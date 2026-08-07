@@ -1,0 +1,28 @@
+HELUT encrypted-netlist bench · SING
+  netlist: picorv32_lut6_netlist.json  module=picorv32
+  poly N=1024  LUTs=2006  DFFs=1565  sequential  2N=2048
+  stimuli=1 (max --vectors 1)  cpu-only=false  metal-netlist-only=false
+  paths filter: public-ms covering-b2
+  paths: public-ms@boolean + public-ms@crypto + secret@crypto (+ Metal)
+  BK noise inject Gaussian σ=128.0 (torus; identity residual is empirical, not B_bk)
+  BK identity confidence trials=1
+  noisy-BK policy: UNSAFE DIAGNOSTIC ONLY (functional output cannot certify ε)
+  divergence trace: enabled (first LUT + all wrong DFFs)
+  boolean scale kδ  k=14  (test-poly stride 14; public-MS native δ)
+  LWE n=512  (CMUX count; extract→KS when n<kN=1024)
+  DynamicRotateCost mux=2099200 binary=11275 speedup≈186.2×
+
+  Metal BR tile progress: quiet
+  starting blind-rotate-metal public-ms covering-b2  n=512
+  extract→KS     kN=1024 → n=512  (δ-lattice GLev e=0)
+  identity residual trials=1  (n=512)
+  identity observed max|e| 95869  (sample-decodable true)
+ENCRYPTED TARGET CONE name=$abc$28808$auto$blifparse.cc:557:parse_blif$29072 LUTs=3/2006
+ENCRYPTED LUT CPU REPLAY
+  name=$abc$28808$auto$blifparse.cc:557:parse_blif$29072 wavefront=2 y=681 address=32 expected=0
+  input-native=[0, 0, 0, 0, 1, 14] input-bits=[0, 0, 0, 0, 0, 1] packed-native=464 expected-packed=448 offset=16
+  cpu    raw=29762309 raw-bit=1 raw-residual=29762309 raw-|e|=29762309 refreshed-native=14 refreshed-bit=1 refreshed-residual=29360128 refreshed-|e|=29360128
+  metal  raw=29762309 raw-bit=1 raw-residual=29762309 raw-|e|=29762309 refreshed-native=14 refreshed-bit=1 refreshed-residual=29360128 refreshed-|e|=29360128
+  ciphertext-equal=yes
+ENCRYPTED TARGET CONE result COMPLETE diagnostic-only=true
+  target-only diagnostic complete: $abc$28808$auto$blifparse.cc:557:parse_blif$29072 (no netlist PASS asserted)

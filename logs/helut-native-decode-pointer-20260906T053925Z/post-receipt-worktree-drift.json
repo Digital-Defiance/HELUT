@@ -1,0 +1,18 @@
+{
+  "schema": "helut-post-receipt-worktree-drift-v1",
+  "observedUTC": "2026-09-06T15:05:31Z",
+  "sealedEvidence": {
+    "runEndedLocal": "2026-09-05T22:43:09.969",
+    "receiptUTC": "2026-09-06T05:55:31Z",
+    "receiptSHA256": "d0d73a42304c40c7779ca556f1f8e8d534ee85c5db254cece9471d48599bb6f8",
+    "measuredTestSourceSHA256": "ad95c1beecf29db93f9f76bfb327485ed64e948914978efed5dfe9478cd16a02",
+    "measuredCompiledXCTestSHA256": "7feb1aaccc0271e38d30ae1252395b16eac8e34212e40113d1ddbeb0fe81fbf3"
+  },
+  "laterWorktreeState": {
+    "testSourceModifiedLocal": "2026-09-05T22:56:51",
+    "testSourceSHA256": "df3a6435b2f88c5dbc5a05bb42e6a84f56c166d3646f5a1e140bab5bf2efc4d2",
+    "compiledXCTestModifiedLocal": "2026-09-05T22:57:22",
+    "compiledXCTestSHA256": "8206c9306ccaf5431c765638bd935770c656af5d7c997c1975ab092d270d9955"
+  },
+  "interpretation": "The source and release XCTest changed after the preregistered decode-pointer run and after its receipt was sealed. The raw log, preregistration, receipt, receipt sidecar, and generated-artifact hashes remain internally consistent. Later input-packing, flat-output, and related source changes are not evidence for the sealed receipt and must be preregistered and measured separately."
+}

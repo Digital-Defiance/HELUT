@@ -1,0 +1,51 @@
+Leeloo: 6 row(s), 3 passes + 0 warmup
+load at start: 2.26 (14%/core)
+rough estimate: 132.1 min
+
+
+=== C35eps-t4 [D] C35 eps at inject B=16, covering-b2, 4 trials (the bar-passing claim)
+    claims: eps log2 = -65.4 at B=16, 4 trials, 'still <= -64'
+    pass 1   wall= 304.805s exit=0 -
+    pass 2   wall= 310.734s exit=0 -
+    pass 3   wall= 310.745s exit=0 -
+    -> median 310.7s  spread 1.9%  stability no-verdict
+
+=== C35eps-t8 [D] C35 eps at inject B=16, covering-b2, 8 trials
+    claims: (not recorded at 8 trials)
+    pass 1   wall= 581.986s exit=0 -
+    pass 2   wall= 576.831s exit=0 -
+    pass 3   wall= 573.797s exit=0 -
+    -> median 576.8s  spread 1.4%  stability no-verdict
+
+=== C35eps-t16 [D] C35 eps at inject B=16, covering-b2, 16 trials
+    claims: (not recorded at 16 trials)
+    pass 1   wall=1133.444s exit=0 -
+    pass 2   wall=1115.287s exit=0 -
+    pass 3   wall=1150.798s exit=0 -
+    -> median 1133s  spread 3.1%  stability no-verdict
+
+=== C32eps-t8 [D] C32 .crypto inject B=1 at N=1024, 8 trials
+    claims: eps log2 ~ -8.4 at 8 trials (sample-sensitive, not -64)
+    pass 1   wall= 219.561s exit=0 -
+    pass 2   wall= 226.800s exit=0 -
+    pass 3   wall= 215.796s exit=0 -
+    -> median 219.6s  spread 5.0%  stability no-verdict
+
+=== C22eps [D] C22 measured noisy-BK residual, N=8, 8 trials
+    claims: N=8 B=64: max|e|=11173, sigma-hat=6396
+    pass 1   wall=   0.007s exit=0 -
+    pass 2   wall=   0.006s exit=0 -
+    pass 3   wall=   0.006s exit=0 -
+    -> median 0.006208s  spread 8.6%  stability no-verdict
+
+=== C26eps [D] C26 product-shaped N=1024 identity residual, B=64
+    claims: B=64 undecodable; B=4 eps log2 ~ -1
+    pass 1   wall=  65.247s exit=0 -
+    pass 2   wall=  67.415s exit=0 -
+    pass 3   wall=  64.420s exit=0 -
+    -> median 65.25s  spread 4.6%  stability no-verdict
+
+wrote /Volumes/Code/HELUT/logs/leeloo/results.json
+wrote /Volumes/Code/HELUT/logs/leeloo/report.md
+no flaky rows
+D_EXIT=0

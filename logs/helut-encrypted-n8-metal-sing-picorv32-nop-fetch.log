@@ -1,0 +1,26 @@
+HELUT encrypted-netlist bench · SING
+  netlist: picorv32_netlist.json  module=picorv32
+  poly N=8  LUTs=4785  DFFs=1565  sequential  2N=16
+  stimuli=8 (max --vectors 256)  cpu-only=false  metal-netlist-only=false
+  encrypted mem: nop ROM (addi x0,x0,0 = 0x00000013)  ticks=8  reset-hold=3
+  paths filter: blind-rotate-metal
+  paths: public-ms@boolean + public-ms@crypto + secret@crypto (+ Metal)
+  DynamicRotateCost mux=144 binary=36 speedup≈4.0×
+
+  starting blind-rotate-metal public-ms boolean
+  mem tick  1  valid=0 ready=0 addr=0x00000000 instr=0 wstrb=0x0
+  mem tick  2  valid=0 ready=0 addr=0x00000000 instr=0 wstrb=0x0
+  mem tick  3  valid=0 ready=0 addr=0x00000000 instr=0 wstrb=0x0
+  mem tick  4  valid=0 ready=1 addr=0x00000000 instr=0 wstrb=0x0
+  FETCH tick  5  addr=0x00000000  instr=1
+  mem tick  6  valid=0 ready=1 addr=0x00000000 instr=1 wstrb=0x0
+  mem tick  7  valid=0 ready=1 addr=0x00000000 instr=1 wstrb=0x0
+  FETCH tick  8  addr=0x00000004  instr=1
+  FETCH summary  served=2  unique_addr=2  addrs=0x0,0x4
+ENCRYPTED EQUIV (blind-rotate-metal public-ms boolean)
+  rows            8
+  wall            63.5532 s  (7944.15 ms/row)
+  classical bits  4.0  (≥128? no)
+  ingest ε log2   -inf  (target -64)
+  noisy BK B_bk   0  (decodable true)
+  result          PASS

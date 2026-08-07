@@ -1,0 +1,491 @@
+{
+  "schema": "E256-VNEXT-ROTOR-SCHEDULE-PREREGISTRATION-1",
+  "status": "FROZEN_FOR_EXECUTION",
+  "revision": {
+    "supersedes_sha256": "58231c685734ba4a2d041d0837342b08f9963ba228b37082293878e39f10b41b",
+    "reason": "Refrozen after semantic review: bind D0-D11 definitions, execute 32-bit/reset boundaries, and require end-to-end controls/baselines.",
+    "prior_receipt_status": "invalidated before claim or promotion"
+  },
+  "date_basis": "2026-08-20 session date; no wall-clock timestamp asserted",
+  "authorization": {
+    "architecture_record": "directives/e256-vnext-topology.md",
+    "accepted_research_constraints": [
+      "D0",
+      "D1",
+      "D2",
+      "D3",
+      "D4",
+      "D5",
+      "D6",
+      "D7",
+      "D8",
+      "D9",
+      "D10",
+      "D11"
+    ],
+    "accepted_constraint_definitions": {
+      "D0": "A reviewed standard nonce-misuse-resistant AEAD with independent directional keys is the external security boundary; AEAD-only remains the baseline.",
+      "D1": "Replace reciprocal mirror traversal with independently derived ingress and egress stacks B_i(A_i(P_i) XOR M_i).",
+      "D2": "Remove fixed-point-free involutive plugboard requirements; use arbitrary validated bijections or fold boundaries into independent stacks.",
+      "D3": "Permit 256 logical rotor IDs but derive/cache selected material; select depth only from attack scaling, never from the number 256.",
+      "D4": "Remove LFSR/NLFF from the security-critical schedule; use a standard counter-bound PRF/XOF schedule with exact context and limits.",
+      "D5": "Use one explicit extract and domain-separated ingress, egress, schedule, mask, directional AEAD, and confirmation/export keys bound to suite/profile/transcript.",
+      "D6": "Bind suite/profile, session, role, direction, sequence, nonce/tweak, and counter; define durable uniqueness, rollback/replay handling, and limits.",
+      "D7": "Authenticate canonical metadata and lengths with standard AEAD; parse strictly and release no plaintext before verification.",
+      "D8": "Require constant-time/oblivious rotor evaluation or an explicit exclusion, trusted-boundary schedule/mask generation where needed, atomic load, integrity, lifecycle, fault, and leakage evidence.",
+      "D9": "Evolution is deterministic, immutable, versioned, offline, control-calibrated, holdout-graded, and human-promoted; deployed mutation is forbidden.",
+      "D10": "Byte-local topology is only an AEAD-protected research transform; standalone-security research requires a separately specified wide-state design with cross-byte diffusion.",
+      "D11": "Promotion requires a new incompatible identity, byte-exact spec, independent implementations and KATs, calibrated attacks, protocol/hardware evidence, external review, and human claim review."
+    },
+    "allowed": "deterministic model and attack-harness research",
+    "blocked": [
+      "cipher-suite promotion",
+      "production software",
+      "fixture or profile promotion",
+      "RTL implementation",
+      "protocol deployment",
+      "C/H/N claim movement",
+      "security-bit or production-readiness claim"
+    ]
+  },
+  "predecessor": {
+    "receipt": "logs/e256-vnext-topology-gate.json",
+    "receipt_sha256": "8ec0b22c10f391c14461d81bcfd18d2df117e7442bba168e1d1bd09c6f19fe6a",
+    "results_sha256": "cc1ca362872c0a822270a3f8ad7b18525301aac54f7b3b59bf819aa6c10635fe",
+    "harness": "Scripts/e256_topology_experiment.py",
+    "harness_sha256": "2fb7f25af28b3ccdd2117911daaee13e60fdb8c51aafd2d499f16cbff30735c3",
+    "git_head_at_preregistration": "a8e192a446ce2efca73998fdb54c7e1c44bd7579"
+  },
+  "questions": [
+    {
+      "id": "Q1",
+      "text": "Do common ingress/egress endpoints across counters create an exact related-position quotient even after the reflector is removed?"
+    },
+    {
+      "id": "Q2",
+      "text": "Does full-counter state reselection remove the tested exact related-state invariants for key-derived random and affine-AES rotor families?"
+    },
+    {
+      "id": "Q3",
+      "text": "Does any active depth from 1+1 through 16+16 improve a bounded attack beyond the linear lookup cost paid by the honest path?"
+    },
+    {
+      "id": "Q4",
+      "text": "Does any byte-local candidate justify retention over PRF-mask-only or AEAD-only under a stated compromise model?"
+    }
+  ],
+  "non_claims": [
+    "Passing this gate is not IND-CPA, IND-CCA, AEAD, PRF, or standalone-cipher security.",
+    "DDT, LAT, ANF, cycle, and ideal-control similarity are diagnostics, not security proofs.",
+    "Every frozen byte state has 256 inputs and a complete map requires at most 255 chosen-input queries by elimination.",
+    "The outer reviewed standard AEAD remains the only production security boundary.",
+    "No security-bit value, quantum resistance, side-channel resistance, or production readiness is computed.",
+    "The disjoint holdout labels are visible in this file and are not described as sealed or blind."
+  ],
+  "experimental_kdf": {
+    "status": "model-only baseline, not a suite decision",
+    "hash": "SHA-512",
+    "extract": "PRK = HMAC-SHA512(key = ASCII 'E256-vNext/bakeoff/extract/v1', data = deterministic 32-byte test IKM)",
+    "expand_stream": "HMAC-SHA512(PRK_subkey, domain || 0x00 || u64be(block_counter))",
+    "subkeys": [
+      "rotor/in",
+      "rotor/out",
+      "schedule",
+      "mask",
+      "controls"
+    ],
+    "bounded_sampler": "u16be rejection of the high incomplete interval",
+    "canonical_context": {
+      "prefix": "E256-vNext/bakeoff/context/v1",
+      "encoding": "prefix || repeated(u16be(byte_length) || UTF-8/opaque bytes) || u8(direction) || u64be(sequence) || u64be(counter)",
+      "ordered_fields": [
+        "corpus",
+        "rotor_family",
+        "schedule_arm",
+        "stream_id",
+        "direction",
+        "sequence",
+        "absolute_byte_counter"
+      ]
+    }
+  },
+  "rotor_families": [
+    {
+      "id": "random_fisher_yates_v1",
+      "candidate": true,
+      "logical_ids_per_bank": 256,
+      "banks": [
+        "ingress",
+        "egress"
+      ],
+      "construction": "independent unbiased Fisher-Yates permutation for each bank and logical ID",
+      "inverse": "exact inverse table",
+      "quality_rejection": "none; retain the complete derived distribution and report intrinsic spectra",
+      "implementation_warning": "arbitrary secret table input addresses have no efficient generic constant-time lookup path"
+    },
+    {
+      "id": "aes_affine_v1",
+      "candidate": true,
+      "logical_ids_per_bank": 256,
+      "banks": [
+        "ingress",
+        "egress"
+      ],
+      "construction": "R(x) = L_out(AES_SBOX(L_in(x) XOR c_in)) XOR c_out with independently derived invertible 8x8 GF(2) matrices and constants",
+      "matrix_convention": "bit 0 is LSB; output bit r is parity(row_r AND x); reject matrices with GF(2) rank below 8 using a domain-separated attempt counter",
+      "aes_sbox_derivation": "GF(2^8) inverse under x^8+x^4+x^3+x+1 followed by the Rijndael affine map and XOR 0x63",
+      "aes_sbox_sha256": "c2d8e5eed6cbebd8625fc18f81486a7733c04f9b0129ffbe974c68b90308b4f2",
+      "inverse": "exact inverse table",
+      "quality_rejection": "invertible affine wrappers only; no post-result DDT/LAT cherry-picking",
+      "implementation_note": "a tableless bitwise implementation path exists in principle but is not side-channel evidence"
+    }
+  ],
+  "schedule_arms": [
+    {
+      "id": "full_counter_reselect_v1",
+      "candidate": true,
+      "selection": "derive independent ordered 16-of-256 ingress and egress ID lists from the full canonical context for every counter",
+      "wrappers": "derive independent XOR pre/post byte wrappers for every selected rotor and counter",
+      "mask": "derive one byte from the independent mask domain and full canonical context"
+    },
+    {
+      "id": "message_stack_counter_wrappers_v1",
+      "candidate": true,
+      "selection": "derive ordered 16-of-256 lists without the counter, fixed for a stream/direction/sequence",
+      "wrappers": "derive independent XOR pre/post byte wrappers from the full counter for every selected rotor",
+      "mask": "derive one byte from the independent mask domain and full canonical context"
+    },
+    {
+      "id": "common_endpoint_mask_only_control",
+      "candidate": false,
+      "selection": "derive stack and wrappers without the counter",
+      "wrappers": "fixed across counters",
+      "mask": "derive one byte from the full counter",
+      "expected": "for unequal masks, F_s composed with inverse(F_t) is a fixed-point-free involution with 128 two-cycles"
+    }
+  ],
+  "active_depths_per_bank": [
+    1,
+    2,
+    4,
+    8,
+    16
+  ],
+  "depth_pairing": "Each state derives one ordered 16-ID list per bank; depth d uses the nested prefix of length d. A domain-separated replication derives an independent ordering to expose prefix artifacts.",
+  "corpus": {
+    "train_key_labels": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "disjoint_holdout_key_labels": [
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "test_ikm": "first 32 bytes of SHA-512(ASCII 'E256-vNext/bakeoff/key/v1/' || u16be(key_label))",
+    "stream_ids_per_key": 2,
+    "stream_id": "first 16 bytes of SHA-256(ASCII 'E256-vNext/bakeoff/stream/v1/' || u16be(key_label) || u8(stream_index))",
+    "directions": [
+      0,
+      1
+    ],
+    "replications": [
+      "primary",
+      "independent"
+    ],
+    "sequence": 7,
+    "counters": [
+      0,
+      1,
+      2,
+      31,
+      32,
+      255,
+      256,
+      257,
+      65535,
+      65536,
+      4294967295,
+      4294967296
+    ],
+    "all_inputs_per_state": 256,
+    "adjacent_pairs": [
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        31,
+        32
+      ],
+      [
+        255,
+        256
+      ],
+      [
+        256,
+        257
+      ],
+      [
+        65535,
+        65536
+      ],
+      [
+        4294967295,
+        4294967296
+      ]
+    ],
+    "reset_context_pairs": [
+      {
+        "before": {
+          "sequence": 7,
+          "counter": 65536
+        },
+        "after": {
+          "sequence": 8,
+          "counter": 0
+        }
+      }
+    ],
+    "exact_spectrum_subset": {
+      "key_labels": [
+        0,
+        8
+      ],
+      "stream_index": 0,
+      "direction": 0,
+      "counters": [
+        0,
+        1,
+        255,
+        256
+      ],
+      "schedule_arms": [
+        "full_counter_reselect_v1",
+        "message_stack_counter_wrappers_v1"
+      ]
+    },
+    "intrinsic_rotor_spectrum_ids": [
+      0,
+      1,
+      2,
+      3,
+      16,
+      17,
+      63,
+      64,
+      127,
+      128,
+      191,
+      192,
+      252,
+      253,
+      254,
+      255
+    ],
+    "key_bit_flip_indices": [
+      0,
+      1,
+      7,
+      8,
+      15,
+      16,
+      31,
+      32,
+      63,
+      64,
+      95,
+      127,
+      128,
+      159,
+      191,
+      255
+    ]
+  },
+  "ideal_controls": [
+    {
+      "id": "ideal_independent_state",
+      "construction": "fresh deterministic unbiased 256-point permutation for each complete context and counter; no shared rotor bank",
+      "purpose": "null distribution for exact state and related-state metrics; never a candidate"
+    },
+    {
+      "id": "prf_mask_only",
+      "construction": "plaintext XOR independent full-context mask byte",
+      "purpose": "ablation showing which confidentiality behavior is supplied by the mask rather than rotors; never a production proposal by itself"
+    },
+    {
+      "id": "aead_only",
+      "construction": "no inner transform",
+      "purpose": "mandatory production complexity and security-boundary baseline"
+    }
+  ],
+  "baseline_execution_contract": {
+    "prf_mask_only": "Execute the same canonical mask derivation over every corpus context; report repeated-state known/chosen-input recovery cost and deterministic inner-operation cost.",
+    "aead_only": "Record the zero-inner-transform complexity and mark byte-map/codebook metrics not applicable; it remains the production policy baseline rather than a simulated AEAD security experiment.",
+    "comparison": "No rotor family is production-retained unless a later independent-key compromise experiment beats both baselines under the same model and cost accounting."
+  },
+  "planted_controls": [
+    {
+      "id": "mirrored_endpoints",
+      "defect": "B equals inverse(A)",
+      "detector": "full map involution at nonzero mask",
+      "required_result": "detected"
+    },
+    {
+      "id": "identity_affine",
+      "defect": "identity/affine rotor map",
+      "detector": "exact affine identity, DDT maximum 256, and LAT maximum 256",
+      "required_result": "detected"
+    },
+    {
+      "id": "duplicate_rotor_bank",
+      "defect": "all logical IDs alias one permutation",
+      "detector": "canonical table digest duplicate count",
+      "required_result": "detected"
+    },
+    {
+      "id": "common_endpoint_mask_only",
+      "defect": "A and B fixed while only masks vary",
+      "detector": "relative permutation is an involution with 128 two-cycles for every unequal-mask tested pair",
+      "required_result": "detected"
+    },
+    {
+      "id": "truncated_counter_8",
+      "defect": "schedule and mask use only the low counter byte",
+      "detector": "complete state/map collision at counters 0 and 256",
+      "required_result": "detected"
+    },
+    {
+      "id": "direction_omitted",
+      "defect": "direction is absent from schedule and mask inputs",
+      "detector": "complete state/map collision between directions 0 and 1",
+      "required_result": "detected"
+    },
+    {
+      "id": "ignored_key_bit",
+      "defect": "bit 255 is cleared before derivation",
+      "detector": "canonical derivation transcript collision between paired test keys",
+      "required_result": "detected"
+    },
+    {
+      "id": "modulo_sampler",
+      "defect": "UInt16 value reduced modulo 255 without rejection",
+      "detector": "exact residue multiplicities over all 65536 inputs are unequal",
+      "required_result": "detected"
+    }
+  ],
+  "control_execution_contract": {
+    "requirement": "Each planted defect must be injected through the same rotor/schedule/state serialization, cell summarization, and rejection-reason functions used for candidates wherever that defect applies.",
+    "standalone_exact_exception": "The modulo-sampler control uses the same bounded-sampler multiplicity validator because it is a primitive-level defect rather than a state-map candidate.",
+    "null_requirement": "Ideal independent controls must traverse the same cell rejection function and produce no exact rejection reason; clean KDF/domain controls must traverse the same reset, direction, and key-flip collision checks."
+  },
+  "metrics": {
+    "functional": [
+      "every rotor and state map is a bijection",
+      "every stored inverse is exact",
+      "encrypt/decrypt round trip over all 256 inputs",
+      "nested-prefix depth construction matches literal composition"
+    ],
+    "intrinsic_rotor_diagnostics": [
+      "cycle histogram and fixed points",
+      "exact differential uniformity and DDT spectrum hash on the pinned ID subset",
+      "exact maximum absolute LAT coefficient and LAT spectrum hash on the pinned ID subset",
+      "coordinate and inverse ANF degree",
+      "exact affine identity"
+    ],
+    "state_map_diagnostics": [
+      "complete map digest",
+      "cycle histogram, fixed points, two-cycles, longest cycle, and involution",
+      "exact DDT/LAT/ANF diagnostics on the pinned spectrum subset",
+      "255-query complete-codebook ceiling"
+    ],
+    "related_state": [
+      "map agreement count",
+      "relative permutation F_s composed with inverse(F_t): cycle data and involution",
+      "reverse relative permutation inverse(F_s) composed with F_t",
+      "cross-map XOR image size and maximum preimage",
+      "commutator identity/fixed-point count on pinned adjacent triples",
+      "exact cross-state differential maximum on the pinned spectrum subset",
+      "complete-state and complete-map collision counts"
+    ],
+    "schedule": [
+      "selected ID/order digest",
+      "adjacent ID overlap",
+      "domain and direction separation",
+      "counter-boundary collision checks",
+      "base-key versus pinned one-bit-flip transcript collisions"
+    ],
+    "deterministic_cost": [
+      "logical rotor evaluations per byte",
+      "derived/cached table bytes",
+      "secret-dependent lookup classification",
+      "candidate depth cost ratio"
+    ]
+  },
+  "hard_rejection_rules": [
+    "Abort interpretation unless every planted control is detected and the ideal-independent-state null triggers none of the exact structural detectors.",
+    "Reject a candidate arm on any tested complete state/map collision across unequal canonical contexts.",
+    "Reject a candidate arm on any direction-domain collision or pinned key-bit-flip transcript collision.",
+    "Reject a candidate arm if any tested full state map is affine, identity, or an involution by construction rather than a separately reported chance event.",
+    "Reject full_counter_reselect_v1 if any tested unequal-state relative permutation repeatedly exhibits the exact common-endpoint 128-transposition signature.",
+    "Reject any schedule that aliases the tested 32-bit or 16-bit counter boundaries, reset contexts, or directions.",
+    "Do not reject or select solely from DDT, LAT, ANF, cycles, p-values, avalanche, or resemblance to the ideal control."
+  ],
+  "depth_selection_rule": {
+    "principle": "Choose the smallest depth only if a preregistered bounded attack improves in data/time/memory scaling after dividing by the honest rotor-evaluation cost ratio, on both train and disjoint holdout corpora.",
+    "required_normalized_improvement_factor": 2.0,
+    "bounded_attacks_in_this_gate": [
+      "two-query involution detector",
+      "common-endpoint related-state quotient detector",
+      "complete-state collision detector",
+      "255-query repeated-state codebook recovery"
+    ],
+    "fallback": "If no depth clears the normalized factor, no depth is security-selected; retain at most the smallest non-rejected depth as a research baseline."
+  },
+  "family_retention_rule": {
+    "production": "No byte-local family may displace AEAD-only in this gate. Production retention additionally requires a precise independent-key compromise model, a constant-time implementation receipt, and an advantage over a separately keyed standard primitive, none of which this gate supplies.",
+    "next_research_baseline": "Among non-rejected arms, prefer full_counter_reselect_v1; prefer a family with a plausible tableless implementation path; then choose the smallest non-rejected depth. This tie-break selects only the next attack target, not a suite.",
+    "valid_verdicts": [
+      "INVALID_CONTROLS",
+      "ALL_CANDIDATES_REJECTED",
+      "NO_BYTE_LOCAL_PRODUCTION_CANDIDATE_RESEARCH_BASELINE_RETAINED"
+    ]
+  },
+  "receipt_contract": {
+    "schema": "E256-VNEXT-ROTOR-SCHEDULE-BAKEOFF-1",
+    "status": "OPEN_PROGRESS",
+    "output": "logs/e256-vnext-rotor-schedule-bakeoff.json",
+    "runner": "Scripts/e256_vnext_bakeoff.py",
+    "deterministic_payload": [
+      "schema",
+      "status",
+      "predecessor",
+      "preregistration path and SHA-256",
+      "input hashes",
+      "pinned parameters",
+      "candidate manifest",
+      "control outcomes",
+      "results",
+      "selection",
+      "limitations"
+    ],
+    "check": "recompute input hashes and deterministic payload; require controls; compare the complete deterministic payload byte-for-byte",
+    "excluded": "wall-clock timing, platform string, and other explicitly advisory environment fields only",
+    "write": "canonical sorted JSON with final newline and atomic replacement"
+  }
+}

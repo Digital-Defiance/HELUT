@@ -1,0 +1,207 @@
+{
+  "schema": "E256-VALIDATION-1",
+  "identity": {
+    "family": "E256",
+    "suite_version": 2,
+    "generation": 0,
+    "fixture_schema_version": 4,
+    "profile_sha256": "fa246e9cba9009a4799e5a81722a9b14e9a67293d9621b45985c5f3e620865d4",
+    "compatibility_key": "E256/v2/gen0/fa246e9cba9009a4799e5a81722a9b14e9a67293d9621b45985c5f3e620865d4/fixture-v4",
+    "center_construction": "conjugated_xor_counter_prf_v1",
+    "center_formula": "A_i^-1(A_i(x) XOR k_i)",
+    "center_mask_key_kdf": "hkdf_sha512_nonce_salt_32_v1",
+    "center_mask_prf": "hmac_sha256_32_byte_blocks_v1",
+    "absolute_counter": "uint64_be_block_counter_start_0",
+    "nlff_receipt_sha256": "5c5bc931a145048037ec420b2c0c47ff310570e963bd45b8262f18a1640f0027"
+  },
+  "artifact_sha256": {
+    "Fixtures/enigma256_generation.json": "0830dec89843ceb2e51b776960593b01fb96448920668f6da57478d6488832a1",
+    "Generated/Profiles/Enigma256/enigma_256_nlff_v2.vh": "2c95f6a075f0249d0821ade64d0dfc898bd0b1c55c378cb849a570c6bdda8126",
+    "Fixtures/enigma256_golden/manifest.json": "71bf3fcc1ec13a203e6278fe3c84f993d39c73bbdafb7ed4c20f99eab5d3917c",
+    "Fixtures/enigma256_golden/ciphertext.bin": "94845a41b16af3c1ef614dad1f19fa6ca7a9b101a0df2bca95b4ad5ee02a69c8",
+    "Fixtures/enigma256_golden/session.json": "401a57ff3c6986d300162b679ab5fe0a6c1c751106ad2c157d0f7add65897e1c",
+    "Fixtures/enigma256_golden/trace/center_mask.hex": "1eecd2ef5ed1953b7535a75b1dc6b7042593f58a95a345029f05637769efeade",
+    "Generated/TensorLUT/Enigma256/enigma_256_step_cone_tensorlut.v": "ef19df1e1543f8a26f6991ae47f3a7853c5590f4cc46b11866618f46026ec9cc",
+    "Generated/TensorLUT/Enigma256/enigma_256_tensorlut_baseline.v": "c4b410a60232fd295c836caf67a530b0cd1a2a70177f02775f3c09af8af5b040"
+  },
+  "canonical_validation": {
+    "profile_emitter_replay": {
+      "status": 0,
+      "status_file": "build/e256-v4-contract/canonical-profile.status"
+    },
+    "swift_fixture_suite": {
+      "status": 0,
+      "tests": 47,
+      "failures": 0,
+      "equality_count": 260,
+      "sample_count": 65536,
+      "equality_rate": 0.00396729,
+      "z_score": 0.250,
+      "status_file": "build/e256-v4-contract/canonical-swift.status"
+    },
+    "direct_rtl": {
+      "status": 0,
+      "bytes": 1024,
+      "state_transitions": "matched",
+      "directed_center_and_counter": "PASS",
+      "status_file": "build/e256-v4-contract/canonical-direct.status"
+    },
+    "lfsr_rtl": {
+      "status": 0,
+      "checkpoints_through_clocks": 1024,
+      "status_file": "build/e256-v4-contract/canonical-lfsr.status"
+    },
+    "native_nlff_rtl": {
+      "status": 0,
+      "fixed_vectors": 14,
+      "status_file": "build/e256-v4-contract/canonical-nlff.status"
+    },
+    "axi_stream": {
+      "status": 0,
+      "table_bytes": 2304,
+      "payload_bytes": 1024,
+      "status_file": "build/e256-v4-contract/canonical-axis.status"
+    },
+    "axi_lite": {
+      "status": 0,
+      "table_bytes": 2304,
+      "payload_bytes": 1024,
+      "status_file": "build/e256-v4-contract/canonical-lite.status"
+    },
+    "rust_reference": {
+      "status": 0,
+      "unit_tests": 11,
+      "integration_tests": 2,
+      "kat_bytes": 1024,
+      "tables": 9,
+      "trace_files": 10,
+      "artifacts": 25,
+      "reciprocal_decrypt": "PASS",
+      "yosys_parity": "8/8 full-adder rows; 16 counter transitions; 1024 toy-ISA transitions",
+      "status_file": "build/e256-v4-contract/canonical-rust.status"
+    },
+    "tensorlut_synthesis": {
+      "status": 0,
+      "status_file": "build/e256-v4-contract/canonical-tensor-synth.status",
+      "cones": {
+        "enigma_256_step_cone": {
+          "inputs": 130,
+          "outputs": 69,
+          "lut6_cells": 145,
+          "dffs": 64,
+          "source_sha256": "595bcc08c5f226ec4b61ed327a3e2adc3b51fdaee81e40b6b7abf2e59dfb4f50"
+        },
+        "enigma_256_nlff_combo": {
+          "inputs": 64,
+          "outputs": 4,
+          "lut6_cells": 62,
+          "source_sha256": "b6e027e8b3d090496444c1814c45d37250533224a4bd9c5537faf4a7024a2eb3"
+        },
+        "enigma_256_nlff_lfsr_combo": {
+          "inputs": 64,
+          "outputs": 7,
+          "lut6_cells": 77,
+          "source_sha256": "34954d4ed1874d16bf9d6eb99730f7ecb8b11e2eb6b1f039837188ea3ad166b0"
+        },
+        "enigma_256_nlff_offset_combo": {
+          "inputs": 96,
+          "outputs": 39,
+          "lut6_cells": 112,
+          "source_sha256": "cf5f23afe4247673c9c121ee4bb6ed27c7d0b9817a7fc953d31a9224bf7836af"
+        },
+        "enigma_256_scramble_frag_combo": {
+          "inputs": 112,
+          "outputs": 47,
+          "lut6_cells": 366,
+          "source_sha256": "b7e65b4c487c93c092c97a7205e39471c0a6ffe99c5bd83fdaed4dd8abb12439"
+        }
+      }
+    }
+  },
+  "post_promotion_validation": {
+    "formal_certificate": {
+      "command": "swift test -c release --filter testEnigma256FormalCertificate",
+      "status": 0,
+      "tests": 1,
+      "failures": 0,
+      "checks": [
+        "bounded scramble bijection",
+        "frozen reciprocity",
+        "128-byte stream round-trip",
+        "plugboard and XOR-center involutions plus fixed-point law",
+        "exact fixture-v4 native-profile integrity"
+      ]
+    },
+    "publication_guard_suite": {
+      "command": "swift test -c release --filter Enigma256Tests",
+      "status": 0,
+      "tests": 49,
+      "failures": 0,
+      "coverage": [
+        "canonical KAT rejects a mismatched profile compatibility key",
+        "default KAT generation writes to build-tree scratch storage",
+        "a split profile/KAT publication is rejected with profileMismatch"
+      ]
+    },
+    "tensorlut_emit": {
+      "command": "make generate-e256-tensorlut",
+      "synthesis_and_emit": "PASS",
+      "baseline_sanity_pass": true,
+      "optimizer_verdict": "blue_hold",
+      "final_crypto": -291592.78125,
+      "final_nonbinary": 1217,
+      "interpretation": "bounded optimizer failure; not security evidence or a work-factor estimate",
+      "log": "logs/tensorlut-enigma256-nlff-v2-gen0-fixture4-fa246e9cba90.log"
+    },
+    "tensorlut_promotion": {
+      "command": "make promote-e256-tensorlut",
+      "status": 0,
+      "yosys_problems": 0
+    },
+    "hardware_compatibility_sync": {
+      "command": "make hardware-compat-sync",
+      "status": 0,
+      "copies_synced": 2
+    },
+    "hardware_integrity": {
+      "command": "make hardware-check",
+      "status": 0,
+      "manifest_artifacts": 47,
+      "compatibility_copies": 20
+    }
+  },
+  "promotion": {
+    "receipt": "build/e256-v4-contract/promotion-receipt.json",
+    "rollback_backup": "build/e256-v4-contract/pre-promotion-canonical-fixture-v3",
+    "historical_fixture_v3": "Fixtures/Historical/Enigma256/E256-v2-gen0-2a9f54c70a1619805a911758158f1e2204b0fd96c35102a9db5f4575aeb40cb0-fixture-v3",
+    "historical_file_count": 27,
+    "historical_aggregate_sha256": "70ee9ebe14099794512f08cff3cac9c29885330cfb180b90e78dadb8e6304ae7"
+  },
+  "review": {
+    "implementation_review": "semantic-review/2026-08-27-192508-pr-0.md",
+    "publication_guard_followup": "semantic-review/2026-08-27-193348-pr-0.md",
+    "publication_guard_verdict": "APPROVED",
+    "human_review": "pending",
+    "finding": "E256-003",
+    "finding_state": "OPEN",
+    "review_boundary": "AI semantic review is not human acceptance and does not close E256-003"
+  },
+  "toolchain": {
+    "git_head_at_validation_with_uncommitted_changes": "019d15abf62d1ed3c7612dc90ffdf318c59ada7c",
+    "macos": "26.6.1",
+    "swift": "Apple Swift 6.3.3; swift-driver 1.148.6; target arm64-apple-macosx26.0",
+    "rustc": "1.97.1 (8bab26f4f 2026-07-14; Homebrew)",
+    "cargo": "1.97.1 (c980f4866 2026-06-30; Homebrew)",
+    "yosys": "0.68+post c12172fbae8af5e20f6fb52e3d4e92d56ed587b6",
+    "iverilog": "13.0 stable",
+    "python": "3.9.6"
+  },
+  "limitations": [
+    "This is bounded implementation and parity evidence, not an IND-CPA proof or an HMAC security proof.",
+    "The Rust consumer is internal; no immutable external KAT has been accepted.",
+    "The TensorLUT artifacts are narrow synthesized cones and do not derive HMAC or represent the full E256 core.",
+    "The host derives and transports centerMask and absoluteByteCounter; RTL validates the counter but does not implement HMAC.",
+    "UInt64.max is exhausted; UInt64.max - 1 is the final accepted pre-counter.",
+    "No wall-clock timestamp is asserted here because the machine clock and session-provided date disagreed during validation."
+  ]
+}

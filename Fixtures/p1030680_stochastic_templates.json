@@ -1,0 +1,1027 @@
+{
+  "target": "P1030680",
+  "ciphertext": "JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF",
+  "note": "Stochastic Bombe template bank v2: '.' = don't-care. Prefer head:/body:; tiles optional.",
+  "templates": [
+    {
+      "name": "head:AUSBILDUNGSFUNKSPR@0",
+      "pattern": "AUSBILDUNGSFUNKSPRUCH...................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 21
+    },
+    {
+      "name": "head:AUSBILDUNGSFUNKSPR@1",
+      "pattern": ".AUSBILDUNGSFUNKSPRUCH..................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 21
+    },
+    {
+      "name": "head:AUSBILDUNGSFUNKSPR@2",
+      "pattern": "..AUSBILDUNGSFUNKSPRUCH.................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 21
+    },
+    {
+      "name": "head:AUSBILDUNGSFUNKSPR@3",
+      "pattern": "...AUSBILDUNGSFUNKSPRUCH................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 21
+    },
+    {
+      "name": "head:AUSBILDUNGSFUNKSPR@4",
+      "pattern": "....AUSBILDUNGSFUNKSPRUCH...............................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 21
+    },
+    {
+      "name": "head:AUSBILDUNGSFUNKSPR@5",
+      "pattern": ".....AUSBILDUNGSFUNKSPRUCH..............................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 21
+    },
+    {
+      "name": "head:FUNKSPRUCHUEBUNG@0",
+      "pattern": "FUNKSPRUCHUEBUNG........................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:FUNKSPRUCHUEBUNG@1",
+      "pattern": ".FUNKSPRUCHUEBUNG.......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:FUNKSPRUCHUEBUNG@2",
+      "pattern": "..FUNKSPRUCHUEBUNG......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:FUNKSPRUCHUEBUNG@3",
+      "pattern": "...FUNKSPRUCHUEBUNG.....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:FUNKSPRUCHUEBUNG@4",
+      "pattern": "....FUNKSPRUCHUEBUNG....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:FUNKSPRUCHUEBUNG@5",
+      "pattern": ".....FUNKSPRUCHUEBUNG...................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:LEHRGANGFUNKSPRUCH@0",
+      "pattern": "LEHRGANGFUNKSPRUCH......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 18
+    },
+    {
+      "name": "head:LEHRGANGFUNKSPRUCH@1",
+      "pattern": ".LEHRGANGFUNKSPRUCH.....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 18
+    },
+    {
+      "name": "head:LEHRGANGFUNKSPRUCH@2",
+      "pattern": "..LEHRGANGFUNKSPRUCH....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 18
+    },
+    {
+      "name": "head:LEHRGANGFUNKSPRUCH@3",
+      "pattern": "...LEHRGANGFUNKSPRUCH...................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 18
+    },
+    {
+      "name": "head:LEHRGANGFUNKSPRUCH@4",
+      "pattern": "....LEHRGANGFUNKSPRUCH..................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 18
+    },
+    {
+      "name": "head:LEHRGANGFUNKSPRUCH@5",
+      "pattern": ".....LEHRGANGFUNKSPRUCH.................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 18
+    },
+    {
+      "name": "head:ANALLEFUNKSTELLEN@0",
+      "pattern": "ANALLEFUNKSTELLEN.......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 17
+    },
+    {
+      "name": "head:ANALLEFUNKSTELLEN@1",
+      "pattern": ".ANALLEFUNKSTELLEN......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 17
+    },
+    {
+      "name": "head:ANALLEFUNKSTELLEN@2",
+      "pattern": "..ANALLEFUNKSTELLEN.....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 17
+    },
+    {
+      "name": "head:ANALLEFUNKSTELLEN@3",
+      "pattern": "...ANALLEFUNKSTELLEN....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 17
+    },
+    {
+      "name": "head:ANALLEFUNKSTELLEN@4",
+      "pattern": "....ANALLEFUNKSTELLEN...................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 17
+    },
+    {
+      "name": "head:ANALLEFUNKSTELLEN@5",
+      "pattern": ".....ANALLEFUNKSTELLEN..................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 17
+    },
+    {
+      "name": "head:THETISFUNKSPRUCH.@0",
+      "pattern": "THETISFUNKSPRUCH........................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:THETISFUNKSPRUCH.@1",
+      "pattern": ".THETISFUNKSPRUCH.......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:THETISFUNKSPRUCH.@2",
+      "pattern": "..THETISFUNKSPRUCH......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:THETISFUNKSPRUCH.@3",
+      "pattern": "...THETISFUNKSPRUCH.....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:THETISFUNKSPRUCH.@4",
+      "pattern": "....THETISFUNKSPRUCH....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:THETISFUNKSPRUCH.@5",
+      "pattern": ".....THETISFUNKSPRUCH...................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:ACHACHACHACHACHA@0",
+      "pattern": "ACHACHACHACHACHA........................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:ACHACHACHACHACHA@1",
+      "pattern": ".ACHACHACHACHACHA.......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:ACHACHACHACHACHA@2",
+      "pattern": "..ACHACHACHACHACHA......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:ACHACHACHACHACHA@3",
+      "pattern": "...ACHACHACHACHACHA.....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:ACHACHACHACHACHA@4",
+      "pattern": "....ACHACHACHACHACHA....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:ACHACHACHACHACHA@5",
+      "pattern": ".....ACHACHACHACHACHA...................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:SEDMSSEDMSSEDMSSE@0",
+      "pattern": "SEDMSSEDMSSEDMSSE.......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 17
+    },
+    {
+      "name": "head:SEDMSSEDMSSEDMSSE@1",
+      "pattern": ".SEDMSSEDMSSEDMSSE......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 17
+    },
+    {
+      "name": "head:SEDMSSEDMSSEDMSSE@2",
+      "pattern": "..SEDMSSEDMSSEDMSSE.....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 17
+    },
+    {
+      "name": "head:SEDMSSEDMSSEDMSSE@3",
+      "pattern": "...SEDMSSEDMSSEDMSSE....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 17
+    },
+    {
+      "name": "head:SEDMSSEDMSSEDMSSE@4",
+      "pattern": "....SEDMSSEDMSSEDMSSE...................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 17
+    },
+    {
+      "name": "head:SEDMSSEDMSSEDMSSE@5",
+      "pattern": ".....SEDMSSEDMSSEDMSSE..................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 17
+    },
+    {
+      "name": "head:OEDMOEDMOEDMOEDM@0",
+      "pattern": "OEDMOEDMOEDMOEDM........................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:OEDMOEDMOEDMOEDM@1",
+      "pattern": ".OEDMOEDMOEDMOEDM.......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:OEDMOEDMOEDMOEDM@2",
+      "pattern": "..OEDMOEDMOEDMOEDM......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:OEDMOEDMOEDMOEDM@3",
+      "pattern": "...OEDMOEDMOEDMOEDM.....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:OEDMOEDMOEDMOEDM@4",
+      "pattern": "....OEDMOEDMOEDMOEDM....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:OEDMOEDMOEDMOEDM@5",
+      "pattern": ".....OEDMOEDMOEDMOEDM...................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:ACHSEDMOEDMACHSE@0",
+      "pattern": "ACHSEDMOEDMACHSE........................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:ACHSEDMOEDMACHSE@1",
+      "pattern": ".ACHSEDMOEDMACHSE.......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:ACHSEDMOEDMACHSE@2",
+      "pattern": "..ACHSEDMOEDMACHSE......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:ACHSEDMOEDMACHSE@3",
+      "pattern": "...ACHSEDMOEDMACHSE.....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:ACHSEDMOEDMACHSE@4",
+      "pattern": "....ACHSEDMOEDMACHSE....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:ACHSEDMOEDMACHSE@5",
+      "pattern": ".....ACHSEDMOEDMACHSE...................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:UEBUNGSMELDUNGUEBU@0",
+      "pattern": "UEBUNGSMELDUNGUEBUNGSMELDUNG............................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 28
+    },
+    {
+      "name": "head:UEBUNGSMELDUNGUEBU@1",
+      "pattern": ".UEBUNGSMELDUNGUEBUNGSMELDUNG...........................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 28
+    },
+    {
+      "name": "head:UEBUNGSMELDUNGUEBU@2",
+      "pattern": "..UEBUNGSMELDUNGUEBUNGSMELDUNG..........................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 28
+    },
+    {
+      "name": "head:UEBUNGSMELDUNGUEBU@3",
+      "pattern": "...UEBUNGSMELDUNGUEBUNGSMELDUNG.........................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 28
+    },
+    {
+      "name": "head:UEBUNGSMELDUNGUEBU@4",
+      "pattern": "....UEBUNGSMELDUNGUEBUNGSMELDUNG........................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 28
+    },
+    {
+      "name": "head:UEBUNGSMELDUNGUEBU@5",
+      "pattern": ".....UEBUNGSMELDUNGUEBUNGSMELDUNG.......................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 28
+    },
+    {
+      "name": "head:VVVUUUUEBUNG....@0",
+      "pattern": "VVVUUUUEBUNG............................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 12
+    },
+    {
+      "name": "head:VVVUUUUEBUNG....@1",
+      "pattern": ".VVVUUUUEBUNG...........................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 12
+    },
+    {
+      "name": "head:VVVUUUUEBUNG....@2",
+      "pattern": "..VVVUUUUEBUNG..........................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 12
+    },
+    {
+      "name": "head:VVVUUUUEBUNG....@3",
+      "pattern": "...VVVUUUUEBUNG.........................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 12
+    },
+    {
+      "name": "head:VVVUUUUEBUNG....@4",
+      "pattern": "....VVVUUUUEBUNG........................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 12
+    },
+    {
+      "name": "head:VVVUUUUEBUNG....@5",
+      "pattern": ".....VVVUUUUEBUNG.......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 12
+    },
+    {
+      "name": "head:VVVUUUAUSBILDUNG@0",
+      "pattern": "VVVUUUAUSBILDUNG........................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:VVVUUUAUSBILDUNG@1",
+      "pattern": ".VVVUUUAUSBILDUNG.......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:VVVUUUAUSBILDUNG@2",
+      "pattern": "..VVVUUUAUSBILDUNG......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:VVVUUUAUSBILDUNG@3",
+      "pattern": "...VVVUUUAUSBILDUNG.....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:VVVUUUAUSBILDUNG@4",
+      "pattern": "....VVVUUUAUSBILDUNG....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:VVVUUUAUSBILDUNG@5",
+      "pattern": ".....VVVUUUAUSBILDUNG...................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:UEBUNGUEBUNGUEBUNG@0",
+      "pattern": "UEBUNGUEBUNGUEBUNG......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 18
+    },
+    {
+      "name": "head:UEBUNGUEBUNGUEBUNG@1",
+      "pattern": ".UEBUNGUEBUNGUEBUNG.....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 18
+    },
+    {
+      "name": "head:UEBUNGUEBUNGUEBUNG@2",
+      "pattern": "..UEBUNGUEBUNGUEBUNG....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 18
+    },
+    {
+      "name": "head:UEBUNGUEBUNGUEBUNG@3",
+      "pattern": "...UEBUNGUEBUNGUEBUNG...................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 18
+    },
+    {
+      "name": "head:UEBUNGUEBUNGUEBUNG@4",
+      "pattern": "....UEBUNGUEBUNGUEBUNG..................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 18
+    },
+    {
+      "name": "head:UEBUNGUEBUNGUEBUNG@5",
+      "pattern": ".....UEBUNGUEBUNGUEBUNG.................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 18
+    },
+    {
+      "name": "head:FUNKUEBUNGFUNKUEBU@0",
+      "pattern": "FUNKUEBUNGFUNKUEBUNG....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 20
+    },
+    {
+      "name": "head:FUNKUEBUNGFUNKUEBU@1",
+      "pattern": ".FUNKUEBUNGFUNKUEBUNG...................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 20
+    },
+    {
+      "name": "head:FUNKUEBUNGFUNKUEBU@2",
+      "pattern": "..FUNKUEBUNGFUNKUEBUNG..................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 20
+    },
+    {
+      "name": "head:FUNKUEBUNGFUNKUEBU@3",
+      "pattern": "...FUNKUEBUNGFUNKUEBUNG.................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 20
+    },
+    {
+      "name": "head:FUNKUEBUNGFUNKUEBU@4",
+      "pattern": "....FUNKUEBUNGFUNKUEBUNG................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 20
+    },
+    {
+      "name": "head:FUNKUEBUNGFUNKUEBU@5",
+      "pattern": ".....FUNKUEBUNGFUNKUEBUNG...............................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 20
+    },
+    {
+      "name": "head:UEBUNGSFUNKUEBUNG@0",
+      "pattern": "UEBUNGSFUNKUEBUNG.......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 17
+    },
+    {
+      "name": "head:UEBUNGSFUNKUEBUNG@1",
+      "pattern": ".UEBUNGSFUNKUEBUNG......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 17
+    },
+    {
+      "name": "head:UEBUNGSFUNKUEBUNG@2",
+      "pattern": "..UEBUNGSFUNKUEBUNG.....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 17
+    },
+    {
+      "name": "head:UEBUNGSFUNKUEBUNG@3",
+      "pattern": "...UEBUNGSFUNKUEBUNG....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 17
+    },
+    {
+      "name": "head:UEBUNGSFUNKUEBUNG@4",
+      "pattern": "....UEBUNGSFUNKUEBUNG...................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 17
+    },
+    {
+      "name": "head:UEBUNGSFUNKUEBUNG@5",
+      "pattern": ".....UEBUNGSFUNKUEBUNG..................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 17
+    },
+    {
+      "name": "head:SCHULFUNKSPRUCH.@0",
+      "pattern": "SCHULFUNKSPRUCH.........................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 15
+    },
+    {
+      "name": "head:SCHULFUNKSPRUCH.@1",
+      "pattern": ".SCHULFUNKSPRUCH........................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 15
+    },
+    {
+      "name": "head:SCHULFUNKSPRUCH.@2",
+      "pattern": "..SCHULFUNKSPRUCH.......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 15
+    },
+    {
+      "name": "head:SCHULFUNKSPRUCH.@3",
+      "pattern": "...SCHULFUNKSPRUCH......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 15
+    },
+    {
+      "name": "head:SCHULFUNKSPRUCH.@4",
+      "pattern": "....SCHULFUNKSPRUCH.....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 15
+    },
+    {
+      "name": "head:SCHULFUNKSPRUCH.@5",
+      "pattern": ".....SCHULFUNKSPRUCH....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 15
+    },
+    {
+      "name": "head:PRAKTIKUMFUNK...@0",
+      "pattern": "PRAKTIKUMFUNK...........................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 13
+    },
+    {
+      "name": "head:PRAKTIKUMFUNK...@1",
+      "pattern": ".PRAKTIKUMFUNK..........................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 13
+    },
+    {
+      "name": "head:PRAKTIKUMFUNK...@2",
+      "pattern": "..PRAKTIKUMFUNK.........................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 13
+    },
+    {
+      "name": "head:PRAKTIKUMFUNK...@3",
+      "pattern": "...PRAKTIKUMFUNK........................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 13
+    },
+    {
+      "name": "head:PRAKTIKUMFUNK...@4",
+      "pattern": "....PRAKTIKUMFUNK.......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 13
+    },
+    {
+      "name": "head:PRAKTIKUMFUNK...@5",
+      "pattern": ".....PRAKTIKUMFUNK......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 13
+    },
+    {
+      "name": "head:VONFUNKLEHRGANG.@0",
+      "pattern": "VONFUNKLEHRGANG.........................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 15
+    },
+    {
+      "name": "head:VONFUNKLEHRGANG.@1",
+      "pattern": ".VONFUNKLEHRGANG........................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 15
+    },
+    {
+      "name": "head:VONFUNKLEHRGANG.@2",
+      "pattern": "..VONFUNKLEHRGANG.......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 15
+    },
+    {
+      "name": "head:VONFUNKLEHRGANG.@3",
+      "pattern": "...VONFUNKLEHRGANG......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 15
+    },
+    {
+      "name": "head:VONFUNKLEHRGANG.@4",
+      "pattern": "....VONFUNKLEHRGANG.....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 15
+    },
+    {
+      "name": "head:VONFUNKLEHRGANG.@5",
+      "pattern": ".....VONFUNKLEHRGANG....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 15
+    },
+    {
+      "name": "head:ANFUNKLEHRGANG..@0",
+      "pattern": "ANFUNKLEHRGANG..........................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 14
+    },
+    {
+      "name": "head:ANFUNKLEHRGANG..@1",
+      "pattern": ".ANFUNKLEHRGANG.........................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 14
+    },
+    {
+      "name": "head:ANFUNKLEHRGANG..@2",
+      "pattern": "..ANFUNKLEHRGANG........................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 14
+    },
+    {
+      "name": "head:ANFUNKLEHRGANG..@3",
+      "pattern": "...ANFUNKLEHRGANG.......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 14
+    },
+    {
+      "name": "head:ANFUNKLEHRGANG..@4",
+      "pattern": "....ANFUNKLEHRGANG......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 14
+    },
+    {
+      "name": "head:ANFUNKLEHRGANG..@5",
+      "pattern": ".....ANFUNKLEHRGANG.....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 14
+    },
+    {
+      "name": "head:THETISTHETISTHET@0",
+      "pattern": "THETISTHETISTHET........................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:THETISTHETISTHET@1",
+      "pattern": ".THETISTHETISTHET.......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:THETISTHETISTHET@2",
+      "pattern": "..THETISTHETISTHET......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:THETISTHETISTHET@3",
+      "pattern": "...THETISTHETISTHET.....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:THETISTHETISTHET@4",
+      "pattern": "....THETISTHETISTHET....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:THETISTHETISTHET@5",
+      "pattern": ".....THETISTHETISTHET...................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:EACHSEDMEACHSEDM@0",
+      "pattern": "EACHSEDMEACHSEDM........................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:EACHSEDMEACHSEDM@1",
+      "pattern": ".EACHSEDMEACHSEDM.......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:EACHSEDMEACHSEDM@2",
+      "pattern": "..EACHSEDMEACHSEDM......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:EACHSEDMEACHSEDM@3",
+      "pattern": "...EACHSEDMEACHSEDM.....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:EACHSEDMEACHSEDM@4",
+      "pattern": "....EACHSEDMEACHSEDM....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:EACHSEDMEACHSEDM@5",
+      "pattern": ".....EACHSEDMEACHSEDM...................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:KACHOEDMKACHOEDM@0",
+      "pattern": "KACHOEDMKACHOEDM........................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:KACHOEDMKACHOEDM@1",
+      "pattern": ".KACHOEDMKACHOEDM.......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:KACHOEDMKACHOEDM@2",
+      "pattern": "..KACHOEDMKACHOEDM......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:KACHOEDMKACHOEDM@3",
+      "pattern": "...KACHOEDMKACHOEDM.....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:KACHOEDMKACHOEDM@4",
+      "pattern": "....KACHOEDMKACHOEDM....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:KACHOEDMKACHOEDM@5",
+      "pattern": ".....KACHOEDMKACHOEDM...................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:UEBUNG.UEBUNG.UEBU@0",
+      "pattern": "UEBUNG.UEBUNG.UEBUNG....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 18
+    },
+    {
+      "name": "head:UEBUNG.UEBUNG.UEBU@1",
+      "pattern": ".UEBUNG.UEBUNG.UEBUNG...................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 18
+    },
+    {
+      "name": "head:UEBUNG.UEBUNG.UEBU@2",
+      "pattern": "..UEBUNG.UEBUNG.UEBUNG..................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 18
+    },
+    {
+      "name": "head:UEBUNG.UEBUNG.UEBU@3",
+      "pattern": "...UEBUNG.UEBUNG.UEBUNG.................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 18
+    },
+    {
+      "name": "head:UEBUNG.UEBUNG.UEBU@4",
+      "pattern": "....UEBUNG.UEBUNG.UEBUNG................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 18
+    },
+    {
+      "name": "head:UEBUNG.UEBUNG.UEBU@5",
+      "pattern": ".....UEBUNG.UEBUNG.UEBUNG...............................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 18
+    },
+    {
+      "name": "head:FUNK.UEBUNG.UEBUNG@0",
+      "pattern": "FUNK.UEBUNG.UEBUNG......................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:FUNK.UEBUNG.UEBUNG@1",
+      "pattern": ".FUNK.UEBUNG.UEBUNG.....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:FUNK.UEBUNG.UEBUNG@2",
+      "pattern": "..FUNK.UEBUNG.UEBUNG....................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:FUNK.UEBUNG.UEBUNG@3",
+      "pattern": "...FUNK.UEBUNG.UEBUNG...................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:FUNK.UEBUNG.UEBUNG@4",
+      "pattern": "....FUNK.UEBUNG.UEBUNG..................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "head:FUNK.UEBUNG.UEBUNG@5",
+      "pattern": ".....FUNK.UEBUNG.UEBUNG.................................................",
+      "note": "Thetis register / UEBUNG head",
+      "constrained": 16
+    },
+    {
+      "name": "body:ANANFUNFUUUFLOTT@12",
+      "pattern": "............ANANFUNFUUUFLOTT.NULEINSZWONULBEIROTNULS....................",
+      "note": "mid-message body hypothesis",
+      "constrained": 39
+    },
+    {
+      "name": "body:ANANFUNFUUUFLOTT@15",
+      "pattern": "...............ANANFUNFUUUFLOTT.NULEINSZWONULBEIROTNULS.................",
+      "note": "mid-message body hypothesis",
+      "constrained": 39
+    },
+    {
+      "name": "body:ANANFUNFUUUFLOTT@18",
+      "pattern": "..................ANANFUNFUUUFLOTT.NULEINSZWONULBEIROTNULS..............",
+      "note": "mid-message body hypothesis",
+      "constrained": 39
+    },
+    {
+      "name": "body:UUUFLOTTXNULEINS@15",
+      "pattern": "...............UUUFLOTT.NULEINS.........................................",
+      "note": "mid-message body hypothesis",
+      "constrained": 15
+    },
+    {
+      "name": "body:UUUFLOTTXNULEINS@18",
+      "pattern": "..................UUUFLOTT.NULEINS......................................",
+      "note": "mid-message body hypothesis",
+      "constrained": 15
+    },
+    {
+      "name": "body:UUUFLOTTXNULEINS@20",
+      "pattern": "....................UUUFLOTT.NULEINS....................................",
+      "note": "mid-message body hypothesis",
+      "constrained": 15
+    },
+    {
+      "name": "body:UUUFLOTTXNULEINS@24",
+      "pattern": "........................UUUFLOTT.NULEINS................................",
+      "note": "mid-message body hypothesis",
+      "constrained": 15
+    },
+    {
+      "name": "body:VONVONUUUFLOTTX@18",
+      "pattern": "..................VONVONUUUFLOTT........................................",
+      "note": "mid-message body hypothesis",
+      "constrained": 14
+    },
+    {
+      "name": "body:VONVONUUUFLOTTX@20",
+      "pattern": "....................VONVONUUUFLOTT......................................",
+      "note": "mid-message body hypothesis",
+      "constrained": 14
+    },
+    {
+      "name": "body:VONVONUUUFLOTTX@24",
+      "pattern": "........................VONVONUUUFLOTT..................................",
+      "note": "mid-message body hypothesis",
+      "constrained": 14
+    },
+    {
+      "name": "body:NULEINSZWONULBEI@20",
+      "pattern": "....................NULEINSZWONULBEI....................................",
+      "note": "mid-message body hypothesis",
+      "constrained": 16
+    },
+    {
+      "name": "body:NULEINSZWONULBEI@24",
+      "pattern": "........................NULEINSZWONULBEI................................",
+      "note": "mid-message body hypothesis",
+      "constrained": 16
+    },
+    {
+      "name": "body:NULEINSZWONULBEI@28",
+      "pattern": "............................NULEINSZWONULBEI............................",
+      "note": "mid-message body hypothesis",
+      "constrained": 16
+    },
+    {
+      "name": "body:UUUFLOTTXTRAVEMU@10",
+      "pattern": "..........UUUFLOTT.TRAVEMUE.............................................",
+      "note": "mid-message body hypothesis",
+      "constrained": 16
+    },
+    {
+      "name": "body:UUUFLOTTXTRAVEMU@15",
+      "pattern": "...............UUUFLOTT.TRAVEMUE........................................",
+      "note": "mid-message body hypothesis",
+      "constrained": 16
+    },
+    {
+      "name": "body:UUUFLOTTXTRAVEMU@20",
+      "pattern": "....................UUUFLOTT.TRAVEMUE...................................",
+      "note": "mid-message body hypothesis",
+      "constrained": 16
+    },
+    {
+      "name": "body:KOMXADMXUNULEINS@12",
+      "pattern": "............KOM.ADM.UNULEINS............................................",
+      "note": "mid-message body hypothesis",
+      "constrained": 14
+    },
+    {
+      "name": "body:KOMXADMXUNULEINS@18",
+      "pattern": "..................KOM.ADM.UNULEINS......................................",
+      "note": "mid-message body hypothesis",
+      "constrained": 14
+    },
+    {
+      "name": "body:STANDORTQUADRAT.@20",
+      "pattern": "....................STANDORTQUADRAT.....................................",
+      "note": "mid-message body hypothesis",
+      "constrained": 15
+    },
+    {
+      "name": "body:STANDORTQUADRAT.@24",
+      "pattern": "........................STANDORTQUADRAT.................................",
+      "note": "mid-message body hypothesis",
+      "constrained": 15
+    },
+    {
+      "name": "body:WETTERBERICHT...@15",
+      "pattern": "...............WETTERBERICHT............................................",
+      "note": "mid-message body hypothesis",
+      "constrained": 13
+    },
+    {
+      "name": "body:WETTERBERICHT...@20",
+      "pattern": "....................WETTERBERICHT.......................................",
+      "note": "mid-message body hypothesis",
+      "constrained": 13
+    },
+    {
+      "name": "tile:UEBUNG",
+      "pattern": "UEBUNGUEBUNGUEBUNGUEBUNGUEBUNGUEBUNGUEBUNGUEBUNGUEBUNGUEBUNGUEBUNGUEBUNG",
+      "note": "tiled training pad",
+      "constrained": 72
+    },
+    {
+      "name": "tile:AUSBILDUNG",
+      "pattern": "AUSBILDUNGAUSBILDUNGAUSBILDUNGAUSBILDUNGAUSBILDUNGAUSBILDUNGAUSBILDUNGAU",
+      "note": "tiled training pad",
+      "constrained": 72
+    },
+    {
+      "name": "tile:THETIS",
+      "pattern": "THETISTHETISTHETISTHETISTHETISTHETISTHETISTHETISTHETISTHETISTHETISTHETIS",
+      "note": "tiled training pad",
+      "constrained": 72
+    },
+    {
+      "name": "tile:ACHSEDM",
+      "pattern": "ACHSEDMACHSEDMACHSEDMACHSEDMACHSEDMACHSEDMACHSEDMACHSEDMACHSEDMACHSEDMAC",
+      "note": "tiled training pad",
+      "constrained": 72
+    }
+  ]
+}

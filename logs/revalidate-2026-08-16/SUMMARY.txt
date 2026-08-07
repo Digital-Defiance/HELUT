@@ -1,0 +1,30 @@
+Re-validation of rows not covered after the determinism fix
+started: 2026-08-16T18:53:32Z
+commit:  2a42593
+
+-- noise measurements (do not exercise tick(); completeness only) --
+PASS C26 measure-bk-noise N=1024 B=64  (75s)  c26-b64.log
+PASS C26 measure-bk-noise N=1024 B=4  (77s)  c26-b4.log
+PASS C30 eps-vs-B ladder N=128           c30-eps-sweep-n128.log
+PASS C34 covering-b4 N=1024 B=1  (363s)  c34-noise.log
+PASS C36 covering-b1 N=1024 B=32  (768s)  c36-noise.log
+PASS C37 covering-b1 N=1024 sigma=24  (769s)  c37-noise.log
+PASS C41 covering-b1 N=256 sigma=128  (7s)  c41-noise-n256.log
+PASS C41 covering-b1 N=512 sigma=128  (97s)  c41-noise-n512.log
+PASS C55 covering-b1 N=1024 sigma=128 lwe=256  (363s)  c55-noise.log
+PASS C56 cryptoPublicMS N=1024 B=1 k=7  (146s)  c56-noise.log
+
+-- encrypted SING (these DO exercise the fixed tick() path) --
+PASS C33 SING N=1024 covering-crypto B=1  (23s)  c33-sing.log
+PASS C34 SING N=1024 covering-b4 B=1  (85s)  c34-sing.log
+PASS C36 SING N=1024 covering-b1 B=32  (333s)  c36-sing.log
+PASS C37 SING N=1024 covering-b1 sigma=24  (335s)  c37-sing.log
+PASS C41 SING N=512 covering-b1 sigma=128  (48s)  c41-sing.log
+FAIL C56 SING N=1024 publicMS B=1 k=7  (10s, rc=133)  c56-sing.log
+
+finished: 2026-08-16T19:51:57Z
+PASS rows: 15
+FAIL rows: 1
+
+A nonzero exit is not automatically a broken claim -- some rows are graded
+negatives and some flags may have moved. Read the log before concluding.

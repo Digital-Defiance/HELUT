@@ -1,0 +1,9 @@
+# TensorLUT M4 stecker-involution
+# netlist=enigma_m4_netlist.json LUTs=925 DFFs=49
+# crib_pt=TEST crib_ct=YCPY grundstellung=AAA
+# target_stecker=(identity)
+# pop=1 gens=1 maxPairs=10 seed=1475104272
+# seed_stecker=(identity)
+# gen bestFitness bestPairs pairCount
+0 0.000000 (identity) 0
+# done fitness=0.000000 pairs=(identity) elapsed=0.0s

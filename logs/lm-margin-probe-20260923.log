@@ -1,0 +1,33 @@
+corpus            : Fixtures/u534_corpus.json
+clean-key controls: 32
+wrong-key samples : 16 per control, same shell, real decrypts
+training          : leave-one-out (the graded message is never trained on)
+total training letters available: 4644
+
+  len  order  ctrls   wins   win%   med margin    med z
+-------------------------------------------------------
+   72      2     30      6    20%      -0.0816     0.16
+   72      3     30      1     3%      -0.0694     0.45
+   72      4     30      3    10%      -0.0532     0.21
+   72      5     30      5    17%      -0.0727     0.02
+   72     IC     30      2     7%      -0.0137        —
+
+  100      2     23      0     0%      -0.1205     0.20
+  100      3     23      1     4%      -0.0687    -0.15
+  100      4     23      2     9%      -0.0451    -0.02
+  100      5     23      3    13%      -0.0498     0.11
+  100     IC     23      4    17%      -0.0095        —
+
+  140      2     12      0     0%      -0.0893    -0.37
+  140      3     12      3    25%      -0.0397    -0.04
+  140      4     12      2    17%      -0.0203     0.43
+  140      5     12      1     8%      -0.0186     0.65
+  140     IC     12      3    25%      -0.0017        —
+
+Reading this table: a NEGATIVE median margin means the best wrong setting outscores
+the truth, so a full sweep would rank noise above signal at that length no matter
+how much compute it is given. Positive margin is the precondition for the
+ciphertext-only attack to be able to work at all.
+
+At 72 letters the best order tested is n=4 with median margin -0.0532.
+Still NEGATIVE. Raising n-gram order does not lift the truth above the decoy maximum at this length, which is consistent with the wall being a shortage of information in 72 letters rather than a shortage of model.

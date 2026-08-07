@@ -1,0 +1,5 @@
+Enigma 256 SoftBus ent gate (gen 5)
+  bytes: 1048576 plain=prng → build/enigma256_keystream.bin in 104.6 ms
+  zero-PT fixed-point rate=29.43% (un-reflector; not gated)
+  entropy=7.999829  mean=127.5248  corr=+0.000072  → PASS
+  log → logs/enigma256-ent.log

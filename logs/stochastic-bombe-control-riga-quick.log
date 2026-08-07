@@ -1,0 +1,28 @@
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Shell evolution: OFF freeRings=true WO=1 ringSeeds=1 subspace=potsdam
+RIGA Option A: elite≈1% immigrants≈19% mutants=remainder (inner 26^4 message-key sweep per chromosome; scores on host)
+Seeded population[1] with oracle stecker (BQ CH DI EJ GL KP NV OU SZ TY)
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  72/72 (100%) tmpl=known-PT IC=0.0657 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ TY
+  all-time  72/72 tmpl=known-PT pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ TY
+*** Hybrid halt — template exact match (known-PT) ***
+HELUT — Stochastic Bombe KPA control (P1030684, 72 letters)
+Fitness: exact decrypt match against known plaintext (German-ness ignored)
+Shell locked: UKW B / γ / IV-III-VIII / rings AACU
+RIGA Option A ON — pop=32 gens=12 immigrants=19% (stecker-only)
+Stecker seed: oracle BQ CH DI EJ GL KP NV OU SZ TY
+KPA hill-climb steps/elite: 8
+Ciphertext: RFBYWKIKELDCHBSXUNFJFSNRRVFWASXYLQCQFADYJXNTBMVLRDCGULOWHTBGWUSSOQHGAYED
+Target PT:  VVVUUUVIRSOBENNULEINSXXMITUUUVIRSIBENNULZWOYVIRSIBENNULDREIYZWODREISECHS
+
+Config: pop=32 gens=12 maxPlugs=10 blockB_greeks=0 samples subspace=potsdam WO=1 evolveShell=false freeRings=true ringSeeds=AACU fitness=KPA letter-match / 72 kpaHill=8 RIGA(imm=19%,elite=1%)
+
+
+Elapsed: 0.3 s
+Best shell: UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ TY
+Best hit: partition=kpa-26^4 tmpl=known-PT pos=VYAA score=72.0000 IC=0.0657
+Plain: VVVUUUVIRSOBENNULEINSXXMITUUUVIRSIBENNULZWOYVIRSIBENNULDREIYZWODREISECHS
+KPA match: 72/72
+*** CONTROL PASS — exact plaintext recovered ***
+See ASIC_CRACKER.md / evolution-hybridization.md / stochastic-bombe.md

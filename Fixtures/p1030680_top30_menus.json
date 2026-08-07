@@ -1,0 +1,475 @@
+{
+  "target": "P1030680",
+  "ciphertext": "JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF",
+  "note": "Top 30 placements for a targeted --bombe-ring-sweep. Filter: len>=16; openings (offset 0) first; then loops, edges. Derived from p1030680_menus.json. Topology matches BombeMenuBuilder.",
+  "cribs": [
+    {
+      "text": "LAUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIRO",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true
+    },
+    {
+      "text": "UKKANANFUNFUUUFLOTTXNULEINSZWONULBEIROTN",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true
+    },
+    {
+      "text": "KANANFUNFUUUFLOTTXNULEINSZWONULBEIROTNUL",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true
+    },
+    {
+      "text": "ANANFUNFUUUFLOTTXNULEINSZWONULBEIROTNULS",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true
+    },
+    {
+      "text": "NANFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSI",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true
+    },
+    {
+      "text": "LOTTXNULEINSZWONULBEIROTNULSIBENGEANKERT",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true
+    },
+    {
+      "text": "OTTXNULEINSZWONULBEIROTNULSIBENGEANKERTX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true
+    },
+    {
+      "text": "TTXNULEINSZWONULBEIROTNULSIBENGEANKERTXZ",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true
+    },
+    {
+      "text": "XNULEINSZWONULBEIROTNULSIBENGEANKERTXZUM",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true
+    },
+    {
+      "text": "NULEINSZWONULBEIROTNULSIBENGEANKERTXZUMW",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true
+    },
+    {
+      "text": "ULEINSZWONULBEIROTNULSIBENGEANKERTXZUMWE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true
+    },
+    {
+      "text": "SZWONULBEIROTNULSIBENGEANKERTXZUMWEITERM",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true
+    },
+    {
+      "text": "WONULBEIROTNULSIBENGEANKERTXZUMWEITERMAR",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true
+    },
+    {
+      "text": "UUUEINSEINSNULDREIKKEISELEKKXX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true
+    },
+    {
+      "text": "VVVCHEFVIERXUUUFLOTTXXMITUUU",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true
+    },
+    {
+      "text": "TGEANKERTXFFFTTTBLEIB",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true
+    },
+    {
+      "text": "OVIERUNDUUUZWOFUNFDR",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true
+    },
+    {
+      "text": "VVVUUUDREINULEINSVI",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true
+    },
+    {
+      "text": "UUUZWODREISECHSFUNF",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true
+    },
+    {
+      "text": "UUUVIRSIBENNULEINS",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true
+    },
+    {
+      "text": "TTTFFFEINSSIBENXX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true
+    },
+    {
+      "text": "FFFTTTBLEIBTBESE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true
+    },
+    {
+      "text": "FFFTTTEINSZWOZWOVI",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true
+    },
+    {
+      "text": "XUUUFLOTTXVVVUUU",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true
+    },
+    {
+      "text": "BENNULZWOYVIRSIBEN",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true
+    },
+    {
+      "text": "NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE",
+      "messages": 0,
+      "offsets": [
+        18,
+        21
+      ],
+      "anchored": false
+    },
+    {
+      "text": "FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN",
+      "messages": 0,
+      "offsets": [
+        19,
+        22
+      ],
+      "anchored": false
+    },
+    {
+      "text": "UNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENG",
+      "messages": 0,
+      "offsets": [
+        20
+      ],
+      "anchored": false
+    }
+  ],
+  "placements": [
+    {
+      "text": "LAUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIRO",
+      "offset": 0,
+      "loops": 18,
+      "edges": 40,
+      "letters": 23,
+      "opening": true
+    },
+    {
+      "text": "UKKANANFUNFUUUFLOTTXNULEINSZWONULBEIROTN",
+      "offset": 0,
+      "loops": 18,
+      "edges": 40,
+      "letters": 23,
+      "opening": true
+    },
+    {
+      "text": "KANANFUNFUUUFLOTTXNULEINSZWONULBEIROTNUL",
+      "offset": 0,
+      "loops": 18,
+      "edges": 40,
+      "letters": 23,
+      "opening": true
+    },
+    {
+      "text": "ANANFUNFUUUFLOTTXNULEINSZWONULBEIROTNULS",
+      "offset": 0,
+      "loops": 18,
+      "edges": 40,
+      "letters": 23,
+      "opening": true
+    },
+    {
+      "text": "NANFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSI",
+      "offset": 0,
+      "loops": 18,
+      "edges": 40,
+      "letters": 23,
+      "opening": true
+    },
+    {
+      "text": "LOTTXNULEINSZWONULBEIROTNULSIBENGEANKERT",
+      "offset": 0,
+      "loops": 18,
+      "edges": 40,
+      "letters": 23,
+      "opening": true
+    },
+    {
+      "text": "OTTXNULEINSZWONULBEIROTNULSIBENGEANKERTX",
+      "offset": 0,
+      "loops": 18,
+      "edges": 40,
+      "letters": 23,
+      "opening": true
+    },
+    {
+      "text": "TTXNULEINSZWONULBEIROTNULSIBENGEANKERTXZ",
+      "offset": 0,
+      "loops": 18,
+      "edges": 40,
+      "letters": 23,
+      "opening": true
+    },
+    {
+      "text": "XNULEINSZWONULBEIROTNULSIBENGEANKERTXZUM",
+      "offset": 0,
+      "loops": 17,
+      "edges": 40,
+      "letters": 24,
+      "opening": true
+    },
+    {
+      "text": "NULEINSZWONULBEIROTNULSIBENGEANKERTXZUMW",
+      "offset": 0,
+      "loops": 17,
+      "edges": 40,
+      "letters": 24,
+      "opening": true
+    },
+    {
+      "text": "ULEINSZWONULBEIROTNULSIBENGEANKERTXZUMWE",
+      "offset": 0,
+      "loops": 17,
+      "edges": 40,
+      "letters": 24,
+      "opening": true
+    },
+    {
+      "text": "SZWONULBEIROTNULSIBENGEANKERTXZUMWEITERM",
+      "offset": 0,
+      "loops": 17,
+      "edges": 40,
+      "letters": 24,
+      "opening": true
+    },
+    {
+      "text": "WONULBEIROTNULSIBENGEANKERTXZUMWEITERMAR",
+      "offset": 0,
+      "loops": 17,
+      "edges": 40,
+      "letters": 24,
+      "opening": true
+    },
+    {
+      "text": "UUUEINSEINSNULDREIKKEISELEKKXX",
+      "offset": 0,
+      "loops": 10,
+      "edges": 30,
+      "letters": 21,
+      "opening": true
+    },
+    {
+      "text": "VVVCHEFVIERXUUUFLOTTXXMITUUU",
+      "offset": 0,
+      "loops": 9,
+      "edges": 28,
+      "letters": 20,
+      "opening": true
+    },
+    {
+      "text": "TGEANKERTXFFFTTTBLEIB",
+      "offset": 0,
+      "loops": 4,
+      "edges": 21,
+      "letters": 18,
+      "opening": true
+    },
+    {
+      "text": "OVIERUNDUUUZWOFUNFDR",
+      "offset": 0,
+      "loops": 3,
+      "edges": 20,
+      "letters": 20,
+      "opening": true
+    },
+    {
+      "text": "VVVUUUDREINULEINSVI",
+      "offset": 0,
+      "loops": 3,
+      "edges": 19,
+      "letters": 18,
+      "opening": true
+    },
+    {
+      "text": "UUUZWODREISECHSFUNF",
+      "offset": 0,
+      "loops": 3,
+      "edges": 19,
+      "letters": 20,
+      "opening": true
+    },
+    {
+      "text": "UUUVIRSIBENNULEINS",
+      "offset": 0,
+      "loops": 3,
+      "edges": 18,
+      "letters": 18,
+      "opening": true
+    },
+    {
+      "text": "TTTFFFEINSSIBENXX",
+      "offset": 0,
+      "loops": 3,
+      "edges": 17,
+      "letters": 15,
+      "opening": true
+    },
+    {
+      "text": "FFFTTTBLEIBTBESE",
+      "offset": 0,
+      "loops": 3,
+      "edges": 16,
+      "letters": 15,
+      "opening": true
+    },
+    {
+      "text": "FFFTTTEINSZWOZWOVI",
+      "offset": 0,
+      "loops": 2,
+      "edges": 18,
+      "letters": 18,
+      "opening": true
+    },
+    {
+      "text": "XUUUFLOTTXVVVUUU",
+      "offset": 0,
+      "loops": 2,
+      "edges": 16,
+      "letters": 16,
+      "opening": true
+    },
+    {
+      "text": "BENNULZWOYVIRSIBEN",
+      "offset": 0,
+      "loops": 1,
+      "edges": 18,
+      "letters": 20,
+      "opening": true
+    },
+    {
+      "text": "NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE",
+      "offset": 18,
+      "loops": 20,
+      "edges": 40,
+      "letters": 21,
+      "opening": false
+    },
+    {
+      "text": "NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE",
+      "offset": 21,
+      "loops": 20,
+      "edges": 40,
+      "letters": 21,
+      "opening": false
+    },
+    {
+      "text": "FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN",
+      "offset": 19,
+      "loops": 20,
+      "edges": 40,
+      "letters": 21,
+      "opening": false
+    },
+    {
+      "text": "FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN",
+      "offset": 22,
+      "loops": 20,
+      "edges": 40,
+      "letters": 21,
+      "opening": false
+    },
+    {
+      "text": "UNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENG",
+      "offset": 20,
+      "loops": 20,
+      "edges": 40,
+      "letters": 21,
+      "opening": false
+    }
+  ]
+}

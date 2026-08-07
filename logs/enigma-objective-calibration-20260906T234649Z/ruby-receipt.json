@@ -1,0 +1,67 @@
+{
+  "schema": "helut.enigma-objective-calibration.v1",
+  "implementation": "ruby-independent-v1",
+  "runtime": {
+    "ruby": "ruby 2.6.10p210 (2022-04-12 revision 67958) [universal.arm64e-darwin25]",
+    "platform": "universal.arm64e-darwin25"
+  },
+  "models": {
+    "bigram": {
+      "model_id": "helut-german-bigram-add-k-0.5-06f8694e-v2",
+      "source_sha256": "06f8694ec17906e993223e0179c6ca326030e62f77ec86e5c4120fddcf68f111",
+      "observed_entries": 674,
+      "window_total": 28508833
+    },
+    "trigram": {
+      "model_id": "helut-german-trigram-add-k-0.5-e08a5659-v1",
+      "source_sha256": "e08a56593d1e74b88d300e35b18dd504bc5fffef8ae03db51d72e6270e9509d7",
+      "observed_entries": 14947,
+      "window_total": 28508832
+    }
+  },
+  "controls": {
+    "generator": "SHA-256(domain || 0x00 || sample-u32be || block-u32be), reject bytes >= 234, byte mod 26",
+    "domain_hex": "48454c55542064656e73652062696772616d2063616c6962726174696f6e207632",
+    "samples": 400,
+    "symbols_per_sample": 72,
+    "first_sample_sha256": "a9de2997fc1b7998c4c619e4dc46e6428cc84c838fbb95dc47855d38c8315225",
+    "corpus_sha256": "1d85fa80ee8bcf121ff4c2fd70e56acccf782a4ab3aaaa16bc1edd15677f424a"
+  },
+  "bigram_calibration": {
+    "german": {"decimal": "-3.3786902470268787", "bit_pattern": "0xc00b078ec0925b5a"},
+    "random_mean": {"decimal": "-4.6528275575363551", "bit_pattern": "0xc0129c7ed3c62f50"},
+    "random_population_deviation": {"decimal": "0.23156779443921308", "bit_pattern": "0x3fcda40373f62dbd"}
+  },
+  "trigram_calibration": {
+    "german": {"decimal": "-2.9671219321853144", "bit_pattern": "0xc007bcaa6c6fd790"},
+    "random_mean": {"decimal": "-5.1000271107154695", "bit_pattern": "0xc014666d81c4f1fc"},
+    "random_population_deviation": {"decimal": "0.24825592068125141", "bit_pattern": "0x3fcfc6d99a2ea2da"},
+    "swift_constants": {"germanMean": -2.967122, "randomMean": -5.100027, "randomDeviation": 0.248256}
+  },
+  "random_model_relationship": {
+    "covariance": {"decimal": "0.029750472940488319", "bit_pattern": "0x3f9e76e871479bce"},
+    "correlation": {"decimal": "0.51750684674192893", "bit_pattern": "0x3fe08f6a84c6ce2f"}
+  },
+  "objective": {
+    "model_id": "helut-enigma-search-n72-correlation-discounted-z-06f8694e-e08a5659-v1",
+    "definition": "(attackZ + (1 - randomModelCorrelation) * trigramZ) / (2 - randomModelCorrelation)",
+    "random_model_correlation": 0.517507,
+    "trigram_weight": 0.482493,
+    "random_mean": {"decimal": "-0.85879403081068384", "bit_pattern": "0xbfeb7b3d9e8a9ef4"},
+    "random_population_deviation": {"decimal": "0.88867832499971144", "bit_pattern": "0x3fec700d86d135d2"},
+    "german_reference": {
+      "sha256": "17ab2fe0bbf0ee813b393e7c064d17ad1343b8eafeffad0be8a7c99e50ffae33",
+      "bigram": {"decimal": "-3.3786902470268787", "bit_pattern": "0xc00b078ec0925b5a"},
+      "trigram": {"decimal": "-2.9671219321853144", "bit_pattern": "0xc007bcaa6c6fd790"},
+      "attack_score": {"decimal": "-3.2504686507827478", "bit_pattern": "0xc00a00f5b53e47fb"},
+      "objective": {"decimal": "6.8811751902287002", "bit_pattern": "0x401b8652ca0050bd"}
+    },
+    "dense_recovered_nonsense": {
+      "sha256": "48aab9a1bbb8aedaaad4334878a85d34d4f8871dfe9437356a7dde19c024372b",
+      "bigram": {"decimal": "-3.3038907977743102", "bit_pattern": "0xc00a6e5e4c6ff7d5"},
+      "trigram": {"decimal": "-3.6791444180145505", "bit_pattern": "0xc00d6ee344c5114d"},
+      "attack_score": {"decimal": "-3.4695659151452021", "bit_pattern": "0xc00bc1abc646eb6d"},
+      "objective": {"decimal": "5.3095093145704606", "bit_pattern": "0x40153cf0027f8cce"}
+    }
+  }
+}

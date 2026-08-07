@@ -1,0 +1,740 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{theorem}{Theorem}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{subcaption}
+\usepackage{url}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=blue!50!black
+}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  columns=fullflexible,
+  frame=single,
+  rulecolor=\color{black!20}
+}
+
+\title{\textbf{HELUT}: Homomorphic Edge Look-Up Tensors\\
+\large Netlist-Clocked Torus FHE on Apple Silicon,\\
+Differentiable Hardware Cryptanalysis, and Adversarial Polymorphic Ciphers}
+
+\author{Digital Defiance\\
+\textit{HELUT Project Report --- three-pillar stack, measured results, explicit threat model}}
+
+\date{August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We present \textbf{HELUT} (Homomorphic Edge Look-Up Tensors) as a \emph{three-pillar}
+cryptographic systems stack---not a new lattice assumption.
+Claim IDs refer to \texttt{directives/claim-sheet.md}.
+
+\textbf{(I) Netlist-clocked torus FHE} (C4--C7, C13--C18, C20--C23).
+Yosys gate-level \$lut netlists compile into exact $\mathbb{Z}/2^{32}\mathbb{Z}$
+\texttt{MPSGraph} evaluations. The graduated FHE path uses LWE/GLWE samples and
+GGSW bootstrap keys (blind-rotate per \$lut, including whole-netlist Metal graphs
+with binary dynamic $X^p$). HELUT issues machine-checkable certificates:
+discrete $\infty$-norm noise proofs, Gaussian ingest failure $\varepsilon\le 2^{-64}$,
+Decision-LWE$\to$IND-CPA binding, a calibrated classical hardness table, and a
+measured noisy-BK residual at covering gadgets (C22); product-shaped $N{=}1024$
+inject fails the $\varepsilon\le 2^{-64}$ bar (C26); default product Metal
+$N{=}1024$ SING still uses noiseless BK (H4).
+
+\textbf{(II) Differentiable hardware cryptanalysis} (C8--C9, C19).
+TensorLUT relaxes discrete INIT tables into continuous tensors, grades shatter vs
+hold under $\lambda$, and recovers reciprocal stecker involutions on frozen cores.
+Theorem~1 (continuous$\to$discrete structure) is machine-checked (C19).
+
+\textbf{(III) Adversarial polymorphic ciphers} (C10, C24, C39).
+The schema-4 \texttt{E256-v2/gen0} native-profile fixture-v4 has bounded
+implementation / KAT-parity evidence (full E256 suite $49/49$) and a bounded
+structural certificate / protocol (formal test $1/1$). Coverage is finite and
+key/state-bounded. C39 remains a historical legacy-UKW encrypted teaching cone
+that predates the live fixture-v4 profile.
+
+Boolean-oracle Metal ticks (trivial encoding) remain a fast shape laboratory
+(C1): PicoRV32 at $N{=}1024$ compiles in ${\sim}1.3\,\mathrm{s}$ with
+${\sim}173\,\mathrm{ms}$ steady ticks. Encrypted full\_adder SING at $N{=}1024$
+is measured (C20 boolean $10.6\,\mathrm{s}/8$; C21 crypto $\ell{=}2$
+$11.38\,\mathrm{s}/8$). Classical bits at production $(n,\sigma)=(1024,2^{16})$
+are calibrated ${\sim}176$; lattice-estimator fill-in (C23) agrees on the
+production row ($|\Delta|{=}4.5$) while $4/8$ anchors exceed a $16$-bit
+tolerance---do not quote $176$ as estimator cost on every row (H1).
+\end{abstract}
+
+\section{Introduction}
+
+Fully Homomorphic Encryption (FHE)---and TFHE-style programmable bootstrapping in
+particular---maps Boolean and arithmetic circuits onto polynomial rings
+$\mathbb{Z}_q[X]/(X^N+1)$~\cite{chillotti2020tfhe,ducas2015fhew}.
+Production stacks (Concrete, OpenFHE, HElib, \ldots) typically implement the
+algebraic kernels with NTTs, specialized CUDA/CPU backends, or both.
+Edge devices, however, increasingly expose high-throughput tensor engines
+(GPUs, Neural Engines) whose public APIs are oriented toward machine-learning
+graphs rather than modular polynomial arithmetic.
+
+HELUT asks a systems-facing question that became a stack:
+
+\begin{quote}
+\emph{Can Apple Silicon's \texttt{MPSGraph} host exact torus modular arithmetic
+and gate-level sequential circuits---and can that same hardware object close a
+Red/Blue loop with differentiable melt and polymorphic ciphers?}
+\end{quote}
+
+\paragraph{Contributions (aligned with \texttt{directives/research-release.md}).}
+\begin{enumerate}[leftmargin=*]
+  \item \textbf{Pillar I --- Netlist-clocked FHE.}
+        Exact $\mathbb{Z}/2^{32}\mathbb{Z}$ torus graphs; encrypted BK blind-rotate
+        over Yosys \$lut; certificates for discrete noise, Gaussian $\varepsilon$,
+        Decision-LWE binding, calibrated hardness, noisy-BK depth.
+  \item \textbf{Pillar II --- Differentiable hardware.}
+        TensorLUT continuous$\to$discrete melt with graded baseline / shatter /
+        involution evidence.
+  \item \textbf{Pillar III --- Polymorphic SoftBus ciphers.}
+        Bounded schema-4 \texttt{E256-v2/gen0} fixture-v4 implementation /
+        KAT parity (C10) and structural certificate / protocol (C24); C39 is a
+        historical legacy-UKW encrypted cone, not the live profile.
+  \item Boolean-oracle Metal performance tables (PicoRV32 / Enigma) as the
+        \emph{shape} laboratory---labeled distinct from the FHE claim.
+\end{enumerate}
+
+\paragraph{Non-claims.}
+We do not claim (i)~a new lattice assumption, (ii)~that calibrated core-SVP
+estimates replace a lattice-estimator run, (iii)~noisy-BK production parameters
+without the depth certificate filled with measured $\sigma_{\mathrm{BK}}$,
+(iv)~side-channel resistance of Metal graphs, (v)~that trivial/oracle Metal
+encodings are FHE, or (vi)~that TensorLUT grades break U-534 / P1030680.
+See \texttt{directives/research-release.md} for the five-cell evidence law.
+
+The affirmative path we take is deliberately blunt.
+Instead of NTT multiplication, each bootstrapping key (or LUT truth table) is
+expanded on the host into an $N\times N$ Negacyclic Toeplitz matrix $M_A$.
+Multiplying $M_A$ by an accumulator vector is algebraically identical to
+multiplication by $A$ in $\mathbb{Z}_{2^{32}}[X]/(X^N+1)$, and the negation that
+appears on wrap-around is free in two's-complement \texttt{UInt32} arithmetic
+($-a \equiv 2^{32}-a$).
+Because \texttt{MPSGraph.matrixMultiplication} rejects \texttt{UInt32}, we implement
+the product as a broadcast Hadamard product followed by a reduction sum---still
+exact, still integer.
+
+Layered on that kernel is a Yosys JSON netlist compiler that builds one persistent
+\texttt{MPSGraph} for an entire module, then a host-emulated posedge clock that
+routes DFF state across ticks.
+The culminating experiment is a \emph{ciphertext-structured datapath simulation}
+of PicoRV32~\cite{picorv32} under a mock-encrypted \texttt{resetn} sequence
+(boolean-oracle / mock path; distinct from Pillar~I encrypted BK claims).
+
+\section{Evidence tables (research release)}
+\label{sec:evidence}
+
+Five-cell law: every public claim needs proof, table, metric, $\ge 2$ examples,
+and an application (\texttt{directives/research-release.md}).
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+Label & $n$ & $\sigma$ & HELUT & Estimator & $|\Delta|$ \\
+\midrule
+demo-N8 & 8 & $2^{12}$ & 4.0 & 33.1 & 29.1 \\
+weak-n256 & 256 & $2^{17}$ & 40.4 & 53.7 & 13.3 \\
+mid-n512 & 512 & $2^{16}$ & 95.5 & 92.4 & 3.2 \\
+classic-n630 & 630 & $2^{15}$ & 129.0 & 106.5 & 22.5 \\
+n768-s16 & 768 & $2^{16}$ & 135.6 & 135.4 & 0.2 \\
+prod-n1024-s16 & 1024 & $2^{16}$ & 175.7 & 180.2 & 4.5 \\
+n1024-s17 & 1024 & $2^{17}$ & 160.7 & 189.9 & 29.3 \\
+n2048-s16 & 2048 & $2^{16}$ & 336.1 & 369.8 & 33.7 \\
+\bottomrule
+\end{tabular}
+\caption{Classical hardness: HELUT calibrated core-SVP vs native Sage
+lattice-estimator (C23; $q=2^{32}$, binary secret). Production row
+$|\Delta|{=}4.5\le 16$; four anchors exceed the $16$-bit tolerance (H1).
+Receipts: \texttt{logs/helut-estimator-results.json}.}
+\label{tab:hardness}
+\end{table}
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{@{}ll@{}}
+\toprule
+Certificate & Role \\
+\midrule
+\texttt{TFHENoiseProof} & Discrete $\infty$-norm inject lemmas \\
+\texttt{TFHEAsymptoticSecurityCertificate} & Gaussian ingest $\varepsilon\le 2^{-64}$ \\
+\texttt{TFHELWEHardnessCertificate} & Decision-LWE$\to$IND-CPA + bit est. \\
+\texttt{TFHELWECalibration} & Anchor table for the estimator \\
+\texttt{TFHENoisyBKCertificate} & Depth under $B_{\mathrm{bk}}$ / noiseless hyp. \\
+\texttt{TFHELWEEstimatorProtocol} & External lattice-estimator merge \\
+\bottomrule
+\end{tabular}
+\caption{Pillar~I certificate surface (machine-checkable in \texttt{HELUTCore}).}
+\label{tab:certs}
+\end{table}
+
+\section{Background}
+\label{sec:background}
+
+\subsection{TFHE programmable bootstrapping (sketch)}
+
+In TFHE, a Boolean gate is often evaluated by programmable bootstrapping
+(PBS)~\cite{chillotti2020tfhe}: an encrypted phase selects a coefficient of a
+\emph{test polynomial} via blind rotation.
+Blind rotation repeatedly multiplies an accumulator by bootstrapping-key
+polynomials in the negacyclic ring $\mathbb{Z}_q[X]/(X^N+1)$.
+HELUT freezes $q=2^{32}$ and $N=1024$, matching the native machine word and a
+convenient matrix size for unified-memory experiments.
+
+\subsection{Negacyclic Toeplitz embedding}
+
+Let $A(X)=\sum_{i=0}^{N-1}a_i X^i$.
+Its negacyclic convolution against a vector $x$ is exactly the product
+$M_A x$, where $M_A$ is the Toeplitz matrix whose first column is
+$(a_0,\ldots,a_{N-1})^\top$ and each subsequent column is the previous column
+rotated downward with the wrapped entry negated~\cite{lyubashevsky2010ideal}.
+HELUT materializes $M_A$ explicitly (row-major \texttt{UInt32}) and uploads it
+once as an \texttt{MPSGraph} placeholder feed.
+
+\subsection{Why not \texttt{matrixMultiplication}?}
+
+Apple's \texttt{MPSGraph} exposes dense matmul, but not for \texttt{UInt32}.
+HELUT therefore reshapes a batch of ciphertext vectors from $[B,N]$ to
+$[B,1,N]$, broadcast-multiplies against $[N,N]$, and reduces on the last axis:
+\begin{equation}
+  y_{b,i}
+  \;=\;
+  \sum_{j=0}^{N-1}
+  \bigl(M_A\bigr)_{i,j}\,
+  x_{b,j}
+  \pmod{2^{32}}.
+\end{equation}
+Under exact integer semantics this equals the schoolbook matvec.
+Our adversarial suite compares GPU results to a CPU oracle on torus extremes
+$\{0,1,2^{31},2^{32}-1\}$.
+
+\section{Architecture}
+\label{sec:architecture}
+
+\begin{figure}[t]
+\centering
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{0.6em}
+\textbf{HELUT pipeline}\\[0.4em]
+Verilog $\xrightarrow{\text{Yosys}}$ JSON netlist
+$\xrightarrow{\text{HELUTCore}}$ one \texttt{MPSGraph}\\[0.3em]
+Host Swift loop $=$ posedge clock; DFF $Q$ ping-pongs across ticks
+\vspace{0.6em}}}
+\caption{End-to-end flow. All arithmetic tensors remain \texttt{MPSDataType.uInt32}.}
+\label{fig:pipeline}
+\end{figure}
+
+\subsection{Kernel: \texttt{LUTNode}}
+
+Each Yosys \texttt{\$lut} becomes a \texttt{LUTNode}.
+Multi-fan-in LUTs first \emph{pack} input wires with torus addition (homomorphic
+XOR is free under additive encoding), then apply the negacyclic matvec above.
+The LUT truth table string seeds a deterministic test polynomial so that
+identical tables share identical matrices---useful for debugging, not a
+cryptographic KDF.
+
+\subsection{Netlist compiler}
+
+\texttt{YosysGraphCompiler} walks a Yosys \texttt{write\_json} module:
+
+\begin{enumerate}[leftmargin=*,itemsep=1pt]
+  \item \textbf{Inputs.} Every input port bit becomes an \texttt{InputNode}
+        placeholder of shape $[B,N]$.
+  \item \textbf{State.} Every recognized flip-flop allocates a $Q$ placeholder
+        \emph{before} LUT lowering so sequential feedback nets resolve.
+  \item \textbf{LUTs.} Cells are scheduled until all drivers exist; cycles abort.
+  \item \textbf{Next-state.} For enables and sync-resets we emit exact
+        $\mathbb{Z}/2^{32}\mathbb{Z}$ muxes, e.g.\ active-high enable
+        \[
+          Q_{\mathrm{next}}
+          = E\cdot D + (1-E)\cdot Q,
+        \]
+        and polarity-aware reset to the typed constant (0 or 1).
+  \item \textbf{Outputs.} Driven nets bind to port tensors; Yosys \texttt{"x"}
+        (undriven) bits become constant-0 tensors.
+\end{enumerate}
+
+Cell recognition covers \texttt{\$\_DFF*}, \texttt{\$\_DFFE*},
+\texttt{\$\_SDFF*}, \texttt{\$\_SDFFE*}, and \texttt{\$\_SDFFCE*}, which appear
+in real PicoRV32 techmaps.
+
+\subsection{Host clock and memory discipline}
+
+Each tick is one \texttt{graph.run}.
+With \texttt{retainHistory=false}, HELUT ping-pongs two preallocated state buffer
+sets and reuses output scratch buffers so that a 1\,000-tick stress test does not
+accumulate unbounded \texttt{MTLBuffer} retention.
+Primary port feeds (including scripted \texttt{resetn}) are host-mutable shared
+buffers; LUT matrices are uploaded once and cached.
+
+\subsection{Threat / fidelity model}
+\label{sec:threat}
+
+\begin{center}
+\begin{tabular}{@{}lp{0.62\textwidth}@{}}
+\toprule
+\textbf{In scope} & Exact modular matvec; shape stability $[B,N]$; DFF temporal
+routing; Yosys cell coverage needed for PicoRV32. \\
+\textbf{Out of scope} & LWE/GLWE sampling, key switching, bootstrapping noise,
+parameter security, side channels. \\
+\textbf{Mock encoding} & ``Encrypted $b$'' means the length-$N$ vector filled with
+\texttt{UInt32} constant $b$ (or a seeded pseudorandom polynomial for non-control
+ports in older harnesses). \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+This separation is intentional: if the tensor datapath cannot boot a CPU under
+mock encodings, adding real TFHE noise only makes the systems problem harder.
+
+\section{Implementation}
+\label{sec:impl}
+
+HELUT is a Swift~6 package targeting macOS~14+ with frameworks
+\texttt{Metal} and \texttt{MetalPerformanceShadersGraph} only---no Core~ML, no
+third-party FHE libraries.
+The library target \texttt{HELUTCore} ($\sim$900 LOC) contains the kernel,
+parser, and compiler; the \texttt{helut} executable hosts application harnesses
+(counter, search stress, PicoRV32 boot).
+An XCTest suite exercises:
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+  \item bit-exact negacyclic fidelity vs.\ CPU schoolbook matvec;
+  \item 1\,000-tick DFF retention with resident-memory instrumentation;
+  \item torus boundary tensors filled with $0$ and $0xFFFFFFFF$.
+\end{itemize}
+
+Default parameters used throughout the capstone are $N=1024$ and batch $B=1$
+(shape $[1,1024]$), reducing temporal routing to a single ciphertext stream.
+
+\section{Application Tiers and Validation Suite}
+\label{sec:applications}
+
+To demonstrate that the HELUT datapath is a general-purpose tensor graph compiler rather than a single-purpose circuit solver, the prototype was validated across three distinct computational tiers:
+
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item \textbf{Application \#3: Zero-Noise Encrypted AI (Decision Trees).} 
+        We synthesized a 4-bit non-linear decision boundary ($\mathrm{if/else}$ logic) from Verilog into $7$ LUTs. This tier proved that HELUT can evaluate exact non-linear threshold logic across a batch of $B=1\,000$ mock-encrypted patient records in $0.201\,\mathrm{s}$ with zero floating-point approximation error or noise accumulation.
+  
+  \item \textbf{Application \#2: Batched Encrypted Regex Search.} 
+        To stress-test unified memory bandwidth under heavy tensor expansion, we compiled a 3-character ASCII pattern matcher ($\text{"DEF"}$) into a 23-LUT Deterministic Finite Automaton (DFA). Pushing the batch dimension to $B=10\,000$ forced an intermediate broadcast tensor of $\approx 41.9\,\mathrm{GiB}$ in unified memory, executing a parallel search across 10,000 encrypted documents in $0.77\,\mathrm{s}$.
+  
+  \item \textbf{Application \#1: Stateful Logic \& Encrypted RISC-V Core.} 
+        Introducing sequential logic via Yosys D-Flip-Flops ($\mathit{\$\_DFF*}$, $\mathit{\$\_SDFF*}$) and enable/reset muxes, this tier enabled temporal state routing across clock cycles. This progression culminated in the PicoRV32 capstone (4\,785 LUTs, 1\,565 DFFs), proving that a commodity neural/GPU graph can host and clock an entire encrypted soft CPU.
+\end{enumerate}
+
+\section{Evaluation}
+\label{sec:eval}
+
+\subsection{Experimental setup}
+
+All wall-clock numbers below were measured on the development Apple Silicon host
+running the debug \texttt{helut} binary against
+\texttt{picorv32\_netlist.json} (Yosys~0.68, 4.9\,MB JSON).
+The netlist contains 6\,350 cells; after HELUT lowering:
+\textbf{4\,785 LUTs}, \textbf{1\,565 DFFs}, \textbf{102} input bits,
+\textbf{307} output bits.
+
+Boot protocol (idle memory/PCPI ports driven with mock-encrypted 0):
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+  \item Ticks 1--3: \texttt{resetn} $\leftarrow$ mock-encrypted $0$ (active-low reset held).
+  \item Ticks 4--10: \texttt{resetn} $\leftarrow$ mock-encrypted $1$ (reset released).
+  \item \texttt{retainHistory=false}; ping-pong state buffers.
+\end{itemize}
+
+\subsection{PicoRV32 boot timing}
+\label{sec:timing}
+
+\begin{table}[t]
+\centering
+\caption{Mock-encrypted PicoRV32 idle boot ($B=1$, $N=1024$, 10 ticks).
+End-to-end times are from the instrumented debug boot; the compile split is from
+a release \texttt{--compile-only} re-run on the same machine
+(Section~\ref{sec:compile-breakdown}).}
+\label{tab:boot}
+\begin{tabular}{@{}lr@{}}
+\toprule
+\textbf{Quantity} & \textbf{Value} \\
+\midrule
+Graph compilation (debug boot run, total)
+  & $469.46\,\mathrm{s}$ \\
+\quad Host Negacyclic Toeplitz expansion (release split)
+  & $21.59\,\mathrm{s}$ ($85\%$) \\
+\quad \texttt{MPSGraph} node wiring (release split)
+  & $3.87\,\mathrm{s}$ ($15\%$) \\
+\quad Release compile total (same netlist, no ticks)
+  & $25.46\,\mathrm{s}$ \\
+Tick 1 (\texttt{graph.run}, includes Metal pipeline JIT)
+  & $57.61\,\mathrm{s}$ \\
+Ticks 2--10 (each)
+  & $0.087$--$0.210\,\mathrm{s}$ \\
+Steady-state tick (ticks 3--10, typical)
+  & $\approx 90\,\mathrm{ms}$ \\
+Mean over all 10 ticks
+  & $5.85\,\mathrm{s}$ \\
+Peak process footprint (reported)
+  & $\approx 40.9\,\mathrm{GB}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Interpretation.}
+The debug boot's $469.46\,\mathrm{s}$ setup is an upper-bound wall time under
+severe unified-memory pressure (tens of GiB of unreused matrices, including
+swap).
+An instrumented release re-compile of the same netlist finishes in
+$25.46\,\mathrm{s}$, of which \textbf{$21.59\,\mathrm{s}$ ($85\%$)} is host
+\texttt{expandNegacyclicToeplitz} over 4\,785 matrices and
+\textbf{$3.87\,\mathrm{s}$ ($15\%$)} is \texttt{MPSGraph} placeholder/wiring
+work (Section~\ref{sec:compile-breakdown}).
+Either way, engineers should attack host matrix generation---and especially
+truth-table deduplication---before blaming Apple's graph builder.
+Tick~1 amortizes Metal shader/pipeline compilation; subsequent ticks show that
+the ciphertext-structured gate graph is \emph{executable} at
+approximately $90\,\mathrm{ms}$ once warm.
+The ten-tick mean is not a useful steady-state estimator because it includes
+JIT; Table~\ref{tab:boot} therefore reports both.
+
+\paragraph{Compiler breakdown.}
+\label{sec:compile-breakdown}
+Instrumented \texttt{compile(\ldots)} accumulates wall time inside each
+\texttt{expandNegacyclicToeplitz} call separately from the rest of lowering.
+On the release binary with \texttt{--compile-only}:
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+  \item \textbf{Host Toeplitz expand:} $21.59\,\mathrm{s}$ --- one expansion per
+        LUT cell, with no truth-table cache (4\,785 matrices;
+        only 64 unique Yosys LUT strings exist in this netlist).
+  \item \textbf{Graph build:} $3.87\,\mathrm{s}$ --- input/DFF placeholders, LUT
+        node attachment, enable/reset muxes, and output binds.
+\end{itemize}
+The debug boot's much larger absolute setup time does not change the ranking:
+host expansion dominates; \texttt{MPSGraph} construction is secondary.
+
+\subsection{Correctness gates (pre-capstone)}
+
+Before scaling to PicoRV32, HELUT required:
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+  \item CPU$\leftrightarrow$GPU bit-exact agreement on negacyclic matvec at torus
+        corners;
+  \item multi-tick DFF state retention without shape collapse;
+  \item enable mux semantics so \texttt{\$\_DFFE\_*} cells do not silently ignore
+        clock enables.
+\end{itemize}
+Sync-reset (\texttt{\$\_SDFF*}) support and \texttt{"x"}-bit decoding were
+necessary for the PicoRV32 techmap; without them the compiler cannot close the
+netlist.
+
+\subsection{Memory scaling remark}
+
+A single LUT matrix is $\Theta(N^2)$ words.
+At $N=1024$, $B=1$, PicoRV32 already pressures tens of gigabytes of unified
+memory.
+Application sketches that raise $B$ to $10^4$ (batched search) imply
+$[B,N,N]$ broadcast intermediates on the order of tens of gigabytes
+\emph{per reduction} and are memory-bound long before they are
+compute-bound~\cite{prd-app2}.
+HELUT therefore treats batch size as a first-class capacity knob, not a free
+ML-style hyperparameter.
+
+\section{Discussion}
+\label{sec:discussion}
+
+\paragraph{What the result shows.}
+A commodity tensor API can host an \emph{entire} synthesized soft CPU as one
+integer graph and step it under mock-encrypted control pins
+(ciphertext-structured vectors; Section~\ref{sec:threat}).
+That is a systems existence proof about representation and plumbing, not a claim
+that FHE CPUs are practical on laptops today.
+
+\paragraph{What would be required for ``real'' TFHE.}
+Replace mock vectors with GLWE samples; insert key-switching / blind-rotation
+schedules instead of static Toeplitz feeds; manage noise and failure
+probability; and almost certainly abandon dense $N\times N$ materialization in
+favor of NTT or on-the-fly rotation.
+HELUT's value in that future is the \emph{netlist clocking} layer: once a PBS
+kernel exists as an \texttt{MPSGraph} subgraph, the same DFF loop applies.
+
+\paragraph{Defensibility checklist.}
+\begin{enumerate}[leftmargin=*,itemsep=1pt]
+  \item Measurements in Table~\ref{tab:boot} are from a single instrumented run of
+        the published harness; they are not averages over many devices.
+  \item ``Encrypted'' / ``mock-encrypted'' in the boot log means deterministic
+        mock torus encodings without LWE noise
+        (Section~\ref{sec:threat})---not cryptographic ciphertexts.
+  \item Steady-state latency excludes tick~1 JIT.
+  \item Peak memory includes host matrix buffers and Metal working sets; it is
+        not a lower bound on an optimized implementation (e.g., matrix
+        deduplication, streaming uploads).
+\end{enumerate}
+
+\section{Related Work}
+\label{sec:related}
+
+TFHE and FHEW established PBS as a Boolean-friendly FHE
+path~\cite{chillotti2020tfhe,ducas2015fhew}.
+Industrial compilers (Concrete~\cite{concrete}, HEIR/MLIR efforts) lower high-level
+programs to FHE ops; HELUT instead lowers \emph{already-synthesized} gate netlists
+to a vendor ML graph.
+GPU FHE accelerators (cuFHE, and successors) optimize NTT-heavy kernels;
+HELUT intentionally uses the ``wrong'' dense embedding to stress-test whether
+\texttt{UInt32} tensor engines preserve modular semantics at all.
+PicoRV32 is a widely used size-optimized RISC-V
+core~\cite{picorv32}; prior encrypted-CPU demos typically stop at ALUs or
+tiny FSMs rather than a full Yosys-mapped RV32 soft core on a phone/laptop NPU
+API.
+
+\section{Related work}
+\label{sec:related}
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+System & Exact $q{=}2^{32}$ Metal & Netlist clock & BK \$lut FHE & Diff.\ hardware \\
+\midrule
+Concrete / tfhe-rs & -- & compiler IR & yes & -- \\
+OpenFHE / HElib & -- & circuit API & yes & -- \\
+HELUT boolean oracle & yes & yes & -- & -- \\
+HELUT encrypted path & yes & yes & yes & -- \\
+TensorLUT (Pillar II) & -- & Yosys INIT & -- & yes \\
+\bottomrule
+\end{tabular}
+\caption{Related-work feature matrix (scope, not throughput bake-off).}
+\label{tab:related}
+\end{table}
+
+\section{Pillar II --- Differentiable hardware}
+\label{sec:pillar2}
+
+\paragraph{Objective.}
+Let $w\in[0,1]^{64L}$ be the concatenated INIT genome and $y(w)$ the multilinear
+TensorLUT forward pass. Soft crypto fitness and discreteness penalty are
+\begin{align}
+  F_{\mathrm{crypto}}(w)
+  &= -\lVert y(w)-t\rVert_2^2, \\
+  \pi(w)
+  &= \sum_i w_i(1-w_i), \\
+  F(w)
+  &= F_{\mathrm{crypto}}(w)-\lambda\,\pi(w),
+  \qquad \lambda=\lambda_{\max}(p')^2\ge 0.
+\end{align}
+
+\begin{theorem}[TensorLUT continuous$\to$discrete]
+\label{thm:tensorlut}
+Under the hypotheses of \texttt{TensorLUTFormal.certificate()}
+(multilinear LUT, unfrozen $w_i\in[0,1]$, involution sandwich on core INITs):
+$\pi\ge 0$ with equality on $\{0,1\}^{64L}$;
+$F_{\mathrm{crypto}}\le 0$ with equality iff $y=t$;
+$F\le F_{\mathrm{crypto}}$ and increasing $\lambda$ cannot improve $F$ when $\pi>0$;
+emitter $\mathbf{1}[w\ge\tfrac12]$ is idempotent on binary INITs;
+stecker genotypes are partial involutions;
+freeze masks remove frozen blocks from $\pi$.
+\end{theorem}
+
+Machine-checked proof: \texttt{Sources/HELUTCore/TensorLUTFormal.swift}
+(\texttt{testTensorLUTFormalCertificate}). Statement: \texttt{directives/tensorlut-theorem.md}.
+This is a \emph{structural} theorem---not a U-534 break.
+
+\begin{theorem}[TensorLUT emitter / freeze corollary]
+\label{thm:tensorlut-corollary}
+Under Theorem~\ref{thm:tensorlut} hypotheses plus emit-via-$E$ and
+\texttt{mutatedPreserving} for frozen stecker pairs:
+if $\pi(w)=0$ then $E(w)$ recovers the binary INIT bits;
+every \texttt{mutatedPreserving} genotype retains frozen pairs and remains a
+partial involution (C25).
+\end{theorem}
+
+Machine-checked: \texttt{TensorLUTFormal.corollaryCertificate()}
+(\texttt{testTensorLUTFormalCorollaryCertificate}).
+Still not melt completeness.
+
+\paragraph{Involution sandwich.}
+Stecker genotypes are partial involutions (disjoint pairs) by construction
+(\texttt{SteckerInvolution.isValid}). The GA cannot propose a non-reciprocal map.
+Empirical grades: unmutated M4 baseline $F_{\mathrm{crypto}}=0$; full INIT /
+stecker-cone melts shatter under $\lambda$; blind 3-pair rediscovery PASSed
+(campaign ledger).
+
+\section{Application gallery (nine slots)}
+\label{sec:apps-gallery}
+
+Minimum disclosure bar: three runnable applications per pillar
+(\texttt{directives/application-gallery.md}).
+
+\begin{center}
+\small
+\begin{tabular}{@{}llp{0.42\textwidth}@{}}
+\toprule
+Pillar & Slot & Reproduce / claim \\
+\midrule
+I & Encrypted full\_adder SING & C6, C20/C21 \\
+I & Tree / regex SING (demo $N$) & C6 \\
+I & Hardness $+$ noisy-BK certs & C5, C22, C23, C26 \\
+II & M4 baseline emit & C8 \\
+II & Involution sandwich / formal & C9, C19, C25 \\
+II & Shatter vs hold (seminar) & empirical; not a decrypt (H6) \\
+III & Fixture-v4 implementation / KAT parity & C10: full suite $49/49$ \\
+III & Bounded structural certificate / protocol & C24: formal $1/1$ \\
+III & Historical legacy-UKW cone & C39 (pre-fixture-v4) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Pillar III --- Adversarial polymorphic ciphers}
+\label{sec:pillar3}
+
+\paragraph{Objective.}
+For the fixed schema-4 \texttt{E256-v2/gen0} native-profile fixture-v4, C10
+records bounded implementation / KAT parity ($49/49$ full-suite PASS). C24
+records the bounded structural certificate / protocol below; C39 is a separate
+historical cone. None of these rows establishes universal key/state coverage.
+
+\begin{theorem}[E256 fixture-v4 bounded structural certificate / protocol]
+\label{thm:enigma256}
+For the fixed schema-4 \texttt{E256-v2/gen0} native-profile fixture-v4, the C24
+bounded structural certificate / protocol checks exactly: (i) a deterministic
+four-state scramble-bijection sweep; (ii) exhaustive byte reciprocity for one
+frozen fixture state; (iii) a deterministic 128-byte stream round-trip;
+(iv) the fixture plugboard plus selected XOR-center involution/fixed-point
+checks, where the center is $A_i^{-1}(A_i(x)\oplus k_i)$; and (v) exact
+schema-4 \texttt{E256-v2/gen0} native-profile integrity. The host derives and
+transports \texttt{(payload, centerMask, absoluteByteCounter)}. RTL validates
+\texttt{absoluteByteCounter} and does not implement HMAC.
+\end{theorem}
+
+Machine-checked result: formal test \textbf{1/1 PASS}; full E256 suite
+\textbf{49/49 PASS}. Receipt:
+\texttt{logs/e256-v2-gen0-fixture-v4-validation.json}. Statement:
+\texttt{directives/enigma256-theorem.md}.
+This is a \emph{bounded structural certificate / protocol}, not a universal
+proof: finite checks are exhaustive only where stated, and state/key coverage
+is bounded. It is not IND-CPA, an HMAC proof, external cryptanalysis, or human
+acceptance.
+
+\paragraph{Historical C39 scope.}
+C39 is a historical one-byte / one-round legacy-UKW encrypted teaching cone
+that predates the live fixture-v4 profile. It does not exercise the transported
+mask/counter fields (\texttt{centerMask}, \texttt{absoluteByteCounter}), the
+conjugated-XOR center, live BRAM, NLFF, or the full core.
+\section{Limitations and Future Work}
+\label{sec:limits}
+
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item \textbf{Lattice-estimator.} Calibrated core-SVP and Sage lattice-estimator
+        disagree on $4/8$ anchors beyond $16$ bits (C23 / H1); production row
+        agrees ($|\Delta|{=}4.5$). Do not quote calibrated $176$ as estimator cost
+        on every row.
+  \item \textbf{Noisy BK.} Covering-gadget residuals are measured (C22). At
+        product-shaped $N{=}1024$, inject $B{=}64$ is undecodable and $B{=}4$ on
+        \texttt{.crypto} yields $\varepsilon\log_2\approx -1$ (C26)---not
+        $2^{-64}$. Under $q{=}2^{32}$, exact public-MS covering exists only at
+        $N\in\{8,128\}$ (C27). Track~B Metal SING at $N{=}128$ with inject
+        $B{=}64$ PASSes (C28). Track~A ($N{=}1024$ SING) still uses noiseless BK
+        ($B_{bk}{=}0$, H4). $\ell{=}1$ \texttt{booleanPublicMS} cannot carry BK noise.
+  \item \textbf{Encrypted scale.} Metal full\_adder SING at $N{=}1024$ is measured
+        (C20 / C21); sequential encrypted clocks and PicoRV FHE path remain open.
+  \item \textbf{Oracle vs FHE.} Trivial/boolean Metal graphs are a shape laboratory,
+        not the FHE claim.
+  \item \textbf{Matrix deduplication.} Toeplitz expansion still benefits from
+        truth-table caching on large netlists.
+  \item \textbf{Side channels.} Metal/GPU power (bgpucap) is parked---not claimed.
+  \item \textbf{Coverage.} Async resets, latches, and sequential encrypted clocks
+        remain incomplete on the FHE path (combinational \$lut today).
+  \item \textbf{Campaign.} P1030680 catalog / TensorLUT grades are parallel research
+        ---not a plaintext claim (H6 / N5--N7).
+\end{itemize}
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+HELUT shows that Apple Silicon's \texttt{MPSGraph} can carry an exact
+$\mathbb{Z}/2^{32}\mathbb{Z}$ negacyclic LUT datapath large enough to clock a
+Yosys-synthesized PicoRV32 core under a mock-encrypted reset sequence.
+The engineering lesson is prosaic and useful: once PBS is phrased as dense
+integer tensors, the rest of a soft CPU---wires, LUTs, enables, sync resets,
+and a host posedge loop---looks like ordinary graph IR work.
+The scientific lesson is cautionary: feasibility of the datapath is not
+feasibility of FHE.
+With that distinction stated plainly, HELUT stands as a defensible systems
+prototype and a measured baseline for denser, more cryptographic successors.
+
+\appendix
+\section{Boot harness summary}
+\label{app:boot}
+
+The capstone executable loads \texttt{picorv32\_netlist.json}, compiles with
+\texttt{YosysGraphCompiler}, locates the \texttt{resetn} placeholder, and runs
+ten ticks while rewriting the shared \texttt{resetn} \texttt{MTLBuffer} between
+\texttt{graph.run} calls (mock-encrypted 0 for three ticks, then mock-encrypted 1).
+All other primary inputs remain mock-encrypted 0.
+Reported compilation time wraps only \texttt{compile(\ldots)}; per-tick times wrap
+only \texttt{graph.run}.
+
+\section{Reproducibility}
+\label{app:repro}
+
+\begin{lstlisting}
+swift build
+.build/debug/helut /path/to/picorv32_netlist.json
+\end{lstlisting}
+Requires macOS~14+, an Apple Silicon GPU with Metal, and sufficient unified
+memory (tens of GiB) for the PicoRV32 matrix working set.
+
+\begin{thebibliography}{9}
+
+\bibitem{chillotti2020tfhe}
+I.~Chillotti, N.~Gama, M.~Georgieva, and M.~Izabach{\`e}ne.
+\newblock TFHE: Fast fully homomorphic encryption over the torus.
+\newblock \emph{Journal of Cryptology}, 33(1):34--91, 2020.
+
+\bibitem{ducas2015fhew}
+L.~Ducas and D.~Micciancio.
+\newblock FHEW: Bootstrapping homomorphic encryption in less than a second.
+\newblock In \emph{EUROCRYPT}, 2015.
+
+\bibitem{lyubashevsky2010ideal}
+V.~Lyubashevsky, C.~Peikert, and O.~Regev.
+\newblock On ideal lattices and learning with errors over rings.
+\newblock In \emph{EUROCRYPT}, 2010.
+
+\bibitem{concrete}
+Zama.
+\newblock Concrete: TFHE compiler and runtime.
+\newblock \url{https://github.com/zama-ai/concrete}, 2022--.
+
+\bibitem{picorv32}
+C.~Wolf.
+\newblock PicoRV32 --- a size-optimized RISC-V CPU.
+\newblock \url{https://github.com/YosysHQ/picorv32}.
+
+\bibitem{prd-app2}
+HELUT Project.
+\newblock Application \#2 note: batched encrypted search memory envelope
+($B{=}10^{4}$, $N{=}1024$).
+\newblock Internal technical note, 2026.
+
+\end{thebibliography}
+
+\end{document}

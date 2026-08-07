@@ -1,0 +1,89 @@
+{
+  "schema": "E256-NAMESPACE-VS-AES-GATE-1",
+  "status": "OPEN_PROGRESS",
+  "preregistration": "directives/e256-namespace-vs-aes-preregistration.json",
+  "preregistration_sha256": "90c5ae3fbd4af29e37777792856ae43f5e52fadc3774977eeb7c02a89f3090b4",
+  "deterministic_payload_sha256": "964c922269c61f4b7dfcb3d85a2a1cf005e1bae866e127eec37748a78374dd7a",
+  "deterministic_payload": {
+    "schema": "E256-NAMESPACE-VS-AES-GATE-1",
+    "prereg_sha256": "90c5ae3fbd4af29e37777792856ae43f5e52fadc3774977eeb7c02a89f3090b4",
+    "twin_surviving_rounds": 3,
+    "candidate_surviving_rounds": 3,
+    "candidate_schedule": [
+      [
+        0,
+        1,
+        4,
+        7
+      ],
+      [
+        0,
+        1,
+        4,
+        7
+      ],
+      [
+        0,
+        1,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        4,
+        7
+      ],
+      [
+        0,
+        1,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        3,
+        4
+      ],
+      [
+        0,
+        1,
+        2,
+        5
+      ],
+      [
+        0,
+        1,
+        3,
+        4
+      ]
+    ],
+    "identity_rotor_surviving_rounds": 8,
+    "mono_parity_all_to_all_by_round_12": false,
+    "verdict": "NAMESPACE_FAILS_ON_THIS_INTEGRAL"
+  },
+  "measured": {
+    "twin_balanced_by_round": [
+      32,
+      32,
+      32,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    "candidate_balanced_by_round": [
+      32,
+      32,
+      32,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "scope": "One integral, rounds 1..8, one key label, three-tuple catalog. Not the attack matrix. Not a round-count selection. Not a security result."
+}

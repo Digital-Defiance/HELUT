@@ -1,0 +1,281 @@
+\chapter{Netlist-clocked torus FHE}
+\label{ch:pillari}
+
+Pillar~I is the reason the course exists: a synthesized sequential circuit
+becomes one tensor graph, ticked by the host, with an encrypted backend that
+is actually LWE.
+
+\section{The HELUT question}
+
+\begin{quote}
+\emph{Can Apple Silicon's \texttt{MPSGraph} host exact torus modular arithmetic
+and gate-level sequential circuits---and can that same hardware object carry
+real bootstrapping keys without lying about it?}
+\end{quote}
+
+The first half is a systems existence proof.
+The second half is a certificate problem.
+HELUT answers both, with the oracle path and the FHE path named as different
+objects~\cite{helut-paper,helut-release}.
+
+\section{Pipeline}
+
+\begin{center}
+\fbox{\parbox{0.92\linewidth}{\centering\vspace{0.5em}
+Verilog $\xrightarrow{\text{Yosys}}$ JSON netlist
+$\xrightarrow{\text{HELUTCore}}$ one \texttt{MPSGraph}\\[0.35em]
+Host Swift loop $=$ posedge clock; DFF $Q$ ping-pongs across ticks\\[0.15em]
+\texttt{\$lut} backend $=$ oracle (multilinear / trivial PBS)
+\quad or\quad
+encrypted (BK blind rotate)
+\vspace{0.5em}}}
+\end{center}
+
+All FHE-path arithmetic tensors remain \texttt{MPSDataType.uInt32}.
+Float32 belongs to TensorLUT (Pillar~II), not to this chapter.
+
+\section{Compiler lowering}
+
+\texttt{YosysGraphCompiler} walks a \texttt{write\_json} module:
+
+\begin{enumerate}
+  \item \textbf{Inputs.} Each input port bit becomes an \texttt{InputNode}
+        placeholder of shape $[B,N]$.
+  \item \textbf{State.} Each recognized flip-flop allocates a $Q$ placeholder
+        \emph{before} LUT lowering so sequential feedback nets resolve.
+  \item \textbf{LUTs.} Cells schedule until all drivers exist; combinational
+        cycles abort.
+  \item \textbf{Next-state.} Enables and sync-resets become exact
+        $\mathbb{Z}/2^{32}\mathbb{Z}$ muxes, e.g.\ active-high enable
+        \[
+          Q_{\mathrm{next}} = E\cdot D + (1-E)\cdot Q.
+        \]
+  \item \textbf{Outputs.} Driven nets bind to port tensors; Yosys \texttt{"x"}
+        becomes constant~0.
+\end{enumerate}
+
+Cell coverage includes \texttt{\$\_DFF*}, \texttt{\$\_DFFE*},
+\texttt{\$\_SDFF*}, \texttt{\$\_SDFFE*}, \texttt{\$\_SDFFCE*}---the techmap
+PicoRV32 actually emits.
+
+\section{Host clock}
+
+Each tick is one \texttt{graph.run}.
+With \texttt{retainHistory=false}, two preallocated state buffer sets ping-pong
+and output scratch is reused, so a 1\,000-tick stress test does not leak
+\texttt{MTLBuffer} retention.
+Primary port feeds (including scripted \texttt{resetn}) are host-mutable shared
+buffers; LUT matrices or BK packs are uploaded once and cached.
+
+This is the reconfigurable clock tree: not routed silicon, but a protocol
+with explicit buffer ownership.
+
+\section{SING as the teaching metric}
+\label{sec:sing}
+
+\textbf{SING} expands to \textbf{S}timuli \textbf{In}, \textbf{G}olden out.
+
+In hardware verification, a \emph{golden model} is the flawless reference
+circuit: feed test vectors (stimuli) in, expect the exact right bits out.
+For HELUT the golden model is the cleartext Yosys netlist simulator.
+A SING check (\texttt{--sing} / \texttt{--bench-encrypted-metrics}) is the
+primary teaching metric and the laboratory analogue of a scan chain:
+encrypt the same generic stimuli, evaluate under GGSW blind-rotate, decrypt,
+and demand bit-exact agreement with cleartext.
+
+A passing encrypted tick under SING is not only a boolean match.
+The log is graded as a cryptographic bundle:
+
+\begin{itemize}
+  \item \textbf{Functional:} ciphertext decrypts to the clear netlist (the hard gate).
+  \item \textbf{Discrete:} $\infty$-norm inject lemmas hold where the path prints them.
+  \item \textbf{Gaussian:} ingest failure probabilities stay under stated hypotheses.
+  \item \textbf{Hardness:} calibrated classical bit estimates print with \hid{1} attached
+        until the estimator row is honest.
+  \item \textbf{Depth:} noisy bootstrap-key residuals are modeled or measured;
+        default Track~A throughput SING may still use $e{=}0$ BK (\hid{4});
+        covering noisy SING receipts are separate claims (\cid{28}, \cid{33}--\cid{37}, \cid{41}, \cid{43}, \cid{52}--\cid{54}).
+\end{itemize}
+
+Brutal engineering rule: if SING fails, you do not get to discuss milliseconds.
+Throughput and timing benches are irrelevant until the FHE path certifies its
+own correctness against the golden netlist.
+
+\begin{lab}[Encrypted adder SING]
+Run the cookbook SING at demo $N$ and at production-shaped $N$
+(Appendix~\ref{app:repro}).
+Record pass/fail, ms/row, and which certificate types printed.
+Then answer: which of those numbers would you be willing to put in an
+abstract without an asterisk?
+\end{lab}
+
+\section{Two backends, one netlist}
+
+\begin{center}
+\begin{tabular}{@{}p{0.28\textwidth}p{0.28\textwidth}p{0.32\textwidth}@{}}
+\toprule
+Backend & Claim status & Use in this course \\
+\midrule
+Trivial / multilinear / CMUX oracle
+  & Shape laboratory, \emph{not} FHE
+  & Batch scaling, PicoRV32 boot, Enigma letter clocks. \\
+\texttt{encrypted} (LWE + GGSW BK)
+  & Pillar~I FHE claim (\cid{4}--\cid{6})
+  & SING vs cleartext; certificates on every tick. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Inter-LUT refresh defaults to \texttt{publicMS} (lattice-compatible BK masks).
+\texttt{.secret} remains for coverage. \texttt{.none} is a debug foot-gun.
+
+\reproduced{C4--C6}{Encrypted LWE/GLWE $+$ GGSW blind-rotate per \texttt{\$lut};
+encrypted $\equiv$ clear multi-netlist SING; full\_adder through $N=1024$
+(publicMS and secret).}
+
+\reproduced{C38}{Encrypted host-clocked DFF $Q$ on a 4-bit counter
+($6$ \texttt{\$lut} $+$ $4$ \texttt{\$\_DFFE\_PP\_}): CPU $N{=}8$ and Metal
+$N{=}1024$ public-ms boolean SING PASS. Not PicoRV32; fused metal-netlist
+and cpu-ggsw remain combinational-only.}
+
+\reproduced{C53}{Same counter under covering-b1 noisy BK, $N{=}1024$,
+torus $\sigma{=}128$, $k{=}7$ stride encoding (\cid{52}): Metal secret
+$110.35\,\mathrm{s}/2$ and public-ms $67.98\,\mathrm{s}/2$ both PASS.
+Receipt: \corpus{logs/helut-encrypted-n1024-metal-sing-counter-covering-b1-gauss-sigma128-k7-stride.log}.}
+
+\reproduced{C40}{Encrypted toy ISA: 4-bit accumulator, \texttt{NOP} or
+\texttt{ADD imm}, $11$ \texttt{\$lut} $+$ $4$ DFFs. Metal $N{=}1024$ SING PASS.}
+
+\reproduced{C54}{Same toy ISA under covering-b1 noisy BK, $N{=}1024$,
+$\sigma{=}128$, $k{=}7$: Metal secret $194.10\,\mathrm{s}/2$ and public-ms
+$104.18\,\mathrm{s}/2$ both PASS.
+Receipt: \corpus{logs/helut-encrypted-n1024-metal-sing-toy-isa-covering-b1-gauss-sigma128-k7-stride.log}.}
+
+\reproduced{C45}{Encrypted PicoRV32: $4785$ \texttt{\$lut} $+$ $1565$ DFFs.
+CPU public-ms boolean output SING PASS at demo $N{=}8$, one host posedge,
+$76.12\,\mathrm{ms}$/row, hardness $4.0$ bits.}
+
+\reproduced{C46}{Encrypted PicoRV32 10-tick \texttt{resetn} boot (hold 3).
+PASS $0.972\,\mathrm{s}/10$ ($97.20\,\mathrm{ms}$/row) with $Q$ $\equiv$ clear.
+Plain \texttt{\$\_DFF\_P\_} must copy native $D$ (no second public-MS).
+$N{=}32$ 1-tick also PASS ($819\,\mathrm{ms}$/row, 16-bit hardness);
+$N{=}64$ 1-tick PASS ($4.35\,\mathrm{s}$/row, 32-bit hardness).}
+
+\reproduced{C47}{Encrypted PicoRV32 NOP ROM: always-ready
+\texttt{addi x0,x0,0}. Ten instruction fetches, \texttt{mem\_addr}
+$0,4,\ldots,\mathtt{0x24}$, $Q\equiv$ clear. $3.15\,\mathrm{s}/32$ at
+demo $N{=}8$. Receipt:
+\corpus{logs/helut-encrypted-n8-cpu-sing-picorv32-nop-fetch.log}.}
+
+\reproduced{C49}{Encrypted PicoRV32 tiny program: \texttt{addi x1,x0,1},
+NOP, \texttt{sw x1,0(x0)}. Store \texttt{wdata}=1 into host RAM.
+PASS $3.79\,\mathrm{s}/48$ ($78.90\,\mathrm{ms}$/row) at demo $N{=}8$.
+\texttt{\$\_SDFFCE\_*} enable gates reset; \texttt{rdata} held for NBA
+\texttt{mem\_xfer}; host DFF copies native LWE.}
+
+\reproduced{C50}{Same ROM plus \texttt{lw x2,0(x0)}. Host RAM on the NBA
+\texttt{mem\_xfer} cycle: \texttt{rdata}=1. PASS $3.77\,\mathrm{s}/48$
+($78.53\,\mathrm{ms}$/row). First-cycle LOAD log may still show leftover
+NOP $0\mathrm{x}13$; PicoRV samples the xfer. Receipt:
+\corpus{logs/helut-encrypted-n8-cpu-sing-picorv32-prog-lw.log}.}
+
+\reproduced{C51}{Metal PicoRV32 NOP-fetch at demo $N{=}8$: tiled-kernel
+BR (\texttt{--metal-br-tile 8}; fused default traps). Two fetches
+($0$, $4$). PASS $63.55\,\mathrm{s}/8$ ($7.94\,\mathrm{s}$/row).
+Per-LUT Metal BR, not fused metal-netlist.}
+
+\section{Why PicoRV32 is real in FHE, with a speed qualifier}
+
+PicoRV32 lowers to 4\,785 LUTs and 1\,565 DFFs~\cite{picorv32}.
+On the boolean-oracle path it compiles in ${\sim}1.3\,\mathrm{s}$ and ticks
+at ${\sim}173\,\mathrm{ms}$ ($N=1024$, $B=1$) in the 2026-08-12 boolean bench
+(\cid{1}).
+That is a fabric existence proof: a commodity neural/GPU graph can host a
+soft CPU's \emph{shape}.
+
+The encrypted path uses the same host-clocked sequential seam as the toy
+counter (\cid{38}) and toy ISA (\cid{40}).
+Claim \cid{45} is one encrypted host posedge of the full PicoRV32 netlist at
+demo $N{=}8$ (output SING).
+Claim \cid{46} is the PRD 10-tick scripted \texttt{resetn} boot at the same
+$N$: CPU public-ms boolean SING PASS in $0.972\,\mathrm{s}$ ($97.20\,\mathrm{ms}$/row),
+calibrated hardness $4.0$ bits, with decrypted $Q$ matching the clear
+register file.
+A second public-MS on already-native $D$ for plain \texttt{\$\_DFF\_P\_}
+cells had been silently folding $1\to 0$ --- outputs could still match.
+Claim \cid{49} is execute+store: \texttt{addi x1,x0,1} then \texttt{sw},
+\texttt{wdata}=1, $3.79\,\mathrm{s}/48$ ($78.90\,\mathrm{ms}$/row).
+Claim \cid{50} is load-back: \texttt{lw} sees stored 1 on the NBA xfer,
+$3.77\,\mathrm{s}/48$ ($78.53\,\mathrm{ms}$/row).
+Claim \cid{51} is the first Metal sequential PicoRV receipt: NOP-fetch,
+two instruction addresses, tiled BR, $7.94\,\mathrm{s}$/row at demo $N$.
+Metal $N{=}1024$ is not SING-logged this epoch --- the LUT-tax is the
+remaining engineering, not a missing compiler.
+
+\begin{warning}
+``We executed encrypted RISC-V'' means \cid{50} on CPU (addi/store/load of 1)
+and \cid{51} on Metal only as a NOP-fetch at demo $N$ ($\sim 8\,\mathrm{s}$/row).
+Not Linux; not Metal $N{=}1024$.
+Avenue~2 in Chapter~\ref{ch:frontier} is self-modifying dark code, not this
+receipt.
+\end{warning}
+
+\section{Threat / fidelity split}
+
+\begin{center}
+\begin{tabular}{@{}lp{0.62\textwidth}@{}}
+\toprule
+In scope for the \emph{datapath} & Exact modular eval; shape $[B,N]$; DFF
+routing; Yosys coverage for PicoRV32. \\
+In scope for the \emph{FHE claim} & LWE/GLWE $+$ BK; noise / $\varepsilon$ /
+hardness / noisy-BK \emph{certificates} as implemented. \\
+Out of scope unless measured & Side channels; quantum; estimator Cost as
+``secure bits'' on every row (\hid{1}); native $k{=}1$ / \texttt{cryptoPublicMS}
+noisy BK and PicoRV covering at $N{=}1024$ (\hid{4} remainder; Grade~B is
+\cid{52}--\cid{54}; PicoRV covering-b2 is \cid{60} FAIL). \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The split is intentional.
+If the tensor datapath cannot boot a CPU under mock encodings, adding real
+TFHE noise only makes the systems problem harder.
+If the FHE path cannot SING an adder, a CPU slide is theatre.
+
+\reproduced{C58}{PicoRV32 \texttt{abc -lut 6} netlist: $2006$ LUT $+$ $1565$ DFF.
+CPU public-ms boolean $1$-tick SING PASS at $N{=}64$ ($1.35\,\mathrm{s}$,
+$32$-bit). Demo $N{=}8$ cannot host LUT6 tables.}
+
+\reproduced{C59}{Same lut6 netlist after sequential wavefront: CPU boolean
+$0.165\,\mathrm{s}/1$ at $N{=}64$ (${\sim}8.2\times$ vs \cid{58}).}
+
+\reproduced{C60}{Covering-b2 $k{=}7$ Metal $N{=}1024$ 1-tick Q SING FAIL
+after ${\sim}33$\,min of combinational BRs.}
+
+\reproduced{C62}{Metal PicoRV lut6 $N{=}1024$ $e{=}0$ public-ms boolean 1-tick
+Q SING PASS ($373.89\,\mathrm{s}$). Covering remains \cid{60}/\cid{61}.}
+
+\reproduced{C63}{Covering-b2 noisy BK on that lut6 core PASSes Q at $N{=}64$
+($1.72\,\mathrm{s}$). The $N{=}1024$ covering Q fail is torus-scale depth, not a
+lut6/wavefront race.}
+
+\reproduced{C64}{Extract$\to$KS closes public-MS PBS at $n{=}64$. Native-$k$
+covering-b2 adder and counter SING at poly $N{=}1024$. PicoRV covering remains
+\cid{60}.}
+
+\reproduced{C65}{Same lut6 PicoRV, covering noisy BK, Metal $N{=}1024$, extract$\to$KS
+$n{=}64$: Q SING PASS (b2 $114\,\mathrm{s}$, b1 $212\,\mathrm{s}$). Walk-around of
+\cid{60}/\cid{61}, not a silent close of $n{=}N$ $k{=}7$.}
+
+\reproduced{C66}{10-tick covering boot on that core: PASS $1136\,\mathrm{s}/10$.}
+
+\reproduced{C67}{KS $n{=}128$ covering adder PASS; $n{\ge}256$ SIGTRAP.}
+
+\reproduced{C68}{NOP-fetch 8 ticks: PASS $911\,\mathrm{s}/8$, PC $0x0{\to}0x4$.}
+
+\reproduced{C69}{Covering KS adder SING PASSes at $n{=}256$ \emph{and} $n{=}512$.
+The $n{=}512$ case was recorded as a FAIL until 2026-08-15; that negative is
+\textbf{withdrawn}. It was an artifact of nondeterministic input encryption, not
+a noise limit --- see \S\ref{sec:determinism}.}
+
+\growswhen{PicoRV \texttt{lw}; KS $n{=}512$ with $k{>}1$; $n{=}N$ native $k$; \texttt{cryptoPublicMS}.}

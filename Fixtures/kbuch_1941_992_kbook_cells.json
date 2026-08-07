@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "scope": "The three Kenngruppen already in the detector, checked against the 1941 Kenngruppenbuch Spaltenliste. A match does not date the 1 May 1945 net, does not add a wheel order, and does not open a menu. Raw strip tokens are not adopted.",
+  "source": {
+    "title": "Kenngruppenbuch",
+    "edition": "Berlin 1941",
+    "mdv": "M.Dv.Nr. 98",
+    "pruefnr": "992",
+    "zuteilungslisteKennwort": "Hering",
+    "url": "https://www.cryptomuseum.com/crypto/enigma/m4/files/KBuch_1941_992_q50.pdf",
+    "readOn": "2026-09-27",
+    "engine": "tesseract 5.5.3"
+  },
+  "checkedCells": [
+    {
+      "trigram": "ACH",
+      "column": 645,
+      "row": 14,
+      "grade": "checked",
+      "pdfPage": 54,
+      "printedPage": 33,
+      "rawOcrFile": "Fixtures/kbuch_1941_992_page33_ocr.json",
+      "note": "Fourteenth token of the column-645 strip. Already the detector entry."
+    },
+    {
+      "trigram": "DUZ",
+      "column": 12,
+      "row": 9,
+      "grade": "checked",
+      "pdfPage": 20,
+      "printedPage": 1,
+      "ocrTokenIndexOnShortStrip": 8,
+      "stripTokenCount": 23,
+      "neighborsOnStrip": {
+        "above": "VAY",
+        "below": "JZYV"
+      },
+      "note": "On this strip DUZ sits under VAY. The row-numbered lower block prints that pair at rows 8 and 9, so the row is 9. That is the detector entry. P1030690, Potsdam, column 12."
+    },
+    {
+      "trigram": "ZPT",
+      "column": 211,
+      "row": 16,
+      "grade": "checked",
+      "pdfPage": 30,
+      "printedPage": 11,
+      "ocrTokenIndex": 16,
+      "stripTokenCount": 24,
+      "neighborsOnStrip": {
+        "above": "ITNY",
+        "below": "PS"
+      },
+      "note": "Column 211 strip. The row-numbered lower block prints ZPT at row 16, under TNY. That is the detector entry for the Reservehandverfahren example, not a Thetis key."
+    }
+  ],
+  "strips": {
+    "column12": {
+      "rawTokens": [
+        "OL",
+        "SEZ",
+        "MRQ",
+        "YFP",
+        "AHA",
+        "PXZ",
+        "VAY",
+        "DUZ",
+        "JZYV",
+        "TBX",
+        "IMM",
+        "NYC",
+        "QDJ",
+        "BLN",
+        "RIQ",
+        "ZTJ",
+        "UHO",
+        "REY",
+        "WNT",
+        "GOA",
+        "OKI",
+        "LJ",
+        "XC"
+      ]
+    },
+    "column211": {
+      "rawTokens": [
+        "VO",
+        "EK",
+        "HCE",
+        "KEE",
+        "SBC",
+        "VJIV",
+        "YE",
+        "ML",
+        "QGI",
+        "WO",
+        "NQ",
+        "GW",
+        "MBC",
+        "CF",
+        "ITNY",
+        "ZPT",
+        "PS",
+        "SBE",
+        "FD",
+        "LP",
+        "DR",
+        "UU",
+        "PG",
+        "AVIV"
+      ],
+      "windowLeft": 248
+    }
+  }
+}

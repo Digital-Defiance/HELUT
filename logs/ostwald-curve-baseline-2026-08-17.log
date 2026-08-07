@@ -1,0 +1,62 @@
+=== Ciphertext-only length threshold — crib-free climb on known M4 keys ===
+corpus        : Fixtures/u534_corpus.json
+controls      : 48 published 1 May 1945 U-534 keys (lengths 60…719), using 48
+trigram model : Fixtures/german_trigrams.txt (14947 grams; letters=28508834 ic=0.0747 distinct=14947)
+scorers       : bigram, trigram, staged
+wrong samples : 16 random message keys per cell, same shell (the hardest negative control — a real sweep also enumerates wrong wheel
+                orders and rings, which are easier to reject, so margins here
+                are conservative)
+target        : P1030680 is 72 letters. Published record for this attack class
+                is 78 letters on three-rotor Heer; this is four-rotor naval M4.
+
+A cell is decided by MARGIN = trueScore − best wrongScore.
+  margin > 0 : signal outranks sampled noise; a sweep can work at this length
+  margin < 0 : the search would rank a wrong key first; compute cannot fix it
+
+────────────────────────────────────────────────────────────────────────────────────────────────
+scorer: bigram
+   len ctrls  win    win%  medMargin    medZ  plugs   corr
+────────────────────────────────────────────────────────────────────────────────────────────────
+    60    47    1      2%    -0.2077   -0.00   0/10     8%
+    68    47    3      6%    -0.1343    0.11   0/10     7%
+    72    46    7     15%    -0.1700    0.18   0/10     7%
+    80    43    4      9%    -0.1699   -0.01   0/10     6%
+    90    42    4     10%    -0.1150    0.18   0/10     7%
+   100    37    3      8%    -0.0928    0.57   0/10     6%
+   120    27    2      7%    -0.1256    0.11   0/10     7%
+   160    14    2     14%    -0.1136   -0.23   0/10     8%
+
+────────────────────────────────────────────────────────────────────────────────────────────────
+scorer: trigram
+   len ctrls  win    win%  medMargin    medZ  plugs   corr
+────────────────────────────────────────────────────────────────────────────────────────────────
+    60    47    2      4%    -0.3000    0.27   0/10     7%
+    68    47    4      9%    -0.2538   -0.15   0/10     7%
+    72    46    1      2%    -0.2180    0.05   0/10     7%
+    80    43    1      2%    -0.2342    0.16   0/10     6%
+    90    42    8     19%    -0.1998    0.31   0/10     8%
+   100    37    2      5%    -0.2195    0.04   0/10     6%
+   120    27    2      7%    -0.2330    0.07   0/10     7%
+   160    14    1      7%    -0.1481   -0.03   0/10     6%
+
+────────────────────────────────────────────────────────────────────────────────────────────────
+scorer: staged
+   len ctrls  win    win%  medMargin    medZ  plugs   corr
+────────────────────────────────────────────────────────────────────────────────────────────────
+    60    47    2      4%    -0.3070   -0.23   1/10     7%
+    68    47    6     13%    -0.2429    0.12   0/10     6%
+    72    46    3      7%    -0.2689    0.25   0/10     6%
+    80    43    6     14%    -0.1966    0.39   0/10     5%
+    90    42    6     14%    -0.1885    0.38   1/10     7%
+   100    37    7     19%    -0.1928    0.37   1/10     6%
+   120    27    6     22%    -0.1298    0.60   1/10     7%
+   160    14    2     14%    -0.1395    0.34   1/10     8%
+
+────────────────────────────────────────────────────────────────────────────────────────────────
+Columns: win = controls whose true setting beat every sampled wrong setting.
+         medMargin / medZ = median margin and median z-score of the truth.
+         plugs = median true plugs recovered of 10. corr = median letters right.
+
+This is a measurement, not a break. It bounds what the crib-free path can reach
+on this traffic class before any of it is pointed at P1030680.
+EXIT=0

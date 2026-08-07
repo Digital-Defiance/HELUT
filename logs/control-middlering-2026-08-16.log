@@ -1,0 +1,37 @@
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030684_control_menus.json (3 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 1 of 3
+min crib length: 16
+running 1 menus, highest deduction power first:
+  [1] VVVUUUVIRSOBENNULEINSXXMITU@0 edges=27 letters=21 loops=8 central=U
+shells/menu: 908544 (336 WO × 2 Greek × 2 UKW × 26 mid-ring × 26 right-ring) → 4.15e+11 settings
+kernel sieve: ≤10 plugs, middle-ring covered-lane skip
+GPU pipeline depth: 4 shells in flight
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+right ring swept: every right-wheel turnover phase covered
+middle ring swept: ring A in full, rings B–Z restricted to lanes whose middle wheel reaches a notch (the rest are exactly the ring-A lanes)
+no residual ring gap for these menus — this is the arm the ledger has never run
+ETA floor (~50M/s): 138.4 min
+
+  [1/1·1] VVVUUUVIRSOBENNULEINSXXMITU@0 edges=27 letters=21 loops=8 central=U       4 stops → 4 physical, best IC 0.064 tail -2.848    4307s  96.4M/s ETA   0.0 min
+
+total raw stops: 4 over 415182802944 settings (96.4M/s mean)
+survived the 10-plug sieve: 4
+
+******************************************************************************
+***  BREAK FOUND  ***
+******************************************************************************
+  menu        VVVUUUVIRSOBENNULEINSXXMITU@0 edges=27 letters=21 loops=8 central=U
+  UKW         B
+  Greek       gamma
+  wheel order IV-III-VIII
+  rings       AAAH
+  position    VYYN
+  stecker     BQ CH DI EJ GL KP NV OU SZ TY (10 pairs)
+  IC          0.064 (floor 0.055)
+  tail        -2.848 vs German -2.847 / noise -5.382
+
+  VVVUUUVIRSOBENNULEINSXXMITUUUVIRSIBENNULZWOYVIRSIBENNULDREIYZWODREISECHSEINSYZWODREIDREIACHTEINSDREIOITNACHWZSTENPASSIRT
+******************************************************************************
+EXIT=0

@@ -1,0 +1,97 @@
+{
+  "schema": "helut-native-final-handoff-v1",
+  "createdUTC": "2026-09-06T17:35:23Z",
+  "status": "FINAL_FOR_THIS_FROZEN_BOUNDED_EXPERIMENT",
+  "rerunRequired": false,
+  "rerunRule": "Do not rerun this protocol merely for filming or publication. If either source or compiled XCTest changes, create a new preregistration and evidence bundle rather than replacing this one.",
+  "source": {
+    "path": "Tests/HELUTTests/NativeBaselineComparisonTests.swift",
+    "gitBlobSHA1": "b0dce16ca9844ce499d07ea090ed4ff7cedae6f9",
+    "sha256": "3ee58213f460cbc8a0a316dc90e6edb9a7af5e77426b839fb1d83e8675e490e2",
+    "bytes": 47681,
+    "mtimeEpoch": 1788714090,
+    "mtimeLocal": "2026-09-06T10:01:30-0700",
+    "mtimeUTC": "2026-09-06T17:01:30Z",
+    "repositoryStateAtHandoff": "untracked"
+  },
+  "compiledXCTest": {
+    "path": ".build/arm64-apple-macosx/release/helutPackageTests.xctest/Contents/MacOS/helutPackageTests",
+    "sha256": "5f6ea6aa884e28fccbd2ab1acc872687e5054bf89d933795db4bba6c7ec505ad",
+    "bytes": 10655632,
+    "mtimeEpoch": 1788714217,
+    "mtimeLocal": "2026-09-06T10:03:37-0700",
+    "mtimeUTC": "2026-09-06T17:03:37Z"
+  },
+  "execution": {
+    "count": 1,
+    "preExecutionGate": "PASS",
+    "xctest": "Executed 1 test, with 0 failures (0 unexpected)",
+    "lanePoints": [1, 16, 256, 1024, 4096, 16384, 32768, 65536],
+    "timedTrialsPerPoint": 5,
+    "requestedNativeWorkers": 16,
+    "b65536DigestHex": "52f209ab0358725",
+    "allDigestsMatched": true,
+    "allReportedResidualsZero": true,
+    "pairedCrossoverThroughB65536": false
+  },
+  "b65536MedianNanoseconds": {
+    "helutPairedTotal": 8544087,
+    "nativeParallelTotal": 7421917,
+    "helutOverNative": 1.151196786490606,
+    "remainingGap": 1122170,
+    "assignment": 29922,
+    "inputPack": 528932,
+    "pairedGraph": 766039,
+    "decode": 548005,
+    "digest": 6676912
+  },
+  "evidence": {
+    "preregister": {
+      "path": "logs/helut-native-degree-one-pack-20260906T170831Z/preregister.json",
+      "sha256": "ccef741e7b42a78517af81579bf878910bebb47dd7344eaf7a572adc298b2890"
+    },
+    "rawLog": {
+      "path": "logs/helut-native-degree-one-pack-20260906T170831Z/raw.log",
+      "sha256": "bae12bb19270904133c5fd566c114abd805ae6665acaa4f97640255439566435"
+    },
+    "receipt": {
+      "path": "logs/helut-native-degree-one-pack-20260906T170831Z/receipt.json",
+      "sha256": "6912cb6586fb3885607849be86ab104c427ceb26b13977b38692cbc0844087d8",
+      "immutable": true
+    },
+    "generated": {
+      "emitted.v": "8ba6dc328983119bd3b2236438f3431d5d54f530710fe73d6512359dd51c6a5e",
+      "lut6.v": "4c9d11388c4385f5fecc293d6c54a44abe830878cc2832993ce4ff6de7905e66",
+      "flow.ys": "40dc7c3526448219a5eca28fa8102c90129d3a031f0ab46e9c1ab70f2848952a",
+      "tb.cpp": "2dfd5a6cb66a4c15628f4464625c7b076498e6dee6219fbeedadfffa483c34b2",
+      "resynth.json": {
+        "sha256": "84ba190a62302f886b63f7607480b0e3f50f27b380f139ce91bb178fac8164fb",
+        "bytes": 44729,
+        "bankedBytesInBundle": false
+      },
+      "obj_dir/sim": {
+        "sha256": "60aab5d844d2b5fc36d6efc20ea0b0fe224a2bde12c4afbe847e4a47e1dfacb9",
+        "bytes": 360784,
+        "bankedBytesInBundle": false
+      }
+    }
+  },
+  "latestSemanticDelta": {
+    "name": "exact degree-one constant-fill input packing",
+    "summary": "The degree-one branch writes selected encoded low[0]/high[0] values directly while retaining all timed pointer binding and all 17 times lanes writes; the degree-greater-than-one path and graph/decode/digest/timing contracts remain unchanged.",
+    "immediatePredecessorGitBlob": "0d389184f6cc341d61e6d71dec6be75d00a79e0e",
+    "predecessorBytesRetained": false,
+    "limitation": "The predecessor identifier is a coordination checkpoint, but its bytes were not retained as a Git object. The semantic delta is bound by preregistration and review, not by a recoverable byte diff."
+  },
+  "publicationWording": {
+    "primary": "At B=65,536 under the accepted paired scope, HELUT measured 8.544087 ms versus 7.421917 ms for 16-worker Verilator: HELUT remained 15.1% slower, with no paired crossover through B=65,536.",
+    "historical": "The warmed graph-only comparison is intentionally asymmetric and may show sampled graph amortization; it is not the paired throughput verdict.",
+    "digest": "The ordered digest is required shared work inside both paired timers. It must not be subtracted post hoc to synthesize a separate evaluator ratio.",
+    "scope": "Five unpinned trials at each of eight widths for one combinational 8-bit ripple adder on one Mac16,5 host; no general HDL, sequential, cross-host, or best-possible-native claim follows."
+  },
+  "knownEvidenceCaveats": [
+    "The sealed preregistration/raw log/receipt render local -0700 mtimes with a Z suffix; epoch, byte size, and hashes are correct. See ERRATA.md.",
+    "raw.log was banked from the complete returned sole-run output after session compaction rather than streamed directly to its final path.",
+    "The generated simulator binary and resynth.json are hash-identified but their bytes are not copied into this evidence directory."
+  ]
+}

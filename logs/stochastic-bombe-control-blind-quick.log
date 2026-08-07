@@ -1,0 +1,44 @@
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Shell evolution: OFF freeRings=false WO=1 ringSeeds=1 subspace=potsdam
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/8 pop=12 blockB_greeks=0
+  gen-best  fitness=16.0000 IC=0.0368 pos=TGXU | UKWB gamma IV-III-VIII rings=AACU stecker=BI CN DQ EZ FP GK HO LU MX RV
+  all-time  fitness=16.0000 IC=0.0368 pos=TGXU | UKWB gamma IV-III-VIII rings=AACU stecker=BI CN DQ EZ FP GK HO LU MX RV
+Hybrid gen 2/8 pop=12 blockB_greeks=0
+  gen-best  fitness=16.0000 IC=0.0368 pos=TGXU | UKWB gamma IV-III-VIII rings=AACU stecker=BI CN DQ EZ FP GK HO LU MX RV
+  all-time  fitness=16.0000 IC=0.0368 pos=TGXU | UKWB gamma IV-III-VIII rings=AACU stecker=BI CN DQ EZ FP GK HO LU MX RV
+Hybrid gen 3/8 pop=12 blockB_greeks=0
+  gen-best  fitness=16.0000 IC=0.0368 pos=TGXU | UKWB gamma IV-III-VIII rings=AACU stecker=BI CN DQ EZ FP GK HO LU MX RV
+  all-time  fitness=16.0000 IC=0.0368 pos=TGXU | UKWB gamma IV-III-VIII rings=AACU stecker=BI CN DQ EZ FP GK HO LU MX RV
+Hybrid gen 4/8 pop=12 blockB_greeks=0
+  gen-best  fitness=16.0000 IC=0.0368 pos=TGXU | UKWB gamma IV-III-VIII rings=AACU stecker=BI CN DQ EZ FP GK HO LU MX RV
+  all-time  fitness=16.0000 IC=0.0368 pos=TGXU | UKWB gamma IV-III-VIII rings=AACU stecker=BI CN DQ EZ FP GK HO LU MX RV
+Hybrid gen 5/8 pop=12 blockB_greeks=0
+  gen-best  fitness=16.0000 IC=0.0368 pos=TGXU | UKWB gamma IV-III-VIII rings=AACU stecker=BI CN DQ EZ FP GK HO LU MX RV
+  all-time  fitness=16.0000 IC=0.0368 pos=TGXU | UKWB gamma IV-III-VIII rings=AACU stecker=BI CN DQ EZ FP GK HO LU MX RV
+Hybrid gen 6/8 pop=12 blockB_greeks=0
+  gen-best  fitness=16.0000 IC=0.0368 pos=TGXU | UKWB gamma IV-III-VIII rings=AACU stecker=BI CN DQ EZ FP GK HO LU MX RV
+  all-time  fitness=16.0000 IC=0.0368 pos=TGXU | UKWB gamma IV-III-VIII rings=AACU stecker=BI CN DQ EZ FP GK HO LU MX RV
+Hybrid gen 7/8 pop=12 blockB_greeks=0
+  gen-best  fitness=16.0000 IC=0.0368 pos=TGXU | UKWB gamma IV-III-VIII rings=AACU stecker=BI CN DQ EZ FP GK HO LU MX RV
+  all-time  fitness=16.0000 IC=0.0368 pos=TGXU | UKWB gamma IV-III-VIII rings=AACU stecker=BI CN DQ EZ FP GK HO LU MX RV
+Hybrid gen 8/8 pop=12 blockB_greeks=0
+  gen-best  fitness=16.0000 IC=0.0368 pos=TGXU | UKWB gamma IV-III-VIII rings=AACU stecker=BI CN DQ EZ FP GK HO LU MX RV
+  all-time  fitness=16.0000 IC=0.0368 pos=TGXU | UKWB gamma IV-III-VIII rings=AACU stecker=BI CN DQ EZ FP GK HO LU MX RV
+HELUT — Stochastic Bombe KPA control (P1030684, 72 letters)
+Fitness: exact decrypt match against known plaintext (German-ness ignored)
+Shell locked: UKW B / γ / IV-III-VIII / rings AACU
+Stecker seed: BLIND (no oracle)
+Ciphertext: RFBYWKIKELDCHBSXUNFJFSNRRVFWASXYLQCQFADYJXNTBMVLRDCGULOWHTBGWUSSOQHGAYED
+Target PT:  VVVUUUVIRSOBENNULEINSXXMITUUUVIRSIBENNULZWOYVIRSIBENNULDREIYZWODREISECHS
+
+Config: pop=12 gens=8 maxPlugs=10 blockB_greeks=0 samples subspace=potsdam WO=1 evolveShell=false freeRings=false ringSeeds=AACU fitness=KPA letter-match / 72
+
+
+Elapsed: 0.8 s
+Best shell: UKWB gamma IV-III-VIII rings=AACU stecker=BI CN DQ EZ FP GK HO LU MX RV
+Best hit: partition=kpa-26^4 pos=TGXU score=16.0000 IC=0.0368
+Plain: WCVUUUDPISNEFSHLTSIERNHKTPQXCAFRMWRBOUUWZOOYUAROHABBNMXCROLKDSMDDBTZUCAJ
+KPA match: 16/72
+*** CONTROL FAIL — decrypt does not match known plaintext ***
+See ASIC_CRACKER.md / evolution-hybridization.md / stochastic-bombe.md

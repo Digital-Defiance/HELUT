@@ -1,0 +1,941 @@
+{
+  "target": "P1030680",
+  "ciphertext": "JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF",
+  "prior": "collapse-tactical-fallback",
+  "note": "M-Thetis as shadow/tactical fallback in final days \u2014 NOT training padding. Lexicon: scuttle (VERSENKEN/VERNICHTEN/REGENBOGEN), urgency (SOFORT/GEHEIM/WICHTIG), command hubs (FLENSBURG/KIEL/DOENITZ), muster (ANTWORTEN/MELDEN). Same Stochastic architecture; new targets only. 16\u201324 constrained; self-stecker legal.",
+  "survivor_ratio": 0.8,
+  "noise_margin": 0.1,
+  "templates": [
+    {
+      "name": "collapse:pad:ANTWORTE+VERSENKE@g2@1",
+      "pattern": ".ANTWORTEN....VERSENKENSOFORT...........................................",
+      "note": "collapse pad+body ANTWORTENXX+VERSENKENSOFORT",
+      "constrained": 24,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:FLENSBUR+VERSENKE@g2@1",
+      "pattern": ".FLENSBURG....VERSENKENSOFORT...........................................",
+      "note": "collapse pad+body FLENSBURGXX+VERSENKENSOFORT",
+      "constrained": 24,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:VERSENKE+VERSENKE@g2@1",
+      "pattern": ".VERSENKEN....VERSENKENSOFORT...........................................",
+      "note": "collapse pad+body VERSENKENXX+VERSENKENSOFORT",
+      "constrained": 24,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:REGENBOG+DOENITZB@g2@1",
+      "pattern": ".REGENBOGEN....DOENITZBEFEHL............................................",
+      "note": "collapse pad+body REGENBOGENXX+DOENITZBEFEHL",
+      "constrained": 23,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:REGENBOG+DOENITZB@g4@1",
+      "pattern": ".REGENBOGEN......DOENITZBEFEHL..........................................",
+      "note": "collapse pad+body REGENBOGENXX+DOENITZBEFEHL",
+      "constrained": 23,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:VERNICHT+DOENITZB@g2@1",
+      "pattern": ".VERNICHTEN...DOENITZBEFEHL.............................................",
+      "note": "collapse pad+body VERNICHTENX+DOENITZBEFEHL",
+      "constrained": 23,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:VERNICHT+DOENITZB@g4@1",
+      "pattern": ".VERNICHTEN.....DOENITZBEFEHL...........................................",
+      "note": "collapse pad+body VERNICHTENX+DOENITZBEFEHL",
+      "constrained": 23,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:ANTWORTE+DOENITZB@g2@1",
+      "pattern": ".ANTWORTEN....DOENITZBEFEHL.............................................",
+      "note": "collapse pad+body ANTWORTENXX+DOENITZBEFEHL",
+      "constrained": 22,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:ANTWORTE+DOENITZB@g2@2",
+      "pattern": "..ANTWORTEN....DOENITZBEFEHL............................................",
+      "note": "collapse pad+body ANTWORTENXX+DOENITZBEFEHL",
+      "constrained": 22,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:ANTWORTE+DOENITZB@g4@1",
+      "pattern": ".ANTWORTEN......DOENITZBEFEHL...........................................",
+      "note": "collapse pad+body ANTWORTENXX+DOENITZBEFEHL",
+      "constrained": 22,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:ANTWORTE+DOENITZB@g4@2",
+      "pattern": "..ANTWORTEN......DOENITZBEFEHL..........................................",
+      "note": "collapse pad+body ANTWORTENXX+DOENITZBEFEHL",
+      "constrained": 22,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:FLENSBUR+DOENITZB@g2@0",
+      "pattern": "FLENSBURG....DOENITZBEFEHL..............................................",
+      "note": "collapse pad+body FLENSBURGXX+DOENITZBEFEHL",
+      "constrained": 22,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:FLENSBUR+DOENITZB@g2@1",
+      "pattern": ".FLENSBURG....DOENITZBEFEHL.............................................",
+      "note": "collapse pad+body FLENSBURGXX+DOENITZBEFEHL",
+      "constrained": 22,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:FLENSBUR+DOENITZB@g2@2",
+      "pattern": "..FLENSBURG....DOENITZBEFEHL............................................",
+      "note": "collapse pad+body FLENSBURGXX+DOENITZBEFEHL",
+      "constrained": 22,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:FLENSBUR+DOENITZB@g4@0",
+      "pattern": "FLENSBURG......DOENITZBEFEHL............................................",
+      "note": "collapse pad+body FLENSBURGXX+DOENITZBEFEHL",
+      "constrained": 22,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:FLENSBUR+DOENITZB@g4@1",
+      "pattern": ".FLENSBURG......DOENITZBEFEHL...........................................",
+      "note": "collapse pad+body FLENSBURGXX+DOENITZBEFEHL",
+      "constrained": 22,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:FLENSBUR+DOENITZB@g4@2",
+      "pattern": "..FLENSBURG......DOENITZBEFEHL..........................................",
+      "note": "collapse pad+body FLENSBURGXX+DOENITZBEFEHL",
+      "constrained": 22,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:REGENBOG+MELDENSO@g2@1",
+      "pattern": ".REGENBOGEN....MELDENSOFORT.............................................",
+      "note": "collapse pad+body REGENBOGENXX+MELDENSOFORTXX",
+      "constrained": 22,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:REGENBOG+MELDENSO@g4@1",
+      "pattern": ".REGENBOGEN......MELDENSOFORT...........................................",
+      "note": "collapse pad+body REGENBOGENXX+MELDENSOFORTXX",
+      "constrained": 22,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:SOFORTGE+REGENBOG@g2@0",
+      "pattern": "SOFORTGEHEIM..REGENBOGEN................................................",
+      "note": "collapse pad+body SOFORTGEHEIM+REGENBOGENXXXX",
+      "constrained": 22,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:SOFORTGE+REGENBOG@g2@2",
+      "pattern": "..SOFORTGEHEIM..REGENBOGEN..............................................",
+      "note": "collapse pad+body SOFORTGEHEIM+REGENBOGENXXXX",
+      "constrained": 22,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:SOFORTGE+REGENBOG@g4@0",
+      "pattern": "SOFORTGEHEIM....REGENBOGEN..............................................",
+      "note": "collapse pad+body SOFORTGEHEIM+REGENBOGENXXXX",
+      "constrained": 22,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:SOFORTGE+REGENBOG@g4@2",
+      "pattern": "..SOFORTGEHEIM....REGENBOGEN............................................",
+      "note": "collapse pad+body SOFORTGEHEIM+REGENBOGENXXXX",
+      "constrained": 22,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:VERSENKE+DOENITZB@g2@1",
+      "pattern": ".VERSENKEN....DOENITZBEFEHL.............................................",
+      "note": "collapse pad+body VERSENKENXX+DOENITZBEFEHL",
+      "constrained": 22,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:VERSENKE+DOENITZB@g2@2",
+      "pattern": "..VERSENKEN....DOENITZBEFEHL............................................",
+      "note": "collapse pad+body VERSENKENXX+DOENITZBEFEHL",
+      "constrained": 22,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:VERSENKE+DOENITZB@g4@1",
+      "pattern": ".VERSENKEN......DOENITZBEFEHL...........................................",
+      "note": "collapse pad+body VERSENKENXX+DOENITZBEFEHL",
+      "constrained": 22,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:VERSENKE+DOENITZB@g4@2",
+      "pattern": "..VERSENKEN......DOENITZBEFEHL..........................................",
+      "note": "collapse pad+body VERSENKENXX+DOENITZBEFEHL",
+      "constrained": 22,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:ANTWORTE+MELDENSO@g2@2",
+      "pattern": "..ANTWORTEN....MELDENSOFORT.............................................",
+      "note": "collapse pad+body ANTWORTENXX+MELDENSOFORTXX",
+      "constrained": 21,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:ANTWORTE+MELDENSO@g4@2",
+      "pattern": "..ANTWORTEN......MELDENSOFORT...........................................",
+      "note": "collapse pad+body ANTWORTENXX+MELDENSOFORTXX",
+      "constrained": 21,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:FLENSBUR+MELDENSO@g2@2",
+      "pattern": "..FLENSBURG....MELDENSOFORT.............................................",
+      "note": "collapse pad+body FLENSBURGXX+MELDENSOFORTXX",
+      "constrained": 21,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:FLENSBUR+MELDENSO@g4@0",
+      "pattern": "FLENSBURG......MELDENSOFORT.............................................",
+      "note": "collapse pad+body FLENSBURGXX+MELDENSOFORTXX",
+      "constrained": 21,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:FLENSBUR+MELDENSO@g4@2",
+      "pattern": "..FLENSBURG......MELDENSOFORT...........................................",
+      "note": "collapse pad+body FLENSBURGXX+MELDENSOFORTXX",
+      "constrained": 21,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:SOFORTGE+ALLEBOOT@g2@0",
+      "pattern": "SOFORTGEHEIM..ALLEBOOTE.................................................",
+      "note": "collapse pad+body SOFORTGEHEIM+ALLEBOOTEXXXXX",
+      "constrained": 21,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:SOFORTGE+ALLEBOOT@g2@2",
+      "pattern": "..SOFORTGEHEIM..ALLEBOOTE...............................................",
+      "note": "collapse pad+body SOFORTGEHEIM+ALLEBOOTEXXXXX",
+      "constrained": 21,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:SOFORTGE+ALLEBOOT@g4@0",
+      "pattern": "SOFORTGEHEIM....ALLEBOOTE...............................................",
+      "note": "collapse pad+body SOFORTGEHEIM+ALLEBOOTEXXXXX",
+      "constrained": 21,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:SOFORTGE+FLENSBUR@g2@0",
+      "pattern": "SOFORTGEHEIM..FLENSBURG.................................................",
+      "note": "collapse pad+body SOFORTGEHEIM+FLENSBURGXXXXX",
+      "constrained": 21,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:SOFORTGE+FLENSBUR@g4@2",
+      "pattern": "..SOFORTGEHEIM....FLENSBURG.............................................",
+      "note": "collapse pad+body SOFORTGEHEIM+FLENSBURGXXXXX",
+      "constrained": 21,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:VERSENKE+MELDENSO@g2@2",
+      "pattern": "..VERSENKEN....MELDENSOFORT.............................................",
+      "note": "collapse pad+body VERSENKENXX+MELDENSOFORTXX",
+      "constrained": 21,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:VERSENKE+MELDENSO@g4@2",
+      "pattern": "..VERSENKEN......MELDENSOFORT...........................................",
+      "note": "collapse pad+body VERSENKENXX+MELDENSOFORTXX",
+      "constrained": 21,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:DOENITZX+DOENITZB@g2@0",
+      "pattern": "DOENITZ......DOENITZBEFEHL..............................................",
+      "note": "collapse pad+body DOENITZXXXX+DOENITZBEFEHL",
+      "constrained": 20,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:DOENITZX+DOENITZB@g2@2",
+      "pattern": "..DOENITZ......DOENITZBEFEHL............................................",
+      "note": "collapse pad+body DOENITZXXXX+DOENITZBEFEHL",
+      "constrained": 20,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:DOENITZX+DOENITZB@g4@0",
+      "pattern": "DOENITZ........DOENITZBEFEHL............................................",
+      "note": "collapse pad+body DOENITZXXXX+DOENITZBEFEHL",
+      "constrained": 20,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:DOENITZX+DOENITZB@g4@2",
+      "pattern": "..DOENITZ........DOENITZBEFEHL..........................................",
+      "note": "collapse pad+body DOENITZXXXX+DOENITZBEFEHL",
+      "constrained": 20,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:REGENBOG+REGENBOG@g2@1",
+      "pattern": ".REGENBOGEN....REGENBOGEN...............................................",
+      "note": "collapse pad+body REGENBOGENXX+REGENBOGENXXXX",
+      "constrained": 20,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:VERNICHT+REGENBOG@g2@1",
+      "pattern": ".VERNICHTEN...REGENBOGEN................................................",
+      "note": "collapse pad+body VERNICHTENX+REGENBOGENXXXX",
+      "constrained": 20,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:VERNICHT+REGENBOG@g4@1",
+      "pattern": ".VERNICHTEN.....REGENBOGEN..............................................",
+      "note": "collapse pad+body VERNICHTENX+REGENBOGENXXXX",
+      "constrained": 20,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:WICHTIGX+DOENITZB@g2@0",
+      "pattern": "WICHTIG......DOENITZBEFEHL..............................................",
+      "note": "collapse pad+body WICHTIGXXXX+DOENITZBEFEHL",
+      "constrained": 20,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:WICHTIGX+DOENITZB@g4@0",
+      "pattern": "WICHTIG........DOENITZBEFEHL............................................",
+      "note": "collapse pad+body WICHTIGXXXX+DOENITZBEFEHL",
+      "constrained": 20,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:ALLEBOOTESVERSEN@3",
+      "pattern": "...ALLEBOOTESVERSENKEN..................................................",
+      "note": "collapse lexicon ALLEBOOTESVERSENKEN",
+      "constrained": 19,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:ALLEBOOTESVERSEN@5",
+      "pattern": ".....ALLEBOOTESVERSENKEN................................................",
+      "note": "collapse lexicon ALLEBOOTESVERSENKEN",
+      "constrained": 19,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:ANTWORTE+REGENBOG@g2@1",
+      "pattern": ".ANTWORTEN....REGENBOGEN................................................",
+      "note": "collapse pad+body ANTWORTENXX+REGENBOGENXXXX",
+      "constrained": 19,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:ANTWORTE+REGENBOG@g2@2",
+      "pattern": "..ANTWORTEN....REGENBOGEN...............................................",
+      "note": "collapse pad+body ANTWORTENXX+REGENBOGENXXXX",
+      "constrained": 19,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:ANTWORTE+REGENBOG@g4@1",
+      "pattern": ".ANTWORTEN......REGENBOGEN..............................................",
+      "note": "collapse pad+body ANTWORTENXX+REGENBOGENXXXX",
+      "constrained": 19,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:DOENITZX+MELDENSO@g2@2",
+      "pattern": "..DOENITZ......MELDENSOFORT.............................................",
+      "note": "collapse pad+body DOENITZXXXX+MELDENSOFORTXX",
+      "constrained": 19,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:DOENITZX+MELDENSO@g4@0",
+      "pattern": "DOENITZ........MELDENSOFORT.............................................",
+      "note": "collapse pad+body DOENITZXXXX+MELDENSOFORTXX",
+      "constrained": 19,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:DOENITZX+MELDENSO@g4@2",
+      "pattern": "..DOENITZ........MELDENSOFORT...........................................",
+      "note": "collapse pad+body DOENITZXXXX+MELDENSOFORTXX",
+      "constrained": 19,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:FLENSBUR+REGENBOG@g2@0",
+      "pattern": "FLENSBURG....REGENBOGEN.................................................",
+      "note": "collapse pad+body FLENSBURGXX+REGENBOGENXXXX",
+      "constrained": 19,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:FLENSBUR+REGENBOG@g2@1",
+      "pattern": ".FLENSBURG....REGENBOGEN................................................",
+      "note": "collapse pad+body FLENSBURGXX+REGENBOGENXXXX",
+      "constrained": 19,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:FLENSBUR+REGENBOG@g2@2",
+      "pattern": "..FLENSBURG....REGENBOGEN...............................................",
+      "note": "collapse pad+body FLENSBURGXX+REGENBOGENXXXX",
+      "constrained": 19,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:FLENSBUR+REGENBOG@g4@0",
+      "pattern": "FLENSBURG......REGENBOGEN...............................................",
+      "note": "collapse pad+body FLENSBURGXX+REGENBOGENXXXX",
+      "constrained": 19,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:FLENSBUR+REGENBOG@g4@1",
+      "pattern": ".FLENSBURG......REGENBOGEN..............................................",
+      "note": "collapse pad+body FLENSBURGXX+REGENBOGENXXXX",
+      "constrained": 19,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:REGENBOG+ALLEBOOT@g2@1",
+      "pattern": ".REGENBOGEN....ALLEBOOTE................................................",
+      "note": "collapse pad+body REGENBOGENXX+ALLEBOOTEXXXXX",
+      "constrained": 19,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:REGENBOG+FLENSBUR@g4@1",
+      "pattern": ".REGENBOGEN......FLENSBURG..............................................",
+      "note": "collapse pad+body REGENBOGENXX+FLENSBURGXXXXX",
+      "constrained": 19,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:VERNICHT+ALLEBOOT@g2@1",
+      "pattern": ".VERNICHTEN...ALLEBOOTE.................................................",
+      "note": "collapse pad+body VERNICHTENX+ALLEBOOTEXXXXX",
+      "constrained": 19,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:VERNICHT+ALLEBOOT@g4@1",
+      "pattern": ".VERNICHTEN.....ALLEBOOTE...............................................",
+      "note": "collapse pad+body VERNICHTENX+ALLEBOOTEXXXXX",
+      "constrained": 19,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:VERNICHT+FLENSBUR@g2@1",
+      "pattern": ".VERNICHTEN...FLENSBURG.................................................",
+      "note": "collapse pad+body VERNICHTENX+FLENSBURGXXXXX",
+      "constrained": 19,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:VERSENKE+REGENBOG@g2@1",
+      "pattern": ".VERSENKEN....REGENBOGEN................................................",
+      "note": "collapse pad+body VERSENKENXX+REGENBOGENXXXX",
+      "constrained": 19,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:VERSENKE+REGENBOG@g2@2",
+      "pattern": "..VERSENKEN....REGENBOGEN...............................................",
+      "note": "collapse pad+body VERSENKENXX+REGENBOGENXXXX",
+      "constrained": 19,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:VERSENKE+REGENBOG@g4@1",
+      "pattern": ".VERSENKEN......REGENBOGEN..............................................",
+      "note": "collapse pad+body VERSENKENXX+REGENBOGENXXXX",
+      "constrained": 19,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:WICHTIGX+MELDENSO@g4@0",
+      "pattern": "WICHTIG........MELDENSOFORT.............................................",
+      "note": "collapse pad+body WICHTIGXXXX+MELDENSOFORTXX",
+      "constrained": 19,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:ANTWORTE+ALLEBOOT@g2@1",
+      "pattern": ".ANTWORTEN....ALLEBOOTE.................................................",
+      "note": "collapse pad+body ANTWORTENXX+ALLEBOOTEXXXXX",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:ANTWORTE+ALLEBOOT@g2@2",
+      "pattern": "..ANTWORTEN....ALLEBOOTE................................................",
+      "note": "collapse pad+body ANTWORTENXX+ALLEBOOTEXXXXX",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:ANTWORTE+ALLEBOOT@g4@1",
+      "pattern": ".ANTWORTEN......ALLEBOOTE...............................................",
+      "note": "collapse pad+body ANTWORTENXX+ALLEBOOTEXXXXX",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:ANTWORTE+FLENSBUR@g2@1",
+      "pattern": ".ANTWORTEN....FLENSBURG.................................................",
+      "note": "collapse pad+body ANTWORTENXX+FLENSBURGXXXXX",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:ANTWORTE+FLENSBUR@g4@2",
+      "pattern": "..ANTWORTEN......FLENSBURG..............................................",
+      "note": "collapse pad+body ANTWORTENXX+FLENSBURGXXXXX",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:FLENSBUR+ALLEBOOT@g2@0",
+      "pattern": "FLENSBURG....ALLEBOOTE..................................................",
+      "note": "collapse pad+body FLENSBURGXX+ALLEBOOTEXXXXX",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:FLENSBUR+ALLEBOOT@g2@1",
+      "pattern": ".FLENSBURG....ALLEBOOTE.................................................",
+      "note": "collapse pad+body FLENSBURGXX+ALLEBOOTEXXXXX",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:FLENSBUR+ALLEBOOT@g2@2",
+      "pattern": "..FLENSBURG....ALLEBOOTE................................................",
+      "note": "collapse pad+body FLENSBURGXX+ALLEBOOTEXXXXX",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:FLENSBUR+ALLEBOOT@g4@0",
+      "pattern": "FLENSBURG......ALLEBOOTE................................................",
+      "note": "collapse pad+body FLENSBURGXX+ALLEBOOTEXXXXX",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:FLENSBUR+ALLEBOOT@g4@1",
+      "pattern": ".FLENSBURG......ALLEBOOTE...............................................",
+      "note": "collapse pad+body FLENSBURGXX+ALLEBOOTEXXXXX",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:FLENSBUR+FLENSBUR@g2@0",
+      "pattern": "FLENSBURG....FLENSBURG..................................................",
+      "note": "collapse pad+body FLENSBURGXX+FLENSBURGXXXXX",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:FLENSBUR+FLENSBUR@g2@1",
+      "pattern": ".FLENSBURG....FLENSBURG.................................................",
+      "note": "collapse pad+body FLENSBURGXX+FLENSBURGXXXXX",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:FLENSBUR+FLENSBUR@g4@2",
+      "pattern": "..FLENSBURG......FLENSBURG..............................................",
+      "note": "collapse pad+body FLENSBURGXX+FLENSBURGXXXXX",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:VERSENKE+ALLEBOOT@g2@1",
+      "pattern": ".VERSENKEN....ALLEBOOTE.................................................",
+      "note": "collapse pad+body VERSENKENXX+ALLEBOOTEXXXXX",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:VERSENKE+ALLEBOOT@g2@2",
+      "pattern": "..VERSENKEN....ALLEBOOTE................................................",
+      "note": "collapse pad+body VERSENKENXX+ALLEBOOTEXXXXX",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:VERSENKE+ALLEBOOT@g4@1",
+      "pattern": ".VERSENKEN......ALLEBOOTE...............................................",
+      "note": "collapse pad+body VERSENKENXX+ALLEBOOTEXXXXX",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:VERSENKE+FLENSBUR@g2@1",
+      "pattern": ".VERSENKEN....FLENSBURG.................................................",
+      "note": "collapse pad+body VERSENKENXX+FLENSBURGXXXXX",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:VERSENKE+FLENSBUR@g4@2",
+      "pattern": "..VERSENKEN......FLENSBURG..............................................",
+      "note": "collapse pad+body VERSENKENXX+FLENSBURGXXXXX",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:stack:DOENITZDOENI@0",
+      "pattern": "DOENITZDOENITZDOEN......................................................",
+      "note": "collapse stack/repeat",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:stack:DOENITZDOENI@2",
+      "pattern": "..DOENITZDOENITZDOEN....................................................",
+      "note": "collapse stack/repeat",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:stack:FLENSBURGFLE@0",
+      "pattern": "FLENSBURGFLENSBURG......................................................",
+      "note": "collapse stack/repeat",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:stack:FLENSBURGFLE@2",
+      "pattern": "..FLENSBURGFLENSBURG....................................................",
+      "note": "collapse stack/repeat",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:stack:FLENSBURGFLE@3",
+      "pattern": "...FLENSBURGFLENSBURG...................................................",
+      "note": "collapse stack/repeat",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:stack:GEHEIMGEHEIM@0",
+      "pattern": "GEHEIMGEHEIMGEHEIM......................................................",
+      "note": "collapse stack/repeat",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:stack:GEHEIMGEHEIM@2",
+      "pattern": "..GEHEIMGEHEIMGEHEIM....................................................",
+      "note": "collapse stack/repeat",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:stack:MELDENMELDEN@1",
+      "pattern": ".MELDENMELDENMELDEN.....................................................",
+      "note": "collapse stack/repeat",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:stack:REGENBOGENRE@3",
+      "pattern": "...REGENBOGENREGENBOG...................................................",
+      "note": "collapse stack/repeat",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:stack:SOFORTSOFORT@0",
+      "pattern": "SOFORTSOFORTSOFORT......................................................",
+      "note": "collapse stack/repeat",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:ALLESTELLENMELDE@2",
+      "pattern": "..ALLESTELLENMELDEN.....................................................",
+      "note": "collapse lexicon ALLESTELLENMELDEN",
+      "constrained": 17,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:ALLESTELLENMELDE@5",
+      "pattern": ".....ALLESTELLENMELDEN..................................................",
+      "note": "collapse lexicon ALLESTELLENMELDEN",
+      "constrained": 17,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:NICHTKAPITULIERE@0",
+      "pattern": "NICHTKAPITULIEREN.......................................................",
+      "note": "collapse lexicon NICHTKAPITULIEREN",
+      "constrained": 17,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:NICHTKAPITULIERE@1",
+      "pattern": ".NICHTKAPITULIEREN......................................................",
+      "note": "collapse lexicon NICHTKAPITULIEREN",
+      "constrained": 17,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:NICHTKAPITULIERE@3",
+      "pattern": "...NICHTKAPITULIEREN....................................................",
+      "note": "collapse lexicon NICHTKAPITULIEREN",
+      "constrained": 17,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:NICHTKAPITULIERE@4",
+      "pattern": "....NICHTKAPITULIEREN...................................................",
+      "note": "collapse lexicon NICHTKAPITULIEREN",
+      "constrained": 17,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:NICHTKAPITULIERE@5",
+      "pattern": ".....NICHTKAPITULIEREN..................................................",
+      "note": "collapse lexicon NICHTKAPITULIEREN",
+      "constrained": 17,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:DOENITZX+REGENBOG@g2@0",
+      "pattern": "DOENITZ......REGENBOGEN.................................................",
+      "note": "collapse pad+body DOENITZXXXX+REGENBOGENXXXX",
+      "constrained": 17,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:DOENITZX+REGENBOG@g2@2",
+      "pattern": "..DOENITZ......REGENBOGEN...............................................",
+      "note": "collapse pad+body DOENITZXXXX+REGENBOGENXXXX",
+      "constrained": 17,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:DOENITZX+REGENBOG@g4@0",
+      "pattern": "DOENITZ........REGENBOGEN...............................................",
+      "note": "collapse pad+body DOENITZXXXX+REGENBOGENXXXX",
+      "constrained": 17,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:WICHTIGX+REGENBOG@g2@0",
+      "pattern": "WICHTIG......REGENBOGEN.................................................",
+      "note": "collapse pad+body WICHTIGXXXX+REGENBOGENXXXX",
+      "constrained": 17,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:WICHTIGX+REGENBOG@g4@0",
+      "pattern": "WICHTIG........REGENBOGEN...............................................",
+      "note": "collapse pad+body WICHTIGXXXX+REGENBOGENXXXX",
+      "constrained": 17,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:DOENITZFLENSBURG@0",
+      "pattern": "DOENITZFLENSBURG........................................................",
+      "note": "collapse lexicon DOENITZFLENSBURG",
+      "constrained": 16,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:DOENITZFLENSBURG@2",
+      "pattern": "..DOENITZFLENSBURG......................................................",
+      "note": "collapse lexicon DOENITZFLENSBURG",
+      "constrained": 16,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:DOENITZFLENSBURG@4",
+      "pattern": "....DOENITZFLENSBURG....................................................",
+      "note": "collapse lexicon DOENITZFLENSBURG",
+      "constrained": 16,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:DOENITZFLENSBURG@5",
+      "pattern": ".....DOENITZFLENSBURG...................................................",
+      "note": "collapse lexicon DOENITZFLENSBURG",
+      "constrained": 16,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:FLENSBURGDOENITZ@0",
+      "pattern": "FLENSBURGDOENITZ........................................................",
+      "note": "collapse lexicon FLENSBURGDOENITZ",
+      "constrained": 16,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:FLENSBURGDOENITZ@5",
+      "pattern": ".....FLENSBURGDOENITZ...................................................",
+      "note": "collapse lexicon FLENSBURGDOENITZ",
+      "constrained": 16,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:FUNKSTELLEMELDEN@0",
+      "pattern": "FUNKSTELLEMELDEN........................................................",
+      "note": "collapse lexicon FUNKSTELLEMELDEN",
+      "constrained": 16,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:FUNKSTELLEMELDEN@2",
+      "pattern": "..FUNKSTELLEMELDEN......................................................",
+      "note": "collapse lexicon FUNKSTELLEMELDEN",
+      "constrained": 16,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:FUNKSTELLEMELDEN@5",
+      "pattern": ".....FUNKSTELLEMELDEN...................................................",
+      "note": "collapse lexicon FUNKSTELLEMELDEN",
+      "constrained": 16,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:REGENBOGENSOFORT@1",
+      "pattern": ".REGENBOGENSOFORT.......................................................",
+      "note": "collapse lexicon REGENBOGENSOFORTX",
+      "constrained": 16,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:REGENBOGENSOFORT@3",
+      "pattern": "...REGENBOGENSOFORT.....................................................",
+      "note": "collapse lexicon REGENBOGENSOFORTX",
+      "constrained": 16,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:STRGEHEIMMELDUNG@1",
+      "pattern": ".STRGEHEIMMELDUNG.......................................................",
+      "note": "collapse lexicon STRGEHEIMMELDUNGX",
+      "constrained": 16,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:VERNICHTENSOFORT@1",
+      "pattern": ".VERNICHTENSOFORT.......................................................",
+      "note": "collapse lexicon VERNICHTENSOFORTXX",
+      "constrained": 16,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:VERNICHTENSOFORT@3",
+      "pattern": "...VERNICHTENSOFORT.....................................................",
+      "note": "collapse lexicon VERNICHTENSOFORTXX",
+      "constrained": 16,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:VERNICHTENSOFORT@5",
+      "pattern": ".....VERNICHTENSOFORT...................................................",
+      "note": "collapse lexicon VERNICHTENSOFORTXX",
+      "constrained": 16,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:DOENITZX+ALLEBOOT@g2@0",
+      "pattern": "DOENITZ......ALLEBOOTE..................................................",
+      "note": "collapse pad+body DOENITZXXXX+ALLEBOOTEXXXXX",
+      "constrained": 16,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:DOENITZX+ALLEBOOT@g2@2",
+      "pattern": "..DOENITZ......ALLEBOOTE................................................",
+      "note": "collapse pad+body DOENITZXXXX+ALLEBOOTEXXXXX",
+      "constrained": 16,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:DOENITZX+ALLEBOOT@g4@0",
+      "pattern": "DOENITZ........ALLEBOOTE................................................",
+      "note": "collapse pad+body DOENITZXXXX+ALLEBOOTEXXXXX",
+      "constrained": 16,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:DOENITZX+FLENSBUR@g2@0",
+      "pattern": "DOENITZ......FLENSBURG..................................................",
+      "note": "collapse pad+body DOENITZXXXX+FLENSBURGXXXXX",
+      "constrained": 16,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:DOENITZX+FLENSBUR@g4@2",
+      "pattern": "..DOENITZ........FLENSBURG..............................................",
+      "note": "collapse pad+body DOENITZXXXX+FLENSBURGXXXXX",
+      "constrained": 16,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:WICHTIGX+ALLEBOOT@g2@0",
+      "pattern": "WICHTIG......ALLEBOOTE..................................................",
+      "note": "collapse pad+body WICHTIGXXXX+ALLEBOOTEXXXXX",
+      "constrained": 16,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:WICHTIGX+ALLEBOOT@g4@0",
+      "pattern": "WICHTIG........ALLEBOOTE................................................",
+      "note": "collapse pad+body WICHTIGXXXX+ALLEBOOTEXXXXX",
+      "constrained": 16,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:pad:WICHTIGX+FLENSBUR@g2@0",
+      "pattern": "WICHTIG......FLENSBURG..................................................",
+      "note": "collapse pad+body WICHTIGXXXX+FLENSBURGXXXXX",
+      "constrained": 16,
+      "prior": "collapse-tactical"
+    }
+  ]
+}

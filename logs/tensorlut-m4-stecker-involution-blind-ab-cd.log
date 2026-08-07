@@ -1,0 +1,11 @@
+# TensorLUT M4 stecker-involution
+# netlist=enigma_m4_netlist.json LUTs=925 DFFs=49
+# crib_pt=TEST crib_ct=YDPY len=4 grundstellung=AAA
+# target_stecker=AB CD
+# active_letters=DEPSTY
+# pop=48 gens=80 maxPairs=4 seed=1475104272 immigrants=0.15 grow=true parsimony=true blind=true
+# seed_stecker=(random)
+# gen bestFitness bestPairs pairCount pairBudget
+0 -1.000000 DW 1 1
+1 0.000000 CD 1 1
+# done fitness=0.000000 pairs=CD elapsed=3.6s active_map_match=PASS full_map_match=FAIL

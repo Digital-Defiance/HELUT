@@ -1,0 +1,14 @@
+HELUT noisy-BK identity residual (H4)
+  N=1024  trials=4  inject ∈ {0, σ=128.0}  kδ=7
+
+cryptoPublicMS B=0: max|e|=0 σ̂=0.0 δ/2=7340032 decode_fail=0 decodable=true εlog2=-inf  (baseLog=11 ℓ=2)
+cryptoPublicMS σ=128.0: max|e|=240253128 σ̂=185316151.4 δ/2=7340032 decode_fail=0 decodable=false εlog2=0.0  (baseLog=11 ℓ=2)
+crypto B=0: max|e|=0 σ̂=0.0 δ/2=7340032 decode_fail=0 decodable=true εlog2=-inf  (baseLog=8 ℓ=4)
+crypto σ=128.0: max|e|=40633580 σ̂=31247644.2 δ/2=7340032 decode_fail=1 decodable=false εlog2=0.0  (baseLog=8 ℓ=4)
+
+| gadget N | inject B | trials | max |e| | σ̂ | δ/2 | decode fail | decodable |
+|----------|----------|--------|---------|-----|-----|-------------|-----------|
+| 1024 | 0 | 4 | 0 | 0.0 | 7340032 | 0 | yes |
+| 1024 | 768 | 4 | 240253128 | 185316151.4 | 7340032 | 0 | no |
+| 1024 | 0 | 4 | 0 | 0.0 | 7340032 | 0 | yes |
+| 1024 | 768 | 4 | 40633580 | 31247644.2 | 7340032 | 1 | no |

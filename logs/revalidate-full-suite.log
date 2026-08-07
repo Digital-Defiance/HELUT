@@ -1,0 +1,501 @@
+[0/1] Planning build
+Building for production...
+[0/7] Write swift-version--58304C5D6DBC2206.txt
+Build complete! (0.16s)
+Test Suite 'All tests' started at 2026-08-15 12:46:49.876.
+Test Suite 'helutPackageTests.xctest' started at 2026-08-15 12:46:49.877.
+Test Suite 'AdversarialColdStartTests' started at 2026-08-15 12:46:49.877.
+Test Case '-[HELUTTests.AdversarialColdStartTests testTwoBitAdderColdStartDiscovery]' started.
+Test Case '-[HELUTTests.AdversarialColdStartTests testTwoBitAdderColdStartDiscovery]' passed (3.209 seconds).
+Test Suite 'AdversarialColdStartTests' passed at 2026-08-15 12:46:53.086.
+	 Executed 1 test, with 0 failures (0 unexpected) in 3.209 (3.209) seconds
+Test Suite 'AdversarialHarnessTests' started at 2026-08-15 12:46:53.086.
+Test Case '-[HELUTTests.AdversarialHarnessTests testTwoLUTCascadeMeltFreezeSnapEmit]' started.
+Test Case '-[HELUTTests.AdversarialHarnessTests testTwoLUTCascadeMeltFreezeSnapEmit]' passed (0.154 seconds).
+Test Case '-[HELUTTests.AdversarialHarnessTests testXORLambdaCoolingSnapsTowardBinary]' started.
+Test Case '-[HELUTTests.AdversarialHarnessTests testXORLambdaCoolingSnapsTowardBinary]' passed (0.058 seconds).
+Test Suite 'AdversarialHarnessTests' passed at 2026-08-15 12:46:53.298.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.212 (0.212) seconds
+Test Suite 'AdversarialResignationTests' started at 2026-08-15 12:46:53.299.
+Test Case '-[HELUTTests.AdversarialResignationTests testStreamResignsAndRebootsLineage]' started.
+Test Case '-[HELUTTests.AdversarialResignationTests testStreamResignsAndRebootsLineage]' passed (0.237 seconds).
+Test Suite 'AdversarialResignationTests' passed at 2026-08-15 12:46:53.535.
+	 Executed 1 test, with 0 failures (0 unexpected) in 0.237 (0.237) seconds
+Test Suite 'AdversarialStreamTests' started at 2026-08-15 12:46:53.535.
+Test Case '-[HELUTTests.AdversarialStreamTests testStreamingDelayXORColdStart]' started.
+Test Case '-[HELUTTests.AdversarialStreamTests testStreamingDelayXORColdStart]' passed (6.445 seconds).
+Test Case '-[HELUTTests.AdversarialStreamTests testStreamingDelayXORKnownINIT]' started.
+Test Case '-[HELUTTests.AdversarialStreamTests testStreamingDelayXORKnownINIT]' passed (0.006 seconds).
+Test Suite 'AdversarialStreamTests' passed at 2026-08-15 12:46:59.987.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 6.451 (6.451) seconds
+Test Suite 'AdversarialSynthesizerTests' started at 2026-08-15 12:46:59.987.
+Test Case '-[HELUTTests.AdversarialSynthesizerTests testCombineFitnessAppliesLambdaPenalty]' started.
+Test Case '-[HELUTTests.AdversarialSynthesizerTests testCombineFitnessAppliesLambdaPenalty]' passed (0.000 seconds).
+Test Case '-[HELUTTests.AdversarialSynthesizerTests testComputeTotalFitnessBinaryInitZeroPenaltyAtGenEnd]' started.
+Test Case '-[HELUTTests.AdversarialSynthesizerTests testComputeTotalFitnessBinaryInitZeroPenaltyAtGenEnd]' passed (0.004 seconds).
+Test Case '-[HELUTTests.AdversarialSynthesizerTests testCryptoFitnessIsNegativeMSE]' started.
+Test Case '-[HELUTTests.AdversarialSynthesizerTests testCryptoFitnessIsNegativeMSE]' passed (0.000 seconds).
+Test Case '-[HELUTTests.AdversarialSynthesizerTests testCryptoFitnessPerfectIsZero]' started.
+Test Case '-[HELUTTests.AdversarialSynthesizerTests testCryptoFitnessPerfectIsZero]' passed (0.000 seconds).
+Test Case '-[HELUTTests.AdversarialSynthesizerTests testLambdaScheduleQuadratic]' started.
+Test Case '-[HELUTTests.AdversarialSynthesizerTests testLambdaScheduleQuadratic]' passed (0.000 seconds).
+Test Case '-[HELUTTests.AdversarialSynthesizerTests testMetalDiscretenessPenaltyMatchesHost]' started.
+Test Case '-[HELUTTests.AdversarialSynthesizerTests testMetalDiscretenessPenaltyMatchesHost]' passed (0.004 seconds).
+Test Case '-[HELUTTests.AdversarialSynthesizerTests testMutateClampsToUnitInterval]' started.
+Test Case '-[HELUTTests.AdversarialSynthesizerTests testMutateClampsToUnitInterval]' passed (0.001 seconds).
+Test Suite 'AdversarialSynthesizerTests' passed at 2026-08-15 12:46:59.996.
+	 Executed 7 tests, with 0 failures (0 unexpected) in 0.009 (0.009) seconds
+Test Suite 'Enigma256Tests' started at 2026-08-15 12:46:59.996.
+Test Case '-[HELUTTests.Enigma256Tests testAEADContainerRoundTrip]' started.
+Test Case '-[HELUTTests.Enigma256Tests testAEADContainerRoundTrip]' passed (0.001 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testAEADRejectsBitFlip]' started.
+Test Case '-[HELUTTests.Enigma256Tests testAEADRejectsBitFlip]' passed (0.001 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testAXIRegOffsetsMatchDoc]' started.
+Test Case '-[HELUTTests.Enigma256Tests testAXIRegOffsetsMatchDoc]' passed (0.000 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testAXISoftBusMatchesContextSeal]' started.
+Test Case '-[HELUTTests.Enigma256Tests testAXISoftBusMatchesContextSeal]' passed (0.001 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testBijectionSweepHoldsOnSample]' started.
+Test Case '-[HELUTTests.Enigma256Tests testBijectionSweepHoldsOnSample]' passed (0.012 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testCoreHandleMatchesContextSeal]' started.
+Test Case '-[HELUTTests.Enigma256Tests testCoreHandleMatchesContextSeal]' passed (0.000 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testCoupledCubicDiffersFromIndependentCubic]' started.
+Test Case '-[HELUTTests.Enigma256Tests testCoupledCubicDiffersFromIndependentCubic]' passed (0.000 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testCubic6NLFFNotRawBits]' started.
+Test Case '-[HELUTTests.Enigma256Tests testCubic6NLFFNotRawBits]' passed (0.000 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testDistinctNoncesYieldDistinctCiphertext]' started.
+Test Case '-[HELUTTests.Enigma256Tests testDistinctNoncesYieldDistinctCiphertext]' passed (0.000 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testECDHFeedsAXISoftBus]' started.
+Test Case '-[HELUTTests.Enigma256Tests testECDHFeedsAXISoftBus]' passed (0.001 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testECDHPairedChannelsSealOpenAndBurn]' started.
+Test Case '-[HELUTTests.Enigma256Tests testECDHPairedChannelsSealOpenAndBurn]' passed (0.001 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testEd25519IdentityBindsTranscript]' started.
+Test Case '-[HELUTTests.Enigma256Tests testEd25519IdentityBindsTranscript]' passed (0.000 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testGen5BalancedStepRates]' started.
+Test Case '-[HELUTTests.Enigma256Tests testGen5BalancedStepRates]' passed (0.002 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testGenerationMutateChangesFoldsAndLabels]' started.
+Test Case '-[HELUTTests.Enigma256Tests testGenerationMutateChangesFoldsAndLabels]' passed (0.000 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testGoldenBundleRoundTrip]' started.
+Test Case '-[HELUTTests.Enigma256Tests testGoldenBundleRoundTrip]' passed (0.015 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testHKDFDayAndMessageRoundTrip]' started.
+Test Case '-[HELUTTests.Enigma256Tests testHKDFDayAndMessageRoundTrip]' passed (0.000 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testHKDFUsesSHA512Chunking]' started.
+Test Case '-[HELUTTests.Enigma256Tests testHKDFUsesSHA512Chunking]' passed (0.001 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testHybridX25519MLKEMPaired]' started.
+Test Case '-[HELUTTests.Enigma256Tests testHybridX25519MLKEMPaired]' passed (0.001 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testIdentityWiringIsReciprocalAndSteps]' started.
+Test Case '-[HELUTTests.Enigma256Tests testIdentityWiringIsReciprocalAndSteps]' passed (0.000 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testLFSRMatchesVerilogFeedback]' started.
+Test Case '-[HELUTTests.Enigma256Tests testLFSRMatchesVerilogFeedback]' passed (0.000 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testNLFFStepMaskNotRawBits]' started.
+Test Case '-[HELUTTests.Enigma256Tests testNLFFStepMaskNotRawBits]' passed (0.000 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testPassphraseContextSealOpen]' started.
+Test Case '-[HELUTTests.Enigma256Tests testPassphraseContextSealOpen]' passed (0.003 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testPassphrasePBKDF2DeterministicAndDistinct]' started.
+Test Case '-[HELUTTests.Enigma256Tests testPassphrasePBKDF2DeterministicAndDistinct]' passed (0.009 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testPlugboardInvolutionProperty]' started.
+Test Case '-[HELUTTests.Enigma256Tests testPlugboardInvolutionProperty]' passed (0.000 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testProtectedSessionNonceReuseRejected]' started.
+Test Case '-[HELUTTests.Enigma256Tests testProtectedSessionNonceReuseRejected]' passed (0.000 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testScrambleBeforeStepParity]' started.
+Test Case '-[HELUTTests.Enigma256Tests testScrambleBeforeStepParity]' passed (0.000 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testSessionSealOpenRoundTrip]' started.
+Test Case '-[HELUTTests.Enigma256Tests testSessionSealOpenRoundTrip]' passed (0.000 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testTableSelCoversTenBRAMs]' started.
+Test Case '-[HELUTTests.Enigma256Tests testTableSelCoversTenBRAMs]' passed (0.000 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testTCPLocalhostSession]' started.
+Test Case '-[HELUTTests.Enigma256Tests testTCPLocalhostSession]' passed (0.313 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testWireFrameRoundTrip]' started.
+Test Case '-[HELUTTests.Enigma256Tests testWireFrameRoundTrip]' passed (0.000 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testWireInProcessHybridAuthenticated]' started.
+Test Case '-[HELUTTests.Enigma256Tests testWireInProcessHybridAuthenticated]' passed (0.005 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testWireInProcessPSKSession]' started.
+Test Case '-[HELUTTests.Enigma256Tests testWireInProcessPSKSession]' passed (0.007 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testWireInProcessSessionChannelOnly]' started.
+Test Case '-[HELUTTests.Enigma256Tests testWireInProcessSessionChannelOnly]' passed (0.003 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testWireInProcessSessionSoftBus]' started.
+Test Case '-[HELUTTests.Enigma256Tests testWireInProcessSessionSoftBus]' passed (0.003 seconds).
+Test Case '-[HELUTTests.Enigma256Tests testXWingPairedIKM]' started.
+Test Case '-[HELUTTests.Enigma256Tests testXWingPairedIKM]' passed (0.001 seconds).
+Test Suite 'Enigma256Tests' passed at 2026-08-15 12:47:00.381.
+	 Executed 35 tests, with 0 failures (0 unexpected) in 0.383 (0.385) seconds
+Test Suite 'EnigmaBaselineTests' started at 2026-08-15 12:47:00.381.
+Test Case '-[HELUTTests.EnigmaBaselineTests testEnigmaM4KnownGoodStream]' started.
+Test Case '-[HELUTTests.EnigmaBaselineTests testEnigmaM4KnownGoodStream]' passed (0.086 seconds).
+Test Suite 'EnigmaBaselineTests' passed at 2026-08-15 12:47:00.467.
+	 Executed 1 test, with 0 failures (0 unexpected) in 0.086 (0.086) seconds
+Test Suite 'EnigmaBombeValidationTests' started at 2026-08-15 12:47:00.467.
+Test Case '-[HELUTTests.EnigmaBombeValidationTests testOracleRoundTripControlPhrase]' started.
+Test Case '-[HELUTTests.EnigmaBombeValidationTests testOracleRoundTripControlPhrase]' passed (0.000 seconds).
+Test Case '-[HELUTTests.EnigmaBombeValidationTests testTier1CleartextNetlistMatchesOracleAndIsolatesCorrectLane]' started.
+Test Case '-[HELUTTests.EnigmaBombeValidationTests testTier1CleartextNetlistMatchesOracleAndIsolatesCorrectLane]' passed (11.842 seconds).
+Test Case '-[HELUTTests.EnigmaBombeValidationTests testTier1InjectedHypothesisHostBombe]' started.
+Test Case '-[HELUTTests.EnigmaBombeValidationTests testTier1InjectedHypothesisHostBombe]' passed (0.039 seconds).
+Test Case '-[HELUTTests.EnigmaBombeValidationTests testTier2CribTargetsSiegfriedWindow]' started.
+Test Case '-[HELUTTests.EnigmaBombeValidationTests testTier2CribTargetsSiegfriedWindow]' passed (0.000 seconds).
+Test Case '-[HELUTTests.EnigmaBombeValidationTests testTier2CryptoCellar1930IndicatorRecoversABL]' started.
+Test Case '-[HELUTTests.EnigmaBombeValidationTests testTier2CryptoCellar1930IndicatorRecoversABL]' passed (0.000 seconds).
+Test Case '-[HELUTTests.EnigmaBombeValidationTests testTier2FranklinHeathBarbarossaParts]' started.
+Test Case '-[HELUTTests.EnigmaBombeValidationTests testTier2FranklinHeathBarbarossaParts]' passed (0.000 seconds).
+Test Case '-[HELUTTests.EnigmaBombeValidationTests testTier2FranklinHeathManual1930]' started.
+Test Case '-[HELUTTests.EnigmaBombeValidationTests testTier2FranklinHeathManual1930]' passed (0.000 seconds).
+Test Case '-[HELUTTests.EnigmaBombeValidationTests testTier2FranklinHeathScharnhorst]' started.
+Test Case '-[HELUTTests.EnigmaBombeValidationTests testTier2FranklinHeathScharnhorst]' passed (0.000 seconds).
+Test Case '-[HELUTTests.EnigmaBombeValidationTests testTier2HistoricalFHPQXDecrypts]' started.
+Test Case '-[HELUTTests.EnigmaBombeValidationTests testTier2HistoricalFHPQXDecrypts]' passed (0.000 seconds).
+Test Case '-[HELUTTests.EnigmaBombeValidationTests testTier3HistoricalMessageScoreboardRanksCorrectKey]' started.
+Test Case '-[HELUTTests.EnigmaBombeValidationTests testTier3HistoricalMessageScoreboardRanksCorrectKey]' passed (0.002 seconds).
+Test Case '-[HELUTTests.EnigmaBombeValidationTests testTier3ScoreboardSpikesOnGermanPlaintext]' started.
+Test Case '-[HELUTTests.EnigmaBombeValidationTests testTier3ScoreboardSpikesOnGermanPlaintext]' passed (0.000 seconds).
+Test Suite 'EnigmaBombeValidationTests' passed at 2026-08-15 12:47:12.351.
+	 Executed 11 tests, with 0 failures (0 unexpected) in 11.883 (11.884) seconds
+Test Suite 'EnigmaM4Tests' started at 2026-08-15 12:47:12.351.
+Test Case '-[HELUTTests.EnigmaM4Tests testBigramScoreRejectsSingleLetterRun]' started.
+Test Case '-[HELUTTests.EnigmaM4Tests testBigramScoreRejectsSingleLetterRun]' passed (0.000 seconds).
+Test Case '-[HELUTTests.EnigmaM4Tests testCribDragKeepsTruePlacementOnKnownMessage]' started.
+Test Case '-[HELUTTests.EnigmaM4Tests testCribDragKeepsTruePlacementOnKnownMessage]' passed (0.000 seconds).
+Test Case '-[HELUTTests.EnigmaM4Tests testCribDragRejectsSelfEncryptingPlacements]' started.
+Test Case '-[HELUTTests.EnigmaM4Tests testCribDragRejectsSelfEncryptingPlacements]' passed (0.001 seconds).
+Test Case '-[HELUTTests.EnigmaM4Tests testEvaluateBreakAcceptsKnownNavalPlaintext]' started.
+Test Case '-[HELUTTests.EnigmaM4Tests testEvaluateBreakAcceptsKnownNavalPlaintext]' passed (0.000 seconds).
+Test Case '-[HELUTTests.EnigmaM4Tests testEvaluateBreakRejectsBigramFluentNonsense]' started.
+Test Case '-[HELUTTests.EnigmaM4Tests testEvaluateBreakRejectsBigramFluentNonsense]' passed (0.000 seconds).
+Test Case '-[HELUTTests.EnigmaM4Tests testGirardPotsdamIndicatorGrundMNNS]' started.
+Test Case '-[HELUTTests.EnigmaM4Tests testGirardPotsdamIndicatorGrundMNNS]' passed (0.000 seconds).
+Test Case '-[HELUTTests.EnigmaM4Tests testM4DecryptsBrokenU534P1030684]' started.
+Test Case '-[HELUTTests.EnigmaM4Tests testM4DecryptsBrokenU534P1030684]' passed (0.000 seconds).
+Test Case '-[HELUTTests.EnigmaM4Tests testM4MessageKeyExhaustRecoversVYAA]' started.
+Test Case '-[HELUTTests.EnigmaM4Tests testM4MessageKeyExhaustRecoversVYAA]' passed (8.699 seconds).
+Test Case '-[HELUTTests.EnigmaM4Tests testP1030680IsNotPotsdamMessageKeySpaceWinner]' started.
+Test Case '-[HELUTTests.EnigmaM4Tests testP1030680IsNotPotsdamMessageKeySpaceWinner]' passed (5.252 seconds).
+Test Case '-[HELUTTests.EnigmaM4Tests testScorerSeparatesGermanFromDegenerateHighICText]' started.
+Test Case '-[HELUTTests.EnigmaM4Tests testScorerSeparatesGermanFromDegenerateHighICText]' passed (0.000 seconds).
+Test Suite 'EnigmaM4Tests' passed at 2026-08-15 12:47:26.305.
+	 Executed 10 tests, with 0 failures (0 unexpected) in 13.954 (13.954) seconds
+Test Suite 'HELUTTests' started at 2026-08-15 12:47:26.305.
+Test Case '-[HELUTTests.HELUTTests testDFFEnableHoldSemantics]' started.
+Test Case '-[HELUTTests.HELUTTests testDFFEnableHoldSemantics]' passed (0.206 seconds).
+Test Case '-[HELUTTests.HELUTTests testLongClockMemoryStability]' started.
+Test Case '-[HELUTTests.HELUTTests testLongClockMemoryStability]' passed (0.188 seconds).
+Test Case '-[HELUTTests.HELUTTests testNegacyclicModuloFidelity]' started.
+Test Case '-[HELUTTests.HELUTTests testNegacyclicModuloFidelity]' passed (0.165 seconds).
+Test Suite 'HELUTTests' passed at 2026-08-15 12:47:26.865.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.560 (0.560) seconds
+Test Suite 'MetalCompilerPhase1Tests' started at 2026-08-15 12:47:26.865.
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testAutomaticLoweringSelectsFusedThenTiled]' started.
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testAutomaticLoweringSelectsFusedThenTiled]' passed (0.001 seconds).
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testCarryLUTTiledMatchesCPU]' started.
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testCarryLUTTiledMatchesCPU]' passed (0.147 seconds).
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testExternalProductKernelMatchesCPUBooleanAndCrypto]' started.
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testExternalProductKernelMatchesCPUBooleanAndCrypto]' passed (0.011 seconds).
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testIdentityLUTBothBitsAcrossDegreesAndTileWidths]' started.
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testIdentityLUTBothBitsAcrossDegreesAndTileWidths]' passed (0.078 seconds).
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testIdentityLUTCryptoNTTMatchesCPU]' started.
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testIdentityLUTCryptoNTTMatchesCPU]' passed (0.004 seconds).
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testKernelNTTPolyMulN1024Spot]' started.
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testKernelNTTPolyMulN1024Spot]' passed (0.055 seconds).
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testKernelPolyMulEdgeVectors]' started.
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testKernelPolyMulEdgeVectors]' passed (0.014 seconds).
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testKernelPolyMulManyRandomSeeds]' started.
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testKernelPolyMulManyRandomSeeds]' passed (0.012 seconds).
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testSecondBlindRotateHitsPolyMulCache]' started.
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testSecondBlindRotateHitsPolyMulCache]' passed (0.004 seconds).
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testTiledKernelNetlistFullAdderMatchesClear]' started.
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testTiledKernelNetlistFullAdderMatchesClear]' passed (0.057 seconds).
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testTiledProgressAndTelemetry]' started.
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testTiledProgressAndTelemetry]' passed (0.003 seconds).
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testXORAllStimuliFusedAndTiled]' started.
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testXORAllStimuliFusedAndTiled]' passed (3.239 seconds).
+Test Suite 'MetalCompilerPhase1Tests' passed at 2026-08-15 12:47:30.490.
+	 Executed 12 tests, with 0 failures (0 unexpected) in 3.624 (3.625) seconds
+Test Suite 'MockPBSBooleanTests' started at 2026-08-15 12:47:30.490.
+Test Case '-[HELUTTests.MockPBSBooleanTests testBooleanSafeCounterMatchesCleartext]' started.
+Test Case '-[HELUTTests.MockPBSBooleanTests testBooleanSafeCounterMatchesCleartext]' passed (0.010 seconds).
+Test Case '-[HELUTTests.MockPBSBooleanTests testBooleanSafeEnigmaNetlistMatchesOracle]' started.
+Test Case '-[HELUTTests.MockPBSBooleanTests testBooleanSafeEnigmaNetlistMatchesOracle]' passed (0.569 seconds).
+Test Case '-[HELUTTests.MockPBSBooleanTests testBooleanSafeFullAdderMatchesCleartext]' started.
+Test Case '-[HELUTTests.MockPBSBooleanTests testBooleanSafeFullAdderMatchesCleartext]' passed (0.051 seconds).
+Test Case '-[HELUTTests.MockPBSBooleanTests testMockTorusEncodeDecodeRoundTrip]' started.
+Test Case '-[HELUTTests.MockPBSBooleanTests testMockTorusEncodeDecodeRoundTrip]' passed (0.000 seconds).
+Test Case '-[HELUTTests.MockPBSBooleanTests testYosysTruthTableEndianMatchesCleartextSim]' started.
+Test Case '-[HELUTTests.MockPBSBooleanTests testYosysTruthTableEndianMatchesCleartextSim]' passed (0.000 seconds).
+Test Suite 'MockPBSBooleanTests' passed at 2026-08-15 12:47:31.120.
+	 Executed 5 tests, with 0 failures (0 unexpected) in 0.630 (0.630) seconds
+Test Suite 'N256BlindRotateSmoke' started at 2026-08-15 12:47:31.120.
+Test Case '-[HELUTTests.N256BlindRotateSmoke testArity3CarryAtDegrees]' started.
+Test Case '-[HELUTTests.N256BlindRotateSmoke testArity3CarryAtDegrees]' passed (72.304 seconds).
+Test Suite 'N256BlindRotateSmoke' passed at 2026-08-15 12:48:43.424.
+	 Executed 1 test, with 0 failures (0 unexpected) in 72.304 (72.304) seconds
+Test Suite 'NearMissQuarantineLogicTests' started at 2026-08-15 12:48:43.424.
+Test Case '-[HELUTTests.NearMissQuarantineLogicTests testSoftBandSitsBetweenNoiseAndStrictBreak]' started.
+Test Case '-[HELUTTests.NearMissQuarantineLogicTests testSoftBandSitsBetweenNoiseAndStrictBreak]' passed (0.000 seconds).
+Test Case '-[HELUTTests.NearMissQuarantineLogicTests testSteckerPairTokenOrdering]' started.
+Test Case '-[HELUTTests.NearMissQuarantineLogicTests testSteckerPairTokenOrdering]' passed (0.000 seconds).
+Test Suite 'NearMissQuarantineLogicTests' passed at 2026-08-15 12:48:43.424.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.000 (0.000) seconds
+Test Suite 'NegacyclicNTTTests' started at 2026-08-15 12:48:43.424.
+Test Case '-[HELUTTests.NegacyclicNTTTests testCRTModulusProduct]' started.
+Test Case '-[HELUTTests.NegacyclicNTTTests testCRTModulusProduct]' passed (0.000 seconds).
+Test Case '-[HELUTTests.NegacyclicNTTTests testCRTRecoversSmallNegatives]' started.
+Test Case '-[HELUTTests.NegacyclicNTTTests testCRTRecoversSmallNegatives]' passed (0.000 seconds).
+Test Case '-[HELUTTests.NegacyclicNTTTests testForwardInverseRoundtrip]' started.
+Test Case '-[HELUTTests.NegacyclicNTTTests testForwardInverseRoundtrip]' passed (0.000 seconds).
+Test Case '-[HELUTTests.NegacyclicNTTTests testNTTMatchesSchoolbookEdgeVectors]' started.
+Test Case '-[HELUTTests.NegacyclicNTTTests testNTTMatchesSchoolbookEdgeVectors]' passed (0.001 seconds).
+Test Case '-[HELUTTests.NegacyclicNTTTests testNTTMatchesSchoolbookManySeeds]' started.
+Test Case '-[HELUTTests.NegacyclicNTTTests testNTTMatchesSchoolbookManySeeds]' passed (0.001 seconds).
+Test Case '-[HELUTTests.NegacyclicNTTTests testNTTMatchesSchoolbookN1024Spot]' started.
+Test Case '-[HELUTTests.NegacyclicNTTTests testNTTMatchesSchoolbookN1024Spot]' passed (0.001 seconds).
+Test Case '-[HELUTTests.NegacyclicNTTTests testPrimesDivideTwoN]' started.
+Test Case '-[HELUTTests.NegacyclicNTTTests testPrimesDivideTwoN]' passed (0.000 seconds).
+Test Suite 'NegacyclicNTTTests' passed at 2026-08-15 12:48:43.428.
+	 Executed 7 tests, with 0 failures (0 unexpected) in 0.003 (0.004) seconds
+Test Suite 'PicoRVHostMemTests' started at 2026-08-15 12:48:43.428.
+Test Case '-[HELUTTests.PicoRVHostMemTests testSDFFCEEnableGatesReset]' started.
+Test Case '-[HELUTTests.PicoRVHostMemTests testSDFFCEEnableGatesReset]' passed (0.000 seconds).
+Test Case '-[HELUTTests.PicoRVHostMemTests testTinyProgramCleartextIssuesStore]' started.
+Test Case '-[HELUTTests.PicoRVHostMemTests testTinyProgramCleartextIssuesStore]' passed (0.428 seconds).
+Test Suite 'PicoRVHostMemTests' passed at 2026-08-15 12:48:43.856.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.428 (0.428) seconds
+Test Suite 'SteckerInvolutionTests' started at 2026-08-15 12:48:43.856.
+Test Case '-[HELUTTests.SteckerInvolutionTests testBlindRediscoverActiveMapShortCrib]' started.
+Test Case '-[HELUTTests.SteckerInvolutionTests testBlindRediscoverActiveMapShortCrib]' passed (0.441 seconds).
+Test Case '-[HELUTTests.SteckerInvolutionTests testBlindRediscoverScaledCrib]' started.
+Test Case '-[HELUTTests.SteckerInvolutionTests testBlindRediscoverScaledCrib]' passed (44.615 seconds).
+Test Case '-[HELUTTests.SteckerInvolutionTests testIdentitySandwichZeroCrypto]' started.
+Test Case '-[HELUTTests.SteckerInvolutionTests testIdentitySandwichZeroCrypto]' passed (0.046 seconds).
+Test Case '-[HELUTTests.SteckerInvolutionTests testInvolutionLegalityUnderMutateAndCrossover]' started.
+Test Case '-[HELUTTests.SteckerInvolutionTests testInvolutionLegalityUnderMutateAndCrossover]' passed (0.002 seconds).
+Test Case '-[HELUTTests.SteckerInvolutionTests testIOProjectionBitWidths]' started.
+Test Case '-[HELUTTests.SteckerInvolutionTests testIOProjectionBitWidths]' passed (0.000 seconds).
+Test Case '-[HELUTTests.SteckerInvolutionTests testMapTableIsSelfInverse]' started.
+Test Case '-[HELUTTests.SteckerInvolutionTests testMapTableIsSelfInverse]' passed (0.000 seconds).
+Test Case '-[HELUTTests.SteckerInvolutionTests testRediscoverKnownSteckerPairs]' started.
+Test Case '-[HELUTTests.SteckerInvolutionTests testRediscoverKnownSteckerPairs]' passed (0.128 seconds).
+Test Suite 'SteckerInvolutionTests' passed at 2026-08-15 12:49:29.089.
+	 Executed 7 tests, with 0 failures (0 unexpected) in 45.232 (45.232) seconds
+Test Suite 'TFHESeamTests' started at 2026-08-15 12:49:29.089.
+Test Case '-[HELUTTests.TFHESeamTests testBlindRotateAndKeySwitchTrivial]' started.
+Test Case '-[HELUTTests.TFHESeamTests testBlindRotateAndKeySwitchTrivial]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testBlindRotateIdentityAndXOR]' started.
+/Volumes/Code/HELUT/Tests/HELUTTests/TFHESeamTests.swift:1644: error: -[HELUTTests.TFHESeamTests testBlindRotateIdentityAndXOR] : XCTAssertEqual failed: ("4294967264") is not equal to ("0")
+/Volumes/Code/HELUT/Tests/HELUTTests/TFHESeamTests.swift:1644: error: -[HELUTTests.TFHESeamTests testBlindRotateIdentityAndXOR] : XCTAssertEqual failed: ("4294967281") is not equal to ("1")
+Test Case '-[HELUTTests.TFHESeamTests testBlindRotateIdentityAndXOR]' failed (0.110 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testChainedExtractedLWEWithPublicMS]' started.
+Test Case '-[HELUTTests.TFHESeamTests testChainedExtractedLWEWithPublicMS]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testChainedExtractedLWEWithSecretRefresh]' started.
+Test Case '-[HELUTTests.TFHESeamTests testChainedExtractedLWEWithSecretRefresh]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testCoreSVPModelFillsEstimatorColumn]' started.
+Test Case '-[HELUTTests.TFHESeamTests testCoreSVPModelFillsEstimatorColumn]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testDatapathConfigs]' started.
+Test Case '-[HELUTTests.TFHESeamTests testDatapathConfigs]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testDiscreteNoiseGLWERoundTrip]' started.
+Test Case '-[HELUTTests.TFHESeamTests testDiscreteNoiseGLWERoundTrip]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testDynamicRotateCostBinaryBeatsMux]' started.
+Test Case '-[HELUTTests.TFHESeamTests testDynamicRotateCostBinaryBeatsMux]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testEncryptedNetlistFullAdderClearSelectorCPU]' started.
+Test Case '-[HELUTTests.TFHESeamTests testEncryptedNetlistFullAdderClearSelectorCPU]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testEncryptedNetlistFullAdderCPU]' started.
+Test Case '-[HELUTTests.TFHESeamTests testEncryptedNetlistFullAdderCPU]' passed (0.001 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testEncryptedNetlistFullAdderMetal]' started.
+Test Case '-[HELUTTests.TFHESeamTests testEncryptedNetlistFullAdderMetal]' passed (2.112 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testEncryptedNetlistFullAdderWithInputNoise]' started.
+Test Case '-[HELUTTests.TFHESeamTests testEncryptedNetlistFullAdderWithInputNoise]' passed (0.003 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testEncryptedNetlistFullAdderWithNoisyBK]' started.
+Compiled module 'stateful_counter': 2 inputs, 6 LUTs, 4 DFFs, 4 outputs
+Compile breakdown: boolean-safe LUT lower 0.00 s, graph build 0.00 s (total 0.00 s)
+Compiled module 'stateful_counter': 2 inputs, 6 LUTs, 4 DFFs, 4 outputs
+Compile breakdown: boolean-safe LUT lower 0.00 s, graph build 0.00 s (total 0.00 s)
+Compiled module 'stateful_counter': 2 inputs, 6 LUTs, 4 DFFs, 4 outputs
+Compile breakdown: boolean-safe LUT lower 0.00 s, graph build 0.00 s (total 0.00 s)
+Compiled module 'enigma_core': 10 inputs, 688 LUTs, 26 DFFs, 8 outputs
+Compile breakdown: boolean-safe LUT lower 0.03 s, graph build 0.00 s (total 0.03 s)
+Compiled module 'full_adder': 3 inputs, 3 LUTs, 0 DFFs, 2 outputs
+Compile breakdown: boolean-safe LUT lower 0.00 s, graph build 0.00 s (total 0.00 s)
+  identity residual trials=16  (n=8)
+  identity B_bk    18466  (decodable true)
+Test Case '-[HELUTTests.TFHESeamTests testEncryptedNetlistFullAdderWithNoisyBK]' passed (0.003 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testEncryptedNetlistMetalSingleGraphFullAdder]' started.
+Test Case '-[HELUTTests.TFHESeamTests testEncryptedNetlistMetalSingleGraphFullAdder]' passed (3.746 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testEncryptedNetlistWireRefreshPublicMSFullAdder]' started.
+Test Case '-[HELUTTests.TFHESeamTests testEncryptedNetlistWireRefreshPublicMSFullAdder]' passed (2.434 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testEncryptedPackedGLWERoundTrip]' started.
+Test Case '-[HELUTTests.TFHESeamTests testEncryptedPackedGLWERoundTrip]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testEncryptedTreeNetlistCPU]' started.
+Test Case '-[HELUTTests.TFHESeamTests testEncryptedTreeNetlistCPU]' passed (0.059 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testEnigma256FormalCertificate]' started.
+Test Case '-[HELUTTests.TFHESeamTests testEnigma256FormalCertificate]' passed (0.002 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testExtractKeySwitchClosesPBSWhenNLessThanKN]' started.
+Test Case '-[HELUTTests.TFHESeamTests testExtractKeySwitchClosesPBSWhenNLessThanKN]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testFusedMetalBlindRotateMatchesCPU]' started.
+Test Case '-[HELUTTests.TFHESeamTests testFusedMetalBlindRotateMatchesCPU]' passed (0.487 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testGaussianAsymptoticProductionCertificate]' started.
+Test Case '-[HELUTTests.TFHESeamTests testGaussianAsymptoticProductionCertificate]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testGGSWExternalProductAndCMux]' started.
+Test Case '-[HELUTTests.TFHESeamTests testGGSWExternalProductAndCMux]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testGGSWIncompleteCoveringCertificate]' started.
+Test Case '-[HELUTTests.TFHESeamTests testGGSWIncompleteCoveringCertificate]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testGGSWPublicMSCoveringCertificate]' started.
+Test Case '-[HELUTTests.TFHESeamTests testGGSWPublicMSCoveringCertificate]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testGLWEEncryptDecryptNonZeroSecret]' started.
+Test Case '-[HELUTTests.TFHESeamTests testGLWEEncryptDecryptNonZeroSecret]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testGLWESampleEncryptExtractDecrypt]' started.
+Test Case '-[HELUTTests.TFHESeamTests testGLWESampleEncryptExtractDecrypt]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testLUTNodeEncryptedMetalLowering]' started.
+Test Case '-[HELUTTests.TFHESeamTests testLUTNodeEncryptedMetalLowering]' passed (2.567 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testLWEEstimatorProtocolPending]' started.
+Test Case '-[HELUTTests.TFHESeamTests testLWEEstimatorProtocolPending]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testLWEHardnessCalibrationTable]' started.
+Test Case '-[HELUTTests.TFHESeamTests testLWEHardnessCalibrationTable]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testLWEHardnessCertificate128]' started.
+Test Case '-[HELUTTests.TFHESeamTests testLWEHardnessCertificate128]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testMetalGGSWCryptoGadgetMatchesCPU]' started.
+Test Case '-[HELUTTests.TFHESeamTests testMetalGGSWCryptoGadgetMatchesCPU]' passed (0.147 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testMetalGGSWEvaluatePBSMatchesCPU]' started.
+Test Case '-[HELUTTests.TFHESeamTests testMetalGGSWEvaluatePBSMatchesCPU]' passed (0.481 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testMetalGGSWExternalProductAndCMux]' started.
+Test Case '-[HELUTTests.TFHESeamTests testMetalGGSWExternalProductAndCMux]' passed (0.197 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testMetalGGSWMatchesCPUExternalProduct]' started.
+Test Case '-[HELUTTests.TFHESeamTests testMetalGGSWMatchesCPUExternalProduct]' passed (0.112 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testMetalKernelPolyMulMatchesCPU]' started.
+Test Case '-[HELUTTests.TFHESeamTests testMetalKernelPolyMulMatchesCPU]' passed (0.003 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testMultilinearOracleXOR]' started.
+Test Case '-[HELUTTests.TFHESeamTests testMultilinearOracleXOR]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testNegacyclicMultiplyByXPower]' started.
+Test Case '-[HELUTTests.TFHESeamTests testNegacyclicMultiplyByXPower]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testNoiseBudgetTracksBlindRotate]' started.
+Test Case '-[HELUTTests.TFHESeamTests testNoiseBudgetTracksBlindRotate]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testNoiseCertificateFullAdder]' started.
+Test Case '-[HELUTTests.TFHESeamTests testNoiseCertificateFullAdder]' passed (0.001 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testNoiseGrowthBoundedAccounting]' started.
+Test Case '-[HELUTTests.TFHESeamTests testNoiseGrowthBoundedAccounting]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testNoiseProofCoreLemmas]' started.
+Test Case '-[HELUTTests.TFHESeamTests testNoiseProofCoreLemmas]' passed (0.001 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testNoisyBKDepthCertificate]' started.
+Test Case '-[HELUTTests.TFHESeamTests testNoisyBKDepthCertificate]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testNoisyBKIdentityMeasurement]' started.
+Test Case '-[HELUTTests.TFHESeamTests testNoisyBKIdentityMeasurement]' passed (0.001 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testPackedGLWEEncodingRoundTrip]' started.
+Test Case '-[HELUTTests.TFHESeamTests testPackedGLWEEncodingRoundTrip]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testPBSGGSWNonZeroSecretCryptoGadget]' started.
+Test Case '-[HELUTTests.TFHESeamTests testPBSGGSWNonZeroSecretCryptoGadget]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testPBSStubTestPolynomial]' started.
+Test Case '-[HELUTTests.TFHESeamTests testPBSStubTestPolynomial]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testPublicModulusSwitchAfterBlindRotate]' started.
+Test Case '-[HELUTTests.TFHESeamTests testPublicModulusSwitchAfterBlindRotate]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testPublicMSCryptoGadgetDiagnostics]' started.
+Test Case '-[HELUTTests.TFHESeamTests testPublicMSCryptoGadgetDiagnostics]' passed (0.001 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testRealKeySwitchBetweenSecrets]' started.
+Test Case '-[HELUTTests.TFHESeamTests testRealKeySwitchBetweenSecrets]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testRotationNativePackStaysInZ2N]' started.
+Test Case '-[HELUTTests.TFHESeamTests testRotationNativePackStaysInZ2N]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testStrideKPublicMSChainedXOR]' started.
+Test Case '-[HELUTTests.TFHESeamTests testStrideKPublicMSChainedXOR]' passed (0.002 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testTensorLUTFormalCertificate]' started.
+Test Case '-[HELUTTests.TFHESeamTests testTensorLUTFormalCertificate]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testTensorLUTFormalCorollaryCertificate]' started.
+Test Case '-[HELUTTests.TFHESeamTests testTensorLUTFormalCorollaryCertificate]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testTensorLUTMeltFreezeSnapCertificate]' started.
+Test Case '-[HELUTTests.TFHESeamTests testTensorLUTMeltFreezeSnapCertificate]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testTestPolyInitCacheHits]' started.
+Test Case '-[HELUTTests.TFHESeamTests testTestPolyInitCacheHits]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testTiledKernelBlindRotateMatchesCPU]' started.
+Test Case '-[HELUTTests.TFHESeamTests testTiledKernelBlindRotateMatchesCPU]' passed (0.017 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testTrivialEncodingsRoundTrip]' started.
+Test Case '-[HELUTTests.TFHESeamTests testTrivialEncodingsRoundTrip]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testTrivialPBSFullAdderMatchesCleartext]' started.
+Test Case '-[HELUTTests.TFHESeamTests testTrivialPBSFullAdderMatchesCleartext]' passed (0.147 seconds).
+Test Case '-[HELUTTests.TFHESeamTests testTrivialPBSOracleMatchesMultilinear]' started.
+Test Case '-[HELUTTests.TFHESeamTests testTrivialPBSOracleMatchesMultilinear]' passed (0.000 seconds).
+Test Suite 'TFHESeamTests' failed at 2026-08-15 12:49:41.731.
+	 Executed 59 tests, with 2 failures (0 unexpected) in 12.640 (12.643) seconds
+Test Suite 'TensorFreezeMaskTests' started at 2026-08-15 12:49:41.731.
+Test Case '-[HELUTTests.TensorFreezeMaskTests testCrossoverKeepsFrozenParentA]' started.
+Test Case '-[HELUTTests.TensorFreezeMaskTests testCrossoverKeepsFrozenParentA]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TensorFreezeMaskTests testHostPenaltyIgnoresFrozenLUTs]' started.
+Test Case '-[HELUTTests.TensorFreezeMaskTests testHostPenaltyIgnoresFrozenLUTs]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TensorFreezeMaskTests testMetalPenaltyMatchesHostWithFreeze]' started.
+Test Case '-[HELUTTests.TensorFreezeMaskTests testMetalPenaltyMatchesHostWithFreeze]' passed (0.001 seconds).
+Test Case '-[HELUTTests.TensorFreezeMaskTests testMutateSkipsFrozenLUTs]' started.
+Test Case '-[HELUTTests.TensorFreezeMaskTests testMutateSkipsFrozenLUTs]' passed (0.001 seconds).
+Test Case '-[HELUTTests.TensorFreezeMaskTests testTwoBitAdderTargetedMeltDiscovers]' started.
+Test Case '-[HELUTTests.TensorFreezeMaskTests testTwoBitAdderTargetedMeltDiscovers]' passed (1.181 seconds).
+Test Case '-[HELUTTests.TensorFreezeMaskTests testWipeMeltRegionPreservesFrozen]' started.
+Test Case '-[HELUTTests.TensorFreezeMaskTests testWipeMeltRegionPreservesFrozen]' passed (0.000 seconds).
+Test Suite 'TensorFreezeMaskTests' passed at 2026-08-15 12:49:42.915.
+	 Executed 6 tests, with 0 failures (0 unexpected) in 1.183 (1.183) seconds
+Test Suite 'TensorLUTCompilerTests' started at 2026-08-15 12:49:42.915.
+Test Case '-[HELUTTests.TensorLUTCompilerTests testCompileCoreNetlistHasEnableDFFs]' started.
+Test Case '-[HELUTTests.TensorLUTCompilerTests testCompileCoreNetlistHasEnableDFFs]' passed (0.001 seconds).
+Test Case '-[HELUTTests.TensorLUTCompilerTests testCompileEnigmaM4Topology]' started.
+Test Case '-[HELUTTests.TensorLUTCompilerTests testCompileEnigmaM4Topology]' passed (0.016 seconds).
+Test Case '-[HELUTTests.TensorLUTCompilerTests testCoreNetlistBinaryTickParityVsCleartext]' started.
+Test Case '-[HELUTTests.TensorLUTCompilerTests testCoreNetlistBinaryTickParityVsCleartext]' passed (0.001 seconds).
+Test Suite 'TensorLUTCompilerTests' passed at 2026-08-15 12:49:42.934.
+	 Executed 3 tests, with 0 failures (0 unexpected) in 0.019 (0.019) seconds
+Test Suite 'TensorLUTConeTaggerTests' started at 2026-08-15 12:49:42.934.
+Test Case '-[HELUTTests.TensorLUTConeTaggerTests testForwardConeDoesNotIncludeStateQReaders]' started.
+Test Case '-[HELUTTests.TensorLUTConeTaggerTests testForwardConeDoesNotIncludeStateQReaders]' passed (0.017 seconds).
+Test Case '-[HELUTTests.TensorLUTConeTaggerTests testSteckerConesOnEnigmaM4AreEdgeSized]' started.
+Test Case '-[HELUTTests.TensorLUTConeTaggerTests testSteckerConesOnEnigmaM4AreEdgeSized]' passed (0.018 seconds).
+Test Suite 'TensorLUTConeTaggerTests' passed at 2026-08-15 12:49:42.969.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.036 (0.036) seconds
+Test Suite 'TensorLUTEmitterTests' started at 2026-08-15 12:49:42.969.
+Test Case '-[HELUTTests.TensorLUTEmitterTests testEmitVerilogTwoBitAdderStructure]' started.
+Test Case '-[HELUTTests.TensorLUTEmitterTests testEmitVerilogTwoBitAdderStructure]' passed (0.000 seconds).
+Test Case '-[HELUTTests.TensorLUTEmitterTests testInitHexRoundTripMatchesCleartextDecode]' started.
+Test Case '-[HELUTTests.TensorLUTEmitterTests testInitHexRoundTripMatchesCleartextDecode]' passed (0.000 seconds).
+Test Suite 'TensorLUTEmitterTests' passed at 2026-08-15 12:49:42.970.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.000 (0.000) seconds
+Test Suite 'TensorLUTParityTests' started at 2026-08-15 12:49:42.970.
+Test Case '-[HELUTTests.TensorLUTParityTests testBinaryParityWithXOR]' started.
+Test Case '-[HELUTTests.TensorLUTParityTests testBinaryParityWithXOR]' passed (0.002 seconds).
+Test Case '-[HELUTTests.TensorLUTParityTests testPadBroadcastMatchesCleartextWidth2]' started.
+Test Case '-[HELUTTests.TensorLUTParityTests testPadBroadcastMatchesCleartextWidth2]' passed (0.000 seconds).
+Test Suite 'TensorLUTParityTests' passed at 2026-08-15 12:49:42.972.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.002 (0.002) seconds
+Test Suite 'WelchmanDiagonalBoardTests' started at 2026-08-15 12:49:42.972.
+Test Case '-[HELUTTests.WelchmanDiagonalBoardTests testDiagonalBoardEnforcesInvolution]' started.
+Test Case '-[HELUTTests.WelchmanDiagonalBoardTests testDiagonalBoardEnforcesInvolution]' passed (0.000 seconds).
+Test Case '-[HELUTTests.WelchmanDiagonalBoardTests testLongMenuLeavesFewSurvivors]' started.
+Test Case '-[HELUTTests.WelchmanDiagonalBoardTests testLongMenuLeavesFewSurvivors]' passed (0.125 seconds).
+Test Case '-[HELUTTests.WelchmanDiagonalBoardTests testMenuCountsLoops]' started.
+Test Case '-[HELUTTests.WelchmanDiagonalBoardTests testMenuCountsLoops]' passed (0.000 seconds).
+Test Case '-[HELUTTests.WelchmanDiagonalBoardTests testMenuRejectsOutOfRangeOffset]' started.
+Test Case '-[HELUTTests.WelchmanDiagonalBoardTests testMenuRejectsOutOfRangeOffset]' passed (0.000 seconds).
+Test Case '-[HELUTTests.WelchmanDiagonalBoardTests testMenuRejectsSelfEncipherment]' started.
+Test Case '-[HELUTTests.WelchmanDiagonalBoardTests testMenuRejectsSelfEncipherment]' passed (0.000 seconds).
+Test Case '-[HELUTTests.WelchmanDiagonalBoardTests testScramblerMatchesMachineWithoutPlugs]' started.
+Test Case '-[HELUTTests.WelchmanDiagonalBoardTests testScramblerMatchesMachineWithoutPlugs]' passed (0.000 seconds).
+Test Case '-[HELUTTests.WelchmanDiagonalBoardTests testTrueSettingSurvivesAndForcesCorrectStecker]' started.
+Test Case '-[HELUTTests.WelchmanDiagonalBoardTests testTrueSettingSurvivesAndForcesCorrectStecker]' passed (0.000 seconds).
+Test Case '-[HELUTTests.WelchmanDiagonalBoardTests testWrongSettingsAreKilled]' started.
+Test Case '-[HELUTTests.WelchmanDiagonalBoardTests testWrongSettingsAreKilled]' passed (0.000 seconds).
+Test Suite 'WelchmanDiagonalBoardTests' passed at 2026-08-15 12:49:43.099.
+	 Executed 8 tests, with 0 failures (0 unexpected) in 0.126 (0.127) seconds
+Test Suite 'helutPackageTests.xctest' failed at 2026-08-15 12:49:43.099.
+	 Executed 191 tests, with 2 failures (0 unexpected) in 173.210 (173.221) seconds
+Test Suite 'All tests' failed at 2026-08-15 12:49:43.099.
+	 Executed 191 tests, with 2 failures (0 unexpected) in 173.210 (173.223) seconds
+DIAG boolean: lattice=36/36 msBit=4/4 chain=4/4
+DIAG crypto: lattice=0/36 msBit=3/4 chain=4/4
+DIAG crypto+stride: lattice=36/36 msBit=4/4 chain=4/4
+Compiled module 'full_adder': 3 inputs, 3 LUTs, 0 DFFs, 2 outputs
+Compile breakdown: boolean-safe LUT lower 0.00 s, graph build 0.00 s (total 0.00 s)
+Compiled module 'full_adder': 3 inputs, 3 LUTs, 0 DFFs, 2 outputs
+Compile breakdown: boolean-safe LUT lower 0.00 s, graph build 0.00 s (total 0.00 s)
+Compiled module 'full_adder': 3 inputs, 3 LUTs, 0 DFFs, 2 outputs
+Compile breakdown: boolean-safe LUT lower 0.00 s, graph build 0.00 s (total 0.00 s)
+Compiled module 'full_adder': 3 inputs, 3 LUTs, 0 DFFs, 2 outputs
+Compile breakdown: boolean-safe LUT lower 0.00 s, graph build 0.00 s (total 0.00 s)
+Compiled module 'full_adder': 3 inputs, 3 LUTs, 0 DFFs, 2 outputs
+Compile breakdown: boolean-safe LUT lower 0.00 s, graph build 0.00 s (total 0.00 s)
+Compiled module 'full_adder': 3 inputs, 3 LUTs, 0 DFFs, 2 outputs
+Compile breakdown: boolean-safe LUT lower 0.00 s, graph build 0.00 s (total 0.00 s)
+Compiled module 'full_adder': 3 inputs, 3 LUTs, 0 DFFs, 2 outputs
+Compile breakdown: boolean-safe LUT lower 0.00 s, graph build 0.00 s (total 0.00 s)
+Compiled module 'full_adder': 3 inputs, 3 LUTs, 0 DFFs, 2 outputs
+Compile breakdown: boolean-safe LUT lower 0.00 s, graph build 0.00 s (total 0.00 s)
+◇ Test run started.
+↳ Testing Library Version: 1902
+↳ Target Platform: arm64e-apple-macos14.0
+✔ Test run with 0 tests in 0 suites passed after 0.001 seconds.

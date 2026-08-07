@@ -1,0 +1,70 @@
+{
+  "schema": "helut.dense-bigram-independent-audit-manifest.v1",
+  "created_utc": "2026-09-06T22:01:23Z",
+  "status": "python_ruby_swift_three_way_agreement",
+  "repository": {
+    "head": "4d47ad0ef40c593bb3a0e4ab5aa2e668b917f975",
+    "working_tree_clean": false,
+    "note": "Existing unrelated benchmark, evidence, and episode work was preserved; this receipt binds explicit files rather than claiming a clean tree."
+  },
+  "inputs": {
+    "fixture": {
+      "path": "Fixtures/german_bigrams.txt",
+      "sha256": "06f8694ec17906e993223e0179c6ca326030e62f77ec86e5c4120fddcf68f111",
+      "letters": 28508834,
+      "counted_pairs": 28508833,
+      "observed_cells": 674,
+      "missing_cells": ["JX", "QY"]
+    },
+    "control_receipt_source": {
+      "path": "Tests/HELUTTests/P1030684SparseControlFixtureTests.swift",
+      "sha256": "2bb1b547723763dd4319db0bd19648f319dd00c4b01bdc5d8d1f5fb80c79c984"
+    },
+    "control_plaintext": {
+      "sha256": "e355b691e78cd71bc1ed816e0808ab4f18aeb73376008b2a71dced197ad07145",
+      "symbols": 120,
+      "bigram_windows": 119
+    }
+  },
+  "protocol": {
+    "table_layout": "row-major A-Z conditional bigrams",
+    "formula": "ln((count[first,second] + 0.5) / (rowTotal[first] + 0.5 * 26))",
+    "accumulation": "explicit binary64 left fold from positive zero over control order",
+    "mean": "one final binary64 division of total by 119",
+    "numeric_bit_pattern": "big-endian textual rendering of the numeric IEEE-754 binary64 UInt64"
+  },
+  "implementations": {
+    "python": {
+      "path": "Scripts/audit_dense_bigrams.py",
+      "source_sha256": "83f2bac5f94be309fa09f6a070f282bdfc3f0d51ecfda75f95f405f7776e2425",
+      "runtime": "Python 3.9.6, arm64, macOS 26.6.2",
+      "receipt": "python-receipt.json",
+      "receipt_sha256": "b4c86e90416bce0380fcfe5c6e51128d83f755d35de46914052c2344f6ecf6f7"
+    },
+    "ruby": {
+      "path": "Scripts/audit_dense_bigrams.rb",
+      "source_sha256": "59dc4e7cd394249fa4c0e220016e768613229d6e9db2081e793718c309fcd8cd",
+      "runtime": "Ruby 2.6.10p210, universal.arm64e, Darwin 25",
+      "receipt": "ruby-receipt.json",
+      "receipt_sha256": "78df6ab6ef785b63d9d203f73ced65ae0107950cbb314d25300aecb28a4833b7"
+    }
+  },
+  "external_agreement": {
+    "fixture_invariants_match": true,
+    "control_invariants_match": true,
+    "floor_window_starts": [],
+    "total_bit_pattern": "0xc0777f715b25d69c",
+    "mean_bit_pattern": "0xc00946646aa57920",
+    "bit_patterns_match": true
+  },
+  "swift_comparison": {
+    "status": "passed",
+    "role": "implementation_under_test",
+    "expected_values_frozen_before_swift_run": true,
+    "total_bit_pattern": "0xc0777f715b25d69c",
+    "mean_bit_pattern": "0xc00946646aa57920",
+    "receipt": "swift-receipt.json",
+    "receipt_sha256": "052835e7a731b07d39d0f1e2426aab6b36c6657b0cbc3f46222f96aac343b0a6",
+    "rule": "The Swift result confirmed the already-frozen external patterns; no expected value was derived or revised from Swift output."
+  }
+}

@@ -1,0 +1,2235 @@
+import Foundation
+import Darwin
+import Metal
+import MetalPerformanceShadersGraph
+import HELUTCore
+import HELUTCLI
+
+// MARK: - Boolean-path HELUT bench (FHE/PBS datapath)
+
+private func checkedBenchValueFlag(_ name: String) -> String? {
+    let arguments = CommandLine.arguments
+    let matches = arguments.indices.filter { arguments[$0] == name }
+    guard matches.count <= 1 else {
+        fputs("\(name) may be specified only once\n", stderr)
+        exit(2)
+    }
+    guard let index = matches.first else { return nil }
+    guard index + 1 < arguments.count, !arguments[index + 1].hasPrefix("--") else {
+        fputs("\(name) requires a value\n", stderr)
+        exit(2)
+    }
+    return arguments[index + 1]
+}
+
+private var benchArchitecture: String {
+    #if arch(arm64)
+    return "arm64"
+    #elseif arch(x86_64)
+    return "x86_64"
+    #else
+    return "unknown"
+    #endif
+}
+
+/// Release harness for trivial-encoding boolean-safe HELUT:
+/// compile wall time, steady-state tick latency, optional Enigma Metal≡cleartext.
+func runHelutBench() {
+    let exportWorkloadPath = checkedBenchValueFlag("--bench-distinct-export-workload")
+    let resultOutputPath = checkedBenchValueFlag("--bench-distinct-result-out")
+    let replayWorkloadPath = checkedBenchValueFlag("--bench-distinct-replay-workload")
+    let replayResultPath = checkedBenchValueFlag("--bench-distinct-replay-result")
+    let requestedModule = checkedBenchValueFlag("--bench-module")
+
+    if replayWorkloadPath != nil || replayResultPath != nil {
+        guard let replayWorkloadPath, let replayResultPath,
+              exportWorkloadPath == nil, resultOutputPath == nil else {
+            fputs("replay requires both --bench-distinct-replay-workload and --bench-distinct-replay-result, without export/run flags\n", stderr)
+            exit(2)
+        }
+        do {
+            let workload = try DistinctLaneExchange.loadWorkload(
+                from: URL(fileURLWithPath: replayWorkloadPath)
+            )
+            let result = try DistinctLaneExchange.loadResult(
+                from: URL(fileURLWithPath: replayResultPath)
+            )
+            let receipt = try DistinctLaneExchange.replay(workload: workload, result: result)
+            print(
+                "BATCH_LANE_REPLAY workload_id=\(receipt.workloadID) lanes=\(receipt.lanes) "
+                    + "input_bits=\(receipt.inputBits) checked=\(receipt.comparedBits) "
+                    + "mismatches=\(receipt.mismatches) distinct_inputs=\(receipt.distinctInputAssignments) "
+                    + "distinct_lane_outputs=\(receipt.distinctLaneOutputs) digest=\(receipt.outputDigest)"
+            )
+            print(
+                String(
+                    format: "BATCH_LANE_REPLAY timing first_ns=%llu steady_median_ns=%.1f steady_avg_ns=%.1f timing_valid=%@",
+                    receipt.firstNanoseconds,
+                    receipt.steadyMedianNanoseconds,
+                    receipt.steadyAverageNanoseconds,
+                    receipt.timingValid ? "true" : "false"
+                )
+            )
+            guard receipt.mismatches == 0 else {
+                fputs("BATCH_LANE_REPLAY result=FAIL; graph timings are void\n", stderr)
+                exit(1)
+            }
+            print("BATCH_LANE_REPLAY result=PASS")
+            return
+        } catch {
+            fputs("BATCH_LANE_REPLAY result=INCONCLUSIVE error=\(error)\n", stderr)
+            exit(1)
+        }
+    }
+
+    let exchangeRequested = exportWorkloadPath != nil || resultOutputPath != nil
+    let distinctLanes = CommandLine.arguments.contains("--bench-distinct-lanes")
+        || exchangeRequested
+    if resultOutputPath != nil, exportWorkloadPath == nil {
+        fputs("--bench-distinct-result-out requires --bench-distinct-export-workload so the result has a banked workload\n", stderr)
+        exit(2)
+    }
+    if CommandLine.arguments.contains("--bench-encrypted") {
+        if distinctLanes {
+            fputs("--bench-distinct-lanes is a cleartext combinational mode; it cannot be combined with --bench-encrypted\n", stderr)
+            exit(1)
+        }
+        runEncryptedNetlistBench()
+        return
+    }
+
+    let path = resolveBenchNetlistPath()
+    let parsedDegree = intFlag("--degree")
+    let parsedBatch = intFlag("--batch")
+    let parsedTicks = intFlag("--ticks", allowZero: true)
+    let parsedWarmup = intFlag("--warmup", allowZero: true)
+    if exchangeRequested {
+        for (flag, valid) in [
+            ("--degree", parsedDegree != nil),
+            ("--batch", parsedBatch != nil),
+            ("--ticks", parsedTicks != nil),
+            ("--warmup", parsedWarmup != nil),
+        ] where CommandLine.arguments.contains(flag) && !valid {
+            fputs("\(flag) has a missing or invalid integer value\n", stderr)
+            exit(2)
+        }
+    }
+    let degree = parsedDegree ?? polynomialDegree
+    let batch = parsedBatch ?? 1
+    let ticks = parsedTicks ?? 10
+    let warmup = parsedWarmup ?? 1
+    let resetHold = intFlag("--reset-hold", allowZero: true) ?? 3
+    let equiv = CommandLine.arguments.contains("--bench-equiv")
+    let compileOnly = CommandLine.arguments.contains("--compile-only")
+    let encodingKind = parseEncodingKindFlag()
+    let lutBackend = parseLUTBackendFlag()
+
+    if lutBackend.usesEncryptedNetlist {
+        if distinctLanes {
+            fputs("--bench-distinct-lanes does not support an encrypted LUT backend\n", stderr)
+            exit(1)
+        }
+        runEncryptedNetlistBench()
+        return
+    }
+    if distinctLanes {
+        guard !equiv else {
+            fputs("--bench-distinct-lanes and --bench-equiv are separate verification modes\n", stderr)
+            exit(1)
+        }
+        guard !compileOnly else {
+            fputs("--bench-distinct-lanes requires execution; remove --compile-only\n", stderr)
+            exit(1)
+        }
+        guard ticks > 0, warmup < ticks else {
+            fputs("--bench-distinct-lanes requires --ticks > --warmup >= 0\n", stderr)
+            exit(1)
+        }
+        guard encodingKind == .constantFill, lutBackend == .multilinear else {
+            fputs("--bench-distinct-lanes currently requires --encoding constant-fill --lut-backend multilinear\n", stderr)
+            exit(1)
+        }
+    }
+
+    var exchangeWorkload: DistinctLaneWorkloadV1?
+    if let exportWorkloadPath {
+        do {
+            let netlistData = try Data(contentsOf: URL(fileURLWithPath: path))
+            let workload = try DistinctLaneExchange.makeWorkload(
+                netlistData: netlistData,
+                moduleName: requestedModule,
+                degree: degree,
+                lanes: batch,
+                trials: ticks,
+                warmup: warmup
+            )
+            try DistinctLaneExchange.write(
+                workload,
+                to: URL(fileURLWithPath: exportWorkloadPath)
+            )
+            exchangeWorkload = workload
+            print(
+                "BATCH_LANE_WORKLOAD result=PASS workload_id=\(workload.workloadID) "
+                    + "module=\(workload.moduleName) lanes=\(workload.lanes) "
+                    + "degree=\(workload.degree) trials=\(workload.trials) warmup=\(workload.warmup) "
+                    + "expected_digest=\(workload.expectedOutputDigest) path=\(exportWorkloadPath)"
+            )
+            if resultOutputPath == nil { return }
+        } catch {
+            fputs("BATCH_LANE_WORKLOAD result=FAIL error=\(error)\n", stderr)
+            exit(1)
+        }
+    }
+
+    let config = HELUTDatapathConfig(
+        encodingDegree: degree,
+        encodingKind: encodingKind,
+        lutBackend: lutBackend
+    )
+    // Fail closed early for --lut-backend pbs
+    config.assertRunnable()
+
+    guard let device = MTLCreateSystemDefaultDevice() else {
+        fputs("No Metal device\n", stderr)
+        exit(1)
+    }
+    guard let commandQueue = device.makeCommandQueue() else {
+        fputs("No MTLCommandQueue\n", stderr)
+        exit(1)
+    }
+
+    print("HELUT boolean-path bench")
+    print("  netlist: \(path)")
+    print("  device: \(device.name)")
+    print("  N=\(degree)  B=\(batch)  ticks=\(ticks)  warmup=\(warmup)  reset_hold=\(resetHold)")
+    print("  batch mode: \(distinctLanes ? "distinct-verified-v1" : "legacy-broadcast-v1")")
+    print("  encoding: \(encodingKind.rawValue) (trivial, noise-free)")
+    print("  LUT backend: \(lutBackend.rawValue)")
+    if encodingKind.isPackedGLWE {
+        print("  wire width: \(encodingKind.wireWidth(polynomialDegree: degree)) (packed k=1)")
+    }
+    print("")
+
+    let netlist = loadYosysNetlist(from: path)
+    let moduleName: String
+    if let exchangeWorkload {
+        moduleName = exchangeWorkload.moduleName
+    } else if let requestedModule {
+        moduleName = requestedModule
+    } else if let first = netlist.modules.first {
+        // Legacy runs retain their historical first-module behavior. Portable
+        // workloads reject ambiguity unless --bench-module is provided.
+        moduleName = first.key
+    } else {
+        fatalError("Empty netlist")
+    }
+    guard let module = netlist.modules[moduleName] else {
+        fputs("Yosys module '\(moduleName)' is missing\n", stderr)
+        exit(1)
+    }
+
+    let rssBefore = taskResidentMemoryBytes()
+    let compiler = YosysGraphCompiler(
+        degree: degree,
+        batch: batch,
+        encodingKind: encodingKind,
+        lutBackend: lutBackend
+    )
+    let compileStarted = CFAbsoluteTimeGetCurrent()
+    compiler.compile(moduleName: moduleName, module: module)
+    let compileSeconds = CFAbsoluteTimeGetCurrent() - compileStarted
+    let rssAfterCompile = taskResidentMemoryBytes()
+
+    print(String(format: "COMPILE"))
+    print(String(format: "  total            %.4f s", compileSeconds))
+    print(String(format: "  LUT lower        %.4f s", compiler.lastToeplitzExpandSeconds))
+    print(String(format: "  graph build      %.4f s", compiler.lastGraphBuildSeconds))
+    print(
+        "  cells            \(compiler.lutNodes.count) LUTs, "
+            + "\(compiler.dffNodes.count) DFFs, "
+            + "\(compiler.inputNodes.count) inputs, "
+            + "\(compiler.outputTensors.count) outputs"
+    )
+    print(
+        String(
+            format: "  RSS delta        %+.1f MiB (after=%.1f MiB)",
+            Double(Int64(rssAfterCompile) &- Int64(rssBefore)) / (1024 * 1024),
+            Double(rssAfterCompile) / (1024 * 1024)
+        )
+    )
+    print("")
+
+    if compileOnly {
+        print("Stopping after compile (--compile-only).")
+        return
+    }
+
+    if compiler.dffNodes.isEmpty {
+        print("Combinational netlist — no clock loop.")
+        if distinctLanes {
+            do {
+                let receipt = try runDistinctCombinationalBatch(
+                    compiler: compiler,
+                    moduleName: moduleName,
+                    module: module,
+                    device: device,
+                    commandQueue: commandQueue,
+                    trials: ticks,
+                    warmup: warmup
+                )
+                let digest = String(format: "fnv1a64-%016llx", receipt.digest)
+                if let resultOutputPath {
+                    guard let workload = exchangeWorkload else {
+                        throw DistinctLaneExchangeError.invalid(
+                            "result export has no associated workload"
+                        )
+                    }
+                    let environment = DistinctLaneEnvironmentV1(
+                        executionBackend: "metal-mpsgraph",
+                        implementation: "HELUT YosysGraphCompiler multilinear",
+                        implementationVersion: "distinct-verified-v1",
+                        deviceName: device.name,
+                        vendor: "Apple",
+                        deviceIdentifier: String(format: "0x%016llx", device.registryID),
+                        operatingSystem: ProcessInfo.processInfo.operatingSystemVersionString,
+                        architecture: benchArchitecture,
+                        unifiedMemory: device.hasUnifiedMemory,
+                        lowPower: device.isLowPower,
+                        removable: device.isRemovable
+                    )
+                    let samples = receipt.graphTimes.map {
+                        UInt64(max(0, ($0 * 1_000_000_000).rounded()))
+                    }
+                    let result = try DistinctLaneExchange.makeResult(
+                        workload: workload,
+                        outputRows: receipt.outputRows,
+                        timingSamplesNanoseconds: samples,
+                        environment: environment
+                    )
+                    try DistinctLaneExchange.write(
+                        result,
+                        to: URL(fileURLWithPath: resultOutputPath)
+                    )
+                    let replay = try DistinctLaneExchange.replay(
+                        workload: workload,
+                        result: result
+                    )
+                    guard replay.mismatches == 0 else {
+                        throw DistinctLaneExchangeError.invalid(
+                            "locally exported result failed replay with \(replay.mismatches) mismatches"
+                        )
+                    }
+                    print(
+                        "BATCH_LANE_RESULT workload_id=\(workload.workloadID) "
+                            + "backend=metal-mpsgraph device=\(device.name) "
+                            + "digest=\(result.outputDigest) replay=PASS path=\(resultOutputPath)"
+                    )
+                }
+                print(
+                    "BATCH_LANES mode=distinct-verified-v1 lanes=\(receipt.lanes) "
+                        + "input_bits=\(receipt.inputBits) "
+                        + "distinct_inputs=\(receipt.distinctInputAssignments) "
+                        + "checked=\(receipt.comparedBits) mismatches=\(receipt.mismatches) "
+                        + "distinct_lane_outputs=\(receipt.distinctLaneOutputs) "
+                        + "digest_schema=fnv1a64-lane-port-bit-v1 digest=\(digest)"
+                )
+                print(
+                    String(
+                        format: "BATCH_LANES timing graph_first_s=%.9f graph_steady_median_s=%.9f graph_steady_avg_s=%.9f verify_s=%.9f trials=%d warmup=%d timing_valid=%@",
+                        receipt.graphFirstSeconds,
+                        receipt.graphSteadyMedianSeconds,
+                        receipt.graphSteadyAverageSeconds,
+                        receipt.verificationSeconds,
+                        receipt.graphTimes.count,
+                        warmup,
+                        receipt.mismatches == 0 ? "true" : "false"
+                    )
+                )
+                if receipt.mismatches == 0 {
+                    print("BATCH_LANES result=PASS")
+                } else {
+                    fputs("BATCH_LANES result=FAIL; graph timings are void\n", stderr)
+                    exit(1)
+                }
+                print("")
+            } catch {
+                fputs("--bench-distinct-lanes failed: \(error)\n", stderr)
+                exit(1)
+            }
+        } else if equiv {
+            runCombinationalEquivGate(
+                compiler: compiler,
+                moduleName: moduleName,
+                module: module,
+                device: device,
+                commandQueue: commandQueue
+            )
+        }
+    } else if distinctLanes {
+        fputs("--bench-distinct-lanes currently supports combinational netlists only\n", stderr)
+        exit(1)
+    } else if ticks > 0 {
+        let tickTimes = runScriptedClock(
+            compiler: compiler,
+            module: module,
+            device: device,
+            commandQueue: commandQueue,
+            ticks: ticks,
+            warmup: warmup,
+            resetHold: resetHold
+        )
+
+        let steady = Array(tickTimes.dropFirst(max(0, warmup)))
+        let steadySum = steady.reduce(0, +)
+        let steadyAvg = steady.isEmpty ? 0 : steadySum / Double(steady.count)
+        let allSum = tickTimes.reduce(0, +)
+
+        print("CLOCK")
+        print(String(format: "  ticks total      %.4f s (%d ticks)", allSum, tickTimes.count))
+        if let first = tickTimes.first {
+            print(String(format: "  tick 1 (JIT)     %.4f s", first))
+        }
+        print(String(format: "  steady avg       %.4f s/tick (n=%d, skip warmup=%d)", steadyAvg, steady.count, warmup))
+        if steadyAvg > 0 {
+            print(String(format: "  steady Hz        %.2f", 1.0 / steadyAvg))
+        }
+        print("")
+    }
+
+    if equiv {
+        if compiler.dffNodes.isEmpty {
+            // Already handled above when combinational.
+        } else {
+            runEnigmaEquivGate(
+                path: path,
+                degree: degree,
+                encodingKind: encodingKind,
+                lutBackend: lutBackend,
+                device: device,
+                commandQueue: commandQueue
+            )
+        }
+    }
+
+    let rssFinal = taskResidentMemoryBytes()
+    print(
+        String(
+            format: "RSS final %.1f MiB (delta from start %+.1f MiB)",
+            Double(rssFinal) / (1024 * 1024),
+            Double(Int64(rssFinal) &- Int64(rssBefore)) / (1024 * 1024)
+        )
+    )
+}
+
+package struct DistinctBatchReceipt {
+    package let lanes: Int
+    package let inputBits: Int
+    package let distinctInputAssignments: Int
+    package let mismatches: Int
+    package let comparedBits: Int
+    package let distinctLaneOutputs: Int
+    package let digest: UInt64
+    package let graphTimes: [Double]
+    package let graphFirstSeconds: Double
+    package let graphSteadyMedianSeconds: Double
+    package let graphSteadyAverageSeconds: Double
+    package let verificationSeconds: Double
+    /// Final decoded output rows in frozen sorted-port/ascending-bit order.
+    package let outputRows: [DistinctLaneBitsV1]
+}
+
+package enum DistinctBatchVerificationError: Error, CustomStringConvertible {
+    case sequentialNetlist
+    case invalidInputWidth(Int)
+    case tooManyLanes(requested: Int, available: UInt64)
+    case invalidTiming(trials: Int, warmup: Int)
+    case noOutputs
+    case allocation(String)
+    case missingPlaceholder(String)
+    case missingOracleOutput(port: String, bit: Int)
+
+    package var description: String {
+        switch self {
+        case .sequentialNetlist:
+            return "sequential netlists require a tick/lane/state digest contract"
+        case .invalidInputWidth(let width):
+            return "input width \(width) is outside the supported 1...62 range"
+        case .tooManyLanes(let requested, let available):
+            return "requested \(requested) lanes but only \(available) distinct assignments exist"
+        case .invalidTiming(let trials, let warmup):
+            return "trials=\(trials), warmup=\(warmup); require trials > warmup >= 0"
+        case .noOutputs:
+            return "netlist has no compiled outputs to verify"
+        case .allocation(let what):
+            return "Metal allocation failed for \(what)"
+        case .missingPlaceholder(let port):
+            return "compiled input \(port) has no placeholder"
+        case .missingOracleOutput(let port, let bit):
+            return "clear oracle omitted \(port)[\(bit)]"
+        }
+    }
+}
+
+/// Production verifier used by the opt-in shipped benchmark and by its tests.
+/// Packing, clear-oracle work, readback, and hashing are outside graph timings.
+package func runDistinctCombinationalBatch(
+    compiler: YosysGraphCompiler,
+    moduleName: String,
+    module: YosysModule,
+    device: MTLDevice,
+    commandQueue: MTLCommandQueue,
+    trials: Int,
+    warmup: Int,
+    corruptFirstOutputInLane: Int? = nil
+) throws -> DistinctBatchReceipt {
+    guard compiler.dffNodes.isEmpty else {
+        throw DistinctBatchVerificationError.sequentialNetlist
+    }
+    guard trials > warmup, warmup >= 0 else {
+        throw DistinctBatchVerificationError.invalidTiming(trials: trials, warmup: warmup)
+    }
+
+    let ports = module.ports.sorted(by: { $0.key < $1.key }).compactMap { name, port in
+        port.direction == "input" ? (name: name, width: port.bits.count) : nil
+    }
+    let inputBits = ports.reduce(0) { $0 + $1.width }
+    guard (1...62).contains(inputBits) else {
+        throw DistinctBatchVerificationError.invalidInputWidth(inputBits)
+    }
+    let assignmentSpace = UInt64(1) << UInt64(inputBits)
+    let lanes = compiler.batch
+    guard UInt64(lanes) <= assignmentSpace else {
+        throw DistinctBatchVerificationError.tooManyLanes(
+            requested: lanes, available: assignmentSpace
+        )
+    }
+    guard !compiler.outputTensors.isEmpty else {
+        throw DistinctBatchVerificationError.noOutputs
+    }
+
+    let stride = max(UInt64(1), assignmentSpace / UInt64(lanes))
+    let assignments = (0..<lanes).map { UInt64($0) * stride }
+    let distinctAssignments = Set(assignments).count
+
+    func bits(for mask: UInt64) -> [String: [UInt32]] {
+        var result: [String: [UInt32]] = [:]
+        var cursor = 0
+        for (name, width) in ports {
+            result[name] = (0..<width).map { _ in
+                defer { cursor += 1 }
+                return UInt32((mask >> UInt64(cursor)) & 1)
+            }
+        }
+        return result
+    }
+
+    let laneInputs = assignments.map(bits(for:))
+    let clear = CleartextNetlistSimulator(moduleName: moduleName, module: module)
+    let expected: [[String: [UInt8]]] = laneInputs.map { values in
+        clear.tick(inputs: values.mapValues { $0.map(UInt8.init) })
+    }
+
+    let degree = compiler.degree
+    let elementCount = lanes * degree
+    let shape: [NSNumber] = [NSNumber(value: lanes), NSNumber(value: degree)]
+    let encoding = compiler.bitEncoding
+    var feeds: [MPSGraphTensor: MPSGraphTensorData] = [:]
+    for entry in compiler.inputNodes {
+        guard let placeholder = entry.node.placeholder else {
+            throw DistinctBatchVerificationError.missingPlaceholder(entry.port)
+        }
+        var host = [UInt32](repeating: 0, count: elementCount)
+        for lane in 0..<lanes {
+            let bit = (laneInputs[lane][entry.port] ?? [0])[entry.bitIndex]
+            let encoded = encoding.encodeBit(bit)
+            host.replaceSubrange((lane * degree)..<((lane + 1) * degree), with: encoded)
+        }
+        guard let buffer = device.makeBuffer(
+            bytes: host,
+            length: elementCount * MemoryLayout<UInt32>.stride,
+            options: .storageModeShared
+        ) else {
+            throw DistinctBatchVerificationError.allocation("input \(entry.port)[\(entry.bitIndex)]")
+        }
+        feeds[placeholder] = MPSGraphTensorData(buffer, shape: shape, dataType: .uInt32)
+    }
+
+    let sortedOutputs = compiler.outputTensors.sorted {
+        ($0.port, $0.bitIndex) < ($1.port, $1.bitIndex)
+    }
+    var results: [MPSGraphTensor: MPSGraphTensorData] = [:]
+    var outputs: [(port: String, bit: Int, buffer: MTLBuffer)] = []
+    for entry in sortedOutputs {
+        guard let buffer = device.makeBuffer(
+            length: elementCount * MemoryLayout<UInt32>.stride,
+            options: .storageModeShared
+        ) else {
+            throw DistinctBatchVerificationError.allocation(
+                "output \(entry.port)[\(entry.bitIndex)]"
+            )
+        }
+        results[entry.tensor] = MPSGraphTensorData(buffer, shape: shape, dataType: .uInt32)
+        outputs.append((entry.port, entry.bitIndex, buffer))
+    }
+
+    var graphTimes: [Double] = []
+    graphTimes.reserveCapacity(trials)
+    for _ in 0..<trials {
+        let started = CFAbsoluteTimeGetCurrent()
+        compiler.graph.run(
+            with: commandQueue,
+            feeds: feeds,
+            targetOperations: nil,
+            resultsDictionary: results
+        )
+        graphTimes.append(CFAbsoluteTimeGetCurrent() - started)
+    }
+
+    let verifyStarted = CFAbsoluteTimeGetCurrent()
+    var mismatches = 0
+    var comparedBits = 0
+    var records: [DistinctBatchRecord] = []
+    var outputRows: [DistinctLaneBitsV1] = []
+    var signatures = Set<String>()
+    var corruptionInjected = false
+    for lane in 0..<lanes {
+        var signature = ""
+        var rowBits = ""
+        for output in outputs {
+            let ptr = output.buffer.contents().bindMemory(
+                to: UInt32.self, capacity: elementCount
+            )
+            let laneSlice = Array(
+                UnsafeBufferPointer(
+                    start: ptr.advanced(by: lane * degree), count: degree
+                )
+            )
+            var got = encoding.decodeBit(laneSlice)
+            if !corruptionInjected, corruptFirstOutputInLane == lane {
+                got ^= 1
+                corruptionInjected = true
+            }
+            guard let values = expected[lane][output.port], output.bit < values.count else {
+                throw DistinctBatchVerificationError.missingOracleOutput(
+                    port: output.port, bit: output.bit
+                )
+            }
+            let want = UInt32(values[output.bit])
+            if got != want { mismatches += 1 }
+            comparedBits += 1
+            records.append(
+                DistinctBatchRecord(
+                    lane: lane, port: output.port, bit: output.bit, value: got
+                )
+            )
+            signature += "\(output.port)[\(output.bit)]=\(got);"
+            rowBits.append(got == 0 ? "0" : "1")
+        }
+        signatures.insert(signature)
+        outputRows.append(DistinctLaneBitsV1(lane: lane, bits: rowBits))
+    }
+    let verificationSeconds = CFAbsoluteTimeGetCurrent() - verifyStarted
+
+    let steady = Array(graphTimes.dropFirst(warmup))
+    let orderedSteady = steady.sorted()
+    let median: Double
+    if orderedSteady.count.isMultiple(of: 2) {
+        let upper = orderedSteady[orderedSteady.count / 2]
+        let lower = orderedSteady[(orderedSteady.count / 2) - 1]
+        median = (lower + upper) / 2
+    } else {
+        median = orderedSteady[orderedSteady.count / 2]
+    }
+    let average = steady.reduce(0, +) / Double(steady.count)
+    return DistinctBatchReceipt(
+        lanes: lanes,
+        inputBits: inputBits,
+        distinctInputAssignments: distinctAssignments,
+        mismatches: mismatches,
+        comparedBits: comparedBits,
+        distinctLaneOutputs: signatures.count,
+        digest: distinctBatchChecksum(records),
+        graphTimes: graphTimes,
+        graphFirstSeconds: graphTimes[0],
+        graphSteadyMedianSeconds: median,
+        graphSteadyAverageSeconds: average,
+        verificationSeconds: verificationSeconds,
+        outputRows: outputRows
+    )
+}
+
+/// Encrypted packed/GLWE netlist: GGSW PBS / blind-rotate per `$lut`.
+private func runEncryptedNetlistBench() {
+    setbuf(stdout, nil)
+    let path = resolveBenchNetlistPath()
+    let degree = intFlag("--degree") ?? 8
+    let sing = CommandLine.arguments.contains("--sing")
+        || CommandLine.arguments.contains("--bench-encrypted-metrics")
+    let cpuOnly = CommandLine.arguments.contains("--cpu-only")
+        || CommandLine.arguments.contains("--skip-metal")
+    let metalNetlistOnly = CommandLine.arguments.contains("--metal-netlist-only")
+    let maxVectors = intFlag("--vectors") ?? 256
+    let encryptedTicks = intFlag("--ticks")
+    let resetHold = intFlag("--reset-hold", allowZero: true)
+    let encryptedMem = stringFlag("--encrypted-mem")
+    let booleanScaleMul = intFlag("--boolean-scale-mul") ?? 1
+    guard (1...128).contains(booleanScaleMul) else {
+        fputs("--boolean-scale-mul must be an integer in 1...128\n", stderr)
+        exit(2)
+    }
+    let lweDimension = intFlag("--lwe-dimension")
+    let traceEncryptedDivergence = CommandLine.arguments.contains(
+        "--trace-encrypted-divergence"
+    )
+    let unsafeNoisyBKDiagnostic = CommandLine.arguments.contains(
+        "--unsafe-noisy-bk-diagnostic"
+    )
+    let noisyBKIdentityTrials = intFlag("--bk-identity-trials")
+    let noisyBKIdentityParallelismFlag = intFlag("--bk-identity-parallelism")
+    if CommandLine.arguments.contains("--bk-identity-parallelism"),
+       noisyBKIdentityParallelismFlag == nil {
+        fputs("--bk-identity-parallelism must be a positive integer\n", stderr)
+        exit(2)
+    }
+    let noisyBKIdentityParallelism = noisyBKIdentityParallelismFlag ?? 1
+    let pathFilter = stringFlag("--paths") // comma list substring match; nil = all
+    let bkNoise: TFHENoiseParams = {
+        if let sigma = doubleFlag("--bk-noise-sigma"), sigma > 0 {
+            return .gaussian(sigma: sigma)
+        }
+        let bound = intFlag("--bk-noise", allowZero: true) ?? 0
+        return TFHENoiseParams(bound: UInt32(bound))
+    }()
+    let netlist = loadYosysNetlist(from: path)
+    guard let (moduleName, module) = netlist.modules.first else {
+        fatalError("Empty netlist")
+    }
+    let clear = CleartextNetlistSimulator(moduleName: moduleName, module: module)
+    let sequential = !clear.dffs.isEmpty
+    if sequential && metalNetlistOnly {
+        fatalError("--metal-netlist-only is combinational-only; sequential netlists use per-LUT BR")
+    }
+
+    let bootTicks = sequential ? encryptedTicks : nil
+    let memKind = encryptedMem
+    let hostMemActive = memKind == "nop" || memKind == "prog"
+    if hostMemActive {
+        precondition(sequential && clear.inputPorts["resetn"] != nil, "--encrypted-mem needs sequential resetn")
+        precondition(clear.inputPorts["mem_ready"] != nil && clear.inputPorts["mem_rdata"] != nil, "--encrypted-mem needs mem_ready/mem_rdata")
+        precondition(clear.outputPorts["mem_valid"] != nil && clear.outputPorts["mem_addr"] != nil, "--encrypted-mem needs mem_valid/mem_addr")
+        if memKind == "prog" {
+            precondition(clear.outputPorts["mem_wstrb"] != nil && clear.outputPorts["mem_wdata"] != nil, "--encrypted-mem prog needs mem_wstrb/mem_wdata")
+        }
+    }
+    if let memKind, memKind != "nop", memKind != "prog" {
+        fatalError("--encrypted-mem must be nop or prog")
+    }
+    let stimuli: [[String: [UInt8]]]
+    if hostMemActive {
+        // Reactive ROM fills rows inside runAll; placeholder length = tick count.
+        let ticks = bootTicks ?? (memKind == "prog" ? 48 : 24)
+        stimuli = Array(repeating: [:], count: ticks)
+    } else if let bootTicks, bootTicks > 0, clear.inputPorts["resetn"] != nil {
+        let hold = resetHold ?? 3
+        stimuli = makeEncryptedResetHoldStimuli(clear: clear, ticks: bootTicks, resetHold: hold)
+    } else {
+        stimuli = makeEncryptedStimuli(clear: clear, maxVectors: maxVectors, seed: 0x51A1)
+    }
+    precondition(!stimuli.isEmpty, "no encrypted stimuli")
+
+    let twoN = 2 * degree
+    let muxCost = MetalGGSW.DynamicRotateCost.muxRotates(twoN: twoN, lweDimension: degree)
+    let binCost: Int
+    if twoN > 1 && twoN.nonzeroBitCount == 1 {
+        binCost = MetalGGSW.DynamicRotateCost.binaryRotates(twoN: twoN, lweDimension: degree)
+    } else {
+        binCost = -1
+    }
+
+    print("HELUT encrypted-netlist bench\(sing ? " · SING" : "")")
+    print("  netlist: \(path)  module=\(moduleName)")
+    print("  poly N=\(degree)  LUTs=\(clear.luts.count)  DFFs=\(clear.dffs.count)\(sequential ? "  sequential" : "")  2N=\(twoN)")
+    print("  stimuli=\(stimuli.count) (max --vectors \(maxVectors))  cpu-only=\(cpuOnly)  metal-netlist-only=\(metalNetlistOnly)")
+    if memKind == "nop" {
+        print("  encrypted mem: nop ROM (addi x0,x0,0 = 0x00000013)  ticks=\(stimuli.count)  reset-hold=\(resetHold ?? 3)")
+    } else if memKind == "prog" {
+        print("  encrypted mem: tiny ROM addi; sw; lw x2,0(x0)  ticks=\(stimuli.count)  reset-hold=\(resetHold ?? 3)")
+    } else if encryptedTicks != nil, sequential, clear.inputPorts["resetn"] != nil {
+        print("  scripted boot: ticks=\(stimuli.count)  reset-hold=\(resetHold ?? 3) (resetn=0 then 1; other inputs 0 including clk)")
+    }
+    if let pathFilter {
+        print("  paths filter: \(pathFilter)")
+    }
+    print("  paths: public-ms@boolean + public-ms@crypto + secret@crypto\(cpuOnly || metalNetlistOnly ? "" : " (+ Metal)")")
+    if bkNoise.usesGaussian {
+        print("  BK noise inject Gaussian σ=\(bkNoise.gaussianSigma) (torus; identity residual is empirical, not B_bk)")
+    } else if bkNoise.bound > 0 {
+        print("  BK noise inject B=\(bkNoise.bound) (identity residual is empirical, not B_bk)")
+    }
+    if let noisyBKIdentityTrials {
+        print("  BK identity confidence trials=\(noisyBKIdentityTrials)")
+    }
+    if noisyBKIdentityParallelism > 1 {
+        print("  BK identity PBS parallelism=\(noisyBKIdentityParallelism) (RNG preparation and reduction remain serial)")
+    }
+    if unsafeNoisyBKDiagnostic {
+        print("  noisy-BK policy: UNSAFE DIAGNOSTIC ONLY (functional output cannot certify ε)")
+    }
+    if traceEncryptedDivergence {
+        print("  divergence trace: enabled (first LUT + all wrong DFFs)")
+    }
+    if booleanScaleMul > 1 {
+        print("  boolean scale kδ  k=\(booleanScaleMul)  (test-poly stride \(booleanScaleMul); public-MS native δ)")
+    }
+    if let lweDimension {
+        print("  LWE n=\(lweDimension)  (CMUX count; extract→KS when n<kN=\(degree))")
+    }
+    if binCost >= 0 {
+        print("  DynamicRotateCost mux=\(muxCost) binary=\(binCost) speedup≈\(String(format: "%.1f", Double(muxCost) / Double(max(binCost, 1))))×")
+    }
+    print("")
+
+    let tileWidthFlag = intFlag("--metal-br-tile")
+    let tileWidth = tileWidthFlag ?? MetalBRControl.defaultTileWidth
+    MetalBRControl.defaultTileWidth = tileWidth
+    if CommandLine.arguments.contains("--metal-br-fused") {
+        MetalBRControl.overrideLowering = .fused
+    } else if tileWidthFlag != nil {
+        MetalBRControl.overrideLowering = .tiledKernel
+    } else {
+        MetalBRControl.overrideLowering = nil
+    }
+    if ProcessInfo.processInfo.environment["HELUT_QUIET_METAL_BR_PROGRESS"] == "1" {
+        MetalBRControl.progress = nil
+        print("  Metal BR tile progress: quiet")
+    } else {
+        MetalBRControl.progress = { line in
+            print(line)
+            fflush(stdout)
+        }
+    }
+
+    struct EncryptedMetric {
+        var label: String
+        var rows: Int
+        var seconds: Double
+        var msPerRow: Double
+        var classicalBits: Double
+        var failureLog2: Double
+        /// Empirical max for noisy BK; deterministic bound for e=0.
+        var noisyBKBound: UInt32
+        var noisyBKCertified: Bool
+        var meets128: Bool
+    }
+    var metrics: [EncryptedMetric] = []
+
+    func wantPath(_ label: String) -> Bool {
+        if sequential && (label.contains("cpu-ggsw") || label.contains("metal-netlist")) {
+            return false
+        }
+        if metalNetlistOnly {
+            return label.contains("metal-netlist")
+        }
+        guard let pathFilter else {
+            // Fused whole-netlist graph hangs at N≳256 unless tiled-kernel lowering
+            // (evaluateTopoNetlistTiledKernel). Still opt-in via --metal-netlist-only.
+            return !label.contains("metal-netlist")
+        }
+        return pathFilter.split(separator: ",").contains { raw in
+            let token = raw.trimmingCharacters(in: .whitespaces)
+            if token.isEmpty { return false }
+            if token == "blind-rotate-metal" || label.contains("metal-netlist") {
+                // Do not let "blind-rotate-metal" substring-match the netlist path.
+                if token == "blind-rotate-metal" {
+                    return label.contains("blind-rotate-metal") && !label.contains("netlist")
+                }
+            }
+            return label.contains(token)
+        }
+    }
+
+    func runAll(
+        label: String,
+        params raw: GGSWParams,
+        backend: EncryptedLUTBackend,
+        wireRefresh: EncryptedWireRefresh,
+        seed: UInt32,
+        device: MTLDevice?,
+        queue: MTLCommandQueue?
+    ) throws {
+        guard wantPath(label) else { return }
+        let gadget: GGSWParams = {
+            guard CommandLine.arguments.contains("--balanced-gadget"),
+                  raw.baseLog * raw.levelCount == 32
+            else { return raw }
+            return raw.withBalancedDigits()
+        }()
+        let params = lweDimension.map { gadget.withLWEDimension($0) } ?? gadget
+        print("  starting \(label)\(lweDimension.map { "  n=\($0)" } ?? "")"
+            + (params.balancedDigits ? "  digits=balanced" : ""))
+        fflush(stdout)
+        clear.resetState()
+        let secret = TFHESecretKey.random(params: params.tfhe, seed: seed)
+        let enc = EncryptedNetlistSimulator(
+            moduleName: moduleName,
+            module: module,
+            secret: secret,
+            params: params,
+            backend: backend,
+            wireRefresh: wireRefresh,
+            bkNoise: bkNoise,
+            seed: seed &+ 0x100,
+            device: device,
+            commandQueue: queue,
+            booleanScaleMul: booleanScaleMul,
+            diagnosticsMode: traceEncryptedDivergence ? .firstDivergence : .off,
+            noisyBKExecutionPolicy: unsafeNoisyBKDiagnostic
+                ? .diagnosticOnly
+                : .requireCircuitConfidence,
+            noisyBKIdentityTrials: noisyBKIdentityTrials,
+            noisyBKIdentityParallelism: noisyBKIdentityParallelism,
+            noisyBKEventCount: max(clear.luts.count * stimuli.count, 1)
+        )
+        var rows = 0
+        var lastOutputs: [String: [UInt8]]?
+        var hostMem = PicoRVHostMem()
+        let hold = resetHold ?? 3
+        let started = CFAbsoluteTimeGetCurrent()
+        for tickIndex in 0..<stimuli.count {
+            let inputs: [String: [UInt8]]
+            if let memKind, hostMemActive {
+                let xfersBefore = hostMem.loadXfers.count
+                inputs = makePicoRVHostMemInputs(
+                    clear: clear,
+                    tick: tickIndex + 1,
+                    resetHold: hold,
+                    lastOutputs: lastOutputs,
+                    kind: memKind,
+                    host: &hostMem
+                )
+                // The load word is driven the tick *after* the request is observed.
+                // Print it so the trace shows the served RAM value, not just the
+                // pre-transfer bus contents.
+                if hostMem.loadXfers.count > xfersBefore, let xfer = hostMem.loadXfers.last {
+                    print(String(
+                        format: "  LOAD  xfer tick %2d  addr=0x%08x  served=0x%08x  (host RAM -> mem_rdata)",
+                        xfer.tick, xfer.addr, xfer.rdata
+                    ))
+                }
+            } else {
+                inputs = stimuli[tickIndex]
+            }
+            let want = clear.tick(inputs: inputs)
+            let got = try enc.tick(inputs: inputs)
+            if let targetOnly = ProcessInfo.processInfo
+                .environment["HELUT_DIAGNOSTIC_TARGET_LUT_ONLY"] {
+                print(
+                    "  target-only diagnostic complete: \(targetOnly) "
+                        + "(no netlist PASS asserted)"
+                )
+                fflush(stdout)
+                return
+            }
+            if traceEncryptedDivergence,
+               let diagnostics = enc.lastTickDiagnostics,
+               diagnostics.hasFailure {
+                print(diagnostics.report(pathLabel: label, tick: rows + 1))
+                fflush(stdout)
+            }
+            func assertOutputMatches(_ port: String, bits: [UInt8]) {
+                guard let gotBits = got[port], gotBits == bits else {
+                    fatalError(
+                        "\(port) mismatch \(label) tick \(rows + 1): want=\(bits) got=\(got[port] ?? [])"
+                    )
+                }
+            }
+
+            // PicoRV look-ahead payloads are meaningful only while their
+            // validity controls are asserted. Compare the controls first, then
+            // gate only the protocol-defined payloads; all other outputs remain
+            // unconditional correctness checks.
+            let picoRVLookAheadPorts = [
+                "mem_la_read", "mem_la_write", "mem_la_addr",
+                "mem_la_wdata", "mem_la_wstrb",
+            ]
+            let hasPicoRVLookAhead = picoRVLookAheadPorts.allSatisfy {
+                want[$0] != nil
+            }
+            if hasPicoRVLookAhead {
+                for control in ["mem_la_read", "mem_la_write"] {
+                    if let bits = want[control] {
+                        assertOutputMatches(control, bits: bits)
+                    }
+                }
+                let readActive = ((want["mem_la_read"] ?? [0]).first ?? 0) == 1
+                let writeActive = ((want["mem_la_write"] ?? [0]).first ?? 0) == 1
+                for (port, bits) in want {
+                    switch port {
+                    case "mem_la_read", "mem_la_write":
+                        continue // Compared above before trusting validity.
+                    case "mem_la_addr" where !readActive && !writeActive:
+                        continue
+                    case "mem_la_wdata" where !writeActive:
+                        continue
+                    case "mem_la_wstrb" where !writeActive:
+                        continue
+                    default:
+                        assertOutputMatches(port, bits: bits)
+                    }
+                }
+            } else {
+                for (port, bits) in want {
+                    assertOutputMatches(port, bits: bits)
+                }
+            }
+            if sequential {
+                let encQ = enc.decryptedRegisterBits()
+                let wrongDFFs = clear.dffs.compactMap { dff -> String? in
+                    let wantQ = clear.state[dff.qWire] ?? 0
+                    let gotQ = encQ[dff.qWire] ?? 255
+                    guard wantQ != gotQ else { return nil }
+                    return "\(dff.name) \(dff.type) want=\(wantQ) got=\(gotQ)"
+                }
+                if !wrongDFFs.isEmpty {
+                    fatalError(
+                        "DFF mismatches \(label) tick \(rows + 1) (\(wrongDFFs.count)): "
+                            + wrongDFFs.joined(separator: "; ")
+                    )
+                }
+            }
+            if hostMemActive {
+                let valid = (want["mem_valid"] ?? [0]).first ?? 0
+                let ready = (inputs["mem_ready"] ?? [0]).first ?? 0
+                let addr = unpackHostLE(want["mem_addr"] ?? [])
+                let instr = (want["mem_instr"] ?? [0]).first ?? 0
+                let wstrb = unpackHostLE(want["mem_wstrb"] ?? [])
+                let wdata = unpackHostLE(want["mem_wdata"] ?? [])
+                if valid == 1 && ready == 1 {
+                    if instr == 1 {
+                        hostMem.noteFetch(tick: rows + 1, addr: addr)
+                        print(String(format: "  FETCH tick %2d  addr=0x%08x  instr=1", rows + 1, addr))
+                    } else if wstrb == 0 {
+                        let rdata = unpackHostLE(inputs["mem_rdata"] ?? [])
+                        hostMem.noteLoad(tick: rows + 1, addr: addr, rdata: rdata)
+                        print(String(format: "  LOAD  req  tick %2d  addr=0x%08x  bus=0x%08x  (pre-transfer)", rows + 1, addr, rdata))
+                    }
+                    if wstrb != 0 {
+                        hostMem.noteStore(tick: rows + 1, addr: addr, wstrb: UInt8(wstrb & 0xf), wdata: wdata)
+                        print(String(format: "  STORE tick %2d  addr=0x%08x  wstrb=0x%x  wdata=0x%08x", rows + 1, addr, wstrb, wdata))
+                    }
+                } else if rows < 12 || valid == 1 {
+                    print(String(format: "  mem tick %2d  valid=%d ready=%d addr=0x%08x instr=%d wstrb=0x%x", rows + 1, valid, ready, addr, instr, wstrb))
+                }
+                hostMem.afterTick(valid: valid, ready: ready, instr: instr, addr: addr)
+            }
+            lastOutputs = want
+            rows += 1
+        }
+        if hostMemActive {
+            let addrs = hostMem.fetches.map { $0.addr }
+            let unique = Set(addrs)
+            let addrList = addrs.map { String(format: "0x%x", $0) }.joined(separator: ",")
+            print("  FETCH summary  served=\(hostMem.fetches.count)  unique_addr=\(unique.count)  addrs=\(addrList)")
+            if hostMem.fetches.count < 2 || unique.count < 2 {
+                fatalError("fetch did not advance PC (served=\(hostMem.fetches.count) unique=\(unique.count)) \(label)")
+            }
+            if memKind == "prog" {
+                let wdata1 = hostMem.stores.contains { $0.wstrb != 0 && ($0.wdata & 0xff) == 1 }
+                print("  STORE summary  count=\(hostMem.stores.count)  wdata1=\(wdata1)  ram0=\(hostMem.ram[0] ?? 0)")
+                if !wdata1 {
+                    fatalError("tiny program did not store 1 (stores=\(hostMem.stores.count)) \(label)")
+                }
+                let load1 = hostMem.loadXfers.contains { $0.rdata == 1 }
+                let servedList = hostMem.loadXfers
+                    .map { String(format: "0x%x", $0.rdata) }
+                    .joined(separator: ",")
+                print("  LOAD  summary  requests=\(hostMem.loads.count)  xfers=\(hostMem.loadXfers.count)  served=\(servedList)  rdata1=\(load1)")
+                if !load1 {
+                    fatalError("tiny program did not load 1 (xfers=\(hostMem.loadXfers)) \(label)")
+                }
+            }
+        }
+        let seconds = CFAbsoluteTimeGetCurrent() - started
+        let hard = enc.hardnessCertificate ?? enc.issueHardnessCertificate()
+        let asym = enc.asymptoticCertificate ?? enc.issueAsymptoticCertificate()
+        let usesBlindRotate: Bool
+        switch backend {
+        case .blindRotate, .blindRotateMetal, .blindRotateMetalNetlist:
+            usesBlindRotate = true
+        case .cpuGGSW, .metalGGSW:
+            usesBlindRotate = false
+        }
+        let usesNoisyBK = usesBlindRotate && (bkNoise.bound > 0 || bkNoise.usesGaussian)
+        let deterministicBK = usesNoisyBK
+            ? nil
+            : (enc.noisyBKCertificate ?? enc.issueNoisyBKCertificate())
+        let gaussianBK = usesNoisyBK ? enc.noisyBKGaussianCertificate : nil
+        let noisyBKCertified = usesNoisyBK
+            ? (gaussianBK?.isConfidenceBound == true && gaussianBK?.isSecure == true)
+            : (deterministicBK?.eachLUTDecodable == true)
+        let displayedBKValue = enc.noisyBKMeasurement?.maxAbsError
+            ?? deterministicBK?.params.outputNoiseBound
+            ?? 0
+        let msPer = seconds * 1000.0 / Double(max(rows, 1))
+        metrics.append(
+            EncryptedMetric(
+                label: label,
+                rows: rows,
+                seconds: seconds,
+                msPerRow: msPer,
+                classicalBits: hard.estimatedClassicalBits,
+                failureLog2: asym.failureLog2,
+                noisyBKBound: displayedBKValue,
+                noisyBKCertified: noisyBKCertified,
+                meets128: hard.meetsTarget
+            )
+        )
+        let epsLabel: String
+        if asym.failureLog2.isInfinite && asym.failureLog2 < 0 {
+            epsLabel = "-inf"
+        } else {
+            epsLabel = String(format: "%.1f", asym.failureLog2)
+        }
+        print("ENCRYPTED EQUIV (\(label))")
+        print("  rows            \(rows)")
+        print(String(format: "  wall            %.4f s  (%.2f ms/row)", seconds, msPer))
+        print(String(format: "  classical bits  %.1f  (≥128? %@)", hard.estimatedClassicalBits, hard.meetsTarget ? "yes" : "no"))
+        print("  ingest ε log2   \(epsLabel)  (target \(asym.params.targetFailureLog2))")
+        if let measured = enc.noisyBKMeasurement, let gaussianBK {
+            let confidenceEpsilon = gaussianBK.failureLog2.isInfinite
+                && gaussianBK.failureLog2 < 0
+                ? "-inf"
+                : String(format: "%.1f", gaussianBK.failureLog2)
+            print("  noisy BK observed max|e| \(measured.maxAbsError)  (sample-decodable \(measured.eachLUTDecodable); not a hard bound)")
+            print(String(format: "  noisy BK 95%% σ  %.1f  events=%d  εlog2=%@  target=%d  clears=%@", gaussianBK.sigmaBK, gaussianBK.lutCount, confidenceEpsilon, gaussianBK.targetFailureLog2, gaussianBK.isSecure ? "yes" : "no"))
+        } else if let deterministicBK {
+            print("  noisy BK bound  \(deterministicBK.params.outputNoiseBound)  (\(deterministicBK.provenance.rawValue); decodable \(deterministicBK.eachLUTDecodable))")
+        } else {
+            print("  noisy BK        not used by this backend")
+        }
+        if noisyBKCertified {
+            print("  result          PASS")
+        } else {
+            print("  functional result PASS")
+            print("  result          DIAGNOSTIC ONLY — NO NOISY-BK CONFIDENCE CERTIFICATE")
+        }
+        print("")
+    }
+
+    do {
+        try runAll(
+            label: "blind-rotate public-ms boolean",
+            params: .booleanPublicMS(degree: degree),
+            backend: .blindRotate,
+            wireRefresh: .publicMS,
+            seed: 0xE11C,
+            device: nil,
+            queue: nil
+        )
+        try runAll(
+            label: "blind-rotate public-ms crypto",
+            params: .cryptoPublicMS(degree: degree),
+            backend: .blindRotate,
+            wireRefresh: .publicMS,
+            seed: 0xE120,
+            device: nil,
+            queue: nil
+        )
+        try runAll(
+            label: "blind-rotate secret crypto",
+            params: .crypto(degree: degree),
+            backend: .blindRotate,
+            wireRefresh: .secret,
+            seed: 0xE11D,
+            device: nil,
+            queue: nil
+        )
+        try runAll(
+            label: "cpu-ggsw secret crypto",
+            params: .crypto(degree: degree),
+            backend: .cpuGGSW,
+            wireRefresh: .secret,
+            seed: 0xE11E,
+            device: nil,
+            queue: nil
+        )
+        if cpuOnly {
+            // Covering gadgets were Metal-only; CPU path is the E2 1k-barrier lever.
+            try runAll(
+                label: "blind-rotate secret covering-b4",
+                params: .covering(degree: degree, baseLog: 4),
+                backend: .blindRotate,
+                wireRefresh: .secret,
+                seed: 0xE142,
+                device: nil,
+                queue: nil
+            )
+            try runAll(
+                label: "blind-rotate public-ms covering-b4",
+                params: .covering(degree: degree, baseLog: 4),
+                backend: .blindRotate,
+                wireRefresh: .publicMS,
+                seed: 0xE143,
+                device: nil,
+                queue: nil
+            )
+            try runAll(
+                label: "blind-rotate secret covering-b2",
+                params: .covering(degree: degree, baseLog: 2),
+                backend: .blindRotate,
+                wireRefresh: .secret,
+                seed: 0xE144,
+                device: nil,
+                queue: nil
+            )
+            try runAll(
+                label: "blind-rotate public-ms covering-b2",
+                params: .covering(degree: degree, baseLog: 2),
+                backend: .blindRotate,
+                wireRefresh: .publicMS,
+                seed: 0xE145,
+                device: nil,
+                queue: nil
+            )
+            try runAll(
+                label: "blind-rotate secret covering-b1",
+                params: .covering(degree: degree, baseLog: 1),
+                backend: .blindRotate,
+                wireRefresh: .secret,
+                seed: 0xE146,
+                device: nil,
+                queue: nil
+            )
+            try runAll(
+                label: "blind-rotate public-ms covering-b1",
+                params: .covering(degree: degree, baseLog: 1),
+                backend: .blindRotate,
+                wireRefresh: .publicMS,
+                seed: 0xE147,
+                device: nil,
+                queue: nil
+            )
+            print("ENCRYPTED EQUIV (metal)")
+            print("  result          SKIP (--cpu-only)")
+            print("")
+        } else if let device = MTLCreateSystemDefaultDevice(),
+                  let queue = device.makeCommandQueue() {
+            if !metalNetlistOnly {
+                try runAll(
+                    label: "blind-rotate-metal public-ms boolean",
+                    params: .booleanPublicMS(degree: degree),
+                    backend: .blindRotateMetal,
+                    wireRefresh: .publicMS,
+                    seed: 0xE122,
+                    device: device,
+                    queue: queue
+                )
+                try runAll(
+                    label: "blind-rotate-metal public-ms crypto",
+                    params: .cryptoPublicMS(degree: degree),
+                    backend: .blindRotateMetal,
+                    wireRefresh: .publicMS,
+                    seed: 0xE11F,
+                    device: device,
+                    queue: queue
+                )
+                // Track A approx candidate (**C31**/**C32**): covering `.crypto` (g₀≠δ).
+                // Distinct from public-ms cryptoPublicMS so C21 reproduce filters stay stable.
+                try runAll(
+                    label: "blind-rotate-metal secret crypto",
+                    params: .crypto(degree: degree),
+                    backend: .blindRotateMetal,
+                    wireRefresh: .secret,
+                    seed: 0xE130,
+                    device: device,
+                    queue: queue
+                )
+                try runAll(
+                    label: "blind-rotate-metal public-ms covering-crypto",
+                    params: .crypto(degree: degree),
+                    backend: .blindRotateMetal,
+                    wireRefresh: .publicMS,
+                    seed: 0xE131,
+                    device: device,
+                    queue: queue
+                )
+                // Finer covering (baseLog=4/2): EP β↓ ⇒ BK-noise amp↓ (H4 toward ε≤2^{-64}).
+                try runAll(
+                    label: "blind-rotate-metal secret covering-b4",
+                    params: .covering(degree: degree, baseLog: 4),
+                    backend: .blindRotateMetal,
+                    wireRefresh: .secret,
+                    seed: 0xE132,
+                    device: device,
+                    queue: queue
+                )
+                try runAll(
+                    label: "blind-rotate-metal public-ms covering-b4",
+                    params: .covering(degree: degree, baseLog: 4),
+                    backend: .blindRotateMetal,
+                    wireRefresh: .publicMS,
+                    seed: 0xE133,
+                    device: device,
+                    queue: queue
+                )
+                try runAll(
+                    label: "blind-rotate-metal secret covering-b2",
+                    params: .covering(degree: degree, baseLog: 2),
+                    backend: .blindRotateMetal,
+                    wireRefresh: .secret,
+                    seed: 0xE134,
+                    device: device,
+                    queue: queue
+                )
+                try runAll(
+                    label: "blind-rotate-metal public-ms covering-b2",
+                    params: .covering(degree: degree, baseLog: 2),
+                    backend: .blindRotateMetal,
+                    wireRefresh: .publicMS,
+                    seed: 0xE135,
+                    device: device,
+                    queue: queue
+                )
+                // Finest covering (baseLog=1): EP β=2 — H4 push toward torus-scale B~128.
+                try runAll(
+                    label: "blind-rotate-metal secret covering-b1",
+                    params: .covering(degree: degree, baseLog: 1),
+                    backend: .blindRotateMetal,
+                    wireRefresh: .secret,
+                    seed: 0xE136,
+                    device: device,
+                    queue: queue
+                )
+                try runAll(
+                    label: "blind-rotate-metal public-ms covering-b1",
+                    params: .covering(degree: degree, baseLog: 1),
+                    backend: .blindRotateMetal,
+                    wireRefresh: .publicMS,
+                    seed: 0xE137,
+                    device: device,
+                    queue: queue
+                )
+            }
+            if metalNetlistOnly {
+                try runAll(
+                    label: "blind-rotate-metal-netlist public-ms boolean",
+                    params: .booleanPublicMS(degree: degree),
+                    backend: .blindRotateMetalNetlist,
+                    wireRefresh: .publicMS,
+                    seed: 0xE121,
+                    device: device,
+                    queue: queue
+                )
+            }
+        } else {
+            print("ENCRYPTED EQUIV (blind-rotate-metal)")
+            print("  result          SKIP (no Metal)")
+            print("")
+        }
+    } catch {
+        fputs("encrypted bench failed: \(error)\n", stderr)
+        exit(1)
+    }
+
+    if sing && !metrics.isEmpty {
+        print("════════ SING METRICS SUMMARY ════════")
+        print("path                                             ms/row       bits    εlog2   BK value  cert")
+        for m in metrics {
+            let eps: String
+            if m.failureLog2.isInfinite && m.failureLog2 < 0 {
+                eps = "-inf"
+            } else {
+                eps = String(format: "%.1f", m.failureLog2)
+            }
+            let pathPad = m.label.padding(toLength: 48, withPad: " ", startingAt: 0)
+            let ms = String(format: "%8.2f", m.msPerRow)
+            let bits = String(format: "%10.1f", m.classicalBits)
+            let epsPad = eps.padding(toLength: 8, withPad: " ", startingAt: 0)
+            let bk = String(format: "%8d", m.noisyBKBound)
+            let cert = m.noisyBKCertified ? "yes" : "NO"
+            print("\(pathPad) \(ms) \(bits) \(epsPad) \(bk)  \(cert)")
+        }
+        print("calibration:\n\(TFHELWECalibration.markdownTable())")
+        print("core-SVP model (sage-free):\n\(TFHELWECoreSVPModel.markdownTable())")
+        print("estimator protocol:\n\(TFHELWEEstimatorProtocol.markdownTable(TFHELWEEstimatorProtocol.mergedFromResultsFile()))")
+        print("══════════════════════════════════════")
+    }
+}
+
+/// Host-clocked sequential boot: `resetn=0` for `resetHold` ticks, then `1`.
+/// Other ports zero; `clk` is the host tick, not a torus wire.
+private func makeEncryptedResetHoldStimuli(
+    clear: CleartextNetlistSimulator,
+    ticks: Int,
+    resetHold: Int
+) -> [[String: [UInt8]]] {
+    precondition(ticks > 0)
+    let hold = max(0, resetHold)
+    let ports = clear.inputPorts.keys.sorted()
+    return (1...ticks).map { tick in
+        var row: [String: [UInt8]] = [:]
+        for p in ports {
+            let width = clear.inputPorts[p]!.count
+            var bits = [UInt8](repeating: 0, count: width)
+            if p == "clk" {
+                bits = [UInt8](repeating: 0, count: width)
+            } else if p == "resetn" {
+                let live: UInt8 = tick <= hold ? 0 : 1
+                bits = [UInt8](repeating: live, count: width)
+            }
+            row[p] = bits
+        }
+        return row
+    }
+}
+
+private func makeEncryptedStimuli(
+    clear: CleartextNetlistSimulator,
+    maxVectors: Int,
+    seed: UInt32
+) -> [[String: [UInt8]]] {
+    let ports = clear.inputPorts.keys.sorted()
+    precondition(!ports.isEmpty)
+    var widths: [String: Int] = [:]
+    var totalBits = 0
+    for p in ports {
+        let w = clear.inputPorts[p]!.count
+        widths[p] = w
+        totalBits += w
+    }
+    func decode(_ mask: UInt64) -> [String: [UInt8]] {
+        var remaining = mask
+        var out: [String: [UInt8]] = [:]
+        for p in ports {
+            let w = widths[p]!
+            var bits = [UInt8](repeating: 0, count: w)
+            for i in 0..<w {
+                bits[i] = UInt8(remaining & 1)
+                remaining >>= 1
+            }
+            out[p] = bits
+        }
+        return out
+    }
+    let space = totalBits >= 63 ? UInt64.max : (UInt64(1) << UInt64(totalBits))
+    if totalBits <= 12 && space <= UInt64(maxVectors) {
+        return (0..<Int(space)).map { decode(UInt64($0)) }
+    }
+    var rng = LCG32(state: seed == 0 ? 1 : seed)
+    var seen = Set<UInt64>()
+    var rows: [[String: [UInt8]]] = []
+    rows.reserveCapacity(maxVectors)
+    // Always include all-zero; include all-one when room remains.
+    let onesMask = totalBits >= 63 ? UInt64.max : (space &- 1)
+    for fixed in [UInt64(0), onesMask] where rows.count < maxVectors {
+        if seen.insert(fixed).inserted {
+            rows.append(decode(fixed))
+        }
+    }
+    while rows.count < maxVectors {
+        let raw = (UInt64(rng.next()) << 32) | UInt64(rng.next())
+        let mask = totalBits >= 63 ? raw : (raw & onesMask)
+        if seen.insert(mask).inserted {
+            rows.append(decode(mask))
+        }
+    }
+    return rows
+}
+
+private func parseEncodingKindFlag() -> TrivialBitEncodingKind {
+    guard let raw = stringFlag("--encoding") else { return .constantFill }
+    guard let kind = TrivialBitEncodingKind(rawValue: raw) else {
+        fputs("Unknown --encoding \(raw) (use constant-fill|phase|glwe-trivial|glwe-packed)\n", stderr)
+        exit(1)
+    }
+    return kind
+}
+
+private func parseLUTBackendFlag() -> LUTEvaluationBackend {
+    guard let raw = stringFlag("--lut-backend") else { return .multilinear }
+    if raw == "pbs" || raw == "programmableBootstrap" {
+        return .programmableBootstrap
+    }
+    if raw == "encrypted" || raw == "blind-rotate" {
+        return .encryptedBlindRotate
+    }
+    guard let backend = LUTEvaluationBackend(rawValue: raw) else {
+        fputs("Unknown --lut-backend \(raw) (use multilinear|pbs|pbs-ggsw|encrypted)\n", stderr)
+        exit(1)
+    }
+    return backend
+}
+
+private func packEncodedBits(bit: UInt32, encoding: any TorusBitEncoding, batch: Int) -> [UInt32] {
+    let lane = encoding.encodeBit(bit)
+    var values: [UInt32] = []
+    values.reserveCapacity(batch * encoding.degree)
+    for _ in 0..<batch {
+        values.append(contentsOf: lane)
+    }
+    return values
+}
+
+// MARK: - Clock
+
+private func runScriptedClock(
+    compiler: YosysGraphCompiler,
+    module: YosysModule,
+    device: MTLDevice,
+    commandQueue: MTLCommandQueue,
+    ticks: Int,
+    warmup: Int,
+    resetHold: Int
+) -> [Double] {
+    _ = module
+    _ = warmup
+    let degree = compiler.degree
+    let batch = compiler.batch
+    let encoding = compiler.bitEncoding
+    let elementCount = batch * degree
+    let vectorShape: [NSNumber] = [NSNumber(value: batch), NSNumber(value: degree)]
+    let zeroHost = packEncodedBits(bit: 0, encoding: encoding, batch: batch)
+    let oneHost = packEncodedBits(bit: 1, encoding: encoding, batch: batch)
+
+    var primaryFeeds: [MPSGraphTensor: MPSGraphTensorData] = [:]
+    var resetnBuffer: MTLBuffer?
+    for entry in compiler.inputNodes {
+        guard let placeholder = entry.node.placeholder else {
+            fatalError("Missing placeholder \(entry.port)")
+        }
+        let values: [UInt32]
+        switch entry.port {
+        case "en":
+            values = oneHost
+        case "resetn":
+            values = zeroHost // start in reset; raised after resetHold
+        default:
+            values = zeroHost
+        }
+        let buffer = makeSharedUInt32Buffer(device: device, values: values)
+        if entry.port == "resetn" {
+            resetnBuffer = buffer
+        }
+        primaryFeeds[placeholder] = MPSGraphTensorData(buffer, shape: vectorShape, dataType: .uInt32)
+    }
+
+    let stateBuffersA: [MTLBuffer] = compiler.dffNodes.map { _ in
+        makeSharedUInt32Buffer(device: device, values: zeroHost)
+    }
+    let stateSetA: [MPSGraphTensorData] = stateBuffersA.map {
+        MPSGraphTensorData($0, shape: vectorShape, dataType: .uInt32)
+    }
+    let stateBuffersB: [MTLBuffer] = compiler.dffNodes.map { _ in
+        makeSharedUInt32Buffer(device: device, count: elementCount)
+    }
+    let stateSetB: [MPSGraphTensorData] = stateBuffersB.map {
+        MPSGraphTensorData($0, shape: vectorShape, dataType: .uInt32)
+    }
+    let outputScratch: [MPSGraphTensorData] = compiler.outputTensors.map { _ in
+        let buffer = makeSharedUInt32Buffer(device: device, count: elementCount)
+        return MPSGraphTensorData(buffer, shape: vectorShape, dataType: .uInt32)
+    }
+
+    var stateFeeds = stateSetA
+    var writeToB = true
+    var times: [Double] = []
+    times.reserveCapacity(ticks)
+
+    for tick in 1...ticks {
+        let elapsed: Double = autoreleasepool {
+            if let resetnBuffer {
+                let host = tick <= resetHold ? zeroHost : oneHost
+                host.withUnsafeBytes { raw in
+                    guard let base = raw.baseAddress else { return }
+                    resetnBuffer.contents().copyMemory(from: base, byteCount: raw.count)
+                }
+            }
+
+            let stateWrites = writeToB ? stateSetB : stateSetA
+            var feeds = primaryFeeds
+            for (index, dff) in compiler.dffNodes.enumerated() {
+                guard let placeholder = dff.stateInput.placeholder else {
+                    fatalError("Missing state placeholder")
+                }
+                feeds[placeholder] = stateFeeds[index]
+            }
+
+            var results: [MPSGraphTensor: MPSGraphTensorData] = [:]
+            for (outIndex, entry) in compiler.outputTensors.enumerated() {
+                _ = entry
+                results[compiler.outputTensors[outIndex].tensor] = outputScratch[outIndex]
+            }
+            for (index, dff) in compiler.dffNodes.enumerated() {
+                guard let stateOutput = dff.stateOutput else {
+                    fatalError("Missing state output")
+                }
+                results[stateOutput] = stateWrites[index]
+            }
+
+            let started = CFAbsoluteTimeGetCurrent()
+            compiler.graph.run(
+                with: commandQueue,
+                feeds: feeds,
+                targetOperations: nil,
+                resultsDictionary: results
+            )
+            let dt = CFAbsoluteTimeGetCurrent() - started
+            stateFeeds = stateWrites
+            writeToB.toggle()
+            return dt
+        }
+        times.append(elapsed)
+        print(String(format: "  tick %2d  %.4f s  resetn=%d", tick, elapsed, tick <= resetHold ? 0 : 1))
+    }
+    return times
+}
+
+// MARK: - Enigma Metal ≡ cleartext
+
+private func runCombinationalEquivGate(
+    compiler: YosysGraphCompiler,
+    moduleName: String,
+    module: YosysModule,
+    device: MTLDevice,
+    commandQueue: MTLCommandQueue
+) {
+    print("EQUIV (Metal PBS/multilinear ≡ CleartextNetlistSim, combinational)")
+    print("  encoding: \(compiler.encodingKind.rawValue)")
+    print("  LUT backend: \(compiler.lutBackend.rawValue)")
+    let clear = CleartextNetlistSimulator(moduleName: moduleName, module: module)
+    let encoding = compiler.bitEncoding
+    let degree = compiler.degree
+    let batch = compiler.batch
+    let elementCount = batch * degree
+    let vectorShape: [NSNumber] = [NSNumber(value: batch), NSNumber(value: degree)]
+
+    // Enumerate primary inputs as single-bit ports (full_adder style).
+    var portWidths: [(String, Int)] = []
+    for (name, port) in module.ports.sorted(by: { $0.key < $1.key }) where port.direction == "input" {
+        portWidths.append((name, port.bits.count))
+    }
+    let totalBits = portWidths.reduce(0) { $0 + $1.1 }
+    precondition(totalBits <= 12, "Combinational equiv only for small input spaces")
+
+    var failures = 0
+    for mask in 0..<(1 << totalBits) {
+        var clearInputs: [String: [UInt8]] = [:]
+        var metalBits: [String: [UInt32]] = [:]
+        var bitCursor = 0
+        for (name, width) in portWidths {
+            var cBits: [UInt8] = []
+            var mBits: [UInt32] = []
+            for _ in 0..<width {
+                let v = UInt32((mask >> bitCursor) & 1)
+                bitCursor += 1
+                cBits.append(UInt8(v))
+                mBits.append(v)
+            }
+            clearInputs[name] = cBits
+            metalBits[name] = mBits
+        }
+        let clearOut = clear.tick(inputs: clearInputs)
+
+        var feeds: [MPSGraphTensor: MPSGraphTensorData] = [:]
+        for entry in compiler.inputNodes {
+            guard let placeholder = entry.node.placeholder else { fatalError("missing placeholder") }
+            let bits = metalBits[entry.port] ?? [0]
+            let lane = encoding.encodeBit(bits[entry.bitIndex])
+            let buffer = device.makeBuffer(
+                bytes: lane,
+                length: lane.count * MemoryLayout<UInt32>.stride,
+                options: .storageModeShared
+            )!
+            feeds[placeholder] = MPSGraphTensorData(buffer, shape: vectorShape, dataType: .uInt32)
+        }
+        var results: [MPSGraphTensor: MPSGraphTensorData] = [:]
+        var outputBuffers: [(port: String, bit: Int, buffer: MTLBuffer)] = []
+        for entry in compiler.outputTensors {
+            let buffer = device.makeBuffer(
+                length: elementCount * MemoryLayout<UInt32>.stride,
+                options: .storageModeShared
+            )!
+            results[entry.tensor] = MPSGraphTensorData(buffer, shape: vectorShape, dataType: .uInt32)
+            outputBuffers.append((entry.port, entry.bitIndex, buffer))
+        }
+        compiler.graph.run(
+            with: commandQueue,
+            feeds: feeds,
+            targetOperations: nil,
+            resultsDictionary: results
+        )
+        for (port, bit, buffer) in outputBuffers {
+            let ptr = buffer.contents().bindMemory(to: UInt32.self, capacity: elementCount)
+            let lane = Array(UnsafeBufferPointer(start: ptr, count: degree))
+            let got = encoding.decodeBit(lane)
+            let want = UInt32(clearOut[port]?[bit] ?? 255)
+            if got != want {
+                failures += 1
+                print("  FAIL mask=\(mask) \(port)[\(bit)] got=\(got) want=\(want)")
+            }
+        }
+    }
+    if failures == 0 {
+        print("  rows            \(1 << totalBits)")
+        print("  result          PASS")
+    } else {
+        print("  result          FAIL (\(failures) mismatches)")
+        fputs("Combinational Metal≡cleartext FAIL\n", stderr)
+        exit(1)
+    }
+    print("")
+}
+
+private func runEnigmaEquivGate(
+    path: String,
+    degree: Int,
+    encodingKind: TrivialBitEncodingKind,
+    lutBackend: LUTEvaluationBackend,
+    device: MTLDevice,
+    commandQueue: MTLCommandQueue
+) {
+    print("EQUIV (Metal boolean-path ≡ CleartextNetlistSim)")
+    print("  encoding: \(encodingKind.rawValue)")
+    print("  LUT backend: \(lutBackend.rawValue)")
+    let plaintext = "KEINEBESONDERENEREIGNISSE"
+    let left = 0, middle = 1, right = 2 // ABC
+
+    let clear = EnigmaNetlistHarness(netlistPath: path)
+    clear.seedGrundstellung(left: left, middle: middle, right: right)
+    let ct = clear.process(ciphertext: EnigmaAlphabet.normalize(plaintext))
+    clear.seedGrundstellung(left: left, middle: middle, right: right)
+    let clearPT = clear.process(ciphertext: ct)
+    let clearStr = EnigmaAlphabet.string(from: clearPT)
+    precondition(clearStr == plaintext, "Clear harness round-trip failed: \(clearStr)")
+
+    let netlist = loadYosysNetlist(from: path)
+    guard let (moduleName, module) = netlist.modules.first else {
+        fatalError("Empty netlist for equiv")
+    }
+    let compiler = YosysGraphCompiler(
+        degree: degree,
+        batch: 1,
+        encodingKind: encodingKind,
+        lutBackend: lutBackend
+    )
+    let compileStarted = CFAbsoluteTimeGetCurrent()
+    compiler.compile(moduleName: moduleName, module: module)
+    let compileSeconds = CFAbsoluteTimeGetCurrent() - compileStarted
+
+    let metalStarted = CFAbsoluteTimeGetCurrent()
+    let metalPT = runEnigmaMetalStream(
+        compiler: compiler,
+        module: module,
+        device: device,
+        commandQueue: commandQueue,
+        ciphertext: ct,
+        left: left,
+        middle: middle,
+        right: right
+    )
+    let metalSeconds = CFAbsoluteTimeGetCurrent() - metalStarted
+    let metalStr = EnigmaAlphabet.string(from: metalPT)
+
+    print(String(format: "  plaintext      %@", plaintext))
+    print(String(format: "  clear          %@", clearStr))
+    print(String(format: "  metal          %@", metalStr))
+    print(String(format: "  compile        %.4f s (N=%d B=1)", compileSeconds, degree))
+    print(
+        String(
+            format: "  stream         %.4f s (%d letters, %.4f s/letter)",
+            metalSeconds,
+            metalPT.count,
+            metalSeconds / Double(max(1, metalPT.count))
+        )
+    )
+    if metalStr == plaintext {
+        print("  result          PASS")
+    } else {
+        print("  result          FAIL")
+        fputs("Metal≡cleartext FAIL\n", stderr)
+        exit(1)
+    }
+    print("")
+}
+
+private func runEnigmaMetalStream(
+    compiler: YosysGraphCompiler,
+    module: YosysModule,
+    device: MTLDevice,
+    commandQueue: MTLCommandQueue,
+    ciphertext: [Int],
+    left: Int,
+    middle: Int,
+    right: Int
+) -> [Int] {
+    let degree = compiler.degree
+    let batch = compiler.batch
+    let encoding = compiler.bitEncoding
+    let elementCount = batch * degree
+    let vectorShape: [NSNumber] = [NSNumber(value: batch), NSNumber(value: degree)]
+    let zeroHost = packEncodedBits(bit: 0, encoding: encoding, batch: batch)
+    let oneHost = packEncodedBits(bit: 1, encoding: encoding, batch: batch)
+
+    var qWireToDFF: [Int: Int] = [:]
+    for (index, dff) in compiler.dffNodes.enumerated() {
+        guard let cell = module.cells[dff.cell],
+              let qBit = cell.connections["Q"]?.first,
+              case .net(let qWire) = qBit else { continue }
+        qWireToDFF[qWire] = index
+    }
+
+    func dffBits(named name: String) -> [Int] {
+        guard let net = module.netnames?[name] else { return [] }
+        return net.bits.compactMap { bit -> Int? in
+            guard case .net(let wire) = bit else { return nil }
+            return qWireToDFF[wire]
+        }
+    }
+    let rBits = dffBits(named: "rotor_r")
+    let mBits = dffBits(named: "rotor_m")
+    let lBits = dffBits(named: "rotor_l")
+
+    var primaryFeeds: [MPSGraphTensor: MPSGraphTensorData] = [:]
+    var ctBuffers: [MTLBuffer?] = Array(repeating: nil, count: 8)
+    for entry in compiler.inputNodes {
+        guard let placeholder = entry.node.placeholder else {
+            fatalError("Missing placeholder")
+        }
+        let values = entry.port == "resetn" ? oneHost : zeroHost
+        let buffer = makeSharedUInt32Buffer(device: device, values: values)
+        if entry.port == "ciphertext_char", entry.bitIndex < 8 {
+            ctBuffers[entry.bitIndex] = buffer
+        }
+        primaryFeeds[placeholder] = MPSGraphTensorData(buffer, shape: vectorShape, dataType: .uInt32)
+    }
+
+    let stateBuffersA: [MTLBuffer] = compiler.dffNodes.map { _ in
+        makeSharedUInt32Buffer(device: device, values: zeroHost)
+    }
+    let stateSetA: [MPSGraphTensorData] = stateBuffersA.map {
+        MPSGraphTensorData($0, shape: vectorShape, dataType: .uInt32)
+    }
+    let stateBuffersB: [MTLBuffer] = compiler.dffNodes.map { _ in
+        makeSharedUInt32Buffer(device: device, count: elementCount)
+    }
+    let stateSetB: [MPSGraphTensorData] = stateBuffersB.map {
+        MPSGraphTensorData($0, shape: vectorShape, dataType: .uInt32)
+    }
+
+    func writeStateBit(buffers: [MTLBuffer], dffIndex: Int, bit: UInt32) {
+        let fill = encoding.encodeBit(bit)
+        fill.withUnsafeBytes { raw in
+            guard let base = raw.baseAddress else { return }
+            buffers[dffIndex].contents().copyMemory(from: base, byteCount: raw.count)
+        }
+    }
+    for (i, dffIndex) in rBits.enumerated() {
+        writeStateBit(buffers: stateBuffersA, dffIndex: dffIndex, bit: UInt32((right >> i) & 1))
+    }
+    for (i, dffIndex) in mBits.enumerated() {
+        writeStateBit(buffers: stateBuffersA, dffIndex: dffIndex, bit: UInt32((middle >> i) & 1))
+    }
+    for (i, dffIndex) in lBits.enumerated() {
+        writeStateBit(buffers: stateBuffersA, dffIndex: dffIndex, bit: UInt32((left >> i) & 1))
+    }
+
+    var ptDFFIndices: [Int: Int] = [:]
+    if let ptBits = module.ports["plaintext_char"]?.bits {
+        for (bitIndex, bit) in ptBits.enumerated() {
+            guard case .net(let wire) = bit, let dffIndex = qWireToDFF[wire] else { continue }
+            ptDFFIndices[bitIndex] = dffIndex
+        }
+    }
+
+    var stateFeeds = stateSetA
+    var writeToB = true
+    var plaintext: [Int] = []
+
+    for letter in ciphertext {
+        for bitIndex in 0..<8 {
+            guard let buffer = ctBuffers[bitIndex] else { continue }
+            let bit: UInt32 = ((letter >> bitIndex) & 1) == 0 ? 0 : 1
+            let host = bit == 0 ? zeroHost : oneHost
+            host.withUnsafeBytes { raw in
+                guard let base = raw.baseAddress else { return }
+                buffer.contents().copyMemory(from: base, byteCount: raw.count)
+            }
+        }
+
+        let stateWrites = writeToB ? stateSetB : stateSetA
+        let writeBuffers = writeToB ? stateBuffersB : stateBuffersA
+        var feeds = primaryFeeds
+        for (index, dff) in compiler.dffNodes.enumerated() {
+            guard let placeholder = dff.stateInput.placeholder else {
+                fatalError("Missing state placeholder")
+            }
+            feeds[placeholder] = stateFeeds[index]
+        }
+
+        var results: [MPSGraphTensor: MPSGraphTensorData] = [:]
+        for entry in compiler.outputTensors {
+            let buffer = makeSharedUInt32Buffer(device: device, count: elementCount)
+            results[entry.tensor] = MPSGraphTensorData(
+                buffer, shape: vectorShape, dataType: .uInt32
+            )
+        }
+        for (index, dff) in compiler.dffNodes.enumerated() {
+            guard let stateOutput = dff.stateOutput else {
+                fatalError("Missing state output")
+            }
+            results[stateOutput] = stateWrites[index]
+        }
+
+        compiler.graph.run(
+            with: commandQueue,
+            feeds: feeds,
+            targetOperations: nil,
+            resultsDictionary: results
+        )
+
+        var value = 0
+        for bit in 0..<5 {
+            guard let dffIndex = ptDFFIndices[bit] else { continue }
+            let ptr = writeBuffers[dffIndex].contents().bindMemory(
+                to: UInt32.self, capacity: elementCount
+            )
+            let lane = Array(UnsafeBufferPointer(start: ptr, count: degree))
+            if encoding.decodeBit(lane) != 0 {
+                value |= (1 << bit)
+            }
+        }
+        plaintext.append(value)
+        stateFeeds = stateWrites
+        writeToB.toggle()
+    }
+    return plaintext
+}
+
+/// Production-N Metal microbench: BK gen + 1-bit identity LUT blind-rotate.
+/// Default N=1024. Use before full_adder×8 at production degree.
+func runEncryptedMicrobench() {
+    // Line-buffer stdout so long N=1024 runs show KEYGEN/TRIAL progress under tee.
+    setbuf(stdout, nil)
+    let degree = intFlag("--degree") ?? 1024
+    let trials = intFlag("--trials") ?? 3
+    let warmup = intFlag("--warmup", allowZero: true) ?? 1
+    let tileWidthFlag = intFlag("--metal-br-tile")
+    let tileWidth = tileWidthFlag ?? MetalBRControl.defaultTileWidth
+    let forceFused = CommandLine.arguments.contains("--metal-br-fused")
+    precondition(degree >= 2 && (2 * degree).nonzeroBitCount == 1, "2N must be power of two")
+    precondition((2 * degree) <= 4096, "2N ≤ 4096 for binary X^p")
+
+    MetalBRControl.defaultTileWidth = tileWidth
+    if forceFused {
+        MetalBRControl.overrideLowering = .fused
+    } else if tileWidthFlag != nil {
+        MetalBRControl.overrideLowering = .tiledKernel
+    } else {
+        MetalBRControl.overrideLowering = nil
+    }
+    MetalBRControl.progress = { line in
+        print(line)
+        fflush(stdout)
+    }
+
+    guard let device = MTLCreateSystemDefaultDevice(),
+          let queue = device.makeCommandQueue() else {
+        fputs("No Metal device\n", stderr)
+        exit(1)
+    }
+
+    let twoN = 2 * degree
+    let mux = MetalGGSW.DynamicRotateCost.muxRotates(twoN: twoN, lweDimension: degree)
+    let bin = MetalGGSW.DynamicRotateCost.binaryRotates(twoN: twoN, lweDimension: degree)
+    let rss0 = taskResidentMemoryBytes()
+
+    print("HELUT encrypted Metal MICROBENCH")
+    print("  N=\(degree)  2N=\(twoN)  trials=\(trials)  warmup=\(warmup)")
+    let autoLower = MetalBRLowering.automatic(degree: degree)
+    let lowering = MetalBRControl.overrideLowering ?? autoLower
+    print("  lowering=\(lowering.rawValue)  tileWidth=\(tileWidth)")
+    print("  DynamicRotateCost mux=\(mux) binary=\(bin) speedup≈\(String(format: "%.1f", Double(mux)/Double(bin)))×")
+    print("")
+
+    let params = GGSWParams.booleanTrivial(degree: degree)
+    let keyStarted = CFAbsoluteTimeGetCurrent()
+    let secret = TFHESecretKey.random(params: params.tfhe, seed: 0x1024)
+    var rng = LCG32(state: 0x1025)
+    let bk = bootstrapKey(
+        secret: secret,
+        params: params,
+        rng: &rng,
+        publicRefreshCompatible: true
+    )
+    let keySeconds = CFAbsoluteTimeGetCurrent() - keyStarted
+    let rss1 = taskResidentMemoryBytes()
+    print(String(format: "KEYGEN+BK         %.3f s  RSS %+0.1f MiB (after=%.1f MiB)",
+                 keySeconds,
+                 Double(Int64(rss1) &- Int64(rss0)) / (1024 * 1024),
+                 Double(rss1) / (1024 * 1024)))
+
+    let scale = rotationScale(polynomialDegree: degree)
+    let hard = TFHELWEHardnessCertificate.forHELUTEncrypt(
+        gaussian: degree >= 1024
+            ? .productionBoolean64(polynomialDegree: degree)
+            : .demoBoolean64(polynomialDegree: degree)
+    )
+    print(String(format: "HARDNESS          %.1f classical bits  (≥128? %@)",
+                 hard.estimatedClassicalBits, hard.meetsTarget ? "yes" : "no"))
+
+    // Identity LUT on 1 bit: table [0,1] → extract should match input bit.
+    let truth: [UInt32] = [0, 1]
+    TFHETestPolyCache.shared.clear()
+
+    func oneBR(bit: UInt32) throws -> (UInt32, Double) {
+        let ct = encryptLWERotationNative(
+            message: bit,
+            secret: secret.lweSecret,
+            twoN: twoN,
+            rng: &rng
+        )
+        print(String(format: "BR start bit=%d  RSS=%.1f MiB …", bit, Double(taskResidentMemoryBytes()) / (1024 * 1024)))
+        fflush(stdout)
+        let t0 = CFAbsoluteTimeGetCurrent()
+        let out = try MetalGGSW.evaluateLUTBlindRotate(
+            truthTable: truth,
+            inputs: [ct],
+            bootstrapKey: bk,
+            scale: scale,
+            device: device,
+            commandQueue: queue
+        )
+        let dt = CFAbsoluteTimeGetCurrent() - t0
+        let phase = decryptLWE(out, secret: secret)
+        let got = decodeRotationBoolean(phase, scale: scale)
+        return (got, dt)
+    }
+
+    do {
+        for i in 0..<warmup {
+            let (got, dt) = try oneBR(bit: UInt32(i & 1))
+            precondition(got == UInt32(i & 1), "warmup mismatch")
+            print(String(format: "WARMUP %d          %.3f s  ok", i, dt))
+        }
+        var times: [Double] = []
+        for i in 0..<trials {
+            let bit = UInt32(i & 1)
+            let (got, dt) = try oneBR(bit: bit)
+            precondition(got == bit, "trial mismatch")
+            times.append(dt)
+            let tel = MetalBRControl.lastTelemetry
+            print(String(format: "TRIAL  %d          %.3f s  bit=%d PASS", i, dt, bit))
+            print(String(
+                format: "  telemetry       lowering=%@ ring=%@ tiles=%d encode=%.3fs gpu=%.3fs copy=%.3fs",
+                tel.lowering, tel.ring, tel.tileCount, tel.encodeSeconds, tel.gpuRunSeconds, tel.hostRepackSeconds
+            ))
+        }
+        let mean = times.reduce(0, +) / Double(max(times.count, 1))
+        let (hits, misses, entries) = TFHETestPolyCache.shared.stats
+        print("")
+        print(String(format: "STEADY mean       %.3f s/BR (1-LUT identity @ N=%d)", mean, degree))
+        print("INIT cache        hits=\(hits) misses=\(misses) entries=\(entries)")
+        print(String(format: "RSS final         %.1f MiB", Double(taskResidentMemoryBytes()) / (1024 * 1024)))
+        print("result            PASS")
+    } catch {
+        fputs("microbench failed: \(error)\n", stderr)
+        exit(1)
+    }
+}
+
+// MARK: - Helpers
+
+private func resolveBenchNetlistPath() -> String {
+    if let arg = positionalArgs.first {
+        return resolveNetlistPath(argument: arg)
+    }
+    // Default suite order is chosen by the driver script; CLI default = PicoRV capstone.
+    return resolveNetlistPath(argument: "picorv32_netlist.json")
+}
+
+func taskResidentMemoryBytes() -> UInt64 {
+    var info = mach_task_basic_info()
+    var count = mach_msg_type_number_t(
+        MemoryLayout<mach_task_basic_info>.size / MemoryLayout<natural_t>.size
+    )
+    let result = withUnsafeMutablePointer(to: &info) { infoPtr in
+        infoPtr.withMemoryRebound(to: integer_t.self, capacity: Int(count)) { raw in
+            task_info(mach_task_self_, task_flavor_t(MACH_TASK_BASIC_INFO), raw, &count)
+        }
+    }
+    precondition(result == KERN_SUCCESS, "task_info failed: \(result)")
+    return info.resident_size
+}
+
+/// Identity-LUT residual under noiseless vs injected BK noise (H4).
+func runNoisyBKMeasure() {
+    setbuf(stdout, nil)
+    let degree = intFlag("--degree") ?? 8
+    let trials = intFlag("--trials") ?? 16
+    let identityParallelismFlag = intFlag("--bk-identity-parallelism")
+    if CommandLine.arguments.contains("--bk-identity-parallelism"),
+       identityParallelismFlag == nil {
+        fputs("--bk-identity-parallelism must be a positive integer\n", stderr)
+        exit(2)
+    }
+    let identityParallelism = identityParallelismFlag ?? 1
+    let injectNoise: TFHENoiseParams = {
+        if let sigma = doubleFlag("--bk-noise-sigma"), sigma > 0 {
+            return .gaussian(sigma: sigma)
+        }
+        return TFHENoiseParams(bound: UInt32(intFlag("--bk-noise", allowZero: true) ?? 64))
+    }()
+    let coveringSweep = CommandLine.arguments.contains("--covering-sweep")
+    let booleanScaleMul = intFlag("--boolean-scale-mul") ?? 1
+    let balancedDigits = CommandLine.arguments.contains("--balanced-gadget")
+    let lweDimension = intFlag("--lwe-dimension")
+    let injectLabel: String
+    if injectNoise.usesGaussian {
+        injectLabel = String(format: "σ=%.1f", injectNoise.gaussianSigma)
+    } else {
+        injectLabel = "B=\(injectNoise.bound)"
+    }
+    print("HELUT noisy-BK identity residual (H4)")
+    print("  N=\(degree)  trials=\(trials)  inject ∈ {0, \(injectLabel)}"
+        + (coveringSweep ? "  covering-sweep=yes" : "")
+        + (booleanScaleMul > 1 ? "  kδ=\(booleanScaleMul)" : "")
+        + (balancedDigits ? "  digits=balanced" : "")
+        + (lweDimension.map { "  n=\($0)" } ?? "")
+        + (identityParallelism > 1 ? "  parallelism=\(identityParallelism)" : ""))
+    print("")
+    var rows: [TFHENoisyBKMeasurement] = []
+    var gadgets: [(String, GGSWParams)] = [
+        ("cryptoPublicMS", .cryptoPublicMS(degree: degree)),
+        ("crypto", .crypto(degree: degree))
+    ]
+    if let baseLogOnly = intFlag("--covering-base-log"), 32 % baseLogOnly == 0 {
+        gadgets = [("covering-b\(baseLogOnly)", .covering(degree: degree, baseLog: baseLogOnly))]
+    } else if coveringSweep {
+        // Smaller baseLog ⇒ smaller EP β ⇒ less BK-noise amp (Track A push toward ε≤2^{-64}).
+        for baseLog in [16, 8, 4, 2, 1] where 32 % baseLog == 0 {
+            gadgets.append(("covering-b\(baseLog)", .covering(degree: degree, baseLog: baseLog)))
+        }
+    }
+    if balancedDigits {
+        gadgets = gadgets.map { ($0.0, $0.1.withBalancedDigits()) }
+    }
+    if degree <= 16 {
+        print("  note: booleanPublicMS (ℓ=1) omitted — incomplete gadget; BK noise mis-decomposes")
+    }
+    for (label, raw) in gadgets {
+        let params = lweDimension.map { raw.withLWEDimension($0) } ?? raw
+        let secret = TFHESecretKey.random(params: params.tfhe, seed: 0xB10C)
+        let modes: [TFHENoiseParams] = [.none, injectNoise]
+        for noise in modes {
+            let measured = TFHENoisyBKMeasurement.identity(
+                secret: secret,
+                params: params,
+                noise: noise,
+                trials: trials,
+                seed: 0xB10D &+ (noise.usesGaussian
+                    ? UInt32(noise.gaussianSigma.rounded())
+                    : noise.bound),
+                booleanScaleMul: booleanScaleMul,
+                maxConcurrentTrials: identityParallelism
+            )
+            let observation = measured.observationReport(lutCount: 8)
+            let gauss = measured.gaussianCertificate(lutCount: 8)
+            let eps: String
+            if gauss.failureLog2.isInfinite && gauss.failureLog2 < 0 {
+                eps = "-inf"
+            } else {
+                eps = String(format: "%.1f", gauss.failureLog2)
+            }
+            let modeTag: String
+            if noise.usesGaussian {
+                modeTag = String(format: "σ=%.1f", noise.gaussianSigma)
+            } else {
+                modeTag = "B=\(noise.bound)"
+            }
+            print(
+                "\(label) \(modeTag): max|e|=\(measured.maxAbsError) "
+                    + String(format: "σ̂=%.1f", measured.sigmaHat)
+                    + " δ/2=\(measured.decodingHalfGap) "
+                    + "decode_fail=\(measured.decodeFailures) "
+                    + "observed-within-gap=\(observation.recordedValueWithinHalfGap) εlog2=\(eps) "
+                    + measured.nativeErrorHistogramLine
+                    // The bar is decided by the confidence bound, not the point
+                    // estimate: log2(eps) is proportional to -1/sigma^2, so a
+                    // sigma-hat from a handful of samples leaves orders
+                    // unresolved. Only worth printing when it could change the
+                    // verdict -- at tiny N the point estimate is astronomically
+                    // below any bar and the uncertainty is moot.
+                    // NOTE %ld, not %d: Int is 64-bit here and %d truncates.
+                    + epsilonConfidenceNote(measured, lutCount: 8)
+                    + "  (baseLog=\(params.baseLog) ℓ=\(params.levelCount))"
+            )
+            rows.append(measured)
+            if noise.bound == 0 && !noise.usesGaussian {
+                precondition(measured.maxAbsError == 0, "noiseless BK must measure |e|=0")
+                TFHENoisyBKCertificate.forNetlist(
+                    params: .noiseless(polynomialDegree: degree, lutCount: 8)
+                ).assertDecodable()
+            }
+        }
+    }
+    print("")
+    print(TFHENoisyBKMeasurement.markdownTable(rows))
+}
+
+/// Human-readable sampling-uncertainty note for a measured epsilon.
+///
+/// `log2(eps)` is proportional to `-1/sigma^2`, so a relative error r in
+/// sigma-hat moves it by about `2*|log2 eps|*r`, and sigma-hat from m samples
+/// carries a standard error near `1/sqrt(2m)`. The consequence found on
+/// 2026-08-15: C35's "-65.4, still <= -64" at 4 samples carried +/-46 orders and
+/// could not decide the bar at all.
+///
+/// Printed only when it is decision-relevant. When the 95% upper bound already
+/// clears the target by a wide margin the note is noise, and at small N the
+/// point estimate is so far below any bar that "orders unresolved" is a
+/// meaningless-looking huge number.
+func epsilonConfidenceNote(
+    _ m: TFHENoisyBKMeasurement,
+    lutCount: Int,
+    targetLog2: Double = -64
+) -> String {
+    guard m.sigmaHat > 0, m.failureLog2Point.isFinite else { return "" }
+    // The printed epsilon is the UNION over `lutCount` LUTs, so the bound must be
+    // too, or the comparison is apples to oranges. Getting this wrong made the
+    // bound look *better* than the point estimate, which is impossible for an
+    // upper bound on sigma: at n=512 the single-LUT bound (-19.1) appeared to
+    // beat the union point estimate (-18.0). Union adds log2(lutCount).
+    let unionPenalty = log2(Double(max(lutCount, 1)))
+    let upper = m.failureLog2Upper95 + unionPenalty
+    let clearsAtBound = upper <= targetLog2
+    // Comfortable: bound clears the bar with an order of magnitude to spare.
+    if clearsAtBound && upper <= targetLog2 * 2 {
+        return String(format: " [n=%ld, 95%%up=%.1f — clears %.0f]", m.samples, upper, targetLog2)
+    }
+    // What to do about a bar that is not met depends entirely on *why*, and the
+    // two cases need opposite responses. Printing "±1 needs n≈40489" invited the
+    // wrong one: that is the cost of resolving ε to ±1 order, a far stricter
+    // standard than clearing a bar, and quoting it made under-sampled rows look
+    // hopeless. AUDIT §14. So report the sample size that would actually settle
+    // the bar, and say plainly when no sample size will.
+    //
+    // The requirement is stated against the union target, since the printed ε is
+    // a union over `lutCount` LUTs.
+    let unionTarget = targetLog2 - unionPenalty
+    let needStr: String
+    if clearsAtBound {
+        needStr = ""
+    } else if let need = m.samplesToMeetTarget(targetLog2: unionTarget) {
+        needStr = String(format: ", under-sampled: n≈%ld would clear", need)
+    } else {
+        needStr = ", point estimate itself fails — no n clears this"
+    }
+    return String(
+        format: " [n=%ld, 95%%up=%.1f %@ %.0f%@]",
+        m.samples,
+        upper,
+        clearsAtBound ? "clears" : "DOES NOT CLEAR",
+        targetLog2,
+        needStr
+    )
+}

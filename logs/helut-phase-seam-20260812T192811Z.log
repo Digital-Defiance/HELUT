@@ -1,0 +1,113 @@
+=== HELUT phase/GLWE/PBS seam 20260812T192811Z ===
+
+######## Phase encoding equiv (N=1024, multilinear) ########
+HELUT boolean-path bench
+  netlist: enigma_netlist.json
+  N=1024  B=1  ticks=0  warmup=1  reset_hold=3
+  encoding: phase (trivial, noise-free)
+  LUT backend: multilinear
+
+Compiled module 'enigma_core': 10 inputs, 688 LUTs, 26 DFFs, 8 outputs
+Compile breakdown: boolean-safe LUT lower 0.04 s, graph build 0.00 s (total 0.04 s)
+COMPILE
+  total            0.0410 s
+  LUT lower        0.0381 s
+  graph build      0.0028 s
+  cells            688 LUTs, 26 DFFs, 10 inputs, 8 outputs
+  RSS delta        +14.7 MiB (after=32.1 MiB)
+
+EQUIV (Metal boolean-path ≡ CleartextNetlistSim)
+  encoding: phase
+  LUT backend: multilinear
+Compiled module 'enigma_core': 10 inputs, 688 LUTs, 26 DFFs, 8 outputs
+Compile breakdown: boolean-safe LUT lower 0.03 s, graph build 0.00 s (total 0.04 s)
+  plaintext      KEINEBESONDERENEREIGNISSE
+  clear          KEINEBESONDERENEREIGNISSE
+  metal          KEINEBESONDERENEREIGNISSE
+  compile        0.0375 s (N=1024 B=1)
+  stream         0.6756 s (25 letters, 0.0270 s/letter)
+  result          PASS
+
+RSS final 217.9 MiB (delta from start +200.5 MiB)
+
+######## GLWE-trivial encoding equiv (N=1024, multilinear) ########
+HELUT boolean-path bench
+  netlist: enigma_netlist.json
+  N=1024  B=1  ticks=0  warmup=1  reset_hold=3
+  encoding: glwe-trivial (trivial, noise-free)
+  LUT backend: multilinear
+
+Compiled module 'enigma_core': 10 inputs, 688 LUTs, 26 DFFs, 8 outputs
+Compile breakdown: boolean-safe LUT lower 0.04 s, graph build 0.00 s (total 0.04 s)
+COMPILE
+  total            0.0379 s
+  LUT lower        0.0352 s
+  graph build      0.0027 s
+  cells            688 LUTs, 26 DFFs, 10 inputs, 8 outputs
+  RSS delta        +14.7 MiB (after=32.0 MiB)
+
+EQUIV (Metal boolean-path ≡ CleartextNetlistSim)
+  encoding: glwe-trivial
+  LUT backend: multilinear
+Compiled module 'enigma_core': 10 inputs, 688 LUTs, 26 DFFs, 8 outputs
+Compile breakdown: boolean-safe LUT lower 0.04 s, graph build 0.00 s (total 0.04 s)
+  plaintext      KEINEBESONDERENEREIGNISSE
+  clear          KEINEBESONDERENEREIGNISSE
+  metal          KEINEBESONDERENEREIGNISSE
+  compile        0.0377 s (N=1024 B=1)
+  stream         0.6826 s (25 letters, 0.0273 s/letter)
+  result          PASS
+
+RSS final 216.3 MiB (delta from start +199.0 MiB)
+
+######## Trivial PBS full_adder (glwe-trivial, N=64) ########
+HELUT boolean-path bench
+  netlist: netlist.json
+  N=64  B=1  ticks=0  warmup=1  reset_hold=3
+  encoding: glwe-trivial (trivial, noise-free)
+  LUT backend: pbs
+
+Compiled module 'full_adder': 3 inputs, 3 LUTs, 0 DFFs, 2 outputs
+Compile breakdown: boolean-safe LUT lower 0.00 s, graph build 0.00 s (total 0.00 s)
+COMPILE
+  total            0.0005 s
+  LUT lower        0.0004 s
+  graph build      0.0001 s
+  cells            3 LUTs, 0 DFFs, 3 inputs, 2 outputs
+  RSS delta        +1.5 MiB (after=14.7 MiB)
+
+Combinational netlist — no clock loop.
+EQUIV (Metal PBS/multilinear ≡ CleartextNetlistSim, combinational)
+  encoding: glwe-trivial
+  LUT backend: pbs
+  rows            8
+  result          PASS
+
+RSS final 24.2 MiB (delta from start +11.1 MiB)
+
+######## Trivial PBS full_adder (phase, N=64) ########
+HELUT boolean-path bench
+  netlist: netlist.json
+  N=64  B=1  ticks=0  warmup=1  reset_hold=3
+  encoding: phase (trivial, noise-free)
+  LUT backend: pbs
+
+Compiled module 'full_adder': 3 inputs, 3 LUTs, 0 DFFs, 2 outputs
+Compile breakdown: boolean-safe LUT lower 0.00 s, graph build 0.00 s (total 0.00 s)
+COMPILE
+  total            0.0005 s
+  LUT lower        0.0004 s
+  graph build      0.0001 s
+  cells            3 LUTs, 0 DFFs, 3 inputs, 2 outputs
+  RSS delta        +1.5 MiB (after=14.7 MiB)
+
+Combinational netlist — no clock loop.
+EQUIV (Metal PBS/multilinear ≡ CleartextNetlistSim, combinational)
+  encoding: phase
+  LUT backend: pbs
+  rows            8
+  result          PASS
+
+RSS final 24.2 MiB (delta from start +11.1 MiB)
+
+=== DONE 20260812T192811Z ===

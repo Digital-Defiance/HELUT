@@ -1,0 +1,18 @@
+# covering-b2 ε vs inject B @ N=1024, trials=4 (merged)
+# B=1 from interrupted run; B=2..16 mid sweep; B=32/64/128 from earlier probes
+=== b2 B=1 ===
+covering-b2 B=1: max|e|=17450 σ̂=10065.5 δ/2=1048576 decode_fail=0 decodable=true εlog2=-7832.5  (baseLog=2 ℓ=16)
+=== b2 B=2 ===
+covering-b2 B=2: max|e|=7249 σ̂=3704.7 δ/2=1048576 decode_fail=0 decodable=true εlog2=-57793.7  (baseLog=2 ℓ=16)
+=== b2 B=4 ===
+covering-b2 B=4: max|e|=41696 σ̂=21943.8 δ/2=1048576 decode_fail=0 decodable=true εlog2=-1650.0  (baseLog=2 ℓ=16)
+=== b2 B=8 ===
+covering-b2 B=8: max|e|=78007 σ̂=49363.9 δ/2=1048576 decode_fail=0 decodable=true εlog2=-327.2  (baseLog=2 ℓ=16)
+=== b2 B=16 ===
+covering-b2 B=16: max|e|=190635 σ̂=110586.5 δ/2=1048576 decode_fail=0 decodable=true εlog2=-65.4  (baseLog=2 ℓ=16)
+=== b2 B=32 ===
+covering-b2 B=32: max|e|=176554 σ̂=140334.5 δ/2=1048576 decode_fail=0 decodable=true εlog2=-40.5  (baseLog=2 ℓ=16)
+=== b2 B=64 ===
+covering-b2 B=64: max|e|=315058 σ̂=215781.0 δ/2=1048576 decode_fail=0 decodable=true εlog2=-16.7  (baseLog=2 ℓ=16)
+=== b2 B=128 ===
+covering-b2 B=128: max|e|=767218 σ̂=511908.5 δ/2=1048576 decode_fail=0 decodable=true εlog2=-1.6  (baseLog=2 ℓ=16)

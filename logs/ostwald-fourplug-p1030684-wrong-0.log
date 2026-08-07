@@ -1,0 +1,2230 @@
+=== launch 2026-09-24T17:30:26Z (wrong setting 0) ===
+cmd: ./.build/release/helut --ostwald-all-settings --ostwald-control p1030684 --ostwald-setting-from 0 --ostwald-setting-count 1 --ostwald-brute-plugs 4 --ostwald-brute-all --ostwald-exhaust 26 --ostwald-memory-gb 56
+expect: 164038875 streamed 4-plug starts; crib BAD / no BREAK bar on AAAA
+true P1030684 index was 385320 (VYAA); this is the ghost control
+true P1030684 index: 385320 (VYAA); wrong-setting control is --ostwald-setting-from 0
+=== Ostwald all-settings (no IC sieve) ===
+shell         : B/gamma/IV-III-VIII/AACU
+positions     : 0..<1 of 456976
+scorer        : staged   beam 1
+board         : empty (--ostwald-keep 0)
+
+=== Ostwald escalation of bombe stops ===
+manifest      : all-settings B/gamma/IV-III-VIII/AACU
+target        : P1030684-control (72 letters)
+candidates    : 1
+scorer        : staged   trigram model: helut-german-trigram-add-k-0.5-e08a5659-v1 (14947 grams; letters=28508834 ic=0.0747 distinct=14947)
+seeding       : all forced plugs UNLOCKED (--ostwald-keep 0); climb from empty extra board
+exhaustion    : 4-plug brute on 26 hot letters
+break bar     : crib exact ∧ IC ≥ 0.055 ∧ tail > -3.6
+
+exhaustion    : streaming 164038875 4-plug starts in waves of 524288 (not materialised; polish-top 256)
+climbs        : 0 materialised + 164038875 streamed (1 candidates)
+unified budget: 56.0 GB → 1.88e+09 trials/dispatch (32-byte records)
+backend       : Metal-ostwald-score   cores 16
+decrypts      : 82511554125
+ETA floor (~10M decrypts/s): 137.5 min
+
+  [wave 1/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 80740352 decrypts]      1s  60.3M/s ETA  22.8 min
+  [round 2 · 524288 climbs live · 144179200 decrypts]      2s  59.3M/s ETA  23.1 min
+  [round 3 · 524222 climbs live · 192413696 decrypts]      4s  54.7M/s ETA  25.1 min
+  [round 4 · 518989 climbs live · 227536570 decrypts]      5s  49.7M/s ETA  27.6 min
+  [round 5 · 457877 climbs live · 251410064 decrypts]      6s  45.2M/s ETA  30.4 min
+  [round 6 · 0 climbs live · 264688497 decrypts]      6s  40.9M/s ETA  33.5 min
+  [wave 2/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 345428849 decrypts]      9s  40.1M/s ETA  34.1 min
+  [round 2 · 524288 climbs live · 408867697 decrypts]     10s  42.2M/s ETA  32.4 min
+  [round 3 · 524227 climbs live · 457102193 decrypts]     11s  42.4M/s ETA  32.2 min
+  [round 4 · 519238 climbs live · 492225402 decrypts]     12s  41.6M/s ETA  32.9 min
+  [round 5 · 459008 climbs live · 516110350 decrypts]     13s  40.1M/s ETA  34.1 min
+  [round 6 · 0 climbs live · 529421582 decrypts]     14s  38.4M/s ETA  35.6 min
+  [wave 3/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 610161934 decrypts]     16s  38.4M/s ETA  35.6 min
+  [round 2 · 524288 climbs live · 673600782 decrypts]     17s  39.6M/s ETA  34.4 min
+  [round 3 · 524244 climbs live · 721835278 decrypts]     18s  40.0M/s ETA  34.1 min
+  [round 4 · 519250 climbs live · 756959626 decrypts]     19s  39.5M/s ETA  34.5 min
+  [round 5 · 458855 climbs live · 780845126 decrypts]     20s  38.7M/s ETA  35.2 min
+  [round 6 · 0 climbs live · 794151921 decrypts]     21s  37.7M/s ETA  36.1 min
+  [wave 4/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 874892273 decrypts]     23s  37.8M/s ETA  36.0 min
+  [round 2 · 524288 climbs live · 938331121 decrypts]     24s  38.7M/s ETA  35.1 min
+  [round 3 · 524206 climbs live · 986565617 decrypts]     25s  39.0M/s ETA  34.9 min
+  [round 4 · 518206 climbs live · 1021687419 decrypts]     26s  38.8M/s ETA  35.0 min
+  [round 5 · 454473 climbs live · 1045524895 decrypts]     27s  38.2M/s ETA  35.6 min
+  [round 6 · 0 climbs live · 1058704612 decrypts]     28s  37.5M/s ETA  36.2 min
+  [wave 5/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1139444964 decrypts]     30s  37.5M/s ETA  36.1 min
+  [round 2 · 524288 climbs live · 1202883812 decrypts]     31s  38.3M/s ETA  35.4 min
+  [round 3 · 524229 climbs live · 1251118308 decrypts]     33s  38.4M/s ETA  35.2 min
+  [round 4 · 519077 climbs live · 1286241651 decrypts]     34s  38.3M/s ETA  35.4 min
+  [round 5 · 457647 climbs live · 1310119193 decrypts]     35s  37.8M/s ETA  35.8 min
+  [round 6 · 0 climbs live · 1323390956 decrypts]     36s  37.2M/s ETA  36.3 min
+  [wave 6/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1404131308 decrypts]     38s  37.3M/s ETA  36.2 min
+  [round 2 · 524288 climbs live · 1467570156 decrypts]     39s  37.9M/s ETA  35.6 min
+  [round 3 · 524207 climbs live · 1515804652 decrypts]     40s  38.1M/s ETA  35.4 min
+  [round 4 · 517844 climbs live · 1550926521 decrypts]     41s  38.0M/s ETA  35.5 min
+  [round 5 · 450711 climbs live · 1574747345 decrypts]     42s  37.6M/s ETA  35.9 min
+  [round 6 · 0 climbs live · 1587817964 decrypts]     43s  37.1M/s ETA  36.3 min
+  [wave 7/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1668558316 decrypts]     45s  37.2M/s ETA  36.2 min
+  [round 2 · 524288 climbs live · 1731997164 decrypts]     46s  37.7M/s ETA  35.7 min
+  [round 3 · 524224 climbs live · 1780231660 decrypts]     47s  37.9M/s ETA  35.5 min
+  [round 4 · 518836 climbs live · 1815354668 decrypts]     48s  37.7M/s ETA  35.6 min
+  [round 5 · 453890 climbs live · 1839221124 decrypts]     49s  37.4M/s ETA  35.9 min
+  [round 6 · 0 climbs live · 1852383934 decrypts]     50s  37.0M/s ETA  36.3 min
+  [wave 8/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1933124286 decrypts]     52s  37.1M/s ETA  36.2 min
+  [round 2 · 524288 climbs live · 1996563134 decrypts]     53s  37.5M/s ETA  35.8 min
+  [round 3 · 524225 climbs live · 2044797630 decrypts]     54s  37.6M/s ETA  35.6 min
+  [round 4 · 518853 climbs live · 2079920705 decrypts]     55s  37.6M/s ETA  35.7 min
+  [round 5 · 453374 climbs live · 2103787943 decrypts]     56s  37.3M/s ETA  35.9 min
+  [round 6 · 0 climbs live · 2116935789 decrypts]     57s  36.9M/s ETA  36.3 min
+  [wave 9/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -2097291155 decrypts]     59s  37.0M/s ETA  36.2 min
+  [round 2 · 524288 climbs live · -2033852307 decrypts]     61s  37.4M/s ETA  35.8 min
+  [round 3 · 524190 climbs live · -1985617811 decrypts]     62s  37.5M/s ETA  35.7 min
+  [round 4 · 517151 climbs live · -1950497081 decrypts]     63s  37.4M/s ETA  35.7 min
+  [round 5 · 447107 climbs live · -1926708135 decrypts]     64s  37.2M/s ETA  35.9 min
+  [round 6 · 0 climbs live · -1913742032 decrypts]     65s  36.9M/s ETA  36.2 min
+  [wave 10/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1833001680 decrypts]     67s  36.9M/s ETA  36.1 min
+  [round 2 · 524288 climbs live · -1769562832 decrypts]     68s  37.3M/s ETA  35.8 min
+  [round 3 · 524201 climbs live · -1721328336 decrypts]     69s  37.4M/s ETA  35.7 min
+  [round 4 · 517864 climbs live · -1686206869 decrypts]     70s  37.3M/s ETA  35.7 min
+  [round 5 · 451273 climbs live · -1662385125 decrypts]     71s  37.1M/s ETA  35.9 min
+  [round 6 · 0 climbs live · -1649298208 decrypts]     72s  36.8M/s ETA  36.2 min
+  [wave 11/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1568557856 decrypts]     74s  36.8M/s ETA  36.1 min
+  [round 2 · 524288 climbs live · -1505119008 decrypts]     75s  37.1M/s ETA  35.8 min
+  [round 3 · 524205 climbs live · -1456884512 decrypts]     76s  37.2M/s ETA  35.7 min
+  [round 4 · 517645 climbs live · -1421762777 decrypts]     77s  37.2M/s ETA  35.7 min
+  [round 5 · 448509 climbs live · -1397951107 decrypts]     78s  37.0M/s ETA  35.9 min
+  [round 6 · 0 climbs live · -1384944346 decrypts]     79s  36.8M/s ETA  36.1 min
+  [wave 12/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1304203994 decrypts]     81s  36.8M/s ETA  36.0 min
+  [round 2 · 524288 climbs live · -1240765146 decrypts]     82s  37.1M/s ETA  35.7 min
+  [round 3 · 524217 climbs live · -1192530650 decrypts]     83s  37.2M/s ETA  35.6 min
+  [round 4 · 518482 climbs live · -1157408111 decrypts]     84s  37.1M/s ETA  35.6 min
+  [round 5 · 451506 climbs live · -1133557939 decrypts]     85s  37.0M/s ETA  35.8 min
+  [round 6 · 0 climbs live · -1120464265 decrypts]     86s  36.8M/s ETA  36.0 min
+  [wave 13/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1039723913 decrypts]     88s  36.8M/s ETA  35.9 min
+  [round 2 · 524288 climbs live · -976285065 decrypts]     90s  37.1M/s ETA  35.6 min
+  [round 3 · 524184 climbs live · -928050569 decrypts]     91s  37.1M/s ETA  35.5 min
+  [round 4 · 517400 climbs live · -892930241 decrypts]     92s  37.1M/s ETA  35.5 min
+  [round 5 · 451103 climbs live · -869129841 decrypts]     93s  36.9M/s ETA  35.7 min
+  [round 6 · 0 climbs live · -856047854 decrypts]     94s  36.7M/s ETA  35.9 min
+  [wave 14/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -775307502 decrypts]     96s  36.8M/s ETA  35.8 min
+  [round 2 · 524287 climbs live · -711868654 decrypts]     97s  37.0M/s ETA  35.5 min
+  [round 3 · 524195 climbs live · -663634250 decrypts]     98s  37.1M/s ETA  35.5 min
+  [round 4 · 517009 climbs live · -628513185 decrypts]     99s  37.0M/s ETA  35.5 min
+  [round 5 · 446609 climbs live · -604730771 decrypts]    100s  36.9M/s ETA  35.6 min
+  [round 6 · 0 climbs live · -591779110 decrypts]    101s  36.7M/s ETA  35.8 min
+  [wave 15/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -511038758 decrypts]    103s  36.7M/s ETA  35.7 min
+  [round 2 · 524288 climbs live · -447599910 decrypts]    104s  37.0M/s ETA  35.5 min
+  [round 3 · 524211 climbs live · -399365414 decrypts]    105s  37.0M/s ETA  35.4 min
+  [round 4 · 517406 climbs live · -364243277 decrypts]    106s  37.0M/s ETA  35.4 min
+  [round 5 · 447643 climbs live · -340442601 decrypts]    107s  36.8M/s ETA  35.5 min
+  [round 6 · 0 climbs live · -327460954 decrypts]    108s  36.7M/s ETA  35.7 min
+  [wave 16/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -246720602 decrypts]    110s  36.7M/s ETA  35.6 min
+  [round 2 · 524288 climbs live · -183281754 decrypts]    111s  36.9M/s ETA  35.4 min
+  [round 3 · 524237 climbs live · -135047258 decrypts]    112s  37.0M/s ETA  35.3 min
+  [round 4 · 518838 climbs live · -99923379 decrypts]    114s  36.9M/s ETA  35.3 min
+  [round 5 · 454417 climbs live · -76056831 decrypts]    115s  36.8M/s ETA  35.4 min
+  [round 6 · 0 climbs live · -62878738 decrypts]    115s  36.7M/s ETA  35.6 min
+  [wave 17/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 17861614 decrypts]    118s  36.7M/s ETA  35.5 min
+  [round 2 · 524288 climbs live · 81300462 decrypts]    119s  36.9M/s ETA  35.3 min
+  [round 3 · 524210 climbs live · 129534958 decrypts]    120s  37.0M/s ETA  35.2 min
+  [round 4 · 518260 climbs live · 164657028 decrypts]    121s  36.9M/s ETA  35.2 min
+  [round 5 · 452509 climbs live · 188496988 decrypts]    122s  36.8M/s ETA  35.3 min
+  [round 6 · 0 climbs live · 201619749 decrypts]    123s  36.7M/s ETA  35.5 min
+  [wave 18/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 282360101 decrypts]    125s  36.7M/s ETA  35.4 min
+  [round 2 · 524288 climbs live · 345798949 decrypts]    126s  36.9M/s ETA  35.2 min
+  [round 3 · 524102 climbs live · 394033445 decrypts]    127s  36.9M/s ETA  35.1 min
+  [round 4 · 516224 climbs live · 429148279 decrypts]    128s  36.9M/s ETA  35.2 min
+  [round 5 · 446564 climbs live · 452894583 decrypts]    129s  36.8M/s ETA  35.2 min
+  [round 6 · 0 climbs live · 465844939 decrypts]    130s  36.6M/s ETA  35.4 min
+  [wave 19/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 546585291 decrypts]    132s  36.6M/s ETA  35.3 min
+  [round 2 · 524288 climbs live · 610024139 decrypts]    133s  36.8M/s ETA  35.1 min
+  [round 3 · 524159 climbs live · 658258635 decrypts]    134s  36.9M/s ETA  35.1 min
+  [round 4 · 516737 climbs live · 693377288 decrypts]    135s  36.8M/s ETA  35.1 min
+  [round 5 · 447178 climbs live · 717147190 decrypts]    136s  36.7M/s ETA  35.2 min
+  [round 6 · 0 climbs live · 730115352 decrypts]    137s  36.6M/s ETA  35.3 min
+  [wave 20/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 810855704 decrypts]    140s  36.6M/s ETA  35.3 min
+  [round 2 · 524288 climbs live · 874294552 decrypts]    141s  36.7M/s ETA  35.1 min
+  [round 3 · 524215 climbs live · 922529048 decrypts]    142s  36.8M/s ETA  35.0 min
+  [round 4 · 518605 climbs live · 957651453 decrypts]    143s  36.8M/s ETA  35.0 min
+  [round 5 · 455539 climbs live · 981507283 decrypts]    144s  36.7M/s ETA  35.1 min
+  [round 6 · 0 climbs live · 994717914 decrypts]    145s  36.5M/s ETA  35.2 min
+  [wave 21/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1075458266 decrypts]    147s  36.5M/s ETA  35.2 min
+  [round 2 · 524288 climbs live · 1138897114 decrypts]    148s  36.7M/s ETA  35.0 min
+  [round 3 · 524150 climbs live · 1187131610 decrypts]    149s  36.7M/s ETA  34.9 min
+  [round 4 · 516009 climbs live · 1222249660 decrypts]    150s  36.7M/s ETA  35.0 min
+  [round 5 · 440733 climbs live · 1245986074 decrypts]    151s  36.6M/s ETA  35.0 min
+  [round 6 · 0 climbs live · 1258767331 decrypts]    152s  36.5M/s ETA  35.2 min
+  [wave 22/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1339507683 decrypts]    154s  36.5M/s ETA  35.1 min
+  [round 2 · 524288 climbs live · 1402946531 decrypts]    156s  36.6M/s ETA  34.9 min
+  [round 3 · 524219 climbs live · 1451181027 decrypts]    157s  36.7M/s ETA  34.9 min
+  [round 4 · 517866 climbs live · 1486303700 decrypts]    158s  36.7M/s ETA  34.9 min
+  [round 5 · 448366 climbs live · 1510125536 decrypts]    159s  36.6M/s ETA  35.0 min
+  [round 6 · 0 climbs live · 1523128150 decrypts]    160s  36.4M/s ETA  35.1 min
+  [wave 23/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1603868502 decrypts]    162s  36.5M/s ETA  35.0 min
+  [round 2 · 524288 climbs live · 1667307350 decrypts]    163s  36.6M/s ETA  34.9 min
+  [round 3 · 524253 climbs live · 1715541846 decrypts]    164s  36.6M/s ETA  34.8 min
+  [round 4 · 519727 climbs live · 1750666797 decrypts]    165s  36.6M/s ETA  34.8 min
+  [round 5 · 461012 climbs live · 1774574239 decrypts]    166s  36.5M/s ETA  34.9 min
+  [round 6 · 0 climbs live · 1787943587 decrypts]    167s  36.4M/s ETA  35.0 min
+  [wave 24/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1868683939 decrypts]    169s  36.4M/s ETA  34.9 min
+  [round 2 · 524288 climbs live · 1932122787 decrypts]    170s  36.6M/s ETA  34.8 min
+  [round 3 · 524140 climbs live · 1980357283 decrypts]    171s  36.6M/s ETA  34.7 min
+  [round 4 · 516226 climbs live · 2015474663 decrypts]    173s  36.6M/s ETA  34.7 min
+  [round 5 · 444177 climbs live · 2039221059 decrypts]    174s  36.5M/s ETA  34.8 min
+  [round 6 · 0 climbs live · 2052102192 decrypts]    174s  36.4M/s ETA  34.9 min
+  [wave 25/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 2132842544 decrypts]    177s  36.4M/s ETA  34.8 min
+  [round 2 · 524288 climbs live · -2098685904 decrypts]    178s  36.5M/s ETA  34.7 min
+  [round 3 · 524144 climbs live · -2050451408 decrypts]    179s  36.6M/s ETA  34.6 min
+  [round 4 · 516160 climbs live · -2015333760 decrypts]    180s  36.5M/s ETA  34.6 min
+  [round 5 · 441461 climbs live · -1991590400 decrypts]    181s  36.5M/s ETA  34.7 min
+  [round 6 · 0 climbs live · -1978788031 decrypts]    182s  36.4M/s ETA  34.8 min
+  [wave 26/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1898047679 decrypts]    184s  36.4M/s ETA  34.7 min
+  [round 2 · 524287 climbs live · -1834608831 decrypts]    185s  36.5M/s ETA  34.6 min
+  [round 3 · 524208 climbs live · -1786374427 decrypts]    186s  36.6M/s ETA  34.5 min
+  [round 4 · 516944 climbs live · -1751252491 decrypts]    187s  36.5M/s ETA  34.5 min
+  [round 5 · 444678 climbs live · -1727473067 decrypts]    188s  36.5M/s ETA  34.6 min
+  [round 6 · 0 climbs live · -1714577405 decrypts]    189s  36.4M/s ETA  34.7 min
+  [wave 27/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1633837053 decrypts]    191s  36.4M/s ETA  34.6 min
+  [round 2 · 524288 climbs live · -1570398205 decrypts]    192s  36.5M/s ETA  34.5 min
+  [round 3 · 524208 climbs live · -1522163709 decrypts]    193s  36.5M/s ETA  34.4 min
+  [round 4 · 518251 climbs live · -1487041773 decrypts]    195s  36.5M/s ETA  34.4 min
+  [round 5 · 451482 climbs live · -1463202227 decrypts]    196s  36.5M/s ETA  34.5 min
+  [round 6 · 0 climbs live · -1450109249 decrypts]    196s  36.4M/s ETA  34.6 min
+  [wave 28/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1369368897 decrypts]    198s  36.4M/s ETA  34.5 min
+  [round 2 · 524288 climbs live · -1305930049 decrypts]    200s  36.5M/s ETA  34.4 min
+  [round 3 · 524241 climbs live · -1257695553 decrypts]    201s  36.5M/s ETA  34.3 min
+  [round 4 · 519447 climbs live · -1222571406 decrypts]    202s  36.5M/s ETA  34.3 min
+  [round 5 · 459694 climbs live · -1198676844 decrypts]    203s  36.5M/s ETA  34.3 min
+  [round 6 · 0 climbs live · -1185345718 decrypts]    204s  36.4M/s ETA  34.4 min
+  [wave 29/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1104605366 decrypts]    206s  36.4M/s ETA  34.4 min
+  [round 2 · 524288 climbs live · -1041166518 decrypts]    207s  36.5M/s ETA  34.2 min
+  [round 3 · 524201 climbs live · -992932022 decrypts]    208s  36.5M/s ETA  34.2 min
+  [round 4 · 518109 climbs live · -957810555 decrypts]    209s  36.5M/s ETA  34.2 min
+  [round 5 · 455247 climbs live · -933977541 decrypts]    210s  36.5M/s ETA  34.2 min
+  [round 6 · 0 climbs live · -920775378 decrypts]    211s  36.4M/s ETA  34.3 min
+  [wave 30/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -840035026 decrypts]    213s  36.4M/s ETA  34.3 min
+  [round 2 · 524288 climbs live · -776596178 decrypts]    214s  36.5M/s ETA  34.1 min
+  [round 3 · 524190 climbs live · -728361682 decrypts]    215s  36.5M/s ETA  34.1 min
+  [round 4 · 517691 climbs live · -693240952 decrypts]    216s  36.5M/s ETA  34.1 min
+  [round 5 · 451986 climbs live · -669427166 decrypts]    217s  36.4M/s ETA  34.1 min
+  [round 6 · 0 climbs live · -656319572 decrypts]    218s  36.4M/s ETA  34.2 min
+  [wave 31/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -575579220 decrypts]    220s  36.4M/s ETA  34.1 min
+  [round 2 · 524288 climbs live · -512140372 decrypts]    221s  36.5M/s ETA  34.0 min
+  [round 3 · 524203 climbs live · -463905876 decrypts]    222s  36.5M/s ETA  33.9 min
+  [round 4 · 518900 climbs live · -428784275 decrypts]    223s  36.5M/s ETA  33.9 min
+  [round 5 · 457929 climbs live · -404914875 decrypts]    224s  36.5M/s ETA  34.0 min
+  [round 6 · 0 climbs live · -391634934 decrypts]    225s  36.4M/s ETA  34.0 min
+  [wave 32/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -310894582 decrypts]    227s  36.4M/s ETA  34.0 min
+  [round 2 · 524288 climbs live · -247455734 decrypts]    228s  36.5M/s ETA  33.9 min
+  [round 3 · 524237 climbs live · -199221238 decrypts]    230s  36.6M/s ETA  33.8 min
+  [round 4 · 518907 climbs live · -164097359 decrypts]    231s  36.5M/s ETA  33.8 min
+  [round 5 · 457340 climbs live · -140227637 decrypts]    232s  36.5M/s ETA  33.8 min
+  [round 6 · 0 climbs live · -126964777 decrypts]    232s  36.4M/s ETA  33.9 min
+  [wave 33/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -46224425 decrypts]    235s  36.4M/s ETA  33.8 min
+  [round 2 · 524286 climbs live · 17214423 decrypts]    236s  36.5M/s ETA  33.7 min
+  [round 3 · 524185 climbs live · 65448735 decrypts]    237s  36.6M/s ETA  33.7 min
+  [round 4 · 517879 climbs live · 100569130 decrypts]    238s  36.5M/s ETA  33.7 min
+  [round 5 · 453690 climbs live · 124391564 decrypts]    239s  36.5M/s ETA  33.7 min
+  [round 6 · 0 climbs live · 137548574 decrypts]    240s  36.4M/s ETA  33.8 min
+  [wave 34/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 218288926 decrypts]    242s  36.4M/s ETA  33.7 min
+  [round 2 · 524288 climbs live · 281727774 decrypts]    243s  36.5M/s ETA  33.6 min
+  [round 3 · 524176 climbs live · 329962270 decrypts]    244s  36.6M/s ETA  33.5 min
+  [round 4 · 518122 climbs live · 365082062 decrypts]    245s  36.6M/s ETA  33.5 min
+  [round 5 · 452735 climbs live · 388915674 decrypts]    246s  36.5M/s ETA  33.6 min
+  [round 6 · 0 climbs live · 402044989 decrypts]    247s  36.4M/s ETA  33.6 min
+  [wave 35/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 482785341 decrypts]    249s  36.4M/s ETA  33.6 min
+  [round 2 · 524288 climbs live · 546224189 decrypts]    250s  36.5M/s ETA  33.5 min
+  [round 3 · 524214 climbs live · 594458685 decrypts]    251s  36.6M/s ETA  33.4 min
+  [round 4 · 518958 climbs live · 629581023 decrypts]    252s  36.6M/s ETA  33.4 min
+  [round 5 · 456521 climbs live · 653453091 decrypts]    253s  36.5M/s ETA  33.4 min
+  [round 6 · 0 climbs live · 666692200 decrypts]    254s  36.4M/s ETA  33.5 min
+  [wave 36/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 747432552 decrypts]    256s  36.4M/s ETA  33.5 min
+  [round 2 · 524288 climbs live · 810871400 decrypts]    257s  36.5M/s ETA  33.3 min
+  [round 3 · 524229 climbs live · 859105896 decrypts]    258s  36.6M/s ETA  33.3 min
+  [round 4 · 519328 climbs live · 894229239 decrypts]    259s  36.6M/s ETA  33.3 min
+  [round 5 · 459291 climbs live · 918118327 decrypts]    260s  36.5M/s ETA  33.3 min
+  [round 6 · 0 climbs live · 931437766 decrypts]    261s  36.4M/s ETA  33.4 min
+  [wave 37/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1012178118 decrypts]    263s  36.5M/s ETA  33.3 min
+  [round 2 · 524288 climbs live · 1075616966 decrypts]    264s  36.6M/s ETA  33.2 min
+  [round 3 · 524225 climbs live · 1123851462 decrypts]    266s  36.6M/s ETA  33.2 min
+  [round 4 · 518873 climbs live · 1158974537 decrypts]    267s  36.6M/s ETA  33.2 min
+  [round 5 · 457353 climbs live · 1182842695 decrypts]    268s  36.5M/s ETA  33.2 min
+  [round 6 · 0 climbs live · 1196105932 decrypts]    268s  36.5M/s ETA  33.3 min
+  [wave 38/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1276846284 decrypts]    271s  36.5M/s ETA  33.2 min
+  [round 2 · 524288 climbs live · 1340285132 decrypts]    272s  36.6M/s ETA  33.1 min
+  [round 3 · 524176 climbs live · 1388519628 decrypts]    273s  36.6M/s ETA  33.0 min
+  [round 4 · 517787 climbs live · 1423639420 decrypts]    274s  36.6M/s ETA  33.0 min
+  [round 5 · 455114 climbs live · 1447457622 decrypts]    275s  36.5M/s ETA  33.1 min
+  [round 6 · 0 climbs live · 1460655928 decrypts]    276s  36.5M/s ETA  33.1 min
+  [wave 39/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1541396280 decrypts]    278s  36.5M/s ETA  33.1 min
+  [round 2 · 524288 climbs live · 1604835128 decrypts]    279s  36.6M/s ETA  33.0 min
+  [round 3 · 524185 climbs live · 1653069624 decrypts]    280s  36.6M/s ETA  32.9 min
+  [round 4 · 518089 climbs live · 1688190019 decrypts]    281s  36.6M/s ETA  32.9 min
+  [round 5 · 455085 climbs live · 1712022113 decrypts]    282s  36.5M/s ETA  33.0 min
+  [round 6 · 0 climbs live · 1725219578 decrypts]    283s  36.4M/s ETA  33.0 min
+  [wave 40/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1805959930 decrypts]    285s  36.5M/s ETA  33.0 min
+  [round 2 · 524288 climbs live · 1869398778 decrypts]    286s  36.5M/s ETA  32.9 min
+  [round 3 · 524198 climbs live · 1917633274 decrypts]    287s  36.6M/s ETA  32.8 min
+  [round 4 · 518528 climbs live · 1952754540 decrypts]    288s  36.6M/s ETA  32.8 min
+  [round 5 · 455822 climbs live · 1976606828 decrypts]    289s  36.5M/s ETA  32.8 min
+  [round 6 · 0 climbs live · 1989825666 decrypts]    290s  36.4M/s ETA  32.9 min
+  [wave 41/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 2070566018 decrypts]    292s  36.5M/s ETA  32.8 min
+  [round 2 · 524288 climbs live · 2134004866 decrypts]    293s  36.5M/s ETA  32.7 min
+  [round 3 · 524133 climbs live · -2112727934 decrypts]    295s  36.6M/s ETA  32.7 min
+  [round 4 · 516862 climbs live · -2077611023 decrypts]    296s  36.6M/s ETA  32.7 min
+  [round 5 · 446649 climbs live · -2053835371 decrypts]    297s  36.5M/s ETA  32.7 min
+  [round 6 · 0 climbs live · -2040882550 decrypts]    298s  36.4M/s ETA  32.8 min
+  [wave 42/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1960142198 decrypts]    300s  36.5M/s ETA  32.7 min
+  [round 2 · 524288 climbs live · -1896703350 decrypts]    301s  36.5M/s ETA  32.6 min
+  [round 3 · 524180 climbs live · -1848468854 decrypts]    302s  36.6M/s ETA  32.6 min
+  [round 4 · 517187 climbs live · -1813348794 decrypts]    303s  36.5M/s ETA  32.6 min
+  [round 5 · 448550 climbs live · -1789558192 decrypts]    304s  36.5M/s ETA  32.6 min
+  [round 6 · 0 climbs live · -1776550242 decrypts]    305s  36.4M/s ETA  32.7 min
+  [wave 43/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1695809890 decrypts]    307s  36.5M/s ETA  32.6 min
+  [round 2 · 524286 climbs live · -1632371042 decrypts]    308s  36.5M/s ETA  32.5 min
+  [round 3 · 524167 climbs live · -1584136730 decrypts]    309s  36.6M/s ETA  32.5 min
+  [round 4 · 518193 climbs live · -1549017541 decrypts]    310s  36.5M/s ETA  32.5 min
+  [round 5 · 456503 climbs live · -1525180663 decrypts]    311s  36.5M/s ETA  32.5 min
+  [round 6 · 0 climbs live · -1511942076 decrypts]    312s  36.4M/s ETA  32.5 min
+  [wave 44/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1431201724 decrypts]    314s  36.4M/s ETA  32.5 min
+  [round 2 · 524288 climbs live · -1367762876 decrypts]    315s  36.5M/s ETA  32.4 min
+  [round 3 · 524190 climbs live · -1319528380 decrypts]    316s  36.5M/s ETA  32.4 min
+  [round 4 · 518129 climbs live · -1284407650 decrypts]    317s  36.5M/s ETA  32.3 min
+  [round 5 · 454236 climbs live · -1260573716 decrypts]    319s  36.5M/s ETA  32.4 min
+  [round 6 · 0 climbs live · -1247400872 decrypts]    319s  36.4M/s ETA  32.4 min
+  [wave 45/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1166660520 decrypts]    322s  36.4M/s ETA  32.4 min
+  [round 2 · 524288 climbs live · -1103221672 decrypts]    323s  36.5M/s ETA  32.3 min
+  [round 3 · 524209 climbs live · -1054987176 decrypts]    324s  36.5M/s ETA  32.2 min
+  [round 4 · 518025 climbs live · -1019865173 decrypts]    325s  36.5M/s ETA  32.2 min
+  [round 5 · 452655 climbs live · -996036023 decrypts]    326s  36.5M/s ETA  32.3 min
+  [round 6 · 0 climbs live · -982909028 decrypts]    327s  36.4M/s ETA  32.3 min
+  [wave 46/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -902168676 decrypts]    329s  36.4M/s ETA  32.3 min
+  [round 2 · 524288 climbs live · -838729828 decrypts]    330s  36.5M/s ETA  32.2 min
+  [round 3 · 524200 climbs live · -790495332 decrypts]    331s  36.5M/s ETA  32.1 min
+  [round 4 · 518330 climbs live · -755373932 decrypts]    332s  36.5M/s ETA  32.1 min
+  [round 5 · 454190 climbs live · -731530752 decrypts]    333s  36.5M/s ETA  32.1 min
+  [round 6 · 0 climbs live · -718359242 decrypts]    334s  36.4M/s ETA  32.2 min
+  [wave 47/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -637618890 decrypts]    336s  36.4M/s ETA  32.1 min
+  [round 2 · 524288 climbs live · -574180042 decrypts]    337s  36.5M/s ETA  32.0 min
+  [round 3 · 524206 climbs live · -525945546 decrypts]    338s  36.5M/s ETA  32.0 min
+  [round 4 · 518414 climbs live · -490823744 decrypts]    339s  36.5M/s ETA  32.0 min
+  [round 5 · 454889 climbs live · -466976700 decrypts]    340s  36.5M/s ETA  32.0 min
+  [round 6 · 0 climbs live · -453784919 decrypts]    341s  36.4M/s ETA  32.1 min
+  [wave 48/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -373044567 decrypts]    343s  36.4M/s ETA  32.0 min
+  [round 2 · 524288 climbs live · -309605719 decrypts]    344s  36.5M/s ETA  31.9 min
+  [round 3 · 524164 climbs live · -261371223 decrypts]    346s  36.5M/s ETA  31.9 min
+  [round 4 · 517233 climbs live · -226252235 decrypts]    347s  36.5M/s ETA  31.9 min
+  [round 5 · 448002 climbs live · -202459517 decrypts]    348s  36.5M/s ETA  31.9 min
+  [round 6 · 0 climbs live · -189467459 decrypts]    349s  36.4M/s ETA  31.9 min
+  [wave 49/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -108727107 decrypts]    351s  36.4M/s ETA  31.9 min
+  [round 2 · 524288 climbs live · -45288259 decrypts]    352s  36.5M/s ETA  31.8 min
+  [round 3 · 524183 climbs live · 2946237 decrypts]    353s  36.5M/s ETA  31.8 min
+  [round 4 · 517522 climbs live · 38066498 decrypts]    354s  36.5M/s ETA  31.8 min
+  [round 5 · 448716 climbs live · 61872510 decrypts]    355s  36.5M/s ETA  31.8 min
+  [round 6 · 0 climbs live · 74885274 decrypts]    356s  36.4M/s ETA  31.8 min
+  [wave 50/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 155625626 decrypts]    358s  36.4M/s ETA  31.8 min
+  [round 2 · 524288 climbs live · 219064474 decrypts]    359s  36.5M/s ETA  31.7 min
+  [round 3 · 524199 climbs live · 267298970 decrypts]    360s  36.5M/s ETA  31.7 min
+  [round 4 · 518003 climbs live · 302420303 decrypts]    361s  36.5M/s ETA  31.7 min
+  [round 5 · 451117 climbs live · 326248441 decrypts]    362s  36.5M/s ETA  31.7 min
+  [round 6 · 0 climbs live · 339330834 decrypts]    363s  36.4M/s ETA  31.7 min
+  [wave 51/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 420071186 decrypts]    365s  36.4M/s ETA  31.7 min
+  [round 2 · 524288 climbs live · 483510034 decrypts]    366s  36.5M/s ETA  31.6 min
+  [round 3 · 524223 climbs live · 531744530 decrypts]    367s  36.5M/s ETA  31.5 min
+  [round 4 · 519003 climbs live · 566867471 decrypts]    369s  36.5M/s ETA  31.5 min
+  [round 5 · 456891 climbs live · 590741609 decrypts]    370s  36.5M/s ETA  31.6 min
+  [round 6 · 0 climbs live · 603991448 decrypts]    370s  36.4M/s ETA  31.6 min
+  [wave 52/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 684731800 decrypts]    373s  36.4M/s ETA  31.6 min
+  [round 2 · 524288 climbs live · 748170648 decrypts]    374s  36.5M/s ETA  31.5 min
+  [round 3 · 524191 climbs live · 796405144 decrypts]    375s  36.5M/s ETA  31.4 min
+  [round 4 · 517853 climbs live · 831525941 decrypts]    376s  36.5M/s ETA  31.4 min
+  [round 5 · 452160 climbs live · 855347179 decrypts]    377s  36.5M/s ETA  31.4 min
+  [round 6 · 0 climbs live · 868459819 decrypts]    378s  36.4M/s ETA  31.5 min
+  [wave 53/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 949200171 decrypts]    380s  36.4M/s ETA  31.4 min
+  [round 2 · 524287 climbs live · 1012639019 decrypts]    381s  36.5M/s ETA  31.4 min
+  [round 3 · 524152 climbs live · 1060873423 decrypts]    382s  36.5M/s ETA  31.3 min
+  [round 4 · 516389 climbs live · 1095991607 decrypts]    383s  36.5M/s ETA  31.3 min
+  [round 5 · 447388 climbs live · 1119745501 decrypts]    384s  36.5M/s ETA  31.3 min
+  [round 6 · 0 climbs live · 1132719753 decrypts]    385s  36.4M/s ETA  31.4 min
+  [wave 54/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1213460105 decrypts]    387s  36.4M/s ETA  31.3 min
+  [round 2 · 524288 climbs live · 1276898953 decrypts]    388s  36.5M/s ETA  31.2 min
+  [round 3 · 524201 climbs live · 1325133449 decrypts]    389s  36.5M/s ETA  31.2 min
+  [round 4 · 516729 climbs live · 1360254916 decrypts]    390s  36.5M/s ETA  31.2 min
+  [round 5 · 446340 climbs live · 1384024450 decrypts]    391s  36.5M/s ETA  31.2 min
+  [round 6 · 0 climbs live · 1396968310 decrypts]    392s  36.4M/s ETA  31.2 min
+  [wave 55/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1477708662 decrypts]    394s  36.4M/s ETA  31.2 min
+  [round 2 · 524288 climbs live · 1541147510 decrypts]    395s  36.5M/s ETA  31.1 min
+  [round 3 · 524184 climbs live · 1589382006 decrypts]    397s  36.5M/s ETA  31.1 min
+  [round 4 · 517519 climbs live · 1624502334 decrypts]    398s  36.5M/s ETA  31.1 min
+  [round 5 · 451103 climbs live · 1648308208 decrypts]    399s  36.5M/s ETA  31.1 min
+  [round 6 · 0 climbs live · 1661390195 decrypts]    400s  36.4M/s ETA  31.1 min
+  [wave 56/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1742130547 decrypts]    402s  36.4M/s ETA  31.1 min
+  [round 2 · 524288 climbs live · 1805569395 decrypts]    403s  36.5M/s ETA  31.0 min
+  [round 3 · 524129 climbs live · 1853803891 decrypts]    404s  36.5M/s ETA  30.9 min
+  [round 4 · 515484 climbs live · 1888920534 decrypts]    405s  36.5M/s ETA  30.9 min
+  [round 5 · 440075 climbs live · 1912632798 decrypts]    406s  36.5M/s ETA  31.0 min
+  [round 6 · 0 climbs live · 1925394973 decrypts]    407s  36.4M/s ETA  31.0 min
+  [wave 57/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 2006135325 decrypts]    409s  36.4M/s ETA  30.9 min
+  [round 2 · 524288 climbs live · 2069574173 decrypts]    410s  36.5M/s ETA  30.9 min
+  [round 3 · 524140 climbs live · 2117808669 decrypts]    411s  36.5M/s ETA  30.8 min
+  [round 4 · 517058 climbs live · -2142041247 decrypts]    412s  36.5M/s ETA  30.8 min
+  [round 5 · 448123 climbs live · -2118256579 decrypts]    413s  36.5M/s ETA  30.8 min
+  [round 6 · 0 climbs live · -2105261012 decrypts]    414s  36.4M/s ETA  30.9 min
+  [wave 58/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -2024520660 decrypts]    416s  36.4M/s ETA  30.8 min
+  [round 2 · 524288 climbs live · -1961081812 decrypts]    417s  36.5M/s ETA  30.7 min
+  [round 3 · 524187 climbs live · -1912847316 decrypts]    418s  36.5M/s ETA  30.7 min
+  [round 4 · 518128 climbs live · -1877726787 decrypts]    419s  36.5M/s ETA  30.7 min
+  [round 5 · 454888 climbs live · -1853892899 decrypts]    420s  36.5M/s ETA  30.7 min
+  [round 6 · 0 climbs live · -1840701147 decrypts]    421s  36.4M/s ETA  30.8 min
+  [wave 59/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1759960795 decrypts]    423s  36.4M/s ETA  30.7 min
+  [round 2 · 524287 climbs live · -1696521947 decrypts]    425s  36.5M/s ETA  30.6 min
+  [round 3 · 524174 climbs live · -1648287543 decrypts]    426s  36.5M/s ETA  30.6 min
+  [round 4 · 517115 climbs live · -1613167885 decrypts]    427s  36.5M/s ETA  30.6 min
+  [round 5 · 448310 climbs live · -1589380595 decrypts]    428s  36.4M/s ETA  30.6 min
+  [round 6 · 0 climbs live · -1576379605 decrypts]    429s  36.4M/s ETA  30.6 min
+  [wave 60/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1495639253 decrypts]    431s  36.4M/s ETA  30.6 min
+  [round 2 · 524287 climbs live · -1432200405 decrypts]    432s  36.5M/s ETA  30.5 min
+  [round 3 · 524173 climbs live · -1383966001 decrypts]    433s  36.5M/s ETA  30.5 min
+  [round 4 · 517000 climbs live · -1348846410 decrypts]    434s  36.5M/s ETA  30.5 min
+  [round 5 · 444185 climbs live · -1325064410 decrypts]    435s  36.5M/s ETA  30.5 min
+  [round 6 · 0 climbs live · -1312183045 decrypts]    436s  36.4M/s ETA  30.5 min
+  [wave 61/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1231442693 decrypts]    438s  36.4M/s ETA  30.5 min
+  [round 2 · 524288 climbs live · -1168003845 decrypts]    439s  36.5M/s ETA  30.4 min
+  [round 3 · 524190 climbs live · -1119769349 decrypts]    440s  36.5M/s ETA  30.3 min
+  [round 4 · 517883 climbs live · -1084648619 decrypts]    441s  36.5M/s ETA  30.3 min
+  [round 5 · 451178 climbs live · -1060826001 decrypts]    442s  36.5M/s ETA  30.4 min
+  [round 6 · 0 climbs live · -1047741839 decrypts]    443s  36.4M/s ETA  30.4 min
+  [wave 62/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -967001487 decrypts]    445s  36.4M/s ETA  30.3 min
+  [round 2 · 524288 climbs live · -903562639 decrypts]    446s  36.5M/s ETA  30.3 min
+  [round 3 · 524193 climbs live · -855328143 decrypts]    447s  36.5M/s ETA  30.2 min
+  [round 4 · 517884 climbs live · -820207212 decrypts]    448s  36.5M/s ETA  30.2 min
+  [round 5 · 451847 climbs live · -796384548 decrypts]    449s  36.5M/s ETA  30.2 min
+  [round 6 · 0 climbs live · -783280985 decrypts]    450s  36.4M/s ETA  30.3 min
+  [wave 63/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -702540633 decrypts]    452s  36.4M/s ETA  30.2 min
+  [round 2 · 524287 climbs live · -639101785 decrypts]    454s  36.5M/s ETA  30.1 min
+  [round 3 · 524068 climbs live · -590867381 decrypts]    455s  36.5M/s ETA  30.1 min
+  [round 4 · 515626 climbs live · -555754825 decrypts]    456s  36.5M/s ETA  30.1 min
+  [round 5 · 442666 climbs live · -532036029 decrypts]    457s  36.5M/s ETA  30.1 min
+  [round 6 · 0 climbs live · -519198715 decrypts]    458s  36.4M/s ETA  30.1 min
+  [wave 64/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -438458363 decrypts]    460s  36.4M/s ETA  30.1 min
+  [round 2 · 524287 climbs live · -375019515 decrypts]    461s  36.5M/s ETA  30.0 min
+  [round 3 · 524063 climbs live · -326785111 decrypts]    462s  36.5M/s ETA  30.0 min
+  [round 4 · 515365 climbs live · -291672890 decrypts]    463s  36.5M/s ETA  30.0 min
+  [round 5 · 442167 climbs live · -267966100 decrypts]    464s  36.5M/s ETA  30.0 min
+  [round 6 · 0 climbs live · -255143257 decrypts]    465s  36.4M/s ETA  30.0 min
+  [wave 65/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -174402905 decrypts]    467s  36.4M/s ETA  30.0 min
+  [round 2 · 524288 climbs live · -110964057 decrypts]    468s  36.5M/s ETA  29.9 min
+  [round 3 · 524165 climbs live · -62729561 decrypts]    469s  36.5M/s ETA  29.9 min
+  [round 4 · 517470 climbs live · -27610506 decrypts]    470s  36.5M/s ETA  29.9 min
+  [round 5 · 451891 climbs live · -3806886 decrypts]    471s  36.4M/s ETA  29.9 min
+  [round 6 · 0 climbs live · 9297953 decrypts]    472s  36.4M/s ETA  29.9 min
+  [wave 66/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 90038305 decrypts]    474s  36.4M/s ETA  29.9 min
+  [round 2 · 524288 climbs live · 153477153 decrypts]    475s  36.5M/s ETA  29.8 min
+  [round 3 · 524170 climbs live · 201711649 decrypts]    476s  36.5M/s ETA  29.8 min
+  [round 4 · 517261 climbs live · 236831039 decrypts]    477s  36.5M/s ETA  29.7 min
+  [round 5 · 447253 climbs live · 260625045 decrypts]    478s  36.5M/s ETA  29.8 min
+  [round 6 · 0 climbs live · 273595382 decrypts]    479s  36.4M/s ETA  29.8 min
+  [wave 67/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 354335734 decrypts]    481s  36.4M/s ETA  29.7 min
+  [round 2 · 524288 climbs live · 417774582 decrypts]    483s  36.5M/s ETA  29.7 min
+  [round 3 · 524150 climbs live · 466009078 decrypts]    484s  36.5M/s ETA  29.6 min
+  [round 4 · 516294 climbs live · 501127128 decrypts]    485s  36.5M/s ETA  29.6 min
+  [round 5 · 442686 climbs live · 524876652 decrypts]    486s  36.5M/s ETA  29.6 min
+  [round 6 · 0 climbs live · 537714546 decrypts]    487s  36.4M/s ETA  29.7 min
+  [wave 68/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 618454898 decrypts]    489s  36.4M/s ETA  29.6 min
+  [round 2 · 524288 climbs live · 681893746 decrypts]    490s  36.5M/s ETA  29.5 min
+  [round 3 · 524144 climbs live · 730128242 decrypts]    491s  36.5M/s ETA  29.5 min
+  [round 4 · 516509 climbs live · 765245890 decrypts]    492s  36.5M/s ETA  29.5 min
+  [round 5 · 444855 climbs live · 789005304 decrypts]    493s  36.5M/s ETA  29.5 min
+  [round 6 · 0 climbs live · 801906099 decrypts]    494s  36.4M/s ETA  29.5 min
+  [wave 69/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 882646451 decrypts]    496s  36.4M/s ETA  29.5 min
+  [round 2 · 524288 climbs live · 946085299 decrypts]    497s  36.5M/s ETA  29.4 min
+  [round 3 · 524163 climbs live · 994319795 decrypts]    498s  36.5M/s ETA  29.4 min
+  [round 4 · 517035 climbs live · 1029438716 decrypts]    499s  36.5M/s ETA  29.4 min
+  [round 5 · 449287 climbs live · 1053222326 decrypts]    500s  36.4M/s ETA  29.4 min
+  [round 6 · 0 climbs live · 1066251649 decrypts]    501s  36.4M/s ETA  29.4 min
+  [wave 70/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1146992001 decrypts]    503s  36.4M/s ETA  29.4 min
+  [round 2 · 524288 climbs live · 1210430849 decrypts]    504s  36.5M/s ETA  29.3 min
+  [round 3 · 524195 climbs live · 1258665345 decrypts]    505s  36.5M/s ETA  29.3 min
+  [round 4 · 516933 climbs live · 1293786410 decrypts]    507s  36.5M/s ETA  29.3 min
+  [round 5 · 446540 climbs live · 1317565328 decrypts]    508s  36.4M/s ETA  29.3 min
+  [round 6 · 0 climbs live · 1330514988 decrypts]    508s  36.4M/s ETA  29.3 min
+  [wave 71/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1411255340 decrypts]    510s  36.4M/s ETA  29.3 min
+  [round 2 · 524288 climbs live · 1474694188 decrypts]    512s  36.5M/s ETA  29.2 min
+  [round 3 · 524189 climbs live · 1522928684 decrypts]    513s  36.5M/s ETA  29.2 min
+  [round 4 · 517470 climbs live · 1558049347 decrypts]    514s  36.5M/s ETA  29.1 min
+  [round 5 · 449293 climbs live · 1581852967 decrypts]    515s  36.4M/s ETA  29.2 min
+  [round 6 · 0 climbs live · 1594882464 decrypts]    516s  36.4M/s ETA  29.2 min
+  [wave 72/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1675622816 decrypts]    518s  36.4M/s ETA  29.1 min
+  [round 2 · 524288 climbs live · 1739061664 decrypts]    519s  36.5M/s ETA  29.1 min
+  [round 3 · 524198 climbs live · 1787296160 decrypts]    520s  36.5M/s ETA  29.0 min
+  [round 4 · 518143 climbs live · 1822417426 decrypts]    521s  36.5M/s ETA  29.0 min
+  [round 5 · 452313 climbs live · 1846252004 decrypts]    522s  36.5M/s ETA  29.0 min
+  [round 6 · 0 climbs live · 1859369081 decrypts]    523s  36.4M/s ETA  29.0 min
+  [wave 73/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1940109433 decrypts]    525s  36.4M/s ETA  29.0 min
+  [round 2 · 524288 climbs live · 2003548281 decrypts]    526s  36.5M/s ETA  28.9 min
+  [round 3 · 524226 climbs live · 2051782777 decrypts]    527s  36.5M/s ETA  28.9 min
+  [round 4 · 518947 climbs live · 2086905919 decrypts]    528s  36.5M/s ETA  28.9 min
+  [round 5 · 457668 climbs live · 2110777481 decrypts]    529s  36.5M/s ETA  28.9 min
+  [round 6 · 0 climbs live · 2124049853 decrypts]    530s  36.4M/s ETA  28.9 min
+  [wave 74/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -2090177091 decrypts]    532s  36.4M/s ETA  28.9 min
+  [round 2 · 524288 climbs live · -2026738243 decrypts]    533s  36.5M/s ETA  28.8 min
+  [round 3 · 524225 climbs live · -1978503747 decrypts]    534s  36.5M/s ETA  28.8 min
+  [round 4 · 518310 climbs live · -1943380672 decrypts]    535s  36.5M/s ETA  28.8 min
+  [round 5 · 454142 climbs live · -1919538412 decrypts]    536s  36.5M/s ETA  28.8 min
+  [round 6 · 0 climbs live · -1906368294 decrypts]    537s  36.4M/s ETA  28.8 min
+  [wave 75/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1825627942 decrypts]    539s  36.4M/s ETA  28.8 min
+  [round 2 · 524288 climbs live · -1762189094 decrypts]    540s  36.5M/s ETA  28.7 min
+  [round 3 · 524151 climbs live · -1713954598 decrypts]    542s  36.5M/s ETA  28.7 min
+  [round 4 · 517272 climbs live · -1678836481 decrypts]    543s  36.5M/s ETA  28.7 min
+  [round 5 · 449985 climbs live · -1655041969 decrypts]    544s  36.5M/s ETA  28.7 min
+  [round 6 · 0 climbs live · -1641992404 decrypts]    545s  36.4M/s ETA  28.7 min
+  [wave 76/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1561252052 decrypts]    547s  36.4M/s ETA  28.6 min
+  [round 2 · 524288 climbs live · -1497813204 decrypts]    548s  36.5M/s ETA  28.6 min
+  [round 3 · 524144 climbs live · -1449578708 decrypts]    549s  36.5M/s ETA  28.5 min
+  [round 4 · 517068 climbs live · -1414461060 decrypts]    550s  36.5M/s ETA  28.5 min
+  [round 5 · 449211 climbs live · -1390675932 decrypts]    551s  36.5M/s ETA  28.5 min
+  [round 6 · 0 climbs live · -1377648813 decrypts]    552s  36.4M/s ETA  28.6 min
+  [wave 77/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1296908461 decrypts]    554s  36.4M/s ETA  28.5 min
+  [round 2 · 524287 climbs live · -1233469613 decrypts]    555s  36.5M/s ETA  28.5 min
+  [round 3 · 524169 climbs live · -1185235209 decrypts]    556s  36.5M/s ETA  28.4 min
+  [round 4 · 517275 climbs live · -1150115886 decrypts]    557s  36.5M/s ETA  28.4 min
+  [round 5 · 452816 climbs live · -1126321236 decrypts]    558s  36.5M/s ETA  28.4 min
+  [round 6 · 0 climbs live · -1113189572 decrypts]    559s  36.4M/s ETA  28.4 min
+  [wave 78/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1032449220 decrypts]    561s  36.4M/s ETA  28.4 min
+  [round 2 · 524287 climbs live · -969010372 decrypts]    562s  36.5M/s ETA  28.3 min
+  [round 3 · 523999 climbs live · -920775968 decrypts]    563s  36.5M/s ETA  28.3 min
+  [round 4 · 514414 climbs live · -885668035 decrypts]    564s  36.5M/s ETA  28.3 min
+  [round 5 · 438530 climbs live · -862004991 decrypts]    565s  36.5M/s ETA  28.3 min
+  [round 6 · 0 climbs live · -849287621 decrypts]    566s  36.4M/s ETA  28.3 min
+  [wave 79/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -768547269 decrypts]    568s  36.4M/s ETA  28.3 min
+  [round 2 · 524288 climbs live · -705108421 decrypts]    570s  36.5M/s ETA  28.2 min
+  [round 3 · 524130 climbs live · -656873925 decrypts]    571s  36.5M/s ETA  28.2 min
+  [round 4 · 516030 climbs live · -621757215 decrypts]    572s  36.5M/s ETA  28.2 min
+  [round 5 · 445581 climbs live · -598019835 decrypts]    573s  36.4M/s ETA  28.2 min
+  [round 6 · 0 climbs live · -585097986 decrypts]    574s  36.4M/s ETA  28.2 min
+  [wave 80/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -504357634 decrypts]    576s  36.4M/s ETA  28.2 min
+  [round 2 · 524287 climbs live · -440918786 decrypts]    577s  36.5M/s ETA  28.1 min
+  [round 3 · 524167 climbs live · -392684382 decrypts]    578s  36.5M/s ETA  28.1 min
+  [round 4 · 517143 climbs live · -357565193 decrypts]    579s  36.5M/s ETA  28.1 min
+  [round 5 · 449751 climbs live · -333776615 decrypts]    580s  36.4M/s ETA  28.1 min
+  [round 6 · 0 climbs live · -320733836 decrypts]    581s  36.4M/s ETA  28.1 min
+  [wave 81/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -239993484 decrypts]    583s  36.4M/s ETA  28.0 min
+  [round 2 · 524288 climbs live · -176554636 decrypts]    584s  36.5M/s ETA  28.0 min
+  [round 3 · 524194 climbs live · -128320140 decrypts]    585s  36.5M/s ETA  28.0 min
+  [round 4 · 517594 climbs live · -93199142 decrypts]    586s  36.5M/s ETA  27.9 min
+  [round 5 · 451640 climbs live · -69389818 decrypts]    587s  36.4M/s ETA  27.9 min
+  [round 6 · 0 climbs live · -56292258 decrypts]    588s  36.4M/s ETA  28.0 min
+  [wave 82/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 24448094 decrypts]    590s  36.4M/s ETA  27.9 min
+  [round 2 · 524287 climbs live · 87886942 decrypts]    591s  36.5M/s ETA  27.9 min
+  [round 3 · 524183 climbs live · 136121346 decrypts]    593s  36.5M/s ETA  27.8 min
+  [round 4 · 518215 climbs live · 171241607 decrypts]    594s  36.5M/s ETA  27.8 min
+  [round 5 · 453631 climbs live · 195079497 decrypts]    595s  36.4M/s ETA  27.8 min
+  [round 6 · 0 climbs live · 208234796 decrypts]    596s  36.4M/s ETA  27.8 min
+  [wave 83/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 288975148 decrypts]    598s  36.4M/s ETA  27.8 min
+  [round 2 · 524288 climbs live · 352413996 decrypts]    599s  36.5M/s ETA  27.7 min
+  [round 3 · 524150 climbs live · 400648492 decrypts]    600s  36.5M/s ETA  27.7 min
+  [round 4 · 516810 climbs live · 435766542 decrypts]    601s  36.5M/s ETA  27.7 min
+  [round 5 · 445291 climbs live · 459539802 decrypts]    602s  36.4M/s ETA  27.7 min
+  [round 6 · 0 climbs live · 472453241 decrypts]    603s  36.4M/s ETA  27.7 min
+  [wave 84/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 553193593 decrypts]    605s  36.4M/s ETA  27.7 min
+  [round 2 · 524288 climbs live · 616632441 decrypts]    606s  36.5M/s ETA  27.6 min
+  [round 3 · 524143 climbs live · 664866937 decrypts]    607s  36.5M/s ETA  27.6 min
+  [round 4 · 515631 climbs live · 699984518 decrypts]    608s  36.5M/s ETA  27.6 min
+  [round 5 · 438085 climbs live · 723703544 decrypts]    609s  36.4M/s ETA  27.6 min
+  [round 6 · 0 climbs live · 736408009 decrypts]    610s  36.4M/s ETA  27.6 min
+  [wave 85/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 817148361 decrypts]    612s  36.4M/s ETA  27.6 min
+  [round 2 · 524287 climbs live · 880587209 decrypts]    613s  36.5M/s ETA  27.5 min
+  [round 3 · 524152 climbs live · 928821613 decrypts]    614s  36.5M/s ETA  27.5 min
+  [round 4 · 515812 climbs live · 963939797 decrypts]    615s  36.5M/s ETA  27.5 min
+  [round 5 · 442447 climbs live · 987667149 decrypts]    616s  36.4M/s ETA  27.5 min
+  [round 6 · 0 climbs live · 1000498112 decrypts]    617s  36.4M/s ETA  27.5 min
+  [wave 86/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1081238464 decrypts]    619s  36.4M/s ETA  27.4 min
+  [round 2 · 524288 climbs live · 1144677312 decrypts]    620s  36.5M/s ETA  27.4 min
+  [round 3 · 524166 climbs live · 1192911808 decrypts]    622s  36.5M/s ETA  27.3 min
+  [round 4 · 516380 climbs live · 1228030930 decrypts]    623s  36.5M/s ETA  27.3 min
+  [round 5 · 443843 climbs live · 1251784410 decrypts]    624s  36.4M/s ETA  27.3 min
+  [round 6 · 0 climbs live · 1264655857 decrypts]    624s  36.4M/s ETA  27.4 min
+  [wave 87/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1345396209 decrypts]    627s  36.4M/s ETA  27.3 min
+  [round 2 · 524288 climbs live · 1408835057 decrypts]    628s  36.5M/s ETA  27.3 min
+  [round 3 · 524210 climbs live · 1457069553 decrypts]    629s  36.5M/s ETA  27.2 min
+  [round 4 · 517727 climbs live · 1492191623 decrypts]    630s  36.5M/s ETA  27.2 min
+  [round 5 · 450807 climbs live · 1516007065 decrypts]    631s  36.4M/s ETA  27.2 min
+  [round 6 · 0 climbs live · 1529080468 decrypts]    632s  36.4M/s ETA  27.2 min
+  [wave 88/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1609820820 decrypts]    634s  36.4M/s ETA  27.2 min
+  [round 2 · 524288 climbs live · 1673259668 decrypts]    635s  36.5M/s ETA  27.1 min
+  [round 3 · 524149 climbs live · 1721494164 decrypts]    636s  36.5M/s ETA  27.1 min
+  [round 4 · 517317 climbs live · 1756612147 decrypts]    637s  36.5M/s ETA  27.1 min
+  [round 5 · 450799 climbs live · 1780408729 decrypts]    638s  36.4M/s ETA  27.1 min
+  [round 6 · 0 climbs live · 1793481900 decrypts]    639s  36.4M/s ETA  27.1 min
+  [wave 89/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1874222252 decrypts]    641s  36.4M/s ETA  27.1 min
+  [round 2 · 524286 climbs live · 1937661100 decrypts]    642s  36.5M/s ETA  27.0 min
+  [round 3 · 524123 climbs live · 1985895412 decrypts]    643s  36.5M/s ETA  27.0 min
+  [round 4 · 517529 climbs live · 2021011653 decrypts]    644s  36.5M/s ETA  27.0 min
+  [round 5 · 453478 climbs live · 2044817987 decrypts]    645s  36.4M/s ETA  27.0 min
+  [round 6 · 0 climbs live · 2057968849 decrypts]    646s  36.4M/s ETA  27.0 min
+  [wave 90/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 2138709201 decrypts]    648s  36.4M/s ETA  27.0 min
+  [round 2 · 524287 climbs live · -2092819247 decrypts]    650s  36.5M/s ETA  26.9 min
+  [round 3 · 524139 climbs live · -2044584843 decrypts]    651s  36.5M/s ETA  26.9 min
+  [round 4 · 517336 climbs live · -2009467530 decrypts]    652s  36.5M/s ETA  26.9 min
+  [round 5 · 451103 climbs live · -1985670074 decrypts]    653s  36.4M/s ETA  26.9 min
+  [round 6 · 0 climbs live · -1972588087 decrypts]    654s  36.4M/s ETA  26.9 min
+  [wave 91/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1891847735 decrypts]    656s  36.4M/s ETA  26.8 min
+  [round 2 · 524288 climbs live · -1828408887 decrypts]    657s  36.5M/s ETA  26.8 min
+  [round 3 · 524128 climbs live · -1780174391 decrypts]    658s  36.5M/s ETA  26.7 min
+  [round 4 · 516108 climbs live · -1745057815 decrypts]    659s  36.5M/s ETA  26.7 min
+  [round 5 · 443576 climbs live · -1721316847 decrypts]    660s  36.4M/s ETA  26.7 min
+  [round 6 · 0 climbs live · -1708453143 decrypts]    661s  36.4M/s ETA  26.8 min
+  [wave 92/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1627712791 decrypts]    663s  36.4M/s ETA  26.7 min
+  [round 2 · 524288 climbs live · -1564273943 decrypts]    664s  36.5M/s ETA  26.7 min
+  [round 3 · 524171 climbs live · -1516039447 decrypts]    665s  36.5M/s ETA  26.6 min
+  [round 4 · 516062 climbs live · -1480919990 decrypts]    666s  36.5M/s ETA  26.6 min
+  [round 5 · 443348 climbs live · -1457181138 decrypts]    667s  36.4M/s ETA  26.6 min
+  [round 6 · 0 climbs live · -1444324046 decrypts]    668s  36.4M/s ETA  26.6 min
+  [wave 93/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1363583694 decrypts]    670s  36.4M/s ETA  26.6 min
+  [round 2 · 524288 climbs live · -1300144846 decrypts]    671s  36.5M/s ETA  26.5 min
+  [round 3 · 524179 climbs live · -1251910350 decrypts]    672s  36.5M/s ETA  26.5 min
+  [round 4 · 516511 climbs live · -1216790357 decrypts]    673s  36.5M/s ETA  26.5 min
+  [round 5 · 443816 climbs live · -1193030851 decrypts]    674s  36.4M/s ETA  26.5 min
+  [round 6 · 0 climbs live · -1180160187 decrypts]    675s  36.4M/s ETA  26.5 min
+  [wave 94/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1099419835 decrypts]    677s  36.4M/s ETA  26.5 min
+  [round 2 · 524288 climbs live · -1035980987 decrypts]    678s  36.5M/s ETA  26.4 min
+  [round 3 · 524159 climbs live · -987746491 decrypts]    679s  36.5M/s ETA  26.4 min
+  [round 4 · 517052 climbs live · -952627838 decrypts]    681s  36.5M/s ETA  26.4 min
+  [round 5 · 447141 climbs live · -928843446 decrypts]    682s  36.4M/s ETA  26.4 min
+  [round 6 · 0 climbs live · -915876357 decrypts]    682s  36.4M/s ETA  26.4 min
+  [wave 95/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -835136005 decrypts]    685s  36.4M/s ETA  26.3 min
+  [round 2 · 524288 climbs live · -771697157 decrypts]    686s  36.5M/s ETA  26.3 min
+  [round 3 · 524179 climbs live · -723462661 decrypts]    687s  36.5M/s ETA  26.3 min
+  [round 4 · 517138 climbs live · -688342668 decrypts]    688s  36.5M/s ETA  26.2 min
+  [round 5 · 447837 climbs live · -664554320 decrypts]    689s  36.4M/s ETA  26.3 min
+  [round 6 · 0 climbs live · -651567047 decrypts]    690s  36.4M/s ETA  26.3 min
+  [wave 96/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -570826695 decrypts]    692s  36.4M/s ETA  26.2 min
+  [round 2 · 524288 climbs live · -507387847 decrypts]    693s  36.5M/s ETA  26.2 min
+  [round 3 · 524204 climbs live · -459153351 decrypts]    694s  36.5M/s ETA  26.1 min
+  [round 4 · 518043 climbs live · -424031683 decrypts]    695s  36.5M/s ETA  26.1 min
+  [round 5 · 452774 climbs live · -400201705 decrypts]    696s  36.4M/s ETA  26.1 min
+  [round 6 · 0 climbs live · -387071259 decrypts]    697s  36.4M/s ETA  26.1 min
+  [wave 97/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -306330907 decrypts]    699s  36.4M/s ETA  26.1 min
+  [round 2 · 524288 climbs live · -242892059 decrypts]    700s  36.5M/s ETA  26.1 min
+  [round 3 · 524208 climbs live · -194657563 decrypts]    701s  36.5M/s ETA  26.0 min
+  [round 4 · 517729 climbs live · -159535627 decrypts]    702s  36.5M/s ETA  26.0 min
+  [round 5 · 449198 climbs live · -135720093 decrypts]    703s  36.4M/s ETA  26.0 min
+  [round 6 · 0 climbs live · -122693351 decrypts]    704s  36.4M/s ETA  26.0 min
+  [wave 98/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -41952999 decrypts]    706s  36.4M/s ETA  26.0 min
+  [round 2 · 524288 climbs live · 21485849 decrypts]    708s  36.5M/s ETA  25.9 min
+  [round 3 · 524175 climbs live · 69720345 decrypts]    709s  36.5M/s ETA  25.9 min
+  [round 4 · 517261 climbs live · 104840070 decrypts]    710s  36.5M/s ETA  25.9 min
+  [round 5 · 446752 climbs live · 128634076 decrypts]    711s  36.4M/s ETA  25.9 min
+  [round 6 · 0 climbs live · 141589884 decrypts]    712s  36.4M/s ETA  25.9 min
+  [wave 99/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 222330236 decrypts]    714s  36.4M/s ETA  25.9 min
+  [round 2 · 524288 climbs live · 285769084 decrypts]    715s  36.4M/s ETA  25.8 min
+  [round 3 · 524166 climbs live · 334003580 decrypts]    716s  36.5M/s ETA  25.8 min
+  [round 4 · 516072 climbs live · 369122702 decrypts]    717s  36.5M/s ETA  25.8 min
+  [round 5 · 441485 climbs live · 392862014 decrypts]    718s  36.4M/s ETA  25.8 min
+  [round 6 · 0 climbs live · 405665079 decrypts]    719s  36.4M/s ETA  25.8 min
+  [wave 100/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 486405431 decrypts]    721s  36.4M/s ETA  25.7 min
+  [round 2 · 524288 climbs live · 549844279 decrypts]    722s  36.5M/s ETA  25.7 min
+  [round 3 · 524183 climbs live · 598078775 decrypts]    723s  36.5M/s ETA  25.7 min
+  [round 4 · 518190 climbs live · 633199036 decrypts]    724s  36.5M/s ETA  25.7 min
+  [round 5 · 451178 climbs live · 657035776 decrypts]    725s  36.4M/s ETA  25.7 min
+  [round 6 · 0 climbs live · 670119938 decrypts]    726s  36.4M/s ETA  25.7 min
+  [wave 101/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 750860290 decrypts]    728s  36.4M/s ETA  25.6 min
+  [round 2 · 524288 climbs live · 814299138 decrypts]    729s  36.5M/s ETA  25.6 min
+  [round 3 · 524182 climbs live · 862533634 decrypts]    730s  36.5M/s ETA  25.5 min
+  [round 4 · 516855 climbs live · 897653828 decrypts]    731s  36.5M/s ETA  25.5 min
+  [round 5 · 442899 climbs live · 921429158 decrypts]    732s  36.4M/s ETA  25.5 min
+  [round 6 · 0 climbs live · 934273229 decrypts]    733s  36.4M/s ETA  25.5 min
+  [wave 102/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1015013581 decrypts]    736s  36.4M/s ETA  25.5 min
+  [round 2 · 524287 climbs live · 1078452429 decrypts]    737s  36.4M/s ETA  25.5 min
+  [round 3 · 524184 climbs live · 1126686833 decrypts]    738s  36.5M/s ETA  25.4 min
+  [round 4 · 516875 climbs live · 1161807161 decrypts]    739s  36.5M/s ETA  25.4 min
+  [round 5 · 447071 climbs live · 1185583411 decrypts]    740s  36.4M/s ETA  25.4 min
+  [round 6 · 0 climbs live · 1198548470 decrypts]    741s  36.4M/s ETA  25.4 min
+  [wave 103/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1279288822 decrypts]    743s  36.4M/s ETA  25.4 min
+  [round 2 · 524287 climbs live · 1342727670 decrypts]    744s  36.4M/s ETA  25.3 min
+  [round 3 · 524170 climbs live · 1390962074 decrypts]    745s  36.5M/s ETA  25.3 min
+  [round 4 · 517416 climbs live · 1426081464 decrypts]    746s  36.4M/s ETA  25.3 min
+  [round 5 · 451013 climbs live · 1449882600 decrypts]    747s  36.4M/s ETA  25.3 min
+  [round 6 · 0 climbs live · 1462961977 decrypts]    748s  36.4M/s ETA  25.3 min
+  [wave 104/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1543702329 decrypts]    750s  36.4M/s ETA  25.3 min
+  [round 2 · 524288 climbs live · 1607141177 decrypts]    751s  36.4M/s ETA  25.2 min
+  [round 3 · 524222 climbs live · 1655375673 decrypts]    752s  36.4M/s ETA  25.2 min
+  [round 4 · 517989 climbs live · 1690498547 decrypts]    754s  36.4M/s ETA  25.2 min
+  [round 5 · 451616 climbs live · 1714326041 decrypts]    755s  36.4M/s ETA  25.2 min
+  [round 6 · 0 climbs live · 1727422905 decrypts]    756s  36.4M/s ETA  25.2 min
+  [wave 105/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1808163257 decrypts]    758s  36.4M/s ETA  25.2 min
+  [round 2 · 524288 climbs live · 1871602105 decrypts]    759s  36.4M/s ETA  25.1 min
+  [round 3 · 524180 climbs live · 1919836601 decrypts]    760s  36.4M/s ETA  25.1 min
+  [round 4 · 517745 climbs live · 1954956661 decrypts]    761s  36.4M/s ETA  25.1 min
+  [round 5 · 452128 climbs live · 1978772931 decrypts]    762s  36.4M/s ETA  25.1 min
+  [round 6 · 0 climbs live · 1991884643 decrypts]    763s  36.4M/s ETA  25.1 min
+  [wave 106/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 2072624995 decrypts]    765s  36.4M/s ETA  25.0 min
+  [round 2 · 524287 climbs live · 2136063843 decrypts]    766s  36.4M/s ETA  25.0 min
+  [round 3 · 524226 climbs live · -2110669049 decrypts]    767s  36.4M/s ETA  25.0 min
+  [round 4 · 518788 climbs live · -2075545907 decrypts]    768s  36.4M/s ETA  24.9 min
+  [round 5 · 455493 climbs live · -2051681659 decrypts]    769s  36.4M/s ETA  24.9 min
+  [round 6 · 0 climbs live · -2038472362 decrypts]    770s  36.4M/s ETA  25.0 min
+  [wave 107/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1957732010 decrypts]    772s  36.4M/s ETA  24.9 min
+  [round 2 · 524288 climbs live · -1894293162 decrypts]    773s  36.4M/s ETA  24.9 min
+  [round 3 · 524206 climbs live · -1846058666 decrypts]    774s  36.4M/s ETA  24.8 min
+  [round 4 · 517564 climbs live · -1810936864 decrypts]    776s  36.4M/s ETA  24.8 min
+  [round 5 · 448732 climbs live · -1787128920 decrypts]    777s  36.4M/s ETA  24.8 min
+  [round 6 · 0 climbs live · -1774115692 decrypts]    778s  36.4M/s ETA  24.8 min
+  [wave 108/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1693375340 decrypts]    780s  36.4M/s ETA  24.8 min
+  [round 2 · 524287 climbs live · -1629936492 decrypts]    781s  36.4M/s ETA  24.7 min
+  [round 3 · 524118 climbs live · -1581702088 decrypts]    782s  36.4M/s ETA  24.7 min
+  [round 4 · 514745 climbs live · -1546586182 decrypts]    783s  36.4M/s ETA  24.7 min
+  [round 5 · 437834 climbs live · -1522907912 decrypts]    784s  36.4M/s ETA  24.7 min
+  [round 6 · 0 climbs live · -1510210726 decrypts]    785s  36.4M/s ETA  24.7 min
+  [wave 109/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1429470374 decrypts]    787s  36.4M/s ETA  24.7 min
+  [round 2 · 524288 climbs live · -1366031526 decrypts]    788s  36.4M/s ETA  24.6 min
+  [round 3 · 524137 climbs live · -1317797030 decrypts]    789s  36.4M/s ETA  24.6 min
+  [round 4 · 516351 climbs live · -1282679851 decrypts]    790s  36.4M/s ETA  24.6 min
+  [round 5 · 443751 climbs live · -1258927705 decrypts]    791s  36.4M/s ETA  24.6 min
+  [round 6 · 0 climbs live · -1246058926 decrypts]    792s  36.4M/s ETA  24.6 min
+  [wave 110/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1165318574 decrypts]    794s  36.4M/s ETA  24.6 min
+  [round 2 · 524288 climbs live · -1101879726 decrypts]    795s  36.4M/s ETA  24.5 min
+  [round 3 · 524187 climbs live · -1053645230 decrypts]    797s  36.4M/s ETA  24.5 min
+  [round 4 · 517491 climbs live · -1018524701 decrypts]    798s  36.4M/s ETA  24.5 min
+  [round 5 · 446909 climbs live · -994720115 decrypts]    799s  36.4M/s ETA  24.5 min
+  [round 6 · 0 climbs live · -981759754 decrypts]    800s  36.4M/s ETA  24.5 min
+  [wave 111/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -901019402 decrypts]    802s  36.4M/s ETA  24.4 min
+  [round 2 · 524288 climbs live · -837580554 decrypts]    803s  36.4M/s ETA  24.4 min
+  [round 3 · 524197 climbs live · -789346058 decrypts]    804s  36.4M/s ETA  24.4 min
+  [round 4 · 516841 climbs live · -754224859 decrypts]    805s  36.4M/s ETA  24.4 min
+  [round 5 · 443581 climbs live · -730450173 decrypts]    806s  36.4M/s ETA  24.4 min
+  [round 6 · 0 climbs live · -717586324 decrypts]    807s  36.4M/s ETA  24.4 min
+  [wave 112/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -636845972 decrypts]    809s  36.4M/s ETA  24.3 min
+  [round 2 · 524288 climbs live · -573407124 decrypts]    810s  36.4M/s ETA  24.3 min
+  [round 3 · 524205 climbs live · -525172628 decrypts]    811s  36.4M/s ETA  24.2 min
+  [round 4 · 517654 climbs live · -490050893 decrypts]    812s  36.4M/s ETA  24.2 min
+  [round 5 · 449444 climbs live · -466238809 decrypts]    813s  36.4M/s ETA  24.2 min
+  [round 6 · 0 climbs live · -453204933 decrypts]    814s  36.4M/s ETA  24.2 min
+  [wave 113/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -372464581 decrypts]    816s  36.4M/s ETA  24.2 min
+  [round 2 · 524288 climbs live · -309025733 decrypts]    818s  36.4M/s ETA  24.2 min
+  [round 3 · 524181 climbs live · -260791237 decrypts]    819s  36.4M/s ETA  24.1 min
+  [round 4 · 517834 climbs live · -225671110 decrypts]    820s  36.4M/s ETA  24.1 min
+  [round 5 · 450889 climbs live · -201850746 decrypts]    821s  36.4M/s ETA  24.1 min
+  [round 6 · 0 climbs live · -188774965 decrypts]    822s  36.4M/s ETA  24.1 min
+  [wave 114/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -108034613 decrypts]    824s  36.4M/s ETA  24.1 min
+  [round 2 · 524286 climbs live · -44595765 decrypts]    825s  36.4M/s ETA  24.0 min
+  [round 3 · 524156 climbs live · 3638547 decrypts]    826s  36.4M/s ETA  24.0 min
+  [round 4 · 516603 climbs live · 38756999 decrypts]    827s  36.4M/s ETA  24.0 min
+  [round 5 · 444893 climbs live · 62520737 decrypts]    828s  36.4M/s ETA  24.0 min
+  [round 6 · 0 climbs live · 75422634 decrypts]    829s  36.4M/s ETA  24.0 min
+  [wave 115/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 156162986 decrypts]    831s  36.4M/s ETA  24.0 min
+  [round 2 · 524288 climbs live · 219601834 decrypts]    832s  36.4M/s ETA  23.9 min
+  [round 3 · 524145 climbs live · 267836330 decrypts]    833s  36.4M/s ETA  23.9 min
+  [round 4 · 515962 climbs live · 302954045 decrypts]    834s  36.4M/s ETA  23.9 min
+  [round 5 · 440502 climbs live · 326688297 decrypts]    835s  36.4M/s ETA  23.9 min
+  [round 6 · 0 climbs live · 339462855 decrypts]    836s  36.4M/s ETA  23.9 min
+  [wave 116/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 420203207 decrypts]    838s  36.4M/s ETA  23.8 min
+  [round 2 · 524288 climbs live · 483642055 decrypts]    839s  36.4M/s ETA  23.8 min
+  [round 3 · 524178 climbs live · 531876551 decrypts]    841s  36.4M/s ETA  23.8 min
+  [round 4 · 517126 climbs live · 566996477 decrypts]    842s  36.4M/s ETA  23.8 min
+  [round 5 · 445628 climbs live · 590784273 decrypts]    843s  36.4M/s ETA  23.8 min
+  [round 6 · 0 climbs live · 603707485 decrypts]    843s  36.4M/s ETA  23.8 min
+  [wave 117/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 684447837 decrypts]    846s  36.4M/s ETA  23.7 min
+  [round 2 · 524287 climbs live · 747886685 decrypts]    847s  36.4M/s ETA  23.7 min
+  [round 3 · 524142 climbs live · 796121089 decrypts]    848s  36.4M/s ETA  23.6 min
+  [round 4 · 515358 climbs live · 831238603 decrypts]    849s  36.4M/s ETA  23.6 min
+  [round 5 · 437511 climbs live · 854945071 decrypts]    850s  36.4M/s ETA  23.6 min
+  [round 6 · 0 climbs live · 867632890 decrypts]    851s  36.4M/s ETA  23.6 min
+  [wave 118/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 948373242 decrypts]    853s  36.4M/s ETA  23.6 min
+  [round 2 · 524288 climbs live · 1011812090 decrypts]    854s  36.4M/s ETA  23.6 min
+  [round 3 · 524167 climbs live · 1060046586 decrypts]    855s  36.4M/s ETA  23.5 min
+  [round 4 · 516091 climbs live · 1095165775 decrypts]    856s  36.4M/s ETA  23.5 min
+  [round 5 · 440176 climbs live · 1118905961 decrypts]    857s  36.4M/s ETA  23.5 min
+  [round 6 · 0 climbs live · 1131671065 decrypts]    858s  36.4M/s ETA  23.5 min
+  [wave 119/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1212411417 decrypts]    860s  36.4M/s ETA  23.5 min
+  [round 2 · 524288 climbs live · 1275850265 decrypts]    861s  36.4M/s ETA  23.4 min
+  [round 3 · 524191 climbs live · 1324084761 decrypts]    862s  36.4M/s ETA  23.4 min
+  [round 4 · 516802 climbs live · 1359205558 decrypts]    863s  36.4M/s ETA  23.4 min
+  [round 5 · 444355 climbs live · 1382978450 decrypts]    864s  36.4M/s ETA  23.4 min
+  [round 6 · 0 climbs live · 1395864745 decrypts]    865s  36.4M/s ETA  23.4 min
+  [wave 120/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1476605097 decrypts]    867s  36.4M/s ETA  23.4 min
+  [round 2 · 524288 climbs live · 1540043945 decrypts]    868s  36.4M/s ETA  23.3 min
+  [round 3 · 524169 climbs live · 1588278441 decrypts]    870s  36.4M/s ETA  23.3 min
+  [round 4 · 516338 climbs live · 1623397764 decrypts]    871s  36.4M/s ETA  23.3 min
+  [round 5 · 441117 climbs live · 1647149312 decrypts]    872s  36.4M/s ETA  23.3 min
+  [round 6 · 0 climbs live · 1659941705 decrypts]    873s  36.4M/s ETA  23.3 min
+  [wave 121/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1740682057 decrypts]    875s  36.4M/s ETA  23.2 min
+  [round 2 · 524288 climbs live · 1804120905 decrypts]    876s  36.4M/s ETA  23.2 min
+  [round 3 · 524160 climbs live · 1852355401 decrypts]    877s  36.4M/s ETA  23.2 min
+  [round 4 · 516804 climbs live · 1887474121 decrypts]    878s  36.4M/s ETA  23.2 min
+  [round 5 · 444340 climbs live · 1911247105 decrypts]    879s  36.4M/s ETA  23.2 min
+  [round 6 · 0 climbs live · 1924132965 decrypts]    880s  36.4M/s ETA  23.2 min
+  [wave 122/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 2004873317 decrypts]    882s  36.4M/s ETA  23.1 min
+  [round 2 · 524287 climbs live · 2068312165 decrypts]    883s  36.4M/s ETA  23.1 min
+  [round 3 · 524151 climbs live · 2116546569 decrypts]    884s  36.4M/s ETA  23.1 min
+  [round 4 · 516317 climbs live · -2143302610 decrypts]    885s  36.4M/s ETA  23.0 min
+  [round 5 · 442329 climbs live · -2119552028 decrypts]    886s  36.4M/s ETA  23.0 min
+  [round 6 · 0 climbs live · -2106724487 decrypts]    887s  36.4M/s ETA  23.0 min
+  [wave 123/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -2025984135 decrypts]    889s  36.4M/s ETA  23.0 min
+  [round 2 · 524288 climbs live · -1962545287 decrypts]    890s  36.4M/s ETA  23.0 min
+  [round 3 · 523993 climbs live · -1914310791 decrypts]    892s  36.4M/s ETA  22.9 min
+  [round 4 · 511512 climbs live · -1879203260 decrypts]    893s  36.4M/s ETA  22.9 min
+  [round 5 · 421899 climbs live · -1855673708 decrypts]    894s  36.4M/s ETA  22.9 min
+  [round 6 · 0 climbs live · -1843438637 decrypts]    894s  36.4M/s ETA  22.9 min
+  [wave 124/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1762698285 decrypts]    897s  36.4M/s ETA  22.9 min
+  [round 2 · 524287 climbs live · -1699259437 decrypts]    898s  36.4M/s ETA  22.8 min
+  [round 3 · 524137 climbs live · -1651025033 decrypts]    899s  36.4M/s ETA  22.8 min
+  [round 4 · 515181 climbs live · -1615907854 decrypts]    900s  36.4M/s ETA  22.8 min
+  [round 5 · 437215 climbs live · -1592209528 decrypts]    901s  36.4M/s ETA  22.8 min
+  [round 6 · 0 climbs live · -1579530293 decrypts]    902s  36.3M/s ETA  22.8 min
+  [wave 125/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1498789941 decrypts]    904s  36.4M/s ETA  22.8 min
+  [round 2 · 524285 climbs live · -1435351093 decrypts]    905s  36.4M/s ETA  22.7 min
+  [round 3 · 524090 climbs live · -1387116873 decrypts]    906s  36.4M/s ETA  22.7 min
+  [round 4 · 514953 climbs live · -1352002843 decrypts]    907s  36.4M/s ETA  22.7 min
+  [round 5 · 436127 climbs live · -1328315005 decrypts]    908s  36.4M/s ETA  22.7 min
+  [round 6 · 0 climbs live · -1315667322 decrypts]    909s  36.4M/s ETA  22.7 min
+  [wave 126/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1234926970 decrypts]    911s  36.4M/s ETA  22.6 min
+  [round 2 · 524286 climbs live · -1171488122 decrypts]    912s  36.4M/s ETA  22.6 min
+  [round 3 · 524065 climbs live · -1123253810 decrypts]    913s  36.4M/s ETA  22.6 min
+  [round 4 · 514485 climbs live · -1088141455 decrypts]    914s  36.4M/s ETA  22.6 min
+  [round 5 · 433326 climbs live · -1064475145 decrypts]    915s  36.4M/s ETA  22.6 min
+  [round 6 · 0 climbs live · -1051908691 decrypts]    916s  36.4M/s ETA  22.6 min
+  [wave 127/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -971168339 decrypts]    918s  36.4M/s ETA  22.5 min
+  [round 2 · 524288 climbs live · -907729491 decrypts]    919s  36.4M/s ETA  22.5 min
+  [round 3 · 524210 climbs live · -859494995 decrypts]    921s  36.4M/s ETA  22.4 min
+  [round 4 · 518355 climbs live · -824372925 decrypts]    922s  36.4M/s ETA  22.4 min
+  [round 5 · 452097 climbs live · -800528595 decrypts]    923s  36.4M/s ETA  22.4 min
+  [round 6 · 0 climbs live · -787417782 decrypts]    923s  36.4M/s ETA  22.4 min
+  [wave 128/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -706677430 decrypts]    926s  36.4M/s ETA  22.4 min
+  [round 2 · 524288 climbs live · -643238582 decrypts]    927s  36.4M/s ETA  22.4 min
+  [round 3 · 524208 climbs live · -595004086 decrypts]    928s  36.4M/s ETA  22.3 min
+  [round 4 · 517724 climbs live · -559882150 decrypts]    929s  36.4M/s ETA  22.3 min
+  [round 5 · 448834 climbs live · -536066846 decrypts]    930s  36.4M/s ETA  22.3 min
+  [round 6 · 0 climbs live · -523050660 decrypts]    931s  36.4M/s ETA  22.3 min
+  [wave 129/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -442310308 decrypts]    933s  36.4M/s ETA  22.3 min
+  [round 2 · 524288 climbs live · -378871460 decrypts]    934s  36.4M/s ETA  22.2 min
+  [round 3 · 524138 climbs live · -330636964 decrypts]    935s  36.4M/s ETA  22.2 min
+  [round 4 · 514983 climbs live · -295519718 decrypts]    936s  36.4M/s ETA  22.2 min
+  [round 5 · 435412 climbs live · -271830500 decrypts]    937s  36.4M/s ETA  22.2 min
+  [round 6 · 0 climbs live · -259203552 decrypts]    938s  36.4M/s ETA  22.2 min
+  [wave 130/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -178463200 decrypts]    940s  36.4M/s ETA  22.2 min
+  [round 2 · 524288 climbs live · -115024352 decrypts]    941s  36.4M/s ETA  22.1 min
+  [round 3 · 524122 climbs live · -66789856 decrypts]    942s  36.4M/s ETA  22.1 min
+  [round 4 · 514697 climbs live · -31673682 decrypts]    943s  36.4M/s ETA  22.1 min
+  [round 5 · 432473 climbs live · -7997620 decrypts]    944s  36.4M/s ETA  22.1 min
+  [round 6 · 0 climbs live · 4544097 decrypts]    945s  36.4M/s ETA  22.1 min
+  [wave 131/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 85284449 decrypts]    947s  36.4M/s ETA  22.0 min
+  [round 2 · 524285 climbs live · 148723297 decrypts]    948s  36.4M/s ETA  22.0 min
+  [round 3 · 524159 climbs live · 196957517 decrypts]    950s  36.4M/s ETA  22.0 min
+  [round 4 · 515964 climbs live · 232076170 decrypts]    951s  36.4M/s ETA  21.9 min
+  [round 5 · 438884 climbs live · 255810514 decrypts]    952s  36.4M/s ETA  21.9 min
+  [round 6 · 0 climbs live · 268538150 decrypts]    952s  36.4M/s ETA  22.0 min
+  [wave 132/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 349278502 decrypts]    955s  36.4M/s ETA  21.9 min
+  [round 2 · 524288 climbs live · 412717350 decrypts]    956s  36.4M/s ETA  21.9 min
+  [round 3 · 524153 climbs live · 460951846 decrypts]    957s  36.4M/s ETA  21.8 min
+  [round 4 · 515920 climbs live · 496070097 decrypts]    958s  36.4M/s ETA  21.8 min
+  [round 5 · 439690 climbs live · 519802417 decrypts]    959s  36.4M/s ETA  21.8 min
+  [round 6 · 0 climbs live · 532553427 decrypts]    960s  36.4M/s ETA  21.8 min
+  [wave 133/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 613293779 decrypts]    962s  36.4M/s ETA  21.8 min
+  [round 2 · 524287 climbs live · 676732627 decrypts]    963s  36.4M/s ETA  21.7 min
+  [round 3 · 523975 climbs live · 724967031 decrypts]    964s  36.4M/s ETA  21.7 min
+  [round 4 · 514049 climbs live · 760073356 decrypts]    965s  36.4M/s ETA  21.7 min
+  [round 5 · 437953 climbs live · 783719610 decrypts]    966s  36.4M/s ETA  21.7 min
+  [round 6 · 0 climbs live · 796420247 decrypts]    967s  36.3M/s ETA  21.7 min
+  [wave 134/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 877160599 decrypts]    969s  36.3M/s ETA  21.7 min
+  [round 2 · 524286 climbs live · 940599447 decrypts]    971s  36.4M/s ETA  21.6 min
+  [round 3 · 524069 climbs live · 988833759 decrypts]    972s  36.4M/s ETA  21.6 min
+  [round 4 · 515958 climbs live · 1023946382 decrypts]    973s  36.4M/s ETA  21.6 min
+  [round 5 · 443660 climbs live · 1047680450 decrypts]    974s  36.4M/s ETA  21.6 min
+  [round 6 · 0 climbs live · 1060546590 decrypts]    975s  36.3M/s ETA  21.6 min
+  [wave 135/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1141286942 decrypts]    977s  36.3M/s ETA  21.6 min
+  [round 2 · 524288 climbs live · 1204725790 decrypts]    978s  36.4M/s ETA  21.5 min
+  [round 3 · 524174 climbs live · 1252960286 decrypts]    979s  36.4M/s ETA  21.5 min
+  [round 4 · 517090 climbs live · 1288079944 decrypts]    980s  36.4M/s ETA  21.5 min
+  [round 5 · 447654 climbs live · 1311866084 decrypts]    981s  36.4M/s ETA  21.5 min
+  [round 6 · 0 climbs live · 1324848050 decrypts]    982s  36.3M/s ETA  21.5 min
+  [wave 136/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1405588402 decrypts]    984s  36.3M/s ETA  21.4 min
+  [round 2 · 524288 climbs live · 1469027250 decrypts]    985s  36.4M/s ETA  21.4 min
+  [round 3 · 524180 climbs live · 1517261746 decrypts]    986s  36.4M/s ETA  21.4 min
+  [round 4 · 517021 climbs live · 1552381806 decrypts]    987s  36.4M/s ETA  21.4 min
+  [round 5 · 445124 climbs live · 1576164772 decrypts]    988s  36.4M/s ETA  21.4 min
+  [round 6 · 0 climbs live · 1589073368 decrypts]    989s  36.3M/s ETA  21.4 min
+  [wave 137/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1669813720 decrypts]    991s  36.3M/s ETA  21.3 min
+  [round 2 · 524287 climbs live · 1733252568 decrypts]    993s  36.4M/s ETA  21.3 min
+  [round 3 · 524172 climbs live · 1781486972 decrypts]    994s  36.4M/s ETA  21.2 min
+  [round 4 · 517135 climbs live · 1816606496 decrypts]    995s  36.4M/s ETA  21.2 min
+  [round 5 · 445983 climbs live · 1840394706 decrypts]    996s  36.4M/s ETA  21.2 min
+  [round 6 · 0 climbs live · 1853328213 decrypts]    997s  36.3M/s ETA  21.2 min
+  [wave 138/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1934068565 decrypts]    999s  36.3M/s ETA  21.2 min
+  [round 2 · 524288 climbs live · 1997507413 decrypts]   1000s  36.4M/s ETA  21.2 min
+  [round 3 · 524108 climbs live · 2045741909 decrypts]   1001s  36.4M/s ETA  21.1 min
+  [round 4 · 516110 climbs live · 2080857145 decrypts]   1002s  36.4M/s ETA  21.1 min
+  [round 5 · 442711 climbs live · 2104598205 decrypts]   1003s  36.4M/s ETA  21.1 min
+  [round 6 · 0 climbs live · 2117436824 decrypts]   1004s  36.3M/s ETA  21.1 min
+  [wave 139/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -2096790120 decrypts]   1006s  36.3M/s ETA  21.1 min
+  [round 2 · 524287 climbs live · -2033351272 decrypts]   1007s  36.4M/s ETA  21.0 min
+  [round 3 · 524142 climbs live · -1985116868 decrypts]   1008s  36.4M/s ETA  21.0 min
+  [round 4 · 516719 climbs live · -1949999354 decrypts]   1009s  36.4M/s ETA  21.0 min
+  [round 5 · 446322 climbs live · -1926230280 decrypts]   1010s  36.4M/s ETA  21.0 min
+  [round 6 · 0 climbs live · -1913286942 decrypts]   1011s  36.3M/s ETA  21.0 min
+  [wave 140/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1832546590 decrypts]   1013s  36.3M/s ETA  21.0 min
+  [round 2 · 524287 climbs live · -1769107742 decrypts]   1014s  36.4M/s ETA  20.9 min
+  [round 3 · 524165 climbs live · -1720873338 decrypts]   1016s  36.4M/s ETA  20.9 min
+  [round 4 · 516414 climbs live · -1685754283 decrypts]   1017s  36.4M/s ETA  20.9 min
+  [round 5 · 446342 climbs live · -1661999239 decrypts]   1018s  36.4M/s ETA  20.9 min
+  [round 6 · 0 climbs live · -1649055321 decrypts]   1019s  36.3M/s ETA  20.9 min
+  [wave 141/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1568314969 decrypts]   1021s  36.3M/s ETA  20.8 min
+  [round 2 · 524288 climbs live · -1504876121 decrypts]   1022s  36.4M/s ETA  20.8 min
+  [round 3 · 524187 climbs live · -1456641625 decrypts]   1023s  36.4M/s ETA  20.8 min
+  [round 4 · 517367 climbs live · -1421521096 decrypts]   1024s  36.4M/s ETA  20.8 min
+  [round 5 · 446501 climbs live · -1397722214 decrypts]   1025s  36.4M/s ETA  20.7 min
+  [round 6 · 0 climbs live · -1384773685 decrypts]   1026s  36.3M/s ETA  20.8 min
+  [wave 142/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1304033333 decrypts]   1028s  36.3M/s ETA  20.7 min
+  [round 2 · 524288 climbs live · -1240594485 decrypts]   1029s  36.4M/s ETA  20.7 min
+  [round 3 · 524197 climbs live · -1192359989 decrypts]   1030s  36.4M/s ETA  20.6 min
+  [round 4 · 517592 climbs live · -1157238790 decrypts]   1031s  36.4M/s ETA  20.6 min
+  [round 5 · 449425 climbs live · -1133429558 decrypts]   1032s  36.4M/s ETA  20.6 min
+  [round 6 · 0 climbs live · -1120396233 decrypts]   1033s  36.3M/s ETA  20.6 min
+  [wave 143/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1039655881 decrypts]   1035s  36.3M/s ETA  20.6 min
+  [round 2 · 524288 climbs live · -976217033 decrypts]   1036s  36.4M/s ETA  20.6 min
+  [round 3 · 524204 climbs live · -927982537 decrypts]   1037s  36.4M/s ETA  20.5 min
+  [round 4 · 518185 climbs live · -892860869 decrypts]   1039s  36.4M/s ETA  20.5 min
+  [round 5 · 452599 climbs live · -869024359 decrypts]   1040s  36.3M/s ETA  20.5 min
+  [round 6 · 0 climbs live · -855898988 decrypts]   1040s  36.3M/s ETA  20.5 min
+  [wave 144/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -775158636 decrypts]   1043s  36.3M/s ETA  20.5 min
+  [round 2 · 524288 climbs live · -711719788 decrypts]   1044s  36.4M/s ETA  20.4 min
+  [round 3 · 524161 climbs live · -663485292 decrypts]   1045s  36.4M/s ETA  20.4 min
+  [round 4 · 516187 climbs live · -628366505 decrypts]   1046s  36.4M/s ETA  20.4 min
+  [round 5 · 441183 climbs live · -604621903 decrypts]   1047s  36.3M/s ETA  20.4 min
+  [round 6 · 0 climbs live · -591827596 decrypts]   1048s  36.3M/s ETA  20.4 min
+  [wave 145/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -511087244 decrypts]   1050s  36.3M/s ETA  20.4 min
+  [round 2 · 524288 climbs live · -447648396 decrypts]   1051s  36.4M/s ETA  20.3 min
+  [round 3 · 524171 climbs live · -399413900 decrypts]   1052s  36.4M/s ETA  20.3 min
+  [round 4 · 516886 climbs live · -364294443 decrypts]   1053s  36.4M/s ETA  20.3 min
+  [round 5 · 445956 climbs live · -340517687 decrypts]   1054s  36.3M/s ETA  20.3 min
+  [round 6 · 0 climbs live · -327584963 decrypts]   1055s  36.3M/s ETA  20.3 min
+  [wave 146/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -246844611 decrypts]   1057s  36.3M/s ETA  20.2 min
+  [round 2 · 524288 climbs live · -183405763 decrypts]   1058s  36.3M/s ETA  20.2 min
+  [round 3 · 524185 climbs live · -135171267 decrypts]   1059s  36.4M/s ETA  20.2 min
+  [round 4 · 517174 climbs live · -100050872 decrypts]   1061s  36.4M/s ETA  20.2 min
+  [round 5 · 448168 climbs live · -76260868 decrypts]   1062s  36.3M/s ETA  20.1 min
+  [round 6 · 0 climbs live · -63263996 decrypts]   1063s  36.3M/s ETA  20.2 min
+  [wave 147/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 17476356 decrypts]   1065s  36.3M/s ETA  20.1 min
+  [round 2 · 524286 climbs live · 80915204 decrypts]   1066s  36.3M/s ETA  20.1 min
+  [round 3 · 524015 climbs live · 129149516 decrypts]   1067s  36.4M/s ETA  20.0 min
+  [round 4 · 513441 climbs live · 164258521 decrypts]   1068s  36.3M/s ETA  20.0 min
+  [round 5 · 434040 climbs live · 187876807 decrypts]   1069s  36.3M/s ETA  20.0 min
+  [round 6 · 0 climbs live · 200463967 decrypts]   1070s  36.3M/s ETA  20.0 min
+  [wave 148/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 281204319 decrypts]   1072s  36.3M/s ETA  20.0 min
+  [round 2 · 524286 climbs live · 344643167 decrypts]   1073s  36.3M/s ETA  20.0 min
+  [round 3 · 523957 climbs live · 392877479 decrypts]   1074s  36.3M/s ETA  19.9 min
+  [round 4 · 512170 climbs live · 427982598 decrypts]   1075s  36.3M/s ETA  19.9 min
+  [round 5 · 429027 climbs live · 451542418 decrypts]   1076s  36.3M/s ETA  19.9 min
+  [round 6 · 0 climbs live · 463984201 decrypts]   1077s  36.3M/s ETA  19.9 min
+  [wave 149/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 544724553 decrypts]   1079s  36.3M/s ETA  19.9 min
+  [round 2 · 524288 climbs live · 608163401 decrypts]   1080s  36.3M/s ETA  19.8 min
+  [round 3 · 524080 climbs live · 656397897 decrypts]   1082s  36.3M/s ETA  19.8 min
+  [round 4 · 513891 climbs live · 691511257 decrypts]   1083s  36.3M/s ETA  19.8 min
+  [round 5 · 434307 climbs live · 715150243 decrypts]   1084s  36.3M/s ETA  19.8 min
+  [round 6 · 0 climbs live · 727745146 decrypts]   1085s  36.3M/s ETA  19.8 min
+  [wave 150/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 808485498 decrypts]   1087s  36.3M/s ETA  19.8 min
+  [round 2 · 524288 climbs live · 871924346 decrypts]   1088s  36.3M/s ETA  19.7 min
+  [round 3 · 524094 climbs live · 920158842 decrypts]   1089s  36.3M/s ETA  19.7 min
+  [round 4 · 514626 climbs live · 955273140 decrypts]   1090s  36.3M/s ETA  19.7 min
+  [round 5 · 435747 climbs live · 978945936 decrypts]   1091s  36.3M/s ETA  19.7 min
+  [round 6 · 0 climbs live · 991582599 decrypts]   1092s  36.3M/s ETA  19.7 min
+  [wave 151/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1072322951 decrypts]   1094s  36.3M/s ETA  19.6 min
+  [round 2 · 524288 climbs live · 1135761799 decrypts]   1095s  36.3M/s ETA  19.6 min
+  [round 3 · 524212 climbs live · 1183996295 decrypts]   1096s  36.3M/s ETA  19.6 min
+  [round 4 · 518383 climbs live · 1219118499 decrypts]   1097s  36.3M/s ETA  19.6 min
+  [round 5 · 451605 climbs live · 1242964117 decrypts]   1098s  36.3M/s ETA  19.6 min
+  [round 6 · 0 climbs live · 1256060662 decrypts]   1099s  36.3M/s ETA  19.6 min
+  [wave 152/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1336801014 decrypts]   1101s  36.3M/s ETA  19.5 min
+  [round 2 · 524288 climbs live · 1400239862 decrypts]   1102s  36.3M/s ETA  19.5 min
+  [round 3 · 524214 climbs live · 1448474358 decrypts]   1104s  36.3M/s ETA  19.5 min
+  [round 4 · 517877 climbs live · 1483596696 decrypts]   1105s  36.3M/s ETA  19.4 min
+  [round 5 · 449869 climbs live · 1507419038 decrypts]   1106s  36.3M/s ETA  19.4 min
+  [round 6 · 0 climbs live · 1520465239 decrypts]   1107s  36.3M/s ETA  19.4 min
+  [wave 153/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1601205591 decrypts]   1109s  36.3M/s ETA  19.4 min
+  [round 2 · 524288 climbs live · 1664644439 decrypts]   1110s  36.3M/s ETA  19.4 min
+  [round 3 · 524125 climbs live · 1712878935 decrypts]   1111s  36.3M/s ETA  19.3 min
+  [round 4 · 515371 climbs live · 1747995310 decrypts]   1112s  36.3M/s ETA  19.3 min
+  [round 5 · 436393 climbs live · 1771702376 decrypts]   1113s  36.3M/s ETA  19.3 min
+  [round 6 · 0 climbs live · 1784357773 decrypts]   1114s  36.3M/s ETA  19.3 min
+  [wave 154/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1865098125 decrypts]   1116s  36.3M/s ETA  19.3 min
+  [round 2 · 524287 climbs live · 1928536973 decrypts]   1117s  36.3M/s ETA  19.2 min
+  [round 3 · 524084 climbs live · 1976771377 decrypts]   1118s  36.3M/s ETA  19.2 min
+  [round 4 · 515077 climbs live · 2011885005 decrypts]   1119s  36.3M/s ETA  19.2 min
+  [round 5 · 435871 climbs live · 2035578547 decrypts]   1120s  36.3M/s ETA  19.2 min
+  [round 6 · 0 climbs live · 2048218806 decrypts]   1121s  36.3M/s ETA  19.2 min
+  [wave 155/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 2128959158 decrypts]   1123s  36.3M/s ETA  19.2 min
+  [round 2 · 524288 climbs live · -2102569290 decrypts]   1124s  36.3M/s ETA  19.1 min
+  [round 3 · 524148 climbs live · -2054334794 decrypts]   1126s  36.3M/s ETA  19.1 min
+  [round 4 · 515966 climbs live · -2019216878 decrypts]   1127s  36.3M/s ETA  19.1 min
+  [round 5 · 439740 climbs live · -1995482442 decrypts]   1128s  36.3M/s ETA  19.1 min
+  [round 6 · 0 climbs live · -1982729982 decrypts]   1128s  36.3M/s ETA  19.1 min
+  [wave 156/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1901989630 decrypts]   1131s  36.3M/s ETA  19.0 min
+  [round 2 · 524288 climbs live · -1838550782 decrypts]   1132s  36.3M/s ETA  19.0 min
+  [round 3 · 524126 climbs live · -1790316286 decrypts]   1133s  36.3M/s ETA  19.0 min
+  [round 4 · 515964 climbs live · -1755199844 decrypts]   1134s  36.3M/s ETA  19.0 min
+  [round 5 · 440905 climbs live · -1731465500 decrypts]   1135s  36.3M/s ETA  18.9 min
+  [round 6 · 0 climbs live · -1718679255 decrypts]   1136s  36.3M/s ETA  19.0 min
+  [wave 157/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1637938903 decrypts]   1138s  36.3M/s ETA  18.9 min
+  [round 2 · 524288 climbs live · -1574500055 decrypts]   1139s  36.3M/s ETA  18.9 min
+  [round 3 · 524205 climbs live · -1526265559 decrypts]   1140s  36.3M/s ETA  18.8 min
+  [round 4 · 517660 climbs live · -1491143824 decrypts]   1141s  36.3M/s ETA  18.8 min
+  [round 5 · 450397 climbs live · -1467331464 decrypts]   1142s  36.3M/s ETA  18.8 min
+  [round 6 · 0 climbs live · -1454269951 decrypts]   1143s  36.3M/s ETA  18.8 min
+  [wave 158/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1373529599 decrypts]   1145s  36.3M/s ETA  18.8 min
+  [round 2 · 524288 climbs live · -1310090751 decrypts]   1146s  36.3M/s ETA  18.8 min
+  [round 3 · 524213 climbs live · -1261856255 decrypts]   1147s  36.3M/s ETA  18.7 min
+  [round 4 · 518157 climbs live · -1226733984 decrypts]   1148s  36.3M/s ETA  18.7 min
+  [round 5 · 451056 climbs live · -1202898762 decrypts]   1149s  36.3M/s ETA  18.7 min
+  [round 6 · 0 climbs live · -1189818138 decrypts]   1150s  36.3M/s ETA  18.7 min
+  [wave 159/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1109077786 decrypts]   1153s  36.3M/s ETA  18.7 min
+  [round 2 · 524287 climbs live · -1045638938 decrypts]   1154s  36.3M/s ETA  18.6 min
+  [round 3 · 524213 climbs live · -997404534 decrypts]   1155s  36.3M/s ETA  18.6 min
+  [round 4 · 518106 climbs live · -962282263 decrypts]   1156s  36.3M/s ETA  18.6 min
+  [round 5 · 451845 climbs live · -938449387 decrypts]   1157s  36.3M/s ETA  18.6 min
+  [round 6 · 0 climbs live · -925345882 decrypts]   1158s  36.3M/s ETA  18.6 min
+  [wave 160/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -844605530 decrypts]   1160s  36.3M/s ETA  18.6 min
+  [round 2 · 524287 climbs live · -781166682 decrypts]   1161s  36.3M/s ETA  18.5 min
+  [round 3 · 524032 climbs live · -732932278 decrypts]   1162s  36.3M/s ETA  18.5 min
+  [round 4 · 514168 climbs live · -697822134 decrypts]   1163s  36.3M/s ETA  18.5 min
+  [round 5 · 436297 climbs live · -674170406 decrypts]   1164s  36.3M/s ETA  18.5 min
+  [round 6 · 0 climbs live · -661517793 decrypts]   1165s  36.3M/s ETA  18.5 min
+  [wave 161/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -580777441 decrypts]   1167s  36.3M/s ETA  18.4 min
+  [round 2 · 524287 climbs live · -517338593 decrypts]   1168s  36.3M/s ETA  18.4 min
+  [round 3 · 524112 climbs live · -469104189 decrypts]   1169s  36.3M/s ETA  18.4 min
+  [round 4 · 515464 climbs live · -433988685 decrypts]   1171s  36.3M/s ETA  18.4 min
+  [round 5 · 440948 climbs live · -410277341 decrypts]   1172s  36.3M/s ETA  18.3 min
+  [round 6 · 0 climbs live · -397489849 decrypts]   1172s  36.3M/s ETA  18.3 min
+  [wave 162/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -316749497 decrypts]   1175s  36.3M/s ETA  18.3 min
+  [round 2 · 524288 climbs live · -253310649 decrypts]   1176s  36.3M/s ETA  18.3 min
+  [round 3 · 524128 climbs live · -205076153 decrypts]   1177s  36.3M/s ETA  18.2 min
+  [round 4 · 514600 climbs live · -169959577 decrypts]   1178s  36.3M/s ETA  18.2 min
+  [round 5 · 435526 climbs live · -146287977 decrypts]   1179s  36.3M/s ETA  18.2 min
+  [round 6 · 0 climbs live · -133657723 decrypts]   1180s  36.3M/s ETA  18.2 min
+  [wave 163/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -52917371 decrypts]   1182s  36.3M/s ETA  18.2 min
+  [round 2 · 524287 climbs live · 10521477 decrypts]   1183s  36.3M/s ETA  18.2 min
+  [round 3 · 523981 climbs live · 58755881 decrypts]   1184s  36.3M/s ETA  18.1 min
+  [round 4 · 513161 climbs live · 93862608 decrypts]   1185s  36.3M/s ETA  18.1 min
+  [round 5 · 429752 climbs live · 117468014 decrypts]   1186s  36.3M/s ETA  18.1 min
+  [round 6 · 0 climbs live · 129930822 decrypts]   1187s  36.3M/s ETA  18.1 min
+  [wave 164/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 210671174 decrypts]   1189s  36.3M/s ETA  18.1 min
+  [round 2 · 524288 climbs live · 274110022 decrypts]   1190s  36.3M/s ETA  18.0 min
+  [round 3 · 524160 climbs live · 322344518 decrypts]   1191s  36.3M/s ETA  18.0 min
+  [round 4 · 515803 climbs live · 357463238 decrypts]   1192s  36.3M/s ETA  18.0 min
+  [round 5 · 439252 climbs live · 381190176 decrypts]   1193s  36.3M/s ETA  18.0 min
+  [round 6 · 0 climbs live · 393928484 decrypts]   1194s  36.3M/s ETA  18.0 min
+  [wave 165/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 474668836 decrypts]   1196s  36.3M/s ETA  17.9 min
+  [round 2 · 524288 climbs live · 538107684 decrypts]   1197s  36.3M/s ETA  17.9 min
+  [round 3 · 524149 climbs live · 586342180 decrypts]   1199s  36.3M/s ETA  17.9 min
+  [round 4 · 516055 climbs live · 621460163 decrypts]   1200s  36.3M/s ETA  17.9 min
+  [round 5 · 439130 climbs live · 645198693 decrypts]   1201s  36.3M/s ETA  17.9 min
+  [round 6 · 0 climbs live · 657933463 decrypts]   1202s  36.3M/s ETA  17.9 min
+  [wave 166/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 738673815 decrypts]   1204s  36.3M/s ETA  17.8 min
+  [round 2 · 524288 climbs live · 802112663 decrypts]   1205s  36.3M/s ETA  17.8 min
+  [round 3 · 524114 climbs live · 850347159 decrypts]   1206s  36.3M/s ETA  17.8 min
+  [round 4 · 514813 climbs live · 885462797 decrypts]   1207s  36.3M/s ETA  17.7 min
+  [round 5 · 434163 climbs live · 909144195 decrypts]   1208s  36.3M/s ETA  17.7 min
+  [round 6 · 0 climbs live · 921734922 decrypts]   1209s  36.3M/s ETA  17.7 min
+  [wave 167/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1002475274 decrypts]   1211s  36.3M/s ETA  17.7 min
+  [round 2 · 524288 climbs live · 1065914122 decrypts]   1212s  36.3M/s ETA  17.7 min
+  [round 3 · 524114 climbs live · 1114148618 decrypts]   1213s  36.3M/s ETA  17.6 min
+  [round 4 · 515810 climbs live · 1149264256 decrypts]   1214s  36.3M/s ETA  17.6 min
+  [round 5 · 441810 climbs live · 1172991516 decrypts]   1215s  36.3M/s ETA  17.6 min
+  [round 6 · 0 climbs live · 1185804006 decrypts]   1216s  36.3M/s ETA  17.6 min
+  [wave 168/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1266544358 decrypts]   1218s  36.3M/s ETA  17.6 min
+  [round 2 · 524288 climbs live · 1329983206 decrypts]   1219s  36.3M/s ETA  17.5 min
+  [round 3 · 524142 climbs live · 1378217702 decrypts]   1220s  36.3M/s ETA  17.5 min
+  [round 4 · 516139 climbs live · 1413335216 decrypts]   1221s  36.3M/s ETA  17.5 min
+  [round 5 · 442319 climbs live · 1437077610 decrypts]   1222s  36.3M/s ETA  17.5 min
+  [round 6 · 0 climbs live · 1449904861 decrypts]   1223s  36.3M/s ETA  17.5 min
+  [wave 169/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1530645213 decrypts]   1225s  36.3M/s ETA  17.5 min
+  [round 2 · 524288 climbs live · 1594084061 decrypts]   1227s  36.3M/s ETA  17.4 min
+  [round 3 · 524173 climbs live · 1642318557 decrypts]   1228s  36.3M/s ETA  17.4 min
+  [round 4 · 516986 climbs live · 1677438148 decrypts]   1229s  36.3M/s ETA  17.4 min
+  [round 5 · 444870 climbs live · 1701219504 decrypts]   1230s  36.3M/s ETA  17.4 min
+  [round 6 · 0 climbs live · 1714120734 decrypts]   1231s  36.3M/s ETA  17.4 min
+  [wave 170/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1794861086 decrypts]   1233s  36.3M/s ETA  17.3 min
+  [round 2 · 524288 climbs live · 1858299934 decrypts]   1234s  36.3M/s ETA  17.3 min
+  [round 3 · 524171 climbs live · 1906534430 decrypts]   1235s  36.3M/s ETA  17.3 min
+  [round 4 · 516431 climbs live · 1941653887 decrypts]   1236s  36.3M/s ETA  17.3 min
+  [round 5 · 443413 climbs live · 1965409713 decrypts]   1237s  36.3M/s ETA  17.3 min
+  [round 6 · 0 climbs live · 1978268690 decrypts]   1238s  36.3M/s ETA  17.3 min
+  [wave 171/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 2059009042 decrypts]   1240s  36.3M/s ETA  17.2 min
+  [round 2 · 524288 climbs live · 2122447890 decrypts]   1241s  36.3M/s ETA  17.2 min
+  [round 3 · 524091 climbs live · -2124284910 decrypts]   1242s  36.3M/s ETA  17.2 min
+  [round 4 · 515352 climbs live · -2089170813 decrypts]   1243s  36.3M/s ETA  17.1 min
+  [round 5 · 439936 climbs live · -2065464621 decrypts]   1244s  36.3M/s ETA  17.1 min
+  [round 6 · 0 climbs live · -2052706477 decrypts]   1245s  36.3M/s ETA  17.1 min
+  [wave 172/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1971966125 decrypts]   1247s  36.3M/s ETA  17.1 min
+  [round 2 · 524286 climbs live · -1908527277 decrypts]   1248s  36.3M/s ETA  17.1 min
+  [round 3 · 524060 climbs live · -1860292965 decrypts]   1249s  36.3M/s ETA  17.0 min
+  [round 4 · 514385 climbs live · -1825180945 decrypts]   1250s  36.3M/s ETA  17.0 min
+  [round 5 · 434974 climbs live · -1801519235 decrypts]   1252s  36.3M/s ETA  17.0 min
+  [round 6 · 0 climbs live · -1788904989 decrypts]   1252s  36.3M/s ETA  17.0 min
+  [wave 173/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1708164637 decrypts]   1255s  36.3M/s ETA  17.0 min
+  [round 2 · 524287 climbs live · -1644725789 decrypts]   1256s  36.3M/s ETA  16.9 min
+  [round 3 · 524041 climbs live · -1596491385 decrypts]   1257s  36.3M/s ETA  16.9 min
+  [round 4 · 514703 climbs live · -1561380638 decrypts]   1258s  36.3M/s ETA  16.9 min
+  [round 5 · 436384 climbs live · -1537704300 decrypts]   1259s  36.3M/s ETA  16.9 min
+  [round 6 · 0 climbs live · -1525049164 decrypts]   1260s  36.3M/s ETA  16.9 min
+  [wave 174/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1444308812 decrypts]   1262s  36.3M/s ETA  16.9 min
+  [round 2 · 524286 climbs live · -1380869964 decrypts]   1263s  36.3M/s ETA  16.8 min
+  [round 3 · 524124 climbs live · -1332635652 decrypts]   1264s  36.3M/s ETA  16.8 min
+  [round 4 · 514700 climbs live · -1297519344 decrypts]   1265s  36.3M/s ETA  16.8 min
+  [round 5 · 434035 climbs live · -1273843144 decrypts]   1266s  36.3M/s ETA  16.8 min
+  [round 6 · 0 climbs live · -1261256129 decrypts]   1267s  36.3M/s ETA  16.8 min
+  [wave 175/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1180515777 decrypts]   1269s  36.3M/s ETA  16.7 min
+  [round 2 · 524287 climbs live · -1117076929 decrypts]   1270s  36.3M/s ETA  16.7 min
+  [round 3 · 523995 climbs live · -1068842525 decrypts]   1271s  36.3M/s ETA  16.7 min
+  [round 4 · 512010 climbs live · -1033734860 decrypts]   1272s  36.3M/s ETA  16.7 min
+  [round 5 · 424249 climbs live · -1010182400 decrypts]   1273s  36.3M/s ETA  16.7 min
+  [round 6 · 0 climbs live · -997879179 decrypts]   1274s  36.3M/s ETA  16.7 min
+  [wave 176/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -917138827 decrypts]   1276s  36.3M/s ETA  16.6 min
+  [round 2 · 524288 climbs live · -853699979 decrypts]   1277s  36.3M/s ETA  16.6 min
+  [round 3 · 524139 climbs live · -805465483 decrypts]   1278s  36.3M/s ETA  16.6 min
+  [round 4 · 516261 climbs live · -770348170 decrypts]   1279s  36.3M/s ETA  16.5 min
+  [round 5 · 443606 climbs live · -746600164 decrypts]   1280s  36.3M/s ETA  16.5 min
+  [round 6 · 0 climbs live · -733735590 decrypts]   1281s  36.3M/s ETA  16.5 min
+  [wave 177/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -652995238 decrypts]   1283s  36.3M/s ETA  16.5 min
+  [round 2 · 524288 climbs live · -589556390 decrypts]   1284s  36.3M/s ETA  16.5 min
+  [round 3 · 524165 climbs live · -541321894 decrypts]   1286s  36.3M/s ETA  16.4 min
+  [round 4 · 516356 climbs live · -506202839 decrypts]   1287s  36.3M/s ETA  16.4 min
+  [round 5 · 444055 climbs live · -482450463 decrypts]   1288s  36.3M/s ETA  16.4 min
+  [round 6 · 0 climbs live · -469572868 decrypts]   1288s  36.3M/s ETA  16.4 min
+  [wave 178/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -388832516 decrypts]   1291s  36.3M/s ETA  16.4 min
+  [round 2 · 524288 climbs live · -325393668 decrypts]   1292s  36.3M/s ETA  16.3 min
+  [round 3 · 524183 climbs live · -277159172 decrypts]   1293s  36.3M/s ETA  16.3 min
+  [round 4 · 517027 climbs live · -242038911 decrypts]   1294s  36.3M/s ETA  16.3 min
+  [round 5 · 446158 climbs live · -218255669 decrypts]   1295s  36.3M/s ETA  16.3 min
+  [round 6 · 0 climbs live · -205317087 decrypts]   1296s  36.3M/s ETA  16.3 min
+  [wave 179/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -124576735 decrypts]   1298s  36.3M/s ETA  16.2 min
+  [round 2 · 524288 climbs live · -61137887 decrypts]   1299s  36.3M/s ETA  16.2 min
+  [round 3 · 524087 climbs live · -12903391 decrypts]   1300s  36.3M/s ETA  16.2 min
+  [round 4 · 514600 climbs live · 22210438 decrypts]   1301s  36.3M/s ETA  16.2 min
+  [round 5 · 433527 climbs live · 45882038 decrypts]   1302s  36.3M/s ETA  16.2 min
+  [round 6 · 0 climbs live · 58454321 decrypts]   1303s  36.3M/s ETA  16.2 min
+  [wave 180/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 139194673 decrypts]   1305s  36.3M/s ETA  16.1 min
+  [round 2 · 524288 climbs live · 202633521 decrypts]   1306s  36.3M/s ETA  16.1 min
+  [round 3 · 524132 climbs live · 250868017 decrypts]   1307s  36.3M/s ETA  16.1 min
+  [round 4 · 515586 climbs live · 285984861 decrypts]   1308s  36.3M/s ETA  16.0 min
+  [round 5 · 438083 climbs live · 309701817 decrypts]   1309s  36.3M/s ETA  16.0 min
+  [round 6 · 0 climbs live · 322406224 decrypts]   1310s  36.3M/s ETA  16.0 min
+  [wave 181/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 403146576 decrypts]   1312s  36.3M/s ETA  16.0 min
+  [round 2 · 524288 climbs live · 466585424 decrypts]   1314s  36.3M/s ETA  16.0 min
+  [round 3 · 524111 climbs live · 514819920 decrypts]   1315s  36.3M/s ETA  15.9 min
+  [round 4 · 514946 climbs live · 549935357 decrypts]   1316s  36.3M/s ETA  15.9 min
+  [round 5 · 436418 climbs live · 573622873 decrypts]   1317s  36.3M/s ETA  15.9 min
+  [round 6 · 0 climbs live · 586278995 decrypts]   1318s  36.3M/s ETA  15.9 min
+  [wave 182/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 667019347 decrypts]   1320s  36.3M/s ETA  15.9 min
+  [round 2 · 524286 climbs live · 730458195 decrypts]   1321s  36.3M/s ETA  15.8 min
+  [round 3 · 524065 climbs live · 778692507 decrypts]   1322s  36.3M/s ETA  15.8 min
+  [round 4 · 514521 climbs live · 813804862 decrypts]   1323s  36.3M/s ETA  15.8 min
+  [round 5 · 436025 climbs live · 837472828 decrypts]   1324s  36.3M/s ETA  15.8 min
+  [round 6 · 0 climbs live · 850117553 decrypts]   1325s  36.3M/s ETA  15.8 min
+  [wave 183/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 930857905 decrypts]   1327s  36.3M/s ETA  15.8 min
+  [round 2 · 524288 climbs live · 994296753 decrypts]   1328s  36.3M/s ETA  15.7 min
+  [round 3 · 524062 climbs live · 1042531249 decrypts]   1329s  36.3M/s ETA  15.7 min
+  [round 4 · 515512 climbs live · 1077643403 decrypts]   1330s  36.3M/s ETA  15.7 min
+  [round 5 · 443449 climbs live · 1101356955 decrypts]   1331s  36.3M/s ETA  15.7 min
+  [round 6 · 0 climbs live · 1114216976 decrypts]   1332s  36.3M/s ETA  15.7 min
+  [wave 184/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1194957328 decrypts]   1334s  36.3M/s ETA  15.6 min
+  [round 2 · 524288 climbs live · 1258396176 decrypts]   1336s  36.3M/s ETA  15.6 min
+  [round 3 · 524130 climbs live · 1306630672 decrypts]   1337s  36.3M/s ETA  15.6 min
+  [round 4 · 515772 climbs live · 1341747382 decrypts]   1338s  36.3M/s ETA  15.6 min
+  [round 5 · 441925 climbs live · 1365472894 decrypts]   1339s  36.3M/s ETA  15.6 min
+  [round 6 · 0 climbs live · 1378288719 decrypts]   1340s  36.3M/s ETA  15.6 min
+  [wave 185/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1459029071 decrypts]   1342s  36.3M/s ETA  15.5 min
+  [round 2 · 524286 climbs live · 1522467919 decrypts]   1343s  36.3M/s ETA  15.5 min
+  [round 3 · 524138 climbs live · 1570702231 decrypts]   1344s  36.3M/s ETA  15.5 min
+  [round 4 · 516687 climbs live · 1605819477 decrypts]   1345s  36.3M/s ETA  15.4 min
+  [round 5 · 443791 climbs live · 1629587079 decrypts]   1346s  36.3M/s ETA  15.4 min
+  [round 6 · 0 climbs live · 1642457018 decrypts]   1347s  36.3M/s ETA  15.4 min
+  [wave 186/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1723197370 decrypts]   1349s  36.3M/s ETA  15.4 min
+  [round 2 · 524288 climbs live · 1786636218 decrypts]   1350s  36.3M/s ETA  15.4 min
+  [round 3 · 524107 climbs live · 1834870714 decrypts]   1351s  36.3M/s ETA  15.3 min
+  [round 4 · 515190 climbs live · 1869985883 decrypts]   1352s  36.3M/s ETA  15.3 min
+  [round 5 · 439358 climbs live · 1893684623 decrypts]   1353s  36.3M/s ETA  15.3 min
+  [round 6 · 0 climbs live · 1906426005 decrypts]   1354s  36.3M/s ETA  15.3 min
+  [wave 187/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1987166357 decrypts]   1357s  36.3M/s ETA  15.3 min
+  [round 2 · 524288 climbs live · 2050605205 decrypts]   1358s  36.3M/s ETA  15.2 min
+  [round 3 · 524120 climbs live · 2098839701 decrypts]   1359s  36.3M/s ETA  15.2 min
+  [round 4 · 516320 climbs live · 2133955741 decrypts]   1360s  36.3M/s ETA  15.2 min
+  [round 5 · 443869 climbs live · -2137260835 decrypts]   1361s  36.3M/s ETA  15.2 min
+  [round 6 · 0 climbs live · -2124388634 decrypts]   1362s  36.3M/s ETA  15.2 min
+  [wave 188/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -2043648282 decrypts]   1364s  36.3M/s ETA  15.2 min
+  [round 2 · 524288 climbs live · -1980209434 decrypts]   1365s  36.3M/s ETA  15.1 min
+  [round 3 · 524196 climbs live · -1931974938 decrypts]   1366s  36.3M/s ETA  15.1 min
+  [round 4 · 517203 climbs live · -1896853806 decrypts]   1367s  36.3M/s ETA  15.1 min
+  [round 5 · 447071 climbs live · -1873062468 decrypts]   1368s  36.3M/s ETA  15.1 min
+  [round 6 · 0 climbs live · -1860097409 decrypts]   1369s  36.3M/s ETA  15.1 min
+  [wave 189/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1779357057 decrypts]   1371s  36.3M/s ETA  15.0 min
+  [round 2 · 524288 climbs live · -1715918209 decrypts]   1372s  36.3M/s ETA  15.0 min
+  [round 3 · 524181 climbs live · -1667683713 decrypts]   1373s  36.3M/s ETA  15.0 min
+  [round 4 · 518100 climbs live · -1632563586 decrypts]   1375s  36.3M/s ETA  15.0 min
+  [round 5 · 453476 climbs live · -1608730986 decrypts]   1376s  36.3M/s ETA  15.0 min
+  [round 6 · 0 climbs live · -1595580182 decrypts]   1376s  36.3M/s ETA  15.0 min
+  [wave 190/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1514839830 decrypts]   1379s  36.3M/s ETA  14.9 min
+  [round 2 · 524287 climbs live · -1451400982 decrypts]   1380s  36.3M/s ETA  14.9 min
+  [round 3 · 524108 climbs live · -1403166578 decrypts]   1381s  36.3M/s ETA  14.9 min
+  [round 4 · 516296 climbs live · -1368051342 decrypts]   1382s  36.3M/s ETA  14.8 min
+  [round 5 · 443510 climbs live · -1344301726 decrypts]   1383s  36.3M/s ETA  14.8 min
+  [round 6 · 0 climbs live · -1331439936 decrypts]   1384s  36.3M/s ETA  14.8 min
+  [wave 191/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1250699584 decrypts]   1386s  36.3M/s ETA  14.8 min
+  [round 2 · 524288 climbs live · -1187260736 decrypts]   1387s  36.3M/s ETA  14.8 min
+  [round 3 · 524169 climbs live · -1139026240 decrypts]   1388s  36.3M/s ETA  14.7 min
+  [round 4 · 517196 climbs live · -1103906917 decrypts]   1389s  36.3M/s ETA  14.7 min
+  [round 5 · 448243 climbs live · -1080115901 decrypts]   1390s  36.3M/s ETA  14.7 min
+  [round 6 · 0 climbs live · -1067116854 decrypts]   1391s  36.3M/s ETA  14.7 min
+  [wave 192/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -986376502 decrypts]   1393s  36.3M/s ETA  14.7 min
+  [round 2 · 524288 climbs live · -922937654 decrypts]   1394s  36.3M/s ETA  14.6 min
+  [round 3 · 524208 climbs live · -874703158 decrypts]   1395s  36.3M/s ETA  14.6 min
+  [round 4 · 517445 climbs live · -839581222 decrypts]   1397s  36.3M/s ETA  14.6 min
+  [round 5 · 447929 climbs live · -815778752 decrypts]   1398s  36.3M/s ETA  14.6 min
+  [round 6 · 0 climbs live · -802788811 decrypts]   1398s  36.3M/s ETA  14.6 min
+  [wave 193/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -722048459 decrypts]   1401s  36.3M/s ETA  14.6 min
+  [round 2 · 524286 climbs live · -658609611 decrypts]   1402s  36.3M/s ETA  14.5 min
+  [round 3 · 524156 climbs live · -610375299 decrypts]   1403s  36.3M/s ETA  14.5 min
+  [round 4 · 516280 climbs live · -575256847 decrypts]   1404s  36.3M/s ETA  14.5 min
+  [round 5 · 444880 climbs live · -551507967 decrypts]   1405s  36.3M/s ETA  14.5 min
+  [round 6 · 0 climbs live · -538606447 decrypts]   1406s  36.3M/s ETA  14.5 min
+  [wave 194/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -457866095 decrypts]   1408s  36.3M/s ETA  14.4 min
+  [round 2 · 524288 climbs live · -394427247 decrypts]   1409s  36.3M/s ETA  14.4 min
+  [round 3 · 524132 climbs live · -346192751 decrypts]   1410s  36.3M/s ETA  14.4 min
+  [round 4 · 515592 climbs live · -311075907 decrypts]   1411s  36.3M/s ETA  14.4 min
+  [round 5 · 442096 climbs live · -287358675 decrypts]   1412s  36.3M/s ETA  14.4 min
+  [round 6 · 0 climbs live · -274537891 decrypts]   1413s  36.3M/s ETA  14.4 min
+  [wave 195/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -193797539 decrypts]   1415s  36.3M/s ETA  14.3 min
+  [round 2 · 524288 climbs live · -130358691 decrypts]   1416s  36.3M/s ETA  14.3 min
+  [round 3 · 524099 climbs live · -82124195 decrypts]   1417s  36.3M/s ETA  14.3 min
+  [round 4 · 515472 climbs live · -47009562 decrypts]   1418s  36.3M/s ETA  14.2 min
+  [round 5 · 440913 climbs live · -23297850 decrypts]   1419s  36.3M/s ETA  14.2 min
+  [round 6 · 0 climbs live · -10511373 decrypts]   1420s  36.3M/s ETA  14.2 min
+  [wave 196/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 70228979 decrypts]   1422s  36.3M/s ETA  14.2 min
+  [round 2 · 524288 climbs live · 133667827 decrypts]   1424s  36.3M/s ETA  14.2 min
+  [round 3 · 524078 climbs live · 181902323 decrypts]   1425s  36.3M/s ETA  14.1 min
+  [round 4 · 515519 climbs live · 217015549 decrypts]   1426s  36.3M/s ETA  14.1 min
+  [round 5 · 441508 climbs live · 240729423 decrypts]   1427s  36.3M/s ETA  14.1 min
+  [round 6 · 0 climbs live · 253533155 decrypts]   1428s  36.3M/s ETA  14.1 min
+  [wave 197/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 334273507 decrypts]   1430s  36.3M/s ETA  14.1 min
+  [round 2 · 524285 climbs live · 397712355 decrypts]   1431s  36.3M/s ETA  14.0 min
+  [round 3 · 524091 climbs live · 445946575 decrypts]   1432s  36.3M/s ETA  14.0 min
+  [round 4 · 515672 climbs live · 481060672 decrypts]   1433s  36.3M/s ETA  14.0 min
+  [round 5 · 443259 climbs live · 504781584 decrypts]   1434s  36.3M/s ETA  14.0 min
+  [round 6 · 0 climbs live · 517636095 decrypts]   1435s  36.3M/s ETA  14.0 min
+  [wave 198/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 598376447 decrypts]   1437s  36.3M/s ETA  14.0 min
+  [round 2 · 524287 climbs live · 661815295 decrypts]   1438s  36.3M/s ETA  13.9 min
+  [round 3 · 524066 climbs live · 710049699 decrypts]   1439s  36.3M/s ETA  13.9 min
+  [round 4 · 514423 climbs live · 745162121 decrypts]   1440s  36.3M/s ETA  13.9 min
+  [round 5 · 436287 climbs live · 768825579 decrypts]   1441s  36.3M/s ETA  13.9 min
+  [round 6 · 0 climbs live · 781477902 decrypts]   1442s  36.3M/s ETA  13.9 min
+  [wave 199/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 862218254 decrypts]   1444s  36.3M/s ETA  13.8 min
+  [round 2 · 524288 climbs live · 925657102 decrypts]   1445s  36.3M/s ETA  13.8 min
+  [round 3 · 524106 climbs live · 973891598 decrypts]   1447s  36.3M/s ETA  13.8 min
+  [round 4 · 515248 climbs live · 1009006700 decrypts]   1448s  36.3M/s ETA  13.8 min
+  [round 5 · 439715 climbs live · 1032708108 decrypts]   1449s  36.3M/s ETA  13.7 min
+  [round 6 · 0 climbs live · 1045459843 decrypts]   1450s  36.3M/s ETA  13.7 min
+  [wave 200/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1126200195 decrypts]   1452s  36.3M/s ETA  13.7 min
+  [round 2 · 524288 climbs live · 1189639043 decrypts]   1453s  36.3M/s ETA  13.7 min
+  [round 3 · 524165 climbs live · 1237873539 decrypts]   1454s  36.3M/s ETA  13.7 min
+  [round 4 · 516541 climbs live · 1272992594 decrypts]   1455s  36.3M/s ETA  13.6 min
+  [round 5 · 443352 climbs live · 1296753480 decrypts]   1456s  36.3M/s ETA  13.6 min
+  [round 6 · 0 climbs live · 1309610688 decrypts]   1457s  36.3M/s ETA  13.6 min
+  [wave 201/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1390351040 decrypts]   1459s  36.3M/s ETA  13.6 min
+  [round 2 · 524288 climbs live · 1453789888 decrypts]   1460s  36.3M/s ETA  13.6 min
+  [round 3 · 524161 climbs live · 1502024384 decrypts]   1461s  36.3M/s ETA  13.5 min
+  [round 4 · 515998 climbs live · 1537143171 decrypts]   1462s  36.3M/s ETA  13.5 min
+  [round 5 · 439381 climbs live · 1560879079 decrypts]   1463s  36.3M/s ETA  13.5 min
+  [round 6 · 0 climbs live · 1573621128 decrypts]   1464s  36.3M/s ETA  13.5 min
+  [wave 202/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1654361480 decrypts]   1466s  36.3M/s ETA  13.5 min
+  [round 2 · 524288 climbs live · 1717800328 decrypts]   1467s  36.3M/s ETA  13.4 min
+  [round 3 · 524126 climbs live · 1766034824 decrypts]   1468s  36.3M/s ETA  13.4 min
+  [round 4 · 516350 climbs live · 1801151266 decrypts]   1469s  36.3M/s ETA  13.4 min
+  [round 5 · 443493 climbs live · 1824903366 decrypts]   1470s  36.3M/s ETA  13.4 min
+  [round 6 · 0 climbs live · 1837764663 decrypts]   1471s  36.3M/s ETA  13.4 min
+  [wave 203/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1918505015 decrypts]   1473s  36.3M/s ETA  13.3 min
+  [round 2 · 524284 climbs live · 1981943863 decrypts]   1474s  36.3M/s ETA  13.3 min
+  [round 3 · 523938 climbs live · 2030177991 decrypts]   1476s  36.3M/s ETA  13.3 min
+  [round 4 · 512826 climbs live · 2065281837 decrypts]   1477s  36.3M/s ETA  13.3 min
+  [round 5 · 427357 climbs live · 2088871833 decrypts]   1478s  36.3M/s ETA  13.3 min
+  [round 6 · 0 climbs live · 2101265186 decrypts]   1478s  36.3M/s ETA  13.3 min
+  [wave 204/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -2112961758 decrypts]   1481s  36.3M/s ETA  13.2 min
+  [round 2 · 524287 climbs live · -2049522910 decrypts]   1482s  36.3M/s ETA  13.2 min
+  [round 3 · 524054 climbs live · -2001288506 decrypts]   1483s  36.3M/s ETA  13.2 min
+  [round 4 · 514091 climbs live · -1966176888 decrypts]   1484s  36.3M/s ETA  13.2 min
+  [round 5 · 431391 climbs live · -1942528702 decrypts]   1485s  36.3M/s ETA  13.1 min
+  [round 6 · 0 climbs live · -1930018363 decrypts]   1486s  36.3M/s ETA  13.1 min
+  [wave 205/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1849278011 decrypts]   1488s  36.3M/s ETA  13.1 min
+  [round 2 · 524287 climbs live · -1785839163 decrypts]   1489s  36.3M/s ETA  13.1 min
+  [round 3 · 524082 climbs live · -1737604759 decrypts]   1490s  36.3M/s ETA  13.0 min
+  [round 4 · 514703 climbs live · -1702491265 decrypts]   1491s  36.3M/s ETA  13.0 min
+  [round 5 · 437156 climbs live · -1678814927 decrypts]   1492s  36.3M/s ETA  13.0 min
+  [round 6 · 0 climbs live · -1666137403 decrypts]   1493s  36.3M/s ETA  13.0 min
+  [wave 206/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1585397051 decrypts]   1495s  36.3M/s ETA  13.0 min
+  [round 2 · 524288 climbs live · -1521958203 decrypts]   1496s  36.3M/s ETA  12.9 min
+  [round 3 · 524166 climbs live · -1473723707 decrypts]   1498s  36.3M/s ETA  12.9 min
+  [round 4 · 517673 climbs live · -1438604585 decrypts]   1499s  36.3M/s ETA  12.9 min
+  [round 5 · 450959 climbs live · -1414791627 decrypts]   1500s  36.3M/s ETA  12.9 min
+  [round 6 · 0 climbs live · -1401713816 decrypts]   1500s  36.3M/s ETA  12.9 min
+  [wave 207/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1320973464 decrypts]   1503s  36.3M/s ETA  12.9 min
+  [round 2 · 524288 climbs live · -1257534616 decrypts]   1504s  36.3M/s ETA  12.8 min
+  [round 3 · 524125 climbs live · -1209300120 decrypts]   1505s  36.3M/s ETA  12.8 min
+  [round 4 · 515607 climbs live · -1174183745 decrypts]   1506s  36.3M/s ETA  12.8 min
+  [round 5 · 439502 climbs live · -1150465823 decrypts]   1507s  36.3M/s ETA  12.8 min
+  [round 6 · 0 climbs live · -1137720265 decrypts]   1508s  36.3M/s ETA  12.8 min
+  [wave 208/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1056979913 decrypts]   1510s  36.3M/s ETA  12.7 min
+  [round 2 · 524288 climbs live · -993541065 decrypts]   1511s  36.3M/s ETA  12.7 min
+  [round 3 · 524160 climbs live · -945306569 decrypts]   1512s  36.3M/s ETA  12.7 min
+  [round 4 · 516515 climbs live · -910187849 decrypts]   1513s  36.3M/s ETA  12.7 min
+  [round 5 · 444239 climbs live · -886428159 decrypts]   1514s  36.3M/s ETA  12.7 min
+  [round 6 · 0 climbs live · -873545228 decrypts]   1515s  36.3M/s ETA  12.7 min
+  [wave 209/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -792804876 decrypts]   1517s  36.3M/s ETA  12.6 min
+  [round 2 · 524288 climbs live · -729366028 decrypts]   1518s  36.3M/s ETA  12.6 min
+  [round 3 · 524106 climbs live · -681131532 decrypts]   1519s  36.3M/s ETA  12.6 min
+  [round 4 · 516367 climbs live · -646016430 decrypts]   1521s  36.3M/s ETA  12.5 min
+  [round 5 · 443613 climbs live · -622263548 decrypts]   1522s  36.3M/s ETA  12.5 min
+  [round 6 · 0 climbs live · -609398771 decrypts]   1522s  36.3M/s ETA  12.5 min
+  [wave 210/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -528658419 decrypts]   1525s  36.3M/s ETA  12.5 min
+  [round 2 · 524288 climbs live · -465219571 decrypts]   1526s  36.3M/s ETA  12.5 min
+  [round 3 · 524190 climbs live · -416985075 decrypts]   1527s  36.3M/s ETA  12.4 min
+  [round 4 · 517830 climbs live · -381864345 decrypts]   1528s  36.3M/s ETA  12.4 min
+  [round 5 · 452318 climbs live · -358044165 decrypts]   1529s  36.3M/s ETA  12.4 min
+  [round 6 · 0 climbs live · -344926943 decrypts]   1530s  36.3M/s ETA  12.4 min
+  [wave 211/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -264186591 decrypts]   1532s  36.3M/s ETA  12.4 min
+  [round 2 · 524288 climbs live · -200747743 decrypts]   1533s  36.3M/s ETA  12.3 min
+  [round 3 · 524132 climbs live · -152513247 decrypts]   1534s  36.3M/s ETA  12.3 min
+  [round 4 · 516888 climbs live · -117396403 decrypts]   1535s  36.3M/s ETA  12.3 min
+  [round 5 · 448348 climbs live · -93619555 decrypts]   1536s  36.3M/s ETA  12.3 min
+  [round 6 · 0 climbs live · -80617463 decrypts]   1537s  36.3M/s ETA  12.3 min
+  [wave 212/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 122889 decrypts]   1539s  36.3M/s ETA  12.3 min
+  [round 2 · 524288 climbs live · 63561737 decrypts]   1540s  36.3M/s ETA  12.2 min
+  [round 3 · 524042 climbs live · 111796233 decrypts]   1541s  36.3M/s ETA  12.2 min
+  [round 4 · 513824 climbs live · 146907047 decrypts]   1542s  36.3M/s ETA  12.2 min
+  [round 5 · 431213 climbs live · 170542951 decrypts]   1544s  36.3M/s ETA  12.2 min
+  [round 6 · 0 climbs live · 183048128 decrypts]   1544s  36.3M/s ETA  12.2 min
+  [wave 213/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 263788480 decrypts]   1546s  36.3M/s ETA  12.1 min
+  [round 2 · 524288 climbs live · 327227328 decrypts]   1548s  36.3M/s ETA  12.1 min
+  [round 3 · 524088 climbs live · 375461824 decrypts]   1549s  36.3M/s ETA  12.1 min
+  [round 4 · 515100 climbs live · 410575720 decrypts]   1550s  36.3M/s ETA  12.1 min
+  [round 5 · 437429 climbs live · 434270320 decrypts]   1551s  36.3M/s ETA  12.1 min
+  [round 6 · 0 climbs live · 446955761 decrypts]   1552s  36.3M/s ETA  12.1 min
+  [wave 214/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 527696113 decrypts]   1554s  36.3M/s ETA  12.0 min
+  [round 2 · 524288 climbs live · 591134961 decrypts]   1555s  36.3M/s ETA  12.0 min
+  [round 3 · 524169 climbs live · 639369457 decrypts]   1556s  36.3M/s ETA  12.0 min
+  [round 4 · 515704 climbs live · 674488780 decrypts]   1557s  36.3M/s ETA  11.9 min
+  [round 5 · 439721 climbs live · 698211164 decrypts]   1558s  36.3M/s ETA  11.9 min
+  [round 6 · 0 climbs live · 710963073 decrypts]   1559s  36.3M/s ETA  11.9 min
+  [wave 215/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 791703425 decrypts]   1561s  36.3M/s ETA  11.9 min
+  [round 2 · 524288 climbs live · 855142273 decrypts]   1562s  36.3M/s ETA  11.9 min
+  [round 3 · 524116 climbs live · 903376769 decrypts]   1563s  36.3M/s ETA  11.8 min
+  [round 4 · 514648 climbs live · 938492541 decrypts]   1564s  36.3M/s ETA  11.8 min
+  [round 5 · 433544 climbs live · 962166349 decrypts]   1565s  36.3M/s ETA  11.8 min
+  [round 6 · 0 climbs live · 974739125 decrypts]   1566s  36.3M/s ETA  11.8 min
+  [wave 216/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1055479477 decrypts]   1568s  36.3M/s ETA  11.8 min
+  [round 2 · 524287 climbs live · 1118918325 decrypts]   1570s  36.3M/s ETA  11.7 min
+  [round 3 · 523967 climbs live · 1167152729 decrypts]   1571s  36.3M/s ETA  11.7 min
+  [round 4 · 512627 climbs live · 1202258518 decrypts]   1572s  36.3M/s ETA  11.7 min
+  [round 5 · 427566 climbs live · 1225839360 decrypts]   1573s  36.3M/s ETA  11.7 min
+  [round 6 · 0 climbs live · 1238238774 decrypts]   1574s  36.3M/s ETA  11.7 min
+  [wave 217/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1318979126 decrypts]   1576s  36.3M/s ETA  11.7 min
+  [round 2 · 524287 climbs live · 1382417974 decrypts]   1577s  36.3M/s ETA  11.6 min
+  [round 3 · 524096 climbs live · 1430652378 decrypts]   1578s  36.3M/s ETA  11.6 min
+  [round 4 · 514310 climbs live · 1465766810 decrypts]   1579s  36.3M/s ETA  11.6 min
+  [round 5 · 434722 climbs live · 1489425070 decrypts]   1580s  36.3M/s ETA  11.6 min
+  [round 6 · 0 climbs live · 1502032008 decrypts]   1581s  36.3M/s ETA  11.6 min
+  [wave 218/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1582772360 decrypts]   1583s  36.3M/s ETA  11.5 min
+  [round 2 · 524288 climbs live · 1646211208 decrypts]   1584s  36.3M/s ETA  11.5 min
+  [round 3 · 524108 climbs live · 1694445704 decrypts]   1585s  36.3M/s ETA  11.5 min
+  [round 4 · 514883 climbs live · 1729560940 decrypts]   1586s  36.3M/s ETA  11.5 min
+  [round 5 · 436417 climbs live · 1753245558 decrypts]   1587s  36.3M/s ETA  11.4 min
+  [round 6 · 0 climbs live · 1765901651 decrypts]   1588s  36.3M/s ETA  11.4 min
+  [wave 219/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1846642003 decrypts]   1590s  36.3M/s ETA  11.4 min
+  [round 2 · 524287 climbs live · 1910080851 decrypts]   1591s  36.3M/s ETA  11.4 min
+  [round 3 · 524121 climbs live · 1958315255 decrypts]   1592s  36.3M/s ETA  11.4 min
+  [round 4 · 515471 climbs live · 1993431362 decrypts]   1593s  36.3M/s ETA  11.3 min
+  [round 5 · 436675 climbs live · 2017143028 decrypts]   1594s  36.3M/s ETA  11.3 min
+  [round 6 · 0 climbs live · 2029806603 decrypts]   1595s  36.3M/s ETA  11.3 min
+  [wave 220/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 2110546955 decrypts]   1597s  36.3M/s ETA  11.3 min
+  [round 2 · 524287 climbs live · -2120981493 decrypts]   1599s  36.3M/s ETA  11.3 min
+  [round 3 · 524019 climbs live · -2072747089 decrypts]   1600s  36.3M/s ETA  11.2 min
+  [round 4 · 514276 climbs live · -2037637816 decrypts]   1601s  36.3M/s ETA  11.2 min
+  [round 5 · 435242 climbs live · -2013981120 decrypts]   1602s  36.3M/s ETA  11.2 min
+  [round 6 · 0 climbs live · -2001359102 decrypts]   1603s  36.3M/s ETA  11.2 min
+  [wave 221/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1920618750 decrypts]   1605s  36.3M/s ETA  11.2 min
+  [round 2 · 524287 climbs live · -1857179902 decrypts]   1606s  36.3M/s ETA  11.1 min
+  [round 3 · 524094 climbs live · -1808945498 decrypts]   1607s  36.3M/s ETA  11.1 min
+  [round 4 · 515023 climbs live · -1773831200 decrypts]   1608s  36.3M/s ETA  11.1 min
+  [round 5 · 438399 climbs live · -1750140142 decrypts]   1609s  36.3M/s ETA  11.1 min
+  [round 6 · 0 climbs live · -1737426571 decrypts]   1610s  36.3M/s ETA  11.1 min
+  [wave 222/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1656686219 decrypts]   1612s  36.3M/s ETA  11.0 min
+  [round 2 · 524288 climbs live · -1593247371 decrypts]   1613s  36.3M/s ETA  11.0 min
+  [round 3 · 524125 climbs live · -1545012875 decrypts]   1614s  36.3M/s ETA  11.0 min
+  [round 4 · 515479 climbs live · -1509896500 decrypts]   1615s  36.3M/s ETA  11.0 min
+  [round 5 · 440119 climbs live · -1486184466 decrypts]   1616s  36.3M/s ETA  11.0 min
+  [round 6 · 0 climbs live · -1473421015 decrypts]   1617s  36.3M/s ETA  11.0 min
+  [wave 223/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1392680663 decrypts]   1619s  36.3M/s ETA  10.9 min
+  [round 2 · 524288 climbs live · -1329241815 decrypts]   1620s  36.3M/s ETA  10.9 min
+  [round 3 · 524165 climbs live · -1281007319 decrypts]   1621s  36.3M/s ETA  10.9 min
+  [round 4 · 516764 climbs live · -1245888264 decrypts]   1623s  36.3M/s ETA  10.9 min
+  [round 5 · 446034 climbs live · -1222117120 decrypts]   1624s  36.3M/s ETA  10.8 min
+  [round 6 · 0 climbs live · -1209182134 decrypts]   1624s  36.3M/s ETA  10.8 min
+  [wave 224/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1128441782 decrypts]   1627s  36.3M/s ETA  10.8 min
+  [round 2 · 524287 climbs live · -1065002934 decrypts]   1628s  36.3M/s ETA  10.8 min
+  [round 3 · 524091 climbs live · -1016768530 decrypts]   1629s  36.3M/s ETA  10.7 min
+  [round 4 · 514933 climbs live · -981654433 decrypts]   1630s  36.3M/s ETA  10.7 min
+  [round 5 · 435275 climbs live · -957967515 decrypts]   1631s  36.3M/s ETA  10.7 min
+  [round 6 · 0 climbs live · -945344540 decrypts]   1632s  36.3M/s ETA  10.7 min
+  [wave 225/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -864604188 decrypts]   1634s  36.3M/s ETA  10.7 min
+  [round 2 · 524285 climbs live · -801165340 decrypts]   1635s  36.3M/s ETA  10.6 min
+  [round 3 · 524093 climbs live · -752931120 decrypts]   1636s  36.3M/s ETA  10.6 min
+  [round 4 · 515457 climbs live · -717816889 decrypts]   1637s  36.3M/s ETA  10.6 min
+  [round 5 · 440044 climbs live · -694105867 decrypts]   1638s  36.3M/s ETA  10.6 min
+  [round 6 · 0 climbs live · -681344591 decrypts]   1639s  36.3M/s ETA  10.6 min
+  [wave 226/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -600604239 decrypts]   1641s  36.3M/s ETA  10.6 min
+  [round 2 · 524288 climbs live · -537165391 decrypts]   1642s  36.3M/s ETA  10.5 min
+  [round 3 · 524142 climbs live · -488930895 decrypts]   1643s  36.3M/s ETA  10.5 min
+  [round 4 · 516500 climbs live · -453813381 decrypts]   1644s  36.3M/s ETA  10.5 min
+  [round 5 · 443289 climbs live · -430054381 decrypts]   1645s  36.3M/s ETA  10.5 min
+  [round 6 · 0 climbs live · -417199000 decrypts]   1646s  36.3M/s ETA  10.5 min
+  [wave 227/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -336458648 decrypts]   1648s  36.3M/s ETA  10.4 min
+  [round 2 · 524287 climbs live · -273019800 decrypts]   1650s  36.3M/s ETA  10.4 min
+  [round 3 · 524072 climbs live · -224785396 decrypts]   1651s  36.3M/s ETA  10.4 min
+  [round 4 · 514271 climbs live · -189672572 decrypts]   1652s  36.3M/s ETA  10.4 min
+  [round 5 · 433864 climbs live · -166016106 decrypts]   1653s  36.3M/s ETA  10.4 min
+  [round 6 · 0 climbs live · -153434050 decrypts]   1654s  36.3M/s ETA  10.4 min
+  [wave 228/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -72693698 decrypts]   1656s  36.3M/s ETA  10.3 min
+  [round 2 · 524288 climbs live · -9254850 decrypts]   1657s  36.3M/s ETA  10.3 min
+  [round 3 · 523973 climbs live · 38979646 decrypts]   1658s  36.3M/s ETA  10.3 min
+  [round 4 · 513262 climbs live · 74085837 decrypts]   1659s  36.3M/s ETA  10.2 min
+  [round 5 · 429789 climbs live · 97695889 decrypts]   1660s  36.3M/s ETA  10.2 min
+  [round 6 · 0 climbs live · 110159770 decrypts]   1661s  36.3M/s ETA  10.2 min
+  [wave 229/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 190900122 decrypts]   1663s  36.3M/s ETA  10.2 min
+  [round 2 · 524288 climbs live · 254338970 decrypts]   1664s  36.3M/s ETA  10.2 min
+  [round 3 · 524137 climbs live · 302573466 decrypts]   1665s  36.3M/s ETA  10.1 min
+  [round 4 · 515845 climbs live · 337690645 decrypts]   1666s  36.3M/s ETA  10.1 min
+  [round 5 · 441695 climbs live · 361419515 decrypts]   1667s  36.3M/s ETA  10.1 min
+  [round 6 · 0 climbs live · 374228670 decrypts]   1668s  36.3M/s ETA  10.1 min
+  [wave 230/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 454969022 decrypts]   1670s  36.3M/s ETA  10.1 min
+  [round 2 · 524288 climbs live · 518407870 decrypts]   1671s  36.3M/s ETA  10.0 min
+  [round 3 · 524057 climbs live · 566642366 decrypts]   1672s  36.3M/s ETA  10.0 min
+  [round 4 · 513922 climbs live · 601754185 decrypts]   1674s  36.3M/s ETA  10.0 min
+  [round 5 · 434334 climbs live · 625394597 decrypts]   1675s  36.3M/s ETA  10.0 min
+  [round 6 · 0 climbs live · 637990283 decrypts]   1675s  36.3M/s ETA  10.0 min
+  [wave 231/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 718730635 decrypts]   1678s  36.3M/s ETA  10.0 min
+  [round 2 · 524288 climbs live · 782169483 decrypts]   1679s  36.3M/s ETA   9.9 min
+  [round 3 · 524001 climbs live · 830403979 decrypts]   1680s  36.3M/s ETA   9.9 min
+  [round 4 · 512898 climbs live · 865512046 decrypts]   1681s  36.3M/s ETA   9.9 min
+  [round 5 · 429453 climbs live · 889105354 decrypts]   1682s  36.3M/s ETA   9.9 min
+  [round 6 · 0 climbs live · 901559491 decrypts]   1683s  36.3M/s ETA   9.9 min
+  [wave 232/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 982299843 decrypts]   1685s  36.3M/s ETA   9.8 min
+  [round 2 · 524286 climbs live · 1045738691 decrypts]   1686s  36.3M/s ETA   9.8 min
+  [round 3 · 523937 climbs live · 1093973003 decrypts]   1687s  36.3M/s ETA   9.8 min
+  [round 4 · 511822 climbs live · 1129076782 decrypts]   1688s  36.3M/s ETA   9.8 min
+  [round 5 · 425132 climbs live · 1152620594 decrypts]   1689s  36.3M/s ETA   9.8 min
+  [round 6 · 0 climbs live · 1164949422 decrypts]   1690s  36.3M/s ETA   9.8 min
+  [wave 233/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1245689774 decrypts]   1692s  36.3M/s ETA   9.7 min
+  [round 2 · 524288 climbs live · 1309128622 decrypts]   1693s  36.3M/s ETA   9.7 min
+  [round 3 · 523997 climbs live · 1357363118 decrypts]   1694s  36.3M/s ETA   9.7 min
+  [round 4 · 513010 climbs live · 1392470917 decrypts]   1695s  36.3M/s ETA   9.6 min
+  [round 5 · 429234 climbs live · 1416069377 decrypts]   1696s  36.3M/s ETA   9.6 min
+  [round 6 · 0 climbs live · 1428517163 decrypts]   1697s  36.3M/s ETA   9.6 min
+  [wave 234/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1509257515 decrypts]   1699s  36.3M/s ETA   9.6 min
+  [round 2 · 524286 climbs live · 1572696363 decrypts]   1700s  36.3M/s ETA   9.6 min
+  [round 3 · 524110 climbs live · 1620930675 decrypts]   1702s  36.3M/s ETA   9.5 min
+  [round 4 · 514848 climbs live · 1656046045 decrypts]   1703s  36.3M/s ETA   9.5 min
+  [round 5 · 436079 climbs live · 1679729053 decrypts]   1704s  36.3M/s ETA   9.5 min
+  [round 6 · 0 climbs live · 1692375344 decrypts]   1704s  36.3M/s ETA   9.5 min
+  [wave 235/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1773115696 decrypts]   1707s  36.3M/s ETA   9.5 min
+  [round 2 · 524288 climbs live · 1836554544 decrypts]   1708s  36.3M/s ETA   9.4 min
+  [round 3 · 524148 climbs live · 1884789040 decrypts]   1709s  36.3M/s ETA   9.4 min
+  [round 4 · 515439 climbs live · 1919906956 decrypts]   1710s  36.3M/s ETA   9.4 min
+  [round 5 · 437098 climbs live · 1943617150 decrypts]   1711s  36.3M/s ETA   9.4 min
+  [round 6 · 0 climbs live · 1956292992 decrypts]   1712s  36.3M/s ETA   9.4 min
+  [wave 236/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 2037033344 decrypts]   1714s  36.3M/s ETA   9.3 min
+  [round 2 · 524288 climbs live · 2100472192 decrypts]   1715s  36.3M/s ETA   9.3 min
+  [round 3 · 524117 climbs live · -2146260608 decrypts]   1716s  36.3M/s ETA   9.3 min
+  [round 4 · 514368 climbs live · -2111144769 decrypts]   1717s  36.3M/s ETA   9.3 min
+  [round 5 · 433118 climbs live · -2087483841 decrypts]   1718s  36.3M/s ETA   9.3 min
+  [round 6 · 0 climbs live · -2074923419 decrypts]   1719s  36.3M/s ETA   9.3 min
+  [wave 237/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1994183067 decrypts]   1721s  36.3M/s ETA   9.2 min
+  [round 2 · 524288 climbs live · -1930744219 decrypts]   1722s  36.3M/s ETA   9.2 min
+  [round 3 · 523947 climbs live · -1882509723 decrypts]   1723s  36.3M/s ETA   9.2 min
+  [round 4 · 511165 climbs live · -1847405274 decrypts]   1724s  36.3M/s ETA   9.2 min
+  [round 5 · 419067 climbs live · -1823891684 decrypts]   1725s  36.3M/s ETA   9.1 min
+  [round 6 · 0 climbs live · -1811738741 decrypts]   1726s  36.3M/s ETA   9.1 min
+  [wave 238/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1730998389 decrypts]   1728s  36.3M/s ETA   9.1 min
+  [round 2 · 524285 climbs live · -1667559541 decrypts]   1729s  36.3M/s ETA   9.1 min
+  [round 3 · 523944 climbs live · -1619325321 decrypts]   1731s  36.3M/s ETA   9.0 min
+  [round 4 · 511903 climbs live · -1584221073 decrypts]   1732s  36.3M/s ETA   9.0 min
+  [round 5 · 422023 climbs live · -1560673535 decrypts]   1733s  36.3M/s ETA   9.0 min
+  [round 6 · 0 climbs live · -1548434868 decrypts]   1733s  36.3M/s ETA   9.0 min
+  [wave 239/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1467694516 decrypts]   1736s  36.3M/s ETA   9.0 min
+  [round 2 · 524286 climbs live · -1404255668 decrypts]   1737s  36.3M/s ETA   9.0 min
+  [round 3 · 524050 climbs live · -1356021356 decrypts]   1738s  36.3M/s ETA   8.9 min
+  [round 4 · 513437 climbs live · -1320910006 decrypts]   1739s  36.3M/s ETA   8.9 min
+  [round 5 · 430685 climbs live · -1297291904 decrypts]   1740s  36.3M/s ETA   8.9 min
+  [round 6 · 0 climbs live · -1284802039 decrypts]   1741s  36.3M/s ETA   8.9 min
+  [wave 240/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1204061687 decrypts]   1743s  36.3M/s ETA   8.9 min
+  [round 2 · 524288 climbs live · -1140622839 decrypts]   1744s  36.3M/s ETA   8.8 min
+  [round 3 · 524208 climbs live · -1092388343 decrypts]   1745s  36.3M/s ETA   8.8 min
+  [round 4 · 517702 climbs live · -1057266407 decrypts]   1746s  36.3M/s ETA   8.8 min
+  [round 5 · 449600 climbs live · -1033452115 decrypts]   1747s  36.3M/s ETA   8.8 min
+  [round 6 · 0 climbs live · -1020413715 decrypts]   1748s  36.3M/s ETA   8.8 min
+  [wave 241/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -939673363 decrypts]   1750s  36.3M/s ETA   8.7 min
+  [round 2 · 524288 climbs live · -876234515 decrypts]   1751s  36.3M/s ETA   8.7 min
+  [round 3 · 524149 climbs live · -828000019 decrypts]   1752s  36.3M/s ETA   8.7 min
+  [round 4 · 515447 climbs live · -792882036 decrypts]   1753s  36.3M/s ETA   8.7 min
+  [round 5 · 437764 climbs live · -769171474 decrypts]   1754s  36.3M/s ETA   8.7 min
+  [round 6 · 0 climbs live · -756476318 decrypts]   1755s  36.3M/s ETA   8.7 min
+  [wave 242/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -675735966 decrypts]   1757s  36.3M/s ETA   8.6 min
+  [round 2 · 524287 climbs live · -612297118 decrypts]   1758s  36.3M/s ETA   8.6 min
+  [round 3 · 524142 climbs live · -564062714 decrypts]   1760s  36.3M/s ETA   8.6 min
+  [round 4 · 516082 climbs live · -528945200 decrypts]   1761s  36.3M/s ETA   8.5 min
+  [round 5 · 442203 climbs live · -505205428 decrypts]   1762s  36.3M/s ETA   8.5 min
+  [round 6 · 0 climbs live · -492381541 decrypts]   1763s  36.3M/s ETA   8.5 min
+  [wave 243/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -411641189 decrypts]   1765s  36.3M/s ETA   8.5 min
+  [round 2 · 524288 climbs live · -348202341 decrypts]   1766s  36.3M/s ETA   8.5 min
+  [round 3 · 524107 climbs live · -299967845 decrypts]   1767s  36.3M/s ETA   8.4 min
+  [round 4 · 514835 climbs live · -264852676 decrypts]   1768s  36.3M/s ETA   8.4 min
+  [round 5 · 436999 climbs live · -241170266 decrypts]   1769s  36.3M/s ETA   8.4 min
+  [round 6 · 0 climbs live · -228497295 decrypts]   1770s  36.3M/s ETA   8.4 min
+  [wave 244/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -147756943 decrypts]   1772s  36.3M/s ETA   8.4 min
+  [round 2 · 524287 climbs live · -84318095 decrypts]   1773s  36.3M/s ETA   8.3 min
+  [round 3 · 524133 climbs live · -36083691 decrypts]   1774s  36.3M/s ETA   8.3 min
+  [round 4 · 515726 climbs live · -966780 decrypts]   1775s  36.3M/s ETA   8.3 min
+  [round 5 · 440320 climbs live · 22756616 decrypts]   1776s  36.3M/s ETA   8.3 min
+  [round 6 · 0 climbs live · 35525896 decrypts]   1777s  36.3M/s ETA   8.3 min
+  [wave 245/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 116266248 decrypts]   1779s  36.3M/s ETA   8.3 min
+  [round 2 · 524287 climbs live · 179705096 decrypts]   1780s  36.3M/s ETA   8.2 min
+  [round 3 · 524124 climbs live · 227939500 decrypts]   1781s  36.3M/s ETA   8.2 min
+  [round 4 · 515421 climbs live · 263055808 decrypts]   1782s  36.3M/s ETA   8.2 min
+  [round 5 · 439313 climbs live · 286765174 decrypts]   1783s  36.3M/s ETA   8.2 min
+  [round 6 · 0 climbs live · 299505251 decrypts]   1784s  36.3M/s ETA   8.2 min
+  [wave 246/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 380245603 decrypts]   1786s  36.3M/s ETA   8.1 min
+  [round 2 · 524286 climbs live · 443684451 decrypts]   1788s  36.3M/s ETA   8.1 min
+  [round 3 · 523959 climbs live · 491918763 decrypts]   1789s  36.3M/s ETA   8.1 min
+  [round 4 · 511511 climbs live · 527024016 decrypts]   1790s  36.3M/s ETA   8.1 min
+  [round 5 · 421966 climbs live · 550553522 decrypts]   1791s  36.3M/s ETA   8.1 min
+  [round 6 · 0 climbs live · 562790536 decrypts]   1792s  36.3M/s ETA   8.1 min
+  [wave 247/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 643530888 decrypts]   1794s  36.3M/s ETA   8.0 min
+  [round 2 · 524287 climbs live · 706969736 decrypts]   1795s  36.3M/s ETA   8.0 min
+  [round 3 · 524096 climbs live · 755204140 decrypts]   1796s  36.3M/s ETA   8.0 min
+  [round 4 · 513994 climbs live · 790318572 decrypts]   1797s  36.3M/s ETA   7.9 min
+  [round 5 · 431249 climbs live · 813962296 decrypts]   1798s  36.3M/s ETA   7.9 min
+  [round 6 · 0 climbs live · 826468517 decrypts]   1799s  36.3M/s ETA   7.9 min
+  [wave 248/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 907208869 decrypts]   1801s  36.3M/s ETA   7.9 min
+  [round 2 · 524288 climbs live · 970647717 decrypts]   1802s  36.3M/s ETA   7.9 min
+  [round 3 · 524058 climbs live · 1018882213 decrypts]   1803s  36.3M/s ETA   7.8 min
+  [round 4 · 513527 climbs live · 1053994099 decrypts]   1804s  36.3M/s ETA   7.8 min
+  [round 5 · 429627 climbs live · 1077616341 decrypts]   1805s  36.3M/s ETA   7.8 min
+  [round 6 · 0 climbs live · 1090075524 decrypts]   1806s  36.3M/s ETA   7.8 min
+  [wave 249/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1170815876 decrypts]   1808s  36.3M/s ETA   7.8 min
+  [round 2 · 524287 climbs live · 1234254724 decrypts]   1809s  36.3M/s ETA   7.7 min
+  [round 3 · 524077 climbs live · 1282489128 decrypts]   1810s  36.3M/s ETA   7.7 min
+  [round 4 · 513787 climbs live · 1317602287 decrypts]   1811s  36.3M/s ETA   7.7 min
+  [round 5 · 431184 climbs live · 1341236489 decrypts]   1812s  36.3M/s ETA   7.7 min
+  [round 6 · 0 climbs live · 1353740825 decrypts]   1813s  36.3M/s ETA   7.7 min
+  [wave 250/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1434481177 decrypts]   1815s  36.3M/s ETA   7.7 min
+  [round 2 · 524288 climbs live · 1497920025 decrypts]   1817s  36.3M/s ETA   7.6 min
+  [round 3 · 524078 climbs live · 1546154521 decrypts]   1818s  36.3M/s ETA   7.6 min
+  [round 4 · 514604 climbs live · 1581267747 decrypts]   1819s  36.3M/s ETA   7.6 min
+  [round 5 · 435692 climbs live · 1604939531 decrypts]   1820s  36.3M/s ETA   7.6 min
+  [round 6 · 0 climbs live · 1617574599 decrypts]   1821s  36.3M/s ETA   7.6 min
+  [wave 251/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1698314951 decrypts]   1823s  36.3M/s ETA   7.5 min
+  [round 2 · 524288 climbs live · 1761753799 decrypts]   1824s  36.3M/s ETA   7.5 min
+  [round 3 · 524028 climbs live · 1809988295 decrypts]   1825s  36.3M/s ETA   7.5 min
+  [round 4 · 513238 climbs live · 1845098171 decrypts]   1826s  36.3M/s ETA   7.5 min
+  [round 5 · 431187 climbs live · 1868707119 decrypts]   1827s  36.3M/s ETA   7.4 min
+  [round 6 · 0 climbs live · 1881211542 decrypts]   1828s  36.3M/s ETA   7.4 min
+  [wave 252/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1961951894 decrypts]   1830s  36.3M/s ETA   7.4 min
+  [round 2 · 524287 climbs live · 2025390742 decrypts]   1831s  36.3M/s ETA   7.4 min
+  [round 3 · 523839 climbs live · 2073625146 decrypts]   1832s  36.3M/s ETA   7.4 min
+  [round 4 · 511828 climbs live · 2108722359 decrypts]   1833s  36.3M/s ETA   7.3 min
+  [round 5 · 429219 climbs live · 2132266447 decrypts]   1834s  36.3M/s ETA   7.3 min
+  [round 6 · 0 climbs live · 2144713798 decrypts]   1835s  36.3M/s ETA   7.3 min
+  [wave 253/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -2069513146 decrypts]   1837s  36.3M/s ETA   7.3 min
+  [round 2 · 524287 climbs live · -2006074298 decrypts]   1839s  36.3M/s ETA   7.3 min
+  [round 3 · 523921 climbs live · -1957839894 decrypts]   1840s  36.3M/s ETA   7.2 min
+  [round 4 · 511803 climbs live · -1922737187 decrypts]   1841s  36.3M/s ETA   7.2 min
+  [round 5 · 428308 climbs live · -1899194249 decrypts]   1842s  36.3M/s ETA   7.2 min
+  [round 6 · 0 climbs live · -1886773317 decrypts]   1843s  36.3M/s ETA   7.2 min
+  [wave 254/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1806032965 decrypts]   1845s  36.3M/s ETA   7.2 min
+  [round 2 · 524288 climbs live · -1742594117 decrypts]   1846s  36.3M/s ETA   7.1 min
+  [round 3 · 524099 climbs live · -1694359621 decrypts]   1847s  36.3M/s ETA   7.1 min
+  [round 4 · 515626 climbs live · -1659244988 decrypts]   1848s  36.3M/s ETA   7.1 min
+  [round 5 · 443386 climbs live · -1635526192 decrypts]   1849s  36.3M/s ETA   7.1 min
+  [round 6 · 0 climbs live · -1622667998 decrypts]   1850s  36.3M/s ETA   7.1 min
+  [wave 255/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1541927646 decrypts]   1852s  36.3M/s ETA   7.0 min
+  [round 2 · 524288 climbs live · -1478488798 decrypts]   1853s  36.3M/s ETA   7.0 min
+  [round 3 · 523979 climbs live · -1430254302 decrypts]   1854s  36.3M/s ETA   7.0 min
+  [round 4 · 513724 climbs live · -1395147709 decrypts]   1855s  36.3M/s ETA   7.0 min
+  [round 5 · 435598 climbs live · -1371516405 decrypts]   1856s  36.3M/s ETA   7.0 min
+  [round 6 · 0 climbs live · -1358884063 decrypts]   1857s  36.3M/s ETA   7.0 min
+  [wave 256/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1278143711 decrypts]   1859s  36.3M/s ETA   6.9 min
+  [round 2 · 524287 climbs live · -1214704863 decrypts]   1860s  36.3M/s ETA   6.9 min
+  [round 3 · 524096 climbs live · -1166470459 decrypts]   1862s  36.3M/s ETA   6.9 min
+  [round 4 · 514837 climbs live · -1131356027 decrypts]   1863s  36.3M/s ETA   6.9 min
+  [round 5 · 438307 climbs live · -1107673525 decrypts]   1864s  36.3M/s ETA   6.8 min
+  [round 6 · 0 climbs live · -1094962622 decrypts]   1864s  36.3M/s ETA   6.8 min
+  [wave 257/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1014222270 decrypts]   1867s  36.3M/s ETA   6.8 min
+  [round 2 · 524287 climbs live · -950783422 decrypts]   1868s  36.3M/s ETA   6.8 min
+  [round 3 · 524095 climbs live · -902549018 decrypts]   1869s  36.3M/s ETA   6.7 min
+  [round 4 · 515197 climbs live · -867434653 decrypts]   1870s  36.3M/s ETA   6.7 min
+  [round 5 · 440044 climbs live · -843735591 decrypts]   1871s  36.3M/s ETA   6.7 min
+  [round 6 · 0 climbs live · -830974315 decrypts]   1872s  36.3M/s ETA   6.7 min
+  [wave 258/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -750233963 decrypts]   1874s  36.3M/s ETA   6.7 min
+  [round 2 · 524286 climbs live · -686795115 decrypts]   1875s  36.3M/s ETA   6.7 min
+  [round 3 · 524071 climbs live · -638560803 decrypts]   1876s  36.3M/s ETA   6.6 min
+  [round 4 · 515561 climbs live · -603448046 decrypts]   1877s  36.3M/s ETA   6.6 min
+  [round 5 · 439002 climbs live · -579732240 decrypts]   1878s  36.3M/s ETA   6.6 min
+  [round 6 · 0 climbs live · -567001182 decrypts]   1879s  36.3M/s ETA   6.6 min
+  [wave 259/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -486260830 decrypts]   1881s  36.3M/s ETA   6.6 min
+  [round 2 · 524288 climbs live · -422821982 decrypts]   1882s  36.3M/s ETA   6.5 min
+  [round 3 · 524143 climbs live · -374587486 decrypts]   1883s  36.3M/s ETA   6.5 min
+  [round 4 · 516064 climbs live · -339469905 decrypts]   1884s  36.3M/s ETA   6.5 min
+  [round 5 · 440472 climbs live · -315730961 decrypts]   1885s  36.3M/s ETA   6.5 min
+  [round 6 · 0 climbs live · -302957273 decrypts]   1886s  36.3M/s ETA   6.5 min
+  [wave 260/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -222216921 decrypts]   1888s  36.3M/s ETA   6.4 min
+  [round 2 · 524285 climbs live · -158778073 decrypts]   1889s  36.3M/s ETA   6.4 min
+  [round 3 · 524074 climbs live · -110543853 decrypts]   1890s  36.3M/s ETA   6.4 min
+  [round 4 · 514768 climbs live · -75430895 decrypts]   1891s  36.3M/s ETA   6.4 min
+  [round 5 · 435778 climbs live · -51751567 decrypts]   1893s  36.3M/s ETA   6.4 min
+  [round 6 · 0 climbs live · -39114005 decrypts]   1893s  36.3M/s ETA   6.4 min
+  [wave 261/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 41626347 decrypts]   1896s  36.3M/s ETA   6.3 min
+  [round 2 · 524286 climbs live · 105065195 decrypts]   1897s  36.3M/s ETA   6.3 min
+  [round 3 · 524080 climbs live · 153299507 decrypts]   1898s  36.3M/s ETA   6.3 min
+  [round 4 · 514860 climbs live · 188412867 decrypts]   1899s  36.3M/s ETA   6.2 min
+  [round 5 · 437233 climbs live · 212096427 decrypts]   1900s  36.3M/s ETA   6.2 min
+  [round 6 · 0 climbs live · 224776184 decrypts]   1901s  36.3M/s ETA   6.2 min
+  [wave 262/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 305516536 decrypts]   1903s  36.3M/s ETA   6.2 min
+  [round 2 · 524288 climbs live · 368955384 decrypts]   1904s  36.3M/s ETA   6.2 min
+  [round 3 · 524104 climbs live · 417189880 decrypts]   1905s  36.3M/s ETA   6.1 min
+  [round 4 · 515624 climbs live · 452304848 decrypts]   1906s  36.3M/s ETA   6.1 min
+  [round 5 · 442291 climbs live · 476023552 decrypts]   1907s  36.3M/s ETA   6.1 min
+  [round 6 · 0 climbs live · 488849991 decrypts]   1908s  36.3M/s ETA   6.1 min
+  [wave 263/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 569590343 decrypts]   1910s  36.3M/s ETA   6.1 min
+  [round 2 · 524286 climbs live · 633029191 decrypts]   1911s  36.3M/s ETA   6.0 min
+  [round 3 · 524001 climbs live · 681263503 decrypts]   1913s  36.3M/s ETA   6.0 min
+  [round 4 · 514808 climbs live · 716371570 decrypts]   1914s  36.3M/s ETA   6.0 min
+  [round 5 · 439713 climbs live · 740052738 decrypts]   1915s  36.3M/s ETA   6.0 min
+  [round 6 · 0 climbs live · 752804415 decrypts]   1916s  36.3M/s ETA   6.0 min
+  [wave 264/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 833544767 decrypts]   1918s  36.3M/s ETA   6.0 min
+  [round 2 · 524283 climbs live · 896983615 decrypts]   1919s  36.3M/s ETA   5.9 min
+  [round 3 · 523971 climbs live · 945217651 decrypts]   1920s  36.3M/s ETA   5.9 min
+  [round 4 · 513880 climbs live · 980323708 decrypts]   1921s  36.3M/s ETA   5.9 min
+  [round 5 · 435618 climbs live · 1003962188 decrypts]   1922s  36.3M/s ETA   5.9 min
+  [round 6 · 0 climbs live · 1016595110 decrypts]   1923s  36.3M/s ETA   5.9 min
+  [wave 265/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1097335462 decrypts]   1925s  36.3M/s ETA   5.8 min
+  [round 2 · 524288 climbs live · 1160774310 decrypts]   1926s  36.3M/s ETA   5.8 min
+  [round 3 · 524058 climbs live · 1209008806 decrypts]   1927s  36.3M/s ETA   5.8 min
+  [round 4 · 515224 climbs live · 1244120692 decrypts]   1928s  36.3M/s ETA   5.8 min
+  [round 5 · 441058 climbs live · 1267820996 decrypts]   1929s  36.3M/s ETA   5.8 min
+  [round 6 · 0 climbs live · 1280611678 decrypts]   1930s  36.3M/s ETA   5.8 min
+  [wave 266/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1361352030 decrypts]   1932s  36.3M/s ETA   5.7 min
+  [round 2 · 524287 climbs live · 1424790878 decrypts]   1934s  36.3M/s ETA   5.7 min
+  [round 3 · 524044 climbs live · 1473025282 decrypts]   1935s  36.3M/s ETA   5.7 min
+  [round 4 · 515329 climbs live · 1508136230 decrypts]   1936s  36.3M/s ETA   5.6 min
+  [round 5 · 441022 climbs live · 1531841364 decrypts]   1937s  36.3M/s ETA   5.6 min
+  [round 6 · 0 climbs live · 1544631002 decrypts]   1938s  36.3M/s ETA   5.6 min
+  [wave 267/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1625371354 decrypts]   1940s  36.3M/s ETA   5.6 min
+  [round 2 · 524288 climbs live · 1688810202 decrypts]   1941s  36.3M/s ETA   5.6 min
+  [round 3 · 524133 climbs live · 1737044698 decrypts]   1942s  36.3M/s ETA   5.5 min
+  [round 4 · 516443 climbs live · 1772161609 decrypts]   1943s  36.3M/s ETA   5.5 min
+  [round 5 · 446775 climbs live · 1795917987 decrypts]   1944s  36.3M/s ETA   5.5 min
+  [round 6 · 0 climbs live · 1808874462 decrypts]   1945s  36.3M/s ETA   5.5 min
+  [wave 268/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1889614814 decrypts]   1947s  36.3M/s ETA   5.5 min
+  [round 2 · 524288 climbs live · 1953053662 decrypts]   1948s  36.3M/s ETA   5.4 min
+  [round 3 · 524148 climbs live · 2001288158 decrypts]   1949s  36.3M/s ETA   5.4 min
+  [round 4 · 516523 climbs live · 2036406074 decrypts]   1950s  36.3M/s ETA   5.4 min
+  [round 5 · 447349 climbs live · 2060166132 decrypts]   1951s  36.3M/s ETA   5.4 min
+  [round 6 · 0 climbs live · 2073139253 decrypts]   1952s  36.3M/s ETA   5.4 min
+  [wave 269/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -2141087691 decrypts]   1954s  36.3M/s ETA   5.3 min
+  [round 2 · 524288 climbs live · -2077648843 decrypts]   1956s  36.3M/s ETA   5.3 min
+  [round 3 · 524105 climbs live · -2029414347 decrypts]   1957s  36.3M/s ETA   5.3 min
+  [round 4 · 514702 climbs live · -1994299312 decrypts]   1958s  36.3M/s ETA   5.3 min
+  [round 5 · 437335 climbs live · -1970623020 decrypts]   1959s  36.3M/s ETA   5.3 min
+  [round 6 · 0 climbs live · -1957940305 decrypts]   1960s  36.3M/s ETA   5.3 min
+  [wave 270/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1877199953 decrypts]   1962s  36.3M/s ETA   5.2 min
+  [round 2 · 524286 climbs live · -1813761105 decrypts]   1963s  36.3M/s ETA   5.2 min
+  [round 3 · 524090 climbs live · -1765526793 decrypts]   1964s  36.3M/s ETA   5.2 min
+  [round 4 · 515469 climbs live · -1730412763 decrypts]   1965s  36.3M/s ETA   5.2 min
+  [round 5 · 440713 climbs live · -1706701189 decrypts]   1966s  36.3M/s ETA   5.1 min
+  [round 6 · 0 climbs live · -1693920512 decrypts]   1967s  36.3M/s ETA   5.1 min
+  [wave 271/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1613180160 decrypts]   1969s  36.3M/s ETA   5.1 min
+  [round 2 · 524288 climbs live · -1549741312 decrypts]   1970s  36.3M/s ETA   5.1 min
+  [round 3 · 524119 climbs live · -1501506816 decrypts]   1971s  36.3M/s ETA   5.1 min
+  [round 4 · 515518 climbs live · -1466390843 decrypts]   1972s  36.3M/s ETA   5.0 min
+  [round 5 · 442052 climbs live · -1442677015 decrypts]   1973s  36.3M/s ETA   5.0 min
+  [round 6 · 0 climbs live · -1429857507 decrypts]   1974s  36.3M/s ETA   5.0 min
+  [wave 272/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1349117155 decrypts]   1976s  36.3M/s ETA   5.0 min
+  [round 2 · 524288 climbs live · -1285678307 decrypts]   1977s  36.3M/s ETA   5.0 min
+  [round 3 · 524124 climbs live · -1237443811 decrypts]   1979s  36.3M/s ETA   4.9 min
+  [round 4 · 516018 climbs live · -1202327503 decrypts]   1980s  36.3M/s ETA   4.9 min
+  [round 5 · 444017 climbs live · -1178590675 decrypts]   1981s  36.3M/s ETA   4.9 min
+  [round 6 · 0 climbs live · -1165714182 decrypts]   1982s  36.3M/s ETA   4.9 min
+  [wave 273/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1084973830 decrypts]   1984s  36.3M/s ETA   4.9 min
+  [round 2 · 524288 climbs live · -1021534982 decrypts]   1985s  36.3M/s ETA   4.8 min
+  [round 3 · 524129 climbs live · -973300486 decrypts]   1986s  36.3M/s ETA   4.8 min
+  [round 4 · 516938 climbs live · -938183843 decrypts]   1987s  36.3M/s ETA   4.8 min
+  [round 5 · 447964 climbs live · -914404695 decrypts]   1988s  36.3M/s ETA   4.8 min
+  [round 6 · 0 climbs live · -901413739 decrypts]   1989s  36.3M/s ETA   4.8 min
+  [wave 274/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -820673387 decrypts]   1991s  36.3M/s ETA   4.7 min
+  [round 2 · 524287 climbs live · -757234539 decrypts]   1992s  36.3M/s ETA   4.7 min
+  [round 3 · 524123 climbs live · -709000135 decrypts]   1993s  36.3M/s ETA   4.7 min
+  [round 4 · 515876 climbs live · -673883894 decrypts]   1994s  36.3M/s ETA   4.7 min
+  [round 5 · 441856 climbs live · -650153598 decrypts]   1995s  36.3M/s ETA   4.7 min
+  [round 6 · 0 climbs live · -637339774 decrypts]   1996s  36.3M/s ETA   4.7 min
+  [wave 275/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -556599422 decrypts]   1998s  36.3M/s ETA   4.6 min
+  [round 2 · 524288 climbs live · -493160574 decrypts]   1999s  36.3M/s ETA   4.6 min
+  [round 3 · 524183 climbs live · -444926078 decrypts]   2001s  36.3M/s ETA   4.6 min
+  [round 4 · 516439 climbs live · -409805817 decrypts]   2002s  36.3M/s ETA   4.6 min
+  [round 5 · 443992 climbs live · -386049623 decrypts]   2003s  36.3M/s ETA   4.5 min
+  [round 6 · 0 climbs live · -373173855 decrypts]   2004s  36.3M/s ETA   4.5 min
+  [wave 276/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -292433503 decrypts]   2006s  36.3M/s ETA   4.5 min
+  [round 2 · 524288 climbs live · -228994655 decrypts]   2007s  36.3M/s ETA   4.5 min
+  [round 3 · 524041 climbs live · -180760159 decrypts]   2008s  36.3M/s ETA   4.4 min
+  [round 4 · 514020 climbs live · -145649412 decrypts]   2009s  36.3M/s ETA   4.4 min
+  [round 5 · 433669 climbs live · -122004492 decrypts]   2010s  36.3M/s ETA   4.4 min
+  [round 6 · 0 climbs live · -109428091 decrypts]   2011s  36.3M/s ETA   4.4 min
+  [wave 277/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -28687739 decrypts]   2013s  36.3M/s ETA   4.4 min
+  [round 2 · 524288 climbs live · 34751109 decrypts]   2014s  36.3M/s ETA   4.3 min
+  [round 3 · 524071 climbs live · 82985605 decrypts]   2015s  36.3M/s ETA   4.3 min
+  [round 4 · 514624 climbs live · 118098362 decrypts]   2016s  36.3M/s ETA   4.3 min
+  [round 5 · 437104 climbs live · 141771066 decrypts]   2017s  36.3M/s ETA   4.3 min
+  [round 6 · 0 climbs live · 154447082 decrypts]   2018s  36.3M/s ETA   4.3 min
+  [wave 278/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 235187434 decrypts]   2020s  36.3M/s ETA   4.3 min
+  [round 2 · 524288 climbs live · 298626282 decrypts]   2021s  36.3M/s ETA   4.2 min
+  [round 3 · 524005 climbs live · 346860778 decrypts]   2022s  36.3M/s ETA   4.2 min
+  [round 4 · 514428 climbs live · 381969113 decrypts]   2024s  36.3M/s ETA   4.2 min
+  [round 5 · 437087 climbs live · 405632801 decrypts]   2025s  36.3M/s ETA   4.2 min
+  [round 6 · 0 climbs live · 418308324 decrypts]   2025s  36.3M/s ETA   4.2 min
+  [wave 279/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 499048676 decrypts]   2028s  36.3M/s ETA   4.1 min
+  [round 2 · 524288 climbs live · 562487524 decrypts]   2029s  36.3M/s ETA   4.1 min
+  [round 3 · 524133 climbs live · 610722020 decrypts]   2030s  36.3M/s ETA   4.1 min
+  [round 4 · 516476 climbs live · 645838931 decrypts]   2031s  36.3M/s ETA   4.1 min
+  [round 5 · 444696 climbs live · 669596827 decrypts]   2032s  36.3M/s ETA   4.1 min
+  [round 6 · 0 climbs live · 682493011 decrypts]   2033s  36.3M/s ETA   4.1 min
+  [wave 280/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 763233363 decrypts]   2035s  36.3M/s ETA   4.0 min
+  [round 2 · 524288 climbs live · 826672211 decrypts]   2036s  36.3M/s ETA   4.0 min
+  [round 3 · 524029 climbs live · 874906707 decrypts]   2037s  36.3M/s ETA   4.0 min
+  [round 4 · 513959 climbs live · 910016650 decrypts]   2038s  36.3M/s ETA   3.9 min
+  [round 5 · 435822 climbs live · 933658764 decrypts]   2039s  36.3M/s ETA   3.9 min
+  [round 6 · 0 climbs live · 946297602 decrypts]   2040s  36.3M/s ETA   3.9 min
+  [wave 281/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1027037954 decrypts]   2042s  36.3M/s ETA   3.9 min
+  [round 2 · 524287 climbs live · 1090476802 decrypts]   2043s  36.3M/s ETA   3.9 min
+  [round 3 · 524053 climbs live · 1138711206 decrypts]   2045s  36.3M/s ETA   3.8 min
+  [round 4 · 514969 climbs live · 1173822757 decrypts]   2046s  36.3M/s ETA   3.8 min
+  [round 5 · 438253 climbs live · 1197511331 decrypts]   2047s  36.3M/s ETA   3.8 min
+  [round 6 · 0 climbs live · 1210220668 decrypts]   2048s  36.2M/s ETA   3.8 min
+  [wave 282/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1290961020 decrypts]   2050s  36.3M/s ETA   3.8 min
+  [round 2 · 524280 climbs live · 1354399868 decrypts]   2051s  36.3M/s ETA   3.7 min
+  [round 3 · 523819 climbs live · 1402633628 decrypts]   2052s  36.3M/s ETA   3.7 min
+  [round 4 · 511977 climbs live · 1437729501 decrypts]   2053s  36.3M/s ETA   3.7 min
+  [round 5 · 431583 climbs live · 1461280443 decrypts]   2054s  36.3M/s ETA   3.7 min
+  [round 6 · 0 climbs live · 1473796350 decrypts]   2055s  36.2M/s ETA   3.7 min
+  [wave 283/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1554536702 decrypts]   2057s  36.2M/s ETA   3.7 min
+  [round 2 · 524288 climbs live · 1617975550 decrypts]   2058s  36.3M/s ETA   3.6 min
+  [round 3 · 524007 climbs live · 1666210046 decrypts]   2059s  36.3M/s ETA   3.6 min
+  [round 4 · 514223 climbs live · 1701318515 decrypts]   2061s  36.3M/s ETA   3.6 min
+  [round 5 · 438136 climbs live · 1724972773 decrypts]   2062s  36.3M/s ETA   3.6 min
+  [round 6 · 0 climbs live · 1737678717 decrypts]   2062s  36.2M/s ETA   3.6 min
+  [wave 284/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1818419069 decrypts]   2065s  36.2M/s ETA   3.5 min
+  [round 2 · 524288 climbs live · 1881857917 decrypts]   2066s  36.3M/s ETA   3.5 min
+  [round 3 · 523981 climbs live · 1930092413 decrypts]   2067s  36.3M/s ETA   3.5 min
+  [round 4 · 513323 climbs live · 1965199140 decrypts]   2068s  36.3M/s ETA   3.5 min
+  [round 5 · 434441 climbs live · 1988811998 decrypts]   2069s  36.3M/s ETA   3.5 min
+  [round 6 · 0 climbs live · 2001410787 decrypts]   2070s  36.2M/s ETA   3.4 min
+  [wave 285/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 2082151139 decrypts]   2072s  36.2M/s ETA   3.4 min
+  [round 2 · 524282 climbs live · 2145589987 decrypts]   2073s  36.3M/s ETA   3.4 min
+  [round 3 · 523716 climbs live · -2101143365 decrypts]   2074s  36.3M/s ETA   3.4 min
+  [round 4 · 510808 climbs live · -2066054393 decrypts]   2075s  36.3M/s ETA   3.3 min
+  [round 5 · 426107 climbs live · -2042557225 decrypts]   2076s  36.2M/s ETA   3.3 min
+  [round 6 · 0 climbs live · -2030200122 decrypts]   2077s  36.2M/s ETA   3.3 min
+  [wave 286/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1949459770 decrypts]   2079s  36.2M/s ETA   3.3 min
+  [round 2 · 524288 climbs live · -1886020922 decrypts]   2080s  36.3M/s ETA   3.3 min
+  [round 3 · 524052 climbs live · -1837786426 decrypts]   2082s  36.3M/s ETA   3.2 min
+  [round 4 · 514171 climbs live · -1802674942 decrypts]   2083s  36.3M/s ETA   3.2 min
+  [round 5 · 434996 climbs live · -1779023076 decrypts]   2084s  36.2M/s ETA   3.2 min
+  [round 6 · 0 climbs live · -1766408192 decrypts]   2085s  36.2M/s ETA   3.2 min
+  [wave 287/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1685667840 decrypts]   2087s  36.2M/s ETA   3.2 min
+  [round 2 · 524288 climbs live · -1622228992 decrypts]   2088s  36.3M/s ETA   3.1 min
+  [round 3 · 524011 climbs live · -1573994496 decrypts]   2089s  36.3M/s ETA   3.1 min
+  [round 4 · 513599 climbs live · -1538885759 decrypts]   2090s  36.3M/s ETA   3.1 min
+  [round 5 · 433310 climbs live · -1515260205 decrypts]   2091s  36.2M/s ETA   3.1 min
+  [round 6 · 0 climbs live · -1502694215 decrypts]   2092s  36.2M/s ETA   3.1 min
+  [wave 288/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1421953863 decrypts]   2094s  36.2M/s ETA   3.0 min
+  [round 2 · 524288 climbs live · -1358515015 decrypts]   2095s  36.3M/s ETA   3.0 min
+  [round 3 · 524030 climbs live · -1310280519 decrypts]   2096s  36.3M/s ETA   3.0 min
+  [round 4 · 513690 climbs live · -1275170509 decrypts]   2097s  36.3M/s ETA   3.0 min
+  [round 5 · 433804 climbs live · -1251540769 decrypts]   2098s  36.2M/s ETA   3.0 min
+  [round 6 · 0 climbs live · -1238960453 decrypts]   2099s  36.2M/s ETA   3.0 min
+  [wave 289/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1158220101 decrypts]   2101s  36.2M/s ETA   2.9 min
+  [round 2 · 524288 climbs live · -1094781253 decrypts]   2102s  36.3M/s ETA   2.9 min
+  [round 3 · 524200 climbs live · -1046546757 decrypts]   2103s  36.3M/s ETA   2.9 min
+  [round 4 · 518002 climbs live · -1011425357 decrypts]   2105s  36.3M/s ETA   2.9 min
+  [round 5 · 451681 climbs live · -987597265 decrypts]   2106s  36.2M/s ETA   2.8 min
+  [round 6 · 0 climbs live · -974498516 decrypts]   2106s  36.2M/s ETA   2.8 min
+  [wave 290/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -893758164 decrypts]   2109s  36.2M/s ETA   2.8 min
+  [round 2 · 524288 climbs live · -830319316 decrypts]   2110s  36.3M/s ETA   2.8 min
+  [round 3 · 524115 climbs live · -782084820 decrypts]   2111s  36.3M/s ETA   2.8 min
+  [round 4 · 514991 climbs live · -746969115 decrypts]   2112s  36.3M/s ETA   2.7 min
+  [round 5 · 436807 climbs live · -723279529 decrypts]   2113s  36.2M/s ETA   2.7 min
+  [round 6 · 0 climbs live · -710612126 decrypts]   2114s  36.2M/s ETA   2.7 min
+  [wave 291/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -629871774 decrypts]   2116s  36.2M/s ETA   2.7 min
+  [round 2 · 524288 climbs live · -566432926 decrypts]   2117s  36.2M/s ETA   2.7 min
+  [round 3 · 524168 climbs live · -518198430 decrypts]   2118s  36.3M/s ETA   2.6 min
+  [round 4 · 516766 climbs live · -483079174 decrypts]   2119s  36.3M/s ETA   2.6 min
+  [round 5 · 443357 climbs live · -459307938 decrypts]   2120s  36.2M/s ETA   2.6 min
+  [round 6 · 0 climbs live · -446450585 decrypts]   2121s  36.2M/s ETA   2.6 min
+  [wave 292/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -365710233 decrypts]   2123s  36.2M/s ETA   2.6 min
+  [round 2 · 524288 climbs live · -302271385 decrypts]   2124s  36.2M/s ETA   2.5 min
+  [round 3 · 524096 climbs live · -254036889 decrypts]   2125s  36.3M/s ETA   2.5 min
+  [round 4 · 514949 climbs live · -218922457 decrypts]   2127s  36.3M/s ETA   2.5 min
+  [round 5 · 436096 climbs live · -195234803 decrypts]   2128s  36.2M/s ETA   2.5 min
+  [round 6 · 0 climbs live · -182588019 decrypts]   2128s  36.2M/s ETA   2.5 min
+  [wave 293/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -101847667 decrypts]   2131s  36.2M/s ETA   2.4 min
+  [round 2 · 524288 climbs live · -38408819 decrypts]   2132s  36.2M/s ETA   2.4 min
+  [round 3 · 524147 climbs live · 9825677 decrypts]   2133s  36.3M/s ETA   2.4 min
+  [round 4 · 515132 climbs live · 44943526 decrypts]   2134s  36.3M/s ETA   2.4 min
+  [round 5 · 436319 climbs live · 68639598 decrypts]   2135s  36.2M/s ETA   2.4 min
+  [round 6 · 0 climbs live · 81292849 decrypts]   2136s  36.2M/s ETA   2.4 min
+  [wave 294/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 162033201 decrypts]   2138s  36.2M/s ETA   2.3 min
+  [round 2 · 524288 climbs live · 225472049 decrypts]   2139s  36.2M/s ETA   2.3 min
+  [round 3 · 524091 climbs live · 273706545 decrypts]   2140s  36.3M/s ETA   2.3 min
+  [round 4 · 514474 climbs live · 308820642 decrypts]   2141s  36.3M/s ETA   2.2 min
+  [round 5 · 434333 climbs live · 332486446 decrypts]   2142s  36.2M/s ETA   2.2 min
+  [round 6 · 0 climbs live · 345082103 decrypts]   2143s  36.2M/s ETA   2.2 min
+  [wave 295/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 425822455 decrypts]   2145s  36.2M/s ETA   2.2 min
+  [round 2 · 524285 climbs live · 489261303 decrypts]   2146s  36.2M/s ETA   2.2 min
+  [round 3 · 523940 climbs live · 537495523 decrypts]   2147s  36.3M/s ETA   2.1 min
+  [round 4 · 511916 climbs live · 572599503 decrypts]   2148s  36.3M/s ETA   2.1 min
+  [round 5 · 424379 climbs live · 596147639 decrypts]   2149s  36.2M/s ETA   2.1 min
+  [round 6 · 0 climbs live · 608454630 decrypts]   2150s  36.2M/s ETA   2.1 min
+  [wave 296/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 689194982 decrypts]   2152s  36.2M/s ETA   2.1 min
+  [round 2 · 524286 climbs live · 752633830 decrypts]   2153s  36.2M/s ETA   2.0 min
+  [round 3 · 524021 climbs live · 800868142 decrypts]   2155s  36.3M/s ETA   2.0 min
+  [round 4 · 513234 climbs live · 835977549 decrypts]   2156s  36.3M/s ETA   2.0 min
+  [round 5 · 429141 climbs live · 859586313 decrypts]   2157s  36.2M/s ETA   2.0 min
+  [round 6 · 0 climbs live · 872031402 decrypts]   2157s  36.2M/s ETA   2.0 min
+  [wave 297/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 952771754 decrypts]   2160s  36.2M/s ETA   2.0 min
+  [round 2 · 524286 climbs live · 1016210602 decrypts]   2161s  36.2M/s ETA   1.9 min
+  [round 3 · 524059 climbs live · 1064444914 decrypts]   2162s  36.3M/s ETA   1.9 min
+  [round 4 · 513579 climbs live · 1099556867 decrypts]   2163s  36.3M/s ETA   1.9 min
+  [round 5 · 429461 climbs live · 1123181501 decrypts]   2164s  36.2M/s ETA   1.9 min
+  [round 6 · 0 climbs live · 1135635870 decrypts]   2165s  36.2M/s ETA   1.9 min
+  [wave 298/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1216376222 decrypts]   2167s  36.2M/s ETA   1.8 min
+  [round 2 · 524287 climbs live · 1279815070 decrypts]   2168s  36.2M/s ETA   1.8 min
+  [round 3 · 524084 climbs live · 1328049474 decrypts]   2169s  36.3M/s ETA   1.8 min
+  [round 4 · 514003 climbs live · 1363163102 decrypts]   2170s  36.3M/s ETA   1.8 min
+  [round 5 · 432984 climbs live · 1386807240 decrypts]   2171s  36.2M/s ETA   1.8 min
+  [round 6 · 0 climbs live · 1399363776 decrypts]   2172s  36.2M/s ETA   1.7 min
+  [wave 299/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1480104128 decrypts]   2174s  36.2M/s ETA   1.7 min
+  [round 2 · 524287 climbs live · 1543542976 decrypts]   2175s  36.2M/s ETA   1.7 min
+  [round 3 · 524149 climbs live · 1591777380 decrypts]   2176s  36.3M/s ETA   1.7 min
+  [round 4 · 517258 climbs live · 1626895363 decrypts]   2178s  36.3M/s ETA   1.6 min
+  [round 5 · 450732 climbs live · 1650689231 decrypts]   2179s  36.2M/s ETA   1.6 min
+  [round 6 · 0 climbs live · 1663760459 decrypts]   2179s  36.2M/s ETA   1.6 min
+  [wave 300/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 1744500811 decrypts]   2181s  36.2M/s ETA   1.6 min
+  [round 2 · 524288 climbs live · 1807939659 decrypts]   2183s  36.2M/s ETA   1.6 min
+  [round 3 · 524162 climbs live · 1856174155 decrypts]   2184s  36.3M/s ETA   1.5 min
+  [round 4 · 517455 climbs live · 1891293009 decrypts]   2185s  36.3M/s ETA   1.5 min
+  [round 5 · 450202 climbs live · 1915095939 decrypts]   2186s  36.2M/s ETA   1.5 min
+  [round 6 · 0 climbs live · 1928151797 decrypts]   2187s  36.2M/s ETA   1.5 min
+  [wave 301/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 2008892149 decrypts]   2189s  36.2M/s ETA   1.5 min
+  [round 2 · 524287 climbs live · 2072330997 decrypts]   2190s  36.2M/s ETA   1.4 min
+  [round 3 · 524115 climbs live · 2120565401 decrypts]   2191s  36.3M/s ETA   1.4 min
+  [round 4 · 515794 climbs live · -2139286190 decrypts]   2192s  36.2M/s ETA   1.4 min
+  [round 5 · 442255 climbs live · -2115559666 decrypts]   2193s  36.2M/s ETA   1.4 min
+  [round 6 · 0 climbs live · -2102734271 decrypts]   2194s  36.2M/s ETA   1.4 min
+  [wave 302/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -2021993919 decrypts]   2196s  36.2M/s ETA   1.3 min
+  [round 2 · 524288 climbs live · -1958555071 decrypts]   2197s  36.2M/s ETA   1.3 min
+  [round 3 · 524091 climbs live · -1910320575 decrypts]   2198s  36.3M/s ETA   1.3 min
+  [round 4 · 514620 climbs live · -1875206478 decrypts]   2199s  36.2M/s ETA   1.3 min
+  [round 5 · 436333 climbs live · -1851533958 decrypts]   2201s  36.2M/s ETA   1.3 min
+  [round 6 · 0 climbs live · -1838880301 decrypts]   2201s  36.2M/s ETA   1.3 min
+  [wave 303/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1758139949 decrypts]   2204s  36.2M/s ETA   1.2 min
+  [round 2 · 524288 climbs live · -1694701101 decrypts]   2205s  36.2M/s ETA   1.2 min
+  [round 3 · 524147 climbs live · -1646466605 decrypts]   2206s  36.2M/s ETA   1.2 min
+  [round 4 · 516654 climbs live · -1611348756 decrypts]   2207s  36.2M/s ETA   1.2 min
+  [round 5 · 446340 climbs live · -1587582672 decrypts]   2208s  36.2M/s ETA   1.1 min
+  [round 6 · 0 climbs live · -1574638812 decrypts]   2209s  36.2M/s ETA   1.1 min
+  [wave 304/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1493898460 decrypts]   2211s  36.2M/s ETA   1.1 min
+  [round 2 · 524288 climbs live · -1430459612 decrypts]   2212s  36.2M/s ETA   1.1 min
+  [round 3 · 524083 climbs live · -1382225116 decrypts]   2213s  36.2M/s ETA   1.1 min
+  [round 4 · 515067 climbs live · -1347111555 decrypts]   2214s  36.2M/s ETA   1.0 min
+  [round 5 · 437815 climbs live · -1323418473 decrypts]   2215s  36.2M/s ETA   1.0 min
+  [round 6 · 0 climbs live · -1310721838 decrypts]   2216s  36.2M/s ETA   1.0 min
+  [wave 305/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -1229981486 decrypts]   2218s  36.2M/s ETA   1.0 min
+  [round 2 · 524286 climbs live · -1166542638 decrypts]   2219s  36.2M/s ETA   1.0 min
+  [round 3 · 524034 climbs live · -1118308326 decrypts]   2220s  36.2M/s ETA   0.9 min
+  [round 4 · 514287 climbs live · -1083198048 decrypts]   2222s  36.2M/s ETA   0.9 min
+  [round 5 · 437807 climbs live · -1059540846 decrypts]   2223s  36.2M/s ETA   0.9 min
+  [round 6 · 0 climbs live · -1046844443 decrypts]   2223s  36.2M/s ETA   0.9 min
+  [wave 306/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -966104091 decrypts]   2225s  36.2M/s ETA   0.9 min
+  [round 2 · 524288 climbs live · -902665243 decrypts]   2227s  36.2M/s ETA   0.8 min
+  [round 3 · 524079 climbs live · -854430747 decrypts]   2228s  36.2M/s ETA   0.8 min
+  [round 4 · 516002 climbs live · -819317454 decrypts]   2229s  36.2M/s ETA   0.8 min
+  [round 5 · 443933 climbs live · -795581362 decrypts]   2230s  36.2M/s ETA   0.8 min
+  [round 6 · 0 climbs live · -782707305 decrypts]   2231s  36.2M/s ETA   0.8 min
+  [wave 307/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -701966953 decrypts]   2233s  36.2M/s ETA   0.7 min
+  [round 2 · 524288 climbs live · -638528105 decrypts]   2234s  36.2M/s ETA   0.7 min
+  [round 3 · 524113 climbs live · -590293609 decrypts]   2235s  36.3M/s ETA   0.7 min
+  [round 4 · 515622 climbs live · -555178038 decrypts]   2236s  36.2M/s ETA   0.7 min
+  [round 5 · 442676 climbs live · -531459426 decrypts]   2237s  36.2M/s ETA   0.7 min
+  [round 6 · 0 climbs live · -518621822 decrypts]   2238s  36.2M/s ETA   0.7 min
+  [wave 308/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -437881470 decrypts]   2240s  36.2M/s ETA   0.6 min
+  [round 2 · 524288 climbs live · -374442622 decrypts]   2241s  36.2M/s ETA   0.6 min
+  [round 3 · 524122 climbs live · -326208126 decrypts]   2242s  36.3M/s ETA   0.6 min
+  [round 4 · 515977 climbs live · -291091952 decrypts]   2243s  36.3M/s ETA   0.6 min
+  [round 5 · 443367 climbs live · -267357010 decrypts]   2244s  36.2M/s ETA   0.5 min
+  [round 6 · 0 climbs live · -254499367 decrypts]   2245s  36.2M/s ETA   0.5 min
+  [wave 309/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · -173759015 decrypts]   2247s  36.2M/s ETA   0.5 min
+  [round 2 · 524287 climbs live · -110320167 decrypts]   2248s  36.3M/s ETA   0.5 min
+  [round 3 · 523943 climbs live · -62085763 decrypts]   2249s  36.3M/s ETA   0.4 min
+  [round 4 · 511724 climbs live · -26981582 decrypts]   2250s  36.3M/s ETA   0.4 min
+  [round 5 · 424273 climbs live · -3442278 decrypts]   2251s  36.2M/s ETA   0.4 min
+  [round 6 · 0 climbs live · 8861639 decrypts]   2252s  36.2M/s ETA   0.4 min
+  [wave 310/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 89601991 decrypts]   2254s  36.2M/s ETA   0.4 min
+  [round 2 · 524285 climbs live · 153040839 decrypts]   2255s  36.3M/s ETA   0.3 min
+  [round 3 · 523905 climbs live · 201275059 decrypts]   2256s  36.3M/s ETA   0.3 min
+  [round 4 · 511874 climbs live · 236376694 decrypts]   2257s  36.3M/s ETA   0.3 min
+  [round 5 · 425408 climbs live · 259922898 decrypts]   2258s  36.2M/s ETA   0.3 min
+  [round 6 · 0 climbs live · 272259730 decrypts]   2259s  36.2M/s ETA   0.3 min
+  [wave 311/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 353000082 decrypts]   2261s  36.2M/s ETA   0.3 min
+  [round 2 · 524286 climbs live · 416438930 decrypts]   2262s  36.3M/s ETA   0.2 min
+  [round 3 · 524068 climbs live · 464673242 decrypts]   2264s  36.3M/s ETA   0.2 min
+  [round 4 · 513878 climbs live · 499785798 decrypts]   2265s  36.3M/s ETA   0.2 min
+  [round 5 · 432677 climbs live · 523424186 decrypts]   2266s  36.3M/s ETA   0.2 min
+  [round 6 · 0 climbs live · 535971819 decrypts]   2266s  36.2M/s ETA   0.2 min
+  [wave 312/313 · 524288 4-plug climbs]
+  [round 1 · 524288 climbs live · 616712171 decrypts]   2268s  36.2M/s ETA   0.1 min
+  [round 2 · 524288 climbs live · 680151019 decrypts]   2270s  36.3M/s ETA   0.1 min
+  [round 3 · 524048 climbs live · 728385515 decrypts]   2271s  36.3M/s ETA   0.1 min
+  [round 4 · 513553 climbs live · 763496731 decrypts]   2272s  36.3M/s ETA   0.1 min
+  [round 5 · 431092 climbs live · 787120169 decrypts]   2273s  36.3M/s ETA   0.1 min
+  [round 6 · 0 climbs live · 799621837 decrypts]   2273s  36.2M/s ETA   0.0 min
+  [wave 313/313 · 461019 4-plug climbs]
+  [round 1 · 461019 climbs live · 870618763 decrypts]   2275s  36.2M/s ETA   0.0 min
+  [round 2 · 461017 climbs live · 926402062 decrypts]   2276s  36.3M/s ETA   0.0 min
+  [round 3 · 460772 climbs live · 968815626 decrypts]   2277s  36.3M/s ETA   0.0 min
+  [round 4 · 450732 climbs live · 999687350 decrypts]   2278s  36.3M/s ETA   0.0 min
+  [round 5 · 374397 climbs live · 1020421022 decrypts]   2279s  36.3M/s ETA   0.0 min
+  [round 6 · 0 climbs live · 1031278535 decrypts]   2280s  36.2M/s ETA   0.0 min
+top escalated candidates by climbed score:
+   #  climbed      IC     tail  crib  shell / position
+   0  -3.0462  0.0509  -3.0462  BAD   B/gamma/IV-III-VIII AACU AAAA
+      QWGRINEMUSEMANGNLITIGOLTAKUDUNRANNTISPOTTKENCIWMILEISZEPLIGEORWWMHANZKPF
+
+NO BREAK — no escalated candidate clears crib-exact ∧ IC ≥ 0.055 ∧ tail > -3.6.
+  best climbed -3.0462 (noise best -inf, Δ +inf) IC 0.0509 tail -3.0462
+
+Read this narrowly. It says the quarantined stops in this file are not the
+key. It does not bound the escalator, which is graded separately on known
+keys (Phase 50.6): given 4+ correct plugs it clears the bar at 72 letters.
+=== exit 0 2026-09-24T18:08:27Z ===

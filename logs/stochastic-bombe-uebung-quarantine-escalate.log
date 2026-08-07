@@ -1,0 +1,9 @@
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 28…28)
+Shell evolution: OFF freeRings=false WO=6 ringSeeds=3 subspace=potsdam-neighbourhood
+Seeded population[0..<55] from Welchman quarantine (55 candidate(s))
+  seed[0] UKWB beta IV-VIII-III rings=AAAA stecker=BS CM EK GX HJ LR NP OT UZ VY
+  seed[1] UKWB gamma III-IV-VIII rings=AAAA stecker=AM BY CV EX FU GT HN JQ
+  seed[2] UKWB beta III-VIII-IV rings=AAAA stecker=AW BP CD EL HY IS JU RV
+  seed[3] UKWB beta VIII-IV-III rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  seed[4] UKWC beta VIII-III-IV rings=AAAA stecker=AF BT DH EK GO IY JV LX MU RS

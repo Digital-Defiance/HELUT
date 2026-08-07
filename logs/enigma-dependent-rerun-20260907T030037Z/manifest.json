@@ -1,0 +1,121 @@
+{
+  "schema": "helut.enigma-dependent-rerun.v2",
+  "created_utc": "2026-09-07T03:00:37Z",
+  "head": "4d47ad0ef40c593bb3a0e4ab5aa2e668b917f975",
+  "worktree": "dirty; manifest binds all relevant files by SHA-256",
+  "supersedes": {
+    "manifest": "logs/enigma-dependent-rerun-20260907T001858Z/manifest.json",
+    "manifest_sha256": "a5e48aad82dfd89d86fe698abaad3a93480daa2e5761e3b39ed769bf30a5e525",
+    "reason": "objective v2 calibrates HostM4Bombe.attackScore rather than normalizing it with raw-bigram moments",
+    "sealed_parent_modified": false
+  },
+  "runtime": {
+    "architecture": "arm64",
+    "swift_driver": "1.148.6",
+    "build_command": "swift build -c release",
+    "binary": ".build/release/helut-bombe",
+    "binary_sha256": "7f6ca8718c80d0fab17a718f3c1371410f47a63a48d0a55ec5ae761117d00f3a",
+    "binary_size_bytes": 7113240
+  },
+  "models": {
+    "bigram_id": "helut-german-bigram-add-k-0.5-06f8694e-v2",
+    "bigram_fixture_sha256": "06f8694ec17906e993223e0179c6ca326030e62f77ec86e5c4120fddcf68f111",
+    "trigram_id": "helut-german-trigram-add-k-0.5-e08a5659-v1",
+    "trigram_fixture_sha256": "e08a56593d1e74b88d300e35b18dd504bc5fffef8ae03db51d72e6270e9509d7",
+    "search_objective_id": "helut-enigma-search-n72-correlation-discounted-z-06f8694e-e08a5659-v2",
+    "objective_attestation_manifest": "logs/enigma-objective-calibration-20260907T025406Z/manifest.json",
+    "objective_attestation_manifest_sha256": "de1421265886b5a08880a68aa609b2c3308e8c65900ea7cc63a658a363eafe1e",
+    "u534_corpus_sha256": "dd66ec7b52f3c45ed50749b577a918ae6cb860cb1ff00c537d53fb92bcc113f8"
+  },
+  "relevant_source_sha256": {
+    "Sources/HELUTCore/LanguageScorer.swift": "766ec20dfb668aee86469a7ba96545ee86ece877a20b7a62c797ee82ad7be363",
+    "Sources/HELUTCore/EnigmaM4.swift": "c30b2effbf14842f711c4572b1272972717b2412ced5b09950b1321c88d0ae02",
+    "Sources/HELUTToolKit/EnigmaScoring.swift": "858c0576470d8fdb4def60bf680f4da8792a77d9c0cfcf66d720c6292b6b07e4",
+    "Sources/HELUTToolKit/ExhaustiveCracker.swift": "3e0fe14a6b9bbe7bb6cac226639953b6fc3019a80e63b514673e93f4f9d706fc",
+    "Sources/HELUTToolKit/OstwaldCurve.swift": "9777dbffde7b4702539eb367934058353ea098111f531eb660066e6f6a5244df",
+    "Sources/HELUTToolKit/OstwaldCurveRunner.swift": "e3eb20ac74a0328c060095d768b1392cf3da86729b6c61cb142651ed5c9c6d5a",
+    "Sources/HELUTToolKit/OstwaldEscalate.swift": "98a25e1d5a9d846d3e32afd1a58cf5a97c4853133904802b32dce3c08d9d5aaf",
+    "Sources/HELUTToolKit/TrigramScorer.swift": "7b42302e9b4199e76e95b100a8db2cb655f312373c4109c468020f29bceafb9a",
+    "Tests/HELUTTests/EnigmaObjectiveRegressionTests.swift": "cfc552ba6091b7354b9a6301f1eac8aadd46feb3873c586b121f9bcac6a7f679"
+  },
+  "historical_receipts": {
+    "logs/exhaust-selftest-revalidate-2026-08-15.log": "b16c4ac6fe0571b68d19a37f7215320e6733876fe4968094ceff1c0c59dbb515",
+    "logs/ostwald-naval-ab-2026-08-17.log": "62a3d34c053971eab73cc5cc945b700e6d0c4955148dd5daa007ed599b04e40b",
+    "logs/ostwald-bombe-seed-ladder-2026-08-17.log": "70775806d85c7fcbbd36f1a8b85311d12f4311ac0bf8b65183ae7835c4c7fa70"
+  },
+  "runs": {
+    "selftest": {
+      "dependency": "directly consumes EnigmaSearchObjective v2",
+      "argv": ["./.build/release/helut-bombe", "--exhaust-selftest", "--selftest-len", "72", "--exhaust-plugs", "10"],
+      "exit": 0,
+      "stdout_sha256": "08d07a9d603ae0ea80a4d2867a3499977120f5ae003a40e96387b04c16000851",
+      "byte_identical_immediate_rerun": true,
+      "uses_fail_closed_final_assessment": true,
+      "metrics": {
+        "level1_rank": 223118,
+        "level1_total": 456976,
+        "letters_correct": 25,
+        "true_plugs_recovered": 5,
+        "plugs_proposed": 7,
+        "recovered": "NNNWOLNARSUNSTTOSOITSXDMIROOONISSIKETTONZWBGNIKSIBATRONDORIVZAUDLEGSEKKS",
+        "candidate_objective": 6.7292,
+        "true_objective": 7.7110,
+        "final_break": false
+      },
+      "comparison_to_v1": {
+        "candidate_plaintext_byte_identical": true,
+        "letters_plugs_and_verdict_identical": true,
+        "objective_coordinates_changed": true
+      }
+    },
+    "generic_ab": {
+      "dependency": "negative control; staged scorer does not consume EnigmaSearchObjective",
+      "argv": ["./.build/release/helut-bombe", "--ostwald-curve", "--ostwald-scorer", "staged", "--ostwald-lengths", "72,100,140,180,252", "--ostwald-controls", "48", "--ostwald-wrong", "16", "--ostwald-exhaust", "0", "--ostwald-seed", "0", "--ostwald-reconnect", "0"],
+      "exit": 0,
+      "stdout_sha256": "e629e5ed15fb3bc9051e7e3fff90a77bd48d6503ae6128f84c2bbe06f2e3c911",
+      "byte_identical_immediate_rerun": true,
+      "stdout_byte_identical_to_prior_bundle": true,
+      "scorer": "legacy staged IC -> dense bigram -> hash-bound trigram ranking benchmark",
+      "publication_verdict": false,
+      "rows": [
+        {"length":72,"controls":30,"wins":5,"win_percent":17,"median_margin":-0.2306,"median_z":-0.01,"median_plugs":1,"median_correct_percent":7},
+        {"length":100,"controls":23,"wins":4,"win_percent":17,"median_margin":-0.2070,"median_z":0.25,"median_plugs":1,"median_correct_percent":7},
+        {"length":140,"controls":12,"wins":0,"win_percent":0,"median_margin":-0.1475,"median_z":0.70,"median_plugs":1,"median_correct_percent":6},
+        {"length":180,"controls":6,"wins":1,"win_percent":17,"median_margin":-0.1287,"median_z":0.19,"median_plugs":2,"median_correct_percent":12},
+        {"length":252,"controls":3,"wins":3,"win_percent":100,"median_margin":0.9273,"median_z":14.14,"median_plugs":10,"median_correct_percent":100}
+      ]
+    },
+    "naval_ab": {
+      "dependency": "negative control; staged scorer does not consume EnigmaSearchObjective",
+      "argv": ["./.build/release/helut-bombe", "--ostwald-curve", "--ostwald-scorer", "staged", "--ostwald-lengths", "72,100,140,180,252", "--ostwald-controls", "48", "--ostwald-wrong", "16", "--ostwald-exhaust", "0", "--ostwald-seed", "0", "--ostwald-reconnect", "0", "--ostwald-naval"],
+      "exit": 0,
+      "stdout_sha256": "49be7aaa15e7c70537dd127416fa70db9be6584eae454dbbaa863893772c7189",
+      "byte_identical_immediate_rerun": true,
+      "stdout_byte_identical_to_prior_bundle": true,
+      "scorer": "legacy staged IC -> dense bigram -> leave-one-out naval trigram ranking benchmark",
+      "publication_verdict": false,
+      "rows": [
+        {"length":72,"controls":30,"wins":4,"win_percent":13,"median_margin":-0.2496,"median_z":-0.15,"median_plugs":1,"median_correct_percent":7},
+        {"length":100,"controls":23,"wins":4,"win_percent":17,"median_margin":-0.2241,"median_z":0.25,"median_plugs":1,"median_correct_percent":7},
+        {"length":140,"controls":12,"wins":0,"win_percent":0,"median_margin":-0.1397,"median_z":0.66,"median_plugs":1,"median_correct_percent":6},
+        {"length":180,"controls":6,"wins":1,"win_percent":17,"median_margin":-0.1381,"median_z":0.15,"median_plugs":2,"median_correct_percent":10},
+        {"length":252,"controls":3,"wins":3,"win_percent":100,"median_margin":1.1531,"median_z":16.75,"median_plugs":10,"median_correct_percent":100}
+      ]
+    },
+    "seed_ladder": {
+      "dependency": "negative control; staged scorer does not consume EnigmaSearchObjective",
+      "argv_template": ["./.build/release/helut-bombe", "--ostwald-curve", "--ostwald-scorer", "staged", "--ostwald-lengths", "72", "--ostwald-controls", "12", "--ostwald-wrong", "6", "--ostwald-exhaust", "0", "--ostwald-reconnect", "0", "--ostwald-seed", "K"],
+      "all_exits": 0,
+      "all_byte_identical_immediate_reruns": true,
+      "all_stdout_byte_identical_to_prior_bundle": true,
+      "publication_verdict": false,
+      "rows": [
+        {"seeded_plugs":0,"stdout_sha256":"29d67fc8d1332ed4a85d4394c50d31a2a2fe2af090836caddf5b364469e7ac1a","controls":10,"wins":2,"win_percent":20,"median_margin":-0.1226,"median_z":0.32,"median_plugs":1,"median_correct_percent":7},
+        {"seeded_plugs":2,"stdout_sha256":"9a6d1bd6bcb30f797158f7c2681ad29c8c875ca7bc316a3919dfc08bc2faf037","controls":10,"wins":3,"win_percent":30,"median_margin":-0.1005,"median_z":0.63,"median_plugs":3,"median_correct_percent":11},
+        {"seeded_plugs":4,"stdout_sha256":"1ae0a869346e716cf072eb020e20a48a7addb9749b46fc6154f8d06bba70e42a","controls":10,"wins":5,"win_percent":50,"median_margin":0.3308,"median_z":4.17,"median_plugs":6,"median_correct_percent":47},
+        {"seeded_plugs":6,"stdout_sha256":"2abe54f0352749f737355f7e24400f6837c788179772726e83cfeda2c7677664","controls":10,"wins":9,"win_percent":90,"median_margin":0.6656,"median_z":5.41,"median_plugs":8,"median_correct_percent":85},
+        {"seeded_plugs":8,"stdout_sha256":"4e1846c2f82d79daa1f3dbb87a89af7df37f774a7f4eea037242a589329e44a4","controls":10,"wins":10,"win_percent":100,"median_margin":1.0488,"median_z":7.65,"median_plugs":10,"median_correct_percent":100}
+      ]
+    }
+  }
+}

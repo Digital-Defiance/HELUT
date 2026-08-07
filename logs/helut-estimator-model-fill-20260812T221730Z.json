@@ -1,0 +1,15 @@
+{
+  "dependency_status": "calibrated-core-svp-model (interim; Sage not required)",
+  "note": "Replace with Scripts/helut_lattice_estimate.py after: sudo brew install --cask sage",
+  "pending": [],
+  "results": {
+    "classic-n630": 129.04,
+    "demo-N8": 4.0,
+    "mid-n512": 95.51,
+    "n1024-s17": 160.66,
+    "n2048-s16": 336.09,
+    "n768-s16": 135.61,
+    "prod-n1024-s16": 175.71,
+    "weak-n256": 40.38
+  }
+}

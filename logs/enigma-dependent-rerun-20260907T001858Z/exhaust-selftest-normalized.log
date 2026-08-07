@@ -1,0 +1,35 @@
+# Normalized deterministic transcript
+# argv: ./.build/release/helut-bombe --exhaust-selftest --selftest-len 72 --exhaust-plugs 10
+# raw stdout SHA-256: 097450fcf9ba88fab9743a9ea266862755c4ef28e56cda1a0d982bca3f72a630
+# immediate rerun: byte-identical
+# process exit: 0
+
+HELUT — exhaustive cracker self-test (known key)
+Control message: U534 P1030684, Potsdam 1 May 1945 (published key)
+Truth: UKW B, gamma, IV-III-VIII, rings AACU, message key VYAA, 10 plugs
+Using first 72 letters — same length as P1030680
+
+Reference plaintext (true key, true plugs):
+  VVVUUUVIRSOBENNULEINSXXMITUUUVIRSIBENNULZWOYVIRSIBENNULDREIYZWODREISECHS
+  objective=6.8812 bigram=-3.3787 trigram=-2.9671 IC=0.0657
+
+Backend: Metal-ic-sweep
+
+Level 1 — correct wheels/rings, plugs unknown, sieve = IC over 26^4 message keys
+  true key IC = 0.0379
+  rank = 223118 of 456976
+  percentile = top 48.825%
+
+Level 2 — stecker hill-climb from the TRUE rotor setting
+  objective: correlation-discounted standardized bigram/IC/crib + trigram
+  recovered: NNNWOLNARSUNSTTOSOITSXDMIROOONISSIKETTONZWBGNIKSIBATRONDORIVZAUDLEGSEKKS
+  letters correct: 25/72 (35%)
+  objective=5.9117 (true plugs: 6.8812)
+  bigram=-3.2711 trigram=-3.5222 IC=0.0669
+  plugs recovered: 5/10 correct, 7 proposed
+
+Level 3 — final assessment on the recovered text
+  bigram-position=1.08 IC=0.0669 trigram=-3.5222 cribs=(none)
+  NO BREAK. High bigram calibration position without naval structure (bigram-fluent nonsense at this message length).
+
+Read this as the ceiling: P1030680 cannot do better than this rehearsal.

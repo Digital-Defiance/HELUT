@@ -1,0 +1,39 @@
+id: helut_radio_regex_matcher
+label: HELUT Regex Matcher
+category: '[HELUT]'
+
+templates:
+  imports: from helut_radio import RegexMatcher
+  make: helut_radio.RegexMatcher(${netlist_path}, ${mode})
+
+parameters:
+-   id: netlist_path
+    label: Netlist JSON
+    dtype: file_open
+    default: regex_netlist.json
+-   id: mode
+    label: Mode
+    dtype: enum
+    options: ['clear', 'encrypted-demo']
+    option_labels: ['clear (oracle)', 'encrypted-demo (N=8)']
+    default: clear
+
+inputs:
+-   label: bytes
+    domain: stream
+    dtype: byte
+
+outputs:
+-   label: match
+    domain: stream
+    dtype: float
+-   domain: message
+    id: match
+    optional: true
+
+documentation: |-
+  Slide a byte stream through HELUT regex_netlist.json (ASCII "DEF").
+  Clear mode is the boolean oracle. encrypted-demo is N=8 only — not
+  production-N SING. Requires libHELUTRadio.dylib (HELUT_RADIO_LIB).
+
+file_format: 1

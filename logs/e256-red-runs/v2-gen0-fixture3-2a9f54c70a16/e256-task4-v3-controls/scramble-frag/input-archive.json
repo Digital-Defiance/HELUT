@@ -1,0 +1,727 @@
+{
+  "aggregate_sha256": "ce89b8f68fa89e881f35536d99a9531d0080ef1ff11c6ad91320905e03f13459",
+  "file_count": 120,
+  "files": [
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Fixtures/enigma256_generation.json",
+      "mode": "0644",
+      "path": "Fixtures/enigma256_generation.json",
+      "sha256": "9348abd117f7561785a176f227436dee9db162d07408ae9103836a8011c65944"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Generated/Profiles/Enigma256/enigma_256_nlff_v2.vh",
+      "mode": "0600",
+      "path": "Generated/Profiles/Enigma256/enigma_256_nlff_v2.vh",
+      "sha256": "87736d2d0582d58bbaa9369401219a4e826f3a23a82b11d3902796cbf45757ec"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Hardware/RTL/Enigma256/enigma_256_nlff_combo.v",
+      "mode": "0644",
+      "path": "Hardware/RTL/Enigma256/enigma_256_nlff_combo.v",
+      "sha256": "352cbde85dcaf59742e690a5d45d6157e881a62d30075a437a4b002ce3c334b9"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Hardware/RTL/Enigma256/enigma_256_nlff_lfsr_combo.v",
+      "mode": "0644",
+      "path": "Hardware/RTL/Enigma256/enigma_256_nlff_lfsr_combo.v",
+      "sha256": "f2210c26d28b8b6f5f27a9154a154f67f73547c438d0074b6c137d4774a22253"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Hardware/RTL/Enigma256/enigma_256_nlff_offset_combo.v",
+      "mode": "0644",
+      "path": "Hardware/RTL/Enigma256/enigma_256_nlff_offset_combo.v",
+      "sha256": "94f12eec9a52dbcc9fc8dfd5ff8226c6af462cdddbb2e9a7dd2b5c24589281be"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v",
+      "mode": "0644",
+      "path": "Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v",
+      "sha256": "e8ac4182907bfcccc4f81d391707088ab949b45e6a9eac3bd4f5810f6e32d97a"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Hardware/RTL/Enigma256/enigma_256_step_cone.v",
+      "mode": "0644",
+      "path": "Hardware/RTL/Enigma256/enigma_256_step_cone.v",
+      "sha256": "18e11308b42925e7c33e290bcc33bd0592348919e8c3470bf83fe7e506e8d488"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Package.swift",
+      "mode": "0644",
+      "path": "Package.swift",
+      "sha256": "945cd6df30cf74766c716fa6ce6d2849879dc2a16c087f21855167f052ec378c"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Scripts/enigma256_red_battery.sh",
+      "mode": "0755",
+      "path": "Scripts/enigma256_red_battery.sh",
+      "sha256": "e2eb00482b4b13048b6bc036c443d81cce539b2fcf3471a46f27970a77003f08"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Scripts/enigma256_scramble_frag_battery.sh",
+      "mode": "0755",
+      "path": "Scripts/enigma256_scramble_frag_battery.sh",
+      "sha256": "e7655dc2e01028ef2c19a68527f53711ac87488f176e20be509a272893e796d1"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Scripts/enigma256_tensorlut_battery.py",
+      "mode": "0644",
+      "path": "Scripts/enigma256_tensorlut_battery.py",
+      "sha256": "039cb90bb6f66c1ae3f84edb94e702d49610e67c3cf5c67531758627814d5be4"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Scripts/enigma256_tensorlut_synth.sh",
+      "mode": "0755",
+      "path": "Scripts/enigma256_tensorlut_synth.sh",
+      "sha256": "8fb14aa6b50f3e7a9bd5f5514659f4a1259c0edd173f5f9725b351baa4921976"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/.DS_Store",
+      "mode": "0644",
+      "path": "Sources/.DS_Store",
+      "sha256": "d9890fef7b1c0da299e4bb906fa44a55661acb34b7ac393db9ffc6df7cb93448"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCLI/CLIFlags.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCLI/CLIFlags.swift",
+      "sha256": "f61fa58ebc44e472dd66b18aa8f7fc55b23bb47f116b2ed2bb89d43b99aa9c7e"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/AdversarialHarness.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/AdversarialHarness.swift",
+      "sha256": "1390efb9e29f1b2583c64a206b590752ab442e8f858e9df198e3344330326f80"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/AdversarialStreamTarget.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/AdversarialStreamTarget.swift",
+      "sha256": "ef492a8ccc5f2c0817716cd27cd6743bfb3b9e41e9b356e0867d4c8c35f7d1a4"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/AdversarialSynthesizer.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/AdversarialSynthesizer.swift",
+      "sha256": "12d82cbf60697e85f511215dc2e131e860e1c303f98cbd1212ca8ad85c605596"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/AdversarialTarget.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/AdversarialTarget.swift",
+      "sha256": "8927bfcbb875f3a008adbb4e16c892646ac8fd784d328ac35d357771f740718f"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/CleartextNetlistSim.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/CleartextNetlistSim.swift",
+      "sha256": "b8a5b4f5eb3cee4c30b69394d2798315ed9968ebfe8642084b91f444a05e2643"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/EncryptedLUTMetalLowering.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/EncryptedLUTMetalLowering.swift",
+      "sha256": "d6df54ad0020ae37fc7bcec00fa1080d1867da26bebc82c77380acf5c027b6ad"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/EncryptedNetlistDiagnostics.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/EncryptedNetlistDiagnostics.swift",
+      "sha256": "a753b8c7f2c48d30d35b791dc83c1da30a4721a7322b47fd4dce4a2000de7a9e"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/EncryptedNetlistSim.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/EncryptedNetlistSim.swift",
+      "sha256": "7abbec7098583e1c1771b54dfe8b2112bd683859aaf348f69ecdaa9afd2d4f3b"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/Enigma256.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/Enigma256.swift",
+      "sha256": "c7e1677d13076c82fdf5293706f6a05464d43c0954159720dcd63398a937c81b"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/Enigma256AEAD.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/Enigma256AEAD.swift",
+      "sha256": "918bfa4f38df0f5c247111c3f195d99fe9ad20a1720e326480fab97f3566cf89"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/Enigma256AXI.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/Enigma256AXI.swift",
+      "sha256": "1ce275639da79d918dcf6a10265752ebd16e6ab575e66ecb03e48b796757bf9a"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/Enigma256Auth.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/Enigma256Auth.swift",
+      "sha256": "8ad4f8258824b4579f8b44e31228c6180da463cd8ee1da573035e6949b8ece31"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/Enigma256Bijection.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/Enigma256Bijection.swift",
+      "sha256": "7bcc56708dd1d2cc86e1442c835fde3db9bbff068d6355b73734835abcc2cae8"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/Enigma256Bridge.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/Enigma256Bridge.swift",
+      "sha256": "b3c0305e932fa0860958e14c73968db19626407efddb8b9fe63a0d34fb4420ff"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/Enigma256ECDH.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/Enigma256ECDH.swift",
+      "sha256": "caa4a601a01efb310bd711a21fe15eac25ed48d719f4c2a349666cf034848a58"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/Enigma256Formal.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/Enigma256Formal.swift",
+      "sha256": "72aa40465d6542a086804fbd09afb5ed4985f2dfa4818ae1381fb86f2fd15962"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/Enigma256Generation.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/Enigma256Generation.swift",
+      "sha256": "78e5a50a266cf5ba85ed403b7e031340f8b0bbc49fc54b72e395e5b7d34fc379"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/Enigma256Hybrid.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/Enigma256Hybrid.swift",
+      "sha256": "8ef83bc83cba1e857f97971c5f8d4e160f096330891f5412ea9dcc7d842d6906"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/Enigma256Passphrase.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/Enigma256Passphrase.swift",
+      "sha256": "2cb135055adadcb025a18828ddefca28030fcf84d06fbfff97a56f0b701760d9"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/Enigma256Session.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/Enigma256Session.swift",
+      "sha256": "e6aeb6deef118f04817af99b459540e0908a7d11fa64555aac26557ea042703d"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/Enigma256TCP.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/Enigma256TCP.swift",
+      "sha256": "0fbe4237c1d3d7c7147ca3826500113bfe3276d5bb1c051b694e9e9134251309"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/Enigma256Wire.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/Enigma256Wire.swift",
+      "sha256": "95c502652bbfe61a43ba3f0c2107c7a324f1611e3b067499c9b35b3eff267fa4"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/EnigmaM4.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/EnigmaM4.swift",
+      "sha256": "324c5db0125c9224f7ea87e9baf0c240cb16d90cf32546192e3621b66c988a31"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/EnigmaOracle.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/EnigmaOracle.swift",
+      "sha256": "5d47a5e776aa183e3a7c5773baa2b3507666d0aa0b57d498865636a3595d1999"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/EnigmaStreamBuilder.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/EnigmaStreamBuilder.swift",
+      "sha256": "44c59fa8b80e6c5d43728c9f0fe8b9f6f0c2665d83f6b7895dc8a8e35ee56108"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/GGSWIncompleteCovering.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/GGSWIncompleteCovering.swift",
+      "sha256": "ddc0160aa8116769a9dc2bfdf9e16fd7e1d0e3db35e870a24cfc9d6148c4fdaf"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/GGSWPublicMSCovering.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/GGSWPublicMSCovering.swift",
+      "sha256": "3a99aee53ce5b83faeb3781bb4c744a806860cc8f928c207fe3440a6ea5fb787"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/HELUTCore.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/HELUTCore.swift",
+      "sha256": "8b6d93150f3a1c6c390e9f31de84b21fac55ced4386af76f2831145d7d9cb52f"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/LanguageScorer.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/LanguageScorer.swift",
+      "sha256": "089dd9cda1276cda169b56aca5cc65277977550282ebb8840f4fab280769a10b"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/MetalGGSW.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/MetalGGSW.swift",
+      "sha256": "d25c48c3394d2c2a0be02192eda4cbe6512e8202a4dda2b01bb6ac45d7841bf0"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/MetalNTTBR.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/MetalNTTBR.swift",
+      "sha256": "38b86798b85fae0b9be674efcb8d4e10e74cd03a2c0f4a3e75b1d15e42e3c12d"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/MetalNTTMul.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/MetalNTTMul.swift",
+      "sha256": "8af703e3cb3205e894b9407b51bf20643dc18fa8c2cc297a2a8756f880f3a52c"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/MetalNegacyclic.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/MetalNegacyclic.swift",
+      "sha256": "0cf891b73fe4f3a5f1108b0a88cf84cd62c2dc5f3a74a0d2a2dc63d43ec6d4bf"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/MuleinBoard.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/MuleinBoard.swift",
+      "sha256": "7551960efdfaaf3568e433a45c6643d7643fdf368e1b2c08e6db9cb435719a12"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/MuleinFuture.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/MuleinFuture.swift",
+      "sha256": "b73e482db5854a5056cfeeb9a63567d2fe69f2a5025cd638c14e599ac2a14676"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/MuleinSparseTranscript.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/MuleinSparseTranscript.swift",
+      "sha256": "5a5b5a7984db3f88c6edbaea341b61040d2374bd1fb78bec069f782a29319f44"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/NegacyclicNTT.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/NegacyclicNTT.swift",
+      "sha256": "0503152a12c9e025cc20e9b6bc0aa7bbf6012a554ce0c0d3578b6577a892ccce"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/PicoRVHostMem.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/PicoRVHostMem.swift",
+      "sha256": "3b0e706fad8163b25a69383f35c32d5d7b0b48278b44f5ee4f7eb7dfcf1cae7f"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/ProgrammableBootstrap.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/ProgrammableBootstrap.swift",
+      "sha256": "4a77fed77dc228e9979101a9d8cdc867d36fe77d31aa74fa1edbdd8da4a49d66"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/SpliceMenu.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/SpliceMenu.swift",
+      "sha256": "957bae57b6e9669af811ae5ca2914393a33b3b620ac1cbde12ecbba2b404f8fe"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/SteckerInvolution.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/SteckerInvolution.swift",
+      "sha256": "4564e90ff317038dc5303267a78252224b017b76a99182fecbe75d1b920c9315"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/TFHEGGSW.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/TFHEGGSW.swift",
+      "sha256": "f2bcd708a6bd5fc602ae72f1ec8e779d3575934c86dbf6e6712751a959a42d52"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/TFHEGaussianSecurity.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/TFHEGaussianSecurity.swift",
+      "sha256": "16980c002f85e74a791182b73388dd6b68efd87e7b066b76d579af2c321c74b6"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/TFHELWECalibration.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/TFHELWECalibration.swift",
+      "sha256": "8cc822a2fbff44ce4a3ceb3701a1bd0e7791ea8cf1a1f8c8fcc3b6db1f9ea01f"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/TFHELWECoreSVPModel.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/TFHELWECoreSVPModel.swift",
+      "sha256": "d041be47597924748c0d68504838f15b76491703ea13e3efca20885ded4b7fe2"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/TFHELWEEstimatorProtocol.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/TFHELWEEstimatorProtocol.swift",
+      "sha256": "0474d5319c6349164fbe1954322269e63f0bd8c77711f8b956dc80573c0b414f"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/TFHELWEHardness.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/TFHELWEHardness.swift",
+      "sha256": "7b65a07e795b08e925e5221b665394f8aee4412dc031f465c3a32038a7096888"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/TFHENoiseProof.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/TFHENoiseProof.swift",
+      "sha256": "54afc1040b48a011fb01a9a821e75da1bf1ff4be483e40cdc22ee7942d4efda3"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/TFHENoisyBK.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/TFHENoisyBK.swift",
+      "sha256": "a19a9b3ae0c37a5a3938e5baacd245591cf127402d6453d6777c2c1489c7fe94"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/TFHESamples.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/TFHESamples.swift",
+      "sha256": "a261b6ee5604d2b42a17ff7e4ff2fb6176ebcb8d78fe7d594d481f1761d283f5"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/TFHESeam.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/TFHESeam.swift",
+      "sha256": "edab41034763a3c61eb1f4fc953999d8fc16448b0543a8fdb4ad46921d12b2b1"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/TFHETestPolyCache.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/TFHETestPolyCache.swift",
+      "sha256": "b164864f700302d0a33e76471c9e1b70fe25702f3f64ded2b3a68735bc2b0302"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/TensorLUTCompiler.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/TensorLUTCompiler.swift",
+      "sha256": "b5059ac5dcc81373276d3e902025e2c9ad4f43ac49d53dd4c0c804fe3970ab56"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/TensorLUTConeTagger.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/TensorLUTConeTagger.swift",
+      "sha256": "1122968195f3e2c7bdc35cb2d3996bbe38b76f08f12b1e5b48e33b8b4ebf20ec"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/TensorLUTEmitter.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/TensorLUTEmitter.swift",
+      "sha256": "3730dda850304f744526e730ace1b062349e55a8452b42fc3fb40da9e0d6aed6"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/TensorLUTFormal.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/TensorLUTFormal.swift",
+      "sha256": "ab1929866d367bf761a2a76e1173d7de12070591781c427d5dcf513c8cdf1865"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/TensorLUTFriction.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/TensorLUTFriction.swift",
+      "sha256": "4984c07a618fb334539bc2044a7c1f448902cf3d55fd04b64da51758a168d365"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/TensorLUTPipeline.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/TensorLUTPipeline.swift",
+      "sha256": "3f33baa110fb489a7d07e2b89c09ffbf9a95ce73c63051f7845446123332de1d"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/TensorLUTTypes.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/TensorLUTTypes.swift",
+      "sha256": "7358880b376db76f407691683c704dae1c00d60f6e71e4ac9e76aac53e7c4390"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTCore/WelchmanDiagonalBoard.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTCore/WelchmanDiagonalBoard.swift",
+      "sha256": "e8ebe1c6f2616e2b649f1d6102331b3e1786d313b9e489b709f0b9b0926bef73"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTRadio/RadioABI.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTRadio/RadioABI.swift",
+      "sha256": "f061a5dd6ecb7861583c98ddf2f1508c608d642f0a4b031829030e5005ca8ce3"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTRadio/RadioEngine.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTRadio/RadioEngine.swift",
+      "sha256": "9a06b45c3b3f8cb4e6856924fd1081bf81eb9be43c4ca6932a7e144c89bf2f0d"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTRadio/include/helut.h",
+      "mode": "0644",
+      "path": "Sources/HELUTRadio/include/helut.h",
+      "sha256": "1c683bc609734eebb09b041e4d4e64dec9ed3bb6f1b0fc0157c35ec950a166e2"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/BombeMetal.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/BombeMetal.swift",
+      "sha256": "e57f3fb58ba409edeb6c7cae0ec17e847da23a3ef2d1105d7e817bc932984ac9"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/BombeSweep.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/BombeSweep.swift",
+      "sha256": "c49cfc964ddd2a33da41175e8af0d04a824fdfa25b0ed5a4615e8fe7e831b2ea"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/CleartextBatchHybrid.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/CleartextBatchHybrid.swift",
+      "sha256": "b5f8f7a8419432bd44818c256547eda5ebc7c1fcdc18ece76ca5bc2f59774238"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/ControlMessageP1030681.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/ControlMessageP1030681.swift",
+      "sha256": "d6aaa7d3397ba3ed2e3961e7c10282db5cde2ba3a6610d986e68dcc21b8ce644"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/DebugSurvivor.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/DebugSurvivor.swift",
+      "sha256": "fa0bf1f5b0bd5eb6e714e8f1862c9ce3c080b94440728cbe520f88c6cfe16bd9"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/Enigma256Commands.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/Enigma256Commands.swift",
+      "sha256": "a1743e94c0e417e8e2dee04060696e8266bef76ed73df953321f3489e3368e46"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/Enigma256TensorLUT.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/Enigma256TensorLUT.swift",
+      "sha256": "7edbf76cd61e6c3dbc41c96071c78bc9364f10650f874fdc53b67816863f79a1"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/ExhaustiveCracker.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/ExhaustiveCracker.swift",
+      "sha256": "fe3c2185f16796c31dba3c0acfcbcf4c10a27ebb803f233134c7ff696dacd150"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/GarbleBoardSelfTest.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/GarbleBoardSelfTest.swift",
+      "sha256": "0b8d140e3b9777e616afa3e6c3ca062d68ff1e170e5cac775a270811836a4286"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/HelutBench.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/HelutBench.swift",
+      "sha256": "fe692b1f011138a21369706fc3541b36b21d0adfb26ad7a2316ef01d6523dfea"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/HelutEntries.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/HelutEntries.swift",
+      "sha256": "0420bef5ba0418f26e84b0138d45b9f81871e669f72655ab4eb54722b96fba4e"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/HybridBombeHarness.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/HybridBombeHarness.swift",
+      "sha256": "80b9c9ea8064ab8666b4512066ac3d9a21b089e9a024d3667590d3b4f99b2601"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/IndelSelfTest.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/IndelSelfTest.swift",
+      "sha256": "2229fd05470bc824298c49caca4c6abfb29f93f44b99450c43b0981c43f67b8e"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/MuleinFutureControl.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/MuleinFutureControl.swift",
+      "sha256": "19cc9be7d0ae20e2d353af089265c141f310747ea938852f3645cb8e322c828a"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/MuleinFutureManifest.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/MuleinFutureManifest.swift",
+      "sha256": "4645795009e3379892d5e75184692de9b4f63791baa97ae801510e309cab8ee4"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/MuleinFutureMetal.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/MuleinFutureMetal.swift",
+      "sha256": "7e96219283328d9ebc9275802dd9fedc3b2d142dafae7b2d90674455c93ceecc"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/MuleinFutureTensorLUTBench.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/MuleinFutureTensorLUTBench.swift",
+      "sha256": "59b2e7c1aebdcb8d48c7436251b62822b1292305b4835d0f4175786bde058b17"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/MuleinFutureTensorLUTEvaluator.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/MuleinFutureTensorLUTEvaluator.swift",
+      "sha256": "d038ffcda26b632e6d6f3b10c33d2d14a89ec8b351d1123893a31c53076366ec"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/MuleinFutureTensorLUTPacking.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/MuleinFutureTensorLUTPacking.swift",
+      "sha256": "845b7e76fd716b124cd7bb6ba609f297978c32e5005f100958299da7f612e5c6"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/MuleinGermanNGramModels.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/MuleinGermanNGramModels.swift",
+      "sha256": "8882dbc2156769a15a75fdf23776766d1ca51e2c4c8350630e249755a47e485c"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/MuleinNGramModel.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/MuleinNGramModel.swift",
+      "sha256": "3b6c1bb5ae444ecebe12c59f5b98bbae8c247964d4d025c331cd79e434671780"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/MuleinScoreTrace.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/MuleinScoreTrace.swift",
+      "sha256": "992718f074173ea7b5a77eab3cfa9ae0a939ed5496716177e1f7cf2d21f6ccab"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/MuleinSparseReferenceEvaluator.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/MuleinSparseReferenceEvaluator.swift",
+      "sha256": "b255bd925fc9cd5d3154809e542bf020c83bba8191e72454b2c6e4de257c2453"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/MuleinTranscriptControls.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/MuleinTranscriptControls.swift",
+      "sha256": "733d7ac5370ff06f56906187282997909f1acbe79e4a852794cb95b54e45bcee"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/NavalDiscriminator.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/NavalDiscriminator.swift",
+      "sha256": "73f6f16d64b3e41e315a5953295730243bef2c1c91b801518ca88c7cda3bd2fb"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/NavalGrams.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/NavalGrams.swift",
+      "sha256": "6b5ea1a03357719ca5260687f33737f8ab9ef49042bb94d1b6f42b199d43368c"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/NavalLexicon.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/NavalLexicon.swift",
+      "sha256": "14337ee2b0abd10060b8c1de078cf4ea9f2dd0a9c93a81b849714d3d465f9266"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/NearMissQuarantine.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/NearMissQuarantine.swift",
+      "sha256": "06062e86f08e90b5da7083657254fd231e96272aaa5991ea2b0bdae3110414f8"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/OstwaldCurve.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/OstwaldCurve.swift",
+      "sha256": "9777dbffde7b4702539eb367934058353ea098111f531eb660066e6f6a5244df"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/OstwaldCurveRunner.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/OstwaldCurveRunner.swift",
+      "sha256": "a5d84ca0059162a8cc75592bf636451c3c2c133663d9ad58e6a8030dac3b37f2"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/OstwaldEscalate.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/OstwaldEscalate.swift",
+      "sha256": "16d19f79515692756eb98d867b9fecad9db6b9c2dc749cc786e431cb015e0d5b"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/P1030680MuleinCampaign.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/P1030680MuleinCampaign.swift",
+      "sha256": "7642aa8cc675bd59fe7031b52be508c823478bb25dd0ead80f53e9d92217200f"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/PostBombeDiscriminator.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/PostBombeDiscriminator.swift",
+      "sha256": "b69815c32eb0b789eb0ffd1e9cb219e1ebe62f81ef61920a2c18103fe5a52fdd"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/QuarantineGarbleControl.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/QuarantineGarbleControl.swift",
+      "sha256": "13e90641be2fc9eacb7fa4c1f46b6a6347d8d3b8390e97fc81a5450f06f30d5e"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/TensorLUTGenericEmit.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/TensorLUTGenericEmit.swift",
+      "sha256": "3102405804c6e564de17c55be0552f124dfe835b1348d14f25959f8c90404fe7"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/TolerancePrequal.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/TolerancePrequal.swift",
+      "sha256": "b6b5027eca635efa1082a05f5d5852dfee06f8cf039f22228b47348a4c7c45e1"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/HELUTToolKit/TrigramScorer.swift",
+      "mode": "0644",
+      "path": "Sources/HELUTToolKit/TrigramScorer.swift",
+      "sha256": "cc9d502c503fba428ee822202576501f23005e735405cbd4ba914122326cf249"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/helut-bench/main.swift",
+      "mode": "0644",
+      "path": "Sources/helut-bench/main.swift",
+      "sha256": "8412c9008223813734714cc312634785fb3a67053e1d02c703cf921e11cda163"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/helut-bombe/main.swift",
+      "mode": "0644",
+      "path": "Sources/helut-bombe/main.swift",
+      "sha256": "30f96e7b14b6ddf51363b73e74b903860b3b09baf85ace8c0adee4e0dec6ab70"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/helut-compile/main.swift",
+      "mode": "0644",
+      "path": "Sources/helut-compile/main.swift",
+      "sha256": "a73006474d62371e29cd9e07543b611dada228dc0316375d5f98cd0b330eed05"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/helut-e256/main.swift",
+      "mode": "0644",
+      "path": "Sources/helut-e256/main.swift",
+      "sha256": "0d6cfa6c1b2e68f76031075ef79a0cbee0c53168137825feed55478ba1192bc5"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/helut-radio/main.swift",
+      "mode": "0644",
+      "path": "Sources/helut-radio/main.swift",
+      "sha256": "589886a6192f4ec7faf8a8811b027839ceef989fb28ae9b512469df40f130627"
+    },
+    {
+      "archived_path": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v3-controls/scramble-frag/input-archive/Sources/helut/main.swift",
+      "mode": "0644",
+      "path": "Sources/helut/main.swift",
+      "sha256": "02605fee650dfc5ea0708518b801c1e3edccfe368961066c82ee99b1102fb7e5"
+    }
+  ],
+  "schema": 1
+}

@@ -1,0 +1,1447 @@
+{
+  "C20": {
+    "claims": "boolean SING 10.6 s / 8",
+    "cmd": ".build/release/helut --bench netlist.json --degree 1024 --bench-encrypted --sing --vectors 8 --paths blind-rotate-metal public-ms boolean",
+    "exits": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C20",
+    "label": "Wavefront-parallel independent $lut BRs, Metal N=1024",
+    "runs": 5,
+    "stability": "stable-pass",
+    "tier": "B",
+    "tool_wall": {
+      "max": 9.2348,
+      "mean": 9.20632,
+      "median": 9.1993,
+      "min": 9.1967,
+      "n": 5,
+      "spread": 0.004141619471046713,
+      "stdev": 0.01615168721836825
+    },
+    "verdicts": [
+      [
+        "PASS"
+      ],
+      [
+        "PASS"
+      ],
+      [
+        "PASS"
+      ],
+      [
+        "PASS"
+      ],
+      [
+        "PASS"
+      ]
+    ],
+    "wall": {
+      "max": 10.404261582999993,
+      "mean": 10.363322149800023,
+      "median": 10.35066929200002,
+      "min": 10.321498708000036,
+      "n": 5,
+      "spread": 0.0079958959817144,
+      "stdev": 0.035262432245327505
+    },
+    "warmup": 1,
+    "when": "2026-08-15T14:27:31"
+  },
+  "C21": {
+    "claims": "crypto l=2 SING 11.38 s / 8",
+    "cmd": ".build/release/helut --bench netlist.json --degree 1024 --bench-encrypted --sing --vectors 8 --paths blind-rotate-metal public-ms crypto",
+    "exits": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C21",
+    "label": "Metal cryptoPublicMS l=2 SING at N=1024",
+    "runs": 5,
+    "stability": "stable-pass",
+    "tier": "B",
+    "tool_wall": {
+      "max": 9.9586,
+      "mean": 9.953520000000001,
+      "median": 9.9542,
+      "min": 9.9456,
+      "n": 5,
+      "spread": 0.0013059813947881196,
+      "stdev": 0.004797082446654287
+    },
+    "verdicts": [
+      [
+        "PASS"
+      ],
+      [
+        "PASS"
+      ],
+      [
+        "PASS"
+      ],
+      [
+        "PASS"
+      ],
+      [
+        "PASS"
+      ]
+    ],
+    "wall": {
+      "max": 12.214399209000021,
+      "mean": 12.195601549999969,
+      "median": 12.205801082999983,
+      "min": 12.170961582999894,
+      "n": 5,
+      "spread": 0.0035587689578708906,
+      "stdev": 0.018993241312228227
+    },
+    "warmup": 1,
+    "when": "2026-08-15T14:28:44"
+  },
+  "C38": {
+    "claims": "CPU N=8 PASS (4 stimuli)",
+    "cmd": ".build/release/helut --bench counter_netlist.json --degree 8 --bench-encrypted --cpu-only --sing --vectors 8",
+    "exits": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C38",
+    "label": "Encrypted sequential DFF host-clock, toy counter, CPU N=8",
+    "runs": 5,
+    "stability": "stable-pass",
+    "tier": "A",
+    "tool_wall": {
+      "max": 0.0007,
+      "mean": 0.00062,
+      "median": 0.0006,
+      "min": 0.0006,
+      "n": 5,
+      "spread": 0.16666666666666677,
+      "stdev": 4.4721359549995816e-05
+    },
+    "verdicts": [
+      [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "SKIP"
+      ]
+    ],
+    "wall": {
+      "max": 0.021724666999999975,
+      "mean": 0.0206886586,
+      "median": 0.02040191700000002,
+      "min": 0.020024041999999992,
+      "n": 5,
+      "spread": 0.08335613756295458,
+      "stdev": 0.0006620131574819987
+    },
+    "warmup": 1,
+    "when": "2026-08-15T14:12:07"
+  },
+  "C38m": {
+    "claims": "Metal N=1024 PASS 15.88 s / 4",
+    "cmd": ".build/release/helut --bench counter_netlist.json --degree 1024 --bench-encrypted --sing --vectors 4 --paths blind-rotate-metal public-ms boolean",
+    "exits": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C38m",
+    "label": "Counter Metal N=1024 public-ms boolean SING",
+    "runs": 5,
+    "stability": "stable-pass",
+    "tier": "B",
+    "tool_wall": {
+      "max": 7.0465,
+      "mean": 7.018800000000001,
+      "median": 7.0119,
+      "min": 7.0111,
+      "n": 5,
+      "spread": 0.005048560304625009,
+      "stdev": 0.015496773857806626
+    },
+    "verdicts": [
+      [
+        "PASS"
+      ],
+      [
+        "PASS"
+      ],
+      [
+        "PASS"
+      ],
+      [
+        "PASS"
+      ],
+      [
+        "PASS"
+      ]
+    ],
+    "wall": {
+      "max": 8.21841008299998,
+      "mean": 8.18021166660003,
+      "median": 8.18281391700009,
+      "min": 8.137332208999965,
+      "n": 5,
+      "spread": 0.009908312082176742,
+      "stdev": 0.031058006416500018
+    },
+    "warmup": 1,
+    "when": "2026-08-15T14:29:33"
+  },
+  "C39": {
+    "claims": "CPU N=16 PASS (32 rows)",
+    "cmd": ".build/release/helut --bench e256_round1_netlist.json --degree 16 --bench-encrypted --cpu-only --sing --vectors 32 --paths blind-rotate public-ms boolean",
+    "exits": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C39",
+    "label": "Encrypted 1-round E256 SoftBus scramble, CPU N=16",
+    "runs": 5,
+    "stability": "stable-pass",
+    "tier": "A",
+    "tool_wall": {
+      "max": 0.0396,
+      "mean": 0.03844,
+      "median": 0.0383,
+      "min": 0.0377,
+      "n": 5,
+      "spread": 0.04960835509138396,
+      "stdev": 0.0007127411872482202
+    },
+    "verdicts": [
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ]
+    ],
+    "wall": {
+      "max": 0.04659508300000004,
+      "mean": 0.0451140332,
+      "median": 0.044990209,
+      "min": 0.04401704099999998,
+      "n": 5,
+      "spread": 0.05730228992712743,
+      "stdev": 0.0009459244230097071
+    },
+    "warmup": 1,
+    "when": "2026-08-15T14:12:07"
+  },
+  "C39m": {
+    "claims": "Metal N=1024 PASS 22.77 s / 2",
+    "cmd": ".build/release/helut --bench e256_round1_netlist.json --degree 1024 --bench-encrypted --sing --vectors 2 --paths blind-rotate-metal public-ms boolean",
+    "exits": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C39m",
+    "label": "E256 round1 Metal N=1024 public-ms boolean SING",
+    "runs": 5,
+    "stability": "stable-pass",
+    "tier": "B",
+    "tool_wall": {
+      "max": 22.6798,
+      "mean": 22.62226,
+      "median": 22.6639,
+      "min": 22.4926,
+      "n": 5,
+      "spread": 0.008259831714753448,
+      "stdev": 0.07708468070894552
+    },
+    "verdicts": [
+      [
+        "PASS"
+      ],
+      [
+        "PASS"
+      ],
+      [
+        "PASS"
+      ],
+      [
+        "PASS"
+      ],
+      [
+        "PASS"
+      ]
+    ],
+    "wall": {
+      "max": 23.907820458999936,
+      "mean": 23.83062178340008,
+      "median": 23.83586800000012,
+      "min": 23.689302500000167,
+      "n": 5,
+      "spread": 0.00916761072010332,
+      "stdev": 0.08836078939754344
+    },
+    "warmup": 1,
+    "when": "2026-08-15T14:33:12"
+  },
+  "C40": {
+    "claims": "CPU N=8 PASS",
+    "cmd": ".build/release/helut --bench toy_isa_netlist.json --degree 8 --bench-encrypted --cpu-only --sing --vectors 32",
+    "exits": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C40",
+    "label": "Encrypted toy NOP/ADD ISA tick, CPU N=8",
+    "runs": 5,
+    "stability": "stable-pass",
+    "tier": "A",
+    "tool_wall": {
+      "max": 0.0055,
+      "mean": 0.005200000000000001,
+      "median": 0.0051,
+      "min": 0.0051,
+      "n": 5,
+      "spread": 0.07843137254901947,
+      "stdev": 0.00017320508075688743
+    },
+    "verdicts": [
+      [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "SKIP"
+      ]
+    ],
+    "wall": {
+      "max": 0.17437729199999996,
+      "mean": 0.1682597004,
+      "median": 0.165812042,
+      "min": 0.16343720900000003,
+      "n": 5,
+      "spread": 0.06597882076622598,
+      "stdev": 0.005151798008040215
+    },
+    "warmup": 1,
+    "when": "2026-08-15T14:12:08"
+  },
+  "C40m": {
+    "claims": "Metal N=1024 PASS 20.31 s / 4",
+    "cmd": ".build/release/helut --bench toy_isa_netlist.json --degree 1024 --bench-encrypted --sing --vectors 4 --paths blind-rotate-metal public-ms boolean",
+    "exits": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C40m",
+    "label": "Toy ISA Metal N=1024 public-ms boolean SING",
+    "runs": 5,
+    "stability": "stable-pass",
+    "tier": "B",
+    "tool_wall": {
+      "max": 11.4524,
+      "mean": 11.447,
+      "median": 11.4464,
+      "min": 11.4422,
+      "n": 5,
+      "spread": 0.000891109868605072,
+      "stdev": 0.003757658845611435
+    },
+    "verdicts": [
+      [
+        "PASS"
+      ],
+      [
+        "PASS"
+      ],
+      [
+        "PASS"
+      ],
+      [
+        "PASS"
+      ],
+      [
+        "PASS"
+      ]
+    ],
+    "wall": {
+      "max": 12.686179042000049,
+      "mean": 12.649820683199982,
+      "median": 12.647103665999907,
+      "min": 12.612024374999919,
+      "n": 5,
+      "spread": 0.005863371484768091,
+      "stdev": 0.02777415540633291
+    },
+    "warmup": 1,
+    "when": "2026-08-15T14:30:49"
+  },
+  "C45": {
+    "claims": "PASS 76.12 ms/row",
+    "cmd": ".build/release/helut --bench picorv32_netlist.json --degree 8 --bench-encrypted --cpu-only --sing --vectors 1 --paths blind-rotate public-ms boolean",
+    "exits": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C45",
+    "label": "Encrypted PicoRV32 1-tick SING, demo N=8",
+    "runs": 5,
+    "stability": "stable-pass",
+    "tier": "A",
+    "tool_wall": {
+      "max": 0.0485,
+      "mean": 0.047819999999999994,
+      "median": 0.0479,
+      "min": 0.0467,
+      "n": 5,
+      "spread": 0.03757828810020883,
+      "stdev": 0.000672309452558865
+    },
+    "verdicts": [
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ]
+    ],
+    "wall": {
+      "max": 0.138758167,
+      "mean": 0.13749854179999996,
+      "median": 0.13741899999999996,
+      "min": 0.13654300000000008,
+      "n": 5,
+      "spread": 0.0161198014830548,
+      "stdev": 0.0008429048400718633
+    },
+    "warmup": 1,
+    "when": "2026-08-15T14:12:09"
+  },
+  "C46": {
+    "claims": "0.972 s / 10 (stale; re-measured 0.473)",
+    "cmd": ".build/release/helut --bench picorv32_netlist.json --degree 8 --bench-encrypted --cpu-only --sing --ticks 10 --reset-hold 3 --paths blind-rotate public-ms boolean",
+    "exits": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C46",
+    "label": "Encrypted PicoRV32 10-tick resetn boot + Q SING, N=8",
+    "runs": 5,
+    "stability": "stable-pass",
+    "tier": "A",
+    "tool_wall": {
+      "max": 0.4733,
+      "mean": 0.46963999999999995,
+      "median": 0.4704,
+      "min": 0.4657,
+      "n": 5,
+      "spread": 0.016156462585034004,
+      "stdev": 0.0028500877179483425
+    },
+    "verdicts": [
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ]
+    ],
+    "wall": {
+      "max": 0.5670451660000002,
+      "mean": 0.5612303495999997,
+      "median": 0.5606719579999995,
+      "min": 0.5572044159999998,
+      "n": 5,
+      "spread": 0.01755170712497165,
+      "stdev": 0.0038483311581303426
+    },
+    "warmup": 1,
+    "when": "2026-08-15T14:12:13"
+  },
+  "C47": {
+    "claims": "PASS 3.15 s / 32, 10 fetches",
+    "cmd": ".build/release/helut --bench picorv32_netlist.json --degree 8 --bench-encrypted --cpu-only --sing --encrypted-mem nop --ticks 32 --reset-hold 3 --paths blind-rotate public-ms boolean",
+    "exits": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C47",
+    "label": "Encrypted PicoRV32 NOP-fetch, PC walks, N=8",
+    "runs": 5,
+    "stability": "stable-pass",
+    "tier": "A",
+    "tool_wall": {
+      "max": 1.5218,
+      "mean": 1.51326,
+      "median": 1.5148,
+      "min": 1.5046,
+      "n": 5,
+      "spread": 0.011354634275151905,
+      "stdev": 0.006389679178174778
+    },
+    "verdicts": [
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ]
+    ],
+    "wall": {
+      "max": 1.614228958,
+      "mean": 1.6067902416,
+      "median": 1.6089759580000003,
+      "min": 1.596175959,
+      "n": 5,
+      "spread": 0.011220179462743726,
+      "stdev": 0.006912966436057949
+    },
+    "warmup": 1,
+    "when": "2026-08-15T14:12:22"
+  },
+  "C49": {
+    "claims": "PASS 3.79 s / 48, store wdata=1",
+    "cmd": ".build/release/helut --bench picorv32_netlist.json --degree 8 --bench-encrypted --cpu-only --sing --encrypted-mem prog --ticks 48 --reset-hold 3 --paths blind-rotate public-ms boolean",
+    "exits": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C49",
+    "label": "Encrypted PicoRV32 addi+sw, N=8",
+    "runs": 5,
+    "stability": "stable-pass",
+    "tier": "A",
+    "tool_wall": {
+      "max": 2.2936,
+      "mean": 2.28256,
+      "median": 2.2878,
+      "min": 2.2688,
+      "n": 5,
+      "spread": 0.010840108401083983,
+      "stdev": 0.01062275858710908
+    },
+    "verdicts": [
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ]
+    ],
+    "wall": {
+      "max": 2.3880704999999978,
+      "mean": 2.3783228334,
+      "median": 2.3842504170000005,
+      "min": 2.365443708000001,
+      "n": 5,
+      "spread": 0.009490107179457799,
+      "stdev": 0.01045007052548937
+    },
+    "warmup": 1,
+    "when": "2026-08-15T14:12:36"
+  },
+  "C52": {
+    "claims": "secret 44.08 s / 2, public-ms 29.40 s / 2",
+    "cmd": ".build/release/helut --bench netlist.json --degree 1024 --bench-encrypted --sing --vectors 2 --paths covering-b1 --bk-noise-sigma 128 --boolean-scale-mul 7",
+    "exits": [
+      0,
+      0,
+      0,
+      0,
+      -5
+    ],
+    "host": "Turing.local",
+    "id": "C52",
+    "label": "Stride-k=7 covering-b1 N=1024 sigma=128 Metal SING",
+    "runs": 5,
+    "stability": "FLAKY:CRASH(signal 5)+PASSx1,PASS/PASSx4",
+    "tier": "B",
+    "tool_wall": {
+      "max": 44.503,
+      "mean": 44.14222,
+      "median": 44.2586,
+      "min": 43.4224,
+      "n": 5,
+      "spread": 0.02441559380549762,
+      "stdev": 0.4230701738482625
+    },
+    "verdicts": [
+      [
+        "PASS",
+        "PASS"
+      ],
+      [
+        "PASS",
+        "PASS"
+      ],
+      [
+        "PASS",
+        "PASS"
+      ],
+      [
+        "PASS",
+        "PASS"
+      ],
+      [
+        "PASS"
+      ]
+    ],
+    "wall": {
+      "max": 299.1019017079998,
+      "mean": 289.52873461639996,
+      "median": 291.3362640409998,
+      "min": 279.5738431670002,
+      "n": 5,
+      "spread": 0.06702927493520484,
+      "stdev": 7.552997899684199
+    },
+    "warmup": 1,
+    "when": "2026-08-15T15:08:47"
+  },
+  "C57": {
+    "claims": "public-ms covering-b2 adder PASS 10.33 s / 1",
+    "cmd": ".build/release/helut --bench netlist.json --degree 1024 --bench-encrypted --sing --vectors 1 --paths public-ms covering-b2 --bk-noise-sigma 128 --boolean-scale-mul 7",
+    "exits": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C57",
+    "label": "Covering-b2 k=7 sigma=128 N=1024 adder, cheaper SING",
+    "runs": 5,
+    "stability": "stable-pass",
+    "tier": "B",
+    "tool_wall": {
+      "max": 10.7379,
+      "mean": 10.71196,
+      "median": 10.7252,
+      "min": 10.6512,
+      "n": 5,
+      "spread": 0.008083765337709362,
+      "stdev": 0.03458616775533257
+    },
+    "verdicts": [
+      [
+        "PASS"
+      ],
+      [
+        "PASS"
+      ],
+      [
+        "PASS"
+      ],
+      [
+        "PASS"
+      ],
+      [
+        "PASS"
+      ]
+    ],
+    "wall": {
+      "max": 72.034709583,
+      "mean": 66.24597022479998,
+      "median": 64.80925424999987,
+      "min": 64.24944708299995,
+      "n": 5,
+      "spread": 0.12012578435123808,
+      "stdev": 3.2609944761489293
+    },
+    "warmup": 1,
+    "when": "2026-08-15T14:39:51"
+  },
+  "C58": {
+    "claims": "PASS 1.35 s / 1 (pre-wavefront)",
+    "cmd": ".build/release/helut --bench picorv32_lut6_netlist.json --degree 64 --bench-encrypted --cpu-only --sing --vectors 1 --paths blind-rotate public-ms boolean",
+    "exits": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C58",
+    "label": "PicoRV32 lut6 CPU SING N=64",
+    "runs": 5,
+    "stability": "stable-pass",
+    "tier": "A",
+    "tool_wall": {
+      "max": 0.1659,
+      "mean": 0.16312,
+      "median": 0.1621,
+      "min": 0.1608,
+      "n": 5,
+      "spread": 0.03146206045650829,
+      "stdev": 0.002134713095476765
+    },
+    "verdicts": [
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ]
+    ],
+    "wall": {
+      "max": 0.25150262500000053,
+      "mean": 0.24895752519999945,
+      "median": 0.24871062499999752,
+      "min": 0.24741841699999867,
+      "n": 5,
+      "spread": 0.016421526020458137,
+      "stdev": 0.0016810183095115024
+    },
+    "warmup": 1,
+    "when": "2026-08-15T14:12:38"
+  },
+  "C59": {
+    "claims": "PASS 0.165 s / 1",
+    "cmd": ".build/release/helut --bench picorv32_lut6_netlist.json --degree 64 --bench-encrypted --cpu-only --sing --vectors 1 --paths blind-rotate public-ms boolean",
+    "exits": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C59",
+    "label": "Sequential wavefront + identity/constant BR skip, N=64",
+    "runs": 5,
+    "stability": "stable-pass",
+    "tier": "A",
+    "tool_wall": {
+      "max": 0.1709,
+      "mean": 0.16448000000000002,
+      "median": 0.1635,
+      "min": 0.1612,
+      "n": 5,
+      "spread": 0.05932721712538218,
+      "stdev": 0.003727868023414987
+    },
+    "verdicts": [
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ]
+    ],
+    "wall": {
+      "max": 0.25858300000000156,
+      "mean": 0.25205936660000033,
+      "median": 0.25116887500000473,
+      "min": 0.2466100830000002,
+      "n": 5,
+      "spread": 0.04766879256038844,
+      "stdev": 0.004733929748559629
+    },
+    "warmup": 1,
+    "when": "2026-08-15T14:12:39"
+  },
+  "C6": {
+    "claims": "PASS, adder N<=1024",
+    "cmd": ".build/release/helut --bench netlist.json --degree 8 --bench-encrypted --cpu-only --sing --vectors 8",
+    "exits": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C6",
+    "label": "Encrypted == clear multi-netlist SING, demo N=8 adder",
+    "runs": 5,
+    "stability": "stable-pass",
+    "tier": "A",
+    "tool_wall": {
+      "max": 0.0006,
+      "mean": 0.0006,
+      "median": 0.0006,
+      "min": 0.0006,
+      "n": 5,
+      "spread": 0.0,
+      "stdev": 0.0
+    },
+    "verdicts": [
+      [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "PASS",
+        "SKIP"
+      ]
+    ],
+    "wall": {
+      "max": 0.025773834000000002,
+      "mean": 0.024406342000000004,
+      "median": 0.024045625,
+      "min": 0.023786334000000006,
+      "n": 5,
+      "spread": 0.0826553687001272,
+      "stdev": 0.0008008890218541515
+    },
+    "warmup": 1,
+    "when": "2026-08-15T14:12:07"
+  },
+  "C63": {
+    "claims": "PASS 1.72 s / 1 (best case; median 1.80)",
+    "cmd": ".build/release/helut --bench picorv32_lut6_netlist.json --degree 64 --bench-encrypted --cpu-only --sing --vectors 1 --paths public-ms covering-b2 --bk-noise-sigma 128",
+    "exits": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C63",
+    "label": "PicoRV lut6 covering-b2 noisy BK N=64, Q SING",
+    "runs": 5,
+    "stability": "stable-pass",
+    "tier": "A",
+    "tool_wall": {
+      "max": 1.808,
+      "mean": 1.7904399999999998,
+      "median": 1.7842,
+      "min": 1.7774,
+      "n": 5,
+      "spread": 0.017150543661024528,
+      "stdev": 0.012653971708518999
+    },
+    "verdicts": [
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ]
+    ],
+    "wall": {
+      "max": 1.9444567500000005,
+      "mean": 1.9289831582000005,
+      "median": 1.9243064579999967,
+      "min": 1.9157347500000057,
+      "n": 5,
+      "spread": 0.01492589700595125,
+      "stdev": 0.011531455876958318
+    },
+    "warmup": 1,
+    "when": "2026-08-15T14:12:51"
+  },
+  "C64": {
+    "claims": "adder PASS 0.264 s",
+    "cmd": ".build/release/helut --bench netlist.json --degree 1024 --bench-encrypted --cpu-only --sing --vectors 1 --paths public-ms boolean --lwe-dimension 64",
+    "exits": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C64",
+    "label": "Extract->KS n=64 closes public-MS PBS, adder poly N=1024",
+    "runs": 5,
+    "stability": "stable-pass",
+    "tier": "A",
+    "tool_wall": {
+      "max": 0.285,
+      "mean": 0.2787,
+      "median": 0.2833,
+      "min": 0.2671,
+      "n": 5,
+      "spread": 0.06318390398870445,
+      "stdev": 0.007951414968419133
+    },
+    "verdicts": [
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ]
+    ],
+    "wall": {
+      "max": 0.37134766599999836,
+      "mean": 0.35568321679999854,
+      "median": 0.3561905839999966,
+      "min": 0.34081516699999526,
+      "n": 5,
+      "spread": 0.0857195568089565,
+      "stdev": 0.012230608376369545
+    },
+    "warmup": 1,
+    "when": "2026-08-15T14:12:53"
+  },
+  "C64b": {
+    "claims": "covering-b2 adder PASS 4.22 s",
+    "cmd": ".build/release/helut --bench netlist.json --degree 1024 --bench-encrypted --cpu-only --sing --vectors 1 --paths public-ms covering-b2 --bk-noise-sigma 128 --lwe-dimension 64",
+    "exits": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C64b",
+    "label": "Extract->KS n=64 covering-b2 sigma=128, adder",
+    "runs": 5,
+    "stability": "stable-pass",
+    "tier": "A",
+    "tool_wall": {
+      "max": 4.3332,
+      "mean": 4.30274,
+      "median": 4.3041,
+      "min": 4.261,
+      "n": 5,
+      "spread": 0.016774703189981553,
+      "stdev": 0.02653446814993653
+    },
+    "verdicts": [
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ]
+    ],
+    "wall": {
+      "max": 14.262295084000002,
+      "mean": 14.0354852666,
+      "median": 14.01516375,
+      "min": 13.856056458000012,
+      "n": 5,
+      "spread": 0.028985649632526752,
+      "stdev": 0.1476272858470314
+    },
+    "warmup": 1,
+    "when": "2026-08-15T14:14:17"
+  },
+  "C67": {
+    "claims": "n=128 PASS 8.58 s",
+    "cmd": ".build/release/helut --bench netlist.json --degree 1024 --bench-encrypted --cpu-only --sing --vectors 1 --paths public-ms covering-b2 --bk-noise-sigma 128 --lwe-dimension 128",
+    "exits": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C67",
+    "label": "Covering-b2 KS ladder n=128, adder",
+    "runs": 5,
+    "stability": "stable-pass",
+    "tier": "B",
+    "tool_wall": {
+      "max": 8.8412,
+      "mean": 8.63776,
+      "median": 8.6312,
+      "min": 8.5225,
+      "n": 5,
+      "spread": 0.036924182037260146,
+      "stdev": 0.12295902976194975
+    },
+    "verdicts": [
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ]
+    ],
+    "wall": {
+      "max": 29.234764709000004,
+      "mean": 28.2748726336,
+      "median": 28.229094000000003,
+      "min": 27.792443792,
+      "n": 5,
+      "spread": 0.051093418619811294,
+      "stdev": 0.5716952177652301
+    },
+    "warmup": 1,
+    "when": "2026-08-15T14:17:16"
+  },
+  "C69": {
+    "claims": "n=256 PASS 17.1 s",
+    "cmd": ".build/release/helut --bench netlist.json --degree 1024 --bench-encrypted --cpu-only --sing --vectors 1 --paths public-ms covering-b2 --bk-noise-sigma 128 --lwe-dimension 256",
+    "exits": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C69",
+    "label": "Covering KS n=256 adder SING",
+    "runs": 5,
+    "stability": "stable-pass",
+    "tier": "B",
+    "tool_wall": {
+      "max": 17.3229,
+      "mean": 17.25732,
+      "median": 17.2831,
+      "min": 17.169,
+      "n": 5,
+      "spread": 0.00890465252182769,
+      "stdev": 0.06110484432514336
+    },
+    "verdicts": [
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ]
+    ],
+    "wall": {
+      "max": 30.49875854199999,
+      "mean": 30.271304716600007,
+      "median": 30.241732707999972,
+      "min": 30.09140375000004,
+      "n": 5,
+      "spread": 0.01346995543982804,
+      "stdev": 0.15017655418654444
+    },
+    "warmup": 1,
+    "when": "2026-08-15T14:20:17"
+  },
+  "C69fail": {
+    "claims": "n=512 SING FAIL (sum mismatch want=0 got=1)",
+    "cmd": ".build/release/helut --bench netlist.json --degree 1024 --bench-encrypted --cpu-only --sing --vectors 1 --paths public-ms covering-b2 --bk-noise-sigma 128 --lwe-dimension 512",
+    "exits": [
+      0,
+      -5,
+      -5,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C69fail",
+    "label": "NEGATIVE STABILITY: covering KS n=512 adder is claimed to FAIL",
+    "runs": 5,
+    "stability": "FLAKY:CRASH(signal 5)x2,PASSx3",
+    "tier": "B",
+    "tool_wall": {
+      "max": 35.9897,
+      "mean": 35.58953333333333,
+      "median": 35.4916,
+      "min": 35.2873,
+      "n": 3,
+      "spread": 0.01979059833876177,
+      "stdev": 0.36129578371928533
+    },
+    "verdicts": [
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [],
+      [],
+      [
+        "PASS",
+        "SKIP"
+      ],
+      [
+        "PASS",
+        "SKIP"
+      ]
+    ],
+    "wall": {
+      "max": 63.75623329199993,
+      "mean": 62.273757508599985,
+      "median": 61.84035291599997,
+      "min": 61.108668084000044,
+      "n": 5,
+      "spread": 0.042812905864172135,
+      "stdev": 1.0434241862086777
+    },
+    "warmup": 1,
+    "when": "2026-08-15T14:26:28"
+  }
+}

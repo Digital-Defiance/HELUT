@@ -1,0 +1,1135 @@
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 20…20)
+Shell evolution: ON freeRings=true WO=6 ringSeeds=3 subspace=potsdam-neighbourhood
+RIGA Option A: elite≈1% immigrants≈19% mutants=remainder (inner 26^4 message-key sweep per chromosome; scores on host)
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  8/20 (40%) tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 IC=0.0333 pos=VGOY | UKWB gamma IV-III-VIII rings=AAAA stecker=(none)
+  all-time  8/20 tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 pos=VGOY | UKWB gamma IV-III-VIII rings=AAAA stecker=(none)
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 IC=0.0372 pos=UWWO | UKWC beta III-VIII-IV rings=OYHA stecker=AZ
+  all-time  9/20 tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 pos=UWWO | UKWC beta III-VIII-IV rings=OYHA stecker=AZ
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 IC=0.0372 pos=UWWO | UKWC beta III-VIII-IV rings=OYHA stecker=AZ
+  all-time  9/20 tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 pos=UWWO | UKWC beta III-VIII-IV rings=OYHA stecker=AZ
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 IC=0.0372 pos=UWWO | UKWC beta III-VIII-IV rings=OYHA stecker=AZ
+  all-time  9/20 tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 pos=UWWO | UKWC beta III-VIII-IV rings=OYHA stecker=AZ
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 IC=0.0372 pos=UWWO | UKWC beta III-VIII-IV rings=OYHA stecker=AZ
+  all-time  9/20 tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 pos=UWWO | UKWC beta III-VIII-IV rings=OYHA stecker=AZ
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 IC=0.0360 pos=UWWO | UKWC beta III-VIII-IV rings=OYHA stecker=AZ CN
+  all-time  10/20 tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 pos=UWWO | UKWC beta III-VIII-IV rings=OYHA stecker=AZ CN
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 IC=0.0360 pos=UWWO | UKWC beta III-VIII-IV rings=OYHA stecker=AZ CN
+  all-time  10/20 tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 pos=UWWO | UKWC beta III-VIII-IV rings=OYHA stecker=AZ CN
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 IC=0.0360 pos=UWWO | UKWC beta III-VIII-IV rings=OYHA stecker=AZ CN
+  all-time  10/20 tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 pos=UWWO | UKWC beta III-VIII-IV rings=OYHA stecker=AZ CN
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 IC=0.0360 pos=UWWO | UKWC beta III-VIII-IV rings=OYHA stecker=AZ CN
+  all-time  10/20 tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 pos=UWWO | UKWC beta III-VIII-IV rings=OYHA stecker=AZ CN
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 IC=0.0360 pos=UWWO | UKWC beta III-VIII-IV rings=OYHA stecker=AZ CN
+  all-time  10/20 tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 pos=UWWO | UKWC beta III-VIII-IV rings=OYHA stecker=AZ CN
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 IC=0.0360 pos=UWWO | UKWC beta III-VIII-IV rings=OYHA stecker=AZ CN
+  all-time  10/20 tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 pos=UWWO | UKWC beta III-VIII-IV rings=OYHA stecker=AZ CN
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 IC=0.0360 pos=UWWO | UKWC beta III-VIII-IV rings=OYHA stecker=AZ CN
+  all-time  10/20 tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 pos=UWWO | UKWC beta III-VIII-IV rings=OYHA stecker=AZ CN
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 20…20)
+Shell evolution: ON freeRings=true WO=6 ringSeeds=3 subspace=potsdam-neighbourhood
+RIGA Option A: elite≈1% immigrants≈19% mutants=remainder (inner 26^4 message-key sweep per chromosome; scores on host)
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  8/20 (40%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 IC=0.0387 pos=REIS | UKWB gamma IV-III-VIII rings=AAAA stecker=(none)
+  all-time  8/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 pos=REIS | UKWB gamma IV-III-VIII rings=AAAA stecker=(none)
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  8/20 (40%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 IC=0.0387 pos=REIS | UKWB gamma IV-III-VIII rings=AAAA stecker=(none)
+  all-time  8/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 pos=REIS | UKWB gamma IV-III-VIII rings=AAAA stecker=(none)
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 IC=0.0360 pos=IUUY | UKWB beta III-IV-VIII rings=DJDN stecker=CY DU FZ GP HO LS NQ TW
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 pos=IUUY | UKWB beta III-IV-VIII rings=DJDN stecker=CY DU FZ GP HO LS NQ TW
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 IC=0.0360 pos=IUUY | UKWB beta III-IV-VIII rings=DJDN stecker=CY DU FZ GP HO LS NQ TW
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 pos=IUUY | UKWB beta III-IV-VIII rings=DJDN stecker=CY DU FZ GP HO LS NQ TW
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 IC=0.0360 pos=IUUY | UKWB beta III-IV-VIII rings=DJDN stecker=CY DU FZ GP HO LS NQ TW
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 pos=IUUY | UKWB beta III-IV-VIII rings=DJDN stecker=CY DU FZ GP HO LS NQ TW
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 IC=0.0360 pos=IUUY | UKWB beta III-IV-VIII rings=DJDN stecker=CY DU FZ GP HO LS NQ TW
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 pos=IUUY | UKWB beta III-IV-VIII rings=DJDN stecker=CY DU FZ GP HO LS NQ TW
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 IC=0.0360 pos=IUUY | UKWB beta III-IV-VIII rings=DJDN stecker=CY DU FZ GP HO LS NQ TW
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 pos=IUUY | UKWB beta III-IV-VIII rings=DJDN stecker=CY DU FZ GP HO LS NQ TW
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 IC=0.0317 pos=VXLU | UKWB beta IV-VIII-III rings=VCCH stecker=BN DG EH LX MR OT PW
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 pos=VXLU | UKWB beta IV-VIII-III rings=VCCH stecker=BN DG EH LX MR OT PW
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 IC=0.0317 pos=VXLU | UKWB beta IV-VIII-III rings=VCCH stecker=BN DG EH LX MR OT PW
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 pos=VXLU | UKWB beta IV-VIII-III rings=VCCH stecker=BN DG EH LX MR OT PW
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 IC=0.0317 pos=VXLU | UKWB beta IV-VIII-III rings=VCCH stecker=BN DG EH LX MR OT PW
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 pos=VXLU | UKWB beta IV-VIII-III rings=VCCH stecker=BN DG EH LX MR OT PW
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 IC=0.0317 pos=VXLU | UKWB beta IV-VIII-III rings=VCCH stecker=BN DG EH LX MR OT PW
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 pos=VXLU | UKWB beta IV-VIII-III rings=VCCH stecker=BN DG EH LX MR OT PW
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 IC=0.0317 pos=VXLU | UKWB beta IV-VIII-III rings=VCCH stecker=BN DG EH LX MR OT PW
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 pos=VXLU | UKWB beta IV-VIII-III rings=VCCH stecker=BN DG EH LX MR OT PW
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 20…20)
+Shell evolution: ON freeRings=true WO=6 ringSeeds=3 subspace=potsdam-neighbourhood
+RIGA Option A: elite≈1% immigrants≈19% mutants=remainder (inner 26^4 message-key sweep per chromosome; scores on host)
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  8/20 (40%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 IC=0.0395 pos=UIOD | UKWC beta III-IV-VIII rings=AACU stecker=JT LW MQ
+  all-time  8/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 pos=UIOD | UKWC beta III-IV-VIII rings=AACU stecker=JT LW MQ
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 IC=0.0387 pos=UIOD | UKWC beta III-IV-VIII rings=AACU stecker=CG JT LW MQ
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 pos=UIOD | UKWC beta III-IV-VIII rings=AACU stecker=CG JT LW MQ
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 IC=0.0395 pos=UIOD | UKWC beta III-IV-VIII rings=AACU stecker=CG JT LW MQ YZ
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 pos=UIOD | UKWC beta III-IV-VIII rings=AACU stecker=CG JT LW MQ YZ
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 IC=0.0368 pos=UIOD | UKWC beta III-IV-VIII rings=AACU stecker=CG JT MQ UW YZ
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 pos=UIOD | UKWC beta III-IV-VIII rings=AACU stecker=CG JT MQ UW YZ
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 IC=0.0368 pos=UIOD | UKWC beta III-IV-VIII rings=AACU stecker=CG JT MQ UW YZ
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 pos=UIOD | UKWC beta III-IV-VIII rings=AACU stecker=CG JT MQ UW YZ
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 IC=0.0368 pos=UIOD | UKWC beta III-IV-VIII rings=AACU stecker=CG JT MQ UW YZ
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 pos=UIOD | UKWC beta III-IV-VIII rings=AACU stecker=CG JT MQ UW YZ
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 IC=0.0368 pos=UIOD | UKWC beta III-IV-VIII rings=AACU stecker=CG JT MQ UW YZ
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 pos=UIOD | UKWC beta III-IV-VIII rings=AACU stecker=CG JT MQ UW YZ
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 IC=0.0368 pos=UIOD | UKWC beta III-IV-VIII rings=AACU stecker=CG JT MQ UW YZ
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 pos=UIOD | UKWC beta III-IV-VIII rings=AACU stecker=CG JT MQ UW YZ
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 IC=0.0379 pos=UIOD | UKWC beta III-IV-VIII rings=AACU stecker=GP JT MQ UW YZ
+  all-time  12/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 pos=UIOD | UKWC beta III-IV-VIII rings=AACU stecker=GP JT MQ UW YZ
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 IC=0.0379 pos=UIOD | UKWC beta III-IV-VIII rings=AACU stecker=GP JT MQ UW YZ
+  all-time  12/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 pos=UIOD | UKWC beta III-IV-VIII rings=AACU stecker=GP JT MQ UW YZ
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 IC=0.0379 pos=UIOD | UKWC beta III-IV-VIII rings=AACU stecker=GP JT MQ UW YZ
+  all-time  12/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 pos=UIOD | UKWC beta III-IV-VIII rings=AACU stecker=GP JT MQ UW YZ
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 IC=0.0379 pos=UIOD | UKWC beta III-IV-VIII rings=AACU stecker=GP JT MQ UW YZ
+  all-time  12/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 pos=UIOD | UKWC beta III-IV-VIII rings=AACU stecker=GP JT MQ UW YZ
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 20…20)
+Shell evolution: ON freeRings=true WO=6 ringSeeds=3 subspace=potsdam-neighbourhood
+RIGA Option A: elite≈1% immigrants≈19% mutants=remainder (inner 26^4 message-key sweep per chromosome; scores on host)
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  8/20 (40%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 IC=0.0333 pos=JWGN | UKWB gamma VIII-IV-III rings=AAAA stecker=CJ GN IX ST
+  all-time  8/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 pos=JWGN | UKWB gamma VIII-IV-III rings=AAAA stecker=CJ GN IX ST
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 IC=0.0438 pos=FAFB | UKWC beta III-VIII-IV rings=VCCH stecker=AT BH OS UY
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 pos=FAFB | UKWC beta III-VIII-IV rings=VCCH stecker=AT BH OS UY
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 IC=0.0399 pos=ILYH | UKWB gamma III-IV-VIII rings=SUDH stecker=CR FU GL HO
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 pos=ILYH | UKWB gamma III-IV-VIII rings=SUDH stecker=CR FU GL HO
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 IC=0.0399 pos=ILYH | UKWB gamma III-IV-VIII rings=SUDH stecker=CR FU GL HO
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 pos=ILYH | UKWB gamma III-IV-VIII rings=SUDH stecker=CR FU GL HO
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 IC=0.0399 pos=ILYH | UKWB gamma III-IV-VIII rings=SUDH stecker=CR FU GL HO
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 pos=ILYH | UKWB gamma III-IV-VIII rings=SUDH stecker=CR FU GL HO
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 IC=0.0399 pos=ILYH | UKWB gamma III-IV-VIII rings=SUDH stecker=CR FU GL HO
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 pos=ILYH | UKWB gamma III-IV-VIII rings=SUDH stecker=CR FU GL HO
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 IC=0.0454 pos=FAFB | UKWC beta III-VIII-IV rings=VCCH stecker=AT BH EF OS UY
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 pos=FAFB | UKWC beta III-VIII-IV rings=VCCH stecker=AT BH EF OS UY
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 IC=0.0454 pos=FAFB | UKWC beta III-VIII-IV rings=VCCH stecker=AT BH EF OS UY
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 pos=FAFB | UKWC beta III-VIII-IV rings=VCCH stecker=AT BH EF OS UY
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 IC=0.0454 pos=FAFB | UKWC beta III-VIII-IV rings=VCCH stecker=AT BH EF OS UY
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 pos=FAFB | UKWC beta III-VIII-IV rings=VCCH stecker=AT BH EF OS UY
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 IC=0.0454 pos=FAFB | UKWC beta III-VIII-IV rings=VCCH stecker=AT BH EF OS UY
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 pos=FAFB | UKWC beta III-VIII-IV rings=VCCH stecker=AT BH EF OS UY
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 IC=0.0454 pos=FAFB | UKWC beta III-VIII-IV rings=VCCH stecker=AT BH EF OS UY
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 pos=FAFB | UKWC beta III-VIII-IV rings=VCCH stecker=AT BH EF OS UY
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 IC=0.0454 pos=FAFB | UKWC beta III-VIII-IV rings=VCCH stecker=AT BH EF OS UY
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 pos=FAFB | UKWC beta III-VIII-IV rings=VCCH stecker=AT BH EF OS UY
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 20…20)
+Shell evolution: ON freeRings=true WO=6 ringSeeds=3 subspace=potsdam-neighbourhood
+RIGA Option A: elite≈1% immigrants≈19% mutants=remainder (inner 26^4 message-key sweep per chromosome; scores on host)
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  8/20 (40%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 IC=0.0454 pos=CZDE | UKWC gamma IV-VIII-III rings=AAAA stecker=BZ IU JK MO QT
+  all-time  8/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 pos=CZDE | UKWC gamma IV-VIII-III rings=AAAA stecker=BZ IU JK MO QT
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 IC=0.0423 pos=GDRR | UKWC beta VIII-IV-III rings=AACU stecker=FV GW IM JQ
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 pos=GDRR | UKWC beta VIII-IV-III rings=AACU stecker=FV GW IM JQ
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 IC=0.0423 pos=GDRR | UKWC beta VIII-IV-III rings=AACU stecker=FV GW IM JQ
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 pos=GDRR | UKWC beta VIII-IV-III rings=AACU stecker=FV GW IM JQ
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 IC=0.0423 pos=GDRR | UKWC beta VIII-IV-III rings=AACU stecker=FV GW IM JQ
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 pos=GDRR | UKWC beta VIII-IV-III rings=AACU stecker=FV GW IM JQ
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 IC=0.0423 pos=GDRR | UKWC beta VIII-IV-III rings=AACU stecker=FV GW IM JQ
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 pos=GDRR | UKWC beta VIII-IV-III rings=AACU stecker=FV GW IM JQ
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 IC=0.0423 pos=GDRR | UKWC beta VIII-IV-III rings=AACU stecker=FV GW IM JQ
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 pos=GDRR | UKWC beta VIII-IV-III rings=AACU stecker=FV GW IM JQ
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 IC=0.0423 pos=GDRR | UKWC beta VIII-IV-III rings=AACU stecker=FV GW IM JQ
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 pos=GDRR | UKWC beta VIII-IV-III rings=AACU stecker=FV GW IM JQ
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 IC=0.0423 pos=GDRR | UKWC beta VIII-IV-III rings=AACU stecker=FV GW IM JQ
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 pos=GDRR | UKWC beta VIII-IV-III rings=AACU stecker=FV GW IM JQ
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 IC=0.0423 pos=GDRR | UKWC beta VIII-IV-III rings=AACU stecker=FV GW IM JQ
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 pos=GDRR | UKWC beta VIII-IV-III rings=AACU stecker=FV GW IM JQ
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 IC=0.0423 pos=GDRR | UKWC beta VIII-IV-III rings=AACU stecker=FV GW IM JQ
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 pos=GDRR | UKWC beta VIII-IV-III rings=AACU stecker=FV GW IM JQ
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 IC=0.0423 pos=GDRR | UKWC beta VIII-IV-III rings=AACU stecker=FV GW IM JQ
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 pos=GDRR | UKWC beta VIII-IV-III rings=AACU stecker=FV GW IM JQ
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 IC=0.0419 pos=GDRR | UKWC beta VIII-IV-III rings=AACU stecker=DE FV GW IM JQ
+  all-time  12/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 pos=GDRR | UKWC beta VIII-IV-III rings=AACU stecker=DE FV GW IM JQ
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 20…20)
+Shell evolution: ON freeRings=true WO=6 ringSeeds=3 subspace=potsdam-neighbourhood
+RIGA Option A: elite≈1% immigrants≈19% mutants=remainder (inner 26^4 message-key sweep per chromosome; scores on host)
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 IC=0.0395 pos=NYSD | UKWB beta III-VIII-IV rings=LQWE stecker=(none)
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 pos=NYSD | UKWB beta III-VIII-IV rings=LQWE stecker=(none)
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 IC=0.0395 pos=NYSD | UKWB beta III-VIII-IV rings=LQWE stecker=(none)
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 pos=NYSD | UKWB beta III-VIII-IV rings=LQWE stecker=(none)
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 IC=0.0395 pos=NYSD | UKWB beta III-VIII-IV rings=LQWE stecker=(none)
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 pos=NYSD | UKWB beta III-VIII-IV rings=LQWE stecker=(none)
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 IC=0.0395 pos=NYSD | UKWB beta III-VIII-IV rings=LQWE stecker=(none)
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 pos=NYSD | UKWB beta III-VIII-IV rings=LQWE stecker=(none)
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 IC=0.0489 pos=OSHT | UKWC beta VIII-III-IV rings=LYJB stecker=FH JO
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 pos=OSHT | UKWC beta VIII-III-IV rings=LYJB stecker=FH JO
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 IC=0.0489 pos=OSHT | UKWC beta VIII-III-IV rings=LYJB stecker=FH JO
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 pos=OSHT | UKWC beta VIII-III-IV rings=LYJB stecker=FH JO
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 IC=0.0489 pos=OSHT | UKWC beta VIII-III-IV rings=LYJB stecker=FH JO
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 pos=OSHT | UKWC beta VIII-III-IV rings=LYJB stecker=FH JO
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 IC=0.0489 pos=OSHT | UKWC beta VIII-III-IV rings=LYJB stecker=FH JO
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 pos=OSHT | UKWC beta VIII-III-IV rings=LYJB stecker=FH JO
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 IC=0.0489 pos=OSHT | UKWC beta VIII-III-IV rings=LYJB stecker=FH JO
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 pos=OSHT | UKWC beta VIII-III-IV rings=LYJB stecker=FH JO
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 IC=0.0489 pos=OSHT | UKWC beta VIII-III-IV rings=LYJB stecker=FH JO
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 pos=OSHT | UKWC beta VIII-III-IV rings=LYJB stecker=FH JO
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 IC=0.0489 pos=OSHT | UKWC beta VIII-III-IV rings=LYJB stecker=FH JO
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 pos=OSHT | UKWC beta VIII-III-IV rings=LYJB stecker=FH JO
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 IC=0.0489 pos=OSHT | UKWC beta VIII-III-IV rings=LYJB stecker=FH JO
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 pos=OSHT | UKWC beta VIII-III-IV rings=LYJB stecker=FH JO
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 20…20)
+Shell evolution: ON freeRings=true WO=6 ringSeeds=3 subspace=potsdam-neighbourhood
+RIGA Option A: elite≈1% immigrants≈19% mutants=remainder (inner 26^4 message-key sweep per chromosome; scores on host)
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  8/20 (40%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 IC=0.0348 pos=GJJY | UKWC beta III-VIII-IV rings=YXVQ stecker=AY EW GQ JN KT LS PV
+  all-time  8/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 pos=GJJY | UKWC beta III-VIII-IV rings=YXVQ stecker=AY EW GQ JN KT LS PV
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 IC=0.0376 pos=NFNL | UKWC beta VIII-IV-III rings=CKTQ stecker=GK
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 pos=NFNL | UKWC beta VIII-IV-III rings=CKTQ stecker=GK
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 IC=0.0376 pos=NFNL | UKWC beta VIII-IV-III rings=CKTQ stecker=GK
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 pos=NFNL | UKWC beta VIII-IV-III rings=CKTQ stecker=GK
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 IC=0.0376 pos=NFNL | UKWC beta VIII-IV-III rings=CKTQ stecker=GK
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 pos=NFNL | UKWC beta VIII-IV-III rings=CKTQ stecker=GK
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 IC=0.0376 pos=NFNL | UKWC beta VIII-IV-III rings=CKTQ stecker=GK
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 pos=NFNL | UKWC beta VIII-IV-III rings=CKTQ stecker=GK
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 IC=0.0376 pos=NFNL | UKWC beta VIII-IV-III rings=CKTQ stecker=GK
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 pos=NFNL | UKWC beta VIII-IV-III rings=CKTQ stecker=GK
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 IC=0.0333 pos=EJSW | UKWC gamma VIII-III-IV rings=AAAA stecker=DH FZ MX VY
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 pos=EJSW | UKWC gamma VIII-III-IV rings=AAAA stecker=DH FZ MX VY
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 IC=0.0333 pos=EJSW | UKWC gamma VIII-III-IV rings=AAAA stecker=DH FZ MX VY
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 pos=EJSW | UKWC gamma VIII-III-IV rings=AAAA stecker=DH FZ MX VY
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 IC=0.0321 pos=EJSW | UKWC gamma VIII-III-IV rings=AAAA stecker=BR DH FZ MX VY
+  all-time  12/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 pos=EJSW | UKWC gamma VIII-III-IV rings=AAAA stecker=BR DH FZ MX VY
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 IC=0.0321 pos=EJSW | UKWC gamma VIII-III-IV rings=AAAA stecker=BR DH FZ MX VY
+  all-time  12/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 pos=EJSW | UKWC gamma VIII-III-IV rings=AAAA stecker=BR DH FZ MX VY
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 IC=0.0321 pos=EJSW | UKWC gamma VIII-III-IV rings=AAAA stecker=BR DH FZ MX VY
+  all-time  12/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 pos=EJSW | UKWC gamma VIII-III-IV rings=AAAA stecker=BR DH FZ MX VY
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 IC=0.0321 pos=EJSW | UKWC gamma VIII-III-IV rings=AAAA stecker=BR DH FZ MX VY
+  all-time  12/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 pos=EJSW | UKWC gamma VIII-III-IV rings=AAAA stecker=BR DH FZ MX VY
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 20…20)
+Shell evolution: ON freeRings=true WO=6 ringSeeds=3 subspace=potsdam-neighbourhood
+RIGA Option A: elite≈1% immigrants≈19% mutants=remainder (inner 26^4 message-key sweep per chromosome; scores on host)
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 IC=0.0352 pos=ZBUN | UKWC gamma III-VIII-IV rings=AAAA stecker=(none)
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 pos=ZBUN | UKWC gamma III-VIII-IV rings=AAAA stecker=(none)
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 IC=0.0329 pos=NVME | UKWC gamma VIII-IV-III rings=MECH stecker=CG DE FI HY OW PU QS RZ
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 pos=NVME | UKWC gamma VIII-IV-III rings=MECH stecker=CG DE FI HY OW PU QS RZ
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 IC=0.0329 pos=NVME | UKWC gamma VIII-IV-III rings=MECH stecker=CG DE FI HY OW PU QS RZ
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 pos=NVME | UKWC gamma VIII-IV-III rings=MECH stecker=CG DE FI HY OW PU QS RZ
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 IC=0.0329 pos=NVME | UKWC gamma VIII-IV-III rings=MECH stecker=CG DE FI HY OW PU QS RZ
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 pos=NVME | UKWC gamma VIII-IV-III rings=MECH stecker=CG DE FI HY OW PU QS RZ
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 IC=0.0329 pos=NVME | UKWC gamma VIII-IV-III rings=MECH stecker=CG DE FI HY OW PU QS RZ
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 pos=NVME | UKWC gamma VIII-IV-III rings=MECH stecker=CG DE FI HY OW PU QS RZ
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 IC=0.0329 pos=NVME | UKWC gamma VIII-IV-III rings=MECH stecker=CG DE FI HY OW PU QS RZ
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 pos=NVME | UKWC gamma VIII-IV-III rings=MECH stecker=CG DE FI HY OW PU QS RZ
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 IC=0.0329 pos=NVME | UKWC gamma VIII-IV-III rings=MECH stecker=CG DE FI HY OW PU QS RZ
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 pos=NVME | UKWC gamma VIII-IV-III rings=MECH stecker=CG DE FI HY OW PU QS RZ
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 IC=0.0329 pos=NVME | UKWC gamma VIII-IV-III rings=MECH stecker=CG DE FI HY OW PU QS RZ
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 pos=NVME | UKWC gamma VIII-IV-III rings=MECH stecker=CG DE FI HY OW PU QS RZ
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 IC=0.0329 pos=NVME | UKWC gamma VIII-IV-III rings=MECH stecker=CG DE FI HY OW PU QS RZ
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 pos=NVME | UKWC gamma VIII-IV-III rings=MECH stecker=CG DE FI HY OW PU QS RZ
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 IC=0.0329 pos=NVME | UKWC gamma VIII-IV-III rings=MECH stecker=CG DE FI HY OW PU QS RZ
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 pos=NVME | UKWC gamma VIII-IV-III rings=MECH stecker=CG DE FI HY OW PU QS RZ
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 IC=0.0352 pos=ABQE | UKWC gamma VIII-IV-III rings=ZKGH stecker=CG DE FI HY OX PU QS RZ
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 pos=ABQE | UKWC gamma VIII-IV-III rings=ZKGH stecker=CG DE FI HY OX PU QS RZ
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 IC=0.0352 pos=ABQE | UKWC gamma VIII-IV-III rings=ZKGH stecker=CG DE FI HY OX PU QS RZ
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 pos=ABQE | UKWC gamma VIII-IV-III rings=ZKGH stecker=CG DE FI HY OX PU QS RZ
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 19…19)
+Shell evolution: ON freeRings=true WO=6 ringSeeds=3 subspace=potsdam-neighbourhood
+RIGA Option A: elite≈1% immigrants≈19% mutants=remainder (inner 26^4 message-key sweep per chromosome; scores on host)
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  8/19 (42%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 IC=0.0344 pos=DKSB | UKWB gamma IV-VIII-III rings=KQST stecker=AH DS GV JO
+  all-time  8/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 pos=DKSB | UKWB gamma IV-VIII-III rings=KQST stecker=AH DS GV JO
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  9/19 (47%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 IC=0.0352 pos=DKSB | UKWB gamma IV-VIII-III rings=KQST stecker=AH BT DS GV JO
+  all-time  9/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 pos=DKSB | UKWB gamma IV-VIII-III rings=KQST stecker=AH BT DS GV JO
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  9/19 (47%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 IC=0.0352 pos=DKSB | UKWB gamma IV-VIII-III rings=KQST stecker=AH BT DS GV JO
+  all-time  9/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 pos=DKSB | UKWB gamma IV-VIII-III rings=KQST stecker=AH BT DS GV JO
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  9/19 (47%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 IC=0.0352 pos=DKSB | UKWB gamma IV-VIII-III rings=KQST stecker=AH BT DS GV JO
+  all-time  9/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 pos=DKSB | UKWB gamma IV-VIII-III rings=KQST stecker=AH BT DS GV JO
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 IC=0.0352 pos=DKSB | UKWB gamma IV-VIII-III rings=KQST stecker=AH BT CL DS GV JO
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 pos=DKSB | UKWB gamma IV-VIII-III rings=KQST stecker=AH BT CL DS GV JO
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 IC=0.0352 pos=DKSB | UKWB gamma IV-VIII-III rings=KQST stecker=AH BT CL DS GV JO
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 pos=DKSB | UKWB gamma IV-VIII-III rings=KQST stecker=AH BT CL DS GV JO
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 IC=0.0352 pos=DKSB | UKWB gamma IV-VIII-III rings=KQST stecker=AH BT CL DS GV JO
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 pos=DKSB | UKWB gamma IV-VIII-III rings=KQST stecker=AH BT CL DS GV JO
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 IC=0.0352 pos=DKSB | UKWB gamma IV-VIII-III rings=KQST stecker=AH BT CL DS GV JO
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 pos=DKSB | UKWB gamma IV-VIII-III rings=KQST stecker=AH BT CL DS GV JO
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 IC=0.0352 pos=DKSB | UKWB gamma IV-VIII-III rings=KQST stecker=AH BT CL DS GV JO
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 pos=DKSB | UKWB gamma IV-VIII-III rings=KQST stecker=AH BT CL DS GV JO
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 IC=0.0352 pos=DKSB | UKWB gamma IV-VIII-III rings=KQST stecker=AH BT CL DS GV JO
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 pos=DKSB | UKWB gamma IV-VIII-III rings=KQST stecker=AH BT CL DS GV JO
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  11/19 (58%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 IC=0.0372 pos=YBXM | UKWC beta IV-VIII-III rings=KZIM stecker=AE BT DW FX GJ IQ KS LU PV YZ
+  all-time  11/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 pos=YBXM | UKWC beta IV-VIII-III rings=KZIM stecker=AE BT DW FX GJ IQ KS LU PV YZ
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  11/19 (58%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 IC=0.0372 pos=YBXM | UKWC beta IV-VIII-III rings=KZIM stecker=AE BT DW FX GJ IQ KS LU PV YZ
+  all-time  11/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 pos=YBXM | UKWC beta IV-VIII-III rings=KZIM stecker=AE BT DW FX GJ IQ KS LU PV YZ
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 19…19)
+Shell evolution: ON freeRings=true WO=6 ringSeeds=3 subspace=potsdam-neighbourhood
+RIGA Option A: elite≈1% immigrants≈19% mutants=remainder (inner 26^4 message-key sweep per chromosome; scores on host)
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  8/19 (42%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 IC=0.0415 pos=EBLE | UKWC gamma VIII-IV-III rings=AACU stecker=JS
+  all-time  8/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 pos=EBLE | UKWC gamma VIII-IV-III rings=AACU stecker=JS
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  9/19 (47%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 IC=0.0426 pos=JBDE | UKWC gamma VIII-IV-III rings=AACU stecker=ST
+  all-time  9/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 pos=JBDE | UKWC gamma VIII-IV-III rings=AACU stecker=ST
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  9/19 (47%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 IC=0.0426 pos=JBDE | UKWC gamma VIII-IV-III rings=AACU stecker=ST
+  all-time  9/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 pos=JBDE | UKWC gamma VIII-IV-III rings=AACU stecker=ST
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  9/19 (47%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 IC=0.0426 pos=JBDE | UKWC gamma VIII-IV-III rings=AACU stecker=ST
+  all-time  9/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 pos=JBDE | UKWC gamma VIII-IV-III rings=AACU stecker=ST
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  9/19 (47%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 IC=0.0426 pos=JBDE | UKWC gamma VIII-IV-III rings=AACU stecker=ST
+  all-time  9/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 pos=JBDE | UKWC gamma VIII-IV-III rings=AACU stecker=ST
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  9/19 (47%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 IC=0.0426 pos=JBDE | UKWC gamma VIII-IV-III rings=AACU stecker=ST
+  all-time  9/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 pos=JBDE | UKWC gamma VIII-IV-III rings=AACU stecker=ST
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  9/19 (47%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 IC=0.0426 pos=JBDE | UKWC gamma VIII-IV-III rings=AACU stecker=ST
+  all-time  9/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 pos=JBDE | UKWC gamma VIII-IV-III rings=AACU stecker=ST
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  9/19 (47%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 IC=0.0426 pos=JBDE | UKWC gamma VIII-IV-III rings=AACU stecker=ST
+  all-time  9/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 pos=JBDE | UKWC gamma VIII-IV-III rings=AACU stecker=ST
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 IC=0.0391 pos=KPCY | UKWC beta III-VIII-IV rings=GEIT stecker=CO DW FX GI KU LY MP NV
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 pos=KPCY | UKWC beta III-VIII-IV rings=GEIT stecker=CO DW FX GI KU LY MP NV
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 IC=0.0391 pos=KPCY | UKWC beta III-VIII-IV rings=GEIT stecker=CO DW FX GI KU LY MP NV
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 pos=KPCY | UKWC beta III-VIII-IV rings=GEIT stecker=CO DW FX GI KU LY MP NV
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  11/19 (58%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 IC=0.0438 pos=JBDE | UKWC gamma VIII-IV-III rings=AACU stecker=FJ ST
+  all-time  11/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 pos=JBDE | UKWC gamma VIII-IV-III rings=AACU stecker=FJ ST
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  11/19 (58%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 IC=0.0438 pos=JBDE | UKWC gamma VIII-IV-III rings=AACU stecker=FJ ST
+  all-time  11/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 pos=JBDE | UKWC gamma VIII-IV-III rings=AACU stecker=FJ ST
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 19…19)
+Shell evolution: ON freeRings=true WO=6 ringSeeds=3 subspace=potsdam-neighbourhood
+RIGA Option A: elite≈1% immigrants≈19% mutants=remainder (inner 26^4 message-key sweep per chromosome; scores on host)
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  8/19 (42%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 IC=0.0372 pos=ISUU | UKWB gamma IV-VIII-III rings=RMUT stecker=AT CZ FS IJ LN MX OP QV WY
+  all-time  8/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 pos=ISUU | UKWB gamma IV-VIII-III rings=RMUT stecker=AT CZ FS IJ LN MX OP QV WY
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  8/19 (42%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 IC=0.0372 pos=ISUU | UKWB gamma IV-VIII-III rings=RMUT stecker=AT CZ FS IJ LN MX OP QV WY
+  all-time  8/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 pos=ISUU | UKWB gamma IV-VIII-III rings=RMUT stecker=AT CZ FS IJ LN MX OP QV WY
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  9/19 (47%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 IC=0.0419 pos=ISUU | UKWB gamma IV-VIII-III rings=RMUT stecker=AT CZ EY FS IJ LN MX OP QV
+  all-time  9/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 pos=ISUU | UKWB gamma IV-VIII-III rings=RMUT stecker=AT CZ EY FS IJ LN MX OP QV
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  9/19 (47%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 IC=0.0419 pos=ISUU | UKWB gamma IV-VIII-III rings=RMUT stecker=AT CZ EY FS IJ LN MX OP QV
+  all-time  9/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 pos=ISUU | UKWB gamma IV-VIII-III rings=RMUT stecker=AT CZ EY FS IJ LN MX OP QV
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  9/19 (47%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 IC=0.0419 pos=ISUU | UKWB gamma IV-VIII-III rings=RMUT stecker=AT CZ EY FS IJ LN MX OP QV
+  all-time  9/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 pos=ISUU | UKWB gamma IV-VIII-III rings=RMUT stecker=AT CZ EY FS IJ LN MX OP QV
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  9/19 (47%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 IC=0.0419 pos=ISUU | UKWB gamma IV-VIII-III rings=RMUT stecker=AT CZ EY FS IJ LN MX OP QV
+  all-time  9/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 pos=ISUU | UKWB gamma IV-VIII-III rings=RMUT stecker=AT CZ EY FS IJ LN MX OP QV
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  9/19 (47%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 IC=0.0419 pos=ISUU | UKWB gamma IV-VIII-III rings=RMUT stecker=AT CZ EY FS IJ LN MX OP QV
+  all-time  9/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 pos=ISUU | UKWB gamma IV-VIII-III rings=RMUT stecker=AT CZ EY FS IJ LN MX OP QV
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  9/19 (47%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 IC=0.0419 pos=ISUU | UKWB gamma IV-VIII-III rings=RMUT stecker=AT CZ EY FS IJ LN MX OP QV
+  all-time  9/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 pos=ISUU | UKWB gamma IV-VIII-III rings=RMUT stecker=AT CZ EY FS IJ LN MX OP QV
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  9/19 (47%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 IC=0.0419 pos=ISUU | UKWB gamma IV-VIII-III rings=RMUT stecker=AT CZ EY FS IJ LN MX OP QV
+  all-time  9/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 pos=ISUU | UKWB gamma IV-VIII-III rings=RMUT stecker=AT CZ EY FS IJ LN MX OP QV
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 IC=0.0348 pos=DMWM | UKWC beta VIII-IV-III rings=ICRB stecker=AW UZ
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 pos=DMWM | UKWC beta VIII-IV-III rings=ICRB stecker=AW UZ
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 IC=0.0348 pos=DMWM | UKWC beta VIII-IV-III rings=ICRB stecker=AW UZ
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 pos=DMWM | UKWC beta VIII-IV-III rings=ICRB stecker=AW UZ
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 IC=0.0348 pos=DMWM | UKWC beta VIII-IV-III rings=ICRB stecker=AW UZ
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 pos=DMWM | UKWC beta VIII-IV-III rings=ICRB stecker=AW UZ
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 19…19)
+Shell evolution: ON freeRings=true WO=6 ringSeeds=3 subspace=potsdam-neighbourhood
+RIGA Option A: elite≈1% immigrants≈19% mutants=remainder (inner 26^4 message-key sweep per chromosome; scores on host)
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  8/19 (42%) tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 IC=0.0391 pos=OSFI | UKWB gamma III-IV-VIII rings=UWCR stecker=DO FH JV LZ QW TX
+  all-time  8/19 tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 pos=OSFI | UKWB gamma III-IV-VIII rings=UWCR stecker=DO FH JV LZ QW TX
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  8/19 (42%) tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 IC=0.0391 pos=OSFI | UKWB gamma III-IV-VIII rings=UWCR stecker=DO FH JV LZ QW TX
+  all-time  8/19 tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 pos=OSFI | UKWB gamma III-IV-VIII rings=UWCR stecker=DO FH JV LZ QW TX
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  8/19 (42%) tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 IC=0.0391 pos=OSFI | UKWB gamma III-IV-VIII rings=UWCR stecker=DO FH JV LZ QW TX
+  all-time  8/19 tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 pos=OSFI | UKWB gamma III-IV-VIII rings=UWCR stecker=DO FH JV LZ QW TX
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  9/19 (47%) tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 IC=0.0383 pos=LGGD | UKWB beta VIII-IV-III rings=AAAA stecker=AW DG FS MY NQ TV
+  all-time  9/19 tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 pos=LGGD | UKWB beta VIII-IV-III rings=AAAA stecker=AW DG FS MY NQ TV
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  9/19 (47%) tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 IC=0.0383 pos=LGGD | UKWB beta VIII-IV-III rings=AAAA stecker=AW DG FS MY NQ TV
+  all-time  9/19 tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 pos=LGGD | UKWB beta VIII-IV-III rings=AAAA stecker=AW DG FS MY NQ TV
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 IC=0.0368 pos=WTYP | UKWB beta III-IV-VIII rings=TXLH stecker=AY BF DH EG IN JL PT SV XZ
+  all-time  10/19 tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 pos=WTYP | UKWB beta III-IV-VIII rings=TXLH stecker=AY BF DH EG IN JL PT SV XZ
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 IC=0.0368 pos=WTYP | UKWB beta III-IV-VIII rings=TXLH stecker=AY BF DH EG IN JL PT SV XZ
+  all-time  10/19 tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 pos=WTYP | UKWB beta III-IV-VIII rings=TXLH stecker=AY BF DH EG IN JL PT SV XZ
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 IC=0.0368 pos=WTYP | UKWB beta III-IV-VIII rings=TXLH stecker=AY BF DH EG IN JL PT SV XZ
+  all-time  10/19 tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 pos=WTYP | UKWB beta III-IV-VIII rings=TXLH stecker=AY BF DH EG IN JL PT SV XZ
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 IC=0.0368 pos=WTYP | UKWB beta III-IV-VIII rings=TXLH stecker=AY BF DH EG IN JL PT SV XZ
+  all-time  10/19 tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 pos=WTYP | UKWB beta III-IV-VIII rings=TXLH stecker=AY BF DH EG IN JL PT SV XZ
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 IC=0.0368 pos=WTYP | UKWB beta III-IV-VIII rings=TXLH stecker=AY BF DH EG IN JL PT SV XZ
+  all-time  10/19 tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 pos=WTYP | UKWB beta III-IV-VIII rings=TXLH stecker=AY BF DH EG IN JL PT SV XZ
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 IC=0.0368 pos=WTYP | UKWB beta III-IV-VIII rings=TXLH stecker=AY BF DH EG IN JL PT SV XZ
+  all-time  10/19 tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 pos=WTYP | UKWB beta III-IV-VIII rings=TXLH stecker=AY BF DH EG IN JL PT SV XZ
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 IC=0.0368 pos=WTYP | UKWB beta III-IV-VIII rings=TXLH stecker=AY BF DH EG IN JL PT SV XZ
+  all-time  10/19 tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 pos=WTYP | UKWB beta III-IV-VIII rings=TXLH stecker=AY BF DH EG IN JL PT SV XZ
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 20…20)
+Shell evolution: ON freeRings=true WO=126 ringSeeds=3 subspace=naval-two-notch-right
+RIGA Option A: elite≈1% immigrants≈19% mutants=remainder (inner 26^4 message-key sweep per chromosome; scores on host)
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  8/20 (40%) tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 IC=0.0352 pos=LUXH | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+  all-time  8/20 tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 pos=LUXH | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 IC=0.0364 pos=TUDD | UKWC beta IV-III-VIII rings=XWMK stecker=EH JR SY TW
+  all-time  9/20 tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 pos=TUDD | UKWC beta IV-III-VIII rings=XWMK stecker=EH JR SY TW
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 IC=0.0364 pos=TUDD | UKWC beta IV-III-VIII rings=XWMK stecker=EH JR SY TW
+  all-time  9/20 tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 pos=TUDD | UKWC beta IV-III-VIII rings=XWMK stecker=EH JR SY TW
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 IC=0.0364 pos=TUDD | UKWC beta IV-III-VIII rings=XWMK stecker=EH JR SY TW
+  all-time  9/20 tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 pos=TUDD | UKWC beta IV-III-VIII rings=XWMK stecker=EH JR SY TW
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 IC=0.0364 pos=TUDD | UKWC beta IV-III-VIII rings=XWMK stecker=EH JR SY TW
+  all-time  9/20 tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 pos=TUDD | UKWC beta IV-III-VIII rings=XWMK stecker=EH JR SY TW
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 IC=0.0364 pos=TUDD | UKWC beta IV-III-VIII rings=XWMK stecker=EH JR SY TW
+  all-time  9/20 tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 pos=TUDD | UKWC beta IV-III-VIII rings=XWMK stecker=EH JR SY TW
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 IC=0.0364 pos=TUDD | UKWC beta IV-III-VIII rings=XWMK stecker=EH JR SY TW
+  all-time  9/20 tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 pos=TUDD | UKWC beta IV-III-VIII rings=XWMK stecker=EH JR SY TW
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 IC=0.0364 pos=TUDD | UKWC beta IV-III-VIII rings=XWMK stecker=EH JR SY TW
+  all-time  9/20 tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 pos=TUDD | UKWC beta IV-III-VIII rings=XWMK stecker=EH JR SY TW
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 IC=0.0360 pos=TUDD | UKWC beta IV-III-VIII rings=XWMK stecker=EH JR MZ SY TW
+  all-time  10/20 tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 pos=TUDD | UKWC beta IV-III-VIII rings=XWMK stecker=EH JR MZ SY TW
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 IC=0.0360 pos=TUDD | UKWC beta IV-III-VIII rings=XWMK stecker=EH JR MZ SY TW
+  all-time  10/20 tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 pos=TUDD | UKWC beta IV-III-VIII rings=XWMK stecker=EH JR MZ SY TW
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 IC=0.0360 pos=TUDD | UKWC beta IV-III-VIII rings=XWMK stecker=EH JR MZ SY TW
+  all-time  10/20 tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 pos=TUDD | UKWC beta IV-III-VIII rings=XWMK stecker=EH JR MZ SY TW
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 IC=0.0344 pos=TUDD | UKWC beta IV-III-VIII rings=XWMK stecker=EH JR MZ PQ SY TW
+  all-time  11/20 tmpl=keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 pos=TUDD | UKWC beta IV-III-VIII rings=XWMK stecker=EH JR MZ PQ SY TW
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 20…20)
+Shell evolution: ON freeRings=true WO=126 ringSeeds=3 subspace=naval-two-notch-right
+RIGA Option A: elite≈1% immigrants≈19% mutants=remainder (inner 26^4 message-key sweep per chromosome; scores on host)
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  8/20 (40%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 IC=0.0372 pos=OOXS | UKWB gamma I-VII-VIII rings=AAAA stecker=CX LV
+  all-time  8/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 pos=OOXS | UKWB gamma I-VII-VIII rings=AAAA stecker=CX LV
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 IC=0.0426 pos=WPWC | UKWC gamma VII-IV-VI rings=AACU stecker=BF DT EK GJ NR WZ
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 pos=WPWC | UKWC gamma VII-IV-VI rings=AACU stecker=BF DT EK GJ NR WZ
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 IC=0.0438 pos=WPWC | UKWC gamma VII-IV-VI rings=AACU stecker=BF DT EK GJ HM NR WZ
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 pos=WPWC | UKWC gamma VII-IV-VI rings=AACU stecker=BF DT EK GJ HM NR WZ
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 IC=0.0438 pos=WPWC | UKWC gamma VII-IV-VI rings=AACU stecker=BF DT EK GJ HM NR WZ
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 pos=WPWC | UKWC gamma VII-IV-VI rings=AACU stecker=BF DT EK GJ HM NR WZ
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 IC=0.0438 pos=WPWC | UKWC gamma VII-IV-VI rings=AACU stecker=BF DT EK GJ HM NR WZ
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 pos=WPWC | UKWC gamma VII-IV-VI rings=AACU stecker=BF DT EK GJ HM NR WZ
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 IC=0.0438 pos=WPWC | UKWC gamma VII-IV-VI rings=AACU stecker=BF DT EK GJ HM NR WZ
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 pos=WPWC | UKWC gamma VII-IV-VI rings=AACU stecker=BF DT EK GJ HM NR WZ
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 IC=0.0415 pos=WPWC | UKWC gamma VII-IV-VI rings=AACU stecker=DT EK GJ HM NR OQ WZ
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 pos=WPWC | UKWC gamma VII-IV-VI rings=AACU stecker=DT EK GJ HM NR OQ WZ
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 IC=0.0415 pos=WPWC | UKWC gamma VII-IV-VI rings=AACU stecker=DT EK GJ HM NR OQ WZ
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 pos=WPWC | UKWC gamma VII-IV-VI rings=AACU stecker=DT EK GJ HM NR OQ WZ
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 IC=0.0415 pos=WPWC | UKWC gamma VII-IV-VI rings=AACU stecker=DT EK GJ HM NR OQ WZ
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 pos=WPWC | UKWC gamma VII-IV-VI rings=AACU stecker=DT EK GJ HM NR OQ WZ
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 IC=0.0415 pos=WPWC | UKWC gamma VII-IV-VI rings=AACU stecker=DT EK GJ HM NR OQ WZ
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 pos=WPWC | UKWC gamma VII-IV-VI rings=AACU stecker=DT EK GJ HM NR OQ WZ
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 IC=0.0415 pos=WPWC | UKWC gamma VII-IV-VI rings=AACU stecker=DT EK GJ HM NR OQ WZ
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 pos=WPWC | UKWC gamma VII-IV-VI rings=AACU stecker=DT EK GJ HM NR OQ WZ
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 IC=0.0415 pos=WPWC | UKWC gamma VII-IV-VI rings=AACU stecker=DT EK GJ HM NR OQ WZ
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 pos=WPWC | UKWC gamma VII-IV-VI rings=AACU stecker=DT EK GJ HM NR OQ WZ
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 20…20)
+Shell evolution: ON freeRings=true WO=126 ringSeeds=3 subspace=naval-two-notch-right
+RIGA Option A: elite≈1% immigrants≈19% mutants=remainder (inner 26^4 message-key sweep per chromosome; scores on host)
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 IC=0.0430 pos=UJVU | UKWB gamma VIII-III-VII rings=AACU stecker=AV BC DH EF JQ KZ LU MY OT
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 pos=UJVU | UKWB gamma VIII-III-VII rings=AACU stecker=AV BC DH EF JQ KZ LU MY OT
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 IC=0.0473 pos=UJVU | UKWB gamma VIII-III-VII rings=AACU stecker=AV DH EF JQ KZ LU MY OT RX
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 pos=UJVU | UKWB gamma VIII-III-VII rings=AACU stecker=AV DH EF JQ KZ LU MY OT RX
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 IC=0.0473 pos=UJVU | UKWB gamma VIII-III-VII rings=AACU stecker=AV DH EF JQ KZ LU MY OT RX
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 pos=UJVU | UKWB gamma VIII-III-VII rings=AACU stecker=AV DH EF JQ KZ LU MY OT RX
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 IC=0.0473 pos=UJVU | UKWB gamma VIII-III-VII rings=AACU stecker=AV DH EF JQ KZ LU MY OT RX
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 pos=UJVU | UKWB gamma VIII-III-VII rings=AACU stecker=AV DH EF JQ KZ LU MY OT RX
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 IC=0.0466 pos=UJVU | UKWB gamma VIII-III-VII rings=AACU stecker=AV DH EF KZ LU MY OT RX
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 pos=UJVU | UKWB gamma VIII-III-VII rings=AACU stecker=AV DH EF KZ LU MY OT RX
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 IC=0.0466 pos=UJVU | UKWB gamma VIII-III-VII rings=AACU stecker=AV DH EF KZ LU MY OT RX
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 pos=UJVU | UKWB gamma VIII-III-VII rings=AACU stecker=AV DH EF KZ LU MY OT RX
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 IC=0.0466 pos=UJVU | UKWB gamma VIII-III-VII rings=AACU stecker=AV DH EF KZ LU MY OT RX
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 pos=UJVU | UKWB gamma VIII-III-VII rings=AACU stecker=AV DH EF KZ LU MY OT RX
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 IC=0.0466 pos=UJVU | UKWB gamma VIII-III-VII rings=AACU stecker=AV DH EF KZ LU MY OT RX
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 pos=UJVU | UKWB gamma VIII-III-VII rings=AACU stecker=AV DH EF KZ LU MY OT RX
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 IC=0.0466 pos=UJVU | UKWB gamma VIII-III-VII rings=AACU stecker=AV DH EF KZ LU MY OT RX
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 pos=UJVU | UKWB gamma VIII-III-VII rings=AACU stecker=AV DH EF KZ LU MY OT RX
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 IC=0.0466 pos=UJVU | UKWB gamma VIII-III-VII rings=AACU stecker=AV DH EF KZ LU MY OT RX
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 pos=UJVU | UKWB gamma VIII-III-VII rings=AACU stecker=AV DH EF KZ LU MY OT RX
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 IC=0.0466 pos=UJVU | UKWB gamma VIII-III-VII rings=AACU stecker=AV DH EF KZ LU MY OT RX
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 pos=UJVU | UKWB gamma VIII-III-VII rings=AACU stecker=AV DH EF KZ LU MY OT RX
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 IC=0.0466 pos=UJVU | UKWB gamma VIII-III-VII rings=AACU stecker=AV DH EF KZ LU MY OT RX
+  all-time  11/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 pos=UJVU | UKWB gamma VIII-III-VII rings=AACU stecker=AV DH EF KZ LU MY OT RX
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 20…20)
+Shell evolution: ON freeRings=true WO=126 ringSeeds=3 subspace=naval-two-notch-right
+RIGA Option A: elite≈1% immigrants≈19% mutants=remainder (inner 26^4 message-key sweep per chromosome; scores on host)
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  8/20 (40%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 IC=0.0446 pos=DHJV | UKWB beta V-IV-VII rings=AAAA stecker=CW DE GP JK MS OY
+  all-time  8/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 pos=DHJV | UKWB beta V-IV-VII rings=AAAA stecker=CW DE GP JK MS OY
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 IC=0.0466 pos=DHJV | UKWB beta V-IV-VII rings=AAAA stecker=CW DE FX GP JK MS OY
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 pos=DHJV | UKWB beta V-IV-VII rings=AAAA stecker=CW DE FX GP JK MS OY
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 IC=0.0466 pos=DHJV | UKWB beta V-IV-VII rings=AAAA stecker=CW DE FX GP JK MS OY
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 pos=DHJV | UKWB beta V-IV-VII rings=AAAA stecker=CW DE FX GP JK MS OY
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 IC=0.0466 pos=DHJV | UKWB beta V-IV-VII rings=AAAA stecker=CW DE FX GP JK MS OY
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 pos=DHJV | UKWB beta V-IV-VII rings=AAAA stecker=CW DE FX GP JK MS OY
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 IC=0.0466 pos=DHJV | UKWB beta V-IV-VII rings=AAAA stecker=CW DE FX GP JK MS OY
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 pos=DHJV | UKWB beta V-IV-VII rings=AAAA stecker=CW DE FX GP JK MS OY
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 IC=0.0426 pos=RCGE | UKWB beta VII-IV-VI rings=VOAH stecker=AS BR DO EI LV PQ TU
+  all-time  12/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 pos=RCGE | UKWB beta VII-IV-VI rings=VOAH stecker=AS BR DO EI LV PQ TU
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 IC=0.0426 pos=RCGE | UKWB beta VII-IV-VI rings=VOAH stecker=AS BR DO EI LV PQ TU
+  all-time  12/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 pos=RCGE | UKWB beta VII-IV-VI rings=VOAH stecker=AS BR DO EI LV PQ TU
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 IC=0.0426 pos=RCGE | UKWB beta VII-IV-VI rings=VOAH stecker=AS BR DO EI LV PQ TU
+  all-time  12/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 pos=RCGE | UKWB beta VII-IV-VI rings=VOAH stecker=AS BR DO EI LV PQ TU
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 IC=0.0426 pos=RCGE | UKWB beta VII-IV-VI rings=VOAH stecker=AS BR DO EI LV PQ TU
+  all-time  12/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 pos=RCGE | UKWB beta VII-IV-VI rings=VOAH stecker=AS BR DO EI LV PQ TU
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 IC=0.0426 pos=RCGE | UKWB beta VII-IV-VI rings=VOAH stecker=AS BR DO EI LV PQ TU
+  all-time  12/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 pos=RCGE | UKWB beta VII-IV-VI rings=VOAH stecker=AS BR DO EI LV PQ TU
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 IC=0.0426 pos=RCGE | UKWB beta VII-IV-VI rings=VOAH stecker=AS BR DO EI LV PQ TU
+  all-time  12/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 pos=RCGE | UKWB beta VII-IV-VI rings=VOAH stecker=AS BR DO EI LV PQ TU
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 IC=0.0426 pos=RCGE | UKWB beta VII-IV-VI rings=VOAH stecker=AS BR DO EI LV PQ TU
+  all-time  12/20 tmpl=keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 pos=RCGE | UKWB beta VII-IV-VI rings=VOAH stecker=AS BR DO EI LV PQ TU
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 20…20)
+Shell evolution: ON freeRings=true WO=126 ringSeeds=3 subspace=naval-two-notch-right
+RIGA Option A: elite≈1% immigrants≈19% mutants=remainder (inner 26^4 message-key sweep per chromosome; scores on host)
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 IC=0.0340 pos=IPUK | UKWC gamma VIII-II-VI rings=EZGN stecker=ER FW JV KS OY QZ
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 pos=IPUK | UKWC gamma VIII-II-VI rings=EZGN stecker=ER FW JV KS OY QZ
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 IC=0.0360 pos=LXYP | UKWC gamma IV-VI-VII rings=AACU stecker=AG CM DT FN HZ KX LS RW
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 pos=LXYP | UKWC gamma IV-VI-VII rings=AACU stecker=AG CM DT FN HZ KX LS RW
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 IC=0.0360 pos=LXYP | UKWC gamma IV-VI-VII rings=AACU stecker=AG CM DT FN HZ KX LS RW
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 pos=LXYP | UKWC gamma IV-VI-VII rings=AACU stecker=AG CM DT FN HZ KX LS RW
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 IC=0.0360 pos=LXYP | UKWC gamma IV-VI-VII rings=AACU stecker=AG CM DT FN HZ KX LS RW
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 pos=LXYP | UKWC gamma IV-VI-VII rings=AACU stecker=AG CM DT FN HZ KX LS RW
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 IC=0.0360 pos=LXYP | UKWC gamma IV-VI-VII rings=AACU stecker=AG CM DT FN HZ KX LS RW
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 pos=LXYP | UKWC gamma IV-VI-VII rings=AACU stecker=AG CM DT FN HZ KX LS RW
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 IC=0.0360 pos=LXYP | UKWC gamma IV-VI-VII rings=AACU stecker=AG CM DT FN HZ KX LS RW
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 pos=LXYP | UKWC gamma IV-VI-VII rings=AACU stecker=AG CM DT FN HZ KX LS RW
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 IC=0.0360 pos=LXYP | UKWC gamma IV-VI-VII rings=AACU stecker=AG CM DT FN HZ KX LS RW
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 pos=LXYP | UKWC gamma IV-VI-VII rings=AACU stecker=AG CM DT FN HZ KX LS RW
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 IC=0.0360 pos=LXYP | UKWC gamma IV-VI-VII rings=AACU stecker=AG CM DT FN HZ KX LS RW
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 pos=LXYP | UKWC gamma IV-VI-VII rings=AACU stecker=AG CM DT FN HZ KX LS RW
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 IC=0.0360 pos=LXYP | UKWC gamma IV-VI-VII rings=AACU stecker=AG CM DT FN HZ KX LS RW
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 pos=LXYP | UKWC gamma IV-VI-VII rings=AACU stecker=AG CM DT FN HZ KX LS RW
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 IC=0.0360 pos=LXYP | UKWC gamma IV-VI-VII rings=AACU stecker=AG CM DT FN HZ KX LS RW
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 pos=LXYP | UKWC gamma IV-VI-VII rings=AACU stecker=AG CM DT FN HZ KX LS RW
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 IC=0.0360 pos=LXYP | UKWC gamma IV-VI-VII rings=AACU stecker=AG CM DT FN HZ KX LS RW
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 pos=LXYP | UKWC gamma IV-VI-VII rings=AACU stecker=AG CM DT FN HZ KX LS RW
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 IC=0.0360 pos=LXYP | UKWC gamma IV-VI-VII rings=AACU stecker=AG CM DT FN HZ KX LS RW
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@0 pos=LXYP | UKWC gamma IV-VI-VII rings=AACU stecker=AG CM DT FN HZ KX LS RW
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 20…20)
+Shell evolution: ON freeRings=true WO=126 ringSeeds=3 subspace=naval-two-notch-right
+RIGA Option A: elite≈1% immigrants≈19% mutants=remainder (inner 26^4 message-key sweep per chromosome; scores on host)
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  8/20 (40%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 IC=0.0364 pos=SZFZ | UKWC gamma IV-VI-VII rings=KYBA stecker=AR BP CN EM GS KL QX VZ
+  all-time  8/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 pos=SZFZ | UKWC gamma IV-VI-VII rings=KYBA stecker=AR BP CN EM GS KL QX VZ
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 IC=0.0329 pos=GJYH | UKWC beta IV-I-VI rings=VIXC stecker=EK HV IL MO NR TU WY
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 pos=GJYH | UKWC beta IV-I-VI rings=VIXC stecker=EK HV IL MO NR TU WY
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 IC=0.0329 pos=GJYH | UKWC beta IV-I-VI rings=VIXC stecker=EK HV IL MO NR TU WY
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 pos=GJYH | UKWC beta IV-I-VI rings=VIXC stecker=EK HV IL MO NR TU WY
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 IC=0.0329 pos=GJYH | UKWC beta IV-I-VI rings=VIXC stecker=EK HV IL MO NR TU WY
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 pos=GJYH | UKWC beta IV-I-VI rings=VIXC stecker=EK HV IL MO NR TU WY
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 IC=0.0329 pos=GJYH | UKWC beta IV-I-VI rings=VIXC stecker=EK HV IL MO NR TU WY
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 pos=GJYH | UKWC beta IV-I-VI rings=VIXC stecker=EK HV IL MO NR TU WY
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 IC=0.0329 pos=GJYH | UKWC beta IV-I-VI rings=VIXC stecker=EK HV IL MO NR TU WY
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 pos=GJYH | UKWC beta IV-I-VI rings=VIXC stecker=EK HV IL MO NR TU WY
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 IC=0.0329 pos=GJYH | UKWC beta IV-I-VI rings=VIXC stecker=EK HV IL MO NR TU WY
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 pos=GJYH | UKWC beta IV-I-VI rings=VIXC stecker=EK HV IL MO NR TU WY
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 IC=0.0329 pos=GJYH | UKWC beta IV-I-VI rings=VIXC stecker=EK HV IL MO NR TU WY
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 pos=GJYH | UKWC beta IV-I-VI rings=VIXC stecker=EK HV IL MO NR TU WY
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 IC=0.0329 pos=GJYH | UKWC beta IV-I-VI rings=VIXC stecker=EK HV IL MO NR TU WY
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 pos=GJYH | UKWC beta IV-I-VI rings=VIXC stecker=EK HV IL MO NR TU WY
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 IC=0.0329 pos=GJYH | UKWC beta IV-I-VI rings=VIXC stecker=EK HV IL MO NR TU WY
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 pos=GJYH | UKWC beta IV-I-VI rings=VIXC stecker=EK HV IL MO NR TU WY
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 IC=0.0329 pos=GJYH | UKWC beta IV-I-VI rings=VIXC stecker=EK HV IL MO NR TU WY
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 pos=GJYH | UKWC beta IV-I-VI rings=VIXC stecker=EK HV IL MO NR TU WY
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 IC=0.0329 pos=GJYH | UKWC beta IV-I-VI rings=VIXC stecker=EK HV IL MO NR TU WY
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g2@1 pos=GJYH | UKWC beta IV-I-VI rings=VIXC stecker=EK HV IL MO NR TU WY
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 20…20)
+Shell evolution: ON freeRings=true WO=126 ringSeeds=3 subspace=naval-two-notch-right
+RIGA Option A: elite≈1% immigrants≈19% mutants=remainder (inner 26^4 message-key sweep per chromosome; scores on host)
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 IC=0.0403 pos=FAOR | UKWB gamma IV-II-VI rings=HXCQ stecker=AP BE CY DF GZ HI KR QT UW
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 pos=FAOR | UKWB gamma IV-II-VI rings=HXCQ stecker=AP BE CY DF GZ HI KR QT UW
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 IC=0.0403 pos=FAOR | UKWB gamma IV-II-VI rings=HXCQ stecker=AP BE CY DF GZ HI KR QT UW
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 pos=FAOR | UKWB gamma IV-II-VI rings=HXCQ stecker=AP BE CY DF GZ HI KR QT UW
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 IC=0.0403 pos=FAOR | UKWB gamma IV-II-VI rings=HXCQ stecker=AP BE CY DF GZ HI KR QT UW
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 pos=FAOR | UKWB gamma IV-II-VI rings=HXCQ stecker=AP BE CY DF GZ HI KR QT UW
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 IC=0.0403 pos=FAOR | UKWB gamma IV-II-VI rings=HXCQ stecker=AP BE CY DF GZ HI KR QT UW
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 pos=FAOR | UKWB gamma IV-II-VI rings=HXCQ stecker=AP BE CY DF GZ HI KR QT UW
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 IC=0.0403 pos=FAOR | UKWB gamma IV-II-VI rings=HXCQ stecker=AP BE CY DF GZ HI KR QT UW
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 pos=FAOR | UKWB gamma IV-II-VI rings=HXCQ stecker=AP BE CY DF GZ HI KR QT UW
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 IC=0.0403 pos=FAOR | UKWB gamma IV-II-VI rings=HXCQ stecker=AP BE CY DF GZ HI KR QT UW
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 pos=FAOR | UKWB gamma IV-II-VI rings=HXCQ stecker=AP BE CY DF GZ HI KR QT UW
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 IC=0.0403 pos=FAOR | UKWB gamma IV-II-VI rings=HXCQ stecker=AP BE CY DF GZ HI KR QT UW
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 pos=FAOR | UKWB gamma IV-II-VI rings=HXCQ stecker=AP BE CY DF GZ HI KR QT UW
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 IC=0.0379 pos=YDEJ | UKWC gamma II-III-VI rings=AACU stecker=AJ BI CD NU OQ
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 pos=YDEJ | UKWC gamma II-III-VI rings=AACU stecker=AJ BI CD NU OQ
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 IC=0.0379 pos=YDEJ | UKWC gamma II-III-VI rings=AACU stecker=AJ BI CD NU OQ
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 pos=YDEJ | UKWC gamma II-III-VI rings=AACU stecker=AJ BI CD NU OQ
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 IC=0.0379 pos=YDEJ | UKWC gamma II-III-VI rings=AACU stecker=AJ BI CD NU OQ
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 pos=YDEJ | UKWC gamma II-III-VI rings=AACU stecker=AJ BI CD NU OQ
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 IC=0.0379 pos=YDEJ | UKWC gamma II-III-VI rings=AACU stecker=AJ BI CD NU OQ
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 pos=YDEJ | UKWC gamma II-III-VI rings=AACU stecker=AJ BI CD NU OQ
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 IC=0.0379 pos=YDEJ | UKWC gamma II-III-VI rings=AACU stecker=AJ BI CD NU OQ
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+POIUZTRE@g4@0 pos=YDEJ | UKWC gamma II-III-VI rings=AACU stecker=AJ BI CD NU OQ
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 20…20)
+Shell evolution: ON freeRings=true WO=126 ringSeeds=3 subspace=naval-two-notch-right
+RIGA Option A: elite≈1% immigrants≈19% mutants=remainder (inner 26^4 message-key sweep per chromosome; scores on host)
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  8/20 (40%) tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 IC=0.0360 pos=BGPQ | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+  all-time  8/20 tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 pos=BGPQ | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 IC=0.0364 pos=UBIB | UKWC gamma VI-IV-VII rings=AAAA stecker=DU FT HK JZ MN
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 pos=UBIB | UKWC gamma VI-IV-VII rings=AAAA stecker=DU FT HK JZ MN
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 IC=0.0364 pos=UBIB | UKWC gamma VI-IV-VII rings=AAAA stecker=DU FT HK JZ MN
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 pos=UBIB | UKWC gamma VI-IV-VII rings=AAAA stecker=DU FT HK JZ MN
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 IC=0.0364 pos=UBIB | UKWC gamma VI-IV-VII rings=AAAA stecker=DU FT HK JZ MN
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 pos=UBIB | UKWC gamma VI-IV-VII rings=AAAA stecker=DU FT HK JZ MN
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 IC=0.0364 pos=UBIB | UKWC gamma VI-IV-VII rings=AAAA stecker=DU FT HK JZ MN
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 pos=UBIB | UKWC gamma VI-IV-VII rings=AAAA stecker=DU FT HK JZ MN
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 IC=0.0364 pos=UBIB | UKWC gamma VI-IV-VII rings=AAAA stecker=DU FT HK JZ MN
+  all-time  9/20 tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 pos=UBIB | UKWC gamma VI-IV-VII rings=AAAA stecker=DU FT HK JZ MN
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 IC=0.0379 pos=UBIB | UKWC gamma VI-IV-VII rings=AAAA stecker=DU FT GL HK JZ
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 pos=UBIB | UKWC gamma VI-IV-VII rings=AAAA stecker=DU FT GL HK JZ
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 IC=0.0379 pos=UBIB | UKWC gamma VI-IV-VII rings=AAAA stecker=DU FT GL HK JZ
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 pos=UBIB | UKWC gamma VI-IV-VII rings=AAAA stecker=DU FT GL HK JZ
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 IC=0.0379 pos=UBIB | UKWC gamma VI-IV-VII rings=AAAA stecker=DU FT GL HK JZ
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 pos=UBIB | UKWC gamma VI-IV-VII rings=AAAA stecker=DU FT GL HK JZ
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 IC=0.0379 pos=UBIB | UKWC gamma VI-IV-VII rings=AAAA stecker=DU FT GL HK JZ
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 pos=UBIB | UKWC gamma VI-IV-VII rings=AAAA stecker=DU FT GL HK JZ
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 IC=0.0379 pos=UBIB | UKWC gamma VI-IV-VII rings=AAAA stecker=DU FT GL HK JZ
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 pos=UBIB | UKWC gamma VI-IV-VII rings=AAAA stecker=DU FT GL HK JZ
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 IC=0.0379 pos=UBIB | UKWC gamma VI-IV-VII rings=AAAA stecker=DU FT GL HK JZ
+  all-time  10/20 tmpl=keyboard:pad:QWERTZUI+QWERTZUI@g2@1 pos=UBIB | UKWC gamma VI-IV-VII rings=AAAA stecker=DU FT GL HK JZ
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 19…19)
+Shell evolution: ON freeRings=true WO=126 ringSeeds=3 subspace=naval-two-notch-right
+RIGA Option A: elite≈1% immigrants≈19% mutants=remainder (inner 26^4 message-key sweep per chromosome; scores on host)
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  9/19 (47%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 IC=0.0434 pos=HAXG | UKWB beta VIII-IV-VII rings=VCCH stecker=(none)
+  all-time  9/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 pos=HAXG | UKWB beta VIII-IV-VII rings=VCCH stecker=(none)
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  9/19 (47%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 IC=0.0434 pos=HAXG | UKWB beta VIII-IV-VII rings=VCCH stecker=(none)
+  all-time  9/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 pos=HAXG | UKWB beta VIII-IV-VII rings=VCCH stecker=(none)
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  9/19 (47%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 IC=0.0434 pos=HAXG | UKWB beta VIII-IV-VII rings=VCCH stecker=(none)
+  all-time  9/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 pos=HAXG | UKWB beta VIII-IV-VII rings=VCCH stecker=(none)
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 IC=0.0348 pos=WONU | UKWC gamma I-IV-VII rings=VXLH stecker=AF BZ DQ EG IS JP LV MU NW TY
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 pos=WONU | UKWC gamma I-IV-VII rings=VXLH stecker=AF BZ DQ EG IS JP LV MU NW TY
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 IC=0.0348 pos=WONU | UKWC gamma I-IV-VII rings=VXLH stecker=AF BZ DQ EG IS JP LV MU NW TY
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 pos=WONU | UKWC gamma I-IV-VII rings=VXLH stecker=AF BZ DQ EG IS JP LV MU NW TY
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 IC=0.0348 pos=WONU | UKWC gamma I-IV-VII rings=VXLH stecker=AF BZ DQ EG IS JP LV MU NW TY
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 pos=WONU | UKWC gamma I-IV-VII rings=VXLH stecker=AF BZ DQ EG IS JP LV MU NW TY
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 IC=0.0348 pos=WONU | UKWC gamma I-IV-VII rings=VXLH stecker=AF BZ DQ EG IS JP LV MU NW TY
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 pos=WONU | UKWC gamma I-IV-VII rings=VXLH stecker=AF BZ DQ EG IS JP LV MU NW TY
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 IC=0.0348 pos=WONU | UKWC gamma I-IV-VII rings=VXLH stecker=AF BZ DQ EG IS JP LV MU NW TY
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 pos=WONU | UKWC gamma I-IV-VII rings=VXLH stecker=AF BZ DQ EG IS JP LV MU NW TY
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 IC=0.0348 pos=WONU | UKWC gamma I-IV-VII rings=VXLH stecker=AF BZ DQ EG IS JP LV MU NW TY
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 pos=WONU | UKWC gamma I-IV-VII rings=VXLH stecker=AF BZ DQ EG IS JP LV MU NW TY
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 IC=0.0348 pos=WONU | UKWC gamma I-IV-VII rings=VXLH stecker=AF BZ DQ EG IS JP LV MU NW TY
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 pos=WONU | UKWC gamma I-IV-VII rings=VXLH stecker=AF BZ DQ EG IS JP LV MU NW TY
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 IC=0.0348 pos=WONU | UKWC gamma I-IV-VII rings=VXLH stecker=AF BZ DQ EG IS JP LV MU NW TY
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 pos=WONU | UKWC gamma I-IV-VII rings=VXLH stecker=AF BZ DQ EG IS JP LV MU NW TY
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 IC=0.0348 pos=WONU | UKWC gamma I-IV-VII rings=VXLH stecker=AF BZ DQ EG IS JP LV MU NW TY
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 pos=WONU | UKWC gamma I-IV-VII rings=VXLH stecker=AF BZ DQ EG IS JP LV MU NW TY
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 19…19)
+Shell evolution: ON freeRings=true WO=126 ringSeeds=3 subspace=naval-two-notch-right
+RIGA Option A: elite≈1% immigrants≈19% mutants=remainder (inner 26^4 message-key sweep per chromosome; scores on host)
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  8/19 (42%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 IC=0.0305 pos=FVRL | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+  all-time  8/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 pos=FVRL | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  9/19 (47%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 IC=0.0501 pos=XHWG | UKWB beta II-VII-VIII rings=VCCH stecker=ET HJ LO NS XY
+  all-time  9/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 pos=XHWG | UKWB beta II-VII-VIII rings=VCCH stecker=ET HJ LO NS XY
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 IC=0.0372 pos=PQTG | UKWB beta IV-II-VII rings=HVLC stecker=AZ BH CW DG JV OP SU XY
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 pos=PQTG | UKWB beta IV-II-VII rings=HVLC stecker=AZ BH CW DG JV OP SU XY
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 IC=0.0372 pos=PQTG | UKWB beta IV-II-VII rings=HVLC stecker=AZ BH CW DG JV OP SU XY
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 pos=PQTG | UKWB beta IV-II-VII rings=HVLC stecker=AZ BH CW DG JV OP SU XY
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 IC=0.0372 pos=PQTG | UKWB beta IV-II-VII rings=HVLC stecker=AZ BH CW DG JV OP SU XY
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 pos=PQTG | UKWB beta IV-II-VII rings=HVLC stecker=AZ BH CW DG JV OP SU XY
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 IC=0.0372 pos=PQTG | UKWB beta IV-II-VII rings=HVLC stecker=AZ BH CW DG JV OP SU XY
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 pos=PQTG | UKWB beta IV-II-VII rings=HVLC stecker=AZ BH CW DG JV OP SU XY
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 IC=0.0372 pos=PQTG | UKWB beta IV-II-VII rings=HVLC stecker=AZ BH CW DG JV OP SU XY
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 pos=PQTG | UKWB beta IV-II-VII rings=HVLC stecker=AZ BH CW DG JV OP SU XY
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 IC=0.0372 pos=PQTG | UKWB beta IV-II-VII rings=HVLC stecker=AZ BH CW DG JV OP SU XY
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 pos=PQTG | UKWB beta IV-II-VII rings=HVLC stecker=AZ BH CW DG JV OP SU XY
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 IC=0.0372 pos=PQTG | UKWB beta IV-II-VII rings=HVLC stecker=AZ BH CW DG JV OP SU XY
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 pos=PQTG | UKWB beta IV-II-VII rings=HVLC stecker=AZ BH CW DG JV OP SU XY
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 IC=0.0372 pos=PQTG | UKWB beta IV-II-VII rings=HVLC stecker=AZ BH CW DG JV OP SU XY
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 pos=PQTG | UKWB beta IV-II-VII rings=HVLC stecker=AZ BH CW DG JV OP SU XY
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 IC=0.0372 pos=PQTG | UKWB beta IV-II-VII rings=HVLC stecker=AZ BH CW DG JV OP SU XY
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 pos=PQTG | UKWB beta IV-II-VII rings=HVLC stecker=AZ BH CW DG JV OP SU XY
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 IC=0.0372 pos=PQTG | UKWB beta IV-II-VII rings=HVLC stecker=AZ BH CW DG JV OP SU XY
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 pos=PQTG | UKWB beta IV-II-VII rings=HVLC stecker=AZ BH CW DG JV OP SU XY
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 19…19)
+Shell evolution: ON freeRings=true WO=126 ringSeeds=3 subspace=naval-two-notch-right
+RIGA Option A: elite≈1% immigrants≈19% mutants=remainder (inner 26^4 message-key sweep per chromosome; scores on host)
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  8/19 (42%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 IC=0.0438 pos=LQVN | UKWB gamma VIII-II-VII rings=XWRA stecker=AY BU CN JP RS
+  all-time  8/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 pos=LQVN | UKWB gamma VIII-II-VII rings=XWRA stecker=AY BU CN JP RS
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  9/19 (47%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 IC=0.0364 pos=RCGP | UKWC beta II-V-VII rings=RNUH stecker=AO BY CJ DK EZ HQ NT PR
+  all-time  9/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 pos=RCGP | UKWC beta II-V-VII rings=RNUH stecker=AO BY CJ DK EZ HQ NT PR
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  9/19 (47%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 IC=0.0364 pos=RCGP | UKWC beta II-V-VII rings=RNUH stecker=AO BY CJ DK EZ HQ NT PR
+  all-time  9/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 pos=RCGP | UKWC beta II-V-VII rings=RNUH stecker=AO BY CJ DK EZ HQ NT PR
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  9/19 (47%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 IC=0.0364 pos=RCGP | UKWC beta II-V-VII rings=RNUH stecker=AO BY CJ DK EZ HQ NT PR
+  all-time  9/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 pos=RCGP | UKWC beta II-V-VII rings=RNUH stecker=AO BY CJ DK EZ HQ NT PR
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 IC=0.0344 pos=WCVD | UKWB gamma IV-II-VII rings=YTCW stecker=CI DR EV FY GZ JP KO LU MT SX
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 pos=WCVD | UKWB gamma IV-II-VII rings=YTCW stecker=CI DR EV FY GZ JP KO LU MT SX
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 IC=0.0344 pos=WCVD | UKWB gamma IV-II-VII rings=YTCW stecker=CI DR EV FY GZ JP KO LU MT SX
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 pos=WCVD | UKWB gamma IV-II-VII rings=YTCW stecker=CI DR EV FY GZ JP KO LU MT SX
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 IC=0.0344 pos=WCVD | UKWB gamma IV-II-VII rings=YTCW stecker=CI DR EV FY GZ JP KO LU MT SX
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 pos=WCVD | UKWB gamma IV-II-VII rings=YTCW stecker=CI DR EV FY GZ JP KO LU MT SX
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 IC=0.0344 pos=WCVD | UKWB gamma IV-II-VII rings=YTCW stecker=CI DR EV FY GZ JP KO LU MT SX
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 pos=WCVD | UKWB gamma IV-II-VII rings=YTCW stecker=CI DR EV FY GZ JP KO LU MT SX
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 IC=0.0344 pos=WCVD | UKWB gamma IV-II-VII rings=YTCW stecker=CI DR EV FY GZ JP KO LU MT SX
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 pos=WCVD | UKWB gamma IV-II-VII rings=YTCW stecker=CI DR EV FY GZ JP KO LU MT SX
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 IC=0.0344 pos=WCVD | UKWB gamma IV-II-VII rings=YTCW stecker=CI DR EV FY GZ JP KO LU MT SX
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 pos=WCVD | UKWB gamma IV-II-VII rings=YTCW stecker=CI DR EV FY GZ JP KO LU MT SX
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 IC=0.0344 pos=WCVD | UKWB gamma IV-II-VII rings=YTCW stecker=CI DR EV FY GZ JP KO LU MT SX
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 pos=WCVD | UKWB gamma IV-II-VII rings=YTCW stecker=CI DR EV FY GZ JP KO LU MT SX
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 IC=0.0344 pos=WCVD | UKWB gamma IV-II-VII rings=YTCW stecker=CI DR EV FY GZ JP KO LU MT SX
+  all-time  10/19 tmpl=keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 pos=WCVD | UKWB gamma IV-II-VII rings=YTCW stecker=CI DR EV FY GZ JP KO LU MT SX
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 19…19)
+Shell evolution: ON freeRings=true WO=126 ringSeeds=3 subspace=naval-two-notch-right
+RIGA Option A: elite≈1% immigrants≈19% mutants=remainder (inner 26^4 message-key sweep per chromosome; scores on host)
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  8/19 (42%) tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 IC=0.0399 pos=NUID | UKWC beta VIII-III-VI rings=AAAA stecker=BR EM NU
+  all-time  8/19 tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 pos=NUID | UKWC beta VIII-III-VI rings=AAAA stecker=BR EM NU
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  9/19 (47%) tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 IC=0.0391 pos=MPQQ | UKWC beta II-I-VII rings=ZDLM stecker=AO DK EL FS HN IY JM RX VZ
+  all-time  9/19 tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 pos=MPQQ | UKWC beta II-I-VII rings=ZDLM stecker=AO DK EL FS HN IY JM RX VZ
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  9/19 (47%) tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 IC=0.0391 pos=MPQQ | UKWC beta II-I-VII rings=ZDLM stecker=AO DK EL FS HN IY JM RX VZ
+  all-time  9/19 tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 pos=MPQQ | UKWC beta II-I-VII rings=ZDLM stecker=AO DK EL FS HN IY JM RX VZ
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 IC=0.0340 pos=UTMD | UKWB gamma I-II-VII rings=FFTR stecker=BH CW GQ OS
+  all-time  10/19 tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 pos=UTMD | UKWB gamma I-II-VII rings=FFTR stecker=BH CW GQ OS
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 IC=0.0340 pos=UTMD | UKWB gamma I-II-VII rings=FFTR stecker=BH CW GQ OS
+  all-time  10/19 tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 pos=UTMD | UKWB gamma I-II-VII rings=FFTR stecker=BH CW GQ OS
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  10/19 (53%) tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 IC=0.0340 pos=UTMD | UKWB gamma I-II-VII rings=FFTR stecker=BH CW GQ OS
+  all-time  10/19 tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 pos=UTMD | UKWB gamma I-II-VII rings=FFTR stecker=BH CW GQ OS
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  11/19 (58%) tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 IC=0.0368 pos=UTMD | UKWB gamma I-II-VII rings=FFTR stecker=CW GQ IL OS
+  all-time  11/19 tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 pos=UTMD | UKWB gamma I-II-VII rings=FFTR stecker=CW GQ IL OS
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  11/19 (58%) tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 IC=0.0368 pos=UTMD | UKWB gamma I-II-VII rings=FFTR stecker=CW GQ IL OS
+  all-time  11/19 tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 pos=UTMD | UKWB gamma I-II-VII rings=FFTR stecker=CW GQ IL OS
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  11/19 (58%) tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 IC=0.0368 pos=UTMD | UKWB gamma I-II-VII rings=FFTR stecker=CW GQ IL OS
+  all-time  11/19 tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 pos=UTMD | UKWB gamma I-II-VII rings=FFTR stecker=CW GQ IL OS
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  11/19 (58%) tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 IC=0.0368 pos=UTMD | UKWB gamma I-II-VII rings=FFTR stecker=CW GQ IL OS
+  all-time  11/19 tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 pos=UTMD | UKWB gamma I-II-VII rings=FFTR stecker=CW GQ IL OS
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  11/19 (58%) tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 IC=0.0368 pos=UTMD | UKWB gamma I-II-VII rings=FFTR stecker=CW GQ IL OS
+  all-time  11/19 tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 pos=UTMD | UKWB gamma I-II-VII rings=FFTR stecker=CW GQ IL OS
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  11/19 (58%) tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 IC=0.0368 pos=UTMD | UKWB gamma I-II-VII rings=FFTR stecker=CW GQ IL OS
+  all-time  11/19 tmpl=keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 pos=UTMD | UKWB gamma I-II-VII rings=FFTR stecker=CW GQ IL OS
+HELUT — Stochastic Bombe vs P1030680 [RIGOR]
+Ciphertext: JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF
+Fitness: match RATIO (×1000 + absolute); halt on exact constrained match
+Survivor bar: ratio ≥ 80% AND ≥ noiseFloor + 10%
+Templates: Fixtures/p1030680_stochastic_weather.json → 12 masks (constrained 16…24)
+  [20] keyboard:pad:ASDFGHJK+QWERTZUI@g2@1
+  [20] keyboard:pad:QWERTZUI+ABCDEFGH@g2@0
+  [20] keyboard:pad:QWERTZUI+ABCDEFGH@g2@1
+  [20] keyboard:pad:QWERTZUI+ABCDEFGH@g4@0
+  [20] keyboard:pad:QWERTZUI+POIUZTRE@g2@0
+  [20] keyboard:pad:QWERTZUI+POIUZTRE@g2@1
+  [20] keyboard:pad:QWERTZUI+POIUZTRE@g4@0
+  [20] keyboard:pad:QWERTZUI+QWERTZUI@g2@1
+  [19] keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0
+  [19] keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1
+  [19] keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0
+  [19] keyboard:pad:QWERTZUI+ASDFGHJK@g2@0
+Subspaces: potsdam, two-notch
+GA: pop=32 gens=12 hill=16 noiseSamples=12 evolveShell=true freeRings=true RIGA(imm=19%,elite=1%)
+
+════════ subspace potsdam-neighbourhood (WO=6) ════════
+——— [potsdam-neighbourhood] 1/12 keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 (20) ———
+  noiseFloor: 7/20 (35%) over 12 random shells
+  → 10/20 (50%) noise=35% Δ=+15% reject pos=UWWO IC=0.0360
+    UKWC beta III-VIII-IV rings=OYHA stecker=AZ CN
+——— [potsdam-neighbourhood] 2/12 keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 (20) ———
+  noiseFloor: 7/20 (35%) over 12 random shells
+  → 10/20 (50%) noise=35% Δ=+15% reject pos=VXLU IC=0.0317
+    UKWB beta IV-VIII-III rings=VCCH stecker=BN DG EH LX MR OT PW
+——— [potsdam-neighbourhood] 3/12 keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 (20) ———
+  noiseFloor: 7/20 (35%) over 12 random shells
+  → 12/20 (60%) noise=35% Δ=+25% reject pos=UIOD IC=0.0379
+    UKWC beta III-IV-VIII rings=AACU stecker=GP JT MQ UW YZ
+——— [potsdam-neighbourhood] 4/12 keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 (20) ———
+  noiseFloor: 9/20 (45%) over 12 random shells
+  → 11/20 (55%) noise=45% Δ=+10% reject pos=FAFB IC=0.0454
+    UKWC beta III-VIII-IV rings=VCCH stecker=AT BH EF OS UY
+——— [potsdam-neighbourhood] 5/12 keyboard:pad:QWERTZUI+POIUZTRE@g2@0 (20) ———
+  noiseFloor: 8/20 (40%) over 12 random shells
+  → 12/20 (60%) noise=40% Δ=+20% reject pos=GDRR IC=0.0419
+    UKWC beta VIII-IV-III rings=AACU stecker=DE FV GW IM JQ
+——— [potsdam-neighbourhood] 6/12 keyboard:pad:QWERTZUI+POIUZTRE@g2@1 (20) ———
+  noiseFloor: 9/20 (45%) over 12 random shells
+  → 10/20 (50%) noise=45% Δ=+5% reject pos=OSHT IC=0.0489
+    UKWC beta VIII-III-IV rings=LYJB stecker=FH JO
+——— [potsdam-neighbourhood] 7/12 keyboard:pad:QWERTZUI+POIUZTRE@g4@0 (20) ———
+  noiseFloor: 8/20 (40%) over 12 random shells
+  → 12/20 (60%) noise=40% Δ=+20% reject pos=EJSW IC=0.0321
+    UKWC gamma VIII-III-IV rings=AAAA stecker=BR DH FZ MX VY
+——— [potsdam-neighbourhood] 8/12 keyboard:pad:QWERTZUI+QWERTZUI@g2@1 (20) ———
+  noiseFloor: 9/20 (45%) over 12 random shells
+  → 12/20 (60%) noise=45% Δ=+15% reject pos=ABQE IC=0.0340
+    UKWC gamma VIII-IV-III rings=ZKGH stecker=BC DE FI HY OX PU QS RZ
+——— [potsdam-neighbourhood] 9/12 keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 (19) ———
+  noiseFloor: 7/19 (37%) over 12 random shells
+  → 11/19 (58%) noise=37% Δ=+21% reject pos=YBXM IC=0.0372
+    UKWC beta IV-VIII-III rings=KZIM stecker=AE BT DW FX GJ IQ KS LU PV YZ
+——— [potsdam-neighbourhood] 10/12 keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 (19) ———
+  noiseFloor: 8/19 (42%) over 12 random shells
+  → 11/19 (58%) noise=42% Δ=+16% reject pos=JBDE IC=0.0438
+    UKWC gamma VIII-IV-III rings=AACU stecker=FJ ST
+——— [potsdam-neighbourhood] 11/12 keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 (19) ———
+  noiseFloor: 7/19 (37%) over 12 random shells
+  → 10/19 (53%) noise=37% Δ=+16% reject pos=DMWM IC=0.0348
+    UKWC beta VIII-IV-III rings=ICRB stecker=AW UZ
+——— [potsdam-neighbourhood] 12/12 keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 (19) ———
+  noiseFloor: 8/19 (42%) over 12 random shells
+  → 11/19 (58%) noise=42% Δ=+16% reject pos=LGGD IC=0.0368
+    UKWB beta VIII-IV-III rings=AAAA stecker=AW DH FS GP MY NQ TV
+════════ subspace naval-two-notch-right (WO=126) ════════
+——— [naval-two-notch-right] 1/12 keyboard:pad:ASDFGHJK+QWERTZUI@g2@1 (20) ———
+  noiseFloor: 8/20 (40%) over 12 random shells
+  → 11/20 (55%) noise=40% Δ=+15% reject pos=TUDD IC=0.0344
+    UKWC beta IV-III-VIII rings=XWMK stecker=EH JR MZ PQ SY TW
+——— [naval-two-notch-right] 2/12 keyboard:pad:QWERTZUI+ABCDEFGH@g2@0 (20) ———
+  noiseFloor: 9/20 (45%) over 12 random shells
+  → 11/20 (55%) noise=45% Δ=+10% reject pos=WPWC IC=0.0415
+    UKWC gamma VII-IV-VI rings=AACU stecker=DT EK GJ HM NR OQ WZ
+——— [naval-two-notch-right] 3/12 keyboard:pad:QWERTZUI+ABCDEFGH@g2@1 (20) ———
+  noiseFloor: 8/20 (40%) over 12 random shells
+  → 11/20 (55%) noise=40% Δ=+15% reject pos=UJVU IC=0.0466
+    UKWB gamma VIII-III-VII rings=AACU stecker=AV DH EF KZ LU MY OT RX
+——— [naval-two-notch-right] 4/12 keyboard:pad:QWERTZUI+ABCDEFGH@g4@0 (20) ———
+  noiseFloor: 8/20 (40%) over 12 random shells
+  → 12/20 (60%) noise=40% Δ=+20% reject pos=RCGE IC=0.0426
+    UKWB beta VII-IV-VI rings=VOAH stecker=AS BR DO EI LV PQ TU
+——— [naval-two-notch-right] 5/12 keyboard:pad:QWERTZUI+POIUZTRE@g2@0 (20) ———
+  noiseFloor: 8/20 (40%) over 12 random shells
+  → 10/20 (50%) noise=40% Δ=+10% reject pos=LXYP IC=0.0360
+    UKWC gamma IV-VI-VII rings=AACU stecker=AG CM DT FN HZ KX LS RW
+——— [naval-two-notch-right] 6/12 keyboard:pad:QWERTZUI+POIUZTRE@g2@1 (20) ———
+  noiseFloor: 8/20 (40%) over 12 random shells
+  → 10/20 (50%) noise=40% Δ=+10% reject pos=GJYH IC=0.0329
+    UKWC beta IV-I-VI rings=VIXC stecker=EK HV IL MO NR TU WY
+——— [naval-two-notch-right] 7/12 keyboard:pad:QWERTZUI+POIUZTRE@g4@0 (20) ———
+  noiseFloor: 9/20 (45%) over 12 random shells
+  → 10/20 (50%) noise=45% Δ=+5% reject pos=YDEJ IC=0.0379
+    UKWC gamma II-III-VI rings=AACU stecker=AJ BI CD NU OQ
+——— [naval-two-notch-right] 8/12 keyboard:pad:QWERTZUI+QWERTZUI@g2@1 (20) ———
+  noiseFloor: 9/20 (45%) over 12 random shells
+  → 10/20 (50%) noise=45% Δ=+5% reject pos=UBIB IC=0.0379
+    UKWC gamma VI-IV-VII rings=AAAA stecker=DU FT GL HK JZ
+——— [naval-two-notch-right] 9/12 keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0 (19) ———
+  noiseFloor: 8/19 (42%) over 12 random shells
+  → 10/19 (53%) noise=42% Δ=+11% reject pos=WONU IC=0.0348
+    UKWC gamma I-IV-VII rings=VXLH stecker=AF BZ DQ EG IS JP LV MU NW TY
+——— [naval-two-notch-right] 10/12 keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1 (19) ———
+  noiseFloor: 8/19 (42%) over 12 random shells
+  → 10/19 (53%) noise=42% Δ=+11% reject pos=PQTG IC=0.0372
+    UKWB beta IV-II-VII rings=HVLC stecker=AZ BH CW DG JV OP SU XY
+——— [naval-two-notch-right] 11/12 keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0 (19) ———
+  noiseFloor: 9/19 (47%) over 12 random shells
+  → 10/19 (53%) noise=47% Δ=+5% reject pos=WCVD IC=0.0344
+    UKWB gamma IV-II-VII rings=YTCW stecker=CI DR EV FY GZ JP KO LU MT SX
+——— [naval-two-notch-right] 12/12 keyboard:pad:QWERTZUI+ASDFGHJK@g2@0 (19) ———
+  noiseFloor: 7/19 (37%) over 12 random shells
+  → 11/19 (58%) noise=37% Δ=+21% reject pos=UTMD IC=0.0368
+    UKWB gamma I-II-VII rings=FFTR stecker=CW GQ IL OS
+
+——— RIGOR SUMMARY (by ratio) ———
+   60.0%  12/20  noise=  35% Δ=+25.0%  potsdam-neighbourhood  keyboard:pad:QWERTZUI+ABCDEFGH@g2@1  | UKWC beta III-IV-VIII rings=AACU stecker=GP JT MQ UW YZ
+   60.0%  12/20  noise=  40% Δ=+20.0%  potsdam-neighbourhood  keyboard:pad:QWERTZUI+POIUZTRE@g2@0  | UKWC beta VIII-IV-III rings=AACU stecker=DE FV GW IM JQ
+   60.0%  12/20  noise=  40% Δ=+20.0%  potsdam-neighbourhood  keyboard:pad:QWERTZUI+POIUZTRE@g4@0  | UKWC gamma VIII-III-IV rings=AAAA stecker=BR DH FZ MX VY
+   60.0%  12/20  noise=  45% Δ=+15.0%  potsdam-neighbourhood  keyboard:pad:QWERTZUI+QWERTZUI@g2@1  | UKWC gamma VIII-IV-III rings=ZKGH stecker=BC DE FI HY OX PU QS RZ
+   60.0%  12/20  noise=  40% Δ=+20.0%  naval-two-notch-right  keyboard:pad:QWERTZUI+ABCDEFGH@g4@0  | UKWB beta VII-IV-VI rings=VOAH stecker=AS BR DO EI LV PQ TU
+   57.9%  11/19  noise=  37% Δ=+21.1%  potsdam-neighbourhood  keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0  | UKWC beta IV-VIII-III rings=KZIM stecker=AE BT DW FX GJ IQ KS LU PV YZ
+   57.9%  11/19  noise=  42% Δ=+15.8%  potsdam-neighbourhood  keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1  | UKWC gamma VIII-IV-III rings=AACU stecker=FJ ST
+   57.9%  11/19  noise=  42% Δ=+15.8%  potsdam-neighbourhood  keyboard:pad:QWERTZUI+ASDFGHJK@g2@0  | UKWB beta VIII-IV-III rings=AAAA stecker=AW DH FS GP MY NQ TV
+   57.9%  11/19  noise=  37% Δ=+21.1%  naval-two-notch-right  keyboard:pad:QWERTZUI+ASDFGHJK@g2@0  | UKWB gamma I-II-VII rings=FFTR stecker=CW GQ IL OS
+   55.0%  11/20  noise=  45% Δ=+10.0%  potsdam-neighbourhood  keyboard:pad:QWERTZUI+ABCDEFGH@g4@0  | UKWC beta III-VIII-IV rings=VCCH stecker=AT BH EF OS UY
+   55.0%  11/20  noise=  40% Δ=+15.0%  naval-two-notch-right  keyboard:pad:ASDFGHJK+QWERTZUI@g2@1  | UKWC beta IV-III-VIII rings=XWMK stecker=EH JR MZ PQ SY TW
+   55.0%  11/20  noise=  45% Δ=+10.0%  naval-two-notch-right  keyboard:pad:QWERTZUI+ABCDEFGH@g2@0  | UKWC gamma VII-IV-VI rings=AACU stecker=DT EK GJ HM NR OQ WZ
+   55.0%  11/20  noise=  40% Δ=+15.0%  naval-two-notch-right  keyboard:pad:QWERTZUI+ABCDEFGH@g2@1  | UKWB gamma VIII-III-VII rings=AACU stecker=AV DH EF KZ LU MY OT RX
+   52.6%  10/19  noise=  37% Δ=+15.8%  potsdam-neighbourhood  keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0  | UKWC beta VIII-IV-III rings=ICRB stecker=AW UZ
+   52.6%  10/19  noise=  42% Δ=+10.5%  naval-two-notch-right  keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0  | UKWC gamma I-IV-VII rings=VXLH stecker=AF BZ DQ EG IS JP LV MU NW TY
+   52.6%  10/19  noise=  42% Δ=+10.5%  naval-two-notch-right  keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1  | UKWB beta IV-II-VII rings=HVLC stecker=AZ BH CW DG JV OP SU XY
+   52.6%  10/19  noise=  47% Δ= +5.3%  naval-two-notch-right  keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0  | UKWB gamma IV-II-VII rings=YTCW stecker=CI DR EV FY GZ JP KO LU MT SX
+   50.0%  10/20  noise=  35% Δ=+15.0%  potsdam-neighbourhood  keyboard:pad:ASDFGHJK+QWERTZUI@g2@1  | UKWC beta III-VIII-IV rings=OYHA stecker=AZ CN
+   50.0%  10/20  noise=  35% Δ=+15.0%  potsdam-neighbourhood  keyboard:pad:QWERTZUI+ABCDEFGH@g2@0  | UKWB beta IV-VIII-III rings=VCCH stecker=BN DG EH LX MR OT PW
+   50.0%  10/20  noise=  45% Δ= +5.0%  potsdam-neighbourhood  keyboard:pad:QWERTZUI+POIUZTRE@g2@1  | UKWC beta VIII-III-IV rings=LYJB stecker=FH JO
+   50.0%  10/20  noise=  40% Δ=+10.0%  naval-two-notch-right  keyboard:pad:QWERTZUI+POIUZTRE@g2@0  | UKWC gamma IV-VI-VII rings=AACU stecker=AG CM DT FN HZ KX LS RW
+   50.0%  10/20  noise=  40% Δ=+10.0%  naval-two-notch-right  keyboard:pad:QWERTZUI+POIUZTRE@g2@1  | UKWC beta IV-I-VI rings=VIXC stecker=EK HV IL MO NR TU WY
+   50.0%  10/20  noise=  45% Δ= +5.0%  naval-two-notch-right  keyboard:pad:QWERTZUI+POIUZTRE@g4@0  | UKWC gamma II-III-VI rings=AACU stecker=AJ BI CD NU OQ
+   50.0%  10/20  noise=  45% Δ= +5.0%  naval-two-notch-right  keyboard:pad:QWERTZUI+QWERTZUI@g2@1  | UKWC gamma VI-IV-VII rings=AAAA stecker=DU FT GL HK JZ
+
+Elapsed: 132.2 s
+Survivors (≥80% and ≥noise+10%): 0
+*** CLEAN NEGATIVE under rigor bar — templates/prior not near-true ***
+Next: invent new structural hypotheses; do not burn catalog rings yet.
+Wrote logs/stochastic-bombe-p1030680-weather-riga.json
+See stochastic-bombe.md / BREAK_P1030680.md Phase 18

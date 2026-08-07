@@ -1,0 +1,156 @@
+\chapter{Claim index (snapshot)}
+\label{app:claims}
+
+Canonical living inventory: \corpus{directives/claim-sheet.md}.
+If this appendix disagrees with the sheet, the sheet wins.
+Snapshot epoch: \livingepoch{}.
+
+\section{Reproducible results}
+
+{\small
+\begin{longtable}{@{}lp{0.72\textwidth}@{}}
+\toprule
+ID & Result \\
+\midrule
+\endfirsthead
+\toprule
+ID & Result \emph{(continued)} \\
+\midrule
+\endhead
+\midrule
+\multicolumn{2}{r}{\emph{Continued on next page}} \\
+\endfoot
+\bottomrule
+\endlastfoot
+\cid{1} & Yosys \texttt{\$lut}/DFF $\to$ Metal/CPU tensor eval (oracle). \\
+\cid{2} & Welchman path breaks known P1030684 end-to-end. \\
+\cid{3} & $\le 10$-plug / SAT kill chain removes ghosts. \\
+\cid{4} & Encrypted LWE/GLWE $+$ GGSW BR per \texttt{\$lut}. \\
+\cid{5} & Certificates on encrypted ticks. \\
+\cid{6} & Encrypted $\equiv$ clear multi-netlist SING; adder $N\le 1024$. \\
+\cid{7} & Metal 1-LUT BR microbench (fused ancestor numbers). \\
+\cid{8} & TensorLUT M4 baseline $F_{\mathrm{crypto}}=0$ $+$ Verilog emit. The
+restored generic per-netlist CLI regenerates the 925-LUT / 49-DFF artifact
+exactly, including all 59,200 INIT floats. Emitted Verilog re-synthesizes through
+Yosys and is functionally equivalent on the 4-LUT design over all 16 inputs,
+with a one-INIT-bit negative control. \\
+\cid{9} & Stecker involution sandwich; blind 3-pair PASS. \\
+\cid{10} & Enigma256 fixture-v4 bounded reciprocity / conjugated-XOR / KAT parity for the schema-4 \texttt{E256-v2/gen0} native profile; full E256 suite \textbf{49/49 PASS}; center $A_i^{-1}(A_i(x)\oplus k_i)$; receipt \texttt{logs/e256-v2-gen0-fixture-v4-validation.json}. Bounded implementation / parity evidence---not IND-CPA, an HMAC proof, external cryptanalysis, or human acceptance. \\
+\cid{11} & Potsdam/Plaice keys $\neq$ P1030680. \\
+\cid{12} & Windowed discriminator vs whole-message turnover flaw. \\
+\cid{13} & Metal tiled-kernel BR at $N=1024$ (pre-fusion lineage). \\
+\cid{14} & Metal full\_adder SING at $N=1024$ (pre-NTT lineage). \\
+\cid{15} & Metal netlist-scheduled SING at $N=1024$. \\
+\cid{16} & Metal fused EP kernel; $1.043\,\mathrm{s}$/BR at $N=1024$. \\
+\cid{17} & GPU-resident BR tile; $0.519\,\mathrm{s}$/BR; SING $12.2\,\mathrm{s}/8$. \\
+\cid{18} & 3-prime NTT persist BR; $0.433\,\mathrm{s}$/BR; SING $15.6\,\mathrm{s}/8$. \\
+\cid{19} & TensorLUT continuous$\to$discrete Theorem~1 (six machine-checked lemmas). \\
+\cid{20} & Wavefront-parallel independent \texttt{\$lut} BRs; boolean SING $10.6\,\mathrm{s}/8$. \\
+\cid{21} & Metal cryptoPublicMS $\ell=2$ SING at $N=1024$; $11.38\,\mathrm{s}/8$. \\
+\cid{22} & Measured noisy-BK residual $\to B_{\mathrm{bk}}/\hat\sigma$ (covering gadget). \\
+\cid{23} & Native Sage lattice-estimator fill-in; production $|\Delta|=4.5$. \\
+\cid{24} & Enigma256 SoftBus Theorem~2, bounded fixture-v4 structural certificate / protocol: formal \textbf{1/1 PASS}; deterministic four-state scramble-bijection sweep; exhaustive byte reciprocity for one frozen fixture state; deterministic 128-byte stream round-trip; fixture plugboard plus selected XOR-center involution/fixed-point checks; exact schema-4 \texttt{E256-v2/gen0} native-profile integrity. Host derives/transports \texttt{(payload, centerMask, absoluteByteCounter)}; RTL validates the counter and does not implement HMAC. Finite checks are exhaustive only where stated; state/key coverage is bounded. Full E256 suite \textbf{49/49 PASS}; receipt \texttt{logs/e256-v2-gen0-fixture-v4-validation.json}. \\
+\cid{25} & TensorLUT Theorem~1 corollary (emitter--discrete $+$ involution under freeze). \\
+\cid{26} & Noisy-BK identity residual at $N{=}1024$: inject $B{=}64$ undecodable; $B{=}4$ $\varepsilon\log_2\approx-1$. \\
+\cid{27} & Exact public-MS covering under $q{=}2^{32}$ only at $N\in\{8,128\}$ (Theorem~3). \\
+\cid{28} & Track~B Metal cryptoPublicMS SING at $N{=}128$ with noisy BK ($B{=}64$) PASS. \\
+\cid{29} & Exact public-MS covering stays $\{8,128\}$ for any power-of-two $q{=}2^{w}$ (Theorem~3$'$). \\
+\cid{30} & Track~B $\varepsilon$ vs inject $B$ at $N{=}128$: printed $\varepsilon$ OK at small $B$; $\hat\sigma$ still $\sim 10^{4}$--$10^{5}$. \\
+\cid{31} & Incomplete public-MS gap at $N{=}1024$: uncoveredBits$=10$; approx candidate $=$\texttt{.crypto}. \\
+\cid{32} & Track~A approx: \texttt{.crypto} inject $B{=}1$ at $N{=}1024$ decodable; $\varepsilon\log_2\approx-8.4$ at 8 trials (not $-64$). \\
+\cid{33} & Track~A Metal SING covering \texttt{.crypto} at $N{=}1024$ with $B{=}1$ PASS (secret + public-ms). \\
+\cid{34} & Track~A covering baseLog$=4$: $\varepsilon\log_2\approx-913$ ($\le 2^{-64}$) + Metal SING PASS. \\
+\cid{35} & Track~A covering baseLog$=2$: $\varepsilon\le 2^{-64}$ through inject $B{=}16$ ($\varepsilon\log_2\approx-65.4$) + Metal SING PASS. \\
+\cid{36} & Track~A covering baseLog$=1$: $\varepsilon\le 2^{-64}$ through inject $B{=}32$ ($\varepsilon\log_2=-97.8$, 95\% bound $-71.2$ at $n{=}64$; the $-139$ was a 4-trial low draw) + Metal SING PASS; $B{=}128$ still fails. \\
+\cid{37} & Track~A Gaussian BK inject on covering-b1: $\sigma{=}24$ meets $\varepsilon\le 2^{-64}$ (95\% bound $-81.4$ at $n{=}20$) + Metal SING PASS; torus $\sigma{\approx}128$ undecodable at native $k{=}1$ (\cid{55}); torus-scale close is \cid{52} ($k{=}7$). \\
+\cid{38} & Encrypted sequential DFF host-clock: 4-bit counter Metal $N{=}1024$ SING PASS ($15.88\,\mathrm{s}/4$). Not PicoRV32. \\
+\cid{39} & Encrypted historical one-byte / one-round legacy-UKW E256 teaching cone Metal $N{=}1024$ SING PASS ($22.77\,\mathrm{s}/2$). It predates live fixture-v4 and does not exercise transported \texttt{centerMask}/\texttt{absoluteByteCounter}, the conjugated-XOR center, live BRAM, NLFF, or the full core. \\
+\cid{40} & Encrypted toy NOP/ADD ISA Metal $N{=}1024$ SING PASS ($20.31\,\mathrm{s}/4$). Not PicoRV32. \\
+\cid{41} & Covering-b1 Gaussian $\sigma{=}128$: meets $\varepsilon\le 2^{-64}$ at $N{=}256$ (95\% bound $-594.5$). At $N{=}512$ native $k{=}1$ is decodable but $\varepsilon\log_2=-50.6$, short of the bar; stride $k\ge 2$ recovers it (bound $-151.5$ at $k{=}2$) with Metal SING PASS at $k{=}2,3,7$. Native $k{=}1$ at $N{=}1024$ still fails (\cid{37}); torus-scale close is \cid{52}. \\
+\cid{42} & 4-bit CSA vs ripple: LUT2 $11\to 8$ ($-27\%$) + encrypted SING PASS. Not TensorLUT melt. \\
+\cid{43} & $k\delta$ encoding at $N{=}1024$ covering-b1 $\sigma{=}128$: $k{=}4$ Metal SING PASS but $\varepsilon\log_2=-34.1$ settled at $n{=}32$, short of the bar. $k{=}8$ meets \emph{both} --- $\varepsilon$ bound $-113.6$ and SING PASS; its recorded SING FAIL predated the 2026-08-15 determinism fix. \\
+\cid{44} & TensorLUT melt--freeze--snap on a separable Boolean interpolant (three lemmas). Not arbitrary-netlist melt. \\
+\cid{45} & Encrypted PicoRV32 1-tick SING at demo $N{=}8$: $76.12\,\mathrm{ms}$/row; 4-bit hardness. Not production $N$. \\
+\cid{46} & Encrypted PicoRV32 10-tick \texttt{resetn} boot SING at $N{=}8$:
+median $0.473\,\mathrm{s}/10$ over five runs, 0.7\% spread; $Q\equiv$ clear.
+The archived $0.972\,\mathrm{s}/10$ predates the sequential wavefront and is
+stale. Plain \texttt{\$\_DFF\_P\_} native-$D$ fix. \\
+\cid{47} & Encrypted PicoRV32 NOP-fetch: 10 instruction fetches, PC $0{+}4k$ through $0x24$; $3.15\,\mathrm{s}/32$. \\
+\cid{48} & 2-LUT cascade melt--snap--emit $(a\land b)\oplus c$; 8-corner SING of snapped INIT (dual interpolant OK). \\
+\cid{49} & Encrypted PicoRV32 \texttt{addi}+\texttt{sw}: store \texttt{wdata}=1, RAM0=1; $3.79\,\mathrm{s}/48$ @ demo $N{=}8$. Load-back is \cid{50}. \\
+\cid{50} & Encrypted PicoRV32 \texttt{lw} sees stored 1 (NBA xfer); $3.77\,\mathrm{s}/48$ @ demo $N{=}8$. Not Metal PicoRV. \\
+\cid{51} & Metal PicoRV32 NOP-fetch @ demo $N{=}8$: tiled BR, 2 fetches, $63.55\,\mathrm{s}/8$. Not fused netlist / not $N{=}1024$. \\
+\cid{52} & Stride-$k$ public-MS covering-b1 @ $N{=}1024$ $\sigma{=}128$ $k{=}7$: $\varepsilon\log_2=-132.5$ (95\% bound $-83.2$ at $n{=}32$; the $-170$ at 8 trials was unsupported) + Metal secret/public-ms SING PASS. Native $k{=}1$ still \cid{37}. \\
+\cid{53} & Sequential covering-b1 counter @ $N{=}1024$ $\sigma{=}128$ $k{=}7$: Metal secret/public-ms SING PASS. Not PicoRV. \\
+\cid{54} & Sequential covering-b1 toy ISA @ $N{=}1024$ $\sigma{=}128$ $k{=}7$: Metal secret/public-ms SING PASS. Not PicoRV. \\
+\cid{55} & Native $k{=}1$ covering-b1 $\sigma{=}128$ LWE-$n$ map @ poly $N{=}1024$: decodable at $n\le 512$ but $\varepsilon>-64$; $n{=}1024$ undecodable (\cid{37}). \\
+\cid{56} & \texttt{cryptoPublicMS} $B{=}1$ $k{=}7$: identity decodable $\varepsilon\approx-12.6$; Metal public-ms SING FAIL. Torus $\sigma{=}128$ still undecodable. \\
+\cid{57} & Covering-b2 ($\ell{=}16$) at $N{=}n{=}1024$, $\sigma{=}128$:
+historical $k{=}7$ is short of the $-64$ bar. The integrated preregistered
+$k{=}14$, 192-trial run gives a 24-event bound of $-93.8005$ and then full-adder
+SING \textbf{8/8 PASS} (48.1757\,s evaluation; 969.48\,s end to end). Exact
+noiseless primary inputs and Gaussian statistical circuit scope---not a hard BK
+bound, fresh-input-noise result, or arbitrary-netlist/depth certificate. \\
+\cid{58} & PicoRV32 \texttt{abc -lut 6}: $2006$ LUT ($-58\%$) + CPU boolean SING PASS @ $N{=}64$ ($1.35\,\mathrm{s}$). Not covering / not $N{=}1024$. \\
+\cid{59} & Sequential wavefront: PicoRV lut6 $N{=}64$ CPU boolean $0.165\,\mathrm{s}/1$ (${\sim}8.2\times$ vs \cid{58}). \\
+\cid{60} & PicoRV lut6 covering-b2 $k{=}7$ @ $N{=}1024$: Metal 1-tick Q SING FAIL (${\sim}33$\,min, DFF want$=0$ got$=1$). Confirmed \emph{structural} by a post-fix re-run failing at the identical cell. \\
+\cid{61} & PicoRV lut6 covering-b1 $k{=}7$ @ $N{=}1024$: Metal 1-tick Q SING FAIL (${\sim}61$\,min). Confirmed structural post-fix, same cell. \\
+\cid{62} & Metal PicoRV lut6 $N{=}1024$ $e{=}0$ 1-tick Q SING PASS ($373.89\,\mathrm{s}$). Not covering. \\
+\cid{63} & PicoRV lut6 covering-b2 $\sigma{=}128$ @ $N{=}64$: Q SING PASS (${\sim}1.72\,\mathrm{s}$). Native $k$. $k{=}7$ SIGTRAPs. \\
+\cid{64} & Extract$\to$KS $n{=}64$ at poly $N{=}1024$: native-$k$ covering-b2 adder+counter SING. Not LWE-176. \\
+\cid{65} & PicoRV lut6 covering Metal $N{=}1024$ extract$\to$KS $n{=}64$: Q SING PASS (b2 $114\,\mathrm{s}$, b1 $212\,\mathrm{s}$). \\
+\cid{66} & PicoRV lut6 covering 10-tick resetn boot extract$\to$KS $n{=}64$: Metal PASS $1136\,\mathrm{s}/10$. \\
+\cid{67} & Covering KS ladder: $n{=}128$ adder PASS; $n{=}256/512$ SIGTRAP. \\
+\cid{68} & PicoRV lut6 covering NOP-fetch extract$\to$KS $n{=}64$: Metal PASS $911\,\mathrm{s}/8$, fetches $0x0,0x4$. \\
+\cid{69} & Covering KS adder SING PASS at $n{=}256$ and $n{=}512$. The $n{=}512$ FAIL was withdrawn 2026-08-15 (determinism artifact). C67 SIGTRAP was identity$\times 4$. \\
+\cid{70} & Balanced covering-b2 digits, $k{=}7$, $N{=}n{=}1024$, $\sigma{=}128$: 24-event bound $-72.7$ clears $-64$, full-adder Metal SING 8/8 PASS. Unsigned \cid{57} $k{=}7$ stays short. PicoRV is \cid{71}. \\
+\cid{71} & Balanced covering-b2 PicoRV lut6 at $N{=}1024$ $k{=}7$: 192-trial per-wire bound $-88.4$ clears $-64$, then Q SING FAIL. The port-weighted packing bound at the same $\sigma$ is $+9.9$ and does not clear. Not the \cid{60} cell. LUT3 $k{=}127$ has three logged receipts. The eight-tick NOP fetched $0\mathrm{x}0$ and $0\mathrm{x}4$ (wall $28693.5\,\mathrm{s}$). None is a claim row. \\
+\end{longtable}
+}
+
+\section{Open hedges}
+
+\begin{center}
+\small
+\begin{tabular}{@{}lp{0.72\textwidth}@{}}
+\toprule
+ID & Asterisk \\
+\midrule
+\hid{1} & \cid{23} filled JSON. Production $|\Delta|=4.5$; divergences are core-SVP vs Cost \texttt{rop}. \\
+\hid{2} & \textbf{Closed} 2026-08-12 ($Z_{2N}$ pack). Kept as history. \\
+\hid{3} & \cid{20}/\cid{21} SING bars met; serial NTT SING still loses vs persist. \\
+\hid{4} & \cid{70} balanced covering-b2 clears the full-adder $k{=}7$ gate; unsigned \cid{57} $k{=}7$ stays short. \cid{71}: the same digits still fail PicoRV Q; the cleared bound was the per-wire margin, and the port-weighted bound does not clear. LUT3 $k{=}127$ has three logged receipts, including an eight-tick NOP fetch of $0\mathrm{x}0$ and $0\mathrm{x}4$; none is a claim row. \cid{64}--\cid{66}/\cid{68} extract$\to$KS $n{=}64$. \cid{69} covering SING at $n{=}256$ and $n{=}512$. Native $k{=}1$ at $n{=}N$ still \cid{37}. \cid{60}/\cid{61} not closed. \\
+\hid{5} & \texttt{*PublicMS} gadgets ($g_0=\delta$): on-lattice intent, not a closer of old \hid{2}. \\
+\hid{6} & TensorLUT / quarantine vs campaign: parallel research, not P1030680 PT. \\
+\hid{7} & Catalog / Regenbogen / UEBUNG: negatives graded; middle ring $\neq A$ tested under VIII-fast (24/24 dead; 294 WO open); catalog parked @417, resume \texttt{--bombe-from 418}. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Standing non-implications}
+
+These were an unnumbered list until 2026-08-15. They are now \claimkind{N} rows in the
+claim sheet, because the campaign report and the agent rules cite \nid{5},
+\nid{6} and \nid{7} by number and those references had no resolvable target.
+Numbering follows the original clause order, so existing citations keep their
+meaning.
+
+\begin{center}
+\small
+\begin{tabular}{@{}lp{0.72\textwidth}@{}}
+\toprule
+ID & Do not let prose imply \\
+\midrule
+\nid{1} & A new lattice assumption. \\
+\nid{2} & ``We invented TFHE'' --- prior art is Chillotti et al., Ducas--Micciancio. \\
+\nid{3} & Production keys are safe without an estimator run (\hid{1}, \cid{23}). \\
+\nid{4} & Mock or trivial torus encoding $=$ FHE (\cid{1} is a shape laboratory). \\
+\nid{5} & P1030680 is decrypted (\hid{6}). \\
+\nid{6} & Campaign fitness $=$ encrypted tick rate. Fitness is cleartext Metal batch. \\
+\nid{7} & TensorLUT $=$ a U-534 / Thetis break (\hid{6}; \cid{19} is structural). \\
+\nid{8} & Side channels are measured. GPU power and timing are parked. \\
+\nid{9} & Quantum attacks are analyzed. Not in scope anywhere in this corpus. \\
+\bottomrule
+\end{tabular}
+\end{center}
+Wild ideas in Chapter~\ref{ch:frontier} are trajectory, not results.

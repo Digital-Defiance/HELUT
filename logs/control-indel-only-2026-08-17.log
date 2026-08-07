@@ -1,0 +1,135 @@
+indel family: +97 spliced menus (delta 4, splices on 4-letter group boundaries)
+  post-gap only: dropped 813 straddling menus. Kept menus carry the full edge count — nothing fell in the gap.
+  a spliced menu runs on the EXACT board — no tolerance, no survivor inflation. Step number and ciphertext index diverge; that is the whole mechanism.
+  indel-only: dropping 3 ordinary menus. On an undamaged ciphertext every splice is false, so ANY break here is a false positive.
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030684_control_menus.json (97 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 97 of 97
+min crib length: 16
+running 97 menus, highest deduction power first:
+  [1] VVVUUUVIRSOBENNULEINSXXMITU@45 edges=27 letters=19 loops=9 central=U
+  [2] VVVUUUVIRSOBENNULEINSXXMITU@4 edges=27 letters=21 loops=8 central=U
+  [3] VVVUUUVIRSOBENNULEINSXXMITU@21 edges=27 letters=21 loops=8 central=N
+  [4] VVVUUUVIRSOBENNULEINSXXMITU@42 edges=27 letters=20 loops=8 central=U
+  [5] VVVUUUVIRSOBENNULEINSXXMITU@73 edges=27 letters=21 loops=8 central=N
+  [6] VVVUUUVIRSOBENNULEINSXXMITU@79 edges=27 letters=21 loops=8 central=N
+  [7] VVVUUUVIRSOBENNULEINSXXMITU@92 edges=27 letters=23 loops=8 central=V
+  [8] VVUUUVIRSOBENNULEINSXXMITUU@5 edges=27 letters=21 loops=8 central=U
+  [9] VVUUUVIRSOBENNULEINSXXMITUU@15 edges=27 letters=21 loops=8 central=U
+  [10] VVUUUVIRSOBENNULEINSXXMITUU@22 edges=27 letters=21 loops=8 central=U
+  [11] VVUUUVIRSOBENNULEINSXXMITUU@32 edges=27 letters=21 loops=8 central=U
+  [12] VVUUUVIRSOBENNULEINSXXMITUU@44 edges=27 letters=20 loops=8 central=U
+  … 85 more
+shells/menu: 1344 (336 WO × 2 Greek × 2 UKW × rings PINNED AAAH) → 6.14e+08 settings
+rings pinned: these are ring HYPOTHESES, not coverage. A negative here eliminates 1 Ringstellung(en) out of 676, no more.
+kernel sieve: ≤10 plugs
+GPU pipeline depth: 4 shells in flight
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+rings AAAA: exhaustive over turnover-free spans, which is 0/26 (0%) of keys at 27 letters. --bombe-ring-sweep covers the rest at 26x cost.
+ETA floor (~50M/s): 19.9 min
+
+quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → logs/quarantine_indel_control.json
+  [1/97·1] VVVUUUVIRSOBENNULEINSXXMITU@45 edges=27 letters=19 loops=9 central=U dead at the board                        31s  19.8M/s ETA  49.7 min
+  [2/97·2] VVVUUUVIRSOBENNULEINSXXMITU@4 edges=27 letters=21 loops=8 central=U       1 stops → 0 scorable completions      65s  18.9M/s ETA  51.4 min
+  [3/97·3] VVVUUUVIRSOBENNULEINSXXMITU@21 edges=27 letters=21 loops=8 central=N dead at the board                        91s  20.3M/s ETA  47.3 min
+  [4/97·4] VVVUUUVIRSOBENNULEINSXXMITU@42 edges=27 letters=20 loops=8 central=U dead at the board                       122s  20.1M/s ETA  47.3 min
+  [5/97·5] VVVUUUVIRSOBENNULEINSXXMITU@73 edges=27 letters=21 loops=8 central=N dead at the board                       157s  19.5M/s ETA  48.2 min
+  [6/97·6] VVVUUUVIRSOBENNULEINSXXMITU@79 edges=27 letters=21 loops=8 central=N dead at the board                       186s  19.9M/s ETA  46.9 min
+  [7/97·7] VVVUUUVIRSOBENNULEINSXXMITU@92 edges=27 letters=23 loops=8 central=V dead at the board                       221s  19.5M/s ETA  47.3 min
+  [8/97·8] VVUUUVIRSOBENNULEINSXXMITUU@5 edges=27 letters=21 loops=8 central=U       1 stops → 0 scorable completions     254s  19.4M/s ETA  47.1 min
+  [9/97·9] VVUUUVIRSOBENNULEINSXXMITUU@15 edges=27 letters=21 loops=8 central=U dead at the board                       281s  19.6M/s ETA  45.9 min
+  [10/97·10] VVUUUVIRSOBENNULEINSXXMITUU@22 edges=27 letters=21 loops=8 central=U dead at the board                       311s  19.7M/s ETA  45.1 min
+  [11/97·11] VVUUUVIRSOBENNULEINSXXMITUU@32 edges=27 letters=21 loops=8 central=U dead at the board                       345s  19.6M/s ETA  44.9 min
+  [12/97·12] VVUUUVIRSOBENNULEINSXXMITUU@44 edges=27 letters=20 loops=8 central=U dead at the board                       377s  19.6M/s ETA  44.5 min
+  [13/97·13] VVUUUVIRSOBENNULEINSXXMITUU@46 edges=27 letters=20 loops=8 central=U dead at the board                       407s  19.6M/s ETA  43.8 min
+  [14/97·14] VVUUUVIRSOBENNULEINSXXMITUU@74 edges=27 letters=21 loops=8 central=N dead at the board                       442s  19.4M/s ETA  43.7 min
+  [15/97·15] VVUUUVIRSOBENNULEINSXXMITUU@93 edges=27 letters=23 loops=8 central=U dead at the board                       479s  19.2M/s ETA  43.6 min
+  [16/97·16] UUVIRSOBENNULEINSXXMITUUUVI@8 edges=27 letters=21 loops=8 central=U       1 stops → 0 scorable completions     510s  19.3M/s ETA  43.0 min
+  [17/97·17] UUVIRSOBENNULEINSXXMITUUUVI@18 edges=27 letters=21 loops=8 central=U dead at the board                       539s  19.4M/s ETA  42.3 min
+  [18/97·18] UUVIRSOBENNULEINSXXMITUUUVI@44 edges=27 letters=20 loops=8 central=U dead at the board                       575s  19.2M/s ETA  42.0 min
+  [19/97·19] UUVIRSOBENNULEINSXXMITUUUVI@46 edges=27 letters=20 loops=8 central=U dead at the board                       604s  19.3M/s ETA  41.3 min
+  [20/97·20] UUVIRSOBENNULEINSXXMITUUUVI@77 edges=27 letters=21 loops=8 central=I dead at the board                       639s  19.2M/s ETA  41.0 min
+  [21/97·21] VVVUUUVIRSOBENNULEINSXXMITU@10 edges=27 letters=22 loops=7 central=U dead at the board                       676s  19.1M/s ETA  40.8 min
+  [22/97·22] VVVUUUVIRSOBENNULEINSXXMITU@14 edges=27 letters=22 loops=7 central=U dead at the board                       703s  19.2M/s ETA  40.0 min
+  [23/97·23] VVVUUUVIRSOBENNULEINSXXMITU@18 edges=27 letters=21 loops=7 central=U dead at the board                       732s  19.3M/s ETA  39.3 min
+  [24/97·24] VVVUUUVIRSOBENNULEINSXXMITU@25 edges=27 letters=21 loops=7 central=V dead at the board                       759s  19.4M/s ETA  38.5 min
+  [25/97·25] VVVUUUVIRSOBENNULEINSXXMITU@31 edges=27 letters=22 loops=7 central=U dead at the board                       793s  19.4M/s ETA  38.1 min
+  [26/97·26] VVVUUUVIRSOBENNULEINSXXMITU@43 edges=27 letters=21 loops=7 central=U dead at the board                       825s  19.4M/s ETA  37.5 min
+  [27/97·27] VVVUUUVIRSOBENNULEINSXXMITU@55 edges=27 letters=22 loops=7 central=U dead at the board                       857s  19.3M/s ETA  37.0 min
+  [28/97·28] VVVUUUVIRSOBENNULEINSXXMITU@87 edges=27 letters=22 loops=7 central=V dead at the board                       889s  19.4M/s ETA  36.5 min
+  [29/97·29] VVVUUUVIRSOBENNULEINSXXMITU@88 edges=27 letters=22 loops=7 central=V dead at the board                       925s  19.3M/s ETA  36.1 min
+  [30/97·30] VVVUUUVIRSOBENNULEINSXXMITU@89 edges=27 letters=22 loops=7 central=V dead at the board                       965s  19.1M/s ETA  35.9 min
+  [31/97·31] VVVUUUVIRSOBENNULEINSXXMITU@90 edges=27 letters=22 loops=7 central=V dead at the board                      1001s  19.0M/s ETA  35.5 min
+  [32/97·32] VVUUUVIRSOBENNULEINSXXMITUU@19 edges=27 letters=21 loops=7 central=U dead at the board                      1029s  19.1M/s ETA  34.8 min
+  [33/97·33] VVUUUVIRSOBENNULEINSXXMITUU@26 edges=27 letters=21 loops=7 central=U dead at the board                      1060s  19.1M/s ETA  34.2 min
+  [34/97·34] VVUUUVIRSOBENNULEINSXXMITUU@41 edges=27 letters=21 loops=7 central=U dead at the board                      1097s  19.0M/s ETA  33.9 min
+  [35/97·35] VVUUUVIRSOBENNULEINSXXMITUU@43 edges=27 letters=21 loops=7 central=U dead at the board                      1128s  19.1M/s ETA  33.3 min
+  [36/97·36] VVUUUVIRSOBENNULEINSXXMITUU@56 edges=27 letters=22 loops=7 central=U dead at the board                      1159s  19.1M/s ETA  32.7 min
+  [37/97·37] VVUUUVIRSOBENNULEINSXXMITUU@73 edges=27 letters=21 loops=7 central=N dead at the board                      1197s  19.0M/s ETA  32.3 min
+  [38/97·38] VVUUUVIRSOBENNULEINSXXMITUU@80 edges=27 letters=22 loops=7 central=N dead at the board                      1225s  19.0M/s ETA  31.7 min
+  [39/97·39] VVUUUVIRSOBENNULEINSXXMITUU@88 edges=27 letters=22 loops=7 central=U dead at the board                      1257s  19.1M/s ETA  31.2 min
+  [40/97·40] VVUUUVIRSOBENNULEINSXXMITUU@89 edges=27 letters=22 loops=7 central=U dead at the board                      1295s  19.0M/s ETA  30.8 min
+  [41/97·41] VVUUUVIRSOBENNULEINSXXMITUU@90 edges=27 letters=22 loops=7 central=U dead at the board                      1334s  18.9M/s ETA  30.4 min
+  [42/97·42] UUVIRSOBENNULEINSXXMITUUUVI@5 edges=27 letters=21 loops=7 central=U dead at the board                      1366s  18.9M/s ETA  29.8 min
+  [43/97·43] UUVIRSOBENNULEINSXXMITUUUVI@14 edges=27 letters=22 loops=7 central=U dead at the board                      1405s  18.8M/s ETA  29.4 min
+  [44/97·44] UUVIRSOBENNULEINSXXMITUUUVI@15 edges=27 letters=21 loops=7 central=U dead at the board                      1437s  18.8M/s ETA  28.9 min
+  [45/97·45] UUVIRSOBENNULEINSXXMITUUUVI@21 edges=27 letters=21 loops=7 central=N dead at the board                      1469s  18.8M/s ETA  28.3 min
+  [46/97·46] UUVIRSOBENNULEINSXXMITUUUVI@22 edges=27 letters=21 loops=7 central=U dead at the board                      1505s  18.8M/s ETA  27.8 min
+  [47/97·47] UUVIRSOBENNULEINSXXMITUUUVI@47 edges=27 letters=21 loops=7 central=U dead at the board                      1540s  18.7M/s ETA  27.3 min
+  [48/97·48] UUVIRSOBENNULEINSXXMITUUUVI@49 edges=27 letters=21 loops=7 central=U dead at the board                      1575s  18.7M/s ETA  26.8 min
+  [49/97·49] UUVIRSOBENNULEINSXXMITUUUVI@73 edges=27 letters=21 loops=7 central=N dead at the board                      1614s  18.6M/s ETA  26.4 min
+  [50/97·50] UUVIRSOBENNULEINSXXMITUUUVI@83 edges=27 letters=23 loops=7 central=I dead at the board                      1650s  18.6M/s ETA  25.9 min
+  [51/97·51] UUVIRSOBENNULEINSXXMITUUUVI@90 edges=27 letters=22 loops=7 central=I dead at the board                      1690s  18.5M/s ETA  25.4 min
+  [52/97·52] UUVIRSOBENNULEINSXXMITUUUVI@96 edges=27 letters=24 loops=7 central=U dead at the board                      1727s  18.5M/s ETA  24.9 min
+  [53/97·53] VVVUUUVIRSOBENNULEINSXXMITU@40 edges=27 letters=22 loops=6 central=U dead at the board                      1767s  18.4M/s ETA  24.4 min
+  [54/97·54] VVVUUUVIRSOBENNULEINSXXMITU@56 edges=27 letters=22 loops=6 central=U dead at the board                      1800s  18.4M/s ETA  23.9 min
+  [55/97·55] VVVUUUVIRSOBENNULEINSXXMITU@72 edges=27 letters=22 loops=6 central=N dead at the board                      1840s  18.4M/s ETA  23.4 min
+  [56/97·56] VVVUUUVIRSOBENNULEINSXXMITU@86 edges=27 letters=22 loops=6 central=V dead at the board                      1878s  18.3M/s ETA  22.9 min
+  [57/97·57] VVVUUUVIRSOBENNULEINSXXMITU@91 edges=27 letters=23 loops=6 central=V dead at the board                      1916s  18.3M/s ETA  22.4 min
+  [58/97·58] VVUUUVIRSOBENNULEINSXXMITUU@11 edges=27 letters=23 loops=6 central=U dead at the board                      1955s  18.2M/s ETA  21.9 min
+  [59/97·59] VVUUUVIRSOBENNULEINSXXMITUU@12 edges=27 letters=22 loops=6 central=U dead at the board                      1990s  18.2M/s ETA  21.4 min
+  [60/97·60] VVUUUVIRSOBENNULEINSXXMITUU@65 edges=27 letters=23 loops=6 central=U dead at the board                      2025s  18.2M/s ETA  20.8 min
+  [61/97·61] VVUUUVIRSOBENNULEINSXXMITUU@87 edges=27 letters=22 loops=6 central=U dead at the board                      2061s  18.2M/s ETA  20.3 min
+  [62/97·62] VVUUUVIRSOBENNULEINSXXMITUU@91 edges=27 letters=23 loops=6 central=U dead at the board                      2097s  18.2M/s ETA  19.7 min
+  [63/97·63] VVUUUVIRSOBENNULEINSXXMITUU@92 edges=27 letters=23 loops=6 central=U dead at the board                      2133s  18.1M/s ETA  19.2 min
+  [64/97·64] UUVIRSOBENNULEINSXXMITUUUVI@29 edges=27 letters=22 loops=6 central=U dead at the board                      2169s  18.1M/s ETA  18.6 min
+  [65/97·65] UUVIRSOBENNULEINSXXMITUUUVI@59 edges=27 letters=23 loops=6 central=U dead at the board                      2201s  18.1M/s ETA  18.1 min
+  [66/97·66] UUVIRSOBENNULEINSXXMITUUUVI@60 edges=27 letters=24 loops=6 central=U dead at the board                      2236s  18.1M/s ETA  17.5 min
+  [67/97·67] UUVIRSOBENNULEINSXXMITUUUVI@68 edges=27 letters=23 loops=6 central=U dead at the board                      2272s  18.1M/s ETA  17.0 min
+  [68/97·68] UUVIRSOBENNULEINSXXMITUUUVI@85 edges=27 letters=23 loops=6 central=I dead at the board                      2308s  18.1M/s ETA  16.4 min
+  [69/97·69] UUVIRSOBENNULEINSXXMITUUUVI@91 edges=27 letters=23 loops=6 central=I dead at the board                      2341s  18.1M/s ETA  15.8 min
+  [70/97·70] UUVIRSOBENNULEINSXXMITUUUVI@92 edges=27 letters=23 loops=6 central=I dead at the board                      2378s  18.1M/s ETA  15.3 min
+  [71/97·71] UUVIRSOBENNULEINSXXMITUUUVI@93 edges=27 letters=23 loops=6 central=U dead at the board                      2414s  18.1M/s ETA  14.7 min
+  [72/97·72] VVVUUUVIRSOBENNULEINSXXMITU@11 edges=27 letters=23 loops=5 central=U dead at the board                      2449s  18.1M/s ETA  14.2 min
+  [73/97·73] VVVUUUVIRSOBENNULEINSXXMITU@34 edges=27 letters=23 loops=5 central=U dead at the board                      2485s  18.0M/s ETA  13.6 min
+  [74/97·74] VVVUUUVIRSOBENNULEINSXXMITU@38 edges=27 letters=23 loops=5 central=U dead at the board                      2521s  18.0M/s ETA  13.1 min
+  [75/97·75] VVVUUUVIRSOBENNULEINSXXMITU@59 edges=27 letters=23 loops=5 central=U dead at the board                      2557s  18.0M/s ETA  12.5 min
+  [76/97·76] VVVUUUVIRSOBENNULEINSXXMITU@64 edges=27 letters=24 loops=5 central=U dead at the board                      2592s  18.0M/s ETA  11.9 min
+  [77/97·77] VVVUUUVIRSOBENNULEINSXXMITU@69 edges=27 letters=23 loops=5 central=N dead at the board                      2628s  18.0M/s ETA  11.4 min
+  [78/97·78] VVVUUUVIRSOBENNULEINSXXMITU@93 edges=27 letters=23 loops=5 central=V dead at the board                      2669s  17.9M/s ETA  10.8 min
+  [79/97·79] VVVUUUVIRSOBENNULEINSXXMITU@94 edges=27 letters=24 loops=5 central=V dead at the board                      2706s  17.9M/s ETA  10.3 min
+  [80/97·80] VVVUUUVIRSOBENNULEINSXXMITU@96 edges=27 letters=24 loops=5 central=V dead at the board                      2738s  17.9M/s ETA   9.7 min
+  [81/97·81] VVUUUVIRSOBENNULEINSXXMITUU@35 edges=27 letters=23 loops=5 central=U dead at the board                      2773s  17.9M/s ETA   9.1 min
+  [82/97·82] VVUUUVIRSOBENNULEINSXXMITUU@57 edges=27 letters=23 loops=5 central=U dead at the board                      2810s  17.9M/s ETA   8.6 min
+  [83/97·83] VVUUUVIRSOBENNULEINSXXMITUU@70 edges=27 letters=23 loops=5 central=N dead at the board                      2845s  17.9M/s ETA   8.0 min
+  [84/97·84] VVUUUVIRSOBENNULEINSXXMITUU@95 edges=27 letters=24 loops=5 central=U dead at the board                      2883s  17.9M/s ETA   7.4 min
+  [85/97·85] VVUUUVIRSOBENNULEINSXXMITUU@97 edges=27 letters=24 loops=5 central=U dead at the board                      2920s  17.9M/s ETA   6.9 min
+  [86/97·86] UUVIRSOBENNULEINSXXMITUUUVI@35 edges=27 letters=23 loops=5 central=U dead at the board                      2955s  17.9M/s ETA   6.3 min
+  [87/97·87] UUVIRSOBENNULEINSXXMITUUUVI@38 edges=27 letters=23 loops=5 central=U dead at the board                      2994s  17.8M/s ETA   5.7 min
+  [88/97·88] UUVIRSOBENNULEINSXXMITUUUVI@53 edges=27 letters=23 loops=5 central=U dead at the board                      3030s  17.8M/s ETA   5.2 min
+  [89/97·89] UUVIRSOBENNULEINSXXMITUUUVI@63 edges=27 letters=24 loops=5 central=U dead at the board                      3065s  17.8M/s ETA   4.6 min
+  [90/97·90] UUVIRSOBENNULEINSXXMITUUUVI@67 edges=27 letters=23 loops=5 central=U dead at the board                      3105s  17.8M/s ETA   4.0 min
+  [91/97·91] UUVIRSOBENNULEINSXXMITUUUVI@94 edges=27 letters=24 loops=5 central=U dead at the board                      3142s  17.8M/s ETA   3.5 min
+  [92/97·92] UUVIRSOBENNULEINSXXMITUUUVI@95 edges=27 letters=24 loops=5 central=U dead at the board                      3178s  17.8M/s ETA   2.9 min
+  [93/97·93] VVVUUUVIRSOBENNULEINSXXMITU@63 edges=27 letters=24 loops=4 central=U dead at the board                      3211s  17.8M/s ETA   2.3 min
+  [94/97·94] VVUUUVIRSOBENNULEINSXXMITUU@60 edges=27 letters=24 loops=4 central=U dead at the board                      3247s  17.8M/s ETA   1.7 min
+  [95/97·95] VVUUUVIRSOBENNULEINSXXMITUU@64 edges=27 letters=24 loops=4 central=U dead at the board                      3281s  17.8M/s ETA   1.2 min
+  [96/97·96] VVUUUVIRSOBENNULEINSXXMITUU@94 edges=27 letters=24 loops=4 central=U dead at the board                      3318s  17.8M/s ETA   0.6 min
+  [97/97·97] UUVIRSOBENNULEINSXXMITUUUVI@97 edges=27 letters=24 loops=4 central=U dead at the board                      3355s  17.8M/s ETA   0.0 min
+
+total raw stops: 3 over 59575047168 settings (17.8M/s mean)
+survived the 10-plug sieve: 0
+every stop was a ghost: no menu admits a physically buildable 10-plug board.
+The cribs tried are not in this message at the offsets tried.
+quarantine: 0 soft-band near-misses (solo pass complete)

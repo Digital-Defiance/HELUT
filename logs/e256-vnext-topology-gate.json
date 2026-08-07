@@ -1,0 +1,249 @@
+{
+  "findings": [
+    "Mirrored: for every tested rotor count in {1,4,8,16,256}, every key, and all 256 masks x 256 inputs, the fixed-state map is the identity at mask 0 and a fixed-point-free involution otherwise. Active rotor count does not change this.",
+    "Two-query same-state distinguisher advantage against the mirrored construction is invariant in rotor count; 256 active rotors does not reduce it.",
+    "The independent ingress/egress candidate is statistically indistinguishable from a uniform random permutation under the same two-query test, and matches the Poisson(1) fixed-point expectation.",
+    "The involution halves same-state codebook cost (128 queries versus 255).",
+    "At equal online lookup depth the independent candidate is not slower; the mirrored path pays 2R+2 dependent lookups per byte."
+  ],
+  "inputs": {
+    "fixture_manifest": "Fixtures/Staging/Enigma256/E256-v3-gen0-0206c00e5084ebafe1f841708d2af3f4a029bcf160f7b22ed63bb5078d376e16-fixture-v5/fixture-v5.json",
+    "fixture_manifest_sha256": "d11753d3a7ed041e77b484d69cf8196087fd816baf4938c4c71d269235a99743",
+    "harness": "Scripts/e256_topology_experiment.py",
+    "harness_sha256": "2fb7f25af28b3ccdd2117911daaee13e60fdb8c51aafd2d499f16cbff30735c3",
+    "profile_sha256": "0206c00e5084ebafe1f841708d2af3f4a029bcf160f7b22ed63bb5078d376e16"
+  },
+  "limitations": [
+    "This is bounded structural and measured-advantage evidence, not an IND-CPA proof, not an HMAC/HKDF security proof, and not external cryptanalysis.",
+    "The distinguisher assumes a repeated-state or chosen-plaintext oracle at one frozen position. It is not a decrypt of nonce-respecting traffic and implies no plaintext recovery against E256-v3 as deployed under a standard AEAD.",
+    "Indistinguishability under this one test is not security. The asymmetric candidate has no independent implementation, KATs, RTL, side-channel evidence, or review.",
+    "Cycle statistics use 64 keys; they are consistent with random-permutation behavior but are not a proof of pseudorandomness.",
+    "Exact 128-two-cycle counts are measured on the pinned mask sample; for the remaining masks the count follows from involution and fixed-point freedom, not measurement.",
+    "No C/H/N row, E256-003, E256-061, or release gate is closed by this receipt. Standard AEAD remains mandatory for real data."
+  ],
+  "no_wall_clock": "No timestamp is asserted; the machine clock and session date disagree.",
+  "performance_advisory_excluded_from_digest": {
+    "1": {
+      "asymmetric_dependent_lookups_per_byte": 4,
+      "asymmetric_split": "1+1",
+      "asymmetric_us_per_byte": 0.79,
+      "mirrored_dependent_lookups_per_byte": 4,
+      "mirrored_us_per_byte": 0.79
+    },
+    "16": {
+      "asymmetric_dependent_lookups_per_byte": 18,
+      "asymmetric_split": "8+8",
+      "asymmetric_us_per_byte": 3.5,
+      "mirrored_dependent_lookups_per_byte": 34,
+      "mirrored_us_per_byte": 6.39
+    },
+    "256": {
+      "asymmetric_dependent_lookups_per_byte": 258,
+      "asymmetric_split": "128+128",
+      "asymmetric_us_per_byte": 48.0,
+      "mirrored_dependent_lookups_per_byte": 514,
+      "mirrored_us_per_byte": 87.92
+    },
+    "4": {
+      "asymmetric_dependent_lookups_per_byte": 6,
+      "asymmetric_split": "2+2",
+      "asymmetric_us_per_byte": 1.16,
+      "mirrored_dependent_lookups_per_byte": 10,
+      "mirrored_us_per_byte": 1.8
+    },
+    "8": {
+      "asymmetric_dependent_lookups_per_byte": 10,
+      "asymmetric_split": "4+4",
+      "asymmetric_us_per_byte": 1.9,
+      "mirrored_dependent_lookups_per_byte": 18,
+      "mirrored_us_per_byte": 3.18
+    }
+  },
+  "pinned_parameters": {
+    "asymmetric_reference_stack": 4,
+    "codebook_keys": 8,
+    "cycle_statistics_keys": 64,
+    "distinguisher_masks_per_key": 128,
+    "distinguisher_trials": 20000,
+    "recovery_keys": 8,
+    "rotor_counts": [
+      1,
+      4,
+      8,
+      16,
+      256
+    ],
+    "structural_keys": 64,
+    "two_cycle_measured_masks": [
+      1,
+      2,
+      3,
+      127,
+      128,
+      129,
+      254,
+      255
+    ]
+  },
+  "question": {
+    "asymmetric_candidate": "C_i = B_i( A_i(P_i) XOR M_i )",
+    "decision": "does active rotor count remove the fixed-state involution?",
+    "mirrored": "C_i = A_i^-1( A_i(P_i) XOR M_i )"
+  },
+  "results": {
+    "A_fixture_fidelity": {
+      "ciphertext_to_plaintext_matches": 1024,
+      "collapsed_algebra_matches_center_io": 1024,
+      "fixture": "Fixtures/Staging/Enigma256/E256-v3-gen0-0206c00e5084ebafe1f841708d2af3f4a029bcf160f7b22ed63bb5078d376e16-fixture-v5",
+      "modeled_output_matches": 1024,
+      "pass": true,
+      "recomputed_center_mask_matches": 1024,
+      "trace_rows": 1024
+    },
+    "B_structure_vs_rotor_count": {
+      "1": {
+        "exactly_128_two_cycles_on_measured_masks": true,
+        "fixed_point_free_for_all_255_nonzero_masks": true,
+        "identity_at_mask_zero": true,
+        "inputs_per_mask": 256,
+        "involution_for_all_255_nonzero_masks": true,
+        "keys": 64,
+        "literal_stack_equals_collapsed_algebra": true,
+        "masks_per_key": 256
+      },
+      "16": {
+        "exactly_128_two_cycles_on_measured_masks": true,
+        "fixed_point_free_for_all_255_nonzero_masks": true,
+        "identity_at_mask_zero": true,
+        "inputs_per_mask": 256,
+        "involution_for_all_255_nonzero_masks": true,
+        "keys": 64,
+        "literal_stack_equals_collapsed_algebra": true,
+        "masks_per_key": 256
+      },
+      "256": {
+        "exactly_128_two_cycles_on_measured_masks": true,
+        "fixed_point_free_for_all_255_nonzero_masks": true,
+        "identity_at_mask_zero": true,
+        "inputs_per_mask": 256,
+        "involution_for_all_255_nonzero_masks": true,
+        "keys": 64,
+        "literal_stack_equals_collapsed_algebra": true,
+        "masks_per_key": 256
+      },
+      "4": {
+        "exactly_128_two_cycles_on_measured_masks": true,
+        "fixed_point_free_for_all_255_nonzero_masks": true,
+        "identity_at_mask_zero": true,
+        "inputs_per_mask": 256,
+        "involution_for_all_255_nonzero_masks": true,
+        "keys": 64,
+        "literal_stack_equals_collapsed_algebra": true,
+        "masks_per_key": 256
+      },
+      "8": {
+        "exactly_128_two_cycles_on_measured_masks": true,
+        "fixed_point_free_for_all_255_nonzero_masks": true,
+        "identity_at_mask_zero": true,
+        "inputs_per_mask": 256,
+        "involution_for_all_255_nonzero_masks": true,
+        "keys": 64,
+        "literal_stack_equals_collapsed_algebra": true,
+        "masks_per_key": 256
+      }
+    },
+    "C_mask_recovery": {
+      "asymmetric_mask_unique_and_equals_A_P_xor_Binv_C": true,
+      "keys": 8,
+      "masks_per_key": 256,
+      "mirrored_mask_unique_and_equals_A_P_xor_A_C": true,
+      "note": "rotor count does not appear in either recovery formula"
+    },
+    "D_cycle_structure": {
+      "asymmetric": {
+        "involution_rate": 0.0,
+        "mean_fixed_points": 1.0312,
+        "mean_max_cycle": 163.34
+      },
+      "asymmetric_stack": "4+4",
+      "keys": 64,
+      "mirrored_exact": {
+        "involution_rate": 1.0,
+        "mean_fixed_points": 0.0,
+        "mean_max_cycle": 2.0
+      },
+      "poisson_expectation_fixed_points": 1.0,
+      "uniform_random_permutation_control": {
+        "involution_rate": 0.0,
+        "mean_fixed_points": 0.8281,
+        "mean_max_cycle": 168.8
+      }
+    },
+    "E_two_query_distinguisher": {
+      "asymmetric": {
+        "1": {
+          "advantage": 0.00015,
+          "detect_rate": 0.0082
+        },
+        "16": {
+          "advantage": 0.001,
+          "detect_rate": 0.00705
+        },
+        "256": {
+          "advantage": 0.00115,
+          "detect_rate": 0.0069
+        },
+        "4": {
+          "advantage": 0.00045,
+          "detect_rate": 0.0076
+        },
+        "8": {
+          "advantage": 0.00015,
+          "detect_rate": 0.0082
+        }
+      },
+      "masks_per_key": 128,
+      "mirrored": {
+        "1": {
+          "advantage": 0.99195,
+          "detect_rate": 1.0
+        },
+        "16": {
+          "advantage": 0.99195,
+          "detect_rate": 1.0
+        },
+        "256": {
+          "advantage": 0.99195,
+          "detect_rate": 1.0
+        },
+        "4": {
+          "advantage": 0.99195,
+          "detect_rate": 1.0
+        },
+        "8": {
+          "advantage": 0.99195,
+          "detect_rate": 1.0
+        }
+      },
+      "queries_per_trial": 2,
+      "random_permutation_control_rate": 0.00805,
+      "trials_per_cell": 20000
+    },
+    "F_same_state_codebook_cost": {
+      "asymmetric_queries_for_full_state_map": 255,
+      "keys": 8,
+      "leak_factor": 1.9922,
+      "mirrored_queries_for_full_state_map": 128
+    }
+  },
+  "results_sha256": "cc1ca362872c0a822270a3f8ad7b18525301aac54f7b3b59bf819aa6c10635fe",
+  "schema": "E256-VNEXT-TOPOLOGY-GATE-1",
+  "status": "OPEN_PROGRESS",
+  "toolchain": {
+    "git_dirty": true,
+    "git_head": "a8e192a446ce2efca73998fdb54c7e1c44bd7579",
+    "numpy": "1.26.4",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "python": "3.9.6"
+  }
+}

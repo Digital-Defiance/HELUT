@@ -1,0 +1,222 @@
+[0/1] Planning build
+Building for production...
+[0/3] Write sources
+[1/3] Write swift-version--58304C5D6DBC2206.txt
+[3/4] Compiling HELUTCore AdversarialHarness.swift
+/Volumes/Code/HELUT/Sources/HELUTCore/Enigma256Wire.swift:591:21: warning: mutation of captured var 'received' in concurrently-executing code [#SendableClosureCaptures]
+589 |                 try responder.handshakeAsResponder()
+590 |                 for _ in messages {
+591 |                     received.append(try responder.receivePlaintext())
+    |                     `- warning: mutation of captured var 'received' in concurrently-executing code [#SendableClosureCaptures]
+592 |                 }
+593 |                 do { _ = try responder.receivePlaintext() }
+
+/Volumes/Code/HELUT/Sources/HELUTCore/Enigma256Wire.swift:596:17: warning: mutation of captured var 'responderError' in concurrently-executing code [#SendableClosureCaptures]
+594 |                 catch Enigma256WireError.closed { /* ok */ }
+595 |             } catch {
+596 |                 responderError = error
+    |                 `- warning: mutation of captured var 'responderError' in concurrently-executing code [#SendableClosureCaptures]
+597 |             }
+598 |         }
+
+/Volumes/Code/HELUT/Sources/HELUTCore/Enigma256Wire.swift:610:17: warning: mutation of captured var 'initiatorError' in concurrently-executing code [#SendableClosureCaptures]
+608 |                 try initiator.close()
+609 |             } catch {
+610 |                 initiatorError = error
+    |                 `- warning: mutation of captured var 'initiatorError' in concurrently-executing code [#SendableClosureCaptures]
+611 |             }
+612 |         }
+
+/Volumes/Code/HELUT/Sources/HELUTCore/Enigma256Wire.swift:644:21: warning: mutation of captured var 'received' in concurrently-executing code [#SendableClosureCaptures]
+642 |                 try responder.handshakeAsPSKResponder(passphrase: passphrase, iterations: iterations)
+643 |                 for _ in messages {
+644 |                     received.append(try responder.receivePlaintext())
+    |                     `- warning: mutation of captured var 'received' in concurrently-executing code [#SendableClosureCaptures]
+645 |                 }
+646 |                 do { _ = try responder.receivePlaintext() }
+
+/Volumes/Code/HELUT/Sources/HELUTCore/Enigma256Wire.swift:649:17: warning: mutation of captured var 'responderError' in concurrently-executing code [#SendableClosureCaptures]
+647 |                 catch Enigma256WireError.closed {}
+648 |             } catch {
+649 |                 responderError = error
+    |                 `- warning: mutation of captured var 'responderError' in concurrently-executing code [#SendableClosureCaptures]
+650 |             }
+651 |         }
+
+/Volumes/Code/HELUT/Sources/HELUTCore/Enigma256Wire.swift:667:17: warning: mutation of captured var 'initiatorError' in concurrently-executing code [#SendableClosureCaptures]
+665 |                 try initiator.close()
+666 |             } catch {
+667 |                 initiatorError = error
+    |                 `- warning: mutation of captured var 'initiatorError' in concurrently-executing code [#SendableClosureCaptures]
+668 |             }
+669 |         }
+
+/Volumes/Code/HELUT/Sources/HELUTCore/Enigma256Wire.swift:707:21: warning: mutation of captured var 'received' in concurrently-executing code [#SendableClosureCaptures]
+705 |                 try responder.handshakeAsHybridResponder()
+706 |                 for _ in messages {
+707 |                     received.append(try responder.receivePlaintext())
+    |                     `- warning: mutation of captured var 'received' in concurrently-executing code [#SendableClosureCaptures]
+708 |                 }
+709 |                 do { _ = try responder.receivePlaintext() }
+
+/Volumes/Code/HELUT/Sources/HELUTCore/Enigma256Wire.swift:712:17: warning: mutation of captured var 'responderError' in concurrently-executing code [#SendableClosureCaptures]
+710 |                 catch Enigma256WireError.closed {}
+711 |             } catch {
+712 |                 responderError = error
+    |                 `- warning: mutation of captured var 'responderError' in concurrently-executing code [#SendableClosureCaptures]
+713 |             }
+714 |         }
+
+/Volumes/Code/HELUT/Sources/HELUTCore/Enigma256Wire.swift:726:17: warning: mutation of captured var 'initiatorError' in concurrently-executing code [#SendableClosureCaptures]
+724 |                 try initiator.close()
+725 |             } catch {
+726 |                 initiatorError = error
+    |                 `- warning: mutation of captured var 'initiatorError' in concurrently-executing code [#SendableClosureCaptures]
+727 |             }
+728 |         }
+
+/Volumes/Code/HELUT/Sources/HELUTCore/SteckerInvolution.swift:181:13: warning: variable 'base' was never mutated; consider changing to 'let' constant
+179 |         let frozenSet = Set(frozenNorm.map { ($0.0 << 8) | $0.1 })
+180 |         let free = pairs.filter { !frozenSet.contains(($0.0 << 8) | $0.1) }
+181 |         var base = SteckerInvolution(pairs: frozenNorm)
+    |             `- warning: variable 'base' was never mutated; consider changing to 'let' constant
+182 |         let room = max(0, maxPairs - base.pairCount)
+183 |         if room == 0 { return base }
+
+[#SendableClosureCaptures]: <https://docs.swift.org/compiler/documentation/diagnostics/sendable-closure-captures>
+[3/6] Write sources
+[5/7] Compiling helut BombeMetal.swift
+/Volumes/Code/HELUT/Sources/helut/BombeSweep.swift:440:38: warning: capture of 'survivors' with non-Sendable type 'UnsafeBufferPointer<UInt32>' in a '@Sendable' closure [#SendableClosureCaptures]
+ 438 |                     let hostAlive = !bombe.isDead(menu: menu, start: (g, l, m, r))
+ 439 |                     if hostAlive { alive += 1 }
+ 440 |                     if hostAlive != (survivors[lane] != 0) { bad += 1 }
+     |                                      `- warning: capture of 'survivors' with non-Sendable type 'UnsafeBufferPointer<UInt32>' in a '@Sendable' closure [#SendableClosureCaptures]
+ 441 |                     _ = hostStops
+ 442 |                 }
+
+Swift.UnsafeBufferPointer:1:23: note: generic struct 'UnsafeBufferPointer' does not conform to the 'Sendable' protocol
+1 | @frozen public struct UnsafeBufferPointer<Element> : Copyable where Element : ~Copyable {
+  |                       `- note: generic struct 'UnsafeBufferPointer' does not conform to the 'Sendable' protocol
+2 |     public let count: Int
+3 |     @inlinable public init(start: UnsafePointer<Element>?, count: Int)
+
+/Volumes/Code/HELUT/Sources/helut/CleartextBatchHybrid.swift:602:17: warning: capture of 'base' with non-Sendable type 'UnsafeMutablePointer<Float>' in a '@Sendable' closure [#SendableClosureCaptures]
+600 |                     }
+601 |                 }
+602 |                 base[lane] = score
+    |                 `- warning: capture of 'base' with non-Sendable type 'UnsafeMutablePointer<Float>' in a '@Sendable' closure [#SendableClosureCaptures]
+603 |             }
+604 |         }
+
+Swift.UnsafeMutablePointer:1:23: note: generic struct 'UnsafeMutablePointer' does not conform to the 'Sendable' protocol
+1 | @frozen public struct UnsafeMutablePointer<Pointee> : Copyable where Pointee : ~Copyable {
+  |                       `- note: generic struct 'UnsafeMutablePointer' does not conform to the 'Sendable' protocol
+2 |     public let _rawValue: Builtin.RawPointer
+3 |     public init(_ _rawValue: Builtin.RawPointer)
+
+/Volumes/Code/HELUT/Sources/helut/CleartextBatchHybrid.swift:628:17: warning: capture of 'base' with non-Sendable type 'UnsafeMutablePointer<Float>' in a '@Sendable' closure [#SendableClosureCaptures]
+626 |                     if expect < 26, p == Int(expect) { hits += 1 }
+627 |                 }
+628 |                 base[lane] = hits
+    |                 `- warning: capture of 'base' with non-Sendable type 'UnsafeMutablePointer<Float>' in a '@Sendable' closure [#SendableClosureCaptures]
+629 |             }
+630 |         }
+
+Swift.UnsafeMutablePointer:1:23: note: generic struct 'UnsafeMutablePointer' does not conform to the 'Sendable' protocol
+1 | @frozen public struct UnsafeMutablePointer<Pointee> : Copyable where Pointee : ~Copyable {
+  |                       `- note: generic struct 'UnsafeMutablePointer' does not conform to the 'Sendable' protocol
+2 |     public let _rawValue: Builtin.RawPointer
+3 |     public init(_ _rawValue: Builtin.RawPointer)
+
+/Volumes/Code/HELUT/Sources/helut/Enigma256Commands.swift:744:13: warning: result of 'try?' is unused [#no-usage]
+742 |         if let handle = try? FileHandle(forWritingTo: url) {
+743 |             defer { try? handle.close() }
+744 |             try? handle.seekToEnd()
+    |             `- warning: result of 'try?' is unused [#no-usage]
+745 |             if let payload = (line + "\n").data(using: .utf8) {
+746 |                 try? handle.write(contentsOf: payload)
+
+/Volumes/Code/HELUT/Sources/helut/ExhaustiveCracker.swift:197:19: warning: immutable value 'device' was never used; consider replacing with '_' or removing it [#no-usage]
+195 | 
+196 |     private func metalSweep(key: EnigmaM4Key) -> UnsafeBufferPointer<Float>? {
+197 |         guard let device, let queue, let pipeline, let ctBuffer, let outBuffer else { return nil }
+    |                   `- warning: immutable value 'device' was never used; consider replacing with '_' or removing it [#no-usage]
+198 |         let tables = SweepTables(key: key)
+199 |         var lenU = UInt32(ctLen)
+
+/Volumes/Code/HELUT/Sources/helut/ExhaustiveCracker.swift:242:17: warning: capture of 'base' with non-Sendable type 'UnsafeMutablePointer<Float>' in a '@Sendable' closure [#SendableClosureCaptures]
+240 |                 var num = 0.0
+241 |                 for c in freq { num += Double(c * (c - 1)) }
+242 |                 base[gid] = Float(num / (n * (n - 1)))
+    |                 `- warning: capture of 'base' with non-Sendable type 'UnsafeMutablePointer<Float>' in a '@Sendable' closure [#SendableClosureCaptures]
+243 |             }
+244 |         }
+
+Swift.UnsafeMutablePointer:1:23: note: generic struct 'UnsafeMutablePointer' does not conform to the 'Sendable' protocol
+1 | @frozen public struct UnsafeMutablePointer<Pointee> : Copyable where Pointee : ~Copyable {
+  |                       `- note: generic struct 'UnsafeMutablePointer' does not conform to the 'Sendable' protocol
+2 |     public let _rawValue: Builtin.RawPointer
+3 |     public init(_ _rawValue: Builtin.RawPointer)
+
+/Volumes/Code/HELUT/Sources/helut/HybridBombeHarness.swift:665:17: warning: capture of 'buffer' with non-Sendable type 'UnsafeMutableBufferPointer<HybridFitness>' in a '@Sendable' closure [#SendableClosureCaptures]
+ 663 |         return Array(unsafeUninitializedCapacity: count) { buffer, initializedCount in
+ 664 |             DispatchQueue.concurrentPerform(iterations: count) { index in
+ 665 |                 buffer[index] = evaluateChromosome(
+     |                 `- warning: capture of 'buffer' with non-Sendable type 'UnsafeMutableBufferPointer<HybridFitness>' in a '@Sendable' closure [#SendableClosureCaptures]
+ 666 |                     population[index],
+ 667 |                     ciphertext: ciphertext,
+
+Swift.UnsafeMutableBufferPointer:1:23: note: generic struct 'UnsafeMutableBufferPointer' does not conform to the 'Sendable' protocol
+1 | @frozen public struct UnsafeMutableBufferPointer<Element> : Copyable where Element : ~Copyable {
+  |                       `- note: generic struct 'UnsafeMutableBufferPointer' does not conform to the 'Sendable' protocol
+2 |     public let count: Int
+3 |     @inlinable public init(start: UnsafeMutablePointer<Element>?, count: Int)
+
+/Volumes/Code/HELUT/Sources/helut/HybridBombeHarness.swift:665:17: warning: mutable capture of 'inout' parameter 'buffer' is not allowed in concurrently-executing code [#SendableClosureCaptures]
+ 663 |         return Array(unsafeUninitializedCapacity: count) { buffer, initializedCount in
+ 664 |             DispatchQueue.concurrentPerform(iterations: count) { index in
+ 665 |                 buffer[index] = evaluateChromosome(
+     |                 `- warning: mutable capture of 'inout' parameter 'buffer' is not allowed in concurrently-executing code [#SendableClosureCaptures]
+ 666 |                     population[index],
+ 667 |                     ciphertext: ciphertext,
+
+[#SendableClosureCaptures]: <https://docs.swift.org/compiler/documentation/diagnostics/sendable-closure-captures>
+[5/7] Write Objects.LinkFileList
+[6/7] Linking helut
+Build of product 'helut' complete! (27.46s)
+Enigma 256 NLFF step-enable stats (80000 LFSR clocks)
+  Goal: mean rate ~0.5, each rotor active, off-diagonal |φ| small.
+
+=== gen0 quadratic3 ===
+  rates: 0.0001 0.0002 0.0003 0.5162  mean=0.1292 BIAS DEAD_ROTORS
+  max|φ| off-diag=0.4653 CORRELATED
+  P(all four on)=0.000013
+  φ +1.000 +0.396 +0.174 +0.005
+  φ +0.396 +1.000 +0.465 +0.002
+  φ +0.174 +0.465 +1.000 +0.004
+  φ +0.005 +0.002 +0.004 +1.000
+
+=== gen3 cubic6 ===
+  rates: 0.5161 0.0004 0.0004 0.5162  mean=0.2582 BIAS DEAD_ROTORS
+  max|φ| off-diag=0.5250 CORRELATED
+  P(all four on)=0.000050
+  φ +1.000 -0.008 +0.000 -0.033
+  φ -0.008 +1.000 +0.525 +0.001
+  φ +0.000 +0.525 +1.000 +0.000
+  φ -0.033 +0.001 +0.000 +1.000
+
+=== gen4 coupledCubic6 (rejected) ===
+  rates: 0.5161 0.0004 0.2582 0.5161  mean=0.3227 BIAS DEAD_ROTORS
+  max|φ| off-diag=0.5710 CORRELATED
+  P(all four on)=0.000000
+  φ +1.000 +0.001 +0.571 -0.033
+  φ +0.001 +1.000 +0.009 +0.001
+  φ +0.571 +0.009 +1.000 +0.570
+  φ -0.033 +0.001 +0.570 +1.000
+
+Breeding balanced cubic6 taps (3000 trials)…
+=== bred gen 5 cubic6 ===
+  folds: (4,15,17,23,26,61) (7,9,31,38,50,59) (30,43,46,49,51,60) (12,29,54,55,57,62)
+  rates: 0.5162 0.5161 0.5161 0.5160  mean=0.5161 FLOOR_OK
+  max|φ|=0.0334 OK
+  Applied → Fixtures/enigma256_generation.json + Verilog + goldens

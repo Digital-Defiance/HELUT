@@ -1,0 +1,53 @@
+=== Quarantine garble control — P1030684 ===
+shell: UKW B / γ / IV-III-VIII / rings AACU / key VYAA
+crib@0 len=18: VVVUUUVIRSOBENNULE
+garble mode=block-wipe flips=20 seed=1783111169
+edits: 18:F→I 19:J→O 20:F→D 21:S→G 22:N→M 23:R→P 24:R→A 25:V→G 26:F→C 27:W→Q 28:A→E 29:S→Z …
+soft band: IC≥0.048 tail>-4.000 | strict: IC≥0.055 tail>-3.600
+
+--- Phase A: clean ciphertext ---
+  best VYAA IC=0.064 tail=-2.863 cribExact=yes break=yes
+  PASS — true key BREAKs on clean CT
+
+--- Phase B: garbled ciphertext ---
+  true key IC=0.053 tail=-3.108 cribExact=yes break=no soft=yes
+  decrypt head: VVVUUUVIRSOBENNULEFBLICISCMJMYKIXHQQALULZWOYVIRS
+  PASS — true key is a soft-band near-miss (quarantine trap)
+  wrote logs/quarantine_p1030684_garbled.json
+  wrote Fixtures/p1030684_garbled_control_menus.json
+
+--- Phase C: Hybrid escalate from quarantine ---
+Quarantine ingest: 1 seed(s) from logs/quarantine_p1030684_garbled.json (soft IC≥0.048 tail>-4.000; evolveShell=false hill=24)
+  [0] B gamma IV-III-VIII rings=AACU pos=VYAA plugs=10 soft=whole IC=0.053≥0.048 tail=-3.129>-4.000; prefix@118 IC=0.053 tail=-3.108 IC=0.053 tail=-3.108
+  expected ceiling ≈ 83.3% (100/120) if shell+stecker correct
+  ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+  Shell evolution: OFF freeRings=false WO=1 ringSeeds=1 subspace=potsdam
+  Seeded population[0..<1] from Welchman quarantine (1 candidate(s))
+    seed[0] UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ TY
+  Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+  Hybrid gen 1/8 pop=12 blockB_greeks=0
+    gen-best  100/120 (83%) tmpl=known-PT IC=0.0529 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ TY
+    all-time  100/120 tmpl=known-PT pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ TY
+  Hybrid gen 2/8 pop=12 blockB_greeks=0
+    gen-best  100/120 (83%) tmpl=known-PT IC=0.0529 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ TY
+    all-time  100/120 tmpl=known-PT pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ TY
+  Hybrid gen 3/8 pop=12 blockB_greeks=0
+    gen-best  100/120 (83%) tmpl=known-PT IC=0.0529 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ TY
+    all-time  100/120 tmpl=known-PT pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ TY
+  Hybrid gen 4/8 pop=12 blockB_greeks=0
+    gen-best  100/120 (83%) tmpl=known-PT IC=0.0529 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ TY
+    all-time  100/120 tmpl=known-PT pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ TY
+  Hybrid gen 5/8 pop=12 blockB_greeks=0
+    gen-best  100/120 (83%) tmpl=known-PT IC=0.0529 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ TY
+    all-time  100/120 tmpl=known-PT pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ TY
+  Hybrid gen 6/8 pop=12 blockB_greeks=0
+    gen-best  100/120 (83%) tmpl=known-PT IC=0.0529 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ TY
+    all-time  100/120 tmpl=known-PT pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ TY
+  Hybrid gen 7/8 pop=12 blockB_greeks=0
+    gen-best  100/120 (83%) tmpl=known-PT IC=0.0529 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ TY
+    all-time  100/120 tmpl=known-PT pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ TY
+  Hybrid gen 8/8 pop=12 blockB_greeks=0
+    gen-best  100/120 (83%) tmpl=known-PT IC=0.0529 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ TY
+    all-time  100/120 tmpl=known-PT pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ TY
+  result: 100/120 (83.3%) shell=UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ TY
+  PASS — quarantine seed recovered the garbled-CT neighborhood (≥80% and near flip ceiling)

@@ -1,0 +1,54 @@
+{
+  "schema": "helut.enigma-objective-attestation-manifest.v1",
+  "created_utc": "2026-09-06T23:46:49Z",
+  "status": "complete",
+  "model_id": "helut-enigma-search-n72-correlation-discounted-z-06f8694e-e08a5659-v1",
+  "protocol": {
+    "sample_length": 72,
+    "random_samples": 400,
+    "random_generator_domain": "HELUT dense bigram calibration v2",
+    "objective": "(attackZ + (1 - randomModelCorrelation) * trigramZ) / (2 - randomModelCorrelation)",
+    "final_assessment": "Core bigram-position + IC + structure gate, exact frozen trigram model, trigram > -3.600",
+    "publication_fails_closed_without_trigram": true
+  },
+  "fixtures": {
+    "bigram_sha256": "06f8694ec17906e993223e0179c6ca326030e62f77ec86e5c4120fddcf68f111",
+    "trigram_sha256": "e08a56593d1e74b88d300e35b18dd504bc5fffef8ae03db51d72e6270e9509d7",
+    "control_reference_sha256": "17ab2fe0bbf0ee813b393e7c064d17ad1343b8eafeffad0be8a7c99e50ffae33",
+    "random_corpus_sha256": "1d85fa80ee8bcf121ff4c2fd70e56acccf782a4ab3aaaa16bc1edd15677f424a"
+  },
+  "implementations": {
+    "python": {
+      "path": "Scripts/audit_enigma_objective_calibration.py",
+      "sha256": "4c6aabdf659e201a6905a1e4a1ae4dae0de31e4826c7be1de796684e6d3e9452",
+      "receipt": "python-receipt.json",
+      "receipt_sha256": "e2fa3d9a056798b1b36ebb7c3dda014cd0269cc248a5366ba821f91dc5f5d407"
+    },
+    "ruby": {
+      "path": "Scripts/audit_enigma_objective_calibration.rb",
+      "sha256": "db18a50dba91b4e6c59e35ed6cbccc8ffeb938eb93fac20e9b01453afee547b5",
+      "receipt": "ruby-receipt.json",
+      "receipt_sha256": "ef5e01fcffbfb4f112c353bd6865e90b553759317b888dacd09465440b6b8acf"
+    },
+    "swift": {
+      "path": "Sources/HELUTToolKit/EnigmaScoring.swift",
+      "sha256": "6f63a178a136b31cb33bcd824d4beb5ececb2f2342b1a31399231bfd3d26c42a",
+      "regression_test": "Tests/HELUTTests/EnigmaObjectiveRegressionTests.swift",
+      "regression_test_sha256": "dee89552d3edbb555f2efd6ddcd1b5fc41a9ba8c6e12945e624ef77477dbac4b",
+      "receipt": "swift-receipt.json"
+    }
+  },
+  "agreement": {
+    "python_ruby_all_calibration_bit_patterns": true,
+    "python_ruby_swift_trigram_bit_patterns": true,
+    "python_ruby_swift_objective_bit_patterns": true,
+    "focused_regressions_pass": true
+  },
+  "scope": {
+    "phase_1_ic_sieve_changed": false,
+    "gpu_lane_search_changed": false,
+    "generic_exact_ten_plug_requirement_added": false,
+    "beam_search_shipped": false,
+    "ranking_treated_as_confidence": false
+  }
+}

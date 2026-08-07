@@ -1,0 +1,358 @@
+=== HELUT boolean scale 20260812T191117Z ===
+
+######## N=1024 vs N=1 (Enigma M3, B=1, 10 ticks) ########
+---- degree=1024 ----
+HELUT boolean-path bench
+  netlist: enigma_netlist.json
+  N=1024  B=1  ticks=10  warmup=1  reset_hold=0
+  encoding: trivial torus (constant-fill {0,1})
+  LUT: multilinear mock PBS (boolean-safe)
+
+Compiled module 'enigma_core': 10 inputs, 688 LUTs, 26 DFFs, 8 outputs
+Compile breakdown: boolean-safe LUT lower 0.04 s, graph build 0.00 s (total 0.04 s)
+COMPILE
+  total            0.0417 s
+  LUT lower        0.0389 s
+  graph build      0.0028 s
+  cells            688 LUTs, 26 DFFs, 10 inputs, 8 outputs
+  RSS delta        +14.4 MiB (after=31.8 MiB)
+
+  tick  1  0.3032 s  resetn=1
+  tick  2  0.0148 s  resetn=1
+  tick  3  0.0148 s  resetn=1
+  tick  4  0.0146 s  resetn=1
+  tick  5  0.0146 s  resetn=1
+  tick  6  0.0146 s  resetn=1
+  tick  7  0.0146 s  resetn=1
+  tick  8  0.0147 s  resetn=1
+  tick  9  0.0145 s  resetn=1
+  tick 10  0.0144 s  resetn=1
+CLOCK
+  ticks total      0.4349 s (10 ticks)
+  tick 1 (JIT)     0.3032 s
+  steady avg       0.0146 s/tick (n=9, skip warmup=1)
+  steady Hz        68.37
+
+RSS final 92.9 MiB (delta from start +75.6 MiB)
+
+---- degree=1 ----
+HELUT boolean-path bench
+  netlist: enigma_netlist.json
+  N=1  B=1  ticks=10  warmup=1  reset_hold=0
+  encoding: trivial torus (constant-fill {0,1})
+  LUT: multilinear mock PBS (boolean-safe)
+
+Compiled module 'enigma_core': 10 inputs, 688 LUTs, 26 DFFs, 8 outputs
+Compile breakdown: boolean-safe LUT lower 0.03 s, graph build 0.00 s (total 0.03 s)
+COMPILE
+  total            0.0290 s
+  LUT lower        0.0270 s
+  graph build      0.0019 s
+  cells            688 LUTs, 26 DFFs, 10 inputs, 8 outputs
+  RSS delta        +8.5 MiB (after=25.9 MiB)
+
+  tick  1  0.5961 s  resetn=1
+  tick  2  0.0139 s  resetn=1
+  tick  3  0.0131 s  resetn=1
+  tick  4  0.0126 s  resetn=1
+  tick  5  0.0128 s  resetn=1
+  tick  6  0.0127 s  resetn=1
+  tick  7  0.0126 s  resetn=1
+  tick  8  0.0126 s  resetn=1
+  tick  9  0.0124 s  resetn=1
+  tick 10  0.0126 s  resetn=1
+CLOCK
+  ticks total      0.7114 s (10 ticks)
+  tick 1 (JIT)     0.5961 s
+  steady avg       0.0128 s/tick (n=9, skip warmup=1)
+  steady Hz        78.07
+
+RSS final 76.6 MiB (delta from start +59.2 MiB)
+
+######## Batch scaling Enigma M3 (N=1024) ########
+---- batch=1 ----
+HELUT boolean-path bench
+  netlist: enigma_netlist.json
+  N=1024  B=1  ticks=8  warmup=1  reset_hold=0
+  encoding: trivial torus (constant-fill {0,1})
+  LUT: multilinear mock PBS (boolean-safe)
+
+Compiled module 'enigma_core': 10 inputs, 688 LUTs, 26 DFFs, 8 outputs
+Compile breakdown: boolean-safe LUT lower 0.04 s, graph build 0.00 s (total 0.04 s)
+COMPILE
+  total            0.0405 s
+  LUT lower        0.0377 s
+  graph build      0.0028 s
+  cells            688 LUTs, 26 DFFs, 10 inputs, 8 outputs
+  RSS delta        +14.5 MiB (after=31.9 MiB)
+
+  tick  1  0.3004 s  resetn=1
+  tick  2  0.0150 s  resetn=1
+  tick  3  0.0146 s  resetn=1
+  tick  4  0.0143 s  resetn=1
+  tick  5  0.0143 s  resetn=1
+  tick  6  0.0146 s  resetn=1
+  tick  7  0.0144 s  resetn=1
+  tick  8  0.0141 s  resetn=1
+CLOCK
+  ticks total      0.4017 s (8 ticks)
+  tick 1 (JIT)     0.3004 s
+  steady avg       0.0145 s/tick (n=7, skip warmup=1)
+  steady Hz        69.11
+
+RSS final 91.8 MiB (delta from start +74.4 MiB)
+
+---- batch=10 ----
+HELUT boolean-path bench
+  netlist: enigma_netlist.json
+  N=1024  B=10  ticks=8  warmup=1  reset_hold=0
+  encoding: trivial torus (constant-fill {0,1})
+  LUT: multilinear mock PBS (boolean-safe)
+
+Compiled module 'enigma_core': 10 inputs, 688 LUTs, 26 DFFs, 8 outputs
+Compile breakdown: boolean-safe LUT lower 0.04 s, graph build 0.00 s (total 0.04 s)
+COMPILE
+  total            0.0440 s
+  LUT lower        0.0405 s
+  graph build      0.0035 s
+  cells            688 LUTs, 26 DFFs, 10 inputs, 8 outputs
+  RSS delta        +75.8 MiB (after=93.2 MiB)
+
+  tick  1  0.5902 s  resetn=1
+  tick  2  0.0161 s  resetn=1
+  tick  3  0.0146 s  resetn=1
+  tick  4  0.0147 s  resetn=1
+  tick  5  0.0145 s  resetn=1
+  tick  6  0.0146 s  resetn=1
+  tick  7  0.0146 s  resetn=1
+  tick  8  0.0143 s  resetn=1
+CLOCK
+  ticks total      0.6934 s (8 ticks)
+  tick 1 (JIT)     0.5902 s
+  steady avg       0.0147 s/tick (n=7, skip warmup=1)
+  steady Hz        67.81
+
+RSS final 157.4 MiB (delta from start +140.1 MiB)
+
+---- batch=100 ----
+HELUT boolean-path bench
+  netlist: enigma_netlist.json
+  N=1024  B=100  ticks=8  warmup=1  reset_hold=0
+  encoding: trivial torus (constant-fill {0,1})
+  LUT: multilinear mock PBS (boolean-safe)
+
+Compiled module 'enigma_core': 10 inputs, 688 LUTs, 26 DFFs, 8 outputs
+Compile breakdown: boolean-safe LUT lower 0.07 s, graph build 0.01 s (total 0.08 s)
+COMPILE
+  total            0.0795 s
+  LUT lower        0.0731 s
+  graph build      0.0064 s
+  cells            688 LUTs, 26 DFFs, 10 inputs, 8 outputs
+  RSS delta        +593.5 MiB (after=610.8 MiB)
+
+  tick  1  0.5351 s  resetn=1
+  tick  2  0.0249 s  resetn=1
+  tick  3  0.0164 s  resetn=1
+  tick  4  0.0151 s  resetn=1
+  tick  5  0.0148 s  resetn=1
+  tick  6  0.0151 s  resetn=1
+  tick  7  0.0148 s  resetn=1
+  tick  8  0.0148 s  resetn=1
+CLOCK
+  ticks total      0.6511 s (8 ticks)
+  tick 1 (JIT)     0.5351 s
+  steady avg       0.0166 s/tick (n=7, skip warmup=1)
+  steady Hz        60.34
+
+RSS final 688.3 MiB (delta from start +671.0 MiB)
+
+---- batch=1000 ----
+HELUT boolean-path bench
+  netlist: enigma_netlist.json
+  N=1024  B=1000  ticks=8  warmup=1  reset_hold=0
+  encoding: trivial torus (constant-fill {0,1})
+  LUT: multilinear mock PBS (boolean-safe)
+
+Compiled module 'enigma_core': 10 inputs, 688 LUTs, 26 DFFs, 8 outputs
+Compile breakdown: boolean-safe LUT lower 0.48 s, graph build 0.04 s (total 0.53 s)
+COMPILE
+  total            0.5269 s
+  LUT lower        0.4836 s
+  graph build      0.0433 s
+  cells            688 LUTs, 26 DFFs, 10 inputs, 8 outputs
+  RSS delta        +5852.2 MiB (after=5869.6 MiB)
+
+  tick  1  0.3670 s  resetn=1
+  tick  2  0.0736 s  resetn=1
+  tick  3  0.0735 s  resetn=1
+  tick  4  0.0732 s  resetn=1
+  tick  5  0.0731 s  resetn=1
+  tick  6  0.0736 s  resetn=1
+  tick  7  0.0732 s  resetn=1
+  tick  8  0.0737 s  resetn=1
+CLOCK
+  ticks total      0.8808 s (8 ticks)
+  tick 1 (JIT)     0.3670 s
+  steady avg       0.0734 s/tick (n=7, skip warmup=1)
+  steady Hz        13.62
+
+RSS final 6057.9 MiB (delta from start +6040.5 MiB)
+
+######## Batch scaling Enigma M3 (N=1 clear-shape) ########
+---- batch=1 degree=1 ----
+HELUT boolean-path bench
+  netlist: enigma_netlist.json
+  N=1  B=1  ticks=8  warmup=1  reset_hold=0
+  encoding: trivial torus (constant-fill {0,1})
+  LUT: multilinear mock PBS (boolean-safe)
+
+Compiled module 'enigma_core': 10 inputs, 688 LUTs, 26 DFFs, 8 outputs
+Compile breakdown: boolean-safe LUT lower 0.03 s, graph build 0.00 s (total 0.03 s)
+COMPILE
+  total            0.0294 s
+  LUT lower        0.0275 s
+  graph build      0.0019 s
+  cells            688 LUTs, 26 DFFs, 10 inputs, 8 outputs
+  RSS delta        +8.5 MiB (after=26.0 MiB)
+
+  tick  1  0.3541 s  resetn=1
+  tick  2  0.0166 s  resetn=1
+  tick  3  0.0132 s  resetn=1
+  tick  4  0.0132 s  resetn=1
+  tick  5  0.0126 s  resetn=1
+  tick  6  0.0128 s  resetn=1
+  tick  7  0.0127 s  resetn=1
+  tick  8  0.0127 s  resetn=1
+CLOCK
+  ticks total      0.4479 s (8 ticks)
+  tick 1 (JIT)     0.3541 s
+  steady avg       0.0134 s/tick (n=7, skip warmup=1)
+  steady Hz        74.69
+
+RSS final 76.4 MiB (delta from start +58.9 MiB)
+
+---- batch=10 degree=1 ----
+HELUT boolean-path bench
+  netlist: enigma_netlist.json
+  N=1  B=10  ticks=8  warmup=1  reset_hold=0
+  encoding: trivial torus (constant-fill {0,1})
+  LUT: multilinear mock PBS (boolean-safe)
+
+Compiled module 'enigma_core': 10 inputs, 688 LUTs, 26 DFFs, 8 outputs
+Compile breakdown: boolean-safe LUT lower 0.03 s, graph build 0.00 s (total 0.03 s)
+COMPILE
+  total            0.0305 s
+  LUT lower        0.0284 s
+  graph build      0.0020 s
+  cells            688 LUTs, 26 DFFs, 10 inputs, 8 outputs
+  RSS delta        +8.7 MiB (after=26.0 MiB)
+
+  tick  1  0.5644 s  resetn=1
+  tick  2  0.0139 s  resetn=1
+  tick  3  0.0131 s  resetn=1
+  tick  4  0.0129 s  resetn=1
+  tick  5  0.0129 s  resetn=1
+  tick  6  0.0131 s  resetn=1
+  tick  7  0.0129 s  resetn=1
+  tick  8  0.0130 s  resetn=1
+CLOCK
+  ticks total      0.6562 s (8 ticks)
+  tick 1 (JIT)     0.5644 s
+  steady avg       0.0131 s/tick (n=7, skip warmup=1)
+  steady Hz        76.21
+
+RSS final 77.4 MiB (delta from start +60.1 MiB)
+
+---- batch=100 degree=1 ----
+HELUT boolean-path bench
+  netlist: enigma_netlist.json
+  N=1  B=100  ticks=8  warmup=1  reset_hold=0
+  encoding: trivial torus (constant-fill {0,1})
+  LUT: multilinear mock PBS (boolean-safe)
+
+Compiled module 'enigma_core': 10 inputs, 688 LUTs, 26 DFFs, 8 outputs
+Compile breakdown: boolean-safe LUT lower 0.03 s, graph build 0.00 s (total 0.04 s)
+COMPILE
+  total            0.0365 s
+  LUT lower        0.0340 s
+  graph build      0.0025 s
+  cells            688 LUTs, 26 DFFs, 10 inputs, 8 outputs
+  RSS delta        +9.3 MiB (after=26.6 MiB)
+
+  tick  1  0.5589 s  resetn=1
+  tick  2  0.0203 s  resetn=1
+  tick  3  0.0163 s  resetn=1
+  tick  4  0.0157 s  resetn=1
+  tick  5  0.0159 s  resetn=1
+  tick  6  0.0154 s  resetn=1
+  tick  7  0.0153 s  resetn=1
+  tick  8  0.0155 s  resetn=1
+CLOCK
+  ticks total      0.6734 s (8 ticks)
+  tick 1 (JIT)     0.5589 s
+  steady avg       0.0163 s/tick (n=7, skip warmup=1)
+  steady Hz        61.16
+
+RSS final 88.9 MiB (delta from start +71.6 MiB)
+
+---- batch=1000 degree=1 ----
+HELUT boolean-path bench
+  netlist: enigma_netlist.json
+  N=1  B=1000  ticks=8  warmup=1  reset_hold=0
+  encoding: trivial torus (constant-fill {0,1})
+  LUT: multilinear mock PBS (boolean-safe)
+
+Compiled module 'enigma_core': 10 inputs, 688 LUTs, 26 DFFs, 8 outputs
+Compile breakdown: boolean-safe LUT lower 0.04 s, graph build 0.00 s (total 0.04 s)
+COMPILE
+  total            0.0378 s
+  LUT lower        0.0350 s
+  graph build      0.0027 s
+  cells            688 LUTs, 26 DFFs, 10 inputs, 8 outputs
+  RSS delta        +14.4 MiB (after=31.7 MiB)
+
+  tick  1  0.3096 s  resetn=1
+  tick  2  0.0152 s  resetn=1
+  tick  3  0.0148 s  resetn=1
+  tick  4  0.0150 s  resetn=1
+  tick  5  0.0147 s  resetn=1
+  tick  6  0.0149 s  resetn=1
+  tick  7  0.0149 s  resetn=1
+  tick  8  0.0147 s  resetn=1
+CLOCK
+  ticks total      0.4139 s (8 ticks)
+  tick 1 (JIT)     0.3096 s
+  steady avg       0.0149 s/tick (n=7, skip warmup=1)
+  steady Hz        67.12
+
+RSS final 90.8 MiB (delta from start +73.5 MiB)
+
+######## Clear-shape equiv (N=1) ########
+HELUT boolean-path bench
+  netlist: enigma_netlist.json
+  N=1  B=1  ticks=0  warmup=1  reset_hold=3
+  encoding: trivial torus (constant-fill {0,1})
+  LUT: multilinear mock PBS (boolean-safe)
+
+Compiled module 'enigma_core': 10 inputs, 688 LUTs, 26 DFFs, 8 outputs
+Compile breakdown: boolean-safe LUT lower 0.03 s, graph build 0.00 s (total 0.03 s)
+COMPILE
+  total            0.0299 s
+  LUT lower        0.0279 s
+  graph build      0.0019 s
+  cells            688 LUTs, 26 DFFs, 10 inputs, 8 outputs
+  RSS delta        +9.0 MiB (after=26.3 MiB)
+
+EQUIV (Metal boolean-path ≡ CleartextNetlistSim)
+Compiled module 'enigma_core': 10 inputs, 688 LUTs, 26 DFFs, 8 outputs
+Compile breakdown: boolean-safe LUT lower 0.03 s, graph build 0.00 s (total 0.03 s)
+  plaintext      KEINEBESONDERENEREIGNISSE
+  clear          KEINEBESONDERENEREIGNISSE
+  metal          KEINEBESONDERENEREIGNISSE
+  compile        0.0315 s (N=1 B=1)
+  stream         0.6403 s (25 letters, 0.0256 s/letter)
+  result          PASS
+
+RSS final 179.0 MiB (delta from start +161.6 MiB)
+
+=== DONE 20260812T191117Z ===

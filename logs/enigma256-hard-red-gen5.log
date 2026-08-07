@@ -1,0 +1,859 @@
+
+-- Running command `
+  read_verilog -sv enigma_256_step_cone.v
+  hierarchy -check -top enigma_256_step_cone
+  proc; opt; memory; opt
+  techmap; opt
+  abc -lut 6
+  opt_clean
+  write_json build/enigma_256_step_cone_netlist.json
+  stat
+' --
+
+1. Executing Verilog-2005 frontend: enigma_256_step_cone.v
+Parsing SystemVerilog input from `enigma_256_step_cone.v' to AST representation.
+Generating RTLIL representation for module `\enigma_256_step_cone'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \enigma_256_step_cone
+
+2.2. Analyzing design hierarchy..
+Top module:  \enigma_256_step_cone
+Removed 0 unused modules.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 2 switch rules as full_case in process $proc$enigma_256_step_cone.v:26$23 in module enigma_256_step_cone.
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_n in `\enigma_256_step_cone.$proc$enigma_256_step_cone.v:26$23'.
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~2 debug messages>
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\enigma_256_step_cone.$proc$enigma_256_step_cone.v:26$23'.
+     1/1: $0\lfsr[63:0]
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\enigma_256_step_cone.\lfsr' using process `\enigma_256_step_cone.$proc$enigma_256_step_cone.v:26$23'.
+  created $adff cell `$procdff$36' with positive edge clock and positive level reset.
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 2 empty switches in `\enigma_256_step_cone.$proc$enigma_256_step_cone.v:26$23'.
+Removing empty process `enigma_256_step_cone.$proc$enigma_256_step_cone.v:26$23'.
+Cleaned up 2 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_step_cone.
+<suppressed ~3 debug messages>
+
+4. Executing OPT pass (performing simple optimizations).
+
+4.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_step_cone.
+
+4.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_step_cone'.
+Computing hashes of 29 cells of `\enigma_256_step_cone'.
+Finding duplicate cells in `\enigma_256_step_cone'.
+Removed a total of 0 cells.
+
+4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \enigma_256_step_cone..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~6 debug messages>
+
+4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \enigma_256_step_cone.
+Performed a total of 0 changes.
+
+4.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_step_cone'.
+Computing hashes of 29 cells of `\enigma_256_step_cone'.
+Finding duplicate cells in `\enigma_256_step_cone'.
+Removed a total of 0 cells.
+
+4.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$36 ($adff) from module enigma_256_step_cone (D = $procmux$30_Y, Q = \lfsr).
+
+4.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_step_cone..
+Removed 2 unused cells and 11 unused wires.
+<suppressed ~3 debug messages>
+
+4.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_step_cone.
+<suppressed ~1 debug messages>
+
+4.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \enigma_256_step_cone..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~6 debug messages>
+
+4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \enigma_256_step_cone.
+Performed a total of 0 changes.
+
+4.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_step_cone'.
+Computing hashes of 28 cells of `\enigma_256_step_cone'.
+Finding duplicate cells in `\enigma_256_step_cone'.
+Removed a total of 0 cells.
+
+4.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_step_cone..
+
+4.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_step_cone.
+
+4.16. Finished fast OPT passes. (There is nothing left to do.)
+
+5. Executing MEMORY pass.
+
+5.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+5.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+5.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+5.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+5.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+5.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_step_cone..
+
+5.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+5.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+5.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_step_cone..
+
+5.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+5.11. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+6. Executing OPT pass (performing simple optimizations).
+
+6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_step_cone.
+
+6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_step_cone'.
+Computing hashes of 28 cells of `\enigma_256_step_cone'.
+Finding duplicate cells in `\enigma_256_step_cone'.
+Removed a total of 0 cells.
+
+6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \enigma_256_step_cone..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~6 debug messages>
+
+6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \enigma_256_step_cone.
+Performed a total of 0 changes.
+
+6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_step_cone'.
+Computing hashes of 28 cells of `\enigma_256_step_cone'.
+Finding duplicate cells in `\enigma_256_step_cone'.
+Removed a total of 0 cells.
+
+6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_step_cone..
+
+6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_step_cone.
+
+6.9. Finished fast OPT passes. (There is nothing left to do.)
+
+7. Executing TECHMAP pass (map to technology primitives).
+
+7.1. Executing Verilog-2005 frontend: /opt/homebrew/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/opt/homebrew/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+7.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $adffe.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $logic_not.
+No more expansions possible.
+<suppressed ~105 debug messages>
+
+8. Executing OPT pass (performing simple optimizations).
+
+8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_step_cone.
+<suppressed ~188 debug messages>
+
+8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_step_cone'.
+Computing hashes of 345 cells of `\enigma_256_step_cone'.
+Finding duplicate cells in `\enigma_256_step_cone'.
+Removed a total of 0 cells.
+
+8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \enigma_256_step_cone..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \enigma_256_step_cone.
+Performed a total of 0 changes.
+
+8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_step_cone'.
+Computing hashes of 345 cells of `\enigma_256_step_cone'.
+Finding duplicate cells in `\enigma_256_step_cone'.
+Removed a total of 0 cells.
+
+8.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_step_cone..
+Removed 1 unused cells and 3 unused wires.
+<suppressed ~2 debug messages>
+
+8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_step_cone.
+
+8.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \enigma_256_step_cone..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \enigma_256_step_cone.
+Performed a total of 0 changes.
+
+8.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_step_cone'.
+Computing hashes of 344 cells of `\enigma_256_step_cone'.
+Finding duplicate cells in `\enigma_256_step_cone'.
+Removed a total of 0 cells.
+
+8.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_step_cone..
+
+8.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_step_cone.
+
+8.16. Finished fast OPT passes. (There is nothing left to do.)
+
+9. Executing ABC pass (technology mapping using ABC).
+
+9.1. Extracting gate netlist of module `\enigma_256_step_cone' to `<abc-temp-dir>/input.blif'..
+Replacing 64 occurrences of constant undef bits with constant zero bits
+
+9.1.1. Executed ABC.
+Extracted 280 gates and 413 wires to a netlist network with 130 inputs and 69 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lut <abc-temp-dir>/lutdefs.txt 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + dch -f 
+ABC: + if 
+ABC: + mfs2 
+ABC: + lutpack -S 1 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+9.1.2. Re-integrating ABC results.
+ABC RESULTS:              $lut cells:       89
+ABC RESULTS:        internal signals:      214
+ABC RESULTS:           input signals:      130
+ABC RESULTS:          output signals:       69
+Removing temp directory.
+Removing global temp directory.
+
+10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_step_cone..
+Removed 0 unused cells and 223 unused wires.
+<suppressed ~1 debug messages>
+
+11. Executing JSON backend.
+
+12. Printing statistics.
+
+=== enigma_256_step_cone ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       33 wires
+      285 wire bits
+       11 public wires
+      200 public wire bits
+       10 ports
+      136 port bits
+      153 cells
+       63   $_DFFE_PN0P_
+        1   $_DFFE_PN1P_
+       89   $lut
+
+End of script. Logfile hash: b1df67954a, time: 0.17s, user: 0.02s, system: 0.01s, MEM: 19.00 MB peak
+Yosys 0.68+post (git sha1 c12172fbae8af5e20f6fb52e3d4e92d56ed587b6, Release, AppleClang clang++ 21.0.0.21000101)
+Time spent: 85% 1x abc (0 sec), 4% 3x read_verilog (0 sec), ...
+
+-- Running command `
+  read_verilog -sv enigma_256_nlff_combo.v
+  hierarchy -check -top enigma_256_nlff_combo
+  proc; opt
+  techmap; opt
+  abc -lut 6
+  opt_clean
+  write_json build/enigma_256_nlff_combo_netlist.json
+  stat
+' --
+
+1. Executing Verilog-2005 frontend: enigma_256_nlff_combo.v
+Parsing SystemVerilog input from `enigma_256_nlff_combo.v' to AST representation.
+Generating RTLIL representation for module `\enigma_256_nlff_combo'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \enigma_256_nlff_combo
+
+2.2. Analyzing design hierarchy..
+Top module:  \enigma_256_nlff_combo
+Removed 0 unused modules.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_nlff_combo.
+
+4. Executing OPT pass (performing simple optimizations).
+
+4.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_nlff_combo.
+
+4.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_nlff_combo'.
+Computing hashes of 20 cells of `\enigma_256_nlff_combo'.
+Finding duplicate cells in `\enigma_256_nlff_combo'.
+Removed a total of 0 cells.
+
+4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \enigma_256_nlff_combo..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \enigma_256_nlff_combo.
+Performed a total of 0 changes.
+
+4.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_nlff_combo'.
+Computing hashes of 20 cells of `\enigma_256_nlff_combo'.
+Finding duplicate cells in `\enigma_256_nlff_combo'.
+Removed a total of 0 cells.
+
+4.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_nlff_combo..
+Removed 0 unused cells and 4 unused wires.
+<suppressed ~1 debug messages>
+
+4.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_nlff_combo.
+
+4.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \enigma_256_nlff_combo..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \enigma_256_nlff_combo.
+Performed a total of 0 changes.
+
+4.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_nlff_combo'.
+Computing hashes of 20 cells of `\enigma_256_nlff_combo'.
+Finding duplicate cells in `\enigma_256_nlff_combo'.
+Removed a total of 0 cells.
+
+4.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_nlff_combo..
+
+4.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_nlff_combo.
+
+4.16. Finished fast OPT passes. (There is nothing left to do.)
+
+5. Executing TECHMAP pass (map to technology primitives).
+
+5.1. Executing Verilog-2005 frontend: /opt/homebrew/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/opt/homebrew/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+5.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $xor.
+No more expansions possible.
+<suppressed ~97 debug messages>
+
+6. Executing OPT pass (performing simple optimizations).
+
+6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_nlff_combo.
+
+6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_nlff_combo'.
+Computing hashes of 20 cells of `\enigma_256_nlff_combo'.
+Finding duplicate cells in `\enigma_256_nlff_combo'.
+Removed a total of 0 cells.
+
+6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \enigma_256_nlff_combo..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \enigma_256_nlff_combo.
+Performed a total of 0 changes.
+
+6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_nlff_combo'.
+Computing hashes of 20 cells of `\enigma_256_nlff_combo'.
+Finding duplicate cells in `\enigma_256_nlff_combo'.
+Removed a total of 0 cells.
+
+6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_nlff_combo..
+
+6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_nlff_combo.
+
+6.9. Finished fast OPT passes. (There is nothing left to do.)
+
+7. Executing ABC pass (technology mapping using ABC).
+
+7.1. Extracting gate netlist of module `\enigma_256_nlff_combo' to `<abc-temp-dir>/input.blif'..
+
+7.1.1. Executed ABC.
+Extracted 20 gates and 44 wires to a netlist network with 24 inputs and 4 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lut <abc-temp-dir>/lutdefs.txt 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + dch -f 
+ABC: + if 
+ABC: + mfs2 
+ABC: + lutpack -S 1 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+7.1.2. Re-integrating ABC results.
+ABC RESULTS:              $lut cells:        4
+ABC RESULTS:        internal signals:       16
+ABC RESULTS:           input signals:       24
+ABC RESULTS:          output signals:        4
+Removing temp directory.
+Removing global temp directory.
+
+8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_nlff_combo..
+Removed 0 unused cells and 44 unused wires.
+<suppressed ~1 debug messages>
+
+9. Executing JSON backend.
+
+10. Printing statistics.
+
+=== enigma_256_nlff_combo ===
+
+        +----------Local Count, excluding submodules.
+        | 
+        5 wires
+       68 wire bits
+        5 public wires
+       68 public wire bits
+        5 ports
+       68 port bits
+        4 cells
+        4   $lut
+
+End of script. Logfile hash: 976627abe5, time: 0.06s, user: 0.01s, system: 0.00s, MEM: 17.41 MB peak
+Yosys 0.68+post (git sha1 c12172fbae8af5e20f6fb52e3d4e92d56ed587b6, Release, AppleClang clang++ 21.0.0.21000101)
+Time spent: 86% 1x abc (0 sec), 8% 3x read_verilog (0 sec), ...
+Wrote build/enigma_256_step_cone_netlist.json
+Wrote build/enigma_256_nlff_combo_netlist.json
+[0/1] Planning build
+Building for production...
+[0/3] Write sources
+[1/3] Write swift-version--58304C5D6DBC2206.txt
+[3/4] Compiling HELUTCore AdversarialHarness.swift
+/Volumes/Code/HELUT/Sources/HELUTCore/Enigma256Wire.swift:591:21: warning: mutation of captured var 'received' in concurrently-executing code [#SendableClosureCaptures]
+589 |                 try responder.handshakeAsResponder()
+590 |                 for _ in messages {
+591 |                     received.append(try responder.receivePlaintext())
+    |                     `- warning: mutation of captured var 'received' in concurrently-executing code [#SendableClosureCaptures]
+592 |                 }
+593 |                 do { _ = try responder.receivePlaintext() }
+
+/Volumes/Code/HELUT/Sources/HELUTCore/Enigma256Wire.swift:596:17: warning: mutation of captured var 'responderError' in concurrently-executing code [#SendableClosureCaptures]
+594 |                 catch Enigma256WireError.closed { /* ok */ }
+595 |             } catch {
+596 |                 responderError = error
+    |                 `- warning: mutation of captured var 'responderError' in concurrently-executing code [#SendableClosureCaptures]
+597 |             }
+598 |         }
+
+/Volumes/Code/HELUT/Sources/HELUTCore/Enigma256Wire.swift:610:17: warning: mutation of captured var 'initiatorError' in concurrently-executing code [#SendableClosureCaptures]
+608 |                 try initiator.close()
+609 |             } catch {
+610 |                 initiatorError = error
+    |                 `- warning: mutation of captured var 'initiatorError' in concurrently-executing code [#SendableClosureCaptures]
+611 |             }
+612 |         }
+
+/Volumes/Code/HELUT/Sources/HELUTCore/Enigma256Wire.swift:644:21: warning: mutation of captured var 'received' in concurrently-executing code [#SendableClosureCaptures]
+642 |                 try responder.handshakeAsPSKResponder(passphrase: passphrase, iterations: iterations)
+643 |                 for _ in messages {
+644 |                     received.append(try responder.receivePlaintext())
+    |                     `- warning: mutation of captured var 'received' in concurrently-executing code [#SendableClosureCaptures]
+645 |                 }
+646 |                 do { _ = try responder.receivePlaintext() }
+
+/Volumes/Code/HELUT/Sources/HELUTCore/Enigma256Wire.swift:649:17: warning: mutation of captured var 'responderError' in concurrently-executing code [#SendableClosureCaptures]
+647 |                 catch Enigma256WireError.closed {}
+648 |             } catch {
+649 |                 responderError = error
+    |                 `- warning: mutation of captured var 'responderError' in concurrently-executing code [#SendableClosureCaptures]
+650 |             }
+651 |         }
+
+/Volumes/Code/HELUT/Sources/HELUTCore/Enigma256Wire.swift:667:17: warning: mutation of captured var 'initiatorError' in concurrently-executing code [#SendableClosureCaptures]
+665 |                 try initiator.close()
+666 |             } catch {
+667 |                 initiatorError = error
+    |                 `- warning: mutation of captured var 'initiatorError' in concurrently-executing code [#SendableClosureCaptures]
+668 |             }
+669 |         }
+
+/Volumes/Code/HELUT/Sources/HELUTCore/Enigma256Wire.swift:707:21: warning: mutation of captured var 'received' in concurrently-executing code [#SendableClosureCaptures]
+705 |                 try responder.handshakeAsHybridResponder()
+706 |                 for _ in messages {
+707 |                     received.append(try responder.receivePlaintext())
+    |                     `- warning: mutation of captured var 'received' in concurrently-executing code [#SendableClosureCaptures]
+708 |                 }
+709 |                 do { _ = try responder.receivePlaintext() }
+
+/Volumes/Code/HELUT/Sources/HELUTCore/Enigma256Wire.swift:712:17: warning: mutation of captured var 'responderError' in concurrently-executing code [#SendableClosureCaptures]
+710 |                 catch Enigma256WireError.closed {}
+711 |             } catch {
+712 |                 responderError = error
+    |                 `- warning: mutation of captured var 'responderError' in concurrently-executing code [#SendableClosureCaptures]
+713 |             }
+714 |         }
+
+/Volumes/Code/HELUT/Sources/HELUTCore/Enigma256Wire.swift:726:17: warning: mutation of captured var 'initiatorError' in concurrently-executing code [#SendableClosureCaptures]
+724 |                 try initiator.close()
+725 |             } catch {
+726 |                 initiatorError = error
+    |                 `- warning: mutation of captured var 'initiatorError' in concurrently-executing code [#SendableClosureCaptures]
+727 |             }
+728 |         }
+
+/Volumes/Code/HELUT/Sources/HELUTCore/SteckerInvolution.swift:181:13: warning: variable 'base' was never mutated; consider changing to 'let' constant
+179 |         let frozenSet = Set(frozenNorm.map { ($0.0 << 8) | $0.1 })
+180 |         let free = pairs.filter { !frozenSet.contains(($0.0 << 8) | $0.1) }
+181 |         var base = SteckerInvolution(pairs: frozenNorm)
+    |             `- warning: variable 'base' was never mutated; consider changing to 'let' constant
+182 |         let room = max(0, maxPairs - base.pairCount)
+183 |         if room == 0 { return base }
+
+[#SendableClosureCaptures]: <https://docs.swift.org/compiler/documentation/diagnostics/sendable-closure-captures>
+[4/6] Compiling helut BombeMetal.swift
+/Volumes/Code/HELUT/Sources/helut/BombeSweep.swift:440:38: warning: capture of 'survivors' with non-Sendable type 'UnsafeBufferPointer<UInt32>' in a '@Sendable' closure [#SendableClosureCaptures]
+ 438 |                     let hostAlive = !bombe.isDead(menu: menu, start: (g, l, m, r))
+ 439 |                     if hostAlive { alive += 1 }
+ 440 |                     if hostAlive != (survivors[lane] != 0) { bad += 1 }
+     |                                      `- warning: capture of 'survivors' with non-Sendable type 'UnsafeBufferPointer<UInt32>' in a '@Sendable' closure [#SendableClosureCaptures]
+ 441 |                     _ = hostStops
+ 442 |                 }
+
+Swift.UnsafeBufferPointer:1:23: note: generic struct 'UnsafeBufferPointer' does not conform to the 'Sendable' protocol
+1 | @frozen public struct UnsafeBufferPointer<Element> : Copyable where Element : ~Copyable {
+  |                       `- note: generic struct 'UnsafeBufferPointer' does not conform to the 'Sendable' protocol
+2 |     public let count: Int
+3 |     @inlinable public init(start: UnsafePointer<Element>?, count: Int)
+
+/Volumes/Code/HELUT/Sources/helut/CleartextBatchHybrid.swift:602:17: warning: capture of 'base' with non-Sendable type 'UnsafeMutablePointer<Float>' in a '@Sendable' closure [#SendableClosureCaptures]
+600 |                     }
+601 |                 }
+602 |                 base[lane] = score
+    |                 `- warning: capture of 'base' with non-Sendable type 'UnsafeMutablePointer<Float>' in a '@Sendable' closure [#SendableClosureCaptures]
+603 |             }
+604 |         }
+
+Swift.UnsafeMutablePointer:1:23: note: generic struct 'UnsafeMutablePointer' does not conform to the 'Sendable' protocol
+1 | @frozen public struct UnsafeMutablePointer<Pointee> : Copyable where Pointee : ~Copyable {
+  |                       `- note: generic struct 'UnsafeMutablePointer' does not conform to the 'Sendable' protocol
+2 |     public let _rawValue: Builtin.RawPointer
+3 |     public init(_ _rawValue: Builtin.RawPointer)
+
+/Volumes/Code/HELUT/Sources/helut/CleartextBatchHybrid.swift:628:17: warning: capture of 'base' with non-Sendable type 'UnsafeMutablePointer<Float>' in a '@Sendable' closure [#SendableClosureCaptures]
+626 |                     if expect < 26, p == Int(expect) { hits += 1 }
+627 |                 }
+628 |                 base[lane] = hits
+    |                 `- warning: capture of 'base' with non-Sendable type 'UnsafeMutablePointer<Float>' in a '@Sendable' closure [#SendableClosureCaptures]
+629 |             }
+630 |         }
+
+Swift.UnsafeMutablePointer:1:23: note: generic struct 'UnsafeMutablePointer' does not conform to the 'Sendable' protocol
+1 | @frozen public struct UnsafeMutablePointer<Pointee> : Copyable where Pointee : ~Copyable {
+  |                       `- note: generic struct 'UnsafeMutablePointer' does not conform to the 'Sendable' protocol
+2 |     public let _rawValue: Builtin.RawPointer
+3 |     public init(_ _rawValue: Builtin.RawPointer)
+
+/Volumes/Code/HELUT/Sources/helut/Enigma256Commands.swift:744:13: warning: result of 'try?' is unused [#no-usage]
+742 |         if let handle = try? FileHandle(forWritingTo: url) {
+743 |             defer { try? handle.close() }
+744 |             try? handle.seekToEnd()
+    |             `- warning: result of 'try?' is unused [#no-usage]
+745 |             if let payload = (line + "\n").data(using: .utf8) {
+746 |                 try? handle.write(contentsOf: payload)
+
+/Volumes/Code/HELUT/Sources/helut/ExhaustiveCracker.swift:197:19: warning: immutable value 'device' was never used; consider replacing with '_' or removing it [#no-usage]
+195 | 
+196 |     private func metalSweep(key: EnigmaM4Key) -> UnsafeBufferPointer<Float>? {
+197 |         guard let device, let queue, let pipeline, let ctBuffer, let outBuffer else { return nil }
+    |                   `- warning: immutable value 'device' was never used; consider replacing with '_' or removing it [#no-usage]
+198 |         let tables = SweepTables(key: key)
+199 |         var lenU = UInt32(ctLen)
+
+/Volumes/Code/HELUT/Sources/helut/ExhaustiveCracker.swift:242:17: warning: capture of 'base' with non-Sendable type 'UnsafeMutablePointer<Float>' in a '@Sendable' closure [#SendableClosureCaptures]
+240 |                 var num = 0.0
+241 |                 for c in freq { num += Double(c * (c - 1)) }
+242 |                 base[gid] = Float(num / (n * (n - 1)))
+    |                 `- warning: capture of 'base' with non-Sendable type 'UnsafeMutablePointer<Float>' in a '@Sendable' closure [#SendableClosureCaptures]
+243 |             }
+244 |         }
+
+Swift.UnsafeMutablePointer:1:23: note: generic struct 'UnsafeMutablePointer' does not conform to the 'Sendable' protocol
+1 | @frozen public struct UnsafeMutablePointer<Pointee> : Copyable where Pointee : ~Copyable {
+  |                       `- note: generic struct 'UnsafeMutablePointer' does not conform to the 'Sendable' protocol
+2 |     public let _rawValue: Builtin.RawPointer
+3 |     public init(_ _rawValue: Builtin.RawPointer)
+
+/Volumes/Code/HELUT/Sources/helut/HybridBombeHarness.swift:665:17: warning: capture of 'buffer' with non-Sendable type 'UnsafeMutableBufferPointer<HybridFitness>' in a '@Sendable' closure [#SendableClosureCaptures]
+ 663 |         return Array(unsafeUninitializedCapacity: count) { buffer, initializedCount in
+ 664 |             DispatchQueue.concurrentPerform(iterations: count) { index in
+ 665 |                 buffer[index] = evaluateChromosome(
+     |                 `- warning: capture of 'buffer' with non-Sendable type 'UnsafeMutableBufferPointer<HybridFitness>' in a '@Sendable' closure [#SendableClosureCaptures]
+ 666 |                     population[index],
+ 667 |                     ciphertext: ciphertext,
+
+Swift.UnsafeMutableBufferPointer:1:23: note: generic struct 'UnsafeMutableBufferPointer' does not conform to the 'Sendable' protocol
+1 | @frozen public struct UnsafeMutableBufferPointer<Element> : Copyable where Element : ~Copyable {
+  |                       `- note: generic struct 'UnsafeMutableBufferPointer' does not conform to the 'Sendable' protocol
+2 |     public let count: Int
+3 |     @inlinable public init(start: UnsafeMutablePointer<Element>?, count: Int)
+
+/Volumes/Code/HELUT/Sources/helut/HybridBombeHarness.swift:665:17: warning: mutable capture of 'inout' parameter 'buffer' is not allowed in concurrently-executing code [#SendableClosureCaptures]
+ 663 |         return Array(unsafeUninitializedCapacity: count) { buffer, initializedCount in
+ 664 |             DispatchQueue.concurrentPerform(iterations: count) { index in
+ 665 |                 buffer[index] = evaluateChromosome(
+     |                 `- warning: mutable capture of 'inout' parameter 'buffer' is not allowed in concurrently-executing code [#SendableClosureCaptures]
+ 666 |                     population[index],
+ 667 |                     ciphertext: ciphertext,
+
+[#SendableClosureCaptures]: <https://docs.swift.org/compiler/documentation/diagnostics/sendable-closure-captures>
+[4/6] Write Objects.LinkFileList
+[5/6] Linking helut
+Build of product 'helut' complete! (27.00s)
+BLUE hold: squeeze failed (crypto -114.0, nb 0)
+Enigma 256 TensorLUT
+  module: enigma_256_nlff_combo
+  LUTs: 4  DFFs: 0  wires: 70
+  baseline → enigma_256_tensorlut_baseline.v
+# TensorLUT Red Team — enigma_256_nlff_combo
+generation: 5
+formula: cubic6
+netlist: build/enigma_256_nlff_combo_netlist.json
+luts: 4
+dffs: 0
+batch: 763
+explore_gens: 240
+polish_gens: 160
+pop: 64
+polish_lambda: 0.0
+explore_seed: 14833185
+baseline_crypto: 0.000000
+explore_best_crypto: -178.309799
+explore_nonbinary: 68
+polish_gen_crypto: -114.301460
+final_crypto: -114.000000
+final_nonbinary: 0
+elite_fitness: -114.000000
+squeeze_survived: false
+verdict: blue_hold
+note: explore λ=0; polish λ=0.0. squeeze_survived=false is a Blue hold.
+  log → logs/tensorlut-enigma256-nlff.log
+Building for production...
+[0/2] Write swift-version--58304C5D6DBC2206.txt
+Build of product 'helut' complete! (0.09s)
+Enigma 256 Red/Blue campaign (Apple Silicon SoftBus field)
+  generation: 5 formula=cubic6
+  folds: (4,15,17,23,26,61) (7,9,31,38,50,59) (30,43,46,49,51,60) (12,29,54,55,57,62)
+  SoftBus KPA: best 9/37 over 4096 trials in 20.3 ms
+  TensorLUT: final_crypto=-114.000000 squeeze_survived=false → BLUE hold (squeeze failed — good)
+  TensorLUT log: logs/tensorlut-enigma256-nlff.log
+  red_pressure: false — Blue holds; SoftBus KPA also weak
+  Blue hold — TensorLUT squeeze failed (good); SoftBus KPA also weak
+  ledger: logs/enigma256-rb-campaign.jsonl

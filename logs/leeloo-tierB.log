@@ -1,0 +1,108 @@
+Leeloo: 10 row(s), 5 passes + 1 warmup
+rough estimate: 19.9 min
+
+
+=== C67 [B] Covering-b2 KS ladder n=128, adder
+    claims: n=128 PASS 8.58 s
+    warmup   wall=  28.897s exit=0 PASS/SKIP tool=8.915s
+    pass 1   wall=  27.889s exit=0 PASS/SKIP tool=8.562s
+    pass 2   wall=  28.229s exit=0 PASS/SKIP tool=8.632s
+    pass 3   wall=  29.235s exit=0 PASS/SKIP tool=8.841s
+    pass 4   wall=  27.792s exit=0 PASS/SKIP tool=8.523s
+    pass 5   wall=  28.229s exit=0 PASS/SKIP tool=8.631s
+    -> median 8.631s  spread 3.7%  stability stable-pass
+
+=== C69 [B] Covering KS n=256 adder SING
+    claims: n=256 PASS 17.1 s
+    warmup   wall=  29.952s exit=0 PASS/SKIP tool=17.03s
+    pass 1   wall=  30.212s exit=0 PASS/SKIP tool=17.22s
+    pass 2   wall=  30.499s exit=0 PASS/SKIP tool=17.28s
+    pass 3   wall=  30.242s exit=0 PASS/SKIP tool=17.32s
+    pass 4   wall=  30.091s exit=0 PASS/SKIP tool=17.17s
+    pass 5   wall=  30.313s exit=0 PASS/SKIP tool=17.29s
+    -> median 17.28s  spread 0.9%  stability stable-pass
+
+=== C69fail [B] NEGATIVE STABILITY: covering KS n=512 adder is claimed to FAIL
+    claims: n=512 SING FAIL (sum mismatch want=0 got=1)
+    warmup   wall=  59.786s exit=-5 -
+    pass 1   wall=  61.109s exit=0 PASS/SKIP tool=35.29s
+    pass 2   wall=  61.840s exit=-5 -
+    pass 3   wall=  61.782s exit=-5 -
+    pass 4   wall=  63.756s exit=0 PASS/SKIP tool=35.99s
+    pass 5   wall=  62.882s exit=0 PASS/SKIP tool=35.49s
+    -> median 35.49s  spread 2.0%  stability stable-pass
+
+=== C20 [B] Wavefront-parallel independent $lut BRs, Metal N=1024
+    claims: boolean SING 10.6 s / 8
+    warmup   wall=  10.359s exit=0 PASS tool=9.2s
+    pass 1   wall=  10.404s exit=0 PASS tool=9.199s
+    pass 2   wall=  10.345s exit=0 PASS tool=9.204s
+    pass 3   wall=  10.321s exit=0 PASS tool=9.197s
+    pass 4   wall=  10.396s exit=0 PASS tool=9.235s
+    pass 5   wall=  10.351s exit=0 PASS tool=9.197s
+    -> median 9.199s  spread 0.4%  stability stable-pass
+
+=== C21 [B] Metal cryptoPublicMS l=2 SING at N=1024
+    claims: crypto l=2 SING 11.38 s / 8
+    warmup   wall=  12.140s exit=0 PASS tool=9.956s
+    pass 1   wall=  12.171s exit=0 PASS tool=9.954s
+    pass 2   wall=  12.180s exit=0 PASS tool=9.946s
+    pass 3   wall=  12.206s exit=0 PASS tool=9.954s
+    pass 4   wall=  12.214s exit=0 PASS tool=9.955s
+    pass 5   wall=  12.207s exit=0 PASS tool=9.959s
+    -> median 9.954s  spread 0.1%  stability stable-pass
+
+=== C38m [B] Counter Metal N=1024 public-ms boolean SING
+    claims: Metal N=1024 PASS 15.88 s / 4
+    warmup   wall=   8.153s exit=0 PASS tool=7.008s
+    pass 1   wall=   8.165s exit=0 PASS tool=7.012s
+    pass 2   wall=   8.137s exit=0 PASS tool=7.012s
+    pass 3   wall=   8.218s exit=0 PASS tool=7.011s
+    pass 4   wall=   8.198s exit=0 PASS tool=7.046s
+    pass 5   wall=   8.183s exit=0 PASS tool=7.013s
+    -> median 7.012s  spread 0.5%  stability stable-pass
+
+=== C40m [B] Toy ISA Metal N=1024 public-ms boolean SING
+    claims: Metal N=1024 PASS 20.31 s / 4
+    warmup   wall=  12.647s exit=0 PASS tool=11.45s
+    pass 1   wall=  12.647s exit=0 PASS tool=11.45s
+    pass 2   wall=  12.612s exit=0 PASS tool=11.45s
+    pass 3   wall=  12.665s exit=0 PASS tool=11.45s
+    pass 4   wall=  12.639s exit=0 PASS tool=11.45s
+    pass 5   wall=  12.686s exit=0 PASS tool=11.44s
+    -> median 11.45s  spread 0.1%  stability stable-pass
+
+=== C39m [B] E256 round1 Metal N=1024 public-ms boolean SING
+    claims: Metal N=1024 PASS 22.77 s / 2
+    warmup   wall=  23.941s exit=0 PASS tool=22.69s
+    pass 1   wall=  23.908s exit=0 PASS tool=22.66s
+    pass 2   wall=  23.818s exit=0 PASS tool=22.61s
+    pass 3   wall=  23.689s exit=0 PASS tool=22.49s
+    pass 4   wall=  23.902s exit=0 PASS tool=22.68s
+    pass 5   wall=  23.836s exit=0 PASS tool=22.66s
+    -> median 22.66s  spread 0.8%  stability stable-pass
+
+=== C57 [B] Covering-b2 k=7 sigma=128 N=1024 adder, cheaper SING
+    claims: public-ms covering-b2 adder PASS 10.33 s / 1
+    warmup   wall=  67.709s exit=0 PASS tool=10.71s
+    pass 1   wall=  64.809s exit=0 PASS tool=10.73s
+    pass 2   wall=  64.750s exit=0 PASS tool=10.65s
+    pass 3   wall=  65.386s exit=0 PASS tool=10.72s
+    pass 4   wall=  72.035s exit=0 PASS tool=10.73s
+    pass 5   wall=  64.249s exit=0 PASS tool=10.74s
+    -> median 10.73s  spread 0.8%  stability stable-pass
+
+=== C52 [B] Stride-k=7 covering-b1 N=1024 sigma=128 Metal SING
+    claims: secret 44.08 s / 2, public-ms 29.40 s / 2
+    warmup   wall= 288.879s exit=0 PASS/PASS tool=44.22s
+    pass 1   wall= 291.336s exit=0 PASS/PASS tool=44.5s
+    pass 2   wall= 279.574s exit=0 PASS/PASS tool=43.42s
+    pass 3   wall= 299.102s exit=0 PASS/PASS tool=44.37s
+    pass 4   wall= 284.744s exit=0 PASS/PASS tool=44.26s
+    pass 5   wall= 292.888s exit=-5 PASS tool=44.15s
+    -> median 44.26s  spread 2.4%  stability FLAKY
+    !! FLAKY: the recorded verdict does not reproduce every pass
+
+wrote /Volumes/Code/HELUT/logs/leeloo/results.json
+wrote /Volumes/Code/HELUT/logs/leeloo/report.md
+FLAKY rows: C52

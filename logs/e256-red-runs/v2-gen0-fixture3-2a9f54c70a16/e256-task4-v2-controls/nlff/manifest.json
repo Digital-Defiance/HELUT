@@ -1,0 +1,80 @@
+{
+  "binary_provenance": {
+    "build_log": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v2-controls/nlff/build.console.txt",
+    "build_log_sha256": "7818a3ecfb5cae2ebf80094e0be0d4d3c88d02a96d07ac2190c63be6e8d73495",
+    "source_inputs_sha256": "ad26b0c03235edbaeaa2ea458cff0f537db1b8ededf501888d82d4a31e3162be",
+    "source_patch": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v2-controls/nlff/source.patch",
+    "source_patch_sha256": "7588231476d49d470e33ba12adccca821bba7dc9eb6f8ab2ba7af62235dab801",
+    "source_snapshot": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v2-controls/nlff/source-snapshot.json",
+    "source_snapshot_sha256": "6b6215eaaf0586172fc24372b9f516ee6df940bb8b2863c6080b0411f6d90e7d"
+  },
+  "budget_profile": "bounded",
+  "compatibility_key": "E256/v2/gen0/2a9f54c70a1619805a911758158f1e2204b0fd96c35102a9db5f4575aeb40cb0/fixture-v3",
+  "cone": "nlff",
+  "controls_only": true,
+  "created_utc": "2026-08-25T20:32:02.213438Z",
+  "fixture_schema_version": 3,
+  "git_dirty": true,
+  "git_head": "019d15abf62d1ed3c7612dc90ffdf318c59ada7c",
+  "git_status_sha256": "0d75db7f15ace67c7525f31d0b1298f8548a224de0f4fa164dee14cee911e788",
+  "helut_binary": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v2-controls/nlff/helut",
+  "helut_binary_sha256": "48c971ee9951b227707f877df41aad4aa280e4ab8d16a9c1b3c9d098ab2b4a33",
+  "macos_version": "26.6.1",
+  "matrix": [
+    {
+      "explore_gens": 16,
+      "name": "control-planted-a",
+      "polish_gens": 8,
+      "polish_lambda": 0.0,
+      "population": 8,
+      "role": "planted-easy",
+      "seed": 14833185
+    },
+    {
+      "explore_gens": 16,
+      "name": "control-planted-b",
+      "polish_gens": 8,
+      "polish_lambda": 0.0,
+      "population": 8,
+      "role": "planted-easy",
+      "seed": 12648430
+    },
+    {
+      "explore_gens": 16,
+      "name": "control-null-a",
+      "polish_gens": 8,
+      "polish_lambda": 0.0,
+      "population": 8,
+      "role": "contradictory-null",
+      "seed": 14833185
+    },
+    {
+      "explore_gens": 16,
+      "name": "control-null-b",
+      "polish_gens": 8,
+      "polish_lambda": 0.0,
+      "population": 8,
+      "role": "contradictory-null",
+      "seed": 12648430
+    }
+  ],
+  "nlff_wrapper_sha256": "e2eb00482b4b13048b6bc036c443d81cce539b2fcf3471a46f27970a77003f08",
+  "profile_fixture": "Fixtures/enigma256_generation.json",
+  "profile_fixture_sha256": "9348abd117f7561785a176f227436dee9db162d07408ae9103836a8011c65944",
+  "profile_sha256": "2a9f54c70a1619805a911758158f1e2204b0fd96c35102a9db5f4575aeb40cb0",
+  "profile_tag": "v2-gen0-fixture3-2a9f54c70a16",
+  "receipt_sha256": "5c5bc931a145048037ec420b2c0c47ff310570e963bd45b8262f18a1640f0027",
+  "run_directory": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v2-controls/nlff",
+  "run_id": "e256-task4-v2-controls",
+  "runner": "Scripts/enigma256_tensorlut_battery.py",
+  "runner_sha256": "66f5ae7ff751c2bb49d915553809d14038931f5ed0c5e16d5c731a82c27a820a",
+  "schema": 1,
+  "scope": "bounded TensorLUT optimizer run; in-sample only; not a security claim or work factor",
+  "scramble_wrapper_sha256": "e7655dc2e01028ef2c19a68527f53711ac87488f176e20be509a272893e796d1",
+  "source_netlist": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v2-controls/nlff/source-netlist.json",
+  "source_netlist_sha256": "b6e027e8b3d090496444c1814c45d37250533224a4bd9c5537faf4a7024a2eb3",
+  "swift_version": "swift-driver version: 1.148.6 Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)",
+  "synthesis_log": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v2-controls/nlff/synthesis.console.txt",
+  "synthesis_log_sha256": "4d9173759984667454713e3e8805c876ee5839a77c990afb6cf9773e837cf60b",
+  "yosys_version": "Yosys 0.68+post (git sha1 c12172fbae8af5e20f6fb52e3d4e92d56ed587b6, Release, AppleClang clang++ 21.0.0.21000101)"
+}

@@ -1,0 +1,45 @@
+fixture           : Fixtures/p1030680_menus.json
+ciphertext        : 72 letters
+distinct spans    : 625
+old kernel cap    : MAX_UPPER = 4
+
+worst distinct (l, m) over every span x lane x rotor pair: 5
+lanes exceeding the old cap: 78354 of 23660000 (0.3312% of the whole catalog lane space)
+
+by crib length (share of lanes silently eliminated by the old cap):
+  len  12:   61 placement(s), worst-case 0.0000% of lanes
+  len  13:   60 placement(s), worst-case 0.0000% of lanes
+  len  14:   59 placement(s), worst-case 0.0000% of lanes
+  len  15:   58 placement(s), worst-case 0.0000% of lanes
+  len  16:   56 placement(s), worst-case 0.0000% of lanes
+  len  17:   45 placement(s), worst-case 0.0000% of lanes
+  len  18:   55 placement(s), worst-case 0.0000% of lanes
+  len  19:   50 placement(s), worst-case 0.0000% of lanes
+  len  20:   29 placement(s), worst-case 0.0000% of lanes
+  len  21:   34 placement(s), worst-case 0.0000% of lanes
+  len  23:   35 placement(s), worst-case 0.0000% of lanes
+  len  25:   22 placement(s), worst-case 0.0000% of lanes
+  len  28:   10 placement(s), worst-case 0.2853% of lanes  <-- contaminated
+  len  30:   18 placement(s), worst-case 1.1412% of lanes  <-- contaminated
+  len  40:   33 placement(s), worst-case 5.5632% of lanes  <-- contaminated
+
+VERDICT: 61 of 625 spans could exceed the old cap, all at crib length [28, 30, 40].
+Those lanes were reported *eliminated* without being tested, so any clean
+negative covering them is incomplete by that fraction. Menus at or below the
+longest unaffected length are unaffected and their negatives stand.
+
+  offset   0 len  28 -> 5 states, 0.2853% of lanes (e.g. middle I right VI, m=14)
+  offset   0 len  30 -> 5 states, 1.1412% of lanes (e.g. middle I right VI, m=13)
+  offset   0 len  40 -> 5 states, 5.5632% of lanes (e.g. middle I right VI, m=13)
+  offset   1 len  30 -> 5 states, 1.1412% of lanes (e.g. middle I right VI, m=13)
+  offset   1 len  40 -> 5 states, 5.5632% of lanes (e.g. middle I right VI, m=12)
+  offset   2 len  40 -> 5 states, 5.5632% of lanes (e.g. middle I right VI, m=12)
+  offset   3 len  40 -> 5 states, 5.5632% of lanes (e.g. middle I right VI, m=12)
+  offset   4 len  28 -> 5 states, 0.2853% of lanes (e.g. middle I right VI, m=14)
+  offset   4 len  30 -> 5 states, 1.1412% of lanes (e.g. middle I right VI, m=13)
+  offset   4 len  40 -> 5 states, 5.5632% of lanes (e.g. middle I right VI, m=12)
+  offset   5 len  40 -> 5 states, 5.5632% of lanes (e.g. middle I right VI, m=12)
+  offset   6 len  30 -> 5 states, 1.1412% of lanes (e.g. middle I right VI, m=13)
+  ... 49 more
+
+wrote Fixtures/p1030680_maxupper_rerun_menus.json: 33 cribs, 300 placements to re-run

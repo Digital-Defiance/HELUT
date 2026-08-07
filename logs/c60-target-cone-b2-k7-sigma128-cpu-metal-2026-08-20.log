@@ -1,0 +1,56 @@
+HELUT encrypted-netlist bench · SING
+  netlist: picorv32_lut6_netlist.json  module=picorv32
+  poly N=1024  LUTs=2006  DFFs=1565  sequential  2N=2048
+  stimuli=1 (max --vectors 1)  cpu-only=false  metal-netlist-only=false
+  paths filter: public-ms covering-b2
+  paths: public-ms@boolean + public-ms@crypto + secret@crypto (+ Metal)
+  BK noise inject Gaussian σ=128.0 (torus; identity residual is empirical, not B_bk)
+  BK identity confidence trials=1
+  noisy-BK policy: UNSAFE DIAGNOSTIC ONLY (functional output cannot certify ε)
+  divergence trace: enabled (first LUT + all wrong DFFs)
+  boolean scale kδ  k=7  (test-poly stride 7; public-MS native δ)
+  DynamicRotateCost mux=2099200 binary=11275 speedup≈186.2×
+
+  starting blind-rotate-metal public-ms covering-b2
+  identity residual trials=1  (n=1024)
+  identity observed max|e| 600952  (sample-decodable true)
+ENCRYPTED TARGET CONE name=$abc$28808$auto$blifparse.cc:557:parse_blif$28953 LUTs=2/2006
+BR tile=1/16 bits=0..<64
+BR tile=2/16 bits=64..<128
+BR tile=3/16 bits=128..<192
+BR tile=4/16 bits=192..<256
+BR tile=5/16 bits=256..<320
+BR tile=6/16 bits=320..<384
+BR tile=7/16 bits=384..<448
+BR tile=8/16 bits=448..<512
+BR tile=9/16 bits=512..<576
+BR tile=10/16 bits=576..<640
+BR tile=11/16 bits=640..<704
+BR tile=12/16 bits=704..<768
+BR tile=13/16 bits=768..<832
+BR tile=14/16 bits=832..<896
+BR tile=15/16 bits=896..<960
+BR tile=16/16 bits=960..<1024
+BR tile=1/16 bits=0..<64
+BR tile=2/16 bits=64..<128
+BR tile=3/16 bits=128..<192
+BR tile=4/16 bits=192..<256
+BR tile=5/16 bits=256..<320
+BR tile=6/16 bits=320..<384
+BR tile=7/16 bits=384..<448
+BR tile=8/16 bits=448..<512
+BR tile=9/16 bits=512..<576
+BR tile=10/16 bits=576..<640
+BR tile=11/16 bits=640..<704
+BR tile=12/16 bits=704..<768
+BR tile=13/16 bits=768..<832
+BR tile=14/16 bits=832..<896
+BR tile=15/16 bits=896..<960
+BR tile=16/16 bits=960..<1024
+ENCRYPTED LUT CPU REPLAY
+  name=$abc$28808$auto$blifparse.cc:557:parse_blif$28953 wavefront=2 y=555 address=4 expected=1
+  cpu    raw=170484 raw-bit=0 raw-residual=-14509580 raw-|e|=14509580 refreshed-native=0 refreshed-bit=0 refreshed-residual=-14680064 refreshed-|e|=14680064
+  metal  raw=170484 raw-bit=0 raw-residual=-14509580 raw-|e|=14509580 refreshed-native=0 refreshed-bit=0 refreshed-residual=-14680064 refreshed-|e|=14680064
+  ciphertext-equal=yes
+ENCRYPTED TARGET CONE result COMPLETE diagnostic-only=true
+  target-only diagnostic complete: $abc$28808$auto$blifparse.cc:557:parse_blif$28953 (no netlist PASS asserted)

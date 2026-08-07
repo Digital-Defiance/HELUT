@@ -1,0 +1,1252 @@
+# Reproduce
+
+**Bar for public science:** if we assert it, someone else can re-run it from this file (or we mark it open in [`directives/claim-sheet.md`](directives/claim-sheet.md)).
+
+**Failure rule:** bank the negative, name the binding constraint, choose a defensible lever, and preregister the next test without lowering the bar. Keep both outcomes. A failure maps the next experiment; it is not a reason to give up or permission to move the goalposts. Protocol: [`directives/research-release.md#failure-protocol-find-the-lever`](directives/research-release.md#failure-protocol-find-the-lever).
+
+Discovery after disclosure: [`directives/research-trajectory.md`](directives/research-trajectory.md).  
+Parameters: [`directives/parameter-cookbook.md`](directives/parameter-cookbook.md).  
+Packaging: [`directives/packaging-roadmap.md`](directives/packaging-roadmap.md).
+
+Preferred tools (binary split — umbrella `helut` still accepts the same flags):
+
+| Tool | Role |
+|------|------|
+| `.build/release/helut-bench` | SING / micro / `--measure-bk-noise` / `--hardness-table` |
+| `.build/release/helut-e256` | Enigma256 SoftBus / TensorLUT melt flags |
+| `.build/release/helut-bombe` | Welchman / hybrid / campaign |
+| `.build/release/helut-compile` | `--validate` |
+| `.build/release/helut` | Umbrella shim |
+
+Commands assume macOS Apple Silicon, Swift 6.3+, repo root after:
+
+```bash
+swift build -c release
+```
+
+Hardware artifact ownership is explicit: authored HDL lives under `Hardware/`,
+checked-in generated receipts under `Generated/`, and disposable regeneration
+under `build/hardware/`. Root HDL and netlist names are compatibility entry
+points only; new generation commands must not overwrite them.
+
+```bash
+make hardware-check   # manifest ownership + root compatibility integrity
+```
+
+## Production distinct lanes at B=65,536 and native baseline
+
+The banked workload/result pair is self-contained and can be replayed without Metal execution:
+
+```bash
+.build/release/helut-bench --bench \
+  --bench-distinct-replay-workload \
+    logs/helut-production-distinct-b65536-20260906T035827Z/workload.json \
+  --bench-distinct-replay-result \
+    logs/helut-production-distinct-b65536-20260906T035827Z/metal-result.json
+```
+
+Expect `lanes=65536`, `distinct_inputs=65536`, `checked=589824`, `mismatches=0`, `distinct_lane_outputs=511`, digest `fnv1a64-3f03b6872d46d5a5`, `timing_valid=true`, and replay **PASS**.
+
+To regenerate the readable mapped artifact and rerun the production path without overwriting the banked result:
+
+```bash
+RECEIPT=logs/helut-production-distinct-b65536-20260906T035827Z
+(
+  cd "$RECEIPT"
+  yosys -q -s flow.ys
+)
+mkdir -p build/repro-distinct-b65536
+.build/release/helut-bench \
+  --bench "$RECEIPT/resynth.json" --bench-module ripple_adder \
+  --degree 1 --batch 65536 --ticks 6 --warmup 1 \
+  --bench-distinct-lanes \
+  --bench-distinct-export-workload build/repro-distinct-b65536/workload.json \
+  --bench-distinct-result-out build/repro-distinct-b65536/metal-result.json
+```
+
+The measured production run checked all 589,824 output bits with zero mismatches. Raw graph samples were 338,255,048; 4,907,966; 4,935,980; 3,043,056; 1,924,038; and 2,047,896 ns, with the first sample treated as warmup. The steady median was 3.043056 ms. The same-era native test measured a 7.356375 ms single-threaded Verilator median at B=65,536, yielding a 2.41743× graph-to-scalar time ratio in that explicitly asymmetric harness.
+
+The stronger comparison is the later preregistered paired run:
+
+```bash
+HELUT_PRESERVE_NATIVE_BASELINE_ARTIFACT=1 \
+HELUT_NATIVE_BASELINE_WORKERS=16 \
+  swift test -c release --filter NativeBaselineComparisonTests
+```
+
+That harness preserves the historical row and adds a closer scope on both sides. HELUT times assignment generation, packing into preallocated input buffers, synchronized graph execution, output decode, and ordered digest. Native times assignment generation, persistent-worker input writes and private-model evaluation, output collection, and the same ordered digest. Build, graph compilation, allocation, worker/model creation, cold specialization, and process startup remain excluded. The phases are analogous, but release Swift/MPSGraph versus optimized generated C++ is still not a language-neutral or pure-kernel comparison.
+
+The clean five-sample run passed all eight widths with identical HELUT, scalar-native, and parallel-native digests. At exhaustive B=65,536:
+
+- historical HELUT graph median: **2.132893 ms**;
+- historical scalar Verilator median: **6.939708 ms**;
+- paired HELUT end-to-end median: **31.954050 ms**;
+- paired 16-worker native end-to-end median: **6.958500 ms**;
+- native parallel assign/eval/collect diagnostic: **0.325500 ms**;
+- digest: `52f209ab0358725` on all three paths.
+
+The historical graph-versus-scalar row first favored HELUT at B=32,768, again supporting a sampled graph-amortization region. The paired row showed **no HELUT crossover through B=65,536**; HELUT took 4.592× the native end-to-end time at the widest point. Approximately 29.82 ms of HELUT's 31.95 ms paired total was outside synchronized graph execution, but graph execution itself was still 6.55× the native prepared diagnostic. Those are two separate optimization levers, not permission to call the older graph-only ratio a native speed win.
+
+The first preregistered paired run reached the same conclusion but omitted the five raw historical scalar samples. It is preserved as functional PASS / protocol PARTIAL at [`logs/helut-native-paired-20260906T042650Z/receipt.json`](logs/helut-native-paired-20260906T042650Z/receipt.json). The reporting-only fix and fully accepted rerun are banked at [`logs/helut-native-paired-rerun-20260906T044651Z/receipt.json`](logs/helut-native-paired-rerun-20260906T044651Z/receipt.json).
+
+The accepted negative was then decomposed without moving the paired boundary. At B=65,536, five-sample medians were 0.099063 ms assignment generation, 1.397967 ms input packing, 3.836036 ms synchronized graph execution, **20.576000 ms strict output decode**, 7.141948 ms canonical digest, and 32.414079 ms total. Adjacent per-trial timestamps reconciled to the total within one nanosecond; all exhaustive digests remained `52f209ab0358725`. Receipt: [`logs/helut-native-phase-baseline-20260906T051035Z/receipt.json`](logs/helut-native-phase-baseline-20260906T051035Z/receipt.json) (SHA-256 `ffe33bd05fc6b9c92327fe84a0d5f5f4937d0e4244267270d48c270c99d73239`).
+
+The preregistered first optimization retained every output read, strict 0/1 and constant-fill check, nested decoded-value materialization, digest operation/order, phase timer, and outer scope. It only replaced each owning one-element output array with `MockTorusEncoding.decodeBit(buffer:lane:degree:strict:)`. The one-shot eight-width rerun passed 1 test with 0 failures. At B=65,536:
+
+- strict decode median: **20.576000 → 0.571966 ms** (**35.97× lower**);
+- HELUT paired median: **32.414079 → 13.419986 ms** (**2.42× lower**);
+- contemporaneous 16-worker native paired median: **7.186084 ms**;
+- exhaustive digest: `52f209ab0358725` on HELUT, scalar native, and parallel native.
+
+There was still **no paired crossover through B=65,536**: optimized HELUT remained 1.867× slower. The result recovers a real lever without changing the comparison, but does not support an end-to-end victory claim. The canonical digest now occupies roughly half the HELUT total and nearly the same serial work exists natively; the remaining differential gap is primarily HELUT input packing plus graph execution plus residual decode versus native prepared assign/eval/collect. Optimized receipt: [`logs/helut-native-decode-pointer-20260906T053925Z/receipt.json`](logs/helut-native-decode-pointer-20260906T053925Z/receipt.json) (SHA-256 `d0d73a42304c40c7779ca556f1f8e8d534ee85c5db254cece9471d48599bb6f8`).
+
+Production distinct-lane artifacts and boundaries remain at [`logs/helut-production-distinct-b65536-20260906T035827Z/receipt.json`](logs/helut-production-distinct-b65536-20260906T035827Z/receipt.json).
+
+## Documents
+
+```bash
+make writeup    # writeup.tex → writeup.pdf + writeup.md
+make paper      # paper/helut.tex → paper/helut.pdf + paper/helut.md
+make textbook   # textbook/helut-living-textbook.tex → pdf + md
+make docs       # all three (needs latexmk + pandoc)
+```
+
+## Hardness / estimator (**C23**, **H1**)
+
+```bash
+.build/release/helut --hardness-table | tee logs/helut-hardness.txt
+.build/release/helut --estimator-export > logs/helut-estimator-pending.json
+./Scripts/helut_sage_estimate.sh
+```
+
+Native SageMath 10.9 lives at `~/Applications/SageMath-10-9.app` (3-manifolds arm64 `.app`; no sudo pkg). The runner finds that path, installs `lattice-estimator`, and writes `logs/helut-estimator-results.json`. Docker qemu amd64 is refused (FLINT SIGILL).
+
+Production `prod-n1024-s16`: HELUT 175.7 vs estimator **180.2** (|Δ|=4.5). Four of eight anchors sit outside the 16-bit merge tolerance — do not quote 176 as estimator cost on every row (**H1**).
+
+## Encrypted ≡ clear (C4–C6) — envelope *N*≤128 (**H2**)
+
+```bash
+# Fast multi-netlist SING (CPU)
+.build/release/helut --bench netlist.json --degree 8 --bench-encrypted --cpu-only --sing --vectors 8
+.build/release/helut --bench tree_netlist.json --degree 8 --bench-encrypted --cpu-only --sing --vectors 256
+.build/release/helut --bench regex_netlist.json --degree 8 --bench-encrypted --cpu-only --sing --vectors 32
+
+# Or
+./Scripts/helut_encrypted_sing.sh
+
+# Public-MS boolean @ N=128 (within envelope)
+.build/release/helut --bench netlist.json --degree 128 --bench-encrypted --cpu-only --vectors 8 \
+  --paths 'blind-rotate public-ms boolean'
+```
+
+Expect `result PASS` and certificate lines. full_adder multi-LUT SING is graded through *N*=1024 (H2 closed 2026-08-12).
+
+## Encrypted sequential DFF (C38)
+
+Host-clocked encrypted *Q* (not fused metal-netlist). Toy `stateful_counter`: 6 `$lut` + 4 DFFs. Not PicoRV32.
+
+```bash
+.build/release/helut --bench counter_netlist.json --degree 8 \
+  --bench-encrypted --cpu-only --sing --vectors 8
+.build/release/helut --bench counter_netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 4 \
+  --paths 'blind-rotate-metal public-ms boolean' \
+  | tee logs/helut-encrypted-n1024-metal-sing-counter.log
+```
+
+Metal receipt: **PASS** 15.88 s / 4 rows (3.97 s/row), *N*=1024 public-ms boolean.
+
+## Encrypted historical E256 1-round teaching cone (C39)
+
+Frozen historical pre-fixture-v4 cone with offsets=0 and identity plug. It uses algebraic sboxes plus the legacy UKW (`Hardware/RTL/Enigma256/Historical/e256_round1.v`). The LUT4 netlist needs CPU `--degree 16`. This receipt does **not** exercise the transported `(payload, centerMask, absoluteByteCounter)` tuple, the live conjugated-XOR center, the host HMAC-SHA256 schedule, counter validation/exhaustion, live BRAM day-key tables, NLFF stepping, or the full `enigma_256_core`. It remains a historical encrypted teaching cone, not fixture-v4 E256 evidence.
+
+```bash
+mkdir -p build/hardware/Enigma256
+yosys -p "read_verilog Hardware/RTL/Enigma256/Historical/e256_round1.v; synth -top e256_round1 -flatten; abc -lut 4; check -assert; write_json build/hardware/Enigma256/e256_round1_netlist.json"
+.build/release/helut --bench build/hardware/Enigma256/e256_round1_netlist.json --degree 16 \
+  --bench-encrypted --cpu-only --sing --vectors 32 \
+  --paths 'blind-rotate public-ms boolean'
+.build/release/helut --bench build/hardware/Enigma256/e256_round1_netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 2 \
+  --paths 'blind-rotate-metal public-ms boolean' \
+  | tee logs/helut-encrypted-n1024-metal-sing-e256-round1.log
+```
+
+Metal receipt: **PASS** 22.77 s / 2 (11.38 s/row).
+
+## Encrypted toy ISA (C40)
+
+4-bit ACC, `NOP` / `ADD imm`. Not PicoRV32.
+
+```bash
+mkdir -p build/hardware/Examples
+yosys -p "read_verilog Hardware/RTL/Examples/toy_isa.v; synth -top toy_isa -flatten; abc -lut 2; check -assert; write_json build/hardware/Examples/toy_isa_netlist.json"
+.build/release/helut --bench build/hardware/Examples/toy_isa_netlist.json --degree 8 \
+  --bench-encrypted --cpu-only --sing --vectors 32
+.build/release/helut --bench build/hardware/Examples/toy_isa_netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 4 \
+  --paths 'blind-rotate-metal public-ms boolean' \
+  | tee logs/helut-encrypted-n1024-metal-sing-toy-isa.log
+```
+
+Metal receipt: **PASS** 20.31 s / 4 (5.08 s/row).
+
+## Metal microbench (C7)
+
+```bash
+.build/release/helut --bench-encrypted-micro --degree 64 --trials 2 --warmup 1 \
+  | tee logs/helut-encrypted-micro-n64.log
+```
+
+Published number: ~50.3 s/BR @ *N*=64 fused MPSGraph (**C7**). Current NTT persist BR (**C18**): **0.433 s/BR** @ *N*=1024, bits 0 and 1 PASS (`ring=ntt`). Persist-schoolbook (**C17**) was 0.519 s/BR. Fused-EP (**C16**) was 1.043 s/BR. Fused schoolbook-in-MPSGraph at *N*=1024 **did not finish** (11.6 h). Default at *N*>64 is `tiled-kernel` with inlined NTT:
+
+```bash
+make test-metal-p1 2>&1 | tee logs/helut-ntt-cert.log
+.build/release/helut --bench-encrypted-micro --degree 1024 --trials 2 --warmup 1 \
+  | tee logs/helut-encrypted-micro-n1024-ntt.log
+.build/release/helut --bench-encrypted-micro --degree 64 --trials 2 --warmup 1 --metal-br-tile 64 \
+  | tee logs/helut-encrypted-micro-n64-ntt.log
+```
+
+Metal full_adder SING per-LUT (**C20** wavefront-parallel NTT): boolean **10.6 s / 8 rows** (beats **C17** 12.2 s). Crypto ℓ=2 (**C21**): **11.38 s / 8**. Legacy fused megagraph is `--metal-br-fused` only.
+
+```bash
+.build/release/helut --bench netlist.json --degree 1024 --bench-encrypted --sing --vectors 8 \
+  --paths 'blind-rotate-metal public-ms boolean' \
+  | tee logs/helut-encrypted-n1024-metal-sing-par.log
+.build/release/helut --bench netlist.json --degree 1024 --bench-encrypted --sing --vectors 8 \
+  --paths 'blind-rotate-metal public-ms crypto' \
+  | tee logs/helut-encrypted-n1024-metal-sing-crypto.log
+.build/release/helut --bench netlist.json --degree 1024 --bench-encrypted --sing --vectors 8 \
+  --metal-netlist-only \
+  | tee logs/helut-encrypted-n1024-metal-netlist-sing.log
+```
+
+Measured noisy BK (**C22**). Covering gadget only (`cryptoPublicMS` / `.crypto`); ℓ=1 `booleanPublicMS` cannot carry BK noise.
+
+```bash
+.build/release/helut --measure-bk-noise --degree 8 --trials 8 --bk-noise 64 \
+  | tee logs/helut-noisy-bk-measure.log
+.build/release/helut --measure-bk-noise --degree 128 --trials 4 --bk-noise 64 \
+  | tee logs/helut-noisy-bk-measure-n128.log
+swift test -c release --filter 'TFHESeamTests/testNoisyBKIdentityMeasurement'
+swift test -c release --filter 'TFHESeamTests/testEncryptedNetlistFullAdderWithNoisyBK'
+```
+
+Product-shaped *N*=1024 residual (**C26**, H4 graded negative — not a production depth close):
+
+```bash
+.build/release/helut --measure-bk-noise --degree 1024 --trials 2 --bk-noise 64 \
+  | tee logs/helut-noisy-bk-measure-n1024.log
+.build/release/helut --measure-bk-noise --degree 1024 --trials 2 --bk-noise 4 \
+  | tee -a logs/helut-noisy-bk-measure-n1024.log
+```
+
+Expect: noiseless *B*=0; inject *B*=64 undecodable; *B*=4 on `.crypto` may be ∞-norm OK with εlog2≈−1 (not −64).
+
+## Exact public-MS covering (C27)
+
+Why covering noisy BK works at *N*=8/128 but not as `cryptoPublicMS` at *N*=1024 under *q*=2³²:
+
+```bash
+swift test -c release --filter testGGSWPublicMSCoveringCertificate
+```
+
+Statement: [`directives/ggsw-public-ms-covering.md`](directives/ggsw-public-ms-covering.md). Exact degrees among {8…2048}: **{8, 128}** only — for *any* power-of-two word *w* (**C29**), not just *q*=2³².
+
+## Track B ε vs inject B (C30)
+
+```bash
+for B in 1 2 4 8 16 32 64; do
+  .build/release/helut --measure-bk-noise --degree 128 --trials 8 --bk-noise $B
+done | tee logs/helut-noisy-bk-eps-sweep-n128.log
+```
+
+Expect: residual amp large even at *B*=1; printed εlog2 ≈ −24 only at *B*=64.
+
+## Incomplete public-MS gap + Track A approx (C31 / C32)
+
+```bash
+swift test -c release --filter testGGSWIncompleteCoveringCertificate
+.build/release/helut --measure-bk-noise --degree 1024 --trials 4 --bk-noise 1 \
+  | tee logs/helut-noisy-bk-measure-n1024-B1.log
+.build/release/helut --measure-bk-noise --degree 1024 --trials 4 --bk-noise 2 \
+  | tee -a logs/helut-noisy-bk-measure-n1024-B1.log
+```
+
+Expect: uncoveredBits(1024)=10; `cryptoPublicMS` *B*≥1 undecodable; `.crypto` *B*=1 εlog2≈−8.4 at 8 trials.
+Statement: [`directives/ggsw-incomplete-covering.md`](directives/ggsw-incomplete-covering.md).
+
+## Track A Metal covering-crypto SING with noisy BK (C33)
+
+```bash
+.build/release/helut --bench netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 2 --bk-noise 1 \
+  --paths 'blind-rotate-metal secret crypto' \
+  | tee logs/helut-encrypted-n1024-metal-sing-covering-crypto-noisy-B1.log
+.build/release/helut --bench netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 2 --bk-noise 1 \
+  --paths covering-crypto \
+  | tee logs/helut-encrypted-n1024-metal-sing-covering-publicms-noisy-B1.log
+```
+
+Expect PASS on both; non-zero decodable *B*<sub>bk</sub>. Not `cryptoPublicMS`.
+
+## Track A covering-b4: ε≤2⁻⁶⁴ + Metal SING (C34)
+
+```bash
+.build/release/helut --measure-bk-noise --degree 1024 --trials 8 --bk-noise 1 \
+  --covering-base-log 4 | tee logs/helut-noisy-bk-covering-b4-n1024-B1.log
+.build/release/helut --bench netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 2 --bk-noise 1 \
+  --paths covering-b4 \
+  | tee logs/helut-encrypted-n1024-metal-sing-covering-b4-noisy-B1.log
+```
+
+Expect: εlog2 ≈ −913 (≪ −64); Metal secret + public-ms covering-b4 PASS.
+Finer covering cuts EP β: baseLog 8→4 drops σ̂ ~10× (`--covering-sweep`).
+
+## Track A covering-b2: ε≤2⁻⁶⁴ through B=16 + Metal SING (C35)
+
+```bash
+.build/release/helut-bench --measure-bk-noise --degree 1024 --trials 4 --bk-noise 16 \
+  --covering-base-log 2 | tee logs/helut-noisy-bk-covering-b2-n1024-B16.log
+# full ε vs B: see logs/helut-noisy-bk-covering-b2-eps-vs-B.log
+.build/release/helut-bench --bench netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 2 --bk-noise 16 \
+  --paths covering-b2 \
+  | tee logs/helut-encrypted-n1024-metal-sing-covering-b2-noisy-B16.log
+```
+
+Expect: εlog2 ≈ −65.4 at *B*=16 (≤ −64); *B*=32 ≈ −40 (fails bar); Metal secret + public-ms covering-b2 PASS.
+
+## Track A covering-b1: ε≤2⁻⁶⁴ through B=32 + Metal SING (C36)
+
+```bash
+.build/release/helut-bench --measure-bk-noise --degree 1024 --trials 4 --bk-noise 32 \
+  --covering-base-log 1 | tee logs/helut-noisy-bk-covering-b1-n1024-B32.log
+# ladder: logs/helut-noisy-bk-covering-b1-eps-vs-B.log
+.build/release/helut-bench --bench netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 2 --bk-noise 32 \
+  --paths covering-b1 \
+  | tee logs/helut-encrypted-n1024-metal-sing-covering-b1-noisy-B32.log
+```
+
+Expect: εlog2 ≈ −139 at *B*=32 (≤ −64); *B*=64 ≈ −26 (fails); *B*=128 ≈ −0.6 (fails, no unlock vs b2); Metal PASS.
+
+## Track A Gaussian BK inject covering-b1 (C37)
+
+```bash
+.build/release/helut-bench --measure-bk-noise --degree 1024 --trials 4 \
+  --bk-noise-sigma 24 --covering-base-log 1 \
+  | tee logs/helut-noisy-bk-covering-b1-gauss-sigma24.log
+.build/release/helut-bench --bench netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 2 --bk-noise-sigma 24 \
+  --paths covering-b1 \
+  | tee logs/helut-encrypted-n1024-metal-sing-covering-b1-gauss-sigma24.log
+```
+
+Expect εlog2 ≈ −159 at σ=24; Metal PASS. Torus σ=128 at *N*=1024 still undecodable.
+
+## Track A param map: σ=128 covering-b1 at N≤512 (C41)
+
+```bash
+.build/release/helut --measure-bk-noise --degree 256 --trials 2 \
+  --bk-noise-sigma 128 --covering-base-log 1
+.build/release/helut --measure-bk-noise --degree 512 --trials 4 \
+  --bk-noise-sigma 128 --covering-base-log 1 \
+  | tee logs/helut-noisy-bk-covering-b1-gauss-sigma128-N256-N512.log
+.build/release/helut --bench netlist.json --degree 512 \
+  --bench-encrypted --sing --vectors 2 --bk-noise-sigma 128 \
+  --paths covering-b1 \
+  | tee logs/helut-encrypted-n512-metal-sing-covering-b1-gauss-sigma128.log
+```
+
+Expect: *N*=256 εlog2≈−2109; *N*=512 εlog2≈−76.6 (4 trials); Metal PASS. Does **not** close *N*=1024 at native *k*=1.
+
+## kδ encoding at N=1024 covering-b1 σ=128 (C43)
+
+```bash
+.build/release/helut --measure-bk-noise --degree 1024 --trials 4 \
+  --bk-noise-sigma 128 --covering-base-log 1 --boolean-scale-mul 4 \
+  | tee logs/helut-noisy-bk-covering-b1-gauss-sigma128-n1024-k4.log
+.build/release/helut --bench netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 2 --bk-noise-sigma 128 \
+  --paths covering-b1 --boolean-scale-mul 4 \
+  | tee logs/helut-encrypted-n1024-metal-sing-covering-b1-gauss-sigma128-k4.log
+```
+
+Expect: *k*=4 Metal SING PASS; 4-trial εlog2≈−43 (not −64). Sweep: `logs/helut-noisy-bk-covering-b1-gauss-sigma128-n1024-kdelta.log`. *k*=8 meets ε; public-ms SING fails under `/kδ` refresh (**C43**).
+
+## Stride-k public-MS at N=1024 covering-b1 σ=128 (C52)
+
+```bash
+.build/release/helut --measure-bk-noise --degree 1024 --trials 8 \
+  --bk-noise-sigma 128 --covering-base-log 1 --boolean-scale-mul 7 \
+  | tee logs/helut-noisy-bk-covering-b1-gauss-sigma128-n1024-k7-stride-t8.log
+.build/release/helut --bench netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 2 --bk-noise-sigma 128 \
+  --paths covering-b1 --boolean-scale-mul 7 \
+  | tee logs/helut-encrypted-n1024-metal-sing-covering-b1-gauss-sigma128-k7-stride.log
+```
+
+Expect: 8-trial εlog2≈−170 (decodable); Metal secret + public-ms **PASS**. Native *k*=1 still **C37**. Not `cryptoPublicMS`.
+
+## Sequential covering counter at N=1024 σ=128 k=7 (C53)
+
+```bash
+.build/release/helut --bench counter_netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 2 --bk-noise-sigma 128 \
+  --paths covering-b1 --boolean-scale-mul 7 \
+  | tee logs/helut-encrypted-n1024-metal-sing-counter-covering-b1-gauss-sigma128-k7-stride.log
+```
+
+Expect Metal secret + public-ms **PASS** (~110 s / ~68 s per 2 rows). Same encoding as **C52**. Not PicoRV.
+
+## Sequential covering toy ISA at N=1024 σ=128 k=7 (C54)
+
+```bash
+.build/release/helut --bench Generated/Netlists/Examples/toy_isa_netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 2 --bk-noise-sigma 128 \
+  --paths covering-b1 --boolean-scale-mul 7 \
+  | tee logs/helut-encrypted-n1024-metal-sing-toy-isa-covering-b1-gauss-sigma128-k7-stride.log
+```
+
+Expect Metal secret + public-ms **PASS** (~194 s / ~104 s per 2 rows). Not PicoRV.
+
+## Native k=1 LWE-n map at N=1024 covering-b1 σ=128 (C55)
+
+```bash
+.build/release/helut-bench --measure-bk-noise --degree 1024 --trials 8 \
+  --bk-noise-sigma 128 --covering-base-log 1 --lwe-dimension 256 \
+  | tee logs/helut-noisy-bk-covering-b1-gauss-sigma128-n1024-lwe256-t8.log
+# omit --lwe-dimension for n=N=1024 (C37)
+```
+
+Expect: *n*=64 ε≈−36.6; *n*=256 ε≈−10.9; *n*=512 ε≈−6.5; *n*=1024 undecodable. None ≤−64.
+
+## cryptoPublicMS + k=7 tiny inject (C56)
+
+```bash
+.build/release/helut-bench --measure-bk-noise --degree 1024 --trials 4 \
+  --bk-noise 1 --boolean-scale-mul 7 \
+  | tee logs/helut-noisy-bk-cryptoPublicMS-n1024-B1-k7-t4.log
+.build/release/helut-bench --bench netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 2 --bk-noise 1 --boolean-scale-mul 7 \
+  --paths 'blind-rotate-metal public-ms crypto' \
+  | tee logs/helut-encrypted-n1024-metal-sing-cryptoPublicMS-B1-k7.log
+```
+
+Expect: identity decodable ε≈−12.6; Metal SING **FAIL**. Torus σ=128 still undecodable.
+
+## Covering-b2 σ=128: historical cheaper SING and integrated bound (C57)
+
+The historical *k*=7 commands remain useful for the one-row cost comparison:
+
+```bash
+.build/release/helut --measure-bk-noise --degree 1024 --trials 4 \
+  --bk-noise-sigma 128 --covering-base-log 2 --boolean-scale-mul 7 \
+  | tee logs/helut-noisy-bk-covering-b2-gauss-sigma128-n1024-k7-e1.log
+.build/release/helut --bench netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 1 --bk-noise-sigma 128 \
+  --paths 'public-ms covering-b2' --boolean-scale-mul 7 \
+  | tee logs/helut-encrypted-n1024-metal-sing-covering-b2-gauss-sigma128-k7-e1.log
+.build/release/helut --bench regex_netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 1 --bk-noise-sigma 128 \
+  --paths 'public-ms covering-b2' --boolean-scale-mul 7 \
+  | tee logs/helut-encrypted-n1024-metal-sing-regex-covering-b2-gauss-sigma128-k7-e1.log
+```
+
+The archived four-trial ε≈−110.7 was a low-σ̂ draw; settled *k*=7 is short of −64. The current integrated, fail-closed full-adder receipt uses one exact path, all eight input rows, and a circuit-scoped confidence gate:
+
+```bash
+set -o pipefail
+HELUT_QUIET_METAL_BR_PROGRESS=1 /usr/bin/time -l \
+  .build/release/helut-bench \
+  --bench netlist.json \
+  --degree 1024 \
+  --bench-encrypted \
+  --sing \
+  --vectors 8 \
+  --bk-noise-sigma 128 \
+  --bk-identity-trials 192 \
+  --bk-identity-parallelism 8 \
+  --paths 'blind-rotate-metal public-ms covering-b2' \
+  --boolean-scale-mul 14 \
+  2>&1 | tee logs/helut-encrypted-bound-reproduction.log
+```
+
+Acceptance requires exactly one selected path, `identity residual trials=192  (n=1024)  parallelism=8`, `rows 8`, preflight and result `clears=yes`, `result PASS`, summary `cert yes`, and process status 0. The banked run reports max|e|=3,369,752, σ₉₅=1,282,096.9856, 24-event log₂ε=−93.8005, 8/8 rows, 48.1757 s encrypted evaluation, and 969.48 s end to end. Raw receipt: `logs/helut-encrypted-k14-recovery-20260906T030525Z-t192-p8.raw.log`; machine receipt: `logs/helut-encrypted-k14-recovery-20260906T030525Z.json`; preregistration: `logs/helut-encrypted-k14-recovery-20260906T030525Z-preregister.json`.
+
+This earned result is *k*=14 with unsigned digits. The preserved *k*=14/32-sample attempt stopped before circuit execution at log₂ε=−48.18 (`logs/helut-encrypted-bound-20260906T012213Z-t32-k14.raw.log`). Before increasing the sample count, an eight-way 32-sample replay exactly matched the serial max|e|, σ₉₅, event count, and log₂ε; identity-measurement wall time fell from 1,132.49 s to 187.92 s (6.03×). That is a sampling-stage CPU speedup, not encrypted circuit or FHE throughput. The *k*=16/t40 PASS remains preserved as fallback history (`logs/helut-encrypted-bound-20260906T014326Z.json`). Do not add `--unsafe-noisy-bk-diagnostic`, substitute the 175.7-bit calibration row for this residual bound, or generalize the 24-event full-adder result to arbitrary circuits/depth. Primary inputs in this command are exact/noiseless. Covering-b4 public-ms and the historical pre-fixture-v4 E256 58-LUT covering-b2 SING failures remain separate negatives. Balanced digits on the same covering base are **C70**.
+
+## Balanced covering-b2 digits at *k*=7 (C70)
+
+Unsigned *k*=7 stays short of −64. `--balanced-gadget` uses digits in [−B/2, B/2). The decomposition is exact when baseLog·ℓ=32. Covering base 1 is unchanged.
+
+```bash
+set -o pipefail
+.build/release/helut-bench --measure-bk-noise --degree 1024 --trials 32 \
+  --bk-noise-sigma 128 --covering-base-log 2 --boolean-scale-mul 7 \
+  --bk-identity-parallelism 8 --balanced-gadget \
+  | tee logs/c57-balanced-k7-n32.log
+HELUT_QUIET_METAL_BR_PROGRESS=1 /usr/bin/time -l \
+  .build/release/helut-bench \
+  --bench netlist.json \
+  --degree 1024 \
+  --bench-encrypted \
+  --sing \
+  --vectors 8 \
+  --bk-noise-sigma 128 \
+  --bk-identity-trials 32 \
+  --bk-identity-parallelism 8 \
+  --paths 'blind-rotate-metal public-ms covering-b2' \
+  --boolean-scale-mul 7 \
+  --balanced-gadget \
+  2>&1 | tee logs/c57-balanced-k7-sing-v8.log
+```
+
+Identity: noiseless max|e|=0; noisy max|e|=1,403,097, σ̂=465,308.8, printed 95% union −113.5, clears −64. Circuit gate (a different 32-trial draw): max|e|=1,495,355, σ₉₅=726,621.9, 24 events, log₂ε=−72.7, clears −64, then 8/8 PASS, 49.6 s evaluation, 241 s end to end. `logs/c57-balanced-k7-sing-smoke.log` is a one-trial `--unsafe-noisy-bk-diagnostic` shader bring-up and is not this certificate. Exact/noiseless primary inputs. Not PicoRV (**C60** not remeasured). Not covering-b1.
+
+CPU covering (same gadget, demo *N*):
+
+```bash
+.build/release/helut --bench netlist.json --degree 8 --bench-encrypted --cpu-only \
+  --sing --vectors 1 --bk-noise-sigma 24 --paths 'public-ms covering-b2'
+```
+
+## PicoRV abc -lut 6 (C58)
+
+```bash
+mkdir -p build/hardware/PicoRV32
+yosys -p "read_verilog Hardware/RTL/Vendor/PicoRV32/picorv32.v; synth -top picorv32 -flatten; abc -lut 6; check -assert; write_json build/hardware/PicoRV32/picorv32_lut6_netlist.json"
+.build/release/helut --bench build/hardware/PicoRV32/picorv32_lut6_netlist.json --degree 64 \
+  --bench-encrypted --cpu-only --sing --vectors 1 \
+  --paths 'blind-rotate public-ms boolean' \
+  | tee logs/helut-encrypted-n64-cpu-sing-picorv32-lut6.log
+```
+
+Expect 2006 `$lut` / 1565 DFF; **PASS** ~1.35 s/1, 32-bit hardness. *N*=8 traps (`table` 64 > *N*). Not covering; not *N*=1024.
+
+## Sequential wavefront (C59)
+
+Same command as **C58** after wavefront. Expect **PASS** ~0.165 s/1 (~8.2×).
+
+## PicoRV lut6 covering-b2 Q SING FAIL (C60)
+
+```bash
+.build/release/helut --bench Generated/Netlists/PicoRV32/picorv32_lut6_netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 1 --bk-noise-sigma 128 \
+  --paths 'public-ms covering-b2' --boolean-scale-mul 7 \
+  | tee logs/helut-encrypted-n1024-metal-sing-picorv32-lut6-covering-b2-k7-e6.log
+```
+
+Expect combinational BRs to finish (~33 min) then **DFF Q SING FAIL** (want=0 got=1). The post-fix re-run fails at `slice$14361`.
+
+## Balanced digits on that PicoRV tick (C71)
+
+Unsigned **C60** stays the recorded cell. `--balanced-gadget` is a different noise draw. A 32-trial union over 2006 events does not clear −64 (log₂ε=−60.7), so that process traps before the tick. At 192 trials the bound clears and the tick still fails.
+
+```bash
+set -o pipefail
+HELUT_QUIET_METAL_BR_PROGRESS=1 \
+  .build/release/helut-bench \
+  --bench Generated/Netlists/PicoRV32/picorv32_lut6_netlist.json \
+  --degree 1024 \
+  --bench-encrypted --sing --vectors 1 \
+  --bk-noise-sigma 128 \
+  --bk-identity-trials 192 --bk-identity-parallelism 8 \
+  --paths 'blind-rotate-metal public-ms covering-b2' \
+  --boolean-scale-mul 7 --balanced-gadget \
+  2>&1 | tee logs/c70-picorv-covering-b2-k7-balanced-t192.log
+```
+
+The recorded 192-trial log printed the per-wire margin `clears=yes` at log₂ε=−88.4, then four `$_DFF_P_` mismatches, want=0 got=1: `slice$14510`, `slice$14521`, `slice$14523`, `slice$8281`. Not `slice$14361`. That margin is P(|e| > kδ/2). The gate now fails closed on the port-weighted union, which at the same σ₉₅=637,757 is +9.9 and does not clear −64. A rerun measures the identity trials and then refuses before the netlist tick. The 32-trial trap is `logs/c70-picorv-covering-b2-k7-balanced.log`. **C61** is covering-b1 and is not this run. The preflight, with no blind rotation, is `python3 Scripts/tensorlut-probe/portcert.py 637757 Generated/Netlists/PicoRV32/picorv32_lut6_netlist.json:7`.
+
+## LUT3 at k=127, one all-zero stimulus (not a claim row)
+
+`--vectors 1` keeps only the all-zero input. That is the same stimulus class as the lut6 failure above. Mismatch of any output or any DFF Q aborts the process before `result PASS`.
+
+```bash
+set -o pipefail
+HELUT_QUIET_METAL_BR_PROGRESS=1 \
+  .build/release/helut-bench \
+  --bench picorv32_lut3_netlist.json \
+  --degree 1024 \
+  --bench-encrypted --sing --vectors 1 \
+  --bk-noise-sigma 128 \
+  --bk-identity-trials 192 --bk-identity-parallelism 8 \
+  --paths 'blind-rotate-metal public-ms covering-b2' \
+  --boolean-scale-mul 127 --balanced-gadget \
+  2>&1 | tee logs/c71-picorv-lut3-k127-balanced.log
+```
+
+Finished 2026-09-30. Module `picorv32`, 4226 LUT, 1565 DFF. Identity max|e|=1,943,891, native ε −1:10, 0:178, 1:4, σ₉₅=615,591.4. Port-weighted union log₂ε=−747.6, 11,869 ports, clears −64. The wire-margin line is not the gate. One row, outputs and every DFF Q matched cleartext, wall 3,816.8 s. `result PASS` is that match plus the certificate. Not a boot, not a fetch, not a claim row.
+
+## LUT3 at k=127, four ticks, reset released on tick 4 (not a claim row)
+
+`--ticks 4 --reset-hold 3` holds `resetn` at 0 for ticks 1–3 and sets it to 1 on tick 4. The clk pin stays 0; each bench tick is the clock step, as in the C66 boot. Other inputs stay 0. No memory port is driven, so this is not a fetch.
+
+```bash
+set -o pipefail
+HELUT_QUIET_METAL_BR_PROGRESS=1 \
+  .build/release/helut-bench \
+  --bench picorv32_lut3_netlist.json \
+  --degree 1024 \
+  --bench-encrypted --sing --ticks 4 --reset-hold 3 \
+  --bk-noise-sigma 128 \
+  --bk-identity-trials 192 --bk-identity-parallelism 8 \
+  --paths 'blind-rotate-metal public-ms covering-b2' \
+  --boolean-scale-mul 127 --balanced-gadget \
+  2>&1 | tee logs/c71-picorv-lut3-k127-reset4.log
+```
+
+Finished 2026-09-30. Same identity draw as the one-row receipt: max|e|=1,943,891, native ε −1:10, 0:178, 1:4, σ₉₅=615,591.4, port-weighted log₂ε=−747.6, clears −64. Four rows, outputs and every DFF Q matched cleartext, wall 14,752.3 s (3,688.1 s/row). `result PASS`. Not a fetch, not a claim row.
+
+## LUT3 at k=127, eight-tick NOP fetch (not a claim row)
+
+`--encrypted-mem nop` serves `addi x0, x0, 0` (`0x00000013`). Reset is held for three ticks. A fetch is counted only when `mem_valid` and `mem_ready` are both 1 and `mem_instr` is 1. The same class on lut6 with extract→KS *n*=64 is **C68**. This run does not cut the LWE dimension.
+
+```bash
+set -o pipefail
+HELUT_QUIET_METAL_BR_PROGRESS=1 \
+  .build/release/helut-bench \
+  --bench picorv32_lut3_netlist.json \
+  --degree 1024 \
+  --bench-encrypted --sing --ticks 8 --reset-hold 3 \
+  --encrypted-mem nop \
+  --bk-noise-sigma 128 \
+  --bk-identity-trials 192 --bk-identity-parallelism 8 \
+  --paths 'blind-rotate-metal public-ms covering-b2' \
+  --boolean-scale-mul 127 --balanced-gadget \
+  2>&1 | tee logs/c71-picorv-lut3-k127-nop8.log
+```
+
+Finished 2026-10-01. Same identity draw: max|e|=1,943,891, native ε −1:10, 0:178, 1:4, σ₉₅=615,591.4, port-weighted log₂ε=−747.6, clears −64. Ticks 1–3 have `mem_valid`=0. Tick 5 fetches `0x0`. Tick 8 fetches `0x4`. Summary: served=2, unique=2. Eight rows, outputs and every DFF Q matched cleartext, wall 28,693.5 s (3,586.7 s/row). `result PASS`. Not a store. Not 10-fetch. Not a claim row.
+
+## PicoRV lut6 Metal N=1024 e=0 (C62)
+
+```bash
+.build/release/helut --bench Generated/Netlists/PicoRV32/picorv32_lut6_netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 1 \
+  --paths 'blind-rotate-metal public-ms boolean' \
+  | tee logs/helut-encrypted-n1024-metal-sing-picorv32-lut6-boolean-e0.log
+```
+
+Expect **PASS** ~374 s / 1, Q SING, *B*<sub>bk</sub>=0. Hardness 175.7 with **H1**. Not covering.
+
+## PicoRV lut6 covering-b2 noisy BK at N=64 (C63)
+
+```bash
+.build/release/helut --bench Generated/Netlists/PicoRV32/picorv32_lut6_netlist.json --degree 64 \
+  --bench-encrypted --cpu-only --sing --vectors 1 \
+  --paths 'public-ms covering-b2' --bk-noise-sigma 128 \
+  | tee logs/helut-encrypted-n64-cpu-sing-picorv32-lut6-covering-b2-sigma128.log
+```
+
+Expect **PASS** ~1.72 s / 1, Q SING, *B*<sub>bk</sub>≈88782. Do **not** add `--boolean-scale-mul 7` at *N*=64 (SIGTRAP). Does not close **C60**.
+
+## Extract→key-switch n=64 (C64)
+
+```bash
+swift test -c release --filter testExtractKeySwitchClosesPBSWhenNLessThanKN
+.build/release/helut --bench netlist.json --degree 1024 --bench-encrypted --cpu-only \
+  --sing --vectors 1 --paths 'public-ms boolean' --lwe-dimension 64 \
+  | tee logs/helut-encrypted-n1024-cpu-sing-adder-ks-n64-e0.log
+.build/release/helut --bench netlist.json --degree 1024 --bench-encrypted --cpu-only \
+  --sing --vectors 1 --paths 'public-ms covering-b2' --bk-noise-sigma 128 \
+  --lwe-dimension 64 \
+  | tee logs/helut-encrypted-n1024-cpu-sing-adder-covering-b2-ks-n64-sigma128.log
+.build/release/helut --bench counter_netlist.json --degree 1024 --bench-encrypted --cpu-only \
+  --sing --vectors 1 --paths 'public-ms covering-b2' --bk-noise-sigma 128 \
+  --lwe-dimension 64 \
+  | tee logs/helut-encrypted-n1024-cpu-sing-counter-covering-b2-ks-n64-sigma128.log
+```
+
+Expect extract→KS print, all **PASS**. Do not quote 175.7 as LWE-*n*=64 security (**H1**). Does not close **C37** (*n*=*N*) or PicoRV **C60**.
+
+## PicoRV lut6 covering extract→KS n=64 (C65)
+
+```bash
+.build/release/helut --bench Generated/Netlists/PicoRV32/picorv32_lut6_netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 1 --bk-noise-sigma 128 \
+  --lwe-dimension 64 --paths 'public-ms covering-b2' \
+  | tee logs/helut-encrypted-n1024-metal-sing-picorv32-lut6-covering-b2-ks-n64.log
+.build/release/helut --bench Generated/Netlists/PicoRV32/picorv32_lut6_netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 1 --bk-noise-sigma 128 \
+  --lwe-dimension 64 --paths 'public-ms covering-b1' \
+  | tee logs/helut-encrypted-n1024-metal-sing-picorv32-lut6-covering-b1-ks-n64.log
+```
+
+Expect **PASS** ~114 s (b2) / ~212 s (b1), Q SING. Native *k*. **C60**/**C61** (*n*=*N*, *k*=7) stay FAIL. Not LWE-176. Not Linux.
+
+## PicoRV lut6 covering 10-tick boot (C66)
+
+```bash
+.build/release/helut --bench Generated/Netlists/PicoRV32/picorv32_lut6_netlist.json --degree 1024 \
+  --bench-encrypted --sing --ticks 10 --reset-hold 3 \
+  --bk-noise-sigma 128 --lwe-dimension 64 --paths 'public-ms covering-b2' \
+  | tee logs/helut-encrypted-n1024-metal-sing-picorv32-lut6-covering-b2-ks-n64-boot10.log
+```
+
+Expect **PASS** ~1136 s / 10 (~114 s/row), Q SING. Idle mem. Not NOP-fetch.
+
+## Covering KS n-ladder (C67)
+
+```bash
+.build/release/helut --bench netlist.json --degree 1024 --bench-encrypted --cpu-only \
+  --sing --vectors 1 --paths 'public-ms covering-b2' --bk-noise-sigma 128 \
+  --lwe-dimension 128 \
+  | tee logs/helut-encrypted-n1024-cpu-sing-adder-covering-b2-ks-n128-sigma128.log
+```
+
+Expect *n*=128 **PASS** ~8.6 s. *n*=256/512 **SIGTRAP** after extract→KS was **C67** (identity×4). **C69** retries with 1 identity trial.
+
+## Covering KS n=256 / n=512 after identity cap (C69)
+
+The current path caps identity measurement at one trial for *n*≥256. Both rungs
+PASS: *n*=256 is about 17 s; *n*=512 passed 5/5 after the primary-input
+Dictionary-order/shared-RNG defect was fixed. The older *n*=512 sum mismatch is
+withdrawn—it was a determinism artifact, not a noise-limit result.
+
+Run the exact non-vacuous preservation gate:
+
+```bash
+make c69-smoke
+```
+
+Or invoke the receipt directly:
+
+```bash
+.build/release/helut --bench netlist.json --degree 1024 --bench-encrypted --cpu-only \
+  --sing --vectors 1 --paths 'public-ms covering-b2' --bk-noise-sigma 128 \
+  --lwe-dimension 512
+```
+
+Expect exactly one selected `blind-rotate public-ms covering-b2` path, the
+`identity residual trials=1 (n=512)` marker, and **PASS**. This preserves the
+covering extract→KS adder ladder through *n*=512; it does not erase the distinct,
+post-fix C60/C61 PicoRV failures at native *n*=*N*, *k*=7.
+
+## PicoRV lut6 covering NOP-fetch (C68)
+
+```bash
+.build/release/helut --bench Generated/Netlists/PicoRV32/picorv32_lut6_netlist.json --degree 1024 \
+  --bench-encrypted --sing --ticks 8 --reset-hold 3 --encrypted-mem nop \
+  --bk-noise-sigma 128 --lwe-dimension 64 --paths 'public-ms covering-b2' \
+  | tee logs/helut-encrypted-n1024-metal-sing-picorv32-lut6-covering-b2-ks-n64-nop8.log
+```
+
+Expect **PASS** ~911 s / 8, FETCH `0x0,0x4`. Not 10-fetch. Not Linux.
+
+## TensorLUT melt–freeze–snap (C44)
+
+```bash
+swift test -c release --filter testTensorLUTMeltFreezeSnapCertificate
+swift test -c release --filter testXORLambdaCoolingSnapsTowardBinary
+```
+
+Expect three lemmas `holds`. XOR elite after `polishBinaryAtEnd` emits INIT bits `0110`. Not multi-LUT topological melt.
+
+## Encrypted PicoRV32 1-tick (C45)
+
+```bash
+.build/release/helut --bench picorv32_netlist.json --degree 8 \
+  --bench-encrypted --cpu-only --sing --vectors 1 \
+  --paths 'blind-rotate public-ms boolean' \
+  | tee logs/helut-encrypted-n8-cpu-sing-picorv32.log
+```
+
+Expect **PASS** ~76 ms/row, 4785 LUT / 1565 DFF, hardness 4.0 bits (demo *N*=8). One host posedge. Output SING; register SING from **C46**.
+
+## Encrypted PicoRV32 10-tick resetn boot (C46)
+
+```bash
+.build/release/helut --bench picorv32_netlist.json --degree 8 \
+  --bench-encrypted --cpu-only --sing --ticks 10 --reset-hold 3 \
+  --paths 'blind-rotate public-ms boolean' \
+  | tee logs/helut-encrypted-n8-cpu-sing-picorv32-boot10.log
+```
+
+Expect **PASS** 0.972 s / 10 (97.20 ms/row), Q ≡ clear. Idle `mem_ready=0`. LUT-tax 1-tick: *N*=32 **819 ms** (16 bits); *N*=64 **4.35 s** (32 bits).
+
+## Encrypted PicoRV32 NOP-fetch (C47)
+
+```bash
+.build/release/helut --bench picorv32_netlist.json --degree 8 \
+  --bench-encrypted --cpu-only --sing --ticks 32 --reset-hold 3 \
+  --encrypted-mem nop --paths 'blind-rotate public-ms boolean' \
+  | tee logs/helut-encrypted-n8-cpu-sing-picorv32-nop-fetch.log
+```
+
+Expect **PASS**, 10 fetches, `mem_addr` 0x0,0x4,…,0x24, ~98 ms/row, Q ≡ clear.
+
+## Encrypted PicoRV32 addi+sw store (C49)
+
+```bash
+.build/release/helut --bench picorv32_netlist.json --degree 8 \
+  --bench-encrypted --cpu-only --sing --ticks 48 --reset-hold 3 \
+  --encrypted-mem prog --paths 'blind-rotate public-ms boolean' \
+  | tee logs/helut-encrypted-n8-cpu-sing-picorv32-prog-store.log
+```
+
+Expect **PASS**, STORE `wdata=1`, host RAM0=1, 14 fetches, ~79 ms/row, Q ≡ clear. Demo *N*=8. Load-back is **C50**.
+
+## Encrypted PicoRV32 lw sees 1 (C50)
+
+```bash
+.build/release/helut --bench picorv32_netlist.json --degree 8 \
+  --bench-encrypted --cpu-only --sing --ticks 48 --reset-hold 3 \
+  --encrypted-mem prog --paths 'blind-rotate public-ms boolean' \
+  | tee logs/helut-encrypted-n8-cpu-sing-picorv32-prog-lw.log
+```
+
+Expect **PASS**, LOAD xfer `rdata=1`, STORE `wdata=1`, RAM0=1, 14 fetches, ~79 ms/row, Q ≡ clear. Demo *N*=8. Not Metal PicoRV.
+
+## Metal PicoRV32 NOP-fetch (C51)
+
+```bash
+.build/release/helut --bench picorv32_netlist.json --degree 8 \
+  --bench-encrypted --sing --ticks 8 --reset-hold 3 \
+  --encrypted-mem nop --paths 'blind-rotate-metal public-ms boolean' \
+  --metal-br-tile 8 \
+  | tee logs/helut-encrypted-n8-metal-sing-picorv32-nop-fetch.log
+```
+
+Expect **PASS**, 2 fetches (`0x0`, `0x4`), ~64 s / 8 (~7.9 s/row). Tiled BR; fused default traps. Demo *N*. Not fused metal-netlist.
+
+## 2-LUT cascade melt–snap–emit (C48)
+
+```bash
+swift test -c release --filter testTwoLUTCascadeMeltFreezeSnapEmit
+```
+
+Expect 8-corner SING of snapped INIT and two LUT6 cells in emitted Verilog.
+
+## 4-bit CSA vs ripple LUT cut (C42)
+
+Architecture, not TensorLUT melt.
+
+```bash
+mkdir -p build/hardware/Examples
+yosys -p "read_verilog Hardware/RTL/Examples/ripple4.v; synth -top ripple4 -flatten; abc -lut 2; check -assert; write_json build/hardware/Examples/ripple4_netlist.json"
+yosys -p "read_verilog Hardware/RTL/Examples/csa4.v; synth -top csa4 -flatten; abc -lut 2; check -assert; write_json build/hardware/Examples/csa4_netlist.json"
+.build/release/helut --bench build/hardware/Examples/ripple4_netlist.json --degree 8 --compile-only
+.build/release/helut --bench build/hardware/Examples/csa4_netlist.json --degree 8 --compile-only
+.build/release/helut --bench build/hardware/Examples/csa4_netlist.json --degree 8 \
+  --bench-encrypted --cpu-only --sing --vectors 64 \
+  --paths 'blind-rotate public-ms boolean'
+```
+
+Expect: 11 → 8 LUT2 (−27%); both SING PASS.
+
+## Grand audit (Phase 0.9 M5)
+
+```bash
+./Scripts/helut_grand_audit.sh           # formal certs + Sage + CPU-only short SING + textbook stamp
+./Scripts/helut_grand_audit.sh --full    # also Metal N=1024 C20/C21 SING
+```
+
+## Track B Metal SING with noisy BK (C28)
+
+```bash
+.build/release/helut --bench netlist.json --degree 128 \
+  --bench-encrypted --sing --vectors 4 --bk-noise 64 \
+  --paths 'blind-rotate-metal public-ms crypto' \
+  | tee logs/helut-encrypted-n128-metal-sing-crypto-noisy.log
+```
+
+Expect PASS, non-zero decodable *B*<sub>bk</sub>, covering degree.
+
+## Campaign control (C2) — cleartext, not FHE (**N6**)
+
+Welchman blind control on known P1030684 (see journal / `BREAK_P1030680.md`). Fitness is cleartext Metal batch — never HELUT encrypted tick rate.
+
+## TensorLUT Theorem 1 (C19)
+
+```bash
+swift test -c release --filter testTensorLUTFormalCertificate
+```
+
+Six lemmas must hold (`π`, MSE, \(F\), emitter, involution, freeze). Statement: [`directives/tensorlut-theorem.md`](directives/tensorlut-theorem.md). Structural — not a U-534 / P1030680 decrypt (**H6**, **N**).
+
+No Swift, no Mac (Phase 0.95 **R1**–**R5**):
+
+```bash
+python3 Scripts/toy_cipher_demo.py
+python3 Scripts/tensorlut_math_ref.py
+python3 Scripts/lambda_threshold_probe.py
+python3 Scripts/penalty_threshold.py
+make note   # note/lut-relaxation.tex → pdf + md (needs latexmk + pandoc)
+```
+
+The first is the introductory module: one SPN skeleton with a nonlinear S-box and an affine one, five ways to tell them apart, including the exact 4-round differential (2^-10 vs probability 1) and the LUT `INIT` view. The second expects PASS on C19 (with the analytic identities), C25-structural, C44, C27 sizes \(\{8,128\}\), and the toy involution. The third and fourth are **not** claims. The third measures where maximizers of \(F_\lambda\) sit as \(\lambda\) grows on a non-separable two-LUT topology (crossover in \((2,4]\)). The fourth computes the classical exact-penalty bound that explains it: \(\lambda\ge\tfrac12\sup\lambda_{\max}(\nabla^2 f) = 2+\sqrt3\) here. That threshold is Raghavachari (1969) / Giannessi–Niccolucci (1976), **not** a HELUT result — see `note/lut-relaxation.tex` §4.
+
+Both are stdlib only and run in Linux CI (`.github/workflows/linux-math.yml`). They are executable checks rather than machine-checked proofs, and neither is a new **C** row. C25 omits `mutatedPreserving`, which needs Swift's RNG. Start-here page: [`INTRO.md`](INTRO.md). Reviewer map: [`REVIEWER.md`](REVIEWER.md).
+
+## TensorLUT Theorem 1 corollary (C25)
+
+```bash
+swift test -c release --filter testTensorLUTFormalCorollaryCertificate
+```
+
+Two lemmas must hold (emitter–discrete agreement; involution under freeze). Still not melt completeness.
+
+## E256 vNext topology gate (OPEN)
+
+```bash
+make e256-vnext-topology-check
+```
+
+Expect schema `E256-VNEXT-TOPOLOGY-GATE-1`, status `OPEN_PROGRESS`, results
+SHA-256 `cc1ca362872c0a822270a3f8ad7b18525301aac54f7b3b59bf819aa6c10635fe`,
+and `CHECK PASS`. This reproduces the fixture-v5-anchored mirrored-topology
+finding and the bounded two-query distinguisher measurements. It is not a
+decrypt, a nonce-respecting attack, pseudorandomness evidence, a production
+candidate, or a C/H/N movement; standard AEAD remains mandatory.
+
+## E256 vNext rotor/schedule bake-off (OPEN)
+
+```bash
+make e256-vnext-bakeoff-check
+```
+
+Expect schema `E256-VNEXT-ROTOR-SCHEDULE-BAKEOFF-1`, status `OPEN_PROGRESS`,
+deterministic payload SHA-256
+`fd54809cbd12de9d6f14151bcd401232aae765b72cb8368128ea54bdfa7b7197`,
+verdict `NO_BYTE_LOCAL_PRODUCTION_CANDIDATE_RESEARCH_BASELINE_RETAINED`, exact
+payload/digest agreement, and `CHECK PASS`. The retained 1+1 cell is an attack
+baseline, not a selected depth, suite, or cipher; AEAD-only remains the
+production baseline.
+
+## E256 wide-state structural gate (OPEN)
+
+```bash
+make e256-wide-check
+```
+
+Expect schema `E256-WIDE-STATE-GATE-1`, status `OPEN_PROGRESS`, deterministic
+payload SHA-256
+`21758ce220b9da469a18ea617fa7b2fd41e906add69a258f830b12843e3e495b`, verdict
+`STRUCTURAL_WIDE_STATE_CANDIDATE_RETAINED_FOR_ATTACK_ONLY`, exact payload/digest
+agreement, and `CHECK PASS`. The fixed-AES comparator reaches the same bounded
+structural bars, so this establishes no rotor-namespace advantage, no production
+round count, and no security result.
+
+## E256-H rotor-lane cost gate (OPEN)
+
+```bash
+make e256-hw-cost-check
+```
+
+Expect schema `E256-HARDWARE-COST-GATE-1`, status `OPEN_PROGRESS`, deterministic
+payload SHA-256
+`a10e001ad2c2b3de55fcc80197c059f166d5e55599c670e20b01de8f6b7d323d`, verdict
+`H3_OFFSET_KEYING_SUPPORTED`, 1,792/1,792 functional checks, exact payload/digest
+agreement, and `CHECK PASS`. These are hierarchy-preserved generic LUT6
+measurements for one combinational byte lane—not place-and-route, full-round,
+power, side-channel, production, or security evidence.
+
+## E256-H candidate and schedule gate (OPEN)
+
+```bash
+make e256-hw-candidate-check
+```
+
+Expect schema `E256-HARDWARE-CANDIDATE-GATE-1`, status `OPEN_PROGRESS`,
+deterministic payload SHA-256
+`98af83ec27093787552475fce588f84a902634afcc969bed26462032dddec3cc`, verdict
+`H3_H4_CANDIDATE_STRUCTURALLY_RECERTIFIED`, all five controls detected, exact
+payload/digest agreement, and `CHECK PASS`. This is bounded structural
+certification plus primitive-invocation accounting; it selects no XOF, wiring
+set, architecture, round count, or security value.
+
+## E256-H hardware attack lane (OPEN)
+
+```bash
+make e256-hw-attack-check
+```
+
+Expect schema `E256-HARDWARE-ATTACK-GATE-1`, status `OPEN_PROGRESS`,
+deterministic payload SHA-256
+`1114e260455232a2979f8a4f613fc6d6daf4be4f97c3ca6903c3f639357d7a2d`, verdict
+`HARDWARE_ATTACK_LANE_CALIBRATED_REDUCED_ROUND_DISTINGUISHER_FOUND`, both
+planted defects recovered, exact payload/digest agreement, and `CHECK PASS`.
+This grades two bounded search arms and finds the expected 3-round integral
+distinguisher; it is not a break, key recovery, an attack matrix, or evidence
+for a production round count.
+
+## E256-H XOR-offset collapse gate (OPEN)
+
+```bash
+make e256-hw-offset-collapse-check
+```
+
+Expect schema `E256-HARDWARE-OFFSET-COLLAPSE-GATE-1`, status `OPEN_PROGRESS`,
+deterministic payload SHA-256
+`1478a0ba317bce5f33cb053744b050bb6188543405c1dfacf52d8aaf920c4b71`, verdict
+`H3_XOR_OFFSETS_EXACTLY_COLLAPSE_TO_EFFECTIVE_MASKS`, all six controls detected,
+exact payload/digest agreement, and `CHECK PASS`. This is an exact material
+normal-form equivalence at the printed software/RTL/SAT scope—not key recovery,
+a security-bit result, or authorization for a shorter production schedule.
+
+## E256-H H2 integrated-cost gate (OPEN)
+
+```bash
+make e256-hw-h2-check
+```
+
+Expect schema `E256-HARDWARE-H2-GATE-1`, status `OPEN_PROGRESS`, verdict
+`H2_INTEGRATED_COSTS_MEASURED_NO_ARCHITECTURE_SELECTED`, deterministic payload
+SHA-256 `b0b62be2cfebd870f71ce0b5e5300eb52ab8c2aea243712d1617f4e2351dc7e1`,
+`prior_digest_valid=True`, `payload_bytes_match=True`, `digest_match=True`, and
+`CHECK PASS`.
+
+This is a fixed-`R=12` non-production generic-cost fixture with no C/H/N
+movement. It selects no architecture, storage organization, round count,
+direct-short schedule, H4 policy, production RTL, or security result; reviewed
+standard AEAD remains the real-data boundary.
+
+## E256-H H4 per-round switching-sequence gate (OPEN)
+
+```bash
+make e256-hw-h4-sequence-check
+```
+
+Expect schema `E256-HARDWARE-H4-SEQUENCE-GATE-1`, status `OPEN_PROGRESS`,
+`harness valid: True`, **1,474,560** structural windows with **737,280**
+failures, **442,368** collapse comparisons with zero mismatches, **18,432**
+executable rows with **55,296** RTL/model comparisons and per-input cycle
+observations, **19/19** controls, structural verdict
+`ARITHMETIC_SEQUENCE_CENSUS_COUNTEREXAMPLE_FOUND`, deterministic payload
+SHA-256 `4562482417cb2917208cf37f8c4441efbdde602230d878ba49d249b017822064`,
+and `CHECK PASS`. The printed sequence-minus-repeated generic mapped deltas are
+FF `-407 LUT6, +132 sequential bits, -275 primitive cells, +1 level` and ring
+`-57 LUT6, +132 sequential bits, +75 primitive cells, +1 level`.
+
+This is valid bounded falsification evidence: unrestricted use of the tested
+arithmetic switching family is parked under the exact three-round byte-
+dependency criterion. It is not a result about every possible switching policy,
+a mixed-sequence 25-active-S-box theorem, a physical FPGA/Metal result, a
+policy or architecture winner, or a security claim. E256-063 remains OPEN and
+reviewed standard AEAD remains mandatory.
+
+## E256-X0 H4 proof-carrying transition-policy gate (OPEN)
+
+```bash
+make e256-x0-h4-evolution-check
+```
+
+Expect schema `E256-X0-H4-EVOLUTION-GATE-1`, status `OPEN_PROGRESS`,
+`harness valid: True`, **73,728/147,456** directed pairs safe, graph root
+`d7e44b625acc693a28469dd993edfe3bf8cd7a4b966275a70ad7cf3941e4a80a`,
+**147,456** exact pair-vector comparisons, **98,304** first-selector cases,
+**2,048** translation cases, and **23/23** controls. Every node has in/out
+degree 192. Expect two 192-node full-graph SCCs, two 8-node support-quotient
+SCCs, verdict `FULL_SUPPORT_QUOTIENT_HAMILTONIAN_CYCLE_NOT_FOUND`, fallback
+path `[0,3,0,3,0,3,0,3,0,3,0,3]` with **11/11** transitions verified,
+deterministic payload SHA-256
+`35060c802427046f5f4630c6b9db6401d8ac90c4649fc0cf088d3f35f31b1b44`,
+and `CHECK PASS`.
+
+This proves the exact structural transition criterion `S(y)+S(z)=Z8` and
+carries one bounded valid path. The two-component topology is an adverse
+finding: the path cannot evolve across all 16 support classes. This is not a
+mixed four-round/25-active-S-box theorem, attack work factor, production
+schedule or evolution mechanism, hardware/Metal/FHE result, or security claim.
+E256-063 remains OPEN and reviewed standard AEAD remains mandatory.
+
+## Enigma256 fixture-v4 KAT parity (C10)
+
+Build once, then generate the golden bundle at the command’s **scratch default** and reuse that validated directory for RTL parity. These commands do not overwrite `Fixtures/enigma256_golden`:
+
+```bash
+.build/release/helut-e256 --enigma256-golden
+E256_REUSE_BUNDLE=1 ./Scripts/enigma256_sim.sh \
+  build/hardware/Enigma256/enigma256_golden
+E256_REUSE_BUNDLE=1 ./Scripts/enigma256_axi_sim.sh \
+  build/hardware/Enigma256/enigma256_golden
+LITE=1 E256_REUSE_BUNDLE=1 ./Scripts/enigma256_axi_sim.sh \
+  build/hardware/Enigma256/enigma256_golden
+swift test -c release --filter Enigma256Tests
+make rust-reference-check
+```
+
+The first command defaults to `build/hardware/Enigma256/enigma256_golden`, reloads the emitted bundle, and checks it against the supplied profile. Explicit publication to `Fixtures/enigma256_golden` is compatibility-key guarded and is not a normal reproduction step.
+
+Expected live identity:
+
+`E256/v2/gen0/fa246e9cba9009a4799e5a81722a9b14e9a67293d9621b45985c5f3e620865d4/fixture-v4`
+
+Bounded expected evidence: **1,024 KAT bytes, 9 tables, 10 trace files, 25 artifacts**; direct RTL, AXIS, and AXI-Lite parity; `Enigma256Tests` **49/49 PASS**; and the internal Rust three-track parity consumer. The deterministic equality diagnostic is **260 / 65,536 = 0.00396729**, **z = 0.250**. Receipt: `logs/e256-v2-gen0-fixture-v4-validation.json`.
+
+This is internal implementation/KAT parity, not an accepted immutable external KAT, an IND-CPA result, an HMAC proof, or human acceptance of **E256-003**.
+
+## Enigma256 SoftBus Theorem 2 (C24)
+
+```bash
+swift test -c release --filter testEnigma256FormalCertificate
+```
+
+Exactly five bounded checks must hold:
+
+1. a deterministic **four-state** frozen-scramble bijection sweep;
+2. exhaustive **256-byte reciprocity** for one frozen fixture state;
+3. a deterministic **128-byte stream round-trip** under identical day/message state;
+4. exhaustive fixture plugboard involution plus XOR-center involutions for masks `00`, `01`, `a5`, and `ff`, with exactly **256 fixed points for mask zero and 0 for every tested nonzero mask**; and
+5. exact fixture-v4 native-profile integrity: family/version/generation/schema, transition/update/schedule identifiers, `native_reversible_16` component/fold topology, profile hash, and separated profile-bound KDF/HMAC domains.
+
+Expected post-promotion result: **1/1 PASS**. Statement: [`directives/enigma256-theorem.md`](directives/enigma256-theorem.md).
+
+The certificate models `A_i^-1(A_i(x) XOR k_i)` and records the boundary that `k_i` is a profile-bound HMAC-SHA256 lane selected by a UInt64 big-endian block counter. The host derives and transports `(payload, centerMask, absoluteByteCounter)`; RTL validates the counter and does not implement HMAC. Counter transport, mismatch rejection, and the `UInt64.max - 1` final accepted pre-counter are exercised in the broader C10/49-test fixture suite, not added as a sixth C24 check.
+
+Finite table/center checks are exhaustive only over the stated finite inputs; state/key coverage remains bounded. C24 is not IND-CPA, external cryptanalysis, a full protocol proof, runtime-mutation evidence, or closure of **E256-003**. It builds on empirical **C10**.
+
+## TensorLUT baseline (C8)
+
+```bash
+# Emit / grades — see tensorlut.md and campaign Phase 21 artifacts
+# Baseline: enigma_m4_tensorlut_baseline.v (925 LUT6 + 49 DFFs)
+
+# Emitted Verilog is synthesizable AND functionally equivalent.
+# Needs yosys on PATH (brew install yosys); skips cleanly without it.
+swift test -c release --filter TensorLUTYosysRoundTripTests \
+  | tee logs/tensorlut-yosys-roundtrip-2026-08-16.log
+```
+
+Expected:
+
+```
+TENSORLUT_ROUNDTRIP ok: 48 output bits over 16 input assignments, yosys-resynthesized vs source netlist
+TENSORLUT_ROUNDTRIP negative control: 4 mismatch(es) detected
+```
+
+The loop is emit → `yosys -q` (`read_verilog`, `hierarchy`, `proc`, `flatten`,
+`techmap`, `abc -lut 6`, `write_json`) → reload through the repo's own Yosys
+loader → `CleartextNetlistSimulator`, compared against direct evaluation of the
+source TensorLUT cells over **all 16** input assignments. Exhaustive, so
+agreement is proof rather than sampling. A behavioural `LUT6` model is supplied
+in-test so the flow does not depend on where a Yosys install keeps its Xilinx
+library.
+
+The negative control matters more than the positive result: flipping a single
+INIT bit must produce a visible mismatch. Without it, a comparison reading the
+wrong ports — or a Yosys pass that optimised INIT away — would pass silently.
+
+**Regenerating the 925-LUT baseline** (gap closed 2026-08-17):
+
+```bash
+.build/release/helut-bench --emit-tensorlut-verilog enigma_m4_netlist.json \
+  --emit-module-name enigma_m4_tensorlut_baseline --emit-out <file>
+```
+
+Reproduces `enigma_m4_tensorlut_baseline.v` exactly: 925 LUTs, 49 DFFs, 59 200
+INIT floats, all 925 INIT words identical, zero differing lines in the module
+body. Locked by `swift test -c release --filter TensorLUTBaselineRegenerationTests`.
+
+Two port details decide whether this works at all, and getting either wrong
+shifts every signal in the file: `clk` is declared by the emitter itself so it
+must not also be passed through `inputWires`, and ports are ordered by net id
+rather than by port name.
+
+Note the scope split — the Yosys equivalence check above is on the 4-LUT design;
+this regeneration check is on the 925-LUT artifact. Neither subsumes the other.
+
+## Determinism gates (encrypted path)
+
+The 2026-08-15 defect: `EncryptedNetlistSimulator.tick` encrypted primary inputs
+while iterating `inputs` as a `Dictionary`, drawing from the shared serial RNG
+inside the loop. Swift reseeds Dictionary hashing per process, so each run gave a
+different mask to a different wire, and thin decode margins became coin tosses.
+It cost a claim: the *n*=512 covering adder was filed as a noise-limit FAIL
+before being traced to this.
+
+```bash
+make gates        # determinism + exact C69 n=512 smoke + claim lints
+make determinism  # fast in-process and cross-process root-cause guards only
+make c69-smoke    # exact N=1024 / n=512 covering-b2 end-to-end receipt
+```
+
+or run the fast guards individually:
+
+```bash
+# In-process guard: decoy keys permute Dictionary layout, fingerprint must hold.
+swift test -c release --filter EncryptedDeterminismTests
+
+# Cross-process guard: the property that actually broke. Runs the emitting test
+# as N separate processes and requires byte-identical fingerprints.
+python3 Scripts/determinism_cross_process.py --runs 5 --verbose
+```
+
+These are macOS CI merge gates in `.github/workflows/macos-determinism.yml`.
+The small-N guards protect the exact Dictionary-order mechanism cheaply; the
+separate C69 smoke protects the recovered *N*=1024, *n*=512 result against
+parameter, key-switch, path-filter, and decode regressions. Its marker checks
+make a successful but unselected path fail as vacuous.
+
+Expected cross-process result:
+`PASS all 5 processes agreed: 9820c89a488d815d`.
+Expected exact smoke result:
+`PASS: C69 covering-b2 N=1024 / n=512 remains an end-to-end SING pass`.
+
+`SWIFT_DETERMINISTIC_HASHING` must stay **unset** — it pins the hash seed and
+makes the cross-process check vacuous. The script refuses to run if it is set
+(exit 2). Exit 1 means fingerprints genuinely diverged.
+
+Both gates were verified to *catch* the bug by reintroducing it: the cross-process
+driver reported 3 distinct fingerprints across 6 processes. A determinism test
+that has never been shown to fail is not evidence.
+
+## ε claim sufficiency
+
+Structural lint cannot catch a row whose ε is correctly measured, correctly
+cited, and still unsupported by its own trial count. That is a statistical
+defect, and it is the one that bit hardest — C36, C37, C41, C52 and C57 all
+quoted an ε their sample size could not carry.
+
+```bash
+python3 Scripts/eps_claim_audit.py           # report
+python3 Scripts/eps_claim_audit.py --strict  # exit 1 if any row is unsupported
+```
+
+The bound clears a target iff `|point| ≥ (m/χ²₀.₀₅(m))·|target|`, so each sample
+count buys fixed slack: n=4 carries any point estimate at or below −371, n=8
+−188, n=16 −129, n=32 −102. **n=4 is not universally too small** — thin margins
+are what cost. Rows are classified `supported`, `under-sampled` (buy trials), or
+`unreachable` (point estimate past the bar; weaken the claim).
+
+## Noise-measurement estimators (ε)
+
+```bash
+# Accumulator sampling agrees with the single-residual estimator (coefficient 0
+# reproduces it exactly; a noiseless BK gives residual 0 everywhere).
+swift test -c release --filter TFHENoisyBKAccumulatorTests
+
+# The confidence bound is not tightened by correlated residuals.
+swift test -c release --filter TFHENoisyBKAccumulatorBoundSafetyTests
+
+# Measured effective sample size per bootstrap (~7 min; prints the table in
+# AUDIT.md 13.4.1). Expect gain 8-12x, flat in N -- not the N-fold that
+# AUDIT 13.4 originally predicted.
+swift test -c release --filter TFHENoisyBKEffectiveSampleTests
+```
+
+## Tests (smoke)
+
+```bash
+swift test --filter 'TFHESeamTests/testRotationNativePackStaysInZ2N'
+swift test -c release --filter 'N256BlindRotateSmoke/testArity3CarryAtDegrees'
+swift test --filter 'TFHESeamTests/testEncryptedNetlistWireRefreshPublicMSFullAdder'
+make test-metal-p1   # Phase 1 tiled-kernel / CSE / cache battery
+```
+
+## Artifact layout (for a release tag)
+
+| Path | Role |
+|------|------|
+| `directives/claim-sheet.md` | C / H / N freeze |
+| `writeup.pdf` / `paper/helut.pdf` | Campaign + stack PDFs |
+| `logs/helut-encrypted-*.log` | SING / micro receipts |
+| `logs/helut-estimator-*.json` | Pending / results |
+| `logs/helut-hardness*.txt` | Hardness table printout |
+| `BREAK_P1030680.md` | Campaign ledger (negatives included) |

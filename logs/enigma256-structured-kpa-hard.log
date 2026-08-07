@@ -1,0 +1,6 @@
+Enigma 256 structured SoftBus KPA (gen 5)
+  crib: 119 B  rounds: 16384
+  hill-climb LFSR (pos+Walzenlage known): 17/119 in 169.9 ms hold
+  hill-climb positions (LFSR+Walzenlage known): 16/119 in 166.6 ms hold
+  hill-climb joint (day only): 18/119 in 162.4 ms hold
+  red_pressure: false — SoftBus holds under structured KPA

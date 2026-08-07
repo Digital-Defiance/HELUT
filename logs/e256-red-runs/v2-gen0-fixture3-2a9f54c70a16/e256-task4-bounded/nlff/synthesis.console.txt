@@ -1,0 +1,1573 @@
+
+-- Running command `
+  read_verilog -sv -I. Hardware/RTL/Enigma256/enigma_256_step_cone.v
+  hierarchy -check -top enigma_256_step_cone
+  proc; opt; memory; opt
+  techmap; opt
+  abc -lut 6
+  opt_clean
+  write_json build/enigma_256_step_cone_netlist.json
+  stat
+' --
+
+1. Executing Verilog-2005 frontend: Hardware/RTL/Enigma256/enigma_256_step_cone.v
+Parsing SystemVerilog input from `Hardware/RTL/Enigma256/enigma_256_step_cone.v' to AST representation.
+Generating RTLIL representation for module `\enigma_256_step_cone'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \enigma_256_step_cone
+
+2.2. Analyzing design hierarchy..
+Top module:  \enigma_256_step_cone
+Removed 0 unused modules.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 2 switch rules as full_case in process $proc$Hardware/RTL/Enigma256/enigma_256_step_cone.v:28$393 in module enigma_256_step_cone.
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_n in `\enigma_256_step_cone.$proc$Hardware/RTL/Enigma256/enigma_256_step_cone.v:28$393'.
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~2 debug messages>
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\enigma_256_step_cone.$proc$Hardware/RTL/Enigma256/enigma_256_step_cone.v:28$393'.
+     1/1: $0\lfsr[63:0]
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\enigma_256_step_cone.\lfsr' using process `\enigma_256_step_cone.$proc$Hardware/RTL/Enigma256/enigma_256_step_cone.v:28$393'.
+  created $adff cell `$procdff$406' with positive edge clock and positive level reset.
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 2 empty switches in `\enigma_256_step_cone.$proc$Hardware/RTL/Enigma256/enigma_256_step_cone.v:28$393'.
+Removing empty process `enigma_256_step_cone.$proc$Hardware/RTL/Enigma256/enigma_256_step_cone.v:28$393'.
+Cleaned up 2 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_step_cone.
+<suppressed ~3 debug messages>
+
+4. Executing OPT pass (performing simple optimizations).
+
+4.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_step_cone.
+
+4.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_step_cone'.
+Computing hashes of 399 cells of `\enigma_256_step_cone'.
+Finding duplicate cells in `\enigma_256_step_cone'.
+Computing hashes of 380 cells of `\enigma_256_step_cone'.
+Finding duplicate cells in `\enigma_256_step_cone'.
+<suppressed ~57 debug messages>
+Removed a total of 19 cells.
+
+4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \enigma_256_step_cone..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~6 debug messages>
+
+4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \enigma_256_step_cone.
+Performed a total of 0 changes.
+
+4.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_step_cone'.
+Computing hashes of 380 cells of `\enigma_256_step_cone'.
+Finding duplicate cells in `\enigma_256_step_cone'.
+Removed a total of 0 cells.
+
+4.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$406 ($adff) from module enigma_256_step_cone (D = $procmux$400_Y, Q = \lfsr).
+
+4.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_step_cone..
+Removed 68 unused cells and 288 unused wires.
+<suppressed ~103 debug messages>
+
+4.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_step_cone.
+<suppressed ~1 debug messages>
+
+4.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \enigma_256_step_cone..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~6 debug messages>
+
+4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \enigma_256_step_cone.
+Performed a total of 0 changes.
+
+4.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_step_cone'.
+Computing hashes of 313 cells of `\enigma_256_step_cone'.
+Finding duplicate cells in `\enigma_256_step_cone'.
+Removed a total of 0 cells.
+
+4.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_step_cone..
+
+4.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_step_cone.
+
+4.16. Finished fast OPT passes. (There is nothing left to do.)
+
+5. Executing MEMORY pass.
+
+5.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+5.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+5.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+5.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+5.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+5.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_step_cone..
+
+5.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+5.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+5.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_step_cone..
+
+5.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+5.11. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+6. Executing OPT pass (performing simple optimizations).
+
+6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_step_cone.
+
+6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_step_cone'.
+Computing hashes of 313 cells of `\enigma_256_step_cone'.
+Finding duplicate cells in `\enigma_256_step_cone'.
+Removed a total of 0 cells.
+
+6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \enigma_256_step_cone..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~6 debug messages>
+
+6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \enigma_256_step_cone.
+Performed a total of 0 changes.
+
+6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_step_cone'.
+Computing hashes of 313 cells of `\enigma_256_step_cone'.
+Finding duplicate cells in `\enigma_256_step_cone'.
+Removed a total of 0 cells.
+
+6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_step_cone..
+
+6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_step_cone.
+
+6.9. Finished fast OPT passes. (There is nothing left to do.)
+
+7. Executing TECHMAP pass (map to technology primitives).
+
+7.1. Executing Verilog-2005 frontend: /opt/homebrew/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/opt/homebrew/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+7.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $reduce_bool.
+Using extmapper simplemap for cells of type $adffe.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $logic_not.
+No more expansions possible.
+<suppressed ~390 debug messages>
+
+8. Executing OPT pass (performing simple optimizations).
+
+8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_step_cone.
+<suppressed ~189 debug messages>
+
+8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_step_cone'.
+Computing hashes of 629 cells of `\enigma_256_step_cone'.
+Finding duplicate cells in `\enigma_256_step_cone'.
+Removed a total of 0 cells.
+
+8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \enigma_256_step_cone..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \enigma_256_step_cone.
+Performed a total of 0 changes.
+
+8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_step_cone'.
+Computing hashes of 629 cells of `\enigma_256_step_cone'.
+Finding duplicate cells in `\enigma_256_step_cone'.
+Removed a total of 0 cells.
+
+8.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_step_cone..
+Removed 1 unused cells and 3 unused wires.
+<suppressed ~2 debug messages>
+
+8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_step_cone.
+
+8.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \enigma_256_step_cone..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \enigma_256_step_cone.
+Performed a total of 0 changes.
+
+8.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_step_cone'.
+Computing hashes of 628 cells of `\enigma_256_step_cone'.
+Finding duplicate cells in `\enigma_256_step_cone'.
+Removed a total of 0 cells.
+
+8.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_step_cone..
+
+8.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_step_cone.
+
+8.16. Finished fast OPT passes. (There is nothing left to do.)
+
+9. Executing ABC pass (technology mapping using ABC).
+
+9.1. Extracting gate netlist of module `\enigma_256_step_cone' to `<abc-temp-dir>/input.blif'..
+Replacing 64 occurrences of constant undef bits with constant zero bits
+
+9.1.1. Executed ABC.
+Extracted 564 gates and 697 wires to a netlist network with 130 inputs and 69 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lut <abc-temp-dir>/lutdefs.txt 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + dch -f 
+ABC: + if 
+ABC: + mfs2 
+ABC: + lutpack -S 1 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+9.1.2. Re-integrating ABC results.
+ABC RESULTS:              $lut cells:      145
+ABC RESULTS:        internal signals:      498
+ABC RESULTS:           input signals:      130
+ABC RESULTS:          output signals:       69
+Removing temp directory.
+Removing global temp directory.
+
+10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_step_cone..
+Removed 0 unused cells and 516 unused wires.
+<suppressed ~167 debug messages>
+
+11. Executing JSON backend.
+
+12. Printing statistics.
+
+=== enigma_256_step_cone ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       93 wires
+      345 wire bits
+       15 public wires
+      204 public wire bits
+       10 ports
+      136 port bits
+      209 cells
+       63   $_DFFE_PN0P_
+        1   $_DFFE_PN1P_
+      145   $lut
+
+End of script. Logfile hash: 7ab7ff1f43, time: 0.25s, user: 0.04s, system: 0.01s, MEM: 21.16 MB peak
+Yosys 0.68+post (git sha1 c12172fbae8af5e20f6fb52e3d4e92d56ed587b6, Release, AppleClang clang++ 21.0.0.21000101)
+Time spent: 85% 1x abc (0 sec), 4% 3x read_verilog (0 sec), ...
+
+-- Running command `
+  read_verilog -sv -I. Hardware/RTL/Enigma256/enigma_256_nlff_combo.v
+  hierarchy -check -top enigma_256_nlff_combo
+  proc; opt
+  techmap; opt
+  abc -lut 6
+  opt_clean
+  write_json build/enigma_256_nlff_combo_netlist.json
+  stat
+' --
+
+1. Executing Verilog-2005 frontend: Hardware/RTL/Enigma256/enigma_256_nlff_combo.v
+Parsing SystemVerilog input from `Hardware/RTL/Enigma256/enigma_256_nlff_combo.v' to AST representation.
+Generating RTLIL representation for module `\enigma_256_nlff_combo'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \enigma_256_nlff_combo
+
+2.2. Analyzing design hierarchy..
+Top module:  \enigma_256_nlff_combo
+Removed 0 unused modules.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_nlff_combo.
+
+4. Executing OPT pass (performing simple optimizations).
+
+4.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_nlff_combo.
+
+4.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_nlff_combo'.
+Computing hashes of 390 cells of `\enigma_256_nlff_combo'.
+Finding duplicate cells in `\enigma_256_nlff_combo'.
+Computing hashes of 371 cells of `\enigma_256_nlff_combo'.
+Finding duplicate cells in `\enigma_256_nlff_combo'.
+<suppressed ~57 debug messages>
+Removed a total of 19 cells.
+
+4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \enigma_256_nlff_combo..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \enigma_256_nlff_combo.
+Performed a total of 0 changes.
+
+4.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_nlff_combo'.
+Computing hashes of 371 cells of `\enigma_256_nlff_combo'.
+Finding duplicate cells in `\enigma_256_nlff_combo'.
+Removed a total of 0 cells.
+
+4.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_nlff_combo..
+Removed 66 unused cells and 281 unused wires.
+<suppressed ~101 debug messages>
+
+4.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_nlff_combo.
+
+4.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \enigma_256_nlff_combo..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \enigma_256_nlff_combo.
+Performed a total of 0 changes.
+
+4.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_nlff_combo'.
+Computing hashes of 305 cells of `\enigma_256_nlff_combo'.
+Finding duplicate cells in `\enigma_256_nlff_combo'.
+Removed a total of 0 cells.
+
+4.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_nlff_combo..
+
+4.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_nlff_combo.
+
+4.16. Finished fast OPT passes. (There is nothing left to do.)
+
+5. Executing TECHMAP pass (map to technology primitives).
+
+5.1. Executing Verilog-2005 frontend: /opt/homebrew/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/opt/homebrew/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+5.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $and.
+No more expansions possible.
+<suppressed ~382 debug messages>
+
+6. Executing OPT pass (performing simple optimizations).
+
+6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_nlff_combo.
+
+6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_nlff_combo'.
+Computing hashes of 305 cells of `\enigma_256_nlff_combo'.
+Finding duplicate cells in `\enigma_256_nlff_combo'.
+Removed a total of 0 cells.
+
+6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \enigma_256_nlff_combo..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \enigma_256_nlff_combo.
+Performed a total of 0 changes.
+
+6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_nlff_combo'.
+Computing hashes of 305 cells of `\enigma_256_nlff_combo'.
+Finding duplicate cells in `\enigma_256_nlff_combo'.
+Removed a total of 0 cells.
+
+6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_nlff_combo..
+
+6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_nlff_combo.
+
+6.9. Finished fast OPT passes. (There is nothing left to do.)
+
+7. Executing ABC pass (technology mapping using ABC).
+
+7.1. Extracting gate netlist of module `\enigma_256_nlff_combo' to `<abc-temp-dir>/input.blif'..
+
+7.1.1. Executed ABC.
+Extracted 305 gates and 369 wires to a netlist network with 64 inputs and 4 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lut <abc-temp-dir>/lutdefs.txt 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + dch -f 
+ABC: + if 
+ABC: + mfs2 
+ABC: + lutpack -S 1 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+7.1.2. Re-integrating ABC results.
+ABC RESULTS:              $lut cells:       62
+ABC RESULTS:        internal signals:      301
+ABC RESULTS:           input signals:       64
+ABC RESULTS:          output signals:        4
+Removing temp directory.
+Removing global temp directory.
+
+8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_nlff_combo..
+Removed 0 unused cells and 377 unused wires.
+<suppressed ~167 debug messages>
+
+9. Executing JSON backend.
+
+10. Printing statistics.
+
+=== enigma_256_nlff_combo ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       67 wires
+      130 wire bits
+        9 public wires
+       72 public wire bits
+        5 ports
+       68 port bits
+       62 cells
+       62   $lut
+
+End of script. Logfile hash: 8766abf5da, time: 0.20s, user: 0.02s, system: 0.00s, MEM: 19.81 MB peak
+Yosys 0.68+post (git sha1 c12172fbae8af5e20f6fb52e3d4e92d56ed587b6, Release, AppleClang clang++ 21.0.0.21000101)
+Time spent: 89% 1x abc (0 sec), 5% 3x read_verilog (0 sec), ...
+
+-- Running command `
+  read_verilog -sv -I. Hardware/RTL/Enigma256/enigma_256_nlff_lfsr_combo.v
+  hierarchy -check -top enigma_256_nlff_lfsr_combo
+  proc; opt
+  techmap; opt
+  abc -lut 6
+  opt_clean
+  write_json build/enigma_256_nlff_lfsr_combo_netlist.json
+  stat
+' --
+
+1. Executing Verilog-2005 frontend: Hardware/RTL/Enigma256/enigma_256_nlff_lfsr_combo.v
+Parsing SystemVerilog input from `Hardware/RTL/Enigma256/enigma_256_nlff_lfsr_combo.v' to AST representation.
+Generating RTLIL representation for module `\enigma_256_nlff_lfsr_combo'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \enigma_256_nlff_lfsr_combo
+
+2.2. Analyzing design hierarchy..
+Top module:  \enigma_256_nlff_lfsr_combo
+Removed 0 unused modules.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_nlff_lfsr_combo.
+
+4. Executing OPT pass (performing simple optimizations).
+
+4.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_nlff_lfsr_combo.
+
+4.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_nlff_lfsr_combo'.
+Computing hashes of 392 cells of `\enigma_256_nlff_lfsr_combo'.
+Finding duplicate cells in `\enigma_256_nlff_lfsr_combo'.
+Computing hashes of 373 cells of `\enigma_256_nlff_lfsr_combo'.
+Finding duplicate cells in `\enigma_256_nlff_lfsr_combo'.
+<suppressed ~57 debug messages>
+Removed a total of 19 cells.
+
+4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \enigma_256_nlff_lfsr_combo..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~2 debug messages>
+
+4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \enigma_256_nlff_lfsr_combo.
+Performed a total of 0 changes.
+
+4.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_nlff_lfsr_combo'.
+Computing hashes of 373 cells of `\enigma_256_nlff_lfsr_combo'.
+Finding duplicate cells in `\enigma_256_nlff_lfsr_combo'.
+Removed a total of 0 cells.
+
+4.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_nlff_lfsr_combo..
+Removed 66 unused cells and 282 unused wires.
+<suppressed ~101 debug messages>
+
+4.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_nlff_lfsr_combo.
+
+4.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \enigma_256_nlff_lfsr_combo..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~2 debug messages>
+
+4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \enigma_256_nlff_lfsr_combo.
+Performed a total of 0 changes.
+
+4.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_nlff_lfsr_combo'.
+Computing hashes of 307 cells of `\enigma_256_nlff_lfsr_combo'.
+Finding duplicate cells in `\enigma_256_nlff_lfsr_combo'.
+Removed a total of 0 cells.
+
+4.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_nlff_lfsr_combo..
+
+4.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_nlff_lfsr_combo.
+
+4.16. Finished fast OPT passes. (There is nothing left to do.)
+
+5. Executing TECHMAP pass (map to technology primitives).
+
+5.1. Executing Verilog-2005 frontend: /opt/homebrew/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/opt/homebrew/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+5.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $and.
+No more expansions possible.
+<suppressed ~384 debug messages>
+
+6. Executing OPT pass (performing simple optimizations).
+
+6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_nlff_lfsr_combo.
+<suppressed ~125 debug messages>
+
+6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_nlff_lfsr_combo'.
+Computing hashes of 308 cells of `\enigma_256_nlff_lfsr_combo'.
+Finding duplicate cells in `\enigma_256_nlff_lfsr_combo'.
+Removed a total of 0 cells.
+
+6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \enigma_256_nlff_lfsr_combo..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \enigma_256_nlff_lfsr_combo.
+Performed a total of 0 changes.
+
+6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_nlff_lfsr_combo'.
+Computing hashes of 308 cells of `\enigma_256_nlff_lfsr_combo'.
+Finding duplicate cells in `\enigma_256_nlff_lfsr_combo'.
+Removed a total of 0 cells.
+
+6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_nlff_lfsr_combo..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_nlff_lfsr_combo.
+
+6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \enigma_256_nlff_lfsr_combo..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \enigma_256_nlff_lfsr_combo.
+Performed a total of 0 changes.
+
+6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_nlff_lfsr_combo'.
+Computing hashes of 308 cells of `\enigma_256_nlff_lfsr_combo'.
+Finding duplicate cells in `\enigma_256_nlff_lfsr_combo'.
+Removed a total of 0 cells.
+
+6.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_nlff_lfsr_combo..
+
+6.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_nlff_lfsr_combo.
+
+6.16. Finished fast OPT passes. (There is nothing left to do.)
+
+7. Executing ABC pass (technology mapping using ABC).
+
+7.1. Extracting gate netlist of module `\enigma_256_nlff_lfsr_combo' to `<abc-temp-dir>/input.blif'..
+
+7.1.1. Executed ABC.
+Extracted 308 gates and 372 wires to a netlist network with 64 inputs and 7 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lut <abc-temp-dir>/lutdefs.txt 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + dch -f 
+ABC: + if 
+ABC: + mfs2 
+ABC: + lutpack -S 1 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+7.1.2. Re-integrating ABC results.
+ABC RESULTS:              $lut cells:       77
+ABC RESULTS:        internal signals:      301
+ABC RESULTS:           input signals:       64
+ABC RESULTS:          output signals:        7
+Removing temp directory.
+Removing global temp directory.
+
+8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_nlff_lfsr_combo..
+Removed 0 unused cells and 380 unused wires.
+<suppressed ~167 debug messages>
+
+9. Executing JSON backend.
+
+10. Printing statistics.
+
+=== enigma_256_nlff_lfsr_combo ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       81 wires
+      214 wire bits
+       11 public wires
+      144 public wire bits
+        6 ports
+       76 port bits
+       77 cells
+       77   $lut
+
+End of script. Logfile hash: c9e08a4247, time: 0.20s, user: 0.03s, system: 0.01s, MEM: 19.92 MB peak
+Yosys 0.68+post (git sha1 c12172fbae8af5e20f6fb52e3d4e92d56ed587b6, Release, AppleClang clang++ 21.0.0.21000101)
+Time spent: 87% 1x abc (0 sec), 5% 3x read_verilog (0 sec), ...
+
+-- Running command `
+  read_verilog -sv -I. Hardware/RTL/Enigma256/enigma_256_nlff_offset_combo.v
+  hierarchy -check -top enigma_256_nlff_offset_combo
+  proc; opt
+  techmap; opt
+  abc -lut 6
+  opt_clean
+  write_json build/enigma_256_nlff_offset_combo_netlist.json
+  stat
+' --
+
+1. Executing Verilog-2005 frontend: Hardware/RTL/Enigma256/enigma_256_nlff_offset_combo.v
+Parsing SystemVerilog input from `Hardware/RTL/Enigma256/enigma_256_nlff_offset_combo.v' to AST representation.
+Generating RTLIL representation for module `\enigma_256_nlff_offset_combo'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \enigma_256_nlff_offset_combo
+
+2.2. Analyzing design hierarchy..
+Top module:  \enigma_256_nlff_offset_combo
+Removed 0 unused modules.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_nlff_offset_combo.
+
+4. Executing OPT pass (performing simple optimizations).
+
+4.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_nlff_offset_combo.
+
+4.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_nlff_offset_combo'.
+Computing hashes of 396 cells of `\enigma_256_nlff_offset_combo'.
+Finding duplicate cells in `\enigma_256_nlff_offset_combo'.
+Computing hashes of 377 cells of `\enigma_256_nlff_offset_combo'.
+Finding duplicate cells in `\enigma_256_nlff_offset_combo'.
+<suppressed ~57 debug messages>
+Removed a total of 19 cells.
+
+4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \enigma_256_nlff_offset_combo..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~2 debug messages>
+
+4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \enigma_256_nlff_offset_combo.
+Performed a total of 0 changes.
+
+4.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_nlff_offset_combo'.
+Computing hashes of 377 cells of `\enigma_256_nlff_offset_combo'.
+Finding duplicate cells in `\enigma_256_nlff_offset_combo'.
+Removed a total of 0 cells.
+
+4.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_nlff_offset_combo..
+Removed 66 unused cells and 286 unused wires.
+<suppressed ~101 debug messages>
+
+4.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_nlff_offset_combo.
+
+4.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \enigma_256_nlff_offset_combo..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~2 debug messages>
+
+4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \enigma_256_nlff_offset_combo.
+Performed a total of 0 changes.
+
+4.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_nlff_offset_combo'.
+Computing hashes of 311 cells of `\enigma_256_nlff_offset_combo'.
+Finding duplicate cells in `\enigma_256_nlff_offset_combo'.
+Removed a total of 0 cells.
+
+4.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_nlff_offset_combo..
+
+4.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_nlff_offset_combo.
+
+4.16. Finished fast OPT passes. (There is nothing left to do.)
+
+5. Executing TECHMAP pass (map to technology primitives).
+
+5.1. Executing Verilog-2005 frontend: /opt/homebrew/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/opt/homebrew/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+5.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $and.
+Running "alumacc" on wrapper $extern:wrap:$add:Y_WIDTH=8:B_WIDTH=8:A_WIDTH=8:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$add:Y_WIDTH=8:B_WIDTH=8:A_WIDTH=8:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$add:Y_WIDTH=8:B_WIDTH=8:A_WIDTH=8:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $paramod$a1bc51c02ce12ac21eb18988e83292af48ed7d72\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000001000 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001000 for cells of type $lcu.
+Using extmapper simplemap for cells of type $or.
+No more expansions possible.
+<suppressed ~712 debug messages>
+
+6. Executing OPT pass (performing simple optimizations).
+
+6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_nlff_offset_combo.
+<suppressed ~413 debug messages>
+
+6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_nlff_offset_combo'.
+Computing hashes of 392 cells of `\enigma_256_nlff_offset_combo'.
+Finding duplicate cells in `\enigma_256_nlff_offset_combo'.
+Removed a total of 0 cells.
+
+6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \enigma_256_nlff_offset_combo..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \enigma_256_nlff_offset_combo.
+Performed a total of 0 changes.
+
+6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_nlff_offset_combo'.
+Computing hashes of 392 cells of `\enigma_256_nlff_offset_combo'.
+Finding duplicate cells in `\enigma_256_nlff_offset_combo'.
+Removed a total of 0 cells.
+
+6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_nlff_offset_combo..
+Removed 16 unused cells and 245 unused wires.
+<suppressed ~17 debug messages>
+
+6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_nlff_offset_combo.
+
+6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \enigma_256_nlff_offset_combo..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \enigma_256_nlff_offset_combo.
+Performed a total of 0 changes.
+
+6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_nlff_offset_combo'.
+Computing hashes of 376 cells of `\enigma_256_nlff_offset_combo'.
+Finding duplicate cells in `\enigma_256_nlff_offset_combo'.
+Removed a total of 0 cells.
+
+6.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_nlff_offset_combo..
+
+6.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_nlff_offset_combo.
+
+6.16. Finished fast OPT passes. (There is nothing left to do.)
+
+7. Executing ABC pass (technology mapping using ABC).
+
+7.1. Extracting gate netlist of module `\enigma_256_nlff_offset_combo' to `<abc-temp-dir>/input.blif'..
+
+7.1.1. Executed ABC.
+Extracted 376 gates and 472 wires to a netlist network with 96 inputs and 39 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lut <abc-temp-dir>/lutdefs.txt 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + dch -f 
+ABC: + if 
+ABC: + mfs2 
+ABC: + lutpack -S 1 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+7.1.2. Re-integrating ABC results.
+ABC RESULTS:              $lut cells:      112
+ABC RESULTS:        internal signals:      337
+ABC RESULTS:           input signals:       96
+ABC RESULTS:          output signals:       39
+Removing temp directory.
+Removing global temp directory.
+
+8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_nlff_offset_combo..
+Removed 0 unused cells and 456 unused wires.
+<suppressed ~167 debug messages>
+
+9. Executing JSON backend.
+
+10. Printing statistics.
+
+=== enigma_256_nlff_offset_combo ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       92 wires
+      281 wire bits
+       19 public wires
+      208 public wire bits
+       14 ports
+      140 port bits
+      112 cells
+      112   $lut
+
+End of script. Logfile hash: 4ecb7554e0, time: 0.18s, user: 0.03s, system: 0.01s, MEM: 21.75 MB peak
+Yosys 0.68+post (git sha1 c12172fbae8af5e20f6fb52e3d4e92d56ed587b6, Release, AppleClang clang++ 21.0.0.21000101)
+Time spent: 81% 1x abc (0 sec), 5% 3x read_verilog (0 sec), ...
+
+-- Running command `
+  read_verilog -sv -I. Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v
+  hierarchy -check -top enigma_256_scramble_frag_combo
+  proc; opt
+  techmap; opt
+  abc -lut 6
+  opt_clean
+  write_json build/enigma_256_scramble_frag_combo_netlist.json
+  stat
+' --
+
+1. Executing Verilog-2005 frontend: Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v
+Parsing SystemVerilog input from `Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v' to AST representation.
+Generating RTLIL representation for module `\enigma_256_scramble_frag_combo'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \enigma_256_scramble_frag_combo
+
+2.2. Analyzing design hierarchy..
+Top module:  \enigma_256_scramble_frag_combo
+Removed 0 unused modules.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 43 assignments to connections.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\enigma_256_scramble_frag_combo.$proc$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:148$497'.
+Creating decoders for process `\enigma_256_scramble_frag_combo.$proc$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:146$489'.
+Creating decoders for process `\enigma_256_scramble_frag_combo.$proc$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:144$481'.
+Creating decoders for process `\enigma_256_scramble_frag_combo.$proc$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:142$473'.
+Creating decoders for process `\enigma_256_scramble_frag_combo.$proc$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:137$468'.
+Creating decoders for process `\enigma_256_scramble_frag_combo.$proc$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:135$460'.
+Creating decoders for process `\enigma_256_scramble_frag_combo.$proc$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:133$452'.
+Creating decoders for process `\enigma_256_scramble_frag_combo.$proc$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:131$444'.
+Creating decoders for process `\enigma_256_scramble_frag_combo.$proc$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:129$437'.
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\enigma_256_scramble_frag_combo.\sbox1_inv$func$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:148$9.$result' from process `\enigma_256_scramble_frag_combo.$proc$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:148$497'.
+No latch inferred for signal `\enigma_256_scramble_frag_combo.\sbox2_inv$func$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:146$8.$result' from process `\enigma_256_scramble_frag_combo.$proc$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:146$489'.
+No latch inferred for signal `\enigma_256_scramble_frag_combo.\sbox3_inv$func$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:144$7.$result' from process `\enigma_256_scramble_frag_combo.$proc$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:144$481'.
+No latch inferred for signal `\enigma_256_scramble_frag_combo.\sbox4_inv$func$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:142$6.$result' from process `\enigma_256_scramble_frag_combo.$proc$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:142$473'.
+No latch inferred for signal `\enigma_256_scramble_frag_combo.\base_reflector$func$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:137$5.$result' from process `\enigma_256_scramble_frag_combo.$proc$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:137$468'.
+No latch inferred for signal `\enigma_256_scramble_frag_combo.\sbox4$func$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:135$4.$result' from process `\enigma_256_scramble_frag_combo.$proc$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:135$460'.
+No latch inferred for signal `\enigma_256_scramble_frag_combo.\sbox3$func$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:133$3.$result' from process `\enigma_256_scramble_frag_combo.$proc$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:133$452'.
+No latch inferred for signal `\enigma_256_scramble_frag_combo.\sbox2$func$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:131$2.$result' from process `\enigma_256_scramble_frag_combo.$proc$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:131$444'.
+No latch inferred for signal `\enigma_256_scramble_frag_combo.\sbox1$func$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:129$1.$result' from process `\enigma_256_scramble_frag_combo.$proc$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:129$437'.
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `enigma_256_scramble_frag_combo.$proc$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:148$497'.
+Removing empty process `enigma_256_scramble_frag_combo.$proc$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:146$489'.
+Removing empty process `enigma_256_scramble_frag_combo.$proc$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:144$481'.
+Removing empty process `enigma_256_scramble_frag_combo.$proc$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:142$473'.
+Removing empty process `enigma_256_scramble_frag_combo.$proc$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:137$468'.
+Removing empty process `enigma_256_scramble_frag_combo.$proc$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:135$460'.
+Removing empty process `enigma_256_scramble_frag_combo.$proc$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:133$452'.
+Removing empty process `enigma_256_scramble_frag_combo.$proc$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:131$444'.
+Removing empty process `enigma_256_scramble_frag_combo.$proc$Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v:129$437'.
+Cleaned up 0 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_scramble_frag_combo.
+<suppressed ~8 debug messages>
+
+4. Executing OPT pass (performing simple optimizations).
+
+4.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_scramble_frag_combo.
+
+4.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_scramble_frag_combo'.
+Computing hashes of 433 cells of `\enigma_256_scramble_frag_combo'.
+Finding duplicate cells in `\enigma_256_scramble_frag_combo'.
+Computing hashes of 414 cells of `\enigma_256_scramble_frag_combo'.
+Finding duplicate cells in `\enigma_256_scramble_frag_combo'.
+<suppressed ~57 debug messages>
+Removed a total of 19 cells.
+
+4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \enigma_256_scramble_frag_combo..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \enigma_256_scramble_frag_combo.
+Performed a total of 0 changes.
+
+4.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_scramble_frag_combo'.
+Computing hashes of 414 cells of `\enigma_256_scramble_frag_combo'.
+Finding duplicate cells in `\enigma_256_scramble_frag_combo'.
+Removed a total of 0 cells.
+
+4.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_scramble_frag_combo..
+Removed 66 unused cells and 374 unused wires.
+<suppressed ~101 debug messages>
+
+4.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_scramble_frag_combo.
+
+4.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \enigma_256_scramble_frag_combo..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \enigma_256_scramble_frag_combo.
+Performed a total of 0 changes.
+
+4.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_scramble_frag_combo'.
+Computing hashes of 348 cells of `\enigma_256_scramble_frag_combo'.
+Finding duplicate cells in `\enigma_256_scramble_frag_combo'.
+Removed a total of 0 cells.
+
+4.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_scramble_frag_combo..
+
+4.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_scramble_frag_combo.
+
+4.16. Finished fast OPT passes. (There is nothing left to do.)
+
+5. Executing TECHMAP pass (map to technology primitives).
+
+5.1. Executing Verilog-2005 frontend: /opt/homebrew/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/opt/homebrew/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+5.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $xor.
+Using extmapper simplemap for cells of type $and.
+Running "alumacc" on wrapper $extern:wrap:$add:Y_WIDTH=8:B_WIDTH=8:A_WIDTH=8:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$add:Y_WIDTH=8:B_WIDTH=8:A_WIDTH=8:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$add:Y_WIDTH=8:B_WIDTH=8:A_WIDTH=8:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Running "alumacc" on wrapper $extern:wrap:$sub:Y_WIDTH=8:B_WIDTH=8:A_WIDTH=8:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using template $extern:wrap:$sub:Y_WIDTH=8:B_WIDTH=8:A_WIDTH=8:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47 for cells of type $extern:wrap:$sub:Y_WIDTH=8:B_WIDTH=8:A_WIDTH=8:B_SIGNED=0:A_SIGNED=0:394426c56d1a028ba8fdd5469b163e04011def47.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $logic_and.
+Using template $paramod$a1bc51c02ce12ac21eb18988e83292af48ed7d72\_90_alu for cells of type $alu.
+Using extmapper simplemap for cells of type $pos.
+Using template $paramod\_90_fa\WIDTH=32'00000000000000000000000000001000 for cells of type $fa.
+Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000001000 for cells of type $lcu.
+Using extmapper simplemap for cells of type $or.
+No more expansions possible.
+<suppressed ~1748 debug messages>
+
+6. Executing OPT pass (performing simple optimizations).
+
+6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_scramble_frag_combo.
+<suppressed ~1535 debug messages>
+
+6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_scramble_frag_combo'.
+Computing hashes of 1591 cells of `\enigma_256_scramble_frag_combo'.
+Finding duplicate cells in `\enigma_256_scramble_frag_combo'.
+Computing hashes of 1494 cells of `\enigma_256_scramble_frag_combo'.
+Finding duplicate cells in `\enigma_256_scramble_frag_combo'.
+<suppressed ~291 debug messages>
+Removed a total of 97 cells.
+
+6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \enigma_256_scramble_frag_combo..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \enigma_256_scramble_frag_combo.
+Performed a total of 0 changes.
+
+6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_scramble_frag_combo'.
+Computing hashes of 1494 cells of `\enigma_256_scramble_frag_combo'.
+Finding duplicate cells in `\enigma_256_scramble_frag_combo'.
+Removed a total of 0 cells.
+
+6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_scramble_frag_combo..
+Removed 212 unused cells and 1511 unused wires.
+<suppressed ~213 debug messages>
+
+6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_scramble_frag_combo.
+
+6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \enigma_256_scramble_frag_combo..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \enigma_256_scramble_frag_combo.
+Performed a total of 0 changes.
+
+6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\enigma_256_scramble_frag_combo'.
+Computing hashes of 1282 cells of `\enigma_256_scramble_frag_combo'.
+Finding duplicate cells in `\enigma_256_scramble_frag_combo'.
+Removed a total of 0 cells.
+
+6.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_scramble_frag_combo..
+
+6.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module enigma_256_scramble_frag_combo.
+
+6.16. Finished fast OPT passes. (There is nothing left to do.)
+
+7. Executing ABC pass (technology mapping using ABC).
+
+7.1. Extracting gate netlist of module `\enigma_256_scramble_frag_combo' to `<abc-temp-dir>/input.blif'..
+
+7.1.1. Executed ABC.
+Extracted 1282 gates and 1386 wires to a netlist network with 104 inputs and 47 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lut <abc-temp-dir>/lutdefs.txt 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + dch -f 
+ABC: + if 
+ABC: + mfs2 
+ABC: + lutpack -S 1 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+7.1.2. Re-integrating ABC results.
+ABC RESULTS:              $lut cells:      348
+ABC RESULTS:        internal signals:     1235
+ABC RESULTS:           input signals:      104
+ABC RESULTS:          output signals:       47
+Removing temp directory.
+Removing global temp directory.
+
+8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \enigma_256_scramble_frag_combo..
+Removed 0 unused cells and 826 unused wires.
+<suppressed ~186 debug messages>
+
+9. Executing JSON backend.
+
+10. Printing statistics.
+
+=== enigma_256_scramble_frag_combo ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      348 wires
+      733 wire bits
+       47 public wires
+      432 public wire bits
+       16 ports
+      156 port bits
+      348 cells
+      348   $lut
+
+End of script. Logfile hash: 023f664521, time: 0.37s, user: 0.08s, system: 0.01s, MEM: 33.30 MB peak
+Yosys 0.68+post (git sha1 c12172fbae8af5e20f6fb52e3d4e92d56ed587b6, Release, AppleClang clang++ 21.0.0.21000101)
+Time spent: 79% 1x abc (0 sec), 5% 9x opt_expr (0 sec), ...
+Wrote build/enigma_256_step_cone_netlist.json
+Wrote build/enigma_256_nlff_combo_netlist.json
+Wrote build/enigma_256_nlff_lfsr_combo_netlist.json
+Wrote build/enigma_256_nlff_offset_combo_netlist.json
+Wrote build/enigma_256_scramble_frag_combo_netlist.json

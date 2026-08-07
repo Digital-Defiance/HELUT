@@ -1,0 +1,27 @@
+{
+  "target": "P1030684 (known key control \u2014 IV-III-VIII gamma B, rings AACU, key VYAA)",
+  "ciphertext": "RFBYWKIKELDCHBSXUNFJFSNRRVFWASXYLQCQFADYJXNTBMVLRDCGULOWHTBGWUSSOQHGAYEDKMJDNGVZNZFOXFKMIBKQNXFDWFIVGCYMJVQCKYQFBHYKZSCJ",
+  "cribs": [
+    {
+      "text": "VVVUUUVIRSOBENNULEINSXXMITU",
+      "messages": 1,
+      "offsets": [
+        0
+      ]
+    },
+    {
+      "text": "VVUUUVIRSOBENNULEINSXXMITUU",
+      "messages": 1,
+      "offsets": [
+        1
+      ]
+    },
+    {
+      "text": "UUVIRSOBENNULEINSXXMITUUUVI",
+      "messages": 1,
+      "offsets": [
+        4
+      ]
+    }
+  ]
+}

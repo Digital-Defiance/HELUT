@@ -1,0 +1,33 @@
+# TensorLUT Red Team — enigma_256_nlff_combo
+family: E256
+suite_version: 2
+generation: 0
+fixture_schema_version: 3
+profile_sha256: 2a9f54c70a1619805a911758158f1e2204b0fd96c35102a9db5f4575aeb40cb0
+formula: native_reversible_16
+lfsr_transition: right_shift_lsb_galois_d800000000000000
+update_order: derive_prestep_mask_scramble_then_step_same_mask
+reflector_derivation: fisher_yates_2_through_255_pairing_reserved_0_1_v1
+center_reserved_pair_rule: 0_1_identity_only_when_center_mode_else_base_reflector
+center_mode: prestep_step_r1_xor_step_r2_xor_step_r3_xor_step_r4
+center_map_order: forward_rotors_center_then_reverse_rotors_v1
+receipt_sha256: 5c5bc931a145048037ec420b2c0c47ff310570e963bd45b8262f18a1640f0027
+netlist: build/enigma_256_nlff_combo_netlist.json
+luts: 62
+dffs: 0
+batch: 786425
+explore_gens: 80
+polish_gens: 48
+pop: 32
+polish_lambda: 0.0
+explore_seed: 14833185
+baseline_crypto: 0.000000
+explore_best_crypto: -364671.718750
+explore_nonbinary: 1287
+polish_gen_crypto: -291592.781250
+final_crypto: -291592.781250
+final_nonbinary: 1217
+elite_fitness: -291592.781250
+squeeze_survived: false
+verdict: blue_hold
+note: explore λ=0; polish λ=0.0. squeeze_survived=false is a Blue hold.

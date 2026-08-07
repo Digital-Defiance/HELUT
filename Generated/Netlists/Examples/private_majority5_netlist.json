@@ -1,0 +1,128 @@
+{
+  "creator": "Yosys 0.68+post (git sha1 c12172fbae8af5e20f6fb52e3d4e92d56ed587b6, Release, AppleClang clang++ 21.0.0.21000101)",
+  "modules": {
+    "private_majority5": {
+      "attributes": {
+        "top": "00000000000000000000000000000001",
+        "src": "Hardware/RTL/Examples/private_majority5.v:9.1-22.10"
+      },
+      "ports": {
+        "votes": {
+          "direction": "input",
+          "bits": [ 2, 3, 4, 5, 6 ]
+        },
+        "proposal_passes": {
+          "direction": "output",
+          "bits": [ 7 ]
+        }
+      },
+      "cells": {
+        "$abc$217$auto$blifparse.cc:557:parse_blif$218": {
+          "hide_name": 1,
+          "type": "$lut",
+          "parameters": {
+            "LUT": "1000000011111110",
+            "WIDTH": "00000000000000000000000000000100"
+          },
+          "attributes": {},
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 8, 6, 4, 9 ],
+            "Y": [ 7 ]
+          }
+        },
+        "$abc$217$auto$blifparse.cc:557:parse_blif$219": {
+          "hide_name": 1,
+          "type": "$lut",
+          "parameters": {
+            "LUT": "00010111",
+            "WIDTH": "00000000000000000000000000000011"
+          },
+          "attributes": {},
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 2, 3, 5 ],
+            "Y": [ 9 ]
+          }
+        },
+        "$abc$217$auto$blifparse.cc:557:parse_blif$220": {
+          "hide_name": 1,
+          "type": "$lut",
+          "parameters": {
+            "LUT": "10010110",
+            "WIDTH": "00000000000000000000000000000011"
+          },
+          "attributes": {},
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 2, 3, 5 ],
+            "Y": [ 8 ]
+          }
+        }
+      },
+      "netnames": {
+        "$abc$205$new_n10": { "hide_name": 1, "bits": [ 10 ], "attributes": {} },
+        "$abc$205$new_n11": { "hide_name": 1, "bits": [ 11 ], "attributes": {} },
+        "$abc$205$new_n12": { "hide_name": 1, "bits": [ 12 ], "attributes": {} },
+        "$abc$205$new_n13": { "hide_name": 1, "bits": [ 13 ], "attributes": {} },
+        "$abc$205$new_n14": { "hide_name": 1, "bits": [ 14 ], "attributes": {} },
+        "$abc$205$new_n15": { "hide_name": 1, "bits": [ 15 ], "attributes": {} },
+        "$abc$205$new_n16": { "hide_name": 1, "bits": [ 16 ], "attributes": {} },
+        "$abc$205$new_n7": { "hide_name": 1, "bits": [ 17 ], "attributes": {} },
+        "$abc$205$new_n8": { "hide_name": 1, "bits": [ 18 ], "attributes": {} },
+        "$abc$205$new_n9": { "hide_name": 1, "bits": [ 19 ], "attributes": {} },
+        "$abc$217$new_n10": { "hide_name": 1, "bits": [ 8 ], "attributes": {} },
+        "$abc$217$new_n9": { "hide_name": 1, "bits": [ 9 ], "attributes": {} },
+        "$abc$217$proposal_passes": {
+          "hide_name": 1,
+          "bits": [ 7 ],
+          "attributes": { "src": "Hardware/RTL/Examples/private_majority5.v:11.23-11.38" }
+        },
+        "$abc$217$votes[0]": {
+          "hide_name": 1,
+          "bits": [ 2 ],
+          "attributes": { "src": "Hardware/RTL/Examples/private_majority5.v:10.23-10.28" }
+        },
+        "$abc$217$votes[1]": {
+          "hide_name": 1,
+          "bits": [ 3 ],
+          "attributes": { "src": "Hardware/RTL/Examples/private_majority5.v:10.23-10.28" }
+        },
+        "$abc$217$votes[2]": {
+          "hide_name": 1,
+          "bits": [ 4 ],
+          "attributes": { "src": "Hardware/RTL/Examples/private_majority5.v:10.23-10.28" }
+        },
+        "$abc$217$votes[3]": {
+          "hide_name": 1,
+          "bits": [ 5 ],
+          "attributes": { "src": "Hardware/RTL/Examples/private_majority5.v:10.23-10.28" }
+        },
+        "$abc$217$votes[4]": {
+          "hide_name": 1,
+          "bits": [ 6 ],
+          "attributes": { "src": "Hardware/RTL/Examples/private_majority5.v:10.23-10.28" }
+        },
+        "proposal_passes": {
+          "hide_name": 0,
+          "bits": [ 7 ],
+          "attributes": { "src": "Hardware/RTL/Examples/private_majority5.v:11.23-11.38" }
+        },
+        "votes": {
+          "hide_name": 0,
+          "bits": [ 2, 3, 4, 5, 6 ],
+          "attributes": { "src": "Hardware/RTL/Examples/private_majority5.v:10.23-10.28" }
+        }
+      }
+    }
+  }
+}

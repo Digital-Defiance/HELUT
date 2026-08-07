@@ -1,0 +1,49 @@
+=== Mulein sparse-path calibration control (P1030684, known key) ===
+Grades the SCORER, not a search. Establishes whether the sparse statistic
+separates a true key from wrong keys under exact and post-gap geometry.
+
+synthetic damage : removed recorded[12..<16] = HBSX
+                   recorded 120 → 116 letters; transmitted timeline 120
+
+  --------------------------------------------------------------------------------------------------------
+  A  exact geometry, TRUE key IC 0.0639  bi  -3.1594  tri  -2.8470  n=120 runs=1 barr=0  EXACT
+  B  exact geometry, wrong key +1 IC 0.0391  bi  -4.4430  tri  -5.0015  n=120 runs=1 barr=0      -
+  B  exact geometry, wrong key +2 IC 0.0408  bi  -4.5215  tri  -4.9817  n=120 runs=1 barr=0      -
+  B  exact geometry, wrong key +3 IC 0.0403  bi  -4.5757  tri  -5.0266  n=120 runs=1 barr=0      -
+  --------------------------------------------------------------------------------------------------------
+  C  post-gap δ4, TRUE key IC 0.0625  bi  -3.1881  tri  -2.8689  n=116 runs=2 barr=4  EXACT
+  D  post-gap δ4, wrong key +1 IC 0.0399  bi  -4.5044  tri  -5.0607  n=116 runs=2 barr=4      -
+  D  post-gap δ4, wrong key +2 IC 0.0418  bi  -4.5896  tri  -5.0218  n=116 runs=2 barr=4      -
+  D  post-gap δ4, wrong key +3 IC 0.0396  bi  -4.5399  tri  -5.0777  n=116 runs=2 barr=4      -
+  --------------------------------------------------------------------------------------------------------
+  E  exact geometry, TRUE key, 1 edge excluded IC 0.0642  bi  -3.1315  tri  -2.8513  n=119 runs=1 barr=1      -
+
+sparse trigram separation: worst TRUE -2.8689  vs  best WRONG -4.7134
+  margin +1.8445  (separates)
+
+dense / sparse equivalence on hole-free geometry (arm A):
+  dense  GermanTrigrams.score(plaintext) : -2.847037
+  sparse meanLogProbability(order 3)     : -2.847037
+  |delta| 0.00e+00  →  IDENTICAL statistic
+  dense IC 0.063866 vs sparse IC 0.063866
+
+threshold transfer:
+  dense break bar        : -3.600
+  dense German reference : -2.847
+  dense noise reference  : -5.382
+  sparse TRUE            : -2.8470 exact / -2.8689 post-gap
+  sparse WRONG (best)    : -4.7134
+  Same statistic and same units, so the -3.600 bar is comparable in SCALE.
+  Two caveats that are not scale problems:
+   * the dense `tailScore` excises crib positions and concatenates, inventing
+     adjacency the sparse path refuses — a sparse tail is a different SAMPLE;
+   * fewer eligible windows means a noisier estimate, so a barrier-heavy
+     candidate deserves less confidence at the same mean.
+
+*** SPARSE CALIBRATION PASS ***
+The sparse path reproduces the control plaintext on both geometries, keeps the
+hole as a scoring barrier, separates the true key, and reproduces the dense
+trigram statistic exactly on hole-free geometry. It is fit to adjudicate
+exact/no-drop post-gap candidates against the existing bar, with window count
+reported alongside every score. It sets no bar for REPAIRED candidates:
+crib-exactness is undefined for them by construction.

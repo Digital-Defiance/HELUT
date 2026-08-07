@@ -1,0 +1,11 @@
+HELUT encrypted-netlist bench · SING
+  netlist: picorv32_lut6_netlist.json  module=picorv32
+  poly N=64  LUTs=2006  DFFs=1565  sequential  2N=128
+  stimuli=1 (max --vectors 1)  cpu-only=true  metal-netlist-only=false
+  paths filter: public-ms covering-b2
+  paths: public-ms@boolean + public-ms@crypto + secret@crypto
+  BK noise inject Gaussian σ=128.0 (torus; measured identity residual → B_bk)
+  boolean scale kδ  k=7  (test-poly stride 7; public-MS native δ)
+  DynamicRotateCost mux=8320 binary=455 speedup≈18.3×
+
+  starting blind-rotate public-ms covering-b2

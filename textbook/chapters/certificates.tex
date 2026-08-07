@@ -1,0 +1,387 @@
+\chapter{Certificates as first-class artifacts}
+\label{ch:certs}
+
+Most compiler courses grade a binary that runs.
+This course grades a binary that \emph{refuses} when it cannot certify.
+
+\section{The surface}
+
+\begin{center}
+\begin{tabular}{@{}lp{0.58\textwidth}@{}}
+\toprule
+Certificate & Role \\
+\midrule
+\texttt{TFHENoiseProof} & Discrete $\infty$-norm inject lemmas. \\
+\texttt{TFHEAsymptoticSecurityCertificate} & Gaussian ingest $\varepsilon\le 2^{-64}$. \\
+\texttt{TFHELWEHardnessCertificate} & Decision-LWE $\to$ IND-CPA $+$ bit estimate. \\
+\texttt{TFHELWECalibration} & Anchor table for the estimator. \\
+\texttt{TFHENoisyBKCertificate} / \texttt{TFHENoisyBKMeasurement} & Depth under $B_{\mathrm{bk}}$; identity residual $\hat\sigma$ (\cid{22}; covering Grade~B \cid{52}). \\
+\texttt{TFHELWEEstimatorProtocol} & External lattice-estimator merge. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\texttt{TFHENoise.refuse} if no certificate.
+That is not an API flourish. It is the difference between a demo and a claim.
+
+\section{How to read a SING log}
+
+\textbf{SING} $=$ \textbf{S}timuli \textbf{In}, \textbf{G}olden out
+(Section~\ref{sec:sing}): encrypted evaluation must match the cleartext
+netlist on the same generic vectors.
+A passing encrypted tick is then read as a bundle:
+
+\begin{itemize}
+  \item Functional: ciphertext decrypts to the clear netlist (the SING gate).
+  \item Discrete: $\infty$-norm lemmas held on the inject.
+  \item Gaussian: ingest $\varepsilon$ under the stated hypotheses.
+  \item Hardness: calibrated classical bits, with \hid{1} attached
+        (\cid{23} filled the estimator JSON; four anchors still $|\Delta|>16$).
+  \item Depth: noisy-BK model; \cid{22} measured at covering gadget;
+        \cid{26} graded fail at \texttt{cryptoPublicMS} $N{=}1024$;
+        covering Track~A torus-scale is \cid{52}--\cid{54};
+        native $k{=}1$ remains \cid{37}/\cid{55};
+        \texttt{cryptoPublicMS} noisy SING remains \cid{26}/\cid{56}.
+\end{itemize}
+
+A lab report on this material is incomplete if it stops at milliseconds: the
+certificate lines are the result, and the timing is context for it.
+
+\reproduced{C22}{Identity-LUT residual under a covering gadget fills
+$B_{\mathrm{bk}}$ and $\hat\sigma$. At $N=8$, inject $B=64$ gives
+$\hat\sigma\approx 6396\ll\delta/2$. At $N=128$ the residual is still
+$\infty$-norm decodable but the union $\varepsilon$ is nowhere near $2^{-64}$.
+Re-measured 2026-08-15 across sample sizes: $\hat\sigma\to 1.67\times 10^6$ and
+union $\varepsilon\log_2\to -18.0$ with a 95\% upper bound of $-16.1$ at
+$n=512$. The archived $-23.5$ came from $n=4$ and was optimistic small-sample
+noise (\S\ref{sec:eps-samples}).}
+
+\reproduced{C26}{Product-shaped $N{=}1024$ identity residual: inject $B{=}64$
+undecodable on \texttt{cryptoPublicMS}/\texttt{crypto}; inject $B{=}4$ on
+\texttt{.crypto} may be $\infty$-norm OK with $\varepsilon\log_2\approx -1$
+(not $-64$). \cid{56}: stride-$k{=}7$ does not turn this into Metal SING.
+Receipt: \corpus{logs/helut-noisy-bk-measure-n1024.log}.}
+
+\reproduced{C28}{Track~B: Metal \texttt{cryptoPublicMS} full\_adder SING at
+covering $N{=}128$ with inject $B{=}64$ PASSes ($B_{\mathrm{bk}}\approx 1.62\times 10^6$
+decodable). Receipt:
+\corpus{logs/helut-encrypted-n128-metal-sing-crypto-noisy.log}.}
+
+\reproduced{C27}{Theorem~3: under $q=2^{32}$, exact public-MS covering forces
+$(1+\log_2 N)\mid 32$; among practical degrees $\{8,\dots,2048\}$ only
+$N\in\{8,128\}$ qualify. $N{=}1024$ \texttt{cryptoPublicMS} has
+$\mathrm{baseLog}\cdot\ell = 11\cdot 2 = 22 \neq 32$.
+Statement: \corpus{directives/ggsw-public-ms-covering.md}.
+Reproduce:
+\texttt{swift test -c release --filter testGGSWPublicMSCoveringCertificate}.}
+
+\begin{theorem}[Exact public-MS covering degrees; \corpusthm{3}]
+\label{thm:covering}
+Let the torus word be $q=2^{32}$ and let a public modulus-switch gadget have
+$g_0=\delta$. If the gadget covers, then $(1+\log_2 N)$ divides $32$.
+Consequently, among $N\in\{8,16,\dots,2048\}$ the only exact covering degrees
+are $N=8$ and $N=128$.
+\end{theorem}
+
+\paragraph{Proof (machine-checked).}
+\texttt{GGSWPublicMSCovering.certificate()} asserts the divisibility lemma and
+enumerates \texttt{exactDegrees} $=[8,128]$ over the practical range; the test
+additionally pins $\mathrm{baseLog}\cdot\ell=22$ for $N{=}1024$.
+
+\reproduced{C29}{Theorem~3$'$: for any power-of-two torus word $w$, exact
+public-MS covering among practical degrees stays $\{8,128\}$. Widening the
+limb does not unlock $N{=}1024$ (baseLog~$=11$ never divides $2^k$).
+Same receipt as \cid{27}; lemma \texttt{powerOfTwoWordObstruction}.}
+
+\reproduced{C30}{At covering $N{=}128$, inject $B\le 8$ prints
+$\varepsilon\log_2=-\infty$, but $\hat\sigma$ remains $\sim 10^{4}$--$10^{5}$.
+At $B{=}64$, $\varepsilon\log_2\approx -24$ (\cid{22}). Receipt:
+\corpus{logs/helut-noisy-bk-eps-sweep-n128.log}.}
+
+\reproduced{C31}{Incomplete public-MS gap: $N{=}1024$ uncoveredBits$=10$.
+Approx candidate is covering \texttt{.crypto} (baseLog$=8$, $g_0\neq\delta$).
+Statement: \corpus{directives/ggsw-incomplete-covering.md}.}
+
+\reproduced{C32}{At $N{=}1024$, \texttt{.crypto} inject $B{=}1$ is $\infty$-norm
+decodable; $\varepsilon\log_2\approx -8.4$ at 8 trials (not $-64$);
+\texttt{cryptoPublicMS} remains undecodable for $B\ge 1$. Receipts:
+\corpus{logs/helut-noisy-bk-measure-n1024-B1.log},
+\corpus{logs/helut-noisy-bk-measure-n1024-B1-t8.log}.}
+
+\reproduced{C33}{Track~A Metal SING with covering \texttt{.crypto} at $N{=}1024$,
+inject $B{=}1$: secret-refresh and public-ms covering paths both PASS
+(non-zero decodable $B_{\mathrm{bk}}$). Receipts:
+\corpus{logs/helut-encrypted-n1024-metal-sing-covering-crypto-noisy-B1.log},
+\corpus{logs/helut-encrypted-n1024-metal-sing-covering-publicms-noisy-B1.log}.}
+
+\reproduced{C34}{Finer covering baseLog$=4$ at $N{=}1024$: inject $B{=}1$ yields
+$\hat\sigma\approx 2.95\times 10^{4}$, asymptotic $\varepsilon\log_2\approx -913$
+(meets $\le 2^{-64}$); Metal secret + public-ms covering-b4 both PASS.
+Receipts: \corpus{logs/helut-noisy-bk-covering-b4-n1024-B1.log},
+\corpus{logs/helut-encrypted-n1024-metal-sing-covering-b4-noisy-B1.log}.
+Torus-scale $B{=}128$ on the same gadget is still undecodable.}
+
+\reproduced{C35}{Covering baseLog$=2$ at $N{=}1024$: $\varepsilon\le 2^{-64}$ holds
+through inject $B{=}16$ ($\varepsilon\log_2\approx -65.4$; $B{=}32$ drops to
+$\approx -40.5$). Metal secret + public-ms covering-b2 at $B{=}16$ both PASS
+($B_{\mathrm{bk}}\approx 1.86\times 10^{5}$ / $6.15\times 10^{4}$).
+Receipts: \corpus{logs/helut-noisy-bk-covering-b2-eps-vs-B.log},
+\corpus{logs/helut-encrypted-n1024-metal-sing-covering-b2-noisy-B16.log}.
+Torus-scale $B{\sim}128$ remains $\varepsilon\approx -1.6$.}
+
+\reproduced{C36}{Covering baseLog$=1$ at $N{=}1024$: $\varepsilon\le 2^{-64}$ holds
+through inject $B{=}32$ ($\varepsilon\log_2\approx -139$ at 4 trials; $B{=}64$
+$\approx -26$). Metal secret + public-ms covering-b1 at $B{=}32$ both PASS.
+Receipts: \corpus{logs/helut-noisy-bk-covering-b1-n1024-B32.log},
+\corpus{logs/helut-encrypted-n1024-metal-sing-covering-b1-noisy-B32.log}.
+Finest covering does \emph{not} unlock $B{=}128$ ($\varepsilon\approx -0.6$).}
+
+\reproduced{C52}{Stride-$k$ encoding: public-MS is native-$\delta$ (wires in $\{0,k\}$),
+test poly $T[k\cdot\mathrm{addr}]$. Covering-b1 at $N{=}1024$, torus $\sigma{=}128$,
+$k{=}7$: 8-trial $\varepsilon\log_2\approx -170$; Metal secret $44.08\,\mathrm{s}/2$
+and public-ms $29.40\,\mathrm{s}/2$ both PASS.
+Receipts: \corpus{logs/helut-noisy-bk-covering-b1-gauss-sigma128-n1024-k7-stride-t8.log},
+\corpus{logs/helut-encrypted-n1024-metal-sing-covering-b1-gauss-sigma128-k7-stride.log}.
+Native $k{=}1$ remains \cid{37}; \texttt{cryptoPublicMS} remains \cid{26}.}
+
+\reproduced{C55}{Native $k{=}1$ covering-b1 $\sigma{=}128$ at polynomial $N{=}1024$:
+cutting LWE $n$ (CMUX count) makes the identity residual decodable at $n\le 512$,
+but $\varepsilon\log_2$ is $-36.6$ ($n{=}64$), $-10.9$ ($n{=}256$), $-6.5$ ($n{=}512$)
+--- none $\le -64$. Default $n{=}N{=}1024$ stays undecodable (\cid{37}, 8 trials).
+Not a hardness-preserving close of native spacing.}
+
+\reproduced{C56}{\texttt{cryptoPublicMS} plus stride-$k{=}7$ at inject $B{=}1$:
+identity residual becomes decodable ($\varepsilon\log_2\approx -12.6$), but Metal
+public-ms full\_adder SING fails (sum mismatch). Torus $\sigma{=}128$ remains
+undecodable. Do not quote $k\delta$ as a \texttt{cryptoPublicMS} noisy-BK close.}
+
+\reproduced{C57}{Covering-b2 $\ell{=}16$ at $N{=}n{=}1024$, $\sigma{=}128$.
+Unsigned $k{=}7$ is short of $-64$ (the four-trial $-110.7$ was a low-$\hat\sigma$ draw).
+The preregistered $k{=}14$, 192-trial run gives a 24-event bound of $-93.8005$
+and full-adder SING 8/8 PASS ($48.1757\,\mathrm{s}$ evaluation).
+Historical one-row adder and regex timings remain. Covering-b4 and the
+historical E256 covering-b2 negatives remain separate. Balanced digits are \cid{70}.}
+
+\reproduced{C58}{PicoRV32 \texttt{abc -lut 6}: $2006$ \texttt{\$lut} ($-58\%$ vs
+lut2 $4785$). CPU public-ms boolean SING PASS at $N{=}64$ ($1.35\,\mathrm{s}$,
+$32$-bit). $N{=}8$ SIGTRAPs because table size $64>N$. Not covering; not
+production $N$.}
+
+\reproduced{C59}{Sequential combinational wavefront: independent ready \texttt{\$lut}s
+\texttt{concurrentPerform} even with DFFs. PicoRV lut6 $N{=}64$ CPU boolean
+$0.165\,\mathrm{s}/1$ versus \cid{58} $1.35\,\mathrm{s}$ (${\sim}8.2\times$).}
+
+\reproduced{C60}{PicoRV lut6 covering-b2 $k{=}7$ Metal $N{=}1024$ one tick:
+combinational BRs finished in ${\sim}33$\,min; Q SING FAIL
+(\texttt{\$\_DFF\_P\_} want$=0$ got$=1$). Timed negative.}
+
+\reproduced{C61}{Same PicoRV lut6 at covering-b1 $k{=}7$: ${\sim}61$\,min then Q SING FAIL
+on a nearby \texttt{\$\_DFF\_P\_}. Finer gadget did not fix sequential Q.}
+
+\reproduced{C62}{Metal PicoRV lut6 $N{=}1024$ public-ms boolean $e{=}0$ one tick:
+Q SING PASS in $373.89\,\mathrm{s}$. Hardness $175.7$ with \hid{1}. Not covering.}
+
+\reproduced{C63}{Same lut6 netlist, covering-b2 $\sigma{=}128$, CPU $N{=}64$ one tick:
+Q SING PASS in $1.72\,\mathrm{s}$ ($B_{\mathrm{bk}}=88782$). Native $k$.
+Stride $k{=}7$ at this $N$ SIGTRAPs. Does not close \cid{60}.}
+
+\reproduced{C64}{Extract$\to$KS ($n{=}64\ll kN$): $\delta$-lattice GLev. CPU covering-b2
+$\sigma{=}128$ native $k{=}1$ at poly $N{=}1024$: adder $4.22\,\mathrm{s}$, counter
+$6.35\,\mathrm{s}$. Not LWE-176. \cid{37} still at $n{=}N$.}
+
+\reproduced{C65}{PicoRV lut6 covering Metal $N{=}1024$ extract$\to$KS $n{=}64$ one tick:
+Q SING PASS covering-b2 $114\,\mathrm{s}$, covering-b1 $212\,\mathrm{s}$.
+\cid{60}/\cid{61} remain $n{=}N$ $k{=}7$ negatives.}
+
+\reproduced{C66}{Same flags, 10-tick \texttt{resetn} boot: Metal PASS $1135.8\,\mathrm{s}/10$
+($113.6\,\mathrm{s}$/row). Q SING. Idle mem.}
+
+\reproduced{C67}{Covering-b2 KS adder ladder at poly $N{=}1024$: $n{=}128$ PASS $8.58\,\mathrm{s}$;
+$n{=}256$ and $n{=}512$ SIGTRAP after extract$\to$KS.}
+
+\reproduced{C68}{NOP-fetch 8 ticks on lut6 PicoRV covering KS $n{=}64$: Metal PASS
+$911\,\mathrm{s}/8$, fetches \texttt{0x0}, \texttt{0x4}.}
+
+\reproduced{C69}{Identity trials$=1$ at LWE $n{\ge}256$: covering-b2 adder PASS at
+$n{=}256$ ($17.1\,\mathrm{s}$) and at $n{=}512$. C67 SIGTRAP was four identity BRs.
+The $n{=}512$ sum mismatch recorded here until 2026-08-15 was a determinism
+artifact and is \textbf{withdrawn} (\S\ref{sec:determinism}).}
+
+\reproduced{C70}{Balanced covering-b2 digits at $N{=}n{=}1024$, $\sigma{=}128$,
+$k{=}7$. Unsigned \cid{57} $k{=}7$ stays short of $-64$. Standalone identity,
+32 trials: noiseless $\max|e|{=}0$; noisy $\hat\sigma{=}465308.8$, printed 95\%
+union $-113.5$. The in-process circuit gate is a different draw: $\sigma_{95}{=}726622$,
+24 events, $\log_2\varepsilon{=}-72.7$, then full-adder Metal SING 8/8 PASS
+($49.6\,\mathrm{s}$ evaluation, $241\,\mathrm{s}$ end to end). Exact primary
+inputs and Gaussian statistical circuit scope. Covering base 1 does not move.
+PicoRV under these digits is \cid{71}. Unsigned digits remain the default.}
+
+\reproduced{C71}{Same lut6 PicoRV, balanced covering-b2, $k{=}7$, $N{=}1024$.
+A 32-trial union over $2006$ events is $\log_2\varepsilon{=}-60.7$ and does not
+clear $-64$, so the circuit does not run. At $192$ trials the bound clears
+($\sigma_{95}{=}637757$, $\log_2\varepsilon{=}-88.4$) and tick 1 still fails:
+four \texttt{\$\_DFF\_P\_} cells want $0$ got $1$
+(\texttt{slice\$14510}, \texttt{slice\$14521}, \texttt{slice\$14523},
+\texttt{slice\$8281}). Not the unsigned \cid{60} cell. Wall $2725\,\mathrm{s}$.
+\cid{61} is covering-b1 and is not this measurement. The $-88.4$ figure is the per-wire margin $P(|e|>k\delta/2)$. Packing consumes the refreshed native integer, and at this $\sigma$ a weight $\ge 4$ port is only inside $\delta/2$. The port-weighted union is $+9.9$ and does not clear $-64$. The circuit gate now fails closed on that union. A separate LUT3 netlist at $k{=}127$ has two receipts, neither a claim row. One all-zero stimulus matched (wall $3816.8\,\mathrm{s}$). Four ticks with reset held for three and $\mathrm{resetn}{=}1$ on tick 4 also matched, same port-weighted $\log_2\varepsilon=-747.6$, wall $14752.3\,\mathrm{s}$. Not a fetch. Eight NOP ticks on 2026-10-01 fetched $0\mathrm{x}0$ then $0\mathrm{x}4$, wall $28693.5\,\mathrm{s}$. Not a store. Not a claim row.}
+
+\section{Calibration is not estimation}
+
+\begin{center}
+\small
+\begin{tabular}{@{}lrrrrr@{}}
+\toprule
+Label & $n$ & $\sigma$ & HELUT & Estimator & $|\Delta|$ \\
+\midrule
+demo-N8 & 8 & $2^{12}$ & 4.0 & 33.1 & 29.1 \\
+weak-n256 & 256 & $2^{17}$ & 40.4 & 53.7 & 13.3 \\
+mid-n512 & 512 & $2^{16}$ & 95.5 & 92.4 & 3.2 \\
+classic-n630 & 630 & $2^{15}$ & 129.0 & 106.5 & 22.5 \\
+n768-s16 & 768 & $2^{16}$ & 135.6 & 135.4 & 0.2 \\
+prod-n1024-s16 & 1024 & $2^{16}$ & 175.7 & \textbf{180.2} & 4.5 \\
+n1024-s17 & 1024 & $2^{17}$ & 160.7 & 189.9 & 29.3 \\
+n2048-s16 & 2048 & $2^{16}$ & 336.1 & 369.8 & 33.7 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+$q=2^{32}$, binary secret, native Sage~10.9 $+$ lattice-estimator (\cid{23}).
+Merge tolerance is $16$ bits: four rows pass, four fail.
+
+\hedgebox{H1}{Quote ``$\sim 176$ calibrated classical bits at production
+$(n,\sigma)$'' together with ``estimator $180.2$ on prod-n1024-s16.''
+A midterm bubble that says ``176-bit secure'' without naming the estimator
+row, or that treats every calibration anchor as estimator cost, is wrong.}
+
+\section{Five-cell test, applied to certificates}
+
+Certificates are themselves claims.
+They need the five cells:
+
+\begin{enumerate}
+  \item Proof: the lemma in code (\texttt{TFHENoiseProof}, \ldots).
+  \item Table: the calibration table; the cookbook production row.
+  \item Metric: $\varepsilon\le 2^{-64}$; bit estimates; $B_{\mathrm{bk}}$.
+  \item Examples: demo $N=8$ (honest fail of 128-bit) and production $N=1024$.
+  \item Application: refuse-closed encrypt so a netlist tick cannot silently
+        drop hardness.
+\end{enumerate}
+
+\begin{exercise}
+\cid{52} closed covering Track~A noisy BK at $N{=}1024$ ($\sigma{=}128$, $k{=}7$).
+Name the two remainders of \hid{4} that are still graded negatives, and the
+two follow-up rows that mapped them without closing $\varepsilon$ or SING
+(\cid{37}/\cid{55}, \cid{26}/\cid{56}). PicoRV covering at production $N$ is
+the third remainder; it is a LUT-tax, not a missing SING log at demo $N$.
+\end{exercise}
+
+\section{Honesty as an engineering interface}
+
+The non-claims of Chapter~\ref{ch:living} are not ethics theater.
+They are API documentation for speech:
+
+\begin{itemize}
+  \item Oracle Metal graphs expose the \emph{shape} of encrypted evaluation
+        (batch, $N$, clock). They do not expose Decision-LWE.
+  \item \texttt{publicMS} is an on-lattice refresh intent. It is not a
+        leakage proof (\claimkind{N} on side channels).
+  \item A campaign's settings/second is a cleartext Metal number. It does
+        not certify encrypted tick rate.
+\end{itemize}
+
+\begin{lab}[Certificate literacy]
+Run \texttt{.build/release/helut --hardness-table} and classify each printed
+row as demo, weak, or production-shaped.
+For each row, write one sentence a journalist may print and one sentence
+they may not.
+\end{lab}
+
+\growswhen{The four off-tolerance anchors (demo-N8, classic-n630, n1024-s17,
+n2048-s16) get a documented estimator model, or HELUT's core-SVP fit is
+revised; then \hid{1} can shrink further.}
+
+\section{\texorpdfstring{Why $\varepsilon$ needs a sample size}{Why epsilon needs a sample size}}
+\label{sec:eps-samples}
+
+The failure probability $\varepsilon$ that appears on a noise certificate is not
+sampled. It is an analytic Gaussian tail evaluated at a \emph{measured} standard
+deviation:
+\[
+  \varepsilon = \Pr\bigl[\,|Z| \ge \delta/2\,\bigr],
+  \qquad Z \sim \mathcal{N}(0,\hat\sigma^2),
+  \qquad
+  \log_2\varepsilon \;\approx\; -\frac{(\delta/2)^2}{2\hat\sigma^2\ln 2}.
+\]
+
+Read the exponent carefully: $\log_2\varepsilon \propto -1/\hat\sigma^2$.
+Differentiating, a relative error $r$ in $\hat\sigma$ moves $\log_2\varepsilon$ by
+about $2\,\lvert\log_2\varepsilon\rvert\, r$. At $\lvert\log_2\varepsilon\rvert=65$
+a one percent error in $\hat\sigma$ is worth $1.3$ orders.
+
+And $\hat\sigma$ is an RMS over however many residuals were collected --- one per
+trial. The standard error of a standard-deviation estimate from $m$ samples is
+about $1/\sqrt{2m}$, so:
+
+\begin{center}
+\small
+\begin{tabular}{@{}rrr@{}}
+\toprule
+$m$ & $\mathrm{SE}(\hat\sigma)/\hat\sigma$ & unresolved orders at $\log_2\varepsilon=-65$ \\
+\midrule
+2 & $50.0\%$ & $\pm 65$ \\
+4 & $35.4\%$ & $\pm 46$ \\
+8 & $25.0\%$ & $\pm 32$ \\
+64 & $8.8\%$ & $\pm 11.5$ \\
+1\,024 & $2.2\%$ & $\pm 2.9$ \\
+8\,450 & $0.77\%$ & $\pm 1$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{warning}
+A measured $\varepsilon$ of $-65.4$ against a $2^{-64}$ bar, taken at four
+samples, carries roughly $\pm 46$ orders. It does not clear the bar. It does not
+fail to clear the bar. It says nothing about the bar at all. Quote the confidence
+bound, or quote nothing.
+\end{warning}
+
+The bound is standard: $m\hat\sigma^2/\sigma^2 \sim \chi^2(m)$, so a one-sided
+upper bound on $\sigma$ is $\hat\sigma\sqrt{m/\chi^2_{\alpha}(m)}$, and
+$\varepsilon$ evaluated there is the conservative figure --- the only one worth
+comparing against a target. HELUT prints it:
+
+\begin{verbatim}
+cryptoPublicMS B=64: ... eps log2=-23.5
+  [n=4, 95%up=-2.8 DOES NOT CLEAR -64, +/-1 needs n~1403]
+\end{verbatim}
+
+\recheckbox{\cid{22} at $N{=}128$}{Re-derived on 2026-08-15 by a second model
+reading the same evidence, then re-measured on the original hardware. This is
+weaker than a human check and stronger than a single archived number; the
+distinction is the point of this box.}
+
+\reproduced{C22}{Worked example. At covering $N{=}128$ with inject $B{=}64$,
+$\hat\sigma$ converges to $1.67\times 10^6$ and union $\varepsilon\log_2$ to
+$-18.0$ (95\% bound $-16.1$) by $n=512$, at $0.21\,\mathrm{s}$ per trial. The
+conclusion --- nowhere near $2^{-64}$ --- was right all along; it is now
+resolved rather than asserted.}
+
+\begin{warning}[Sample cost can make a bar unreachable]
+The same measurement at production degree costs about $155\,\mathrm{s}$ per trial
+($N{=}1024$, covering-b1, $\ell{=}32$). The $n\approx 8450$ needed for $\pm 1$
+order is therefore roughly \emph{fifteen days}. Some bars cannot be established
+by running the experiment longer, and saying so is part of the certificate.
+\end{warning}
+
+\growswhen{The residual measurement samples all $N$ coefficients of the GLWE
+accumulator instead of only the extracted one. Each is a draw from the same noise
+distribution, so that is about a thousandfold more samples per bootstrap at no
+extra cryptographic cost, and it would turn the fifteen days above into minutes.}
+
+\begin{exercise}
+A colleague reports $\varepsilon \le 2^{-64}$ from three trials and proposes
+shipping the parameters. Compute the unresolved orders. Then compute how many
+trials would be needed to support the sentence they wrote, and how long that
+would take at $155\,\mathrm{s}$ per trial. Write the one-line reply you would
+send.
+\end{exercise}

@@ -1,0 +1,40 @@
+{
+  "german_reference": {
+    "definition": "first 72 symbols of ControlMessageP1030684 plaintext",
+    "ic_decimal": "0.06572769953051644",
+    "score_bit_pattern": "0xc00b078ec0925b5a",
+    "score_decimal": "-3.3786902470268787",
+    "sha256": "17ab2fe0bbf0ee813b393e7c064d17ad1343b8eafeffad0be8a7c99e50ffae33",
+    "symbols": 72
+  },
+  "implementation": "python-independent-v2",
+  "model": {
+    "add_k": 0.5,
+    "corpus_ic": 0.0747,
+    "source": "bigrams",
+    "source_sha256": "06f8694ec17906e993223e0179c6ca326030e62f77ec86e5c4120fddcf68f111"
+  },
+  "random_reference": {
+    "corpus_sha256": "1d85fa80ee8bcf121ff4c2fd70e56acccf782a4ab3aaaa16bc1edd15677f424a",
+    "domain_hex": "48454c55542064656e73652062696772616d2063616c6962726174696f6e207632",
+    "first_sample_sha256": "a9de2997fc1b7998c4c619e4dc46e6428cc84c838fbb95dc47855d38c8315225",
+    "generator": "SHA-256(domain || 0x00 || sample-u32be || block-u32be), reject bytes >= 234, byte mod 26",
+    "mean_bit_pattern": "0xc0129c7ed3c62f50",
+    "mean_decimal": "-4.652827557536355",
+    "population_deviation_bit_pattern": "0x3fcda40373f62dbd",
+    "population_deviation_decimal": "0.23156779443921308",
+    "samples": 400,
+    "symbols_per_sample": 72
+  },
+  "runtime": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "python": "3.9.6 (default, May 22 2026, 11:13:45) "
+  },
+  "schema": "helut.bigram-calibration.v2",
+  "swift_constants": {
+    "germanIC": 0.0747,
+    "germanMean": -3.37869,
+    "randomDeviation": 0.231568,
+    "randomMean": -4.652828
+  }
+}

@@ -1,0 +1,22 @@
+[0/1] Planning build
+Test Suite 'Selected tests' started at 2026-08-20 21:03:44.530.
+Test Suite 'helutPackageTests.xctest' started at 2026-08-20 21:03:44.531.
+Test Suite 'NoisyBKLUTIsolationTests' started at 2026-08-20 21:03:44.531.
+Test Case '-[HELUTTests.NoisyBKLUTIsolationTests testC60FirstCorruptLUTCPUAndMetal]' started.
+Test Case '-[HELUTTests.NoisyBKLUTIsolationTests testC60FirstCorruptLUTCPUAndMetal]' passed (60.233 seconds).
+Test Suite 'NoisyBKLUTIsolationTests' passed at 2026-08-20 21:04:44.764.
+	 Executed 1 test, with 0 failures (0 unexpected) in 60.233 (60.233) seconds
+Test Suite 'helutPackageTests.xctest' passed at 2026-08-20 21:04:44.764.
+	 Executed 1 test, with 0 failures (0 unexpected) in 60.233 (60.233) seconds
+Test Suite 'Selected tests' passed at 2026-08-20 21:04:44.764.
+	 Executed 1 test, with 0 failures (0 unexpected) in 60.233 (60.234) seconds
+C60_LUT_PROBE start N=1024 n=1024 baseLog=2 levels=16 k=7 sigma=0.0 backend=both secretSeed=0xE135 bkSeed=0xE235 inputSeed=0xE335
+C60_LUT_PROBE bk-seconds=17.414041
+C60_LUT_PROBE input address=4 packed-native=28 expected-packed=28 expected-bit=1
+C60_LUT_PROBE backend=cpu seconds=36.796009 raw=14680064 raw-bit=1 raw-|e|=0 refreshed-native=7 refreshed-bit=1 refreshed-|e|=0 half-gap=7340032
+C60_LUT_PROBE backend=metal seconds=5.998231 raw=14680064 raw-bit=1 raw-|e|=0 refreshed-native=7 refreshed-bit=1 refreshed-|e|=0 half-gap=7340032
+C60_LUT_PROBE result COMPLETE diagnostic-only=false
+◇ Test run started.
+↳ Testing Library Version: 1902
+↳ Target Platform: arm64e-apple-macos14.0
+✔ Test run with 0 tests in 0 suites passed after 0.001 seconds.

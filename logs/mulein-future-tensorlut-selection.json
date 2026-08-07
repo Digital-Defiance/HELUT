@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "kind": "mulein-future-tensorlut-width-selection",
+  "device": "Apple M4 Max",
+  "execution": "cleartext Float TensorLUT/Metal",
+  "controlTarget": "P1030684 known-key controls",
+  "targetDataEvaluated": false,
+  "settingsPerRepetition": 16,
+  "logicalJobsPerSetting": 16,
+  "completeReceiptsPerRepetition": 256,
+  "repetitions": 5,
+  "tickLimit": 100000,
+  "receiptDigest": "fnv1a64-17435188996435da",
+  "candidates": [
+    {
+      "bankLanes": 1,
+      "medianCompleteReceiptsPerSecond": 233.777350172,
+      "result": "PASS",
+      "rawLog": "build/mulein/mulein_future_bank1_bench.txt",
+      "rawLogSHA256": "ee0674897c791667b98a954f80e5461132c611599ff600ea22e0874670d14f81"
+    },
+    {
+      "bankLanes": 2,
+      "medianCompleteReceiptsPerSecond": 264.718510307,
+      "result": "PASS",
+      "rawLog": "build/mulein/mulein_future_bank2_bench.txt",
+      "rawLogSHA256": "3f94f0ae704d286cf4df9917bea4bc24215a332d7b9f9fd9eee5ff0bf3329f32"
+    },
+    {
+      "bankLanes": 4,
+      "medianCompleteReceiptsPerSecond": 276.035471632,
+      "result": "PASS",
+      "rawLog": "build/mulein/mulein_future_bank4_bench.txt",
+      "rawLogSHA256": "613e1bc0d0bfb967300016db430778201fad6fc50e24f6079197f0cb8ebcbc44"
+    },
+    {
+      "bankLanes": 8,
+      "medianCompleteReceiptsPerSecond": 273.889660462,
+      "result": "PASS",
+      "rawLog": "build/mulein/mulein_future_bank8_bench.txt",
+      "rawLogSHA256": "f54ab22f1614bfe18336c28343087b3b8fac48c391ba96aa694febbd8918bc0b"
+    },
+    {
+      "bankLanes": 16,
+      "medianCompleteReceiptsPerSecond": 230.780129610,
+      "result": "PASS",
+      "rawLog": "build/mulein/mulein_future_bank16_bench.txt",
+      "rawLogSHA256": "d19a8d539b0250e8e386dd7fcd0286ffb19b382ada0fd2a74706b246eb123324"
+    }
+  ],
+  "selectedBankLanes": 4,
+  "selectedMedianCompleteReceiptsPerSecond": 276.035471632,
+  "selectedArtifact": "build/mulein/mulein_future_bank4_lut6.json",
+  "selectedArtifactSHA256": "6a502ae4a21984c6b5e443c6bd14c39c97976dec13ce48401294330af5d31872",
+  "selectedArtifactMetrics": {
+    "lut6": 189032,
+    "dff": 2772,
+    "wires": 205177,
+    "levels": 28
+  },
+  "scope": "All widths passed identical complete-receipt known-key controls. This selection is cleartext Float TensorLUT/Metal, not FHE; no P1030680 verdict or decrypt is implied."
+}

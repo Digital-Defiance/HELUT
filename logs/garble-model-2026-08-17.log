@@ -1,0 +1,30 @@
+controls round-tripping cleanly : 31
+controls with discrepancies     : 17
+
+=== substitution vs indel: does the mismatch run to the end of the message? ===
+A run of errors starting at position p and continuing to the end is the signature
+of an insertion or deletion. Scattered isolated errors are substitutions.
+
+id           len  errs  first  last  tail?  verdict
+P1030675     719   400    298   718   True  INDEL (shifted)
+P1030705     208   179     26   207   True  INDEL (shifted)
+P1030700     252   111    132   251   True  INDEL (shifted)
+P1030710     183    88     88   182   True  INDEL (shifted)
+P1030711      98    76     22    97   True  INDEL (shifted)
+P1030693     208    64    143   207   True  INDEL (shifted)
+P1030701     127    38     89   126   True  INDEL (shifted)
+P1030702     125    32     90   124   True  INDEL (shifted)
+P1030709     143    11    131   142   True  INDEL (shifted)
+P1030699     142     9    133   141   True  INDEL (shifted)
+P1030659     100     7     92    99   True  INDEL (shifted)
+P1030664     107     5    102   106   True  INDEL (shifted)
+P1030708     142     3    139   141  False  substitution(s)
+P1030695      90     2     88    89  False  substitution(s)
+P1030706     128     2     12    13  False  substitution(s)
+P1030707     119     1    118   118  False  substitution(s)
+Traceback (most recent call last):
+  File "/Volumes/Code/HELUT/Scripts/garble_model.py", line 184, in <module>
+    raise SystemExit(main())
+  File "/Volumes/Code/HELUT/Scripts/garble_model.py", line 139, in main
+    first, last = bad[0], bad[-1]
+IndexError: list index out of range

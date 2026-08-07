@@ -1,0 +1,1358 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.68+post (git sha1 c12172fbae8af5e20f6fb52e3d4e92d56ed587b6, Release, AppleClang clang++ 21.0.0.21000101)
+
+-- Executing script file `flow.ys' --
+
+1. Executing Verilog-2005 frontend: lut6.v
+Parsing Verilog input from `lut6.v' to AST representation.
+Generating RTLIL representation for module `\LUT6'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: emitted.v
+Parsing Verilog input from `emitted.v' to AST representation.
+Generating RTLIL representation for module `\multiplier3x3_dut'.
+Successfully finished Verilog frontend.
+
+3. Executing HIERARCHY pass (managing design hierarchy).
+
+3.1. Analyzing design hierarchy..
+Top module:  \multiplier3x3_dut
+Used module:     \LUT6
+Parameter \INIT = 64'1010101010101010101010101010101010101010101010101010101010101010
+
+3.2. Executing AST frontend in derive mode using pre-parsed AST for module `\LUT6'.
+Parameter \INIT = 64'1010101010101010101010101010101010101010101010101010101010101010
+Generating RTLIL representation for module `$paramod$3bb603edebd7ec20b40d6408f00e08b86f5f3952\LUT6'.
+Parameter \INIT = 64'1111111100000000111111110000000011111111000000001111111100000000
+
+3.3. Executing AST frontend in derive mode using pre-parsed AST for module `\LUT6'.
+Parameter \INIT = 64'1111111100000000111111110000000011111111000000001111111100000000
+Generating RTLIL representation for module `$paramod$f2d069f7172c977b474ef0ac14b0324bac5c3e9f\LUT6'.
+Parameter \INIT = 64'1110000011000000100000000000000000000000000000000000000000000000
+
+3.4. Executing AST frontend in derive mode using pre-parsed AST for module `\LUT6'.
+Parameter \INIT = 64'1110000011000000100000000000000000000000000000000000000000000000
+Generating RTLIL representation for module `$paramod$224e97a062f1676031d7c6cd30f2e02a713aff26\LUT6'.
+Parameter \INIT = 64'1010101010101010101010101010101010101010101010101010101010101010
+Found cached RTLIL representation for module `$paramod$3bb603edebd7ec20b40d6408f00e08b86f5f3952\LUT6'.
+Parameter \INIT = 64'1001100000111000011100001111000011000000000000000000000000000000
+
+3.5. Executing AST frontend in derive mode using pre-parsed AST for module `\LUT6'.
+Parameter \INIT = 64'1001100000111000011100001111000011000000000000000000000000000000
+Generating RTLIL representation for module `$paramod$ec699c3108cc48c75b63e5c585a3abc51704f733\LUT6'.
+Parameter \INIT = 64'1001100000111000011100001111000011000000000000000000000000000000
+Found cached RTLIL representation for module `$paramod$ec699c3108cc48c75b63e5c585a3abc51704f733\LUT6'.
+Parameter \INIT = 64'1100110011001100110011001100110011001100110011001100110011001100
+
+3.6. Executing AST frontend in derive mode using pre-parsed AST for module `\LUT6'.
+Parameter \INIT = 64'1100110011001100110011001100110011001100110011001100110011001100
+Generating RTLIL representation for module `$paramod$a0c309a405dd4cc0285b4208c28262fa35a0cace\LUT6'.
+Parameter \INIT = 64'0101010010110100011011001100110000111000111100000000000000000000
+
+3.7. Executing AST frontend in derive mode using pre-parsed AST for module `\LUT6'.
+Parameter \INIT = 64'0101010010110100011011001100110000111000111100000000000000000000
+Generating RTLIL representation for module `$paramod$3fa90fd7aa4f4dc3c106a0fc5e972c7f1efaf587\LUT6'.
+Parameter \INIT = 64'0101010010110100011011001100110000111000111100000000000000000000
+Found cached RTLIL representation for module `$paramod$3fa90fd7aa4f4dc3c106a0fc5e972c7f1efaf587\LUT6'.
+Parameter \INIT = 64'1010101010101010101010101010101010101010101010101010101010101010
+Found cached RTLIL representation for module `$paramod$3bb603edebd7ec20b40d6408f00e08b86f5f3952\LUT6'.
+Parameter \INIT = 64'0001111001100110010110101010101010110100110011001111000000000000
+
+3.8. Executing AST frontend in derive mode using pre-parsed AST for module `\LUT6'.
+Parameter \INIT = 64'0001111001100110010110101010101010110100110011001111000000000000
+Generating RTLIL representation for module `$paramod$ef0b716a223be598a75e75ea90abf863453c1d11\LUT6'.
+Parameter \INIT = 64'0001111001100110010110101010101010110100110011001111000000000000
+Found cached RTLIL representation for module `$paramod$ef0b716a223be598a75e75ea90abf863453c1d11\LUT6'.
+Parameter \INIT = 64'1100110011001100110011001100110011001100110011001100110011001100
+Found cached RTLIL representation for module `$paramod$a0c309a405dd4cc0285b4208c28262fa35a0cace\LUT6'.
+Parameter \INIT = 64'0110011010101010110011000000000001100110101010101100110000000000
+
+3.9. Executing AST frontend in derive mode using pre-parsed AST for module `\LUT6'.
+Parameter \INIT = 64'0110011010101010110011000000000001100110101010101100110000000000
+Generating RTLIL representation for module `$paramod$1d8a65cba29950e54d06d9c47da6830aeeefbccc\LUT6'.
+Parameter \INIT = 64'0110011010101010110011000000000001100110101010101100110000000000
+Found cached RTLIL representation for module `$paramod$1d8a65cba29950e54d06d9c47da6830aeeefbccc\LUT6'.
+Parameter \INIT = 64'1000100010001000100010001000100010001000100010001000100010001000
+
+3.10. Executing AST frontend in derive mode using pre-parsed AST for module `\LUT6'.
+Parameter \INIT = 64'1000100010001000100010001000100010001000100010001000100010001000
+Generating RTLIL representation for module `$paramod$21a8bc909cf124d59085eb7f904656a55f93f58c\LUT6'.
+Parameter \INIT = 64'1010101000000000101010100000000010101010000000001010101000000000
+
+3.11. Executing AST frontend in derive mode using pre-parsed AST for module `\LUT6'.
+Parameter \INIT = 64'1010101000000000101010100000000010101010000000001010101000000000
+Generating RTLIL representation for module `$paramod$1868893688c5add8fbfe38e998368c52328de2d3\LUT6'.
+Parameter \INIT = 64'1111111111111111111111111111111111111111111111111111111111111111
+
+3.12. Executing AST frontend in derive mode using pre-parsed AST for module `\LUT6'.
+Parameter \INIT = 64'1111111111111111111111111111111111111111111111111111111111111111
+Generating RTLIL representation for module `$paramod$e674067559e770a9fae68a0f56687d9c3e456dce\LUT6'.
+
+3.13. Analyzing design hierarchy..
+Top module:  \multiplier3x3_dut
+Used module:     $paramod$3bb603edebd7ec20b40d6408f00e08b86f5f3952\LUT6
+Used module:     $paramod$f2d069f7172c977b474ef0ac14b0324bac5c3e9f\LUT6
+Used module:     $paramod$224e97a062f1676031d7c6cd30f2e02a713aff26\LUT6
+Used module:     $paramod$ec699c3108cc48c75b63e5c585a3abc51704f733\LUT6
+Used module:     $paramod$a0c309a405dd4cc0285b4208c28262fa35a0cace\LUT6
+Used module:     $paramod$3fa90fd7aa4f4dc3c106a0fc5e972c7f1efaf587\LUT6
+Used module:     $paramod$ef0b716a223be598a75e75ea90abf863453c1d11\LUT6
+Used module:     $paramod$1d8a65cba29950e54d06d9c47da6830aeeefbccc\LUT6
+Used module:     $paramod$21a8bc909cf124d59085eb7f904656a55f93f58c\LUT6
+Used module:     $paramod$1868893688c5add8fbfe38e998368c52328de2d3\LUT6
+Used module:     $paramod$e674067559e770a9fae68a0f56687d9c3e456dce\LUT6
+
+3.14. Analyzing design hierarchy..
+Top module:  \multiplier3x3_dut
+Used module:     $paramod$3bb603edebd7ec20b40d6408f00e08b86f5f3952\LUT6
+Used module:     $paramod$f2d069f7172c977b474ef0ac14b0324bac5c3e9f\LUT6
+Used module:     $paramod$224e97a062f1676031d7c6cd30f2e02a713aff26\LUT6
+Used module:     $paramod$ec699c3108cc48c75b63e5c585a3abc51704f733\LUT6
+Used module:     $paramod$a0c309a405dd4cc0285b4208c28262fa35a0cace\LUT6
+Used module:     $paramod$3fa90fd7aa4f4dc3c106a0fc5e972c7f1efaf587\LUT6
+Used module:     $paramod$ef0b716a223be598a75e75ea90abf863453c1d11\LUT6
+Used module:     $paramod$1d8a65cba29950e54d06d9c47da6830aeeefbccc\LUT6
+Used module:     $paramod$21a8bc909cf124d59085eb7f904656a55f93f58c\LUT6
+Used module:     $paramod$1868893688c5add8fbfe38e998368c52328de2d3\LUT6
+Used module:     $paramod$e674067559e770a9fae68a0f56687d9c3e456dce\LUT6
+Removing unused module `\LUT6'.
+Removed 1 unused modules.
+
+4. Executing PROC pass (convert processes to netlists).
+
+4.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+4.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+4.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+4.4. Executing PROC_INIT pass (extract init attributes).
+
+4.5. Executing PROC_ARST pass (detect async resets in processes).
+
+4.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+4.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+4.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+4.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+4.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+4.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+4.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$1868893688c5add8fbfe38e998368c52328de2d3\LUT6.
+Optimizing module $paramod$21a8bc909cf124d59085eb7f904656a55f93f58c\LUT6.
+Optimizing module $paramod$1d8a65cba29950e54d06d9c47da6830aeeefbccc\LUT6.
+Optimizing module $paramod$ef0b716a223be598a75e75ea90abf863453c1d11\LUT6.
+Optimizing module $paramod$3fa90fd7aa4f4dc3c106a0fc5e972c7f1efaf587\LUT6.
+Optimizing module $paramod$a0c309a405dd4cc0285b4208c28262fa35a0cace\LUT6.
+Optimizing module $paramod$ec699c3108cc48c75b63e5c585a3abc51704f733\LUT6.
+Optimizing module $paramod$224e97a062f1676031d7c6cd30f2e02a713aff26\LUT6.
+Optimizing module $paramod$f2d069f7172c977b474ef0ac14b0324bac5c3e9f\LUT6.
+Optimizing module $paramod$3bb603edebd7ec20b40d6408f00e08b86f5f3952\LUT6.
+Optimizing module multiplier3x3_dut.
+Optimizing module $paramod$e674067559e770a9fae68a0f56687d9c3e456dce\LUT6.
+
+5. Executing FLATTEN pass (flatten design).
+Deleting now unused module $paramod$1868893688c5add8fbfe38e998368c52328de2d3\LUT6.
+Deleting now unused module $paramod$21a8bc909cf124d59085eb7f904656a55f93f58c\LUT6.
+Deleting now unused module $paramod$1d8a65cba29950e54d06d9c47da6830aeeefbccc\LUT6.
+Deleting now unused module $paramod$ef0b716a223be598a75e75ea90abf863453c1d11\LUT6.
+Deleting now unused module $paramod$3fa90fd7aa4f4dc3c106a0fc5e972c7f1efaf587\LUT6.
+Deleting now unused module $paramod$a0c309a405dd4cc0285b4208c28262fa35a0cace\LUT6.
+Deleting now unused module $paramod$ec699c3108cc48c75b63e5c585a3abc51704f733\LUT6.
+Deleting now unused module $paramod$224e97a062f1676031d7c6cd30f2e02a713aff26\LUT6.
+Deleting now unused module $paramod$f2d069f7172c977b474ef0ac14b0324bac5c3e9f\LUT6.
+Deleting now unused module $paramod$3bb603edebd7ec20b40d6408f00e08b86f5f3952\LUT6.
+Deleting now unused module $paramod$e674067559e770a9fae68a0f56687d9c3e456dce\LUT6.
+<suppressed ~18 debug messages>
+
+6. Executing OPT pass (performing simple optimizations).
+
+6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module multiplier3x3_dut.
+
+6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\multiplier3x3_dut'.
+Computing hashes of 36 cells of `\multiplier3x3_dut'.
+Finding duplicate cells in `\multiplier3x3_dut'.
+Computing hashes of 32 cells of `\multiplier3x3_dut'.
+Finding duplicate cells in `\multiplier3x3_dut'.
+<suppressed ~12 debug messages>
+Removed a total of 4 cells.
+
+6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \multiplier3x3_dut..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \multiplier3x3_dut.
+Performed a total of 0 changes.
+
+6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\multiplier3x3_dut'.
+Computing hashes of 32 cells of `\multiplier3x3_dut'.
+Finding duplicate cells in `\multiplier3x3_dut'.
+Removed a total of 0 cells.
+
+6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \multiplier3x3_dut..
+Removed 0 unused cells and 18 unused wires.
+<suppressed ~1 debug messages>
+
+6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module multiplier3x3_dut.
+
+6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \multiplier3x3_dut..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \multiplier3x3_dut.
+Performed a total of 0 changes.
+
+6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\multiplier3x3_dut'.
+Computing hashes of 32 cells of `\multiplier3x3_dut'.
+Finding duplicate cells in `\multiplier3x3_dut'.
+Removed a total of 0 cells.
+
+6.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \multiplier3x3_dut..
+
+6.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module multiplier3x3_dut.
+
+6.16. Finished fast OPT passes. (There is nothing left to do.)
+
+7. Executing TECHMAP pass (map to technology primitives).
+
+7.1. Executing Verilog-2005 frontend: /opt/homebrew/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/opt/homebrew/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+7.2. Continuing TECHMAP pass.
+Using template $paramod$constmap:94ccd39e6416a54f64bf8cf24c64533c1bec1e29$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx for cells of type $shiftx.
+Analyzing pattern of constant bits for this cell:
+  Constant input on bit 0 of port A: 1'0
+  Constant input on bit 1 of port A: 1'0
+  Constant input on bit 2 of port A: 1'0
+  Constant input on bit 3 of port A: 1'0
+  Constant input on bit 4 of port A: 1'0
+  Constant input on bit 5 of port A: 1'0
+  Constant input on bit 6 of port A: 1'0
+  Constant input on bit 7 of port A: 1'0
+  Constant input on bit 8 of port A: 1'0
+  Constant input on bit 9 of port A: 1'1
+  Constant input on bit 10 of port A: 1'0
+  Constant input on bit 11 of port A: 1'1
+  Constant input on bit 12 of port A: 1'0
+  Constant input on bit 13 of port A: 1'1
+  Constant input on bit 14 of port A: 1'0
+  Constant input on bit 15 of port A: 1'1
+  Constant input on bit 16 of port A: 1'0
+  Constant input on bit 17 of port A: 1'0
+  Constant input on bit 18 of port A: 1'0
+  Constant input on bit 19 of port A: 1'0
+  Constant input on bit 20 of port A: 1'0
+  Constant input on bit 21 of port A: 1'0
+  Constant input on bit 22 of port A: 1'0
+  Constant input on bit 23 of port A: 1'0
+  Constant input on bit 24 of port A: 1'0
+  Constant input on bit 25 of port A: 1'1
+  Constant input on bit 26 of port A: 1'0
+  Constant input on bit 27 of port A: 1'1
+  Constant input on bit 28 of port A: 1'0
+  Constant input on bit 29 of port A: 1'1
+  Constant input on bit 30 of port A: 1'0
+  Constant input on bit 31 of port A: 1'1
+  Constant input on bit 32 of port A: 1'0
+  Constant input on bit 33 of port A: 1'0
+  Constant input on bit 34 of port A: 1'0
+  Constant input on bit 35 of port A: 1'0
+  Constant input on bit 36 of port A: 1'0
+  Constant input on bit 37 of port A: 1'0
+  Constant input on bit 38 of port A: 1'0
+  Constant input on bit 39 of port A: 1'0
+  Constant input on bit 40 of port A: 1'0
+  Constant input on bit 41 of port A: 1'1
+  Constant input on bit 42 of port A: 1'0
+  Constant input on bit 43 of port A: 1'1
+  Constant input on bit 44 of port A: 1'0
+  Constant input on bit 45 of port A: 1'1
+  Constant input on bit 46 of port A: 1'0
+  Constant input on bit 47 of port A: 1'1
+  Constant input on bit 48 of port A: 1'0
+  Constant input on bit 49 of port A: 1'0
+  Constant input on bit 50 of port A: 1'0
+  Constant input on bit 51 of port A: 1'0
+  Constant input on bit 52 of port A: 1'0
+  Constant input on bit 53 of port A: 1'0
+  Constant input on bit 54 of port A: 1'0
+  Constant input on bit 55 of port A: 1'0
+  Constant input on bit 56 of port A: 1'0
+  Constant input on bit 57 of port A: 1'1
+  Constant input on bit 58 of port A: 1'0
+  Constant input on bit 59 of port A: 1'1
+  Constant input on bit 60 of port A: 1'0
+  Constant input on bit 61 of port A: 1'1
+  Constant input on bit 62 of port A: 1'0
+  Constant input on bit 63 of port A: 1'1
+Creating constmapped module `$paramod$constmap:11155557506ef8a8a9721dc5ac26d1bffc707a2c$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx'.
+
+7.8. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$constmap:11155557506ef8a8a9721dc5ac26d1bffc707a2c$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$105.
+    dead port 2/2 on $mux $procmux$111.
+    dead port 2/2 on $mux $procmux$117.
+    dead port 2/2 on $mux $procmux$123.
+    dead port 2/2 on $mux $procmux$129.
+    dead port 2/2 on $mux $procmux$135.
+Removed 6 multiplexer ports.
+<suppressed ~431 debug messages>
+
+7.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$constmap:11155557506ef8a8a9721dc5ac26d1bffc707a2c$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx.
+<suppressed ~3 debug messages>
+Removed 0 unused cells and 12 unused wires.
+Using template $paramod$constmap:11155557506ef8a8a9721dc5ac26d1bffc707a2c$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx for cells of type $shiftx.
+Using template $paramod$constmap:f7884a6c6f96e89a772e30ebd8850ceb47ba03c0$paramod$7ff4260567c9b4790ea4ff6c187771bc9869faee\_90_shift_shiftx for cells of type $shiftx.
+Analyzing pattern of constant bits for this cell:
+  Constant input on bit 0 of port A: 1'0
+  Constant input on bit 1 of port A: 1'0
+  Constant input on bit 2 of port A: 1'0
+  Constant input on bit 3 of port A: 1'0
+  Constant input on bit 4 of port A: 1'0
+  Constant input on bit 5 of port A: 1'0
+  Constant input on bit 6 of port A: 1'0
+  Constant input on bit 7 of port A: 1'0
+  Constant input on bit 8 of port A: 1'0
+  Constant input on bit 9 of port A: 1'0
+  Constant input on bit 10 of port A: 1'1
+  Constant input on bit 11 of port A: 1'1
+  Constant input on bit 12 of port A: 1'0
+  Constant input on bit 13 of port A: 1'0
+  Constant input on bit 14 of port A: 1'1
+  Constant input on bit 15 of port A: 1'1
+  Constant input on bit 16 of port A: 1'0
+  Constant input on bit 17 of port A: 1'1
+  Constant input on bit 18 of port A: 1'0
+  Constant input on bit 19 of port A: 1'1
+  Constant input on bit 20 of port A: 1'0
+  Constant input on bit 21 of port A: 1'1
+  Constant input on bit 22 of port A: 1'0
+  Constant input on bit 23 of port A: 1'1
+  Constant input on bit 24 of port A: 1'0
+  Constant input on bit 25 of port A: 1'1
+  Constant input on bit 26 of port A: 1'1
+  Constant input on bit 27 of port A: 1'0
+  Constant input on bit 28 of port A: 1'0
+  Constant input on bit 29 of port A: 1'1
+  Constant input on bit 30 of port A: 1'1
+  Constant input on bit 31 of port A: 1'0
+  Constant input on bit 32 of port A: 1'0
+  Constant input on bit 33 of port A: 1'0
+  Constant input on bit 34 of port A: 1'0
+  Constant input on bit 35 of port A: 1'0
+  Constant input on bit 36 of port A: 1'0
+  Constant input on bit 37 of port A: 1'0
+  Constant input on bit 38 of port A: 1'0
+  Constant input on bit 39 of port A: 1'0
+  Constant input on bit 40 of port A: 1'0
+  Constant input on bit 41 of port A: 1'0
+  Constant input on bit 42 of port A: 1'1
+  Constant input on bit 43 of port A: 1'1
+  Constant input on bit 44 of port A: 1'0
+  Constant input on bit 45 of port A: 1'0
+  Constant input on bit 46 of port A: 1'1
+  Constant input on bit 47 of port A: 1'1
+  Constant input on bit 48 of port A: 1'0
+  Constant input on bit 49 of port A: 1'1
+  Constant input on bit 50 of port A: 1'0
+  Constant input on bit 51 of port A: 1'1
+  Constant input on bit 52 of port A: 1'0
+  Constant input on bit 53 of port A: 1'1
+  Constant input on bit 54 of port A: 1'0
+  Constant input on bit 55 of port A: 1'1
+  Constant input on bit 56 of port A: 1'0
+  Constant input on bit 57 of port A: 1'1
+  Constant input on bit 58 of port A: 1'1
+  Constant input on bit 59 of port A: 1'0
+  Constant input on bit 60 of port A: 1'0
+  Constant input on bit 61 of port A: 1'1
+  Constant input on bit 62 of port A: 1'1
+  Constant input on bit 63 of port A: 1'0
+Creating constmapped module `$paramod$constmap:f0ec82433e24de69164f2ec06009bbf4c84d3d03$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx'.
+
+7.15. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$constmap:f0ec82433e24de69164f2ec06009bbf4c84d3d03$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$105.
+    dead port 2/2 on $mux $procmux$111.
+    dead port 2/2 on $mux $procmux$117.
+    dead port 2/2 on $mux $procmux$123.
+    dead port 2/2 on $mux $procmux$129.
+    dead port 2/2 on $mux $procmux$135.
+Removed 6 multiplexer ports.
+<suppressed ~325 debug messages>
+
+7.16. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$constmap:f0ec82433e24de69164f2ec06009bbf4c84d3d03$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx.
+<suppressed ~3 debug messages>
+Removed 0 unused cells and 12 unused wires.
+Using template $paramod$constmap:f0ec82433e24de69164f2ec06009bbf4c84d3d03$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx for cells of type $shiftx.
+Analyzing pattern of constant bits for this cell:
+  Bit 1 of port B and bit 0 of port B are connected.
+  Constant input on bit 2 of port B: 1'0
+  Constant input on bit 3 of port B: 1'0
+  Constant input on bit 4 of port B: 1'0
+  Constant input on bit 5 of port B: 1'0
+  Constant input on bit 0 of port A: 1'0
+  Constant input on bit 1 of port A: 1'0
+  Constant input on bit 2 of port A: 1'1
+  Constant input on bit 3 of port A: 1'1
+  Constant input on bit 4 of port A: 1'0
+  Constant input on bit 5 of port A: 1'0
+  Constant input on bit 6 of port A: 1'1
+  Constant input on bit 7 of port A: 1'1
+  Constant input on bit 8 of port A: 1'0
+  Constant input on bit 9 of port A: 1'0
+  Constant input on bit 10 of port A: 1'1
+  Constant input on bit 11 of port A: 1'1
+  Constant input on bit 12 of port A: 1'0
+  Constant input on bit 13 of port A: 1'0
+  Constant input on bit 14 of port A: 1'1
+  Constant input on bit 15 of port A: 1'1
+  Constant input on bit 16 of port A: 1'0
+  Constant input on bit 17 of port A: 1'0
+  Constant input on bit 18 of port A: 1'1
+  Constant input on bit 19 of port A: 1'1
+  Constant input on bit 20 of port A: 1'0
+  Constant input on bit 21 of port A: 1'0
+  Constant input on bit 22 of port A: 1'1
+  Constant input on bit 23 of port A: 1'1
+  Constant input on bit 24 of port A: 1'0
+  Constant input on bit 25 of port A: 1'0
+  Constant input on bit 26 of port A: 1'1
+  Constant input on bit 27 of port A: 1'1
+  Constant input on bit 28 of port A: 1'0
+  Constant input on bit 29 of port A: 1'0
+  Constant input on bit 30 of port A: 1'1
+  Constant input on bit 31 of port A: 1'1
+  Constant input on bit 32 of port A: 1'0
+  Constant input on bit 33 of port A: 1'0
+  Constant input on bit 34 of port A: 1'1
+  Constant input on bit 35 of port A: 1'1
+  Constant input on bit 36 of port A: 1'0
+  Constant input on bit 37 of port A: 1'0
+  Constant input on bit 38 of port A: 1'1
+  Constant input on bit 39 of port A: 1'1
+  Constant input on bit 40 of port A: 1'0
+  Constant input on bit 41 of port A: 1'0
+  Constant input on bit 42 of port A: 1'1
+  Constant input on bit 43 of port A: 1'1
+  Constant input on bit 44 of port A: 1'0
+  Constant input on bit 45 of port A: 1'0
+  Constant input on bit 46 of port A: 1'1
+  Constant input on bit 47 of port A: 1'1
+  Constant input on bit 48 of port A: 1'0
+  Constant input on bit 49 of port A: 1'0
+  Constant input on bit 50 of port A: 1'1
+  Constant input on bit 51 of port A: 1'1
+  Constant input on bit 52 of port A: 1'0
+  Constant input on bit 53 of port A: 1'0
+  Constant input on bit 54 of port A: 1'1
+  Constant input on bit 55 of port A: 1'1
+  Constant input on bit 56 of port A: 1'0
+  Constant input on bit 57 of port A: 1'0
+  Constant input on bit 58 of port A: 1'1
+  Constant input on bit 59 of port A: 1'1
+  Constant input on bit 60 of port A: 1'0
+  Constant input on bit 61 of port A: 1'0
+  Constant input on bit 62 of port A: 1'1
+  Constant input on bit 63 of port A: 1'1
+Creating constmapped module `$paramod$constmap:f7533cdaa760127aaae1d093beae36e8f8e73902$paramod$7ff4260567c9b4790ea4ff6c187771bc9869faee\_90_shift_shiftx'.
+
+7.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$constmap:f7533cdaa760127aaae1d093beae36e8f8e73902$paramod$7ff4260567c9b4790ea4ff6c187771bc9869faee\_90_shift_shiftx..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$150.
+    dead port 2/2 on $mux $procmux$150.
+    dead port 1/2 on $mux $procmux$153.
+    dead port 1/2 on $mux $procmux$156.
+    dead port 2/2 on $mux $procmux$156.
+    dead port 1/2 on $mux $procmux$159.
+    dead port 1/2 on $mux $procmux$162.
+    dead port 2/2 on $mux $procmux$162.
+    dead port 1/2 on $mux $procmux$165.
+    dead port 1/2 on $mux $procmux$168.
+    dead port 2/2 on $mux $procmux$168.
+    dead port 1/2 on $mux $procmux$171.
+    dead port 2/2 on $mux $procmux$174.
+    dead port 2/2 on $mux $procmux$180.
+Removed 14 multiplexer ports.
+<suppressed ~31 debug messages>
+
+7.18. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$constmap:f7533cdaa760127aaae1d093beae36e8f8e73902$paramod$7ff4260567c9b4790ea4ff6c187771bc9869faee\_90_shift_shiftx.
+<suppressed ~3 debug messages>
+Removed 0 unused cells and 17 unused wires.
+Using template $paramod$constmap:f7533cdaa760127aaae1d093beae36e8f8e73902$paramod$7ff4260567c9b4790ea4ff6c187771bc9869faee\_90_shift_shiftx for cells of type $shiftx.
+Analyzing pattern of constant bits for this cell:
+  Constant input on bit 0 of port A: 1'0
+  Constant input on bit 1 of port A: 1'0
+  Constant input on bit 2 of port A: 1'0
+  Constant input on bit 3 of port A: 1'0
+  Constant input on bit 4 of port A: 1'0
+  Constant input on bit 5 of port A: 1'0
+  Constant input on bit 6 of port A: 1'0
+  Constant input on bit 7 of port A: 1'0
+  Constant input on bit 8 of port A: 1'0
+  Constant input on bit 9 of port A: 1'0
+  Constant input on bit 10 of port A: 1'0
+  Constant input on bit 11 of port A: 1'0
+  Constant input on bit 12 of port A: 1'1
+  Constant input on bit 13 of port A: 1'1
+  Constant input on bit 14 of port A: 1'1
+  Constant input on bit 15 of port A: 1'1
+  Constant input on bit 16 of port A: 1'0
+  Constant input on bit 17 of port A: 1'0
+  Constant input on bit 18 of port A: 1'1
+  Constant input on bit 19 of port A: 1'1
+  Constant input on bit 20 of port A: 1'0
+  Constant input on bit 21 of port A: 1'0
+  Constant input on bit 22 of port A: 1'1
+  Constant input on bit 23 of port A: 1'1
+  Constant input on bit 24 of port A: 1'0
+  Constant input on bit 25 of port A: 1'0
+  Constant input on bit 26 of port A: 1'1
+  Constant input on bit 27 of port A: 1'0
+  Constant input on bit 28 of port A: 1'1
+  Constant input on bit 29 of port A: 1'1
+  Constant input on bit 30 of port A: 1'0
+  Constant input on bit 31 of port A: 1'1
+  Constant input on bit 32 of port A: 1'0
+  Constant input on bit 33 of port A: 1'1
+  Constant input on bit 34 of port A: 1'0
+  Constant input on bit 35 of port A: 1'1
+  Constant input on bit 36 of port A: 1'0
+  Constant input on bit 37 of port A: 1'1
+  Constant input on bit 38 of port A: 1'0
+  Constant input on bit 39 of port A: 1'1
+  Constant input on bit 40 of port A: 1'0
+  Constant input on bit 41 of port A: 1'1
+  Constant input on bit 42 of port A: 1'0
+  Constant input on bit 43 of port A: 1'1
+  Constant input on bit 44 of port A: 1'1
+  Constant input on bit 45 of port A: 1'0
+  Constant input on bit 46 of port A: 1'1
+  Constant input on bit 47 of port A: 1'0
+  Constant input on bit 48 of port A: 1'0
+  Constant input on bit 49 of port A: 1'1
+  Constant input on bit 50 of port A: 1'1
+  Constant input on bit 51 of port A: 1'0
+  Constant input on bit 52 of port A: 1'0
+  Constant input on bit 53 of port A: 1'1
+  Constant input on bit 54 of port A: 1'1
+  Constant input on bit 55 of port A: 1'0
+  Constant input on bit 56 of port A: 1'0
+  Constant input on bit 57 of port A: 1'1
+  Constant input on bit 58 of port A: 1'1
+  Constant input on bit 59 of port A: 1'1
+  Constant input on bit 60 of port A: 1'1
+  Constant input on bit 61 of port A: 1'0
+  Constant input on bit 62 of port A: 1'0
+  Constant input on bit 63 of port A: 1'0
+Creating constmapped module `$paramod$constmap:016020bb97fdcc2915475be17eb1fe10ef5dbe2d$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx'.
+
+7.19. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$constmap:016020bb97fdcc2915475be17eb1fe10ef5dbe2d$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$105.
+    dead port 2/2 on $mux $procmux$111.
+    dead port 2/2 on $mux $procmux$117.
+    dead port 2/2 on $mux $procmux$123.
+    dead port 2/2 on $mux $procmux$129.
+    dead port 2/2 on $mux $procmux$135.
+Removed 6 multiplexer ports.
+<suppressed ~76 debug messages>
+
+7.20. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$constmap:016020bb97fdcc2915475be17eb1fe10ef5dbe2d$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx.
+<suppressed ~3 debug messages>
+Removed 0 unused cells and 12 unused wires.
+Using template $paramod$constmap:016020bb97fdcc2915475be17eb1fe10ef5dbe2d$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx for cells of type $shiftx.
+Analyzing pattern of constant bits for this cell:
+  Bit 1 of port B and bit 0 of port B are connected.
+  Constant input on bit 2 of port B: 1'0
+  Constant input on bit 3 of port B: 1'0
+  Constant input on bit 4 of port B: 1'0
+  Constant input on bit 5 of port B: 1'0
+  Constant input on bit 0 of port A: 1'0
+  Constant input on bit 1 of port A: 1'1
+  Constant input on bit 2 of port A: 1'0
+  Constant input on bit 3 of port A: 1'1
+  Constant input on bit 4 of port A: 1'0
+  Constant input on bit 5 of port A: 1'1
+  Constant input on bit 6 of port A: 1'0
+  Constant input on bit 7 of port A: 1'1
+  Constant input on bit 8 of port A: 1'0
+  Constant input on bit 9 of port A: 1'1
+  Constant input on bit 10 of port A: 1'0
+  Constant input on bit 11 of port A: 1'1
+  Constant input on bit 12 of port A: 1'0
+  Constant input on bit 13 of port A: 1'1
+  Constant input on bit 14 of port A: 1'0
+  Constant input on bit 15 of port A: 1'1
+  Constant input on bit 16 of port A: 1'0
+  Constant input on bit 17 of port A: 1'1
+  Constant input on bit 18 of port A: 1'0
+  Constant input on bit 19 of port A: 1'1
+  Constant input on bit 20 of port A: 1'0
+  Constant input on bit 21 of port A: 1'1
+  Constant input on bit 22 of port A: 1'0
+  Constant input on bit 23 of port A: 1'1
+  Constant input on bit 24 of port A: 1'0
+  Constant input on bit 25 of port A: 1'1
+  Constant input on bit 26 of port A: 1'0
+  Constant input on bit 27 of port A: 1'1
+  Constant input on bit 28 of port A: 1'0
+  Constant input on bit 29 of port A: 1'1
+  Constant input on bit 30 of port A: 1'0
+  Constant input on bit 31 of port A: 1'1
+  Constant input on bit 32 of port A: 1'0
+  Constant input on bit 33 of port A: 1'1
+  Constant input on bit 34 of port A: 1'0
+  Constant input on bit 35 of port A: 1'1
+  Constant input on bit 36 of port A: 1'0
+  Constant input on bit 37 of port A: 1'1
+  Constant input on bit 38 of port A: 1'0
+  Constant input on bit 39 of port A: 1'1
+  Constant input on bit 40 of port A: 1'0
+  Constant input on bit 41 of port A: 1'1
+  Constant input on bit 42 of port A: 1'0
+  Constant input on bit 43 of port A: 1'1
+  Constant input on bit 44 of port A: 1'0
+  Constant input on bit 45 of port A: 1'1
+  Constant input on bit 46 of port A: 1'0
+  Constant input on bit 47 of port A: 1'1
+  Constant input on bit 48 of port A: 1'0
+  Constant input on bit 49 of port A: 1'1
+  Constant input on bit 50 of port A: 1'0
+  Constant input on bit 51 of port A: 1'1
+  Constant input on bit 52 of port A: 1'0
+  Constant input on bit 53 of port A: 1'1
+  Constant input on bit 54 of port A: 1'0
+  Constant input on bit 55 of port A: 1'1
+  Constant input on bit 56 of port A: 1'0
+  Constant input on bit 57 of port A: 1'1
+  Constant input on bit 58 of port A: 1'0
+  Constant input on bit 59 of port A: 1'1
+  Constant input on bit 60 of port A: 1'0
+  Constant input on bit 61 of port A: 1'1
+  Constant input on bit 62 of port A: 1'0
+  Constant input on bit 63 of port A: 1'1
+Creating constmapped module `$paramod$constmap:d3d3cce98f2a639f44383726f972c838f50bd0b4$paramod$7ff4260567c9b4790ea4ff6c187771bc9869faee\_90_shift_shiftx'.
+
+7.21. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$constmap:d3d3cce98f2a639f44383726f972c838f50bd0b4$paramod$7ff4260567c9b4790ea4ff6c187771bc9869faee\_90_shift_shiftx..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$150.
+    dead port 2/2 on $mux $procmux$150.
+    dead port 1/2 on $mux $procmux$153.
+    dead port 1/2 on $mux $procmux$156.
+    dead port 2/2 on $mux $procmux$156.
+    dead port 1/2 on $mux $procmux$159.
+    dead port 1/2 on $mux $procmux$162.
+    dead port 2/2 on $mux $procmux$162.
+    dead port 1/2 on $mux $procmux$165.
+    dead port 1/2 on $mux $procmux$168.
+    dead port 2/2 on $mux $procmux$168.
+    dead port 1/2 on $mux $procmux$171.
+    dead port 2/2 on $mux $procmux$174.
+    dead port 2/2 on $mux $procmux$180.
+Removed 14 multiplexer ports.
+<suppressed ~31 debug messages>
+
+7.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$constmap:d3d3cce98f2a639f44383726f972c838f50bd0b4$paramod$7ff4260567c9b4790ea4ff6c187771bc9869faee\_90_shift_shiftx.
+<suppressed ~3 debug messages>
+Removed 0 unused cells and 17 unused wires.
+Using template $paramod$constmap:d3d3cce98f2a639f44383726f972c838f50bd0b4$paramod$7ff4260567c9b4790ea4ff6c187771bc9869faee\_90_shift_shiftx for cells of type $shiftx.
+Analyzing pattern of constant bits for this cell:
+  Constant input on bit 0 of port A: 1'0
+  Constant input on bit 1 of port A: 1'0
+  Constant input on bit 2 of port A: 1'0
+  Constant input on bit 3 of port A: 1'0
+  Constant input on bit 4 of port A: 1'0
+  Constant input on bit 5 of port A: 1'0
+  Constant input on bit 6 of port A: 1'0
+  Constant input on bit 7 of port A: 1'0
+  Constant input on bit 8 of port A: 1'0
+  Constant input on bit 9 of port A: 1'0
+  Constant input on bit 10 of port A: 1'0
+  Constant input on bit 11 of port A: 1'0
+  Constant input on bit 12 of port A: 1'0
+  Constant input on bit 13 of port A: 1'0
+  Constant input on bit 14 of port A: 1'0
+  Constant input on bit 15 of port A: 1'0
+  Constant input on bit 16 of port A: 1'0
+  Constant input on bit 17 of port A: 1'0
+  Constant input on bit 18 of port A: 1'0
+  Constant input on bit 19 of port A: 1'0
+  Constant input on bit 20 of port A: 1'1
+  Constant input on bit 21 of port A: 1'1
+  Constant input on bit 22 of port A: 1'1
+  Constant input on bit 23 of port A: 1'1
+  Constant input on bit 24 of port A: 1'0
+  Constant input on bit 25 of port A: 1'0
+  Constant input on bit 26 of port A: 1'0
+  Constant input on bit 27 of port A: 1'1
+  Constant input on bit 28 of port A: 1'1
+  Constant input on bit 29 of port A: 1'1
+  Constant input on bit 30 of port A: 1'0
+  Constant input on bit 31 of port A: 1'0
+  Constant input on bit 32 of port A: 1'0
+  Constant input on bit 33 of port A: 1'0
+  Constant input on bit 34 of port A: 1'1
+  Constant input on bit 35 of port A: 1'1
+  Constant input on bit 36 of port A: 1'0
+  Constant input on bit 37 of port A: 1'0
+  Constant input on bit 38 of port A: 1'1
+  Constant input on bit 39 of port A: 1'1
+  Constant input on bit 40 of port A: 1'0
+  Constant input on bit 41 of port A: 1'0
+  Constant input on bit 42 of port A: 1'1
+  Constant input on bit 43 of port A: 1'1
+  Constant input on bit 44 of port A: 1'0
+  Constant input on bit 45 of port A: 1'1
+  Constant input on bit 46 of port A: 1'1
+  Constant input on bit 47 of port A: 1'0
+  Constant input on bit 48 of port A: 1'0
+  Constant input on bit 49 of port A: 1'0
+  Constant input on bit 50 of port A: 1'1
+  Constant input on bit 51 of port A: 1'0
+  Constant input on bit 52 of port A: 1'1
+  Constant input on bit 53 of port A: 1'1
+  Constant input on bit 54 of port A: 1'0
+  Constant input on bit 55 of port A: 1'1
+  Constant input on bit 56 of port A: 1'0
+  Constant input on bit 57 of port A: 1'0
+  Constant input on bit 58 of port A: 1'1
+  Constant input on bit 59 of port A: 1'0
+  Constant input on bit 60 of port A: 1'1
+  Constant input on bit 61 of port A: 1'0
+  Constant input on bit 62 of port A: 1'1
+  Constant input on bit 63 of port A: 1'0
+Creating constmapped module `$paramod$constmap:da378ca1befa994c2d20bf59242d2ba985d12920$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx'.
+
+7.23. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$constmap:da378ca1befa994c2d20bf59242d2ba985d12920$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$105.
+    dead port 2/2 on $mux $procmux$111.
+    dead port 2/2 on $mux $procmux$117.
+    dead port 2/2 on $mux $procmux$123.
+    dead port 2/2 on $mux $procmux$129.
+    dead port 2/2 on $mux $procmux$135.
+Removed 6 multiplexer ports.
+<suppressed ~76 debug messages>
+
+7.24. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$constmap:da378ca1befa994c2d20bf59242d2ba985d12920$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx.
+<suppressed ~3 debug messages>
+Removed 0 unused cells and 12 unused wires.
+Using template $paramod$constmap:da378ca1befa994c2d20bf59242d2ba985d12920$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx for cells of type $shiftx.
+Analyzing pattern of constant bits for this cell:
+  Constant input on bit 0 of port A: 1'0
+  Constant input on bit 1 of port A: 1'0
+  Constant input on bit 2 of port A: 1'0
+  Constant input on bit 3 of port A: 1'0
+  Constant input on bit 4 of port A: 1'0
+  Constant input on bit 5 of port A: 1'0
+  Constant input on bit 6 of port A: 1'0
+  Constant input on bit 7 of port A: 1'0
+  Constant input on bit 8 of port A: 1'0
+  Constant input on bit 9 of port A: 1'0
+  Constant input on bit 10 of port A: 1'0
+  Constant input on bit 11 of port A: 1'0
+  Constant input on bit 12 of port A: 1'0
+  Constant input on bit 13 of port A: 1'0
+  Constant input on bit 14 of port A: 1'0
+  Constant input on bit 15 of port A: 1'0
+  Constant input on bit 16 of port A: 1'0
+  Constant input on bit 17 of port A: 1'0
+  Constant input on bit 18 of port A: 1'0
+  Constant input on bit 19 of port A: 1'0
+  Constant input on bit 20 of port A: 1'0
+  Constant input on bit 21 of port A: 1'0
+  Constant input on bit 22 of port A: 1'0
+  Constant input on bit 23 of port A: 1'0
+  Constant input on bit 24 of port A: 1'0
+  Constant input on bit 25 of port A: 1'0
+  Constant input on bit 26 of port A: 1'0
+  Constant input on bit 27 of port A: 1'0
+  Constant input on bit 28 of port A: 1'0
+  Constant input on bit 29 of port A: 1'0
+  Constant input on bit 30 of port A: 1'1
+  Constant input on bit 31 of port A: 1'1
+  Constant input on bit 32 of port A: 1'0
+  Constant input on bit 33 of port A: 1'0
+  Constant input on bit 34 of port A: 1'0
+  Constant input on bit 35 of port A: 1'0
+  Constant input on bit 36 of port A: 1'1
+  Constant input on bit 37 of port A: 1'1
+  Constant input on bit 38 of port A: 1'1
+  Constant input on bit 39 of port A: 1'1
+  Constant input on bit 40 of port A: 1'0
+  Constant input on bit 41 of port A: 1'0
+  Constant input on bit 42 of port A: 1'0
+  Constant input on bit 43 of port A: 1'0
+  Constant input on bit 44 of port A: 1'1
+  Constant input on bit 45 of port A: 1'1
+  Constant input on bit 46 of port A: 1'1
+  Constant input on bit 47 of port A: 1'0
+  Constant input on bit 48 of port A: 1'0
+  Constant input on bit 49 of port A: 1'0
+  Constant input on bit 50 of port A: 1'0
+  Constant input on bit 51 of port A: 1'1
+  Constant input on bit 52 of port A: 1'1
+  Constant input on bit 53 of port A: 1'1
+  Constant input on bit 54 of port A: 1'0
+  Constant input on bit 55 of port A: 1'0
+  Constant input on bit 56 of port A: 1'0
+  Constant input on bit 57 of port A: 1'0
+  Constant input on bit 58 of port A: 1'0
+  Constant input on bit 59 of port A: 1'1
+  Constant input on bit 60 of port A: 1'1
+  Constant input on bit 61 of port A: 1'0
+  Constant input on bit 62 of port A: 1'0
+  Constant input on bit 63 of port A: 1'1
+Creating constmapped module `$paramod$constmap:07f45f182b81e2c4e7cc71b4142d9e317ef3b97d$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx'.
+
+7.25. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$constmap:07f45f182b81e2c4e7cc71b4142d9e317ef3b97d$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$105.
+    dead port 2/2 on $mux $procmux$111.
+    dead port 2/2 on $mux $procmux$117.
+    dead port 2/2 on $mux $procmux$123.
+    dead port 2/2 on $mux $procmux$129.
+    dead port 2/2 on $mux $procmux$135.
+Removed 6 multiplexer ports.
+<suppressed ~77 debug messages>
+
+7.26. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$constmap:07f45f182b81e2c4e7cc71b4142d9e317ef3b97d$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx.
+<suppressed ~3 debug messages>
+Removed 0 unused cells and 12 unused wires.
+Using template $paramod$constmap:07f45f182b81e2c4e7cc71b4142d9e317ef3b97d$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx for cells of type $shiftx.
+Analyzing pattern of constant bits for this cell:
+  Constant input on bit 0 of port A: 1'0
+  Constant input on bit 1 of port A: 1'0
+  Constant input on bit 2 of port A: 1'0
+  Constant input on bit 3 of port A: 1'0
+  Constant input on bit 4 of port A: 1'0
+  Constant input on bit 5 of port A: 1'0
+  Constant input on bit 6 of port A: 1'0
+  Constant input on bit 7 of port A: 1'0
+  Constant input on bit 8 of port A: 1'0
+  Constant input on bit 9 of port A: 1'0
+  Constant input on bit 10 of port A: 1'0
+  Constant input on bit 11 of port A: 1'0
+  Constant input on bit 12 of port A: 1'0
+  Constant input on bit 13 of port A: 1'0
+  Constant input on bit 14 of port A: 1'0
+  Constant input on bit 15 of port A: 1'0
+  Constant input on bit 16 of port A: 1'0
+  Constant input on bit 17 of port A: 1'0
+  Constant input on bit 18 of port A: 1'0
+  Constant input on bit 19 of port A: 1'0
+  Constant input on bit 20 of port A: 1'0
+  Constant input on bit 21 of port A: 1'0
+  Constant input on bit 22 of port A: 1'0
+  Constant input on bit 23 of port A: 1'0
+  Constant input on bit 24 of port A: 1'0
+  Constant input on bit 25 of port A: 1'0
+  Constant input on bit 26 of port A: 1'0
+  Constant input on bit 27 of port A: 1'0
+  Constant input on bit 28 of port A: 1'0
+  Constant input on bit 29 of port A: 1'0
+  Constant input on bit 30 of port A: 1'0
+  Constant input on bit 31 of port A: 1'0
+  Constant input on bit 32 of port A: 1'0
+  Constant input on bit 33 of port A: 1'0
+  Constant input on bit 34 of port A: 1'0
+  Constant input on bit 35 of port A: 1'0
+  Constant input on bit 36 of port A: 1'0
+  Constant input on bit 37 of port A: 1'0
+  Constant input on bit 38 of port A: 1'0
+  Constant input on bit 39 of port A: 1'0
+  Constant input on bit 40 of port A: 1'0
+  Constant input on bit 41 of port A: 1'0
+  Constant input on bit 42 of port A: 1'0
+  Constant input on bit 43 of port A: 1'0
+  Constant input on bit 44 of port A: 1'0
+  Constant input on bit 45 of port A: 1'0
+  Constant input on bit 46 of port A: 1'0
+  Constant input on bit 47 of port A: 1'1
+  Constant input on bit 48 of port A: 1'0
+  Constant input on bit 49 of port A: 1'0
+  Constant input on bit 50 of port A: 1'0
+  Constant input on bit 51 of port A: 1'0
+  Constant input on bit 52 of port A: 1'0
+  Constant input on bit 53 of port A: 1'0
+  Constant input on bit 54 of port A: 1'1
+  Constant input on bit 55 of port A: 1'1
+  Constant input on bit 56 of port A: 1'0
+  Constant input on bit 57 of port A: 1'0
+  Constant input on bit 58 of port A: 1'0
+  Constant input on bit 59 of port A: 1'0
+  Constant input on bit 60 of port A: 1'0
+  Constant input on bit 61 of port A: 1'1
+  Constant input on bit 62 of port A: 1'1
+  Constant input on bit 63 of port A: 1'1
+Creating constmapped module `$paramod$constmap:1a4f80b34fed2ccc773c7f35a027040369a57eac$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx'.
+
+7.27. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$constmap:1a4f80b34fed2ccc773c7f35a027040369a57eac$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$105.
+    dead port 2/2 on $mux $procmux$111.
+    dead port 2/2 on $mux $procmux$117.
+    dead port 2/2 on $mux $procmux$123.
+    dead port 2/2 on $mux $procmux$129.
+    dead port 2/2 on $mux $procmux$135.
+Removed 6 multiplexer ports.
+<suppressed ~77 debug messages>
+
+7.28. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$constmap:1a4f80b34fed2ccc773c7f35a027040369a57eac$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx.
+<suppressed ~3 debug messages>
+Removed 0 unused cells and 12 unused wires.
+Using template $paramod$constmap:1a4f80b34fed2ccc773c7f35a027040369a57eac$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx for cells of type $shiftx.
+Analyzing pattern of constant bits for this cell:
+  Constant input on bit 0 of port A: 1'0
+  Constant input on bit 1 of port A: 1'0
+  Constant input on bit 2 of port A: 1'0
+  Constant input on bit 3 of port A: 1'0
+  Constant input on bit 4 of port A: 1'0
+  Constant input on bit 5 of port A: 1'0
+  Constant input on bit 6 of port A: 1'0
+  Constant input on bit 7 of port A: 1'0
+  Constant input on bit 8 of port A: 1'1
+  Constant input on bit 9 of port A: 1'1
+  Constant input on bit 10 of port A: 1'1
+  Constant input on bit 11 of port A: 1'1
+  Constant input on bit 12 of port A: 1'1
+  Constant input on bit 13 of port A: 1'1
+  Constant input on bit 14 of port A: 1'1
+  Constant input on bit 15 of port A: 1'1
+  Constant input on bit 16 of port A: 1'0
+  Constant input on bit 17 of port A: 1'0
+  Constant input on bit 18 of port A: 1'0
+  Constant input on bit 19 of port A: 1'0
+  Constant input on bit 20 of port A: 1'0
+  Constant input on bit 21 of port A: 1'0
+  Constant input on bit 22 of port A: 1'0
+  Constant input on bit 23 of port A: 1'0
+  Constant input on bit 24 of port A: 1'1
+  Constant input on bit 25 of port A: 1'1
+  Constant input on bit 26 of port A: 1'1
+  Constant input on bit 27 of port A: 1'1
+  Constant input on bit 28 of port A: 1'1
+  Constant input on bit 29 of port A: 1'1
+  Constant input on bit 30 of port A: 1'1
+  Constant input on bit 31 of port A: 1'1
+  Constant input on bit 32 of port A: 1'0
+  Constant input on bit 33 of port A: 1'0
+  Constant input on bit 34 of port A: 1'0
+  Constant input on bit 35 of port A: 1'0
+  Constant input on bit 36 of port A: 1'0
+  Constant input on bit 37 of port A: 1'0
+  Constant input on bit 38 of port A: 1'0
+  Constant input on bit 39 of port A: 1'0
+  Constant input on bit 40 of port A: 1'1
+  Constant input on bit 41 of port A: 1'1
+  Constant input on bit 42 of port A: 1'1
+  Constant input on bit 43 of port A: 1'1
+  Constant input on bit 44 of port A: 1'1
+  Constant input on bit 45 of port A: 1'1
+  Constant input on bit 46 of port A: 1'1
+  Constant input on bit 47 of port A: 1'1
+  Constant input on bit 48 of port A: 1'0
+  Constant input on bit 49 of port A: 1'0
+  Constant input on bit 50 of port A: 1'0
+  Constant input on bit 51 of port A: 1'0
+  Constant input on bit 52 of port A: 1'0
+  Constant input on bit 53 of port A: 1'0
+  Constant input on bit 54 of port A: 1'0
+  Constant input on bit 55 of port A: 1'0
+  Constant input on bit 56 of port A: 1'1
+  Constant input on bit 57 of port A: 1'1
+  Constant input on bit 58 of port A: 1'1
+  Constant input on bit 59 of port A: 1'1
+  Constant input on bit 60 of port A: 1'1
+  Constant input on bit 61 of port A: 1'1
+  Constant input on bit 62 of port A: 1'1
+  Constant input on bit 63 of port A: 1'1
+Creating constmapped module `$paramod$constmap:f94076c6b759b34ef57f38dd102fe2584b5dd55c$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx'.
+
+7.29. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$constmap:f94076c6b759b34ef57f38dd102fe2584b5dd55c$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$105.
+    dead port 2/2 on $mux $procmux$111.
+    dead port 2/2 on $mux $procmux$117.
+    dead port 2/2 on $mux $procmux$123.
+    dead port 2/2 on $mux $procmux$129.
+    dead port 2/2 on $mux $procmux$135.
+Removed 6 multiplexer ports.
+<suppressed ~76 debug messages>
+
+7.30. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$constmap:f94076c6b759b34ef57f38dd102fe2584b5dd55c$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx.
+<suppressed ~3 debug messages>
+Removed 0 unused cells and 12 unused wires.
+Using template $paramod$constmap:f94076c6b759b34ef57f38dd102fe2584b5dd55c$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx for cells of type $shiftx.
+Analyzing pattern of constant bits for this cell:
+  Constant input on bit 2 of port B: 1'0
+  Constant input on bit 3 of port B: 1'0
+  Constant input on bit 4 of port B: 1'0
+  Constant input on bit 5 of port B: 1'0
+  Constant input on bit 0 of port A: 1'0
+  Constant input on bit 1 of port A: 1'1
+  Constant input on bit 2 of port A: 1'0
+  Constant input on bit 3 of port A: 1'1
+  Constant input on bit 4 of port A: 1'0
+  Constant input on bit 5 of port A: 1'1
+  Constant input on bit 6 of port A: 1'0
+  Constant input on bit 7 of port A: 1'1
+  Constant input on bit 8 of port A: 1'0
+  Constant input on bit 9 of port A: 1'1
+  Constant input on bit 10 of port A: 1'0
+  Constant input on bit 11 of port A: 1'1
+  Constant input on bit 12 of port A: 1'0
+  Constant input on bit 13 of port A: 1'1
+  Constant input on bit 14 of port A: 1'0
+  Constant input on bit 15 of port A: 1'1
+  Constant input on bit 16 of port A: 1'0
+  Constant input on bit 17 of port A: 1'1
+  Constant input on bit 18 of port A: 1'0
+  Constant input on bit 19 of port A: 1'1
+  Constant input on bit 20 of port A: 1'0
+  Constant input on bit 21 of port A: 1'1
+  Constant input on bit 22 of port A: 1'0
+  Constant input on bit 23 of port A: 1'1
+  Constant input on bit 24 of port A: 1'0
+  Constant input on bit 25 of port A: 1'1
+  Constant input on bit 26 of port A: 1'0
+  Constant input on bit 27 of port A: 1'1
+  Constant input on bit 28 of port A: 1'0
+  Constant input on bit 29 of port A: 1'1
+  Constant input on bit 30 of port A: 1'0
+  Constant input on bit 31 of port A: 1'1
+  Constant input on bit 32 of port A: 1'0
+  Constant input on bit 33 of port A: 1'1
+  Constant input on bit 34 of port A: 1'0
+  Constant input on bit 35 of port A: 1'1
+  Constant input on bit 36 of port A: 1'0
+  Constant input on bit 37 of port A: 1'1
+  Constant input on bit 38 of port A: 1'0
+  Constant input on bit 39 of port A: 1'1
+  Constant input on bit 40 of port A: 1'0
+  Constant input on bit 41 of port A: 1'1
+  Constant input on bit 42 of port A: 1'0
+  Constant input on bit 43 of port A: 1'1
+  Constant input on bit 44 of port A: 1'0
+  Constant input on bit 45 of port A: 1'1
+  Constant input on bit 46 of port A: 1'0
+  Constant input on bit 47 of port A: 1'1
+  Constant input on bit 48 of port A: 1'0
+  Constant input on bit 49 of port A: 1'1
+  Constant input on bit 50 of port A: 1'0
+  Constant input on bit 51 of port A: 1'1
+  Constant input on bit 52 of port A: 1'0
+  Constant input on bit 53 of port A: 1'1
+  Constant input on bit 54 of port A: 1'0
+  Constant input on bit 55 of port A: 1'1
+  Constant input on bit 56 of port A: 1'0
+  Constant input on bit 57 of port A: 1'1
+  Constant input on bit 58 of port A: 1'0
+  Constant input on bit 59 of port A: 1'1
+  Constant input on bit 60 of port A: 1'0
+  Constant input on bit 61 of port A: 1'1
+  Constant input on bit 62 of port A: 1'0
+  Constant input on bit 63 of port A: 1'1
+Creating constmapped module `$paramod$constmap:6d90f4ea5599a3b09763289dfd1342a07eb31652$paramod$7ff4260567c9b4790ea4ff6c187771bc9869faee\_90_shift_shiftx'.
+
+7.31. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$constmap:6d90f4ea5599a3b09763289dfd1342a07eb31652$paramod$7ff4260567c9b4790ea4ff6c187771bc9869faee\_90_shift_shiftx..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$150.
+    dead port 2/2 on $mux $procmux$150.
+    dead port 1/2 on $mux $procmux$153.
+    dead port 1/2 on $mux $procmux$156.
+    dead port 2/2 on $mux $procmux$156.
+    dead port 1/2 on $mux $procmux$159.
+    dead port 1/2 on $mux $procmux$162.
+    dead port 2/2 on $mux $procmux$162.
+    dead port 1/2 on $mux $procmux$165.
+    dead port 1/2 on $mux $procmux$168.
+    dead port 2/2 on $mux $procmux$168.
+    dead port 1/2 on $mux $procmux$171.
+    dead port 2/2 on $mux $procmux$174.
+    dead port 2/2 on $mux $procmux$180.
+Removed 14 multiplexer ports.
+<suppressed ~34 debug messages>
+
+7.32. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$constmap:6d90f4ea5599a3b09763289dfd1342a07eb31652$paramod$7ff4260567c9b4790ea4ff6c187771bc9869faee\_90_shift_shiftx.
+<suppressed ~3 debug messages>
+Removed 0 unused cells and 17 unused wires.
+Using template $paramod$constmap:6d90f4ea5599a3b09763289dfd1342a07eb31652$paramod$7ff4260567c9b4790ea4ff6c187771bc9869faee\_90_shift_shiftx for cells of type $shiftx.
+Using extmapper simplemap for cells of type $mux.
+No more expansions possible.
+<suppressed ~61 debug messages>
+
+8. Executing OPT pass (performing simple optimizations).
+
+8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module multiplier3x3_dut.
+<suppressed ~1519 debug messages>
+
+8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\multiplier3x3_dut'.
+Computing hashes of 2339 cells of `\multiplier3x3_dut'.
+Finding duplicate cells in `\multiplier3x3_dut'.
+Computing hashes of 1996 cells of `\multiplier3x3_dut'.
+Finding duplicate cells in `\multiplier3x3_dut'.
+Computing hashes of 1663 cells of `\multiplier3x3_dut'.
+Finding duplicate cells in `\multiplier3x3_dut'.
+Computing hashes of 1535 cells of `\multiplier3x3_dut'.
+Finding duplicate cells in `\multiplier3x3_dut'.
+Computing hashes of 1467 cells of `\multiplier3x3_dut'.
+Finding duplicate cells in `\multiplier3x3_dut'.
+Computing hashes of 1435 cells of `\multiplier3x3_dut'.
+Finding duplicate cells in `\multiplier3x3_dut'.
+Computing hashes of 1424 cells of `\multiplier3x3_dut'.
+Finding duplicate cells in `\multiplier3x3_dut'.
+<suppressed ~2745 debug messages>
+Removed a total of 915 cells.
+
+8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \multiplier3x3_dut..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \multiplier3x3_dut.
+Performed a total of 0 changes.
+
+8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\multiplier3x3_dut'.
+Computing hashes of 1424 cells of `\multiplier3x3_dut'.
+Finding duplicate cells in `\multiplier3x3_dut'.
+Removed a total of 0 cells.
+
+8.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \multiplier3x3_dut..
+Removed 1353 unused cells and 119 unused wires.
+<suppressed ~1354 debug messages>
+
+8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module multiplier3x3_dut.
+<suppressed ~5 debug messages>
+
+8.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \multiplier3x3_dut..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \multiplier3x3_dut.
+Performed a total of 0 changes.
+
+8.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\multiplier3x3_dut'.
+Computing hashes of 66 cells of `\multiplier3x3_dut'.
+Finding duplicate cells in `\multiplier3x3_dut'.
+Removed a total of 0 cells.
+
+8.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \multiplier3x3_dut..
+Removed 0 unused cells and 3 unused wires.
+<suppressed ~1 debug messages>
+
+8.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module multiplier3x3_dut.
+
+8.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+8.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \multiplier3x3_dut..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+8.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \multiplier3x3_dut.
+Performed a total of 0 changes.
+
+8.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\multiplier3x3_dut'.
+Computing hashes of 66 cells of `\multiplier3x3_dut'.
+Finding duplicate cells in `\multiplier3x3_dut'.
+Removed a total of 0 cells.
+
+8.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \multiplier3x3_dut..
+
+8.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module multiplier3x3_dut.
+
+8.23. Finished fast OPT passes. (There is nothing left to do.)
+
+9. Executing ABC pass (technology mapping using ABC).
+
+9.1. Extracting gate netlist of module `\multiplier3x3_dut' to `<abc-temp-dir>/input.blif'..
+
+9.1.1. Executed ABC.
+Extracted 48 gates and 56 wires to a netlist network with 6 inputs and 6 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lut <abc-temp-dir>/lutdefs.txt 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + dch -f 
+ABC: + if 
+ABC: + mfs2 
+ABC: + lutpack -S 1 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+9.1.2. Re-integrating ABC results.
+ABC RESULTS:              $lut cells:        6
+ABC RESULTS:        internal signals:       44
+ABC RESULTS:           input signals:        6
+ABC RESULTS:          output signals:        6
+Removing temp directory.
+Removing global temp directory.
+
+10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \multiplier3x3_dut..
+Removed 0 unused cells and 28 unused wires.
+<suppressed ~1 debug messages>
+
+11. Executing CHECK pass (checking for obvious problems).
+Checking module multiplier3x3_dut...
+Found and reported 0 problems.
+
+12. Printing statistics.
+
+=== multiplier3x3_dut ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      158 wires
+      271 wire bits
+      158 public wires
+      271 public wire bits
+       13 ports
+       13 port bits
+       24 cells
+        6   $lut
+       18   $scopeinfo
+
+13. Executing JSON backend.
+
+End of script. Logfile hash: 85392ecc3b, time: 0.12s, user: 0.07s, system: 0.01s, MEM: 30.45 MB peak
+Yosys 0.68+post (git sha1 c12172fbae8af5e20f6fb52e3d4e92d56ed587b6, Release, AppleClang clang++ 21.0.0.21000101)
+Time spent: 42% 1x abc (0 sec), 13% 22x opt_expr (0 sec), ...

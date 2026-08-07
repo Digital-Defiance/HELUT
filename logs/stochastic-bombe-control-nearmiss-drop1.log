@@ -1,0 +1,43 @@
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Shell evolution: OFF freeRings=false WO=1 ringSeeds=1 subspace=potsdam
+Seeded population[1] with oracle stecker (BQ CH DI EJ GL KP NV OU SZ)
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/15 pop=10 blockB_greeks=0
+  gen-best  fitness=65.0000 IC=0.0638 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ
+  all-time  fitness=65.0000 IC=0.0638 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ
+Hybrid gen 2/15 pop=10 blockB_greeks=0
+  gen-best  fitness=65.0000 IC=0.0638 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ
+  all-time  fitness=65.0000 IC=0.0638 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ
+Hybrid gen 3/15 pop=10 blockB_greeks=0
+  gen-best  fitness=65.0000 IC=0.0638 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ
+  all-time  fitness=65.0000 IC=0.0638 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ
+Hybrid gen 4/15 pop=10 blockB_greeks=0
+  gen-best  fitness=65.0000 IC=0.0638 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ
+  all-time  fitness=65.0000 IC=0.0638 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ
+Hybrid gen 5/15 pop=10 blockB_greeks=0
+  gen-best  fitness=65.0000 IC=0.0638 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ
+  all-time  fitness=65.0000 IC=0.0638 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ
+Hybrid gen 6/15 pop=10 blockB_greeks=0
+  gen-best  fitness=65.0000 IC=0.0638 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ
+  all-time  fitness=65.0000 IC=0.0638 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ
+  hill-climb recovered fitness=72 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ TY
+*** Hybrid halt — exact known-plaintext match (hill-climb) ***
+Near-miss seed: dropped 1 true plug pair(s); 9 remain
+HELUT — Stochastic Bombe KPA control (P1030684, 72 letters)
+Fitness: exact decrypt match against known plaintext (German-ness ignored)
+Shell locked: UKW B / γ / IV-III-VIII / rings AACU
+Stecker seed: oracle BQ CH DI EJ GL KP NV OU SZ
+KPA hill-climb steps/elite: 8
+Ciphertext: RFBYWKIKELDCHBSXUNFJFSNRRVFWASXYLQCQFADYJXNTBMVLRDCGULOWHTBGWUSSOQHGAYED
+Target PT:  VVVUUUVIRSOBENNULEINSXXMITUUUVIRSIBENNULZWOYVIRSIBENNULDREIYZWODREISECHS
+
+Config: pop=10 gens=15 maxPlugs=10 blockB_greeks=0 samples subspace=potsdam WO=1 evolveShell=false freeRings=false ringSeeds=AACU fitness=KPA letter-match / 72
+
+
+Elapsed: 2.1 s
+Best shell: UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ TY
+Best hit: partition=kpa-26^4 pos=VYAA score=72.0000 IC=0.0657
+Plain: VVVUUUVIRSOBENNULEINSXXMITUUUVIRSIBENNULZWOYVIRSIBENNULDREIYZWODREISECHS
+KPA match: 72/72
+*** CONTROL PASS — exact plaintext recovered ***
+See ASIC_CRACKER.md / evolution-hybridization.md / stochastic-bombe.md

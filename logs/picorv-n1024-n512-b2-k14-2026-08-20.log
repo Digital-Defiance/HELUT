@@ -1,0 +1,53 @@
+HELUT encrypted-netlist bench · SING
+  netlist: picorv32_lut6_netlist.json  module=picorv32
+  poly N=1024  LUTs=2006  DFFs=1565  sequential  2N=2048
+  stimuli=1 (max --vectors 1)  cpu-only=false  metal-netlist-only=false
+  paths filter: public-ms covering-b2
+  paths: public-ms@boolean + public-ms@crypto + secret@crypto (+ Metal)
+  BK noise inject Gaussian σ=128.0 (torus; identity residual is empirical, not B_bk)
+  BK identity confidence trials=1
+  noisy-BK policy: UNSAFE DIAGNOSTIC ONLY (functional output cannot certify ε)
+  divergence trace: enabled (first LUT + all wrong DFFs)
+  boolean scale kδ  k=14  (test-poly stride 14; public-MS native δ)
+  LWE n=512  (CMUX count; extract→KS when n<kN=1024)
+  DynamicRotateCost mux=2099200 binary=11275 speedup≈186.2×
+
+  Metal BR tile progress: quiet
+  starting blind-rotate-metal public-ms covering-b2  n=512
+  extract→KS     kN=1024 → n=512  (δ-lattice GLev e=0)
+  identity residual trials=1  (n=512)
+  identity observed max|e| 95869  (sample-decodable true)
+ENCRYPTED DIVERGENCE TRACE
+  backend=blind-rotate-metal refresh=public-ms serial-wavefront=false path=blind-rotate-metal public-ms covering-b2 tick=1
+  first clear divergence: wavefront=2 ordinal=263 name=$abc$28808$auto$blifparse.cc:557:parse_blif$29072 y=681
+    A=[net(203), net(227), net(226), net(202), net(684), net(685)] arity=6 INIT=0000000000000000001010110010001000000000000000000000000000000000 table[0...]=0000000000000000000000000000000001000100110101000000000000000000
+    address clear=32 encrypted=32 expected-clear=0 expected-local=0 actual=1
+    phase torus-extracted raw=29762309 (0x01c62305) residual=29762309 |e|=29762309 half-gap=14680064 BR-skip=no
+  first locally corrupt LUT: wavefront=2 ordinal=263 name=$abc$28808$auto$blifparse.cc:557:parse_blif$29072 y=681
+    A=[net(203), net(227), net(226), net(202), net(684), net(685)] arity=6 INIT=0000000000000000001010110010001000000000000000000000000000000000 table[0...]=0000000000000000000000000000000001000100110101000000000000000000
+    address clear=32 encrypted=32 expected-clear=0 expected-local=0 actual=1
+    phase torus-extracted raw=29762309 (0x01c62305) residual=29762309 |e|=29762309 half-gap=14680064 BR-skip=no
+  wrong DFFs: 11
+    $auto$ff.cc:337:slice$14344 $_DFF_P_ Q=794 D=net(2692) want=0 got=1 producer=$abc$28808$auto$blifparse.cc:557:parse_blif$29984@wavefront3/LUT6/INIT=1111111111111111111111111111111111111111111111111111100010001000
+      native-phase=14 torus-phase=29360128 residual=29360128 |e|=29360128 half-gap=14680064
+    $auto$ff.cc:337:slice$14348 $_DFF_P_ Q=375 D=net(3523) want=0 got=1 producer=$abc$28808$auto$blifparse.cc:557:parse_blif$30678@wavefront3/LUT6/INIT=1111111111111111100011001100000011111111111111111111111111111111
+      native-phase=14 torus-phase=29360128 residual=29360128 |e|=29360128 half-gap=14680064
+    $auto$ff.cc:337:slice$14352 $_DFF_P_ Q=419 D=net(2648) want=0 got=1 producer=$abc$28808$auto$blifparse.cc:557:parse_blif$29951@wavefront5/LUT5/INIT=11111111111111111111111111111000
+      native-phase=14 torus-phase=29360128 residual=29360128 |e|=29360128 half-gap=14680064
+    $auto$ff.cc:337:slice$14353 $_DFF_P_ Q=503 D=net(3514) want=0 got=1 producer=$abc$28808$auto$blifparse.cc:557:parse_blif$30669@wavefront5/LUT6/INIT=1111111111111111100011001100000011111111111111111111111111111111
+      native-phase=14 torus-phase=29360128 residual=29360128 |e|=29360128 half-gap=14680064
+    $auto$ff.cc:337:slice$14355 $_DFF_P_ Q=324 D=net(3511) want=0 got=1 producer=$abc$28808$auto$blifparse.cc:557:parse_blif$30666@wavefront6/LUT6/INIT=1111111111111111100011001100000011111111111111111111111111111111
+      native-phase=13 torus-phase=27262976 residual=27262976 |e|=27262976 half-gap=14680064
+    $auto$ff.cc:337:slice$14356 $_DFF_P_ Q=489 D=net(2625) want=0 got=1 producer=$abc$28808$auto$blifparse.cc:557:parse_blif$29934@wavefront6/LUT5/INIT=11111111111111111111111111111000
+      native-phase=14 torus-phase=29360128 residual=29360128 |e|=29360128 half-gap=14680064
+    $auto$ff.cc:337:slice$14357 $_DFF_P_ Q=482 D=net(3508) want=0 got=1 producer=$abc$28808$auto$blifparse.cc:557:parse_blif$30663@wavefront7/LUT6/INIT=1111111111111111100011001100000011111111111111111111111111111111
+      native-phase=14 torus-phase=29360128 residual=29360128 |e|=29360128 half-gap=14680064
+    $auto$ff.cc:337:slice$14363 $_DFF_P_ Q=754 D=net(2582) want=0 got=1 producer=$abc$28808$auto$blifparse.cc:557:parse_blif$29908@wavefront8/LUT6/INIT=1111111111111111001010001000001011111111111111111111111111111111
+      native-phase=14 torus-phase=29360128 residual=29360128 |e|=29360128 half-gap=14680064
+    $auto$ff.cc:337:slice$14373 $_DFF_P_ Q=383 D=net(2505) want=0 got=1 producer=$abc$28808$auto$blifparse.cc:557:parse_blif$29864@wavefront12/LUT5/INIT=01111101110101110101010101010101
+      native-phase=14 torus-phase=29360128 residual=29360128 |e|=29360128 half-gap=14680064
+    $auto$ff.cc:337:slice$14508 $_DFF_P_ Q=308 D=net(659) want=0 got=1 producer=$abc$28808$auto$blifparse.cc:557:parse_blif$29053@wavefront4/LUT6/INIT=1111111111111111111111111111111101010011001100001111111111110000
+      native-phase=14 torus-phase=29360128 residual=29360128 |e|=29360128 half-gap=14680064
+    $auto$ff.cc:337:slice$14525 $_DFF_P_ Q=410 D=net(611) want=0 got=1 producer=$abc$28808$auto$blifparse.cc:557:parse_blif$29005@wavefront11/LUT6/INIT=1111111111111111111111111111111101010011001100001111111111110000
+      native-phase=14 torus-phase=29360128 residual=29360128 |e|=29360128 half-gap=14680064
+HELUTToolKit/HelutBench.swift:433: Fatal error: DFF mismatches blind-rotate-metal public-ms covering-b2 tick 1 (11): $auto$ff.cc:337:slice$14344 $_DFF_P_ want=0 got=1; $auto$ff.cc:337:slice$14348 $_DFF_P_ want=0 got=1; $auto$ff.cc:337:slice$14352 $_DFF_P_ want=0 got=1; $auto$ff.cc:337:slice$14353 $_DFF_P_ want=0 got=1; $auto$ff.cc:337:slice$14355 $_DFF_P_ want=0 got=1; $auto$ff.cc:337:slice$14356 $_DFF_P_ want=0 got=1; $auto$ff.cc:337:slice$14357 $_DFF_P_ want=0 got=1; $auto$ff.cc:337:slice$14363 $_DFF_P_ want=0 got=1; $auto$ff.cc:337:slice$14373 $_DFF_P_ want=0 got=1; $auto$ff.cc:337:slice$14508 $_DFF_P_ want=0 got=1; $auto$ff.cc:337:slice$14525 $_DFF_P_ want=0 got=1

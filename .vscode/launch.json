@@ -1,0 +1,124 @@
+{
+    "configurations": [
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:HELUT}",
+            "name": "Debug helut",
+            "target": "helut",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug helut"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:HELUT}",
+            "name": "Release helut",
+            "target": "helut",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release helut"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:HELUT}",
+            "name": "Debug helut-bench",
+            "target": "helut-bench",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug helut-bench"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:HELUT}",
+            "name": "Release helut-bench",
+            "target": "helut-bench",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release helut-bench"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:HELUT}",
+            "name": "Debug helut-e256",
+            "target": "helut-e256",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug helut-e256"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:HELUT}",
+            "name": "Release helut-e256",
+            "target": "helut-e256",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release helut-e256"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:HELUT}",
+            "name": "Debug helut-bombe",
+            "target": "helut-bombe",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug helut-bombe"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:HELUT}",
+            "name": "Release helut-bombe",
+            "target": "helut-bombe",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release helut-bombe"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:HELUT}",
+            "name": "Debug helut-compile",
+            "target": "helut-compile",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug helut-compile"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:HELUT}",
+            "name": "Release helut-compile",
+            "target": "helut-compile",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release helut-compile"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:HELUT}",
+            "name": "Debug helut-radio",
+            "target": "helut-radio",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug helut-radio"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:HELUT}",
+            "name": "Release helut-radio",
+            "target": "helut-radio",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release helut-radio"
+        }
+    ]
+}

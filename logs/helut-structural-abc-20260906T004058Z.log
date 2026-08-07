@@ -1,0 +1,44 @@
+HELUT structural evolution versus identical ABC receipt
+schema=helut.tensorlut.structural-abc-benchmark.v1
+timestamp_utc=2026-09-06T00:41:15Z
+command=env HELUT_STRUCTURAL_BENCH_ARTIFACT_DIR=/Volumes/Code/MuleinLabs/HELUT/logs/helut-structural-abc-20260906T004058Z swift test -c release --skip-build --filter TensorLUTStructuralBenchmarkTests
+yosys=Yosys 0.68+post (git sha1 c12172fbae8af5e20f6fb52e3d4e92d56ed587b6)
+report=logs/helut-structural-abc-20260906T004058Z/report.json
+report_sha256=2d22285f2d96b01e5d4659a04ddf37de8e6be1765e45b50863c00e85a1d57e32
+
+FLOW (identical for every baseline and finalist):
+  map=read LUT6 model + emitted candidate; hierarchy -check; proc; flatten; opt; techmap; opt; abc -lut 6; opt_clean; check -assert; write_json
+  area_proxy=post-ABC $lut cell count
+  timing_proxy=maximum post-ABC output-cone LUT levels
+  proof=read mapped JSON + independent behavioral RTL; miter -equiv -flatten; sat -prove trigger 0
+
+SEARCH:
+  seeds=0x0000000000005eed,0x0000000000c0ffee,0x0000000051a7e123
+  population=96 generations=16 elites=12 tournament=4 mutation=0.15 crossover=0.85
+  rank=mismatches,active_luts,depth,support_edges,changed_modes (lexicographic)
+
+CIRCUIT                 search rows       pre baseline -> evolved       mapped baseline -> evolved
+parity12                4096/4096         7 LUT d3 -> 3 LUT d2          3 LUT d2 -> 3 LUT d2
+6-input decision tree   64/64             3 LUT d2 -> 1 LUT d1          1 LUT d1 -> 1 LUT d1
+8:1 mux                 2048/2048         15 LUT d4 -> 7 LUT d3         3 LUT d2 -> 3 LUT d2
+popcount6               64/64             9 LUT d2 -> 3 LUT d1          3 LUT d1 -> 3 LUT d1
+3x3 multiplier          64/64             18 LUT d2 -> 6 LUT d1         6 LUT d1 -> 6 LUT d1
+8-bit adder             512/65536         41 LUT d9 -> 16 LUT d8        14 LUT d3 -> 14 LUT d3
+
+FORMAL_RESULT:
+  baselines=6 proved=6
+  unique_retained_finalists=9 proved=9 refuted=0 inconclusive=0
+  seed_results=18 retained_and_proved=18
+  8-bit-adder search was sampled, but every mapped finalist was SAT-proven against behavioral 8-bit addition over the full Boolean input space.
+
+POST_ABC_RESULT:
+  mapped_lut_wins=0 mapped_lut_ties=18 mapped_lut_losses=0
+  mapped_depth_wins=0 mapped_depth_ties=18 mapped_depth_losses=0
+  verdict=honest null: restricted structural evolution removed redundant pre-map cones, but ABC removed the same redundancy and no retained finalist beat or lost to its identically mapped baseline.
+
+ARTIFACTS:
+  Each baseline/finalist directory contains emitted.v, reference.v, lut6.v, flow.ys, prove.ys, resynth.json, synthesis.log, and proof.log.
+
+CLAIM_BOUNDARY:
+  LUT6 count and LUT-level depth under this one ABC flow are implementation proxies only.
+  This does not establish physical area, delay, frequency, power, or a general advantage over ABC.

@@ -1,0 +1,852 @@
+{
+  "target": "P1030680",
+  "ciphertext": "JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF",
+  "note": "Thetis \u00dcbung pair fixture: short UEBUNG-family headers at offsets 0\u20132 plus top-40 \u226516 catalog cribs at offsets 10\u201320. Run with --bombe-confirm 2 --bombe-min-crib 6. Solo BREAK requires length \u226516; short headers need independent shell agreement.",
+  "cribs": [
+    {
+      "text": "ANANFUNFUUUFLOTTXNULEINSZWONULBEIROTNULS",
+      "messages": 0,
+      "offsets": [
+        15,
+        18
+      ],
+      "anchored": false
+    },
+    {
+      "text": "ANFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIB",
+      "messages": 0,
+      "offsets": [
+        17,
+        20
+      ],
+      "anchored": false
+    },
+    {
+      "text": "AUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIROT",
+      "messages": 0,
+      "offsets": [
+        11,
+        18
+      ],
+      "anchored": false
+    },
+    {
+      "text": "FLOTTXNULEINSZWONULBEIROTNULSIBENGEANKER",
+      "messages": 0,
+      "offsets": [
+        10,
+        12,
+        14
+      ],
+      "anchored": false
+    },
+    {
+      "text": "FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN",
+      "messages": 0,
+      "offsets": [
+        19
+      ],
+      "anchored": false
+    },
+    {
+      "text": "FUUUFLOTTXNULEINSZWONULBEIROTNULSIBENGEA",
+      "messages": 0,
+      "offsets": [
+        10
+      ],
+      "anchored": false
+    },
+    {
+      "text": "KANANFUNFUUUFLOTTXNULEINSZWONULBEIROTNUL",
+      "messages": 0,
+      "offsets": [
+        14,
+        17
+      ],
+      "anchored": false
+    },
+    {
+      "text": "KKANANFUNFUUUFLOTTXNULEINSZWONULBEIROTNU",
+      "messages": 0,
+      "offsets": [
+        13,
+        20
+      ],
+      "anchored": false
+    },
+    {
+      "text": "LAUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIRO",
+      "messages": 0,
+      "offsets": [
+        10,
+        17
+      ],
+      "anchored": false
+    },
+    {
+      "text": "LEINSZWONULBEIROTNULSIBENGEANKERTXZUMWEI",
+      "messages": 0,
+      "offsets": [
+        10
+      ],
+      "anchored": false
+    },
+    {
+      "text": "LOTTXNULEINSZWONULBEIROTNULSIBENGEANKERT",
+      "messages": 0,
+      "offsets": [
+        11,
+        13,
+        15
+      ],
+      "anchored": false
+    },
+    {
+      "text": "NANFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSI",
+      "messages": 0,
+      "offsets": [
+        16,
+        19
+      ],
+      "anchored": false
+    },
+    {
+      "text": "NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE",
+      "messages": 0,
+      "offsets": [
+        18
+      ],
+      "anchored": false
+    },
+    {
+      "text": "NSZWONULBEIROTNULSIBENGEANKERTXZUMWEITER",
+      "messages": 0,
+      "offsets": [
+        10
+      ],
+      "anchored": false
+    },
+    {
+      "text": "OTTXNULEINSZWONULBEIROTNULSIBENGEANKERTX",
+      "messages": 0,
+      "offsets": [
+        12,
+        14
+      ],
+      "anchored": false
+    },
+    {
+      "text": "TTXNULEINSZWONULBEIROTNULSIBENGEANKERTXZ",
+      "messages": 0,
+      "offsets": [
+        13,
+        15
+      ],
+      "anchored": false
+    },
+    {
+      "text": "TXNULEINSZWONULBEIROTNULSIBENGEANKERTXZU",
+      "messages": 0,
+      "offsets": [
+        14,
+        16
+      ],
+      "anchored": false
+    },
+    {
+      "text": "UFLOTTXNULEINSZWONULBEIROTNULSIBENGEANKE",
+      "messages": 0,
+      "offsets": [
+        10,
+        11,
+        13
+      ],
+      "anchored": false
+    },
+    {
+      "text": "UKKANANFUNFUUUFLOTTXNULEINSZWONULBEIROTN",
+      "messages": 0,
+      "offsets": [
+        12,
+        19
+      ],
+      "anchored": false
+    },
+    {
+      "text": "UNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENG",
+      "messages": 0,
+      "offsets": [
+        20
+      ],
+      "anchored": false
+    },
+    {
+      "text": "UUFLOTTXNULEINSZWONULBEIROTNULSIBENGEANK",
+      "messages": 0,
+      "offsets": [
+        10,
+        12
+      ],
+      "anchored": false
+    },
+    {
+      "text": "UUUFLOTTXNULEINSZWONULBEIROTNULSIBENGEAN",
+      "messages": 0,
+      "offsets": [
+        11
+      ],
+      "anchored": false
+    },
+    {
+      "text": "UEBUNGSMELDUNG",
+      "messages": 0,
+      "offsets": [
+        0,
+        1
+      ],
+      "anchored": true
+    },
+    {
+      "text": "XUEBUNGXUEBUNG",
+      "messages": 0,
+      "offsets": [
+        0,
+        2
+      ],
+      "anchored": true
+    },
+    {
+      "text": "UEBUNGXUEBUNG",
+      "messages": 0,
+      "offsets": [
+        0,
+        1
+      ],
+      "anchored": true
+    },
+    {
+      "text": "UEBUNGUEBUNG",
+      "messages": 0,
+      "offsets": [
+        0,
+        1
+      ],
+      "anchored": true
+    },
+    {
+      "text": "FUNKXUEBUNG",
+      "messages": 0,
+      "offsets": [
+        0,
+        1,
+        2
+      ],
+      "anchored": true
+    },
+    {
+      "text": "UEBUNGSFUNK",
+      "messages": 0,
+      "offsets": [
+        0,
+        1
+      ],
+      "anchored": true
+    },
+    {
+      "text": "UEBUNGXFUNK",
+      "messages": 0,
+      "offsets": [
+        0,
+        1
+      ],
+      "anchored": true
+    },
+    {
+      "text": "FUNKUEBUNG",
+      "messages": 0,
+      "offsets": [
+        0,
+        1,
+        2
+      ],
+      "anchored": true
+    },
+    {
+      "text": "UEBUNGXXX",
+      "messages": 0,
+      "offsets": [
+        0,
+        1
+      ],
+      "anchored": true
+    },
+    {
+      "text": "XXXUEBUNG",
+      "messages": 0,
+      "offsets": [
+        0,
+        1,
+        2
+      ],
+      "anchored": true
+    },
+    {
+      "text": "UEBUNGXX",
+      "messages": 0,
+      "offsets": [
+        0,
+        1
+      ],
+      "anchored": true
+    },
+    {
+      "text": "XXUEBUNG",
+      "messages": 0,
+      "offsets": [
+        1,
+        2
+      ],
+      "anchored": false
+    },
+    {
+      "text": "UEBUNGX",
+      "messages": 0,
+      "offsets": [
+        0,
+        1
+      ],
+      "anchored": true
+    },
+    {
+      "text": "XUEBUNG",
+      "messages": 0,
+      "offsets": [
+        0,
+        2
+      ],
+      "anchored": true
+    },
+    {
+      "text": "UEBUNG",
+      "messages": 0,
+      "offsets": [
+        0,
+        1
+      ],
+      "anchored": true
+    }
+  ],
+  "placements": [
+    {
+      "text": "UEBUNG",
+      "offset": 0,
+      "edges": 6,
+      "loops": 0,
+      "role": "head"
+    },
+    {
+      "text": "UEBUNG",
+      "offset": 1,
+      "edges": 6,
+      "loops": 0,
+      "role": "head"
+    },
+    {
+      "text": "UEBUNGX",
+      "offset": 0,
+      "edges": 7,
+      "loops": 0,
+      "role": "head"
+    },
+    {
+      "text": "UEBUNGX",
+      "offset": 1,
+      "edges": 7,
+      "loops": 0,
+      "role": "head"
+    },
+    {
+      "text": "XUEBUNG",
+      "offset": 0,
+      "edges": 7,
+      "loops": 0,
+      "role": "head"
+    },
+    {
+      "text": "XUEBUNG",
+      "offset": 2,
+      "edges": 7,
+      "loops": 0,
+      "role": "head"
+    },
+    {
+      "text": "UEBUNGUEBUNG",
+      "offset": 0,
+      "edges": 12,
+      "loops": 1,
+      "role": "head"
+    },
+    {
+      "text": "UEBUNGUEBUNG",
+      "offset": 1,
+      "edges": 12,
+      "loops": 1,
+      "role": "head"
+    },
+    {
+      "text": "UEBUNGXUEBUNG",
+      "offset": 0,
+      "edges": 13,
+      "loops": 3,
+      "role": "head"
+    },
+    {
+      "text": "UEBUNGXUEBUNG",
+      "offset": 1,
+      "edges": 13,
+      "loops": 2,
+      "role": "head"
+    },
+    {
+      "text": "XUEBUNGXUEBUNG",
+      "offset": 0,
+      "edges": 14,
+      "loops": 2,
+      "role": "head"
+    },
+    {
+      "text": "XUEBUNGXUEBUNG",
+      "offset": 2,
+      "edges": 14,
+      "loops": 2,
+      "role": "head"
+    },
+    {
+      "text": "FUNKUEBUNG",
+      "offset": 0,
+      "edges": 10,
+      "loops": 0,
+      "role": "head"
+    },
+    {
+      "text": "FUNKUEBUNG",
+      "offset": 1,
+      "edges": 10,
+      "loops": 1,
+      "role": "head"
+    },
+    {
+      "text": "FUNKUEBUNG",
+      "offset": 2,
+      "edges": 10,
+      "loops": 0,
+      "role": "head"
+    },
+    {
+      "text": "FUNKXUEBUNG",
+      "offset": 0,
+      "edges": 11,
+      "loops": 0,
+      "role": "head"
+    },
+    {
+      "text": "FUNKXUEBUNG",
+      "offset": 1,
+      "edges": 11,
+      "loops": 0,
+      "role": "head"
+    },
+    {
+      "text": "FUNKXUEBUNG",
+      "offset": 2,
+      "edges": 11,
+      "loops": 2,
+      "role": "head"
+    },
+    {
+      "text": "UEBUNGSFUNK",
+      "offset": 0,
+      "edges": 11,
+      "loops": 1,
+      "role": "head"
+    },
+    {
+      "text": "UEBUNGSFUNK",
+      "offset": 1,
+      "edges": 11,
+      "loops": 0,
+      "role": "head"
+    },
+    {
+      "text": "UEBUNGXFUNK",
+      "offset": 0,
+      "edges": 11,
+      "loops": 1,
+      "role": "head"
+    },
+    {
+      "text": "UEBUNGXFUNK",
+      "offset": 1,
+      "edges": 11,
+      "loops": 0,
+      "role": "head"
+    },
+    {
+      "text": "XXXUEBUNG",
+      "offset": 0,
+      "edges": 9,
+      "loops": 0,
+      "role": "head"
+    },
+    {
+      "text": "XXXUEBUNG",
+      "offset": 1,
+      "edges": 9,
+      "loops": 0,
+      "role": "head"
+    },
+    {
+      "text": "XXXUEBUNG",
+      "offset": 2,
+      "edges": 9,
+      "loops": 0,
+      "role": "head"
+    },
+    {
+      "text": "UEBUNGXXX",
+      "offset": 0,
+      "edges": 9,
+      "loops": 1,
+      "role": "head"
+    },
+    {
+      "text": "UEBUNGXXX",
+      "offset": 1,
+      "edges": 9,
+      "loops": 0,
+      "role": "head"
+    },
+    {
+      "text": "XXUEBUNG",
+      "offset": 1,
+      "edges": 8,
+      "loops": 0,
+      "role": "head"
+    },
+    {
+      "text": "XXUEBUNG",
+      "offset": 2,
+      "edges": 8,
+      "loops": 0,
+      "role": "head"
+    },
+    {
+      "text": "UEBUNGXX",
+      "offset": 0,
+      "edges": 8,
+      "loops": 0,
+      "role": "head"
+    },
+    {
+      "text": "UEBUNGXX",
+      "offset": 1,
+      "edges": 8,
+      "loops": 0,
+      "role": "head"
+    },
+    {
+      "text": "UEBUNGSMELDUNG",
+      "offset": 0,
+      "edges": 14,
+      "loops": 0,
+      "role": "head"
+    },
+    {
+      "text": "UEBUNGSMELDUNG",
+      "offset": 1,
+      "edges": 14,
+      "loops": 0,
+      "role": "head"
+    },
+    {
+      "text": "NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE",
+      "offset": 18,
+      "edges": 40,
+      "loops": 20,
+      "role": "body"
+    },
+    {
+      "text": "FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN",
+      "offset": 19,
+      "edges": 40,
+      "loops": 20,
+      "role": "body"
+    },
+    {
+      "text": "UNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENG",
+      "offset": 20,
+      "edges": 40,
+      "loops": 20,
+      "role": "body"
+    },
+    {
+      "text": "LAUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIRO",
+      "offset": 10,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "FUUUFLOTTXNULEINSZWONULBEIROTNULSIBENGEA",
+      "offset": 10,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "UUFLOTTXNULEINSZWONULBEIROTNULSIBENGEANK",
+      "offset": 10,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "UFLOTTXNULEINSZWONULBEIROTNULSIBENGEANKE",
+      "offset": 10,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "FLOTTXNULEINSZWONULBEIROTNULSIBENGEANKER",
+      "offset": 10,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "AUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIROT",
+      "offset": 11,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "UUUFLOTTXNULEINSZWONULBEIROTNULSIBENGEAN",
+      "offset": 11,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "UFLOTTXNULEINSZWONULBEIROTNULSIBENGEANKE",
+      "offset": 11,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "LOTTXNULEINSZWONULBEIROTNULSIBENGEANKERT",
+      "offset": 11,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "UKKANANFUNFUUUFLOTTXNULEINSZWONULBEIROTN",
+      "offset": 12,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "UUFLOTTXNULEINSZWONULBEIROTNULSIBENGEANK",
+      "offset": 12,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "FLOTTXNULEINSZWONULBEIROTNULSIBENGEANKER",
+      "offset": 12,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "OTTXNULEINSZWONULBEIROTNULSIBENGEANKERTX",
+      "offset": 12,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "KKANANFUNFUUUFLOTTXNULEINSZWONULBEIROTNU",
+      "offset": 13,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "UFLOTTXNULEINSZWONULBEIROTNULSIBENGEANKE",
+      "offset": 13,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "LOTTXNULEINSZWONULBEIROTNULSIBENGEANKERT",
+      "offset": 13,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "TTXNULEINSZWONULBEIROTNULSIBENGEANKERTXZ",
+      "offset": 13,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "KANANFUNFUUUFLOTTXNULEINSZWONULBEIROTNUL",
+      "offset": 14,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "FLOTTXNULEINSZWONULBEIROTNULSIBENGEANKER",
+      "offset": 14,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "OTTXNULEINSZWONULBEIROTNULSIBENGEANKERTX",
+      "offset": 14,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "TXNULEINSZWONULBEIROTNULSIBENGEANKERTXZU",
+      "offset": 14,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "ANANFUNFUUUFLOTTXNULEINSZWONULBEIROTNULS",
+      "offset": 15,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "LOTTXNULEINSZWONULBEIROTNULSIBENGEANKERT",
+      "offset": 15,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "TTXNULEINSZWONULBEIROTNULSIBENGEANKERTXZ",
+      "offset": 15,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "NANFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSI",
+      "offset": 16,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "TXNULEINSZWONULBEIROTNULSIBENGEANKERTXZU",
+      "offset": 16,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "LAUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIRO",
+      "offset": 17,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "KANANFUNFUUUFLOTTXNULEINSZWONULBEIROTNUL",
+      "offset": 17,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "ANFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIB",
+      "offset": 17,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "AUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIROT",
+      "offset": 18,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "ANANFUNFUUUFLOTTXNULEINSZWONULBEIROTNULS",
+      "offset": 18,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "UKKANANFUNFUUUFLOTTXNULEINSZWONULBEIROTN",
+      "offset": 19,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "NANFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSI",
+      "offset": 19,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "KKANANFUNFUUUFLOTTXNULEINSZWONULBEIROTNU",
+      "offset": 20,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "ANFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIB",
+      "offset": 20,
+      "edges": 40,
+      "loops": 19,
+      "role": "body"
+    },
+    {
+      "text": "LEINSZWONULBEIROTNULSIBENGEANKERTXZUMWEI",
+      "offset": 10,
+      "edges": 40,
+      "loops": 18,
+      "role": "body"
+    },
+    {
+      "text": "NSZWONULBEIROTNULSIBENGEANKERTXZUMWEITER",
+      "offset": 10,
+      "edges": 40,
+      "loops": 18,
+      "role": "body"
+    }
+  ]
+}

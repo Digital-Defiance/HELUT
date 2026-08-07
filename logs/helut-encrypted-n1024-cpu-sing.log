@@ -1,0 +1,37 @@
+HELUT encrypted-netlist bench
+  netlist: netlist.json  module=full_adder
+  poly N=1024  LUTs=3  2N=2048
+  stimuli=8 (max --vectors 8)  cpu-only=true  metal-netlist-only=false
+  paths filter: blind-rotate public-ms boolean
+  paths: public-ms@boolean + public-ms@crypto + secret@crypto
+  DynamicRotateCost mux=2099200 binary=11275 speedup≈186.2×
+
+ENCRYPTED EQUIV (blind-rotate public-ms boolean)
+  rows            8
+  wall            51.9427 s  (6492.83 ms/row)
+  classical bits  175.7  (≥128? yes)
+  ingest ε log2   -inf  (target -64)
+  noisy BK B_bk   0  (decodable true)
+  result          PASS
+
+ENCRYPTED EQUIV (metal)
+  result          SKIP (--cpu-only)
+
+       53.01 real        52.46 user         0.38 sys
+            29818880  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+                2034  page reclaims
+                   6  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+               23863  involuntary context switches
+       1561764153533  instructions retired
+        209009709594  cycles elapsed
+            24215960  peak memory footprint

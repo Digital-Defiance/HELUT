@@ -1,0 +1,23 @@
+######## trigram model = generic ########
+trigram model : Fixtures/german_trigrams.txt (14947 grams; letters=28508834 ic=0.0747 distinct=14947)
+scorer: staged
+   len ctrls  win    win%  medMargin    medZ  plugs   corr
+────────────────────────────────────────────────────────────────────────────────────────────────
+    72    30    2      7%    -0.2735    0.12   0/10     7%
+   100    23    4     17%    -0.0996    1.01   1/10     7%
+   140    12    2     17%    -0.1062    0.52   2/10     7%
+   180     6    2     33%    -0.0114    1.49   2/10    10%
+   252     3    2     67%    +0.4957    8.14   8/10    67%
+
+######## trigram model = naval ########
+trigram model : U-534 naval dialect (48 decrypts, 7537 letters) mixed into Fixtures/german_trigrams.txt (14947 grams; letters=28508834 ic=0.0747 distinct=14947)
+scorer: staged
+   len ctrls  win    win%  medMargin    medZ  plugs   corr
+────────────────────────────────────────────────────────────────────────────────────────────────
+    72    30    2      7%    -0.2763   -0.05   0/10     7%
+   100    23    4     17%    -0.1048    1.08   1/10     7%
+   140    12    1      8%    -0.1168    0.91   1/10     8%
+   180     6    2     33%    -0.0277    1.25   2/10    17%
+   252     3    2     67%    +0.5428   10.78   8/10    67%
+
+EXIT=0

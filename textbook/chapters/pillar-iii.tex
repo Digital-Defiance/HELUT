@@ -1,0 +1,166 @@
+\chapter{Ciphers that grow under fire}
+\label{ch:pillariii}
+
+\growswhen{A polymorphic Red/Blue standard beyond the bounded E256 fixture-v4
+receipt (roadmap: Schneier pillar), and IND-CPA / Red-pressure security results
+that go past finite structural checks. This chapter is a scaffold and collecting
+surface for existing receipts---not lecture-ready material and not a finished
+industry standard.}
+
+\section{Evidence boundary for a design laboratory}
+
+Historical Enigma traits motivate the E256 design laboratory, but the checked
+claims here do not prove those traits universally fatal or prove their removal
+for every generated machine. This collecting surface records three existing
+rows: bounded fixture-v4 implementation parity (C10), a bounded structural
+certificate / protocol (C24), and a historical encrypted teaching cone (C39).
+
+The same-state reciprocal shape is a design target. The evidence below is
+finite: only checks explicitly called exhaustive are exhaustive, and key/state
+coverage remains bounded.
+
+\paragraph{Open E256-H/X0 hardware and policy measurements.}
+The E256-061/062/063 hardware and X0 checks remain
+\texttt{OPEN\_PROGRESS} and have no C/H/N row. Their complete dependency-ordered
+reproduction commands, receipt digests, and non-claims are in
+\corpus{REPRODUCE.md}. The three latest gates can be re-checked directly with:
+\begin{itemize}[nosep]
+  \item \texttt{make e256-hw-h2-check};
+  \item \texttt{make e256-hw-h4-sequence-check};
+  \item \texttt{make e256-x0-h4-evolution-check}.
+\end{itemize}
+The H4 census validly found that 737,280 of 1,474,560 preregistered mixed
+three-round windows fail the exact all-to-all byte-dependency criterion. Its
+first frozen-order witness uses list indices $[1,2,3]$---tuples
+$(0,1,3,4)$, $(0,1,4,3)$, and $(0,1,4,7)$---where output lane 0 lacks input
+lanes $[6,11,24,29]$. The sequence-specific H3 collapse passed 442,368 exact
+comparisons; integrated RTL/model and per-input cycle evidence passed 55,296
+comparisons each; and all 19 controls were detected.
+
+X0 then checked the exact criterion $S(y)+S(z)=\mathbb{Z}_8$ for all 147,456
+ordered catalog pairs using independent literal and sumset implementations.
+Exactly 73,728 directed transitions are safe and every node has in/out degree
+192. The full graph has two 192-node strongly connected components; the
+16-support quotient has two 8-node components and no Hamiltonian cycle. The
+frozen fallback certificate alternates catalog indices 0 and 3 for twelve
+selectors and verifies all 11 adjacent transitions. All 23 X0 controls were
+detected. This proves only the represented contiguous three-round structural
+dependency windows; the two components prevent one safe walk from covering all
+16 supports.
+
+The generic Yosys/ABC sequence-minus-repeated observations were:
+\begin{itemize}
+  \item FF storage: $-407$ LUT6, $+132$ state bits, $-275$ primitive
+        cells, and $+1$ combinational level;
+  \item ring storage: $-57$ LUT6, $+132$ state bits, $+75$ primitive
+        cells, and $+1$ combinational level.
+\end{itemize}
+There was no threshold or winner. Negative LUT deltas from separate generic
+mappings are not physical selector savings. The H4 counterexample parks
+unrestricted arithmetic switching; X0 supplies a bounded safe-transition
+grammar and path, not a production evolution mechanism. Neither result inherits
+the fixed-tuple four-round/25-active-S-box statement. These are generic
+mapped-RTL measurements, bounded falsification, and host-side structural
+evidence only---not a theorem or course-ready laboratory result. They select no
+architecture, storage organization, round count, schedule, XOF, H4 policy,
+suite, protocol, production RTL, cryptanalytic result, or security value.
+
+\section{Fixture-v4 evidence capsule (scaffold)}
+
+\begin{itemize}
+  \item The fixed live profile is schema-4 \texttt{E256-v2/gen0}, fixture-v4.
+  \item Its conjugated-XOR center is
+        $A_i^{-1}(A_i(x)\oplus k_i)$.
+  \item The host derives and transports
+        \texttt{(payload, centerMask, absoluteByteCounter)}; RTL validates
+        \texttt{absoluteByteCounter} and does not implement HMAC.
+  \item The formal C24 test is \textbf{1/1 PASS}; the full E256 C10 suite is
+        \textbf{49/49 PASS}. The receipt is
+        \texttt{logs/e256-v2-gen0-fixture-v4-validation.json}.
+\end{itemize}
+
+\reproduced{C10}{Enigma256 fixture-v4 bounded implementation / KAT-parity,
+reciprocity, and conjugated-XOR evidence for the fixed schema-4
+\texttt{E256-v2/gen0} native profile. Full E256 suite: \textbf{49/49 PASS}.
+Receipt: \texttt{logs/e256-v2-gen0-fixture-v4-validation.json}.}
+
+\reproduced{C24}{Enigma256 SoftBus Theorem~2 is a bounded fixture-v4
+structural certificate / protocol: deterministic four-state
+scramble-bijection sweep; exhaustive byte reciprocity for one frozen fixture
+state; deterministic 128-byte stream round-trip; fixture plugboard plus
+selected XOR-center involution/fixed-point checks; and exact schema-4
+\texttt{E256-v2/gen0} native-profile integrity. Formal test:
+\textbf{1/1 PASS}. Statement: \corpus{directives/enigma256-theorem.md}.}
+
+\reproduced{C39}{One frozen historical one-byte / one-round E256 teaching cone
+with algebraic sboxes, legacy UKW, offsets $0$, and identity plug under GGSW
+Metal SING at $N{=}1024$. It predates the live fixture-v4 profile and does not
+exercise transported mask/counter tuples, the conjugated-XOR center, live BRAM
+day-key tables, NLFF stepping, or the full core.}
+
+\section{Theorem 2 (bounded structural certificate / protocol)}
+\label{sec:thm-enigma256}
+
+\begin{theorem}[E256 fixture-v4 bounded structural certificate / protocol;
+\corpusthm{2}]
+\label{thm:enigma256}
+For the fixed schema-4 \texttt{E256-v2/gen0} native-profile fixture-v4, the C24
+bounded structural certificate / protocol checks exactly: (i) a deterministic
+four-state scramble-bijection sweep; (ii) exhaustive byte reciprocity for one
+frozen fixture state; (iii) a deterministic 128-byte stream round-trip;
+(iv) the fixture plugboard plus selected XOR-center involution/fixed-point
+checks, where the center is $A_i^{-1}(A_i(x)\oplus k_i)$; and (v) exact
+schema-4 \texttt{E256-v2/gen0} native-profile integrity. The host derives and
+transports \texttt{(payload, centerMask, absoluteByteCounter)}. RTL validates
+\texttt{absoluteByteCounter} and does not implement HMAC.
+\end{theorem}
+
+Machine-checked result: \texttt{Enigma256Formal.certificate()} /
+\texttt{testEnigma256FormalCertificate}, \textbf{1/1 PASS}; full E256 suite,
+\textbf{49/49 PASS}. Receipt:
+\texttt{logs/e256-v2-gen0-fixture-v4-validation.json}.
+Reproduce through \corpus{REPRODUCE.md}.
+
+\begin{warning}
+Theorem~2 records a \emph{bounded structural certificate / protocol}, not a
+universal proof. Finite checks are exhaustive only where stated, and state/key
+coverage is bounded. It is not IND-CPA, an HMAC proof, external cryptanalysis,
+human acceptance, or a finished polymorphic-cipher standard.
+\end{warning}
+
+\section{Red-pressure questions kept separate}
+
+TensorLUT, known-plaintext, and \texttt{ent} experiments remain internal Red
+questions on this collecting surface. C24 does not show that those experiments
+cannot force a generation roll, and the fixture-v4 receipt is not external
+cryptanalysis or human acceptance. No coupled-NLFF hardening result is part of
+the bounded certificate.
+
+\section{Draft lab prompts (scaffold; not lecture-ready)}
+
+\begin{exercise}[Blue studio prompt]
+Propose one additional E256 invariant as an open design question (for example,
+an NLFF period lower bound or BRAM burst-width condition). Specify a test that
+could refuse a generation, but do not promote the proposal to a claim without
+a checked receipt.
+\end{exercise}
+
+\begin{exercise}[Historical-leak checklist prompt]
+Compare historical Enigma traits with the corresponding E256 design choices.
+Keep every unsupported security consequence labeled as a question, not a
+claim.
+\end{exercise}
+
+\section{Relation to Pillars I and II}
+
+This collecting surface links the bounded C24 protocol to its fixture receipt
+(Theorem~\ref{thm:enigma256}). \cid{39} is a historical frozen one-round
+legacy-UKW scramble under GGSW Metal SING. It predates live fixture-v4 and does
+not exercise transported \texttt{centerMask}/\texttt{absoluteByteCounter}, the
+conjugated-XOR center, live BRAM, NLFF, or a full core. Calling that lab
+``production encrypted E256'' is a \claimkind{N}.
+
+\nonclaimbox{E256 is not a NIST candidate in this scaffold, not a replacement
+for TLS, and not an implication that polymorphic rotors beat lattices. The
+fixture-v4 receipt is bounded implementation / protocol evidence, not IND-CPA,
+an HMAC proof, external cryptanalysis, or human acceptance.}

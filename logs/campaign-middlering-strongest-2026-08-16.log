@@ -1,0 +1,61 @@
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030680_maxupper_strongest_menus.json (24 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 24 of 24
+min crib length: 16
+running 24 menus, highest deduction power first:
+  [1] NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE@18 edges=40 letters=21 loops=20 central=U
+  [2] NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE@21 edges=40 letters=21 loops=20 central=U
+  [3] FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN@19 edges=40 letters=21 loops=20 central=U
+  [4] FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN@22 edges=40 letters=21 loops=20 central=U
+  [5] UNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENG@20 edges=40 letters=21 loops=20 central=U
+  [6] UNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENG@23 edges=40 letters=21 loops=20 central=T
+  [7] NFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENGE@21 edges=40 letters=21 loops=20 central=T
+  [8] LAUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIRO@10 edges=40 letters=22 loops=19 central=U
+  [9] LAUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIRO@17 edges=40 letters=22 loops=19 central=U
+  [10] AUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIROT@11 edges=40 letters=22 loops=19 central=U
+  [11] UUUFUNFDREIVIERKKNOLLAUKK@25 edges=25 letters=19 loops=8 central=R
+  [12] UUUFUNFDREIVIERKKNOLLAUKK@27 edges=25 letters=20 loops=8 central=R
+  … 12 more
+shells/menu: 908544 (336 WO × 2 Greek × 2 UKW × 26 mid-ring × 26 right-ring) → 4.15e+11 settings
+kernel sieve: ≤10 plugs, middle-ring covered-lane skip
+GPU pipeline depth: 4 shells in flight
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+right ring swept: every right-wheel turnover phase covered
+middle ring swept: ring A in full, rings B–Z restricted to lanes whose middle wheel reaches a notch (the rest are exactly the ring-A lanes)
+no residual ring gap for these menus — this is the arm the ledger has never run
+ETA floor (~50M/s): 3321.5 min
+
+quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → logs/quarantine_middlering.json
+  [1/24·1] NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE@18 edges=40 letters=21 loops=20 central=U dead at the board                      7947s  52.2M/s ETA 3046.5 min
+EXIT=143
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030680_maxupper_strongest_menus.json (24 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 24 of 24
+min crib length: 16
+resuming from menu 2 of 24 (skipping 1 already done)
+running 23 menus, highest deduction power first:
+  [2] NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE@21 edges=40 letters=21 loops=20 central=U
+  [3] FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN@19 edges=40 letters=21 loops=20 central=U
+  [4] FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN@22 edges=40 letters=21 loops=20 central=U
+  [5] UNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENG@20 edges=40 letters=21 loops=20 central=U
+  [6] UNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENG@23 edges=40 letters=21 loops=20 central=T
+  [7] NFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENGE@21 edges=40 letters=21 loops=20 central=T
+  [8] LAUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIRO@10 edges=40 letters=22 loops=19 central=U
+  [9] LAUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIRO@17 edges=40 letters=22 loops=19 central=U
+  [10] AUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIROT@11 edges=40 letters=22 loops=19 central=U
+  [11] UUUFUNFDREIVIERKKNOLLAUKK@25 edges=25 letters=19 loops=8 central=R
+  [12] UUUFUNFDREIVIERKKNOLLAUKK@27 edges=25 letters=20 loops=8 central=R
+  [13] DMXUUUBOOTEYFXDXUUUAUSB@8 edges=23 letters=19 loops=7 central=U
+  … 11 more
+shells/menu: 908544 (336 WO × 2 Greek × 2 UKW × 26 mid-ring × 26 right-ring) → 4.15e+11 settings
+kernel sieve: ≤10 plugs, middle-ring covered-lane skip
+GPU pipeline depth: 4 shells in flight
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+right ring swept: every right-wheel turnover phase covered
+middle ring swept: ring A in full, rings B–Z restricted to lanes whose middle wheel reaches a notch (the rest are exactly the ring-A lanes)
+no residual ring gap for these menus — this is the arm the ledger has never run
+ETA floor (~50M/s): 3183.1 min
+
+quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → logs/quarantine_middlering.json

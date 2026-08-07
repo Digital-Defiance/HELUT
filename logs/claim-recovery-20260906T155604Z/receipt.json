@@ -1,0 +1,97 @@
+{
+  "schema": "helut-claim-recovery-v1",
+  "receiptId": "claim-recovery-20260906T155604Z",
+  "runDate": "2026-09-06",
+  "repositoryCommit": "4d47ad0ef40c593bb3a0e4ab5aa2e668b917f975",
+  "workingTreeClean": false,
+  "platform": {
+    "os": "macOS 26.6.2",
+    "build": "25G83",
+    "arch": "arm64",
+    "swiftDriver": "1.148.6"
+  },
+  "artifacts": {
+    "helutCompileSha256": "70927a2e307151ff89f4ae66fd9e6779cb4ffff1e5fa350f8ff68153799b86df",
+    "helutBombeSha256": "d284055ca3b4cb1017fbda2cde56bede31ff52f6c95d3ffa2d245a513334ca8c",
+    "helutSha256": "9e3d5020db6a6f7b838d158189f2e9783da48412339564193075634ec4e9c46d",
+    "xctestSha256": "d339f1933249d51d808000df2e4ce0312029f00e2060896579537df8fb925ce6"
+  },
+  "coordination": {
+    "nativeBaselineBlobAtGateStartAndImmediatePostGate": "0d389184f6cc341d61e6d71dec6be75d00a79e0e",
+    "nativeBaselineBlobAtFinalReview": "b0dce16ca9844ce499d07ea090ed4ff7cedae6f9",
+    "nativeBaselinePostRunDriftObservedAt": "2026-09-06T17:15:48Z",
+    "tensorLutRoundTripBlobAtGateStartAndFinalReview": "285441315e1bddf4268059e51cd4ef3629c925c7",
+    "receiptsDependOnNativeBaseline": false
+  },
+  "results": [
+    {
+      "id": "compiler-three-tier",
+      "status": "pass",
+      "scope": "default Enigma validation fixture",
+      "childReturnCode": 0,
+      "markers": ["lane 42 exclusive plaintext recovery — PASS", "Cleartext netlist ≡ oracle for HELUT baseline — PASS", "Crib window contains SIEGFR: PASS", "Spike isolation of SDV among 200 hypotheses — PASS", "VALIDATION COMPLETE — tiers 1–3 green."]
+    },
+    {
+      "id": "c69-functional-sing",
+      "status": "functional-pass-diagnostic-only",
+      "scope": "full-adder N=1024 n=512 covering-b2 sigma=128 one vector",
+      "childReturnCode": 0,
+      "wallSeconds": 35.1628,
+      "noisyBkConfidenceCertificate": false
+    },
+    {
+      "id": "tensorlut-formal",
+      "status": "pass",
+      "tests": 1,
+      "failures": 0
+    },
+    {
+      "id": "tensorlut-scaling",
+      "status": "pass-with-boundary",
+      "tests": 5,
+      "failures": 0,
+      "seconds": 125.522,
+      "generalComplexityClaim": false,
+      "abcResourceWin": false
+    },
+    {
+      "id": "tensorlut-sequential-one-dff",
+      "status": "pass",
+      "tests": 1,
+      "failures": 0,
+      "seconds": 9.885
+    },
+    {
+      "id": "mulein-future-known-control",
+      "status": "pass",
+      "tests": 2,
+      "failures": 0,
+      "seconds": 519.361,
+      "p1030680Evidence": false,
+      "fhe": false
+    },
+    {
+      "id": "garble-gpu-known-control",
+      "status": "observed-pass-table",
+      "hostGpuMismatches": 0,
+      "hostGpuComparisons": 192,
+      "p1030680Evidence": false
+    },
+    {
+      "id": "indel-known-control",
+      "status": "mechanism-observation",
+      "wrongSplicesRejectedByLegality": 28,
+      "wrongSplicesEvaluatedByBoard": 0,
+      "boardSpecificityMeasured": false,
+      "p1030680Evidence": false
+    }
+  ],
+  "claimsRemainingWithdrawnOrOpen": [
+    "cleartext batch throughput superiority",
+    "native-dimension noisy PicoRV32 at C60/C61 parameters",
+    "general TensorLUT search-complexity decoupling or GA completeness",
+    "area/depth superiority over ABC",
+    "P1030680 corruption, key, plaintext, decrypt, BREAK, or global negative",
+    "discrete-GPU superiority"
+  ]
+}

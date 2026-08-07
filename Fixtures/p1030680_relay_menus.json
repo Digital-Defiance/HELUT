@@ -1,0 +1,169 @@
+{
+  "target": "P1030680",
+  "ciphertext": "JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF",
+  "note": "Relay hypothesis. Windows carried by exactly ONE broken U-534 decrypt, which crib_mine.py excludes by construction via --emit-min-messages>=2. A one-off order relayed onto a training net is verbatim content, not stock register, so the recurrence filter is the wrong gate for it. Loop-ranked, capped per source message for hypothesis diversity. Emitted by Scripts/relay_crib_mine.py.",
+  "cribs": [
+    {
+      "text": "CHPRUEFENUSDNEUVERSCHLUESSELTABSETENXFUN",
+      "messages": 1,
+      "offsets": [
+        12
+      ]
+    },
+    {
+      "text": "HPRUEFENUSDNEUVERSCHLUESSELTABSETENXFUNL",
+      "messages": 1,
+      "offsets": [
+        13
+      ]
+    },
+    {
+      "text": "XUUUBOOTEYFUENFXUUUFLOTTXYVIERXUUUFLOTTX",
+      "messages": 1,
+      "offsets": [
+        14
+      ]
+    },
+    {
+      "text": "SDERGEGENWAERTIGENLAGEERGEBENXGEZXREICHS",
+      "messages": 1,
+      "offsets": [
+        31
+      ]
+    },
+    {
+      "text": "TZUEBELSTELLTGEGENSTELLENVERKEHRABZWONUL",
+      "messages": 1,
+      "offsets": [
+        31
+      ]
+    },
+    {
+      "text": "ZUEBELSTELLTGEGENSTELLENVERKEHRABZWONULL",
+      "messages": 1,
+      "offsets": [
+        32
+      ]
+    },
+    {
+      "text": "LOTTLXVVVUUUVIRSIUENNULEINSXXERBITTEJKIE",
+      "messages": 1,
+      "offsets": [
+        31
+      ]
+    },
+    {
+      "text": "ULDREIKKEISELEKKXXISTSECHSSTUENDLICHESDO",
+      "messages": 1,
+      "offsets": [
+        11
+      ]
+    },
+    {
+      "text": "LDREIKKEISELEKKXXISTSECHSSTUENDLICHESDOC",
+      "messages": 1,
+      "offsets": [
+        12
+      ]
+    },
+    {
+      "text": "CHRXUUUSTUETZPUNKTLUEBECKVVVCHEFVIERXUUU",
+      "messages": 1,
+      "offsets": [
+        30
+      ]
+    },
+    {
+      "text": "HRXUUUSTUETZPUNKTLUEBECKVVVCHEFVIERXUUUF",
+      "messages": 1,
+      "offsets": [
+        31
+      ]
+    },
+    {
+      "text": "TYSSSMMMHHHSSSOSTAZWWFUNFXUUUFLOTTXYFUNF",
+      "messages": 1,
+      "offsets": [
+        19,
+        20
+      ]
+    },
+    {
+      "text": "FIGKIELBLEIBENXDHEIKKBESTARTEHXNGERBETEN",
+      "messages": 1,
+      "offsets": [
+        29
+      ]
+    },
+    {
+      "text": "IGKIELBLEIBENXDHEIKKBESTARTEHXNGERBETENX",
+      "messages": 1,
+      "offsets": [
+        30
+      ]
+    },
+    {
+      "text": "REIKKEISELEKKXXEINSKKUNDICHTIGKEITROHRVI",
+      "messages": 1,
+      "offsets": [
+        10
+      ]
+    },
+    {
+      "text": "EIKKEISELEKKXXEINSKKUNDICHTIGKEITROHRVIE",
+      "messages": 1,
+      "offsets": [
+        11
+      ]
+    },
+    {
+      "text": "NANLAGEWARTEAUFUUULEITSTELLEXFRAGEXXWANN",
+      "messages": 1,
+      "offsets": [
+        23
+      ]
+    },
+    {
+      "text": "ANLAGEWARTEAUFUUULEITSTELLEXFRAGEXXWANNW",
+      "messages": 1,
+      "offsets": [
+        24
+      ]
+    },
+    {
+      "text": "USBXYVIERXYZWOFUNFXUXZWOUECHSXUUUFLXXHIE",
+      "messages": 1,
+      "offsets": [
+        21
+      ]
+    },
+    {
+      "text": "SBXYVIERXYZWOFUNFXUXZWOUECHSXUUUFLXXHIER",
+      "messages": 1,
+      "offsets": [
+        22
+      ]
+    },
+    {
+      "text": "UENDEYTTTFFFEINSFUNFYTTCFFFEINSSIBENVONV",
+      "messages": 1,
+      "offsets": [
+        10
+      ]
+    },
+    {
+      "text": "ENDEYTTTFFFEINSFUNFYTTCFFFEINSSIBENVONVO",
+      "messages": 1,
+      "offsets": [
+        11
+      ]
+    },
+    {
+      "text": "UNGVONVONEINSNEUNXUUUFLOTTFFFTTTEINSZWOZ",
+      "messages": 1,
+      "offsets": [
+        10
+      ]
+    }
+  ]
+}

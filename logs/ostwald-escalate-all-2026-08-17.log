@@ -1,0 +1,24 @@
+######## logs/quarantine_regenbogen.json
+candidates    : 22
+noise floor   : mean -3.7315, best of 12 random settings -3.3949
+NO BREAK — no escalated candidate clears crib-exact ∧ IC ≥ 0.055 ∧ tail > -3.6.
+  best climbed -3.7316 (noise best -3.3949, Δ -0.3367) IC 0.0477 tail -3.7316
+  and it does not even clear the random-setting floor, so these stops
+######## logs/quarantine_regenbogen_hela.json
+candidates    : 7
+noise floor   : mean -3.7989, best of 12 random settings -3.5512
+NO BREAK — no escalated candidate clears crib-exact ∧ IC ≥ 0.055 ∧ tail > -3.6.
+  best climbed -3.7807 (noise best -3.5512, Δ -0.2295) IC 0.0426 tail -3.7807
+  and it does not even clear the random-setting floor, so these stops
+######## logs/quarantine_uebung_nearmiss_soft43.json
+candidates    : 55
+noise floor   : mean -3.7171, best of 12 random settings -3.4639
+NO BREAK — no escalated candidate clears crib-exact ∧ IC ≥ 0.055 ∧ tail > -3.6.
+  best climbed -3.6583 (noise best -3.4639, Δ -0.1943) IC 0.0520 tail -3.6583
+  and it does not even clear the random-setting floor, so these stops
+######## logs/quarantine_maxupper_rerun.json
+candidates    : 2
+noise floor   : mean -3.7027, best of 12 random settings -3.4293
+NO BREAK — no escalated candidate clears crib-exact ∧ IC ≥ 0.055 ∧ tail > -3.6.
+  best climbed -4.2270 (noise best -3.4293, Δ -0.7976) IC 0.0407 tail -4.2270
+  and it does not even clear the random-setting floor, so these stops

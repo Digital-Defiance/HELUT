@@ -1,0 +1,147 @@
+HELUT backend-neutral discrete-GPU contract receipt
+UTC artifact epoch: 2026-09-06T00:55:47Z
+Verdict: PORTABLE HARNESS COMPLETE; ACTUAL DISCRETE-GPU COMPARISON NOT MEASURED
+
+Claim boundary
+--------------
+This receipt proves that HELUT can freeze one lane-distinct workload, accept complete output rows plus raw synchronized timing samples from an independent backend, and replay the result against a locally recomputed clear oracle. It does not prove CUDA, HIP, ROCm, Vulkan, NVIDIA, AMD, or discrete-GPU performance. The measured result below is Apple integrated Metal/MPSGraph provenance used to exercise the interchange and replay path, not a discrete-GPU result and not a discrete-versus-integrated comparison.
+
+Frozen workload
+---------------
+kind: helut.distinct-lane.workload.v1
+schemaVersion: 1
+mode: distinct-verified-v1
+assignmentSchema: distinct-input-stride-v1
+encodingSchema: constant-fill-u32-v1
+lutSemantics: yosys-lut-lsb-address-v1
+outputDigestSchema: fnv1a64-lane-port-bit-v1
+timingScope: synchronized-graph-run-v1
+module: ripple4
+degree: 1
+lanes: 256
+trials: 6
+warmup: 1
+input ports, in serialized order: a[4], b[4]
+output ports, in serialized order: cout[1], s[4]
+workload ID: sha256-a7f061d4dee4d00ceb93dbc3fb82e462295d4d6deafc721432b78ec1d4c7c498
+embedded Yosys JSON SHA-256: sha256-00155b3cb4ba07cbeb0e24046c4dc67bc57749e7abd277914e8dc163b3059416
+expected clear digest: fnv1a64-316ae77a78a0150d
+artifact: logs/helut-discrete-gpu-contract-20260906T005547Z/workload.json
+artifact SHA-256: 1559607b6122181aa4bb22f469534d60d1691ce0f08565ce7712b3aa1f48e68d
+
+The workload is self-contained: it embeds the exact Yosys JSON bytes as base64, binds those bytes with SHA-256, names the module explicitly, freezes all 256 lane inputs and port ordering, and binds the length-prefixed binary workload transcript with the workload ID. Loading fails closed if the JSON, netlist bytes, workload ID, lane rows, schemas, or clear oracle digest do not agree.
+
+Locally produced contract result
+--------------------------------
+kind: helut.distinct-lane.result.v1
+schemaVersion: 1
+workload ID: sha256-a7f061d4dee4d00ceb93dbc3fb82e462295d4d6deafc721432b78ec1d4c7c498
+output digest: fnv1a64-316ae77a78a0150d
+complete output rows: 256 rows x 5 bits = 1,280 bits
+raw timing samples (nanoseconds): [18316031, 597000, 488997, 821948, 968099, 494957]
+timing unit: nanoseconds
+timing scope: synchronized-graph-run-v1
+result warmup: 1
+artifact: logs/helut-discrete-gpu-contract-20260906T005547Z/metal-result.json
+artifact SHA-256: 8888c1f6a04961aa3a8f0c75cedb250d2e795999e2c2ab14c13514ea66f421d8
+
+environment provenance (not attestation):
+  vendor: Apple
+  device: Apple M4 Max
+  device identifier: 0x000000010000044c
+  architecture: arm64
+  operating system: Version 26.6.2 (Build 25G83)
+  execution backend: metal-mpsgraph
+  implementation: HELUT YosysGraphCompiler multilinear
+  implementation version: distinct-verified-v1
+  unified memory: true
+  low power: false
+  removable: false
+
+Independent system_profiler evidence:
+  model: Apple M4 Max
+  GPU cores: 40
+  bus: built-in
+  Metal family: Metal 4
+
+Replay evidence
+---------------
+Command:
+  .build/release/helut-bench --bench --bench-distinct-replay-workload logs/helut-discrete-gpu-contract-20260906T005547Z/workload.json --bench-distinct-replay-result logs/helut-discrete-gpu-contract-20260906T005547Z/metal-result.json
+
+Locally recomputed replay:
+  workload_id=sha256-a7f061d4dee4d00ceb93dbc3fb82e462295d4d6deafc721432b78ec1d4c7c498
+  lanes=256
+  input_bits=8
+  checked=1280
+  mismatches=0
+  distinct_inputs=256
+  distinct_lane_outputs=31
+  digest=fnv1a64-316ae77a78a0150d
+  first_ns=18316031
+  steady_median_ns=597000.0
+  steady_avg_ns=674200.2
+  timing_valid=true
+  result=PASS
+  child process termination status=0
+
+The IDE shell transport separately displayed synthetic "Exit Code: -1" after complete output. A capturing child process recorded the executable's real termination status as 0, and the release XCTest integration path independently asserts zero termination status. The transport status is not treated as executable evidence.
+
+Replay trust model
+------------------
+Replay does not trust a backend PASS string, mismatch count, aggregate timing, or output digest. It requires every flattened output row and locally recomputes the clear oracle, FNV-1a digest, mismatch count, compared-bit count, distinct signatures, and timing aggregates. Hardware strings are provenance only.
+
+Negative controls exercised by DistinctLaneExchangeTests:
+  - one output-bit corruption is recomputed as exactly one mismatch and timing_valid=false;
+  - a stale output digest is rejected;
+  - a wrong workload ID is rejected;
+  - a missing lane is rejected;
+  - a non-binary output row is rejected;
+  - a tampered embedded netlist/workload is rejected.
+
+Runnable workflow
+-----------------
+1. Build the shipped tools:
+     swift build -c release
+
+2. Export the exact workload without creating a Metal device:
+     .build/release/helut-bench --bench Generated/Netlists/Examples/ripple4_netlist.json --bench-module ripple4 --degree 1 --batch 256 --ticks 6 --warmup 1 --bench-distinct-lanes --bench-distinct-export-workload logs/helut-discrete-gpu-contract-20260906T005547Z/workload.json
+
+3. On another backend, consume workload.json exactly and emit helut.distinct-lane.result.v1 containing:
+     - the unchanged workloadID;
+     - one binary output row for every lane, in frozen output-port order;
+     - all raw synchronized graph-run samples as integer nanoseconds;
+     - backend/device provenance.
+   No CUDA/HIP executable is claimed here because none exists in this repository. The JSON schema and shipped replay command are the runnable boundary.
+
+4. Bring the result file back and run the replay command above. Only a locally replayed result with mismatches=0 and timing_valid=true is eligible for comparison. Compare raw synchronized-graph-run samples only between results carrying the same workload ID; do not mix compile, upload, packing, oracle, readback, or verification time into that graph timing.
+
+The local Apple Metal result was generated with:
+  .build/release/helut-bench --bench Generated/Netlists/Examples/ripple4_netlist.json --bench-module ripple4 --degree 1 --batch 256 --ticks 6 --warmup 1 --bench-distinct-lanes --bench-distinct-export-workload logs/helut-discrete-gpu-contract-20260906T005547Z/workload.json --bench-distinct-result-out logs/helut-discrete-gpu-contract-20260906T005547Z/metal-result.json
+
+Exact blocker to an actual discrete comparison
+----------------------------------------------
+Available hardware is Apple M4 Max, 40 GPU cores, built-in/unified-memory, Metal 4. It is not a discrete NVIDIA or AMD GPU.
+
+Tool discovery:
+  nvcc: NOT_FOUND
+  nvidia-smi: NOT_FOUND
+  hipcc: NOT_FOUND
+  rocminfo: NOT_FOUND
+
+Production-source search for CUDA, HIP, ROCm, NVIDIA, AMD, and Vulkan found no corresponding execution backend. CUDA matches are comments referring to the external enigma-cuda project, not runnable HELUT backend code. Therefore this machine cannot produce an honest NVIDIA/AMD discrete result, and the repository has no production CUDA/HIP/ROCm/Vulkan runner to invoke elsewhere yet. Closing that final empirical gap requires both (a) implementing an independent backend that emits the frozen result schema and (b) running it on identified discrete hardware. Device-name strings alone are not accepted as attestation.
+
+Validation
+----------
+  swift test -c release --filter DistinctLaneExchangeTests
+    4 tests, 0 failures; captured child exit=0
+  swift test -c release --filter BatchLaneDistinctTests
+    3 tests, 0 failures; captured child exit=0
+  swift build -c release
+    build complete; captured child exit=0
+  git diff --check -- Sources/HELUTToolKit/DistinctLaneExchange.swift Sources/HELUTToolKit/HelutBench.swift Sources/HELUTCLI/CLIFlags.swift Tests/HELUTTests/DistinctLaneExchangeTests.swift
+    captured child exit=0
+
+Final task-6 verdict
+--------------------
+The backend-neutral apples-to-apples workload/result/replay harness is complete and executable. A B=256 Apple integrated-Metal result has passed local oracle replay and demonstrates the contract. No discrete-GPU measurement or speedup is claimed. The remaining discrete empirical measurement is blocked exactly by absent discrete NVIDIA/AMD hardware and absent HELUT CUDA/HIP/ROCm/Vulkan runner code, not by an undefined workload or unverifiable result format.

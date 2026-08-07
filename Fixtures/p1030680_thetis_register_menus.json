@@ -1,0 +1,290 @@
+{
+  "target": "P1030680",
+  "ciphertext": "JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF",
+  "note": "Thetis-register hypothesis: Kenngruppe drill (ACH/SEDM/OEDM) and training-net openings at offsets 0\u20135, length\u226516. Not Potsdam corpus cribs; not Girard Buchgruppen form annotation. Run with --bombe-min-crib 16 --bombe-confirm 1.",
+  "cribs": [
+    {
+      "text": "AUSBILDUNGSFUNKSPRUCH",
+      "messages": 0,
+      "offsets": [
+        3
+      ],
+      "anchored": false
+    },
+    {
+      "text": "THETISXTHETISXTHETIS",
+      "messages": 0,
+      "offsets": [
+        2,
+        4
+      ],
+      "anchored": false
+    },
+    {
+      "text": "VERFAHRENKENNGRUPPE",
+      "messages": 0,
+      "offsets": [
+        1,
+        4
+      ],
+      "anchored": false
+    },
+    {
+      "text": "ACHACHACHACHACHACH",
+      "messages": 0,
+      "offsets": [
+        2,
+        5
+      ],
+      "anchored": false
+    },
+    {
+      "text": "LEHRGANGFUNKSPRUCH",
+      "messages": 0,
+      "offsets": [
+        1,
+        2
+      ],
+      "anchored": false
+    },
+    {
+      "text": "ANALLEFUNKSTELLEN",
+      "messages": 0,
+      "offsets": [
+        1,
+        3
+      ],
+      "anchored": false
+    },
+    {
+      "text": "GRUPPENZAHLXXXXXX",
+      "messages": 0,
+      "offsets": [
+        3,
+        4
+      ],
+      "anchored": false
+    },
+    {
+      "text": "SEDMSSEDMSSEDMSSE",
+      "messages": 0,
+      "offsets": [
+        0,
+        2
+      ],
+      "anchored": true
+    },
+    {
+      "text": "THETISFUNKSPRUCHX",
+      "messages": 0,
+      "offsets": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "anchored": true
+    },
+    {
+      "text": "UEBUNGSSPRUCHXXXX",
+      "messages": 0,
+      "offsets": [
+        3,
+        4,
+        5
+      ],
+      "anchored": false
+    },
+    {
+      "text": "ACHACHACHACHACHA",
+      "messages": 0,
+      "offsets": [
+        2,
+        3,
+        5
+      ],
+      "anchored": false
+    },
+    {
+      "text": "ACHSEDMOEDMACHSE",
+      "messages": 0,
+      "offsets": [
+        1,
+        3
+      ],
+      "anchored": false
+    },
+    {
+      "text": "ANALLEXXANALLEXX",
+      "messages": 0,
+      "offsets": [
+        0,
+        1,
+        3
+      ],
+      "anchored": true
+    },
+    {
+      "text": "ANFUNKLEHRGANGXX",
+      "messages": 0,
+      "offsets": [
+        0,
+        1,
+        2
+      ],
+      "anchored": true
+    },
+    {
+      "text": "AUSBILDUNGXFUNKX",
+      "messages": 0,
+      "offsets": [
+        0,
+        5
+      ],
+      "anchored": true
+    },
+    {
+      "text": "AUSBILDUNGXXXXXX",
+      "messages": 0,
+      "offsets": [
+        5
+      ],
+      "anchored": false
+    },
+    {
+      "text": "EACHSEDMEACHSEDM",
+      "messages": 0,
+      "offsets": [
+        0,
+        1
+      ],
+      "anchored": true
+    },
+    {
+      "text": "FUNKLEHRGANGXXXX",
+      "messages": 0,
+      "offsets": [
+        2,
+        3,
+        4
+      ],
+      "anchored": false
+    },
+    {
+      "text": "FUNKSPRUCHUEBUNG",
+      "messages": 0,
+      "offsets": [
+        0,
+        2,
+        3,
+        5
+      ],
+      "anchored": true
+    },
+    {
+      "text": "KACHOEDMKACHOEDM",
+      "messages": 0,
+      "offsets": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "anchored": true
+    },
+    {
+      "text": "LEHRSPRUCHXXXXXX",
+      "messages": 0,
+      "offsets": [
+        5
+      ],
+      "anchored": false
+    },
+    {
+      "text": "OEDMOEDMOEDMOEDM",
+      "messages": 0,
+      "offsets": [
+        0,
+        2,
+        4
+      ],
+      "anchored": true
+    },
+    {
+      "text": "PRAKTIKUMFUNKXXX",
+      "messages": 0,
+      "offsets": [
+        5
+      ],
+      "anchored": false
+    },
+    {
+      "text": "SCHULFUNKSPRUCHX",
+      "messages": 0,
+      "offsets": [
+        1,
+        2,
+        4,
+        5
+      ],
+      "anchored": false
+    },
+    {
+      "text": "SEDMOEDMACHSEDMO",
+      "messages": 0,
+      "offsets": [
+        1,
+        2,
+        4
+      ],
+      "anchored": false
+    },
+    {
+      "text": "THETISXTHETISXTH",
+      "messages": 0,
+      "offsets": [
+        2,
+        4
+      ],
+      "anchored": false
+    },
+    {
+      "text": "VONFUNKLEHRGANGX",
+      "messages": 0,
+      "offsets": [
+        0,
+        1,
+        3,
+        5
+      ],
+      "anchored": true
+    },
+    {
+      "text": "XXXSEDMXXXSEDMXX",
+      "messages": 0,
+      "offsets": [
+        2,
+        3
+      ],
+      "anchored": false
+    },
+    {
+      "text": "XXXXACHXXXXACHXX",
+      "messages": 0,
+      "offsets": [
+        1,
+        2
+      ],
+      "anchored": false
+    },
+    {
+      "text": "ZEITGRUPPEXXXXXX",
+      "messages": 0,
+      "offsets": [
+        4,
+        5
+      ],
+      "anchored": false
+    }
+  ]
+}

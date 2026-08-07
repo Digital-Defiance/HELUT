@@ -1,0 +1,91 @@
+\chapter{Application gallery}
+\label{ch:apps}
+
+Applications exist to keep pillars honest.
+A compiler with no netlist is a speech; a melt with no cipher is a float
+toy; a polymorphic cipher with no Red is a blog post.
+
+Canonical nine-slot card: \corpus{directives/application-gallery.md}.
+
+\section{Pillar~I (encrypted)}
+
+\begin{enumerate}
+  \item \textbf{Encrypted \texttt{full\_adder} SING.}
+        Multi-LUT correctness at production-shaped $N$ (\cid{6}, \cid{20};
+        \cid{21} is $e{=}0$ BK). Covering noisy adder is \cid{52}.
+        Balanced covering-b2 at the same $N$ and $k{=}7$ is \cid{70}.
+  \item \textbf{Encrypted tree / regex SING.}
+        Compiler is not adder-specialized (\cid{6} demo $N$; regex covering
+        \cid{57} at production $N$). Tree Metal covering remains.
+  \item \textbf{Hardness $+$ noisy-BK certificates.}
+        Estimator fill-in and covering-gadget residuals (\cid{5}, \cid{22},
+        \cid{23}). Covering Track~A at $N{=}1024$, $\sigma{=}128$, $k{=}7$
+        is \cid{52}--\cid{54}; unsigned covering-b2 $k{=}7$ stays short of $-64$ (\cid{57});
+        balanced digits clear the full-adder gate (\cid{70}).
+        Product-shaped \texttt{cryptoPublicMS} inject
+        remains a graded failure (\cid{26}, \cid{56}); native $k{=}1$ remains
+        \cid{37}/\cid{55} (\hid{4} remainder).
+  \item \textbf{Encrypted sequential.}
+        Counter (\cid{38}), toy \texttt{NOP}/\texttt{ADD} (\cid{40}),
+        PicoRV32 \texttt{addi}+\texttt{sw}+\texttt{lw} at demo $N{=}8$
+        (\cid{50}); Metal NOP-fetch (\cid{51}).
+  \item \textbf{4-bit CSA vs ripple LUT cut} (\cid{42}).
+        Architecture, not TensorLUT melt.
+\end{enumerate}
+
+\section{Pillar~I shape laboratory (oracle --- not FHE)}
+
+\begin{enumerate}
+  \item \textbf{Decision tree.}
+        A 4-bit non-linear boundary, 7 LUTs. Exact threshold logic on a
+        batch of records. Teaches: non-linear Boolean $\neq$ neural net,
+        and $B$ is a capacity knob.
+  \item \textbf{Regex / DFA search.}
+        3-character matcher, 23 LUTs. Large $B$ turns unified memory into
+        the story.
+  \item \textbf{PicoRV32.}
+        ${\sim}4.8\mathrm{k}$ LUTs, ${\sim}1.5\mathrm{k}$ DFFs. Scripted
+        \texttt{resetn} boot. Oracle path: \cid{1}. Encrypted 1-tick at
+        demo $N{=}8$: \cid{50} \texttt{lw} sees 1; Metal NOP-fetch \cid{51}.
+\end{enumerate}
+
+\section{Pillar~II}
+
+\begin{enumerate}
+  \item \textbf{M4 TensorLUT baseline emit} (\cid{8}).
+  \item \textbf{Stecker involution sandwich / formal} (\cid{9}, \cid{19},
+        \cid{25}, \cid{44}, \cid{48}).
+  \item \textbf{Shatter vs hold under $\lambda$} --- seminar empirics; not a
+        decrypt (\hid{6}).
+\end{enumerate}
+
+\section{Pillar~III}
+
+\begin{enumerate}
+  \item \textbf{SoftBus reciprocity / bijection} (\cid{10}, \cid{24}).
+  \item \textbf{Encrypted 1-round frozen scramble} (\cid{39}) --- algebraic
+        slice under torus FHE, not live BRAM.
+  \item \textbf{Red battery} (TensorLUT / KPA / \texttt{ent}) --- empirical
+        grades in \texttt{logs/enigma256-*}.
+  \item \textbf{Fail-closed NLFF harden} (\cid{24} clause~5).
+\end{enumerate}
+
+\section{Campaign as a case study (not a decrypt)}
+
+Welchman-path break of known P1030684 (\cid{2}), $\le 10$-plug SAT kill
+chain (\cid{3}), Potsdam/Plaice $\neq$ P1030680 (\cid{11}), windowed
+discriminator versus whole-message turnover (\cid{12}): these belong in a
+cryptanalysis seminar attached to Pillar~II methods.
+
+\nonclaimbox{This book does not claim a decrypt of P1030680.
+Campaign fitness is cleartext Metal batch, not HELUT encrypted tick rate.}
+
+\begin{exercise}
+Pick one application tier and write a five-cell card for it.
+If you cannot name two runnable instances, it is not ready for the gallery
+lecture.
+\end{exercise}
+
+\growswhen{An encrypted tree/regex Metal SING table at production $N$;
+PicoRV covering at production $N$; any new application that earns a \claimkind{C}
+row. Site gallery figures already exist under \texttt{site/public/gallery/}.}

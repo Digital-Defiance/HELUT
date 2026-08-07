@@ -1,0 +1,1874 @@
+{
+  "bm_bits": 2048,
+  "combined_formula_grades": [
+    {
+      "accepted": true,
+      "algebraic_degree": 6,
+      "first_order_correlation_immune": true,
+      "inputs": 16,
+      "max_abs_nonconstant_walsh_bound": 576,
+      "max_normalized_linear_correlation_bound": 0.0087890625,
+      "ones": 32768
+    },
+    {
+      "accepted": true,
+      "algebraic_degree": 6,
+      "first_order_correlation_immune": true,
+      "inputs": 16,
+      "max_abs_nonconstant_walsh_bound": 576,
+      "max_normalized_linear_correlation_bound": 0.0087890625,
+      "ones": 32768
+    },
+    {
+      "accepted": true,
+      "algebraic_degree": 5,
+      "first_order_correlation_immune": true,
+      "inputs": 16,
+      "max_abs_nonconstant_walsh_bound": 576,
+      "max_normalized_linear_correlation_bound": 0.0087890625,
+      "ones": 32768
+    },
+    {
+      "accepted": true,
+      "algebraic_degree": 6,
+      "first_order_correlation_immune": true,
+      "inputs": 16,
+      "max_abs_nonconstant_walsh_bound": 576,
+      "max_normalized_linear_correlation_bound": 0.0087890625,
+      "ones": 32768
+    }
+  ],
+  "component_gate_count": 24,
+  "component_generations": 160,
+  "component_population": 128,
+  "components": [
+    {
+      "accepted_generation": 0,
+      "gates": [
+        {
+          "controls": [
+            3,
+            5
+          ],
+          "op": "and2_xor",
+          "target": 6
+        },
+        {
+          "controls": [
+            1
+          ],
+          "op": "xor",
+          "target": 2
+        },
+        {
+          "controls": [
+            2,
+            0,
+            5
+          ],
+          "op": "and3_xor",
+          "target": 4
+        },
+        {
+          "controls": [
+            4,
+            5
+          ],
+          "op": "and2_xor",
+          "target": 6
+        },
+        {
+          "controls": [
+            3,
+            5
+          ],
+          "op": "and2_xor",
+          "target": 4
+        },
+        {
+          "controls": [
+            2,
+            6
+          ],
+          "op": "and2_xor",
+          "target": 4
+        },
+        {
+          "controls": [
+            0
+          ],
+          "op": "xor",
+          "target": 3
+        },
+        {
+          "controls": [
+            2
+          ],
+          "op": "xor",
+          "target": 1
+        },
+        {
+          "controls": [
+            4,
+            1
+          ],
+          "op": "and2_xor",
+          "target": 2
+        },
+        {
+          "controls": [
+            1,
+            5
+          ],
+          "op": "and2_xor",
+          "target": 4
+        },
+        {
+          "controls": [
+            2
+          ],
+          "op": "xor",
+          "target": 6
+        },
+        {
+          "controls": [
+            6,
+            1
+          ],
+          "op": "and2_xor",
+          "target": 5
+        },
+        {
+          "controls": [
+            3,
+            2
+          ],
+          "op": "and2_xor",
+          "target": 5
+        },
+        {
+          "controls": [
+            1,
+            5
+          ],
+          "op": "and2_xor",
+          "target": 2
+        },
+        {
+          "controls": [
+            4
+          ],
+          "op": "xor",
+          "target": 6
+        },
+        {
+          "controls": [
+            1,
+            6
+          ],
+          "op": "and2_xor",
+          "target": 3
+        },
+        {
+          "controls": [
+            4,
+            0
+          ],
+          "op": "and2_xor",
+          "target": 5
+        },
+        {
+          "controls": [
+            1,
+            0,
+            3
+          ],
+          "op": "and3_xor",
+          "target": 2
+        },
+        {
+          "controls": [
+            1,
+            5
+          ],
+          "op": "and2_xor",
+          "target": 2
+        },
+        {
+          "controls": [
+            4,
+            2
+          ],
+          "op": "and2_xor",
+          "target": 1
+        },
+        {
+          "controls": [
+            4,
+            6
+          ],
+          "op": "and2_xor",
+          "target": 0
+        },
+        {
+          "controls": [
+            5,
+            4
+          ],
+          "op": "and2_xor",
+          "target": 0
+        },
+        {
+          "controls": [
+            3,
+            1
+          ],
+          "op": "and2_xor",
+          "target": 0
+        },
+        {
+          "controls": [
+            6,
+            4
+          ],
+          "op": "and2_xor",
+          "target": 3
+        }
+      ],
+      "grade": {
+        "accepted": true,
+        "algebraic_degree": 5,
+        "dependent_inputs": 7,
+        "max_abs_autocorrelation": 48,
+        "max_abs_nonconstant_walsh": 24,
+        "max_normalized_linear_correlation": 0.1875,
+        "nonlinearity": 52,
+        "ones": 64
+      },
+      "output": 5,
+      "search_seed_hex": "0xe256000200000000",
+      "truth_hex": "a39d51afd62adcd05b55a9672ee22418"
+    },
+    {
+      "accepted_generation": 3,
+      "gates": [
+        {
+          "controls": [
+            6,
+            0
+          ],
+          "op": "and2_xor",
+          "target": 2
+        },
+        {
+          "controls": [
+            4,
+            0
+          ],
+          "op": "and2_xor",
+          "target": 1
+        },
+        {
+          "controls": [
+            0,
+            3,
+            6
+          ],
+          "op": "and3_xor",
+          "target": 2
+        },
+        {
+          "controls": [
+            3,
+            5
+          ],
+          "op": "and2_xor",
+          "target": 1
+        },
+        {
+          "controls": [
+            0,
+            4,
+            1
+          ],
+          "op": "and3_xor",
+          "target": 3
+        },
+        {
+          "controls": [
+            1
+          ],
+          "op": "xor",
+          "target": 5
+        },
+        {
+          "controls": [
+            3,
+            6,
+            4
+          ],
+          "op": "and3_xor",
+          "target": 1
+        },
+        {
+          "controls": [
+            0,
+            1,
+            6
+          ],
+          "op": "and3_xor",
+          "target": 4
+        },
+        {
+          "controls": [
+            5,
+            0
+          ],
+          "op": "and2_xor",
+          "target": 4
+        },
+        {
+          "controls": [
+            6,
+            4
+          ],
+          "op": "and2_xor",
+          "target": 5
+        },
+        {
+          "controls": [
+            6,
+            5,
+            1
+          ],
+          "op": "and3_xor",
+          "target": 3
+        },
+        {
+          "controls": [
+            3,
+            5
+          ],
+          "op": "and2_xor",
+          "target": 2
+        },
+        {
+          "controls": [
+            1
+          ],
+          "op": "xor",
+          "target": 6
+        },
+        {
+          "controls": [
+            1
+          ],
+          "op": "xor",
+          "target": 3
+        },
+        {
+          "controls": [
+            3,
+            2
+          ],
+          "op": "and2_xor",
+          "target": 5
+        },
+        {
+          "controls": [
+            2,
+            0
+          ],
+          "op": "and2_xor",
+          "target": 3
+        },
+        {
+          "controls": [
+            0
+          ],
+          "op": "xor",
+          "target": 4
+        },
+        {
+          "controls": [
+            0,
+            3
+          ],
+          "op": "and2_xor",
+          "target": 1
+        },
+        {
+          "controls": [
+            4,
+            1
+          ],
+          "op": "and2_xor",
+          "target": 2
+        },
+        {
+          "controls": [
+            6,
+            2
+          ],
+          "op": "and2_xor",
+          "target": 0
+        },
+        {
+          "controls": [
+            2,
+            4,
+            5
+          ],
+          "op": "and3_xor",
+          "target": 0
+        },
+        {
+          "controls": [
+            5,
+            3,
+            2
+          ],
+          "op": "and3_xor",
+          "target": 4
+        },
+        {
+          "controls": [
+            4,
+            6
+          ],
+          "op": "and2_xor",
+          "target": 3
+        },
+        {
+          "controls": [
+            4,
+            6,
+            5
+          ],
+          "op": "and3_xor",
+          "target": 0
+        }
+      ],
+      "grade": {
+        "accepted": true,
+        "algebraic_degree": 6,
+        "dependent_inputs": 7,
+        "max_abs_autocorrelation": 32,
+        "max_abs_nonconstant_walsh": 24,
+        "max_normalized_linear_correlation": 0.1875,
+        "nonlinearity": 52,
+        "ones": 64
+      },
+      "output": 3,
+      "search_seed_hex": "0x808d79bb7f4a7c15",
+      "truth_hex": "28934ec6d3776da07da0c6a47da6136c"
+    },
+    {
+      "accepted_generation": 1,
+      "gates": [
+        {
+          "controls": [
+            5,
+            1
+          ],
+          "op": "and2_xor",
+          "target": 2
+        },
+        {
+          "controls": [
+            3,
+            4
+          ],
+          "op": "and2_xor",
+          "target": 0
+        },
+        {
+          "controls": [
+            1,
+            3
+          ],
+          "op": "and2_xor",
+          "target": 5
+        },
+        {
+          "controls": [
+            5,
+            2
+          ],
+          "op": "and2_xor",
+          "target": 0
+        },
+        {
+          "controls": [
+            4,
+            5
+          ],
+          "op": "and2_xor",
+          "target": 2
+        },
+        {
+          "controls": [
+            1
+          ],
+          "op": "xor",
+          "target": 4
+        },
+        {
+          "controls": [
+            1,
+            2,
+            4
+          ],
+          "op": "and3_xor",
+          "target": 3
+        },
+        {
+          "controls": [
+            0,
+            3,
+            1
+          ],
+          "op": "and3_xor",
+          "target": 4
+        },
+        {
+          "controls": [
+            0
+          ],
+          "op": "xor",
+          "target": 1
+        },
+        {
+          "controls": [
+            3,
+            0
+          ],
+          "op": "and2_xor",
+          "target": 2
+        },
+        {
+          "controls": [
+            4,
+            1
+          ],
+          "op": "and2_xor",
+          "target": 5
+        },
+        {
+          "controls": [
+            5,
+            0
+          ],
+          "op": "and2_xor",
+          "target": 2
+        },
+        {
+          "controls": [
+            6,
+            3
+          ],
+          "op": "and2_xor",
+          "target": 5
+        },
+        {
+          "controls": [
+            3,
+            1
+          ],
+          "op": "and2_xor",
+          "target": 6
+        },
+        {
+          "controls": [
+            2,
+            6,
+            0
+          ],
+          "op": "and3_xor",
+          "target": 3
+        },
+        {
+          "controls": [
+            1
+          ],
+          "op": "xor",
+          "target": 3
+        },
+        {
+          "controls": [
+            0,
+            2
+          ],
+          "op": "and2_xor",
+          "target": 4
+        },
+        {
+          "controls": [
+            2,
+            6
+          ],
+          "op": "and2_xor",
+          "target": 1
+        },
+        {
+          "controls": [
+            5
+          ],
+          "op": "xor",
+          "target": 3
+        },
+        {
+          "controls": [
+            6,
+            4
+          ],
+          "op": "and2_xor",
+          "target": 2
+        },
+        {
+          "controls": [
+            0,
+            6,
+            5
+          ],
+          "op": "and3_xor",
+          "target": 2
+        },
+        {
+          "controls": [
+            0
+          ],
+          "op": "xor",
+          "target": 2
+        },
+        {
+          "controls": [
+            2,
+            0
+          ],
+          "op": "and2_xor",
+          "target": 1
+        },
+        {
+          "controls": [
+            6,
+            4
+          ],
+          "op": "and2_xor",
+          "target": 0
+        }
+      ],
+      "grade": {
+        "accepted": true,
+        "algebraic_degree": 5,
+        "dependent_inputs": 7,
+        "max_abs_autocorrelation": 40,
+        "max_abs_nonconstant_walsh": 24,
+        "max_normalized_linear_correlation": 0.1875,
+        "nonlinearity": 52,
+        "ones": 64
+      },
+      "output": 2,
+      "search_seed_hex": "0x1ec4f374fe94f82a",
+      "truth_hex": "5d6022ec0beb78760ed16430b978fe9a"
+    },
+    {
+      "accepted_generation": 1,
+      "gates": [
+        {
+          "controls": [
+            2,
+            1
+          ],
+          "op": "and2_xor",
+          "target": 4
+        },
+        {
+          "controls": [
+            3
+          ],
+          "op": "xor",
+          "target": 5
+        },
+        {
+          "controls": [
+            1,
+            3
+          ],
+          "op": "and2_xor",
+          "target": 6
+        },
+        {
+          "controls": [
+            5,
+            4
+          ],
+          "op": "and2_xor",
+          "target": 0
+        },
+        {
+          "controls": [
+            4
+          ],
+          "op": "xor",
+          "target": 1
+        },
+        {
+          "controls": [
+            5,
+            4
+          ],
+          "op": "and2_xor",
+          "target": 6
+        },
+        {
+          "controls": [
+            4,
+            6
+          ],
+          "op": "and2_xor",
+          "target": 2
+        },
+        {
+          "controls": [
+            4,
+            3
+          ],
+          "op": "and2_xor",
+          "target": 2
+        },
+        {
+          "controls": [
+            5
+          ],
+          "op": "xor",
+          "target": 1
+        },
+        {
+          "controls": [
+            2,
+            1,
+            5
+          ],
+          "op": "and3_xor",
+          "target": 6
+        },
+        {
+          "controls": [
+            5,
+            3
+          ],
+          "op": "and2_xor",
+          "target": 6
+        },
+        {
+          "controls": [
+            2,
+            3
+          ],
+          "op": "and2_xor",
+          "target": 6
+        },
+        {
+          "controls": [
+            5,
+            0
+          ],
+          "op": "and2_xor",
+          "target": 4
+        },
+        {
+          "controls": [
+            1
+          ],
+          "op": "xor",
+          "target": 0
+        },
+        {
+          "controls": [
+            4,
+            2
+          ],
+          "op": "and2_xor",
+          "target": 5
+        },
+        {
+          "controls": [
+            0,
+            5,
+            6
+          ],
+          "op": "and3_xor",
+          "target": 1
+        },
+        {
+          "controls": [
+            6,
+            5
+          ],
+          "op": "and2_xor",
+          "target": 4
+        },
+        {
+          "controls": [
+            3,
+            0
+          ],
+          "op": "and2_xor",
+          "target": 4
+        },
+        {
+          "controls": [
+            2,
+            1
+          ],
+          "op": "and2_xor",
+          "target": 6
+        },
+        {
+          "controls": [
+            5,
+            3
+          ],
+          "op": "and2_xor",
+          "target": 1
+        },
+        {
+          "controls": [
+            4,
+            1
+          ],
+          "op": "and2_xor",
+          "target": 0
+        },
+        {
+          "controls": [
+            6,
+            2
+          ],
+          "op": "and2_xor",
+          "target": 1
+        },
+        {
+          "controls": [
+            2,
+            5
+          ],
+          "op": "and2_xor",
+          "target": 4
+        },
+        {
+          "controls": [
+            3,
+            6
+          ],
+          "op": "and2_xor",
+          "target": 4
+        }
+      ],
+      "grade": {
+        "accepted": true,
+        "algebraic_degree": 6,
+        "dependent_inputs": 7,
+        "max_abs_autocorrelation": 56,
+        "max_abs_nonconstant_walsh": 24,
+        "max_normalized_linear_correlation": 0.1875,
+        "nonlinearity": 52,
+        "ones": 64
+      },
+      "output": 4,
+      "search_seed_hex": "0xbcfc6d2e7ddf743f",
+      "truth_hex": "61ba65b5723f93c0abde9a6ad30f2300"
+    },
+    {
+      "accepted_generation": 1,
+      "gates": [
+        {
+          "controls": [
+            4
+          ],
+          "op": "xor",
+          "target": 3
+        },
+        {
+          "controls": [
+            3
+          ],
+          "op": "xor",
+          "target": 6
+        },
+        {
+          "controls": [
+            3,
+            1
+          ],
+          "op": "and2_xor",
+          "target": 5
+        },
+        {
+          "controls": [
+            1,
+            0,
+            2
+          ],
+          "op": "and3_xor",
+          "target": 5
+        },
+        {
+          "controls": [
+            6,
+            2
+          ],
+          "op": "and2_xor",
+          "target": 5
+        },
+        {
+          "controls": [
+            1,
+            5
+          ],
+          "op": "and2_xor",
+          "target": 4
+        },
+        {
+          "controls": [
+            6
+          ],
+          "op": "xor",
+          "target": 4
+        },
+        {
+          "controls": [
+            1,
+            0
+          ],
+          "op": "and2_xor",
+          "target": 6
+        },
+        {
+          "controls": [
+            1,
+            3
+          ],
+          "op": "and2_xor",
+          "target": 6
+        },
+        {
+          "controls": [
+            5
+          ],
+          "op": "xor",
+          "target": 1
+        },
+        {
+          "controls": [
+            6,
+            0
+          ],
+          "op": "and2_xor",
+          "target": 2
+        },
+        {
+          "controls": [
+            0,
+            3
+          ],
+          "op": "and2_xor",
+          "target": 1
+        },
+        {
+          "controls": [
+            1,
+            4
+          ],
+          "op": "and2_xor",
+          "target": 5
+        },
+        {
+          "controls": [
+            3
+          ],
+          "op": "xor",
+          "target": 4
+        },
+        {
+          "controls": [
+            3,
+            6,
+            5
+          ],
+          "op": "and3_xor",
+          "target": 4
+        },
+        {
+          "controls": [
+            2
+          ],
+          "op": "xor",
+          "target": 0
+        },
+        {
+          "controls": [
+            6,
+            0
+          ],
+          "op": "and2_xor",
+          "target": 1
+        },
+        {
+          "controls": [
+            2,
+            3
+          ],
+          "op": "and2_xor",
+          "target": 6
+        },
+        {
+          "controls": [
+            3,
+            1
+          ],
+          "op": "and2_xor",
+          "target": 6
+        },
+        {
+          "controls": [
+            2
+          ],
+          "op": "xor",
+          "target": 1
+        },
+        {
+          "controls": [
+            3,
+            1
+          ],
+          "op": "and2_xor",
+          "target": 4
+        },
+        {
+          "controls": [
+            5
+          ],
+          "op": "xor",
+          "target": 1
+        },
+        {
+          "controls": [
+            4,
+            1,
+            6
+          ],
+          "op": "and3_xor",
+          "target": 0
+        },
+        {
+          "controls": [
+            3,
+            1,
+            4
+          ],
+          "op": "and3_xor",
+          "target": 6
+        }
+      ],
+      "grade": {
+        "accepted": true,
+        "algebraic_degree": 5,
+        "dependent_inputs": 7,
+        "max_abs_autocorrelation": 64,
+        "max_abs_nonconstant_walsh": 24,
+        "max_normalized_linear_correlation": 0.1875,
+        "nonlinearity": 52,
+        "ones": 64
+      },
+      "output": 1,
+      "search_seed_hex": "0x5b33e6e7fd29f054",
+      "truth_hex": "6e83562d6ef4ded2878ca9347804de34"
+    },
+    {
+      "accepted_generation": 0,
+      "gates": [
+        {
+          "controls": [
+            1,
+            0
+          ],
+          "op": "and2_xor",
+          "target": 3
+        },
+        {
+          "controls": [
+            3,
+            0
+          ],
+          "op": "and2_xor",
+          "target": 2
+        },
+        {
+          "controls": [
+            4
+          ],
+          "op": "xor",
+          "target": 3
+        },
+        {
+          "controls": [
+            4,
+            1
+          ],
+          "op": "and2_xor",
+          "target": 6
+        },
+        {
+          "controls": [
+            3
+          ],
+          "op": "xor",
+          "target": 5
+        },
+        {
+          "controls": [
+            0,
+            6,
+            3
+          ],
+          "op": "and3_xor",
+          "target": 2
+        },
+        {
+          "controls": [
+            2,
+            3
+          ],
+          "op": "and2_xor",
+          "target": 1
+        },
+        {
+          "controls": [
+            4,
+            5,
+            0
+          ],
+          "op": "and3_xor",
+          "target": 2
+        },
+        {
+          "controls": [
+            3,
+            4,
+            6
+          ],
+          "op": "and3_xor",
+          "target": 1
+        },
+        {
+          "controls": [
+            6,
+            0
+          ],
+          "op": "and2_xor",
+          "target": 1
+        },
+        {
+          "controls": [
+            5,
+            3,
+            6
+          ],
+          "op": "and3_xor",
+          "target": 4
+        },
+        {
+          "controls": [
+            0,
+            6
+          ],
+          "op": "and2_xor",
+          "target": 5
+        },
+        {
+          "controls": [
+            3,
+            5
+          ],
+          "op": "and2_xor",
+          "target": 2
+        },
+        {
+          "controls": [
+            0,
+            5
+          ],
+          "op": "and2_xor",
+          "target": 3
+        },
+        {
+          "controls": [
+            2
+          ],
+          "op": "xor",
+          "target": 1
+        },
+        {
+          "controls": [
+            1
+          ],
+          "op": "xor",
+          "target": 6
+        },
+        {
+          "controls": [
+            5
+          ],
+          "op": "xor",
+          "target": 0
+        },
+        {
+          "controls": [
+            2,
+            4,
+            1
+          ],
+          "op": "and3_xor",
+          "target": 0
+        },
+        {
+          "controls": [
+            0,
+            2,
+            4
+          ],
+          "op": "and3_xor",
+          "target": 5
+        },
+        {
+          "controls": [
+            3
+          ],
+          "op": "xor",
+          "target": 4
+        },
+        {
+          "controls": [
+            5
+          ],
+          "op": "xor",
+          "target": 2
+        },
+        {
+          "controls": [
+            2
+          ],
+          "op": "xor",
+          "target": 3
+        },
+        {
+          "controls": [
+            3,
+            2,
+            6
+          ],
+          "op": "and3_xor",
+          "target": 4
+        },
+        {
+          "controls": [
+            0,
+            2,
+            5
+          ],
+          "op": "and3_xor",
+          "target": 6
+        }
+      ],
+      "grade": {
+        "accepted": true,
+        "algebraic_degree": 4,
+        "dependent_inputs": 7,
+        "max_abs_autocorrelation": 64,
+        "max_abs_nonconstant_walsh": 24,
+        "max_normalized_linear_correlation": 0.1875,
+        "nonlinearity": 52,
+        "ones": 64
+      },
+      "output": 6,
+      "search_seed_hex": "0xf96b60a17c746c69",
+      "truth_hex": "a84c3b648fc11ce9fd4c4cb9dac16b34"
+    },
+    {
+      "accepted_generation": 2,
+      "gates": [
+        {
+          "controls": [
+            2,
+            5,
+            6
+          ],
+          "op": "and3_xor",
+          "target": 3
+        },
+        {
+          "controls": [
+            2,
+            1
+          ],
+          "op": "and2_xor",
+          "target": 5
+        },
+        {
+          "controls": [
+            6,
+            1
+          ],
+          "op": "and2_xor",
+          "target": 4
+        },
+        {
+          "controls": [
+            6
+          ],
+          "op": "xor",
+          "target": 3
+        },
+        {
+          "controls": [
+            2,
+            4
+          ],
+          "op": "and2_xor",
+          "target": 0
+        },
+        {
+          "controls": [
+            2,
+            0
+          ],
+          "op": "and2_xor",
+          "target": 1
+        },
+        {
+          "controls": [
+            2,
+            1
+          ],
+          "op": "and2_xor",
+          "target": 6
+        },
+        {
+          "controls": [
+            4,
+            2,
+            3
+          ],
+          "op": "and3_xor",
+          "target": 5
+        },
+        {
+          "controls": [
+            0,
+            4
+          ],
+          "op": "and2_xor",
+          "target": 6
+        },
+        {
+          "controls": [
+            6,
+            3,
+            4
+          ],
+          "op": "and3_xor",
+          "target": 2
+        },
+        {
+          "controls": [
+            4,
+            1
+          ],
+          "op": "and2_xor",
+          "target": 2
+        },
+        {
+          "controls": [
+            0,
+            4,
+            5
+          ],
+          "op": "and3_xor",
+          "target": 3
+        },
+        {
+          "controls": [
+            4,
+            2
+          ],
+          "op": "and2_xor",
+          "target": 6
+        },
+        {
+          "controls": [
+            2,
+            3
+          ],
+          "op": "and2_xor",
+          "target": 6
+        },
+        {
+          "controls": [
+            1,
+            4
+          ],
+          "op": "and2_xor",
+          "target": 5
+        },
+        {
+          "controls": [
+            2,
+            4
+          ],
+          "op": "and2_xor",
+          "target": 5
+        },
+        {
+          "controls": [
+            0,
+            3
+          ],
+          "op": "and2_xor",
+          "target": 4
+        },
+        {
+          "controls": [
+            1
+          ],
+          "op": "xor",
+          "target": 5
+        },
+        {
+          "controls": [
+            3,
+            6
+          ],
+          "op": "and2_xor",
+          "target": 2
+        },
+        {
+          "controls": [
+            6
+          ],
+          "op": "xor",
+          "target": 0
+        },
+        {
+          "controls": [
+            1,
+            4
+          ],
+          "op": "and2_xor",
+          "target": 5
+        },
+        {
+          "controls": [
+            4,
+            0
+          ],
+          "op": "and2_xor",
+          "target": 6
+        },
+        {
+          "controls": [
+            5,
+            2
+          ],
+          "op": "and2_xor",
+          "target": 4
+        },
+        {
+          "controls": [
+            0
+          ],
+          "op": "xor",
+          "target": 4
+        }
+      ],
+      "grade": {
+        "accepted": true,
+        "algebraic_degree": 6,
+        "dependent_inputs": 7,
+        "max_abs_autocorrelation": 40,
+        "max_abs_nonconstant_walsh": 24,
+        "max_normalized_linear_correlation": 0.1875,
+        "nonlinearity": 52,
+        "ones": 64
+      },
+      "output": 4,
+      "search_seed_hex": "0x97a2da5afbbee87e",
+      "truth_hex": "4674f9a094fadda75957f09a2523906a"
+    },
+    {
+      "accepted_generation": 1,
+      "gates": [
+        {
+          "controls": [
+            4,
+            0,
+            6
+          ],
+          "op": "and3_xor",
+          "target": 5
+        },
+        {
+          "controls": [
+            6
+          ],
+          "op": "xor",
+          "target": 1
+        },
+        {
+          "controls": [
+            6,
+            3
+          ],
+          "op": "and2_xor",
+          "target": 0
+        },
+        {
+          "controls": [
+            3
+          ],
+          "op": "xor",
+          "target": 1
+        },
+        {
+          "controls": [
+            2,
+            1,
+            5
+          ],
+          "op": "and3_xor",
+          "target": 3
+        },
+        {
+          "controls": [
+            2,
+            1
+          ],
+          "op": "and2_xor",
+          "target": 6
+        },
+        {
+          "controls": [
+            1
+          ],
+          "op": "xor",
+          "target": 3
+        },
+        {
+          "controls": [
+            5,
+            0,
+            4
+          ],
+          "op": "and3_xor",
+          "target": 6
+        },
+        {
+          "controls": [
+            4
+          ],
+          "op": "xor",
+          "target": 1
+        },
+        {
+          "controls": [
+            6,
+            2
+          ],
+          "op": "and2_xor",
+          "target": 5
+        },
+        {
+          "controls": [
+            2,
+            6
+          ],
+          "op": "and2_xor",
+          "target": 5
+        },
+        {
+          "controls": [
+            3,
+            4,
+            0
+          ],
+          "op": "and3_xor",
+          "target": 5
+        },
+        {
+          "controls": [
+            6,
+            0
+          ],
+          "op": "and2_xor",
+          "target": 1
+        },
+        {
+          "controls": [
+            1,
+            0
+          ],
+          "op": "and2_xor",
+          "target": 3
+        },
+        {
+          "controls": [
+            5,
+            2
+          ],
+          "op": "and2_xor",
+          "target": 4
+        },
+        {
+          "controls": [
+            6,
+            2
+          ],
+          "op": "and2_xor",
+          "target": 0
+        },
+        {
+          "controls": [
+            1,
+            4
+          ],
+          "op": "and2_xor",
+          "target": 3
+        },
+        {
+          "controls": [
+            6
+          ],
+          "op": "xor",
+          "target": 4
+        },
+        {
+          "controls": [
+            3,
+            2,
+            1
+          ],
+          "op": "and3_xor",
+          "target": 5
+        },
+        {
+          "controls": [
+            4,
+            1
+          ],
+          "op": "and2_xor",
+          "target": 5
+        },
+        {
+          "controls": [
+            2
+          ],
+          "op": "xor",
+          "target": 3
+        },
+        {
+          "controls": [
+            5,
+            1
+          ],
+          "op": "and2_xor",
+          "target": 2
+        },
+        {
+          "controls": [
+            2,
+            5
+          ],
+          "op": "and2_xor",
+          "target": 0
+        },
+        {
+          "controls": [
+            5,
+            3,
+            4
+          ],
+          "op": "and3_xor",
+          "target": 0
+        }
+      ],
+      "grade": {
+        "accepted": true,
+        "algebraic_degree": 5,
+        "dependent_inputs": 7,
+        "max_abs_autocorrelation": 40,
+        "max_abs_nonconstant_walsh": 24,
+        "max_normalized_linear_correlation": 0.1875,
+        "nonlinearity": 52,
+        "ones": 64
+      },
+      "output": 0,
+      "search_seed_hex": "0x35da54147b096493",
+      "truth_hex": "355c4728f7ca7c6a284e79e6de408a6a"
+    }
+  ],
+  "family": "E256",
+  "folds": [
+    {
+      "left_component": 0,
+      "right_component": 1,
+      "taps": [
+        9,
+        43,
+        15,
+        16,
+        21,
+        39,
+        48,
+        5,
+        38,
+        28,
+        41,
+        51,
+        31,
+        30,
+        63,
+        52
+      ]
+    },
+    {
+      "left_component": 2,
+      "right_component": 3,
+      "taps": [
+        42,
+        13,
+        53,
+        32,
+        1,
+        11,
+        36,
+        50,
+        0,
+        45,
+        19,
+        22,
+        6,
+        23,
+        12,
+        29
+      ]
+    },
+    {
+      "left_component": 4,
+      "right_component": 5,
+      "taps": [
+        61,
+        40,
+        47,
+        20,
+        18,
+        44,
+        34,
+        59,
+        27,
+        8,
+        25,
+        55,
+        33,
+        2,
+        17,
+        4
+      ]
+    },
+    {
+      "left_component": 6,
+      "right_component": 7,
+      "taps": [
+        10,
+        26,
+        60,
+        57,
+        62,
+        35,
+        54,
+        58,
+        46,
+        14,
+        7,
+        49,
+        24,
+        37,
+        56,
+        3
+      ]
+    }
+  ],
+  "formula": "dual_balanced_reversible_nlff16",
+  "generation": 0,
+  "holdout": {
+    "accepted": true,
+    "max_autocorrelation": 0.023011658426417628,
+    "max_pair_phi": 0.02356735226755637,
+    "max_rate_deviation": 0.01080322265625,
+    "max_state_bit_phi": 0.022959502555601297,
+    "min_bm_complexity": 1022
+  },
+  "holdout_seeds_hex": [
+    "0x9e3779b97f4a7c15",
+    "0xd1b54a32d192ed03",
+    "0x94d049bb133111eb",
+    "0xf1357aea2e62a9c5"
+  ],
+  "positive_control": {
+    "detected": true,
+    "grade": {
+      "accepted": false,
+      "algebraic_degree": 1,
+      "dependent_inputs": 1,
+      "max_abs_autocorrelation": 128,
+      "max_abs_nonconstant_walsh": 128,
+      "max_normalized_linear_correlation": 1.0,
+      "nonlinearity": 0,
+      "ones": 64
+    },
+    "name": "raw_state_bit"
+  },
+  "schema": "E256-NATIVE-NLFF-SEARCH-1",
+  "search_seed_hex": "0xe256000200000000",
+  "security_scope": "bounded deterministic native-NLFF grading; not a security proof",
+  "status": "ACCEPTED_RESEARCH_PROFILE",
+  "steps_per_seed": 16384,
+  "suite_version": 2,
+  "tap_trials": 512,
+  "thresholds": {
+    "combined_max_normalized_linear_correlation_bound": 0.035,
+    "component_max_abs_walsh": 24,
+    "component_min_degree": 4,
+    "component_min_nonlinearity": 52,
+    "max_autocorrelation": 0.035,
+    "max_pair_phi": 0.03,
+    "max_rate_deviation": 0.015,
+    "max_state_bit_phi": 0.04,
+    "min_bm_complexity": 900
+  },
+  "train": {
+    "accepted": true,
+    "max_autocorrelation": 0.019936399217221134,
+    "max_pair_phi": 0.010483884009151326,
+    "max_rate_deviation": 0.0050048828125,
+    "max_state_bit_phi": 0.024499656877625717,
+    "min_bm_complexity": 1024
+  },
+  "train_seeds_hex": [
+    "0x0123456789abcdef",
+    "0xc0ffee123456789a",
+    "0xa5a55a5af00dcafe",
+    "0x6d2b79f5b16b00b5"
+  ],
+  "transition": "(state >> 1) xor (lsb ? 0xD800000000000000 : 0)"
+}

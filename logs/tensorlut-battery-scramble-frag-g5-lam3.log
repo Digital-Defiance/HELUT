@@ -1,0 +1,22 @@
+# TensorLUT Red Team — enigma_256_scramble_frag_combo
+generation: 5
+formula: cubic6
+netlist: build/enigma_256_scramble_frag_combo_netlist.json
+luts: 295
+dffs: 0
+batch: 3815
+explore_gens: 160
+polish_gens: 120
+pop: 48
+polish_lambda: 3.0
+explore_seed: 14833203
+baseline_crypto: 0.000000
+explore_best_crypto: -25179.226562
+explore_nonbinary: 6486
+polish_gen_crypto: -15055.365234
+final_crypto: -15055.365234
+final_nonbinary: 4540
+elite_fitness: -17568.335938
+squeeze_survived: false
+verdict: blue_hold
+note: explore λ=0; polish λ=3.0. squeeze_survived=false is a Blue hold.

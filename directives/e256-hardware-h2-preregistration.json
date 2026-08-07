@@ -1,0 +1,506 @@
+{
+  "schema": "E256-HARDWARE-H2-PREREGISTRATION-1",
+  "status": "FROZEN_FOR_EXECUTION",
+  "date_basis": "2026-08-20 session date; no wall-clock timestamp asserted",
+  "purpose": "Measure the complete non-production E256-H fixed-R=12 iterative core after exact H3 offset collapse, with all 416 effective-mask bytes inside the graded boundary, paired fixed/runtime-repeated H4 wiring, three explicit storage organizations, recursive hierarchy accounting, and cycle/throughput receipts. Select no production architecture.",
+  "prior_execution": {
+    "statement": "No H2 integrated-core RTL, testbench, runner, synthesis result, or receipt existed or ran before this preregistration was frozen.",
+    "known_inputs": [
+      "The exact H3 collapse and 416-byte fixed-R=12 normal form are inherited results, not H2 predictions.",
+      "The six-top matrix, protocol, logical storage sizes, coverage counts, cycle constants, controls, and accounting method were documented before implementation.",
+      "No exact new LUT6, FF, memory, primitive-cell, depth, ciphertext-aggregate, or runtime value has been observed or frozen."
+    ]
+  },
+  "authorization": {
+    "architecture_record": "directives/e256-hardware-architecture.md",
+    "design_record_section": "10. Pre-execution decision record — collapsed-schedule H2 integrated core",
+    "base_contract_start_marker": "<!-- E256-H-CONTRACT-START -->",
+    "base_contract_end_marker": "<!-- E256-H-CONTRACT-END -->",
+    "base_contract_sha256": "b64472f73be9d0fc6318ff445c5f550cb0129309313228f416599c27d3957bb1",
+    "h2_contract_start_marker": "<!-- E256-H-H2-CONTRACT-START -->",
+    "h2_contract_end_marker": "<!-- E256-H-H2-CONTRACT-END -->",
+    "contract_hash_preimage": "all bytes strictly between the unique marker strings, including surrounding newlines but excluding both marker strings",
+    "h2_contract_sha256": "214aee439ddf715ebf3e5fc206c336119dd27f85da12ef65f8e590c0cb0bfceb",
+    "graded_constraints": ["H0", "H1", "H2", "H3", "H4", "H5"],
+    "allowed": "non-production fixed-R=12 integrated-core functional, storage, generic synthesis, hierarchy-accounting, and cycle measurement",
+    "blocked": [
+      "production RTL, bitstream, cipher suite, profile, fixture, or protocol",
+      "C/H/N claim movement or E256 finding closure",
+      "security-bit, cryptanalytic, or production-readiness claim",
+      "production round-count, XOF, direct-short schedule, H4 switching policy, or storage selection",
+      "vendor LUT, BRAM, timing closure, Fmax, place-and-route, ASIC area, power, energy, fault, zeroization, TVLA, EM, or side-channel claim"
+    ]
+  },
+  "predecessors": [
+    {
+      "id": "E256-062",
+      "receipt": "logs/e256-wide-state-gate.json",
+      "receipt_schema": "E256-WIDE-STATE-GATE-1",
+      "deterministic_payload_sha256": "21758ce220b9da469a18ea617fa7b2fd41e906add69a258f830b12843e3e495b"
+    },
+    {
+      "id": "E256-063-step-1",
+      "receipt": "logs/e256-hardware-cost-gate.json",
+      "receipt_schema": "E256-HARDWARE-COST-GATE-1",
+      "deterministic_payload_sha256": "a10e001ad2c2b3de55fcc80197c059f166d5e55599c670e20b01de8f6b7d323d"
+    },
+    {
+      "id": "E256-063-steps-2-3",
+      "receipt": "logs/e256-hardware-candidate-gate.json",
+      "receipt_schema": "E256-HARDWARE-CANDIDATE-GATE-1",
+      "deterministic_payload_sha256": "98af83ec27093787552475fce588f84a902634afcc969bed26462032dddec3cc",
+      "certified_h4_set_size": 384,
+      "certified_h4_set_sha256": "199f1f7bddccf19ce5aa0bde0987441735d628354140d53ebdfec538d7b3f5ed"
+    },
+    {
+      "id": "E256-063-step-4",
+      "receipt": "logs/e256-hardware-attack-gate.json",
+      "receipt_schema": "E256-HARDWARE-ATTACK-GATE-1",
+      "deterministic_payload_sha256": "1114e260455232a2979f8a4f613fc6d6daf4be4f97c3ca6903c3f639357d7a2d",
+      "frozen_material_sha256": "b6738e7f117bb7b916ee002db482f105a3eb5a046ee84dff45f178510cdeb691"
+    },
+    {
+      "id": "E256-063-h3-collapse",
+      "receipt": "logs/e256-hardware-offset-collapse-gate.json",
+      "receipt_schema": "E256-HARDWARE-OFFSET-COLLAPSE-GATE-1",
+      "deterministic_payload_sha256": "1478a0ba317bce5f33cb053744b050bb6188543405c1dfacf52d8aaf920c4b71",
+      "preregistration_sha256": "3d7a12731fcf81f6120577122c55bd8ec25589a82226d49fab7e5b8350ee0cee",
+      "verdict": "H3_XOR_OFFSETS_EXACTLY_COLLAPSE_TO_EFFECTIVE_MASKS"
+    }
+  ],
+  "frozen_predecessor_sources": {
+    "attack_rtl": {
+      "path": "Hardware/RTL/Research/E256H/e256h_attack_core.v",
+      "sha256": "f4b5d6210275d831e48a3b16ca0457fa0927164ab33853b466ae0ca326fbcd3b"
+    },
+    "attack_testbench": {
+      "path": "Hardware/Testbenches/Research/E256H/e256h_attack_core_tb.v",
+      "sha256": "ae9d35af3edb76a696249dd4c32b8a3816c7a06643efbbf8f1397409a8b9ee2b"
+    },
+    "attack_runner": {
+      "path": "Scripts/e256_hardware_attack_gate.py",
+      "sha256": "6928516545363269fd3c36224ab0013779bb14068336493a068eeb4ce9d077c2"
+    },
+    "collapse_miter": {
+      "path": "Hardware/RTL/Research/E256H/e256h_offset_collapse_miter.v",
+      "sha256": "8b29ca93334536ad4ba6bfb8f602f73e2b7a37c5cd56dd958c25141f9261c082"
+    },
+    "collapse_testbench": {
+      "path": "Hardware/Testbenches/Research/E256H/e256h_offset_collapse_tb.v",
+      "sha256": "bcbc8e08c01fb3ff3da09db8a8e7aae9cbc6c461c7c5d318b0c7769811f109c0"
+    },
+    "collapse_runner": {
+      "path": "Scripts/e256_hardware_offset_collapse_gate.py",
+      "sha256": "5931ec48276c9402bee78382bc82366409e33fa78670246f0d967497d480cd80"
+    }
+  },
+  "questions": [
+    {
+      "id": "H2Q1",
+      "text": "What are the complete recursive generic LUT6, sequential-bit, memory-bit, primitive-cell, and end-to-end combinational-level costs of each integrated 416-byte storage/H4 variant?"
+    },
+    {
+      "id": "H2Q2",
+      "text": "What marginal cost does one runtime-loaded repeated H4 tuple add over fixed (0,1,3,4) wiring within each unchanged storage organization?"
+    },
+    {
+      "id": "H2Q3",
+      "text": "What storage, logic, and cycle tradeoffs separate stationary FF, rotating FF, and H1-ineligible generic synchronous-memory organizations?"
+    },
+    {
+      "id": "H2Q4",
+      "text": "Do all six integrated tops remain byte-exact against the independent fixed-R=12 effective-mask model with input-independent protocol cycles?"
+    }
+  ],
+  "toolchain_contract": {
+    "python": "3.9.6",
+    "yosys_version_prefix": "Yosys 0.68+post",
+    "yosys_git_sha1": "c12172fbae8af5e20f6fb52e3d4e92d56ed587b6",
+    "iverilog_version_prefix": "Icarus Verilog version 13.0",
+    "advisory_only": ["platform", "elapsed_seconds", "git_head", "git_dirty"]
+  },
+  "construction": {
+    "identity": "E256-H collapsed-schedule H2 integrated measurement fixture",
+    "measurement_rounds": 12,
+    "production_round_count": null,
+    "state_bytes": 32,
+    "geometry": "4 rows by 8 columns, byte index 4*column+row; byte j is word[8*j +: 8]",
+    "canonical_recurrence": "Z_0=P XOR K_0; Z_{r+1}=L_w(SBOX^32(Z_r)) XOR K_{r+1} for 0<=r<12",
+    "linear_layer": "forward H4 RowShift takes source column (column+offset[row]) mod 8, followed by AES MixColumns over GF(2) polynomial 0x11b",
+    "mix_columns_matrix_hex_rows": [
+      ["02", "03", "01", "01"],
+      ["01", "02", "03", "01"],
+      ["01", "01", "02", "03"],
+      ["03", "01", "01", "02"]
+    ],
+    "aes_sbox_sha256": "c2d8e5eed6cbebd8625fc18f81486a7733c04f9b0129ffbe974c68b90308b4f2",
+    "effective_masks": {
+      "words": 13,
+      "word_bits": 256,
+      "logical_bits": 3328,
+      "logical_bytes": 416,
+      "terminal_rule": "K_12 excludes A_12; frozen raw material defines no A_12",
+      "source": "collapse already-derived 1184-byte material under the same repeated H4 tuple used by the run"
+    },
+    "raw_h3_comparator": {
+      "bytes": 1184,
+      "bits": 9472,
+      "shake256_rate_blocks": 9,
+      "representation_kernel_bytes": 768,
+      "representation_kernel_bits": 6144
+    },
+    "compatibility_rule": "No H2 top contains an XOF. Directly squeezing 416 bytes is a new schedule/domain and is not authorized by this gate.",
+    "h4_scope": {
+      "fixed_tuple": [0, 1, 3, 4],
+      "direct_encoding": "cfg_h4={off3[2:0],off2[2:0],off1[2:0],off0[2:0]}",
+      "direct_state_bits": 12,
+      "certified_set_size": 384,
+      "certified_set_sha256": "199f1f7bddccf19ce5aa0bde0987441735d628354140d53ebdfec538d7b3f5ed",
+      "use": "one selected tuple is sampled at successful commit and repeated for every round and block until reconfiguration",
+      "eligibility_boundary": "the runner grades only the ordered certified set; the direct hardware interface is selector-general and is not an on-chip certification catalog",
+      "not_authorized": "arbitrary per-round H4 switching or a production selector policy"
+    }
+  },
+  "protocol_contract": {
+    "ports": [
+      "clk", "rst", "cfg_begin", "cfg_valid", "cfg_ready", "cfg_word[255:0]", "cfg_commit", "cfg_h4[11:0]", "key_valid", "cfg_error", "start", "ready", "block_i[255:0]", "block_o[255:0]", "busy", "done"
+    ],
+    "configuration": {
+      "begin_beats": 1,
+      "mask_word_beats": 13,
+      "commit_beats": 1,
+      "word_order": "K_0 through K_12",
+      "rules": [
+        "cfg_begin while idle invalidates the old configuration and resets the accepted-word count",
+        "exactly thirteen cfg_valid beats are accepted while idle before cfg_commit",
+        "early or late commit, a fourteenth word, configuration while busy, or start without key_valid sets cfg_error and cannot yield a result",
+        "mask stores are not reset or claimed to zeroize secrets; key_valid gates use"
+      ]
+    },
+    "ff_and_ring_cycles": {
+      "accept_edge": "E0 applies K_0",
+      "round_edges": "E1 through E12 execute rounds 0 through 11 with K_1 through K_12",
+      "done_edge": "E12",
+      "latency_cycles": 12,
+      "initiation_interval_cycles": 13,
+      "blocks_per_cycle": {"numerator": 1, "denominator": 13},
+      "bytes_per_cycle": {"numerator": 32, "denominator": 13}
+    },
+    "mem_cycles": {
+      "accept_edge": "E0 requests K_0",
+      "fetch_edges": "E1 captures K_0 and requests K_1; E2 applies K_0",
+      "round_edges": "E3 through E14 execute rounds 0 through 11 with K_1 through K_12",
+      "done_edge": "E14",
+      "latency_cycles": 14,
+      "initiation_interval_cycles": 15,
+      "blocks_per_cycle": {"numerator": 1, "denominator": 15},
+      "bytes_per_cycle": {"numerator": 32, "denominator": 15}
+    },
+    "stimulus_rule": "Drive all changing data/configuration and pulses on negative edges; define cycle counts by positive acceptance and done edges."
+  },
+  "variants": [
+    {
+      "id": "ff_fixed",
+      "top": "e256h_h2_ff_fixed",
+      "storage_id": "ff",
+      "h4_id": "fixed",
+      "storage": "stationary runtime-loaded 3328-bit FF vector with public round-index read",
+      "h2_eligible": true,
+      "latency_cycles": 12,
+      "initiation_interval_cycles": 13
+    },
+    {
+      "id": "ff_direct",
+      "top": "e256h_h2_ff_direct",
+      "storage_id": "ff",
+      "h4_id": "direct",
+      "storage": "stationary runtime-loaded 3328-bit FF vector with public round-index read",
+      "h2_eligible": true,
+      "latency_cycles": 12,
+      "initiation_interval_cycles": 13
+    },
+    {
+      "id": "ring_fixed",
+      "top": "e256h_h2_ring_fixed",
+      "storage_id": "ring",
+      "h4_id": "fixed",
+      "storage": "runtime-loaded rotating 13-word FF bank restored to K_0 ordering after each block",
+      "h2_eligible": true,
+      "latency_cycles": 12,
+      "initiation_interval_cycles": 13
+    },
+    {
+      "id": "ring_direct",
+      "top": "e256h_h2_ring_direct",
+      "storage_id": "ring",
+      "h4_id": "direct",
+      "storage": "runtime-loaded rotating 13-word FF bank restored to K_0 ordering after each block",
+      "h2_eligible": true,
+      "latency_cycles": 12,
+      "initiation_interval_cycles": 13
+    },
+    {
+      "id": "mem_fixed",
+      "top": "e256h_h2_mem_fixed",
+      "storage_id": "mem",
+      "h4_id": "fixed",
+      "storage": "13x256 generic synchronous memory addressed only by the public round index",
+      "h2_eligible": false,
+      "exclusion": "H1-ineligible comparator; generic memory is not an authorized production table, ROM, SRAM, or claimed BRAM",
+      "latency_cycles": 14,
+      "initiation_interval_cycles": 15
+    },
+    {
+      "id": "mem_direct",
+      "top": "e256h_h2_mem_direct",
+      "storage_id": "mem",
+      "h4_id": "direct",
+      "storage": "13x256 generic synchronous memory addressed only by the public round index",
+      "h2_eligible": false,
+      "exclusion": "H1-ineligible comparator; generic memory is not an authorized production table, ROM, SRAM, or claimed BRAM",
+      "latency_cycles": 14,
+      "initiation_interval_cycles": 15
+    }
+  ],
+  "functional_coverage": {
+    "material_sets": [
+      {
+        "id": "frozen_attack_v1",
+        "derivation": "the exact predecessor material under E256-H/attack/material/v1"
+      },
+      {
+        "id": "collapse_aux_0",
+        "derivation": "SHAKE256(ASCII 'E256-H/collapse/material/v1/0').digest(1184)"
+      },
+      {
+        "id": "collapse_aux_1",
+        "derivation": "SHAKE256(ASCII 'E256-H/collapse/material/v1/1').digest(1184)"
+      }
+    ],
+    "block_ids": [
+      "all_zero",
+      "all_ff",
+      "ascending_00_1f",
+      "descending_ff_e0",
+      "shake_0",
+      "shake_1",
+      "shake_2",
+      "shake_3"
+    ],
+    "block_definition": "all-zero; all-ff; bytes 00..1f; bytes ff..e0; then four consecutive 32-byte blocks from SHAKE256(ASCII 'E256-H/collapse/blocks/v1')",
+    "fixed_h4_outputs_per_variant": 24,
+    "direct_h4_outputs_per_variant": 9216,
+    "expected_total_rtl_model_comparisons": 27720,
+    "expected_storage_equivalence_comparisons": 18480,
+    "expected_fixed_direct_bridge_comparisons": 72,
+    "aggregate_rule": "For each record in frozen nested-loop order, append a 4-byte unsigned big-endian length followed by compact canonical UTF-8 JSON; state outputs are ascending byte-index order encoded as 64 lowercase hex characters.",
+    "requirements": [
+      "every RTL output equals the independent Python fixed-R=12 model",
+      "ff, ring, and mem outputs agree for equal effective masks and H4 tuple",
+      "each direct top equals its fixed counterpart at tuple (0,1,3,4)",
+      "the executed variant, material, block, H4, comparison, and cycle sets exactly equal the frozen sets",
+      "latency and initiation interval are input-independent within each variant"
+    ]
+  },
+  "synthesis_contract": {
+    "rtl_sources": [
+      "Hardware/RTL/Research/E256H/e256h_attack_core.v",
+      "Hardware/RTL/Research/E256H/e256h_h2_integrated_core.v"
+    ],
+    "flatten_before_or_during_mapping_prohibited": true,
+    "storage_preserved_script": "read_verilog <rtl_sources>; hierarchy -check -top <top>; proc; memory -nomap; opt; check -assert; write_json <storage_json>; stat",
+    "mapped_script": "read_verilog <rtl_sources>; hierarchy -check -top <top>; proc; memory -nomap; opt; techmap; opt; dffunmap; zinit -all; abc -lut 6; opt_clean; check -assert; write_json <mapped_json>; stat",
+    "depth_script": "read_json <mapped_json>; hierarchy -check -top <top>; write_json <depth_before_json>; flatten; write_json <depth_after_json>; check -assert; ltp -noff",
+    "depth_rule": "No optimization, techmap, or ABC may follow analysis-only flattening. The recursive primitive multiset before and flat primitive multiset after must be identical; exactly one loop-free ltp -noff length is required.",
+    "generic_metrics": [
+      "generic_abc_lut6",
+      "generic_sequential_bits",
+      "generic_memory_bits",
+      "generic_primitive_cells",
+      "generic_abc_combinational_logic_levels"
+    ],
+    "recursive_rule": "recursive(m)=local(m)+sum(instance_count(m,c)*recursive(c)) independently for LUT6, sequential bits, memory bits, and primitive cells; only local primitives enter the base term and hierarchy summary totals are never added",
+    "classification_rule": "Accepted sequential and memory cell families and bit-width extraction are explicit; any unclassified sequential, latch, or memory primitive invalidates the harness.",
+    "storage_boundary_rule": "Every graded system top accounts for all 3328 logical effective-mask bits. State, result, protocol, and direct-H4 register bits are reported separately. A wide externalized-mask port cannot satisfy H2.",
+    "h4_delta_rule": "Within each storage row, subtract fixed recursive metrics from direct recursive metrics; non-H4 storage/datapath child graphs must otherwise match.",
+    "generic_boundary": "LUT6 and logic levels are generic yosys/ABC mapping artifacts. Generic memory bits are not vendor BRAM/SRAM and logic levels are not timing or Fmax."
+  },
+  "controls": [
+    {
+      "id": "wrong_key_order",
+      "mutation": "reverse K_0 through K_12",
+      "shared_path": ["independent effective-mask loader", "RTL/model corpus"],
+      "required_result": "detected"
+    },
+    {
+      "id": "wrong_round_key_address",
+      "mutation": "use K_r where K_(r+1) is required by a round",
+      "shared_path": ["storage read path", "RTL/model corpus"],
+      "required_result": "detected"
+    },
+    {
+      "id": "reverse_word_bytes",
+      "mutation": "reverse the 32 byte lanes inside every effective-mask word",
+      "shared_path": ["configuration packing", "RTL/model corpus"],
+      "required_result": "detected"
+    },
+    {
+      "id": "wrong_h4_shift_direction",
+      "mutation": "use source column (column-offset[row]) mod 8",
+      "shared_path": ["complete dynamic H4 linear layer", "independent model corpus"],
+      "required_result": "detected"
+    },
+    {
+      "id": "ignore_h4_selector",
+      "mutation": "force direct variants to fixed (0,1,3,4)",
+      "shared_path": ["runtime direct-H4 row selector", "complete certified tuple corpus"],
+      "required_result": "detected with at least one non-fixed output witness"
+    },
+    {
+      "id": "broken_ring_rotation",
+      "mutation": "omit the acceptance rotation that advances K_0 to K_1",
+      "shared_path": ["ring storage datapath", "RTL/model corpus"],
+      "required_result": "detected"
+    },
+    {
+      "id": "stale_sync_memory_read",
+      "mutation": "consume the previous synchronous-memory word instead of the prefetched word",
+      "shared_path": ["synchronous memory FSM", "RTL/model and cycle corpus"],
+      "required_result": "detected"
+    },
+    {
+      "id": "incomplete_configuration",
+      "mutation": "commit after twelve mask words and attempt start",
+      "shared_path": ["configuration FSM", "testbench protocol checker"],
+      "required_result": "cfg_error asserted, key_valid false, and no done pulse"
+    },
+    {
+      "id": "externalized_storage",
+      "mutation": "replace the integrated 3328-bit store with a wide live input port",
+      "shared_path": ["storage-boundary accounting validator"],
+      "required_result": "rejected as an H2 result"
+    },
+    {
+      "id": "nested_child_multiplicity",
+      "mutation": "known synthetic hierarchy contains repeated nested children",
+      "shared_path": ["recursive accounting function"],
+      "required_result": "exact known recursive totals"
+    },
+    {
+      "id": "duplicate_child_accounting",
+      "mutation": "planted accounting accumulator counts one child edge twice",
+      "shared_path": ["recursive accounting function", "independent flat primitive multiset"],
+      "required_result": "detected"
+    },
+    {
+      "id": "postmap_depth_preservation",
+      "mutation": "compare primitive multisets before and after analysis-only flatten",
+      "shared_path": ["mapped hierarchy JSON", "depth-analysis JSON"],
+      "required_result": "identical primitive multiset and one parseable loop-free depth"
+    }
+  ],
+  "predictions": [
+    {
+      "id": "H2P1",
+      "role": "validity_control",
+      "statement": "the exact six-top coverage matrix executes, all functional/cross-variant comparisons pass, and all twelve controls are detected"
+    },
+    {
+      "id": "H2P2",
+      "role": "validity_control",
+      "statement": "recursive hierarchy arithmetic closes against the independent flat primitive multiset without omitted or duplicate child instances"
+    },
+    {
+      "id": "H2P3",
+      "role": "validity_control",
+      "statement": "every integrated system boundary accounts for exactly 3328 logical effective-mask bits in its declared FF or memory organization"
+    },
+    {
+      "id": "H2P4",
+      "role": "validity_control",
+      "statement": "analysis-only flatten preserves the mapped primitive multiset and yields one loop-free end-to-end generic logic-level result per variant"
+    },
+    {
+      "id": "H2P5",
+      "role": "validity_control",
+      "statement": "cycle counts are deterministic and equal the frozen latency/initiation constants for every input in each variant"
+    },
+    {
+      "id": "H2P6",
+      "role": "inherited_arithmetic",
+      "statement": "the 416-byte normal form contains 6144 fewer logical keyed-state bits than the already-derived 1184-byte raw H3 representation"
+    },
+    {
+      "id": "H2P7",
+      "role": "graded_finding",
+      "statement": "runtime repeated-H4 selection has a measurable paired marginal cost relative to fixed wiring; no exact magnitude or sign is frozen"
+    },
+    {
+      "id": "H2P8",
+      "role": "graded_finding",
+      "statement": "stationary FF, rotating FF, and generic synchronous-memory organizations expose measurable logic/storage/cycle tradeoffs; no winner is predicted"
+    },
+    {
+      "id": "H2P9",
+      "role": "graded_finding",
+      "statement": "recursive integrated totals differ from local-only module fields; no ratio or storage-versus-logic dominance threshold is predicted"
+    }
+  ],
+  "hard_rejection_rules": [
+    "Refuse the receipt if this preregistration hash, either architecture contract hash, any predecessor payload digest, frozen predecessor source hash, certified H4 set hash, material hash, AES S-box hash, or pinned tool version drifts.",
+    "Refuse unless executed variant, storage, H4, material, block, control, prediction, module, comparison, and cycle sets exactly equal the frozen sets.",
+    "Refuse on any RTL/model, storage-equivalence, fixed/direct bridge, configuration, or cycle mismatch.",
+    "Refuse if any validity control or planted mutation is missed.",
+    "Refuse if any integrated top fails to account for all 3328 logical effective-mask bits, or if external storage is presented as an H2 result.",
+    "Refuse on a recursive hierarchy cycle, omitted/double-counted child, unclassified sequential/latch/memory primitive, or mismatch against the independent flat primitive multiset.",
+    "Refuse if flatten occurs before or during mapping, if optimization occurs after analysis flatten, if the primitive multiset changes, or if depth is missing, ambiguous, or looped.",
+    "Refuse if paired fixed/direct variants change their non-H4 storage/datapath organization.",
+    "Refuse if generic results are labeled vendor resources, timing, Fmax, place-and-route, ASIC area, power, energy, zeroization, fault, or side-channel evidence.",
+    "Refuse any attempt to choose a production round count, XOF, direct-short schedule, H4 switching policy, storage winner, suite/profile/fixture/protocol, production RTL, security value, or C/H/N movement."
+  ],
+  "interpretation": {
+    "internal_invalid_status": "INVALID_H2_COST_HARNESS; never emitted or accepted as the canonical receipt",
+    "valid_emitted_verdict": "H2_INTEGRATED_COSTS_MEASURED_NO_ARCHITECTURE_SELECTED",
+    "scope": "fixed-R=12 non-production integrated cost fixture; 416-byte effective masks collapsed from already-derived raw H3 material; one repeated H4 tuple per configuration",
+    "passing_interpretation": "Report recursive generic logic/register/memory/depth costs, paired dynamic-H4 deltas, and exact simulation cycles for all six variants without selecting a production architecture.",
+    "next": "Use the measured receipt to identify further preregistered implementation or attack questions. Any production round count, short XOF schedule, switching policy, vendor P&R, or promotion requires a separate freeze and evidence."
+  },
+  "non_claims": [
+    "This cost gate is not a cryptanalytic break, security proof, key recovery, security-bit estimate, or rotor-namespace advantage.",
+    "R=12 is a measurement fixture inherited from the collapse normal form, not a production round-count choice.",
+    "The gate loads effective masks collapsed from already-derived 1184-byte material; it does not authorize or measure a direct 416-byte XOF schedule.",
+    "The direct H4 interface repeats one tuple and is selector-general; it neither enforces the 384-entry catalog on chip nor certifies arbitrary per-round switching.",
+    "The generic synchronous-memory variants are H1-ineligible comparators and are not production memory recommendations.",
+    "Generic ABC LUT6 and logic levels are not vendor utilization, timing closure, Fmax, place-and-route, ASIC area, power, energy, zeroization, fault, or side-channel evidence.",
+    "No exact physical-cost ordering, storage winner, or storage-versus-logic dominance relationship is predicted.",
+    "No C/H/N row, E256 finding, suite, profile, fixture, protocol, or release gate closes; reviewed standard AEAD remains mandatory for real data."
+  ],
+  "receipt_contract": {
+    "schema": "E256-HARDWARE-H2-GATE-1",
+    "status": "OPEN_PROGRESS",
+    "output": "logs/e256-hardware-h2-gate.json",
+    "runner": "Scripts/e256_hardware_h2_gate.py",
+    "rtl": "Hardware/RTL/Research/E256H/e256h_h2_integrated_core.v",
+    "testbench": "Hardware/Testbenches/Research/E256H/e256h_h2_integrated_core_tb.v",
+    "scratch": "build/e256h-h2",
+    "deterministic_payload_top_level_keys": [
+      "schema",
+      "status",
+      "inputs",
+      "pinned_parameters",
+      "coverage",
+      "functional",
+      "controls",
+      "hierarchy_accounting",
+      "storage_accounting",
+      "measurements",
+      "cycles",
+      "predictions",
+      "interpretation",
+      "limitations"
+    ],
+    "digest": "SHA-256 of compact canonical JSON deterministic_payload",
+    "checker": "rerun all frozen validation, simulation, controls, synthesis, recursive accounting, depth, cycle, and prediction work; validate prior digest; compare complete canonical payload bytes and digest",
+    "write": "sorted indented UTF-8 JSON with final newline and atomic replacement"
+  }
+}

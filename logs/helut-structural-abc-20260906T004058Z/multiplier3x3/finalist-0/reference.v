@@ -1,0 +1,24 @@
+module multiplier3x3_ref(clk, in_0, in_1, in_2, in_3, in_4, in_5, out_8, out_11, out_14, out_17, out_20, out_23);
+    input clk;
+    input in_0;
+    input in_1;
+    input in_2;
+    input in_3;
+    input in_4;
+    input in_5;
+    output out_8;
+    output out_11;
+    output out_14;
+    output out_17;
+    output out_20;
+    output out_23;
+        wire [2:0] a = {in_2, in_1, in_0};
+        wire [2:0] b = {in_5, in_4, in_3};
+        wire [5:0] product = a * b;
+        assign out_8 = product[0];
+    assign out_11 = product[1];
+    assign out_14 = product[2];
+    assign out_17 = product[3];
+    assign out_20 = product[4];
+    assign out_23 = product[5];
+endmodule

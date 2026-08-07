@@ -1,0 +1,995 @@
+import Foundation
+import Darwin
+
+// MARK: - Noisy BK depth certificate (research-release / step 10p)
+//
+// HELUT’s default BK path is e=0 (noiseless gadget encrypt). Production TFHE
+// uses noisy BK; this module makes the depth / failure story *explicit* so the
+// ε-certificate’s “noiseless BK” hypothesis is not silent.
+//
+// Under publicMS after each BR: decode/MS succeeds iff |e| < δ/2. With BK body
+// noise bound B_bk (∞-norm) or Gaussian σ_bk, every LUT is a fresh failure event.
+//
+// Measurement (`TFHENoisyBKMeasurement`) requires a covering gadget
+// (baseLog·ℓ = 32). ℓ=1 booleanPublicMS is a noiseless δ-lattice vehicle:
+// BK noise leaves the lattice and later CMUXes mis-decompose.
+
+/// Discrete ∞-norm BK noise floor after one blind-rotate.
+package struct TFHENoisyBKParams: Sendable, Equatable {
+    /// Worst-case centered |e| on the extracted LWE after BR (torus).
+    package var outputNoiseBound: UInt32
+    package var delta: UInt32
+    package var lutCount: Int
+
+    package init(outputNoiseBound: UInt32, delta: UInt32, lutCount: Int) {
+        precondition(delta >= 2)
+        precondition(lutCount >= 0)
+        self.outputNoiseBound = outputNoiseBound
+        self.delta = delta
+        self.lutCount = lutCount
+    }
+
+    package var decodingHalfGap: UInt32 { delta / 2 }
+
+    /// HELUT e=0 BK (current Metal/CPU crypto gadget encrypt).
+    package static func noiseless(polynomialDegree n: Int, lutCount: Int) -> TFHENoisyBKParams {
+        TFHENoisyBKParams(
+            outputNoiseBound: 0,
+            delta: rotationScale(polynomialDegree: n),
+            lutCount: lutCount
+        )
+    }
+
+    /// Conservative engineering floor: B_bk = σ-scale inject bound.
+    package static func bounded(
+        outputNoiseBound: UInt32,
+        polynomialDegree n: Int,
+        lutCount: Int
+    ) -> TFHENoisyBKParams {
+        TFHENoisyBKParams(
+            outputNoiseBound: outputNoiseBound,
+            delta: rotationScale(polynomialDegree: n),
+            lutCount: lutCount
+        )
+    }
+}
+
+package enum TFHENoisyBKBoundProvenance: String, Sendable, Equatable {
+    /// Exact construction fact for the repository's e=0 bootstrap key.
+    case exactNoiselessConstruction
+    /// A conservative bound supplied by a proof or an explicitly audited caller.
+    case callerSuppliedConservative
+    /// Largest residual seen in a finite experiment; never a deterministic bound.
+    case observedSampleMaximum
+}
+
+/// Depth / decodability certificate under noisy (or noiseless) BK.
+package struct TFHENoisyBKCertificate: Sendable, Equatable {
+    package var params: TFHENoisyBKParams
+    package var provenance: TFHENoisyBKBoundProvenance
+    package var hypotheses: [String]
+
+    /// Whether the recorded number is entitled to deterministic-bound semantics.
+    package var hasConservativeBound: Bool {
+        provenance != .observedSampleMaximum
+    }
+
+    /// Arithmetic check on the recorded value, including empirical observations.
+    package var recordedValueWithinHalfGap: Bool {
+        UInt64(params.outputNoiseBound) < UInt64(params.decodingHalfGap)
+    }
+
+    /// Deterministic decodability is true only for an actual conservative bound.
+    package var eachLUTDecodable: Bool {
+        hasConservativeBound && recordedValueWithinHalfGap
+    }
+
+    /// Under publicMS-per-LUT, circuit depth in LUTs is unlimited iff each BR is decodable.
+    package var unboundedDepthUnderPublicMS: Bool { eachLUTDecodable }
+
+    /// Max LUT count before a forced undecodable state (∞ if each LUT OK).
+    package var maxSafeLUTCount: Int {
+        eachLUTDecodable ? Int.max : 0
+    }
+
+    package var meetsHELUTNoiselessHypothesis: Bool {
+        provenance == .exactNoiselessConstruction && params.outputNoiseBound == 0
+    }
+
+    package init(
+        params: TFHENoisyBKParams,
+        provenance: TFHENoisyBKBoundProvenance,
+        hypotheses: [String]
+    ) {
+        self.params = params
+        self.provenance = provenance
+        self.hypotheses = hypotheses
+    }
+
+    package static func forNetlist(
+        params: TFHENoisyBKParams,
+        measurement: TFHENoisyBKMeasurement? = nil,
+        provenance explicitProvenance: TFHENoisyBKBoundProvenance? = nil
+    ) -> TFHENoisyBKCertificate {
+        let provenance = explicitProvenance
+            ?? (measurement != nil
+                ? .observedSampleMaximum
+                : (params.outputNoiseBound == 0
+                    ? .exactNoiselessConstruction
+                    : .callerSuppliedConservative))
+        let boundNoun = provenance == .observedSampleMaximum
+            ? "Observed finite-sample max |e|"
+            : "Conservative post-BR noise bound |e|"
+        var hypotheses = [
+            "\(boundNoun) = \(params.outputNoiseBound) (provenance: \(provenance.rawValue))",
+            "publicMS / decode requires |e| < δ/2 = \(params.decodingHalfGap)",
+            "Each LUT is an independent BR → same floor (no cumulative BR noise under refresh)",
+            "Does not replace TFHEAsymptoticSecurityCertificate Gaussian ingest analysis"
+        ]
+        if let measurement {
+            let provenance = measurement.isAccumulatorSampled
+                ? "\(measurement.bootstraps) PBS × \(measurement.polynomialDegree) "
+                    + "accumulator coeffs = \(measurement.samples) residuals, "
+                    + "credited \(measurement.effectiveSamples) independent"
+                : "trials=\(measurement.samples)"
+            hypotheses.insert(
+                "Identity-LUT observation only; max|e| is not a support bound "
+                    + "(\(provenance), inject B=\(measurement.injectBound), "
+                    + String(format: "σ̂=%.1f", measurement.sigmaHat)
+                    + ", decode_fail=\(measurement.decodeFailures))",
+                at: 3
+            )
+            // σ̂ is an RMS over the residuals and log₂ε ∝ −1/σ̂², so the sample
+            // size, not the arithmetic, sets how much of ε is real. The count
+            // quoted here is the *effective* one: accumulator coefficients are
+            // correlated, and crediting all of them would tighten the bound
+            // beyond what the data supports.
+            hypotheses.insert(
+                String(
+                    format:
+                        "ε sampling uncertainty: σ̂ from %d effective samples ⇒ log₂ε "
+                        + "unresolved to ±%.0f orders; point %.1f, 95%% upper bound %.1f; "
+                        + "±1 order would need ~%d effective samples",
+                    measurement.effectiveSamples,
+                    measurement.epsilonUnresolvedOrders,
+                    measurement.failureLog2Point,
+                    measurement.failureLog2Upper95,
+                    measurement.samplesForOneOrder
+                ),
+                at: 4
+            )
+        } else if params.outputNoiseBound == 0 {
+            hypotheses.insert(
+                "HELUT default BK encrypt is noiseless (e=0 gadget) — production stacks use noisy BK",
+                at: 3
+            )
+        } else {
+            hypotheses.insert(
+                "Caller-supplied engineering bound; provenance must be audited separately",
+                at: 3
+            )
+        }
+        return TFHENoisyBKCertificate(
+            params: params,
+            provenance: provenance,
+            hypotheses: hypotheses
+        )
+    }
+
+    package func assertDecodable(file: StaticString = #file, line: UInt = #line) {
+        precondition(
+            eachLUTDecodable,
+            "TFHENoisyBKCertificate lacks a decodable conservative bound "
+                + "(provenance=\(provenance.rawValue), value=\(params.outputNoiseBound), "
+                + "half=\(params.decodingHalfGap)) at \(file):\(line)"
+        )
+    }
+}
+
+/// One LUT's noisy input ports. `weightSum` is Σ 2^i over those ports.
+package struct TFHENoisyPortBudget: Sendable, Equatable {
+    package var weightSum: Int
+    package var noisyCount: Int
+}
+
+package enum TFHENoisyPortWeight {
+    /// LUT outputs and flip-flop Q are noisy. Primary inputs and constants are exact.
+    package static func budgets(
+        luts: [CleartextNetlistSimulator.LUTCell],
+        dffs: [CleartextNetlistSimulator.DFFCell]
+    ) -> [TFHENoisyPortBudget] {
+        var noisyWires = Set<Int>()
+        noisyWires.reserveCapacity(luts.count + dffs.count)
+        for lut in luts {
+            noisyWires.insert(lut.yWire)
+        }
+        for dff in dffs {
+            noisyWires.insert(dff.qWire)
+        }
+        var budgets: [TFHENoisyPortBudget] = []
+        budgets.reserveCapacity(luts.count)
+        for lut in luts {
+            var weightSum = 0
+            var noisyCount = 0
+            for (index, bit) in lut.aBits.enumerated() {
+                guard case .net(let wire) = bit, noisyWires.contains(wire) else { continue }
+                precondition(index < 30, "LUT port weight 2^\(index) does not fit a port budget")
+                weightSum += 1 << index
+                noisyCount += 1
+            }
+            if noisyCount > 0 {
+                budgets.append(TFHENoisyPortBudget(weightSum: weightSum, noisyCount: noisyCount))
+            }
+        }
+        return budgets
+    }
+}
+
+private func log2SumExp(_ terms: [Double]) -> Double {
+    let finite = terms.filter { $0.isFinite }
+    if finite.isEmpty {
+        return terms.contains(where: { $0 > 0 }) ? Double.infinity : -Double.infinity
+    }
+    let hi = finite.max()!
+    var acc = 0.0
+    for term in finite {
+        acc += pow(2, term - hi)
+    }
+    return hi + log2(acc)
+}
+
+/// Integer the public-MS packer consumes: round(signed torus error / δ).
+package func refreshedNativeError(phase: UInt32, expected: UInt32, nativeDelta: UInt32) -> Int {
+    precondition(nativeDelta > 0)
+    let diff = phase &- expected
+    let signed = diff <= 0x8000_0000 ? Double(diff) : Double(diff) - 4294967296.0
+    return Int((signed / Double(nativeDelta)).rounded())
+}
+
+/// Gaussian BK output noise → circuit-scoped MS failure after BR.
+package struct TFHENoisyBKGaussianCertificate: Sendable, Equatable {
+    /// Sigma used for the bound. Measurement-derived certificates use the
+    /// one-sided 95% upper confidence value, never the RMS point estimate.
+    package var sigmaBK: Double
+    package var delta: UInt32
+    /// Number of post-BR decode events covered by the union bound.
+    package var lutCount: Int
+    package var perLUTFailureProbability: Double
+    package var unionFailureProbability: Double
+    package var targetFailureLog2: Int
+    package var confidenceLevel: Double?
+    package var effectiveSamples: Int?
+    /// Set when this certificate is the port-weighted packing union.
+    /// `failureLog2` then reports that union, which may be positive.
+    package var portWeightedLog2: Double?
+    /// `m=0×5856 m=3×1` — noisy ports grouped by the integer error budget.
+    package var portClassSummary: String?
+
+    package var isConfidenceBound: Bool {
+        confidenceLevel != nil && effectiveSamples != nil
+    }
+
+    package var isSecure: Bool {
+        if let portWeightedLog2 {
+            return portWeightedLog2 <= Double(targetFailureLog2)
+        }
+        return unionFailureProbability <= pow(2, Double(targetFailureLog2))
+    }
+
+    package var failureLog2: Double {
+        if let portWeightedLog2 {
+            return portWeightedLog2
+        }
+        if sigmaBK == 0 {
+            return -Double.infinity
+        }
+        let half = Double(delta) / 2
+        let log2One = log2GaussianTwoSidedTail(stddev: sigmaBK, threshold: half)
+        // Union bound: P_union ≤ lutCount · P_one ⇒ log2 ≤ log2(lutCount) + log2(P_one)
+        let n = max(lutCount, 1)
+        if log2One.isInfinite && log2One < 0 {
+            return log2One
+        }
+        let log2Union = log2(Double(n)) + log2One
+        return min(0, log2Union)
+    }
+
+    /// Union bound over `lutCount` independent post-BR MS events.
+    package static func forDepth(
+        sigmaBK: Double,
+        polynomialDegree n: Int,
+        lutCount: Int,
+        targetFailureLog2: Int = -64
+    ) -> TFHENoisyBKGaussianCertificate {
+        forDepth(
+            sigmaBK: sigmaBK,
+            delta: rotationScale(polynomialDegree: n),
+            lutCount: lutCount,
+            targetFailureLog2: targetFailureLog2
+        )
+    }
+
+    package static func forDepth(
+        sigmaBK: Double,
+        delta: UInt32,
+        lutCount: Int,
+        targetFailureLog2: Int = -64
+    ) -> TFHENoisyBKGaussianCertificate {
+        precondition(sigmaBK >= 0)
+        precondition(delta >= 2)
+        precondition(lutCount >= 0)
+        let half = Double(delta) / 2
+        let pOne: Double
+        if sigmaBK == 0 {
+            pOne = 0
+        } else {
+            pOne = gaussianTwoSidedTail(stddev: sigmaBK, threshold: half)
+        }
+        let pUnion = min(1, Double(max(lutCount, 1)) * pOne)
+        return TFHENoisyBKGaussianCertificate(
+            sigmaBK: sigmaBK,
+            delta: delta,
+            lutCount: lutCount,
+            perLUTFailureProbability: pOne,
+            unionFailureProbability: pUnion,
+            targetFailureLog2: targetFailureLog2,
+            confidenceLevel: nil,
+            effectiveSamples: nil,
+            portWeightedLog2: nil,
+            portClassSummary: nil
+        )
+    }
+
+    /// Union over noisy LUT input ports. A port is noisy when a LUT output or
+    /// a flip-flop Q drives it. Primary inputs and constants are exact.
+    ///
+    /// Each LUT packs refreshed natives with weights 2^i. Every noisy input
+    /// must satisfy |ε| ≤ m, where m · W < k/2 and W is the sum of those
+    /// weights. The per-port threshold is (m + ½)·δ. This is the margin
+    /// packing consumes. The per-wire kδ/2 margin is a different event.
+    package static func forNoisyPorts(
+        sigmaBK: Double,
+        nativeDelta: UInt32,
+        booleanK: Int,
+        budgets: [TFHENoisyPortBudget],
+        targetFailureLog2: Int = -64
+    ) -> TFHENoisyBKGaussianCertificate {
+        precondition(sigmaBK >= 0)
+        precondition(nativeDelta >= 2)
+        precondition(booleanK >= 1)
+        let delta = Double(nativeDelta)
+        var portsByBudget: [Int: Int] = [:]
+        var classLogs: [Double] = []
+        var worstTail = -Double.infinity
+        var portCount = 0
+        for budget in budgets where budget.noisyCount > 0 && budget.weightSum > 0 {
+            let m = Int(floor((Double(booleanK) / 2 - 1e-9) / Double(budget.weightSum)))
+            let threshold = (Double(m) + 0.5) * delta
+            let tail = log2GaussianTwoSidedTail(stddev: sigmaBK, threshold: threshold)
+            let contribution: Double
+            if tail.isInfinite && tail < 0 {
+                contribution = tail
+            } else {
+                contribution = log2(Double(budget.noisyCount)) + tail
+            }
+            classLogs.append(contribution)
+            portsByBudget[m, default: 0] += budget.noisyCount
+            portCount += budget.noisyCount
+            if tail > worstTail { worstTail = tail }
+        }
+        let unionLog2 = log2SumExp(classLogs)
+        let summary = portsByBudget.keys.sorted().map { key in
+            "m=\(key)×\(portsByBudget[key] ?? 0)"
+        }.joined(separator: " ")
+        let pUnion: Double
+        if unionLog2.isInfinite && unionLog2 < 0 {
+            pUnion = 0
+        } else if unionLog2 >= 0 {
+            pUnion = 1
+        } else {
+            pUnion = min(1, pow(2, unionLog2))
+        }
+        return TFHENoisyBKGaussianCertificate(
+            sigmaBK: sigmaBK,
+            delta: nativeDelta,
+            lutCount: portCount,
+            perLUTFailureProbability: worstTail.isInfinite && worstTail < 0
+                ? 0
+                : (worstTail >= 0 ? 1 : pow(2, worstTail)),
+            unionFailureProbability: pUnion,
+            targetFailureLog2: targetFailureLog2,
+            confidenceLevel: nil,
+            effectiveSamples: nil,
+            portWeightedLog2: unionLog2,
+            portClassSummary: summary.isEmpty ? "no noisy ports" : summary
+        )
+    }
+
+    package func assertSecure(file: StaticString = #file, line: UInt = #line) {
+        let sampleText = effectiveSamples.map { String($0) } ?? "none"
+        precondition(
+            isConfidenceBound && isSecure,
+            "Noisy-BK circuit confidence does not clear: events=\(lutCount) "
+                + "sigma95=\(sigmaBK) log2ε=\(failureLog2) target=\(targetFailureLog2) "
+                + "samples=\(sampleText) at \(file):\(line)"
+        )
+    }
+}
+
+/// Apply noisy-BK floor to a `TFHENoiseGrowth` tracker (one BR).
+extension TFHENoiseGrowth {
+    package mutating func afterBlindRotate(noisyBK params: TFHENoisyBKParams) {
+        afterBlindRotate(outputNoiseBound: params.outputNoiseBound)
+    }
+}
+
+/// Centered torus magnitude: `min(x, q−x)` on `UInt32`.
+package func torusCenteredMagnitude(_ x: UInt32) -> UInt32 {
+    x <= 0x8000_0000 ? x : UInt32(0) &- x
+}
+
+private struct NoisyBKIdentityTrial: Sendable {
+    let bit: UInt32
+    let lwe: LWECiphertext
+}
+
+private struct NoisyBKIdentityResidual: Sendable {
+    let error: UInt32
+    let decodeFailed: Bool
+    let nativeError: Int
+}
+
+/// Indexed result storage for bounded synchronous workers. Every slot access is
+/// lock-protected; the expensive PBS runs outside the lock.
+private final class NoisyBKIdentityResultSlots: @unchecked Sendable {
+    private var slots: [NoisyBKIdentityResidual?]
+    private let lock = NSLock()
+
+    init(count: Int) {
+        slots = Array(repeating: nil, count: count)
+    }
+
+    func store(_ residual: NoisyBKIdentityResidual, at index: Int) {
+        lock.lock()
+        slots[index] = residual
+        lock.unlock()
+    }
+
+    func snapshot() -> [NoisyBKIdentityResidual] {
+        lock.lock()
+        defer { lock.unlock() }
+        return slots.enumerated().map { index, residual in
+            precondition(residual != nil, "missing noisy-BK identity result at trial \(index)")
+            return residual!
+        }
+    }
+}
+
+/// Empirical post-BR residual under a (possibly noisy) bootstrap key.
+/// Identity LUT: encrypt bit `b`, PBS `[0,1]`, compare phase to `b·δ`.
+package struct TFHENoisyBKMeasurement: Sendable, Equatable {
+    package var maxAbsError: UInt32
+    package var rms: Double
+    package var samples: Int
+    package var injectBound: UInt32
+    package var delta: UInt32
+    package var polynomialDegree: Int
+    package var decodeFailures: Int
+    /// Histogram of refreshed native ε = round(signed error / δ). Packing consumes this integer.
+    package var nativeErrorHistogram: [Int: Int]
+
+    // MARK: Sample provenance
+    //
+    // `samples` is a count of *residuals*, which is not the same thing as a
+    // count of bootstraps. The single-residual estimator (`identity`) draws one
+    // residual per PBS, so the two agree. The accumulator estimator
+    // (`identityAllCoefficients`) draws N residuals per PBS, so `samples` is
+    // ~N× `bootstraps`. The χ² confidence bound assumes independent samples, so
+    // any caller quoting a bound from the accumulator estimator has to know
+    // which of the two it is holding. Hence this field rather than a comment.
+
+    /// Number of PBS evaluations behind `samples`. Equals `samples` for the
+    /// single-residual estimator.
+    package var bootstraps: Int
+
+    /// Effective *independent* sample count backing `rms`, which is what a
+    /// confidence bound may divide by.
+    ///
+    /// For the single-residual estimator this is `samples`: one residual per
+    /// bootstrap, genuinely independent. For the accumulator estimator it is
+    /// **not** `samples`. The N residuals from one bootstrap share the same
+    /// GGSW external-product error, so they are identically distributed but
+    /// correlated, and the measured effective count per bootstrap is a flat
+    /// 7.7–11.7 across N ∈ {32,64,128,256} rather than N
+    /// (`TFHENoisyBKEffectiveSampleTests`). Quoting `samples` here would make
+    /// `sigmaUpper95` too tight, i.e. ε too good — the dangerous direction.
+    package var effectiveSamples: Int
+
+    /// Max |residual| over *all* accumulator coefficients, when measured.
+    /// `nil` for the single-residual estimator, which only ever sees
+    /// coefficient 0. Kept distinct from `maxAbsError` because decodability is
+    /// a property of the extracted coefficient, not of the whole accumulator.
+    package var accumulatorMaxAbsError: UInt32?
+
+    /// Whether `samples` counts accumulator coefficients rather than bootstraps.
+    package var isAccumulatorSampled: Bool { bootstraps != samples }
+
+    package var sigmaHat: Double { rms }
+
+    package var decodingHalfGap: UInt32 { delta / 2 }
+
+    // MARK: Sampling uncertainty
+    //
+    // `rms` is an RMS over exactly `samples` observations (one residual per
+    // trial), and ε is an analytic tail evaluated at it. Because log₂ε ∝ −1/σ̂²,
+    // small-sample error in σ̂ dominates ε. These accessors exist so no caller
+    // can quote ε against a bar without also seeing what the sample size can
+    // actually resolve. See the 2026-08-15 re-validation of C35.
+
+    /// One-sided 95% upper confidence bound on σ from this sample.
+    ///
+    /// Divides by `effectiveSamples`, not `samples`. The two differ only for the
+    /// accumulator estimator, where correlated coefficients make the raw
+    /// residual count an overstatement of independence.
+    package var sigmaUpper95: Double {
+        sigmaUpperConfidenceBound(sigmaHat: sigmaHat, samples: effectiveSamples)
+    }
+
+    /// `log₂ε` recomputed at `sigmaUpper95` — the conservative figure, and the
+    /// only one that should be compared against a target such as 2⁻⁶⁴.
+    package var failureLog2Upper95: Double {
+        guard sigmaUpper95.isFinite, sigmaUpper95 > 0 else { return 0 }
+        return log2GaussianTwoSidedTail(
+            stddev: sigmaUpper95,
+            threshold: Double(decodingHalfGap)
+        )
+    }
+
+    /// `log₂ε` at the point estimate of σ̂ (what the tool historically printed).
+    package var failureLog2Point: Double {
+        guard sigmaHat > 0 else { return -Double.infinity }
+        return log2GaussianTwoSidedTail(
+            stddev: sigmaHat,
+            threshold: Double(decodingHalfGap)
+        )
+    }
+
+    /// Orders of `log₂ε` this sample size cannot resolve. Uses the effective
+    /// count for the same reason `sigmaUpper95` does.
+    package var epsilonUnresolvedOrders: Double {
+        epsilonResolutionOrders(failureLog2: failureLog2Point, samples: effectiveSamples)
+    }
+
+    /// Whether the target bar is met at the 95% upper bound, not merely at the
+    /// point estimate.
+    package func meetsTargetWithConfidence(targetLog2: Double) -> Bool {
+        failureLog2Upper95 <= targetLog2
+    }
+
+    /// Samples needed to resolve ε to ±1 order at this magnitude.
+    ///
+    /// Usually *not* the number you want — see `samplesToMeetTarget`. Resolving
+    /// to ±1 order is far stricter than clearing a bar, and conflating the two
+    /// led to declaring C35 undecidable when it was only under-sampled
+    /// (AUDIT §13 vs §14).
+    package var samplesForOneOrder: Int {
+        samplesForEpsilonResolution(failureLog2: failureLog2Point)
+    }
+
+    /// Smallest sample count whose 95% bound would clear `targetLog2`, or `nil`
+    /// if no sample count can because the point estimate already fails.
+    ///
+    /// Lets a caller distinguish the two ways a bar goes unmet, which need
+    /// opposite responses:
+    ///
+    ///  - **under-sampled** — point estimate clears, bound does not. Buy more
+    ///    trials. C35 and C36 are this.
+    ///  - **genuinely unmet** — point estimate itself fails. More trials are
+    ///    wasted compute; the claim has to be weakened. C55 and C56 are this,
+    ///    and both already say so.
+    package func samplesToMeetTarget(targetLog2: Double = -64) -> Int? {
+        samplesToClearFailureTarget(
+            sigmaHat: sigmaHat,
+            threshold: Double(decodingHalfGap),
+            targetLog2: targetLog2
+        )
+    }
+
+    /// Whether this measurement's *sample size* is what stands between it and
+    /// the bar. True means more trials would settle it.
+    package func isUnderSampledForTarget(targetLog2: Double = -64) -> Bool {
+        guard !meetsTargetWithConfidence(targetLog2: targetLog2) else { return false }
+        return samplesToMeetTarget(targetLog2: targetLog2) != nil
+    }
+
+    package var eachLUTDecodable: Bool {
+        UInt64(maxAbsError) < UInt64(decodingHalfGap)
+    }
+
+    /// Independent samples one bootstrap is credited with under accumulator
+    /// sampling.
+    ///
+    /// Measured gain is 7.7–11.7 across N ∈ {32,64,128,256}, flat in N rather
+    /// than proportional to it, and mildly *decreasing* with N
+    /// (`TFHENoisyBKEffectiveSampleTests`). This constant sits below the lowest
+    /// measured value on purpose: the estimate feeds a confidence bound, and
+    /// crediting too many independent samples makes that bound too tight. Under
+    /// -crediting only costs sample size. It is not extrapolated to N=1024,
+    /// where no measurement has been taken.
+    package static let accumulatorSampleGain = 4
+
+    package init(
+        maxAbsError: UInt32,
+        rms: Double,
+        samples: Int,
+        injectBound: UInt32,
+        delta: UInt32,
+        polynomialDegree: Int,
+        decodeFailures: Int,
+        bootstraps: Int? = nil,
+        accumulatorMaxAbsError: UInt32? = nil,
+        effectiveSamples: Int? = nil,
+        nativeErrorHistogram: [Int: Int] = [:]
+    ) {
+        self.maxAbsError = maxAbsError
+        self.rms = rms
+        self.samples = samples
+        self.injectBound = injectBound
+        self.delta = delta
+        self.polynomialDegree = polynomialDegree
+        self.decodeFailures = decodeFailures
+        self.nativeErrorHistogram = nativeErrorHistogram
+        let pbs = bootstraps ?? samples
+        self.bootstraps = pbs
+        self.accumulatorMaxAbsError = accumulatorMaxAbsError
+        if let effectiveSamples {
+            self.effectiveSamples = effectiveSamples
+        } else if pbs == samples {
+            // Single-residual estimator: one independent draw per bootstrap.
+            self.effectiveSamples = samples
+        } else {
+            // Accumulator estimator: credit the conservative measured gain, and
+            // never more than the residuals actually collected.
+            self.effectiveSamples = min(
+                samples,
+                max(1, pbs * TFHENoisyBKMeasurement.accumulatorSampleGain)
+            )
+        }
+    }
+
+    /// Report an observed maximum without granting it deterministic-bound semantics.
+    package func observationReport(lutCount: Int) -> TFHENoisyBKCertificate {
+        TFHENoisyBKCertificate.forNetlist(
+            params: TFHENoisyBKParams(
+                outputNoiseBound: maxAbsError,
+                delta: delta,
+                lutCount: lutCount
+            ),
+            measurement: self,
+            provenance: .observedSampleMaximum
+        )
+    }
+
+    /// 95%-confidence Gaussian union bound over the supplied post-BR events.
+    package func gaussianCertificate(
+        lutCount: Int,
+        targetFailureLog2: Int = -64
+    ) -> TFHENoisyBKGaussianCertificate {
+        var certificate = TFHENoisyBKGaussianCertificate.forDepth(
+            sigmaBK: sigmaUpper95,
+            delta: delta,
+            lutCount: lutCount,
+            targetFailureLog2: targetFailureLog2
+        )
+        certificate.confidenceLevel = 0.95
+        certificate.effectiveSamples = effectiveSamples
+        return certificate
+    }
+
+    /// Port-weighted packing union at this measurement's σ₉₅. `nativeDelta` is δ, not kδ.
+    package func portWeightedCertificate(
+        budgets: [TFHENoisyPortBudget],
+        nativeDelta: UInt32,
+        booleanK: Int,
+        targetFailureLog2: Int = -64
+    ) -> TFHENoisyBKGaussianCertificate {
+        var certificate = TFHENoisyBKGaussianCertificate.forNoisyPorts(
+            sigmaBK: sigmaUpper95,
+            nativeDelta: nativeDelta,
+            booleanK: booleanK,
+            budgets: budgets,
+            targetFailureLog2: targetFailureLog2
+        )
+        certificate.confidenceLevel = 0.95
+        certificate.effectiveSamples = effectiveSamples
+        return certificate
+    }
+
+    package var nativeErrorHistogramLine: String {
+        if nativeErrorHistogram.isEmpty { return "native ε (none)" }
+        let parts = nativeErrorHistogram.keys.sorted().map { bin in
+            "\(bin):\(nativeErrorHistogram[bin] ?? 0)"
+        }
+        return "native ε " + parts.joined(separator: " ")
+    }
+
+    /// Identity-LUT BR residual. Uses `existing` BK when provided (no extra encrypt).
+    ///
+    /// Key generation, random trial preparation, and result reduction remain
+    /// serial. `maxConcurrentTrials` bounds only the RNG-free PBS evaluations,
+    /// preserving the exact serial sample stream and reduction order.
+    package static func identity(
+        secret: TFHESecretKey,
+        params: GGSWParams,
+        noise: TFHENoiseParams = .none,
+        bootstrapKey existing: BootstrapKey? = nil,
+        trials: Int = 16,
+        seed: UInt32 = 0xB10C,
+        publicRefreshCompatible: Bool = true,
+        booleanScaleMul: Int = 1,
+        maxConcurrentTrials: Int = 1
+    ) -> TFHENoisyBKMeasurement {
+        precondition(trials > 0)
+        precondition(maxConcurrentTrials > 0)
+        let n = params.tfhe.polynomialDegree
+        let twoN = 2 * n
+        let scale = rotationBooleanScale(polynomialDegree: n, mul: booleanScaleMul)
+        var rng = LCG32(state: seed == 0 ? 1 : seed)
+        let bk = existing ?? bootstrapKey(
+            secret: secret,
+            params: params,
+            rng: &rng,
+            publicRefreshCompatible: publicRefreshCompatible,
+            noise: noise
+        )
+        let identity: [UInt32] = [0, 1]
+
+        // Preserve the historical streaming path exactly unless concurrency is
+        // explicitly requested. This remains the allocation/timing baseline.
+        let nativeDelta = rotationScale(polynomialDegree: n)
+        if maxConcurrentTrials == 1 || trials == 1 {
+            var maxAbs: UInt32 = 0
+            var sumSq: Double = 0
+            var failures = 0
+            var histogram: [Int: Int] = [:]
+            for _ in 0..<trials {
+                let bit = rng.next() & 1
+                let lwe = encryptLWERotationNative(
+                    message: encodeRotationNativeBit(bit, k: booleanScaleMul),
+                    secret: secret.lweSecret,
+                    twoN: twoN,
+                    rng: &rng
+                )
+                let out = evaluateLUTBlindRotate(
+                    truthTable: identity,
+                    inputs: [lwe],
+                    bootstrapKey: bk,
+                    scale: scale
+                )
+                let phase = decryptLWE(out, secret: secret)
+                let expected = bit &* scale
+                let err = torusCenteredMagnitude(phase &- expected)
+                if err > maxAbs { maxAbs = err }
+                sumSq += Double(err) * Double(err)
+                histogram[refreshedNativeError(phase: phase, expected: expected, nativeDelta: nativeDelta), default: 0] += 1
+                if decodeRotationBoolean(phase, scale: scale) != bit {
+                    failures += 1
+                }
+            }
+            return TFHENoisyBKMeasurement(
+                maxAbsError: maxAbs,
+                rms: sqrt(sumSq / Double(trials)),
+                samples: trials,
+                injectBound: noise.bound,
+                delta: scale,
+                polynomialDegree: n,
+                decodeFailures: failures,
+                nativeErrorHistogram: histogram
+            )
+        }
+
+        // Consume the same RNG values in the same trial-major order as the
+        // serial loop before any work is dispatched. The bootstrap key is a
+        // read-only value during all evaluations.
+        let lweSecret = secret.lweSecret
+        var preparedStorage: [NoisyBKIdentityTrial] = []
+        preparedStorage.reserveCapacity(trials)
+        for _ in 0..<trials {
+            let bit = rng.next() & 1
+            let lwe = encryptLWERotationNative(
+                message: encodeRotationNativeBit(bit, k: booleanScaleMul),
+                secret: lweSecret,
+                twoN: twoN,
+                rng: &rng
+            )
+            preparedStorage.append(NoisyBKIdentityTrial(bit: bit, lwe: lwe))
+        }
+        let prepared = preparedStorage
+        let results = NoisyBKIdentityResultSlots(count: trials)
+        let evaluateTrial: @Sendable (NoisyBKIdentityTrial) -> NoisyBKIdentityResidual = { trial in
+            let out = evaluateLUTBlindRotate(
+                truthTable: identity,
+                inputs: [trial.lwe],
+                bootstrapKey: bk,
+                scale: scale
+            )
+            let phase = decryptLWE(out, secret: secret)
+            let expected = trial.bit &* scale
+            return NoisyBKIdentityResidual(
+                error: torusCenteredMagnitude(phase &- expected),
+                decodeFailed: decodeRotationBoolean(phase, scale: scale) != trial.bit,
+                nativeError: refreshedNativeError(
+                    phase: phase,
+                    expected: expected,
+                    nativeDelta: nativeDelta
+                )
+            )
+        }
+
+        // Settle the shared test-polynomial cache serially, then run a bounded
+        // number of strided workers. The first trial is still reduced at index 0.
+        results.store(evaluateTrial(prepared[0]), at: 0)
+        let workerCount = min(maxConcurrentTrials, trials - 1)
+        DispatchQueue.concurrentPerform(iterations: workerCount) { workerIndex in
+            var trialIndex = 1 + workerIndex
+            while trialIndex < trials {
+                results.store(evaluateTrial(prepared[trialIndex]), at: trialIndex)
+                trialIndex += workerCount
+            }
+        }
+
+        var maxAbs: UInt32 = 0
+        var sumSq: Double = 0
+        var failures = 0
+        var histogram: [Int: Int] = [:]
+        for residual in results.snapshot() {
+            if residual.error > maxAbs { maxAbs = residual.error }
+            sumSq += Double(residual.error) * Double(residual.error)
+            histogram[residual.nativeError, default: 0] += 1
+            if residual.decodeFailed { failures += 1 }
+        }
+        return TFHENoisyBKMeasurement(
+            maxAbsError: maxAbs,
+            rms: sqrt(sumSq / Double(trials)),
+            samples: trials,
+            injectBound: noise.bound,
+            delta: scale,
+            polynomialDegree: n,
+            decodeFailures: failures,
+            nativeErrorHistogram: histogram
+        )
+    }
+
+    /// Identity-LUT BR residual measured across **every** accumulator
+    /// coefficient instead of only the extracted one.
+    ///
+    /// Why this exists: `identity` above runs a full PBS and then keeps a single
+    /// scalar residual, discarding the other N−1 coefficients of the GLWE
+    /// accumulator. Since log₂ε ∝ −1/σ̂², the sample size needed to pin ε down
+    /// grows fast, and at N=1024 the single-residual estimator needs ~8 450
+    /// bootstraps to resolve ε to ±1 order — about eight days. The discarded
+    /// coefficients carry noise from the same distribution, so measuring all of
+    /// them yields ~N residuals per bootstrap at no extra cryptographic cost.
+    ///
+    /// How the reference is obtained: blind rotate leaves
+    /// `ACC = X^{−p}·v` where `p = b − Σ_j a_j s_j` is the LWE phase in `Z_2N`.
+    /// This is a self-test, so `s` is in hand and `p` is computable exactly —
+    /// no decryption of a noisy quantity is involved in forming the reference.
+    /// Rotating the test polynomial by that exact power gives the noiseless
+    /// accumulator, and the residual is the difference. An approximate
+    /// reference would contaminate the estimate, which is why the power is
+    /// recomputed from the secret rather than inferred from the output.
+    ///
+    /// Independence caveat, stated because it bears on the confidence bound:
+    /// the per-coefficient residuals are identically distributed but only
+    /// *approximately* independent — the CMUX ladder mixes external-product
+    /// error across coefficients. `bootstraps` is therefore recorded alongside
+    /// `samples` so a caller can compare the two estimators and see whether the
+    /// effective sample size is really N per PBS.
+    /// `TFHENoisyBKAccumulatorAgreement` does exactly that.
+    package static func identityAllCoefficients(
+        secret: TFHESecretKey,
+        params: GGSWParams,
+        noise: TFHENoiseParams = .none,
+        bootstrapKey existing: BootstrapKey? = nil,
+        trials: Int = 16,
+        seed: UInt32 = 0xB10C,
+        publicRefreshCompatible: Bool = true,
+        booleanScaleMul: Int = 1
+    ) -> TFHENoisyBKMeasurement {
+        precondition(trials > 0)
+        let n = params.tfhe.polynomialDegree
+        let twoN = 2 * n
+        let scale = rotationBooleanScale(polynomialDegree: n, mul: booleanScaleMul)
+        var rng = LCG32(state: seed == 0 ? 1 : seed)
+        let bk = existing ?? bootstrapKey(
+            secret: secret,
+            params: params,
+            rng: &rng,
+            publicRefreshCompatible: publicRefreshCompatible,
+            noise: noise
+        )
+        let identity: [UInt32] = [0, 1]
+        let testPoly = TFHETestPolyCache.shared.testPolynomial(
+            truthTable: identity,
+            degree: n,
+            scale: scale
+        )
+        let s = secret.lweSecret
+
+        var extractedMaxAbs: UInt32 = 0
+        var accMaxAbs: UInt32 = 0
+        var sumSq: Double = 0
+        var sampleCount = 0
+        var failures = 0
+
+        for _ in 0..<trials {
+            let bit = rng.next() & 1
+            let lwe = encryptLWERotationNative(
+                message: encodeRotationNativeBit(bit, k: booleanScaleMul),
+                secret: s,
+                twoN: twoN,
+                rng: &rng
+            )
+            let packed = packLWEBits([lwe], twoN: twoN)
+            let acc = blindRotate(
+                testPolynomial: testPoly,
+                lwe: packed,
+                bootstrapKey: bk
+            )
+
+            // Exact noiseless accumulator: X^{−p}·v, p the LWE phase in Z_2N.
+            var rotation = -rotationPower(packed.b, twoN: twoN)
+            for j in 0..<packed.lweDimension where s[j] == 1 {
+                rotation += rotationPower(packed.a[j], twoN: twoN)
+            }
+            let reference = negacyclicMultiplyByXPower(testPoly, power: rotation)
+
+            let phases = decryptGLWE(acc, secret: secret)
+            precondition(phases.count == n && reference.count == n)
+            for i in 0..<n {
+                let err = torusCenteredMagnitude(phases[i] &- reference[i])
+                if err > accMaxAbs { accMaxAbs = err }
+                sumSq += Double(err) * Double(err)
+            }
+            sampleCount += n
+
+            // Coefficient 0 is what `sampleExtractLWE` lifts, so decodability
+            // and the extracted-residual max stay defined on it alone — same
+            // semantics as `identity` above.
+            let err0 = torusCenteredMagnitude(phases[0] &- reference[0])
+            if err0 > extractedMaxAbs { extractedMaxAbs = err0 }
+            if decodeRotationBoolean(phases[0], scale: scale) != bit {
+                failures += 1
+            }
+        }
+
+        return TFHENoisyBKMeasurement(
+            maxAbsError: extractedMaxAbs,
+            rms: sqrt(sumSq / Double(sampleCount)),
+            samples: sampleCount,
+            injectBound: noise.bound,
+            delta: scale,
+            polynomialDegree: n,
+            decodeFailures: failures,
+            bootstraps: trials,
+            accumulatorMaxAbsError: accMaxAbs
+        )
+    }
+
+    package static func markdownTable(_ rows: [TFHENoisyBKMeasurement]) -> String {
+        var lines = [
+            "| gadget N | inject B | trials | max |e| | σ̂ | δ/2 | decode fail | decodable |",
+            "|----------|----------|--------|---------|-----|-----|-------------|-----------|"
+        ]
+        for row in rows {
+            let ok = row.eachLUTDecodable && row.decodeFailures == 0 ? "yes" : "no"
+            lines.append(
+                "| \(row.polynomialDegree) | \(row.injectBound) | \(row.samples) | \(row.maxAbsError) | "
+                    + String(format: "%.1f", row.sigmaHat) + " | \(row.decodingHalfGap) | "
+                    + "\(row.decodeFailures) | \(ok) |"
+            )
+        }
+        return lines.joined(separator: "\n")
+    }
+}

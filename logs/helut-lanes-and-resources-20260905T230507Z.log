@@ -1,0 +1,112 @@
+=== HELUT receipt: lane-distinct batch verification + resource metrics ===
+date: 2026-09-05T23:05:07Z
+cmd: swift test -c release --filter 'BatchLaneDistinctTests|TensorLUTMeltScalingTests'
+host: Apple M4 Max / macOS 26.6.2
+swift: swift-driver version: 1.148.6 Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)
+yosys: Yosys 0.68+post (git sha1 c12172fbae8af5e20f6fb52e3d4e92d56ed587b6, Release, AppleClang clang++ 21.0.0.21000101)
+
+closes two admitted gaps:
+  1. batch lanes were bitwise-identical broadcasts and outputs were never read back
+     (packEncodedBits replicates one encoded lane B times; runScriptedClock drops output buffers)
+  2. no resource metric existed anywhere, so no ABC comparison was even measurable
+
+NOT changed: the shipped --bench timed path, so archived batch numbers in logs/ keep their meaning.
+NOTE: BATCH_LANES wall times are single graph runs dominated by JIT/warm-up and are NOT throughput.
+
+Building for production...
+[0/9] Write swift-version--58304C5D6DBC2206.txt
+Build complete! (0.09s)
+Test Suite 'Selected tests' started at 2026-09-05 16:05:08.528.
+Test Suite 'helutPackageTests.xctest' started at 2026-09-05 16:05:08.528.
+Test Suite 'BatchLaneDistinctTests' started at 2026-09-05 16:05:08.528.
+Test Case '-[HELUTTests.BatchLaneDistinctTests testEveryBatchLaneDoesIndependentVerifiedWork]' started.
+Test Case '-[HELUTTests.BatchLaneDistinctTests testEveryBatchLaneDoesIndependentVerifiedWork]' passed (0.204 seconds).
+Test Case '-[HELUTTests.BatchLaneDistinctTests testPerLaneChecksumDetectsASingleCorruptedLane]' started.
+Test Case '-[HELUTTests.BatchLaneDistinctTests testPerLaneChecksumDetectsASingleCorruptedLane]' passed (0.024 seconds).
+Test Suite 'BatchLaneDistinctTests' passed at 2026-09-05 16:05:08.757.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.228 (0.228) seconds
+Test Suite 'TensorLUTMeltScalingTests' started at 2026-09-05 16:05:08.757.
+Test Case '-[HELUTTests.TensorLUTMeltScalingTests testColdStartMeltIsBudgetLeverOrBoundary]' started.
+Test Case '-[HELUTTests.TensorLUTMeltScalingTests testColdStartMeltIsBudgetLeverOrBoundary]' passed (7.694 seconds).
+Test Case '-[HELUTTests.TensorLUTMeltScalingTests testDiscoveredVersusHandDesignedResourceCost]' started.
+Test Case '-[HELUTTests.TensorLUTMeltScalingTests testDiscoveredVersusHandDesignedResourceCost]' passed (17.822 seconds).
+Test Case '-[HELUTTests.TensorLUTMeltScalingTests testMeltScalingByMeltRegionSize]' started.
+Test Case '-[HELUTTests.TensorLUTMeltScalingTests testMeltScalingByMeltRegionSize]' passed (7.258 seconds).
+Test Case '-[HELUTTests.TensorLUTMeltScalingTests testMeltScalingBySurroundingCircuitSize]' started.
+Test Case '-[HELUTTests.TensorLUTMeltScalingTests testMeltScalingBySurroundingCircuitSize]' passed (48.661 seconds).
+Test Case '-[HELUTTests.TensorLUTMeltScalingTests testSearchConvergesFromSampledStimulusAndStillProves]' started.
+Test Case '-[HELUTTests.TensorLUTMeltScalingTests testSearchConvergesFromSampledStimulusAndStillProves]' passed (20.520 seconds).
+Test Suite 'TensorLUTMeltScalingTests' passed at 2026-09-05 16:06:50.714.
+	 Executed 5 tests, with 0 failures (0 unexpected) in 101.956 (101.957) seconds
+Test Suite 'helutPackageTests.xctest' passed at 2026-09-05 16:06:50.714.
+	 Executed 7 tests, with 0 failures (0 unexpected) in 102.184 (102.185) seconds
+Test Suite 'Selected tests' passed at 2026-09-05 16:06:50.714.
+	 Executed 7 tests, with 0 failures (0 unexpected) in 102.184 (102.186) seconds
+Compiled module 'ripple4': 8 inputs, 11 LUTs, 0 DFFs, 5 outputs
+Compile breakdown: boolean-safe LUT lower 0.00 s, graph build 0.00 s (total 0.00 s)
+BATCH_LANES lanes=1 input_bits=8 checked=5 mismatches=0 distinct_lane_outputs=1 digest=d639180d47f1636a wall=0.0920s
+Compiled module 'ripple4': 8 inputs, 11 LUTs, 0 DFFs, 5 outputs
+Compile breakdown: boolean-safe LUT lower 0.00 s, graph build 0.00 s (total 0.00 s)
+BATCH_LANES lanes=16 input_bits=8 checked=80 mismatches=0 distinct_lane_outputs=16 digest=8ff440f7801a1a7d wall=0.0512s
+Compiled module 'ripple4': 8 inputs, 11 LUTs, 0 DFFs, 5 outputs
+Compile breakdown: boolean-safe LUT lower 0.00 s, graph build 0.00 s (total 0.00 s)
+BATCH_LANES lanes=64 input_bits=8 checked=320 mismatches=0 distinct_lane_outputs=28 digest=2c81f1c165bf1edd wall=0.0073s
+Compiled module 'ripple4': 8 inputs, 11 LUTs, 0 DFFs, 5 outputs
+Compile breakdown: boolean-safe LUT lower 0.00 s, graph build 0.00 s (total 0.00 s)
+BATCH_LANES lanes=256 input_bits=8 checked=1280 mismatches=0 distinct_lane_outputs=31 digest=316ae77a78a0150d wall=0.0050s
+BATCH_LANES verified: 256 lanes, 1280 output bits each checked against its own oracle run, 31 distinct lane output signatures
+Compiled module 'ripple4': 8 inputs, 11 LUTs, 0 DFFs, 5 outputs
+Compile breakdown: boolean-safe LUT lower 0.00 s, graph build 0.00 s (total 0.00 s)
+Compiled module 'ripple4': 8 inputs, 11 LUTs, 0 DFFs, 5 outputs
+Compile breakdown: boolean-safe LUT lower 0.00 s, graph build 0.00 s (total 0.00 s)
+BATCH_LANES negative control: lane 37 corruption produced 5 mismatch(es); digest 2c81f1c165bf1edd → a06c2874ad01d2c4
+MELT_SCALING cold-start gen=120 pop=48 → REFUTED fitness=-16.0 frac=0 search=1.40s
+MELT_SCALING cold-start gen=500 pop=48 → PROVED fitness=0.0 frac=0 search=5.41s
+MELT_SCALING cold-start verdict: BUDGET LEVER — full-circuit melt proved at 500 generations / population 48
+
+MELT_SCALING axis-C (4-bit cold start, escalating budget)
+  bits  LUTs  melted  rows   space   search_s  fitness    frac  frozen  erased        searched
+     4     8      8    256     256      1.40  -16.0000     0     yes  REFUTED       REFUTED
+     4     8      8    256     256      5.41    0.0000     0     yes  REFUTED       PROVED
+
+MELT_RESOURCE hand-designed 4-bit ripple adder
+  source TensorLUT cells : 8
+  post abc -lut 6        : 6
+  combinational levels   : 4
+MELT_RESOURCE melt=2/8 proven; post abc -lut 6 = 6 vs hand-designed 6 → no difference
+MELT_RESOURCE melt=4/8 proven; post abc -lut 6 = 6 vs hand-designed 6 → no difference
+MELT_RESOURCE melt=6/8 proven; post abc -lut 6 = 6 vs hand-designed 6 → no difference
+
+MELT_RESOURCE boundary: LUT count under one ABC recipe is the only resource proxy this repository can produce. There is no area, depth, power, or timing model, so no simplification claim against Yosys/ABC follows from these numbers either way.
+MELT_SCALING axis-B boundary: melting 8 of 8 LUTs did not prove — REFUTED, 0 fractional entries, fitness -16.0
+
+MELT_SCALING axis-B (fixed 4-bit adder, growing melt region)
+  bits  LUTs  melted  rows   space   search_s  fitness    frac  frozen  erased        searched
+     4     8      2    256     256      1.33    0.0000     0     yes  REFUTED       PROVED
+     4     8      4    256     256      1.33    0.0000     0     yes  REFUTED       PROVED
+     4     8      6    256     256      1.33    0.0000     0     yes  REFUTED       PROVED
+     4     8      8    256     256      1.33  -16.0000     0     yes  REFUTED       REFUTED
+
+MELT_SCALING axis-A (fixed 2-LUT melt, growing circuit)
+  bits  LUTs  melted  rows   space   search_s  fitness    frac  frozen  erased        searched
+     2     4      2     16      16      1.14    0.0000     0     yes  REFUTED       PROVED
+     3     6      2     64      64      1.24    0.0000     0     yes  REFUTED       PROVED
+     4     8      2    256     256      1.32    0.0000     0     yes  REFUTED       PROVED
+     5    10      2   1024    1024      1.71    0.0000     0     yes  REFUTED       PROVED
+     6    12      2   4096    4096      3.08    0.0000     0     yes  REFUTED       PROVED
+     7    14      2  16384   16384      7.95    0.0000     0     yes  REFUTED       PROVED
+     8    16      2  65536   65536     28.63    0.0000     0     yes  REFUTED       PROVED
+MELT_SCALING sampled gen=500 rows=64/65536 (0.10%) → PROVED fitness=0.0 search=5.45s
+MELT_SCALING sampled gen=500 rows=256/65536 (0.39%) → PROVED fitness=0.0 search=5.90s
+MELT_SCALING sampled gen=500 rows=1024/65536 (1.56%) → PROVED fitness=0.0 search=7.56s
+
+MELT_SCALING axis-D (8-bit adder, 2-LUT melt, sampled training stimulus)
+  bits  LUTs  melted  rows   space   search_s  fitness    frac  frozen  erased        searched
+     8    16      2     64   65536      5.45    0.0000     0     yes  REFUTED       PROVED
+     8    16      2    256   65536      5.90    0.0000     0     yes  REFUTED       PROVED
+     8    16      2   1024   65536      7.56    0.0000     0     yes  REFUTED       PROVED
+MELT_SCALING sampling verdict: search cost DECOUPLES from input space — 64 of 65536 rows (0.10%) sufficed, and the result is formally proven over all 65536 assignments.
+◇ Test run started.
+↳ Testing Library Version: 1902
+↳ Target Platform: arm64e-apple-macos14.0
+✔ Test run with 0 tests in 0 suites passed after 0.001 seconds.

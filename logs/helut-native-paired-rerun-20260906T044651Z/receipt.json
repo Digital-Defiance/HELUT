@@ -1,0 +1,238 @@
+{
+  "schema": "helut-native-paired-receipt-v2",
+  "verdict": {
+    "functional": "PASS",
+    "preregisteredProtocol": "PASS",
+    "historicalPerformance": "FIRST_TESTED_GRAPH_WIN_AT_B32768",
+    "pairedPerformance": "NO_CROSSOVER_THROUGH_B65536"
+  },
+  "preregister": {
+    "path": "logs/helut-native-paired-rerun-20260906T044651Z/preregister.json",
+    "sha256": "e37d83871af0e43e4d8d1ed3e76fd38dddee7e4e7d061da98a9a640b227b458c"
+  },
+  "predecessor": {
+    "path": "logs/helut-native-paired-20260906T042650Z/receipt.json",
+    "sha256": "df72274216b02b1790924c619eca2e966b509c2a98df941939a5387840d3b10d",
+    "status": "Preserved functional PASS / protocol PARTIAL run; not replaced."
+  },
+  "execution": {
+    "commandMatchedPreregister": true,
+    "requestedWorkers": 16,
+    "timedTrialsPerPoint": 5,
+    "xctestFooter": "Executed 1 test, with 0 failures (0 unexpected)",
+    "xctestDurationSeconds": 3.992,
+    "toolTransportExitCode": -1,
+    "toolTransportNote": "The execution transport reported its known synthetic -1 despite the XCTest PASS footer and complete fail-closed harness output.",
+    "verilatorBuildSecondsExcluded": 1.88,
+    "result": "PASS"
+  },
+  "provenance": {
+    "gitCommit": "4d47ad0ef40c593bb3a0e4ab5aa2e668b917f975",
+    "workingTreeDirty": true,
+    "testSourceSHA256": "258ea3cddb7d03250433ec6f5ba81d073b4e04776913c9d0303340d2b80e57a3",
+    "compiledXCTestSHA256": "f9b7d1fc553234f346e9dc123ed4ae9f184a24d7d46d411e94781007a6e29341",
+    "hostModel": "Mac16,5",
+    "activeProcessorCount": 16,
+    "operatingSystemVersion": "26.6.2",
+    "verilatorVersion": "5.052",
+    "yosysVersion": "0.68+post c12172fbae8af5e20f6fb52e3d4e92d56ed587b6"
+  },
+  "fixture": {
+    "module": "ripple_adder",
+    "emittedLUT6": 16,
+    "mappedLUTs": 14,
+    "mappedDFFs": 0,
+    "declaredInputBits": 17,
+    "functionalInputBits": 16,
+    "outputBits": 9,
+    "measuredResynthSHA256": "84ba190a62302f886b63f7607480b0e3f50f27b380f139ce91bb178fac8164fb",
+    "b65536AssignmentCoverage": "All 65536 functional 16-bit assignments exactly once."
+  },
+  "timingScopes": {
+    "historicalHELUT": "Warmed synchronized MPSGraph.run with already prepared feeds/results.",
+    "historicalNative": "Scalar assignment, eval, output reads, and ordered FNV digest.",
+    "pairedHELUT": "Assignment-mask generation and preallocated input-buffer packing through synchronized graph execution, output traversal/decode, and ordered FNV digest.",
+    "pairedNative": "Assignment-vector generation through persistent-worker input writes/eval/output collection and serial ordered FNV digest.",
+    "nativePreparedDiagnostic": "Persistent-worker synchronization, input writes, eval, output collection, and completion; excludes assignment-vector generation and digest.",
+    "excluded": [
+      "Yosys synthesis",
+      "Verilator build",
+      "HELUT graph compilation",
+      "Metal/model allocation",
+      "worker/model creation",
+      "process startup",
+      "HELUT cold specialization"
+    ]
+  },
+  "rows": [
+    {
+      "lanes": 1,
+      "workers": 1,
+      "digest": "8f9f7fb8cfd7dde2",
+      "helutColdSeconds": 0.101311,
+      "helutGraphMedianSeconds": 0.002621055,
+      "nativeScalarEndToEndMedianSeconds": 0.000000209,
+      "helutEndToEndMedianSeconds": 0.001837969,
+      "nativeParallelPreparedMedianSeconds": 0.000008208,
+      "nativeParallelEndToEndMedianSeconds": 0.000008375,
+      "helutGraphSamplesNanoseconds": [2621055, 2895951, 2641916, 1793981, 1749992],
+      "nativeScalarEndToEndSamplesNanoseconds": [458, 250, 209, 208, 209],
+      "helutEndToEndSamplesNanoseconds": [1813889, 2028108, 1979947, 1726985, 1837969],
+      "nativeParallelPreparedSamplesNanoseconds": [9791, 7834, 9417, 7708, 8208],
+      "nativeParallelEndToEndSamplesNanoseconds": [10333, 8250, 9750, 8000, 8375]
+    },
+    {
+      "lanes": 16,
+      "workers": 16,
+      "digest": "84c0b917691450a5",
+      "helutColdSeconds": 0.043546,
+      "helutGraphMedianSeconds": 0.002669096,
+      "nativeScalarEndToEndMedianSeconds": 0.000002208,
+      "helutEndToEndMedianSeconds": 0.001973033,
+      "nativeParallelPreparedMedianSeconds": 0.000080250,
+      "nativeParallelEndToEndMedianSeconds": 0.000082709,
+      "helutGraphSamplesNanoseconds": [3136992, 2650976, 2669096, 3234029, 2642035],
+      "nativeScalarEndToEndSamplesNanoseconds": [2208, 2250, 2208, 1875, 1750],
+      "helutEndToEndSamplesNanoseconds": [1973033, 2118945, 1982927, 1879930, 1906991],
+      "nativeParallelPreparedSamplesNanoseconds": [80250, 99250, 76125, 78125, 87083],
+      "nativeParallelEndToEndSamplesNanoseconds": [82709, 101458, 78625, 80709, 89625]
+    },
+    {
+      "lanes": 256,
+      "workers": 16,
+      "digest": "aa0c5f15c933c725",
+      "helutColdSeconds": 0.039342,
+      "helutGraphMedianSeconds": 0.002932072,
+      "nativeScalarEndToEndMedianSeconds": 0.000029375,
+      "helutEndToEndMedianSeconds": 0.002287030,
+      "nativeParallelPreparedMedianSeconds": 0.000074541,
+      "nativeParallelEndToEndMedianSeconds": 0.000102958,
+      "helutGraphSamplesNanoseconds": [3090978, 3486991, 2932072, 2247930, 2140999],
+      "nativeScalarEndToEndSamplesNanoseconds": [29375, 29417, 29333, 29500, 29375],
+      "helutEndToEndSamplesNanoseconds": [2287030, 2308011, 2200961, 2205968, 2299070],
+      "nativeParallelPreparedSamplesNanoseconds": [74541, 80708, 89833, 61250, 60583],
+      "nativeParallelEndToEndSamplesNanoseconds": [102958, 115875, 126084, 96083, 90916]
+    },
+    {
+      "lanes": 1024,
+      "workers": 16,
+      "digest": "25bc9c05761bbee5",
+      "helutColdSeconds": 0.034637,
+      "helutGraphMedianSeconds": 0.003013968,
+      "nativeScalarEndToEndMedianSeconds": 0.000101083,
+      "helutEndToEndMedianSeconds": 0.002457023,
+      "nativeParallelPreparedMedianSeconds": 0.000069750,
+      "nativeParallelEndToEndMedianSeconds": 0.000183125,
+      "helutGraphSamplesNanoseconds": [3265977, 3013968, 3516078, 2969027, 1989007],
+      "nativeScalarEndToEndSamplesNanoseconds": [101500, 100959, 100458, 101083, 101083],
+      "helutEndToEndSamplesNanoseconds": [2441049, 2555013, 2455950, 2457023, 2546072],
+      "nativeParallelPreparedSamplesNanoseconds": [69750, 66250, 61459, 73417, 71417],
+      "nativeParallelEndToEndSamplesNanoseconds": [177459, 174334, 188250, 184542, 183125]
+    },
+    {
+      "lanes": 4096,
+      "workers": 16,
+      "digest": "53efd78eadd2ee5",
+      "helutColdSeconds": 0.034669,
+      "helutGraphMedianSeconds": 0.003049016,
+      "nativeScalarEndToEndMedianSeconds": 0.000451083,
+      "helutEndToEndMedianSeconds": 0.003738046,
+      "nativeParallelPreparedMedianSeconds": 0.000081291,
+      "nativeParallelEndToEndMedianSeconds": 0.000497084,
+      "helutGraphSamplesNanoseconds": [3049016, 3165007, 3548980, 2980947, 2010942],
+      "nativeScalarEndToEndSamplesNanoseconds": [397208, 406292, 463875, 453875, 451083],
+      "helutEndToEndSamplesNanoseconds": [3738046, 3691912, 3879070, 3682017, 3883958],
+      "nativeParallelPreparedSamplesNanoseconds": [77916, 81291, 63917, 119208, 85333],
+      "nativeParallelEndToEndSamplesNanoseconds": [497084, 480125, 466083, 518250, 512875]
+    },
+    {
+      "lanes": 16384,
+      "workers": 16,
+      "digest": "5bae3d89c7c044e5",
+      "helutColdSeconds": 0.033900,
+      "helutGraphMedianSeconds": 0.002812982,
+      "nativeScalarEndToEndMedianSeconds": 0.001687667,
+      "helutEndToEndMedianSeconds": 0.009220958,
+      "nativeParallelPreparedMedianSeconds": 0.000118041,
+      "nativeParallelEndToEndMedianSeconds": 0.001713709,
+      "helutGraphSamplesNanoseconds": [3466010, 3747940, 2812982, 1991987, 1929998],
+      "nativeScalarEndToEndSamplesNanoseconds": [1717000, 1609625, 1640708, 1687667, 1821834],
+      "helutEndToEndSamplesNanoseconds": [9220958, 9203076, 9260893, 8854985, 9228945],
+      "nativeParallelPreparedSamplesNanoseconds": [138708, 112916, 110166, 126834, 118041],
+      "nativeParallelEndToEndSamplesNanoseconds": [1775792, 1709125, 1694667, 1806834, 1713709]
+    },
+    {
+      "lanes": 32768,
+      "workers": 16,
+      "digest": "f79eaea4cb7276a5",
+      "helutColdSeconds": 0.032583,
+      "helutGraphMedianSeconds": 0.003219962,
+      "nativeScalarEndToEndMedianSeconds": 0.003474708,
+      "helutEndToEndMedianSeconds": 0.016307950,
+      "nativeParallelPreparedMedianSeconds": 0.000188833,
+      "nativeParallelEndToEndMedianSeconds": 0.003550834,
+      "helutGraphSamplesNanoseconds": [3821015, 4191041, 3219962, 1876950, 2016068],
+      "nativeScalarEndToEndSamplesNanoseconds": [3535792, 3474708, 3375000, 3626667, 3372917],
+      "helutEndToEndSamplesNanoseconds": [16270041, 15862942, 16307950, 16614914, 16945958],
+      "nativeParallelPreparedSamplesNanoseconds": [188500, 186541, 191375, 225459, 188833],
+      "nativeParallelEndToEndSamplesNanoseconds": [3415708, 3650125, 3475584, 3550834, 3564167]
+    },
+    {
+      "lanes": 65536,
+      "workers": 16,
+      "digest": "52f209ab0358725",
+      "helutColdSeconds": 0.034662,
+      "helutGraphMedianSeconds": 0.002132893,
+      "nativeScalarEndToEndMedianSeconds": 0.006939708,
+      "helutEndToEndMedianSeconds": 0.031954050,
+      "nativeParallelPreparedMedianSeconds": 0.000325500,
+      "nativeParallelEndToEndMedianSeconds": 0.006958500,
+      "helutGraphSamplesNanoseconds": [5196929, 4561901, 2061963, 2132893, 2082944],
+      "nativeScalarEndToEndSamplesNanoseconds": [7013334, 7033042, 6807791, 6908500, 6939708],
+      "helutEndToEndSamplesNanoseconds": [31046987, 30712962, 31954050, 33207059, 32899022],
+      "nativeParallelPreparedSamplesNanoseconds": [283000, 367708, 371625, 325500, 300334],
+      "nativeParallelEndToEndSamplesNanoseconds": [6958500, 7059084, 7005791, 6867709, 6795459]
+    }
+  ],
+  "conclusions": {
+    "historicalFirstTestedGraphWinLanes": 32768,
+    "historicalB65536ScalarTimeOverGraphTime": 3.2536597006975976,
+    "pairedCrossoverThroughB65536": false,
+    "pairedB65536HELUTTimeOverNativeTime": 4.592088812244017,
+    "preparedB65536HELUTGraphTimeOverNativePreparedTime": 6.552666666666666,
+    "b65536HELUTNonGraphSeconds": 0.029821157,
+    "b65536ParallelEndToEndOverScalarEndToEnd": 1.0027078949143104,
+    "statement": "The historical asymmetric graph-versus-scalar crossover remains a sampled phenomenon, first appearing at B=32768 in this run. Under the closer paired scope, HELUT did not beat 16-worker native execution at any tested width through exhaustive B=65536. At B=65536 HELUT took 31.954050 ms versus 6.958500 ms, or 4.592x the native time."
+  },
+  "artifacts": {
+    "rawLog": {
+      "path": "logs/helut-native-paired-rerun-20260906T044651Z/raw.log",
+      "sha256": "084f2aac99892b8278bdf43d856cd13fad044def2b00382aa3670e061d0caec8"
+    },
+    "emitted.v": "8ba6dc328983119bd3b2236438f3431d5d54f530710fe73d6512359dd51c6a5e",
+    "lut6.v": "4c9d11388c4385f5fecc293d6c54a44abe830878cc2832993ce4ff6de7905e66",
+    "flow.ys": "40dc7c3526448219a5eca28fa8102c90129d3a031f0ab46e9c1ab70f2848952a",
+    "tb.cpp": "2dfd5a6cb66a4c15628f4464625c7b076498e6dee6219fbeedadfffa483c34b2",
+    "generatedNativeBinarySHA256": "60aab5d844d2b5fc36d6efc20ea0b0fe224a2bde12c4afbe847e4a47e1dfacb9",
+    "measuredResynthSHA256": "84ba190a62302f886b63f7607480b0e3f50f27b380f139ce91bb178fac8164fb"
+  },
+  "acceptance": {
+    "xctestPassed": true,
+    "allEightLanePointsPresent": true,
+    "fivePositiveRawSamplesForAllFiveScopesAtEveryPoint": true,
+    "allMediansRecomputeFromRawSamples": true,
+    "allDigestsStableAndEqual": true,
+    "b65536Exhaustive": true,
+    "speedupWasNotRequired": true,
+    "preregisterFullySatisfied": true
+  },
+  "claimBoundaries": [
+    "One combinational 8-bit ripple adder on one Mac16,5 host.",
+    "HELUT uses release Swift/MPSGraph over the post-ABC 14-LUT netlist; native uses optimized generated C++ over the common emitted Verilog lineage.",
+    "Workers are persistent but scheduler-managed and unpinned.",
+    "The paired scope includes analogous phases but remains language/runtime-specific and is not a pure-kernel comparison.",
+    "The result rejects an end-to-end or parallel-native crossover through B=65536 for this harness; it does not reject the separately labeled graph-amortization result.",
+    "No sequential, encrypted, cross-host, Apple-superiority, or general HDL performance claim follows."
+  ],
+  "nextLever": "The failure is localized rather than terminal: at B=65536 roughly 29.82 ms of HELUT's 31.95 ms paired total is outside graph execution, while the prepared graph still takes 6.55x the native prepared diagnostic. Next measure HELUT pack, graph, decode, and digest as separate paired phases, then optimize only the dominant host phases without changing the correctness contract; treat graph-kernel competitiveness as a separate lever."
+}

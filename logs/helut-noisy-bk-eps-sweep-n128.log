@@ -1,0 +1,21 @@
+=== B=1 ===
+cryptoPublicMS B=0: max|e|=0 σ̂=0.0 δ/2=8388608 decode_fail=0 decodable=true εlog2=-inf
+cryptoPublicMS B=1: max|e|=73011 σ̂=46241.1 δ/2=8388608 decode_fail=0 decodable=true εlog2=-inf
+=== B=2 ===
+cryptoPublicMS B=0: max|e|=0 σ̂=0.0 δ/2=8388608 decode_fail=0 decodable=true εlog2=-inf
+cryptoPublicMS B=2: max|e|=77513 σ̂=42500.0 δ/2=8388608 decode_fail=0 decodable=true εlog2=-inf
+=== B=4 ===
+cryptoPublicMS B=0: max|e|=0 σ̂=0.0 δ/2=8388608 decode_fail=0 decodable=true εlog2=-inf
+cryptoPublicMS B=4: max|e|=164838 σ̂=75431.9 δ/2=8388608 decode_fail=0 decodable=true εlog2=-inf
+=== B=8 ===
+cryptoPublicMS B=0: max|e|=0 σ̂=0.0 δ/2=8388608 decode_fail=0 decodable=true εlog2=-inf
+cryptoPublicMS B=8: max|e|=339890 σ̂=160795.2 δ/2=8388608 decode_fail=0 decodable=true εlog2=-inf
+=== B=16 ===
+cryptoPublicMS B=0: max|e|=0 σ̂=0.0 δ/2=8388608 decode_fail=0 decodable=true εlog2=-inf
+cryptoPublicMS B=16: max|e|=848102 σ̂=442623.2 δ/2=8388608 decode_fail=0 decodable=true εlog2=-260.6
+=== B=32 ===
+cryptoPublicMS B=0: max|e|=0 σ̂=0.0 δ/2=8388608 decode_fail=0 decodable=true εlog2=-inf
+cryptoPublicMS B=32: max|e|=815541 σ̂=486932.6 δ/2=8388608 decode_fail=0 decodable=true εlog2=-215.4
+=== B=64 ===
+cryptoPublicMS B=0: max|e|=0 σ̂=0.0 δ/2=8388608 decode_fail=0 decodable=true εlog2=-inf
+cryptoPublicMS B=64: max|e|=2417603 σ̂=1448276.8 δ/2=8388608 decode_fail=0 decodable=true εlog2=-24.1

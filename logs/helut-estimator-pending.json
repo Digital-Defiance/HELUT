@@ -1,0 +1,82 @@
+[
+  {
+    "helut_bits" : 4,
+    "label" : "demo-N8",
+    "log_sigma" : 12,
+    "n" : 8,
+    "q" : 4294967296,
+    "sage_hint" : "# HELUT LWE instance — feed to lattice-estimator \/ estimator.LWE\n# from estimator import *\nn, q, sigma = 8, 2**32, 4096.0\n# LWE.estimate(LWE.Parameters(n=n, q=q, Xs=ND.UniformMod(2), Xe=ND.DiscreteGaussian(sigma)))",
+    "secret" : "binary",
+    "sigma" : 4096
+  },
+  {
+    "helut_bits" : 40.375184999999988,
+    "label" : "weak-n256",
+    "log_sigma" : 17,
+    "n" : 256,
+    "q" : 4294967296,
+    "sage_hint" : "# HELUT LWE instance — feed to lattice-estimator \/ estimator.LWE\n# from estimator import *\nn, q, sigma = 256, 2**32, 131072.0\n# LWE.estimate(LWE.Parameters(n=n, q=q, Xs=ND.UniformMod(2), Xe=ND.DiscreteGaussian(sigma)))",
+    "secret" : "binary",
+    "sigma" : 131072
+  },
+  {
+    "helut_bits" : 95.514047000000005,
+    "label" : "mid-n512",
+    "log_sigma" : 16,
+    "n" : 512,
+    "q" : 4294967296,
+    "sage_hint" : "# HELUT LWE instance — feed to lattice-estimator \/ estimator.LWE\n# from estimator import *\nn, q, sigma = 512, 2**32, 65536.0\n# LWE.estimate(LWE.Parameters(n=n, q=q, Xs=ND.UniformMod(2), Xe=ND.DiscreteGaussian(sigma)))",
+    "secret" : "binary",
+    "sigma" : 65536
+  },
+  {
+    "helut_bits" : 129.038659,
+    "label" : "classic-n630",
+    "log_sigma" : 15,
+    "n" : 630,
+    "q" : 4294967296,
+    "sage_hint" : "# HELUT LWE instance — feed to lattice-estimator \/ estimator.LWE\n# from estimator import *\nn, q, sigma = 630, 2**32, 32768.0\n# LWE.estimate(LWE.Parameters(n=n, q=q, Xs=ND.UniformMod(2), Xe=ND.DiscreteGaussian(sigma)))",
+    "secret" : "binary",
+    "sigma" : 32768
+  },
+  {
+    "helut_bits" : 135.61004699999998,
+    "label" : "n768-s16",
+    "log_sigma" : 16,
+    "n" : 768,
+    "q" : 4294967296,
+    "sage_hint" : "# HELUT LWE instance — feed to lattice-estimator \/ estimator.LWE\n# from estimator import *\nn, q, sigma = 768, 2**32, 65536.0\n# LWE.estimate(LWE.Parameters(n=n, q=q, Xs=ND.UniformMod(2), Xe=ND.DiscreteGaussian(sigma)))",
+    "secret" : "binary",
+    "sigma" : 65536
+  },
+  {
+    "helut_bits" : 175.70604699999998,
+    "label" : "prod-n1024-s16",
+    "log_sigma" : 16,
+    "n" : 1024,
+    "q" : 4294967296,
+    "sage_hint" : "# HELUT LWE instance — feed to lattice-estimator \/ estimator.LWE\n# from estimator import *\nn, q, sigma = 1024, 2**32, 65536.0\n# LWE.estimate(LWE.Parameters(n=n, q=q, Xs=ND.UniformMod(2), Xe=ND.DiscreteGaussian(sigma)))",
+    "secret" : "binary",
+    "sigma" : 65536
+  },
+  {
+    "helut_bits" : 160.66318499999997,
+    "label" : "n1024-s17",
+    "log_sigma" : 17,
+    "n" : 1024,
+    "q" : 4294967296,
+    "sage_hint" : "# HELUT LWE instance — feed to lattice-estimator \/ estimator.LWE\n# from estimator import *\nn, q, sigma = 1024, 2**32, 131072.0\n# LWE.estimate(LWE.Parameters(n=n, q=q, Xs=ND.UniformMod(2), Xe=ND.DiscreteGaussian(sigma)))",
+    "secret" : "binary",
+    "sigma" : 131072
+  },
+  {
+    "helut_bits" : 336.09004699999997,
+    "label" : "n2048-s16",
+    "log_sigma" : 16,
+    "n" : 2048,
+    "q" : 4294967296,
+    "sage_hint" : "# HELUT LWE instance — feed to lattice-estimator \/ estimator.LWE\n# from estimator import *\nn, q, sigma = 2048, 2**32, 65536.0\n# LWE.estimate(LWE.Parameters(n=n, q=q, Xs=ND.UniformMod(2), Xe=ND.DiscreteGaussian(sigma)))",
+    "secret" : "binary",
+    "sigma" : 65536
+  }
+]

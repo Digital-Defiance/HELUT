@@ -1,0 +1,205 @@
+=== BATTERY scramble-frag g5/hard0 gens=240 pop=64 polish=160 λ=0 seed=14833185 ===
+BLUE hold: squeeze failed (crypto -13212.204, nb 4705)
+Enigma 256 TensorLUT
+  module: enigma_256_scramble_frag_combo
+  LUTs: 295  DFFs: 0  wires: 401
+  baseline → build/enigma_256_scramble_frag_tensorlut_g5_hard0.v
+# TensorLUT Red Team — enigma_256_scramble_frag_combo
+generation: 5
+formula: cubic6
+netlist: build/enigma_256_scramble_frag_combo_netlist.json
+luts: 295
+dffs: 0
+batch: 3815
+explore_gens: 240
+polish_gens: 160
+pop: 64
+polish_lambda: 0.0
+explore_seed: 14833185
+baseline_crypto: 0.000000
+explore_best_crypto: -21235.560547
+explore_nonbinary: 6806
+polish_gen_crypto: -13212.204102
+final_crypto: -13212.204102
+final_nonbinary: 4705
+elite_fitness: -13212.204102
+squeeze_survived: false
+verdict: blue_hold
+note: explore λ=0; polish λ=0.0. squeeze_survived=false is a Blue hold.
+  log → logs/tensorlut-battery-scramble-frag-g5-hard0.log
+=== BATTERY scramble-frag g5/seedA gens=200 pop=48 polish=120 λ=0 seed=12648430 ===
+BLUE hold: squeeze failed (crypto -14036.413, nb 3864)
+Enigma 256 TensorLUT
+  module: enigma_256_scramble_frag_combo
+  LUTs: 295  DFFs: 0  wires: 401
+  baseline → build/enigma_256_scramble_frag_tensorlut_g5_seedA.v
+# TensorLUT Red Team — enigma_256_scramble_frag_combo
+generation: 5
+formula: cubic6
+netlist: build/enigma_256_scramble_frag_combo_netlist.json
+luts: 295
+dffs: 0
+batch: 3815
+explore_gens: 200
+polish_gens: 120
+pop: 48
+polish_lambda: 0.0
+explore_seed: 12648430
+baseline_crypto: 0.000000
+explore_best_crypto: -26330.207031
+explore_nonbinary: 6356
+polish_gen_crypto: -14036.413086
+final_crypto: -14036.413086
+final_nonbinary: 3864
+elite_fitness: -14036.413086
+squeeze_survived: false
+verdict: blue_hold
+note: explore λ=0; polish λ=0.0. squeeze_survived=false is a Blue hold.
+  log → logs/tensorlut-battery-scramble-frag-g5-seedA.log
+=== BATTERY scramble-frag g5/seedB gens=200 pop=48 polish=120 λ=0 seed=195936478 ===
+BLUE hold: squeeze failed (crypto -15388.067, nb 4161)
+Enigma 256 TensorLUT
+  module: enigma_256_scramble_frag_combo
+  LUTs: 295  DFFs: 0  wires: 401
+  baseline → build/enigma_256_scramble_frag_tensorlut_g5_seedB.v
+# TensorLUT Red Team — enigma_256_scramble_frag_combo
+generation: 5
+formula: cubic6
+netlist: build/enigma_256_scramble_frag_combo_netlist.json
+luts: 295
+dffs: 0
+batch: 3815
+explore_gens: 200
+polish_gens: 120
+pop: 48
+polish_lambda: 0.0
+explore_seed: 195936478
+baseline_crypto: 0.000000
+explore_best_crypto: -23370.023438
+explore_nonbinary: 6631
+polish_gen_crypto: -15388.067383
+final_crypto: -15388.067383
+final_nonbinary: 4161
+elite_fitness: -15388.067383
+squeeze_survived: false
+verdict: blue_hold
+note: explore λ=0; polish λ=0.0. squeeze_survived=false is a Blue hold.
+  log → logs/tensorlut-battery-scramble-frag-g5-seedB.log
+=== BATTERY scramble-frag g5/lam1 gens=160 pop=48 polish=120 λ=1 seed=14833201 ===
+BLUE hold: squeeze failed (crypto -15882.577, nb 4266)
+Enigma 256 TensorLUT
+  module: enigma_256_scramble_frag_combo
+  LUTs: 295  DFFs: 0  wires: 401
+  baseline → build/enigma_256_scramble_frag_tensorlut_g5_lam1.v
+# TensorLUT Red Team — enigma_256_scramble_frag_combo
+generation: 5
+formula: cubic6
+netlist: build/enigma_256_scramble_frag_combo_netlist.json
+luts: 295
+dffs: 0
+batch: 3815
+explore_gens: 160
+polish_gens: 120
+pop: 48
+polish_lambda: 1.0
+explore_seed: 14833201
+baseline_crypto: 0.000000
+explore_best_crypto: -27473.085938
+explore_nonbinary: 7546
+polish_gen_crypto: -15882.577148
+final_crypto: -15882.577148
+final_nonbinary: 4266
+elite_fitness: -16709.689453
+squeeze_survived: false
+verdict: blue_hold
+note: explore λ=0; polish λ=1.0. squeeze_survived=false is a Blue hold.
+  log → logs/tensorlut-battery-scramble-frag-g5-lam1.log
+=== BATTERY scramble-frag g5/lam3 gens=160 pop=48 polish=120 λ=3 seed=14833203 ===
+BLUE hold: squeeze failed (crypto -15055.365, nb 4540)
+Enigma 256 TensorLUT
+  module: enigma_256_scramble_frag_combo
+  LUTs: 295  DFFs: 0  wires: 401
+  baseline → build/enigma_256_scramble_frag_tensorlut_g5_lam3.v
+# TensorLUT Red Team — enigma_256_scramble_frag_combo
+generation: 5
+formula: cubic6
+netlist: build/enigma_256_scramble_frag_combo_netlist.json
+luts: 295
+dffs: 0
+batch: 3815
+explore_gens: 160
+polish_gens: 120
+pop: 48
+polish_lambda: 3.0
+explore_seed: 14833203
+baseline_crypto: 0.000000
+explore_best_crypto: -25179.226562
+explore_nonbinary: 6486
+polish_gen_crypto: -15055.365234
+final_crypto: -15055.365234
+final_nonbinary: 4540
+elite_fitness: -17568.335938
+squeeze_survived: false
+verdict: blue_hold
+note: explore λ=0; polish λ=3.0. squeeze_survived=false is a Blue hold.
+  log → logs/tensorlut-battery-scramble-frag-g5-lam3.log
+=== BATTERY scramble-frag g5/longex gens=320 pop=48 polish=80 λ=0 seed=14833217 ===
+BLUE hold: squeeze failed (crypto -13916.104, nb 4209)
+Enigma 256 TensorLUT
+  module: enigma_256_scramble_frag_combo
+  LUTs: 295  DFFs: 0  wires: 401
+  baseline → build/enigma_256_scramble_frag_tensorlut_g5_longex.v
+# TensorLUT Red Team — enigma_256_scramble_frag_combo
+generation: 5
+formula: cubic6
+netlist: build/enigma_256_scramble_frag_combo_netlist.json
+luts: 295
+dffs: 0
+batch: 3815
+explore_gens: 320
+polish_gens: 80
+pop: 48
+polish_lambda: 0.0
+explore_seed: 14833217
+baseline_crypto: 0.000000
+explore_best_crypto: -18903.064453
+explore_nonbinary: 5421
+polish_gen_crypto: -13916.103516
+final_crypto: -13916.103516
+final_nonbinary: 4209
+elite_fitness: -13916.103516
+squeeze_survived: false
+verdict: blue_hold
+note: explore λ=0; polish λ=0.0. squeeze_survived=false is a Blue hold.
+  log → logs/tensorlut-battery-scramble-frag-g5-longex.log
+=== BATTERY scramble-frag g5/fatpop gens=120 pop=96 polish=100 λ=0 seed=14833233 ===
+BLUE hold: squeeze failed (crypto -17156.73, nb 5346)
+Enigma 256 TensorLUT
+  module: enigma_256_scramble_frag_combo
+  LUTs: 295  DFFs: 0  wires: 401
+  baseline → build/enigma_256_scramble_frag_tensorlut_g5_fatpop.v
+# TensorLUT Red Team — enigma_256_scramble_frag_combo
+generation: 5
+formula: cubic6
+netlist: build/enigma_256_scramble_frag_combo_netlist.json
+luts: 295
+dffs: 0
+batch: 3815
+explore_gens: 120
+polish_gens: 100
+pop: 96
+polish_lambda: 0.0
+explore_seed: 14833233
+baseline_crypto: 0.000000
+explore_best_crypto: -22883.398438
+explore_nonbinary: 7149
+polish_gen_crypto: -17156.730469
+final_crypto: -17156.730469
+final_nonbinary: 5346
+elite_fitness: -17156.730469
+squeeze_survived: false
+verdict: blue_hold
+note: explore λ=0; polish λ=0.0. squeeze_survived=false is a Blue hold.
+  log → logs/tensorlut-battery-scramble-frag-g5-fatpop.log
+Battery complete → logs/enigma256-scramble-frag-battery-g5.jsonl
+   7 verdict: blue_hold

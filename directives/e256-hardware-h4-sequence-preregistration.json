@@ -1,0 +1,317 @@
+{
+  "schema": "E256-HARDWARE-H4-SEQUENCE-PREREGISTRATION-1",
+  "status": "FROZEN_BEFORE_IMPLEMENTATION",
+  "freeze_date": "2026-08-20",
+  "title": "E256-H H4 per-round switching-sequence census, collapse, integrated RTL, and mapped-cost gate",
+  "architecture_contract": {
+    "path": "directives/e256-hardware-architecture.md",
+    "start_marker": "<!-- E256-H-H4-SEQUENCE-CONTRACT-START -->",
+    "end_marker": "<!-- E256-H-H4-SEQUENCE-CONTRACT-END -->",
+    "digest_rule": "SHA-256 of the exact UTF-8 bytes from the first byte of the unique start marker through the last byte of the unique end marker, inclusive",
+    "sha256": "aac50bda525ead96234fc3c0e3e3692fabbde101de34d44f632d6a65bfbed1e4",
+    "base_contract_sha256": "b64472f73be9d0fc6318ff445c5f550cb0129309313228f416599c27d3957bb1",
+    "h2_contract_sha256": "214aee439ddf715ebf3e5fc206c336119dd27f85da12ef65f8e590c0cb0bfceb"
+  },
+  "absence_at_freeze": [
+    "directives/e256-hardware-h4-sequence-preregistration.json",
+    "Hardware/RTL/Research/E256H/e256h_h4_sequence_core.v",
+    "Hardware/Testbenches/Research/E256H/e256h_h4_sequence_core_tb.v",
+    "Scripts/e256_hardware_h4_sequence_gate.py",
+    "logs/e256-hardware-h4-sequence-gate.json",
+    "build/e256h-h4-sequence"
+  ],
+  "predecessors": [
+    {
+      "id": "E256-063-steps-2-3",
+      "receipt": "logs/e256-hardware-candidate-gate.json",
+      "raw_sha256_at_freeze": "0402a53a725f3303ab379bf7f5e986a55cadedb001f4621d9d996f4ee0d93cfc",
+      "deterministic_payload_sha256": "98af83ec27093787552475fce588f84a902634afcc969bed26462032dddec3cc"
+    },
+    {
+      "id": "E256-063-h3-collapse",
+      "receipt": "logs/e256-hardware-offset-collapse-gate.json",
+      "raw_sha256_at_freeze": "4b56be2a44ac71d9a89580817a06d6f617247fd3e8b8fc39efd481b888ef0fff",
+      "deterministic_payload_sha256": "1478a0ba317bce5f33cb053744b050bb6188543405c1dfacf52d8aaf920c4b71",
+      "preregistration_sha256": "3d7a12731fcf81f6120577122c55bd8ec25589a82226d49fab7e5b8350ee0cee"
+    },
+    {
+      "id": "E256-063-h2-integrated-cost",
+      "receipt": "logs/e256-hardware-h2-gate.json",
+      "raw_sha256_at_freeze": "1e61489e935e17927b1e66c5387ed83bd303ca797418bae38a3640841d50abd5",
+      "deterministic_payload_sha256": "b0b62be2cfebd870f71ce0b5e5300eb52ab8c2aea243712d1617f4e2351dc7e1"
+    }
+  ],
+  "frozen_sources": {
+    "h2_rtl": {
+      "path": "Hardware/RTL/Research/E256H/e256h_h2_integrated_core.v",
+      "sha256": "05edd3c1cfb3cfc24ecb12fcada8c07f81451eb9937efd0f3fc10abf3f1d0adf"
+    },
+    "h2_testbench": {
+      "path": "Hardware/Testbenches/Research/E256H/e256h_h2_integrated_core_tb.v",
+      "sha256": "fb02e49ab376c761b6ae1bbb3fec6ab1325c5bfda71c9ff2684668cc14cb2b95"
+    },
+    "h2_runner": {
+      "path": "Scripts/e256_hardware_h2_gate.py",
+      "sha256": "3a62a7fc56a65682aa735fbb4cd1c611e0da8d4be84081a77c948865f7b77c5c"
+    }
+  },
+  "toolchain": {
+    "python": {
+      "required_exact": "3.9.6"
+    },
+    "yosys": {
+      "required_version_prefix": "Yosys 0.68+post",
+      "required_git_sha": "c12172fbae8af5e20f6fb52e3d4e92d56ed587b6"
+    },
+    "iverilog": {
+      "required_version_prefix": "Icarus Verilog version 13.0"
+    },
+    "target_host": "Apple Silicon macOS",
+    "scope": "Yosys/ABC-mapped generic RTL and Icarus-validated behavior in the HELUT repository; no vendor P&R or implicit Metal execution"
+  },
+  "questions": [
+    {
+      "id": "H4SQ1",
+      "text": "Does every contiguous three-round window in the complete frozen arithmetic schedule family satisfy the byte all-to-all dependency criterion when each round uses its actual selector?"
+    },
+    {
+      "id": "H4SQ2",
+      "text": "Does the sequence-specific H3 offset collapse agree at every frozen round boundary with the independent canonical evaluator?"
+    },
+    {
+      "id": "H4SQ3",
+      "text": "Do commit-sampled repeated and per-round sequence selectors execute byte-exactly with complete ready/busy evidence in stationary-FF and rotating-ring integrated tops?"
+    },
+    {
+      "id": "H4SQ4",
+      "text": "What paired generic-LUT6, sequential-state, primitive-cell, and end-to-end depth delta does 144-bit sequence selection introduce over 12-bit repeated selection within each storage organization?"
+    }
+  ],
+  "certified_list": {
+    "source": "logs/e256-hardware-candidate-gate.json#/deterministic_payload/results/h4_wiring/certified_set",
+    "count": 384,
+    "canonical_sha256": "199f1f7bddccf19ce5aa0bde0987441735d628354140d53ebdfec538d7b3f5ed",
+    "fixed_tuple": [0, 1, 3, 4],
+    "fixed_tuple_index": 1,
+    "first_tuple": [0, 1, 2, 5],
+    "last_tuple": [7, 6, 5, 2],
+    "tuple_code": "o_0 | (o_1 << 3) | (o_2 << 6) | (o_3 << 9)"
+  },
+  "corpora": {
+    "record_schema": {
+      "keys": ["a", "d", "indices"],
+      "indices_rule": "[(a + r*d) mod 384 for r in 0..11]",
+      "canonical_encoding": "UTF-8 JSON with sorted object keys, separators ',' and ':', allow_nan false"
+    },
+    "structural": {
+      "order": "a outer 0..383, d inner 0..383",
+      "schedule_count": 147456,
+      "rounds_per_schedule": 12,
+      "contiguous_three_round_windows": 1474560,
+      "adjacent_transition_placements": 1622016,
+      "canonical_sha256": "fc0eac948c91ec416b5473724af21106e45a05a9fefa7451577bbd73582d85c8"
+    },
+    "executable": {
+      "order": "d outer in [0,1], a inner 0..383",
+      "steps": [0, 1],
+      "schedule_count": 768,
+      "repeated_schedule_count": 384,
+      "switching_schedule_count": 384,
+      "tuple_placements": 9216,
+      "canonical_sha256": "8056e742146cffd707f3c5590667766fc376c7b25fee4bcec5cd3fc49cbc2a6a",
+      "scope_limit": "Executable coverage is balanced by tuple and round position but is not exhaustive over transition pairs or orbit lengths"
+    }
+  },
+  "material_corpus": {
+    "source": "the exact three material sets and eight blocks used by the frozen H2/collapse predecessors",
+    "material_set_ids": ["frozen_attack_v1", "collapse_aux_0", "collapse_aux_1"],
+    "material_set_count": 3,
+    "blocks_per_material": 8,
+    "canonical_sha256": "b6738e7f117bb7b916ee002db482f105a3eb5a046ee84dff45f178510cdeb691",
+    "aes_sbox_sha256": "c2d8e5eed6cbebd8625fc18f81486a7733c04f9b0129ffbe974c68b90308b4f2"
+  },
+  "collapse_contract": {
+    "rounds": 12,
+    "k0": "M_0 XOR A_0",
+    "interior": "K_r = L_(w_(r-1))(B_(r-1)) XOR M_r XOR A_r for 1 <= r < 12",
+    "terminal": "K_12 = L_(w_11)(B_11) XOR M_12",
+    "canonical_initial": "Z_0 = X XOR K_0",
+    "canonical_round": "Z_(r+1) = L_(w_r)(SBOX^32(Z_r)) XOR K_(r+1)",
+    "stage_a_comparisons": 221184,
+    "stage_b_comparisons": 221184,
+    "total_comparisons": 442368,
+    "mismatch_policy": "fail closed; no filtering"
+  },
+  "structural_contract": {
+    "criterion": "For every contiguous three-round window, initialize each input byte with its own dependency singleton, treat S-box as lane-preserving, apply exact per-round AES row mixing and certified row-offset selector, and require every output byte to depend on all 32 input bytes",
+    "failure_reporting": "report complete failure count and first deterministic counterexample without filtering",
+    "valid_outcomes": [
+      "ARITHMETIC_SEQUENCE_CENSUS_ZERO_MIXED_WINDOW_FAILURES",
+      "ARITHMETIC_SEQUENCE_CENSUS_COUNTEREXAMPLE_FOUND"
+    ],
+    "explicit_exclusion": "The fixed-tuple/local 25-active-S-box four-round statement is not inherited or asserted for mixed sequences"
+  },
+  "sequence_interface": {
+    "port": "cfg_h4_sequence[143:0]",
+    "layout": "tuple w_r occupies bits [12*r +: 12]",
+    "sample_boundary": "successful complete configuration commit",
+    "repeated_behavior": "retain low 12 bits and reuse w_0 for all rounds",
+    "sequence_behavior": "retain all 144 bits and select w_r by public round_index",
+    "restart_behavior": "every accepted block restarts at w_0",
+    "post_commit_pin_rule": "external changes have no effect until another complete successful commit"
+  },
+  "protocol_contract": {
+    "configuration": "clean idle cfg_begin, thirteen accepted effective-mask word beats, then clean idle cfg_commit",
+    "stimulus_rule": "one block starts only while ready; the next start is attempted at the earliest ready edge after done",
+    "initial_edge": "E0 applies K_0",
+    "round_edges": "E1 through E12 execute rounds 0 through 11 with K_1 through K_12",
+    "done_edge": "E12",
+    "latency_cycles": 12,
+    "initiation_interval_cycles": 13,
+    "ready_rule": "ready remains low while busy",
+    "error_rule": "incomplete, overlapping, or busy-time configuration is rejected without changing committed in-flight state"
+  },
+  "variants": [
+    {
+      "id": "ff_repeated",
+      "top": "e256h_h4_ff_repeated",
+      "storage_id": "ff",
+      "selector_mode": "repeated",
+      "expected_outputs": 9216,
+      "latency_cycles": 12,
+      "initiation_interval_cycles": 13,
+      "mask_state_bits": 3328,
+      "selector_state_bits": 12,
+      "h1_eligible": true
+    },
+    {
+      "id": "ff_sequence",
+      "top": "e256h_h4_ff_sequence",
+      "storage_id": "ff",
+      "selector_mode": "sequence",
+      "expected_outputs": 18432,
+      "latency_cycles": 12,
+      "initiation_interval_cycles": 13,
+      "mask_state_bits": 3328,
+      "selector_state_bits": 144,
+      "h1_eligible": true
+    },
+    {
+      "id": "ring_repeated",
+      "top": "e256h_h4_ring_repeated",
+      "storage_id": "ring",
+      "selector_mode": "repeated",
+      "expected_outputs": 9216,
+      "latency_cycles": 12,
+      "initiation_interval_cycles": 13,
+      "mask_state_bits": 3328,
+      "selector_state_bits": 12,
+      "h1_eligible": true
+    },
+    {
+      "id": "ring_sequence",
+      "top": "e256h_h4_ring_sequence",
+      "storage_id": "ring",
+      "selector_mode": "sequence",
+      "expected_outputs": 18432,
+      "latency_cycles": 12,
+      "initiation_interval_cycles": 13,
+      "mask_state_bits": 3328,
+      "selector_state_bits": 144,
+      "h1_eligible": true
+    }
+  ],
+  "execution_counts": {
+    "schedule_material_block_rows": 18432,
+    "rtl_model_comparisons": 55296,
+    "per_input_cycle_observations": 55296,
+    "storage_comparisons": 27648,
+    "repeated_sequence_bridge_comparisons": 18432
+  },
+  "synthesis_contract": {
+    "logic_basis": "generic LUT6 via pinned Yosys/ABC",
+    "tops_synthesized_independently": true,
+    "required_artifacts_per_top": ["pre-map hierarchy JSON", "mapped hierarchy JSON", "analysis-only flattened JSON", "mapped Verilog"],
+    "accounting": [
+      "recursive child multiplicity closes against independent flat primitive multiset",
+      "mask and selector state are counted separately",
+      "wide live ports may not externalize committed mask or selector state",
+      "analysis-only flatten preserves mapped primitive counts",
+      "flattened end-to-end combinational depth is loop-free"
+    ],
+    "graded_deltas": ["generic_lut6", "sequential_bits", "primitive_cells", "combinational_levels"],
+    "comparison_rule": "sequence minus repeated within the same storage_id only; no winner threshold"
+  },
+  "controls": [
+    {"id": "corpus_digest_perturbation", "mutation": "change one generated schedule index before digest validation"},
+    {"id": "reverse_sequence_order", "mutation": "use w_(11-r) in the sequence evaluator"},
+    {"id": "hold_w0", "mutation": "use w_0 for every switching round"},
+    {"id": "selector_index_plus_one", "mutation": "use w_((r+1) mod 12)"},
+    {"id": "wrong_h4_shift_direction", "mutation": "reverse the certified row-offset direction"},
+    {"id": "wrong_collapse_transport", "mutation": "transport B_(r-1) with w_r rather than w_(r-1)"},
+    {"id": "terminal_a12", "mutation": "add an unauthorized terminal A_12 term"},
+    {"id": "wrong_round_key_address", "mutation": "use K_r where K_(r+1) is required"},
+    {"id": "reverse_mask_word_bytes", "mutation": "reverse the 32 byte lanes in each configured mask word"},
+    {"id": "broken_ring_rotation", "mutation": "omit the acceptance rotation that advances K_0 to K_1"},
+    {"id": "incomplete_configuration", "mutation": "commit after twelve mask words and attempt start"},
+    {"id": "post_commit_pin_change", "mutation": "read live cfg_h4_sequence pins after a successful commit"},
+    {"id": "externalized_sequence_state", "mutation": "replace committed selector state with a wide live input"},
+    {"id": "externalized_mask_state", "mutation": "replace the integrated 3328-bit mask store with wide live inputs"},
+    {"id": "nested_child_multiplicity", "mutation": "evaluate a known hierarchy with repeated nested children"},
+    {"id": "duplicate_child_accounting", "mutation": "count one planted child edge twice"},
+    {"id": "postmap_depth_preservation", "mutation": "corrupt the expected primitive/depth relation across analysis-only flatten"},
+    {"id": "extra_repeated_output", "mutation": "inject one d=1 output for a repeated variant"},
+    {"id": "missing_cycle_observation", "mutation": "remove one latency/initiation observation from an otherwise valid row"}
+  ],
+  "predictions": [
+    {
+      "id": "H4SP1",
+      "role": "validity_control",
+      "statement": "all frozen source, tool, corpus, execution-set, semantic, cycle, synthesis, and control invariants close exactly"
+    },
+    {
+      "id": "H4SP2",
+      "role": "graded_finding",
+      "statement": "the complete arithmetic census may have zero or nonzero mixed-window dependency failures; neither outcome invalidates the harness"
+    },
+    {
+      "id": "H4SP3",
+      "role": "graded_finding",
+      "statement": "sequence selection has measurable paired mapped deltas; no sign, magnitude, or storage winner is predicted"
+    }
+  ],
+  "receipt_contract": {
+    "schema": "E256-HARDWARE-H4-SEQUENCE-GATE-1",
+    "path": "logs/e256-hardware-h4-sequence-gate.json",
+    "scratch_path": "build/e256h-h4-sequence",
+    "emit_target": "make e256-hw-h4-sequence",
+    "check_target": "make e256-hw-h4-sequence-check",
+    "deterministic_digest_rule": "SHA-256 of canonical compact sorted-key JSON encoding of deterministic_payload",
+    "record_hash_rule": "SHA-256 of canonical compact sorted-key JSON encoding of the complete record with record_sha256 set to null",
+    "check_rule": "--check regenerates and requires byte-identical deterministic_payload and deterministic_payload_sha256, exact current source/prereg identities, and all validity predicates",
+    "required_sections": [
+      "integrity",
+      "corpora",
+      "structural_census",
+      "collapse_equivalence",
+      "functional_equivalence",
+      "cycle_evidence",
+      "controls",
+      "synthesis",
+      "paired_measurements",
+      "verdicts",
+      "non_claims"
+    ]
+  },
+  "validity_rule": "Exact identities and counts, all nineteen controls detected, complete collapse and RTL/model agreement, per-input cycle evidence, and closed synthesis/accounting are mandatory. Structural counterexamples and any mapped-cost delta sign remain valid reportable science.",
+  "non_claims": [
+    "no H4 production policy or architecture selection",
+    "no inherited mixed-sequence 25-active-S-box or four-round bound",
+    "no cryptographic security level or primitive selection",
+    "no XOF, schedule, round-count, cipher-suite, or AEAD selection",
+    "no vendor FPGA, place-and-route, Fmax, physical power, or literal GPU-to-FPGA synthesis evidence",
+    "no encrypted Metal or FHE execution claim",
+    "reviewed standard AEAD remains mandatory",
+    "E256-063 remains OPEN and no C/H/N or public claim epoch moves"
+  ]
+}

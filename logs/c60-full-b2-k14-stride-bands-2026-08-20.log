@@ -1,0 +1,17 @@
+HELUT encrypted-netlist bench · SING
+  netlist: picorv32_lut6_netlist.json  module=picorv32
+  poly N=1024  LUTs=2006  DFFs=1565  sequential  2N=2048
+  stimuli=1 (max --vectors 1)  cpu-only=false  metal-netlist-only=false
+  paths filter: public-ms covering-b2
+  paths: public-ms@boolean + public-ms@crypto + secret@crypto (+ Metal)
+  BK noise inject Gaussian σ=128.0 (torus; identity residual is empirical, not B_bk)
+  BK identity confidence trials=1
+  noisy-BK policy: UNSAFE DIAGNOSTIC ONLY (functional output cannot certify ε)
+  divergence trace: enabled (first LUT + all wrong DFFs)
+  boolean scale kδ  k=14  (test-poly stride 14; public-MS native δ)
+  DynamicRotateCost mux=2099200 binary=11275 speedup≈186.2×
+
+  Metal BR tile progress: quiet
+  starting blind-rotate-metal public-ms covering-b2
+  identity residual trials=1  (n=1024)
+  identity observed max|e| 45231  (sample-decodable true)

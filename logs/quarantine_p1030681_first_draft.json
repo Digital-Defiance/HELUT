@@ -1,0 +1,48 @@
+{
+  "candidates" : [
+    {
+      "cribExact" : true,
+      "effectiveTailScore" : -2.1593162931157717,
+      "fullScore" : -3.4481828645196027,
+      "greek" : "beta",
+      "ic" : 0.05422716865200128,
+      "menuCrib" : "KRKRALLEXXFOLGENDESISTSO",
+      "menuEdges" : 24,
+      "menuLoops" : 4,
+      "menuOffset" : 0,
+      "pairCount" : 9,
+      "plaintextPrefix" : "KRKRALLEXXFOLGENDESISTSOFORTBEKANNTJUGEBENSXICHH",
+      "positions" : "YOSZ",
+      "prefixEnd" : 42,
+      "prefixIC" : 0.05110336817653891,
+      "prefixTailScore" : -2.1593162931157717,
+      "rings" : "AAEL",
+      "softBand" : "whole IC=0.054≥0.048 tail=-3.518>-4.000; prefix@42 IC=0.051 tail=-2.159",
+      "source" : "P1030681 Dönitz (first-draft aligned)",
+      "steckerPairs" : [
+        "AE",
+        "BF",
+        "CM",
+        "DQ",
+        "HU",
+        "JN",
+        "LX",
+        "PR",
+        "SZ"
+      ],
+      "tailScore" : -3.5175861480204125,
+      "ukw" : "C",
+      "wheelOrder" : "V-VI-VIII"
+    }
+  ],
+  "ciphertext" : "LANOTCTOUARBBFPMHPHGCZXTDYGAHGUFXGEWKBLKGJWLQXXTGPJJAVTOCKZFSLPPGIHZFXOBBWIIEKFZLCLOAQJULJOYFSSMBBGWHZAMVOIIPCRBRTDJQDJJOQCHXPDNBBFYVXLYTAPGVERTXSONPNYNQFUDBBHHVWEPYEYDOHNLXKZDNWRHDUWUJUMPWVIIWZBIVIXKDRHYMNCYEFUAPNHOTKHKGDNPSAKNUAGHJZSMJBMHVTREQEDGXHLZWIFUSKDQVELNMIMITHBSBBWVSDFYHJOQIFORTDJDBWXEMEAYXGYQXOHFDMUWXXNOJAZRHGRPLWMLRCLALLRTRTTVLBFYOORZLGOWUNUXHMHYFAACQEKRHSJW",
+  "generatedAt" : "2026-08-10T21:52:31Z",
+  "softBar" : {
+    "softICFloor" : 0.048,
+    "softTailFloor" : -4,
+    "strictICFloor" : 0.055,
+    "strictTailFloor" : -3.6
+  },
+  "sourceFixture" : "Girard\/Hörenberg first draft (aligned)",
+  "target" : "P1030681 Dönitz (first-draft aligned)"
+}

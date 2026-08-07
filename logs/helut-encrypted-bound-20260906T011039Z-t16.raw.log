@@ -1,0 +1,35 @@
+HELUT encrypted-netlist bench · SING
+  netlist: netlist.json  module=full_adder
+  poly N=1024  LUTs=3  DFFs=0  2N=2048
+  stimuli=8 (max --vectors 8)  cpu-only=false  metal-netlist-only=false
+  paths filter: blind-rotate-metal public-ms covering-b2
+  paths: public-ms@boolean + public-ms@crypto + secret@crypto (+ Metal)
+  BK noise inject Gaussian σ=128.0 (torus; identity residual is empirical, not B_bk)
+  BK identity confidence trials=16
+  boolean scale kδ  k=14  (test-poly stride 14; public-MS native δ)
+  DynamicRotateCost mux=2099200 binary=11275 speedup≈186.2×
+
+  Metal BR tile progress: quiet
+  starting blind-rotate-metal public-ms covering-b2
+  identity residual trials=16  (n=1024)
+  identity observed max|e| 3125505  (sample-decodable true)
+time: command terminated abnormally
+      564.81 real       559.01 user         4.84 sys
+           362545152  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               22356  page reclaims
+                  10  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   1  voluntary context switches
+               25994  involuntary context switches
+      16792250644830  instructions retired
+       2273632892726  cycles elapsed
+           352404296  peak memory footprint
+ENCRYPTED_BOUND_CHILD_EXIT=-5

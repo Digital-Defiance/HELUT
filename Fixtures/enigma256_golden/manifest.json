@@ -1,0 +1,13 @@
+{
+  "schema": "E256-KAT-MANIFEST-6",
+  "compatibility_key": "E256/v6/gen0/c2abdbe580bad275838fc2650f81fdb14cb5ae3865cb74c5087f488ca51a35b9/fixture-v6",
+  "profile_sha256": "c2abdbe580bad275838fc2650f81fdb14cb5ae3865cb74c5087f488ca51a35b9",
+  "profile_canonical": "E256|6|0|6|gf2_16_mul_inv_xor1_shift_mix|inverse_decrypt|poly_0x1100B|affine_0x1|shake256|E256-v6/schedule/v2|zero_scale_becomes_1|shifts_0.1.2.3|mix_branch_5|rounds_25|pad_iso9797_1_method2",
+  "rounds": 25,
+  "artifacts": {
+    "key.bin": "630dcd2966c4336691125448bbb25b4ff412a49c732db2c8abc1b8581bd710dd",
+    "plaintext.bin": "6fb4323468eb6802fa60ff2852032760b70358f055f32debb3dbb007730c41ed",
+    "ciphertext.bin": "493ab23348cb54f61f413e349ee9645da10e3dd1e82d3aae19fc4305ebe1bb52",
+    "profile.json": "4f14602379066d61dc807c6d5b5f9efe27e077bc278d45628de0a40426c4c360"
+  }
+}

@@ -1,0 +1,110 @@
+HELUT encrypted-netlist bench · SING
+  netlist: netlist.json  module=full_adder
+  poly N=1024  LUTs=3  DFFs=0  2N=2048
+  stimuli=2 (max --vectors 2)  cpu-only=false  metal-netlist-only=false
+  paths filter: blind-rotate-metal public-ms crypto
+  paths: public-ms@boolean + public-ms@crypto + secret@crypto (+ Metal)
+  BK noise inject B=1 (measured identity residual → B_bk)
+  boolean scale kδ  k=7  (test-poly stride 7; public-MS native δ)
+  DynamicRotateCost mux=2099200 binary=11275 speedup≈186.2×
+
+  starting blind-rotate-metal public-ms crypto
+  identity residual trials=1  (n=1024)
+  identity B_bk    986169  (decodable true)
+BR tile=1/16 bits=0..<64
+BR tile=1/16 bits=0..<64
+BR tile=2/16 bits=64..<128
+BR tile=2/16 bits=64..<128
+BR tile=3/16 bits=128..<192
+BR tile=3/16 bits=128..<192
+BR tile=4/16 bits=192..<256
+BR tile=4/16 bits=192..<256
+BR tile=5/16 bits=256..<320
+BR tile=5/16 bits=256..<320
+BR tile=6/16 bits=320..<384
+BR tile=6/16 bits=320..<384
+BR tile=7/16 bits=384..<448
+BR tile=7/16 bits=384..<448
+BR tile=8/16 bits=448..<512
+BR tile=8/16 bits=448..<512
+BR tile=9/16 bits=512..<576
+BR tile=9/16 bits=512..<576
+BR tile=10/16 bits=576..<640
+BR tile=10/16 bits=576..<640
+BR tile=11/16 bits=640..<704
+BR tile=11/16 bits=640..<704
+BR tile=12/16 bits=704..<768
+BR tile=12/16 bits=704..<768
+BR tile=13/16 bits=768..<832
+BR tile=13/16 bits=768..<832
+BR tile=14/16 bits=832..<896
+BR tile=14/16 bits=832..<896
+BR tile=15/16 bits=896..<960
+BR tile=15/16 bits=896..<960
+BR tile=16/16 bits=960..<1024
+BR tile=16/16 bits=960..<1024
+BR tile=1/16 bits=0..<64
+BR tile=2/16 bits=64..<128
+BR tile=3/16 bits=128..<192
+BR tile=4/16 bits=192..<256
+BR tile=5/16 bits=256..<320
+BR tile=6/16 bits=320..<384
+BR tile=7/16 bits=384..<448
+BR tile=8/16 bits=448..<512
+BR tile=9/16 bits=512..<576
+BR tile=10/16 bits=576..<640
+BR tile=11/16 bits=640..<704
+BR tile=12/16 bits=704..<768
+BR tile=13/16 bits=768..<832
+BR tile=14/16 bits=832..<896
+BR tile=15/16 bits=896..<960
+BR tile=16/16 bits=960..<1024
+BR tile=1/16 bits=0..<64
+BR tile=1/16 bits=0..<64
+BR tile=2/16 bits=64..<128
+BR tile=2/16 bits=64..<128
+BR tile=3/16 bits=128..<192
+BR tile=3/16 bits=128..<192
+BR tile=4/16 bits=192..<256
+BR tile=4/16 bits=192..<256
+BR tile=5/16 bits=256..<320
+BR tile=5/16 bits=256..<320
+BR tile=6/16 bits=320..<384
+BR tile=6/16 bits=320..<384
+BR tile=7/16 bits=384..<448
+BR tile=7/16 bits=384..<448
+BR tile=8/16 bits=448..<512
+BR tile=8/16 bits=448..<512
+BR tile=9/16 bits=512..<576
+BR tile=9/16 bits=512..<576
+BR tile=10/16 bits=576..<640
+BR tile=10/16 bits=576..<640
+BR tile=11/16 bits=640..<704
+BR tile=11/16 bits=640..<704
+BR tile=12/16 bits=704..<768
+BR tile=12/16 bits=704..<768
+BR tile=13/16 bits=768..<832
+BR tile=13/16 bits=768..<832
+BR tile=14/16 bits=832..<896
+BR tile=14/16 bits=832..<896
+BR tile=15/16 bits=896..<960
+BR tile=15/16 bits=896..<960
+BR tile=16/16 bits=960..<1024
+BR tile=16/16 bits=960..<1024
+BR tile=1/16 bits=0..<64
+BR tile=2/16 bits=64..<128
+BR tile=3/16 bits=128..<192
+BR tile=4/16 bits=192..<256
+BR tile=5/16 bits=256..<320
+BR tile=6/16 bits=320..<384
+BR tile=7/16 bits=384..<448
+BR tile=8/16 bits=448..<512
+BR tile=9/16 bits=512..<576
+BR tile=10/16 bits=576..<640
+BR tile=11/16 bits=640..<704
+BR tile=12/16 bits=704..<768
+BR tile=13/16 bits=768..<832
+BR tile=14/16 bits=832..<896
+BR tile=15/16 bits=896..<960
+BR tile=16/16 bits=960..<1024
+HELUTToolKit/HelutBench.swift:371: Fatal error: sum mismatch blind-rotate-metal public-ms crypto tick 2: want=[1] got=[0]

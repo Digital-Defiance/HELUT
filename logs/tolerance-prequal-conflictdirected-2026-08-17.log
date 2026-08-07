@@ -1,0 +1,41 @@
+=== Tolerance pre-qualification — Fixtures/p1030680_maxupper_strongest_menus.json ===
+menus            : 24 of 24 (crib ≥ 16)
+tolerance ladder : 0…1
+shell samples    : 2 wrong shells per menu, rings AAAA
+arm priced       : 1344 shells/placement
+
+Inflation is placement dependent (Phase 51.4). A menu qualifies only if its
+projected stop count stays inside what the escalator has actually digested —
+86 candidates across four arms (Phase 50.7). This measures cost on the target;
+it is not a search and produces no verdict.
+
+  # menu                                          t=0        t=1        t=2   verdict
+  1 NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE@18 ed          0          0   QUALIFIES t=1 (proj 0 stops)
+  2 NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE@21 ed          0          0   QUALIFIES t=1 (proj 0 stops)
+  3 FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN@19 ed          0          0   QUALIFIES t=1 (proj 0 stops)
+  4 FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN@22 ed          0          0   QUALIFIES t=1 (proj 0 stops)
+  5 UNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENG@20 ed          0          0   QUALIFIES t=1 (proj 0 stops)
+  6 UNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENG@23 ed          0          0   QUALIFIES t=1 (proj 0 stops)
+  7 NFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENGE@21 ed          0          0   QUALIFIES t=1 (proj 0 stops)
+  8 LAUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIRO@10 ed          0          0   QUALIFIES t=1 (proj 0 stops)
+  9 LAUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIRO@17 ed          0          0   QUALIFIES t=1 (proj 0 stops)
+ 10 AUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIROT@11 ed          0          0   QUALIFIES t=1 (proj 0 stops)
+ 11 UUUFUNFDREIVIERKKNOLLAUKK@25 edges=25 letters=          0          0   QUALIFIES t=1 (proj 0 stops)
+ 12 UUUFUNFDREIVIERKKNOLLAUKK@27 edges=25 letters=          0          0   QUALIFIES t=1 (proj 0 stops)
+ 13 DMXUUUBOOTEYFXDXUUUAUSB@8 edges=23 letters=19           0          0   QUALIFIES t=1 (proj 0 stops)
+ 14 DMXUUUBOOTEYFXDXUUUAUSB@31 edges=23 letters=19          0          0   QUALIFIES t=1 (proj 0 stops)
+ 15 ZPKTXWWWHAVENXXFFFTTT@25 edges=21 letters=17 l          0          0   QUALIFIES t=1 (proj 0 stops)
+ 16 ZPKTXWWWHAVENXXFFFTTT@50 edges=21 letters=18 l          0          0   QUALIFIES t=1 (proj 0 stops)
+ 17 TGEANKERTXFFFTTTBLEIB@24 edges=21 letters=17 l          0          0   QUALIFIES t=1 (proj 0 stops)
+ 18 TGEANKERTXFFFTTTBLEIB@37 edges=21 letters=17 l          0          0   QUALIFIES t=1 (proj 0 stops)
+ 19 UUUFUNFDREIVIERKKNO@27 edges=19 letters=16 loo          0          0   QUALIFIES t=1 (proj 0 stops)
+ 20 ULDREIYZWODREISECHSEINS@12 edges=23 letters=20          0          0   QUALIFIES t=1 (proj 0 stops)
+ 21 ULDREIYZWODREISECHSEINS@16 edges=23 letters=19          0          0   QUALIFIES t=1 (proj 0 stops)
+ 22 VVVUUUDREINULEINSVI@40 edges=19 letters=15 loo          0          0   QUALIFIES t=1 (proj 0 stops)
+ 23 UUUVIRSIBENNULEINS@40 edges=18 letters=14 loop          0          0   QUALIFIES t=1 (proj 0 stops)
+ 24 UUUVIRSIBENNULEINS@44 edges=18 letters=14 loop          0          0   QUALIFIES t=1 (proj 0 stops)
+
+qualifying at tolerance 1: 24 of 24 menus
+measured tolerance-1 cost factor: 6.2x
+projected arm: 0.97 h for those 24 menus at 1344 shells each
+projected raw stops for the arm: 0

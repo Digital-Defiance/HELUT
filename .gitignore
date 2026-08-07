@@ -1,0 +1,18 @@
+.DS_Store
+/.build
+/Packages
+xcuserdata/
+DerivedData/
+.swiftpm/configuration/registries.json
+.swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
+.netrc
+# Yosys JSON for Enigma 256 flattens BRAMs (~27MB); regenerate via Scripts/enigma256_synth.sh
+/enigma_256_netlist.json
+/build/
+# Auto-stamped by Scripts/helut_grand_audit.sh
+/textbook/git-stamp.tex
+
+
+__pycache__/
+*.py[cod]
+/Reference/Rust/target/

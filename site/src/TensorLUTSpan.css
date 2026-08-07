@@ -1,0 +1,12 @@
+.tensorlut-span {
+  font-family: Fraunces, Georgia, serif;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-decoration: none;
+  color: black;
+  display: inline-block;
+}
+
+.tensorlut-span span {
+  color: var(--copper);
+}

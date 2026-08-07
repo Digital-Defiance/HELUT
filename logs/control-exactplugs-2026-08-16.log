@@ -1,0 +1,39 @@
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030684_control_menus.json (3 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 3 of 3
+min crib length: 16
+running 3 menus, highest deduction power first:
+  [1] VVVUUUVIRSOBENNULEINSXXMITU@0 edges=27 letters=21 loops=8 central=U
+  [2] VVUUUVIRSOBENNULEINSXXMITUU@1 edges=27 letters=21 loops=8 central=U
+  [3] UUVIRSOBENNULEINSXXMITUUUVI@4 edges=27 letters=21 loops=8 central=U
+shells/menu: 34944 (336 WO × 2 Greek × 2 UKW × 1 mid-ring × 26 right-ring) → 1.6e+10 settings
+kernel sieve: ≤10 plugs, exactly-10 budget
+GPU pipeline depth: 4 shells in flight
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+right ring swept: every right-wheel turnover phase covered
+residual gap: middle ring pinned A, so keys whose middle wheel turns over inside a 27-letter span (~8% for 1 notch, ~15% for 2) are not covered — --bombe-middle-ring closes it
+ETA floor (~50M/s): 16.0 min
+
+quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → logs/quarantine_candidates.json
+  [1/3·1] VVVUUUVIRSOBENNULEINSXXMITU@0 edges=27 letters=21 loops=8 central=U       2 stops → 2 physical, best IC 0.064 tail -2.848     348s  45.9M/s ETA  11.6 min
+
+total raw stops: 2 over 15968569344 settings (45.9M/s mean)
+survived the 10-plug sieve: 2
+quarantine: 0 soft-band near-misses (break claimed; soft-band peers retained)
+
+******************************************************************************
+***  BREAK FOUND  ***
+******************************************************************************
+  menu        VVVUUUVIRSOBENNULEINSXXMITU@0 edges=27 letters=21 loops=8 central=U
+  UKW         B
+  Greek       gamma
+  wheel order IV-III-VIII
+  rings       AAAH
+  position    VYYN
+  stecker     BQ CH DI EJ GL KP NV OU SZ TY (10 pairs)
+  IC          0.064 (floor 0.055)
+  tail        -2.848 vs German -2.847 / noise -5.382
+
+  VVVUUUVIRSOBENNULEINSXXMITUUUVIRSIBENNULZWOYVIRSIBENNULDREIYZWODREISECHSEINSYZWODREIDREIACHTEINSDREIOITNACHWZSTENPASSIRT
+******************************************************************************

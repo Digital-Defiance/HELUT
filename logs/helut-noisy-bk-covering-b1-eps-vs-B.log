@@ -1,0 +1,12 @@
+=== b1 B=128 ===
+covering-b1 B=0: max|e|=0 σ̂=0.0 δ/2=1048576 decode_fail=0 decodable=true εlog2=-inf  (baseLog=1 ℓ=32)
+covering-b1 B=128: max|e|=819297 σ̂=600728.8 δ/2=1048576 decode_fail=0 decodable=true εlog2=-0.6  (baseLog=1 ℓ=32)
+=== b1 B=64 ===
+covering-b1 B=0: max|e|=0 σ̂=0.0 δ/2=1048576 decode_fail=0 decodable=true εlog2=-inf  (baseLog=1 ℓ=32)
+covering-b1 B=64: max|e|=197575 σ̂=171852.6 δ/2=1048576 decode_fail=0 decodable=true εlog2=-26.8  (baseLog=1 ℓ=32)
+=== b1 B=32 ===
+covering-b1 B=0: max|e|=0 σ̂=0.0 δ/2=1048576 decode_fail=0 decodable=true εlog2=-inf  (baseLog=1 ℓ=32)
+covering-b1 B=32: max|e|=89774 σ̂=88390.0 δ/2=1048576 decode_fail=0 decodable=true εlog2=-102.4  (baseLog=1 ℓ=32)
+=== b1 B=16 ===
+covering-b1 B=0: max|e|=0 σ̂=0.0 δ/2=1048576 decode_fail=0 decodable=true εlog2=-inf  (baseLog=1 ℓ=32)
+covering-b1 B=16: max|e|=47369 σ̂=42376.8 δ/2=1048576 decode_fail=0 decodable=true εlog2=-443.6  (baseLog=1 ℓ=32)

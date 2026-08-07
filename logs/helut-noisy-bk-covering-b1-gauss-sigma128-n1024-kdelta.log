@@ -1,0 +1,17 @@
+HELUT covering-b1 Gaussian σ=128 @ N=1024 — kδ encoding sweep (H4)
+k=1 is native δ=q/(2N). k>1 is test-poly/decode spacing kδ (--boolean-scale-mul).
+
+k=1 trials=2: max|e|=1070287 σ̂=765409 δ/2=1048576 decode_fail=1 decodable=NO  εlog2=0.0
+k=2 trials=2: max|e|=1055198 σ̂=746591 δ/2=2097152 decode_fail=0 decodable=yes εlog2=-4.7
+k=4 trials=2: max|e|=480680  σ̂=344967 δ/2=4194304 decode_fail=0 decodable=yes εlog2=-107.5
+k=4 trials=4: max|e|=783925  σ̂=543112 δ/2=4194304 decode_fail=0 decodable=yes εlog2=-43.3  (not ≤−64)
+k=8 trials=2: max|e|=290857  σ̂=240357 δ/2=8388608 decode_fail=0 decodable=yes εlog2=-881.1
+k=8 trials=4: max|e|=290857  σ̂=188003 δ/2=8388608 decode_fail=0 decodable=yes εlog2=-1438.9
+
+Metal SING full_adder covering-b1 σ=128:
+  k=4 secret PASS 43.36 s / 2  B_bk=704888
+  k=4 public-ms PASS 29.54 s / 2  B_bk=1030050
+  k=8 secret PASS 43.35 s / 2  B_bk=1522941
+  k=8 public-ms FAIL (sum want=1 got=0 on a=b=cin=1)
+
+Native k=1 σ=128 remains C37 (undecodable).

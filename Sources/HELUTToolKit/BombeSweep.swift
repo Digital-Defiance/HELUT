@@ -1,0 +1,1685 @@
+import Foundation
+import HELUTCore
+import HELUTCLI
+
+// MARK: - Welchman bombe driver
+//
+// Rehearsal first, sweep second. The rehearsal runs the bombe against P1030684,
+// whose key is known, and reports three numbers that decide whether the sweep is
+// worth starting at all: does the true setting survive, is the deduced stecker
+// correct, and what fraction of wrong settings does the menu actually kill.
+
+// MARK: Menu set
+
+struct CribMenuSet {
+    let ciphertext: [Int]
+    let menus: [BombeMenu]
+    let source: String
+}
+
+private struct MenuFile: Decodable {
+    struct Crib: Decodable {
+        let text: String
+        let messages: Int
+        let offsets: [Int]
+    }
+    struct Constellation: Decodable {
+        struct Anchor: Decodable {
+            let text: String
+            let offset: Int
+        }
+        let id: String
+        let anchors: [Anchor]
+    }
+    let target: String
+    let ciphertext: String
+    let cribs: [Crib]?
+    let constellations: [Constellation]?
+}
+
+private struct CorpusFile: Decodable {
+    struct Message: Decodable {
+        let id: String
+        let plaintext: String?
+        let ciphertext: String?
+    }
+    let messages: [Message]
+}
+
+func loadCribMenus(path: String) -> CribMenuSet? {
+    guard let data = FileManager.default.contents(atPath: path),
+          let file = try? JSONDecoder().decode(MenuFile.self, from: data) else {
+        return nil
+    }
+    let ciphertext = EnigmaAlphabet.normalize(file.ciphertext)
+    var menus: [BombeMenu] = []
+    for crib in file.cribs ?? [] {
+        for offset in crib.offsets {
+            if let menu = BombeMenuBuilder.menu(
+                crib: crib.text, offset: offset, ciphertext: ciphertext
+            ) {
+                menus.append(menu)
+            }
+        }
+    }
+    // A constellation is one joint hypothesis whose short anchors remain separate evidence.
+    // Build endpoints from plaintext + absolute offsets + the root ciphertext; never trust a
+    // fixture-supplied edge array, and never drop one malformed anchor while keeping the rest.
+    for (index, constellation) in (file.constellations ?? []).enumerated() {
+        do {
+            let menu = try BombeMenuBuilder.constellation(
+                anchors: constellation.anchors.map { ($0.text, $0.offset) },
+                ciphertext: ciphertext,
+                maximumEdges: welchmanMaxEdges
+            )
+            menus.append(menu)
+        } catch {
+            fputs(
+                "invalid constellation \(index) ('\(constellation.id)') in \(path): \(error)\n",
+                stderr
+            )
+            return nil
+        }
+    }
+    guard !menus.isEmpty else {
+        fputs("menu fixture \(path) produced no legal menus\n", stderr)
+        return nil
+    }
+
+    // `--bombe-indel <delta>` adds the spliced (indel) family to the same menu list, so both
+    // mechanisms ride ONE sweep rather than two competing processes. The ring loop taught the
+    // same lesson: two processes on one GPU merely timeshare a single command queue and each
+    // takes about twice as long for the same finish time, whereas extra menus in one pass keep
+    // the queue saturated and share the fixture load.
+    //
+    // Spliced menus need no tolerance — a splice relaxes nothing and runs on the exact board —
+    // so with per-menu tolerance a mixed run gives each family what it actually needs.
+    if let delta = intFlag("--bombe-indel"), delta > 0 {
+        // `--bombe-indel-post-gap` keeps only the family whose crib lies entirely AFTER the
+        // gap. That is the affordable and best-motivated first bite, for three reasons:
+        //
+        //   * It is the cleanest form of the hypothesis — "a group went missing somewhere
+        //     before this crib, so every step number is delta too low." One menu per legal
+        //     offset, independent of where before the crib the gap actually sat.
+        //   * It carries the FULL edge count. Nothing fell in the gap, so no deduction power
+        //     is lost, whereas a straddling menu forfeits up to `delta` edges.
+        //   * It is ~11% of the family (33 of 302 on the control), and the straddling
+        //     remainder is both weaker and nine times more numerous. Full family at right-ring
+        //     coverage is ~7 days; post-gap only is ~18 h.
+        let postGapOnly = CommandLine.arguments.contains("--bombe-indel-post-gap")
+        var spliced: [BombeMenu] = []
+        var straddlingDropped = 0
+        var seenTexts = Set<String>()
+        for crib in (file.cribs ?? []) where seenTexts.insert(crib.text).inserted {
+            let family = SpliceMenuBuilder.indelMenus(
+                crib: crib.text, ciphertext: ciphertext,
+                deltas: [delta], minimumEdges: intFlag("--bombe-min-crib") ?? 16
+            )
+            let kept = postGapOnly ? family.filter { !$0.straddlesGap } : family
+            straddlingDropped += family.count - kept.count
+            spliced.append(contentsOf: kept.map { $0.menu })
+        }
+        print("indel family: +\(spliced.count) spliced menus (delta \(delta),"
+            + " splices on \(SpliceMenuBuilder.transmissionGroup)-letter group boundaries)")
+        if postGapOnly {
+            print("  post-gap only: dropped \(straddlingDropped) straddling menus."
+                + " Kept menus carry the full edge count — nothing fell in the gap.")
+        }
+        print("  a spliced menu runs on the EXACT board — no tolerance, no survivor inflation."
+            + " Step number and ciphertext index diverge; that is the whole mechanism.")
+        // `--bombe-indel-only` drops the ordinary family, which is the only way to ask whether
+        // the spliced family manufactures ghosts. On an UNDAMAGED control every splice is a
+        // false hypothesis by construction, so any break from this arm is a false positive —
+        // a clean, decisive specificity test.
+        //
+        // Needed because the obvious version of that test does not work: the control fixture
+        // holds three true cribs at true offsets, so skipping past the first one merely reaches
+        // the second and "breaks" legitimately. That mistake was made and is recorded here.
+        if CommandLine.arguments.contains("--bombe-indel-only") {
+            print("  indel-only: dropping \(menus.count) ordinary menus, sweeping the spliced"
+                + " family alone.")
+            // Deliberately does NOT say "any break here is a false positive". That is true only
+            // on a control whose ciphertext is known to be undamaged, where every splice is
+            // false by construction — it is how the specificity grade works. On a target whose
+            // transcript may genuinely be missing a group, a break would be a real indel hit,
+            // and it still has to clear the ordinary victory conditions. A banner that is true
+            // for one fixture and false for another is how this campaign printed
+            // "turnover phase fully covered" for months.
+            print("  on a known-undamaged control every splice is false, so a break there would"
+                + " be a false positive; on the target a break is a genuine hypothesis hit and"
+                + " must still clear crib-exact ∧ IC ∧ tail ∧ ≤10 plugs.")
+            menus.removeAll()
+        }
+        menus.append(contentsOf: spliced)
+    }
+    // Shortcut #2: rank by deduction power on *this* ciphertext, not by corpus popularity.
+    menus.sort(by: byLoopPower)
+    return CribMenuSet(ciphertext: ciphertext, menus: menus, source: path)
+}
+
+/// Offset-0 openings mined from broken U-534 decrypts (shortcut #1).
+/// Shared openings (≥2 messages) first; unique 24-letter openings fill out the set.
+func loadOpeningMenus(
+    corpusPath: String,
+    ciphertext: [Int],
+    minLength: Int,
+    maxLength: Int = 24
+) -> [BombeMenu] {
+    guard let data = FileManager.default.contents(atPath: corpusPath),
+          let file = try? JSONDecoder().decode(CorpusFile.self, from: data) else {
+        return []
+    }
+    let upper = min(maxLength, ciphertext.count)
+    guard minLength <= upper else { return [] }
+
+    var carriers: [String: Set<String>] = [:]
+    for message in file.messages {
+        guard let plaintext = message.plaintext, plaintext.count >= minLength else { continue }
+        for length in minLength...min(plaintext.count, upper) {
+            carriers[String(plaintext.prefix(length)), default: []].insert(message.id)
+        }
+    }
+
+    func build(_ texts: [String]) -> [BombeMenu] {
+        var menus: [BombeMenu] = []
+        for text in texts {
+            if let menu = BombeMenuBuilder.menu(crib: text, offset: 0, ciphertext: ciphertext) {
+                menus.append(menu)
+            }
+        }
+        return maximalMenus(menus).sorted(by: byLoopPower)
+    }
+
+    let shared = carriers.filter { $0.value.count >= 2 }.map(\.key)
+    let uniqueLong = carriers.filter { $0.value.count == 1 && $0.key.count == upper }.map(\.key)
+    // Shared register first (the actual shortcut), then unique long openings.
+    let sharedMenus = build(shared)
+    let uniqueMenus = build(uniqueLong).filter { candidate in
+        sharedMenus.allSatisfy { menusAreIndependent($0, candidate) }
+    }
+    // A handful of unique long openings; confirmation partners supply the rest.
+    return sharedMenus + Array(uniqueMenus.prefix(4))
+}
+
+/// Drop exact duplicates and menus whose canonical constraint set is a proper subset of a
+/// stronger menu. This works for contiguous legacy cribs and noncontiguous constellations.
+func maximalMenus(_ menus: [BombeMenu]) -> [BombeMenu] {
+    let ordered = menus.sorted(by: byLoopPower)
+    var kept: [BombeMenu] = []
+    for menu in ordered {
+        let dominated = kept.contains { menu.constraints.isSubset(of: $0.constraints) }
+        if !dominated { kept.append(menu) }
+    }
+    return kept
+}
+
+/// Conservative independence: two hypotheses sharing even one exact board constraint do not
+/// count as independent confirmation. Internal constellation anchors remain one menu.
+func menusAreIndependent(_ a: BombeMenu, _ b: BombeMenu) -> Bool {
+    a.constraints.isDisjoint(with: b.constraints)
+}
+
+/// Select menus for a run: openings (± loop-ranked partners) or pure loop ranking.
+func selectMenus(config: BombeSweepConfig, full: CribMenuSet) -> (menus: [BombeMenu], openingCount: Int) {
+    if !config.menuFilter.isEmpty {
+        let opening = loadOpeningMenus(
+            corpusPath: resolveCorpusPath(),
+            ciphertext: full.ciphertext,
+            minLength: config.minOpeningLength
+        )
+        // "CRIB" matches any placement; "CRIB@12" pins one.
+        let parts = config.menuFilter.split(separator: "@", maxSplits: 1)
+        let text = String(parts[0])
+        let wanted = parts.count > 1 ? Int(parts[1]) : nil
+        let matched = (opening + full.menus).filter { menu in
+            menu.anchors.contains { anchor in
+                anchor.text.contains(text) && (wanted == nil || anchor.offset == wanted!)
+            }
+        }
+        return (Array(matched.sorted(by: byLoopPower).prefix(max(config.menuCount, 1))), matched.count)
+    }
+    if config.openingsOnly {
+        let openings = loadOpeningMenus(
+            corpusPath: resolveCorpusPath(),
+            ciphertext: full.ciphertext,
+            minLength: config.minOpeningLength
+        )
+        let partners = full.menus.filter { candidate in
+            openings.allSatisfy { menusAreIndependent($0, candidate) }
+        }
+        // Never drop openings when capping — trim partners first.
+        let partnerBudget: Int
+        if config.menuCount > 0 && config.menuCount > openings.count {
+            partnerBudget = min(config.confirmPartners, config.menuCount - openings.count)
+        } else if config.menuCount > 0 {
+            partnerBudget = 0
+        } else {
+            partnerBudget = config.confirmPartners
+        }
+        let chosenPartners = Array(partners.prefix(max(partnerBudget, config.confirmMenus > 1 ? config.confirmPartners : 0)))
+        // Run highest-loop first, but keep every opening in the set.
+        let chosen = (openings + chosenPartners).sorted(by: byLoopPower)
+        return (chosen, openings.count)
+    }
+    return (Array(full.menus.prefix(config.menuCount > 0 ? config.menuCount : full.menus.count)), 0)
+}
+
+func resolveMenuPath() -> String {
+    firstExisting([
+        "Fixtures/p1030680_menus.json",
+        FileManager.default.currentDirectoryPath + "/Fixtures/p1030680_menus.json"
+    ]) ?? "Fixtures/p1030680_menus.json"
+}
+
+func resolveCorpusPath() -> String {
+    firstExisting([
+        "Fixtures/u534_corpus.json",
+        FileManager.default.currentDirectoryPath + "/Fixtures/u534_corpus.json"
+    ]) ?? "Fixtures/u534_corpus.json"
+}
+
+private func firstExisting(_ paths: [String]) -> String? {
+    paths.first { FileManager.default.fileExists(atPath: $0) }
+}
+
+private func byLoopPower(_ a: BombeMenu, _ b: BombeMenu) -> Bool {
+    (a.loops, a.edgeCount, -a.components, a.stepHorizon, a.anchorSummary)
+        > (b.loops, b.edgeCount, -b.components, b.stepHorizon, b.anchorSummary)
+}
+
+// MARK: Known-key control
+
+/// P1030684 — Potsdam, 1 May 1945. Key recovered, so the bombe can be graded.
+enum ControlMessageP1030684 {
+    static let ciphertext =
+        "RFBYWKIKELDCHBSXUNFJFSNRRVFWASXYLQCQFADYJXNTBMVLRDCGULOWHTBGWUSSOQHGAY"
+        + "EDKMJDNGVZNZFOXFKMIBKQNXFDWFIVGCYMJVQCKYQFBHYKZSCJ"
+    static let plaintext =
+        "VVVUUUVIRSOBENNULEINSXXMITUUUVIRSIBENNULZWOYVIRSIBENNULDREIYZWODREISEC"
+        + "HSEINSYZWODREIDREIACHTEINSDREIOITNACHWZSTENPASSIRT"
+    static let rings = "AACU"
+    static let positions = "VYAA"
+    static let plugPairs = ["CH", "EJ", "NV", "OU", "TY", "LG", "SZ", "PK", "DI", "QB"]
+
+    static func bombe(maxPlugs: Int = 10) -> WelchmanBombe {
+        WelchmanBombe(
+            greek: EnigmaM4Warehouse.gamma,
+            left: EnigmaWarehouse.rotorIV,
+            middle: EnigmaWarehouse.rotorIII,
+            right: EnigmaWarehouse.rotorVIII,
+            reflector: EnigmaM4Warehouse.thinB,
+            rings: EnigmaM4Key.rings(fromLetters: rings),
+            maxPlugs: maxPlugs
+        )
+    }
+
+    static var trueStecker: [Int] {
+        var table = Array(0..<26)
+        for pair in plugPairs {
+            let letters = Array(pair)
+            let a = EnigmaAlphabet.index(letters[0])
+            let b = EnigmaAlphabet.index(letters[1])
+            table[a] = b
+            table[b] = a
+        }
+        return table
+    }
+}
+
+// MARK: Rehearsal
+
+func runWelchmanRehearsal() {
+    let cipher = EnigmaAlphabet.normalize(ControlMessageP1030684.ciphertext)
+    let plain = EnigmaAlphabet.normalize(ControlMessageP1030684.plaintext)
+    let bombe = ControlMessageP1030684.bombe()
+    let truth = EnigmaM4Key.positions(fromLetters: ControlMessageP1030684.positions)
+    let trueStecker = ControlMessageP1030684.trueStecker
+
+    print("=== Welchman diagonal board — known-key rehearsal (P1030684) ===")
+    print("wheel order IV-III-VIII, Greek γ, UKW B, rings \(ControlMessageP1030684.rings)")
+    print("true message key \(ControlMessageP1030684.positions), "
+        + "10 plugs \(ControlMessageP1030684.plugPairs.joined(separator: " "))")
+    print()
+
+    // Crib lengths spanning what we actually mined for P1030680 (6–10 letters) up to
+    // the long menus a bombe operator would have preferred.
+    let lengths = [6, 8, 9, 10, 12, 16, 20, 25]
+    print("Each row sweeps the full 26⁴ position space for the true wheel order.")
+    print("'survivors' counts settings the menu could not kill — the sweep's output volume.")
+    print()
+    print("crib                       len edges loops | truth | stecker        | "
+        + "survivors/26⁴ | proj. full space")
+    print(String(repeating: "-", count: 118))
+
+    for length in lengths where length <= plain.count {
+        let cribText = EnigmaAlphabet.string(from: Array(plain[0..<length]))
+        guard let menu = BombeMenuBuilder.menu(crib: cribText, offset: 0, ciphertext: cipher)
+        else { continue }
+
+        // 1. Does the true setting survive, and is the forced stecker right?
+        let stops = bombe.test(menu: menu, start: truth)
+        var graded = "no stop"
+        var verdict = "KILLED"
+        if let stop = stops.first(where: { candidate in
+            (0..<26).allSatisfy {
+                !candidate.determined[$0] || candidate.stecker[$0] == trueStecker[$0]
+            }
+        }) {
+            verdict = "kept  "
+            graded = "\((0..<26).filter { stop.determined[$0] }.count)/26 correct"
+        } else if !stops.isEmpty {
+            graded = "\(stops.count) stops, wrong"
+        }
+
+        // 2. Exhaustive survivor count over every position for this shell.
+        let survivors = LockedCounter()
+        DispatchQueue.concurrentPerform(iterations: 26) { g in
+            var local = 0
+            for l in 0..<26 {
+                for m in 0..<26 {
+                    for r in 0..<26 where !bombe.isDead(menu: menu, start: (g, l, m, r)) {
+                        local += 1
+                    }
+                }
+            }
+            survivors.add(local)
+        }
+        let kept = survivors.value
+        // 336 wheel orders × 2 Greek × 2 UKW share this per-shell survivor rate.
+        let projected = Double(kept) * 1344.0
+
+        let padded = cribText.padding(toLength: 26, withPad: " ", startingAt: 0)
+        print(String(format: "%@ %3d %5d %5d | %@ | %-14@ | %13d | %.3g",
+                     padded, length, menu.edgeCount, menu.loops, verdict,
+                     graded as NSString, kept, projected))
+    }
+
+    print()
+    print("Projection assumes the per-shell survivor rate holds across all 1344 shells.")
+    print("A survivor is a stop, not a break: each still needs its plaintext read.")
+    print()
+
+    verifyMetalAgainstHost(cipher: cipher, plain: plain, bombe: bombe, truth: truth)
+    validateDiscriminator(cipher: cipher, plain: plain, bombe: bombe, truth: truth)
+}
+
+/// Grade the discriminator where the answer is known: an 18-letter menu (the same
+/// length as the only P1030680 crib that stops) on P1030684. The true key must not
+/// merely survive — it must come out ranked first, ahead of its ghosts.
+private func validateDiscriminator(
+    cipher: [Int],
+    plain: [Int],
+    bombe: WelchmanBombe,
+    truth: (Int, Int, Int, Int)
+) {
+    print()
+    print("=== Discriminator rehearsal (18-letter menu, known key) ===")
+    let cribText = EnigmaAlphabet.string(from: Array(plain[0..<18]))
+    guard let menu = BombeMenuBuilder.menu(crib: cribText, offset: 0, ciphertext: cipher) else {
+        print("  could not build an 18-letter control menu")
+        return
+    }
+    print("  menu \(menu.description)")
+
+    // Collect every survivor over the 26⁴ window space at the true shell.
+    var stops: [SweepStop] = []
+    for g in 0..<26 {
+        for l in 0..<26 {
+            for m in 0..<26 {
+                for r in 0..<26 {
+                    let start = (g, l, m, r)
+                    for stop in bombe.test(menu: menu, start: start) {
+                        stops.append(
+                            SweepStop(
+                                ukw: "B", greek: "gamma", wheelOrder: "IV-III-VIII",
+                                menu: menu,
+                                rings: EnigmaM4Key.rings(
+                                    fromLetters: ControlMessageP1030684.rings
+                                ),
+                                stop: stop,
+                                ciphertext: cipher
+                            )
+                        )
+                    }
+                }
+            }
+        }
+    }
+    print("  survivors at the true shell: \(stops.count)")
+    guard !stops.isEmpty else { return }
+
+    let ranked = PostBombeDiscriminator.rank(stops: stops, ciphertext: cipher).candidates
+    guard let winner = ranked.first else { return }
+
+    let truthString = EnigmaAlphabet.string(from: [truth.0, truth.1, truth.2, truth.3])
+    let rankOfTruth = ranked.firstIndex { $0.messageKey == truthString }.map { $0 + 1 }
+    let exactCount = ranked.filter(\.cribExact).count
+
+    print(String(format: "  crib reproduced exactly by %d/%d after completion",
+                 exactCount, ranked.count))
+    print(String(format: "  German %.3f / noise %.3f / threshold %.3f / IC floor %.3f",
+                 PostBombeDiscriminator.germanReference,
+                 PostBombeDiscriminator.noiseReference,
+                 PostBombeDiscriminator.breakThreshold,
+                 PostBombeDiscriminator.icFloor))
+    for (index, candidate) in ranked.prefix(5).enumerated() {
+        let mark = candidate.messageKey == truthString ? " <-- TRUE KEY" : ""
+        print(String(format: "  %2d. %@ IC %.3f tail %8.3f  crib %@  %@%@",
+                     index + 1, candidate.messageKey, candidate.ic, candidate.tailScore,
+                     candidate.cribExact ? "ok " : "BAD",
+                     String(candidate.plaintext.prefix(40)), mark))
+    }
+
+    if let rankOfTruth {
+        print("  true key ranked #\(rankOfTruth) of \(ranked.count)")
+        if rankOfTruth == 1 && PostBombeDiscriminator.isBreak(winner) {
+            print("  PASS — the discriminator picks the real message out of its ghosts")
+            // Fire the real banner on a known message, so the path that matters most
+            // is exercised on every rehearsal rather than first run in anger.
+            PostBombeDiscriminator.announceBreak(winner)
+        } else if rankOfTruth == 1 {
+            print("  WEAK — correct order, but the winner fails the break gate "
+                + "(IC / tail)")
+        } else {
+            print("  FAIL — a ghost outranks the true key at this crib length")
+        }
+    } else {
+        print("  FAIL — the true key is not among the survivors")
+    }
+}
+
+/// The GPU bombe is only useful if it decides identically to the validated host one.
+/// This sweeps the same 26⁴ space both ways and demands an exact match, lane for lane.
+private func verifyMetalAgainstHost(
+    cipher: [Int],
+    plain: [Int],
+    bombe: WelchmanBombe,
+    truth: (Int, Int, Int, Int)
+) {
+    print("=== GPU cross-check (must agree with the host engine exactly) ===")
+    guard let engine = WelchmanMetalEngine() else {
+        print("  no Metal device — host engine only")
+        return
+    }
+
+    let cribText = EnigmaAlphabet.string(from: Array(plain[0..<12]))
+    guard let menu = BombeMenuBuilder.menu(crib: cribText, offset: 0, ciphertext: cipher) else {
+        print("  could not build the cross-check menu")
+        return
+    }
+
+    let started = Date()
+    guard let survivors = engine.sweep(
+        menu: menu,
+        greek: EnigmaM4Warehouse.gamma,
+        left: EnigmaWarehouse.rotorIV,
+        middle: EnigmaWarehouse.rotorIII,
+        right: EnigmaWarehouse.rotorVIII,
+        reflector: EnigmaM4Warehouse.thinB,
+        rings: EnigmaM4Key.rings(fromLetters: ControlMessageP1030684.rings)
+    ) else {
+        print("  GPU sweep failed")
+        return
+    }
+    let gpuElapsed = Date().timeIntervalSince(started)
+
+    var gpuAlive = 0
+    for mask in survivors where mask != 0 { gpuAlive += 1 }
+
+    let hostStarted = Date()
+    let hostCounter = LockedCounter()
+    let mismatches = LockedCounter()
+    DispatchQueue.concurrentPerform(iterations: 26) { g in
+        var alive = 0
+        var bad = 0
+        for l in 0..<26 {
+            for m in 0..<26 {
+                for r in 0..<26 {
+                    let lane = g * 17576 + l * 676 + m * 26 + r
+                    let hostStops = bombe.test(menu: menu, start: (g, l, m, r))
+                    // Host applies the ten-plug rule; compare the raw logic instead.
+                    let hostAlive = !bombe.isDead(menu: menu, start: (g, l, m, r))
+                    if hostAlive { alive += 1 }
+                    if hostAlive != (survivors[lane] != 0) { bad += 1 }
+                    _ = hostStops
+                }
+            }
+        }
+        hostCounter.add(alive)
+        mismatches.add(bad)
+    }
+    let hostElapsed = Date().timeIntervalSince(hostStarted)
+
+    let trueLane = truth.0 * 17576 + truth.1 * 676 + truth.2 * 26 + truth.3
+    print("  menu       \(menu.description)")
+    print(String(format: "  GPU  %7d survivors in %.2fs (%.2fM settings/s)",
+                 gpuAlive, gpuElapsed, Double(WelchmanMetalEngine.laneCount) / gpuElapsed / 1e6))
+    print(String(format: "  host %7d survivors in %.2fs (%.2fM settings/s)",
+                 hostCounter.value, hostElapsed,
+                 Double(WelchmanMetalEngine.laneCount) / hostElapsed / 1e6))
+    print("  lane mismatches: \(mismatches.value)")
+    print("  true setting \(EnigmaAlphabet.string(from: [truth.0, truth.1, truth.2, truth.3])) "
+        + "survives on GPU: \(survivors[trueLane] != 0)")
+    if mismatches.value == 0 {
+        print(String(format: "  AGREEMENT EXACT — GPU is %.0fx the host sweep rate",
+                     hostElapsed / gpuElapsed))
+    } else {
+        print("  DISAGREEMENT — do not trust the GPU path until this is zero")
+    }
+}
+
+// MARK: Middle-ring coverage self-test
+
+/// Grade the claim that lets a middle-ring sweep cost ~5x instead of 26x.
+///
+/// The claim: for middle ring ρ ≠ A, a lane whose middle wheel never reaches its own
+/// notch across the menu span — and whose ring-A partner at window `m − ρ` also never
+/// does — is *exactly* the same machine as that partner, so the rings-AAAA pass already
+/// decided it. Only lanes that break the invariant need testing at ρ.
+///
+/// This asserts it the only way worth trusting: run the validated host board on both
+/// lanes of every claimed-covered pair and demand identical verdicts. A single mismatch
+/// means the skip is dropping keys, which is the exact class of bug that made the old
+/// `MAX_UPPER` overflow report a clean negative it had not earned.
+func runMiddleRingCoverageSelfTest(greekSample: [Int] = [0, 7, 13, 19]) {
+    let cipher = EnigmaAlphabet.normalize(ControlMessageP1030684.ciphertext)
+    let plain = EnigmaAlphabet.normalize(ControlMessageP1030684.plaintext)
+    // 27 letters: campaign scale, the length the blind control actually runs.
+    let cribText = EnigmaAlphabet.string(from: Array(plain[0..<27]))
+    guard let menu = BombeMenuBuilder.menu(crib: cribText, offset: 0, ciphertext: cipher) else {
+        print("could not build the self-test menu")
+        return
+    }
+
+    // Both notch regimes. The middle wheel's own notch count is what the predicate turns
+    // on, so a two-notch middle (VI–VIII) is the case most likely to break it.
+    let triples: [(String, EnigmaRotorSpec, EnigmaRotorSpec, EnigmaRotorSpec)] = [
+        ("IV-III-VIII (1-notch middle)",
+         EnigmaWarehouse.rotorIV, EnigmaWarehouse.rotorIII, EnigmaWarehouse.rotorVIII),
+        ("I-VI-VII (2-notch middle)",
+         EnigmaWarehouse.rotorI, EnigmaWarehouse.rotorVI, EnigmaWarehouse.rotorVII)
+    ]
+
+    print("=== Middle-ring covered-lane skip — coverage self-test ===")
+    print("menu \(menu.description)")
+    print("claim: skipped lanes at middle ring ρ are the same machine as their ring-A")
+    print("partner at window m−ρ, so the rings-AAAA pass already decided them.")
+    print("checking every claimed-covered pair on the validated host board.")
+    print("Greek sample \(greekSample.map { EnigmaAlphabet.character($0) }), "
+        + "all 26³ (L,M,R) per ring, rings B–Z, right ring A.")
+    print()
+
+    let maxStep = menu.steps.max() ?? 0
+
+    /// The kernel's predicate, restated on the host. Must stay in lock-step with the
+    /// `skipCovered` block in `BombeMetal.swift`.
+    func coveredByRingA(middle: EnigmaRotorSpec, right: EnigmaRotorSpec,
+                        posM: Int, posR: Int, ring: Int) -> Bool {
+        var mA = posM
+        var mB = (posM - ring + 26) % 26
+        var rr = posR
+        for _ in 0...maxStep {
+            if middle.isAtNotch(position: mA) || middle.isAtNotch(position: mB) {
+                return false
+            }
+            if right.isAtNotch(position: rr) {
+                mA = (mA + 1) % 26
+                mB = (mB + 1) % 26
+            }
+            rr = (rr + 1) % 26
+        }
+        return true
+    }
+
+    var allPass = true
+    for (label, left, middle, right) in triples {
+        let mismatches = LockedCounter()
+        let skipped = LockedCounter()
+        let tested = LockedCounter()
+        let total = LockedCounter()
+
+        DispatchQueue.concurrentPerform(iterations: 25) { index in
+            let ring = index + 1 // rings B…Z; ring A is the pass everything defers to
+            let atRing = WelchmanBombe(
+                greek: EnigmaM4Warehouse.gamma, left: left, middle: middle, right: right,
+                reflector: EnigmaM4Warehouse.thinB, rings: (0, 0, ring, 0), maxPlugs: 0
+            )
+            let atRingA = WelchmanBombe(
+                greek: EnigmaM4Warehouse.gamma, left: left, middle: middle, right: right,
+                reflector: EnigmaM4Warehouse.thinB, rings: (0, 0, 0, 0), maxPlugs: 0
+            )
+            var localBad = 0, localSkip = 0, localTest = 0, localAll = 0
+            for g in greekSample {
+                for l in 0..<26 {
+                    for m in 0..<26 {
+                        for r in 0..<26 {
+                            localAll += 1
+                            guard coveredByRingA(
+                                middle: middle, right: right, posM: m, posR: r, ring: ring
+                            ) else {
+                                localTest += 1
+                                continue
+                            }
+                            localSkip += 1
+                            let deadHere = atRing.isDead(menu: menu, start: (g, l, m, r))
+                            let partner = (m - ring + 26) % 26
+                            let deadThere = atRingA.isDead(
+                                menu: menu, start: (g, l, partner, r)
+                            )
+                            if deadHere != deadThere { localBad += 1 }
+                        }
+                    }
+                }
+            }
+            mismatches.add(localBad)
+            skipped.add(localSkip)
+            tested.add(localTest)
+            total.add(localAll)
+        }
+
+        let skipRate = Double(skipped.value) / Double(max(total.value, 1))
+        // Ring A runs in full; each of the other 25 runs only its non-covered lanes.
+        let cost = 1.0 + 25.0 * (1.0 - skipRate)
+        print(label)
+        print(String(format: "  pairs claimed covered : %d of %d lanes (%.1f%%)",
+                     skipped.value, total.value, skipRate * 100))
+        print(String(format: "  lanes needing a test  : %d (%.1f%%)",
+                     tested.value, (1 - skipRate) * 100))
+        print("  host verdict mismatches: \(mismatches.value)")
+        print(String(format: "  sweep cost vs rings-AAAA: %.1fx (flat sweep would be 26x)",
+                     cost))
+        if mismatches.value != 0 {
+            allPass = false
+            print("  FAIL — the skip is dropping lanes the ring-A pass did not decide")
+        } else {
+            print("  PASS — every skipped lane is decided identically by its ring-A partner")
+        }
+        print()
+    }
+
+    print(allPass
+        ? "host predicate PASS — covered-lane skip is sound on both notch regimes; the "
+            + "union of ring A (full) and rings B–Z (non-covered lanes) is complete."
+        : "host predicate FAIL — do not run --bombe-middle-ring until this is zero.")
+    print()
+
+    // Phase 2. The host predicate being sound says nothing about the kernel wiring
+    // actually implementing it. Sweep the same ring with the skip on and off and demand:
+    // every lane the skip keeps carries an identical survivor mask, and every lane it
+    // drops is both predicate-covered *and* decided by its ring-A partner on the GPU.
+    print("=== Same claim, through the Metal kernel ===")
+    guard let engine = WelchmanMetalEngine() else {
+        print("  no Metal device — host phase only")
+        return
+    }
+    // A 27-letter menu is dead at the board for almost every shell, which makes the
+    // comparison vacuous: nothing survives either way and the test "passes" by having
+    // no evidence. A 14-letter one leaves only a couple of survivors, which is no better.
+    // Ten letters leaves thousands, so the skip has to discard real survivors and the
+    // ring-A partner has to be the thing that catches them.
+    let shortCrib = EnigmaAlphabet.string(from: Array(plain[0..<10]))
+    guard let shortMenu = BombeMenuBuilder.menu(
+        crib: shortCrib, offset: 0, ciphertext: cipher
+    ) else {
+        print("  could not build the kernel-phase menu")
+        return
+    }
+    let shortMaxStep = shortMenu.steps.max() ?? 0
+
+    func coveredShort(middle: EnigmaRotorSpec, right: EnigmaRotorSpec,
+                      posM: Int, posR: Int, ring: Int) -> Bool {
+        var mA = posM
+        var mB = (posM - ring + 26) % 26
+        var rr = posR
+        for _ in 0...shortMaxStep {
+            if middle.isAtNotch(position: mA) || middle.isAtNotch(position: mB) {
+                return false
+            }
+            if right.isAtNotch(position: rr) {
+                mA = (mA + 1) % 26
+                mB = (mB + 1) % 26
+            }
+            rr = (rr + 1) % 26
+        }
+        return true
+    }
+
+    print("  menu \(shortMenu.description)")
+    var kernelPass = true
+    var sawEvidence = false
+
+    for (label, left, middle, right) in triples {
+        func sweep(ring: Int, skip: Bool) -> [UInt32]? {
+            engine.sieve = WelchmanSieve(
+                maxPlugs: 0, exactPlugs: 0, skipMiddleRingCovered: skip
+            )
+            guard let buffer = engine.sweep(
+                menu: shortMenu, greek: EnigmaM4Warehouse.gamma,
+                left: left, middle: middle, right: right,
+                reflector: EnigmaM4Warehouse.thinB, rings: (0, 0, ring, 0)
+            ) else { return nil }
+            return Array(buffer)
+        }
+        guard let ringAMasks = sweep(ring: 0, skip: false) else {
+            print("  \(label): GPU sweep failed")
+            kernelPass = false
+            continue
+        }
+        print("  \(label)")
+        for ring in [1, 5, 13] {
+            guard let off = sweep(ring: ring, skip: false),
+                  let on = sweep(ring: ring, skip: true) else {
+                print("    ring \(ring): GPU sweep failed")
+                kernelPass = false
+                continue
+            }
+            var lanesSkipped = 0        // predicate says covered
+            var survivorsOff = 0        // survivors when nothing is skipped
+            var survivorsDropped = 0    // survivors the skip discarded — the evidence
+            var notSkipped = 0          // covered but kernel kept it: skip not implemented
+            var wronglySkipped = 0      // kernel zeroed a lane the predicate did not cover
+            var partnerDisagrees = 0    // discarded verdict is not carried by ring A
+            for lane in 0..<WelchmanMetalEngine.laneCount {
+                let (g, l, m, r) = WelchmanMetalEngine.position(forLane: lane)
+                let covered = coveredShort(
+                    middle: middle, right: right, posM: m, posR: r, ring: ring
+                )
+                if off[lane] != 0 { survivorsOff += 1 }
+                if covered {
+                    lanesSkipped += 1
+                    // The kernel must have zeroed it…
+                    if on[lane] != 0 { notSkipped += 1 }
+                    if off[lane] != 0 {
+                        survivorsDropped += 1
+                        // …and the ring-A partner must carry the discarded verdict.
+                        let partner = (m - ring + 26) % 26
+                        let partnerLane = g * 17576 + l * 676 + partner * 26 + r
+                        if ringAMasks[partnerLane] != off[lane] { partnerDisagrees += 1 }
+                    }
+                } else if on[lane] != off[lane] {
+                    // Not covered: the skip must not have touched this lane at all.
+                    wronglySkipped += 1
+                }
+            }
+            if survivorsDropped > 0 { sawEvidence = true }
+            print(String(format: "    ring %@: %6d/%d lanes skipped (%.1f%%), "
+                         + "survivors %6d of which %6d discarded",
+                         String(EnigmaAlphabet.character(ring)) as NSString,
+                         lanesSkipped, WelchmanMetalEngine.laneCount,
+                         Double(lanesSkipped) / Double(WelchmanMetalEngine.laneCount) * 100,
+                         survivorsOff, survivorsDropped))
+            print("             violations — covered-but-kept \(notSkipped), "
+                + "skipped-but-not-covered \(wronglySkipped), "
+                + "ring-A partner disagrees \(partnerDisagrees)")
+            if notSkipped != 0 || wronglySkipped != 0 || partnerDisagrees != 0 {
+                kernelPass = false
+            }
+        }
+    }
+
+    if !sawEvidence {
+        print("VACUOUS — the skip never discarded a single survivor, so the equivalence "
+            + "was never actually exercised. Not a pass.")
+        return
+    }
+    print(kernelPass && allPass
+        ? "PASS — kernel skip drops only lanes whose ring-A partner carries the same "
+            + "verdict, and never alters a verdict it keeps."
+        : "FAIL — kernel skip is not sound; --bombe-middle-ring would lose coverage.")
+}
+
+// MARK: Sweep
+
+struct BombeSweepConfig {
+    var menuCount = 1
+    var wheelOrders: [(EnigmaRotorSpec, EnigmaRotorSpec, EnigmaRotorSpec)] =
+        M4ThetisAttack.allWheelOrders()
+    var maxPlugs = 10
+    var reportLimit = 20
+    /// Sweep the fast-wheel Ringstellung as well. The middle and greek rings are
+    /// absorbed into their window positions, and the left ring never gates a
+    /// turnover, but the right ring sets *when* the middle wheel steps — so a menu
+    /// long enough to span a turnover needs all 26 phases to be complete.
+    var sweepRightRing = false
+    /// Sweep the *middle* Ringstellung — the one gap no campaign has ever tested.
+    ///
+    /// The middle ring is absorbed into its window position only while the middle wheel
+    /// stays off its own notch in span; once it turns over, the left wheel moves and the
+    /// absorption fails. Rather than pay a flat 26x, ring A is swept in full and each
+    /// other ring tests only the lanes whose middle wheel (or whose ring-A partner's)
+    /// actually reaches a notch — see the `skipCovered` block in `BombeMetal.swift`.
+    /// The union is still complete, at roughly 5-8x instead of 26x.
+    var sweepMiddleRing = false
+    /// Assume the historical ten-lead board and sieve on the plug *budget* as well as the
+    /// ceiling: a menu that pins letters without leaving room for the remaining plugs is
+    /// not buildable. Opt-in, because it is an assumption about the target rather than a
+    /// restatement of the host rule. 0 disables.
+    var exactPlugs = 0
+    /// Pin the Ringstellung to an explicit list of hypotheses instead of sweeping all 676,
+    /// e.g. `AAAA,AACU`. A specific ring guess then costs 1x rather than 676x: 1,344 shells
+    /// per placement per ring, ~12 s. Empty means sweep as directed by the sweep flags.
+    ///
+    /// Several rings belong in *one* run rather than several processes. The ring loop is
+    /// inside the sweep, so listing them here shares the menu build and keeps a single
+    /// command queue saturated; two concurrent processes on one GPU merely timeshare it and
+    /// each takes about twice as long for the same finish time.
+    ///
+    /// Greek and left entries should be A: those two rings are unobservable in a short
+    /// message, which is exactly why the 676x reduction may pin them.
+    var pinnedRings: [(Int, Int, Int, Int)] = []
+    /// Deletion tolerance for the diagonal board (the Mulein board). 0 is the historical
+    /// board. Above 0 the kernel accepts a setting when dropping up to this many menu edges
+    /// makes it consistent, on the hypothesis that a dropped edge is a mis-transcribed
+    /// ciphertext letter. Costs `1 + E + C(E,2) + C(E,3)` closures per seed and *widens*
+    /// what survives, so inflation must be pre-qualified per menu — it is placement
+    /// dependent, not a function of crib length (Phase 51).
+    var garbleTolerance = 0
+    /// How many GPU shells to keep in flight. 4 is usually enough to hide host drain.
+    var pipelineDepth = WelchmanMetalEngine.defaultDepth
+    /// Prefer offset-0 message openings (≥ minOpeningLength) from the U-534 corpus,
+    /// then fill remaining slots with highest-loop independent menus.
+    var openingsOnly = false
+    /// Run only menus whose crib contains this text — for re-testing one stop-producing crib.
+    var menuFilter = ""
+    var minOpeningLength = 16
+    /// Drop menus shorter than this. 14-letter cribs sit under unicity and produced
+    /// the −4.070 false positive; 16 is the rehearsal length that isolates a true key.
+    var minCribLength = 16
+    /// 1-based index into the selected list to resume from (`--bombe-from 628`
+    /// skips menus 1…627). Applied before the length filter so log indices match.
+    var resumeFrom = 1
+    /// A shell is only reported when this many *independent* menus stop on it.
+    /// Nested cribs (one a prefix of another at the same offset) count as one.
+    var confirmMenus = 1
+    /// Extra high-loop menus to pull in as confirmation partners under openings mode.
+    var confirmPartners = 8
+    /// Menu fixture to attack. Empty means the P1030680 catalog. Pointing this at a
+    /// known-key control fixture grades the sweep itself instead of swapping files.
+    var fixturePath = ""
+    /// When non-nil, physical soft-band near-misses are appended to this quarantine JSON
+    /// for Stochastic Bombe seeding (`--hybrid-quarantine`). Empty string disables.
+    var quarantinePath: String? = NearMissQuarantine.defaultPath
+    /// Soft tail margin below the strict break threshold (default 0.4 → floor −4.0).
+    var quarantineSoftTailMargin = NearMissQuarantine.softTailMargin
+    /// Soft IC floor for quarantine (default 0.048).
+    var quarantineSoftICFloor = NearMissQuarantine.softICFloor
+}
+
+func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
+    let path = config.fixturePath.isEmpty ? resolveMenuPath() : config.fixturePath
+    guard let set = loadCribMenus(path: path) else {
+        print("could not load menus from \(path)")
+        print("run: python3 Scripts/crib_mine.py Fixtures/u534_corpus.json "
+            + "--emit Fixtures/p1030680_menus.json")
+        return
+    }
+
+    let selection = selectMenus(config: config, full: set)
+    let catalog = selection.menus
+    guard !catalog.isEmpty else {
+        print("no menus selected — check --bombe-openings / corpus / menu fixture")
+        return
+    }
+
+    // Resume uses the catalog's original 1-based indices (matching prior log lines),
+    // then the length filter drops short cribs from whatever remains.
+    let resumeFrom = max(config.resumeFrom, 1)
+    let afterResume = catalog.enumerated().compactMap { index, menu -> (Int, BombeMenu)? in
+        let original = index + 1
+        guard original >= resumeFrom else { return nil }
+        return (original, menu)
+    }
+    let chosen = afterResume.filter { $0.1.constraintCount >= config.minCribLength }
+    let droppedWeak = afterResume.count - chosen.count
+    if afterResume.isEmpty, resumeFrom > catalog.count {
+        fputs(
+            "Welchman resume failed: --bombe-from \(resumeFrom) exceeds the selected "
+                + "catalog of \(catalog.count) / \(set.menus.count) menu(s). Pass "
+                + "--bombe-menus 0 (all) or an explicit count >= \(resumeFrom).\n",
+            stderr
+        )
+        fflush(stderr)
+        exit(1)
+    }
+    guard !chosen.isEmpty else {
+        print("no menus left after --bombe-from \(resumeFrom) / min crib \(config.minCribLength)")
+        return
+    }
+
+    print("=== Welchman diagonal board — P1030680 ===")
+    print("fixture: \(set.source) (\(set.menus.count) loop-ranked placements)")
+    if config.openingsOnly {
+        print("mode: openings (≥\(config.minOpeningLength)…24 @0) + \(config.confirmPartners) "
+            + "loop-ranked confirmation partners")
+        print("selected \(catalog.count) menus "
+            + "(\(selection.openingCount) openings, confirm≥\(config.confirmMenus) independent)")
+    } else {
+        print("mode: loop-ranked (loops, edges); confirm≥\(config.confirmMenus) independent")
+        print("selected \(catalog.count) of \(set.menus.count)")
+    }
+    print("min menu constraints: \(config.minCribLength)"
+        + (droppedWeak > 0 ? " (dropped \(droppedWeak) weaker from the remaining set)" : ""))
+    if resumeFrom > 1 {
+        print("resuming from menu \(resumeFrom) of \(catalog.count) "
+            + "(skipping \(resumeFrom - 1) already done)")
+    }
+    print("running \(chosen.count) menus, highest deduction power first:")
+    for item in chosen.prefix(12) {
+        print("  [\(item.0)] \(item.1.description)")
+    }
+    if chosen.count > 12 { print("  … \(chosen.count - 12) more") }
+    if CommandLine.arguments.contains("--bombe-plan-only") {
+        print("PLAN ONLY: \(chosen.count) menus selected; no campaign settings evaluated")
+        print("No Metal device or command queue was created.")
+        return
+    }
+
+    guard let engine = WelchmanMetalEngine(depth: config.pipelineDepth) else {
+        print("no Metal device available — the host engine is 100x slower; "
+            + "use --welchman-rehearsal to measure it")
+        return
+    }
+
+    let middleRingValues = config.sweepMiddleRing ? Array(0..<26) : [0]
+    let rightRingValues = config.sweepRightRing ? Array(0..<26) : [0]
+    // Ring A first in both axes: every other middle ring defers its already-covered
+    // lanes to the ring-A pass, so the ring-A pass must be the one that runs in full.
+    let ringVariants: [(Int, Int, Int, Int)] = {
+        if !config.pinnedRings.isEmpty { return config.pinnedRings }
+        return middleRingValues.flatMap { middle in
+            rightRingValues.map { right in (0, 0, middle, right) }
+        }
+    }()
+    let shellsPerMenu = config.wheelOrders.count * 4 * ringVariants.count
+    let settingsPerMenu = Double(shellsPerMenu) * Double(WelchmanMetalEngine.laneCount)
+    if !config.pinnedRings.isEmpty {
+        let letters = config.pinnedRings.map {
+            EnigmaAlphabet.string(from: [$0.0, $0.1, $0.2, $0.3])
+        }.joined(separator: ",")
+        print(String(format: "shells/menu: %d (%d WO × 2 Greek × 2 UKW × rings PINNED %@)"
+                     + " → %.3g settings",
+                     shellsPerMenu, config.wheelOrders.count,
+                     letters as NSString, settingsPerMenu))
+        print("rings pinned: these are ring HYPOTHESES, not coverage. A negative here"
+            + " eliminates \(config.pinnedRings.count) Ringstellung(en) out of 676, no more.")
+    } else {
+        print(String(format: "shells/menu: %d (%d WO × 2 Greek × 2 UKW × %d mid-ring × %d right-ring)"
+                     + " → %.3g settings",
+                     shellsPerMenu, config.wheelOrders.count,
+                     middleRingValues.count, rightRingValues.count, settingsPerMenu))
+    }
+    engine.sieve = WelchmanSieve(
+        maxPlugs: config.maxPlugs,
+        exactPlugs: config.exactPlugs,
+        // A pinned ring is one explicit hypothesis, so nothing may be deferred to a
+        // ring-A pass that this run is not performing.
+        skipMiddleRingCovered: config.sweepMiddleRing && config.pinnedRings.isEmpty,
+        garbleTolerance: config.garbleTolerance
+    )
+    if config.garbleTolerance > 0 {
+        print("garble tolerance: \(config.garbleTolerance) menu edges may be dropped"
+            + " (Mulein board — widens survivors; inflation is placement dependent)")
+    }
+    print("kernel sieve: ≤\(config.maxPlugs) plugs"
+        + (config.exactPlugs > 0 ? ", exactly-\(config.exactPlugs) budget" : "")
+        + (config.sweepMiddleRing ? ", middle-ring covered-lane skip" : ""))
+    print("GPU pipeline depth: \(engine.depth) shells in flight")
+    print(String(format: "break threshold: %.3f  IC floor: %.3f  (German %.3f / noise %.3f)",
+                 PostBombeDiscriminator.breakThreshold,
+                 PostBombeDiscriminator.icFloor,
+                 PostBombeDiscriminator.germanReference,
+                 PostBombeDiscriminator.noiseReference))
+    let longestSpan = chosen.map { $0.1.stepHorizon }.max() ?? 0
+    if config.sweepMiddleRing && config.sweepRightRing {
+        print("right ring swept: every right-wheel turnover phase covered")
+        print("middle ring swept: ring A in full, rings B–Z restricted to lanes whose "
+            + "middle wheel reaches a notch (the rest are exactly the ring-A lanes)")
+        print("no residual ring gap for these menus — this is the arm the ledger has "
+            + "never run")
+    } else if config.sweepMiddleRing {
+        print("middle ring swept, right ring pinned A: covers middle-wheel turnover but "
+            + "not right-wheel turnover phase. Add --bombe-ring-sweep for both.")
+    } else if config.sweepRightRing {
+        // Sweeping the right ring covers every phase of the right-wheel turnover, so
+        // middle-wheel stepping is correct for all 26. The middle ring stays pinned at
+        // A, which is only exact while the middle wheel itself does not turn over in
+        // span — so a key that steps the left wheel mid-crib is still out of reach.
+        let steps = longestSpan / 26 + 1
+        print("right ring swept: every right-wheel turnover phase covered")
+        print(String(format: "residual gap: middle ring pinned A, so keys whose middle "
+                     + "wheel turns over inside a %d-letter span (~%.0f%% for 1 notch, "
+                     + "~%.0f%% for 2) are not covered — --bombe-middle-ring closes it",
+                     longestSpan, Double(steps) / 26.0 * 100, Double(2 * steps) / 26.0 * 100))
+    } else {
+        let longest = chosen.map { $0.1.stepHorizon }.max() ?? 0
+        let free = max(0, 26 - longest)
+        print(String(format: "rings AAAA: exhaustive over turnover-free spans, which is "
+                     + "%d/26 (%.0f%%) of keys at %d letters. --bombe-ring-sweep covers "
+                     + "the rest at 26x cost.",
+                     free, Double(free) / 26.0 * 100, longest))
+    }
+    let etaSeconds = settingsPerMenu * Double(chosen.count) / 50e6
+    print(String(format: "ETA floor (~50M/s): %.1f min", etaSeconds / 60))
+    print()
+    fflush(stdout)
+
+    let greeks: [(String, EnigmaRotorSpec)] = [
+        ("beta", EnigmaM4Warehouse.beta), ("gamma", EnigmaM4Warehouse.gamma)
+    ]
+    let reflectors: [(String, [Int])] = [
+        ("B", EnigmaM4Warehouse.thinB), ("C", EnigmaM4Warehouse.thinC)
+    ]
+
+    // Shortcut #3: accumulate stops by shell; report only multi-menu agreements.
+    let agreements = LockedShellAgreements()
+    /// Physical shells admitted by a unicity-safe (≥16) menu. Short challengers under
+    /// confirm≥2 never GPU-sweep: they only re-test these shells on the host. A true
+    /// key still survives — its ≥16 body locks the shell, then the short header
+    /// confirms it. What dies is the 10M–40M ghost-completion flood that stalled arm 2.
+    var lockedAnchors: [ShellID: LockedAnchorShell] = [:]
+    let anchorMinConstraints = 16
+    var totalStops = 0
+    var totalCompletions = 0
+    var settingsDone = 0
+    var shellsDone = 0
+    let started = Date()
+    var bestSoFar: DiscriminatedCandidate?
+    var breakFound: DiscriminatedCandidate?
+    var quarantineBag: [QuarantineCandidate] = []
+    let softBar = QuarantineSoftBar(
+        softTailFloor: PostBombeDiscriminator.breakThreshold - config.quarantineSoftTailMargin,
+        softICFloor: config.quarantineSoftICFloor,
+        strictTailFloor: PostBombeDiscriminator.breakThreshold,
+        strictICFloor: PostBombeDiscriminator.icFloor
+    )
+    let quarantineSource = path
+    if let qPath = config.quarantinePath, !qPath.isEmpty {
+        print(String(
+            format: "quarantine: soft IC≥%.3f / tail>%.3f (strict IC≥%.3f / tail>%.3f) → %@",
+            softBar.softICFloor,
+            softBar.softTailFloor,
+            softBar.strictICFloor,
+            softBar.strictTailFloor,
+            qPath
+        ))
+        fflush(stdout)
+    }
+    /// Physically valid stops retained per menu. A guard, not a filter: a legitimate
+    /// menu produces a handful, so hitting this cap means the menu was too weak to
+    /// be worth reading anyway.
+    let physicalCap = 5_000
+    let overlong = chosen.filter { $0.1.edgeCount > welchmanMaxEdges }
+    let runnableRaw = chosen.filter { $0.1.edgeCount <= welchmanMaxEdges }
+    // Confirm mode: every unicity-safe menu before any short challenger, so the
+    // locked-anchor set is complete before challengers run.
+    let runnable: [(Int, BombeMenu)]
+    if config.confirmMenus > 1 {
+        let anchors = runnableRaw.filter { $0.1.constraintCount >= anchorMinConstraints }
+        let challengers = runnableRaw.filter { $0.1.constraintCount < anchorMinConstraints }
+        runnable = anchors + challengers
+        print("confirm mode: \(anchors.count) anchor menus (≥\(anchorMinConstraints) constraints), "
+            + "\(challengers.count) short challengers (host re-test of locked shells only)")
+    } else {
+        runnable = runnableRaw
+    }
+    if !overlong.isEmpty {
+        print("WARNING: \(overlong.count) menu(s) exceed Metal edge cap "
+            + "(\(welchmanMaxEdges)) and will not be tested:")
+        for (originalIndex, menu) in overlong.prefix(12) {
+            print(String(format: "  [%d] %@ — %d edges",
+                         originalIndex, menu.description as NSString, menu.edgeCount))
+        }
+        if overlong.count > 12 { print("  … \(overlong.count - 12) more") }
+        print()
+    }
+    // ETA covers GPU anchor work only; challengers are O(|locked shells|) on host.
+    let anchorRunnable = runnable.filter {
+        $0.1.constraintCount >= anchorMinConstraints || config.confirmMenus <= 1
+    }
+    let runnableShells = shellsPerMenu * anchorRunnable.count
+    let etaSecondsRunnable = settingsPerMenu * Double(anchorRunnable.count) / 50e6
+    if runnable.count != chosen.count || config.confirmMenus > 1 {
+        print(String(format: "runnable: %d menus (%d GPU) → ETA floor %.1f min",
+                     runnable.count, anchorRunnable.count, etaSecondsRunnable / 60))
+        print()
+    }
+
+    /// Tolerance this specific menu may be given, from its own redundancy.
+    ///
+    /// Phase 51.4: tolerance *spends* menu redundancy, and only a loop-rich menu has enough to
+    /// spend. The placements that detonate are the ones already weak at tolerance 0, so the
+    /// gate is loop count rather than crib length — an earlier crib-length rule held only at
+    /// offset 0 and was withdrawn.
+    ///
+    /// The thresholds here are conservative and deliberately not a substitute for
+    /// `--bombe-tolerance-prequal`, which measures actual survivor counts. This only prevents
+    /// the obvious catastrophe of handing tolerance to an under-determined menu; a menu that
+    /// clears this bar can still inflate, which is what the prequal gate is for.
+    func toleranceFor(menu: BombeMenu, requested: Int) -> Int {
+        // Measured on the target's strongest fixture: 40 edges / 20 loops carries tolerance 1
+        // with zero inflation, while 18 edges / 14 letters detonated at tolerance 2.
+        if menu.loops >= 12 { return min(requested, 2) }
+        if menu.loops >= 6 { return min(requested, 1) }
+        return 0
+    }
+
+    for (runIndex, item) in runnable.enumerated() {
+        let originalIndex = item.0
+        let menu = item.1
+        let label = String(format: "[%d/%d·%d]", originalIndex, catalog.count, runIndex + 1)
+        let isChallenger = config.confirmMenus > 1
+            && menu.constraintCount < anchorMinConstraints
+
+        var physical: [SweepStop] = []
+        var rawStops = 0
+
+        // Per-menu tolerance. Phase 51.4 measured inflation as a property of the individual
+        // menu's loop structure, not of the run, so a single global switch is the wrong shape:
+        // it would either forgo tolerance on menus that can afford it, or detonate on menus
+        // that cannot. Setting it here lets one sweep carry mixed families in a single pass —
+        // spliced (indel) menus at tolerance 0, where they need none because a splice relaxes
+        // nothing, alongside loop-rich menus at tolerance 1.
+        //
+        // Safe with the shell pipeline: `enqueue` copies the tolerance into the command buffer
+        // at encode time, so shells already in flight from the previous menu keep their own
+        // value even while this one is being set.
+        let menuTolerance = config.garbleTolerance > 0
+            ? toleranceFor(menu: menu, requested: config.garbleTolerance)
+            : 0
+        engine.sieve = WelchmanSieve(
+            maxPlugs: config.maxPlugs,
+            exactPlugs: config.exactPlugs,
+            skipMiddleRingCovered: config.sweepMiddleRing && config.pinnedRings.isEmpty,
+            garbleTolerance: menuTolerance
+        )
+
+        if isChallenger {
+            if lockedAnchors.isEmpty {
+                print(String(format: "  %@ %-44@ skipped — no locked anchor shells",
+                             label, menu.description as NSString))
+                fflush(stdout)
+                continue
+            }
+            // Host-only: re-test each locked shell against this short menu.
+            for anchor in lockedAnchors.values {
+                let bombe = WelchmanBombe(
+                    greek: anchor.greek, left: anchor.left,
+                    middle: anchor.middle, right: anchor.right,
+                    reflector: anchor.reflector, rings: anchor.rings,
+                    maxPlugs: config.maxPlugs
+                )
+                let stops = bombe.test(menu: menu, start: anchor.positions)
+                rawStops += stops.count
+                for stop in stops {
+                    let sweepStop = SweepStop(
+                        ukw: anchor.ukwName, greek: anchor.greekName,
+                        wheelOrder: anchor.wheelOrder,
+                        menu: menu,
+                        rings: anchor.rings,
+                        stop: stop,
+                        ciphertext: set.ciphertext
+                    )
+                    guard !PostBombeDiscriminator.completions(
+                        for: sweepStop, maxPlugs: config.maxPlugs
+                    ).isEmpty else { continue }
+                    if physical.count < physicalCap { physical.append(sweepStop) }
+                    agreements.insert(sweepStop)
+                }
+            }
+            settingsDone += lockedAnchors.count
+        } else {
+            // Full GPU sweep for unicity-safe anchors (and for confirm=1 runs).
+            var inFlight: [WelchmanInFlight] = []
+
+            func drainOldest() {
+                guard let flight = inFlight.first else { return }
+                inFlight.removeFirst()
+                let survivors = engine.wait(flight)
+                let shell = flight.shell
+                let bombe = WelchmanBombe(
+                    greek: shell.greek, left: shell.left, middle: shell.middle, right: shell.right,
+                    reflector: shell.reflector, rings: shell.rings, maxPlugs: config.maxPlugs
+                )
+                for lane in 0..<WelchmanMetalEngine.laneCount where survivors[lane] != 0 {
+                    let start = WelchmanMetalEngine.position(forLane: lane)
+                    // The GPU already decided all 26 seeds; re-running the ones it killed
+                    // is pure duplicated work. An undecided lane carries every bit, so it
+                    // is re-tested in full on an engine with no slow-state cap.
+                    let stops = bombe.test(
+                        menu: shell.menu, start: start, seedMask: survivors[lane]
+                    )
+                    rawStops += stops.count
+                    for stop in stops {
+                        let sweepStop = SweepStop(
+                            ukw: shell.ukwName, greek: shell.greekName,
+                            wheelOrder: shell.wheelOrder,
+                            menu: shell.menu,
+                            rings: shell.rings,
+                            stop: stop,
+                            ciphertext: set.ciphertext
+                        )
+                        guard !PostBombeDiscriminator.completions(
+                            for: sweepStop, maxPlugs: config.maxPlugs
+                        ).isEmpty else { continue }
+                        if physical.count < physicalCap { physical.append(sweepStop) }
+                        lockedAnchors[sweepStop.shellID] = LockedAnchorShell(
+                            ukwName: shell.ukwName, greekName: shell.greekName,
+                            wheelOrder: shell.wheelOrder,
+                            greek: shell.greek, left: shell.left,
+                            middle: shell.middle, right: shell.right,
+                            reflector: shell.reflector, rings: shell.rings,
+                            positions: stop.positions
+                        )
+                        if config.confirmMenus > 1 { agreements.insert(sweepStop) }
+                    }
+                }
+                engine.release(flight)
+                settingsDone += WelchmanMetalEngine.laneCount
+                shellsDone += 1
+            }
+
+            for (ukwName, reflector) in reflectors {
+                for (greekName, greek) in greeks {
+                    for rings in ringVariants {
+                        for order in config.wheelOrders {
+                            while inFlight.count >= engine.depth {
+                                drainOldest()
+                            }
+                            let shell = WelchmanShell(
+                                menu: menu,
+                                greek: greek, left: order.0, middle: order.1, right: order.2,
+                                reflector: reflector, rings: rings,
+                                ukwName: ukwName, greekName: greekName,
+                                wheelOrder: "\(order.0.name)-\(order.1.name)-\(order.2.name)"
+                            )
+                            if let flight = engine.enqueue(shell: shell) {
+                                inFlight.append(flight)
+                            }
+                        }
+                    }
+                }
+            }
+            while !inFlight.isEmpty {
+                drainOldest()
+            }
+        }
+
+        totalStops += rawStops
+        let elapsed = Date().timeIntervalSince(started)
+        let rate = elapsed > 0 ? Double(settingsDone) / elapsed / 1e6 : 0
+        let remaining = max(0, runnableShells - shellsDone)
+        let eta = rate > 0
+            ? Double(remaining) * Double(WelchmanMetalEngine.laneCount) / (rate * 1e6)
+            : 0
+        let progress = String(format: "%6.0fs %5.1fM/s ETA %5.1f min", elapsed, rate, eta / 60)
+
+        // Stage 1 — the bombe. Nothing survived, so there is nothing to sieve.
+        if rawStops == 0 {
+            print(String(format: "  %@ %-44@ dead at the board                    %@",
+                         label, menu.description as NSString, progress))
+            fflush(stdout)
+            continue
+        }
+
+        // Stage 2 — the physical sieve, already applied as the stops drained. A survivor
+        // needing more than 10 plugs, or contradicting the plugs already deduced, is not
+        // a machine the Kriegsmarine could have built.
+        if physical.isEmpty {
+            print(String(format: "  %@ %-44@ %7d stops → 0 valid 10-plug completions  %@",
+                         label, menu.description as NSString, rawStops, progress))
+            fflush(stdout)
+            continue
+        }
+
+        // Stage 3 — the discriminator. Physically possible is not the same as true.
+        let verdict = PostBombeDiscriminator.rank(
+            stops: physical,
+            ciphertext: set.ciphertext,
+            maxPlugs: config.maxPlugs,
+            provisionalICFloor: config.quarantinePath != nil ? softBar.softICFloor : nil
+        )
+        totalCompletions += verdict.candidates.count
+        guard let best = verdict.candidates.first else {
+            print(String(format: "  %@ %-44@ %7d stops → 0 scorable completions  %@",
+                         label, menu.description as NSString, rawStops, progress))
+            fflush(stdout)
+            continue
+        }
+        if bestSoFar == nil || best.tailScore > bestSoFar!.tailScore { bestSoFar = best }
+        if config.quarantinePath != nil {
+            for candidate in verdict.candidates.prefix(8)
+            where NearMissQuarantine.shouldQuarantine(candidate, softBar: softBar) {
+                quarantineBag.append(
+                    NearMissQuarantine.makeCandidate(
+                        from: candidate,
+                        source: quarantineSource,
+                        softBar: softBar
+                    )
+                )
+            }
+        }
+        print(String(format: "  %@ %-44@ %7d stops → %d physical, best IC %.3f tail %.3f  %@",
+                     label, menu.description as NSString,
+                     rawStops, verdict.candidates.count, best.ic, best.tailScore, progress))
+        let ringString = EnigmaAlphabet.string(from: [
+            best.stop.rings.0, best.stop.rings.1, best.stop.rings.2, best.stop.rings.3
+        ])
+        print(String(
+            format: "    shell %@/%@/%@/%@ pos %@ plugs %d  → %@",
+            best.stop.ukw, best.stop.greek, best.stop.wheelOrder, ringString,
+            best.messageKey, best.pairCount, NearMissQuarantine.physicalLedgerPath
+        ))
+        for candidate in verdict.candidates.prefix(8) {
+            NearMissQuarantine.appendPhysical(candidate, source: quarantineSource + "#physical")
+        }
+        fflush(stdout)
+
+        // Solo BREAK is allowed only for cribs that clear the unicity floor (16).
+        // Shorter menus under --bombe-confirm ≥2 may clear the linguistic bar by chance
+        // (menu 627); they must wait for an independent partner on the same shell.
+        if PostBombeDiscriminator.isBreak(best) {
+            if PostBombeDiscriminator.breaksOnPrefixOnly(best) {
+                let end = best.prefix?.end ?? 0
+                print(String(
+                    format: "  head letters 0..%d clears; whole message IC %.3f tail %.3f does not. Continuing.",
+                    end, best.ic, best.tailScore
+                ))
+                if config.sweepMiddleRing {
+                    print("  Middle ring was swept. This head is not a recovered plaintext.")
+                } else {
+                    print("  Middle ring was pinned. Re-run this menu with --bombe-middle-ring; this sweep continues.")
+                }
+                fflush(stdout)
+            } else if menu.constraintCount >= 16 {
+                breakFound = best
+                break
+            } else if config.confirmMenus > 1 {
+                print(String(format: "  %@ clears the bar at %d letters — holding for "
+                             + "≥%d-menu agreement before claiming a break",
+                             label, menu.constraintCount, config.confirmMenus))
+                fflush(stdout)
+            } else {
+                print(String(format: "  %@ clears the bar at %d letters but is under "
+                             + "unicity — not claiming a break (use --bombe-confirm 2)",
+                             label, menu.constraintCount))
+                fflush(stdout)
+            }
+        }
+    }
+
+    let elapsedTotal = Date().timeIntervalSince(started)
+    print()
+    print("total raw stops: \(totalStops) over \(settingsDone) settings "
+        + String(format: "(%.1fM/s mean)",
+                 elapsedTotal > 0 ? Double(settingsDone) / elapsedTotal / 1e6 : 0))
+
+    print("survived the 10-plug sieve: \(totalCompletions)")
+    if config.confirmMenus > 1 {
+        print("locked anchor shells (≥\(anchorMinConstraints) constraints): \(lockedAnchors.count)")
+    }
+    if !overlong.isEmpty {
+        print("skipped (edges > \(welchmanMaxEdges) Metal cap): \(overlong.count) — not tested")
+    }
+
+    func flushQuarantine(note: String) {
+        guard let qPath = config.quarantinePath, !qPath.isEmpty else { return }
+        // Also quarantine the campaign best if it sits in the soft band.
+        if let best = bestSoFar,
+           NearMissQuarantine.shouldQuarantine(best, softBar: softBar) {
+            quarantineBag.append(
+                NearMissQuarantine.makeCandidate(
+                    from: best,
+                    source: quarantineSource + "#bestSoFar",
+                    softBar: softBar
+                )
+            )
+        }
+        let deduped = NearMissQuarantine.prioritize(NearMissQuarantine.dedupe(quarantineBag))
+        guard !deduped.isEmpty else {
+            print("quarantine: 0 soft-band near-misses (\(note))")
+            return
+        }
+        let ct = EnigmaAlphabet.string(from: set.ciphertext)
+        let manifest = QuarantineManifest(
+            target: "P1030680",
+            ciphertext: ct,
+            generatedAt: ISO8601DateFormatter().string(from: Date()),
+            sourceFixture: quarantineSource,
+            softBar: softBar,
+            candidates: deduped
+        )
+        do {
+            try NearMissQuarantine.writeManifest(manifest, to: qPath)
+            print("quarantine: wrote \(deduped.count) near-miss(es) → \(qPath) (\(note))")
+            print("  escalate: --hybrid --hybrid-stochastic --hybrid-quarantine \(qPath)")
+        } catch {
+            print("quarantine: failed to write \(qPath): \(error)")
+        }
+    }
+
+    if let winner = breakFound {
+        flushQuarantine(note: "break claimed; soft-band peers retained")
+        PostBombeDiscriminator.announceBreak(winner, middleRingSwept: config.sweepMiddleRing)
+        return
+    }
+
+    if runnable.isEmpty {
+        print("nothing runnable — every selected menu exceeded the Metal edge cap")
+    } else if totalStops == 0 {
+        print("no setting survived — every runnable menu contradicted everywhere it was tried")
+    } else if totalCompletions == 0 {
+        print("every stop was a ghost: no menu admits a physically buildable "
+            + "\(config.maxPlugs)-plug board.")
+        print("The cribs tried are not in this message at the offsets tried.")
+    } else if let best = bestSoFar {
+        print(String(format: "best physical candidate: IC %.3f tail %.3f "
+                     + "(IC floor %.3f / threshold %.3f) — below the bar, so no break claimed",
+                     best.ic, best.tailScore,
+                     PostBombeDiscriminator.icFloor,
+                     PostBombeDiscriminator.breakThreshold))
+        print("  \(best.stop.menu.description)")
+        print("  UKW \(best.stop.ukw) Greek \(best.stop.greek) WO \(best.stop.wheelOrder) "
+            + "pos \(best.messageKey)")
+        print("  \(best.plaintext)")
+    }
+
+    guard config.confirmMenus > 1 else {
+        flushQuarantine(note: "solo pass complete")
+        return
+    }
+    let confirmed = agreements.confirmed(minIndependentMenus: config.confirmMenus)
+    print("confirmed shells (≥\(config.confirmMenus) independent menus): \(confirmed.count)")
+    for hit in confirmed.prefix(config.reportLimit) { print(hit.report()) }
+
+    // Agreement is the only path a short crib has to a claimed break. Re-score each
+    // confirmed shell; the representative stop comes from the strongest independent menu.
+    for hit in confirmed {
+        let verdict = PostBombeDiscriminator.rank(
+            stops: [hit.representative],
+            ciphertext: set.ciphertext,
+            maxPlugs: config.maxPlugs,
+            provisionalICFloor: config.quarantinePath != nil ? softBar.softICFloor : nil
+        )
+        guard let best = verdict.candidates.first else { continue }
+        if NearMissQuarantine.shouldQuarantine(best, softBar: softBar) {
+            quarantineBag.append(
+                NearMissQuarantine.makeCandidate(
+                    from: best,
+                    source: quarantineSource + "#confirmed",
+                    softBar: softBar
+                )
+            )
+        }
+        guard PostBombeDiscriminator.isBreak(best),
+              !PostBombeDiscriminator.breaksOnPrefixOnly(best) else { continue }
+        print()
+        print("confirmed shell also clears the linguistic bar "
+            + "(\(hit.independentCount) independent menus)")
+        flushQuarantine(note: "confirmed break")
+        PostBombeDiscriminator.announceBreak(best, middleRingSwept: config.sweepMiddleRing)
+        return
+    }
+    flushQuarantine(note: "confirm pass complete")
+}
+
+struct SweepStop {
+    let ukw: String
+    let greek: String
+    let wheelOrder: String
+    let menu: BombeMenu
+    let rings: (Int, Int, Int, Int)
+    let stop: BombeStop
+    let ciphertext: [Int]
+
+    var shellID: ShellID {
+        ShellID(
+            ukw: ukw, greek: greek, wheelOrder: wheelOrder,
+            rings: rings, positions: stop.positions
+        )
+    }
+
+    func report() -> String {
+        let key = EnigmaM4Key(
+            greek: EnigmaM4Warehouse.greek(named: greek == "beta" ? "B" : "C"),
+            rotors: rotorTriple(),
+            rings: rings,
+            positions: stop.positions,
+            plugboard: stop.stecker,
+            reflector: EnigmaM4Warehouse.thinReflector(named: ukw)
+        )
+        var machine = EnigmaM4Machine(key: key)
+        let plain = EnigmaAlphabet.string(from: machine.processText(ciphertext))
+        let ringString = EnigmaAlphabet.string(from: [rings.0, rings.1, rings.2, rings.3])
+        return """
+          UKW \(ukw) Greek \(greek) WO \(wheelOrder) rings \(ringString) pos \(stop.positionsString)
+            menu    \(menu.description)
+            stecker \(stop.pairsString) (\(stop.pairCount) pairs)
+            decrypt \(plain)
+        """
+    }
+
+    func rotorTriple() -> (EnigmaRotorSpec, EnigmaRotorSpec, EnigmaRotorSpec) {
+        let names = wheelOrder.split(separator: "-").map(String.init)
+        let lookup = M4ThetisAttack.navalRotors
+        func rotor(_ name: String) -> EnigmaRotorSpec {
+            lookup.first { $0.name == name } ?? EnigmaWarehouse.rotorI
+        }
+        return (rotor(names[0]), rotor(names[1]), rotor(names[2]))
+    }
+}
+
+struct ShellID: Hashable {
+    let ukw: String
+    let greek: String
+    let wheelOrder: String
+    let rings: (Int, Int, Int, Int)
+    let positions: (Int, Int, Int, Int)
+
+    static func == (lhs: ShellID, rhs: ShellID) -> Bool {
+        lhs.ukw == rhs.ukw && lhs.greek == rhs.greek && lhs.wheelOrder == rhs.wheelOrder
+            && lhs.rings == rhs.rings && lhs.positions == rhs.positions
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(ukw)
+        hasher.combine(greek)
+        hasher.combine(wheelOrder)
+        hasher.combine(rings.0); hasher.combine(rings.1)
+        hasher.combine(rings.2); hasher.combine(rings.3)
+        hasher.combine(positions.0); hasher.combine(positions.1)
+        hasher.combine(positions.2); hasher.combine(positions.3)
+    }
+}
+
+/// Machine identity for a shell a ≥16 anchor already admitted — enough to re-test a
+/// short challenger menu on the host without another full GPU sweep.
+struct LockedAnchorShell {
+    let ukwName: String
+    let greekName: String
+    let wheelOrder: String
+    let greek: EnigmaRotorSpec
+    let left: EnigmaRotorSpec
+    let middle: EnigmaRotorSpec
+    let right: EnigmaRotorSpec
+    let reflector: [Int]
+    let rings: (Int, Int, Int, Int)
+    let positions: (Int, Int, Int, Int)
+}
+
+struct ConfirmedShell {
+    let representative: SweepStop
+    let menus: [BombeMenu]
+    let independentCount: Int
+
+    func report() -> String {
+        let menuList = menus.map(\.description).joined(separator: "\n            ")
+        return representative.report()
+            + "\n            confirmed by \(independentCount) independent menus:\n            \(menuList)"
+    }
+}
+
+// MARK: Thread-safe accumulators
+
+final class LockedCounter: @unchecked Sendable {
+    private let lock = NSLock()
+    private var count = 0
+
+    func increment() { add(1) }
+
+    func add(_ amount: Int) {
+        lock.lock()
+        count += amount
+        lock.unlock()
+    }
+
+    var value: Int {
+        lock.lock()
+        defer { lock.unlock() }
+        return count
+    }
+}
+
+/// Accumulates raw stops and returns only shells that multiple independent menus agree on.
+final class LockedShellAgreements: @unchecked Sendable {
+    private let lock = NSLock()
+    private var byShell: [ShellID: [SweepStop]] = [:]
+
+    func insert(_ stop: SweepStop) {
+        lock.lock()
+        byShell[stop.shellID, default: []].append(stop)
+        lock.unlock()
+    }
+
+    func confirmed(minIndependentMenus: Int) -> [ConfirmedShell] {
+        lock.lock()
+        defer { lock.unlock() }
+        var hits: [ConfirmedShell] = []
+        for (_, stops) in byShell {
+            let menus = maximalMenus(stops.map(\.menu))
+            // Count pairwise-independent menus after dropping nested duplicates.
+            var independent: [BombeMenu] = []
+            for menu in menus.sorted(by: byLoopPower) {
+                if independent.allSatisfy({ menusAreIndependent($0, menu) }) {
+                    independent.append(menu)
+                }
+            }
+            guard independent.count >= minIndependentMenus else { continue }
+            // Prefer the stop from the strongest menu as the representative decrypt.
+            let bestMenu = independent[0]
+            let representative = stops.first {
+                $0.menu.constraints == bestMenu.constraints
+            } ?? stops[0]
+            hits.append(
+                ConfirmedShell(
+                    representative: representative,
+                    menus: independent,
+                    independentCount: independent.count
+                )
+            )
+        }
+        return hits.sorted {
+            ($0.independentCount, $0.representative.menu.loops)
+                > ($1.independentCount, $1.representative.menu.loops)
+        }
+    }
+}

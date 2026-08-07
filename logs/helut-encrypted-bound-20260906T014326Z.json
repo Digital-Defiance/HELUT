@@ -1,0 +1,165 @@
+{
+  "schema": "helut-encrypted-bench-receipt-v1",
+  "verdict": "PASS_WITH_NARROW_SCOPE",
+  "claimScope": {
+    "circuit": "full_adder",
+    "netlistSHA256": "d647afbd947b9b67e63505caa215209e559efc10aa8099fd10ad18cad5acb13c",
+    "path": "blind-rotate-metal public-ms covering-b2",
+    "rows": 8,
+    "exhaustiveInputSpace": true,
+    "postBlindRotateEvents": 24,
+    "statement": "All 8 inputs of this 3-LUT full adder matched the clear oracle. A one-sided 95%-confidence Gaussian residual bound over this circuit's 24 post-blind-rotate decode events cleared 2^-64 at N=n=1024, covering-b2, bootstrapping-key sigma 128, and Boolean stride k=16.",
+    "notClaimed": [
+      "the failed k=14 configuration clears at 32 samples",
+      "arbitrary circuits, netlist sizes, depths, or repeated executions",
+      "native Boolean stride k=1",
+      "fresh primary-input noise sigma 2^16",
+      "a hard deterministic bootstrapping-key noise bound",
+      "independence beyond the identity residual samples used by the stated model",
+      "a universal 176-bit security proof",
+      "an external lattice-estimator result",
+      "cleartext-to-FHE or integrated-to-discrete speedup",
+      "total GPU-resident memory"
+    ]
+  },
+  "provenance": {
+    "preregister": "logs/helut-encrypted-bound-20260906T014326Z-preregister.json",
+    "preregisterSHA256": "307494c52585fd76e440eec961d025328a9f43ef84141d6fb3529bd4886b06ef",
+    "rawLog": "logs/helut-encrypted-bound-20260906T014326Z-t40-k16.raw.log",
+    "rawLogSHA256": "23623e0103d54be258bbd0f06532f8ca22e79356cffc8c85f64de41ea35791df",
+    "gitCommit": "4d47ad0ef40c593bb3a0e4ab5aa2e668b917f975",
+    "workingTreeDirty": true,
+    "binarySHA256": "24b8355e4438fd401cb6f78677d567561610889d228a6c525e92ab4c6b199a42",
+    "netlist": "netlist.json",
+    "netlistSHA256": "d647afbd947b9b67e63505caa215209e559efc10aa8099fd10ad18cad5acb13c",
+    "argv": [
+      ".build/release/helut-bench",
+      "--bench",
+      "netlist.json",
+      "--degree",
+      "1024",
+      "--bench-encrypted",
+      "--sing",
+      "--vectors",
+      "8",
+      "--bk-noise-sigma",
+      "128",
+      "--bk-identity-trials",
+      "40",
+      "--paths",
+      "blind-rotate-metal public-ms covering-b2",
+      "--boolean-scale-mul",
+      "16"
+    ],
+    "environment": {
+      "HELUT_QUIET_METAL_BR_PROGRESS": "1"
+    },
+    "host": {
+      "model": "Apple M4 Max",
+      "gpuCores": 40,
+      "gpuBus": "built-in",
+      "metalFamily": "Metal 4",
+      "memoryBytes": 68719476736,
+      "operatingSystem": "macOS 26.6.2 (25G83)",
+      "architecture": "arm64"
+    }
+  },
+  "parameters": {
+    "torusModulus": "2^32",
+    "ring": "Z_q[X]/(X^1024+1)",
+    "polynomialDegreeN": 1024,
+    "glweDimension": 1,
+    "lweDimensionN": 1024,
+    "gadgetBaseLog": 2,
+    "gadgetBase": 4,
+    "gadgetLevels": 16,
+    "wireRefresh": "public-ms",
+    "primaryInputNoise": "none/exact",
+    "bootstrappingKeyNoise": {
+      "distribution": "discrete Gaussian",
+      "sigmaTorusUnits": 128
+    },
+    "nativeRotationDelta": 2097152,
+    "booleanStrideK": 16,
+    "booleanScale": 33554432,
+    "decodeHalfGap": 16777216
+  },
+  "confidence": {
+    "estimator": "single residual from each independently randomized identity PBS",
+    "identityTrials": 40,
+    "effectiveIndependentSamples": 40,
+    "confidenceLevel": 0.95,
+    "observedMaxAbsoluteError": 2787617,
+    "sampleDecodable": true,
+    "sampleDecodeFailures": 0,
+    "sigmaUpper95": 1503502.0283404433,
+    "eventCount": 24,
+    "unionFailureLog2": -89.01572017702523,
+    "targetUnionFailureLog2": -64,
+    "clearsTarget": true,
+    "modelBoundary": "Gaussian-tail model with a circuit-scoped union bound; observational/statistical, not a hard deterministic error bound."
+  },
+  "functional": {
+    "luts": 3,
+    "dffs": 0,
+    "inputBits": 3,
+    "vectorsRequested": 8,
+    "vectorsRun": 8,
+    "allInputsExhaustive": true,
+    "allOutputsMatchClearOracle": true,
+    "result": "PASS"
+  },
+  "hardnessDisplay": {
+    "calibratedClassicalBits": 175.7,
+    "targetBits": 128,
+    "boundary": "Interim calibrated Core-SVP model row for production-shaped n=1024, sigma=2^16 parameters. It is distinct from the measured BK sigma=128 residual bound and is not a blanket or external-estimator security proof."
+  },
+  "timing": {
+    "encryptedCircuitEvaluationWallSeconds": 48.0879,
+    "encryptedCircuitEvaluationMillisecondsPerRow": 6010.99,
+    "endToEndRealSeconds": 1445.31,
+    "endToEndUserSeconds": 1388.80,
+    "endToEndSystemSeconds": 12.41,
+    "boundary": "The HELUT wall covers encrypted circuit evaluation only. /usr/bin/time covers process setup, BK construction, confidence sampling, evaluation, and reporting. No cleartext or native speed ratio is claimed."
+  },
+  "memory": {
+    "macOSMaximumResidentSetBytes": 2243952640,
+    "macOSPeakMemoryFootprintBytes": 2403092640,
+    "swaps": 0,
+    "scope": "Process-level macOS accounting on unified memory; informative but not a complete GPU-residency or VRAM measurement."
+  },
+  "validation": {
+    "processExitStatus": 0,
+    "expectedStartingPathBlocks": 1,
+    "expectedEquivalenceBlocks": 1,
+    "expectedSummaryRows": 1,
+    "summaryCert": "yes",
+    "containsSkip": false,
+    "containsDiagnosticOnly": false,
+    "containsMismatch": false,
+    "containsFailure": false,
+    "acceptanceSatisfied": true
+  },
+  "preservedNegativeEvidence": [
+    {
+      "configuration": "k=14, identity trials=16",
+      "preregister": "logs/helut-encrypted-bound-20260906T011039Z-preregister.json",
+      "preregisterSHA256": "279d412fdcd89d73ac5893a62d176b3aba1f6026e0e3c883526d41c6293c77ea",
+      "rawLog": "logs/helut-encrypted-bound-20260906T011039Z-t16.raw.log",
+      "rawLogSHA256": "ea9b9442cfda334b4d2373a5db654da7fd5edb7c37b1f128921373c6f7d0d0fd",
+      "outcome": "fail-closed before circuit execution; preflight diagnostic was not yet printed"
+    },
+    {
+      "configuration": "k=14, identity trials=32",
+      "preregister": "logs/helut-encrypted-bound-20260906T012213Z-preregister.json",
+      "preregisterSHA256": "61a17c894adc696e85346fb173c536eb6793bbdc186a21b52a1e042d72de81f7",
+      "rawLog": "logs/helut-encrypted-bound-20260906T012213Z-t32-k14.raw.log",
+      "rawLogSHA256": "9b08d9b32a0a1022669df32b8eb996006c53290be717b5443d3440e8daa956de",
+      "sigmaUpper95": 1774113.6388565525,
+      "eventCount": 24,
+      "unionFailureLog2": -48.183293522830674,
+      "targetUnionFailureLog2": -64,
+      "outcome": "fail-closed before circuit execution; point estimate was under-sampled for the target, with an estimated 164 samples required at k=14"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+HELUT noisy-BK identity residual (H4)
+  N=1024  trials=4  inject B ∈ {0, 1}
+
+cryptoPublicMS B=0: max|e|=0 σ̂=0.0 δ/2=1048576 decode_fail=0 decodable=true εlog2=-inf
+cryptoPublicMS B=1: max|e|=2514445 σ̂=1348308.3 δ/2=1048576 decode_fail=1 decodable=false εlog2=0.0
+crypto B=0: max|e|=0 σ̂=0.0 δ/2=1048576 decode_fail=0 decodable=true εlog2=-inf
+crypto B=1: max|e|=243872 σ̂=157241.6 δ/2=1048576 decode_fail=0 decodable=true εlog2=-32.2
+
+| gadget N | inject B | trials | max |e| | σ̂ | δ/2 | decode fail | decodable |
+|----------|----------|--------|---------|-----|-----|-------------|-----------|
+| 1024 | 0 | 4 | 0 | 0.0 | 1048576 | 0 | yes |
+| 1024 | 1 | 4 | 2514445 | 1348308.3 | 1048576 | 1 | no |
+| 1024 | 0 | 4 | 0 | 0.0 | 1048576 | 0 | yes |
+| 1024 | 1 | 4 | 243872 | 157241.6 | 1048576 | 0 | yes |
+HELUT noisy-BK identity residual (H4)
+  N=1024  trials=4  inject B ∈ {0, 2}
+
+cryptoPublicMS B=0: max|e|=0 σ̂=0.0 δ/2=1048576 decode_fail=0 decodable=true εlog2=-inf
+cryptoPublicMS B=2: max|e|=7848353 σ̂=4117253.6 δ/2=1048576 decode_fail=1 decodable=false εlog2=0.0
+crypto B=0: max|e|=0 σ̂=0.0 δ/2=1048576 decode_fail=0 decodable=true εlog2=-inf
+crypto B=2: max|e|=1001683 σ̂=539030.5 δ/2=1048576 decode_fail=0 decodable=true εlog2=-1.3
+
+| gadget N | inject B | trials | max |e| | σ̂ | δ/2 | decode fail | decodable |
+|----------|----------|--------|---------|-----|-----|-------------|-----------|
+| 1024 | 0 | 4 | 0 | 0.0 | 1048576 | 0 | yes |
+| 1024 | 2 | 4 | 7848353 | 4117253.6 | 1048576 | 1 | no |
+| 1024 | 0 | 4 | 0 | 0.0 | 1048576 | 0 | yes |
+| 1024 | 2 | 4 | 1001683 | 539030.5 | 1048576 | 0 | yes |

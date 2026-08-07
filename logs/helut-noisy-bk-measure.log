@@ -1,0 +1,15 @@
+HELUT noisy-BK identity residual (H4)
+  N=8  trials=8  inject B ∈ {0, 64}
+
+  note: booleanPublicMS (ℓ=1) omitted — incomplete gadget; BK noise mis-decomposes
+cryptoPublicMS B=0: max|e|=0 σ̂=0.0 δ/2=134217728 decode_fail=0 decodable=true εlog2=-inf
+cryptoPublicMS B=64: max|e|=11173 σ̂=6395.9 δ/2=134217728 decode_fail=0 decodable=true εlog2=-inf
+crypto B=0: max|e|=0 σ̂=0.0 δ/2=134217728 decode_fail=0 decodable=true εlog2=-inf
+crypto B=64: max|e|=99937 σ̂=59959.9 δ/2=134217728 decode_fail=0 decodable=true εlog2=-inf
+
+| gadget N | inject B | trials | max |e| | σ̂ | δ/2 | decode fail | decodable |
+|----------|----------|--------|---------|-----|-----|-------------|-----------|
+| 8 | 0 | 8 | 0 | 0.0 | 134217728 | 0 | yes |
+| 8 | 64 | 8 | 11173 | 6395.9 | 134217728 | 0 | yes |
+| 8 | 0 | 8 | 0 | 0.0 | 134217728 | 0 | yes |
+| 8 | 64 | 8 | 99937 | 59959.9 | 134217728 | 0 | yes |

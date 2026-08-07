@@ -1,0 +1,263 @@
+HELUT encrypted-netlist bench · SING
+  netlist: netlist.json  module=full_adder
+  poly N=1024  LUTs=3  DFFs=0  2N=2048
+  stimuli=2 (max --vectors 2)  cpu-only=false  metal-netlist-only=false
+  paths filter: covering-b1
+  paths: public-ms@boolean + public-ms@crypto + secret@crypto (+ Metal)
+  BK noise inject Gaussian σ=24.0 (torus; measured identity residual → B_bk)
+  DynamicRotateCost mux=2099200 binary=11275 speedup≈186.2×
+
+  starting blind-rotate-metal secret covering-b1
+  identity residual trials=1  (n=1024)
+  identity B_bk    160891  (decodable true)
+BR tile=1/16 bits=0..<64
+BR tile=1/16 bits=0..<64
+BR tile=2/16 bits=64..<128
+BR tile=2/16 bits=64..<128
+BR tile=3/16 bits=128..<192
+BR tile=3/16 bits=128..<192
+BR tile=4/16 bits=192..<256
+BR tile=4/16 bits=192..<256
+BR tile=5/16 bits=256..<320
+BR tile=5/16 bits=256..<320
+BR tile=6/16 bits=320..<384
+BR tile=6/16 bits=320..<384
+BR tile=7/16 bits=384..<448
+BR tile=7/16 bits=384..<448
+BR tile=8/16 bits=448..<512
+BR tile=8/16 bits=448..<512
+BR tile=9/16 bits=512..<576
+BR tile=9/16 bits=512..<576
+BR tile=10/16 bits=576..<640
+BR tile=10/16 bits=576..<640
+BR tile=11/16 bits=640..<704
+BR tile=11/16 bits=640..<704
+BR tile=12/16 bits=704..<768
+BR tile=12/16 bits=704..<768
+BR tile=13/16 bits=768..<832
+BR tile=13/16 bits=768..<832
+BR tile=14/16 bits=832..<896
+BR tile=14/16 bits=832..<896
+BR tile=15/16 bits=896..<960
+BR tile=15/16 bits=896..<960
+BR tile=16/16 bits=960..<1024
+BR tile=16/16 bits=960..<1024
+BR tile=1/16 bits=0..<64
+BR tile=2/16 bits=64..<128
+BR tile=3/16 bits=128..<192
+BR tile=4/16 bits=192..<256
+BR tile=5/16 bits=256..<320
+BR tile=6/16 bits=320..<384
+BR tile=7/16 bits=384..<448
+BR tile=8/16 bits=448..<512
+BR tile=9/16 bits=512..<576
+BR tile=10/16 bits=576..<640
+BR tile=11/16 bits=640..<704
+BR tile=12/16 bits=704..<768
+BR tile=13/16 bits=768..<832
+BR tile=14/16 bits=832..<896
+BR tile=15/16 bits=896..<960
+BR tile=16/16 bits=960..<1024
+BR tile=1/16 bits=0..<64
+BR tile=1/16 bits=0..<64
+BR tile=2/16 bits=64..<128
+BR tile=2/16 bits=64..<128
+BR tile=3/16 bits=128..<192
+BR tile=3/16 bits=128..<192
+BR tile=4/16 bits=192..<256
+BR tile=4/16 bits=192..<256
+BR tile=5/16 bits=256..<320
+BR tile=5/16 bits=256..<320
+BR tile=6/16 bits=320..<384
+BR tile=6/16 bits=320..<384
+BR tile=7/16 bits=384..<448
+BR tile=7/16 bits=384..<448
+BR tile=8/16 bits=448..<512
+BR tile=8/16 bits=448..<512
+BR tile=9/16 bits=512..<576
+BR tile=9/16 bits=512..<576
+BR tile=10/16 bits=576..<640
+BR tile=10/16 bits=576..<640
+BR tile=11/16 bits=640..<704
+BR tile=11/16 bits=640..<704
+BR tile=12/16 bits=704..<768
+BR tile=12/16 bits=704..<768
+BR tile=13/16 bits=768..<832
+BR tile=13/16 bits=768..<832
+BR tile=14/16 bits=832..<896
+BR tile=14/16 bits=832..<896
+BR tile=15/16 bits=896..<960
+BR tile=15/16 bits=896..<960
+BR tile=16/16 bits=960..<1024
+BR tile=16/16 bits=960..<1024
+BR tile=1/16 bits=0..<64
+BR tile=2/16 bits=64..<128
+BR tile=3/16 bits=128..<192
+BR tile=4/16 bits=192..<256
+BR tile=5/16 bits=256..<320
+BR tile=6/16 bits=320..<384
+BR tile=7/16 bits=384..<448
+BR tile=8/16 bits=448..<512
+BR tile=9/16 bits=512..<576
+BR tile=10/16 bits=576..<640
+BR tile=11/16 bits=640..<704
+BR tile=12/16 bits=704..<768
+BR tile=13/16 bits=768..<832
+BR tile=14/16 bits=832..<896
+BR tile=15/16 bits=896..<960
+BR tile=16/16 bits=960..<1024
+ENCRYPTED EQUIV (blind-rotate-metal secret covering-b1)
+  rows            2
+  wall            43.3156 s  (21657.79 ms/row)
+  classical bits  175.7  (≥128? yes)
+  ingest ε log2   -inf  (target -64)
+  noisy BK B_bk   160891  (decodable true)
+  result          PASS
+
+  starting blind-rotate-metal public-ms covering-b1
+  identity residual trials=1  (n=1024)
+  identity B_bk    152569  (decodable true)
+BR tile=1/16 bits=0..<64
+BR tile=1/16 bits=0..<64
+BR tile=2/16 bits=64..<128
+BR tile=2/16 bits=64..<128
+BR tile=3/16 bits=128..<192
+BR tile=3/16 bits=128..<192
+BR tile=4/16 bits=192..<256
+BR tile=5/16 bits=256..<320
+BR tile=4/16 bits=192..<256
+BR tile=6/16 bits=320..<384
+BR tile=5/16 bits=256..<320
+BR tile=7/16 bits=384..<448
+BR tile=6/16 bits=320..<384
+BR tile=8/16 bits=448..<512
+BR tile=7/16 bits=384..<448
+BR tile=9/16 bits=512..<576
+BR tile=8/16 bits=448..<512
+BR tile=10/16 bits=576..<640
+BR tile=9/16 bits=512..<576
+BR tile=11/16 bits=640..<704
+BR tile=10/16 bits=576..<640
+BR tile=12/16 bits=704..<768
+BR tile=11/16 bits=640..<704
+BR tile=13/16 bits=768..<832
+BR tile=12/16 bits=704..<768
+BR tile=14/16 bits=832..<896
+BR tile=13/16 bits=768..<832
+BR tile=15/16 bits=896..<960
+BR tile=14/16 bits=832..<896
+BR tile=16/16 bits=960..<1024
+BR tile=15/16 bits=896..<960
+BR tile=16/16 bits=960..<1024
+BR tile=1/16 bits=0..<64
+BR tile=2/16 bits=64..<128
+BR tile=3/16 bits=128..<192
+BR tile=4/16 bits=192..<256
+BR tile=5/16 bits=256..<320
+BR tile=6/16 bits=320..<384
+BR tile=7/16 bits=384..<448
+BR tile=8/16 bits=448..<512
+BR tile=9/16 bits=512..<576
+BR tile=10/16 bits=576..<640
+BR tile=11/16 bits=640..<704
+BR tile=12/16 bits=704..<768
+BR tile=13/16 bits=768..<832
+BR tile=14/16 bits=832..<896
+BR tile=15/16 bits=896..<960
+BR tile=16/16 bits=960..<1024
+BR tile=1/16 bits=0..<64
+BR tile=1/16 bits=0..<64
+BR tile=2/16 bits=64..<128
+BR tile=2/16 bits=64..<128
+BR tile=3/16 bits=128..<192
+BR tile=3/16 bits=128..<192
+BR tile=4/16 bits=192..<256
+BR tile=4/16 bits=192..<256
+BR tile=5/16 bits=256..<320
+BR tile=5/16 bits=256..<320
+BR tile=6/16 bits=320..<384
+BR tile=6/16 bits=320..<384
+BR tile=7/16 bits=384..<448
+BR tile=7/16 bits=384..<448
+BR tile=8/16 bits=448..<512
+BR tile=8/16 bits=448..<512
+BR tile=9/16 bits=512..<576
+BR tile=9/16 bits=512..<576
+BR tile=10/16 bits=576..<640
+BR tile=10/16 bits=576..<640
+BR tile=11/16 bits=640..<704
+BR tile=11/16 bits=640..<704
+BR tile=12/16 bits=704..<768
+BR tile=12/16 bits=704..<768
+BR tile=13/16 bits=768..<832
+BR tile=13/16 bits=768..<832
+BR tile=14/16 bits=832..<896
+BR tile=14/16 bits=832..<896
+BR tile=15/16 bits=896..<960
+BR tile=15/16 bits=896..<960
+BR tile=16/16 bits=960..<1024
+BR tile=16/16 bits=960..<1024
+BR tile=1/16 bits=0..<64
+BR tile=2/16 bits=64..<128
+BR tile=3/16 bits=128..<192
+BR tile=4/16 bits=192..<256
+BR tile=5/16 bits=256..<320
+BR tile=6/16 bits=320..<384
+BR tile=7/16 bits=384..<448
+BR tile=8/16 bits=448..<512
+BR tile=9/16 bits=512..<576
+BR tile=10/16 bits=576..<640
+BR tile=11/16 bits=640..<704
+BR tile=12/16 bits=704..<768
+BR tile=13/16 bits=768..<832
+BR tile=14/16 bits=832..<896
+BR tile=15/16 bits=896..<960
+BR tile=16/16 bits=960..<1024
+ENCRYPTED EQUIV (blind-rotate-metal public-ms covering-b1)
+  rows            2
+  wall            29.8291 s  (14914.56 ms/row)
+  classical bits  175.7  (≥128? yes)
+  ingest ε log2   -inf  (target -64)
+  noisy BK B_bk   152569  (decodable true)
+  result          PASS
+
+════════ SING METRICS SUMMARY ════════
+path                                             ms/row       bits    εlog2     B_bk
+blind-rotate-metal secret covering-b1            21657.79      175.7 -inf       160891
+blind-rotate-metal public-ms covering-b1         14914.56      175.7 -inf       152569
+calibration:
+| Label | n | σ | Ref bits | HELUT est | Δ | Source |
+|---|---:|---:|---:|---:|---:|---|
+| demo-N8 | 8 | 2^12 | 4 | 4.0 | +0.0 | HELUT demo (not production) |
+| weak-n256 | 256 | 2^17 | 45 | 40.4 | -4.6 | TFHE-style ballpark (weak) |
+| mid-n512 | 512 | 2^16 | 95 | 95.5 | +0.5 | TFHE-style ballpark |
+| classic-n630 | 630 | 2^15 | 128 | 129.0 | +1.0 | ≈ Chillotti boolean 128-bit regime |
+| n768-s16 | 768 | 2^16 | 140 | 135.6 | -4.4 | TFHE-style ballpark |
+| prod-n1024-s16 | 1024 | 2^16 | 170 | 175.7 | +5.7 | HELUT productionBoolean64 |
+| n1024-s17 | 1024 | 2^17 | 155 | 160.7 | +5.7 | same n, noisier σ |
+| n2048-s16 | 2048 | 2^16 | 340 | 336.1 | -3.9 | extrapolated high-security |
+core-SVP model (sage-free):
+| Label | n | σ | HELUT | Core-SVP model | β |
+|---|---:|---:|---:|---:|---:|
+| demo-N8 | 8 | 2^12 | 4.0 | 4.0 | 14 |
+| weak-n256 | 256 | 2^17 | 40.4 | 40.4 | 138 |
+| mid-n512 | 512 | 2^16 | 95.5 | 95.5 | 327 |
+| classic-n630 | 630 | 2^15 | 129.0 | 129.0 | 442 |
+| n768-s16 | 768 | 2^16 | 135.6 | 135.6 | 464 |
+| prod-n1024-s16 | 1024 | 2^16 | 175.7 | 175.7 | 602 |
+| n1024-s17 | 1024 | 2^17 | 160.7 | 160.7 | 550 |
+| n2048-s16 | 2048 | 2^16 | 336.1 | 336.1 | 1151 |
+
+_Interim calibrated Core-SVP (0.292·β). Replace via Sage lattice-estimator when available._
+estimator protocol:
+| Label | n | σ | HELUT | Estimator | Δ |
+|---|---:|---:|---:|---:|---:|
+| demo-N8 | 8 | 2^12 | 4.0 | 33.1 | 29.1 |
+| weak-n256 | 256 | 2^17 | 40.4 | 53.7 | 13.3 |
+| mid-n512 | 512 | 2^16 | 95.5 | 92.4 | 3.2 |
+| classic-n630 | 630 | 2^15 | 129.0 | 106.5 | 22.5 |
+| n768-s16 | 768 | 2^16 | 135.6 | 135.4 | 0.2 |
+| prod-n1024-s16 | 1024 | 2^16 | 175.7 | 180.2 | 4.5 |
+| n1024-s17 | 1024 | 2^17 | 160.7 | 189.9 | 29.3 |
+| n2048-s16 | 2048 | 2^16 | 336.1 | 369.8 | 33.7 |
+══════════════════════════════════════

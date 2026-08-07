@@ -1,0 +1,36 @@
+########## crib=16 ##########
+SENSITIVITY (kernel) — does the true lane survive its own garbled ciphertext?
+  garbled   tol=0    tol=g    host tol=g   agree
+        0   KEPT   KEPT   KEPT   yes
+        1   LOST   KEPT   KEPT   yes
+        2   LOST   KEPT   KEPT   yes
+
+SPECIFICITY + CROSS-CHECK (kernel) — clean ciphertext, all 26^4 lanes.
+The 26^3 slice at the true Greek position is the same population the host arm
+sampled, so those survivor counts are directly comparable.
+  tol   lanes surviving   26^3 slice   undecided   GPU s   settings/s   mismatches
+    0                1            1           0    0.03         13.7M   0/192
+    1           130787         4998           0    0.49        0.941M   0/192
+    2           454052        17466           0    4.34        0.105M   0/192
+
+Mismatches must be 0/192. The kernel is not a second opinion on the
+board — it is the same board at scale, and any disagreement is a kernel bug, not a
+finding. Survivor inflation is the real cost and it is measured, not assumed.
+########## crib=20 ##########
+SENSITIVITY (kernel) — does the true lane survive its own garbled ciphertext?
+  garbled   tol=0    tol=g    host tol=g   agree
+        0   KEPT   KEPT   KEPT   yes
+        1   LOST   KEPT   KEPT   yes
+        2   LOST   KEPT   KEPT   yes
+
+SPECIFICITY + CROSS-CHECK (kernel) — clean ciphertext, all 26^4 lanes.
+The 26^3 slice at the true Greek position is the same population the host arm
+sampled, so those survivor counts are directly comparable.
+  tol   lanes surviving   26^3 slice   undecided   GPU s   settings/s   mismatches
+    0                1            1           0    0.03           17M   0/192
+    1                1            1           0    0.46        0.996M   0/192
+    2            85219         3267           0    4.97        0.092M   0/192
+
+Mismatches must be 0/192. The kernel is not a second opinion on the
+board — it is the same board at scale, and any disagreement is a kernel bug, not a
+finding. Survivor inflation is the real cost and it is measured, not assumed.

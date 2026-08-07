@@ -1,0 +1,71 @@
+=== P1030680 sparse candidate adjudication (read-only) ===
+source ledger : logs/p1030680-mulein-operational-settings-000001-000256-v3.jsonl
+output        : logs/p1030680-sparse-adjudication.jsonl
+bar           : crib-exact ∧ IC ≥ 0.055 ∧ sparse trigram > -3.6
+scope         : exact/no-drop post-gap only. Repaired candidates are counted, not
+                graded — `cribExact` is undefined when the board discarded a letter.
+
+ledger SHA-256: c516238d5420bde46fb7bdc76078ac086b5946de2374f8d7a4b4d56b1e7e52f2
+rows          : 10048
+run           : sha256-efb770bcaddd2bc0581edbb19b66077160a806c30650a60d0b9d6a733c592cc0
+manifest      : 628 Futures, fingerprint fnv1a64-616326e94036a97d — rebound by content
+
+candidates    : 4184 total
+  adjudicable : 41  (exact, no drop, post-gap)
+  already done: 40  (exact identity — scored by the campaign)
+  deferred    : 4103  (repaired — no declared bar)
+
+  # shell/future                                    pairs cribX     IC    sparse-tri  win  runs  assessment
+  ----------------------------------------------------------------------------------------------------------------------
+   1 0/512     6     -      -           -    -     - no-consistent-board
+   2 0/512     2     -      -           -    -     - no-consistent-board
+   3 0/525     5     -      -           -    -     - no-consistent-board
+   4 0/525     5     -      -           -    -     - no-consistent-board
+   5 0/525     4     -      -           -    -     - no-consistent-board
+   6 0/550     4     -      -           -    -     - no-consistent-board
+   7 0/602     2     -      -           -    -     - no-consistent-board
+   8 0/602     3     -      -           -    -     - no-consistent-board
+   9 0/602     3     -      -           -    -     - no-consistent-board
+  10 0/602     2     -      -           -    -     - no-consistent-board
+  11 0/602     2     -      -           -    -     - no-consistent-board
+  12 0/602     2     -      -           -    -     - no-consistent-board
+  13 0/602     2     -      -           -    -     - no-consistent-board
+  14 0/602     3     -      -           -    -     - no-consistent-board
+  15 0/602     3     -      -           -    -     - no-consistent-board
+  16 0/605     4     -      -           -    -     - no-consistent-board
+  17 0/605     3     -      -           -    -     - no-consistent-board
+  18 0/605     3     -      -           -    -     - no-consistent-board
+  19 0/605     4     -      -           -    -     - no-consistent-board
+  20 0/605     5     -      -           -    -     - no-consistent-board
+  21 0/605     4     -      -           -    -     - no-consistent-board
+  22 0/605     5     -      -           -    -     - no-consistent-board
+  23 0/605     5     -      -           -    -     - no-consistent-board
+  24 0/605     5     -      -           -    -     - no-consistent-board
+  25 0/605     5     -      -           -    -     - no-consistent-board
+  26 0/605     4     -      -           -    -     - no-consistent-board
+  27 0/605     5     -      -           -    -     - no-consistent-board
+  28 0/605     3     -      -           -    -     - no-consistent-board
+  29 0/605     5     -      -           -    -     - no-consistent-board
+  30 0/605     4     -      -           -    -     - no-consistent-board
+  31 0/605     4     -      -           -    -     - no-consistent-board
+  32 0/605     4     -      -           -    -     - no-consistent-board
+  33 0/605     6     -      -           -    -     - no-consistent-board
+  34 0/605     5     -      -           -    -     - no-consistent-board
+  35 0/605     3     -      -           -    -     - no-consistent-board
+  36 0/605     4     -      -           -    -     - no-consistent-board
+  37 0/605     3     -      -           -    -     - no-consistent-board
+  38 0/605     4     -      -           -    -     - no-consistent-board
+  39 0/605     5     -      -           -    -     - no-consistent-board
+  40 0/605     5     -      -           -    -     - no-consistent-board
+  41 0/623     6     -      -           -    -     - no-consistent-board
+
+=== Adjudication summary ===
+adjudicated        : 0 of 41 selected
+crib-exact         : 0
+clears dense bar   : 0
+deferred repaired  : 4103 (no declared bar)
+wrote              : logs/p1030680-sparse-adjudication.jsonl
+
+NO CANDIDATE CLEARS THE BAR. P1030680 remains unbroken. This adjudicates the
+exact/no-drop post-gap family only; repaired candidates and every unrun setting,
+shell, and ring remain open.

@@ -1,0 +1,86 @@
+HELUT EPISODE 12 — FIVE-VOTER PRIVATE MAJORITY
+Captured 2026-09-04 on Apple silicon / Metal
+This is a curated receipt. Full command output is under build/episode12/.
+
+BOUNDED CLAIM
+HELUT evaluates a synthesized five-input majority function on encrypted ballot bits,
+decrypts the one-bit result inside the SING harness, and compares it with the clear
+golden model. This is not a deployed multiparty voting protocol. The N=1024 receipt
+uses the exact-noiseless boolean bootstrap-key construction; it is not a noisy-BK proof.
+
+SOURCE
+  Hardware/RTL/Examples/private_majority5.v
+  SHA-256  9df86f15425f310bbdb2966e13976202c47fe082c98cf11a70e5f8603764b59b
+
+GENERATED NETLIST
+  build/episode12/private_majority5.json
+  SHA-256  b0e15e06dbeca6012019c47a354045348b8852fcdc231f2a6ef8a404a2fb56a7
+  Yosys 0.68+post / abc -lut 4
+
+[1/6] SYNTHESIS
+$ yosys -Q -p "read_verilog Hardware/RTL/Examples/private_majority5.v; hierarchy -check -top private_majority5; synth -top private_majority5 -flatten; abc -lut 4; check -assert; stat; write_json build/episode12/private_majority5.json"
+
+=== private_majority5 ===
+        6 port bits
+        3 cells
+        3   $lut
+Checking module private_majority5...
+Found and reported 0 problems.
+
+[2/6] VISIBLE TRUTH-TABLE ENDPOINTS
+$ yosys -Q -p "read_verilog Hardware/RTL/Examples/private_majority5.v; prep -top private_majority5; eval -set votes 5'b00000 -show proposal_passes; eval -set votes 5'b11111 -show proposal_passes"
+
+Eval result: \\proposal_passes = 1'0.
+Eval result: \\proposal_passes = 1'1.
+
+[3/6] HELUT COMPILE
+$ .build/release/helut-bench --bench build/episode12/private_majority5.json --degree 16 --compile-only
+
+Compiled module 'private_majority5': 5 inputs, 3 LUTs, 0 DFFs, 1 outputs
+COMPILE
+  total            0.0032 s
+  cells            3 LUTs, 0 DFFs, 5 inputs, 1 outputs
+Stopping after compile (--compile-only).
+
+[4/6] EXHAUSTIVE CLEAR / TRIVIAL EQUIVALENCE
+$ .build/release/helut-bench --bench build/episode12/private_majority5.json --degree 16 --bench-equiv
+
+EQUIV (Metal PBS/multilinear ≡ CleartextNetlistSim, combinational)
+  rows            32
+  result          PASS
+
+[5/6] EXHAUSTIVE DEMONSTRATION-SIZE ENCRYPTED SING
+$ .build/release/helut-bench --bench build/episode12/private_majority5.json --degree 16 --bench-encrypted --cpu-only --sing --vectors 32 --paths 'blind-rotate public-ms boolean'
+
+HELUT encrypted-netlist bench · SING
+  poly N=16  LUTs=3  DFFs=0  2N=32
+  stimuli=32 (max --vectors 32)  cpu-only=true
+ENCRYPTED EQUIV (blind-rotate public-ms boolean)
+  rows            32
+  wall            0.0089 s  (0.28 ms/row)
+  classical bits  8.0  (≥128? no)
+  noisy BK bound  0  (exactNoiselessConstruction; decodable true)
+  result          PASS
+
+[6/6] PRODUCTION-PARAMETER-SIZE METAL SING
+$ HELUT_QUIET_METAL_BR_PROGRESS=1 .build/release/helut-bench --bench build/episode12/private_majority5.json --degree 1024 --bench-encrypted --sing --vectors 2 --paths 'blind-rotate-metal public-ms boolean'
+
+HELUT encrypted-netlist bench · SING
+  poly N=1024  LUTs=3  DFFs=0  2N=2048
+  stimuli=2 (max --vectors 2)  cpu-only=false
+  starting blind-rotate-metal public-ms boolean
+ENCRYPTED EQUIV (blind-rotate-metal public-ms boolean)
+  rows            2
+  wall            2.7189 s  (1359.45 ms/row)
+  classical bits  175.7  (≥128? yes)
+  ingest ε log2   -inf  (target -64)
+  noisy BK bound  0  (exactNoiselessConstruction; decodable true)
+  result          PASS
+
+FULL-LOG SHA-256
+  01 synthesis       44c2f092f383648b9406ac922c0ce601eb13d80d122c9e21942d11be4855651b
+  02 endpoints       c7265302c522cf1edc41245a910b27bbef5178bc95ea9a44830e05222f5626a5
+  03 compile         13dc121a9ecd4a8c94dcb00f1b199c0d0f2c2ca2f7c76e223f5d06a6f8e4b3cd
+  04 clear equiv     e37a4d76673f36d11d34785a47a5184f351cc3bedf3e23a7f1650e1d52f8b8a2
+  05 N=16 CPU        cf598fdf7a388dfde7c997c7cd1991d358f7cc0866ce3a1a5d7b9c3fb162f84c
+  06 N=1024 Metal    fb99b16a2dd7bc518885bcba2f417d15d79544c116d1750a83de0cdd16bd14a2

@@ -1,0 +1,379 @@
+import XCTest
+
+@testable import HELUTCore
+
+/// Regression tests for encrypted-path determinism.
+///
+/// Background. Until 2026-08-15 `EncryptedNetlistSimulator.tick` encrypted the
+/// primary inputs while iterating `inputs` as a `Dictionary`, drawing from the
+/// shared serial RNG inside the loop. Swift randomises Dictionary hash seeds per
+/// process, so each run handed a different mask vector to a different wire. The
+/// ciphertexts and the noise realisation differed run to run, and wherever the
+/// margin was thin the decode became a coin toss: the n=512 covering-b2 adder
+/// SING alternated between PASS and a `sum mismatch` fatalError with every seed
+/// fixed and an identical measured B_bk.
+///
+/// The reason no existing test caught it is worth stating, because it shapes
+/// these tests. Within a single process the hash seed is constant, so the naive
+/// check — run the same tick twice and compare — passes with or without the bug.
+/// The property that actually broke is *invariance of the result to the order in
+/// which the input dictionary happens to be walked*, and that is what
+/// `testEncryptedTickIsInvariantToInputDictionaryOrder` exercises.
+final class EncryptedDeterminismTests: XCTestCase {
+
+    /// Local copy: the helper in TFHESeamTests.swift is file-private.
+    private func repoFile(_ name: String) -> String? {
+        let fm = FileManager.default
+        let cwd = fm.currentDirectoryPath
+        for relative in [name, "../\(name)", "../../\(name)", "../../../\(name)"] {
+            let path = URL(fileURLWithPath: cwd).appendingPathComponent(relative).path
+            if fm.fileExists(atPath: path) { return path }
+        }
+        var url = URL(fileURLWithPath: #filePath)
+        for _ in 0..<5 {
+            url.deleteLastPathComponent()
+            let candidate = url.appendingPathComponent(name).path
+            if fm.fileExists(atPath: candidate) { return candidate }
+        }
+        return nil
+    }
+
+    private func loadAdder() -> (String, YosysModule)? {
+        guard let path = repoFile("netlist.json") else { return nil }
+        let netlist = loadYosysNetlist(from: path)
+        return netlist.modules.first.map { ($0.key, $0.value) }
+    }
+
+    private func makeSim(_ moduleName: String, _ module: YosysModule) -> EncryptedNetlistSimulator {
+        let params = GGSWParams.booleanTrivial(degree: 8)
+        let secret = TFHESecretKey.random(params: params.tfhe, seed: 0xD371)
+        return EncryptedNetlistSimulator(
+            moduleName: moduleName,
+            module: module,
+            secret: secret,
+            params: params,
+            backend: .blindRotate,
+            seed: 0xD372
+        )
+    }
+
+    /// Why this asserts on the INPUT fingerprint, not the outputs.
+    ///
+    /// The fault was in input encryption, so that is where it is observable.
+    /// Two dead ends, recorded so nobody repeats them:
+    ///
+    ///  - Under an e=0 bootstrap key, blind rotation cancels the input mask
+    ///    exactly (the accumulator is `X^(b - <a,s>) . testPoly` = `X^message .
+    ///    testPoly`), so permuting the input order leaves every *output*
+    ///    ciphertext byte-identical. An output-fingerprint test passes with the
+    ///    bug still in place — I verified that by reintroducing it.
+    ///  - Injecting enough BK noise to make masks matter downstream pushes
+    ///    `booleanPublicMS` past δ/2 (`B_bk 134218072, decodable false`) and
+    ///    traps before the assertion runs.
+    ///
+    /// Fingerprinting the freshly encrypted inputs avoids both.
+
+    /// The real regression guard.
+    ///
+    /// Keys that do not name a port are skipped by the `guard let portBits`
+    /// without consuming the RNG, but their presence changes the Dictionary's
+    /// internal layout and therefore the order in which the *real* ports are
+    /// visited. Under the old code that permuted which wire received which mask
+    /// and the fingerprint moved. Under sorted iteration the real ports are
+    /// always visited in the same relative order, so every variant must produce
+    /// byte-identical output ciphertexts.
+    func testEncryptedTickIsInvariantToInputDictionaryOrder() throws {
+        guard let (moduleName, module) = loadAdder() else {
+            return XCTFail("netlist.json not found")
+        }
+
+        let real: [String: [UInt8]] = ["a": [1], "b": [0], "cin": [1]]
+        // Several decoy sets, to make it very likely at least one permutes the
+        // iteration order of the three real keys.
+        let decoySets: [[String: [UInt8]]] = [
+            [:],
+            ["zzz_decoy": [0]],
+            ["aaa_decoy": [1], "mmm_decoy": [0]],
+            ["q": [0], "r": [1], "s": [0], "t": [1]],
+            ["decoy_0": [0], "decoy_1": [1], "decoy_2": [0], "decoy_3": [1], "decoy_4": [0]]
+        ]
+
+        var fingerprints: [UInt64] = []
+        var outputs: [[String: [UInt8]]] = []
+
+        for decoys in decoySets {
+            let sim = makeSim(moduleName, module)
+            var inputs = real
+            for (k, v) in decoys { inputs[k] = v }
+            let got = try sim.tick(inputs: inputs)
+            fingerprints.append(sim.lastInputFingerprint)
+            outputs.append(got)
+        }
+
+        XCTAssertFalse(fingerprints.contains(0), "input fingerprint was never set")
+        for (i, fp) in fingerprints.enumerated().dropFirst() {
+            XCTAssertEqual(
+                fp, fingerprints[0],
+                """
+                Input ciphertexts changed when unrelated keys were added to \
+                the input dictionary (variant \(i)). Input encryption is walking \
+                the dictionary in hash order while consuming the shared RNG, so \
+                mask vectors are being assigned to wires nondeterministically. \
+                Iterate ports in sorted order.
+                """
+            )
+            XCTAssertEqual(outputs[i], outputs[0], "decoded outputs diverged (variant \(i))")
+        }
+    }
+
+    /// Same seed, two fresh simulators, identical ciphertexts.
+    ///
+    /// This does not catch hash-order dependence (see the class comment) but it
+    /// does catch any future nondeterminism that is *not* hash-seed related —
+    /// an unsynchronised cache, or a race introduced into the wavefront.
+    func testTwoSimulatorsWithSameSeedAgreeBitForBit() throws {
+        guard let (moduleName, module) = loadAdder() else {
+            return XCTFail("netlist.json not found")
+        }
+        let inputs: [String: [UInt8]] = ["a": [1], "b": [1], "cin": [0]]
+
+        let simA = makeSim(moduleName, module)
+        let simB = makeSim(moduleName, module)
+        let outA = try simA.tick(inputs: inputs)
+        let outB = try simB.tick(inputs: inputs)
+
+        XCTAssertEqual(outA, outB)
+        XCTAssertNotEqual(simA.lastInputFingerprint, 0)
+        XCTAssertEqual(
+            simA.lastInputFingerprint, simB.lastInputFingerprint,
+            "two simulators with the same seed produced different ciphertexts"
+        )
+    }
+
+    /// Repeated ticks on one simulator must stay self-consistent against the
+    /// cleartext oracle. The RNG advances between ticks, so ciphertexts differ
+    /// by design; the decoded result must not.
+    func testRepeatedTicksMatchCleartextAcrossRNGAdvance() throws {
+        guard let (moduleName, module) = loadAdder() else {
+            return XCTFail("netlist.json not found")
+        }
+        let sim = makeSim(moduleName, module)
+        let clear = CleartextNetlistSimulator(moduleName: moduleName, module: module)
+
+        var seenFingerprints = Set<UInt64>()
+        for round in 0..<3 {
+            for a in 0...1 {
+                for b in 0...1 {
+                    let inputs: [String: [UInt8]] = ["a": [UInt8(a)], "b": [UInt8(b)], "cin": [0]]
+                    let want = clear.tick(inputs: inputs)
+                    let got = try sim.tick(inputs: inputs)
+                    XCTAssertEqual(got["sum"], want["sum"], "round \(round) a=\(a) b=\(b)")
+                    XCTAssertEqual(got["cout"], want["cout"], "round \(round) a=\(a) b=\(b)")
+                    seenFingerprints.insert(sim.lastInputFingerprint)
+                }
+            }
+        }
+        // Fresh randomness per tick: fingerprints should not all collapse to one
+        // value, which would mean the RNG was not advancing.
+        XCTAssertGreaterThan(seenFingerprints.count, 1, "ciphertexts never changed across ticks")
+    }
+
+    /// The fingerprint must not depend on Swift's per-process `Hasher` seed, or
+    /// it cannot be compared across runs.
+    func testFingerprintIsStableAcrossDictionaryConstruction() {
+        let ct = LWECiphertext(a: [1, 2, 3, 4], b: 5)
+        let wires: [Int: LWECiphertext] = [7: ct]
+        let portsA: [String: [YosysBit]] = ["out": [.net(7)]]
+        var portsB: [String: [YosysBit]] = [:]
+        portsB["out"] = [.net(7)]
+        XCTAssertEqual(
+            EncryptedNetlistSimulator.fingerprint(wires: wires, ports: portsA),
+            EncryptedNetlistSimulator.fingerprint(wires: wires, ports: portsB)
+        )
+        // And it must actually depend on the ciphertext.
+        let other: [Int: LWECiphertext] = [7: LWECiphertext(a: [1, 2, 3, 4], b: 6)]
+        XCTAssertNotEqual(
+            EncryptedNetlistSimulator.fingerprint(wires: wires, ports: portsA),
+            EncryptedNetlistSimulator.fingerprint(wires: other, ports: portsA)
+        )
+    }
+
+    func testOptInDiagnosticsCaptureStableCleanLUTMetadata() throws {
+        guard let (moduleName, module) = loadAdder() else {
+            return XCTFail("netlist.json not found")
+        }
+        let params = GGSWParams.booleanTrivial(degree: 8)
+        let secret = TFHESecretKey.random(params: params.tfhe, seed: 0xD381)
+        let sim = EncryptedNetlistSimulator(
+            moduleName: moduleName,
+            module: module,
+            secret: secret,
+            params: params,
+            backend: .blindRotate,
+            seed: 0xD382,
+            diagnosticsMode: .firstDivergence
+        )
+        _ = try sim.tick(inputs: ["a": [1], "b": [0], "cin": [1]])
+        let trace = try XCTUnwrap(sim.lastTickDiagnostics)
+        XCTAssertEqual(trace.lutRecords.count, sim.clear.luts.count)
+        XCTAssertNil(trace.firstDivergentLUT)
+        XCTAssertNil(trace.firstLocallyCorruptLUT)
+        XCTAssertTrue(trace.wrongDFFs.isEmpty)
+        XCTAssertTrue(trace.lutRecords.allSatisfy { !$0.initMSBFirst.isEmpty })
+        let ordering = trace.lutRecords.map { "\($0.wavefront):\($0.ordinal)" }
+        let sortedOrdering = trace.lutRecords.sorted {
+            ($0.wavefront, $0.ordinal) < ($1.wavefront, $1.ordinal)
+        }.map { "\($0.wavefront):\($0.ordinal)" }
+        XCTAssertEqual(ordering, sortedOrdering)
+    }
+
+    func testDiagnosticReportSelectsFirstLocalCorruptionAndAllDFFs() {
+        func lut(name: String, ordinal: Int, actual: UInt8) -> EncryptedLUTDiagnostic {
+            EncryptedLUTDiagnostic(
+                wavefront: 1,
+                ordinal: ordinal,
+                name: name,
+                yWire: 100 + ordinal,
+                aBits: ["net(1)"],
+                arity: 1,
+                initMSBFirst: "10",
+                tableLSBFirst: "01",
+                clearAddress: 1,
+                encryptedAddress: 1,
+                packedAddress: 1,
+                clearExpectedBit: 1,
+                localExpectedBit: 1,
+                packedExpectedBit: 1,
+                actualBit: actual,
+                inputPhaseDomain: "full-torus-public-ms",
+                packedNativePhase: 1,
+                expectedPackedPhase: 1,
+                packedOffset: 0,
+                rawPhase: 7,
+                phaseDomain: "torus-extracted",
+                signedResidual: -1,
+                residualMagnitude: 1,
+                halfGap: 8,
+                skippedBlindRotate: false
+            )
+        }
+        let first = lut(name: "a_first", ordinal: 0, actual: 0)
+        let second = lut(name: "b_second", ordinal: 1, actual: 0)
+        let dffA = EncryptedDFFDiagnostic(
+            name: "dff_a", type: "$_DFF_P_", qWire: 20, dBit: "net(100)",
+            expectedBit: 1, actualBit: 0, rawPhase: 0,
+            phaseDomain: "full-torus-wire", normalizedTorusPhase: 0, signedResidual: -8,
+            residualMagnitude: 8, halfGap: 8, producerName: "a_first",
+            producerWavefront: 1, producerArity: 1, producerINIT: "10"
+        )
+        let dffB = EncryptedDFFDiagnostic(
+            name: "dff_b", type: "$_DFF_P_", qWire: 21, dBit: "net(101)",
+            expectedBit: 1, actualBit: 0, rawPhase: 0,
+            phaseDomain: "full-torus-wire", normalizedTorusPhase: 0, signedResidual: -8,
+            residualMagnitude: 8, halfGap: 8, producerName: "b_second",
+            producerWavefront: 1, producerArity: 1, producerINIT: "10"
+        )
+        let trace = EncryptedTickDiagnostics(
+            backend: "blind-rotate", wireRefresh: "public-ms",
+            serialWavefront: false, lutRecords: [first, second],
+            wrongDFFs: [dffA, dffB]
+        )
+        XCTAssertEqual(trace.firstDivergentLUT?.name, "a_first")
+        XCTAssertNil(trace.firstAddressAlias)
+        XCTAssertEqual(trace.firstLocallyCorruptLUT?.name, "a_first")
+        XCTAssertEqual(trace.wrongDFFs.count, 2)
+        let report = trace.report(pathLabel: "test", tick: 1)
+        XCTAssertTrue(report.contains("first locally corrupt LUT"))
+        XCTAssertTrue(report.contains("wrong DFFs: 2"))
+        XCTAssertTrue(report.contains("INIT=10"))
+    }
+}
+
+/// Cross-process determinism.
+///
+/// Everything in `EncryptedDeterminismTests` runs inside one process, and a
+/// single process has one Dictionary hash seed. The property that actually broke
+/// on 2026-08-15 was *cross-process*: Swift reseeds Dictionary hashing per
+/// process, so run A and run B of the same binary visited `inputs` in different
+/// orders and encrypted different wires with different masks. An in-process test
+/// can permute keys to simulate that, but it cannot observe the real thing.
+///
+/// This emits the fingerprint on stdout in a fixed format so an external driver
+/// can run the binary repeatedly and diff. `Scripts/determinism_cross_process.py`
+/// is that driver, and it must run with `SWIFT_DETERMINISTIC_HASHING` unset —
+/// setting it would suppress the very reseeding the check depends on.
+final class EncryptedCrossProcessDeterminismTests: XCTestCase {
+
+    /// Marker the external driver greps for. Changing it breaks the script.
+    static let marker = "CROSS_PROCESS_FINGERPRINT"
+
+    private func repoFile(_ name: String) -> String? {
+        let fm = FileManager.default
+        let cwd = fm.currentDirectoryPath
+        for relative in [name, "../\(name)", "../../\(name)", "../../../\(name)"] {
+            let path = URL(fileURLWithPath: cwd).appendingPathComponent(relative).path
+            if fm.fileExists(atPath: path) { return path }
+        }
+        var url = URL(fileURLWithPath: #filePath)
+        for _ in 0..<5 {
+            url.deleteLastPathComponent()
+            let candidate = url.appendingPathComponent(name).path
+            if fm.fileExists(atPath: candidate) { return candidate }
+        }
+        return nil
+    }
+
+    /// Emit a fingerprint over encrypted inputs and decoded outputs at a fixed
+    /// seed. Deterministic by construction, so any variation across processes is
+    /// a real defect.
+    func testEmitCrossProcessFingerprint() throws {
+        guard let path = repoFile("netlist.json") else {
+            return XCTFail("netlist.json not found")
+        }
+        let netlist = loadYosysNetlist(from: path)
+        guard let (moduleName, module) = netlist.modules.first.map({ ($0.key, $0.value) }) else {
+            return XCTFail("no module in netlist.json")
+        }
+
+        let params = GGSWParams.booleanTrivial(degree: 8)
+        let secret = TFHESecretKey.random(params: params.tfhe, seed: 0xD371)
+        let sim = EncryptedNetlistSimulator(
+            moduleName: moduleName,
+            module: module,
+            secret: secret,
+            params: params,
+            backend: .blindRotate,
+            seed: 0xD372
+        )
+
+        // Enough distinct keys that the Dictionary layout is worth reseeding.
+        // Decoys are skipped without consuming RNG but do move iteration order,
+        // which is exactly the mechanism the old bug rode in on.
+        let inputs: [String: [UInt8]] = [
+            "a": [1], "b": [0], "cin": [1],
+            "zzz_decoy": [0], "aaa_decoy": [1], "mmm_decoy": [0],
+            "q": [0], "r": [1], "s": [0], "t": [1]
+        ]
+
+        var accumulated: UInt64 = 0xcbf2_9ce4_8422_2325
+        for tick in 0..<3 {
+            let outputs = try sim.tick(inputs: inputs)
+            // Fold the input fingerprint.
+            accumulated ^= sim.lastInputFingerprint
+            accumulated = accumulated.multipliedReportingOverflow(by: 0x100_0000_01b3).partialValue
+            // Fold decoded outputs in a key-sorted order so the *fingerprint*
+            // cannot itself depend on Dictionary order.
+            for key in outputs.keys.sorted() {
+                for byte in outputs[key] ?? [] {
+                    accumulated ^= UInt64(byte)
+                    accumulated = accumulated
+                        .multipliedReportingOverflow(by: 0x100_0000_01b3).partialValue
+                }
+            }
+            accumulated ^= UInt64(tick)
+        }
+
+        XCTAssertNotEqual(accumulated, 0)
+        print("\(Self.marker) \(String(accumulated, radix: 16))")
+    }
+}

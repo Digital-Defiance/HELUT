@@ -1,0 +1,20 @@
+{
+  "target": "P1030680",
+  "ciphertext": "JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF",
+  "note": "Finite exact-radio family after Selm Merel Wenselaers' BLEIBT BESETZT lead. The 40-letter text is verbatim P1030668 plaintext[131..<171], not an invented sentence: UHR J KIEL WEINGELAUFEN Y FFF TTT BLEIBT BESETZT. P1030668 independently makes the clean phrase exact even though the P1030707 sister copy is corrupted. The four offsets are one representative per source/target alignment diagonal, all single-component, 40 edges, 23 letters, 18 loops. A fifth legal placement at offset 25 has two components and is excluded under the Phase-4 split-menu doctrine. Staged behind the existing middle-ring arm; manifest generation evaluates no settings.",
+  "source": {
+    "message": "P1030668",
+    "network": "second C/beta/568/AAEL",
+    "plaintextRange": "131..<171",
+    "historian": "Selm Merel Wenselaers, Historian / Curator, Amsterdam / Antwerp",
+    "received": "2026-09-23"
+  },
+  "cribs": [
+    {
+      "text": "UHRJKIELWEINGELAUFENYFFFTTTBLEIBTBESETZT",
+      "messages": 1,
+      "offsets": [7, 17, 27, 30],
+      "anchored": false
+    }
+  ]
+}

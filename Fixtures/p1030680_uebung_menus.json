@@ -1,0 +1,235 @@
+{
+  "target": "P1030680",
+  "ciphertext": "JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF",
+  "note": "Thetis training-header hypothesis: UEBUNG / FUNKUEBUNG pads at offsets 0\u20132, length\u226516 only. Not mined from Potsdam decrypts. Illegal self-stecker placements dropped.",
+  "cribs": [
+    {
+      "text": "UEBUNGSMELDUNGUEBUNGSMELDUNG",
+      "messages": 0,
+      "offsets": [
+        0,
+        1
+      ],
+      "anchored": true
+    },
+    {
+      "text": "UEBUNGSFUNKUEBUNGSFUNK",
+      "messages": 0,
+      "offsets": [
+        1
+      ],
+      "anchored": false
+    },
+    {
+      "text": "FUNKUEBUNGXFUNKUEBUNG",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true
+    },
+    {
+      "text": "UEBUNGSMELDUNGXUEBUNG",
+      "messages": 0,
+      "offsets": [
+        0,
+        1
+      ],
+      "anchored": true
+    },
+    {
+      "text": "XUEBUNGXUEBUNGXUEBUNG",
+      "messages": 0,
+      "offsets": [
+        0,
+        2
+      ],
+      "anchored": true
+    },
+    {
+      "text": "FUNKUEBUNGFUNKUEBUNG",
+      "messages": 0,
+      "offsets": [
+        0,
+        1
+      ],
+      "anchored": true
+    },
+    {
+      "text": "UEBUNGXUEBUNGXUEBUNG",
+      "messages": 0,
+      "offsets": [
+        1
+      ],
+      "anchored": false
+    },
+    {
+      "text": "XUEBUNGXUEBUNGUEBUNG",
+      "messages": 0,
+      "offsets": [
+        0,
+        2
+      ],
+      "anchored": true
+    },
+    {
+      "text": "UEBUNGUEBUNGXUEBUNG",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true
+    },
+    {
+      "text": "UEBUNGXUEBUNGUEBUNG",
+      "messages": 0,
+      "offsets": [
+        0,
+        1
+      ],
+      "anchored": true
+    },
+    {
+      "text": "XXXXXUEBUNGSMELDUNG",
+      "messages": 0,
+      "offsets": [
+        0,
+        1,
+        2
+      ],
+      "anchored": true
+    },
+    {
+      "text": "FUNKXUEBUNGXUEBUNG",
+      "messages": 0,
+      "offsets": [
+        0,
+        1
+      ],
+      "anchored": true
+    },
+    {
+      "text": "UEBUNGSFUNKXUEBUNG",
+      "messages": 0,
+      "offsets": [
+        0,
+        1
+      ],
+      "anchored": true
+    },
+    {
+      "text": "UEBUNGSMELDUNGXXXX",
+      "messages": 0,
+      "offsets": [
+        0,
+        1
+      ],
+      "anchored": true
+    },
+    {
+      "text": "UEBUNGUEBUNGUEBUNG",
+      "messages": 0,
+      "offsets": [
+        0,
+        1
+      ],
+      "anchored": true
+    },
+    {
+      "text": "UEBUNGXFUNKXUEBUNG",
+      "messages": 0,
+      "offsets": [
+        0,
+        1
+      ],
+      "anchored": true
+    },
+    {
+      "text": "XXXXUEBUNGSMELDUNG",
+      "messages": 0,
+      "offsets": [
+        1,
+        2
+      ],
+      "anchored": false
+    },
+    {
+      "text": "FUNKUEBUNGXUEBUNG",
+      "messages": 0,
+      "offsets": [
+        1,
+        2
+      ],
+      "anchored": false
+    },
+    {
+      "text": "UEBUNGSMELDUNGXXX",
+      "messages": 0,
+      "offsets": [
+        0,
+        1
+      ],
+      "anchored": true
+    },
+    {
+      "text": "UEBUNGXXXXXUEBUNG",
+      "messages": 0,
+      "offsets": [
+        1
+      ],
+      "anchored": false
+    },
+    {
+      "text": "XXXUEBUNGSMELDUNG",
+      "messages": 0,
+      "offsets": [
+        0,
+        2
+      ],
+      "anchored": true
+    },
+    {
+      "text": "UEBUNGSMELDUNGXX",
+      "messages": 0,
+      "offsets": [
+        0,
+        1
+      ],
+      "anchored": true
+    },
+    {
+      "text": "UEBUNGXXXXUEBUNG",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true
+    },
+    {
+      "text": "XUEBUNGSMELDUNGX",
+      "messages": 0,
+      "offsets": [
+        0,
+        2
+      ],
+      "anchored": true
+    },
+    {
+      "text": "XXUEBUNGSMELDUNG",
+      "messages": 0,
+      "offsets": [
+        1
+      ],
+      "anchored": false
+    },
+    {
+      "text": "XXXUEBUNGXUEBUNG",
+      "messages": 0,
+      "offsets": [
+        0,
+        2
+      ],
+      "anchored": true
+    }
+  ]
+}

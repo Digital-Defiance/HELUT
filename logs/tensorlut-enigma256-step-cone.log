@@ -1,0 +1,13 @@
+# TensorLUT Red Team — enigma_256_step_cone
+netlist: build/enigma_256_step_cone_netlist.json
+luts: 89
+dffs: 64
+batch: 1
+baseline_crypto: 0.000000
+explore_best_crypto: 0.000000
+explore_nonbinary: 3302
+squeeze_best_crypto: -1.028826
+squeeze_best_fitness: -4076.894287
+squeeze_nonbinary: 1871
+elite_fitness: -1.000000
+note: NLFF combo is the deliberate first Red Team target; full core BRAM flatten deferred.

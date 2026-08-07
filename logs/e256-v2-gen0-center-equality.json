@@ -1,0 +1,71 @@
+{
+  "schema": "E256-CENTER-EQUALITY-1",
+  "date": "2026-08-20",
+  "status": "ACCEPTED_BOUNDED_FUNCTIONAL_EVIDENCE",
+  "profile": {
+    "family": "E256",
+    "suite_version": 2,
+    "generation": 0,
+    "fixture_schema_version": 3,
+    "profile_sha256": "2a9f54c70a1619805a911758158f1e2204b0fd96c35102a9db5f4575aeb40cb0",
+    "compatibility_key": "E256/v2/gen0/2a9f54c70a1619805a911758158f1e2204b0fd96c35102a9db5f4575aeb40cb0/fixture-v3"
+  },
+  "center": {
+    "base_reflector": "fixed-point-free involution with reserved pair 0<->1",
+    "mode": "prestep_step_r1_xor_step_r2_xor_step_r3_xor_step_r4",
+    "reserved_pair_rule": "identity on center input 0 or 1 only when mode is 1; otherwise apply base reflector",
+    "fixed_points_by_mode": {
+      "0": 0,
+      "1": 2
+    }
+  },
+  "command": "swift test -c release --filter Enigma256Tests.testSchema3ZeroPlaintextEqualityCalibrationWithHistoricalPositiveControl",
+  "sampling": {
+    "key_count": 4,
+    "nonce_count_per_key": 4,
+    "stream_count": 16,
+    "bytes_per_stream": 65536,
+    "observations": 1048576,
+    "plaintext_byte": 0,
+    "key_ikm_rule": "32 repetitions of UInt8(0x31 + keyIndex*29), keyIndex in 0..<4",
+    "nonce_rule": "16 bytes UInt8(keyIndex*41 + nonceIndex*17 + byteIndex), nonceIndex in 0..<4"
+  },
+  "null": {
+    "model": "independent uniform byte equality",
+    "probability": 0.00390625,
+    "expected_count": 4096,
+    "standard_deviation": 63.874877690685246,
+    "acceptance_gate": "absolute count deviation <= 6 standard deviations"
+  },
+  "schema3_observation": {
+    "equal_count": 4083,
+    "observations": 1048576,
+    "rate": 0.0038938522338867188,
+    "absolute_count_deviation": 13,
+    "z_score": 0.20352375281326694,
+    "gate_passed": true
+  },
+  "historical_positive_control": {
+    "builder": "Enigma256KDF.involution(from: Data(repeating: 0, count: 512), allowFixedPoints: true)",
+    "equal_count": 1048576,
+    "observations": 1048576,
+    "rate": 1.0,
+    "minimum_required_rate": 0.1,
+    "gate_passed": true
+  },
+  "related_validation": {
+    "swift_suite": "43 tests, 0 failures",
+    "formal_certificate": "1 test, 0 failures",
+    "direct_rtl": "1024 golden bytes plus lfsr/mask/offset/center-input/center-output traces",
+    "axis": "1024 golden bytes, vvp status 0",
+    "axi_lite": "1024 golden bytes, vvp status 0",
+    "directed_center": "mode 0 and mode 1, reserved inputs 0 and 1, vvp status 0"
+  },
+  "toolchain": {
+    "swift_driver": "1.148.6",
+    "python": "3.9.6",
+    "iverilog": "13.0 stable",
+    "yosys": "0.68+post c12172fbae8af5e20f6fb52e3d4e92d56ed587b6"
+  },
+  "scope": "This receipt measures one equality statistic and functional Swift/RTL agreement for a fixed research profile. It is not an IND-CPA proof, a security estimate, external cryptanalysis, or evidence that E256 is unbreakable or production-ready."
+}

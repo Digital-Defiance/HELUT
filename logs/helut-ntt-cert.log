@@ -1,0 +1,59 @@
+./Scripts/helut_metal_phase1_test.sh
+[0/1] Planning build
+Building for production...
+[0/3] Write swift-version--58304C5D6DBC2206.txt
+Build complete! (0.13s)
+Test Suite 'Selected tests' started at 2026-08-13 08:17:40.609.
+Test Suite 'helutPackageTests.xctest' started at 2026-08-13 08:17:40.610.
+Test Suite 'MetalCompilerPhase1Tests' started at 2026-08-13 08:17:40.610.
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testAutomaticLoweringSelectsFusedThenTiled]' started.
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testAutomaticLoweringSelectsFusedThenTiled]' passed (0.025 seconds).
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testCarryLUTTiledMatchesCPU]' started.
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testCarryLUTTiledMatchesCPU]' passed (0.060 seconds).
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testExternalProductKernelMatchesCPUBooleanAndCrypto]' started.
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testExternalProductKernelMatchesCPUBooleanAndCrypto]' passed (0.007 seconds).
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testIdentityLUTBothBitsAcrossDegreesAndTileWidths]' started.
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testIdentityLUTBothBitsAcrossDegreesAndTileWidths]' passed (0.127 seconds).
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testIdentityLUTCryptoNTTMatchesCPU]' started.
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testIdentityLUTCryptoNTTMatchesCPU]' passed (0.006 seconds).
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testKernelNTTPolyMulN1024Spot]' started.
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testKernelNTTPolyMulN1024Spot]' passed (0.003 seconds).
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testKernelPolyMulEdgeVectors]' started.
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testKernelPolyMulEdgeVectors]' passed (0.041 seconds).
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testKernelPolyMulManyRandomSeeds]' started.
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testKernelPolyMulManyRandomSeeds]' passed (0.043 seconds).
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testSecondBlindRotateHitsPolyMulCache]' started.
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testSecondBlindRotateHitsPolyMulCache]' passed (0.009 seconds).
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testTiledKernelNetlistFullAdderMatchesClear]' started.
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testTiledKernelNetlistFullAdderMatchesClear]' passed (0.095 seconds).
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testTiledProgressAndTelemetry]' started.
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testTiledProgressAndTelemetry]' passed (0.006 seconds).
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testXORAllStimuliFusedAndTiled]' started.
+Test Case '-[HELUTTests.MetalCompilerPhase1Tests testXORAllStimuliFusedAndTiled]' passed (2.762 seconds).
+Test Suite 'MetalCompilerPhase1Tests' passed at 2026-08-13 08:17:43.795.
+	 Executed 12 tests, with 0 failures (0 unexpected) in 3.184 (3.185) seconds
+Test Suite 'NegacyclicNTTTests' started at 2026-08-13 08:17:43.796.
+Test Case '-[HELUTTests.NegacyclicNTTTests testCRTModulusProduct]' started.
+Test Case '-[HELUTTests.NegacyclicNTTTests testCRTModulusProduct]' passed (0.000 seconds).
+Test Case '-[HELUTTests.NegacyclicNTTTests testCRTRecoversSmallNegatives]' started.
+Test Case '-[HELUTTests.NegacyclicNTTTests testCRTRecoversSmallNegatives]' passed (0.000 seconds).
+Test Case '-[HELUTTests.NegacyclicNTTTests testForwardInverseRoundtrip]' started.
+Test Case '-[HELUTTests.NegacyclicNTTTests testForwardInverseRoundtrip]' passed (0.000 seconds).
+Test Case '-[HELUTTests.NegacyclicNTTTests testNTTMatchesSchoolbookEdgeVectors]' started.
+Test Case '-[HELUTTests.NegacyclicNTTTests testNTTMatchesSchoolbookEdgeVectors]' passed (0.001 seconds).
+Test Case '-[HELUTTests.NegacyclicNTTTests testNTTMatchesSchoolbookManySeeds]' started.
+Test Case '-[HELUTTests.NegacyclicNTTTests testNTTMatchesSchoolbookManySeeds]' passed (0.001 seconds).
+Test Case '-[HELUTTests.NegacyclicNTTTests testNTTMatchesSchoolbookN1024Spot]' started.
+Test Case '-[HELUTTests.NegacyclicNTTTests testNTTMatchesSchoolbookN1024Spot]' passed (0.001 seconds).
+Test Case '-[HELUTTests.NegacyclicNTTTests testPrimesDivideTwoN]' started.
+Test Case '-[HELUTTests.NegacyclicNTTTests testPrimesDivideTwoN]' passed (0.000 seconds).
+Test Suite 'NegacyclicNTTTests' passed at 2026-08-13 08:17:43.800.
+	 Executed 7 tests, with 0 failures (0 unexpected) in 0.004 (0.004) seconds
+Test Suite 'helutPackageTests.xctest' passed at 2026-08-13 08:17:43.800.
+	 Executed 19 tests, with 0 failures (0 unexpected) in 3.187 (3.189) seconds
+Test Suite 'Selected tests' passed at 2026-08-13 08:17:43.800.
+	 Executed 19 tests, with 0 failures (0 unexpected) in 3.187 (3.190) seconds
+◇ Test run started.
+↳ Testing Library Version: 1902
+↳ Target Platform: arm64e-apple-macos14.0
+✔ Test run with 0 tests in 0 suites passed after 0.001 seconds.

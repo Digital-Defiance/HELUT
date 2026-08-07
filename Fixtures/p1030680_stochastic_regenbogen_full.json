@@ -1,0 +1,2522 @@
+{
+  "target": "P1030680",
+  "ciphertext": "JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF",
+  "note": "Operation Regenbogen / Hannibal operational cribs for P1030680 (M-Thetis). Phrases are period-plausible constructions from attested vocabulary (not verified native decrypts except shared lexicon with P1030681). Offsets are self-stecker-legal against the 72-letter CT. Queue AFTER catalog right-ring sweep; do not preempt Metal. Stochastic bank: all tiers including own-orders + filler.",
+  "prior": "regenbogen-hannibal",
+  "survivor_ratio": 0.8,
+  "noise_margin": 0.1,
+  "templates": [
+    {
+      "name": "body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@1",
+      "pattern": ".BEFEHLERHALTENREGENBOGEN...............................................",
+      "note": "High-density Regenbogen anchor / regenbogen_scuttling",
+      "constrained": 24,
+      "prior": "regenbogen_scuttling",
+      "tier": "01_anchor"
+    },
+    {
+      "name": "body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@10",
+      "pattern": "..........BEFEHLERHALTENREGENBOGEN......................................",
+      "note": "High-density Regenbogen anchor / regenbogen_scuttling",
+      "constrained": 24,
+      "prior": "regenbogen_scuttling",
+      "tier": "01_anchor"
+    },
+    {
+      "name": "body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@13",
+      "pattern": ".............BEFEHLERHALTENREGENBOGEN...................................",
+      "note": "High-density Regenbogen anchor / regenbogen_scuttling",
+      "constrained": 24,
+      "prior": "regenbogen_scuttling",
+      "tier": "01_anchor"
+    },
+    {
+      "name": "body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@15",
+      "pattern": "...............BEFEHLERHALTENREGENBOGEN.................................",
+      "note": "High-density Regenbogen anchor / regenbogen_scuttling",
+      "constrained": 24,
+      "prior": "regenbogen_scuttling",
+      "tier": "01_anchor"
+    },
+    {
+      "name": "body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@17",
+      "pattern": ".................BEFEHLERHALTENREGENBOGEN...............................",
+      "note": "High-density Regenbogen anchor / regenbogen_scuttling",
+      "constrained": 24,
+      "prior": "regenbogen_scuttling",
+      "tier": "01_anchor"
+    },
+    {
+      "name": "body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@18",
+      "pattern": "..................BEFEHLERHALTENREGENBOGEN..............................",
+      "note": "High-density Regenbogen anchor / regenbogen_scuttling",
+      "constrained": 24,
+      "prior": "regenbogen_scuttling",
+      "tier": "01_anchor"
+    },
+    {
+      "name": "body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@2",
+      "pattern": "..BEFEHLERHALTENREGENBOGEN..............................................",
+      "note": "High-density Regenbogen anchor / regenbogen_scuttling",
+      "constrained": 24,
+      "prior": "regenbogen_scuttling",
+      "tier": "01_anchor"
+    },
+    {
+      "name": "body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@22",
+      "pattern": "......................BEFEHLERHALTENREGENBOGEN..........................",
+      "note": "High-density Regenbogen anchor / regenbogen_scuttling",
+      "constrained": 24,
+      "prior": "regenbogen_scuttling",
+      "tier": "01_anchor"
+    },
+    {
+      "name": "body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@24",
+      "pattern": "........................BEFEHLERHALTENREGENBOGEN........................",
+      "note": "High-density Regenbogen anchor / regenbogen_scuttling",
+      "constrained": 24,
+      "prior": "regenbogen_scuttling",
+      "tier": "01_anchor"
+    },
+    {
+      "name": "body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@29",
+      "pattern": ".............................BEFEHLERHALTENREGENBOGEN...................",
+      "note": "High-density Regenbogen anchor / regenbogen_scuttling",
+      "constrained": 24,
+      "prior": "regenbogen_scuttling",
+      "tier": "01_anchor"
+    },
+    {
+      "name": "body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@32",
+      "pattern": "................................BEFEHLERHALTENREGENBOGEN................",
+      "note": "High-density Regenbogen anchor / regenbogen_scuttling",
+      "constrained": 24,
+      "prior": "regenbogen_scuttling",
+      "tier": "01_anchor"
+    },
+    {
+      "name": "body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@33",
+      "pattern": ".................................BEFEHLERHALTENREGENBOGEN...............",
+      "note": "High-density Regenbogen anchor / regenbogen_scuttling",
+      "constrained": 24,
+      "prior": "regenbogen_scuttling",
+      "tier": "01_anchor"
+    },
+    {
+      "name": "body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@34",
+      "pattern": "..................................BEFEHLERHALTENREGENBOGEN..............",
+      "note": "High-density Regenbogen anchor / regenbogen_scuttling",
+      "constrained": 24,
+      "prior": "regenbogen_scuttling",
+      "tier": "01_anchor"
+    },
+    {
+      "name": "body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@38",
+      "pattern": "......................................BEFEHLERHALTENREGENBOGEN..........",
+      "note": "High-density Regenbogen anchor / regenbogen_scuttling",
+      "constrained": 24,
+      "prior": "regenbogen_scuttling",
+      "tier": "01_anchor"
+    },
+    {
+      "name": "body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@42",
+      "pattern": "..........................................BEFEHLERHALTENREGENBOGEN......",
+      "note": "High-density Regenbogen anchor / regenbogen_scuttling",
+      "constrained": 24,
+      "prior": "regenbogen_scuttling",
+      "tier": "01_anchor"
+    },
+    {
+      "name": "body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@45",
+      "pattern": ".............................................BEFEHLERHALTENREGENBOGEN...",
+      "note": "High-density Regenbogen anchor / regenbogen_scuttling",
+      "constrained": 24,
+      "prior": "regenbogen_scuttling",
+      "tier": "01_anchor"
+    },
+    {
+      "name": "body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@48",
+      "pattern": "................................................BEFEHLERHALTENREGENBOGEN",
+      "note": "High-density Regenbogen anchor / regenbogen_scuttling",
+      "constrained": 24,
+      "prior": "regenbogen_scuttling",
+      "tier": "01_anchor"
+    },
+    {
+      "name": "body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@5",
+      "pattern": ".....BEFEHLERHALTENREGENBOGEN...........................................",
+      "note": "High-density Regenbogen anchor / regenbogen_scuttling",
+      "constrained": 24,
+      "prior": "regenbogen_scuttling",
+      "tier": "01_anchor"
+    },
+    {
+      "name": "body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@8",
+      "pattern": "........BEFEHLERHALTENREGENBOGEN........................................",
+      "note": "High-density Regenbogen anchor / regenbogen_scuttling",
+      "constrained": 24,
+      "prior": "regenbogen_scuttling",
+      "tier": "01_anchor"
+    },
+    {
+      "name": "body:u534_own_orders:AUSLAUFENKIELNORWEGEN@10",
+      "pattern": "..........AUSLAUFENKIELNORWEGEN.........................................",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 21,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:AUSLAUFENKIELNORWEGEN@12",
+      "pattern": "............AUSLAUFENKIELNORWEGEN.......................................",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 21,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:AUSLAUFENKIELNORWEGEN@14",
+      "pattern": "..............AUSLAUFENKIELNORWEGEN.....................................",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 21,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:AUSLAUFENKIELNORWEGEN@16",
+      "pattern": "................AUSLAUFENKIELNORWEGEN...................................",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 21,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:AUSLAUFENKIELNORWEGEN@18",
+      "pattern": "..................AUSLAUFENKIELNORWEGEN.................................",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 21,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:AUSLAUFENKIELNORWEGEN@19",
+      "pattern": "...................AUSLAUFENKIELNORWEGEN................................",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 21,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:AUSLAUFENKIELNORWEGEN@2",
+      "pattern": "..AUSLAUFENKIELNORWEGEN.................................................",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 21,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:AUSLAUFENKIELNORWEGEN@20",
+      "pattern": "....................AUSLAUFENKIELNORWEGEN...............................",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 21,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:AUSLAUFENKIELNORWEGEN@22",
+      "pattern": "......................AUSLAUFENKIELNORWEGEN.............................",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 21,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:AUSLAUFENKIELNORWEGEN@25",
+      "pattern": ".........................AUSLAUFENKIELNORWEGEN..........................",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 21,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:AUSLAUFENKIELNORWEGEN@29",
+      "pattern": ".............................AUSLAUFENKIELNORWEGEN......................",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 21,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:AUSLAUFENKIELNORWEGEN@30",
+      "pattern": "..............................AUSLAUFENKIELNORWEGEN.....................",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 21,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:AUSLAUFENKIELNORWEGEN@31",
+      "pattern": "...............................AUSLAUFENKIELNORWEGEN....................",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 21,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:AUSLAUFENKIELNORWEGEN@32",
+      "pattern": "................................AUSLAUFENKIELNORWEGEN...................",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 21,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:AUSLAUFENKIELNORWEGEN@34",
+      "pattern": "..................................AUSLAUFENKIELNORWEGEN.................",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 21,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:AUSLAUFENKIELNORWEGEN@36",
+      "pattern": "....................................AUSLAUFENKIELNORWEGEN...............",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 21,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:AUSLAUFENKIELNORWEGEN@40",
+      "pattern": "........................................AUSLAUFENKIELNORWEGEN...........",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 21,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:AUSLAUFENKIELNORWEGEN@41",
+      "pattern": ".........................................AUSLAUFENKIELNORWEGEN..........",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 21,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:AUSLAUFENKIELNORWEGEN@42",
+      "pattern": "..........................................AUSLAUFENKIELNORWEGEN.........",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 21,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:AUSLAUFENKIELNORWEGEN@43",
+      "pattern": "...........................................AUSLAUFENKIELNORWEGEN........",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 21,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:AUSLAUFENKIELNORWEGEN@45",
+      "pattern": ".............................................AUSLAUFENKIELNORWEGEN......",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 21,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:AUSLAUFENKIELNORWEGEN@46",
+      "pattern": "..............................................AUSLAUFENKIELNORWEGEN.....",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 21,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:AUSLAUFENKIELNORWEGEN@48",
+      "pattern": "................................................AUSLAUFENKIELNORWEGEN...",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 21,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:AUSLAUFENKIELNORWEGEN@50",
+      "pattern": "..................................................AUSLAUFENKIELNORWEGEN.",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 21,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:AUSLAUFENKIELNORWEGEN@8",
+      "pattern": "........AUSLAUFENKIELNORWEGEN...........................................",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 21,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:KURSNORWEGENBEFOHLEN@1",
+      "pattern": ".KURSNORWEGENBEFOHLEN...................................................",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 20,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:KURSNORWEGENBEFOHLEN@10",
+      "pattern": "..........KURSNORWEGENBEFOHLEN..........................................",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 20,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:KURSNORWEGENBEFOHLEN@11",
+      "pattern": "...........KURSNORWEGENBEFOHLEN.........................................",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 20,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:KURSNORWEGENBEFOHLEN@12",
+      "pattern": "............KURSNORWEGENBEFOHLEN........................................",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 20,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:KURSNORWEGENBEFOHLEN@14",
+      "pattern": "..............KURSNORWEGENBEFOHLEN......................................",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 20,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:KURSNORWEGENBEFOHLEN@17",
+      "pattern": ".................KURSNORWEGENBEFOHLEN...................................",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 20,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:KURSNORWEGENBEFOHLEN@25",
+      "pattern": ".........................KURSNORWEGENBEFOHLEN...........................",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 20,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:KURSNORWEGENBEFOHLEN@29",
+      "pattern": ".............................KURSNORWEGENBEFOHLEN.......................",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 20,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:KURSNORWEGENBEFOHLEN@3",
+      "pattern": "...KURSNORWEGENBEFOHLEN.................................................",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 20,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:KURSNORWEGENBEFOHLEN@30",
+      "pattern": "..............................KURSNORWEGENBEFOHLEN......................",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 20,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:KURSNORWEGENBEFOHLEN@31",
+      "pattern": "...............................KURSNORWEGENBEFOHLEN.....................",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 20,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:KURSNORWEGENBEFOHLEN@33",
+      "pattern": ".................................KURSNORWEGENBEFOHLEN...................",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 20,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:KURSNORWEGENBEFOHLEN@38",
+      "pattern": "......................................KURSNORWEGENBEFOHLEN..............",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 20,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:KURSNORWEGENBEFOHLEN@39",
+      "pattern": ".......................................KURSNORWEGENBEFOHLEN.............",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 20,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:KURSNORWEGENBEFOHLEN@41",
+      "pattern": ".........................................KURSNORWEGENBEFOHLEN...........",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 20,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:KURSNORWEGENBEFOHLEN@42",
+      "pattern": "..........................................KURSNORWEGENBEFOHLEN..........",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 20,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:KURSNORWEGENBEFOHLEN@43",
+      "pattern": "...........................................KURSNORWEGENBEFOHLEN.........",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 20,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:KURSNORWEGENBEFOHLEN@46",
+      "pattern": "..............................................KURSNORWEGENBEFOHLEN......",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 20,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:KURSNORWEGENBEFOHLEN@49",
+      "pattern": ".................................................KURSNORWEGENBEFOHLEN...",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 20,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:KURSNORWEGENBEFOHLEN@51",
+      "pattern": "...................................................KURSNORWEGENBEFOHLEN.",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 20,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:KURSNORWEGENBEFOHLEN@6",
+      "pattern": "......KURSNORWEGENBEFOHLEN..............................................",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 20,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:KURSNORWEGENBEFOHLEN@7",
+      "pattern": ".......KURSNORWEGENBEFOHLEN.............................................",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 20,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:u534_own_orders:KURSNORWEGENBEFOHLEN@9",
+      "pattern": ".........KURSNORWEGENBEFOHLEN...........................................",
+      "note": "U-534 own-orders (lower prior) / u534_own_orders",
+      "constrained": 20,
+      "prior": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:RAEUMUNGOSTPREUSSEN@1",
+      "pattern": ".RAEUMUNGOSTPREUSSEN....................................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 19,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:RAEUMUNGOSTPREUSSEN@11",
+      "pattern": "...........RAEUMUNGOSTPREUSSEN..........................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 19,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:RAEUMUNGOSTPREUSSEN@12",
+      "pattern": "............RAEUMUNGOSTPREUSSEN.........................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 19,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:RAEUMUNGOSTPREUSSEN@13",
+      "pattern": ".............RAEUMUNGOSTPREUSSEN........................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 19,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:RAEUMUNGOSTPREUSSEN@21",
+      "pattern": ".....................RAEUMUNGOSTPREUSSEN................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 19,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:RAEUMUNGOSTPREUSSEN@22",
+      "pattern": "......................RAEUMUNGOSTPREUSSEN...............................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 19,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:RAEUMUNGOSTPREUSSEN@23",
+      "pattern": ".......................RAEUMUNGOSTPREUSSEN..............................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 19,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:RAEUMUNGOSTPREUSSEN@25",
+      "pattern": ".........................RAEUMUNGOSTPREUSSEN............................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 19,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:RAEUMUNGOSTPREUSSEN@29",
+      "pattern": ".............................RAEUMUNGOSTPREUSSEN........................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 19,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:RAEUMUNGOSTPREUSSEN@31",
+      "pattern": "...............................RAEUMUNGOSTPREUSSEN......................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 19,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:RAEUMUNGOSTPREUSSEN@32",
+      "pattern": "................................RAEUMUNGOSTPREUSSEN.....................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 19,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:RAEUMUNGOSTPREUSSEN@33",
+      "pattern": ".................................RAEUMUNGOSTPREUSSEN....................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 19,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:RAEUMUNGOSTPREUSSEN@39",
+      "pattern": ".......................................RAEUMUNGOSTPREUSSEN..............",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 19,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:RAEUMUNGOSTPREUSSEN@40",
+      "pattern": "........................................RAEUMUNGOSTPREUSSEN.............",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 19,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:RAEUMUNGOSTPREUSSEN@41",
+      "pattern": ".........................................RAEUMUNGOSTPREUSSEN............",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 19,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:RAEUMUNGOSTPREUSSEN@43",
+      "pattern": "...........................................RAEUMUNGOSTPREUSSEN..........",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 19,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:RAEUMUNGOSTPREUSSEN@45",
+      "pattern": ".............................................RAEUMUNGOSTPREUSSEN........",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 19,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:RAEUMUNGOSTPREUSSEN@47",
+      "pattern": "...............................................RAEUMUNGOSTPREUSSEN......",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 19,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:RAEUMUNGOSTPREUSSEN@5",
+      "pattern": ".....RAEUMUNGOSTPREUSSEN................................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 19,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:RAEUMUNGOSTPREUSSEN@52",
+      "pattern": "....................................................RAEUMUNGOSTPREUSSEN.",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 19,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:RAEUMUNGOSTPREUSSEN@53",
+      "pattern": ".....................................................RAEUMUNGOSTPREUSSEN",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 19,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:RAEUMUNGOSTPREUSSEN@6",
+      "pattern": "......RAEUMUNGOSTPREUSSEN...............................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 19,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:RAEUMUNGOSTPREUSSEN@7",
+      "pattern": ".......RAEUMUNGOSTPREUSSEN..............................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 19,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:RAEUMUNGOSTPREUSSEN@9",
+      "pattern": ".........RAEUMUNGOSTPREUSSEN............................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 19,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:regenbogen_scuttling:STICHWORTREGENBOGEN@1",
+      "pattern": ".STICHWORTREGENBOGEN....................................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 19,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:STICHWORTREGENBOGEN@10",
+      "pattern": "..........STICHWORTREGENBOGEN...........................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 19,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:STICHWORTREGENBOGEN@11",
+      "pattern": "...........STICHWORTREGENBOGEN..........................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 19,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:STICHWORTREGENBOGEN@12",
+      "pattern": "............STICHWORTREGENBOGEN.........................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 19,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:STICHWORTREGENBOGEN@13",
+      "pattern": ".............STICHWORTREGENBOGEN........................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 19,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:STICHWORTREGENBOGEN@14",
+      "pattern": "..............STICHWORTREGENBOGEN.......................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 19,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:STICHWORTREGENBOGEN@15",
+      "pattern": "...............STICHWORTREGENBOGEN......................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 19,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:STICHWORTREGENBOGEN@18",
+      "pattern": "..................STICHWORTREGENBOGEN...................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 19,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:STICHWORTREGENBOGEN@20",
+      "pattern": "....................STICHWORTREGENBOGEN.................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 19,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:STICHWORTREGENBOGEN@22",
+      "pattern": "......................STICHWORTREGENBOGEN...............................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 19,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:STICHWORTREGENBOGEN@27",
+      "pattern": "...........................STICHWORTREGENBOGEN..........................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 19,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:STICHWORTREGENBOGEN@28",
+      "pattern": "............................STICHWORTREGENBOGEN.........................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 19,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:STICHWORTREGENBOGEN@29",
+      "pattern": ".............................STICHWORTREGENBOGEN........................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 19,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:STICHWORTREGENBOGEN@31",
+      "pattern": "...............................STICHWORTREGENBOGEN......................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 19,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:STICHWORTREGENBOGEN@34",
+      "pattern": "..................................STICHWORTREGENBOGEN...................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 19,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:STICHWORTREGENBOGEN@36",
+      "pattern": "....................................STICHWORTREGENBOGEN.................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 19,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:STICHWORTREGENBOGEN@37",
+      "pattern": ".....................................STICHWORTREGENBOGEN................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 19,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:STICHWORTREGENBOGEN@38",
+      "pattern": "......................................STICHWORTREGENBOGEN...............",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 19,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:STICHWORTREGENBOGEN@4",
+      "pattern": "....STICHWORTREGENBOGEN.................................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 19,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:STICHWORTREGENBOGEN@42",
+      "pattern": "..........................................STICHWORTREGENBOGEN...........",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 19,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:STICHWORTREGENBOGEN@44",
+      "pattern": "............................................STICHWORTREGENBOGEN.........",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 19,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:STICHWORTREGENBOGEN@48",
+      "pattern": "................................................STICHWORTREGENBOGEN.....",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 19,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:STICHWORTREGENBOGEN@6",
+      "pattern": "......STICHWORTREGENBOGEN...............................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 19,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:STICHWORTREGENBOGEN@7",
+      "pattern": ".......STICHWORTREGENBOGEN..............................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 19,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:STICHWORTREGENBOGEN@9",
+      "pattern": ".........STICHWORTREGENBOGEN............................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 19,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:FLUECHTLINGEANBORD@11",
+      "pattern": "...........FLUECHTLINGEANBORD...........................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 18,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:FLUECHTLINGEANBORD@13",
+      "pattern": ".............FLUECHTLINGEANBORD.........................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 18,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:FLUECHTLINGEANBORD@16",
+      "pattern": "................FLUECHTLINGEANBORD......................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 18,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:FLUECHTLINGEANBORD@17",
+      "pattern": ".................FLUECHTLINGEANBORD.....................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 18,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:FLUECHTLINGEANBORD@18",
+      "pattern": "..................FLUECHTLINGEANBORD....................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 18,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:FLUECHTLINGEANBORD@2",
+      "pattern": "..FLUECHTLINGEANBORD....................................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 18,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:FLUECHTLINGEANBORD@21",
+      "pattern": ".....................FLUECHTLINGEANBORD.................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 18,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:FLUECHTLINGEANBORD@22",
+      "pattern": "......................FLUECHTLINGEANBORD................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 18,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:FLUECHTLINGEANBORD@23",
+      "pattern": ".......................FLUECHTLINGEANBORD...............................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 18,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:FLUECHTLINGEANBORD@24",
+      "pattern": "........................FLUECHTLINGEANBORD..............................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 18,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:FLUECHTLINGEANBORD@28",
+      "pattern": "............................FLUECHTLINGEANBORD..........................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 18,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:FLUECHTLINGEANBORD@3",
+      "pattern": "...FLUECHTLINGEANBORD...................................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 18,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:FLUECHTLINGEANBORD@30",
+      "pattern": "..............................FLUECHTLINGEANBORD........................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 18,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:FLUECHTLINGEANBORD@36",
+      "pattern": "....................................FLUECHTLINGEANBORD..................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 18,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:FLUECHTLINGEANBORD@37",
+      "pattern": ".....................................FLUECHTLINGEANBORD.................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 18,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:FLUECHTLINGEANBORD@4",
+      "pattern": "....FLUECHTLINGEANBORD..................................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 18,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:FLUECHTLINGEANBORD@40",
+      "pattern": "........................................FLUECHTLINGEANBORD..............",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 18,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:FLUECHTLINGEANBORD@41",
+      "pattern": ".........................................FLUECHTLINGEANBORD.............",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 18,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:FLUECHTLINGEANBORD@43",
+      "pattern": "...........................................FLUECHTLINGEANBORD...........",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 18,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:FLUECHTLINGEANBORD@44",
+      "pattern": "............................................FLUECHTLINGEANBORD..........",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 18,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:FLUECHTLINGEANBORD@45",
+      "pattern": ".............................................FLUECHTLINGEANBORD.........",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 18,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:FLUECHTLINGEANBORD@48",
+      "pattern": "................................................FLUECHTLINGEANBORD......",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 18,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:FLUECHTLINGEANBORD@49",
+      "pattern": ".................................................FLUECHTLINGEANBORD.....",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 18,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:FLUECHTLINGEANBORD@5",
+      "pattern": ".....FLUECHTLINGEANBORD.................................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 18,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:FLUECHTLINGEANBORD@50",
+      "pattern": "..................................................FLUECHTLINGEANBORD....",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 18,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:FLUECHTLINGEANBORD@53",
+      "pattern": ".....................................................FLUECHTLINGEANBORD.",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 18,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:FLUECHTLINGEANBORD@6",
+      "pattern": "......FLUECHTLINGEANBORD................................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 18,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:regenbogen_scuttling:ALLEBOOTEVERSENKEN@10",
+      "pattern": "..........ALLEBOOTEVERSENKEN............................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:ALLEBOOTEVERSENKEN@11",
+      "pattern": "...........ALLEBOOTEVERSENKEN...........................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:ALLEBOOTEVERSENKEN@13",
+      "pattern": ".............ALLEBOOTEVERSENKEN.........................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:ALLEBOOTEVERSENKEN@14",
+      "pattern": "..............ALLEBOOTEVERSENKEN........................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:ALLEBOOTEVERSENKEN@16",
+      "pattern": "................ALLEBOOTEVERSENKEN......................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:ALLEBOOTEVERSENKEN@20",
+      "pattern": "....................ALLEBOOTEVERSENKEN..................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:ALLEBOOTEVERSENKEN@21",
+      "pattern": ".....................ALLEBOOTEVERSENKEN.................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:ALLEBOOTEVERSENKEN@23",
+      "pattern": ".......................ALLEBOOTEVERSENKEN...............................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:ALLEBOOTEVERSENKEN@25",
+      "pattern": ".........................ALLEBOOTEVERSENKEN.............................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:ALLEBOOTEVERSENKEN@26",
+      "pattern": "..........................ALLEBOOTEVERSENKEN............................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:ALLEBOOTEVERSENKEN@27",
+      "pattern": "...........................ALLEBOOTEVERSENKEN...........................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:ALLEBOOTEVERSENKEN@28",
+      "pattern": "............................ALLEBOOTEVERSENKEN..........................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:ALLEBOOTEVERSENKEN@29",
+      "pattern": ".............................ALLEBOOTEVERSENKEN.........................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:ALLEBOOTEVERSENKEN@3",
+      "pattern": "...ALLEBOOTEVERSENKEN...................................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:ALLEBOOTEVERSENKEN@30",
+      "pattern": "..............................ALLEBOOTEVERSENKEN........................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:ALLEBOOTEVERSENKEN@32",
+      "pattern": "................................ALLEBOOTEVERSENKEN......................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:ALLEBOOTEVERSENKEN@33",
+      "pattern": ".................................ALLEBOOTEVERSENKEN.....................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:ALLEBOOTEVERSENKEN@37",
+      "pattern": ".....................................ALLEBOOTEVERSENKEN.................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:ALLEBOOTEVERSENKEN@40",
+      "pattern": "........................................ALLEBOOTEVERSENKEN..............",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:ALLEBOOTEVERSENKEN@44",
+      "pattern": "............................................ALLEBOOTEVERSENKEN..........",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:ALLEBOOTEVERSENKEN@46",
+      "pattern": "..............................................ALLEBOOTEVERSENKEN........",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:ALLEBOOTEVERSENKEN@48",
+      "pattern": "................................................ALLEBOOTEVERSENKEN......",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:ALLEBOOTEVERSENKEN@49",
+      "pattern": ".................................................ALLEBOOTEVERSENKEN.....",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:ALLEBOOTEVERSENKEN@5",
+      "pattern": ".....ALLEBOOTEVERSENKEN.................................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:ALLEBOOTEVERSENKEN@6",
+      "pattern": "......ALLEBOOTEVERSENKEN................................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:ALLEBOOTEVERSENKEN@8",
+      "pattern": "........ALLEBOOTEVERSENKEN..............................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:VERSENKUNGBEFOHLEN@12",
+      "pattern": "............VERSENKUNGBEFOHLEN..........................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:VERSENKUNGBEFOHLEN@13",
+      "pattern": ".............VERSENKUNGBEFOHLEN.........................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:VERSENKUNGBEFOHLEN@14",
+      "pattern": "..............VERSENKUNGBEFOHLEN........................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:VERSENKUNGBEFOHLEN@17",
+      "pattern": ".................VERSENKUNGBEFOHLEN.....................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:VERSENKUNGBEFOHLEN@18",
+      "pattern": "..................VERSENKUNGBEFOHLEN....................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:VERSENKUNGBEFOHLEN@19",
+      "pattern": "...................VERSENKUNGBEFOHLEN...................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:VERSENKUNGBEFOHLEN@2",
+      "pattern": "..VERSENKUNGBEFOHLEN....................................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:VERSENKUNGBEFOHLEN@22",
+      "pattern": "......................VERSENKUNGBEFOHLEN................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:VERSENKUNGBEFOHLEN@23",
+      "pattern": ".......................VERSENKUNGBEFOHLEN...............................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:VERSENKUNGBEFOHLEN@27",
+      "pattern": "...........................VERSENKUNGBEFOHLEN...........................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:VERSENKUNGBEFOHLEN@3",
+      "pattern": "...VERSENKUNGBEFOHLEN...................................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:VERSENKUNGBEFOHLEN@30",
+      "pattern": "..............................VERSENKUNGBEFOHLEN........................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:VERSENKUNGBEFOHLEN@34",
+      "pattern": "..................................VERSENKUNGBEFOHLEN....................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:VERSENKUNGBEFOHLEN@35",
+      "pattern": "...................................VERSENKUNGBEFOHLEN...................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:VERSENKUNGBEFOHLEN@38",
+      "pattern": "......................................VERSENKUNGBEFOHLEN................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:VERSENKUNGBEFOHLEN@4",
+      "pattern": "....VERSENKUNGBEFOHLEN..................................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:VERSENKUNGBEFOHLEN@41",
+      "pattern": ".........................................VERSENKUNGBEFOHLEN.............",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:VERSENKUNGBEFOHLEN@42",
+      "pattern": "..........................................VERSENKUNGBEFOHLEN............",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:VERSENKUNGBEFOHLEN@43",
+      "pattern": "...........................................VERSENKUNGBEFOHLEN...........",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:VERSENKUNGBEFOHLEN@46",
+      "pattern": "..............................................VERSENKUNGBEFOHLEN........",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:VERSENKUNGBEFOHLEN@49",
+      "pattern": ".................................................VERSENKUNGBEFOHLEN.....",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:VERSENKUNGBEFOHLEN@51",
+      "pattern": "...................................................VERSENKUNGBEFOHLEN...",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:VERSENKUNGBEFOHLEN@52",
+      "pattern": "....................................................VERSENKUNGBEFOHLEN..",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:VERSENKUNGBEFOHLEN@53",
+      "pattern": ".....................................................VERSENKUNGBEFOHLEN.",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:VERSENKUNGBEFOHLEN@7",
+      "pattern": ".......VERSENKUNGBEFOHLEN...............................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 18,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@10",
+      "pattern": "..........SOFORTMELDENLAGE..............................................",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@11",
+      "pattern": "...........SOFORTMELDENLAGE.............................................",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@12",
+      "pattern": "............SOFORTMELDENLAGE............................................",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@13",
+      "pattern": ".............SOFORTMELDENLAGE...........................................",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@14",
+      "pattern": "..............SOFORTMELDENLAGE..........................................",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@15",
+      "pattern": "...............SOFORTMELDENLAGE.........................................",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@16",
+      "pattern": "................SOFORTMELDENLAGE........................................",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@17",
+      "pattern": ".................SOFORTMELDENLAGE.......................................",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@18",
+      "pattern": "..................SOFORTMELDENLAGE......................................",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@21",
+      "pattern": ".....................SOFORTMELDENLAGE...................................",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@23",
+      "pattern": ".......................SOFORTMELDENLAGE.................................",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@29",
+      "pattern": ".............................SOFORTMELDENLAGE...........................",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@31",
+      "pattern": "...............................SOFORTMELDENLAGE.........................",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@33",
+      "pattern": ".................................SOFORTMELDENLAGE.......................",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@34",
+      "pattern": "..................................SOFORTMELDENLAGE......................",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@35",
+      "pattern": "...................................SOFORTMELDENLAGE.....................",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@36",
+      "pattern": "....................................SOFORTMELDENLAGE....................",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@37",
+      "pattern": ".....................................SOFORTMELDENLAGE...................",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@39",
+      "pattern": ".......................................SOFORTMELDENLAGE.................",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@4",
+      "pattern": "....SOFORTMELDENLAGE....................................................",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@40",
+      "pattern": "........................................SOFORTMELDENLAGE................",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@41",
+      "pattern": ".........................................SOFORTMELDENLAGE...............",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@44",
+      "pattern": "............................................SOFORTMELDENLAGE............",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@45",
+      "pattern": ".............................................SOFORTMELDENLAGE...........",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@47",
+      "pattern": "...............................................SOFORTMELDENLAGE.........",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@48",
+      "pattern": "................................................SOFORTMELDENLAGE........",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@49",
+      "pattern": ".................................................SOFORTMELDENLAGE.......",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@50",
+      "pattern": "..................................................SOFORTMELDENLAGE......",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@52",
+      "pattern": "....................................................SOFORTMELDENLAGE....",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@54",
+      "pattern": "......................................................SOFORTMELDENLAGE..",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@6",
+      "pattern": "......SOFORTMELDENLAGE..................................................",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@7",
+      "pattern": ".......SOFORTMELDENLAGE.................................................",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:general_situation:SOFORTMELDENLAGE@9",
+      "pattern": ".........SOFORTMELDENLAGE...............................................",
+      "note": "Generic situation filler / general_situation",
+      "constrained": 16,
+      "prior": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@1",
+      "pattern": ".EINSCHIFFUNGHELA.......................................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@11",
+      "pattern": "...........EINSCHIFFUNGHELA.............................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@14",
+      "pattern": "..............EINSCHIFFUNGHELA..........................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@17",
+      "pattern": ".................EINSCHIFFUNGHELA.......................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@18",
+      "pattern": "..................EINSCHIFFUNGHELA......................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@2",
+      "pattern": "..EINSCHIFFUNGHELA......................................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@21",
+      "pattern": ".....................EINSCHIFFUNGHELA...................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@23",
+      "pattern": ".......................EINSCHIFFUNGHELA.................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@27",
+      "pattern": "...........................EINSCHIFFUNGHELA.............................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@28",
+      "pattern": "............................EINSCHIFFUNGHELA............................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@29",
+      "pattern": ".............................EINSCHIFFUNGHELA...........................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@3",
+      "pattern": "...EINSCHIFFUNGHELA.....................................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@32",
+      "pattern": "................................EINSCHIFFUNGHELA........................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@33",
+      "pattern": ".................................EINSCHIFFUNGHELA.......................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@34",
+      "pattern": "..................................EINSCHIFFUNGHELA......................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@35",
+      "pattern": "...................................EINSCHIFFUNGHELA.....................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@36",
+      "pattern": "....................................EINSCHIFFUNGHELA....................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@37",
+      "pattern": ".....................................EINSCHIFFUNGHELA...................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@39",
+      "pattern": ".......................................EINSCHIFFUNGHELA.................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@4",
+      "pattern": "....EINSCHIFFUNGHELA....................................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@40",
+      "pattern": "........................................EINSCHIFFUNGHELA................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@41",
+      "pattern": ".........................................EINSCHIFFUNGHELA...............",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@42",
+      "pattern": "..........................................EINSCHIFFUNGHELA..............",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@43",
+      "pattern": "...........................................EINSCHIFFUNGHELA.............",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@44",
+      "pattern": "............................................EINSCHIFFUNGHELA............",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@47",
+      "pattern": "...............................................EINSCHIFFUNGHELA.........",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@49",
+      "pattern": ".................................................EINSCHIFFUNGHELA.......",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@51",
+      "pattern": "...................................................EINSCHIFFUNGHELA.....",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@52",
+      "pattern": "....................................................EINSCHIFFUNGHELA....",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@53",
+      "pattern": ".....................................................EINSCHIFFUNGHELA...",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@55",
+      "pattern": ".......................................................EINSCHIFFUNGHELA.",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@6",
+      "pattern": "......EINSCHIFFUNGHELA..................................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@7",
+      "pattern": ".......EINSCHIFFUNGHELA.................................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:hela_baltic_evacuation:EINSCHIFFUNGHELA@9",
+      "pattern": ".........EINSCHIFFUNGHELA...............................................",
+      "note": "Hela / Ostpreussen evacuation / hela_baltic_evacuation",
+      "constrained": 16,
+      "prior": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "name": "body:regenbogen_scuttling:REGENBOGENBEFEHL@10",
+      "pattern": "..........REGENBOGENBEFEHL..............................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:REGENBOGENBEFEHL@12",
+      "pattern": "............REGENBOGENBEFEHL............................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:REGENBOGENBEFEHL@13",
+      "pattern": ".............REGENBOGENBEFEHL...........................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:REGENBOGENBEFEHL@14",
+      "pattern": "..............REGENBOGENBEFEHL..........................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:REGENBOGENBEFEHL@16",
+      "pattern": "................REGENBOGENBEFEHL........................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:REGENBOGENBEFEHL@18",
+      "pattern": "..................REGENBOGENBEFEHL......................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:REGENBOGENBEFEHL@19",
+      "pattern": "...................REGENBOGENBEFEHL.....................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:REGENBOGENBEFEHL@22",
+      "pattern": "......................REGENBOGENBEFEHL..................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:REGENBOGENBEFEHL@23",
+      "pattern": ".......................REGENBOGENBEFEHL.................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:REGENBOGENBEFEHL@24",
+      "pattern": "........................REGENBOGENBEFEHL................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:REGENBOGENBEFEHL@27",
+      "pattern": "...........................REGENBOGENBEFEHL.............................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:REGENBOGENBEFEHL@3",
+      "pattern": "...REGENBOGENBEFEHL.....................................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:REGENBOGENBEFEHL@31",
+      "pattern": "...............................REGENBOGENBEFEHL.........................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:REGENBOGENBEFEHL@32",
+      "pattern": "................................REGENBOGENBEFEHL........................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:REGENBOGENBEFEHL@33",
+      "pattern": ".................................REGENBOGENBEFEHL.......................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:REGENBOGENBEFEHL@35",
+      "pattern": "...................................REGENBOGENBEFEHL.....................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:REGENBOGENBEFEHL@38",
+      "pattern": "......................................REGENBOGENBEFEHL..................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:REGENBOGENBEFEHL@40",
+      "pattern": "........................................REGENBOGENBEFEHL................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:REGENBOGENBEFEHL@43",
+      "pattern": "...........................................REGENBOGENBEFEHL.............",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:REGENBOGENBEFEHL@45",
+      "pattern": ".............................................REGENBOGENBEFEHL...........",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:REGENBOGENBEFEHL@46",
+      "pattern": "..............................................REGENBOGENBEFEHL..........",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:REGENBOGENBEFEHL@47",
+      "pattern": "...............................................REGENBOGENBEFEHL.........",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:REGENBOGENBEFEHL@48",
+      "pattern": "................................................REGENBOGENBEFEHL........",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:REGENBOGENBEFEHL@51",
+      "pattern": "...................................................REGENBOGENBEFEHL.....",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:REGENBOGENBEFEHL@52",
+      "pattern": "....................................................REGENBOGENBEFEHL....",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:REGENBOGENBEFEHL@53",
+      "pattern": ".....................................................REGENBOGENBEFEHL...",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:REGENBOGENBEFEHL@56",
+      "pattern": "........................................................REGENBOGENBEFEHL",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:REGENBOGENBEFEHL@8",
+      "pattern": "........REGENBOGENBEFEHL................................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:SELBSTVERSENKUNG@12",
+      "pattern": "............SELBSTVERSENKUNG............................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:SELBSTVERSENKUNG@13",
+      "pattern": ".............SELBSTVERSENKUNG...........................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:SELBSTVERSENKUNG@14",
+      "pattern": "..............SELBSTVERSENKUNG..........................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:SELBSTVERSENKUNG@16",
+      "pattern": "................SELBSTVERSENKUNG........................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:SELBSTVERSENKUNG@17",
+      "pattern": ".................SELBSTVERSENKUNG.......................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:SELBSTVERSENKUNG@21",
+      "pattern": ".....................SELBSTVERSENKUNG...................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:SELBSTVERSENKUNG@23",
+      "pattern": ".......................SELBSTVERSENKUNG.................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:SELBSTVERSENKUNG@24",
+      "pattern": "........................SELBSTVERSENKUNG................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:SELBSTVERSENKUNG@28",
+      "pattern": "............................SELBSTVERSENKUNG............................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:SELBSTVERSENKUNG@29",
+      "pattern": ".............................SELBSTVERSENKUNG...........................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:SELBSTVERSENKUNG@30",
+      "pattern": "..............................SELBSTVERSENKUNG..........................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:SELBSTVERSENKUNG@31",
+      "pattern": "...............................SELBSTVERSENKUNG.........................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:SELBSTVERSENKUNG@32",
+      "pattern": "................................SELBSTVERSENKUNG........................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:SELBSTVERSENKUNG@33",
+      "pattern": ".................................SELBSTVERSENKUNG.......................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:SELBSTVERSENKUNG@35",
+      "pattern": "...................................SELBSTVERSENKUNG.....................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:SELBSTVERSENKUNG@36",
+      "pattern": "....................................SELBSTVERSENKUNG....................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:SELBSTVERSENKUNG@37",
+      "pattern": ".....................................SELBSTVERSENKUNG...................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:SELBSTVERSENKUNG@40",
+      "pattern": "........................................SELBSTVERSENKUNG................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:SELBSTVERSENKUNG@45",
+      "pattern": ".............................................SELBSTVERSENKUNG...........",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:SELBSTVERSENKUNG@48",
+      "pattern": "................................................SELBSTVERSENKUNG........",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:SELBSTVERSENKUNG@52",
+      "pattern": "....................................................SELBSTVERSENKUNG....",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:SELBSTVERSENKUNG@54",
+      "pattern": "......................................................SELBSTVERSENKUNG..",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:SELBSTVERSENKUNG@56",
+      "pattern": "........................................................SELBSTVERSENKUNG",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:SELBSTVERSENKUNG@6",
+      "pattern": "......SELBSTVERSENKUNG..................................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    },
+    {
+      "name": "body:regenbogen_scuttling:SELBSTVERSENKUNG@7",
+      "pattern": ".......SELBSTVERSENKUNG.................................................",
+      "note": "Regenbogen scuttling variants / regenbogen_scuttling",
+      "constrained": 16,
+      "prior": "regenbogen_scuttling",
+      "tier": "02_scuttle"
+    }
+  ]
+}

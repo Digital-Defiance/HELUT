@@ -1,0 +1,33 @@
+---
+inclusion: always
+---
+# HELUT videos sync (MuleinLabs)
+
+Remotion scripts live **outside** this repo:
+`/Volumes/Code/MuleinLabs/helut-videos` (GitHub: JessicaMulein/MuleinLabs `helut-videos/`).
+They lag the claim sheet unless you update them in the **same turn** as the science.
+
+**Trigger:** you add or change a **C** / **H** / **N** row that any episode voiceover,
+bullet, or YouTube description asserts (especially hardness **H1**/**C23**, noisy BK
+**H4**/**C22**/**C26**–**C30**, covering **C27**/**C29**, Metal SING **C20**/**C21**,
+TensorLUT **C19**, campaign **N5**), or you bump `\livingepoch` in
+`textbook/preamble.tex`.
+
+**Then, same turn:**
+1. Diff `directives/claim-sheet.md` (and `\livingepoch`) against
+   `claimEpoch` in each
+   `/Volumes/Code/MuleinLabs/helut-videos/scripts/episodes/*.json`.
+   Sheet / `\livingepoch` wins.
+2. Patch the mismatched episode JSON voiceovers + on-screen bullets so they
+   pass the Five-Cell Test (no lecture-voice invents). Ep03 TensorLUT usually
+   only moves on **C19**/involution grades.
+3. Set every touched episode’s `claimEpoch` to match `\livingepoch`
+   (`YYYY-MM-DD / C<n>`).
+4. Do **not** re-render or burn ElevenLabs until the author asks — update
+   scripts only. After VO changes, remind: `npm run tts -- --stale` in
+   `helut-videos` before the next render.
+5. If HELUT and MuleinLabs disagree, **claim-sheet wins**; videos are a teaching
+   surface, not a second corpus.
+
+Contract: `MuleinLabs/helut-videos/README.md` § Living sync.
+Textbook remains `.cursor/rules/living-textbook.mdc` (separate surface).

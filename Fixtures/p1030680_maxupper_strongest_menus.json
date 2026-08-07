@@ -1,0 +1,115 @@
+{
+  "target": "P1030680",
+  "ciphertext": "JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF",
+  "note": "Strongest + diverse placements for FULL middle x right ring coverage. Part one: contaminated spans that could exceed the old Metal MAX_UPPER=4 cap, which reported such lanes ELIMINATED without testing them. Part two: high-loop uncontaminated placements, so the middle-ring arm (the only key space no arm has ever tested) is spent on several hypotheses rather than many alignments of one. Alignments per source phrase are capped. Emitted by Scripts/max_upper_audit.py --emit-top.",
+  "cribs": [
+    {
+      "text": "NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE",
+      "messages": 0,
+      "offsets": [
+        18,
+        21
+      ]
+    },
+    {
+      "text": "FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN",
+      "messages": 0,
+      "offsets": [
+        19,
+        22
+      ]
+    },
+    {
+      "text": "UNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENG",
+      "messages": 0,
+      "offsets": [
+        20,
+        23
+      ]
+    },
+    {
+      "text": "NFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENGE",
+      "messages": 0,
+      "offsets": [
+        21
+      ]
+    },
+    {
+      "text": "LAUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIRO",
+      "messages": 0,
+      "offsets": [
+        10,
+        17
+      ]
+    },
+    {
+      "text": "AUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIROT",
+      "messages": 0,
+      "offsets": [
+        11
+      ]
+    },
+    {
+      "text": "UUUFUNFDREIVIERKKNOLLAUKK",
+      "messages": 0,
+      "offsets": [
+        25,
+        27
+      ]
+    },
+    {
+      "text": "DMXUUUBOOTEYFXDXUUUAUSB",
+      "messages": 0,
+      "offsets": [
+        8,
+        31
+      ]
+    },
+    {
+      "text": "ZPKTXWWWHAVENXXFFFTTT",
+      "messages": 0,
+      "offsets": [
+        25,
+        50
+      ]
+    },
+    {
+      "text": "TGEANKERTXFFFTTTBLEIB",
+      "messages": 0,
+      "offsets": [
+        24,
+        37
+      ]
+    },
+    {
+      "text": "UUUFUNFDREIVIERKKNO",
+      "messages": 0,
+      "offsets": [
+        27
+      ]
+    },
+    {
+      "text": "ULDREIYZWODREISECHSEINS",
+      "messages": 0,
+      "offsets": [
+        12,
+        16
+      ]
+    },
+    {
+      "text": "VVVUUUDREINULEINSVI",
+      "messages": 0,
+      "offsets": [
+        40
+      ]
+    },
+    {
+      "text": "UUUVIRSIBENNULEINS",
+      "messages": 0,
+      "offsets": [
+        40,
+        44
+      ]
+    }
+  ]
+}

@@ -1,0 +1,160 @@
+\chapter{Laboratories}
+\label{ch:lab}
+
+Systems-track labs assume macOS 14$+$, Apple Silicon, Swift 6.3, and a
+release \texttt{helut} at repo root:
+\texttt{swift build -c release --product helut}.
+Theory-track substitutes are stated per lab.
+
+\section{Lab 0 --- Claim literacy (everyone)}
+
+Read \corpus{directives/claim-sheet.md} at the printed epoch.
+Classify five public sentences (instructor-provided) as \claimkind{C}, \claimkind{H},
+\claimkind{N}, or frontier.
+No machine required.
+
+\section{Lab 1 --- Negacyclic oracle}
+
+Implement $N=8$ schoolbook mul in $\mathbb{Z}/2^{32}\mathbb{Z}[X]/(X^N+1)$
+and check a dense Toeplitz expansion against it on torus corners.
+Theory track: $N=4$ by hand (Chapter~\ref{ch:torus} exercises).
+
+\section{Lab 2 --- Netlist clock}
+
+Compile the checked-in \texttt{counter} or \texttt{full\_adder} Yosys JSON
+from \corpus{Generated/} with \texttt{--compile-only}. If you re-synthesize an
+authored source from \corpus{Hardware/}, write the disposable JSON below
+\corpus{build/hardware/}; do not overwrite a root compatibility file.
+Tick with \texttt{--bench}. Identify $B$, $N$, LUT count, DFF count.
+Explain in writing why $N$ is not the circuit size.
+
+\section{Lab 3 --- Boolean oracle versus FHE path}
+
+\begin{lstlisting}
+.build/release/helut --bench Generated/Netlists/Examples/netlist.json --degree 64 \
+  --lut-backend pbs --encoding phase --bench-equiv
+.build/release/helut --bench Generated/Netlists/Examples/netlist.json --degree 8 \
+  --bench-encrypted --cpu-only --sing --vectors 8
+.build/release/helut --bench Generated/Netlists/Examples/counter_netlist.json --degree 8 \
+  --bench-encrypted --cpu-only --sing --vectors 8
+.build/release/helut --bench Generated/Netlists/Examples/toy_isa_netlist.json --degree 8 \
+  --bench-encrypted --cpu-only --sing --vectors 32
+.build/release/helut --bench Generated/Netlists/PicoRV32/picorv32_netlist.json --degree 8 \
+  --bench-encrypted --cpu-only --sing --ticks 48 --reset-hold 3 \
+  --encrypted-mem prog --paths 'blind-rotate public-ms boolean'
+\end{lstlisting}
+
+Deliverable: a table with columns \{backend, $N$, SING, certificates
+printed, may we say ``encrypted'' on a slide?\}.
+
+\section{Lab 4 --- Production-shaped SING}
+
+\reproduced{C6}{full\_adder encrypted SING through $N=1024$ (the result that
+closed \hid{2}).}
+
+Follow Appendix~\ref{app:repro}. Record ms/row at $N=8$ and $N=1024$.
+Write the \hid{1} asterisk next to hardness.
+Write the \hid{4} asterisk next to depth: covering Track~A Grade~B is
+\cid{52}--\cid{54}; $e{=}0$ BK is still the default noiseless SING;
+native $k{=}1$ / \texttt{cryptoPublicMS} / PicoRV covering remain.
+
+Theory track: parse a published SING log and reconstruct the table
+without running Metal.
+
+\section{Lab 4b --- Measured noisy BK (\cid{22})}
+
+\begin{lstlisting}
+.build/release/helut --measure-bk-noise --degree 8 \
+  --trials 8 --bk-noise 64
+\end{lstlisting}
+
+Deliverable: $B_{\mathrm{bk}}$, $\hat\sigma$, $\delta/2$, and one sentence
+on why $\ell=1$ \texttt{booleanPublicMS} is omitted.
+Theory track: read \corpus{logs/helut-noisy-bk-measure.log}.
+Optional: parse a \cid{52} covering log at $N{=}1024$ and name the three
+\hid{4} remainders (\cid{37}/\cid{55}, \cid{26}/\cid{56}, PicoRV covering).
+
+\section{Lab 5 --- Metal compiler post-mortem}
+
+Compare fused-megagraph DNF, \cid{16}--\cid{21} using
+Chapter~\ref{ch:metal}'s table.
+Optional systems: \texttt{make test-metal-p1} and one
+\texttt{--bench-encrypted-micro --degree 64} run.
+Deliverable: the \hid{3} paragraph in your own words (scheduler vs NTT).
+
+\section{Lab 6 --- TensorLUT Theorem 1 (\cid{19})}
+
+\begin{lstlisting}
+swift test -c release --filter testTensorLUTFormalCertificate
+\end{lstlisting}
+
+Deliverable: name the six lemmas, the certificate hypotheses, and one
+sentence that Theorem~\ref{thm:tensorlut} does \emph{not} prove.
+Optional: \texttt{testTensorLUTMeltFreezeSnapCertificate} (\cid{44}) ---
+what class of INIT genomes the unique-maximizer lemma covers.
+Theory track, no Swift and no Mac: \texttt{python3 Scripts/toy\_cipher\_demo.py}
+for the smallest worked example, then
+\texttt{python3 Scripts/tensorlut\_math\_ref.py};
+read \corpus{directives/theorem-1-plain.md} and
+\corpus{directives/tensorlut-theorem.md}; reconstruct the five-cell card.
+Both scripts are executable checks, not machine-checked proofs.
+
+\section{Lab 7 --- Five-cell audit (everyone)}
+
+The signature assignment (Chapter~\ref{ch:instructor}).
+One abstract sentence from \corpus{paper/helut.tex}; five cells; a
+pass/fail on whether the sentence is lecture-safe at this epoch.
+
+\section{Lab 8 --- Frontier proposal (everyone)}
+
+Chapter~\ref{ch:frontier}: pick one avenue. Propose the first experiment
+that would mint a \claimkind{C} row. You may not claim the avenue works.
+
+\section{\texorpdfstring{Lab 9 --- Run it five times}{Lab 9 --- Run it five times}}
+\label{sec:lab-repeat}
+
+Every measurement in this corpus began as a single observation. This lab is about
+what that costs, and it needs no Apple hardware for the first half.
+
+\begin{enumerate}[itemsep=2pt]
+  \item Pick any timing in \corpus{directives/claim-sheet.md}. Re-run it five
+        times with \corpus{Scripts/bench\_repeat.py} and report min, median,
+        max and relative spread. Was the archived figure a median, or a best
+        case?
+  \item Run the same command once on a cold cache and once warm. On the machine
+        these claims were measured, one row moved by $2.4\times$ between the two.
+        Which of the two numbers belongs in a paper?
+  \item Now take a row whose claim is a \emph{failure}. Run it five times.
+        Report whether the failure is deterministic. A negative that reproduces
+        three times in five is a different scientific object from one that
+        reproduces five times in five --- name the difference in one sentence.
+  \item Read \corpus{logs/leeloo/prefix-vs-postfix.md}. Two rows changed
+        stability after a one-line source fix. Explain why running each row once
+        could never have found that, no matter how carefully the code was
+        reviewed.
+\end{enumerate}
+
+Deliverable: a table of \{row, archived figure, median of 5, spread, verdict\}
+and one paragraph on which archived numbers you would now decline to quote.
+
+\begin{warning}
+The harness refuses to start if another benchmark is already running, and that
+refusal is load-bearing rather than fussy: one benchmark on a sixteen-core
+machine is about $26\%$ per core, well under any sane load threshold, yet it
+contends for the GPU and memory bandwidth and will skew every number in a
+concurrent sweep. A build is worse --- it replaces the binary underneath a
+running sweep.
+\end{warning}
+
+\growswhen{Negative-stability results exist for the \cid{60}/\cid{61} rows, so
+students can compare a deterministic negative against an intermittent one on real
+data.}
+
+\section{Optional project slots}
+
+TensorLUT involution sandwich replay (\cid{9} logs), E256 invariant
+studio, or a new Yosys netlist (student RTL $\to$ SING).
+Instructor approval required; campaign decrypt projects are out of scope.
+
+\growswhen{Autograded SING harnesses for course VMs; a Dockerized theory
+track; non-Apple ring-oracle labs.}

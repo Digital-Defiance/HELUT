@@ -1,0 +1,432 @@
+{
+  "deterministic_payload": {
+    "coverage": {
+      "executed_variant_ids": [
+        "identity",
+        "xor_only",
+        "fixed",
+        "offset",
+        "offset_alt",
+        "affine",
+        "table"
+      ],
+      "frozen_prediction_ids": [
+        "P1",
+        "P2",
+        "P3",
+        "P7",
+        "P4",
+        "P5",
+        "P6",
+        "P8"
+      ],
+      "frozen_variant_ids": [
+        "identity",
+        "xor_only",
+        "fixed",
+        "offset",
+        "offset_alt",
+        "affine",
+        "table"
+      ],
+      "graded_prediction_ids": [
+        "P1",
+        "P2",
+        "P3",
+        "P7",
+        "P4",
+        "P5",
+        "P6",
+        "P8"
+      ],
+      "syntheses_executed": 7,
+      "variant_coverage_exact": true
+    },
+    "functional": {
+      "checks_per_variant": 256,
+      "equivalence_obligations": [
+        "offset output equals affine output when both matrices are the identity",
+        "table output equals affine output on all 256 inputs",
+        "offset_alt output equals offset output on all 256 inputs"
+      ],
+      "executed_checks": 1792,
+      "expected_checks": 1792,
+      "failures": 0,
+      "pass": true
+    },
+    "inputs": {
+      "aes_sbox_sha256": "c2d8e5eed6cbebd8625fc18f81486a7733c04f9b0129ffbe974c68b90308b4f2",
+      "architecture_contract_sha256": "b64472f73be9d0fc6318ff445c5f550cb0129309313228f416599c27d3957bb1",
+      "architecture_record": "directives/e256-hardware-architecture.md",
+      "iverilog_version": "Icarus Verilog version 13.0 (stable) (v13_0)",
+      "predecessor_payload_sha256": "21758ce220b9da469a18ea617fa7b2fd41e906add69a258f830b12843e3e495b",
+      "predecessor_receipt": "logs/e256-wide-state-gate.json",
+      "preregistration": "directives/e256-hardware-cost-preregistration.json",
+      "preregistration_sha256": "cbaa5b02ca71824866d857edda838d97ceca0816bed5f5af334d8625db336e27",
+      "rtl": "Hardware/RTL/Research/E256H/e256h_cost_lanes.v",
+      "rtl_sha256": "ea0d3201dc911b60c84e56065eae27cb0416b37ce837377bf7756a7ed7098996",
+      "runner": "Scripts/e256_hardware_cost_gate.py",
+      "runner_sha256": "05b4da78d010c6e97ba48ab1dd92a5640982cb6a0b159a62d9d3cafaf37915c5",
+      "testbench": "Hardware/Testbenches/Research/E256H/e256h_cost_lanes_tb.v",
+      "testbench_sha256": "c192645270b09a6ea5e3c4948e91de5d2c85c504db9bafe33f25f42b8f9f745a",
+      "yosys_version": "Yosys 0.68+post (git sha1 c12172fbae8af5e20f6fb52e3d4e92d56ed587b6, Release, AppleClang clang++ 21.0.0.21000101)"
+    },
+    "interpretation": {
+      "harness_valid": true,
+      "harness_validity_checks": {
+        "frozen_contract_validated": true,
+        "functional_verification_pass": true,
+        "validity_controls_pass": true,
+        "variant_coverage_exact": true
+      },
+      "internal_invalid_status": "INVALID_COST_HARNESS; never emitted or accepted as the canonical receipt",
+      "next": "A supported result promotes H3 from proposal to measured default and licenses the H4/H5 structural re-certification. It does not license production RTL or a round count.",
+      "production_boundary": "Reviewed standard AEAD remains the production boundary; AEAD-only remains a valid final outcome.",
+      "production_keying_scheme": null,
+      "production_round_count": null,
+      "scope": "one combinational byte lane only; the 32-lane round, register budget, schedule, and mode are not measured here",
+      "structural_certificates_unaffected": "MDS, branch number, DDT/LAT, degree, and dependency certificates come from E256-062 and are untouched by any cost figure here.",
+      "verdict": "H3_OFFSET_KEYING_SUPPORTED"
+    },
+    "limitations": [
+      "LUT6 counts are yosys/ABC generic mapping artifacts, not vendor place-and-route, not gate equivalents, and not ASIC area.",
+      "No timing closure, Fmax, power, energy, TVLA, EM, or fault result is produced.",
+      "Constant-latency combinational logic is not side-channel resistance.",
+      "Only marginal keying cost is compared; the absolute S-box cost reflects a truth-table description, not an optimized tower-field circuit.",
+      "Keying cost is measured with hierarchy preserved. A flattened, globally optimized implementation will not reproduce these numbers, and the ratios are properties of this flow rather than of silicon.",
+      "LUT6 ratios do not transfer to ASIC gate equivalents; the hand estimate in the architecture record put programmable-affine wrappers at 3-5x an optimized tower-field S-box, which a 6-LUT fabric does not reproduce.",
+      "Register and parameter-storage budgets under H2 are not measured by this gate.",
+      "A cheaper lane is not a stronger lane; no structural or security certificate is affected by any figure here.",
+      "This RTL is a non-production cost model and is not a specification, suite, profile, or fixture.",
+      "No C/H/N row, E256 finding, suite, profile, fixture, or release gate closes here, and reviewed standard AEAD remains mandatory for real data."
+    ],
+    "measurements": {
+      "depth_by_variant": {
+        "affine": 5,
+        "fixed": 1,
+        "identity": 0,
+        "offset": 3,
+        "offset_alt": 3,
+        "table": 5,
+        "xor_only": 1
+      },
+      "executed_ids": [
+        "identity",
+        "xor_only",
+        "fixed",
+        "offset",
+        "offset_alt",
+        "affine",
+        "table"
+      ],
+      "frozen_ids": [
+        "identity",
+        "xor_only",
+        "fixed",
+        "offset",
+        "offset_alt",
+        "affine",
+        "table"
+      ],
+      "ids_exact": true,
+      "keying_lut6_by_variant": {
+        "affine": 64,
+        "fixed": 0,
+        "identity": 0,
+        "offset": 16,
+        "offset_alt": 16,
+        "table": 700,
+        "xor_only": 8
+      },
+      "keying_lut6_ratio_over_offset": {
+        "affine": 4.0,
+        "table": 43.75
+      },
+      "records": [
+        {
+          "id": "identity",
+          "keyed_bits": 0,
+          "keying_lut6": 0,
+          "local_cell_types": {},
+          "local_cells": 0,
+          "longest_topological_path": 0,
+          "memory_bits": 0,
+          "module": "e256h_cost_identity",
+          "role": "calibration_control",
+          "shared_sbox_lut6": 0,
+          "total_lut6": 0
+        },
+        {
+          "id": "xor_only",
+          "keyed_bits": 8,
+          "keying_lut6": 8,
+          "local_cell_types": {
+            "$lut": 8
+          },
+          "local_cells": 8,
+          "longest_topological_path": 1,
+          "memory_bits": 0,
+          "module": "e256h_cost_xor_only",
+          "role": "calibration_control",
+          "shared_sbox_lut6": 0,
+          "total_lut6": 8
+        },
+        {
+          "id": "fixed",
+          "keyed_bits": 0,
+          "keying_lut6": 0,
+          "local_cell_types": {},
+          "local_cells": 0,
+          "longest_topological_path": 1,
+          "memory_bits": 0,
+          "module": "e256h_cost_fixed",
+          "role": "baseline",
+          "shared_sbox_lut6": 49,
+          "total_lut6": 49
+        },
+        {
+          "id": "offset",
+          "keyed_bits": 16,
+          "keying_lut6": 16,
+          "local_cell_types": {
+            "$lut": 16
+          },
+          "local_cells": 16,
+          "longest_topological_path": 3,
+          "memory_bits": 0,
+          "module": "e256h_cost_offset",
+          "role": "candidate",
+          "shared_sbox_lut6": 49,
+          "total_lut6": 65
+        },
+        {
+          "id": "offset_alt",
+          "keyed_bits": 16,
+          "keying_lut6": 16,
+          "local_cell_types": {
+            "$lut": 16
+          },
+          "local_cells": 16,
+          "longest_topological_path": 3,
+          "memory_bits": 0,
+          "module": "e256h_cost_offset_alt",
+          "role": "metric_stability_control",
+          "shared_sbox_lut6": 49,
+          "total_lut6": 65
+        },
+        {
+          "id": "affine",
+          "keyed_bits": 144,
+          "keying_lut6": 64,
+          "local_cell_types": {
+            "$lut": 64
+          },
+          "local_cells": 64,
+          "longest_topological_path": 5,
+          "memory_bits": 0,
+          "module": "e256h_cost_affine",
+          "role": "incumbent",
+          "shared_sbox_lut6": 49,
+          "total_lut6": 113
+        },
+        {
+          "id": "table",
+          "keyed_bits": 2048,
+          "keying_lut6": 700,
+          "local_cell_types": {
+            "$lut": 700
+          },
+          "local_cells": 700,
+          "longest_topological_path": 5,
+          "memory_bits": 0,
+          "module": "e256h_cost_table",
+          "role": "h1_violation_comparator",
+          "shared_sbox_lut6": 0,
+          "total_lut6": 700
+        }
+      ],
+      "shared_sbox_lut6": 49,
+      "shared_sbox_lut6_constant_across_variants": true
+    },
+    "pinned_parameters": {
+      "affine_table_sha256": "7b84f8f1875819680e1e0e5aa0d01f6e56ab5fe96dc3eb4c4bcdb48dd93ca06b",
+      "depth_metric": "length reported by ltp -noff for the top module in the mapped netlist",
+      "fixed_table_sha256": "c2d8e5eed6cbebd8625fc18f81486a7733c04f9b0129ffbe974c68b90308b4f2",
+      "flatten_prohibited": "`flatten` must not appear. Flattening lets ABC re-synthesize the shared S-box together with the keying logic, which destroys the structural boundary the marginal measurement depends on and makes the metric description-sensitive.",
+      "graded_constraints": [
+        "H0",
+        "H1",
+        "H2",
+        "H3",
+        "H7"
+      ],
+      "keying_lut6_metric": "the local $lut count reported by stat for the top module, which excludes submodules and is therefore exactly the keying overhead added around the shared S-box; absent means zero",
+      "offset_p_in": 196,
+      "offset_p_out": 208,
+      "offset_table_sha256": "62bc84544d4dce04807c944897228985b10f738b32de9178989c654ce363bc73",
+      "rotor_c_in": 196,
+      "rotor_c_out": 208,
+      "rotor_matrix_in": [
+        232,
+        190,
+        159,
+        211,
+        124,
+        163,
+        145,
+        120
+      ],
+      "rotor_matrix_out": [
+        213,
+        152,
+        31,
+        30,
+        45,
+        104,
+        108,
+        242
+      ],
+      "shared_sbox_lut6_metric": "the local $lut count reported by stat for e256h_aes_sbox in the same run",
+      "synthesis_script": "read_verilog Hardware/RTL/Research/E256H/e256h_cost_lanes.v; hierarchy -check -top <module>; proc; memory; opt; techmap; opt; dffunmap; zinit -all; abc -lut 6; opt_clean; check -assert; stat; ltp -noff",
+      "variants": [
+        {
+          "function": "y = x",
+          "id": "identity",
+          "keyed_bits": 0,
+          "module": "e256h_cost_identity",
+          "role": "calibration_control"
+        },
+        {
+          "function": "y = x XOR p_in",
+          "id": "xor_only",
+          "keyed_bits": 8,
+          "module": "e256h_cost_xor_only",
+          "role": "calibration_control"
+        },
+        {
+          "function": "y = SBOX(x)",
+          "id": "fixed",
+          "keyed_bits": 0,
+          "module": "e256h_cost_fixed",
+          "role": "baseline"
+        },
+        {
+          "function": "y = SBOX(x XOR p_in) XOR p_out",
+          "id": "offset",
+          "keyed_bits": 16,
+          "module": "e256h_cost_offset",
+          "role": "candidate"
+        },
+        {
+          "function": "identical to offset, written with per-bit loops instead of byte expressions",
+          "id": "offset_alt",
+          "keyed_bits": 16,
+          "module": "e256h_cost_offset_alt",
+          "role": "metric_stability_control"
+        },
+        {
+          "function": "y = L_out(SBOX(L_in(x) XOR c_in)) XOR c_out with runtime matrices",
+          "id": "affine",
+          "keyed_bits": 144,
+          "module": "e256h_cost_affine",
+          "role": "incumbent"
+        },
+        {
+          "function": "y = tbl[x], runtime-loaded 256-entry lookup computing the same function as affine",
+          "id": "table",
+          "keyed_bits": 2048,
+          "module": "e256h_cost_table",
+          "role": "h1_violation_comparator"
+        }
+      ]
+    },
+    "predictions": {
+      "outcomes": {
+        "P1": {
+          "observed": 0,
+          "pass": true,
+          "role": "validity_control",
+          "statement": "identity keying_lut6 is exactly 0"
+        },
+        "P2": {
+          "observed": 8,
+          "pass": true,
+          "role": "validity_control",
+          "statement": "xor_only keying_lut6 is at most 8"
+        },
+        "P3": {
+          "observed": {
+            "offset_alt_depth": 3,
+            "offset_alt_keying_lut6": 16,
+            "offset_depth": 3,
+            "offset_keying_lut6": 16
+          },
+          "pass": true,
+          "role": "validity_control",
+          "statement": "offset_alt equals offset in keying_lut6 and depth"
+        },
+        "P4": {
+          "observed": {
+            "affine_keying_lut6": 64,
+            "offset_keying_lut6": 16,
+            "ratio": 4.0
+          },
+          "pass": true,
+          "role": "graded_finding",
+          "statement": "affine keying_lut6 is at least 4x offset keying_lut6"
+        },
+        "P5": {
+          "observed": {
+            "shared_sbox_lut6": 49,
+            "table_keying_lut6": 700
+          },
+          "pass": true,
+          "role": "graded_finding",
+          "statement": "table keying_lut6 exceeds the shared S-box cost"
+        },
+        "P6": {
+          "observed": 16,
+          "pass": true,
+          "role": "graded_finding",
+          "statement": "offset keying_lut6 is at most 32"
+        },
+        "P7": {
+          "observed": {
+            "fixed_keying_lut6": 0,
+            "shared_sbox_lut6": 49
+          },
+          "pass": true,
+          "role": "validity_control",
+          "statement": "fixed keying_lut6 is 0 and its shared S-box cost is positive"
+        },
+        "P8": {
+          "observed": {
+            "affine_depth": 5,
+            "offset_depth": 3
+          },
+          "pass": true,
+          "role": "graded_finding",
+          "statement": "offset depth is strictly less than affine depth"
+        }
+      },
+      "validity_control_ids": [
+        "P1",
+        "P2",
+        "P3",
+        "P7"
+      ],
+      "validity_controls_pass": true
+    },
+    "schema": "E256-HARDWARE-COST-GATE-1",
+    "status": "OPEN_PROGRESS"
+  },
+  "deterministic_payload_sha256": "a10e001ad2c2b3de55fcc80197c059f166d5e55599c670e20b01de8f6b7d323d",
+  "environment_advisory_excluded_from_digest": {
+    "elapsed_seconds_single_run_not_a_claim": 3.17,
+    "git_dirty": true,
+    "git_head": "a8e192a446ce2efca73998fdb54c7e1c44bd7579",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "python": "3.9.6"
+  },
+  "no_wall_clock": "No wall-clock timestamp is asserted; only deterministic inputs and outputs are graded."
+}

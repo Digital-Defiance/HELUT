@@ -1,0 +1,505 @@
+{
+  "target": "P1030680",
+  "ciphertext": "JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF",
+  "note": "Placements whose spans could exceed the old Metal MAX_UPPER=4 slow-state cap, which reported such lanes ELIMINATED without testing them. Prior clean negatives on these placements are incomplete by up to 5.56% of lanes and must be re-run on the corrected kernel. Emitted by Scripts/max_upper_audit.py --emit.",
+  "cribs": [
+    {
+      "text": "LAUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIRO",
+      "messages": 2,
+      "offsets": [
+        0,
+        1,
+        10,
+        17,
+        21,
+        22,
+        26,
+        27,
+        30
+      ]
+    },
+    {
+      "text": "AUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIROT",
+      "messages": 2,
+      "offsets": [
+        1,
+        2,
+        11,
+        18,
+        22,
+        23,
+        27,
+        28,
+        31
+      ]
+    },
+    {
+      "text": "UKKANANFUNFUUUFLOTTXNULEINSZWONULBEIROTN",
+      "messages": 2,
+      "offsets": [
+        0,
+        2,
+        3,
+        5,
+        12,
+        19,
+        23,
+        24,
+        28,
+        29,
+        32
+      ]
+    },
+    {
+      "text": "KKANANFUNFUUUFLOTTXNULEINSZWONULBEIROTNU",
+      "messages": 2,
+      "offsets": [
+        1,
+        3,
+        4,
+        6,
+        13,
+        20,
+        24,
+        25,
+        29,
+        30
+      ]
+    },
+    {
+      "text": "KANANFUNFUUUFLOTTXNULEINSZWONULBEIROTNUL",
+      "messages": 2,
+      "offsets": [
+        0,
+        2,
+        4,
+        5,
+        7,
+        14,
+        17,
+        21,
+        25,
+        26,
+        30,
+        31
+      ]
+    },
+    {
+      "text": "ANANFUNFUUUFLOTTXNULEINSZWONULBEIROTNULS",
+      "messages": 2,
+      "offsets": [
+        0,
+        1,
+        3,
+        5,
+        6,
+        8,
+        15,
+        18,
+        22,
+        26,
+        31,
+        32
+      ]
+    },
+    {
+      "text": "NANFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSI",
+      "messages": 2,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        6,
+        7,
+        9,
+        16,
+        19,
+        23,
+        27,
+        32
+      ]
+    },
+    {
+      "text": "ANFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIB",
+      "messages": 2,
+      "offsets": [
+        1,
+        2,
+        3,
+        5,
+        17,
+        20,
+        24,
+        28
+      ]
+    },
+    {
+      "text": "NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE",
+      "messages": 2,
+      "offsets": [
+        2,
+        3,
+        4,
+        6,
+        18,
+        21,
+        25,
+        29
+      ]
+    },
+    {
+      "text": "FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN",
+      "messages": 2,
+      "offsets": [
+        3,
+        4,
+        5,
+        7,
+        19,
+        22,
+        26,
+        30
+      ]
+    },
+    {
+      "text": "UNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENG",
+      "messages": 2,
+      "offsets": [
+        4,
+        5,
+        6,
+        8,
+        20,
+        23,
+        27
+      ]
+    },
+    {
+      "text": "NFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENGE",
+      "messages": 2,
+      "offsets": [
+        5,
+        6,
+        7,
+        9,
+        21,
+        24,
+        28
+      ]
+    },
+    {
+      "text": "FUUUFLOTTXNULEINSZWONULBEIROTNULSIBENGEA",
+      "messages": 2,
+      "offsets": [
+        6,
+        7,
+        8,
+        10,
+        22,
+        25,
+        29
+      ]
+    },
+    {
+      "text": "UUUFLOTTXNULEINSZWONULBEIROTNULSIBENGEAN",
+      "messages": 2,
+      "offsets": [
+        7,
+        8,
+        9,
+        11,
+        23,
+        26,
+        28,
+        30
+      ]
+    },
+    {
+      "text": "UUFLOTTXNULEINSZWONULBEIROTNULSIBENGEANK",
+      "messages": 2,
+      "offsets": [
+        8,
+        9,
+        10,
+        12,
+        24,
+        27,
+        29,
+        31
+      ]
+    },
+    {
+      "text": "UFLOTTXNULEINSZWONULBEIROTNULSIBENGEANKE",
+      "messages": 2,
+      "offsets": [
+        9,
+        10,
+        11,
+        13,
+        25,
+        28,
+        30,
+        32
+      ]
+    },
+    {
+      "text": "FLOTTXNULEINSZWONULBEIROTNULSIBENGEANKER",
+      "messages": 2,
+      "offsets": [
+        10,
+        12,
+        14,
+        26,
+        29,
+        31
+      ]
+    },
+    {
+      "text": "LOTTXNULEINSZWONULBEIROTNULSIBENGEANKERT",
+      "messages": 2,
+      "offsets": [
+        0,
+        11,
+        13,
+        15,
+        27,
+        30,
+        32
+      ]
+    },
+    {
+      "text": "OTTXNULEINSZWONULBEIROTNULSIBENGEANKERTX",
+      "messages": 2,
+      "offsets": [
+        0,
+        1,
+        12,
+        14,
+        28,
+        31
+      ]
+    },
+    {
+      "text": "TTXNULEINSZWONULBEIROTNULSIBENGEANKERTXZ",
+      "messages": 2,
+      "offsets": [
+        0,
+        1,
+        2,
+        13,
+        15,
+        29,
+        32
+      ]
+    },
+    {
+      "text": "TXNULEINSZWONULBEIROTNULSIBENGEANKERTXZU",
+      "messages": 2,
+      "offsets": [
+        1,
+        2,
+        3,
+        14,
+        16,
+        30
+      ]
+    },
+    {
+      "text": "XNULEINSZWONULBEIROTNULSIBENGEANKERTXZUM",
+      "messages": 2,
+      "offsets": [
+        0,
+        2,
+        3,
+        4,
+        7,
+        15,
+        17,
+        26,
+        31
+      ]
+    },
+    {
+      "text": "NULEINSZWONULBEIROTNULSIBENGEANKERTXZUMW",
+      "messages": 2,
+      "offsets": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        8,
+        16,
+        18,
+        27,
+        32
+      ]
+    },
+    {
+      "text": "ULEINSZWONULBEIROTNULSIBENGEANKERTXZUMWE",
+      "messages": 2,
+      "offsets": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        6,
+        9,
+        17,
+        19,
+        28
+      ]
+    },
+    {
+      "text": "LEINSZWONULBEIROTNULSIBENGEANKERTXZUMWEI",
+      "messages": 2,
+      "offsets": [
+        1,
+        2,
+        3,
+        5,
+        6,
+        7,
+        10,
+        18,
+        20,
+        23,
+        29
+      ]
+    },
+    {
+      "text": "EINSZWONULBEIROTNULSIBENGEANKERTXZUMWEIT",
+      "messages": 2,
+      "offsets": [
+        2,
+        3,
+        4,
+        6,
+        7,
+        8,
+        11,
+        24,
+        30
+      ]
+    },
+    {
+      "text": "INSZWONULBEIROTNULSIBENGEANKERTXZUMWEITE",
+      "messages": 2,
+      "offsets": [
+        3,
+        4,
+        5,
+        7,
+        8,
+        9,
+        12,
+        25,
+        31
+      ]
+    },
+    {
+      "text": "NSZWONULBEIROTNULSIBENGEANKERTXZUMWEITER",
+      "messages": 2,
+      "offsets": [
+        4,
+        5,
+        6,
+        8,
+        9,
+        10,
+        13,
+        26,
+        32
+      ]
+    },
+    {
+      "text": "SZWONULBEIROTNULSIBENGEANKERTXZUMWEITERM",
+      "messages": 2,
+      "offsets": [
+        0,
+        5,
+        6,
+        7,
+        9,
+        10,
+        11,
+        14,
+        27
+      ]
+    },
+    {
+      "text": "ZWONULBEIROTNULSIBENGEANKERTXZUMWEITERMA",
+      "messages": 2,
+      "offsets": [
+        1,
+        6,
+        7,
+        8,
+        10,
+        11,
+        12,
+        15,
+        20,
+        28
+      ]
+    },
+    {
+      "text": "WONULBEIROTNULSIBENGEANKERTXZUMWEITERMAR",
+      "messages": 2,
+      "offsets": [
+        0,
+        2,
+        7,
+        8,
+        9,
+        12,
+        13,
+        16,
+        21,
+        29
+      ]
+    },
+    {
+      "text": "UUUEINSEINSNULDREIKKEISELEKKXX",
+      "messages": 2,
+      "offsets": [
+        0,
+        1,
+        4,
+        6,
+        8,
+        14,
+        17,
+        25,
+        28,
+        30,
+        32,
+        33,
+        34,
+        37,
+        38,
+        39,
+        40,
+        42
+      ]
+    },
+    {
+      "text": "VVVCHEFVIERXUUUFLOTTXXMITUUU",
+      "messages": 2,
+      "offsets": [
+        0,
+        4,
+        11,
+        13,
+        15,
+        22,
+        23,
+        25,
+        27,
+        28
+      ]
+    }
+  ]
+}

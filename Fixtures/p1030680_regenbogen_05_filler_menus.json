@@ -1,0 +1,353 @@
+{
+  "target": "P1030680",
+  "ciphertext": "JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF",
+  "note": "Operation Regenbogen / Hannibal operational cribs for P1030680 (M-Thetis). Phrases are period-plausible constructions from attested vocabulary (not verified native decrypts except shared lexicon with P1030681). Offsets are self-stecker-legal against the 72-letter CT. Queue AFTER catalog right-ring sweep; do not preempt Metal. Tier 05_filler: Generic situation filler.",
+  "source": "Claude research pass, 2026-08-10 -- Operation Regenbogen / Operation Hannibal context for P1030680 (M-Thetis, U534, 1 May 1945)",
+  "cribs": [
+    {
+      "text": "SOFORTMELDENLAGE",
+      "messages": 1,
+      "offsets": [
+        4,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        21,
+        23,
+        29,
+        31,
+        33,
+        34,
+        35,
+        36,
+        37,
+        39,
+        40,
+        41,
+        44,
+        45,
+        47,
+        48,
+        49,
+        50,
+        52,
+        54
+      ]
+    }
+  ],
+  "placements": [
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 41,
+      "edges": 16,
+      "loops": 3,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 18,
+      "edges": 16,
+      "loops": 2,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 23,
+      "edges": 16,
+      "loops": 2,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 45,
+      "edges": 16,
+      "loops": 2,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 50,
+      "edges": 16,
+      "loops": 2,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 4,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 9,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 11,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 12,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 14,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 15,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 17,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 21,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 29,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 34,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 35,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 36,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 37,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 39,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 40,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 48,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 52,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 54,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 6,
+      "edges": 16,
+      "loops": 0,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 7,
+      "edges": 16,
+      "loops": 0,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 10,
+      "edges": 16,
+      "loops": 0,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 13,
+      "edges": 16,
+      "loops": 0,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 16,
+      "edges": 16,
+      "loops": 0,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 31,
+      "edges": 16,
+      "loops": 0,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 33,
+      "edges": 16,
+      "loops": 0,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 44,
+      "edges": 16,
+      "loops": 0,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 47,
+      "edges": 16,
+      "loops": 0,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    },
+    {
+      "text": "SOFORTMELDENLAGE",
+      "offset": 49,
+      "edges": 16,
+      "loops": 0,
+      "role": "body",
+      "cluster": "general_situation",
+      "tier": "05_filler"
+    }
+  ],
+  "stats": {
+    "phrases": 1,
+    "placements": 33,
+    "tiers": [
+      "05_filler"
+    ]
+  }
+}

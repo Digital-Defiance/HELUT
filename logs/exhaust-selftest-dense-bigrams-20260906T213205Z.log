@@ -1,0 +1,27 @@
+HELUT — exhaustive cracker self-test (known key)
+Control message: U534 P1030684, Potsdam 1 May 1945 (published key)
+Truth: UKW B, gamma, IV-III-VIII, rings AACU, message key VYAA, 10 plugs
+Using first 72 letters — same length as P1030680
+
+Reference plaintext (true key, true plugs):
+  VVVUUUVIRSOBENNULEINSXXMITUUUVIRSIBENNULZWOYVIRSIBENNULDREIYZWODREISECHS
+  bigram=-3.3787 IC=0.0657
+
+Backend: Metal-ic-sweep
+
+Level 1 — correct wheels/rings, plugs unknown, sieve = IC over 26^4 message keys
+  true key IC = 0.0379
+  rank = 223118 of 456976
+  percentile = top 48.825%
+
+Level 2 — stecker hill-climb from the TRUE rotor setting
+  recovered: LLLWOHLARGULATTUSZITSPAMIROOOLOSTIKETTOLZFFNLIKDIBAKRJLDNRITZAUDHEMZEKKS
+  letters correct: 21/72 (29%)
+  bigram=-3.3039 (true plugs: -3.3787)
+  plugs recovered: 4/10 correct, 9 proposed
+
+Level 3 — verdict on the recovered text
+  likeness=1.00 IC=0.0540 cribs=(none)
+  NO BREAK. Candidates are indistinguishable from noise at this message length.
+
+Read this as the ceiling: P1030680 cannot do better than this rehearsal.

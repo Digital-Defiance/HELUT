@@ -1,0 +1,297 @@
+{
+  "schema": "E256-X1-MIXED-WALK-ACTIVITY-PREREGISTRATION-1",
+  "status": "FROZEN_BEFORE_IMPLEMENTATION",
+  "purpose": "Grade the exact minimum number of active S-boxes over any four consecutive E256-H rounds when the H4 row-offset selector changes per round, which the E256-X0 receipt recorded as mixed_four_round_bound = OPEN_NOT_GRADED.",
+  "contract": {
+    "path": "directives/e256-x1-mixed-walk-activity.md",
+    "start_marker": "<!-- E256-X1-MIXED-WALK-ACTIVITY-CONTRACT-START -->",
+    "end_marker": "<!-- E256-X1-MIXED-WALK-ACTIVITY-CONTRACT-END -->",
+    "inclusive_sha256": "c0f951f08ced7e7897a8fb1e1770b823ec62127f94c96fb2afac755e366a1716"
+  },
+  "predecessors": {
+    "candidate_receipt": {
+      "path": "logs/e256-hardware-candidate-gate.json",
+      "schema": "E256-HARDWARE-CANDIDATE-GATE-1",
+      "raw_sha256": "0402a53a725f3303ab379bf7f5e986a55cadedb001f4621d9d996f4ee0d93cfc",
+      "payload_sha256": "98af83ec27093787552475fce588f84a902634afcc969bed26462032dddec3cc",
+      "supplies": "ordered 384-entry certified H4 catalog"
+    },
+    "wide_receipt": {
+      "path": "logs/e256-wide-state-gate.json",
+      "schema": "E256-WIDE-STATE-GATE-1",
+      "raw_sha256": "6e904713366d16de938ebb9bf93139e760b5748a3ec52ae973c5895baa80c584",
+      "payload_sha256": "21758ce220b9da469a18ea617fa7b2fd41e906add69a258f830b12843e3e495b",
+      "supplies": "69 nonzero MixColumns minors, branch number 5, and the fixed-selector E256-W-WIDETRAIL-25-v1 four-round value of 25"
+    },
+    "x0_receipt": {
+      "path": "logs/e256-x0-h4-evolution-gate.json",
+      "schema": "E256-X0-H4-EVOLUTION-GATE-1",
+      "raw_sha256": "8db5f21b6e0a7249fa9b558c02a989324911575e91704b5e096e2749744ac2c9",
+      "payload_sha256": "35060c802427046f5f4630c6b9db6401d8ac90c4649fc0cf088d3f35f31b1b44",
+      "graph_root": "d7e44b625acc693a28469dd993edfe3bf8cd7a4b966275a70ad7cf3941e4a80a",
+      "supplies": "the safe-transition criterion S(y)+S(z)=Z_8 and the OPEN_NOT_GRADED item this gate closes"
+    },
+    "x0_contract": {
+      "path": "directives/e256-x0-h4-evolution.md",
+      "inclusive_sha256": "1ef354e9b933838eb3e74b32b202e4693f1bfdd62379f10dbc6a8673b3383962"
+    },
+    "x0_runner": {
+      "path": "Scripts/e256_x0_h4_evolution_gate.py",
+      "raw_sha256": "d011419ca4a712101481162748c4fcafe960d733582ffd2e2fd635f7a99fd602"
+    },
+    "wide_runner": {
+      "path": "Scripts/e256_wide_gate.py",
+      "raw_sha256": "d6946d2007535a6371ddeef35693747fde8b4b94a110f65f32ea8b86cec22252",
+      "supplies": "the frozen row_shift forward convention and the AES MDS matrix this gate reuses"
+    }
+  },
+  "catalog": {
+    "source_pointer": "deterministic_payload.results.h4_wiring.certified_set",
+    "count": 384,
+    "canonical_sha256": "199f1f7bddccf19ce5aa0bde0987441735d628354140d53ebdfec538d7b3f5ed",
+    "first_tuple": [0, 1, 2, 5],
+    "fixed_tuple_index": 1,
+    "fixed_tuple": [0, 1, 3, 4],
+    "last_tuple": [7, 6, 5, 2],
+    "support_count": 16,
+    "permutations_per_support": 24
+  },
+  "activity_model": {
+    "state_bytes": 32,
+    "rows": 4,
+    "columns": 8,
+    "byte_index_rule": "4*column + row",
+    "shift_rows_forward": "out[r][c] = in[r][(c + w_r) mod 8]",
+    "mix_columns": "AES 4x4 circulant MDS over GF(2^8)/0x11b applied per column",
+    "branch_number": 5,
+    "mds_truncated_constraint": "(a = 0 and b = 0) or a + b >= 5",
+    "sbox_layers_per_window": 4,
+    "mix_boundaries_per_window": 3,
+    "selectors_per_window": 3,
+    "cost": "sum of the four S-box layer activity weights",
+    "nonzero_condition": "first layer weight >= 1",
+    "bound_direction": "every actual differential trail projects to a feasible activity pattern, so the relaxation minimum is a lower bound on the active S-box count",
+    "relaxation_is_not": [
+      "a trail count",
+      "a differential or linear probability",
+      "a claim that a minimising pattern is realisable by actual differences"
+    ]
+  },
+  "symmetry_quotient": {
+    "per_round_translation": "SR_{w+t} = Rot_t . SR_w with Rot_t commuting with MixColumns and ShiftRows",
+    "global_row_rotation": "R_rho . SR_w = SR_{R_rho w} . R_rho with R_rho commuting with the circulant MDS matrix",
+    "canonical_rule": "lexicographic minimum over rho in Z_4 of rotating all three tuples by rho then translating each tuple independently to first offset 0",
+    "group_order": 2048,
+    "expected_class_count": 27648,
+    "class_count_is_an_outcome": true,
+    "empirical_orbit_check_required": true
+  },
+  "oracles": {
+    "smt": {
+      "tool": "z3",
+      "invocation": "external process, SMT-LIB2 on stdin",
+      "role": "authoritative lower bound; unsat at budget B proves minimum > B",
+      "encoding_note": "shared integer column weights; no reified column-active indicator and no derived lemmas, which were measured to be far slower"
+    },
+    "ilp": {
+      "tool": "scipy.optimize.milp (HiGHS)",
+      "role": "independent exact minimum and optimal witness",
+      "encoding": "all-binary variables with a <= 4d, b <= 4d, a + b >= branch*d per column"
+    },
+    "exhaustive": {
+      "tool": "pure-Python branch and bound",
+      "role": "third independent minimum on the anchor and control cases",
+      "sound_pruning": "cost >= 5*(k_1 + k_3), obtained by summing the per-column MDS constraints at the first and third boundaries"
+    },
+    "witness_checker": {
+      "tool": "pure-Python exact re-verification",
+      "role": "verify every solver witness against the MDS constraints and its claimed weight",
+      "must_reject": "a witness with any single active byte removed"
+    },
+    "agreement_rule": "disagreement between any two oracles on a shared case is a validity failure that forbids receipt emission"
+  },
+  "coverage": {
+    "fixed_repeated_triples": 384,
+    "canonical_classes_expected": 27648,
+    "smt_budget_for_lower_bound": 24,
+    "asserted_lower_bound": 25,
+    "sampling_in_graded_result": false,
+    "safe_subfamily_rule": "S(w_1)+S(w_2) = Z_8 and S(w_2)+S(w_3) = Z_8",
+    "report_safe_and_complement_separately": true
+  },
+  "prior_disclosure": {
+    "nature": "X1 is a complete verification of facts already observed in a read-only pre-freeze exploration, not a blind prediction. Every item below must be reconstructed exactly.",
+    "items": [
+      "the 16 catalog supports are exactly the sixteen 4-subsets S of Z_8 with S+S = Z_8, out of 70",
+      "the catalog is closed under translation and under cyclic row rotation, with free orbits giving 48 translation classes and 12 translation-plus-rotation classes per single tuple",
+      "the canonical triple-class count is 27648 = 384^3 / 2048, so the group action is free on ordered catalog triples",
+      "the exact minimum for the fixed tuple (0,1,3,4) repeated is 25, agreeing with E256-W-WIDETRAIL-25-v1",
+      "the exact minimum for the X0 fallback alternation (0,1,2,5)/(0,1,4,7)/(0,1,2,5) is 25",
+      "all 384 fixed-repeated catalog triples have exact minimum 25",
+      "a 3000-class random canonical sample had exact minimum 25 in every class, for both the X0-safe subfamily and its complement",
+      "control minima observed: zero row offsets 10, branch number forced to 4 gives 4, single-parity (0,2,4,6) repeated gives 25, sampled non-certified distinct tuples gave 25",
+      "a greedy (1,4,...) witness constructor does not reach 25, returning 40 or 45, so witnesses must come from a solver and be independently checked"
+    ]
+  },
+  "predictions": [
+    {
+      "id": "X1-P1",
+      "role": "validity_control",
+      "statement": "the recomputed catalog digest equals the frozen canonical_sha256 and the catalog order, first, fixed, and last tuples match"
+    },
+    {
+      "id": "X1-P2",
+      "role": "validity_control",
+      "statement": "the 16 recomputed support masks are exactly the 4-subsets of Z_8 satisfying S+S = Z_8"
+    },
+    {
+      "id": "X1-P3",
+      "role": "validity_control",
+      "statement": "the recomputed canonical class count equals 27648 with every orbit of size 2048"
+    },
+    {
+      "id": "X1-P4",
+      "role": "validity_control",
+      "statement": "sampled orbit members share an identical exact minimum, confirming both symmetries empirically"
+    },
+    {
+      "id": "X1-P5",
+      "role": "validity_control",
+      "statement": "the SMT, ILP, and exhaustive oracles agree exactly on the anchor and on every control case where all three are run"
+    },
+    {
+      "id": "X1-P6",
+      "role": "validity_control",
+      "statement": "every solver witness is independently verified at its claimed weight, and the byte-removal tamper of each verified witness is rejected"
+    },
+    {
+      "id": "X1-P7",
+      "role": "reconstruction",
+      "statement": "the fixed Rijndael tuple repeated yields exact minimum 25, reproducing the inherited fixed-selector value"
+    },
+    {
+      "id": "X1-P8",
+      "role": "reconstruction",
+      "statement": "all 384 fixed-repeated triples yield exact minimum 25"
+    },
+    {
+      "id": "X1-P9",
+      "role": "graded_finding",
+      "statement": "the exact minimum over every canonical class is recorded as a histogram, and the global minimum over the complete family is reported"
+    },
+    {
+      "id": "X1-P10",
+      "role": "graded_finding",
+      "statement": "the minima over the X0-safe subfamily and over its non-safe complement are reported separately and compared"
+    },
+    {
+      "id": "X1-P11",
+      "role": "validity_control",
+      "statement": "all 23 planted controls are detected through production loaders, oracles, the canonical quotient, or the witness checker"
+    }
+  ],
+  "controls": [
+    {"id": "branch_number_four", "mutation": "force the MDS branch number to 4", "required_result": "minimum drops below 25"},
+    {"id": "zero_row_offsets", "mutation": "all offsets zero in every tuple", "required_result": "minimum drops to 10"},
+    {"id": "repeated_offset_in_tuple", "mutation": "one tuple carries a repeated offset", "required_result": "minimum drops below 25"},
+    {"id": "nonzero_requirement_omitted", "mutation": "drop the nonzero first-layer requirement", "required_result": "an all-zero trail of weight 0 becomes feasible"},
+    {"id": "reverse_shift_direction", "mutation": "substitute out[r][c] = in[r][(c - w_r) mod 8]", "required_result": "a pinned differing case is detected"},
+    {"id": "three_sbox_layers", "mutation": "grade three layers instead of four", "required_result": "minimum drops below 25"},
+    {"id": "five_sbox_layers", "mutation": "grade five layers instead of four", "required_result": "minimum rises above 25"},
+    {"id": "stale_catalog_hash", "mutation": "supply a stale catalog digest", "required_result": "rejected"},
+    {"id": "catalog_reorder", "mutation": "reorder two catalog entries", "required_result": "rejected"},
+    {"id": "tuple_element_mutation", "mutation": "mutate one tuple element", "required_result": "rejected"},
+    {"id": "duplicate_tuple_offset", "mutation": "duplicate one tuple offset", "required_result": "rejected"},
+    {"id": "out_of_range_tuple_offset", "mutation": "insert an out-of-range tuple offset", "required_result": "rejected"},
+    {"id": "witness_byte_removed", "mutation": "remove one active byte from a verified witness", "required_result": "witness checker rejects"},
+    {"id": "witness_weight_forged", "mutation": "claim a witness weight below its verified weight", "required_result": "witness checker rejects"},
+    {"id": "omitted_column_constraint", "mutation": "omit one column's MDS constraint", "required_result": "minimum drops below 25"},
+    {"id": "injected_oracle_disagreement", "mutation": "perturb one oracle's reported minimum", "required_result": "agreement gate rejects"},
+    {"id": "noncertified_support_admitted", "mutation": "admit a support with S+S != Z_8 into the catalog", "required_result": "rejected"},
+    {"id": "orbit_member_minimum_mismatch", "mutation": "assign an orbit member a different minimum", "required_result": "symmetry gate rejects"},
+    {"id": "canonical_class_count_mismatch", "mutation": "claim a canonical class count other than the recomputed value", "required_result": "rejected"},
+    {"id": "filtered_class_corpus", "mutation": "drop one class from the canonical corpus", "required_result": "coverage gate rejects"},
+    {"id": "xor_safe_adjacency", "mutation": "substitute XOR for modular addition in the safe-adjacency oracle", "required_result": "rejected"},
+    {"id": "budget_off_by_one", "mutation": "assert unsat at the achieved minimum", "required_result": "the SMT arm returns sat and the assertion is rejected"},
+    {"id": "fabricated_exhaustive_minimum", "mutation": "report an exhaustive minimum below the SMT and ILP value", "required_result": "agreement gate rejects"}
+  ],
+  "receipt_contract": {
+    "schema": "E256-X1-MIXED-WALK-ACTIVITY-GATE-1",
+    "status": "OPEN_PROGRESS",
+    "path": "logs/e256-x1-mixed-walk-activity-gate.json",
+    "scratch_path": "build/e256-x1-mixed-walk-activity",
+    "required_sections": [
+      "integrity",
+      "catalog",
+      "activity_model",
+      "symmetry_quotient",
+      "oracle_agreement",
+      "coverage",
+      "safe_subfamily",
+      "diagnostics",
+      "controls",
+      "verdicts",
+      "non_claims"
+    ],
+    "digest_rule": "SHA-256 of canonical compact sorted-key JSON of the deterministic payload",
+    "record_rule": "complete-record SHA-256 computed with record_sha256 set to null",
+    "solver_models_excluded_from_digest": true,
+    "solver_versions_are_advisory_outside_digest": true,
+    "check_rule": "--check must regenerate byte-identical deterministic payload bytes and digest"
+  },
+  "make_entry_points": [
+    "e256-x1-mixed-walk-activity",
+    "e256-x1-mixed-walk-activity-check"
+  ],
+  "verdicts": {
+    "pass": "MIXED_WALK_FOUR_ROUND_ACTIVITY_LOWER_BOUND_CERTIFIED",
+    "valid_adverse_outcomes": [
+      "a canonical class with minimum below 25, refuting the inherited fixed-selector bound under switching",
+      "a canonical class with minimum above 25"
+    ],
+    "validity_failures": [
+      "oracle disagreement",
+      "an undetected control",
+      "a coverage or class-count mismatch",
+      "a witness that fails independent verification"
+    ]
+  },
+  "no_claim_boundary": {
+    "moves_no_row": ["C", "H", "N"],
+    "e256_063": "remains OPEN",
+    "selects_nothing": [
+      "round count",
+      "schedule",
+      "evolution policy",
+      "key or XOF derivation",
+      "architecture",
+      "storage organisation",
+      "RTL enforcement mechanism",
+      "Metal or FHE path",
+      "physical FPGA target",
+      "suite",
+      "protocol",
+      "security level",
+      "standard"
+    ],
+    "out_of_scope": [
+      "trail clustering",
+      "value and cancellation feasibility",
+      "integral",
+      "algebraic and degree growth",
+      "cube",
+      "meet in the middle",
+      "impossible differential",
+      "rebound",
+      "slide",
+      "invariant subspace",
+      "related key and related tweak",
+      "multi user",
+      "TMTO",
+      "side channel",
+      "fault"
+    ],
+    "aead": "reviewed standard AEAD remains mandatory for real data",
+    "bound_surviving_switching_is_not_a_benefit_claim": true
+  }
+}

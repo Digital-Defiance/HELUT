@@ -1,0 +1,50 @@
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030680_regenbogen_01_anchor_menus.json (19 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 19 of 19
+min crib length: 16
+running 19 menus, highest deduction power first:
+  [1] BEFEHLERHALTENREGENBOGEN@24 edges=24 letters=16 loops=9 central=E
+  [2] BEFEHLERHALTENREGENBOGEN@22 edges=24 letters=17 loops=8 central=E
+  [3] BEFEHLERHALTENREGENBOGEN@34 edges=24 letters=18 loops=8 central=E
+  [4] BEFEHLERHALTENREGENBOGEN@38 edges=24 letters=17 loops=8 central=E
+  [5] BEFEHLERHALTENREGENBOGEN@42 edges=24 letters=18 loops=8 central=E
+  [6] BEFEHLERHALTENREGENBOGEN@45 edges=24 letters=19 loops=8 central=E
+  [7] BEFEHLERHALTENREGENBOGEN@18 edges=24 letters=19 loops=7 central=E
+  [8] BEFEHLERHALTENREGENBOGEN@29 edges=24 letters=18 loops=7 central=E
+  [9] BEFEHLERHALTENREGENBOGEN@32 edges=24 letters=18 loops=7 central=E
+  [10] BEFEHLERHALTENREGENBOGEN@33 edges=24 letters=18 loops=7 central=E
+  [11] BEFEHLERHALTENREGENBOGEN@8 edges=24 letters=21 loops=6 central=E
+  [12] BEFEHLERHALTENREGENBOGEN@10 edges=24 letters=20 loops=6 central=E
+  … 7 more
+shells/menu: 1344 (336 WO × 2 Greek × 2 UKW × 1 ring) → 6.14e+08 settings
+GPU pipeline depth: 4 shells in flight
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+rings AAAA: exhaustive over turnover-free spans, which is 2/26 (8%) of keys at 24 letters. --bombe-ring-sweep covers the rest at 26x cost.
+ETA floor (~50M/s): 3.9 min
+
+quarantine: soft IC≥0.048 / tail>-4.300 (strict IC≥0.055 / tail>-3.600) → logs/quarantine_regenbogen.json
+  [1/19·1] BEFEHLERHALTENREGENBOGEN@24 edges=24 letters=16 loops=9 central=E dead at the board                        11s  57.1M/s ETA   3.2 min
+  [2/19·2] BEFEHLERHALTENREGENBOGEN@22 edges=24 letters=17 loops=8 central=E dead at the board                        25s  50.0M/s ETA   3.5 min
+  [3/19·3] BEFEHLERHALTENREGENBOGEN@34 edges=24 letters=18 loops=8 central=E dead at the board                        36s  51.6M/s ETA   3.2 min
+  [4/19·4] BEFEHLERHALTENREGENBOGEN@38 edges=24 letters=17 loops=8 central=E dead at the board                        47s  51.9M/s ETA   3.0 min
+  [5/19·5] BEFEHLERHALTENREGENBOGEN@42 edges=24 letters=18 loops=8 central=E dead at the board                        60s  51.5M/s ETA   2.8 min
+  [6/19·6] BEFEHLERHALTENREGENBOGEN@45 edges=24 letters=19 loops=8 central=E dead at the board                        71s  52.1M/s ETA   2.6 min
+  [7/19·7] BEFEHLERHALTENREGENBOGEN@18 edges=24 letters=19 loops=7 central=E dead at the board                        84s  51.1M/s ETA   2.4 min
+  [8/19·8] BEFEHLERHALTENREGENBOGEN@29 edges=24 letters=18 loops=7 central=E dead at the board                        96s  51.1M/s ETA   2.2 min
+  [9/19·9] BEFEHLERHALTENREGENBOGEN@32 edges=24 letters=18 loops=7 central=E dead at the board                       106s  52.0M/s ETA   2.0 min
+  [10/19·10] BEFEHLERHALTENREGENBOGEN@33 edges=24 letters=18 loops=7 central=E dead at the board                       118s  52.0M/s ETA   1.8 min
+  [11/19·11] BEFEHLERHALTENREGENBOGEN@8 edges=24 letters=21 loops=6 central=E dead at the board                       128s  52.8M/s ETA   1.6 min
+  [12/19·12] BEFEHLERHALTENREGENBOGEN@10 edges=24 letters=20 loops=6 central=E dead at the board                       141s  52.3M/s ETA   1.4 min
+  [13/19·13] BEFEHLERHALTENREGENBOGEN@13 edges=24 letters=20 loops=6 central=E dead at the board                       154s  51.7M/s ETA   1.2 min
+  [14/19·14] BEFEHLERHALTENREGENBOGEN@15 edges=24 letters=19 loops=6 central=E dead at the board                       166s  51.7M/s ETA   1.0 min
+  [15/19·15] BEFEHLERHALTENREGENBOGEN@17 edges=24 letters=19 loops=6 central=E dead at the board                       180s  51.1M/s ETA   0.8 min
+  [16/19·16] BEFEHLERHALTENREGENBOGEN@48 edges=24 letters=19 loops=6 central=E dead at the board                       193s  50.8M/s ETA   0.6 min
+  [17/19·17] BEFEHLERHALTENREGENBOGEN@1 edges=24 letters=20 loops=5 central=E dead at the board                       204s  51.1M/s ETA   0.4 min
+  [18/19·18] BEFEHLERHALTENREGENBOGEN@2 edges=24 letters=20 loops=5 central=E dead at the board                       215s  51.4M/s ETA   0.2 min
+  [19/19·19] BEFEHLERHALTENREGENBOGEN@5 edges=24 letters=20 loops=5 central=E dead at the board                       227s  51.5M/s ETA   0.0 min
+
+total raw stops: 0 over 11669339136 settings (51.5M/s mean)
+survived the 10-plug sieve: 0
+no setting survived — every runnable menu contradicted everywhere it was tried
+quarantine: 0 soft-band near-misses (solo pass complete)

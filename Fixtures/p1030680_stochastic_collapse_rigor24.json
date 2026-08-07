@@ -1,0 +1,178 @@
+{
+  "target": "P1030680",
+  "ciphertext": "JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF",
+  "prior": "collapse-tactical-fallback",
+  "note": "M-Thetis as shadow/tactical fallback in final days \u2014 NOT training padding. Lexicon: scuttle (VERSENKEN/VERNICHTEN/REGENBOGEN), urgency (SOFORT/GEHEIM/WICHTIG), command hubs (FLENSBURG/KIEL/DOENITZ), muster (ANTWORTEN/MELDEN). Same Stochastic architecture; new targets only. 16\u201324 constrained; self-stecker legal. Curated \u226420 non-pad heads for first rigor pass.",
+  "survivor_ratio": 0.8,
+  "noise_margin": 0.1,
+  "templates": [
+    {
+      "name": "collapse:ALLEBOOTESVERSEN@3",
+      "pattern": "...ALLEBOOTESVERSENKEN..................................................",
+      "note": "collapse lexicon ALLEBOOTESVERSENKEN",
+      "constrained": 19,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:ALLEBOOTESVERSEN@5",
+      "pattern": ".....ALLEBOOTESVERSENKEN................................................",
+      "note": "collapse lexicon ALLEBOOTESVERSENKEN",
+      "constrained": 19,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:stack:DOENITZDOENI@0",
+      "pattern": "DOENITZDOENITZDOEN......................................................",
+      "note": "collapse stack/repeat",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:stack:DOENITZDOENI@2",
+      "pattern": "..DOENITZDOENITZDOEN....................................................",
+      "note": "collapse stack/repeat",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:stack:FLENSBURGFLE@0",
+      "pattern": "FLENSBURGFLENSBURG......................................................",
+      "note": "collapse stack/repeat",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:stack:FLENSBURGFLE@2",
+      "pattern": "..FLENSBURGFLENSBURG....................................................",
+      "note": "collapse stack/repeat",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:stack:GEHEIMGEHEIM@0",
+      "pattern": "GEHEIMGEHEIMGEHEIM......................................................",
+      "note": "collapse stack/repeat",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:stack:GEHEIMGEHEIM@2",
+      "pattern": "..GEHEIMGEHEIMGEHEIM....................................................",
+      "note": "collapse stack/repeat",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:stack:MELDENMELDEN@1",
+      "pattern": ".MELDENMELDENMELDEN.....................................................",
+      "note": "collapse stack/repeat",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:stack:REGENBOGENRE@3",
+      "pattern": "...REGENBOGENREGENBOG...................................................",
+      "note": "collapse stack/repeat",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:stack:SOFORTSOFORT@0",
+      "pattern": "SOFORTSOFORTSOFORT......................................................",
+      "note": "collapse stack/repeat",
+      "constrained": 18,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:ALLESTELLENMELDE@2",
+      "pattern": "..ALLESTELLENMELDEN.....................................................",
+      "note": "collapse lexicon ALLESTELLENMELDEN",
+      "constrained": 17,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:ALLESTELLENMELDE@5",
+      "pattern": ".....ALLESTELLENMELDEN..................................................",
+      "note": "collapse lexicon ALLESTELLENMELDEN",
+      "constrained": 17,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:NICHTKAPITULIERE@0",
+      "pattern": "NICHTKAPITULIEREN.......................................................",
+      "note": "collapse lexicon NICHTKAPITULIEREN",
+      "constrained": 17,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:NICHTKAPITULIERE@1",
+      "pattern": ".NICHTKAPITULIEREN......................................................",
+      "note": "collapse lexicon NICHTKAPITULIEREN",
+      "constrained": 17,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:DOENITZFLENSBURG@0",
+      "pattern": "DOENITZFLENSBURG........................................................",
+      "note": "collapse lexicon DOENITZFLENSBURG",
+      "constrained": 16,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:DOENITZFLENSBURG@2",
+      "pattern": "..DOENITZFLENSBURG......................................................",
+      "note": "collapse lexicon DOENITZFLENSBURG",
+      "constrained": 16,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:FLENSBURGDOENITZ@0",
+      "pattern": "FLENSBURGDOENITZ........................................................",
+      "note": "collapse lexicon FLENSBURGDOENITZ",
+      "constrained": 16,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:FLENSBURGDOENITZ@5",
+      "pattern": ".....FLENSBURGDOENITZ...................................................",
+      "note": "collapse lexicon FLENSBURGDOENITZ",
+      "constrained": 16,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:FUNKSTELLEMELDEN@0",
+      "pattern": "FUNKSTELLEMELDEN........................................................",
+      "note": "collapse lexicon FUNKSTELLEMELDEN",
+      "constrained": 16,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:FUNKSTELLEMELDEN@2",
+      "pattern": "..FUNKSTELLEMELDEN......................................................",
+      "note": "collapse lexicon FUNKSTELLEMELDEN",
+      "constrained": 16,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:REGENBOGENSOFORT@1",
+      "pattern": ".REGENBOGENSOFORT.......................................................",
+      "note": "collapse lexicon REGENBOGENSOFORTX",
+      "constrained": 16,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:REGENBOGENSOFORT@3",
+      "pattern": "...REGENBOGENSOFORT.....................................................",
+      "note": "collapse lexicon REGENBOGENSOFORTX",
+      "constrained": 16,
+      "prior": "collapse-tactical"
+    },
+    {
+      "name": "collapse:STRGEHEIMMELDUNG@1",
+      "pattern": ".STRGEHEIMMELDUNG.......................................................",
+      "note": "collapse lexicon STRGEHEIMMELDUNGX",
+      "constrained": 16,
+      "prior": "collapse-tactical"
+    }
+  ]
+}

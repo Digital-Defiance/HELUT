@@ -1,0 +1,182 @@
+{
+  "schema": "helut-encrypted-bench-receipt-v1",
+  "verdict": "PASS_K14_RECOVERED",
+  "claimScope": {
+    "circuit": "full_adder",
+    "netlistSHA256": "d647afbd947b9b67e63505caa215209e559efc10aa8099fd10ad18cad5acb13c",
+    "path": "blind-rotate-metal public-ms covering-b2",
+    "rows": 8,
+    "exhaustiveInputSpace": true,
+    "postBlindRotateEvents": 24,
+    "statement": "All 8 inputs of this 3-LUT full adder matched the clear oracle. A one-sided 95%-confidence Gaussian residual bound over this circuit's 24 post-blind-rotate decode events cleared 2^-64 at N=n=1024, covering-b2, bootstrapping-key sigma 128, and Boolean stride k=14.",
+    "notClaimed": [
+      "arbitrary circuits, netlist sizes, depths, or repeated executions",
+      "native Boolean stride k=1",
+      "fresh primary-input noise sigma 2^16",
+      "a hard deterministic bootstrapping-key noise bound",
+      "independence beyond the 192 identity-PBS residual samples used by the stated model",
+      "a universal 176-bit security proof",
+      "an external lattice-estimator result",
+      "cleartext-to-FHE or integrated-to-discrete speedup",
+      "total GPU-resident memory"
+    ]
+  },
+  "provenance": {
+    "preregister": "logs/helut-encrypted-k14-recovery-20260906T030525Z-preregister.json",
+    "preregisterSHA256": "171b8547119c8e12b6687189ab713ed045ffaae45365b76b711c87535c189a50",
+    "rawLog": "logs/helut-encrypted-k14-recovery-20260906T030525Z-t192-p8.raw.log",
+    "rawLogSHA256": "50067c1399b224f4eb20c84c31406be6499d9fd01f65bb55230081a918a5495a",
+    "gitCommit": "4d47ad0ef40c593bb3a0e4ab5aa2e668b917f975",
+    "workingTreeDirty": true,
+    "binarySHA256": "77c449a249c76c79970486949bb9075068943149cbab05580865b20db1847a38",
+    "coreSourceSHA256": "ea233e55105645134990a3bd7a14594c27d8382c1ae36e03dfa83694c5c298e6",
+    "simulatorSourceSHA256": "4bbd61051a5df9e7317b0d4789f4648b67083bd0bfb893a7e2e4b5296f6a82d8",
+    "netlist": "netlist.json",
+    "netlistSHA256": "d647afbd947b9b67e63505caa215209e559efc10aa8099fd10ad18cad5acb13c",
+    "argv": [
+      ".build/release/helut-bench",
+      "--bench",
+      "netlist.json",
+      "--degree",
+      "1024",
+      "--bench-encrypted",
+      "--sing",
+      "--vectors",
+      "8",
+      "--bk-noise-sigma",
+      "128",
+      "--bk-identity-trials",
+      "192",
+      "--bk-identity-parallelism",
+      "8",
+      "--paths",
+      "blind-rotate-metal public-ms covering-b2",
+      "--boolean-scale-mul",
+      "14"
+    ],
+    "environment": {
+      "HELUT_QUIET_METAL_BR_PROGRESS": "1"
+    },
+    "host": {
+      "model": "Apple M4 Max",
+      "gpuCores": 40,
+      "gpuBus": "built-in",
+      "metalFamily": "Metal 4",
+      "memoryBytes": 68719476736,
+      "operatingSystem": "macOS 26.6.2 (25G83)",
+      "architecture": "arm64"
+    }
+  },
+  "parameters": {
+    "torusModulus": "2^32",
+    "ring": "Z_q[X]/(X^1024+1)",
+    "polynomialDegreeN": 1024,
+    "glweDimension": 1,
+    "lweDimensionN": 1024,
+    "gadgetBaseLog": 2,
+    "gadgetBase": 4,
+    "gadgetLevels": 16,
+    "wireRefresh": "public-ms",
+    "primaryInputNoise": "none/exact",
+    "bootstrappingKeyNoise": {
+      "distribution": "discrete Gaussian",
+      "sigmaTorusUnits": 128
+    },
+    "nativeRotationDelta": 2097152,
+    "booleanStrideK": 14,
+    "booleanScale": 29360128,
+    "decodeHalfGap": 14680064
+  },
+  "parallelSampling": {
+    "maxConcurrentPBS": 8,
+    "rngPreparation": "serial historical order",
+    "resultReduction": "serial ascending trial order",
+    "bootstrapKeyAccess": "immutable shared value",
+    "productionSerialReferenceSamples": 32,
+    "productionSerialReferenceSHA256": "9b08d9b32a0a1022669df32b8eb996006c53290be717b5443d3440e8daa956de",
+    "productionParallelReplaySHA256": "de8a471c161757760a8b76853dc5200ac61977b96f82ab0fe38b7be753b68be3",
+    "serialParallelExactFields": [
+      "maxAbsError",
+      "sigmaUpper95",
+      "eventCount",
+      "unionFailureLog2"
+    ],
+    "serialRealSeconds": 1132.49,
+    "parallelRealSeconds": 187.92,
+    "speedup": 6.0268,
+    "boundary": "This is a measurement-stage CPU speedup, not encrypted circuit evaluation or FHE throughput speedup."
+  },
+  "confidence": {
+    "estimator": "single residual from each independently randomized identity PBS",
+    "identityTrials": 192,
+    "effectiveIndependentSamples": 192,
+    "confidenceLevel": 0.95,
+    "observedMaxAbsoluteError": 3369752,
+    "sampleDecodable": true,
+    "sampleDecodeFailures": 0,
+    "reconstructedSigmaHat": 1173837.4407009135,
+    "sigmaUpper95": 1282096.985627122,
+    "eventCount": 24,
+    "unionFailureLog2": -93.80046749185595,
+    "targetUnionFailureLog2": -64,
+    "clearsTarget": true,
+    "modelBoundary": "Gaussian-tail model with a circuit-scoped union bound; observational/statistical, not a hard deterministic error bound."
+  },
+  "functional": {
+    "luts": 3,
+    "dffs": 0,
+    "inputBits": 3,
+    "vectorsRequested": 8,
+    "vectorsRun": 8,
+    "allInputsExhaustive": true,
+    "allOutputsMatchClearOracle": true,
+    "result": "PASS"
+  },
+  "hardnessDisplay": {
+    "calibratedClassicalBits": 175.7,
+    "targetBits": 128,
+    "boundary": "Interim calibrated Core-SVP model row for production-shaped n=1024, sigma=2^16 parameters. It is distinct from the measured BK sigma=128 residual bound and is not a blanket or external-estimator security proof."
+  },
+  "timing": {
+    "encryptedCircuitEvaluationWallSeconds": 48.1757,
+    "encryptedCircuitEvaluationMillisecondsPerRow": 6021.96,
+    "endToEndRealSeconds": 969.48,
+    "endToEndUserSeconds": 6928.01,
+    "endToEndSystemSeconds": 18.91,
+    "boundary": "The HELUT wall covers encrypted circuit evaluation only. /usr/bin/time covers process setup, BK construction, parallel confidence sampling, evaluation, and reporting. No cleartext or native speed ratio is claimed."
+  },
+  "memory": {
+    "macOSMaximumResidentSetBytes": 2246279168,
+    "macOSPeakMemoryFootprintBytes": 2405370064,
+    "swaps": 0,
+    "scope": "Process-level macOS accounting on unified memory; informative but not a complete GPU-residency or VRAM measurement."
+  },
+  "validation": {
+    "processExitStatus": 0,
+    "expectedStartingPathBlocks": 1,
+    "expectedEquivalenceBlocks": 1,
+    "expectedSummaryRows": 1,
+    "summaryCert": "yes",
+    "containsDiagnosticOnly": false,
+    "containsMismatch": false,
+    "containsFailedConfidence": false,
+    "containsFailure": false,
+    "acceptanceSatisfied": true
+  },
+  "preservedNegativeAndFallbackEvidence": [
+    {
+      "configuration": "k=14, identity trials=32, serial",
+      "rawLog": "logs/helut-encrypted-bound-20260906T012213Z-t32-k14.raw.log",
+      "rawLogSHA256": "9b08d9b32a0a1022669df32b8eb996006c53290be717b5443d3440e8daa956de",
+      "sigmaUpper95": 1774113.6388565525,
+      "eventCount": 24,
+      "unionFailureLog2": -48.183293522830674,
+      "outcome": "under-sampled; failed closed before circuit execution"
+    },
+    {
+      "configuration": "k=16, identity trials=40, serial",
+      "receipt": "logs/helut-encrypted-bound-20260906T014326Z.json",
+      "outcome": "PASS fallback; superseded as the narrowest recovered stride by this k=14 receipt"
+    }
+  ]
+}

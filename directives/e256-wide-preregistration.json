@@ -1,0 +1,759 @@
+{
+  "schema": "E256-WIDE-PREREGISTRATION-1",
+  "status": "FROZEN_FOR_EXECUTION",
+  "revision": {
+    "supersedes_sha256": "ed23922b81ee699fac39a8d9283ac9f657a64d9ea44a04e20bf3c828e5d7f3cf",
+    "supersession_chain": [
+      "4231dcdc080b9f0a5f038ef589ffb8e5f79c53bcaf4d885cbc8bce40cf191e78"
+    ],
+    "reason": "Refrozen before execution after implementation audit pinned the reciprocal-control stream domain, raw material serialization, exhaustive inverse scope, and diagnostic encodings that the prior draft left implicit.",
+    "prior_receipt_status": "no receipt was generated under either superseded preregistration"
+  },
+  "date_basis": "2026-08-20 session date; no wall-clock timestamp asserted",
+  "toolchain_contract": {
+    "python": "3.9.6",
+    "numpy": "1.26.4",
+    "deterministic_operations": "integer and byte operations only; no floating-point value enters the deterministic payload",
+    "advisory_only": [
+      "platform",
+      "elapsed_seconds",
+      "git_head",
+      "git_dirty"
+    ]
+  },
+  "authorization": {
+    "architecture_record": "directives/e256-wide-architecture.md",
+    "contract_start_marker": "<!-- E256-W-CONTRACT-START -->",
+    "contract_end_marker": "<!-- E256-W-CONTRACT-END -->",
+    "contract_hash_preimage": "all bytes strictly between the unique start and end marker strings, including their surrounding newlines but excluding both marker strings",
+    "contract_sha256": "1f18c46884d13b010dca9a8217eb8d5472cb5b85fac59ec9ba886defb8fc4c5d",
+    "accepted_research_constraints": [
+      "W0",
+      "W1",
+      "W2",
+      "W3",
+      "W4",
+      "W5",
+      "W6",
+      "W7",
+      "W8",
+      "W9",
+      "W10",
+      "W11",
+      "W12"
+    ],
+    "accepted_constraint_definitions": {
+      "W0": "Reviewed nonce-misuse-resistant AEAD is the external boundary; AEAD-only is the production baseline.",
+      "W1": "Use one 256-bit / 32-byte security-bearing state rather than independent byte maps.",
+      "W2": "Use 4x8 Rijndael geometry with byte j at row j mod 4 and column j div 4.",
+      "W3": "Use 32 keyed 8-bit rotor bijections per round as the only nonlinear layer.",
+      "W4": "Use keyed affine equivalents of the AES S-box so every rotor preserves exact DDT, LAT, and algebraic-degree bounds.",
+      "W5": "Use Rijndael-256 row offsets 0,1,3,4 and a 4x4 MDS MixColumns layer for explicit cross-byte diffusion.",
+      "W6": "Derive rotor selection, round masks, and tweak material from a keyed PRF over complete canonical context.",
+      "W7": "Inject a 32-byte PRF-derived mask before round one and after every round.",
+      "W8": "Encryption and decryption are deliberately different; reflector reciprocity is forbidden.",
+      "W9": "Require a tableless/bitsliced rotor path or explicitly exclude physical-security claims.",
+      "W10": "Test rounds 1 through 12 but select no production round count in this gate.",
+      "W11": "Evolution is immutable, deterministic, preregistered, control-calibrated, holdout-graded, and human-promoted; deployed mutation is forbidden.",
+      "W12": "Promotion requires a new identity, byte-exact spec, independent implementations and KATs, full attacks, protocol/hardware evidence, external review, and human claim review."
+    },
+    "allowed": "deterministic model, structural certificate, ablation, and attack-harness research",
+    "blocked": [
+      "cipher-suite or profile promotion",
+      "production software or RTL",
+      "fixture or protocol promotion",
+      "C/H/N claim movement",
+      "security-bit or production-readiness claim",
+      "publication claim without separate review"
+    ]
+  },
+  "predecessor": {
+    "architecture": "directives/e256-vnext-topology.md",
+    "receipt": "logs/e256-vnext-rotor-schedule-bakeoff.json",
+    "receipt_schema": "E256-VNEXT-ROTOR-SCHEDULE-BAKEOFF-1",
+    "deterministic_payload_sha256": "fd54809cbd12de9d6f14151bcd401232aae765b72cb8368128ea54bdfa7b7197",
+    "inherited_result": "No byte-local depth was security-selected; 1+1 affine-AES/full-counter remains attack-only and AEAD-only remains production baseline."
+  },
+  "questions": [
+    {
+      "id": "WQ1",
+      "text": "Does the frozen rotor family preserve exact AES-S-box differential, linear, algebraic, and bijection properties for every sampled key and ID?"
+    },
+    {
+      "id": "WQ2",
+      "text": "Do the MDS and row-shift certificates establish branch number 5, structural all-to-all byte reachability, and the 25-active-rotor four-round theorem premise?"
+    },
+    {
+      "id": "WQ3",
+      "text": "Are the rotors load-bearing: does bypassing their nonlinearity make the complete 256-bit permutation affine while the candidate violates the recovered affine model?"
+    },
+    {
+      "id": "WQ4",
+      "text": "Is diffusion load-bearing: does removing it restore 32 isolated byte lanes while the candidate reaches full structural byte reachability?"
+    },
+    {
+      "id": "WQ5",
+      "text": "Does this structural gate justify any production round count or an advantage over fixed-AES-SPN and AEAD-only baselines?"
+    }
+  ],
+  "non_claims": [
+    "Passing this gate is not IND-CPA, IND-CCA, AEAD, PRP, PRF, or standalone-cipher security.",
+    "A single-trail bound does not cover differential clustering, integrals, algebraic, meet-in-the-middle, rebound, slide, invariant-subspace, related-key/tweak, multi-user, reset/reuse, or implementation attacks.",
+    "Structural dependency paths do not prove the absence of algebraic cancellation.",
+    "No security-bit value is computed or implied; E256 denotes the alphabet and state width only.",
+    "Avalanche and dependency results are diagnostics, not confidentiality evidence.",
+    "The rotor namespace is not assumed to beat a fixed reviewed S-box; that remains an open comparison.",
+    "Reviewed standard AEAD remains mandatory for real data and AEAD-only is a valid final outcome.",
+    "No C/H/N row, E256 finding, suite, profile, fixture, or release gate closes here."
+  ],
+  "byte_encodings": {
+    "u8": "one unsigned big-endian byte",
+    "u16be": "two unsigned big-endian bytes",
+    "u64be": "eight unsigned big-endian bytes",
+    "field": "u16be(byte_length) || bytes; reject byte_length > 65535",
+    "bit_numbering": "bit i is byte floor(i/8), mask 1 << (i mod 8); bit 0 is the LSB of byte 0",
+    "canonical_json": "UTF-8 JSON with sort_keys=true and separators=(',', ':'); integers only in deterministic numeric results",
+    "spectrum_serialization": "DDT as row-major little-endian uint16; LAT as row-major little-endian int16",
+    "aes_sbox_hash_preimage": "256 bytes SBOX[0] through SBOX[255]"
+  },
+  "experimental_kdf": {
+    "status": "model-only HMAC-SHA512 PRF; not a suite decision",
+    "extract_key_ascii": "E256-W/gate/extract/v1",
+    "extract": "HMAC-SHA512(key=extract_key_ascii, data=deterministic 32-byte test IKM)",
+    "subkey": "HMAC-SHA512(PRK, ASCII 'subkey' || 0x00 || ASCII domain)",
+    "purpose_stream": "concatenate HMAC-SHA512(PRK_subkey, domain || 0x00 || u64be(chunk_index)) for chunk_index=0,1,...; reject before chunk_index wrap",
+    "subkeys": [
+      "rotor",
+      "selection",
+      "round-mask",
+      "controls"
+    ],
+    "bounded_sampler": "limit=65536-(65536 mod upper); read u16be v until v<limit; return v mod upper; require 1<=upper<=65536",
+    "canonical_context": {
+      "prefix_ascii": "E256-W/gate/context/v1",
+      "encoding": "prefix || field(UTF8 corpus) || field(opaque stream_id) || u8(direction) || u64be(sequence) || u64be(block_counter)",
+      "ordered_fields": [
+        "corpus",
+        "stream_id",
+        "direction",
+        "sequence",
+        "block_counter"
+      ],
+      "direction_semantics": "traffic/channel direction held unchanged between permutation and inverse; not an encrypt/decrypt selector",
+      "corpus_values": {
+        "train": "e256-wide-train",
+        "disjoint_holdout": "e256-wide-holdout"
+      }
+    },
+    "rotor_derivation": {
+      "key": "subkey(PRK, 'rotor')",
+      "base": "ASCII 'E256-W/gate/rotor/v1' || u8(logical_id)",
+      "matrix_in_attempt": "PurposeStream(key, base || ASCII '/matrix/in/attempt/' || u16be(attempt)).read(8)",
+      "matrix_out_attempt": "PurposeStream(key, base || ASCII '/matrix/out/attempt/' || u16be(attempt)).read(8)",
+      "matrix_rows": "eight consecutive bytes become GF(2) rows 0 through 7; choose first attempt with rank 8",
+      "constants": "PurposeStream(key, base || ASCII '/constants').read(2); byte 0 is c_in, byte 1 is c_out"
+    },
+    "selection_derivation": {
+      "key": "subkey(PRK, 'selection')",
+      "domain": "ASCII 'E256-W/gate/selection/v1' || field(canonical_context) || u16be(round) || u8(lane)",
+      "logical_id": "PurposeStream(key, domain).byte()",
+      "round_range": "1 through 12",
+      "lane_range": "0 through 31"
+    },
+    "round_mask_derivation": {
+      "key": "subkey(PRK, 'round-mask')",
+      "domain": "ASCII 'E256-W/gate/round-mask/v1' || field(canonical_context) || u16be(mask_index)",
+      "mask": "PurposeStream(key, domain).read(32)",
+      "mask_index_range": "0 through selected round count"
+    },
+    "control_root": "subkey(extract_prk(test_ikm(0)), 'controls')"
+  },
+  "execution_serialization": {
+    "purpose_stream_chunk_range": "chunk indices 0 through 18446744073709551615 are valid; after emitting chunk 18446744073709551615, reject before integer wrap if another chunk is requested",
+    "reciprocal_sandwich_control_stream": {
+      "key": "control_root",
+      "domain_ascii": "E256-W/gate/control/reciprocal-sandwich/v1",
+      "mask": "read consecutive 32-byte values from one PurposeStream and use the first value that is not 32 zero bytes"
+    },
+    "complete_round_material": "800 raw bytes with no tags or lengths: 384 rotor-ID bytes in round-major then lane-major order for rounds 1 through 12 and lanes 0 through 31, followed by 416 mask bytes in mask-index-major then byte-index order for masks 0 through 12 and bytes 0 through 31",
+    "rotor_table_record": "512 raw bytes with no tags or lengths: 256 forward bytes in input order followed by 256 inverse bytes in input order",
+    "rotor_namespace": "131072 raw bytes with no tags or lengths: rotor_table_record in logical-ID order 0 through 255",
+    "key_bit_flip_material": "131872 raw bytes with no tags or lengths: rotor_namespace followed by complete_round_material",
+    "digest_rule": "all material and namespace digests are lowercase SHA-256 hex of the exact raw serialization above",
+    "duplicate_table_count": "256 minus the number of distinct rotor_table_record SHA-256 digests in the key-label-0 namespace",
+    "rotor_inverse_validation": {
+      "key_labels": [
+        0,
+        1,
+        8,
+        9
+      ],
+      "logical_ids": "0 through 255 for every listed key label",
+      "expected_table_pairs": 1024,
+      "check": "forward and inverse are both 256-point bijections and inverse[forward[x]] = forward[inverse[x]] = x for every x"
+    },
+    "rotor_id_repeat_count": "over the frozen 55296-ID roundtrip traversal in canonical key-label, stream-index, direction, context-case, round, lane order, count every occurrence after the first occurrence of that logical ID; also emit the 256-entry occurrence histogram",
+    "affine_holdout_attempts": "attempt values 0 through 65535 are valid u16be values; fail closed if no admissible distinct holdout is found",
+    "singular_mix_matrix_error_code": "SINGULAR_MIX_MATRIX",
+    "avalanche_histogram": "a 257-element integer array whose array index is Hamming distance 0 through 256",
+    "fixed_aes_material": "derive and retain the same candidate selections and masks; fixed-AES permutation ignores selection bytes but uses the masks unchanged",
+    "outer_receipt_keys": [
+      "deterministic_payload",
+      "deterministic_payload_sha256",
+      "environment_advisory_excluded_from_digest",
+      "no_wall_clock"
+    ]
+  },
+  "construction": {
+    "identity": "E256-W/gate-candidate/v1",
+    "state_bytes": 32,
+    "state_bits": 256,
+    "rows": 4,
+    "columns": 8,
+    "byte_mapping": "index = 4 * column + row",
+    "round_counts": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "round_order": [
+      "xor_round_mask_0_before_round_1",
+      "rotor_sub_32_lanes",
+      "row_shift_left",
+      "mix_columns_8_columns",
+      "xor_round_mask_r"
+    ],
+    "inverse_loop": "for round r from R down to 1: xor mask[r], inverse MixColumns, inverse RowShift, inverse rotor layer r; after loop xor mask[0]",
+    "logical_rotor_ids": 256,
+    "rotor_family": {
+      "id": "aes_affine_v1",
+      "formula": "R(x) = L_out(AES_SBOX(L_in(x) XOR c_in)) XOR c_out",
+      "matrix_convention": "bit 0 is LSB; output bit r is parity(row_r AND x); matrix rows 0 through 7 are derived in order",
+      "aes_field_polynomial": "0x11b",
+      "aes_sbox_sha256": "c2d8e5eed6cbebd8625fc18f81486a7733c04f9b0129ffbe974c68b90308b4f2",
+      "expected_bijection": true,
+      "expected_differential_uniformity": 4,
+      "expected_maximum_absolute_lat": 32,
+      "expected_forward_algebraic_degree": 7,
+      "expected_inverse_algebraic_degree": 7,
+      "quality_rejection": "invertible affine wrappers only; no DDT/LAT/cycle cherry-picking"
+    },
+    "row_shift": {
+      "offsets": [
+        0,
+        1,
+        3,
+        4
+      ],
+      "forward": "out[4*c+r] = in[4*((c+offset[r]) mod 8)+r]",
+      "inverse": "out[4*c+r] = in[4*((c-offset[r]) mod 8)+r]"
+    },
+    "mix_columns": {
+      "field_polynomial": "0x11b",
+      "bit_order": "bit 0 is the constant coefficient",
+      "orientation": "out[4*c+r] = XOR over k=0..3 of gf_mul(matrix[r][k], in[4*c+k])",
+      "matrix_hex_rows": [
+        [
+          "02",
+          "03",
+          "01",
+          "01"
+        ],
+        [
+          "01",
+          "02",
+          "03",
+          "01"
+        ],
+        [
+          "01",
+          "01",
+          "02",
+          "03"
+        ],
+        [
+          "03",
+          "01",
+          "01",
+          "02"
+        ]
+      ],
+      "inverse": "compute by exact GF(2^8) Gaussian elimination and require matrix*inverse=inverse*matrix=identity",
+      "certificate": "all 69 nonempty square minors are nonzero over GF(2^8), hence branch number 5"
+    },
+    "round_masks": "one 32-byte purpose-stream read for mask indices 0 through selected round count",
+    "round_bijection_certificate": "compositional only: all 32 rotors bijective, RowShift a byte permutation, MixColumns determinant nonzero, and XOR masks invertible; no 2^256 exhaustive claim"
+  },
+  "metric_definitions": {
+    "differential_uniformity": "max DDT[input_difference][output_difference] over input_difference 1..255",
+    "maximum_absolute_lat": "max absolute LAT[input_mask][output_mask] over input_mask 1..255 and output_mask 1..255",
+    "algebraic_degree": "maximum coordinate ANF degree; compute separately for forward and inverse maps",
+    "dependency": "boolean structural byte reachability propagated through lane-local rotors, ShiftRows permutation, and union at nonzero MixColumns coefficients; not a no-cancellation proof",
+    "affine_model": "f(0) is offset; column i is f(e_i) XOR f(0) for the 256 frozen basis vectors; predict by XORing selected columns and offset",
+    "avalanche": "diagnostic Hamming distance in 256 output bits between zero block and each one-bit input flip under identical key/context/round material"
+  },
+  "theorem_targets": {
+    "mds_all_square_minors_nonzero": true,
+    "mds_expected_minor_count": 69,
+    "mix_columns_branch_number": 5,
+    "row_offsets_distinct": true,
+    "single_column_rows_reach_distinct_columns": true,
+    "full_structural_byte_dependency_by_round": 3,
+    "four_round_certificate_id": "E256-W-WIDETRAIL-25-v1",
+    "four_round_proof_obligations": [
+      "all 69 MixColumns nonempty square minors are nonzero",
+      "MixColumns branch number is 5",
+      "row offsets 0,1,3,4 are distinct modulo 8",
+      "for active source-column counts a=1,2,3,4, middle bundle cases record a+(5-a)=5",
+      "active source-column counts a>=5 satisfy the middle bound immediately",
+      "two outer MDS inequalities each contribute branch factor 5"
+    ],
+    "four_round_active_rotor_lower_bound": 25,
+    "four_round_single_trail_differential_probability_log2_upper": -150,
+    "four_round_single_trail_linear_correlation_log2_upper": -75,
+    "scope": "single differential/linear trails only; no clustering or security claim"
+  },
+  "corpus": {
+    "train_key_labels": [
+      0,
+      1
+    ],
+    "disjoint_holdout_key_labels": [
+      8,
+      9
+    ],
+    "test_ikm": "first 32 bytes of SHA-512(ASCII 'E256-W/gate/key/v1/' || u16be(key_label))",
+    "stream_ids_per_key": 2,
+    "stream_indices": [
+      0,
+      1
+    ],
+    "stream_id": "first 16 bytes of SHA-256(ASCII 'E256-W/gate/stream/v1/' || u16be(key_label) || u8(stream_index))",
+    "directions": [
+      0,
+      1
+    ],
+    "context_cases": [
+      {
+        "id": "counter_0",
+        "sequence": 7,
+        "counter": 0
+      },
+      {
+        "id": "counter_1",
+        "sequence": 7,
+        "counter": 1
+      },
+      {
+        "id": "counter_255",
+        "sequence": 7,
+        "counter": 255
+      },
+      {
+        "id": "counter_256",
+        "sequence": 7,
+        "counter": 256
+      },
+      {
+        "id": "counter_65535",
+        "sequence": 7,
+        "counter": 65535
+      },
+      {
+        "id": "counter_65536",
+        "sequence": 7,
+        "counter": 65536
+      },
+      {
+        "id": "counter_2p32_minus_1",
+        "sequence": 7,
+        "counter": 4294967295
+      },
+      {
+        "id": "counter_2p32",
+        "sequence": 7,
+        "counter": 4294967296
+      },
+      {
+        "id": "sequence_reset",
+        "sequence": 8,
+        "counter": 0
+      }
+    ],
+    "required_distinct_context_pairs": [
+      [
+        "counter_0",
+        "counter_1"
+      ],
+      [
+        "counter_255",
+        "counter_256"
+      ],
+      [
+        "counter_65535",
+        "counter_65536"
+      ],
+      [
+        "counter_2p32_minus_1",
+        "counter_2p32"
+      ],
+      [
+        "counter_0",
+        "counter_2p32"
+      ],
+      [
+        "counter_0",
+        "sequence_reset"
+      ],
+      [
+        "counter_65536",
+        "sequence_reset"
+      ]
+    ],
+    "roundtrip_cartesian_product": {
+      "key_labels": "all train and disjoint holdout labels",
+      "stream_indices": "0 and 1",
+      "directions": "0 and 1",
+      "context_cases": "all nine cases",
+      "round_counts": "1 through 12",
+      "block_indices": "0 through 7",
+      "expected_contexts": 144,
+      "expected_tests": 13824
+    },
+    "roundtrip_block": "first 32 bytes of SHA-512(ASCII 'E256-W/gate/block/v1/' || field(canonical_context) || u16be(block_index))",
+    "rotor_spectrum_key_labels": [
+      0,
+      8
+    ],
+    "rotor_spectrum_ids": [
+      0,
+      1,
+      2,
+      3,
+      16,
+      17,
+      63,
+      64,
+      127,
+      128,
+      191,
+      192,
+      252,
+      253,
+      254,
+      255
+    ],
+    "expected_rotor_spectrum_records": 32,
+    "affine_probe": {
+      "key_label": 0,
+      "stream_index": 0,
+      "direction": 0,
+      "context_case": "counter_0",
+      "rounds": [
+        1,
+        2,
+        4,
+        8,
+        12
+      ],
+      "basis_inputs": "zero plus basis vectors e_0 through e_255 using frozen bit numbering",
+      "holdout_count": 64,
+      "holdout_derivation": "first 32 bytes of SHA-512(ASCII 'E256-W/gate/affine-holdout/v1/' || u16be(index) || u16be(attempt)); choose first value that is nonzero, not a power of two, and not previously selected",
+      "expected_identity_control_matches": 64,
+      "expected_candidate_mismatches_minimum": 1,
+      "expected_fixed_aes_mismatches_minimum": 1
+    },
+    "avalanche_probe": {
+      "key_labels": [
+        0,
+        8
+      ],
+      "stream_index": 0,
+      "direction": 0,
+      "context_case": "counter_0",
+      "rounds": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        8,
+        10,
+        12
+      ],
+      "base_block": "32 zero bytes",
+      "input_bit_flips": 256,
+      "expected_comparisons": 4096,
+      "output": "integer histogram with keys 0 through 256 for each key label and round; diagnostic only"
+    },
+    "context_material_separation": {
+      "context_pair_product": "all four key labels x two stream indices x two directions x seven required context pairs",
+      "expected_context_pair_comparisons": 112,
+      "direction_pair_product": "all four key labels x two stream indices x nine context cases",
+      "expected_direction_pair_comparisons": 72,
+      "material_scope": "all rotor IDs for rounds 1 through 12 plus all round masks 0 through 12",
+      "collision_rule": "complete canonical material bytes equal across unequal frozen contexts"
+    },
+    "key_bit_flip_probe": {
+      "base_key_label": 0,
+      "stream_index": 0,
+      "direction": 0,
+      "context_case": "counter_0",
+      "indices": [
+        0,
+        1,
+        7,
+        8,
+        31,
+        32,
+        63,
+        64,
+        127,
+        128,
+        191,
+        255
+      ],
+      "mutation": "flip the indexed bit in the 32-byte test IKM before extract",
+      "expected_comparisons": 12,
+      "material_scope": "all 256 rotor tables plus rounds 1 through 12 selection and masks"
+    },
+    "rotor_id_repeat_scope": "all selection IDs in the 144 roundtrip contexts for rounds 1 through 12 and lanes 0 through 31",
+    "rotor_namespace_digest_scope": "all 256 forward and inverse rotor tables for key label 0"
+  },
+  "baselines": [
+    {
+      "id": "fixed_aes_spn",
+      "construction": "same masks, row shifts, and MDS layer, but every lane uses the public AES S-box without a keyed rotor namespace",
+      "purpose": "honest structural and implementation-cost comparator; this gate assumes no security advantage for keyed rotor selection",
+      "required_nulls": [
+        "must mismatch the recovered affine model on at least one frozen holdout",
+        "must not exhibit byte-lane isolation",
+        "must not trigger the reciprocal two-query detector on every probe"
+      ]
+    },
+    {
+      "id": "aead_only",
+      "construction": "no inner permutation",
+      "purpose": "mandatory production complexity and security-boundary baseline",
+      "byte_metrics": "not applicable"
+    }
+  ],
+  "planted_controls": [
+    {
+      "id": "affine_rotor_bypass",
+      "mutation": "inject identity rotor tables through the normal rotor-layer variant while retaining normal masks, RowShift, and MixColumns",
+      "shared_path": [
+        "round material",
+        "permute",
+        "inverse permute",
+        "affine probe"
+      ],
+      "detector": "affine_model_matches_all_64_holdouts",
+      "required_result": "detected"
+    },
+    {
+      "id": "no_diffusion",
+      "mutation": "inject identity RowShift and identity MixColumns through the normal dependency and permutation variants",
+      "shared_path": [
+        "rotor layer",
+        "round material",
+        "dependency reachability",
+        "permute",
+        "inverse permute"
+      ],
+      "detector": "all 32 dependency rows remain singleton same-index lanes for rounds 1 through 12",
+      "required_result": "detected"
+    },
+    {
+      "id": "singular_mix_matrix",
+      "mutation": "replace MixColumns row 3 with row 2 before structural validation",
+      "shared_path": [
+        "GF(2^8) determinant and minor certificate"
+      ],
+      "adapter_exception": "expected typed structural rejection occurs before inverse or permutation because no inverse exists",
+      "detector": "zero determinant or minor and inverse unavailable",
+      "required_result": "detected"
+    },
+    {
+      "id": "zero_row_shifts",
+      "mutation": "inject row offsets 0,0,0,0 through the normal dependency reachability routine",
+      "shared_path": [
+        "dependency reachability",
+        "row-dispersion certificate"
+      ],
+      "detector": "full 32-byte structural dependency is not reached by round 12",
+      "required_result": "detected"
+    },
+    {
+      "id": "reciprocal_sandwich",
+      "mutation": "adapter F(x)=A^-1(A(x) XOR m), where A is the normal four-round candidate under the frozen affine-probe context and m is the first nonzero 32-byte controls-domain stream value",
+      "shared_path": [
+        "candidate permute",
+        "candidate inverse permute"
+      ],
+      "adapter_exception": "the wrapper deliberately recreates the predecessor topology outside the normal candidate round order",
+      "probes": "64 affine holdout vectors",
+      "detector": "F(F(x)) equals x for all 64 probes",
+      "null_calibration": "normal candidate and fixed-AES four-round maps composed with themselves must each fail equality on at least one probe",
+      "required_result": "detected"
+    },
+    {
+      "id": "truncated_counter_32",
+      "mutation": "before normal canonical encoding replace block_counter by zero-extended (block_counter mod 2^32) in the u64be slot",
+      "shared_path": [
+        "canonical context",
+        "selection material",
+        "round masks",
+        "complete material collision detector"
+      ],
+      "comparison": "counter_0 versus counter_2p32",
+      "detector": "complete round-material collision",
+      "required_result": "detected"
+    },
+    {
+      "id": "direction_omitted",
+      "mutation": "before normal canonical encoding replace direction by u8 zero while retaining the field",
+      "shared_path": [
+        "canonical context",
+        "selection material",
+        "round masks",
+        "complete material collision detector"
+      ],
+      "comparison": "direction 0 versus direction 1 at key label 0, stream 0, counter_0",
+      "detector": "complete round-material collision",
+      "required_result": "detected"
+    }
+  ],
+  "control_execution_contract": {
+    "requirement": "Each control must execute exactly its declared shared_path; only declared adapter_exception stages may terminate early or wrap the candidate.",
+    "exact_control_ids": true,
+    "candidate_nulls": [
+      "candidate affine model must mismatch at least one holdout for every affine-probe round",
+      "candidate dependency must not be lane-isolated and must reach all-to-all by round 3",
+      "candidate four-round self-composition must fail equality on at least one reciprocal probe"
+    ],
+    "baseline_nulls": [
+      "fixed-AES affine model must mismatch at least one holdout for every affine-probe round",
+      "fixed-AES dependency must not be lane-isolated",
+      "fixed-AES four-round self-composition must fail equality on at least one reciprocal probe"
+    ],
+    "fail_closed": "Build an in-memory invalid diagnostic, exit nonzero, and refuse to write or accept the canonical receipt on any contract, control, null, or coverage failure."
+  },
+  "metrics": {
+    "functional": [
+      "exhaustive 256-point rotor bijection and exact inverse",
+      "compositional round-bijection certificate",
+      "sampled encrypt/decrypt round trip for the exact corpus Cartesian product",
+      "complete context material and selection digest"
+    ],
+    "rotor": [
+      "exact DDT maximum and little-endian spectrum hash",
+      "exact LAT maximum and little-endian spectrum hash",
+      "forward and inverse maximum coordinate ANF degree",
+      "bijection and affine-identity test",
+      "complete logical-ID namespace forward/inverse digest and duplicate-table count for key 0"
+    ],
+    "diffusion": [
+      "all 69 MixColumns nonempty square minors",
+      "exact inverse and branch-number certificate",
+      "row-offset dispersion certificate",
+      "32x32 structural byte-dependency reachability by round",
+      "earliest all-to-all structural dependency round",
+      "E256-W-WIDETRAIL-25-v1 obligation manifest"
+    ],
+    "load_bearing": [
+      "candidate versus affine-recovered model",
+      "identity-rotor affine control",
+      "candidate versus no-diffusion lane-isolation control",
+      "fixed-AES-SPN comparator"
+    ],
+    "context": [
+      "required counter-boundary and reset material separation",
+      "direction separation",
+      "pinned test-IKM key-bit-flip material separation"
+    ],
+    "diagnostic_only": [
+      "bit-avalanche integer Hamming-distance histogram by round",
+      "rotor-ID repeat count"
+    ],
+    "cost_convention": {
+      "candidate_per_round": "32 rotor evaluations, 64 non-unit GF(2^8) multiplications, 96 MixColumns XORs, and 32 round-mask XORs; plus initial 32 mask XORs per permutation",
+      "fixed_aes_per_round": "32 fixed AES-S-box evaluations with the same diffusion and mask costs",
+      "aead_only": "zero inner-transform operations",
+      "full_forward_inverse_table_cache_bytes": 131072,
+      "tableless_status": "implementation path required later; not implemented or evidenced by this gate"
+    }
+  },
+  "hard_rejection_rules": [
+    "Abort interpretation unless exact planted-control IDs execute through declared paths and every required result and null calibration passes.",
+    "Reject the construction if the architecture contract, preregistration, predecessor payload, AES S-box, toolchain contract, KDF domains, or operational fields drift.",
+    "Reject the construction if any sampled roundtrip, exhaustive rotor inverse, compositional round-bijection, or state-width check fails.",
+    "Reject the construction if any sampled rotor is non-bijective or differs from DDT maximum 4, LAT maximum 32, forward degree 7, or inverse degree 7 under the frozen metric definitions.",
+    "Reject the construction if any MixColumns square minor is zero, the matrix is non-invertible, or branch number 5 is uncertified.",
+    "Reject the structural interpretation if row dispersion fails, structural all-to-all byte reachability is not reached by round 3, or E256-W-WIDETRAIL-25-v1 is uncertified.",
+    "Reject the construction if candidate context material collides at any required counter pair, reset, direction, or pinned key-bit flip.",
+    "Reject the construction if the candidate matches the recovered affine model on all holdouts for any frozen affine-probe round or if it exhibits byte-lane isolation under the frozen dependency routine.",
+    "Do not select a production round count or claim security solely from structural certificates, avalanche, failed affine probes, or a single-trail bound."
+  ],
+  "interpretation": {
+    "internal_invalid_status": "INVALID_CONTROLS_OR_CONTRACT; never emitted or accepted as the canonical receipt",
+    "valid_emitted_verdicts": [
+      "WIDE_STATE_CANDIDATE_REJECTED",
+      "STRUCTURAL_WIDE_STATE_CANDIDATE_RETAINED_FOR_ATTACK_ONLY"
+    ],
+    "decision_table": [
+      {
+        "condition": "contract, coverage, control, candidate-null, or baseline-null failure",
+        "action": "exit nonzero and refuse canonical receipt write/check"
+      },
+      {
+        "condition": "valid harness and any candidate hard structural rejection",
+        "action": "emit WIDE_STATE_CANDIDATE_REJECTED"
+      },
+      {
+        "condition": "valid harness and every candidate hard structural gate passes",
+        "action": "emit STRUCTURAL_WIDE_STATE_CANDIDATE_RETAINED_FOR_ATTACK_ONLY"
+      }
+    ],
+    "round_selection": "No production round count may be selected. Report the earliest structural dependency-complete round and four-round trail certificate only.",
+    "candidate_retention": "Retain E256-W only as the next attack target if every hard structural gate and control passes.",
+    "baseline_result": "The fixed-AES-SPN comparator has the same structural bounds with less keyed machinery; AEAD-only remains the production baseline. This gate establishes no rotor-namespace security advantage.",
+    "next_if_retained": "Freeze reduced-round and full-round attack campaigns before any byte-exact suite specification."
+  },
+  "receipt_contract": {
+    "schema": "E256-WIDE-STATE-GATE-1",
+    "status": "OPEN_PROGRESS",
+    "output": "logs/e256-wide-state-gate.json",
+    "runner": "Scripts/e256_wide_gate.py",
+    "deterministic_payload_top_level_keys": [
+      "schema",
+      "status",
+      "inputs",
+      "pinned_parameters",
+      "coverage",
+      "controls",
+      "baselines",
+      "results",
+      "interpretation",
+      "limitations"
+    ],
+    "digest": "SHA-256 of canonical_json(deterministic_payload)",
+    "checker": "recompute frozen hashes, all experiments, interpretation gate, payload, and digest; require gate pass; compare complete deterministic payload and digest byte-for-byte",
+    "environment_advisory_excluded_from_digest": [
+      "platform",
+      "elapsed_seconds",
+      "git_head",
+      "git_dirty"
+    ],
+    "write": "sorted indented UTF-8 JSON with final newline and atomic replacement"
+  }
+}

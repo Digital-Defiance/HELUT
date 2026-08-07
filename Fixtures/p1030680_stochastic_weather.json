@@ -1,0 +1,598 @@
+{
+  "target": "P1030680",
+  "ciphertext": "JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF",
+  "prior": "weather-keyboard-kurzsignal",
+  "note": "Qualitatively new prior after training/collapse clean negatives at ~65\u201369%. Families: Wetterkurzschl\u00fcssel-ish weather lexicon, QWERTZ/ASDF keyboard-row slides, Kurzsignal-ish compressed groups. NOT Thetis training or VERSENKEN/FLENSBURG collapse. 16\u201324 constrained; self-stecker legal. First falsification keeps rings AAAA/AACU.",
+  "survivor_ratio": 0.8,
+  "noise_margin": 0.1,
+  "templates": [
+    {
+      "name": "weather:pad:WETTERXX+LUFTDRUC@g2@0",
+      "pattern": "WETTERXX..LUFTDRUCKXXX..................................................",
+      "note": "pad+body WETTERXX +2+ LUFTDRUCKXXX",
+      "constrained": 20,
+      "prior": "weather"
+    },
+    {
+      "name": "weather:pad:WETTERXX+LUFTDRUC@g2@1",
+      "pattern": ".WETTERXX..LUFTDRUCKXXX.................................................",
+      "note": "pad+body WETTERXX +2+ LUFTDRUCKXXX",
+      "constrained": 20,
+      "prior": "weather"
+    },
+    {
+      "name": "weather:pad:WETTERXX+LUFTDRUC@g2@2",
+      "pattern": "..WETTERXX..LUFTDRUCKXXX................................................",
+      "note": "pad+body WETTERXX +2+ LUFTDRUCKXXX",
+      "constrained": 20,
+      "prior": "weather"
+    },
+    {
+      "name": "weather:pad:WETTERXX+LUFTDRUC@g4@0",
+      "pattern": "WETTERXX....LUFTDRUCKXXX................................................",
+      "note": "pad+body WETTERXX +4+ LUFTDRUCKXXX",
+      "constrained": 20,
+      "prior": "weather"
+    },
+    {
+      "name": "weather:pad:WETTERXX+LUFTDRUC@g4@1",
+      "pattern": ".WETTERXX....LUFTDRUCKXXX...............................................",
+      "note": "pad+body WETTERXX +4+ LUFTDRUCKXXX",
+      "constrained": 20,
+      "prior": "weather"
+    },
+    {
+      "name": "weather:pad:WETTERXX+LUFTDRUC@g4@2",
+      "pattern": "..WETTERXX....LUFTDRUCKXXX..............................................",
+      "note": "pad+body WETTERXX +4+ LUFTDRUCKXXX",
+      "constrained": 20,
+      "prior": "weather"
+    },
+    {
+      "name": "weather:pad:WETTERXX+NIEDERSC@g2@1",
+      "pattern": ".WETTERXX..NIEDERSCHLAG.................................................",
+      "note": "pad+body WETTERXX +2+ NIEDERSCHLAG",
+      "constrained": 20,
+      "prior": "weather"
+    },
+    {
+      "name": "weather:pad:WETTERXX+SICHTWEI@g2@0",
+      "pattern": "WETTERXX..SICHTWEITEXX..................................................",
+      "note": "pad+body WETTERXX +2+ SICHTWEITEXX",
+      "constrained": 20,
+      "prior": "weather"
+    },
+    {
+      "name": "weather:pad:WETTERXX+SICHTWEI@g2@1",
+      "pattern": ".WETTERXX..SICHTWEITEXX.................................................",
+      "note": "pad+body WETTERXX +2+ SICHTWEITEXX",
+      "constrained": 20,
+      "prior": "weather"
+    },
+    {
+      "name": "weather:pad:WETTERXX+SICHTWEI@g2@2",
+      "pattern": "..WETTERXX..SICHTWEITEXX................................................",
+      "note": "pad+body WETTERXX +2+ SICHTWEITEXX",
+      "constrained": 20,
+      "prior": "weather"
+    },
+    {
+      "name": "weather:pad:WETTERXX+SICHTWEI@g4@0",
+      "pattern": "WETTERXX....SICHTWEITEXX................................................",
+      "note": "pad+body WETTERXX +4+ SICHTWEITEXX",
+      "constrained": 20,
+      "prior": "weather"
+    },
+    {
+      "name": "weather:pad:WETTERXX+SICHTWEI@g4@1",
+      "pattern": ".WETTERXX....SICHTWEITEXX...............................................",
+      "note": "pad+body WETTERXX +4+ SICHTWEITEXX",
+      "constrained": 20,
+      "prior": "weather"
+    },
+    {
+      "name": "weather:pad:WETTERXX+SICHTWEI@g4@2",
+      "pattern": "..WETTERXX....SICHTWEITEXX..............................................",
+      "note": "pad+body WETTERXX +4+ SICHTWEITEXX",
+      "constrained": 20,
+      "prior": "weather"
+    },
+    {
+      "name": "weather:pad:WETTERXX+TEMPERAT@g2@0",
+      "pattern": "WETTERXX..TEMPERATURXX..................................................",
+      "note": "pad+body WETTERXX +2+ TEMPERATURXX",
+      "constrained": 20,
+      "prior": "weather"
+    },
+    {
+      "name": "weather:pad:WETTERXX+WETTERBE@g2@0",
+      "pattern": "WETTERXX..WETTERBERICH..................................................",
+      "note": "pad+body WETTERXX +2+ WETTERBERICH",
+      "constrained": 20,
+      "prior": "weather"
+    },
+    {
+      "name": "weather:pad:WETTERXX+WINDSTAE@g2@0",
+      "pattern": "WETTERXX..WINDSTAERKEX..................................................",
+      "note": "pad+body WETTERXX +2+ WINDSTAERKEX",
+      "constrained": 20,
+      "prior": "weather"
+    },
+    {
+      "name": "weather:BAROMETERX@6",
+      "pattern": "......BAROMETERXXXXXXX..................................................",
+      "note": "weather single BAROMETERXXXXXXX@6",
+      "constrained": 16,
+      "prior": "weather"
+    },
+    {
+      "name": "weather:BEWOELKUNG@3",
+      "pattern": "...BEWOELKUNGENXXXX.....................................................",
+      "note": "weather single BEWOELKUNGENXXXX@3",
+      "constrained": 16,
+      "prior": "weather"
+    },
+    {
+      "name": "weather:DRUCKTENDE@2",
+      "pattern": "..DRUCKTENDENZXXXX......................................................",
+      "note": "weather single DRUCKTENDENZXXXX@2",
+      "constrained": 16,
+      "prior": "weather"
+    },
+    {
+      "name": "weather:GRADCELSIU@3",
+      "pattern": "...GRADCELSIUSXXXXX.....................................................",
+      "note": "weather single GRADCELSIUSXXXXX@3",
+      "constrained": 16,
+      "prior": "weather"
+    },
+    {
+      "name": "weather:HOCHDRUCKX@5",
+      "pattern": ".....HOCHDRUCKXXXXXXX...................................................",
+      "note": "weather single HOCHDRUCKXXXXXXX@5",
+      "constrained": 16,
+      "prior": "weather"
+    },
+    {
+      "name": "weather:LUFTDRUCKX@5",
+      "pattern": ".....LUFTDRUCKXXXXXXX...................................................",
+      "note": "weather single LUFTDRUCKXXXXXXX@5",
+      "constrained": 16,
+      "prior": "weather"
+    },
+    {
+      "name": "weather:LUFTFEUCHT@4",
+      "pattern": "....LUFTFEUCHTEXXXXX....................................................",
+      "note": "weather single LUFTFEUCHTEXXXXX@4",
+      "constrained": 16,
+      "prior": "weather"
+    },
+    {
+      "name": "weather:NEBELBANKE@4",
+      "pattern": "....NEBELBANKENXXXXX....................................................",
+      "note": "weather single NEBELBANKENXXXXX@4",
+      "constrained": 16,
+      "prior": "weather"
+    },
+    {
+      "name": "weather:NIEDERSCHL@3",
+      "pattern": "...NIEDERSCHLAGXXXX.....................................................",
+      "note": "weather single NIEDERSCHLAGXXXX@3",
+      "constrained": 16,
+      "prior": "weather"
+    },
+    {
+      "name": "weather:REGENFALLX@6",
+      "pattern": "......REGENFALLXXXXXXX..................................................",
+      "note": "weather single REGENFALLXXXXXXX@6",
+      "constrained": 16,
+      "prior": "weather"
+    },
+    {
+      "name": "weather:SEEZUSTAND@4",
+      "pattern": "....SEEZUSTANDXXXXXX....................................................",
+      "note": "weather single SEEZUSTANDXXXXXX@4",
+      "constrained": 16,
+      "prior": "weather"
+    },
+    {
+      "name": "weather:SICHTWEITE@5",
+      "pattern": ".....SICHTWEITEXXXXXX...................................................",
+      "note": "weather single SICHTWEITEXXXXXX@5",
+      "constrained": 16,
+      "prior": "weather"
+    },
+    {
+      "name": "keyboard:pad:ASDFGHJK+ASDFGHJK@g2@0",
+      "pattern": "ASDFGHJK..ASDFGHJKLYXC..................................................",
+      "note": "pad+body ASDFGHJK +2+ ASDFGHJKLYXC",
+      "constrained": 20,
+      "prior": "keyboard"
+    },
+    {
+      "name": "keyboard:pad:ASDFGHJK+ASDFGHJK@g2@1",
+      "pattern": ".ASDFGHJK..ASDFGHJKLYXC.................................................",
+      "note": "pad+body ASDFGHJK +2+ ASDFGHJKLYXC",
+      "constrained": 20,
+      "prior": "keyboard"
+    },
+    {
+      "name": "keyboard:pad:ASDFGHJK+ASDFGHJK@g4@0",
+      "pattern": "ASDFGHJK....ASDFGHJKLYXC................................................",
+      "note": "pad+body ASDFGHJK +4+ ASDFGHJKLYXC",
+      "constrained": 20,
+      "prior": "keyboard"
+    },
+    {
+      "name": "keyboard:pad:ASDFGHJK+QWERTZUI@g2@1",
+      "pattern": ".ASDFGHJK..QWERTZUIOASD.................................................",
+      "note": "pad+body ASDFGHJK +2+ QWERTZUIOASD",
+      "constrained": 20,
+      "prior": "keyboard"
+    },
+    {
+      "name": "keyboard:pad:QWERTZUI+ABCDEFGH@g2@0",
+      "pattern": "QWERTZUI..ABCDEFGHIJKL..................................................",
+      "note": "pad+body QWERTZUI +2+ ABCDEFGHIJKL",
+      "constrained": 20,
+      "prior": "keyboard"
+    },
+    {
+      "name": "keyboard:pad:QWERTZUI+ABCDEFGH@g2@1",
+      "pattern": ".QWERTZUI..ABCDEFGHIJKL.................................................",
+      "note": "pad+body QWERTZUI +2+ ABCDEFGHIJKL",
+      "constrained": 20,
+      "prior": "keyboard"
+    },
+    {
+      "name": "keyboard:pad:QWERTZUI+ABCDEFGH@g4@0",
+      "pattern": "QWERTZUI....ABCDEFGHIJKL................................................",
+      "note": "pad+body QWERTZUI +4+ ABCDEFGHIJKL",
+      "constrained": 20,
+      "prior": "keyboard"
+    },
+    {
+      "name": "keyboard:pad:QWERTZUI+ASDFGHJK@g2@0",
+      "pattern": "QWERTZUI..ASDFGHJKLYXC..................................................",
+      "note": "pad+body QWERTZUI +2+ ASDFGHJKLYXC",
+      "constrained": 20,
+      "prior": "keyboard"
+    },
+    {
+      "name": "keyboard:pad:QWERTZUI+ASDFGHJK@g2@1",
+      "pattern": ".QWERTZUI..ASDFGHJKLYXC.................................................",
+      "note": "pad+body QWERTZUI +2+ ASDFGHJKLYXC",
+      "constrained": 20,
+      "prior": "keyboard"
+    },
+    {
+      "name": "keyboard:pad:QWERTZUI+ASDFGHJK@g4@0",
+      "pattern": "QWERTZUI....ASDFGHJKLYXC................................................",
+      "note": "pad+body QWERTZUI +4+ ASDFGHJKLYXC",
+      "constrained": 20,
+      "prior": "keyboard"
+    },
+    {
+      "name": "keyboard:pad:QWERTZUI+POIUZTRE@g2@0",
+      "pattern": "QWERTZUI..POIUZTREWQAS..................................................",
+      "note": "pad+body QWERTZUI +2+ POIUZTREWQAS",
+      "constrained": 20,
+      "prior": "keyboard"
+    },
+    {
+      "name": "keyboard:pad:QWERTZUI+POIUZTRE@g2@1",
+      "pattern": ".QWERTZUI..POIUZTREWQAS.................................................",
+      "note": "pad+body QWERTZUI +2+ POIUZTREWQAS",
+      "constrained": 20,
+      "prior": "keyboard"
+    },
+    {
+      "name": "keyboard:pad:QWERTZUI+POIUZTRE@g4@0",
+      "pattern": "QWERTZUI....POIUZTREWQAS................................................",
+      "note": "pad+body QWERTZUI +4+ POIUZTREWQAS",
+      "constrained": 20,
+      "prior": "keyboard"
+    },
+    {
+      "name": "keyboard:pad:QWERTZUI+QWERTZUI@g2@1",
+      "pattern": ".QWERTZUI..QWERTZUIOASD.................................................",
+      "note": "pad+body QWERTZUI +2+ QWERTZUIOASD",
+      "constrained": 20,
+      "prior": "keyboard"
+    },
+    {
+      "name": "keyboard:pad:QWERTZUI+YXCVBNML@g4@1",
+      "pattern": ".QWERTZUI....YXCVBNMLKJHG...............................................",
+      "note": "pad+body QWERTZUI +4+ YXCVBNMLKJHG",
+      "constrained": 20,
+      "prior": "keyboard"
+    },
+    {
+      "name": "keyboard:pad:ASDFGH+QWERTZUI@g4@1",
+      "pattern": ".ASDFGH....QWERTZUIOASD.................................................",
+      "note": "pad+body ASDFGH +4+ QWERTZUIOASD",
+      "constrained": 18,
+      "prior": "keyboard"
+    },
+    {
+      "name": "keyboard:pad:QWERTZ+ABCDEFGH@g4@1",
+      "pattern": ".QWERTZ....ABCDEFGHIJKL.................................................",
+      "note": "pad+body QWERTZ +4+ ABCDEFGHIJKL",
+      "constrained": 18,
+      "prior": "keyboard"
+    },
+    {
+      "name": "keyboard:pad:QWERTZ+POIUZTRE@g4@1",
+      "pattern": ".QWERTZ....POIUZTREWQAS.................................................",
+      "note": "pad+body QWERTZ +4+ POIUZTREWQAS",
+      "constrained": 18,
+      "prior": "keyboard"
+    },
+    {
+      "name": "keyboard:pad:QWERTZ+QWERTZUI@g4@1",
+      "pattern": ".QWERTZ....QWERTZUIOASD.................................................",
+      "note": "pad+body QWERTZ +4+ QWERTZUIOASD",
+      "constrained": 18,
+      "prior": "keyboard"
+    },
+    {
+      "name": "keyboard:pad:QWERTZ+YXCVBNML@g2@1",
+      "pattern": ".QWERTZ..YXCVBNMLKJHG...................................................",
+      "note": "pad+body QWERTZ +2+ YXCVBNMLKJHG",
+      "constrained": 18,
+      "prior": "keyboard"
+    },
+    {
+      "name": "keyboard:pad:QWERTZ+ZYXWVUTS@g2@0",
+      "pattern": "QWERTZ..ZYXWVUTSRQPO....................................................",
+      "note": "pad+body QWERTZ +2+ ZYXWVUTSRQPO",
+      "constrained": 18,
+      "prior": "keyboard"
+    },
+    {
+      "name": "keyboard:ABCDEFGHIJ@2",
+      "pattern": "..ABCDEFGHIJKLMNXX......................................................",
+      "note": "keyboard single ABCDEFGHIJKLMNXX@2",
+      "constrained": 16,
+      "prior": "keyboard"
+    },
+    {
+      "name": "keyboard:ASDFGHJKLA@0",
+      "pattern": "ASDFGHJKLASDFGXX........................................................",
+      "note": "keyboard single ASDFGHJKLASDFGXX@0",
+      "constrained": 16,
+      "prior": "keyboard"
+    },
+    {
+      "name": "keyboard:ASDFGHJKLQ@0",
+      "pattern": "ASDFGHJKLQWERTXX........................................................",
+      "note": "keyboard single ASDFGHJKLQWERTXX@0",
+      "constrained": 16,
+      "prior": "keyboard"
+    },
+    {
+      "name": "keyboard:ASDFGHJKLY@1",
+      "pattern": ".ASDFGHJKLYXCVXXX.......................................................",
+      "note": "keyboard single ASDFGHJKLYXCVXXX@1",
+      "constrained": 16,
+      "prior": "keyboard"
+    },
+    {
+      "name": "keyboard:LKJHGFDSAP@2",
+      "pattern": "..LKJHGFDSAPOIUXXX......................................................",
+      "note": "keyboard single LKJHGFDSAPOIUXXX@2",
+      "constrained": 16,
+      "prior": "keyboard"
+    },
+    {
+      "name": "keyboard:POIUZTREWQ@0",
+      "pattern": "POIUZTREWQASDFXX........................................................",
+      "note": "keyboard single POIUZTREWQASDFXX@0",
+      "constrained": 16,
+      "prior": "keyboard"
+    },
+    {
+      "name": "keyboard:QAYXSWEDCV@0",
+      "pattern": "QAYXSWEDCVFRTGXX........................................................",
+      "note": "keyboard single QAYXSWEDCVFRTGXX@0",
+      "constrained": 16,
+      "prior": "keyboard"
+    },
+    {
+      "name": "kurzsignal:pad:KURZSIGX+AABBCCDD@g2@2",
+      "pattern": "..KURZSIGX..AABBCCDDEEFF................................................",
+      "note": "pad+body KURZSIGX +2+ AABBCCDDEEFF",
+      "constrained": 20,
+      "prior": "kurzsignal"
+    },
+    {
+      "name": "kurzsignal:pad:KURZSIGX+AABBCCDD@g4@2",
+      "pattern": "..KURZSIGX....AABBCCDDEEFF..............................................",
+      "note": "pad+body KURZSIGX +4+ AABBCCDDEEFF",
+      "constrained": 20,
+      "prior": "kurzsignal"
+    },
+    {
+      "name": "kurzsignal:pad:KURZSIGX+KURZSIGN@g2@2",
+      "pattern": "..KURZSIGX..KURZSIGNALHE................................................",
+      "note": "pad+body KURZSIGX +2+ KURZSIGNALHE",
+      "constrained": 20,
+      "prior": "kurzsignal"
+    },
+    {
+      "name": "kurzsignal:pad:KURZSIGX+POSITION@g2@2",
+      "pattern": "..KURZSIGX..POSITIONMELD................................................",
+      "note": "pad+body KURZSIGX +2+ POSITIONMELD",
+      "constrained": 20,
+      "prior": "kurzsignal"
+    },
+    {
+      "name": "kurzsignal:pad:KURZSIGX+POSITION@g4@2",
+      "pattern": "..KURZSIGX....POSITIONMELD..............................................",
+      "note": "pad+body KURZSIGX +4+ POSITIONMELD",
+      "constrained": 20,
+      "prior": "kurzsignal"
+    },
+    {
+      "name": "kurzsignal:pad:KURZSIGX+SIGNALGR@g2@2",
+      "pattern": "..KURZSIGX..SIGNALGRUPPE................................................",
+      "note": "pad+body KURZSIGX +2+ SIGNALGRUPPE",
+      "constrained": 20,
+      "prior": "kurzsignal"
+    },
+    {
+      "name": "kurzsignal:pad:KURZSIGX+STANDORT@g2@2",
+      "pattern": "..KURZSIGX..STANDORTMELD................................................",
+      "note": "pad+body KURZSIGX +2+ STANDORTMELD",
+      "constrained": 20,
+      "prior": "kurzsignal"
+    },
+    {
+      "name": "kurzsignal:pad:KURZSIGX+STANDORT@g4@2",
+      "pattern": "..KURZSIGX....STANDORTMELD..............................................",
+      "note": "pad+body KURZSIGX +4+ STANDORTMELD",
+      "constrained": 20,
+      "prior": "kurzsignal"
+    },
+    {
+      "name": "kurzsignal:pad:KURZSI+AABBCCDD@g2@1",
+      "pattern": ".KURZSI..AABBCCDDEEFF...................................................",
+      "note": "pad+body KURZSI +2+ AABBCCDDEEFF",
+      "constrained": 18,
+      "prior": "kurzsignal"
+    },
+    {
+      "name": "kurzsignal:pad:KURZSI+AABBCCDD@g4@1",
+      "pattern": ".KURZSI....AABBCCDDEEFF.................................................",
+      "note": "pad+body KURZSI +4+ AABBCCDDEEFF",
+      "constrained": 18,
+      "prior": "kurzsignal"
+    },
+    {
+      "name": "kurzsignal:pad:KURZSI+EINSZWEI@g2@1",
+      "pattern": ".KURZSI..EINSZWEIDREI...................................................",
+      "note": "pad+body KURZSI +2+ EINSZWEIDREI",
+      "constrained": 18,
+      "prior": "kurzsignal"
+    },
+    {
+      "name": "kurzsignal:pad:KURZSI+EINSZWEI@g4@1",
+      "pattern": ".KURZSI....EINSZWEIDREI.................................................",
+      "note": "pad+body KURZSI +4+ EINSZWEIDREI",
+      "constrained": 18,
+      "prior": "kurzsignal"
+    },
+    {
+      "name": "kurzsignal:pad:KURZSI+KURZSIGN@g2@1",
+      "pattern": ".KURZSI..KURZSIGNALHE...................................................",
+      "note": "pad+body KURZSI +2+ KURZSIGNALHE",
+      "constrained": 18,
+      "prior": "kurzsignal"
+    },
+    {
+      "name": "kurzsignal:pad:KURZSI+POSITION@g2@1",
+      "pattern": ".KURZSI..POSITIONMELD...................................................",
+      "note": "pad+body KURZSI +2+ POSITIONMELD",
+      "constrained": 18,
+      "prior": "kurzsignal"
+    },
+    {
+      "name": "kurzsignal:pad:KURZSI+SIGNALGR@g2@1",
+      "pattern": ".KURZSI..SIGNALGRUPPE...................................................",
+      "note": "pad+body KURZSI +2+ SIGNALGRUPPE",
+      "constrained": 18,
+      "prior": "kurzsignal"
+    },
+    {
+      "name": "kurzsignal:pad:KURZSI+STANDORT@g2@1",
+      "pattern": ".KURZSI..STANDORTMELD...................................................",
+      "note": "pad+body KURZSI +2+ STANDORTMELD",
+      "constrained": 18,
+      "prior": "kurzsignal"
+    },
+    {
+      "name": "kurzsignal:pad:KURZSI+XXAAXXBB@g2@2",
+      "pattern": "..KURZSI..XXAAXXBBXXCC..................................................",
+      "note": "pad+body KURZSI +2+ XXAAXXBBXXCC",
+      "constrained": 18,
+      "prior": "kurzsignal"
+    },
+    {
+      "name": "kurzsignal:pad:KURZSIGX+XXAAXXBB@g4@2",
+      "pattern": "..KURZSIGX....XXAAXXBBXX................................................",
+      "note": "pad+body KURZSIGX +4+ XXAAXXBBXX",
+      "constrained": 18,
+      "prior": "kurzsignal"
+    },
+    {
+      "name": "kurzsignal:AAAAAAAABB@5",
+      "pattern": ".....AAAAAAAABBBBBBXX...................................................",
+      "note": "kurzsignal single AAAAAAAABBBBBBXX@5",
+      "constrained": 16,
+      "prior": "kurzsignal"
+    },
+    {
+      "name": "kurzsignal:AABBCCDDEE@0",
+      "pattern": "AABBCCDDEEFFGGXX........................................................",
+      "note": "kurzsignal single AABBCCDDEEFFGGXX@0",
+      "constrained": 16,
+      "prior": "kurzsignal"
+    },
+    {
+      "name": "kurzsignal:ABABABABAB@1",
+      "pattern": ".ABABABABABABABXX.......................................................",
+      "note": "kurzsignal single ABABABABABABABXX@1",
+      "constrained": 16,
+      "prior": "kurzsignal"
+    },
+    {
+      "name": "kurzsignal:EINSZWEIDR@1",
+      "pattern": ".EINSZWEIDREIVIXX.......................................................",
+      "note": "kurzsignal single EINSZWEIDREIVIXX@1",
+      "constrained": 16,
+      "prior": "kurzsignal"
+    },
+    {
+      "name": "kurzsignal:FFEEFFEEFF@12",
+      "pattern": "............FFEEFFEEFFEEFFXX............................................",
+      "note": "kurzsignal single FFEEFFEEFFEEFFXX@12",
+      "constrained": 16,
+      "prior": "kurzsignal"
+    },
+    {
+      "name": "kurzsignal:KENNUNGGRU@2",
+      "pattern": "..KENNUNGGRUPPEXXX......................................................",
+      "note": "kurzsignal single KENNUNGGRUPPEXXX@2",
+      "constrained": 16,
+      "prior": "kurzsignal"
+    },
+    {
+      "name": "kurzsignal:KURZSIGNAL@2",
+      "pattern": "..KURZSIGNALHEFTXX......................................................",
+      "note": "kurzsignal single KURZSIGNALHEFTXX@2",
+      "constrained": 16,
+      "prior": "kurzsignal"
+    },
+    {
+      "name": "kurzsignal:NULNULDREI@1",
+      "pattern": ".NULNULDREIZWOXXX.......................................................",
+      "note": "kurzsignal single NULNULDREIZWOXXX@1",
+      "constrained": 16,
+      "prior": "kurzsignal"
+    },
+    {
+      "name": "kurzsignal:POSITIONME@4",
+      "pattern": "....POSITIONMELDXXXX....................................................",
+      "note": "kurzsignal single POSITIONMELDXXXX@4",
+      "constrained": 16,
+      "prior": "kurzsignal"
+    },
+    {
+      "name": "kurzsignal:QEQEQEQEQE@0",
+      "pattern": "QEQEQEQEQEQEQEXX........................................................",
+      "note": "kurzsignal single QEQEQEQEQEQEQEXX@0",
+      "constrained": 16,
+      "prior": "kurzsignal"
+    }
+  ]
+}

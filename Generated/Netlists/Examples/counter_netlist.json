@@ -1,0 +1,338 @@
+{
+  "creator": "Yosys 0.68+post (git sha1 c12172fbae8af5e20f6fb52e3d4e92d56ed587b6, Release, AppleClang clang++ 21.0.0.21000101)",
+  "modules": {
+    "stateful_counter": {
+      "attributes": {
+        "top": "00000000000000000000000000000001",
+        "src": "counter.v:1.1-10.10"
+      },
+      "ports": {
+        "clk": {
+          "direction": "input",
+          "bits": [ 2 ]
+        },
+        "en": {
+          "direction": "input",
+          "bits": [ 3 ]
+        },
+        "count": {
+          "direction": "output",
+          "bits": [ 4, 5, 6, 7 ]
+        }
+      },
+      "cells": {
+        "$abc$161$auto$blifparse.cc:557:parse_blif$162": {
+          "hide_name": 1,
+          "type": "$lut",
+          "parameters": {
+            "LUT": "0110",
+            "WIDTH": "00000000000000000000000000000010"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 8, 6 ],
+            "Y": [ 9 ]
+          }
+        },
+        "$abc$161$auto$blifparse.cc:557:parse_blif$163": {
+          "hide_name": 1,
+          "type": "$lut",
+          "parameters": {
+            "LUT": "1000",
+            "WIDTH": "00000000000000000000000000000010"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 4, 5 ],
+            "Y": [ 8 ]
+          }
+        },
+        "$abc$161$auto$blifparse.cc:557:parse_blif$164": {
+          "hide_name": 1,
+          "type": "$lut",
+          "parameters": {
+            "LUT": "0110",
+            "WIDTH": "00000000000000000000000000000010"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 10, 7 ],
+            "Y": [ 11 ]
+          }
+        },
+        "$abc$161$auto$blifparse.cc:557:parse_blif$165": {
+          "hide_name": 1,
+          "type": "$lut",
+          "parameters": {
+            "LUT": "1000",
+            "WIDTH": "00000000000000000000000000000010"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 8, 6 ],
+            "Y": [ 10 ]
+          }
+        },
+        "$abc$161$auto$blifparse.cc:557:parse_blif$166": {
+          "hide_name": 1,
+          "type": "$lut",
+          "parameters": {
+            "LUT": "0110",
+            "WIDTH": "00000000000000000000000000000010"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 4, 5 ],
+            "Y": [ 12 ]
+          }
+        },
+        "$abc$161$auto$blifparse.cc:557:parse_blif$167": {
+          "hide_name": 1,
+          "type": "$lut",
+          "parameters": {
+            "LUT": "01",
+            "WIDTH": "00000000000000000000000000000001"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 4 ],
+            "Y": [ 13 ]
+          }
+        },
+        "$auto$ff.cc:337:slice$84": {
+          "hide_name": 1,
+          "type": "$_DFFE_PP_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "counter.v:6.5-9.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "E": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 13 ],
+            "E": [ 3 ],
+            "Q": [ 4 ]
+          }
+        },
+        "$auto$ff.cc:337:slice$85": {
+          "hide_name": 1,
+          "type": "$_DFFE_PP_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "counter.v:6.5-9.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "E": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 12 ],
+            "E": [ 3 ],
+            "Q": [ 5 ]
+          }
+        },
+        "$auto$ff.cc:337:slice$86": {
+          "hide_name": 1,
+          "type": "$_DFFE_PP_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "counter.v:6.5-9.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "E": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 9 ],
+            "E": [ 3 ],
+            "Q": [ 6 ]
+          }
+        },
+        "$auto$ff.cc:337:slice$87": {
+          "hide_name": 1,
+          "type": "$_DFFE_PP_",
+          "parameters": {
+          },
+          "attributes": {
+            "src": "counter.v:6.5-9.8"
+          },
+          "port_directions": {
+            "C": "input",
+            "D": "input",
+            "E": "input",
+            "Q": "output"
+          },
+          "connections": {
+            "C": [ 2 ],
+            "D": [ 11 ],
+            "E": [ 3 ],
+            "Q": [ 7 ]
+          }
+        }
+      },
+      "netnames": {
+        "$abc$154$new_n10": {
+          "hide_name": 1,
+          "bits": [ 14 ],
+          "attributes": {
+          }
+        },
+        "$abc$154$new_n11": {
+          "hide_name": 1,
+          "bits": [ 15 ],
+          "attributes": {
+          }
+        },
+        "$abc$161$auto$alumacc.cc:548:replace_alu$7.P[0]": {
+          "hide_name": 1,
+          "bits": [ 13 ],
+          "attributes": {
+            "src": "counter.v:8.22-8.34|/opt/homebrew/bin/../share/yosys/techmap.v:287.21-287.22"
+          }
+        },
+        "$abc$161$auto$alumacc.cc:548:replace_alu$7.Y[1]": {
+          "hide_name": 1,
+          "bits": [ 12 ],
+          "attributes": {
+            "src": "counter.v:8.22-8.34|/opt/homebrew/bin/../share/yosys/techmap.v:270.26-270.27"
+          }
+        },
+        "$abc$161$auto$alumacc.cc:548:replace_alu$7.Y[2]": {
+          "hide_name": 1,
+          "bits": [ 9 ],
+          "attributes": {
+            "src": "counter.v:8.22-8.34|/opt/homebrew/bin/../share/yosys/techmap.v:270.26-270.27"
+          }
+        },
+        "$abc$161$auto$alumacc.cc:548:replace_alu$7.Y[3]": {
+          "hide_name": 1,
+          "bits": [ 11 ],
+          "attributes": {
+            "src": "counter.v:8.22-8.34|/opt/homebrew/bin/../share/yosys/techmap.v:270.26-270.27"
+          }
+        },
+        "$abc$161$count[0]": {
+          "hide_name": 1,
+          "bits": [ 4 ],
+          "attributes": {
+            "src": "counter.v:4.22-4.27"
+          }
+        },
+        "$abc$161$count[1]": {
+          "hide_name": 1,
+          "bits": [ 5 ],
+          "attributes": {
+            "src": "counter.v:4.22-4.27"
+          }
+        },
+        "$abc$161$count[2]": {
+          "hide_name": 1,
+          "bits": [ 6 ],
+          "attributes": {
+            "src": "counter.v:4.22-4.27"
+          }
+        },
+        "$abc$161$count[3]": {
+          "hide_name": 1,
+          "bits": [ 7 ],
+          "attributes": {
+            "src": "counter.v:4.22-4.27"
+          }
+        },
+        "$abc$161$new_n11": {
+          "hide_name": 1,
+          "bits": [ 8 ],
+          "attributes": {
+          }
+        },
+        "$abc$161$new_n13": {
+          "hide_name": 1,
+          "bits": [ 10 ],
+          "attributes": {
+          }
+        },
+        "$auto$alumacc.cc:548:replace_alu$7.P": {
+          "hide_name": 1,
+          "bits": [ 13, 5, 6, 7 ],
+          "attributes": {
+            "force_downto": "00000000000000000000000000000001",
+            "src": "counter.v:8.22-8.34|/opt/homebrew/bin/../share/yosys/techmap.v:287.21-287.22"
+          }
+        },
+        "$auto$alumacc.cc:548:replace_alu$7.Y": {
+          "hide_name": 1,
+          "bits": [ 13, 12, 9, 11 ],
+          "attributes": {
+            "force_downto": "00000000000000000000000000000001",
+            "src": "counter.v:8.22-8.34|/opt/homebrew/bin/../share/yosys/techmap.v:270.26-270.27"
+          }
+        },
+        "clk": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+            "src": "counter.v:2.11-2.14"
+          }
+        },
+        "count": {
+          "hide_name": 0,
+          "bits": [ 4, 5, 6, 7 ],
+          "attributes": {
+            "src": "counter.v:4.22-4.27"
+          }
+        },
+        "en": {
+          "hide_name": 0,
+          "bits": [ 3 ],
+          "attributes": {
+            "src": "counter.v:3.11-3.13"
+          }
+        }
+      }
+    }
+  }
+}

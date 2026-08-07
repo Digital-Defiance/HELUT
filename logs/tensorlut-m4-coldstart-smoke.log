@@ -1,0 +1,12 @@
+# TensorLUT M4 cold-start
+# netlist=enigma_m4_netlist.json
+# LUTs=925 DFFs=49 inits=59200
+# crib_pt=TEST crib_ct=YCPY grundstellung=AAA (L=0 M=0 R=0)
+# pop=4 explore=2 squeeze=2 lambdaMax=10.0 seed=2119188496
+# phase gen bestCrypto bestFitness lambda nonBinary
+explore 0 -4.587124 -4.587124 0.0000 58276
+explore 1 -4.412337 -4.412337 0.0000 57383
+# explore_done crypto=-4.412337 fitness=-4.412337 nonBinary=57383 elapsed=0.3s
+squeeze 2 -4.353714 -4.353714 0.0000 56836
+squeeze 3 -4.660339 -27509.714844 1.9753 56342
+# squeeze_done crypto=-4.660339 fitness=-27509.714844 nonBinary=56342 elapsed=0.7s

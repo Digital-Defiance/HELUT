@@ -1,0 +1,23 @@
+Building for production...
+[0/7] Write swift-version--58304C5D6DBC2206.txt
+Build complete! (0.08s)
+Test Suite 'Selected tests' started at 2026-08-16 11:20:05.959.
+Test Suite 'helutPackageTests.xctest' started at 2026-08-16 11:20:05.959.
+Test Suite 'TensorLUTYosysRoundTripTests' started at 2026-08-16 11:20:05.959.
+Test Case '-[HELUTTests.TensorLUTYosysRoundTripTests testEmittedVerilogResynthesizesToEquivalentNetlist]' started.
+Test Case '-[HELUTTests.TensorLUTYosysRoundTripTests testEmittedVerilogResynthesizesToEquivalentNetlist]' passed (0.149 seconds).
+Test Case '-[HELUTTests.TensorLUTYosysRoundTripTests testRoundTripDetectsACorruptedInitBit]' started.
+Test Case '-[HELUTTests.TensorLUTYosysRoundTripTests testRoundTripDetectsACorruptedInitBit]' passed (0.152 seconds).
+Test Suite 'TensorLUTYosysRoundTripTests' passed at 2026-08-16 11:20:06.260.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.301 (0.301) seconds
+Test Suite 'helutPackageTests.xctest' passed at 2026-08-16 11:20:06.260.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.301 (0.301) seconds
+Test Suite 'Selected tests' passed at 2026-08-16 11:20:06.260.
+	 Executed 2 tests, with 0 failures (0 unexpected) in 0.301 (0.302) seconds
+TENSORLUT_ROUNDTRIP ok: 48 output bits over 16 input assignments, yosys-resynthesized vs source netlist
+TENSORLUT_ROUNDTRIP negative control: 4 mismatch(es) detected
+◇ Test run started.
+↳ Testing Library Version: 1902
+↳ Target Platform: arm64e-apple-macos14.0
+✔ Test run with 0 tests in 0 suites passed after 0.001 seconds.
+Yosys 0.68+post (git sha1 c12172fbae8af5e20f6fb52e3d4e92d56ed587b6, Release, AppleClang clang++ 21.0.0.21000101)
