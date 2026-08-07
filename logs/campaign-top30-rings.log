@@ -1,0 +1,31 @@
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030680_menus.json (30 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 30 of 30
+min crib length: 16
+running 30 menus, highest deduction power first:
+  [1] NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE@18 edges=40 letters=21 loops=20 central=U
+  [2] NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE@21 edges=40 letters=21 loops=20 central=U
+  [3] FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN@19 edges=40 letters=21 loops=20 central=U
+  [4] FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN@22 edges=40 letters=21 loops=20 central=U
+  [5] UNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENG@20 edges=40 letters=21 loops=20 central=U
+  [6] LAUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIRO@0 edges=40 letters=23 loops=18 central=U
+  [7] UKKANANFUNFUUUFLOTTXNULEINSZWONULBEIROTN@0 edges=40 letters=23 loops=18 central=U
+  [8] KANANFUNFUUUFLOTTXNULEINSZWONULBEIROTNUL@0 edges=40 letters=23 loops=18 central=U
+  [9] ANANFUNFUUUFLOTTXNULEINSZWONULBEIROTNULS@0 edges=40 letters=23 loops=18 central=U
+  [10] NANFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSI@0 edges=40 letters=23 loops=18 central=U
+  [11] LOTTXNULEINSZWONULBEIROTNULSIBENGEANKERT@0 edges=40 letters=23 loops=18 central=E
+  [12] OTTXNULEINSZWONULBEIROTNULSIBENGEANKERTX@0 edges=40 letters=23 loops=18 central=E
+  … 18 more
+shells/menu: 34944 (336 WO × 2 Greek × 2 UKW × 26 ring) → 1.6e+10 settings
+GPU pipeline depth: 4 shells in flight
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+right ring swept: turnover phase fully covered, elimination is complete
+ETA floor (~50M/s): 159.7 min
+
+  [1/30·1] NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE@18 edges=40 letters=21 loops=20 central=U dead at the board                       360s  44.3M/s ETA 174.0 min
+  [2/30·2] NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE@21 edges=40 letters=21 loops=20 central=U dead at the board                       682s  46.8M/s ETA 159.1 min
+  [3/30·3] FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN@19 edges=40 letters=21 loops=20 central=U dead at the board                      1038s  46.1M/s ETA 155.8 min
+  [4/30·4] FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN@22 edges=40 letters=21 loops=20 central=U dead at the board                      1360s  47.0M/s ETA 147.3 min
+  [5/30·5] UNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENG@20 edges=40 letters=21 loops=20 central=U dead at the board                      1712s  46.6M/s ETA 142.7 min
+  [6/30·6] LAUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIRO@0 edges=40 letters=23 loops=18 central=U dead at the board                      2179s  44.0M/s ETA 145.3 min

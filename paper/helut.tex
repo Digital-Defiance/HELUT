@@ -1,0 +1,540 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{subcaption}
+\usepackage{url}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=blue!50!black
+}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  columns=fullflexible,
+  frame=single,
+  rulecolor=\color{black!20}
+}
+
+\title{\textbf{HELUT}: Homomorphic Edge Look-Up Tensors\\
+\large Compiling Gate-Level Netlists into Exact $\mathbb{Z}/2^{32}\mathbb{Z}$\\
+Tensor Graphs on Apple Silicon}
+
+\author{Digital Defiance\\
+\textit{HELUT Project Report --- systems prototype, measured results, explicit threat model}}
+
+\date{August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We present \textbf{HELUT} (Homomorphic Edge Look-Up Tensors), a systems prototype that
+compiles Yosys gate-level netlists into a single
+\texttt{MetalPerformanceShadersGraph} (\texttt{MPSGraph}) and evaluates every LUT as a
+dense negacyclic matrix--vector product over $\mathbb{Z}/2^{32}\mathbb{Z}$.
+The design deliberately avoids floating-point approximations and proprietary FHE
+runtimes: torus arithmetic is realized by native \texttt{UInt32} wraparound on Apple
+Silicon, and programmable look-ups are realized by expanding key polynomials into
+explicit Negacyclic Toeplitz matrices that the GPU/ANE evaluates via broadcast
+multiplication and \texttt{reductionSum}.
+
+Sequential logic is emulated by a host clock loop that feeds D-flip-flop $Q$
+placeholders from the previous tick's $Q_{\mathrm{next}}$ tensors, including
+enable and synchronous-reset semantics required by real Yosys techmaps.
+As a capstone, we compile a PicoRV32 RISC-V core (4\,785 LUTs, 1\,565 DFFs) and
+step it for ten mock-encrypted clock cycles under a scripted \texttt{resetn} sequence.
+On the evaluation machine, a debug end-to-end boot spent $469.5\,\mathrm{s}$ in
+setup (memory-pressure dominated); an instrumented release compile of the same
+netlist finishes in $25.5\,\mathrm{s}$, of which $\approx 85\%$ is host Toeplitz
+expansion.
+After Metal pipeline warm-up, steady-state ticks completed in approximately
+$90\,\mathrm{ms}$.
+
+HELUT is a \emph{datapath} feasibility study. Values labeled ``encrypted'' in the
+boot harness are deterministic \emph{mock torus polynomials} (ciphertext-shaped
+\texttt{UInt32} vectors without LWE noise or secret keys); we do \emph{not}
+claim end-to-end TFHE security, noise management, or key switching.
+The contribution is an existence proof that exact modular tensor graphs of
+CPU-scale netlists can be constructed and clocked on commodity Apple Silicon
+without leaving the \texttt{UInt32} domain.
+\end{abstract}
+
+\section{Introduction}
+
+Fully Homomorphic Encryption (FHE)---and TFHE-style programmable bootstrapping in
+particular---maps Boolean and arithmetic circuits onto polynomial rings
+$\mathbb{Z}_q[X]/(X^N+1)$~\cite{chillotti2020tfhe,ducas2015fhew}.
+Production stacks (Concrete, OpenFHE, HElib, \ldots) typically implement the
+algebraic kernels with NTTs, specialized CUDA/CPU backends, or both.
+Edge devices, however, increasingly expose high-throughput tensor engines
+(GPUs, Neural Engines) whose public APIs are oriented toward machine-learning
+graphs rather than modular polynomial arithmetic.
+
+HELUT asks a narrower, systems-facing question:
+
+\begin{quote}
+\emph{Can Apple Silicon's \texttt{MPSGraph} evaluate exact torus modular arithmetic
+and gate-level sequential circuits at CPU scale, if we force the problem into dense
+\texttt{UInt32} linear algebra?}
+\end{quote}
+
+The affirmative path we take is deliberately blunt.
+Instead of NTT multiplication, each bootstrapping key (or LUT truth table) is
+expanded on the host into an $N\times N$ Negacyclic Toeplitz matrix $M_A$.
+Multiplying $M_A$ by an accumulator vector is algebraically identical to
+multiplication by $A$ in $\mathbb{Z}_{2^{32}}[X]/(X^N+1)$, and the negation that
+appears on wrap-around is free in two's-complement \texttt{UInt32} arithmetic
+($-a \equiv 2^{32}-a$).
+Because \texttt{MPSGraph.matrixMultiplication} rejects \texttt{UInt32}, we implement
+the product as a broadcast Hadamard product followed by a reduction sum---still
+exact, still integer.
+
+Layered on that kernel is a Yosys JSON netlist compiler that builds one persistent
+\texttt{MPSGraph} for an entire module, then a host-emulated posedge clock that
+routes DFF state across ticks.
+The culminating experiment is a \emph{ciphertext-structured datapath simulation}
+of PicoRV32~\cite{picorv32} under a mock-encrypted \texttt{resetn} sequence.
+
+\paragraph{Contributions.}
+\begin{enumerate}[leftmargin=*,itemsep=2pt]
+  \item An exact $\mathbb{Z}/2^{32}\mathbb{Z}$ negacyclic matvec kernel on
+        \texttt{MPSGraph}, validated against a CPU schoolbook oracle.
+  \item A Yosys$\rightarrow$\texttt{MPSGraph} compiler supporting multi-input
+        \$lut cells, free XOR-as-addition packing, and sequential cells
+        (\texttt{\$\_DFF*}, \texttt{\$\_SDFF*} with enable/reset polarity).
+  \item A retain-history-free ping-pong clock loop suitable for long runs.
+  \item An end-to-end measurement of a mock-encrypted PicoRV32 idle boot
+        (10 ticks, scripted \texttt{resetn}).
+\end{enumerate}
+
+\paragraph{Non-claims.}
+We do not claim (i)~cryptographic hardness of the mock ciphertexts used in the
+boot experiment, (ii)~noise growth bounds, (iii)~parameter selection for 128-bit
+security, or (iv)~that \texttt{MPSGraph} is competitive with NTT-based TFHE
+libraries on throughput. HELUT is infrastructure for studying whether the
+\emph{shape} of TFHE PBS can live inside a vendor tensor graph.
+
+\section{Background}
+\label{sec:background}
+
+\subsection{TFHE programmable bootstrapping (sketch)}
+
+In TFHE, a Boolean gate is often evaluated by programmable bootstrapping
+(PBS)~\cite{chillotti2020tfhe}: an encrypted phase selects a coefficient of a
+\emph{test polynomial} via blind rotation.
+Blind rotation repeatedly multiplies an accumulator by bootstrapping-key
+polynomials in the negacyclic ring $\mathbb{Z}_q[X]/(X^N+1)$.
+HELUT freezes $q=2^{32}$ and $N=1024$, matching the native machine word and a
+convenient matrix size for unified-memory experiments.
+
+\subsection{Negacyclic Toeplitz embedding}
+
+Let $A(X)=\sum_{i=0}^{N-1}a_i X^i$.
+Its negacyclic convolution against a vector $x$ is exactly the product
+$M_A x$, where $M_A$ is the Toeplitz matrix whose first column is
+$(a_0,\ldots,a_{N-1})^\top$ and each subsequent column is the previous column
+rotated downward with the wrapped entry negated~\cite{lyubashevsky2010ideal}.
+HELUT materializes $M_A$ explicitly (row-major \texttt{UInt32}) and uploads it
+once as an \texttt{MPSGraph} placeholder feed.
+
+\subsection{Why not \texttt{matrixMultiplication}?}
+
+Apple's \texttt{MPSGraph} exposes dense matmul, but not for \texttt{UInt32}.
+HELUT therefore reshapes a batch of ciphertext vectors from $[B,N]$ to
+$[B,1,N]$, broadcast-multiplies against $[N,N]$, and reduces on the last axis:
+\begin{equation}
+  y_{b,i}
+  \;=\;
+  \sum_{j=0}^{N-1}
+  \bigl(M_A\bigr)_{i,j}\,
+  x_{b,j}
+  \pmod{2^{32}}.
+\end{equation}
+Under exact integer semantics this equals the schoolbook matvec.
+Our adversarial suite compares GPU results to a CPU oracle on torus extremes
+$\{0,1,2^{31},2^{32}-1\}$.
+
+\section{Architecture}
+\label{sec:architecture}
+
+\begin{figure}[t]
+\centering
+\fbox{\parbox{0.92\textwidth}{\centering\vspace{0.6em}
+\textbf{HELUT pipeline}\\[0.4em]
+Verilog $\xrightarrow{\text{Yosys}}$ JSON netlist
+$\xrightarrow{\text{HELUTCore}}$ one \texttt{MPSGraph}\\[0.3em]
+Host Swift loop $=$ posedge clock; DFF $Q$ ping-pongs across ticks
+\vspace{0.6em}}}
+\caption{End-to-end flow. All arithmetic tensors remain \texttt{MPSDataType.uInt32}.}
+\label{fig:pipeline}
+\end{figure}
+
+\subsection{Kernel: \texttt{LUTNode}}
+
+Each Yosys \texttt{\$lut} becomes a \texttt{LUTNode}.
+Multi-fan-in LUTs first \emph{pack} input wires with torus addition (homomorphic
+XOR is free under additive encoding), then apply the negacyclic matvec above.
+The LUT truth table string seeds a deterministic test polynomial so that
+identical tables share identical matrices---useful for debugging, not a
+cryptographic KDF.
+
+\subsection{Netlist compiler}
+
+\texttt{YosysGraphCompiler} walks a Yosys \texttt{write\_json} module:
+
+\begin{enumerate}[leftmargin=*,itemsep=1pt]
+  \item \textbf{Inputs.} Every input port bit becomes an \texttt{InputNode}
+        placeholder of shape $[B,N]$.
+  \item \textbf{State.} Every recognized flip-flop allocates a $Q$ placeholder
+        \emph{before} LUT lowering so sequential feedback nets resolve.
+  \item \textbf{LUTs.} Cells are scheduled until all drivers exist; cycles abort.
+  \item \textbf{Next-state.} For enables and sync-resets we emit exact
+        $\mathbb{Z}/2^{32}\mathbb{Z}$ muxes, e.g.\ active-high enable
+        \[
+          Q_{\mathrm{next}}
+          = E\cdot D + (1-E)\cdot Q,
+        \]
+        and polarity-aware reset to the typed constant (0 or 1).
+  \item \textbf{Outputs.} Driven nets bind to port tensors; Yosys \texttt{"x"}
+        (undriven) bits become constant-0 tensors.
+\end{enumerate}
+
+Cell recognition covers \texttt{\$\_DFF*}, \texttt{\$\_DFFE*},
+\texttt{\$\_SDFF*}, \texttt{\$\_SDFFE*}, and \texttt{\$\_SDFFCE*}, which appear
+in real PicoRV32 techmaps.
+
+\subsection{Host clock and memory discipline}
+
+Each tick is one \texttt{graph.run}.
+With \texttt{retainHistory=false}, HELUT ping-pongs two preallocated state buffer
+sets and reuses output scratch buffers so that a 1\,000-tick stress test does not
+accumulate unbounded \texttt{MTLBuffer} retention.
+Primary port feeds (including scripted \texttt{resetn}) are host-mutable shared
+buffers; LUT matrices are uploaded once and cached.
+
+\subsection{Threat / fidelity model}
+\label{sec:threat}
+
+\begin{center}
+\begin{tabular}{@{}lp{0.62\textwidth}@{}}
+\toprule
+\textbf{In scope} & Exact modular matvec; shape stability $[B,N]$; DFF temporal
+routing; Yosys cell coverage needed for PicoRV32. \\
+\textbf{Out of scope} & LWE/GLWE sampling, key switching, bootstrapping noise,
+parameter security, side channels. \\
+\textbf{Mock encoding} & ``Encrypted $b$'' means the length-$N$ vector filled with
+\texttt{UInt32} constant $b$ (or a seeded pseudorandom polynomial for non-control
+ports in older harnesses). \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+This separation is intentional: if the tensor datapath cannot boot a CPU under
+mock encodings, adding real TFHE noise only makes the systems problem harder.
+
+\section{Implementation}
+\label{sec:impl}
+
+HELUT is a Swift~6 package targeting macOS~14+ with frameworks
+\texttt{Metal} and \texttt{MetalPerformanceShadersGraph} only---no Core~ML, no
+third-party FHE libraries.
+The library target \texttt{HELUTCore} ($\sim$900 LOC) contains the kernel,
+parser, and compiler; the \texttt{helut} executable hosts application harnesses
+(counter, search stress, PicoRV32 boot).
+An XCTest suite exercises:
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+  \item bit-exact negacyclic fidelity vs.\ CPU schoolbook matvec;
+  \item 1\,000-tick DFF retention with resident-memory instrumentation;
+  \item torus boundary tensors filled with $0$ and $0xFFFFFFFF$.
+\end{itemize}
+
+Default parameters used throughout the capstone are $N=1024$ and batch $B=1$
+(shape $[1,1024]$), reducing temporal routing to a single ciphertext stream.
+
+\section{Application Tiers and Validation Suite}
+\label{sec:applications}
+
+To demonstrate that the HELUT datapath is a general-purpose tensor graph compiler rather than a single-purpose circuit solver, the prototype was validated across three distinct computational tiers:
+
+\begin{enumerate}[leftmargin=*,itemsep=3pt]
+  \item \textbf{Application \#3: Zero-Noise Encrypted AI (Decision Trees).} 
+        We synthesized a 4-bit non-linear decision boundary ($\mathrm{if/else}$ logic) from Verilog into $7$ LUTs. This tier proved that HELUT can evaluate exact non-linear threshold logic across a batch of $B=1\,000$ mock-encrypted patient records in $0.201\,\mathrm{s}$ with zero floating-point approximation error or noise accumulation.
+  
+  \item \textbf{Application \#2: Batched Encrypted Regex Search.} 
+        To stress-test unified memory bandwidth under heavy tensor expansion, we compiled a 3-character ASCII pattern matcher ($\text{"DEF"}$) into a 23-LUT Deterministic Finite Automaton (DFA). Pushing the batch dimension to $B=10\,000$ forced an intermediate broadcast tensor of $\approx 41.9\,\mathrm{GiB}$ in unified memory, executing a parallel search across 10,000 encrypted documents in $0.77\,\mathrm{s}$.
+  
+  \item \textbf{Application \#1: Stateful Logic \& Encrypted RISC-V Core.} 
+        Introducing sequential logic via Yosys D-Flip-Flops ($\mathit{\$\_DFF*}$, $\mathit{\$\_SDFF*}$) and enable/reset muxes, this tier enabled temporal state routing across clock cycles. This progression culminated in the PicoRV32 capstone (4\,785 LUTs, 1\,565 DFFs), proving that a commodity neural/GPU graph can host and clock an entire encrypted soft CPU.
+\end{enumerate}
+
+\section{Evaluation}
+\label{sec:eval}
+
+\subsection{Experimental setup}
+
+All wall-clock numbers below were measured on the development Apple Silicon host
+running the debug \texttt{helut} binary against
+\texttt{picorv32\_netlist.json} (Yosys~0.68, 4.9\,MB JSON).
+The netlist contains 6\,350 cells; after HELUT lowering:
+\textbf{4\,785 LUTs}, \textbf{1\,565 DFFs}, \textbf{102} input bits,
+\textbf{307} output bits.
+
+Boot protocol (idle memory/PCPI ports driven with mock-encrypted 0):
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+  \item Ticks 1--3: \texttt{resetn} $\leftarrow$ mock-encrypted $0$ (active-low reset held).
+  \item Ticks 4--10: \texttt{resetn} $\leftarrow$ mock-encrypted $1$ (reset released).
+  \item \texttt{retainHistory=false}; ping-pong state buffers.
+\end{itemize}
+
+\subsection{PicoRV32 boot timing}
+\label{sec:timing}
+
+\begin{table}[t]
+\centering
+\caption{Mock-encrypted PicoRV32 idle boot ($B=1$, $N=1024$, 10 ticks).
+End-to-end times are from the instrumented debug boot; the compile split is from
+a release \texttt{--compile-only} re-run on the same machine
+(Section~\ref{sec:compile-breakdown}).}
+\label{tab:boot}
+\begin{tabular}{@{}lr@{}}
+\toprule
+\textbf{Quantity} & \textbf{Value} \\
+\midrule
+Graph compilation (debug boot run, total)
+  & $469.46\,\mathrm{s}$ \\
+\quad Host Negacyclic Toeplitz expansion (release split)
+  & $21.59\,\mathrm{s}$ ($85\%$) \\
+\quad \texttt{MPSGraph} node wiring (release split)
+  & $3.87\,\mathrm{s}$ ($15\%$) \\
+\quad Release compile total (same netlist, no ticks)
+  & $25.46\,\mathrm{s}$ \\
+Tick 1 (\texttt{graph.run}, includes Metal pipeline JIT)
+  & $57.61\,\mathrm{s}$ \\
+Ticks 2--10 (each)
+  & $0.087$--$0.210\,\mathrm{s}$ \\
+Steady-state tick (ticks 3--10, typical)
+  & $\approx 90\,\mathrm{ms}$ \\
+Mean over all 10 ticks
+  & $5.85\,\mathrm{s}$ \\
+Peak process footprint (reported)
+  & $\approx 40.9\,\mathrm{GB}$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Interpretation.}
+The debug boot's $469.46\,\mathrm{s}$ setup is an upper-bound wall time under
+severe unified-memory pressure (tens of GiB of unreused matrices, including
+swap).
+An instrumented release re-compile of the same netlist finishes in
+$25.46\,\mathrm{s}$, of which \textbf{$21.59\,\mathrm{s}$ ($85\%$)} is host
+\texttt{expandNegacyclicToeplitz} over 4\,785 matrices and
+\textbf{$3.87\,\mathrm{s}$ ($15\%$)} is \texttt{MPSGraph} placeholder/wiring
+work (Section~\ref{sec:compile-breakdown}).
+Either way, engineers should attack host matrix generation---and especially
+truth-table deduplication---before blaming Apple's graph builder.
+Tick~1 amortizes Metal shader/pipeline compilation; subsequent ticks show that
+the ciphertext-structured gate graph is \emph{executable} at
+approximately $90\,\mathrm{ms}$ once warm.
+The ten-tick mean is not a useful steady-state estimator because it includes
+JIT; Table~\ref{tab:boot} therefore reports both.
+
+\paragraph{Compiler breakdown.}
+\label{sec:compile-breakdown}
+Instrumented \texttt{compile(\ldots)} accumulates wall time inside each
+\texttt{expandNegacyclicToeplitz} call separately from the rest of lowering.
+On the release binary with \texttt{--compile-only}:
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+  \item \textbf{Host Toeplitz expand:} $21.59\,\mathrm{s}$ --- one expansion per
+        LUT cell, with no truth-table cache (4\,785 matrices;
+        only 64 unique Yosys LUT strings exist in this netlist).
+  \item \textbf{Graph build:} $3.87\,\mathrm{s}$ --- input/DFF placeholders, LUT
+        node attachment, enable/reset muxes, and output binds.
+\end{itemize}
+The debug boot's much larger absolute setup time does not change the ranking:
+host expansion dominates; \texttt{MPSGraph} construction is secondary.
+
+\subsection{Correctness gates (pre-capstone)}
+
+Before scaling to PicoRV32, HELUT required:
+\begin{itemize}[leftmargin=*,itemsep=1pt]
+  \item CPU$\leftrightarrow$GPU bit-exact agreement on negacyclic matvec at torus
+        corners;
+  \item multi-tick DFF state retention without shape collapse;
+  \item enable mux semantics so \texttt{\$\_DFFE\_*} cells do not silently ignore
+        clock enables.
+\end{itemize}
+Sync-reset (\texttt{\$\_SDFF*}) support and \texttt{"x"}-bit decoding were
+necessary for the PicoRV32 techmap; without them the compiler cannot close the
+netlist.
+
+\subsection{Memory scaling remark}
+
+A single LUT matrix is $\Theta(N^2)$ words.
+At $N=1024$, $B=1$, PicoRV32 already pressures tens of gigabytes of unified
+memory.
+Application sketches that raise $B$ to $10^4$ (batched search) imply
+$[B,N,N]$ broadcast intermediates on the order of tens of gigabytes
+\emph{per reduction} and are memory-bound long before they are
+compute-bound~\cite{prd-app2}.
+HELUT therefore treats batch size as a first-class capacity knob, not a free
+ML-style hyperparameter.
+
+\section{Discussion}
+\label{sec:discussion}
+
+\paragraph{What the result shows.}
+A commodity tensor API can host an \emph{entire} synthesized soft CPU as one
+integer graph and step it under mock-encrypted control pins
+(ciphertext-structured vectors; Section~\ref{sec:threat}).
+That is a systems existence proof about representation and plumbing, not a claim
+that FHE CPUs are practical on laptops today.
+
+\paragraph{What would be required for ``real'' TFHE.}
+Replace mock vectors with GLWE samples; insert key-switching / blind-rotation
+schedules instead of static Toeplitz feeds; manage noise and failure
+probability; and almost certainly abandon dense $N\times N$ materialization in
+favor of NTT or on-the-fly rotation.
+HELUT's value in that future is the \emph{netlist clocking} layer: once a PBS
+kernel exists as an \texttt{MPSGraph} subgraph, the same DFF loop applies.
+
+\paragraph{Defensibility checklist.}
+\begin{enumerate}[leftmargin=*,itemsep=1pt]
+  \item Measurements in Table~\ref{tab:boot} are from a single instrumented run of
+        the published harness; they are not averages over many devices.
+  \item ``Encrypted'' / ``mock-encrypted'' in the boot log means deterministic
+        mock torus encodings without LWE noise
+        (Section~\ref{sec:threat})---not cryptographic ciphertexts.
+  \item Steady-state latency excludes tick~1 JIT.
+  \item Peak memory includes host matrix buffers and Metal working sets; it is
+        not a lower bound on an optimized implementation (e.g., matrix
+        deduplication, streaming uploads).
+\end{enumerate}
+
+\section{Related Work}
+\label{sec:related}
+
+TFHE and FHEW established PBS as a Boolean-friendly FHE
+path~\cite{chillotti2020tfhe,ducas2015fhew}.
+Industrial compilers (Concrete~\cite{concrete}, HEIR/MLIR efforts) lower high-level
+programs to FHE ops; HELUT instead lowers \emph{already-synthesized} gate netlists
+to a vendor ML graph.
+GPU FHE accelerators (cuFHE, and successors) optimize NTT-heavy kernels;
+HELUT intentionally uses the ``wrong'' dense embedding to stress-test whether
+\texttt{UInt32} tensor engines preserve modular semantics at all.
+PicoRV32 is a widely used size-optimized RISC-V
+core~\cite{picorv32}; prior encrypted-CPU demos typically stop at ALUs or
+tiny FSMs rather than a full Yosys-mapped RV32 soft core on a phone/laptop NPU
+API.
+
+\section{Limitations and Future Work}
+\label{sec:limits}
+
+\begin{itemize}[leftmargin=*,itemsep=2pt]
+  \item \textbf{Cryptography.} Mock encodings only; no security claims.
+  \item \textbf{Matrix deduplication.} The prototype expands one Toeplitz matrix
+        \emph{per LUT cell}. PicoRV32's techmap uses only \textbf{64} distinct
+        Yosys truth tables across 4\,785 \$lut cells ($\approx 75\times$ reuse).
+        Caching a singleton matrix per unique truth table was omitted for
+        implementation simplicity, but would collapse the $\approx 19\,\mathrm{GiB}$
+        raw host footprint to $\approx 0.25\,\mathrm{GiB}$ and cut the dominant
+        term of the $469\,\mathrm{s}$ setup ceiling proportionally---the first
+        optimization a systems reviewer should demand.
+  \item \textbf{Memory.} Explicit Toeplitz matrices are pedagogically clear and
+        experimentally brutal even \emph{with} deduplication; production FHE
+        systems should not materialize dense $N\times N$ forms at all.
+  \item \textbf{Coverage.} Async resets, latches, and non-LUT Yosys cells remain
+        incomplete.
+  \item \textbf{Performance.} No attempt yet to fuse LUTs, shard the graph, or
+        overlap host expansion with device execution.
+  \item \textbf{Verification.} Boot proves \emph{execution}, not functional
+        equivalence against a Verilog simulator under the same stimulus (future
+        work: co-simulate trap/PC traces).
+\end{itemize}
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+HELUT shows that Apple Silicon's \texttt{MPSGraph} can carry an exact
+$\mathbb{Z}/2^{32}\mathbb{Z}$ negacyclic LUT datapath large enough to clock a
+Yosys-synthesized PicoRV32 core under a mock-encrypted reset sequence.
+The engineering lesson is prosaic and useful: once PBS is phrased as dense
+integer tensors, the rest of a soft CPU---wires, LUTs, enables, sync resets,
+and a host posedge loop---looks like ordinary graph IR work.
+The scientific lesson is cautionary: feasibility of the datapath is not
+feasibility of FHE.
+With that distinction stated plainly, HELUT stands as a defensible systems
+prototype and a measured baseline for denser, more cryptographic successors.
+
+\appendix
+\section{Boot harness summary}
+\label{app:boot}
+
+The capstone executable loads \texttt{picorv32\_netlist.json}, compiles with
+\texttt{YosysGraphCompiler}, locates the \texttt{resetn} placeholder, and runs
+ten ticks while rewriting the shared \texttt{resetn} \texttt{MTLBuffer} between
+\texttt{graph.run} calls (mock-encrypted 0 for three ticks, then mock-encrypted 1).
+All other primary inputs remain mock-encrypted 0.
+Reported compilation time wraps only \texttt{compile(\ldots)}; per-tick times wrap
+only \texttt{graph.run}.
+
+\section{Reproducibility}
+\label{app:repro}
+
+\begin{lstlisting}
+swift build
+.build/debug/helut /path/to/picorv32_netlist.json
+\end{lstlisting}
+Requires macOS~14+, an Apple Silicon GPU with Metal, and sufficient unified
+memory (tens of GiB) for the PicoRV32 matrix working set.
+
+\begin{thebibliography}{9}
+
+\bibitem{chillotti2020tfhe}
+I.~Chillotti, N.~Gama, M.~Georgieva, and M.~Izabach{\`e}ne.
+\newblock TFHE: Fast fully homomorphic encryption over the torus.
+\newblock \emph{Journal of Cryptology}, 33(1):34--91, 2020.
+
+\bibitem{ducas2015fhew}
+L.~Ducas and D.~Micciancio.
+\newblock FHEW: Bootstrapping homomorphic encryption in less than a second.
+\newblock In \emph{EUROCRYPT}, 2015.
+
+\bibitem{lyubashevsky2010ideal}
+V.~Lyubashevsky, C.~Peikert, and O.~Regev.
+\newblock On ideal lattices and learning with errors over rings.
+\newblock In \emph{EUROCRYPT}, 2010.
+
+\bibitem{concrete}
+Zama.
+\newblock Concrete: TFHE compiler and runtime.
+\newblock \url{https://github.com/zama-ai/concrete}, 2022--.
+
+\bibitem{picorv32}
+C.~Wolf.
+\newblock PicoRV32 --- a size-optimized RISC-V CPU.
+\newblock \url{https://github.com/YosysHQ/picorv32}.
+
+\bibitem{prd-app2}
+HELUT Project.
+\newblock Application \#2 note: batched encrypted search memory envelope
+($B{=}10^{4}$, $N{=}1024$).
+\newblock Internal technical note, 2026.
+
+\end{thebibliography}
+
+\end{document}

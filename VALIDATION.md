@@ -1,0 +1,47 @@
+# HELUT-Bombe Validation Pipeline
+
+Three-tier verification against real Enigma semantics. Letter-level assertions use the host `EnigmaOracle` and a **cleartext** Yosys netlist simulator — not Metal mock-PBS polynomials (those exercise the tensor engine but do not preserve boolean plaintext).
+
+## Tier 1 — Synthetic ground truth
+
+- Control plaintext: `KEINEBESONDERENEREIGNISSE`
+- Key: rotors `I-II-III`, rings `AAA`, start `ABC`, 10 steckers
+- Inject correct Grundstellung into one of 10,000 lanes; remaining lanes get deterministic wrong keys
+- Assert exclusive plaintext recovery on the correct lane + language-score spike
+
+Cleartext `enigma_netlist.json` simulation is checked bit-for-bit against the oracle for the HELUT Verilog baseline (empty stecker, rings AAA).
+
+## Tier 2 — Historical vectors
+
+Fixtures:
+
+- `Fixtures/historical_enigma_vectors.json` — keyed decrypt tests
+- `Fixtures/cryptocellar_catalog.json` — full CryptoCellar message + key-sheet index
+
+**Keyed & asserted by HELUT oracle (`supported: true`):**
+
+| Vector | Source |
+|--------|--------|
+| 1930 Instruction Manual (UKW A) | [CryptoCellar](https://cryptocellar.org/enigma/e-message-1930.html) |
+| Barbarossa BLA / LSD (1941) | Franklin Heath / Sullivan–Weierud |
+| Scharnhorst last message (1943) | [CryptoCellar / M4 Project](https://cryptocellar.org/bgac/scharnhorst.html) |
+| FHPQX HG Nord (1941) | Ostwald–Weierud |
+
+**Catalogued, not yet asserted (avoid false positives):**
+
+- [1938 Army FRX teleprinter](https://cryptocellar.org/enigma/tbombe.html) — CT/PT + pencil keys AGI/YBE/LUN; daily key pending lock
+- [Dolphin 1944](https://cryptocellar.org/enigma/dolphin.html) — Erskine break challenge (key withheld)
+- [M4 Shark/Turtle/Pike](https://cryptocellar.org/bgac/m4-messages.html) — needs 4-rotor oracle
+- [Flossenbürg KL messages](https://cryptocellar.org/Flossenbuerg/index.html) — keys in per-message PDFs
+- Army / Luftwaffe / Triton / Nixe **key sheets** (PDF) listed in `cryptocellar_catalog.json`
+
+## Tier 3 — Scoreboard
+
+`LanguageScorer` computes Index of Coincidence and German military n-gram log-probs per lane, then `detectSpikes` isolates winners above the noise floor.
+
+## Commands
+
+```bash
+swift test --filter EnigmaBombeValidationTests
+swift run -c release helut -- --validate
+```

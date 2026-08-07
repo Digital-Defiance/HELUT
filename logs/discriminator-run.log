@@ -1,0 +1,96 @@
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030680_menus.json (2513 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 1 of 2513
+running, highest deduction power first:
+  UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+shells/menu: 34944 (336 WO × 2 Greek × 2 UKW × 26 ring) → 1.6e+10 settings
+GPU pipeline depth: 4 shells in flight
+right ring swept: turnover phase fully covered, elimination is complete
+ETA floor (~50M/s): 5.3 min
+
+  [1/1] UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E       12 stops   294.3s  54.3M/s  ETA 0.0 min
+
+total raw stops: 12 over 15968569344 settings (54.3M/s mean)
+showing 12:
+  UKW B Greek beta WO V-VII-I rings AAAR pos AFYA
+    menu    UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+    stecker AD CU EG HK IM JQ NO (7 pairs)
+    decrypt UUUWIRWINENNUGEINFXZNQCYOVUOSEJSCMGCHCJUTSEEPBAZNTUALBJDDZRLYYZIWAKSWRRP
+            confirmed by 1 independent menus:
+            UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+  UKW B Greek beta WO VII-V-VIII rings AAAU pos PBMX
+    menu    UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+    stecker AG CM EJ HK IQ NW OR (7 pairs)
+    decrypt UUUUIRKITENNUTEINCNMRHBFAGFRWDBLAKICJZLOJHSTUWQGYYHRCTIIZPYDOZQZPLGIOTDW
+            confirmed by 1 independent menus:
+            UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+  UKW B Greek beta WO VII-V-VIII rings AAAH pos PBMK
+    menu    UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+    stecker AG CM EJ HK IQ NW OR (7 pairs)
+    decrypt UUUUIRKITENNUTEINCNMRHBFAGFRWDBLAKICJZLOJHSTUWQGYYHRCTIIZPYDOZQZPLGIOTDW
+            confirmed by 1 independent menus:
+            UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+  UKW B Greek beta WO III-IV-VII rings AAAM pos TKIX
+    menu    UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+    stecker AP CX DN EO FY GQ HJ IL KU MR (10 pairs)
+    decrypt UUUEIRIIVENNULEINCMBVZTHXAAZCJIWDGRSYZNTSFPZEAREZZNTZDVLKZEERALAJSCRZSVY
+            confirmed by 1 independent menus:
+            UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+  UKW B Greek gamma WO VII-V-VI rings AAAR pos SSBU
+    menu    UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+    stecker AP CR EN GU IW JO KQ MY (8 pairs)
+    decrypt UUUCIRNIQENNUKEINGGLSAXESLPYVTIRXPBRVEIRVSEFKANSPNZHPXATBFPJEMQWPCKXUYBC
+            confirmed by 1 independent menus:
+            UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+  UKW B Greek gamma WO V-IV-III rings AAAV pos WGQF
+    menu    UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+    stecker AD CR EO GP HY IJ KQ MU (8 pairs)
+    decrypt UUUMIRQINENNUREINGRXJMEGTSHGXKLLGGSHJYRRDNIPHBALUXIGSRCDBPWWEPVBXUPSAKWJ
+            confirmed by 1 independent menus:
+            UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+  UKW C Greek gamma WO VIII-III-VII rings AAAK pos ROSK
+    menu    UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+    stecker AR CI EH FJ GO KQ LY NP WX (9 pairs)
+    decrypt UUUKIRDIOENNULEINHTCRKBSSHVQJOIZJJCSTHNYDDWERKWGKNTWYQRZQXXWYTGMKPFBYMCG
+            confirmed by 1 independent menus:
+            UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+  UKW C Greek gamma WO VII-II-IV rings AAAT pos NHLI
+    menu    UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+    stecker AJ EI GQ HL NO PR XY (7 pairs)
+    decrypt UUUBIRUIQENNULEINIDWQJEAKCDDOVBFVWWDDFVMXTSGFMRQDZKWSUBQRVPLNDDJKYVJEJET
+            confirmed by 1 independent menus:
+            UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+  UKW B Greek beta WO III-VI-IV rings AAAQ pos TNYW
+    menu    UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+    stecker CO KU NW PY (4 pairs)
+    decrypt UUUMIRMIRENNUAEINHXMZIGSWFLKGVARUSOJTQSFQJEOOBDCRNADBEBAADLOAOCAFIZZNRVP
+            confirmed by 1 independent menus:
+            UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+  UKW B Greek gamma WO VII-V-VI rings AAAE pos SSBH
+    menu    UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+    stecker AP CR EN GU IW JO KQ MY (8 pairs)
+    decrypt UUUCIRNIQENNUKEINGGLSAXESLPYVTIRXPBRVEIRVSEFKANSPNZHPXATBFPJEMQWPCKXUYBC
+            confirmed by 1 independent menus:
+            UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+  UKW C Greek gamma WO VIII-III-VII rings AAAX pos ROSX
+    menu    UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+    stecker AR CI EH FJ GO KQ LY NP WX (9 pairs)
+    decrypt UUUKIRDIOENNULEINHTCRKBSSHVQJOIZJJCSTHNYDDWERKWGKNTWYQRZQXXWYTGMKPFBYMCG
+            confirmed by 1 independent menus:
+            UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+  UKW B Greek beta WO III-IV-VII rings AAAZ pos TKIK
+    menu    UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+    stecker AP CX DN EO FY GQ HJ IL KU MR (10 pairs)
+    decrypt UUUEIRIIVENNULEINCMBVZTHXAAZCJIWDGRSYZNTSFPZEAREZZNTZDVLKZEERALAJSCRZSVY
+            confirmed by 1 independent menus:
+            UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+
+=== Post-bombe discriminator ===
+trigram model: Fixtures/german_trigrams.txt (14947 grams; letters=28508834 ic=0.0747 distinct=14947)
+stecker completion killed 12 stop(s): no ≤10-plug board satisfies the whole menu.
+  Those stops survived the sweep only because the bombe seeds a single letter, so it
+  never tested the menu components that seed could not reach. Completing every
+  component is a strictly stronger sieve, and it is applied here.
+
+No stop admits a consistent plugboard. This crib is dead everywhere it was tried.

@@ -1,0 +1,6801 @@
+{
+  "target": "P1030680",
+  "ciphertext": "JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF",
+  "note": "Fuzzed Kriegsmarine crib menus (400 placements, 349 distinct texts). Mutations: header \u00b11/2/3, signal abbreviations, phonetic/orthographic slips, Hamming-1 body swaps. Filter: len>=16 and <=40 (Metal edge cap); self-encipherment illegal. Derived from p1030680_menus.json. Topology matches BombeMenuBuilder.",
+  "cribs": [
+    {
+      "text": "ITUUUUUVIIRSIBENNULZWOYVIRS",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YUUUVIIRSIBENNULFINSYNACHR",
+      "messages": 0,
+      "offsets": [
+        26
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "PHTTTRAVEMUENDEWDEPASSIERTXMA",
+      "messages": 0,
+      "offsets": [
+        24,
+        41
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "XPHTTRAVEMUENDEWDEPASSIERTXMA",
+      "messages": 0,
+      "offsets": [
+        24
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "PHTTRAVEMUENDEWDEPASSIERTXMAX",
+      "messages": 0,
+      "offsets": [
+        25,
+        41
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "PHTTRAVEMUENNDEWDEPASSIERTXMA",
+      "messages": 0,
+      "offsets": [
+        25,
+        41
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "PHTTRAVEMUENDEWDEPASSIERTXMAY",
+      "messages": 0,
+      "offsets": [
+        41
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "YCHTRAVEMUENDEVDEVVVUUUDREIN",
+      "messages": 0,
+      "offsets": [
+        20
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "KOMMANDADXUUUUBOOTEYFUENFXUX",
+      "messages": 0,
+      "offsets": [
+        20
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "KOMMANDADXUUUUBOOTEYFFXDXUUU",
+      "messages": 0,
+      "offsets": [
+        23
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "KOMMANDADXUUUUBOOTEYFXDXUUUY",
+      "messages": 0,
+      "offsets": [
+        23
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "YKOMMANDADXUUUBOOTEYFXDXUUUY",
+      "messages": 0,
+      "offsets": [
+        0,
+        23
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "PHTTRAVEMUENDEADEPASSIERTXMA",
+      "messages": 0,
+      "offsets": [
+        25
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "PHTTRAVEMUENDEEDEPASSIERTXMA",
+      "messages": 0,
+      "offsets": [
+        25
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "PHTTRAVEMUENDEFDEPASSIERTXMA",
+      "messages": 0,
+      "offsets": [
+        25
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "PHTTRAVEMUENDEIDEPASSIERTXMA",
+      "messages": 0,
+      "offsets": [
+        25
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "PHTTRAVEMUENDEVDEPASSIERTXMA",
+      "messages": 0,
+      "offsets": [
+        25
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "PHTTRAVEMUENDEWDEPASSAERTXMA",
+      "messages": 0,
+      "offsets": [
+        25
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "PHTTRAVEMUENDEWDEPASSFERTXMA",
+      "messages": 0,
+      "offsets": [
+        25
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "PHTTRAVEMUENDEWDEPASSTERTXMA",
+      "messages": 0,
+      "offsets": [
+        25
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "PHTTRAVEMUENDEWDEPASSXERTXMA",
+      "messages": 0,
+      "offsets": [
+        25
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "PHTTRAVEMUENDEXDEPASSIERTXMA",
+      "messages": 0,
+      "offsets": [
+        25
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "PHTTRAAEMUENDEWDEPASSIERTXMA",
+      "messages": 0,
+      "offsets": [
+        25
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "PHTTRAFEMUENDEWDEPASSIERTXMA",
+      "messages": 0,
+      "offsets": [
+        25
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "PHTTRAREMUENDEWDEPASSIERTXMA",
+      "messages": 0,
+      "offsets": [
+        25
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "PHTTRATEMUENDEWDEPASSIERTXMA",
+      "messages": 0,
+      "offsets": [
+        25
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "PHTTRAWEMUENDEWDEPASSIERTXMA",
+      "messages": 0,
+      "offsets": [
+        25
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "CHTRAVEMUENDEVDEVVVUUUDREINX",
+      "messages": 0,
+      "offsets": [
+        33
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "CHTRAVEMUENDEVDEVVWUUUDREINX",
+      "messages": 0,
+      "offsets": [
+        33
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "PHTTRAVEAUENDEWDEPASSIERTXMA",
+      "messages": 0,
+      "offsets": [
+        41
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "PHTTRAVEMEENDEWDEPASSIERTXMA",
+      "messages": 0,
+      "offsets": [
+        41
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "PHTTRAVEMNENDEWDEPASSIERTXMA",
+      "messages": 0,
+      "offsets": [
+        41
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "CHTREVEMUENDEVDEVVVUUUDREIN",
+      "messages": 0,
+      "offsets": [
+        18,
+        21,
+        22,
+        41
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "CHTRIVEMUENDEVDEVVVUUUDREIN",
+      "messages": 0,
+      "offsets": [
+        21,
+        22,
+        41
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "CHTRTVEMUENDEVDEVVVUUUDREIN",
+      "messages": 0,
+      "offsets": [
+        22,
+        41
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "CHTRTVEMUENDEVDEVVWUUUDREIN",
+      "messages": 0,
+      "offsets": [
+        41
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "ITUUUUVIIRSIBENNULZWOYVIRS",
+      "messages": 0,
+      "offsets": [
+        1
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "YITUUUVIIRSIBENNULZWOYVIRS",
+      "messages": 0,
+      "offsets": [
+        1
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "YITUUUVIIRSIBENNULZWOYVIRZ",
+      "messages": 0,
+      "offsets": [
+        1
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "KOMXADMXUUUBOOTTEYFXDXUUUX",
+      "messages": 0,
+      "offsets": [
+        25
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "KOMXADMXUUUBOOTTEYFXDXUUUY",
+      "messages": 0,
+      "offsets": [
+        25
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "KOMXADMXUUUUBOOTEYFXDXUUUX",
+      "messages": 0,
+      "offsets": [
+        25
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "KOMXADMXUUUUBOOTEYFXDXUUUY",
+      "messages": 0,
+      "offsets": [
+        25
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "KOMMADMXUUUUBOOTEYFXDXUUUY",
+      "messages": 0,
+      "offsets": [
+        25
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "YUUUVIIRSIBENNULEINSYNACHR",
+      "messages": 0,
+      "offsets": [
+        15,
+        24,
+        26
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "YUUUVIRSIBENNNULEINSYNACHR",
+      "messages": 0,
+      "offsets": [
+        26
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "YYUUUVIRSIBENNULEINSYNACHR",
+      "messages": 0,
+      "offsets": [
+        15,
+        24,
+        26
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "XUUUVIIRSIBENNULUINSYNACHR",
+      "messages": 0,
+      "offsets": [
+        26
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "XXXXKOMXADMXUUUBOOTEGKDOSV",
+      "messages": 0,
+      "offsets": [
+        35
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "YXXXKOMXADMXUUUBOOTEGKDOSV",
+      "messages": 0,
+      "offsets": [
+        35
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "XYXXKOMXADMXUUUBOOTEGKDOSV",
+      "messages": 0,
+      "offsets": [
+        35
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "YYXXKOMXADMXUUUBOOTEGKDOSV",
+      "messages": 0,
+      "offsets": [
+        35
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "YYXXKOMMADMXUUUBOOTEGKDOSV",
+      "messages": 0,
+      "offsets": [
+        35
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXXADMXUUUBOOTEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0,
+        36
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXXKOMXADMXUUUBOOTEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0,
+        36
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YXXKOMXADMXUUUBOOTEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0,
+        36
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXXADMXUUUBOOTEGKDOSVY",
+      "messages": 0,
+      "offsets": [
+        0,
+        36
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXXKOMXADMXUUUBOOTEGKDOSVY",
+      "messages": 0,
+      "offsets": [
+        0,
+        36
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YXXKOMXADMXUUUBOOTEGKDOSVY",
+      "messages": 0,
+      "offsets": [
+        0,
+        36
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGKDOSVXX",
+      "messages": 0,
+      "offsets": [
+        0,
+        1,
+        37
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGKDOSVXY",
+      "messages": 0,
+      "offsets": [
+        0,
+        1,
+        37
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGKDOSVYX",
+      "messages": 0,
+      "offsets": [
+        0,
+        37
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGKDOSVYY",
+      "messages": 0,
+      "offsets": [
+        0,
+        37
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YUUUVIRSIBENNULNINSYNACHR",
+      "messages": 0,
+      "offsets": [
+        27
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "YUUUVIRSIBENNULUINSYNACHR",
+      "messages": 0,
+      "offsets": [
+        27
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "YUUUVIRSIBENNULFINSYNACHR",
+      "messages": 0,
+      "offsets": [
+        27
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "YUUUVIRSIBENNULIINSYNACHR",
+      "messages": 0,
+      "offsets": [
+        27
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIIRSIBENNULFINSYNACHR",
+      "messages": 0,
+      "offsets": [
+        27
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIIRSIBENNULIINSYNACHR",
+      "messages": 0,
+      "offsets": [
+        27
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIIRSIBENNULNINSYNACHR",
+      "messages": 0,
+      "offsets": [
+        27
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIIRSIBENNULUINSYNACHR",
+      "messages": 0,
+      "offsets": [
+        27
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "ITUUUVIRSIBINNULIWOYVIRS",
+      "messages": 0,
+      "offsets": [
+        44
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "CHIRAVEMUENDEVDEVVVUUUDREIN",
+      "messages": 0,
+      "offsets": [
+        18,
+        21
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "CHDRAVEMUENDEVDEVVVUUUDREIN",
+      "messages": 0,
+      "offsets": [
+        21
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "CHFRAVEMUENDEVDEVVVUUUDREIN",
+      "messages": 0,
+      "offsets": [
+        21
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "CHNRAVEMUENDEVDEVVVUUUDREIN",
+      "messages": 0,
+      "offsets": [
+        21
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "CHTEAVEMUENDEVDEVVVUUUDREIN",
+      "messages": 0,
+      "offsets": [
+        21
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "CHTFAVEMUENDEVDEVVVUUUDREIN",
+      "messages": 0,
+      "offsets": [
+        21
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "CHTIAVEMUENDEVDEVVVUUUDREIN",
+      "messages": 0,
+      "offsets": [
+        21
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "CHTRAFEMUENDEVDEVVVUUUDREIN",
+      "messages": 0,
+      "offsets": [
+        21
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "CHTRANEMUENDEVDEVVVUUUDREIN",
+      "messages": 0,
+      "offsets": [
+        21
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "CHTRXVEMUENDEVDEVVVUUUDREIN",
+      "messages": 0,
+      "offsets": [
+        21
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "CHTUAVEMUENDEVDEVVVUUUDREIN",
+      "messages": 0,
+      "offsets": [
+        21
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "CHURAVEMUENDEVDEVVVUUUDREIN",
+      "messages": 0,
+      "offsets": [
+        21
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEYFXDXUUU",
+      "messages": 0,
+      "offsets": [
+        0,
+        1
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YXKOMXADMXUUUBOOTEYFXDXUUU",
+      "messages": 0,
+      "offsets": [
+        0,
+        1
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "ITUUUUUVIRSIBENNULZWOYVIRS",
+      "messages": 0,
+      "offsets": [
+        1
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "YITUUUUVIRSIBENNULZWOYVIRS",
+      "messages": 0,
+      "offsets": [
+        1
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "YITTUUUVIRSIBENNULZWOYVIRS",
+      "messages": 0,
+      "offsets": [
+        1
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "YYITUUUVIRSIBENNULZWOYVIRS",
+      "messages": 0,
+      "offsets": [
+        1
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "XUUUVIIRSIBENNULEINSANANEI",
+      "messages": 0,
+      "offsets": [
+        10
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "XXUUUVIRSIBENNULEINSANANEI",
+      "messages": 0,
+      "offsets": [
+        10
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "YXUUUVIRSIBENNULEINSANANEI",
+      "messages": 0,
+      "offsets": [
+        10
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIIRSIBENNULEINSANANEIY",
+      "messages": 0,
+      "offsets": [
+        14,
+        15,
+        25
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIIRSIBENNULEINSYNACHRY",
+      "messages": 0,
+      "offsets": [
+        14,
+        25,
+        27
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "YUUUVIIRSIBENNULEINSANANEI",
+      "messages": 0,
+      "offsets": [
+        15
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIBENNULEINSANANEIYY",
+      "messages": 0,
+      "offsets": [
+        0,
+        15,
+        24
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIBENNULEINSYNACHRYY",
+      "messages": 0,
+      "offsets": [
+        0,
+        15,
+        17,
+        24
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXUUUVIRSIBENNULEINSYNACHR",
+      "messages": 0,
+      "offsets": [
+        15
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "YYUUUVIRSIBENNULEINSANANEI",
+      "messages": 0,
+      "offsets": [
+        15
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIBENNULEINSYNACHRXY",
+      "messages": 0,
+      "offsets": [
+        0,
+        17
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXAAMXUUUBOOTEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEEKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEOKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTERKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEUKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXAEMXUUUBOOTEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXAOMXUUUBOOTEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXARMXUUUBOOTEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXATMXUUUBOOTEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXAUMXUUUBOOTEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEAKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTETKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRAIBENNULEINSANANEIY",
+      "messages": 0,
+      "offsets": [
+        24,
+        26
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIREIBENNULEINSANANEIY",
+      "messages": 0,
+      "offsets": [
+        24,
+        26
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRIIBENNULEINSANANEIY",
+      "messages": 0,
+      "offsets": [
+        24,
+        26
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRTIBENNULEINSANANEIY",
+      "messages": 0,
+      "offsets": [
+        24
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIREIBENNULEINSYNACHRY",
+      "messages": 0,
+      "offsets": [
+        24
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRIIBENNULEINSYNACHRY",
+      "messages": 0,
+      "offsets": [
+        24
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRNIBENNULEINSYNACHRY",
+      "messages": 0,
+      "offsets": [
+        24
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRUIBENNULEINSYNACHRY",
+      "messages": 0,
+      "offsets": [
+        24
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "XKOMMANDADXUUUBOOTEYFXDXUUUY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XKOMMANDADXUUUBOOTEYFXDXUUU",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXXKOMMANDADXUUUBOOTEGKDOSV",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YKOMMANDADXUUUBOOTEYFXDXUUU",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YXXKOMMANDADXUUUBOOTEGKDOSV",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXXKOMMANDADXUEUBOOTEGKDOSV",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXXKOMMANDADXUUUBOOTETKDOSV",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XYKOMXADMXUUUBOOTEYFXDXUUU",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YYKOMXADMXUUUBOOTEYFXDXUUU",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIEENNULEINSANANEIY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIRENNULEINSANANEIY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSITENNULEINSANANEIY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIAENNULEINSYNACHRY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIEENNULEINSYNACHRY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIOENNULEINSYNACHRY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIRENNULEINSYNACHRY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSITENNULEINSYNACHRY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIUENNULEINSYNACHRY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXAOMXADMXUUUBOOTEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXCOMXADMXUUUBOOTEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXFOMXADMXUUUBOOTEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKAMXADMXUUUBOOTEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOEXADMXUUUBOOTEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOOXADMXUUUBOOTEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKORXADMXUUUBOOTEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOUXADMXUUUBOOTEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKTMXADMXUUUBOOTEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKUMXADMXUUUBOOTEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXOOMXADMXUUUBOOTEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXUOMXADMXUUUBOOTEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXXOMXADMXUUUBOOTEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMMADMXUUUBOOTERKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXRUUBOOTEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXTUUBOOTEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXUAUBOOTEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXUOUBOOTEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXUTUBOOTEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXUUTBOOTEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXUUUAOOTEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXUUUBEOTEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOAEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXUUUBOODEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOEEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOOEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGADOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGKAOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGKDASVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGKDESVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGKDOAVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGKDOEVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGKDOZVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGKDRSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGKDTSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGKEOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXAOMXADMXUUUBOOTEAKDOSV",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XXCOMXADMXUUUBOOTEAKDOSV",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIBENNULEINSANANEIXX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIBENNULEINSANANEIXY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIBENNULEINSANANEIYX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIBENNULEINSYNACHRXX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIBENNULEINSYNACHRYX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIEENNULEINSANANEIX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIIENNULEINSANANEIX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIRENNULEINSANANEIX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIUENNULEINSANANEIX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIXENNULEINSANANEIX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUAIRSIBENNULEINSANANEIY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUEIRSIBENNULEINSANANEIY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUIIRSIBENNULEINSANANEIY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUOIRSIBENNULEINSANANEIY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUURIRSIBENNULEINSANANEIY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUTIRSIBENNULEINSANANEIY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUUIRSIBENNULEINSANANEIY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVERSIBENNULEINSANANEIY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIASIBENNULEINSANANEIY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIESIBENNULEINSANANEIY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIISIBENNULEINSANANEIY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIBENNUIEINSANANEIX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIBENNUNEINSANANEIX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIBENNUREINSANANEIX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUEVIRSIBENNULEINSANANEIY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUIVIRSIBENNULEINSANANEIY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUNVIRSIBENNULEINSANANEIY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIBENAULEINSANANEIY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIBENEULEINSANANEIY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIBENNOLEINSANANEIY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIBENNRLEINSANANEIY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIBENNTLEINSANANEIY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIBENNUFEINSANANEIY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIBENNUIEINSANANEIY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIBENNULEANSANANEIY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIBENNULEIASANANEIY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIBENNULEIESANANEIY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIBENNULEINIANANEIY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "WETTERVORHERSAGEXX",
+      "messages": 0,
+      "offsets": [
+        40,
+        44
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "XXWETTERVORHERSAGE",
+      "messages": 0,
+      "offsets": [
+        42
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "YXWETTERVORHERSAGE",
+      "messages": 0,
+      "offsets": [
+        42
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "XYWETTERVORHERSAGE",
+      "messages": 0,
+      "offsets": [
+        42
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "YYWETTERVORHERSAGE",
+      "messages": 0,
+      "offsets": [
+        42
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "XWETTERVORHERSAGEX",
+      "messages": 0,
+      "offsets": [
+        43
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "YWETTERVORHERSAGEX",
+      "messages": 0,
+      "offsets": [
+        43
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "XWETTERVORHERSAGEY",
+      "messages": 0,
+      "offsets": [
+        43
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "YWETTERVORHERSAGEY",
+      "messages": 0,
+      "offsets": [
+        43
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "WETTERVORHERSAGEXY",
+      "messages": 0,
+      "offsets": [
+        44
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "WETTERVORHERSAGEYX",
+      "messages": 0,
+      "offsets": [
+        44
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "WETTERVORHERSAGEYY",
+      "messages": 0,
+      "offsets": [
+        44
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "WETTERVARHERSAGEX",
+      "messages": 0,
+      "offsets": [
+        40
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "WETTERVERHERSAGEX",
+      "messages": 0,
+      "offsets": [
+        40
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "WETTERVORHERSEGEX",
+      "messages": 0,
+      "offsets": [
+        40
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "WETTERVORHERSOGEX",
+      "messages": 0,
+      "offsets": [
+        40
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "WETTERVORHERSRGEX",
+      "messages": 0,
+      "offsets": [
+        40
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "WETTERVORHERSTGEX",
+      "messages": 0,
+      "offsets": [
+        40
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "WETTERVRRHERSAGEX",
+      "messages": 0,
+      "offsets": [
+        40
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "WETTERVTRHERSAGEX",
+      "messages": 0,
+      "offsets": [
+        40
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "WETTERVXRHERSAGEX",
+      "messages": 0,
+      "offsets": [
+        40
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "XWETTERAORHERSAGE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XWETTEREORHERSAGE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XWETTEROORHERSAGE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XWETTERRORHERSAGE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XWETTERTORHERSAGE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XWETTERVARHERSAGE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XWETTERVORAERSAGE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XWETTERVOROERSAGE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XWETTERVORRERSAGE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XWETTERVORTERSAGE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XWETTERVRRHERSAGE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XWETTERVTRHERSAGE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YWETTERAORHERSAGE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YWETTEROORHERSAGE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YWETTERRORHERSAGE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YWETTERTORHERSAGE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YWETTERVARHERSAGE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YWETTERVERHERSAGE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YWETTERVORAERSAGE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YWETTERVOROERSAGE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YWETTERVORRERSAGE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YWETTERVORTERSAGE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YWETTERVORXERSAGE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YWETTERVRRHERSAGE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YWETTERVTRHERSAGE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "NFUUUFLOTTILLEVONVONZWOECHSY",
+      "messages": 0,
+      "offsets": [
+        10
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "UUFLOTTILLEXEINSKKTTTFFFEINY",
+      "messages": 0,
+      "offsets": [
+        12,
+        13
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "YUUFLOTTILLEHACHRXFXDXUUUAUS",
+      "messages": 0,
+      "offsets": [
+        13
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "FXUUUFLOTTILLEYFUNFXUUUFLOT",
+      "messages": 0,
+      "offsets": [
+        10
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "UUFLOTTILLEYVIERXUUUFLOTTXV",
+      "messages": 0,
+      "offsets": [
+        10,
+        14
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "FXUUUFLOTTILLEYVIERXUUUFLOT",
+      "messages": 0,
+      "offsets": [
+        11,
+        13,
+        14,
+        21,
+        23
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "UUFLOTTXYVIERXUUUFLOTTILLEV",
+      "messages": 0,
+      "offsets": [
+        11,
+        23
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "FXUUUFLOTTILLEXEINSKKTTTFFF",
+      "messages": 0,
+      "offsets": [
+        0,
+        13
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "FXUUUFLOTTILLEXEINZKKTTTFFF",
+      "messages": 0,
+      "offsets": [
+        13
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "UUFLOTTILLEYFUNFXUUUFLOTTXY",
+      "messages": 0,
+      "offsets": [
+        13
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "UUFLOTTILLEVVVUUURWODREISEC",
+      "messages": 0,
+      "offsets": [
+        23
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "UUFLOTTILLEVVVUUUFUNFDREIVI",
+      "messages": 0,
+      "offsets": [
+        24
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "UUFLOTTXYFUNFXUUUFLOTTILLEY",
+      "messages": 0,
+      "offsets": [
+        32
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "XFXUUUFLOTTXYFUNFXUUUFLOT",
+      "messages": 0,
+      "offsets": [
+        20
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "YFXUUUFLOTTXYFUNFXUUUFLOT",
+      "messages": 0,
+      "offsets": [
+        20
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "VXUUUFLOTTILLEHACHRXFXDXUUUX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "TEUUUFFLOTTILLEANANUUUZWOFUE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "VXUUUFLOTTILLEHACHRXFXDXUUU",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "TEUUUFFLOTTXANANUUUZWOFUE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "TEUUUUFLOTTXANANUUUZWOFUE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XTEUUUFLOTTXANANUUUZWOFUE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YTEUUUFLOTTXANANUUUZWOFUE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "NFUUUFLOTTILLEJTREIBOALVERB",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "SXUUUFLOTTILLEVVVUUURWODREI",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "NFUUUFLOTTILLENULEINZWONUL",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UFLOTTILLEVVVUUUFUNFDREIVI",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "FXUUUFFLOTTXXEINSKKTTTFFF",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "FXUUUUFLOTTXXEINSKKTTTFFF",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XFXUUUFLOTTXXEINSKKTTTFFF",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YFXUUUFLOTTXXEINSKKTTTFFF",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "HSUUUFFLOTTXXTTTFFFZWODRE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "HSUUUUFLOTTXXTTTFFFZWODRE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XHSUUUFLOTTXXTTTFFFZWODRE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YHSUUUFLOTTXXTTTFFFZWODRE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "RXUUUFFLOTTXXMITUUUVIERSI",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "RXUUUUFLOTTXXMITUUUVIERSI",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XRXUUUFLOTTXXMITUUUVIERSI",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YRXUUUFLOTTXXMITUUUVIERSI",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "TEUUUFLOTTTXANANUUUZWOFUE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "LXVVVUUUVIRSIUENNUULEINSX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "TXVVVUUUUEINSEINSNULDREIK",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XTXVVVUUUEINSEINSNULDREIK",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YTXVVVUUUEINSEINSNULDREIK",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "LXVVVUUUVIRSIUENNULEIASX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "LXVVVUUUVIRSIUENNULEIESX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "LXVVVUUUVIRSIUENNULEIISX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "LXVVVUUUVIRSIUENNULEIOSX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "LXVVVUUUVIRSIUENNULEITSX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "LXVVVUUUVIRSIUENNULEIXSX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "NGNANNCBRUNOVVVUUUJNSULN",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "NGNANNCBRUNOVVVUUUNNSULN",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "NGNANNCBRUNOVVVUUUONSULN",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "NGNANNCBRUNOVVVUUURNSULN",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "NGNANNCBRUNOVVVUUUXNSULN",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "NGNANNCTRUNOVVVUUUINSULN",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "TXEULEINSZWONULBEIROTNUL",
+      "messages": 0,
+      "offsets": [
+        35
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "TXNELEINSZWONULBEIROTNUL",
+      "messages": 0,
+      "offsets": [
+        35
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "TXNILEINSZWONULBEIROTNUL",
+      "messages": 0,
+      "offsets": [
+        35
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "TXNNLEINSZWONULBEIROTNUL",
+      "messages": 0,
+      "offsets": [
+        35
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "TXNOLEINSZWONULBEIROTNUL",
+      "messages": 0,
+      "offsets": [
+        35
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "TXNRLEINSZWONULBEIROTNUL",
+      "messages": 0,
+      "offsets": [
+        35
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "TXNUEEINSZWONULBEIROTNUL",
+      "messages": 0,
+      "offsets": [
+        35
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "TXNUIEINSZWONULBEIROTNUL",
+      "messages": 0,
+      "offsets": [
+        35
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "TXNULEENSZWONULBEIROTNUL",
+      "messages": 0,
+      "offsets": [
+        35
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "TXNULEIESZWONULBEIROTNUL",
+      "messages": 0,
+      "offsets": [
+        35
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "TXNULEINEZWONULBEIROTNUL",
+      "messages": 0,
+      "offsets": [
+        35
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "TXNULEINFZWONULBEIROTNUL",
+      "messages": 0,
+      "offsets": [
+        35
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "TXNULEINIZWONULBEIROTNUL",
+      "messages": 0,
+      "offsets": [
+        35
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "TXNULEINNZWONULBEIROTNUL",
+      "messages": 0,
+      "offsets": [
+        35
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "TXNULEINOZWONULBEIROTNUL",
+      "messages": 0,
+      "offsets": [
+        35
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "TXNULEINRZWONULBEIROTNUL",
+      "messages": 0,
+      "offsets": [
+        35
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "TXNULEINUZWONULBEIROTNUL",
+      "messages": 0,
+      "offsets": [
+        35
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "TXNULEINZZWONULBEIROTNUL",
+      "messages": 0,
+      "offsets": [
+        35
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "TXNULEIUSZWONULBEIROTNUL",
+      "messages": 0,
+      "offsets": [
+        35
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "TXNULEIXSZWONULBEIROTNUL",
+      "messages": 0,
+      "offsets": [
+        35
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "TXNULENNSZWONULBEIROTNUL",
+      "messages": 0,
+      "offsets": [
+        35
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "TXNULEONSZWONULBEIROTNUL",
+      "messages": 0,
+      "offsets": [
+        35
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "TXVVVUUDREINKLEINSVYEYT",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "TXVVVUUEINSEINSNULDREIK",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "NGNANNCBRUNOVVVUUUINSULNX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "NGNANNCBRUNOVVVUUUINSULNY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "TXVVVUUUUDREINULDREINULKK",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XTXVVVUUUDREINULDREINULKK",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YTXVVVUUUDREINULDREINULKK",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "TXVVVUUUFFUNFDREIVIERKKNO",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "TXVVVUUUFUNFFDREIVIERKKNO",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "TXNULEINZWONULBEIROTNULL",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "TXNULEINZWONULBEIROTNUL",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    }
+  ],
+  "placements": [
+    {
+      "text": "ITUUUUUVIIRSIBENNULZWOYVIRS",
+      "offset": 0,
+      "loops": 11,
+      "edges": 27,
+      "letters": 21,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YUUUVIIRSIBENNULFINSYNACHR",
+      "offset": 26,
+      "loops": 11,
+      "edges": 26,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "PHTTTRAVEMUENDEWDEPASSIERTXMA",
+      "offset": 24,
+      "loops": 10,
+      "edges": 29,
+      "letters": 22,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XPHTTRAVEMUENDEWDEPASSIERTXMA",
+      "offset": 24,
+      "loops": 10,
+      "edges": 29,
+      "letters": 22,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "PHTTRAVEMUENDEWDEPASSIERTXMAX",
+      "offset": 25,
+      "loops": 10,
+      "edges": 29,
+      "letters": 22,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "PHTTRAVEMUENNDEWDEPASSIERTXMA",
+      "offset": 25,
+      "loops": 10,
+      "edges": 29,
+      "letters": 22,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "PHTTRAVEMUENDEWDEPASSIERTXMAX",
+      "offset": 41,
+      "loops": 10,
+      "edges": 29,
+      "letters": 21,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "PHTTRAVEMUENDEWDEPASSIERTXMAY",
+      "offset": 41,
+      "loops": 10,
+      "edges": 29,
+      "letters": 21,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "PHTTRAVEMUENNDEWDEPASSIERTXMA",
+      "offset": 41,
+      "loops": 10,
+      "edges": 29,
+      "letters": 21,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "PHTTTRAVEMUENDEWDEPASSIERTXMA",
+      "offset": 41,
+      "loops": 10,
+      "edges": 29,
+      "letters": 21,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YCHTRAVEMUENDEVDEVVVUUUDREIN",
+      "offset": 20,
+      "loops": 10,
+      "edges": 28,
+      "letters": 20,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "KOMMANDADXUUUUBOOTEYFUENFXUX",
+      "offset": 20,
+      "loops": 10,
+      "edges": 28,
+      "letters": 20,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "KOMMANDADXUUUUBOOTEYFFXDXUUU",
+      "offset": 23,
+      "loops": 10,
+      "edges": 28,
+      "letters": 20,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "KOMMANDADXUUUUBOOTEYFXDXUUUY",
+      "offset": 23,
+      "loops": 10,
+      "edges": 28,
+      "letters": 20,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YKOMMANDADXUUUBOOTEYFXDXUUUY",
+      "offset": 23,
+      "loops": 10,
+      "edges": 28,
+      "letters": 20,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "PHTTRAVEMUENDEADEPASSIERTXMA",
+      "offset": 25,
+      "loops": 10,
+      "edges": 28,
+      "letters": 21,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "PHTTRAVEMUENDEEDEPASSIERTXMA",
+      "offset": 25,
+      "loops": 10,
+      "edges": 28,
+      "letters": 21,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "PHTTRAVEMUENDEFDEPASSIERTXMA",
+      "offset": 25,
+      "loops": 10,
+      "edges": 28,
+      "letters": 21,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "PHTTRAVEMUENDEIDEPASSIERTXMA",
+      "offset": 25,
+      "loops": 10,
+      "edges": 28,
+      "letters": 21,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "PHTTRAVEMUENDEVDEPASSIERTXMA",
+      "offset": 25,
+      "loops": 10,
+      "edges": 28,
+      "letters": 21,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "PHTTRAVEMUENDEWDEPASSAERTXMA",
+      "offset": 25,
+      "loops": 10,
+      "edges": 28,
+      "letters": 21,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "PHTTRAVEMUENDEWDEPASSFERTXMA",
+      "offset": 25,
+      "loops": 10,
+      "edges": 28,
+      "letters": 21,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "PHTTRAVEMUENDEWDEPASSTERTXMA",
+      "offset": 25,
+      "loops": 10,
+      "edges": 28,
+      "letters": 21,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "PHTTRAVEMUENDEWDEPASSXERTXMA",
+      "offset": 25,
+      "loops": 10,
+      "edges": 28,
+      "letters": 21,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "PHTTRAVEMUENDEXDEPASSIERTXMA",
+      "offset": 25,
+      "loops": 10,
+      "edges": 28,
+      "letters": 21,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "PHTTRAAEMUENDEWDEPASSIERTXMA",
+      "offset": 25,
+      "loops": 10,
+      "edges": 28,
+      "letters": 22,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "PHTTRAFEMUENDEWDEPASSIERTXMA",
+      "offset": 25,
+      "loops": 10,
+      "edges": 28,
+      "letters": 22,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "PHTTRAREMUENDEWDEPASSIERTXMA",
+      "offset": 25,
+      "loops": 10,
+      "edges": 28,
+      "letters": 22,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "PHTTRATEMUENDEWDEPASSIERTXMA",
+      "offset": 25,
+      "loops": 10,
+      "edges": 28,
+      "letters": 22,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "PHTTRAWEMUENDEWDEPASSIERTXMA",
+      "offset": 25,
+      "loops": 10,
+      "edges": 28,
+      "letters": 22,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "CHTRAVEMUENDEVDEVVVUUUDREINX",
+      "offset": 33,
+      "loops": 10,
+      "edges": 28,
+      "letters": 21,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "CHTRAVEMUENDEVDEVVWUUUDREINX",
+      "offset": 33,
+      "loops": 10,
+      "edges": 28,
+      "letters": 21,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "PHTTRAVEAUENDEWDEPASSIERTXMA",
+      "offset": 41,
+      "loops": 10,
+      "edges": 28,
+      "letters": 21,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "PHTTRAVEMEENDEWDEPASSIERTXMA",
+      "offset": 41,
+      "loops": 10,
+      "edges": 28,
+      "letters": 20,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "PHTTRAVEMNENDEWDEPASSIERTXMA",
+      "offset": 41,
+      "loops": 10,
+      "edges": 28,
+      "letters": 20,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "CHTREVEMUENDEVDEVVVUUUDREIN",
+      "offset": 41,
+      "loops": 10,
+      "edges": 27,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "CHTRIVEMUENDEVDEVVVUUUDREIN",
+      "offset": 41,
+      "loops": 10,
+      "edges": 27,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "CHTRTVEMUENDEVDEVVVUUUDREIN",
+      "offset": 41,
+      "loops": 10,
+      "edges": 27,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "CHTRTVEMUENDEVDEVVWUUUDREIN",
+      "offset": 41,
+      "loops": 10,
+      "edges": 27,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "ITUUUUVIIRSIBENNULZWOYVIRS",
+      "offset": 1,
+      "loops": 10,
+      "edges": 26,
+      "letters": 21,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YITUUUVIIRSIBENNULZWOYVIRS",
+      "offset": 1,
+      "loops": 10,
+      "edges": 26,
+      "letters": 21,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YITUUUVIIRSIBENNULZWOYVIRZ",
+      "offset": 1,
+      "loops": 10,
+      "edges": 26,
+      "letters": 21,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "KOMXADMXUUUBOOTTEYFXDXUUUX",
+      "offset": 25,
+      "loops": 10,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "KOMXADMXUUUBOOTTEYFXDXUUUY",
+      "offset": 25,
+      "loops": 10,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "KOMXADMXUUUUBOOTEYFXDXUUUX",
+      "offset": 25,
+      "loops": 10,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "KOMXADMXUUUUBOOTEYFXDXUUUY",
+      "offset": 25,
+      "loops": 10,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "KOMMADMXUUUUBOOTEYFXDXUUUY",
+      "offset": 25,
+      "loops": 10,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YUUUVIIRSIBENNULEINSYNACHR",
+      "offset": 26,
+      "loops": 10,
+      "edges": 26,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YUUUVIRSIBENNNULEINSYNACHR",
+      "offset": 26,
+      "loops": 10,
+      "edges": 26,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YYUUUVIRSIBENNULEINSYNACHR",
+      "offset": 26,
+      "loops": 10,
+      "edges": 26,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XUUUVIIRSIBENNULUINSYNACHR",
+      "offset": 26,
+      "loops": 10,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXXXKOMXADMXUUUBOOTEGKDOSV",
+      "offset": 35,
+      "loops": 10,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YXXXKOMXADMXUUUBOOTEGKDOSV",
+      "offset": 35,
+      "loops": 10,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XYXXKOMXADMXUUUBOOTEGKDOSV",
+      "offset": 35,
+      "loops": 10,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YYXXKOMXADMXUUUBOOTEGKDOSV",
+      "offset": 35,
+      "loops": 10,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YYXXKOMMADMXUUUBOOTEGKDOSV",
+      "offset": 35,
+      "loops": 10,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXXADMXUUUBOOTEGKDOSVX",
+      "offset": 36,
+      "loops": 10,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXXKOMXADMXUUUBOOTEGKDOSVX",
+      "offset": 36,
+      "loops": 10,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YXXKOMXADMXUUUBOOTEGKDOSVX",
+      "offset": 36,
+      "loops": 10,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXXADMXUUUBOOTEGKDOSVY",
+      "offset": 36,
+      "loops": 10,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXXKOMXADMXUUUBOOTEGKDOSVY",
+      "offset": 36,
+      "loops": 10,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YXXKOMXADMXUUUBOOTEGKDOSVY",
+      "offset": 36,
+      "loops": 10,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGKDOSVXX",
+      "offset": 37,
+      "loops": 10,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGKDOSVXY",
+      "offset": 37,
+      "loops": 10,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGKDOSVYX",
+      "offset": 37,
+      "loops": 10,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGKDOSVYY",
+      "offset": 37,
+      "loops": 10,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YUUUVIRSIBENNULNINSYNACHR",
+      "offset": 27,
+      "loops": 10,
+      "edges": 25,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YUUUVIRSIBENNULUINSYNACHR",
+      "offset": 27,
+      "loops": 10,
+      "edges": 25,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YUUUVIRSIBENNULFINSYNACHR",
+      "offset": 27,
+      "loops": 10,
+      "edges": 25,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YUUUVIRSIBENNULIINSYNACHR",
+      "offset": 27,
+      "loops": 10,
+      "edges": 25,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIIRSIBENNULFINSYNACHR",
+      "offset": 27,
+      "loops": 10,
+      "edges": 25,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIIRSIBENNULIINSYNACHR",
+      "offset": 27,
+      "loops": 10,
+      "edges": 25,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIIRSIBENNULNINSYNACHR",
+      "offset": 27,
+      "loops": 10,
+      "edges": 25,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIIRSIBENNULUINSYNACHR",
+      "offset": 27,
+      "loops": 10,
+      "edges": 25,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "ITUUUVIRSIBINNULIWOYVIRS",
+      "offset": 44,
+      "loops": 10,
+      "edges": 24,
+      "letters": 17,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "CHIRAVEMUENDEVDEVVVUUUDREIN",
+      "offset": 18,
+      "loops": 9,
+      "edges": 27,
+      "letters": 21,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "CHTREVEMUENDEVDEVVVUUUDREIN",
+      "offset": 18,
+      "loops": 9,
+      "edges": 27,
+      "letters": 20,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "CHDRAVEMUENDEVDEVVVUUUDREIN",
+      "offset": 21,
+      "loops": 9,
+      "edges": 27,
+      "letters": 20,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "CHFRAVEMUENDEVDEVVVUUUDREIN",
+      "offset": 21,
+      "loops": 9,
+      "edges": 27,
+      "letters": 20,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "CHIRAVEMUENDEVDEVVVUUUDREIN",
+      "offset": 21,
+      "loops": 9,
+      "edges": 27,
+      "letters": 20,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "CHNRAVEMUENDEVDEVVVUUUDREIN",
+      "offset": 21,
+      "loops": 9,
+      "edges": 27,
+      "letters": 20,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "CHTEAVEMUENDEVDEVVVUUUDREIN",
+      "offset": 21,
+      "loops": 9,
+      "edges": 27,
+      "letters": 20,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "CHTFAVEMUENDEVDEVVVUUUDREIN",
+      "offset": 21,
+      "loops": 9,
+      "edges": 27,
+      "letters": 20,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "CHTIAVEMUENDEVDEVVVUUUDREIN",
+      "offset": 21,
+      "loops": 9,
+      "edges": 27,
+      "letters": 20,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "CHTRAFEMUENDEVDEVVVUUUDREIN",
+      "offset": 21,
+      "loops": 9,
+      "edges": 27,
+      "letters": 20,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "CHTRANEMUENDEVDEVVVUUUDREIN",
+      "offset": 21,
+      "loops": 9,
+      "edges": 27,
+      "letters": 20,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "CHTREVEMUENDEVDEVVVUUUDREIN",
+      "offset": 21,
+      "loops": 9,
+      "edges": 27,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "CHTRIVEMUENDEVDEVVVUUUDREIN",
+      "offset": 21,
+      "loops": 9,
+      "edges": 27,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "CHTRXVEMUENDEVDEVVVUUUDREIN",
+      "offset": 21,
+      "loops": 9,
+      "edges": 27,
+      "letters": 20,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "CHTUAVEMUENDEVDEVVVUUUDREIN",
+      "offset": 21,
+      "loops": 9,
+      "edges": 27,
+      "letters": 20,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "CHURAVEMUENDEVDEVVVUUUDREIN",
+      "offset": 21,
+      "loops": 9,
+      "edges": 27,
+      "letters": 20,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "CHTREVEMUENDEVDEVVVUUUDREIN",
+      "offset": 22,
+      "loops": 9,
+      "edges": 27,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "CHTRIVEMUENDEVDEVVVUUUDREIN",
+      "offset": 22,
+      "loops": 9,
+      "edges": 27,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "CHTRTVEMUENDEVDEVVVUUUDREIN",
+      "offset": 22,
+      "loops": 9,
+      "edges": 27,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGKDOSVXY",
+      "offset": 0,
+      "loops": 9,
+      "edges": 26,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEYFXDXUUU",
+      "offset": 1,
+      "loops": 9,
+      "edges": 26,
+      "letters": 20,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YXKOMXADMXUUUBOOTEYFXDXUUU",
+      "offset": 1,
+      "loops": 9,
+      "edges": 26,
+      "letters": 20,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGKDOSVXX",
+      "offset": 1,
+      "loops": 9,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGKDOSVXY",
+      "offset": 1,
+      "loops": 9,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "ITUUUUUVIRSIBENNULZWOYVIRS",
+      "offset": 1,
+      "loops": 9,
+      "edges": 26,
+      "letters": 21,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YITUUUUVIRSIBENNULZWOYVIRS",
+      "offset": 1,
+      "loops": 9,
+      "edges": 26,
+      "letters": 21,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YITTUUUVIRSIBENNULZWOYVIRS",
+      "offset": 1,
+      "loops": 9,
+      "edges": 26,
+      "letters": 21,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YYITUUUVIRSIBENNULZWOYVIRS",
+      "offset": 1,
+      "loops": 9,
+      "edges": 26,
+      "letters": 21,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XUUUVIIRSIBENNULEINSANANEI",
+      "offset": 10,
+      "loops": 9,
+      "edges": 26,
+      "letters": 20,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXUUUVIRSIBENNULEINSANANEI",
+      "offset": 10,
+      "loops": 9,
+      "edges": 26,
+      "letters": 20,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YXUUUVIRSIBENNULEINSANANEI",
+      "offset": 10,
+      "loops": 9,
+      "edges": 26,
+      "letters": 20,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIIRSIBENNULEINSANANEIY",
+      "offset": 14,
+      "loops": 9,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIIRSIBENNULEINSYNACHRY",
+      "offset": 14,
+      "loops": 9,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIIRSIBENNULEINSANANEIY",
+      "offset": 15,
+      "loops": 9,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YUUUVIIRSIBENNULEINSANANEI",
+      "offset": 15,
+      "loops": 9,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YUUUVIIRSIBENNULEINSYNACHR",
+      "offset": 15,
+      "loops": 9,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIBENNULEINSANANEIYY",
+      "offset": 15,
+      "loops": 9,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIBENNULEINSYNACHRYY",
+      "offset": 15,
+      "loops": 9,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXUUUVIRSIBENNULEINSYNACHR",
+      "offset": 15,
+      "loops": 9,
+      "edges": 26,
+      "letters": 20,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YYUUUVIRSIBENNULEINSANANEI",
+      "offset": 15,
+      "loops": 9,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YYUUUVIRSIBENNULEINSYNACHR",
+      "offset": 15,
+      "loops": 9,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIBENNULEINSYNACHRXY",
+      "offset": 17,
+      "loops": 9,
+      "edges": 26,
+      "letters": 21,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIBENNULEINSYNACHRYY",
+      "offset": 17,
+      "loops": 9,
+      "edges": 26,
+      "letters": 20,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YUUUVIIRSIBENNULEINSYNACHR",
+      "offset": 24,
+      "loops": 9,
+      "edges": 26,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIBENNULEINSANANEIYY",
+      "offset": 24,
+      "loops": 9,
+      "edges": 26,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIBENNULEINSYNACHRYY",
+      "offset": 24,
+      "loops": 9,
+      "edges": 26,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YYUUUVIRSIBENNULEINSYNACHR",
+      "offset": 24,
+      "loops": 9,
+      "edges": 26,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIIRSIBENNULEINSANANEIY",
+      "offset": 25,
+      "loops": 9,
+      "edges": 26,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIIRSIBENNULEINSYNACHRY",
+      "offset": 25,
+      "loops": 9,
+      "edges": 26,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIIRSIBENNULEINSYNACHRY",
+      "offset": 27,
+      "loops": 9,
+      "edges": 26,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXAAMXUUUBOOTEGKDOSVX",
+      "offset": 0,
+      "loops": 9,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEEKDOSVX",
+      "offset": 0,
+      "loops": 9,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEOKDOSVX",
+      "offset": 0,
+      "loops": 9,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTERKDOSVX",
+      "offset": 0,
+      "loops": 9,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEUKDOSVX",
+      "offset": 0,
+      "loops": 9,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXAEMXUUUBOOTEGKDOSVX",
+      "offset": 0,
+      "loops": 9,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXAOMXUUUBOOTEGKDOSVX",
+      "offset": 0,
+      "loops": 9,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXARMXUUUBOOTEGKDOSVX",
+      "offset": 0,
+      "loops": 9,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXATMXUUUBOOTEGKDOSVX",
+      "offset": 0,
+      "loops": 9,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXAUMXUUUBOOTEGKDOSVX",
+      "offset": 0,
+      "loops": 9,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEAKDOSVX",
+      "offset": 0,
+      "loops": 9,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTETKDOSVX",
+      "offset": 0,
+      "loops": 9,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRAIBENNULEINSANANEIY",
+      "offset": 24,
+      "loops": 9,
+      "edges": 25,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIREIBENNULEINSANANEIY",
+      "offset": 24,
+      "loops": 9,
+      "edges": 25,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRIIBENNULEINSANANEIY",
+      "offset": 24,
+      "loops": 9,
+      "edges": 25,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRTIBENNULEINSANANEIY",
+      "offset": 24,
+      "loops": 9,
+      "edges": 25,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIREIBENNULEINSYNACHRY",
+      "offset": 24,
+      "loops": 9,
+      "edges": 25,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRIIBENNULEINSYNACHRY",
+      "offset": 24,
+      "loops": 9,
+      "edges": 25,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRNIBENNULEINSYNACHRY",
+      "offset": 24,
+      "loops": 9,
+      "edges": 25,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRUIBENNULEINSYNACHRY",
+      "offset": 24,
+      "loops": 9,
+      "edges": 25,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRAIBENNULEINSANANEIY",
+      "offset": 26,
+      "loops": 9,
+      "edges": 25,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIREIBENNULEINSANANEIY",
+      "offset": 26,
+      "loops": 9,
+      "edges": 25,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRIIBENNULEINSANANEIY",
+      "offset": 26,
+      "loops": 9,
+      "edges": 25,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XKOMMANDADXUUUBOOTEYFXDXUUUY",
+      "offset": 0,
+      "loops": 8,
+      "edges": 28,
+      "letters": 21,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YKOMMANDADXUUUBOOTEYFXDXUUUY",
+      "offset": 0,
+      "loops": 8,
+      "edges": 28,
+      "letters": 21,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XKOMMANDADXUUUBOOTEYFXDXUUU",
+      "offset": 0,
+      "loops": 8,
+      "edges": 27,
+      "letters": 21,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXXKOMMANDADXUUUBOOTEGKDOSV",
+      "offset": 0,
+      "loops": 8,
+      "edges": 27,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YKOMMANDADXUUUBOOTEYFXDXUUU",
+      "offset": 0,
+      "loops": 8,
+      "edges": 27,
+      "letters": 21,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YXXKOMMANDADXUUUBOOTEGKDOSV",
+      "offset": 0,
+      "loops": 8,
+      "edges": 27,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXXKOMMANDADXUEUBOOTEGKDOSV",
+      "offset": 0,
+      "loops": 8,
+      "edges": 27,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXXKOMMANDADXUUUBOOTETKDOSV",
+      "offset": 0,
+      "loops": 8,
+      "edges": 27,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEYFXDXUUU",
+      "offset": 0,
+      "loops": 8,
+      "edges": 26,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YXKOMXADMXUUUBOOTEYFXDXUUU",
+      "offset": 0,
+      "loops": 8,
+      "edges": 26,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGKDOSVXX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 26,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXXADMXUUUBOOTEGKDOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 26,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXXKOMXADMXUUUBOOTEGKDOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 26,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YXXKOMXADMXUUUBOOTEGKDOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 26,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGKDOSVYX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 26,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGKDOSVYY",
+      "offset": 0,
+      "loops": 8,
+      "edges": 26,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXXADMXUUUBOOTEGKDOSVY",
+      "offset": 0,
+      "loops": 8,
+      "edges": 26,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXXKOMXADMXUUUBOOTEGKDOSVY",
+      "offset": 0,
+      "loops": 8,
+      "edges": 26,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YXXKOMXADMXUUUBOOTEGKDOSVY",
+      "offset": 0,
+      "loops": 8,
+      "edges": 26,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XYKOMXADMXUUUBOOTEYFXDXUUU",
+      "offset": 0,
+      "loops": 8,
+      "edges": 26,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIBENNULEINSANANEIYY",
+      "offset": 0,
+      "loops": 8,
+      "edges": 26,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIBENNULEINSYNACHRYY",
+      "offset": 0,
+      "loops": 8,
+      "edges": 26,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YYKOMXADMXUUUBOOTEYFXDXUUU",
+      "offset": 0,
+      "loops": 8,
+      "edges": 26,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIEENNULEINSANANEIY",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIRENNULEINSANANEIY",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSITENNULEINSANANEIY",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIAENNULEINSYNACHRY",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIEENNULEINSYNACHRY",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIOENNULEINSYNACHRY",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIRENNULEINSYNACHRY",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSITENNULEINSYNACHRY",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIUENNULEINSYNACHRY",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXAOMXADMXUUUBOOTEGKDOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXCOMXADMXUUUBOOTEGKDOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXFOMXADMXUUUBOOTEGKDOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKAMXADMXUUUBOOTEGKDOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOEXADMXUUUBOOTEGKDOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOOXADMXUUUBOOTEGKDOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKORXADMXUUUBOOTEGKDOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOUXADMXUUUBOOTEGKDOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKTMXADMXUUUBOOTEGKDOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKUMXADMXUUUBOOTEGKDOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXOOMXADMXUUUBOOTEGKDOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXUOMXADMXUUUBOOTEGKDOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXXOMXADMXUUUBOOTEGKDOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMMADMXUUUBOOTERKDOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXRUUBOOTEGKDOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXTUUBOOTEGKDOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUAUBOOTEGKDOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUOUBOOTEGKDOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUTUBOOTEGKDOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUTBOOTEGKDOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUAOOTEGKDOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 18,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBEOTEGKDOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOAEGKDOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBOODEGKDOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOEEGKDOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOOEGKDOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGADOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGKAOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGKDASVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGKDESVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGKDOAVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGKDOEVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGKDOZVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGKDRSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGKDTSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXKOMXADMXUUUBOOTEGKEOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXAOMXADMXUUUBOOTEAKDOSV",
+      "offset": 0,
+      "loops": 8,
+      "edges": 24,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXCOMXADMXUUUBOOTEAKDOSV",
+      "offset": 0,
+      "loops": 8,
+      "edges": 24,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIBENNULEINSANANEIXX",
+      "offset": 0,
+      "loops": 7,
+      "edges": 26,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIBENNULEINSANANEIXY",
+      "offset": 0,
+      "loops": 7,
+      "edges": 26,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIBENNULEINSANANEIYX",
+      "offset": 0,
+      "loops": 7,
+      "edges": 26,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIBENNULEINSYNACHRXX",
+      "offset": 0,
+      "loops": 7,
+      "edges": 26,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIBENNULEINSYNACHRXY",
+      "offset": 0,
+      "loops": 7,
+      "edges": 26,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIBENNULEINSYNACHRYX",
+      "offset": 0,
+      "loops": 7,
+      "edges": 26,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIEENNULEINSANANEIX",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIIENNULEINSANANEIX",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIRENNULEINSANANEIX",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIUENNULEINSANANEIX",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIXENNULEINSANANEIX",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUAIRSIBENNULEINSANANEIY",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUEIRSIBENNULEINSANANEIY",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUIIRSIBENNULEINSANANEIY",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUOIRSIBENNULEINSANANEIY",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUURIRSIBENNULEINSANANEIY",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUTIRSIBENNULEINSANANEIY",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUUIRSIBENNULEINSANANEIY",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVERSIBENNULEINSANANEIY",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIASIBENNULEINSANANEIY",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIESIBENNULEINSANANEIY",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIISIBENNULEINSANANEIY",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIBENNUIEINSANANEIX",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIBENNUNEINSANANEIX",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIBENNUREINSANANEIX",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUEVIRSIBENNULEINSANANEIY",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUIVIRSIBENNULEINSANANEIY",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUNVIRSIBENNULEINSANANEIY",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIBENAULEINSANANEIY",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIBENEULEINSANANEIY",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIBENNOLEINSANANEIY",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIBENNRLEINSANANEIY",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIBENNTLEINSANANEIY",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIBENNUFEINSANANEIY",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIBENNUIEINSANANEIY",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIBENNULEANSANANEIY",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIBENNULEIASANANEIY",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIBENNULEIESANANEIY",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUUVIRSIBENNULEINIANANEIY",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "WETTERVORHERSAGEXX",
+      "offset": 40,
+      "loops": 6,
+      "edges": 18,
+      "letters": 13,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XXWETTERVORHERSAGE",
+      "offset": 42,
+      "loops": 6,
+      "edges": 18,
+      "letters": 13,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YXWETTERVORHERSAGE",
+      "offset": 42,
+      "loops": 6,
+      "edges": 18,
+      "letters": 13,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XYWETTERVORHERSAGE",
+      "offset": 42,
+      "loops": 6,
+      "edges": 18,
+      "letters": 13,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YYWETTERVORHERSAGE",
+      "offset": 42,
+      "loops": 6,
+      "edges": 18,
+      "letters": 13,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XWETTERVORHERSAGEX",
+      "offset": 43,
+      "loops": 6,
+      "edges": 18,
+      "letters": 13,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YWETTERVORHERSAGEX",
+      "offset": 43,
+      "loops": 6,
+      "edges": 18,
+      "letters": 13,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XWETTERVORHERSAGEY",
+      "offset": 43,
+      "loops": 6,
+      "edges": 18,
+      "letters": 13,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YWETTERVORHERSAGEY",
+      "offset": 43,
+      "loops": 6,
+      "edges": 18,
+      "letters": 13,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "WETTERVORHERSAGEXX",
+      "offset": 44,
+      "loops": 6,
+      "edges": 18,
+      "letters": 13,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "WETTERVORHERSAGEXY",
+      "offset": 44,
+      "loops": 6,
+      "edges": 18,
+      "letters": 13,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "WETTERVORHERSAGEYX",
+      "offset": 44,
+      "loops": 6,
+      "edges": 18,
+      "letters": 13,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "WETTERVORHERSAGEYY",
+      "offset": 44,
+      "loops": 6,
+      "edges": 18,
+      "letters": 13,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "WETTERVARHERSAGEX",
+      "offset": 40,
+      "loops": 6,
+      "edges": 17,
+      "letters": 12,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "WETTERVERHERSAGEX",
+      "offset": 40,
+      "loops": 6,
+      "edges": 17,
+      "letters": 12,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "WETTERVORHERSEGEX",
+      "offset": 40,
+      "loops": 6,
+      "edges": 17,
+      "letters": 12,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "WETTERVORHERSOGEX",
+      "offset": 40,
+      "loops": 6,
+      "edges": 17,
+      "letters": 12,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "WETTERVORHERSRGEX",
+      "offset": 40,
+      "loops": 6,
+      "edges": 17,
+      "letters": 12,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "WETTERVORHERSTGEX",
+      "offset": 40,
+      "loops": 6,
+      "edges": 17,
+      "letters": 12,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "WETTERVRRHERSAGEX",
+      "offset": 40,
+      "loops": 6,
+      "edges": 17,
+      "letters": 12,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "WETTERVTRHERSAGEX",
+      "offset": 40,
+      "loops": 6,
+      "edges": 17,
+      "letters": 12,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "WETTERVXRHERSAGEX",
+      "offset": 40,
+      "loops": 6,
+      "edges": 17,
+      "letters": 12,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XWETTERAORHERSAGE",
+      "offset": 0,
+      "loops": 5,
+      "edges": 17,
+      "letters": 14,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XWETTEREORHERSAGE",
+      "offset": 0,
+      "loops": 5,
+      "edges": 17,
+      "letters": 14,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XWETTEROORHERSAGE",
+      "offset": 0,
+      "loops": 5,
+      "edges": 17,
+      "letters": 14,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XWETTERRORHERSAGE",
+      "offset": 0,
+      "loops": 5,
+      "edges": 17,
+      "letters": 14,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XWETTERTORHERSAGE",
+      "offset": 0,
+      "loops": 5,
+      "edges": 17,
+      "letters": 14,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XWETTERVARHERSAGE",
+      "offset": 0,
+      "loops": 5,
+      "edges": 17,
+      "letters": 14,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XWETTERVORAERSAGE",
+      "offset": 0,
+      "loops": 5,
+      "edges": 17,
+      "letters": 14,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XWETTERVOROERSAGE",
+      "offset": 0,
+      "loops": 5,
+      "edges": 17,
+      "letters": 14,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XWETTERVORRERSAGE",
+      "offset": 0,
+      "loops": 5,
+      "edges": 17,
+      "letters": 14,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XWETTERVORTERSAGE",
+      "offset": 0,
+      "loops": 5,
+      "edges": 17,
+      "letters": 14,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XWETTERVRRHERSAGE",
+      "offset": 0,
+      "loops": 5,
+      "edges": 17,
+      "letters": 14,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XWETTERVTRHERSAGE",
+      "offset": 0,
+      "loops": 5,
+      "edges": 17,
+      "letters": 14,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YWETTERAORHERSAGE",
+      "offset": 0,
+      "loops": 5,
+      "edges": 17,
+      "letters": 14,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YWETTEROORHERSAGE",
+      "offset": 0,
+      "loops": 5,
+      "edges": 17,
+      "letters": 14,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YWETTERRORHERSAGE",
+      "offset": 0,
+      "loops": 5,
+      "edges": 17,
+      "letters": 14,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YWETTERTORHERSAGE",
+      "offset": 0,
+      "loops": 5,
+      "edges": 17,
+      "letters": 14,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YWETTERVARHERSAGE",
+      "offset": 0,
+      "loops": 5,
+      "edges": 17,
+      "letters": 14,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YWETTERVERHERSAGE",
+      "offset": 0,
+      "loops": 5,
+      "edges": 17,
+      "letters": 14,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YWETTERVORAERSAGE",
+      "offset": 0,
+      "loops": 5,
+      "edges": 17,
+      "letters": 14,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YWETTERVOROERSAGE",
+      "offset": 0,
+      "loops": 5,
+      "edges": 17,
+      "letters": 14,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YWETTERVORRERSAGE",
+      "offset": 0,
+      "loops": 5,
+      "edges": 17,
+      "letters": 14,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YWETTERVORTERSAGE",
+      "offset": 0,
+      "loops": 5,
+      "edges": 17,
+      "letters": 14,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YWETTERVORXERSAGE",
+      "offset": 0,
+      "loops": 5,
+      "edges": 17,
+      "letters": 14,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YWETTERVRRHERSAGE",
+      "offset": 0,
+      "loops": 5,
+      "edges": 17,
+      "letters": 14,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YWETTERVTRHERSAGE",
+      "offset": 0,
+      "loops": 5,
+      "edges": 17,
+      "letters": 14,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "NFUUUFLOTTILLEVONVONZWOECHSY",
+      "offset": 10,
+      "loops": 11,
+      "edges": 28,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUFLOTTILLEXEINSKKTTTFFFEINY",
+      "offset": 12,
+      "loops": 11,
+      "edges": 28,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YUUFLOTTILLEHACHRXFXDXUUUAUS",
+      "offset": 13,
+      "loops": 11,
+      "edges": 28,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUFLOTTILLEXEINSKKTTTFFFEINY",
+      "offset": 13,
+      "loops": 11,
+      "edges": 28,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "FXUUUFLOTTILLEYFUNFXUUUFLOT",
+      "offset": 10,
+      "loops": 11,
+      "edges": 27,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUFLOTTILLEYVIERXUUUFLOTTXV",
+      "offset": 10,
+      "loops": 11,
+      "edges": 27,
+      "letters": 17,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "FXUUUFLOTTILLEYVIERXUUUFLOT",
+      "offset": 11,
+      "loops": 11,
+      "edges": 27,
+      "letters": 17,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUFLOTTXYVIERXUUUFLOTTILLEV",
+      "offset": 11,
+      "loops": 11,
+      "edges": 27,
+      "letters": 17,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "FXUUUFLOTTILLEXEINSKKTTTFFF",
+      "offset": 13,
+      "loops": 11,
+      "edges": 27,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "FXUUUFLOTTILLEXEINZKKTTTFFF",
+      "offset": 13,
+      "loops": 11,
+      "edges": 27,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "FXUUUFLOTTILLEYVIERXUUUFLOT",
+      "offset": 13,
+      "loops": 11,
+      "edges": 27,
+      "letters": 17,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUFLOTTILLEYFUNFXUUUFLOTTXY",
+      "offset": 13,
+      "loops": 11,
+      "edges": 27,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "FXUUUFLOTTILLEYVIERXUUUFLOT",
+      "offset": 14,
+      "loops": 11,
+      "edges": 27,
+      "letters": 17,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUFLOTTILLEYVIERXUUUFLOTTXV",
+      "offset": 14,
+      "loops": 11,
+      "edges": 27,
+      "letters": 17,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "FXUUUFLOTTILLEYVIERXUUUFLOT",
+      "offset": 21,
+      "loops": 11,
+      "edges": 27,
+      "letters": 17,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "FXUUUFLOTTILLEYVIERXUUUFLOT",
+      "offset": 23,
+      "loops": 11,
+      "edges": 27,
+      "letters": 17,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUFLOTTILLEVVVUUURWODREISEC",
+      "offset": 23,
+      "loops": 11,
+      "edges": 27,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUFLOTTXYVIERXUUUFLOTTILLEV",
+      "offset": 23,
+      "loops": 11,
+      "edges": 27,
+      "letters": 17,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUFLOTTILLEVVVUUUFUNFDREIVI",
+      "offset": 24,
+      "loops": 11,
+      "edges": 27,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UUFLOTTXYFUNFXUUUFLOTTILLEY",
+      "offset": 32,
+      "loops": 11,
+      "edges": 27,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XFXUUUFLOTTXYFUNFXUUUFLOT",
+      "offset": 20,
+      "loops": 11,
+      "edges": 25,
+      "letters": 15,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YFXUUUFLOTTXYFUNFXUUUFLOT",
+      "offset": 20,
+      "loops": 11,
+      "edges": 25,
+      "letters": 15,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "VXUUUFLOTTILLEHACHRXFXDXUUUX",
+      "offset": 0,
+      "loops": 9,
+      "edges": 28,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TEUUUFFLOTTILLEANANUUUZWOFUE",
+      "offset": 0,
+      "loops": 8,
+      "edges": 28,
+      "letters": 21,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "FXUUUFLOTTILLEXEINSKKTTTFFF",
+      "offset": 0,
+      "loops": 8,
+      "edges": 27,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "VXUUUFLOTTILLEHACHRXFXDXUUU",
+      "offset": 0,
+      "loops": 8,
+      "edges": 27,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TEUUUFFLOTTXANANUUUZWOFUE",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TEUUUUFLOTTXANANUUUZWOFUE",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XTEUUUFLOTTXANANUUUZWOFUE",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YTEUUUFLOTTXANANUUUZWOFUE",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "NFUUUFLOTTILLEJTREIBOALVERB",
+      "offset": 0,
+      "loops": 7,
+      "edges": 27,
+      "letters": 21,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "SXUUUFLOTTILLEVVVUUURWODREI",
+      "offset": 0,
+      "loops": 7,
+      "edges": 27,
+      "letters": 21,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "NFUUUFLOTTILLENULEINZWONUL",
+      "offset": 0,
+      "loops": 7,
+      "edges": 26,
+      "letters": 21,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "UFLOTTILLEVVVUUUFUNFDREIVI",
+      "offset": 0,
+      "loops": 7,
+      "edges": 26,
+      "letters": 21,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "FXUUUFFLOTTXXEINSKKTTTFFF",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "FXUUUUFLOTTXXEINSKKTTTFFF",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XFXUUUFLOTTXXEINSKKTTTFFF",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YFXUUUFLOTTXXEINSKKTTTFFF",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "HSUUUFFLOTTXXTTTFFFZWODRE",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "HSUUUUFLOTTXXTTTFFFZWODRE",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XHSUUUFLOTTXXTTTFFFZWODRE",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YHSUUUFLOTTXXTTTFFFZWODRE",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "RXUUUFFLOTTXXMITUUUVIERSI",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "RXUUUUFLOTTXXMITUUUVIERSI",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XRXUUUFLOTTXXMITUUUVIERSI",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YRXUUUFLOTTXXMITUUUVIERSI",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TEUUUFLOTTTXANANUUUZWOFUE",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "LXVVVUUUVIRSIUENNUULEINSX",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TXVVVUUUUEINSEINSNULDREIK",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XTXVVVUUUEINSEINSNULDREIK",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YTXVVVUUUEINSEINSNULDREIK",
+      "offset": 0,
+      "loops": 7,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "LXVVVUUUVIRSIUENNULEIASX",
+      "offset": 0,
+      "loops": 7,
+      "edges": 24,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "LXVVVUUUVIRSIUENNULEIESX",
+      "offset": 0,
+      "loops": 7,
+      "edges": 24,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "LXVVVUUUVIRSIUENNULEIISX",
+      "offset": 0,
+      "loops": 7,
+      "edges": 24,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "LXVVVUUUVIRSIUENNULEIOSX",
+      "offset": 0,
+      "loops": 7,
+      "edges": 24,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "LXVVVUUUVIRSIUENNULEITSX",
+      "offset": 0,
+      "loops": 7,
+      "edges": 24,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "LXVVVUUUVIRSIUENNULEIXSX",
+      "offset": 0,
+      "loops": 7,
+      "edges": 24,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "NGNANNCBRUNOVVVUUUJNSULN",
+      "offset": 0,
+      "loops": 7,
+      "edges": 24,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "NGNANNCBRUNOVVVUUUNNSULN",
+      "offset": 0,
+      "loops": 7,
+      "edges": 24,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "NGNANNCBRUNOVVVUUUONSULN",
+      "offset": 0,
+      "loops": 7,
+      "edges": 24,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "NGNANNCBRUNOVVVUUURNSULN",
+      "offset": 0,
+      "loops": 7,
+      "edges": 24,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "NGNANNCBRUNOVVVUUUXNSULN",
+      "offset": 0,
+      "loops": 7,
+      "edges": 24,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "NGNANNCTRUNOVVVUUUINSULN",
+      "offset": 0,
+      "loops": 7,
+      "edges": 24,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TXEULEINSZWONULBEIROTNUL",
+      "offset": 35,
+      "loops": 7,
+      "edges": 24,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TXNELEINSZWONULBEIROTNUL",
+      "offset": 35,
+      "loops": 7,
+      "edges": 24,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TXNILEINSZWONULBEIROTNUL",
+      "offset": 35,
+      "loops": 7,
+      "edges": 24,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TXNNLEINSZWONULBEIROTNUL",
+      "offset": 35,
+      "loops": 7,
+      "edges": 24,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TXNOLEINSZWONULBEIROTNUL",
+      "offset": 35,
+      "loops": 7,
+      "edges": 24,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TXNRLEINSZWONULBEIROTNUL",
+      "offset": 35,
+      "loops": 7,
+      "edges": 24,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TXNUEEINSZWONULBEIROTNUL",
+      "offset": 35,
+      "loops": 7,
+      "edges": 24,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TXNUIEINSZWONULBEIROTNUL",
+      "offset": 35,
+      "loops": 7,
+      "edges": 24,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TXNULEENSZWONULBEIROTNUL",
+      "offset": 35,
+      "loops": 7,
+      "edges": 24,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TXNULEIESZWONULBEIROTNUL",
+      "offset": 35,
+      "loops": 7,
+      "edges": 24,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TXNULEINEZWONULBEIROTNUL",
+      "offset": 35,
+      "loops": 7,
+      "edges": 24,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TXNULEINFZWONULBEIROTNUL",
+      "offset": 35,
+      "loops": 7,
+      "edges": 24,
+      "letters": 19,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TXNULEINIZWONULBEIROTNUL",
+      "offset": 35,
+      "loops": 7,
+      "edges": 24,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TXNULEINNZWONULBEIROTNUL",
+      "offset": 35,
+      "loops": 7,
+      "edges": 24,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TXNULEINOZWONULBEIROTNUL",
+      "offset": 35,
+      "loops": 7,
+      "edges": 24,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TXNULEINRZWONULBEIROTNUL",
+      "offset": 35,
+      "loops": 7,
+      "edges": 24,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TXNULEINUZWONULBEIROTNUL",
+      "offset": 35,
+      "loops": 7,
+      "edges": 24,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TXNULEINZZWONULBEIROTNUL",
+      "offset": 35,
+      "loops": 7,
+      "edges": 24,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TXNULEIUSZWONULBEIROTNUL",
+      "offset": 35,
+      "loops": 7,
+      "edges": 24,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TXNULEIXSZWONULBEIROTNUL",
+      "offset": 35,
+      "loops": 7,
+      "edges": 24,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TXNULENNSZWONULBEIROTNUL",
+      "offset": 35,
+      "loops": 7,
+      "edges": 24,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TXNULEONSZWONULBEIROTNUL",
+      "offset": 35,
+      "loops": 7,
+      "edges": 24,
+      "letters": 18,
+      "opening": false,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TXVVVUUDREINKLEINSVYEYT",
+      "offset": 0,
+      "loops": 7,
+      "edges": 23,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TXVVVUUEINSEINSNULDREIK",
+      "offset": 0,
+      "loops": 7,
+      "edges": 23,
+      "letters": 19,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "NGNANNCBRUNOVVVUUUINSULNX",
+      "offset": 0,
+      "loops": 6,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "NGNANNCBRUNOVVVUUUINSULNY",
+      "offset": 0,
+      "loops": 6,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TXVVVUUUUDREINULDREINULKK",
+      "offset": 0,
+      "loops": 6,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "XTXVVVUUUDREINULDREINULKK",
+      "offset": 0,
+      "loops": 6,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "YTXVVVUUUDREINULDREINULKK",
+      "offset": 0,
+      "loops": 6,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TXVVVUUUFFUNFDREIVIERKKNO",
+      "offset": 0,
+      "loops": 6,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TXVVVUUUFUNFFDREIVIERKKNO",
+      "offset": 0,
+      "loops": 6,
+      "edges": 25,
+      "letters": 20,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TXNULEINZWONULBEIROTNULL",
+      "offset": 0,
+      "loops": 4,
+      "edges": 24,
+      "letters": 21,
+      "opening": true,
+      "mutation": "fuzz"
+    },
+    {
+      "text": "TXNULEINZWONULBEIROTNUL",
+      "offset": 0,
+      "loops": 3,
+      "edges": 23,
+      "letters": 21,
+      "opening": true,
+      "mutation": "fuzz"
+    }
+  ]
+}

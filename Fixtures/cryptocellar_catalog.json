@@ -1,0 +1,132 @@
+{
+  "title": "CryptoCellar Enigma Messages and Keys — HELUT Tier 2 reference library",
+  "portal": "https://cryptocellar.org/",
+  "license_note": "Catalog of publicly documented authentic messages and key sheets (Weierud / Sullivan / Erskine et al.). Used for validation research; PDF key sheets are linked, not OCR'd here.",
+  "messages_and_decrypts": [
+    {
+      "title": "Authentic German Army Test Message from 1930",
+      "url": "https://cryptocellar.org/enigma/e-message-1930.html",
+      "machine": "Enigma I",
+      "helut_fixture_id": "MANUAL_1930",
+      "helut_supported": true,
+      "notes": "Umkehrwalze A; message key ABL recovered from indicator at Grundstellung FOL. Same vector as Franklin Heath."
+    },
+    {
+      "title": "Authentic German Army Enigma Decrypt (Turing Bombe article)",
+      "url": "https://cryptocellar.org/enigma/tbombe.html",
+      "machine": "Enigma I",
+      "helut_fixture_id": "ARMY_1938_FRX",
+      "helut_supported": false,
+      "notes": "Three-part teleprinter FRX, 21 Sep 1938 (not 1939). Message keys AGI / YBE / LUN in pencil. Full daily key not asserted in HELUT until independently verified."
+    },
+    {
+      "title": "Authentic German Navy Enigma Decrypt (Dolphin / Hydra)",
+      "url": "https://cryptocellar.org/enigma/dolphin.html",
+      "machine": "Enigma M3",
+      "helut_fixture_id": "DOLPHIN_1944",
+      "helut_supported": false,
+      "notes": "Ralph Erskine challenge message (Apr 1944). Plaintext published; key withheld as a break exercise."
+    },
+    {
+      "title": "Authentic German Navy Enigma M4 Messages",
+      "url": "https://cryptocellar.org/bgac/m4-messages.html",
+      "machine": "Enigma M4",
+      "helut_supported": false,
+      "notes": "Shark/Triton, Turtle/Medusa, Pike/Aegir ciphertexts for the M4 Message Breaking Project. Requires 4-rotor oracle."
+    },
+    {
+      "title": "Scharnhorst’s Last Message?",
+      "url": "https://cryptocellar.org/bgac/scharnhorst.html",
+      "machine": "Enigma M3",
+      "helut_fixture_id": "SCHARNHORST_1943",
+      "helut_supported": true,
+      "notes": "Broken by M4 Project 2008. UKW B, wheels 368, rings AHM, key UZV, 10 steckers. Indicators UTKZ RBSB …"
+    },
+    {
+      "title": "Large Number of Authentic Enigma Messages (BGAC portal)",
+      "url": "https://cryptocellar.org/bgac/index.html#Authentic%20Enigma",
+      "helut_supported": false,
+      "notes": "Index into Army Group / Wehrmacht collections and break reports."
+    },
+    {
+      "title": "Authentic Wehrmacht (SS) Enigma Decrypts — Flossenbürg",
+      "url": "https://cryptocellar.org/Flossenbuerg/index.html",
+      "machine": "Enigma I (KL-Maschinenschlüssel)",
+      "helut_supported": false,
+      "notes": "258 KL Flossenbürg messages; keys published in per-message PDFs on that site."
+    }
+  ],
+  "wehrmacht_keys": [
+    {
+      "title": "Schlüsseleinsatz — Ciphers in use during Jan–May 1945",
+      "url": "https://cryptocellar.org/enigma/e-keys/schluesseleinsatz-jan-may-1945.pdf"
+    }
+  ],
+  "army_keys": [
+    {
+      "title": "Heeres-Stabs-Maschinenschlüssel Ost Nr. 123",
+      "url": "https://cryptocellar.org/enigma/e-keys/heeres-stabs-ost-nr123.pdf"
+    },
+    {
+      "title": "Sonder-Maschinenschlüssel AHS",
+      "url": "https://cryptocellar.org/enigma/e-keys/sonder-mschluessel-ahs.pdf"
+    },
+    {
+      "title": "Sonder-Maschinenschlüssel AQA",
+      "url": "https://cryptocellar.org/enigma/e-keys/sonder-mschluessel-aqa.pdf"
+    },
+    {
+      "title": "Sonder-Maschinenschlüssel BHH",
+      "url": "https://cryptocellar.org/enigma/e-keys/sonder-mschluessel-bhh.pdf"
+    },
+    {
+      "title": "Sonder-Maschinenschlüssel BHI / BHJ (archive mix-up)",
+      "url": "https://cryptocellar.org/enigma/e-keys/sonder-mschluessel-bhi.pdf",
+      "notes": "Envelope labeled BHI serial 2; sheet is BHJ serial 3."
+    },
+    {
+      "title": "Sonder-Maschinenschlüssel SW",
+      "url": "https://cryptocellar.org/enigma/e-keys/sonder-mschluessel-sw.pdf"
+    },
+    {
+      "title": "Sonder-Maschinenschlüssel SX",
+      "url": "https://cryptocellar.org/enigma/e-keys/sonder-mschluessel-sx.pdf"
+    },
+    {
+      "title": "Sonder-Maschinenschlüssel SY",
+      "url": "https://cryptocellar.org/enigma/e-keys/sonder-mschluessel-sy.pdf"
+    },
+    {
+      "title": "Sonder-Maschinenschlüssel SZ",
+      "url": "https://cryptocellar.org/enigma/e-keys/sonder-mschluessel-sz.pdf"
+    }
+  ],
+  "air_force_keys": [
+    {
+      "title": "Luftwaffen-Maschinenschlüssel Nr. 619",
+      "url": "https://cryptocellar.org/enigma/e-keys/luftwaffen-mschluessel-nr619.pdf"
+    },
+    {
+      "title": "Luftwaffen-Maschinenschlüssel Nr. 651",
+      "url": "https://cryptocellar.org/enigma/e-keys/luftwaffen-mschluessel-nr651.pdf"
+    },
+    {
+      "title": "Luftwaffen-Maschinenschlüssel Nr. 679",
+      "url": "https://cryptocellar.org/enigma/e-keys/luftwaffen-mschluessel-nr679.pdf"
+    }
+  ],
+  "naval_keys": [
+    {
+      "title": "Schlüssel M Triton – Allgemein",
+      "url": "https://cryptocellar.org/enigma/e-keys/triton-allgemein.pdf"
+    },
+    {
+      "title": "Schlüssel M Triton – Offizier",
+      "url": "https://cryptocellar.org/enigma/e-keys/triton-offizier.pdf"
+    },
+    {
+      "title": "Schlüssel M Nixe – Sonderschlüssel",
+      "url": "https://cryptocellar.org/enigma/e-keys/sonder-schluessel-nixe.pdf"
+    }
+  ]
+}

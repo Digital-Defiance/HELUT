@@ -1,0 +1,185 @@
+{
+  "creator": "Yosys 0.68+post (git sha1 c12172fbae8af5e20f6fb52e3d4e92d56ed587b6, Release, AppleClang clang++ 21.0.0.21000101)",
+  "modules": {
+    "full_adder": {
+      "attributes": {
+        "top": "00000000000000000000000000000001",
+        "src": "circuit.v:1.1-4.10"
+      },
+      "ports": {
+        "a": {
+          "direction": "input",
+          "bits": [ 2 ]
+        },
+        "b": {
+          "direction": "input",
+          "bits": [ 3 ]
+        },
+        "cin": {
+          "direction": "input",
+          "bits": [ 4 ]
+        },
+        "sum": {
+          "direction": "output",
+          "bits": [ 5 ]
+        },
+        "cout": {
+          "direction": "output",
+          "bits": [ 6 ]
+        }
+      },
+      "cells": {
+        "$abc$89$auto$blifparse.cc:557:parse_blif$90": {
+          "hide_name": 1,
+          "type": "$lut",
+          "parameters": {
+            "LUT": "0110",
+            "WIDTH": "00000000000000000000000000000010"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 7, 4 ],
+            "Y": [ 5 ]
+          }
+        },
+        "$abc$89$auto$blifparse.cc:557:parse_blif$91": {
+          "hide_name": 1,
+          "type": "$lut",
+          "parameters": {
+            "LUT": "0110",
+            "WIDTH": "00000000000000000000000000000010"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 2, 3 ],
+            "Y": [ 7 ]
+          }
+        },
+        "$abc$89$auto$blifparse.cc:557:parse_blif$92": {
+          "hide_name": 1,
+          "type": "$lut",
+          "parameters": {
+            "LUT": "11101000",
+            "WIDTH": "00000000000000000000000000000011"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 2, 3, 4 ],
+            "Y": [ 6 ]
+          }
+        }
+      },
+      "netnames": {
+        "$abc$83$new_n6": {
+          "hide_name": 1,
+          "bits": [ 8 ],
+          "attributes": {
+          }
+        },
+        "$abc$83$new_n7": {
+          "hide_name": 1,
+          "bits": [ 9 ],
+          "attributes": {
+          }
+        },
+        "$abc$83$new_n8": {
+          "hide_name": 1,
+          "bits": [ 10 ],
+          "attributes": {
+          }
+        },
+        "$abc$89$a": {
+          "hide_name": 1,
+          "bits": [ 2 ],
+          "attributes": {
+            "src": "circuit.v:1.25-1.26"
+          }
+        },
+        "$abc$89$b": {
+          "hide_name": 1,
+          "bits": [ 3 ],
+          "attributes": {
+            "src": "circuit.v:1.34-1.35"
+          }
+        },
+        "$abc$89$cin": {
+          "hide_name": 1,
+          "bits": [ 4 ],
+          "attributes": {
+            "src": "circuit.v:1.43-1.46"
+          }
+        },
+        "$abc$89$cout": {
+          "hide_name": 1,
+          "bits": [ 6 ],
+          "attributes": {
+            "src": "circuit.v:1.67-1.71"
+          }
+        },
+        "$abc$89$new_n8": {
+          "hide_name": 1,
+          "bits": [ 7 ],
+          "attributes": {
+          }
+        },
+        "$abc$89$sum": {
+          "hide_name": 1,
+          "bits": [ 5 ],
+          "attributes": {
+            "src": "circuit.v:1.55-1.58"
+          }
+        },
+        "a": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+            "src": "circuit.v:1.25-1.26"
+          }
+        },
+        "b": {
+          "hide_name": 0,
+          "bits": [ 3 ],
+          "attributes": {
+            "src": "circuit.v:1.34-1.35"
+          }
+        },
+        "cin": {
+          "hide_name": 0,
+          "bits": [ 4 ],
+          "attributes": {
+            "src": "circuit.v:1.43-1.46"
+          }
+        },
+        "cout": {
+          "hide_name": 0,
+          "bits": [ 6 ],
+          "attributes": {
+            "src": "circuit.v:1.67-1.71"
+          }
+        },
+        "sum": {
+          "hide_name": 0,
+          "bits": [ 5 ],
+          "attributes": {
+            "src": "circuit.v:1.55-1.58"
+          }
+        }
+      }
+    }
+  }
+}
