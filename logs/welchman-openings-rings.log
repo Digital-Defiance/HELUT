@@ -1,0 +1,103 @@
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030680_menus.json (2513 loop-ranked placements)
+mode: openings (≥16…24 @0) + 8 loop-ranked confirmation partners
+selected 9 menus (5 openings, confirm≥1 independent)
+running, highest deduction power first:
+  NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE@18 edges=40 letters=21 loops=20 central=U
+  NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE@21 edges=40 letters=21 loops=20 central=U
+  FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN@19 edges=40 letters=21 loops=20 central=U
+  FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN@22 edges=40 letters=21 loops=20 central=U
+  KBTACHSVAVRVAUQAVAKOKACH@0 edges=24 letters=18 loops=7 central=A
+  VONVONUUUEINSNULNULACHTK@0 edges=24 letters=19 loops=6 central=U
+  FUNFUUUFLOTTXVONVONZWOEC@0 edges=24 letters=20 loops=6 central=O
+  XUUUFLOTTXVVVUUUFUNFDREI@0 edges=24 letters=21 loops=5 central=U
+  UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+shells/menu: 34944 (336 WO × 2 Greek × 2 UKW × 26 ring) → 1.6e+10 settings
+GPU pipeline depth: 4 shells in flight
+right ring swept: turnover phase fully covered, elimination is complete
+ETA floor (~50M/s): 47.9 min
+
+  [1/9] NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE@18 edges=40 letters=21 loops=20 central=U        0 stops   413.6s  38.6M/s  ETA 55.2 min
+  [2/9] NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE@21 edges=40 letters=21 loops=20 central=U        0 stops   820.5s  38.9M/s  ETA 47.9 min
+  [3/9] FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN@19 edges=40 letters=21 loops=20 central=U        0 stops  1267.2s  37.8M/s  ETA 42.2 min
+  [4/9] FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN@22 edges=40 letters=21 loops=20 central=U        0 stops  1665.5s  38.4M/s  ETA 34.7 min
+  [5/9] KBTACHSVAVRVAUQAVAKOKACH@0 edges=24 letters=18 loops=7 central=A        0 stops  2009.8s  39.7M/s  ETA 26.8 min
+  [6/9] VONVONUUUEINSNULNULACHTK@0 edges=24 letters=19 loops=6 central=U        0 stops  2439.4s  39.3M/s  ETA 20.3 min
+  [7/9] FUNFUUUFLOTTXVONVONZWOEC@0 edges=24 letters=20 loops=6 central=O        0 stops  2954.9s  37.8M/s  ETA 14.1 min
+  [8/9] XUUUFLOTTXVVVUUUFUNFDREI@0 edges=24 letters=21 loops=5 central=U        0 stops  3415.2s  37.4M/s  ETA 7.1 min
+  [9/9] UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E       12 stops  3762.3s  38.2M/s  ETA 0.0 min
+
+total raw stops: 12 over 143717124096 settings (38.2M/s mean)
+showing 12:
+  UKW B Greek beta WO VII-V-VIII rings AAAH pos PBMK
+    menu    UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+    stecker AG CM EJ HK IQ NW OR (7 pairs)
+    decrypt UUUUIRKITENNUTEINCNMRHBFAGFRWDBLAKICJZLOJHSTUWQGYYHRCTIIZPYDOZQZPLGIOTDW
+            confirmed by 1 independent menus:
+            UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+  UKW B Greek beta WO III-IV-VII rings AAAZ pos TKIK
+    menu    UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+    stecker AP CX DN EO FY GQ HJ IL KU MR (10 pairs)
+    decrypt UUUEIRIIVENNULEINCMBVZTHXAAZCJIWDGRSYZNTSFPZEAREZZNTZDVLKZEERALAJSCRZSVY
+            confirmed by 1 independent menus:
+            UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+  UKW B Greek gamma WO VII-V-VI rings AAAR pos SSBU
+    menu    UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+    stecker AP CR EN GU IW JO KQ MY (8 pairs)
+    decrypt UUUCIRNIQENNUKEINGGLSAXESLPYVTIRXPBRVEIRVSEFKANSPNZHPXATBFPJEMQWPCKXUYBC
+            confirmed by 1 independent menus:
+            UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+  UKW C Greek gamma WO VIII-III-VII rings AAAX pos ROSX
+    menu    UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+    stecker AR CI EH FJ GO KQ LY NP WX (9 pairs)
+    decrypt UUUKIRDIOENNULEINHTCRKBSSHVQJOIZJJCSTHNYDDWERKWGKNTWYQRZQXXWYTGMKPFBYMCG
+            confirmed by 1 independent menus:
+            UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+  UKW B Greek beta WO III-VI-IV rings AAAQ pos TNYW
+    menu    UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+    stecker CO KU NW PY (4 pairs)
+    decrypt UUUMIRMIRENNUAEINHXMZIGSWFLKGVARUSOJTQSFQJEOOBDCRNADBEBAADLOAOCAFIZZNRVP
+            confirmed by 1 independent menus:
+            UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+  UKW B Greek beta WO III-IV-VII rings AAAM pos TKIX
+    menu    UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+    stecker AP CX DN EO FY GQ HJ IL KU MR (10 pairs)
+    decrypt UUUEIRIIVENNULEINCMBVZTHXAAZCJIWDGRSYZNTSFPZEAREZZNTZDVLKZEERALAJSCRZSVY
+            confirmed by 1 independent menus:
+            UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+  UKW B Greek beta WO VII-V-VIII rings AAAU pos PBMX
+    menu    UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+    stecker AG CM EJ HK IQ NW OR (7 pairs)
+    decrypt UUUUIRKITENNUTEINCNMRHBFAGFRWDBLAKICJZLOJHSTUWQGYYHRCTIIZPYDOZQZPLGIOTDW
+            confirmed by 1 independent menus:
+            UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+  UKW C Greek gamma WO VIII-III-VII rings AAAK pos ROSK
+    menu    UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+    stecker AR CI EH FJ GO KQ LY NP WX (9 pairs)
+    decrypt UUUKIRDIOENNULEINHTCRKBSSHVQJOIZJJCSTHNYDDWERKWGKNTWYQRZQXXWYTGMKPFBYMCG
+            confirmed by 1 independent menus:
+            UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+  UKW C Greek gamma WO VII-II-IV rings AAAT pos NHLI
+    menu    UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+    stecker AJ EI GQ HL NO PR XY (7 pairs)
+    decrypt UUUBIRUIQENNULEINIDWQJEAKCDDOVBFVWWDDFVMXTSGFMRQDZKWSUBQRVPLNDDJKYVJEJET
+            confirmed by 1 independent menus:
+            UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+  UKW B Greek beta WO V-VII-I rings AAAR pos AFYA
+    menu    UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+    stecker AD CU EG HK IM JQ NO (7 pairs)
+    decrypt UUUWIRWINENNUGEINFXZNQCYOVUOSEJSCMGCHCJUTSEEPBAZNTUALBJDDZRLYYZIWAKSWRRP
+            confirmed by 1 independent menus:
+            UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+  UKW B Greek gamma WO V-IV-III rings AAAV pos WGQF
+    menu    UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+    stecker AD CR EO GP HY IJ KQ MU (8 pairs)
+    decrypt UUUMIRQINENNUREINGRXJMEGTSHGXKLLGGSHJYRRDNIPHBALUXIGSRCDBPWWEPVBXUPSAKWJ
+            confirmed by 1 independent menus:
+            UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+  UKW B Greek gamma WO VII-V-VI rings AAAE pos SSBH
+    menu    UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E
+    stecker AP CR EN GU IW JO KQ MY (8 pairs)
+    decrypt UUUCIRNIQENNUKEINGGLSAXESLPYVTIRXPBRVEIRVSEFKANSPNZHPXATBFPJEMQWPCKXUYBC
+            confirmed by 1 independent menus:
+            UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E

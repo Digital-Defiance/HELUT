@@ -1,0 +1,625 @@
+{
+  "target": "P1030680",
+  "ciphertext": "JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF",
+  "note": "Top 40 fuzzed placements for --bombe-ring-sweep. Filter: len>=18; edges<=40; drop XX+KOM Hamming ghost factories and AAAA stop-producers. Openings first, then loops/edges. Derived from p1030680_fuzzed_menus.json.",
+  "cribs": [
+    {
+      "text": "ITUUUUUVIIRSIBENNULZWOYVIRS",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "VXUUUFLOTTILLEHACHRXFXDXUUUX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XKOMMANDADXUUUBOOTEYFXDXUUUY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YKOMMANDADXUUUBOOTEYFXDXUUUY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "TEUUUFFLOTTILLEANANUUUZWOFUE",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XKOMMANDADXUUUBOOTEYFXDXUUU",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YKOMMANDADXUUUBOOTEYFXDXUUU",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YXXKOMMANDADXUUUBOOTEGKDOSV",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "FXUUUFLOTTILLEXEINSKKTTTFFF",
+      "messages": 0,
+      "offsets": [
+        0,
+        13
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "VXUUUFLOTTILLEHACHRXFXDXUUU",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YXKOMXADMXUUUBOOTEYFXDXUUU",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YXXKOMXADMXUUUBOOTEGKDOSVX",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YXXKOMXADMXUUUBOOTEGKDOSVY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "XYKOMXADMXUUUBOOTEYFXDXUUU",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIBENNULEINSANANEIYY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIBENNULEINSYNACHRYY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "YYKOMXADMXUUUBOOTEYFXDXUUU",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIEENNULEINSANANEIY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSIRENNULEINSANANEIY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "UUUVIRSITENNULEINSANANEIY",
+      "messages": 0,
+      "offsets": [
+        0
+      ],
+      "anchored": true,
+      "fuzzed": true
+    },
+    {
+      "text": "NFUUUFLOTTILLEVONVONZWOECHSY",
+      "messages": 0,
+      "offsets": [
+        10
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "UUFLOTTILLEXEINSKKTTTFFFEINY",
+      "messages": 0,
+      "offsets": [
+        12,
+        13
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "YUUFLOTTILLEHACHRXFXDXUUUAUS",
+      "messages": 0,
+      "offsets": [
+        13
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "FXUUUFLOTTILLEYFUNFXUUUFLOT",
+      "messages": 0,
+      "offsets": [
+        10
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "UUFLOTTILLEYVIERXUUUFLOTTXV",
+      "messages": 0,
+      "offsets": [
+        10,
+        14
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "FXUUUFLOTTILLEYVIERXUUUFLOT",
+      "messages": 0,
+      "offsets": [
+        11,
+        13,
+        14,
+        21,
+        23
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "UUFLOTTXYVIERXUUUFLOTTILLEV",
+      "messages": 0,
+      "offsets": [
+        11,
+        23
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "FXUUUFLOTTILLEXEINZKKTTTFFF",
+      "messages": 0,
+      "offsets": [
+        13
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "UUFLOTTILLEYFUNFXUUUFLOTTXY",
+      "messages": 0,
+      "offsets": [
+        13
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "UUFLOTTILLEVVVUUURWODREISEC",
+      "messages": 0,
+      "offsets": [
+        23
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "UUFLOTTILLEVVVUUUFUNFDREIVI",
+      "messages": 0,
+      "offsets": [
+        24
+      ],
+      "anchored": false,
+      "fuzzed": true
+    },
+    {
+      "text": "UUFLOTTXYFUNFXUUUFLOTTILLEY",
+      "messages": 0,
+      "offsets": [
+        32
+      ],
+      "anchored": false,
+      "fuzzed": true
+    }
+  ],
+  "placements": [
+    {
+      "text": "ITUUUUUVIIRSIBENNULZWOYVIRS",
+      "offset": 0,
+      "loops": 11,
+      "edges": 27,
+      "letters": 21,
+      "opening": true
+    },
+    {
+      "text": "VXUUUFLOTTILLEHACHRXFXDXUUUX",
+      "offset": 0,
+      "loops": 9,
+      "edges": 28,
+      "letters": 20,
+      "opening": true
+    },
+    {
+      "text": "XKOMMANDADXUUUBOOTEYFXDXUUUY",
+      "offset": 0,
+      "loops": 8,
+      "edges": 28,
+      "letters": 21,
+      "opening": true
+    },
+    {
+      "text": "YKOMMANDADXUUUBOOTEYFXDXUUUY",
+      "offset": 0,
+      "loops": 8,
+      "edges": 28,
+      "letters": 21,
+      "opening": true
+    },
+    {
+      "text": "TEUUUFFLOTTILLEANANUUUZWOFUE",
+      "offset": 0,
+      "loops": 8,
+      "edges": 28,
+      "letters": 21,
+      "opening": true
+    },
+    {
+      "text": "XKOMMANDADXUUUBOOTEYFXDXUUU",
+      "offset": 0,
+      "loops": 8,
+      "edges": 27,
+      "letters": 21,
+      "opening": true
+    },
+    {
+      "text": "YKOMMANDADXUUUBOOTEYFXDXUUU",
+      "offset": 0,
+      "loops": 8,
+      "edges": 27,
+      "letters": 21,
+      "opening": true
+    },
+    {
+      "text": "YXXKOMMANDADXUUUBOOTEGKDOSV",
+      "offset": 0,
+      "loops": 8,
+      "edges": 27,
+      "letters": 20,
+      "opening": true
+    },
+    {
+      "text": "FXUUUFLOTTILLEXEINSKKTTTFFF",
+      "offset": 0,
+      "loops": 8,
+      "edges": 27,
+      "letters": 20,
+      "opening": true
+    },
+    {
+      "text": "VXUUUFLOTTILLEHACHRXFXDXUUU",
+      "offset": 0,
+      "loops": 8,
+      "edges": 27,
+      "letters": 20,
+      "opening": true
+    },
+    {
+      "text": "YXKOMXADMXUUUBOOTEYFXDXUUU",
+      "offset": 0,
+      "loops": 8,
+      "edges": 26,
+      "letters": 20,
+      "opening": true
+    },
+    {
+      "text": "YXXKOMXADMXUUUBOOTEGKDOSVX",
+      "offset": 0,
+      "loops": 8,
+      "edges": 26,
+      "letters": 19,
+      "opening": true
+    },
+    {
+      "text": "YXXKOMXADMXUUUBOOTEGKDOSVY",
+      "offset": 0,
+      "loops": 8,
+      "edges": 26,
+      "letters": 19,
+      "opening": true
+    },
+    {
+      "text": "XYKOMXADMXUUUBOOTEYFXDXUUU",
+      "offset": 0,
+      "loops": 8,
+      "edges": 26,
+      "letters": 20,
+      "opening": true
+    },
+    {
+      "text": "UUUVIRSIBENNULEINSANANEIYY",
+      "offset": 0,
+      "loops": 8,
+      "edges": 26,
+      "letters": 20,
+      "opening": true
+    },
+    {
+      "text": "UUUVIRSIBENNULEINSYNACHRYY",
+      "offset": 0,
+      "loops": 8,
+      "edges": 26,
+      "letters": 20,
+      "opening": true
+    },
+    {
+      "text": "YYKOMXADMXUUUBOOTEYFXDXUUU",
+      "offset": 0,
+      "loops": 8,
+      "edges": 26,
+      "letters": 20,
+      "opening": true
+    },
+    {
+      "text": "UUUVIRSIEENNULEINSANANEIY",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true
+    },
+    {
+      "text": "UUUVIRSIRENNULEINSANANEIY",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true
+    },
+    {
+      "text": "UUUVIRSITENNULEINSANANEIY",
+      "offset": 0,
+      "loops": 8,
+      "edges": 25,
+      "letters": 19,
+      "opening": true
+    },
+    {
+      "text": "NFUUUFLOTTILLEVONVONZWOECHSY",
+      "offset": 10,
+      "loops": 11,
+      "edges": 28,
+      "letters": 19,
+      "opening": false
+    },
+    {
+      "text": "UUFLOTTILLEXEINSKKTTTFFFEINY",
+      "offset": 12,
+      "loops": 11,
+      "edges": 28,
+      "letters": 18,
+      "opening": false
+    },
+    {
+      "text": "YUUFLOTTILLEHACHRXFXDXUUUAUS",
+      "offset": 13,
+      "loops": 11,
+      "edges": 28,
+      "letters": 19,
+      "opening": false
+    },
+    {
+      "text": "UUFLOTTILLEXEINSKKTTTFFFEINY",
+      "offset": 13,
+      "loops": 11,
+      "edges": 28,
+      "letters": 18,
+      "opening": false
+    },
+    {
+      "text": "FXUUUFLOTTILLEYFUNFXUUUFLOT",
+      "offset": 10,
+      "loops": 11,
+      "edges": 27,
+      "letters": 18,
+      "opening": false
+    },
+    {
+      "text": "UUFLOTTILLEYVIERXUUUFLOTTXV",
+      "offset": 10,
+      "loops": 11,
+      "edges": 27,
+      "letters": 17,
+      "opening": false
+    },
+    {
+      "text": "FXUUUFLOTTILLEYVIERXUUUFLOT",
+      "offset": 11,
+      "loops": 11,
+      "edges": 27,
+      "letters": 17,
+      "opening": false
+    },
+    {
+      "text": "UUFLOTTXYVIERXUUUFLOTTILLEV",
+      "offset": 11,
+      "loops": 11,
+      "edges": 27,
+      "letters": 17,
+      "opening": false
+    },
+    {
+      "text": "FXUUUFLOTTILLEXEINSKKTTTFFF",
+      "offset": 13,
+      "loops": 11,
+      "edges": 27,
+      "letters": 18,
+      "opening": false
+    },
+    {
+      "text": "FXUUUFLOTTILLEXEINZKKTTTFFF",
+      "offset": 13,
+      "loops": 11,
+      "edges": 27,
+      "letters": 18,
+      "opening": false
+    },
+    {
+      "text": "FXUUUFLOTTILLEYVIERXUUUFLOT",
+      "offset": 13,
+      "loops": 11,
+      "edges": 27,
+      "letters": 17,
+      "opening": false
+    },
+    {
+      "text": "UUFLOTTILLEYFUNFXUUUFLOTTXY",
+      "offset": 13,
+      "loops": 11,
+      "edges": 27,
+      "letters": 18,
+      "opening": false
+    },
+    {
+      "text": "FXUUUFLOTTILLEYVIERXUUUFLOT",
+      "offset": 14,
+      "loops": 11,
+      "edges": 27,
+      "letters": 17,
+      "opening": false
+    },
+    {
+      "text": "UUFLOTTILLEYVIERXUUUFLOTTXV",
+      "offset": 14,
+      "loops": 11,
+      "edges": 27,
+      "letters": 17,
+      "opening": false
+    },
+    {
+      "text": "FXUUUFLOTTILLEYVIERXUUUFLOT",
+      "offset": 21,
+      "loops": 11,
+      "edges": 27,
+      "letters": 17,
+      "opening": false
+    },
+    {
+      "text": "FXUUUFLOTTILLEYVIERXUUUFLOT",
+      "offset": 23,
+      "loops": 11,
+      "edges": 27,
+      "letters": 17,
+      "opening": false
+    },
+    {
+      "text": "UUFLOTTILLEVVVUUURWODREISEC",
+      "offset": 23,
+      "loops": 11,
+      "edges": 27,
+      "letters": 19,
+      "opening": false
+    },
+    {
+      "text": "UUFLOTTXYVIERXUUUFLOTTILLEV",
+      "offset": 23,
+      "loops": 11,
+      "edges": 27,
+      "letters": 17,
+      "opening": false
+    },
+    {
+      "text": "UUFLOTTILLEVVVUUUFUNFDREIVI",
+      "offset": 24,
+      "loops": 11,
+      "edges": 27,
+      "letters": 18,
+      "opening": false
+    },
+    {
+      "text": "UUFLOTTXYFUNFXUUUFLOTTILLEY",
+      "offset": 32,
+      "loops": 11,
+      "edges": 27,
+      "letters": 19,
+      "opening": false
+    }
+  ]
+}

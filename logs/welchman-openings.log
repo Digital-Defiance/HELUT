@@ -1,0 +1,40 @@
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030680_menus.json (2513 loop-ranked placements)
+mode: openings (≥16…24 @0) + 8 loop-ranked confirmation partners
+selected 13 menus (5 openings, confirm≥2 independent)
+running, highest deduction power first:
+  NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE@18 edges=40 letters=21 loops=20 central=U
+  NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE@21 edges=40 letters=21 loops=20 central=U
+  FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN@19 edges=40 letters=21 loops=20 central=U
+  FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN@22 edges=40 letters=21 loops=20 central=U
+  UNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENG@20 edges=40 letters=21 loops=20 central=U
+  UNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENG@23 edges=40 letters=21 loops=20 central=T
+  NFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENGE@21 edges=40 letters=21 loops=20 central=T
+  LAUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIRO@10 edges=40 letters=22 loops=19 central=U
+  KBTACHSVAVRVAUQAVAKOKACH@0 edges=24 letters=18 loops=7 central=A
+  VONVONUUUEINSNULNULACHTK@0 edges=24 letters=19 loops=6 central=U
+  FUNFUUUFLOTTXVONVONZWOEC@0 edges=24 letters=20 loops=6 central=O
+  GRUPPENMARYMHMITUUUDREIN@0 edges=24 letters=21 loops=5 central=U
+  … 1 more
+shells/menu: 1344 (336 WO × 2 Greek × 2 UKW × 1 ring) → 6.14e+08 settings
+GPU pipeline depth: 4 shells in flight
+rings AAAA: exhaustive over turnover-free spans, which is 0/26 (0%) of keys at 40 letters. --bombe-ring-sweep covers the rest at 26x cost.
+ETA floor (~50M/s): 2.7 min
+
+  [1/13] NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE@18 edges=40 letters=21 loops=20 central=U        0 stops    14.5s  42.3M/s  ETA 2.9 min
+  [2/13] NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE@21 edges=40 letters=21 loops=20 central=U        0 stops    27.7s  44.4M/s  ETA 2.5 min
+  [3/13] FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN@19 edges=40 letters=21 loops=20 central=U        0 stops    41.9s  43.9M/s  ETA 2.3 min
+  [4/13] FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN@22 edges=40 letters=21 loops=20 central=U        0 stops    54.9s  44.8M/s  ETA 2.1 min
+  [5/13] UNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENG@20 edges=40 letters=21 loops=20 central=U        0 stops    68.9s  44.6M/s  ETA 1.8 min
+  [6/13] UNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENG@23 edges=40 letters=21 loops=20 central=T        0 stops    83.7s  44.0M/s  ETA 1.6 min
+  [7/13] NFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENGE@21 edges=40 letters=21 loops=20 central=T        0 stops   103.2s  41.7M/s  ETA 1.5 min
+  [8/13] LAUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIRO@10 edges=40 letters=22 loops=19 central=U        0 stops   119.4s  41.2M/s  ETA 1.2 min
+  [9/13] KBTACHSVAVRVAUQAVAKOKACH@0 edges=24 letters=18 loops=7 central=A        0 stops   130.7s  42.3M/s  ETA 1.0 min
+  [10/13] VONVONUUUEINSNULNULACHTK@0 edges=24 letters=19 loops=6 central=U        0 stops   144.7s  42.4M/s  ETA 0.7 min
+  [11/13] FUNFUUUFLOTTXVONVONZWOEC@0 edges=24 letters=20 loops=6 central=O        0 stops   161.4s  41.9M/s  ETA 0.5 min
+  [12/13] GRUPPENMARYMHMITUUUDREIN@0 edges=24 letters=21 loops=5 central=U        0 stops   175.0s  42.1M/s  ETA 0.2 min
+  [13/13] UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E        0 stops   186.3s  42.9M/s  ETA 0.0 min
+
+total raw stops: 0 over 7984284672 settings (42.9M/s mean)
+confirmed shells (≥2 independent menus): 0
+no setting survived — every menu contradicted everywhere it was tried

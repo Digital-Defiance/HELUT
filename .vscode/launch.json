@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:HELUT}",
+            "name": "Debug helut",
+            "target": "helut",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug helut"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:HELUT}",
+            "name": "Release helut",
+            "target": "helut",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release helut"
+        }
+    ]
+}

@@ -1,0 +1,10 @@
+---
+description: Core constraints for HELUT (Homomorphic Edge Look-Up Tensors)
+globs: *.swift, *.metal
+---
+# HELUT Architecture Rules
+- DOMAIN: We are implementing TFHE Programmable Bootstrapping (PBS) using `MPSGraph`.
+- SUBVERSION: We are NOT using standard cryptographic libraries. We are mapping polynomial multiplications over $\mathbb{Z}_{2^{32}}[X]/(X^N+1)$ into dense Matrix-Vector multiplications.
+- DATA TYPES: TFHE torus arithmetic relies on exact modulo $2^{32}$ wrapping. All tensors in `MPSGraph` must use `MPSDataType.uInt32`. Do not use floats.
+- MEMORY: Rely on `MTLBuffer` zero-copy bridging. We will expand key polynomials into explicit Negacyclic Toeplitz matrices (size $N \times N$) in memory to force the hardware to evaluate them via dense linear algebra.
+- PROHIBITION: Do not import any Machine Learning dependencies other than `Metal` and `MetalPerformanceShadersGraph`.

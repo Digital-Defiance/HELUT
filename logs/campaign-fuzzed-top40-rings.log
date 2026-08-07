@@ -1,0 +1,43 @@
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030680_menus.json (40 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 40 of 40
+min crib length: 16
+running 40 menus, highest deduction power first:
+  [1] NFUUUFLOTTILLEVONVONZWOECHSY@10 edges=28 letters=19 loops=11 central=O
+  [2] UUFLOTTILLEXEINSKKTTTFFFEINY@12 edges=28 letters=18 loops=11 central=F
+  [3] UUFLOTTILLEXEINSKKTTTFFFEINY@13 edges=28 letters=18 loops=11 central=F
+  [4] YUUFLOTTILLEHACHRXFXDXUUUAUS@13 edges=28 letters=19 loops=11 central=U
+  [5] ITUUUUUVIIRSIBENNULZWOYVIRS@0 edges=27 letters=21 loops=11 central=U
+  [6] FXUUUFLOTTILLEXEINSKKTTTFFF@13 edges=27 letters=18 loops=11 central=F
+  [7] FXUUUFLOTTILLEYFUNFXUUUFLOT@10 edges=27 letters=18 loops=11 central=U
+  [8] UUFLOTTILLEYVIERXUUUFLOTTXV@10 edges=27 letters=17 loops=11 central=U
+  [9] UUFLOTTILLEYVIERXUUUFLOTTXV@14 edges=27 letters=17 loops=11 central=L
+  [10] FXUUUFLOTTILLEYVIERXUUUFLOT@11 edges=27 letters=17 loops=11 central=U
+  [11] FXUUUFLOTTILLEYVIERXUUUFLOT@13 edges=27 letters=17 loops=11 central=U
+  [12] FXUUUFLOTTILLEYVIERXUUUFLOT@14 edges=27 letters=17 loops=11 central=U
+  … 28 more
+shells/menu: 34944 (336 WO × 2 Greek × 2 UKW × 26 ring) → 1.6e+10 settings
+GPU pipeline depth: 4 shells in flight
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+right ring swept: turnover phase fully covered, elimination is complete
+ETA floor (~50M/s): 212.9 min
+
+  [1/40·1] NFUUUFLOTTILLEVONVONZWOECHSY@10 edges=28 letters=19 loops=11 central=O dead at the board                       432s  37.0M/s ETA 280.5 min
+  [2/40·2] UUFLOTTILLEXEINSKKTTTFFFEINY@12 edges=28 letters=18 loops=11 central=F dead at the board                       902s  35.4M/s ETA 285.8 min
+  [3/40·3] UUFLOTTILLEXEINSKKTTTFFFEINY@13 edges=28 letters=18 loops=11 central=F dead at the board                      1428s  33.5M/s ETA 293.6 min
+  [4/40·4] YUUFLOTTILLEHACHRXFXDXUUUAUS@13 edges=28 letters=19 loops=11 central=U dead at the board                      1927s  33.2M/s ETA 289.0 min
+  [5/40·5] ITUUUUUVIIRSIBENNULZWOYVIRS@0 edges=27 letters=21 loops=11 central=U dead at the board                      2291s  34.9M/s ETA 267.3 min
+  [6/40·6] FXUUUFLOTTILLEXEINSKKTTTFFF@13 edges=27 letters=18 loops=11 central=F dead at the board                      2733s  35.1M/s ETA 258.1 min
+  [7/40·7] FXUUUFLOTTILLEYFUNFXUUUFLOT@10 edges=27 letters=18 loops=11 central=U dead at the board                      3167s  35.3M/s ETA 248.8 min
+  [8/40·8] UUFLOTTILLEYVIERXUUUFLOTTXV@10 edges=27 letters=17 loops=11 central=U dead at the board                      3569s  35.8M/s ETA 237.9 min
+  [9/40·9] UUFLOTTILLEYVIERXUUUFLOTTXV@14 edges=27 letters=17 loops=11 central=L dead at the board                      3978s  36.1M/s ETA 228.4 min
+  [10/40·10] FXUUUFLOTTILLEYVIERXUUUFLOT@11 edges=27 letters=17 loops=11 central=U dead at the board                      4478s  35.7M/s ETA 223.9 min
+  [11/40·11] FXUUUFLOTTILLEYVIERXUUUFLOT@13 edges=27 letters=17 loops=11 central=U dead at the board                      4855s  36.2M/s ETA 213.3 min
+  [12/40·12] FXUUUFLOTTILLEYVIERXUUUFLOT@14 edges=27 letters=17 loops=11 central=U dead at the board                      5228s  36.7M/s ETA 203.3 min
+  [13/40·13] FXUUUFLOTTILLEYVIERXUUUFLOT@21 edges=27 letters=17 loops=11 central=U dead at the board                      5513s  37.7M/s ETA 190.8 min
+  [14/40·14] FXUUUFLOTTILLEYVIERXUUUFLOT@23 edges=27 letters=17 loops=11 central=L dead at the board                      5888s  38.0M/s ETA 182.3 min
+  [15/40·15] UUFLOTTXYVIERXUUUFLOTTILLEV@11 edges=27 letters=17 loops=11 central=U dead at the board                      6241s  38.4M/s ETA 173.4 min
+  [16/40·16] UUFLOTTXYVIERXUUUFLOTTILLEV@23 edges=27 letters=17 loops=11 central=L dead at the board                      6611s  38.6M/s ETA 165.3 min
+  [17/40·17] FXUUUFLOTTILLEXEINZKKTTTFFF@13 edges=27 letters=18 loops=11 central=F dead at the board                      7015s  38.7M/s ETA 158.2 min
+  [18/40·18] UUFLOTTILLEYFUNFXUUUFLOTTXY@13 edges=27 letters=18 loops=11 central=U dead at the board                      7381s  38.9M/s ETA 150.4 min
