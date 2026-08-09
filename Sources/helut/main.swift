@@ -52,7 +52,7 @@ let positionalArgs: [String] = {
         "--hybrid-pop", "--hybrid-gens", "--hybrid-greek-samples",
         "--exhaust-top", "--exhaust-plugs", "--selftest-len",
         "--bombe-menus", "--bombe-plugs", "--bombe-report", "--bombe-pipeline",
-        "--bombe-from", "--bombe-min-crib",
+        "--bombe-from", "--bombe-min-crib", "--bombe-fixture",
         "--bombe-confirm", "--bombe-partners", "--bombe-opening-len"
     ]
     while index < args.count {
@@ -111,6 +111,7 @@ if CommandLine.arguments.contains("--welchman") {
     config.minCribLength = intFlag("--bombe-min-crib") ?? config.minCribLength
     config.resumeFrom = intFlag("--bombe-from") ?? config.resumeFrom
     config.sweepRightRing = CommandLine.arguments.contains("--bombe-ring-sweep")
+    config.fixturePath = stringFlag("--bombe-fixture") ?? config.fixturePath
     if let subspace = stringFlag("--subspace") {
         config.wheelOrders = M4ThetisAttack.subspace(named: subspace).wheelOrders
     }
