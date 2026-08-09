@@ -497,10 +497,13 @@ struct BombeSweepConfig {
     var confirmMenus = 1
     /// Extra high-loop menus to pull in as confirmation partners under openings mode.
     var confirmPartners = 8
+    /// Menu fixture to attack. Empty means the P1030680 catalog. Pointing this at a
+    /// known-key control fixture grades the sweep itself instead of swapping files.
+    var fixturePath = ""
 }
 
 func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
-    let path = resolveMenuPath()
+    let path = config.fixturePath.isEmpty ? resolveMenuPath() : config.fixturePath
     guard let set = loadCribMenus(path: path) else {
         print("could not load menus from \(path)")
         print("run: python3 Scripts/crib_mine.py Fixtures/u534_corpus.json "
@@ -573,7 +576,17 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
                  PostBombeDiscriminator.germanReference,
                  PostBombeDiscriminator.noiseReference))
     if config.sweepRightRing {
-        print("right ring swept: turnover phase fully covered, elimination is complete")
+        // Sweeping the right ring covers every phase of the right-wheel turnover, so
+        // middle-wheel stepping is correct for all 26. The middle ring stays pinned at
+        // A, which is only exact while the middle wheel itself does not turn over in
+        // span — so a key that steps the left wheel mid-crib is still out of reach.
+        let longest = chosen.map { $0.1.edgeCount }.max() ?? 0
+        let steps = longest / 26 + 1
+        print("right ring swept: every right-wheel turnover phase covered")
+        print(String(format: "residual gap: middle ring pinned A, so keys whose middle "
+                     + "wheel turns over inside a %d-letter span (~%.0f%% for 1 notch, "
+                     + "~%.0f%% for 2) are not covered",
+                     longest, Double(steps) / 26.0 * 100, Double(2 * steps) / 26.0 * 100))
     } else {
         let longest = chosen.map { $0.1.edgeCount }.max() ?? 0
         let free = max(0, 26 - longest)

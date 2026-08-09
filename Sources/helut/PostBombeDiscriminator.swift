@@ -20,6 +20,21 @@ import HELUTCore
 // are a consistent involution, and demands the crib decrypt back exactly.
 
 /// A survivor after stecker completion and full-message scoring.
+/// The decrypt read only up to `end`, scored the same way as the whole message.
+///
+/// Every campaign pins the middle ring at A, which is exact only while the middle wheel
+/// does not turn over inside the crib span. A *true* key whose middle wheel turns over
+/// after the crib therefore decrypts correctly up to that turnover and into noise after
+/// it — and the whole-message gates, which average a German head with a noise tail, land
+/// near their midpoint and throw the answer away. A correct head followed by noise is the
+/// only divergence shape a legitimate stop can produce, so prefixes are the family to scan.
+struct PrefixEvidence {
+    /// Exclusive end of the readable head — the suspected turnover point.
+    let end: Int
+    let ic: Double
+    let tailScore: Double
+}
+
 struct DiscriminatedCandidate {
     let stop: SweepStop
     let stecker: [Int]
@@ -30,11 +45,18 @@ struct DiscriminatedCandidate {
     let score: Double
     /// Same, restricted to the letters the crib does *not* cover — the ghost test.
     let tailScore: Double
+    /// Best reading of a shorter head, when the whole message is not the right unit.
+    let prefix: PrefixEvidence?
     let cribExact: Bool
     let pairCount: Int
     let determinedLetters: Int
 
     var messageKey: String { stop.stop.positionsString }
+
+    /// The stronger of the two readings — whole message, or the best head.
+    var effectiveTailScore: Double {
+        max(tailScore, prefix?.tailScore ?? -.infinity)
+    }
 }
 
 /// Outcome of discriminating one batch of stops.
@@ -174,12 +196,46 @@ enum PostBombeDiscriminator {
 
     /// Score the stretch of plaintext the crib does not already guarantee.
     private static func tailScore(plain: [Int], menu: BombeMenu) -> Double {
+        tailScore(plain: plain, menu: menu, end: plain.count)
+    }
+
+    /// Trigram score of `plain[0..<end]` with the crib letters removed, so a decrypt
+    /// cannot score well merely by handing back the crib it was seeded with.
+    private static func tailScore(plain: [Int], menu: BombeMenu, end: Int) -> Double {
         var tail: [Int] = []
         let cribRange = menu.offset..<(menu.offset + menu.edgeCount)
-        for (index, letter) in plain.enumerated() where !cribRange.contains(index) {
-            tail.append(letter)
+        for index in 0..<min(end, plain.count) where !cribRange.contains(index) {
+            tail.append(plain[index])
         }
         return tail.count >= 3 ? GermanTrigrams.score(tail) : -10
+    }
+
+    /// Non-crib letters a head must contain before its score is allowed to mean anything.
+    /// 16 is the rehearsal length at which a menu isolates a true key in 26⁴; below it a
+    /// run of noise can fluke naval trigrams, which is exactly how menu 627 happened.
+    static let minPrefixTail = 16
+
+    /// Best-scoring head of the decrypt, or nil if no head is long enough to judge.
+    /// Only heads strictly shorter than the message are considered — the whole message is
+    /// already scored, and reporting it twice would double-count the same evidence.
+    private static func bestPrefix(plain: [Int], menu: BombeMenu) -> PrefixEvidence? {
+        let cribEnd = menu.offset + menu.edgeCount
+        guard cribEnd <= plain.count else { return nil }
+        var best: PrefixEvidence?
+        // A head of `end` letters holds `end - cribLength` non-crib letters once the crib
+        // is excised, so start where that reaches the floor.
+        var end = max(cribEnd, menu.offset) + minPrefixTail
+        while end < plain.count {
+            let head = Array(plain[0..<end])
+            let evidence = PrefixEvidence(
+                end: end,
+                ic: LanguageScorer.indexOfCoincidence(head),
+                tailScore: tailScore(plain: plain, menu: menu, end: end)
+            )
+            if best == nil || evidence.tailScore > best!.tailScore { best = evidence }
+            end += 1
+        }
+        return best
     }
 
     /// Every ≤`maxPlugs` board that satisfies this stop's whole menu, not just the part
@@ -230,8 +286,11 @@ enum PostBombeDiscriminator {
             for table in tables {
                 let plain = decrypt(ciphertext: ciphertext, stop: stop, stecker: table)
                 let ic = LanguageScorer.indexOfCoincidence(plain)
-                // IC gate before trigrams — cheap, and decisive against noise.
-                if ic < icFloor {
+                let prefix = bestPrefix(plain: plain, menu: stop.menu)
+                // IC gate before trigrams — cheap, and decisive against noise. A decrypt
+                // that diverges at a mid-message turnover dilutes whole-string IC, so a
+                // qualifying head is allowed through on its own IC.
+                if ic < icFloor && !(prefix.map { $0.ic >= icFloor } ?? false) {
                     sawICFail = true
                     continue
                 }
@@ -253,6 +312,7 @@ enum PostBombeDiscriminator {
                     ic: ic,
                     score: GermanTrigrams.score(plain),
                     tailScore: tailScore(plain: plain, menu: stop.menu),
+                    prefix: prefix,
                     cribExact: exact,
                     pairCount: pairs,
                     determinedLetters: determined
@@ -261,7 +321,7 @@ enum PostBombeDiscriminator {
                 if best == nil
                     || (candidate.cribExact && !(best!.cribExact))
                     || (candidate.cribExact == best!.cribExact
-                        && candidate.tailScore > best!.tailScore) {
+                        && candidate.effectiveTailScore > best!.effectiveTailScore) {
                     best = candidate
                 }
             }
@@ -275,7 +335,7 @@ enum PostBombeDiscriminator {
         return DiscriminationResult(
             candidates: candidates.sorted {
                 if $0.cribExact != $1.cribExact { return $0.cribExact }
-                return $0.tailScore > $1.tailScore
+                return $0.effectiveTailScore > $1.effectiveTailScore
             },
             killedByCompletion: killed,
             killedByIC: killedIC
@@ -367,20 +427,37 @@ enum PostBombeDiscriminator {
         print("  crib reproduced exactly: \(winner.cribExact)")
         print(String(format: "  IC %.3f (floor %.3f)  tail trigram %.3f vs German %.3f / noise %.3f, margin over #2 %.3f",
                      winner.ic, icFloor, winner.tailScore, germanReference, noiseReference, margin))
+        if let prefix = winner.prefix {
+            print(String(format: "  best head 0..%d  IC %.3f  tail %.3f",
+                         prefix.end, prefix.ic, prefix.tailScore))
+        }
         print("  plaintext \(winner.plaintext)")
         if !looksGerman {
             print()
-            print("  Failed the break gate (crib exact + IC ≥ \(icFloor) + tail > \(breakThreshold)).")
+            print("  Failed the break gate (crib exact + IC ≥ \(icFloor) + tail > "
+                + "\(breakThreshold), whole message or a head of ≥\(minPrefixTail) "
+                + "non-crib letters).")
             print("  Ghosts that clear the board still die here.")
         }
     }
 
-    /// Halt condition: crib exact, whole-string IC above the noise floor, and a
-    /// trigram tail that clears the tightened bar.
+    /// Halt condition: crib exact, plus IC above the noise floor and a trigram tail past
+    /// the tightened bar — judged over the whole message, or over a head long enough to
+    /// stand on its own when the message diverges at a middle-wheel turnover the pinned
+    /// middle ring cannot represent. Both readings use the same bar; the head just has to
+    /// carry `minPrefixTail` non-crib letters to be offered one.
     static func isBreak(_ candidate: DiscriminatedCandidate) -> Bool {
-        candidate.cribExact
-            && candidate.ic >= icFloor
-            && candidate.tailScore > breakThreshold
+        guard candidate.cribExact else { return false }
+        if candidate.ic >= icFloor && candidate.tailScore > breakThreshold { return true }
+        guard let prefix = candidate.prefix else { return false }
+        return prefix.ic >= icFloor && prefix.tailScore > breakThreshold
+    }
+
+    /// True when the head, not the whole message, is what clears the gate — the signature
+    /// of a decrypt that runs correct and then falls off a turnover.
+    static func breaksOnPrefixOnly(_ candidate: DiscriminatedCandidate) -> Bool {
+        guard isBreak(candidate) else { return false }
+        return !(candidate.ic >= icFloor && candidate.tailScore > breakThreshold)
     }
 
     /// The banner. Printed once, when a candidate clears every stage.
@@ -400,6 +477,14 @@ enum PostBombeDiscriminator {
         print(String(format: "  IC          %.3f (floor %.3f)", winner.ic, icFloor))
         print(String(format: "  tail        %.3f vs German %.3f / noise %.3f",
                      winner.tailScore, germanReference, noiseReference))
+        if let prefix = winner.prefix, breaksOnPrefixOnly(winner) {
+            print(String(format: "  head        letters 0..%d — IC %.3f, tail %.3f. "
+                         + "The decrypt is German to there and noise after.",
+                         prefix.end, prefix.ic, prefix.tailScore))
+            print("  Likely a middle-wheel turnover past the crib, which the pinned middle")
+            print("  ring cannot represent. Re-run this shell sweeping the middle ring to")
+            print("  recover the remainder of the message.")
+        }
         print()
         print("  \(winner.plaintext)")
         print(rule)
@@ -492,5 +577,36 @@ enum PostBombeDiscriminator {
             print("    \(steckerString(table)) (\(pairs / 2) pairs)")
         }
         print("  VERDICT: live — \(tables.count) plugboard(s) satisfy the whole menu.")
+
+        // A live board is not a reading. Score every completion exactly the way the
+        // campaign does — whole message and best head — so forensics answers the question
+        // it is usually asked: does this setting say anything, or is it a ghost?
+        print()
+        print("=== What it reads as ===")
+        for table in tables.prefix(6) {
+            let key = EnigmaM4Key(
+                greek: EnigmaM4Warehouse.greek(named: field[1] == "beta" ? "B" : "C"),
+                rotors: (rotor(names[0]), rotor(names[1]), rotor(names[2])),
+                rings: rings,
+                positions: start,
+                plugboard: table,
+                reflector: EnigmaM4Warehouse.thinReflector(named: field[0])
+            )
+            var machine = EnigmaM4Machine(key: key)
+            let plain = machine.processText(cipher)
+            let ic = LanguageScorer.indexOfCoincidence(plain)
+            let whole = tailScore(plain: plain, menu: menu)
+            print("  \(steckerString(table))")
+            print(String(format: "    whole   IC %.3f (floor %.3f)  tail %.3f (bar %.3f)%@",
+                         ic, icFloor, whole, breakThreshold,
+                         ic >= icFloor && whole > breakThreshold ? "  <-- clears" : ""))
+            if let head = bestPrefix(plain: plain, menu: menu) {
+                print(String(format: "    head    0..%d  IC %.3f  tail %.3f%@",
+                             head.end, head.ic, head.tailScore,
+                             head.ic >= icFloor && head.tailScore > breakThreshold
+                                ? "  <-- clears" : ""))
+            }
+            print("    \(EnigmaAlphabet.string(from: plain))")
+        }
     }
 }

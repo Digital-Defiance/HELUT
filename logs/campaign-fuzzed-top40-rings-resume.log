@@ -1,0 +1,30 @@
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030680_fuzzed_top40_menus.json (40 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 40 of 40
+min crib length: 16
+resuming from menu 19 of 40 (skipping 18 already done)
+running 22 menus, highest deduction power first:
+  [19] UUFLOTTILLEVVVUUURWODREISEC@23 edges=27 letters=19 loops=11 central=R
+  [20] UUFLOTTILLEVVVUUUFUNFDREIVI@24 edges=27 letters=18 loops=11 central=V
+  [21] UUFLOTTXYFUNFXUUUFLOTTILLEY@32 edges=27 letters=19 loops=11 central=L
+  [22] VXUUUFLOTTILLEHACHRXFXDXUUUX@0 edges=28 letters=20 loops=9 central=U
+  [23] XKOMMANDADXUUUBOOTEYFXDXUUUY@0 edges=28 letters=21 loops=8 central=U
+  [24] YKOMMANDADXUUUBOOTEYFXDXUUUY@0 edges=28 letters=21 loops=8 central=U
+  [25] TEUUUFFLOTTILLEANANUUUZWOFUE@0 edges=28 letters=21 loops=8 central=U
+  [26] XKOMMANDADXUUUBOOTEYFXDXUUU@0 edges=27 letters=21 loops=8 central=U
+  [27] YKOMMANDADXUUUBOOTEYFXDXUUU@0 edges=27 letters=21 loops=8 central=U
+  [28] YXXKOMMANDADXUUUBOOTEGKDOSV@0 edges=27 letters=20 loops=8 central=O
+  [29] FXUUUFLOTTILLEXEINSKKTTTFFF@0 edges=27 letters=20 loops=8 central=T
+  [30] VXUUUFLOTTILLEHACHRXFXDXUUU@0 edges=27 letters=20 loops=8 central=U
+  … 10 more
+shells/menu: 34944 (336 WO × 2 Greek × 2 UKW × 26 ring) → 1.6e+10 settings
+GPU pipeline depth: 4 shells in flight
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+right ring swept: every right-wheel turnover phase covered
+residual gap: middle ring pinned A, so keys whose middle wheel turns over inside a 28-letter span (~8% for 1 notch, ~15% for 2) are not covered
+ETA floor (~50M/s): 117.1 min
+
+  [19/40·1] UUFLOTTILLEVVVUUURWODREISEC@23 edges=27 letters=19 loops=11 central=R dead at the board                       301s  53.0M/s ETA 105.4 min
+  [20/40·2] UUFLOTTILLEVVVUUUFUNFDREIVI@24 edges=27 letters=18 loops=11 central=V dead at the board                       591s  54.0M/s ETA  98.5 min
+  [21/40·3] UUFLOTTXYFUNFXUUUFLOTTILLEY@32 edges=27 letters=19 loops=11 central=L dead at the board                       947s  50.6M/s ETA  99.9 min
