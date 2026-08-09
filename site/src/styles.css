@@ -260,12 +260,22 @@ code, .mono {
   font-size: clamp(3.8rem, 11vw, 7rem);
   line-height: 0.92;
   letter-spacing: -0.04em;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
 }
 
 .hero-copy .brand-mark em {
   font-style: normal;
   color: var(--copper);
+}
+
+.hero-copy .brand-expand {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: clamp(0.72rem, 1.4vw, 0.88rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 0.85rem;
+  max-width: 42ch;
 }
 
 .hero-copy h1 {
@@ -418,6 +428,28 @@ section.band-ink code {
 .prose strong {
   color: var(--ink);
   font-weight: 600;
+}
+
+/* Home — personal origin, first band after the hero */
+.origin .section-head {
+  max-width: 42rem;
+  margin-bottom: 1.75rem;
+}
+
+.origin-body {
+  max-width: 40rem;
+}
+
+.origin-slot {
+  padding: 0.85rem 1rem;
+  border-left: 3px solid var(--copper);
+  background: rgba(255, 255, 255, 0.45);
+  color: var(--muted);
+  font-style: italic;
+}
+
+.origin-punch {
+  border-left-color: var(--signal);
 }
 
 .split {

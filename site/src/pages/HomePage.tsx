@@ -10,9 +10,10 @@ export function HomePage() {
             HE<em>LUT</em>
           </div>
           <div className="hero-readable">
+            <p className="brand-expand">Homomorphic Edge Look-Up Tensors</p>
             <h1>Turning Silicon into Mathematics</h1>
             <p className="lede">
-              Imagine taking the physical blueprints of a computer chip, translating its wiring into pure mathematical equations, and running it at lightning speed on Apple Silicon. That is HELUT. My ultimate destination is real homomorphic encryption—computing on data while it remains completely secure. But to prove my engine can carry that cryptographic weight, I aimed it at an 80-year-old unbroken WWII ghost.
+              Take a chip’s wiring, rewrite it as equations, and run those equations at Apple Silicon speed—while the data stays encrypted. That is Homomorphic Edge Look-Up Tensors. To prove the engine can carry real cryptographic weight, I aimed it at an 80-year-old unbroken WWII ghost.
             </p>
             <div className="cta-row">
               <Link className="btn" to="/stack">
@@ -22,6 +23,32 @@ export function HomePage() {
                 The hunt for U-534
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="band">
+        <div className="shell origin">
+          <div className="section-head">
+            <div className="kicker">Origin</div>
+            <h2>I built this because I already lived at the edge.</h2>
+            <p>
+              Homomorphic Edge Look-Up Tensors did not start as a product pitch. I’ve always been fascinated by the seamless interchange between bits and radio waves. With tools like GNURadio, you could manipulate a flowgraph to make the physical air between transmitter and receiver effectively disappear.
+            </p>
+          </div>
+          <div className="prose origin-body">
+            <p className="origin-slot" data-slot="sigint">
+            In SIGINT, those signals can't wait for a cloud round-trip. More commonly, they are operating on an air-gapped machine or a standalone device in the field—the math has to execute exactly where the data lives.
+            </p>
+            <p className="origin-slot" data-slot="fpga">
+            Software flowgraphs are beautiful, but they hit a wall when you need absolute real-time, deterministic execution. FPGAs became my language of choice because they erased the boundary between code and silicon. Pure software waits its turn for a CPU cycle. An FPGA lets you rewire a physical circuit on the fly to catch a signal the exact microsecond it arrives on the wire.
+            </p>
+            <p className="origin-slot origin-punch" data-slot="mining">
+            The value of edge compute crystallized in a pitch-black mine when all our 'Plan A' gear didn't make it. Sitting in the dark, I reconfigured an FPGA in the literal Field (as in Field Programmable Gate Array), cobbled together a custom flowgraph, and successfully pushed a signal 3,000 meters using the mine’s raw powerline infrastructure as our transmission medium. That is when dynamic, field-programmable hardware stopped being theoretical.
+            </p>
+            <p>
+              That is why I created HELUT: Homomorphic Edge Look-Up Tensors—so the kind of work I used to do in the clear could eventually run on ciphertext, on hardware that already knows how to think in tables and edges. I wanted to bring the power of reconfigurable computing to Apple Silicon.
+            </p>
           </div>
         </div>
       </section>
