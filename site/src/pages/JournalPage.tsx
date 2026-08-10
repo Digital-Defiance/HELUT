@@ -247,7 +247,16 @@ export function JournalPage() {
                   Arm 1: forty-six ≥16 <code>UEBUNG</code>/<code>FUNKUEBUNG</code> pads at offsets 0–2 under rings AAAA—zero physical boards. Those exact training openings are not at the absolute head in the turnover-free slice.
                 </p>
                 <p>
-                  Arm 2: short headers paired with mid-message body cribs under confirm-2. All forty ≥16 body anchors died at the board, so agreement was already impossible. The short menus then stalled the host on tens of millions of ghost completions; several printed “clears the bar” on prefix flukes while their whole-message IC and tail still failed. I aborted, taught confirm mode to only re-test shells a ≥16 anchor already locked, and closed the “header pushes the body back” claim under rings AAAA.
+                  Arm 2: short headers paired with mid-message body cribs under confirm-2. All forty ≥16 body anchors died at the board under AAAA, so agreement was already impossible. The short menus then stalled the host on tens of millions of ghost completions; several printed “clears the bar” on prefix flukes while their whole-message IC and tail still failed. I aborted and taught confirm mode to only re-test shells a ≥16 anchor already locked. Ring-sweep of those bodies: 40/40 dead at the board, zero raw stops. The “header pushes the body back” claim is exhausted under right-ring coverage.
+                </p>
+              </div>
+            </article>
+            <article className="tl-item">
+              <div className="when">Phase 17: Thetis Register</div>
+              <h3>Not Potsdam. Not more UEBUNG. Try the training desk.</h3>
+              <div className="prose">
+                <p>
+                  With Übung-push exhausted, I am probing Kenngruppe drill from this message’s own keying material—<code>ACH</code>, <code>SEDM</code>, <code>OEDM</code>—and school/training openings like <code>AUSBILDUNG</code>, <code>LEHRGANG</code>, <code>ANALLEFUNKSTELLEN</code>, at the head, length ≥16. The scraped “plaintext” field is Girard’s Buchgruppen worksheet, not a decrypt; I am not cribbing that.
                 </p>
               </div>
             </article>
@@ -261,14 +270,14 @@ export function JournalPage() {
             <div className="kicker">Honest Scope</div>
             <h2>The Evidence Room</h2>
             <p>
-              I know the Potsdam 1 May keys decrypt other U-534 traffic, but not this message. The archival levers are spent. My engine is graded rather than trusted—a blind control breaks a known key through the full campaign in 361 seconds. Exact catalog and fuzzed arms under rings AAAA are clean negatives; so is the ≥16 UEBUNG head. The mid-message “Übung push” claim is dead on the body side under AAAA. What remains: parked catalog rings at menu 57/868, no middle ring but A, and turnover coverage on any Thetis body that ever locks a shell.
+              I know the Potsdam 1 May keys decrypt other U-534 traffic, but not this message. The archival levers are spent. My engine is graded rather than trusted—a blind control breaks a known key through the full campaign in 361 seconds. Exact catalog and fuzzed arms under rings AAAA are clean negatives; so is the ≥16 UEBUNG head. The mid-message “Übung push” claim is dead under AAAA and under full right-ring sweep (40/40 body anchors, zero stops). What remains: parked catalog rings at menu 57/868, no middle ring but A, and Thetis-register probes now running.
             </p>
           </div>
           <ul className="stack-list">
             <li>
               <span className="mono">FIXTURES</span>
               <span>
-                <strong>The Input Data:</strong> Contains the scraped 1 May corpus (<code>u534_corpus.json</code>), my 100 mined cribs mapped to 2,513 placements (<code>p1030680_menus.json</code>), the Top-30 turnover set, the fuzzed operator-error menus, the Thetis UEBUNG fixtures (<code>p1030680_uebung_menus.json</code>, <code>p1030680_uebung_pair_menus.json</code>), the known-key control fixture, and my naval trigram model.
+                <strong>The Input Data:</strong> Contains the scraped 1 May corpus (<code>u534_corpus.json</code>), my 100 mined cribs mapped to 2,513 placements (<code>p1030680_menus.json</code>), the Top-30 turnover set, the fuzzed operator-error menus, the Thetis UEBUNG fixtures, the Thetis-register fixture (<code>p1030680_thetis_register_menus.json</code>), the known-key control fixture, and my naval trigram model.
               </span>
             </li>
             <li>
@@ -339,34 +348,44 @@ export function JournalPage() {
             </article>
 
             <article className="tl-item">
-              <div className="when">5 — Running: body × rings</div>
+              <div className="when">5 — Done, clean negative</div>
               <h3>Pair a Thetis head with a mid-message body crib.</h3>
               <div className="prose">
                 <p>
-                  All forty ≥16 mid-message body anchors died at the board under rings AAAA, so confirm-2 could not fire. Short <code>UEBUNG</code> headers then flooded the host with tens of millions of ghost completions; the “clears the bar” lines were prefix flukes—whole-message IC and tail still failed. I aborted, taught confirm mode to only re-test shells a ≥16 anchor already locked, and closed the “header pushes the body back” claim in the turnover-free slice.
+                  All forty ≥16 mid-message body anchors died at the board under rings AAAA, so confirm-2 could not fire. Short <code>UEBUNG</code> headers then flooded the host with tens of millions of ghost completions; the “clears the bar” lines were prefix flukes—whole-message IC and tail still failed. I aborted, taught confirm mode to only re-test shells a ≥16 anchor already locked.
                 </p>
                 <p>
-                  Next: ring-sweep those same forty body anchors—about four to five hours. If any lock a shell, the short headers can re-test it cheaply.
+                  Ring-sweep of those same forty bodies: every menu dead at the board, zero raw stops across 6.4×10¹¹ settings. Turnover does not save the “header pushes the body back” claim for these cribs. The Übung-push hypothesis is exhausted under right-ring coverage.
                 </p>
               </div>
             </article>
 
             <article className="tl-item">
-              <div className="when">6 — About 2.5 days</div>
+              <div className="when">6 — Running — hours</div>
+              <h3>Probe Thetis register: Kenngruppe and training openings.</h3>
+              <div className="prose">
+                <p>
+                  Not Potsdam. Not more <code>UEBUNG</code> pads. Head offsets, length ≥16, rings AAAA first. Catalog ring sweep stays parked until this cools.
+                </p>
+              </div>
+            </article>
+
+            <article className="tl-item">
+              <div className="when">7 — About 2.5 days</div>
               <h3>Unpin the middle ring on the best menus.</h3>
               <div className="prose">
                 <p>
-                  The 8–15% of keys my audit says have never been on the board. Twenty-six times the cost, so it only earns its slot on surviving Thetis-header menus—not on another Potsdam catalog sweep.
+                  The 8–15% of keys my audit says have never been on the board. Twenty-six times the cost, so it only earns its slot on menus that ever live.
                 </p>
               </div>
             </article>
 
             <article className="tl-item">
-              <div className="when">7 — Parked, resumable</div>
+              <div className="when">8 — Parked, last resort</div>
               <h3>Catalog ring sweep can wait.</h3>
               <div className="prose">
                 <p>
-                  Menus 1–57 of the exact ≥16 ring sweep are already dead in <code>logs/campaign-catalog-rings.log</code>. If the Übung hunch cools, resume with <code>--bombe-from 58</code>. I am not spending the remaining days forcing Potsdam register onto a training net.
+                  Menus 1–57 of the exact ≥16 ring sweep are already dead in <code>logs/campaign-catalog-rings.log</code>. Resume with <code>--bombe-from 58</code> only if Thetis-register probes cool. I still do not believe in spending the remaining days forcing Potsdam register onto a training net.
                 </p>
               </div>
             </article>

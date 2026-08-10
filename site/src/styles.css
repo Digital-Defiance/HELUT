@@ -16,6 +16,14 @@
   -webkit-font-smoothing: antialiased;
 }
 
+@font-face {
+  font-family: 'Fraunces', 'Fraunces-Light', 'Fraunces-Variable';
+  src: url('/Fraunces-VariableFont_SOFT,WONK,opsz,wght.woff2') format('woff2');
+  font-weight: 100 900; /* Fraunces supports full weights from Thin to Black */
+  font-style: normal;
+  font-display: swap;
+}
+
 *,
 *::before,
 *::after {
@@ -211,12 +219,19 @@ code, .mono {
 .hero-plane::after {
   content: "";
   position: absolute;
-  inset: auto 12% 18% auto;
-  width: min(42vw, 28rem);
-  height: min(42vw, 28rem);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 50%;
-  animation: orbit 18s linear infinite;
+  /* Lowered the top constraint from 5% to 18% to center it vertically */
+  inset: 35% 15% auto auto;
+  width: min(40vw, 28rem);
+  height: min(40vw, 28rem);
+  
+  background-image: url('/HELUT-tensor.svg');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  filter: brightness(0) invert(1) opacity(0.12);
+  
+  animation: float 14s ease-in-out infinite;
 }
 
 @keyframes plane-in {
@@ -224,8 +239,10 @@ code, .mono {
   to { opacity: 1; transform: translateX(4%); }
 }
 
-@keyframes orbit {
-  to { transform: rotate(360deg); }
+/* Replace @keyframes orbit with this */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
 }
 
 @keyframes rise {
@@ -498,6 +515,15 @@ section.band-ink code {
   background: rgba(196, 120, 58, 0.08);
   color: var(--ink-soft);
   font-size: 0.95rem;
+}
+
+.note-glow {
+  margin-top: 1.5rem;
+  padding: 1rem 1.1rem;
+  border-left: 3px solid var(--copper);
+  background: rgba(196, 120, 58, 0.08);
+  font-size: 0.95rem;
+  color: var(--signal-glow);
 }
 
 /* Apps */

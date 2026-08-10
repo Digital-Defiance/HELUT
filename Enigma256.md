@@ -54,3 +54,19 @@ To guarantee that Enigma 256 outpaces advancements in automated cryptanalysis, i
 - **The Red Team (HELUT Cryptanalysis):** A massive array of **Homomorphic Edge Look-Up Tensor (HELUT)** engines acts as the automated adversary. The HELUT engine uses genetic algorithms to breed "alien" Boolean netlists, aggressively mutating its own Metal compute shaders to find early-exit logic, zero-cycle SAT predictors, and optimized menu graph topologies capable of breaking the current Enigma 256 generation.
 - **The Blue Team (Polymorphic Logic Generator):** An evolutionary logic generator oversees the Enigma 256 silicon. It constantly monitors the Red Team's "time-to-crack" metrics.
 - **Automated Threat Mutation:** If HELUT evolves a tensor reduction that brings the decryption time below an acceptable operational threshold, the Blue Team instantly reacts. It procedural breeds new LFSR stepping taps, modifies the procedural rotor generation algorithms, and rolls the polymorphic updates directly to the field hardware. This creates a living cipher—a software-defined state machine that continuously rewrites its own physical DNA to outrun the algorithms hunting it.
+
+### 7. Commodity Silicon Deployment (COTS)
+
+#### 7.1 Hardware Agnosticism
+
+Enigma 256 is designed strictly for Commercial Off-The-Shelf (COTS) System-on-Chip (SoC) architectures containing both a traditional CPU (Processing System) and programmable gate arrays (Programmable Logic). It requires no custom ASIC fabrication.
+
+#### 7.2 The Hardware/Software Boundary
+
+- **The Control Plane (Software):** Ephemeral key exchange (ECDH), Master Secret derivation (PBKDF2/Argon2), and HKDF expansion are executed purely in software on standard ARM/RISC-V cores. This allows the system to leverage existing, peer-reviewed open-source cryptographic libraries for network handshakes.
+- **The Data Plane (Hardware):** The expanded HKDF stream is pushed via standard AXI memory-mapped interfaces to the FPGA fabric. The `enigma_256_core` executes entirely in programmable logic, ensuring gigabit throughput and physical isolation from the host operating system.
+
+#### 7.3 Decentralized Field Upgrades
+
+Because the cipher relies on polymorphic logic rather than static physical hardware, the "mutation parameters" (such as new LFSR polynomial taps or modified HKDF expansion rules) can be pushed as over-the-air software updates. The receiving node simply recompiles the Verilog bitstream locally and flashes its own FPGA fabric, fundamentally altering the physical execution of the cryptography without requiring new hardware deployment.
+
