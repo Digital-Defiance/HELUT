@@ -11,9 +11,9 @@ export function HomePage() {
           </div>
           <div className="hero-readable">
             <p className="brand-expand">Homomorphic Edge Look-Up Tensors</p>
-            <h1>Turning Silicon into Mathematics</h1>
+            <h1>The Universal Imitation Game</h1>
             <p className="lede">
-              Take a chip’s wiring, rewrite it as equations, and run those equations at Apple Silicon speed—while the data stays encrypted. That is Homomorphic Edge Look-Up Tensors. To prove the engine can carry real cryptographic weight, I aimed it at an 80-year-old unbroken WWII ghost.
+              In 1950, Alan Turing formalized the "Imitation Game" based on a profound mathematical truth: a discrete-state digital computer can perfectly imitate the behavior of any other machine. Homomorphic Edge Look-Up Tensors takes that theorem to its absolute limit. I take raw hardware circuits, translate them into pure tensor mathematics, and force modern silicon to perfectly imitate their physical execution—while the data stays entirely encrypted.
             </p>
             <div className="cta-row">
               <Link className="btn" to="/stack">
@@ -41,13 +41,13 @@ export function HomePage() {
             In SIGINT, those signals can't wait for a cloud round-trip. More commonly, they are operating on an air-gapped machine or a standalone device in the field—the math has to execute exactly where the data lives.
             </p>
             <p className="origin-slot" data-slot="fpga">
-            Software flowgraphs are beautiful, but they hit a wall when you need absolute real-time, deterministic execution. FPGAs became my language of choice because they erased the boundary between code and silicon. Pure software waits its turn for a CPU cycle. An FPGA lets you rewire a physical circuit on the fly to catch a signal the exact microsecond it arrives on the wire.
+            Software flowgraphs are beautiful, but they hit a wall when you need absolute real-time, deterministic execution. FPGAs became my language of choice because they are the physical embodiment of universal computation. Pure software waits its turn for a CPU cycle. An FPGA is a blank die playing a hardware imitation game—rewiring its own logic gates on the fly to become the exact circuit you need to catch a signal on the wire.
             </p>
             <p className="origin-slot origin-punch" data-slot="mining">
-            The value of edge compute crystallized in a pitch-black mine when all our 'Plan A' gear didn't make it. Sitting in the dark, I reconfigured an FPGA in the literal Field (as in Field Programmable Gate Array), cobbled together a custom flowgraph, and successfully pushed a signal 3,000 meters using the mine’s raw powerline infrastructure as our transmission medium. That is when dynamic, field-programmable hardware stopped being theoretical.
+            The value of edge compute crystallized in a pitch-black mine when all our gear failed. Sitting in the dark, I reconfigured an FPGA in the literal Field, cobbled together a custom flowgraph, and successfully pushed a signal 3,000 meters using the mine’s raw powerline infrastructure as our transmission medium. That is when dynamic, field-programmable hardware stopped being theoretical.
             </p>
             <p>
-              That is why I created HELUT: Homomorphic Edge Look-Up Tensors—so the kind of work I used to do in the clear could eventually run on ciphertext, on hardware that already knows how to think in tables and edges. I wanted to bring the power of reconfigurable computing to Apple Silicon.
+              That is why I created HELUT. I wanted to take the raw, reconfigurable power of an FPGA and emulate it in software on modern tensor silicon, allowing the kind of work I used to do in the clear to run seamlessly on ciphertext. 
             </p>
           </div>
         </div>
@@ -57,12 +57,21 @@ export function HomePage() {
         <div className="shell split">
           <div className="section-head" style={{ marginBottom: 0 }}>
             <div className="kicker">The Trajectory</div>
-            <h2>From Mock-PBS to True Homomorphic Encryption</h2>
+            <h2>Imitating Logic in the Dark</h2>
             <p>
-              HELUT was not built to be an Enigma cracking tool. It is a systems prototype designed to evaluate real hardware netlists under homomorphic tensor arithmetic. I am currently using "mock" Programmable Bootstrapping (PBS) to prove that my datapath, batching mechanics, and logic gates can run at CPU-scale without collapsing.
+              HELUT is a systems prototype designed to evaluate real hardware netlists blindly, under homomorphic tensor arithmetic. It is the deepest layer of the Imitation Game: it forces the processor to emulate physical logic on data it cannot see, calculating absolute truth while remaining completely in the dark.
             </p>
             <p style={{ marginTop: '1rem' }}>
-              Once the plumbing is perfected, I introduce true cryptographic noise budgets, actual Torus PBS, and key-switching. The Enigma campaign is just my ultimate stress test.
+              The secret to its execution speed lies in the "LUT" (Look-Up Table). FPGAs don't compute complex equations; they map inputs to outputs using physical LUTs. An Enigma rotor operates the exact same way—it is not an algebraic function, but a scrambled ball of wires acting as a hardwired 26-element look-up table. 
+            </p>
+            <p style={{ marginTop: '1rem' }}>
+              Here is where the architecture becomes a masterpiece. You cannot efficiently evaluate physical circuits on a GPU by writing software that simulates sequential spinning gears. Graphics cards actively choke on branching <code>if/then</code> loops. They are built for one thing: evaluating massive matrices in parallel.
+            </p>
+            <p style={{ marginTop: '1rem' }}>
+              Instead, HELUT hooks directly into Yosys, the industry-standard open-source synthesis suite. You write standard Verilog. Yosys synthesizes it into a flattened hardware netlist. HELUT ingests that netlist, transforms every Look-Up Table into a multidimensional tensor array, and maps the hardware’s boolean constraints directly into Apple’s Metal shaders as branchless, pure matrix mathematics. When the engine tests a cryptographic key, it doesn't step through a program; it executes millions of parallel tensor operations where an impossible physical state instantly and mathematically collapses to zero.
+            </p>
+            <p style={{ marginTop: '1rem' }}>
+              I am using this "mock" PBS and pure LUT execution to prove that the datapath, batching mechanics, and logic gates can scale to universal computation without collapsing. Once the plumbing is perfected, I introduce true cryptographic noise budgets and actual Torus PBS.
             </p>
           </div>
           <ul className="stack-list">
@@ -81,13 +90,13 @@ export function HomePage() {
             <li>
               <span className="mono">03</span>
               <span>
-                <strong>The Blind Decision Tree</strong> — An exact non-linear classification circuit, proving I don't have to take floating-point shortcuts to make complex logical choices.
+                <strong>The Blind Decision Tree</strong> — An exact non-linear classification circuit, proving I don't have to take floating-point shortcuts to make complex logical choices on encrypted states.
               </span>
             </li>
             <li>
               <span className="mono">04</span>
               <span>
-                <strong>The Welchman Bombe</strong> — The ultimate datapath test: weaponizing the engine to deterministically dismantle an unbroken 1945 message from a German U-boat.
+                <strong>The Welchman Bombe</strong> — The ultimate datapath stress test: translating the 1945 electromechanical Bombe into pure tensor mathematics to deterministically dismantle an unbroken Kriegsmarine ghost.
               </span>
             </li>
           </ul>
