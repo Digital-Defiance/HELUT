@@ -147,14 +147,14 @@ export function JournalPage() {
             </article>
 
             <article className="tl-item">
-              <div className="when">Phase 10: The Interrupted Arm</div>
-              <h3>45% of a sweep is not a negative.</h3>
+              <div className="when">Phase 10: The Fuzzed Turnover Sweep</div>
+              <h3>Operator-error cribs, clean negative.</h3>
               <div className="prose">
                 <p>
-                  I launched a ring sweep on the curated top-40 fuzzed menus and treated the log as finished. An audit of the terminal history showed the process had died at menu 18 of 40—no completion summary, eighteen placements dead at the board, zero raw stops. That is not a clean negative; it is half an arm.
+                  I launched a ring sweep on the curated top-40 fuzzed menus and wrongly treated the log as finished. An audit showed the process had died at menu 18 of 40—half an arm, not a result. Menus 19 through 40 went back on the GPU under the head-reading gate.
                 </p>
                 <p>
-                  Menus 19 through 40 are back on the GPU now, on the rebuilt engine so whatever they produce is judged by the head-reading gate rather than the old whole-message score. Closing an arm properly is cheaper than opening a new one.
+                  They finished clean: every remaining menu dead at the board, zero raw stops across 3.5×10¹¹ settings. Combined with the first eighteen, that is a real negative on all forty curated fuzzed placements. Orthographic noise on Potsdam register language is not hiding the key under right-ring coverage.
                 </p>
               </div>
             </article>
@@ -192,7 +192,7 @@ export function JournalPage() {
                   My sweep printed <em>"turnover phase fully covered, elimination is complete"</em> whenever I swept the ring settings. That was too strong. Sweeping the fast rotor's ring covers every phase of <em>its</em> turnover, but I keep the middle ring pinned at A, and that shortcut only holds while the middle rotor doesn't click over inside the crib itself. No run I have ever launched has tested any other middle ring. Somewhere between 8% and 15% of all possible keys have never been on the board at all.
                 </p>
                 <p>
-                  Worse, I went back through the terminal history and found my fuzzed turnover sweep had been killed at menu 18 of 40. I had been treating it as a finished clean negative. It was 45% of one arm. And of my 2,513 catalog placements, only 886 were ever long enough to test—and of those 886, exactly <strong>54</strong> have had genuine ring coverage. My "clean negative on the full catalog" was a negative across less than a fifth of the ring space.
+                  Worse, I went back through the terminal history and found my fuzzed turnover sweep had been killed at menu 18 of 40—I had been treating half an arm as a finished negative. I finished that arm properly (Phase 10: clean). And of my 2,513 catalog placements, only 886 were ever long enough to test—and of those 886, exactly <strong>54</strong> have had genuine ring coverage. My "clean negative on the full catalog" was a negative across less than a fifth of the ring space.
                 </p>
                 <p>
                   I fixed the log line so the machine reports its own gap honestly. I would rather have an uncomfortable ledger than a flattering one.
@@ -215,6 +215,42 @@ export function JournalPage() {
                 </p>
               </div>
             </article>
+
+            <article className="tl-item">
+              <div className="when">Phase 14: The Head-Gate Re-read</div>
+              <h3>The answer was not already in the logs.</h3>
+              <div className="prose">
+                <p>
+                  I re-swept every exact crib of 16 letters or longer under rings AAAA with the new head-reading gate—868 menus, half a trillion settings. Result: three physically valid ten-plug boards, zero breaks. The best candidate scored IC 0.051 and a trigram tail of −4.837, under both bars. The head reading did not resurrect a true key from the turnover-free slice.
+                </p>
+                <p>
+                  That closes the cheap hope that I had already thrown the answer away. Exact historical cribs are eliminated under rings AAAA for real. What remained was the expensive half—or opening a Thetis-shaped wedge instead of more Potsdam.
+                </p>
+              </div>
+            </article>
+
+            <article className="tl-item">
+              <div className="when">Phase 15: The Park</div>
+              <h3>I stopped the four-day sweep on purpose.</h3>
+              <div className="prose">
+                <p>
+                  I started the exact ≥16 catalog ring sweep, then parked it at menu 57 of 868—all dead at the board so far—in <code>logs/campaign-catalog-rings.log</code>. Resume is <code>--bombe-from 58</code> with append. I was not going to spend the remaining days forcing Potsdam register onto a training net while a Thetis-shaped opening was still untested.
+                </p>
+              </div>
+            </article>
+
+            <article className="tl-item">
+              <div className="when">Phase 16: UEBUNG</div>
+              <h3>Stop speaking Potsdam. Try a training header.</h3>
+              <div className="prose">
+                <p>
+                  Arm 1: forty-six ≥16 <code>UEBUNG</code>/<code>FUNKUEBUNG</code> pads at offsets 0–2 under rings AAAA—zero physical boards. Those exact training openings are not at the absolute head in the turnover-free slice.
+                </p>
+                <p>
+                  Arm 2: short headers paired with mid-message body cribs under confirm-2. All forty ≥16 body anchors died at the board, so agreement was already impossible. The short menus then stalled the host on tens of millions of ghost completions; several printed “clears the bar” on prefix flukes while their whole-message IC and tail still failed. I aborted, taught confirm mode to only re-test shells a ≥16 anchor already locked, and closed the “header pushes the body back” claim under rings AAAA.
+                </p>
+              </div>
+            </article>
           </div>
         </div>
       </section>
@@ -225,26 +261,26 @@ export function JournalPage() {
             <div className="kicker">Honest Scope</div>
             <h2>The Evidence Room</h2>
             <p>
-              I know the Potsdam 1 May keys decrypt other U-534 traffic, but not this message. The archival levers are spent. My engine is graded rather than trusted—a blind control breaks a known key through the full campaign in 361 seconds. But my audit is blunt about the rest: 54 of 886 placements have real ring coverage, no middle ring but A has ever been tested, and 1,627 short placements were never tried at all. Here is the strict index of my artifacts and victory conditions.
+              I know the Potsdam 1 May keys decrypt other U-534 traffic, but not this message. The archival levers are spent. My engine is graded rather than trusted—a blind control breaks a known key through the full campaign in 361 seconds. Exact catalog and fuzzed arms under rings AAAA are clean negatives; so is the ≥16 UEBUNG head. The mid-message “Übung push” claim is dead on the body side under AAAA. What remains: parked catalog rings at menu 57/868, no middle ring but A, and turnover coverage on any Thetis body that ever locks a shell.
             </p>
           </div>
           <ul className="stack-list">
             <li>
               <span className="mono">FIXTURES</span>
               <span>
-                <strong>The Input Data:</strong> Contains the scraped 1 May corpus (<code>u534_corpus.json</code>), my 100 mined cribs mapped to 2,513 placements (<code>p1030680_menus.json</code>), the Top-30 turnover set, the fuzzed operator-error menus (<code>p1030680_fuzzed_menus.json</code>), the known-key control fixture (<code>p1030684_control_menus.json</code>), and my naval trigram model.
+                <strong>The Input Data:</strong> Contains the scraped 1 May corpus (<code>u534_corpus.json</code>), my 100 mined cribs mapped to 2,513 placements (<code>p1030680_menus.json</code>), the Top-30 turnover set, the fuzzed operator-error menus, the Thetis UEBUNG fixtures (<code>p1030680_uebung_menus.json</code>, <code>p1030680_uebung_pair_menus.json</code>), the known-key control fixture, and my naval trigram model.
               </span>
             </li>
             <li>
               <span className="mono">LOGS</span>
               <span>
-                <strong>The Ledger:</strong> A record of every campaign, including the ones that embarrass me. The early openings sweeps that yielded zero stops (<code>welchman-openings.log</code>), the false-alarm catalog run (<code>campaign-all-menus.log</code>), the completed top-30 turnover sweep (<code>campaign-top30-rings.log</code>) — clean negative — the fuzzed sweep I wrongly called finished at 18 of 40 menus, its resume still in flight (<code>campaign-fuzzed-top40-rings-resume.log</code>), and the blind control that broke a real key in six minutes (<code>control-p1030684-rings.log</code>).
+                <strong>The Ledger:</strong> A record of every campaign, including the ones that embarrass me. The false-alarm catalog run, the top-30 and fuzzed top-40 ring sweeps, the blind control (<code>control-p1030684-rings.log</code>), the head-gate catalog re-read, the UEBUNG arm 1 clean negative, the arm 2 pair run aborted in a ghost flood (<code>campaign-uebung-pair-aaaa.log</code>), and the parked catalog rings log.
               </span>
             </li>
             <li>
               <span className="mono">VICTORY CONDITIONS</span>
               <span>
-                <strong>The Rules of Engagement:</strong> I claim a break only when four things align: a naval German plaintext, an exact crib match, an IC ≥ 0.055, and a physically possible ≤ 10-plug board — judged over the whole message, or over a readable head of at least 16 letters outside the crib. Anything less is a ghost.
+                <strong>The Rules of Engagement:</strong> I claim a break only when four things align: a naval German plaintext, an exact crib match, an IC ≥ 0.055, and a physically possible ≤ 10-plug board — judged over the whole message, or over a readable head of at least 16 letters outside the crib. Cribs under 16 cannot solo-claim a break; under confirm-2 they only re-test shells a ≥16 anchor already locked. Anything less is a ghost.
               </span>
             </li>
           </ul>
@@ -255,78 +291,82 @@ export function JournalPage() {
         <div className="shell">
           <div className="section-head">
             <div className="kicker">The Plan</div>
-            <h2>Six moves left, in order of cheapness</h2>
+            <h2>What is left, in order of cheapness</h2>
             <p>
-              Everything below is priced in real GPU time on one Apple Silicon machine. One crib placement, swept across all 26 ring phases, is 16 billion machine settings and takes about six and a half minutes—roughly 190 placements a day. That number is what makes this a campaign and not a coin flip.
+              The head-gate re-read, the fuzzed turnover arm, and both UEBUNG AAAA arms are closed. Everything below is priced in real GPU time on one Apple Silicon machine. One crib placement, swept across all 26 ring phases, is 16 billion machine settings and takes about six and a half minutes—roughly 190 placements a day.
             </p>
           </div>
 
           <div className="timeline">
             <article className="tl-item">
-              <div className="when">1 — Code shipped, 8 hours of GPU left</div>
-              <h3>Re-read the survivors I already threw away.</h3>
+              <div className="when">1 — Done, clean negative</div>
+              <h3>Re-read the catalog under the head gate.</h3>
               <div className="prose">
                 <p>
-                  This is the move I would bet on. My linguistic scanner scores the whole 72-letter decrypt. But if the true key clicks the middle rotor over <em>after</em> my crib and before the end of the message, the plaintext comes out perfect across the crib and turns to garbage after it—so the whole-message score lands halfway between German and noise, below my threshold, and I discard the answer.
-                </p>
-                <p>
-                  My catalog runs already produced <strong>2,219 physically valid ten-plug boards</strong> that I rejected on that score alone. There is a real chance the key is already sitting in a log file I wrote weeks ago.
-                </p>
-                <p>
-                  The code for this is now written. My engine scores the readable head of a decrypt as well as the whole message, and it will accept a break on either. I proved it two ways before trusting it: my known-key control still breaks identically, and the infamous menu-627 ghost still dies—its best head scores <em>worse</em> than its whole message, which is exactly right, because you cannot manufacture a correct beginning out of noise. What remains is the eight hours of GPU time to re-read the survivors.
+                  868 menus, half a trillion settings, three physical boards, zero breaks. The mid-message divergence hypothesis does not hide a key in the turnover-free slice. That cheap hope is closed.
                 </p>
               </div>
             </article>
 
             <article className="tl-item">
-              <div className="when">2 — Running now, about 2.5 hours</div>
+              <div className="when">2 — Done, clean negative</div>
               <h3>Finish the fuzzed sweep I abandoned.</h3>
               <div className="prose">
                 <p>
-                  Twenty-two placements remain from the run that died at menu 18. Closing an arm properly is cheaper than opening a new one, and I no longer get to call it a negative until it finishes. It is on the GPU as I write this, on the rebuilt engine, so whatever it finds gets judged by the new scoring rather than the old.
+                  Full top-40 fuzzed ring sweep closed with zero raw stops. Orthographic fuzzing of Potsdam register language is exhausted under right-ring coverage.
                 </p>
               </div>
             </article>
 
             <article className="tl-item">
-              <div className="when">3 — About 4 days</div>
+              <div className="when">3 — Parked at menu 57 of 868</div>
               <h3>Sweep every ring phase on every exact crib.</h3>
               <div className="prose">
                 <p>
-                  886 placements × 26 ring phases. This is the run that converts my comfortable-sounding negative into a real one: right now I have eliminated the exact historical cribs across less than a fifth of the ring space. Until this finishes, everything I believe about exact cribs is a guess.
+                  I started the four-day ring sweep and parked it to chase another theory. Menus 1–57 are done—all dead at the board—in <code>logs/campaign-catalog-rings.log</code>. Resume later with <code>--bombe-from 58</code> and append to that log; do not restart from menu 1.
                 </p>
               </div>
             </article>
 
             <article className="tl-item">
-              <div className="when">4 — About 8 hours to triage</div>
-              <h3>Bring back the 1,627 short cribs—in pairs.</h3>
+              <div className="when">4 — Done, clean negative</div>
+              <h3>Stop speaking Potsdam. Try UEBUNG.</h3>
               <div className="prose">
                 <p>
-                  I banned cribs under 16 letters because a 14-letter phrase produced my worst false alarm. That ban was right for a crib judged <em>alone</em>. But two <em>independent</em> short cribs landing on the same rotor state is a completely different claim, and my engine already supports that kind of cross-confirmation.
-                </p>
-                <p>
-                  This is the only move that adds genuinely new attack surface instead of grinding harder on the same wedges—it recovers the 65% of my catalog that I have never tested.
+                  Forty-six ≥16 training-header pads at offsets 0–2 under rings AAAA: every stop was a ghost—zero physical boards. Those exact Thetis openings are not sitting at the absolute head in the turnover-free slice.
                 </p>
               </div>
             </article>
 
             <article className="tl-item">
-              <div className="when">5 — About 2.5 days</div>
+              <div className="when">5 — Running: body × rings</div>
+              <h3>Pair a Thetis head with a mid-message body crib.</h3>
+              <div className="prose">
+                <p>
+                  All forty ≥16 mid-message body anchors died at the board under rings AAAA, so confirm-2 could not fire. Short <code>UEBUNG</code> headers then flooded the host with tens of millions of ghost completions; the “clears the bar” lines were prefix flukes—whole-message IC and tail still failed. I aborted, taught confirm mode to only re-test shells a ≥16 anchor already locked, and closed the “header pushes the body back” claim in the turnover-free slice.
+                </p>
+                <p>
+                  Next: ring-sweep those same forty body anchors—about four to five hours. If any lock a shell, the short headers can re-test it cheaply.
+                </p>
+              </div>
+            </article>
+
+            <article className="tl-item">
+              <div className="when">6 — About 2.5 days</div>
               <h3>Unpin the middle ring on the best menus.</h3>
               <div className="prose">
                 <p>
-                  The 8–15% of keys my audit says have never been on the board. Twenty-six times the cost, so it only earns its slot on the strongest twenty placements, and only after move 3 comes back empty.
+                  The 8–15% of keys my audit says have never been on the board. Twenty-six times the cost, so it only earns its slot on surviving Thetis-header menus—not on another Potsdam catalog sweep.
                 </p>
               </div>
             </article>
 
             <article className="tl-item">
-              <div className="when">6 — Back to the archives</div>
-              <h3>Stop asking a training net to speak Potsdam.</h3>
+              <div className="when">7 — Parked, resumable</div>
+              <h3>Catalog ring sweep can wait.</h3>
               <div className="prose">
                 <p>
-                  If the first five moves are clean, the wedge is wrong and not the offsets. A 72-letter Thetis message plausibly opens with a callsign or key group before the body ever starts—which would put the real crib short, and somewhere around letter 5 to 15. That makes move 4, not move 3, the one that lands. And it means the next real breakthrough may come from a records office rather than a GPU.
+                  Menus 1–57 of the exact ≥16 ring sweep are already dead in <code>logs/campaign-catalog-rings.log</code>. If the Übung hunch cools, resume with <code>--bombe-from 58</code>. I am not spending the remaining days forcing Potsdam register onto a training net.
                 </p>
               </div>
             </article>

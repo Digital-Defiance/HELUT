@@ -609,6 +609,12 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
 
     // Shortcut #3: accumulate stops by shell; report only multi-menu agreements.
     let agreements = LockedShellAgreements()
+    /// Physical shells admitted by a unicity-safe (≥16) menu. Short challengers under
+    /// confirm≥2 never GPU-sweep: they only re-test these shells on the host. A true
+    /// key still survives — its ≥16 body locks the shell, then the short header
+    /// confirms it. What dies is the 10M–40M ghost-completion flood that stalled arm 2.
+    var lockedAnchors: [ShellID: LockedAnchorShell] = [:]
+    let anchorMinLength = 16
     var totalStops = 0
     var totalCompletions = 0
     var settingsDone = 0
@@ -621,7 +627,19 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
     /// be worth reading anyway.
     let physicalCap = 5_000
     let overlong = chosen.filter { $0.1.edgeCount > welchmanMaxEdges }
-    let runnable = chosen.filter { $0.1.edgeCount <= welchmanMaxEdges }
+    let runnableRaw = chosen.filter { $0.1.edgeCount <= welchmanMaxEdges }
+    // Confirm mode: every unicity-safe menu before any short challenger, so the
+    // locked-anchor set is complete before challengers run.
+    let runnable: [(Int, BombeMenu)]
+    if config.confirmMenus > 1 {
+        let anchors = runnableRaw.filter { $0.1.crib.count >= anchorMinLength }
+        let challengers = runnableRaw.filter { $0.1.crib.count < anchorMinLength }
+        runnable = anchors + challengers
+        print("confirm mode: \(anchors.count) anchor menus (≥\(anchorMinLength)), "
+            + "\(challengers.count) short challengers (host re-test of locked shells only)")
+    } else {
+        runnable = runnableRaw
+    }
     if !overlong.isEmpty {
         print("WARNING: \(overlong.count) menu(s) exceed Metal edge cap "
             + "(\(welchmanMaxEdges)) and will not be tested:")
@@ -632,12 +650,13 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
         if overlong.count > 12 { print("  … \(overlong.count - 12) more") }
         print()
     }
-    // Recompute ETA against menus the GPU can actually run.
-    let runnableShells = shellsPerMenu * runnable.count
-    let etaSecondsRunnable = settingsPerMenu * Double(runnable.count) / 50e6
-    if runnable.count != chosen.count {
-        print(String(format: "runnable: %d/%d menus → ETA floor %.1f min",
-                     runnable.count, chosen.count, etaSecondsRunnable / 60))
+    // ETA covers GPU anchor work only; challengers are O(|locked shells|) on host.
+    let anchorRunnable = runnable.filter { $0.1.crib.count >= anchorMinLength || config.confirmMenus <= 1 }
+    let runnableShells = shellsPerMenu * anchorRunnable.count
+    let etaSecondsRunnable = settingsPerMenu * Double(anchorRunnable.count) / 50e6
+    if runnable.count != chosen.count || config.confirmMenus > 1 {
+        print(String(format: "runnable: %d menus (%d GPU) → ETA floor %.1f min",
+                     runnable.count, anchorRunnable.count, etaSecondsRunnable / 60))
         print()
     }
 
@@ -645,32 +664,34 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
         let originalIndex = item.0
         let menu = item.1
         let label = String(format: "[%d/%d·%d]", originalIndex, catalog.count, runIndex + 1)
+        let isChallenger = config.confirmMenus > 1 && menu.crib.count < anchorMinLength
 
-        // Stage 2 runs inline as stops drain, so only physically buildable settings are
-        // ever retained. A weak menu can stop on hundreds of thousands of settings.
         var physical: [SweepStop] = []
         var rawStops = 0
-        var inFlight: [WelchmanInFlight] = []
 
-        func drainOldest() {
-            guard let flight = inFlight.first else { return }
-            inFlight.removeFirst()
-            let survivors = engine.wait(flight)
-            let shell = flight.shell
-            let bombe = WelchmanBombe(
-                greek: shell.greek, left: shell.left, middle: shell.middle, right: shell.right,
-                reflector: shell.reflector, rings: shell.rings, maxPlugs: config.maxPlugs
-            )
-            for lane in 0..<WelchmanMetalEngine.laneCount where survivors[lane] != 0 {
-                let start = WelchmanMetalEngine.position(forLane: lane)
-                let stops = bombe.test(menu: shell.menu, start: start)
+        if isChallenger {
+            if lockedAnchors.isEmpty {
+                print(String(format: "  %@ %-44@ skipped — no locked anchor shells",
+                             label, menu.description as NSString))
+                fflush(stdout)
+                continue
+            }
+            // Host-only: re-test each locked shell against this short menu.
+            for anchor in lockedAnchors.values {
+                let bombe = WelchmanBombe(
+                    greek: anchor.greek, left: anchor.left,
+                    middle: anchor.middle, right: anchor.right,
+                    reflector: anchor.reflector, rings: anchor.rings,
+                    maxPlugs: config.maxPlugs
+                )
+                let stops = bombe.test(menu: menu, start: anchor.positions)
                 rawStops += stops.count
                 for stop in stops {
                     let sweepStop = SweepStop(
-                        ukw: shell.ukwName, greek: shell.greekName,
-                        wheelOrder: shell.wheelOrder,
-                        menu: shell.menu,
-                        rings: shell.rings,
+                        ukw: anchor.ukwName, greek: anchor.greekName,
+                        wheelOrder: anchor.wheelOrder,
+                        menu: menu,
+                        rings: anchor.rings,
                         stop: stop,
                         ciphertext: set.ciphertext
                     )
@@ -678,43 +699,86 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
                         for: sweepStop, maxPlugs: config.maxPlugs
                     ).isEmpty else { continue }
                     if physical.count < physicalCap { physical.append(sweepStop) }
-                    if config.confirmMenus > 1 { agreements.insert(sweepStop) }
+                    agreements.insert(sweepStop)
                 }
             }
-            engine.release(flight)
-            settingsDone += WelchmanMetalEngine.laneCount
-            shellsDone += 1
-        }
+            settingsDone += lockedAnchors.count
+        } else {
+            // Full GPU sweep for unicity-safe anchors (and for confirm=1 runs).
+            var inFlight: [WelchmanInFlight] = []
 
-        for (ukwName, reflector) in reflectors {
-            for (greekName, greek) in greeks {
-                for rings in ringVariants {
-                    for order in config.wheelOrders {
-                        while inFlight.count >= engine.depth {
-                            drainOldest()
-                        }
-                        let shell = WelchmanShell(
-                            menu: menu,
-                            greek: greek, left: order.0, middle: order.1, right: order.2,
-                            reflector: reflector, rings: rings,
-                            ukwName: ukwName, greekName: greekName,
-                            wheelOrder: "\(order.0.name)-\(order.1.name)-\(order.2.name)"
+            func drainOldest() {
+                guard let flight = inFlight.first else { return }
+                inFlight.removeFirst()
+                let survivors = engine.wait(flight)
+                let shell = flight.shell
+                let bombe = WelchmanBombe(
+                    greek: shell.greek, left: shell.left, middle: shell.middle, right: shell.right,
+                    reflector: shell.reflector, rings: shell.rings, maxPlugs: config.maxPlugs
+                )
+                for lane in 0..<WelchmanMetalEngine.laneCount where survivors[lane] != 0 {
+                    let start = WelchmanMetalEngine.position(forLane: lane)
+                    let stops = bombe.test(menu: shell.menu, start: start)
+                    rawStops += stops.count
+                    for stop in stops {
+                        let sweepStop = SweepStop(
+                            ukw: shell.ukwName, greek: shell.greekName,
+                            wheelOrder: shell.wheelOrder,
+                            menu: shell.menu,
+                            rings: shell.rings,
+                            stop: stop,
+                            ciphertext: set.ciphertext
                         )
-                        if let flight = engine.enqueue(shell: shell) {
-                            inFlight.append(flight)
+                        guard !PostBombeDiscriminator.completions(
+                            for: sweepStop, maxPlugs: config.maxPlugs
+                        ).isEmpty else { continue }
+                        if physical.count < physicalCap { physical.append(sweepStop) }
+                        lockedAnchors[sweepStop.shellID] = LockedAnchorShell(
+                            ukwName: shell.ukwName, greekName: shell.greekName,
+                            wheelOrder: shell.wheelOrder,
+                            greek: shell.greek, left: shell.left,
+                            middle: shell.middle, right: shell.right,
+                            reflector: shell.reflector, rings: shell.rings,
+                            positions: stop.positions
+                        )
+                        if config.confirmMenus > 1 { agreements.insert(sweepStop) }
+                    }
+                }
+                engine.release(flight)
+                settingsDone += WelchmanMetalEngine.laneCount
+                shellsDone += 1
+            }
+
+            for (ukwName, reflector) in reflectors {
+                for (greekName, greek) in greeks {
+                    for rings in ringVariants {
+                        for order in config.wheelOrders {
+                            while inFlight.count >= engine.depth {
+                                drainOldest()
+                            }
+                            let shell = WelchmanShell(
+                                menu: menu,
+                                greek: greek, left: order.0, middle: order.1, right: order.2,
+                                reflector: reflector, rings: rings,
+                                ukwName: ukwName, greekName: greekName,
+                                wheelOrder: "\(order.0.name)-\(order.1.name)-\(order.2.name)"
+                            )
+                            if let flight = engine.enqueue(shell: shell) {
+                                inFlight.append(flight)
+                            }
                         }
                     }
                 }
             }
-        }
-        while !inFlight.isEmpty {
-            drainOldest()
+            while !inFlight.isEmpty {
+                drainOldest()
+            }
         }
 
         totalStops += rawStops
         let elapsed = Date().timeIntervalSince(started)
         let rate = elapsed > 0 ? Double(settingsDone) / elapsed / 1e6 : 0
-        let remaining = runnableShells - shellsDone
+        let remaining = max(0, runnableShells - shellsDone)
         let eta = rate > 0
             ? Double(remaining) * Double(WelchmanMetalEngine.laneCount) / (rate * 1e6)
             : 0
@@ -755,9 +819,25 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
                      rawStops, verdict.candidates.count, best.ic, best.tailScore, progress))
         fflush(stdout)
 
+        // Solo BREAK is allowed only for cribs that clear the unicity floor (16).
+        // Shorter menus under --bombe-confirm ≥2 may clear the linguistic bar by chance
+        // (menu 627); they must wait for an independent partner on the same shell.
         if PostBombeDiscriminator.isBreak(best) {
-            breakFound = best
-            break
+            if menu.crib.count >= 16 {
+                breakFound = best
+                break
+            }
+            if config.confirmMenus > 1 {
+                print(String(format: "  %@ clears the bar at %d letters — holding for "
+                             + "≥%d-menu agreement before claiming a break",
+                             label, menu.crib.count, config.confirmMenus))
+                fflush(stdout)
+            } else {
+                print(String(format: "  %@ clears the bar at %d letters but is under "
+                             + "unicity — not claiming a break (use --bombe-confirm 2)",
+                             label, menu.crib.count))
+                fflush(stdout)
+            }
         }
     }
 
@@ -768,6 +848,9 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
                  elapsedTotal > 0 ? Double(settingsDone) / elapsedTotal / 1e6 : 0))
 
     print("survived the 10-plug sieve: \(totalCompletions)")
+    if config.confirmMenus > 1 {
+        print("locked anchor shells (≥\(anchorMinLength)): \(lockedAnchors.count)")
+    }
     if !overlong.isEmpty {
         print("skipped (edges > \(welchmanMaxEdges) Metal cap): \(overlong.count) — not tested")
     }
@@ -801,6 +884,22 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
     let confirmed = agreements.confirmed(minIndependentMenus: config.confirmMenus)
     print("confirmed shells (≥\(config.confirmMenus) independent menus): \(confirmed.count)")
     for hit in confirmed.prefix(config.reportLimit) { print(hit.report()) }
+
+    // Agreement is the only path a short crib has to a claimed break. Re-score each
+    // confirmed shell; the representative stop comes from the strongest independent menu.
+    for hit in confirmed {
+        let verdict = PostBombeDiscriminator.rank(
+            stops: [hit.representative], ciphertext: set.ciphertext, maxPlugs: config.maxPlugs
+        )
+        guard let best = verdict.candidates.first, PostBombeDiscriminator.isBreak(best) else {
+            continue
+        }
+        print()
+        print("confirmed shell also clears the linguistic bar "
+            + "(\(hit.independentCount) independent menus)")
+        PostBombeDiscriminator.announceBreak(best)
+        return
+    }
 }
 
 struct SweepStop {
@@ -870,6 +969,21 @@ struct ShellID: Hashable {
         hasher.combine(positions.0); hasher.combine(positions.1)
         hasher.combine(positions.2); hasher.combine(positions.3)
     }
+}
+
+/// Machine identity for a shell a ≥16 anchor already admitted — enough to re-test a
+/// short challenger menu on the host without another full GPU sweep.
+struct LockedAnchorShell {
+    let ukwName: String
+    let greekName: String
+    let wheelOrder: String
+    let greek: EnigmaRotorSpec
+    let left: EnigmaRotorSpec
+    let middle: EnigmaRotorSpec
+    let right: EnigmaRotorSpec
+    let reflector: [Int]
+    let rings: (Int, Int, Int, Int)
+    let positions: (Int, Int, Int, Int)
 }
 
 struct ConfirmedShell {

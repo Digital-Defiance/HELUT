@@ -28,3 +28,27 @@ ETA floor (~50M/s): 117.1 min
   [19/40·1] UUFLOTTILLEVVVUUURWODREISEC@23 edges=27 letters=19 loops=11 central=R dead at the board                       301s  53.0M/s ETA 105.4 min
   [20/40·2] UUFLOTTILLEVVVUUUFUNFDREIVI@24 edges=27 letters=18 loops=11 central=V dead at the board                       591s  54.0M/s ETA  98.5 min
   [21/40·3] UUFLOTTXYFUNFXUUUFLOTTILLEY@32 edges=27 letters=19 loops=11 central=L dead at the board                       947s  50.6M/s ETA  99.9 min
+  [22/40·4] VXUUUFLOTTILLEHACHRXFXDXUUUX@0 edges=28 letters=20 loops=9 central=U dead at the board                      1372s  46.5M/s ETA 102.9 min
+  [23/40·5] XKOMMANDADXUUUBOOTEYFXDXUUUY@0 edges=28 letters=21 loops=8 central=U dead at the board                      1857s  43.0M/s ETA 105.3 min
+  [24/40·6] YKOMMANDADXUUUBOOTEYFXDXUUUY@0 edges=28 letters=21 loops=8 central=U dead at the board                      2335s  41.0M/s ETA 103.8 min
+  [25/40·7] TEUUUFFLOTTILLEANANUUUZWOFUE@0 edges=28 letters=21 loops=8 central=U dead at the board                      2685s  41.6M/s ETA  95.9 min
+  [26/40·8] XKOMMANDADXUUUBOOTEYFXDXUUU@0 edges=27 letters=21 loops=8 central=U dead at the board                      3159s  40.4M/s ETA  92.1 min
+  [27/40·9] YKOMMANDADXUUUBOOTEYFXDXUUU@0 edges=27 letters=21 loops=8 central=U dead at the board                      3619s  39.7M/s ETA  87.1 min
+  [28/40·10] YXXKOMMANDADXUUUBOOTEGKDOSV@0 edges=27 letters=20 loops=8 central=O dead at the board                      4000s  39.9M/s ETA  80.0 min
+  [29/40·11] FXUUUFLOTTILLEXEINSKKTTTFFF@0 edges=27 letters=20 loops=8 central=T dead at the board                      4342s  40.5M/s ETA  72.4 min
+  [30/40·12] VXUUUFLOTTILLEHACHRXFXDXUUU@0 edges=27 letters=20 loops=8 central=U dead at the board                      4752s  40.3M/s ETA  66.0 min
+  [31/40·13] YXKOMXADMXUUUBOOTEYFXDXUUU@0 edges=26 letters=20 loops=8 central=U dead at the board                      5046s  41.1M/s ETA  58.2 min
+  [32/40·14] YXXKOMXADMXUUUBOOTEGKDOSVX@0 edges=26 letters=19 loops=8 central=X dead at the board                      5358s  41.7M/s ETA  51.0 min
+  [33/40·15] YXXKOMXADMXUUUBOOTEGKDOSVY@0 edges=26 letters=19 loops=8 central=O dead at the board                      5683s  42.1M/s ETA  44.2 min
+  [34/40·16] XYKOMXADMXUUUBOOTEYFXDXUUU@0 edges=26 letters=20 loops=8 central=U dead at the board                      5982s  42.7M/s ETA  37.4 min
+  [35/40·17] UUUVIRSIBENNULEINSANANEIYY@0 edges=26 letters=20 loops=8 central=E dead at the board                      6308s  43.0M/s ETA  30.9 min
+  [36/40·18] UUUVIRSIBENNULEINSYNACHRYY@0 edges=26 letters=20 loops=8 central=S dead at the board                      6631s  43.3M/s ETA  24.6 min
+  [37/40·19] YYKOMXADMXUUUBOOTEYFXDXUUU@0 edges=26 letters=20 loops=8 central=U dead at the board                      6925s  43.8M/s ETA  18.2 min
+  [38/40·20] UUUVIRSIEENNULEINSANANEIY@0 edges=25 letters=19 loops=8 central=E dead at the board                      7243s  44.1M/s ETA  12.1 min
+  [39/40·21] UUUVIRSIRENNULEINSANANEIY@0 edges=25 letters=19 loops=8 central=E dead at the board                      7560s  44.4M/s ETA   6.0 min
+  [40/40·22] UUUVIRSITENNULEINSANANEIY@0 edges=25 letters=19 loops=8 central=E dead at the board                      7890s  44.5M/s ETA   0.0 min
+
+total raw stops: 0 over 351308525568 settings (44.5M/s mean)
+survived the 10-plug sieve: 0
+no setting survived — every runnable menu contradicted everywhere it was tried
+

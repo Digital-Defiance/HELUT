@@ -1,0 +1,201 @@
+{
+  "target": "P1030680",
+  "ciphertext": "JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF",
+  "note": "UEBUNG arm2 body anchors only (\u226516 @ offsets 10\u201320). Ring-sweep after AAAA all-dead.",
+  "cribs": [
+    {
+      "text": "ANANFUNFUUUFLOTTXNULEINSZWONULBEIROTNULS",
+      "messages": 0,
+      "offsets": [
+        15,
+        18
+      ],
+      "anchored": false
+    },
+    {
+      "text": "ANFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIB",
+      "messages": 0,
+      "offsets": [
+        17,
+        20
+      ],
+      "anchored": false
+    },
+    {
+      "text": "AUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIROT",
+      "messages": 0,
+      "offsets": [
+        11,
+        18
+      ],
+      "anchored": false
+    },
+    {
+      "text": "FLOTTXNULEINSZWONULBEIROTNULSIBENGEANKER",
+      "messages": 0,
+      "offsets": [
+        10,
+        12,
+        14
+      ],
+      "anchored": false
+    },
+    {
+      "text": "FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN",
+      "messages": 0,
+      "offsets": [
+        19
+      ],
+      "anchored": false
+    },
+    {
+      "text": "FUUUFLOTTXNULEINSZWONULBEIROTNULSIBENGEA",
+      "messages": 0,
+      "offsets": [
+        10
+      ],
+      "anchored": false
+    },
+    {
+      "text": "KANANFUNFUUUFLOTTXNULEINSZWONULBEIROTNUL",
+      "messages": 0,
+      "offsets": [
+        14,
+        17
+      ],
+      "anchored": false
+    },
+    {
+      "text": "KKANANFUNFUUUFLOTTXNULEINSZWONULBEIROTNU",
+      "messages": 0,
+      "offsets": [
+        13,
+        20
+      ],
+      "anchored": false
+    },
+    {
+      "text": "LAUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIRO",
+      "messages": 0,
+      "offsets": [
+        10,
+        17
+      ],
+      "anchored": false
+    },
+    {
+      "text": "LEINSZWONULBEIROTNULSIBENGEANKERTXZUMWEI",
+      "messages": 0,
+      "offsets": [
+        10
+      ],
+      "anchored": false
+    },
+    {
+      "text": "LOTTXNULEINSZWONULBEIROTNULSIBENGEANKERT",
+      "messages": 0,
+      "offsets": [
+        11,
+        13,
+        15
+      ],
+      "anchored": false
+    },
+    {
+      "text": "NANFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSI",
+      "messages": 0,
+      "offsets": [
+        16,
+        19
+      ],
+      "anchored": false
+    },
+    {
+      "text": "NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE",
+      "messages": 0,
+      "offsets": [
+        18
+      ],
+      "anchored": false
+    },
+    {
+      "text": "NSZWONULBEIROTNULSIBENGEANKERTXZUMWEITER",
+      "messages": 0,
+      "offsets": [
+        10
+      ],
+      "anchored": false
+    },
+    {
+      "text": "OTTXNULEINSZWONULBEIROTNULSIBENGEANKERTX",
+      "messages": 0,
+      "offsets": [
+        12,
+        14
+      ],
+      "anchored": false
+    },
+    {
+      "text": "TTXNULEINSZWONULBEIROTNULSIBENGEANKERTXZ",
+      "messages": 0,
+      "offsets": [
+        13,
+        15
+      ],
+      "anchored": false
+    },
+    {
+      "text": "TXNULEINSZWONULBEIROTNULSIBENGEANKERTXZU",
+      "messages": 0,
+      "offsets": [
+        14,
+        16
+      ],
+      "anchored": false
+    },
+    {
+      "text": "UFLOTTXNULEINSZWONULBEIROTNULSIBENGEANKE",
+      "messages": 0,
+      "offsets": [
+        10,
+        11,
+        13
+      ],
+      "anchored": false
+    },
+    {
+      "text": "UKKANANFUNFUUUFLOTTXNULEINSZWONULBEIROTN",
+      "messages": 0,
+      "offsets": [
+        12,
+        19
+      ],
+      "anchored": false
+    },
+    {
+      "text": "UNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENG",
+      "messages": 0,
+      "offsets": [
+        20
+      ],
+      "anchored": false
+    },
+    {
+      "text": "UUFLOTTXNULEINSZWONULBEIROTNULSIBENGEANK",
+      "messages": 0,
+      "offsets": [
+        10,
+        12
+      ],
+      "anchored": false
+    },
+    {
+      "text": "UUUFLOTTXNULEINSZWONULBEIROTNULSIBENGEAN",
+      "messages": 0,
+      "offsets": [
+        11
+      ],
+      "anchored": false
+    }
+  ]
+}
