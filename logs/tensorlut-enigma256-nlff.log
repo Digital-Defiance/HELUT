@@ -3,12 +3,12 @@ netlist: build/enigma_256_nlff_combo_netlist.json
 luts: 4
 dffs: 0
 batch: 90
-explore_gens: 120
-polish_gens: 60
+explore_gens: 80
+polish_gens: 48
 baseline_crypto: 0.000000
-explore_best_crypto: -0.723512
-explore_nonbinary: 106
-polish_gen_crypto: 0.000000
+explore_best_crypto: -0.856990
+explore_nonbinary: 87
+polish_gen_crypto: -0.004391
 final_crypto: 0.000000
 final_nonbinary: 0
 elite_fitness: 0.000000

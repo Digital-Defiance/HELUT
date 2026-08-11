@@ -8,14 +8,13 @@ cd "$ROOT"
 mkdir -p logs Fixtures
 
 RUN_TENSOR=0
-MUTATE=()
-EXTRA=()
+ARGS=(--enigma256-campaign)
 for arg in "$@"; do
   case "$arg" in
     --tensorlut) RUN_TENSOR=1 ;;
-    --mutate) MUTATE+=(--enigma256-campaign-mutate) ;;
-    --force-mutate) MUTATE+=(--enigma256-campaign-force-mutate) ;;
-    *) EXTRA+=("$arg") ;;
+    --mutate) ARGS+=(--enigma256-campaign-mutate) ;;
+    --force-mutate) ARGS+=(--enigma256-campaign-force-mutate) ;;
+    *) ARGS+=("$arg") ;;
   esac
 done
 
@@ -23,6 +22,4 @@ if [[ "$RUN_TENSOR" -eq 1 ]]; then
   ./Scripts/enigma256_tensorlut.sh
 fi
 
-swift run -c release helut --enigma256-campaign \
-  "${MUTATE[@]}" \
-  "${EXTRA[@]}"
+swift run -c release helut "${ARGS[@]}"
