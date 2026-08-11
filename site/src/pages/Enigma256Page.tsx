@@ -497,7 +497,7 @@ export function Enigma256Page() {
             <li>
               <span className="mono">RED</span>
               <span>
-                <strong>TensorLUT cones:</strong> NLFF (4 LUT6) → +<code>lfsr_next_hi</code> (8) → <strong>past NLFF</strong> offset next-state (~47 LUT6, <code>enigma_256_nlff_offset_combo.v</code>). Full BRAM flatten deferred.
+                <strong>TensorLUT cones:</strong> NLFF (4) → +<code>lfsr_next_hi</code> (8) → +offsets (~47) → <strong>scramble fragment</strong> (~106 LUT6, frozen R1/R2). Campaign <code>--wide</code>. Full BRAM flatten deferred.
               </span>
             </li>
             <li>
@@ -594,7 +594,7 @@ export function Enigma256Page() {
               <h3>Push Red past NLFF: offset next-state cone.</h3>
               <div className="prose">
                 <p>
-                  <code>enigma_256_nlff_offset_combo</code> exposes step enables plus <code>next_ri = offset_ri + step_ri</code> (~47 LUT6). Campaign <code>--wide</code> expects TensorLUT <code>blue_hold</code>. Full-core BRAM melt stays deferred.
+                  <code>enigma_256_scramble_frag_combo</code> stacks NLFF + offset next-state + a frozen two-rotor forward fragment (~106 LUT6). Campaign <code>--wide</code> expects TensorLUT <code>blue_hold</code>. Full-core BRAM melt stays deferred.
                 </p>
               </div>
             </article>

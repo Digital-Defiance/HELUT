@@ -12,6 +12,7 @@ mkdir -p logs Fixtures build
 RUN_TENSOR=0
 HARD_RED=0
 WIDE_RED=0
+WIDE_OFFSET_RED=0
 WIDE_LFSR_RED=0
 RUN_GATES=1
 ARGS=(--enigma256-campaign)
@@ -20,6 +21,7 @@ for arg in "$@"; do
     --tensorlut) RUN_TENSOR=1 ;;
     --hard-red) HARD_RED=1; RUN_TENSOR=1 ;;
     --wide) WIDE_RED=1; HARD_RED=1; RUN_TENSOR=1 ;;
+    --wide-offset) WIDE_OFFSET_RED=1; HARD_RED=1; RUN_TENSOR=1 ;;
     --wide-lfsr) WIDE_LFSR_RED=1; HARD_RED=1; RUN_TENSOR=1 ;;
     --no-gates) RUN_GATES=0 ;;
     --mutate) ARGS+=(--enigma256-campaign-mutate) ;;
@@ -49,7 +51,11 @@ if [[ "$RUN_TENSOR" -eq 1 ]]; then
     EMIT=enigma_256_tensorlut_baseline.v
     LOG=logs/tensorlut-enigma256-nlff.log
     if [[ "$WIDE_RED" -eq 1 ]]; then
-      # Past-NLFF: steps + offset next-state (+ lfsr_next_hi)
+      # Past-NLFF: scramble fragment + NLFF + offset next (+ lfsr_next_hi)
+      NETLIST=build/enigma_256_scramble_frag_combo_netlist.json
+      EMIT=build/enigma_256_scramble_frag_tensorlut.v
+      LOG=logs/tensorlut-wide-scramble-frag-g5-hard.log
+    elif [[ "$WIDE_OFFSET_RED" -eq 1 ]]; then
       NETLIST=build/enigma_256_nlff_offset_combo_netlist.json
       EMIT=build/enigma_256_nlff_offset_tensorlut.v
       LOG=logs/tensorlut-wide-offset-g5-hard.log

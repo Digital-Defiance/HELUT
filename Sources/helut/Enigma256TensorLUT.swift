@@ -148,6 +148,84 @@ func enigma256NLFFOffsetTrainingBatch(
     return (inputs, expected)
 }
 
+/// Frozen Red stand-in bijections — must match `enigma_256_scramble_frag_combo.v`.
+func enigma256FragSbox1(_ x: UInt8) -> UInt8 {
+    let a = (x &<< 3) | (x &>> 5) // rotl 3
+    let b = a &+ 0x3D
+    return (b &<< 1) | (b &>> 7) // rotl 1
+}
+
+func enigma256FragSbox2(_ x: UInt8) -> UInt8 {
+    let a = (x &<< 5) | (x &>> 3) // rotl 5
+    let b = a ^ 0xA5
+    return b &+ 0x11
+}
+
+func enigma256ScrambleFrag(
+    dataIn: UInt8,
+    offsetR1: UInt8,
+    offsetR2: UInt8
+) -> UInt8 {
+    let r1In = dataIn &+ offsetR1
+    let r1Out = enigma256FragSbox1(r1In) &- offsetR1
+    let r2In = r1Out &+ offsetR2
+    return enigma256FragSbox2(r2In) &- offsetR2
+}
+
+/// Past-offset cone: LFSR + data_in + offsets → frag_out + steps + next offsets + lfsr_next_hi.
+func enigma256ScrambleFragTrainingBatch(
+    generation: Enigma256Generation = .current,
+    extra: Enigma256NLFFExtraOut = .none
+) -> (inputs: [[Float]], expected: [[Float]]) {
+    let offsetPatterns: [(UInt8, UInt8, UInt8, UInt8)] = [
+        (0x00, 0x00, 0x00, 0x00),
+        (0xFF, 0xFF, 0xFF, 0xFF),
+        (0x01, 0x02, 0x03, 0x04),
+        (0xA5, 0x5A, 0x3C, 0xC3)
+    ]
+    let dataPatterns: [UInt8] = [0x00, 0x01, 0x7F, 0x80, 0xA5, 0xFF]
+    var inputs: [[Float]] = []
+    var expected: [[Float]] = []
+    // Subsample LFSR seeds to keep batch size tractable (~4k rows).
+    let seeds = enigma256NLFFSeedPatterns(generation: generation)
+    let stride = max(1, seeds.count / 48)
+    let thinSeeds = stride == 1 ? seeds : stride(from: 0, to: seeds.count, by: stride).map { seeds[$0] }
+    for s in thinSeeds {
+        let mask = Enigma256LFSR(seed: s).stepMask(using: generation)
+        let steps: [Bool] = [mask.0, mask.1, mask.2, mask.3]
+        for offsets in offsetPatterns {
+            for dataIn in dataPatterns {
+                var row = [Float]()
+                row.reserveCapacity(104)
+                for bit in 0 ..< 64 {
+                    row.append(Float((s >> bit) & 1))
+                }
+                enigma256AppendByteBits(&row, dataIn)
+                let offs = [offsets.0, offsets.1, offsets.2, offsets.3]
+                for o in offs {
+                    enigma256AppendByteBits(&row, o)
+                }
+                inputs.append(row)
+
+                let frag = enigma256ScrambleFrag(
+                    dataIn: dataIn,
+                    offsetR1: offsets.0,
+                    offsetR2: offsets.1
+                )
+                var out: [Float] = []
+                enigma256AppendByteBits(&out, frag)
+                out.append(contentsOf: steps.map { $0 ? Float(1) : 0 })
+                for (o, stepped) in zip(offs, steps) {
+                    enigma256AppendByteBits(&out, o &+ (stepped ? 1 : 0))
+                }
+                enigma256AppendExtraOut(&out, seed: s, extra: extra)
+                expected.append(out)
+            }
+        }
+    }
+    return (inputs, expected)
+}
+
 func runEnigma256TensorLUT() {
     _ = Enigma256Generation.bootstrapFromFixture()
     let netlistPath = stringFlag("--enigma256-netlist")
@@ -205,8 +283,42 @@ func runEnigma256TensorLUT() {
     } else {
         let lfsrNets = enigma256PortNets(module, "lfsr")
         precondition(lfsrNets.count == 64)
+        let hasScrambleFrag = module.ports["data_in"] != nil && module.ports["frag_out"] != nil
         let hasOffsetNext = module.ports["offset_r1"] != nil && module.ports["next_r1"] != nil
-        if hasOffsetNext {
+        if hasScrambleFrag {
+            let dataNets = enigma256PortNets(module, "data_in")
+            let offsetNets = enigma256PortNets(module, "offset_r1")
+                + enigma256PortNets(module, "offset_r2")
+                + enigma256PortNets(module, "offset_r3")
+                + enigma256PortNets(module, "offset_r4")
+            precondition(dataNets.count == 8 && offsetNets.count == 32)
+            inputWires = lfsrNets + dataNets + offsetNets
+            var outs = enigma256PortNets(module, "frag_out")
+                + enigma256PortNets(module, "step_r1")
+                + enigma256PortNets(module, "step_r2")
+                + enigma256PortNets(module, "step_r3")
+                + enigma256PortNets(module, "step_r4")
+                + enigma256PortNets(module, "next_r1")
+                + enigma256PortNets(module, "next_r2")
+                + enigma256PortNets(module, "next_r3")
+                + enigma256PortNets(module, "next_r4")
+            let extra: Enigma256NLFFExtraOut
+            if module.ports["lfsr_next_hi"] != nil {
+                outs += enigma256PortNets(module, "lfsr_next_hi")
+                extra = .nextHi
+            } else {
+                extra = .none
+            }
+            outputWires = outs
+            let batch = enigma256ScrambleFragTrainingBatch(extra: extra)
+            target = AdversarialTarget(
+                inputWireIDs: inputWires,
+                outputWireIDs: outputWires,
+                inputVectors: batch.inputs,
+                expectedOutputs: batch.expected,
+                clockTicks: 0
+            )
+        } else if hasOffsetNext {
             let offsetNets = enigma256PortNets(module, "offset_r1")
                 + enigma256PortNets(module, "offset_r2")
                 + enigma256PortNets(module, "offset_r3")
@@ -273,6 +385,7 @@ func runEnigma256TensorLUT() {
     case "enigma_256_nlff_combo": emitName = "enigma_256_tensorlut_baseline"
     case "enigma_256_nlff_lfsr_combo": emitName = "enigma_256_nlff_lfsr_tensorlut"
     case "enigma_256_nlff_offset_combo": emitName = "enigma_256_nlff_offset_tensorlut"
+    case "enigma_256_scramble_frag_combo": emitName = "enigma_256_scramble_frag_tensorlut"
     default: emitName = "enigma_256_step_cone_tensorlut"
     }
     let verilog = TensorLUTEmitter.emitVerilog(
