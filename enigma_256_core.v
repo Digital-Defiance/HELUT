@@ -92,10 +92,10 @@ module enigma_256_core (
     reg [7:0] offset_r1, offset_r2, offset_r3, offset_r4;
 
     // Non-linear filtering function: step enables are not raw LFSR bits.
-    wire step_r1 = (lfsr[2]  & lfsr[8])  ^ lfsr[21];
-    wire step_r2 = (lfsr[0]  & lfsr[6])  ^ lfsr[15];
-    wire step_r3 = (lfsr[3]  & lfsr[4])  ^ lfsr[12];
-    wire step_r4 = (lfsr[11]  & lfsr[17])  ^ lfsr[23];
+        wire step_r1 = (lfsr[46] & lfsr[49]) ^ lfsr[55];
+    wire step_r2 = (lfsr[36] & lfsr[39]) ^ lfsr[41];
+    wire step_r3 = (lfsr[50] & lfsr[54]) ^ lfsr[60];
+    wire step_r4 = (lfsr[44] & lfsr[52]) ^ lfsr[56];
 
     // =========================================================================
     // 3. CRYPTOGRAPHIC DATAPATH (combinational; sampled with valid_in)
