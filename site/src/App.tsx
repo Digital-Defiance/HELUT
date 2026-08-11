@@ -28,7 +28,7 @@ function Nav() {
               <NavLink to="/journal">Turing Complete</NavLink>
             </li>
             <li>
-              <NavLink to="/enigma-256">Enigma 256</NavLink>
+              <NavLink to="/e256">E256</NavLink>
             </li>
             <li>
               <a
@@ -69,6 +69,7 @@ export default function App() {
         <Route path="/stack" element={<StackPage />} />
         <Route path="/apps" element={<AppsPage />} />
         <Route path="/enigma" element={<EnigmaPage />} />
+        <Route path="/e256" element={<Enigma256Page />} />
         <Route path="/enigma-256" element={<Enigma256Page />} />
         <Route path="/journal" element={<JournalPage />} />
       </Routes>

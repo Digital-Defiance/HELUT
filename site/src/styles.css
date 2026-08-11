@@ -645,6 +645,77 @@ section.band-ink code {
   .status-strip {
     grid-template-columns: repeat(3, 1fr);
   }
+  .status-strip-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.arch-figure {
+  margin: 1.75rem 0 0;
+}
+
+.arch-figure figcaption {
+  margin-top: 0.85rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.arch-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.arch-svg .arch-label {
+  fill: #9ee0da;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.arch-svg .arch-label-light {
+  fill: #f0c49a;
+}
+
+.arch-svg .arch-label-dark {
+  fill: var(--ink);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.arch-svg .arch-box {
+  fill: #e8ecef;
+  font-family: Fraunces, Georgia, serif;
+  font-size: 16px;
+}
+
+.arch-svg .arch-sub {
+  fill: rgba(232, 236, 239, 0.72);
+  font-family: Outfit, sans-serif;
+  font-size: 12px;
+}
+
+.arch-svg .arch-flow {
+  fill: var(--muted);
+  font-family: Outfit, sans-serif;
+  font-size: 12px;
+}
+
+.arch-svg .arch-path {
+  fill: var(--ink);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 12px;
+}
+
+.arch-svg .arch-path-note {
+  fill: var(--ink-soft);
+  font-family: Outfit, sans-serif;
+  font-size: 12px;
 }
 
 .stat {

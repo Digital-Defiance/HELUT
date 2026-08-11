@@ -18,13 +18,13 @@ export function Enigma256Page() {
             </p>
           </div>
 
-          <div className="status-strip">
+          <div className="status-strip status-strip-4">
             <div className="stat">
-              <div className="label">Alphabet</div>
-              <div className="value">Base-256 bytes</div>
+              <div className="label">Live field</div>
+              <div className="value">Gen 5 · SoftBus</div>
             </div>
             <div className="stat">
-              <div className="label">KDF</div>
+              <div className="label">KDF / AEAD</div>
               <div className="value">HKDF-SHA512</div>
             </div>
             <div className="stat">
@@ -32,10 +32,104 @@ export function Enigma256Page() {
               <div className="value">X25519 ‖ ML-KEM</div>
             </div>
             <div className="stat">
-              <div className="label">Datapath</div>
-              <div className="value">enigma_256_core.v</div>
+              <div className="label">Red surface</div>
+              <div className="value">Past NLFF</div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="band">
+        <div className="shell">
+          <div className="section-head">
+            <div className="kicker">Architecture</div>
+            <h2>Three planes on one Mac</h2>
+            <p>
+              Control plane never enters BRAM. Data plane is SoftBus ↔ <code>enigma_256_core</code>. Red melts synthesizable cones and grades SoftBus oracles; Blue rolls genes only under pressure.
+            </p>
+          </div>
+
+          <figure className="arch-figure" aria-label="E256 architecture diagram">
+            <svg viewBox="0 0 920 520" role="img" className="arch-svg">
+              <title>E256 control plane, data plane, and Red/Blue field</title>
+              <defs>
+                <linearGradient id="archCp" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="#0f3034" />
+                  <stop offset="100%" stopColor="#1f6f6a" />
+                </linearGradient>
+                <linearGradient id="archDp" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#2a374e" />
+                  <stop offset="100%" stopColor="#0d1322" />
+                </linearGradient>
+                <linearGradient id="archRed" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stopColor="#a86227" />
+                  <stop offset="100%" stopColor="#d4833f" />
+                </linearGradient>
+              </defs>
+
+              {/* Control plane */}
+              <rect x="24" y="24" width="872" height="118" rx="4" fill="url(#archCp)" />
+              <text x="44" y="52" className="arch-label">Control plane · Swift / CryptoKit</text>
+              <rect x="44" y="68" width="190" height="52" rx="2" fill="rgba(255,255,255,0.08)" stroke="rgba(158,224,218,0.35)" />
+              <text x="54" y="90" className="arch-box">Handshake</text>
+              <text x="54" y="108" className="arch-sub">X25519 ‖ ML-KEM · Ed25519</text>
+              <path d="M240 94 H268" stroke="#9ee0da" strokeWidth="1.5" markerEnd="url(#archArrow)" />
+              <rect x="274" y="68" width="170" height="52" rx="2" fill="rgba(255,255,255,0.08)" stroke="rgba(158,224,218,0.35)" />
+              <text x="284" y="90" className="arch-box">HKDF-SHA512</text>
+              <text x="284" y="108" className="arch-sub">day · msg · mac</text>
+              <path d="M450 94 H478" stroke="#9ee0da" strokeWidth="1.5" />
+              <rect x="484" y="68" width="170" height="52" rx="2" fill="rgba(255,255,255,0.08)" stroke="rgba(158,224,218,0.35)" />
+              <text x="494" y="90" className="arch-box">AEAD + nonce</text>
+              <text x="494" y="108" className="arch-sub">HMAC-SHA512 · counter</text>
+              <path d="M660 94 H688" stroke="#9ee0da" strokeWidth="1.5" />
+              <rect x="694" y="68" width="178" height="52" rx="2" fill="rgba(255,255,255,0.08)" stroke="rgba(158,224,218,0.35)" />
+              <text x="704" y="90" className="arch-box">E2W1 · TCP</text>
+              <text x="704" y="108" className="arch-sub">verify before fabric</text>
+
+              {/* Arrow control → data */}
+              <path d="M360 142 V168" stroke="var(--ink-soft, #2a374e)" strokeWidth="1.5" strokeDasharray="4 3" />
+              <text x="372" y="162" className="arch-flow">day + message key · tables</text>
+
+              {/* Data plane */}
+              <rect x="24" y="172" width="560" height="180" rx="4" fill="url(#archDp)" />
+              <text x="44" y="200" className="arch-label arch-label-light">Data plane · SoftBus ↔ enigma_256_core</text>
+              <rect x="44" y="220" width="150" height="100" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(212,131,63,0.45)" />
+              <text x="54" y="248" className="arch-box">Burst load</text>
+              <text x="54" y="268" className="arch-sub">10×256 BRAM</text>
+              <text x="54" y="286" className="arch-sub">AXIS / SoftBus</text>
+              <text x="54" y="304" className="arch-sub">CTRL[1] arm</text>
+              <path d="M200 270 H228" stroke="#d4833f" strokeWidth="1.5" />
+              <rect x="234" y="220" width="200" height="100" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(212,131,63,0.45)" />
+              <text x="244" y="248" className="arch-box">Core stream</text>
+              <text x="244" y="268" className="arch-sub">plug → R1…R4 → UKW</text>
+              <text x="244" y="286" className="arch-sub">→ rev → plug</text>
+              <text x="244" y="304" className="arch-sub">scramble then NLFF step</text>
+              <path d="M440 270 H468" stroke="#d4833f" strokeWidth="1.5" />
+              <rect x="474" y="220" width="90" height="100" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(212,131,63,0.45)" />
+              <text x="486" y="262" className="arch-box">CT</text>
+              <text x="482" y="284" className="arch-sub">DATA_OUT</text>
+
+              {/* Red / Blue */}
+              <rect x="604" y="172" width="292" height="180" rx="4" fill="url(#archRed)" />
+              <text x="624" y="200" className="arch-label">Red / Blue field</text>
+              <text x="624" y="228" className="arch-box">ent · SoftBus KPA</text>
+              <text x="624" y="252" className="arch-box">TensorLUT cones</text>
+              <text x="624" y="276" className="arch-sub">NLFF → +lfsr_hi → +offsets</text>
+              <text x="624" y="300" className="arch-sub">gen 5 genes · campaign gates</text>
+              <text x="624" y="324" className="arch-sub">mutate only under pressure</text>
+
+              {/* Byte path strip */}
+              <rect x="24" y="372" width="872" height="124" rx="4" fill="#e8ecef" stroke="rgba(13,19,34,0.12)" />
+              <text x="44" y="400" className="arch-label-dark">Reciprocal byte path</text>
+              <text x="44" y="430" className="arch-path">PT → plug → R1±off → R2±off → R3±off → R4±off → un-reflector → rev path → plug → CT</text>
+              <text x="44" y="458" className="arch-path-note">Un-reflector allows fixed points · encrypt ≡ decrypt · gen 5 cubic6 NLFF clocks all four offsets</text>
+              <text x="44" y="482" className="arch-path-note">Full-core BRAM melt deferred · past-NLFF offset cone (~47 LUT6) is the live Red surface</text>
+            </svg>
+            <figcaption>
+              SoftBus is the field fabric. Spec detail and mermaid sources live in{' '}
+              <a href="https://github.com/Digital-Defiance/HELUT/blob/main/Enigma256.md">Enigma256.md</a>.
+            </figcaption>
+          </figure>
         </div>
       </section>
 
@@ -134,7 +228,7 @@ export function Enigma256Page() {
                   Historical rotors step like a mileage counter. On a 72-letter Thetis message the Greek wheel never turns; the left rotor’s notch drives nothing. That mechanical truth is why my engine pins those drums and why ring-AAAA and right-ring sweeps are even affordable.
                 </p>
                 <p>
-                  E256 clocks a 64-bit Galois LFSR (primitive taps 64, 63, 61, 60 → feedback <code>0xD800_0000_0000_0000</code>) on every byte. Step enables are <strong>not</strong> raw LFSR bits—they pass a non-linear fold <code>(bit_a &amp; bit_b) ^ bit_c</code> so observable rotor motion does not hand Berlekamp–Massey a linear system. All wheels can move every symbol; static-left assumptions die.
+                  E256 clocks a 64-bit Galois LFSR (primitive taps 64, 63, 61, 60 → feedback <code>0xD800_0000_0000_0000</code>) on every byte. Step enables are <strong>not</strong> raw LFSR bits—live gen 5 uses bred <strong>cubic6</strong> six-tap folds so observable rotor motion does not hand Berlekamp–Massey a linear system. All wheels can move every symbol; static-left assumptions die.
                 </p>
               </div>
             </article>
@@ -170,10 +264,10 @@ export function Enigma256Page() {
               <h3>Evolve the cipher against the same engines that hunt M4.</h3>
               <div className="prose">
                 <p>
-                  HELUT already breeds alien netlists, melts LUT INIT tables, and scores stecker involutions. That Red Team is the continuous adversary on this Mac: SoftBus KPA and TensorLUT against the current E256 generation. If pressure crosses threshold, Blue mutates NLFF folds and HKDF generation labels via <code>--enigma256-campaign-mutate</code>.
+                  HELUT already breeds alien netlists, melts LUT INIT tables, and scores stecker involutions. That Red Team is the continuous adversary on this Mac: SoftBus KPA, fail-closed <code>ent</code>, and TensorLUT against expanding cones (NLFF → offsets). If pressure crosses threshold, Blue mutates NLFF folds and HKDF generation labels via <code>--enigma256-campaign-mutate</code>.
                 </p>
                 <p>
-                  Boundary rule: TensorLUT melts the NLFF cone on purpose; full-core BRAM soft-map stays deferred. SoftBus is the field fabric—the cipher does not wait for a Zynq.
+                  Boundary rule: past-NLFF offset cone is fair game; full-core BRAM soft-map stays deferred. SoftBus is the field fabric—the cipher does not wait for a Zynq.
                 </p>
               </div>
             </article>
@@ -218,13 +312,19 @@ export function Enigma256Page() {
             <li>
               <span className="mono">RED</span>
               <span>
-                <strong>TensorLUT:</strong> NLFF combo → 4 LUT6 baseline (<code>enigma_256_tensorlut_baseline.v</code>). Cold-start smoke in <code>logs/tensorlut-enigma256-nlff.log</code>. Full BRAM flatten deferred.
+                <strong>TensorLUT cones:</strong> NLFF (4 LUT6) → +<code>lfsr_next_hi</code> (8) → <strong>past NLFF</strong> offset next-state (~47 LUT6, <code>enigma_256_nlff_offset_combo.v</code>). Full BRAM flatten deferred.
+              </span>
+            </li>
+            <li>
+              <span className="mono">GATE</span>
+              <span>
+                <strong>Fail-closed:</strong> SoftBus <code>ent</code> (PRNG PT) + structured KPA (partial leak + day-only joint). Campaign default; <code>--no-gates</code> to skip.
               </span>
             </li>
             <li>
               <span className="mono">RB</span>
               <span>
-                <strong>Campaign:</strong> <code>--enigma256-campaign</code> / <code>Scripts/enigma256_rb_campaign.sh</code> — SoftBus KPA + TensorLUT ledger; Blue rolls <code>Enigma256Generation</code> under pressure.
+                <strong>Campaign:</strong> <code>Scripts/enigma256_rb_campaign.sh</code> — gates, SoftBus KPA ledger, <code>--hard-red</code> / <code>--wide</code> (offset cone) with TensorLUT <code>expect-hold</code>.
               </span>
             </li>
             <li>
@@ -296,10 +396,20 @@ export function Enigma256Page() {
 
             <article className="tl-item">
               <div className="when">5 — Live</div>
-              <h3>Red/Blue on Apple Silicon SoftBus.</h3>
+              <h3>Gen 5 SoftBus field with fail-closed gates.</h3>
               <div className="prose">
                 <p>
-                  Field fabric is SoftBus on this device. <code>--enigma256-campaign</code> scores SoftBus KPA and TensorLUT; under pressure Blue rolls <code>Enigma256Generation</code> (NLFF folds + HKDF labels) and rewrites the NLFF Verilog cones. No Zynq on the critical path.
+                  Balanced cubic6 genes; <code>ent</code> + structured KPA gate every campaign; gen-5 Red battery holds. No Zynq on the critical path.
+                </p>
+              </div>
+            </article>
+
+            <article className="tl-item">
+              <div className="when">6 — Live</div>
+              <h3>Push Red past NLFF: offset next-state cone.</h3>
+              <div className="prose">
+                <p>
+                  <code>enigma_256_nlff_offset_combo</code> exposes step enables plus <code>next_ri = offset_ri + step_ri</code> (~47 LUT6). Campaign <code>--wide</code> expects TensorLUT <code>blue_hold</code>. Full-core BRAM melt stays deferred.
                 </p>
               </div>
             </article>
