@@ -227,7 +227,8 @@ flowchart LR
 |------|--------|------:|---------|
 | NLFF | `enigma_256_nlff_combo` | 4 | Step enables only |
 | + LFSR hi | `enigma_256_nlff_lfsr_combo` | 8 | + `lfsr_next[63:56]` |
-| **Past NLFF** | `enigma_256_nlff_offset_combo` | ~47 | + `next_ri = offset_ri + step_ri` |
+| + offsets | `enigma_256_nlff_offset_combo` | ~47 | + `next_ri = offset_ri + step_ri` |
+| **Past NLFF** | `enigma_256_scramble_frag_combo` | denser | + frozen R1/R2 scramble fragment |
 | Full core | `enigma_256_core` | — | **Deferred** (BRAM melt) |
 
 ## 7. Deployment field (Apple Silicon)
@@ -243,7 +244,7 @@ flowchart LR
 - **AXI / SoftBus:** Lite + AXIS table burst (`enigma_256_axis_tables.v`); SoftBus burst + jitter. Co-sim: `Scripts/enigma256_axi_sim.sh`.
 - **Handshake / wire / TCP / PSK:** hybrid default on macOS 26+; `--enigma256-classical` / `--enigma256-passphrase`.
 - **Live genes:** gen **5** balanced cubic6.
-- **Campaign:** `Scripts/enigma256_rb_campaign.sh` — fail-closes on SoftBus `ent` + structured KPA (`--no-gates` to skip). `--hard-red` NLFF; `--wide` **offset cone** (past NLFF); `--wide-lfsr` NLFF+`lfsr_next_hi`. Battery: `Scripts/enigma256_red_battery.sh`.
+- **Campaign:** `Scripts/enigma256_rb_campaign.sh` — fail-closes on SoftBus `ent` + structured KPA (`--no-gates` to skip). `--hard-red` NLFF; `--wide` **scramble-fragment** cone (past NLFF); `--wide-offset` / `--wide-lfsr` for intermediate cones. Battery: `Scripts/enigma256_red_battery.sh`.
 - **Ent:** PRNG plaintext (`Scripts/enigma256_ent.sh`). Zero-PT is diagnostic only (un-reflector FP bias).
 
 ## 9. Protocol gap closure

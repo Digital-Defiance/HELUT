@@ -687,7 +687,8 @@ func runEnigma256Campaign() {
                 "enigma_256_core.v",
                 "enigma_256_step_cone.v",
                 "enigma_256_nlff_lfsr_combo.v",
-                "enigma_256_nlff_offset_combo.v"
+                "enigma_256_nlff_offset_combo.v",
+                "enigma_256_scramble_frag_combo.v"
             ] {
                 let src = try String(contentsOfFile: path, encoding: .utf8)
                 try nextGen.rewritingNLFF(in: src).write(toFile: path, atomically: true, encoding: .utf8)

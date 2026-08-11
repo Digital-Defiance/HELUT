@@ -1,0 +1,28 @@
+BLUE hold: squeeze failed (crypto -12120.0, nb 0)
+Enigma 256 TensorLUT
+  module: enigma_256_scramble_frag_combo
+  LUTs: 106  DFFs: 0  wires: 212
+  baseline → build/enigma_256_scramble_frag_tensorlut.v
+# TensorLUT Red Team — enigma_256_scramble_frag_combo
+generation: 5
+formula: cubic6
+netlist: build/enigma_256_scramble_frag_combo_netlist.json
+luts: 106
+dffs: 0
+batch: 3815
+explore_gens: 240
+polish_gens: 160
+pop: 64
+polish_lambda: 0.0
+explore_seed: 14833185
+baseline_crypto: 0.000000
+explore_best_crypto: -23564.687500
+explore_nonbinary: 2997
+polish_gen_crypto: -12713.075195
+final_crypto: -12120.000000
+final_nonbinary: 0
+elite_fitness: -12120.000000
+squeeze_survived: false
+verdict: blue_hold
+note: explore λ=0; polish λ=0.0. squeeze_survived=false is a Blue hold.
+  log → logs/tensorlut-wide-scramble-frag-g5-hard.log
