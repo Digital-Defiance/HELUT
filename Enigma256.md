@@ -53,32 +53,33 @@ Swift oracle (`Enigma256LFSR.stepMask`) and `enigma_256_core.v` agree. Scramble-
 
 ## 6. Evolutionary Hardware & Polymorphic Adversarial Loops
 
-- **Red Team (HELUT):** Homomorphic Edge Look-Up Tensor engines breed alien netlists against the current generation.
-- **Blue Team:** Monitors time-to-crack; mutates LFSR / pool generation and rolls updates to field fabric.
+- **Red Team (HELUT):** Homomorphic Edge Look-Up Tensor engines breed alien netlists against the current generation on **Apple Silicon** (SoftBus + Yosys/TensorLUT).
+- **Blue Team:** Monitors time-to-crack; mutates NLFF folds / HKDF generation labels and rolls updates into SoftBus + the Verilog NLFF cones (`--enigma256-campaign`).
 
-### 7. Commodity Silicon Deployment (COTS)
+### 7. Deployment field (Apple Silicon)
 
-#### 7.1 Hardware Agnosticism
+#### 7.1 No board required
 
-COTS SoCs with CPU (PS) + programmable logic (PL). No custom ASIC.
+The live field is this Mac: SoftBus stands in for AXI/AXIS fabric; iverilog co-sim and Yosys/TensorLUT are the Red harness. A future COTS PL board is optional and **not** on the critical path.
 
 #### 7.2 The Hardware/Software Boundary
 
 - **Control Plane:** Hybrid KEM / ECDH, Ed25519, PBKDF2, HKDF-SHA512, AEAD, nonce guard, `E2W1` wire, TCP.
-- **Data Plane:** `enigma_256_core` BRAM + NLFF LFSR stream. Tables load via **AXI4-Stream burst** (`enigma_256_axis_tables.v`, 2,560 bytes) or legacy AXI-Lite beats. Optional **stream jitter** (`SCA_CTRL`) disrupts DPA trace alignment; full dual-rail / masked LUTs remain a high-assurance synthesis option.
+- **Data Plane:** `enigma_256_core` BRAM + NLFF LFSR stream, exercised via **SoftBus** (and AXIS co-sim). Optional **stream jitter** (`SCA_CTRL`); dual-rail / masked LUTs remain a high-assurance synthesis option.
 
-#### 7.3 Decentralized Field Upgrades
+#### 7.3 Generation rolls
 
-Mutation parameters ship as software; nodes recompile and flash local fabric.
+Mutation parameters live in `Fixtures/enigma256_generation.json`. Blue rolls rewrite SoftBus genes and `enigma_256_nlff_combo.v` / core / step-cone NLFF lines; Red re-scores with TensorLUT + SoftBus KPA.
 
 ## 8. Implementation Status & TensorLUT Boundary
 
-- **Oracle / core:** `Enigma256.swift` ↔ `enigma_256_core.v` (NLFF stepping). Golden co-sim: `Scripts/enigma256_sim.sh`.
+- **Oracle / core:** `Enigma256.swift` ↔ `enigma_256_core.v` (NLFF stepping via `Enigma256Generation`). Golden co-sim: `Scripts/enigma256_sim.sh`.
 - **Session / AEAD:** `Enigma256Context`, `Enigma256AEAD`, `Enigma256ProtectedSession`; `E256` ver=2 containers.
 - **AXI:** Lite + **AXIS table burst** (`enigma_256_axis_tables.v` wired into `enigma_256_axi.v`; CTRL[1] arms). SoftBus burst + jitter. Co-sim: `Scripts/enigma256_axi_sim.sh` (default AXIS; `LITE=1` legacy).
 - **Handshake:** X25519, hybrid ML-KEM / X-Wing, Ed25519-signed hybrid wire frames.
 - **Wire / TCP / PSK:** `Enigma256Wire` (AEAD DATA). TCP default = **hybrid+AEAD** on macOS 26+ (`--enigma256-classical` for X25519-only; `--enigma256-passphrase` for PSK). Identity `--enigma256-identity` / `--enigma256-identity-out`; trust `--enigma256-trust`.
-- **Yosys / TensorLUT:** FPGA path keeps BRAMs (`Scripts/enigma256_synth.sh`). Red Team NLFF cone (`Scripts/enigma256_tensorlut.sh`): baseline crypto 0; λ=0 explore + discrete polish recovers binary elite (`squeeze_survived: true` in `logs/tensorlut-enigma256-nlff.log`). Full-core BRAM soft-map deferred.
+- **Yosys / TensorLUT:** FPGA-style synth keeps BRAMs (`Scripts/enigma256_synth.sh`). Red Team NLFF cone (`Scripts/enigma256_tensorlut.sh`): baseline crypto 0; λ=0 explore + discrete polish recovers binary elite (`squeeze_survived: true` in `logs/tensorlut-enigma256-nlff.log`). Full-core BRAM soft-map deferred.
+- **Red/Blue campaign:** `Scripts/enigma256_rb_campaign.sh` / `--enigma256-campaign` — SoftBus KPA + TensorLUT ledger; `--enigma256-campaign-mutate` rolls genes under pressure.
 - **Red Team hold (updated):** Golden + AXI AXIS co-sim pass; TensorLUT is pointed at the NLFF cone on purpose — not a premature full-core melt.
 
 ## 9. Protocol gap closure

@@ -62,7 +62,8 @@ let positionalArgs: [String] = {
         "--enigma256-netlist", "--enigma256-emit-out", "--enigma256-tensorlut-log",
         "--enigma256-tensorlut-gens", "--enigma256-tensorlut-pop", "--enigma256-tensorlut-polish",
         "--enigma256-identity", "--enigma256-identity-out",
-        "--enigma256-trust", "--enigma256-trust-file"
+        "--enigma256-trust", "--enigma256-trust-file",
+        "--enigma256-genes", "--enigma256-campaign-log", "--enigma256-campaign-trials"
     ]
     while index < args.count {
         let arg = args[index]
@@ -112,6 +113,11 @@ if CommandLine.arguments.contains("--enigma256-connect") {
 
 if CommandLine.arguments.contains("--enigma256-tensorlut") {
     runEnigma256TensorLUT()
+    exit(0)
+}
+
+if CommandLine.arguments.contains("--enigma256-campaign") {
+    runEnigma256Campaign()
     exit(0)
 }
 

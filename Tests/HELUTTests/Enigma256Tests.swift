@@ -1,7 +1,20 @@
 import XCTest
 @testable import HELUTCore
 
+private struct Enigma256TestRNG: RandomNumberGenerator {
+    private var state: UInt64
+    init(seed: UInt64) { self.state = seed == 0 ? 1 : seed }
+    mutating func next() -> UInt64 {
+        state = state &* 0x5851_F42D_4C95_7F2D &+ 1
+        return state
+    }
+}
+
 final class Enigma256Tests: XCTestCase {
+    override func setUp() {
+        super.setUp()
+        Enigma256Generation.current = .gen0
+    }
 
     func testLFSRMatchesVerilogFeedback() {
         var lfsr = Enigma256LFSR(seed: 1)
@@ -403,6 +416,17 @@ final class Enigma256Tests: XCTestCase {
         let nlff = (true && false) != false // (0&7)^12 = 0
         XCTAssertEqual(lfsr.stepMask.0, nlff)
         XCTAssertNotEqual(lfsr.stepMask.0, rawBit0)
+    }
+
+    func testGenerationMutateChangesFoldsAndLabels() {
+        var rng = Enigma256TestRNG(seed: 0xC0FFEE)
+        let next = Enigma256Generation.gen0.mutated(rng: &rng)
+        XCTAssertEqual(next.id, 1)
+        XCTAssertNotEqual(next.folds, Enigma256Generation.gen0.folds)
+        XCTAssertNotEqual(next.dayInfo, Enigma256Generation.gen0.dayInfo)
+        let v = next.emitNLFFComboVerilog()
+        XCTAssertTrue(v.contains("module enigma_256_nlff_combo"))
+        XCTAssertTrue(v.contains("assign step_r1"))
     }
 
     func testAEADRejectsBitFlip() throws {

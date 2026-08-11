@@ -24,22 +24,21 @@ package struct Enigma256LFSR: Sendable, Equatable {
         state = next
     }
 
-    /// Stepping triggers via NLFF (non-linear fold) — matches Verilog.
+    /// Stepping triggers via NLFF (non-linear fold) — matches Verilog / SoftBus generation.
     /// Avoids exposing raw LFSR bits to observable rotor motion (Berlekamp–Massey).
-    /// step_r1 = (lfsr[0] & lfsr[7]) ^ lfsr[12], etc.
     package var stepMask: (Bool, Bool, Bool, Bool) {
-        func nlff(_ a: Int, _ b: Int, _ c: Int) -> Bool {
-            let x = (state >> a) & 1
-            let y = (state >> b) & 1
-            let z = (state >> c) & 1
+        stepMask(using: Enigma256Generation.current)
+    }
+
+    package func stepMask(using generation: Enigma256Generation) -> (Bool, Bool, Bool, Bool) {
+        func nlff(_ fold: Enigma256NLFFFold) -> Bool {
+            let x = (state >> fold.a) & 1
+            let y = (state >> fold.b) & 1
+            let z = (state >> fold.c) & 1
             return ((x & y) ^ z) != 0
         }
-        return (
-            nlff(0, 7, 12),
-            nlff(15, 22, 29),
-            nlff(31, 38, 45),
-            nlff(47, 54, 61)
-        )
+        let f = generation.folds
+        return (nlff(f[0]), nlff(f[1]), nlff(f[2]), nlff(f[3]))
     }
 }
 
@@ -253,11 +252,13 @@ package enum Enigma256KDF {
     package static let dayOKMLength = 512 + (16 * 512) + 512 // plug + 16 rotors + reflector
 
     /// Derive the heavy day-key blueprint from IKM (ECDH secret, Argon2 output, …).
+    /// Default `info` follows the live Blue generation (Apple Silicon SoftBus field).
     package static func deriveDayKey(
         ikm: Data,
         salt: Data = Data(),
-        info: Data = dayInfo
+        info: Data? = nil
     ) -> Enigma256DayKey {
+        let info = info ?? Enigma256Generation.current.dayInfo
         let okm = hkdf(ikm: ikm, salt: salt, info: info, length: dayOKMLength)
         var cursor = 0
         func take(_ n: Int) -> Data {
@@ -290,8 +291,9 @@ package enum Enigma256KDF {
     package static func deriveMessageKey(
         masterIKM: Data,
         nonce: Data,
-        info: Data = messageInfo
+        info: Data? = nil
     ) -> Enigma256MessageKey {
+        let info = info ?? Enigma256Generation.current.messageInfo
         // Salt with the public nonce so each message gets a fresh micro-stream.
         let okm = hkdf(ikm: masterIKM, salt: nonce, info: info, length: 16)
         let bytes = [UInt8](okm)
