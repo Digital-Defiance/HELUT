@@ -4,7 +4,7 @@ formula: cubic6
 bytes: 1048576
 plaintext: prng
 sample: build/enigma256_keystream.bin
-softbus_ms: 104.6
+softbus_ms: 96.9
 zero_pt_fixed_point_rate: 0.2943 (diagnostic; expected ≫ 1/256)
 entropy_bits_per_byte: 7.999829
 mean: 127.5248
