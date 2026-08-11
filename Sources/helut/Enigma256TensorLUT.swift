@@ -80,6 +80,10 @@ func runEnigma256TensorLUT() {
     let gens = intFlag("--enigma256-tensorlut-gens") ?? 80
     let pop = intFlag("--enigma256-tensorlut-pop") ?? 32
     let polishGens = intFlag("--enigma256-tensorlut-polish") ?? max(40, gens / 2)
+    let polishLambda = Float(stringFlag("--enigma256-tensorlut-lambda").flatMap(Double.init) ?? 0)
+    let exploreSeed = UInt64(intFlag("--enigma256-tensorlut-seed") ?? 0xE256_21)
+    let expectHold = CommandLine.arguments.contains("--enigma256-tensorlut-expect-hold")
+    let requireSqueeze = CommandLine.arguments.contains("--enigma256-tensorlut-require-squeeze")
 
     guard FileManager.default.fileExists(atPath: netlistPath) else {
         fputs("""
@@ -213,20 +217,20 @@ func runEnigma256TensorLUT() {
             generations: gens,
             eliteCount: max(4, pop / 6),
             seedScatter: true,
-            rngSeed: 0xE256_21,
+            rngSeed: exploreSeed,
             seedInits: wiped,
             crossoverRate: 0.7
         ),
         progress: { exploreLast = $0 }
     )
 
-    // Phase B — binary polish with λ=0 (pad snap only). Avoid λ-crush on WIDTH<6 pads.
+    // Phase B — binary polish. Default λ=0 (pad snap only). Optional λ via --enigma256-tensorlut-lambda.
     let polishSynth = try! AdversarialSynthesizer(
         device: device,
         config: .init(
             mutationRate: 0.1,
             maxNoise: 0.15,
-            lambdaMax: 0,
+            lambdaMax: polishLambda,
             liveWidths: liveWidths,
             discreteJumpRate: 0.7
         )
@@ -244,7 +248,7 @@ func runEnigma256TensorLUT() {
             generations: polishGens,
             eliteCount: max(4, pop / 6),
             seedScatter: false,
-            rngSeed: 0xE256_22,
+            rngSeed: exploreSeed &+ 1,
             seedInits: explored.inits,
             crossoverRate: 0.35,
             polishBinaryAtEnd: true
@@ -290,6 +294,8 @@ func runEnigma256TensorLUT() {
     explore_gens: \(gens)
     polish_gens: \(polishGens)
     pop: \(pop)
+    polish_lambda: \(polishLambda)
+    explore_seed: \(exploreSeed)
     baseline_crypto: \(baselineStats.map { String(format: "%.6f", $0.bestCrypto) } ?? "n/a")
     explore_best_crypto: \(exploreLast.map { String(format: "%.6f", $0.bestCrypto) } ?? "n/a")
     explore_nonbinary: \(exploreLast.map { String($0.bestNonBinaryCount) } ?? "n/a")
@@ -299,7 +305,7 @@ func runEnigma256TensorLUT() {
     elite_fitness: \(String(format: "%.6f", polished.fitness))
     squeeze_survived: \(survived)
     verdict: \(verdict)
-    note: λ=0 explore + λ=0 discrete polish (no λ-crush on LUT6 pads); exhaustive NLFF corners. squeeze_survived=false is a Blue hold.
+    note: explore λ=0; polish λ=\(polishLambda). squeeze_survived=false is a Blue hold.
     """
 
     try! FileManager.default.createDirectory(
@@ -309,8 +315,13 @@ func runEnigma256TensorLUT() {
     try! report.write(toFile: logPath, atomically: true, encoding: .utf8)
     print(report)
     print("  log → \(logPath)")
-    if !survived {
-        fputs("WARNING: final crypto/nonbinary did not meet bar (crypto \(finalCrypto), nb \(finalNonBinary))\n", stderr)
-        exit(1)
+    if survived {
+        fputs("RED pressure: squeeze recovered a binary elite\n", stderr)
+        if expectHold { exit(2) }
+        exit(0)
+    } else {
+        fputs("BLUE hold: squeeze failed (crypto \(finalCrypto), nb \(finalNonBinary))\n", stderr)
+        if requireSqueeze { exit(1) }
+        exit(0)
     }
 }

@@ -18,10 +18,14 @@ module enigma_256_step_cone (
 );
     wire [63:0] lfsr_next = {lfsr[62:0], 1'b0} ^ (lfsr[63] ? 64'hD800000000000000 : 64'h0);
 
-    assign step_r1 = (lfsr[0] & lfsr[13] & lfsr[27]) ^ (lfsr[5] & lfsr[41]) ^ lfsr[62];
-    assign step_r2 = (lfsr[1] & lfsr[18] & lfsr[33]) ^ (lfsr[9] & lfsr[44]) ^ lfsr[58];
-    assign step_r3 = (lfsr[2] & lfsr[21] & lfsr[36]) ^ (lfsr[11] & lfsr[48]) ^ lfsr[55];
-    assign step_r4 = (lfsr[3] & lfsr[24] & lfsr[39]) ^ (lfsr[14] & lfsr[51]) ^ lfsr[60];
+    wire nlff_f1 = (lfsr[0] & lfsr[13] & lfsr[27]) ^ (lfsr[5] & lfsr[41]) ^ lfsr[62];
+    wire nlff_f2 = (lfsr[1] & lfsr[18] & lfsr[33]) ^ (lfsr[9] & lfsr[44]) ^ lfsr[58];
+    wire nlff_f3 = (lfsr[2] & lfsr[21] & lfsr[36]) ^ (lfsr[11] & lfsr[48]) ^ lfsr[55];
+    wire nlff_f4 = (lfsr[3] & lfsr[24] & lfsr[39]) ^ (lfsr[14] & lfsr[51]) ^ lfsr[60];
+    assign step_r1 = nlff_f1 ^ (nlff_f2 & nlff_f3);
+    assign step_r2 = nlff_f2 ^ (nlff_f3 & nlff_f4);
+    assign step_r3 = nlff_f3 ^ (nlff_f4 & nlff_f1);
+    assign step_r4 = nlff_f4 ^ (nlff_f1 & nlff_f2);
 
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin

@@ -598,9 +598,9 @@ func runEnigma256Campaign() {
 
     var mutated = false
     var nextGen = generation
-    // Explicit --mutate on quadratic3 always structural-hardens to cubic6.
-    if forceMutate || (allowMutate && (redPressure || generation.formula == .quadratic3)) {
-        if generation.formula == .quadratic3 {
+    // Explicit --mutate upgrades quadratic3→cubic6 and cubic6→coupledCubic6.
+    if forceMutate || (allowMutate && (redPressure || generation.formula != .coupledCubic6)) {
+        if generation.formula != .coupledCubic6 {
             nextGen = generation.hardenedCubic()
         } else {
             nextGen = generation.mutated(rng: &rng)
@@ -637,8 +637,10 @@ func runEnigma256Campaign() {
         }
     } else if redPressure {
         print("  Blue hold — red pressure present; re-run with --enigma256-campaign-mutate to roll genes")
+    } else if tensor.blueHold {
+        print("  Blue hold — TensorLUT squeeze failed (good); SoftBus KPA also weak")
     } else {
-        print("  Blue hold — SoftBus KPA did not recover; TensorLUT pressure absent or unscored")
+        print("  Blue hold — SoftBus KPA did not recover; TensorLUT unscored")
     }
 
     // JSONL ledger row

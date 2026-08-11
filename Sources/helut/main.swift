@@ -61,6 +61,7 @@ let positionalArgs: [String] = {
         "--enigma256-passphrase", "--enigma256-pbkdf2-iters",
         "--enigma256-netlist", "--enigma256-emit-out", "--enigma256-tensorlut-log",
         "--enigma256-tensorlut-gens", "--enigma256-tensorlut-pop", "--enigma256-tensorlut-polish",
+        "--enigma256-tensorlut-lambda", "--enigma256-tensorlut-seed",
         "--enigma256-identity", "--enigma256-identity-out",
         "--enigma256-trust", "--enigma256-trust-file",
         "--enigma256-genes", "--enigma256-campaign-log", "--enigma256-campaign-trials"

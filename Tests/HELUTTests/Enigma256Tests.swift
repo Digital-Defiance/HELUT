@@ -422,7 +422,7 @@ final class Enigma256Tests: XCTestCase {
         var rng = Enigma256TestRNG(seed: 0xC0FFEE)
         let next = Enigma256Generation.gen0.mutated(rng: &rng)
         XCTAssertEqual(next.id, 1)
-        XCTAssertEqual(next.formula, .cubic6)
+        XCTAssertEqual(next.formula, .coupledCubic6)
         XCTAssertNotEqual(next.folds, Enigma256Generation.gen0.folds)
         XCTAssertNotEqual(next.dayInfo, Enigma256Generation.gen0.dayInfo)
         let v = next.emitNLFFComboVerilog()
@@ -437,6 +437,24 @@ final class Enigma256Tests: XCTestCase {
         // cubic6 fold0 uses bit0 in the AND3 — with others 0 → step_r1 false; raw bit0 true
         XCTAssertFalse(lfsr.stepMask.0)
         XCTAssertNotEqual(lfsr.stepMask.0, true)
+    }
+
+    func testCoupledCubicDiffersFromIndependentCubic() {
+        var foundDiff = false
+        var seed: UInt64 = 1
+        while seed < 10_000 {
+            let cubic = Enigma256LFSR(seed: seed).stepMask(using: .gen3Cubic)
+            let coupled = Enigma256LFSR(seed: seed).stepMask(using: .gen4Coupled)
+            if [cubic.0, cubic.1, cubic.2, cubic.3] != [coupled.0, coupled.1, coupled.2, coupled.3] {
+                foundDiff = true
+                break
+            }
+            seed += 1
+        }
+        XCTAssertTrue(foundDiff, "expected some LFSR seed where coupling changes step enables")
+        let v = Enigma256Generation.gen4Coupled.emitNLFFComboVerilog()
+        XCTAssertTrue(v.contains("nlff_f1"))
+        XCTAssertTrue(v.contains("nlff_f1 ^ (nlff_f2 & nlff_f3)"))
     }
 
     func testAEADRejectsBitFlip() throws {

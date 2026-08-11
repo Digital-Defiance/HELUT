@@ -32,12 +32,25 @@ package struct Enigma256LFSR: Sendable, Equatable {
 
     package func stepMask(using generation: Enigma256Generation) -> (Bool, Bool, Bool, Bool) {
         let f = generation.folds
-        return (
-            f[0].evaluate(state, formula: generation.formula),
-            f[1].evaluate(state, formula: generation.formula),
-            f[2].evaluate(state, formula: generation.formula),
-            f[3].evaluate(state, formula: generation.formula)
+        let formula = generation.formula
+        let leaves = (
+            f[0].leaf(state, formula: formula),
+            f[1].leaf(state, formula: formula),
+            f[2].leaf(state, formula: formula),
+            f[3].leaf(state, formula: formula)
         )
+        switch formula {
+        case .quadratic3, .cubic6:
+            return leaves
+        case .coupledCubic6:
+            // step_i = f_i ⊕ (f_{i+1} ∧ f_{i+2})
+            return (
+                leaves.0 != (leaves.1 && leaves.2),
+                leaves.1 != (leaves.2 && leaves.3),
+                leaves.2 != (leaves.3 && leaves.0),
+                leaves.3 != (leaves.0 && leaves.1)
+            )
+        }
     }
 }
 
