@@ -78,7 +78,7 @@ Mutation parameters ship as software; nodes recompile and flash local fabric.
 - **AXI:** Lite + **AXIS table burst** (`enigma_256_axis_tables.v` wired into `enigma_256_axi.v`; CTRL[1] arms). SoftBus burst + jitter. Co-sim: `Scripts/enigma256_axi_sim.sh` (default AXIS; `LITE=1` legacy).
 - **Handshake:** X25519, hybrid ML-KEM / X-Wing, Ed25519-signed hybrid wire frames.
 - **Wire / TCP / PSK:** `Enigma256Wire` (AEAD DATA), `Enigma256TCPTransport`, PBKDF2-SHA512 PSK.
-- **Yosys / TensorLUT:** FPGA path keeps BRAMs (`Scripts/enigma256_synth.sh`). Deliberate Red Team targets the **NLFF step-enable cone** (`enigma_256_nlff_combo.v` → 4 LUT6): `Scripts/enigma256_tensorlut.sh` emits baseline + cold-start smoke (`logs/tensorlut-enigma256-nlff.log`). Full-core BRAM soft-map (~20k DFFs) stays out of scope.
+- **Yosys / TensorLUT:** FPGA path keeps BRAMs (`Scripts/enigma256_synth.sh`). Red Team NLFF cone (`Scripts/enigma256_tensorlut.sh`): baseline crypto 0; λ=0 explore + discrete polish recovers binary elite (`squeeze_survived: true` in `logs/tensorlut-enigma256-nlff.log`). Full-core BRAM soft-map deferred.
 - **Red Team hold (updated):** Golden + AXI AXIS co-sim pass; TensorLUT is pointed at the NLFF cone on purpose — not a premature full-core melt.
 
 ## 9. Protocol gap closure

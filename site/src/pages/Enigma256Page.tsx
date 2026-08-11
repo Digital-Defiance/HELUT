@@ -283,7 +283,7 @@ export function Enigma256Page() {
               <h3>AXIS table burst + deliberate TensorLUT on NLFF cone.</h3>
               <div className="prose">
                 <p>
-                  <code>enigma_256_axi</code> loads day tables over AXI-Stream (2,560 bytes; CTRL[1] arms). Yosys keeps BRAMs for FPGA; TensorLUT is pointed at the 4-LUT NLFF step-enable cone on purpose—baseline crypto 0, cold-start explore near-recovers then λ-squeeze shatters (same grammar as M4 melts). Full-core soft-map stays deferred.
+                  <code>enigma_256_axi</code> loads day tables over AXI-Stream (2,560 bytes; CTRL[1] arms). Yosys keeps BRAMs for FPGA; TensorLUT hits the 4-LUT NLFF cone—baseline crypto 0, and λ=0 explore + discrete polish recovers a binary elite (`squeeze_survived`). Listen/connect default to hybrid+AEAD. Full-core soft-map stays deferred.
                 </p>
               </div>
             </article>

@@ -2,12 +2,15 @@
 netlist: build/enigma_256_nlff_combo_netlist.json
 luts: 4
 dffs: 0
-batch: 16
+batch: 90
+explore_gens: 120
+polish_gens: 60
 baseline_crypto: 0.000000
-explore_best_crypto: -0.027250
-explore_nonbinary: 81
-squeeze_best_crypto: -3.049284
-squeeze_best_fitness: -31.294535
-squeeze_nonbinary: 24
-elite_fitness: -3.000000
-note: NLFF combo is the deliberate first Red Team target; full core BRAM flatten deferred.
+explore_best_crypto: -0.723512
+explore_nonbinary: 106
+polish_gen_crypto: 0.000000
+final_crypto: 0.000000
+final_nonbinary: 0
+elite_fitness: 0.000000
+squeeze_survived: true
+note: λ=0 explore + λ=0 discrete polish (no λ-crush on LUT6 pads); exhaustive NLFF corners.
