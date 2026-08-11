@@ -14,22 +14,25 @@ func enigma256PortNets(_ module: YosysModule, _ name: String) -> [Int32] {
     }
 }
 
-/// Exhaustive coverage of each NLFF's three live bits (others held at a base pattern).
+/// Exhaustive coverage of each NLFF's live taps (others held at a base pattern).
 func enigma256NLFFTrainingBatch(
     generation: Enigma256Generation = .current
 ) -> (inputs: [[Float]], expected: [[Float]]) {
-    let triples: [(Int, Int, Int)] = generation.folds.map { ($0.a, $0.b, $0.c) }
+    let tapSets: [[Int]] = generation.folds.map { $0.taps(for: generation.formula) }
     var seeds: [UInt64] = []
     // Base patterns so unused bits aren't all-zero lockup.
     let bases: [UInt64] = [1, 0xA5A5_A5A5_A5A5_A5A5, 0x0123_4567_89AB_CDEF]
     for base in bases {
-        for (a, b, c) in triples {
-            for mask in 0 ..< 8 {
+        for taps in tapSets {
+            let space = 1 << taps.count
+            for mask in 0 ..< space {
                 var s = base
-                s &= ~((UInt64(1) << a) | (UInt64(1) << b) | (UInt64(1) << c))
-                if mask & 1 != 0 { s |= UInt64(1) << a }
-                if mask & 2 != 0 { s |= UInt64(1) << b }
-                if mask & 4 != 0 { s |= UInt64(1) << c }
+                var clear: UInt64 = 0
+                for t in taps { clear |= UInt64(1) << t }
+                s &= ~clear
+                for (i, t) in taps.enumerated() where (mask & (1 << i)) != 0 {
+                    s |= UInt64(1) << t
+                }
                 if s == 0 { s = 1 }
                 seeds.append(s)
             }

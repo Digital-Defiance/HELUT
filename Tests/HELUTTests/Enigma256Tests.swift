@@ -422,11 +422,21 @@ final class Enigma256Tests: XCTestCase {
         var rng = Enigma256TestRNG(seed: 0xC0FFEE)
         let next = Enigma256Generation.gen0.mutated(rng: &rng)
         XCTAssertEqual(next.id, 1)
+        XCTAssertEqual(next.formula, .cubic6)
         XCTAssertNotEqual(next.folds, Enigma256Generation.gen0.folds)
         XCTAssertNotEqual(next.dayInfo, Enigma256Generation.gen0.dayInfo)
         let v = next.emitNLFFComboVerilog()
         XCTAssertTrue(v.contains("module enigma_256_nlff_combo"))
         XCTAssertTrue(v.contains("assign step_r1"))
+        XCTAssertTrue(v.contains("& lfsr[") && v.contains(") ^ (lfsr["))
+    }
+
+    func testCubic6NLFFNotRawBits() {
+        Enigma256Generation.gen3Cubic.activate()
+        let lfsr = Enigma256LFSR(seed: 0b1) // only bit 0
+        // cubic6 fold0 uses bit0 in the AND3 — with others 0 → step_r1 false; raw bit0 true
+        XCTAssertFalse(lfsr.stepMask.0)
+        XCTAssertNotEqual(lfsr.stepMask.0, true)
     }
 
     func testAEADRejectsBitFlip() throws {

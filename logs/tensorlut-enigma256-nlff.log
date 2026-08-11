@@ -2,15 +2,15 @@
 netlist: build/enigma_256_nlff_combo_netlist.json
 luts: 4
 dffs: 0
-batch: 90
+batch: 762
 explore_gens: 80
 polish_gens: 48
 baseline_crypto: 0.000000
-explore_best_crypto: -0.856990
-explore_nonbinary: 87
-polish_gen_crypto: -0.004391
-final_crypto: 0.000000
-final_nonbinary: 0
-elite_fitness: 0.000000
-squeeze_survived: true
+explore_best_crypto: -233.822708
+explore_nonbinary: 67
+polish_gen_crypto: -160.691696
+final_crypto: -160.691696
+final_nonbinary: 39
+elite_fitness: -160.691696
+squeeze_survived: false
 note: λ=0 explore + λ=0 discrete polish (no λ-crush on LUT6 pads); exhaustive NLFF corners.

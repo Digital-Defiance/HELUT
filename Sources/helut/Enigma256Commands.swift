@@ -550,8 +550,12 @@ func runEnigma256Campaign() {
     let redPressure = softPressure || tensor.redPressure
 
     print("Enigma 256 Red/Blue campaign (Apple Silicon SoftBus field)")
-    print("  generation: \(generation.id)")
-    print("  folds: \(generation.folds.map { "(\($0.a),\($0.b),\($0.c))" }.joined(separator: " "))")
+    print("  generation: \(generation.id) formula=\(generation.formula.rawValue)")
+    let foldDesc = generation.folds.map { fold -> String in
+        let taps = fold.taps(for: generation.formula).map(String.init).joined(separator: ",")
+        return "(\(taps))"
+    }.joined(separator: " ")
+    print("  folds: \(foldDesc)")
     print("  SoftBus KPA: best \(soft.bestMatches)/\(crib.count) over \(soft.trials) trials in \(String(format: "%.1f", soft.elapsedMs)) ms")
     if let c = tensor.finalCrypto, let s = tensor.squeezeSurvived {
         print("  TensorLUT: final_crypto=\(String(format: "%.6f", c)) squeeze_survived=\(s) (\(tensor.path))")
@@ -565,8 +569,13 @@ func runEnigma256Campaign() {
 
     var mutated = false
     var nextGen = generation
-    if forceMutate || (allowMutate && redPressure) {
-        nextGen = generation.mutated(rng: &rng)
+    // Explicit --mutate on quadratic3 always structural-hardens to cubic6.
+    if forceMutate || (allowMutate && (redPressure || generation.formula == .quadratic3)) {
+        if generation.formula == .quadratic3 {
+            nextGen = generation.hardenedCubic()
+        } else {
+            nextGen = generation.mutated(rng: &rng)
+        }
         nextGen.activate()
         do {
             try FileManager.default.createDirectory(
