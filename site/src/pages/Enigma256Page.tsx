@@ -200,7 +200,7 @@ export function Enigma256Page() {
             <li>
               <span className="mono">STEP</span>
               <span>
-                <strong>Galois + NLFF:</strong> feedback <code>0xD800_0000_0000_0000</code>. Gen 3 cubic6 held against TensorLUT squeeze; gen 4+ can couple leaves as <code>f_i⊕(f_{i+1}∧f_{i+2})</code>. Genes in <code>Fixtures/enigma256_generation.json</code>. Zero seed forced to 1.
+                <strong>Galois + NLFF:</strong> feedback <code>0xD800_0000_0000_0000</code>. Live field is gen 5 balanced cubic6 (~0.5 step rate, low φ). Blue evolves stronger stepping—not TensorLUT-only hardness. Genes in <code>Fixtures/enigma256_generation.json</code>. Zero seed forced to 1.
               </span>
             </li>
             <li>

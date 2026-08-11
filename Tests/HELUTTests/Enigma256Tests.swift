@@ -422,7 +422,7 @@ final class Enigma256Tests: XCTestCase {
         var rng = Enigma256TestRNG(seed: 0xC0FFEE)
         let next = Enigma256Generation.gen0.mutated(rng: &rng)
         XCTAssertEqual(next.id, 1)
-        XCTAssertEqual(next.formula, .coupledCubic6)
+        XCTAssertEqual(next.formula, .cubic6)
         XCTAssertNotEqual(next.folds, Enigma256Generation.gen0.folds)
         XCTAssertNotEqual(next.dayInfo, Enigma256Generation.gen0.dayInfo)
         let v = next.emitNLFFComboVerilog()
@@ -452,6 +452,14 @@ final class Enigma256Tests: XCTestCase {
         let v = Enigma256Generation.gen4Coupled.emitNLFFComboVerilog()
         XCTAssertTrue(v.contains("nlff_f1"))
         XCTAssertTrue(v.contains("nlff_f1 ^ (nlff_f2 & nlff_f3)"))
+    }
+
+    func testGen5BalancedStepRates() {
+        let s = Enigma256Generation.gen5Balanced.stepEnableStats(steps: 50_000)
+        XCTAssertTrue(s.rateFloorOK, "gen5 should keep all rotors active")
+        XCTAssertTrue(s.independenceOK, "gen5 should keep low step correlation")
+        XCTAssertGreaterThan(s.meanRate, 0.45)
+        XCTAssertLessThan(s.meanRate, 0.55)
     }
 
     func testAEADRejectsBitFlip() throws {

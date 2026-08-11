@@ -433,9 +433,70 @@ func runEnigma256TCPConnect() {
     }
 }
 
+// MARK: - NLFF step-enable quality (`--enigma256-nlff-stats`)
+
+func runEnigma256NLFFStats() {
+    let steps = intFlag("--enigma256-nlff-stats-steps") ?? 200_000
+    print("Enigma 256 NLFF step-enable stats (\(steps) LFSR clocks)")
+    print("  Goal: mean rate ~0.5, each rotor active, off-diagonal |φ| small.")
+    print("")
+    for (label, gen) in [
+        ("gen0 quadratic3", Enigma256Generation.gen0),
+        ("gen3 cubic6 (unbalanced taps)", Enigma256Generation.gen3Cubic),
+        ("gen4 coupledCubic6 (rejected)", Enigma256Generation.gen4Coupled),
+        ("gen5 cubic6 balanced (live)", Enigma256Generation.gen5Balanced)
+    ] {
+        let s = gen.stepEnableStats(steps: steps)
+        let rateStr = s.rates.map { String(format: "%.4f", $0) }.joined(separator: " ")
+        print("=== \(label) ===")
+        print("  rates: \(rateStr)  mean=\(String(format: "%.4f", s.meanRate)) \(s.meanRateOK ? "OK" : "BIAS") \(s.rateFloorOK ? "FLOOR_OK" : "DEAD_ROTORS")")
+        print("  max|φ| off-diag=\(String(format: "%.4f", s.maxAbsOffDiagPhi)) \(s.independenceOK ? "OK" : "CORRELATED")")
+        print(String(format: "  P(all four on)=%.6f", s.allFourOnRate))
+        for row in s.phi {
+            print("  φ " + row.map { String(format: "%+.3f", $0) }.joined(separator: " "))
+        }
+        print("")
+    }
+
+    if CommandLine.arguments.contains("--enigma256-nlff-breed") {
+        let trials = intFlag("--enigma256-nlff-breed-trials") ?? 2_000
+        print("Breeding balanced cubic6 taps (\(trials) trials)…")
+        var rng = SystemRandomNumberGenerator()
+        let (gen, stats) = Enigma256Generation.breedBalancedCubic6(trials: trials, rng: &rng)
+        let rateStr = stats.rates.map { String(format: "%.4f", $0) }.joined(separator: " ")
+        print("=== bred gen \(gen.id) cubic6 ===")
+        print("  folds: \(gen.folds.map { "(\($0.a),\($0.b),\($0.c),\($0.d),\($0.e),\($0.f))" }.joined(separator: " "))")
+        print("  rates: \(rateStr)  mean=\(String(format: "%.4f", stats.meanRate)) \(stats.rateFloorOK ? "FLOOR_OK" : "DEAD_ROTORS")")
+        print("  max|φ|=\(String(format: "%.4f", stats.maxAbsOffDiagPhi)) \(stats.independenceOK ? "OK" : "CORRELATED")")
+        if CommandLine.arguments.contains("--enigma256-nlff-breed-apply") {
+            gen.activate()
+            let genesPath = stringFlag("--enigma256-genes") ?? "Fixtures/enigma256_generation.json"
+            do {
+                try gen.save(to: URL(fileURLWithPath: genesPath))
+                try gen.emitNLFFComboVerilog().write(toFile: "enigma_256_nlff_combo.v", atomically: true, encoding: .utf8)
+                for path in ["enigma_256_core.v", "enigma_256_step_cone.v"] {
+                    let src = try String(contentsOfFile: path, encoding: .utf8)
+                    try gen.rewritingNLFF(in: src).write(toFile: path, atomically: true, encoding: .utf8)
+                }
+                let session = Enigma256Bridge.makeGoldenSession()
+                _ = try Enigma256Bridge.writeGoldenBundle(
+                    session: session,
+                    to: URL(fileURLWithPath: "Fixtures/enigma256_golden", isDirectory: true)
+                )
+                print("  Applied → \(genesPath) + Verilog + goldens")
+            } catch {
+                fputs("breed apply failed: \(error)\n", stderr)
+                exit(1)
+            }
+        }
+    }
+}
+
+
 // MARK: - Enigma 256 Red/Blue campaign (`--enigma256-campaign`)
 //
 // Field = Apple Silicon SoftBus + HELUT TensorLUT. No Zynq required.
+// Blue evolves stronger stepping crypto; TensorLUT resistance is a constraint, not a trade for correlation.
 
 struct Enigma256TensorLUTScore: Sendable {
     var finalCrypto: Double?
@@ -598,13 +659,21 @@ func runEnigma256Campaign() {
 
     var mutated = false
     var nextGen = generation
-    // Explicit --mutate upgrades quadratic3→cubic6 and cubic6→coupledCubic6.
-    if forceMutate || (allowMutate && (redPressure || generation.formula != .coupledCubic6)) {
-        if generation.formula != .coupledCubic6 {
-            nextGen = generation.hardenedCubic()
-        } else {
-            nextGen = generation.mutated(rng: &rng)
+    // Mutate policy: evolve *stronger* stepping crypto.
+    // - quadratic3 → cubic6 (gen3)
+    // - coupledCubic6 → rollback gen3 (coupling correlates rotors — rejected)
+    // - cubic6 → retap only under red pressure / force-mutate
+    if forceMutate || allowMutate {
+        switch generation.formula {
+        case .quadratic3, .coupledCubic6:
+            nextGen = .gen3Cubic
+        case .cubic6:
+            if forceMutate || redPressure {
+                nextGen = generation.mutated(rng: &rng)
+            }
         }
+    }
+    if nextGen.id != generation.id || nextGen.formula != generation.formula || nextGen.folds != generation.folds {
         nextGen.activate()
         do {
             try FileManager.default.createDirectory(
@@ -619,7 +688,11 @@ func runEnigma256Campaign() {
                 try nextGen.rewritingNLFF(in: src).write(toFile: path, atomically: true, encoding: .utf8)
             }
             mutated = true
-            print("  Blue mutate → generation \(nextGen.id) (genes + NLFF Verilog rewritten)")
+            if generation.formula == .coupledCubic6 {
+                print("  Blue rollback → generation \(nextGen.id) cubic6 (reject correlated coupling)")
+            } else {
+                print("  Blue mutate → generation \(nextGen.id) (genes + NLFF Verilog rewritten)")
+            }
             do {
                 let session = Enigma256Bridge.makeGoldenSession()
                 _ = try Enigma256Bridge.writeGoldenBundle(
