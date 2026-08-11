@@ -275,14 +275,21 @@ func runEnigma256TensorLUT() {
     let finalCrypto = finalStats?.bestCrypto ?? -999
     let finalNonBinary = polished.inits.reduce(0) { $0 + (($1 > 0.05 && $1 < 0.95) ? 1 : 0) }
     let survived = finalCrypto > -0.05 && finalNonBinary == 0
+    let generation = Enigma256Generation.current
+    // squeeze_survived=true  → Red recovered a binary elite (Blue must mutate).
+    // squeeze_survived=false → Red failed the squeeze (Blue holds this generation).
+    let verdict = survived ? "red_pressure" : "blue_hold"
     let report = """
     # TensorLUT Red Team — \(moduleName)
+    generation: \(generation.id)
+    formula: \(generation.formula.rawValue)
     netlist: \(netlistPath)
     luts: \(soft.luts.count)
     dffs: \(soft.dffs.count)
     batch: \(target.batchSize)
     explore_gens: \(gens)
     polish_gens: \(polishGens)
+    pop: \(pop)
     baseline_crypto: \(baselineStats.map { String(format: "%.6f", $0.bestCrypto) } ?? "n/a")
     explore_best_crypto: \(exploreLast.map { String(format: "%.6f", $0.bestCrypto) } ?? "n/a")
     explore_nonbinary: \(exploreLast.map { String($0.bestNonBinaryCount) } ?? "n/a")
@@ -291,7 +298,8 @@ func runEnigma256TensorLUT() {
     final_nonbinary: \(finalNonBinary)
     elite_fitness: \(String(format: "%.6f", polished.fitness))
     squeeze_survived: \(survived)
-    note: λ=0 explore + λ=0 discrete polish (no λ-crush on LUT6 pads); exhaustive NLFF corners.
+    verdict: \(verdict)
+    note: λ=0 explore + λ=0 discrete polish (no λ-crush on LUT6 pads); exhaustive NLFF corners. squeeze_survived=false is a Blue hold.
     """
 
     try! FileManager.default.createDirectory(

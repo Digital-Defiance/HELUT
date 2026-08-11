@@ -440,16 +440,30 @@ func runEnigma256TCPConnect() {
 struct Enigma256TensorLUTScore: Sendable {
     var finalCrypto: Double?
     var squeezeSurvived: Bool?
+    var generation: Int?
+    var formula: String?
+    var verdict: String?
     var path: String
 
     var redPressure: Bool {
         guard let c = finalCrypto, let s = squeezeSurvived else { return false }
         return s && c <= 1e-6
     }
+
+    var blueHold: Bool {
+        squeezeSurvived == false
+    }
 }
 
 func enigma256ParseTensorLUTLog(at path: String) -> Enigma256TensorLUTScore {
-    var score = Enigma256TensorLUTScore(finalCrypto: nil, squeezeSurvived: nil, path: path)
+    var score = Enigma256TensorLUTScore(
+        finalCrypto: nil,
+        squeezeSurvived: nil,
+        generation: nil,
+        formula: nil,
+        verdict: nil,
+        path: path
+    )
     guard let text = try? String(contentsOfFile: path, encoding: .utf8) else { return score }
     for line in text.split(whereSeparator: \.isNewline) {
         let s = String(line)
@@ -459,6 +473,13 @@ func enigma256ParseTensorLUTLog(at path: String) -> Enigma256TensorLUTScore {
         } else if s.hasPrefix("squeeze_survived:") {
             let t = s.dropFirst("squeeze_survived:".count).trimmingCharacters(in: .whitespaces).lowercased()
             score.squeezeSurvived = (t == "true" || t == "1" || t == "yes")
+        } else if s.hasPrefix("generation:") {
+            let t = s.dropFirst("generation:".count).trimmingCharacters(in: .whitespaces)
+            score.generation = Int(t)
+        } else if s.hasPrefix("formula:") {
+            score.formula = s.dropFirst("formula:".count).trimmingCharacters(in: .whitespaces)
+        } else if s.hasPrefix("verdict:") {
+            score.verdict = s.dropFirst("verdict:".count).trimmingCharacters(in: .whitespaces)
         }
     }
     return score
@@ -558,14 +579,22 @@ func runEnigma256Campaign() {
     print("  folds: \(foldDesc)")
     print("  SoftBus KPA: best \(soft.bestMatches)/\(crib.count) over \(soft.trials) trials in \(String(format: "%.1f", soft.elapsedMs)) ms")
     if let c = tensor.finalCrypto, let s = tensor.squeezeSurvived {
-        print("  TensorLUT: final_crypto=\(String(format: "%.6f", c)) squeeze_survived=\(s) (\(tensor.path))")
-        if generation.id != 0 {
-            print("  note: TensorLUT log may predate generation \(generation.id) — re-run Scripts/enigma256_tensorlut.sh")
+        let side = s ? "RED pressure (squeeze recovered binary elite)" : "BLUE hold (squeeze failed — good)"
+        print("  TensorLUT: final_crypto=\(String(format: "%.6f", c)) squeeze_survived=\(s) → \(side)")
+        print("  TensorLUT log: \(tensor.path)")
+        if let g = tensor.generation, g != generation.id {
+            print("  note: log is generation \(g); live genes are \(generation.id) — re-run Scripts/enigma256_tensorlut.sh")
         }
     } else {
         print("  TensorLUT: no score in \(tensor.path) (run Scripts/enigma256_tensorlut.sh)")
     }
-    print("  red_pressure: \(redPressure) (soft=\(softPressure) tensor=\(tensor.redPressure))")
+    if redPressure {
+        print("  red_pressure: true — Blue should mutate")
+    } else if tensor.blueHold {
+        print("  red_pressure: false — Blue holds; SoftBus KPA also weak")
+    } else {
+        print("  red_pressure: false (soft=\(softPressure) tensor=\(tensor.redPressure))")
+    }
 
     var mutated = false
     var nextGen = generation
