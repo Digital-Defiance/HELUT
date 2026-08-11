@@ -58,6 +58,94 @@ flowchart LR
 
 Encrypt ≡ decrypt under the same machine state. After each byte: NLFF step enables advance offsets; Galois LFSR clocks.
 
+## The machine (how E256 is put together)
+
+Day key material is a **16-rotor virtual pool** plus plugboard and un-reflector. Each message’s nonce picks **four active rotors** (Walzenlage), **four Grundstellung bytes** (initial offsets), and a **64-bit LFSR seed**. Only the active slot is burst into SoftBus BRAMs (10 × 256 entries).
+
+```mermaid
+flowchart TB
+  subgraph DAY["Day key (HKDF day-v2 OKM)"]
+    PB["Plugboard<br/>256-entry involution<br/>128 pairs · no fixed points"]
+    POOL["Rotor pool<br/>16 × (fwd 256 + rev 256)"]
+    UKW["Un-reflector<br/>256-entry involution<br/>fixed points allowed"]
+  end
+
+  subgraph MSG["Message key (HKDF msg-v2 ← nonce)"]
+    WALZ["Walzenlage<br/>pick 4 of 16 indices"]
+    GRUND["Grundstellung<br/>offset_r1…r4 ∈ 0…255"]
+    SEED["LFSR seed<br/>64-bit · zero→1"]
+  end
+
+  subgraph SLOT["Active slot → SoftBus BRAMs"]
+    T0["0 plugboard"]
+    T1["1–2 R1 fwd/rev"]
+    T2["3–4 R2 fwd/rev"]
+    T3["5–6 R3 fwd/rev"]
+    T4["7–8 R4 fwd/rev"]
+    T5["9 reflector"]
+  end
+
+  PB --> T0
+  POOL --> WALZ
+  WALZ --> T1 & T2 & T3 & T4
+  UKW --> T5
+  GRUND --> CORE
+  SEED --> LFSR
+```
+
+### One-byte scramble (combinational)
+
+Each rotor stage is **add offset → table lookup → subtract offset** (mod 256). The same plugboard is entered on the way in and on the way out. The un-reflector sits in the middle; because it is an involution, the whole path is reciprocal (encrypt ≡ decrypt).
+
+```mermaid
+flowchart LR
+  PT["PT"] --> PBin["plugboard[PT]"]
+  PBin --> A1["⊕ offset_r1"]
+  A1 --> F1["r1_fwd[·]"]
+  F1 --> S1["⊖ offset_r1"]
+  S1 --> A2["⊕ offset_r2"]
+  A2 --> F2["r2_fwd[·]"]
+  F2 --> S2["⊖ offset_r2"]
+  S2 --> A3["⊕ offset_r3"]
+  A3 --> F3["r3_fwd[·]"]
+  F3 --> S3["⊖ offset_r3"]
+  S3 --> A4["⊕ offset_r4"]
+  A4 --> F4["r4_fwd[·]"]
+  F4 --> S4["⊖ offset_r4"]
+  S4 --> REF["reflector[·]"]
+  REF --> A4r["⊕ offset_r4"]
+  A4r --> R4["r4_rev[·]"]
+  R4 --> S4r["⊖ offset_r4"]
+  S4r --> A3r["⊕ offset_r3"]
+  A3r --> R3["r3_rev[·]"]
+  R3 --> S3r["⊖ offset_r3"]
+  S3r --> A2r["⊕ offset_r2"]
+  A2r --> R2["r2_rev[·]"]
+  R2 --> S2r["⊖ offset_r2"]
+  S2r --> A1r["⊕ offset_r1"]
+  A1r --> R1["r1_rev[·]"]
+  R1 --> S1r["⊖ offset_r1"]
+  S1r --> PBout["plugboard[·]"]
+  PBout --> CT["CT"]
+```
+
+### After the byte: step (sequential)
+
+```mermaid
+flowchart TB
+  LFSR["lfsr[63:0]<br/>Galois next<br/>feedback 0xD800…"]
+  NLFF["NLFF cubic6<br/>four independent folds"]
+  LFSR --> NLFF
+  NLFF --> S1["step_r1"] & S2["step_r2"] & S3["step_r3"] & S4["step_r4"]
+  S1 -->|"if 1: +1"| O1["offset_r1"]
+  S2 -->|"if 1: +1"| O2["offset_r2"]
+  S3 -->|"if 1: +1"| O3["offset_r3"]
+  S4 -->|"if 1: +1"| O4["offset_r4"]
+  LFSR -->|"clock"| LFSR
+```
+
+Order matches SoftBus / Verilog: **emit CT under current offsets, then step**. Gen 5 bred taps keep each `P(step_ri) ≈ 0.5` with low pairwise φ.
+
 ### Planes and trust boundary
 
 | Plane | Runs where | Owns |

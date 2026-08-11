@@ -136,6 +136,191 @@ export function Enigma256Page() {
       <section className="band">
         <div className="shell">
           <div className="section-head">
+            <div className="kicker">The machine</div>
+            <h2>How the wheels and plugboard actually connect</h2>
+            <p>
+              Four active 256-entry rotors sit between a full-spectrum plugboard and an un-reflector. Offsets are not notches—they are bytes advanced by a Galois LFSR through NLFF step enables after every symbol.
+            </p>
+          </div>
+
+          <figure className="arch-figure" aria-label="E256 machine internals diagram">
+            <svg viewBox="0 0 960 640" role="img" className="arch-svg">
+              <title>E256 rotor machine: plugboard, four rotors, un-reflector, LFSR stepping</title>
+              <defs>
+                <linearGradient id="machInk" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#1a2438" />
+                  <stop offset="100%" stopColor="#0d1322" />
+                </linearGradient>
+                <linearGradient id="machTeal" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="#0f3034" />
+                  <stop offset="100%" stopColor="#1f6f6a" />
+                </linearGradient>
+                <linearGradient id="machCopper" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stopColor="#a86227" />
+                  <stop offset="100%" stopColor="#d4833f" />
+                </linearGradient>
+                <marker id="machArr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                  <path d="M0,0 L6,3 L0,6 Z" fill="#9ee0da" />
+                </marker>
+                <marker id="machArrCu" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                  <path d="M0,0 L6,3 L0,6 Z" fill="#f0c49a" />
+                </marker>
+              </defs>
+
+              {/* Day / message key strip */}
+              <rect x="20" y="16" width="920" height="88" rx="4" fill="url(#machTeal)" />
+              <text x="36" y="42" className="arch-label">Keying · day pool → message slot</text>
+              <rect x="36" y="54" width="200" height="36" rx="2" fill="rgba(255,255,255,0.08)" stroke="rgba(158,224,218,0.35)" />
+              <text x="48" y="77" className="arch-box" style={{ fontSize: 14 }}>Day: 16-rotor pool</text>
+              <rect x="252" y="54" width="200" height="36" rx="2" fill="rgba(255,255,255,0.08)" stroke="rgba(158,224,218,0.35)" />
+              <text x="264" y="77" className="arch-box" style={{ fontSize: 14 }}>Plug + un-reflector</text>
+              <path d="M460 72 H488" stroke="#9ee0da" strokeWidth="1.5" markerEnd="url(#machArr)" />
+              <rect x="496" y="54" width="210" height="36" rx="2" fill="rgba(255,255,255,0.08)" stroke="rgba(158,224,218,0.35)" />
+              <text x="508" y="77" className="arch-box" style={{ fontSize: 14 }}>Nonce → 4 of 16 + offs</text>
+              <path d="M714 72 H742" stroke="#9ee0da" strokeWidth="1.5" markerEnd="url(#machArr)" />
+              <rect x="750" y="54" width="170" height="36" rx="2" fill="rgba(255,255,255,0.08)" stroke="rgba(158,224,218,0.35)" />
+              <text x="762" y="77" className="arch-box" style={{ fontSize: 14 }}>LFSR seed 64b</text>
+
+              {/* Main chassis */}
+              <rect x="20" y="120" width="920" height="360" rx="4" fill="url(#machInk)" />
+              <text x="36" y="148" className="arch-label arch-label-light">Scramble path · base-256 · reciprocal</text>
+
+              {/* PT */}
+              <rect x="36" y="250" width="56" height="56" rx="2" fill="rgba(255,255,255,0.08)" stroke="#9ee0da" />
+              <text x="50" y="275" className="arch-box" style={{ fontSize: 15 }}>PT</text>
+              <text x="44" y="294" className="arch-sub">byte</text>
+
+              {/* Plugboard in */}
+              <path d="M98 278 H118" stroke="#9ee0da" strokeWidth="1.5" markerEnd="url(#machArr)" />
+              <rect x="124" y="220" width="72" height="116" rx="2" fill="rgba(20,129,119,0.35)" stroke="#22a89c" />
+              <text x="134" y="250" className="arch-box" style={{ fontSize: 13 }}>Plug</text>
+              <text x="132" y="270" className="arch-sub">256</text>
+              <text x="132" y="288" className="arch-sub">invo-</text>
+              <text x="132" y="306" className="arch-sub">lution</text>
+              <text x="132" y="324" className="arch-sub">128 pr</text>
+
+              {/* Forward rotors */}
+              <path d="M202 278 H220" stroke="#f0c49a" strokeWidth="1.5" markerEnd="url(#machArrCu)" />
+              {[
+                { x: 226, label: 'R1', sub: 'fwd' },
+                { x: 318, label: 'R2', sub: 'fwd' },
+                { x: 410, label: 'R3', sub: 'fwd' },
+                { x: 502, label: 'R4', sub: 'fwd' },
+              ].map((r) => (
+                <g key={`fwd-${r.label}`}>
+                  <rect x={r.x} y="200" width="72" height="72" rx="2" fill="rgba(212,131,63,0.22)" stroke="#d4833f" />
+                  <text x={r.x + 18} y="230" className="arch-box" style={{ fontSize: 16 }}>{r.label}</text>
+                  <text x={r.x + 22} y="252" className="arch-sub">{r.sub} 256</text>
+                  <text x={r.x + 8} y="180" className="arch-sub">+off −off</text>
+                </g>
+              ))}
+              <path d="M298 236 H312" stroke="#f0c49a" strokeWidth="1.5" />
+              <path d="M390 236 H404" stroke="#f0c49a" strokeWidth="1.5" />
+              <path d="M482 236 H496" stroke="#f0c49a" strokeWidth="1.5" />
+
+              {/* Un-reflector */}
+              <path d="M580 236 H598" stroke="#f0c49a" strokeWidth="1.5" markerEnd="url(#machArrCu)" />
+              <rect x="604" y="188" width="96" height="96" rx="2" fill="url(#machCopper)" />
+              <text x="618" y="224" className="arch-box" style={{ fontSize: 14 }}>Un-UKW</text>
+              <text x="616" y="246" className="arch-sub">fixed pts OK</text>
+              <text x="622" y="266" className="arch-sub">involution</text>
+
+              {/* Reverse rotors */}
+              <path d="M652 300 V320" stroke="#f0c49a" strokeWidth="1.5" />
+              <path d="M652 320 H574" stroke="#f0c49a" strokeWidth="1.5" />
+              {[
+                { x: 502, label: 'R4', sub: 'rev' },
+                { x: 410, label: 'R3', sub: 'rev' },
+                { x: 318, label: 'R2', sub: 'rev' },
+                { x: 226, label: 'R1', sub: 'rev' },
+              ].map((r) => (
+                <g key={`rev-${r.label}`}>
+                  <rect x={r.x} y="328" width="72" height="72" rx="2" fill="rgba(212,131,63,0.12)" stroke="rgba(240,196,154,0.7)" strokeDasharray="3 2" />
+                  <text x={r.x + 18} y="358" className="arch-box" style={{ fontSize: 16 }}>{r.label}</text>
+                  <text x={r.x + 22} y="380" className="arch-sub">{r.sub} 256</text>
+                </g>
+              ))}
+              <path d="M502 364 H486" stroke="#f0c49a" strokeWidth="1.5" />
+              <path d="M410 364 H394" stroke="#f0c49a" strokeWidth="1.5" />
+              <path d="M318 364 H302" stroke="#f0c49a" strokeWidth="1.5" />
+
+              {/* Plugboard out + CT */}
+              <path d="M226 364 H202" stroke="#9ee0da" strokeWidth="1.5" markerEnd="url(#machArr)" />
+              <path d="M160 336 V364" stroke="#9ee0da" strokeWidth="1.5" />
+              <path d="M160 364 H196" stroke="#9ee0da" strokeWidth="1.5" />
+              <text x="132" y="360" className="arch-sub">same</text>
+              <text x="132" y="376" className="arch-sub">table</text>
+              <path d="M124 336 H98" stroke="#9ee0da" strokeWidth="1.5" markerEnd="url(#machArr)" />
+              <rect x="36" y="336" width="56" height="56" rx="2" fill="rgba(255,255,255,0.08)" stroke="#9ee0da" />
+              <text x="50" y="361" className="arch-box" style={{ fontSize: 15 }}>CT</text>
+              <text x="44" y="380" className="arch-sub">byte</text>
+
+              {/* Stage math callout */}
+              <rect x="720" y="200" width="200" height="168" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(158,224,218,0.3)" />
+              <text x="736" y="228" className="arch-box" style={{ fontSize: 14 }}>Per rotor stage</text>
+              <text x="736" y="254" className="arch-sub">in  = x + offset</text>
+              <text x="736" y="274" className="arch-sub">y  = table[in]</text>
+              <text x="736" y="294" className="arch-sub">out = y − offset</text>
+              <text x="736" y="320" className="arch-sub">mod 256 arithmetic</text>
+              <text x="736" y="344" className="arch-sub">fwd then rev tables</text>
+              <text x="736" y="364" className="arch-sub">are inverses</text>
+
+              {/* Stepping engine */}
+              <rect x="20" y="500" width="920" height="120" rx="4" fill="#e8ecef" stroke="rgba(13,19,34,0.12)" />
+              <text x="36" y="528" className="arch-label-dark">After CT emits · step engine</text>
+              <rect x="36" y="544" width="160" height="56" rx="2" fill="#0f3034" />
+              <text x="52" y="568" className="arch-box" style={{ fontSize: 14 }}>Galois LFSR</text>
+              <text x="48" y="588" className="arch-sub">64b · 0xD800…</text>
+              <path d="M204 572 H228" stroke="#148177" strokeWidth="1.5" />
+              <rect x="236" y="544" width="160" height="56" rx="2" fill="#1f6f6a" />
+              <text x="260" y="568" className="arch-box" style={{ fontSize: 14 }}>NLFF cubic6</text>
+              <text x="248" y="588" className="arch-sub">gen 5 bred taps</text>
+              <path d="M404 572 H428" stroke="#148177" strokeWidth="1.5" />
+              <rect x="436" y="544" width="220" height="56" rx="2" fill="#2a374e" />
+              <text x="452" y="568" className="arch-box" style={{ fontSize: 14 }}>step_r1…r4</text>
+              <text x="448" y="588" className="arch-sub">each ≈ ½ · low φ</text>
+              <path d="M664 572 H688" stroke="#a86227" strokeWidth="1.5" />
+              <rect x="696" y="544" width="224" height="56" rx="2" fill="#a86227" />
+              <text x="712" y="568" className="arch-box" style={{ fontSize: 14 }}>offset_ri += step_ri</text>
+              <text x="708" y="588" className="arch-sub">then LFSR clocks</text>
+            </svg>
+            <figcaption>
+              Forward path (solid) through plugboard and four rotors to the un-reflector; return path (dashed) uses reverse tables and the same plugboard. Encrypt equals decrypt under one state.
+            </figcaption>
+          </figure>
+
+          <ul className="stack-list" style={{ marginTop: '1.5rem' }}>
+            <li>
+              <span className="mono">POOL</span>
+              <span>
+                <strong>Day blueprint:</strong> HKDF expands a 16-rotor virtual warehouse plus plugboard and un-reflector. Only four rotors are selected per nonce (Walzenlage) and burst into SoftBus.
+              </span>
+            </li>
+            <li>
+              <span className="mono">OFFSET</span>
+              <span>
+                <strong>Not notches:</strong> each active rotor carries an 8-bit offset. Stage math is <code>(table[x+off] − off)</code> mod 256 — the classical “wiring through a turned wheel,” without odometer geometry.
+              </span>
+            </li>
+            <li>
+              <span className="mono">UKW</span>
+              <span>
+                <strong>Un-reflector:</strong> still an involution (so the machine stays reciprocal), but fixed points are legal. That kills the historical “never encrypts as itself” crib wedge.
+              </span>
+            </li>
+            <li>
+              <span className="mono">ORDER</span>
+              <span>
+                <strong>Scramble then step:</strong> CT is emitted under the current offsets; then NLFF decides which offsets advance and the LFSR clocks — matching <code>Enigma256Machine.process</code> and <code>enigma_256_core.v</code>.
+              </span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section className="band">
+        <div className="shell">
+          <div className="section-head">
             <div className="kicker">Hard facts</div>
             <h2>What the ghost hunt taught the designer</h2>
             <p>
