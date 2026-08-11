@@ -440,18 +440,15 @@ final class Enigma256Tests: XCTestCase {
     }
 
     func testCoupledCubicDiffersFromIndependentCubic() {
-        var foundDiff = false
-        var seed: UInt64 = 1
-        while seed < 10_000 {
-            let cubic = Enigma256LFSR(seed: seed).stepMask(using: .gen3Cubic)
-            let coupled = Enigma256LFSR(seed: seed).stepMask(using: .gen4Coupled)
-            if [cubic.0, cubic.1, cubic.2, cubic.3] != [coupled.0, coupled.1, coupled.2, coupled.3] {
-                foundDiff = true
-                break
-            }
-            seed += 1
-        }
-        XCTAssertTrue(foundDiff, "expected some LFSR seed where coupling changes step enables")
+        // Force three consecutive cubic leaves true via their linear taps.
+        let seed = (UInt64(1) << 62) | (UInt64(1) << 58) | (UInt64(1) << 55)
+        let cubic = Enigma256LFSR(seed: seed).stepMask(using: .gen3Cubic)
+        let coupled = Enigma256LFSR(seed: seed).stepMask(using: .gen4Coupled)
+        XCTAssertTrue(cubic.0)   // leaf0 = f62
+        XCTAssertTrue(cubic.1)   // leaf1 = f58
+        XCTAssertTrue(cubic.2)   // leaf2 = f55
+        // step0 = leaf0 ⊕ (leaf1 ∧ leaf2) = 1 ⊕ 1 = 0
+        XCTAssertFalse(coupled.0)
         let v = Enigma256Generation.gen4Coupled.emitNLFFComboVerilog()
         XCTAssertTrue(v.contains("nlff_f1"))
         XCTAssertTrue(v.contains("nlff_f1 ^ (nlff_f2 & nlff_f3)"))
