@@ -212,7 +212,13 @@ export function Enigma256Page() {
             <li>
               <span className="mono">BURST</span>
               <span>
-                <strong>Table DMA:</strong> AXIS loader <code>enigma_256_axis_tables.v</code> / SoftBus burst programs 2,560 BRAM bytes in one transfer. Optional <code>SCA_CTRL</code> stream jitter for DPA alignment break.
+                <strong>Table DMA:</strong> AXIS loader wired into <code>enigma_256_axi</code> (CTRL[1] arm, 2,560 B). SoftBus burst + optional <code>SCA_CTRL</code> jitter. Co-sim default is AXIS.
+              </span>
+            </li>
+            <li>
+              <span className="mono">RED</span>
+              <span>
+                <strong>TensorLUT:</strong> NLFF combo → 4 LUT6 baseline (<code>enigma_256_tensorlut_baseline.v</code>). Cold-start smoke in <code>logs/tensorlut-enigma256-nlff.log</code>. Full BRAM flatten deferred.
               </span>
             </li>
             <li>
@@ -273,11 +279,11 @@ export function Enigma256Page() {
             </article>
 
             <article className="tl-item">
-              <div className="when">4 — Next</div>
-              <h3>Point HELUT / TensorLUT at the synthesized netlist on purpose.</h3>
+              <div className="when">4 — Done</div>
+              <h3>AXIS table burst + deliberate TensorLUT on NLFF cone.</h3>
               <div className="prose">
                 <p>
-                  Only after Yosys is clean: treat Enigma 256 as an adversarial target the way App 04 treats M4—measure time-to-crack, resign early on shatter, mutate LFSR and pool generation when the Blue threshold trips.
+                  <code>enigma_256_axi</code> loads day tables over AXI-Stream (2,560 bytes; CTRL[1] arms). Yosys keeps BRAMs for FPGA; TensorLUT is pointed at the 4-LUT NLFF step-enable cone on purpose—baseline crypto 0, cold-start explore near-recovers then λ-squeeze shatters (same grammar as M4 melts). Full-core soft-map stays deferred.
                 </p>
               </div>
             </article>
@@ -287,7 +293,7 @@ export function Enigma256Page() {
               <h3>COTS SoC data plane + OTA mutation.</h3>
               <div className="prose">
                 <p>
-                  Burst-load day-key tables; keep hybrid KEM, HKDF-SHA512, and AEAD on the control plane; flash polymorphic updates without new silicon.
+                  Burst-load day-key tables on real fabric; keep hybrid KEM, HKDF-SHA512, and AEAD on the control plane; flash polymorphic updates without new silicon.
                 </p>
               </div>
             </article>

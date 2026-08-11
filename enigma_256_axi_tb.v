@@ -1,10 +1,10 @@
 `timescale 1ns / 1ps
 
-// Golden co-sim through AXI4-Lite (enigma_256_axi).
+// Golden co-sim through AXI4-Lite + AXIS table burst (enigma_256_axi).
 //
-//   swift run helut --enigma256-golden --enigma256-out Fixtures/enigma256_golden
-//   iverilog -g2012 -o /tmp/e256axi.vvp enigma_256_core.v enigma_256_axi.v enigma_256_axi_tb.v
-//   vvp /tmp/e256axi.vvp
+//   ./Scripts/enigma256_axi_sim.sh
+//
+// Default: load tables via AXIS (2560 beats). +LITE=1 uses legacy WR_* path.
 
 module enigma_256_axi_tb;
     reg         aclk = 0;
@@ -29,19 +29,26 @@ module enigma_256_axi_tb;
     wire        rvalid;
     reg         rready = 1;
 
+    reg  [7:0]  axis_tdata = 0;
+    reg         axis_tvalid = 0;
+    wire        axis_tready;
+    reg         axis_tlast = 0;
+
     enigma_256_axi dut (
         .aclk(aclk), .aresetn(aresetn),
         .s_axi_awaddr(awaddr), .s_axi_awvalid(awvalid), .s_axi_awready(awready),
         .s_axi_wdata(wdata), .s_axi_wstrb(wstrb), .s_axi_wvalid(wvalid), .s_axi_wready(wready),
         .s_axi_bresp(bresp), .s_axi_bvalid(bvalid), .s_axi_bready(bready),
         .s_axi_araddr(araddr), .s_axi_arvalid(arvalid), .s_axi_arready(arready),
-        .s_axi_rdata(rdata), .s_axi_rresp(rresp), .s_axi_rvalid(rvalid), .s_axi_rready(rready)
+        .s_axi_rdata(rdata), .s_axi_rresp(rresp), .s_axi_rvalid(rvalid), .s_axi_rready(rready),
+        .s_axis_tdata(axis_tdata), .s_axis_tvalid(axis_tvalid),
+        .s_axis_tready(axis_tready), .s_axis_tlast(axis_tlast)
     );
 
     reg [7:0] table_mem [0:9][0:255];
     reg [7:0] plain_mem [0:1023];
     reg [7:0] cipher_mem [0:1023];
-    integer i, t, errors, n_bytes, code, fd, polls;
+    integer i, t, errors, n_bytes, code, fd, polls, use_lite;
     reg [7:0] byte_v;
     reg [31:0] rtmp;
     string hexdir, path;
@@ -123,7 +130,7 @@ module enigma_256_axi_tb;
             axi_write(8'h28, {24'd0, din});
             polls = 0;
             rtmp = 0;
-            while (polls < 16) begin
+            while (polls < 32) begin
                 axi_read(8'h30, rtmp);
                 if (rtmp[0]) begin
                     axi_read(8'h2C, rtmp);
@@ -140,9 +147,71 @@ module enigma_256_axi_tb;
         end
     endtask
 
+    task axis_load_tables;
+        integer guard;
+        begin
+            axi_write(8'h00, 32'h2); // CTRL[1] arm AXIS
+            @(posedge aclk);
+            for (t = 0; t < 10; t = t + 1) begin
+                for (i = 0; i < 256; i = i + 1) begin
+                    guard = 0;
+                    @(posedge aclk);
+                    axis_tdata  <= table_mem[t][i];
+                    axis_tvalid <= 1;
+                    axis_tlast  <= (t == 9 && i == 255);
+                    @(posedge aclk);
+                    while (!axis_tready && guard < 100) begin
+                        guard = guard + 1;
+                        @(posedge aclk);
+                    end
+                    if (guard >= 100) begin
+                        $display("FATAL: AXIS tready timeout sel=%0d addr=%0d", t, i);
+                        $finish(1);
+                    end
+                    axis_tvalid <= 0;
+                    axis_tlast  <= 0;
+                end
+            end
+            // Wait for done (STATUS[2])
+            polls = 0;
+            rtmp = 0;
+            while (polls < 64) begin
+                axi_read(8'h30, rtmp);
+                if (rtmp[2]) begin
+                    polls = 99;
+                end else begin
+                    polls = polls + 1;
+                end
+            end
+            if (polls != 99) begin
+                $display("FATAL: AXIS done timeout");
+                $finish(1);
+            end
+            axi_read(8'h38, rtmp);
+            if (rtmp[11:0] != 12'd2560) begin
+                $display("FATAL: BURST_STATUS=%0d want 2560", rtmp[11:0]);
+                $finish(1);
+            end
+            $display("AXIS table burst: %0d bytes OK", rtmp[11:0]);
+        end
+    endtask
+
+    task lite_load_tables;
+        begin
+            for (t = 0; t < 10; t = t + 1) begin
+                axi_write(8'h04, t[3:0]);
+                for (i = 0; i < 256; i = i + 1) begin
+                    axi_write(8'h08, i[7:0]);
+                    axi_write(8'h0C, table_mem[t][i]);
+                end
+            end
+        end
+    endtask
+
     initial begin
         if (!$value$plusargs("HEXDIR=%s", hexdir))
             hexdir = "Fixtures/enigma256_golden";
+        use_lite = $test$plusargs("LITE");
         n_bytes = ENIGMA256_N;
 
         path = {hexdir, "/tables/plugboard.hex"}; load_table(0);
@@ -163,14 +232,10 @@ module enigma_256_axi_tb;
         aresetn = 1;
         @(posedge aclk);
 
-        // Program BRAMs via AXI
-        for (t = 0; t < 10; t = t + 1) begin
-            axi_write(8'h04, t[3:0]); // WR_SEL
-            for (i = 0; i < 256; i = i + 1) begin
-                axi_write(8'h08, i[7:0]);           // WR_ADDR
-                axi_write(8'h0C, table_mem[t][i]);  // WR_DATA → wr_en
-            end
-        end
+        if (use_lite)
+            lite_load_tables();
+        else
+            axis_load_tables();
 
         // Message key + LOAD_STATE
         axi_write(8'h10, ENIGMA256_LFSR[31:0]);
@@ -192,7 +257,8 @@ module enigma_256_axi_tb;
         end
 
         if (errors == 0)
-            $display("PASS: enigma_256_axi matched %0d golden bytes", n_bytes);
+            $display("PASS: enigma_256_axi matched %0d golden bytes (%s)",
+                     n_bytes, use_lite ? "LITE" : "AXIS");
         else
             $display("FAIL: %0d mismatches", errors);
         $finish(errors == 0 ? 0 : 1);

@@ -19,7 +19,7 @@ Do not assert `VALID_IN` during table writes or `LOAD_STATE`.
 
 | Offset | Name | Access | Width | Description |
 |--------|------|--------|-------|-------------|
-| `0x00` | `CTRL` | W1C / RW | 32 | bit0: pulse `LOAD_STATE` (W1C). bit8: soft reset (optional). |
+| `0x00` | `CTRL` | W1C / RW | 32 | bit0: pulse `LOAD_STATE`. bit1: arm AXIS table burst. bit8: soft clear stream latch. |
 | `0x04` | `WR_SEL` | RW | 32 | Table select `0…9` (see below). |
 | `0x08` | `WR_ADDR` | RW | 32 | Byte address `0…255` within the selected table. |
 | `0x0C` | `WR_DATA` | RW | 32 | Data byte; writing commits one BRAM write (`wr_en` pulse). |
