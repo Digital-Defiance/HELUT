@@ -1,0 +1,509 @@
+{
+  "target": "P1030680",
+  "ciphertext": "JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF",
+  "note": "Operation Regenbogen / Hannibal operational cribs for P1030680 (M-Thetis). Phrases are period-plausible constructions from attested vocabulary (not verified native decrypts except shared lexicon with P1030681). Offsets are self-stecker-legal against the 72-letter CT. Queue AFTER catalog right-ring sweep; do not preempt Metal. Tier 04_own: U-534 own-orders (lower prior).",
+  "source": "Claude research pass, 2026-08-10 -- Operation Regenbogen / Operation Hannibal context for P1030680 (M-Thetis, U534, 1 May 1945)",
+  "cribs": [
+    {
+      "text": "AUSLAUFENKIELNORWEGEN",
+      "messages": 1,
+      "offsets": [
+        2,
+        8,
+        10,
+        12,
+        14,
+        16,
+        18,
+        19,
+        20,
+        22,
+        25,
+        29,
+        30,
+        31,
+        32,
+        34,
+        36,
+        40,
+        41,
+        42,
+        43,
+        45,
+        46,
+        48,
+        50
+      ]
+    },
+    {
+      "text": "KURSNORWEGENBEFOHLEN",
+      "messages": 1,
+      "offsets": [
+        1,
+        3,
+        6,
+        7,
+        9,
+        10,
+        11,
+        12,
+        14,
+        17,
+        25,
+        29,
+        30,
+        31,
+        33,
+        38,
+        39,
+        41,
+        42,
+        43,
+        46,
+        49,
+        51
+      ]
+    }
+  ],
+  "placements": [
+    {
+      "text": "AUSLAUFENKIELNORWEGEN",
+      "offset": 25,
+      "edges": 21,
+      "loops": 5,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "KURSNORWEGENBEFOHLEN",
+      "offset": 31,
+      "edges": 20,
+      "loops": 5,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "KURSNORWEGENBEFOHLEN",
+      "offset": 38,
+      "edges": 20,
+      "loops": 5,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "KURSNORWEGENBEFOHLEN",
+      "offset": 39,
+      "edges": 20,
+      "loops": 5,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "KURSNORWEGENBEFOHLEN",
+      "offset": 42,
+      "edges": 20,
+      "loops": 5,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "KURSNORWEGENBEFOHLEN",
+      "offset": 43,
+      "edges": 20,
+      "loops": 5,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "AUSLAUFENKIELNORWEGEN",
+      "offset": 16,
+      "edges": 21,
+      "loops": 4,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "AUSLAUFENKIELNORWEGEN",
+      "offset": 19,
+      "edges": 21,
+      "loops": 4,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "AUSLAUFENKIELNORWEGEN",
+      "offset": 22,
+      "edges": 21,
+      "loops": 4,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "AUSLAUFENKIELNORWEGEN",
+      "offset": 31,
+      "edges": 21,
+      "loops": 4,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "AUSLAUFENKIELNORWEGEN",
+      "offset": 34,
+      "edges": 21,
+      "loops": 4,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "AUSLAUFENKIELNORWEGEN",
+      "offset": 41,
+      "edges": 21,
+      "loops": 4,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "AUSLAUFENKIELNORWEGEN",
+      "offset": 45,
+      "edges": 21,
+      "loops": 4,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "KURSNORWEGENBEFOHLEN",
+      "offset": 10,
+      "edges": 20,
+      "loops": 4,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "KURSNORWEGENBEFOHLEN",
+      "offset": 25,
+      "edges": 20,
+      "loops": 4,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "KURSNORWEGENBEFOHLEN",
+      "offset": 30,
+      "edges": 20,
+      "loops": 4,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "KURSNORWEGENBEFOHLEN",
+      "offset": 33,
+      "edges": 20,
+      "loops": 4,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "KURSNORWEGENBEFOHLEN",
+      "offset": 41,
+      "edges": 20,
+      "loops": 4,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "KURSNORWEGENBEFOHLEN",
+      "offset": 46,
+      "edges": 20,
+      "loops": 4,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "KURSNORWEGENBEFOHLEN",
+      "offset": 51,
+      "edges": 20,
+      "loops": 4,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "AUSLAUFENKIELNORWEGEN",
+      "offset": 10,
+      "edges": 21,
+      "loops": 3,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "AUSLAUFENKIELNORWEGEN",
+      "offset": 14,
+      "edges": 21,
+      "loops": 3,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "AUSLAUFENKIELNORWEGEN",
+      "offset": 18,
+      "edges": 21,
+      "loops": 3,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "AUSLAUFENKIELNORWEGEN",
+      "offset": 20,
+      "edges": 21,
+      "loops": 3,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "AUSLAUFENKIELNORWEGEN",
+      "offset": 29,
+      "edges": 21,
+      "loops": 3,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "AUSLAUFENKIELNORWEGEN",
+      "offset": 30,
+      "edges": 21,
+      "loops": 3,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "AUSLAUFENKIELNORWEGEN",
+      "offset": 32,
+      "edges": 21,
+      "loops": 3,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "AUSLAUFENKIELNORWEGEN",
+      "offset": 36,
+      "edges": 21,
+      "loops": 3,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "AUSLAUFENKIELNORWEGEN",
+      "offset": 40,
+      "edges": 21,
+      "loops": 3,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "AUSLAUFENKIELNORWEGEN",
+      "offset": 42,
+      "edges": 21,
+      "loops": 3,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "AUSLAUFENKIELNORWEGEN",
+      "offset": 46,
+      "edges": 21,
+      "loops": 3,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "KURSNORWEGENBEFOHLEN",
+      "offset": 1,
+      "edges": 20,
+      "loops": 3,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "KURSNORWEGENBEFOHLEN",
+      "offset": 7,
+      "edges": 20,
+      "loops": 3,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "KURSNORWEGENBEFOHLEN",
+      "offset": 11,
+      "edges": 20,
+      "loops": 3,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "KURSNORWEGENBEFOHLEN",
+      "offset": 12,
+      "edges": 20,
+      "loops": 3,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "KURSNORWEGENBEFOHLEN",
+      "offset": 14,
+      "edges": 20,
+      "loops": 3,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "KURSNORWEGENBEFOHLEN",
+      "offset": 17,
+      "edges": 20,
+      "loops": 3,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "KURSNORWEGENBEFOHLEN",
+      "offset": 29,
+      "edges": 20,
+      "loops": 3,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "KURSNORWEGENBEFOHLEN",
+      "offset": 49,
+      "edges": 20,
+      "loops": 3,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "AUSLAUFENKIELNORWEGEN",
+      "offset": 2,
+      "edges": 21,
+      "loops": 2,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "AUSLAUFENKIELNORWEGEN",
+      "offset": 8,
+      "edges": 21,
+      "loops": 2,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "AUSLAUFENKIELNORWEGEN",
+      "offset": 43,
+      "edges": 21,
+      "loops": 2,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "AUSLAUFENKIELNORWEGEN",
+      "offset": 50,
+      "edges": 21,
+      "loops": 2,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "KURSNORWEGENBEFOHLEN",
+      "offset": 3,
+      "edges": 20,
+      "loops": 2,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "KURSNORWEGENBEFOHLEN",
+      "offset": 6,
+      "edges": 20,
+      "loops": 2,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "KURSNORWEGENBEFOHLEN",
+      "offset": 9,
+      "edges": 20,
+      "loops": 2,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "AUSLAUFENKIELNORWEGEN",
+      "offset": 12,
+      "edges": 21,
+      "loops": 1,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    },
+    {
+      "text": "AUSLAUFENKIELNORWEGEN",
+      "offset": 48,
+      "edges": 21,
+      "loops": 1,
+      "role": "body",
+      "cluster": "u534_own_orders",
+      "tier": "04_own"
+    }
+  ],
+  "stats": {
+    "phrases": 2,
+    "placements": 48,
+    "tiers": [
+      "04_own"
+    ]
+  }
+}

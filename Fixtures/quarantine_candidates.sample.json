@@ -1,0 +1,38 @@
+{
+  "target": "P1030680",
+  "ciphertext": "JCRSAFHBWYXCZBQGJYNPXJBSWBLSNXTZYOHPTCGGLUCEHDBBTASOGYKKUTVQOXALCZXJHLODCFPVL",
+  "generatedAt": "2026-08-10T21:00:00Z",
+  "sourceFixture": "Fixtures/p1030680_menus.json#sample",
+  "softBar": {
+    "softTailFloor": -4.0,
+    "softICFloor": 0.048,
+    "strictTailFloor": -3.6,
+    "strictICFloor": 0.055
+  },
+  "candidates": [
+    {
+      "ukw": "B",
+      "greek": "gamma",
+      "wheelOrder": "IV-III-VIII",
+      "rings": "AAAA",
+      "positions": "AAAA",
+      "steckerPairs": ["CH", "EJ"],
+      "pairCount": 2,
+      "menuCrib": "UUUFLOTTX",
+      "menuOffset": 0,
+      "menuLoops": 1,
+      "menuEdges": 9,
+      "ic": 0.051,
+      "tailScore": -3.85,
+      "fullScore": -3.7,
+      "effectiveTailScore": -3.85,
+      "cribExact": true,
+      "prefixEnd": null,
+      "prefixIC": null,
+      "prefixTailScore": null,
+      "plaintextPrefix": "SAMPLEQUARANTINESEED",
+      "softBand": "whole IC=0.051≥0.048 tail=-3.850>-4.000",
+      "source": "sample"
+    }
+  ]
+}

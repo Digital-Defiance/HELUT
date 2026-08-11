@@ -1,0 +1,106 @@
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 12 (constrained 16…39)
+Shell evolution: ON freeRings=false WO=6 ringSeeds=3 subspace=potsdam-neighbourhood
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/25 pop=16 blockB_greeks=0
+  gen-best  fitness=11/39 tmpl=body:ANANFUNFUUUFLOTT@15 IC=0.0391 pos=RTUQ | UKWC beta VIII-IV-III rings=AAAA stecker=IW LZ ST
+  all-time  fitness=11 tmpl=body:ANANFUNFUUUFLOTT@15 pos=RTUQ | UKWC beta VIII-IV-III rings=AAAA stecker=IW LZ ST
+Hybrid gen 2/25 pop=16 blockB_greeks=0
+  gen-best  fitness=11/39 tmpl=body:ANANFUNFUUUFLOTT@15 IC=0.0391 pos=RTUQ | UKWC beta VIII-IV-III rings=AAAA stecker=IW LZ ST
+  all-time  fitness=11 tmpl=body:ANANFUNFUUUFLOTT@15 pos=RTUQ | UKWC beta VIII-IV-III rings=AAAA stecker=IW LZ ST
+Hybrid gen 3/25 pop=16 blockB_greeks=0
+  gen-best  fitness=13/39 tmpl=body:ANANFUNFUUUFLOTT@15 IC=0.0403 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+  all-time  fitness=13 tmpl=body:ANANFUNFUUUFLOTT@15 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+Hybrid gen 4/25 pop=16 blockB_greeks=0
+  gen-best  fitness=13/39 tmpl=body:ANANFUNFUUUFLOTT@15 IC=0.0403 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+  all-time  fitness=13 tmpl=body:ANANFUNFUUUFLOTT@15 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+Hybrid gen 5/25 pop=16 blockB_greeks=0
+  gen-best  fitness=13/39 tmpl=body:ANANFUNFUUUFLOTT@15 IC=0.0403 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+  all-time  fitness=13 tmpl=body:ANANFUNFUUUFLOTT@15 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+Hybrid gen 6/25 pop=16 blockB_greeks=0
+  gen-best  fitness=13/39 tmpl=body:ANANFUNFUUUFLOTT@15 IC=0.0403 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+  all-time  fitness=13 tmpl=body:ANANFUNFUUUFLOTT@15 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+Hybrid gen 7/25 pop=16 blockB_greeks=0
+  gen-best  fitness=13/39 tmpl=body:ANANFUNFUUUFLOTT@15 IC=0.0403 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+  all-time  fitness=13 tmpl=body:ANANFUNFUUUFLOTT@15 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+Hybrid gen 8/25 pop=16 blockB_greeks=0
+  gen-best  fitness=13/39 tmpl=body:ANANFUNFUUUFLOTT@15 IC=0.0403 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+  all-time  fitness=13 tmpl=body:ANANFUNFUUUFLOTT@15 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+Hybrid gen 9/25 pop=16 blockB_greeks=0
+  gen-best  fitness=13/39 tmpl=body:ANANFUNFUUUFLOTT@15 IC=0.0403 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+  all-time  fitness=13 tmpl=body:ANANFUNFUUUFLOTT@15 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+Hybrid gen 10/25 pop=16 blockB_greeks=0
+  gen-best  fitness=13/39 tmpl=body:ANANFUNFUUUFLOTT@15 IC=0.0403 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+  all-time  fitness=13 tmpl=body:ANANFUNFUUUFLOTT@15 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+Hybrid gen 11/25 pop=16 blockB_greeks=0
+  gen-best  fitness=13/39 tmpl=body:ANANFUNFUUUFLOTT@15 IC=0.0403 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+  all-time  fitness=13 tmpl=body:ANANFUNFUUUFLOTT@15 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+Hybrid gen 12/25 pop=16 blockB_greeks=0
+  gen-best  fitness=13/39 tmpl=body:ANANFUNFUUUFLOTT@15 IC=0.0403 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+  all-time  fitness=13 tmpl=body:ANANFUNFUUUFLOTT@15 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+Hybrid gen 13/25 pop=16 blockB_greeks=0
+  gen-best  fitness=13/39 tmpl=body:ANANFUNFUUUFLOTT@15 IC=0.0403 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+  all-time  fitness=13 tmpl=body:ANANFUNFUUUFLOTT@15 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+Hybrid gen 14/25 pop=16 blockB_greeks=0
+  gen-best  fitness=13/39 tmpl=body:ANANFUNFUUUFLOTT@15 IC=0.0403 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+  all-time  fitness=13 tmpl=body:ANANFUNFUUUFLOTT@15 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+Hybrid gen 15/25 pop=16 blockB_greeks=0
+  gen-best  fitness=13/39 tmpl=body:ANANFUNFUUUFLOTT@15 IC=0.0403 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+  all-time  fitness=13 tmpl=body:ANANFUNFUUUFLOTT@15 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+Hybrid gen 16/25 pop=16 blockB_greeks=0
+  gen-best  fitness=13/39 tmpl=body:ANANFUNFUUUFLOTT@15 IC=0.0403 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+  all-time  fitness=13 tmpl=body:ANANFUNFUUUFLOTT@15 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+Hybrid gen 17/25 pop=16 blockB_greeks=0
+  gen-best  fitness=13/39 tmpl=body:ANANFUNFUUUFLOTT@15 IC=0.0403 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+  all-time  fitness=13 tmpl=body:ANANFUNFUUUFLOTT@15 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+Hybrid gen 18/25 pop=16 blockB_greeks=0
+  gen-best  fitness=13/39 tmpl=body:ANANFUNFUUUFLOTT@15 IC=0.0403 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+  all-time  fitness=13 tmpl=body:ANANFUNFUUUFLOTT@15 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+Hybrid gen 19/25 pop=16 blockB_greeks=0
+  gen-best  fitness=13/39 tmpl=body:ANANFUNFUUUFLOTT@15 IC=0.0403 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+  all-time  fitness=13 tmpl=body:ANANFUNFUUUFLOTT@15 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+Hybrid gen 20/25 pop=16 blockB_greeks=0
+  gen-best  fitness=13/39 tmpl=body:ANANFUNFUUUFLOTT@15 IC=0.0403 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+  all-time  fitness=13 tmpl=body:ANANFUNFUUUFLOTT@15 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+Hybrid gen 21/25 pop=16 blockB_greeks=0
+  gen-best  fitness=13/39 tmpl=body:ANANFUNFUUUFLOTT@15 IC=0.0403 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+  all-time  fitness=13 tmpl=body:ANANFUNFUUUFLOTT@15 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KM QV RX WZ
+Hybrid gen 22/25 pop=16 blockB_greeks=0
+  gen-best  fitness=14/39 tmpl=body:ANANFUNFUUUFLOTT@15 IC=0.0379 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KY QV RX WZ
+  all-time  fitness=14 tmpl=body:ANANFUNFUUUFLOTT@15 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KY QV RX WZ
+Hybrid gen 23/25 pop=16 blockB_greeks=0
+  gen-best  fitness=14/39 tmpl=body:ANANFUNFUUUFLOTT@15 IC=0.0379 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KY QV RX WZ
+  all-time  fitness=14 tmpl=body:ANANFUNFUUUFLOTT@15 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KY QV RX WZ
+Hybrid gen 24/25 pop=16 blockB_greeks=0
+  gen-best  fitness=14/39 tmpl=body:ANANFUNFUUUFLOTT@15 IC=0.0379 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KY QV RX WZ
+  all-time  fitness=14 tmpl=body:ANANFUNFUUUFLOTT@15 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KY QV RX WZ
+Hybrid gen 25/25 pop=16 blockB_greeks=0
+  gen-best  fitness=14/39 tmpl=body:ANANFUNFUUUFLOTT@15 IC=0.0379 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KY QV RX WZ
+  all-time  fitness=14 tmpl=body:ANANFUNFUUUFLOTT@15 pos=BEQC | UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KY QV RX WZ
+HELUT — Stochastic Bombe vs P1030680 (Thetis template bank)
+Ciphertext: JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF
+Fitness: letter-match on masked templates ('.' = don't-care); German-ness ignored
+Templates (12, minConstrained=12):
+  [39] body:ANANFUNFUUUFLOTT@15
+  [28] head:UEBUNGSMELDUNGUEBUNG@0
+  [21] head:AUSBILDUNGSFUNKSPRUC@0
+  [18] head:LEHRGANGFUNKSPRUCH@0
+  [17] head:ANALLEFUNKSTELLEN@0
+  [17] head:SEDMSSEDMSSEDMSSE@0
+  [16] head:ACHACHACHACHACHA@0
+  [16] head:ACHSEDMOEDMACHSE@0
+  [16] head:FUNKSPRUCHUEBUNG@0
+  [16] head:OEDMOEDMOEDMOEDM@0
+  [16] head:THETISFUNKSPRUCHX@0
+  [16] head:VVVUUUAUSBILDUNG@0
+
+Config: pop=16 gens=25 maxPlugs=10 blockB_greeks=0 samples subspace=potsdam-neighbourhood WO=6 evolveShell=true freeRings=false ringSeeds=AAAA,AACU,VCCH fitness=KPA templates×12 kpaHill=16
+
+
+Elapsed: 128.2 s
+Best shell: UKWC gamma III-IV-VIII rings=ACCH stecker=CO EU FG HN JP KY QV RX WZ
+Best hit: partition=kpa-26^4 tmpl=body:ANANFUNFUUUFLOTT@15 pos=BEQC score=14.0000 IC=0.0379
+Plain: FIWKOFWWFAIGMICDRAYFFNAMLVDQOEPYNUMEPNISICNOLFEWRVTXPDSLUXMRHUWWJOYVZYDR
+Template match: 14/39 on body:ANANFUNFUUUFLOTT@15
+*** No template fully satisfied — continue bank / operators ***
+See ASIC_CRACKER.md / evolution-hybridization.md / stochastic-bombe.md

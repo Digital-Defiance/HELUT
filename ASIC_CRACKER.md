@@ -6,12 +6,22 @@ Goal: a **real** P1030680 attack machine — not HELUT mock-PBS theater.
 
 | Layer | Role | Analogy |
 |-------|------|---------|
-| **Cleartext batch datapath** (`CleartextBatchHybrid.swift`) | Decrypt + **attack score** (bigram − IC penalty + crib bonuses) over `B = 17 576` | ASIC / hard macros |
+| **Cleartext batch datapath** (`CleartextBatchHybrid.swift`) | Decrypt + **attack score** (bigram) **or KPA letter-match** over `B = 17 576` | ASIC / hard macros |
 | **Evolutionary outer loop** (`HybridBombeHarness.swift`) | Population of **shell + stecker** chromosomes | Self-evolution / reconfigurable search |
 | **Host plugboard** | Stecker as tables | Bonding pads / soft I/O |
 | **HELUT mock-PBS / PicoRV** | Systems research | **Out of band for cracking** |
 
 Mock PBS cannot assign fitness. This cracker does not use them.
+
+## Stochastic Bombe / KPA mode
+
+German bigrams failed the P1030684 control at 72 letters (flat landscape). `--hybrid-control` switches fitness to **exact letter match** against a known/template plaintext and uses Metal kernel `m4_kpa_batch`. See [`stochastic-bombe.md`](stochastic-bombe.md).
+
+```bash
+.build/release/helut --hybrid --hybrid-control --quick          # oracle stecker smoke
+.build/release/helut --hybrid --hybrid-control --hybrid-seed-drop 1
+.build/release/helut --hybrid --hybrid-control --hybrid-blind --hybrid-pop 24 --hybrid-gens 40
+```
 
 ## Chromosome genes
 

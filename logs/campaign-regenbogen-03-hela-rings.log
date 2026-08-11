@@ -1,0 +1,40 @@
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030680_regenbogen_03_hela_menus.json (85 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 85 of 85
+min crib length: 16
+running 85 menus, highest deduction power first:
+  [1] RAEUMUNGOSTPREUSSEN@33 edges=19 letters=17 loops=5 central=P
+  [2] RAEUMUNGOSTPREUSSEN@39 edges=19 letters=17 loops=5 central=S
+  [3] RAEUMUNGOSTPREUSSEN@1 edges=19 letters=17 loops=4 central=S
+  [4] RAEUMUNGOSTPREUSSEN@22 edges=19 letters=17 loops=4 central=P
+  [5] RAEUMUNGOSTPREUSSEN@23 edges=19 letters=17 loops=4 central=P
+  [6] RAEUMUNGOSTPREUSSEN@25 edges=19 letters=18 loops=4 central=R
+  [7] RAEUMUNGOSTPREUSSEN@40 edges=19 letters=17 loops=4 central=S
+  [8] RAEUMUNGOSTPREUSSEN@41 edges=19 letters=17 loops=4 central=S
+  [9] RAEUMUNGOSTPREUSSEN@43 edges=19 letters=17 loops=4 central=S
+  [10] RAEUMUNGOSTPREUSSEN@5 edges=19 letters=18 loops=3 central=E
+  [11] RAEUMUNGOSTPREUSSEN@9 edges=19 letters=20 loops=3 central=E
+  [12] RAEUMUNGOSTPREUSSEN@12 edges=19 letters=19 loops=3 central=R
+  … 73 more
+shells/menu: 34944 (336 WO × 2 Greek × 2 UKW × 26 ring) → 1.6e+10 settings
+GPU pipeline depth: 4 shells in flight
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+right ring swept: every right-wheel turnover phase covered
+residual gap: middle ring pinned A, so keys whose middle wheel turns over inside a 19-letter span (~4% for 1 notch, ~8% for 2) are not covered
+ETA floor (~50M/s): 452.4 min
+
+quarantine: soft IC≥0.048 / tail>-4.300 (strict IC≥0.055 / tail>-3.600) → logs/quarantine_regenbogen_hela.json
+  [1/85·1] RAEUMUNGOSTPREUSSEN@33 edges=19 letters=17 loops=5 central=P dead at the board                       266s  60.0M/s ETA 372.7 min
+  [2/85·2] RAEUMUNGOSTPREUSSEN@39 edges=19 letters=17 loops=5 central=S dead at the board                       682s  46.9M/s ETA 471.4 min
+  [3/85·3] RAEUMUNGOSTPREUSSEN@1 edges=19 letters=17 loops=4 central=S dead at the board                       940s  51.0M/s ETA 428.0 min
+  [4/85·4] RAEUMUNGOSTPREUSSEN@22 edges=19 letters=17 loops=4 central=P  211237 stops → 0 valid 10-plug completions    1201s  53.2M/s ETA 405.5 min
+  [5/85·5] RAEUMUNGOSTPREUSSEN@23 edges=19 letters=17 loops=4 central=P dead at the board                      1508s  53.0M/s ETA 402.0 min
+  [6/85·6] RAEUMUNGOSTPREUSSEN@25 edges=19 letters=18 loops=4 central=R dead at the board                      1767s  54.2M/s ETA 387.8 min
+  [7/85·7] RAEUMUNGOSTPREUSSEN@40 edges=19 letters=17 loops=4 central=S dead at the board                      2096s  53.3M/s ETA 389.2 min
+  [8/85·8] RAEUMUNGOSTPREUSSEN@41 edges=19 letters=17 loops=4 central=S      82 stops → 0 valid 10-plug completions    2354s  54.3M/s ETA 377.6 min
+  [9/85·9] RAEUMUNGOSTPREUSSEN@43 edges=19 letters=17 loops=4 central=S dead at the board                      2677s  53.7M/s ETA 376.8 min
+  [10/85·10] RAEUMUNGOSTPREUSSEN@5 edges=19 letters=18 loops=3 central=E dead at the board                      2943s  54.3M/s ETA 367.8 min
+  [11/85·11] RAEUMUNGOSTPREUSSEN@9 edges=19 letters=20 loops=3 central=E       2 stops → 0 valid 10-plug completions    3171s  55.4M/s ETA 355.5 min
+  [12/85·12] RAEUMUNGOSTPREUSSEN@12 edges=19 letters=19 loops=3 central=R dead at the board                      3472s  55.2M/s ETA 352.0 min
+  [13/85·13] RAEUMUNGOSTPREUSSEN@13 edges=19 letters=19 loops=3 central=R dead at the board                      3804s  54.6M/s ETA 351.1 min

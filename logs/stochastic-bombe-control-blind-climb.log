@@ -1,0 +1,141 @@
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Shell evolution: OFF freeRings=false WO=1 ringSeeds=1 subspace=potsdam
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/40 pop=24 blockB_greeks=0
+  gen-best  fitness=15.0000 IC=0.0383 pos=TODH | UKWB gamma IV-III-VIII rings=AACU stecker=AS BG EQ HY IW KN LP
+  all-time  fitness=15.0000 IC=0.0383 pos=TODH | UKWB gamma IV-III-VIII rings=AACU stecker=AS BG EQ HY IW KN LP
+Hybrid gen 2/40 pop=24 blockB_greeks=0
+  gen-best  fitness=16.0000 IC=0.0305 pos=UHPW | UKWB gamma IV-III-VIII rings=AACU stecker=AS FT GK HN LR OP VY WX
+  all-time  fitness=16.0000 IC=0.0305 pos=UHPW | UKWB gamma IV-III-VIII rings=AACU stecker=AS FT GK HN LR OP VY WX
+Hybrid gen 3/40 pop=24 blockB_greeks=0
+  gen-best  fitness=17.0000 IC=0.0321 pos=UHPW | UKWB gamma IV-III-VIII rings=AACU stecker=AS EI FT GK HN LR OP VY WX
+  all-time  fitness=17.0000 IC=0.0321 pos=UHPW | UKWB gamma IV-III-VIII rings=AACU stecker=AS EI FT GK HN LR OP VY WX
+Hybrid gen 4/40 pop=24 blockB_greeks=0
+  gen-best  fitness=17.0000 IC=0.0321 pos=UHPW | UKWB gamma IV-III-VIII rings=AACU stecker=AS EI FT GK HN LR OP VY WX
+  all-time  fitness=17.0000 IC=0.0321 pos=UHPW | UKWB gamma IV-III-VIII rings=AACU stecker=AS EI FT GK HN LR OP VY WX
+Hybrid gen 5/40 pop=24 blockB_greeks=0
+  gen-best  fitness=18.0000 IC=0.0364 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AE BU DG FP LN RZ SX VY
+  all-time  fitness=18.0000 IC=0.0364 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AE BU DG FP LN RZ SX VY
+Hybrid gen 6/40 pop=24 blockB_greeks=0
+  gen-best  fitness=19.0000 IC=0.0387 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AE BU DG FM KN LP RZ SX VY
+  all-time  fitness=19.0000 IC=0.0387 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AE BU DG FM KN LP RZ SX VY
+Hybrid gen 7/40 pop=24 blockB_greeks=0
+  gen-best  fitness=19.0000 IC=0.0387 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AE BU DG FM KN LP RZ SX VY
+  all-time  fitness=19.0000 IC=0.0387 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AE BU DG FM KN LP RZ SX VY
+Hybrid gen 8/40 pop=24 blockB_greeks=0
+  gen-best  fitness=19.0000 IC=0.0387 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AE BU DG FM KN LP RZ SX VY
+  all-time  fitness=19.0000 IC=0.0387 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AE BU DG FM KN LP RZ SX VY
+Hybrid gen 9/40 pop=24 blockB_greeks=0
+  gen-best  fitness=20.0000 IC=0.0403 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AE BU CT DG FM KN LP RZ SX VY
+  all-time  fitness=20.0000 IC=0.0403 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AE BU CT DG FM KN LP RZ SX VY
+Hybrid gen 10/40 pop=24 blockB_greeks=0
+  gen-best  fitness=20.0000 IC=0.0403 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AE BU CT DG FM KN LP RZ SX VY
+  all-time  fitness=20.0000 IC=0.0403 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AE BU CT DG FM KN LP RZ SX VY
+Hybrid gen 11/40 pop=24 blockB_greeks=0
+  gen-best  fitness=20.0000 IC=0.0403 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AE BU CT DG FM KN LP RZ SX VY
+  all-time  fitness=20.0000 IC=0.0403 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AE BU CT DG FM KN LP RZ SX VY
+Hybrid gen 12/40 pop=24 blockB_greeks=0
+  gen-best  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+  all-time  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+Hybrid gen 13/40 pop=24 blockB_greeks=0
+  gen-best  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+  all-time  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+Hybrid gen 14/40 pop=24 blockB_greeks=0
+  gen-best  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+  all-time  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+Hybrid gen 15/40 pop=24 blockB_greeks=0
+  gen-best  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+  all-time  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+Hybrid gen 16/40 pop=24 blockB_greeks=0
+  gen-best  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+  all-time  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+Hybrid gen 17/40 pop=24 blockB_greeks=0
+  gen-best  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+  all-time  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+Hybrid gen 18/40 pop=24 blockB_greeks=0
+  gen-best  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+  all-time  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+Hybrid gen 19/40 pop=24 blockB_greeks=0
+  gen-best  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+  all-time  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+Hybrid gen 20/40 pop=24 blockB_greeks=0
+  gen-best  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+  all-time  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+Hybrid gen 21/40 pop=24 blockB_greeks=0
+  gen-best  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+  all-time  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+Hybrid gen 22/40 pop=24 blockB_greeks=0
+  gen-best  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+  all-time  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+Hybrid gen 23/40 pop=24 blockB_greeks=0
+  gen-best  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+  all-time  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+Hybrid gen 24/40 pop=24 blockB_greeks=0
+  gen-best  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+  all-time  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+Hybrid gen 25/40 pop=24 blockB_greeks=0
+  gen-best  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+  all-time  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+Hybrid gen 26/40 pop=24 blockB_greeks=0
+  gen-best  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+  all-time  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+Hybrid gen 27/40 pop=24 blockB_greeks=0
+  gen-best  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+  all-time  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+Hybrid gen 28/40 pop=24 blockB_greeks=0
+  gen-best  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+  all-time  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+Hybrid gen 29/40 pop=24 blockB_greeks=0
+  gen-best  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+  all-time  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+Hybrid gen 30/40 pop=24 blockB_greeks=0
+  gen-best  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+  all-time  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+Hybrid gen 31/40 pop=24 blockB_greeks=0
+  gen-best  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+  all-time  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+Hybrid gen 32/40 pop=24 blockB_greeks=0
+  gen-best  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+  all-time  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+Hybrid gen 33/40 pop=24 blockB_greeks=0
+  gen-best  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+  all-time  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+Hybrid gen 34/40 pop=24 blockB_greeks=0
+  gen-best  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+  all-time  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+Hybrid gen 35/40 pop=24 blockB_greeks=0
+  gen-best  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+  all-time  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+Hybrid gen 36/40 pop=24 blockB_greeks=0
+  gen-best  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+  all-time  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+Hybrid gen 37/40 pop=24 blockB_greeks=0
+  gen-best  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+  all-time  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+Hybrid gen 38/40 pop=24 blockB_greeks=0
+  gen-best  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+  all-time  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+Hybrid gen 39/40 pop=24 blockB_greeks=0
+  gen-best  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+  all-time  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+Hybrid gen 40/40 pop=24 blockB_greeks=0
+  gen-best  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+  all-time  fitness=22.0000 IC=0.0344 pos=ABLF | UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+HELUT — Stochastic Bombe KPA control (P1030684, 72 letters)
+Fitness: exact decrypt match against known plaintext (German-ness ignored)
+Shell locked: UKW B / γ / IV-III-VIII / rings AACU
+Stecker seed: BLIND (no oracle)
+KPA hill-climb steps/elite: 24
+Ciphertext: RFBYWKIKELDCHBSXUNFJFSNRRVFWASXYLQCQFADYJXNTBMVLRDCGULOWHTBGWUSSOQHGAYED
+Target PT:  VVVUUUVIRSOBENNULEINSXXMITUUUVIRSIBENNULZWOYVIRSIBENNULDREIYZWODREISECHS
+
+Config: pop=24 gens=40 maxPlugs=10 blockB_greeks=0 samples subspace=potsdam WO=1 evolveShell=false freeRings=false ringSeeds=AACU fitness=KPA letter-match / 72
+
+
+Elapsed: 35.0 s
+Best shell: UKWB gamma IV-III-VIII rings=AACU stecker=AT BU CE DG FP KQ LN RZ SX VY
+Best hit: partition=kpa-26^4 pos=ABLF score=22.0000 IC=0.0344
+Plain: JHVTKUBAROOXLMLUFEIDOXOMIELURGERSNPJNMUFZWPYLLYJUBRQSCLYZWDNGEQDDEYPWPKQ
+KPA match: 22/72
+*** CONTROL FAIL — decrypt does not match known plaintext ***
+See ASIC_CRACKER.md / evolution-hybridization.md / stochastic-bombe.md

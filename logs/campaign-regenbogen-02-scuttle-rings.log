@@ -1,0 +1,165 @@
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030680_regenbogen_02_scuttle_menus.json (129 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 129 of 129
+min crib length: 16
+running 129 menus, highest deduction power first:
+  [1] STICHWORTREGENBOGEN@42 edges=19 letters=15 loops=6 central=T
+  [2] STICHWORTREGENBOGEN@38 edges=19 letters=16 loops=5 central=B
+  [3] ALLEBOOTEVERSENKEN@16 edges=18 letters=17 loops=5 central=E
+  [4] ALLEBOOTEVERSENKEN@44 edges=18 letters=15 loops=5 central=E
+  [5] REGENBOGENBEFEHL@27 edges=16 letters=14 loops=5 central=E
+  [6] REGENBOGENBEFEHL@31 edges=16 letters=13 loops=5 central=E
+  [7] STICHWORTREGENBOGEN@29 edges=19 letters=18 loops=4 central=P
+  [8] STICHWORTREGENBOGEN@36 edges=19 letters=17 loops=4 central=B
+  [9] STICHWORTREGENBOGEN@37 edges=19 letters=17 loops=4 central=B
+  [10] STICHWORTREGENBOGEN@44 edges=19 letters=16 loops=4 central=T
+  [11] VERSENKUNGBEFOHLEN@27 edges=18 letters=16 loops=4 central=E
+  [12] VERSENKUNGBEFOHLEN@30 edges=18 letters=15 loops=4 central=E
+  … 117 more
+shells/menu: 34944 (336 WO × 2 Greek × 2 UKW × 26 ring) → 1.6e+10 settings
+GPU pipeline depth: 4 shells in flight
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+right ring swept: every right-wheel turnover phase covered
+residual gap: middle ring pinned A, so keys whose middle wheel turns over inside a 19-letter span (~4% for 1 notch, ~8% for 2) are not covered
+ETA floor (~50M/s): 686.6 min
+
+quarantine: soft IC≥0.048 / tail>-4.300 (strict IC≥0.055 / tail>-3.600) → logs/quarantine_regenbogen.json
+  [1/129·1] STICHWORTREGENBOGEN@42 edges=19 letters=15 loops=6 central=T dead at the board                       271s  58.9M/s ETA 578.7 min
+  [2/129·2] STICHWORTREGENBOGEN@38 edges=19 letters=16 loops=5 central=B dead at the board                       535s  59.7M/s ETA 566.1 min
+  [3/129·3] ALLEBOOTEVERSENKEN@16 edges=18 letters=17 loops=5 central=E       3 stops → 0 valid 10-plug completions     779s  61.5M/s ETA 545.5 min
+  [4/129·4] ALLEBOOTEVERSENKEN@44 edges=18 letters=15 loops=5 central=E dead at the board                      1070s  59.7M/s ETA 557.5 min
+  [5/129·5] REGENBOGENBEFEHL@27 edges=16 letters=14 loops=5 central=E      42 stops → 0 valid 10-plug completions    1296s  61.6M/s ETA 535.5 min
+  [6/129·6] REGENBOGENBEFEHL@31 edges=16 letters=13 loops=5 central=E       6 stops → 0 scorable completions    1608s  59.6M/s ETA 549.5 min
+  [7/129·7] STICHWORTREGENBOGEN@29 edges=19 letters=18 loops=4 central=P dead at the board                      1884s  59.3M/s ETA 547.2 min
+  [8/129·8] STICHWORTREGENBOGEN@36 edges=19 letters=17 loops=4 central=B dead at the board                      2249s  56.8M/s ETA 567.0 min
+  [9/129·9] STICHWORTREGENBOGEN@37 edges=19 letters=17 loops=4 central=B dead at the board                      2560s  56.1M/s ETA 568.8 min
+  [10/129·10] STICHWORTREGENBOGEN@44 edges=19 letters=16 loops=4 central=T dead at the board                      2832s  56.4M/s ETA 561.8 min
+  [11/129·11] VERSENKUNGBEFOHLEN@27 edges=18 letters=16 loops=4 central=E dead at the board                      3145s  55.8M/s ETA 562.4 min
+  [12/129·12] VERSENKUNGBEFOHLEN@30 edges=18 letters=15 loops=4 central=E dead at the board                      3385s  56.6M/s ETA 550.1 min
+  [13/129·13] VERSENKUNGBEFOHLEN@34 edges=18 letters=16 loops=4 central=B       2 stops → 0 valid 10-plug completions    3757s  55.3M/s ETA 558.7 min
+  [14/129·14] VERSENKUNGBEFOHLEN@35 edges=18 letters=16 loops=4 central=B dead at the board                      4146s  53.9M/s ETA 567.5 min
+  [15/129·15] VERSENKUNGBEFOHLEN@41 edges=18 letters=16 loops=4 central=B dead at the board                      4462s  53.7M/s ETA 565.2 min
+  [16/129·16] ALLEBOOTEVERSENKEN@23 edges=18 letters=15 loops=4 central=E dead at the board                      4792s  53.3M/s ETA 564.1 min
+  [17/129·17] ALLEBOOTEVERSENKEN@25 edges=18 letters=16 loops=4 central=E dead at the board                      5046s  53.8M/s ETA 554.1 min
+  [18/129·18] ALLEBOOTEVERSENKEN@29 edges=18 letters=17 loops=4 central=E dead at the board                      5367s  53.6M/s ETA 551.6 min
+  [19/129·19] ALLEBOOTEVERSENKEN@30 edges=18 letters=16 loops=4 central=E dead at the board                      5627s  53.9M/s ETA 543.0 min
+  [20/129·20] ALLEBOOTEVERSENKEN@32 edges=18 letters=16 loops=4 central=E dead at the board                      5942s  53.7M/s ETA 539.8 min
+  [21/129·21] ALLEBOOTEVERSENKEN@33 edges=18 letters=15 loops=4 central=E dead at the board                      6254s  53.6M/s ETA 536.0 min
+  [22/129·22] ALLEBOOTEVERSENKEN@37 edges=18 letters=16 loops=4 central=E dead at the board                      6510s  54.0M/s ETA 527.7 min
+  [23/129·23] ALLEBOOTEVERSENKEN@40 edges=18 letters=15 loops=4 central=E dead at the board                      6815s  53.9M/s ETA 523.4 min
+  [24/129·24] REGENBOGENBEFEHL@22 edges=16 letters=16 loops=4 central=E  137100 stops → 2 physical, best IC 0.049 tail -4.869    7109s  53.9M/s ETA 518.4 min
+  [25/129·25] REGENBOGENBEFEHL@32 edges=16 letters=13 loops=4 central=E dead at the board                      7373s  54.1M/s ETA 511.2 min
+  [26/129·26] REGENBOGENBEFEHL@35 edges=16 letters=13 loops=4 central=B       2 stops → 2 physical, best IC 0.050 tail -5.213    7726s  53.7M/s ETA 510.1 min
+  [27/129·27] REGENBOGENBEFEHL@47 edges=16 letters=16 loops=4 central=E      98 stops → 1 physical, best IC 0.049 tail -4.929    7965s  54.1M/s ETA 501.5 min
+  [28/129·28] SELBSTVERSENKUNG@35 edges=16 letters=13 loops=4 central=B       3 stops → 0 scorable completions    8252s  54.2M/s ETA 496.1 min
+  [29/129·29] SELBSTVERSENKUNG@36 edges=16 letters=13 loops=4 central=B       6 stops → 4 physical, best IC 0.054 tail -4.982    8679s  53.4M/s ETA 498.8 min
+  [30/129·30] STICHWORTREGENBOGEN@7 edges=19 letters=19 loops=3 central=E dead at the board                      8988s  53.3M/s ETA 494.4 min
+  [31/129·31] STICHWORTREGENBOGEN@11 edges=19 letters=19 loops=3 central=E dead at the board                      9310s  53.2M/s ETA 490.5 min
+  [32/129·32] STICHWORTREGENBOGEN@14 edges=19 letters=19 loops=3 central=R dead at the board                      9732s  52.5M/s ETA 491.7 min
+  [33/129·33] STICHWORTREGENBOGEN@18 edges=19 letters=19 loops=3 central=R     410 stops → 0 valid 10-plug completions    9956s  52.9M/s ETA 482.7 min
+  [34/129·34] STICHWORTREGENBOGEN@20 edges=19 letters=19 loops=3 central=R dead at the board                     10261s  52.9M/s ETA 477.8 min
+  [35/129·35] STICHWORTREGENBOGEN@27 edges=19 letters=18 loops=3 central=R dead at the board                     10594s  52.8M/s ETA 474.2 min
+  [36/129·36] STICHWORTREGENBOGEN@28 edges=19 letters=18 loops=3 central=R dead at the board                     10889s  52.8M/s ETA 468.8 min
+  [37/129·37] STICHWORTREGENBOGEN@31 edges=19 letters=18 loops=3 central=B dead at the board                     11424s  51.7M/s ETA 473.4 min
+  [38/129·38] STICHWORTREGENBOGEN@34 edges=19 letters=18 loops=3 central=B dead at the board                     11862s  51.2M/s ETA 473.5 min
+  [39/129·39] STICHWORTREGENBOGEN@48 edges=19 letters=17 loops=3 central=G dead at the board                     12135s  51.3M/s ETA 466.7 min
+  [40/129·40] VERSENKUNGBEFOHLEN@19 edges=18 letters=17 loops=3 central=E dead at the board                     12537s  50.9M/s ETA 464.9 min
+  [41/129·41] VERSENKUNGBEFOHLEN@22 edges=18 letters=17 loops=3 central=E dead at the board                     12813s  51.1M/s ETA 458.3 min
+  [42/129·42] VERSENKUNGBEFOHLEN@42 edges=18 letters=17 loops=3 central=B dead at the board                     13168s  50.9M/s ETA 454.6 min
+  [43/129·43] VERSENKUNGBEFOHLEN@49 edges=18 letters=18 loops=3 central=E       3 stops → 0 valid 10-plug completions   13469s  51.0M/s ETA 449.0 min
+  [44/129·44] VERSENKUNGBEFOHLEN@52 edges=18 letters=19 loops=3 central=E       2 stops → 0 valid 10-plug completions   13774s  51.0M/s ETA 443.5 min
+  [45/129·45] VERSENKUNGBEFOHLEN@53 edges=18 letters=19 loops=3 central=G       3 stops → 0 valid 10-plug completions   14087s  51.0M/s ETA 438.2 min
+  [46/129·46] ALLEBOOTEVERSENKEN@3 edges=18 letters=17 loops=3 central=E dead at the board                     14379s  51.1M/s ETA 432.4 min
+  [47/129·47] ALLEBOOTEVERSENKEN@20 edges=18 letters=17 loops=3 central=E dead at the board                     14598s  51.4M/s ETA 424.5 min
+  [48/129·48] ALLEBOOTEVERSENKEN@21 edges=18 letters=16 loops=3 central=E dead at the board                     14851s  51.6M/s ETA 417.7 min
+  [49/129·49] ALLEBOOTEVERSENKEN@27 edges=18 letters=17 loops=3 central=E dead at the board                     15098s  51.8M/s ETA 410.8 min
+  [50/129·50] ALLEBOOTEVERSENKEN@28 edges=18 letters=17 loops=3 central=E dead at the board                     15363s  52.0M/s ETA 404.6 min
+  [51/129·51] ALLEBOOTEVERSENKEN@46 edges=18 letters=16 loops=3 central=E dead at the board                     15682s  51.9M/s ETA 399.7 min
+  [52/129·52] ALLEBOOTEVERSENKEN@48 edges=18 letters=16 loops=3 central=E dead at the board                     15936s  52.1M/s ETA 393.3 min
+  [53/129·53] ALLEBOOTEVERSENKEN@49 edges=18 letters=16 loops=3 central=E dead at the board                     16263s  52.0M/s ETA 388.7 min
+  [54/129·54] REGENBOGENBEFEHL@19 edges=16 letters=16 loops=3 central=E     895 stops → 3 physical, best IC 0.042 tail -4.925   16557s  52.1M/s ETA 383.3 min
+  [55/129·55] REGENBOGENBEFEHL@23 edges=16 letters=15 loops=3 central=E      18 stops → 6 physical, best IC 0.050 tail -4.841   16866s  52.1M/s ETA 378.2 min
+  [56/129·56] REGENBOGENBEFEHL@33 edges=16 letters=14 loops=3 central=E      12 stops → 2 physical, best IC 0.048 tail -4.791   17159s  52.1M/s ETA 372.8 min
+  [57/129·57] REGENBOGENBEFEHL@38 edges=16 letters=14 loops=3 central=B       6 stops → 0 scorable completions   17440s  52.2M/s ETA 367.2 min
+  [58/129·58] REGENBOGENBEFEHL@40 edges=16 letters=14 loops=3 central=B      10 stops → 0 scorable completions   17811s  52.0M/s ETA 363.4 min
+  [59/129·59] REGENBOGENBEFEHL@43 edges=16 letters=14 loops=3 central=B       2 stops → 0 scorable completions   18095s  52.1M/s ETA 357.8 min
+  [60/129·60] REGENBOGENBEFEHL@45 edges=16 letters=15 loops=3 central=B      23 stops → 1 physical, best IC 0.048 tail -5.491   18328s  52.3M/s ETA 351.3 min
+  [61/129·61] REGENBOGENBEFEHL@46 edges=16 letters=15 loops=3 central=B      11 stops → 1 physical, best IC 0.050 tail -4.863   18548s  52.5M/s ETA 344.6 min
+  [62/129·62] REGENBOGENBEFEHL@48 edges=16 letters=17 loops=3 central=E      88 stops → 9 physical, best IC 0.050 tail -4.866   18835s  52.6M/s ETA 339.2 min
+  [63/129·63] SELBSTVERSENKUNG@28 edges=16 letters=16 loops=3 central=P     532 stops → 0 scorable completions   19128s  52.6M/s ETA 334.0 min
+  [64/129·64] SELBSTVERSENKUNG@29 edges=16 letters=16 loops=3 central=P      40 stops → 4 physical, best IC 0.043 tail -4.806   19389s  52.7M/s ETA 328.2 min
+  [65/129·65] SELBSTVERSENKUNG@30 edges=16 letters=15 loops=3 central=P      18 stops → 2 physical, best IC 0.052 tail -4.835   19664s  52.8M/s ETA 322.7 min
+  [66/129·66] SELBSTVERSENKUNG@33 edges=16 letters=14 loops=3 central=V      15 stops → 0 scorable completions   19955s  52.8M/s ETA 317.5 min
+  [67/129·67] SELBSTVERSENKUNG@37 edges=16 letters=14 loops=3 central=B       2 stops → 0 scorable completions   20294s  52.7M/s ETA 313.0 min
+  [68/129·68] SELBSTVERSENKUNG@40 edges=16 letters=14 loops=3 central=S       9 stops → 0 scorable completions   20514s  52.9M/s ETA 306.7 min
+  [69/129·69] SELBSTVERSENKUNG@45 edges=16 letters=14 loops=3 central=S       9 stops → 1 physical, best IC 0.052 tail -4.981   20833s  52.9M/s ETA 301.9 min
+  [70/129·70] SELBSTVERSENKUNG@48 edges=16 letters=15 loops=3 central=S      63 stops → 0 scorable completions   21064s  53.1M/s ETA 295.9 min
+  [71/129·71] STICHWORTREGENBOGEN@1 edges=19 letters=18 loops=2 central=E dead at the board                     21366s  53.1M/s ETA 290.9 min
+  [72/129·72] STICHWORTREGENBOGEN@9 edges=19 letters=20 loops=2 central=E dead at the board                     21665s  53.1M/s ETA 285.9 min
+  [73/129·73] STICHWORTREGENBOGEN@10 edges=19 letters=19 loops=2 central=E dead at the board                     22021s  52.9M/s ETA 281.6 min
+  [74/129·74] STICHWORTREGENBOGEN@12 edges=19 letters=19 loops=2 central=R dead at the board                     22522s  52.5M/s ETA 279.0 min
+  [75/129·75] STICHWORTREGENBOGEN@13 edges=19 letters=20 loops=2 central=R       4 stops → 0 valid 10-plug completions   22966s  52.1M/s ETA 275.6 min
+  [76/129·76] STICHWORTREGENBOGEN@15 edges=19 letters=18 loops=2 central=R dead at the board                     23347s  52.0M/s ETA 271.4 min
+  [77/129·77] STICHWORTREGENBOGEN@22 edges=19 letters=19 loops=2 central=R dead at the board                     23693s  51.9M/s ETA 266.7 min
+  [78/129·78] VERSENKUNGBEFOHLEN@3 edges=18 letters=19 loops=2 central=E      12 stops → 0 valid 10-plug completions   23995s  51.9M/s ETA 261.5 min
+  [79/129·79] VERSENKUNGBEFOHLEN@4 edges=18 letters=19 loops=2 central=E       2 stops → 0 valid 10-plug completions   24205s  52.1M/s ETA 255.3 min
+  [80/129·80] VERSENKUNGBEFOHLEN@7 edges=18 letters=18 loops=2 central=E       1 stops → 0 scorable completions   24484s  52.2M/s ETA 249.9 min
+  [81/129·81] VERSENKUNGBEFOHLEN@13 edges=18 letters=18 loops=2 central=E       6 stops → 0 valid 10-plug completions   24806s  52.1M/s ETA 245.0 min
+  [82/129·82] VERSENKUNGBEFOHLEN@14 edges=18 letters=18 loops=2 central=E       2 stops → 0 valid 10-plug completions   25065s  52.2M/s ETA 239.4 min
+  [83/129·83] VERSENKUNGBEFOHLEN@17 edges=18 letters=18 loops=2 central=E    1032 stops → 0 valid 10-plug completions   25381s  52.2M/s ETA 234.4 min
+  [84/129·84] VERSENKUNGBEFOHLEN@18 edges=18 letters=18 loops=2 central=E  619494 stops → 0 valid 10-plug completions   25802s  52.0M/s ETA 230.4 min
+  [85/129·85] VERSENKUNGBEFOHLEN@23 edges=18 letters=17 loops=2 central=E dead at the board                     26098s  52.0M/s ETA 225.2 min
+  [86/129·86] VERSENKUNGBEFOHLEN@38 edges=18 letters=17 loops=2 central=B       1 stops → 0 scorable completions   26505s  51.8M/s ETA 220.9 min
+  [87/129·87] VERSENKUNGBEFOHLEN@43 edges=18 letters=17 loops=2 central=B dead at the board                     26808s  51.8M/s ETA 215.7 min
+  [88/129·88] VERSENKUNGBEFOHLEN@46 edges=18 letters=18 loops=2 central=B       2 stops → 0 valid 10-plug completions   27126s  51.8M/s ETA 210.6 min
+  [89/129·89] VERSENKUNGBEFOHLEN@51 edges=18 letters=19 loops=2 central=E     113 stops → 0 valid 10-plug completions   27499s  51.7M/s ETA 206.0 min
+  [90/129·90] ALLEBOOTEVERSENKEN@5 edges=18 letters=18 loops=2 central=E dead at the board                     27792s  51.7M/s ETA 200.7 min
+  [91/129·91] ALLEBOOTEVERSENKEN@6 edges=18 letters=18 loops=2 central=E       1 stops → 0 scorable completions   28145s  51.6M/s ETA 195.9 min
+  [92/129·92] ALLEBOOTEVERSENKEN@8 edges=18 letters=18 loops=2 central=E       1 stops → 0 scorable completions   28459s  51.6M/s ETA 190.8 min
+  [93/129·93] ALLEBOOTEVERSENKEN@10 edges=18 letters=18 loops=2 central=E dead at the board                     28853s  51.5M/s ETA 186.1 min
+  [94/129·94] ALLEBOOTEVERSENKEN@13 edges=18 letters=18 loops=2 central=E dead at the board                     29170s  51.5M/s ETA 181.0 min
+  [95/129·95] ALLEBOOTEVERSENKEN@14 edges=18 letters=18 loops=2 central=E dead at the board                     29551s  51.3M/s ETA 176.3 min
+  [96/129·96] ALLEBOOTEVERSENKEN@26 edges=18 letters=17 loops=2 central=E dead at the board                     29930s  51.2M/s ETA 171.5 min
+  [97/129·97] REGENBOGENBEFEHL@3 edges=16 letters=17 loops=2 central=E    3744 stops → 10 physical, best IC 0.037 tail -4.662   30236s  51.2M/s ETA 166.2 min
+  [98/129·98] REGENBOGENBEFEHL@24 edges=16 letters=15 loops=2 central=E      14 stops → 1 physical, best IC 0.052 tail -4.850   30500s  51.3M/s ETA 160.8 min
+  [99/129·99] REGENBOGENBEFEHL@56 edges=16 letters=16 loops=2 central=G      44 stops → 1 physical, best IC 0.055 tail -5.159   30741s  51.4M/s ETA 155.3 min
+  [100/129·100] SELBSTVERSENKUNG@6 edges=16 letters=16 loops=2 central=E      42 stops → 13 physical, best IC 0.039 tail -4.933   31005s  51.5M/s ETA 149.9 min
+  [101/129·101] SELBSTVERSENKUNG@7 edges=16 letters=16 loops=2 central=E      25 stops → 0 scorable completions   31260s  51.6M/s ETA 144.4 min
+  [102/129·102] SELBSTVERSENKUNG@12 edges=16 letters=18 loops=2 central=E    3062 stops → 6 physical, best IC 0.041 tail -5.076   31573s  51.6M/s ETA 139.3 min
+  [103/129·103] SELBSTVERSENKUNG@21 edges=16 letters=16 loops=2 central=R     126 stops → 0 scorable completions   31945s  51.5M/s ETA 134.4 min
+  [104/129·104] SELBSTVERSENKUNG@23 edges=16 letters=16 loops=2 central=R    2624 stops → 1 physical, best IC 0.051 tail -5.281   32277s  51.5M/s ETA 129.3 min
+  [105/129·105] SELBSTVERSENKUNG@24 edges=16 letters=15 loops=2 central=P      21 stops → 0 scorable completions   32601s  51.4M/s ETA 124.2 min
+  [106/129·106] SELBSTVERSENKUNG@31 edges=16 letters=15 loops=2 central=P      38 stops → 1 physical, best IC 0.049 tail -4.802   32895s  51.5M/s ETA 119.0 min
+  [107/129·107] SELBSTVERSENKUNG@32 edges=16 letters=15 loops=2 central=V       8 stops → 0 scorable completions   33198s  51.5M/s ETA 113.8 min
+  [108/129·108] SELBSTVERSENKUNG@52 edges=16 letters=16 loops=2 central=S      33 stops → 0 scorable completions   33488s  51.5M/s ETA 108.5 min
+  [109/129·109] SELBSTVERSENKUNG@56 edges=16 letters=16 loops=2 central=G      61 stops → 0 scorable completions   33731s  51.6M/s ETA 103.2 min
+  [110/129·110] STICHWORTREGENBOGEN@4 edges=19 letters=20 loops=1 central=E dead at the board                     34135s  51.5M/s ETA  98.3 min
+  [111/129·111] STICHWORTREGENBOGEN@6 edges=19 letters=19 loops=1 central=E dead at the board                     34453s  51.4M/s ETA  93.1 min
+  [112/129·112] VERSENKUNGBEFOHLEN@2 edges=18 letters=19 loops=1 central=E dead at the board                     34769s  51.4M/s ETA  88.0 min
+  [113/129·113] VERSENKUNGBEFOHLEN@12 edges=18 letters=18 loops=1 central=E dead at the board                     35148s  51.3M/s ETA  82.9 min
+  [114/129·114] ALLEBOOTEVERSENKEN@11 edges=18 letters=18 loops=1 central=E       1 stops → 0 scorable completions   35525s  51.2M/s ETA  77.9 min
+  [115/129·115] REGENBOGENBEFEHL@8 edges=16 letters=17 loops=1 central=E     225 stops → 16 physical, best IC 0.037 tail -4.906   35838s  51.2M/s ETA  72.7 min
+  [116/129·116] REGENBOGENBEFEHL@10 edges=16 letters=18 loops=1 central=E     216 stops → 13 physical, best IC 0.045 tail -4.740   36152s  51.2M/s ETA  67.5 min
+  [117/129·117] REGENBOGENBEFEHL@12 edges=16 letters=18 loops=1 central=E    1815 stops → 19 physical, best IC 0.047 tail -4.350   36462s  51.2M/s ETA  62.3 min
+  [118/129·118] REGENBOGENBEFEHL@14 edges=16 letters=17 loops=1 central=E     835 stops → 13 physical, best IC 0.045 tail -4.232   36814s  51.2M/s ETA  57.2 min
+  [119/129·119] REGENBOGENBEFEHL@16 edges=16 letters=17 loops=1 central=E      82 stops → 11 physical, best IC 0.041 tail -4.883   37122s  51.2M/s ETA  52.0 min
+  [120/129·120] REGENBOGENBEFEHL@18 edges=16 letters=16 loops=1 central=E      13 stops → 0 scorable completions   37452s  51.2M/s ETA  46.8 min
+  [121/129·121] REGENBOGENBEFEHL@51 edges=16 letters=17 loops=1 central=E      60 stops → 2 physical, best IC 0.049 tail -5.100   37779s  51.1M/s ETA  41.6 min
+  [122/129·122] REGENBOGENBEFEHL@53 edges=16 letters=18 loops=1 central=E     558 stops → 7 physical, best IC 0.063 tail -4.602   38097s  51.1M/s ETA  36.4 min
+  [123/129·123] SELBSTVERSENKUNG@13 edges=16 letters=18 loops=1 central=S    6944 stops → 5 physical, best IC 0.045 tail -4.542   38393s  51.2M/s ETA  31.2 min
+  [124/129·124] SELBSTVERSENKUNG@16 edges=16 letters=17 loops=1 central=R      61 stops → 6 physical, best IC 0.046 tail -4.943   38800s  51.0M/s ETA  26.1 min
+  [125/129·125] SELBSTVERSENKUNG@17 edges=16 letters=17 loops=1 central=R      49 stops → 1 physical, best IC 0.050 tail -5.071   39172s  51.0M/s ETA  20.9 min
+  [126/129·126] SELBSTVERSENKUNG@54 edges=16 letters=17 loops=1 central=G      42 stops → 4 physical, best IC 0.053 tail -4.531   39611s  50.8M/s ETA  15.7 min
+  [127/129·127] REGENBOGENBEFEHL@13 edges=16 letters=18 loops=0 central=E   30298 stops → 12 physical, best IC 0.046 tail -4.824   40035s  50.7M/s ETA  10.5 min
+  [128/129·128] REGENBOGENBEFEHL@52 edges=16 letters=18 loops=0 central=E     101 stops → 0 scorable completions   40448s  50.5M/s ETA   5.3 min
+  [129/129·129] SELBSTVERSENKUNG@14 edges=16 letters=17 loops=0 central=S      57 stops → 3 physical, best IC 0.048 tail -4.733   40862s  50.4M/s ETA   0.0 min
+
+total raw stops: 811303 over 2059945445376 settings (50.4M/s mean)
+survived the 10-plug sieve: 183
+best physical candidate: IC 0.045 tail -4.232 (IC floor 0.055 / threshold -3.600) — below the bar, so no break claimed
+  REGENBOGENBEFEHL@14 edges=16 letters=17 loops=1 central=E
+  UKW C Greek gamma WO V-VIII-III pos GBEQ
+  EKFBUQDVFBODPAREGENBOGENBEFEHLLEBEIOMLYKAJFIFIZINIPUAGKEPTJAASHLRTWPRIHY
+quarantine: wrote 22 near-miss(es) → logs/quarantine_regenbogen.json (solo pass complete)
+  escalate: --hybrid --hybrid-stochastic --hybrid-quarantine logs/quarantine_regenbogen.json

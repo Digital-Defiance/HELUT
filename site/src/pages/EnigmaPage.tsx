@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 export function EnigmaPage() {
   return (
     <main>
@@ -117,7 +119,8 @@ export function EnigmaPage() {
             <a href="https://github.com/Digital-Defiance/HELUT/blob/main/BREAK_P1030680.md">
               The P1030680 Campaign Journal
             </a>
-            .
+            . The Blue Team rewrite of every flaw this hunt exposed is{' '}
+            <Link to="/enigma-256">Enigma 256</Link>.
           </p>
         </div>
       </section>

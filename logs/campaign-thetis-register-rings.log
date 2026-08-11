@@ -1,0 +1,42 @@
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030680_thetis_register_menus.json (73 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 73 of 73
+min crib length: 16
+running 73 menus, highest deduction power first:
+  [1] THETISXTHETISXTHETIS@2 edges=20 letters=14 loops=7 central=T
+  [2] THETISXTHETISXTHETIS@4 edges=20 letters=15 loops=6 central=T
+  [3] ACHACHACHACHACHACH@2 edges=18 letters=13 loops=6 central=A
+  [4] VERFAHRENKENNGRUPPE@1 edges=19 letters=18 loops=5 central=E
+  [5] ACHACHACHACHACHACH@5 edges=18 letters=14 loops=5 central=H
+  [6] SEDMSSEDMSSEDMSSE@0 edges=17 letters=13 loops=5 central=S
+  [7] SEDMSSEDMSSEDMSSE@2 edges=17 letters=13 loops=5 central=S
+  [8] ACHACHACHACHACHA@3 edges=16 letters=12 loops=5 central=A
+  [9] ACHACHACHACHACHA@5 edges=16 letters=12 loops=5 central=A
+  [10] ANALLEXXANALLEXX@3 edges=16 letters=12 loops=5 central=A
+  [11] THETISXTHETISXTH@4 edges=16 letters=12 loops=5 central=T
+  [12] XXXSEDMXXXSEDMXX@3 edges=16 letters=12 loops=5 central=X
+  … 61 more
+shells/menu: 34944 (336 WO × 2 Greek × 2 UKW × 26 ring) → 1.6e+10 settings
+GPU pipeline depth: 4 shells in flight
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+right ring swept: every right-wheel turnover phase covered
+residual gap: middle ring pinned A, so keys whose middle wheel turns over inside a 21-letter span (~4% for 1 notch, ~8% for 2) are not covered
+ETA floor (~50M/s): 388.6 min
+
+  [1/73·1] THETISXTHETISXTHETIS@2 edges=20 letters=14 loops=7 central=T dead at the board                       273s  58.6M/s ETA 327.1 min
+  [2/73·2] THETISXTHETISXTHETIS@4 edges=20 letters=15 loops=6 central=T dead at the board                       514s  62.1M/s ETA 304.2 min
+  [3/73·3] ACHACHACHACHACHACH@2 edges=18 letters=13 loops=6 central=A dead at the board                       782s  61.3M/s ETA 304.0 min
+  [4/73·4] VERFAHRENKENNGRUPPE@1 edges=19 letters=18 loops=5 central=E dead at the board                      1036s  61.7M/s ETA 297.8 min
+  [5/73·5] ACHACHACHACHACHACH@5 edges=18 letters=14 loops=5 central=H dead at the board                      1355s  58.9M/s ETA 307.2 min
+  [6/73·6] SEDMSSEDMSSEDMSSE@0 edges=17 letters=13 loops=5 central=S dead at the board                      1559s  61.5M/s ETA 290.1 min
+  [7/73·7] SEDMSSEDMSSEDMSSE@2 edges=17 letters=13 loops=5 central=S dead at the board                      1791s  62.4M/s ETA 281.4 min
+  [8/73·8] ACHACHACHACHACHA@3 edges=16 letters=12 loops=5 central=A dead at the board                      2046s  62.4M/s ETA 277.1 min
+  [9/73·9] ACHACHACHACHACHA@5 edges=16 letters=12 loops=5 central=A dead at the board                      2301s  62.5M/s ETA 272.7 min
+  [10/73·10] ANALLEXXANALLEXX@3 edges=16 letters=12 loops=5 central=A dead at the board                      2516s  63.5M/s ETA 264.2 min
+  [11/73·11] THETISXTHETISXTH@4 edges=16 letters=12 loops=5 central=T       1 stops → 0 scorable completions    2746s  64.0M/s ETA 258.0 min
+  [12/73·12] XXXSEDMXXXSEDMXX@3 edges=16 letters=12 loops=5 central=X dead at the board                      2983s  64.2M/s ETA 252.7 min
+  [13/73·13] XXXXACHXXXXACHXX@1 edges=16 letters=12 loops=5 central=X dead at the board                      3196s  65.0M/s ETA 245.8 min
+
+---
+ABORTED at menu 13/73. Resume: --bombe-from 14 | tee -a this log.

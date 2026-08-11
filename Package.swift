@@ -17,7 +17,8 @@ let package = Package(
             name: "HELUTCore",
             linkerSettings: [
                 .linkedFramework("Metal"),
-                .linkedFramework("MetalPerformanceShadersGraph")
+                .linkedFramework("MetalPerformanceShadersGraph"),
+                .linkedFramework("Accelerate")
             ]
         ),
         .executableTarget(

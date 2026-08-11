@@ -500,6 +500,13 @@ struct BombeSweepConfig {
     /// Menu fixture to attack. Empty means the P1030680 catalog. Pointing this at a
     /// known-key control fixture grades the sweep itself instead of swapping files.
     var fixturePath = ""
+    /// When non-nil, physical soft-band near-misses are appended to this quarantine JSON
+    /// for Stochastic Bombe seeding (`--hybrid-quarantine`). Empty string disables.
+    var quarantinePath: String? = NearMissQuarantine.defaultPath
+    /// Soft tail margin below the strict break threshold (default 0.4 → floor −4.0).
+    var quarantineSoftTailMargin = NearMissQuarantine.softTailMargin
+    /// Soft IC floor for quarantine (default 0.048).
+    var quarantineSoftICFloor = NearMissQuarantine.softICFloor
 }
 
 func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
@@ -622,6 +629,25 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
     let started = Date()
     var bestSoFar: DiscriminatedCandidate?
     var breakFound: DiscriminatedCandidate?
+    var quarantineBag: [QuarantineCandidate] = []
+    let softBar = QuarantineSoftBar(
+        softTailFloor: PostBombeDiscriminator.breakThreshold - config.quarantineSoftTailMargin,
+        softICFloor: config.quarantineSoftICFloor,
+        strictTailFloor: PostBombeDiscriminator.breakThreshold,
+        strictICFloor: PostBombeDiscriminator.icFloor
+    )
+    let quarantineSource = path
+    if let qPath = config.quarantinePath, !qPath.isEmpty {
+        print(String(
+            format: "quarantine: soft IC≥%.3f / tail>%.3f (strict IC≥%.3f / tail>%.3f) → %@",
+            softBar.softICFloor,
+            softBar.softTailFloor,
+            softBar.strictICFloor,
+            softBar.strictTailFloor,
+            qPath
+        ))
+        fflush(stdout)
+    }
     /// Physically valid stops retained per menu. A guard, not a filter: a legitimate
     /// menu produces a handful, so hitting this cap means the menu was too weak to
     /// be worth reading anyway.
@@ -804,7 +830,10 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
 
         // Stage 3 — the discriminator. Physically possible is not the same as true.
         let verdict = PostBombeDiscriminator.rank(
-            stops: physical, ciphertext: set.ciphertext, maxPlugs: config.maxPlugs
+            stops: physical,
+            ciphertext: set.ciphertext,
+            maxPlugs: config.maxPlugs,
+            provisionalICFloor: config.quarantinePath != nil ? softBar.softICFloor : nil
         )
         totalCompletions += verdict.candidates.count
         guard let best = verdict.candidates.first else {
@@ -814,6 +843,18 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
             continue
         }
         if bestSoFar == nil || best.tailScore > bestSoFar!.tailScore { bestSoFar = best }
+        if config.quarantinePath != nil {
+            for candidate in verdict.candidates.prefix(8)
+            where NearMissQuarantine.shouldQuarantine(candidate, softBar: softBar) {
+                quarantineBag.append(
+                    NearMissQuarantine.makeCandidate(
+                        from: candidate,
+                        source: quarantineSource,
+                        softBar: softBar
+                    )
+                )
+            }
+        }
         print(String(format: "  %@ %-44@ %7d stops → %d physical, best IC %.3f tail %.3f  %@",
                      label, menu.description as NSString,
                      rawStops, verdict.candidates.count, best.ic, best.tailScore, progress))
@@ -855,7 +896,44 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
         print("skipped (edges > \(welchmanMaxEdges) Metal cap): \(overlong.count) — not tested")
     }
 
+    func flushQuarantine(note: String) {
+        guard let qPath = config.quarantinePath, !qPath.isEmpty else { return }
+        // Also quarantine the campaign best if it sits in the soft band.
+        if let best = bestSoFar,
+           NearMissQuarantine.shouldQuarantine(best, softBar: softBar) {
+            quarantineBag.append(
+                NearMissQuarantine.makeCandidate(
+                    from: best,
+                    source: quarantineSource + "#bestSoFar",
+                    softBar: softBar
+                )
+            )
+        }
+        let deduped = NearMissQuarantine.prioritize(NearMissQuarantine.dedupe(quarantineBag))
+        guard !deduped.isEmpty else {
+            print("quarantine: 0 soft-band near-misses (\(note))")
+            return
+        }
+        let ct = EnigmaAlphabet.string(from: set.ciphertext)
+        let manifest = QuarantineManifest(
+            target: "P1030680",
+            ciphertext: ct,
+            generatedAt: ISO8601DateFormatter().string(from: Date()),
+            sourceFixture: quarantineSource,
+            softBar: softBar,
+            candidates: deduped
+        )
+        do {
+            try NearMissQuarantine.writeManifest(manifest, to: qPath)
+            print("quarantine: wrote \(deduped.count) near-miss(es) → \(qPath) (\(note))")
+            print("  escalate: --hybrid --hybrid-stochastic --hybrid-quarantine \(qPath)")
+        } catch {
+            print("quarantine: failed to write \(qPath): \(error)")
+        }
+    }
+
     if let winner = breakFound {
+        flushQuarantine(note: "break claimed; soft-band peers retained")
         PostBombeDiscriminator.announceBreak(winner)
         return
     }
@@ -880,7 +958,10 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
         print("  \(best.plaintext)")
     }
 
-    guard config.confirmMenus > 1 else { return }
+    guard config.confirmMenus > 1 else {
+        flushQuarantine(note: "solo pass complete")
+        return
+    }
     let confirmed = agreements.confirmed(minIndependentMenus: config.confirmMenus)
     print("confirmed shells (≥\(config.confirmMenus) independent menus): \(confirmed.count)")
     for hit in confirmed.prefix(config.reportLimit) { print(hit.report()) }
@@ -889,17 +970,30 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
     // confirmed shell; the representative stop comes from the strongest independent menu.
     for hit in confirmed {
         let verdict = PostBombeDiscriminator.rank(
-            stops: [hit.representative], ciphertext: set.ciphertext, maxPlugs: config.maxPlugs
+            stops: [hit.representative],
+            ciphertext: set.ciphertext,
+            maxPlugs: config.maxPlugs,
+            provisionalICFloor: config.quarantinePath != nil ? softBar.softICFloor : nil
         )
-        guard let best = verdict.candidates.first, PostBombeDiscriminator.isBreak(best) else {
-            continue
+        guard let best = verdict.candidates.first else { continue }
+        if NearMissQuarantine.shouldQuarantine(best, softBar: softBar) {
+            quarantineBag.append(
+                NearMissQuarantine.makeCandidate(
+                    from: best,
+                    source: quarantineSource + "#confirmed",
+                    softBar: softBar
+                )
+            )
         }
+        guard PostBombeDiscriminator.isBreak(best) else { continue }
         print()
         print("confirmed shell also clears the linguistic bar "
             + "(\(hit.independentCount) independent menus)")
+        flushQuarantine(note: "confirmed break")
         PostBombeDiscriminator.announceBreak(best)
         return
     }
+    flushQuarantine(note: "confirm pass complete")
 }
 
 struct SweepStop {

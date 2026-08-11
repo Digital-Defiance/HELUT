@@ -1,0 +1,115 @@
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Shell evolution: OFF freeRings=false WO=1 ringSeeds=1 subspace=potsdam
+RIGA Option A: elite≈1% immigrants≈19% mutants=remainder (inner 26^4 message-key sweep per chromosome; scores on host)
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/40 pop=64 blockB_greeks=0
+  gen-best  15/72 (21%) tmpl=known-PT IC=0.0466 pos=QKSU | UKWB gamma IV-III-VIII rings=AACU stecker=IU KZ MS OX RV
+  all-time  15/72 tmpl=known-PT pos=QKSU | UKWB gamma IV-III-VIII rings=AACU stecker=IU KZ MS OX RV
+Hybrid gen 2/40 pop=64 blockB_greeks=0
+  gen-best  18/72 (25%) tmpl=known-PT IC=0.0426 pos=IXVQ | UKWB gamma IV-III-VIII rings=AACU stecker=BC DZ FX GN HW IJ KV LR MS TU
+  all-time  18/72 tmpl=known-PT pos=IXVQ | UKWB gamma IV-III-VIII rings=AACU stecker=BC DZ FX GN HW IJ KV LR MS TU
+Hybrid gen 3/40 pop=64 blockB_greeks=0
+  gen-best  18/72 (25%) tmpl=known-PT IC=0.0426 pos=IXVQ | UKWB gamma IV-III-VIII rings=AACU stecker=BC DZ FX GN HW IJ KV LR MS TU
+  all-time  18/72 tmpl=known-PT pos=IXVQ | UKWB gamma IV-III-VIII rings=AACU stecker=BC DZ FX GN HW IJ KV LR MS TU
+Hybrid gen 4/40 pop=64 blockB_greeks=0
+  gen-best  18/72 (25%) tmpl=known-PT IC=0.0426 pos=IXVQ | UKWB gamma IV-III-VIII rings=AACU stecker=BC DZ FX GN HW IJ KV LR MS TU
+  all-time  18/72 tmpl=known-PT pos=IXVQ | UKWB gamma IV-III-VIII rings=AACU stecker=BC DZ FX GN HW IJ KV LR MS TU
+Hybrid gen 5/40 pop=64 blockB_greeks=0
+  gen-best  18/72 (25%) tmpl=known-PT IC=0.0426 pos=IXVQ | UKWB gamma IV-III-VIII rings=AACU stecker=BC DZ FX GN HW IJ KV LR MS TU
+  all-time  18/72 tmpl=known-PT pos=IXVQ | UKWB gamma IV-III-VIII rings=AACU stecker=BC DZ FX GN HW IJ KV LR MS TU
+Hybrid gen 6/40 pop=64 blockB_greeks=0
+  gen-best  18/72 (25%) tmpl=known-PT IC=0.0426 pos=IXVQ | UKWB gamma IV-III-VIII rings=AACU stecker=BC DZ FX GN HW IJ KV LR MS TU
+  all-time  18/72 tmpl=known-PT pos=IXVQ | UKWB gamma IV-III-VIII rings=AACU stecker=BC DZ FX GN HW IJ KV LR MS TU
+Hybrid gen 7/40 pop=64 blockB_greeks=0
+  gen-best  18/72 (25%) tmpl=known-PT IC=0.0426 pos=IXVQ | UKWB gamma IV-III-VIII rings=AACU stecker=BC DZ FX GN HW IJ KV LR MS TU
+  all-time  18/72 tmpl=known-PT pos=IXVQ | UKWB gamma IV-III-VIII rings=AACU stecker=BC DZ FX GN HW IJ KV LR MS TU
+Hybrid gen 8/40 pop=64 blockB_greeks=0
+  gen-best  18/72 (25%) tmpl=known-PT IC=0.0426 pos=IXVQ | UKWB gamma IV-III-VIII rings=AACU stecker=BC DZ FX GN HW IJ KV LR MS TU
+  all-time  18/72 tmpl=known-PT pos=IXVQ | UKWB gamma IV-III-VIII rings=AACU stecker=BC DZ FX GN HW IJ KV LR MS TU
+Hybrid gen 9/40 pop=64 blockB_greeks=0
+  gen-best  18/72 (25%) tmpl=known-PT IC=0.0426 pos=IXVQ | UKWB gamma IV-III-VIII rings=AACU stecker=BC DZ FX GN HW IJ KV LR MS TU
+  all-time  18/72 tmpl=known-PT pos=IXVQ | UKWB gamma IV-III-VIII rings=AACU stecker=BC DZ FX GN HW IJ KV LR MS TU
+Hybrid gen 10/40 pop=64 blockB_greeks=0
+  gen-best  23/72 (32%) tmpl=known-PT IC=0.0426 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=AG BQ CZ DI HK NV
+  all-time  23/72 tmpl=known-PT pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=AG BQ CZ DI HK NV
+Hybrid gen 11/40 pop=64 blockB_greeks=0
+  gen-best  33/72 (46%) tmpl=known-PT IC=0.0485 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CZ DI MS NV OU
+  all-time  33/72 tmpl=known-PT pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CZ DI MS NV OU
+Hybrid gen 12/40 pop=64 blockB_greeks=0
+  gen-best  35/72 (49%) tmpl=known-PT IC=0.0458 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CZ DI NV OU
+  all-time  35/72 tmpl=known-PT pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CZ DI NV OU
+Hybrid gen 13/40 pop=64 blockB_greeks=0
+  gen-best  35/72 (49%) tmpl=known-PT IC=0.0458 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CZ DI NV OU
+  all-time  35/72 tmpl=known-PT pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CZ DI NV OU
+Hybrid gen 14/40 pop=64 blockB_greeks=0
+  gen-best  35/72 (49%) tmpl=known-PT IC=0.0458 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CZ DI NV OU
+  all-time  35/72 tmpl=known-PT pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CZ DI NV OU
+Hybrid gen 15/40 pop=64 blockB_greeks=0
+  gen-best  36/72 (50%) tmpl=known-PT IC=0.0462 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CZ DI GH NV OU
+  all-time  36/72 tmpl=known-PT pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CZ DI GH NV OU
+Hybrid gen 16/40 pop=64 blockB_greeks=0
+  gen-best  36/72 (50%) tmpl=known-PT IC=0.0462 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CZ DI GH NV OU
+  all-time  36/72 tmpl=known-PT pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CZ DI GH NV OU
+Hybrid gen 17/40 pop=64 blockB_greeks=0
+  gen-best  36/72 (50%) tmpl=known-PT IC=0.0462 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CZ DI GH NV OU
+  all-time  36/72 tmpl=known-PT pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CZ DI GH NV OU
+Hybrid gen 18/40 pop=64 blockB_greeks=0
+  gen-best  59/72 (82%) tmpl=known-PT IC=0.0606 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI GL NV OU SZ TY
+  all-time  59/72 tmpl=known-PT pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI GL NV OU SZ TY
+Hybrid gen 19/40 pop=64 blockB_greeks=0
+  gen-best  59/72 (82%) tmpl=known-PT IC=0.0606 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI GL NV OU SZ TY
+  all-time  59/72 tmpl=known-PT pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI GL NV OU SZ TY
+Hybrid gen 20/40 pop=64 blockB_greeks=0
+  gen-best  59/72 (82%) tmpl=known-PT IC=0.0606 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI GL NV OU SZ TY
+  all-time  59/72 tmpl=known-PT pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI GL NV OU SZ TY
+Hybrid gen 21/40 pop=64 blockB_greeks=0
+  gen-best  59/72 (82%) tmpl=known-PT IC=0.0606 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI GL NV OU SZ TY
+  all-time  59/72 tmpl=known-PT pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI GL NV OU SZ TY
+Hybrid gen 22/40 pop=64 blockB_greeks=0
+  gen-best  60/72 (83%) tmpl=known-PT IC=0.0575 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ NV OU SZ TY
+  all-time  60/72 tmpl=known-PT pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ NV OU SZ TY
+Hybrid gen 23/40 pop=64 blockB_greeks=0
+  gen-best  60/72 (83%) tmpl=known-PT IC=0.0575 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ NV OU SZ TY
+  all-time  60/72 tmpl=known-PT pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ NV OU SZ TY
+Hybrid gen 24/40 pop=64 blockB_greeks=0
+  gen-best  60/72 (83%) tmpl=known-PT IC=0.0575 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ NV OU SZ TY
+  all-time  60/72 tmpl=known-PT pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ NV OU SZ TY
+Hybrid gen 25/40 pop=64 blockB_greeks=0
+  gen-best  60/72 (83%) tmpl=known-PT IC=0.0575 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ NV OU SZ TY
+  all-time  60/72 tmpl=known-PT pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ NV OU SZ TY
+Hybrid gen 26/40 pop=64 blockB_greeks=0
+  gen-best  60/72 (83%) tmpl=known-PT IC=0.0575 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ NV OU SZ TY
+  all-time  60/72 tmpl=known-PT pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ NV OU SZ TY
+Hybrid gen 27/40 pop=64 blockB_greeks=0
+  gen-best  60/72 (83%) tmpl=known-PT IC=0.0575 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ NV OU SZ TY
+  all-time  60/72 tmpl=known-PT pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ NV OU SZ TY
+Hybrid gen 28/40 pop=64 blockB_greeks=0
+  gen-best  60/72 (83%) tmpl=known-PT IC=0.0575 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ NV OU SZ TY
+  all-time  60/72 tmpl=known-PT pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ NV OU SZ TY
+Hybrid gen 29/40 pop=64 blockB_greeks=0
+  gen-best  62/72 (86%) tmpl=known-PT IC=0.0606 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ KP NV OU SZ TY
+  all-time  62/72 tmpl=known-PT pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ KP NV OU SZ TY
+Hybrid gen 30/40 pop=64 blockB_greeks=0
+  gen-best  62/72 (86%) tmpl=known-PT IC=0.0606 pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ KP NV OU SZ TY
+  all-time  62/72 tmpl=known-PT pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ KP NV OU SZ TY
+  hill-climb recovered fitness=72 tmpl=known-PT pos=VYAA | UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ TY
+*** Hybrid halt — template exact match (hill-climb) ***
+HELUT — Stochastic Bombe KPA control (P1030684, 72 letters)
+Fitness: exact decrypt match against known plaintext (German-ness ignored)
+Shell locked: UKW B / γ / IV-III-VIII / rings AACU
+RIGA Option A ON — pop=32 gens=80 immigrants=19% (stecker-only)
+Stecker seed: BLIND (no oracle)
+KPA hill-climb steps/elite: 24
+Ciphertext: RFBYWKIKELDCHBSXUNFJFSNRRVFWASXYLQCQFADYJXNTBMVLRDCGULOWHTBGWUSSOQHGAYED
+Target PT:  VVVUUUVIRSOBENNULEINSXXMITUUUVIRSIBENNULZWOYVIRSIBENNULDREIYZWODREISECHS
+
+Config: pop=64 gens=40 maxPlugs=10 blockB_greeks=0 samples subspace=potsdam WO=1 evolveShell=false freeRings=false ringSeeds=AACU fitness=KPA letter-match / 72 kpaHill=24 RIGA(imm=19%,elite=1%)
+
+
+Elapsed: 33.7 s
+Best shell: UKWB gamma IV-III-VIII rings=AACU stecker=BQ CH DI EJ GL KP NV OU SZ TY
+Best hit: partition=kpa-26^4 tmpl=known-PT pos=VYAA score=72.0000 IC=0.0657
+Plain: VVVUUUVIRSOBENNULEINSXXMITUUUVIRSIBENNULZWOYVIRSIBENNULDREIYZWODREISECHS
+KPA match: 72/72
+*** CONTROL PASS — exact plaintext recovered ***
+See ASIC_CRACKER.md / evolution-hybridization.md / stochastic-bombe.md

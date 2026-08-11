@@ -1,0 +1,54 @@
+=== Quarantine garble control — P1030681 Dönitz (first-draft aligned) ===
+shell: UKW C / beta / V-VI-VIII / rings AAEL / key YOSZ
+crib@0 len=24: KRKRALLEXXFOLGENDESISTSO
+garble: Girard/Hörenberg first draft (aligned) — historical first draft: .→X + insert HMHY; 38 CT diffs; shared head 56
+edits (38): 56:Y→C 57:J→K 58:F→Z 59:G→F 64:Q→G 71:E→B 92:H→F 103:N→M 109:Y→C 122:K→C 123:C→H 125:W→P …
+soft band: IC≥0.048 tail>-4.000 | strict: IC≥0.055 tail>-3.600
+
+--- Phase A: clean / proofed ciphertext ---
+  best YOSZ IC=0.058 tail=-2.159 cribExact=yes break=yes
+  PASS — true key BREAKs on clean/proofed CT
+
+--- Phase B: garbled / Schlüsselzettel ciphertext ---
+  true key IC=0.054 tail=-2.159 cribExact=yes break=no soft=yes
+  decrypt head: KRKRALLEXXFOLGENDESISTSOFORTBEKANNTJUGEBENSXICHH
+  PASS — true key is a soft-band near-miss (quarantine trap)
+  wrote logs/quarantine_p1030681_first_draft.json
+  wrote Fixtures/p1030681_first_draft_menus.json
+
+--- Phase C: Hybrid escalate from quarantine ---
+Quarantine ingest: 1 seed(s) from logs/quarantine_p1030681_first_draft.json (soft IC≥0.048 tail>-4.000; evolveShell=false hill=24)
+  [0] C beta V-VI-VIII rings=AAEL pos=YOSZ plugs=9 soft=whole IC=0.054≥0.048 tail=-3.518>-4.000; prefix@42 IC=0.051 tail=-2.159 IC=0.054 tail=-2.159
+  expected ceiling ≈ 89.8% (334/372) if shell+stecker correct
+  ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+  Shell evolution: OFF freeRings=false WO=1 ringSeeds=1 subspace=potsdam
+  Seeded population[0..<1] from Welchman quarantine (1 candidate(s))
+    seed[0] UKWC beta V-VI-VIII rings=AAEL stecker=AE BF CM DQ HU JN LX PR SZ
+  Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+  Hybrid gen 1/8 pop=12 blockB_greeks=0
+    gen-best  304/372 (82%) tmpl=known-PT IC=0.0542 pos=YOSZ | UKWC beta V-VI-VIII rings=AAEL stecker=AE BF CM DQ HU JN LX PR SZ
+    all-time  304/372 tmpl=known-PT pos=YOSZ | UKWC beta V-VI-VIII rings=AAEL stecker=AE BF CM DQ HU JN LX PR SZ
+  Hybrid gen 2/8 pop=12 blockB_greeks=0
+    gen-best  304/372 (82%) tmpl=known-PT IC=0.0542 pos=YOSZ | UKWC beta V-VI-VIII rings=AAEL stecker=AE BF CM DQ HU JN LX PR SZ
+    all-time  304/372 tmpl=known-PT pos=YOSZ | UKWC beta V-VI-VIII rings=AAEL stecker=AE BF CM DQ HU JN LX PR SZ
+  Hybrid gen 3/8 pop=12 blockB_greeks=0
+    gen-best  304/372 (82%) tmpl=known-PT IC=0.0542 pos=YOSZ | UKWC beta V-VI-VIII rings=AAEL stecker=AE BF CM DQ HU JN LX PR SZ
+    all-time  304/372 tmpl=known-PT pos=YOSZ | UKWC beta V-VI-VIII rings=AAEL stecker=AE BF CM DQ HU JN LX PR SZ
+  Hybrid gen 4/8 pop=12 blockB_greeks=0
+    gen-best  304/372 (82%) tmpl=known-PT IC=0.0542 pos=YOSZ | UKWC beta V-VI-VIII rings=AAEL stecker=AE BF CM DQ HU JN LX PR SZ
+    all-time  304/372 tmpl=known-PT pos=YOSZ | UKWC beta V-VI-VIII rings=AAEL stecker=AE BF CM DQ HU JN LX PR SZ
+  Hybrid gen 5/8 pop=12 blockB_greeks=0
+    gen-best  304/372 (82%) tmpl=known-PT IC=0.0542 pos=YOSZ | UKWC beta V-VI-VIII rings=AAEL stecker=AE BF CM DQ HU JN LX PR SZ
+    all-time  304/372 tmpl=known-PT pos=YOSZ | UKWC beta V-VI-VIII rings=AAEL stecker=AE BF CM DQ HU JN LX PR SZ
+  Hybrid gen 6/8 pop=12 blockB_greeks=0
+    gen-best  304/372 (82%) tmpl=known-PT IC=0.0542 pos=YOSZ | UKWC beta V-VI-VIII rings=AAEL stecker=AE BF CM DQ HU JN LX PR SZ
+    all-time  304/372 tmpl=known-PT pos=YOSZ | UKWC beta V-VI-VIII rings=AAEL stecker=AE BF CM DQ HU JN LX PR SZ
+  Hybrid gen 7/8 pop=12 blockB_greeks=0
+    gen-best  304/372 (82%) tmpl=known-PT IC=0.0542 pos=YOSZ | UKWC beta V-VI-VIII rings=AAEL stecker=AE BF CM DQ HU JN LX PR SZ
+    all-time  304/372 tmpl=known-PT pos=YOSZ | UKWC beta V-VI-VIII rings=AAEL stecker=AE BF CM DQ HU JN LX PR SZ
+  Hybrid gen 8/8 pop=12 blockB_greeks=0
+    gen-best  334/372 (90%) tmpl=known-PT IC=0.0570 pos=YOSZ | UKWC beta V-VI-VIII rings=AAEL stecker=AE BF CM DQ HU JN LX PR SZ VW
+    all-time  334/372 tmpl=known-PT pos=YOSZ | UKWC beta V-VI-VIII rings=AAEL stecker=AE BF CM DQ HU JN LX PR SZ VW
+  result: 334/372 (89.8%) shell=UKWC beta V-VI-VIII rings=AAEL stecker=AE BF CM DQ HU JN LX PR SZ VW
+  PASS — quarantine seed clears ≥80% on garbled CT
+  PASS — match near historical edit ceiling

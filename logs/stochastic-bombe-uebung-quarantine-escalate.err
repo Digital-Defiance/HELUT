@@ -1,0 +1,2112 @@
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 28…28)
+Shell evolution: OFF freeRings=false WO=47 ringSeeds=3 subspace=potsdam-neighbourhood
+Seeded population[0..<55] from Welchman quarantine (55 candidate(s))
+  seed[0] UKWB gamma I-IV-VI rings=AAAA stecker=AM BY CV EX FU GT HN JQ
+  seed[1] UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL HY IS JU RV
+  seed[2] UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK GX HJ LR NP OT UZ VY
+  seed[3] UKWC beta IV-VIII-III rings=AAAA stecker=AV BP CR DN EL GI HU MX QY TW
+  seed[4] UKWC beta V-VIII-III rings=AAAA stecker=AI CW EP GZ HN LR MY OS QT VX
+  seed[5] UKWB gamma VII-IV-III rings=AAAA stecker=AP BH CF DR EI GZ JQ KS LT OX
+  seed[6] UKWB beta II-V-III rings=AAAA stecker=AJ BI CK EG LR MY NS PT UW
+  seed[7] UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  seed[8] UKWC gamma III-IV-II rings=AAAA stecker=AK BU DP EZ FR JY LV MX NW ST
+  seed[9] UKWB beta II-VII-V rings=AAAA stecker=BI CM FG JL NQ RS TU WY
+  seed[10] UKWB beta II-I-VII rings=AAAA stecker=AP BV CD GL HY IS JM KN RZ
+  seed[11] UKWB gamma I-VII-IV rings=AAAA stecker=AF CH DN GP IM JL KX OS RU
+  seed[12] UKWB beta IV-VII-II rings=AAAA stecker=AY BO CI DJ EK GP HS RU TV
+  seed[13] UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  seed[14] UKWB beta VI-V-VII rings=AAAA stecker=AH BP CD JQ LT NV OU SZ WY
+  seed[15] UKWC beta VIII-V-III rings=AAAA stecker=AO BJ CR DX EI FG HN KU LT PY
+  seed[16] UKWB beta VII-VIII-II rings=AAAA stecker=ER GI HY JW KS NQ OU TX
+  seed[17] UKWB gamma I-VII-VI rings=AAAA stecker=AB CK DF GW HY IN JV LP MR SU
+  seed[18] UKWC beta VI-VII-III rings=AAAA stecker=BF CZ EK GP IX MR TY UV
+  seed[19] UKWB beta IV-VIII-III rings=AAAA stecker=BZ CD FU GK HY JO NV PS RX TW
+  seed[20] UKWC gamma VIII-IV-I rings=AAAA stecker=BC DJ EH GK LS NR OU VX
+  seed[21] UKWC gamma VIII-IV-I rings=AAAA stecker=BC DJ EH GK LS NR OU VX
+  seed[22] UKWB beta VII-V-VI rings=AAAA stecker=AP BJ CY DE GQ IS NZ OR UW
+  seed[23] UKWC gamma VIII-IV-III rings=AAAA stecker=AW BY CH DR EZ GJ IS KT NU VX
+  seed[24] UKWB beta VI-I-IV rings=AAAA stecker=AP BR FJ HU KT NY QS XZ
+  seed[25] UKWC gamma V-VIII-VII rings=AAAA stecker=AF CW DG EP HJ KR OU TV YZ
+  seed[26] UKWC gamma V-VIII-VII rings=AAAA stecker=AF CW DG EP HJ KR OU TV YZ
+  seed[27] UKWC beta II-III-IV rings=AAAA stecker=AH CR DT EX FS GZ JO LY NV UW
+  seed[28] UKWB beta IV-VIII-VI rings=AAAA stecker=BD FG HR IY JL NV PU ST
+  seed[29] UKWB beta I-VI-IV rings=AAAA stecker=BD CX EQ GT JM OR SW
+  seed[30] UKWC beta IV-III-VIII rings=AAAA stecker=BT CF DG HX IR JW KU MS OY
+  seed[31] UKWB beta II-V-III rings=AAAA stecker=AQ BP CE DU GZ IS KN MR TV
+  seed[32] UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW GZ IY KS NQ UX
+  seed[33] UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW GZ IY KS NQ UX
+  seed[34] UKWC gamma VI-V-VIII rings=AAAA stecker=AT BE CI DY JZ KM LN RX SW
+  seed[35] UKWC gamma I-II-IV rings=AAAA stecker=AI BZ CJ EX FT GL KS MN RV WY
+  seed[36] UKWB beta III-VII-II rings=AAAA stecker=AL CH EK JN MX QY TV UW
+  seed[37] UKWC gamma VI-VII-VIII rings=AAAA stecker=BK DX FS GJ MU NO TV YZ
+  seed[38] UKWB beta II-IV-V rings=AAAA stecker=AZ CD EW FU GI HR JV LN ST XY
+  seed[39] UKWB beta VIII-I-IV rings=AAAA stecker=AY BW CH DU EL GV PX RS
+  seed[40] UKWB beta V-VII-II rings=AAAA stecker=AP CI DK EW GR JX LY MQ SU TV
+  seed[41] UKWC beta VI-IV-VIII rings=AAAA stecker=AF BT DH EK GO IY JV LX MU RS
+  seed[42] UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  seed[43] UKWC beta VIII-IV-VII rings=AAAA stecker=AF BG EK IT JW MS NO PU QR VX
+  seed[44] UKWB beta VIII-VII-IV rings=AAAA stecker=AN CP DZ GL HM IJ OY RV SW TX
+  seed[45] UKWB gamma III-VIII-II rings=AAAA stecker=AB CR EK FY GI HN JX MS PT UV
+  seed[46] UKWC gamma I-II-VII rings=AAAA stecker=BX CI DV EU FG LN MR OT SW
+  seed[47] UKWC gamma II-VI-IV rings=AAAA stecker=BZ CW GR HL JK MO QT SV XY
+  seed[48] UKWB gamma VIII-III-IV rings=AAAA stecker=AR BO CK DQ FT GV HY IU JM SW
+  seed[49] UKWB gamma VIII-III-IV rings=AAAA stecker=AR BO CK DQ FT GV HY IU JM SW
+  seed[50] UKWB beta II-I-VIII rings=AAAA stecker=AV BU CH EF GW JZ KS LT NQ XY
+  seed[51] UKWB beta VIII-I-VI rings=AAAA stecker=AI BD EV GH JT NQ OR SW UX
+  seed[52] UKWB gamma III-I-V rings=AAAA stecker=AC BR HX JK LQ ST UV
+  seed[53] UKWB beta I-VII-VI rings=AAAA stecker=AM BK CP DE FJ GL IU RW YZ
+  seed[54] UKWB beta VIII-I-III rings=AAAA stecker=AQ BV CJ DR ET GM LS NP UZ
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@0 IC=0.0395 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@0 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+Hybrid gen 2/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@0 IC=0.0395 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@0 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+Hybrid gen 3/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@0 IC=0.0395 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@0 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+Hybrid gen 4/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@0 IC=0.0395 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@0 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+Hybrid gen 5/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@0 IC=0.0395 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@0 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+Hybrid gen 6/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@0 IC=0.0395 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@0 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+Hybrid gen 7/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@0 IC=0.0395 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@0 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+Hybrid gen 8/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@0 IC=0.0395 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@0 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+Hybrid gen 9/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@0 IC=0.0395 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@0 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+Hybrid gen 10/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@0 IC=0.0395 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@0 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+Hybrid gen 11/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@0 IC=0.0395 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@0 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+Hybrid gen 12/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@0 IC=0.0395 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@0 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+Hybrid gen 13/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@0 IC=0.0395 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@0 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+Hybrid gen 14/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@0 IC=0.0395 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@0 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+Hybrid gen 15/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@0 IC=0.0395 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@0 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+Hybrid gen 16/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@0 IC=0.0395 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@0 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+Hybrid gen 17/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@0 IC=0.0395 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@0 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+Hybrid gen 18/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@0 IC=0.0395 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@0 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+Hybrid gen 19/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@0 IC=0.0395 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@0 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+Hybrid gen 20/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@0 IC=0.0395 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@0 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+Hybrid gen 21/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@0 IC=0.0395 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@0 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+Hybrid gen 22/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@0 IC=0.0395 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@0 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+Hybrid gen 23/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@0 IC=0.0395 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@0 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+Hybrid gen 24/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@0 IC=0.0395 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@0 pos=WLPC | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 28…28)
+Shell evolution: OFF freeRings=false WO=47 ringSeeds=3 subspace=potsdam-neighbourhood
+Seeded population[0..<55] from Welchman quarantine (55 candidate(s))
+  seed[0] UKWB gamma I-IV-VI rings=AAAA stecker=AM BY CV EX FU GT HN JQ
+  seed[1] UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL HY IS JU RV
+  seed[2] UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK GX HJ LR NP OT UZ VY
+  seed[3] UKWC beta IV-VIII-III rings=AAAA stecker=AV BP CR DN EL GI HU MX QY TW
+  seed[4] UKWC beta V-VIII-III rings=AAAA stecker=AI CW EP GZ HN LR MY OS QT VX
+  seed[5] UKWB gamma VII-IV-III rings=AAAA stecker=AP BH CF DR EI GZ JQ KS LT OX
+  seed[6] UKWB beta II-V-III rings=AAAA stecker=AJ BI CK EG LR MY NS PT UW
+  seed[7] UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  seed[8] UKWC gamma III-IV-II rings=AAAA stecker=AK BU DP EZ FR JY LV MX NW ST
+  seed[9] UKWB beta II-VII-V rings=AAAA stecker=BI CM FG JL NQ RS TU WY
+  seed[10] UKWB beta II-I-VII rings=AAAA stecker=AP BV CD GL HY IS JM KN RZ
+  seed[11] UKWB gamma I-VII-IV rings=AAAA stecker=AF CH DN GP IM JL KX OS RU
+  seed[12] UKWB beta IV-VII-II rings=AAAA stecker=AY BO CI DJ EK GP HS RU TV
+  seed[13] UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  seed[14] UKWB beta VI-V-VII rings=AAAA stecker=AH BP CD JQ LT NV OU SZ WY
+  seed[15] UKWC beta VIII-V-III rings=AAAA stecker=AO BJ CR DX EI FG HN KU LT PY
+  seed[16] UKWB beta VII-VIII-II rings=AAAA stecker=ER GI HY JW KS NQ OU TX
+  seed[17] UKWB gamma I-VII-VI rings=AAAA stecker=AB CK DF GW HY IN JV LP MR SU
+  seed[18] UKWC beta VI-VII-III rings=AAAA stecker=BF CZ EK GP IX MR TY UV
+  seed[19] UKWB beta IV-VIII-III rings=AAAA stecker=BZ CD FU GK HY JO NV PS RX TW
+  seed[20] UKWC gamma VIII-IV-I rings=AAAA stecker=BC DJ EH GK LS NR OU VX
+  seed[21] UKWC gamma VIII-IV-I rings=AAAA stecker=BC DJ EH GK LS NR OU VX
+  seed[22] UKWB beta VII-V-VI rings=AAAA stecker=AP BJ CY DE GQ IS NZ OR UW
+  seed[23] UKWC gamma VIII-IV-III rings=AAAA stecker=AW BY CH DR EZ GJ IS KT NU VX
+  seed[24] UKWB beta VI-I-IV rings=AAAA stecker=AP BR FJ HU KT NY QS XZ
+  seed[25] UKWC gamma V-VIII-VII rings=AAAA stecker=AF CW DG EP HJ KR OU TV YZ
+  seed[26] UKWC gamma V-VIII-VII rings=AAAA stecker=AF CW DG EP HJ KR OU TV YZ
+  seed[27] UKWC beta II-III-IV rings=AAAA stecker=AH CR DT EX FS GZ JO LY NV UW
+  seed[28] UKWB beta IV-VIII-VI rings=AAAA stecker=BD FG HR IY JL NV PU ST
+  seed[29] UKWB beta I-VI-IV rings=AAAA stecker=BD CX EQ GT JM OR SW
+  seed[30] UKWC beta IV-III-VIII rings=AAAA stecker=BT CF DG HX IR JW KU MS OY
+  seed[31] UKWB beta II-V-III rings=AAAA stecker=AQ BP CE DU GZ IS KN MR TV
+  seed[32] UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW GZ IY KS NQ UX
+  seed[33] UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW GZ IY KS NQ UX
+  seed[34] UKWC gamma VI-V-VIII rings=AAAA stecker=AT BE CI DY JZ KM LN RX SW
+  seed[35] UKWC gamma I-II-IV rings=AAAA stecker=AI BZ CJ EX FT GL KS MN RV WY
+  seed[36] UKWB beta III-VII-II rings=AAAA stecker=AL CH EK JN MX QY TV UW
+  seed[37] UKWC gamma VI-VII-VIII rings=AAAA stecker=BK DX FS GJ MU NO TV YZ
+  seed[38] UKWB beta II-IV-V rings=AAAA stecker=AZ CD EW FU GI HR JV LN ST XY
+  seed[39] UKWB beta VIII-I-IV rings=AAAA stecker=AY BW CH DU EL GV PX RS
+  seed[40] UKWB beta V-VII-II rings=AAAA stecker=AP CI DK EW GR JX LY MQ SU TV
+  seed[41] UKWC beta VI-IV-VIII rings=AAAA stecker=AF BT DH EK GO IY JV LX MU RS
+  seed[42] UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  seed[43] UKWC beta VIII-IV-VII rings=AAAA stecker=AF BG EK IT JW MS NO PU QR VX
+  seed[44] UKWB beta VIII-VII-IV rings=AAAA stecker=AN CP DZ GL HM IJ OY RV SW TX
+  seed[45] UKWB gamma III-VIII-II rings=AAAA stecker=AB CR EK FY GI HN JX MS PT UV
+  seed[46] UKWC gamma I-II-VII rings=AAAA stecker=BX CI DV EU FG LN MR OT SW
+  seed[47] UKWC gamma II-VI-IV rings=AAAA stecker=BZ CW GR HL JK MO QT SV XY
+  seed[48] UKWB gamma VIII-III-IV rings=AAAA stecker=AR BO CK DQ FT GV HY IU JM SW
+  seed[49] UKWB gamma VIII-III-IV rings=AAAA stecker=AR BO CK DQ FT GV HY IU JM SW
+  seed[50] UKWB beta II-I-VIII rings=AAAA stecker=AV BU CH EF GW JZ KS LT NQ XY
+  seed[51] UKWB beta VIII-I-VI rings=AAAA stecker=AI BD EV GH JT NQ OR SW UX
+  seed[52] UKWB gamma III-I-V rings=AAAA stecker=AC BR HX JK LQ ST UV
+  seed[53] UKWB beta I-VII-VI rings=AAAA stecker=AM BK CP DE FJ GL IU RW YZ
+  seed[54] UKWB beta VIII-I-III rings=AAAA stecker=AQ BV CJ DR ET GM LS NP UZ
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@1 IC=0.0473 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@1 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+Hybrid gen 2/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@1 IC=0.0473 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@1 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+Hybrid gen 3/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@1 IC=0.0473 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@1 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+Hybrid gen 4/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@1 IC=0.0473 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@1 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+Hybrid gen 5/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@1 IC=0.0473 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@1 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+Hybrid gen 6/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@1 IC=0.0473 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@1 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+Hybrid gen 7/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@1 IC=0.0473 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@1 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+Hybrid gen 8/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@1 IC=0.0473 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@1 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+Hybrid gen 9/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@1 IC=0.0473 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@1 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+Hybrid gen 10/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@1 IC=0.0473 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@1 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+Hybrid gen 11/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@1 IC=0.0473 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@1 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+Hybrid gen 12/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@1 IC=0.0473 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@1 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+Hybrid gen 13/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@1 IC=0.0473 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@1 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+Hybrid gen 14/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@1 IC=0.0473 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@1 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+Hybrid gen 15/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@1 IC=0.0473 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@1 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+Hybrid gen 16/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@1 IC=0.0473 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@1 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+Hybrid gen 17/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@1 IC=0.0473 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@1 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+Hybrid gen 18/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@1 IC=0.0473 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@1 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+Hybrid gen 19/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@1 IC=0.0473 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@1 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+Hybrid gen 20/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@1 IC=0.0473 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@1 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+Hybrid gen 21/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@1 IC=0.0473 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@1 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+Hybrid gen 22/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@1 IC=0.0473 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@1 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+Hybrid gen 23/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@1 IC=0.0473 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@1 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+Hybrid gen 24/24 pop=64 blockB_greeks=0
+  gen-best  16/28 (57%) tmpl=head:UEBUNGSMELDUNGUEBU@1 IC=0.0473 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  all-time  16/28 tmpl=head:UEBUNGSMELDUNGUEBU@1 pos=OJNC | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 28…28)
+Shell evolution: OFF freeRings=false WO=47 ringSeeds=3 subspace=potsdam-neighbourhood
+Seeded population[0..<55] from Welchman quarantine (55 candidate(s))
+  seed[0] UKWB gamma I-IV-VI rings=AAAA stecker=AM BY CV EX FU GT HN JQ
+  seed[1] UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL HY IS JU RV
+  seed[2] UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK GX HJ LR NP OT UZ VY
+  seed[3] UKWC beta IV-VIII-III rings=AAAA stecker=AV BP CR DN EL GI HU MX QY TW
+  seed[4] UKWC beta V-VIII-III rings=AAAA stecker=AI CW EP GZ HN LR MY OS QT VX
+  seed[5] UKWB gamma VII-IV-III rings=AAAA stecker=AP BH CF DR EI GZ JQ KS LT OX
+  seed[6] UKWB beta II-V-III rings=AAAA stecker=AJ BI CK EG LR MY NS PT UW
+  seed[7] UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  seed[8] UKWC gamma III-IV-II rings=AAAA stecker=AK BU DP EZ FR JY LV MX NW ST
+  seed[9] UKWB beta II-VII-V rings=AAAA stecker=BI CM FG JL NQ RS TU WY
+  seed[10] UKWB beta II-I-VII rings=AAAA stecker=AP BV CD GL HY IS JM KN RZ
+  seed[11] UKWB gamma I-VII-IV rings=AAAA stecker=AF CH DN GP IM JL KX OS RU
+  seed[12] UKWB beta IV-VII-II rings=AAAA stecker=AY BO CI DJ EK GP HS RU TV
+  seed[13] UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  seed[14] UKWB beta VI-V-VII rings=AAAA stecker=AH BP CD JQ LT NV OU SZ WY
+  seed[15] UKWC beta VIII-V-III rings=AAAA stecker=AO BJ CR DX EI FG HN KU LT PY
+  seed[16] UKWB beta VII-VIII-II rings=AAAA stecker=ER GI HY JW KS NQ OU TX
+  seed[17] UKWB gamma I-VII-VI rings=AAAA stecker=AB CK DF GW HY IN JV LP MR SU
+  seed[18] UKWC beta VI-VII-III rings=AAAA stecker=BF CZ EK GP IX MR TY UV
+  seed[19] UKWB beta IV-VIII-III rings=AAAA stecker=BZ CD FU GK HY JO NV PS RX TW
+  seed[20] UKWC gamma VIII-IV-I rings=AAAA stecker=BC DJ EH GK LS NR OU VX
+  seed[21] UKWC gamma VIII-IV-I rings=AAAA stecker=BC DJ EH GK LS NR OU VX
+  seed[22] UKWB beta VII-V-VI rings=AAAA stecker=AP BJ CY DE GQ IS NZ OR UW
+  seed[23] UKWC gamma VIII-IV-III rings=AAAA stecker=AW BY CH DR EZ GJ IS KT NU VX
+  seed[24] UKWB beta VI-I-IV rings=AAAA stecker=AP BR FJ HU KT NY QS XZ
+  seed[25] UKWC gamma V-VIII-VII rings=AAAA stecker=AF CW DG EP HJ KR OU TV YZ
+  seed[26] UKWC gamma V-VIII-VII rings=AAAA stecker=AF CW DG EP HJ KR OU TV YZ
+  seed[27] UKWC beta II-III-IV rings=AAAA stecker=AH CR DT EX FS GZ JO LY NV UW
+  seed[28] UKWB beta IV-VIII-VI rings=AAAA stecker=BD FG HR IY JL NV PU ST
+  seed[29] UKWB beta I-VI-IV rings=AAAA stecker=BD CX EQ GT JM OR SW
+  seed[30] UKWC beta IV-III-VIII rings=AAAA stecker=BT CF DG HX IR JW KU MS OY
+  seed[31] UKWB beta II-V-III rings=AAAA stecker=AQ BP CE DU GZ IS KN MR TV
+  seed[32] UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW GZ IY KS NQ UX
+  seed[33] UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW GZ IY KS NQ UX
+  seed[34] UKWC gamma VI-V-VIII rings=AAAA stecker=AT BE CI DY JZ KM LN RX SW
+  seed[35] UKWC gamma I-II-IV rings=AAAA stecker=AI BZ CJ EX FT GL KS MN RV WY
+  seed[36] UKWB beta III-VII-II rings=AAAA stecker=AL CH EK JN MX QY TV UW
+  seed[37] UKWC gamma VI-VII-VIII rings=AAAA stecker=BK DX FS GJ MU NO TV YZ
+  seed[38] UKWB beta II-IV-V rings=AAAA stecker=AZ CD EW FU GI HR JV LN ST XY
+  seed[39] UKWB beta VIII-I-IV rings=AAAA stecker=AY BW CH DU EL GV PX RS
+  seed[40] UKWB beta V-VII-II rings=AAAA stecker=AP CI DK EW GR JX LY MQ SU TV
+  seed[41] UKWC beta VI-IV-VIII rings=AAAA stecker=AF BT DH EK GO IY JV LX MU RS
+  seed[42] UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  seed[43] UKWC beta VIII-IV-VII rings=AAAA stecker=AF BG EK IT JW MS NO PU QR VX
+  seed[44] UKWB beta VIII-VII-IV rings=AAAA stecker=AN CP DZ GL HM IJ OY RV SW TX
+  seed[45] UKWB gamma III-VIII-II rings=AAAA stecker=AB CR EK FY GI HN JX MS PT UV
+  seed[46] UKWC gamma I-II-VII rings=AAAA stecker=BX CI DV EU FG LN MR OT SW
+  seed[47] UKWC gamma II-VI-IV rings=AAAA stecker=BZ CW GR HL JK MO QT SV XY
+  seed[48] UKWB gamma VIII-III-IV rings=AAAA stecker=AR BO CK DQ FT GV HY IU JM SW
+  seed[49] UKWB gamma VIII-III-IV rings=AAAA stecker=AR BO CK DQ FT GV HY IU JM SW
+  seed[50] UKWB beta II-I-VIII rings=AAAA stecker=AV BU CH EF GW JZ KS LT NQ XY
+  seed[51] UKWB beta VIII-I-VI rings=AAAA stecker=AI BD EV GH JT NQ OR SW UX
+  seed[52] UKWB gamma III-I-V rings=AAAA stecker=AC BR HX JK LQ ST UV
+  seed[53] UKWB beta I-VII-VI rings=AAAA stecker=AM BK CP DE FJ GL IU RW YZ
+  seed[54] UKWB beta VIII-I-III rings=AAAA stecker=AQ BV CJ DR ET GM LS NP UZ
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/24 pop=64 blockB_greeks=0
+  gen-best  10/28 (36%) tmpl=head:UEBUNGSMELDUNGUEBU@2 IC=0.0360 pos=QPUR | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  all-time  10/28 tmpl=head:UEBUNGSMELDUNGUEBU@2 pos=QPUR | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+Hybrid gen 2/24 pop=64 blockB_greeks=0
+  gen-best  10/28 (36%) tmpl=head:UEBUNGSMELDUNGUEBU@2 IC=0.0360 pos=QPUR | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  all-time  10/28 tmpl=head:UEBUNGSMELDUNGUEBU@2 pos=QPUR | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+Hybrid gen 3/24 pop=64 blockB_greeks=0
+  gen-best  11/28 (39%) tmpl=head:UEBUNGSMELDUNGUEBU@2 IC=0.0321 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+  all-time  11/28 tmpl=head:UEBUNGSMELDUNGUEBU@2 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+Hybrid gen 4/24 pop=64 blockB_greeks=0
+  gen-best  11/28 (39%) tmpl=head:UEBUNGSMELDUNGUEBU@2 IC=0.0321 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+  all-time  11/28 tmpl=head:UEBUNGSMELDUNGUEBU@2 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+Hybrid gen 5/24 pop=64 blockB_greeks=0
+  gen-best  11/28 (39%) tmpl=head:UEBUNGSMELDUNGUEBU@2 IC=0.0321 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+  all-time  11/28 tmpl=head:UEBUNGSMELDUNGUEBU@2 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+Hybrid gen 6/24 pop=64 blockB_greeks=0
+  gen-best  11/28 (39%) tmpl=head:UEBUNGSMELDUNGUEBU@2 IC=0.0321 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+  all-time  11/28 tmpl=head:UEBUNGSMELDUNGUEBU@2 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+Hybrid gen 7/24 pop=64 blockB_greeks=0
+  gen-best  11/28 (39%) tmpl=head:UEBUNGSMELDUNGUEBU@2 IC=0.0321 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+  all-time  11/28 tmpl=head:UEBUNGSMELDUNGUEBU@2 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+Hybrid gen 8/24 pop=64 blockB_greeks=0
+  gen-best  11/28 (39%) tmpl=head:UEBUNGSMELDUNGUEBU@2 IC=0.0321 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+  all-time  11/28 tmpl=head:UEBUNGSMELDUNGUEBU@2 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+Hybrid gen 9/24 pop=64 blockB_greeks=0
+  gen-best  11/28 (39%) tmpl=head:UEBUNGSMELDUNGUEBU@2 IC=0.0321 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+  all-time  11/28 tmpl=head:UEBUNGSMELDUNGUEBU@2 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+Hybrid gen 10/24 pop=64 blockB_greeks=0
+  gen-best  11/28 (39%) tmpl=head:UEBUNGSMELDUNGUEBU@2 IC=0.0321 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+  all-time  11/28 tmpl=head:UEBUNGSMELDUNGUEBU@2 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+Hybrid gen 11/24 pop=64 blockB_greeks=0
+  gen-best  11/28 (39%) tmpl=head:UEBUNGSMELDUNGUEBU@2 IC=0.0321 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+  all-time  11/28 tmpl=head:UEBUNGSMELDUNGUEBU@2 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+Hybrid gen 12/24 pop=64 blockB_greeks=0
+  gen-best  11/28 (39%) tmpl=head:UEBUNGSMELDUNGUEBU@2 IC=0.0321 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+  all-time  11/28 tmpl=head:UEBUNGSMELDUNGUEBU@2 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+Hybrid gen 13/24 pop=64 blockB_greeks=0
+  gen-best  11/28 (39%) tmpl=head:UEBUNGSMELDUNGUEBU@2 IC=0.0321 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+  all-time  11/28 tmpl=head:UEBUNGSMELDUNGUEBU@2 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+Hybrid gen 14/24 pop=64 blockB_greeks=0
+  gen-best  11/28 (39%) tmpl=head:UEBUNGSMELDUNGUEBU@2 IC=0.0321 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+  all-time  11/28 tmpl=head:UEBUNGSMELDUNGUEBU@2 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+Hybrid gen 15/24 pop=64 blockB_greeks=0
+  gen-best  11/28 (39%) tmpl=head:UEBUNGSMELDUNGUEBU@2 IC=0.0321 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+  all-time  11/28 tmpl=head:UEBUNGSMELDUNGUEBU@2 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+Hybrid gen 16/24 pop=64 blockB_greeks=0
+  gen-best  11/28 (39%) tmpl=head:UEBUNGSMELDUNGUEBU@2 IC=0.0321 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+  all-time  11/28 tmpl=head:UEBUNGSMELDUNGUEBU@2 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+Hybrid gen 17/24 pop=64 blockB_greeks=0
+  gen-best  11/28 (39%) tmpl=head:UEBUNGSMELDUNGUEBU@2 IC=0.0321 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+  all-time  11/28 tmpl=head:UEBUNGSMELDUNGUEBU@2 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+Hybrid gen 18/24 pop=64 blockB_greeks=0
+  gen-best  11/28 (39%) tmpl=head:UEBUNGSMELDUNGUEBU@2 IC=0.0321 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+  all-time  11/28 tmpl=head:UEBUNGSMELDUNGUEBU@2 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+Hybrid gen 19/24 pop=64 blockB_greeks=0
+  gen-best  11/28 (39%) tmpl=head:UEBUNGSMELDUNGUEBU@2 IC=0.0321 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+  all-time  11/28 tmpl=head:UEBUNGSMELDUNGUEBU@2 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+Hybrid gen 20/24 pop=64 blockB_greeks=0
+  gen-best  11/28 (39%) tmpl=head:UEBUNGSMELDUNGUEBU@2 IC=0.0321 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+  all-time  11/28 tmpl=head:UEBUNGSMELDUNGUEBU@2 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+Hybrid gen 21/24 pop=64 blockB_greeks=0
+  gen-best  11/28 (39%) tmpl=head:UEBUNGSMELDUNGUEBU@2 IC=0.0321 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+  all-time  11/28 tmpl=head:UEBUNGSMELDUNGUEBU@2 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+Hybrid gen 22/24 pop=64 blockB_greeks=0
+  gen-best  11/28 (39%) tmpl=head:UEBUNGSMELDUNGUEBU@2 IC=0.0321 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+  all-time  11/28 tmpl=head:UEBUNGSMELDUNGUEBU@2 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+Hybrid gen 23/24 pop=64 blockB_greeks=0
+  gen-best  11/28 (39%) tmpl=head:UEBUNGSMELDUNGUEBU@2 IC=0.0321 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+  all-time  11/28 tmpl=head:UEBUNGSMELDUNGUEBU@2 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+Hybrid gen 24/24 pop=64 blockB_greeks=0
+  gen-best  11/28 (39%) tmpl=head:UEBUNGSMELDUNGUEBU@2 IC=0.0321 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+  all-time  11/28 tmpl=head:UEBUNGSMELDUNGUEBU@2 pos=XZCM | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 28…28)
+Shell evolution: OFF freeRings=false WO=47 ringSeeds=3 subspace=potsdam-neighbourhood
+Seeded population[0..<55] from Welchman quarantine (55 candidate(s))
+  seed[0] UKWB gamma I-IV-VI rings=AAAA stecker=AM BY CV EX FU GT HN JQ
+  seed[1] UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL HY IS JU RV
+  seed[2] UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK GX HJ LR NP OT UZ VY
+  seed[3] UKWC beta IV-VIII-III rings=AAAA stecker=AV BP CR DN EL GI HU MX QY TW
+  seed[4] UKWC beta V-VIII-III rings=AAAA stecker=AI CW EP GZ HN LR MY OS QT VX
+  seed[5] UKWB gamma VII-IV-III rings=AAAA stecker=AP BH CF DR EI GZ JQ KS LT OX
+  seed[6] UKWB beta II-V-III rings=AAAA stecker=AJ BI CK EG LR MY NS PT UW
+  seed[7] UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  seed[8] UKWC gamma III-IV-II rings=AAAA stecker=AK BU DP EZ FR JY LV MX NW ST
+  seed[9] UKWB beta II-VII-V rings=AAAA stecker=BI CM FG JL NQ RS TU WY
+  seed[10] UKWB beta II-I-VII rings=AAAA stecker=AP BV CD GL HY IS JM KN RZ
+  seed[11] UKWB gamma I-VII-IV rings=AAAA stecker=AF CH DN GP IM JL KX OS RU
+  seed[12] UKWB beta IV-VII-II rings=AAAA stecker=AY BO CI DJ EK GP HS RU TV
+  seed[13] UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  seed[14] UKWB beta VI-V-VII rings=AAAA stecker=AH BP CD JQ LT NV OU SZ WY
+  seed[15] UKWC beta VIII-V-III rings=AAAA stecker=AO BJ CR DX EI FG HN KU LT PY
+  seed[16] UKWB beta VII-VIII-II rings=AAAA stecker=ER GI HY JW KS NQ OU TX
+  seed[17] UKWB gamma I-VII-VI rings=AAAA stecker=AB CK DF GW HY IN JV LP MR SU
+  seed[18] UKWC beta VI-VII-III rings=AAAA stecker=BF CZ EK GP IX MR TY UV
+  seed[19] UKWB beta IV-VIII-III rings=AAAA stecker=BZ CD FU GK HY JO NV PS RX TW
+  seed[20] UKWC gamma VIII-IV-I rings=AAAA stecker=BC DJ EH GK LS NR OU VX
+  seed[21] UKWC gamma VIII-IV-I rings=AAAA stecker=BC DJ EH GK LS NR OU VX
+  seed[22] UKWB beta VII-V-VI rings=AAAA stecker=AP BJ CY DE GQ IS NZ OR UW
+  seed[23] UKWC gamma VIII-IV-III rings=AAAA stecker=AW BY CH DR EZ GJ IS KT NU VX
+  seed[24] UKWB beta VI-I-IV rings=AAAA stecker=AP BR FJ HU KT NY QS XZ
+  seed[25] UKWC gamma V-VIII-VII rings=AAAA stecker=AF CW DG EP HJ KR OU TV YZ
+  seed[26] UKWC gamma V-VIII-VII rings=AAAA stecker=AF CW DG EP HJ KR OU TV YZ
+  seed[27] UKWC beta II-III-IV rings=AAAA stecker=AH CR DT EX FS GZ JO LY NV UW
+  seed[28] UKWB beta IV-VIII-VI rings=AAAA stecker=BD FG HR IY JL NV PU ST
+  seed[29] UKWB beta I-VI-IV rings=AAAA stecker=BD CX EQ GT JM OR SW
+  seed[30] UKWC beta IV-III-VIII rings=AAAA stecker=BT CF DG HX IR JW KU MS OY
+  seed[31] UKWB beta II-V-III rings=AAAA stecker=AQ BP CE DU GZ IS KN MR TV
+  seed[32] UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW GZ IY KS NQ UX
+  seed[33] UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW GZ IY KS NQ UX
+  seed[34] UKWC gamma VI-V-VIII rings=AAAA stecker=AT BE CI DY JZ KM LN RX SW
+  seed[35] UKWC gamma I-II-IV rings=AAAA stecker=AI BZ CJ EX FT GL KS MN RV WY
+  seed[36] UKWB beta III-VII-II rings=AAAA stecker=AL CH EK JN MX QY TV UW
+  seed[37] UKWC gamma VI-VII-VIII rings=AAAA stecker=BK DX FS GJ MU NO TV YZ
+  seed[38] UKWB beta II-IV-V rings=AAAA stecker=AZ CD EW FU GI HR JV LN ST XY
+  seed[39] UKWB beta VIII-I-IV rings=AAAA stecker=AY BW CH DU EL GV PX RS
+  seed[40] UKWB beta V-VII-II rings=AAAA stecker=AP CI DK EW GR JX LY MQ SU TV
+  seed[41] UKWC beta VI-IV-VIII rings=AAAA stecker=AF BT DH EK GO IY JV LX MU RS
+  seed[42] UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  seed[43] UKWC beta VIII-IV-VII rings=AAAA stecker=AF BG EK IT JW MS NO PU QR VX
+  seed[44] UKWB beta VIII-VII-IV rings=AAAA stecker=AN CP DZ GL HM IJ OY RV SW TX
+  seed[45] UKWB gamma III-VIII-II rings=AAAA stecker=AB CR EK FY GI HN JX MS PT UV
+  seed[46] UKWC gamma I-II-VII rings=AAAA stecker=BX CI DV EU FG LN MR OT SW
+  seed[47] UKWC gamma II-VI-IV rings=AAAA stecker=BZ CW GR HL JK MO QT SV XY
+  seed[48] UKWB gamma VIII-III-IV rings=AAAA stecker=AR BO CK DQ FT GV HY IU JM SW
+  seed[49] UKWB gamma VIII-III-IV rings=AAAA stecker=AR BO CK DQ FT GV HY IU JM SW
+  seed[50] UKWB beta II-I-VIII rings=AAAA stecker=AV BU CH EF GW JZ KS LT NQ XY
+  seed[51] UKWB beta VIII-I-VI rings=AAAA stecker=AI BD EV GH JT NQ OR SW UX
+  seed[52] UKWB gamma III-I-V rings=AAAA stecker=AC BR HX JK LQ ST UV
+  seed[53] UKWB beta I-VII-VI rings=AAAA stecker=AM BK CP DE FJ GL IU RW YZ
+  seed[54] UKWB beta VIII-I-III rings=AAAA stecker=AQ BV CJ DR ET GM LS NP UZ
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/24 pop=64 blockB_greeks=0
+  gen-best  9/28 (32%) tmpl=head:UEBUNGSMELDUNGUEBU@3 IC=0.0356 pos=TLJY | UKWB gamma I-IV-VI rings=AAAA stecker=AM BY CV EX FU GT HN JQ
+  all-time  9/28 tmpl=head:UEBUNGSMELDUNGUEBU@3 pos=TLJY | UKWB gamma I-IV-VI rings=AAAA stecker=AM BY CV EX FU GT HN JQ
+Hybrid gen 2/24 pop=64 blockB_greeks=0
+  gen-best  10/28 (36%) tmpl=head:UEBUNGSMELDUNGUEBU@3 IC=0.0391 pos=ZVON | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL HY IS RV TX
+  all-time  10/28 tmpl=head:UEBUNGSMELDUNGUEBU@3 pos=ZVON | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL HY IS RV TX
+Hybrid gen 3/24 pop=64 blockB_greeks=0
+  gen-best  11/28 (39%) tmpl=head:UEBUNGSMELDUNGUEBU@3 IC=0.0442 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK GX IQ LR NP UZ VY
+  all-time  11/28 tmpl=head:UEBUNGSMELDUNGUEBU@3 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK GX IQ LR NP UZ VY
+Hybrid gen 4/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@3 IC=0.0419 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@3 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+Hybrid gen 5/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@3 IC=0.0419 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@3 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+Hybrid gen 6/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@3 IC=0.0419 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@3 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+Hybrid gen 7/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@3 IC=0.0419 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@3 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+Hybrid gen 8/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@3 IC=0.0419 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@3 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+Hybrid gen 9/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@3 IC=0.0419 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@3 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+Hybrid gen 10/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@3 IC=0.0419 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@3 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+Hybrid gen 11/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@3 IC=0.0419 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@3 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+Hybrid gen 12/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@3 IC=0.0419 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@3 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+Hybrid gen 13/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@3 IC=0.0419 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@3 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+Hybrid gen 14/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@3 IC=0.0419 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@3 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+Hybrid gen 15/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@3 IC=0.0419 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@3 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+Hybrid gen 16/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@3 IC=0.0419 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@3 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+Hybrid gen 17/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@3 IC=0.0419 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@3 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+Hybrid gen 18/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@3 IC=0.0419 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@3 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+Hybrid gen 19/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@3 IC=0.0419 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@3 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+Hybrid gen 20/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@3 IC=0.0419 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@3 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+Hybrid gen 21/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@3 IC=0.0419 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@3 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+Hybrid gen 22/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@3 IC=0.0419 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@3 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+Hybrid gen 23/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@3 IC=0.0419 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@3 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+Hybrid gen 24/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@3 IC=0.0419 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@3 pos=EEVV | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 28…28)
+Shell evolution: OFF freeRings=false WO=47 ringSeeds=3 subspace=potsdam-neighbourhood
+Seeded population[0..<55] from Welchman quarantine (55 candidate(s))
+  seed[0] UKWB gamma I-IV-VI rings=AAAA stecker=AM BY CV EX FU GT HN JQ
+  seed[1] UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL HY IS JU RV
+  seed[2] UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK GX HJ LR NP OT UZ VY
+  seed[3] UKWC beta IV-VIII-III rings=AAAA stecker=AV BP CR DN EL GI HU MX QY TW
+  seed[4] UKWC beta V-VIII-III rings=AAAA stecker=AI CW EP GZ HN LR MY OS QT VX
+  seed[5] UKWB gamma VII-IV-III rings=AAAA stecker=AP BH CF DR EI GZ JQ KS LT OX
+  seed[6] UKWB beta II-V-III rings=AAAA stecker=AJ BI CK EG LR MY NS PT UW
+  seed[7] UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  seed[8] UKWC gamma III-IV-II rings=AAAA stecker=AK BU DP EZ FR JY LV MX NW ST
+  seed[9] UKWB beta II-VII-V rings=AAAA stecker=BI CM FG JL NQ RS TU WY
+  seed[10] UKWB beta II-I-VII rings=AAAA stecker=AP BV CD GL HY IS JM KN RZ
+  seed[11] UKWB gamma I-VII-IV rings=AAAA stecker=AF CH DN GP IM JL KX OS RU
+  seed[12] UKWB beta IV-VII-II rings=AAAA stecker=AY BO CI DJ EK GP HS RU TV
+  seed[13] UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  seed[14] UKWB beta VI-V-VII rings=AAAA stecker=AH BP CD JQ LT NV OU SZ WY
+  seed[15] UKWC beta VIII-V-III rings=AAAA stecker=AO BJ CR DX EI FG HN KU LT PY
+  seed[16] UKWB beta VII-VIII-II rings=AAAA stecker=ER GI HY JW KS NQ OU TX
+  seed[17] UKWB gamma I-VII-VI rings=AAAA stecker=AB CK DF GW HY IN JV LP MR SU
+  seed[18] UKWC beta VI-VII-III rings=AAAA stecker=BF CZ EK GP IX MR TY UV
+  seed[19] UKWB beta IV-VIII-III rings=AAAA stecker=BZ CD FU GK HY JO NV PS RX TW
+  seed[20] UKWC gamma VIII-IV-I rings=AAAA stecker=BC DJ EH GK LS NR OU VX
+  seed[21] UKWC gamma VIII-IV-I rings=AAAA stecker=BC DJ EH GK LS NR OU VX
+  seed[22] UKWB beta VII-V-VI rings=AAAA stecker=AP BJ CY DE GQ IS NZ OR UW
+  seed[23] UKWC gamma VIII-IV-III rings=AAAA stecker=AW BY CH DR EZ GJ IS KT NU VX
+  seed[24] UKWB beta VI-I-IV rings=AAAA stecker=AP BR FJ HU KT NY QS XZ
+  seed[25] UKWC gamma V-VIII-VII rings=AAAA stecker=AF CW DG EP HJ KR OU TV YZ
+  seed[26] UKWC gamma V-VIII-VII rings=AAAA stecker=AF CW DG EP HJ KR OU TV YZ
+  seed[27] UKWC beta II-III-IV rings=AAAA stecker=AH CR DT EX FS GZ JO LY NV UW
+  seed[28] UKWB beta IV-VIII-VI rings=AAAA stecker=BD FG HR IY JL NV PU ST
+  seed[29] UKWB beta I-VI-IV rings=AAAA stecker=BD CX EQ GT JM OR SW
+  seed[30] UKWC beta IV-III-VIII rings=AAAA stecker=BT CF DG HX IR JW KU MS OY
+  seed[31] UKWB beta II-V-III rings=AAAA stecker=AQ BP CE DU GZ IS KN MR TV
+  seed[32] UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW GZ IY KS NQ UX
+  seed[33] UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW GZ IY KS NQ UX
+  seed[34] UKWC gamma VI-V-VIII rings=AAAA stecker=AT BE CI DY JZ KM LN RX SW
+  seed[35] UKWC gamma I-II-IV rings=AAAA stecker=AI BZ CJ EX FT GL KS MN RV WY
+  seed[36] UKWB beta III-VII-II rings=AAAA stecker=AL CH EK JN MX QY TV UW
+  seed[37] UKWC gamma VI-VII-VIII rings=AAAA stecker=BK DX FS GJ MU NO TV YZ
+  seed[38] UKWB beta II-IV-V rings=AAAA stecker=AZ CD EW FU GI HR JV LN ST XY
+  seed[39] UKWB beta VIII-I-IV rings=AAAA stecker=AY BW CH DU EL GV PX RS
+  seed[40] UKWB beta V-VII-II rings=AAAA stecker=AP CI DK EW GR JX LY MQ SU TV
+  seed[41] UKWC beta VI-IV-VIII rings=AAAA stecker=AF BT DH EK GO IY JV LX MU RS
+  seed[42] UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  seed[43] UKWC beta VIII-IV-VII rings=AAAA stecker=AF BG EK IT JW MS NO PU QR VX
+  seed[44] UKWB beta VIII-VII-IV rings=AAAA stecker=AN CP DZ GL HM IJ OY RV SW TX
+  seed[45] UKWB gamma III-VIII-II rings=AAAA stecker=AB CR EK FY GI HN JX MS PT UV
+  seed[46] UKWC gamma I-II-VII rings=AAAA stecker=BX CI DV EU FG LN MR OT SW
+  seed[47] UKWC gamma II-VI-IV rings=AAAA stecker=BZ CW GR HL JK MO QT SV XY
+  seed[48] UKWB gamma VIII-III-IV rings=AAAA stecker=AR BO CK DQ FT GV HY IU JM SW
+  seed[49] UKWB gamma VIII-III-IV rings=AAAA stecker=AR BO CK DQ FT GV HY IU JM SW
+  seed[50] UKWB beta II-I-VIII rings=AAAA stecker=AV BU CH EF GW JZ KS LT NQ XY
+  seed[51] UKWB beta VIII-I-VI rings=AAAA stecker=AI BD EV GH JT NQ OR SW UX
+  seed[52] UKWB gamma III-I-V rings=AAAA stecker=AC BR HX JK LQ ST UV
+  seed[53] UKWB beta I-VII-VI rings=AAAA stecker=AM BK CP DE FJ GL IU RW YZ
+  seed[54] UKWB beta VIII-I-III rings=AAAA stecker=AQ BV CJ DR ET GM LS NP UZ
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/24 pop=64 blockB_greeks=0
+  gen-best  9/28 (32%) tmpl=head:UEBUNGSMELDUNGUEBU@4 IC=0.0387 pos=IFQS | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK GX HJ LR NP OT UZ VY
+  all-time  9/28 tmpl=head:UEBUNGSMELDUNGUEBU@4 pos=IFQS | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK GX HJ LR NP OT UZ VY
+Hybrid gen 2/24 pop=64 blockB_greeks=0
+  gen-best  10/28 (36%) tmpl=head:UEBUNGSMELDUNGUEBU@4 IC=0.0376 pos=MCFM | UKWC gamma VI-V-VIII rings=AAAA stecker=AC DY EK GV HT IU JZ LM RX SW
+  all-time  10/28 tmpl=head:UEBUNGSMELDUNGUEBU@4 pos=MCFM | UKWC gamma VI-V-VIII rings=AAAA stecker=AC DY EK GV HT IU JZ LM RX SW
+Hybrid gen 3/24 pop=64 blockB_greeks=0
+  gen-best  11/28 (39%) tmpl=head:UEBUNGSMELDUNGUEBU@4 IC=0.0426 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK GI JN OQ PT SZ UV WY
+  all-time  11/28 tmpl=head:UEBUNGSMELDUNGUEBU@4 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK GI JN OQ PT SZ UV WY
+Hybrid gen 4/24 pop=64 blockB_greeks=0
+  gen-best  11/28 (39%) tmpl=head:UEBUNGSMELDUNGUEBU@4 IC=0.0426 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK GI JN OQ PT SZ UV WY
+  all-time  11/28 tmpl=head:UEBUNGSMELDUNGUEBU@4 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK GI JN OQ PT SZ UV WY
+Hybrid gen 5/24 pop=64 blockB_greeks=0
+  gen-best  11/28 (39%) tmpl=head:UEBUNGSMELDUNGUEBU@4 IC=0.0426 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK GI JN OQ PT SZ UV WY
+  all-time  11/28 tmpl=head:UEBUNGSMELDUNGUEBU@4 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK GI JN OQ PT SZ UV WY
+Hybrid gen 6/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@4 IC=0.0458 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@4 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+Hybrid gen 7/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@4 IC=0.0458 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@4 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+Hybrid gen 8/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@4 IC=0.0458 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@4 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+Hybrid gen 9/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@4 IC=0.0458 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@4 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+Hybrid gen 10/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@4 IC=0.0458 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@4 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+Hybrid gen 11/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@4 IC=0.0458 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@4 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+Hybrid gen 12/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@4 IC=0.0458 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@4 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+Hybrid gen 13/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@4 IC=0.0458 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@4 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+Hybrid gen 14/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@4 IC=0.0458 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@4 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+Hybrid gen 15/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@4 IC=0.0458 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@4 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+Hybrid gen 16/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@4 IC=0.0458 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@4 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+Hybrid gen 17/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@4 IC=0.0458 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@4 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+Hybrid gen 18/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@4 IC=0.0458 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@4 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+Hybrid gen 19/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@4 IC=0.0458 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@4 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+Hybrid gen 20/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@4 IC=0.0458 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@4 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+Hybrid gen 21/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@4 IC=0.0458 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@4 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+Hybrid gen 22/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@4 IC=0.0458 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@4 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+Hybrid gen 23/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@4 IC=0.0458 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@4 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+Hybrid gen 24/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@4 IC=0.0458 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@4 pos=OFQS | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 28…28)
+Shell evolution: OFF freeRings=false WO=47 ringSeeds=3 subspace=potsdam-neighbourhood
+Seeded population[0..<55] from Welchman quarantine (55 candidate(s))
+  seed[0] UKWB gamma I-IV-VI rings=AAAA stecker=AM BY CV EX FU GT HN JQ
+  seed[1] UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL HY IS JU RV
+  seed[2] UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK GX HJ LR NP OT UZ VY
+  seed[3] UKWC beta IV-VIII-III rings=AAAA stecker=AV BP CR DN EL GI HU MX QY TW
+  seed[4] UKWC beta V-VIII-III rings=AAAA stecker=AI CW EP GZ HN LR MY OS QT VX
+  seed[5] UKWB gamma VII-IV-III rings=AAAA stecker=AP BH CF DR EI GZ JQ KS LT OX
+  seed[6] UKWB beta II-V-III rings=AAAA stecker=AJ BI CK EG LR MY NS PT UW
+  seed[7] UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  seed[8] UKWC gamma III-IV-II rings=AAAA stecker=AK BU DP EZ FR JY LV MX NW ST
+  seed[9] UKWB beta II-VII-V rings=AAAA stecker=BI CM FG JL NQ RS TU WY
+  seed[10] UKWB beta II-I-VII rings=AAAA stecker=AP BV CD GL HY IS JM KN RZ
+  seed[11] UKWB gamma I-VII-IV rings=AAAA stecker=AF CH DN GP IM JL KX OS RU
+  seed[12] UKWB beta IV-VII-II rings=AAAA stecker=AY BO CI DJ EK GP HS RU TV
+  seed[13] UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  seed[14] UKWB beta VI-V-VII rings=AAAA stecker=AH BP CD JQ LT NV OU SZ WY
+  seed[15] UKWC beta VIII-V-III rings=AAAA stecker=AO BJ CR DX EI FG HN KU LT PY
+  seed[16] UKWB beta VII-VIII-II rings=AAAA stecker=ER GI HY JW KS NQ OU TX
+  seed[17] UKWB gamma I-VII-VI rings=AAAA stecker=AB CK DF GW HY IN JV LP MR SU
+  seed[18] UKWC beta VI-VII-III rings=AAAA stecker=BF CZ EK GP IX MR TY UV
+  seed[19] UKWB beta IV-VIII-III rings=AAAA stecker=BZ CD FU GK HY JO NV PS RX TW
+  seed[20] UKWC gamma VIII-IV-I rings=AAAA stecker=BC DJ EH GK LS NR OU VX
+  seed[21] UKWC gamma VIII-IV-I rings=AAAA stecker=BC DJ EH GK LS NR OU VX
+  seed[22] UKWB beta VII-V-VI rings=AAAA stecker=AP BJ CY DE GQ IS NZ OR UW
+  seed[23] UKWC gamma VIII-IV-III rings=AAAA stecker=AW BY CH DR EZ GJ IS KT NU VX
+  seed[24] UKWB beta VI-I-IV rings=AAAA stecker=AP BR FJ HU KT NY QS XZ
+  seed[25] UKWC gamma V-VIII-VII rings=AAAA stecker=AF CW DG EP HJ KR OU TV YZ
+  seed[26] UKWC gamma V-VIII-VII rings=AAAA stecker=AF CW DG EP HJ KR OU TV YZ
+  seed[27] UKWC beta II-III-IV rings=AAAA stecker=AH CR DT EX FS GZ JO LY NV UW
+  seed[28] UKWB beta IV-VIII-VI rings=AAAA stecker=BD FG HR IY JL NV PU ST
+  seed[29] UKWB beta I-VI-IV rings=AAAA stecker=BD CX EQ GT JM OR SW
+  seed[30] UKWC beta IV-III-VIII rings=AAAA stecker=BT CF DG HX IR JW KU MS OY
+  seed[31] UKWB beta II-V-III rings=AAAA stecker=AQ BP CE DU GZ IS KN MR TV
+  seed[32] UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW GZ IY KS NQ UX
+  seed[33] UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW GZ IY KS NQ UX
+  seed[34] UKWC gamma VI-V-VIII rings=AAAA stecker=AT BE CI DY JZ KM LN RX SW
+  seed[35] UKWC gamma I-II-IV rings=AAAA stecker=AI BZ CJ EX FT GL KS MN RV WY
+  seed[36] UKWB beta III-VII-II rings=AAAA stecker=AL CH EK JN MX QY TV UW
+  seed[37] UKWC gamma VI-VII-VIII rings=AAAA stecker=BK DX FS GJ MU NO TV YZ
+  seed[38] UKWB beta II-IV-V rings=AAAA stecker=AZ CD EW FU GI HR JV LN ST XY
+  seed[39] UKWB beta VIII-I-IV rings=AAAA stecker=AY BW CH DU EL GV PX RS
+  seed[40] UKWB beta V-VII-II rings=AAAA stecker=AP CI DK EW GR JX LY MQ SU TV
+  seed[41] UKWC beta VI-IV-VIII rings=AAAA stecker=AF BT DH EK GO IY JV LX MU RS
+  seed[42] UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  seed[43] UKWC beta VIII-IV-VII rings=AAAA stecker=AF BG EK IT JW MS NO PU QR VX
+  seed[44] UKWB beta VIII-VII-IV rings=AAAA stecker=AN CP DZ GL HM IJ OY RV SW TX
+  seed[45] UKWB gamma III-VIII-II rings=AAAA stecker=AB CR EK FY GI HN JX MS PT UV
+  seed[46] UKWC gamma I-II-VII rings=AAAA stecker=BX CI DV EU FG LN MR OT SW
+  seed[47] UKWC gamma II-VI-IV rings=AAAA stecker=BZ CW GR HL JK MO QT SV XY
+  seed[48] UKWB gamma VIII-III-IV rings=AAAA stecker=AR BO CK DQ FT GV HY IU JM SW
+  seed[49] UKWB gamma VIII-III-IV rings=AAAA stecker=AR BO CK DQ FT GV HY IU JM SW
+  seed[50] UKWB beta II-I-VIII rings=AAAA stecker=AV BU CH EF GW JZ KS LT NQ XY
+  seed[51] UKWB beta VIII-I-VI rings=AAAA stecker=AI BD EV GH JT NQ OR SW UX
+  seed[52] UKWB gamma III-I-V rings=AAAA stecker=AC BR HX JK LQ ST UV
+  seed[53] UKWB beta I-VII-VI rings=AAAA stecker=AM BK CP DE FJ GL IU RW YZ
+  seed[54] UKWB beta VIII-I-III rings=AAAA stecker=AQ BV CJ DR ET GM LS NP UZ
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/24 pop=64 blockB_greeks=0
+  gen-best  9/28 (32%) tmpl=head:UEBUNGSMELDUNGUEBU@5 IC=0.0387 pos=QKIX | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL HY IS JU RV
+  all-time  9/28 tmpl=head:UEBUNGSMELDUNGUEBU@5 pos=QKIX | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL HY IS JU RV
+Hybrid gen 2/24 pop=64 blockB_greeks=0
+  gen-best  11/28 (39%) tmpl=head:UEBUNGSMELDUNGUEBU@5 IC=0.0321 pos=HYLX | UKWB beta II-VII-V rings=AAAA stecker=BP CM DO FG JL NQ RS TU WY
+  all-time  11/28 tmpl=head:UEBUNGSMELDUNGUEBU@5 pos=HYLX | UKWB beta II-VII-V rings=AAAA stecker=BP CM DO FG JL NQ RS TU WY
+Hybrid gen 3/24 pop=64 blockB_greeks=0
+  gen-best  11/28 (39%) tmpl=head:UEBUNGSMELDUNGUEBU@5 IC=0.0321 pos=HYLX | UKWB beta II-VII-V rings=AAAA stecker=BP CM DO FG JL NQ RS TU WY
+  all-time  11/28 tmpl=head:UEBUNGSMELDUNGUEBU@5 pos=HYLX | UKWB beta II-VII-V rings=AAAA stecker=BP CM DO FG JL NQ RS TU WY
+Hybrid gen 4/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@5 IC=0.0309 pos=HYLX | UKWB beta II-VII-V rings=AAAA stecker=AK BP CM DO FG JL NQ RS TU WY
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@5 pos=HYLX | UKWB beta II-VII-V rings=AAAA stecker=AK BP CM DO FG JL NQ RS TU WY
+Hybrid gen 5/24 pop=64 blockB_greeks=0
+  gen-best  12/28 (43%) tmpl=head:UEBUNGSMELDUNGUEBU@5 IC=0.0309 pos=HYLX | UKWB beta II-VII-V rings=AAAA stecker=AK BP CM DO FG JL NQ RS TU WY
+  all-time  12/28 tmpl=head:UEBUNGSMELDUNGUEBU@5 pos=HYLX | UKWB beta II-VII-V rings=AAAA stecker=AK BP CM DO FG JL NQ RS TU WY
+Hybrid gen 6/24 pop=64 blockB_greeks=0
+  gen-best  13/28 (46%) tmpl=head:UEBUNGSMELDUNGUEBU@5 IC=0.0403 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+  all-time  13/28 tmpl=head:UEBUNGSMELDUNGUEBU@5 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+Hybrid gen 7/24 pop=64 blockB_greeks=0
+  gen-best  13/28 (46%) tmpl=head:UEBUNGSMELDUNGUEBU@5 IC=0.0403 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+  all-time  13/28 tmpl=head:UEBUNGSMELDUNGUEBU@5 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+Hybrid gen 8/24 pop=64 blockB_greeks=0
+  gen-best  13/28 (46%) tmpl=head:UEBUNGSMELDUNGUEBU@5 IC=0.0403 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+  all-time  13/28 tmpl=head:UEBUNGSMELDUNGUEBU@5 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+Hybrid gen 9/24 pop=64 blockB_greeks=0
+  gen-best  13/28 (46%) tmpl=head:UEBUNGSMELDUNGUEBU@5 IC=0.0403 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+  all-time  13/28 tmpl=head:UEBUNGSMELDUNGUEBU@5 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+Hybrid gen 10/24 pop=64 blockB_greeks=0
+  gen-best  13/28 (46%) tmpl=head:UEBUNGSMELDUNGUEBU@5 IC=0.0403 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+  all-time  13/28 tmpl=head:UEBUNGSMELDUNGUEBU@5 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+Hybrid gen 11/24 pop=64 blockB_greeks=0
+  gen-best  13/28 (46%) tmpl=head:UEBUNGSMELDUNGUEBU@5 IC=0.0403 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+  all-time  13/28 tmpl=head:UEBUNGSMELDUNGUEBU@5 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+Hybrid gen 12/24 pop=64 blockB_greeks=0
+  gen-best  13/28 (46%) tmpl=head:UEBUNGSMELDUNGUEBU@5 IC=0.0403 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+  all-time  13/28 tmpl=head:UEBUNGSMELDUNGUEBU@5 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+Hybrid gen 13/24 pop=64 blockB_greeks=0
+  gen-best  13/28 (46%) tmpl=head:UEBUNGSMELDUNGUEBU@5 IC=0.0403 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+  all-time  13/28 tmpl=head:UEBUNGSMELDUNGUEBU@5 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+Hybrid gen 14/24 pop=64 blockB_greeks=0
+  gen-best  13/28 (46%) tmpl=head:UEBUNGSMELDUNGUEBU@5 IC=0.0403 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+  all-time  13/28 tmpl=head:UEBUNGSMELDUNGUEBU@5 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+Hybrid gen 15/24 pop=64 blockB_greeks=0
+  gen-best  13/28 (46%) tmpl=head:UEBUNGSMELDUNGUEBU@5 IC=0.0403 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+  all-time  13/28 tmpl=head:UEBUNGSMELDUNGUEBU@5 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+Hybrid gen 16/24 pop=64 blockB_greeks=0
+  gen-best  13/28 (46%) tmpl=head:UEBUNGSMELDUNGUEBU@5 IC=0.0403 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+  all-time  13/28 tmpl=head:UEBUNGSMELDUNGUEBU@5 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+Hybrid gen 17/24 pop=64 blockB_greeks=0
+  gen-best  13/28 (46%) tmpl=head:UEBUNGSMELDUNGUEBU@5 IC=0.0403 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+  all-time  13/28 tmpl=head:UEBUNGSMELDUNGUEBU@5 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+Hybrid gen 18/24 pop=64 blockB_greeks=0
+  gen-best  13/28 (46%) tmpl=head:UEBUNGSMELDUNGUEBU@5 IC=0.0403 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+  all-time  13/28 tmpl=head:UEBUNGSMELDUNGUEBU@5 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+Hybrid gen 19/24 pop=64 blockB_greeks=0
+  gen-best  13/28 (46%) tmpl=head:UEBUNGSMELDUNGUEBU@5 IC=0.0403 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+  all-time  13/28 tmpl=head:UEBUNGSMELDUNGUEBU@5 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+Hybrid gen 20/24 pop=64 blockB_greeks=0
+  gen-best  13/28 (46%) tmpl=head:UEBUNGSMELDUNGUEBU@5 IC=0.0403 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+  all-time  13/28 tmpl=head:UEBUNGSMELDUNGUEBU@5 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+Hybrid gen 21/24 pop=64 blockB_greeks=0
+  gen-best  13/28 (46%) tmpl=head:UEBUNGSMELDUNGUEBU@5 IC=0.0403 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+  all-time  13/28 tmpl=head:UEBUNGSMELDUNGUEBU@5 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+Hybrid gen 22/24 pop=64 blockB_greeks=0
+  gen-best  13/28 (46%) tmpl=head:UEBUNGSMELDUNGUEBU@5 IC=0.0403 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+  all-time  13/28 tmpl=head:UEBUNGSMELDUNGUEBU@5 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+Hybrid gen 23/24 pop=64 blockB_greeks=0
+  gen-best  13/28 (46%) tmpl=head:UEBUNGSMELDUNGUEBU@5 IC=0.0403 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+  all-time  13/28 tmpl=head:UEBUNGSMELDUNGUEBU@5 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+Hybrid gen 24/24 pop=64 blockB_greeks=0
+  gen-best  13/28 (46%) tmpl=head:UEBUNGSMELDUNGUEBU@5 IC=0.0403 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+  all-time  13/28 tmpl=head:UEBUNGSMELDUNGUEBU@5 pos=YZIF | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 21…21)
+Shell evolution: OFF freeRings=false WO=47 ringSeeds=3 subspace=potsdam-neighbourhood
+Seeded population[0..<55] from Welchman quarantine (55 candidate(s))
+  seed[0] UKWB gamma I-IV-VI rings=AAAA stecker=AM BY CV EX FU GT HN JQ
+  seed[1] UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL HY IS JU RV
+  seed[2] UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK GX HJ LR NP OT UZ VY
+  seed[3] UKWC beta IV-VIII-III rings=AAAA stecker=AV BP CR DN EL GI HU MX QY TW
+  seed[4] UKWC beta V-VIII-III rings=AAAA stecker=AI CW EP GZ HN LR MY OS QT VX
+  seed[5] UKWB gamma VII-IV-III rings=AAAA stecker=AP BH CF DR EI GZ JQ KS LT OX
+  seed[6] UKWB beta II-V-III rings=AAAA stecker=AJ BI CK EG LR MY NS PT UW
+  seed[7] UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  seed[8] UKWC gamma III-IV-II rings=AAAA stecker=AK BU DP EZ FR JY LV MX NW ST
+  seed[9] UKWB beta II-VII-V rings=AAAA stecker=BI CM FG JL NQ RS TU WY
+  seed[10] UKWB beta II-I-VII rings=AAAA stecker=AP BV CD GL HY IS JM KN RZ
+  seed[11] UKWB gamma I-VII-IV rings=AAAA stecker=AF CH DN GP IM JL KX OS RU
+  seed[12] UKWB beta IV-VII-II rings=AAAA stecker=AY BO CI DJ EK GP HS RU TV
+  seed[13] UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  seed[14] UKWB beta VI-V-VII rings=AAAA stecker=AH BP CD JQ LT NV OU SZ WY
+  seed[15] UKWC beta VIII-V-III rings=AAAA stecker=AO BJ CR DX EI FG HN KU LT PY
+  seed[16] UKWB beta VII-VIII-II rings=AAAA stecker=ER GI HY JW KS NQ OU TX
+  seed[17] UKWB gamma I-VII-VI rings=AAAA stecker=AB CK DF GW HY IN JV LP MR SU
+  seed[18] UKWC beta VI-VII-III rings=AAAA stecker=BF CZ EK GP IX MR TY UV
+  seed[19] UKWB beta IV-VIII-III rings=AAAA stecker=BZ CD FU GK HY JO NV PS RX TW
+  seed[20] UKWC gamma VIII-IV-I rings=AAAA stecker=BC DJ EH GK LS NR OU VX
+  seed[21] UKWC gamma VIII-IV-I rings=AAAA stecker=BC DJ EH GK LS NR OU VX
+  seed[22] UKWB beta VII-V-VI rings=AAAA stecker=AP BJ CY DE GQ IS NZ OR UW
+  seed[23] UKWC gamma VIII-IV-III rings=AAAA stecker=AW BY CH DR EZ GJ IS KT NU VX
+  seed[24] UKWB beta VI-I-IV rings=AAAA stecker=AP BR FJ HU KT NY QS XZ
+  seed[25] UKWC gamma V-VIII-VII rings=AAAA stecker=AF CW DG EP HJ KR OU TV YZ
+  seed[26] UKWC gamma V-VIII-VII rings=AAAA stecker=AF CW DG EP HJ KR OU TV YZ
+  seed[27] UKWC beta II-III-IV rings=AAAA stecker=AH CR DT EX FS GZ JO LY NV UW
+  seed[28] UKWB beta IV-VIII-VI rings=AAAA stecker=BD FG HR IY JL NV PU ST
+  seed[29] UKWB beta I-VI-IV rings=AAAA stecker=BD CX EQ GT JM OR SW
+  seed[30] UKWC beta IV-III-VIII rings=AAAA stecker=BT CF DG HX IR JW KU MS OY
+  seed[31] UKWB beta II-V-III rings=AAAA stecker=AQ BP CE DU GZ IS KN MR TV
+  seed[32] UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW GZ IY KS NQ UX
+  seed[33] UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW GZ IY KS NQ UX
+  seed[34] UKWC gamma VI-V-VIII rings=AAAA stecker=AT BE CI DY JZ KM LN RX SW
+  seed[35] UKWC gamma I-II-IV rings=AAAA stecker=AI BZ CJ EX FT GL KS MN RV WY
+  seed[36] UKWB beta III-VII-II rings=AAAA stecker=AL CH EK JN MX QY TV UW
+  seed[37] UKWC gamma VI-VII-VIII rings=AAAA stecker=BK DX FS GJ MU NO TV YZ
+  seed[38] UKWB beta II-IV-V rings=AAAA stecker=AZ CD EW FU GI HR JV LN ST XY
+  seed[39] UKWB beta VIII-I-IV rings=AAAA stecker=AY BW CH DU EL GV PX RS
+  seed[40] UKWB beta V-VII-II rings=AAAA stecker=AP CI DK EW GR JX LY MQ SU TV
+  seed[41] UKWC beta VI-IV-VIII rings=AAAA stecker=AF BT DH EK GO IY JV LX MU RS
+  seed[42] UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  seed[43] UKWC beta VIII-IV-VII rings=AAAA stecker=AF BG EK IT JW MS NO PU QR VX
+  seed[44] UKWB beta VIII-VII-IV rings=AAAA stecker=AN CP DZ GL HM IJ OY RV SW TX
+  seed[45] UKWB gamma III-VIII-II rings=AAAA stecker=AB CR EK FY GI HN JX MS PT UV
+  seed[46] UKWC gamma I-II-VII rings=AAAA stecker=BX CI DV EU FG LN MR OT SW
+  seed[47] UKWC gamma II-VI-IV rings=AAAA stecker=BZ CW GR HL JK MO QT SV XY
+  seed[48] UKWB gamma VIII-III-IV rings=AAAA stecker=AR BO CK DQ FT GV HY IU JM SW
+  seed[49] UKWB gamma VIII-III-IV rings=AAAA stecker=AR BO CK DQ FT GV HY IU JM SW
+  seed[50] UKWB beta II-I-VIII rings=AAAA stecker=AV BU CH EF GW JZ KS LT NQ XY
+  seed[51] UKWB beta VIII-I-VI rings=AAAA stecker=AI BD EV GH JT NQ OR SW UX
+  seed[52] UKWB gamma III-I-V rings=AAAA stecker=AC BR HX JK LQ ST UV
+  seed[53] UKWB beta I-VII-VI rings=AAAA stecker=AM BK CP DE FJ GL IU RW YZ
+  seed[54] UKWB beta VIII-I-III rings=AAAA stecker=AQ BV CJ DR ET GM LS NP UZ
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/24 pop=64 blockB_greeks=0
+  gen-best  9/21 (43%) tmpl=head:AUSBILDUNGSFUNKSPR@0 IC=0.0430 pos=XWXA | UKWC beta IV-VIII-III rings=AAAA stecker=AV BP CR DN EL GI HU MX QY TW
+  all-time  9/21 tmpl=head:AUSBILDUNGSFUNKSPR@0 pos=XWXA | UKWC beta IV-VIII-III rings=AAAA stecker=AV BP CR DN EL GI HU MX QY TW
+Hybrid gen 2/24 pop=64 blockB_greeks=0
+  gen-best  9/21 (43%) tmpl=head:AUSBILDUNGSFUNKSPR@0 IC=0.0430 pos=XWXA | UKWC beta IV-VIII-III rings=AAAA stecker=AV BP CR DN EL GI HU MX QY TW
+  all-time  9/21 tmpl=head:AUSBILDUNGSFUNKSPR@0 pos=XWXA | UKWC beta IV-VIII-III rings=AAAA stecker=AV BP CR DN EL GI HU MX QY TW
+Hybrid gen 3/24 pop=64 blockB_greeks=0
+  gen-best  9/21 (43%) tmpl=head:AUSBILDUNGSFUNKSPR@0 IC=0.0430 pos=XWXA | UKWC beta IV-VIII-III rings=AAAA stecker=AV BP CR DN EL GI HU MX QY TW
+  all-time  9/21 tmpl=head:AUSBILDUNGSFUNKSPR@0 pos=XWXA | UKWC beta IV-VIII-III rings=AAAA stecker=AV BP CR DN EL GI HU MX QY TW
+Hybrid gen 4/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@0 IC=0.0430 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@0 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+Hybrid gen 5/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@0 IC=0.0430 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@0 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+Hybrid gen 6/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@0 IC=0.0430 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@0 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+Hybrid gen 7/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@0 IC=0.0430 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@0 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+Hybrid gen 8/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@0 IC=0.0430 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@0 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+Hybrid gen 9/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@0 IC=0.0430 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@0 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+Hybrid gen 10/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@0 IC=0.0430 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@0 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+Hybrid gen 11/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@0 IC=0.0430 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@0 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+Hybrid gen 12/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@0 IC=0.0430 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@0 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+Hybrid gen 13/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@0 IC=0.0430 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@0 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+Hybrid gen 14/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@0 IC=0.0430 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@0 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+Hybrid gen 15/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@0 IC=0.0430 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@0 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+Hybrid gen 16/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@0 IC=0.0430 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@0 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+Hybrid gen 17/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@0 IC=0.0430 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@0 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+Hybrid gen 18/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@0 IC=0.0430 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@0 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+Hybrid gen 19/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@0 IC=0.0430 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@0 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+Hybrid gen 20/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@0 IC=0.0430 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@0 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+Hybrid gen 21/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@0 IC=0.0430 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@0 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+Hybrid gen 22/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@0 IC=0.0430 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@0 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+Hybrid gen 23/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@0 IC=0.0430 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@0 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+Hybrid gen 24/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@0 IC=0.0430 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@0 pos=FWGJ | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 21…21)
+Shell evolution: OFF freeRings=false WO=47 ringSeeds=3 subspace=potsdam-neighbourhood
+Seeded population[0..<55] from Welchman quarantine (55 candidate(s))
+  seed[0] UKWB gamma I-IV-VI rings=AAAA stecker=AM BY CV EX FU GT HN JQ
+  seed[1] UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL HY IS JU RV
+  seed[2] UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK GX HJ LR NP OT UZ VY
+  seed[3] UKWC beta IV-VIII-III rings=AAAA stecker=AV BP CR DN EL GI HU MX QY TW
+  seed[4] UKWC beta V-VIII-III rings=AAAA stecker=AI CW EP GZ HN LR MY OS QT VX
+  seed[5] UKWB gamma VII-IV-III rings=AAAA stecker=AP BH CF DR EI GZ JQ KS LT OX
+  seed[6] UKWB beta II-V-III rings=AAAA stecker=AJ BI CK EG LR MY NS PT UW
+  seed[7] UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  seed[8] UKWC gamma III-IV-II rings=AAAA stecker=AK BU DP EZ FR JY LV MX NW ST
+  seed[9] UKWB beta II-VII-V rings=AAAA stecker=BI CM FG JL NQ RS TU WY
+  seed[10] UKWB beta II-I-VII rings=AAAA stecker=AP BV CD GL HY IS JM KN RZ
+  seed[11] UKWB gamma I-VII-IV rings=AAAA stecker=AF CH DN GP IM JL KX OS RU
+  seed[12] UKWB beta IV-VII-II rings=AAAA stecker=AY BO CI DJ EK GP HS RU TV
+  seed[13] UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  seed[14] UKWB beta VI-V-VII rings=AAAA stecker=AH BP CD JQ LT NV OU SZ WY
+  seed[15] UKWC beta VIII-V-III rings=AAAA stecker=AO BJ CR DX EI FG HN KU LT PY
+  seed[16] UKWB beta VII-VIII-II rings=AAAA stecker=ER GI HY JW KS NQ OU TX
+  seed[17] UKWB gamma I-VII-VI rings=AAAA stecker=AB CK DF GW HY IN JV LP MR SU
+  seed[18] UKWC beta VI-VII-III rings=AAAA stecker=BF CZ EK GP IX MR TY UV
+  seed[19] UKWB beta IV-VIII-III rings=AAAA stecker=BZ CD FU GK HY JO NV PS RX TW
+  seed[20] UKWC gamma VIII-IV-I rings=AAAA stecker=BC DJ EH GK LS NR OU VX
+  seed[21] UKWC gamma VIII-IV-I rings=AAAA stecker=BC DJ EH GK LS NR OU VX
+  seed[22] UKWB beta VII-V-VI rings=AAAA stecker=AP BJ CY DE GQ IS NZ OR UW
+  seed[23] UKWC gamma VIII-IV-III rings=AAAA stecker=AW BY CH DR EZ GJ IS KT NU VX
+  seed[24] UKWB beta VI-I-IV rings=AAAA stecker=AP BR FJ HU KT NY QS XZ
+  seed[25] UKWC gamma V-VIII-VII rings=AAAA stecker=AF CW DG EP HJ KR OU TV YZ
+  seed[26] UKWC gamma V-VIII-VII rings=AAAA stecker=AF CW DG EP HJ KR OU TV YZ
+  seed[27] UKWC beta II-III-IV rings=AAAA stecker=AH CR DT EX FS GZ JO LY NV UW
+  seed[28] UKWB beta IV-VIII-VI rings=AAAA stecker=BD FG HR IY JL NV PU ST
+  seed[29] UKWB beta I-VI-IV rings=AAAA stecker=BD CX EQ GT JM OR SW
+  seed[30] UKWC beta IV-III-VIII rings=AAAA stecker=BT CF DG HX IR JW KU MS OY
+  seed[31] UKWB beta II-V-III rings=AAAA stecker=AQ BP CE DU GZ IS KN MR TV
+  seed[32] UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW GZ IY KS NQ UX
+  seed[33] UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW GZ IY KS NQ UX
+  seed[34] UKWC gamma VI-V-VIII rings=AAAA stecker=AT BE CI DY JZ KM LN RX SW
+  seed[35] UKWC gamma I-II-IV rings=AAAA stecker=AI BZ CJ EX FT GL KS MN RV WY
+  seed[36] UKWB beta III-VII-II rings=AAAA stecker=AL CH EK JN MX QY TV UW
+  seed[37] UKWC gamma VI-VII-VIII rings=AAAA stecker=BK DX FS GJ MU NO TV YZ
+  seed[38] UKWB beta II-IV-V rings=AAAA stecker=AZ CD EW FU GI HR JV LN ST XY
+  seed[39] UKWB beta VIII-I-IV rings=AAAA stecker=AY BW CH DU EL GV PX RS
+  seed[40] UKWB beta V-VII-II rings=AAAA stecker=AP CI DK EW GR JX LY MQ SU TV
+  seed[41] UKWC beta VI-IV-VIII rings=AAAA stecker=AF BT DH EK GO IY JV LX MU RS
+  seed[42] UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  seed[43] UKWC beta VIII-IV-VII rings=AAAA stecker=AF BG EK IT JW MS NO PU QR VX
+  seed[44] UKWB beta VIII-VII-IV rings=AAAA stecker=AN CP DZ GL HM IJ OY RV SW TX
+  seed[45] UKWB gamma III-VIII-II rings=AAAA stecker=AB CR EK FY GI HN JX MS PT UV
+  seed[46] UKWC gamma I-II-VII rings=AAAA stecker=BX CI DV EU FG LN MR OT SW
+  seed[47] UKWC gamma II-VI-IV rings=AAAA stecker=BZ CW GR HL JK MO QT SV XY
+  seed[48] UKWB gamma VIII-III-IV rings=AAAA stecker=AR BO CK DQ FT GV HY IU JM SW
+  seed[49] UKWB gamma VIII-III-IV rings=AAAA stecker=AR BO CK DQ FT GV HY IU JM SW
+  seed[50] UKWB beta II-I-VIII rings=AAAA stecker=AV BU CH EF GW JZ KS LT NQ XY
+  seed[51] UKWB beta VIII-I-VI rings=AAAA stecker=AI BD EV GH JT NQ OR SW UX
+  seed[52] UKWB gamma III-I-V rings=AAAA stecker=AC BR HX JK LQ ST UV
+  seed[53] UKWB beta I-VII-VI rings=AAAA stecker=AM BK CP DE FJ GL IU RW YZ
+  seed[54] UKWB beta VIII-I-III rings=AAAA stecker=AQ BV CJ DR ET GM LS NP UZ
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/24 pop=64 blockB_greeks=0
+  gen-best  8/21 (38%) tmpl=head:AUSBILDUNGSFUNKSPR@1 IC=0.0356 pos=OCPZ | UKWB beta II-VII-V rings=AAAA stecker=BI CM FG JL NQ RS TU WY
+  all-time  8/21 tmpl=head:AUSBILDUNGSFUNKSPR@1 pos=OCPZ | UKWB beta II-VII-V rings=AAAA stecker=BI CM FG JL NQ RS TU WY
+Hybrid gen 2/24 pop=64 blockB_greeks=0
+  gen-best  9/21 (43%) tmpl=head:AUSBILDUNGSFUNKSPR@1 IC=0.0336 pos=HGFI | UKWB beta VII-V-VI rings=AAAA stecker=AP BJ CY DE IS NZ OR UW
+  all-time  9/21 tmpl=head:AUSBILDUNGSFUNKSPR@1 pos=HGFI | UKWB beta VII-V-VI rings=AAAA stecker=AP BJ CY DE IS NZ OR UW
+Hybrid gen 3/24 pop=64 blockB_greeks=0
+  gen-best  9/21 (43%) tmpl=head:AUSBILDUNGSFUNKSPR@1 IC=0.0336 pos=HGFI | UKWB beta VII-V-VI rings=AAAA stecker=AP BJ CY DE IS NZ OR UW
+  all-time  9/21 tmpl=head:AUSBILDUNGSFUNKSPR@1 pos=HGFI | UKWB beta VII-V-VI rings=AAAA stecker=AP BJ CY DE IS NZ OR UW
+Hybrid gen 4/24 pop=64 blockB_greeks=0
+  gen-best  9/21 (43%) tmpl=head:AUSBILDUNGSFUNKSPR@1 IC=0.0336 pos=HGFI | UKWB beta VII-V-VI rings=AAAA stecker=AP BJ CY DE IS NZ OR UW
+  all-time  9/21 tmpl=head:AUSBILDUNGSFUNKSPR@1 pos=HGFI | UKWB beta VII-V-VI rings=AAAA stecker=AP BJ CY DE IS NZ OR UW
+Hybrid gen 5/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@1 IC=0.0399 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@1 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+Hybrid gen 6/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@1 IC=0.0399 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@1 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+Hybrid gen 7/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@1 IC=0.0399 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@1 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+Hybrid gen 8/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@1 IC=0.0399 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@1 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+Hybrid gen 9/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@1 IC=0.0399 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@1 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+Hybrid gen 10/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@1 IC=0.0399 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@1 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+Hybrid gen 11/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@1 IC=0.0399 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@1 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+Hybrid gen 12/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@1 IC=0.0399 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@1 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+Hybrid gen 13/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@1 IC=0.0399 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@1 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+Hybrid gen 14/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@1 IC=0.0399 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@1 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+Hybrid gen 15/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@1 IC=0.0399 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@1 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+Hybrid gen 16/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@1 IC=0.0399 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@1 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+Hybrid gen 17/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@1 IC=0.0399 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@1 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+Hybrid gen 18/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@1 IC=0.0399 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@1 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+Hybrid gen 19/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@1 IC=0.0399 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@1 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+Hybrid gen 20/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@1 IC=0.0399 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@1 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+Hybrid gen 21/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@1 IC=0.0399 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@1 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+Hybrid gen 22/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@1 IC=0.0399 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@1 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+Hybrid gen 23/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@1 IC=0.0399 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@1 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+Hybrid gen 24/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@1 IC=0.0399 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@1 pos=VUFX | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 21…21)
+Shell evolution: OFF freeRings=false WO=47 ringSeeds=3 subspace=potsdam-neighbourhood
+Seeded population[0..<55] from Welchman quarantine (55 candidate(s))
+  seed[0] UKWB gamma I-IV-VI rings=AAAA stecker=AM BY CV EX FU GT HN JQ
+  seed[1] UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL HY IS JU RV
+  seed[2] UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK GX HJ LR NP OT UZ VY
+  seed[3] UKWC beta IV-VIII-III rings=AAAA stecker=AV BP CR DN EL GI HU MX QY TW
+  seed[4] UKWC beta V-VIII-III rings=AAAA stecker=AI CW EP GZ HN LR MY OS QT VX
+  seed[5] UKWB gamma VII-IV-III rings=AAAA stecker=AP BH CF DR EI GZ JQ KS LT OX
+  seed[6] UKWB beta II-V-III rings=AAAA stecker=AJ BI CK EG LR MY NS PT UW
+  seed[7] UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  seed[8] UKWC gamma III-IV-II rings=AAAA stecker=AK BU DP EZ FR JY LV MX NW ST
+  seed[9] UKWB beta II-VII-V rings=AAAA stecker=BI CM FG JL NQ RS TU WY
+  seed[10] UKWB beta II-I-VII rings=AAAA stecker=AP BV CD GL HY IS JM KN RZ
+  seed[11] UKWB gamma I-VII-IV rings=AAAA stecker=AF CH DN GP IM JL KX OS RU
+  seed[12] UKWB beta IV-VII-II rings=AAAA stecker=AY BO CI DJ EK GP HS RU TV
+  seed[13] UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  seed[14] UKWB beta VI-V-VII rings=AAAA stecker=AH BP CD JQ LT NV OU SZ WY
+  seed[15] UKWC beta VIII-V-III rings=AAAA stecker=AO BJ CR DX EI FG HN KU LT PY
+  seed[16] UKWB beta VII-VIII-II rings=AAAA stecker=ER GI HY JW KS NQ OU TX
+  seed[17] UKWB gamma I-VII-VI rings=AAAA stecker=AB CK DF GW HY IN JV LP MR SU
+  seed[18] UKWC beta VI-VII-III rings=AAAA stecker=BF CZ EK GP IX MR TY UV
+  seed[19] UKWB beta IV-VIII-III rings=AAAA stecker=BZ CD FU GK HY JO NV PS RX TW
+  seed[20] UKWC gamma VIII-IV-I rings=AAAA stecker=BC DJ EH GK LS NR OU VX
+  seed[21] UKWC gamma VIII-IV-I rings=AAAA stecker=BC DJ EH GK LS NR OU VX
+  seed[22] UKWB beta VII-V-VI rings=AAAA stecker=AP BJ CY DE GQ IS NZ OR UW
+  seed[23] UKWC gamma VIII-IV-III rings=AAAA stecker=AW BY CH DR EZ GJ IS KT NU VX
+  seed[24] UKWB beta VI-I-IV rings=AAAA stecker=AP BR FJ HU KT NY QS XZ
+  seed[25] UKWC gamma V-VIII-VII rings=AAAA stecker=AF CW DG EP HJ KR OU TV YZ
+  seed[26] UKWC gamma V-VIII-VII rings=AAAA stecker=AF CW DG EP HJ KR OU TV YZ
+  seed[27] UKWC beta II-III-IV rings=AAAA stecker=AH CR DT EX FS GZ JO LY NV UW
+  seed[28] UKWB beta IV-VIII-VI rings=AAAA stecker=BD FG HR IY JL NV PU ST
+  seed[29] UKWB beta I-VI-IV rings=AAAA stecker=BD CX EQ GT JM OR SW
+  seed[30] UKWC beta IV-III-VIII rings=AAAA stecker=BT CF DG HX IR JW KU MS OY
+  seed[31] UKWB beta II-V-III rings=AAAA stecker=AQ BP CE DU GZ IS KN MR TV
+  seed[32] UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW GZ IY KS NQ UX
+  seed[33] UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW GZ IY KS NQ UX
+  seed[34] UKWC gamma VI-V-VIII rings=AAAA stecker=AT BE CI DY JZ KM LN RX SW
+  seed[35] UKWC gamma I-II-IV rings=AAAA stecker=AI BZ CJ EX FT GL KS MN RV WY
+  seed[36] UKWB beta III-VII-II rings=AAAA stecker=AL CH EK JN MX QY TV UW
+  seed[37] UKWC gamma VI-VII-VIII rings=AAAA stecker=BK DX FS GJ MU NO TV YZ
+  seed[38] UKWB beta II-IV-V rings=AAAA stecker=AZ CD EW FU GI HR JV LN ST XY
+  seed[39] UKWB beta VIII-I-IV rings=AAAA stecker=AY BW CH DU EL GV PX RS
+  seed[40] UKWB beta V-VII-II rings=AAAA stecker=AP CI DK EW GR JX LY MQ SU TV
+  seed[41] UKWC beta VI-IV-VIII rings=AAAA stecker=AF BT DH EK GO IY JV LX MU RS
+  seed[42] UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  seed[43] UKWC beta VIII-IV-VII rings=AAAA stecker=AF BG EK IT JW MS NO PU QR VX
+  seed[44] UKWB beta VIII-VII-IV rings=AAAA stecker=AN CP DZ GL HM IJ OY RV SW TX
+  seed[45] UKWB gamma III-VIII-II rings=AAAA stecker=AB CR EK FY GI HN JX MS PT UV
+  seed[46] UKWC gamma I-II-VII rings=AAAA stecker=BX CI DV EU FG LN MR OT SW
+  seed[47] UKWC gamma II-VI-IV rings=AAAA stecker=BZ CW GR HL JK MO QT SV XY
+  seed[48] UKWB gamma VIII-III-IV rings=AAAA stecker=AR BO CK DQ FT GV HY IU JM SW
+  seed[49] UKWB gamma VIII-III-IV rings=AAAA stecker=AR BO CK DQ FT GV HY IU JM SW
+  seed[50] UKWB beta II-I-VIII rings=AAAA stecker=AV BU CH EF GW JZ KS LT NQ XY
+  seed[51] UKWB beta VIII-I-VI rings=AAAA stecker=AI BD EV GH JT NQ OR SW UX
+  seed[52] UKWB gamma III-I-V rings=AAAA stecker=AC BR HX JK LQ ST UV
+  seed[53] UKWB beta I-VII-VI rings=AAAA stecker=AM BK CP DE FJ GL IU RW YZ
+  seed[54] UKWB beta VIII-I-III rings=AAAA stecker=AQ BV CJ DR ET GM LS NP UZ
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/24 pop=64 blockB_greeks=0
+  gen-best  9/21 (43%) tmpl=head:AUSBILDUNGSFUNKSPR@2 IC=0.0336 pos=KDWM | UKWC gamma VIII-IV-III rings=AAAA stecker=AW BY CH DR EZ GJ IS KT NU VX
+  all-time  9/21 tmpl=head:AUSBILDUNGSFUNKSPR@2 pos=KDWM | UKWC gamma VIII-IV-III rings=AAAA stecker=AW BY CH DR EZ GJ IS KT NU VX
+Hybrid gen 2/24 pop=64 blockB_greeks=0
+  gen-best  9/21 (43%) tmpl=head:AUSBILDUNGSFUNKSPR@2 IC=0.0336 pos=KDWM | UKWC gamma VIII-IV-III rings=AAAA stecker=AW BY CH DR EZ GJ IS KT NU VX
+  all-time  9/21 tmpl=head:AUSBILDUNGSFUNKSPR@2 pos=KDWM | UKWC gamma VIII-IV-III rings=AAAA stecker=AW BY CH DR EZ GJ IS KT NU VX
+Hybrid gen 3/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@2 IC=0.0352 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@2 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+Hybrid gen 4/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@2 IC=0.0352 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@2 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+Hybrid gen 5/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@2 IC=0.0352 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@2 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+Hybrid gen 6/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@2 IC=0.0352 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@2 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+Hybrid gen 7/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@2 IC=0.0352 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@2 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+Hybrid gen 8/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@2 IC=0.0352 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@2 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+Hybrid gen 9/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@2 IC=0.0352 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@2 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+Hybrid gen 10/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@2 IC=0.0352 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@2 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+Hybrid gen 11/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@2 IC=0.0352 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@2 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+Hybrid gen 12/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@2 IC=0.0352 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@2 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+Hybrid gen 13/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@2 IC=0.0352 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@2 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+Hybrid gen 14/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@2 IC=0.0352 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@2 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+Hybrid gen 15/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@2 IC=0.0352 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@2 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+Hybrid gen 16/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@2 IC=0.0352 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@2 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+Hybrid gen 17/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@2 IC=0.0352 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@2 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+Hybrid gen 18/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@2 IC=0.0352 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@2 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+Hybrid gen 19/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@2 IC=0.0352 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@2 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+Hybrid gen 20/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@2 IC=0.0352 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@2 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+Hybrid gen 21/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@2 IC=0.0352 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@2 pos=PJXS | UKWB gamma IV-III-VIII rings=AAAA stecker=AH BP CE FT IX KL NV OU SZ
+Hybrid gen 22/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@2 IC=0.0348 pos=QPBB | UKWB gamma I-VII-IV rings=AAAA stecker=AF BI CH DN ER GV JL KS OU TX
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@2 pos=QPBB | UKWB gamma I-VII-IV rings=AAAA stecker=AF BI CH DN ER GV JL KS OU TX
+Hybrid gen 23/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@2 IC=0.0348 pos=QPBB | UKWB gamma I-VII-IV rings=AAAA stecker=AF BI CH DN ER GV JL KS OU TX
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@2 pos=QPBB | UKWB gamma I-VII-IV rings=AAAA stecker=AF BI CH DN ER GV JL KS OU TX
+Hybrid gen 24/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@2 IC=0.0348 pos=QPBB | UKWB gamma I-VII-IV rings=AAAA stecker=AF BI CH DN ER GV JL KS OU TX
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@2 pos=QPBB | UKWB gamma I-VII-IV rings=AAAA stecker=AF BI CH DN ER GV JL KS OU TX
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 21…21)
+Shell evolution: OFF freeRings=false WO=47 ringSeeds=3 subspace=potsdam-neighbourhood
+Seeded population[0..<55] from Welchman quarantine (55 candidate(s))
+  seed[0] UKWB gamma I-IV-VI rings=AAAA stecker=AM BY CV EX FU GT HN JQ
+  seed[1] UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL HY IS JU RV
+  seed[2] UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK GX HJ LR NP OT UZ VY
+  seed[3] UKWC beta IV-VIII-III rings=AAAA stecker=AV BP CR DN EL GI HU MX QY TW
+  seed[4] UKWC beta V-VIII-III rings=AAAA stecker=AI CW EP GZ HN LR MY OS QT VX
+  seed[5] UKWB gamma VII-IV-III rings=AAAA stecker=AP BH CF DR EI GZ JQ KS LT OX
+  seed[6] UKWB beta II-V-III rings=AAAA stecker=AJ BI CK EG LR MY NS PT UW
+  seed[7] UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  seed[8] UKWC gamma III-IV-II rings=AAAA stecker=AK BU DP EZ FR JY LV MX NW ST
+  seed[9] UKWB beta II-VII-V rings=AAAA stecker=BI CM FG JL NQ RS TU WY
+  seed[10] UKWB beta II-I-VII rings=AAAA stecker=AP BV CD GL HY IS JM KN RZ
+  seed[11] UKWB gamma I-VII-IV rings=AAAA stecker=AF CH DN GP IM JL KX OS RU
+  seed[12] UKWB beta IV-VII-II rings=AAAA stecker=AY BO CI DJ EK GP HS RU TV
+  seed[13] UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  seed[14] UKWB beta VI-V-VII rings=AAAA stecker=AH BP CD JQ LT NV OU SZ WY
+  seed[15] UKWC beta VIII-V-III rings=AAAA stecker=AO BJ CR DX EI FG HN KU LT PY
+  seed[16] UKWB beta VII-VIII-II rings=AAAA stecker=ER GI HY JW KS NQ OU TX
+  seed[17] UKWB gamma I-VII-VI rings=AAAA stecker=AB CK DF GW HY IN JV LP MR SU
+  seed[18] UKWC beta VI-VII-III rings=AAAA stecker=BF CZ EK GP IX MR TY UV
+  seed[19] UKWB beta IV-VIII-III rings=AAAA stecker=BZ CD FU GK HY JO NV PS RX TW
+  seed[20] UKWC gamma VIII-IV-I rings=AAAA stecker=BC DJ EH GK LS NR OU VX
+  seed[21] UKWC gamma VIII-IV-I rings=AAAA stecker=BC DJ EH GK LS NR OU VX
+  seed[22] UKWB beta VII-V-VI rings=AAAA stecker=AP BJ CY DE GQ IS NZ OR UW
+  seed[23] UKWC gamma VIII-IV-III rings=AAAA stecker=AW BY CH DR EZ GJ IS KT NU VX
+  seed[24] UKWB beta VI-I-IV rings=AAAA stecker=AP BR FJ HU KT NY QS XZ
+  seed[25] UKWC gamma V-VIII-VII rings=AAAA stecker=AF CW DG EP HJ KR OU TV YZ
+  seed[26] UKWC gamma V-VIII-VII rings=AAAA stecker=AF CW DG EP HJ KR OU TV YZ
+  seed[27] UKWC beta II-III-IV rings=AAAA stecker=AH CR DT EX FS GZ JO LY NV UW
+  seed[28] UKWB beta IV-VIII-VI rings=AAAA stecker=BD FG HR IY JL NV PU ST
+  seed[29] UKWB beta I-VI-IV rings=AAAA stecker=BD CX EQ GT JM OR SW
+  seed[30] UKWC beta IV-III-VIII rings=AAAA stecker=BT CF DG HX IR JW KU MS OY
+  seed[31] UKWB beta II-V-III rings=AAAA stecker=AQ BP CE DU GZ IS KN MR TV
+  seed[32] UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW GZ IY KS NQ UX
+  seed[33] UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW GZ IY KS NQ UX
+  seed[34] UKWC gamma VI-V-VIII rings=AAAA stecker=AT BE CI DY JZ KM LN RX SW
+  seed[35] UKWC gamma I-II-IV rings=AAAA stecker=AI BZ CJ EX FT GL KS MN RV WY
+  seed[36] UKWB beta III-VII-II rings=AAAA stecker=AL CH EK JN MX QY TV UW
+  seed[37] UKWC gamma VI-VII-VIII rings=AAAA stecker=BK DX FS GJ MU NO TV YZ
+  seed[38] UKWB beta II-IV-V rings=AAAA stecker=AZ CD EW FU GI HR JV LN ST XY
+  seed[39] UKWB beta VIII-I-IV rings=AAAA stecker=AY BW CH DU EL GV PX RS
+  seed[40] UKWB beta V-VII-II rings=AAAA stecker=AP CI DK EW GR JX LY MQ SU TV
+  seed[41] UKWC beta VI-IV-VIII rings=AAAA stecker=AF BT DH EK GO IY JV LX MU RS
+  seed[42] UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  seed[43] UKWC beta VIII-IV-VII rings=AAAA stecker=AF BG EK IT JW MS NO PU QR VX
+  seed[44] UKWB beta VIII-VII-IV rings=AAAA stecker=AN CP DZ GL HM IJ OY RV SW TX
+  seed[45] UKWB gamma III-VIII-II rings=AAAA stecker=AB CR EK FY GI HN JX MS PT UV
+  seed[46] UKWC gamma I-II-VII rings=AAAA stecker=BX CI DV EU FG LN MR OT SW
+  seed[47] UKWC gamma II-VI-IV rings=AAAA stecker=BZ CW GR HL JK MO QT SV XY
+  seed[48] UKWB gamma VIII-III-IV rings=AAAA stecker=AR BO CK DQ FT GV HY IU JM SW
+  seed[49] UKWB gamma VIII-III-IV rings=AAAA stecker=AR BO CK DQ FT GV HY IU JM SW
+  seed[50] UKWB beta II-I-VIII rings=AAAA stecker=AV BU CH EF GW JZ KS LT NQ XY
+  seed[51] UKWB beta VIII-I-VI rings=AAAA stecker=AI BD EV GH JT NQ OR SW UX
+  seed[52] UKWB gamma III-I-V rings=AAAA stecker=AC BR HX JK LQ ST UV
+  seed[53] UKWB beta I-VII-VI rings=AAAA stecker=AM BK CP DE FJ GL IU RW YZ
+  seed[54] UKWB beta VIII-I-III rings=AAAA stecker=AQ BV CJ DR ET GM LS NP UZ
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/24 pop=64 blockB_greeks=0
+  gen-best  8/21 (38%) tmpl=head:AUSBILDUNGSFUNKSPR@3 IC=0.0383 pos=ECKV | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH CF DR EI GZ JQ KS LT OX
+  all-time  8/21 tmpl=head:AUSBILDUNGSFUNKSPR@3 pos=ECKV | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH CF DR EI GZ JQ KS LT OX
+Hybrid gen 2/24 pop=64 blockB_greeks=0
+  gen-best  9/21 (43%) tmpl=head:AUSBILDUNGSFUNKSPR@3 IC=0.0356 pos=WLVO | UKWB beta II-I-VII rings=AAAA stecker=AP BV CD FT GL HY IS JM KN RZ
+  all-time  9/21 tmpl=head:AUSBILDUNGSFUNKSPR@3 pos=WLVO | UKWB beta II-I-VII rings=AAAA stecker=AP BV CD FT GL HY IS JM KN RZ
+Hybrid gen 3/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@3 IC=0.0360 pos=WLVO | UKWB beta II-I-VII rings=AAAA stecker=AP BV CD FT GL HY IS KN RZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@3 pos=WLVO | UKWB beta II-I-VII rings=AAAA stecker=AP BV CD FT GL HY IS KN RZ
+Hybrid gen 4/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@3 IC=0.0360 pos=WLVO | UKWB beta II-I-VII rings=AAAA stecker=AP BV CD FT GL HY IS KN RZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@3 pos=WLVO | UKWB beta II-I-VII rings=AAAA stecker=AP BV CD FT GL HY IS KN RZ
+Hybrid gen 5/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@3 IC=0.0360 pos=WLVO | UKWB beta II-I-VII rings=AAAA stecker=AP BV CD FT GL HY IS KN RZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@3 pos=WLVO | UKWB beta II-I-VII rings=AAAA stecker=AP BV CD FT GL HY IS KN RZ
+Hybrid gen 6/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@3 IC=0.0360 pos=WLVO | UKWB beta II-I-VII rings=AAAA stecker=AP BV CD FT GL HY IS KN RZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@3 pos=WLVO | UKWB beta II-I-VII rings=AAAA stecker=AP BV CD FT GL HY IS KN RZ
+Hybrid gen 7/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@3 IC=0.0360 pos=WLVO | UKWB beta II-I-VII rings=AAAA stecker=AP BV CD FT GL HY IS KN RZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@3 pos=WLVO | UKWB beta II-I-VII rings=AAAA stecker=AP BV CD FT GL HY IS KN RZ
+Hybrid gen 8/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@3 IC=0.0360 pos=WLVO | UKWB beta II-I-VII rings=AAAA stecker=AP BV CD FT GL HY IS KN RZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@3 pos=WLVO | UKWB beta II-I-VII rings=AAAA stecker=AP BV CD FT GL HY IS KN RZ
+Hybrid gen 9/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@3 IC=0.0360 pos=WLVO | UKWB beta II-I-VII rings=AAAA stecker=AP BV CD FT GL HY IS KN RZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@3 pos=WLVO | UKWB beta II-I-VII rings=AAAA stecker=AP BV CD FT GL HY IS KN RZ
+Hybrid gen 10/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@3 IC=0.0360 pos=WLVO | UKWB beta II-I-VII rings=AAAA stecker=AP BV CD FT GL HY IS KN RZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@3 pos=WLVO | UKWB beta II-I-VII rings=AAAA stecker=AP BV CD FT GL HY IS KN RZ
+Hybrid gen 11/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@3 IC=0.0360 pos=WLVO | UKWB beta II-I-VII rings=AAAA stecker=AP BV CD FT GL HY IS KN RZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@3 pos=WLVO | UKWB beta II-I-VII rings=AAAA stecker=AP BV CD FT GL HY IS KN RZ
+Hybrid gen 12/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@3 IC=0.0360 pos=WLVO | UKWB beta II-I-VII rings=AAAA stecker=AP BV CD FT GL HY IS KN RZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@3 pos=WLVO | UKWB beta II-I-VII rings=AAAA stecker=AP BV CD FT GL HY IS KN RZ
+Hybrid gen 13/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@3 IC=0.0360 pos=WLVO | UKWB beta II-I-VII rings=AAAA stecker=AP BV CD FT GL HY IS KN RZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@3 pos=WLVO | UKWB beta II-I-VII rings=AAAA stecker=AP BV CD FT GL HY IS KN RZ
+Hybrid gen 14/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@3 IC=0.0360 pos=WLVO | UKWB beta II-I-VII rings=AAAA stecker=AP BV CD FT GL HY IS KN RZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@3 pos=WLVO | UKWB beta II-I-VII rings=AAAA stecker=AP BV CD FT GL HY IS KN RZ
+Hybrid gen 15/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@3 IC=0.0360 pos=WLVO | UKWB beta II-I-VII rings=AAAA stecker=AP BV CD FT GL HY IS KN RZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@3 pos=WLVO | UKWB beta II-I-VII rings=AAAA stecker=AP BV CD FT GL HY IS KN RZ
+Hybrid gen 16/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@3 IC=0.0360 pos=WLVO | UKWB beta II-I-VII rings=AAAA stecker=AP BV CD FT GL HY IS KN RZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@3 pos=WLVO | UKWB beta II-I-VII rings=AAAA stecker=AP BV CD FT GL HY IS KN RZ
+Hybrid gen 17/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@3 IC=0.0360 pos=WLVO | UKWB beta II-I-VII rings=AAAA stecker=AP BV CD FT GL HY IS KN RZ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@3 pos=WLVO | UKWB beta II-I-VII rings=AAAA stecker=AP BV CD FT GL HY IS KN RZ
+Hybrid gen 18/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@3 IC=0.0403 pos=GBNJ | UKWB gamma VIII-IV-V rings=AAAA stecker=AO BK CP DE FJ HT IU LX QS YZ
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@3 pos=GBNJ | UKWB gamma VIII-IV-V rings=AAAA stecker=AO BK CP DE FJ HT IU LX QS YZ
+Hybrid gen 19/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@3 IC=0.0403 pos=GBNJ | UKWB gamma VIII-IV-V rings=AAAA stecker=AO BK CP DE FJ HT IU LX QS YZ
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@3 pos=GBNJ | UKWB gamma VIII-IV-V rings=AAAA stecker=AO BK CP DE FJ HT IU LX QS YZ
+Hybrid gen 20/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@3 IC=0.0403 pos=GBNJ | UKWB gamma VIII-IV-V rings=AAAA stecker=AO BK CP DE FJ HT IU LX QS YZ
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@3 pos=GBNJ | UKWB gamma VIII-IV-V rings=AAAA stecker=AO BK CP DE FJ HT IU LX QS YZ
+Hybrid gen 21/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@3 IC=0.0403 pos=GBNJ | UKWB gamma VIII-IV-V rings=AAAA stecker=AO BK CP DE FJ HT IU LX QS YZ
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@3 pos=GBNJ | UKWB gamma VIII-IV-V rings=AAAA stecker=AO BK CP DE FJ HT IU LX QS YZ
+Hybrid gen 22/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@3 IC=0.0403 pos=GBNJ | UKWB gamma VIII-IV-V rings=AAAA stecker=AO BK CP DE FJ HT IU LX QS YZ
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@3 pos=GBNJ | UKWB gamma VIII-IV-V rings=AAAA stecker=AO BK CP DE FJ HT IU LX QS YZ
+Hybrid gen 23/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@3 IC=0.0403 pos=GBNJ | UKWB gamma VIII-IV-V rings=AAAA stecker=AO BK CP DE FJ HT IU LX QS YZ
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@3 pos=GBNJ | UKWB gamma VIII-IV-V rings=AAAA stecker=AO BK CP DE FJ HT IU LX QS YZ
+Hybrid gen 24/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@3 IC=0.0403 pos=GBNJ | UKWB gamma VIII-IV-V rings=AAAA stecker=AO BK CP DE FJ HT IU LX QS YZ
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@3 pos=GBNJ | UKWB gamma VIII-IV-V rings=AAAA stecker=AO BK CP DE FJ HT IU LX QS YZ
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 21…21)
+Shell evolution: OFF freeRings=false WO=47 ringSeeds=3 subspace=potsdam-neighbourhood
+Seeded population[0..<55] from Welchman quarantine (55 candidate(s))
+  seed[0] UKWB gamma I-IV-VI rings=AAAA stecker=AM BY CV EX FU GT HN JQ
+  seed[1] UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL HY IS JU RV
+  seed[2] UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK GX HJ LR NP OT UZ VY
+  seed[3] UKWC beta IV-VIII-III rings=AAAA stecker=AV BP CR DN EL GI HU MX QY TW
+  seed[4] UKWC beta V-VIII-III rings=AAAA stecker=AI CW EP GZ HN LR MY OS QT VX
+  seed[5] UKWB gamma VII-IV-III rings=AAAA stecker=AP BH CF DR EI GZ JQ KS LT OX
+  seed[6] UKWB beta II-V-III rings=AAAA stecker=AJ BI CK EG LR MY NS PT UW
+  seed[7] UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  seed[8] UKWC gamma III-IV-II rings=AAAA stecker=AK BU DP EZ FR JY LV MX NW ST
+  seed[9] UKWB beta II-VII-V rings=AAAA stecker=BI CM FG JL NQ RS TU WY
+  seed[10] UKWB beta II-I-VII rings=AAAA stecker=AP BV CD GL HY IS JM KN RZ
+  seed[11] UKWB gamma I-VII-IV rings=AAAA stecker=AF CH DN GP IM JL KX OS RU
+  seed[12] UKWB beta IV-VII-II rings=AAAA stecker=AY BO CI DJ EK GP HS RU TV
+  seed[13] UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  seed[14] UKWB beta VI-V-VII rings=AAAA stecker=AH BP CD JQ LT NV OU SZ WY
+  seed[15] UKWC beta VIII-V-III rings=AAAA stecker=AO BJ CR DX EI FG HN KU LT PY
+  seed[16] UKWB beta VII-VIII-II rings=AAAA stecker=ER GI HY JW KS NQ OU TX
+  seed[17] UKWB gamma I-VII-VI rings=AAAA stecker=AB CK DF GW HY IN JV LP MR SU
+  seed[18] UKWC beta VI-VII-III rings=AAAA stecker=BF CZ EK GP IX MR TY UV
+  seed[19] UKWB beta IV-VIII-III rings=AAAA stecker=BZ CD FU GK HY JO NV PS RX TW
+  seed[20] UKWC gamma VIII-IV-I rings=AAAA stecker=BC DJ EH GK LS NR OU VX
+  seed[21] UKWC gamma VIII-IV-I rings=AAAA stecker=BC DJ EH GK LS NR OU VX
+  seed[22] UKWB beta VII-V-VI rings=AAAA stecker=AP BJ CY DE GQ IS NZ OR UW
+  seed[23] UKWC gamma VIII-IV-III rings=AAAA stecker=AW BY CH DR EZ GJ IS KT NU VX
+  seed[24] UKWB beta VI-I-IV rings=AAAA stecker=AP BR FJ HU KT NY QS XZ
+  seed[25] UKWC gamma V-VIII-VII rings=AAAA stecker=AF CW DG EP HJ KR OU TV YZ
+  seed[26] UKWC gamma V-VIII-VII rings=AAAA stecker=AF CW DG EP HJ KR OU TV YZ
+  seed[27] UKWC beta II-III-IV rings=AAAA stecker=AH CR DT EX FS GZ JO LY NV UW
+  seed[28] UKWB beta IV-VIII-VI rings=AAAA stecker=BD FG HR IY JL NV PU ST
+  seed[29] UKWB beta I-VI-IV rings=AAAA stecker=BD CX EQ GT JM OR SW
+  seed[30] UKWC beta IV-III-VIII rings=AAAA stecker=BT CF DG HX IR JW KU MS OY
+  seed[31] UKWB beta II-V-III rings=AAAA stecker=AQ BP CE DU GZ IS KN MR TV
+  seed[32] UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW GZ IY KS NQ UX
+  seed[33] UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW GZ IY KS NQ UX
+  seed[34] UKWC gamma VI-V-VIII rings=AAAA stecker=AT BE CI DY JZ KM LN RX SW
+  seed[35] UKWC gamma I-II-IV rings=AAAA stecker=AI BZ CJ EX FT GL KS MN RV WY
+  seed[36] UKWB beta III-VII-II rings=AAAA stecker=AL CH EK JN MX QY TV UW
+  seed[37] UKWC gamma VI-VII-VIII rings=AAAA stecker=BK DX FS GJ MU NO TV YZ
+  seed[38] UKWB beta II-IV-V rings=AAAA stecker=AZ CD EW FU GI HR JV LN ST XY
+  seed[39] UKWB beta VIII-I-IV rings=AAAA stecker=AY BW CH DU EL GV PX RS
+  seed[40] UKWB beta V-VII-II rings=AAAA stecker=AP CI DK EW GR JX LY MQ SU TV
+  seed[41] UKWC beta VI-IV-VIII rings=AAAA stecker=AF BT DH EK GO IY JV LX MU RS
+  seed[42] UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  seed[43] UKWC beta VIII-IV-VII rings=AAAA stecker=AF BG EK IT JW MS NO PU QR VX
+  seed[44] UKWB beta VIII-VII-IV rings=AAAA stecker=AN CP DZ GL HM IJ OY RV SW TX
+  seed[45] UKWB gamma III-VIII-II rings=AAAA stecker=AB CR EK FY GI HN JX MS PT UV
+  seed[46] UKWC gamma I-II-VII rings=AAAA stecker=BX CI DV EU FG LN MR OT SW
+  seed[47] UKWC gamma II-VI-IV rings=AAAA stecker=BZ CW GR HL JK MO QT SV XY
+  seed[48] UKWB gamma VIII-III-IV rings=AAAA stecker=AR BO CK DQ FT GV HY IU JM SW
+  seed[49] UKWB gamma VIII-III-IV rings=AAAA stecker=AR BO CK DQ FT GV HY IU JM SW
+  seed[50] UKWB beta II-I-VIII rings=AAAA stecker=AV BU CH EF GW JZ KS LT NQ XY
+  seed[51] UKWB beta VIII-I-VI rings=AAAA stecker=AI BD EV GH JT NQ OR SW UX
+  seed[52] UKWB gamma III-I-V rings=AAAA stecker=AC BR HX JK LQ ST UV
+  seed[53] UKWB beta I-VII-VI rings=AAAA stecker=AM BK CP DE FJ GL IU RW YZ
+  seed[54] UKWB beta VIII-I-III rings=AAAA stecker=AQ BV CJ DR ET GM LS NP UZ
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/24 pop=64 blockB_greeks=0
+  gen-best  8/21 (38%) tmpl=head:AUSBILDUNGSFUNKSPR@4 IC=0.0364 pos=UNZO | UKWC gamma VIII-IV-III rings=AAAA stecker=AW BY CH DR EZ GJ IS KT NU VX
+  all-time  8/21 tmpl=head:AUSBILDUNGSFUNKSPR@4 pos=UNZO | UKWC gamma VIII-IV-III rings=AAAA stecker=AW BY CH DR EZ GJ IS KT NU VX
+Hybrid gen 2/24 pop=64 blockB_greeks=0
+  gen-best  9/21 (43%) tmpl=head:AUSBILDUNGSFUNKSPR@4 IC=0.0352 pos=FHRO | UKWC beta IV-III-VIII rings=AAAA stecker=BT CF DG HX IR JW KU MS NQ OY
+  all-time  9/21 tmpl=head:AUSBILDUNGSFUNKSPR@4 pos=FHRO | UKWC beta IV-III-VIII rings=AAAA stecker=BT CF DG HX IR JW KU MS NQ OY
+Hybrid gen 3/24 pop=64 blockB_greeks=0
+  gen-best  9/21 (43%) tmpl=head:AUSBILDUNGSFUNKSPR@4 IC=0.0352 pos=FHRO | UKWC beta IV-III-VIII rings=AAAA stecker=BT CF DG HX IR JW KU MS NQ OY
+  all-time  9/21 tmpl=head:AUSBILDUNGSFUNKSPR@4 pos=FHRO | UKWC beta IV-III-VIII rings=AAAA stecker=BT CF DG HX IR JW KU MS NQ OY
+Hybrid gen 4/24 pop=64 blockB_greeks=0
+  gen-best  9/21 (43%) tmpl=head:AUSBILDUNGSFUNKSPR@4 IC=0.0352 pos=FHRO | UKWC beta IV-III-VIII rings=AAAA stecker=BT CF DG HX IR JW KU MS NQ OY
+  all-time  9/21 tmpl=head:AUSBILDUNGSFUNKSPR@4 pos=FHRO | UKWC beta IV-III-VIII rings=AAAA stecker=BT CF DG HX IR JW KU MS NQ OY
+Hybrid gen 5/24 pop=64 blockB_greeks=0
+  gen-best  9/21 (43%) tmpl=head:AUSBILDUNGSFUNKSPR@4 IC=0.0352 pos=FHRO | UKWC beta IV-III-VIII rings=AAAA stecker=BT CF DG HX IR JW KU MS NQ OY
+  all-time  9/21 tmpl=head:AUSBILDUNGSFUNKSPR@4 pos=FHRO | UKWC beta IV-III-VIII rings=AAAA stecker=BT CF DG HX IR JW KU MS NQ OY
+Hybrid gen 6/24 pop=64 blockB_greeks=0
+  gen-best  9/21 (43%) tmpl=head:AUSBILDUNGSFUNKSPR@4 IC=0.0352 pos=FHRO | UKWC beta IV-III-VIII rings=AAAA stecker=BT CF DG HX IR JW KU MS NQ OY
+  all-time  9/21 tmpl=head:AUSBILDUNGSFUNKSPR@4 pos=FHRO | UKWC beta IV-III-VIII rings=AAAA stecker=BT CF DG HX IR JW KU MS NQ OY
+Hybrid gen 7/24 pop=64 blockB_greeks=0
+  gen-best  9/21 (43%) tmpl=head:AUSBILDUNGSFUNKSPR@4 IC=0.0352 pos=FHRO | UKWC beta IV-III-VIII rings=AAAA stecker=BT CF DG HX IR JW KU MS NQ OY
+  all-time  9/21 tmpl=head:AUSBILDUNGSFUNKSPR@4 pos=FHRO | UKWC beta IV-III-VIII rings=AAAA stecker=BT CF DG HX IR JW KU MS NQ OY
+Hybrid gen 8/24 pop=64 blockB_greeks=0
+  gen-best  9/21 (43%) tmpl=head:AUSBILDUNGSFUNKSPR@4 IC=0.0352 pos=FHRO | UKWC beta IV-III-VIII rings=AAAA stecker=BT CF DG HX IR JW KU MS NQ OY
+  all-time  9/21 tmpl=head:AUSBILDUNGSFUNKSPR@4 pos=FHRO | UKWC beta IV-III-VIII rings=AAAA stecker=BT CF DG HX IR JW KU MS NQ OY
+Hybrid gen 9/24 pop=64 blockB_greeks=0
+  gen-best  9/21 (43%) tmpl=head:AUSBILDUNGSFUNKSPR@4 IC=0.0352 pos=FHRO | UKWC beta IV-III-VIII rings=AAAA stecker=BT CF DG HX IR JW KU MS NQ OY
+  all-time  9/21 tmpl=head:AUSBILDUNGSFUNKSPR@4 pos=FHRO | UKWC beta IV-III-VIII rings=AAAA stecker=BT CF DG HX IR JW KU MS NQ OY
+Hybrid gen 10/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@4 IC=0.0344 pos=AQFI | UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW IY KS LU MZ NQ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@4 pos=AQFI | UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW IY KS LU MZ NQ
+Hybrid gen 11/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@4 IC=0.0344 pos=AQFI | UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW IY KS LU MZ NQ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@4 pos=AQFI | UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW IY KS LU MZ NQ
+Hybrid gen 12/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@4 IC=0.0344 pos=AQFI | UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW IY KS LU MZ NQ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@4 pos=AQFI | UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW IY KS LU MZ NQ
+Hybrid gen 13/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@4 IC=0.0344 pos=AQFI | UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW IY KS LU MZ NQ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@4 pos=AQFI | UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW IY KS LU MZ NQ
+Hybrid gen 14/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@4 IC=0.0344 pos=AQFI | UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW IY KS LU MZ NQ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@4 pos=AQFI | UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW IY KS LU MZ NQ
+Hybrid gen 15/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@4 IC=0.0344 pos=AQFI | UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW IY KS LU MZ NQ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@4 pos=AQFI | UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW IY KS LU MZ NQ
+Hybrid gen 16/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@4 IC=0.0344 pos=AQFI | UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW IY KS LU MZ NQ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@4 pos=AQFI | UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW IY KS LU MZ NQ
+Hybrid gen 17/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@4 IC=0.0344 pos=AQFI | UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW IY KS LU MZ NQ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@4 pos=AQFI | UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW IY KS LU MZ NQ
+Hybrid gen 18/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@4 IC=0.0344 pos=AQFI | UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW IY KS LU MZ NQ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@4 pos=AQFI | UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW IY KS LU MZ NQ
+Hybrid gen 19/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@4 IC=0.0344 pos=AQFI | UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW IY KS LU MZ NQ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@4 pos=AQFI | UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW IY KS LU MZ NQ
+Hybrid gen 20/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@4 IC=0.0344 pos=AQFI | UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW IY KS LU MZ NQ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@4 pos=AQFI | UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW IY KS LU MZ NQ
+Hybrid gen 21/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@4 IC=0.0344 pos=AQFI | UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW IY KS LU MZ NQ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@4 pos=AQFI | UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW IY KS LU MZ NQ
+Hybrid gen 22/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@4 IC=0.0344 pos=AQFI | UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW IY KS LU MZ NQ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@4 pos=AQFI | UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW IY KS LU MZ NQ
+Hybrid gen 23/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@4 IC=0.0344 pos=AQFI | UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW IY KS LU MZ NQ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@4 pos=AQFI | UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW IY KS LU MZ NQ
+Hybrid gen 24/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@4 IC=0.0344 pos=AQFI | UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW IY KS LU MZ NQ
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@4 pos=AQFI | UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW IY KS LU MZ NQ
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 21…21)
+Shell evolution: OFF freeRings=false WO=47 ringSeeds=3 subspace=potsdam-neighbourhood
+Seeded population[0..<55] from Welchman quarantine (55 candidate(s))
+  seed[0] UKWB gamma I-IV-VI rings=AAAA stecker=AM BY CV EX FU GT HN JQ
+  seed[1] UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL HY IS JU RV
+  seed[2] UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK GX HJ LR NP OT UZ VY
+  seed[3] UKWC beta IV-VIII-III rings=AAAA stecker=AV BP CR DN EL GI HU MX QY TW
+  seed[4] UKWC beta V-VIII-III rings=AAAA stecker=AI CW EP GZ HN LR MY OS QT VX
+  seed[5] UKWB gamma VII-IV-III rings=AAAA stecker=AP BH CF DR EI GZ JQ KS LT OX
+  seed[6] UKWB beta II-V-III rings=AAAA stecker=AJ BI CK EG LR MY NS PT UW
+  seed[7] UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  seed[8] UKWC gamma III-IV-II rings=AAAA stecker=AK BU DP EZ FR JY LV MX NW ST
+  seed[9] UKWB beta II-VII-V rings=AAAA stecker=BI CM FG JL NQ RS TU WY
+  seed[10] UKWB beta II-I-VII rings=AAAA stecker=AP BV CD GL HY IS JM KN RZ
+  seed[11] UKWB gamma I-VII-IV rings=AAAA stecker=AF CH DN GP IM JL KX OS RU
+  seed[12] UKWB beta IV-VII-II rings=AAAA stecker=AY BO CI DJ EK GP HS RU TV
+  seed[13] UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  seed[14] UKWB beta VI-V-VII rings=AAAA stecker=AH BP CD JQ LT NV OU SZ WY
+  seed[15] UKWC beta VIII-V-III rings=AAAA stecker=AO BJ CR DX EI FG HN KU LT PY
+  seed[16] UKWB beta VII-VIII-II rings=AAAA stecker=ER GI HY JW KS NQ OU TX
+  seed[17] UKWB gamma I-VII-VI rings=AAAA stecker=AB CK DF GW HY IN JV LP MR SU
+  seed[18] UKWC beta VI-VII-III rings=AAAA stecker=BF CZ EK GP IX MR TY UV
+  seed[19] UKWB beta IV-VIII-III rings=AAAA stecker=BZ CD FU GK HY JO NV PS RX TW
+  seed[20] UKWC gamma VIII-IV-I rings=AAAA stecker=BC DJ EH GK LS NR OU VX
+  seed[21] UKWC gamma VIII-IV-I rings=AAAA stecker=BC DJ EH GK LS NR OU VX
+  seed[22] UKWB beta VII-V-VI rings=AAAA stecker=AP BJ CY DE GQ IS NZ OR UW
+  seed[23] UKWC gamma VIII-IV-III rings=AAAA stecker=AW BY CH DR EZ GJ IS KT NU VX
+  seed[24] UKWB beta VI-I-IV rings=AAAA stecker=AP BR FJ HU KT NY QS XZ
+  seed[25] UKWC gamma V-VIII-VII rings=AAAA stecker=AF CW DG EP HJ KR OU TV YZ
+  seed[26] UKWC gamma V-VIII-VII rings=AAAA stecker=AF CW DG EP HJ KR OU TV YZ
+  seed[27] UKWC beta II-III-IV rings=AAAA stecker=AH CR DT EX FS GZ JO LY NV UW
+  seed[28] UKWB beta IV-VIII-VI rings=AAAA stecker=BD FG HR IY JL NV PU ST
+  seed[29] UKWB beta I-VI-IV rings=AAAA stecker=BD CX EQ GT JM OR SW
+  seed[30] UKWC beta IV-III-VIII rings=AAAA stecker=BT CF DG HX IR JW KU MS OY
+  seed[31] UKWB beta II-V-III rings=AAAA stecker=AQ BP CE DU GZ IS KN MR TV
+  seed[32] UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW GZ IY KS NQ UX
+  seed[33] UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW GZ IY KS NQ UX
+  seed[34] UKWC gamma VI-V-VIII rings=AAAA stecker=AT BE CI DY JZ KM LN RX SW
+  seed[35] UKWC gamma I-II-IV rings=AAAA stecker=AI BZ CJ EX FT GL KS MN RV WY
+  seed[36] UKWB beta III-VII-II rings=AAAA stecker=AL CH EK JN MX QY TV UW
+  seed[37] UKWC gamma VI-VII-VIII rings=AAAA stecker=BK DX FS GJ MU NO TV YZ
+  seed[38] UKWB beta II-IV-V rings=AAAA stecker=AZ CD EW FU GI HR JV LN ST XY
+  seed[39] UKWB beta VIII-I-IV rings=AAAA stecker=AY BW CH DU EL GV PX RS
+  seed[40] UKWB beta V-VII-II rings=AAAA stecker=AP CI DK EW GR JX LY MQ SU TV
+  seed[41] UKWC beta VI-IV-VIII rings=AAAA stecker=AF BT DH EK GO IY JV LX MU RS
+  seed[42] UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  seed[43] UKWC beta VIII-IV-VII rings=AAAA stecker=AF BG EK IT JW MS NO PU QR VX
+  seed[44] UKWB beta VIII-VII-IV rings=AAAA stecker=AN CP DZ GL HM IJ OY RV SW TX
+  seed[45] UKWB gamma III-VIII-II rings=AAAA stecker=AB CR EK FY GI HN JX MS PT UV
+  seed[46] UKWC gamma I-II-VII rings=AAAA stecker=BX CI DV EU FG LN MR OT SW
+  seed[47] UKWC gamma II-VI-IV rings=AAAA stecker=BZ CW GR HL JK MO QT SV XY
+  seed[48] UKWB gamma VIII-III-IV rings=AAAA stecker=AR BO CK DQ FT GV HY IU JM SW
+  seed[49] UKWB gamma VIII-III-IV rings=AAAA stecker=AR BO CK DQ FT GV HY IU JM SW
+  seed[50] UKWB beta II-I-VIII rings=AAAA stecker=AV BU CH EF GW JZ KS LT NQ XY
+  seed[51] UKWB beta VIII-I-VI rings=AAAA stecker=AI BD EV GH JT NQ OR SW UX
+  seed[52] UKWB gamma III-I-V rings=AAAA stecker=AC BR HX JK LQ ST UV
+  seed[53] UKWB beta I-VII-VI rings=AAAA stecker=AM BK CP DE FJ GL IU RW YZ
+  seed[54] UKWB beta VIII-I-III rings=AAAA stecker=AQ BV CJ DR ET GM LS NP UZ
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/24 pop=64 blockB_greeks=0
+  gen-best  9/21 (43%) tmpl=head:AUSBILDUNGSFUNKSPR@5 IC=0.0387 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH CF DR EI GZ JQ KS LT OX
+  all-time  9/21 tmpl=head:AUSBILDUNGSFUNKSPR@5 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH CF DR EI GZ JQ KS LT OX
+Hybrid gen 2/24 pop=64 blockB_greeks=0
+  gen-best  9/21 (43%) tmpl=head:AUSBILDUNGSFUNKSPR@5 IC=0.0387 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH CF DR EI GZ JQ KS LT OX
+  all-time  9/21 tmpl=head:AUSBILDUNGSFUNKSPR@5 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH CF DR EI GZ JQ KS LT OX
+Hybrid gen 3/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@5 IC=0.0415 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR EI FN GZ JQ KS LT OX
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@5 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR EI FN GZ JQ KS LT OX
+Hybrid gen 4/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@5 IC=0.0415 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR EI FN GZ JQ KS LT OX
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@5 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR EI FN GZ JQ KS LT OX
+Hybrid gen 5/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@5 IC=0.0415 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR EI FN GZ JQ KS LT OX
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@5 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR EI FN GZ JQ KS LT OX
+Hybrid gen 6/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@5 IC=0.0415 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR EI FN GZ JQ KS LT OX
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@5 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR EI FN GZ JQ KS LT OX
+Hybrid gen 7/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@5 IC=0.0415 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR EI FN GZ JQ KS LT OX
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@5 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR EI FN GZ JQ KS LT OX
+Hybrid gen 8/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@5 IC=0.0415 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR EI FN GZ JQ KS LT OX
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@5 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR EI FN GZ JQ KS LT OX
+Hybrid gen 9/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@5 IC=0.0415 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR EI FN GZ JQ KS LT OX
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@5 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR EI FN GZ JQ KS LT OX
+Hybrid gen 10/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@5 IC=0.0415 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR EI FN GZ JQ KS LT OX
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@5 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR EI FN GZ JQ KS LT OX
+Hybrid gen 11/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@5 IC=0.0415 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR EI FN GZ JQ KS LT OX
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@5 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR EI FN GZ JQ KS LT OX
+Hybrid gen 12/24 pop=64 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=head:AUSBILDUNGSFUNKSPR@5 IC=0.0415 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR EI FN GZ JQ KS LT OX
+  all-time  10/21 tmpl=head:AUSBILDUNGSFUNKSPR@5 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR EI FN GZ JQ KS LT OX
+Hybrid gen 13/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@5 IC=0.0364 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR FN GZ JQ KS LT OX VW
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@5 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR FN GZ JQ KS LT OX VW
+Hybrid gen 14/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@5 IC=0.0364 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR FN GZ JQ KS LT OX VW
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@5 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR FN GZ JQ KS LT OX VW
+Hybrid gen 15/24 pop=64 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=head:AUSBILDUNGSFUNKSPR@5 IC=0.0364 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR FN GZ JQ KS LT OX VW
+  all-time  11/21 tmpl=head:AUSBILDUNGSFUNKSPR@5 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR FN GZ JQ KS LT OX VW
+Hybrid gen 16/24 pop=64 blockB_greeks=0
+  gen-best  12/21 (57%) tmpl=head:AUSBILDUNGSFUNKSPR@5 IC=0.0383 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR FN GZ JM KS LT OX VW
+  all-time  12/21 tmpl=head:AUSBILDUNGSFUNKSPR@5 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR FN GZ JM KS LT OX VW
+Hybrid gen 17/24 pop=64 blockB_greeks=0
+  gen-best  12/21 (57%) tmpl=head:AUSBILDUNGSFUNKSPR@5 IC=0.0383 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR FN GZ JM KS LT OX VW
+  all-time  12/21 tmpl=head:AUSBILDUNGSFUNKSPR@5 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR FN GZ JM KS LT OX VW
+Hybrid gen 18/24 pop=64 blockB_greeks=0
+  gen-best  12/21 (57%) tmpl=head:AUSBILDUNGSFUNKSPR@5 IC=0.0383 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR FN GZ JM KS LT OX VW
+  all-time  12/21 tmpl=head:AUSBILDUNGSFUNKSPR@5 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR FN GZ JM KS LT OX VW
+Hybrid gen 19/24 pop=64 blockB_greeks=0
+  gen-best  12/21 (57%) tmpl=head:AUSBILDUNGSFUNKSPR@5 IC=0.0383 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR FN GZ JM KS LT OX VW
+  all-time  12/21 tmpl=head:AUSBILDUNGSFUNKSPR@5 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR FN GZ JM KS LT OX VW
+Hybrid gen 20/24 pop=64 blockB_greeks=0
+  gen-best  12/21 (57%) tmpl=head:AUSBILDUNGSFUNKSPR@5 IC=0.0383 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR FN GZ JM KS LT OX VW
+  all-time  12/21 tmpl=head:AUSBILDUNGSFUNKSPR@5 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR FN GZ JM KS LT OX VW
+Hybrid gen 21/24 pop=64 blockB_greeks=0
+  gen-best  12/21 (57%) tmpl=head:AUSBILDUNGSFUNKSPR@5 IC=0.0383 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR FN GZ JM KS LT OX VW
+  all-time  12/21 tmpl=head:AUSBILDUNGSFUNKSPR@5 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR FN GZ JM KS LT OX VW
+Hybrid gen 22/24 pop=64 blockB_greeks=0
+  gen-best  12/21 (57%) tmpl=head:AUSBILDUNGSFUNKSPR@5 IC=0.0383 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR FN GZ JM KS LT OX VW
+  all-time  12/21 tmpl=head:AUSBILDUNGSFUNKSPR@5 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR FN GZ JM KS LT OX VW
+Hybrid gen 23/24 pop=64 blockB_greeks=0
+  gen-best  12/21 (57%) tmpl=head:AUSBILDUNGSFUNKSPR@5 IC=0.0383 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR FN GZ JM KS LT OX VW
+  all-time  12/21 tmpl=head:AUSBILDUNGSFUNKSPR@5 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR FN GZ JM KS LT OX VW
+Hybrid gen 24/24 pop=64 blockB_greeks=0
+  gen-best  12/21 (57%) tmpl=head:AUSBILDUNGSFUNKSPR@5 IC=0.0383 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR FN GZ JM KS LT OX VW
+  all-time  12/21 tmpl=head:AUSBILDUNGSFUNKSPR@5 pos=ZQNF | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR FN GZ JM KS LT OX VW
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 20…20)
+Shell evolution: OFF freeRings=false WO=47 ringSeeds=3 subspace=potsdam-neighbourhood
+Seeded population[0..<55] from Welchman quarantine (55 candidate(s))
+  seed[0] UKWB gamma I-IV-VI rings=AAAA stecker=AM BY CV EX FU GT HN JQ
+  seed[1] UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL HY IS JU RV
+  seed[2] UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK GX HJ LR NP OT UZ VY
+  seed[3] UKWC beta IV-VIII-III rings=AAAA stecker=AV BP CR DN EL GI HU MX QY TW
+  seed[4] UKWC beta V-VIII-III rings=AAAA stecker=AI CW EP GZ HN LR MY OS QT VX
+  seed[5] UKWB gamma VII-IV-III rings=AAAA stecker=AP BH CF DR EI GZ JQ KS LT OX
+  seed[6] UKWB beta II-V-III rings=AAAA stecker=AJ BI CK EG LR MY NS PT UW
+  seed[7] UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  seed[8] UKWC gamma III-IV-II rings=AAAA stecker=AK BU DP EZ FR JY LV MX NW ST
+  seed[9] UKWB beta II-VII-V rings=AAAA stecker=BI CM FG JL NQ RS TU WY
+  seed[10] UKWB beta II-I-VII rings=AAAA stecker=AP BV CD GL HY IS JM KN RZ
+  seed[11] UKWB gamma I-VII-IV rings=AAAA stecker=AF CH DN GP IM JL KX OS RU
+  seed[12] UKWB beta IV-VII-II rings=AAAA stecker=AY BO CI DJ EK GP HS RU TV
+  seed[13] UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  seed[14] UKWB beta VI-V-VII rings=AAAA stecker=AH BP CD JQ LT NV OU SZ WY
+  seed[15] UKWC beta VIII-V-III rings=AAAA stecker=AO BJ CR DX EI FG HN KU LT PY
+  seed[16] UKWB beta VII-VIII-II rings=AAAA stecker=ER GI HY JW KS NQ OU TX
+  seed[17] UKWB gamma I-VII-VI rings=AAAA stecker=AB CK DF GW HY IN JV LP MR SU
+  seed[18] UKWC beta VI-VII-III rings=AAAA stecker=BF CZ EK GP IX MR TY UV
+  seed[19] UKWB beta IV-VIII-III rings=AAAA stecker=BZ CD FU GK HY JO NV PS RX TW
+  seed[20] UKWC gamma VIII-IV-I rings=AAAA stecker=BC DJ EH GK LS NR OU VX
+  seed[21] UKWC gamma VIII-IV-I rings=AAAA stecker=BC DJ EH GK LS NR OU VX
+  seed[22] UKWB beta VII-V-VI rings=AAAA stecker=AP BJ CY DE GQ IS NZ OR UW
+  seed[23] UKWC gamma VIII-IV-III rings=AAAA stecker=AW BY CH DR EZ GJ IS KT NU VX
+  seed[24] UKWB beta VI-I-IV rings=AAAA stecker=AP BR FJ HU KT NY QS XZ
+  seed[25] UKWC gamma V-VIII-VII rings=AAAA stecker=AF CW DG EP HJ KR OU TV YZ
+  seed[26] UKWC gamma V-VIII-VII rings=AAAA stecker=AF CW DG EP HJ KR OU TV YZ
+  seed[27] UKWC beta II-III-IV rings=AAAA stecker=AH CR DT EX FS GZ JO LY NV UW
+  seed[28] UKWB beta IV-VIII-VI rings=AAAA stecker=BD FG HR IY JL NV PU ST
+  seed[29] UKWB beta I-VI-IV rings=AAAA stecker=BD CX EQ GT JM OR SW
+  seed[30] UKWC beta IV-III-VIII rings=AAAA stecker=BT CF DG HX IR JW KU MS OY
+  seed[31] UKWB beta II-V-III rings=AAAA stecker=AQ BP CE DU GZ IS KN MR TV
+  seed[32] UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW GZ IY KS NQ UX
+  seed[33] UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW GZ IY KS NQ UX
+  seed[34] UKWC gamma VI-V-VIII rings=AAAA stecker=AT BE CI DY JZ KM LN RX SW
+  seed[35] UKWC gamma I-II-IV rings=AAAA stecker=AI BZ CJ EX FT GL KS MN RV WY
+  seed[36] UKWB beta III-VII-II rings=AAAA stecker=AL CH EK JN MX QY TV UW
+  seed[37] UKWC gamma VI-VII-VIII rings=AAAA stecker=BK DX FS GJ MU NO TV YZ
+  seed[38] UKWB beta II-IV-V rings=AAAA stecker=AZ CD EW FU GI HR JV LN ST XY
+  seed[39] UKWB beta VIII-I-IV rings=AAAA stecker=AY BW CH DU EL GV PX RS
+  seed[40] UKWB beta V-VII-II rings=AAAA stecker=AP CI DK EW GR JX LY MQ SU TV
+  seed[41] UKWC beta VI-IV-VIII rings=AAAA stecker=AF BT DH EK GO IY JV LX MU RS
+  seed[42] UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  seed[43] UKWC beta VIII-IV-VII rings=AAAA stecker=AF BG EK IT JW MS NO PU QR VX
+  seed[44] UKWB beta VIII-VII-IV rings=AAAA stecker=AN CP DZ GL HM IJ OY RV SW TX
+  seed[45] UKWB gamma III-VIII-II rings=AAAA stecker=AB CR EK FY GI HN JX MS PT UV
+  seed[46] UKWC gamma I-II-VII rings=AAAA stecker=BX CI DV EU FG LN MR OT SW
+  seed[47] UKWC gamma II-VI-IV rings=AAAA stecker=BZ CW GR HL JK MO QT SV XY
+  seed[48] UKWB gamma VIII-III-IV rings=AAAA stecker=AR BO CK DQ FT GV HY IU JM SW
+  seed[49] UKWB gamma VIII-III-IV rings=AAAA stecker=AR BO CK DQ FT GV HY IU JM SW
+  seed[50] UKWB beta II-I-VIII rings=AAAA stecker=AV BU CH EF GW JZ KS LT NQ XY
+  seed[51] UKWB beta VIII-I-VI rings=AAAA stecker=AI BD EV GH JT NQ OR SW UX
+  seed[52] UKWB gamma III-I-V rings=AAAA stecker=AC BR HX JK LQ ST UV
+  seed[53] UKWB beta I-VII-VI rings=AAAA stecker=AM BK CP DE FJ GL IU RW YZ
+  seed[54] UKWB beta VIII-I-III rings=AAAA stecker=AQ BV CJ DR ET GM LS NP UZ
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/24 pop=64 blockB_greeks=0
+  gen-best  8/20 (40%) tmpl=head:FUNKUEBUNGFUNKUEBU@0 IC=0.0340 pos=PBOU | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL HY IS JU RV
+  all-time  8/20 tmpl=head:FUNKUEBUNGFUNKUEBU@0 pos=PBOU | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL HY IS JU RV
+Hybrid gen 2/24 pop=64 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=head:FUNKUEBUNGFUNKUEBU@0 IC=0.0333 pos=PBOU | UKWB beta VII-V-II rings=AAAA stecker=AW CD EL HY IS JU RV
+  all-time  9/20 tmpl=head:FUNKUEBUNGFUNKUEBU@0 pos=PBOU | UKWB beta VII-V-II rings=AAAA stecker=AW CD EL HY IS JU RV
+Hybrid gen 3/24 pop=64 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=head:FUNKUEBUNGFUNKUEBU@0 IC=0.0333 pos=PBOU | UKWB beta VII-V-II rings=AAAA stecker=AW CD EL HY IS JU RV
+  all-time  9/20 tmpl=head:FUNKUEBUNGFUNKUEBU@0 pos=PBOU | UKWB beta VII-V-II rings=AAAA stecker=AW CD EL HY IS JU RV
+Hybrid gen 4/24 pop=64 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=head:FUNKUEBUNGFUNKUEBU@0 IC=0.0333 pos=PBOU | UKWB beta VII-V-II rings=AAAA stecker=AW CD EL HY IS JU RV
+  all-time  9/20 tmpl=head:FUNKUEBUNGFUNKUEBU@0 pos=PBOU | UKWB beta VII-V-II rings=AAAA stecker=AW CD EL HY IS JU RV
+Hybrid gen 5/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@0 IC=0.0403 pos=GKRQ | UKWB beta II-V-III rings=AAAA stecker=BI CK FG JX MZ NQ RV TU WY
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@0 pos=GKRQ | UKWB beta II-V-III rings=AAAA stecker=BI CK FG JX MZ NQ RV TU WY
+Hybrid gen 6/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@0 IC=0.0403 pos=GKRQ | UKWB beta II-V-III rings=AAAA stecker=BI CK FG JX MZ NQ RV TU WY
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@0 pos=GKRQ | UKWB beta II-V-III rings=AAAA stecker=BI CK FG JX MZ NQ RV TU WY
+Hybrid gen 7/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@0 IC=0.0403 pos=GKRQ | UKWB beta II-V-III rings=AAAA stecker=BI CK FG JX MZ NQ RV TU WY
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@0 pos=GKRQ | UKWB beta II-V-III rings=AAAA stecker=BI CK FG JX MZ NQ RV TU WY
+Hybrid gen 8/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@0 IC=0.0403 pos=GKRQ | UKWB beta II-V-III rings=AAAA stecker=BI CK FG JX MZ NQ RV TU WY
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@0 pos=GKRQ | UKWB beta II-V-III rings=AAAA stecker=BI CK FG JX MZ NQ RV TU WY
+Hybrid gen 9/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@0 IC=0.0403 pos=GKRQ | UKWB beta II-V-III rings=AAAA stecker=BI CK FG JX MZ NQ RV TU WY
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@0 pos=GKRQ | UKWB beta II-V-III rings=AAAA stecker=BI CK FG JX MZ NQ RV TU WY
+Hybrid gen 10/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@0 IC=0.0403 pos=GKRQ | UKWB beta II-V-III rings=AAAA stecker=BI CK FG JX MZ NQ RV TU WY
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@0 pos=GKRQ | UKWB beta II-V-III rings=AAAA stecker=BI CK FG JX MZ NQ RV TU WY
+Hybrid gen 11/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@0 IC=0.0403 pos=GKRQ | UKWB beta II-V-III rings=AAAA stecker=BI CK FG JX MZ NQ RV TU WY
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@0 pos=GKRQ | UKWB beta II-V-III rings=AAAA stecker=BI CK FG JX MZ NQ RV TU WY
+Hybrid gen 12/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@0 IC=0.0403 pos=GKRQ | UKWB beta II-V-III rings=AAAA stecker=BI CK FG JX MZ NQ RV TU WY
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@0 pos=GKRQ | UKWB beta II-V-III rings=AAAA stecker=BI CK FG JX MZ NQ RV TU WY
+Hybrid gen 13/24 pop=64 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=head:FUNKUEBUNGFUNKUEBU@0 IC=0.0469 pos=XOMP | UKWC beta V-VIII-III rings=AAAA stecker=AM BY CW EP GZ HN JX LR OS QT
+  all-time  11/20 tmpl=head:FUNKUEBUNGFUNKUEBU@0 pos=XOMP | UKWC beta V-VIII-III rings=AAAA stecker=AM BY CW EP GZ HN JX LR OS QT
+Hybrid gen 14/24 pop=64 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=head:FUNKUEBUNGFUNKUEBU@0 IC=0.0469 pos=XOMP | UKWC beta V-VIII-III rings=AAAA stecker=AM BY CW EP GZ HN JX LR OS QT
+  all-time  11/20 tmpl=head:FUNKUEBUNGFUNKUEBU@0 pos=XOMP | UKWC beta V-VIII-III rings=AAAA stecker=AM BY CW EP GZ HN JX LR OS QT
+Hybrid gen 15/24 pop=64 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=head:FUNKUEBUNGFUNKUEBU@0 IC=0.0469 pos=XOMP | UKWC beta V-VIII-III rings=AAAA stecker=AM BY CW EP GZ HN JX LR OS QT
+  all-time  11/20 tmpl=head:FUNKUEBUNGFUNKUEBU@0 pos=XOMP | UKWC beta V-VIII-III rings=AAAA stecker=AM BY CW EP GZ HN JX LR OS QT
+Hybrid gen 16/24 pop=64 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=head:FUNKUEBUNGFUNKUEBU@0 IC=0.0469 pos=XOMP | UKWC beta V-VIII-III rings=AAAA stecker=AM BY CW EP GZ HN JX LR OS QT
+  all-time  11/20 tmpl=head:FUNKUEBUNGFUNKUEBU@0 pos=XOMP | UKWC beta V-VIII-III rings=AAAA stecker=AM BY CW EP GZ HN JX LR OS QT
+Hybrid gen 17/24 pop=64 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=head:FUNKUEBUNGFUNKUEBU@0 IC=0.0469 pos=XOMP | UKWC beta V-VIII-III rings=AAAA stecker=AM BY CW EP GZ HN JX LR OS QT
+  all-time  11/20 tmpl=head:FUNKUEBUNGFUNKUEBU@0 pos=XOMP | UKWC beta V-VIII-III rings=AAAA stecker=AM BY CW EP GZ HN JX LR OS QT
+Hybrid gen 18/24 pop=64 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=head:FUNKUEBUNGFUNKUEBU@0 IC=0.0469 pos=XOMP | UKWC beta V-VIII-III rings=AAAA stecker=AM BY CW EP GZ HN JX LR OS QT
+  all-time  11/20 tmpl=head:FUNKUEBUNGFUNKUEBU@0 pos=XOMP | UKWC beta V-VIII-III rings=AAAA stecker=AM BY CW EP GZ HN JX LR OS QT
+Hybrid gen 19/24 pop=64 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=head:FUNKUEBUNGFUNKUEBU@0 IC=0.0462 pos=XOMP | UKWC beta V-VIII-III rings=AAAA stecker=AM BY CV EP GZ HN JX LR OS QT
+  all-time  12/20 tmpl=head:FUNKUEBUNGFUNKUEBU@0 pos=XOMP | UKWC beta V-VIII-III rings=AAAA stecker=AM BY CV EP GZ HN JX LR OS QT
+Hybrid gen 20/24 pop=64 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=head:FUNKUEBUNGFUNKUEBU@0 IC=0.0462 pos=XOMP | UKWC beta V-VIII-III rings=AAAA stecker=AM BY CV EP GZ HN JX LR OS QT
+  all-time  12/20 tmpl=head:FUNKUEBUNGFUNKUEBU@0 pos=XOMP | UKWC beta V-VIII-III rings=AAAA stecker=AM BY CV EP GZ HN JX LR OS QT
+Hybrid gen 21/24 pop=64 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=head:FUNKUEBUNGFUNKUEBU@0 IC=0.0462 pos=XOMP | UKWC beta V-VIII-III rings=AAAA stecker=AM BY CV EP GZ HN JX LR OS QT
+  all-time  12/20 tmpl=head:FUNKUEBUNGFUNKUEBU@0 pos=XOMP | UKWC beta V-VIII-III rings=AAAA stecker=AM BY CV EP GZ HN JX LR OS QT
+Hybrid gen 22/24 pop=64 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=head:FUNKUEBUNGFUNKUEBU@0 IC=0.0462 pos=XOMP | UKWC beta V-VIII-III rings=AAAA stecker=AM BY CV EP GZ HN JX LR OS QT
+  all-time  12/20 tmpl=head:FUNKUEBUNGFUNKUEBU@0 pos=XOMP | UKWC beta V-VIII-III rings=AAAA stecker=AM BY CV EP GZ HN JX LR OS QT
+Hybrid gen 23/24 pop=64 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=head:FUNKUEBUNGFUNKUEBU@0 IC=0.0462 pos=XOMP | UKWC beta V-VIII-III rings=AAAA stecker=AM BY CV EP GZ HN JX LR OS QT
+  all-time  12/20 tmpl=head:FUNKUEBUNGFUNKUEBU@0 pos=XOMP | UKWC beta V-VIII-III rings=AAAA stecker=AM BY CV EP GZ HN JX LR OS QT
+Hybrid gen 24/24 pop=64 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=head:FUNKUEBUNGFUNKUEBU@0 IC=0.0462 pos=XOMP | UKWC beta V-VIII-III rings=AAAA stecker=AM BY CV EP GZ HN JX LR OS QT
+  all-time  12/20 tmpl=head:FUNKUEBUNGFUNKUEBU@0 pos=XOMP | UKWC beta V-VIII-III rings=AAAA stecker=AM BY CV EP GZ HN JX LR OS QT
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 20…20)
+Shell evolution: OFF freeRings=false WO=47 ringSeeds=3 subspace=potsdam-neighbourhood
+Seeded population[0..<55] from Welchman quarantine (55 candidate(s))
+  seed[0] UKWB gamma I-IV-VI rings=AAAA stecker=AM BY CV EX FU GT HN JQ
+  seed[1] UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL HY IS JU RV
+  seed[2] UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK GX HJ LR NP OT UZ VY
+  seed[3] UKWC beta IV-VIII-III rings=AAAA stecker=AV BP CR DN EL GI HU MX QY TW
+  seed[4] UKWC beta V-VIII-III rings=AAAA stecker=AI CW EP GZ HN LR MY OS QT VX
+  seed[5] UKWB gamma VII-IV-III rings=AAAA stecker=AP BH CF DR EI GZ JQ KS LT OX
+  seed[6] UKWB beta II-V-III rings=AAAA stecker=AJ BI CK EG LR MY NS PT UW
+  seed[7] UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  seed[8] UKWC gamma III-IV-II rings=AAAA stecker=AK BU DP EZ FR JY LV MX NW ST
+  seed[9] UKWB beta II-VII-V rings=AAAA stecker=BI CM FG JL NQ RS TU WY
+  seed[10] UKWB beta II-I-VII rings=AAAA stecker=AP BV CD GL HY IS JM KN RZ
+  seed[11] UKWB gamma I-VII-IV rings=AAAA stecker=AF CH DN GP IM JL KX OS RU
+  seed[12] UKWB beta IV-VII-II rings=AAAA stecker=AY BO CI DJ EK GP HS RU TV
+  seed[13] UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  seed[14] UKWB beta VI-V-VII rings=AAAA stecker=AH BP CD JQ LT NV OU SZ WY
+  seed[15] UKWC beta VIII-V-III rings=AAAA stecker=AO BJ CR DX EI FG HN KU LT PY
+  seed[16] UKWB beta VII-VIII-II rings=AAAA stecker=ER GI HY JW KS NQ OU TX
+  seed[17] UKWB gamma I-VII-VI rings=AAAA stecker=AB CK DF GW HY IN JV LP MR SU
+  seed[18] UKWC beta VI-VII-III rings=AAAA stecker=BF CZ EK GP IX MR TY UV
+  seed[19] UKWB beta IV-VIII-III rings=AAAA stecker=BZ CD FU GK HY JO NV PS RX TW
+  seed[20] UKWC gamma VIII-IV-I rings=AAAA stecker=BC DJ EH GK LS NR OU VX
+  seed[21] UKWC gamma VIII-IV-I rings=AAAA stecker=BC DJ EH GK LS NR OU VX
+  seed[22] UKWB beta VII-V-VI rings=AAAA stecker=AP BJ CY DE GQ IS NZ OR UW
+  seed[23] UKWC gamma VIII-IV-III rings=AAAA stecker=AW BY CH DR EZ GJ IS KT NU VX
+  seed[24] UKWB beta VI-I-IV rings=AAAA stecker=AP BR FJ HU KT NY QS XZ
+  seed[25] UKWC gamma V-VIII-VII rings=AAAA stecker=AF CW DG EP HJ KR OU TV YZ
+  seed[26] UKWC gamma V-VIII-VII rings=AAAA stecker=AF CW DG EP HJ KR OU TV YZ
+  seed[27] UKWC beta II-III-IV rings=AAAA stecker=AH CR DT EX FS GZ JO LY NV UW
+  seed[28] UKWB beta IV-VIII-VI rings=AAAA stecker=BD FG HR IY JL NV PU ST
+  seed[29] UKWB beta I-VI-IV rings=AAAA stecker=BD CX EQ GT JM OR SW
+  seed[30] UKWC beta IV-III-VIII rings=AAAA stecker=BT CF DG HX IR JW KU MS OY
+  seed[31] UKWB beta II-V-III rings=AAAA stecker=AQ BP CE DU GZ IS KN MR TV
+  seed[32] UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW GZ IY KS NQ UX
+  seed[33] UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW GZ IY KS NQ UX
+  seed[34] UKWC gamma VI-V-VIII rings=AAAA stecker=AT BE CI DY JZ KM LN RX SW
+  seed[35] UKWC gamma I-II-IV rings=AAAA stecker=AI BZ CJ EX FT GL KS MN RV WY
+  seed[36] UKWB beta III-VII-II rings=AAAA stecker=AL CH EK JN MX QY TV UW
+  seed[37] UKWC gamma VI-VII-VIII rings=AAAA stecker=BK DX FS GJ MU NO TV YZ
+  seed[38] UKWB beta II-IV-V rings=AAAA stecker=AZ CD EW FU GI HR JV LN ST XY
+  seed[39] UKWB beta VIII-I-IV rings=AAAA stecker=AY BW CH DU EL GV PX RS
+  seed[40] UKWB beta V-VII-II rings=AAAA stecker=AP CI DK EW GR JX LY MQ SU TV
+  seed[41] UKWC beta VI-IV-VIII rings=AAAA stecker=AF BT DH EK GO IY JV LX MU RS
+  seed[42] UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  seed[43] UKWC beta VIII-IV-VII rings=AAAA stecker=AF BG EK IT JW MS NO PU QR VX
+  seed[44] UKWB beta VIII-VII-IV rings=AAAA stecker=AN CP DZ GL HM IJ OY RV SW TX
+  seed[45] UKWB gamma III-VIII-II rings=AAAA stecker=AB CR EK FY GI HN JX MS PT UV
+  seed[46] UKWC gamma I-II-VII rings=AAAA stecker=BX CI DV EU FG LN MR OT SW
+  seed[47] UKWC gamma II-VI-IV rings=AAAA stecker=BZ CW GR HL JK MO QT SV XY
+  seed[48] UKWB gamma VIII-III-IV rings=AAAA stecker=AR BO CK DQ FT GV HY IU JM SW
+  seed[49] UKWB gamma VIII-III-IV rings=AAAA stecker=AR BO CK DQ FT GV HY IU JM SW
+  seed[50] UKWB beta II-I-VIII rings=AAAA stecker=AV BU CH EF GW JZ KS LT NQ XY
+  seed[51] UKWB beta VIII-I-VI rings=AAAA stecker=AI BD EV GH JT NQ OR SW UX
+  seed[52] UKWB gamma III-I-V rings=AAAA stecker=AC BR HX JK LQ ST UV
+  seed[53] UKWB beta I-VII-VI rings=AAAA stecker=AM BK CP DE FJ GL IU RW YZ
+  seed[54] UKWB beta VIII-I-III rings=AAAA stecker=AQ BV CJ DR ET GM LS NP UZ
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/24 pop=64 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=head:FUNKUEBUNGFUNKUEBU@1 IC=0.0368 pos=IJCI | UKWB beta II-V-III rings=AAAA stecker=AQ BP CE DU GZ IS KN MR TV
+  all-time  9/20 tmpl=head:FUNKUEBUNGFUNKUEBU@1 pos=IJCI | UKWB beta II-V-III rings=AAAA stecker=AQ BP CE DU GZ IS KN MR TV
+Hybrid gen 2/24 pop=64 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=head:FUNKUEBUNGFUNKUEBU@1 IC=0.0368 pos=IJCI | UKWB beta II-V-III rings=AAAA stecker=AQ BP CE DU GZ IS KN MR TV
+  all-time  9/20 tmpl=head:FUNKUEBUNGFUNKUEBU@1 pos=IJCI | UKWB beta II-V-III rings=AAAA stecker=AQ BP CE DU GZ IS KN MR TV
+Hybrid gen 3/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@1 IC=0.0383 pos=RCLE | UKWC beta V-VIII-III rings=AAAA stecker=AI CW DF EP GZ HN LR OS QT
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@1 pos=RCLE | UKWC beta V-VIII-III rings=AAAA stecker=AI CW DF EP GZ HN LR OS QT
+Hybrid gen 4/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@1 IC=0.0383 pos=RCLE | UKWC beta V-VIII-III rings=AAAA stecker=AI CW DF EP GZ HN LR OS QT
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@1 pos=RCLE | UKWC beta V-VIII-III rings=AAAA stecker=AI CW DF EP GZ HN LR OS QT
+Hybrid gen 5/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@1 IC=0.0383 pos=RCLE | UKWC beta V-VIII-III rings=AAAA stecker=AI CW DF EP GZ HN LR OS QT
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@1 pos=RCLE | UKWC beta V-VIII-III rings=AAAA stecker=AI CW DF EP GZ HN LR OS QT
+Hybrid gen 6/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@1 IC=0.0383 pos=RCLE | UKWC beta V-VIII-III rings=AAAA stecker=AI CW DF EP GZ HN LR OS QT
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@1 pos=RCLE | UKWC beta V-VIII-III rings=AAAA stecker=AI CW DF EP GZ HN LR OS QT
+Hybrid gen 7/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@1 IC=0.0383 pos=RCLE | UKWC beta V-VIII-III rings=AAAA stecker=AI CW DF EP GZ HN LR OS QT
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@1 pos=RCLE | UKWC beta V-VIII-III rings=AAAA stecker=AI CW DF EP GZ HN LR OS QT
+Hybrid gen 8/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@1 IC=0.0383 pos=RCLE | UKWC beta V-VIII-III rings=AAAA stecker=AI CW DF EP GZ HN LR OS QT
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@1 pos=RCLE | UKWC beta V-VIII-III rings=AAAA stecker=AI CW DF EP GZ HN LR OS QT
+Hybrid gen 9/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@1 IC=0.0383 pos=RCLE | UKWC beta V-VIII-III rings=AAAA stecker=AI CW DF EP GZ HN LR OS QT
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@1 pos=RCLE | UKWC beta V-VIII-III rings=AAAA stecker=AI CW DF EP GZ HN LR OS QT
+Hybrid gen 10/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@1 IC=0.0383 pos=RCLE | UKWC beta V-VIII-III rings=AAAA stecker=AI CW DF EP GZ HN LR OS QT
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@1 pos=RCLE | UKWC beta V-VIII-III rings=AAAA stecker=AI CW DF EP GZ HN LR OS QT
+Hybrid gen 11/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@1 IC=0.0383 pos=RCLE | UKWC beta V-VIII-III rings=AAAA stecker=AI CW DF EP GZ HN LR OS QT
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@1 pos=RCLE | UKWC beta V-VIII-III rings=AAAA stecker=AI CW DF EP GZ HN LR OS QT
+Hybrid gen 12/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@1 IC=0.0383 pos=RCLE | UKWC beta V-VIII-III rings=AAAA stecker=AI CW DF EP GZ HN LR OS QT
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@1 pos=RCLE | UKWC beta V-VIII-III rings=AAAA stecker=AI CW DF EP GZ HN LR OS QT
+Hybrid gen 13/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@1 IC=0.0383 pos=RCLE | UKWC beta V-VIII-III rings=AAAA stecker=AI CW DF EP GZ HN LR OS QT
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@1 pos=RCLE | UKWC beta V-VIII-III rings=AAAA stecker=AI CW DF EP GZ HN LR OS QT
+Hybrid gen 14/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@1 IC=0.0383 pos=RCLE | UKWC beta V-VIII-III rings=AAAA stecker=AI CW DF EP GZ HN LR OS QT
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@1 pos=RCLE | UKWC beta V-VIII-III rings=AAAA stecker=AI CW DF EP GZ HN LR OS QT
+Hybrid gen 15/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@1 IC=0.0383 pos=RCLE | UKWC beta V-VIII-III rings=AAAA stecker=AI CW DF EP GZ HN LR OS QT
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@1 pos=RCLE | UKWC beta V-VIII-III rings=AAAA stecker=AI CW DF EP GZ HN LR OS QT
+Hybrid gen 16/24 pop=64 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=head:FUNKUEBUNGFUNKUEBU@1 IC=0.0423 pos=EHRO | UKWB beta III-VI-VIII rings=AAAA stecker=AR BF CM EK GX HJ LT NP UZ VY
+  all-time  11/20 tmpl=head:FUNKUEBUNGFUNKUEBU@1 pos=EHRO | UKWB beta III-VI-VIII rings=AAAA stecker=AR BF CM EK GX HJ LT NP UZ VY
+Hybrid gen 17/24 pop=64 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=head:FUNKUEBUNGFUNKUEBU@1 IC=0.0423 pos=EHRO | UKWB beta III-VI-VIII rings=AAAA stecker=AR BF CM EK GX HJ LT NP UZ VY
+  all-time  11/20 tmpl=head:FUNKUEBUNGFUNKUEBU@1 pos=EHRO | UKWB beta III-VI-VIII rings=AAAA stecker=AR BF CM EK GX HJ LT NP UZ VY
+Hybrid gen 18/24 pop=64 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=head:FUNKUEBUNGFUNKUEBU@1 IC=0.0423 pos=EHRO | UKWB beta III-VI-VIII rings=AAAA stecker=AR BF CM EK GX HJ LT NP UZ VY
+  all-time  11/20 tmpl=head:FUNKUEBUNGFUNKUEBU@1 pos=EHRO | UKWB beta III-VI-VIII rings=AAAA stecker=AR BF CM EK GX HJ LT NP UZ VY
+Hybrid gen 19/24 pop=64 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=head:FUNKUEBUNGFUNKUEBU@1 IC=0.0423 pos=EHRO | UKWB beta III-VI-VIII rings=AAAA stecker=AR BF CM EK GX HJ LT NP UZ VY
+  all-time  11/20 tmpl=head:FUNKUEBUNGFUNKUEBU@1 pos=EHRO | UKWB beta III-VI-VIII rings=AAAA stecker=AR BF CM EK GX HJ LT NP UZ VY
+Hybrid gen 20/24 pop=64 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=head:FUNKUEBUNGFUNKUEBU@1 IC=0.0423 pos=EHRO | UKWB beta III-VI-VIII rings=AAAA stecker=AR BF CM EK GX HJ LT NP UZ VY
+  all-time  11/20 tmpl=head:FUNKUEBUNGFUNKUEBU@1 pos=EHRO | UKWB beta III-VI-VIII rings=AAAA stecker=AR BF CM EK GX HJ LT NP UZ VY
+Hybrid gen 21/24 pop=64 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=head:FUNKUEBUNGFUNKUEBU@1 IC=0.0423 pos=EHRO | UKWB beta III-VI-VIII rings=AAAA stecker=AR BF CM EK GX HJ LT NP UZ VY
+  all-time  11/20 tmpl=head:FUNKUEBUNGFUNKUEBU@1 pos=EHRO | UKWB beta III-VI-VIII rings=AAAA stecker=AR BF CM EK GX HJ LT NP UZ VY
+Hybrid gen 22/24 pop=64 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=head:FUNKUEBUNGFUNKUEBU@1 IC=0.0423 pos=EHRO | UKWB beta III-VI-VIII rings=AAAA stecker=AR BF CM EK GX HJ LT NP UZ VY
+  all-time  11/20 tmpl=head:FUNKUEBUNGFUNKUEBU@1 pos=EHRO | UKWB beta III-VI-VIII rings=AAAA stecker=AR BF CM EK GX HJ LT NP UZ VY
+Hybrid gen 23/24 pop=64 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=head:FUNKUEBUNGFUNKUEBU@1 IC=0.0423 pos=EHRO | UKWB beta III-VI-VIII rings=AAAA stecker=AR BF CM EK GX HJ LT NP UZ VY
+  all-time  11/20 tmpl=head:FUNKUEBUNGFUNKUEBU@1 pos=EHRO | UKWB beta III-VI-VIII rings=AAAA stecker=AR BF CM EK GX HJ LT NP UZ VY
+Hybrid gen 24/24 pop=64 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=head:FUNKUEBUNGFUNKUEBU@1 IC=0.0423 pos=EHRO | UKWB beta III-VI-VIII rings=AAAA stecker=AR BF CM EK GX HJ LT NP UZ VY
+  all-time  11/20 tmpl=head:FUNKUEBUNGFUNKUEBU@1 pos=EHRO | UKWB beta III-VI-VIII rings=AAAA stecker=AR BF CM EK GX HJ LT NP UZ VY
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 20…20)
+Shell evolution: OFF freeRings=false WO=47 ringSeeds=3 subspace=potsdam-neighbourhood
+Seeded population[0..<55] from Welchman quarantine (55 candidate(s))
+  seed[0] UKWB gamma I-IV-VI rings=AAAA stecker=AM BY CV EX FU GT HN JQ
+  seed[1] UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL HY IS JU RV
+  seed[2] UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK GX HJ LR NP OT UZ VY
+  seed[3] UKWC beta IV-VIII-III rings=AAAA stecker=AV BP CR DN EL GI HU MX QY TW
+  seed[4] UKWC beta V-VIII-III rings=AAAA stecker=AI CW EP GZ HN LR MY OS QT VX
+  seed[5] UKWB gamma VII-IV-III rings=AAAA stecker=AP BH CF DR EI GZ JQ KS LT OX
+  seed[6] UKWB beta II-V-III rings=AAAA stecker=AJ BI CK EG LR MY NS PT UW
+  seed[7] UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  seed[8] UKWC gamma III-IV-II rings=AAAA stecker=AK BU DP EZ FR JY LV MX NW ST
+  seed[9] UKWB beta II-VII-V rings=AAAA stecker=BI CM FG JL NQ RS TU WY
+  seed[10] UKWB beta II-I-VII rings=AAAA stecker=AP BV CD GL HY IS JM KN RZ
+  seed[11] UKWB gamma I-VII-IV rings=AAAA stecker=AF CH DN GP IM JL KX OS RU
+  seed[12] UKWB beta IV-VII-II rings=AAAA stecker=AY BO CI DJ EK GP HS RU TV
+  seed[13] UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  seed[14] UKWB beta VI-V-VII rings=AAAA stecker=AH BP CD JQ LT NV OU SZ WY
+  seed[15] UKWC beta VIII-V-III rings=AAAA stecker=AO BJ CR DX EI FG HN KU LT PY
+  seed[16] UKWB beta VII-VIII-II rings=AAAA stecker=ER GI HY JW KS NQ OU TX
+  seed[17] UKWB gamma I-VII-VI rings=AAAA stecker=AB CK DF GW HY IN JV LP MR SU
+  seed[18] UKWC beta VI-VII-III rings=AAAA stecker=BF CZ EK GP IX MR TY UV
+  seed[19] UKWB beta IV-VIII-III rings=AAAA stecker=BZ CD FU GK HY JO NV PS RX TW
+  seed[20] UKWC gamma VIII-IV-I rings=AAAA stecker=BC DJ EH GK LS NR OU VX
+  seed[21] UKWC gamma VIII-IV-I rings=AAAA stecker=BC DJ EH GK LS NR OU VX
+  seed[22] UKWB beta VII-V-VI rings=AAAA stecker=AP BJ CY DE GQ IS NZ OR UW
+  seed[23] UKWC gamma VIII-IV-III rings=AAAA stecker=AW BY CH DR EZ GJ IS KT NU VX
+  seed[24] UKWB beta VI-I-IV rings=AAAA stecker=AP BR FJ HU KT NY QS XZ
+  seed[25] UKWC gamma V-VIII-VII rings=AAAA stecker=AF CW DG EP HJ KR OU TV YZ
+  seed[26] UKWC gamma V-VIII-VII rings=AAAA stecker=AF CW DG EP HJ KR OU TV YZ
+  seed[27] UKWC beta II-III-IV rings=AAAA stecker=AH CR DT EX FS GZ JO LY NV UW
+  seed[28] UKWB beta IV-VIII-VI rings=AAAA stecker=BD FG HR IY JL NV PU ST
+  seed[29] UKWB beta I-VI-IV rings=AAAA stecker=BD CX EQ GT JM OR SW
+  seed[30] UKWC beta IV-III-VIII rings=AAAA stecker=BT CF DG HX IR JW KU MS OY
+  seed[31] UKWB beta II-V-III rings=AAAA stecker=AQ BP CE DU GZ IS KN MR TV
+  seed[32] UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW GZ IY KS NQ UX
+  seed[33] UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW GZ IY KS NQ UX
+  seed[34] UKWC gamma VI-V-VIII rings=AAAA stecker=AT BE CI DY JZ KM LN RX SW
+  seed[35] UKWC gamma I-II-IV rings=AAAA stecker=AI BZ CJ EX FT GL KS MN RV WY
+  seed[36] UKWB beta III-VII-II rings=AAAA stecker=AL CH EK JN MX QY TV UW
+  seed[37] UKWC gamma VI-VII-VIII rings=AAAA stecker=BK DX FS GJ MU NO TV YZ
+  seed[38] UKWB beta II-IV-V rings=AAAA stecker=AZ CD EW FU GI HR JV LN ST XY
+  seed[39] UKWB beta VIII-I-IV rings=AAAA stecker=AY BW CH DU EL GV PX RS
+  seed[40] UKWB beta V-VII-II rings=AAAA stecker=AP CI DK EW GR JX LY MQ SU TV
+  seed[41] UKWC beta VI-IV-VIII rings=AAAA stecker=AF BT DH EK GO IY JV LX MU RS
+  seed[42] UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  seed[43] UKWC beta VIII-IV-VII rings=AAAA stecker=AF BG EK IT JW MS NO PU QR VX
+  seed[44] UKWB beta VIII-VII-IV rings=AAAA stecker=AN CP DZ GL HM IJ OY RV SW TX
+  seed[45] UKWB gamma III-VIII-II rings=AAAA stecker=AB CR EK FY GI HN JX MS PT UV
+  seed[46] UKWC gamma I-II-VII rings=AAAA stecker=BX CI DV EU FG LN MR OT SW
+  seed[47] UKWC gamma II-VI-IV rings=AAAA stecker=BZ CW GR HL JK MO QT SV XY
+  seed[48] UKWB gamma VIII-III-IV rings=AAAA stecker=AR BO CK DQ FT GV HY IU JM SW
+  seed[49] UKWB gamma VIII-III-IV rings=AAAA stecker=AR BO CK DQ FT GV HY IU JM SW
+  seed[50] UKWB beta II-I-VIII rings=AAAA stecker=AV BU CH EF GW JZ KS LT NQ XY
+  seed[51] UKWB beta VIII-I-VI rings=AAAA stecker=AI BD EV GH JT NQ OR SW UX
+  seed[52] UKWB gamma III-I-V rings=AAAA stecker=AC BR HX JK LQ ST UV
+  seed[53] UKWB beta I-VII-VI rings=AAAA stecker=AM BK CP DE FJ GL IU RW YZ
+  seed[54] UKWB beta VIII-I-III rings=AAAA stecker=AQ BV CJ DR ET GM LS NP UZ
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@2 IC=0.0548 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL HY IS JU RV
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@2 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL HY IS JU RV
+Hybrid gen 2/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@2 IC=0.0548 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL HY IS JU RV
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@2 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL HY IS JU RV
+Hybrid gen 3/24 pop=64 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=head:FUNKUEBUNGFUNKUEBU@2 IC=0.0532 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU
+  all-time  11/20 tmpl=head:FUNKUEBUNGFUNKUEBU@2 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU
+Hybrid gen 4/24 pop=64 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=head:FUNKUEBUNGFUNKUEBU@2 IC=0.0532 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU
+  all-time  11/20 tmpl=head:FUNKUEBUNGFUNKUEBU@2 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU
+Hybrid gen 5/24 pop=64 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=head:FUNKUEBUNGFUNKUEBU@2 IC=0.0532 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU
+  all-time  11/20 tmpl=head:FUNKUEBUNGFUNKUEBU@2 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU
+Hybrid gen 6/24 pop=64 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=head:FUNKUEBUNGFUNKUEBU@2 IC=0.0524 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+  all-time  12/20 tmpl=head:FUNKUEBUNGFUNKUEBU@2 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+Hybrid gen 7/24 pop=64 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=head:FUNKUEBUNGFUNKUEBU@2 IC=0.0524 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+  all-time  12/20 tmpl=head:FUNKUEBUNGFUNKUEBU@2 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+Hybrid gen 8/24 pop=64 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=head:FUNKUEBUNGFUNKUEBU@2 IC=0.0524 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+  all-time  12/20 tmpl=head:FUNKUEBUNGFUNKUEBU@2 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+Hybrid gen 9/24 pop=64 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=head:FUNKUEBUNGFUNKUEBU@2 IC=0.0524 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+  all-time  12/20 tmpl=head:FUNKUEBUNGFUNKUEBU@2 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+Hybrid gen 10/24 pop=64 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=head:FUNKUEBUNGFUNKUEBU@2 IC=0.0524 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+  all-time  12/20 tmpl=head:FUNKUEBUNGFUNKUEBU@2 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+Hybrid gen 11/24 pop=64 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=head:FUNKUEBUNGFUNKUEBU@2 IC=0.0524 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+  all-time  12/20 tmpl=head:FUNKUEBUNGFUNKUEBU@2 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+Hybrid gen 12/24 pop=64 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=head:FUNKUEBUNGFUNKUEBU@2 IC=0.0524 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+  all-time  12/20 tmpl=head:FUNKUEBUNGFUNKUEBU@2 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+Hybrid gen 13/24 pop=64 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=head:FUNKUEBUNGFUNKUEBU@2 IC=0.0524 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+  all-time  12/20 tmpl=head:FUNKUEBUNGFUNKUEBU@2 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+Hybrid gen 14/24 pop=64 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=head:FUNKUEBUNGFUNKUEBU@2 IC=0.0524 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+  all-time  12/20 tmpl=head:FUNKUEBUNGFUNKUEBU@2 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+Hybrid gen 15/24 pop=64 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=head:FUNKUEBUNGFUNKUEBU@2 IC=0.0524 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+  all-time  12/20 tmpl=head:FUNKUEBUNGFUNKUEBU@2 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+Hybrid gen 16/24 pop=64 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=head:FUNKUEBUNGFUNKUEBU@2 IC=0.0524 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+  all-time  12/20 tmpl=head:FUNKUEBUNGFUNKUEBU@2 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+Hybrid gen 17/24 pop=64 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=head:FUNKUEBUNGFUNKUEBU@2 IC=0.0524 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+  all-time  12/20 tmpl=head:FUNKUEBUNGFUNKUEBU@2 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+Hybrid gen 18/24 pop=64 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=head:FUNKUEBUNGFUNKUEBU@2 IC=0.0524 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+  all-time  12/20 tmpl=head:FUNKUEBUNGFUNKUEBU@2 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+Hybrid gen 19/24 pop=64 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=head:FUNKUEBUNGFUNKUEBU@2 IC=0.0524 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+  all-time  12/20 tmpl=head:FUNKUEBUNGFUNKUEBU@2 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+Hybrid gen 20/24 pop=64 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=head:FUNKUEBUNGFUNKUEBU@2 IC=0.0524 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+  all-time  12/20 tmpl=head:FUNKUEBUNGFUNKUEBU@2 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+Hybrid gen 21/24 pop=64 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=head:FUNKUEBUNGFUNKUEBU@2 IC=0.0524 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+  all-time  12/20 tmpl=head:FUNKUEBUNGFUNKUEBU@2 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+Hybrid gen 22/24 pop=64 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=head:FUNKUEBUNGFUNKUEBU@2 IC=0.0524 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+  all-time  12/20 tmpl=head:FUNKUEBUNGFUNKUEBU@2 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+Hybrid gen 23/24 pop=64 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=head:FUNKUEBUNGFUNKUEBU@2 IC=0.0524 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+  all-time  12/20 tmpl=head:FUNKUEBUNGFUNKUEBU@2 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+Hybrid gen 24/24 pop=64 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=head:FUNKUEBUNGFUNKUEBU@2 IC=0.0524 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+  all-time  12/20 tmpl=head:FUNKUEBUNGFUNKUEBU@2 pos=NDGY | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 20…20)
+Shell evolution: OFF freeRings=false WO=47 ringSeeds=3 subspace=potsdam-neighbourhood
+Seeded population[0..<55] from Welchman quarantine (55 candidate(s))
+  seed[0] UKWB gamma I-IV-VI rings=AAAA stecker=AM BY CV EX FU GT HN JQ
+  seed[1] UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL HY IS JU RV
+  seed[2] UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK GX HJ LR NP OT UZ VY
+  seed[3] UKWC beta IV-VIII-III rings=AAAA stecker=AV BP CR DN EL GI HU MX QY TW
+  seed[4] UKWC beta V-VIII-III rings=AAAA stecker=AI CW EP GZ HN LR MY OS QT VX
+  seed[5] UKWB gamma VII-IV-III rings=AAAA stecker=AP BH CF DR EI GZ JQ KS LT OX
+  seed[6] UKWB beta II-V-III rings=AAAA stecker=AJ BI CK EG LR MY NS PT UW
+  seed[7] UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  seed[8] UKWC gamma III-IV-II rings=AAAA stecker=AK BU DP EZ FR JY LV MX NW ST
+  seed[9] UKWB beta II-VII-V rings=AAAA stecker=BI CM FG JL NQ RS TU WY
+  seed[10] UKWB beta II-I-VII rings=AAAA stecker=AP BV CD GL HY IS JM KN RZ
+  seed[11] UKWB gamma I-VII-IV rings=AAAA stecker=AF CH DN GP IM JL KX OS RU
+  seed[12] UKWB beta IV-VII-II rings=AAAA stecker=AY BO CI DJ EK GP HS RU TV
+  seed[13] UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  seed[14] UKWB beta VI-V-VII rings=AAAA stecker=AH BP CD JQ LT NV OU SZ WY
+  seed[15] UKWC beta VIII-V-III rings=AAAA stecker=AO BJ CR DX EI FG HN KU LT PY
+  seed[16] UKWB beta VII-VIII-II rings=AAAA stecker=ER GI HY JW KS NQ OU TX
+  seed[17] UKWB gamma I-VII-VI rings=AAAA stecker=AB CK DF GW HY IN JV LP MR SU
+  seed[18] UKWC beta VI-VII-III rings=AAAA stecker=BF CZ EK GP IX MR TY UV
+  seed[19] UKWB beta IV-VIII-III rings=AAAA stecker=BZ CD FU GK HY JO NV PS RX TW
+  seed[20] UKWC gamma VIII-IV-I rings=AAAA stecker=BC DJ EH GK LS NR OU VX
+  seed[21] UKWC gamma VIII-IV-I rings=AAAA stecker=BC DJ EH GK LS NR OU VX
+  seed[22] UKWB beta VII-V-VI rings=AAAA stecker=AP BJ CY DE GQ IS NZ OR UW
+  seed[23] UKWC gamma VIII-IV-III rings=AAAA stecker=AW BY CH DR EZ GJ IS KT NU VX
+  seed[24] UKWB beta VI-I-IV rings=AAAA stecker=AP BR FJ HU KT NY QS XZ
+  seed[25] UKWC gamma V-VIII-VII rings=AAAA stecker=AF CW DG EP HJ KR OU TV YZ
+  seed[26] UKWC gamma V-VIII-VII rings=AAAA stecker=AF CW DG EP HJ KR OU TV YZ
+  seed[27] UKWC beta II-III-IV rings=AAAA stecker=AH CR DT EX FS GZ JO LY NV UW
+  seed[28] UKWB beta IV-VIII-VI rings=AAAA stecker=BD FG HR IY JL NV PU ST
+  seed[29] UKWB beta I-VI-IV rings=AAAA stecker=BD CX EQ GT JM OR SW
+  seed[30] UKWC beta IV-III-VIII rings=AAAA stecker=BT CF DG HX IR JW KU MS OY
+  seed[31] UKWB beta II-V-III rings=AAAA stecker=AQ BP CE DU GZ IS KN MR TV
+  seed[32] UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW GZ IY KS NQ UX
+  seed[33] UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW GZ IY KS NQ UX
+  seed[34] UKWC gamma VI-V-VIII rings=AAAA stecker=AT BE CI DY JZ KM LN RX SW
+  seed[35] UKWC gamma I-II-IV rings=AAAA stecker=AI BZ CJ EX FT GL KS MN RV WY
+  seed[36] UKWB beta III-VII-II rings=AAAA stecker=AL CH EK JN MX QY TV UW
+  seed[37] UKWC gamma VI-VII-VIII rings=AAAA stecker=BK DX FS GJ MU NO TV YZ
+  seed[38] UKWB beta II-IV-V rings=AAAA stecker=AZ CD EW FU GI HR JV LN ST XY
+  seed[39] UKWB beta VIII-I-IV rings=AAAA stecker=AY BW CH DU EL GV PX RS
+  seed[40] UKWB beta V-VII-II rings=AAAA stecker=AP CI DK EW GR JX LY MQ SU TV
+  seed[41] UKWC beta VI-IV-VIII rings=AAAA stecker=AF BT DH EK GO IY JV LX MU RS
+  seed[42] UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  seed[43] UKWC beta VIII-IV-VII rings=AAAA stecker=AF BG EK IT JW MS NO PU QR VX
+  seed[44] UKWB beta VIII-VII-IV rings=AAAA stecker=AN CP DZ GL HM IJ OY RV SW TX
+  seed[45] UKWB gamma III-VIII-II rings=AAAA stecker=AB CR EK FY GI HN JX MS PT UV
+  seed[46] UKWC gamma I-II-VII rings=AAAA stecker=BX CI DV EU FG LN MR OT SW
+  seed[47] UKWC gamma II-VI-IV rings=AAAA stecker=BZ CW GR HL JK MO QT SV XY
+  seed[48] UKWB gamma VIII-III-IV rings=AAAA stecker=AR BO CK DQ FT GV HY IU JM SW
+  seed[49] UKWB gamma VIII-III-IV rings=AAAA stecker=AR BO CK DQ FT GV HY IU JM SW
+  seed[50] UKWB beta II-I-VIII rings=AAAA stecker=AV BU CH EF GW JZ KS LT NQ XY
+  seed[51] UKWB beta VIII-I-VI rings=AAAA stecker=AI BD EV GH JT NQ OR SW UX
+  seed[52] UKWB gamma III-I-V rings=AAAA stecker=AC BR HX JK LQ ST UV
+  seed[53] UKWB beta I-VII-VI rings=AAAA stecker=AM BK CP DE FJ GL IU RW YZ
+  seed[54] UKWB beta VIII-I-III rings=AAAA stecker=AQ BV CJ DR ET GM LS NP UZ
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@3 IC=0.0462 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@3 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+Hybrid gen 2/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@3 IC=0.0462 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@3 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+Hybrid gen 3/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@3 IC=0.0462 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@3 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+Hybrid gen 4/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@3 IC=0.0462 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@3 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+Hybrid gen 5/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@3 IC=0.0462 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@3 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+Hybrid gen 6/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@3 IC=0.0462 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@3 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+Hybrid gen 7/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@3 IC=0.0462 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@3 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+Hybrid gen 8/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@3 IC=0.0462 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@3 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+Hybrid gen 9/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@3 IC=0.0462 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@3 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+Hybrid gen 10/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@3 IC=0.0462 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@3 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+Hybrid gen 11/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@3 IC=0.0462 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@3 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+Hybrid gen 12/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@3 IC=0.0462 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@3 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+Hybrid gen 13/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@3 IC=0.0462 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@3 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+Hybrid gen 14/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@3 IC=0.0462 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@3 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+Hybrid gen 15/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@3 IC=0.0462 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@3 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+Hybrid gen 16/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@3 IC=0.0462 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@3 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+Hybrid gen 17/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@3 IC=0.0462 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@3 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+Hybrid gen 18/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@3 IC=0.0462 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@3 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+Hybrid gen 19/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@3 IC=0.0462 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@3 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+Hybrid gen 20/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@3 IC=0.0462 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@3 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+Hybrid gen 21/24 pop=64 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=head:FUNKUEBUNGFUNKUEBU@3 IC=0.0462 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+  all-time  10/20 tmpl=head:FUNKUEBUNGFUNKUEBU@3 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ DN EO FG IJ PU SY TW
+Hybrid gen 22/24 pop=64 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=head:FUNKUEBUNGFUNKUEBU@3 IC=0.0446 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ CL DN EO FG IJ PU SY WX
+  all-time  11/20 tmpl=head:FUNKUEBUNGFUNKUEBU@3 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ CL DN EO FG IJ PU SY WX
+Hybrid gen 23/24 pop=64 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=head:FUNKUEBUNGFUNKUEBU@3 IC=0.0446 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ CL DN EO FG IJ PU SY WX
+  all-time  11/20 tmpl=head:FUNKUEBUNGFUNKUEBU@3 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ CL DN EO FG IJ PU SY WX
+Hybrid gen 24/24 pop=64 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=head:FUNKUEBUNGFUNKUEBU@3 IC=0.0446 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ CL DN EO FG IJ PU SY WX
+  all-time  11/20 tmpl=head:FUNKUEBUNGFUNKUEBU@3 pos=DFYR | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ CL DN EO FG IJ PU SY WX

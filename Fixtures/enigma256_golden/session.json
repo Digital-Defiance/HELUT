@@ -1,0 +1,37 @@
+{
+  "ciphertext_hex" : "fbba4c5554206db14ad3c46132aa03cf81c505bb319420b365afbfecff6d737472b8474c",
+  "core" : "enigma_256_core",
+  "ikm_hex" : "68656c75742d656e69676d613235362d676f6c64656e2d696b6d2d763121212121",
+  "length" : 36,
+  "message" : {
+    "lfsr_seed_hex" : "0xb5b4911457d83ffb",
+    "positions" : [
+      250,
+      70,
+      87,
+      109
+    ],
+    "rotor_indices" : [
+      6,
+      0,
+      13,
+      7
+    ]
+  },
+  "nonce_hex" : "e256000102030405060708090a0b0c0d",
+  "plaintext_hex" : "48454c555420456e69676d6132353620676f6c64656e20766563746f722073747265616d",
+  "salt_hex" : "68656c75742d73616c74",
+  "version" : 1,
+  "wr_sel_order" : [
+    "plugboard.hex",
+    "r1_fwd.hex",
+    "r1_rev.hex",
+    "r2_fwd.hex",
+    "r2_rev.hex",
+    "r3_fwd.hex",
+    "r3_rev.hex",
+    "r4_fwd.hex",
+    "r4_rev.hex",
+    "reflector.hex"
+  ]
+}

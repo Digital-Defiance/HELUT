@@ -155,6 +155,71 @@ kernel void m4_attack_batch(
 
     outScore[lane] = score;
 }
+
+/// Known-plaintext / template match: score = letter hits (0…ctLen). Used by the
+/// Stochastic Bombe — German n-grams are irrelevant for Thetis template search.
+kernel void m4_kpa_batch(
+    device uchar const *ciphertext [[buffer(0)]],
+    constant uint &ctLen [[buffer(1)]],
+    constant uint &greekPos [[buffer(2)]],
+    constant uchar *rings [[buffer(3)]],
+    constant uchar *plug [[buffer(4)]],
+    constant uchar *refl [[buffer(5)]],
+    constant uchar *gFwd [[buffer(6)]],
+    constant uchar *gInv [[buffer(7)]],
+    constant uchar *lFwd [[buffer(8)]],
+    constant uchar *lInv [[buffer(9)]],
+    constant uchar *mFwd [[buffer(10)]],
+    constant uchar *mInv [[buffer(11)]],
+    constant uchar *rFwd [[buffer(12)]],
+    constant uchar *rInv [[buffer(13)]],
+    constant uchar *notchL [[buffer(14)]],
+    constant uchar *notchM [[buffer(15)]],
+    constant uchar *notchR [[buffer(16)]],
+    constant uchar *known [[buffer(17)]],
+    device float *outScore [[buffer(18)]],
+    uint lane [[thread_position_in_grid]]
+) {
+    if (lane >= 17576u) return;
+    (void)notchL[0];
+
+    uchar posR = uchar(lane % 26u);
+    uchar posM = uchar((lane / 26u) % 26u);
+    uchar posL = uchar(lane / 676u);
+    uchar posG = uchar(greekPos);
+
+    uchar rg = rings[0], rl = rings[1], rm = rings[2], rr = rings[3];
+
+    float matches = 0.0f;
+    for (uint t = 0; t < ctLen; ++t) {
+        bool midNotch = notchM[posM] != 0;
+        bool rightNotch = notchR[posR] != 0;
+        if (midNotch) {
+            posL = uchar((uint(posL) + 1u) % 26u);
+        }
+        if (midNotch || rightNotch) {
+            posM = uchar((uint(posM) + 1u) % 26u);
+        }
+        posR = uchar((uint(posR) + 1u) % 26u);
+
+        uchar x = plug[ciphertext[t]];
+        x = rot_fwd(x, posR, rr, rFwd);
+        x = rot_fwd(x, posM, rm, mFwd);
+        x = rot_fwd(x, posL, rl, lFwd);
+        x = rot_fwd(x, posG, rg, gFwd);
+        x = refl[x];
+        x = rot_inv(x, posG, rg, gInv);
+        x = rot_inv(x, posL, rl, lInv);
+        x = rot_inv(x, posM, rm, mInv);
+        x = rot_inv(x, posR, rr, rInv);
+        x = plug[x];
+
+        if (known[t] < 26u && x == known[t]) {
+            matches += 1.0f;
+        }
+    }
+    outScore[lane] = matches;
+}
 """
 
 private func packAttackCribs(_ cribs: [String]) -> [UInt8] {
@@ -178,11 +243,16 @@ final class CleartextM4BatchEngine: @unchecked Sendable {
     private let device: MTLDevice?
     private let queue: MTLCommandQueue?
     private let pipeline: MTLComputePipelineState?
+    private let kpaPipeline: MTLComputePipelineState?
     private let ctBuffer: MTLBuffer?
     private let outBuffer: MTLBuffer?
     private let bigramBuffer: MTLBuffer?
     private let cribBuffer: MTLBuffer?
+    private let knownBuffer: MTLBuffer?
     private let ciphertext: [Int]
+    private let knownPlaintext: [Int]?
+    /// 0…25 = required letter; values ≥26 (e.g. 255) are don't-care for masked templates.
+    private var activeKnown: [UInt8]
     private let ctLen: Int
     private let bigrams: [Float]
     private let cribBytes: [UInt8]
@@ -190,21 +260,31 @@ final class CleartextM4BatchEngine: @unchecked Sendable {
 
     private init(
         ciphertext: [Int],
+        knownPlaintext: [Int]?,
         device: MTLDevice?,
         queue: MTLCommandQueue?,
         pipeline: MTLComputePipelineState?,
+        kpaPipeline: MTLComputePipelineState?,
         backendName: String
     ) {
         self.ciphertext = ciphertext
+        self.knownPlaintext = knownPlaintext
         self.ctLen = ciphertext.count
         self.device = device
         self.queue = queue
         self.pipeline = pipeline
+        self.kpaPipeline = kpaPipeline
         self.backendName = backendName
         self.bigrams = floatBigramTable()
         self.cribBytes = packAttackCribs(attackScoreCribs)
+        if let known = knownPlaintext {
+            self.activeKnown = known.map { UInt8(clamping: $0 > 25 ? 255 : $0) }
+        } else {
+            self.activeKnown = [UInt8](repeating: 255, count: ciphertext.count)
+        }
+        while self.activeKnown.count < 128 { self.activeKnown.append(255) }
 
-        if let device, pipeline != nil {
+        if let device, pipeline != nil || kpaPipeline != nil {
             var ctBytes = ciphertext.map { UInt8($0) }
             while ctBytes.count < 128 { ctBytes.append(0) }
             self.ctBuffer = device.makeBuffer(bytes: &ctBytes, length: ctBytes.count, options: .storageModeShared)
@@ -224,40 +304,62 @@ final class CleartextM4BatchEngine: @unchecked Sendable {
                 length: cribCopy.count,
                 options: .storageModeShared
             )
+            var knownBytes = activeKnown
+            self.knownBuffer = device.makeBuffer(
+                bytes: &knownBytes,
+                length: knownBytes.count,
+                options: .storageModeShared
+            )
         } else {
             self.ctBuffer = nil
             self.outBuffer = nil
             self.bigramBuffer = nil
             self.cribBuffer = nil
+            self.knownBuffer = nil
         }
     }
 
     /// Prefer Metal; always returns a usable engine (CPU fallback).
-    static func make(ciphertext: [Int]) -> CleartextM4BatchEngine {
+    static func make(ciphertext: [Int], knownPlaintext: [Int]? = nil) -> CleartextM4BatchEngine {
         if let device = MTLCreateSystemDefaultDevice(),
            let queue = device.makeCommandQueue() {
             do {
                 let library = try device.makeLibrary(source: m4AttackBatchMetalSource, options: nil)
-                if let fn = library.makeFunction(name: "m4_attack_batch") {
-                    let pipeline = try device.makeComputePipelineState(function: fn)
+                let attackFn = library.makeFunction(name: "m4_attack_batch")
+                let kpaFn = library.makeFunction(name: "m4_kpa_batch")
+                let attackPipe = try attackFn.map { try device.makeComputePipelineState(function: $0) }
+                let kpaPipe = try kpaFn.map { try device.makeComputePipelineState(function: $0) }
+                if attackPipe != nil || kpaPipe != nil {
+                    let mode: String
+                    if knownPlaintext != nil, kpaPipe != nil {
+                        mode = "Metal-cleartext-KPA"
+                    } else if attackPipe != nil {
+                        mode = "Metal-cleartext-attack"
+                    } else {
+                        mode = "Metal-cleartext-KPA-only"
+                    }
                     return CleartextM4BatchEngine(
                         ciphertext: ciphertext,
+                        knownPlaintext: knownPlaintext,
                         device: device,
                         queue: queue,
-                        pipeline: pipeline,
-                        backendName: "Metal-cleartext-attack"
+                        pipeline: attackPipe,
+                        kpaPipeline: kpaPipe,
+                        backendName: mode
                     )
                 }
             } catch {
-                fputs("Cleartext Metal attack-batch compile failed (\(error)); CPU batch.\n", stderr)
+                fputs("Cleartext Metal batch compile failed (\(error)); CPU batch.\n", stderr)
             }
         }
         return CleartextM4BatchEngine(
             ciphertext: ciphertext,
+            knownPlaintext: knownPlaintext,
             device: nil,
             queue: nil,
             pipeline: nil,
-            backendName: "CPU-cleartext-attack"
+            kpaPipeline: nil,
+            backendName: knownPlaintext == nil ? "CPU-cleartext-attack" : "CPU-cleartext-KPA"
         )
     }
 
@@ -271,6 +373,53 @@ final class CleartextM4BatchEngine: @unchecked Sendable {
         } else {
             scores = cpuAttackBatch(key: key, greek: greek)
         }
+        return Self.pickTop(scores: scores, topK: topK)
+    }
+
+    /// Best message-key lane under letter-match to `known` (0…25 required; ≥26 don't-care).
+    /// Full 26⁴ scan. Updates the on-device known buffer under the engine lock.
+    func bestKPAMatch(key: EnigmaM4Key, known: [Int]) -> (greek: Int, lane: Int, score: Float) {
+        lock.lock()
+        defer { lock.unlock() }
+
+        activeKnown = known.map { UInt8(clamping: $0 > 25 ? 255 : $0) }
+        while activeKnown.count < 128 { activeKnown.append(255) }
+        if let knownBuffer {
+            let ptr = knownBuffer.contents().bindMemory(to: UInt8.self, capacity: activeKnown.count)
+            for i in 0..<activeKnown.count { ptr[i] = activeKnown[i] }
+        }
+
+        var bestGreek = 0
+        var bestLane = 0
+        var bestScore: Float = -1
+        for greek in 0..<26 {
+            let scores: [Float]
+            if kpaPipeline != nil, knownBuffer != nil {
+                scores = metalKPABatch(key: key, greek: greek)
+            } else {
+                scores = cpuKPABatch(key: key, greek: greek)
+            }
+            for lane in 0..<scores.count {
+                let score = scores[lane]
+                if score > bestScore {
+                    bestScore = score
+                    bestLane = lane
+                    bestGreek = greek
+                }
+            }
+        }
+        return (bestGreek, bestLane, bestScore)
+    }
+
+    /// Convenience: use the known plaintext supplied at `make` time.
+    func bestKPAMatch(key: EnigmaM4Key) -> (greek: Int, lane: Int, score: Float) {
+        guard let known = knownPlaintext else {
+            return (0, 0, -1)
+        }
+        return bestKPAMatch(key: key, known: known)
+    }
+
+    private static func pickTop(scores: [Float], topK: Int) -> [(lane: Int, score: Float)] {
         var best = [(Int, Float)]()
         best.reserveCapacity(topK)
         for lane in 0..<scores.count {
@@ -341,6 +490,60 @@ final class CleartextM4BatchEngine: @unchecked Sendable {
         return Array(UnsafeBufferPointer(start: ptr, count: cleartextBatchLaneCount))
     }
 
+    private func metalKPABatch(key: EnigmaM4Key, greek: Int) -> [Float] {
+        guard let device, let queue, let kpaPipeline,
+              let ctBuffer, let outBuffer, let knownBuffer else {
+            return cpuKPABatch(key: key, greek: greek)
+        }
+        let tables = KeyTables(key: key)
+        var greekU = UInt32(greek)
+        var lenU = UInt32(ctLen)
+        var rings: [UInt8] = [
+            UInt8(key.rings.0), UInt8(key.rings.1), UInt8(key.rings.2), UInt8(key.rings.3)
+        ]
+
+        func buf(_ bytes: [UInt8]) -> MTLBuffer {
+            var copy = bytes
+            return device.makeBuffer(bytes: &copy, length: copy.count, options: .storageModeShared)!
+        }
+
+        guard let command = queue.makeCommandBuffer(),
+              let encoder = command.makeComputeCommandEncoder() else {
+            return cpuKPABatch(key: key, greek: greek)
+        }
+
+        encoder.setComputePipelineState(kpaPipeline)
+        encoder.setBuffer(ctBuffer, offset: 0, index: 0)
+        encoder.setBytes(&lenU, length: 4, index: 1)
+        encoder.setBytes(&greekU, length: 4, index: 2)
+        encoder.setBytes(&rings, length: 4, index: 3)
+        encoder.setBuffer(buf(tables.plug), offset: 0, index: 4)
+        encoder.setBuffer(buf(tables.refl), offset: 0, index: 5)
+        encoder.setBuffer(buf(tables.gFwd), offset: 0, index: 6)
+        encoder.setBuffer(buf(tables.gInv), offset: 0, index: 7)
+        encoder.setBuffer(buf(tables.lFwd), offset: 0, index: 8)
+        encoder.setBuffer(buf(tables.lInv), offset: 0, index: 9)
+        encoder.setBuffer(buf(tables.mFwd), offset: 0, index: 10)
+        encoder.setBuffer(buf(tables.mInv), offset: 0, index: 11)
+        encoder.setBuffer(buf(tables.rFwd), offset: 0, index: 12)
+        encoder.setBuffer(buf(tables.rInv), offset: 0, index: 13)
+        encoder.setBuffer(buf(tables.notchL), offset: 0, index: 14)
+        encoder.setBuffer(buf(tables.notchM), offset: 0, index: 15)
+        encoder.setBuffer(buf(tables.notchR), offset: 0, index: 16)
+        encoder.setBuffer(knownBuffer, offset: 0, index: 17)
+        encoder.setBuffer(outBuffer, offset: 0, index: 18)
+
+        let w = kpaPipeline.threadExecutionWidth
+        let groups = MTLSize(width: (cleartextBatchLaneCount + w - 1) / w, height: 1, depth: 1)
+        encoder.dispatchThreadgroups(groups, threadsPerThreadgroup: MTLSize(width: w, height: 1, depth: 1))
+        encoder.endEncoding()
+        command.commit()
+        command.waitUntilCompleted()
+
+        let ptr = outBuffer.contents().bindMemory(to: Float.self, capacity: cleartextBatchLaneCount)
+        return Array(UnsafeBufferPointer(start: ptr, count: cleartextBatchLaneCount))
+    }
+
     private func cpuAttackBatch(key: EnigmaM4Key, greek: Int) -> [Float] {
         var out = [Float](repeating: 0, count: cleartextBatchLaneCount)
         let ct = ciphertext
@@ -397,6 +600,32 @@ final class CleartextM4BatchEngine: @unchecked Sendable {
                     }
                 }
                 base[lane] = score
+            }
+        }
+        return out
+    }
+
+    private func cpuKPABatch(key: EnigmaM4Key, greek: Int) -> [Float] {
+        let known = activeKnown
+        var out = [Float](repeating: 0, count: cleartextBatchLaneCount)
+        let ct = ciphertext
+        let n = ctLen
+        out.withUnsafeMutableBufferPointer { buf in
+            let base = buf.baseAddress!
+            DispatchQueue.concurrentPerform(iterations: cleartextBatchLaneCount) { lane in
+                let r = lane % 26
+                let m = (lane / 26) % 26
+                let l = lane / 676
+                var k = key
+                k.positions = (greek, l, m, r)
+                var machine = EnigmaM4Machine(key: k)
+                var hits: Float = 0
+                for t in 0..<n {
+                    let p = machine.process(ct[t])
+                    let expect = known[t]
+                    if expect < 26, p == Int(expect) { hits += 1 }
+                }
+                base[lane] = hits
             }
         }
         return out
