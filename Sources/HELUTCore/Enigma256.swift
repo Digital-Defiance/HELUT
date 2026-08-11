@@ -24,13 +24,21 @@ package struct Enigma256LFSR: Sendable, Equatable {
         state = next
     }
 
-    /// Stepping triggers for rotors 1…4 (matches Verilog `lfsr[0|15|31|47]`).
+    /// Stepping triggers via NLFF (non-linear fold) — matches Verilog.
+    /// Avoids exposing raw LFSR bits to observable rotor motion (Berlekamp–Massey).
+    /// step_r1 = (lfsr[0] & lfsr[7]) ^ lfsr[12], etc.
     package var stepMask: (Bool, Bool, Bool, Bool) {
-        (
-            (state & (1 << 0)) != 0,
-            (state & (1 << 15)) != 0,
-            (state & (1 << 31)) != 0,
-            (state & (1 << 47)) != 0
+        func nlff(_ a: Int, _ b: Int, _ c: Int) -> Bool {
+            let x = (state >> a) & 1
+            let y = (state >> b) & 1
+            let z = (state >> c) & 1
+            return ((x & y) ^ z) != 0
+        }
+        return (
+            nlff(0, 7, 12),
+            nlff(15, 22, 29),
+            nlff(31, 38, 45),
+            nlff(47, 54, 61)
         )
     }
 }
@@ -234,11 +242,12 @@ package struct Enigma256Machine: Sendable {
     }
 }
 
-// MARK: - Key derivation (HKDF-SHA256)
+// MARK: - Key derivation (HKDF-SHA512)
 
 package enum Enigma256KDF {
-    package static let dayInfo = Data("enigma256-day-v1".utf8)
-    package static let messageInfo = Data("enigma256-msg-v1".utf8)
+    /// Domain-separated labels (v2 = SHA-512 OKM; v1 was SHA-256).
+    package static let dayInfo = Data("enigma256-day-v2".utf8)
+    package static let messageInfo = Data("enigma256-msg-v2".utf8)
 
     /// Bytes consumed from the day-key OKM (Fisher–Yates entropy + tables).
     package static let dayOKMLength = 512 + (16 * 512) + 512 // plug + 16 rotors + reflector
@@ -311,12 +320,12 @@ package enum Enigma256KDF {
 
     package static func hkdf(ikm: Data, salt: Data, info: Data, length: Int) -> Data {
         // RFC 5869: L ≤ 255·HashLen. CryptoKit traps above that; chunk via distinct info labels.
-        let hashLen = 32
+        let hashLen = 64 // SHA-512
         let maxChunk = 255 * hashLen
         precondition(length > 0)
         let key = SymmetricKey(data: ikm)
         if length <= maxChunk {
-            return HKDF<SHA256>.deriveKey(
+            return HKDF<SHA512>.deriveKey(
                 inputKeyMaterial: key,
                 salt: salt,
                 info: info,
@@ -330,7 +339,7 @@ package enum Enigma256KDF {
             let need = min(maxChunk, length - out.count)
             var chunkInfo = info
             chunkInfo.append(contentsOf: withUnsafeBytes(of: chunkIndex.bigEndian) { Array($0) })
-            let piece = HKDF<SHA256>.deriveKey(
+            let piece = HKDF<SHA512>.deriveKey(
                 inputKeyMaterial: key,
                 salt: salt,
                 info: chunkInfo,

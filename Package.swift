@@ -18,7 +18,8 @@ let package = Package(
             linkerSettings: [
                 .linkedFramework("Metal"),
                 .linkedFramework("MetalPerformanceShadersGraph"),
-                .linkedFramework("Accelerate")
+                .linkedFramework("Accelerate"),
+                .linkedFramework("Network")
             ]
         ),
         .executableTarget(
@@ -26,7 +27,8 @@ let package = Package(
             dependencies: ["HELUTCore"],
             linkerSettings: [
                 .linkedFramework("Metal"),
-                .linkedFramework("MetalPerformanceShadersGraph")
+                .linkedFramework("MetalPerformanceShadersGraph"),
+                .linkedFramework("Network")
             ]
         ),
         .testTarget(
@@ -34,7 +36,8 @@ let package = Package(
             dependencies: ["HELUTCore"],
             linkerSettings: [
                 .linkedFramework("Metal"),
-                .linkedFramework("MetalPerformanceShadersGraph")
+                .linkedFramework("MetalPerformanceShadersGraph"),
+                .linkedFramework("Network")
             ]
         )
     ],

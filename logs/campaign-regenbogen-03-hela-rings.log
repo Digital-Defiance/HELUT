@@ -38,3 +38,10 @@ quarantine: soft IC≥0.048 / tail>-4.300 (strict IC≥0.055 / tail>-3.600) → 
   [11/85·11] RAEUMUNGOSTPREUSSEN@9 edges=19 letters=20 loops=3 central=E       2 stops → 0 valid 10-plug completions    3171s  55.4M/s ETA 355.5 min
   [12/85·12] RAEUMUNGOSTPREUSSEN@12 edges=19 letters=19 loops=3 central=R dead at the board                      3472s  55.2M/s ETA 352.0 min
   [13/85·13] RAEUMUNGOSTPREUSSEN@13 edges=19 letters=19 loops=3 central=R dead at the board                      3804s  54.6M/s ETA 351.1 min
+  [14/85·14] RAEUMUNGOSTPREUSSEN@21 edges=19 letters=17 loops=3 central=P dead at the board                      4238s  52.8M/s ETA 358.2 min
+  [15/85·15] RAEUMUNGOSTPREUSSEN@29 edges=19 letters=19 loops=3 central=P       8 stops → 0 valid 10-plug completions    4524s  53.0M/s ETA 351.8 min
+  [16/85·16] RAEUMUNGOSTPREUSSEN@31 edges=19 letters=18 loops=3 central=P dead at the board                      4818s  53.0M/s ETA 346.3 min
+  [17/85·17] RAEUMUNGOSTPREUSSEN@32 edges=19 letters=18 loops=3 central=P dead at the board                      5127s  52.9M/s ETA 341.8 min
+  [18/85·18] EINSCHIFFUNGHELA@37 edges=16 letters=18 loops=3 central=B  228764 stops → 0 scorable completions    5654s  50.8M/s ETA 350.7 min
+  [19/85·19] RAEUMUNGOSTPREUSSEN@6 edges=19 letters=19 loops=2 central=E dead at the board                      5951s  51.0M/s ETA 344.5 min
+  [20/85·20] RAEUMUNGOSTPREUSSEN@7 edges=19 letters=19 loops=2 central=E dead at the board                      6249s  51.1M/s ETA 338.5 min

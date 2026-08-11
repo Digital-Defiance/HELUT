@@ -56,7 +56,9 @@ let positionalArgs: [String] = {
         "--bombe-confirm", "--bombe-partners", "--bombe-opening-len",
         "--enigma256-out", "--enigma256-plain",
         "--enigma256-in", "--enigma256-ikm", "--enigma256-salt", "--enigma256-nonce",
-        "--enigma256-mode"
+        "--enigma256-mode", "--enigma256-plain-file",
+        "--enigma256-host", "--enigma256-port",
+        "--enigma256-passphrase", "--enigma256-pbkdf2-iters"
     ]
     while index < args.count {
         let arg = args[index]
@@ -81,6 +83,26 @@ if CommandLine.arguments.contains("--enigma256-golden") {
 
 if CommandLine.arguments.contains("--enigma256-crypt") {
     runEnigma256Crypt()
+    exit(0)
+}
+
+if CommandLine.arguments.contains("--enigma256-ecdh-demo") {
+    runEnigma256ECDHDemo()
+    exit(0)
+}
+
+if CommandLine.arguments.contains("--enigma256-wire-demo") {
+    runEnigma256WireDemo()
+    exit(0)
+}
+
+if CommandLine.arguments.contains("--enigma256-listen") {
+    runEnigma256TCPListen()
+    exit(0)
+}
+
+if CommandLine.arguments.contains("--enigma256-connect") {
+    runEnigma256TCPConnect()
     exit(0)
 }
 
