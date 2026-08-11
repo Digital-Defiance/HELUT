@@ -65,7 +65,10 @@ let positionalArgs: [String] = {
         "--enigma256-identity", "--enigma256-identity-out",
         "--enigma256-trust", "--enigma256-trust-file",
         "--enigma256-genes", "--enigma256-campaign-log", "--enigma256-campaign-trials",
-        "--enigma256-nlff-stats-steps", "--enigma256-nlff-breed-trials"
+        "--enigma256-nlff-stats-steps", "--enigma256-nlff-breed-trials",
+        "--enigma256-ent-bytes", "--enigma256-ent-out", "--enigma256-ent-log",
+        "--enigma256-ent-plain",
+        "--enigma256-kpa-rounds"
     ]
     while index < args.count {
         let arg = args[index]
@@ -125,6 +128,16 @@ if CommandLine.arguments.contains("--enigma256-campaign") {
 
 if CommandLine.arguments.contains("--enigma256-nlff-stats") {
     runEnigma256NLFFStats()
+    exit(0)
+}
+
+if CommandLine.arguments.contains("--enigma256-ent") {
+    runEnigma256Ent()
+    exit(0)
+}
+
+if CommandLine.arguments.contains("--enigma256-structured-kpa") {
+    runEnigma256StructuredKPA()
     exit(0)
 }
 

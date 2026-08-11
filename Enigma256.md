@@ -85,7 +85,7 @@ Mutation parameters live in `Fixtures/enigma256_generation.json`. Blue rolls rew
 - **Handshake:** X25519, hybrid ML-KEM / X-Wing, Ed25519-signed hybrid wire frames.
 - **Wire / TCP / PSK:** `Enigma256Wire` (AEAD DATA). TCP default = **hybrid+AEAD** on macOS 26+ (`--enigma256-classical` for X25519-only; `--enigma256-passphrase` for PSK). Identity `--enigma256-identity` / `--enigma256-identity-out`; trust `--enigma256-trust`.
 - **Yosys / TensorLUT:** FPGA-style synth keeps BRAMs (`Scripts/enigma256_synth.sh`). Red Team NLFF cone (`Scripts/enigma256_tensorlut.sh`). Live field = **gen 5 balanced cubic6**. Gen 4 coupling rejected. Grade stepping with `--enigma256-nlff-stats` before celebrating TensorLUT holds.
-- **Red/Blue campaign:** `Scripts/enigma256_rb_campaign.sh` / `--enigma256-campaign`; `--hard-red` and `Scripts/enigma256_red_battery.sh` for stronger Red probes.
+- **Red/Blue campaign:** `Scripts/enigma256_rb_campaign.sh` / `--enigma256-campaign`; `--hard-red` and `Scripts/enigma256_red_battery.sh` for stronger Red probes. SoftBus CT entropy (`Scripts/enigma256_ent.sh` / `--enigma256-ent`): seeded PRNG plaintext (not zeros — un-reflector self-maps by design). Structured SoftBus KPA: `--enigma256-structured-kpa`. Wider Red cone: `enigma_256_nlff_lfsr_combo.v` (NLFF + `lfsr_next[63:56]`).
 - **Red Team hold (updated):** Golden + AXI AXIS co-sim pass; TensorLUT is pointed at the NLFF cone on purpose — not a premature full-core melt.
 
 ## 9. Protocol gap closure

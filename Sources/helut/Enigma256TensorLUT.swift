@@ -15,12 +15,19 @@ func enigma256PortNets(_ module: YosysModule, _ name: String) -> [Int32] {
 }
 
 /// Exhaustive coverage of each NLFF's live taps (others held at a base pattern).
+/// Optional Galois next-state byte densifies the Red cone past NLFF-only.
+enum Enigma256NLFFExtraOut: Sendable {
+    case none
+    case nextLo // lfsr_next[7:0] — trivial shift on this poly; prefer nextHi
+    case nextHi // lfsr_next[63:56] — includes feedback taps
+}
+
 func enigma256NLFFTrainingBatch(
-    generation: Enigma256Generation = .current
+    generation: Enigma256Generation = .current,
+    extra: Enigma256NLFFExtraOut = .none
 ) -> (inputs: [[Float]], expected: [[Float]]) {
     let tapSets: [[Int]] = generation.folds.map { $0.taps(for: generation.formula) }
     var seeds: [UInt64] = []
-    // Base patterns so unused bits aren't all-zero lockup.
     let bases: [UInt64] = [1, 0xA5A5_A5A5_A5A5_A5A5, 0x0123_4567_89AB_CDEF]
     for base in bases {
         for taps in tapSets {
@@ -38,7 +45,6 @@ func enigma256NLFFTrainingBatch(
             }
         }
     }
-    // Extra random-ish anchors (golden LFSR included).
     seeds.append(contentsOf: [
         0xE842_0155_1FDB_C83A,
         0x8000_0000_0000_0001,
@@ -58,12 +64,27 @@ func enigma256NLFFTrainingBatch(
         }
         inputs.append(row)
         let mask = Enigma256LFSR(seed: s).stepMask(using: generation)
-        expected.append([
+        var out: [Float] = [
             mask.0 ? 1 : 0,
             mask.1 ? 1 : 0,
             mask.2 ? 1 : 0,
             mask.3 ? 1 : 0
-        ])
+        ]
+        switch extra {
+        case .none:
+            break
+        case .nextLo:
+            let next = Enigma256LFSR(seed: s).next
+            for bit in 0 ..< 8 {
+                out.append(Float((next >> bit) & 1))
+            }
+        case .nextHi:
+            let next = Enigma256LFSR(seed: s).next
+            for bit in 0 ..< 8 {
+                out.append(Float((next >> (56 + bit)) & 1))
+            }
+        }
+        expected.append(out)
     }
     return (inputs, expected)
 }
@@ -126,11 +147,22 @@ func runEnigma256TensorLUT() {
         let lfsrNets = enigma256PortNets(module, "lfsr")
         precondition(lfsrNets.count == 64)
         inputWires = lfsrNets
-        outputWires = enigma256PortNets(module, "step_r1")
+        var outs = enigma256PortNets(module, "step_r1")
             + enigma256PortNets(module, "step_r2")
             + enigma256PortNets(module, "step_r3")
             + enigma256PortNets(module, "step_r4")
-        let batch = enigma256NLFFTrainingBatch()
+        let extra: Enigma256NLFFExtraOut
+        if module.ports["lfsr_next_hi"] != nil {
+            outs += enigma256PortNets(module, "lfsr_next_hi")
+            extra = .nextHi
+        } else if module.ports["lfsr_next_lo"] != nil {
+            outs += enigma256PortNets(module, "lfsr_next_lo")
+            extra = .nextLo
+        } else {
+            extra = .none
+        }
+        outputWires = outs
+        let batch = enigma256NLFFTrainingBatch(extra: extra)
         target = AdversarialTarget(
             inputWireIDs: inputWires,
             outputWireIDs: outputWires,
@@ -140,10 +172,14 @@ func runEnigma256TensorLUT() {
         )
     }
 
+    let emitName: String
+    switch moduleName {
+    case "enigma_256_nlff_combo": emitName = "enigma_256_tensorlut_baseline"
+    case "enigma_256_nlff_lfsr_combo": emitName = "enigma_256_nlff_lfsr_tensorlut"
+    default: emitName = "enigma_256_step_cone_tensorlut"
+    }
     let verilog = TensorLUTEmitter.emitVerilog(
-        moduleName: moduleName == "enigma_256_nlff_combo"
-            ? "enigma_256_tensorlut_baseline"
-            : "enigma_256_step_cone_tensorlut",
+        moduleName: emitName,
         netlist: soft,
         chromosome: chromo,
         inputWires: inputWires,

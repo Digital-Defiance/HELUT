@@ -752,3 +752,352 @@ func runEnigma256Campaign() {
         print("  ledger: \(ledgerPath)")
     }
 }
+
+// MARK: - SoftBus keystream entropy (`--enigma256-ent`)
+
+struct Enigma256EntReport: Sendable {
+    var bytes: Int
+    var entropyPerByte: Double?
+    var mean: Double?
+    var serialCorr: Double?
+    var chiPercent: Double?
+    var path: String
+    var raw: String
+
+    /// Smoke thresholds for ≥1MiB samples (not a cryptanalytic bar).
+    var pass: Bool {
+        guard let e = entropyPerByte, let m = mean, let c = serialCorr else { return false }
+        return e >= 7.9 && abs(m - 127.5) < 2.0 && abs(c) < 0.05
+    }
+}
+
+func enigma256ParseEntOutput(_ text: String, bytes: Int, path: String) -> Enigma256EntReport {
+    var report = Enigma256EntReport(
+        bytes: bytes, entropyPerByte: nil, mean: nil, serialCorr: nil, chiPercent: nil, path: path, raw: text
+    )
+    for line in text.split(whereSeparator: \.isNewline).map(String.init) {
+        if line.hasPrefix("Entropy ="), line.contains("bits per byte") {
+            let part = line.dropFirst("Entropy =".count)
+                .trimmingCharacters(in: .whitespaces)
+                .split(separator: " ").first
+            report.entropyPerByte = part.flatMap { Double($0) }
+        } else if line.contains("Arithmetic mean value of data bytes is") {
+            // "Arithmetic mean value of data bytes is 127.9123 (127.5 = random)."
+            if let range = line.range(of: "bytes is ") {
+                let rest = line[range.upperBound...]
+                let num = rest.split(separator: " ").first.map(String.init)
+                report.mean = num.flatMap(Double.init)
+            }
+        } else if line.hasPrefix("Serial correlation coefficient is") {
+            if let range = line.range(of: "coefficient is ") {
+                let rest = line[range.upperBound...]
+                let num = rest.split(separator: " ").first.map(String.init)
+                report.serialCorr = num.flatMap(Double.init)
+            }
+        } else if line.contains("would exceed this value") {
+            if let range = line.range(of: "value ") {
+                let rest = line[range.upperBound...]
+                let num = rest.split(separator: " ").first.map(String.init)
+                report.chiPercent = num.flatMap(Double.init)
+            }
+        }
+    }
+    return report
+}
+
+func runEnigma256Ent() {
+    _ = Enigma256Generation.bootstrapFromFixture()
+    let bytes = intFlag("--enigma256-ent-bytes") ?? (1 << 20)
+    let outPath = stringFlag("--enigma256-ent-out") ?? "build/enigma256_keystream.bin"
+    let logPath = stringFlag("--enigma256-ent-log") ?? "logs/enigma256-ent.log"
+    let failClosed = CommandLine.arguments.contains("--enigma256-ent-fail-closed")
+
+    guard bytes >= 4096 else {
+        fputs("ent sample too small (\(bytes)); use ≥4096 (prefer ≥1MiB)\n", stderr)
+        exit(2)
+    }
+
+    // Seeded PRNG plaintext → SoftBus ciphertext under live generation.
+    // Do NOT encrypt zeros: the un-reflector permits self-mapping, so scramble(0)==0
+    // ~30% of the time by design — that fails `ent` without indicating a dead cipher.
+    // Prefer PRNG PT over a counter: counter structure can inflate serial correlation.
+    let plainMode = (stringFlag("--enigma256-ent-plain") ?? "prng").lowercased()
+    let ikm = Data("enigma256-ent-ikm-v1-32-bytes!!!!!!".utf8)
+    let ctx = Enigma256Context(ikm: ikm)
+    let nonce = Data("ent-nonce-16b!!!!".utf8)
+    let key = Enigma256KDF.deriveMessageKey(masterIKM: ikm, nonce: nonce)
+    let bus = Enigma256SoftBus()
+    let driver = Enigma256AXIDriver(bus: bus)
+    driver.configure(day: ctx.day, message: key)
+
+    // Diagnostic: fixed-point rate under PT=0 (expected high; not a fail criterion).
+    var fpProbe = 0
+    let fpN = min(100_000, bytes)
+    for _ in 0 ..< fpN {
+        if driver.transfer(0) == 0 { fpProbe += 1 }
+    }
+    let fpRate = Double(fpProbe) / Double(fpN)
+    // Re-arm for the actual entropy sample.
+    driver.configure(day: ctx.day, message: key)
+
+    let chunk = 64 * 1024
+    var plain = [UInt8](repeating: 0, count: min(chunk, bytes))
+    var produced = 0
+    // xorshift64* — deterministic, not crypto; only to feed a non-structured PT.
+    var prng: UInt64 = 0xE256_E470_51ED_0001
+    func nextPlainByte() -> UInt8 {
+        switch plainMode {
+        case "zeros", "zero":
+            return 0
+        case "counter":
+            return UInt8(truncatingIfNeeded: produced) // filled per index below
+        default:
+            prng ^= prng << 13
+            prng ^= prng >> 7
+            prng ^= prng << 17
+            return UInt8(truncatingIfNeeded: prng &* 0x2545_F491_4F6C_DD1D)
+        }
+    }
+    let url = URL(fileURLWithPath: outPath)
+    try? FileManager.default.createDirectory(
+        at: url.deletingLastPathComponent(),
+        withIntermediateDirectories: true
+    )
+    FileManager.default.createFile(atPath: outPath, contents: nil)
+    guard let handle = try? FileHandle(forWritingTo: url) else {
+        fputs("cannot write \(outPath)\n", stderr)
+        exit(1)
+    }
+    defer { try? handle.close() }
+
+    let t0 = DispatchTime.now().uptimeNanoseconds
+    while produced < bytes {
+        let n = min(plain.count, bytes - produced)
+        if n != plain.count { plain = [UInt8](repeating: 0, count: n) }
+        for i in 0 ..< n {
+            if plainMode == "counter" {
+                plain[i] = UInt8(truncatingIfNeeded: produced &+ i)
+            } else {
+                plain[i] = nextPlainByte()
+            }
+        }
+        let ct = driver.transfer(plain)
+        try? handle.write(contentsOf: Data(ct))
+        produced += n
+    }
+    let ms = Double(DispatchTime.now().uptimeNanoseconds - t0) / 1_000_000
+
+    let entPath = ProcessInfo.processInfo.environment["ENT"] ?? "ent"
+    let proc = Process()
+    proc.executableURL = URL(fileURLWithPath: "/usr/bin/env")
+    proc.arguments = [entPath, outPath]
+    let pipe = Pipe()
+    proc.standardOutput = pipe
+    proc.standardError = pipe
+    do {
+        try proc.run()
+        proc.waitUntilExit()
+    } catch {
+        fputs("failed to run ent (\(entPath)): \(error)\n", stderr)
+        exit(2)
+    }
+    let data = pipe.fileHandleForReading.readDataToEndOfFile()
+    let text = String(data: data, encoding: .utf8) ?? ""
+    let report = enigma256ParseEntOutput(text, bytes: bytes, path: outPath)
+
+    let summary = """
+    # Enigma 256 SoftBus ent gate
+    generation: \(Enigma256Generation.current.id)
+    formula: \(Enigma256Generation.current.formula.rawValue)
+    bytes: \(bytes)
+    plaintext: \(plainMode)
+    sample: \(outPath)
+    softbus_ms: \(String(format: "%.1f", ms))
+    zero_pt_fixed_point_rate: \(String(format: "%.4f", fpRate)) (diagnostic; expected ≫ 1/256)
+    entropy_bits_per_byte: \(report.entropyPerByte.map { String(format: "%.6f", $0) } ?? "n/a")
+    mean: \(report.mean.map { String(format: "%.4f", $0) } ?? "n/a")
+    serial_corr: \(report.serialCorr.map { String(format: "%.6f", $0) } ?? "n/a")
+    chi_percent: \(report.chiPercent.map { String(format: "%.2f", $0) } ?? "n/a")
+    pass: \(report.pass)
+    thresholds: entropy>=7.9 mean∈[125.5,129.5] |corr|<0.05
+
+    \(text)
+    """
+    try? FileManager.default.createDirectory(
+        at: URL(fileURLWithPath: logPath).deletingLastPathComponent(),
+        withIntermediateDirectories: true
+    )
+    try? summary.write(toFile: logPath, atomically: true, encoding: .utf8)
+
+    print("Enigma 256 SoftBus ent gate (gen \(Enigma256Generation.current.id))")
+    print("  bytes: \(bytes) plain=\(plainMode) → \(outPath) in \(String(format: "%.1f", ms)) ms")
+    print(String(format: "  zero-PT fixed-point rate=%.2f%% (un-reflector; not gated)", fpRate * 100))
+    if let e = report.entropyPerByte, let m = report.mean, let c = report.serialCorr {
+        print(String(format: "  entropy=%.6f  mean=%.4f  corr=%+.6f  → %@", e, m, c, report.pass ? "PASS" : "FAIL"))
+    } else {
+        print("  failed to parse ent output")
+        print(text)
+        exit(2)
+    }
+    print("  log → \(logPath)")
+    if failClosed && !report.pass { exit(1) }
+}
+
+// MARK: - Structured SoftBus KPA (widen Red beyond random search)
+
+func enigma256MatchCount(_ a: [UInt8], _ b: [UInt8]) -> Int {
+    zip(a, b).reduce(0) { $0 + ($1.0 == $1.1 ? 1 : 0) }
+}
+
+func enigma256SoftBusCrypt(
+    day: Enigma256DayKey,
+    message: Enigma256MessageKey,
+    plaintext: [UInt8]
+) -> [UInt8] {
+    let bus = Enigma256SoftBus()
+    let driver = Enigma256AXIDriver(bus: bus)
+    driver.configure(day: day, message: message)
+    return driver.transfer(plaintext)
+}
+
+/// Hill-climb LFSR seed with Walzenlage + Grundstellung known (side-channel leak model).
+func enigma256HillClimbLFSR(
+    day: Enigma256DayKey,
+    rotors: (Int, Int, Int, Int),
+    positions: (UInt8, UInt8, UInt8, UInt8),
+    plaintext: [UInt8],
+    ciphertext: [UInt8],
+    rounds: Int,
+    rng: inout some RandomNumberGenerator
+) -> (bestMatches: Int, seed: UInt64, elapsedMs: Double) {
+    let t0 = DispatchTime.now().uptimeNanoseconds
+    var seed = UInt64.random(in: 1 ... .max, using: &rng)
+    if seed == 0 { seed = 1 }
+    var bestSeed = seed
+    var best = enigma256MatchCount(
+        enigma256SoftBusCrypt(
+            day: day,
+            message: Enigma256MessageKey(rotorIndices: rotors, positions: positions, lfsrSeed: seed),
+            plaintext: plaintext
+        ),
+        ciphertext
+    )
+    for _ in 0 ..< rounds {
+        let bit = Int.random(in: 0 ..< 64, using: &rng)
+        let trial = seed ^ (UInt64(1) << bit)
+        let s = trial == 0 ? 1 : trial
+        let matches = enigma256MatchCount(
+            enigma256SoftBusCrypt(
+                day: day,
+                message: Enigma256MessageKey(rotorIndices: rotors, positions: positions, lfsrSeed: s),
+                plaintext: plaintext
+            ),
+            ciphertext
+        )
+        if matches >= best {
+            best = matches
+            seed = s
+            bestSeed = s
+            if best == plaintext.count { break }
+        }
+    }
+    let ms = Double(DispatchTime.now().uptimeNanoseconds - t0) / 1_000_000
+    return (best, bestSeed, ms)
+}
+
+/// Hill-climb Grundstellung with rotors + LFSR known.
+func enigma256HillClimbPositions(
+    day: Enigma256DayKey,
+    rotors: (Int, Int, Int, Int),
+    lfsrSeed: UInt64,
+    plaintext: [UInt8],
+    ciphertext: [UInt8],
+    rounds: Int,
+    rng: inout some RandomNumberGenerator
+) -> (bestMatches: Int, positions: (UInt8, UInt8, UInt8, UInt8), elapsedMs: Double) {
+    let t0 = DispatchTime.now().uptimeNanoseconds
+    var pos: (UInt8, UInt8, UInt8, UInt8) = (
+        UInt8.random(in: .min ... .max, using: &rng),
+        UInt8.random(in: .min ... .max, using: &rng),
+        UInt8.random(in: .min ... .max, using: &rng),
+        UInt8.random(in: .min ... .max, using: &rng)
+    )
+    var bestPos = pos
+    var best = enigma256MatchCount(
+        enigma256SoftBusCrypt(
+            day: day,
+            message: Enigma256MessageKey(rotorIndices: rotors, positions: pos, lfsrSeed: lfsrSeed),
+            plaintext: plaintext
+        ),
+        ciphertext
+    )
+    for _ in 0 ..< rounds {
+        var trial = pos
+        switch Int.random(in: 0 ..< 4, using: &rng) {
+        case 0: trial.0 &+= UInt8.random(in: 1 ... 7, using: &rng)
+        case 1: trial.1 &+= UInt8.random(in: 1 ... 7, using: &rng)
+        case 2: trial.2 &+= UInt8.random(in: 1 ... 7, using: &rng)
+        default: trial.3 &+= UInt8.random(in: 1 ... 7, using: &rng)
+        }
+        let matches = enigma256MatchCount(
+            enigma256SoftBusCrypt(
+                day: day,
+                message: Enigma256MessageKey(rotorIndices: rotors, positions: trial, lfsrSeed: lfsrSeed),
+                plaintext: plaintext
+            ),
+            ciphertext
+        )
+        if matches >= best {
+            best = matches
+            pos = trial
+            bestPos = trial
+            if best == plaintext.count { break }
+        }
+    }
+    let ms = Double(DispatchTime.now().uptimeNanoseconds - t0) / 1_000_000
+    return (best, bestPos, ms)
+}
+
+func runEnigma256StructuredKPA() {
+    _ = Enigma256Generation.bootstrapFromFixture()
+    let rounds = intFlag("--enigma256-kpa-rounds") ?? 8_192
+    let crib = Array((stringFlag("--enigma256-plain") ?? "HELUT Enigma256 structured SoftBus KPA crib vector!!").utf8)
+    let ikm = Data("enigma256-struct-kpa-ikm-v1!!!!".utf8)
+    let ctx = Enigma256Context(ikm: ikm)
+    let nonce = Data("struct-kpa-nonce!".utf8)
+    let trueKey = Enigma256KDF.deriveMessageKey(masterIKM: ikm, nonce: nonce)
+    let ct = enigma256SoftBusCrypt(day: ctx.day, message: trueKey, plaintext: crib)
+
+    var rng = SystemRandomNumberGenerator()
+    let climbLFSR = enigma256HillClimbLFSR(
+        day: ctx.day,
+        rotors: trueKey.rotorIndices,
+        positions: trueKey.positions,
+        plaintext: crib,
+        ciphertext: ct,
+        rounds: rounds,
+        rng: &rng
+    )
+    let climbPos = enigma256HillClimbPositions(
+        day: ctx.day,
+        rotors: trueKey.rotorIndices,
+        lfsrSeed: trueKey.lfsrSeed,
+        plaintext: crib,
+        ciphertext: ct,
+        rounds: rounds,
+        rng: &rng
+    )
+
+    let lfsrPressure = climbLFSR.bestMatches == crib.count
+    let posPressure = climbPos.bestMatches == crib.count
+    print("Enigma 256 structured SoftBus KPA (gen \(Enigma256Generation.current.id))")
+    print("  crib: \(crib.count) B  rounds: \(rounds)")
+    print("  hill-climb LFSR (pos+Walzenlage known): \(climbLFSR.bestMatches)/\(crib.count) in \(String(format: "%.1f", climbLFSR.elapsedMs)) ms \(lfsrPressure ? "BREAK" : "hold")")
+    print("  hill-climb positions (LFSR+Walzenlage known): \(climbPos.bestMatches)/\(crib.count) in \(String(format: "%.1f", climbPos.elapsedMs)) ms \(posPressure ? "BREAK" : "hold")")
+    if lfsrPressure || posPressure {
+        print("  red_pressure: true — leaked message-key halves are fatal; keep AEAD/control-plane tight")
+        exit(2)
+    } else {
+        print("  red_pressure: false — SoftBus holds under partial-leak hill-climb")
+    }
+}

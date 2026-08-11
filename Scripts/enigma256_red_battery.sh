@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Multi-config Red battery against the live Enigma 256 NLFF cone (Apple Silicon).
-# Appends machine-readable rows to logs/enigma256-red-battery.jsonl
+# Multi-config Red battery against the live Enigma 256 NLFF cone (gen 5+).
+# Appends to logs/enigma256-red-battery-g5.jsonl (does not clobber older gens).
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
@@ -8,18 +8,23 @@ cd "$ROOT"
 mkdir -p logs build
 ./Scripts/enigma256_tensorlut_synth.sh
 
-LEDGER=logs/enigma256-red-battery.jsonl
-SUMMARY=logs/enigma256-red-battery-summary.txt
+LEDGER=logs/enigma256-red-battery-g5.jsonl
+SUMMARY=logs/enigma256-red-battery-g5-summary.txt
 : > "$SUMMARY"
 
 run_one() {
   local name="$1" gens="$2" pop="$3" polish="$4" lambda="$5" seed="$6"
-  local log="logs/tensorlut-battery-${name}.log"
-  echo "=== BATTERY ${name} gens=${gens} pop=${pop} polish=${polish} λ=${lambda} seed=${seed} ===" | tee -a "$SUMMARY"
+  local log="logs/tensorlut-battery-g5-${name}.log"
+  echo "=== BATTERY g5/${name} gens=${gens} pop=${pop} polish=${polish} λ=${lambda} seed=${seed} ===" | tee -a "$SUMMARY"
   set +e
-  swift run -c release helut --enigma256-tensorlut \
+  # Prefer the release binary (avoids swift-run rebuild races against concurrent builds).
+  local HELUT_BIN="${HELUT_BIN:-.build/release/helut}"
+  if [[ ! -x "$HELUT_BIN" ]]; then
+    swift build -c release --product helut >/dev/null
+  fi
+  "$HELUT_BIN" --enigma256-tensorlut \
     --enigma256-netlist build/enigma_256_nlff_combo_netlist.json \
-    --enigma256-emit-out "build/enigma_256_tensorlut_${name}.v" \
+    --enigma256-emit-out "build/enigma_256_tensorlut_g5_${name}.v" \
     --enigma256-tensorlut-log "$log" \
     --enigma256-tensorlut-gens "$gens" \
     --enigma256-tensorlut-pop "$pop" \
@@ -37,6 +42,7 @@ run_one() {
 import json, time
 row = {
   "ts": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+  "generation": 5,
   "name": "${name}",
   "gens": int("${gens}"),
   "pop": int("${pop}"),
@@ -54,18 +60,13 @@ print(json.dumps(row))
 PY
 }
 
-# Baseline hard (known hold)
 run_one hard0 240 64 160 0 $((0xE25621))
-# Alternate seeds, λ=0
 run_one seedA 200 48 120 0 $((0xC0FFEE))
 run_one seedB 200 48 120 0 $((0xBADC0DE))
-# Gentle λ polish (may help or crush — grade either way)
 run_one lam1 160 48 120 1  $((0xE25631))
 run_one lam3 160 48 120 3  $((0xE25633))
-# Long explore, short polish
 run_one longex 320 48 80 0 $((0xE25641))
-# Fat population
 run_one fatpop 120 96 100 0 $((0xE25651))
 
 echo "Battery complete → $LEDGER" | tee -a "$SUMMARY"
-grep -h verdict logs/tensorlut-battery-*.log | sort | uniq -c | tee -a "$SUMMARY" || true
+grep -h verdict logs/tensorlut-battery-g5-*.log | sort | uniq -c | tee -a "$SUMMARY" || true
