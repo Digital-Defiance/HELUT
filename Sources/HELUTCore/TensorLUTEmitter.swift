@@ -54,7 +54,8 @@ package enum TensorLUTEmitter {
         outputWires: [Int32]
     ) -> String {
         precondition(chromosome.inits.count == netlist.luts.count * 64)
-        precondition(Set(inputWires).isDisjoint(with: Set(outputWires)), "I/O wire overlap")
+        // Yosys may alias output bits onto primary inputs (pure wires / shifts).
+        // That is fine: `assign n[w] = in_w` then `assign out_w = n[w]` is a passthrough.
 
         var v: [String] = []
 

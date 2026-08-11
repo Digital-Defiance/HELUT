@@ -1,0 +1,205 @@
+=== BATTERY g5/hard0 gens=240 pop=64 polish=160 λ=0 seed=14833185 ===
+BLUE hold: squeeze failed (crypto -114.0, nb 0)
+Enigma 256 TensorLUT
+  module: enigma_256_nlff_combo
+  LUTs: 4  DFFs: 0  wires: 70
+  baseline → build/enigma_256_tensorlut_g5_hard0.v
+# TensorLUT Red Team — enigma_256_nlff_combo
+generation: 5
+formula: cubic6
+netlist: build/enigma_256_nlff_combo_netlist.json
+luts: 4
+dffs: 0
+batch: 763
+explore_gens: 240
+polish_gens: 160
+pop: 64
+polish_lambda: 0.0
+explore_seed: 14833185
+baseline_crypto: 0.000000
+explore_best_crypto: -178.309799
+explore_nonbinary: 68
+polish_gen_crypto: -114.301460
+final_crypto: -114.000000
+final_nonbinary: 0
+elite_fitness: -114.000000
+squeeze_survived: false
+verdict: blue_hold
+note: explore λ=0; polish λ=0.0. squeeze_survived=false is a Blue hold.
+  log → logs/tensorlut-battery-g5-hard0.log
+=== BATTERY g5/seedA gens=200 pop=48 polish=120 λ=0 seed=12648430 ===
+BLUE hold: squeeze failed (crypto -131.0, nb 0)
+Enigma 256 TensorLUT
+  module: enigma_256_nlff_combo
+  LUTs: 4  DFFs: 0  wires: 70
+  baseline → build/enigma_256_tensorlut_g5_seedA.v
+# TensorLUT Red Team — enigma_256_nlff_combo
+generation: 5
+formula: cubic6
+netlist: build/enigma_256_nlff_combo_netlist.json
+luts: 4
+dffs: 0
+batch: 763
+explore_gens: 200
+polish_gens: 120
+pop: 48
+polish_lambda: 0.0
+explore_seed: 12648430
+baseline_crypto: 0.000000
+explore_best_crypto: -185.251831
+explore_nonbinary: 74
+polish_gen_crypto: -131.658417
+final_crypto: -131.000000
+final_nonbinary: 0
+elite_fitness: -131.000000
+squeeze_survived: false
+verdict: blue_hold
+note: explore λ=0; polish λ=0.0. squeeze_survived=false is a Blue hold.
+  log → logs/tensorlut-battery-g5-seedA.log
+=== BATTERY g5/seedB gens=200 pop=48 polish=120 λ=0 seed=195936478 ===
+BLUE hold: squeeze failed (crypto -114.36874, nb 33)
+Enigma 256 TensorLUT
+  module: enigma_256_nlff_combo
+  LUTs: 4  DFFs: 0  wires: 70
+  baseline → build/enigma_256_tensorlut_g5_seedB.v
+# TensorLUT Red Team — enigma_256_nlff_combo
+generation: 5
+formula: cubic6
+netlist: build/enigma_256_nlff_combo_netlist.json
+luts: 4
+dffs: 0
+batch: 763
+explore_gens: 200
+polish_gens: 120
+pop: 48
+polish_lambda: 0.0
+explore_seed: 195936478
+baseline_crypto: 0.000000
+explore_best_crypto: -193.870422
+explore_nonbinary: 59
+polish_gen_crypto: -114.368736
+final_crypto: -114.368736
+final_nonbinary: 33
+elite_fitness: -114.368736
+squeeze_survived: false
+verdict: blue_hold
+note: explore λ=0; polish λ=0.0. squeeze_survived=false is a Blue hold.
+  log → logs/tensorlut-battery-g5-seedB.log
+=== BATTERY g5/lam1 gens=160 pop=48 polish=120 λ=1 seed=14833201 ===
+BLUE hold: squeeze failed (crypto -134.48708, nb 48)
+Enigma 256 TensorLUT
+  module: enigma_256_nlff_combo
+  LUTs: 4  DFFs: 0  wires: 70
+  baseline → build/enigma_256_tensorlut_g5_lam1.v
+# TensorLUT Red Team — enigma_256_nlff_combo
+generation: 5
+formula: cubic6
+netlist: build/enigma_256_nlff_combo_netlist.json
+luts: 4
+dffs: 0
+batch: 763
+explore_gens: 160
+polish_gens: 120
+pop: 48
+polish_lambda: 1.0
+explore_seed: 14833201
+baseline_crypto: 0.000000
+explore_best_crypto: -192.133850
+explore_nonbinary: 61
+polish_gen_crypto: -134.487076
+final_crypto: -134.487076
+final_nonbinary: 48
+elite_fitness: -142.043823
+squeeze_survived: false
+verdict: blue_hold
+note: explore λ=0; polish λ=1.0. squeeze_survived=false is a Blue hold.
+  log → logs/tensorlut-battery-g5-lam1.log
+=== BATTERY g5/lam3 gens=160 pop=48 polish=120 λ=3 seed=14833203 ===
+BLUE hold: squeeze failed (crypto -117.6176, nb 30)
+Enigma 256 TensorLUT
+  module: enigma_256_nlff_combo
+  LUTs: 4  DFFs: 0  wires: 70
+  baseline → build/enigma_256_tensorlut_g5_lam3.v
+# TensorLUT Red Team — enigma_256_nlff_combo
+generation: 5
+formula: cubic6
+netlist: build/enigma_256_nlff_combo_netlist.json
+luts: 4
+dffs: 0
+batch: 763
+explore_gens: 160
+polish_gens: 120
+pop: 48
+polish_lambda: 3.0
+explore_seed: 14833203
+baseline_crypto: 0.000000
+explore_best_crypto: -194.508850
+explore_nonbinary: 67
+polish_gen_crypto: -117.617599
+final_crypto: -117.617599
+final_nonbinary: 30
+elite_fitness: -129.347443
+squeeze_survived: false
+verdict: blue_hold
+note: explore λ=0; polish λ=3.0. squeeze_survived=false is a Blue hold.
+  log → logs/tensorlut-battery-g5-lam3.log
+=== BATTERY g5/longex gens=320 pop=48 polish=80 λ=0 seed=14833217 ===
+BLUE hold: squeeze failed (crypto -133.17383, nb 38)
+Enigma 256 TensorLUT
+  module: enigma_256_nlff_combo
+  LUTs: 4  DFFs: 0  wires: 70
+  baseline → build/enigma_256_tensorlut_g5_longex.v
+# TensorLUT Red Team — enigma_256_nlff_combo
+generation: 5
+formula: cubic6
+netlist: build/enigma_256_nlff_combo_netlist.json
+luts: 4
+dffs: 0
+batch: 763
+explore_gens: 320
+polish_gens: 80
+pop: 48
+polish_lambda: 0.0
+explore_seed: 14833217
+baseline_crypto: 0.000000
+explore_best_crypto: -174.625092
+explore_nonbinary: 67
+polish_gen_crypto: -133.173828
+final_crypto: -133.173828
+final_nonbinary: 38
+elite_fitness: -133.173828
+squeeze_survived: false
+verdict: blue_hold
+note: explore λ=0; polish λ=0.0. squeeze_survived=false is a Blue hold.
+  log → logs/tensorlut-battery-g5-longex.log
+=== BATTERY g5/fatpop gens=120 pop=96 polish=100 λ=0 seed=14833233 ===
+BLUE hold: squeeze failed (crypto -122.30678, nb 47)
+Enigma 256 TensorLUT
+  module: enigma_256_nlff_combo
+  LUTs: 4  DFFs: 0  wires: 70
+  baseline → build/enigma_256_tensorlut_g5_fatpop.v
+# TensorLUT Red Team — enigma_256_nlff_combo
+generation: 5
+formula: cubic6
+netlist: build/enigma_256_nlff_combo_netlist.json
+luts: 4
+dffs: 0
+batch: 763
+explore_gens: 120
+polish_gens: 100
+pop: 96
+polish_lambda: 0.0
+explore_seed: 14833233
+baseline_crypto: 0.000000
+explore_best_crypto: -195.405396
+explore_nonbinary: 70
+polish_gen_crypto: -122.306778
+final_crypto: -122.306778
+final_nonbinary: 47
+elite_fitness: -122.306778
+squeeze_survived: false
+verdict: blue_hold
+note: explore λ=0; polish λ=0.0. squeeze_survived=false is a Blue hold.
+  log → logs/tensorlut-battery-g5-fatpop.log
+Battery complete → logs/enigma256-red-battery-g5.jsonl
+   8 verdict: blue_hold
