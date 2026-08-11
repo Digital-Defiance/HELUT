@@ -1,16 +1,20 @@
 # TensorLUT Red Team — enigma_256_nlff_combo
+generation: 3
+formula: cubic6
 netlist: build/enigma_256_nlff_combo_netlist.json
 luts: 4
 dffs: 0
 batch: 762
-explore_gens: 80
-polish_gens: 48
+explore_gens: 240
+polish_gens: 160
+pop: 64
 baseline_crypto: 0.000000
-explore_best_crypto: -233.822708
-explore_nonbinary: 67
-polish_gen_crypto: -160.691696
-final_crypto: -160.691696
-final_nonbinary: 39
-elite_fitness: -160.691696
+explore_best_crypto: -172.369354
+explore_nonbinary: 66
+polish_gen_crypto: -117.258308
+final_crypto: -117.258308
+final_nonbinary: 34
+elite_fitness: -117.258308
 squeeze_survived: false
-note: λ=0 explore + λ=0 discrete polish (no λ-crush on LUT6 pads); exhaustive NLFF corners.
+verdict: blue_hold
+note: λ=0 explore + λ=0 discrete polish (no λ-crush on LUT6 pads); exhaustive NLFF corners. squeeze_survived=false is a Blue hold.
