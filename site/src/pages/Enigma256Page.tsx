@@ -10,7 +10,7 @@ export function Enigma256Page() {
             <div className="kicker">Blue Team · 2026</div>
             <h2>Fixing Enigma for a century that can melt silicon</h2>
             <p className="lede">
-              The hunt for P1030680 is a ledger of how the 1945 machine leaks. Every clean negative, every ghost board, every Turing-shaped shortcut I weaponized against M4 is also a specification for what a rotor cipher must never do again. Enigma 256 is that rewrite: a base-256 polymorphic stream cipher whose datapath is SoftBus-backed Verilog on Apple Silicon and whose keys never sit in a water-soluble codebook.
+              The hunt for P1030680 is a ledger of how the 1945 machine leaks. Every clean negative, every ghost board, every Turing-shaped shortcut I weaponized against M4 is also a specification for what a rotor cipher must never do again. Enigma 256 (E256) is that rewrite: a base-256 polymorphic stream cipher whose datapath is SoftBus-backed Verilog on Apple Silicon and whose keys never sit in a water-soluble codebook.
             </p>
             <p className="lede" style={{ marginTop: '1rem' }}>
               This is not nostalgia hardware. It is the Blue Team answer to a Red Team that already runs Welchman, Stochastic KPA, and TensorLUT on Apple Silicon—built from the same findings documented in the{' '}
@@ -52,25 +52,25 @@ export function Enigma256Page() {
             <li>
               <span className="mono">NO SELF-MAP</span>
               <span>
-                <strong>M4 forbade A→A.</strong> That law is the crib-alignment wedge: ciphertext never equals plaintext at a position, so menus lock. Enigma 256’s un-reflector is an involution that <em>permits</em> fixed points, blinding known-plaintext placement and ciphertext-only cribbing of that form.
+                <strong>M4 forbade A→A.</strong> That law is the crib-alignment wedge: ciphertext never equals plaintext at a position, so menus lock. E256’s un-reflector is an involution that <em>permits</em> fixed points, blinding known-plaintext placement and ciphertext-only cribbing of that form.
               </span>
             </li>
             <li>
               <span className="mono">STATIC LEFT</span>
               <span>
-                <strong>Greek and left rotors sit still on short traffic.</strong> Pinning them collapsed my search by 676×—Turing’s reduction, still true in 2026. Enigma 256 drives all four active rotors from a 64-bit Galois LFSR every byte, so the “left wheels never move” assumption is dead.
+                <strong>Greek and left rotors sit still on short traffic.</strong> Pinning them collapsed my search by 676×—Turing’s reduction, still true in 2026. E256 drives all four active rotors from a 64-bit Galois LFSR every byte, so the “left wheels never move” assumption is dead.
               </span>
             </li>
             <li>
               <span className="mono">TEN PLUGS</span>
               <span>
-                <strong>The Steckerbrett was a 10-cable involution.</strong> Ghost menus die when they demand an eleventh pair; TensorLUT only rediscovers plugs when reciprocity is structural. Enigma 256 loads a full 128-pair base-256 plugboard from HKDF—no cable budget for a Welchman kill chain to exploit.
+                <strong>The Steckerbrett was a 10-cable involution.</strong> Ghost menus die when they demand an eleventh pair; TensorLUT only rediscovers plugs when reciprocity is structural. E256 loads a full 128-pair base-256 plugboard from HKDF—no cable budget for a Welchman kill chain to exploit.
               </span>
             </li>
             <li>
               <span className="mono">CODEBOOK</span>
               <span>
-                <strong>Day keys lived on paper that dissolved.</strong> Capture of one sheet burned the net. Enigma 256 derives session material from X25519 (optionally hybrid with ML-KEM-768) + <strong>HKDF-SHA512</strong>; Ed25519 identities bind hybrid HELLO/ACK against MitM. Ephemeral keys burn at session end.
+                <strong>Day keys lived on paper that dissolved.</strong> Capture of one sheet burned the net. E256 derives session material from X25519 (optionally hybrid with ML-KEM-768) + <strong>HKDF-SHA512</strong>; Ed25519 identities bind hybrid HELLO/ACK against MitM. Ephemeral keys burn at session end.
               </span>
             </li>
           </ul>
@@ -83,7 +83,7 @@ export function Enigma256Page() {
             <div className="kicker">Chronology</div>
             <h2>From M4 wound to 256-bit machine, step by step</h2>
             <p>
-              Each phase below is a finding from the U-534 campaign, then the architectural correction that became Enigma 256.
+              Each phase below is a finding from the U-534 campaign, then the architectural correction that became E256.
             </p>
           </div>
           <div className="timeline">
@@ -95,7 +95,7 @@ export function Enigma256Page() {
                   Welchman menus, Naval trigrams, and Thetis cribs all assume a 26-symbol ring. A Metal cleartext batch can score every <code>26⁴</code> message key against a template in one shot. That density is why stochastic KPA is even thinkable on M4.
                 </p>
                 <p>
-                  Enigma 256 replaces the alphabet with the full byte space <code>0x00…0xFF</code>. Rotors, plugboard, and reflector are 256-entry tables. The classical menu graph and letter-match objective do not transfer; the machine speaks octets, not Kriegsmarine spelling.
+                  E256 replaces the alphabet with the full byte space <code>0x00…0xFF</code>. Rotors, plugboard, and reflector are 256-entry tables. The classical menu graph and letter-match objective do not transfer; the machine speaks octets, not Kriegsmarine spelling.
                 </p>
               </div>
             </article>
@@ -108,7 +108,7 @@ export function Enigma256Page() {
                   Every exact catalog negative and every Stochastic template bank still leaned on a machine that cannot encrypt a letter to itself. That invariant is how you place a crib before you search rings.
                 </p>
                 <p>
-                  The Enigma 256 reflector is still an involution—reciprocal encrypt/decrypt survives—but fixed points are allowed. Self-mapping is no longer a forbidden residue that points a Boolean board at the right offset.
+                  The E256 reflector is still an involution—reciprocal encrypt/decrypt survives—but fixed points are allowed. Self-mapping is no longer a forbidden residue that points a Boolean board at the right offset.
                 </p>
               </div>
             </article>
@@ -121,7 +121,7 @@ export function Enigma256Page() {
                   Phase 3 of the journal was the 10-plug trap: mathematical survivors that needed impossible boards. TensorLUT’s live arm freezes the M4 core and evolves a ≤10-pair involution by construction for the same reason—reciprocity and sparsity are the genotype.
                 </p>
                 <p>
-                  Enigma 256’s plugboard is a complete base-256 involution: 128 pairs, Fisher–Yates-derived from the day-key OKM. There is no “eleventh cable” rejection rule. The stecker space is no longer a 47-bit pocket the Bombe can squeeze.
+                  E256’s plugboard is a complete base-256 involution: 128 pairs, Fisher–Yates-derived from the day-key OKM. There is no “eleventh cable” rejection rule. The stecker space is no longer a 47-bit pocket the Bombe can squeeze.
                 </p>
               </div>
             </article>
@@ -134,7 +134,7 @@ export function Enigma256Page() {
                   Historical rotors step like a mileage counter. On a 72-letter Thetis message the Greek wheel never turns; the left rotor’s notch drives nothing. That mechanical truth is why my engine pins those drums and why ring-AAAA and right-ring sweeps are even affordable.
                 </p>
                 <p>
-                  Enigma 256 clocks a 64-bit Galois LFSR (primitive taps 64, 63, 61, 60 → feedback <code>0xD800_0000_0000_0000</code>) on every byte. Step enables are <strong>not</strong> raw LFSR bits—they pass a non-linear fold <code>(bit_a &amp; bit_b) ^ bit_c</code> so observable rotor motion does not hand Berlekamp–Massey a linear system. All wheels can move every symbol; static-left assumptions die.
+                  E256 clocks a 64-bit Galois LFSR (primitive taps 64, 63, 61, 60 → feedback <code>0xD800_0000_0000_0000</code>) on every byte. Step enables are <strong>not</strong> raw LFSR bits—they pass a non-linear fold <code>(bit_a &amp; bit_b) ^ bit_c</code> so observable rotor motion does not hand Berlekamp–Massey a linear system. All wheels can move every symbol; static-left assumptions die.
                 </p>
               </div>
             </article>
@@ -147,7 +147,7 @@ export function Enigma256Page() {
                   M-Thetis died with its Grund table. Indicators <code>VROL NMKA</code> bought less than one bit because the starting-position book is gone. Sister traffic needed degarbling because paper and operators disagree.
                 </p>
                 <p>
-                  Enigma 256 splits control and data planes. Software runs X25519 and, on macOS 26+, hybrid ML-KEM (or X-Wing), then <strong>HKDF-SHA512</strong> into a day-key blueprint: plugboard shuffle, 16-rotor virtual pool, un-reflector. Each packet carries a plaintext nonce; a micro-HKDF picks Walzenlage (4 of 16), Grundstellung, and LFSR seed. Capture of one session does not decrypt the next.
+                  E256 splits control and data planes. Software runs X25519 and, on macOS 26+, hybrid ML-KEM (or X-Wing), then <strong>HKDF-SHA512</strong> into a day-key blueprint: plugboard shuffle, 16-rotor virtual pool, un-reflector. Each packet carries a plaintext nonce; a micro-HKDF picks Walzenlage (4 of 16), Grundstellung, and LFSR seed. Capture of one session does not decrypt the next.
                 </p>
               </div>
             </article>
@@ -170,7 +170,7 @@ export function Enigma256Page() {
               <h3>Evolve the cipher against the same engines that hunt M4.</h3>
               <div className="prose">
                 <p>
-                  HELUT already breeds alien netlists, melts LUT INIT tables, and scores stecker involutions. That Red Team is the continuous adversary on this Mac: SoftBus KPA and TensorLUT against the current Enigma 256 generation. If pressure crosses threshold, Blue mutates NLFF folds and HKDF generation labels via <code>--enigma256-campaign-mutate</code>.
+                  HELUT already breeds alien netlists, melts LUT INIT tables, and scores stecker involutions. That Red Team is the continuous adversary on this Mac: SoftBus KPA and TensorLUT against the current E256 generation. If pressure crosses threshold, Blue mutates NLFF folds and HKDF generation labels via <code>--enigma256-campaign-mutate</code>.
                 </p>
                 <p>
                   Boundary rule: TensorLUT melts the NLFF cone on purpose; full-core BRAM soft-map stays deferred. SoftBus is the field fabric—the cipher does not wait for a Zynq.
@@ -313,7 +313,7 @@ export function Enigma256Page() {
             <div className="kicker">Why rebuild it</div>
             <h2>The same footsteps, facing forward</h2>
             <p>
-              Turing’s reductions still work on 1945 metal because the metal never changed. Rebuilding Enigma without deleting those reductions would be theater. Enigma 256 is the opposite gesture: take every wedge the journal proved—self-stecker law, static left wheels, thin plugboards, paper day keys—and engineer them out, then invite the same HELUT stack to try again.
+              Turing’s reductions still work on 1945 metal because the metal never changed. Rebuilding Enigma without deleting those reductions would be theater. E256 is the opposite gesture: take every wedge the journal proved—self-stecker law, static left wheels, thin plugboards, paper day keys—and engineer them out, then invite the same HELUT stack to try again.
             </p>
           </div>
           <div className="prose">

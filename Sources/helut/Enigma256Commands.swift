@@ -683,7 +683,7 @@ func runEnigma256Campaign() {
             try nextGen.save(to: genesURL)
             let combo = nextGen.emitNLFFComboVerilog()
             try combo.write(toFile: "enigma_256_nlff_combo.v", atomically: true, encoding: .utf8)
-            for path in ["enigma_256_core.v", "enigma_256_step_cone.v"] {
+            for path in ["enigma_256_core.v", "enigma_256_step_cone.v", "enigma_256_nlff_lfsr_combo.v"] {
                 let src = try String(contentsOfFile: path, encoding: .utf8)
                 try nextGen.rewritingNLFF(in: src).write(toFile: path, atomically: true, encoding: .utf8)
             }
@@ -960,6 +960,36 @@ func enigma256SoftBusCrypt(
     return driver.transfer(plaintext)
 }
 
+/// SoftBus scorer that burst-loads day tables once, then only reloads message keys.
+final class Enigma256SoftBusScorer {
+    private let day: Enigma256DayKey
+    private let bus = Enigma256SoftBus()
+    private let driver: Enigma256AXIDriver
+    private var tablesLoaded = false
+
+    init(day: Enigma256DayKey) {
+        self.day = day
+        self.driver = Enigma256AXIDriver(bus: bus)
+    }
+
+    func crypt(message: Enigma256MessageKey, plaintext: [UInt8]) -> [UInt8] {
+        if !tablesLoaded {
+            driver.configure(day: day, message: message)
+            tablesLoaded = true
+        } else {
+            // Re-burst active-slot wiring (cheap SoftBus assign) + reload stream state.
+            driver.programTablesBurst(message.wiring(from: day))
+            driver.writeMessageKey(message)
+            driver.pulseLoadState()
+        }
+        return driver.transfer(plaintext)
+    }
+
+    func matchCount(message: Enigma256MessageKey, plaintext: [UInt8], ciphertext: [UInt8]) -> Int {
+        enigma256MatchCount(crypt(message: message, plaintext: plaintext), ciphertext)
+    }
+}
+
 /// Hill-climb LFSR seed with Walzenlage + Grundstellung known (side-channel leak model).
 func enigma256HillClimbLFSR(
     day: Enigma256DayKey,
@@ -971,28 +1001,23 @@ func enigma256HillClimbLFSR(
     rng: inout some RandomNumberGenerator
 ) -> (bestMatches: Int, seed: UInt64, elapsedMs: Double) {
     let t0 = DispatchTime.now().uptimeNanoseconds
+    let scorer = Enigma256SoftBusScorer(day: day)
     var seed = UInt64.random(in: 1 ... .max, using: &rng)
     if seed == 0 { seed = 1 }
     var bestSeed = seed
-    var best = enigma256MatchCount(
-        enigma256SoftBusCrypt(
-            day: day,
-            message: Enigma256MessageKey(rotorIndices: rotors, positions: positions, lfsrSeed: seed),
-            plaintext: plaintext
-        ),
-        ciphertext
+    var best = scorer.matchCount(
+        message: Enigma256MessageKey(rotorIndices: rotors, positions: positions, lfsrSeed: seed),
+        plaintext: plaintext,
+        ciphertext: ciphertext
     )
     for _ in 0 ..< rounds {
         let bit = Int.random(in: 0 ..< 64, using: &rng)
         let trial = seed ^ (UInt64(1) << bit)
         let s = trial == 0 ? 1 : trial
-        let matches = enigma256MatchCount(
-            enigma256SoftBusCrypt(
-                day: day,
-                message: Enigma256MessageKey(rotorIndices: rotors, positions: positions, lfsrSeed: s),
-                plaintext: plaintext
-            ),
-            ciphertext
+        let matches = scorer.matchCount(
+            message: Enigma256MessageKey(rotorIndices: rotors, positions: positions, lfsrSeed: s),
+            plaintext: plaintext,
+            ciphertext: ciphertext
         )
         if matches >= best {
             best = matches
@@ -1016,6 +1041,7 @@ func enigma256HillClimbPositions(
     rng: inout some RandomNumberGenerator
 ) -> (bestMatches: Int, positions: (UInt8, UInt8, UInt8, UInt8), elapsedMs: Double) {
     let t0 = DispatchTime.now().uptimeNanoseconds
+    let scorer = Enigma256SoftBusScorer(day: day)
     var pos: (UInt8, UInt8, UInt8, UInt8) = (
         UInt8.random(in: .min ... .max, using: &rng),
         UInt8.random(in: .min ... .max, using: &rng),
@@ -1023,13 +1049,10 @@ func enigma256HillClimbPositions(
         UInt8.random(in: .min ... .max, using: &rng)
     )
     var bestPos = pos
-    var best = enigma256MatchCount(
-        enigma256SoftBusCrypt(
-            day: day,
-            message: Enigma256MessageKey(rotorIndices: rotors, positions: pos, lfsrSeed: lfsrSeed),
-            plaintext: plaintext
-        ),
-        ciphertext
+    var best = scorer.matchCount(
+        message: Enigma256MessageKey(rotorIndices: rotors, positions: pos, lfsrSeed: lfsrSeed),
+        plaintext: plaintext,
+        ciphertext: ciphertext
     )
     for _ in 0 ..< rounds {
         var trial = pos
@@ -1039,13 +1062,10 @@ func enigma256HillClimbPositions(
         case 2: trial.2 &+= UInt8.random(in: 1 ... 7, using: &rng)
         default: trial.3 &+= UInt8.random(in: 1 ... 7, using: &rng)
         }
-        let matches = enigma256MatchCount(
-            enigma256SoftBusCrypt(
-                day: day,
-                message: Enigma256MessageKey(rotorIndices: rotors, positions: trial, lfsrSeed: lfsrSeed),
-                plaintext: plaintext
-            ),
-            ciphertext
+        let matches = scorer.matchCount(
+            message: Enigma256MessageKey(rotorIndices: rotors, positions: trial, lfsrSeed: lfsrSeed),
+            plaintext: plaintext,
+            ciphertext: ciphertext
         )
         if matches >= best {
             best = matches
@@ -1058,6 +1078,78 @@ func enigma256HillClimbPositions(
     return (best, bestPos, ms)
 }
 
+/// Hill-climb full message key with only the day key known (no Walzenlage / pos / LFSR leak).
+func enigma256HillClimbJoint(
+    day: Enigma256DayKey,
+    plaintext: [UInt8],
+    ciphertext: [UInt8],
+    rounds: Int,
+    rng: inout some RandomNumberGenerator
+) -> (bestMatches: Int, elapsedMs: Double) {
+    let t0 = DispatchTime.now().uptimeNanoseconds
+    let scorer = Enigma256SoftBusScorer(day: day)
+    var available = Array(0 ..< 16)
+    available.shuffle(using: &rng)
+    var rotors = (available[0], available[1], available[2], available[3])
+    var positions = (
+        UInt8.random(in: .min ... .max, using: &rng),
+        UInt8.random(in: .min ... .max, using: &rng),
+        UInt8.random(in: .min ... .max, using: &rng),
+        UInt8.random(in: .min ... .max, using: &rng)
+    )
+    var seed = UInt64.random(in: 1 ... .max, using: &rng)
+    if seed == 0 { seed = 1 }
+
+    func score(_ r: (Int, Int, Int, Int), _ p: (UInt8, UInt8, UInt8, UInt8), _ s: UInt64) -> Int {
+        scorer.matchCount(
+            message: Enigma256MessageKey(rotorIndices: r, positions: p, lfsrSeed: s),
+            plaintext: plaintext,
+            ciphertext: ciphertext
+        )
+    }
+
+    var best = score(rotors, positions, seed)
+    for _ in 0 ..< rounds {
+        var trialR = rotors
+        var trialP = positions
+        var trialS = seed
+        switch Int.random(in: 0 ..< 3, using: &rng) {
+        case 0:
+            let bit = Int.random(in: 0 ..< 64, using: &rng)
+            trialS ^= (UInt64(1) << bit)
+            if trialS == 0 { trialS = 1 }
+        case 1:
+            switch Int.random(in: 0 ..< 4, using: &rng) {
+            case 0: trialP.0 &+= UInt8.random(in: 1 ... 7, using: &rng)
+            case 1: trialP.1 &+= UInt8.random(in: 1 ... 7, using: &rng)
+            case 2: trialP.2 &+= UInt8.random(in: 1 ... 7, using: &rng)
+            default: trialP.3 &+= UInt8.random(in: 1 ... 7, using: &rng)
+            }
+        default:
+            let pool = Array(0 ..< 16).filter {
+                $0 != trialR.0 && $0 != trialR.1 && $0 != trialR.2 && $0 != trialR.3
+            }
+            guard let pick = pool.randomElement(using: &rng) else { continue }
+            switch Int.random(in: 0 ..< 4, using: &rng) {
+            case 0: trialR.0 = pick
+            case 1: trialR.1 = pick
+            case 2: trialR.2 = pick
+            default: trialR.3 = pick
+            }
+        }
+        let matches = score(trialR, trialP, trialS)
+        if matches >= best {
+            best = matches
+            rotors = trialR
+            positions = trialP
+            seed = trialS
+            if best == plaintext.count { break }
+        }
+    }
+    let ms = Double(DispatchTime.now().uptimeNanoseconds - t0) / 1_000_000
+    return (best, ms)
+}
+
 func runEnigma256StructuredKPA() {
     _ = Enigma256Generation.bootstrapFromFixture()
     let rounds = intFlag("--enigma256-kpa-rounds") ?? 8_192
@@ -1067,6 +1159,8 @@ func runEnigma256StructuredKPA() {
     let nonce = Data("struct-kpa-nonce!".utf8)
     let trueKey = Enigma256KDF.deriveMessageKey(masterIKM: ikm, nonce: nonce)
     let ct = enigma256SoftBusCrypt(day: ctx.day, message: trueKey, plaintext: crib)
+    let runHard = CommandLine.arguments.contains("--enigma256-structured-kpa-hard")
+        || !CommandLine.arguments.contains("--enigma256-structured-kpa-partial-only")
 
     var rng = SystemRandomNumberGenerator()
     let climbLFSR = enigma256HillClimbLFSR(
@@ -1087,17 +1181,30 @@ func runEnigma256StructuredKPA() {
         rounds: rounds,
         rng: &rng
     )
+    let climbJoint: (bestMatches: Int, elapsedMs: Double)? = runHard
+        ? enigma256HillClimbJoint(
+            day: ctx.day,
+            plaintext: crib,
+            ciphertext: ct,
+            rounds: rounds,
+            rng: &rng
+        )
+        : nil
 
     let lfsrPressure = climbLFSR.bestMatches == crib.count
     let posPressure = climbPos.bestMatches == crib.count
+    let jointPressure = climbJoint.map { $0.bestMatches == crib.count } ?? false
     print("Enigma 256 structured SoftBus KPA (gen \(Enigma256Generation.current.id))")
     print("  crib: \(crib.count) B  rounds: \(rounds)")
     print("  hill-climb LFSR (pos+Walzenlage known): \(climbLFSR.bestMatches)/\(crib.count) in \(String(format: "%.1f", climbLFSR.elapsedMs)) ms \(lfsrPressure ? "BREAK" : "hold")")
     print("  hill-climb positions (LFSR+Walzenlage known): \(climbPos.bestMatches)/\(crib.count) in \(String(format: "%.1f", climbPos.elapsedMs)) ms \(posPressure ? "BREAK" : "hold")")
-    if lfsrPressure || posPressure {
-        print("  red_pressure: true — leaked message-key halves are fatal; keep AEAD/control-plane tight")
+    if let joint = climbJoint {
+        print("  hill-climb joint (day only): \(joint.bestMatches)/\(crib.count) in \(String(format: "%.1f", joint.elapsedMs)) ms \(jointPressure ? "BREAK" : "hold")")
+    }
+    if lfsrPressure || posPressure || jointPressure {
+        print("  red_pressure: true — message-key recovery under leak/search; keep AEAD/control-plane tight")
         exit(2)
     } else {
-        print("  red_pressure: false — SoftBus holds under partial-leak hill-climb")
+        print("  red_pressure: false — SoftBus holds under structured KPA")
     }
 }
