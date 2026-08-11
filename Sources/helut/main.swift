@@ -58,7 +58,9 @@ let positionalArgs: [String] = {
         "--enigma256-in", "--enigma256-ikm", "--enigma256-salt", "--enigma256-nonce",
         "--enigma256-mode", "--enigma256-plain-file",
         "--enigma256-host", "--enigma256-port",
-        "--enigma256-passphrase", "--enigma256-pbkdf2-iters"
+        "--enigma256-passphrase", "--enigma256-pbkdf2-iters",
+        "--enigma256-netlist", "--enigma256-emit-out", "--enigma256-tensorlut-log",
+        "--enigma256-tensorlut-gens", "--enigma256-tensorlut-pop"
     ]
     while index < args.count {
         let arg = args[index]
@@ -103,6 +105,11 @@ if CommandLine.arguments.contains("--enigma256-listen") {
 
 if CommandLine.arguments.contains("--enigma256-connect") {
     runEnigma256TCPConnect()
+    exit(0)
+}
+
+if CommandLine.arguments.contains("--enigma256-tensorlut") {
+    runEnigma256TensorLUT()
     exit(0)
 }
 

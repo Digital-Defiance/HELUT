@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Synthesize enigma_256_core.v → Yosys JSON (future TensorLUT melt input).
+# Synthesize enigma_256_core.v → Yosys JSON for FPGA bring-up (BRAMs kept).
+# Does NOT flatten tables into soft flops (that path is ~20k DFFs — TensorLUT poison).
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 OUT="${1:-$ROOT/build/enigma_256_netlist.json}"
@@ -9,12 +10,11 @@ cd "$ROOT"
 yosys -Q -p "
   read_verilog -sv enigma_256_core.v
   hierarchy -check -top enigma_256_core
-  proc; opt; memory; opt
-  techmap; opt
-  abc -g AND,NAND,OR,NOR,XOR,XNOR,MUX
+  proc; opt
+  memory -nomap
   opt_clean
   write_json $OUT
   stat
 "
 
-echo "Wrote $OUT"
+echo "Wrote $OUT (memories kept as \$mem — FPGA / Blue Team path)"

@@ -75,10 +75,11 @@ Mutation parameters ship as software; nodes recompile and flash local fabric.
 
 - **Oracle / core:** `Enigma256.swift` ↔ `enigma_256_core.v` (NLFF stepping). Golden co-sim: `Scripts/enigma256_sim.sh`.
 - **Session / AEAD:** `Enigma256Context`, `Enigma256AEAD`, `Enigma256ProtectedSession`; `E256` ver=2 containers.
-- **AXI:** Lite wrapper `enigma_256_axi.v`; AXIS table DMA `enigma_256_axis_tables.v`; SoftBus burst + jitter (`ENIGMA256_REGMAP.md`).
+- **AXI:** Lite + **AXIS table burst** (`enigma_256_axis_tables.v` wired into `enigma_256_axi.v`; CTRL[1] arms). SoftBus burst + jitter. Co-sim: `Scripts/enigma256_axi_sim.sh` (default AXIS; `LITE=1` legacy).
 - **Handshake:** X25519, hybrid ML-KEM / X-Wing, Ed25519-signed hybrid wire frames.
 - **Wire / TCP / PSK:** `Enigma256Wire` (AEAD DATA), `Enigma256TCPTransport`, PBKDF2-SHA512 PSK.
-- **Red Team hold:** Do **not** TensorLUT-melt until golden vectors match RTL and Yosys is clean.
+- **Yosys / TensorLUT:** FPGA path keeps BRAMs (`Scripts/enigma256_synth.sh`). Deliberate Red Team targets the **NLFF step-enable cone** (`enigma_256_nlff_combo.v` → 4 LUT6): `Scripts/enigma256_tensorlut.sh` emits baseline + cold-start smoke (`logs/tensorlut-enigma256-nlff.log`). Full-core BRAM soft-map (~20k DFFs) stays out of scope.
+- **Red Team hold (updated):** Golden + AXI AXIS co-sim pass; TensorLUT is pointed at the NLFF cone on purpose — not a premature full-core melt.
 
 ## 9. Protocol gap closure
 
