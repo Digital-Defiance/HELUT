@@ -35,13 +35,50 @@ export function JournalPage() {
       <section className="band">
         <div className="shell">
           <div className="section-head">
+            <div className="kicker">Hard facts</div>
+            <h2>What we know for sure against history</h2>
+            <p>
+              Not hunches. Exhaustion, archival negatives, and graded controls.
+            </p>
+          </div>
+          <ul className="stack-list">
+            <li>
+              <span className="mono">NET</span>
+              <span>
+                <strong>M-Thetis, not Potsdam.</strong> Kenngruppe <code>ACH</code> names Thetis. The three recovered 1 May daily keys from other nets decrypt other U-534 traffic; against this ciphertext every message key is noise. No depth partner, no kiss, no Thetis key sheet—the Grund table is gone, so indicators buy less than one bit.
+              </span>
+            </li>
+            <li>
+              <span className="mono">ENGINE</span>
+              <span>
+                <strong>The campaign path works.</strong> Blind Welchman control breaks known P1030684 in six minutes with all ten plugs. Stochastic KPA recovers the same control when the template is known (oracle and near-miss). Every clean negative below is a real negative, not a broken tool. Parallel track: TensorLUT locks the unmutated M4 netlist at <em>F<sub>crypto</sub> = 0</em>; full INIT melt and stecker-cone melt shattered under λ; the live arm freezes that core and evolves a reciprocal stecker by construction.
+              </span>
+            </li>
+            <li>
+              <span className="mono">ELIMINATED</span>
+              <span>
+                <strong>Where tested, these wedges are gone:</strong> exact ≥16 catalog × rings AAAA; curated exact and fuzzed top-40 × right rings; ≥16 UEBUNG heads and their body anchors under right-ring coverage; Thetis-register × AAAA; training, collapse, and weather/keyboard stochastic priors under an 80% rigor bar (ceiling ~60–69% is coincidence). Shell-RIGA with free rings did not lift a wrong prior over that bar.
+              </span>
+            </li>
+            <li>
+              <span className="mono">OPEN</span>
+              <span>
+                <strong>Still untested or incomplete:</strong> most of the catalog under right-ring sweep (resume menu 203; parked for Regenbogen); Thetis-register rings from menu 14; any middle ring other than A (~8–15% of keys). Sister message P1030681 needed heavy degarbling—exact Welchman clean negatives do not rule out a mis-transcribed P1030680. Soft-band near-misses now quarantine into Stochastic seeds. More GPU on inventing letters does not invent the plaintext—boolean coverage plus garble-aware escalation does.
+              </span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section className="band">
+        <div className="shell">
+          <div className="section-head">
             <div className="kicker">Chronology</div>
             <h2>Hunting the true key, step by step</h2>
             <p>
               When you are trying to break a cipher this old, your first instinct is to let a computer guess the answer. I learned very quickly that guessing is exactly what the Enigma machine was designed to defeat. Here is the true chronological history of my attack on U-534.
             </p>
           </div>
-
           <div className="timeline">
             <article className="tl-item">
               <div className="when">Phase 0: The False Start</div>
@@ -234,7 +271,7 @@ export function JournalPage() {
               <h3>I stopped the four-day sweep on purpose.</h3>
               <div className="prose">
                 <p>
-                  I started the exact ≥16 catalog ring sweep, then parked it at menu 57 of 868—all dead at the board so far—in <code>logs/campaign-catalog-rings.log</code>. Resume is <code>--bombe-from 58</code> with append. I was not going to spend the remaining days forcing Potsdam register onto a training net while a Thetis-shaped opening was still untested.
+                  I started the exact ≥16 catalog ring sweep, then parked it at menu 57 of 868—all dead at the board so far—in <code>logs/campaign-catalog-rings.log</code> to chase Übung. That arm later resumed and has since cleared through menu 202 (still all dead); resume is <code>--bombe-from 203</code>. I was not going to spend those days forcing Potsdam register onto a training net while a Thetis-shaped opening was still untested.
                 </p>
               </div>
             </article>
@@ -256,7 +293,64 @@ export function JournalPage() {
               <h3>Not Potsdam. Not more UEBUNG. Try the training desk.</h3>
               <div className="prose">
                 <p>
-                  With Übung-push exhausted, I am probing Kenngruppe drill from this message’s own keying material—<code>ACH</code>, <code>SEDM</code>, <code>OEDM</code>—and school/training openings like <code>AUSBILDUNG</code>, <code>LEHRGANG</code>, <code>ANALLEFUNKSTELLEN</code>, at the head, length ≥16. The scraped “plaintext” field is Girard’s Buchgruppen worksheet, not a decrypt; I am not cribbing that.
+                  With Übung-push exhausted, I probed Kenngruppe drill from this message’s own keying material—<code>ACH</code>, <code>SEDM</code>, <code>OEDM</code>—and school/training openings like <code>AUSBILDUNG</code>, <code>LEHRGANG</code>, <code>ANALLEFUNKSTELLEN</code>, at the head, length ≥16. AAAA: three physical boards, zero breaks. Best candidate IC 0.041 / tail −4.903. Right-ring sweep of that set was parked at menu 13 of 73—all dead or unscorable so far. Resume is <code>--bombe-from 14</code>.
+                </p>
+              </div>
+            </article>
+            <article className="tl-item">
+              <div className="when">Phase 18: Stochastic Bombe</div>
+              <h3>Match the template. Do not score German-ness.</h3>
+              <div className="prose">
+                <p>
+                  Turing’s Bombe eliminated impossible keys with a known crib: boolean death by contradiction. Eighty-five years later I can do the reverse—because the GPU can score millions of keys that are merely <em>better</em>, not only keys that are impossible. The Stochastic Bombe keeps a hypothesized plaintext fixed (or a small template bank) and evolves the daily key until the decrypt matches letter-for-letter. That is not brute-forcing \(26^{72}\) plaintext; it is searching the key space under an exact-match objective. German n-grams are irrelevant—Thetis need not look like Potsdam.
+                </p>
+                <p>
+                  The Metal cleartext batch already runs this on the GPU: 26 Greek windows × 17,576 L/M/R lanes per stecker. Control on the first 72 letters of known P1030684 proves the datapath: oracle stecker recovers plaintext and message key <code>VYAA</code> in ~0.2s; drop one true plug and hill-climb climbs 65→72. Cold blind stecker search only reached 22/72 in forty generations—more gens will not melt a false peak in a \(10^{14}\)-sized plugboard. Near the truth the landscape is sharp; far away it is full of traps.
+                </p>
+                <p>
+                  What will break P1030680 is not “evolve harder” on an empty template. It is a small bank of Thetis-shaped hypothesized plaintexts (training pads, Kenngruppe drill, structural grids) plus shell constraints, then key search under letter-match—Welchman still runs wherever a ≥16 crib lives. Reversing Turing only works when you bring a hypothesis the 1945 machine never needed to invent on its own.
+                </p>
+                <p>
+                  First live shots on the GPU: Metal KPA against a Thetis template bank under the Potsdam-wheel prior. Max-over-bank peaked at 14/39 on a mid-message FLOTTX guess. Per-template GA on sixteen head masks topped out around half—noise. Then I ran it with rigor: ratio fitness, an empirical noise floor per cell, a survivor bar of 80% and at least ten points above that floor, twenty-one structural Thetis masks, and both the Potsdam-wheel and two-notch priors. Forty-two cells. Zero survivors. Best score 11/16 (68.8%) on <code>THETIS@1</code> under Potsdam—above noise, below the bar.
+                </p>
+                <p>
+                  Then I dropped the training-net assumption. If Thetis was a shadow tactical fallback in the last days, the lexicon is collapse language: <code>VERSENKEN</code>, <code>REGENBOGEN</code>, <code>SOFORT</code>, <code>FLENSBURG</code>, <code>DOENITZ</code>, <code>ANTWORTEN</code>. Same engine, new targets. Another rigor pass—twenty-four collapse heads × two priors—again zero survivors. Best: 11/16 (68.8%) on <code>DOENITZFLENSBURG@0</code>, the same ceiling as the training bank.
+                </p>
+                <p>
+                  Meta-evolve mutated those banks; weather, keyboard slides, and Kurzsignal-shaped masks followed; then shell-RIGA with continuous random immigration and free rings. Every arm: zero survivors under the rigor bar. Best weather-RIGA score was 60%—still coincidence. The architecture is holding the line exactly where it should. Wrong plaintext plus all the Metal in the world does not invent the true letters. Exact cribs go back to the Welchman ring sweep; stochastic stays parked until a qualitatively new hypothesis appears.
+                </p>
+              </div>
+            </article>
+            <article className="tl-item">
+              <div className="when">Phase 21: TensorLUT</div>
+              <h3>Melt the silicon. Learn what cannot melt. Adapt.</h3>
+              <div className="prose">
+                <p>
+                  While the catalog ring sweep burns Boolean coverage, I closed a different loop: a continuous–discrete compiler. Yosys LUT6 cells become 64-wide floating-point INIT tensors. Metal evaluates them with a multilinear kernel and ticks the DFFs in a streaming inject→forward→clock→sample contract—exactly what a stateful Enigma needs. Fitness is soft ciphertext×plaintext MSE; a rising λ penalty squeezes fractions toward binary. When the elite snaps clean, <code>TensorLUTEmitter</code> writes gate-level <code>{`LUT6 #(.INIT(64'h…))`}</code> Verilog.
+                </p>
+                <p>
+                  Before wiping anything I locked the unmutated M4 core: 925 LUT6 + 49 DFFs, ~158 KB of baseline Verilog, and <em>F<sub>crypto</sub> = 0</em> on a four-letter crib with known Grundstellung. That proves the continuous weights still execute physical Enigma. Then the full melt: all 59,200 INIT floats to 0.5. Explore climbed from about −4.59 to −1.22. Squeeze toward λ=10 forced discreteness and <em>regressed</em> crypto to −8.04 with tens of thousands of fractional weights left. Continuous soft paths that ignore rotor wiring look brilliant until the hardware law arrives. That is dependency-chain shatter—not rediscovery.
+                </p>
+                <p>
+                  Adaptation one: freeze known-good LUTs and melt only a cone. On an abc-flattened netlist there are no hierarchical plugboard names; a naive reverse BFS floods hundreds of cells through the state cloud. A cone tagger that refuses state-Q wires and unwraps registered plaintext recovered sixteen edge LUTs. Melting just those still shattered under λ. Early resignation correctly aborted doomed lineages—including an identity-stecker control that resigned three times with hundreds of fractional melt weights. The structural lesson: Verilog <code>plugboard()</code> is identity. Those sixteen cells are I/O codecs, not a reciprocal letter map. Independent INIT floats never invent A↔X.
+                </p>
+                <p>
+                  Adaptation two: stop melting the stecker into INIT tables. Freeze the entire known-good TensorLUT core. Evolve a <code>SteckerInvolution</code>—at most ten disjoint pairs—and sandwich it around the frozen silicon: inject <em>S</em>(ciphertext), score soft plaintext against the bits of <em>S</em>(plaintext). Reciprocity is structural; the GA cannot invent a non-involution. Identity seed on the same four-letter crib hits <em>F<sub>crypto</sub> = 0</em>. Blind search needed longer cribs, parsimony, plateau pair-growth, and soft freeze with thaw—hard freeze once locked a wrong second plug. With those adaptations, a three-pair board on a fourteen-letter crib rediscovers the exact involution with no oracle seed. This is still not a P1030680 break claim. It is the generative compiler learning which genotype belongs on which side of the wire.
+                </p>
+              </div>
+            </article>
+            <article className="tl-item">
+              <div className="when">Phase 22: Quarantine</div>
+              <h3>Exact bars drop garbled truths. Soft-band them into Stochastic.</h3>
+              <div className="prose">
+                <p>
+                  Dan Girard’s degarbling of the Dönitz sister message P1030681 shows what U-534 paper actually looks like: two disagreeing copies, U confused with N, Q with G, a whole four-letter group missing from one transcript. Our message may be the same kind of mess. An exact Welchman BREAK bar can therefore throw away the true shell because two or three ciphertext letters are wrong.
+                </p>
+                <p>
+                  So I added a quarantine tier. Physical stops that still decrypt their crib exactly, clear a soft IC/trigram band, but fail the strict break gate are written to <code>logs/quarantine_candidates.json</code>. The Stochastic Bombe can ingest that file as elite shell seeds—wheels and rings locked, stecker free to drift—and hunt local garbles without abandoning the Boolean sieve. Synthetic control: wipe twenty letters of known P1030684 after the crib; clean CT still BREAKs, garbled CT soft-bands, Hybrid escalate recovers 100/120 (≥80%). Historical control on Girard’s P1030681: the Schlüsselzettel re-check is only twelve letter diffs and still BREAKs; the first draft—uncertain dots filled, missing group <code>HMHY</code> re-inserted—is thirty-eight diffs, lands in the soft band, and escalate recovers the edit ceiling (334/372). Prior exact-menu clean negatives still stand for those letter strings; they do not stand for a nearby transcription of the same German.
+                </p>
+                <p>
+                  An audit of older campaign logs found no soft-band hits on P1030680 at the default soft tail (−4.0)—closest is <code>UEBUNGXUEBUNG@0</code> at IC 0.049 / tail −4.270. A temporary soft-tail floor of −4.3 on a slim UEBUNG near-miss fixture pulled 55 candidates into quarantine (one whole-band shell). Hybrid locked-shell escalate from that net returned a clean negative under the 80% survivor bar—German-looking IC, coincidence-wall ratio. Soft boundary catches the stop; it does not invent the plaintext.
                 </p>
               </div>
             </article>
@@ -270,7 +364,7 @@ export function JournalPage() {
             <div className="kicker">Honest Scope</div>
             <h2>The Evidence Room</h2>
             <p>
-              I know the Potsdam 1 May keys decrypt other U-534 traffic, but not this message. The archival levers are spent. My engine is graded rather than trusted—a blind control breaks a known key through the full campaign in 361 seconds. Exact catalog and fuzzed arms under rings AAAA are clean negatives; so is the ≥16 UEBUNG head. The mid-message “Übung push” claim is dead under AAAA and under full right-ring sweep (40/40 body anchors, zero stops). What remains: parked catalog rings at menu 57/868, no middle ring but A, and Thetis-register probes now running.
+              I know the Potsdam 1 May keys decrypt other U-534 traffic, but not this message. The archival levers are spent. My engine is graded rather than trusted—a blind Welchman control breaks a known key through the full campaign in 361 seconds, and the Stochastic Bombe’s GPU KPA path recovers that same control when the template is known. Training, collapse, weather, meta-evolve, and shell-RIGA all produced zero survivors under an 80%∩noise+10% gate. Exact catalog and fuzzed arms under rings AAAA are clean negatives; so is the ≥16 UEBUNG head. Sister traffic P1030681 needed degarbling, so exact clean negatives may still miss a mis-read ciphertext—soft-band Welchman stops now quarantine into Stochastic seeds, graded on both synthetic and historical garbles. TensorLUT is a parallel compiler track, not a Thetis crib. What remains on the menu path: catalog right-ring coverage parked at menu 202 (resume 203), Regenbogen/Hannibal operational cribs queued next, parked Thetis-register rings at 13/73, and no middle ring but A.
             </p>
           </div>
           <ul className="stack-list">
@@ -283,13 +377,13 @@ export function JournalPage() {
             <li>
               <span className="mono">LOGS</span>
               <span>
-                <strong>The Ledger:</strong> A record of every campaign, including the ones that embarrass me. The false-alarm catalog run, the top-30 and fuzzed top-40 ring sweeps, the blind control (<code>control-p1030684-rings.log</code>), the head-gate catalog re-read, the UEBUNG arm 1 clean negative, the arm 2 pair run aborted in a ghost flood (<code>campaign-uebung-pair-aaaa.log</code>), and the parked catalog rings log.
+                <strong>The Ledger:</strong> Every campaign, including the embarrassing ones—false-alarm catalog, top-30 and fuzzed top-40 ring sweeps, Welchman blind control (<code>control-p1030684-rings.log</code>), Stochastic Bombe KPA grades (<code>stochastic-bombe-control-*.log</code>), UEBUNG arms, catalog rings, TensorLUT shatter/involution grades (<code>tensorlut-m4-coldstart.log</code>, <code>tensorlut-m4-stecker-melt.log</code>, <code>tensorlut-m4-stecker-resign-control.log</code>, <code>tensorlut-m4-stecker-involution-blind-3pair.log</code>), and quarantine garble controls (<code>quarantine-garble-control.log</code>, <code>quarantine-donitz-control.log</code>, <code>quarantine-donitz-first-control.log</code>).
               </span>
             </li>
             <li>
               <span className="mono">VICTORY CONDITIONS</span>
               <span>
-                <strong>The Rules of Engagement:</strong> I claim a break only when four things align: a naval German plaintext, an exact crib match, an IC ≥ 0.055, and a physically possible ≤ 10-plug board — judged over the whole message, or over a readable head of at least 16 letters outside the crib. Cribs under 16 cannot solo-claim a break; under confirm-2 they only re-test shells a ≥16 anchor already locked. Anything less is a ghost.
+                <strong>The Rules of Engagement:</strong> I claim a break only when four things align: a naval German plaintext, an exact crib match, an IC ≥ 0.055, and a physically possible ≤ 10-plug board — judged over the whole message, or over a readable head of at least 16 letters outside the crib. Cribs under 16 cannot solo-claim a break; under confirm-2 they only re-test shells a ≥16 anchor already locked. Stochastic Bombe halt is exact template match under a ≤10-plug board—never a high bigram score alone. Anything less is a ghost.
               </span>
             </li>
           </ul>
@@ -302,7 +396,7 @@ export function JournalPage() {
             <div className="kicker">The Plan</div>
             <h2>What is left, in order of cheapness</h2>
             <p>
-              The head-gate re-read, the fuzzed turnover arm, and both UEBUNG AAAA arms are closed. Everything below is priced in real GPU time on one Apple Silicon machine. One crib placement, swept across all 26 ring phases, is 16 billion machine settings and takes about six and a half minutes—roughly 190 placements a day.
+              The head-gate re-read, the fuzzed turnover arm, UEBUNG arms, and the current stochastic priors are closed. Everything below is priced in real GPU time on one Apple Silicon machine. One crib placement, swept across all 26 ring phases, is 16 billion machine settings and takes about six and a half minutes—roughly 190 placements a day.
             </p>
           </div>
 
@@ -328,11 +422,11 @@ export function JournalPage() {
             </article>
 
             <article className="tl-item">
-              <div className="when">3 — Parked at menu 57 of 868</div>
+              <div className="when">3 — Parked: catalog resume from menu 203</div>
               <h3>Sweep every ring phase on every exact crib.</h3>
               <div className="prose">
                 <p>
-                  I started the four-day ring sweep and parked it to chase another theory. Menus 1–57 are done—all dead at the board—in <code>logs/campaign-catalog-rings.log</code>. Resume later with <code>--bombe-from 58</code> and append to that log; do not restart from menu 1.
+                  Menus 1–202 are done—all dead at the board—in <code>logs/campaign-catalog-rings.log</code>. Resume later with <code>--bombe-from 203</code> and append. Live Metal is on the Regenbogen/Hannibal operational-crib queue. Quarantine stays armed so any soft-band physical lands in <code>logs/quarantine_candidates.json</code>.
                 </p>
               </div>
             </article>
@@ -361,38 +455,47 @@ export function JournalPage() {
             </article>
 
             <article className="tl-item">
-              <div className="when">6 — Running — hours</div>
+              <div className="when">6 — Parked at menu 13 of 73 (parallel OK)</div>
               <h3>Probe Thetis register: Kenngruppe and training openings.</h3>
               <div className="prose">
                 <p>
-                  Not Potsdam. Not more <code>UEBUNG</code> pads. Head offsets, length ≥16, rings AAAA first. Catalog ring sweep stays parked until this cools.
+                  Seventy-three ≥16 Kenngruppe/training placements at the head under rings AAAA: three physical boards, zero breaks. Right-ring sweep reached menu 13 of 73—all dead or unscorable—then was aborted. Resume with <code>--bombe-from 14</code> into <code>logs/campaign-thetis-register-rings.log</code> while the catalog sweep runs.
                 </p>
               </div>
             </article>
 
             <article className="tl-item">
-              <div className="when">7 — About 2.5 days</div>
+              <div className="when">7 — Done, clean negatives under rigor bar</div>
+              <h3>Stochastic Bombe: training, collapse, weather, RIGA.</h3>
+              <div className="prose">
+                <p>
+                  Training structural, collapse/tactical, weather/keyboard/Kurzsignal, meta-evolve, and shell-RIGA with free rings: all zero survivors. Coincidence ceiling ~60–69%. More immigration does not invent plaintext. Stochastic stays parked; menus stay on Welchman.
+                </p>
+              </div>
+            </article>
+
+            <article className="tl-item">
+              <div className="when">8 — About 2.5 days after live candidates</div>
               <h3>Unpin the middle ring on the best menus.</h3>
               <div className="prose">
                 <p>
-                  The 8–15% of keys my audit says have never been on the board. Twenty-six times the cost, so it only earns its slot on menus that ever live.
+                  The 8–15% of keys my audit says have never been on the board. Twenty-six times the cost, so it only earns its slot on menus that ever live under right-ring coverage.
                 </p>
               </div>
             </article>
 
             <article className="tl-item">
-              <div className="when">8 — Parked, last resort</div>
-              <h3>Catalog ring sweep can wait.</h3>
+              <div className="when">9 — Parallel: TensorLUT involution</div>
+              <h3>Freeze the core; evolve reciprocal plugs.</h3>
               <div className="prose">
                 <p>
-                  Menus 1–57 of the exact ≥16 ring sweep are already dead in <code>logs/campaign-catalog-rings.log</code>. Resume with <code>--bombe-from 58</code> only if Thetis-register probes cool. I still do not believe in spending the remaining days forcing Potsdam register onto a training net.
+                  Full INIT melt and stecker-cone melt are diagnosed dead ends. The live arm freezes the known-good TensorLUT silicon and searches a ≤10-pair involution sandwich. Blind three-pair rediscovery on a fourteen-letter crib already PASSed. Still parallel research—not a substitute for catalog right-ring coverage from menu 203.
                 </p>
               </div>
             </article>
           </div>
         </div>
       </section>
-
       <section className="band-ink">
         <div className="shell split">
           <div className="section-head" style={{ marginBottom: 0 }}>

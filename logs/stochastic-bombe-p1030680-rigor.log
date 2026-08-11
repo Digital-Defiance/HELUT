@@ -1,0 +1,1930 @@
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 22…22)
+Shell evolution: ON freeRings=false WO=6 ringSeeds=2 subspace=potsdam-neighbourhood
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  9/22 (41%) tmpl=struct:pad+GRUPPENZ@g2@1 IC=0.0344 pos=ROJJ | UKWB beta IV-VIII-III rings=AACU stecker=AN LO
+  all-time  9/22 tmpl=struct:pad+GRUPPENZ@g2@1 pos=ROJJ | UKWB beta IV-VIII-III rings=AACU stecker=AN LO
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  9/22 (41%) tmpl=struct:pad+GRUPPENZ@g2@1 IC=0.0344 pos=ROJJ | UKWB beta IV-VIII-III rings=AACU stecker=AN LO
+  all-time  9/22 tmpl=struct:pad+GRUPPENZ@g2@1 pos=ROJJ | UKWB beta IV-VIII-III rings=AACU stecker=AN LO
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  9/22 (41%) tmpl=struct:pad+GRUPPENZ@g2@1 IC=0.0344 pos=ROJJ | UKWB beta IV-VIII-III rings=AACU stecker=AN LO
+  all-time  9/22 tmpl=struct:pad+GRUPPENZ@g2@1 pos=ROJJ | UKWB beta IV-VIII-III rings=AACU stecker=AN LO
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  9/22 (41%) tmpl=struct:pad+GRUPPENZ@g2@1 IC=0.0344 pos=ROJJ | UKWB beta IV-VIII-III rings=AACU stecker=AN LO
+  all-time  9/22 tmpl=struct:pad+GRUPPENZ@g2@1 pos=ROJJ | UKWB beta IV-VIII-III rings=AACU stecker=AN LO
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  9/22 (41%) tmpl=struct:pad+GRUPPENZ@g2@1 IC=0.0344 pos=ROJJ | UKWB beta IV-VIII-III rings=AACU stecker=AN LO
+  all-time  9/22 tmpl=struct:pad+GRUPPENZ@g2@1 pos=ROJJ | UKWB beta IV-VIII-III rings=AACU stecker=AN LO
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  9/22 (41%) tmpl=struct:pad+GRUPPENZ@g2@1 IC=0.0344 pos=ROJJ | UKWB beta IV-VIII-III rings=AACU stecker=AN LO
+  all-time  9/22 tmpl=struct:pad+GRUPPENZ@g2@1 pos=ROJJ | UKWB beta IV-VIII-III rings=AACU stecker=AN LO
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  9/22 (41%) tmpl=struct:pad+GRUPPENZ@g2@1 IC=0.0344 pos=ROJJ | UKWB beta IV-VIII-III rings=AACU stecker=AN LO
+  all-time  9/22 tmpl=struct:pad+GRUPPENZ@g2@1 pos=ROJJ | UKWB beta IV-VIII-III rings=AACU stecker=AN LO
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g2@1 IC=0.0387 pos=HRUI | UKWC gamma III-IV-VIII rings=AACU stecker=AN HQ SZ
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g2@1 pos=HRUI | UKWC gamma III-IV-VIII rings=AACU stecker=AN HQ SZ
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g2@1 IC=0.0387 pos=HRUI | UKWC gamma III-IV-VIII rings=AACU stecker=AN HQ SZ
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g2@1 pos=HRUI | UKWC gamma III-IV-VIII rings=AACU stecker=AN HQ SZ
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g2@1 IC=0.0387 pos=HRUI | UKWC gamma III-IV-VIII rings=AACU stecker=AN HQ SZ
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g2@1 pos=HRUI | UKWC gamma III-IV-VIII rings=AACU stecker=AN HQ SZ
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g2@1 IC=0.0387 pos=HRUI | UKWC gamma III-IV-VIII rings=AACU stecker=AN HQ SZ
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g2@1 pos=HRUI | UKWC gamma III-IV-VIII rings=AACU stecker=AN HQ SZ
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g2@1 IC=0.0387 pos=HRUI | UKWC gamma III-IV-VIII rings=AACU stecker=AN HQ SZ
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g2@1 pos=HRUI | UKWC gamma III-IV-VIII rings=AACU stecker=AN HQ SZ
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 22…22)
+Shell evolution: ON freeRings=false WO=6 ringSeeds=2 subspace=potsdam-neighbourhood
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  8/22 (36%) tmpl=struct:pad+GRUPPENZ@g4@1 IC=0.0352 pos=VABO | UKWB beta VIII-III-IV rings=AACU stecker=AP BR CN DT GY IW JZ LQ UV
+  all-time  8/22 tmpl=struct:pad+GRUPPENZ@g4@1 pos=VABO | UKWB beta VIII-III-IV rings=AACU stecker=AP BR CN DT GY IW JZ LQ UV
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  9/22 (41%) tmpl=struct:pad+GRUPPENZ@g4@1 IC=0.0356 pos=EFAU | UKWB beta VIII-III-IV rings=AACU stecker=AP BR CN DT EX GY IW JZ LQ UV
+  all-time  9/22 tmpl=struct:pad+GRUPPENZ@g4@1 pos=EFAU | UKWB beta VIII-III-IV rings=AACU stecker=AP BR CN DT EX GY IW JZ LQ UV
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  9/22 (41%) tmpl=struct:pad+GRUPPENZ@g4@1 IC=0.0356 pos=EFAU | UKWB beta VIII-III-IV rings=AACU stecker=AP BR CN DT EX GY IW JZ LQ UV
+  all-time  9/22 tmpl=struct:pad+GRUPPENZ@g4@1 pos=EFAU | UKWB beta VIII-III-IV rings=AACU stecker=AP BR CN DT EX GY IW JZ LQ UV
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  9/22 (41%) tmpl=struct:pad+GRUPPENZ@g4@1 IC=0.0356 pos=EFAU | UKWB beta VIII-III-IV rings=AACU stecker=AP BR CN DT EX GY IW JZ LQ UV
+  all-time  9/22 tmpl=struct:pad+GRUPPENZ@g4@1 pos=EFAU | UKWB beta VIII-III-IV rings=AACU stecker=AP BR CN DT EX GY IW JZ LQ UV
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g4@1 IC=0.0379 pos=IYQB | UKWB beta VIII-III-IV rings=AACU stecker=AD JL
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g4@1 pos=IYQB | UKWB beta VIII-III-IV rings=AACU stecker=AD JL
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g4@1 IC=0.0379 pos=IYQB | UKWB beta VIII-III-IV rings=AACU stecker=AD JL
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g4@1 pos=IYQB | UKWB beta VIII-III-IV rings=AACU stecker=AD JL
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g4@1 IC=0.0379 pos=IYQB | UKWB beta VIII-III-IV rings=AACU stecker=AD JL
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g4@1 pos=IYQB | UKWB beta VIII-III-IV rings=AACU stecker=AD JL
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g4@1 IC=0.0379 pos=IYQB | UKWB beta VIII-III-IV rings=AACU stecker=AD JL
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g4@1 pos=IYQB | UKWB beta VIII-III-IV rings=AACU stecker=AD JL
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g4@1 IC=0.0379 pos=IYQB | UKWB beta VIII-III-IV rings=AACU stecker=AD JL
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g4@1 pos=IYQB | UKWB beta VIII-III-IV rings=AACU stecker=AD JL
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g4@1 IC=0.0379 pos=IYQB | UKWB beta VIII-III-IV rings=AACU stecker=AD JL
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g4@1 pos=IYQB | UKWB beta VIII-III-IV rings=AACU stecker=AD JL
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g4@1 IC=0.0379 pos=IYQB | UKWB beta VIII-III-IV rings=AACU stecker=AD JL
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g4@1 pos=IYQB | UKWB beta VIII-III-IV rings=AACU stecker=AD JL
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g4@1 IC=0.0379 pos=IYQB | UKWB beta VIII-III-IV rings=AACU stecker=AD JL
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g4@1 pos=IYQB | UKWB beta VIII-III-IV rings=AACU stecker=AD JL
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 22…22)
+Shell evolution: ON freeRings=false WO=6 ringSeeds=2 subspace=potsdam-neighbourhood
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  8/22 (36%) tmpl=struct:pad+GRUPPENZ@g6@1 IC=0.0446 pos=MFAV | UKWB gamma IV-VIII-III rings=AACU stecker=AU BF CD EQ IN JZ KT MR VX
+  all-time  8/22 tmpl=struct:pad+GRUPPENZ@g6@1 pos=MFAV | UKWB gamma IV-VIII-III rings=AACU stecker=AU BF CD EQ IN JZ KT MR VX
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  9/22 (41%) tmpl=struct:pad+GRUPPENZ@g6@1 IC=0.0340 pos=DOVI | UKWC gamma VIII-IV-III rings=AAAA stecker=DF JM KU
+  all-time  9/22 tmpl=struct:pad+GRUPPENZ@g6@1 pos=DOVI | UKWC gamma VIII-IV-III rings=AAAA stecker=DF JM KU
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g6@1 IC=0.0364 pos=DOVI | UKWC gamma VIII-IV-III rings=AAAA stecker=DF HT JM KU
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g6@1 pos=DOVI | UKWC gamma VIII-IV-III rings=AAAA stecker=DF HT JM KU
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g6@1 IC=0.0364 pos=DOVI | UKWC gamma VIII-IV-III rings=AAAA stecker=DF HT JM KU
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g6@1 pos=DOVI | UKWC gamma VIII-IV-III rings=AAAA stecker=DF HT JM KU
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  11/22 (50%) tmpl=struct:pad+GRUPPENZ@g6@1 IC=0.0395 pos=QHTO | UKWC gamma VIII-IV-III rings=AAAA stecker=DF EY HT KU
+  all-time  11/22 tmpl=struct:pad+GRUPPENZ@g6@1 pos=QHTO | UKWC gamma VIII-IV-III rings=AAAA stecker=DF EY HT KU
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  11/22 (50%) tmpl=struct:pad+GRUPPENZ@g6@1 IC=0.0395 pos=QHTO | UKWC gamma VIII-IV-III rings=AAAA stecker=DF EY HT KU
+  all-time  11/22 tmpl=struct:pad+GRUPPENZ@g6@1 pos=QHTO | UKWC gamma VIII-IV-III rings=AAAA stecker=DF EY HT KU
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  11/22 (50%) tmpl=struct:pad+GRUPPENZ@g6@1 IC=0.0395 pos=QHTO | UKWC gamma VIII-IV-III rings=AAAA stecker=DF EY HT KU
+  all-time  11/22 tmpl=struct:pad+GRUPPENZ@g6@1 pos=QHTO | UKWC gamma VIII-IV-III rings=AAAA stecker=DF EY HT KU
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  11/22 (50%) tmpl=struct:pad+GRUPPENZ@g6@1 IC=0.0395 pos=QHTO | UKWC gamma VIII-IV-III rings=AAAA stecker=DF EY HT KU
+  all-time  11/22 tmpl=struct:pad+GRUPPENZ@g6@1 pos=QHTO | UKWC gamma VIII-IV-III rings=AAAA stecker=DF EY HT KU
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  12/22 (55%) tmpl=struct:pad+GRUPPENZ@g6@1 IC=0.0387 pos=QHTO | UKWC gamma VIII-IV-III rings=AAAA stecker=DF EY HT KU NZ PR
+  all-time  12/22 tmpl=struct:pad+GRUPPENZ@g6@1 pos=QHTO | UKWC gamma VIII-IV-III rings=AAAA stecker=DF EY HT KU NZ PR
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  12/22 (55%) tmpl=struct:pad+GRUPPENZ@g6@1 IC=0.0387 pos=QHTO | UKWC gamma VIII-IV-III rings=AAAA stecker=DF EY HT KU NZ PR
+  all-time  12/22 tmpl=struct:pad+GRUPPENZ@g6@1 pos=QHTO | UKWC gamma VIII-IV-III rings=AAAA stecker=DF EY HT KU NZ PR
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  12/22 (55%) tmpl=struct:pad+GRUPPENZ@g6@1 IC=0.0387 pos=QHTO | UKWC gamma VIII-IV-III rings=AAAA stecker=DF EY HT KU NZ PR
+  all-time  12/22 tmpl=struct:pad+GRUPPENZ@g6@1 pos=QHTO | UKWC gamma VIII-IV-III rings=AAAA stecker=DF EY HT KU NZ PR
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  12/22 (55%) tmpl=struct:pad+GRUPPENZ@g6@1 IC=0.0387 pos=QHTO | UKWC gamma VIII-IV-III rings=AAAA stecker=DF EY HT KU NZ PR
+  all-time  12/22 tmpl=struct:pad+GRUPPENZ@g6@1 pos=QHTO | UKWC gamma VIII-IV-III rings=AAAA stecker=DF EY HT KU NZ PR
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 21…21)
+Shell evolution: ON freeRings=false WO=6 ringSeeds=2 subspace=potsdam-neighbourhood
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  8/21 (38%) tmpl=struct:AUSBILDUNG_FUNK@3 IC=0.0376 pos=XAKT | UKWB beta VIII-IV-III rings=AACU stecker=AC DF EL GM JR KW YZ
+  all-time  8/21 tmpl=struct:AUSBILDUNG_FUNK@3 pos=XAKT | UKWB beta VIII-IV-III rings=AACU stecker=AC DF EL GM JR KW YZ
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=struct:AUSBILDUNG_FUNK@3 IC=0.0423 pos=UBVT | UKWB beta VIII-IV-III rings=AACU stecker=AC DF EV GM JR KW LY
+  all-time  10/21 tmpl=struct:AUSBILDUNG_FUNK@3 pos=UBVT | UKWB beta VIII-IV-III rings=AACU stecker=AC DF EV GM JR KW LY
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=struct:AUSBILDUNG_FUNK@3 IC=0.0423 pos=UBVT | UKWB beta VIII-IV-III rings=AACU stecker=AC DF EV GM JR KW LY
+  all-time  10/21 tmpl=struct:AUSBILDUNG_FUNK@3 pos=UBVT | UKWB beta VIII-IV-III rings=AACU stecker=AC DF EV GM JR KW LY
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=struct:AUSBILDUNG_FUNK@3 IC=0.0423 pos=UBVT | UKWB beta VIII-IV-III rings=AACU stecker=AC DF EV GM JR KW LY
+  all-time  10/21 tmpl=struct:AUSBILDUNG_FUNK@3 pos=UBVT | UKWB beta VIII-IV-III rings=AACU stecker=AC DF EV GM JR KW LY
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=struct:AUSBILDUNG_FUNK@3 IC=0.0423 pos=UBVT | UKWB beta VIII-IV-III rings=AACU stecker=AC DF EV GM JR KW LY
+  all-time  10/21 tmpl=struct:AUSBILDUNG_FUNK@3 pos=UBVT | UKWB beta VIII-IV-III rings=AACU stecker=AC DF EV GM JR KW LY
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=struct:AUSBILDUNG_FUNK@3 IC=0.0423 pos=UBVT | UKWB beta VIII-IV-III rings=AACU stecker=AC DF EV GM JR KW LY
+  all-time  10/21 tmpl=struct:AUSBILDUNG_FUNK@3 pos=UBVT | UKWB beta VIII-IV-III rings=AACU stecker=AC DF EV GM JR KW LY
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=struct:AUSBILDUNG_FUNK@3 IC=0.0462 pos=UBVT | UKWB beta VIII-IV-III rings=AACU stecker=AC DF EV GM JR KW LN
+  all-time  11/21 tmpl=struct:AUSBILDUNG_FUNK@3 pos=UBVT | UKWB beta VIII-IV-III rings=AACU stecker=AC DF EV GM JR KW LN
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=struct:AUSBILDUNG_FUNK@3 IC=0.0462 pos=UBVT | UKWB beta VIII-IV-III rings=AACU stecker=AC DF EV GM JR KW LN
+  all-time  11/21 tmpl=struct:AUSBILDUNG_FUNK@3 pos=UBVT | UKWB beta VIII-IV-III rings=AACU stecker=AC DF EV GM JR KW LN
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=struct:AUSBILDUNG_FUNK@3 IC=0.0462 pos=UBVT | UKWB beta VIII-IV-III rings=AACU stecker=AC DF EV GM JR KW LN
+  all-time  11/21 tmpl=struct:AUSBILDUNG_FUNK@3 pos=UBVT | UKWB beta VIII-IV-III rings=AACU stecker=AC DF EV GM JR KW LN
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=struct:AUSBILDUNG_FUNK@3 IC=0.0462 pos=UBVT | UKWB beta VIII-IV-III rings=AACU stecker=AC DF EV GM JR KW LN
+  all-time  11/21 tmpl=struct:AUSBILDUNG_FUNK@3 pos=UBVT | UKWB beta VIII-IV-III rings=AACU stecker=AC DF EV GM JR KW LN
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=struct:AUSBILDUNG_FUNK@3 IC=0.0462 pos=UBVT | UKWB beta VIII-IV-III rings=AACU stecker=AC DF EV GM JR KW LN
+  all-time  11/21 tmpl=struct:AUSBILDUNG_FUNK@3 pos=UBVT | UKWB beta VIII-IV-III rings=AACU stecker=AC DF EV GM JR KW LN
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  11/21 (52%) tmpl=struct:AUSBILDUNG_FUNK@3 IC=0.0462 pos=UBVT | UKWB beta VIII-IV-III rings=AACU stecker=AC DF EV GM JR KW LN
+  all-time  11/21 tmpl=struct:AUSBILDUNG_FUNK@3 pos=UBVT | UKWB beta VIII-IV-III rings=AACU stecker=AC DF EV GM JR KW LN
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 20…20)
+Shell evolution: ON freeRings=false WO=6 ringSeeds=2 subspace=potsdam-neighbourhood
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  8/20 (40%) tmpl=struct:FUNKUEBUNG@0 IC=0.0391 pos=HDPQ | UKWB beta IV-III-VIII rings=AAAA stecker=AC EZ FK GS HT IN LU MO PW VX
+  all-time  8/20 tmpl=struct:FUNKUEBUNG@0 pos=HDPQ | UKWB beta IV-III-VIII rings=AAAA stecker=AC EZ FK GS HT IN LU MO PW VX
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=struct:FUNKUEBUNG@0 IC=0.0372 pos=SLHC | UKWC beta VIII-III-IV rings=AACU stecker=BD EP GN HW IY OV QZ
+  all-time  10/20 tmpl=struct:FUNKUEBUNG@0 pos=SLHC | UKWC beta VIII-III-IV rings=AACU stecker=BD EP GN HW IY OV QZ
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=struct:FUNKUEBUNG@0 IC=0.0372 pos=SLHC | UKWC beta VIII-III-IV rings=AACU stecker=BD EP GN HW IY OV QZ
+  all-time  10/20 tmpl=struct:FUNKUEBUNG@0 pos=SLHC | UKWC beta VIII-III-IV rings=AACU stecker=BD EP GN HW IY OV QZ
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=struct:FUNKUEBUNG@0 IC=0.0372 pos=SLHC | UKWC beta VIII-III-IV rings=AACU stecker=BD EP GN HW IY OV QZ
+  all-time  10/20 tmpl=struct:FUNKUEBUNG@0 pos=SLHC | UKWC beta VIII-III-IV rings=AACU stecker=BD EP GN HW IY OV QZ
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=struct:FUNKUEBUNG@0 IC=0.0352 pos=SLHC | UKWC beta VIII-III-IV rings=AACU stecker=BD EP GN HW IY QZ RS
+  all-time  11/20 tmpl=struct:FUNKUEBUNG@0 pos=SLHC | UKWC beta VIII-III-IV rings=AACU stecker=BD EP GN HW IY QZ RS
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=struct:FUNKUEBUNG@0 IC=0.0352 pos=SLHC | UKWC beta VIII-III-IV rings=AACU stecker=BD EP GN HW IY QZ RS
+  all-time  11/20 tmpl=struct:FUNKUEBUNG@0 pos=SLHC | UKWC beta VIII-III-IV rings=AACU stecker=BD EP GN HW IY QZ RS
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=struct:FUNKUEBUNG@0 IC=0.0352 pos=SLHC | UKWC beta VIII-III-IV rings=AACU stecker=BD EP GN HW IY QZ RS
+  all-time  11/20 tmpl=struct:FUNKUEBUNG@0 pos=SLHC | UKWC beta VIII-III-IV rings=AACU stecker=BD EP GN HW IY QZ RS
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=struct:FUNKUEBUNG@0 IC=0.0352 pos=SLHC | UKWC beta VIII-III-IV rings=AACU stecker=BD EP GN HW IY QZ RS
+  all-time  11/20 tmpl=struct:FUNKUEBUNG@0 pos=SLHC | UKWC beta VIII-III-IV rings=AACU stecker=BD EP GN HW IY QZ RS
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=struct:FUNKUEBUNG@0 IC=0.0352 pos=SLHC | UKWC beta VIII-III-IV rings=AACU stecker=BD EP GN HW IY QZ RS
+  all-time  11/20 tmpl=struct:FUNKUEBUNG@0 pos=SLHC | UKWC beta VIII-III-IV rings=AACU stecker=BD EP GN HW IY QZ RS
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=struct:FUNKUEBUNG@0 IC=0.0352 pos=SLHC | UKWC beta VIII-III-IV rings=AACU stecker=BD EP GN HW IY QZ RS
+  all-time  11/20 tmpl=struct:FUNKUEBUNG@0 pos=SLHC | UKWC beta VIII-III-IV rings=AACU stecker=BD EP GN HW IY QZ RS
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=struct:FUNKUEBUNG@0 IC=0.0376 pos=SLHC | UKWC beta VIII-III-IV rings=AACU stecker=BD CL EP GN HW IY OV QZ RS
+  all-time  12/20 tmpl=struct:FUNKUEBUNG@0 pos=SLHC | UKWC beta VIII-III-IV rings=AACU stecker=BD CL EP GN HW IY OV QZ RS
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  12/20 (60%) tmpl=struct:FUNKUEBUNG@0 IC=0.0376 pos=SLHC | UKWC beta VIII-III-IV rings=AACU stecker=BD CL EP GN HW IY OV QZ RS
+  all-time  12/20 tmpl=struct:FUNKUEBUNG@0 pos=SLHC | UKWC beta VIII-III-IV rings=AACU stecker=BD CL EP GN HW IY OV QZ RS
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 20…20)
+Shell evolution: ON freeRings=false WO=6 ringSeeds=2 subspace=potsdam-neighbourhood
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  7/20 (35%) tmpl=struct:FUNKUEBUNG@1 IC=0.0442 pos=HVKH | UKWB gamma IV-III-VIII rings=AAAA stecker=(none)
+  all-time  7/20 tmpl=struct:FUNKUEBUNG@1 pos=HVKH | UKWB gamma IV-III-VIII rings=AAAA stecker=(none)
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=struct:FUNKUEBUNG@1 IC=0.0368 pos=QOGG | UKWC gamma IV-VIII-III rings=AAAA stecker=KM TY
+  all-time  9/20 tmpl=struct:FUNKUEBUNG@1 pos=QOGG | UKWC gamma IV-VIII-III rings=AAAA stecker=KM TY
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=struct:FUNKUEBUNG@1 IC=0.0379 pos=VXOZ | UKWB gamma III-VIII-IV rings=AAAA stecker=AM CE GP HU JS YZ
+  all-time  10/20 tmpl=struct:FUNKUEBUNG@1 pos=VXOZ | UKWB gamma III-VIII-IV rings=AAAA stecker=AM CE GP HU JS YZ
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=struct:FUNKUEBUNG@1 IC=0.0379 pos=VXOZ | UKWB gamma III-VIII-IV rings=AAAA stecker=AM CE GP HU JS YZ
+  all-time  10/20 tmpl=struct:FUNKUEBUNG@1 pos=VXOZ | UKWB gamma III-VIII-IV rings=AAAA stecker=AM CE GP HU JS YZ
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=struct:FUNKUEBUNG@1 IC=0.0379 pos=VXOZ | UKWB gamma III-VIII-IV rings=AAAA stecker=AM CE GP HU JS YZ
+  all-time  10/20 tmpl=struct:FUNKUEBUNG@1 pos=VXOZ | UKWB gamma III-VIII-IV rings=AAAA stecker=AM CE GP HU JS YZ
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=struct:FUNKUEBUNG@1 IC=0.0379 pos=VXOZ | UKWB gamma III-VIII-IV rings=AAAA stecker=AM CE GP HU JS YZ
+  all-time  10/20 tmpl=struct:FUNKUEBUNG@1 pos=VXOZ | UKWB gamma III-VIII-IV rings=AAAA stecker=AM CE GP HU JS YZ
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=struct:FUNKUEBUNG@1 IC=0.0395 pos=VXOZ | UKWB gamma III-VIII-IV rings=AAAA stecker=AM CE FI GP HU JS YZ
+  all-time  11/20 tmpl=struct:FUNKUEBUNG@1 pos=VXOZ | UKWB gamma III-VIII-IV rings=AAAA stecker=AM CE FI GP HU JS YZ
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=struct:FUNKUEBUNG@1 IC=0.0395 pos=VXOZ | UKWB gamma III-VIII-IV rings=AAAA stecker=AM CE FI GP HU JS YZ
+  all-time  11/20 tmpl=struct:FUNKUEBUNG@1 pos=VXOZ | UKWB gamma III-VIII-IV rings=AAAA stecker=AM CE FI GP HU JS YZ
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=struct:FUNKUEBUNG@1 IC=0.0395 pos=VXOZ | UKWB gamma III-VIII-IV rings=AAAA stecker=AM CE FI GP HU JS YZ
+  all-time  11/20 tmpl=struct:FUNKUEBUNG@1 pos=VXOZ | UKWB gamma III-VIII-IV rings=AAAA stecker=AM CE FI GP HU JS YZ
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=struct:FUNKUEBUNG@1 IC=0.0395 pos=VXOZ | UKWB gamma III-VIII-IV rings=AAAA stecker=AM CE FI GP HU JS YZ
+  all-time  11/20 tmpl=struct:FUNKUEBUNG@1 pos=VXOZ | UKWB gamma III-VIII-IV rings=AAAA stecker=AM CE FI GP HU JS YZ
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=struct:FUNKUEBUNG@1 IC=0.0395 pos=VXOZ | UKWB gamma III-VIII-IV rings=AAAA stecker=AM CE FI GP HU JS YZ
+  all-time  11/20 tmpl=struct:FUNKUEBUNG@1 pos=VXOZ | UKWB gamma III-VIII-IV rings=AAAA stecker=AM CE FI GP HU JS YZ
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=struct:FUNKUEBUNG@1 IC=0.0395 pos=VXOZ | UKWB gamma III-VIII-IV rings=AAAA stecker=AM CE FI GP HU JS YZ
+  all-time  11/20 tmpl=struct:FUNKUEBUNG@1 pos=VXOZ | UKWB gamma III-VIII-IV rings=AAAA stecker=AM CE FI GP HU JS YZ
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 20…20)
+Shell evolution: ON freeRings=false WO=6 ringSeeds=2 subspace=potsdam-neighbourhood
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  8/20 (40%) tmpl=struct:pad+ZEITGRUP@g2@0 IC=0.0333 pos=IWUG | UKWB gamma III-VIII-IV rings=AACU stecker=JW
+  all-time  8/20 tmpl=struct:pad+ZEITGRUP@g2@0 pos=IWUG | UKWB gamma III-VIII-IV rings=AACU stecker=JW
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=struct:pad+ZEITGRUP@g2@0 IC=0.0364 pos=IWUG | UKWB gamma III-VIII-IV rings=AACU stecker=EJ
+  all-time  9/20 tmpl=struct:pad+ZEITGRUP@g2@0 pos=IWUG | UKWB gamma III-VIII-IV rings=AACU stecker=EJ
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=struct:pad+ZEITGRUP@g2@0 IC=0.0364 pos=IWUG | UKWB gamma III-VIII-IV rings=AACU stecker=EJ
+  all-time  9/20 tmpl=struct:pad+ZEITGRUP@g2@0 pos=IWUG | UKWB gamma III-VIII-IV rings=AACU stecker=EJ
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=struct:pad+ZEITGRUP@g2@0 IC=0.0364 pos=IWUG | UKWB gamma III-VIII-IV rings=AACU stecker=EJ
+  all-time  9/20 tmpl=struct:pad+ZEITGRUP@g2@0 pos=IWUG | UKWB gamma III-VIII-IV rings=AACU stecker=EJ
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=struct:pad+ZEITGRUP@g2@0 IC=0.0364 pos=IWUG | UKWB gamma III-VIII-IV rings=AACU stecker=EJ
+  all-time  9/20 tmpl=struct:pad+ZEITGRUP@g2@0 pos=IWUG | UKWB gamma III-VIII-IV rings=AACU stecker=EJ
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=struct:pad+ZEITGRUP@g2@0 IC=0.0301 pos=IWUG | UKWB gamma III-VIII-IV rings=AACU stecker=AR
+  all-time  10/20 tmpl=struct:pad+ZEITGRUP@g2@0 pos=IWUG | UKWB gamma III-VIII-IV rings=AACU stecker=AR
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=struct:pad+ZEITGRUP@g2@0 IC=0.0301 pos=IWUG | UKWB gamma III-VIII-IV rings=AACU stecker=AR
+  all-time  10/20 tmpl=struct:pad+ZEITGRUP@g2@0 pos=IWUG | UKWB gamma III-VIII-IV rings=AACU stecker=AR
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=struct:pad+ZEITGRUP@g2@0 IC=0.0301 pos=IWUG | UKWB gamma III-VIII-IV rings=AACU stecker=AR
+  all-time  10/20 tmpl=struct:pad+ZEITGRUP@g2@0 pos=IWUG | UKWB gamma III-VIII-IV rings=AACU stecker=AR
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=struct:pad+ZEITGRUP@g2@0 IC=0.0301 pos=IWUG | UKWB gamma III-VIII-IV rings=AACU stecker=AR
+  all-time  10/20 tmpl=struct:pad+ZEITGRUP@g2@0 pos=IWUG | UKWB gamma III-VIII-IV rings=AACU stecker=AR
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=struct:pad+ZEITGRUP@g2@0 IC=0.0348 pos=IWUG | UKWB gamma III-VIII-IV rings=AACU stecker=AR EJ MO
+  all-time  11/20 tmpl=struct:pad+ZEITGRUP@g2@0 pos=IWUG | UKWB gamma III-VIII-IV rings=AACU stecker=AR EJ MO
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=struct:pad+ZEITGRUP@g2@0 IC=0.0348 pos=IWUG | UKWB gamma III-VIII-IV rings=AACU stecker=AR EJ MO
+  all-time  11/20 tmpl=struct:pad+ZEITGRUP@g2@0 pos=IWUG | UKWB gamma III-VIII-IV rings=AACU stecker=AR EJ MO
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=struct:pad+ZEITGRUP@g2@0 IC=0.0348 pos=IWUG | UKWB gamma III-VIII-IV rings=AACU stecker=AR EJ MO
+  all-time  11/20 tmpl=struct:pad+ZEITGRUP@g2@0 pos=IWUG | UKWB gamma III-VIII-IV rings=AACU stecker=AR EJ MO
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 18…18)
+Shell evolution: ON freeRings=false WO=6 ringSeeds=2 subspace=potsdam-neighbourhood
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  7/18 (39%) tmpl=struct:ACHSEDM_drill@1 IC=0.0450 pos=VRYX | UKWB gamma VIII-III-IV rings=AAAA stecker=FZ HT IY KP OR SV
+  all-time  7/18 tmpl=struct:ACHSEDM_drill@1 pos=VRYX | UKWB gamma VIII-III-IV rings=AAAA stecker=FZ HT IY KP OR SV
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  8/18 (44%) tmpl=struct:ACHSEDM_drill@1 IC=0.0469 pos=VRYX | UKWB gamma VIII-III-IV rings=AAAA stecker=FZ GX HT IY KP OR SV
+  all-time  8/18 tmpl=struct:ACHSEDM_drill@1 pos=VRYX | UKWB gamma VIII-III-IV rings=AAAA stecker=FZ GX HT IY KP OR SV
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  8/18 (44%) tmpl=struct:ACHSEDM_drill@1 IC=0.0469 pos=VRYX | UKWB gamma VIII-III-IV rings=AAAA stecker=FZ GX HT IY KP OR SV
+  all-time  8/18 tmpl=struct:ACHSEDM_drill@1 pos=VRYX | UKWB gamma VIII-III-IV rings=AAAA stecker=FZ GX HT IY KP OR SV
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:ACHSEDM_drill@1 IC=0.0403 pos=LXML | UKWC gamma III-VIII-IV rings=AACU stecker=BE
+  all-time  9/18 tmpl=struct:ACHSEDM_drill@1 pos=LXML | UKWC gamma III-VIII-IV rings=AACU stecker=BE
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:ACHSEDM_drill@1 IC=0.0403 pos=LXML | UKWC gamma III-VIII-IV rings=AACU stecker=BE
+  all-time  9/18 tmpl=struct:ACHSEDM_drill@1 pos=LXML | UKWC gamma III-VIII-IV rings=AACU stecker=BE
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:ACHSEDM_drill@1 IC=0.0403 pos=LXML | UKWC gamma III-VIII-IV rings=AACU stecker=BE
+  all-time  9/18 tmpl=struct:ACHSEDM_drill@1 pos=LXML | UKWC gamma III-VIII-IV rings=AACU stecker=BE
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:ACHSEDM_drill@1 IC=0.0403 pos=LXML | UKWC gamma III-VIII-IV rings=AACU stecker=BE
+  all-time  9/18 tmpl=struct:ACHSEDM_drill@1 pos=LXML | UKWC gamma III-VIII-IV rings=AACU stecker=BE
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  10/18 (56%) tmpl=struct:ACHSEDM_drill@1 IC=0.0485 pos=KVXU | UKWB gamma III-IV-VIII rings=AAAA stecker=AV CH ET KR MN
+  all-time  10/18 tmpl=struct:ACHSEDM_drill@1 pos=KVXU | UKWB gamma III-IV-VIII rings=AAAA stecker=AV CH ET KR MN
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  10/18 (56%) tmpl=struct:ACHSEDM_drill@1 IC=0.0485 pos=KVXU | UKWB gamma III-IV-VIII rings=AAAA stecker=AV CH ET KR MN
+  all-time  10/18 tmpl=struct:ACHSEDM_drill@1 pos=KVXU | UKWB gamma III-IV-VIII rings=AAAA stecker=AV CH ET KR MN
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  10/18 (56%) tmpl=struct:ACHSEDM_drill@1 IC=0.0485 pos=KVXU | UKWB gamma III-IV-VIII rings=AAAA stecker=AV CH ET KR MN
+  all-time  10/18 tmpl=struct:ACHSEDM_drill@1 pos=KVXU | UKWB gamma III-IV-VIII rings=AAAA stecker=AV CH ET KR MN
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  10/18 (56%) tmpl=struct:ACHSEDM_drill@1 IC=0.0485 pos=KVXU | UKWB gamma III-IV-VIII rings=AAAA stecker=AV CH ET KR MN
+  all-time  10/18 tmpl=struct:ACHSEDM_drill@1 pos=KVXU | UKWB gamma III-IV-VIII rings=AAAA stecker=AV CH ET KR MN
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  10/18 (56%) tmpl=struct:ACHSEDM_drill@1 IC=0.0485 pos=KVXU | UKWB gamma III-IV-VIII rings=AAAA stecker=AV CH ET KR MN
+  all-time  10/18 tmpl=struct:ACHSEDM_drill@1 pos=KVXU | UKWB gamma III-IV-VIII rings=AAAA stecker=AV CH ET KR MN
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 18…18)
+Shell evolution: ON freeRings=false WO=6 ringSeeds=2 subspace=potsdam-neighbourhood
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  7/18 (39%) tmpl=struct:LEHRGANG@1 IC=0.0387 pos=QVYL | UKWB gamma IV-III-VIII rings=AAAA stecker=(none)
+  all-time  7/18 tmpl=struct:LEHRGANG@1 pos=QVYL | UKWB gamma IV-III-VIII rings=AAAA stecker=(none)
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  8/18 (44%) tmpl=struct:LEHRGANG@1 IC=0.0356 pos=QVYL | UKWB gamma IV-III-VIII rings=AAAA stecker=NO
+  all-time  8/18 tmpl=struct:LEHRGANG@1 pos=QVYL | UKWB gamma IV-III-VIII rings=AAAA stecker=NO
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  8/18 (44%) tmpl=struct:LEHRGANG@1 IC=0.0356 pos=QVYL | UKWB gamma IV-III-VIII rings=AAAA stecker=NO
+  all-time  8/18 tmpl=struct:LEHRGANG@1 pos=QVYL | UKWB gamma IV-III-VIII rings=AAAA stecker=NO
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  8/18 (44%) tmpl=struct:LEHRGANG@1 IC=0.0356 pos=QVYL | UKWB gamma IV-III-VIII rings=AAAA stecker=NO
+  all-time  8/18 tmpl=struct:LEHRGANG@1 pos=QVYL | UKWB gamma IV-III-VIII rings=AAAA stecker=NO
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  8/18 (44%) tmpl=struct:LEHRGANG@1 IC=0.0356 pos=QVYL | UKWB gamma IV-III-VIII rings=AAAA stecker=NO
+  all-time  8/18 tmpl=struct:LEHRGANG@1 pos=QVYL | UKWB gamma IV-III-VIII rings=AAAA stecker=NO
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  8/18 (44%) tmpl=struct:LEHRGANG@1 IC=0.0356 pos=QVYL | UKWB gamma IV-III-VIII rings=AAAA stecker=NO
+  all-time  8/18 tmpl=struct:LEHRGANG@1 pos=QVYL | UKWB gamma IV-III-VIII rings=AAAA stecker=NO
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@1 IC=0.0364 pos=QVYL | UKWB gamma IV-III-VIII rings=AAAA stecker=CW NO
+  all-time  9/18 tmpl=struct:LEHRGANG@1 pos=QVYL | UKWB gamma IV-III-VIII rings=AAAA stecker=CW NO
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@1 IC=0.0364 pos=QVYL | UKWB gamma IV-III-VIII rings=AAAA stecker=CW NO
+  all-time  9/18 tmpl=struct:LEHRGANG@1 pos=QVYL | UKWB gamma IV-III-VIII rings=AAAA stecker=CW NO
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@1 IC=0.0364 pos=QVYL | UKWB gamma IV-III-VIII rings=AAAA stecker=CW NO
+  all-time  9/18 tmpl=struct:LEHRGANG@1 pos=QVYL | UKWB gamma IV-III-VIII rings=AAAA stecker=CW NO
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@1 IC=0.0364 pos=QVYL | UKWB gamma IV-III-VIII rings=AAAA stecker=CW NO
+  all-time  9/18 tmpl=struct:LEHRGANG@1 pos=QVYL | UKWB gamma IV-III-VIII rings=AAAA stecker=CW NO
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@1 IC=0.0364 pos=QVYL | UKWB gamma IV-III-VIII rings=AAAA stecker=CW NO
+  all-time  9/18 tmpl=struct:LEHRGANG@1 pos=QVYL | UKWB gamma IV-III-VIII rings=AAAA stecker=CW NO
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@1 IC=0.0364 pos=QVYL | UKWB gamma IV-III-VIII rings=AAAA stecker=CW NO
+  all-time  9/18 tmpl=struct:LEHRGANG@1 pos=QVYL | UKWB gamma IV-III-VIII rings=AAAA stecker=CW NO
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 18…18)
+Shell evolution: ON freeRings=false WO=6 ringSeeds=2 subspace=potsdam-neighbourhood
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@2 IC=0.0407 pos=ZPKO | UKWC beta IV-III-VIII rings=AACU stecker=BM CV DL EQ FW GS JY OP TZ
+  all-time  9/18 tmpl=struct:LEHRGANG@2 pos=ZPKO | UKWC beta IV-III-VIII rings=AACU stecker=BM CV DL EQ FW GS JY OP TZ
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@2 IC=0.0407 pos=ZPKO | UKWC beta IV-III-VIII rings=AACU stecker=BM CV DL EQ FW GS JY OP TZ
+  all-time  9/18 tmpl=struct:LEHRGANG@2 pos=ZPKO | UKWC beta IV-III-VIII rings=AACU stecker=BM CV DL EQ FW GS JY OP TZ
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@2 IC=0.0407 pos=ZPKO | UKWC beta IV-III-VIII rings=AACU stecker=BM CV DL EQ FW GS JY OP TZ
+  all-time  9/18 tmpl=struct:LEHRGANG@2 pos=ZPKO | UKWC beta IV-III-VIII rings=AACU stecker=BM CV DL EQ FW GS JY OP TZ
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@2 IC=0.0407 pos=ZPKO | UKWC beta IV-III-VIII rings=AACU stecker=BM CV DL EQ FW GS JY OP TZ
+  all-time  9/18 tmpl=struct:LEHRGANG@2 pos=ZPKO | UKWC beta IV-III-VIII rings=AACU stecker=BM CV DL EQ FW GS JY OP TZ
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@2 IC=0.0407 pos=ZPKO | UKWC beta IV-III-VIII rings=AACU stecker=BM CV DL EQ FW GS JY OP TZ
+  all-time  9/18 tmpl=struct:LEHRGANG@2 pos=ZPKO | UKWC beta IV-III-VIII rings=AACU stecker=BM CV DL EQ FW GS JY OP TZ
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@2 IC=0.0407 pos=ZPKO | UKWC beta IV-III-VIII rings=AACU stecker=BM CV DL EQ FW GS JY OP TZ
+  all-time  9/18 tmpl=struct:LEHRGANG@2 pos=ZPKO | UKWC beta IV-III-VIII rings=AACU stecker=BM CV DL EQ FW GS JY OP TZ
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@2 IC=0.0407 pos=ZPKO | UKWC beta IV-III-VIII rings=AACU stecker=BM CV DL EQ FW GS JY OP TZ
+  all-time  9/18 tmpl=struct:LEHRGANG@2 pos=ZPKO | UKWC beta IV-III-VIII rings=AACU stecker=BM CV DL EQ FW GS JY OP TZ
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@2 IC=0.0407 pos=ZPKO | UKWC beta IV-III-VIII rings=AACU stecker=BM CV DL EQ FW GS JY OP TZ
+  all-time  9/18 tmpl=struct:LEHRGANG@2 pos=ZPKO | UKWC beta IV-III-VIII rings=AACU stecker=BM CV DL EQ FW GS JY OP TZ
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@2 IC=0.0407 pos=ZPKO | UKWC beta IV-III-VIII rings=AACU stecker=BM CV DL EQ FW GS JY OP TZ
+  all-time  9/18 tmpl=struct:LEHRGANG@2 pos=ZPKO | UKWC beta IV-III-VIII rings=AACU stecker=BM CV DL EQ FW GS JY OP TZ
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  10/18 (56%) tmpl=struct:LEHRGANG@2 IC=0.0387 pos=ZPKO | UKWC beta IV-III-VIII rings=AACU stecker=CV DL EQ FW GS HN JY OP TZ
+  all-time  10/18 tmpl=struct:LEHRGANG@2 pos=ZPKO | UKWC beta IV-III-VIII rings=AACU stecker=CV DL EQ FW GS HN JY OP TZ
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  10/18 (56%) tmpl=struct:LEHRGANG@2 IC=0.0387 pos=ZPKO | UKWC beta IV-III-VIII rings=AACU stecker=CV DL EQ FW GS HN JY OP TZ
+  all-time  10/18 tmpl=struct:LEHRGANG@2 pos=ZPKO | UKWC beta IV-III-VIII rings=AACU stecker=CV DL EQ FW GS HN JY OP TZ
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  10/18 (56%) tmpl=struct:LEHRGANG@2 IC=0.0387 pos=ZPKO | UKWC beta IV-III-VIII rings=AACU stecker=CV DL EQ FW GS HN JY OP TZ
+  all-time  10/18 tmpl=struct:LEHRGANG@2 pos=ZPKO | UKWC beta IV-III-VIII rings=AACU stecker=CV DL EQ FW GS HN JY OP TZ
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 18…18)
+Shell evolution: ON freeRings=false WO=6 ringSeeds=2 subspace=potsdam-neighbourhood
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  8/18 (44%) tmpl=struct:UEBUNG_tile@0 IC=0.0348 pos=LHVG | UKWC gamma IV-III-VIII rings=AACU stecker=(none)
+  all-time  8/18 tmpl=struct:UEBUNG_tile@0 pos=LHVG | UKWC gamma IV-III-VIII rings=AACU stecker=(none)
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:UEBUNG_tile@0 IC=0.0497 pos=YISX | UKWB beta III-IV-VIII rings=AACU stecker=DZ EV JU KQ PT
+  all-time  9/18 tmpl=struct:UEBUNG_tile@0 pos=YISX | UKWB beta III-IV-VIII rings=AACU stecker=DZ EV JU KQ PT
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:UEBUNG_tile@0 IC=0.0497 pos=YISX | UKWB beta III-IV-VIII rings=AACU stecker=DZ EV JU KQ PT
+  all-time  9/18 tmpl=struct:UEBUNG_tile@0 pos=YISX | UKWB beta III-IV-VIII rings=AACU stecker=DZ EV JU KQ PT
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:UEBUNG_tile@0 IC=0.0497 pos=YISX | UKWB beta III-IV-VIII rings=AACU stecker=DZ EV JU KQ PT
+  all-time  9/18 tmpl=struct:UEBUNG_tile@0 pos=YISX | UKWB beta III-IV-VIII rings=AACU stecker=DZ EV JU KQ PT
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:UEBUNG_tile@0 IC=0.0497 pos=YISX | UKWB beta III-IV-VIII rings=AACU stecker=DZ EV JU KQ PT
+  all-time  9/18 tmpl=struct:UEBUNG_tile@0 pos=YISX | UKWB beta III-IV-VIII rings=AACU stecker=DZ EV JU KQ PT
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:UEBUNG_tile@0 IC=0.0497 pos=YISX | UKWB beta III-IV-VIII rings=AACU stecker=DZ EV JU KQ PT
+  all-time  9/18 tmpl=struct:UEBUNG_tile@0 pos=YISX | UKWB beta III-IV-VIII rings=AACU stecker=DZ EV JU KQ PT
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:UEBUNG_tile@0 IC=0.0497 pos=YISX | UKWB beta III-IV-VIII rings=AACU stecker=DZ EV JU KQ PT
+  all-time  9/18 tmpl=struct:UEBUNG_tile@0 pos=YISX | UKWB beta III-IV-VIII rings=AACU stecker=DZ EV JU KQ PT
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:UEBUNG_tile@0 IC=0.0497 pos=YISX | UKWB beta III-IV-VIII rings=AACU stecker=DZ EV JU KQ PT
+  all-time  9/18 tmpl=struct:UEBUNG_tile@0 pos=YISX | UKWB beta III-IV-VIII rings=AACU stecker=DZ EV JU KQ PT
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:UEBUNG_tile@0 IC=0.0497 pos=YISX | UKWB beta III-IV-VIII rings=AACU stecker=DZ EV JU KQ PT
+  all-time  9/18 tmpl=struct:UEBUNG_tile@0 pos=YISX | UKWB beta III-IV-VIII rings=AACU stecker=DZ EV JU KQ PT
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:UEBUNG_tile@0 IC=0.0497 pos=YISX | UKWB beta III-IV-VIII rings=AACU stecker=DZ EV JU KQ PT
+  all-time  9/18 tmpl=struct:UEBUNG_tile@0 pos=YISX | UKWB beta III-IV-VIII rings=AACU stecker=DZ EV JU KQ PT
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:UEBUNG_tile@0 IC=0.0497 pos=YISX | UKWB beta III-IV-VIII rings=AACU stecker=DZ EV JU KQ PT
+  all-time  9/18 tmpl=struct:UEBUNG_tile@0 pos=YISX | UKWB beta III-IV-VIII rings=AACU stecker=DZ EV JU KQ PT
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  10/18 (56%) tmpl=struct:UEBUNG_tile@0 IC=0.0469 pos=YISX | UKWB beta III-IV-VIII rings=AACU stecker=BI DZ EV JU KQ PT
+  all-time  10/18 tmpl=struct:UEBUNG_tile@0 pos=YISX | UKWB beta III-IV-VIII rings=AACU stecker=BI DZ EV JU KQ PT
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 18…18)
+Shell evolution: ON freeRings=false WO=6 ringSeeds=2 subspace=potsdam-neighbourhood
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  8/18 (44%) tmpl=struct:UEBUNG_tile@1 IC=0.0372 pos=ZIMW | UKWB gamma III-VIII-IV rings=AAAA stecker=CP DN HY IW JK MO QU SZ
+  all-time  8/18 tmpl=struct:UEBUNG_tile@1 pos=ZIMW | UKWB gamma III-VIII-IV rings=AAAA stecker=CP DN HY IW JK MO QU SZ
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  8/18 (44%) tmpl=struct:UEBUNG_tile@1 IC=0.0372 pos=ZIMW | UKWB gamma III-VIII-IV rings=AAAA stecker=CP DN HY IW JK MO QU SZ
+  all-time  8/18 tmpl=struct:UEBUNG_tile@1 pos=ZIMW | UKWB gamma III-VIII-IV rings=AAAA stecker=CP DN HY IW JK MO QU SZ
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:UEBUNG_tile@1 IC=0.0387 pos=XRON | UKWC beta III-IV-VIII rings=AACU stecker=CZ GL
+  all-time  9/18 tmpl=struct:UEBUNG_tile@1 pos=XRON | UKWC beta III-IV-VIII rings=AACU stecker=CZ GL
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:UEBUNG_tile@1 IC=0.0387 pos=XRON | UKWC beta III-IV-VIII rings=AACU stecker=CZ GL
+  all-time  9/18 tmpl=struct:UEBUNG_tile@1 pos=XRON | UKWC beta III-IV-VIII rings=AACU stecker=CZ GL
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:UEBUNG_tile@1 IC=0.0387 pos=XRON | UKWC beta III-IV-VIII rings=AACU stecker=CZ GL
+  all-time  9/18 tmpl=struct:UEBUNG_tile@1 pos=XRON | UKWC beta III-IV-VIII rings=AACU stecker=CZ GL
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:UEBUNG_tile@1 IC=0.0387 pos=XRON | UKWC beta III-IV-VIII rings=AACU stecker=CZ GL
+  all-time  9/18 tmpl=struct:UEBUNG_tile@1 pos=XRON | UKWC beta III-IV-VIII rings=AACU stecker=CZ GL
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  10/18 (56%) tmpl=struct:UEBUNG_tile@1 IC=0.0395 pos=XRON | UKWC beta III-IV-VIII rings=AACU stecker=CZ FG
+  all-time  10/18 tmpl=struct:UEBUNG_tile@1 pos=XRON | UKWC beta III-IV-VIII rings=AACU stecker=CZ FG
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  10/18 (56%) tmpl=struct:UEBUNG_tile@1 IC=0.0395 pos=XRON | UKWC beta III-IV-VIII rings=AACU stecker=CZ FG
+  all-time  10/18 tmpl=struct:UEBUNG_tile@1 pos=XRON | UKWC beta III-IV-VIII rings=AACU stecker=CZ FG
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  10/18 (56%) tmpl=struct:UEBUNG_tile@1 IC=0.0395 pos=XRON | UKWC beta III-IV-VIII rings=AACU stecker=CZ FG
+  all-time  10/18 tmpl=struct:UEBUNG_tile@1 pos=XRON | UKWC beta III-IV-VIII rings=AACU stecker=CZ FG
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  10/18 (56%) tmpl=struct:UEBUNG_tile@1 IC=0.0395 pos=XRON | UKWC beta III-IV-VIII rings=AACU stecker=CZ FG
+  all-time  10/18 tmpl=struct:UEBUNG_tile@1 pos=XRON | UKWC beta III-IV-VIII rings=AACU stecker=CZ FG
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  10/18 (56%) tmpl=struct:UEBUNG_tile@1 IC=0.0395 pos=XRON | UKWC beta III-IV-VIII rings=AACU stecker=CZ FG
+  all-time  10/18 tmpl=struct:UEBUNG_tile@1 pos=XRON | UKWC beta III-IV-VIII rings=AACU stecker=CZ FG
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  10/18 (56%) tmpl=struct:UEBUNG_tile@1 IC=0.0395 pos=XRON | UKWC beta III-IV-VIII rings=AACU stecker=CZ FG
+  all-time  10/18 tmpl=struct:UEBUNG_tile@1 pos=XRON | UKWC beta III-IV-VIII rings=AACU stecker=CZ FG
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 17…17)
+Shell evolution: ON freeRings=false WO=6 ringSeeds=2 subspace=potsdam-neighbourhood
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  7/17 (41%) tmpl=struct:ANALLE@1 IC=0.0415 pos=BDMV | UKWB gamma IV-III-VIII rings=AAAA stecker=(none)
+  all-time  7/17 tmpl=struct:ANALLE@1 pos=BDMV | UKWB gamma IV-III-VIII rings=AAAA stecker=(none)
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  8/17 (47%) tmpl=struct:ANALLE@1 IC=0.0395 pos=ZYVM | UKWC gamma III-VIII-IV rings=AACU stecker=AE BR DY FP IU KO NX QS TZ
+  all-time  8/17 tmpl=struct:ANALLE@1 pos=ZYVM | UKWC gamma III-VIII-IV rings=AACU stecker=AE BR DY FP IU KO NX QS TZ
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  8/17 (47%) tmpl=struct:ANALLE@1 IC=0.0395 pos=ZYVM | UKWC gamma III-VIII-IV rings=AACU stecker=AE BR DY FP IU KO NX QS TZ
+  all-time  8/17 tmpl=struct:ANALLE@1 pos=ZYVM | UKWC gamma III-VIII-IV rings=AACU stecker=AE BR DY FP IU KO NX QS TZ
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  8/17 (47%) tmpl=struct:ANALLE@1 IC=0.0395 pos=ZYVM | UKWC gamma III-VIII-IV rings=AACU stecker=AE BR DY FP IU KO NX QS TZ
+  all-time  8/17 tmpl=struct:ANALLE@1 pos=ZYVM | UKWC gamma III-VIII-IV rings=AACU stecker=AE BR DY FP IU KO NX QS TZ
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  8/17 (47%) tmpl=struct:ANALLE@1 IC=0.0395 pos=ZYVM | UKWC gamma III-VIII-IV rings=AACU stecker=AE BR DY FP IU KO NX QS TZ
+  all-time  8/17 tmpl=struct:ANALLE@1 pos=ZYVM | UKWC gamma III-VIII-IV rings=AACU stecker=AE BR DY FP IU KO NX QS TZ
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  8/17 (47%) tmpl=struct:ANALLE@1 IC=0.0395 pos=ZYVM | UKWC gamma III-VIII-IV rings=AACU stecker=AE BR DY FP IU KO NX QS TZ
+  all-time  8/17 tmpl=struct:ANALLE@1 pos=ZYVM | UKWC gamma III-VIII-IV rings=AACU stecker=AE BR DY FP IU KO NX QS TZ
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  8/17 (47%) tmpl=struct:ANALLE@1 IC=0.0395 pos=ZYVM | UKWC gamma III-VIII-IV rings=AACU stecker=AE BR DY FP IU KO NX QS TZ
+  all-time  8/17 tmpl=struct:ANALLE@1 pos=ZYVM | UKWC gamma III-VIII-IV rings=AACU stecker=AE BR DY FP IU KO NX QS TZ
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  8/17 (47%) tmpl=struct:ANALLE@1 IC=0.0395 pos=ZYVM | UKWC gamma III-VIII-IV rings=AACU stecker=AE BR DY FP IU KO NX QS TZ
+  all-time  8/17 tmpl=struct:ANALLE@1 pos=ZYVM | UKWC gamma III-VIII-IV rings=AACU stecker=AE BR DY FP IU KO NX QS TZ
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:ANALLE@1 IC=0.0481 pos=JOSJ | UKWB gamma VIII-III-IV rings=AACU stecker=AG CH DL FI KQ UW XY
+  all-time  9/17 tmpl=struct:ANALLE@1 pos=JOSJ | UKWB gamma VIII-III-IV rings=AACU stecker=AG CH DL FI KQ UW XY
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:ANALLE@1 IC=0.0481 pos=JOSJ | UKWB gamma VIII-III-IV rings=AACU stecker=AG CH DL FI KQ UW XY
+  all-time  9/17 tmpl=struct:ANALLE@1 pos=JOSJ | UKWB gamma VIII-III-IV rings=AACU stecker=AG CH DL FI KQ UW XY
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:ANALLE@1 IC=0.0481 pos=JOSJ | UKWB gamma VIII-III-IV rings=AACU stecker=AG CH DL FI KQ UW XY
+  all-time  9/17 tmpl=struct:ANALLE@1 pos=JOSJ | UKWB gamma VIII-III-IV rings=AACU stecker=AG CH DL FI KQ UW XY
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:ANALLE@1 IC=0.0481 pos=JOSJ | UKWB gamma VIII-III-IV rings=AACU stecker=AG CH DL FI KQ UW XY
+  all-time  9/17 tmpl=struct:ANALLE@1 pos=JOSJ | UKWB gamma VIII-III-IV rings=AACU stecker=AG CH DL FI KQ UW XY
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 17…17)
+Shell evolution: ON freeRings=false WO=6 ringSeeds=2 subspace=potsdam-neighbourhood
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  7/17 (41%) tmpl=struct:ANALLE@3 IC=0.0415 pos=WPUO | UKWB gamma VIII-III-IV rings=AAAA stecker=JQ
+  all-time  7/17 tmpl=struct:ANALLE@3 pos=WPUO | UKWB gamma VIII-III-IV rings=AAAA stecker=JQ
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  8/17 (47%) tmpl=struct:ANALLE@3 IC=0.0333 pos=NXKG | UKWB gamma VIII-III-IV rings=AAAA stecker=EV JQ
+  all-time  8/17 tmpl=struct:ANALLE@3 pos=NXKG | UKWB gamma VIII-III-IV rings=AAAA stecker=EV JQ
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  8/17 (47%) tmpl=struct:ANALLE@3 IC=0.0333 pos=NXKG | UKWB gamma VIII-III-IV rings=AAAA stecker=EV JQ
+  all-time  8/17 tmpl=struct:ANALLE@3 pos=NXKG | UKWB gamma VIII-III-IV rings=AAAA stecker=EV JQ
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  8/17 (47%) tmpl=struct:ANALLE@3 IC=0.0333 pos=NXKG | UKWB gamma VIII-III-IV rings=AAAA stecker=EV JQ
+  all-time  8/17 tmpl=struct:ANALLE@3 pos=NXKG | UKWB gamma VIII-III-IV rings=AAAA stecker=EV JQ
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  8/17 (47%) tmpl=struct:ANALLE@3 IC=0.0333 pos=NXKG | UKWB gamma VIII-III-IV rings=AAAA stecker=EV JQ
+  all-time  8/17 tmpl=struct:ANALLE@3 pos=NXKG | UKWB gamma VIII-III-IV rings=AAAA stecker=EV JQ
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  8/17 (47%) tmpl=struct:ANALLE@3 IC=0.0333 pos=NXKG | UKWB gamma VIII-III-IV rings=AAAA stecker=EV JQ
+  all-time  8/17 tmpl=struct:ANALLE@3 pos=NXKG | UKWB gamma VIII-III-IV rings=AAAA stecker=EV JQ
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:ANALLE@3 IC=0.0469 pos=EYNS | UKWB gamma VIII-III-IV rings=AAAA stecker=ES JQ
+  all-time  9/17 tmpl=struct:ANALLE@3 pos=EYNS | UKWB gamma VIII-III-IV rings=AAAA stecker=ES JQ
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:ANALLE@3 IC=0.0469 pos=EYNS | UKWB gamma VIII-III-IV rings=AAAA stecker=ES JQ
+  all-time  9/17 tmpl=struct:ANALLE@3 pos=EYNS | UKWB gamma VIII-III-IV rings=AAAA stecker=ES JQ
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:ANALLE@3 IC=0.0469 pos=EYNS | UKWB gamma VIII-III-IV rings=AAAA stecker=ES JQ
+  all-time  9/17 tmpl=struct:ANALLE@3 pos=EYNS | UKWB gamma VIII-III-IV rings=AAAA stecker=ES JQ
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:ANALLE@3 IC=0.0469 pos=EYNS | UKWB gamma VIII-III-IV rings=AAAA stecker=ES JQ
+  all-time  9/17 tmpl=struct:ANALLE@3 pos=EYNS | UKWB gamma VIII-III-IV rings=AAAA stecker=ES JQ
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  10/17 (59%) tmpl=struct:ANALLE@3 IC=0.0481 pos=EYNS | UKWB gamma VIII-III-IV rings=AAAA stecker=ES IU JQ
+  all-time  10/17 tmpl=struct:ANALLE@3 pos=EYNS | UKWB gamma VIII-III-IV rings=AAAA stecker=ES IU JQ
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  10/17 (59%) tmpl=struct:ANALLE@3 IC=0.0481 pos=EYNS | UKWB gamma VIII-III-IV rings=AAAA stecker=ES IU JQ
+  all-time  10/17 tmpl=struct:ANALLE@3 pos=EYNS | UKWB gamma VIII-III-IV rings=AAAA stecker=ES IU JQ
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 17…17)
+Shell evolution: ON freeRings=false WO=6 ringSeeds=2 subspace=potsdam-neighbourhood
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  7/17 (41%) tmpl=struct:SEDM_repeat@0 IC=0.0419 pos=MNJM | UKWB gamma IV-III-VIII rings=AAAA stecker=(none)
+  all-time  7/17 tmpl=struct:SEDM_repeat@0 pos=MNJM | UKWB gamma IV-III-VIII rings=AAAA stecker=(none)
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  7/17 (41%) tmpl=struct:SEDM_repeat@0 IC=0.0419 pos=MNJM | UKWB gamma IV-III-VIII rings=AAAA stecker=(none)
+  all-time  7/17 tmpl=struct:SEDM_repeat@0 pos=MNJM | UKWB gamma IV-III-VIII rings=AAAA stecker=(none)
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  7/17 (41%) tmpl=struct:SEDM_repeat@0 IC=0.0419 pos=MNJM | UKWB gamma IV-III-VIII rings=AAAA stecker=(none)
+  all-time  7/17 tmpl=struct:SEDM_repeat@0 pos=MNJM | UKWB gamma IV-III-VIII rings=AAAA stecker=(none)
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  8/17 (47%) tmpl=struct:SEDM_repeat@0 IC=0.0372 pos=JVHB | UKWC beta VIII-IV-III rings=AAAU stecker=AU CI DE HL NS OZ PR QV TW
+  all-time  8/17 tmpl=struct:SEDM_repeat@0 pos=JVHB | UKWC beta VIII-IV-III rings=AAAU stecker=AU CI DE HL NS OZ PR QV TW
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  8/17 (47%) tmpl=struct:SEDM_repeat@0 IC=0.0372 pos=JVHB | UKWC beta VIII-IV-III rings=AAAU stecker=AU CI DE HL NS OZ PR QV TW
+  all-time  8/17 tmpl=struct:SEDM_repeat@0 pos=JVHB | UKWC beta VIII-IV-III rings=AAAU stecker=AU CI DE HL NS OZ PR QV TW
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  8/17 (47%) tmpl=struct:SEDM_repeat@0 IC=0.0372 pos=JVHB | UKWC beta VIII-IV-III rings=AAAU stecker=AU CI DE HL NS OZ PR QV TW
+  all-time  8/17 tmpl=struct:SEDM_repeat@0 pos=JVHB | UKWC beta VIII-IV-III rings=AAAU stecker=AU CI DE HL NS OZ PR QV TW
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  8/17 (47%) tmpl=struct:SEDM_repeat@0 IC=0.0372 pos=JVHB | UKWC beta VIII-IV-III rings=AAAU stecker=AU CI DE HL NS OZ PR QV TW
+  all-time  8/17 tmpl=struct:SEDM_repeat@0 pos=JVHB | UKWC beta VIII-IV-III rings=AAAU stecker=AU CI DE HL NS OZ PR QV TW
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:SEDM_repeat@0 IC=0.0419 pos=NMZD | UKWC beta VIII-IV-III rings=AAAU stecker=AU CX DE HL NS OZ PR QV TW
+  all-time  9/17 tmpl=struct:SEDM_repeat@0 pos=NMZD | UKWC beta VIII-IV-III rings=AAAU stecker=AU CX DE HL NS OZ PR QV TW
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:SEDM_repeat@0 IC=0.0419 pos=NMZD | UKWC beta VIII-IV-III rings=AAAU stecker=AU CX DE HL NS OZ PR QV TW
+  all-time  9/17 tmpl=struct:SEDM_repeat@0 pos=NMZD | UKWC beta VIII-IV-III rings=AAAU stecker=AU CX DE HL NS OZ PR QV TW
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:SEDM_repeat@0 IC=0.0419 pos=NMZD | UKWC beta VIII-IV-III rings=AAAU stecker=AU CX DE HL NS OZ PR QV TW
+  all-time  9/17 tmpl=struct:SEDM_repeat@0 pos=NMZD | UKWC beta VIII-IV-III rings=AAAU stecker=AU CX DE HL NS OZ PR QV TW
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  10/17 (59%) tmpl=struct:SEDM_repeat@0 IC=0.0430 pos=BAYF | UKWC beta VIII-IV-III rings=AACA stecker=AY BC DE GL JU MQ NS OZ PR WX
+  all-time  10/17 tmpl=struct:SEDM_repeat@0 pos=BAYF | UKWC beta VIII-IV-III rings=AACA stecker=AY BC DE GL JU MQ NS OZ PR WX
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  10/17 (59%) tmpl=struct:SEDM_repeat@0 IC=0.0430 pos=BAYF | UKWC beta VIII-IV-III rings=AACA stecker=AY BC DE GL JU MQ NS OZ PR WX
+  all-time  10/17 tmpl=struct:SEDM_repeat@0 pos=BAYF | UKWC beta VIII-IV-III rings=AACA stecker=AY BC DE GL JU MQ NS OZ PR WX
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 17…17)
+Shell evolution: ON freeRings=false WO=6 ringSeeds=2 subspace=potsdam-neighbourhood
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  7/17 (41%) tmpl=struct:SEDM_repeat@2 IC=0.0469 pos=BWJD | UKWC gamma IV-VIII-III rings=AAAA stecker=(none)
+  all-time  7/17 tmpl=struct:SEDM_repeat@2 pos=BWJD | UKWC gamma IV-VIII-III rings=AAAA stecker=(none)
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  8/17 (47%) tmpl=struct:SEDM_repeat@2 IC=0.0419 pos=YRFY | UKWC beta III-IV-VIII rings=AAAA stecker=AH FP GW LV MX QS
+  all-time  8/17 tmpl=struct:SEDM_repeat@2 pos=YRFY | UKWC beta III-IV-VIII rings=AAAA stecker=AH FP GW LV MX QS
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:SEDM_repeat@2 IC=0.0438 pos=RPYS | UKWC gamma VIII-IV-III rings=AACU stecker=AK BJ DV GX IR LO MT PW QZ
+  all-time  9/17 tmpl=struct:SEDM_repeat@2 pos=RPYS | UKWC gamma VIII-IV-III rings=AACU stecker=AK BJ DV GX IR LO MT PW QZ
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:SEDM_repeat@2 IC=0.0438 pos=RPYS | UKWC gamma VIII-IV-III rings=AACU stecker=AK BJ DV GX IR LO MT PW QZ
+  all-time  9/17 tmpl=struct:SEDM_repeat@2 pos=RPYS | UKWC gamma VIII-IV-III rings=AACU stecker=AK BJ DV GX IR LO MT PW QZ
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:SEDM_repeat@2 IC=0.0438 pos=RPYS | UKWC gamma VIII-IV-III rings=AACU stecker=AK BJ DV GX IR LO MT PW QZ
+  all-time  9/17 tmpl=struct:SEDM_repeat@2 pos=RPYS | UKWC gamma VIII-IV-III rings=AACU stecker=AK BJ DV GX IR LO MT PW QZ
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:SEDM_repeat@2 IC=0.0438 pos=RPYS | UKWC gamma VIII-IV-III rings=AACU stecker=AK BJ DV GX IR LO MT PW QZ
+  all-time  9/17 tmpl=struct:SEDM_repeat@2 pos=RPYS | UKWC gamma VIII-IV-III rings=AACU stecker=AK BJ DV GX IR LO MT PW QZ
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:SEDM_repeat@2 IC=0.0438 pos=RPYS | UKWC gamma VIII-IV-III rings=AACU stecker=AK BJ DV GX IR LO MT PW QZ
+  all-time  9/17 tmpl=struct:SEDM_repeat@2 pos=RPYS | UKWC gamma VIII-IV-III rings=AACU stecker=AK BJ DV GX IR LO MT PW QZ
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:SEDM_repeat@2 IC=0.0438 pos=RPYS | UKWC gamma VIII-IV-III rings=AACU stecker=AK BJ DV GX IR LO MT PW QZ
+  all-time  9/17 tmpl=struct:SEDM_repeat@2 pos=RPYS | UKWC gamma VIII-IV-III rings=AACU stecker=AK BJ DV GX IR LO MT PW QZ
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:SEDM_repeat@2 IC=0.0438 pos=RPYS | UKWC gamma VIII-IV-III rings=AACU stecker=AK BJ DV GX IR LO MT PW QZ
+  all-time  9/17 tmpl=struct:SEDM_repeat@2 pos=RPYS | UKWC gamma VIII-IV-III rings=AACU stecker=AK BJ DV GX IR LO MT PW QZ
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:SEDM_repeat@2 IC=0.0438 pos=RPYS | UKWC gamma VIII-IV-III rings=AACU stecker=AK BJ DV GX IR LO MT PW QZ
+  all-time  9/17 tmpl=struct:SEDM_repeat@2 pos=RPYS | UKWC gamma VIII-IV-III rings=AACU stecker=AK BJ DV GX IR LO MT PW QZ
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:SEDM_repeat@2 IC=0.0438 pos=RPYS | UKWC gamma VIII-IV-III rings=AACU stecker=AK BJ DV GX IR LO MT PW QZ
+  all-time  9/17 tmpl=struct:SEDM_repeat@2 pos=RPYS | UKWC gamma VIII-IV-III rings=AACU stecker=AK BJ DV GX IR LO MT PW QZ
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:SEDM_repeat@2 IC=0.0438 pos=RPYS | UKWC gamma VIII-IV-III rings=AACU stecker=AK BJ DV GX IR LO MT PW QZ
+  all-time  9/17 tmpl=struct:SEDM_repeat@2 pos=RPYS | UKWC gamma VIII-IV-III rings=AACU stecker=AK BJ DV GX IR LO MT PW QZ
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 16…16)
+Shell evolution: ON freeRings=false WO=6 ringSeeds=2 subspace=potsdam-neighbourhood
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:OEDM_repeat@0 IC=0.0391 pos=AGCM | UKWC beta III-VIII-IV rings=AAAA stecker=AV BW CJ FY GS KM PT QR
+  all-time  8/16 tmpl=struct:OEDM_repeat@0 pos=AGCM | UKWC beta III-VIII-IV rings=AAAA stecker=AV BW CJ FY GS KM PT QR
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:OEDM_repeat@0 IC=0.0391 pos=AGCM | UKWC beta III-VIII-IV rings=AAAA stecker=AV BW CJ FY GS KM PT QR
+  all-time  8/16 tmpl=struct:OEDM_repeat@0 pos=AGCM | UKWC beta III-VIII-IV rings=AAAA stecker=AV BW CJ FY GS KM PT QR
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:OEDM_repeat@0 IC=0.0391 pos=AGCM | UKWC beta III-VIII-IV rings=AAAA stecker=AV BW CJ FY GS KM PT QR
+  all-time  8/16 tmpl=struct:OEDM_repeat@0 pos=AGCM | UKWC beta III-VIII-IV rings=AAAA stecker=AV BW CJ FY GS KM PT QR
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:OEDM_repeat@0 IC=0.0391 pos=AGCM | UKWC beta III-VIII-IV rings=AAAA stecker=AV BW CJ FY GS KM PT QR
+  all-time  8/16 tmpl=struct:OEDM_repeat@0 pos=AGCM | UKWC beta III-VIII-IV rings=AAAA stecker=AV BW CJ FY GS KM PT QR
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:OEDM_repeat@0 IC=0.0399 pos=AGCM | UKWC beta III-VIII-IV rings=AAAA stecker=AV BW CJ FY GS KM NT QR
+  all-time  9/16 tmpl=struct:OEDM_repeat@0 pos=AGCM | UKWC beta III-VIII-IV rings=AAAA stecker=AV BW CJ FY GS KM NT QR
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:OEDM_repeat@0 IC=0.0399 pos=AGCM | UKWC beta III-VIII-IV rings=AAAA stecker=AV BW CJ FY GS KM NT QR
+  all-time  9/16 tmpl=struct:OEDM_repeat@0 pos=AGCM | UKWC beta III-VIII-IV rings=AAAA stecker=AV BW CJ FY GS KM NT QR
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:OEDM_repeat@0 IC=0.0399 pos=AGCM | UKWC beta III-VIII-IV rings=AAAA stecker=AV BW CJ FY GS KM NT QR
+  all-time  9/16 tmpl=struct:OEDM_repeat@0 pos=AGCM | UKWC beta III-VIII-IV rings=AAAA stecker=AV BW CJ FY GS KM NT QR
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:OEDM_repeat@0 IC=0.0399 pos=AGCM | UKWC beta III-VIII-IV rings=AAAA stecker=AV BW CJ FY GS KM NT QR
+  all-time  9/16 tmpl=struct:OEDM_repeat@0 pos=AGCM | UKWC beta III-VIII-IV rings=AAAA stecker=AV BW CJ FY GS KM NT QR
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:OEDM_repeat@0 IC=0.0399 pos=AGCM | UKWC beta III-VIII-IV rings=AAAA stecker=AV BW CJ FY GS KM NT QR
+  all-time  9/16 tmpl=struct:OEDM_repeat@0 pos=AGCM | UKWC beta III-VIII-IV rings=AAAA stecker=AV BW CJ FY GS KM NT QR
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:OEDM_repeat@0 IC=0.0399 pos=AGCM | UKWC beta III-VIII-IV rings=AAAA stecker=AV BW CJ FY GS KM NT QR
+  all-time  9/16 tmpl=struct:OEDM_repeat@0 pos=AGCM | UKWC beta III-VIII-IV rings=AAAA stecker=AV BW CJ FY GS KM NT QR
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  10/16 (62%) tmpl=struct:OEDM_repeat@0 IC=0.0458 pos=AGCM | UKWC beta III-VIII-IV rings=AAAA stecker=AV BW CJ GS HI KM NT PY QR
+  all-time  10/16 tmpl=struct:OEDM_repeat@0 pos=AGCM | UKWC beta III-VIII-IV rings=AAAA stecker=AV BW CJ GS HI KM NT PY QR
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  10/16 (62%) tmpl=struct:OEDM_repeat@0 IC=0.0458 pos=AGCM | UKWC beta III-VIII-IV rings=AAAA stecker=AV BW CJ GS HI KM NT PY QR
+  all-time  10/16 tmpl=struct:OEDM_repeat@0 pos=AGCM | UKWC beta III-VIII-IV rings=AAAA stecker=AV BW CJ GS HI KM NT PY QR
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 16…16)
+Shell evolution: ON freeRings=false WO=6 ringSeeds=2 subspace=potsdam-neighbourhood
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:OEDM_repeat@2 IC=0.0442 pos=YGGF | UKWC gamma IV-VIII-III rings=AACU stecker=BD CP EG FH LN QZ RS XY
+  all-time  8/16 tmpl=struct:OEDM_repeat@2 pos=YGGF | UKWC gamma IV-VIII-III rings=AACU stecker=BD CP EG FH LN QZ RS XY
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:OEDM_repeat@2 IC=0.0442 pos=YGGF | UKWC gamma IV-VIII-III rings=AACU stecker=BD CP EG FH LN QZ RS XY
+  all-time  8/16 tmpl=struct:OEDM_repeat@2 pos=YGGF | UKWC gamma IV-VIII-III rings=AACU stecker=BD CP EG FH LN QZ RS XY
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:OEDM_repeat@2 IC=0.0442 pos=YGGF | UKWC gamma IV-VIII-III rings=AACU stecker=BD CP EG FH LN QZ RS XY
+  all-time  8/16 tmpl=struct:OEDM_repeat@2 pos=YGGF | UKWC gamma IV-VIII-III rings=AACU stecker=BD CP EG FH LN QZ RS XY
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:OEDM_repeat@2 IC=0.0442 pos=YGGF | UKWC gamma IV-VIII-III rings=AACU stecker=BD CP EG FH LN QZ RS XY
+  all-time  8/16 tmpl=struct:OEDM_repeat@2 pos=YGGF | UKWC gamma IV-VIII-III rings=AACU stecker=BD CP EG FH LN QZ RS XY
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:OEDM_repeat@2 IC=0.0415 pos=YGGF | UKWC gamma IV-VIII-III rings=AACU stecker=BD EG FH LN QZ RS TV XY
+  all-time  9/16 tmpl=struct:OEDM_repeat@2 pos=YGGF | UKWC gamma IV-VIII-III rings=AACU stecker=BD EG FH LN QZ RS TV XY
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:OEDM_repeat@2 IC=0.0415 pos=YGGF | UKWC gamma IV-VIII-III rings=AACU stecker=BD EG FH LN QZ RS TV XY
+  all-time  9/16 tmpl=struct:OEDM_repeat@2 pos=YGGF | UKWC gamma IV-VIII-III rings=AACU stecker=BD EG FH LN QZ RS TV XY
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:OEDM_repeat@2 IC=0.0415 pos=YGGF | UKWC gamma IV-VIII-III rings=AACU stecker=BD EG FH LN QZ RS TV XY
+  all-time  9/16 tmpl=struct:OEDM_repeat@2 pos=YGGF | UKWC gamma IV-VIII-III rings=AACU stecker=BD EG FH LN QZ RS TV XY
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:OEDM_repeat@2 IC=0.0415 pos=YGGF | UKWC gamma IV-VIII-III rings=AACU stecker=BD EG FH LN QZ RS TV XY
+  all-time  9/16 tmpl=struct:OEDM_repeat@2 pos=YGGF | UKWC gamma IV-VIII-III rings=AACU stecker=BD EG FH LN QZ RS TV XY
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:OEDM_repeat@2 IC=0.0415 pos=YGGF | UKWC gamma IV-VIII-III rings=AACU stecker=BD EG FH LN QZ RS TV XY
+  all-time  9/16 tmpl=struct:OEDM_repeat@2 pos=YGGF | UKWC gamma IV-VIII-III rings=AACU stecker=BD EG FH LN QZ RS TV XY
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:OEDM_repeat@2 IC=0.0415 pos=YGGF | UKWC gamma IV-VIII-III rings=AACU stecker=BD EG FH LN QZ RS TV XY
+  all-time  9/16 tmpl=struct:OEDM_repeat@2 pos=YGGF | UKWC gamma IV-VIII-III rings=AACU stecker=BD EG FH LN QZ RS TV XY
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:OEDM_repeat@2 IC=0.0415 pos=YGGF | UKWC gamma IV-VIII-III rings=AACU stecker=BD EG FH LN QZ RS TV XY
+  all-time  9/16 tmpl=struct:OEDM_repeat@2 pos=YGGF | UKWC gamma IV-VIII-III rings=AACU stecker=BD EG FH LN QZ RS TV XY
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:OEDM_repeat@2 IC=0.0415 pos=YGGF | UKWC gamma IV-VIII-III rings=AACU stecker=BD EG FH LN QZ RS TV XY
+  all-time  9/16 tmpl=struct:OEDM_repeat@2 pos=YGGF | UKWC gamma IV-VIII-III rings=AACU stecker=BD EG FH LN QZ RS TV XY
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 16…16)
+Shell evolution: ON freeRings=false WO=6 ringSeeds=2 subspace=potsdam-neighbourhood
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  7/16 (44%) tmpl=struct:THETIS@0 IC=0.0395 pos=VDJJ | UKWB gamma IV-III-VIII rings=AAAA stecker=(none)
+  all-time  7/16 tmpl=struct:THETIS@0 pos=VDJJ | UKWB gamma IV-III-VIII rings=AAAA stecker=(none)
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  7/16 (44%) tmpl=struct:THETIS@0 IC=0.0395 pos=VDJJ | UKWB gamma IV-III-VIII rings=AAAA stecker=(none)
+  all-time  7/16 tmpl=struct:THETIS@0 pos=VDJJ | UKWB gamma IV-III-VIII rings=AAAA stecker=(none)
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:THETIS@0 IC=0.0407 pos=FLHU | UKWB beta III-IV-VIII rings=AACU stecker=AO DI EG FP HJ KR NU QZ SY
+  all-time  8/16 tmpl=struct:THETIS@0 pos=FLHU | UKWB beta III-IV-VIII rings=AACU stecker=AO DI EG FP HJ KR NU QZ SY
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:THETIS@0 IC=0.0407 pos=FLHU | UKWB beta III-IV-VIII rings=AACU stecker=AO DI EG FP HJ KR NU QZ SY
+  all-time  8/16 tmpl=struct:THETIS@0 pos=FLHU | UKWB beta III-IV-VIII rings=AACU stecker=AO DI EG FP HJ KR NU QZ SY
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:THETIS@0 IC=0.0407 pos=FLHU | UKWB beta III-IV-VIII rings=AACU stecker=AO DI EG FP HJ KR NU QZ SY
+  all-time  8/16 tmpl=struct:THETIS@0 pos=FLHU | UKWB beta III-IV-VIII rings=AACU stecker=AO DI EG FP HJ KR NU QZ SY
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:THETIS@0 IC=0.0407 pos=FLHU | UKWB beta III-IV-VIII rings=AACU stecker=AO DI EG FP HJ KR NU QZ SY
+  all-time  8/16 tmpl=struct:THETIS@0 pos=FLHU | UKWB beta III-IV-VIII rings=AACU stecker=AO DI EG FP HJ KR NU QZ SY
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:THETIS@0 IC=0.0407 pos=FLHU | UKWB beta III-IV-VIII rings=AACU stecker=AO DI EG FP HJ KR NU QZ SY
+  all-time  8/16 tmpl=struct:THETIS@0 pos=FLHU | UKWB beta III-IV-VIII rings=AACU stecker=AO DI EG FP HJ KR NU QZ SY
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:THETIS@0 IC=0.0407 pos=FLHU | UKWB beta III-IV-VIII rings=AACU stecker=AO DI EG FP HJ KR NU QZ SY
+  all-time  8/16 tmpl=struct:THETIS@0 pos=FLHU | UKWB beta III-IV-VIII rings=AACU stecker=AO DI EG FP HJ KR NU QZ SY
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:THETIS@0 IC=0.0407 pos=FLHU | UKWB beta III-IV-VIII rings=AACU stecker=AO DI EG FP HJ KR NU QZ SY
+  all-time  8/16 tmpl=struct:THETIS@0 pos=FLHU | UKWB beta III-IV-VIII rings=AACU stecker=AO DI EG FP HJ KR NU QZ SY
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:THETIS@0 IC=0.0407 pos=FLHU | UKWB beta III-IV-VIII rings=AACU stecker=AO DI EG FP HJ KR NU QZ SY
+  all-time  8/16 tmpl=struct:THETIS@0 pos=FLHU | UKWB beta III-IV-VIII rings=AACU stecker=AO DI EG FP HJ KR NU QZ SY
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:THETIS@0 IC=0.0407 pos=FLHU | UKWB beta III-IV-VIII rings=AACU stecker=AO DI EG FP HJ KR NU QZ SY
+  all-time  8/16 tmpl=struct:THETIS@0 pos=FLHU | UKWB beta III-IV-VIII rings=AACU stecker=AO DI EG FP HJ KR NU QZ SY
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:THETIS@0 IC=0.0407 pos=FLHU | UKWB beta III-IV-VIII rings=AACU stecker=AO DI EG FP HJ KR NU QZ SY
+  all-time  8/16 tmpl=struct:THETIS@0 pos=FLHU | UKWB beta III-IV-VIII rings=AACU stecker=AO DI EG FP HJ KR NU QZ SY
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 16…16)
+Shell evolution: ON freeRings=false WO=6 ringSeeds=2 subspace=potsdam-neighbourhood
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  7/16 (44%) tmpl=struct:THETIS@1 IC=0.0333 pos=CTHN | UKWB gamma IV-III-VIII rings=AAAA stecker=(none)
+  all-time  7/16 tmpl=struct:THETIS@1 pos=CTHN | UKWB gamma IV-III-VIII rings=AAAA stecker=(none)
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:THETIS@1 IC=0.0329 pos=GGGY | UKWB beta III-VIII-IV rings=AAAA stecker=AT BS DQ FP GL HW JX KZ MR UY
+  all-time  8/16 tmpl=struct:THETIS@1 pos=GGGY | UKWB beta III-VIII-IV rings=AAAA stecker=AT BS DQ FP GL HW JX KZ MR UY
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:THETIS@1 IC=0.0329 pos=GGGY | UKWB beta III-VIII-IV rings=AAAA stecker=AT BS DQ FP GL HW JX KZ MR UY
+  all-time  8/16 tmpl=struct:THETIS@1 pos=GGGY | UKWB beta III-VIII-IV rings=AAAA stecker=AT BS DQ FP GL HW JX KZ MR UY
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@1 IC=0.0340 pos=BBZP | UKWB beta III-IV-VIII rings=AACU stecker=BW EN KL MT
+  all-time  9/16 tmpl=struct:THETIS@1 pos=BBZP | UKWB beta III-IV-VIII rings=AACU stecker=BW EN KL MT
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@1 IC=0.0340 pos=BBZP | UKWB beta III-IV-VIII rings=AACU stecker=BW EN KL MT
+  all-time  9/16 tmpl=struct:THETIS@1 pos=BBZP | UKWB beta III-IV-VIII rings=AACU stecker=BW EN KL MT
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@1 IC=0.0340 pos=BBZP | UKWB beta III-IV-VIII rings=AACU stecker=BW EN KL MT
+  all-time  9/16 tmpl=struct:THETIS@1 pos=BBZP | UKWB beta III-IV-VIII rings=AACU stecker=BW EN KL MT
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@1 IC=0.0340 pos=BBZP | UKWB beta III-IV-VIII rings=AACU stecker=BW EN KL MT
+  all-time  9/16 tmpl=struct:THETIS@1 pos=BBZP | UKWB beta III-IV-VIII rings=AACU stecker=BW EN KL MT
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@1 IC=0.0340 pos=BBZP | UKWB beta III-IV-VIII rings=AACU stecker=BW EN KL MT
+  all-time  9/16 tmpl=struct:THETIS@1 pos=BBZP | UKWB beta III-IV-VIII rings=AACU stecker=BW EN KL MT
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@1 IC=0.0340 pos=BBZP | UKWB beta III-IV-VIII rings=AACU stecker=BW EN KL MT
+  all-time  9/16 tmpl=struct:THETIS@1 pos=BBZP | UKWB beta III-IV-VIII rings=AACU stecker=BW EN KL MT
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@1 IC=0.0340 pos=BBZP | UKWB beta III-IV-VIII rings=AACU stecker=BW EN KL MT
+  all-time  9/16 tmpl=struct:THETIS@1 pos=BBZP | UKWB beta III-IV-VIII rings=AACU stecker=BW EN KL MT
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  10/16 (62%) tmpl=struct:THETIS@1 IC=0.0336 pos=RPLS | UKWC beta III-IV-VIII rings=AAAA stecker=BR DQ EN FP GL HW IX KZ UY
+  all-time  10/16 tmpl=struct:THETIS@1 pos=RPLS | UKWC beta III-IV-VIII rings=AAAA stecker=BR DQ EN FP GL HW IX KZ UY
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  11/16 (69%) tmpl=struct:THETIS@1 IC=0.0344 pos=RPLS | UKWC beta III-IV-VIII rings=AAAA stecker=BR DQ EN FP GL HW IX JM KZ UY
+  all-time  11/16 tmpl=struct:THETIS@1 pos=RPLS | UKWC beta III-IV-VIII rings=AAAA stecker=BR DQ EN FP GL HW IX JM KZ UY
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 16…16)
+Shell evolution: ON freeRings=false WO=6 ringSeeds=2 subspace=potsdam-neighbourhood
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:THETIS@2 IC=0.0372 pos=LGJC | UKWB gamma VIII-IV-III rings=AACU stecker=CR
+  all-time  8/16 tmpl=struct:THETIS@2 pos=LGJC | UKWB gamma VIII-IV-III rings=AACU stecker=CR
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:THETIS@2 IC=0.0372 pos=LGJC | UKWB gamma VIII-IV-III rings=AACU stecker=CR
+  all-time  8/16 tmpl=struct:THETIS@2 pos=LGJC | UKWB gamma VIII-IV-III rings=AACU stecker=CR
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@2 IC=0.0364 pos=LGJC | UKWB gamma VIII-IV-III rings=AACU stecker=AQ CR
+  all-time  9/16 tmpl=struct:THETIS@2 pos=LGJC | UKWB gamma VIII-IV-III rings=AACU stecker=AQ CR
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@2 IC=0.0364 pos=LGJC | UKWB gamma VIII-IV-III rings=AACU stecker=AQ CR
+  all-time  9/16 tmpl=struct:THETIS@2 pos=LGJC | UKWB gamma VIII-IV-III rings=AACU stecker=AQ CR
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@2 IC=0.0364 pos=LGJC | UKWB gamma VIII-IV-III rings=AACU stecker=AQ CR
+  all-time  9/16 tmpl=struct:THETIS@2 pos=LGJC | UKWB gamma VIII-IV-III rings=AACU stecker=AQ CR
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@2 IC=0.0364 pos=LGJC | UKWB gamma VIII-IV-III rings=AACU stecker=AQ CR
+  all-time  9/16 tmpl=struct:THETIS@2 pos=LGJC | UKWB gamma VIII-IV-III rings=AACU stecker=AQ CR
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@2 IC=0.0364 pos=LGJC | UKWB gamma VIII-IV-III rings=AACU stecker=AQ CR
+  all-time  9/16 tmpl=struct:THETIS@2 pos=LGJC | UKWB gamma VIII-IV-III rings=AACU stecker=AQ CR
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@2 IC=0.0364 pos=LGJC | UKWB gamma VIII-IV-III rings=AACU stecker=AQ CR
+  all-time  9/16 tmpl=struct:THETIS@2 pos=LGJC | UKWB gamma VIII-IV-III rings=AACU stecker=AQ CR
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@2 IC=0.0364 pos=LGJC | UKWB gamma VIII-IV-III rings=AACU stecker=AQ CR
+  all-time  9/16 tmpl=struct:THETIS@2 pos=LGJC | UKWB gamma VIII-IV-III rings=AACU stecker=AQ CR
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@2 IC=0.0364 pos=LGJC | UKWB gamma VIII-IV-III rings=AACU stecker=AQ CR
+  all-time  9/16 tmpl=struct:THETIS@2 pos=LGJC | UKWB gamma VIII-IV-III rings=AACU stecker=AQ CR
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@2 IC=0.0364 pos=LGJC | UKWB gamma VIII-IV-III rings=AACU stecker=AQ CR
+  all-time  9/16 tmpl=struct:THETIS@2 pos=LGJC | UKWB gamma VIII-IV-III rings=AACU stecker=AQ CR
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@2 IC=0.0364 pos=LGJC | UKWB gamma VIII-IV-III rings=AACU stecker=AQ CR
+  all-time  9/16 tmpl=struct:THETIS@2 pos=LGJC | UKWB gamma VIII-IV-III rings=AACU stecker=AQ CR
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 22…22)
+Shell evolution: ON freeRings=false WO=126 ringSeeds=2 subspace=naval-two-notch-right
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  8/22 (36%) tmpl=struct:pad+GRUPPENZ@g2@1 IC=0.0403 pos=NOKX | UKWB beta I-V-VII rings=AACU stecker=AD BZ ER HT IO JY LS MV PW
+  all-time  8/22 tmpl=struct:pad+GRUPPENZ@g2@1 pos=NOKX | UKWB beta I-V-VII rings=AACU stecker=AD BZ ER HT IO JY LS MV PW
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  9/22 (41%) tmpl=struct:pad+GRUPPENZ@g2@1 IC=0.0411 pos=LYZM | UKWB gamma I-II-VI rings=AAAA stecker=DK ST
+  all-time  9/22 tmpl=struct:pad+GRUPPENZ@g2@1 pos=LYZM | UKWB gamma I-II-VI rings=AAAA stecker=DK ST
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g2@1 IC=0.0376 pos=OGUZ | UKWB gamma VII-V-VI rings=AACU stecker=AK BG CE DH FI JZ LY MS OP RX
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g2@1 pos=OGUZ | UKWB gamma VII-V-VI rings=AACU stecker=AK BG CE DH FI JZ LY MS OP RX
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g2@1 IC=0.0376 pos=OGUZ | UKWB gamma VII-V-VI rings=AACU stecker=AK BG CE DH FI JZ LY MS OP RX
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g2@1 pos=OGUZ | UKWB gamma VII-V-VI rings=AACU stecker=AK BG CE DH FI JZ LY MS OP RX
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g2@1 IC=0.0376 pos=OGUZ | UKWB gamma VII-V-VI rings=AACU stecker=AK BG CE DH FI JZ LY MS OP RX
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g2@1 pos=OGUZ | UKWB gamma VII-V-VI rings=AACU stecker=AK BG CE DH FI JZ LY MS OP RX
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g2@1 IC=0.0376 pos=OGUZ | UKWB gamma VII-V-VI rings=AACU stecker=AK BG CE DH FI JZ LY MS OP RX
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g2@1 pos=OGUZ | UKWB gamma VII-V-VI rings=AACU stecker=AK BG CE DH FI JZ LY MS OP RX
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g2@1 IC=0.0376 pos=OGUZ | UKWB gamma VII-V-VI rings=AACU stecker=AK BG CE DH FI JZ LY MS OP RX
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g2@1 pos=OGUZ | UKWB gamma VII-V-VI rings=AACU stecker=AK BG CE DH FI JZ LY MS OP RX
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g2@1 IC=0.0376 pos=OGUZ | UKWB gamma VII-V-VI rings=AACU stecker=AK BG CE DH FI JZ LY MS OP RX
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g2@1 pos=OGUZ | UKWB gamma VII-V-VI rings=AACU stecker=AK BG CE DH FI JZ LY MS OP RX
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g2@1 IC=0.0376 pos=OGUZ | UKWB gamma VII-V-VI rings=AACU stecker=AK BG CE DH FI JZ LY MS OP RX
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g2@1 pos=OGUZ | UKWB gamma VII-V-VI rings=AACU stecker=AK BG CE DH FI JZ LY MS OP RX
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g2@1 IC=0.0376 pos=OGUZ | UKWB gamma VII-V-VI rings=AACU stecker=AK BG CE DH FI JZ LY MS OP RX
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g2@1 pos=OGUZ | UKWB gamma VII-V-VI rings=AACU stecker=AK BG CE DH FI JZ LY MS OP RX
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g2@1 IC=0.0376 pos=OGUZ | UKWB gamma VII-V-VI rings=AACU stecker=AK BG CE DH FI JZ LY MS OP RX
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g2@1 pos=OGUZ | UKWB gamma VII-V-VI rings=AACU stecker=AK BG CE DH FI JZ LY MS OP RX
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g2@1 IC=0.0376 pos=OGUZ | UKWB gamma VII-V-VI rings=AACU stecker=AK BG CE DH FI JZ LY MS OP RX
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g2@1 pos=OGUZ | UKWB gamma VII-V-VI rings=AACU stecker=AK BG CE DH FI JZ LY MS OP RX
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 22…22)
+Shell evolution: ON freeRings=false WO=126 ringSeeds=2 subspace=naval-two-notch-right
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  8/22 (36%) tmpl=struct:pad+GRUPPENZ@g4@1 IC=0.0379 pos=WLLP | UKWB beta II-IV-VII rings=AACU stecker=AQ BV EX FK HW MN OT PS UY
+  all-time  8/22 tmpl=struct:pad+GRUPPENZ@g4@1 pos=WLLP | UKWB beta II-IV-VII rings=AACU stecker=AQ BV EX FK HW MN OT PS UY
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  9/22 (41%) tmpl=struct:pad+GRUPPENZ@g4@1 IC=0.0340 pos=LOTY | UKWC gamma I-V-VIII rings=AAAA stecker=CJ DP EG FH MR OV TU
+  all-time  9/22 tmpl=struct:pad+GRUPPENZ@g4@1 pos=LOTY | UKWC gamma I-V-VIII rings=AAAA stecker=CJ DP EG FH MR OV TU
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  9/22 (41%) tmpl=struct:pad+GRUPPENZ@g4@1 IC=0.0340 pos=LOTY | UKWC gamma I-V-VIII rings=AAAA stecker=CJ DP EG FH MR OV TU
+  all-time  9/22 tmpl=struct:pad+GRUPPENZ@g4@1 pos=LOTY | UKWC gamma I-V-VIII rings=AAAA stecker=CJ DP EG FH MR OV TU
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  9/22 (41%) tmpl=struct:pad+GRUPPENZ@g4@1 IC=0.0340 pos=LOTY | UKWC gamma I-V-VIII rings=AAAA stecker=CJ DP EG FH MR OV TU
+  all-time  9/22 tmpl=struct:pad+GRUPPENZ@g4@1 pos=LOTY | UKWC gamma I-V-VIII rings=AAAA stecker=CJ DP EG FH MR OV TU
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  9/22 (41%) tmpl=struct:pad+GRUPPENZ@g4@1 IC=0.0340 pos=LOTY | UKWC gamma I-V-VIII rings=AAAA stecker=CJ DP EG FH MR OV TU
+  all-time  9/22 tmpl=struct:pad+GRUPPENZ@g4@1 pos=LOTY | UKWC gamma I-V-VIII rings=AAAA stecker=CJ DP EG FH MR OV TU
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g4@1 IC=0.0360 pos=SCNX | UKWB beta I-III-VII rings=AACU stecker=GI HL OV RZ SY
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g4@1 pos=SCNX | UKWB beta I-III-VII rings=AACU stecker=GI HL OV RZ SY
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g4@1 IC=0.0360 pos=SCNX | UKWB beta I-III-VII rings=AACU stecker=GI HL OV RZ SY
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g4@1 pos=SCNX | UKWB beta I-III-VII rings=AACU stecker=GI HL OV RZ SY
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g4@1 IC=0.0360 pos=SCNX | UKWB beta I-III-VII rings=AACU stecker=GI HL OV RZ SY
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g4@1 pos=SCNX | UKWB beta I-III-VII rings=AACU stecker=GI HL OV RZ SY
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g4@1 IC=0.0360 pos=SCNX | UKWB beta I-III-VII rings=AACU stecker=GI HL OV RZ SY
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g4@1 pos=SCNX | UKWB beta I-III-VII rings=AACU stecker=GI HL OV RZ SY
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g4@1 IC=0.0360 pos=SCNX | UKWB beta I-III-VII rings=AACU stecker=GI HL OV RZ SY
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g4@1 pos=SCNX | UKWB beta I-III-VII rings=AACU stecker=GI HL OV RZ SY
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g4@1 IC=0.0360 pos=SCNX | UKWB beta I-III-VII rings=AACU stecker=GI HL OV RZ SY
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g4@1 pos=SCNX | UKWB beta I-III-VII rings=AACU stecker=GI HL OV RZ SY
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g4@1 IC=0.0360 pos=SCNX | UKWB beta I-III-VII rings=AACU stecker=GI HL OV RZ SY
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g4@1 pos=SCNX | UKWB beta I-III-VII rings=AACU stecker=GI HL OV RZ SY
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 22…22)
+Shell evolution: ON freeRings=false WO=126 ringSeeds=2 subspace=naval-two-notch-right
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  9/22 (41%) tmpl=struct:pad+GRUPPENZ@g6@1 IC=0.0430 pos=KZUN | UKWC beta II-I-VI rings=AACU stecker=DL KT MR UY
+  all-time  9/22 tmpl=struct:pad+GRUPPENZ@g6@1 pos=KZUN | UKWC beta II-I-VI rings=AACU stecker=DL KT MR UY
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  9/22 (41%) tmpl=struct:pad+GRUPPENZ@g6@1 IC=0.0430 pos=KZUN | UKWC beta II-I-VI rings=AACU stecker=DL KT MR UY
+  all-time  9/22 tmpl=struct:pad+GRUPPENZ@g6@1 pos=KZUN | UKWC beta II-I-VI rings=AACU stecker=DL KT MR UY
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  9/22 (41%) tmpl=struct:pad+GRUPPENZ@g6@1 IC=0.0430 pos=KZUN | UKWC beta II-I-VI rings=AACU stecker=DL KT MR UY
+  all-time  9/22 tmpl=struct:pad+GRUPPENZ@g6@1 pos=KZUN | UKWC beta II-I-VI rings=AACU stecker=DL KT MR UY
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  9/22 (41%) tmpl=struct:pad+GRUPPENZ@g6@1 IC=0.0430 pos=KZUN | UKWC beta II-I-VI rings=AACU stecker=DL KT MR UY
+  all-time  9/22 tmpl=struct:pad+GRUPPENZ@g6@1 pos=KZUN | UKWC beta II-I-VI rings=AACU stecker=DL KT MR UY
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  9/22 (41%) tmpl=struct:pad+GRUPPENZ@g6@1 IC=0.0430 pos=KZUN | UKWC beta II-I-VI rings=AACU stecker=DL KT MR UY
+  all-time  9/22 tmpl=struct:pad+GRUPPENZ@g6@1 pos=KZUN | UKWC beta II-I-VI rings=AACU stecker=DL KT MR UY
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g6@1 IC=0.0383 pos=PHBZ | UKWB gamma I-III-VI rings=AACU stecker=AM BD GK LZ
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g6@1 pos=PHBZ | UKWB gamma I-III-VI rings=AACU stecker=AM BD GK LZ
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  10/22 (45%) tmpl=struct:pad+GRUPPENZ@g6@1 IC=0.0383 pos=PHBZ | UKWB gamma I-III-VI rings=AACU stecker=AM BD GK LZ
+  all-time  10/22 tmpl=struct:pad+GRUPPENZ@g6@1 pos=PHBZ | UKWB gamma I-III-VI rings=AACU stecker=AM BD GK LZ
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  11/22 (50%) tmpl=struct:pad+GRUPPENZ@g6@1 IC=0.0415 pos=PHBZ | UKWB gamma I-III-VI rings=AACU stecker=AM BD GK HL
+  all-time  11/22 tmpl=struct:pad+GRUPPENZ@g6@1 pos=PHBZ | UKWB gamma I-III-VI rings=AACU stecker=AM BD GK HL
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  11/22 (50%) tmpl=struct:pad+GRUPPENZ@g6@1 IC=0.0415 pos=PHBZ | UKWB gamma I-III-VI rings=AACU stecker=AM BD GK HL
+  all-time  11/22 tmpl=struct:pad+GRUPPENZ@g6@1 pos=PHBZ | UKWB gamma I-III-VI rings=AACU stecker=AM BD GK HL
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  11/22 (50%) tmpl=struct:pad+GRUPPENZ@g6@1 IC=0.0415 pos=PHBZ | UKWB gamma I-III-VI rings=AACU stecker=AM BD GK HL
+  all-time  11/22 tmpl=struct:pad+GRUPPENZ@g6@1 pos=PHBZ | UKWB gamma I-III-VI rings=AACU stecker=AM BD GK HL
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  11/22 (50%) tmpl=struct:pad+GRUPPENZ@g6@1 IC=0.0415 pos=PHBZ | UKWB gamma I-III-VI rings=AACU stecker=AM BD GK HL
+  all-time  11/22 tmpl=struct:pad+GRUPPENZ@g6@1 pos=PHBZ | UKWB gamma I-III-VI rings=AACU stecker=AM BD GK HL
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  11/22 (50%) tmpl=struct:pad+GRUPPENZ@g6@1 IC=0.0415 pos=PHBZ | UKWB gamma I-III-VI rings=AACU stecker=AM BD GK HL
+  all-time  11/22 tmpl=struct:pad+GRUPPENZ@g6@1 pos=PHBZ | UKWB gamma I-III-VI rings=AACU stecker=AM BD GK HL
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 21…21)
+Shell evolution: ON freeRings=false WO=126 ringSeeds=2 subspace=naval-two-notch-right
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  8/21 (38%) tmpl=struct:AUSBILDUNG_FUNK@3 IC=0.0352 pos=SKRY | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+  all-time  8/21 tmpl=struct:AUSBILDUNG_FUNK@3 pos=SKRY | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  9/21 (43%) tmpl=struct:AUSBILDUNG_FUNK@3 IC=0.0395 pos=BSJX | UKWB gamma VIII-IV-VII rings=AACU stecker=BD HO
+  all-time  9/21 tmpl=struct:AUSBILDUNG_FUNK@3 pos=BSJX | UKWB gamma VIII-IV-VII rings=AACU stecker=BD HO
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  9/21 (43%) tmpl=struct:AUSBILDUNG_FUNK@3 IC=0.0395 pos=BSJX | UKWB gamma VIII-IV-VII rings=AACU stecker=BD HO
+  all-time  9/21 tmpl=struct:AUSBILDUNG_FUNK@3 pos=BSJX | UKWB gamma VIII-IV-VII rings=AACU stecker=BD HO
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  9/21 (43%) tmpl=struct:AUSBILDUNG_FUNK@3 IC=0.0395 pos=BSJX | UKWB gamma VIII-IV-VII rings=AACU stecker=BD HO
+  all-time  9/21 tmpl=struct:AUSBILDUNG_FUNK@3 pos=BSJX | UKWB gamma VIII-IV-VII rings=AACU stecker=BD HO
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  9/21 (43%) tmpl=struct:AUSBILDUNG_FUNK@3 IC=0.0395 pos=BSJX | UKWB gamma VIII-IV-VII rings=AACU stecker=BD HO
+  all-time  9/21 tmpl=struct:AUSBILDUNG_FUNK@3 pos=BSJX | UKWB gamma VIII-IV-VII rings=AACU stecker=BD HO
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  9/21 (43%) tmpl=struct:AUSBILDUNG_FUNK@3 IC=0.0395 pos=BSJX | UKWB gamma VIII-IV-VII rings=AACU stecker=BD HO
+  all-time  9/21 tmpl=struct:AUSBILDUNG_FUNK@3 pos=BSJX | UKWB gamma VIII-IV-VII rings=AACU stecker=BD HO
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  9/21 (43%) tmpl=struct:AUSBILDUNG_FUNK@3 IC=0.0395 pos=BSJX | UKWB gamma VIII-IV-VII rings=AACU stecker=BD HO
+  all-time  9/21 tmpl=struct:AUSBILDUNG_FUNK@3 pos=BSJX | UKWB gamma VIII-IV-VII rings=AACU stecker=BD HO
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=struct:AUSBILDUNG_FUNK@3 IC=0.0383 pos=BSJX | UKWB gamma VIII-IV-VII rings=AACU stecker=BD HO QX
+  all-time  10/21 tmpl=struct:AUSBILDUNG_FUNK@3 pos=BSJX | UKWB gamma VIII-IV-VII rings=AACU stecker=BD HO QX
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=struct:AUSBILDUNG_FUNK@3 IC=0.0383 pos=BSJX | UKWB gamma VIII-IV-VII rings=AACU stecker=BD HO QX
+  all-time  10/21 tmpl=struct:AUSBILDUNG_FUNK@3 pos=BSJX | UKWB gamma VIII-IV-VII rings=AACU stecker=BD HO QX
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=struct:AUSBILDUNG_FUNK@3 IC=0.0383 pos=BSJX | UKWB gamma VIII-IV-VII rings=AACU stecker=BD HO QX
+  all-time  10/21 tmpl=struct:AUSBILDUNG_FUNK@3 pos=BSJX | UKWB gamma VIII-IV-VII rings=AACU stecker=BD HO QX
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=struct:AUSBILDUNG_FUNK@3 IC=0.0383 pos=BSJX | UKWB gamma VIII-IV-VII rings=AACU stecker=BD HO QX
+  all-time  10/21 tmpl=struct:AUSBILDUNG_FUNK@3 pos=BSJX | UKWB gamma VIII-IV-VII rings=AACU stecker=BD HO QX
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  10/21 (48%) tmpl=struct:AUSBILDUNG_FUNK@3 IC=0.0383 pos=BSJX | UKWB gamma VIII-IV-VII rings=AACU stecker=BD HO QX
+  all-time  10/21 tmpl=struct:AUSBILDUNG_FUNK@3 pos=BSJX | UKWB gamma VIII-IV-VII rings=AACU stecker=BD HO QX
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 20…20)
+Shell evolution: ON freeRings=false WO=126 ringSeeds=2 subspace=naval-two-notch-right
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  8/20 (40%) tmpl=struct:FUNKUEBUNG@0 IC=0.0442 pos=CFJL | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+  all-time  8/20 tmpl=struct:FUNKUEBUNG@0 pos=CFJL | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=struct:FUNKUEBUNG@0 IC=0.0454 pos=CFJL | UKWB gamma I-II-VI rings=AAAA stecker=PZ
+  all-time  9/20 tmpl=struct:FUNKUEBUNG@0 pos=CFJL | UKWB gamma I-II-VI rings=AAAA stecker=PZ
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=struct:FUNKUEBUNG@0 IC=0.0454 pos=CFJL | UKWB gamma I-II-VI rings=AAAA stecker=PZ
+  all-time  9/20 tmpl=struct:FUNKUEBUNG@0 pos=CFJL | UKWB gamma I-II-VI rings=AAAA stecker=PZ
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=struct:FUNKUEBUNG@0 IC=0.0454 pos=CFJL | UKWB gamma I-II-VI rings=AAAA stecker=PZ
+  all-time  9/20 tmpl=struct:FUNKUEBUNG@0 pos=CFJL | UKWB gamma I-II-VI rings=AAAA stecker=PZ
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=struct:FUNKUEBUNG@0 IC=0.0454 pos=CFJL | UKWB gamma I-II-VI rings=AAAA stecker=PZ
+  all-time  9/20 tmpl=struct:FUNKUEBUNG@0 pos=CFJL | UKWB gamma I-II-VI rings=AAAA stecker=PZ
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=struct:FUNKUEBUNG@0 IC=0.0454 pos=CFJL | UKWB gamma I-II-VI rings=AAAA stecker=PZ
+  all-time  9/20 tmpl=struct:FUNKUEBUNG@0 pos=CFJL | UKWB gamma I-II-VI rings=AAAA stecker=PZ
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=struct:FUNKUEBUNG@0 IC=0.0454 pos=CFJL | UKWB gamma I-II-VI rings=AAAA stecker=PZ
+  all-time  9/20 tmpl=struct:FUNKUEBUNG@0 pos=CFJL | UKWB gamma I-II-VI rings=AAAA stecker=PZ
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=struct:FUNKUEBUNG@0 IC=0.0454 pos=CFJL | UKWB gamma I-II-VI rings=AAAA stecker=PZ
+  all-time  9/20 tmpl=struct:FUNKUEBUNG@0 pos=CFJL | UKWB gamma I-II-VI rings=AAAA stecker=PZ
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=struct:FUNKUEBUNG@0 IC=0.0454 pos=CFJL | UKWB gamma I-II-VI rings=AAAA stecker=PZ
+  all-time  9/20 tmpl=struct:FUNKUEBUNG@0 pos=CFJL | UKWB gamma I-II-VI rings=AAAA stecker=PZ
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=struct:FUNKUEBUNG@0 IC=0.0454 pos=CFJL | UKWB gamma I-II-VI rings=AAAA stecker=PZ
+  all-time  9/20 tmpl=struct:FUNKUEBUNG@0 pos=CFJL | UKWB gamma I-II-VI rings=AAAA stecker=PZ
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=struct:FUNKUEBUNG@0 IC=0.0454 pos=CFJL | UKWB gamma I-II-VI rings=AAAA stecker=PZ
+  all-time  9/20 tmpl=struct:FUNKUEBUNG@0 pos=CFJL | UKWB gamma I-II-VI rings=AAAA stecker=PZ
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=struct:FUNKUEBUNG@0 IC=0.0454 pos=CFJL | UKWB gamma I-II-VI rings=AAAA stecker=PZ
+  all-time  9/20 tmpl=struct:FUNKUEBUNG@0 pos=CFJL | UKWB gamma I-II-VI rings=AAAA stecker=PZ
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 20…20)
+Shell evolution: ON freeRings=false WO=126 ringSeeds=2 subspace=naval-two-notch-right
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  8/20 (40%) tmpl=struct:FUNKUEBUNG@1 IC=0.0407 pos=OVND | UKWC beta VIII-II-VI rings=AAAA stecker=AD CW GP HK NT QU RS VX
+  all-time  8/20 tmpl=struct:FUNKUEBUNG@1 pos=OVND | UKWC beta VIII-II-VI rings=AAAA stecker=AD CW GP HK NT QU RS VX
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=struct:FUNKUEBUNG@1 IC=0.0423 pos=OVND | UKWC beta VIII-II-VI rings=AAAA stecker=CW GP HK NT QU RS VX
+  all-time  9/20 tmpl=struct:FUNKUEBUNG@1 pos=OVND | UKWC beta VIII-II-VI rings=AAAA stecker=CW GP HK NT QU RS VX
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=struct:FUNKUEBUNG@1 IC=0.0423 pos=OVND | UKWC beta VIII-II-VI rings=AAAA stecker=CW GP HK NT QU RS VX
+  all-time  9/20 tmpl=struct:FUNKUEBUNG@1 pos=OVND | UKWC beta VIII-II-VI rings=AAAA stecker=CW GP HK NT QU RS VX
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=struct:FUNKUEBUNG@1 IC=0.0423 pos=OVND | UKWC beta VIII-II-VI rings=AAAA stecker=CW GP HK NT QU RS VX
+  all-time  9/20 tmpl=struct:FUNKUEBUNG@1 pos=OVND | UKWC beta VIII-II-VI rings=AAAA stecker=CW GP HK NT QU RS VX
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=struct:FUNKUEBUNG@1 IC=0.0407 pos=JYVA | UKWB beta IV-VII-VIII rings=AAAA stecker=BI DN EP HM JO
+  all-time  10/20 tmpl=struct:FUNKUEBUNG@1 pos=JYVA | UKWB beta IV-VII-VIII rings=AAAA stecker=BI DN EP HM JO
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=struct:FUNKUEBUNG@1 IC=0.0407 pos=JYVA | UKWB beta IV-VII-VIII rings=AAAA stecker=BI DN EP HM JO
+  all-time  10/20 tmpl=struct:FUNKUEBUNG@1 pos=JYVA | UKWB beta IV-VII-VIII rings=AAAA stecker=BI DN EP HM JO
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=struct:FUNKUEBUNG@1 IC=0.0407 pos=JYVA | UKWB beta IV-VII-VIII rings=AAAA stecker=BI DN EP HM JO
+  all-time  10/20 tmpl=struct:FUNKUEBUNG@1 pos=JYVA | UKWB beta IV-VII-VIII rings=AAAA stecker=BI DN EP HM JO
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=struct:FUNKUEBUNG@1 IC=0.0407 pos=JYVA | UKWB beta IV-VII-VIII rings=AAAA stecker=BI DN EP HM JO
+  all-time  10/20 tmpl=struct:FUNKUEBUNG@1 pos=JYVA | UKWB beta IV-VII-VIII rings=AAAA stecker=BI DN EP HM JO
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=struct:FUNKUEBUNG@1 IC=0.0407 pos=JYVA | UKWB beta IV-VII-VIII rings=AAAA stecker=BI DN EP HM JO
+  all-time  10/20 tmpl=struct:FUNKUEBUNG@1 pos=JYVA | UKWB beta IV-VII-VIII rings=AAAA stecker=BI DN EP HM JO
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=struct:FUNKUEBUNG@1 IC=0.0407 pos=JYVA | UKWB beta IV-VII-VIII rings=AAAA stecker=BI DN EP HM JO
+  all-time  10/20 tmpl=struct:FUNKUEBUNG@1 pos=JYVA | UKWB beta IV-VII-VIII rings=AAAA stecker=BI DN EP HM JO
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=struct:FUNKUEBUNG@1 IC=0.0407 pos=JYVA | UKWB beta IV-VII-VIII rings=AAAA stecker=BI DN EP HM JO
+  all-time  10/20 tmpl=struct:FUNKUEBUNG@1 pos=JYVA | UKWB beta IV-VII-VIII rings=AAAA stecker=BI DN EP HM JO
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=struct:FUNKUEBUNG@1 IC=0.0407 pos=JYVA | UKWB beta IV-VII-VIII rings=AAAA stecker=BI DN EP HM JO
+  all-time  10/20 tmpl=struct:FUNKUEBUNG@1 pos=JYVA | UKWB beta IV-VII-VIII rings=AAAA stecker=BI DN EP HM JO
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 20…20)
+Shell evolution: ON freeRings=false WO=126 ringSeeds=2 subspace=naval-two-notch-right
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  8/20 (40%) tmpl=struct:pad+ZEITGRUP@g2@0 IC=0.0348 pos=OVLN | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+  all-time  8/20 tmpl=struct:pad+ZEITGRUP@g2@0 pos=OVLN | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  8/20 (40%) tmpl=struct:pad+ZEITGRUP@g2@0 IC=0.0348 pos=OVLN | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+  all-time  8/20 tmpl=struct:pad+ZEITGRUP@g2@0 pos=OVLN | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  8/20 (40%) tmpl=struct:pad+ZEITGRUP@g2@0 IC=0.0348 pos=OVLN | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+  all-time  8/20 tmpl=struct:pad+ZEITGRUP@g2@0 pos=OVLN | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  9/20 (45%) tmpl=struct:pad+ZEITGRUP@g2@0 IC=0.0336 pos=HWWA | UKWB gamma IV-V-VI rings=AAAA stecker=AE BO MP SY
+  all-time  9/20 tmpl=struct:pad+ZEITGRUP@g2@0 pos=HWWA | UKWB gamma IV-V-VI rings=AAAA stecker=AE BO MP SY
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=struct:pad+ZEITGRUP@g2@0 IC=0.0325 pos=HWWA | UKWB gamma IV-V-VI rings=AAAA stecker=AE BO IR MP SY
+  all-time  10/20 tmpl=struct:pad+ZEITGRUP@g2@0 pos=HWWA | UKWB gamma IV-V-VI rings=AAAA stecker=AE BO IR MP SY
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=struct:pad+ZEITGRUP@g2@0 IC=0.0325 pos=HWWA | UKWB gamma IV-V-VI rings=AAAA stecker=AE BO IR MP SY
+  all-time  10/20 tmpl=struct:pad+ZEITGRUP@g2@0 pos=HWWA | UKWB gamma IV-V-VI rings=AAAA stecker=AE BO IR MP SY
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=struct:pad+ZEITGRUP@g2@0 IC=0.0325 pos=HWWA | UKWB gamma IV-V-VI rings=AAAA stecker=AE BO IR MP SY
+  all-time  10/20 tmpl=struct:pad+ZEITGRUP@g2@0 pos=HWWA | UKWB gamma IV-V-VI rings=AAAA stecker=AE BO IR MP SY
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  10/20 (50%) tmpl=struct:pad+ZEITGRUP@g2@0 IC=0.0325 pos=HWWA | UKWB gamma IV-V-VI rings=AAAA stecker=AE BO IR MP SY
+  all-time  10/20 tmpl=struct:pad+ZEITGRUP@g2@0 pos=HWWA | UKWB gamma IV-V-VI rings=AAAA stecker=AE BO IR MP SY
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=struct:pad+ZEITGRUP@g2@0 IC=0.0321 pos=HWWA | UKWB gamma IV-V-VI rings=AAAA stecker=AE BO IR MP SY TW
+  all-time  11/20 tmpl=struct:pad+ZEITGRUP@g2@0 pos=HWWA | UKWB gamma IV-V-VI rings=AAAA stecker=AE BO IR MP SY TW
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=struct:pad+ZEITGRUP@g2@0 IC=0.0321 pos=HWWA | UKWB gamma IV-V-VI rings=AAAA stecker=AE BO IR MP SY TW
+  all-time  11/20 tmpl=struct:pad+ZEITGRUP@g2@0 pos=HWWA | UKWB gamma IV-V-VI rings=AAAA stecker=AE BO IR MP SY TW
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=struct:pad+ZEITGRUP@g2@0 IC=0.0321 pos=HWWA | UKWB gamma IV-V-VI rings=AAAA stecker=AE BO IR MP SY TW
+  all-time  11/20 tmpl=struct:pad+ZEITGRUP@g2@0 pos=HWWA | UKWB gamma IV-V-VI rings=AAAA stecker=AE BO IR MP SY TW
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  11/20 (55%) tmpl=struct:pad+ZEITGRUP@g2@0 IC=0.0321 pos=HWWA | UKWB gamma IV-V-VI rings=AAAA stecker=AE BO IR MP SY TW
+  all-time  11/20 tmpl=struct:pad+ZEITGRUP@g2@0 pos=HWWA | UKWB gamma IV-V-VI rings=AAAA stecker=AE BO IR MP SY TW
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 18…18)
+Shell evolution: ON freeRings=false WO=126 ringSeeds=2 subspace=naval-two-notch-right
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  8/18 (44%) tmpl=struct:ACHSEDM_drill@1 IC=0.0356 pos=STUY | UKWC beta IV-VII-VIII rings=AACU stecker=AL BC DG IX NS
+  all-time  8/18 tmpl=struct:ACHSEDM_drill@1 pos=STUY | UKWC beta IV-VII-VIII rings=AACU stecker=AL BC DG IX NS
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  8/18 (44%) tmpl=struct:ACHSEDM_drill@1 IC=0.0356 pos=STUY | UKWC beta IV-VII-VIII rings=AACU stecker=AL BC DG IX NS
+  all-time  8/18 tmpl=struct:ACHSEDM_drill@1 pos=STUY | UKWC beta IV-VII-VIII rings=AACU stecker=AL BC DG IX NS
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  8/18 (44%) tmpl=struct:ACHSEDM_drill@1 IC=0.0356 pos=STUY | UKWC beta IV-VII-VIII rings=AACU stecker=AL BC DG IX NS
+  all-time  8/18 tmpl=struct:ACHSEDM_drill@1 pos=STUY | UKWC beta IV-VII-VIII rings=AACU stecker=AL BC DG IX NS
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  8/18 (44%) tmpl=struct:ACHSEDM_drill@1 IC=0.0356 pos=STUY | UKWC beta IV-VII-VIII rings=AACU stecker=AL BC DG IX NS
+  all-time  8/18 tmpl=struct:ACHSEDM_drill@1 pos=STUY | UKWC beta IV-VII-VIII rings=AACU stecker=AL BC DG IX NS
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  8/18 (44%) tmpl=struct:ACHSEDM_drill@1 IC=0.0356 pos=STUY | UKWC beta IV-VII-VIII rings=AACU stecker=AL BC DG IX NS
+  all-time  8/18 tmpl=struct:ACHSEDM_drill@1 pos=STUY | UKWC beta IV-VII-VIII rings=AACU stecker=AL BC DG IX NS
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  8/18 (44%) tmpl=struct:ACHSEDM_drill@1 IC=0.0356 pos=STUY | UKWC beta IV-VII-VIII rings=AACU stecker=AL BC DG IX NS
+  all-time  8/18 tmpl=struct:ACHSEDM_drill@1 pos=STUY | UKWC beta IV-VII-VIII rings=AACU stecker=AL BC DG IX NS
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  8/18 (44%) tmpl=struct:ACHSEDM_drill@1 IC=0.0356 pos=STUY | UKWC beta IV-VII-VIII rings=AACU stecker=AL BC DG IX NS
+  all-time  8/18 tmpl=struct:ACHSEDM_drill@1 pos=STUY | UKWC beta IV-VII-VIII rings=AACU stecker=AL BC DG IX NS
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:ACHSEDM_drill@1 IC=0.0376 pos=STUY | UKWC beta IV-VII-VIII rings=AACU stecker=AF BC DG IX NS
+  all-time  9/18 tmpl=struct:ACHSEDM_drill@1 pos=STUY | UKWC beta IV-VII-VIII rings=AACU stecker=AF BC DG IX NS
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:ACHSEDM_drill@1 IC=0.0376 pos=STUY | UKWC beta IV-VII-VIII rings=AACU stecker=AF BC DG IX NS
+  all-time  9/18 tmpl=struct:ACHSEDM_drill@1 pos=STUY | UKWC beta IV-VII-VIII rings=AACU stecker=AF BC DG IX NS
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:ACHSEDM_drill@1 IC=0.0376 pos=STUY | UKWC beta IV-VII-VIII rings=AACU stecker=AF BC DG IX NS
+  all-time  9/18 tmpl=struct:ACHSEDM_drill@1 pos=STUY | UKWC beta IV-VII-VIII rings=AACU stecker=AF BC DG IX NS
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:ACHSEDM_drill@1 IC=0.0376 pos=STUY | UKWC beta IV-VII-VIII rings=AACU stecker=AF BC DG IX NS
+  all-time  9/18 tmpl=struct:ACHSEDM_drill@1 pos=STUY | UKWC beta IV-VII-VIII rings=AACU stecker=AF BC DG IX NS
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:ACHSEDM_drill@1 IC=0.0376 pos=STUY | UKWC beta IV-VII-VIII rings=AACU stecker=AF BC DG IX NS
+  all-time  9/18 tmpl=struct:ACHSEDM_drill@1 pos=STUY | UKWC beta IV-VII-VIII rings=AACU stecker=AF BC DG IX NS
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 18…18)
+Shell evolution: ON freeRings=false WO=126 ringSeeds=2 subspace=naval-two-notch-right
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  8/18 (44%) tmpl=struct:LEHRGANG@1 IC=0.0399 pos=FWYK | UKWB gamma VII-III-VIII rings=AACU stecker=HQ IZ JU LO MR NT
+  all-time  8/18 tmpl=struct:LEHRGANG@1 pos=FWYK | UKWB gamma VII-III-VIII rings=AACU stecker=HQ IZ JU LO MR NT
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  8/18 (44%) tmpl=struct:LEHRGANG@1 IC=0.0399 pos=FWYK | UKWB gamma VII-III-VIII rings=AACU stecker=HQ IZ JU LO MR NT
+  all-time  8/18 tmpl=struct:LEHRGANG@1 pos=FWYK | UKWB gamma VII-III-VIII rings=AACU stecker=HQ IZ JU LO MR NT
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@1 IC=0.0379 pos=YZYQ | UKWB beta III-IV-VII rings=AAAA stecker=BG JY NO
+  all-time  9/18 tmpl=struct:LEHRGANG@1 pos=YZYQ | UKWB beta III-IV-VII rings=AAAA stecker=BG JY NO
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@1 IC=0.0379 pos=YZYQ | UKWB beta III-IV-VII rings=AAAA stecker=BG JY NO
+  all-time  9/18 tmpl=struct:LEHRGANG@1 pos=YZYQ | UKWB beta III-IV-VII rings=AAAA stecker=BG JY NO
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@1 IC=0.0379 pos=YZYQ | UKWB beta III-IV-VII rings=AAAA stecker=BG JY NO
+  all-time  9/18 tmpl=struct:LEHRGANG@1 pos=YZYQ | UKWB beta III-IV-VII rings=AAAA stecker=BG JY NO
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@1 IC=0.0379 pos=YZYQ | UKWB beta III-IV-VII rings=AAAA stecker=BG JY NO
+  all-time  9/18 tmpl=struct:LEHRGANG@1 pos=YZYQ | UKWB beta III-IV-VII rings=AAAA stecker=BG JY NO
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@1 IC=0.0379 pos=YZYQ | UKWB beta III-IV-VII rings=AAAA stecker=BG JY NO
+  all-time  9/18 tmpl=struct:LEHRGANG@1 pos=YZYQ | UKWB beta III-IV-VII rings=AAAA stecker=BG JY NO
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@1 IC=0.0379 pos=YZYQ | UKWB beta III-IV-VII rings=AAAA stecker=BG JY NO
+  all-time  9/18 tmpl=struct:LEHRGANG@1 pos=YZYQ | UKWB beta III-IV-VII rings=AAAA stecker=BG JY NO
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@1 IC=0.0379 pos=YZYQ | UKWB beta III-IV-VII rings=AAAA stecker=BG JY NO
+  all-time  9/18 tmpl=struct:LEHRGANG@1 pos=YZYQ | UKWB beta III-IV-VII rings=AAAA stecker=BG JY NO
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@1 IC=0.0379 pos=YZYQ | UKWB beta III-IV-VII rings=AAAA stecker=BG JY NO
+  all-time  9/18 tmpl=struct:LEHRGANG@1 pos=YZYQ | UKWB beta III-IV-VII rings=AAAA stecker=BG JY NO
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@1 IC=0.0379 pos=YZYQ | UKWB beta III-IV-VII rings=AAAA stecker=BG JY NO
+  all-time  9/18 tmpl=struct:LEHRGANG@1 pos=YZYQ | UKWB beta III-IV-VII rings=AAAA stecker=BG JY NO
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@1 IC=0.0379 pos=YZYQ | UKWB beta III-IV-VII rings=AAAA stecker=BG JY NO
+  all-time  9/18 tmpl=struct:LEHRGANG@1 pos=YZYQ | UKWB beta III-IV-VII rings=AAAA stecker=BG JY NO
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 18…18)
+Shell evolution: ON freeRings=false WO=126 ringSeeds=2 subspace=naval-two-notch-right
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  8/18 (44%) tmpl=struct:LEHRGANG@2 IC=0.0383 pos=EBQX | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+  all-time  8/18 tmpl=struct:LEHRGANG@2 pos=EBQX | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  8/18 (44%) tmpl=struct:LEHRGANG@2 IC=0.0383 pos=EBQX | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+  all-time  8/18 tmpl=struct:LEHRGANG@2 pos=EBQX | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@2 IC=0.0403 pos=WFXC | UKWB beta I-V-VIII rings=AACU stecker=BW DS EV IT JZ KM NX OR QY
+  all-time  9/18 tmpl=struct:LEHRGANG@2 pos=WFXC | UKWB beta I-V-VIII rings=AACU stecker=BW DS EV IT JZ KM NX OR QY
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@2 IC=0.0403 pos=WFXC | UKWB beta I-V-VIII rings=AACU stecker=BW DS EV IT JZ KM NX OR QY
+  all-time  9/18 tmpl=struct:LEHRGANG@2 pos=WFXC | UKWB beta I-V-VIII rings=AACU stecker=BW DS EV IT JZ KM NX OR QY
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@2 IC=0.0403 pos=WFXC | UKWB beta I-V-VIII rings=AACU stecker=BW DS EV IT JZ KM NX OR QY
+  all-time  9/18 tmpl=struct:LEHRGANG@2 pos=WFXC | UKWB beta I-V-VIII rings=AACU stecker=BW DS EV IT JZ KM NX OR QY
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@2 IC=0.0403 pos=WFXC | UKWB beta I-V-VIII rings=AACU stecker=BW DS EV IT JZ KM NX OR QY
+  all-time  9/18 tmpl=struct:LEHRGANG@2 pos=WFXC | UKWB beta I-V-VIII rings=AACU stecker=BW DS EV IT JZ KM NX OR QY
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@2 IC=0.0403 pos=WFXC | UKWB beta I-V-VIII rings=AACU stecker=BW DS EV IT JZ KM NX OR QY
+  all-time  9/18 tmpl=struct:LEHRGANG@2 pos=WFXC | UKWB beta I-V-VIII rings=AACU stecker=BW DS EV IT JZ KM NX OR QY
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@2 IC=0.0403 pos=WFXC | UKWB beta I-V-VIII rings=AACU stecker=BW DS EV IT JZ KM NX OR QY
+  all-time  9/18 tmpl=struct:LEHRGANG@2 pos=WFXC | UKWB beta I-V-VIII rings=AACU stecker=BW DS EV IT JZ KM NX OR QY
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@2 IC=0.0403 pos=WFXC | UKWB beta I-V-VIII rings=AACU stecker=BW DS EV IT JZ KM NX OR QY
+  all-time  9/18 tmpl=struct:LEHRGANG@2 pos=WFXC | UKWB beta I-V-VIII rings=AACU stecker=BW DS EV IT JZ KM NX OR QY
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@2 IC=0.0403 pos=WFXC | UKWB beta I-V-VIII rings=AACU stecker=BW DS EV IT JZ KM NX OR QY
+  all-time  9/18 tmpl=struct:LEHRGANG@2 pos=WFXC | UKWB beta I-V-VIII rings=AACU stecker=BW DS EV IT JZ KM NX OR QY
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@2 IC=0.0403 pos=WFXC | UKWB beta I-V-VIII rings=AACU stecker=BW DS EV IT JZ KM NX OR QY
+  all-time  9/18 tmpl=struct:LEHRGANG@2 pos=WFXC | UKWB beta I-V-VIII rings=AACU stecker=BW DS EV IT JZ KM NX OR QY
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:LEHRGANG@2 IC=0.0403 pos=WFXC | UKWB beta I-V-VIII rings=AACU stecker=BW DS EV IT JZ KM NX OR QY
+  all-time  9/18 tmpl=struct:LEHRGANG@2 pos=WFXC | UKWB beta I-V-VIII rings=AACU stecker=BW DS EV IT JZ KM NX OR QY
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 18…18)
+Shell evolution: ON freeRings=false WO=126 ringSeeds=2 subspace=naval-two-notch-right
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  7/18 (39%) tmpl=struct:UEBUNG_tile@0 IC=0.0391 pos=NUUX | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+  all-time  7/18 tmpl=struct:UEBUNG_tile@0 pos=NUUX | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:UEBUNG_tile@0 IC=0.0434 pos=NEQT | UKWC beta IV-V-VII rings=AACU stecker=AT DV FX HN JW OP
+  all-time  9/18 tmpl=struct:UEBUNG_tile@0 pos=NEQT | UKWC beta IV-V-VII rings=AACU stecker=AT DV FX HN JW OP
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:UEBUNG_tile@0 IC=0.0434 pos=NEQT | UKWC beta IV-V-VII rings=AACU stecker=AT DV FX HN JW OP
+  all-time  9/18 tmpl=struct:UEBUNG_tile@0 pos=NEQT | UKWC beta IV-V-VII rings=AACU stecker=AT DV FX HN JW OP
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:UEBUNG_tile@0 IC=0.0434 pos=NEQT | UKWC beta IV-V-VII rings=AACU stecker=AT DV FX HN JW OP
+  all-time  9/18 tmpl=struct:UEBUNG_tile@0 pos=NEQT | UKWC beta IV-V-VII rings=AACU stecker=AT DV FX HN JW OP
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:UEBUNG_tile@0 IC=0.0434 pos=NEQT | UKWC beta IV-V-VII rings=AACU stecker=AT DV FX HN JW OP
+  all-time  9/18 tmpl=struct:UEBUNG_tile@0 pos=NEQT | UKWC beta IV-V-VII rings=AACU stecker=AT DV FX HN JW OP
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:UEBUNG_tile@0 IC=0.0434 pos=NEQT | UKWC beta IV-V-VII rings=AACU stecker=AT DV FX HN JW OP
+  all-time  9/18 tmpl=struct:UEBUNG_tile@0 pos=NEQT | UKWC beta IV-V-VII rings=AACU stecker=AT DV FX HN JW OP
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:UEBUNG_tile@0 IC=0.0434 pos=NEQT | UKWC beta IV-V-VII rings=AACU stecker=AT DV FX HN JW OP
+  all-time  9/18 tmpl=struct:UEBUNG_tile@0 pos=NEQT | UKWC beta IV-V-VII rings=AACU stecker=AT DV FX HN JW OP
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:UEBUNG_tile@0 IC=0.0434 pos=NEQT | UKWC beta IV-V-VII rings=AACU stecker=AT DV FX HN JW OP
+  all-time  9/18 tmpl=struct:UEBUNG_tile@0 pos=NEQT | UKWC beta IV-V-VII rings=AACU stecker=AT DV FX HN JW OP
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:UEBUNG_tile@0 IC=0.0434 pos=NEQT | UKWC beta IV-V-VII rings=AACU stecker=AT DV FX HN JW OP
+  all-time  9/18 tmpl=struct:UEBUNG_tile@0 pos=NEQT | UKWC beta IV-V-VII rings=AACU stecker=AT DV FX HN JW OP
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:UEBUNG_tile@0 IC=0.0434 pos=NEQT | UKWC beta IV-V-VII rings=AACU stecker=AT DV FX HN JW OP
+  all-time  9/18 tmpl=struct:UEBUNG_tile@0 pos=NEQT | UKWC beta IV-V-VII rings=AACU stecker=AT DV FX HN JW OP
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:UEBUNG_tile@0 IC=0.0434 pos=NEQT | UKWC beta IV-V-VII rings=AACU stecker=AT DV FX HN JW OP
+  all-time  9/18 tmpl=struct:UEBUNG_tile@0 pos=NEQT | UKWC beta IV-V-VII rings=AACU stecker=AT DV FX HN JW OP
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  10/18 (56%) tmpl=struct:UEBUNG_tile@0 IC=0.0434 pos=NEQT | UKWC beta IV-V-VII rings=AACU stecker=AT DV FX HN IR JW OP
+  all-time  10/18 tmpl=struct:UEBUNG_tile@0 pos=NEQT | UKWC beta IV-V-VII rings=AACU stecker=AT DV FX HN IR JW OP
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 18…18)
+Shell evolution: ON freeRings=false WO=126 ringSeeds=2 subspace=naval-two-notch-right
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:UEBUNG_tile@1 IC=0.0356 pos=GGOV | UKWC gamma IV-VII-VI rings=AACU stecker=AS BJ CY ET FR GH KP MX OQ UW
+  all-time  9/18 tmpl=struct:UEBUNG_tile@1 pos=GGOV | UKWC gamma IV-VII-VI rings=AACU stecker=AS BJ CY ET FR GH KP MX OQ UW
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:UEBUNG_tile@1 IC=0.0356 pos=GGOV | UKWC gamma IV-VII-VI rings=AACU stecker=AS BJ CY ET FR GH KP MX OQ UW
+  all-time  9/18 tmpl=struct:UEBUNG_tile@1 pos=GGOV | UKWC gamma IV-VII-VI rings=AACU stecker=AS BJ CY ET FR GH KP MX OQ UW
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:UEBUNG_tile@1 IC=0.0356 pos=GGOV | UKWC gamma IV-VII-VI rings=AACU stecker=AS BJ CY ET FR GH KP MX OQ UW
+  all-time  9/18 tmpl=struct:UEBUNG_tile@1 pos=GGOV | UKWC gamma IV-VII-VI rings=AACU stecker=AS BJ CY ET FR GH KP MX OQ UW
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:UEBUNG_tile@1 IC=0.0356 pos=GGOV | UKWC gamma IV-VII-VI rings=AACU stecker=AS BJ CY ET FR GH KP MX OQ UW
+  all-time  9/18 tmpl=struct:UEBUNG_tile@1 pos=GGOV | UKWC gamma IV-VII-VI rings=AACU stecker=AS BJ CY ET FR GH KP MX OQ UW
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:UEBUNG_tile@1 IC=0.0356 pos=GGOV | UKWC gamma IV-VII-VI rings=AACU stecker=AS BJ CY ET FR GH KP MX OQ UW
+  all-time  9/18 tmpl=struct:UEBUNG_tile@1 pos=GGOV | UKWC gamma IV-VII-VI rings=AACU stecker=AS BJ CY ET FR GH KP MX OQ UW
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  9/18 (50%) tmpl=struct:UEBUNG_tile@1 IC=0.0356 pos=GGOV | UKWC gamma IV-VII-VI rings=AACU stecker=AS BJ CY ET FR GH KP MX OQ UW
+  all-time  9/18 tmpl=struct:UEBUNG_tile@1 pos=GGOV | UKWC gamma IV-VII-VI rings=AACU stecker=AS BJ CY ET FR GH KP MX OQ UW
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  10/18 (56%) tmpl=struct:UEBUNG_tile@1 IC=0.0379 pos=GGOV | UKWC gamma IV-VII-VI rings=AACU stecker=AS BL CY ET FR GH KP MX OQ UW
+  all-time  10/18 tmpl=struct:UEBUNG_tile@1 pos=GGOV | UKWC gamma IV-VII-VI rings=AACU stecker=AS BL CY ET FR GH KP MX OQ UW
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  10/18 (56%) tmpl=struct:UEBUNG_tile@1 IC=0.0379 pos=GGOV | UKWC gamma IV-VII-VI rings=AACU stecker=AS BL CY ET FR GH KP MX OQ UW
+  all-time  10/18 tmpl=struct:UEBUNG_tile@1 pos=GGOV | UKWC gamma IV-VII-VI rings=AACU stecker=AS BL CY ET FR GH KP MX OQ UW
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  10/18 (56%) tmpl=struct:UEBUNG_tile@1 IC=0.0379 pos=GGOV | UKWC gamma IV-VII-VI rings=AACU stecker=AS BL CY ET FR GH KP MX OQ UW
+  all-time  10/18 tmpl=struct:UEBUNG_tile@1 pos=GGOV | UKWC gamma IV-VII-VI rings=AACU stecker=AS BL CY ET FR GH KP MX OQ UW
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  10/18 (56%) tmpl=struct:UEBUNG_tile@1 IC=0.0379 pos=GGOV | UKWC gamma IV-VII-VI rings=AACU stecker=AS BL CY ET FR GH KP MX OQ UW
+  all-time  10/18 tmpl=struct:UEBUNG_tile@1 pos=GGOV | UKWC gamma IV-VII-VI rings=AACU stecker=AS BL CY ET FR GH KP MX OQ UW
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  10/18 (56%) tmpl=struct:UEBUNG_tile@1 IC=0.0379 pos=GGOV | UKWC gamma IV-VII-VI rings=AACU stecker=AS BL CY ET FR GH KP MX OQ UW
+  all-time  10/18 tmpl=struct:UEBUNG_tile@1 pos=GGOV | UKWC gamma IV-VII-VI rings=AACU stecker=AS BL CY ET FR GH KP MX OQ UW
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  10/18 (56%) tmpl=struct:UEBUNG_tile@1 IC=0.0379 pos=GGOV | UKWC gamma IV-VII-VI rings=AACU stecker=AS BL CY ET FR GH KP MX OQ UW
+  all-time  10/18 tmpl=struct:UEBUNG_tile@1 pos=GGOV | UKWC gamma IV-VII-VI rings=AACU stecker=AS BL CY ET FR GH KP MX OQ UW
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 17…17)
+Shell evolution: ON freeRings=false WO=126 ringSeeds=2 subspace=naval-two-notch-right
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  7/17 (41%) tmpl=struct:ANALLE@1 IC=0.0387 pos=KQNW | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+  all-time  7/17 tmpl=struct:ANALLE@1 pos=KQNW | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:ANALLE@1 IC=0.0419 pos=FNNG | UKWC beta III-IV-VI rings=AAAA stecker=AV BU DY FI HL NS OP
+  all-time  9/17 tmpl=struct:ANALLE@1 pos=FNNG | UKWC beta III-IV-VI rings=AAAA stecker=AV BU DY FI HL NS OP
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:ANALLE@1 IC=0.0419 pos=FNNG | UKWC beta III-IV-VI rings=AAAA stecker=AV BU DY FI HL NS OP
+  all-time  9/17 tmpl=struct:ANALLE@1 pos=FNNG | UKWC beta III-IV-VI rings=AAAA stecker=AV BU DY FI HL NS OP
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:ANALLE@1 IC=0.0419 pos=FNNG | UKWC beta III-IV-VI rings=AAAA stecker=AV BU DY FI HL NS OP
+  all-time  9/17 tmpl=struct:ANALLE@1 pos=FNNG | UKWC beta III-IV-VI rings=AAAA stecker=AV BU DY FI HL NS OP
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:ANALLE@1 IC=0.0419 pos=FNNG | UKWC beta III-IV-VI rings=AAAA stecker=AV BU DY FI HL NS OP
+  all-time  9/17 tmpl=struct:ANALLE@1 pos=FNNG | UKWC beta III-IV-VI rings=AAAA stecker=AV BU DY FI HL NS OP
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:ANALLE@1 IC=0.0419 pos=FNNG | UKWC beta III-IV-VI rings=AAAA stecker=AV BU DY FI HL NS OP
+  all-time  9/17 tmpl=struct:ANALLE@1 pos=FNNG | UKWC beta III-IV-VI rings=AAAA stecker=AV BU DY FI HL NS OP
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:ANALLE@1 IC=0.0419 pos=FNNG | UKWC beta III-IV-VI rings=AAAA stecker=AV BU DY FI HL NS OP
+  all-time  9/17 tmpl=struct:ANALLE@1 pos=FNNG | UKWC beta III-IV-VI rings=AAAA stecker=AV BU DY FI HL NS OP
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:ANALLE@1 IC=0.0419 pos=FNNG | UKWC beta III-IV-VI rings=AAAA stecker=AV BU DY FI HL NS OP
+  all-time  9/17 tmpl=struct:ANALLE@1 pos=FNNG | UKWC beta III-IV-VI rings=AAAA stecker=AV BU DY FI HL NS OP
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:ANALLE@1 IC=0.0419 pos=FNNG | UKWC beta III-IV-VI rings=AAAA stecker=AV BU DY FI HL NS OP
+  all-time  9/17 tmpl=struct:ANALLE@1 pos=FNNG | UKWC beta III-IV-VI rings=AAAA stecker=AV BU DY FI HL NS OP
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:ANALLE@1 IC=0.0419 pos=FNNG | UKWC beta III-IV-VI rings=AAAA stecker=AV BU DY FI HL NS OP
+  all-time  9/17 tmpl=struct:ANALLE@1 pos=FNNG | UKWC beta III-IV-VI rings=AAAA stecker=AV BU DY FI HL NS OP
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  10/17 (59%) tmpl=struct:ANALLE@1 IC=0.0383 pos=FNNG | UKWC beta III-IV-VI rings=AAAA stecker=AV BU DY FI LW NS OP
+  all-time  10/17 tmpl=struct:ANALLE@1 pos=FNNG | UKWC beta III-IV-VI rings=AAAA stecker=AV BU DY FI LW NS OP
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  10/17 (59%) tmpl=struct:ANALLE@1 IC=0.0383 pos=FNNG | UKWC beta III-IV-VI rings=AAAA stecker=AV BU DY FI LW NS OP
+  all-time  10/17 tmpl=struct:ANALLE@1 pos=FNNG | UKWC beta III-IV-VI rings=AAAA stecker=AV BU DY FI LW NS OP
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 17…17)
+Shell evolution: ON freeRings=false WO=126 ringSeeds=2 subspace=naval-two-notch-right
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  7/17 (41%) tmpl=struct:ANALLE@3 IC=0.0423 pos=RJXT | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+  all-time  7/17 tmpl=struct:ANALLE@3 pos=RJXT | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  8/17 (47%) tmpl=struct:ANALLE@3 IC=0.0317 pos=XOVH | UKWB gamma III-II-VI rings=AACU stecker=EI JK MN PZ TU
+  all-time  8/17 tmpl=struct:ANALLE@3 pos=XOVH | UKWB gamma III-II-VI rings=AACU stecker=EI JK MN PZ TU
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:ANALLE@3 IC=0.0352 pos=FGQS | UKWC gamma II-VII-VIII rings=AACU stecker=CJ DO EM FK GQ HU IT NW PS VZ
+  all-time  9/17 tmpl=struct:ANALLE@3 pos=FGQS | UKWC gamma II-VII-VIII rings=AACU stecker=CJ DO EM FK GQ HU IT NW PS VZ
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:ANALLE@3 IC=0.0352 pos=FGQS | UKWC gamma II-VII-VIII rings=AACU stecker=CJ DO EM FK GQ HU IT NW PS VZ
+  all-time  9/17 tmpl=struct:ANALLE@3 pos=FGQS | UKWC gamma II-VII-VIII rings=AACU stecker=CJ DO EM FK GQ HU IT NW PS VZ
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:ANALLE@3 IC=0.0352 pos=FGQS | UKWC gamma II-VII-VIII rings=AACU stecker=CJ DO EM FK GQ HU IT NW PS VZ
+  all-time  9/17 tmpl=struct:ANALLE@3 pos=FGQS | UKWC gamma II-VII-VIII rings=AACU stecker=CJ DO EM FK GQ HU IT NW PS VZ
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:ANALLE@3 IC=0.0352 pos=FGQS | UKWC gamma II-VII-VIII rings=AACU stecker=CJ DO EM FK GQ HU IT NW PS VZ
+  all-time  9/17 tmpl=struct:ANALLE@3 pos=FGQS | UKWC gamma II-VII-VIII rings=AACU stecker=CJ DO EM FK GQ HU IT NW PS VZ
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:ANALLE@3 IC=0.0352 pos=FGQS | UKWC gamma II-VII-VIII rings=AACU stecker=CJ DO EM FK GQ HU IT NW PS VZ
+  all-time  9/17 tmpl=struct:ANALLE@3 pos=FGQS | UKWC gamma II-VII-VIII rings=AACU stecker=CJ DO EM FK GQ HU IT NW PS VZ
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:ANALLE@3 IC=0.0352 pos=FGQS | UKWC gamma II-VII-VIII rings=AACU stecker=CJ DO EM FK GQ HU IT NW PS VZ
+  all-time  9/17 tmpl=struct:ANALLE@3 pos=FGQS | UKWC gamma II-VII-VIII rings=AACU stecker=CJ DO EM FK GQ HU IT NW PS VZ
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:ANALLE@3 IC=0.0352 pos=FGQS | UKWC gamma II-VII-VIII rings=AACU stecker=CJ DO EM FK GQ HU IT NW PS VZ
+  all-time  9/17 tmpl=struct:ANALLE@3 pos=FGQS | UKWC gamma II-VII-VIII rings=AACU stecker=CJ DO EM FK GQ HU IT NW PS VZ
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:ANALLE@3 IC=0.0352 pos=FGQS | UKWC gamma II-VII-VIII rings=AACU stecker=CJ DO EM FK GQ HU IT NW PS VZ
+  all-time  9/17 tmpl=struct:ANALLE@3 pos=FGQS | UKWC gamma II-VII-VIII rings=AACU stecker=CJ DO EM FK GQ HU IT NW PS VZ
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:ANALLE@3 IC=0.0352 pos=FGQS | UKWC gamma II-VII-VIII rings=AACU stecker=CJ DO EM FK GQ HU IT NW PS VZ
+  all-time  9/17 tmpl=struct:ANALLE@3 pos=FGQS | UKWC gamma II-VII-VIII rings=AACU stecker=CJ DO EM FK GQ HU IT NW PS VZ
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:ANALLE@3 IC=0.0352 pos=FGQS | UKWC gamma II-VII-VIII rings=AACU stecker=CJ DO EM FK GQ HU IT NW PS VZ
+  all-time  9/17 tmpl=struct:ANALLE@3 pos=FGQS | UKWC gamma II-VII-VIII rings=AACU stecker=CJ DO EM FK GQ HU IT NW PS VZ
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 17…17)
+Shell evolution: ON freeRings=false WO=126 ringSeeds=2 subspace=naval-two-notch-right
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  8/17 (47%) tmpl=struct:SEDM_repeat@0 IC=0.0368 pos=PUKW | UKWB beta III-VII-VI rings=AAAA stecker=CI EO FZ HR JQ KL MX NT UY
+  all-time  8/17 tmpl=struct:SEDM_repeat@0 pos=PUKW | UKWB beta III-VII-VI rings=AAAA stecker=CI EO FZ HR JQ KL MX NT UY
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  8/17 (47%) tmpl=struct:SEDM_repeat@0 IC=0.0368 pos=PUKW | UKWB beta III-VII-VI rings=AAAA stecker=CI EO FZ HR JQ KL MX NT UY
+  all-time  8/17 tmpl=struct:SEDM_repeat@0 pos=PUKW | UKWB beta III-VII-VI rings=AAAA stecker=CI EO FZ HR JQ KL MX NT UY
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  8/17 (47%) tmpl=struct:SEDM_repeat@0 IC=0.0368 pos=PUKW | UKWB beta III-VII-VI rings=AAAA stecker=CI EO FZ HR JQ KL MX NT UY
+  all-time  8/17 tmpl=struct:SEDM_repeat@0 pos=PUKW | UKWB beta III-VII-VI rings=AAAA stecker=CI EO FZ HR JQ KL MX NT UY
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  8/17 (47%) tmpl=struct:SEDM_repeat@0 IC=0.0368 pos=PUKW | UKWB beta III-VII-VI rings=AAAA stecker=CI EO FZ HR JQ KL MX NT UY
+  all-time  8/17 tmpl=struct:SEDM_repeat@0 pos=PUKW | UKWB beta III-VII-VI rings=AAAA stecker=CI EO FZ HR JQ KL MX NT UY
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:SEDM_repeat@0 IC=0.0352 pos=PUKW | UKWB beta III-VII-VI rings=AAAA stecker=CI EO FZ HR JQ KP MX NT UY
+  all-time  9/17 tmpl=struct:SEDM_repeat@0 pos=PUKW | UKWB beta III-VII-VI rings=AAAA stecker=CI EO FZ HR JQ KP MX NT UY
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:SEDM_repeat@0 IC=0.0352 pos=PUKW | UKWB beta III-VII-VI rings=AAAA stecker=CI EO FZ HR JQ KP MX NT UY
+  all-time  9/17 tmpl=struct:SEDM_repeat@0 pos=PUKW | UKWB beta III-VII-VI rings=AAAA stecker=CI EO FZ HR JQ KP MX NT UY
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:SEDM_repeat@0 IC=0.0352 pos=PUKW | UKWB beta III-VII-VI rings=AAAA stecker=CI EO FZ HR JQ KP MX NT UY
+  all-time  9/17 tmpl=struct:SEDM_repeat@0 pos=PUKW | UKWB beta III-VII-VI rings=AAAA stecker=CI EO FZ HR JQ KP MX NT UY
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:SEDM_repeat@0 IC=0.0352 pos=PUKW | UKWB beta III-VII-VI rings=AAAA stecker=CI EO FZ HR JQ KP MX NT UY
+  all-time  9/17 tmpl=struct:SEDM_repeat@0 pos=PUKW | UKWB beta III-VII-VI rings=AAAA stecker=CI EO FZ HR JQ KP MX NT UY
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:SEDM_repeat@0 IC=0.0352 pos=PUKW | UKWB beta III-VII-VI rings=AAAA stecker=CI EO FZ HR JQ KP MX NT UY
+  all-time  9/17 tmpl=struct:SEDM_repeat@0 pos=PUKW | UKWB beta III-VII-VI rings=AAAA stecker=CI EO FZ HR JQ KP MX NT UY
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:SEDM_repeat@0 IC=0.0352 pos=PUKW | UKWB beta III-VII-VI rings=AAAA stecker=CI EO FZ HR JQ KP MX NT UY
+  all-time  9/17 tmpl=struct:SEDM_repeat@0 pos=PUKW | UKWB beta III-VII-VI rings=AAAA stecker=CI EO FZ HR JQ KP MX NT UY
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:SEDM_repeat@0 IC=0.0352 pos=PUKW | UKWB beta III-VII-VI rings=AAAA stecker=CI EO FZ HR JQ KP MX NT UY
+  all-time  9/17 tmpl=struct:SEDM_repeat@0 pos=PUKW | UKWB beta III-VII-VI rings=AAAA stecker=CI EO FZ HR JQ KP MX NT UY
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:SEDM_repeat@0 IC=0.0352 pos=PUKW | UKWB beta III-VII-VI rings=AAAA stecker=CI EO FZ HR JQ KP MX NT UY
+  all-time  9/17 tmpl=struct:SEDM_repeat@0 pos=PUKW | UKWB beta III-VII-VI rings=AAAA stecker=CI EO FZ HR JQ KP MX NT UY
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 17…17)
+Shell evolution: ON freeRings=false WO=126 ringSeeds=2 subspace=naval-two-notch-right
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  7/17 (41%) tmpl=struct:SEDM_repeat@2 IC=0.0411 pos=OWWH | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+  all-time  7/17 tmpl=struct:SEDM_repeat@2 pos=OWWH | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  8/17 (47%) tmpl=struct:SEDM_repeat@2 IC=0.0372 pos=LXTF | UKWC gamma IV-I-VI rings=AAAA stecker=EZ GH JL NV OY PR QW TU
+  all-time  8/17 tmpl=struct:SEDM_repeat@2 pos=LXTF | UKWC gamma IV-I-VI rings=AAAA stecker=EZ GH JL NV OY PR QW TU
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  9/17 (53%) tmpl=struct:SEDM_repeat@2 IC=0.0399 pos=EMHT | UKWC beta IV-I-VIII rings=AACU stecker=AH RT SU
+  all-time  9/17 tmpl=struct:SEDM_repeat@2 pos=EMHT | UKWC beta IV-I-VIII rings=AACU stecker=AH RT SU
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  10/17 (59%) tmpl=struct:SEDM_repeat@2 IC=0.0399 pos=EMHT | UKWC beta IV-I-VIII rings=AACU stecker=GH RT SU
+  all-time  10/17 tmpl=struct:SEDM_repeat@2 pos=EMHT | UKWC beta IV-I-VIII rings=AACU stecker=GH RT SU
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  10/17 (59%) tmpl=struct:SEDM_repeat@2 IC=0.0399 pos=EMHT | UKWC beta IV-I-VIII rings=AACU stecker=GH RT SU
+  all-time  10/17 tmpl=struct:SEDM_repeat@2 pos=EMHT | UKWC beta IV-I-VIII rings=AACU stecker=GH RT SU
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  10/17 (59%) tmpl=struct:SEDM_repeat@2 IC=0.0399 pos=EMHT | UKWC beta IV-I-VIII rings=AACU stecker=GH RT SU
+  all-time  10/17 tmpl=struct:SEDM_repeat@2 pos=EMHT | UKWC beta IV-I-VIII rings=AACU stecker=GH RT SU
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  10/17 (59%) tmpl=struct:SEDM_repeat@2 IC=0.0399 pos=EMHT | UKWC beta IV-I-VIII rings=AACU stecker=GH RT SU
+  all-time  10/17 tmpl=struct:SEDM_repeat@2 pos=EMHT | UKWC beta IV-I-VIII rings=AACU stecker=GH RT SU
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  10/17 (59%) tmpl=struct:SEDM_repeat@2 IC=0.0399 pos=EMHT | UKWC beta IV-I-VIII rings=AACU stecker=GH RT SU
+  all-time  10/17 tmpl=struct:SEDM_repeat@2 pos=EMHT | UKWC beta IV-I-VIII rings=AACU stecker=GH RT SU
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  10/17 (59%) tmpl=struct:SEDM_repeat@2 IC=0.0399 pos=EMHT | UKWC beta IV-I-VIII rings=AACU stecker=GH RT SU
+  all-time  10/17 tmpl=struct:SEDM_repeat@2 pos=EMHT | UKWC beta IV-I-VIII rings=AACU stecker=GH RT SU
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  10/17 (59%) tmpl=struct:SEDM_repeat@2 IC=0.0399 pos=EMHT | UKWC beta IV-I-VIII rings=AACU stecker=GH RT SU
+  all-time  10/17 tmpl=struct:SEDM_repeat@2 pos=EMHT | UKWC beta IV-I-VIII rings=AACU stecker=GH RT SU
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  10/17 (59%) tmpl=struct:SEDM_repeat@2 IC=0.0399 pos=EMHT | UKWC beta IV-I-VIII rings=AACU stecker=GH RT SU
+  all-time  10/17 tmpl=struct:SEDM_repeat@2 pos=EMHT | UKWC beta IV-I-VIII rings=AACU stecker=GH RT SU
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  10/17 (59%) tmpl=struct:SEDM_repeat@2 IC=0.0399 pos=EMHT | UKWC beta IV-I-VIII rings=AACU stecker=GH RT SU
+  all-time  10/17 tmpl=struct:SEDM_repeat@2 pos=EMHT | UKWC beta IV-I-VIII rings=AACU stecker=GH RT SU
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 16…16)
+Shell evolution: ON freeRings=false WO=126 ringSeeds=2 subspace=naval-two-notch-right
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  7/16 (44%) tmpl=struct:OEDM_repeat@0 IC=0.0477 pos=HGZN | UKWC beta III-II-VII rings=AACU stecker=AT DE
+  all-time  7/16 tmpl=struct:OEDM_repeat@0 pos=HGZN | UKWC beta III-II-VII rings=AACU stecker=AT DE
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  7/16 (44%) tmpl=struct:OEDM_repeat@0 IC=0.0477 pos=HGZN | UKWC beta III-II-VII rings=AACU stecker=AT DE
+  all-time  7/16 tmpl=struct:OEDM_repeat@0 pos=HGZN | UKWC beta III-II-VII rings=AACU stecker=AT DE
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:OEDM_repeat@0 IC=0.0434 pos=KNRE | UKWB beta I-III-VII rings=AACU stecker=AN BJ CL FO GW HZ KV MP SY UX
+  all-time  8/16 tmpl=struct:OEDM_repeat@0 pos=KNRE | UKWB beta I-III-VII rings=AACU stecker=AN BJ CL FO GW HZ KV MP SY UX
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:OEDM_repeat@0 IC=0.0434 pos=KNRE | UKWB beta I-III-VII rings=AACU stecker=AN BJ CL FO GW HZ KV MP SY UX
+  all-time  8/16 tmpl=struct:OEDM_repeat@0 pos=KNRE | UKWB beta I-III-VII rings=AACU stecker=AN BJ CL FO GW HZ KV MP SY UX
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:OEDM_repeat@0 IC=0.0434 pos=KNRE | UKWB beta I-III-VII rings=AACU stecker=AN BJ CL FO GW HZ KV MP SY UX
+  all-time  8/16 tmpl=struct:OEDM_repeat@0 pos=KNRE | UKWB beta I-III-VII rings=AACU stecker=AN BJ CL FO GW HZ KV MP SY UX
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:OEDM_repeat@0 IC=0.0434 pos=KNRE | UKWB beta I-III-VII rings=AACU stecker=AN BJ CL FO GW HZ KV MP SY UX
+  all-time  8/16 tmpl=struct:OEDM_repeat@0 pos=KNRE | UKWB beta I-III-VII rings=AACU stecker=AN BJ CL FO GW HZ KV MP SY UX
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:OEDM_repeat@0 IC=0.0434 pos=KNRE | UKWB beta I-III-VII rings=AACU stecker=AN BJ CL FO GW HZ KV MP SY UX
+  all-time  8/16 tmpl=struct:OEDM_repeat@0 pos=KNRE | UKWB beta I-III-VII rings=AACU stecker=AN BJ CL FO GW HZ KV MP SY UX
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:OEDM_repeat@0 IC=0.0434 pos=KNRE | UKWB beta I-III-VII rings=AACU stecker=AN BJ CL FO GW HZ KV MP SY UX
+  all-time  8/16 tmpl=struct:OEDM_repeat@0 pos=KNRE | UKWB beta I-III-VII rings=AACU stecker=AN BJ CL FO GW HZ KV MP SY UX
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:OEDM_repeat@0 IC=0.0434 pos=KNRE | UKWB beta I-III-VII rings=AACU stecker=AN BJ CL FO GW HZ KV MP SY UX
+  all-time  8/16 tmpl=struct:OEDM_repeat@0 pos=KNRE | UKWB beta I-III-VII rings=AACU stecker=AN BJ CL FO GW HZ KV MP SY UX
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:OEDM_repeat@0 IC=0.0407 pos=NRUJ | UKWC beta III-I-VI rings=AACU stecker=AH CO IX LQ RT
+  all-time  9/16 tmpl=struct:OEDM_repeat@0 pos=NRUJ | UKWC beta III-I-VI rings=AACU stecker=AH CO IX LQ RT
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:OEDM_repeat@0 IC=0.0407 pos=NRUJ | UKWC beta III-I-VI rings=AACU stecker=AH CO IX LQ RT
+  all-time  9/16 tmpl=struct:OEDM_repeat@0 pos=NRUJ | UKWC beta III-I-VI rings=AACU stecker=AH CO IX LQ RT
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:OEDM_repeat@0 IC=0.0407 pos=NRUJ | UKWC beta III-I-VI rings=AACU stecker=AH CO IX LQ RT
+  all-time  9/16 tmpl=struct:OEDM_repeat@0 pos=NRUJ | UKWC beta III-I-VI rings=AACU stecker=AH CO IX LQ RT
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 16…16)
+Shell evolution: ON freeRings=false WO=126 ringSeeds=2 subspace=naval-two-notch-right
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  7/16 (44%) tmpl=struct:OEDM_repeat@2 IC=0.0372 pos=IZSV | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+  all-time  7/16 tmpl=struct:OEDM_repeat@2 pos=IZSV | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:OEDM_repeat@2 IC=0.0372 pos=FHQI | UKWC beta III-IV-VII rings=AACU stecker=GT
+  all-time  8/16 tmpl=struct:OEDM_repeat@2 pos=FHQI | UKWC beta III-IV-VII rings=AACU stecker=GT
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:OEDM_repeat@2 IC=0.0372 pos=FHQI | UKWC beta III-IV-VII rings=AACU stecker=GT
+  all-time  8/16 tmpl=struct:OEDM_repeat@2 pos=FHQI | UKWC beta III-IV-VII rings=AACU stecker=GT
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:OEDM_repeat@2 IC=0.0372 pos=FHQI | UKWC beta III-IV-VII rings=AACU stecker=GT
+  all-time  8/16 tmpl=struct:OEDM_repeat@2 pos=FHQI | UKWC beta III-IV-VII rings=AACU stecker=GT
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:OEDM_repeat@2 IC=0.0372 pos=FHQI | UKWC beta III-IV-VII rings=AACU stecker=GT
+  all-time  8/16 tmpl=struct:OEDM_repeat@2 pos=FHQI | UKWC beta III-IV-VII rings=AACU stecker=GT
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:OEDM_repeat@2 IC=0.0372 pos=FHQI | UKWC beta III-IV-VII rings=AACU stecker=GT
+  all-time  8/16 tmpl=struct:OEDM_repeat@2 pos=FHQI | UKWC beta III-IV-VII rings=AACU stecker=GT
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:OEDM_repeat@2 IC=0.0395 pos=XOPC | UKWC beta III-II-VIII rings=AACU stecker=AX BS FL HR IQ JT KM NV OY PW
+  all-time  9/16 tmpl=struct:OEDM_repeat@2 pos=XOPC | UKWC beta III-II-VIII rings=AACU stecker=AX BS FL HR IQ JT KM NV OY PW
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:OEDM_repeat@2 IC=0.0395 pos=XOPC | UKWC beta III-II-VIII rings=AACU stecker=AX BS FL HR IQ JT KM NV OY PW
+  all-time  9/16 tmpl=struct:OEDM_repeat@2 pos=XOPC | UKWC beta III-II-VIII rings=AACU stecker=AX BS FL HR IQ JT KM NV OY PW
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:OEDM_repeat@2 IC=0.0395 pos=XOPC | UKWC beta III-II-VIII rings=AACU stecker=AX BS FL HR IQ JT KM NV OY PW
+  all-time  9/16 tmpl=struct:OEDM_repeat@2 pos=XOPC | UKWC beta III-II-VIII rings=AACU stecker=AX BS FL HR IQ JT KM NV OY PW
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:OEDM_repeat@2 IC=0.0395 pos=XOPC | UKWC beta III-II-VIII rings=AACU stecker=AX BS FL HR IQ JT KM NV OY PW
+  all-time  9/16 tmpl=struct:OEDM_repeat@2 pos=XOPC | UKWC beta III-II-VIII rings=AACU stecker=AX BS FL HR IQ JT KM NV OY PW
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:OEDM_repeat@2 IC=0.0395 pos=XOPC | UKWC beta III-II-VIII rings=AACU stecker=AX BS FL HR IQ JT KM NV OY PW
+  all-time  9/16 tmpl=struct:OEDM_repeat@2 pos=XOPC | UKWC beta III-II-VIII rings=AACU stecker=AX BS FL HR IQ JT KM NV OY PW
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:OEDM_repeat@2 IC=0.0395 pos=XOPC | UKWC beta III-II-VIII rings=AACU stecker=AX BS FL HR IQ JT KM NV OY PW
+  all-time  9/16 tmpl=struct:OEDM_repeat@2 pos=XOPC | UKWC beta III-II-VIII rings=AACU stecker=AX BS FL HR IQ JT KM NV OY PW
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 16…16)
+Shell evolution: ON freeRings=false WO=126 ringSeeds=2 subspace=naval-two-notch-right
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  7/16 (44%) tmpl=struct:THETIS@0 IC=0.0415 pos=KZZZ | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+  all-time  7/16 tmpl=struct:THETIS@0 pos=KZZZ | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:THETIS@0 IC=0.0352 pos=FVYR | UKWB gamma V-VII-VI rings=AAAA stecker=AU CD GH VX
+  all-time  8/16 tmpl=struct:THETIS@0 pos=FVYR | UKWB gamma V-VII-VI rings=AAAA stecker=AU CD GH VX
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:THETIS@0 IC=0.0352 pos=FVYR | UKWB gamma V-VII-VI rings=AAAA stecker=AU CD GH VX
+  all-time  8/16 tmpl=struct:THETIS@0 pos=FVYR | UKWB gamma V-VII-VI rings=AAAA stecker=AU CD GH VX
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:THETIS@0 IC=0.0352 pos=FVYR | UKWB gamma V-VII-VI rings=AAAA stecker=AU CD GH VX
+  all-time  8/16 tmpl=struct:THETIS@0 pos=FVYR | UKWB gamma V-VII-VI rings=AAAA stecker=AU CD GH VX
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:THETIS@0 IC=0.0352 pos=FVYR | UKWB gamma V-VII-VI rings=AAAA stecker=AU CD GH VX
+  all-time  8/16 tmpl=struct:THETIS@0 pos=FVYR | UKWB gamma V-VII-VI rings=AAAA stecker=AU CD GH VX
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@0 IC=0.0321 pos=FVYR | UKWB gamma V-VII-VI rings=AAAA stecker=AU CD GH NV
+  all-time  9/16 tmpl=struct:THETIS@0 pos=FVYR | UKWB gamma V-VII-VI rings=AAAA stecker=AU CD GH NV
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@0 IC=0.0321 pos=FVYR | UKWB gamma V-VII-VI rings=AAAA stecker=AU CD GH NV
+  all-time  9/16 tmpl=struct:THETIS@0 pos=FVYR | UKWB gamma V-VII-VI rings=AAAA stecker=AU CD GH NV
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@0 IC=0.0321 pos=FVYR | UKWB gamma V-VII-VI rings=AAAA stecker=AU CD GH NV
+  all-time  9/16 tmpl=struct:THETIS@0 pos=FVYR | UKWB gamma V-VII-VI rings=AAAA stecker=AU CD GH NV
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@0 IC=0.0321 pos=FVYR | UKWB gamma V-VII-VI rings=AAAA stecker=AU CD GH NV
+  all-time  9/16 tmpl=struct:THETIS@0 pos=FVYR | UKWB gamma V-VII-VI rings=AAAA stecker=AU CD GH NV
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  10/16 (62%) tmpl=struct:THETIS@0 IC=0.0340 pos=FVYR | UKWB gamma V-VII-VI rings=AAAA stecker=AU CD GH NV TX
+  all-time  10/16 tmpl=struct:THETIS@0 pos=FVYR | UKWB gamma V-VII-VI rings=AAAA stecker=AU CD GH NV TX
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  10/16 (62%) tmpl=struct:THETIS@0 IC=0.0340 pos=FVYR | UKWB gamma V-VII-VI rings=AAAA stecker=AU CD GH NV TX
+  all-time  10/16 tmpl=struct:THETIS@0 pos=FVYR | UKWB gamma V-VII-VI rings=AAAA stecker=AU CD GH NV TX
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  10/16 (62%) tmpl=struct:THETIS@0 IC=0.0340 pos=FVYR | UKWB gamma V-VII-VI rings=AAAA stecker=AU CD GH NV TX
+  all-time  10/16 tmpl=struct:THETIS@0 pos=FVYR | UKWB gamma V-VII-VI rings=AAAA stecker=AU CD GH NV TX
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 16…16)
+Shell evolution: ON freeRings=false WO=126 ringSeeds=2 subspace=naval-two-notch-right
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  7/16 (44%) tmpl=struct:THETIS@1 IC=0.0368 pos=FHTH | UKWB gamma VI-III-VII rings=AACU stecker=AI BY DW GM LN OV PR TU XZ
+  all-time  7/16 tmpl=struct:THETIS@1 pos=FHTH | UKWB gamma VI-III-VII rings=AACU stecker=AI BY DW GM LN OV PR TU XZ
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  7/16 (44%) tmpl=struct:THETIS@1 IC=0.0368 pos=FHTH | UKWB gamma VI-III-VII rings=AACU stecker=AI BY DW GM LN OV PR TU XZ
+  all-time  7/16 tmpl=struct:THETIS@1 pos=FHTH | UKWB gamma VI-III-VII rings=AACU stecker=AI BY DW GM LN OV PR TU XZ
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:THETIS@1 IC=0.0379 pos=LVPO | UKWB gamma III-IV-VI rings=AAAA stecker=AI BY DW EF GS HJ KL NV PR XZ
+  all-time  8/16 tmpl=struct:THETIS@1 pos=LVPO | UKWB gamma III-IV-VI rings=AAAA stecker=AI BY DW EF GS HJ KL NV PR XZ
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:THETIS@1 IC=0.0379 pos=LVPO | UKWB gamma III-IV-VI rings=AAAA stecker=AI BY DW EF GS HJ KL NV PR XZ
+  all-time  8/16 tmpl=struct:THETIS@1 pos=LVPO | UKWB gamma III-IV-VI rings=AAAA stecker=AI BY DW EF GS HJ KL NV PR XZ
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@1 IC=0.0360 pos=FHTH | UKWB gamma VI-III-VII rings=AACU stecker=AI BY DW FV GM LN TU XZ
+  all-time  9/16 tmpl=struct:THETIS@1 pos=FHTH | UKWB gamma VI-III-VII rings=AACU stecker=AI BY DW FV GM LN TU XZ
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@1 IC=0.0360 pos=FHTH | UKWB gamma VI-III-VII rings=AACU stecker=AI BY DW FV GM LN TU XZ
+  all-time  9/16 tmpl=struct:THETIS@1 pos=FHTH | UKWB gamma VI-III-VII rings=AACU stecker=AI BY DW FV GM LN TU XZ
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@1 IC=0.0360 pos=FHTH | UKWB gamma VI-III-VII rings=AACU stecker=AI BY DW FV GM LN TU XZ
+  all-time  9/16 tmpl=struct:THETIS@1 pos=FHTH | UKWB gamma VI-III-VII rings=AACU stecker=AI BY DW FV GM LN TU XZ
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@1 IC=0.0360 pos=FHTH | UKWB gamma VI-III-VII rings=AACU stecker=AI BY DW FV GM LN TU XZ
+  all-time  9/16 tmpl=struct:THETIS@1 pos=FHTH | UKWB gamma VI-III-VII rings=AACU stecker=AI BY DW FV GM LN TU XZ
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@1 IC=0.0360 pos=FHTH | UKWB gamma VI-III-VII rings=AACU stecker=AI BY DW FV GM LN TU XZ
+  all-time  9/16 tmpl=struct:THETIS@1 pos=FHTH | UKWB gamma VI-III-VII rings=AACU stecker=AI BY DW FV GM LN TU XZ
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@1 IC=0.0360 pos=FHTH | UKWB gamma VI-III-VII rings=AACU stecker=AI BY DW FV GM LN TU XZ
+  all-time  9/16 tmpl=struct:THETIS@1 pos=FHTH | UKWB gamma VI-III-VII rings=AACU stecker=AI BY DW FV GM LN TU XZ
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@1 IC=0.0360 pos=FHTH | UKWB gamma VI-III-VII rings=AACU stecker=AI BY DW FV GM LN TU XZ
+  all-time  9/16 tmpl=struct:THETIS@1 pos=FHTH | UKWB gamma VI-III-VII rings=AACU stecker=AI BY DW FV GM LN TU XZ
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@1 IC=0.0360 pos=FHTH | UKWB gamma VI-III-VII rings=AACU stecker=AI BY DW FV GM LN TU XZ
+  all-time  9/16 tmpl=struct:THETIS@1 pos=FHTH | UKWB gamma VI-III-VII rings=AACU stecker=AI BY DW FV GM LN TU XZ
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 16…16)
+Shell evolution: ON freeRings=false WO=126 ringSeeds=2 subspace=naval-two-notch-right
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=12 blockB_greeks=0
+  gen-best  7/16 (44%) tmpl=struct:THETIS@2 IC=0.0336 pos=UKDU | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+  all-time  7/16 tmpl=struct:THETIS@2 pos=UKDU | UKWB gamma I-II-VI rings=AAAA stecker=(none)
+Hybrid gen 2/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:THETIS@2 IC=0.0356 pos=UTEF | UKWB gamma IV-VII-VI rings=AAAA stecker=AV CX DL FT IO JW KS MY
+  all-time  8/16 tmpl=struct:THETIS@2 pos=UTEF | UKWB gamma IV-VII-VI rings=AAAA stecker=AV CX DL FT IO JW KS MY
+Hybrid gen 3/12 pop=12 blockB_greeks=0
+  gen-best  8/16 (50%) tmpl=struct:THETIS@2 IC=0.0356 pos=UTEF | UKWB gamma IV-VII-VI rings=AAAA stecker=AV CX DL FT IO JW KS MY
+  all-time  8/16 tmpl=struct:THETIS@2 pos=UTEF | UKWB gamma IV-VII-VI rings=AAAA stecker=AV CX DL FT IO JW KS MY
+Hybrid gen 4/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@2 IC=0.0372 pos=UTEF | UKWB gamma IV-VII-VI rings=AAAA stecker=AV CX DL FT IO JW KS MY PU
+  all-time  9/16 tmpl=struct:THETIS@2 pos=UTEF | UKWB gamma IV-VII-VI rings=AAAA stecker=AV CX DL FT IO JW KS MY PU
+Hybrid gen 5/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@2 IC=0.0372 pos=UTEF | UKWB gamma IV-VII-VI rings=AAAA stecker=AV CX DL FT IO JW KS MY PU
+  all-time  9/16 tmpl=struct:THETIS@2 pos=UTEF | UKWB gamma IV-VII-VI rings=AAAA stecker=AV CX DL FT IO JW KS MY PU
+Hybrid gen 6/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@2 IC=0.0372 pos=UTEF | UKWB gamma IV-VII-VI rings=AAAA stecker=AV CX DL FT IO JW KS MY PU
+  all-time  9/16 tmpl=struct:THETIS@2 pos=UTEF | UKWB gamma IV-VII-VI rings=AAAA stecker=AV CX DL FT IO JW KS MY PU
+Hybrid gen 7/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@2 IC=0.0372 pos=UTEF | UKWB gamma IV-VII-VI rings=AAAA stecker=AV CX DL FT IO JW KS MY PU
+  all-time  9/16 tmpl=struct:THETIS@2 pos=UTEF | UKWB gamma IV-VII-VI rings=AAAA stecker=AV CX DL FT IO JW KS MY PU
+Hybrid gen 8/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@2 IC=0.0372 pos=UTEF | UKWB gamma IV-VII-VI rings=AAAA stecker=AV CX DL FT IO JW KS MY PU
+  all-time  9/16 tmpl=struct:THETIS@2 pos=UTEF | UKWB gamma IV-VII-VI rings=AAAA stecker=AV CX DL FT IO JW KS MY PU
+Hybrid gen 9/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@2 IC=0.0372 pos=UTEF | UKWB gamma IV-VII-VI rings=AAAA stecker=AV CX DL FT IO JW KS MY PU
+  all-time  9/16 tmpl=struct:THETIS@2 pos=UTEF | UKWB gamma IV-VII-VI rings=AAAA stecker=AV CX DL FT IO JW KS MY PU
+Hybrid gen 10/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@2 IC=0.0372 pos=UTEF | UKWB gamma IV-VII-VI rings=AAAA stecker=AV CX DL FT IO JW KS MY PU
+  all-time  9/16 tmpl=struct:THETIS@2 pos=UTEF | UKWB gamma IV-VII-VI rings=AAAA stecker=AV CX DL FT IO JW KS MY PU
+Hybrid gen 11/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@2 IC=0.0372 pos=UTEF | UKWB gamma IV-VII-VI rings=AAAA stecker=AV CX DL FT IO JW KS MY PU
+  all-time  9/16 tmpl=struct:THETIS@2 pos=UTEF | UKWB gamma IV-VII-VI rings=AAAA stecker=AV CX DL FT IO JW KS MY PU
+Hybrid gen 12/12 pop=12 blockB_greeks=0
+  gen-best  9/16 (56%) tmpl=struct:THETIS@2 IC=0.0372 pos=UTEF | UKWB gamma IV-VII-VI rings=AAAA stecker=AV CX DL FT IO JW KS MY PU
+  all-time  9/16 tmpl=struct:THETIS@2 pos=UTEF | UKWB gamma IV-VII-VI rings=AAAA stecker=AV CX DL FT IO JW KS MY PU
+HELUT — Stochastic Bombe vs P1030680 [RIGOR]
+Ciphertext: JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF
+Fitness: match RATIO (×1000 + absolute); halt on exact constrained match
+Survivor bar: ratio ≥ 80% AND ≥ noiseFloor + 10%
+Templates: Fixtures/p1030680_stochastic_structural.json → 21 masks (constrained 16…24)
+  [22] struct:pad+GRUPPENZ@g2@1
+  [22] struct:pad+GRUPPENZ@g4@1
+  [22] struct:pad+GRUPPENZ@g6@1
+  [21] struct:AUSBILDUNG_FUNK@3
+  [20] struct:FUNKUEBUNG@0
+  [20] struct:FUNKUEBUNG@1
+  [20] struct:pad+ZEITGRUP@g2@0
+  [18] struct:ACHSEDM_drill@1
+  [18] struct:LEHRGANG@1
+  [18] struct:LEHRGANG@2
+  [18] struct:UEBUNG_tile@0
+  [18] struct:UEBUNG_tile@1
+  [17] struct:ANALLE@1
+  [17] struct:ANALLE@3
+  [17] struct:SEDM_repeat@0
+  [17] struct:SEDM_repeat@2
+  [16] struct:OEDM_repeat@0
+  [16] struct:OEDM_repeat@2
+  [16] struct:THETIS@0
+  [16] struct:THETIS@1
+  [16] struct:THETIS@2
+Subspaces: potsdam, two-notch
+GA: pop=12 gens=12 hill=16 noiseSamples=8 evolveShell=true freeRings=false
+
+════════ subspace potsdam-neighbourhood (WO=6) ════════
+——— [potsdam-neighbourhood] 1/21 struct:pad+GRUPPENZ@g2@1 (22) ———
+  noiseFloor: 9/22 (41%) over 8 random shells
+  → 10/22 (45%) noise=41% Δ=+5% reject pos=HRUI IC=0.0387
+    UKWC gamma III-IV-VIII rings=AACU stecker=AN HQ SZ
+——— [potsdam-neighbourhood] 2/21 struct:pad+GRUPPENZ@g4@1 (22) ———
+  noiseFloor: 10/22 (45%) over 8 random shells
+  → 11/22 (50%) noise=45% Δ=+5% reject pos=JZFI IC=0.0391
+    UKWC beta III-VIII-IV rings=AACU stecker=CY FM GX KP WZ
+——— [potsdam-neighbourhood] 3/21 struct:pad+GRUPPENZ@g6@1 (22) ———
+  noiseFloor: 9/22 (41%) over 8 random shells
+  → 12/22 (55%) noise=41% Δ=+14% reject pos=QHTO IC=0.0387
+    UKWC gamma VIII-IV-III rings=AAAA stecker=DF EY HT KU NZ PR
+——— [potsdam-neighbourhood] 4/21 struct:AUSBILDUNG_FUNK@3 (21) ———
+  noiseFloor: 8/21 (38%) over 8 random shells
+  → 11/21 (52%) noise=38% Δ=+14% reject pos=UBVT IC=0.0462
+    UKWB beta VIII-IV-III rings=AACU stecker=AC DF EV GM JR KW LN
+——— [potsdam-neighbourhood] 5/21 struct:FUNKUEBUNG@0 (20) ———
+  noiseFloor: 8/20 (40%) over 8 random shells
+  → 12/20 (60%) noise=40% Δ=+20% reject pos=SLHC IC=0.0376
+    UKWC beta VIII-III-IV rings=AACU stecker=BD CL EP GN HW IY OV QZ RS
+——— [potsdam-neighbourhood] 6/21 struct:FUNKUEBUNG@1 (20) ———
+  noiseFloor: 7/20 (35%) over 8 random shells
+  → 11/20 (55%) noise=35% Δ=+20% reject pos=VXOZ IC=0.0395
+    UKWB gamma III-VIII-IV rings=AAAA stecker=AM CE FI GP HU JS YZ
+——— [potsdam-neighbourhood] 7/21 struct:pad+ZEITGRUP@g2@0 (20) ———
+  noiseFloor: 8/20 (40%) over 8 random shells
+  → 11/20 (55%) noise=40% Δ=+15% reject pos=IWUG IC=0.0348
+    UKWB gamma III-VIII-IV rings=AACU stecker=AR EJ MO
+——— [potsdam-neighbourhood] 8/21 struct:ACHSEDM_drill@1 (18) ———
+  noiseFloor: 7/18 (39%) over 8 random shells
+  → 10/18 (56%) noise=39% Δ=+17% reject pos=KVXU IC=0.0485
+    UKWB gamma III-IV-VIII rings=AAAA stecker=AV CH ET KR MN
+——— [potsdam-neighbourhood] 9/21 struct:LEHRGANG@1 (18) ———
+  noiseFloor: 8/18 (44%) over 8 random shells
+  → 10/18 (56%) noise=44% Δ=+11% reject pos=UUSE IC=0.0352
+    UKWB gamma III-VIII-IV rings=AAAA stecker=BS DP EU IO LQ NW XY
+——— [potsdam-neighbourhood] 10/21 struct:LEHRGANG@2 (18) ———
+  noiseFloor: 8/18 (44%) over 8 random shells
+  → 10/18 (56%) noise=44% Δ=+11% reject pos=ZPKO IC=0.0387
+    UKWC beta IV-III-VIII rings=AACU stecker=CV DL EQ FW GS HN JY OP TZ
+——— [potsdam-neighbourhood] 11/21 struct:UEBUNG_tile@0 (18) ———
+  noiseFloor: 7/18 (39%) over 8 random shells
+  → 10/18 (56%) noise=39% Δ=+17% reject pos=YISX IC=0.0469
+    UKWB beta III-IV-VIII rings=AACU stecker=BI DZ EV JU KQ PT
+——— [potsdam-neighbourhood] 12/21 struct:UEBUNG_tile@1 (18) ———
+  noiseFloor: 8/18 (44%) over 8 random shells
+  → 11/18 (61%) noise=44% Δ=+17% reject pos=XRON IC=0.0372
+    UKWC beta III-IV-VIII rings=AACU stecker=CZ FG IN
+——— [potsdam-neighbourhood] 13/21 struct:ANALLE@1 (17) ———
+  noiseFloor: 8/17 (47%) over 8 random shells
+  → 9/17 (53%) noise=47% Δ=+6% reject pos=JOSJ IC=0.0481
+    UKWB gamma VIII-III-IV rings=AACU stecker=AG CH DL FI KQ UW XY
+——— [potsdam-neighbourhood] 14/21 struct:ANALLE@3 (17) ———
+  noiseFloor: 9/17 (53%) over 8 random shells
+  → 10/17 (59%) noise=53% Δ=+6% reject pos=EYNS IC=0.0481
+    UKWB gamma VIII-III-IV rings=AAAA stecker=ES IU JQ
+——— [potsdam-neighbourhood] 15/21 struct:SEDM_repeat@0 (17) ———
+  noiseFloor: 7/17 (41%) over 8 random shells
+  → 10/17 (59%) noise=41% Δ=+18% reject pos=BAYF IC=0.0430
+    UKWC beta VIII-IV-III rings=AACA stecker=AY BC DE GL JU MQ NS OZ PR WX
+——— [potsdam-neighbourhood] 16/21 struct:SEDM_repeat@2 (17) ———
+  noiseFloor: 7/17 (41%) over 8 random shells
+  → 9/17 (53%) noise=41% Δ=+12% reject pos=RPYS IC=0.0438
+    UKWC gamma VIII-IV-III rings=AACU stecker=AK BJ DV GX IR LO MT PW QZ
+——— [potsdam-neighbourhood] 17/21 struct:OEDM_repeat@0 (16) ———
+  noiseFloor: 7/16 (44%) over 8 random shells
+  → 10/16 (62%) noise=44% Δ=+19% reject pos=AGCM IC=0.0458
+    UKWC beta III-VIII-IV rings=AAAA stecker=AV BW CJ GS HI KM NT PY QR
+——— [potsdam-neighbourhood] 18/21 struct:OEDM_repeat@2 (16) ———
+  noiseFloor: 7/16 (44%) over 8 random shells
+  → 9/16 (56%) noise=44% Δ=+12% reject pos=YGGF IC=0.0415
+    UKWC gamma IV-VIII-III rings=AACU stecker=BD EG FH LN QZ RS TV XY
+——— [potsdam-neighbourhood] 19/21 struct:THETIS@0 (16) ———
+  noiseFloor: 7/16 (44%) over 8 random shells
+  → 8/16 (50%) noise=44% Δ=+6% reject pos=FLHU IC=0.0407
+    UKWB beta III-IV-VIII rings=AACU stecker=AO DI EG FP HJ KR NU QZ SY
+——— [potsdam-neighbourhood] 20/21 struct:THETIS@1 (16) ———
+  noiseFloor: 7/16 (44%) over 8 random shells
+  → 11/16 (69%) noise=44% Δ=+25% reject pos=RPLS IC=0.0344
+    UKWC beta III-IV-VIII rings=AAAA stecker=BR DQ EN FP GL HW IX JM KZ UY
+——— [potsdam-neighbourhood] 21/21 struct:THETIS@2 (16) ———
+  noiseFloor: 7/16 (44%) over 8 random shells
+  → 10/16 (62%) noise=44% Δ=+19% reject pos=LGJC IC=0.0356
+    UKWB gamma VIII-IV-III rings=AACU stecker=AQ CR OP
+════════ subspace naval-two-notch-right (WO=126) ════════
+——— [naval-two-notch-right] 1/21 struct:pad+GRUPPENZ@g2@1 (22) ———
+  noiseFloor: 9/22 (41%) over 8 random shells
+  → 10/22 (45%) noise=41% Δ=+5% reject pos=OGUZ IC=0.0376
+    UKWB gamma VII-V-VI rings=AACU stecker=AK BG CE DH FI JZ LY MS OP RX
+——— [naval-two-notch-right] 2/21 struct:pad+GRUPPENZ@g4@1 (22) ———
+  noiseFloor: 8/22 (36%) over 8 random shells
+  → 10/22 (45%) noise=36% Δ=+9% reject pos=SCNX IC=0.0360
+    UKWB beta I-III-VII rings=AACU stecker=GI HL OV RZ SY
+——— [naval-two-notch-right] 3/21 struct:pad+GRUPPENZ@g6@1 (22) ———
+  noiseFloor: 8/22 (36%) over 8 random shells
+  → 11/22 (50%) noise=36% Δ=+14% reject pos=PHBZ IC=0.0415
+    UKWB gamma I-III-VI rings=AACU stecker=AM BD GK HL
+——— [naval-two-notch-right] 4/21 struct:AUSBILDUNG_FUNK@3 (21) ———
+  noiseFloor: 8/21 (38%) over 8 random shells
+  → 10/21 (48%) noise=38% Δ=+10% reject pos=BSJX IC=0.0383
+    UKWB gamma VIII-IV-VII rings=AACU stecker=BD HO QX
+——— [naval-two-notch-right] 5/21 struct:FUNKUEBUNG@0 (20) ———
+  noiseFloor: 8/20 (40%) over 8 random shells
+  → 9/20 (45%) noise=40% Δ=+5% reject pos=CFJL IC=0.0454
+    UKWB gamma I-II-VI rings=AAAA stecker=PZ
+——— [naval-two-notch-right] 6/21 struct:FUNKUEBUNG@1 (20) ———
+  noiseFloor: 8/20 (40%) over 8 random shells
+  → 10/20 (50%) noise=40% Δ=+10% reject pos=JYVA IC=0.0407
+    UKWB beta IV-VII-VIII rings=AAAA stecker=BI DN EP HM JO
+——— [naval-two-notch-right] 7/21 struct:pad+ZEITGRUP@g2@0 (20) ———
+  noiseFloor: 8/20 (40%) over 8 random shells
+  → 11/20 (55%) noise=40% Δ=+15% reject pos=HWWA IC=0.0321
+    UKWB gamma IV-V-VI rings=AAAA stecker=AE BO IR MP SY TW
+——— [naval-two-notch-right] 8/21 struct:ACHSEDM_drill@1 (18) ———
+  noiseFloor: 8/18 (44%) over 8 random shells
+  → 9/18 (50%) noise=44% Δ=+6% reject pos=STUY IC=0.0376
+    UKWC beta IV-VII-VIII rings=AACU stecker=AF BC DG IX NS
+——— [naval-two-notch-right] 9/21 struct:LEHRGANG@1 (18) ———
+  noiseFloor: 7/18 (39%) over 8 random shells
+  → 9/18 (50%) noise=39% Δ=+11% reject pos=YZYQ IC=0.0379
+    UKWB beta III-IV-VII rings=AAAA stecker=BG JY NO
+——— [naval-two-notch-right] 10/21 struct:LEHRGANG@2 (18) ———
+  noiseFloor: 7/18 (39%) over 8 random shells
+  → 9/18 (50%) noise=39% Δ=+11% reject pos=WFXC IC=0.0403
+    UKWB beta I-V-VIII rings=AACU stecker=BW DS EV IT JZ KM NX OR QY
+——— [naval-two-notch-right] 11/21 struct:UEBUNG_tile@0 (18) ———
+  noiseFloor: 7/18 (39%) over 8 random shells
+  → 10/18 (56%) noise=39% Δ=+17% reject pos=NEQT IC=0.0434
+    UKWC beta IV-V-VII rings=AACU stecker=AT DV FX HN IR JW OP
+——— [naval-two-notch-right] 12/21 struct:UEBUNG_tile@1 (18) ———
+  noiseFloor: 7/18 (39%) over 8 random shells
+  → 11/18 (61%) noise=39% Δ=+22% reject pos=RJCZ IC=0.0423
+    UKWB beta VI-VII-VIII rings=AACU stecker=EP GH JW LZ OR
+——— [naval-two-notch-right] 13/21 struct:ANALLE@1 (17) ———
+  noiseFloor: 8/17 (47%) over 8 random shells
+  → 10/17 (59%) noise=47% Δ=+12% reject pos=FNNG IC=0.0383
+    UKWC beta III-IV-VI rings=AAAA stecker=AV BU DY FI LW NS OP
+——— [naval-two-notch-right] 14/21 struct:ANALLE@3 (17) ———
+  noiseFloor: 8/17 (47%) over 8 random shells
+  → 9/17 (53%) noise=47% Δ=+6% reject pos=FGQS IC=0.0352
+    UKWC gamma II-VII-VIII rings=AACU stecker=CJ DO EM FK GQ HU IT NW PS VZ
+——— [naval-two-notch-right] 15/21 struct:SEDM_repeat@0 (17) ———
+  noiseFloor: 8/17 (47%) over 8 random shells
+  → 9/17 (53%) noise=47% Δ=+6% reject pos=PUKW IC=0.0352
+    UKWB beta III-VII-VI rings=AAAA stecker=CI EO FZ HR JQ KP MX NT UY
+——— [naval-two-notch-right] 16/21 struct:SEDM_repeat@2 (17) ———
+  noiseFloor: 9/17 (53%) over 8 random shells
+  → 10/17 (59%) noise=53% Δ=+6% reject pos=EMHT IC=0.0399
+    UKWC beta IV-I-VIII rings=AACU stecker=GH RT SU
+——— [naval-two-notch-right] 17/21 struct:OEDM_repeat@0 (16) ———
+  noiseFloor: 7/16 (44%) over 8 random shells
+  → 9/16 (56%) noise=44% Δ=+12% reject pos=NRUJ IC=0.0407
+    UKWC beta III-I-VI rings=AACU stecker=AH CO IX LQ RT
+——— [naval-two-notch-right] 18/21 struct:OEDM_repeat@2 (16) ———
+  noiseFloor: 7/16 (44%) over 8 random shells
+  → 9/16 (56%) noise=44% Δ=+12% reject pos=XOPC IC=0.0395
+    UKWC beta III-II-VIII rings=AACU stecker=AX BS FL HR IQ JT KM NV OY PW
+——— [naval-two-notch-right] 19/21 struct:THETIS@0 (16) ———
+  noiseFloor: 8/16 (50%) over 8 random shells
+  → 10/16 (62%) noise=50% Δ=+12% reject pos=FVYR IC=0.0340
+    UKWB gamma V-VII-VI rings=AAAA stecker=AU CD GH NV TX
+——— [naval-two-notch-right] 20/21 struct:THETIS@1 (16) ———
+  noiseFloor: 8/16 (50%) over 8 random shells
+  → 10/16 (62%) noise=50% Δ=+12% reject pos=ILIB IC=0.0395
+    UKWB gamma III-IV-VI rings=AAAA stecker=AV CN DW EF GS HJ IM KL PR QU
+——— [naval-two-notch-right] 21/21 struct:THETIS@2 (16) ———
+  noiseFloor: 7/16 (44%) over 8 random shells
+  → 9/16 (56%) noise=44% Δ=+12% reject pos=UTEF IC=0.0372
+    UKWB gamma IV-VII-VI rings=AAAA stecker=AV CX DL FT IO JW KS MY PU
+
+——— RIGOR SUMMARY (by ratio) ———
+   68.8%  11/16  noise=  44% Δ=+25.0%  potsdam-neighbourhood  struct:THETIS@1  | UKWC beta III-IV-VIII rings=AAAA stecker=BR DQ EN FP GL HW IX JM KZ UY
+   62.5%  10/16  noise=  44% Δ=+18.8%  potsdam-neighbourhood  struct:OEDM_repeat@0  | UKWC beta III-VIII-IV rings=AAAA stecker=AV BW CJ GS HI KM NT PY QR
+   62.5%  10/16  noise=  44% Δ=+18.8%  potsdam-neighbourhood  struct:THETIS@2  | UKWB gamma VIII-IV-III rings=AACU stecker=AQ CR OP
+   62.5%  10/16  noise=  50% Δ=+12.5%  naval-two-notch-right  struct:THETIS@0  | UKWB gamma V-VII-VI rings=AAAA stecker=AU CD GH NV TX
+   62.5%  10/16  noise=  50% Δ=+12.5%  naval-two-notch-right  struct:THETIS@1  | UKWB gamma III-IV-VI rings=AAAA stecker=AV CN DW EF GS HJ IM KL PR QU
+   61.1%  11/18  noise=  44% Δ=+16.7%  potsdam-neighbourhood  struct:UEBUNG_tile@1  | UKWC beta III-IV-VIII rings=AACU stecker=CZ FG IN
+   61.1%  11/18  noise=  39% Δ=+22.2%  naval-two-notch-right  struct:UEBUNG_tile@1  | UKWB beta VI-VII-VIII rings=AACU stecker=EP GH JW LZ OR
+   60.0%  12/20  noise=  40% Δ=+20.0%  potsdam-neighbourhood  struct:FUNKUEBUNG@0  | UKWC beta VIII-III-IV rings=AACU stecker=BD CL EP GN HW IY OV QZ RS
+   58.8%  10/17  noise=  53% Δ= +5.9%  potsdam-neighbourhood  struct:ANALLE@3  | UKWB gamma VIII-III-IV rings=AAAA stecker=ES IU JQ
+   58.8%  10/17  noise=  41% Δ=+17.6%  potsdam-neighbourhood  struct:SEDM_repeat@0  | UKWC beta VIII-IV-III rings=AACA stecker=AY BC DE GL JU MQ NS OZ PR WX
+   58.8%  10/17  noise=  47% Δ=+11.8%  naval-two-notch-right  struct:ANALLE@1  | UKWC beta III-IV-VI rings=AAAA stecker=AV BU DY FI LW NS OP
+   58.8%  10/17  noise=  53% Δ= +5.9%  naval-two-notch-right  struct:SEDM_repeat@2  | UKWC beta IV-I-VIII rings=AACU stecker=GH RT SU
+   56.2%   9/16  noise=  44% Δ=+12.5%  potsdam-neighbourhood  struct:OEDM_repeat@2  | UKWC gamma IV-VIII-III rings=AACU stecker=BD EG FH LN QZ RS TV XY
+   56.2%   9/16  noise=  44% Δ=+12.5%  naval-two-notch-right  struct:OEDM_repeat@0  | UKWC beta III-I-VI rings=AACU stecker=AH CO IX LQ RT
+   56.2%   9/16  noise=  44% Δ=+12.5%  naval-two-notch-right  struct:OEDM_repeat@2  | UKWC beta III-II-VIII rings=AACU stecker=AX BS FL HR IQ JT KM NV OY PW
+   56.2%   9/16  noise=  44% Δ=+12.5%  naval-two-notch-right  struct:THETIS@2  | UKWB gamma IV-VII-VI rings=AAAA stecker=AV CX DL FT IO JW KS MY PU
+   55.6%  10/18  noise=  39% Δ=+16.7%  potsdam-neighbourhood  struct:ACHSEDM_drill@1  | UKWB gamma III-IV-VIII rings=AAAA stecker=AV CH ET KR MN
+   55.6%  10/18  noise=  44% Δ=+11.1%  potsdam-neighbourhood  struct:LEHRGANG@1  | UKWB gamma III-VIII-IV rings=AAAA stecker=BS DP EU IO LQ NW XY
+   55.6%  10/18  noise=  44% Δ=+11.1%  potsdam-neighbourhood  struct:LEHRGANG@2  | UKWC beta IV-III-VIII rings=AACU stecker=CV DL EQ FW GS HN JY OP TZ
+   55.6%  10/18  noise=  39% Δ=+16.7%  potsdam-neighbourhood  struct:UEBUNG_tile@0  | UKWB beta III-IV-VIII rings=AACU stecker=BI DZ EV JU KQ PT
+   55.6%  10/18  noise=  39% Δ=+16.7%  naval-two-notch-right  struct:UEBUNG_tile@0  | UKWC beta IV-V-VII rings=AACU stecker=AT DV FX HN IR JW OP
+   55.0%  11/20  noise=  35% Δ=+20.0%  potsdam-neighbourhood  struct:FUNKUEBUNG@1  | UKWB gamma III-VIII-IV rings=AAAA stecker=AM CE FI GP HU JS YZ
+   55.0%  11/20  noise=  40% Δ=+15.0%  potsdam-neighbourhood  struct:pad+ZEITGRUP@g2@0  | UKWB gamma III-VIII-IV rings=AACU stecker=AR EJ MO
+   55.0%  11/20  noise=  40% Δ=+15.0%  naval-two-notch-right  struct:pad+ZEITGRUP@g2@0  | UKWB gamma IV-V-VI rings=AAAA stecker=AE BO IR MP SY TW
+   54.5%  12/22  noise=  41% Δ=+13.6%  potsdam-neighbourhood  struct:pad+GRUPPENZ@g6@1  | UKWC gamma VIII-IV-III rings=AAAA stecker=DF EY HT KU NZ PR
+   52.9%   9/17  noise=  47% Δ= +5.9%  potsdam-neighbourhood  struct:ANALLE@1  | UKWB gamma VIII-III-IV rings=AACU stecker=AG CH DL FI KQ UW XY
+   52.9%   9/17  noise=  41% Δ=+11.8%  potsdam-neighbourhood  struct:SEDM_repeat@2  | UKWC gamma VIII-IV-III rings=AACU stecker=AK BJ DV GX IR LO MT PW QZ
+   52.9%   9/17  noise=  47% Δ= +5.9%  naval-two-notch-right  struct:ANALLE@3  | UKWC gamma II-VII-VIII rings=AACU stecker=CJ DO EM FK GQ HU IT NW PS VZ
+   52.9%   9/17  noise=  47% Δ= +5.9%  naval-two-notch-right  struct:SEDM_repeat@0  | UKWB beta III-VII-VI rings=AAAA stecker=CI EO FZ HR JQ KP MX NT UY
+   52.4%  11/21  noise=  38% Δ=+14.3%  potsdam-neighbourhood  struct:AUSBILDUNG_FUNK@3  | UKWB beta VIII-IV-III rings=AACU stecker=AC DF EV GM JR KW LN
+   50.0%  11/22  noise=  45% Δ= +4.5%  potsdam-neighbourhood  struct:pad+GRUPPENZ@g4@1  | UKWC beta III-VIII-IV rings=AACU stecker=CY FM GX KP WZ
+   50.0%   8/16  noise=  44% Δ= +6.2%  potsdam-neighbourhood  struct:THETIS@0  | UKWB beta III-IV-VIII rings=AACU stecker=AO DI EG FP HJ KR NU QZ SY
+   50.0%  11/22  noise=  36% Δ=+13.6%  naval-two-notch-right  struct:pad+GRUPPENZ@g6@1  | UKWB gamma I-III-VI rings=AACU stecker=AM BD GK HL
+   50.0%  10/20  noise=  40% Δ=+10.0%  naval-two-notch-right  struct:FUNKUEBUNG@1  | UKWB beta IV-VII-VIII rings=AAAA stecker=BI DN EP HM JO
+   50.0%   9/18  noise=  44% Δ= +5.6%  naval-two-notch-right  struct:ACHSEDM_drill@1  | UKWC beta IV-VII-VIII rings=AACU stecker=AF BC DG IX NS
+   50.0%   9/18  noise=  39% Δ=+11.1%  naval-two-notch-right  struct:LEHRGANG@1  | UKWB beta III-IV-VII rings=AAAA stecker=BG JY NO
+   50.0%   9/18  noise=  39% Δ=+11.1%  naval-two-notch-right  struct:LEHRGANG@2  | UKWB beta I-V-VIII rings=AACU stecker=BW DS EV IT JZ KM NX OR QY
+   47.6%  10/21  noise=  38% Δ= +9.5%  naval-two-notch-right  struct:AUSBILDUNG_FUNK@3  | UKWB gamma VIII-IV-VII rings=AACU stecker=BD HO QX
+   45.5%  10/22  noise=  41% Δ= +4.5%  potsdam-neighbourhood  struct:pad+GRUPPENZ@g2@1  | UKWC gamma III-IV-VIII rings=AACU stecker=AN HQ SZ
+   45.5%  10/22  noise=  41% Δ= +4.5%  naval-two-notch-right  struct:pad+GRUPPENZ@g2@1  | UKWB gamma VII-V-VI rings=AACU stecker=AK BG CE DH FI JZ LY MS OP RX
+   45.5%  10/22  noise=  36% Δ= +9.1%  naval-two-notch-right  struct:pad+GRUPPENZ@g4@1  | UKWB beta I-III-VII rings=AACU stecker=GI HL OV RZ SY
+   45.0%   9/20  noise=  40% Δ= +5.0%  naval-two-notch-right  struct:FUNKUEBUNG@0  | UKWB gamma I-II-VI rings=AAAA stecker=PZ
+
+Elapsed: 185.6 s
+Survivors (≥80% and ≥noise+10%): 0
+*** CLEAN NEGATIVE under rigor bar — templates/prior not near-true ***
+Next: invent new structural hypotheses; do not burn catalog rings yet.
+Wrote logs/stochastic-bombe-p1030680-rigor.json
+See stochastic-bombe.md / BREAK_P1030680.md Phase 18

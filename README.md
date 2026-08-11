@@ -88,7 +88,7 @@ Two different jobs:
 |----------------|--------|---------|
 | `--p1030680-bombe` / default Enigma Metal run | Mock-PBS tensors | Parallel bombe **architecture** demo |
 | `--break-p1030680` / `--campaign` | Host M4 oracle | **Cryptanalysis** (boolean-faithful) |
-| `--hybrid` | GA shell+stecker × cleartext Metal/CPU `B=17576` | ASIC-esque cracker ([`ASIC_CRACKER.md`](ASIC_CRACKER.md)) |
+| `--hybrid` | GA shell+stecker × cleartext Metal/CPU `B=17576` | ASIC-esque / Stochastic Bombe ([`ASIC_CRACKER.md`](ASIC_CRACKER.md), [`stochastic-bombe.md`](stochastic-bombe.md)) |
 
 Mock-PBS does not preserve boolean plaintext — do not treat Metal `linguistic_score` rankings as a break.
 
@@ -97,9 +97,19 @@ Mock-PBS does not preserve boolean plaintext — do not treat Metal `linguistic_
 .build/release/helut --campaign 2>&1 | tee logs/campaign.log
 # ./Scripts/p1030680_campaign.sh
 
-# ASIC-esque: evolving WO/Greek/UKW/rings/stecker × cleartext batch
+# ASIC-esque: evolving WO/Greek/UKW/rings/stecker × cleartext batch (bigram fitness)
 .build/release/helut --hybrid --quick
 .build/release/helut --hybrid --rings AACU --hybrid-pop 32 --hybrid-gens 80
+
+# Stochastic Bombe KPA control (letter-match fitness on P1030684)
+.build/release/helut --hybrid --hybrid-control --quick
+.build/release/helut --hybrid --hybrid-control --hybrid-seed-drop 1
+.build/release/helut --hybrid --hybrid-control --hybrid-blind --hybrid-pop 24 --hybrid-gens 40
+
+# Rigor campaign vs P1030680 (ratio fitness, noise floor, potsdam + two-notch)
+.build/release/helut --hybrid --hybrid-stochastic --hybrid-rigor \
+  --hybrid-pop 12 --hybrid-gens 12 --hybrid-noise-samples 8 \
+  --rings AAAA,AACU 2>&1 | tee logs/stochastic-bombe-p1030680-rigor.log
 
 # Metal M4 bombe (demo)
 .build/release/helut --p1030680-bombe --batch 30000 --compile-only

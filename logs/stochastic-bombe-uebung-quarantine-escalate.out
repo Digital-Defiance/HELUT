@@ -1,0 +1,170 @@
+Quarantine ingest: 55 seed(s) from logs/quarantine_candidates.json (soft IC≥0.048 tail>-4.300; evolveShell=false hill=24)
+  [0] B gamma I-IV-VI rings=AAAA pos=HZBR plugs=8 soft=whole IC=0.049≥0.048 tail=-4.270>-4.300; prefix@36 IC=0.059 tail=-3.119 IC=0.049 tail=-3.119
+  [1] B beta VII-V-II rings=AAAA pos=NDGY plugs=8 soft=prefix@28 IC=0.085 tail=-3.138 IC=0.055 tail=-3.138
+  [2] B beta III-VI-VIII rings=AAAA pos=CITG plugs=10 soft=prefix@29 IC=0.106 tail=-3.078 IC=0.053 tail=-3.078
+  [3] C beta IV-VIII-III rings=AAAA pos=NLVT plugs=10 soft=prefix@29 IC=0.081 tail=-3.245 IC=0.051 tail=-3.245
+  [4] C beta V-VIII-III rings=AAAA pos=ZLKU plugs=10 soft=prefix@30 IC=0.069 tail=-3.391 IC=0.049 tail=-3.391
+  [5] B gamma VII-IV-III rings=AAAA pos=BUQL plugs=10 soft=prefix@30 IC=0.085 tail=-3.357 IC=0.049 tail=-3.357
+  [6] B beta II-V-III rings=AAAA pos=BFKF plugs=9 soft=prefix@28 IC=0.079 tail=-3.374 IC=0.049 tail=-3.374
+  [7] B gamma VIII-IV-V rings=AAAA pos=OJNC plugs=10 soft=prefix@33 IC=0.072 tail=-3.951 IC=0.047 tail=-3.951
+  [8] C gamma III-IV-II rings=AAAA pos=DIAA plugs=10 soft=prefix@36 IC=0.054 tail=-3.880 IC=0.047 tail=-3.880
+  [9] B beta II-VII-V rings=AAAA pos=JBXC plugs=8 soft=prefix@36 IC=0.083 tail=-3.342 IC=0.047 tail=-3.342
+  [10] B beta II-I-VII rings=AAAA pos=WSGG plugs=9 soft=prefix@31 IC=0.071 tail=-3.778 IC=0.047 tail=-3.778
+  [11] B gamma I-VII-IV rings=AAAA pos=BZLZ plugs=9 soft=prefix@31 IC=0.054 tail=-3.871 IC=0.047 tail=-3.871
+  [12] B beta IV-VII-II rings=AAAA pos=LJUQ plugs=9 soft=prefix@29 IC=0.062 tail=-3.508 IC=0.046 tail=-3.508
+  [13] B beta III-VI-VII rings=AAAA pos=DFYR plugs=9 soft=prefix@29 IC=0.106 tail=-3.203 IC=0.046 tail=-3.203
+  [14] B beta VI-V-VII rings=AAAA pos=QQTG plugs=9 soft=prefix@29 IC=0.084 tail=-3.249 IC=0.046 tail=-3.249
+  [15] C beta VIII-V-III rings=AAAA pos=WYEW plugs=10 soft=prefix@33 IC=0.049 tail=-3.303 IC=0.046 tail=-3.303
+  [16] B beta VII-VIII-II rings=AAAA pos=ZOUK plugs=8 soft=prefix@29 IC=0.084 tail=-3.333 IC=0.046 tail=-3.333
+  [17] B gamma I-VII-VI rings=AAAA pos=AROA plugs=10 soft=prefix@37 IC=0.068 tail=-3.675 IC=0.046 tail=-3.675
+  [18] C beta VI-VII-III rings=AAAA pos=LOJW plugs=8 soft=prefix@31 IC=0.073 tail=-3.534 IC=0.045 tail=-3.534
+  [19] B beta IV-VIII-III rings=AAAA pos=SIBP plugs=10 soft=prefix@29 IC=0.054 tail=-3.330 IC=0.045 tail=-3.330
+  [20] C gamma VIII-IV-I rings=AAAA pos=LVJU plugs=8 soft=prefix@30 IC=0.062 tail=-4.219 IC=0.045 tail=-4.219
+  [21] C gamma VIII-IV-I rings=AAAA pos=LWKU plugs=8 soft=prefix@30 IC=0.062 tail=-4.219 IC=0.045 tail=-4.219
+  [22] B beta VII-V-VI rings=AAAA pos=LPLP plugs=9 soft=prefix@31 IC=0.062 tail=-3.342 IC=0.044 tail=-3.342
+  [23] C gamma VIII-IV-III rings=AAAA pos=OLSP plugs=10 soft=prefix@30 IC=0.057 tail=-3.330 IC=0.044 tail=-3.330
+  [24] B beta VI-I-IV rings=AAAA pos=LQWS plugs=8 soft=prefix@30 IC=0.060 tail=-3.299 IC=0.044 tail=-3.299
+  [25] C gamma V-VIII-VII rings=AAAA pos=XRMR plugs=9 soft=prefix@38 IC=0.065 tail=-4.012 IC=0.044 tail=-4.012
+  [26] C gamma V-VIII-VII rings=AAAA pos=XSNR plugs=9 soft=prefix@38 IC=0.065 tail=-4.012 IC=0.044 tail=-4.012
+  [27] C beta II-III-IV rings=AAAA pos=DVJK plugs=10 soft=prefix@29 IC=0.067 tail=-3.255 IC=0.044 tail=-3.255
+  [28] B beta IV-VIII-VI rings=AAAA pos=CLHK plugs=8 soft=prefix@28 IC=0.061 tail=-3.401 IC=0.043 tail=-3.401
+  [29] B beta I-VI-IV rings=AAAA pos=HWVV plugs=7 soft=prefix@30 IC=0.060 tail=-3.248 IC=0.043 tail=-3.248
+  [30] C beta IV-III-VIII rings=AAAA pos=EIDO plugs=9 soft=prefix@30 IC=0.060 tail=-3.344 IC=0.043 tail=-3.344
+  [31] B beta II-V-III rings=AAAA pos=HWFB plugs=9 soft=prefix@32 IC=0.071 tail=-3.438 IC=0.042 tail=-3.438
+  [32] B beta VII-IV-I rings=AAAA pos=LUJG plugs=10 soft=prefix@30 IC=0.051 tail=-3.315 IC=0.041 tail=-3.315
+  [33] B beta VII-IV-I rings=AAAA pos=LVKG plugs=10 soft=prefix@30 IC=0.051 tail=-3.315 IC=0.041 tail=-3.315
+  [34] C gamma VI-V-VIII rings=AAAA pos=GRNH plugs=9 soft=prefix@33 IC=0.066 tail=-3.762 IC=0.041 tail=-3.762
+  [35] C gamma I-II-IV rings=AAAA pos=HECT plugs=10 soft=prefix@31 IC=0.052 tail=-3.335 IC=0.041 tail=-3.335
+  [36] B beta III-VII-II rings=AAAA pos=HQQP plugs=8 soft=prefix@32 IC=0.048 tail=-3.227 IC=0.041 tail=-3.227
+  [37] C gamma VI-VII-VIII rings=AAAA pos=IBXJ plugs=8 soft=prefix@46 IC=0.053 tail=-4.227 IC=0.041 tail=-4.227
+  [38] B beta II-IV-V rings=AAAA pos=QXPV plugs=10 soft=prefix@29 IC=0.071 tail=-3.437 IC=0.040 tail=-3.437
+  [39] B beta VIII-I-IV rings=AAAA pos=EESO plugs=8 soft=prefix@35 IC=0.054 tail=-4.256 IC=0.040 tail=-4.256
+  [40] B beta V-VII-II rings=AAAA pos=AZPC plugs=10 soft=prefix@33 IC=0.049 tail=-3.890 IC=0.040 tail=-3.890
+  [41] C beta VI-IV-VIII rings=AAAA pos=MYUW plugs=10 soft=prefix@32 IC=0.067 tail=-3.218 IC=0.040 tail=-3.218
+  [42] C gamma I-VII-VI rings=AAAA pos=WLPC plugs=10 soft=prefix@30 IC=0.055 tail=-3.746 IC=0.040 tail=-3.746
+  [43] C beta VIII-IV-VII rings=AAAA pos=QNZB plugs=10 soft=prefix@30 IC=0.053 tail=-3.902 IC=0.039 tail=-3.902
+  [44] B beta VIII-VII-IV rings=AAAA pos=XKWK plugs=10 soft=prefix@32 IC=0.056 tail=-3.955 IC=0.039 tail=-3.955
+  [45] B gamma III-VIII-II rings=AAAA pos=FPUE plugs=10 soft=prefix@34 IC=0.053 tail=-3.863 IC=0.039 tail=-3.863
+  [46] C gamma I-II-VII rings=AAAA pos=ECVN plugs=9 soft=prefix@30 IC=0.071 tail=-3.536 IC=0.039 tail=-3.536
+  [47] C gamma II-VI-IV rings=AAAA pos=FUKM plugs=9 soft=prefix@31 IC=0.080 tail=-4.026 IC=0.038 tail=-4.026
+  [48] B gamma VIII-III-IV rings=AAAA pos=YKVP plugs=10 soft=prefix@31 IC=0.049 tail=-3.869 IC=0.038 tail=-3.869
+  [49] B gamma VIII-III-IV rings=AAAA pos=YLWP plugs=10 soft=prefix@31 IC=0.049 tail=-3.869 IC=0.038 tail=-3.869
+  [50] B beta II-I-VIII rings=AAAA pos=OLIQ plugs=10 soft=prefix@30 IC=0.053 tail=-3.240 IC=0.037 tail=-3.240
+  [51] B beta VIII-I-VI rings=AAAA pos=CSUY plugs=9 soft=prefix@29 IC=0.054 tail=-3.491 IC=0.037 tail=-3.491
+  [52] B gamma III-I-V rings=AAAA pos=UJIL plugs=7 soft=prefix@30 IC=0.048 tail=-3.782 IC=0.036 tail=-3.782
+  [53] B beta I-VII-VI rings=AAAA pos=WUHQ plugs=9 soft=prefix@29 IC=0.071 tail=-3.440 IC=0.035 tail=-3.440
+  [54] B beta VIII-I-III rings=AAAA pos=ESSQ plugs=9 soft=prefix@29 IC=0.069 tail=-3.416 IC=0.034 tail=-3.416
+HELUT — Stochastic Bombe vs P1030680
+Ciphertext: JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF
+Fitness: match RATIO (×1000 + absolute); halt on exact constrained match
+Survivor bar: ratio ≥ 80% AND ≥ noiseFloor + 10%
+Templates: Fixtures/p1030680_stochastic_templates.json → 16 masks (constrained 16…28)
+  [28] head:UEBUNGSMELDUNGUEBU@0
+  [28] head:UEBUNGSMELDUNGUEBU@1
+  [28] head:UEBUNGSMELDUNGUEBU@2
+  [28] head:UEBUNGSMELDUNGUEBU@3
+  [28] head:UEBUNGSMELDUNGUEBU@4
+  [28] head:UEBUNGSMELDUNGUEBU@5
+  [21] head:AUSBILDUNGSFUNKSPR@0
+  [21] head:AUSBILDUNGSFUNKSPR@1
+  [21] head:AUSBILDUNGSFUNKSPR@2
+  [21] head:AUSBILDUNGSFUNKSPR@3
+  [21] head:AUSBILDUNGSFUNKSPR@4
+  [21] head:AUSBILDUNGSFUNKSPR@5
+  [20] head:FUNKUEBUNGFUNKUEBU@0
+  [20] head:FUNKUEBUNGFUNKUEBU@1
+  [20] head:FUNKUEBUNGFUNKUEBU@2
+  [20] head:FUNKUEBUNGFUNKUEBU@3
+Subspaces: potsdam
+GA: pop=64 gens=24 hill=24 noiseSamples=0 evolveShell=false freeRings=false
+
+════════ subspace potsdam-neighbourhood (WO=6) ════════
+  quarantine WO table retained (47 orders; subspace potsdam-neighbourhood not applied)
+——— [potsdam-neighbourhood] 1/16 head:UEBUNGSMELDUNGUEBU@0 (28) ———
+  → 16/28 (57%) noise=0% Δ=+57% reject pos=WLPC IC=0.0395
+    UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+  quarantine WO table retained (47 orders; subspace potsdam-neighbourhood not applied)
+——— [potsdam-neighbourhood] 2/16 head:UEBUNGSMELDUNGUEBU@1 (28) ———
+  → 16/28 (57%) noise=0% Δ=+57% reject pos=OJNC IC=0.0473
+    UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+  quarantine WO table retained (47 orders; subspace potsdam-neighbourhood not applied)
+——— [potsdam-neighbourhood] 3/16 head:UEBUNGSMELDUNGUEBU@2 (28) ———
+  → 11/28 (39%) noise=0% Δ=+39% reject pos=XZCM IC=0.0321
+    UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+  quarantine WO table retained (47 orders; subspace potsdam-neighbourhood not applied)
+——— [potsdam-neighbourhood] 4/16 head:UEBUNGSMELDUNGUEBU@3 (28) ———
+  → 12/28 (43%) noise=0% Δ=+43% reject pos=EEVV IC=0.0419
+    UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+  quarantine WO table retained (47 orders; subspace potsdam-neighbourhood not applied)
+——— [potsdam-neighbourhood] 5/16 head:UEBUNGSMELDUNGUEBU@4 (28) ———
+  → 12/28 (43%) noise=0% Δ=+43% reject pos=OFQS IC=0.0458
+    UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+  quarantine WO table retained (47 orders; subspace potsdam-neighbourhood not applied)
+——— [potsdam-neighbourhood] 6/16 head:UEBUNGSMELDUNGUEBU@5 (28) ———
+  → 13/28 (46%) noise=0% Δ=+46% reject pos=YZIF IC=0.0403
+    UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+  quarantine WO table retained (47 orders; subspace potsdam-neighbourhood not applied)
+——— [potsdam-neighbourhood] 7/16 head:AUSBILDUNGSFUNKSPR@0 (21) ———
+  → 10/21 (48%) noise=0% Δ=+48% reject pos=FWGJ IC=0.0430
+    UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+  quarantine WO table retained (47 orders; subspace potsdam-neighbourhood not applied)
+——— [potsdam-neighbourhood] 8/16 head:AUSBILDUNGSFUNKSPR@1 (21) ———
+  → 11/21 (52%) noise=0% Δ=+52% reject pos=VUFX IC=0.0399
+    UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+  quarantine WO table retained (47 orders; subspace potsdam-neighbourhood not applied)
+——— [potsdam-neighbourhood] 9/16 head:AUSBILDUNGSFUNKSPR@2 (21) ———
+  → 11/21 (52%) noise=0% Δ=+52% reject pos=QPBB IC=0.0348
+    UKWB gamma I-VII-IV rings=AAAA stecker=AF BI CH DN ER GV JL KS OU TX
+  quarantine WO table retained (47 orders; subspace potsdam-neighbourhood not applied)
+——— [potsdam-neighbourhood] 10/16 head:AUSBILDUNGSFUNKSPR@3 (21) ———
+  → 11/21 (52%) noise=0% Δ=+52% reject pos=GBNJ IC=0.0403
+    UKWB gamma VIII-IV-V rings=AAAA stecker=AO BK CP DE FJ HT IU LX QS YZ
+  quarantine WO table retained (47 orders; subspace potsdam-neighbourhood not applied)
+——— [potsdam-neighbourhood] 11/16 head:AUSBILDUNGSFUNKSPR@4 (21) ———
+  → 10/21 (48%) noise=0% Δ=+48% reject pos=AQFI IC=0.0344
+    UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW IY KS LU MZ NQ
+  quarantine WO table retained (47 orders; subspace potsdam-neighbourhood not applied)
+——— [potsdam-neighbourhood] 12/16 head:AUSBILDUNGSFUNKSPR@5 (21) ———
+  → 12/21 (57%) noise=0% Δ=+57% reject pos=ZQNF IC=0.0383
+    UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR FN GZ JM KS LT OX VW
+  quarantine WO table retained (47 orders; subspace potsdam-neighbourhood not applied)
+——— [potsdam-neighbourhood] 13/16 head:FUNKUEBUNGFUNKUEBU@0 (20) ———
+  → 12/20 (60%) noise=0% Δ=+60% reject pos=XOMP IC=0.0462
+    UKWC beta V-VIII-III rings=AAAA stecker=AM BY CV EP GZ HN JX LR OS QT
+  quarantine WO table retained (47 orders; subspace potsdam-neighbourhood not applied)
+——— [potsdam-neighbourhood] 14/16 head:FUNKUEBUNGFUNKUEBU@1 (20) ———
+  → 11/20 (55%) noise=0% Δ=+55% reject pos=EHRO IC=0.0423
+    UKWB beta III-VI-VIII rings=AAAA stecker=AR BF CM EK GX HJ LT NP UZ VY
+  quarantine WO table retained (47 orders; subspace potsdam-neighbourhood not applied)
+——— [potsdam-neighbourhood] 15/16 head:FUNKUEBUNGFUNKUEBU@2 (20) ———
+  → 12/20 (60%) noise=0% Δ=+60% reject pos=NDGY IC=0.0524
+    UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+  quarantine WO table retained (47 orders; subspace potsdam-neighbourhood not applied)
+——— [potsdam-neighbourhood] 16/16 head:FUNKUEBUNGFUNKUEBU@3 (20) ———
+  → 11/20 (55%) noise=0% Δ=+55% reject pos=DFYR IC=0.0446
+    UKWB beta III-VI-VII rings=AAAA stecker=AK BZ CL DN EO FG IJ PU SY WX
+
+——— RIGOR SUMMARY (by ratio) ———
+   60.0%  12/20  noise=   0% Δ=+60.0%  potsdam-neighbourhood  head:FUNKUEBUNGFUNKUEBU@0  | UKWC beta V-VIII-III rings=AAAA stecker=AM BY CV EP GZ HN JX LR OS QT
+   60.0%  12/20  noise=   0% Δ=+60.0%  potsdam-neighbourhood  head:FUNKUEBUNGFUNKUEBU@2  | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL FR HY IS JU KX
+   57.1%  16/28  noise=   0% Δ=+57.1%  potsdam-neighbourhood  head:UEBUNGSMELDUNGUEBU@0  | UKWC gamma I-VII-VI rings=AAAA stecker=AV BD CT FX GZ IL JS MP QU RW
+   57.1%  16/28  noise=   0% Δ=+57.1%  potsdam-neighbourhood  head:UEBUNGSMELDUNGUEBU@1  | UKWB gamma VIII-IV-V rings=AAAA stecker=AC BO EK GV HT IU JY LM NW QS
+   57.1%  12/21  noise=   0% Δ=+57.1%  potsdam-neighbourhood  head:AUSBILDUNGSFUNKSPR@5  | UKWB gamma VII-IV-III rings=AAAA stecker=AP BH DR FN GZ JM KS LT OX VW
+   55.0%  11/20  noise=   0% Δ=+55.0%  potsdam-neighbourhood  head:FUNKUEBUNGFUNKUEBU@1  | UKWB beta III-VI-VIII rings=AAAA stecker=AR BF CM EK GX HJ LT NP UZ VY
+   55.0%  11/20  noise=   0% Δ=+55.0%  potsdam-neighbourhood  head:FUNKUEBUNGFUNKUEBU@3  | UKWB beta III-VI-VII rings=AAAA stecker=AK BZ CL DN EO FG IJ PU SY WX
+   52.4%  11/21  noise=   0% Δ=+52.4%  potsdam-neighbourhood  head:AUSBILDUNGSFUNKSPR@1  | UKWB gamma IV-III-VIII rings=AAAA stecker=AJ BS CI ET GW HM LN PV RX
+   52.4%  11/21  noise=   0% Δ=+52.4%  potsdam-neighbourhood  head:AUSBILDUNGSFUNKSPR@2  | UKWB gamma I-VII-IV rings=AAAA stecker=AF BI CH DN ER GV JL KS OU TX
+   52.4%  11/21  noise=   0% Δ=+52.4%  potsdam-neighbourhood  head:AUSBILDUNGSFUNKSPR@3  | UKWB gamma VIII-IV-V rings=AAAA stecker=AO BK CP DE FJ HT IU LX QS YZ
+   47.6%  10/21  noise=   0% Δ=+47.6%  potsdam-neighbourhood  head:AUSBILDUNGSFUNKSPR@0  | UKWB beta VII-V-II rings=AAAA stecker=AW BP CD EL GY JU MS RV
+   47.6%  10/21  noise=   0% Δ=+47.6%  potsdam-neighbourhood  head:AUSBILDUNGSFUNKSPR@4  | UKWB beta VII-IV-I rings=AAAA stecker=AR BF CO DT EW IY KS LU MZ NQ
+   46.4%  13/28  noise=   0% Δ=+46.4%  potsdam-neighbourhood  head:UEBUNGSMELDUNGUEBU@5  | UKWB beta III-VI-VIII rings=AAAA stecker=AE BS CM DW GX IJ LR NP UZ VY
+   42.9%  12/28  noise=   0% Δ=+42.9%  potsdam-neighbourhood  head:UEBUNGSMELDUNGUEBU@3  | UKWB beta III-VI-VIII rings=AAAA stecker=BS CM EK FG IQ LR NP UZ VY
+   42.9%  12/28  noise=   0% Δ=+42.9%  potsdam-neighbourhood  head:UEBUNGSMELDUNGUEBU@4  | UKWB gamma III-VIII-II rings=AAAA stecker=AH CR EK FW GI JN OQ PT SZ UV
+   39.3%  11/28  noise=   0% Δ=+39.3%  potsdam-neighbourhood  head:UEBUNGSMELDUNGUEBU@2  | UKWB beta II-V-III rings=AAAA stecker=AO BP CE DU FY GZ IS KN MR TV
+
+Elapsed: 272.5 s
+Survivors (≥80% and ≥noise+10%): 0
+*** CLEAN NEGATIVE under rigor bar — templates/prior not near-true ***
+Next: invent new structural hypotheses; do not burn catalog rings yet.
+Wrote logs/stochastic-bombe-p1030680-rigor.json
+See stochastic-bombe.md / BREAK_P1030680.md Phase 18

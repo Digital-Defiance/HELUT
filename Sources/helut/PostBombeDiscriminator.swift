@@ -268,11 +268,15 @@ enum PostBombeDiscriminator {
     static func rank(
         stops: [SweepStop],
         ciphertext: [Int],
-        maxPlugs: Int = 10
+        maxPlugs: Int = 10,
+        /// When set (e.g. quarantine soft IC), keep candidates that would otherwise
+        /// die at the strict `icFloor` so soft-band near-misses can be exported.
+        provisionalICFloor: Double? = nil
     ) -> DiscriminationResult {
         var candidates: [DiscriminatedCandidate] = []
         var killed = 0
         var killedIC = 0
+        let gate = provisionalICFloor ?? icFloor
 
         for stop in stops {
             let tables = completions(for: stop, maxPlugs: maxPlugs)
@@ -290,7 +294,7 @@ enum PostBombeDiscriminator {
                 // IC gate before trigrams — cheap, and decisive against noise. A decrypt
                 // that diverges at a mid-message turnover dilutes whole-string IC, so a
                 // qualifying head is allowed through on its own IC.
-                if ic < icFloor && !(prefix.map { $0.ic >= icFloor } ?? false) {
+                if ic < gate && !(prefix.map { $0.ic >= gate } ?? false) {
                     sawICFail = true
                     continue
                 }
@@ -449,6 +453,10 @@ enum PostBombeDiscriminator {
     static func isBreak(_ candidate: DiscriminatedCandidate) -> Bool {
         guard candidate.cribExact else { return false }
         if candidate.ic >= icFloor && candidate.tailScore > breakThreshold { return true }
+        // Prefix-only break is for turnover divergence on unicity-safe menus.
+        // Short cribs fluke head IC/trigrams (the UEBUNG-pair "clears the bar" spam);
+        // they must earn a break through multi-menu agreement, not a lucky head.
+        guard candidate.stop.menu.crib.count >= 16 else { return false }
         guard let prefix = candidate.prefix else { return false }
         return prefix.ic >= icFloor && prefix.tailScore > breakThreshold
     }

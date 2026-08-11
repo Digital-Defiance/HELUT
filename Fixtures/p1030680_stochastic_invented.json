@@ -1,0 +1,973 @@
+{
+  "target": "P1030680",
+  "ciphertext": "JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF",
+  "note": "Invented prior library for --hybrid-meta-evolve. Cheap-probe then deepen high-\u0394.",
+  "templates": [
+    {
+      "name": "inv:head:UEBUNGUEBUNGUE@0",
+      "pattern": "UEBUNGUEBUNGUEBUNG......................................................",
+      "note": "invented head UEBUNGUEBUNGUEBUNG@0",
+      "constrained": 18
+    },
+    {
+      "name": "inv:head:UEBUNGUEBUNGUE@1",
+      "pattern": ".UEBUNGUEBUNGUEBUNG.....................................................",
+      "note": "invented head UEBUNGUEBUNGUEBUNG@1",
+      "constrained": 18
+    },
+    {
+      "name": "inv:head:UEBUNGUEBUNGUE@4",
+      "pattern": "....UEBUNGUEBUNGUEBUNG..................................................",
+      "note": "invented head UEBUNGUEBUNGUEBUNG@4",
+      "constrained": 18
+    },
+    {
+      "name": "inv:head:FUNKUEBUNGFUNK@0",
+      "pattern": "FUNKUEBUNGFUNKUEBUNG....................................................",
+      "note": "invented head FUNKUEBUNGFUNKUEBUNG@0",
+      "constrained": 20
+    },
+    {
+      "name": "inv:head:FUNKUEBUNGFUNK@1",
+      "pattern": ".FUNKUEBUNGFUNKUEBUNG...................................................",
+      "note": "invented head FUNKUEBUNGFUNKUEBUNG@1",
+      "constrained": 20
+    },
+    {
+      "name": "inv:head:FUNKUEBUNGFUNK@4",
+      "pattern": "....FUNKUEBUNGFUNKUEBUNG................................................",
+      "note": "invented head FUNKUEBUNGFUNKUEBUNG@4",
+      "constrained": 20
+    },
+    {
+      "name": "inv:head:AUSBILDUNGSFUN@3",
+      "pattern": "...AUSBILDUNGSFUNKSPRUCH................................................",
+      "note": "invented head AUSBILDUNGSFUNKSPRUCH@3",
+      "constrained": 21
+    },
+    {
+      "name": "inv:head:LEHRGANGFUNKSP@1",
+      "pattern": ".LEHRGANGFUNKSPRUCH.....................................................",
+      "note": "invented head LEHRGANGFUNKSPRUCH@1",
+      "constrained": 18
+    },
+    {
+      "name": "inv:head:LEHRGANGFUNKSP@2",
+      "pattern": "..LEHRGANGFUNKSPRUCH....................................................",
+      "note": "invented head LEHRGANGFUNKSPRUCH@2",
+      "constrained": 18
+    },
+    {
+      "name": "inv:head:ANALLEFUNKSTEL@1",
+      "pattern": ".ANALLEFUNKSTELLEN......................................................",
+      "note": "invented head ANALLEFUNKSTELLEN@1",
+      "constrained": 17
+    },
+    {
+      "name": "inv:head:ANALLEFUNKSTEL@3",
+      "pattern": "...ANALLEFUNKSTELLEN....................................................",
+      "note": "invented head ANALLEFUNKSTELLEN@3",
+      "constrained": 17
+    },
+    {
+      "name": "inv:head:THETISFUNKSPRU@0",
+      "pattern": "THETISFUNKSPRUCH........................................................",
+      "note": "invented head THETISFUNKSPRUCHX@0",
+      "constrained": 16
+    },
+    {
+      "name": "inv:head:THETISFUNKSPRU@1",
+      "pattern": ".THETISFUNKSPRUCH.......................................................",
+      "note": "invented head THETISFUNKSPRUCHX@1",
+      "constrained": 16
+    },
+    {
+      "name": "inv:head:THETISFUNKSPRU@2",
+      "pattern": "..THETISFUNKSPRUCH......................................................",
+      "note": "invented head THETISFUNKSPRUCHX@2",
+      "constrained": 16
+    },
+    {
+      "name": "inv:head:THETISFUNKSPRU@4",
+      "pattern": "....THETISFUNKSPRUCH....................................................",
+      "note": "invented head THETISFUNKSPRUCHX@4",
+      "constrained": 16
+    },
+    {
+      "name": "inv:head:ACHSEDMOEDMACH@1",
+      "pattern": ".ACHSEDMOEDMACHSEDM.....................................................",
+      "note": "invented head ACHSEDMOEDMACHSEDM@1",
+      "constrained": 18
+    },
+    {
+      "name": "inv:head:ACHSEDMOEDMACH@3",
+      "pattern": "...ACHSEDMOEDMACHSEDM...................................................",
+      "note": "invented head ACHSEDMOEDMACHSEDM@3",
+      "constrained": 18
+    },
+    {
+      "name": "inv:head:SEDMSSEDMSSEDM@0",
+      "pattern": "SEDMSSEDMSSEDMSSE.......................................................",
+      "note": "invented head SEDMSSEDMSSEDMSSE@0",
+      "constrained": 17
+    },
+    {
+      "name": "inv:head:SEDMSSEDMSSEDM@2",
+      "pattern": "..SEDMSSEDMSSEDMSSE.....................................................",
+      "note": "invented head SEDMSSEDMSSEDMSSE@2",
+      "constrained": 17
+    },
+    {
+      "name": "inv:head:OEDMOEDMOEDMOE@0",
+      "pattern": "OEDMOEDMOEDMOEDM........................................................",
+      "note": "invented head OEDMOEDMOEDMOEDM@0",
+      "constrained": 16
+    },
+    {
+      "name": "inv:head:OEDMOEDMOEDMOE@2",
+      "pattern": "..OEDMOEDMOEDMOEDM......................................................",
+      "note": "invented head OEDMOEDMOEDMOEDM@2",
+      "constrained": 16
+    },
+    {
+      "name": "inv:head:OEDMOEDMOEDMOE@4",
+      "pattern": "....OEDMOEDMOEDMOEDM....................................................",
+      "note": "invented head OEDMOEDMOEDMOEDM@4",
+      "constrained": 16
+    },
+    {
+      "name": "inv:head:VVVUUUAUSBILDU@1",
+      "pattern": ".VVVUUUAUSBILDUNG.......................................................",
+      "note": "invented head VVVUUUAUSBILDUNG@1",
+      "constrained": 16
+    },
+    {
+      "name": "inv:head:VVVUUUAUSBILDU@2",
+      "pattern": "..VVVUUUAUSBILDUNG......................................................",
+      "note": "invented head VVVUUUAUSBILDUNG@2",
+      "constrained": 16
+    },
+    {
+      "name": "inv:head:VVVUUUAUSBILDU@3",
+      "pattern": "...VVVUUUAUSBILDUNG.....................................................",
+      "note": "invented head VVVUUUAUSBILDUNG@3",
+      "constrained": 16
+    },
+    {
+      "name": "inv:head:VVVUUUAUSBILDU@4",
+      "pattern": "....VVVUUUAUSBILDUNG....................................................",
+      "note": "invented head VVVUUUAUSBILDUNG@4",
+      "constrained": 16
+    },
+    {
+      "name": "inv:head:VVVUUUAUSBILDU@5",
+      "pattern": ".....VVVUUUAUSBILDUNG...................................................",
+      "note": "invented head VVVUUUAUSBILDUNG@5",
+      "constrained": 16
+    },
+    {
+      "name": "inv:head:EACHSEDMEACHSE@0",
+      "pattern": "EACHSEDMEACHSEDM........................................................",
+      "note": "invented head EACHSEDMEACHSEDM@0",
+      "constrained": 16
+    },
+    {
+      "name": "inv:head:EACHSEDMEACHSE@1",
+      "pattern": ".EACHSEDMEACHSEDM.......................................................",
+      "note": "invented head EACHSEDMEACHSEDM@1",
+      "constrained": 16
+    },
+    {
+      "name": "inv:head:KACHOEDMKACHOE@0",
+      "pattern": "KACHOEDMKACHOEDM........................................................",
+      "note": "invented head KACHOEDMKACHOEDM@0",
+      "constrained": 16
+    },
+    {
+      "name": "inv:head:KACHOEDMKACHOE@1",
+      "pattern": ".KACHOEDMKACHOEDM.......................................................",
+      "note": "invented head KACHOEDMKACHOEDM@1",
+      "constrained": 16
+    },
+    {
+      "name": "inv:head:KACHOEDMKACHOE@2",
+      "pattern": "..KACHOEDMKACHOEDM......................................................",
+      "note": "invented head KACHOEDMKACHOEDM@2",
+      "constrained": 16
+    },
+    {
+      "name": "inv:head:KACHOEDMKACHOE@4",
+      "pattern": "....KACHOEDMKACHOEDM....................................................",
+      "note": "invented head KACHOEDMKACHOEDM@4",
+      "constrained": 16
+    },
+    {
+      "name": "inv:head:FUNKXUEBUNGXUE@0",
+      "pattern": "FUNK.UEBUNG.UEBUNG......................................................",
+      "note": "invented head FUNKXUEBUNGXUEBUNG@0",
+      "constrained": 16
+    },
+    {
+      "name": "inv:head:FUNKXUEBUNGXUE@1",
+      "pattern": ".FUNK.UEBUNG.UEBUNG.....................................................",
+      "note": "invented head FUNKXUEBUNGXUEBUNG@1",
+      "constrained": 16
+    },
+    {
+      "name": "inv:head:FUNKXUEBUNGXUE@2",
+      "pattern": "..FUNK.UEBUNG.UEBUNG....................................................",
+      "note": "invented head FUNKXUEBUNGXUEBUNG@2",
+      "constrained": 16
+    },
+    {
+      "name": "inv:head:FUNKXUEBUNGXUE@3",
+      "pattern": "...FUNK.UEBUNG.UEBUNG...................................................",
+      "note": "invented head FUNKXUEBUNGXUEBUNG@3",
+      "constrained": 16
+    },
+    {
+      "name": "inv:head:FUNKXUEBUNGXUE@5",
+      "pattern": ".....FUNK.UEBUNG.UEBUNG.................................................",
+      "note": "invented head FUNKXUEBUNGXUEBUNG@5",
+      "constrained": 16
+    },
+    {
+      "name": "inv:pad:UEBUNGUE+ZEITGRUP@g2@0",
+      "pattern": "UEBUNGUEBUNG..ZEITGRUPPE................................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:UEBUNGUE+ZEITGRUP@g2@1",
+      "pattern": ".UEBUNGUEBUNG..ZEITGRUPPE...............................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:UEBUNGUE+ZEITGRUP@g6@1",
+      "pattern": ".UEBUNGUEBUNG......ZEITGRUPPE...........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:UEBUNGUE+GRUPPENZ@g2@0",
+      "pattern": "UEBUNGUEBUNG..GRUPPENZAHL...............................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:UEBUNGUE+GRUPPENZ@g2@1",
+      "pattern": ".UEBUNGUEBUNG..GRUPPENZAHL..............................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:UEBUNGUE+GRUPPENZ@g4@0",
+      "pattern": "UEBUNGUEBUNG....GRUPPENZAHL.............................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:UEBUNGUE+GRUPPENZ@g4@1",
+      "pattern": ".UEBUNGUEBUNG....GRUPPENZAHL............................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:UEBUNGUE+GRUPPENZ@g6@0",
+      "pattern": "UEBUNGUEBUNG......GRUPPENZAHL...........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:UEBUNGUE+GRUPPENZ@g6@1",
+      "pattern": ".UEBUNGUEBUNG......GRUPPENZAHL..........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:UEBUNGUE+FUNKSPRU@g2@0",
+      "pattern": "UEBUNGUEBUNG..FUNKSPRUCH................................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:UEBUNGUE+FUNKSPRU@g4@1",
+      "pattern": ".UEBUNGUEBUNG....FUNKSPRUCH.............................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:UEBUNGUE+FUNKSPRU@g6@0",
+      "pattern": "UEBUNGUEBUNG......FUNKSPRUCH............................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:UEBUNGUE+FUNKSPRU@g6@1",
+      "pattern": ".UEBUNGUEBUNG......FUNKSPRUCH...........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:FUNKUEBU+ZEITGRUP@g2@0",
+      "pattern": "FUNKUEBUNGFU..ZEITGRUPPE................................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:FUNKUEBU+ZEITGRUP@g2@1",
+      "pattern": ".FUNKUEBUNGFU..ZEITGRUPPE...............................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:FUNKUEBU+ZEITGRUP@g6@1",
+      "pattern": ".FUNKUEBUNGFU......ZEITGRUPPE...........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:FUNKUEBU+ZEITGRUP@g6@2",
+      "pattern": "..FUNKUEBUNGFU......ZEITGRUPPE..........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:FUNKUEBU+GRUPPENZ@g2@0",
+      "pattern": "FUNKUEBUNGFU..GRUPPENZAHL...............................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:FUNKUEBU+GRUPPENZ@g2@1",
+      "pattern": ".FUNKUEBUNGFU..GRUPPENZAHL..............................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:FUNKUEBU+GRUPPENZ@g2@2",
+      "pattern": "..FUNKUEBUNGFU..GRUPPENZAHL.............................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:FUNKUEBU+GRUPPENZ@g4@0",
+      "pattern": "FUNKUEBUNGFU....GRUPPENZAHL.............................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:FUNKUEBU+GRUPPENZ@g4@1",
+      "pattern": ".FUNKUEBUNGFU....GRUPPENZAHL............................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:FUNKUEBU+GRUPPENZ@g4@2",
+      "pattern": "..FUNKUEBUNGFU....GRUPPENZAHL...........................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:FUNKUEBU+GRUPPENZ@g6@0",
+      "pattern": "FUNKUEBUNGFU......GRUPPENZAHL...........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:FUNKUEBU+GRUPPENZ@g6@1",
+      "pattern": ".FUNKUEBUNGFU......GRUPPENZAHL..........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:FUNKUEBU+FUNKSPRU@g2@0",
+      "pattern": "FUNKUEBUNGFU..FUNKSPRUCH................................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:FUNKUEBU+FUNKSPRU@g4@1",
+      "pattern": ".FUNKUEBUNGFU....FUNKSPRUCH.............................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:FUNKUEBU+FUNKSPRU@g4@2",
+      "pattern": "..FUNKUEBUNGFU....FUNKSPRUCH............................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:FUNKUEBU+FUNKSPRU@g6@0",
+      "pattern": "FUNKUEBUNGFU......FUNKSPRUCH............................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:FUNKUEBU+FUNKSPRU@g6@1",
+      "pattern": ".FUNKUEBUNGFU......FUNKSPRUCH...........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:UEBUNGSM+ZEITGRUP@g2@0",
+      "pattern": "UEBUNGSMELDU..ZEITGRUPPE................................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:UEBUNGSM+ZEITGRUP@g2@1",
+      "pattern": ".UEBUNGSMELDU..ZEITGRUPPE...............................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:UEBUNGSM+ZEITGRUP@g6@1",
+      "pattern": ".UEBUNGSMELDU......ZEITGRUPPE...........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:UEBUNGSM+GRUPPENZ@g2@0",
+      "pattern": "UEBUNGSMELDU..GRUPPENZAHL...............................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:UEBUNGSM+GRUPPENZ@g2@1",
+      "pattern": ".UEBUNGSMELDU..GRUPPENZAHL..............................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:UEBUNGSM+GRUPPENZ@g4@0",
+      "pattern": "UEBUNGSMELDU....GRUPPENZAHL.............................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:UEBUNGSM+GRUPPENZ@g4@1",
+      "pattern": ".UEBUNGSMELDU....GRUPPENZAHL............................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:UEBUNGSM+GRUPPENZ@g6@0",
+      "pattern": "UEBUNGSMELDU......GRUPPENZAHL...........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:UEBUNGSM+GRUPPENZ@g6@1",
+      "pattern": ".UEBUNGSMELDU......GRUPPENZAHL..........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:UEBUNGSM+FUNKSPRU@g2@0",
+      "pattern": "UEBUNGSMELDU..FUNKSPRUCH................................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:UEBUNGSM+FUNKSPRU@g4@1",
+      "pattern": ".UEBUNGSMELDU....FUNKSPRUCH.............................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:UEBUNGSM+FUNKSPRU@g6@0",
+      "pattern": "UEBUNGSMELDU......FUNKSPRUCH............................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:UEBUNGSM+FUNKSPRU@g6@1",
+      "pattern": ".UEBUNGSMELDU......FUNKSPRUCH...........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:AUSBILDU+ZEITGRUP@g2@0",
+      "pattern": "AUSBILDUNGSF..ZEITGRUPPE................................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:AUSBILDU+ZEITGRUP@g6@2",
+      "pattern": "..AUSBILDUNGSF......ZEITGRUPPE..........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:AUSBILDU+GRUPPENZ@g2@0",
+      "pattern": "AUSBILDUNGSF..GRUPPENZAHL...............................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:AUSBILDU+GRUPPENZ@g2@2",
+      "pattern": "..AUSBILDUNGSF..GRUPPENZAHL.............................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:AUSBILDU+GRUPPENZ@g4@0",
+      "pattern": "AUSBILDUNGSF....GRUPPENZAHL.............................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:AUSBILDU+GRUPPENZ@g4@2",
+      "pattern": "..AUSBILDUNGSF....GRUPPENZAHL...........................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:AUSBILDU+GRUPPENZ@g6@0",
+      "pattern": "AUSBILDUNGSF......GRUPPENZAHL...........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:AUSBILDU+FUNKSPRU@g2@0",
+      "pattern": "AUSBILDUNGSF..FUNKSPRUCH................................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:AUSBILDU+FUNKSPRU@g4@2",
+      "pattern": "..AUSBILDUNGSF....FUNKSPRUCH............................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:AUSBILDU+FUNKSPRU@g6@0",
+      "pattern": "AUSBILDUNGSF......FUNKSPRUCH............................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:LEHRGANG+ZEITGRUP@g2@1",
+      "pattern": ".LEHRGANGFUNK..ZEITGRUPPE...............................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:LEHRGANG+ZEITGRUP@g6@1",
+      "pattern": ".LEHRGANGFUNK......ZEITGRUPPE...........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:LEHRGANG+ZEITGRUP@g6@2",
+      "pattern": "..LEHRGANGFUNK......ZEITGRUPPE..........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:LEHRGANG+GRUPPENZ@g2@1",
+      "pattern": ".LEHRGANGFUNK..GRUPPENZAHL..............................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:LEHRGANG+GRUPPENZ@g2@2",
+      "pattern": "..LEHRGANGFUNK..GRUPPENZAHL.............................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:LEHRGANG+GRUPPENZ@g4@1",
+      "pattern": ".LEHRGANGFUNK....GRUPPENZAHL............................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:LEHRGANG+GRUPPENZ@g4@2",
+      "pattern": "..LEHRGANGFUNK....GRUPPENZAHL...........................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:LEHRGANG+GRUPPENZ@g6@1",
+      "pattern": ".LEHRGANGFUNK......GRUPPENZAHL..........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:LEHRGANG+FUNKSPRU@g4@1",
+      "pattern": ".LEHRGANGFUNK....FUNKSPRUCH.............................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:LEHRGANG+FUNKSPRU@g4@2",
+      "pattern": "..LEHRGANGFUNK....FUNKSPRUCH............................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:LEHRGANG+FUNKSPRU@g6@1",
+      "pattern": ".LEHRGANGFUNK......FUNKSPRUCH...........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:ANALLEFU+ZEITGRUP@g2@0",
+      "pattern": "ANALLEFUNKST..ZEITGRUPPE................................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:ANALLEFU+ZEITGRUP@g2@1",
+      "pattern": ".ANALLEFUNKST..ZEITGRUPPE...............................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:ANALLEFU+ZEITGRUP@g6@1",
+      "pattern": ".ANALLEFUNKST......ZEITGRUPPE...........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:ANALLEFU+GRUPPENZ@g2@0",
+      "pattern": "ANALLEFUNKST..GRUPPENZAHL...............................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:ANALLEFU+GRUPPENZ@g2@1",
+      "pattern": ".ANALLEFUNKST..GRUPPENZAHL..............................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:ANALLEFU+GRUPPENZ@g4@0",
+      "pattern": "ANALLEFUNKST....GRUPPENZAHL.............................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:ANALLEFU+GRUPPENZ@g4@1",
+      "pattern": ".ANALLEFUNKST....GRUPPENZAHL............................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:ANALLEFU+GRUPPENZ@g6@0",
+      "pattern": "ANALLEFUNKST......GRUPPENZAHL...........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:ANALLEFU+GRUPPENZ@g6@1",
+      "pattern": ".ANALLEFUNKST......GRUPPENZAHL..........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:ANALLEFU+FUNKSPRU@g2@0",
+      "pattern": "ANALLEFUNKST..FUNKSPRUCH................................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:ANALLEFU+FUNKSPRU@g4@1",
+      "pattern": ".ANALLEFUNKST....FUNKSPRUCH.............................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:ANALLEFU+FUNKSPRU@g6@0",
+      "pattern": "ANALLEFUNKST......FUNKSPRUCH............................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:ANALLEFU+FUNKSPRU@g6@1",
+      "pattern": ".ANALLEFUNKST......FUNKSPRUCH...........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:THETISFU+ZEITGRUP@g2@0",
+      "pattern": "THETISFUNKSP..ZEITGRUPPE................................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:THETISFU+ZEITGRUP@g2@1",
+      "pattern": ".THETISFUNKSP..ZEITGRUPPE...............................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:THETISFU+ZEITGRUP@g6@1",
+      "pattern": ".THETISFUNKSP......ZEITGRUPPE...........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:THETISFU+ZEITGRUP@g6@2",
+      "pattern": "..THETISFUNKSP......ZEITGRUPPE..........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:THETISFU+GRUPPENZ@g2@0",
+      "pattern": "THETISFUNKSP..GRUPPENZAHL...............................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:THETISFU+GRUPPENZ@g2@1",
+      "pattern": ".THETISFUNKSP..GRUPPENZAHL..............................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:THETISFU+GRUPPENZ@g2@2",
+      "pattern": "..THETISFUNKSP..GRUPPENZAHL.............................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:THETISFU+GRUPPENZ@g4@0",
+      "pattern": "THETISFUNKSP....GRUPPENZAHL.............................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:THETISFU+GRUPPENZ@g4@1",
+      "pattern": ".THETISFUNKSP....GRUPPENZAHL............................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:THETISFU+GRUPPENZ@g4@2",
+      "pattern": "..THETISFUNKSP....GRUPPENZAHL...........................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:THETISFU+GRUPPENZ@g6@0",
+      "pattern": "THETISFUNKSP......GRUPPENZAHL...........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:THETISFU+GRUPPENZ@g6@1",
+      "pattern": ".THETISFUNKSP......GRUPPENZAHL..........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:THETISFU+FUNKSPRU@g2@0",
+      "pattern": "THETISFUNKSP..FUNKSPRUCH................................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:THETISFU+FUNKSPRU@g4@1",
+      "pattern": ".THETISFUNKSP....FUNKSPRUCH.............................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:THETISFU+FUNKSPRU@g4@2",
+      "pattern": "..THETISFUNKSP....FUNKSPRUCH............................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:THETISFU+FUNKSPRU@g6@0",
+      "pattern": "THETISFUNKSP......FUNKSPRUCH............................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:THETISFU+FUNKSPRU@g6@1",
+      "pattern": ".THETISFUNKSP......FUNKSPRUCH...........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:ACHSEDMO+ZEITGRUP@g2@1",
+      "pattern": ".ACHSEDMOEDMA..ZEITGRUPPE...............................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:ACHSEDMO+ZEITGRUP@g6@1",
+      "pattern": ".ACHSEDMOEDMA......ZEITGRUPPE...........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:ACHSEDMO+GRUPPENZ@g2@1",
+      "pattern": ".ACHSEDMOEDMA..GRUPPENZAHL..............................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:ACHSEDMO+GRUPPENZ@g4@1",
+      "pattern": ".ACHSEDMOEDMA....GRUPPENZAHL............................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:ACHSEDMO+GRUPPENZ@g6@1",
+      "pattern": ".ACHSEDMOEDMA......GRUPPENZAHL..........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:ACHSEDMO+FUNKSPRU@g4@1",
+      "pattern": ".ACHSEDMOEDMA....FUNKSPRUCH.............................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:ACHSEDMO+FUNKSPRU@g6@1",
+      "pattern": ".ACHSEDMOEDMA......FUNKSPRUCH...........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:SEDMSSED+ZEITGRUP@g2@0",
+      "pattern": "SEDMSSEDMSSE..ZEITGRUPPE................................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:SEDMSSED+ZEITGRUP@g6@2",
+      "pattern": "..SEDMSSEDMSSE......ZEITGRUPPE..........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:SEDMSSED+GRUPPENZ@g2@0",
+      "pattern": "SEDMSSEDMSSE..GRUPPENZAHL...............................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:SEDMSSED+GRUPPENZ@g2@2",
+      "pattern": "..SEDMSSEDMSSE..GRUPPENZAHL.............................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:SEDMSSED+GRUPPENZ@g4@0",
+      "pattern": "SEDMSSEDMSSE....GRUPPENZAHL.............................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:SEDMSSED+GRUPPENZ@g4@2",
+      "pattern": "..SEDMSSEDMSSE....GRUPPENZAHL...........................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:SEDMSSED+GRUPPENZ@g6@0",
+      "pattern": "SEDMSSEDMSSE......GRUPPENZAHL...........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:SEDMSSED+FUNKSPRU@g2@0",
+      "pattern": "SEDMSSEDMSSE..FUNKSPRUCH................................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:SEDMSSED+FUNKSPRU@g4@2",
+      "pattern": "..SEDMSSEDMSSE....FUNKSPRUCH............................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:SEDMSSED+FUNKSPRU@g6@0",
+      "pattern": "SEDMSSEDMSSE......FUNKSPRUCH............................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:OEDMOEDM+ZEITGRUP@g2@0",
+      "pattern": "OEDMOEDMOEDM..ZEITGRUPPE................................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:OEDMOEDM+ZEITGRUP@g6@2",
+      "pattern": "..OEDMOEDMOEDM......ZEITGRUPPE..........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:OEDMOEDM+GRUPPENZ@g2@0",
+      "pattern": "OEDMOEDMOEDM..GRUPPENZAHL...............................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:OEDMOEDM+GRUPPENZ@g2@2",
+      "pattern": "..OEDMOEDMOEDM..GRUPPENZAHL.............................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:OEDMOEDM+GRUPPENZ@g4@0",
+      "pattern": "OEDMOEDMOEDM....GRUPPENZAHL.............................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:OEDMOEDM+GRUPPENZ@g4@2",
+      "pattern": "..OEDMOEDMOEDM....GRUPPENZAHL...........................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:OEDMOEDM+GRUPPENZ@g6@0",
+      "pattern": "OEDMOEDMOEDM......GRUPPENZAHL...........................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 23
+    },
+    {
+      "name": "inv:pad:OEDMOEDM+FUNKSPRU@g2@0",
+      "pattern": "OEDMOEDMOEDM..FUNKSPRUCH................................................",
+      "note": "invented pad+body gap=2",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:OEDMOEDM+FUNKSPRU@g4@2",
+      "pattern": "..OEDMOEDMOEDM....FUNKSPRUCH............................................",
+      "note": "invented pad+body gap=4",
+      "constrained": 22
+    },
+    {
+      "name": "inv:pad:OEDMOEDM+FUNKSPRU@g6@0",
+      "pattern": "OEDMOEDMOEDM......FUNKSPRUCH............................................",
+      "note": "invented pad+body gap=6",
+      "constrained": 22
+    },
+    {
+      "name": "inv:shift:UEBUNGUEBUNG@6",
+      "pattern": "......UEBUNGUEBUNGUEBUNG................................................",
+      "note": "offset sweep",
+      "constrained": 18
+    },
+    {
+      "name": "inv:shift:FUNKUEBUNGFU@6",
+      "pattern": "......FUNKUEBUNGFUNKUEBUNG..............................................",
+      "note": "offset sweep",
+      "constrained": 20
+    }
+  ]
+}

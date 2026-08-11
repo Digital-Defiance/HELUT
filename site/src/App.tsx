@@ -3,6 +3,7 @@ import { HomePage } from './pages/HomePage'
 import { StackPage } from './pages/StackPage'
 import { AppsPage } from './pages/AppsPage'
 import { EnigmaPage } from './pages/EnigmaPage'
+import { Enigma256Page } from './pages/Enigma256Page'
 import { JournalPage } from './pages/JournalPage'
 
 function Nav() {
@@ -25,6 +26,9 @@ function Nav() {
             </li>
             <li>
               <NavLink to="/journal">Turing Complete</NavLink>
+            </li>
+            <li>
+              <NavLink to="/enigma-256">Enigma 256</NavLink>
             </li>
             <li>
               <a
@@ -65,6 +69,7 @@ export default function App() {
         <Route path="/stack" element={<StackPage />} />
         <Route path="/apps" element={<AppsPage />} />
         <Route path="/enigma" element={<EnigmaPage />} />
+        <Route path="/enigma-256" element={<Enigma256Page />} />
         <Route path="/journal" element={<JournalPage />} />
       </Routes>
       <Footer />

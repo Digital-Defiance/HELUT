@@ -1,0 +1,885 @@
+{
+  "target": "P1030680",
+  "ciphertext": "JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF",
+  "note": "Operation Regenbogen / Hannibal operational cribs for P1030680 (M-Thetis). Phrases are period-plausible constructions from attested vocabulary (not verified native decrypts except shared lexicon with P1030681). Offsets are self-stecker-legal against the 72-letter CT. Queue AFTER catalog right-ring sweep; do not preempt Metal. Tier 03_hela: Hela / Ostpreussen evacuation.",
+  "source": "Claude research pass, 2026-08-10 -- Operation Regenbogen / Operation Hannibal context for P1030680 (M-Thetis, U534, 1 May 1945)",
+  "cribs": [
+    {
+      "text": "RAEUMUNGOSTPREUSSEN",
+      "messages": 1,
+      "offsets": [
+        1,
+        5,
+        6,
+        7,
+        9,
+        11,
+        12,
+        13,
+        21,
+        22,
+        23,
+        25,
+        29,
+        31,
+        32,
+        33,
+        39,
+        40,
+        41,
+        43,
+        45,
+        47,
+        52,
+        53
+      ]
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "messages": 1,
+      "offsets": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        7,
+        9,
+        11,
+        14,
+        17,
+        18,
+        21,
+        23,
+        27,
+        28,
+        29,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        47,
+        49,
+        51,
+        52,
+        53,
+        55
+      ]
+    },
+    {
+      "text": "FLUECHTLINGEANBORD",
+      "messages": 1,
+      "offsets": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        11,
+        13,
+        16,
+        17,
+        18,
+        21,
+        22,
+        23,
+        24,
+        28,
+        30,
+        36,
+        37,
+        40,
+        41,
+        43,
+        44,
+        45,
+        48,
+        49,
+        50,
+        53
+      ]
+    }
+  ],
+  "placements": [
+    {
+      "text": "RAEUMUNGOSTPREUSSEN",
+      "offset": 33,
+      "edges": 19,
+      "loops": 5,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "RAEUMUNGOSTPREUSSEN",
+      "offset": 39,
+      "edges": 19,
+      "loops": 5,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "RAEUMUNGOSTPREUSSEN",
+      "offset": 1,
+      "edges": 19,
+      "loops": 4,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "RAEUMUNGOSTPREUSSEN",
+      "offset": 22,
+      "edges": 19,
+      "loops": 4,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "RAEUMUNGOSTPREUSSEN",
+      "offset": 23,
+      "edges": 19,
+      "loops": 4,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "RAEUMUNGOSTPREUSSEN",
+      "offset": 25,
+      "edges": 19,
+      "loops": 4,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "RAEUMUNGOSTPREUSSEN",
+      "offset": 40,
+      "edges": 19,
+      "loops": 4,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "RAEUMUNGOSTPREUSSEN",
+      "offset": 41,
+      "edges": 19,
+      "loops": 4,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "RAEUMUNGOSTPREUSSEN",
+      "offset": 43,
+      "edges": 19,
+      "loops": 4,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "RAEUMUNGOSTPREUSSEN",
+      "offset": 5,
+      "edges": 19,
+      "loops": 3,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "RAEUMUNGOSTPREUSSEN",
+      "offset": 9,
+      "edges": 19,
+      "loops": 3,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "RAEUMUNGOSTPREUSSEN",
+      "offset": 12,
+      "edges": 19,
+      "loops": 3,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "RAEUMUNGOSTPREUSSEN",
+      "offset": 13,
+      "edges": 19,
+      "loops": 3,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "RAEUMUNGOSTPREUSSEN",
+      "offset": 21,
+      "edges": 19,
+      "loops": 3,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "RAEUMUNGOSTPREUSSEN",
+      "offset": 29,
+      "edges": 19,
+      "loops": 3,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "RAEUMUNGOSTPREUSSEN",
+      "offset": 31,
+      "edges": 19,
+      "loops": 3,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "RAEUMUNGOSTPREUSSEN",
+      "offset": 32,
+      "edges": 19,
+      "loops": 3,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 37,
+      "edges": 16,
+      "loops": 3,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "RAEUMUNGOSTPREUSSEN",
+      "offset": 6,
+      "edges": 19,
+      "loops": 2,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "RAEUMUNGOSTPREUSSEN",
+      "offset": 7,
+      "edges": 19,
+      "loops": 2,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "RAEUMUNGOSTPREUSSEN",
+      "offset": 45,
+      "edges": 19,
+      "loops": 2,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "RAEUMUNGOSTPREUSSEN",
+      "offset": 47,
+      "edges": 19,
+      "loops": 2,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "RAEUMUNGOSTPREUSSEN",
+      "offset": 52,
+      "edges": 19,
+      "loops": 2,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "RAEUMUNGOSTPREUSSEN",
+      "offset": 53,
+      "edges": 19,
+      "loops": 2,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "FLUECHTLINGEANBORD",
+      "offset": 21,
+      "edges": 18,
+      "loops": 2,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "FLUECHTLINGEANBORD",
+      "offset": 23,
+      "edges": 18,
+      "loops": 2,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "FLUECHTLINGEANBORD",
+      "offset": 24,
+      "edges": 18,
+      "loops": 2,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "FLUECHTLINGEANBORD",
+      "offset": 49,
+      "edges": 18,
+      "loops": 2,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 7,
+      "edges": 16,
+      "loops": 2,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 23,
+      "edges": 16,
+      "loops": 2,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 27,
+      "edges": 16,
+      "loops": 2,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 28,
+      "edges": 16,
+      "loops": 2,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 29,
+      "edges": 16,
+      "loops": 2,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 33,
+      "edges": 16,
+      "loops": 2,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 35,
+      "edges": 16,
+      "loops": 2,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 39,
+      "edges": 16,
+      "loops": 2,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "RAEUMUNGOSTPREUSSEN",
+      "offset": 11,
+      "edges": 19,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "FLUECHTLINGEANBORD",
+      "offset": 3,
+      "edges": 18,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "FLUECHTLINGEANBORD",
+      "offset": 11,
+      "edges": 18,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "FLUECHTLINGEANBORD",
+      "offset": 13,
+      "edges": 18,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "FLUECHTLINGEANBORD",
+      "offset": 17,
+      "edges": 18,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "FLUECHTLINGEANBORD",
+      "offset": 18,
+      "edges": 18,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "FLUECHTLINGEANBORD",
+      "offset": 22,
+      "edges": 18,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "FLUECHTLINGEANBORD",
+      "offset": 28,
+      "edges": 18,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "FLUECHTLINGEANBORD",
+      "offset": 30,
+      "edges": 18,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "FLUECHTLINGEANBORD",
+      "offset": 37,
+      "edges": 18,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "FLUECHTLINGEANBORD",
+      "offset": 40,
+      "edges": 18,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "FLUECHTLINGEANBORD",
+      "offset": 44,
+      "edges": 18,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "FLUECHTLINGEANBORD",
+      "offset": 50,
+      "edges": 18,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 1,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 2,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 3,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 4,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 9,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 11,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 14,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 17,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 18,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 21,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 32,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 40,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 41,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 43,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 44,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 47,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 49,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 51,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 53,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 55,
+      "edges": 16,
+      "loops": 1,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "FLUECHTLINGEANBORD",
+      "offset": 2,
+      "edges": 18,
+      "loops": 0,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "FLUECHTLINGEANBORD",
+      "offset": 4,
+      "edges": 18,
+      "loops": 0,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "FLUECHTLINGEANBORD",
+      "offset": 5,
+      "edges": 18,
+      "loops": 0,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "FLUECHTLINGEANBORD",
+      "offset": 6,
+      "edges": 18,
+      "loops": 0,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "FLUECHTLINGEANBORD",
+      "offset": 16,
+      "edges": 18,
+      "loops": 0,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "FLUECHTLINGEANBORD",
+      "offset": 36,
+      "edges": 18,
+      "loops": 0,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "FLUECHTLINGEANBORD",
+      "offset": 41,
+      "edges": 18,
+      "loops": 0,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "FLUECHTLINGEANBORD",
+      "offset": 43,
+      "edges": 18,
+      "loops": 0,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "FLUECHTLINGEANBORD",
+      "offset": 45,
+      "edges": 18,
+      "loops": 0,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "FLUECHTLINGEANBORD",
+      "offset": 48,
+      "edges": 18,
+      "loops": 0,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "FLUECHTLINGEANBORD",
+      "offset": 53,
+      "edges": 18,
+      "loops": 0,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 6,
+      "edges": 16,
+      "loops": 0,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 34,
+      "edges": 16,
+      "loops": 0,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 36,
+      "edges": 16,
+      "loops": 0,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 42,
+      "edges": 16,
+      "loops": 0,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    },
+    {
+      "text": "EINSCHIFFUNGHELA",
+      "offset": 52,
+      "edges": 16,
+      "loops": 0,
+      "role": "body",
+      "cluster": "hela_baltic_evacuation",
+      "tier": "03_hela"
+    }
+  ],
+  "stats": {
+    "phrases": 3,
+    "placements": 85,
+    "tiers": [
+      "03_hela"
+    ]
+  }
+}

@@ -70,3 +70,10 @@ Enigma 256 is designed strictly for Commercial Off-The-Shelf (COTS) System-on-Ch
 
 Because the cipher relies on polymorphic logic rather than static physical hardware, the "mutation parameters" (such as new LFSR polynomial taps or modified HKDF expansion rules) can be pushed as over-the-air software updates. The receiving node simply recompiles the Verilog bitstream locally and flashes its own FPGA fabric, fundamentally altering the physical execution of the cryptography without requiring new hardware deployment.
 
+## 8. Implementation Status & TensorLUT Boundary
+
+- **Blue Team (this cipher):** Swift oracle in `Sources/HELUTCore/Enigma256.swift` and FPGA datapath in `enigma_256_core.v`. Control-plane HKDF / message-key derivation runs in software; the core is a loadable BRAM + LFSR stream engine.
+- **Session API:** `Enigma256Context` seal/open + `E256` file container; bitbang host model `Enigma256CoreHandle`. Register map: `ENIGMA256_REGMAP.md`. CLI: `helut --enigma256-crypt --enigma256-mode encrypt|decrypt --enigma256-ikm … --enigma256-in … --enigma256-out …`.
+- **Golden bridge:** `Enigma256Bridge` dumps `tables/*.hex`, `session.json`, stream hex, and `tb_params.vh` for RTL co-sim. CLI: `swift run helut --enigma256-golden --enigma256-out Fixtures/enigma256_golden`. Testbench: `enigma_256_tb.v`. Yosys: `Scripts/enigma256_synth.sh` → `build/enigma_256_netlist.json` (gitignored; BRAM flatten is ~27MB).
+- **Red Team (HELUT / TensorLUT):** Do **not** melt `enigma_256_core.v` into TensorLUT until the golden bundle matches RTL sim and Yosys emits a clean netlist. TensorLUT is the adversarial path for M4 / evolved netlists (`tensorlut.md`); Enigma 256 first needs a correct reciprocal machine, then a deliberate attack harness—not a premature stecker-style melt.
+

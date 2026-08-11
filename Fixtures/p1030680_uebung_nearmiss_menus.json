@@ -1,0 +1,93 @@
+{
+  "target": "P1030680",
+  "ciphertext": "JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF",
+  "note": "Slim UEBUNG soft-tail \u22124.3 quarantine catch: excludes multi-million-stop ghost floods. Primary: UEBUNGXUEBUNG@0 (IC 0.049 / tail \u22124.270).",
+  "cribs": [
+    {
+      "text": "UEBUNGXUEBUNG",
+      "messages": 1,
+      "offsets": [
+        0,
+        1
+      ],
+      "anchored": true
+    },
+    {
+      "text": "XUEBUNGXUEBUNG",
+      "messages": 1,
+      "offsets": [
+        0
+      ],
+      "anchored": true
+    },
+    {
+      "text": "UEBUNGUEBUNG",
+      "messages": 1,
+      "offsets": [
+        0,
+        1
+      ],
+      "anchored": true
+    },
+    {
+      "text": "UEBUNGSMELDUNG",
+      "messages": 1,
+      "offsets": [
+        0,
+        1
+      ],
+      "anchored": true
+    }
+  ],
+  "placements": [
+    {
+      "text": "UEBUNGXUEBUNG",
+      "offset": 0,
+      "edges": 13,
+      "loops": 3,
+      "role": "head"
+    },
+    {
+      "text": "XUEBUNGXUEBUNG",
+      "offset": 0,
+      "edges": 14,
+      "loops": 2,
+      "role": "head"
+    },
+    {
+      "text": "UEBUNGXUEBUNG",
+      "offset": 1,
+      "edges": 13,
+      "loops": 2,
+      "role": "head"
+    },
+    {
+      "text": "UEBUNGUEBUNG",
+      "offset": 0,
+      "edges": 12,
+      "loops": 1,
+      "role": "head"
+    },
+    {
+      "text": "UEBUNGUEBUNG",
+      "offset": 1,
+      "edges": 12,
+      "loops": 1,
+      "role": "head"
+    },
+    {
+      "text": "UEBUNGSMELDUNG",
+      "offset": 0,
+      "edges": 14,
+      "loops": 0,
+      "role": "head"
+    },
+    {
+      "text": "UEBUNGSMELDUNG",
+      "offset": 1,
+      "edges": 14,
+      "loops": 0,
+      "role": "head"
+    }
+  ]
+}

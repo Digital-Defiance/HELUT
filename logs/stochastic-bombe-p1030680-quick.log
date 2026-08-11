@@ -1,0 +1,49 @@
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 6 (constrained 39…72)
+Shell evolution: ON freeRings=true WO=6 ringSeeds=3 subspace=potsdam-neighbourhood
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/8 pop=10 blockB_greeks=0
+  gen-best  fitness=15/72 tmpl=tile:AUSBILDUNG IC=0.0383 pos=HMIX | UKWB beta III-IV-VIII rings=RIKP stecker=EY FP HN IZ JL RT
+  all-time  fitness=15 tmpl=tile:AUSBILDUNG pos=HMIX | UKWB beta III-IV-VIII rings=RIKP stecker=EY FP HN IZ JL RT
+Hybrid gen 2/8 pop=10 blockB_greeks=0
+  gen-best  fitness=16/72 tmpl=tile:UEBUNG IC=0.0481 pos=XBNJ | UKWB beta III-IV-VIII rings=RIKP stecker=EY FP IZ JL OV RT
+  all-time  fitness=16 tmpl=tile:UEBUNG pos=XBNJ | UKWB beta III-IV-VIII rings=RIKP stecker=EY FP IZ JL OV RT
+Hybrid gen 3/8 pop=10 blockB_greeks=0
+  gen-best  fitness=16/72 tmpl=tile:UEBUNG IC=0.0481 pos=XBNJ | UKWB beta III-IV-VIII rings=RIKP stecker=EY FP IZ JL OV RT
+  all-time  fitness=16 tmpl=tile:UEBUNG pos=XBNJ | UKWB beta III-IV-VIII rings=RIKP stecker=EY FP IZ JL OV RT
+Hybrid gen 4/8 pop=10 blockB_greeks=0
+  gen-best  fitness=17/72 tmpl=tile:ACHSEDM IC=0.0368 pos=NMHM | UKWB beta VIII-III-IV rings=RAKP stecker=AZ BC DK EY FP JL OV RT SU
+  all-time  fitness=17 tmpl=tile:ACHSEDM pos=NMHM | UKWB beta VIII-III-IV rings=RAKP stecker=AZ BC DK EY FP JL OV RT SU
+Hybrid gen 5/8 pop=10 blockB_greeks=0
+  gen-best  fitness=18/72 tmpl=tile:ACHSEDM IC=0.0340 pos=NMHM | UKWB beta VIII-III-IV rings=RAKP stecker=AZ BC DK EY FP JL RT SU
+  all-time  fitness=18 tmpl=tile:ACHSEDM pos=NMHM | UKWB beta VIII-III-IV rings=RAKP stecker=AZ BC DK EY FP JL RT SU
+Hybrid gen 6/8 pop=10 blockB_greeks=0
+  gen-best  fitness=18/72 tmpl=tile:ACHSEDM IC=0.0340 pos=NMHM | UKWB beta VIII-III-IV rings=RAKP stecker=AZ BC DK EY FP JL RT SU
+  all-time  fitness=18 tmpl=tile:ACHSEDM pos=NMHM | UKWB beta VIII-III-IV rings=RAKP stecker=AZ BC DK EY FP JL RT SU
+Hybrid gen 7/8 pop=10 blockB_greeks=0
+  gen-best  fitness=18/72 tmpl=tile:ACHSEDM IC=0.0340 pos=NMHM | UKWB beta VIII-III-IV rings=RAKP stecker=AZ BC DK EY FP JL RT SU
+  all-time  fitness=18 tmpl=tile:ACHSEDM pos=NMHM | UKWB beta VIII-III-IV rings=RAKP stecker=AZ BC DK EY FP JL RT SU
+Hybrid gen 8/8 pop=10 blockB_greeks=0
+  gen-best  fitness=18/72 tmpl=tile:ACHSEDM IC=0.0340 pos=NMHM | UKWB beta VIII-III-IV rings=RAKP stecker=AZ BC DK EY FP JL RT SU
+  all-time  fitness=18 tmpl=tile:ACHSEDM pos=NMHM | UKWB beta VIII-III-IV rings=RAKP stecker=AZ BC DK EY FP JL RT SU
+HELUT — Stochastic Bombe vs P1030680 (Thetis template bank)
+Ciphertext: JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF
+Fitness: letter-match on masked templates ('.' = don't-care); German-ness ignored
+Templates (6, minConstrained=14):
+  [72] tile:UEBUNG
+  [72] tile:AUSBILDUNG
+  [72] tile:THETIS
+  [72] tile:ACHSEDM
+  [70] radio:VVVUUUVIRSOBENNU
+  [39] body:ANANFUNFUUUFLOTT@15
+
+Config: pop=10 gens=8 maxPlugs=10 blockB_greeks=0 samples subspace=potsdam-neighbourhood WO=6 evolveShell=true freeRings=true ringSeeds=AAAA,AACU,VCCH fitness=KPA templates×6 kpaHill=6
+
+
+Elapsed: 10.8 s
+Best shell: UKWB beta VIII-III-IV rings=RAKP stecker=AZ BC DK EY FP JL RT SU
+Best hit: partition=kpa-26^4 tmpl=tile:ACHSEDM pos=NMHM score=18.0000 IC=0.0340
+Plain: RJHIOWPJCMUMFRAPISFZMZCPSECEHYXSEOAACDWUDMHCLXKDWDBQPFBRAQNZADGSENZQOIVY
+Template match: 18/72 on tile:ACHSEDM
+*** No template fully satisfied — continue bank / operators ***
+See ASIC_CRACKER.md / evolution-hybridization.md / stochastic-bombe.md

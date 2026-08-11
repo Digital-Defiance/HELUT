@@ -1,0 +1,756 @@
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 24…24)
+Shell evolution: OFF freeRings=false WO=15 ringSeeds=19 subspace=potsdam-neighbourhood
+Seeded population[0..<22] from Welchman quarantine (22 candidate(s))
+  seed[0] UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+  seed[1] UKWC gamma III-IV-VIII rings=AAAJ stecker=CH DU EZ FS GT JR LX OV PY
+  seed[2] UKWC gamma III-IV-VIII rings=AAAW stecker=CH DU EZ FS GT JR LX OV PY
+  seed[3] UKWC gamma V-VIII-III rings=AAAP stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[4] UKWC gamma V-VIII-III rings=AAAR stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[5] UKWC gamma V-VIII-III rings=AAAO stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[6] UKWB gamma V-II-VIII rings=AAAL stecker=BW DV EX GN HM JT KR LZ OU PY
+  seed[7] UKWB gamma V-II-VIII rings=AAAY stecker=BW DV EX GN HM JT KR LZ OU PY
+  seed[8] UKWB beta III-IV-VII rings=AAAG stecker=AV BG CS DZ EQ JY KN MO PU
+  seed[9] UKWB beta III-IV-VII rings=AAAT stecker=AV BG CS DZ EQ JY KN MO PU
+  seed[10] UKWC gamma V-VIII-III rings=AAAQ stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[11] UKWC gamma VII-I-III rings=AAAR stecker=AE FM GK HS JY OT PU RW VZ
+  seed[12] UKWC gamma VIII-II-I rings=AAAI stecker=AU CJ DS EL FH IZ MV NO QR TX
+  seed[13] UKWC beta IV-VIII-III rings=AAAX stecker=AJ BL EO GP KR MY QZ TU WX
+  seed[14] UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  seed[15] UKWC beta VII-IV-VIII rings=AAAR stecker=AO BH CM FP GS KQ NU RX TV YZ
+  seed[16] UKWC gamma II-VII-VI rings=AAAL stecker=AS BY EV GT HJ KN LM PU RW
+  seed[17] UKWC gamma II-VII-VI rings=AAAY stecker=AS BY EV GT HJ KN LM PU RW
+  seed[18] UKWC beta VII-VI-III rings=AAAZ stecker=AT BL CE DN GS HV IZ KP UW
+  seed[19] UKWC gamma VII-VIII-V rings=AAAD stecker=AU BF CN ES GP IZ KT MO RW VY
+  seed[20] UKWB gamma VI-V-III rings=AAAP stecker=BT CO DJ FV GN HQ IY LM SU XZ
+  seed[21] UKWB gamma V-VIII-II rings=AAAK stecker=AT BO DH EN FX GW IR LZ MU SV
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  9/24 (38%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@1 IC=0.0325 pos=BWSD | UKWB gamma V-II-VIII rings=AAAL stecker=BW DV EX GN HM JT KR LZ OU PY
+  all-time  9/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@1 pos=BWSD | UKWB gamma V-II-VIII rings=AAAL stecker=BW DV EX GN HM JT KR LZ OU PY
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@1 IC=0.0329 pos=BWSD | UKWB gamma V-II-VIII rings=AAAL stecker=BW DV EX FH GN JT KR LZ OU PY
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@1 pos=BWSD | UKWB gamma V-II-VIII rings=AAAL stecker=BW DV EX FH GN JT KR LZ OU PY
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@1 IC=0.0376 pos=BWSD | UKWB gamma V-II-VIII rings=AAAL stecker=AB DV EX FH GN JT KR LZ OU PY
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@1 pos=BWSD | UKWB gamma V-II-VIII rings=AAAL stecker=AB DV EX FH GN JT KR LZ OU PY
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@1 IC=0.0376 pos=BWSD | UKWB gamma V-II-VIII rings=AAAL stecker=AB DV EX FH GN JT KR LZ OU PY
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@1 pos=BWSD | UKWB gamma V-II-VIII rings=AAAL stecker=AB DV EX FH GN JT KR LZ OU PY
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@1 IC=0.0376 pos=BWSD | UKWB gamma V-II-VIII rings=AAAL stecker=AB DV EX FH GN JT KR LZ OU PY
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@1 pos=BWSD | UKWB gamma V-II-VIII rings=AAAL stecker=AB DV EX FH GN JT KR LZ OU PY
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@1 IC=0.0376 pos=BWSD | UKWB gamma V-II-VIII rings=AAAL stecker=AB DV EX FH GN JT KR LZ OU PY
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@1 pos=BWSD | UKWB gamma V-II-VIII rings=AAAL stecker=AB DV EX FH GN JT KR LZ OU PY
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@1 IC=0.0376 pos=BWSD | UKWB gamma V-II-VIII rings=AAAL stecker=AB DV EX FH GN JT KR LZ OU PY
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@1 pos=BWSD | UKWB gamma V-II-VIII rings=AAAL stecker=AB DV EX FH GN JT KR LZ OU PY
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  12/24 (50%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@1 IC=0.0411 pos=BWSD | UKWB gamma V-II-VIII rings=AAAL stecker=AB CT DV EX FH GN KR LZ OU PY
+  all-time  12/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@1 pos=BWSD | UKWB gamma V-II-VIII rings=AAAL stecker=AB CT DV EX FH GN KR LZ OU PY
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  12/24 (50%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@1 IC=0.0411 pos=BWSD | UKWB gamma V-II-VIII rings=AAAL stecker=AB CT DV EX FH GN KR LZ OU PY
+  all-time  12/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@1 pos=BWSD | UKWB gamma V-II-VIII rings=AAAL stecker=AB CT DV EX FH GN KR LZ OU PY
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  12/24 (50%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@1 IC=0.0411 pos=BWSD | UKWB gamma V-II-VIII rings=AAAL stecker=AB CT DV EX FH GN KR LZ OU PY
+  all-time  12/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@1 pos=BWSD | UKWB gamma V-II-VIII rings=AAAL stecker=AB CT DV EX FH GN KR LZ OU PY
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  12/24 (50%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@1 IC=0.0411 pos=BWSD | UKWB gamma V-II-VIII rings=AAAL stecker=AB CT DV EX FH GN KR LZ OU PY
+  all-time  12/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@1 pos=BWSD | UKWB gamma V-II-VIII rings=AAAL stecker=AB CT DV EX FH GN KR LZ OU PY
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  12/24 (50%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@1 IC=0.0411 pos=BWSD | UKWB gamma V-II-VIII rings=AAAL stecker=AB CT DV EX FH GN KR LZ OU PY
+  all-time  12/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@1 pos=BWSD | UKWB gamma V-II-VIII rings=AAAL stecker=AB CT DV EX FH GN KR LZ OU PY
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 24…24)
+Shell evolution: OFF freeRings=false WO=15 ringSeeds=19 subspace=potsdam-neighbourhood
+Seeded population[0..<22] from Welchman quarantine (22 candidate(s))
+  seed[0] UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+  seed[1] UKWC gamma III-IV-VIII rings=AAAJ stecker=CH DU EZ FS GT JR LX OV PY
+  seed[2] UKWC gamma III-IV-VIII rings=AAAW stecker=CH DU EZ FS GT JR LX OV PY
+  seed[3] UKWC gamma V-VIII-III rings=AAAP stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[4] UKWC gamma V-VIII-III rings=AAAR stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[5] UKWC gamma V-VIII-III rings=AAAO stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[6] UKWB gamma V-II-VIII rings=AAAL stecker=BW DV EX GN HM JT KR LZ OU PY
+  seed[7] UKWB gamma V-II-VIII rings=AAAY stecker=BW DV EX GN HM JT KR LZ OU PY
+  seed[8] UKWB beta III-IV-VII rings=AAAG stecker=AV BG CS DZ EQ JY KN MO PU
+  seed[9] UKWB beta III-IV-VII rings=AAAT stecker=AV BG CS DZ EQ JY KN MO PU
+  seed[10] UKWC gamma V-VIII-III rings=AAAQ stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[11] UKWC gamma VII-I-III rings=AAAR stecker=AE FM GK HS JY OT PU RW VZ
+  seed[12] UKWC gamma VIII-II-I rings=AAAI stecker=AU CJ DS EL FH IZ MV NO QR TX
+  seed[13] UKWC beta IV-VIII-III rings=AAAX stecker=AJ BL EO GP KR MY QZ TU WX
+  seed[14] UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  seed[15] UKWC beta VII-IV-VIII rings=AAAR stecker=AO BH CM FP GS KQ NU RX TV YZ
+  seed[16] UKWC gamma II-VII-VI rings=AAAL stecker=AS BY EV GT HJ KN LM PU RW
+  seed[17] UKWC gamma II-VII-VI rings=AAAY stecker=AS BY EV GT HJ KN LM PU RW
+  seed[18] UKWC beta VII-VI-III rings=AAAZ stecker=AT BL CE DN GS HV IZ KP UW
+  seed[19] UKWC gamma VII-VIII-V rings=AAAD stecker=AU BF CN ES GP IZ KT MO RW VY
+  seed[20] UKWB gamma VI-V-III rings=AAAP stecker=BT CO DJ FV GN HQ IY LM SU XZ
+  seed[21] UKWB gamma V-VIII-II rings=AAAK stecker=AT BO DH EN FX GW IR LZ MU SV
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  9/24 (38%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@10 IC=0.0411 pos=ZTKL | UKWB gamma V-VIII-II rings=AAAK stecker=AT BO DH EN FX GW IR LZ MU SV
+  all-time  9/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@10 pos=ZTKL | UKWB gamma V-VIII-II rings=AAAK stecker=AT BO DH EN FX GW IR LZ MU SV
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  9/24 (38%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@10 IC=0.0411 pos=ZTKL | UKWB gamma V-VIII-II rings=AAAK stecker=AT BO DH EN FX GW IR LZ MU SV
+  all-time  9/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@10 pos=ZTKL | UKWB gamma V-VIII-II rings=AAAK stecker=AT BO DH EN FX GW IR LZ MU SV
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@10 IC=0.0426 pos=ZTKL | UKWB gamma V-VIII-II rings=AAAK stecker=AT BO CM DH EN FX GW IR LZ SV
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@10 pos=ZTKL | UKWB gamma V-VIII-II rings=AAAK stecker=AT BO CM DH EN FX GW IR LZ SV
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@10 IC=0.0415 pos=ZTKL | UKWB gamma V-VIII-II rings=AAAK stecker=AT BO CM DH EN GW IR LZ QY SV
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@10 pos=ZTKL | UKWB gamma V-VIII-II rings=AAAK stecker=AT BO CM DH EN GW IR LZ QY SV
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@10 IC=0.0415 pos=ZTKL | UKWB gamma V-VIII-II rings=AAAK stecker=AT BO CM DH EN GW IR LZ QY SV
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@10 pos=ZTKL | UKWB gamma V-VIII-II rings=AAAK stecker=AT BO CM DH EN GW IR LZ QY SV
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@10 IC=0.0415 pos=ZTKL | UKWB gamma V-VIII-II rings=AAAK stecker=AT BO CM DH EN GW IR LZ QY SV
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@10 pos=ZTKL | UKWB gamma V-VIII-II rings=AAAK stecker=AT BO CM DH EN GW IR LZ QY SV
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@10 IC=0.0415 pos=ZTKL | UKWB gamma V-VIII-II rings=AAAK stecker=AT BO CM DH EN GW IR LZ QY SV
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@10 pos=ZTKL | UKWB gamma V-VIII-II rings=AAAK stecker=AT BO CM DH EN GW IR LZ QY SV
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@10 IC=0.0415 pos=ZTKL | UKWB gamma V-VIII-II rings=AAAK stecker=AT BO CM DH EN GW IR LZ QY SV
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@10 pos=ZTKL | UKWB gamma V-VIII-II rings=AAAK stecker=AT BO CM DH EN GW IR LZ QY SV
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  12/24 (50%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@10 IC=0.0403 pos=BZLD | UKWB gamma IV-III-VIII rings=AAAA stecker=AT DF EO GK HU IN JY RW SX
+  all-time  12/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@10 pos=BZLD | UKWB gamma IV-III-VIII rings=AAAA stecker=AT DF EO GK HU IN JY RW SX
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  13/24 (54%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@10 IC=0.0407 pos=BZLD | UKWB gamma IV-III-VIII rings=AAAA stecker=AT BP DF EO GK HU IN JY RW SX
+  all-time  13/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@10 pos=BZLD | UKWB gamma IV-III-VIII rings=AAAA stecker=AT BP DF EO GK HU IN JY RW SX
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  14/24 (58%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@10 IC=0.0399 pos=BZLD | UKWB gamma IV-III-VIII rings=AAAA stecker=AT BP DF EO GK HU IN JY MX RW
+  all-time  14/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@10 pos=BZLD | UKWB gamma IV-III-VIII rings=AAAA stecker=AT BP DF EO GK HU IN JY MX RW
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  14/24 (58%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@10 IC=0.0399 pos=BZLD | UKWB gamma IV-III-VIII rings=AAAA stecker=AT BP DF EO GK HU IN JY MX RW
+  all-time  14/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@10 pos=BZLD | UKWB gamma IV-III-VIII rings=AAAA stecker=AT BP DF EO GK HU IN JY MX RW
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 24…24)
+Shell evolution: OFF freeRings=false WO=15 ringSeeds=19 subspace=potsdam-neighbourhood
+Seeded population[0..<22] from Welchman quarantine (22 candidate(s))
+  seed[0] UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+  seed[1] UKWC gamma III-IV-VIII rings=AAAJ stecker=CH DU EZ FS GT JR LX OV PY
+  seed[2] UKWC gamma III-IV-VIII rings=AAAW stecker=CH DU EZ FS GT JR LX OV PY
+  seed[3] UKWC gamma V-VIII-III rings=AAAP stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[4] UKWC gamma V-VIII-III rings=AAAR stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[5] UKWC gamma V-VIII-III rings=AAAO stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[6] UKWB gamma V-II-VIII rings=AAAL stecker=BW DV EX GN HM JT KR LZ OU PY
+  seed[7] UKWB gamma V-II-VIII rings=AAAY stecker=BW DV EX GN HM JT KR LZ OU PY
+  seed[8] UKWB beta III-IV-VII rings=AAAG stecker=AV BG CS DZ EQ JY KN MO PU
+  seed[9] UKWB beta III-IV-VII rings=AAAT stecker=AV BG CS DZ EQ JY KN MO PU
+  seed[10] UKWC gamma V-VIII-III rings=AAAQ stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[11] UKWC gamma VII-I-III rings=AAAR stecker=AE FM GK HS JY OT PU RW VZ
+  seed[12] UKWC gamma VIII-II-I rings=AAAI stecker=AU CJ DS EL FH IZ MV NO QR TX
+  seed[13] UKWC beta IV-VIII-III rings=AAAX stecker=AJ BL EO GP KR MY QZ TU WX
+  seed[14] UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  seed[15] UKWC beta VII-IV-VIII rings=AAAR stecker=AO BH CM FP GS KQ NU RX TV YZ
+  seed[16] UKWC gamma II-VII-VI rings=AAAL stecker=AS BY EV GT HJ KN LM PU RW
+  seed[17] UKWC gamma II-VII-VI rings=AAAY stecker=AS BY EV GT HJ KN LM PU RW
+  seed[18] UKWC beta VII-VI-III rings=AAAZ stecker=AT BL CE DN GS HV IZ KP UW
+  seed[19] UKWC gamma VII-VIII-V rings=AAAD stecker=AU BF CN ES GP IZ KT MO RW VY
+  seed[20] UKWB gamma VI-V-III rings=AAAP stecker=BT CO DJ FV GN HQ IY LM SU XZ
+  seed[21] UKWB gamma V-VIII-II rings=AAAK stecker=AT BO DH EN FX GW IR LZ MU SV
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@13 IC=0.0383 pos=MMBR | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@13 pos=MMBR | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@13 IC=0.0383 pos=MMBR | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@13 pos=MMBR | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@13 IC=0.0383 pos=MMBR | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@13 pos=MMBR | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@13 IC=0.0383 pos=MMBR | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@13 pos=MMBR | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@13 IC=0.0383 pos=MMBR | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@13 pos=MMBR | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@13 IC=0.0383 pos=MMBR | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@13 pos=MMBR | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@13 IC=0.0383 pos=MMBR | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@13 pos=MMBR | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@13 IC=0.0383 pos=MMBR | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@13 pos=MMBR | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@13 IC=0.0383 pos=MMBR | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@13 pos=MMBR | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@13 IC=0.0383 pos=MMBR | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@13 pos=MMBR | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@13 IC=0.0383 pos=MMBR | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@13 pos=MMBR | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@13 IC=0.0383 pos=MMBR | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@13 pos=MMBR | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 24…24)
+Shell evolution: OFF freeRings=false WO=15 ringSeeds=19 subspace=potsdam-neighbourhood
+Seeded population[0..<22] from Welchman quarantine (22 candidate(s))
+  seed[0] UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+  seed[1] UKWC gamma III-IV-VIII rings=AAAJ stecker=CH DU EZ FS GT JR LX OV PY
+  seed[2] UKWC gamma III-IV-VIII rings=AAAW stecker=CH DU EZ FS GT JR LX OV PY
+  seed[3] UKWC gamma V-VIII-III rings=AAAP stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[4] UKWC gamma V-VIII-III rings=AAAR stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[5] UKWC gamma V-VIII-III rings=AAAO stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[6] UKWB gamma V-II-VIII rings=AAAL stecker=BW DV EX GN HM JT KR LZ OU PY
+  seed[7] UKWB gamma V-II-VIII rings=AAAY stecker=BW DV EX GN HM JT KR LZ OU PY
+  seed[8] UKWB beta III-IV-VII rings=AAAG stecker=AV BG CS DZ EQ JY KN MO PU
+  seed[9] UKWB beta III-IV-VII rings=AAAT stecker=AV BG CS DZ EQ JY KN MO PU
+  seed[10] UKWC gamma V-VIII-III rings=AAAQ stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[11] UKWC gamma VII-I-III rings=AAAR stecker=AE FM GK HS JY OT PU RW VZ
+  seed[12] UKWC gamma VIII-II-I rings=AAAI stecker=AU CJ DS EL FH IZ MV NO QR TX
+  seed[13] UKWC beta IV-VIII-III rings=AAAX stecker=AJ BL EO GP KR MY QZ TU WX
+  seed[14] UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  seed[15] UKWC beta VII-IV-VIII rings=AAAR stecker=AO BH CM FP GS KQ NU RX TV YZ
+  seed[16] UKWC gamma II-VII-VI rings=AAAL stecker=AS BY EV GT HJ KN LM PU RW
+  seed[17] UKWC gamma II-VII-VI rings=AAAY stecker=AS BY EV GT HJ KN LM PU RW
+  seed[18] UKWC beta VII-VI-III rings=AAAZ stecker=AT BL CE DN GS HV IZ KP UW
+  seed[19] UKWC gamma VII-VIII-V rings=AAAD stecker=AU BF CN ES GP IZ KT MO RW VY
+  seed[20] UKWB gamma VI-V-III rings=AAAP stecker=BT CO DJ FV GN HQ IY LM SU XZ
+  seed[21] UKWB gamma V-VIII-II rings=AAAK stecker=AT BO DH EN FX GW IR LZ MU SV
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  9/24 (38%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@15 IC=0.0407 pos=IJWJ | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+  all-time  9/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@15 pos=IJWJ | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@15 IC=0.0411 pos=RBAR | UKWC gamma III-IV-VIII rings=AAAJ stecker=CH DU FS GT JR LX OV PY QZ
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@15 pos=RBAR | UKWC gamma III-IV-VIII rings=AAAJ stecker=CH DU FS GT JR LX OV PY QZ
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@15 IC=0.0411 pos=RBAR | UKWC gamma III-IV-VIII rings=AAAJ stecker=CH DU FS GT JR LX OV PY QZ
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@15 pos=RBAR | UKWC gamma III-IV-VIII rings=AAAJ stecker=CH DU FS GT JR LX OV PY QZ
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@15 IC=0.0411 pos=RBAR | UKWC gamma III-IV-VIII rings=AAAJ stecker=CH DU FS GT JR LX OV PY QZ
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@15 pos=RBAR | UKWC gamma III-IV-VIII rings=AAAJ stecker=CH DU FS GT JR LX OV PY QZ
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@15 IC=0.0411 pos=RBAR | UKWC gamma III-IV-VIII rings=AAAJ stecker=CH DU FS GT JR LX OV PY QZ
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@15 pos=RBAR | UKWC gamma III-IV-VIII rings=AAAJ stecker=CH DU FS GT JR LX OV PY QZ
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@15 IC=0.0360 pos=SFZZ | UKWB beta III-IV-VII rings=AAAG stecker=AP BW CX EQ FJ GN HM IS LZ OU
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@15 pos=SFZZ | UKWB beta III-IV-VII rings=AAAG stecker=AP BW CX EQ FJ GN HM IS LZ OU
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@15 IC=0.0360 pos=SFZZ | UKWB beta III-IV-VII rings=AAAG stecker=AP BW CX EQ FJ GN HM IS LZ OU
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@15 pos=SFZZ | UKWB beta III-IV-VII rings=AAAG stecker=AP BW CX EQ FJ GN HM IS LZ OU
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@15 IC=0.0360 pos=SFZZ | UKWB beta III-IV-VII rings=AAAG stecker=AP BW CX EQ FJ GN HM IS LZ OU
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@15 pos=SFZZ | UKWB beta III-IV-VII rings=AAAG stecker=AP BW CX EQ FJ GN HM IS LZ OU
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@15 IC=0.0360 pos=SFZZ | UKWB beta III-IV-VII rings=AAAG stecker=AP BW CX EQ FJ GN HM IS LZ OU
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@15 pos=SFZZ | UKWB beta III-IV-VII rings=AAAG stecker=AP BW CX EQ FJ GN HM IS LZ OU
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@15 IC=0.0360 pos=SFZZ | UKWB beta III-IV-VII rings=AAAG stecker=AP BW CX EQ FJ GN HM IS LZ OU
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@15 pos=SFZZ | UKWB beta III-IV-VII rings=AAAG stecker=AP BW CX EQ FJ GN HM IS LZ OU
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@15 IC=0.0360 pos=SFZZ | UKWB beta III-IV-VII rings=AAAG stecker=AP BW CX EQ FJ GN HM IS LZ OU
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@15 pos=SFZZ | UKWB beta III-IV-VII rings=AAAG stecker=AP BW CX EQ FJ GN HM IS LZ OU
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@15 IC=0.0360 pos=SFZZ | UKWB beta III-IV-VII rings=AAAG stecker=AP BW CX EQ FJ GN HM IS LZ OU
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@15 pos=SFZZ | UKWB beta III-IV-VII rings=AAAG stecker=AP BW CX EQ FJ GN HM IS LZ OU
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 24…24)
+Shell evolution: OFF freeRings=false WO=15 ringSeeds=19 subspace=potsdam-neighbourhood
+Seeded population[0..<22] from Welchman quarantine (22 candidate(s))
+  seed[0] UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+  seed[1] UKWC gamma III-IV-VIII rings=AAAJ stecker=CH DU EZ FS GT JR LX OV PY
+  seed[2] UKWC gamma III-IV-VIII rings=AAAW stecker=CH DU EZ FS GT JR LX OV PY
+  seed[3] UKWC gamma V-VIII-III rings=AAAP stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[4] UKWC gamma V-VIII-III rings=AAAR stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[5] UKWC gamma V-VIII-III rings=AAAO stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[6] UKWB gamma V-II-VIII rings=AAAL stecker=BW DV EX GN HM JT KR LZ OU PY
+  seed[7] UKWB gamma V-II-VIII rings=AAAY stecker=BW DV EX GN HM JT KR LZ OU PY
+  seed[8] UKWB beta III-IV-VII rings=AAAG stecker=AV BG CS DZ EQ JY KN MO PU
+  seed[9] UKWB beta III-IV-VII rings=AAAT stecker=AV BG CS DZ EQ JY KN MO PU
+  seed[10] UKWC gamma V-VIII-III rings=AAAQ stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[11] UKWC gamma VII-I-III rings=AAAR stecker=AE FM GK HS JY OT PU RW VZ
+  seed[12] UKWC gamma VIII-II-I rings=AAAI stecker=AU CJ DS EL FH IZ MV NO QR TX
+  seed[13] UKWC beta IV-VIII-III rings=AAAX stecker=AJ BL EO GP KR MY QZ TU WX
+  seed[14] UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  seed[15] UKWC beta VII-IV-VIII rings=AAAR stecker=AO BH CM FP GS KQ NU RX TV YZ
+  seed[16] UKWC gamma II-VII-VI rings=AAAL stecker=AS BY EV GT HJ KN LM PU RW
+  seed[17] UKWC gamma II-VII-VI rings=AAAY stecker=AS BY EV GT HJ KN LM PU RW
+  seed[18] UKWC beta VII-VI-III rings=AAAZ stecker=AT BL CE DN GS HV IZ KP UW
+  seed[19] UKWC gamma VII-VIII-V rings=AAAD stecker=AU BF CN ES GP IZ KT MO RW VY
+  seed[20] UKWB gamma VI-V-III rings=AAAP stecker=BT CO DJ FV GN HQ IY LM SU XZ
+  seed[21] UKWB gamma V-VIII-II rings=AAAK stecker=AT BO DH EN FX GW IR LZ MU SV
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@17 IC=0.0376 pos=BLLU | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@17 pos=BLLU | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@17 IC=0.0376 pos=BLLU | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@17 pos=BLLU | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@17 IC=0.0376 pos=BLLU | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@17 pos=BLLU | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@17 IC=0.0376 pos=BLLU | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@17 pos=BLLU | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@17 IC=0.0376 pos=BLLU | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@17 pos=BLLU | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@17 IC=0.0376 pos=BLLU | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@17 pos=BLLU | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@17 IC=0.0376 pos=BLLU | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@17 pos=BLLU | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@17 IC=0.0376 pos=BLLU | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@17 pos=BLLU | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@17 IC=0.0376 pos=BLLU | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@17 pos=BLLU | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@17 IC=0.0376 pos=BLLU | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@17 pos=BLLU | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@17 IC=0.0376 pos=BLLU | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@17 pos=BLLU | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@17 IC=0.0376 pos=BLLU | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@17 pos=BLLU | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 24…24)
+Shell evolution: OFF freeRings=false WO=15 ringSeeds=19 subspace=potsdam-neighbourhood
+Seeded population[0..<22] from Welchman quarantine (22 candidate(s))
+  seed[0] UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+  seed[1] UKWC gamma III-IV-VIII rings=AAAJ stecker=CH DU EZ FS GT JR LX OV PY
+  seed[2] UKWC gamma III-IV-VIII rings=AAAW stecker=CH DU EZ FS GT JR LX OV PY
+  seed[3] UKWC gamma V-VIII-III rings=AAAP stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[4] UKWC gamma V-VIII-III rings=AAAR stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[5] UKWC gamma V-VIII-III rings=AAAO stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[6] UKWB gamma V-II-VIII rings=AAAL stecker=BW DV EX GN HM JT KR LZ OU PY
+  seed[7] UKWB gamma V-II-VIII rings=AAAY stecker=BW DV EX GN HM JT KR LZ OU PY
+  seed[8] UKWB beta III-IV-VII rings=AAAG stecker=AV BG CS DZ EQ JY KN MO PU
+  seed[9] UKWB beta III-IV-VII rings=AAAT stecker=AV BG CS DZ EQ JY KN MO PU
+  seed[10] UKWC gamma V-VIII-III rings=AAAQ stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[11] UKWC gamma VII-I-III rings=AAAR stecker=AE FM GK HS JY OT PU RW VZ
+  seed[12] UKWC gamma VIII-II-I rings=AAAI stecker=AU CJ DS EL FH IZ MV NO QR TX
+  seed[13] UKWC beta IV-VIII-III rings=AAAX stecker=AJ BL EO GP KR MY QZ TU WX
+  seed[14] UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  seed[15] UKWC beta VII-IV-VIII rings=AAAR stecker=AO BH CM FP GS KQ NU RX TV YZ
+  seed[16] UKWC gamma II-VII-VI rings=AAAL stecker=AS BY EV GT HJ KN LM PU RW
+  seed[17] UKWC gamma II-VII-VI rings=AAAY stecker=AS BY EV GT HJ KN LM PU RW
+  seed[18] UKWC beta VII-VI-III rings=AAAZ stecker=AT BL CE DN GS HV IZ KP UW
+  seed[19] UKWC gamma VII-VIII-V rings=AAAD stecker=AU BF CN ES GP IZ KT MO RW VY
+  seed[20] UKWB gamma VI-V-III rings=AAAP stecker=BT CO DJ FV GN HQ IY LM SU XZ
+  seed[21] UKWB gamma V-VIII-II rings=AAAK stecker=AT BO DH EN FX GW IR LZ MU SV
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  9/24 (38%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@18 IC=0.0450 pos=XVXV | UKWC gamma III-IV-VIII rings=AAAJ stecker=CH DU EZ FS GT JR LX OV PY
+  all-time  9/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@18 pos=XVXV | UKWC gamma III-IV-VIII rings=AAAJ stecker=CH DU EZ FS GT JR LX OV PY
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@18 IC=0.0466 pos=XVXI | UKWC gamma III-IV-VIII rings=AAAW stecker=CH EZ FS GT JR LW NU OV PY
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@18 pos=XVXI | UKWC gamma III-IV-VIII rings=AAAW stecker=CH EZ FS GT JR LW NU OV PY
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@18 IC=0.0466 pos=XVXI | UKWC gamma III-IV-VIII rings=AAAW stecker=CH EZ FS GT JR LW NU OV PY
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@18 pos=XVXI | UKWC gamma III-IV-VIII rings=AAAW stecker=CH EZ FS GT JR LW NU OV PY
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@18 IC=0.0466 pos=XVXI | UKWC gamma III-IV-VIII rings=AAAW stecker=CH EZ FS GT JR LW NU OV PY
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@18 pos=XVXI | UKWC gamma III-IV-VIII rings=AAAW stecker=CH EZ FS GT JR LW NU OV PY
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@18 IC=0.0466 pos=XVXI | UKWC gamma III-IV-VIII rings=AAAW stecker=CH EZ FS GT JR LW NU OV PY
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@18 pos=XVXI | UKWC gamma III-IV-VIII rings=AAAW stecker=CH EZ FS GT JR LW NU OV PY
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@18 IC=0.0466 pos=XVXI | UKWC gamma III-IV-VIII rings=AAAW stecker=CH EZ FS GT JR LW NU OV PY
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@18 pos=XVXI | UKWC gamma III-IV-VIII rings=AAAW stecker=CH EZ FS GT JR LW NU OV PY
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@18 IC=0.0466 pos=XVXI | UKWC gamma III-IV-VIII rings=AAAW stecker=CH EZ FS GT JR LW NU OV PY
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@18 pos=XVXI | UKWC gamma III-IV-VIII rings=AAAW stecker=CH EZ FS GT JR LW NU OV PY
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@18 IC=0.0466 pos=XVXI | UKWC gamma III-IV-VIII rings=AAAW stecker=CH EZ FS GT JR LW NU OV PY
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@18 pos=XVXI | UKWC gamma III-IV-VIII rings=AAAW stecker=CH EZ FS GT JR LW NU OV PY
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@18 IC=0.0466 pos=XVXI | UKWC gamma III-IV-VIII rings=AAAW stecker=CH EZ FS GT JR LW NU OV PY
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@18 pos=XVXI | UKWC gamma III-IV-VIII rings=AAAW stecker=CH EZ FS GT JR LW NU OV PY
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@18 IC=0.0466 pos=XVXI | UKWC gamma III-IV-VIII rings=AAAW stecker=CH EZ FS GT JR LW NU OV PY
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@18 pos=XVXI | UKWC gamma III-IV-VIII rings=AAAW stecker=CH EZ FS GT JR LW NU OV PY
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@18 IC=0.0466 pos=XVXI | UKWC gamma III-IV-VIII rings=AAAW stecker=CH EZ FS GT JR LW NU OV PY
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@18 pos=XVXI | UKWC gamma III-IV-VIII rings=AAAW stecker=CH EZ FS GT JR LW NU OV PY
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@18 IC=0.0466 pos=XVXI | UKWC gamma III-IV-VIII rings=AAAW stecker=CH EZ FS GT JR LW NU OV PY
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@18 pos=XVXI | UKWC gamma III-IV-VIII rings=AAAW stecker=CH EZ FS GT JR LW NU OV PY
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 24…24)
+Shell evolution: OFF freeRings=false WO=15 ringSeeds=19 subspace=potsdam-neighbourhood
+Seeded population[0..<22] from Welchman quarantine (22 candidate(s))
+  seed[0] UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+  seed[1] UKWC gamma III-IV-VIII rings=AAAJ stecker=CH DU EZ FS GT JR LX OV PY
+  seed[2] UKWC gamma III-IV-VIII rings=AAAW stecker=CH DU EZ FS GT JR LX OV PY
+  seed[3] UKWC gamma V-VIII-III rings=AAAP stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[4] UKWC gamma V-VIII-III rings=AAAR stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[5] UKWC gamma V-VIII-III rings=AAAO stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[6] UKWB gamma V-II-VIII rings=AAAL stecker=BW DV EX GN HM JT KR LZ OU PY
+  seed[7] UKWB gamma V-II-VIII rings=AAAY stecker=BW DV EX GN HM JT KR LZ OU PY
+  seed[8] UKWB beta III-IV-VII rings=AAAG stecker=AV BG CS DZ EQ JY KN MO PU
+  seed[9] UKWB beta III-IV-VII rings=AAAT stecker=AV BG CS DZ EQ JY KN MO PU
+  seed[10] UKWC gamma V-VIII-III rings=AAAQ stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[11] UKWC gamma VII-I-III rings=AAAR stecker=AE FM GK HS JY OT PU RW VZ
+  seed[12] UKWC gamma VIII-II-I rings=AAAI stecker=AU CJ DS EL FH IZ MV NO QR TX
+  seed[13] UKWC beta IV-VIII-III rings=AAAX stecker=AJ BL EO GP KR MY QZ TU WX
+  seed[14] UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  seed[15] UKWC beta VII-IV-VIII rings=AAAR stecker=AO BH CM FP GS KQ NU RX TV YZ
+  seed[16] UKWC gamma II-VII-VI rings=AAAL stecker=AS BY EV GT HJ KN LM PU RW
+  seed[17] UKWC gamma II-VII-VI rings=AAAY stecker=AS BY EV GT HJ KN LM PU RW
+  seed[18] UKWC beta VII-VI-III rings=AAAZ stecker=AT BL CE DN GS HV IZ KP UW
+  seed[19] UKWC gamma VII-VIII-V rings=AAAD stecker=AU BF CN ES GP IZ KT MO RW VY
+  seed[20] UKWB gamma VI-V-III rings=AAAP stecker=BT CO DJ FV GN HQ IY LM SU XZ
+  seed[21] UKWB gamma V-VIII-II rings=AAAK stecker=AT BO DH EN FX GW IR LZ MU SV
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@2 IC=0.0407 pos=ETAP | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@2 pos=ETAP | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@2 IC=0.0407 pos=ETAP | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@2 pos=ETAP | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@2 IC=0.0407 pos=ETAP | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@2 pos=ETAP | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  12/24 (50%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@2 IC=0.0415 pos=ETAP | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM GS JX KQ NU PR TV YZ
+  all-time  12/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@2 pos=ETAP | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM GS JX KQ NU PR TV YZ
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  12/24 (50%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@2 IC=0.0415 pos=ETAP | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM GS JX KQ NU PR TV YZ
+  all-time  12/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@2 pos=ETAP | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM GS JX KQ NU PR TV YZ
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  12/24 (50%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@2 IC=0.0415 pos=ETAP | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM GS JX KQ NU PR TV YZ
+  all-time  12/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@2 pos=ETAP | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM GS JX KQ NU PR TV YZ
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  12/24 (50%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@2 IC=0.0415 pos=ETAP | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM GS JX KQ NU PR TV YZ
+  all-time  12/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@2 pos=ETAP | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM GS JX KQ NU PR TV YZ
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  12/24 (50%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@2 IC=0.0415 pos=ETAP | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM GS JX KQ NU PR TV YZ
+  all-time  12/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@2 pos=ETAP | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM GS JX KQ NU PR TV YZ
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  12/24 (50%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@2 IC=0.0415 pos=ETAP | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM GS JX KQ NU PR TV YZ
+  all-time  12/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@2 pos=ETAP | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM GS JX KQ NU PR TV YZ
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  12/24 (50%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@2 IC=0.0415 pos=ETAP | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM GS JX KQ NU PR TV YZ
+  all-time  12/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@2 pos=ETAP | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM GS JX KQ NU PR TV YZ
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  12/24 (50%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@2 IC=0.0415 pos=ETAP | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM GS JX KQ NU PR TV YZ
+  all-time  12/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@2 pos=ETAP | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM GS JX KQ NU PR TV YZ
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  12/24 (50%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@2 IC=0.0415 pos=ETAP | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM GS JX KQ NU PR TV YZ
+  all-time  12/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@2 pos=ETAP | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM GS JX KQ NU PR TV YZ
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 24…24)
+Shell evolution: OFF freeRings=false WO=15 ringSeeds=19 subspace=potsdam-neighbourhood
+Seeded population[0..<22] from Welchman quarantine (22 candidate(s))
+  seed[0] UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+  seed[1] UKWC gamma III-IV-VIII rings=AAAJ stecker=CH DU EZ FS GT JR LX OV PY
+  seed[2] UKWC gamma III-IV-VIII rings=AAAW stecker=CH DU EZ FS GT JR LX OV PY
+  seed[3] UKWC gamma V-VIII-III rings=AAAP stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[4] UKWC gamma V-VIII-III rings=AAAR stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[5] UKWC gamma V-VIII-III rings=AAAO stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[6] UKWB gamma V-II-VIII rings=AAAL stecker=BW DV EX GN HM JT KR LZ OU PY
+  seed[7] UKWB gamma V-II-VIII rings=AAAY stecker=BW DV EX GN HM JT KR LZ OU PY
+  seed[8] UKWB beta III-IV-VII rings=AAAG stecker=AV BG CS DZ EQ JY KN MO PU
+  seed[9] UKWB beta III-IV-VII rings=AAAT stecker=AV BG CS DZ EQ JY KN MO PU
+  seed[10] UKWC gamma V-VIII-III rings=AAAQ stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[11] UKWC gamma VII-I-III rings=AAAR stecker=AE FM GK HS JY OT PU RW VZ
+  seed[12] UKWC gamma VIII-II-I rings=AAAI stecker=AU CJ DS EL FH IZ MV NO QR TX
+  seed[13] UKWC beta IV-VIII-III rings=AAAX stecker=AJ BL EO GP KR MY QZ TU WX
+  seed[14] UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  seed[15] UKWC beta VII-IV-VIII rings=AAAR stecker=AO BH CM FP GS KQ NU RX TV YZ
+  seed[16] UKWC gamma II-VII-VI rings=AAAL stecker=AS BY EV GT HJ KN LM PU RW
+  seed[17] UKWC gamma II-VII-VI rings=AAAY stecker=AS BY EV GT HJ KN LM PU RW
+  seed[18] UKWC beta VII-VI-III rings=AAAZ stecker=AT BL CE DN GS HV IZ KP UW
+  seed[19] UKWC gamma VII-VIII-V rings=AAAD stecker=AU BF CN ES GP IZ KT MO RW VY
+  seed[20] UKWB gamma VI-V-III rings=AAAP stecker=BT CO DJ FV GN HQ IY LM SU XZ
+  seed[21] UKWB gamma V-VIII-II rings=AAAK stecker=AT BO DH EN FX GW IR LZ MU SV
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@22 IC=0.0434 pos=YIJH | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@22 pos=YIJH | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@22 IC=0.0434 pos=YIJH | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@22 pos=YIJH | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@22 IC=0.0434 pos=YIJH | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@22 pos=YIJH | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@22 IC=0.0434 pos=YIJH | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@22 pos=YIJH | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@22 IC=0.0434 pos=YIJH | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@22 pos=YIJH | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@22 IC=0.0348 pos=HTEN | UKWB gamma V-II-VIII rings=AAAY stecker=AV BF EY GP IZ JT KN LM OR SX
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@22 pos=HTEN | UKWB gamma V-II-VIII rings=AAAY stecker=AV BF EY GP IZ JT KN LM OR SX
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@22 IC=0.0348 pos=HTEN | UKWB gamma V-II-VIII rings=AAAY stecker=AV BF EY GP IZ JT KN LM OR SX
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@22 pos=HTEN | UKWB gamma V-II-VIII rings=AAAY stecker=AV BF EY GP IZ JT KN LM OR SX
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@22 IC=0.0348 pos=HTEN | UKWB gamma V-II-VIII rings=AAAY stecker=AV BF EY GP IZ JT KN LM OR SX
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@22 pos=HTEN | UKWB gamma V-II-VIII rings=AAAY stecker=AV BF EY GP IZ JT KN LM OR SX
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@22 IC=0.0348 pos=HTEN | UKWB gamma V-II-VIII rings=AAAY stecker=AV BF EY GP IZ JT KN LM OR SX
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@22 pos=HTEN | UKWB gamma V-II-VIII rings=AAAY stecker=AV BF EY GP IZ JT KN LM OR SX
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@22 IC=0.0348 pos=HTEN | UKWB gamma V-II-VIII rings=AAAY stecker=AV BF EY GP IZ JT KN LM OR SX
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@22 pos=HTEN | UKWB gamma V-II-VIII rings=AAAY stecker=AV BF EY GP IZ JT KN LM OR SX
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@22 IC=0.0348 pos=HTEN | UKWB gamma V-II-VIII rings=AAAY stecker=AV BF EY GP IZ JT KN LM OR SX
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@22 pos=HTEN | UKWB gamma V-II-VIII rings=AAAY stecker=AV BF EY GP IZ JT KN LM OR SX
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@22 IC=0.0348 pos=HTEN | UKWB gamma V-II-VIII rings=AAAY stecker=AV BF EY GP IZ JT KN LM OR SX
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@22 pos=HTEN | UKWB gamma V-II-VIII rings=AAAY stecker=AV BF EY GP IZ JT KN LM OR SX
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 24…24)
+Shell evolution: OFF freeRings=false WO=15 ringSeeds=19 subspace=potsdam-neighbourhood
+Seeded population[0..<22] from Welchman quarantine (22 candidate(s))
+  seed[0] UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+  seed[1] UKWC gamma III-IV-VIII rings=AAAJ stecker=CH DU EZ FS GT JR LX OV PY
+  seed[2] UKWC gamma III-IV-VIII rings=AAAW stecker=CH DU EZ FS GT JR LX OV PY
+  seed[3] UKWC gamma V-VIII-III rings=AAAP stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[4] UKWC gamma V-VIII-III rings=AAAR stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[5] UKWC gamma V-VIII-III rings=AAAO stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[6] UKWB gamma V-II-VIII rings=AAAL stecker=BW DV EX GN HM JT KR LZ OU PY
+  seed[7] UKWB gamma V-II-VIII rings=AAAY stecker=BW DV EX GN HM JT KR LZ OU PY
+  seed[8] UKWB beta III-IV-VII rings=AAAG stecker=AV BG CS DZ EQ JY KN MO PU
+  seed[9] UKWB beta III-IV-VII rings=AAAT stecker=AV BG CS DZ EQ JY KN MO PU
+  seed[10] UKWC gamma V-VIII-III rings=AAAQ stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[11] UKWC gamma VII-I-III rings=AAAR stecker=AE FM GK HS JY OT PU RW VZ
+  seed[12] UKWC gamma VIII-II-I rings=AAAI stecker=AU CJ DS EL FH IZ MV NO QR TX
+  seed[13] UKWC beta IV-VIII-III rings=AAAX stecker=AJ BL EO GP KR MY QZ TU WX
+  seed[14] UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  seed[15] UKWC beta VII-IV-VIII rings=AAAR stecker=AO BH CM FP GS KQ NU RX TV YZ
+  seed[16] UKWC gamma II-VII-VI rings=AAAL stecker=AS BY EV GT HJ KN LM PU RW
+  seed[17] UKWC gamma II-VII-VI rings=AAAY stecker=AS BY EV GT HJ KN LM PU RW
+  seed[18] UKWC beta VII-VI-III rings=AAAZ stecker=AT BL CE DN GS HV IZ KP UW
+  seed[19] UKWC gamma VII-VIII-V rings=AAAD stecker=AU BF CN ES GP IZ KT MO RW VY
+  seed[20] UKWB gamma VI-V-III rings=AAAP stecker=BT CO DJ FV GN HQ IY LM SU XZ
+  seed[21] UKWB gamma V-VIII-II rings=AAAK stecker=AT BO DH EN FX GW IR LZ MU SV
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  9/24 (38%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@24 IC=0.0395 pos=FXVV | UKWC gamma V-VIII-III rings=AAAP stecker=CJ DU EM FQ HN OR PZ SX TY
+  all-time  9/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@24 pos=FXVV | UKWC gamma V-VIII-III rings=AAAP stecker=CJ DU EM FQ HN OR PZ SX TY
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@24 IC=0.0438 pos=GTBQ | UKWC gamma V-VIII-III rings=AAAQ stecker=BV CJ EM FQ HN OR PZ SX TY
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@24 pos=GTBQ | UKWC gamma V-VIII-III rings=AAAQ stecker=BV CJ EM FQ HN OR PZ SX TY
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@24 IC=0.0438 pos=GTBQ | UKWC gamma V-VIII-III rings=AAAQ stecker=BV CJ EM FQ HN OR PZ SX TY
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@24 pos=GTBQ | UKWC gamma V-VIII-III rings=AAAQ stecker=BV CJ EM FQ HN OR PZ SX TY
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@24 IC=0.0438 pos=GTBQ | UKWC gamma V-VIII-III rings=AAAQ stecker=BV CJ EM FQ HN OR PZ SX TY
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@24 pos=GTBQ | UKWC gamma V-VIII-III rings=AAAQ stecker=BV CJ EM FQ HN OR PZ SX TY
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@24 IC=0.0423 pos=GTBQ | UKWC gamma V-VIII-III rings=AAAQ stecker=BV CJ EM FQ HN KW OR PZ SX TY
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@24 pos=GTBQ | UKWC gamma V-VIII-III rings=AAAQ stecker=BV CJ EM FQ HN KW OR PZ SX TY
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@24 IC=0.0423 pos=GTBQ | UKWC gamma V-VIII-III rings=AAAQ stecker=BV CJ EM FQ HN KW OR PZ SX TY
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@24 pos=GTBQ | UKWC gamma V-VIII-III rings=AAAQ stecker=BV CJ EM FQ HN KW OR PZ SX TY
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@24 IC=0.0423 pos=GTBQ | UKWC gamma V-VIII-III rings=AAAQ stecker=BV CJ EM FQ HN KW OR PZ SX TY
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@24 pos=GTBQ | UKWC gamma V-VIII-III rings=AAAQ stecker=BV CJ EM FQ HN KW OR PZ SX TY
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@24 IC=0.0423 pos=GTBQ | UKWC gamma V-VIII-III rings=AAAQ stecker=BV CJ EM FQ HN KW OR PZ SX TY
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@24 pos=GTBQ | UKWC gamma V-VIII-III rings=AAAQ stecker=BV CJ EM FQ HN KW OR PZ SX TY
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@24 IC=0.0423 pos=GTBQ | UKWC gamma V-VIII-III rings=AAAQ stecker=BV CJ EM FQ HN KW OR PZ SX TY
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@24 pos=GTBQ | UKWC gamma V-VIII-III rings=AAAQ stecker=BV CJ EM FQ HN KW OR PZ SX TY
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@24 IC=0.0423 pos=GTBQ | UKWC gamma V-VIII-III rings=AAAQ stecker=BV CJ EM FQ HN KW OR PZ SX TY
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@24 pos=GTBQ | UKWC gamma V-VIII-III rings=AAAQ stecker=BV CJ EM FQ HN KW OR PZ SX TY
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  12/24 (50%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@24 IC=0.0403 pos=GTBQ | UKWC gamma V-VIII-III rings=AAAQ stecker=AX BV CJ EM FQ HN KW OR PZ TY
+  all-time  12/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@24 pos=GTBQ | UKWC gamma V-VIII-III rings=AAAQ stecker=AX BV CJ EM FQ HN KW OR PZ TY
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  12/24 (50%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@24 IC=0.0403 pos=GTBQ | UKWC gamma V-VIII-III rings=AAAQ stecker=AX BV CJ EM FQ HN KW OR PZ TY
+  all-time  12/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@24 pos=GTBQ | UKWC gamma V-VIII-III rings=AAAQ stecker=AX BV CJ EM FQ HN KW OR PZ TY
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 24…24)
+Shell evolution: OFF freeRings=false WO=15 ringSeeds=19 subspace=potsdam-neighbourhood
+Seeded population[0..<22] from Welchman quarantine (22 candidate(s))
+  seed[0] UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+  seed[1] UKWC gamma III-IV-VIII rings=AAAJ stecker=CH DU EZ FS GT JR LX OV PY
+  seed[2] UKWC gamma III-IV-VIII rings=AAAW stecker=CH DU EZ FS GT JR LX OV PY
+  seed[3] UKWC gamma V-VIII-III rings=AAAP stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[4] UKWC gamma V-VIII-III rings=AAAR stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[5] UKWC gamma V-VIII-III rings=AAAO stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[6] UKWB gamma V-II-VIII rings=AAAL stecker=BW DV EX GN HM JT KR LZ OU PY
+  seed[7] UKWB gamma V-II-VIII rings=AAAY stecker=BW DV EX GN HM JT KR LZ OU PY
+  seed[8] UKWB beta III-IV-VII rings=AAAG stecker=AV BG CS DZ EQ JY KN MO PU
+  seed[9] UKWB beta III-IV-VII rings=AAAT stecker=AV BG CS DZ EQ JY KN MO PU
+  seed[10] UKWC gamma V-VIII-III rings=AAAQ stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[11] UKWC gamma VII-I-III rings=AAAR stecker=AE FM GK HS JY OT PU RW VZ
+  seed[12] UKWC gamma VIII-II-I rings=AAAI stecker=AU CJ DS EL FH IZ MV NO QR TX
+  seed[13] UKWC beta IV-VIII-III rings=AAAX stecker=AJ BL EO GP KR MY QZ TU WX
+  seed[14] UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  seed[15] UKWC beta VII-IV-VIII rings=AAAR stecker=AO BH CM FP GS KQ NU RX TV YZ
+  seed[16] UKWC gamma II-VII-VI rings=AAAL stecker=AS BY EV GT HJ KN LM PU RW
+  seed[17] UKWC gamma II-VII-VI rings=AAAY stecker=AS BY EV GT HJ KN LM PU RW
+  seed[18] UKWC beta VII-VI-III rings=AAAZ stecker=AT BL CE DN GS HV IZ KP UW
+  seed[19] UKWC gamma VII-VIII-V rings=AAAD stecker=AU BF CN ES GP IZ KT MO RW VY
+  seed[20] UKWB gamma VI-V-III rings=AAAP stecker=BT CO DJ FV GN HQ IY LM SU XZ
+  seed[21] UKWB gamma V-VIII-II rings=AAAK stecker=AT BO DH EN FX GW IR LZ MU SV
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  9/24 (38%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@29 IC=0.0395 pos=NFML | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+  all-time  9/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@29 pos=NFML | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@29 IC=0.0368 pos=NFML | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN KW PU TX
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@29 pos=NFML | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN KW PU TX
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@29 IC=0.0368 pos=NFML | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN KW PU TX
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@29 pos=NFML | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN KW PU TX
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@29 IC=0.0368 pos=NFML | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN KW PU TX
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@29 pos=NFML | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN KW PU TX
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@29 IC=0.0368 pos=NFML | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN KW PU TX
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@29 pos=NFML | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN KW PU TX
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@29 IC=0.0368 pos=NFML | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN KW PU TX
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@29 pos=NFML | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN KW PU TX
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@29 IC=0.0368 pos=NFML | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN KW PU TX
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@29 pos=NFML | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN KW PU TX
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@29 IC=0.0329 pos=JZQK | UKWB gamma IV-III-VIII rings=AAAA stecker=CV HJ KS MO
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@29 pos=JZQK | UKWB gamma IV-III-VIII rings=AAAA stecker=CV HJ KS MO
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@29 IC=0.0329 pos=JZQK | UKWB gamma IV-III-VIII rings=AAAA stecker=CV HJ KS MO
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@29 pos=JZQK | UKWB gamma IV-III-VIII rings=AAAA stecker=CV HJ KS MO
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@29 IC=0.0329 pos=JZQK | UKWB gamma IV-III-VIII rings=AAAA stecker=CV HJ KS MO
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@29 pos=JZQK | UKWB gamma IV-III-VIII rings=AAAA stecker=CV HJ KS MO
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  12/24 (50%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@29 IC=0.0329 pos=JZQK | UKWB gamma IV-III-VIII rings=AAAA stecker=CV HJ KS MO NW
+  all-time  12/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@29 pos=JZQK | UKWB gamma IV-III-VIII rings=AAAA stecker=CV HJ KS MO NW
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  12/24 (50%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@29 IC=0.0329 pos=JZQK | UKWB gamma IV-III-VIII rings=AAAA stecker=CV HJ KS MO NW
+  all-time  12/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@29 pos=JZQK | UKWB gamma IV-III-VIII rings=AAAA stecker=CV HJ KS MO NW
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 24…24)
+Shell evolution: OFF freeRings=false WO=15 ringSeeds=19 subspace=potsdam-neighbourhood
+Seeded population[0..<22] from Welchman quarantine (22 candidate(s))
+  seed[0] UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+  seed[1] UKWC gamma III-IV-VIII rings=AAAJ stecker=CH DU EZ FS GT JR LX OV PY
+  seed[2] UKWC gamma III-IV-VIII rings=AAAW stecker=CH DU EZ FS GT JR LX OV PY
+  seed[3] UKWC gamma V-VIII-III rings=AAAP stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[4] UKWC gamma V-VIII-III rings=AAAR stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[5] UKWC gamma V-VIII-III rings=AAAO stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[6] UKWB gamma V-II-VIII rings=AAAL stecker=BW DV EX GN HM JT KR LZ OU PY
+  seed[7] UKWB gamma V-II-VIII rings=AAAY stecker=BW DV EX GN HM JT KR LZ OU PY
+  seed[8] UKWB beta III-IV-VII rings=AAAG stecker=AV BG CS DZ EQ JY KN MO PU
+  seed[9] UKWB beta III-IV-VII rings=AAAT stecker=AV BG CS DZ EQ JY KN MO PU
+  seed[10] UKWC gamma V-VIII-III rings=AAAQ stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[11] UKWC gamma VII-I-III rings=AAAR stecker=AE FM GK HS JY OT PU RW VZ
+  seed[12] UKWC gamma VIII-II-I rings=AAAI stecker=AU CJ DS EL FH IZ MV NO QR TX
+  seed[13] UKWC beta IV-VIII-III rings=AAAX stecker=AJ BL EO GP KR MY QZ TU WX
+  seed[14] UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  seed[15] UKWC beta VII-IV-VIII rings=AAAR stecker=AO BH CM FP GS KQ NU RX TV YZ
+  seed[16] UKWC gamma II-VII-VI rings=AAAL stecker=AS BY EV GT HJ KN LM PU RW
+  seed[17] UKWC gamma II-VII-VI rings=AAAY stecker=AS BY EV GT HJ KN LM PU RW
+  seed[18] UKWC beta VII-VI-III rings=AAAZ stecker=AT BL CE DN GS HV IZ KP UW
+  seed[19] UKWC gamma VII-VIII-V rings=AAAD stecker=AU BF CN ES GP IZ KT MO RW VY
+  seed[20] UKWB gamma VI-V-III rings=AAAP stecker=BT CO DJ FV GN HQ IY LM SU XZ
+  seed[21] UKWB gamma V-VIII-II rings=AAAK stecker=AT BO DH EN FX GW IR LZ MU SV
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  9/24 (38%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@32 IC=0.0329 pos=UEIX | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  all-time  9/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@32 pos=UEIX | UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@32 IC=0.0364 pos=GRCB | UKWC gamma III-IV-VIII rings=AAAJ stecker=BM CH DU EZ FS GT JR LX OV PY
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@32 pos=GRCB | UKWC gamma III-IV-VIII rings=AAAJ stecker=BM CH DU EZ FS GT JR LX OV PY
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@32 IC=0.0364 pos=GRCB | UKWC gamma III-IV-VIII rings=AAAJ stecker=BM CH DU EZ FS GT JR LX OV PY
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@32 pos=GRCB | UKWC gamma III-IV-VIII rings=AAAJ stecker=BM CH DU EZ FS GT JR LX OV PY
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@32 IC=0.0344 pos=GRCB | UKWC gamma III-IV-VIII rings=AAAJ stecker=BM CH EZ FS GT JR KU LX OV PY
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@32 pos=GRCB | UKWC gamma III-IV-VIII rings=AAAJ stecker=BM CH EZ FS GT JR KU LX OV PY
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@32 IC=0.0344 pos=GRCB | UKWC gamma III-IV-VIII rings=AAAJ stecker=BM CH EZ FS GT JR KU LX OV PY
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@32 pos=GRCB | UKWC gamma III-IV-VIII rings=AAAJ stecker=BM CH EZ FS GT JR KU LX OV PY
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@32 IC=0.0344 pos=GRCB | UKWC gamma III-IV-VIII rings=AAAJ stecker=BM CH EZ FS GT JR KU LX OV PY
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@32 pos=GRCB | UKWC gamma III-IV-VIII rings=AAAJ stecker=BM CH EZ FS GT JR KU LX OV PY
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@32 IC=0.0344 pos=GRCB | UKWC gamma III-IV-VIII rings=AAAJ stecker=BM CH EZ FS GT JR KU LX OV PY
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@32 pos=GRCB | UKWC gamma III-IV-VIII rings=AAAJ stecker=BM CH EZ FS GT JR KU LX OV PY
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@32 IC=0.0344 pos=GRCB | UKWC gamma III-IV-VIII rings=AAAJ stecker=BM CH EZ FS GT JR KU LX OV PY
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@32 pos=GRCB | UKWC gamma III-IV-VIII rings=AAAJ stecker=BM CH EZ FS GT JR KU LX OV PY
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@32 IC=0.0344 pos=GRCB | UKWC gamma III-IV-VIII rings=AAAJ stecker=BM CH EZ FS GT JR KU LX OV PY
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@32 pos=GRCB | UKWC gamma III-IV-VIII rings=AAAJ stecker=BM CH EZ FS GT JR KU LX OV PY
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@32 IC=0.0344 pos=GRCB | UKWC gamma III-IV-VIII rings=AAAJ stecker=BM CH EZ FS GT JR KU LX OV PY
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@32 pos=GRCB | UKWC gamma III-IV-VIII rings=AAAJ stecker=BM CH EZ FS GT JR KU LX OV PY
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@32 IC=0.0344 pos=GRCB | UKWC gamma III-IV-VIII rings=AAAJ stecker=BM CH EZ FS GT JR KU LX OV PY
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@32 pos=GRCB | UKWC gamma III-IV-VIII rings=AAAJ stecker=BM CH EZ FS GT JR KU LX OV PY
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@32 IC=0.0344 pos=GRCB | UKWC gamma III-IV-VIII rings=AAAJ stecker=BM CH EZ FS GT JR KU LX OV PY
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@32 pos=GRCB | UKWC gamma III-IV-VIII rings=AAAJ stecker=BM CH EZ FS GT JR KU LX OV PY
+ASIC datapath backend: Metal-cleartext-KPA (B=17576 cleartext lanes/Greek)
+Stochastic templates: 1 (constrained 24…24)
+Shell evolution: OFF freeRings=false WO=15 ringSeeds=19 subspace=potsdam-neighbourhood
+Seeded population[0..<22] from Welchman quarantine (22 candidate(s))
+  seed[0] UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+  seed[1] UKWC gamma III-IV-VIII rings=AAAJ stecker=CH DU EZ FS GT JR LX OV PY
+  seed[2] UKWC gamma III-IV-VIII rings=AAAW stecker=CH DU EZ FS GT JR LX OV PY
+  seed[3] UKWC gamma V-VIII-III rings=AAAP stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[4] UKWC gamma V-VIII-III rings=AAAR stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[5] UKWC gamma V-VIII-III rings=AAAO stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[6] UKWB gamma V-II-VIII rings=AAAL stecker=BW DV EX GN HM JT KR LZ OU PY
+  seed[7] UKWB gamma V-II-VIII rings=AAAY stecker=BW DV EX GN HM JT KR LZ OU PY
+  seed[8] UKWB beta III-IV-VII rings=AAAG stecker=AV BG CS DZ EQ JY KN MO PU
+  seed[9] UKWB beta III-IV-VII rings=AAAT stecker=AV BG CS DZ EQ JY KN MO PU
+  seed[10] UKWC gamma V-VIII-III rings=AAAQ stecker=CJ DU EM FQ HN OR PZ SX TY
+  seed[11] UKWC gamma VII-I-III rings=AAAR stecker=AE FM GK HS JY OT PU RW VZ
+  seed[12] UKWC gamma VIII-II-I rings=AAAI stecker=AU CJ DS EL FH IZ MV NO QR TX
+  seed[13] UKWC beta IV-VIII-III rings=AAAX stecker=AJ BL EO GP KR MY QZ TU WX
+  seed[14] UKWC beta VII-IV-VIII rings=AAAE stecker=AO BH CM FP GS KQ NU RX TV YZ
+  seed[15] UKWC beta VII-IV-VIII rings=AAAR stecker=AO BH CM FP GS KQ NU RX TV YZ
+  seed[16] UKWC gamma II-VII-VI rings=AAAL stecker=AS BY EV GT HJ KN LM PU RW
+  seed[17] UKWC gamma II-VII-VI rings=AAAY stecker=AS BY EV GT HJ KN LM PU RW
+  seed[18] UKWC beta VII-VI-III rings=AAAZ stecker=AT BL CE DN GS HV IZ KP UW
+  seed[19] UKWC gamma VII-VIII-V rings=AAAD stecker=AU BF CN ES GP IZ KT MO RW VY
+  seed[20] UKWB gamma VI-V-III rings=AAAP stecker=BT CO DJ FV GN HQ IY LM SU XZ
+  seed[21] UKWB gamma V-VIII-II rings=AAAK stecker=AT BO DH EN FX GW IR LZ MU SV
+Block B Greeks (fixed): (none) — fitness higher=better (KPA letter-match)
+Hybrid gen 1/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@33 IC=0.0442 pos=WRYK | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@33 pos=WRYK | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+Hybrid gen 2/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@33 IC=0.0442 pos=WRYK | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@33 pos=WRYK | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+Hybrid gen 3/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@33 IC=0.0442 pos=WRYK | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@33 pos=WRYK | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+Hybrid gen 4/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@33 IC=0.0442 pos=WRYK | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@33 pos=WRYK | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+Hybrid gen 5/12 pop=32 blockB_greeks=0
+  gen-best  10/24 (42%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@33 IC=0.0442 pos=WRYK | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+  all-time  10/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@33 pos=WRYK | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PU TX
+Hybrid gen 6/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@33 IC=0.0462 pos=WRYK | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PW TX
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@33 pos=WRYK | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PW TX
+Hybrid gen 7/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@33 IC=0.0462 pos=WRYK | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PW TX
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@33 pos=WRYK | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PW TX
+Hybrid gen 8/12 pop=32 blockB_greeks=0
+  gen-best  11/24 (46%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@33 IC=0.0462 pos=WRYK | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PW TX
+  all-time  11/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@33 pos=WRYK | UKWC gamma VIII-VI-V rings=AAAJ stecker=AL BD CY EO FQ GM IN JK PW TX
+Hybrid gen 9/12 pop=32 blockB_greeks=0
+  gen-best  12/24 (50%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@33 IC=0.0313 pos=DNKU | UKWB gamma V-II-VIII rings=AAAL stecker=AU BW DV EX GN JT KR LZ OQ
+  all-time  12/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@33 pos=DNKU | UKWB gamma V-II-VIII rings=AAAL stecker=AU BW DV EX GN JT KR LZ OQ
+Hybrid gen 10/12 pop=32 blockB_greeks=0
+  gen-best  13/24 (54%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@33 IC=0.0325 pos=DNKU | UKWB gamma V-II-VIII rings=AAAL stecker=AU BW DV EX HI JT KR LZ OQ
+  all-time  13/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@33 pos=DNKU | UKWB gamma V-II-VIII rings=AAAL stecker=AU BW DV EX HI JT KR LZ OQ
+Hybrid gen 11/12 pop=32 blockB_greeks=0
+  gen-best  13/24 (54%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@33 IC=0.0325 pos=DNKU | UKWB gamma V-II-VIII rings=AAAL stecker=AU BW DV EX HI JT KR LZ OQ
+  all-time  13/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@33 pos=DNKU | UKWB gamma V-II-VIII rings=AAAL stecker=AU BW DV EX HI JT KR LZ OQ
+Hybrid gen 12/12 pop=32 blockB_greeks=0
+  gen-best  13/24 (54%) tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@33 IC=0.0325 pos=DNKU | UKWB gamma V-II-VIII rings=AAAL stecker=AU BW DV EX HI JT KR LZ OQ
+  all-time  13/24 tmpl=body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@33 pos=DNKU | UKWB gamma V-II-VIII rings=AAAL stecker=AU BW DV EX HI JT KR LZ OQ

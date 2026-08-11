@@ -1,0 +1,37 @@
+{
+  "ciphertext" : "RFBYWKIKELDCHBSXUNIODGMPAGCQEZUETAOEGZDYJXNTBMVLRDCGULOWHTBGWUSSOQHGAYEDKMJDNGVZNZFOXFKMIBKQNXFDWFIVGCYMJVQCKYQFBHYKZSCJ",
+  "clean_ciphertext" : "RFBYWKIKELDCHBSXUNFJFSNRRVFWASXYLQCQFADYJXNTBMVLRDCGULOWHTBGWUSSOQHGAYEDKMJDNGVZNZFOXFKMIBKQNXFDWFIVGCYMJVQCKYQFBHYKZSCJ",
+  "cribs" : [
+    {
+      "messages" : 1,
+      "offsets" : [
+        0
+      ],
+      "text" : "VVVUUUVIRSOBENNULE"
+    }
+  ],
+  "garble_edits" : [
+    "18:F→I",
+    "19:J→O",
+    "20:F→D",
+    "21:S→G",
+    "22:N→M",
+    "23:R→P",
+    "24:R→A",
+    "25:V→G",
+    "26:F→C",
+    "27:W→Q",
+    "28:A→E",
+    "29:S→Z",
+    "30:X→U",
+    "31:Y→E",
+    "32:L→T",
+    "33:Q→A",
+    "34:C→O",
+    "35:Q→E",
+    "36:F→G",
+    "37:A→Z"
+  ],
+  "note" : "CT flips outside crib@0[..<18]: 18:F→I 19:J→O 20:F→D 21:S→G 22:N→M 23:R→P 24:R→A 25:V→G 26:F→C 27:W→Q 28:A→E 29:S→Z 30:X→U 31:Y→E 32:L→T 33:Q→A 34:C→O 35:Q→E 36:F→G 37:A→Z",
+  "target" : "P1030684 garbled control (quarantine grade)"
+}

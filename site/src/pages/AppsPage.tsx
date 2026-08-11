@@ -19,6 +19,12 @@ const apps = [
     body: 'Computers struggle with complex branching choices without relying on floating-point math. I built an exact non-linear classify circuit over a batch of records (two 4-bit features, one-bit high-risk output) to prove HELUT can handle strict decision branching gracefully.',
     meta: 'decision_tree.v · tree_netlist.json · PRD_App3.md',
   },
+  {
+    idx: 'App 04',
+    title: 'The Generative Loop: TensorLUT Enigma',
+    body: 'Melt a 925-LUT / 49-DFF Enigma M4 netlist into continuous INIT tensors, stream-evaluate under crypto fitness, squeeze toward binary with λ, and emit gate-level LUT6 Verilog. Baseline locks perfect stream fitness before any wipe; cold-start from 0.5 is the live melt.',
+    meta: 'enigma_m4_tensorlut_baseline.v · tensorlut.md · adversarial-synthesis.md',
+  },
 ]
 
 export function AppsPage() {
@@ -29,12 +35,12 @@ export function AppsPage() {
         <div className="shell">
           <div className="section-head">
             <div className="kicker">The Proving Grounds</div>
-            <h2>Three circuits before Enigma (and true PBS)</h2>
+            <h2>Circuits before—and inside—the Enigma hunt</h2>
             <p>
-              These were the proofs that HELUT is a general netlist runtime, not an Enigma toy. More importantly, they are the scaffolding for my ultimate goal: <strong>true Torus Fully Homomorphic Encryption (TFHE)</strong>.
+              The first three apps proved HELUT is a general netlist runtime, not an Enigma toy. They remain the scaffolding for true Torus Fully Homomorphic Encryption (TFHE). App 04 closes the other loop: a continuous–discrete adversarial compiler that evolves LUT INIT tables and writes physical Verilog.
             </p>
             <p style={{ marginTop: '1rem' }}>
-              Before I flip the switch to introduce the heavy cryptographic noise of real Programmable Bootstrapping (PBS), I had to prove my datapath could handle CPU-scale logic under "mock" encryption. I couldn't point an unproven system at a historically unbreakable cypher, so each of these circuits was designed to push a different part of the architecture to its limit: sequential scale, batch bandwidth, and exact non-linear classify.
+              Before I flip the switch to introduce the heavy cryptographic noise of real Programmable Bootstrapping (PBS), I had to prove my datapath could handle CPU-scale logic under &quot;mock&quot; encryption—and that the same silicon can re-synthesize gate logic from continuous ambiguity. Each circuit pushes a different limit: sequential scale, batch bandwidth, exact non-linear classify, and generative INIT discovery.
             </p>
           </div>
         </div>
@@ -55,10 +61,48 @@ export function AppsPage() {
         </div>
       </section>
 
+      <section className="band">
+        <div className="shell split">
+          <div className="section-head" style={{ marginBottom: 0 }}>
+            <div className="kicker">What the GPU Points At</div>
+            <h2>Three attack surfaces, one Apple Silicon</h2>
+            <p>
+              The early apps proved the compiler. The Enigma campaign uses a boolean-faithful Metal cleartext path—tens of millions of settings per second—not mock-PBS fitness. TensorLUT is the third surface: evolve the netlist itself.
+            </p>
+          </div>
+          <ul className="stack-list">
+            <li>
+              <span className="mono">WELCHMAN</span>
+              <span>
+                <strong>Turing’s question:</strong> Given a crib, which keys are physically impossible? Closed electrical loops kill drums. This is what Bletchley could build in 1940 with relays and a known plaintext wedge.
+              </span>
+            </li>
+            <li>
+              <span className="mono">STOCHASTIC</span>
+              <span>
+                <strong>The dual question:</strong> Given a hypothesized plaintext template, which keys decrypt closer? A genetic loop evolves stecker/shell while the GPU scores letter-match across all \(26^4\) message keys per candidate. 1945 could not afford that—no massively parallel cleartext scoring, no gradient over “better.” We can. See <code>stochastic-bombe.md</code>.
+              </span>
+            </li>
+            <li>
+              <span className="mono">TENSORLUT</span>
+              <span>
+                <strong>The generative question:</strong> Given a ciphertext stream and a fitness, which LUT INIT tables decrypt it—and can they cool into real <code>LUT6</code> gates? Continuous weights, λ binary squeeze, reverse Verilog emit. See <code>adversarial-synthesis.md</code>.
+              </span>
+            </li>
+            <li>
+              <span className="mono">NOT \(26^{72}\)</span>
+              <span>
+                <strong>The constraint:</strong> We do not invent random 72-letter plaintext. Welchman and stochastic search keys against small Thetis-shaped hypotheses. TensorLUT rediscovers gate tables under a short known crib—it does not invent P1030680’s missing plaintext.
+              </span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
       <section className="band-ink">
         <div className="shell">
           <div className="note" style={{ marginTop: 0, background: 'rgba(196, 120, 58, 0.14)', color: 'rgba(232, 236, 239, 0.88)' }}>
-            <strong>The Endgame:</strong> Re-synthesize with Yosys when you change Verilog; the CLI accepts arbitrary JSON via <code>--compile-only</code>. While the day-to-day <code>helut</code> UX is currently Enigma-first, <strong>HELUTCore</strong> remains the shared foundational compiler. When I swap the mock torus polynomials for real TFHE ciphertexts, these exact same applications will run fully homomorphically. HELUT is Enigma-oriented as a research convenience at the moment since I am the only user. That will change once my research is concluded.
+            <strong>The Endgame:</strong> Re-synthesize with Yosys when you change Verilog; the CLI accepts arbitrary JSON via <code>--compile-only</code>. Emit TensorLUT baselines with <code>--emit-tensorlut-verilog</code>; melt with <code>--tensorlut-cold-start</code>. While the day-to-day <code>helut</code> UX is currently Enigma-first, <strong>HELUTCore</strong> remains the shared foundational compiler. When I swap the mock torus polynomials for real TFHE ciphertexts, these exact same applications will run fully homomorphically. HELUT is Enigma-oriented as a research convenience at the moment since I am the only user. That will change once my research is concluded.
           </div>
 
           <p style={{ marginTop: '1.75rem' }}>

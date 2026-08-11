@@ -1,0 +1,96 @@
+{
+  "target": "P1030680",
+  "status": "running_03_hela_rings",
+  "catalog_resume": "--bombe-from 203",
+  "completed": [
+    {
+      "step": 1,
+      "name": "Anchor AAAA smoke",
+      "result": "clean negative \u2014 19/19 dead, 0 stops",
+      "log": "logs/campaign-regenbogen-01-anchor-aaaa.log"
+    },
+    {
+      "step": 2,
+      "name": "Anchor right-ring",
+      "result": "clean negative \u2014 19/19 dead, 0 raw stops, 3.03e11 settings @ 48.7M/s",
+      "log": "logs/campaign-regenbogen-01-anchor-rings.log"
+    },
+    {
+      "step": 3,
+      "name": "Scuttling variants AAAA",
+      "result": "9 physical / best IC 0.052 tail -4.835 \u2014 below soft (\u22124.3); 0 quarantine",
+      "log": "logs/campaign-regenbogen-02-scuttle-aaaa.log"
+    },
+    {
+      "step": 4,
+      "name": "Scuttling variants right-ring",
+      "result": "183 physical / 22 soft-band quarantine (prefix); best campaign IC 0.045 tail -4.232 \u2014 no BREAK",
+      "log": "logs/campaign-regenbogen-02-scuttle-rings.log",
+      "quarantine": "logs/quarantine_regenbogen.json"
+    },
+    {
+      "step": 5,
+      "name": "Quarantine Hybrid escalate (Regenbogen templates)",
+      "result": "0 survivors; ceiling ~58% on BEFEHL masks \u2014 clean negative. Fixed template names to head:/body: prefixes (empty-bank trap).",
+      "log": "logs/stochastic-bombe-regenbogen-quarantine-escalate.out"
+    },
+    {
+      "step": 6,
+      "name": "Hela AAAA",
+      "result": "7 physical / best IC 0.054 tail -4.748 \u2014 below soft; 0 quarantine",
+      "log": "logs/campaign-regenbogen-03-hela-aaaa.log"
+    }
+  ],
+  "do_not_run_while": null,
+  "research_source": "Fixtures/p1030680_regenbogen_hannibal_research.json",
+  "rationale": [
+    "16\u201324 letter operational phrases: denser than short UEBUNG headers",
+    "Self-stecker offsets pre-pruned",
+    "Regenbogen timeline aligns 30 Apr order \u2192 1 May first scuttlings",
+    "Hela not Gotenhafen (fallen 28 Mar); broadcast prior > own-orders if keys stale"
+  ],
+  "priority": [
+    {
+      "step": 1,
+      "name": "Anchor AAAA smoke",
+      "fixture": "Fixtures/p1030680_regenbogen_01_anchor_menus.json",
+      "why": "BEFEHLERHALTENREGENBOGEN len=24, 19 offsets, best loops=9",
+      "cmd": "./.build/release/helut --welchman --bombe-fixture Fixtures/p1030680_regenbogen_01_anchor_menus.json --bombe-menus 0 --bombe-confirm 1 --bombe-min-crib 16 2>&1 | tee logs/campaign-regenbogen-01-anchor-aaaa.log"
+    },
+    {
+      "step": 2,
+      "name": "Anchor right-ring if AAAA shows physical",
+      "fixture": "Fixtures/p1030680_regenbogen_01_anchor_menus.json",
+      "cmd": "./.build/release/helut --welchman --bombe-fixture Fixtures/p1030680_regenbogen_01_anchor_menus.json --bombe-menus 0 --bombe-confirm 1 --bombe-min-crib 16 --bombe-ring-sweep 2>&1 | tee logs/campaign-regenbogen-01-anchor-rings.log"
+    },
+    {
+      "step": 3,
+      "name": "Scuttling variants AAAA then rings",
+      "fixture": "Fixtures/p1030680_regenbogen_02_scuttle_menus.json",
+      "cmd_aaaa": "./.build/release/helut --welchman --bombe-fixture Fixtures/p1030680_regenbogen_02_scuttle_menus.json --bombe-menus 0 --bombe-confirm 1 --bombe-min-crib 16 2>&1 | tee logs/campaign-regenbogen-02-scuttle-aaaa.log",
+      "cmd_rings": "./.build/release/helut --welchman --bombe-fixture Fixtures/p1030680_regenbogen_02_scuttle_menus.json --bombe-menus 0 --bombe-confirm 1 --bombe-min-crib 16 --bombe-ring-sweep 2>&1 | tee logs/campaign-regenbogen-02-scuttle-rings.log"
+    },
+    {
+      "step": 4,
+      "name": "Hela evacuation",
+      "fixture": "Fixtures/p1030680_regenbogen_03_hela_menus.json",
+      "cmd": "./.build/release/helut --welchman --bombe-fixture Fixtures/p1030680_regenbogen_03_hela_menus.json --bombe-menus 0 --bombe-confirm 1 --bombe-min-crib 16 --bombe-ring-sweep 2>&1 | tee logs/campaign-regenbogen-03-hela-rings.log"
+    },
+    {
+      "step": 5,
+      "name": "Stochastic (after or interleaved when Metal free)",
+      "fixture": "Fixtures/p1030680_stochastic_regenbogen.json",
+      "cmd": "./.build/release/helut --hybrid --hybrid-stochastic --hybrid-rigor --hybrid-templates Fixtures/p1030680_stochastic_regenbogen.json 2>&1 | tee logs/stochastic-bombe-p1030680-regenbogen.log"
+    },
+    {
+      "step": 6,
+      "name": "Own-orders + filler (fallback only)",
+      "fixtures": [
+        "Fixtures/p1030680_regenbogen_04_own_menus.json",
+        "Fixtures/p1030680_regenbogen_05_filler_menus.json"
+      ]
+    }
+  ],
+  "combined_welchman": "Fixtures/p1030680_regenbogen_hannibal_menus.json",
+  "near_shell_walker": "still deferred: plug\u00b11/ring\u00b11 around 681/682 after catalog"
+}

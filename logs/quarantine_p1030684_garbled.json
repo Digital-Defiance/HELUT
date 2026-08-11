@@ -1,0 +1,49 @@
+{
+  "candidates" : [
+    {
+      "cribExact" : true,
+      "effectiveTailScore" : -3.1077040292345055,
+      "fullScore" : -3.1101551939423366,
+      "greek" : "gamma",
+      "ic" : 0.052941176470588235,
+      "menuCrib" : "VVVUUUVIRSOBENNULE",
+      "menuEdges" : 18,
+      "menuLoops" : 2,
+      "menuOffset" : 0,
+      "pairCount" : 10,
+      "plaintextPrefix" : "VVVUUUVIRSOBENNULEFBLICISCMJMYKIXHQQALULZWOYVIRS",
+      "positions" : "VYAA",
+      "prefixEnd" : 118,
+      "prefixIC" : 0.05331015500507026,
+      "prefixTailScore" : -3.1077040292345055,
+      "rings" : "AACU",
+      "softBand" : "whole IC=0.053≥0.048 tail=-3.129>-4.000; prefix@118 IC=0.053 tail=-3.108",
+      "source" : "P1030684-garble-control",
+      "steckerPairs" : [
+        "BQ",
+        "CH",
+        "DI",
+        "EJ",
+        "GL",
+        "KP",
+        "NV",
+        "OU",
+        "SZ",
+        "TY"
+      ],
+      "tailScore" : -3.1286040434809697,
+      "ukw" : "B",
+      "wheelOrder" : "IV-III-VIII"
+    }
+  ],
+  "ciphertext" : "RFBYWKIKELDCHBSXUNIODGMPAGCQEZUETAOEGZDYJXNTBMVLRDCGULOWHTBGWUSSOQHGAYEDKMJDNGVZNZFOXFKMIBKQNXFDWFIVGCYMJVQCKYQFBHYKZSCJ",
+  "generatedAt" : "2026-08-10T21:48:09Z",
+  "softBar" : {
+    "softICFloor" : 0.048,
+    "softTailFloor" : -4,
+    "strictICFloor" : 0.055,
+    "strictTailFloor" : -3.6
+  },
+  "sourceFixture" : "ControlMessageP1030684+garble",
+  "target" : "P1030684-garbled"
+}

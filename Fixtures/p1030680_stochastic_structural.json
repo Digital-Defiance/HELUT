@@ -1,0 +1,156 @@
+{
+  "target": "P1030680",
+  "ciphertext": "JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF",
+  "note": "Rigor structural bank for Stochastic Bombe. 16\u201324 constrained letters; '.' = don't-care; self-stecker legal vs ciphertext. Survivor bar: ratio \u2265 0.80 and above empirical noise floor + 0.10.",
+  "survivor_ratio": 0.8,
+  "noise_margin": 0.1,
+  "templates": [
+    {
+      "name": "struct:pad+GRUPPENZ@g2@1",
+      "pattern": ".ACHSEDMOEDM..GRUPPENZAHL...............................................",
+      "note": "pad 'ACHSEDMOEDM' + gap 2 + body 'GRUPPENZAHLXXXX'",
+      "constrained": 22,
+      "offset": 1
+    },
+    {
+      "name": "struct:pad+GRUPPENZ@g4@1",
+      "pattern": ".ACHSEDMOEDM....GRUPPENZAHL.............................................",
+      "note": "pad 'ACHSEDMOEDM' + gap 4 + body 'GRUPPENZAHLXXXX'",
+      "constrained": 22,
+      "offset": 1
+    },
+    {
+      "name": "struct:pad+GRUPPENZ@g6@1",
+      "pattern": ".ACHSEDMOEDM......GRUPPENZAHL...........................................",
+      "note": "pad 'ACHSEDMOEDM' + gap 6 + body 'GRUPPENZAHLXXXX'",
+      "constrained": 22,
+      "offset": 1
+    },
+    {
+      "name": "struct:AUSBILDUNG_FUNK@3",
+      "pattern": "...AUSBILDUNGSFUNKSPRUCH................................................",
+      "note": "Training: Ausbildungsfunkspruch",
+      "constrained": 21,
+      "offset": 3
+    },
+    {
+      "name": "struct:FUNKUEBUNG@0",
+      "pattern": "FUNKUEBUNGFUNKUEBUNG....................................................",
+      "note": "Training pad FUNKUEBUNG\u00d72",
+      "constrained": 20,
+      "offset": 0
+    },
+    {
+      "name": "struct:FUNKUEBUNG@1",
+      "pattern": ".FUNKUEBUNGFUNKUEBUNG...................................................",
+      "note": "Training pad FUNKUEBUNG\u00d72",
+      "constrained": 20,
+      "offset": 1
+    },
+    {
+      "name": "struct:pad+ZEITGRUP@g2@0",
+      "pattern": "AUSBILDUNG....ZEITGRUPPE................................................",
+      "note": "pad 'AUSBILDUNGXX' + gap 2 + body 'ZEITGRUPPEXXXXXX'",
+      "constrained": 20,
+      "offset": 0
+    },
+    {
+      "name": "struct:ACHSEDM_drill@1",
+      "pattern": ".ACHSEDMOEDMACHSEDM.....................................................",
+      "note": "Schl\u00fcssel/Verfahren Kenngruppe drill ACH+SEDM+OEDM",
+      "constrained": 18,
+      "offset": 1
+    },
+    {
+      "name": "struct:LEHRGANG@1",
+      "pattern": ".LEHRGANGFUNKSPRUCH.....................................................",
+      "note": "Training: Lehrgang funkspruch",
+      "constrained": 18,
+      "offset": 1
+    },
+    {
+      "name": "struct:LEHRGANG@2",
+      "pattern": "..LEHRGANGFUNKSPRUCH....................................................",
+      "note": "Training: Lehrgang funkspruch",
+      "constrained": 18,
+      "offset": 2
+    },
+    {
+      "name": "struct:UEBUNG_tile@0",
+      "pattern": "UEBUNGUEBUNGUEBUNG......................................................",
+      "note": "Training pad UEBUNG\u00d73",
+      "constrained": 18,
+      "offset": 0
+    },
+    {
+      "name": "struct:UEBUNG_tile@1",
+      "pattern": ".UEBUNGUEBUNGUEBUNG.....................................................",
+      "note": "Training pad UEBUNG\u00d73",
+      "constrained": 18,
+      "offset": 1
+    },
+    {
+      "name": "struct:ANALLE@1",
+      "pattern": ".ANALLEFUNKSTELLEN......................................................",
+      "note": "Training address: an alle Funkstellen",
+      "constrained": 17,
+      "offset": 1
+    },
+    {
+      "name": "struct:ANALLE@3",
+      "pattern": "...ANALLEFUNKSTELLEN....................................................",
+      "note": "Training address: an alle Funkstellen",
+      "constrained": 17,
+      "offset": 3
+    },
+    {
+      "name": "struct:SEDM_repeat@0",
+      "pattern": "SEDMSSEDMSSEDMSSE.......................................................",
+      "note": "Verfahren SEDM drill repeat",
+      "constrained": 17,
+      "offset": 0
+    },
+    {
+      "name": "struct:SEDM_repeat@2",
+      "pattern": "..SEDMSSEDMSSEDMSSE.....................................................",
+      "note": "Verfahren SEDM drill repeat",
+      "constrained": 17,
+      "offset": 2
+    },
+    {
+      "name": "struct:OEDM_repeat@0",
+      "pattern": "OEDMOEDMOEDMOEDM........................................................",
+      "note": "Verfahren OEDM drill (VA reading)",
+      "constrained": 16,
+      "offset": 0
+    },
+    {
+      "name": "struct:OEDM_repeat@2",
+      "pattern": "..OEDMOEDMOEDMOEDM......................................................",
+      "note": "Verfahren OEDM drill (VA reading)",
+      "constrained": 16,
+      "offset": 2
+    },
+    {
+      "name": "struct:THETIS@0",
+      "pattern": "THETISFUNKSPRUCH........................................................",
+      "note": "Net name as opening",
+      "constrained": 16,
+      "offset": 0
+    },
+    {
+      "name": "struct:THETIS@1",
+      "pattern": ".THETISFUNKSPRUCH.......................................................",
+      "note": "Net name as opening",
+      "constrained": 16,
+      "offset": 1
+    },
+    {
+      "name": "struct:THETIS@2",
+      "pattern": "..THETISFUNKSPRUCH......................................................",
+      "note": "Net name as opening",
+      "constrained": 16,
+      "offset": 2
+    }
+  ]
+}
