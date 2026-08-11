@@ -1,20 +1,20 @@
 {
-  "ciphertext_hex" : "489d4c68cd20456e69a7af6024f6922068a5b47d6ea599768ade5cb32a20ab15db452e88",
+  "ciphertext_hex" : "48454c5578c66467ff1ef0613235a6c2540a80516b048eb965c9396272947ec272e86164",
   "core" : "enigma_256_core",
   "ikm_hex" : "68656c75742d656e69676d613235362d676f6c64656e2d696b6d2d763121212121",
   "length" : 36,
   "message" : {
-    "lfsr_seed_hex" : "0xaaed21640f15ea29",
+    "lfsr_seed_hex" : "0x45eef606d2c147a4",
     "positions" : [
-      166,
-      52,
-      92,
-      7
+      35,
+      28,
+      3,
+      102
     ],
     "rotor_indices" : [
-      7,
-      8,
       15,
+      4,
+      12,
       14
     ]
   },

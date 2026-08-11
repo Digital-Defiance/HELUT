@@ -110,7 +110,19 @@ package struct Enigma256Generation: Sendable, Equatable, Codable {
         ]
     )
 
-    /// Gen 4: same taps as gen3, cross-coupled step enables (denser TensorLUT cone).
+    /// Gen 5: cubic6 with bred taps — balanced ~0.5 step rates, low φ (stronger stepping).
+    package static let gen5Balanced = Enigma256Generation(
+        id: 5,
+        formula: .cubic6,
+        folds: [
+            Enigma256NLFFFold(a: 4, b: 15, c: 17, d: 23, e: 26, f: 61),
+            Enigma256NLFFFold(a: 7, b: 9, c: 31, d: 38, e: 50, f: 59),
+            Enigma256NLFFFold(a: 30, b: 43, c: 46, d: 49, e: 51, f: 60),
+            Enigma256NLFFFold(a: 12, b: 29, c: 54, d: 55, e: 57, f: 62)
+        ]
+    )
+
+    /// Gen 4 experiment: coupled enables — rejected (correlates rotor steps). Kept for stats/regression.
     package static let gen4Coupled = Enigma256Generation(
         id: 4,
         formula: .coupledCubic6,
@@ -180,8 +192,8 @@ package struct Enigma256Generation: Sendable, Equatable, Codable {
         precondition(folds.count == 4)
     }
 
-    /// Breed a new NLFF schedule and bump generation id.
-    /// Emits `.coupledCubic6` going forward (cubic6 held; coupling is the next Blue layer).
+    /// Breed a new cubic6 tap schedule and bump generation id.
+    /// Stays on independent cubic6 — coupling was rejected (correlated step enables).
     package func mutated(rng: inout some RandomNumberGenerator) -> Enigma256Generation {
         var used = Set<Int>()
         var nextFolds: [Enigma256NLFFFold] = []
@@ -202,19 +214,19 @@ package struct Enigma256Generation: Sendable, Equatable, Codable {
                 )
             )
         }
-        return Enigma256Generation(id: id + 1, formula: .coupledCubic6, folds: nextFolds)
+        return Enigma256Generation(id: id + 1, formula: .cubic6, folds: nextFolds)
     }
 
-    /// Structural upgrade: quadratic3→cubic6 gen3, cubic6→coupledCubic6 gen4, else mutate.
+    /// Structural upgrade toward stronger independent NLFF (never toward coupledCubic6).
+    /// quadratic3 → gen3 cubic6; coupledCubic6 → rollback gen3; cubic6 → retap mutate.
     package func hardenedCubic() -> Enigma256Generation {
         switch formula {
         case .quadratic3:
-            return id < 3 ? .gen3Cubic : Enigma256Generation(id: max(3, id + 1), formula: .cubic6, folds: folds)
-        case .cubic6:
-            return id < 4
-                ? .gen4Coupled
-                : Enigma256Generation(id: id + 1, formula: .coupledCubic6, folds: folds)
+            return .gen3Cubic
         case .coupledCubic6:
+            // Coupling bought TensorLUT hardness by correlating rotors — reject.
+            return .gen3Cubic
+        case .cubic6:
             var rng = SystemRandomNumberGenerator()
             return mutated(rng: &rng)
         }
@@ -301,5 +313,110 @@ package struct Enigma256Generation: Sendable, Equatable, Codable {
         let replacement = sample.contains("assign") ? nlffAssignLines() : nlffWireLines()
         out.replaceSubrange(firstR.lowerBound ..< lastR.upperBound, with: replacement)
         return out
+    }
+}
+
+// MARK: - NLFF step-enable statistics (Blue quality, not TensorLUT score)
+
+package struct Enigma256NLFFStepStats: Sendable {
+    package var steps: Int
+    package var rates: [Double]          // P(step_ri)
+    package var phi: [[Double]]          // pairwise φ correlation
+    package var meanRate: Double
+    package var maxAbsOffDiagPhi: Double
+    package var allFourOnRate: Double
+
+    package var meanRateOK: Bool { abs(meanRate - 0.5) < 0.08 }
+    /// Independent enables should keep |φ| small off-diagonal.
+    package var independenceOK: Bool { maxAbsOffDiagPhi < 0.20 }
+    /// All four rotors should step with non-trivial probability.
+    package var rateFloorOK: Bool { rates.allSatisfy { $0 > 0.25 && $0 < 0.75 } }
+}
+
+extension Enigma256Generation {
+    /// Monte-Carlo step-enable rates / correlations under Galois LFSR clocks.
+    package func stepEnableStats(
+        steps: Int = 200_000,
+        seed: UInt64 = 0xC0FF_EE12_3456_789A
+    ) -> Enigma256NLFFStepStats {
+        var lfsr = Enigma256LFSR(seed: seed == 0 ? 1 : seed)
+        var counts = [0, 0, 0, 0]
+        var pair = Array(repeating: Array(repeating: 0, count: 4), count: 4)
+        var allOn = 0
+        for _ in 0 ..< steps {
+            let m = lfsr.stepMask(using: self)
+            let bits = [m.0, m.1, m.2, m.3]
+            for i in 0 ..< 4 {
+                if bits[i] { counts[i] += 1 }
+                for j in 0 ..< 4 where bits[i] && bits[j] {
+                    pair[i][j] += 1
+                }
+            }
+            if bits[0] && bits[1] && bits[2] && bits[3] { allOn += 1 }
+            lfsr.clock()
+        }
+        let n = Double(steps)
+        let rates = counts.map { Double($0) / n }
+        var phi = Array(repeating: Array(repeating: 0.0, count: 4), count: 4)
+        var maxAbs = 0.0
+        for i in 0 ..< 4 {
+            for j in 0 ..< 4 {
+                let pij = Double(pair[i][j]) / n
+                let denom = (rates[i] * (1 - rates[i]) * rates[j] * (1 - rates[j])).squareRoot()
+                let v = denom > 1e-12 ? (pij - rates[i] * rates[j]) / denom : 0
+                phi[i][j] = v
+                if i != j { maxAbs = max(maxAbs, abs(v)) }
+            }
+        }
+        return Enigma256NLFFStepStats(
+            steps: steps,
+            rates: rates,
+            phi: phi,
+            meanRate: rates.reduce(0, +) / 4,
+            maxAbsOffDiagPhi: maxAbs,
+            allFourOnRate: Double(allOn) / n
+        )
+    }
+
+    /// Search disjoint cubic6 tap schedules for balanced rates + low step correlation.
+    package static func breedBalancedCubic6(
+        id: Int = 5,
+        trials: Int = 2_000,
+        sampleSteps: Int = 40_000,
+        rng: inout some RandomNumberGenerator
+    ) -> (generation: Enigma256Generation, stats: Enigma256NLFFStepStats) {
+        var best: Enigma256Generation?
+        var bestStats: Enigma256NLFFStepStats?
+        var bestScore = Double.infinity
+        for _ in 0 ..< trials {
+            var used = Set<Int>()
+            var folds: [Enigma256NLFFFold] = []
+            var ok = true
+            for _ in 0 ..< 4 {
+                var pool = Array(0 ..< 64).filter { !used.contains($0) }
+                if pool.count < 6 { ok = false; break }
+                pool.shuffle(using: &rng)
+                let picks = Array(pool.prefix(6)).sorted()
+                used.formUnion(picks)
+                folds.append(Enigma256NLFFFold(
+                    a: picks[0], b: picks[1], c: picks[2],
+                    d: picks[3], e: picks[4], f: picks[5]
+                ))
+            }
+            guard ok else { continue }
+            let gen = Enigma256Generation(id: id, formula: .cubic6, folds: folds)
+            let stats = gen.stepEnableStats(steps: sampleSteps)
+            let rateErr = stats.rates.map { abs($0 - 0.5) }.reduce(0, +)
+            let score = rateErr * 2.0 + stats.maxAbsOffDiagPhi * 3.0 + abs(stats.meanRate - 0.5) * 2.0
+            if score < bestScore {
+                bestScore = score
+                best = gen
+                bestStats = stats
+            }
+        }
+        guard let best, let bestStats else {
+            return (.gen3Cubic, Enigma256Generation.gen3Cubic.stepEnableStats(steps: sampleSteps))
+        }
+        return (best, bestStats)
     }
 }

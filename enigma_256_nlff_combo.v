@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 
 // Combinational NLFF only — TensorLUT-friendly (no DFFs).
-// Blue generation 4 formula=coupledCubic6 — SoftBus field on Apple Silicon.
+// Blue generation 5 formula=cubic6 — SoftBus field on Apple Silicon.
 
 module enigma_256_nlff_combo (
     input  wire [63:0] lfsr,
@@ -10,12 +10,8 @@ module enigma_256_nlff_combo (
     output wire        step_r3,
     output wire        step_r4
 );
-    wire nlff_f1 = (lfsr[0] & lfsr[13] & lfsr[27]) ^ (lfsr[5] & lfsr[41]) ^ lfsr[62];
-    wire nlff_f2 = (lfsr[1] & lfsr[18] & lfsr[33]) ^ (lfsr[9] & lfsr[44]) ^ lfsr[58];
-    wire nlff_f3 = (lfsr[2] & lfsr[21] & lfsr[36]) ^ (lfsr[11] & lfsr[48]) ^ lfsr[55];
-    wire nlff_f4 = (lfsr[3] & lfsr[24] & lfsr[39]) ^ (lfsr[14] & lfsr[51]) ^ lfsr[60];
-    assign step_r1 = nlff_f1 ^ (nlff_f2 & nlff_f3);
-    assign step_r2 = nlff_f2 ^ (nlff_f3 & nlff_f4);
-    assign step_r3 = nlff_f3 ^ (nlff_f4 & nlff_f1);
-    assign step_r4 = nlff_f4 ^ (nlff_f1 & nlff_f2);
+    assign step_r1 = (lfsr[4] & lfsr[15] & lfsr[17]) ^ (lfsr[23] & lfsr[26]) ^ lfsr[61];
+    assign step_r2 = (lfsr[7] & lfsr[9] & lfsr[31]) ^ (lfsr[38] & lfsr[50]) ^ lfsr[59];
+    assign step_r3 = (lfsr[30] & lfsr[43] & lfsr[46]) ^ (lfsr[49] & lfsr[51]) ^ lfsr[60];
+    assign step_r4 = (lfsr[12] & lfsr[29] & lfsr[54]) ^ (lfsr[55] & lfsr[57]) ^ lfsr[62];
 endmodule

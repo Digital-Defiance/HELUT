@@ -42,20 +42,20 @@ The stepping engine is a 64-bit Galois LFSR (primitive taps 64, 63, 61, 60 → f
 
 Raw single-bit taps would leak LFSR state into observable rotor motion (Berlekamp–Massey). Live genes in `Fixtures/enigma256_generation.json` select the boolean class:
 
-- **quadratic3** (gen 0–2): `step = (a ∧ b) ⊕ c`
-- **cubic6** (gen 3): `step = (a ∧ b ∧ c) ⊕ (d ∧ e) ⊕ f` — algebraic degree 3, six taps per rotor
-- **coupledCubic6** (gen 4+): leaf `f_i` as cubic6, then `step_i = f_i ⊕ (f_{i+1} ∧ f_{i+2})` — cross-coupled enables, denser Yosys/TensorLUT cone
+- **quadratic3** (gen 0–2): `step = (a ∧ b) ⊕ c` — sparse/biased under Galois clocks
+- **cubic6** gen 3: degree-3 six-tap folds (TensorLUT-hard) but **dead middle rotors** on the first tap schedule
+- **coupledCubic6** gen 4: **rejected** — correlates rotor steps
+- **cubic6** gen 5 (**live field**): same formula, **bred taps** — ~0.5 step rate each rotor, low φ (`--enigma256-nlff-breed`)
 
-Gen 3 shipping folds (cubic6 leaves; gen 4 reuses the same taps with coupling):
-
+Gen 5 shipping folds:
 ```
-step_r1 = (lfsr[0]  & lfsr[13] & lfsr[27]) ^ (lfsr[5]  & lfsr[41]) ^ lfsr[62]
-step_r2 = (lfsr[1]  & lfsr[18] & lfsr[33]) ^ (lfsr[9]  & lfsr[44]) ^ lfsr[58]
-step_r3 = (lfsr[2]  & lfsr[21] & lfsr[36]) ^ (lfsr[11] & lfsr[48]) ^ lfsr[55]
-step_r4 = (lfsr[3]  & lfsr[24] & lfsr[39]) ^ (lfsr[14] & lfsr[51]) ^ lfsr[60]
+step_r1 = (lfsr[4]  & lfsr[15] & lfsr[17]) ^ (lfsr[23] & lfsr[26]) ^ lfsr[61]
+step_r2 = (lfsr[7]  & lfsr[9]  & lfsr[31]) ^ (lfsr[38] & lfsr[50]) ^ lfsr[59]
+step_r3 = (lfsr[30] & lfsr[43] & lfsr[46]) ^ (lfsr[49] & lfsr[51]) ^ lfsr[60]
+step_r4 = (lfsr[12] & lfsr[29] & lfsr[54]) ^ (lfsr[55] & lfsr[57]) ^ lfsr[62]
 ```
 
-Swift oracle (`Enigma256LFSR.stepMask`) and `enigma_256_core.v` agree. Scramble-then-step order is unchanged. TensorLUT repeatedly recovered quadratic3; cubic6 held under hard Red (`verdict: blue_hold`). Coupling is the next Blue layer when we choose to roll.
+Swift oracle (`Enigma256LFSR.stepMask`) and `enigma_256_core.v` agree. Blue evolves **stronger stepping crypto** (balance + independence); TensorLUT resistance is graded afterward (`--enigma256-nlff-stats`).
 
 ## 6. Evolutionary Hardware & Polymorphic Adversarial Loops
 
@@ -84,7 +84,7 @@ Mutation parameters live in `Fixtures/enigma256_generation.json`. Blue rolls rew
 - **AXI:** Lite + **AXIS table burst** (`enigma_256_axis_tables.v` wired into `enigma_256_axi.v`; CTRL[1] arms). SoftBus burst + jitter. Co-sim: `Scripts/enigma256_axi_sim.sh` (default AXIS; `LITE=1` legacy).
 - **Handshake:** X25519, hybrid ML-KEM / X-Wing, Ed25519-signed hybrid wire frames.
 - **Wire / TCP / PSK:** `Enigma256Wire` (AEAD DATA). TCP default = **hybrid+AEAD** on macOS 26+ (`--enigma256-classical` for X25519-only; `--enigma256-passphrase` for PSK). Identity `--enigma256-identity` / `--enigma256-identity-out`; trust `--enigma256-trust`.
-- **Yosys / TensorLUT:** FPGA-style synth keeps BRAMs (`Scripts/enigma256_synth.sh`). Red Team NLFF cone (`Scripts/enigma256_tensorlut.sh`). **`squeeze_survived: false` = Blue hold** (Red failed to recover a binary elite); `true` = Red pressure → mutate. Gen 4 `coupledCubic6` (8 LUT6) holds under hard Red and a 7-config battery on gen 3. Full-core BRAM soft-map deferred.
+- **Yosys / TensorLUT:** FPGA-style synth keeps BRAMs (`Scripts/enigma256_synth.sh`). Red Team NLFF cone (`Scripts/enigma256_tensorlut.sh`). Live field = **gen 5 balanced cubic6**. Gen 4 coupling rejected. Grade stepping with `--enigma256-nlff-stats` before celebrating TensorLUT holds.
 - **Red/Blue campaign:** `Scripts/enigma256_rb_campaign.sh` / `--enigma256-campaign`; `--hard-red` and `Scripts/enigma256_red_battery.sh` for stronger Red probes.
 - **Red Team hold (updated):** Golden + AXI AXIS co-sim pass; TensorLUT is pointed at the NLFF cone on purpose — not a premature full-core melt.
 
