@@ -1,7 +1,8 @@
 `timescale 1ns / 1ps
 
 // Enigma 256 cryptographic datapath (Blue Team cipher core).
-// Matches Sources/HELUTCore/Enigma256.swift — do NOT TensorLUT-melt until golden vectors exist.
+// Matches Sources/HELUTCore/Enigma256.swift SoftBus oracle (Apple Silicon field).
+// NLFF folds track Enigma256Generation — TensorLUT melts the NLFF cone, not the BRAMs.
 //
 // Load sequence (software control plane):
 //   1. wr_en strobes fill plugboard / rotor fwd+rev / reflector BRAMs
@@ -91,10 +92,10 @@ module enigma_256_core (
     reg [7:0] offset_r1, offset_r2, offset_r3, offset_r4;
 
     // Non-linear filtering function: step enables are not raw LFSR bits.
-    wire step_r1 = (lfsr[0]  & lfsr[7])  ^ lfsr[12];
-    wire step_r2 = (lfsr[15] & lfsr[22]) ^ lfsr[29];
-    wire step_r3 = (lfsr[31] & lfsr[38]) ^ lfsr[45];
-    wire step_r4 = (lfsr[47] & lfsr[54]) ^ lfsr[61];
+    wire step_r1 = (lfsr[2]  & lfsr[8])  ^ lfsr[21];
+    wire step_r2 = (lfsr[0]  & lfsr[6])  ^ lfsr[15];
+    wire step_r3 = (lfsr[3]  & lfsr[4])  ^ lfsr[12];
+    wire step_r4 = (lfsr[11]  & lfsr[17])  ^ lfsr[23];
 
     // =========================================================================
     // 3. CRYPTOGRAPHIC DATAPATH (combinational; sampled with valid_in)

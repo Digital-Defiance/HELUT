@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 
 // Combinational NLFF only — TensorLUT-friendly (no DFFs).
-// Matches enigma_256_core / enigma_256_step_cone step enables.
+// Blue generation 1 — SoftBus field on Apple Silicon.
 
 module enigma_256_nlff_combo (
     input  wire [63:0] lfsr,
@@ -10,8 +10,8 @@ module enigma_256_nlff_combo (
     output wire        step_r3,
     output wire        step_r4
 );
-    assign step_r1 = (lfsr[0]  & lfsr[7])  ^ lfsr[12];
-    assign step_r2 = (lfsr[15] & lfsr[22]) ^ lfsr[29];
-    assign step_r3 = (lfsr[31] & lfsr[38]) ^ lfsr[45];
-    assign step_r4 = (lfsr[47] & lfsr[54]) ^ lfsr[61];
+    assign step_r1 = (lfsr[2] & lfsr[8]) ^ lfsr[21];
+    assign step_r2 = (lfsr[0] & lfsr[6]) ^ lfsr[15];
+    assign step_r3 = (lfsr[3] & lfsr[4]) ^ lfsr[12];
+    assign step_r4 = (lfsr[11] & lfsr[17]) ^ lfsr[23];
 endmodule

@@ -15,13 +15,10 @@ func enigma256PortNets(_ module: YosysModule, _ name: String) -> [Int32] {
 }
 
 /// Exhaustive coverage of each NLFF's three live bits (others held at a base pattern).
-func enigma256NLFFTrainingBatch() -> (inputs: [[Float]], expected: [[Float]]) {
-    let triples: [(Int, Int, Int)] = [
-        (0, 7, 12),
-        (15, 22, 29),
-        (31, 38, 45),
-        (47, 54, 61)
-    ]
+func enigma256NLFFTrainingBatch(
+    generation: Enigma256Generation = .current
+) -> (inputs: [[Float]], expected: [[Float]]) {
+    let triples: [(Int, Int, Int)] = generation.folds.map { ($0.a, $0.b, $0.c) }
     var seeds: [UInt64] = []
     // Base patterns so unused bits aren't all-zero lockup.
     let bases: [UInt64] = [1, 0xA5A5_A5A5_A5A5_A5A5, 0x0123_4567_89AB_CDEF]
@@ -57,7 +54,7 @@ func enigma256NLFFTrainingBatch() -> (inputs: [[Float]], expected: [[Float]]) {
             row.append(Float((s >> bit) & 1))
         }
         inputs.append(row)
-        let mask = Enigma256LFSR(seed: s).stepMask
+        let mask = Enigma256LFSR(seed: s).stepMask(using: generation)
         expected.append([
             mask.0 ? 1 : 0,
             mask.1 ? 1 : 0,
@@ -69,6 +66,7 @@ func enigma256NLFFTrainingBatch() -> (inputs: [[Float]], expected: [[Float]]) {
 }
 
 func runEnigma256TensorLUT() {
+    _ = Enigma256Generation.bootstrapFromFixture()
     let netlistPath = stringFlag("--enigma256-netlist")
         ?? "build/enigma_256_nlff_combo_netlist.json"
     let emitOut = stringFlag("--enigma256-emit-out")

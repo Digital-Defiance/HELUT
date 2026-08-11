@@ -4,6 +4,7 @@ import HELUTCore
 // MARK: - Enigma 256 golden dump (`--enigma256-golden`)
 
 func runEnigma256Golden() {
+    _ = Enigma256Generation.bootstrapFromFixture()
     let outDir = stringFlag("--enigma256-out") ?? "Fixtures/enigma256_golden"
     let plainArg = stringFlag("--enigma256-plain")
     let plaintext: [UInt8]
@@ -429,5 +430,212 @@ func runEnigma256TCPConnect() {
     } catch {
         fputs("Enigma256 connect failed: \(error)\n", stderr)
         exit(1)
+    }
+}
+
+// MARK: - Enigma 256 Red/Blue campaign (`--enigma256-campaign`)
+//
+// Field = Apple Silicon SoftBus + HELUT TensorLUT. No Zynq required.
+
+struct Enigma256TensorLUTScore: Sendable {
+    var finalCrypto: Double?
+    var squeezeSurvived: Bool?
+    var path: String
+
+    var redPressure: Bool {
+        guard let c = finalCrypto, let s = squeezeSurvived else { return false }
+        return s && c <= 1e-6
+    }
+}
+
+func enigma256ParseTensorLUTLog(at path: String) -> Enigma256TensorLUTScore {
+    var score = Enigma256TensorLUTScore(finalCrypto: nil, squeezeSurvived: nil, path: path)
+    guard let text = try? String(contentsOfFile: path, encoding: .utf8) else { return score }
+    for line in text.split(whereSeparator: \.isNewline) {
+        let s = String(line)
+        if s.hasPrefix("final_crypto:") {
+            let t = s.dropFirst("final_crypto:".count).trimmingCharacters(in: .whitespaces)
+            score.finalCrypto = Double(t)
+        } else if s.hasPrefix("squeeze_survived:") {
+            let t = s.dropFirst("squeeze_survived:".count).trimmingCharacters(in: .whitespaces).lowercased()
+            score.squeezeSurvived = (t == "true" || t == "1" || t == "yes")
+        }
+    }
+    return score
+}
+
+/// Soft Red: day key known; random-search message keys against SoftBus CT (stochastic KPA).
+func enigma256SoftBusKPA(
+    day: Enigma256DayKey,
+    plaintext: [UInt8],
+    ciphertext: [UInt8],
+    trials: Int,
+    rng: inout some RandomNumberGenerator
+) -> (bestMatches: Int, trials: Int, elapsedMs: Double) {
+    let t0 = DispatchTime.now().uptimeNanoseconds
+    var best = 0
+    for _ in 0 ..< trials {
+        var available = Array(0 ..< 16)
+        available.shuffle(using: &rng)
+        let rotors = (available[0], available[1], available[2], available[3])
+        let positions = (
+            UInt8.random(in: .min ... .max, using: &rng),
+            UInt8.random(in: .min ... .max, using: &rng),
+            UInt8.random(in: .min ... .max, using: &rng),
+            UInt8.random(in: .min ... .max, using: &rng)
+        )
+        var seed = UInt64.random(in: 1 ... .max, using: &rng)
+        if seed == 0 { seed = 1 }
+        let msg = Enigma256MessageKey(rotorIndices: rotors, positions: positions, lfsrSeed: seed)
+        let bus = Enigma256SoftBus()
+        let driver = Enigma256AXIDriver(bus: bus)
+        driver.configure(day: day, message: msg)
+        let guess = driver.transfer(plaintext)
+        var matches = 0
+        for i in 0 ..< min(guess.count, ciphertext.count) where guess[i] == ciphertext[i] {
+            matches += 1
+        }
+        if matches > best { best = matches }
+        if best == plaintext.count { break }
+    }
+    let elapsed = Double(DispatchTime.now().uptimeNanoseconds - t0) / 1_000_000
+    return (best, trials, elapsed)
+}
+
+func runEnigma256Campaign() {
+    let genesPath = stringFlag("--enigma256-genes") ?? "Fixtures/enigma256_generation.json"
+    let ledgerPath = stringFlag("--enigma256-campaign-log") ?? "logs/enigma256-rb-campaign.jsonl"
+    let tensorLog = stringFlag("--enigma256-tensorlut-log") ?? "logs/tensorlut-enigma256-nlff.log"
+    let trials = intFlag("--enigma256-campaign-trials") ?? 4_096
+    let allowMutate = CommandLine.arguments.contains("--enigma256-campaign-mutate")
+    let forceMutate = CommandLine.arguments.contains("--enigma256-campaign-force-mutate")
+    let crib = Array((stringFlag("--enigma256-plain") ?? "HELUT Enigma256 SoftBus Red/Blue crib").utf8)
+
+    let genesURL = URL(fileURLWithPath: genesPath)
+    var generation: Enigma256Generation
+    if FileManager.default.fileExists(atPath: genesPath) {
+        do {
+            generation = try Enigma256Generation.load(from: genesURL)
+        } catch {
+            fputs("Failed to load genes \(genesPath): \(error)\n", stderr)
+            exit(2)
+        }
+    } else {
+        generation = .gen0
+    }
+    generation.activate()
+
+    let ikm = Data("enigma256-rb-campaign-ikm-v1".utf8)
+    let ctx = Enigma256Context(ikm: ikm)
+    let nonce = Data("campaign-nonce-01".utf8)
+    let box = ctx.seal(crib, nonce: nonce)
+    let trueKey = Enigma256KDF.deriveMessageKey(masterIKM: ikm, nonce: nonce)
+    let bus = Enigma256SoftBus()
+    let driver = Enigma256AXIDriver(bus: bus)
+    driver.configure(day: ctx.day, message: trueKey)
+    let softCT = driver.transfer(crib)
+    precondition(softCT == box.ciphertext, "SoftBus body must match Context seal body")
+
+    var rng = SystemRandomNumberGenerator()
+    let soft = enigma256SoftBusKPA(
+        day: ctx.day,
+        plaintext: crib,
+        ciphertext: softCT,
+        trials: trials,
+        rng: &rng
+    )
+    let softPressure = soft.bestMatches == crib.count
+
+    let tensor = enigma256ParseTensorLUTLog(at: tensorLog)
+    let redPressure = softPressure || tensor.redPressure
+
+    print("Enigma 256 Red/Blue campaign (Apple Silicon SoftBus field)")
+    print("  generation: \(generation.id)")
+    print("  folds: \(generation.folds.map { "(\($0.a),\($0.b),\($0.c))" }.joined(separator: " "))")
+    print("  SoftBus KPA: best \(soft.bestMatches)/\(crib.count) over \(soft.trials) trials in \(String(format: "%.1f", soft.elapsedMs)) ms")
+    if let c = tensor.finalCrypto, let s = tensor.squeezeSurvived {
+        print("  TensorLUT: final_crypto=\(String(format: "%.6f", c)) squeeze_survived=\(s) (\(tensor.path))")
+        if generation.id != 0 {
+            print("  note: TensorLUT log may predate generation \(generation.id) — re-run Scripts/enigma256_tensorlut.sh")
+        }
+    } else {
+        print("  TensorLUT: no score in \(tensor.path) (run Scripts/enigma256_tensorlut.sh)")
+    }
+    print("  red_pressure: \(redPressure) (soft=\(softPressure) tensor=\(tensor.redPressure))")
+
+    var mutated = false
+    var nextGen = generation
+    if forceMutate || (allowMutate && redPressure) {
+        nextGen = generation.mutated(rng: &rng)
+        nextGen.activate()
+        do {
+            try FileManager.default.createDirectory(
+                at: genesURL.deletingLastPathComponent(),
+                withIntermediateDirectories: true
+            )
+            try nextGen.save(to: genesURL)
+            let combo = nextGen.emitNLFFComboVerilog()
+            try combo.write(toFile: "enigma_256_nlff_combo.v", atomically: true, encoding: .utf8)
+            for path in ["enigma_256_core.v", "enigma_256_step_cone.v"] {
+                let src = try String(contentsOfFile: path, encoding: .utf8)
+                try nextGen.rewritingNLFF(in: src).write(toFile: path, atomically: true, encoding: .utf8)
+            }
+            mutated = true
+            print("  Blue mutate → generation \(nextGen.id) (genes + NLFF Verilog rewritten)")
+            do {
+                let session = Enigma256Bridge.makeGoldenSession()
+                _ = try Enigma256Bridge.writeGoldenBundle(
+                    session: session,
+                    to: URL(fileURLWithPath: "Fixtures/enigma256_golden", isDirectory: true)
+                )
+                print("  golden fixtures regenerated under generation \(nextGen.id)")
+            } catch {
+                fputs("  warning: golden regenerate failed: \(error)\n", stderr)
+            }
+            print("  Next: ./Scripts/enigma256_sim.sh && ./Scripts/enigma256_tensorlut.sh")
+        } catch {
+            fputs("Blue mutate failed: \(error)\n", stderr)
+            exit(1)
+        }
+    } else if redPressure {
+        print("  Blue hold — red pressure present; re-run with --enigma256-campaign-mutate to roll genes")
+    } else {
+        print("  Blue hold — SoftBus KPA did not recover; TensorLUT pressure absent or unscored")
+    }
+
+    // JSONL ledger row
+    let row: [String: Any] = [
+        "ts": ISO8601DateFormatter().string(from: Date()),
+        "generation": generation.id,
+        "next_generation": nextGen.id,
+        "mutated": mutated,
+        "soft_best_matches": soft.bestMatches,
+        "soft_length": crib.count,
+        "soft_trials": soft.trials,
+        "soft_ms": soft.elapsedMs,
+        "soft_pressure": softPressure,
+        "tensor_final_crypto": tensor.finalCrypto as Any,
+        "tensor_squeeze_survived": tensor.squeezeSurvived as Any,
+        "tensor_pressure": tensor.redPressure,
+        "red_pressure": redPressure,
+        "folds": generation.folds.map { ["a": $0.a, "b": $0.b, "c": $0.c] }
+    ]
+    if let data = try? JSONSerialization.data(withJSONObject: row),
+       let line = String(data: data, encoding: .utf8) {
+        let url = URL(fileURLWithPath: ledgerPath)
+        try? FileManager.default.createDirectory(
+            at: url.deletingLastPathComponent(),
+            withIntermediateDirectories: true
+        )
+        if let handle = try? FileHandle(forWritingTo: url) {
+            defer { try? handle.close() }
+            try? handle.seekToEnd()
+            if let payload = (line + "\n").data(using: .utf8) {
+                try? handle.write(contentsOf: payload)
+            }
+        } else {
+            try? (line + "\n").write(toFile: ledgerPath, atomically: true, encoding: .utf8)
+        }
+        print("  ledger: \(ledgerPath)")
     }
 }

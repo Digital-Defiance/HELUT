@@ -10,7 +10,7 @@ export function Enigma256Page() {
             <div className="kicker">Blue Team · 2026</div>
             <h2>Fixing Enigma for a century that can melt silicon</h2>
             <p className="lede">
-              The hunt for P1030680 is a ledger of how the 1945 machine leaks. Every clean negative, every ghost board, every Turing-shaped shortcut I weaponized against M4 is also a specification for what a rotor cipher must never do again. Enigma 256 is that rewrite: a base-256 polymorphic stream cipher whose datapath lives in FPGA fabric and whose keys never sit in a water-soluble codebook.
+              The hunt for P1030680 is a ledger of how the 1945 machine leaks. Every clean negative, every ghost board, every Turing-shaped shortcut I weaponized against M4 is also a specification for what a rotor cipher must never do again. Enigma 256 is that rewrite: a base-256 polymorphic stream cipher whose datapath is SoftBus-backed Verilog on Apple Silicon and whose keys never sit in a water-soluble codebook.
             </p>
             <p className="lede" style={{ marginTop: '1rem' }}>
               This is not nostalgia hardware. It is the Blue Team answer to a Red Team that already runs Welchman, Stochastic KPA, and TensorLUT on Apple Silicon—built from the same findings documented in the{' '}
@@ -160,7 +160,7 @@ export function Enigma256Page() {
                   The Blue Team core is <code>enigma_256_core</code>: AXI-friendly BRAM load for plugboard / four rotors fwd+rev / reflector, then <code>load_state</code> for LFSR + positions, then a streaming <code>valid_in</code> byte path. Combinational scramble under current offsets, register the output, then step—matching the Swift oracle’s scramble-then-step order.
                 </p>
                 <p>
-                  Control plane stays on the CPU (CryptoKit HKDF, ECDH libraries). Data plane stays in programmable logic on COTS SoCs—no custom ASIC. Mutation parameters (LFSR taps, expansion labels) can ship as software; the node recompiles and flashes its own fabric.
+                  Control plane stays in Swift (CryptoKit HKDF, ECDH). Data plane is exercised on <strong>Apple Silicon SoftBus</strong> with iverilog/Yosys as the Red harness—no board on the critical path. Generation rolls ship as SoftBus genes plus NLFF Verilog rewrites.
                 </p>
               </div>
             </article>
@@ -170,10 +170,10 @@ export function Enigma256Page() {
               <h3>Evolve the cipher against the same engines that hunt M4.</h3>
               <div className="prose">
                 <p>
-                  HELUT already breeds alien netlists, melts LUT INIT tables, and scores stecker involutions. That Red Team becomes the continuous adversary: time-to-crack metrics against the current Enigma 256 generation. If a tensor reduction drops below threshold, the Blue Team breeds new LFSR taps and rotor-generation rules and rolls them to the field.
+                  HELUT already breeds alien netlists, melts LUT INIT tables, and scores stecker involutions. That Red Team is the continuous adversary on this Mac: SoftBus KPA and TensorLUT against the current Enigma 256 generation. If pressure crosses threshold, Blue mutates NLFF folds and HKDF generation labels via <code>--enigma256-campaign-mutate</code>.
                 </p>
                 <p>
-                  Boundary rule, written into the spec and the Verilog header: do <em>not</em> TensorLUT-melt <code>enigma_256_core.v</code> until golden encrypt/decrypt vectors exist and Yosys synthesis is clean. TensorLUT remains the attack harness for M4 and evolved netlists; Enigma 256 first needs a correct reciprocal machine, then a deliberate adversarial loop—not a premature stecker-style melt.
+                  Boundary rule: TensorLUT melts the NLFF cone on purpose; full-core BRAM soft-map stays deferred. SoftBus is the field fabric—the cipher does not wait for a Zynq.
                 </p>
               </div>
             </article>
@@ -222,6 +222,12 @@ export function Enigma256Page() {
               </span>
             </li>
             <li>
+              <span className="mono">RB</span>
+              <span>
+                <strong>Campaign:</strong> <code>--enigma256-campaign</code> / <code>Scripts/enigma256_rb_campaign.sh</code> — SoftBus KPA + TensorLUT ledger; Blue rolls <code>Enigma256Generation</code> under pressure.
+              </span>
+            </li>
+            <li>
               <span className="mono">PATH</span>
               <span>
                 <strong>Byte scrambler:</strong> plugboard → four forward rotors with offset add/sub → un-reflector → four reverse rotors → plugboard. Encrypt equals decrypt under the same state machine.
@@ -230,7 +236,7 @@ export function Enigma256Page() {
             <li>
               <span className="mono">HOLD</span>
               <span>
-                <strong>TensorLUT hold line:</strong> melt only after golden vectors and a clean Yosys netlist. Until then, Red Team pressure stays on M4 TensorLUT / Welchman / Stochastic arms documented in the journal.
+                <strong>Full-core melt:</strong> NLFF cone is fair game; do not soft-map the BRAM datapath until a campaign generation explicitly asks for it.
               </span>
             </li>
           </ul>
@@ -243,7 +249,7 @@ export function Enigma256Page() {
             <div className="kicker">The Plan</div>
             <h2>What ships next, in order of honesty</h2>
             <p>
-              A cipher that claims to outrun HELUT must be graded the way the journal grades the Bombe: controls first, then adversarial pressure, then field mutation.
+              A cipher that claims to outrun HELUT must be graded the way the journal grades the Bombe: controls first, then adversarial pressure, then SoftBus generation rolls on Apple Silicon.
             </p>
           </div>
 
@@ -283,17 +289,17 @@ export function Enigma256Page() {
               <h3>AXIS table burst + deliberate TensorLUT on NLFF cone.</h3>
               <div className="prose">
                 <p>
-                  <code>enigma_256_axi</code> loads day tables over AXI-Stream (2,560 bytes; CTRL[1] arms). Yosys keeps BRAMs for FPGA; TensorLUT hits the 4-LUT NLFF cone—baseline crypto 0, and λ=0 explore + discrete polish recovers a binary elite (`squeeze_survived`). Listen/connect default to hybrid+AEAD. Full-core soft-map stays deferred.
+                  <code>enigma_256_axi</code> loads day tables over AXI-Stream (2,560 bytes; CTRL[1] arms). Yosys keeps BRAMs for FPGA-style synth; TensorLUT hits the 4-LUT NLFF cone—baseline crypto 0, and λ=0 explore + discrete polish recovers a binary elite (`squeeze_survived`). Listen/connect default to hybrid+AEAD. Full-core soft-map stays deferred.
                 </p>
               </div>
             </article>
 
             <article className="tl-item">
-              <div className="when">5 — Field</div>
-              <h3>COTS SoC data plane + OTA mutation.</h3>
+              <div className="when">5 — Live</div>
+              <h3>Red/Blue on Apple Silicon SoftBus.</h3>
               <div className="prose">
                 <p>
-                  Burst-load day-key tables on real fabric; keep hybrid KEM, HKDF-SHA512, and AEAD on the control plane; flash polymorphic updates without new silicon.
+                  Field fabric is SoftBus on this device. <code>--enigma256-campaign</code> scores SoftBus KPA and TensorLUT; under pressure Blue rolls <code>Enigma256Generation</code> (NLFF folds + HKDF labels) and rewrites the NLFF Verilog cones. No Zynq on the critical path.
                 </p>
               </div>
             </article>

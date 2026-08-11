@@ -18,10 +18,10 @@ module enigma_256_step_cone (
 );
     wire [63:0] lfsr_next = {lfsr[62:0], 1'b0} ^ (lfsr[63] ? 64'hD800000000000000 : 64'h0);
 
-    assign step_r1 = (lfsr[0]  & lfsr[7])  ^ lfsr[12];
-    assign step_r2 = (lfsr[15] & lfsr[22]) ^ lfsr[29];
-    assign step_r3 = (lfsr[31] & lfsr[38]) ^ lfsr[45];
-    assign step_r4 = (lfsr[47] & lfsr[54]) ^ lfsr[61];
+    assign step_r1 = (lfsr[2] & lfsr[8]) ^ lfsr[21];
+    assign step_r2 = (lfsr[0] & lfsr[6]) ^ lfsr[15];
+    assign step_r3 = (lfsr[3] & lfsr[4]) ^ lfsr[12];
+    assign step_r4 = (lfsr[11] & lfsr[17]) ^ lfsr[23];
 
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
