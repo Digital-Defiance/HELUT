@@ -53,7 +53,10 @@ let positionalArgs: [String] = {
         "--exhaust-top", "--exhaust-plugs", "--selftest-len",
         "--bombe-menus", "--bombe-plugs", "--bombe-report", "--bombe-pipeline",
         "--bombe-from", "--bombe-min-crib", "--bombe-fixture",
-        "--bombe-confirm", "--bombe-partners", "--bombe-opening-len"
+        "--bombe-confirm", "--bombe-partners", "--bombe-opening-len",
+        "--enigma256-out", "--enigma256-plain",
+        "--enigma256-in", "--enigma256-ikm", "--enigma256-salt", "--enigma256-nonce",
+        "--enigma256-mode"
     ]
     while index < args.count {
         let arg = args[index]
@@ -70,6 +73,17 @@ let positionalArgs: [String] = {
     }
     return out
 }()
+
+if CommandLine.arguments.contains("--enigma256-golden") {
+    runEnigma256Golden()
+    exit(0)
+}
+
+if CommandLine.arguments.contains("--enigma256-crypt") {
+    runEnigma256Crypt()
+    exit(0)
+}
+
 let netlistPath = resolveEnigmaNetlistPath(
     argument: positionalArgs.first,
     preferredName: p1030680Bombe ? "enigma_m4_netlist.json" : "enigma_netlist.json"
