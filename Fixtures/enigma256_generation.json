@@ -33,6 +33,6 @@
       "f" : 60
     }
   ],
-  "formula" : "cubic6",
-  "id" : 3
+  "formula" : "coupledCubic6",
+  "id" : 4
 }

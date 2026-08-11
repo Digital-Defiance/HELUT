@@ -6,13 +6,14 @@ import Foundation
 // Red Team (TensorLUT / SoftBus KPA) scores the live generation; Blue mutates
 // NLFF folds + HKDF domain labels when pressure crosses threshold.
 
-/// NLFF boolean class. Gen 0–2 used quadratic3; gen 3+ uses cubic6 after TensorLUT
-/// repeatedly recovered the 3-input AND-XOR cone.
+/// NLFF boolean class. Gen 0–2 used quadratic3; gen 3 cubic6; gen 4+ coupledCubic6.
 package enum Enigma256NLFFFormula: String, Sendable, Equatable, Codable {
     /// step = (a ∧ b) ⊕ c
     case quadratic3
     /// step = (a ∧ b ∧ c) ⊕ (d ∧ e) ⊕ f  (algebraic degree 3, six taps)
     case cubic6
+    /// Coupled cubic6: step_i = f_i ⊕ (f_{i+1} ∧ f_{i+2}) — shared cross terms, denser cone
+    case coupledCubic6
 }
 
 /// Tap indices into the 64-bit LFSR for one rotor step enable.
@@ -54,18 +55,24 @@ package struct Enigma256NLFFFold: Sendable, Equatable, Codable, Hashable {
     package func taps(for formula: Enigma256NLFFFormula) -> [Int] {
         switch formula {
         case .quadratic3: return [a, b, c]
-        case .cubic6: return [a, b, c, d, e, f]
+        case .cubic6, .coupledCubic6: return [a, b, c, d, e, f]
         }
     }
 
-    package func evaluate(_ state: UInt64, formula: Enigma256NLFFFormula) -> Bool {
+    /// Raw cubic6 / quadratic leaf (before any cross-coupling).
+    package func leaf(_ state: UInt64, formula: Enigma256NLFFFormula) -> Bool {
         func bit(_ i: Int) -> UInt64 { (state >> i) & 1 }
         switch formula {
         case .quadratic3:
             return ((bit(a) & bit(b)) ^ bit(c)) != 0
-        case .cubic6:
+        case .cubic6, .coupledCubic6:
             return ((bit(a) & bit(b) & bit(c)) ^ (bit(d) & bit(e)) ^ bit(f)) != 0
         }
+    }
+
+    package func evaluate(_ state: UInt64, formula: Enigma256NLFFFormula) -> Bool {
+        // Coupling is applied at generation level across all four folds.
+        leaf(state, formula: formula)
     }
 }
 
@@ -101,6 +108,13 @@ package struct Enigma256Generation: Sendable, Equatable, Codable {
             Enigma256NLFFFold(a: 2, b: 21, c: 36, d: 11, e: 48, f: 55),
             Enigma256NLFFFold(a: 3, b: 24, c: 39, d: 14, e: 51, f: 60)
         ]
+    )
+
+    /// Gen 4: same taps as gen3, cross-coupled step enables (denser TensorLUT cone).
+    package static let gen4Coupled = Enigma256Generation(
+        id: 4,
+        formula: .coupledCubic6,
+        folds: Enigma256Generation.gen3Cubic.folds
     )
 
     package init(id: Int, formula: Enigma256NLFFFormula = .quadratic3, folds: [Enigma256NLFFFold]) {
@@ -167,7 +181,7 @@ package struct Enigma256Generation: Sendable, Equatable, Codable {
     }
 
     /// Breed a new NLFF schedule and bump generation id.
-    /// Always emits `.cubic6` — quadratic3 lost the TensorLUT arms race.
+    /// Emits `.coupledCubic6` going forward (cubic6 held; coupling is the next Blue layer).
     package func mutated(rng: inout some RandomNumberGenerator) -> Enigma256Generation {
         var used = Set<Int>()
         var nextFolds: [Enigma256NLFFFold] = []
@@ -175,7 +189,6 @@ package struct Enigma256Generation: Sendable, Equatable, Codable {
         for _ in 0 ..< 4 {
             var candidates = Array(0 ..< 64).filter { !used.contains($0) }
             candidates.shuffle(using: &rng)
-            // Prefer a ~24-bit window so taps stay mixed but local enough for synth.
             let windowOrigin = candidates[0]
             let window = candidates.filter { abs($0 - windowOrigin) <= 23 }
             let pickPool = window.count >= 6 ? window : candidates
@@ -189,37 +202,69 @@ package struct Enigma256Generation: Sendable, Equatable, Codable {
                 )
             )
         }
-        return Enigma256Generation(id: id + 1, formula: .cubic6, folds: nextFolds)
+        return Enigma256Generation(id: id + 1, formula: .coupledCubic6, folds: nextFolds)
     }
 
-    /// Structural upgrade path: jump to cubic6 gen3 schedule (or id+1 if already ≥3).
+    /// Structural upgrade: quadratic3→cubic6 gen3, cubic6→coupledCubic6 gen4, else mutate.
     package func hardenedCubic() -> Enigma256Generation {
-        if id < 3 {
-            return .gen3Cubic
+        switch formula {
+        case .quadratic3:
+            return id < 3 ? .gen3Cubic : Enigma256Generation(id: max(3, id + 1), formula: .cubic6, folds: folds)
+        case .cubic6:
+            return id < 4
+                ? .gen4Coupled
+                : Enigma256Generation(id: id + 1, formula: .coupledCubic6, folds: folds)
+        case .coupledCubic6:
+            var rng = SystemRandomNumberGenerator()
+            return mutated(rng: &rng)
         }
-        var rng = SystemRandomNumberGenerator()
-        return mutated(rng: &rng)
     }
 
-    package func nlffExpression(_ fold: Enigma256NLFFFold) -> String {
+    package func leafExpression(_ fold: Enigma256NLFFFold) -> String {
         switch formula {
         case .quadratic3:
             return "(lfsr[\(fold.a)] & lfsr[\(fold.b)]) ^ lfsr[\(fold.c)]"
-        case .cubic6:
+        case .cubic6, .coupledCubic6:
             return "(lfsr[\(fold.a)] & lfsr[\(fold.b)] & lfsr[\(fold.c)]) ^ (lfsr[\(fold.d)] & lfsr[\(fold.e)]) ^ lfsr[\(fold.f)]"
         }
     }
 
     package func nlffAssignLines(indent: String = "    ") -> String {
-        folds.enumerated().map { i, fold in
-            "\(indent)assign step_r\(i + 1) = \(nlffExpression(fold));"
-        }.joined(separator: "\n")
+        switch formula {
+        case .quadratic3, .cubic6:
+            return folds.enumerated().map { i, fold in
+                "\(indent)assign step_r\(i + 1) = \(leafExpression(fold));"
+            }.joined(separator: "\n")
+        case .coupledCubic6:
+            var lines: [String] = []
+            for (i, fold) in folds.enumerated() {
+                lines.append("\(indent)wire nlff_f\(i + 1) = \(leafExpression(fold));")
+            }
+            lines.append("\(indent)assign step_r1 = nlff_f1 ^ (nlff_f2 & nlff_f3);")
+            lines.append("\(indent)assign step_r2 = nlff_f2 ^ (nlff_f3 & nlff_f4);")
+            lines.append("\(indent)assign step_r3 = nlff_f3 ^ (nlff_f4 & nlff_f1);")
+            lines.append("\(indent)assign step_r4 = nlff_f4 ^ (nlff_f1 & nlff_f2);")
+            return lines.joined(separator: "\n")
+        }
     }
 
     package func nlffWireLines(indent: String = "    ") -> String {
-        folds.enumerated().map { i, fold in
-            "\(indent)wire step_r\(i + 1) = \(nlffExpression(fold));"
-        }.joined(separator: "\n")
+        switch formula {
+        case .quadratic3, .cubic6:
+            return folds.enumerated().map { i, fold in
+                "\(indent)wire step_r\(i + 1) = \(leafExpression(fold));"
+            }.joined(separator: "\n")
+        case .coupledCubic6:
+            var lines: [String] = []
+            for (i, fold) in folds.enumerated() {
+                lines.append("\(indent)wire nlff_f\(i + 1) = \(leafExpression(fold));")
+            }
+            lines.append("\(indent)wire step_r1 = nlff_f1 ^ (nlff_f2 & nlff_f3);")
+            lines.append("\(indent)wire step_r2 = nlff_f2 ^ (nlff_f3 & nlff_f4);")
+            lines.append("\(indent)wire step_r3 = nlff_f3 ^ (nlff_f4 & nlff_f1);")
+            lines.append("\(indent)wire step_r4 = nlff_f4 ^ (nlff_f1 & nlff_f2);")
+            return lines.joined(separator: "\n")
+        }
     }
 
     package func emitNLFFComboVerilog() -> String {
@@ -242,19 +287,19 @@ package struct Enigma256Generation: Sendable, Equatable, Codable {
         """
     }
 
-    /// Rewrite `wire` / `assign` step_rN lines in core / cone sources.
+    /// Rewrite NLFF step / leaf lines in core / cone / combo sources.
     package func rewritingNLFF(in verilog: String) -> String {
         var out = verilog
-        let pattern = #"(?m)^[ \t]*(?:wire|assign)[ \t]+step_r[1-4][ \t]*=[ \t]*[^;]+;"#
+        let pattern = #"(?m)^[ \t]*(?:wire|assign)[ \t]+(?:nlff_f|step_r)[1-4][ \t]*=[ \t]*[^;]+;"#
         guard let re = try? NSRegularExpression(pattern: pattern) else { return out }
         let range = NSRange(out.startIndex ..< out.endIndex, in: out)
         let matches = re.matches(in: out, range: range)
-        guard matches.count >= 4 else { return out }
-        let firstFour = Array(matches.prefix(4))
-        let first = Range(firstFour[0].range, in: out)!
-        let last = Range(firstFour[3].range, in: out)!
-        let replacement = out[first].contains("assign") ? nlffAssignLines() : nlffWireLines()
-        out.replaceSubrange(first.lowerBound ..< last.upperBound, with: replacement)
+        guard let first = matches.first, let last = matches.last,
+              let firstR = Range(first.range, in: out),
+              let lastR = Range(last.range, in: out) else { return out }
+        let sample = String(out[firstR])
+        let replacement = sample.contains("assign") ? nlffAssignLines() : nlffWireLines()
+        out.replaceSubrange(firstR.lowerBound ..< lastR.upperBound, with: replacement)
         return out
     }
 }

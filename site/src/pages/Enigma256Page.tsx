@@ -200,7 +200,7 @@ export function Enigma256Page() {
             <li>
               <span className="mono">STEP</span>
               <span>
-                <strong>Galois + NLFF:</strong> feedback <code>0xD800_0000_0000_0000</code>. Gen 3+ uses cubic6 <code>(a∧b∧c)⊕(d∧e)⊕f</code> (six taps); earlier gens used quadratic3. Genes in <code>Fixtures/enigma256_generation.json</code>. Zero seed forced to 1.
+                <strong>Galois + NLFF:</strong> feedback <code>0xD800_0000_0000_0000</code>. Gen 3 cubic6 held against TensorLUT squeeze; gen 4+ can couple leaves as <code>f_i⊕(f_{i+1}∧f_{i+2})</code>. Genes in <code>Fixtures/enigma256_generation.json</code>. Zero seed forced to 1.
               </span>
             </li>
             <li>

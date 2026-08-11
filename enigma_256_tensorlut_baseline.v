@@ -73,7 +73,7 @@ module enigma_256_tensorlut_baseline (
     output wire out_69;
 
     // Internal Netlist Wires
-    wire [69:0] n;
+    wire [73:0] n;
 
     // Primary I/O Bindings
     assign n[2] = in_2;
@@ -147,27 +147,51 @@ module enigma_256_tensorlut_baseline (
 
     // Adversarially Synthesized Combinational Logic
     LUT6 #(
-        .INIT(64'h807F7F7F7F808080)
+        .INIT(64'h7878787878787878)
     ) lut_0 (
-        .I0(n[41]), .I1(n[5]), .I2(n[26]), .I3(n[16]), .I4(n[53]), .I5(n[62]),
+        .I0(n[70]), .I1(n[71]), .I2(n[72]), .I3(1'b0), .I4(1'b0), .I5(1'b0),
         .O(n[69])
     );
     LUT6 #(
         .INIT(64'h807F7F7F7F808080)
     ) lut_1 (
-        .I0(n[38]), .I1(n[4]), .I2(n[23]), .I3(n[13]), .I4(n[50]), .I5(n[57]),
-        .O(n[68])
+        .I0(n[29]), .I1(n[2]), .I2(n[15]), .I3(n[7]), .I4(n[43]), .I5(n[64]),
+        .O(n[70])
     );
     LUT6 #(
         .INIT(64'h807F7F7F7F808080)
     ) lut_2 (
         .I0(n[35]), .I1(n[3]), .I2(n[20]), .I3(n[11]), .I4(n[46]), .I5(n[60]),
-        .O(n[67])
+        .O(n[71])
     );
     LUT6 #(
         .INIT(64'h807F7F7F7F808080)
     ) lut_3 (
-        .I0(n[29]), .I1(n[2]), .I2(n[15]), .I3(n[7]), .I4(n[43]), .I5(n[64]),
+        .I0(n[41]), .I1(n[5]), .I2(n[26]), .I3(n[16]), .I4(n[53]), .I5(n[62]),
+        .O(n[72])
+    );
+    LUT6 #(
+        .INIT(64'h7878787878787878)
+    ) lut_4 (
+        .I0(n[70]), .I1(n[72]), .I2(n[73]), .I3(1'b0), .I4(1'b0), .I5(1'b0),
+        .O(n[68])
+    );
+    LUT6 #(
+        .INIT(64'h807F7F7F7F808080)
+    ) lut_5 (
+        .I0(n[38]), .I1(n[4]), .I2(n[23]), .I3(n[13]), .I4(n[50]), .I5(n[57]),
+        .O(n[73])
+    );
+    LUT6 #(
+        .INIT(64'h7878787878787878)
+    ) lut_6 (
+        .I0(n[72]), .I1(n[73]), .I2(n[71]), .I3(1'b0), .I4(1'b0), .I5(1'b0),
+        .O(n[67])
+    );
+    LUT6 #(
+        .INIT(64'h7878787878787878)
+    ) lut_7 (
+        .I0(n[71]), .I1(n[73]), .I2(n[70]), .I3(1'b0), .I4(1'b0), .I5(1'b0),
         .O(n[66])
     );
 
