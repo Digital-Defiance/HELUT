@@ -1158,8 +1158,10 @@ func enigma256HillClimbJoint(
 
 func runEnigma256StructuredKPA() {
     _ = Enigma256Generation.bootstrapFromFixture()
-    let rounds = intFlag("--enigma256-kpa-rounds") ?? 8_192
-    let crib = Array((stringFlag("--enigma256-plain") ?? "HELUT Enigma256 structured SoftBus KPA crib vector!!").utf8)
+    let rounds = intFlag("--enigma256-kpa-rounds") ?? 16_384
+    let defaultCrib =
+        "HELUT Enigma256 structured SoftBus KPA long crib — day-only joint hill-climb pressure vector for gen5 SoftBus field!!"
+    let crib = Array((stringFlag("--enigma256-plain") ?? defaultCrib).utf8)
     let ikm = Data("enigma256-struct-kpa-ikm-v1!!!!".utf8)
     let ctx = Enigma256Context(ikm: ikm)
     let nonce = Data("struct-kpa-nonce!".utf8)

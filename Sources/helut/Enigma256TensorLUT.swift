@@ -149,27 +149,90 @@ func enigma256NLFFOffsetTrainingBatch(
 }
 
 /// Frozen Red stand-in bijections — must match `enigma_256_scramble_frag_combo.v`.
+func enigma256FragRotL(_ x: UInt8, _ n: UInt8) -> UInt8 {
+    let k = n % 8
+    return (x &<< k) | (x &>> (8 - k))
+}
+
+func enigma256FragRotR(_ x: UInt8, _ n: UInt8) -> UInt8 {
+    let k = n % 8
+    return (x &>> k) | (x &<< (8 - k))
+}
+
 func enigma256FragSbox1(_ x: UInt8) -> UInt8 {
-    let a = (x &<< 3) | (x &>> 5) // rotl 3
+    let a = enigma256FragRotL(x, 3)
     let b = a &+ 0x3D
-    return (b &<< 1) | (b &>> 7) // rotl 1
+    return enigma256FragRotL(b, 1)
+}
+
+func enigma256FragSbox1Inv(_ x: UInt8) -> UInt8 {
+    let a = enigma256FragRotR(x, 1)
+    let b = a &- 0x3D
+    return enigma256FragRotR(b, 3)
 }
 
 func enigma256FragSbox2(_ x: UInt8) -> UInt8 {
-    let a = (x &<< 5) | (x &>> 3) // rotl 5
+    let a = enigma256FragRotL(x, 5)
     let b = a ^ 0xA5
     return b &+ 0x11
 }
 
+func enigma256FragSbox2Inv(_ x: UInt8) -> UInt8 {
+    let a = x &- 0x11
+    let b = a ^ 0xA5
+    return enigma256FragRotR(b, 5)
+}
+
+func enigma256FragSbox3(_ x: UInt8) -> UInt8 {
+    let a = enigma256FragRotL(x, 2)
+    let b = a ^ 0xC3
+    return b &+ 0x27
+}
+
+func enigma256FragSbox3Inv(_ x: UInt8) -> UInt8 {
+    let a = x &- 0x27
+    let b = a ^ 0xC3
+    return enigma256FragRotR(b, 2)
+}
+
+func enigma256FragSbox4(_ x: UInt8) -> UInt8 {
+    let a = enigma256FragRotL(x, 7)
+    let b = a &+ 0x6E
+    return b ^ 0x39
+}
+
+func enigma256FragSbox4Inv(_ x: UInt8) -> UInt8 {
+    let a = x ^ 0x39
+    let b = a &- 0x6E
+    return enigma256FragRotR(b, 7)
+}
+
+func enigma256FragUkw(_ x: UInt8) -> UInt8 {
+    let swapped = (x &<< 4) | (x &>> 4)
+    return swapped ^ 0x55
+}
+
+func enigma256FragStage(_ x: UInt8, offset: UInt8, sbox: (UInt8) -> UInt8) -> UInt8 {
+    sbox(x &+ offset) &- offset
+}
+
+/// Full frozen reciprocal fragment (identity plug sandwich).
 func enigma256ScrambleFrag(
     dataIn: UInt8,
     offsetR1: UInt8,
-    offsetR2: UInt8
+    offsetR2: UInt8,
+    offsetR3: UInt8,
+    offsetR4: UInt8
 ) -> UInt8 {
-    let r1In = dataIn &+ offsetR1
-    let r1Out = enigma256FragSbox1(r1In) &- offsetR1
-    let r2In = r1Out &+ offsetR2
-    return enigma256FragSbox2(r2In) &- offsetR2
+    let r1 = enigma256FragStage(dataIn, offset: offsetR1, sbox: enigma256FragSbox1)
+    let r2 = enigma256FragStage(r1, offset: offsetR2, sbox: enigma256FragSbox2)
+    let r3 = enigma256FragStage(r2, offset: offsetR3, sbox: enigma256FragSbox3)
+    let r4 = enigma256FragStage(r3, offset: offsetR4, sbox: enigma256FragSbox4)
+    let ref = enigma256FragUkw(r4)
+    let r4r = enigma256FragStage(ref, offset: offsetR4, sbox: enigma256FragSbox4Inv)
+    let r3r = enigma256FragStage(r4r, offset: offsetR3, sbox: enigma256FragSbox3Inv)
+    let r2r = enigma256FragStage(r3r, offset: offsetR2, sbox: enigma256FragSbox2Inv)
+    return enigma256FragStage(r2r, offset: offsetR1, sbox: enigma256FragSbox1Inv)
 }
 
 /// Past-offset cone: LFSR + data_in + offsets → frag_out + steps + next offsets + lfsr_next_hi.
@@ -186,10 +249,9 @@ func enigma256ScrambleFragTrainingBatch(
     let dataPatterns: [UInt8] = [0x00, 0x01, 0x7F, 0x80, 0xA5, 0xFF]
     var inputs: [[Float]] = []
     var expected: [[Float]] = []
-    // Subsample LFSR seeds to keep batch size tractable (~4k rows).
     let seeds = enigma256NLFFSeedPatterns(generation: generation)
-    let stride = max(1, seeds.count / 48)
-    let thinSeeds = stride == 1 ? seeds : stride(from: 0, to: seeds.count, by: stride).map { seeds[$0] }
+    let step = max(1, seeds.count / 48)
+    let thinSeeds = step == 1 ? seeds : Swift.stride(from: 0, to: seeds.count, by: step).map { seeds[$0] }
     for s in thinSeeds {
         let mask = Enigma256LFSR(seed: s).stepMask(using: generation)
         let steps: [Bool] = [mask.0, mask.1, mask.2, mask.3]
@@ -210,7 +272,9 @@ func enigma256ScrambleFragTrainingBatch(
                 let frag = enigma256ScrambleFrag(
                     dataIn: dataIn,
                     offsetR1: offsets.0,
-                    offsetR2: offsets.1
+                    offsetR2: offsets.1,
+                    offsetR3: offsets.2,
+                    offsetR4: offsets.3
                 )
                 var out: [Float] = []
                 enigma256AppendByteBits(&out, frag)

@@ -41,7 +41,7 @@ if [[ "$RUN_GATES" -eq 1 ]]; then
 
   echo "=== GATE: structured SoftBus KPA (partial-leak + day-only joint) ==="
   "$HELUT_BIN" --enigma256-structured-kpa \
-    --enigma256-kpa-rounds "${KPA_ROUNDS:-4096}"
+    --enigma256-kpa-rounds "${KPA_ROUNDS:-16384}"
 fi
 
 if [[ "$RUN_TENSOR" -eq 1 ]]; then

@@ -228,7 +228,7 @@ flowchart LR
 | NLFF | `enigma_256_nlff_combo` | 4 | Step enables only |
 | + LFSR hi | `enigma_256_nlff_lfsr_combo` | 8 | + `lfsr_next[63:56]` |
 | + offsets | `enigma_256_nlff_offset_combo` | ~47 | + `next_ri = offset_ri + step_ri` |
-| **Past NLFF** | `enigma_256_scramble_frag_combo` | denser | + frozen R1/R2 scramble fragment |
+| **Past NLFF** | `enigma_256_scramble_frag_combo` | ~295 | frozen reciprocal R1…R4 + un-UKW + NLFF/offsets |
 | Full core | `enigma_256_core` | — | **Deferred** (BRAM melt) |
 
 ## 7. Deployment field (Apple Silicon)
@@ -244,7 +244,7 @@ flowchart LR
 - **AXI / SoftBus:** Lite + AXIS table burst (`enigma_256_axis_tables.v`); SoftBus burst + jitter. Co-sim: `Scripts/enigma256_axi_sim.sh`.
 - **Handshake / wire / TCP / PSK:** hybrid default on macOS 26+; `--enigma256-classical` / `--enigma256-passphrase`.
 - **Live genes:** gen **5** balanced cubic6.
-- **Campaign:** `Scripts/enigma256_rb_campaign.sh` — fail-closes on SoftBus `ent` + structured KPA (`--no-gates` to skip). `--hard-red` NLFF; `--wide` **scramble-fragment** cone (past NLFF); `--wide-offset` / `--wide-lfsr` for intermediate cones. Battery: `Scripts/enigma256_red_battery.sh`.
+- **Campaign:** `Scripts/enigma256_rb_campaign.sh` — fail-closes on SoftBus `ent` + structured KPA (`--no-gates` to skip; KPA default 16384 rounds + long crib). `--hard-red` NLFF; `--wide` **scramble-fragment** cone (past NLFF); `--wide-offset` / `--wide-lfsr` for intermediate cones. Batteries: `Scripts/enigma256_red_battery.sh`, `Scripts/enigma256_scramble_frag_battery.sh`.
 - **Ent:** PRNG plaintext (`Scripts/enigma256_ent.sh`). Zero-PT is diagnostic only (un-reflector FP bias).
 
 ## 9. Protocol gap closure
@@ -256,4 +256,4 @@ flowchart LR
 | Key state | Nonce-reuse keystream collision | Critical | Monotonic counter + reject reuse |
 | Hardware bus | 2,560 AXI-Lite table writes | Medium | AXIS / SoftBus burst load |
 | Side-channel | BRAM address DPA | Medium | Stream jitter; dual-rail noted for HA |
-| Red surface | NLFF-only diminishing returns | — | Offset cone (`--wide`); full-core melt still deferred |
+| Red surface | NLFF-only diminishing returns | — | Scramble-frag cone (`--wide`, ~295 LUT6); full-core melt still deferred |
