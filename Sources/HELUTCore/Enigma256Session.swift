@@ -1,30 +1,43 @@
+import CryptoKit
 import Foundation
 
 // MARK: - Enigma 256 session API (control plane)
 //
-// IKM → day key → per-message nonce → seal/open. Reciprocal cipher: seal ≡ open
-// with the same day key + nonce. FPGA programming goes through `Enigma256CoreHandle`
-// (see ENIGMA256_REGMAP.md).
+// IKM → day key → per-message nonce → seal/open. Reciprocal cipher body:
+// seal ≡ open with the same day key + nonce. Wire/file containers use AEAD
+// (HMAC-SHA512) via `sealAEAD` / `Enigma256ProtectedSession`.
 
-/// Sealed blob: public nonce + ciphertext (no MAC; confidentiality only).
+/// Sealed blob: public nonce + ciphertext + optional AEAD tag.
 package struct Enigma256SealedBox: Sendable, Equatable {
     package var nonce: Data
     package var ciphertext: [UInt8]
+    /// HMAC-SHA512 truncated tag (32 bytes). Nil only for legacy v1 containers.
+    package var tag: Data?
 
-    package init(nonce: Data, ciphertext: [UInt8]) {
+    package init(nonce: Data, ciphertext: [UInt8], tag: Data? = nil) {
         precondition(!nonce.isEmpty, "nonce must be non-empty")
         self.nonce = nonce
         self.ciphertext = ciphertext
+        self.tag = tag
     }
 
-    /// On-wire container: `E256` | ver=1 | nlen | nonce | ciphertext.
+    /// On-wire container: `E256` | ver | nlen | nonce | ciphertext [| tag].
+    /// ver=2 includes 32-byte tag; ver=1 is legacy body-only (tests / migration).
     package func encode() -> Data {
         precondition(nonce.count <= 255)
         var out = Data("E256".utf8)
-        out.append(1) // version
-        out.append(UInt8(nonce.count))
-        out.append(nonce)
-        out.append(contentsOf: ciphertext)
+        if let tag, tag.count == Enigma256AEAD.tagLength {
+            out.append(Enigma256AEAD.containerVersion)
+            out.append(UInt8(nonce.count))
+            out.append(nonce)
+            out.append(contentsOf: ciphertext)
+            out.append(tag)
+        } else {
+            out.append(1)
+            out.append(UInt8(nonce.count))
+            out.append(nonce)
+            out.append(contentsOf: ciphertext)
+        }
         return out
     }
 
@@ -33,12 +46,24 @@ package struct Enigma256SealedBox: Sendable, Equatable {
         let magic = String(data: data.prefix(4), encoding: .utf8)
         guard magic == "E256" else { throw Enigma256SessionError.badMagic }
         let version = data[4]
-        guard version == 1 else { throw Enigma256SessionError.unsupportedVersion(version) }
         let nlen = Int(data[5])
         guard data.count >= 6 + nlen else { throw Enigma256SessionError.truncatedContainer }
         let nonce = data.subdata(in: 6 ..< (6 + nlen))
-        let ct = [UInt8](data.subdata(in: (6 + nlen) ..< data.count))
-        return Enigma256SealedBox(nonce: nonce, ciphertext: ct)
+        let rest = data.subdata(in: (6 + nlen) ..< data.count)
+        switch version {
+        case 1:
+            return Enigma256SealedBox(nonce: nonce, ciphertext: [UInt8](rest), tag: nil)
+        case Enigma256AEAD.containerVersion:
+            guard rest.count >= Enigma256AEAD.tagLength else {
+                throw Enigma256SessionError.truncatedContainer
+            }
+            let ctEnd = rest.count - Enigma256AEAD.tagLength
+            let ct = [UInt8](rest.prefix(ctEnd))
+            let tag = Data(rest.suffix(Enigma256AEAD.tagLength))
+            return Enigma256SealedBox(nonce: nonce, ciphertext: ct, tag: tag)
+        default:
+            throw Enigma256SessionError.unsupportedVersion(version)
+        }
     }
 }
 
@@ -68,27 +93,25 @@ package struct Enigma256Context: Sendable {
         return (key, key.wiring(from: day))
     }
 
-    /// Encrypt (or decrypt — reciprocal) under a fresh or caller-supplied nonce.
+    /// Body-only encrypt (no MAC). Prefer `sealAEAD` for wire/file.
     package func seal(_ plaintext: [UInt8], nonce: Data) -> Enigma256SealedBox {
-        let (key, wiring) = messageState(nonce: nonce)
-        var machine = Enigma256Machine(wiring: wiring, lfsrSeed: key.lfsrSeed, positions: key.positions)
-        let ct = machine.process(plaintext)
-        return Enigma256SealedBox(nonce: nonce, ciphertext: ct)
+        let ct = sealBody(plaintext, nonce: nonce)
+        return Enigma256SealedBox(nonce: nonce, ciphertext: ct, tag: nil)
     }
 
-    /// Open a sealed box (same as seal on the ciphertext).
+    /// Open body (reciprocal). For AEAD boxes call `openAEAD` / ProtectedSession.
     package func open(_ box: Enigma256SealedBox) -> [UInt8] {
-        seal(box.ciphertext, nonce: box.nonce).ciphertext
+        sealBody(box.ciphertext, nonce: box.nonce)
     }
 
-    /// Random 16-byte nonce + seal.
+    /// Random 16-byte nonce + AEAD seal (no reuse tracking — use ProtectedSession).
     package func seal(_ plaintext: [UInt8]) -> Enigma256SealedBox {
         var nonceBytes = [UInt8](repeating: 0, count: 16)
         var rng = SystemRandomNumberGenerator()
         for i in 0 ..< 16 {
             nonceBytes[i] = UInt8.random(in: .min ... .max, using: &rng)
         }
-        return seal(plaintext, nonce: Data(nonceBytes))
+        return sealAEAD(plaintext, nonce: Data(nonceBytes))
     }
 }
 
@@ -126,6 +149,12 @@ package final class Enigma256CoreHandle: @unchecked Sendable {
         }
     }
 
+    /// Burst-oriented table load (models AXI-Stream DMA of 2,560 bytes).
+    package func programTablesBurst(_ wiring: Enigma256Wiring) {
+        transactionLog.append(.tableBurst(byteCount: 10 * 256))
+        self.wiring = wiring
+    }
+
     package func writeMessageKey(_ key: Enigma256MessageKey) {
         regLFSR = key.lfsrSeed == 0 ? 1 : key.lfsrSeed
         regPos = key.positions
@@ -139,16 +168,20 @@ package final class Enigma256CoreHandle: @unchecked Sendable {
     }
 
     /// Full host bring-up: tables → message key → load.
-    package func configure(day: Enigma256DayKey, message: Enigma256MessageKey) {
+    package func configure(day: Enigma256DayKey, message: Enigma256MessageKey, burstTables: Bool = true) {
         let w = message.wiring(from: day)
-        programTables(w)
+        if burstTables {
+            programTablesBurst(w)
+        } else {
+            programTables(w)
+        }
         writeMessageKey(message)
         pulseLoadState()
     }
 
-    package func configure(context: Enigma256Context, nonce: Data) {
+    package func configure(context: Enigma256Context, nonce: Data, burstTables: Bool = true) {
         let (key, _) = context.messageState(nonce: nonce)
-        configure(day: context.day, message: key)
+        configure(day: context.day, message: key, burstTables: burstTables)
     }
 
     /// One `DATA_IN`/`VALID_IN` beat → `DATA_OUT`.
@@ -164,6 +197,7 @@ package final class Enigma256CoreHandle: @unchecked Sendable {
 
 package enum Enigma256BusTxn: Sendable, Equatable {
     case tableWrite(sel: Int, addr: UInt8, data: UInt8)
+    case tableBurst(byteCount: Int)
     case messageKey(lfsr: UInt64, positions: (UInt8, UInt8, UInt8, UInt8))
     case loadState
     case stream(UInt8)
@@ -172,6 +206,8 @@ package enum Enigma256BusTxn: Sendable, Equatable {
         switch (lhs, rhs) {
         case let (.tableWrite(s1, a1, d1), .tableWrite(s2, a2, d2)):
             return s1 == s2 && a1 == a2 && d1 == d2
+        case let (.tableBurst(a), .tableBurst(b)):
+            return a == b
         case let (.messageKey(l1, p1), .messageKey(l2, p2)):
             return l1 == l2 && p1.0 == p2.0 && p1.1 == p2.1 && p1.2 == p2.2 && p1.3 == p2.3
         case (.loadState, .loadState):

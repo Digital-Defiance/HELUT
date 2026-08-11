@@ -1,16 +1,17 @@
 # Enigma 256 Core — Host Register Map
 
 Software control plane programs `enigma_256_core` over a memory-mapped AXI-lite
-(or equivalent) window. Addresses below are offsets from the core base. The
-Swift bitbang model is `Enigma256CoreHandle` in `Enigma256Session.swift`.
+window, with an optional **AXI4-Stream table burst** for day-slot loads. Addresses
+below are offsets from the core base. The Swift bitbang model is
+`Enigma256CoreHandle` / `Enigma256SoftBus` in HELUTCore.
 
 ## Bring-up sequence
 
 1. **Reset** — assert `rst_n` low then high.
-2. **Load tables** — for `wr_sel = 0…9`, write 256 bytes via `WR_*` (see table map).
+2. **Load tables** — prefer AXIS burst (`enigma_256_axis_tables.v`, 2,560 bytes) or SoftBus `programTablesBurst`. Legacy path: for `wr_sel = 0…9`, write 256 bytes via `WR_*`.
 3. **Load message key** — write `INIT_LFSR_*` and `INIT_R*_POS`.
 4. **Pulse `LOAD_STATE`** — capture LFSR + Grundstellung into the stream engine.
-5. **Stream** — present each byte on `DATA_IN` with `VALID_IN` for one cycle; read `DATA_OUT` when `VALID_OUT` is high (same cycle as the registered update in the RTL).
+5. **Stream** — present each byte on `DATA_IN` with `VALID_IN` for one cycle; read `DATA_OUT` when `VALID_OUT` is high. Optional `SCA_CTRL` enables stream jitter to disrupt DPA alignment.
 
 Do not assert `VALID_IN` during table writes or `LOAD_STATE`.
 
@@ -18,7 +19,7 @@ Do not assert `VALID_IN` during table writes or `LOAD_STATE`.
 
 | Offset | Name | Access | Width | Description |
 |--------|------|--------|-------|-------------|
-| `0x00` | `CTRL` | W1C / RW | 32 | bit0: pulse `LOAD_STATE` (W1C). bit1: reserved. bit8: soft reset (optional). |
+| `0x00` | `CTRL` | W1C / RW | 32 | bit0: pulse `LOAD_STATE` (W1C). bit8: soft reset (optional). |
 | `0x04` | `WR_SEL` | RW | 32 | Table select `0…9` (see below). |
 | `0x08` | `WR_ADDR` | RW | 32 | Byte address `0…255` within the selected table. |
 | `0x0C` | `WR_DATA` | RW | 32 | Data byte; writing commits one BRAM write (`wr_en` pulse). |
@@ -31,10 +32,8 @@ Do not assert `VALID_IN` during table writes or `LOAD_STATE`.
 | `0x28` | `DATA_IN` | RW | 32 | Stream input byte (low 8 bits). |
 | `0x2C` | `DATA_OUT` | RO | 32 | Stream output byte (low 8 bits). |
 | `0x30` | `STATUS` | RO | 32 | bit0: `VALID_OUT`. bit1: busy (optional). |
-
-Wire-level ports on the Verilog module map 1:1 to these fields; an AXI adapter
-is responsible for strobing `wr_en` / `load_state` / `valid_in` for a single
-cycle per commit.
+| `0x34` | `SCA_CTRL` | RW | 32 | bit0: enable stream jitter (DPA alignment break). |
+| `0x38` | `BURST_STATUS` | RO | 32 | Last AXIS/SoftBus table burst byte count (2,560 when complete). |
 
 ## `WR_SEL` table map
 
@@ -51,21 +50,20 @@ cycle per commit.
 | 8 | Rotor 4 reverse |
 | 9 | Un-reflector |
 
-Active-slot tables come from the day-key pool after message-key Walzenlage
-selection (HKDF over IKM ∥ nonce). Host software (`Enigma256Context`) derives
-tables; the fabric only stores the four active rotors plus plugboard/reflector.
-
 ## Streaming contract
 
-- Cipher is reciprocal: encrypt and decrypt are the same operation under the
-  same day key + nonce (reload tables/message key before the reverse pass).
-- One plaintext/ciphertext byte per accepted `VALID_IN` beat.
-- LFSR + offsets advance **after** the scramble for that beat (Swift oracle and
-  RTL agree; see golden co-sim).
+- Cipher body is reciprocal under the same day key + nonce.
+- Wire/file containers use **HMAC-SHA512 AEAD** (verify tag before streaming into fabric).
+- LFSR step enables use an **NLFF** fold, not raw bit taps.
+- LFSR + offsets advance **after** the scramble for that beat.
 
 ## Related artifacts
 
-- RTL: `enigma_256_core.v`
-- Bitbang: `Enigma256CoreHandle`
+- RTL core: `enigma_256_core.v`
+- AXI4-Lite wrapper: `enigma_256_axi.v`
+- AXIS table burst: `enigma_256_axis_tables.v`
+- Soft MMIO + driver: `Enigma256SoftBus` / `Enigma256AXIDriver`
+- AEAD + nonce guard: `Enigma256AEAD.swift` / `Enigma256ProtectedSession`
 - Golden dump: `swift run helut --enigma256-golden`
-- File crypt: `swift run helut --enigma256-crypt …`
+- Core co-sim: `Scripts/enigma256_sim.sh`
+- AXI co-sim: `Scripts/enigma256_axi_sim.sh`

@@ -42,8 +42,10 @@ func runEnigma256Crypt() {
         fputs("""
         Usage:
           helut --enigma256-crypt --enigma256-mode encrypt|decrypt \\
-            --enigma256-ikm <path|hex|string> --enigma256-in <file> --enigma256-out <file> \\
-            [--enigma256-salt <path|hex|string>] [--enigma256-nonce <hex>]
+            (--enigma256-ikm <path|hex|string> | --enigma256-passphrase <text>) \\
+            --enigma256-in <file> --enigma256-out <file> \\
+            [--enigma256-salt <path|hex|string>] [--enigma256-nonce <hex>] \\
+            [--enigma256-pbkdf2-iters N]
 
         Encrypt writes an E256 container (magic|ver|nonce|ciphertext).
         Decrypt reads that container. Reciprocal cipher — same IKM/salt for both.
@@ -52,9 +54,14 @@ func runEnigma256Crypt() {
         exit(2)
     }
 
-    let ikm = enigma256Material(stringFlag("--enigma256-ikm"), label: "ikm")!
     let salt = enigma256Material(stringFlag("--enigma256-salt"), label: "salt", allowNil: true) ?? Data()
-    let ctx = Enigma256Context(ikm: ikm, salt: salt)
+    let ctx: Enigma256Context
+    do {
+        ctx = try enigma256ResolveContext(salt: salt)
+    } catch {
+        fputs("Enigma256 key material failed: \(error)\n", stderr)
+        exit(2)
+    }
 
     do {
         let input = try Data(contentsOf: URL(fileURLWithPath: inPath))
@@ -130,4 +137,199 @@ func enigma256ParseHex(_ hex: String, label: String) -> [UInt8] {
         i = j
     }
     return out
+}
+
+/// Prefer `--enigma256-passphrase` (PBKDF2) over raw `--enigma256-ikm`.
+func enigma256ResolveContext(salt: Data) throws -> Enigma256Context {
+    if let pass = stringFlag("--enigma256-passphrase") {
+        let iters = intFlag("--enigma256-pbkdf2-iters") ?? Enigma256Passphrase.defaultIterations
+        let effectiveSalt = salt.isEmpty ? Data("helut-pbkdf2".utf8) : salt
+        return try Enigma256Passphrase.openContext(
+            passphrase: pass,
+            salt: effectiveSalt,
+            iterations: iters
+        )
+    }
+    guard let ikm = enigma256Material(stringFlag("--enigma256-ikm"), label: "ikm") else {
+        fputs("Provide --enigma256-ikm or --enigma256-passphrase\n", stderr)
+        exit(2)
+    }
+    return Enigma256Context(ikm: ikm, salt: salt)
+}
+
+func enigma256UsesPSK() -> Bool {
+    stringFlag("--enigma256-passphrase") != nil
+}
+
+// MARK: - Enigma 256 ECDH demo (`--enigma256-ecdh-demo`)
+
+func runEnigma256ECDHDemo() {
+    let salt = enigma256Material(stringFlag("--enigma256-salt"), label: "salt", allowNil: true) ?? Data("helut".utf8)
+    let plain: [UInt8]
+    if let path = stringFlag("--enigma256-plain-file") ?? stringFlag("--enigma256-in") {
+        do { plain = [UInt8](try Data(contentsOf: URL(fileURLWithPath: path))) }
+        catch {
+            fputs("Failed reading plaintext: \(error)\n", stderr)
+            exit(1)
+        }
+    } else if let text = stringFlag("--enigma256-plain") {
+        plain = Array(text.utf8)
+    } else {
+        plain = Array("Enigma256 X25519 handshake demo".utf8)
+    }
+
+    do {
+        let (alice, bob) = try Enigma256Handshake.paired(salt: salt)
+        print("Enigma256 ECDH (X25519) — software control plane only (no Verilog)")
+        print("  alice pub: \(alice.local.publicKeyRaw.map { String(format: "%02x", $0) }.joined().prefix(32))…")
+        print("  bob   pub: \(bob.local.publicKeyRaw.map { String(format: "%02x", $0) }.joined().prefix(32))…")
+        print("  ikm match: \(alice.context?.ikm == bob.context?.ikm)")
+
+        let box = try alice.seal(plain)
+        let recovered = try bob.open(box)
+        precondition(recovered == plain, "ECDH seal/open mismatch")
+        print("  seal/open: \(plain.count) B OK (nonce \(box.nonce.count) B)")
+
+        // Day-key tables could now be pushed over AXI from bob.context.
+        if let ctx = bob.context {
+            let bus = Enigma256SoftBus()
+            let drv = Enigma256AXIDriver(bus: bus)
+            drv.configure(context: ctx, nonce: box.nonce)
+            let axiPT = drv.transfer(box.ciphertext)
+            precondition(axiPT == plain, "ECDH→AXI soft decrypt failed")
+            print("  ecdh→axi softbus decrypt: OK")
+        }
+
+        alice.burn()
+        bob.burn()
+        print("  burned ephemeral keys + contexts")
+    } catch {
+        fputs("Enigma256 ECDH demo failed: \(error)\n", stderr)
+        exit(1)
+    }
+}
+
+// MARK: - Enigma 256 wire-session demo (`--enigma256-wire-demo`)
+
+func runEnigma256WireDemo() {
+    let salt = enigma256Material(stringFlag("--enigma256-salt"), label: "salt", allowNil: true)
+        ?? Data("helut-wire".utf8)
+    let messages: [[UInt8]]
+    if let path = stringFlag("--enigma256-plain-file") ?? stringFlag("--enigma256-in") {
+        do { messages = [[UInt8](try Data(contentsOf: URL(fileURLWithPath: path)))] }
+        catch {
+            fputs("Failed reading plaintext: \(error)\n", stderr)
+            exit(1)
+        }
+    } else if let text = stringFlag("--enigma256-plain") {
+        messages = [Array(text.utf8)]
+    } else {
+        messages = [
+            Array("HELLO from HELUT wire framing".utf8),
+            Array("second datagram on Apple Silicon".utf8)
+        ]
+    }
+
+    do {
+        print("Enigma256 wire session (in-process duplex, SoftBus decrypt)")
+        print("  frames: HELLO → ACK → DATA×\(messages.count) → BYE")
+        let got = try Enigma256WireSession.runInProcess(
+            messages: messages,
+            salt: salt,
+            decryptViaSoftBus: true
+        )
+        precondition(got == messages)
+        for (i, m) in got.enumerated() {
+            let preview = String(bytes: m.prefix(48), encoding: .utf8) ?? "(\(m.count) B)"
+            print("  rx[\(i)]: \(preview)")
+        }
+        print("  OK")
+    } catch {
+        fputs("Enigma256 wire demo failed: \(error)\n", stderr)
+        exit(1)
+    }
+}
+
+// MARK: - Enigma 256 TCP listen / connect (Network.framework)
+
+func enigma256Port() -> UInt16 {
+    if let n = intFlag("--enigma256-port"), n > 0, n <= 65535 {
+        return UInt16(n)
+    }
+    return 25600
+}
+
+func runEnigma256TCPListen() {
+    let port = enigma256Port()
+    let psk = enigma256UsesPSK()
+    print("Enigma256 TCP listen on 0.0.0.0:\(port) (responder, SoftBus decrypt, \(psk ? "PSK" : "ECDH"))")
+    do {
+        let transport = try Enigma256TCPTransport.accept(port: port, timeout: 120)
+        defer { transport.close() }
+        let peer = Enigma256WirePeer(transport: transport, decryptViaSoftBus: true)
+        if psk {
+            let pass = stringFlag("--enigma256-passphrase")!
+            let iters = intFlag("--enigma256-pbkdf2-iters") ?? Enigma256Passphrase.defaultIterations
+            try peer.handshakeAsPSKResponder(passphrase: pass, iterations: iters)
+        } else {
+            try peer.handshakeAsResponder()
+        }
+        print("  handshake OK — waiting for DATA…")
+        while true {
+            do {
+                let plain = try peer.receivePlaintext()
+                let preview = String(bytes: plain.prefix(80), encoding: .utf8) ?? "(\(plain.count) B)"
+                print("  rx: \(preview)")
+            } catch Enigma256WireError.closed {
+                print("  peer BYE / closed")
+                break
+            }
+        }
+    } catch {
+        fputs("Enigma256 listen failed: \(error)\n", stderr)
+        exit(1)
+    }
+}
+
+func runEnigma256TCPConnect() {
+    let host = stringFlag("--enigma256-host") ?? "127.0.0.1"
+    let port = enigma256Port()
+    let psk = enigma256UsesPSK()
+    let salt = enigma256Material(stringFlag("--enigma256-salt"), label: "salt", allowNil: true)
+        ?? (psk ? Enigma256Passphrase.randomSalt() : Data("helut-wire".utf8))
+    let messages: [[UInt8]]
+    if let path = stringFlag("--enigma256-plain-file") ?? stringFlag("--enigma256-in") {
+        do { messages = [[UInt8](try Data(contentsOf: URL(fileURLWithPath: path)))] }
+        catch {
+            fputs("Failed reading plaintext: \(error)\n", stderr)
+            exit(1)
+        }
+    } else if let text = stringFlag("--enigma256-plain") {
+        messages = [Array(text.utf8)]
+    } else {
+        messages = [Array("helut tcp datagram on Apple Silicon".utf8)]
+    }
+
+    print("Enigma256 TCP connect \(host):\(port) (initiator, \(psk ? "PSK" : "ECDH"))")
+    do {
+        let transport = try Enigma256TCPTransport.connect(host: host, port: port, timeout: 15)
+        defer { transport.close() }
+        let peer = Enigma256WirePeer(transport: transport, decryptViaSoftBus: true)
+        if psk {
+            let pass = stringFlag("--enigma256-passphrase")!
+            let iters = intFlag("--enigma256-pbkdf2-iters") ?? Enigma256Passphrase.defaultIterations
+            try peer.handshakeAsPSKInitiator(passphrase: pass, salt: salt, iterations: iters)
+        } else {
+            try peer.handshakeAsInitiator(salt: salt)
+        }
+        for (i, msg) in messages.enumerated() {
+            try peer.sendPlaintext(msg)
+            print("  tx[\(i)]: \(msg.count) B")
+        }
+        try peer.close()
+        print("  BYE sent — done")
+    } catch {
+        fputs("Enigma256 connect failed: \(error)\n", stderr)
+        exit(1)
+    }
 }

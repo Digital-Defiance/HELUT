@@ -7,6 +7,12 @@
 //   1. wr_en strobes fill plugboard / rotor fwd+rev / reflector BRAMs
 //   2. load_state captures LFSR seed + Grundstellung
 //   3. valid_in streams plaintext/ciphertext bytes (machine is reciprocal)
+//
+// Hardening:
+//   - NLFF on LFSR step enables (no raw bit taps → Berlekamp–Massey)
+//   - Side-channel: BRAM address leakage is mitigated at the AXI wrapper via
+//     optional stream jitter (DPA alignment break). Full dual-rail / masked
+//     LUTs are a high-assurance synthesis option outside this reciprocal core.
 
 module enigma_256_core (
     input  wire        clk,
@@ -76,7 +82,7 @@ module enigma_256_core (
     end
 
     // =========================================================================
-    // 2. STEPPING ENGINE (64-bit Galois LFSR)
+    // 2. STEPPING ENGINE (64-bit Galois LFSR + NLFF)
     // Primitive taps 64,63,61,60 → feedback 0xD800_0000_0000_0000
     // =========================================================================
     reg  [63:0] lfsr;
@@ -84,10 +90,11 @@ module enigma_256_core (
 
     reg [7:0] offset_r1, offset_r2, offset_r3, offset_r4;
 
-    wire step_r1 = lfsr[0];
-    wire step_r2 = lfsr[15];
-    wire step_r3 = lfsr[31];
-    wire step_r4 = lfsr[47];
+    // Non-linear filtering function: step enables are not raw LFSR bits.
+    wire step_r1 = (lfsr[0]  & lfsr[7])  ^ lfsr[12];
+    wire step_r2 = (lfsr[15] & lfsr[22]) ^ lfsr[29];
+    wire step_r3 = (lfsr[31] & lfsr[38]) ^ lfsr[45];
+    wire step_r4 = (lfsr[47] & lfsr[54]) ^ lfsr[61];
 
     // =========================================================================
     // 3. CRYPTOGRAPHIC DATAPATH (combinational; sampled with valid_in)

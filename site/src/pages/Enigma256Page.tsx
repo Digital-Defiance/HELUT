@@ -24,12 +24,16 @@ export function Enigma256Page() {
               <div className="value">Base-256 bytes</div>
             </div>
             <div className="stat">
-              <div className="label">Datapath</div>
-              <div className="value">enigma_256_core.v</div>
+              <div className="label">KDF</div>
+              <div className="value">HKDF-SHA512</div>
             </div>
             <div className="stat">
-              <div className="label">Oracle</div>
-              <div className="value">Enigma256.swift</div>
+              <div className="label">Handshake</div>
+              <div className="value">X25519 ‖ ML-KEM</div>
+            </div>
+            <div className="stat">
+              <div className="label">Datapath</div>
+              <div className="value">enigma_256_core.v</div>
             </div>
           </div>
         </div>
@@ -66,7 +70,7 @@ export function Enigma256Page() {
             <li>
               <span className="mono">CODEBOOK</span>
               <span>
-                <strong>Day keys lived on paper that dissolved.</strong> Capture of one sheet burned the net. Enigma 256 derives session material from ECDH + HKDF (RFC 5869); ephemeral keys burn at session end. Perfect forward secrecy replaces the Grundstellung table.
+                <strong>Day keys lived on paper that dissolved.</strong> Capture of one sheet burned the net. Enigma 256 derives session material from X25519 (optionally hybrid with ML-KEM-768) + <strong>HKDF-SHA512</strong>; Ed25519 identities bind hybrid HELLO/ACK against MitM. Ephemeral keys burn at session end.
               </span>
             </li>
           </ul>
@@ -130,7 +134,7 @@ export function Enigma256Page() {
                   Historical rotors step like a mileage counter. On a 72-letter Thetis message the Greek wheel never turns; the left rotor’s notch drives nothing. That mechanical truth is why my engine pins those drums and why ring-AAAA and right-ring sweeps are even affordable.
                 </p>
                 <p>
-                  Enigma 256 clocks a 64-bit Galois LFSR (primitive taps 64, 63, 61, 60 → feedback <code>0xD800_0000_0000_0000</code>) on every byte. Bits <code>[0|15|31|47]</code> decide which of the four active rotors advance. All wheels can move every symbol; static-left assumptions and Welchman turnover menus built for notch geometry no longer apply.
+                  Enigma 256 clocks a 64-bit Galois LFSR (primitive taps 64, 63, 61, 60 → feedback <code>0xD800_0000_0000_0000</code>) on every byte. Step enables are <strong>not</strong> raw LFSR bits—they pass a non-linear fold <code>(bit_a &amp; bit_b) ^ bit_c</code> so observable rotor motion does not hand Berlekamp–Massey a linear system. All wheels can move every symbol; static-left assumptions die.
                 </p>
               </div>
             </article>
@@ -143,7 +147,7 @@ export function Enigma256Page() {
                   M-Thetis died with its Grund table. Indicators <code>VROL NMKA</code> bought less than one bit because the starting-position book is gone. Sister traffic needed degarbling because paper and operators disagree.
                 </p>
                 <p>
-                  Enigma 256 splits control and data planes. Software runs ECDH (or any IKM), then HKDF-Expand into a day-key blueprint: 128-byte entropy for the plugboard shuffle, 4,096 bytes for a 16-rotor virtual pool, 256 bytes for the un-reflector. Each packet carries a plaintext nonce; a micro-HKDF picks Walzenlage (4 of 16), Grundstellung, and LFSR seed. Capture of one session does not decrypt the next.
+                  Enigma 256 splits control and data planes. Software runs X25519 and, on macOS 26+, hybrid ML-KEM (or X-Wing), then <strong>HKDF-SHA512</strong> into a day-key blueprint: plugboard shuffle, 16-rotor virtual pool, un-reflector. Each packet carries a plaintext nonce; a micro-HKDF picks Walzenlage (4 of 16), Grundstellung, and LFSR seed. Capture of one session does not decrypt the next.
                 </p>
               </div>
             </article>
@@ -196,7 +200,19 @@ export function Enigma256Page() {
             <li>
               <span className="mono">STEP</span>
               <span>
-                <strong>Galois clock:</strong> shift-left with feedback <code>0xD800_0000_0000_0000</code> when the MSB is set. Step enables from LFSR bits 0, 15, 31, 47. Zero seed forced to 1 to avoid lockup.
+                <strong>Galois + NLFF:</strong> feedback <code>0xD800_0000_0000_0000</code>; step enables <code>(lfsr[i] &amp; lfsr[i+7]) ^ lfsr[i+12]</code> for bases 0, 15, 31, 47. Zero seed forced to 1.
+              </span>
+            </li>
+            <li>
+              <span className="mono">AEAD</span>
+              <span>
+                <strong>Integrity:</strong> HMAC-SHA512 tag on <code>nonce‖ciphertext</code> (E256 v2). Wire verifies before SoftBus/AXI. <code>Enigma256ProtectedSession</code> forbids nonce reuse under one IKM.
+              </span>
+            </li>
+            <li>
+              <span className="mono">BURST</span>
+              <span>
+                <strong>Table DMA:</strong> AXIS loader <code>enigma_256_axis_tables.v</code> / SoftBus burst programs 2,560 BRAM bytes in one transfer. Optional <code>SCA_CTRL</code> stream jitter for DPA alignment break.
               </span>
             </li>
             <li>
@@ -237,17 +253,27 @@ export function Enigma256Page() {
             </article>
 
             <article className="tl-item">
-              <div className="when">2 — Next</div>
-              <h3>Publish golden vectors and FPGA load scripts.</h3>
+              <div className="when">2 — Done</div>
+              <h3>Control plane: SHA-512 KDF, hybrid PQ, Ed25519 auth.</h3>
               <div className="prose">
                 <p>
-                  Bridge-exported BRAM hex + session JSON become the grade for any bitstream. No melt, no Red Team claim, until those vectors pass on hardware.
+                  HKDF-SHA512 and PBKDF2-HMAC-SHA512 feed the day key. Hybrid <code>X25519_SS ‖ ML-KEM_SS</code> resists store-now-decrypt-later; Ed25519-signed hybrid wire frames close MitM—still zero Verilog change on that path.
                 </p>
               </div>
             </article>
 
             <article className="tl-item">
-              <div className="when">3 — Then</div>
+              <div className="when">3 — Done</div>
+              <h3>Data-plane hardening: NLFF, AEAD, nonce guard, burst, jitter.</h3>
+              <div className="prose">
+                <p>
+                  NLFF stepping in Verilog and Swift; HMAC-SHA512 AEAD on wire/file with verify-before-fabric; monotonic nonce sessions; AXIS/SoftBus table burst; optional stream jitter for DPA. Dual-rail masked LUTs remain the high-assurance synthesis path.
+                </p>
+              </div>
+            </article>
+
+            <article className="tl-item">
+              <div className="when">4 — Next</div>
               <h3>Point HELUT / TensorLUT at the synthesized netlist on purpose.</h3>
               <div className="prose">
                 <p>
@@ -257,11 +283,11 @@ export function Enigma256Page() {
             </article>
 
             <article className="tl-item">
-              <div className="when">4 — Field</div>
+              <div className="when">5 — Field</div>
               <h3>COTS SoC data plane + OTA mutation.</h3>
               <div className="prose">
                 <p>
-                  Push day-key tables over AXI; keep ECDH and HKDF on the ARM/RISC-V control plane; flash polymorphic updates without new silicon. The living cipher is a deployment story, not a README claim.
+                  Burst-load day-key tables; keep hybrid KEM, HKDF-SHA512, and AEAD on the control plane; flash polymorphic updates without new silicon.
                 </p>
               </div>
             </article>
