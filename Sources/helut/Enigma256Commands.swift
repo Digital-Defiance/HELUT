@@ -232,16 +232,31 @@ func runEnigma256WireDemo() {
 
     do {
         print("Enigma256 wire session (in-process duplex, SoftBus decrypt)")
-        print("  frames: HELLO → ACK → DATA×\(messages.count) → BYE")
-        let got = try Enigma256WireSession.runInProcess(
-            messages: messages,
-            salt: salt,
-            decryptViaSoftBus: true
-        )
-        precondition(got == messages)
-        for (i, m) in got.enumerated() {
-            let preview = String(bytes: m.prefix(48), encoding: .utf8) ?? "(\(m.count) B)"
-            print("  rx[\(i)]: \(preview)")
+        if enigma256PreferHybrid(), #available(macOS 26.0, *) {
+            print("  frames: hybrid HELLO/ACK (Ed25519) → DATA×\(messages.count) AEAD → BYE")
+            let got = try Enigma256WireSession.runInProcessHybrid(
+                messages: messages,
+                salt: salt,
+                decryptViaSoftBus: true,
+                requireTrust: true
+            )
+            precondition(got == messages)
+            for (i, m) in got.enumerated() {
+                let preview = String(bytes: m.prefix(48), encoding: .utf8) ?? "(\(m.count) B)"
+                print("  rx[\(i)]: \(preview)")
+            }
+        } else {
+            print("  frames: HELLO → ACK → DATA×\(messages.count) AEAD → BYE")
+            let got = try Enigma256WireSession.runInProcess(
+                messages: messages,
+                salt: salt,
+                decryptViaSoftBus: true
+            )
+            precondition(got == messages)
+            for (i, m) in got.enumerated() {
+                let preview = String(bytes: m.prefix(48), encoding: .utf8) ?? "(\(m.count) B)"
+                print("  rx[\(i)]: \(preview)")
+            }
         }
         print("  OK")
     } catch {
@@ -259,22 +274,87 @@ func enigma256Port() -> UInt16 {
     return 25600
 }
 
+/// Default wire mode: hybrid PQ + Ed25519 (macOS 26+). Opt out with `--enigma256-classical`.
+func enigma256PreferHybrid() -> Bool {
+    if enigma256UsesPSK() { return false }
+    if CommandLine.arguments.contains("--enigma256-classical")
+        || CommandLine.arguments.contains("--enigma256-x25519")
+    {
+        return false
+    }
+    if CommandLine.arguments.contains("--enigma256-hybrid") { return true }
+    if #available(macOS 26.0, *) { return true }
+    return false
+}
+
+func enigma256LoadOrMakeIdentity() -> Enigma256Identity {
+    if let path = stringFlag("--enigma256-identity") {
+        do {
+            let raw = try Data(contentsOf: URL(fileURLWithPath: path))
+            return try Enigma256Identity(privateKeyRaw: raw)
+        } catch {
+            fputs("Failed loading --enigma256-identity: \(error)\n", stderr)
+            exit(2)
+        }
+    }
+    let id = Enigma256Identity()
+    if let out = stringFlag("--enigma256-identity-out") {
+        if let sk = id.privateKeyRaw {
+            try? sk.write(to: URL(fileURLWithPath: out))
+            try? id.publicKeyRaw.write(to: URL(fileURLWithPath: out + ".pub"))
+            print("  wrote identity → \(out) (+ .pub)")
+        }
+    }
+    return id
+}
+
+func enigma256TrustedSet() -> Set<Data> {
+    var trusted = Set<Data>()
+    if let hex = stringFlag("--enigma256-trust") {
+        trusted.insert(Data(enigma256ParseHex(hex, label: "trust")))
+    }
+    if let path = stringFlag("--enigma256-trust-file") {
+        if let raw = try? Data(contentsOf: URL(fileURLWithPath: path)), raw.count == 32 {
+            trusted.insert(raw)
+        }
+    }
+    return trusted
+}
+
 func runEnigma256TCPListen() {
     let port = enigma256Port()
     let psk = enigma256UsesPSK()
-    print("Enigma256 TCP listen on 0.0.0.0:\(port) (responder, SoftBus decrypt, \(psk ? "PSK" : "ECDH"))")
+    let hybrid = !psk && enigma256PreferHybrid()
+    let mode = psk ? "PSK" : (hybrid ? "hybrid+AEAD" : "X25519+AEAD")
+    print("Enigma256 TCP listen on 0.0.0.0:\(port) (responder, SoftBus decrypt, \(mode))")
     do {
         let transport = try Enigma256TCPTransport.accept(port: port, timeout: 120)
         defer { transport.close() }
-        let peer = Enigma256WirePeer(transport: transport, decryptViaSoftBus: true)
+        let identity = hybrid ? enigma256LoadOrMakeIdentity() : nil
+        let peer = Enigma256WirePeer(
+            transport: transport,
+            decryptViaSoftBus: true,
+            identity: identity
+        )
+        peer.trustedIdentities = enigma256TrustedSet()
         if psk {
             let pass = stringFlag("--enigma256-passphrase")!
             let iters = intFlag("--enigma256-pbkdf2-iters") ?? Enigma256Passphrase.defaultIterations
             try peer.handshakeAsPSKResponder(passphrase: pass, iterations: iters)
+        } else if hybrid {
+            guard #available(macOS 26.0, *) else {
+                fputs("Hybrid handshake requires macOS 26+\n", stderr)
+                exit(2)
+            }
+            try peer.handshakeAsHybridResponder()
+            if let pub = peer.peerIdentityPublicKey {
+                let hex = pub.map { String(format: "%02x", $0) }.joined()
+                print("  peer identity: \(hex.prefix(32))…")
+            }
         } else {
             try peer.handshakeAsResponder()
         }
-        print("  handshake OK — waiting for DATA…")
+        print("  handshake OK — DATA carries AEAD (HMAC-SHA512); waiting…")
         while true {
             do {
                 let plain = try peer.receivePlaintext()
@@ -295,6 +375,7 @@ func runEnigma256TCPConnect() {
     let host = stringFlag("--enigma256-host") ?? "127.0.0.1"
     let port = enigma256Port()
     let psk = enigma256UsesPSK()
+    let hybrid = !psk && enigma256PreferHybrid()
     let salt = enigma256Material(stringFlag("--enigma256-salt"), label: "salt", allowNil: true)
         ?? (psk ? Enigma256Passphrase.randomSalt() : Data("helut-wire".utf8))
     let messages: [[UInt8]]
@@ -310,21 +391,38 @@ func runEnigma256TCPConnect() {
         messages = [Array("helut tcp datagram on Apple Silicon".utf8)]
     }
 
-    print("Enigma256 TCP connect \(host):\(port) (initiator, \(psk ? "PSK" : "ECDH"))")
+    let mode = psk ? "PSK" : (hybrid ? "hybrid+AEAD" : "X25519+AEAD")
+    print("Enigma256 TCP connect \(host):\(port) (initiator, \(mode))")
     do {
         let transport = try Enigma256TCPTransport.connect(host: host, port: port, timeout: 15)
         defer { transport.close() }
-        let peer = Enigma256WirePeer(transport: transport, decryptViaSoftBus: true)
+        let identity = hybrid ? enigma256LoadOrMakeIdentity() : nil
+        let peer = Enigma256WirePeer(
+            transport: transport,
+            decryptViaSoftBus: true,
+            identity: identity
+        )
+        peer.trustedIdentities = enigma256TrustedSet()
         if psk {
             let pass = stringFlag("--enigma256-passphrase")!
             let iters = intFlag("--enigma256-pbkdf2-iters") ?? Enigma256Passphrase.defaultIterations
             try peer.handshakeAsPSKInitiator(passphrase: pass, salt: salt, iterations: iters)
+        } else if hybrid {
+            guard #available(macOS 26.0, *) else {
+                fputs("Hybrid handshake requires macOS 26+\n", stderr)
+                exit(2)
+            }
+            try peer.handshakeAsHybridInitiator(salt: salt)
+            if let pub = peer.peerIdentityPublicKey {
+                let hex = pub.map { String(format: "%02x", $0) }.joined()
+                print("  peer identity: \(hex.prefix(32))…")
+            }
         } else {
             try peer.handshakeAsInitiator(salt: salt)
         }
         for (i, msg) in messages.enumerated() {
             try peer.sendPlaintext(msg)
-            print("  tx[\(i)]: \(msg.count) B")
+            print("  tx[\(i)]: \(msg.count) B (AEAD)")
         }
         try peer.close()
         print("  BYE sent — done")

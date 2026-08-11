@@ -14,9 +14,61 @@ func enigma256PortNets(_ module: YosysModule, _ name: String) -> [Int32] {
     }
 }
 
+/// Exhaustive coverage of each NLFF's three live bits (others held at a base pattern).
+func enigma256NLFFTrainingBatch() -> (inputs: [[Float]], expected: [[Float]]) {
+    let triples: [(Int, Int, Int)] = [
+        (0, 7, 12),
+        (15, 22, 29),
+        (31, 38, 45),
+        (47, 54, 61)
+    ]
+    var seeds: [UInt64] = []
+    // Base patterns so unused bits aren't all-zero lockup.
+    let bases: [UInt64] = [1, 0xA5A5_A5A5_A5A5_A5A5, 0x0123_4567_89AB_CDEF]
+    for base in bases {
+        for (a, b, c) in triples {
+            for mask in 0 ..< 8 {
+                var s = base
+                s &= ~((UInt64(1) << a) | (UInt64(1) << b) | (UInt64(1) << c))
+                if mask & 1 != 0 { s |= UInt64(1) << a }
+                if mask & 2 != 0 { s |= UInt64(1) << b }
+                if mask & 4 != 0 { s |= UInt64(1) << c }
+                if s == 0 { s = 1 }
+                seeds.append(s)
+            }
+        }
+    }
+    // Extra random-ish anchors (golden LFSR included).
+    seeds.append(contentsOf: [
+        0xE842_0155_1FDB_C83A,
+        0x8000_0000_0000_0001,
+        0xFFFF_FFFF_FFFF_FFFF,
+        0x7FFF_FFFF_FFFF_FFFF
+    ])
+
+    var inputs: [[Float]] = []
+    var expected: [[Float]] = []
+    var seen = Set<UInt64>()
+    for seed in seeds where seen.insert(seed).inserted {
+        let s = seed == 0 ? 1 : seed
+        var row = [Float]()
+        row.reserveCapacity(64)
+        for bit in 0 ..< 64 {
+            row.append(Float((s >> bit) & 1))
+        }
+        inputs.append(row)
+        let mask = Enigma256LFSR(seed: s).stepMask
+        expected.append([
+            mask.0 ? 1 : 0,
+            mask.1 ? 1 : 0,
+            mask.2 ? 1 : 0,
+            mask.3 ? 1 : 0
+        ])
+    }
+    return (inputs, expected)
+}
+
 func runEnigma256TensorLUT() {
-    // Default attack surface: pure NLFF combo (TensorLUT-friendly, no DFFs).
-    // Sequential step cone remains available via --enigma256-netlist.
     let netlistPath = stringFlag("--enigma256-netlist")
         ?? "build/enigma_256_nlff_combo_netlist.json"
     let emitOut = stringFlag("--enigma256-emit-out")
@@ -24,8 +76,9 @@ func runEnigma256TensorLUT() {
     let logPath = stringFlag("--enigma256-tensorlut-log")
         ?? "logs/tensorlut-enigma256-nlff.log"
     let smoke = !CommandLine.arguments.contains("--enigma256-tensorlut-emit-only")
-    let gens = intFlag("--enigma256-tensorlut-gens") ?? 40
-    let pop = intFlag("--enigma256-tensorlut-pop") ?? 24
+    let gens = intFlag("--enigma256-tensorlut-gens") ?? 80
+    let pop = intFlag("--enigma256-tensorlut-pop") ?? 32
+    let polishGens = intFlag("--enigma256-tensorlut-polish") ?? max(40, gens / 2)
 
     guard FileManager.default.fileExists(atPath: netlistPath) else {
         fputs("""
@@ -48,7 +101,6 @@ func runEnigma256TensorLUT() {
     let target: AdversarialTarget
 
     if module.ports["init_lfsr"] != nil {
-        // Sequential step cone — emit only recommended; smoke uses NLFF combo by default.
         let rstNets = enigma256PortNets(module, "rst_n")
         let loadNets = enigma256PortNets(module, "load_state")
         let initNets = enigma256PortNets(module, "init_lfsr")
@@ -73,47 +125,12 @@ func runEnigma256TensorLUT() {
             + enigma256PortNets(module, "step_r2")
             + enigma256PortNets(module, "step_r3")
             + enigma256PortNets(module, "step_r4")
-
-        let seeds: [UInt64] = [
-            1,
-            0xE842_0155_1FDB_C83A,
-            0x8000_0000_0000_0001,
-            0x0123_4567_89AB_CDEF,
-            0xFFFF_FFFF_FFFF_FFFF,
-            0x00FF_00FF_00FF_00FF,
-            0x0F0F_0F0F_0F0F_0F0F,
-            0xA5A5_A5A5_A5A5_A5A5,
-            0x1111_2222_3333_4444,
-            0xDEAD_BEEF_CAFE_BABE,
-            0x0123_4567_89AB_0000,
-            0x7FFF_FFFF_FFFF_FFFF,
-            0x0000_0000_0000_0002,
-            0x5555_5555_5555_5555,
-            0xAAAA_AAAA_AAAA_AAAA,
-            0x0
-        ]
-        var inputs: [[Float]] = []
-        var expected: [[Float]] = []
-        for seed in seeds {
-            let s = seed == 0 ? 1 : seed
-            var row = [Float]()
-            for b in 0..<64 {
-                row.append(Float((s >> b) & 1))
-            }
-            inputs.append(row)
-            let mask = Enigma256LFSR(seed: s).stepMask
-            expected.append([
-                mask.0 ? 1 : 0,
-                mask.1 ? 1 : 0,
-                mask.2 ? 1 : 0,
-                mask.3 ? 1 : 0
-            ])
-        }
+        let batch = enigma256NLFFTrainingBatch()
         target = AdversarialTarget(
             inputWireIDs: inputWires,
             outputWireIDs: outputWires,
-            inputVectors: inputs,
-            expectedOutputs: expected,
+            inputVectors: batch.inputs,
+            expectedOutputs: batch.expected,
             clockTicks: 0
         )
     }
@@ -149,6 +166,7 @@ func runEnigma256TensorLUT() {
     }
 
     let pipeline = try! TensorLUTPipeline(device: device, netlist: soft)
+    let liveWidths = soft.liveWidths
 
     var baselineStats: AdversarialHarness.GenerationStats?
     _ = AdversarialHarness(
@@ -169,16 +187,16 @@ func runEnigma256TensorLUT() {
         progress: { baselineStats = $0 }
     )
 
+    // Phase A — crypto-only explore (λ=0).
     let wiped = [Float](repeating: 0.5, count: soft.luts.count * 64)
-    let liveWidths = soft.liveWidths
     let exploreSynth = try! AdversarialSynthesizer(
         device: device,
         config: .init(
-            mutationRate: 0.25,
+            mutationRate: 0.28,
             maxNoise: 0.5,
             lambdaMax: 0,
             liveWidths: liveWidths,
-            discreteJumpRate: 0.4
+            discreteJumpRate: 0.5
         )
     )
     var exploreLast: AdversarialHarness.GenerationStats?
@@ -192,61 +210,87 @@ func runEnigma256TensorLUT() {
         config: .init(
             populationSize: pop,
             generations: gens,
-            eliteCount: max(2, pop / 8),
+            eliteCount: max(4, pop / 6),
             seedScatter: true,
-            rngSeed: 0xE256_01,
+            rngSeed: 0xE256_21,
             seedInits: wiped,
-            crossoverRate: 0.6
+            crossoverRate: 0.7
         ),
         progress: { exploreLast = $0 }
     )
 
-    let squeezeSynth = try! AdversarialSynthesizer(
+    // Phase B — binary polish with λ=0 (pad snap only). Avoid λ-crush on WIDTH<6 pads.
+    let polishSynth = try! AdversarialSynthesizer(
         device: device,
         config: .init(
-            mutationRate: 0.12,
-            maxNoise: 0.25,
-            lambdaMax: 12,
+            mutationRate: 0.1,
+            maxNoise: 0.15,
+            lambdaMax: 0,
             liveWidths: liveWidths,
-            lambdaDelayFraction: 0.1,
-            discreteJumpRate: 0.5
+            discreteJumpRate: 0.7
         )
     )
-    var squeezeLast: AdversarialHarness.GenerationStats?
-    let squeezed = AdversarialHarness(
+    var polishLast: AdversarialHarness.GenerationStats?
+    let polished = AdversarialHarness(
         device: device,
         pipeline: pipeline,
-        synthesizer: squeezeSynth,
+        synthesizer: polishSynth,
         netlist: soft
     ).run(
         target: target,
         config: .init(
             populationSize: pop,
-            generations: gens,
-            eliteCount: max(2, pop / 8),
-            seedScatter: true,
-            rngSeed: 0xE256_02,
+            generations: polishGens,
+            eliteCount: max(4, pop / 6),
+            seedScatter: false,
+            rngSeed: 0xE256_22,
             seedInits: explored.inits,
-            crossoverRate: 0.5,
+            crossoverRate: 0.35,
             polishBinaryAtEnd: true
         ),
-        progress: { squeezeLast = $0 }
+        progress: { polishLast = $0 }
     )
 
+    // Re-score the polished elite (post snap-to-binary).
+    var finalStats: AdversarialHarness.GenerationStats?
+    _ = AdversarialHarness(
+        device: device,
+        pipeline: pipeline,
+        synthesizer: try! AdversarialSynthesizer(device: device, config: .init(lambdaMax: 0)),
+        netlist: soft
+    ).run(
+        target: target,
+        config: .init(
+            populationSize: 1,
+            generations: 1,
+            eliteCount: 1,
+            seedScatter: false,
+            rngSeed: 3,
+            seedInits: polished.inits
+        ),
+        progress: { finalStats = $0 }
+    )
+
+    let finalCrypto = finalStats?.bestCrypto ?? -999
+    let finalNonBinary = polished.inits.reduce(0) { $0 + (($1 > 0.05 && $1 < 0.95) ? 1 : 0) }
+    let survived = finalCrypto > -0.05 && finalNonBinary == 0
     let report = """
     # TensorLUT Red Team — \(moduleName)
     netlist: \(netlistPath)
     luts: \(soft.luts.count)
     dffs: \(soft.dffs.count)
     batch: \(target.batchSize)
+    explore_gens: \(gens)
+    polish_gens: \(polishGens)
     baseline_crypto: \(baselineStats.map { String(format: "%.6f", $0.bestCrypto) } ?? "n/a")
     explore_best_crypto: \(exploreLast.map { String(format: "%.6f", $0.bestCrypto) } ?? "n/a")
     explore_nonbinary: \(exploreLast.map { String($0.bestNonBinaryCount) } ?? "n/a")
-    squeeze_best_crypto: \(squeezeLast.map { String(format: "%.6f", $0.bestCrypto) } ?? "n/a")
-    squeeze_best_fitness: \(squeezeLast.map { String(format: "%.6f", $0.bestFitness) } ?? "n/a")
-    squeeze_nonbinary: \(squeezeLast.map { String($0.bestNonBinaryCount) } ?? "n/a")
-    elite_fitness: \(String(format: "%.6f", squeezed.fitness))
-    note: NLFF combo is the deliberate first Red Team target; full core BRAM flatten deferred.
+    polish_gen_crypto: \(polishLast.map { String(format: "%.6f", $0.bestCrypto) } ?? "n/a")
+    final_crypto: \(String(format: "%.6f", finalCrypto))
+    final_nonbinary: \(finalNonBinary)
+    elite_fitness: \(String(format: "%.6f", polished.fitness))
+    squeeze_survived: \(survived)
+    note: λ=0 explore + λ=0 discrete polish (no λ-crush on LUT6 pads); exhaustive NLFF corners.
     """
 
     try! FileManager.default.createDirectory(
@@ -256,4 +300,8 @@ func runEnigma256TensorLUT() {
     try! report.write(toFile: logPath, atomically: true, encoding: .utf8)
     print(report)
     print("  log → \(logPath)")
+    if !survived {
+        fputs("WARNING: final crypto/nonbinary did not meet bar (crypto \(finalCrypto), nb \(finalNonBinary))\n", stderr)
+        exit(1)
+    }
 }

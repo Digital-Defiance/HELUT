@@ -30,6 +30,23 @@ package final class Enigma256Identity: @unchecked Sendable {
         self.publicKeyRaw = privateKey.publicKey.rawRepresentation
     }
 
+    /// Restore from 32-byte Ed25519 seed (`PrivateKey.rawRepresentation`).
+    package init(privateKeyRaw: Data) throws {
+        guard privateKeyRaw.count == 32 else { throw Enigma256AuthError.invalidIdentityKey }
+        do {
+            let key = try Curve25519.Signing.PrivateKey(rawRepresentation: privateKeyRaw)
+            self.privateKey = key
+            self.publicKeyRaw = key.publicKey.rawRepresentation
+        } catch {
+            throw Enigma256AuthError.invalidIdentityKey
+        }
+    }
+
+    /// 32-byte seed for persistence (nil if burned).
+    package var privateKeyRaw: Data? {
+        privateKey?.rawRepresentation
+    }
+
     package static func parsePublicKey(_ raw: Data) throws -> Curve25519.Signing.PublicKey {
         guard raw.count == 32 else { throw Enigma256AuthError.invalidIdentityKey }
         do {
