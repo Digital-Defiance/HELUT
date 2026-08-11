@@ -40,16 +40,21 @@ Extract-and-Expand Key Derivation uses **HKDF-SHA512** (RFC 5869). Domain labels
 
 The stepping engine is a 64-bit Galois LFSR (primitive taps 64, 63, 61, 60 → feedback `0xD800_0000_0000_0000`).
 
-Raw single-bit taps would leak LFSR state into observable rotor motion (Berlekamp–Massey). Instead, each step enable is a **non-linear fold**:
+Raw single-bit taps would leak LFSR state into observable rotor motion (Berlekamp–Massey). Live genes in `Fixtures/enigma256_generation.json` select the boolean class:
+
+- **quadratic3** (gen 0–2): `step = (a ∧ b) ⊕ c`
+- **cubic6** (gen 3+): `step = (a ∧ b ∧ c) ⊕ (d ∧ e) ⊕ f` — algebraic degree 3, six taps per rotor
+
+Gen 3 shipping folds:
 
 ```
-step_r1 = (lfsr[0]  & lfsr[7])  ^ lfsr[12]
-step_r2 = (lfsr[15] & lfsr[22]) ^ lfsr[29]
-step_r3 = (lfsr[31] & lfsr[38]) ^ lfsr[45]
-step_r4 = (lfsr[47] & lfsr[54]) ^ lfsr[61]
+step_r1 = (lfsr[0]  & lfsr[13] & lfsr[27]) ^ (lfsr[5]  & lfsr[41]) ^ lfsr[62]
+step_r2 = (lfsr[1]  & lfsr[18] & lfsr[33]) ^ (lfsr[9]  & lfsr[44]) ^ lfsr[58]
+step_r3 = (lfsr[2]  & lfsr[21] & lfsr[36]) ^ (lfsr[11] & lfsr[48]) ^ lfsr[55]
+step_r4 = (lfsr[3]  & lfsr[24] & lfsr[39]) ^ (lfsr[14] & lfsr[51]) ^ lfsr[60]
 ```
 
-Swift oracle (`Enigma256LFSR.stepMask`) and `enigma_256_core.v` agree. Scramble-then-step order is unchanged.
+Swift oracle (`Enigma256LFSR.stepMask`) and `enigma_256_core.v` agree. Scramble-then-step order is unchanged. TensorLUT repeatedly recovered quadratic3; cubic6 is the Blue structural response.
 
 ## 6. Evolutionary Hardware & Polymorphic Adversarial Loops
 

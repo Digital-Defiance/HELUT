@@ -200,7 +200,7 @@ export function Enigma256Page() {
             <li>
               <span className="mono">STEP</span>
               <span>
-                <strong>Galois + NLFF:</strong> feedback <code>0xD800_0000_0000_0000</code>; step enables <code>(lfsr[i] &amp; lfsr[i+7]) ^ lfsr[i+12]</code> for bases 0, 15, 31, 47. Zero seed forced to 1.
+                <strong>Galois + NLFF:</strong> feedback <code>0xD800_0000_0000_0000</code>. Gen 3+ uses cubic6 <code>(a∧b∧c)⊕(d∧e)⊕f</code> (six taps); earlier gens used quadratic3. Genes in <code>Fixtures/enigma256_generation.json</code>. Zero seed forced to 1.
               </span>
             </li>
             <li>

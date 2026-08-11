@@ -31,14 +31,13 @@ package struct Enigma256LFSR: Sendable, Equatable {
     }
 
     package func stepMask(using generation: Enigma256Generation) -> (Bool, Bool, Bool, Bool) {
-        func nlff(_ fold: Enigma256NLFFFold) -> Bool {
-            let x = (state >> fold.a) & 1
-            let y = (state >> fold.b) & 1
-            let z = (state >> fold.c) & 1
-            return ((x & y) ^ z) != 0
-        }
         let f = generation.folds
-        return (nlff(f[0]), nlff(f[1]), nlff(f[2]), nlff(f[3]))
+        return (
+            f[0].evaluate(state, formula: generation.formula),
+            f[1].evaluate(state, formula: generation.formula),
+            f[2].evaluate(state, formula: generation.formula),
+            f[3].evaluate(state, formula: generation.formula)
+        )
     }
 }
 
