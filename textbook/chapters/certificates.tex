@@ -70,9 +70,16 @@ Approx candidate is covering \texttt{.crypto} (baseLog$=8$, $g_0\neq\delta$).
 Statement: \corpus{directives/ggsw-incomplete-covering.md}.}
 
 \reproduced{C32}{At $N{=}1024$, \texttt{.crypto} inject $B{=}1$ is $\infty$-norm
-decodable with $\varepsilon\log_2\approx -32.2$ (not $-64$);
-\texttt{cryptoPublicMS} remains undecodable for $B\ge 1$. Receipt:
-\corpus{logs/helut-noisy-bk-measure-n1024-B1.log}.}
+decodable; $\varepsilon\log_2\approx -8.4$ at 8 trials (not $-64$);
+\texttt{cryptoPublicMS} remains undecodable for $B\ge 1$. Receipts:
+\corpus{logs/helut-noisy-bk-measure-n1024-B1.log},
+\corpus{logs/helut-noisy-bk-measure-n1024-B1-t8.log}.}
+
+\reproduced{C33}{Track~A Metal SING with covering \texttt{.crypto} at $N{=}1024$,
+inject $B{=}1$: secret-refresh and public-ms covering paths both PASS
+(non-zero decodable $B_{\mathrm{bk}}$). Receipts:
+\corpus{logs/helut-encrypted-n1024-metal-sing-covering-crypto-noisy-B1.log},
+\corpus{logs/helut-encrypted-n1024-metal-sing-covering-publicms-noisy-B1.log}.}
 
 \section{Calibration is not estimation}
 

@@ -382,6 +382,26 @@ private func runEncryptedNetlistBench() {
                     device: device,
                     queue: queue
                 )
+                // Track A approx candidate (**C31**/**C32**): covering `.crypto` (g₀≠δ).
+                // Distinct from public-ms cryptoPublicMS so C21 reproduce filters stay stable.
+                try runAll(
+                    label: "blind-rotate-metal secret crypto",
+                    params: .crypto(degree: degree),
+                    backend: .blindRotateMetal,
+                    wireRefresh: .secret,
+                    seed: 0xE130,
+                    device: device,
+                    queue: queue
+                )
+                try runAll(
+                    label: "blind-rotate-metal public-ms covering-crypto",
+                    params: .crypto(degree: degree),
+                    backend: .blindRotateMetal,
+                    wireRefresh: .publicMS,
+                    seed: 0xE131,
+                    device: device,
+                    queue: queue
+                )
             }
             if metalNetlistOnly {
                 try runAll(

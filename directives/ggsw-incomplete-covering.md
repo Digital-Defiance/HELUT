@@ -31,18 +31,19 @@ Reproduce: `swift test -c release --filter testGGSWIncompleteCoveringCertificate
 
 ---
 
-## Measured tiny inject on the approx candidate (**C32**)
+## Measured tiny inject on the approx candidate (**C32** / **C33**)
 
-At \(N=1024\), inject \(B\in\{1,2\}\) (`logs/helut-noisy-bk-measure-n1024-B1.log`):
+At \(N=1024\), inject \(B=1\):
 
-| Gadget | \(B\) | Decodable? | εlog2 |
-|--------|-------|------------|-------|
-| `cryptoPublicMS` (incomplete, \(g_0=\delta\)) | 1 | **no** | 0 |
-| `cryptoPublicMS` | 2 | **no** | 0 |
-| `.crypto` (covering, \(g_0\neq\delta\)) | 1 | **yes** | **≈ −32.2** |
-| `.crypto` | 2 | yes | ≈ −1.3 |
+| Surface | Receipt |
+|---------|---------|
+| Measure 4 trials | `.crypto` εlog2≈−32.2; `cryptoPublicMS` undecodable · `…-B1.log` |
+| Measure 8 trials | `.crypto` εlog2≈**−8.4** (σ̂≈2.95×10⁵) · `…-B1-t8.log` |
+| Metal SING secret + `.crypto` | **PASS** · *B*<sub>bk</sub>=712370 · `…-covering-crypto-noisy-B1.log` (**C33**) |
+| Metal SING public-ms + `.crypto` | **PASS** · *B*<sub>bk</sub>=352756 · `…-covering-publicms-noisy-B1.log` (**C33**) |
 
-So the approx candidate *carries* \(B=1\) with ε ≈ 2⁻³² — better than **C26**’s \(B=4\) (ε ≈ −1), but **not** ε ≤ 2⁻⁶⁴. Track A Metal SING still defaults to `cryptoPublicMS` + *e*=0 BK.
+So Track A *can* run Metal SING with covering-non-δ + inject \(B=1\). Gaussian ε is still ≫ 2⁻⁶⁴.
+`cryptoPublicMS` + noise remains undecodable; noiseless `cryptoPublicMS` SING is still **C21**.
 
 ---
 
