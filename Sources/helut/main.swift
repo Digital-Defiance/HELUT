@@ -50,7 +50,7 @@ let positionalArgs: [String] = {
     let valueFlags: Set<String> = [
         "--ticks", "--batch", "--rings", "--subspace", "--msg-keys", "--skip", "--from",
         "--degree", "--warmup", "--reset-hold", "--encoding", "--lut-backend",
-        "--vectors", "--paths", "--trials",
+        "--vectors", "--paths", "--trials", "--bk-noise",
         "--hybrid-pop", "--hybrid-gens", "--hybrid-greek-samples",
         "--exhaust-top", "--exhaust-plugs", "--selftest-len",
         "--bombe-menus", "--bombe-plugs", "--bombe-report", "--bombe-pipeline",
@@ -155,12 +155,17 @@ if CommandLine.arguments.contains("--hardness-table") {
     print("")
     print(TFHELWECoreSVPModel.markdownTable())
     print("")
-    print(TFHELWEEstimatorProtocol.markdownTable())
+    print(TFHELWEEstimatorProtocol.markdownTable(TFHELWEEstimatorProtocol.mergedFromResultsFile()))
     exit(0)
 }
 
 if CommandLine.arguments.contains("--estimator-export") {
     print(TFHELWEEstimatorProtocol.exportPendingJSON())
+    exit(0)
+}
+
+if CommandLine.arguments.contains("--measure-bk-noise") {
+    runNoisyBKMeasure()
     exit(0)
 }
 

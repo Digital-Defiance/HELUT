@@ -1,0 +1,119 @@
+\chapter{Netlists as the universal IR}
+\label{ch:reconf}
+
+\section{From RTL to LUTs}
+
+A combinational Boolean function $f:\{0,1\}^k\to\{0,1\}$ is exactly a truth
+table of $2^k$ bits.
+FPGA vendors package that table as a $k$-input look-up table.
+Yosys~\cite{yosys} emits the same object after \texttt{abc -lut 2} (or 4, or 6)
+as a cell of type \texttt{\$lut} with a parameter string INIT.
+
+\begin{definition}[Yosys \texttt{\$lut}]
+A combinational cell whose output bit is INIT indexed by the concatenated
+input bits. HELUT treats every \texttt{\$lut} as one programmable gate, whether
+the backend is a multilinear oracle or a TFHE blind rotate.
+\end{definition}
+
+Sequential logic is a \texttt{\$\_DFF*} (or enable / sync-reset variant).
+The clock is not a net in the tensor graph: it is a \emph{host protocol}
+(Chapter~\ref{ch:pillari}).
+That substitution---clock as protocol, not as a routed tree---is the first
+reconfigurable-computing heresy of the course, and it is load-bearing.
+Tensor engines do not give you a global posedge. They give you
+\texttt{graph.run}.
+
+\section{Why we start from synthesized netlists}
+
+High-level FHE compilers start from a language and lower to homomorphic ops.
+HELUT starts from a \emph{netlist that already exists}: PicoRV32, a regex DFA,
+a decision tree, an Enigma core~\cite{picorv32}.
+The pedagogical reason is the same as the systems reason:
+
+\begin{itemize}
+  \item The IR is stable. Verilog front-ends change; \texttt{\$lut} does not.
+  \item Sequential depth is explicit. Multiplicative depth in an arithmetic
+        circuit is a metaphor; DFF count is a fact.
+  \item Any HDL, any synthesizer that can emit Yosys JSON, is in scope.
+  \item Cryptanalysis targets (historical machines, stream ciphers) already
+        \emph{are} netlists.
+\end{itemize}
+
+\begin{remark}
+Starting from netlists does not make HELUT ``better than Concrete.''
+It makes it a different compiler problem: \emph{spatial} Boolean fabric
+onto a graph API, not \emph{scalar} program onto PBS.
+\end{remark}
+
+\section{The four objects a student must be able to draw}
+
+\begin{enumerate}
+  \item \textbf{A LUT} as a box with INIT and $k$ wires.
+  \item \textbf{A DFF} as a box whose $Q$ at tick $t+1$ is a mux of $D$, enable,
+        and reset, evaluated \emph{between} graph runs.
+  \item \textbf{A batch axis $B$} as $B$ independent copies of the same fabric
+        in one run---the reconfigurable analog of SIMD, and the reason a
+        Bombe search is a tensor problem.
+  \item \textbf{A polynomial degree $N$} as the \emph{ciphertext shape}, not
+        the circuit size. $N=1$ is clear-shape boolean. $N=1024$ is
+        TFHE-shaped. Confusing $N$ with LUT count is the most common
+        homework error in week~2.
+\end{enumerate}
+
+\section{Worked lowering: a half-adder}
+
+A half-adder is two gates: $\mathrm{sum}=A\oplus B$, $\mathrm{carry}=A\land B$.
+Under additive torus encoding, XOR is a vector add (free).
+AND is a LUT (or a PBS).
+
+\begin{example}[Half-adder as a graph]
+Yosys emits (typically) one \texttt{\$lut} for the AND and uses an add/xor
+cell or a second LUT for the sum, depending on techmap.
+HELUT's Phase-2 compiler~\cite{helut-paper} lowers this to placeholders for
+$A,B$, an add node, a LUT node, and output binds---one persistent
+\texttt{MPSGraph}.
+There is no FPGA routing step. The ``place-and-route'' \emph{is} the tensor
+edge list.
+\end{example}
+
+\begin{exercise}
+Synthesize a 1-bit full adder with Yosys (\texttt{abc -lut 2}) and count
+\texttt{\$lut} versus \texttt{\$\_DFF*} cells.
+Then argue, in four sentences, why the encrypted SING of that netlist is a
+better first FHE lab than PicoRV32. (PicoRV32 is \cid{1} on the \emph{oracle}
+path; the encrypted path's multi-LUT workhorse is the adder, \cid{6}.)
+\end{exercise}
+
+\section{Batch is a first-class capacity knob}
+
+On an FPGA, duplicating a circuit costs LUTs.
+On a tensor engine, duplicating a circuit is a batch dimension $B$ on every
+placeholder.
+Memory scales as the broadcast intermediates, not as ``more CLBs.''
+
+\reproduced{C1}{Yosys \texttt{\$lut}/DFF $\to$ Metal/CPU tensor eval on the
+cleartext / trivial-oracle path. PicoRV32, Enigma stream, and campaign-scale
+batch search all sit on this lowering.}
+
+At $N=1024$, $B=1000$, Enigma~M3's TFHE-shaped working set is gigabytes while
+clear-shape $N=1$ stays flat.
+Students designing a ``just crank $B$'' attack are designing a memory bomb.
+That is a reconfigurable-computing lesson, not an FHE lesson.
+
+\begin{exercise}
+Using only the boolean-path scale table in the HELUT README (epoch of this
+edition), plot tick time versus $B$ at $N=1$ and $N=1024$.
+Identify the regime where graph overhead dominates $N$, and the regime where
+$N=1024$ becomes memory-bound.
+\end{exercise}
+
+\section{What this chapter refuses to call a bitstream}
+
+A Metal graph executable is late-bound, cached, and device-specific.
+It is tempting to call it a bitstream.
+We do not, yet.
+A bitstream has a documented configuration memory; an \texttt{MPSGraphExecutable}
+has an Apple runtime.
+The analogy is useful in lecture and false on an exam.
+Chapter~\ref{ch:metal} returns to this when the compiler stops unrolling
+schoolbook arithmetic into MLIR and starts calling ring kernels.

@@ -1,0 +1,90 @@
+\chapter{Laboratories}
+\label{ch:lab}
+
+Systems-track labs assume macOS 14$+$, Apple Silicon, Swift 6.3, and a
+release \texttt{helut} at repo root:
+\texttt{swift build -c release --product helut}.
+Theory-track substitutes are stated per lab.
+
+\section{Lab 0 --- Claim literacy (everyone)}
+
+Read \corpus{directives/claim-sheet.md} at the printed epoch.
+Classify five public sentences (instructor-provided) as \cid{}, \hid{},
+\nid{}, or frontier.
+No machine required.
+
+\section{Lab 1 --- Negacyclic oracle}
+
+Implement $N=8$ schoolbook mul in $\mathbb{Z}/2^{32}\mathbb{Z}[X]/(X^N+1)$
+and check a dense Toeplitz expansion against it on torus corners.
+Theory track: $N=4$ by hand (Chapter~\ref{ch:torus} exercises).
+
+\section{Lab 2 --- Netlist clock}
+
+Compile \texttt{counter} or \texttt{full\_adder} Yosys JSON with
+\texttt{--compile-only}.
+Tick with \texttt{--bench}. Identify $B$, $N$, LUT count, DFF count.
+Explain in writing why $N$ is not the circuit size.
+
+\section{Lab 3 --- Boolean oracle versus FHE path}
+
+\begin{lstlisting}
+.build/release/helut --bench netlist.json --degree 64 \
+  --lut-backend pbs --encoding phase --bench-equiv
+.build/release/helut --bench netlist.json --degree 8 \
+  --bench-encrypted --cpu-only --sing --vectors 8
+\end{lstlisting}
+
+Deliverable: a table with columns \{backend, $N$, SING, certificates
+printed, may we say ``encrypted'' on a slide?\}.
+
+\section{Lab 4 --- Production-shaped SING}
+
+\reproduced{C6, H2 closed}{full\_adder encrypted SING through $N=1024$.}
+
+Follow Appendix~\ref{app:repro}. Record ms/row at $N=8$ and $N=1024$.
+Write the \hid{1} and \hid{4} asterisks next to any hardness or depth
+sentence.
+
+Theory track: parse a published SING log and reconstruct the table
+without running Metal.
+
+\section{Lab 5 --- Metal compiler post-mortem}
+
+Compare fused-megagraph DNF, \cid{16}, \cid{17}, \cid{18} using
+Chapter~\ref{ch:metal}'s table.
+Optional systems: \texttt{make test-metal-p1} and one
+\texttt{--bench-encrypted-micro --degree 64} run.
+Deliverable: the \hid{3} paragraph in your own words.
+
+\section{Lab 6 --- TensorLUT Theorem 1 (\cid{19})}
+
+\begin{lstlisting}
+swift test -c release --filter testTensorLUTFormalCertificate
+\end{lstlisting}
+
+Deliverable: name the six lemmas, the certificate hypotheses, and one
+sentence that Theorem~\ref{thm:tensorlut} does \emph{not} prove.
+Theory track: read \corpus{Sources/HELUTCore/TensorLUTFormal.swift} and
+\corpus{directives/tensorlut-theorem.md}; reconstruct the five-cell card
+without running Swift.
+
+\section{Lab 7 --- Five-cell audit (everyone)}
+
+The signature assignment (Chapter~\ref{ch:instructor}).
+One abstract sentence from \corpus{paper/helut.tex}; five cells; a
+pass/fail on whether the sentence is lecture-safe at this epoch.
+
+\section{Lab 8 --- Frontier proposal (everyone)}
+
+Chapter~\ref{ch:frontier}: pick one avenue. Propose the first experiment
+that would mint a \cid{} row. You may not claim the avenue works.
+
+\section{Optional project slots}
+
+TensorLUT involution sandwich replay (\cid{9} logs), E256 invariant
+studio, or a new Yosys netlist (student RTL $\to$ SING).
+Instructor approval required; campaign decrypt projects are out of scope.
+
+\growswhen{Autograded SING harnesses for course VMs; a Dockerized theory
+track; non-Apple ring-oracle labs.}

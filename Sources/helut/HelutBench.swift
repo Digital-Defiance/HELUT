@@ -174,6 +174,8 @@ private func runEncryptedNetlistBench() {
     let metalNetlistOnly = CommandLine.arguments.contains("--metal-netlist-only")
     let maxVectors = intFlag("--vectors") ?? 256
     let pathFilter = stringFlag("--paths") // comma list substring match; nil = all
+    let bkNoiseBound = intFlag("--bk-noise", allowZero: true) ?? 0
+    let bkNoise = TFHENoiseParams(bound: UInt32(bkNoiseBound))
     let netlist = loadYosysNetlist(from: path)
     guard let (moduleName, module) = netlist.modules.first else {
         fatalError("Empty netlist")
@@ -201,6 +203,9 @@ private func runEncryptedNetlistBench() {
         print("  paths filter: \(pathFilter)")
     }
     print("  paths: public-ms@boolean + public-ms@crypto + secret@crypto\(cpuOnly || metalNetlistOnly ? "" : " (+ Metal)")")
+    if bkNoise.bound > 0 {
+        print("  BK noise inject B=\(bkNoise.bound) (measured identity residual → B_bk)")
+    }
     if binCost >= 0 {
         print("  DynamicRotateCost mux=\(muxCost) binary=\(binCost) speedup≈\(String(format: "%.1f", Double(muxCost) / Double(max(binCost, 1))))×")
     }
@@ -263,6 +268,7 @@ private func runEncryptedNetlistBench() {
             params: params,
             backend: backend,
             wireRefresh: wireRefresh,
+            bkNoise: bkNoise,
             seed: seed &+ 0x100,
             device: device,
             commandQueue: queue
@@ -417,7 +423,7 @@ private func runEncryptedNetlistBench() {
         }
         print("calibration:\n\(TFHELWECalibration.markdownTable())")
         print("core-SVP model (sage-free):\n\(TFHELWECoreSVPModel.markdownTable())")
-        print("estimator protocol:\n\(TFHELWEEstimatorProtocol.markdownTable())")
+        print("estimator protocol:\n\(TFHELWEEstimatorProtocol.markdownTable(TFHELWEEstimatorProtocol.mergedFromResultsFile()))")
         print("══════════════════════════════════════")
     }
 }
@@ -1100,4 +1106,57 @@ private func taskResidentMemoryBytes() -> UInt64 {
     }
     precondition(result == KERN_SUCCESS, "task_info failed: \(result)")
     return info.resident_size
+}
+
+/// Identity-LUT residual under noiseless vs injected BK noise (H4).
+func runNoisyBKMeasure() {
+    setbuf(stdout, nil)
+    let degree = intFlag("--degree") ?? 8
+    let trials = intFlag("--trials") ?? 16
+    let inject = UInt32(intFlag("--bk-noise", allowZero: true) ?? 64)
+    print("HELUT noisy-BK identity residual (H4)")
+    print("  N=\(degree)  trials=\(trials)  inject B ∈ {0, \(inject)}")
+    print("")
+    var rows: [TFHENoisyBKMeasurement] = []
+    let gadgets: [(String, GGSWParams)] = [
+        ("cryptoPublicMS", .cryptoPublicMS(degree: degree)),
+        ("crypto", .crypto(degree: degree))
+    ]
+    if degree <= 16 {
+        print("  note: booleanPublicMS (ℓ=1) omitted — incomplete gadget; BK noise mis-decomposes")
+    }
+    for (label, params) in gadgets {
+        let secret = TFHESecretKey.random(params: params.tfhe, seed: 0xB10C)
+        for bound in [UInt32(0), inject] {
+            let measured = TFHENoisyBKMeasurement.identity(
+                secret: secret,
+                params: params,
+                noise: TFHENoiseParams(bound: bound),
+                trials: trials,
+                seed: 0xB10D &+ bound
+            )
+            let cert = measured.certificate(lutCount: 8)
+            let gauss = measured.gaussianCertificate(lutCount: 8)
+            let eps: String
+            if gauss.failureLog2.isInfinite && gauss.failureLog2 < 0 {
+                eps = "-inf"
+            } else {
+                eps = String(format: "%.1f", gauss.failureLog2)
+            }
+            print(
+                "\(label) B=\(bound): max|e|=\(measured.maxAbsError) "
+                    + String(format: "σ̂=%.1f", measured.sigmaHat)
+                    + " δ/2=\(measured.decodingHalfGap) "
+                    + "decode_fail=\(measured.decodeFailures) "
+                    + "decodable=\(cert.eachLUTDecodable) εlog2=\(eps)"
+            )
+            rows.append(measured)
+            if bound == 0 {
+                precondition(measured.maxAbsError == 0, "noiseless BK must measure B_bk=0")
+                cert.assertDecodable()
+            }
+        }
+    }
+    print("")
+    print(TFHENoisyBKMeasurement.markdownTable(rows))
 }

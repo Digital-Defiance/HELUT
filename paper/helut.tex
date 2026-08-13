@@ -2,6 +2,7 @@
 
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb,amsthm}
+\newtheorem{theorem}{Theorem}
 \usepackage{booktabs}
 \usepackage{graphicx}
 \usepackage{hyperref}
@@ -525,17 +526,29 @@ TensorLUT forward pass. Soft crypto fitness and discreteness penalty are
   &= F_{\mathrm{crypto}}(w)-\lambda\,\pi(w),
   \qquad \lambda=\lambda_{\max}(p')^2\ge 0.
 \end{align}
-Machine-checkable lemmas (\texttt{TensorLUTFormal}): $\pi\ge 0$ with equality on
-$\{0,1\}^{64L}$; $F_{\mathrm{crypto}}\le 0$ with equality iff $y=t$; increasing
-$\lambda$ cannot improve $F$ when $\pi>0$; emitter $\mathbf{1}[w\ge\tfrac12]$ is
-idempotent on binary INITs; freeze masks remove frozen blocks from $\pi$.
+
+\begin{theorem}[TensorLUT continuous$\to$discrete]
+\label{thm:tensorlut}
+Under the hypotheses of \texttt{TensorLUTFormal.certificate()}
+(multilinear LUT, unfrozen $w_i\in[0,1]$, involution sandwich on core INITs):
+$\pi\ge 0$ with equality on $\{0,1\}^{64L}$;
+$F_{\mathrm{crypto}}\le 0$ with equality iff $y=t$;
+$F\le F_{\mathrm{crypto}}$ and increasing $\lambda$ cannot improve $F$ when $\pi>0$;
+emitter $\mathbf{1}[w\ge\tfrac12]$ is idempotent on binary INITs;
+stecker genotypes are partial involutions;
+freeze masks remove frozen blocks from $\pi$.
+\end{theorem}
+
+Machine-checked proof: \texttt{Sources/HELUTCore/TensorLUTFormal.swift}
+(\texttt{testTensorLUTFormalCertificate}). Statement: \texttt{directives/tensorlut-theorem.md}.
+This is a \emph{structural} theorem---not a U-534 break.
 
 \paragraph{Involution sandwich.}
 Stecker genotypes are partial involutions (disjoint pairs) by construction
 (\texttt{SteckerInvolution.isValid}). The GA cannot propose a non-reciprocal map.
 Empirical grades: unmutated M4 baseline $F_{\mathrm{crypto}}=0$; full INIT /
 stecker-cone melts shatter under $\lambda$; blind 3-pair rediscovery PASSed
-(campaign ledger). This is a \emph{method} claim---not a U-534 break.
+(campaign ledger).
 
 \section{Pillar III --- Adversarial polymorphic ciphers (sketch)}
 \label{sec:pillar3}

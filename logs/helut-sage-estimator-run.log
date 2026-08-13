@@ -1,0 +1,2 @@
+/bin/bash: -c: line 1: syntax error near unexpected token `0,"/est"'
+/bin/bash: -c: line 1: `sage -python -c import sys; sys.path.insert(0,"/est"); import subprocess; subprocess.check_call(["sage","--pip","install","/est"]); import runpy; sys.argv=["helut_lattice_estimate.py","--pending","/work/logs/helut-estimator-pending.json","--out","/work/logs/helut-estimator-results.json"]; runpy.run_path("/work/Scripts/helut_lattice_estimate.py", run_name="__main__")'

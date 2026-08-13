@@ -1,5 +1,5 @@
 {
-  "dependency_status": "missing sage.all (No module named 'sage')",
+  "dependency_status": "missing estimator (No module named 'estimator')",
   "note": "Install: pip install 'git+https://github.com/malb/lattice-estimator.git' and SageMath (sage.all). None values mean not verified \u2014 do not treat HELUT calibrated estimates as lattice-estimator output.",
   "pending": [
     "demo-N8",

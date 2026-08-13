@@ -1,0 +1,62 @@
+\chapter{Open problems (trajectory)}
+\label{ch:open}
+
+This chapter is the discovery path after disclosure~\cite{helut-trajectory}.
+None of these items are lecture facts until they have receipts.
+
+\section{Near term}
+
+\begin{center}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}p{0.24\textwidth}p{0.34\textwidth}p{0.32\textwidth}@{}}
+\toprule
+Track & Status at epoch \livingepoch{} & Next experiment \\
+\midrule
+\hid{2} full\_adder $N\ge 256$
+  & \textbf{Closed} ($Z_{2N}$ pack / \texttt{rotationPower})
+  & Keep as a worked bug in Chapter~\ref{ch:torus}. \\
+\hid{1} Sage lattice-estimator
+  & Protocol shipped; SageMath not filled
+  & Estimator script on pending JSON. \\
+\hid{3} Metal BR at large $N$
+  & \cid{18} micro win; SING not vs.\ \cid{17}
+  & Cut in-tile NTT/iNTT round-trips. \\
+\hid{4} Noisy BK
+  & Modeled; $B_{\mathrm{bk}}=0$
+  & Measured $\sigma_{\mathrm{BK}}$ into the certificate. \\
+Campaign catalog
+  & Middle ring $\neq A$ untested; catalog @265
+  & Resume \texttt{--bombe-from 265}. \\
+Garble / quarantine
+  & Soft-band grades
+  & Sister-message lessons; not a decrypt claim. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Mid-term pillars}
+
+\begin{enumerate}
+  \item \textbf{Pillar I science:} shallower nets, NTT/persist graphs,
+        estimator-backed params (this book's Parts~III).
+  \item \textbf{Pillar II science:} Theorem~1 landed (\cid{19},
+        Chapter~\ref{ch:pillarii}); remaining: completeness of melt,
+        stream-cipher melts.
+  \item \textbf{Pillar III science:} polymorphic Red/Blue standard beyond
+        E256 SoftBus.
+  \item \textbf{FHE gate / ZK depth:} TensorLUT aimed at multiplicative
+        depth (queued; not a part of this edition).
+  \item \textbf{Side-channel (parked):} bgpucap-style power on live Metal
+        graphs only with controlled fixtures --- Chapter~\ref{ch:frontier},
+        avenue 5.
+\end{enumerate}
+
+\begin{exercise}[Pick a next experiment]
+Choose one open hedge. Write a one-page lab proposal: command line, pass
+bar, which box in this book would change, and which \nid{} you refuse to
+imply if the experiment fails.
+\end{exercise}
+
+\growswhen{Each closed row in this table deletes a hedge box elsewhere
+and adds a reproduced box. That is the only way this chapter shrinks.}

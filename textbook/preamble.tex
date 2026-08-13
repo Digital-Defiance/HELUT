@@ -1,0 +1,82 @@
+% Shared preamble for the HELUT living textbook.
+% Canonical TeX. Build with: make textbook
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{url}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=blue!50!black,
+  pdftitle={Reconfigurable Homomorphic Computing: A Living Textbook},
+  pdfauthor={Digital Defiance / HELUT}
+}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  columns=fullflexible,
+  frame=single,
+  rulecolor=\color{black!20},
+  showstringspaces=false
+}
+
+% ---------------------------------------------------------------------------
+% Living epoch --- bump when claim-sheet.md gains a C-row or closes an H.
+% Canonical inventory: directives/claim-sheet.md
+% ---------------------------------------------------------------------------
+\newcommand{\livingepoch}{2026-08-13 / C19}
+\newcommand{\corpusedition}{0.1}
+
+% Claim-sheet IDs
+\newcommand{\cid}[1]{\textbf{C#1}}
+\newcommand{\hid}[1]{\textbf{H#1}}
+\newcommand{\nid}[1]{\textbf{N#1}}
+
+% Pointers into the HELUT corpus (repo-relative)
+\newcommand{\corpus}[1]{\texttt{#1}}
+
+% Status boxes: reproduced / hedge / frontier / grows-when
+\newcommand{\livingbox}[3]{%
+  \par\medskip
+  \noindent\fcolorbox{#1}{white}{%
+    \begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
+    \smallskip
+    \textbf{#2.} #3
+    \smallskip
+    \end{minipage}%
+  }\par\medskip
+}
+\newcommand{\reproduced}[2]{\livingbox{green!50!black}{Reproduced (#1)}{#2}}
+\newcommand{\hedgebox}[2]{\livingbox{orange!70!black}{Open hedge (#1)}{#2}}
+\newcommand{\frontierbox}[1]{\livingbox{blue!55!black}{Frontier --- not a claim}{#1}}
+\newcommand{\growswhen}[1]{\livingbox{black!45}{This section grows when}{#1}}
+\newcommand{\nonclaimbox}[1]{\livingbox{red!55!black}{Non-claim}{#1}}
+
+% Pedagogy
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{example}{Example}[chapter]
+\newtheorem{exercise}{Exercise}[chapter]
+\newtheorem{lab}{Laboratory}[chapter]
+\theoremstyle{plain}
+\newtheorem{lemma}{Lemma}[chapter]
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{proposition}{Proposition}[chapter]
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[chapter]
+\newtheorem{warning}{Honesty note}[chapter]
+
+\setlist[itemize]{leftmargin=*}
+\setlist[enumerate]{leftmargin=*}

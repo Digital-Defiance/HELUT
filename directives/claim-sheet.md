@@ -2,7 +2,7 @@
 
 **Bar:** anything we say in public must be **reproducible** from this repo (`REPRODUCE.md` + logs/tests). IDs are for bookkeeping, not a premiere freeze — science moves; update rows when evidence moves.
 
-Doctrine: [`research-release.md`](research-release.md) · Cookbook: [`parameter-cookbook.md`](parameter-cookbook.md) · Reproduce: [`../REPRODUCE.md`](../REPRODUCE.md) · Beyond today: [`research-trajectory.md`](research-trajectory.md)
+Doctrine: [`research-release.md`](research-release.md) · Cookbook: [`parameter-cookbook.md`](parameter-cookbook.md) · Reproduce: [`../REPRODUCE.md`](../REPRODUCE.md) · Beyond today: [`research-trajectory.md`](research-trajectory.md) · Course book: [`../textbook/`](../textbook/) (agents: `.cursor/rules/living-textbook.mdc`).
 
 **How to talk about it:** lead with what runs and what it does *not* prove. Discovery continues after any disclosure.
 
@@ -18,7 +18,7 @@ Doctrine: [`research-release.md`](research-release.md) · Cookbook: [`parameter-
 | **C4** | Encrypted LWE/GLWE + GGSW BR per `$lut` (publicMS / secret) | `--bench-encrypted` | seam tests · EncryptedNetlistSim · full_adder through *N*=1024 |
 | **C5** | Certificates on encrypted ticks (noise, *ε*, calibrated hardness, noisy-BK model) | `--hardness-table` · SING cert lines | cookbook production row |
 | **C6** | Encrypted ≡ clear multi-netlist SING | `Scripts/helut_encrypted_sing.sh` | `logs/helut-encrypted-*.log` · adder *N*≤1024 |
-| **C7** | Metal 1-LUT BR microbench | `--bench-encrypted-micro --degree 64` | fused ~50.3 s/BR · persist-tile **0.001 s/BR** (**C17**) |
+| **C7** | Metal 1-LUT BR microbench | `--bench-encrypted-micro --degree 64` | fused ~50.3 s/BR · persist-schoolbook **0.001 s/BR** (**C17**) · NTT-tile **0.010 s/BR** (**C18**, `--metal-br-tile 64`) |
 | **C8** | TensorLUT M4 baseline *F*<sub>crypto</sub>=0 + Verilog emit | TensorLUT CLI / Phase 21 | `enigma_m4_tensorlut_baseline.v` |
 | **C9** | Stecker involution sandwich · blind 3-pair PASS | Phase 21 protocol | involution logs / journal |
 | **C10** | Enigma256 reciprocity · fail-closed / bijection | E256 tests | `Enigma256.md` · fixtures |
@@ -29,6 +29,9 @@ Doctrine: [`research-release.md`](research-release.md) · Cookbook: [`parameter-
 | **C15** | Metal netlist-scheduled SING @ *N*=1024 | `--metal-netlist-only --degree 1024 --vectors 8` | 91.9 s / 8 rows (11.5 s/row) · tiled-kernel lowering · `logs/helut-encrypted-n1024-metal-netlist-sing.log` |
 | **C16** | Metal fused EP kernel (Phase 2.2) | `--bench-encrypted-micro --degree 1024 --trials 2` · boolean SING | **1.043 s/BR** @ *N*=1024 (gpu 0.99 s) · N=64 tiled 0.043 s/BR · boolean SING 25.1 s / 8 rows (3.14 s/row) · `logs/helut-encrypted-micro-n1024-ep.log` · `logs/helut-encrypted-n1024-metal-sing-ep.log` |
 | **C17** | GPU-resident BR tile (Phase 2.3) | `--bench-encrypted-micro --degree 1024 --trials 2` · boolean SING | **0.519 s/BR** @ *N*=1024 (gpu 0.50 s, RSS 68 MiB) · N=64 **0.001 s/BR** · boolean SING **12.2 s / 8** (1.52 s/row) · `logs/helut-encrypted-micro-n1024-persist.log` · `logs/helut-encrypted-n1024-metal-sing-persist.log` |
+| **C18** | Metal 3-prime NTT persist BR (Phase 2 NTT) | `make test-metal-p1` · `--bench-encrypted-micro --degree 1024 --trials 2 --warmup 1` · boolean SING | CPU+Metal NTT ≡ schoolbook (19 tests) · **0.433 s/BR** @ *N*=1024 (gpu 0.43 s, RSS 148 MiB) · N=64 tiled **0.010 s/BR** · boolean SING **15.6 s / 8** (1.95 s/row) · `logs/helut-ntt-cert.log` · `logs/helut-encrypted-micro-n1024-ntt.log` · `logs/helut-encrypted-micro-n64-ntt.log` · `logs/helut-encrypted-n1024-metal-sing-ntt.log` |
+| **C19** | TensorLUT continuous→discrete Theorem 1 | `swift test -c release --filter testTensorLUTFormalCertificate` | 6 lemmas hold (`π`, MSE, \(F\), emitter, involution, freeze) · `directives/tensorlut-theorem.md` · `TensorLUTFormal.certificate()` |
+| **C20** | Wavefront-parallel independent `$lut` BRs | `--bench-encrypted --paths 'blind-rotate-metal public-ms boolean'` · N=1024×8 | boolean SING **10.6 s / 8** (1.33 s/row) vs **C17** 12.2 s / **C18** 15.6 s · fused 3-prime NTT micro **0.420 s/BR** · `logs/helut-encrypted-n1024-metal-sing-par.log` · `logs/helut-encrypted-micro-n1024-ntt3.log` |
 
 ---
 
@@ -36,9 +39,9 @@ Doctrine: [`research-release.md`](research-release.md) · Cookbook: [`parameter-
 
 | ID | Open item | Honest asterisk |
 |----|-----------|-----------------|
-| **H1** | ~176‑bit calibrated @ production (*n*,*σ*) | ≠ lattice-estimator until Sage fills pending JSON |
+| **H1** | ~176‑bit calibrated @ production (*n*,*σ*) | ≠ lattice-estimator until **native** Sage fills pending JSON. Docker `sagemath/sagemath` linux/amd64 on Apple silicon **SIGILL** in FLINT under qemu (`logs/helut-sage-estimator-run.log`). Runner: `Scripts/helut_sage_estimate.sh`. |
 | **H2** | Multi-LUT encrypted @ large *N* | **Closed 2026-08-12:** `rotationPower` / pack now keep Z_{2N}; full_adder SING PASS @ N=256/512/1024. Was arity-3 pack overflowing 256·2N headroom. |
-| **H3** | Metal encrypted @ *N*=1024 | **C17:** persist-tile 0.519 s/BR; boolean SING 12.2 s / 8. **C16** fused-EP was 1.043 s/BR / 25 s. Schoolbook still inside the tile kernel (one-tile ≡ 16-tile wall ⇒ remaining is ALU/mem, not launch). Fused megagraph `--metal-br-fused` DNF. Crypto ℓ=2 SING not re-timed. NTT next. |
+| **H3** | Metal encrypted @ *N*=1024 | **C20:** wavefront-parallel NTT BR boolean SING **10.6 s / 8** (beats **C17** schoolbook persist 12.2 s). **C18** serial NTT SING was 15.6 s. Micro fused 3-prime **0.420 s/BR**. Fused megagraph DNF. Crypto ℓ=2 SING not re-timed. Sage **H1** still pending (native Sage). |
 | **H4** | Noisy BK in product path | Depth **modeled**; BK encrypt still noiseless |
 | **H5** | `*PublicMS` gadgets (*g*<sub>0</sub>=*δ*) | On-lattice intent; does not alone clear H2 |
 | **H6** | TensorLUT / quarantine vs campaign | Parallel research — not P1030680 plaintext |

@@ -1,0 +1,128 @@
+\chapter{To the instructor}
+\label{ch:instructor}
+
+You are being asked to teach a class that does not yet appear in the ACM/IEEE
+curriculum guidelines under that name.
+This chapter is the briefing.
+
+\section{The course in one paragraph}
+
+Students learn to treat a \emph{synthesized gate netlist} as the universal
+intermediate representation of reconfigurable computing, to lower that netlist
+onto a \emph{tensor engine} (here: Apple Silicon \texttt{MPSGraph}), and to
+evaluate it either as a boolean-faithful oracle or as torus FHE with
+certificates.
+They then learn a second compiler direction---melting discrete hardware into
+continuous tensors---and a third: designing ciphers that are born under
+adversarial pressure.
+The moral of the course is not ``FHE is fast on a laptop.''
+The moral is: \emph{reconfigurable computing has a new fabric, and honesty about
+what that fabric proves is part of the engineering.}
+
+\section{Prerequisites}
+
+\begin{center}
+\begin{tabular}{@{}lp{0.62\textwidth}@{}}
+\toprule
+\textbf{Required} & Digital logic (LUTs, flip-flops, timing)~\cite{harris2012digital};
+linear algebra; a first crypto course (modular arithmetic, attack models)~\cite{paar2009crypto}. \\
+\textbf{Helpful} & One HDL (Verilog or VHDL); one systems language; Yosys as a
+black box~\cite{yosys}. \\
+\textbf{Not required} & Prior FHE, prior Metal, prior Swift, prior lattice
+cryptography. The torus chapter is self-contained at the level this course needs.
+\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Two tracks}
+
+Not every department can put an M-series Mac in front of every student.
+
+\begin{description}
+  \item[Systems track.]
+        Apple Silicon laboratory.
+        Students build, tick, and certificate-read HELUT from
+        \corpus{REPRODUCE.md}.
+        Labs~\ref{ch:lab} assume this track.
+  \item[Theory track.]
+        No GPU required.
+        Students work the five-cell test, noise lemmas, and published logs as
+        \emph{data}.
+        A department can still grade a claim-audit final (below).
+\end{description}
+
+A mixed offering works: theory problem sets for everyone; systems labs as a
+project option or a second section.
+
+\section{Suggested grading}
+
+\begin{center}
+\begin{tabular}{@{}lp{0.22\textwidth}p{0.48\textwidth}@{}}
+\toprule
+Weight & Instrument & Why it exists \\
+\midrule
+30\% & Problem sets & Negacyclic arithmetic, packing, certificate reading. \\
+40\% & Laboratories or theory equivalents & Receipts, not vibes. \\
+20\% & \textbf{Claim audit} & Take a public sentence; run the five-cell test
+from Chapter~\ref{ch:living}. Fail the assignment if the student upgrades a
+hedge to a theorem. \\
+10\% & Frontier essay & Pick one avenue from Chapter~\ref{ch:frontier}.
+Must label it frontier. Must propose the \emph{first experiment} that would
+graduate it. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The claim audit is the signature assignment of this course.
+It trains the skill the field currently lacks: refusing to launder an
+open hedge into a keynote.
+
+\section{What to lecture, what to assign as reading}
+
+\begin{itemize}
+  \item \textbf{Lecture} Parts~II--III (foundations and Pillar~I), the
+        honesty chapter, and Theorem~\ref{thm:tensorlut} (\cid{19}).
+  \item \textbf{Seminar} Pillar~II empirics (shatter / hold, campaign as
+        case study) and Pillar~III in edition~\corpusedition{}.
+        Do not lecture shatter grades as if they were Theorem~\ref{thm:tensorlut}.
+  \item \textbf{Do not lecture as fact} Chapter~\ref{ch:frontier}.
+        Give it as the last two seminars, with the frontier boxes left on
+        the slides.
+\end{itemize}
+
+\section{How to pull a new edition mid-semester}
+
+Science will move under your feet.
+That is the point of a living textbook.
+
+\begin{enumerate}
+  \item Diff \corpus{directives/claim-sheet.md} against the epoch printed on
+        the title page.
+  \item If a new \cid{} row appeared, assign the matching lab receipt as a
+        one-page addendum; do not pretend the old PDF contained it.
+  \item If an \hid{} closed, tell the class explicitly: ``this asterisk is
+        gone; here is the log.''
+  \item If only frontier text moved, do not change the midterm.
+\end{enumerate}
+
+Bump \texttt{\textbackslash livingepoch} in \corpus{textbook/preamble.tex}
+when you accept an addendum.
+Cite git.
+
+\section{Classroom norms}
+
+\begin{itemize}
+  \item Trivial / mock torus encodings are a \emph{shape laboratory}, not FHE.
+        Students who call the boolean oracle ``encrypted computing'' lose
+        points on purpose.
+  \item Campaign cryptanalysis (Enigma / P1030680) is a \emph{case study} in
+        Pillar~II methods, not the FHE claim, and not a decrypt.
+  \item Speculative systems (encrypted LLM firewalls, self-modifying dark
+        binaries, honey-token ledgers) are ethics-and-design discussions,
+        not implementation homework, until they have \cid{} rows.
+\end{itemize}
+
+\growswhen{A published instructor's guide with slide skeletons, a Moodle/Canvas
+quiz bank, and a non-Apple reference implementation of the negacyclic oracle
+for the theory track.}

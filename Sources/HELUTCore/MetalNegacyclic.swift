@@ -408,6 +408,45 @@ func packGGSWForMetalEP(_ ggsw: GGSWCiphertext) -> [UInt32] {
     return packed
 }
 
+enum MetalBKPackCache {
+    private static let lock = NSLock()
+    nonisolated(unsafe) private static var cachedStamp: UInt64 = 0
+    nonisolated(unsafe) private static var coeff: [UInt32] = []
+
+    static func stamp(_ bk: BootstrapKey) -> UInt64 {
+        var h: UInt64 = UInt64(bk.bitKeys.count) &* 0x9E3779B97F4A7C15
+        h ^= UInt64(bk.params.baseLog) &<< 32
+        h ^= UInt64(bk.params.levelCount) &<< 16
+        h ^= UInt64(bk.params.tfhe.polynomialDegree)
+        guard !bk.bitKeys.isEmpty else { return h }
+        let n = bk.params.tfhe.polynomialDegree
+        let step = max(1, bk.bitKeys.count / 8)
+        var i = 0
+        while i < bk.bitKeys.count {
+            let g0 = bk.bitKeys[i].row(glweRow: 0, level: 0)
+            h ^= UInt64(g0.body[0])
+            h ^= UInt64(g0.body[n - 1]) &* 0x100000001b3
+            h ^= UInt64(g0.mask[0][0])
+            h = h &* 0x100000001b3
+            i += step
+        }
+        let last = bk.bitKeys[bk.bitKeys.count - 1].row(glweRow: 1, level: 0)
+        h ^= UInt64(last.body[n / 2])
+        return h
+    }
+
+    static func coeffPack(_ bk: BootstrapKey) -> [UInt32] {
+        let s = stamp(bk)
+        lock.lock()
+        defer { lock.unlock() }
+        if s == cachedStamp, !coeff.isEmpty { return coeff }
+        let packed = packBootstrapKeyForMetalEP(bk)
+        cachedStamp = s
+        coeff = packed
+        return packed
+    }
+}
+
 func packBootstrapKeyForMetalEP(_ bk: BootstrapKey) -> [UInt32] {
     var packed: [UInt32] = []
     packed.reserveCapacity(bk.bitKeys.count * bk.params.levelCount * 4 * bk.params.tfhe.polynomialDegree)
@@ -804,7 +843,7 @@ extension MetalGGSW {
                 device: device, n: n, levelCount: params.levelCount, bitCount: dim
             )
             if ntt.canFuseThreadgroup {
-                let packedBK = packBootstrapKeyForMetalEP(bootstrapKey)
+                let packedBK = MetalBKPackCache.coeffPack(bootstrapKey)
                 let (mask, body) = try ntt.blindRotate(
                     accMask: acc0.mask[0],
                     accBody: acc0.body,
@@ -832,7 +871,7 @@ extension MetalGGSW {
             device: device, n: n, levelCount: params.levelCount, bitCount: dim
         )
         if persist.canFuseThreadgroup {
-            let packedBK = packBootstrapKeyForMetalEP(bootstrapKey)
+            let packedBK = MetalBKPackCache.coeffPack(bootstrapKey)
             let (mask, body) = try persist.blindRotate(
                 accMask: acc0.mask[0],
                 accBody: acc0.body,

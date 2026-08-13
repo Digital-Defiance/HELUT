@@ -1,0 +1,109 @@
+% HELUT living textbook --- canonical TeX.
+% Build: `make textbook` → textbook/helut-living-textbook.pdf + .md
+% Markdown is generated; edit this tree only.
+% Living epoch and claim IDs: directives/claim-sheet.md
+%
+% Chapters are \input (not \include) so latexmk -outdir stays well-behaved.
+
+\documentclass[11pt,oneside,openany]{book}
+
+\input{preamble}
+
+\title{\textbf{Reconfigurable Homomorphic Computing}\\
+\large A Living Textbook of Netlist-Clocked FHE,\\
+Differentiable Hardware, and Polymorphic Ciphers}
+\author{Digital Defiance\\
+\textit{HELUT Project --- living edition \corpusedition{} (\livingepoch)}}
+\date{August 2026}
+
+\begin{document}
+\frontmatter
+
+\begin{titlepage}
+\thispagestyle{empty}
+\centering
+\vspace*{2cm}
+{\Huge\bfseries Reconfigurable Homomorphic Computing\par}
+\vspace{1.2em}
+{\Large A Living Textbook\par}
+\vspace{0.8em}
+{\large Netlist-Clocked Torus FHE \textperiodcentered{}
+Differentiable Hardware \textperiodcentered{}
+Adversarial Polymorphic Ciphers\par}
+\vfill
+{\large Digital Defiance / HELUT Project\par}
+\vspace{0.5em}
+{\large Living edition \corpusedition{} \textperiodcentered{} epoch \livingepoch\par}
+\vspace{0.3em}
+{\large For a first university course in a new subject\par}
+\vfill
+{\small Canonical source: \texttt{textbook/helut-living-textbook.tex}.
+Corpus of record: \texttt{directives/claim-sheet.md}.
+This book grows when reproducible results grow.
+Frontier chapters are labeled frontier.\par}
+\end{titlepage}
+
+\chapter*{How to read the living boxes}
+\addcontentsline{toc}{chapter}{How to read the living boxes}
+
+Four boxes appear throughout this book.
+They are not decoration; they are the difference between a textbook and a press release.
+
+\reproduced{C\textit{n}}{A result that someone else can re-run from \corpus{REPRODUCE.md} and the claim inventory. Lecture voice may treat it as established \emph{in this corpus}.}
+
+\hedgebox{H\textit{n}}{An honest asterisk. Say it in class with the hedge attached. Do not let students drop the asterisk in a problem set or a paper.}
+
+\frontierbox{Speculative territory from \corpus{directives/potential-avenues.md}. Assign as a seminar essay, never as a midterm fact.}
+
+\growswhen{A stub that is waiting on a new \cid{} row, a closed \hid{}, or a graduated avenue. Instructors: skip, or treat as a reading of the matching directive.}
+
+\tableofcontents
+
+\mainmatter
+
+\part{How This Book Lives}
+
+\input{chapters/preface}
+\input{chapters/instructor}
+\input{chapters/living-contract}
+
+\part{Foundations of the Subject}
+
+\input{chapters/the-subject}
+\input{chapters/reconfigurable}
+\input{chapters/torus-fhe}
+
+\part{Pillar I --- Netlist-Clocked Torus FHE}
+
+\input{chapters/pillar-i}
+\input{chapters/metal-compiler}
+\input{chapters/certificates}
+
+\part{Pillar II --- Differentiable Hardware}
+
+\input{chapters/pillar-ii}
+
+\part{Pillar III --- Adversarial Polymorphic Ciphers}
+
+\input{chapters/pillar-iii}
+
+\part{Laboratory, Applications, and the Frontier}
+
+\input{chapters/applications}
+\input{chapters/laboratory}
+\input{chapters/open-problems}
+\input{chapters/frontier}
+
+\appendix
+\part{Appendices}
+
+\input{appendices/notation}
+\input{appendices/claim-index}
+\input{appendices/syllabus}
+\input{appendices/reproduce}
+
+\backmatter
+\bibliographystyle{plain}
+\bibliography{refs}
+
+\end{document}

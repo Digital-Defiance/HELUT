@@ -39,7 +39,8 @@ package struct EncryptedLUTMetalContext: Sendable {
             secret: secret,
             params: params,
             rng: &rng,
-            publicRefreshCompatible: publicRefreshCompatible
+            publicRefreshCompatible: publicRefreshCompatible,
+            noise: .none
         )
         let scale = rotationScale(polynomialDegree: params.tfhe.polynomialDegree)
         return EncryptedLUTMetalContext(

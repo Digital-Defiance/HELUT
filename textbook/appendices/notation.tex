@@ -1,0 +1,34 @@
+\chapter{Notation}
+\label{app:notation}
+
+\begin{center}
+\begin{tabular}{@{}lp{0.68\textwidth}@{}}
+\toprule
+Symbol & Meaning \\
+\midrule
+$q$ & Torus modulus; HELUT uses $q=2^{32}$. \\
+$N$ & Polynomial degree / ciphertext shape. Not LUT count. \\
+$n$ & LWE dimension (often $n=N$ in HELUT boolean production). \\
+$B$ & Batch axis: independent copies of one netlist. \\
+$\delta$ & $q/(2N)$, rotation / message spacing. \\
+$\sigma$ & LWE Gaussian width. \\
+$\varepsilon$ & Ingest failure probability (Gaussian certificate). \\
+$B_{\mathrm{bk}}$ & BK noise bound; $0$ in HELUT now (\hid{4}). \\
+$\ell$ & GGSW gadget levels. \\
+$W$ & CMUX tile width in the Metal compiler. \\
+$R_q$ & $\mathbb{Z}_q[X]/(X^N+1)$. \\
+$M_A$ & Negacyclic Toeplitz matrix of polynomial $A$. \\
+$w$ & TensorLUT INIT genome in $[0,1]^{64L}$. \\
+$L$ & Number of LUT6 cells in a TensorLUT netlist. \\
+$y(w)$ & Multilinear extension of INITs (exact on $\{0,1\}$). \\
+$t$ & Target bit vector for $F_{\mathrm{crypto}}$. \\
+$\pi(w)$ & Discreteness penalty $\sum_i w_i(1-w_i)$. \\
+$E(w)$ & Emitter $\mathbf{1}[w\ge\tfrac12]$. \\
+$M$ & Freeze mask: coordinates excluded from $\pi$. \\
+$\lambda$ & Discreteness squeeze on $\pi(w)$; Theorem~1 needs $\lambda\ge 0$. \\
+\texttt{\$lut} & Yosys look-up cell; one programmable gate. \\
+SING & Encrypted $\equiv$ clear on generic stimuli. \\
+\cid{$n$}, \hid{$n$}, \nid{$n$} & Claim, hedge, non-implication IDs. \\
+\bottomrule
+\end{tabular}
+\end{center}

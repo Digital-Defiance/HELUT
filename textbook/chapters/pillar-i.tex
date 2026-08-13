@@ -1,0 +1,155 @@
+\chapter{Netlist-clocked torus FHE}
+\label{ch:pillari}
+
+Pillar~I is the reason the course exists: a synthesized sequential circuit
+becomes one tensor graph, ticked by the host, with an encrypted backend that
+is actually LWE.
+
+\section{The HELUT question}
+
+\begin{quote}
+\emph{Can Apple Silicon's \texttt{MPSGraph} host exact torus modular arithmetic
+and gate-level sequential circuits---and can that same hardware object carry
+real bootstrapping keys without lying about it?}
+\end{quote}
+
+The first half is a systems existence proof.
+The second half is a certificate problem.
+HELUT answers both, with the oracle path and the FHE path named as different
+objects~\cite{helut-paper,helut-release}.
+
+\section{Pipeline}
+
+\begin{center}
+\fbox{\parbox{0.92\linewidth}{\centering\vspace{0.5em}
+Verilog $\xrightarrow{\text{Yosys}}$ JSON netlist
+$\xrightarrow{\text{HELUTCore}}$ one \texttt{MPSGraph}\\[0.35em]
+Host Swift loop $=$ posedge clock; DFF $Q$ ping-pongs across ticks\\[0.15em]
+\texttt{\$lut} backend $=$ oracle (multilinear / trivial PBS)
+\quad or\quad
+encrypted (BK blind rotate)
+\vspace{0.5em}}}
+\end{center}
+
+All FHE-path arithmetic tensors remain \texttt{MPSDataType.uInt32}.
+Float32 belongs to TensorLUT (Pillar~II), not to this chapter.
+
+\section{Compiler lowering}
+
+\texttt{YosysGraphCompiler} walks a \texttt{write\_json} module:
+
+\begin{enumerate}
+  \item \textbf{Inputs.} Each input port bit becomes an \texttt{InputNode}
+        placeholder of shape $[B,N]$.
+  \item \textbf{State.} Each recognized flip-flop allocates a $Q$ placeholder
+        \emph{before} LUT lowering so sequential feedback nets resolve.
+  \item \textbf{LUTs.} Cells schedule until all drivers exist; combinational
+        cycles abort.
+  \item \textbf{Next-state.} Enables and sync-resets become exact
+        $\mathbb{Z}/2^{32}\mathbb{Z}$ muxes, e.g.\ active-high enable
+        \[
+          Q_{\mathrm{next}} = E\cdot D + (1-E)\cdot Q.
+        \]
+  \item \textbf{Outputs.} Driven nets bind to port tensors; Yosys \texttt{"x"}
+        becomes constant~0.
+\end{enumerate}
+
+Cell coverage includes \texttt{\$\_DFF*}, \texttt{\$\_DFFE*},
+\texttt{\$\_SDFF*}, \texttt{\$\_SDFFE*}, \texttt{\$\_SDFFCE*}---the techmap
+PicoRV32 actually emits.
+
+\section{Host clock}
+
+Each tick is one \texttt{graph.run}.
+With \texttt{retainHistory=false}, two preallocated state buffer sets ping-pong
+and output scratch is reused, so a 1\,000-tick stress test does not leak
+\texttt{MTLBuffer} retention.
+Primary port feeds (including scripted \texttt{resetn}) are host-mutable shared
+buffers; LUT matrices or BK packs are uploaded once and cached.
+
+This is the reconfigurable clock tree: not routed silicon, but a protocol
+with explicit buffer ownership.
+
+\section{Two backends, one netlist}
+
+\begin{center}
+\begin{tabular}{@{}p{0.28\textwidth}p{0.28\textwidth}p{0.32\textwidth}@{}}
+\toprule
+Backend & Claim status & Use in this course \\
+\midrule
+Trivial / multilinear / CMUX oracle
+  & Shape laboratory, \emph{not} FHE
+  & Batch scaling, PicoRV32 boot, Enigma letter clocks. \\
+\texttt{encrypted} (LWE + GGSW BK)
+  & Pillar~I FHE claim (\cid{4}--\cid{6})
+  & SING vs cleartext; certificates on every tick. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Inter-LUT refresh defaults to \texttt{publicMS} (lattice-compatible BK masks).
+\texttt{.secret} remains for coverage. \texttt{.none} is a debug foot-gun.
+
+\reproduced{C4--C6}{Encrypted LWE/GLWE $+$ GGSW blind-rotate per \texttt{\$lut};
+encrypted $\equiv$ clear multi-netlist SING; full\_adder through $N=1024$
+(publicMS and secret).}
+
+\section{Why PicoRV32 is the oracle capstone, not the FHE capstone}
+
+PicoRV32 lowers to 4\,785 LUTs and 1\,565 DFFs~\cite{picorv32}.
+On the boolean-oracle path it compiles in ${\sim}1.3\,\mathrm{s}$ and ticks
+at ${\sim}173\,\mathrm{ms}$ ($N=1024$, $B=1$) in the 2026-08-12 boolean bench
+(\cid{1}).
+That is a fabric existence proof: a commodity neural/GPU graph can host a
+soft CPU's \emph{shape}.
+
+The encrypted path's correctness workhorse is smaller: \texttt{full\_adder},
+then tree and regex netlists, under SING.
+An encrypted PicoRV32 at production $N$ is a trajectory item, not a
+\cid{} row in this epoch.
+
+\begin{warning}
+``We booted an encrypted RISC-V core'' is true of the \emph{dark-VM} story
+only in the oracle or mock-encoding sense unless a SING log says otherwise.
+Avenue~2 in Chapter~\ref{ch:frontier} is the speculative sequel.
+Do not merge those sentences on a slide.
+\end{warning}
+
+\section{SING as the teaching metric}
+
+SING (stimuli in, golden out) is encrypted $\equiv$ clear on generic vectors,
+with certificate lines.
+It is the lab equivalent of a scan chain: if SING fails, you do not get to
+discuss milliseconds.
+
+\begin{lab}[Encrypted adder SING]
+Run the cookbook SING at demo $N$ and at production-shaped $N$
+(Appendix~\ref{app:repro}).
+Record pass/fail, ms/row, and which certificate types printed.
+Then answer: which of those numbers would you be willing to put in an
+abstract without an asterisk?
+\end{lab}
+
+\section{Threat / fidelity split}
+
+\begin{center}
+\begin{tabular}{@{}lp{0.62\textwidth}@{}}
+\toprule
+In scope for the \emph{datapath} & Exact modular eval; shape $[B,N]$; DFF
+routing; Yosys coverage for PicoRV32. \\
+In scope for the \emph{FHE claim} & LWE/GLWE $+$ BK; noise / $\varepsilon$ /
+hardness / noisy-BK \emph{certificates} as implemented. \\
+Out of scope unless measured & Side channels; quantum; estimator-backed
+production keys (\hid{1}); noisy BK as a filled product parameter (\hid{4}). \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The split is intentional.
+If the tensor datapath cannot boot a CPU under mock encodings, adding real
+TFHE noise only makes the systems problem harder.
+If the FHE path cannot SING an adder, a CPU slide is theatre.
+
+\growswhen{Encrypted sequential clocks beyond combinational \texttt{\$lut}
+refresh; async resets and latches; an encrypted PicoRV32 SING at production
+$N$.}

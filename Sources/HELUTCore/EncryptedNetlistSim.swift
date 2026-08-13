@@ -48,6 +48,8 @@ package final class EncryptedNetlistSimulator {
     package let wireRefresh: EncryptedWireRefresh
     /// Discrete body noise on primary inputs (`0` → rotation-native noiseless encrypt).
     package let inputNoise: TFHENoiseParams
+    /// Discrete body noise on GGSW BK rows (`0` → noiseless gadget encrypt).
+    package let bkNoise: TFHENoiseParams
     /// Force scaled lattice primary encrypt (`bit·δ`, `maskStride=δ`) even when noiseless.
     package let scaledPrimaryInputs: Bool
     package private(set) var rng: LCG32
@@ -63,6 +65,10 @@ package final class EncryptedNetlistSimulator {
     package private(set) var hardnessCertificate: TFHELWEHardnessCertificate?
     /// Noisy/noiseless BK depth certificate (step 10p).
     package private(set) var noisyBKCertificate: TFHENoisyBKCertificate?
+    /// Identity-LUT residual when `bkNoise.bound > 0` (H4 measured σ_BK).
+    package private(set) var noisyBKMeasurement: TFHENoisyBKMeasurement?
+    /// Gaussian union-bound certificate from measured RMS (nil if BK noiseless / unmeasured).
+    package private(set) var noisyBKGaussianCertificate: TFHENoisyBKGaussianCertificate?
 
     private let device: MTLDevice?
     private let commandQueue: MTLCommandQueue?
@@ -77,6 +83,7 @@ package final class EncryptedNetlistSimulator {
         backend: EncryptedLUTBackend = .blindRotate,
         wireRefresh: EncryptedWireRefresh = .publicMS,
         inputNoise: TFHENoiseParams = .none,
+        bkNoise: TFHENoiseParams = .none,
         scaledPrimaryInputs: Bool = false,
         seed: UInt32 = 0xE11C,
         device: MTLDevice? = nil,
@@ -105,6 +112,7 @@ package final class EncryptedNetlistSimulator {
         self.backend = backend
         self.wireRefresh = wireRefresh
         self.inputNoise = inputNoise
+        self.bkNoise = bkNoise
         self.scaledPrimaryInputs = scaledPrimaryInputs || inputNoise.bound > 0
         self.rng = LCG32(state: seed == 0 ? 1 : seed)
         self.twoN = 2 * n
@@ -123,6 +131,8 @@ package final class EncryptedNetlistSimulator {
         self.asymptoticCertificate = nil
         self.hardnessCertificate = nil
         self.noisyBKCertificate = nil
+        self.noisyBKMeasurement = nil
+        self.noisyBKGaussianCertificate = nil
         if backend == .metalGGSW || backend == .blindRotateMetal || backend == .blindRotateMetalNetlist {
             precondition(device != nil && commandQueue != nil, "Metal backend needs device + queue")
         }
@@ -134,8 +144,24 @@ package final class EncryptedNetlistSimulator {
                 secret: secret,
                 params: params,
                 rng: &self.rng,
-                publicRefreshCompatible: wireRefresh == .publicMS || self.scaledPrimaryInputs
+                publicRefreshCompatible: wireRefresh == .publicMS || self.scaledPrimaryInputs,
+                noise: bkNoise
             )
+            if bkNoise.bound > 0, let bk = self.bootstrappingKey {
+                let measured = TFHENoisyBKMeasurement.identity(
+                    secret: secret,
+                    params: params,
+                    noise: bkNoise,
+                    bootstrapKey: bk,
+                    trials: n <= 16 ? 16 : 4,
+                    seed: seed &+ 0xB10C,
+                    publicRefreshCompatible: wireRefresh == .publicMS || self.scaledPrimaryInputs
+                )
+                self.noisyBKMeasurement = measured
+                self.noisyBKGaussianCertificate = measured.gaussianCertificate(
+                    lutCount: self.clear.luts.count
+                )
+            }
         } else {
             self.bootstrappingKey = nil
         }
@@ -213,17 +239,22 @@ package final class EncryptedNetlistSimulator {
         return cert
     }
 
-    /// Issue noisy/noiseless BK depth certificate (HELUT default: B_bk = 0).
+    /// Issue noisy/noiseless BK depth certificate.
+    /// Default `B_bk` is the measured identity residual when BK was noisy, else 0.
     @discardableResult
     package func issueNoisyBKCertificate(
-        outputNoiseBound: UInt32 = 0
+        outputNoiseBound: UInt32? = nil
     ) -> TFHENoisyBKCertificate {
+        let bound = outputNoiseBound ?? noisyBKMeasurement?.maxAbsError ?? 0
         let params = TFHENoisyBKParams(
-            outputNoiseBound: outputNoiseBound,
+            outputNoiseBound: bound,
             delta: scale,
             lutCount: clear.luts.count
         )
-        let cert = TFHENoisyBKCertificate.forNetlist(params: params)
+        let cert = TFHENoisyBKCertificate.forNetlist(
+            params: params,
+            measurement: noisyBKMeasurement
+        )
         noisyBKCertificate = cert
         return cert
     }
@@ -254,7 +285,7 @@ package final class EncryptedNetlistSimulator {
         if params.tfhe.polynomialDegree >= 1024 {
             hard.assertMeetsTarget()
         }
-        let bkCert = issueNoisyBKCertificate(outputNoiseBound: 0)
+        let bkCert = issueNoisyBKCertificate()
         bkCert.assertDecodable()
         var wires: [Int: LWECiphertext] = [:]
         let useScaledInputs = scaledPrimaryInputs
@@ -313,49 +344,68 @@ package final class EncryptedNetlistSimulator {
             guardCount -= 1
             precondition(guardCount > 0, "Combinational loop in encrypted sim")
             var still: [CleartextNetlistSimulator.LUTCell] = []
-            var progressed = false
+            var ready: [(CleartextNetlistSimulator.LUTCell, [LWECiphertext])] = []
             for lut in pending {
                 if let aLWEs = resolveLWEBits(lut.aBits, wires: wires) {
-                    let table = lut.table.map { UInt32($0) }
+                    ready.append((lut, aLWEs))
+                } else {
+                    still.append(lut)
+                }
+            }
+            precondition(!ready.isEmpty, "Stuck encrypted LUT resolve")
+            var extractedByWire: [Int: LWECiphertext] = [:]
+            var waveError: Error?
+            let waveLock = NSLock()
+            DispatchQueue.concurrentPerform(iterations: ready.count) { idx in
+                let (lut, aLWEs) = ready[idx]
+                let table = lut.table.map { UInt32($0) }
+                do {
                     let extracted = try evaluateLUTBlindRotateBody(
                         truthTable: table,
                         inputs: aLWEs,
                         bootstrapKey: bk
                     )
-                    // Cost: one BR level per LUT input bit + extract.
-                    for _ in 0..<aLWEs.count {
-                        noiseBudget.consume(.blindRotateLevel)
-                    }
-                    noiseBudget.consume(.sampleExtract)
-                    precondition(noiseBudget.isSafe, "noise budget exhausted mid-netlist")
-                    // PBS refreshes ∞-norm (noiseless BK → output floor 0).
-                    noiseGrowth.afterBlindRotate(outputNoiseBound: 0)
-                    switch wireRefresh {
-                    case .secret:
-                        let phase = decryptLWE(extracted, secret: secret)
-                        let bit = decodeRotationBoolean(phase, scale: scale)
-                        wires[lut.yWire] = encryptLWERotationNative(
-                            message: bit,
-                            secret: secret.lweSecret,
-                            twoN: twoN,
-                            rng: &rng
-                        )
-                        noiseBudget.consume(.encrypt)
-                        noiseGrowth.setEncrypt(noise: .none)
-                    case .publicMS:
-                        wires[lut.yWire] = publicRefreshBit(extracted, twoN: twoN, scale: scale)
-                        noiseBudget.consume(.modulusSwitch)
-                        noiseGrowth.afterExactModulusSwitch()
-                    case .none:
-                        wires[lut.yWire] = extracted
-                    }
-                    noiseGrowth.assertDecodable()
-                    progressed = true
-                } else {
-                    still.append(lut)
+                    waveLock.lock()
+                    extractedByWire[lut.yWire] = extracted
+                    waveLock.unlock()
+                } catch {
+                    waveLock.lock()
+                    waveError = error
+                    waveLock.unlock()
                 }
             }
-            precondition(progressed, "Stuck encrypted LUT resolve")
+            if let waveError { throw waveError }
+            for (lut, aLWEs) in ready {
+                guard let extracted = extractedByWire[lut.yWire] else {
+                    preconditionFailure("missing wavefront BR for wire \(lut.yWire)")
+                }
+                for _ in 0..<aLWEs.count {
+                    noiseBudget.consume(.blindRotateLevel)
+                }
+                noiseBudget.consume(.sampleExtract)
+                precondition(noiseBudget.isSafe, "noise budget exhausted mid-netlist")
+                noiseGrowth.afterBlindRotate(outputNoiseBound: 0)
+                switch wireRefresh {
+                case .secret:
+                    let phase = decryptLWE(extracted, secret: secret)
+                    let bit = decodeRotationBoolean(phase, scale: scale)
+                    wires[lut.yWire] = encryptLWERotationNative(
+                        message: bit,
+                        secret: secret.lweSecret,
+                        twoN: twoN,
+                        rng: &rng
+                    )
+                    noiseBudget.consume(.encrypt)
+                    noiseGrowth.setEncrypt(noise: .none)
+                case .publicMS:
+                    wires[lut.yWire] = publicRefreshBit(extracted, twoN: twoN, scale: scale)
+                    noiseBudget.consume(.modulusSwitch)
+                    noiseGrowth.afterExactModulusSwitch()
+                case .none:
+                    wires[lut.yWire] = extracted
+                }
+                noiseGrowth.assertDecodable()
+            }
             pending = still
         }
 
@@ -542,7 +592,7 @@ package final class EncryptedNetlistSimulator {
         _ = issueNoiseCertificate()
         _ = issueAsymptoticCertificate()
         _ = issueHardnessCertificate()
-        _ = issueNoisyBKCertificate(outputNoiseBound: 0)
+        _ = issueNoisyBKCertificate()
         var wires: [Int: GLWECiphertext] = [:]
 
         for (port, bits) in inputs {

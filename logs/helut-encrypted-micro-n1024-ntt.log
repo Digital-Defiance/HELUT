@@ -1,0 +1,68 @@
+HELUT encrypted Metal MICROBENCH
+  N=1024  2N=2048  trials=2  warmup=1
+  lowering=tiled-kernel  tileWidth=64
+  DynamicRotateCost mux=2099200 binary=11275 speedup≈186.2×
+
+KEYGEN+BK         1.069 s  RSS +21.0 MiB (after=33.8 MiB)
+HARDNESS          175.7 classical bits  (≥128? yes)
+BR start bit=0  RSS=33.9 MiB …
+BR tile=1/16 bits=0..<64
+BR tile=2/16 bits=64..<128
+BR tile=3/16 bits=128..<192
+BR tile=4/16 bits=192..<256
+BR tile=5/16 bits=256..<320
+BR tile=6/16 bits=320..<384
+BR tile=7/16 bits=384..<448
+BR tile=8/16 bits=448..<512
+BR tile=9/16 bits=512..<576
+BR tile=10/16 bits=576..<640
+BR tile=11/16 bits=640..<704
+BR tile=12/16 bits=704..<768
+BR tile=13/16 bits=768..<832
+BR tile=14/16 bits=832..<896
+BR tile=15/16 bits=896..<960
+BR tile=16/16 bits=960..<1024
+WARMUP 0          0.748 s  ok
+BR start bit=0  RSS=148.2 MiB …
+BR tile=1/16 bits=0..<64
+BR tile=2/16 bits=64..<128
+BR tile=3/16 bits=128..<192
+BR tile=4/16 bits=192..<256
+BR tile=5/16 bits=256..<320
+BR tile=6/16 bits=320..<384
+BR tile=7/16 bits=384..<448
+BR tile=8/16 bits=448..<512
+BR tile=9/16 bits=512..<576
+BR tile=10/16 bits=576..<640
+BR tile=11/16 bits=640..<704
+BR tile=12/16 bits=704..<768
+BR tile=13/16 bits=768..<832
+BR tile=14/16 bits=832..<896
+BR tile=15/16 bits=896..<960
+BR tile=16/16 bits=960..<1024
+TRIAL  0          0.431 s  bit=0 PASS
+  telemetry       lowering=tiled-kernel ring=ntt tiles=16 encode=0.000s gpu=0.429s copy=0.000s
+BR start bit=1  RSS=148.2 MiB …
+BR tile=1/16 bits=0..<64
+BR tile=2/16 bits=64..<128
+BR tile=3/16 bits=128..<192
+BR tile=4/16 bits=192..<256
+BR tile=5/16 bits=256..<320
+BR tile=6/16 bits=320..<384
+BR tile=7/16 bits=384..<448
+BR tile=8/16 bits=448..<512
+BR tile=9/16 bits=512..<576
+BR tile=10/16 bits=576..<640
+BR tile=11/16 bits=640..<704
+BR tile=12/16 bits=704..<768
+BR tile=13/16 bits=768..<832
+BR tile=14/16 bits=832..<896
+BR tile=15/16 bits=896..<960
+BR tile=16/16 bits=960..<1024
+TRIAL  1          0.434 s  bit=1 PASS
+  telemetry       lowering=tiled-kernel ring=ntt tiles=16 encode=0.000s gpu=0.432s copy=0.000s
+
+STEADY mean       0.433 s/BR (1-LUT identity @ N=1024)
+INIT cache        hits=2 misses=1 entries=1
+RSS final         148.2 MiB
+result            PASS
