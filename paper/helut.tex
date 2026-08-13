@@ -634,9 +634,9 @@ Red pressure cannot force Blue generation rolls.
         product-shaped $N{=}1024$, inject $B{=}64$ is undecodable and $B{=}4$ on
         \texttt{.crypto} yields $\varepsilon\log_2\approx -1$ (C26)---not
         $2^{-64}$. Under $q{=}2^{32}$, exact public-MS covering exists only at
-        $N\in\{8,128\}$ (C27); $N{=}1024$ cannot be both $g_0=\delta$ and covering.
-        Default Metal SING still uses noiseless BK ($B_{bk}{=}0$, H4).
-        $\ell{=}1$ \texttt{booleanPublicMS} cannot carry BK noise.
+        $N\in\{8,128\}$ (C27). Track~B Metal SING at $N{=}128$ with inject
+        $B{=}64$ PASSes (C28). Track~A ($N{=}1024$ SING) still uses noiseless BK
+        ($B_{bk}{=}0$, H4). $\ell{=}1$ \texttt{booleanPublicMS} cannot carry BK noise.
   \item \textbf{Encrypted scale.} Metal full\_adder SING at $N{=}1024$ is measured
         (C20 / C21); sequential encrypted clocks and PicoRV FHE path remain open.
   \item \textbf{Oracle vs FHE.} Trivial/boolean Metal graphs are a shape laboratory,

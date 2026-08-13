@@ -46,12 +46,11 @@ that HELUT must stay at *N*=1024 forever.
 
 | Path | *N* | Covering? | \(g_0=\delta\)? | Noisy BK |
 |------|-----|-----------|-----------------|----------|
-| Covering public-MS | 8, 128 | yes | yes | **C22** measured |
+| Covering public-MS | 8, 128 | yes | yes | **C22** measured; **C28** Metal SING + inject PASS |
 | `cryptoPublicMS` | 1024 | **no** | yes | **C26** inject blows up |
 | `.crypto` | 1024 | yes | **no** | **C26** *B*=4 ∞-norm OK, ε≪64-bit |
 
-Production SING stays *e*=0 BK until a new parameter regime or approximate gadget earns a receipt.
-
+**Two tracks:** throughput *N*=1024 stays *e*=0 BK (Track A). Noisy depth lives at covering *N*∈{8,128} (Track B). Closing Track A needs a new \((q,N)\) or approximate gadget.
 ---
 
 ## Five-cell test

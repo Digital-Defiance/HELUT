@@ -12,9 +12,9 @@ Living textbook (course surface on this trajectory): [`../textbook/`](../textboo
 | Track | Why it matters | Next experiment |
 |-------|----------------|-----------------|
 | **H2** full_adder @ *N*≥256 | ~~Multi-LUT encrypted correctness~~ **Closed** | Z_{2N} pack / `rotationPower` fix; SING PASS @ 256/512/1024 |
-| **H1** Sage lattice-estimator | Honest classical bits for production-shaped params | **C23** JSON filled. Production row agrees (|Δ|=4.5). Tighten HELUT vs estimator on classic-n630 / n1024-s17 / n2048 (Δ>16). |
-| **H3** Metal BR @ large *N* | Real wall-clock / memory envelope | **C20** boolean 10.6 s · **C21** crypto ℓ=2 11.38 s · NTT micro 0.420 s/BR. NTT inside crypto ℓ=2 tile. |
-| **H4** Noisy BK | Production depth story | **C22**/**C26**/**C27**: covering only at *N*∈{8,128} under *q*=2³²; *N*=1024 inject fails. Next: new (*q*,*N*) or approx gadget for ε≤2⁻⁶⁴ |
+| **H1** Sage lattice-estimator | Honest classical bits | **C23** filled. Production Δ=4.5. Divergences = core-SVP vs Cost `rop`, not silent bugs. Optional retune / quote estimator-only on Δ>16 rows |
+| **H3** Metal BR @ large *N* | Real wall-clock / memory envelope | **C20**/**C21** SING. NTT inside crypto ℓ=2 at *N*=1024 (incomplete public-MS gadget) |
+| **H4** Noisy BK | Production depth story | **C28** Track B Metal SING @ *N*=128 + noisy BK PASS. Track A *N*=1024 stays *e*=0 (**C26**/**C27**). Next: new (*q*,*N*) for Track A, or tighten Gaussian ε at *N*=128 |
 | Campaign catalog | Exhaust Boolean coverage | Resume `--bombe-from 418`; middle ring ≠ A |
 | Garble / quarantine | Ciphertext may be wrong letters | Soft-band escalate grades; sister-message lessons |
 

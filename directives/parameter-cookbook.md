@@ -4,6 +4,20 @@ Honest: calibrated classical bits at production *n*=1024, *σ*=2^{16} match latt
 
 Living inventory: `directives/claim-sheet.md`. Reproduce: `REPRODUCE.md`. Trajectory: `directives/research-trajectory.md`.
 
+## Two tracks (read this first)
+
+**Not a SoftBus bug.** Under \(q=2^{32}\), exact public-MS covering (\(g_0=\delta\) **and** `baseLog·ℓ=32`) holds only for \(N\in\{8,128\}\) (**C27**). That is a torus-parameter fact, not a Metal failure.
+
+| Track | *N* | BK | What it is for |
+|-------|-----|-----|----------------|
+| **A — throughput / shape** | 1024 | *e*=0 (noiseless) | Metal SING wall-clock (**C20**/**C21**), netlist scale, hardness row prod-n1024-s16 |
+| **B — noisy depth** | 128 (or 8) | covering + measured residual (**C22**, **C28**) | Depth / ε story under public MS; Metal SING with inject |
+
+Track A does **not** need noisy BK to be a valid FHE datapath claim (noiseless BK + certificates still certify). Track B is where you quote \(B_{bk}\) / σ̂. Mixing them — e.g. “production *N*=1024 with covering noisy BK under \(q=2^{32}\)” — is what **C26**/**C27** forbid.
+
+**Track B receipt (**C28**):** Metal `cryptoPublicMS` full_adder SING @ *N*=128, `--bk-noise 64`, PASS · *B*<sub>bk</sub>≈1.62×10⁶ decodable · `logs/helut-encrypted-n128-metal-sing-crypto-noisy.log`.
+
+To close **H4** for Track A you need a **new** \((q,N)\) (or approximate gadget) where covering + \(g_0=\delta\) hold at the throughput size. Until then: Track A stays *e*=0; Track B owns noisy depth.
 ## Encrypted multi-LUT correctness envelope (H2)
 
 | N | full_adder SING (publicMS / secret) | Notes |

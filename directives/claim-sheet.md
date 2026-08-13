@@ -39,6 +39,7 @@ Doctrine: [`research-release.md`](research-release.md) · Cookbook: [`parameter-
 | **C25** | TensorLUT Theorem 1 corollary (emitter–discrete + involution under freeze) | `swift test -c release --filter testTensorLUTFormalCorollaryCertificate` | 2 lemmas hold · `TensorLUTFormal.corollaryCertificate()` · `directives/tensorlut-theorem.md` §corollary · still not melt completeness |
 | **C26** | Noisy-BK identity residual @ *N*=1024 (product-shaped) | `--measure-bk-noise --degree 1024 --trials 2 --bk-noise 64` (and `--bk-noise 4`) | Noiseless → *B*<sub>bk</sub>=0. Inject *B*=64: both `cryptoPublicMS` / `crypto` **undecodable** (max\|*e*\| ≫ δ/2). Inject *B*=4: `crypto` ∞-norm OK but εlog2≈−1 (not −64); `cryptoPublicMS` still undecodable. Product SING stays *e*=0 BK. · `logs/helut-noisy-bk-measure-n1024.log` |
 | **C27** | Exact public-MS covering only at *N*∈{8,128} under *q*=2³² | `swift test -c release --filter testGGSWPublicMSCoveringCertificate` | Theorem 3: *g₀*=*δ* ∧ covering ⇒ (1+log₂ *N*) \| 32. Among {8…2048}, only 8 and 128. *N*=1024 `cryptoPublicMS` product 11·2=22≠32. · `directives/ggsw-public-ms-covering.md` · `GGSWPublicMSCovering.certificate()` |
+| **C28** | Track B: Metal cryptoPublicMS SING @ *N*=128 with noisy BK | `--bench netlist.json --degree 128 --bench-encrypted --sing --vectors 4 --bk-noise 64 --paths 'blind-rotate-metal public-ms crypto'` | **PASS** 0.487 s / 4 · *B*<sub>bk</sub>=1624726 (decodable) · ingest εlog2=−∞ · covering degree (**C27**) · `logs/helut-encrypted-n128-metal-sing-crypto-noisy.log` |
 
 ---
 
@@ -46,10 +47,10 @@ Doctrine: [`research-release.md`](research-release.md) · Cookbook: [`parameter-
 
 | ID | Open item | Honest asterisk |
 |----|-----------|-----------------|
-| **H1** | ~176‑bit calibrated @ production (*n*,*σ*) | **C23:** estimator JSON filled (native Sage 10.9). Production prod-n1024-s16: HELUT 175.7 vs estimator **180.2** (\|Δ\|=4.5). 4/8 anchors within 16-bit tolerance; demo-N8, classic-n630, n1024-s17, n2048-s16 exceed it. Do not quote 176 as estimator cost on every row. |
+| **H1** | ~176‑bit calibrated @ production (*n*,*σ*) | **C23:** estimator JSON filled. Production \|Δ\|=4.5. **Model note:** HELUT quotes calibrated core-SVP (0.292·β); Sage lattice-estimator quotes attack Cost `rop`. Anchors mid/n768/prod agree (Δ≤4.5); demo-N8 / classic-n630 / n1024-s17 / n2048 diverge (Δ>16) — calibrated ≠ estimator on those rows, not a silent bug. Do not quote 176 as estimator cost on every row. |
 | **H2** | Multi-LUT encrypted @ large *N* | **Closed 2026-08-12:** `rotationPower` / pack now keep Z_{2N}; full_adder SING PASS @ N=256/512/1024. Was arity-3 pack overflowing 256·2N headroom. |
 | **H3** | Metal encrypted @ *N*=1024 | **C20** boolean **10.6 s / 8**; **C21** crypto ℓ=2 **11.38 s / 8** (was **C14** 175.6 s). Micro fused 3-prime **0.420 s/BR**. Fused megagraph DNF. |
-| **H4** | Noisy BK in product path | **C22** covering *N*=8/*N*=128; **C26** *N*=1024 inject fails; **C27** under *q*=2³² exact public-MS covering only at *N*∈{8,128} (*N*=1024 cannot be both *g₀*=*δ* and covering). Default Metal SING still *e*=0 BK. ε≤2⁻⁶⁴ at production *N* needs new (*q*,*N*) or approximate gadget. |
+| **H4** | Noisy BK in product path | **C27** forbids covering+*g₀*=*δ* at *N*=1024 under *q*=2³². **Track B closed for Metal:** **C28** *N*=128 cryptoPublicMS SING with inject *B*=64 PASSes (*B*<sub>bk</sub>≈1.6×10⁶ decodable). **Track A** (*N*=1024 SING) still *e*=0 BK (**C26** inject fails). ε≤2⁻⁶⁴ Gaussian union at covering *N*=128 inject *B*=64 remains ≈2⁻²³·⁵ (**C22**) — not −64. Closing Track A needs new (*q*,*N*) or approx gadget. |
 | **H5** | `*PublicMS` gadgets (*g*<sub>0</sub>=*δ*) | On-lattice intent; does not alone clear H2 |
 | **H6** | TensorLUT / quarantine vs campaign | Parallel research — not P1030680 plaintext |
 | **H7** | Catalog / Regenbogen / UEBUNG | Negatives / not-BREAK as graded; middle ring ≠A untested; catalog parked @417, resume `--bombe-from 418` |
