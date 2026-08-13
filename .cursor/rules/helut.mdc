@@ -3,8 +3,14 @@ description: Core constraints for HELUT (Homomorphic Edge Look-Up Tensors)
 globs: *.swift, *.metal
 ---
 # HELUT Architecture Rules
-- DOMAIN: We are implementing TFHE Programmable Bootstrapping (PBS) using `MPSGraph`.
-- SUBVERSION: We are NOT using standard cryptographic libraries. We are mapping polynomial multiplications over $\mathbb{Z}_{2^{32}}[X]/(X^N+1)$ into dense Matrix-Vector multiplications.
-- DATA TYPES: TFHE torus arithmetic relies on exact modulo $2^{32}$ wrapping. All tensors in `MPSGraph` must use `MPSDataType.uInt32`. Do not use floats.
-- MEMORY: Rely on `MTLBuffer` zero-copy bridging. We will expand key polynomials into explicit Negacyclic Toeplitz matrices (size $N \times N$) in memory to force the hardware to evaluate them via dense linear algebra.
-- PROHIBITION: Do not import any Machine Learning dependencies other than `Metal` and `MetalPerformanceShadersGraph`.
+- DOMAIN: TFHE-shaped Programmable Bootstrapping (PBS) on Apple Silicon (`MPSGraph` / Metal).
+- FHE CLAIM: `--lut-backend encrypted` / `--bench-encrypted` via `EncryptedNetlistSimulator` (LWE + BK blind-rotate per Yosys `$lut`). Do not call trivial Metal multilinear/CMUX graphs “homomorphic encryption”.
+- BOOLEAN ORACLE: Under trivial torus encoding (constant-fill, phase, glwe-trivial, glwe-packed), `$lut` may use **multilinear** or **trivial PBS** (CMUX + rotate). Bit-exact vs `CleartextNetlistSim`. Useful for shape/batch — not the FHE claim.
+- SAMPLES: LWE/GLWE + BK; `TFHENoiseProof` + Gaussian ε-cert + **`TFHELWEHardnessCertificate`** / `TFHELWECalibration` (Decision-LWE binding). `TFHENoise.refuse` if no certificate.
+- PBS BACKEND: oracle `pbs`/`pbs-ggsw`; **`encrypted`** via `LUTNode` or **whole-netlist** `.blindRotateMetalNetlist` (binary X^p, one MPSGraph). Multi-LUT: `publicMS` default.
+- PHASE-1 KERNEL: Negacyclic poly mul via dense Toeplitz (`NegacyclicMatvecNode`) remains the modular-arithmetic gate — not a netlist `$lut` backend.
+- DATA TYPES: Torus arithmetic is exact mod $2^{32}$. HELUT / PBS tensors use `MPSDataType.uInt32` (no floats on this path; TensorLUT is separate).
+- MEMORY: Prefer `MTLBuffer` zero-copy. Dense $N\times N$ Toeplitz is kernel/stress only.
+- PROHIBITION: No ML deps other than `Metal` / `MetalPerformanceShadersGraph` on HELUTCore PBS paths.
+- NEXT: N=1024 Metal microbench + evolve-for-Σ-arity; Sage sudo for estimator. INIT dedup shipped. Cookbook: `directives/parameter-cookbook.md`.
+---

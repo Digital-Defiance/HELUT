@@ -538,6 +538,109 @@ section.band-ink code {
   }
 }
 
+.project-grid {
+  display: grid;
+  gap: 1.35rem;
+}
+
+@media (min-width: 900px) {
+  .project-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.project-card {
+  padding: 1.45rem 1.4rem 1.55rem;
+  border-top: 3px solid var(--signal);
+  background:
+    linear-gradient(165deg, rgba(31, 111, 106, 0.08), transparent 55%),
+    rgba(255, 255, 255, 0.72);
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-3px);
+  border-top-color: var(--copper-deep);
+}
+
+.project-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+
+.project-card h3 {
+  font-family: var(--display);
+  font-size: clamp(1.25rem, 2vw, 1.55rem);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.project-card h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.project-card h3 a:hover {
+  color: var(--signal);
+}
+
+.project-subtitle {
+  margin: 0;
+  font-style: italic;
+  color: var(--muted);
+}
+
+.project-card > p {
+  margin: 0;
+  flex: 1;
+}
+
+.project-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.35rem;
+}
+
+.project-status {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.project-status--active {
+  color: var(--signal);
+}
+
+.project-status--research {
+  color: var(--copper-deep);
+}
+
+.band-ink .project-card {
+  background:
+    linear-gradient(165deg, rgba(255, 255, 255, 0.06), transparent 55%),
+    rgba(255, 255, 255, 0.04);
+  border-top-color: var(--copper);
+  color: inherit;
+}
+
+.band-ink .project-card h3 a:hover {
+  color: var(--copper);
+}
+
+.band-ink .project-subtitle,
+.band-ink .project-status {
+  color: rgba(255, 255, 255, 0.65);
+}
+
 .app {
   padding: 1.4rem 1.35rem 1.5rem;
   border-top: 3px solid var(--signal);
@@ -658,6 +761,19 @@ section.band-ink code {
   margin-top: 0.85rem;
   color: var(--muted);
   font-size: 0.9rem;
+}
+
+.shell.imagining figure {
+  margin-top: 0;
+}
+
+.shell.imagining {
+  margin-top: 3rem;
+}
+
+.shell.imagining figcaption {
+  margin-top: 0;
+  margin-bottom: 0.85rem;
 }
 
 .arch-svg {

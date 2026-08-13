@@ -7,14 +7,19 @@ export function Enigma256Page() {
         <div className="page-plane" aria-hidden="true" />
         <div className="shell">
           <div className="section-head">
-            <div className="kicker">Blue Team · 2026</div>
+            <div className="kicker">
+              <Link to="/projects/e256" style={{ color: 'inherit', textDecoration: 'none' }}>
+                Project · E256
+              </Link>
+              {' · '}Blue Team · 2026
+            </div>
             <h2>Fixing Enigma for a century that can melt silicon</h2>
             <p className="lede">
               The hunt for P1030680 is a ledger of how the 1945 machine leaks. Every clean negative, every ghost board, every Turing-shaped shortcut I weaponized against M4 is also a specification for what a rotor cipher must never do again. Enigma 256 (E256) is that rewrite: a base-256 polymorphic stream cipher whose datapath is SoftBus-backed Verilog on Apple Silicon and whose keys never sit in a water-soluble codebook.
             </p>
             <p className="lede" style={{ marginTop: '1rem' }}>
               This is not nostalgia hardware. It is the Blue Team answer to a Red Team that already runs Welchman, Stochastic KPA, and TensorLUT on Apple Silicon—built from the same findings documented in the{' '}
-              <Link to="/journal">campaign journal</Link>.
+              <Link to="/projects/p1030680/journal">campaign journal</Link>.
             </p>
           </div>
 
@@ -315,6 +320,21 @@ export function Enigma256Page() {
               </span>
             </li>
           </ul>
+        </div>
+
+        <div className="shell imagining">
+          <div className="section-head">
+            <div className="kicker">Imagining The Machine</div>
+            <p>While the Enigma 256 is unlikely to be built, I wanted to imagine what it might look like, or might have looked like if it were to have been built in the time of Turing.</p>
+            <figure className="arch-figure">
+              <figcaption>AI Rotor Imagining</figcaption>
+              <img src="/Rotor.svg" alt="Rotor" />
+            </figure>
+            <figure className="arch-figure">
+              <figcaption>AI Plugboard Imagining</figcaption>
+              <img src="/Plugboard.svg" alt="Plugboard" />
+            </figure>
+          </div>
         </div>
       </section>
 
@@ -617,7 +637,7 @@ export function Enigma256Page() {
             </p>
             <p>
               Campaign ledger:{' '}
-              <Link to="/journal">Turing Complete</Link>
+              <Link to="/projects/p1030680/journal">Turing Complete</Link>
               {' · '}
               Hunt overview:{' '}
               <Link to="/enigma">Enigma</Link>

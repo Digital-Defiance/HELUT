@@ -120,7 +120,7 @@ export function EnigmaPage() {
               The P1030680 Campaign Journal
             </a>
             . The Blue Team rewrite of every flaw this hunt exposed is{' '}
-            <Link to="/e256">E256</Link>.
+            <Link to="/projects/e256">E256</Link>.
           </p>
         </div>
       </section>

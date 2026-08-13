@@ -47,7 +47,7 @@ generation g
   halt on evaluateBreak
 ```
 
-**Recompile note:** a ~25s Yosys→HELUT rebuild is fine for *systems* experiments, but it is the wrong lever for this cracker — mock PBS is not boolean-faithful. Scoring LUTs live in the cleartext Metal kernel (compile once per process); shell genes only reload 26-byte tables.
+**Recompile note:** a Yosys→HELUT rebuild is fine for *systems* experiments (boolean-safe mock PBS under trivial encoding). For this cracker, scoring LUTs live in the cleartext Metal kernel (compile once per process); shell genes only reload 26-byte tables.
 
 ## Run
 

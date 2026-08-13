@@ -11,16 +11,20 @@ export function HomePage() {
           </div>
           <div className="hero-readable">
             <p className="brand-expand">Homomorphic Edge Look-Up Tensors</p>
-            <h1>The Universal Imitation Game</h1>
+            <h1>Netlists that tick on ciphertext</h1>
             <p className="lede">
-              In 1950, Alan Turing formalized the "Imitation Game" based on a profound mathematical truth: a discrete-state digital computer can perfectly imitate the behavior of any other machine. Homomorphic Edge Look-Up Tensors takes that theorem to its absolute limit. I take raw hardware circuits, translate them into pure tensor mathematics, and force modern silicon to perfectly imitate their physical execution—while the data stays entirely encrypted.
+              HELUT compiles Yosys gate-level netlists into tensor graphs on Apple Silicon. The
+              graduated path evaluates real LWE/GLWE samples with GGSW blind-rotate and
+              machine-checkable certificates—not a new lattice assumption. A cleartext Metal path
+              still runs the Enigma campaign at tens of millions of settings per second. TensorLUT
+              melts INIT tables when the genotype itself is the question.
             </p>
             <div className="cta-row">
               <Link className="btn" to="/stack">
-                How the engine works
+                The stack
               </Link>
-              <Link className="btn ghost" to="/enigma">
-                The hunt for U-534
+              <Link className="btn ghost" to="/apps">
+                Applications
               </Link>
             </div>
           </div>
@@ -33,21 +37,32 @@ export function HomePage() {
             <div className="kicker">Origin</div>
             <h2>I built this because I already lived at the edge.</h2>
             <p>
-              Homomorphic Edge Look-Up Tensors did not start as a product pitch. I’ve always been fascinated by the seamless interchange between bits and radio waves. With tools like GNURadio, you could manipulate a flowgraph to make the physical air between transmitter and receiver effectively disappear.
+              HELUT did not start as a product pitch. I have always been fascinated by the
+              interchange between bits and radio waves. With GNU Radio, you could reshape a
+              flowgraph until the air between transmitter and receiver effectively disappeared.
             </p>
           </div>
           <div className="prose origin-body">
             <p className="origin-slot" data-slot="sigint">
-            In SIGINT, those signals can't wait for a cloud round-trip. More commonly, they are operating on an air-gapped machine or a standalone device in the field—the math has to execute exactly where the data lives.
+              In SIGINT, those signals cannot wait for a cloud round-trip. More often the math has
+              to run on an air-gapped machine or a standalone device in the field—exactly where the
+              data lives.
             </p>
             <p className="origin-slot" data-slot="fpga">
-            Software flowgraphs are beautiful, but they hit a wall when you need absolute real-time, deterministic execution. FPGAs became my language of choice because they are the physical embodiment of universal computation. Pure software waits its turn for a CPU cycle. An FPGA is a blank die playing a hardware imitation game—rewiring its own logic gates on the fly to become the exact circuit you need to catch a signal on the wire.
+              Software flowgraphs hit a wall when you need deterministic, real-time execution.
+              FPGAs became my language of choice: a blank die that rewires its own logic to become
+              the circuit you need on the wire.
             </p>
             <p className="origin-slot origin-punch" data-slot="mining">
-            The value of edge compute crystallized in a pitch-black mine when all our gear failed. Sitting in the dark, I reconfigured an FPGA in the literal Field, cobbled together a custom flowgraph, and successfully pushed a signal 3,000 meters using the mine’s raw powerline infrastructure as our transmission medium. That is when dynamic, field-programmable hardware stopped being theoretical.
+              That lesson crystallized in a pitch-black mine when our gear failed. I reconfigured
+              an FPGA in the field, cobbled together a flowgraph, and pushed a signal 3,000 meters
+              over the mine’s raw powerline infrastructure. Dynamic hardware stopped being
+              theoretical.
             </p>
             <p>
-              That is why I created HELUT. I wanted to take the raw, reconfigurable power of an FPGA and emulate it in software on modern tensor silicon, allowing the kind of work I used to do in the clear to run seamlessly on ciphertext. 
+              HELUT takes that reconfigurable discipline onto tensor silicon: Verilog in, Yosys
+              netlist, Metal (or CPU) evaluation—in the clear for campaign-scale search, or under
+              torus FHE samples when the datapath must stay dark.
             </p>
           </div>
         </div>
@@ -56,47 +71,49 @@ export function HomePage() {
       <section className="band-ink">
         <div className="shell split">
           <div className="section-head" style={{ marginBottom: 0 }}>
-            <div className="kicker">The Trajectory</div>
-            <h2>Imitating Logic in the Dark</h2>
+            <div className="kicker">Three pillars</div>
+            <h2>What ships today</h2>
             <p>
-              HELUT is a systems prototype designed to evaluate real hardware netlists blindly, under homomorphic tensor arithmetic. It is the deepest layer of the Imitation Game: it forces the processor to emulate physical logic on data it cannot see, calculating absolute truth while remaining completely in the dark.
+              Mock-PBS torus shapes were the scaffolding. They still exist for CPU-scale cleartext
+              netlists (PicoRV32, campaign batch). The encrypted path has graduated: per-
+              <code>$lut</code> blind-rotate, public-MS or secret wire refresh, noise / hardness /
+              noisy-BK certificates, and <code>--sing</code> equivalence benches against clear
+              ticks.
             </p>
             <p style={{ marginTop: '1rem' }}>
-              The secret to its execution speed lies in the "LUT" (Look-Up Table). FPGAs don't compute complex equations; they map inputs to outputs using physical LUTs. An Enigma rotor operates the exact same way—it is not an algebraic function, but a scrambled ball of wires acting as a hardwired 26-element look-up table. 
-            </p>
-            <p style={{ marginTop: '1rem' }}>
-              Here is where the architecture becomes a masterpiece. You cannot efficiently evaluate physical circuits on a GPU by writing software that simulates sequential spinning gears. Graphics cards actively choke on branching <code>if/then</code> loops. They are built for one thing: evaluating massive matrices in parallel.
-            </p>
-            <p style={{ marginTop: '1rem' }}>
-              Instead, HELUT hooks directly into Yosys, the industry-standard open-source synthesis suite. You write standard Verilog. Yosys synthesizes it into a flattened hardware netlist. HELUT ingests that netlist, transforms every Look-Up Table into a multidimensional tensor array, and maps the hardware’s boolean constraints directly into Apple’s Metal shaders as branchless, pure matrix mathematics. When the engine tests a cryptographic key, it doesn't step through a program; it executes millions of parallel tensor operations where an impossible physical state instantly and mathematically collapses to zero.
-            </p>
-            <p style={{ marginTop: '1rem' }}>
-              I am using this "mock" PBS and pure LUT execution to prove that the datapath, batching mechanics, and logic gates can scale to universal computation without collapsing. Once the plumbing is perfected, I introduce true cryptographic noise budgets and actual Torus PBS.
+              Honest limits: classical hardness is a calibrated estimate until Sage fills the
+              lattice-estimator table; large-<em>N</em> Metal encrypted wall-clock is still being
+              measured; campaign fitness is Welchman/cleartext—not FHE tick rate.
             </p>
           </div>
           <ul className="stack-list">
             <li>
-              <span className="mono">01</span>
+              <span className="mono">I</span>
               <span>
-                <strong>The Virtual Brain (Encrypted RISC-V)</strong> — I successfully booted a full RISC-V processor under mock encryption to prove my logic gates scale to the size of a real computer.
+                <strong>Netlist-clocked torus FHE</strong> — LWE/GLWE + GGSW BK on Metal/CPU;
+                encrypted full_adder, tree, and regex netlists pass cleartext equivalence under{' '}
+                <code>--bench-encrypted --sing</code>.
               </span>
             </li>
             <li>
-              <span className="mono">02</span>
+              <span className="mono">II</span>
               <span>
-                <strong>The Parallel Searcher</strong> — A batched pattern matcher across thousands of streams simultaneously, proving my engine can handle overwhelming amounts of data in a single pass.
+                <strong>Differentiable hardware</strong> — TensorLUT melts INIT tables, grades
+                shatter vs hold under λ, recovers reciprocal stecker involutions on frozen cores.
               </span>
             </li>
             <li>
-              <span className="mono">03</span>
+              <span className="mono">III</span>
               <span>
-                <strong>The Blind Decision Tree</strong> — An exact non-linear classification circuit, proving I don't have to take floating-point shortcuts to make complex logical choices on encrypted states.
+                <strong>Polymorphic ciphers</strong> — Enigma256 SoftBus co-evolves under Red
+                pressure (TensorLUT cones, KPA, <code>ent</code>) and fails closed.
               </span>
             </li>
             <li>
-              <span className="mono">04</span>
+              <span className="mono">LAB</span>
               <span>
-                <strong>The Welchman Bombe</strong> — The ultimate datapath stress test: translating the 1945 electromechanical Bombe into pure tensor mathematics to deterministically dismantle an unbroken Kriegsmarine ghost.
+                <strong>P1030680 campaign</strong> — Welchman + Stochastic Bombe on cleartext Metal
+                batch; still the unbroken M-Thetis ghost from U-534.
               </span>
             </li>
           </ul>

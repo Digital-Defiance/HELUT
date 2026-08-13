@@ -66,3 +66,56 @@ quarantine: soft IC≥0.048 / tail>-4.300 (strict IC≥0.055 / tail>-3.600) → 
   [39/85·39] FLUECHTLINGEANBORD@11 edges=18 letters=21 loops=1 central=E     501 stops → 0 valid 10-plug completions   13073s  47.6M/s ETA 257.0 min
   [40/85·40] FLUECHTLINGEANBORD@13 edges=18 letters=21 loops=1 central=R       5 stops → 0 valid 10-plug completions   13588s  47.0M/s ETA 254.8 min
   [41/85·41] FLUECHTLINGEANBORD@17 edges=18 letters=20 loops=1 central=R       1 stops → 0 valid 10-plug completions   13933s  47.0M/s ETA 249.2 min
+  [42/85·42] FLUECHTLINGEANBORD@18 edges=18 letters=20 loops=1 central=R 260446823 stops → 0 valid 10-plug completions   20117s  33.3M/s ETA 343.3 min
+  [43/85·43] FLUECHTLINGEANBORD@22 edges=18 letters=19 loops=1 central=P dead at the board                     20449s  33.6M/s ETA 332.9 min
+  [44/85·44] FLUECHTLINGEANBORD@28 edges=18 letters=19 loops=1 central=L dead at the board                     20788s  33.8M/s ETA 322.8 min
+  [45/85·45] FLUECHTLINGEANBORD@30 edges=18 letters=19 loops=1 central=L dead at the board                     21082s  34.1M/s ETA 312.3 min
+  [46/85·46] FLUECHTLINGEANBORD@37 edges=18 letters=21 loops=1 central=B       3 stops → 0 scorable completions   21399s  34.3M/s ETA 302.4 min
+  [47/85·47] FLUECHTLINGEANBORD@40 edges=18 letters=19 loops=1 central=B dead at the board                     21812s  34.4M/s ETA 293.9 min
+  [48/85·48] FLUECHTLINGEANBORD@44 edges=18 letters=20 loops=1 central=B   22804 stops → 0 valid 10-plug completions   22222s  34.5M/s ETA 285.5 min
+  [49/85·49] FLUECHTLINGEANBORD@50 edges=18 letters=22 loops=1 central=G     556 stops → 0 valid 10-plug completions   22558s  34.7M/s ETA 276.2 min
+  [50/85·50] EINSCHIFFUNGHELA@1 edges=16 letters=17 loops=1 central=E     236 stops → 1 physical, best IC 0.039 tail -4.868   22968s  34.8M/s ETA 268.0 min
+  [51/85·51] EINSCHIFFUNGHELA@2 edges=16 letters=18 loops=1 central=E    9512 stops → 12 physical, best IC 0.044 tail -4.804   23415s  34.8M/s ETA 260.2 min
+  [52/85·52] EINSCHIFFUNGHELA@3 edges=16 letters=17 loops=1 central=E   68441 stops → 2 physical, best IC 0.043 tail -4.247   23709s  35.0M/s ETA 250.8 min
+  [53/85·53] EINSCHIFFUNGHELA@4 edges=16 letters=17 loops=1 central=E      76 stops → 2 physical, best IC 0.044 tail -4.609   24096s  35.1M/s ETA 242.5 min
+  [54/85·54] EINSCHIFFUNGHELA@9 edges=16 letters=18 loops=1 central=E     548 stops → 0 scorable completions   24382s  35.4M/s ETA 233.3 min
+  [55/85·55] EINSCHIFFUNGHELA@11 edges=16 letters=19 loops=1 central=E    1568 stops → 11 physical, best IC 0.042 tail -4.992   24680s  35.6M/s ETA 224.4 min
+  [56/85·56] EINSCHIFFUNGHELA@14 edges=16 letters=18 loops=1 central=C   41097 stops → 4 physical, best IC 0.040 tail -4.872   25205s  35.5M/s ETA 217.5 min
+  [57/85·57] EINSCHIFFUNGHELA@17 edges=16 letters=17 loops=1 central=F      64 stops → 4 physical, best IC 0.047 tail -4.920   25586s  35.6M/s ETA 209.5 min
+  [58/85·58] EINSCHIFFUNGHELA@18 edges=16 letters=17 loops=1 central=F     219 stops → 0 scorable completions   25938s  35.7M/s ETA 201.2 min
+  [59/85·59] EINSCHIFFUNGHELA@21 edges=16 letters=17 loops=1 central=F    3844 stops → 0 scorable completions   26299s  35.8M/s ETA 193.2 min
+  [60/85·60] EINSCHIFFUNGHELA@32 edges=16 letters=17 loops=1 central=F     224 stops → 13 physical, best IC 0.046 tail -5.035   26689s  35.9M/s ETA 185.3 min
+  [61/85·61] EINSCHIFFUNGHELA@40 edges=16 letters=17 loops=1 central=B     936 stops → 0 scorable completions   27195s  35.8M/s ETA 178.3 min
+  [62/85·62] EINSCHIFFUNGHELA@41 edges=16 letters=17 loops=1 central=B   16276 stops → 1 physical, best IC 0.050 tail -5.276   27632s  35.8M/s ETA 170.8 min
+  [63/85·63] EINSCHIFFUNGHELA@43 edges=16 letters=17 loops=1 central=B 1208022 stops → 0 scorable completions   28005s  35.9M/s ETA 163.0 min
+  [64/85·64] EINSCHIFFUNGHELA@44 edges=16 letters=18 loops=1 central=B     548 stops → 1 physical, best IC 0.051 tail -4.660   28293s  36.1M/s ETA 154.7 min
+  [65/85·65] EINSCHIFFUNGHELA@47 edges=16 letters=19 loops=1 central=G   23733 stops → 0 scorable completions   28671s  36.2M/s ETA 147.0 min
+  [66/85·66] EINSCHIFFUNGHELA@49 edges=16 letters=20 loops=1 central=G 87281342 stops → 1 physical, best IC 0.051 tail -5.042   30085s  35.0M/s ETA 144.3 min
+  [67/85·67] EINSCHIFFUNGHELA@51 edges=16 letters=18 loops=1 central=G 13109782 stops → 0 scorable completions   30557s  35.0M/s ETA 136.8 min
+  [68/85·68] EINSCHIFFUNGHELA@53 edges=16 letters=18 loops=1 central=G     578 stops → 0 scorable completions   30884s  35.2M/s ETA 128.7 min
+  [69/85·69] EINSCHIFFUNGHELA@55 edges=16 letters=17 loops=1 central=G     253 stops → 7 physical, best IC 0.049 tail -5.157   31180s  35.3M/s ETA 120.5 min
+  [70/85·70] FLUECHTLINGEANBORD@2 edges=18 letters=21 loops=0 central=E    4349 stops → 0 valid 10-plug completions   31663s  35.3M/s ETA 113.1 min
+  [71/85·71] FLUECHTLINGEANBORD@4 edges=18 letters=22 loops=0 central=E      60 stops → 0 valid 10-plug completions   32084s  35.3M/s ETA 105.4 min
+  [72/85·72] FLUECHTLINGEANBORD@5 edges=18 letters=22 loops=0 central=E       5 stops → 0 valid 10-plug completions   32507s  35.4M/s ETA  97.8 min
+  [73/85·73] FLUECHTLINGEANBORD@6 edges=18 letters=22 loops=0 central=E 1477926 stops → 0 valid 10-plug completions   33028s  35.3M/s ETA  90.5 min
+  [74/85·74] FLUECHTLINGEANBORD@16 edges=18 letters=20 loops=0 central=R 1858590 stops → 0 valid 10-plug completions   33590s  35.2M/s ETA  83.2 min
+  [75/85·75] FLUECHTLINGEANBORD@36 edges=18 letters=20 loops=0 central=B dead at the board                     34059s  35.2M/s ETA  75.7 min
+  [76/85·76] FLUECHTLINGEANBORD@41 edges=18 letters=19 loops=0 central=B dead at the board                     34493s  35.2M/s ETA  68.1 min
+  [77/85·77] FLUECHTLINGEANBORD@43 edges=18 letters=20 loops=0 central=B       9 stops → 0 scorable completions   34905s  35.2M/s ETA  60.4 min
+  [78/85·78] FLUECHTLINGEANBORD@45 edges=18 letters=21 loops=0 central=B       8 stops → 0 valid 10-plug completions   35303s  35.3M/s ETA  52.8 min
+  [79/85·79] FLUECHTLINGEANBORD@48 edges=18 letters=22 loops=0 central=G    2034 stops → 0 valid 10-plug completions   35728s  35.3M/s ETA  45.2 min
+  [80/85·80] FLUECHTLINGEANBORD@53 edges=18 letters=22 loops=0 central=G    2429 stops → 0 valid 10-plug completions   36110s  35.4M/s ETA  37.6 min
+  [81/85·81] EINSCHIFFUNGHELA@6 edges=16 letters=18 loops=0 central=E     128 stops → 3 physical, best IC 0.044 tail -4.603   36649s  35.3M/s ETA  30.2 min
+  [82/85·82] EINSCHIFFUNGHELA@34 edges=16 letters=18 loops=0 central=B     100 stops → 1 physical, best IC 0.047 tail -4.697   37279s  35.1M/s ETA  22.7 min
+  [83/85·83] EINSCHIFFUNGHELA@36 edges=16 letters=17 loops=0 central=B      46 stops → 0 scorable completions   37812s  35.1M/s ETA  15.2 min
+  [84/85·84] EINSCHIFFUNGHELA@42 edges=16 letters=17 loops=0 central=B      27 stops → 0 scorable completions   38330s  35.0M/s ETA   7.6 min
+  [85/85·85] EINSCHIFFUNGHELA@52 edges=16 letters=18 loops=0 central=G      79 stops → 2 physical, best IC 0.050 tail -4.620   38800s  35.0M/s ETA   0.0 min
+
+total raw stops: 371375218 over 1357328394240 settings (35.0M/s mean)
+survived the 10-plug sieve: 75
+best physical candidate: IC 0.043 tail -4.247 (IC floor 0.055 / threshold -3.600) — below the bar, so no break claimed
+  EINSCHIFFUNGHELA@3 edges=16 letters=17 loops=1 central=E
+  UKW B Greek beta WO VIII-II-IV pos IWWE
+  EXWEINSCHIFFUNGHELAZPHOZEJOIMZUATXVMMEHIKZECEUANNEFAVLHRUKSCQOIICNADYLDT
+quarantine: wrote 7 near-miss(es) → logs/quarantine_regenbogen_hela.json (solo pass complete)
+  escalate: --hybrid --hybrid-stochastic --hybrid-quarantine logs/quarantine_regenbogen_hela.json

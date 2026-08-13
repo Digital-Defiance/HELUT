@@ -1,9 +1,9 @@
 import Foundation
 
-/// Cleartext evaluator for Yosys `$lut` / `$_SDFF*` netlists (real boolean bits, no mock PBS).
+/// Cleartext evaluator for Yosys `$lut` / `$_SDFF*` netlists (real boolean bits).
 ///
-/// Used to validate `enigma_netlist.json` against `EnigmaMachine` without false positives from
-/// HELUT's mock-encrypted LUT polynomials.
+/// Oracle for Metal boolean-safe mock PBS (`LUTNode` multilinear path) and for
+/// Enigma letter-level validation without batch tensor plumbing.
 package final class CleartextNetlistSimulator {
     package struct DFFCell {
         package let name: String

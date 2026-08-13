@@ -1,6 +1,6 @@
 {
   "target": "P1030680",
-  "status": "running_03_hela_rings",
+  "status": "primary_complete_aaaa_fallback_done",
   "catalog_resume": "--bombe-from 203",
   "completed": [
     {
@@ -39,6 +39,31 @@
       "name": "Hela AAAA",
       "result": "7 physical / best IC 0.054 tail -4.748 \u2014 below soft; 0 quarantine",
       "log": "logs/campaign-regenbogen-03-hela-aaaa.log"
+    },
+    {
+      "step": 7,
+      "name": "Hela right-ring",
+      "result": "75 physical / 7 soft-band quarantine; best campaign IC 0.043 tail -4.247 \u2014 no BREAK",
+      "log": "logs/campaign-regenbogen-03-hela-rings.log",
+      "quarantine": "logs/quarantine_regenbogen_hela.json"
+    },
+    {
+      "step": 8,
+      "name": "Hela quarantine Hybrid escalate",
+      "result": "0 survivors; ceiling ~54% \u2014 clean negative",
+      "log": "logs/stochastic-bombe-regenbogen-hela-escalate.out"
+    },
+    {
+      "step": 9,
+      "name": "Own-orders AAAA",
+      "result": "clean negative \u2014 0 physical (all ghosts); 0 soft quarantine; 2.18e6 raw stops",
+      "log": "logs/campaign-regenbogen-04-own-aaaa.log"
+    },
+    {
+      "step": 10,
+      "name": "Filler AAAA",
+      "result": "2 physical / best IC 0.043 tail -4.568 \u2014 below soft (\u22124.3) and BREAK; 0 quarantine \u2014 no rings warranted",
+      "log": "logs/campaign-regenbogen-05-filler-aaaa.log"
     }
   ],
   "do_not_run_while": null,

@@ -1,0 +1,1 @@
+HELUTCore/TFHESeam.swift:166: Fatal error: ProgrammableBootstrap not implemented (selected as netlist LUT backend). Keep --lut-backend multilinear; PBS graduation is encoding + LUT body swap only (directives/fhe-graduation.md).

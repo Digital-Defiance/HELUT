@@ -1,6 +1,6 @@
 # HELUT-Bombe Validation Pipeline
 
-Three-tier verification against real Enigma semantics. Letter-level assertions use the host `EnigmaOracle` and a **cleartext** Yosys netlist simulator — not Metal mock-PBS polynomials (those exercise the tensor engine but do not preserve boolean plaintext).
+Three-tier verification against real Enigma semantics. Letter-level campaign assertions use the host `EnigmaOracle` and a **cleartext** Yosys netlist simulator. Metal boolean oracle under trivial torus encoding is gated bit-exact (`MockPBSBooleanTests`, `TFHESeamTests`). Encrypted FHE path: BK blind-rotate netlist (`EncryptedNetlistSimulator`, `--lut-backend encrypted`) — **PASS** for full_adder.
 
 ## Tier 1 — Synthetic ground truth
 
@@ -10,6 +10,31 @@ Three-tier verification against real Enigma semantics. Letter-level assertions u
 - Assert exclusive plaintext recovery on the correct lane + language-score spike
 
 Cleartext `enigma_netlist.json` simulation is checked bit-for-bit against the oracle for the HELUT Verilog baseline (empty stecker, rings AAA).
+
+## Mock-PBS boolean gate
+
+```bash
+swift test --filter 'MockPBSBooleanTests|TFHESeamTests'
+# Release re-bench + N=1024 Enigma Metal≡cleartext
+./Scripts/helut_boolean_bench.sh
+.build/release/helut --bench enigma_netlist.json --ticks 0 --bench-equiv
+# Phase encoding + trivial PBS (full_adder)
+./Scripts/helut_phase_seam.sh
+```
+
+Asserts Metal multilinear/trivial-PBS `$lut` evaluation matches `CleartextNetlistSim` where claimed. Encrypted path: whole-netlist Metal graph (binary X^p), Decision-LWE hardness cert (~176-bit est. @ N=1024), Gaussian ε≤2⁻⁶⁴, noisy-BK depth cert — **PASS** (`TFHESeamTests`). Multi-netlist CPU lock: full_adder / tree (256×) / regex (sampled). Metrics: `--bench-encrypted --sing` / `./Scripts/helut_encrypted_sing.sh` (`--cpu-only`, `--vectors`). Mock/trivial graphs are the boolean oracle (`directives/fhe-graduation.md`). Research-release: `directives/research-release.md`. Parameters: `directives/parameter-cookbook.md`.
+
+## Boolean-path performance snapshot
+
+Logs: `logs/helut-boolean-bench-*.log`, `logs/helut-boolean-scale-*.log`, `logs/helut-phase-seam-*.log`. Seams: `directives/fhe-graduation.md`.
+
+| Target | Compile | Steady |
+|--------|---------|--------|
+| PicoRV32 N=1024 B=1 | 1.30 s | 173 ms/tick |
+| Enigma M3 N=1024 B=1 | 0.04 s | 15 ms/tick |
+| Enigma M3 N=1024 B=1000 | 0.53 s | 73 ms/tick (~6 GiB) |
+| Enigma M3 N=1 B=1000 | 0.04 s | 15 ms/tick (~91 MiB) |
+| Enigma M3 equiv N=1024 / N=1 | — | PASS / PASS |
 
 ## Tier 2 — Historical vectors
 

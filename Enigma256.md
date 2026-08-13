@@ -244,7 +244,8 @@ flowchart LR
 - **AXI / SoftBus:** Lite + AXIS table burst (`enigma_256_axis_tables.v`); SoftBus burst + jitter. Co-sim: `Scripts/enigma256_axi_sim.sh`.
 - **Handshake / wire / TCP / PSK:** hybrid default on macOS 26+; `--enigma256-classical` / `--enigma256-passphrase`.
 - **Live genes:** gen **5** balanced cubic6.
-- **Campaign:** `Scripts/enigma256_rb_campaign.sh` — fail-closes on SoftBus `ent` + structured KPA (`--no-gates` to skip; KPA default 16384 rounds + long crib). `--hard-red` NLFF; `--wide` **scramble-fragment** cone (past NLFF); `--wide-offset` / `--wide-lfsr` for intermediate cones. Batteries: `Scripts/enigma256_red_battery.sh`, `Scripts/enigma256_scramble_frag_battery.sh`.
+- **Campaign:** `Scripts/enigma256_rb_campaign.sh` — fail-closes on SoftBus `ent` + **bijection sweep** + structured KPA (`--no-gates` to skip; KPA default 16384 rounds + long crib). `--hard-red` NLFF; `--wide` **scramble-fragment** cone (past NLFF); `--wide-offset` / `--wide-lfsr` for intermediate cones. Batteries: `Scripts/enigma256_red_battery.sh`, `Scripts/enigma256_scramble_frag_battery.sh`.
+- **Bijection gate:** `--enigma256-bijection` / `Scripts/enigma256_bijection.sh` — default **10⁶** random Walzenlage+offsets on one day key; frozen scramble must be bijective + reciprocal; optional stream round-trip (64 B).
 - **Ent:** PRNG plaintext (`Scripts/enigma256_ent.sh`). Zero-PT is diagnostic only (un-reflector FP bias).
 
 ## 9. Protocol gap closure
@@ -257,3 +258,4 @@ flowchart LR
 | Hardware bus | 2,560 AXI-Lite table writes | Medium | AXIS / SoftBus burst load |
 | Side-channel | BRAM address DPA | Medium | Stream jitter; dual-rail noted for HA |
 | Red surface | NLFF-only diminishing returns | — | Scramble-frag cone (`--wide`, ~295 LUT6); full-core melt still deferred |
+| Scramble collapse | many:1 / 1:many if tables break | Critical | Bijection + reciprocity sweep (10⁶ states gate) |

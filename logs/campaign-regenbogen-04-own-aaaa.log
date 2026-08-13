@@ -1,0 +1,80 @@
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030680_regenbogen_04_own_menus.json (48 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 48 of 48
+min crib length: 16
+running 48 menus, highest deduction power first:
+  [1] AUSLAUFENKIELNORWEGEN@25 edges=21 letters=19 loops=5 central=R
+  [2] KURSNORWEGENBEFOHLEN@31 edges=20 letters=17 loops=5 central=B
+  [3] KURSNORWEGENBEFOHLEN@38 edges=20 letters=17 loops=5 central=B
+  [4] KURSNORWEGENBEFOHLEN@39 edges=20 letters=17 loops=5 central=B
+  [5] KURSNORWEGENBEFOHLEN@42 edges=20 letters=17 loops=5 central=B
+  [6] KURSNORWEGENBEFOHLEN@43 edges=20 letters=17 loops=5 central=B
+  [7] AUSLAUFENKIELNORWEGEN@16 edges=21 letters=20 loops=4 central=E
+  [8] AUSLAUFENKIELNORWEGEN@19 edges=21 letters=19 loops=4 central=E
+  [9] AUSLAUFENKIELNORWEGEN@22 edges=21 letters=18 loops=4 central=R
+  [10] AUSLAUFENKIELNORWEGEN@31 edges=21 letters=19 loops=4 central=E
+  [11] AUSLAUFENKIELNORWEGEN@34 edges=21 letters=20 loops=4 central=E
+  [12] AUSLAUFENKIELNORWEGEN@41 edges=21 letters=19 loops=4 central=E
+  … 36 more
+shells/menu: 1344 (336 WO × 2 Greek × 2 UKW × 1 ring) → 6.14e+08 settings
+GPU pipeline depth: 4 shells in flight
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+rings AAAA: exhaustive over turnover-free spans, which is 5/26 (19%) of keys at 21 letters. --bombe-ring-sweep covers the rest at 26x cost.
+ETA floor (~50M/s): 9.8 min
+
+quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → logs/quarantine_candidates.json
+  [1/48·1] AUSLAUFENKIELNORWEGEN@25 edges=21 letters=19 loops=5 central=R dead at the board                        10s  61.5M/s ETA   7.8 min
+  [2/48·2] KURSNORWEGENBEFOHLEN@31 edges=20 letters=17 loops=5 central=B dead at the board                        24s  51.0M/s ETA   9.2 min
+  [3/48·3] KURSNORWEGENBEFOHLEN@38 edges=20 letters=17 loops=5 central=B dead at the board                        35s  52.9M/s ETA   8.7 min
+  [4/48·4] KURSNORWEGENBEFOHLEN@39 edges=20 letters=17 loops=5 central=B dead at the board                        47s  52.5M/s ETA   8.6 min
+  [5/48·5] KURSNORWEGENBEFOHLEN@42 edges=20 letters=17 loops=5 central=B dead at the board                        59s  51.8M/s ETA   8.5 min
+  [6/48·6] KURSNORWEGENBEFOHLEN@43 edges=20 letters=17 loops=5 central=B dead at the board                        68s  54.2M/s ETA   7.9 min
+  [7/48·7] AUSLAUFENKIELNORWEGEN@16 edges=21 letters=20 loops=4 central=E dead at the board                        81s  52.9M/s ETA   7.9 min
+  [8/48·8] AUSLAUFENKIELNORWEGEN@19 edges=21 letters=19 loops=4 central=E dead at the board                        94s  52.3M/s ETA   7.8 min
+  [9/48·9] AUSLAUFENKIELNORWEGEN@22 edges=21 letters=18 loops=4 central=R dead at the board                       107s  51.9M/s ETA   7.7 min
+  [10/48·10] AUSLAUFENKIELNORWEGEN@31 edges=21 letters=19 loops=4 central=E dead at the board                       122s  50.5M/s ETA   7.7 min
+  [11/48·11] AUSLAUFENKIELNORWEGEN@34 edges=21 letters=20 loops=4 central=E dead at the board                       137s  49.4M/s ETA   7.7 min
+  [12/48·12] AUSLAUFENKIELNORWEGEN@41 edges=21 letters=19 loops=4 central=E  148828 stops → 0 valid 10-plug completions     149s  49.4M/s ETA   7.5 min
+  [13/48·13] AUSLAUFENKIELNORWEGEN@45 edges=21 letters=19 loops=4 central=E dead at the board                       164s  48.6M/s ETA   7.4 min
+  [14/48·14] KURSNORWEGENBEFOHLEN@10 edges=20 letters=19 loops=4 central=E dead at the board                       174s  49.4M/s ETA   7.0 min
+  [15/48·15] KURSNORWEGENBEFOHLEN@25 edges=20 letters=18 loops=4 central=R dead at the board                       185s  49.7M/s ETA   6.8 min
+  [16/48·16] KURSNORWEGENBEFOHLEN@30 edges=20 letters=17 loops=4 central=B dead at the board                       203s  48.5M/s ETA   6.8 min
+  [17/48·17] KURSNORWEGENBEFOHLEN@33 edges=20 letters=18 loops=4 central=B dead at the board                       221s  47.3M/s ETA   6.7 min
+  [18/48·18] KURSNORWEGENBEFOHLEN@41 edges=20 letters=17 loops=4 central=B dead at the board                       231s  47.8M/s ETA   6.4 min
+  [19/48·19] KURSNORWEGENBEFOHLEN@46 edges=20 letters=18 loops=4 central=B dead at the board                       245s  47.7M/s ETA   6.2 min
+  [20/48·20] KURSNORWEGENBEFOHLEN@51 edges=20 letters=19 loops=4 central=G dead at the board                       261s  47.1M/s ETA   6.1 min
+  [21/48·21] AUSLAUFENKIELNORWEGEN@10 edges=21 letters=20 loops=3 central=E dead at the board                       275s  46.8M/s ETA   5.9 min
+  [22/48·22] AUSLAUFENKIELNORWEGEN@14 edges=21 letters=20 loops=3 central=E 2033776 stops → 0 valid 10-plug completions     313s  43.1M/s ETA   6.2 min
+  [23/48·23] AUSLAUFENKIELNORWEGEN@18 edges=21 letters=20 loops=3 central=E dead at the board                       333s  42.4M/s ETA   6.0 min
+  [24/48·24] AUSLAUFENKIELNORWEGEN@20 edges=21 letters=19 loops=3 central=E dead at the board                       346s  42.5M/s ETA   5.8 min
+  [25/48·25] AUSLAUFENKIELNORWEGEN@29 edges=21 letters=20 loops=3 central=E dead at the board                       358s  42.9M/s ETA   5.5 min
+  [26/48·26] AUSLAUFENKIELNORWEGEN@30 edges=21 letters=19 loops=3 central=E dead at the board                       372s  42.9M/s ETA   5.3 min
+  [27/48·27] AUSLAUFENKIELNORWEGEN@32 edges=21 letters=20 loops=3 central=E dead at the board                       395s  42.0M/s ETA   5.1 min
+  [28/48·28] AUSLAUFENKIELNORWEGEN@36 edges=21 letters=19 loops=3 central=E dead at the board                       414s  41.5M/s ETA   4.9 min
+  [29/48·29] AUSLAUFENKIELNORWEGEN@40 edges=21 letters=19 loops=3 central=E dead at the board                       428s  41.6M/s ETA   4.7 min
+  [30/48·30] AUSLAUFENKIELNORWEGEN@42 edges=21 letters=19 loops=3 central=E dead at the board                       446s  41.3M/s ETA   4.5 min
+  [31/48·31] AUSLAUFENKIELNORWEGEN@46 edges=21 letters=19 loops=3 central=E dead at the board                       457s  41.6M/s ETA   4.2 min
+  [32/48·32] KURSNORWEGENBEFOHLEN@1 edges=20 letters=20 loops=3 central=E dead at the board                       470s  41.8M/s ETA   3.9 min
+  [33/48·33] KURSNORWEGENBEFOHLEN@7 edges=20 letters=20 loops=3 central=E dead at the board                       484s  41.9M/s ETA   3.7 min
+  [34/48·34] KURSNORWEGENBEFOHLEN@11 edges=20 letters=19 loops=3 central=E dead at the board                       497s  42.0M/s ETA   3.4 min
+  [35/48·35] KURSNORWEGENBEFOHLEN@12 edges=20 letters=20 loops=3 central=E dead at the board                       512s  42.0M/s ETA   3.2 min
+  [36/48·36] KURSNORWEGENBEFOHLEN@14 edges=20 letters=19 loops=3 central=R dead at the board                       526s  42.1M/s ETA   2.9 min
+  [37/48·37] KURSNORWEGENBEFOHLEN@17 edges=20 letters=19 loops=3 central=R dead at the board                       540s  42.1M/s ETA   2.7 min
+  [38/48·38] KURSNORWEGENBEFOHLEN@29 edges=20 letters=18 loops=3 central=E dead at the board                       557s  41.9M/s ETA   2.4 min
+  [39/48·39] KURSNORWEGENBEFOHLEN@49 edges=20 letters=19 loops=3 central=E dead at the board                       572s  41.9M/s ETA   2.2 min
+  [40/48·40] AUSLAUFENKIELNORWEGEN@2 edges=21 letters=20 loops=2 central=E dead at the board                       586s  41.9M/s ETA   2.0 min
+  [41/48·41] AUSLAUFENKIELNORWEGEN@8 edges=21 letters=21 loops=2 central=E dead at the board                       600s  42.0M/s ETA   1.7 min
+  [42/48·42] AUSLAUFENKIELNORWEGEN@43 edges=21 letters=20 loops=2 central=E dead at the board                       614s  42.0M/s ETA   1.5 min
+  [43/48·43] AUSLAUFENKIELNORWEGEN@50 edges=21 letters=20 loops=2 central=G dead at the board                       628s  42.1M/s ETA   1.2 min
+  [44/48·44] KURSNORWEGENBEFOHLEN@3 edges=20 letters=20 loops=2 central=E dead at the board                       643s  42.0M/s ETA   1.0 min
+  [45/48·45] KURSNORWEGENBEFOHLEN@6 edges=20 letters=20 loops=2 central=E dead at the board                       658s  42.0M/s ETA   0.7 min
+  [46/48·46] KURSNORWEGENBEFOHLEN@9 edges=20 letters=20 loops=2 central=E dead at the board                       668s  42.3M/s ETA   0.5 min
+  [47/48·47] AUSLAUFENKIELNORWEGEN@12 edges=21 letters=21 loops=1 central=E dead at the board                       684s  42.2M/s ETA   0.2 min
+  [48/48·48] AUSLAUFENKIELNORWEGEN@48 edges=21 letters=21 loops=1 central=E dead at the board                       705s  41.8M/s ETA   0.0 min
+
+total raw stops: 2182604 over 29480435712 settings (41.8M/s mean)
+survived the 10-plug sieve: 0
+every stop was a ghost: no menu admits a physically buildable 10-plug board.
+The cribs tried are not in this message at the offsets tried.
+quarantine: 0 soft-band near-misses (solo pass complete)

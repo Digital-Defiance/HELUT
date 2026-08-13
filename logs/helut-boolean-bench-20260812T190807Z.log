@@ -1,0 +1,123 @@
+=== HELUT boolean-path bench 20260812T190807Z ===
+
+######## PicoRV32 compile+boot (N=1024 B=1, 10 ticks) ########
+HELUT boolean-path bench
+  netlist: picorv32_netlist.json
+  N=1024  B=1  ticks=10  warmup=1  reset_hold=3
+  encoding: trivial torus (constant-fill {0,1})
+  LUT: multilinear mock PBS (boolean-safe)
+
+Compiled module 'picorv32': 102 inputs, 4785 LUTs, 1565 DFFs, 307 outputs
+Compile breakdown: boolean-safe LUT lower 0.75 s, graph build 0.55 s (total 1.30 s)
+COMPILE
+  total            1.2972 s
+  LUT lower        0.7510 s
+  graph build      0.5462 s
+  cells            4785 LUTs, 1565 DFFs, 102 inputs, 307 outputs
+  RSS delta        +142.2 MiB (after=180.1 MiB)
+
+  tick  1  6.4284 s  resetn=0
+  tick  2  0.1722 s  resetn=0
+  tick  3  0.1739 s  resetn=0
+  tick  4  0.1728 s  resetn=1
+  tick  5  0.1727 s  resetn=1
+  tick  6  0.1733 s  resetn=1
+  tick  7  0.1733 s  resetn=1
+  tick  8  0.1766 s  resetn=1
+  tick  9  0.1725 s  resetn=1
+  tick 10  0.1721 s  resetn=1
+CLOCK
+  ticks total      7.9879 s (10 ticks)
+  tick 1 (JIT)     6.4284 s
+  steady avg       0.1733 s/tick (n=9, skip warmup=1)
+  steady Hz        5.77
+
+RSS final 647.5 MiB (delta from start +609.6 MiB)
+
+######## Enigma M3 compile+boot (N=1024 B=1, 10 ticks) ########
+HELUT boolean-path bench
+  netlist: enigma_netlist.json
+  N=1024  B=1  ticks=10  warmup=1  reset_hold=3
+  encoding: trivial torus (constant-fill {0,1})
+  LUT: multilinear mock PBS (boolean-safe)
+
+Compiled module 'enigma_core': 10 inputs, 688 LUTs, 26 DFFs, 8 outputs
+Compile breakdown: boolean-safe LUT lower 0.04 s, graph build 0.00 s (total 0.04 s)
+COMPILE
+  total            0.0392 s
+  LUT lower        0.0366 s
+  graph build      0.0026 s
+  cells            688 LUTs, 26 DFFs, 10 inputs, 8 outputs
+  RSS delta        +15.0 MiB (after=32.1 MiB)
+
+  tick  1  0.5189 s  resetn=0
+  tick  2  0.0171 s  resetn=0
+  tick  3  0.0171 s  resetn=0
+  tick  4  0.0145 s  resetn=1
+  tick  5  0.0145 s  resetn=1
+  tick  6  0.0144 s  resetn=1
+  tick  7  0.0144 s  resetn=1
+  tick  8  0.0146 s  resetn=1
+  tick  9  0.0145 s  resetn=1
+  tick 10  0.0147 s  resetn=1
+CLOCK
+  ticks total      0.6547 s (10 ticks)
+  tick 1 (JIT)     0.5189 s
+  steady avg       0.0151 s/tick (n=9, skip warmup=1)
+  steady Hz        66.28
+
+RSS final 93.9 MiB (delta from start +76.8 MiB)
+
+######## Enigma M3 Metal≡cleartext (N=1024) ########
+HELUT boolean-path bench
+  netlist: enigma_netlist.json
+  N=1024  B=1  ticks=1  warmup=1  reset_hold=3
+  encoding: trivial torus (constant-fill {0,1})
+  LUT: multilinear mock PBS (boolean-safe)
+
+Compiled module 'enigma_core': 10 inputs, 688 LUTs, 26 DFFs, 8 outputs
+Compile breakdown: boolean-safe LUT lower 0.04 s, graph build 0.00 s (total 0.04 s)
+COMPILE
+  total            0.0386 s
+  LUT lower        0.0359 s
+  graph build      0.0027 s
+  cells            688 LUTs, 26 DFFs, 10 inputs, 8 outputs
+  RSS delta        +14.8 MiB (after=32.1 MiB)
+
+  tick  1  0.3118 s  resetn=0
+CLOCK
+  ticks total      0.3118 s (1 ticks)
+  tick 1 (JIT)     0.3118 s
+  steady avg       0.0000 s/tick (n=0, skip warmup=1)
+
+EQUIV (Metal boolean-path ≡ CleartextNetlistSim)
+Compiled module 'enigma_core': 10 inputs, 688 LUTs, 26 DFFs, 8 outputs
+Compile breakdown: boolean-safe LUT lower 0.03 s, graph build 0.00 s (total 0.04 s)
+  plaintext      KEINEBESONDERENEREIGNISSE
+  clear          KEINEBESONDERENEREIGNISSE
+  metal          KEINEBESONDERENEREIGNISSE
+  compile        0.0372 s (N=1024 B=1)
+  stream         0.6826 s (25 letters, 0.0273 s/letter)
+  result          PASS
+
+RSS final 241.2 MiB (delta from start +223.9 MiB)
+
+######## Enigma M4 compile-only (N=1024 B=1) ########
+HELUT boolean-path bench
+  netlist: enigma_m4_netlist.json
+  N=1024  B=1  ticks=10  warmup=1  reset_hold=3
+  encoding: trivial torus (constant-fill {0,1})
+  LUT: multilinear mock PBS (boolean-safe)
+
+Compiled module 'enigma_m4_core': 10 inputs, 925 LUTs, 49 DFFs, 24 outputs
+Compile breakdown: boolean-safe LUT lower 0.06 s, graph build 0.01 s (total 0.06 s)
+COMPILE
+  total            0.0635 s
+  LUT lower        0.0577 s
+  graph build      0.0058 s
+  cells            925 LUTs, 49 DFFs, 10 inputs, 24 outputs
+  RSS delta        +20.4 MiB (after=39.1 MiB)
+
+Stopping after compile (--compile-only).
+
+=== DONE 20260812T190807Z ===

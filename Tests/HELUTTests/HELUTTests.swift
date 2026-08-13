@@ -114,13 +114,11 @@ func makeMatrixFeeds(
     device: MTLDevice,
     shape: [NSNumber]
 ) -> [MPSGraphTensor: MPSGraphTensorData]? {
-    var feeds: [MPSGraphTensor: MPSGraphTensorData] = [:]
-    for entry in compiler.lutNodes {
-        guard let matrixPlaceholder = entry.node.matrixPlaceholder else { return nil }
-        let buffer = makeSharedUInt32Buffer(device: device, values: entry.node.matrix)
-        feeds[matrixPlaceholder] = MPSGraphTensorData(buffer, shape: shape, dataType: .uInt32)
-    }
-    return feeds
+    _ = compiler
+    _ = device
+    _ = shape
+    // Boolean-safe mock PBS embeds truth tables in the graph; no LUT matrix feeds.
+    return [:]
 }
 
 func runHoldTick(
@@ -205,12 +203,17 @@ final class HELUTTests: XCTestCase {
                 let expected = cpuSchoolbookMatvec(matrix: matrix, vector: vector, degree: degree)
 
                 let graph = MPSGraph()
-                let lut = LUTNode(name: "fidelity_lut", matrix: matrix, degree: degree, batch: batch)
+                let matvec = NegacyclicMatvecNode(
+                    name: "fidelity_matvec",
+                    matrix: matrix,
+                    degree: degree,
+                    batch: batch
+                )
                 let input = InputNode(name: "fidelity_in", degree: degree, batch: batch)
                 let inputTensor = input.compile(graph: graph, inputs: [])
-                let outputTensor = lut.compile(graph: graph, inputs: [inputTensor])
+                let outputTensor = matvec.compile(graph: graph, inputs: [inputTensor])
 
-                guard let matrixPlaceholder = lut.matrixPlaceholder,
+                guard let matrixPlaceholder = matvec.matrixPlaceholder,
                       let inputPlaceholder = input.placeholder else {
                     return XCTFail("Missing placeholders")
                 }

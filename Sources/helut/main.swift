@@ -49,6 +49,8 @@ let positionalArgs: [String] = {
     var index = 0
     let valueFlags: Set<String> = [
         "--ticks", "--batch", "--rings", "--subspace", "--msg-keys", "--skip", "--from",
+        "--degree", "--warmup", "--reset-hold", "--encoding", "--lut-backend",
+        "--vectors", "--paths", "--trials",
         "--hybrid-pop", "--hybrid-gens", "--hybrid-greek-samples",
         "--exhaust-top", "--exhaust-plugs", "--selftest-len",
         "--bombe-menus", "--bombe-plugs", "--bombe-report", "--bombe-pipeline",
@@ -68,7 +70,9 @@ let positionalArgs: [String] = {
         "--enigma256-nlff-stats-steps", "--enigma256-nlff-breed-trials",
         "--enigma256-ent-bytes", "--enigma256-ent-out", "--enigma256-ent-log",
         "--enigma256-ent-plain",
-        "--enigma256-kpa-rounds"
+        "--enigma256-kpa-rounds",
+        "--enigma256-bijection-states", "--enigma256-bijection-stream",
+        "--enigma256-bijection-seed"
     ]
     while index < args.count {
         let arg = args[index]
@@ -138,6 +142,35 @@ if CommandLine.arguments.contains("--enigma256-ent") {
 
 if CommandLine.arguments.contains("--enigma256-structured-kpa") {
     runEnigma256StructuredKPA()
+    exit(0)
+}
+
+if CommandLine.arguments.contains("--enigma256-bijection") {
+    runEnigma256BijectionSweep()
+    exit(0)
+}
+
+if CommandLine.arguments.contains("--hardness-table") {
+    print(TFHELWECalibration.markdownTable())
+    print("")
+    print(TFHELWECoreSVPModel.markdownTable())
+    print("")
+    print(TFHELWEEstimatorProtocol.markdownTable())
+    exit(0)
+}
+
+if CommandLine.arguments.contains("--estimator-export") {
+    print(TFHELWEEstimatorProtocol.exportPendingJSON())
+    exit(0)
+}
+
+if CommandLine.arguments.contains("--bench-encrypted-micro") {
+    runEncryptedMicrobench()
+    exit(0)
+}
+
+if CommandLine.arguments.contains("--bench") {
+    runHelutBench()
     exit(0)
 }
 
@@ -293,7 +326,7 @@ let compileSeconds = CFAbsoluteTimeGetCurrent() - compileStarted
 print(String(format: "Graph compilation (setup): %.4f s", compileSeconds))
 print(
     String(
-        format: "  of which Toeplitz expand %.4f s, MPSGraph build %.4f s",
+        format: "  of which boolean-safe LUT lower %.4f s, MPSGraph build %.4f s",
         compiler.lastToeplitzExpandSeconds,
         compiler.lastGraphBuildSeconds
     )
@@ -313,6 +346,7 @@ print(
 
 let bombeRun = runEnigmaBombe(
     compiler: compiler,
+    module: module,
     device: device,
     commandQueue: commandQueue,
     ticks: bombeTicks,
@@ -372,7 +406,8 @@ if let last = tickResults.last {
             )
         }
         print(
-            "Note: mock-PBS tensors are not boolean-faithful; host `--break-p1030680` is the cryptanalytic oracle."
+            "Note: mock-PBS LUTs are boolean-faithful under trivial torus encoding; "
+                + "host `--break-p1030680` remains the campaign oracle."
         )
     } else {
         let candidates = scorePlaintextCandidates(
@@ -470,6 +505,7 @@ struct BombeRunResult {
 
 func runEnigmaBombe(
     compiler: YosysGraphCompiler,
+    module: YosysModule,
     device: MTLDevice,
     commandQueue: MTLCommandQueue,
     ticks: Int,
@@ -485,7 +521,6 @@ func runEnigmaBombe(
     }
 
     let vectorShape: [NSNumber] = [NSNumber(value: compiler.batch), NSNumber(value: compiler.degree)]
-    let matrixShape: [NSNumber] = [NSNumber(value: compiler.degree), NSNumber(value: compiler.degree)]
     let elementCount = compiler.batch * compiler.degree
     let zeroHost = [UInt32](repeating: 0, count: elementCount)
     let oneHost = [UInt32](repeating: 1, count: elementCount)
@@ -497,13 +532,19 @@ func runEnigmaBombe(
         zeroHost: zeroHost,
         oneHost: oneHost
     )
-    let matrixFeeds = makeBombeLUTMatrixFeeds(compiler: compiler, device: device, shape: matrixShape)
     let buffers = makeBombeBufferPool(
         compiler: compiler,
         device: device,
         shape: vectorShape,
         elementCount: elementCount,
         zeroHost: zeroHost
+    )
+
+    // Registered outputs (plaintext_char, linguistic_score, …) bind to Q placeholders.
+    // After each tick, copy Q_next into those output buffers so scoring matches cleartext.
+    let registeredOutputCopies = makeRegisteredOutputCopyPlan(
+        compiler: compiler,
+        module: module
     )
 
     // Seed state set A with per-lane Grundstellung hypotheses (rotor DFFs only).
@@ -537,8 +578,8 @@ func runEnigmaBombe(
             }
 
             let stateWrites = writeToB ? buffers.stateSetB : buffers.stateSetA
+            let stateWriteBuffers = writeToB ? buffers.stateBuffersB : buffers.stateBuffersA
             var feeds = primary.feeds
-            feeds.merge(matrixFeeds) { _, new in new }
             for (index, dff) in compiler.dffNodes.enumerated() {
                 guard let placeholder = dff.stateInput.placeholder else {
                     fatalError("Missing state-input placeholder for '\(dff.cell)'")
@@ -566,6 +607,14 @@ func runEnigmaBombe(
             )
             let elapsed = CFAbsoluteTimeGetCurrent() - started
 
+            let byteCount = elementCount * MemoryLayout<UInt32>.stride
+            for copy in registeredOutputCopies {
+                buffers.outputBuffers[copy.outputIndex].contents().copyMemory(
+                    from: stateWriteBuffers[copy.dffIndex].contents(),
+                    byteCount: byteCount
+                )
+            }
+
             stateFeeds = stateWrites
             writeToB.toggle()
             return BombeTickResult(tick: tick, ciphertextByte: cipherByte, elapsedSeconds: elapsed)
@@ -574,6 +623,33 @@ func runEnigmaBombe(
     }
 
     return BombeRunResult(ticks: tickResults, outputBuffers: buffers.outputBuffers)
+}
+
+private struct RegisteredOutputCopy {
+    let outputIndex: Int
+    let dffIndex: Int
+}
+
+private func makeRegisteredOutputCopyPlan(
+    compiler: YosysGraphCompiler,
+    module: YosysModule
+) -> [RegisteredOutputCopy] {
+    var qWireToDFF: [Int: Int] = [:]
+    for (index, dff) in compiler.dffNodes.enumerated() {
+        guard let cell = module.cells[dff.cell],
+              let qBit = cell.connections["Q"]?.first,
+              case .net(let qWire) = qBit else { continue }
+        qWireToDFF[qWire] = index
+    }
+    var plan: [RegisteredOutputCopy] = []
+    for (outIndex, entry) in compiler.outputTensors.enumerated() {
+        guard let port = module.ports[entry.port],
+              entry.bitIndex < port.bits.count,
+              case .net(let wire) = port.bits[entry.bitIndex],
+              let dffIndex = qWireToDFF[wire] else { continue }
+        plan.append(RegisteredOutputCopy(outputIndex: outIndex, dffIndex: dffIndex))
+    }
+    return plan
 }
 
 private struct BombePrimaryFeeds {
@@ -588,6 +664,7 @@ private struct BombeBufferPool {
     let stateSetA: [MPSGraphTensorData]
     let stateSetB: [MPSGraphTensorData]
     let stateBuffersA: [MTLBuffer]
+    let stateBuffersB: [MTLBuffer]
     let outputScratch: [MPSGraphTensorData]
     let outputBuffers: [MTLBuffer]
 }
@@ -643,22 +720,6 @@ private func makeBombePrimaryFeeds(
     )
 }
 
-private func makeBombeLUTMatrixFeeds(
-    compiler: YosysGraphCompiler,
-    device: MTLDevice,
-    shape: [NSNumber]
-) -> [MPSGraphTensor: MPSGraphTensorData] {
-    var feeds: [MPSGraphTensor: MPSGraphTensorData] = [:]
-    for entry in compiler.lutNodes {
-        guard let matrixPlaceholder = entry.node.matrixPlaceholder else {
-            fatalError("Missing matrix placeholder for LUT '\(entry.cell)'")
-        }
-        let buffer = makeSharedUInt32Buffer(device: device, values: entry.node.matrix)
-        feeds[matrixPlaceholder] = MPSGraphTensorData(buffer, shape: shape, dataType: .uInt32)
-    }
-    return feeds
-}
-
 private func makeBombeBufferPool(
     compiler: YosysGraphCompiler,
     device: MTLDevice,
@@ -673,8 +734,11 @@ private func makeBombeBufferPool(
         stateBuffersA.append(buffer)
         return MPSGraphTensorData(buffer, shape: shape, dataType: .uInt32)
     }
+    var stateBuffersB: [MTLBuffer] = []
+    stateBuffersB.reserveCapacity(compiler.dffNodes.count)
     let stateSetB: [MPSGraphTensorData] = compiler.dffNodes.map { _ in
         let buffer = makeSharedUInt32Buffer(device: device, count: elementCount)
+        stateBuffersB.append(buffer)
         return MPSGraphTensorData(buffer, shape: shape, dataType: .uInt32)
     }
     var outputBuffers: [MTLBuffer] = []
@@ -688,6 +752,7 @@ private func makeBombeBufferPool(
         stateSetA: stateSetA,
         stateSetB: stateSetB,
         stateBuffersA: stateBuffersA,
+        stateBuffersB: stateBuffersB,
         outputScratch: outputScratch,
         outputBuffers: outputBuffers
     )
@@ -1018,8 +1083,8 @@ func runThreeTierValidation(netlistPath: String) {
     print("")
     print("VALIDATION COMPLETE — tiers 1–3 green.")
     print(
-        "Note: Metal mock-PBS tensors do not carry boolean plaintext; "
-            + "letter-level assertions use EnigmaOracle + cleartext netlist simulation."
+        "Note: Metal mock-PBS is boolean-faithful under trivial torus encoding; "
+            + "campaign letter-level assertions still use EnigmaOracle + cleartext netlist simulation."
     )
 }
 

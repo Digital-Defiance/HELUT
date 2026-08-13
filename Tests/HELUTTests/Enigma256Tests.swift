@@ -492,4 +492,17 @@ final class Enigma256Tests: XCTestCase {
         XCTAssertEqual(decoded.tag?.count, 32)
         XCTAssertEqual(try ctx.openAEAD(decoded), Array("v2".utf8))
     }
+
+    func testBijectionSweepHoldsOnSample() {
+        let ikm = Data("enigma256-bijection-unit-ikm-v1!".utf8)
+        let day = Enigma256KDF.deriveDayKey(ikm: ikm, salt: Data("unit".utf8))
+        let report = Enigma256Bijection.sweep(
+            day: day,
+            states: 2_000,
+            streamBytes: 32,
+            seed: 0xB13E_0001
+        )
+        XCTAssertNil(report.failure, report.failure.map { "\($0)" } ?? "")
+        XCTAssertEqual(report.statesChecked, 2_000)
+    }
 }

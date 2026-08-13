@@ -1,10 +1,22 @@
-import { NavLink, Route, Routes } from 'react-router-dom'
+import { NavLink, Navigate, Route, Routes } from 'react-router-dom'
 import { HomePage } from './pages/HomePage'
 import { StackPage } from './pages/StackPage'
 import { AppsPage } from './pages/AppsPage'
 import { EnigmaPage } from './pages/EnigmaPage'
 import { Enigma256Page } from './pages/Enigma256Page'
+import { Enigma256JournalPage } from './pages/Enigma256JournalPage'
 import { JournalPage } from './pages/JournalPage'
+import { ProjectsIndexPage } from './pages/ProjectsIndexPage'
+import { ProjectHubPage } from './pages/ProjectHubPage'
+import {
+  DifferentiableHardwareJournalPage,
+  DifferentiableHardwareParadigmPage,
+} from './pages/DifferentiableHardwarePages'
+import {
+  PolymorphicCiphersJournalPage,
+  PolymorphicRedBluePage,
+} from './pages/PolymorphicCiphersPages'
+import { QueuedProjectJournalPage } from './pages/QueuedProjectJournalPage'
 
 function Nav() {
   return (
@@ -22,13 +34,16 @@ function Nav() {
               <NavLink to="/apps">Applications</NavLink>
             </li>
             <li>
+              <NavLink to="/projects">Projects</NavLink>
+            </li>
+            <li>
               <NavLink to="/enigma">Enigma</NavLink>
             </li>
             <li>
-              <NavLink to="/journal">Turing Complete</NavLink>
+              <NavLink to="/projects/p1030680/journal">Turing Complete</NavLink>
             </li>
             <li>
-              <NavLink to="/e256">E256</NavLink>
+              <NavLink to="/projects/e256">E256</NavLink>
             </li>
             <li>
               <a
@@ -69,9 +84,34 @@ export default function App() {
         <Route path="/stack" element={<StackPage />} />
         <Route path="/apps" element={<AppsPage />} />
         <Route path="/enigma" element={<EnigmaPage />} />
-        <Route path="/e256" element={<Enigma256Page />} />
-        <Route path="/enigma-256" element={<Enigma256Page />} />
-        <Route path="/journal" element={<JournalPage />} />
+
+        <Route path="/projects" element={<ProjectsIndexPage />} />
+        <Route path="/projects/:slug" element={<ProjectHubPage />} />
+        <Route path="/projects/p1030680/journal" element={<JournalPage />} />
+        <Route path="/projects/e256/design" element={<Enigma256Page />} />
+        <Route path="/projects/e256/journal" element={<Enigma256JournalPage />} />
+        <Route
+          path="/projects/differentiable-hardware/journal"
+          element={<DifferentiableHardwareJournalPage />}
+        />
+        <Route
+          path="/projects/differentiable-hardware/paradigm"
+          element={<DifferentiableHardwareParadigmPage />}
+        />
+        <Route
+          path="/projects/polymorphic-ciphers/journal"
+          element={<PolymorphicCiphersJournalPage />}
+        />
+        <Route
+          path="/projects/polymorphic-ciphers/red-blue"
+          element={<PolymorphicRedBluePage />}
+        />
+        <Route path="/projects/:slug/journal" element={<QueuedProjectJournalPage />} />
+
+        {/* Legacy aliases */}
+        <Route path="/journal" element={<Navigate to="/projects/p1030680/journal" replace />} />
+        <Route path="/e256" element={<Navigate to="/projects/e256/design" replace />} />
+        <Route path="/enigma-256" element={<Navigate to="/projects/e256/design" replace />} />
       </Routes>
       <Footer />
     </>

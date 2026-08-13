@@ -1,0 +1,66 @@
+=== HELUT phase seam 20260812T191626Z ===
+
+######## Phase encoding equiv (N=1024) ########
+HELUT boolean-path bench
+  netlist: enigma_netlist.json
+  N=1024  B=1  ticks=0  warmup=1  reset_hold=3
+  encoding: phase (trivial, noise-free)
+  LUT backend: multilinear
+
+Compiled module 'enigma_core': 10 inputs, 688 LUTs, 26 DFFs, 8 outputs
+Compile breakdown: boolean-safe LUT lower 0.04 s, graph build 0.00 s (total 0.04 s)
+COMPILE
+  total            0.0411 s
+  LUT lower        0.0382 s
+  graph build      0.0028 s
+  cells            688 LUTs, 26 DFFs, 10 inputs, 8 outputs
+  RSS delta        +14.7 MiB (after=32.0 MiB)
+
+EQUIV (Metal boolean-path ≡ CleartextNetlistSim)
+  encoding: phase
+Compiled module 'enigma_core': 10 inputs, 688 LUTs, 26 DFFs, 8 outputs
+Compile breakdown: boolean-safe LUT lower 0.03 s, graph build 0.00 s (total 0.04 s)
+  plaintext      KEINEBESONDERENEREIGNISSE
+  clear          KEINEBESONDERENEREIGNISSE
+  metal          KEINEBESONDERENEREIGNISSE
+  compile        0.0371 s (N=1024 B=1)
+  stream         0.6740 s (25 letters, 0.0270 s/letter)
+  result          PASS
+
+RSS final 217.6 MiB (delta from start +200.3 MiB)
+
+######## Phase encoding equiv (N=1) ########
+HELUT boolean-path bench
+  netlist: enigma_netlist.json
+  N=1  B=1  ticks=0  warmup=1  reset_hold=3
+  encoding: phase (trivial, noise-free)
+  LUT backend: multilinear
+
+Compiled module 'enigma_core': 10 inputs, 688 LUTs, 26 DFFs, 8 outputs
+Compile breakdown: boolean-safe LUT lower 0.03 s, graph build 0.00 s (total 0.03 s)
+COMPILE
+  total            0.0292 s
+  LUT lower        0.0272 s
+  graph build      0.0020 s
+  cells            688 LUTs, 26 DFFs, 10 inputs, 8 outputs
+  RSS delta        +8.8 MiB (after=26.1 MiB)
+
+EQUIV (Metal boolean-path ≡ CleartextNetlistSim)
+  encoding: phase
+Compiled module 'enigma_core': 10 inputs, 688 LUTs, 26 DFFs, 8 outputs
+Compile breakdown: boolean-safe LUT lower 0.03 s, graph build 0.00 s (total 0.03 s)
+  plaintext      KEINEBESONDERENEREIGNISSE
+  clear          KEINEBESONDERENEREIGNISSE
+  metal          KEINEBESONDERENEREIGNISSE
+  compile        0.0296 s (N=1 B=1)
+  stream         0.6313 s (25 letters, 0.0253 s/letter)
+  result          PASS
+
+RSS final 177.5 MiB (delta from start +160.2 MiB)
+
+######## PBS backend must fail closed ########
+./Scripts/helut_phase_seam.sh: line 37:  5767 Trace/BPT trap: 5       "$BIN" --bench netlist.json --ticks 0 --lut-backend pbs 2> "$LOG.pbs.err"
+PBS refuse OK:
+HELUTCore/TFHESeam.swift:166: Fatal error: ProgrammableBootstrap not implemented (selected as netlist LUT backend). Keep --lut-backend multilinear; PBS graduation is encoding + LUT body swap only (directives/fhe-graduation.md).
+
+=== DONE 20260812T191626Z ===

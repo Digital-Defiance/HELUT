@@ -1,0 +1,67 @@
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030680_regenbogen_05_filler_menus.json (33 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 33 of 33
+min crib length: 16
+running 33 menus, highest deduction power first:
+  [1] SOFORTMELDENLAGE@41 edges=16 letters=17 loops=3 central=B
+  [2] SOFORTMELDENLAGE@18 edges=16 letters=18 loops=2 central=R
+  [3] SOFORTMELDENLAGE@23 edges=16 letters=17 loops=2 central=R
+  [4] SOFORTMELDENLAGE@45 edges=16 letters=17 loops=2 central=T
+  [5] SOFORTMELDENLAGE@50 edges=16 letters=18 loops=2 central=G
+  [6] SOFORTMELDENLAGE@4 edges=16 letters=17 loops=1 central=E
+  [7] SOFORTMELDENLAGE@9 edges=16 letters=21 loops=1 central=E
+  [8] SOFORTMELDENLAGE@11 edges=16 letters=20 loops=1 central=E
+  [9] SOFORTMELDENLAGE@12 edges=16 letters=20 loops=1 central=E
+  [10] SOFORTMELDENLAGE@14 edges=16 letters=19 loops=1 central=E
+  [11] SOFORTMELDENLAGE@15 edges=16 letters=18 loops=1 central=R
+  [12] SOFORTMELDENLAGE@17 edges=16 letters=18 loops=1 central=R
+  … 21 more
+shells/menu: 1344 (336 WO × 2 Greek × 2 UKW × 1 ring) → 6.14e+08 settings
+GPU pipeline depth: 4 shells in flight
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+rings AAAA: exhaustive over turnover-free spans, which is 10/26 (38%) of keys at 16 letters. --bombe-ring-sweep covers the rest at 26x cost.
+ETA floor (~50M/s): 6.8 min
+
+quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → logs/quarantine_candidates.json
+  [1/33·1] SOFORTMELDENLAGE@41 edges=16 letters=17 loops=3 central=B    1214 stops → 0 valid 10-plug completions      11s  55.3M/s ETA   5.9 min
+  [2/33·2] SOFORTMELDENLAGE@18 edges=16 letters=18 loops=2 central=R     382 stops → 0 scorable completions      24s  51.3M/s ETA   6.2 min
+  [3/33·3] SOFORTMELDENLAGE@23 edges=16 letters=17 loops=2 central=R       2 stops → 0 scorable completions      38s  48.0M/s ETA   6.4 min
+  [4/33·4] SOFORTMELDENLAGE@45 edges=16 letters=17 loops=2 central=T    3003 stops → 0 scorable completions      54s  45.4M/s ETA   6.5 min
+  [5/33·5] SOFORTMELDENLAGE@50 edges=16 letters=18 loops=2 central=G    2712 stops → 0 scorable completions      67s  46.1M/s ETA   6.2 min
+  [6/33·6] SOFORTMELDENLAGE@4 edges=16 letters=17 loops=1 central=E       3 stops → 1 physical, best IC 0.043 tail -4.568      78s  47.1M/s ETA   5.9 min
+  [7/33·7] SOFORTMELDENLAGE@9 edges=16 letters=21 loops=1 central=E    4510 stops → 0 scorable completions      91s  47.5M/s ETA   5.6 min
+  [8/33·8] SOFORTMELDENLAGE@11 edges=16 letters=20 loops=1 central=E      45 stops → 0 scorable completions     107s  45.8M/s ETA   5.6 min
+  [9/33·9] SOFORTMELDENLAGE@12 edges=16 letters=20 loops=1 central=E  653020 stops → 0 scorable completions     124s  44.4M/s ETA   5.5 min
+  [10/33·10] SOFORTMELDENLAGE@14 edges=16 letters=19 loops=1 central=E 19051235 stops → 0 scorable completions     576s  10.7M/s ETA  22.1 min
+  [11/33·11] SOFORTMELDENLAGE@15 edges=16 letters=18 loops=1 central=R      21 stops → 0 scorable completions     594s  11.4M/s ETA  19.8 min
+  [12/33·12] SOFORTMELDENLAGE@17 edges=16 letters=18 loops=1 central=R 52301805 stops → 0 valid 10-plug completions    1715s   4.3M/s ETA  50.0 min
+  [13/33·13] SOFORTMELDENLAGE@21 edges=16 letters=17 loops=1 central=R       7 stops → 0 scorable completions    1727s   4.6M/s ETA  44.3 min
+  [14/33·14] SOFORTMELDENLAGE@29 edges=16 letters=18 loops=1 central=L      10 stops → 0 scorable completions    1741s   4.9M/s ETA  39.4 min
+  [15/33·15] SOFORTMELDENLAGE@34 edges=16 letters=18 loops=1 central=L       5 stops → 0 valid 10-plug completions    1758s   5.2M/s ETA  35.2 min
+  [16/33·16] SOFORTMELDENLAGE@35 edges=16 letters=17 loops=1 central=L       4 stops → 0 scorable completions    1770s   5.6M/s ETA  31.3 min
+  [17/33·17] SOFORTMELDENLAGE@36 edges=16 letters=17 loops=1 central=L      34 stops → 0 valid 10-plug completions    1784s   5.9M/s ETA  28.0 min
+  [18/33·18] SOFORTMELDENLAGE@37 edges=16 letters=18 loops=1 central=B    6831 stops → 0 scorable completions    1802s   6.1M/s ETA  25.0 min
+  [19/33·19] SOFORTMELDENLAGE@39 edges=16 letters=18 loops=1 central=B      71 stops → 0 scorable completions    1813s   6.4M/s ETA  22.3 min
+  [20/33·20] SOFORTMELDENLAGE@40 edges=16 letters=17 loops=1 central=B      33 stops → 0 scorable completions    1831s   6.7M/s ETA  19.8 min
+  [21/33·21] SOFORTMELDENLAGE@48 edges=16 letters=19 loops=1 central=T      15 stops → 0 valid 10-plug completions    1842s   7.0M/s ETA  17.5 min
+  [22/33·22] SOFORTMELDENLAGE@52 edges=16 letters=19 loops=1 central=G     184 stops → 0 valid 10-plug completions    1856s   7.3M/s ETA  15.5 min
+  [23/33·23] SOFORTMELDENLAGE@54 edges=16 letters=20 loops=1 central=G    7037 stops → 0 scorable completions    1877s   7.5M/s ETA  13.6 min
+  [24/33·24] SOFORTMELDENLAGE@6 edges=16 letters=19 loops=0 central=E  953189 stops → 1 physical, best IC 0.047 tail -5.249    1900s   7.8M/s ETA  11.9 min
+  [25/33·25] SOFORTMELDENLAGE@7 edges=16 letters=20 loops=0 central=E      31 stops → 0 scorable completions    1915s   8.0M/s ETA  10.2 min
+  [26/33·26] SOFORTMELDENLAGE@10 edges=16 letters=20 loops=0 central=E    1500 stops → 0 scorable completions    1928s   8.3M/s ETA   8.7 min
+  [27/33·27] SOFORTMELDENLAGE@13 edges=16 letters=20 loops=0 central=E      81 stops → 0 scorable completions    1949s   8.5M/s ETA   7.2 min
+  [28/33·28] SOFORTMELDENLAGE@16 edges=16 letters=19 loops=0 central=R      33 stops → 0 scorable completions    1968s   8.7M/s ETA   5.9 min
+  [29/33·29] SOFORTMELDENLAGE@31 edges=16 letters=18 loops=0 central=L       3 stops → 0 scorable completions    1987s   9.0M/s ETA   4.6 min
+  [30/33·30] SOFORTMELDENLAGE@33 edges=16 letters=18 loops=0 central=L      13 stops → 0 scorable completions    2001s   9.2M/s ETA   3.3 min
+  [31/33·31] SOFORTMELDENLAGE@44 edges=16 letters=17 loops=0 central=B       2 stops → 0 scorable completions    2021s   9.4M/s ETA   2.2 min
+  [32/33·32] SOFORTMELDENLAGE@47 edges=16 letters=18 loops=0 central=T    1112 stops → 0 scorable completions    2034s   9.7M/s ETA   1.1 min
+  [33/33·33] SOFORTMELDENLAGE@49 edges=16 letters=19 loops=0 central=E   13199 stops → 0 scorable completions    2052s   9.9M/s ETA   0.0 min
+
+total raw stops: 73001346 over 20267799552 settings (9.9M/s mean)
+survived the 10-plug sieve: 2
+best physical candidate: IC 0.043 tail -4.568 (IC floor 0.055 / threshold -3.600) — below the bar, so no break claimed
+  SOFORTMELDENLAGE@4 edges=16 letters=17 loops=1 central=E
+  UKW B Greek beta WO VII-VI-I pos YIRI
+  LVLOSOFORTMELDENLAGEJIWYALAHKPVGARMMEOSESNDKGMMODPZGEOIDIQDXYJTEDRMBCNXA
+quarantine: 0 soft-band near-misses (solo pass complete)

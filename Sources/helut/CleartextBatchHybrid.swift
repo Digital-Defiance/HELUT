@@ -9,8 +9,8 @@ import HELUTCore
 // Parallel lanes: B = 26³ = 17_576. On-device fitness ≈ HostM4Bombe.attackScore
 // (mean bigram − IC penalty + multi-letter crib bonuses).
 //
-// NOT HELUT mock-PBS. A ~25s Yosys→MPSGraph recompile is the wrong lever for
-// cracking: mock PBS is not boolean-faithful. Pack scoring here instead.
+// NOT the HELUT mock-PBS graph for fitness. Scoring LUTs live in this cleartext
+// Metal kernel (compile once per process); shell genes only reload 26-byte tables.
 
 let cleartextBatchLaneCount = 26 * 26 * 26 // 17_576
 

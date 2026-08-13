@@ -1156,6 +1156,50 @@ func enigma256HillClimbJoint(
     return (best, ms)
 }
 
+// MARK: - Scramble bijection sweep (`--enigma256-bijection`)
+
+func runEnigma256BijectionSweep() {
+    _ = Enigma256Generation.bootstrapFromFixture()
+    let states = intFlag("--enigma256-bijection-states") ?? 1_000_000
+    let streamBytes = intFlag("--enigma256-bijection-stream", allowZero: true) ?? 64
+    let seedRaw = intFlag("--enigma256-bijection-seed") ?? 0xE256_B13E
+    let seed = UInt64(bitPattern: Int64(seedRaw))
+    let ikm = Data((stringFlag("--enigma256-ikm") ?? "enigma256-bijection-gate-ikm-v1!!!!").utf8)
+    let day = Enigma256KDF.deriveDayKey(ikm: ikm, salt: Data("bijection-gate".utf8))
+
+    print("Enigma 256 bijection sweep (gen \(Enigma256Generation.current.id))")
+    print("  states: \(states)  stream_bytes/state: \(streamBytes)  seed: \(String(format: "0x%016llx", seed))")
+    fflush(stdout)
+    let report = Enigma256Bijection.sweep(
+        day: day,
+        states: states,
+        streamBytes: streamBytes,
+        seed: seed
+    ) { n in
+        print("  … \(n) states")
+        fflush(stdout)
+    }
+
+    let rate = report.elapsedSeconds > 0
+        ? Double(report.statesChecked) / report.elapsedSeconds
+        : 0
+    if let fail = report.failure, let st = report.failedState {
+        fputs("""
+        FAIL after \(report.statesChecked) states (\(String(format: "%.2f", report.elapsedSeconds)) s): \(fail)
+          rotors: \(st.rotorIndices.0),\(st.rotorIndices.1),\(st.rotorIndices.2),\(st.rotorIndices.3)
+          positions: \(String(format: "%02x %02x %02x %02x", st.positions.0, st.positions.1, st.positions.2, st.positions.3))
+
+        """, stderr)
+        exit(2)
+    }
+    print(
+        "  PASS: \(report.statesChecked) states — scramble bijection + reciprocity"
+            + (streamBytes > 0 ? " + \(streamBytes) B stream round-trip" : "")
+            + " in \(String(format: "%.2f", report.elapsedSeconds)) s"
+            + " (\(String(format: "%.0f", rate)) states/s)"
+    )
+}
+
 func runEnigma256StructuredKPA() {
     _ = Enigma256Generation.bootstrapFromFixture()
     let rounds = intFlag("--enigma256-kpa-rounds") ?? 16_384

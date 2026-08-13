@@ -3,26 +3,32 @@ import { Link } from 'react-router-dom'
 const apps = [
   {
     idx: 'App 01',
-    title: 'The Virtual Brain: Encrypted RISC-V',
-    body: 'My capstone existence proof. I loaded a synthesized PicoRV32 processor (~4.8k LUTs / ~1.5k DFFs) and stepped the core under mock encryption. Steady-state ticks in the harness ran at ~90 ms. It proved that CPU-scale netlists fit my clock loop without crashing.',
+    title: 'PicoRV32 · cleartext scale',
+    body: 'Synthesized PicoRV32 (~4.8k LUTs / ~1.5k DFFs) stepped under the cleartext / mock-torus clock loop to prove CPU-scale netlists fit the host DFF contract. Steady ticks in the harness are on the order of ~90–173&nbsp;ms depending on degree and build. This remains a Path&nbsp;A existence proof—not an encrypted CPU claim.',
     meta: 'picorv32.v · picorv32_netlist.json · PRD_App1_RISCV.md',
   },
   {
     idx: 'App 02',
-    title: 'The Bandwidth Test: Batched Search',
-    body: 'A 3-character pattern matcher evaluated across thousands of data streams in a single tensor pass. This stresses unified-memory bandwidth, proving my system can seamlessly broadcast batched placeholders against static negacyclic LUT matrices and reduce them back.',
-    meta: 'regex_matcher.v · regex_netlist.json · PRD_App2.md',
+    title: 'Batched regex · bandwidth + encrypted SING',
+    body: 'A small pattern-matcher netlist stresses batch broadcast against LUT tensors in the clear. The same JSON now also runs under --bench-encrypted (CPU SING) so ciphertext ticks must match the clear simulator on sampled stimuli.',
+    meta: 'regex_matcher.v · regex_netlist.json · --bench-encrypted --sing',
   },
   {
     idx: 'App 03',
-    title: 'The Logic Test: Decision Tree Classify',
-    body: 'Computers struggle with complex branching choices without relying on floating-point math. I built an exact non-linear classify circuit over a batch of records (two 4-bit features, one-bit high-risk output) to prove HELUT can handle strict decision branching gracefully.',
-    meta: 'decision_tree.v · tree_netlist.json · PRD_App3.md',
+    title: 'Decision tree · exact classify + encrypted SING',
+    body: 'Non-linear classify over batched records (two 4-bit features, one-bit high-risk out). Cleartext path proves branchless exactness; encrypted path is part of the multi-netlist SING suite.',
+    meta: 'decision_tree.v · tree_netlist.json · --bench-encrypted --sing',
   },
   {
     idx: 'App 04',
-    title: 'The Generative Loop: TensorLUT Enigma',
-    body: 'Melt a 925-LUT / 49-DFF Enigma M4 netlist into continuous INIT tensors, stream-evaluate under crypto fitness, squeeze toward binary with λ, and emit gate-level LUT6 Verilog. Baseline locks perfect stream fitness before any wipe; cold-start from 0.5 is the live melt.',
+    title: 'full_adder · encrypted equivalence harness',
+    body: 'Three-LUT full adder is the fast encrypted regression: public-MS and secret refresh, boolean and crypto-shaped gadgets, CPU and Metal backends. Use --sing / Scripts/helut_encrypted_sing.sh. Metal microbench (--bench-encrypted-micro) isolates one blind-rotate at chosen N.',
+    meta: 'netlist.json · HelutBench · logs/helut-encrypted-*.log',
+  },
+  {
+    idx: 'App 05',
+    title: 'TensorLUT Enigma · generative INIT',
+    body: 'Melt a 925-LUT / 49-DFF Enigma M4 netlist into continuous INIT tensors, score crypto fitness, squeeze with λ, emit LUT6 Verilog. Baseline locks F_crypto = 0 before any wipe; live arm freezes silicon and evolves a reciprocal stecker involution.',
     meta: 'enigma_m4_tensorlut_baseline.v · tensorlut.md · adversarial-synthesis.md',
   },
 ]
@@ -34,13 +40,12 @@ export function AppsPage() {
         <div className="page-plane" aria-hidden="true" />
         <div className="shell">
           <div className="section-head">
-            <div className="kicker">The Proving Grounds</div>
-            <h2>Circuits before—and inside—the Enigma hunt</h2>
+            <div className="kicker">Applications</div>
+            <h2>Cleartext scale, encrypted equivalence, generative INIT</h2>
             <p>
-              The first three apps proved HELUT is a general netlist runtime, not an Enigma toy. They remain the scaffolding for true Torus Fully Homomorphic Encryption (TFHE). App 04 closes the other loop: a continuous–discrete adversarial compiler that evolves LUT INIT tables and writes physical Verilog.
-            </p>
-            <p style={{ marginTop: '1rem' }}>
-              Before I flip the switch to introduce the heavy cryptographic noise of real Programmable Bootstrapping (PBS), I had to prove my datapath could handle CPU-scale logic under &quot;mock&quot; encryption—and that the same silicon can re-synthesize gate logic from continuous ambiguity. Each circuit pushes a different limit: sequential scale, batch bandwidth, exact non-linear classify, and generative INIT discovery.
+              Early apps proved HELUT is a general netlist runtime, not an Enigma toy. Mock-torus
+              shapes still carry CPU-scale cleartext work. Graduated FHE now owns the small-netlist
+              equivalence benches. TensorLUT is the separate generative loop.
             </p>
           </div>
         </div>
@@ -64,35 +69,32 @@ export function AppsPage() {
       <section className="band">
         <div className="shell split">
           <div className="section-head" style={{ marginBottom: 0 }}>
-            <div className="kicker">What the GPU Points At</div>
-            <h2>Three attack surfaces, one Apple Silicon</h2>
+            <div className="kicker">Campaign surfaces</div>
+            <h2>Three questions on the same silicon</h2>
             <p>
-              The early apps proved the compiler. The Enigma campaign uses a boolean-faithful Metal cleartext path—tens of millions of settings per second—not mock-PBS fitness. TensorLUT is the third surface: evolve the netlist itself.
+              The Enigma hunt uses cleartext Metal batch—not encrypted tick rate. TensorLUT is a
+              third surface aimed at genotypes, not P1030680 plaintext invention.
             </p>
           </div>
           <ul className="stack-list">
             <li>
               <span className="mono">WELCHMAN</span>
               <span>
-                <strong>Turing’s question:</strong> Given a crib, which keys are physically impossible? Closed electrical loops kill drums. This is what Bletchley could build in 1940 with relays and a known plaintext wedge.
+                <strong>Which keys are impossible?</strong> Crib menus, closed loops, dead drums.
               </span>
             </li>
             <li>
               <span className="mono">STOCHASTIC</span>
               <span>
-                <strong>The dual question:</strong> Given a hypothesized plaintext template, which keys decrypt closer? A genetic loop evolves stecker/shell while the GPU scores letter-match across all \(26^4\) message keys per candidate. 1945 could not afford that—no massively parallel cleartext scoring, no gradient over “better.” We can. See <code>stochastic-bombe.md</code>.
+                <strong>Which keys decrypt closer?</strong> Template + GPU letter-match. See{' '}
+                <code>stochastic-bombe.md</code>.
               </span>
             </li>
             <li>
               <span className="mono">TENSORLUT</span>
               <span>
-                <strong>The generative question:</strong> Given a ciphertext stream and a fitness, which LUT INIT tables decrypt it—and can they cool into real <code>LUT6</code> gates? Continuous weights, λ binary squeeze, reverse Verilog emit. See <code>adversarial-synthesis.md</code>.
-              </span>
-            </li>
-            <li>
-              <span className="mono">NOT \(26^{72}\)</span>
-              <span>
-                <strong>The constraint:</strong> We do not invent random 72-letter plaintext. Welchman and stochastic search keys against small Thetis-shaped hypotheses. TensorLUT rediscovers gate tables under a short known crib—it does not invent P1030680’s missing plaintext.
+                <strong>Which INIT tables hold?</strong> Continuous weights, λ squeeze, reverse
+                Verilog. See <code>adversarial-synthesis.md</code>.
               </span>
             </li>
           </ul>
@@ -101,12 +103,20 @@ export function AppsPage() {
 
       <section className="band-ink">
         <div className="shell">
-          <div className="note" style={{ marginTop: 0, background: 'rgba(196, 120, 58, 0.14)', color: 'rgba(232, 236, 239, 0.88)' }}>
-            <strong>The Endgame:</strong> Re-synthesize with Yosys when you change Verilog; the CLI accepts arbitrary JSON via <code>--compile-only</code>. Emit TensorLUT baselines with <code>--emit-tensorlut-verilog</code>; melt with <code>--tensorlut-cold-start</code>. While the day-to-day <code>helut</code> UX is currently Enigma-first, <strong>HELUTCore</strong> remains the shared foundational compiler. When I swap the mock torus polynomials for real TFHE ciphertexts, these exact same applications will run fully homomorphically. HELUT is Enigma-oriented as a research convenience at the moment since I am the only user. That will change once my research is concluded.
+          <div
+            className="note"
+            style={{ marginTop: 0, background: 'rgba(196, 120, 58, 0.14)', color: 'rgba(232, 236, 239, 0.88)' }}
+          >
+            <strong>Reproduce:</strong> arbitrary netlist JSON via <code>--compile-only</code> /
+            <code>--bench</code>. Encrypted equivalence:{' '}
+            <code>--bench-encrypted --sing</code> (or <code>Scripts/helut_encrypted_sing.sh</code>).
+            TensorLUT emit: <code>--emit-tensorlut-verilog</code>; melt:{' '}
+            <code>--tensorlut-cold-start</code>. Parameter and hardness notes:{' '}
+            <code>directives/parameter-cookbook.md</code>.
           </div>
 
           <p style={{ marginTop: '1.75rem' }}>
-            <Link to="/enigma">Then the bombe entered the chat →</Link>
+            <Link to="/enigma">The hunt for U-534 →</Link>
           </p>
         </div>
       </section>

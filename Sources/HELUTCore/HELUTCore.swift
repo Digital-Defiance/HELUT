@@ -15,6 +15,10 @@ package let clockCycles = 5
 package struct LCG32 {
     package var state: UInt32
 
+    package init(state: UInt32) {
+        self.state = state == 0 ? 1 : state
+    }
+
     package mutating func next() -> UInt32 {
         // Numerical Recipes LCG; wraps naturally in UInt32.
         state = state &* 1_664_525 &+ 1_013_904_223
@@ -28,12 +32,92 @@ package func randomPolynomial(count: Int, seed: UInt32) -> [UInt32] {
 }
 
 /// Deterministic test polynomial keyed by a Yosys LUT truth-table string.
+/// Used only by the Phase-1 dense-matvec stress path — not by boolean-safe mock PBS.
 package func polynomialFromLUTTruthTable(_ lut: String, degree: Int) -> [UInt32] {
     var seed: UInt32 = 0x4C55_5401 // "LUT\x01"
     for byte in lut.utf8 {
         seed = seed &* 167_776_19 &+ UInt32(byte)
     }
     return randomPolynomial(count: degree, seed: seed | 1)
+}
+
+// MARK: - Boolean-safe mock torus encoding
+
+/// Trivial (noise-free) boolean encoding used by mock PBS and DFF muxes:
+/// bit `b ∈ {0,1}` ↔ length-`N` vector filled with `b`.
+package enum MockTorusEncoding {
+    /// Encode a clear bit as a mock torus polynomial (constant fill).
+    package static func encodeBit(_ bit: UInt32, degree: Int = polynomialDegree) -> [UInt32] {
+        precondition(bit == 0 || bit == 1, "Mock torus bits must be 0 or 1")
+        return [UInt32](repeating: bit, count: degree)
+    }
+
+    /// Decode a mock torus polynomial: require constant fill, return the bit.
+    package static func decodeBit(_ polynomial: [UInt32]) -> UInt32 {
+        precondition(!polynomial.isEmpty)
+        let bit = polynomial[0]
+        precondition(bit == 0 || bit == 1, "Decoded mock bit must be 0 or 1, got \(bit)")
+        for coeff in polynomial where coeff != bit {
+            preconditionFailure("Mock torus polynomial is not a constant-fill encoding")
+        }
+        return bit
+    }
+
+    /// Decode lane `lane` from a packed `[B, N]` buffer (coeff 0 of that lane).
+    package static func decodeBit(
+        buffer: UnsafePointer<UInt32>,
+        lane: Int,
+        degree: Int,
+        strict: Bool = true
+    ) -> UInt32 {
+        let base = lane * degree
+        let bit = buffer[base]
+        if strict {
+            precondition(bit == 0 || bit == 1, "Decoded mock bit must be 0 or 1, got \(bit)")
+            for i in 1..<degree where buffer[base + i] != bit {
+                preconditionFailure("Lane \(lane) mock torus is not constant-fill")
+            }
+        }
+        return bit == 0 ? 0 : 1
+    }
+}
+
+/// Parse a Yosys `$lut` truth-table string into LSB-address entries in `{0,1}`.
+///
+/// Yosys stores the MSB (A = all-1s) on the left; `entries[mask]` is the output for
+/// input bits packed as `mask = Σ A[i]·2^i` (same convention as `CleartextNetlistSim`).
+package func parseYosysLUTTruthTable(_ lutTruth: String) -> [UInt32] {
+    let count = lutTruth.count
+    precondition(count > 0 && count.nonzeroBitCount == 1, "LUT length must be a power of two")
+    var entries = [UInt32](repeating: 0, count: count)
+    for mask in 0..<count {
+        let charIndex = count - 1 - mask
+        let ch = lutTruth[lutTruth.index(lutTruth.startIndex, offsetBy: charIndex)]
+        entries[mask] = ch == "1" ? 1 : 0
+    }
+    return entries
+}
+
+/// CPU multilinear LUT eval over `{0,1}^k` (oracle for boolean-safe mock PBS).
+package func evaluateMultilinearLUT(truthTable: [UInt32], inputs: [UInt32]) -> UInt32 {
+    let width = inputs.count
+    precondition(truthTable.count == 1 << width)
+    for bit in inputs {
+        precondition(bit == 0 || bit == 1)
+    }
+    var acc: UInt32 = 0
+    for mask in 0..<truthTable.count {
+        let t = truthTable[mask]
+        if t == 0 { continue }
+        var term: UInt32 = t
+        for i in 0..<width {
+            let want = (mask >> i) & 1
+            let bit = inputs[i]
+            term &*= (want == 1) ? bit : (1 &- bit)
+        }
+        acc &+= term
+    }
+    return acc
 }
 
 // MARK: - Host: Negacyclic Toeplitz expansion (Phase 1)
@@ -199,6 +283,7 @@ package final class InputNode: CircuitNode {
 }
 
 /// Homomorphic XOR via free torus addition (`A + B` with UInt32 wraparound).
+/// Exact for TFHE-style ±μ encodings; under mock `{0,1}` fill use a LUT (`0110`) instead.
 package final class AddNode: CircuitNode {
     package let name: String
 
@@ -212,17 +297,14 @@ package final class AddNode: CircuitNode {
     }
 }
 
-/// Programmable bootstrapping / LUT evaluation via dense negacyclic matvec.
+/// Phase-1 dense negacyclic matvec (Hadamard + `reductionSum`).
 ///
-/// `MPSGraph.matrixMultiplication` rejects `UInt32`, so this reuses the Phase 1
-/// workaround with a batch axis: reshape `[B, N]` → `[B, 1, N]`, broadcast-multiply
-/// against the static `[N, N]` matrix (→ `[B, N, N]`), then `reductionSum` on axis 2
-/// and reshape back to `[B, N]` for cascading.
-package final class LUTNode: CircuitNode {
+/// Kept as the modular-arithmetic kernel proof. Boolean netlist LUTs use `LUTNode`
+/// (multilinear mock PBS), not this node — random Toeplitz feeds are not boolean-safe.
+package final class NegacyclicMatvecNode: CircuitNode {
     package let name: String
     package let degree: Int
     package let batch: Int
-    /// Host-side Negacyclic Toeplitz matrix (`N×N` row-major `UInt32`).
     package let matrix: [UInt32]
     package private(set) var matrixPlaceholder: MPSGraphTensor?
 
@@ -240,18 +322,7 @@ package final class LUTNode: CircuitNode {
     }
 
     package func compile(graph: MPSGraph, inputs: [MPSGraphTensor]) -> MPSGraphTensor {
-        precondition(!inputs.isEmpty, "LUTNode '\(name)' requires at least one vector input")
-
-        // Pack multi-input LUT wires via free torus addition, then PBS.
-        var packed = inputs[0]
-        for index in 1..<inputs.count {
-            packed = graph.addition(
-                packed,
-                inputs[index],
-                name: "\(name)_pack_\(index)"
-            )
-        }
-
+        precondition(inputs.count == 1, "NegacyclicMatvecNode '\(name)' takes one vector")
         let matrixShape: [NSNumber] = [NSNumber(value: degree), NSNumber(value: degree)]
         let matrixTensor = graph.placeholder(
             shape: matrixShape,
@@ -260,27 +331,261 @@ package final class LUTNode: CircuitNode {
         )
         matrixPlaceholder = matrixTensor
 
-        // [B, N] → [B, 1, N] so Hadamard against [N, N] broadcasts to [B, N, N].
         let batchVecShape: [NSNumber] = [
             NSNumber(value: batch),
             NSNumber(value: 1),
             NSNumber(value: degree)
         ]
-        let packed3D = graph.reshape(packed, shape: batchVecShape, name: "\(name)_batch_vec")
-
-        let products = graph.multiplication(
-            matrixTensor,
-            packed3D,
-            name: "\(name)_Hadamard"
-        )
-        let reduced = graph.reductionSum(
-            with: products,
-            axis: 2,
-            name: "\(name)_reduce"
-        )
-        // Collapse back to [B, N] for the next LUT / output port.
+        let packed3D = graph.reshape(inputs[0], shape: batchVecShape, name: "\(name)_batch_vec")
+        let products = graph.multiplication(matrixTensor, packed3D, name: "\(name)_Hadamard")
+        let reduced = graph.reductionSum(with: products, axis: 2, name: "\(name)_reduce")
         let outShape: [NSNumber] = [NSNumber(value: batch), NSNumber(value: degree)]
         return graph.reshape(reduced, shape: outShape, name: name)
+    }
+}
+
+/// Boolean-safe `$lut` body (`multilinear` / trivial PBS) or encrypted Metal BR.
+///
+/// Exact on trivial encodings when constants / wires share `encodingKind`.
+/// Encrypted path: `evaluateEncrypted` → fused Metal BR (`EncryptedLUTMetalContext`).
+/// See `TFHESeam.swift` / `ProgrammableBootstrap.swift` / `EncryptedLUTMetalLowering.swift`.
+package final class LUTNode: CircuitNode {
+    package let name: String
+    package let degree: Int
+    package let batch: Int
+    /// LSB-address truth table; entries in `{0,1}`, length `2^width`.
+    package let truthTable: [UInt32]
+    package let backend: LUTEvaluationBackend
+    package let encodingKind: TrivialBitEncodingKind
+
+    package init(
+        name: String,
+        truthTable: [UInt32],
+        degree: Int = polynomialDegree,
+        batch: Int = batchSize,
+        backend: LUTEvaluationBackend = .multilinear,
+        encodingKind: TrivialBitEncodingKind = .constantFill
+    ) {
+        precondition(!truthTable.isEmpty && truthTable.count.nonzeroBitCount == 1)
+        for entry in truthTable {
+            precondition(entry == 0 || entry == 1)
+        }
+        precondition(
+            backend == .multilinear
+                || backend.usesPBSMetalSubgraph
+                || backend == .encryptedBlindRotate,
+            "LUTNode backend must be multilinear, pbs, pbs-ggsw, or encrypted"
+        )
+        if backend.usesPBSMetalSubgraph {
+            let polyN = encodingKind.isPackedGLWE ? degree / 2 : degree
+            precondition(
+                polyN >= truthTable.count,
+                "PBS LUT needs polynomial degree >= table size (\(truthTable.count))"
+            )
+        }
+        if backend == .encryptedBlindRotate {
+            precondition(
+                degree >= truthTable.count,
+                "encrypted LUT needs poly degree >= table size (\(truthTable.count))"
+            )
+        }
+        self.name = name
+        self.degree = degree
+        self.batch = batch
+        self.truthTable = truthTable
+        self.backend = backend
+        self.encodingKind = encodingKind
+    }
+
+    package func compile(graph: MPSGraph, inputs: [MPSGraphTensor]) -> MPSGraphTensor {
+        let width = inputs.count
+        precondition(
+            truthTable.count == 1 << width,
+            "LUTNode '\(name)': table length \(truthTable.count) != 2^\(width)"
+        )
+        if encodingKind.isPackedGLWE {
+            return compilePacked(graph: graph, inputs: inputs)
+        }
+        switch backend {
+        case .programmableBootstrap, .programmableBootstrapGGSW:
+            return ProgrammableBootstrap.compileLUT(
+                name: name,
+                truthTable: truthTable,
+                graph: graph,
+                inputs: inputs,
+                degree: degree,
+                batch: batch,
+                encodingKind: encodingKind == .glweTrivial ? .phase : encodingKind
+            )
+        case .multilinear:
+            return compileMultilinear(graph: graph, inputs: inputs)
+        case .denseNegacyclicMatvec:
+            preconditionFailure("denseNegacyclicMatvec is not a LUTNode backend")
+        case .encryptedBlindRotate:
+            preconditionFailure(
+                "encrypted LUTNode uses evaluateEncrypted(_:context:) Metal lowering, not compile()"
+            )
+        }
+    }
+
+    /// Packed GLWE wires: evaluate on body half, re-pack as zero-mask ‖ body.
+    private func compilePacked(graph: MPSGraph, inputs: [MPSGraphTensor]) -> MPSGraphTensor {
+        precondition(degree % 2 == 0)
+        let polyN = degree / 2
+        var bodies: [MPSGraphTensor] = []
+        bodies.reserveCapacity(inputs.count)
+        for (index, input) in inputs.enumerated() {
+            bodies.append(
+                graph.sliceTensor(
+                    input,
+                    dimension: 1,
+                    start: polyN,
+                    length: polyN,
+                    name: "\(name)_body_\(index)"
+                )
+            )
+        }
+        let bodyOut: MPSGraphTensor
+        switch backend {
+        case .programmableBootstrap, .programmableBootstrapGGSW:
+            bodyOut = ProgrammableBootstrap.compileLUT(
+                name: name,
+                truthTable: truthTable,
+                graph: graph,
+                inputs: bodies,
+                degree: polyN,
+                batch: batch,
+                encodingKind: .phase
+            )
+        case .multilinear:
+            bodyOut = compileMultilinearOnBodies(graph: graph, bodies: bodies, polyN: polyN)
+        case .denseNegacyclicMatvec:
+            preconditionFailure("denseNegacyclicMatvec is not a LUTNode backend")
+        case .encryptedBlindRotate:
+            preconditionFailure(
+                "encrypted LUTNode uses evaluateEncrypted(_:context:) Metal lowering, not compilePacked"
+            )
+        }
+        let zeroMask = encodedZeroMask(graph: graph, polyN: polyN)
+        return graph.concatTensors([zeroMask, bodyOut], dimension: 1, name: name)
+    }
+
+    private func encodedZeroMask(graph: MPSGraph, polyN: Int) -> MPSGraphTensor {
+        let shape: [NSNumber] = [NSNumber(value: batch), NSNumber(value: polyN)]
+        let values = [UInt32](repeating: 0, count: batch * polyN)
+        let data = values.withUnsafeBufferPointer { Data(buffer: $0) }
+        return graph.constant(data, shape: shape, dataType: .uInt32)
+    }
+
+    private func compileMultilinearOnBodies(
+        graph: MPSGraph,
+        bodies: [MPSGraphTensor],
+        polyN: Int
+    ) -> MPSGraphTensor {
+        let width = bodies.count
+        let oneLane = TrivialPhaseEncoding(degree: polyN).encodeBit(1)
+        var oneHost: [UInt32] = []
+        oneHost.reserveCapacity(batch * polyN)
+        for _ in 0..<batch { oneHost.append(contentsOf: oneLane) }
+        let oneShape: [NSNumber] = [NSNumber(value: batch), NSNumber(value: polyN)]
+        let oneData = oneHost.withUnsafeBufferPointer { Data(buffer: $0) }
+        let one = graph.constant(oneData, shape: oneShape, dataType: .uInt32)
+        if width == 0 {
+            let bit = truthTable[0]
+            let lane = TrivialPhaseEncoding(degree: polyN).encodeBit(bit)
+            var host: [UInt32] = []
+            for _ in 0..<batch { host.append(contentsOf: lane) }
+            let data = host.withUnsafeBufferPointer { Data(buffer: $0) }
+            return graph.constant(data, shape: oneShape, dataType: .uInt32)
+        }
+        var complements: [MPSGraphTensor] = []
+        for (index, input) in bodies.enumerated() {
+            complements.append(graph.subtraction(one, input, name: "\(name)_pnot_\(index)"))
+        }
+        var accumulator: MPSGraphTensor?
+        for mask in 0..<truthTable.count {
+            guard truthTable[mask] == 1 else { continue }
+            var term: MPSGraphTensor?
+            for bitIndex in 0..<width {
+                let factor = ((mask >> bitIndex) & 1) == 1 ? bodies[bitIndex] : complements[bitIndex]
+                if let existing = term {
+                    term = graph.multiplication(existing, factor, name: "\(name)_pm\(mask)_x\(bitIndex)")
+                } else {
+                    term = factor
+                }
+            }
+            guard let term else { continue }
+            if let existing = accumulator {
+                accumulator = graph.addition(existing, term, name: "\(name)_pacc_\(mask)")
+            } else {
+                accumulator = term
+            }
+        }
+        if let accumulator { return accumulator }
+        let lane = TrivialPhaseEncoding(degree: polyN).encodeBit(0)
+        var host: [UInt32] = []
+        for _ in 0..<batch { host.append(contentsOf: lane) }
+        let data = host.withUnsafeBufferPointer { Data(buffer: $0) }
+        return graph.constant(data, shape: oneShape, dataType: .uInt32)
+    }
+
+    private func compileMultilinear(graph: MPSGraph, inputs: [MPSGraphTensor]) -> MPSGraphTensor {
+        let width = inputs.count
+        let one = encodedConstant(graph: graph, bit: 1)
+        if width == 0 {
+            return encodedConstant(graph: graph, bit: truthTable[0])
+        }
+
+        var complements: [MPSGraphTensor] = []
+        complements.reserveCapacity(width)
+        for (index, input) in inputs.enumerated() {
+            complements.append(
+                graph.subtraction(one, input, name: "\(name)_not_\(index)")
+            )
+        }
+
+        var accumulator: MPSGraphTensor?
+        for mask in 0..<truthTable.count {
+            guard truthTable[mask] == 1 else { continue }
+            var term: MPSGraphTensor?
+            for bitIndex in 0..<width {
+                let factor = ((mask >> bitIndex) & 1) == 1
+                    ? inputs[bitIndex]
+                    : complements[bitIndex]
+                if let existing = term {
+                    term = graph.multiplication(
+                        existing,
+                        factor,
+                        name: "\(name)_m\(mask)_x\(bitIndex)"
+                    )
+                } else {
+                    term = factor
+                }
+            }
+            guard let term else { continue }
+            if let existing = accumulator {
+                accumulator = graph.addition(
+                    existing,
+                    term,
+                    name: "\(name)_acc_\(mask)"
+                )
+            } else {
+                accumulator = term
+            }
+        }
+        return accumulator ?? encodedConstant(graph: graph, bit: 0)
+    }
+
+    private func encodedConstant(graph: MPSGraph, bit: UInt32) -> MPSGraphTensor {
+        let shape: [NSNumber] = [NSNumber(value: batch), NSNumber(value: degree)]
+        let lane = encodingKind.makeEncoding(degree: degree).encodeBit(bit)
+        var values: [UInt32] = []
+        values.reserveCapacity(batch * degree)
+        for _ in 0..<batch {
+            values.append(contentsOf: lane)
+        }
+        let data = values.withUnsafeBufferPointer { Data(buffer: $0) }
+        return graph.constant(data, shape: shape, dataType: .uInt32)
     }
 }
 
@@ -383,8 +688,13 @@ package func parseYosysDFFPolarity(_ type: String) -> YosysDFFPolarity {
 
 /// Compiles a Yosys module into one `MPSGraph`, routing wires by Yosys net ID.
 package final class YosysGraphCompiler {
+    /// Metal wire length (`N` or `2N` when `glwe-packed`).
     package let degree: Int
+    /// Polynomial degree `N` for PBS / GLWE math.
+    package let polyDegree: Int
     package let batch: Int
+    package let encodingKind: TrivialBitEncodingKind
+    package let lutBackend: LUTEvaluationBackend
     package let graph = MPSGraph()
 
     /// Yosys wire ID → live tensor (inputs, LUT outputs, DFF Q, constants).
@@ -394,21 +704,39 @@ package final class YosysGraphCompiler {
     package private(set) var dffNodes: [CompiledDFF] = []
     package private(set) var outputTensors: [CompiledOutput] = []
 
-    /// Reused across `runClockCycles` so repeated calls do not re-allocate N×N LUT matrices.
+    /// Reused across `runClockCycles` so repeated calls do not re-allocate primary feeds.
     private var cachedPrimaryFeeds: [MPSGraphTensor: MPSGraphTensorData]?
-    private var cachedMatrixFeeds: [MPSGraphTensor: MPSGraphTensorData]?
     private var cachedOutputScratch: [MPSGraphTensorData]?
     private var cachedStateSetA: [MPSGraphTensorData]?
     private var cachedStateSetB: [MPSGraphTensorData]?
 
-    /// Host wall time spent inside `expandNegacyclicToeplitz` during the last `compile`.
+    /// Host wall time spent lowering `$lut` cells (boolean-safe mock PBS) during `compile`.
+    /// Name retained for CLI compatibility; dense Toeplitz expand is no longer on this path.
     package private(set) var lastToeplitzExpandSeconds: Double = 0
     /// Host wall time for the remainder of `compile` (placeholders, wiring, DFF muxes).
     package private(set) var lastGraphBuildSeconds: Double = 0
 
-    package init(degree: Int = polynomialDegree, batch: Int = batchSize) {
-        self.degree = degree
+    package var bitEncoding: any TorusBitEncoding {
+        encodingKind.makeEncoding(degree: polyDegree)
+    }
+
+    package init(
+        degree: Int = polynomialDegree,
+        batch: Int = batchSize,
+        encodingKind: TrivialBitEncodingKind = .constantFill,
+        lutBackend: LUTEvaluationBackend = .multilinear
+    ) {
+        // `degree` argument is the polynomial degree N from CLI / callers.
+        self.polyDegree = degree
+        self.degree = encodingKind.wireWidth(polynomialDegree: degree)
         self.batch = batch
+        self.encodingKind = encodingKind
+        self.lutBackend = lutBackend
+        HELUTDatapathConfig(
+            encodingDegree: self.polyDegree,
+            encodingKind: encodingKind,
+            lutBackend: lutBackend
+        ).assertRunnable()
     }
 
     package func compile(moduleName: String, module: YosysModule) {
@@ -417,7 +745,9 @@ package final class YosysGraphCompiler {
         compileInputPorts(module.ports)
         // Register Q placeholders before LUTs so sequential feedback nets resolve.
         compileDFFStateInputs(module.cells)
+        let lutStarted = CFAbsoluteTimeGetCurrent()
         compileLUTCells(module.cells)
+        lastToeplitzExpandSeconds = CFAbsoluteTimeGetCurrent() - lutStarted
         compileDFFStateOutputs(module.cells)
         compileOutputPorts(module.ports)
         let total = CFAbsoluteTimeGetCurrent() - compileStarted
@@ -429,7 +759,7 @@ package final class YosysGraphCompiler {
         )
         print(
             String(
-                format: "Compile breakdown: Toeplitz expand %.2f s, graph build %.2f s (total %.2f s)",
+                format: "Compile breakdown: boolean-safe LUT lower %.2f s, graph build %.2f s (total %.2f s)",
                 lastToeplitzExpandSeconds,
                 lastGraphBuildSeconds,
                 total
@@ -574,15 +904,14 @@ package final class YosysGraphCompiler {
             return false
         }
 
-        let poly = polynomialFromLUTTruthTable(lutTruth, degree: degree)
-        let expandStarted = CFAbsoluteTimeGetCurrent()
-        let matrix = expandNegacyclicToeplitz(poly)
-        lastToeplitzExpandSeconds += CFAbsoluteTimeGetCurrent() - expandStarted
+        let truthTable = parseYosysLUTTruthTable(lutTruth)
         let node = LUTNode(
             name: sanitizeName(cellName),
-            matrix: matrix,
+            truthTable: truthTable,
             degree: degree,
-            batch: batch
+            batch: batch,
+            backend: lutBackend,
+            encodingKind: encodingKind
         )
         wires[outWire] = node.compile(graph: graph, inputs: inputTensors)
         lutNodes.append(CompiledLUT(cell: cellName, node: node))
@@ -643,8 +972,14 @@ package final class YosysGraphCompiler {
     }
 
     private func constantTensor(value: UInt32) -> MPSGraphTensor {
+        let bit: UInt32 = value == 0 ? 0 : 1
         let shape: [NSNumber] = [NSNumber(value: batch), NSNumber(value: degree)]
-        let values = [UInt32](repeating: value, count: batch * degree)
+        let lane = bitEncoding.encodeBit(bit)
+        var values: [UInt32] = []
+        values.reserveCapacity(batch * degree)
+        for _ in 0..<batch {
+            values.append(contentsOf: lane)
+        }
         let data = values.withUnsafeBufferPointer { Data(buffer: $0) }
         return graph.constant(data, shape: shape, dataType: .uInt32)
     }
@@ -674,9 +1009,7 @@ package final class YosysGraphCompiler {
         }
 
         let vectorShape: [NSNumber] = [NSNumber(value: batch), NSNumber(value: degree)]
-        let matrixShape: [NSNumber] = [NSNumber(value: degree), NSNumber(value: degree)]
         let primaryFeeds = makePrimaryInputFeeds(device: device, shape: vectorShape)
-        let matrixFeeds = makeMatrixFeeds(device: device, shape: matrixShape)
         let pool = prepareClockBufferPool(device: device, shape: vectorShape)
 
         var stateFeeds = pool.stateSetA
@@ -694,7 +1027,6 @@ package final class YosysGraphCompiler {
                     commandQueue: commandQueue,
                     vectorShape: vectorShape,
                     primaryFeeds: primaryFeeds,
-                    matrixFeeds: matrixFeeds,
                     pool: pool,
                     stateFeeds: &stateFeeds,
                     writeToB: &writeToB
@@ -760,7 +1092,6 @@ package final class YosysGraphCompiler {
         commandQueue: MTLCommandQueue,
         vectorShape: [NSNumber],
         primaryFeeds: [MPSGraphTensor: MPSGraphTensorData],
-        matrixFeeds: [MPSGraphTensor: MPSGraphTensorData],
         pool: ClockBufferPool,
         stateFeeds: inout [MPSGraphTensorData],
         writeToB: inout Bool
@@ -776,7 +1107,6 @@ package final class YosysGraphCompiler {
         }
 
         var feeds = primaryFeeds
-        feeds.merge(matrixFeeds) { _, new in new }
         for (index, dff) in dffNodes.enumerated() {
             guard let placeholder = dff.stateInput.placeholder else {
                 fatalError("Missing state-input placeholder for '\(dff.cell)'")
@@ -876,11 +1206,9 @@ package final class YosysGraphCompiler {
             }
             let values: [UInt32]
             if entry.port == "en" {
-                // Mock ciphertext for plaintext 1 (enable asserted every tick).
-                values = [UInt32](repeating: 1, count: batch * degree)
+                values = encodeFeedBit(1)
             } else if entry.port == "clk" {
-                // Host loop is the clock; feed zeros so the unused placeholder is satisfied.
-                values = [UInt32](repeating: 0, count: batch * degree)
+                values = encodeFeedBit(0)
             } else {
                 values = randomPolynomial(
                     count: batch * degree,
@@ -894,23 +1222,14 @@ package final class YosysGraphCompiler {
         return feeds
     }
 
-    private func makeMatrixFeeds(
-        device: MTLDevice,
-        shape: [NSNumber]
-    ) -> [MPSGraphTensor: MPSGraphTensorData] {
-        if let cachedMatrixFeeds {
-            return cachedMatrixFeeds
+    private func encodeFeedBit(_ bit: UInt32) -> [UInt32] {
+        let lane = bitEncoding.encodeBit(bit)
+        var values: [UInt32] = []
+        values.reserveCapacity(batch * degree)
+        for _ in 0..<batch {
+            values.append(contentsOf: lane)
         }
-        var feeds: [MPSGraphTensor: MPSGraphTensorData] = [:]
-        for entry in lutNodes {
-            guard let matrixPlaceholder = entry.node.matrixPlaceholder else {
-                fatalError("Missing matrix placeholder for LUT '\(entry.cell)'")
-            }
-            let buffer = makeSharedUInt32Buffer(device: device, values: entry.node.matrix)
-            feeds[matrixPlaceholder] = MPSGraphTensorData(buffer, shape: shape, dataType: .uInt32)
-        }
-        cachedMatrixFeeds = feeds
-        return feeds
+        return values
     }
 
 }
