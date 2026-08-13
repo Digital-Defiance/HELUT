@@ -131,7 +131,8 @@ Apps/
 ### P4 — Researcher happiness
 
 - [ ] DocC for Core public API (`make docs-api`)
-- [ ] Semver tags for library (`helut-lib-0.1.0`) separate from corpus tags (`helut-corpus-C34`)
+- [x] Semver tags for library (`0.1.0` / `helut-lib-0.1.0`) separate from corpus tags (`helut-corpus-C*`)
+- [x] Homebrew formula in [`Digital-Defiance/homebrew-tap`](https://github.com/Digital-Defiance/homebrew-tap) (`Formula/helut.rb`) + HELUT `HOMEBREW.md`
 - [ ] Example out-of-tree package in MuleinLabs or `examples/hello-br/`
 - [ ] CI matrix: Core-only tests vs app tests (Metal optional jobs)
 

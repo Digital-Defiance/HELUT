@@ -6,9 +6,12 @@ The point is not “Enigma only.” Enigma is one application. The stack is a **
 
 | Layer | Role |
 |-------|------|
-| **HELUTCore** | Yosys JSON → `MPSGraph`, boolean-safe mock PBS (multilinear LUTs), DFF clocking, batch axis |
-| **`helut` CLI** | Drive netlists / apps (Enigma bombe UI is the current default front-end) |
+| **HELUTCore** / ToolKit | Swift libraries (SPM) + Metal FHE / netlist stack |
+| **CLI tools** | `helut-bench`, `helut-e256`, `helut-bombe`, `helut-compile`, umbrella `helut` |
 | **Host oracles** | Boolean-faithful Enigma/M4 for cryptanalysis and validation (campaign path) |
+
+**Homebrew (CLIs):** see [`HOMEBREW.md`](HOMEBREW.md) — `brew tap digital-defiance/homebrew-tap && brew install --HEAD helut`.  
+**Library consumers:** SPM `from: "0.1.0"` (not corpus tags). Packaging plan: [`directives/packaging-roadmap.md`](directives/packaging-roadmap.md).
 
 Values labeled “encrypted” on the **FHE path** (`--lut-backend encrypted` / `--bench-encrypted`) are LWE/GLWE samples evaluated with GGSW bootstrap keys (blind-rotate per Yosys `$lut`, `LUTNode` or whole-netlist Metal graph). HELUT ships Decision-LWE → IND-CPA binding (`TFHELWEHardnessCertificate`, ~176-bit classical estimate at N=1024 via `TFHELWECalibration`), Gaussian ε≤2⁻⁶⁴, discrete-inject proofs, and noisy-BK depth certificates. Metrics: `--bench-encrypted --sing` / `Scripts/helut_encrypted_sing.sh`. Bit estimates should be cross-checked with a lattice estimator (`Scripts/helut_lattice_estimate.py`) before production key sizes. Research-release evidence law: `directives/research-release.md`.
 Living results inventory: [`directives/claim-sheet.md`](directives/claim-sheet.md). Reproduce: [`REPRODUCE.md`](REPRODUCE.md). Trajectory beyond disclosure: [`directives/research-trajectory.md`](directives/research-trajectory.md).
