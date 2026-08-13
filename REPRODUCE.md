@@ -111,7 +111,17 @@ Why covering noisy BK works at *N*=8/128 but not as `cryptoPublicMS` at *N*=1024
 swift test -c release --filter testGGSWPublicMSCoveringCertificate
 ```
 
-Statement: [`directives/ggsw-public-ms-covering.md`](directives/ggsw-public-ms-covering.md). Exact degrees among {8…2048}: **{8, 128}** only.
+Statement: [`directives/ggsw-public-ms-covering.md`](directives/ggsw-public-ms-covering.md). Exact degrees among {8…2048}: **{8, 128}** only — for *any* power-of-two word *w* (**C29**), not just *q*=2³².
+
+## Track B ε vs inject B (C30)
+
+```bash
+for B in 1 2 4 8 16 32 64; do
+  .build/release/helut --measure-bk-noise --degree 128 --trials 8 --bk-noise $B
+done | tee logs/helut-noisy-bk-eps-sweep-n128.log
+```
+
+Expect: residual amp large even at *B*=1; printed εlog2 ≈ −24 only at *B*=64.
 
 ## Track B Metal SING with noisy BK (C28)
 

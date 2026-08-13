@@ -93,8 +93,20 @@ $\varepsilon\log_2\approx -1$ (not $-64$).
 swift test -c release --filter testGGSWPublicMSCoveringCertificate
 \end{lstlisting}
 
-Exact degrees among $\{8,\ldots,2048\}$: $\{8,128\}$ only.
+Exact degrees among $\{8,\ldots,2048\}$: $\{8,128\}$ only — for any
+power-of-two word $w$ (\cid{29}), not just $q{=}2^{32}$.
 Statement: \corpus{directives/ggsw-public-ms-covering.md}.
+
+\section{Track B $\varepsilon$ vs inject $B$ (\cid{30})}
+
+\begin{lstlisting}
+for B in 1 2 4 8 16 32 64; do
+  .build/release/helut --measure-bk-noise --degree 128 \
+    --trials 8 --bk-noise $B
+done
+\end{lstlisting}
+
+Residual amplification stays large; printed $\varepsilon\log_2\approx-24$ only at $B{=}64$.
 
 \section{Track B Metal SING with noisy BK (\cid{28})}
 

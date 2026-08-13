@@ -2,14 +2,16 @@ import Foundation
 
 // MARK: - Exact public-MS covering (Pillar I / H4 obstruction)
 //
-// Under q = 2³² and power-of-two N, rotation spacing is δ = q/(2N) = 2^{32−(1+v)}
+// Under q = 2^w and power-of-two N, rotation spacing is δ = q/(2N) = 2^{w−(1+v)}
 // with v = log₂(N). Exact public MS wants g₀ = δ, so baseLog = 1+v.
-// Exact covering decomposition (Metal EP / digit extract) wants baseLog·ℓ = 32.
-// Those constraints hold together iff (1+v) | 32.
+// Exact covering decomposition (Metal EP / digit extract) wants baseLog·ℓ = w.
+// Those constraints hold together iff (1+v) | w.
 //
-// Among practical HELUT sizes N ∈ {8,…,2048}, only N = 8 and N = 128 qualify.
-// Production N = 1024 cannot be both covering and g₀ = δ — **C26** measured the
-// residual blow-up; this module states the structural reason (**C27**).
+// When w is itself a power of two, every divisor of w is a power of two, so
+// 1+v = 2^a ⇒ N = 2^{2^a − 1}. Among practical HELUT sizes N ∈ {8,…,2048},
+// only N = 8 and N = 128 qualify — for *any* such w (**C29**). In particular
+// widening the limb (UInt64, …) does **not** unlock production N = 1024.
+// Native path uses w = 32 (**C27**); **C26** measured the residual blow-up.
 
 package enum GGSWPublicMSCoveringLemma: String, Sendable {
     /// For power-of-two N, public-MS baseLog equals 1 + log₂(N) (= log₂(2N)).
@@ -20,6 +22,9 @@ package enum GGSWPublicMSCoveringLemma: String, Sendable {
     case exactPublicMSCovering
     /// Among N∈{8,16,…,2048}, only 8 and 128 are exact.
     case practicalDegrees
+    /// For any power-of-two word *w*, baseLog must itself be a power of two ⇒ among
+    /// practical degrees only N∈{8,128}; N=1024 (baseLog=11) never exact (**C29**).
+    case powerOfTwoWordObstruction
 }
 
 package struct GGSWPublicMSCoveringProofStep: Sendable, Equatable {
@@ -46,7 +51,7 @@ package struct GGSWPublicMSCoveringCertificate: Sendable, Equatable {
     }
 }
 
-/// Structural facts about simultaneous g₀=δ and covering under q=2³².
+/// Structural facts about simultaneous g₀=δ and covering under q=2^w.
 package enum GGSWPublicMSCovering {
     /// Powers of two from 8 through 2048 (HELUT demo → extrapolated).
     package static let practicalDegrees: [Int] = [8, 16, 32, 64, 128, 256, 512, 1024, 2048]
@@ -60,21 +65,24 @@ package enum GGSWPublicMSCovering {
         return 1 + n.trailingZeroBitCount
     }
 
-    /// True when some integer ℓ ≥ 1 satisfies baseLog·ℓ = 32.
-    package static func dividesWord(_ baseLog: Int) -> Bool {
-        baseLog > 0 && baseLog <= 32 && 32 % baseLog == 0
+    /// Power-of-two torus word sizes (limb widths) used in the C29 obstruction.
+    package static let powerOfTwoWordBits: [Int] = [16, 32, 64, 128]
+
+    /// True when some integer ℓ ≥ 1 satisfies baseLog·ℓ = wordBits.
+    package static func dividesWord(_ baseLog: Int, wordBits: Int = 32) -> Bool {
+        baseLog > 0 && baseLog <= wordBits && wordBits % baseLog == 0
     }
 
     /// Covering level count when `dividesWord(baseLog)`; else nil.
-    package static func coveringLevelCount(baseLog: Int) -> Int? {
-        guard dividesWord(baseLog) else { return nil }
-        return 32 / baseLog
+    package static func coveringLevelCount(baseLog: Int, wordBits: Int = 32) -> Int? {
+        guard dividesWord(baseLog, wordBits: wordBits) else { return nil }
+        return wordBits / baseLog
     }
 
-    /// Exact public-MS covering at this power-of-two degree.
-    package static func isExactPublicMSCovering(degree n: Int) -> Bool {
+    /// Exact public-MS covering at this power-of-two degree under torus word `wordBits`.
+    package static func isExactPublicMSCovering(degree n: Int, wordBits: Int = 32) -> Bool {
         guard n >= 2, n.nonzeroBitCount == 1 else { return false }
-        return dividesWord(publicMSBaseLog(degree: n))
+        return dividesWord(publicMSBaseLog(degree: n), wordBits: wordBits)
     }
 
     /// Matches `GGSWParams.cryptoPublicMS` when covering; else documents the gap.
@@ -132,23 +140,46 @@ package enum GGSWPublicMSCovering {
         return found == exactPracticalDegrees
     }
 
+    /// Divisors of a power-of-two word are themselves powers of two, so
+    /// `1+log₂ N` must be a power of two ⇒ `N = 2^{2^a − 1}`.
+    /// Among practical degrees that yields only {8, 128}; never 1024.
+    package static func checkPowerOfTwoWordObstruction() -> Bool {
+        for w in powerOfTwoWordBits {
+            guard w >= 2, w.nonzeroBitCount == 1 else { return false }
+            let found = practicalDegrees.filter { isExactPublicMSCovering(degree: $0, wordBits: w) }
+            if found != exactPracticalDegrees { return false }
+            // N=1024 ⇒ baseLog=11, and 11 never divides a power of two.
+            if isExactPublicMSCovering(degree: 1024, wordBits: w) { return false }
+            if dividesWord(11, wordBits: w) { return false }
+        }
+        // Positive: N=8,128 remain exact at every listed power-of-two word.
+        for w in powerOfTwoWordBits {
+            if !isExactPublicMSCovering(degree: 8, wordBits: w) { return false }
+            if !isExactPublicMSCovering(degree: 128, wordBits: w) { return false }
+        }
+        return true
+    }
+
     package static func certificate() -> GGSWPublicMSCoveringCertificate {
         let steps: [GGSWPublicMSCoveringProofStep] = [
             .init(lemma: .publicMSBaseLog, holds: checkPublicMSBaseLog()),
             .init(lemma: .coveringDividesWord, holds: checkCoveringDividesWord()),
             .init(lemma: .exactPublicMSCovering, holds: checkExactPublicMSCovering()),
             .init(lemma: .practicalDegrees, holds: checkPracticalDegrees(),
-                  note: "exact degrees = \(exactPracticalDegrees)")
+                  note: "exact degrees = \(exactPracticalDegrees)"),
+            .init(lemma: .powerOfTwoWordObstruction, holds: checkPowerOfTwoWordObstruction(),
+                  note: "words \(powerOfTwoWordBits); N=1024 never exact")
         ]
         return GGSWPublicMSCoveringCertificate(
             steps: steps,
             hypotheses: [
-                "Torus modulus q = 2³² (native UInt32)",
+                "Torus modulus q = 2^w for power-of-two word w (native UInt32 ⇒ w=32)",
                 "Polynomial degree N is a power of two",
                 "δ = q/(2N) is the rotation / boolean message spacing",
                 "Exact public MS wants g₀ = δ (ACC stays on δ-lattice)",
-                "Exact covering / Metal EP wants baseLog·ℓ = 32",
-                "Structural — not a claim that noisy BK is impossible under other (q,N)",
+                "Exact covering / Metal EP wants baseLog·ℓ = w",
+                "C27: under w=32 exact degrees among practical = {8,128}",
+                "C29: for any power-of-two w, practical exact degrees stay {8,128}; widening limb ≠ Track A unlock",
                 "C26 measures residual blow-up when inject≠0 at incomplete N=1024 gadget"
             ],
             exactDegrees: exactPracticalDegrees

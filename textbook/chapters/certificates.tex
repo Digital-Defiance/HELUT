@@ -55,6 +55,16 @@ undecodable on \texttt{cryptoPublicMS}/\texttt{crypto}; inject $B{=}4$ on
 covering $N{=}128$ with inject $B{=}64$ PASSes ($B_{\mathrm{bk}}\approx 1.62\times 10^6$
 decodable). Receipt:
 \corpus{logs/helut-encrypted-n128-metal-sing-crypto-noisy.log}.}
+
+\reproduced{C29}{Theorem~3$'$: for any power-of-two torus word $w$, exact
+public-MS covering among practical degrees stays $\{8,128\}$. Widening the
+limb does not unlock $N{=}1024$ (baseLog~$=11$ never divides $2^k$).}
+
+\reproduced{C30}{At covering $N{=}128$, inject $B\le 8$ prints
+$\varepsilon\log_2=-\infty$, but $\hat\sigma$ remains $\sim 10^{4}$--$10^{5}$.
+At $B{=}64$, $\varepsilon\log_2\approx -24$ (\cid{22}). Receipt:
+\corpus{logs/helut-noisy-bk-eps-sweep-n128.log}.}
+
 \section{Calibration is not estimation}
 
 \begin{center}
