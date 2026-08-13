@@ -1,0 +1,20 @@
+HELUT encrypted Metal MICROBENCH
+  N=1024  2N=2048  trials=2  warmup=0
+  lowering=tiled-kernel  tileWidth=1024
+  DynamicRotateCost mux=2099200 binary=11275 speedup≈186.2×
+
+KEYGEN+BK         1.076 s  RSS +21.0 MiB (after=33.7 MiB)
+HARDNESS          175.7 classical bits  (≥128? yes)
+BR start bit=0  RSS=33.9 MiB …
+BR tile=1/1 bits=0..<1024
+TRIAL  0          0.514 s  bit=0 PASS
+  telemetry       lowering=tiled-kernel tiles=1 encode=0.002s gpu=0.508s copy=0.001s
+BR start bit=1  RSS=67.7 MiB …
+BR tile=1/1 bits=0..<1024
+TRIAL  1          0.504 s  bit=1 PASS
+  telemetry       lowering=tiled-kernel tiles=1 encode=0.000s gpu=0.503s copy=0.000s
+
+STEADY mean       0.509 s/BR (1-LUT identity @ N=1024)
+INIT cache        hits=1 misses=1 entries=1
+RSS final         67.8 MiB
+result            PASS

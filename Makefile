@@ -3,9 +3,9 @@
 #   make writeup     # writeup.tex → writeup.pdf + writeup.md
 #   make paper       # paper/helut.tex → paper/helut.pdf + paper/helut.md
 #   make docs        # both
-#   make clean-docs  # LaTeX aux under build/
+#   make test-metal-p1  # Phase 1 Metal BR XCTest battery (release)
 
-.PHONY: writeup paper docs clean-docs
+.PHONY: writeup paper docs clean-docs test-metal-p1
 
 writeup: writeup.tex Scripts/build_writeup.sh
 	@chmod +x Scripts/build_writeup.sh
@@ -16,6 +16,10 @@ paper: paper/helut.tex Scripts/build_writeup.sh
 	./Scripts/build_writeup.sh paper/helut.tex
 
 docs: writeup paper
+
+test-metal-p1:
+	@chmod +x Scripts/helut_metal_phase1_test.sh
+	./Scripts/helut_metal_phase1_test.sh
 
 clean-docs:
 	rm -rf build/writeup build/paper

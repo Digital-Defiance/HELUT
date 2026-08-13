@@ -73,6 +73,7 @@ package enum MetalGGSW {
         let baseLog = ggsw.params.baseLog
         let packedWidth = GLWEPack.packedDegree(polynomialDegree: degree, glweDimension: 1)
         let graph = MPSGraph()
+        let bank = GraphConstBank(graph: graph, degree: degree, batch: batch)
 
         let ctPack = GLWEPack.pack(ciphertext)
         let ctTensor = constantPacked(graph: graph, values: ctPack, batch: batch, width: packedWidth, name: "ct")
@@ -119,7 +120,8 @@ package enum MetalGGSW {
                 poly: maskDigits[level],
                 degree: degree,
                 batch: batch,
-                name: "t0_\(level)"
+                name: "t0_\(level)",
+                bank: bank
             )
             let t1 = scaleGLWE(
                 graph: graph,
@@ -127,7 +129,8 @@ package enum MetalGGSW {
                 poly: bodyDigits[level],
                 degree: degree,
                 batch: batch,
-                name: "t1_\(level)"
+                name: "t1_\(level)",
+                bank: bank
             )
             let levelMask = graph.addition(t0.mask, t1.mask, name: "lm\(level)")
             let levelBody = graph.addition(t0.body, t1.body, name: "lb\(level)")
@@ -229,8 +232,43 @@ package enum MetalGGSW {
         return decodeBooleanPhase(phase, delta: params.tfhe.delta)
     }
 
-    /// Blind rotate on Metal — **one** MPSGraph for all CMUX levels (fused).
+    /// Blind rotate on Metal. Default: fused MPSGraph at *N*≤64; tiled kernel otherwise.
     package static func blindRotate(
+        testPolynomial: [UInt32],
+        lwe: LWECiphertext,
+        bootstrapKey: BootstrapKey,
+        device: MTLDevice,
+        commandQueue: MTLCommandQueue,
+        lowering: MetalBRLowering? = nil,
+        tileWidth: Int? = nil
+    ) throws -> GLWECiphertext {
+        let n = bootstrapKey.params.tfhe.polynomialDegree
+        let mode = lowering ?? MetalBRControl.overrideLowering ?? MetalBRLowering.automatic(degree: n)
+        let w = tileWidth ?? MetalBRControl.defaultTileWidth
+        switch mode {
+        case .tiledKernel:
+            return try blindRotateTiledKernel(
+                testPolynomial: testPolynomial,
+                lwe: lwe,
+                bootstrapKey: bootstrapKey,
+                device: device,
+                commandQueue: commandQueue,
+                tileWidth: w
+            )
+        case .fused:
+            return try blindRotateFused(
+                testPolynomial: testPolynomial,
+                lwe: lwe,
+                bootstrapKey: bootstrapKey,
+                device: device,
+                commandQueue: commandQueue
+            )
+        }
+    }
+
+    /// One MPSGraph for all CMUX levels (schoolbook poly-mul expanded to MLIR).
+    /// Do not use at *N*=1024 — encode does not finish (H3 fused kill 2026-08-13).
+    private static func blindRotateFused(
         testPolynomial: [UInt32],
         lwe: LWECiphertext,
         bootstrapKey: BootstrapKey,
@@ -248,24 +286,28 @@ package enum MetalGGSW {
         precondition(lwe.lweDimension == bootstrapKey.bitKeys.count)
         precondition(baseLog * levels == 32)
 
+        let encode0 = CFAbsoluteTimeGetCurrent()
         let bPow = rotationPower(lwe.b, twoN: twoN)
         let acc0Body = negacyclicMultiplyByXPower(testPolynomial, power: -bPow)
-        let acc0Mask = [UInt32](repeating: 0, count: n)
         let packedWidth = GLWEPack.packedDegree(polynomialDegree: n, glweDimension: 1)
 
         let graph = MPSGraph()
+        let bank = GraphConstBank(graph: graph, degree: n, batch: batch)
         var acc = GLWETensors(
-            mask: constantPacked(graph: graph, values: acc0Mask, batch: batch, width: n, name: "acc0_m"),
+            mask: bank.zeros,
             body: constantPacked(graph: graph, values: acc0Body, batch: batch, width: n, name: "acc0_b")
         )
 
+        MetalBRControl.progress?("BR fused encode N=\(n) CMUX=0..<\(lwe.lweDimension)")
         for j in 0..<lwe.lweDimension {
             let aPow = rotationPower(lwe.a[j], twoN: twoN)
             let rotMask = mulByXPower(
-                graph: graph, poly: acc.mask, power: aPow, name: "rot_m\(j)", degree: n, batch: batch
+                graph: graph, poly: acc.mask, power: aPow, name: "rot_m\(j)", degree: n, batch: batch,
+                bank: bank
             )
             let rotBody = mulByXPower(
-                graph: graph, poly: acc.body, power: aPow, name: "rot_b\(j)", degree: n, batch: batch
+                graph: graph, poly: acc.body, power: aPow, name: "rot_b\(j)", degree: n, batch: batch,
+                bank: bank
             )
             let diff = GLWETensors(
                 mask: graph.subtraction(rotMask, acc.mask, name: "diff_m\(j)"),
@@ -279,7 +321,8 @@ package enum MetalGGSW {
                 batch: batch,
                 baseLog: baseLog,
                 levelCount: levels,
-                name: "ep\(j)"
+                name: "ep\(j)",
+                bank: bank
             )
             acc = GLWETensors(
                 mask: graph.addition(acc.mask, gated.mask, name: "acc_m\(j)"),
@@ -288,12 +331,24 @@ package enum MetalGGSW {
         }
 
         let packed = graph.concatTensors([acc.mask, acc.body], dimension: 1, name: "br_out")
+        let encodeSeconds = CFAbsoluteTimeGetCurrent() - encode0
+        let run0 = CFAbsoluteTimeGetCurrent()
         let resultPack = try runUnary(
             graph: graph,
             output: packed,
             device: device,
             commandQueue: commandQueue,
             elementCount: packedWidth
+        )
+        let gpuSeconds = CFAbsoluteTimeGetCurrent() - run0
+        MetalBRControl.lastTelemetry = MetalBRTelemetry(
+            lowering: MetalBRLowering.fused.rawValue,
+            tileWidth: lwe.lweDimension,
+            tileCount: 1,
+            encodeSeconds: encodeSeconds,
+            gpuRunSeconds: gpuSeconds,
+            hostRepackSeconds: 0,
+            ring: "mlir"
         )
         return GLWEPack.unpack(resultPack, polynomialDegree: n, glweDimension: 1)
     }
@@ -304,7 +359,9 @@ package enum MetalGGSW {
         bootstrapKey: BootstrapKey,
         scale: UInt32? = nil,
         device: MTLDevice,
-        commandQueue: MTLCommandQueue
+        commandQueue: MTLCommandQueue,
+        lowering: MetalBRLowering? = nil,
+        tileWidth: Int? = nil
     ) throws -> LWECiphertext {
         let params = bootstrapKey.params
         let n = params.tfhe.polynomialDegree
@@ -322,7 +379,9 @@ package enum MetalGGSW {
             lwe: packed,
             bootstrapKey: bootstrapKey,
             device: device,
-            commandQueue: commandQueue
+            commandQueue: commandQueue,
+            lowering: lowering,
+            tileWidth: tileWidth
         )
         return sampleExtractLWE(acc, params: params.tfhe)
     }
@@ -347,9 +406,86 @@ package enum MetalGGSW {
         }
     }
 
-    /// Evaluate an entire combinational LUT netlist in **one** MPSGraph submit.
-    /// Requires rotation-native / `Z_{2N}` LWE wires (use after ingest publicMS).
+    /// Evaluate a combinational LUT netlist after ingest publicMS.
+    /// Default: host-scheduled per-LUT BR (tiled-kernel at *N*>64).
+    /// `--metal-br-fused` keeps the legacy single MPSGraph (do not use at *N*=1024).
     package static func evaluateTopoNetlistSingleGraph(
+        jobs: [NetlistLUTJob],
+        primaryWires: [Int: LWECiphertext],
+        bootstrapKey: BootstrapKey,
+        scale: UInt32,
+        device: MTLDevice,
+        commandQueue: MTLCommandQueue
+    ) throws -> [Int: LWECiphertext] {
+        let n = bootstrapKey.params.tfhe.polynomialDegree
+        let mode = MetalBRControl.overrideLowering ?? MetalBRLowering.automatic(degree: n)
+        switch mode {
+        case .tiledKernel:
+            return try evaluateTopoNetlistTiledKernel(
+                jobs: jobs,
+                primaryWires: primaryWires,
+                bootstrapKey: bootstrapKey,
+                scale: scale,
+                device: device,
+                commandQueue: commandQueue
+            )
+        case .fused:
+            return try evaluateTopoNetlistFusedGraph(
+                jobs: jobs,
+                primaryWires: primaryWires,
+                bootstrapKey: bootstrapKey,
+                scale: scale,
+                device: device,
+                commandQueue: commandQueue
+            )
+        }
+    }
+
+    /// Host-scheduled LUT BRs + `publicRefreshBit` (Phase 2.3 netlist lowering).
+    private static func evaluateTopoNetlistTiledKernel(
+        jobs: [NetlistLUTJob],
+        primaryWires: [Int: LWECiphertext],
+        bootstrapKey: BootstrapKey,
+        scale: UInt32,
+        device: MTLDevice,
+        commandQueue: MTLCommandQueue
+    ) throws -> [Int: LWECiphertext] {
+        let params = bootstrapKey.params
+        precondition(params.tfhe.glweDimension == 1)
+        let n = params.tfhe.polynomialDegree
+        let twoN = 2 * n
+        var wires = primaryWires
+        var produced: [Int: LWECiphertext] = [:]
+        for (jobIndex, job) in jobs.enumerated() {
+            MetalBRControl.progress?(
+                "netlist LUT \(jobIndex + 1)/\(jobs.count) \(job.name)"
+            )
+            var inputs: [LWECiphertext] = []
+            inputs.reserveCapacity(job.inputWireIds.count)
+            for wid in job.inputWireIds {
+                guard let ct = wires[wid] else {
+                    preconditionFailure("missing wire \(wid) for LUT \(job.name)")
+                }
+                inputs.append(ct)
+            }
+            let extracted = try evaluateLUTBlindRotate(
+                truthTable: job.truthTable,
+                inputs: inputs,
+                bootstrapKey: bootstrapKey,
+                scale: scale,
+                device: device,
+                commandQueue: commandQueue,
+                lowering: .tiledKernel
+            )
+            let refreshed = publicRefreshBit(extracted, twoN: twoN, scale: scale)
+            wires[job.outputWireId] = refreshed
+            produced[job.outputWireId] = refreshed
+        }
+        return produced
+    }
+
+    /// Legacy whole-netlist **one** MPSGraph submit (schoolbook-in-MLIR).
+    private static func evaluateTopoNetlistFusedGraph(
         jobs: [NetlistLUTJob],
         primaryWires: [Int: LWECiphertext],
         bootstrapKey: BootstrapKey,
@@ -369,6 +505,7 @@ package enum MetalGGSW {
         precondition(lweN == n)
 
         let graph = MPSGraph()
+        let bank = GraphConstBank(graph: graph, degree: n, batch: batch)
         var wireTensors: [Int: LWETensors] = [:]
         for (id, ct) in primaryWires {
             precondition(ct.lweDimension == lweN)
@@ -422,7 +559,8 @@ package enum MetalGGSW {
                 bootstrapKey: bootstrapKey,
                 degree: n,
                 batch: batch,
-                name: "br\(jobIndex)"
+                name: "br\(jobIndex)",
+                bank: bank
             )
             let extracted = sampleExtractOnGraph(
                 graph: graph,
@@ -472,6 +610,37 @@ package enum MetalGGSW {
     }
 
     // MARK: - Graph building blocks
+
+    /// Shared splats for one MPSGraph (Phase 1.2 CSE).
+    private final class GraphConstBank {
+        let graph: MPSGraph
+        let degree: Int
+        let batch: Int
+        let ones: MPSGraphTensor
+        let zeros: MPSGraphTensor
+        let scalarZero: MPSGraphTensor
+
+        init(graph: MPSGraph, degree: Int, batch: Int) {
+            self.graph = graph
+            self.degree = degree
+            self.batch = batch
+            self.ones = constantPacked(
+                graph: graph,
+                values: [UInt32](repeating: 1, count: degree),
+                batch: batch,
+                width: degree,
+                name: "cse_ones"
+            )
+            self.zeros = constantPacked(
+                graph: graph,
+                values: [UInt32](repeating: 0, count: degree),
+                batch: batch,
+                width: degree,
+                name: "cse_zeros"
+            )
+            self.scalarZero = graph.constant(0, dataType: .uInt32)
+        }
+    }
 
     private struct GLWETensors {
         var mask: MPSGraphTensor
@@ -583,18 +752,13 @@ package enum MetalGGSW {
         powerMod2N: MPSGraphTensor, // [B, 1]
         degree: Int,
         batch: Int,
-        name: String
+        name: String,
+        bank: GraphConstBank
     ) -> MPSGraphTensor {
         let twoN = 2 * degree
         precondition(twoN.nonzeroBitCount == 1)
         let logTwoN = twoN.trailingZeroBitCount
-        let ones = constantPacked(
-            graph: graph,
-            values: [UInt32](repeating: 1, count: degree),
-            batch: batch,
-            width: degree,
-            name: "\(name)_ones"
-        )
+        let ones = bank.ones
         var acc = poly
         var power = powerMod2N
         for i in 0..<logTwoN {
@@ -612,7 +776,8 @@ package enum MetalGGSW {
                 power: 1 << i,
                 name: "\(name)_x\(i)",
                 degree: degree,
-                batch: batch
+                batch: batch,
+                bank: bank
             )
             let bitB = graph.multiplication(bit, ones, name: "\(name)_bb\(i)")
             let oneMinus = graph.subtraction(ones, bitB, name: "\(name)_om\(i)")
@@ -630,7 +795,8 @@ package enum MetalGGSW {
         bootstrapKey: BootstrapKey,
         degree: Int,
         batch: Int,
-        name: String
+        name: String,
+        bank: GraphConstBank
     ) -> GLWETensors {
         let twoN = 2 * degree
         let levels = bootstrapKey.params.levelCount
@@ -658,16 +824,11 @@ package enum MetalGGSW {
             powerMod2N: negB,
             degree: degree,
             batch: batch,
-            name: "\(name)_acc0"
+            name: "\(name)_acc0",
+            bank: bank
         )
         var acc = GLWETensors(
-            mask: constantPacked(
-                graph: graph,
-                values: [UInt32](repeating: 0, count: degree),
-                batch: batch,
-                width: degree,
-                name: "\(name)_m0"
-            ),
+            mask: bank.zeros,
             body: acc0Body
         )
         for j in 0..<bootstrapKey.bitKeys.count {
@@ -679,11 +840,11 @@ package enum MetalGGSW {
             )
             let rotMask = mulByXPowerDynamic(
                 graph: graph, poly: acc.mask, powerMod2N: aPow, degree: degree, batch: batch,
-                name: "\(name)_rm\(j)"
+                name: "\(name)_rm\(j)", bank: bank
             )
             let rotBody = mulByXPowerDynamic(
                 graph: graph, poly: acc.body, powerMod2N: aPow, degree: degree, batch: batch,
-                name: "\(name)_rb\(j)"
+                name: "\(name)_rb\(j)", bank: bank
             )
             let diff = GLWETensors(
                 mask: graph.subtraction(rotMask, acc.mask, name: "\(name)_dm\(j)"),
@@ -697,7 +858,8 @@ package enum MetalGGSW {
                 batch: batch,
                 baseLog: baseLog,
                 levelCount: levels,
-                name: "\(name)_ep\(j)"
+                name: "\(name)_ep\(j)",
+                bank: bank
             )
             acc = GLWETensors(
                 mask: graph.addition(acc.mask, gated.mask, name: "\(name)_am\(j)"),
@@ -715,7 +877,8 @@ package enum MetalGGSW {
         bootstrapKey: BootstrapKey,
         degree: Int,
         batch: Int,
-        name: String
+        name: String,
+        bank: GraphConstBank
     ) -> GLWETensors {
         let twoN = 2 * degree
         let levels = bootstrapKey.params.levelCount
@@ -740,16 +903,11 @@ package enum MetalGGSW {
             powerMod2N: negB,
             degree: degree,
             batch: batch,
-            name: "\(name)_acc0"
+            name: "\(name)_acc0",
+            bank: bank
         )
         var acc = GLWETensors(
-            mask: constantPacked(
-                graph: graph,
-                values: [UInt32](repeating: 0, count: degree),
-                batch: batch,
-                width: degree,
-                name: "\(name)_m0"
-            ),
+            mask: bank.zeros,
             body: acc0Body
         )
         for j in 0..<bootstrapKey.bitKeys.count {
@@ -761,11 +919,11 @@ package enum MetalGGSW {
             )
             let rotMask = mulByXPowerDynamic(
                 graph: graph, poly: acc.mask, powerMod2N: aPow, degree: degree, batch: batch,
-                name: "\(name)_rm\(j)"
+                name: "\(name)_rm\(j)", bank: bank
             )
             let rotBody = mulByXPowerDynamic(
                 graph: graph, poly: acc.body, powerMod2N: aPow, degree: degree, batch: batch,
-                name: "\(name)_rb\(j)"
+                name: "\(name)_rb\(j)", bank: bank
             )
             let diff = GLWETensors(
                 mask: graph.subtraction(rotMask, acc.mask, name: "\(name)_dm\(j)"),
@@ -779,7 +937,8 @@ package enum MetalGGSW {
                 batch: batch,
                 baseLog: baseLog,
                 levelCount: levels,
-                name: "\(name)_ep\(j)"
+                name: "\(name)_ep\(j)",
+                bank: bank
             )
             acc = GLWETensors(
                 mask: graph.addition(acc.mask, gated.mask, name: "\(name)_am\(j)"),
@@ -855,7 +1014,8 @@ package enum MetalGGSW {
         batch: Int,
         baseLog: Int,
         levelCount: Int,
-        name: String
+        name: String,
+        bank: GraphConstBank
     ) -> GLWETensors {
         let maskDigits = gadgetDecomposeMetal(
             graph: graph,
@@ -896,7 +1056,8 @@ package enum MetalGGSW {
                 poly: maskDigits[level],
                 degree: degree,
                 batch: batch,
-                name: "\(name)_t0_\(level)"
+                name: "\(name)_t0_\(level)",
+                bank: bank
             )
             let t1 = scaleGLWE(
                 graph: graph,
@@ -904,7 +1065,8 @@ package enum MetalGGSW {
                 poly: bodyDigits[level],
                 degree: degree,
                 batch: batch,
-                name: "\(name)_t1_\(level)"
+                name: "\(name)_t1_\(level)",
+                bank: bank
             )
             let levelMask = graph.addition(t0.mask, t1.mask, name: "\(name)_lm\(level)")
             let levelBody = graph.addition(t0.body, t1.body, name: "\(name)_lb\(level)")
@@ -993,7 +1155,8 @@ package enum MetalGGSW {
         poly: MPSGraphTensor,
         degree: Int,
         batch: Int,
-        name: String
+        name: String,
+        bank: GraphConstBank
     ) -> GLWETensors {
         GLWETensors(
             mask: negacyclicPolyMul(
@@ -1002,7 +1165,8 @@ package enum MetalGGSW {
                 b: poly,
                 degree: degree,
                 batch: batch,
-                name: "\(name)_sm"
+                name: "\(name)_sm",
+                bank: bank
             ),
             body: negacyclicPolyMul(
                 graph: graph,
@@ -1010,7 +1174,8 @@ package enum MetalGGSW {
                 b: poly,
                 degree: degree,
                 batch: batch,
-                name: "\(name)_sb"
+                name: "\(name)_sb",
+                bank: bank
             )
         )
     }
@@ -1022,26 +1187,21 @@ package enum MetalGGSW {
         b: MPSGraphTensor,
         degree: Int,
         batch: Int,
-        name: String
+        name: String,
+        bank: GraphConstBank
     ) -> MPSGraphTensor {
         var acc: MPSGraphTensor?
         for j in 0..<degree {
             let bj = graph.sliceTensor(b, dimension: 1, start: j, length: 1, name: "\(name)_b\(j)")
-            let ones = constantPacked(
-                graph: graph,
-                values: [UInt32](repeating: 1, count: degree),
-                batch: batch,
-                width: degree,
-                name: "\(name)_ones\(j)"
-            )
-            let bjBroadcast = graph.multiplication(bj, ones, name: "\(name)_bj\(j)")
+            let bjBroadcast = graph.multiplication(bj, bank.ones, name: "\(name)_bj\(j)")
             let shifted = mulByXPower(
                 graph: graph,
                 poly: a,
                 power: j,
                 name: "\(name)_x\(j)",
                 degree: degree,
-                batch: batch
+                batch: batch,
+                bank: bank
             )
             let term = graph.multiplication(shifted, bjBroadcast, name: "\(name)_t\(j)")
             if let existing = acc {
@@ -1050,13 +1210,7 @@ package enum MetalGGSW {
                 acc = term
             }
         }
-        return acc ?? constantPacked(
-            graph: graph,
-            values: [UInt32](repeating: 0, count: degree),
-            batch: batch,
-            width: degree,
-            name: "\(name)_zero"
-        )
+        return acc ?? bank.zeros
     }
 
     private static func mulByXPower(
@@ -1065,7 +1219,8 @@ package enum MetalGGSW {
         power: Int,
         name: String,
         degree: Int,
-        batch: Int
+        batch: Int,
+        bank: GraphConstBank
     ) -> MPSGraphTensor {
         var p = power % (2 * degree)
         if p < 0 { p += 2 * degree }
@@ -1081,24 +1236,19 @@ package enum MetalGGSW {
                     poly: poly,
                     power: rem,
                     name: "\(name)_red",
-                    degree: degree
+                    degree: degree,
+                    bank: bank
                 )
             }
-            let zero = constantPacked(
-                graph: graph,
-                values: [UInt32](repeating: 0, count: degree),
-                batch: batch,
-                width: degree,
-                name: "\(name)_z"
-            )
-            return graph.subtraction(zero, reduced, name: name)
+            return graph.subtraction(bank.zeros, reduced, name: name)
         }
         return mulByXPowerPositive(
             graph: graph,
             poly: poly,
             power: p,
             name: name,
-            degree: degree
+            degree: degree,
+            bank: bank
         )
     }
 
@@ -1107,7 +1257,8 @@ package enum MetalGGSW {
         poly: MPSGraphTensor,
         power: Int,
         name: String,
-        degree: Int
+        degree: Int,
+        bank: GraphConstBank
     ) -> MPSGraphTensor {
         precondition(power > 0 && power < degree)
         let k = power
@@ -1127,7 +1278,7 @@ package enum MetalGGSW {
         )
         let zeroK = graph.multiplication(
             right,
-            graph.constant(0, dataType: .uInt32),
+            bank.scalarZero,
             name: "\(name)_zeroK"
         )
         let negRight = graph.subtraction(zeroK, right, name: "\(name)_neg")

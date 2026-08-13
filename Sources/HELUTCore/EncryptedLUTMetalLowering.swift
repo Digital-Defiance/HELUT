@@ -4,9 +4,8 @@ import MetalPerformanceShadersGraph
 
 // MARK: - Encrypted LUT → Metal lowering (graduation step 10j)
 //
-// `LUTNode` with `.encryptedBlindRotate` lowers each `$lut` through the fused
-// Metal blind-rotate MPSGraph (`MetalGGSW.evaluateLUTBlindRotate`). Host still
-// supplies LWE wires + BK; the LUT *body* is one Metal graph (not clear selectors).
+// `LUTNode` with `.encryptedBlindRotate` lowers each `$lut` through
+// `MetalGGSW.evaluateLUTBlindRotate` (fused at *N*≤64, tiled-kernel otherwise).
 
 /// Metal + BK context required to lower an encrypted `LUTNode`.
 package struct EncryptedLUTMetalContext: Sendable {

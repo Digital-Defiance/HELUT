@@ -18,12 +18,17 @@ Doctrine: [`research-release.md`](research-release.md) · Cookbook: [`parameter-
 | **C4** | Encrypted LWE/GLWE + GGSW BR per `$lut` (publicMS / secret) | `--bench-encrypted` | seam tests · EncryptedNetlistSim · full_adder through *N*=1024 |
 | **C5** | Certificates on encrypted ticks (noise, *ε*, calibrated hardness, noisy-BK model) | `--hardness-table` · SING cert lines | cookbook production row |
 | **C6** | Encrypted ≡ clear multi-netlist SING | `Scripts/helut_encrypted_sing.sh` | `logs/helut-encrypted-*.log` · adder *N*≤1024 |
-| **C7** | Metal 1-LUT BR microbench | `--bench-encrypted-micro --degree 64` | ~50.3 s/BR · `logs/helut-encrypted-micro-n64.log` |
+| **C7** | Metal 1-LUT BR microbench | `--bench-encrypted-micro --degree 64` | fused ~50.3 s/BR · persist-tile **0.001 s/BR** (**C17**) |
 | **C8** | TensorLUT M4 baseline *F*<sub>crypto</sub>=0 + Verilog emit | TensorLUT CLI / Phase 21 | `enigma_m4_tensorlut_baseline.v` |
 | **C9** | Stecker involution sandwich · blind 3-pair PASS | Phase 21 protocol | involution logs / journal |
 | **C10** | Enigma256 reciprocity · fail-closed / bijection | E256 tests | `Enigma256.md` · fixtures |
 | **C11** | Potsdam/Plaice keys ≠ P1030680 | exhaustion | BREAK table |
 | **C12** | Windowed discriminator vs whole-message turnover flaw | discriminator design | 2 219 boards · writeup §4 |
+| **C13** | Metal tiled-kernel BR @ *N*=1024 | `--bench-encrypted-micro --degree 1024 --trials 2` | 3.645 s/BR · bits 0+1 PASS · `logs/helut-encrypted-micro-n1024-tiled.log` |
+| **C14** | Metal full_adder SING @ *N*=1024 | `--bench-encrypted --paths 'blind-rotate-metal public-ms boolean'` | boolean 90.6 s / 8 rows (11.3 s/row); crypto 175.6 s (22.0 s/row) |
+| **C15** | Metal netlist-scheduled SING @ *N*=1024 | `--metal-netlist-only --degree 1024 --vectors 8` | 91.9 s / 8 rows (11.5 s/row) · tiled-kernel lowering · `logs/helut-encrypted-n1024-metal-netlist-sing.log` |
+| **C16** | Metal fused EP kernel (Phase 2.2) | `--bench-encrypted-micro --degree 1024 --trials 2` · boolean SING | **1.043 s/BR** @ *N*=1024 (gpu 0.99 s) · N=64 tiled 0.043 s/BR · boolean SING 25.1 s / 8 rows (3.14 s/row) · `logs/helut-encrypted-micro-n1024-ep.log` · `logs/helut-encrypted-n1024-metal-sing-ep.log` |
+| **C17** | GPU-resident BR tile (Phase 2.3) | `--bench-encrypted-micro --degree 1024 --trials 2` · boolean SING | **0.519 s/BR** @ *N*=1024 (gpu 0.50 s, RSS 68 MiB) · N=64 **0.001 s/BR** · boolean SING **12.2 s / 8** (1.52 s/row) · `logs/helut-encrypted-micro-n1024-persist.log` · `logs/helut-encrypted-n1024-metal-sing-persist.log` |
 
 ---
 
@@ -33,7 +38,7 @@ Doctrine: [`research-release.md`](research-release.md) · Cookbook: [`parameter-
 |----|-----------|-----------------|
 | **H1** | ~176‑bit calibrated @ production (*n*,*σ*) | ≠ lattice-estimator until Sage fills pending JSON |
 | **H2** | Multi-LUT encrypted @ large *N* | **Closed 2026-08-12:** `rotationPower` / pack now keep Z_{2N}; full_adder SING PASS @ N=256/512/1024. Was arity-3 pack overflowing 256·2N headroom. |
-| **H3** | Metal encrypted @ *N*=1024 | **In flight:** micro PID harness; after HARDNESS spends long CPU in MPSGraph build (`externalProduct` / `negacyclicPolyMul`). Log: `logs/helut-encrypted-micro-n1024.log`. N=64 ≈48 s/BR PASS. |
+| **H3** | Metal encrypted @ *N*=1024 | **C17:** persist-tile 0.519 s/BR; boolean SING 12.2 s / 8. **C16** fused-EP was 1.043 s/BR / 25 s. Schoolbook still inside the tile kernel (one-tile ≡ 16-tile wall ⇒ remaining is ALU/mem, not launch). Fused megagraph `--metal-br-fused` DNF. Crypto ℓ=2 SING not re-timed. NTT next. |
 | **H4** | Noisy BK in product path | Depth **modeled**; BK encrypt still noiseless |
 | **H5** | `*PublicMS` gadgets (*g*<sub>0</sub>=*δ*) | On-lattice intent; does not alone clear H2 |
 | **H6** | TensorLUT / quarantine vs campaign | Parallel research — not P1030680 plaintext |

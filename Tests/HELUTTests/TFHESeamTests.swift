@@ -1047,12 +1047,76 @@ final class TFHESeamTests: XCTestCase {
                     bootstrapKey: bk,
                     scale: scale,
                     device: device,
-                    commandQueue: commandQueue
+                    commandQueue: commandQueue,
+                    lowering: .fused
                 )
                 let want = UInt32(x ^ y)
                 XCTAssertEqual(decodeRotationBoolean(decryptLWE(cpu, secret: secret), scale: scale), want)
                 XCTAssertEqual(decodeRotationBoolean(decryptLWE(metal, secret: secret), scale: scale), want)
                 XCTAssertEqual(cpu, metal, "fused Metal BR must match CPU ciphertext x=\(x) y=\(y)")
+            }
+        }
+    }
+
+    func testMetalKernelPolyMulMatchesCPU() throws {
+        guard let device = MTLCreateSystemDefaultDevice() else {
+            throw XCTSkip("No Metal device")
+        }
+        guard let commandQueue = device.makeCommandQueue() else {
+            throw XCTSkip("No MTLCommandQueue")
+        }
+        for n in [8, 32, 64] {
+            var rng = LCG32(state: UInt32(0xA11 * n))
+            let a = (0..<n).map { _ in rng.next() }
+            let b = (0..<n).map { _ in rng.next() }
+            let cpu = negacyclicPolynomialMultiply(a, b)
+            let metal = try MetalGGSW.negacyclicPolyMulMetal(
+                a, b, device: device, commandQueue: commandQueue
+            )
+            XCTAssertEqual(metal, cpu, "kernel poly-mul N=\(n)")
+        }
+    }
+
+    func testTiledKernelBlindRotateMatchesCPU() throws {
+        guard let device = MTLCreateSystemDefaultDevice() else {
+            throw XCTSkip("No Metal device")
+        }
+        guard let commandQueue = device.makeCommandQueue() else {
+            throw XCTSkip("No MTLCommandQueue")
+        }
+        let degree = 8
+        let params = GGSWParams.booleanTrivial(degree: degree)
+        let secret = TFHESecretKey.random(params: params.tfhe, seed: 0x71ED)
+        var rng = LCG32(state: 0x71EE)
+        let bk = bootstrapKey(secret: secret, params: params, rng: &rng)
+        let twoN = 2 * degree
+        let scale = rotationScale(polynomialDegree: degree)
+        let truth: [UInt32] = [0, 1, 1, 0]
+        for x in 0...1 {
+            for y in 0...1 {
+                let lx = encryptLWERotationNative(
+                    message: UInt32(x), secret: secret.lweSecret, twoN: twoN, rng: &rng
+                )
+                let ly = encryptLWERotationNative(
+                    message: UInt32(y), secret: secret.lweSecret, twoN: twoN, rng: &rng
+                )
+                let cpu = evaluateLUTBlindRotate(
+                    truthTable: truth, inputs: [lx, ly], bootstrapKey: bk, scale: scale
+                )
+                let metal = try MetalGGSW.evaluateLUTBlindRotate(
+                    truthTable: truth,
+                    inputs: [lx, ly],
+                    bootstrapKey: bk,
+                    scale: scale,
+                    device: device,
+                    commandQueue: commandQueue,
+                    lowering: .tiledKernel,
+                    tileWidth: 4
+                )
+                let want = UInt32(x ^ y)
+                XCTAssertEqual(decodeRotationBoolean(decryptLWE(cpu, secret: secret), scale: scale), want)
+                XCTAssertEqual(decodeRotationBoolean(decryptLWE(metal, secret: secret), scale: scale), want)
+                XCTAssertEqual(cpu, metal, "tiled-kernel Metal BR must match CPU x=\(x) y=\(y)")
             }
         }
     }

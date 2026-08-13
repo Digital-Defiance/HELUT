@@ -12,5 +12,5 @@ globs: *.swift, *.metal
 - DATA TYPES: Torus arithmetic is exact mod $2^{32}$. HELUT / PBS tensors use `MPSDataType.uInt32` (no floats on this path; TensorLUT is separate).
 - MEMORY: Prefer `MTLBuffer` zero-copy. Dense $N\times N$ Toeplitz is kernel/stress only.
 - PROHIBITION: No ML deps other than `Metal` / `MetalPerformanceShadersGraph` on HELUTCore PBS paths.
-- NEXT: N=1024 Metal microbench + evolve-for-Σ-arity; Sage sudo for estimator. INIT dedup shipped. Cookbook: `directives/parameter-cookbook.md`.
+- NEXT: NTT poly-mul (schoolbook still in GPU-resident BR tile); Sage estimator; noisy BK. Cookbook: `directives/parameter-cookbook.md`.
 ---

@@ -61,8 +61,10 @@ python3 Scripts/helut_lattice_estimate.py \
 .build/release/helut --bench regex_netlist.json --degree 8 --bench-encrypted --cpu-only --vectors 32 --sing
 
 # N=1024 levers
-.build/release/helut --bench-encrypted-micro --degree 64    # ~50 s/BR measured
-.build/release/helut --bench-encrypted-micro --degree 1024  # long; log: logs/helut-encrypted-micro-n1024.log
+.build/release/helut --bench-encrypted-micro --degree 64    # fused; ~50 s/BR measured
+.build/release/helut --bench-encrypted-micro --degree 1024  # auto tiled-kernel; not fused
+# Fused schoolbook at N=1024 does not finish (H3 kill 2026-08-13). Force only for debug:
+# .build/release/helut --bench-encrypted-micro --degree 64 --metal-br-fused
 # Prefer production-shaped N for public multi-LUT SING (H2 closed @ 256–1024)
 .build/release/helut --bench netlist.json --degree 1024 --bench-encrypted --cpu-only --vectors 8 --sing
 ./Scripts/helut_encrypted_sing.sh
@@ -72,8 +74,8 @@ python3 Scripts/helut_lattice_estimate.py \
 
 | N | s/BR | RSS | Note |
 |---|-----:|----:|------|
-| 64 | ~50.3 | ~2.3 GiB | PASS 2026-08-12 |
-| 1024 | (running / extrapolate ~N²) | 64 GiB OK for mats | use `--bench-encrypted-micro` |
+| 64 | fused ~50.3 / persist-tile **0.001** | ~2.3 GiB / 15 MiB | PASS; **C17** |
+| 1024 | persist-tile **0.519** (fused-EP 1.043 / poly-mul 3.645) | 68 MiB | bits 0+1 PASS; fused DNF 11.6 h; gpu 0.50 s |
 
 INIT dedup: `TFHETestPolyCache` + shared test-poly tensors in metal-netlist graph.
 
