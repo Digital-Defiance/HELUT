@@ -1,24 +1,15 @@
 {
-  "dependency_status": "missing estimator (No module named 'estimator')",
+  "dependency_status": "ok",
   "note": "Install: pip install 'git+https://github.com/malb/lattice-estimator.git' and SageMath (sage.all). None values mean not verified \u2014 do not treat HELUT calibrated estimates as lattice-estimator output.",
-  "pending": [
-    "demo-N8",
-    "weak-n256",
-    "mid-n512",
-    "classic-n630",
-    "n768-s16",
-    "prod-n1024-s16",
-    "n1024-s17",
-    "n2048-s16"
-  ],
+  "pending": [],
   "results": {
-    "classic-n630": null,
-    "demo-N8": null,
-    "mid-n512": null,
-    "n1024-s17": null,
-    "n2048-s16": null,
-    "n768-s16": null,
-    "prod-n1024-s16": null,
-    "weak-n256": null
+    "classic-n630": 106.5,
+    "demo-N8": 33.09,
+    "mid-n512": 92.36,
+    "n1024-s17": 189.95,
+    "n2048-s16": 369.77,
+    "n768-s16": 135.42,
+    "prod-n1024-s16": 180.17,
+    "weak-n256": 53.7
   }
 }

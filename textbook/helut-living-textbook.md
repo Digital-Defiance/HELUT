@@ -2,7 +2,7 @@
 
 # Reconfigurable Homomorphic Computing A Living Textbook of Netlist-Clocked FHE, Differentiable Hardware, and Polymorphic Ciphers
 
-*Digital Defiance HELUT Project --- living edition 0.1 (2026-08-13 / C19) · August 2026*
+*Digital Defiance HELUT Project --- living edition 0.1 (2026-08-13 / C26) · August 2026*
 
 ::: titlepage
 **Reconfigurable Homomorphic Computing**
@@ -13,7 +13,7 @@ Netlist-Clocked Torus FHE Differentiable Hardware Adversarial Polymorphic Cipher
 
 Digital Defiance / HELUT Project
 
-Living edition 0.1 epoch 2026-08-13 / C19
+Living edition 0.1 epoch 2026-08-13 / C26
 
 For a first university course in a new subject
 
@@ -44,7 +44,7 @@ The stack has three pillars [@helut-release; @helut-paper]:
 
 ###### Why a living textbook.
 
-Research papers freeze a slice of a laboratory. This course cannot. The claim inventory [@helut-claim-sheet] moves: Metal kernels get faster, hedges close, avenues stay unlabeled until they earn receipts. A professor who taught from a PDF dated June would be teaching a different Metal compiler than a professor teaching from August. So the book is versioned against the corpus *epoch* (2026-08-13 / C19 in this edition) and is honest about stubs.
+Research papers freeze a slice of a laboratory. This course cannot. The claim inventory [@helut-claim-sheet] moves: Metal kernels get faster, hedges close, avenues stay unlabeled until they earn receipts. A professor who taught from a PDF dated June would be teaching a different Metal compiler than a professor teaching from August. So the book is versioned against the corpus *epoch* (2026-08-13 / C26 in this edition) and is honest about stubs.
 
 ###### What this edition is.
 
@@ -422,15 +422,15 @@ That closed hedge is the best homework in the chapter: a systems bug that is als
 Three layers ship as code, not as vibes (**C5**):
 
 ::: center
-  ------------------------------------ ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  ------------------------------------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   `TFHENoiseProof`                     Discrete $\infty$-norm inject lemmas.
   Gaussian $\varepsilon$-certificate   Ingest failure $\le 2^{-64}$ under independent-noise hypotheses.
-  `TFHENoisyBKCertificate`             Depth under a BK-noise bound $B_{\mathrm{bk}}$. HELUT's current BK encrypt is noiseless ($B_{\mathrm{bk}}=0$); production must fill a measured $\sigma_{\mathrm{BK}}$ (**H4**).
-  ------------------------------------ ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  `TFHENoisyBKCertificate`             Depth under a BK-noise bound $B_{\mathrm{bk}}$. Default Metal SING still encrypts BK with $e=0$. **C22** fills $B_{\mathrm{bk}}/\hat\sigma$ from identity-LUT residuals on a covering gadget ($N=8$: inject $B=64\to\hat\sigma\approx 6396$; $N=128$: $\hat\sigma\approx 1.47\times 10^6$, still $<\delta/2$, Gaussian $\varepsilon\log_2\approx -23.5$ not $-64$). $\ell=1$ `booleanPublicMS` cannot carry BK noise (**H4**).
+  ------------------------------------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 :::
 
 ::: warning
-*Honesty note 3.2*. A noiseless BK is a correct *functional* bootstrap and an incomplete *depth* story. Students who say "we have noisy BK" because the certificate *type* exists are failing **H4**.
+*Honesty note 3.2*. A noiseless BK is a correct *functional* bootstrap and an incomplete *depth* story. **C22** measures residuals; it does not put noisy BK on the $N=1024$ Metal SING path. Students who say "we have production noisy BK" from the $N=8$ table are failing the remaining **H4** asterisk.
 :::
 
 ### Parameters you may quote
@@ -438,15 +438,15 @@ Three layers ship as code, not as vibes (**C5**):
 From the cookbook [@helut-cookbook], production-shaped boolean:
 
 ::: center
-  Knob                   Value                Asterisk
-  ---------------------- -------------------- ----------------------------------
-  $N$                    1024                 
-  $q$                    $2^{32}$             native word
-  $\sigma$               $2^{16}$             $\ll \delta/2 = 2^{20}$
-  Target $\varepsilon$   $\le 2^{-64}$        Gaussian union on primary wires
-  Classical target       $\ge 128$ bits       HELUT est. $\approx 176$; **H1**
-  $B_{\mathrm{bk}}$      0 (now)              **H4**
-  Inter-LUT refresh      `publicMS` default   lattice-compatible BK masks
+  Knob                   Value                                                     Asterisk
+  ---------------------- --------------------------------------------------------- ----------------------------------
+  $N$                    1024                                                      
+  $q$                    $2^{32}$                                                  native word
+  $\sigma$               $2^{16}$                                                  $\ll \delta/2 = 2^{20}$
+  Target $\varepsilon$   $\le 2^{-64}$                                             Gaussian union on primary wires
+  Classical target       $\ge 128$ bits                                            HELUT est. $\approx 176$; **H1**
+  $B_{\mathrm{bk}}$      0 at $N=1024$ SING; measured at covering $N=8$, $N=128$   **H4**
+  Inter-LUT refresh      `publicMS` default                                        lattice-compatible BK masks
 :::
 
 Demo $N=8$ will not meet 128-bit hardness. The certificate reports that honestly. Using demo $N$ for a "secure encrypted CPU" slide is a **N**.
@@ -524,11 +524,11 @@ SING (stimuli in, golden out) is encrypted $\equiv$ clear on generic vectors, wi
 ### Threat / fidelity split
 
 ::: center
-  ------------------------------ ---------------------------------------------------------------------------------------------------------------------
+  ------------------------------ -----------------------------------------------------------------------------------------------------------------------
   In scope for the *datapath*    Exact modular eval; shape $[B,N]$; DFF routing; Yosys coverage for PicoRV32.
   In scope for the *FHE claim*   LWE/GLWE $+$ BK; noise / $\varepsilon$ / hardness / noisy-BK *certificates* as implemented.
-  Out of scope unless measured   Side channels; quantum; estimator-backed production keys (**H1**); noisy BK as a filled product parameter (**H4**).
-  ------------------------------ ---------------------------------------------------------------------------------------------------------------------
+  Out of scope unless measured   Side channels; quantum; estimator-backed production keys (**H1**); noisy BK on the $N=1024$ Metal SING path (**H4**).
+  ------------------------------ -----------------------------------------------------------------------------------------------------------------------
 :::
 
 The split is intentional. If the tensor datapath cannot boot a CPU under mock encodings, adding real TFHE noise only makes the systems problem harder. If the FHE path cannot SING an adder, a CPU slide is theatre.
@@ -580,17 +580,19 @@ Phase 1 without Phase 2 still leaves $O(W\cdot N)$ encode inside each tile. Ph
 
 Default Metal BR: fused if $N\le 64$, tiled-kernel otherwise (NTT EP inside tiles). Legacy fused megagraph is `--metal-br-fused` only, and at production $N$ it is a museum exhibit.
 
-### Numbers a student may quote (epoch 2026-08-13 / C19)
+### Numbers a student may quote (epoch 2026-08-13 / C26)
 
 ::: center
-  Path at $N=1024$               s/BR (micro)               Boolean SING / 8                    RSS
-  ------------------------------ -------------------------- ----------------------------------- ---------------
-  Fused schoolbook megagraph     DNF ($11.6\,\mathrm{h}$)   ---                                 ${\sim}4$ GiB
-  Poly-mul kernel                3.645                      ---                                 ---
-  Fused EP (**C16**)             1.043                      $25.1\,\mathrm{s}$ ($3.14$ s/row)   ---
-  Persist schoolbook (**C17**)   0.519                      $12.2\,\mathrm{s}$ ($1.52$ s/row)   68 MiB
-  NTT persist (**C18**)          **0.433**                  $15.6\,\mathrm{s}$ ($1.95$ s/row)   148 MiB
-  CPU SING full_adder            ---                        ${\sim}52\,\mathrm{s}$              ---
+  Path at $N=1024$                    s/BR (micro)               SING / 8 rows                           RSS
+  ----------------------------------- -------------------------- --------------------------------------- ---------------
+  Fused schoolbook megagraph          DNF ($11.6\,\mathrm{h}$)   ---                                     ${\sim}4$ GiB
+  Poly-mul kernel                     3.645                      ---                                     ---
+  Fused EP (**C16**)                  1.043                      $25.1\,\mathrm{s}$ ($3.14$ s/row)       ---
+  Persist schoolbook (**C17**)        0.519                      $12.2\,\mathrm{s}$ ($1.52$ s/row)       68 MiB
+  NTT persist (**C18**) serial SING   **0.433**                  $15.6\,\mathrm{s}$ ($1.95$ s/row)       148 MiB
+  Wavefront-parallel (**C20**)        0.420 (fused 3-prime)      **$10.6\,\mathrm{s}$** ($1.33$ s/row)   ---
+  Crypto $\ell=2$ SING (**C21**)      ---                        $11.38\,\mathrm{s}$ ($1.42$ s/row)      ---
+  CPU SING full_adder                 ---                        ${\sim}52\,\mathrm{s}$                  ---
 :::
 
 ::: exercise
@@ -612,14 +614,14 @@ Most compiler courses grade a binary that runs. This course grades a binary that
 ### The surface
 
 ::: center
-  Certificate                           Role
-  ------------------------------------- -------------------------------------------------------
-  `TFHENoiseProof`                      Discrete $\infty$-norm inject lemmas.
-  `TFHEAsymptoticSecurityCertificate`   Gaussian ingest $\varepsilon\le 2^{-64}$.
-  `TFHELWEHardnessCertificate`          Decision-LWE $\to$ IND-CPA $+$ bit estimate.
-  `TFHELWECalibration`                  Anchor table for the estimator.
-  `TFHENoisyBKCertificate`              Depth under $B_{\mathrm{bk}}$ / noiseless hypothesis.
-  `TFHELWEEstimatorProtocol`            External lattice-estimator merge.
+  Certificate                                           Role
+  ----------------------------------------------------- --------------------------------------------------------------------------
+  `TFHENoiseProof`                                      Discrete $\infty$-norm inject lemmas.
+  `TFHEAsymptoticSecurityCertificate`                   Gaussian ingest $\varepsilon\le 2^{-64}$.
+  `TFHELWEHardnessCertificate`                          Decision-LWE $\to$ IND-CPA $+$ bit estimate.
+  `TFHELWECalibration`                                  Anchor table for the estimator.
+  `TFHENoisyBKCertificate` / `TFHENoisyBKMeasurement`   Depth under $B_{\mathrm{bk}}$; identity residual $\hat\sigma$ (**C22**).
+  `TFHELWEEstimatorProtocol`                            External lattice-estimator merge.
 :::
 
 `TFHENoise.refuse` if no certificate. That is not an API flourish. It is the difference between a demo and a claim.
@@ -636,23 +638,26 @@ A passing encrypted tick is a bundle:
 
 - Hardness: calibrated classical bits, with **H1** attached until Sage fills the estimator JSON.
 
-- Depth: noisy-BK model, with **H4** attached while $B_{\mathrm{bk}}=0$.
+- Depth: noisy-BK model; **C22** measured at covering gadget; **C26** graded fail at product $N{=}1024$ inject; **H4** while $N=1024$ Metal SING keeps $B_{\mathrm{bk}}=0$.
 
 Students who report only milliseconds have not completed the lab.
 
 ### Calibration is not estimation
 
 ::: center
-  Label               $n$   $\sigma$   Ref bits   HELUT est.
-  ---------------- ------ ---------- ---------- ------------
-  demo-N8               8   $2^{12}$          4          4.0
-  weak-n256           256   $2^{17}$         45         40.4
-  mid-n512            512   $2^{16}$         95         95.5
-  classic-n630        630   $2^{15}$        128        129.0
-  prod-n1024-s16     1024   $2^{16}$        170        175.7
+  Label               $n$   $\sigma$   HELUT   Estimator   $|\Delta|$
+  ---------------- ------ ---------- ------- ----------- ------------
+  demo-N8               8   $2^{12}$     4.0        33.1         29.1
+  weak-n256           256   $2^{17}$    40.4        53.7         13.3
+  mid-n512            512   $2^{16}$    95.5        92.4          3.2
+  classic-n630        630   $2^{15}$   129.0       106.5         22.5
+  n768-s16            768   $2^{16}$   135.6       135.4          0.2
+  prod-n1024-s16     1024   $2^{16}$   175.7   **180.2**          4.5
+  n1024-s17          1024   $2^{17}$   160.7       189.9         29.3
+  n2048-s16          2048   $2^{16}$   336.1       369.8         33.7
 :::
 
-$q=2^{32}$, binary secret. The estimator column is PENDING until the cookbook export is filled.
+$q=2^{32}$, binary secret, native Sage 10.9 $+$ lattice-estimator (**C23**). Merge tolerance is $16$ bits: four rows pass, four fail.
 
 ### Five-cell test, applied to certificates
 
@@ -669,7 +674,7 @@ Certificates are themselves claims. They need the five cells:
 5.  Application: refuse-closed encrypt so a netlist tick cannot silently drop hardness.
 
 ::: exercise
-**Exercise 3.1**. Which cell is missing for noisy BK as a *product* parameter? Write the experiment that would fill it (**H4**: measured $\sigma_{\mathrm{BK}}$ into `TFHENoisyBKCertificate`).
+**Exercise 3.1**. **C22** filled the measurement cell at covering-gadget $N=8$ and $N=128$. Which cell is still missing for noisy BK as a *product* parameter at $N=1024$ Metal SING? Name the gadget obstruction ($\ell=1$ vs covering).
 :::
 
 ### Honesty as an engineering interface
@@ -738,7 +743,13 @@ Every Yosys `$lut` of width $1\ldots 6$ pads to a 64-wide `Float32` INIT. The fo
 
 ###### Proof (machine-checked).
 
-Each clause is a `TensorLUTFormal.check*` in `TensorLUTFormal.swift`, aggregated by `TensorLUTFormal.certificate()`. The named lemmas are `discretenessPenalty`, `cryptoFitnessMSE`, `combinedObjective`, `emitterThreshold`, `involutionSandwich`, `freezeMask`. Source path: `Sources/HELUTCore/TensorLUTFormal.swift`.
+Each clause is a `TensorLUTFormal.check*` in `TensorLUTFormal.swift`, aggregated by `TensorLUTFormal.certificate()`.
+
+::: {#thm:tensorlut-corollary .theorem}
+**Theorem 1.2** (TensorLUT emitter / freeze corollary). *Under Theorem [1.1](#thm:tensorlut){reference-type="ref" reference="thm:tensorlut"} hypotheses plus emit-via-$E$ and `mutatedPreserving`: if $\pi(w)=0$ then $E(w)$ recovers the binary INIT; every freeze-preserving genotype remains a partial involution containing the frozen pairs.*
+:::
+
+Still not melt completeness.The named lemmas are `discretenessPenalty`, `cryptoFitnessMSE`, `combinedObjective`, `emitterThreshold`, `involutionSandwich`, `freezeMask`. Source path: `Sources/HELUTCore/TensorLUTFormal.swift`.
 
 ::: warning
 *Honesty note 1.2*. Theorem 1 does *not* prove recovery of arbitrary keys; a U-534 / P1030680 plaintext; or that melt is complete for all netlists. Shatter / hold grades remain empirical (**C8**, **C9**, **H6**).
@@ -812,15 +823,23 @@ The historical Enigma leaks this laboratory proved fatal---26-letter menus, self
 
 - The live field is Apple Silicon SoftBus, not an FPGA board on the critical path.
 
+### Theorem 2 (structural SoftBus) {#sec:thm-enigma256}
+
+::: {#thm:enigma256 .theorem}
+**Theorem 1.3** (Enigma256 SoftBus reciprocity / fail-closed). *Under the hypotheses of `Enigma256Formal.certificate()` (reciprocal scramble path; day-key involution builders; NLFF retaps do not rewrite frozen scramble): frozen scramble is a permutation and an involution; stream encrypt-then-decrypt recovers plaintext under identical keys; derived plugboard is fixed-point-free involution and un-reflector is an involution; `hardenedCubic()` rejects `coupledCubic6`.*
+:::
+
+Machine-checked: `Enigma256Formal.certificate()` / `testEnigma256FormalCertificate`. Reproduce: see Lab appendix / `REPRODUCE.md`.
+
+::: warning
+*Honesty note 1.4*. Theorem 2 is a *structural SoftBus contract*---not IND-CPA, not a claim that Red TensorLUT/KPA/`ent` cannot force Blue generation rolls, and not a finished polymorphic-cipher standard.
+:::
+
 ### Red pressure
 
 Red is not a separate team with a PDF of attacks. Red is TensorLUT cones, SoftBus known-plaintext attacks, and `ent` on the keystream---on the same Mac that rolls Blue generations.
 
-A generation that cannot hold under that pressure does not ship. Fail-closed means: if reciprocity, bijection, or a stated invariant breaks, the roll aborts rather than emitting a "mostly fine" Verilog.
-
-::: warning
-*Honesty note 1.4*. Fail-closed as implemented in tests is not yet the security-property proof the doctrine wants for a standard. Do not tell a standards committee that E256 is "done." Tell them the loop exists and the proof is an open hedge on the trajectory.
-:::
+A generation that cannot hold under that pressure does not ship. Fail-closed means: if reciprocity, bijection, or a stated invariant breaks, the roll aborts rather than emitting a "mostly fine" Verilog. Theorem 2 covers the structural abort path for coupled NLFF harden; empirical Red batteries remain separate grades.
 
 ### What students design
 
@@ -842,25 +861,43 @@ E256 is not evaluated as torus FHE in this edition's lecture arc. It is a SoftBu
 
 Applications exist to keep pillars honest. A compiler with no netlist is a speech; a melt with no cipher is a float toy; a polymorphic cipher with no Red is a blog post.
 
-### Tiered datapath (Pillar I shape laboratory)
+Canonical nine-slot card: `directives/application-gallery.md`.
+
+### Pillar I (encrypted)
+
+1.  **Encrypted `full_adder` SING.** Multi-LUT correctness at production-shaped $N$ (**C6**, **C20**, **C21**).
+
+2.  **Encrypted tree / regex SING.** Compiler is not adder-specialized (**C6**, demo $N$).
+
+3.  **Hardness $+$ noisy-BK certificates.** Estimator fill-in and covering-gadget residuals (**C5**, **C22**, **C23**). Product-shaped $N{=}1024$ inject is a graded failure (**C26**); Metal SING still noiseless BK (**H4**).
+
+### Pillar I shape laboratory (oracle --- not FHE)
 
 1.  **Decision tree.** A 4-bit non-linear boundary, 7 LUTs. Exact threshold logic on a batch of records. Teaches: non-linear Boolean $\neq$ neural net, and $B$ is a capacity knob.
 
-2.  **Regex / DFA search.** 3-character matcher, 23 LUTs. Large $B$ turns unified memory into the story. Teaches: tensor expansion can be a 40 GiB intermediate before it is a clever algorithm.
+2.  **Regex / DFA search.** 3-character matcher, 23 LUTs. Large $B$ turns unified memory into the story.
 
-3.  **PicoRV32.** ${\sim}4.8\mathrm{k}$ LUTs, ${\sim}1.5\mathrm{k}$ DFFs. Scripted `resetn` boot. Teaches: sequential coverage (enables, sync-reset, `"x"` bits) is the compiler, not the kernel. Oracle path: **C1**. Encrypted CPU SING: not a **C** in this epoch.
+3.  **PicoRV32.** ${\sim}4.8\mathrm{k}$ LUTs, ${\sim}1.5\mathrm{k}$ DFFs. Scripted `resetn` boot. Oracle path: **C1**. Encrypted CPU SING: not a **C** in this epoch.
 
-### Encrypted correctness netlists
+### Pillar II
 
-`full_adder`, tree, and regex under `--bench-encrypted --sing` are the FHE teaching set (**C4**--**C6**). The adder is the first lab; the others prove the compiler is not adder-specialized.
+1.  **M4 TensorLUT baseline emit** (**C8**).
+
+2.  **Stecker involution sandwich / formal** (**C9**, **C19**, **C25**).
+
+3.  **Shatter vs hold under $\lambda$** --- seminar empirics; not a decrypt (**H6**).
+
+### Pillar III
+
+1.  **SoftBus reciprocity / bijection** (**C10**, **C24**).
+
+2.  **Red battery** (TensorLUT / KPA / `ent`) --- empirical grades in `logs/enigma256-*`.
+
+3.  **Fail-closed NLFF harden** (**C24** clause 5).
 
 ### Campaign as a case study (not a decrypt)
 
 Welchman-path break of known P1030684 (**C2**), $\le 10$-plug SAT kill chain (**C3**), Potsdam/Plaice $\neq$ P1030680 (**C11**), windowed discriminator versus whole-message turnover (**C12**): these belong in a cryptanalysis seminar attached to Pillar II methods.
-
-### E256 (Pillar III)
-
-The live cipher under Red pressure (Chapter [1](#ch:pillariii){reference-type="ref" reference="ch:pillariii"}). Use it as a design studio, not as a messaging homework.
 
 ::: exercise
 **Exercise 1.6**. Pick one application tier and write a five-cell card for it. If you cannot name two runnable instances, it is not ready for the gallery lecture.
@@ -893,13 +930,20 @@ Deliverable: a table with columns {backend, $N$, SING, certificates printed, may
 
 ### Lab 4 --- Production-shaped SING
 
-Follow Appendix [4](#app:repro){reference-type="ref" reference="app:repro"}. Record ms/row at $N=8$ and $N=1024$. Write the **H1** and **H4** asterisks next to any hardness or depth sentence.
+Follow Appendix [4](#app:repro){reference-type="ref" reference="app:repro"}. Record ms/row at $N=8$ and $N=1024$. Write the **H1** asterisk next to hardness. Write the **H4** asterisk next to depth: **C22** measured covering gadget; $N=1024$ SING is still $e=0$ BK.
 
 Theory track: parse a published SING log and reconstruct the table without running Metal.
 
+### Lab 4b --- Measured noisy BK (**C22**)
+
+    .build/release/helut --measure-bk-noise --degree 8 \
+      --trials 8 --bk-noise 64
+
+Deliverable: $B_{\mathrm{bk}}$, $\hat\sigma$, $\delta/2$, and one sentence on why $\ell=1$ `booleanPublicMS` is omitted. Theory track: read `logs/helut-noisy-bk-measure.log`.
+
 ### Lab 5 --- Metal compiler post-mortem
 
-Compare fused-megagraph DNF, **C16**, **C17**, **C18** using Chapter [2](#ch:metal){reference-type="ref" reference="ch:metal"}'s table. Optional systems: `make test-metal-p1` and one `--bench-encrypted-micro --degree 64` run. Deliverable: the **H3** paragraph in your own words.
+Compare fused-megagraph DNF, **C16**--**C21** using Chapter [2](#ch:metal){reference-type="ref" reference="ch:metal"}'s table. Optional systems: `make test-metal-p1` and one `--bench-encrypted-micro --degree 64` run. Deliverable: the **H3** paragraph in your own words (scheduler vs NTT).
 
 ### Lab 6 --- TensorLUT Theorem 1 (**C19**)
 
@@ -926,23 +970,23 @@ This chapter is the discovery path after disclosure [@helut-trajectory]. None o
 ### Near term
 
 ::: center
-  Track                           Status at epoch 2026-08-13 / C19               Next experiment
-  ------------------------------- ---------------------------------------------- --------------------------------------------------------------------------------------------
-  **H2** full_adder $N\ge 256$    **Closed** ($Z_{2N}$ pack / `rotationPower`)   Keep as a worked bug in Chapter [3](#ch:torus){reference-type="ref" reference="ch:torus"}.
-  **H1** Sage lattice-estimator   Protocol shipped; SageMath not filled          Estimator script on pending JSON.
-  **H3** Metal BR at large $N$    **C18** micro win; SING not vs. **C17**        Cut in-tile NTT/iNTT round-trips.
-  **H4** Noisy BK                 Modeled; $B_{\mathrm{bk}}=0$                   Measured $\sigma_{\mathrm{BK}}$ into the certificate.
-  Campaign catalog                Middle ring $\neq A$ untested; catalog \@265   Resume `--bombe-from 265`.
-  Garble / quarantine             Soft-band grades                               Sister-message lessons; not a decrypt claim.
+  Track                           Status at epoch 2026-08-13 / C26                                                   Next experiment
+  ------------------------------- ---------------------------------------------------------------------------------- --------------------------------------------------------------------------------------------
+  **H2** full_adder $N\ge 256$    **Closed** ($Z_{2N}$ pack / `rotationPower`)                                       Keep as a worked bug in Chapter [3](#ch:torus){reference-type="ref" reference="ch:torus"}.
+  **H1** Sage lattice-estimator   **C23** JSON filled; production $|\Delta|=4.5$                                     Tighten HELUT vs estimator where $|\Delta|>16$.
+  **H3** Metal BR at large $N$    **C20** boolean $10.6\,\mathrm{s}$; **C21** crypto $\ell=2$ $11.38\,\mathrm{s}$    NTT inside the crypto $\ell=2$ tile.
+  **H4** Noisy BK                 **C22** covering $N\le 128$; **C26** $N{=}1024$ inject graded fail; SING $e{=}0$   Gadget/$\sigma$ that meets $\varepsilon\le 2^{-64}$ at production $N$.
+  Campaign catalog                Middle ring $\neq A$ untested; catalog parked \@417                                Resume `--bombe-from 418`.
+  Garble / quarantine             Soft-band grades                                                                   Sister-message lessons; not a decrypt claim.
 :::
 
 ### Mid-term pillars
 
 1.  **Pillar I science:** shallower nets, NTT/persist graphs, estimator-backed params (this book's Parts III).
 
-2.  **Pillar II science:** Theorem 1 landed (**C19**, Chapter [1](#ch:pillarii){reference-type="ref" reference="ch:pillarii"}); remaining: completeness of melt, stream-cipher melts.
+2.  **Pillar II science:** Theorem 1 landed (**C19**); corollary emitter / freeze (**C25**, Chapter [1](#ch:pillarii){reference-type="ref" reference="ch:pillarii"}); remaining: completeness of melt, stream-cipher melts.
 
-3.  **Pillar III science:** polymorphic Red/Blue standard beyond E256 SoftBus.
+3.  **Pillar III science:** SoftBus Theorem 2 landed (**C24**, Chapter [1](#ch:pillariii){reference-type="ref" reference="ch:pillariii"}); remaining: polymorphic Red/Blue standard beyond E256 SoftBus.
 
 4.  **FHE gate / ZK depth:** TensorLUT aimed at multiplicative depth (queued; not a part of this edition).
 
@@ -1020,13 +1064,13 @@ First graduating experiment: fixture harness that emits tick markers and a publi
 
 ## Claim index (snapshot) {#app:claims}
 
-Canonical living inventory: `directives/claim-sheet.md`. If this appendix disagrees with the sheet, the sheet wins. Snapshot epoch: 2026-08-13 / C19.
+Canonical living inventory: `directives/claim-sheet.md`. If this appendix disagrees with the sheet, the sheet wins. Snapshot epoch: 2026-08-13 / C26.
 
 ### Reproducible results
 
 ::: center
   ID        Result
-  --------- -------------------------------------------------------------------------------
+  --------- --------------------------------------------------------------------------------------------------------------
   **C1**    Yosys `$lut`/DFF $\to$ Metal/CPU tensor eval (oracle).
   **C2**    Welchman path breaks known P1030684 end-to-end.
   **C3**    $\le 10$-plug / SAT kill chain removes ghosts.
@@ -1047,20 +1091,26 @@ Canonical living inventory: `directives/claim-sheet.md`. If this appendix disagr
   **C18**   3-prime NTT persist BR; $0.433\,\mathrm{s}$/BR; SING $15.6\,\mathrm{s}/8$.
   **C19**   TensorLUT continuous$\to$discrete Theorem 1 (six machine-checked lemmas).
   **C20**   Wavefront-parallel independent `$lut` BRs; boolean SING $10.6\,\mathrm{s}/8$.
+  **C21**   Metal cryptoPublicMS $\ell=2$ SING at $N=1024$; $11.38\,\mathrm{s}/8$.
+  **C22**   Measured noisy-BK residual $\to B_{\mathrm{bk}}/\hat\sigma$ (covering gadget).
+  **C23**   Native Sage lattice-estimator fill-in; production $|\Delta|=4.5$.
+  **C24**   Enigma256 SoftBus Theorem 2 (reciprocity / fail-closed; five lemmas).
+  **C25**   TensorLUT Theorem 1 corollary (emitter--discrete $+$ involution under freeze).
+  **C26**   Noisy-BK identity residual at $N{=}1024$: inject $B{=}64$ undecodable; $B{=}4$ $\varepsilon\log_2\approx-1$.
 :::
 
 ### Open hedges
 
 ::: center
   ID       Asterisk
-  -------- --------------------------------------------------------------------------------------------------
-  **H1**   Calibrated bits $\neq$ lattice-estimator until Sage fills JSON.
+  -------- -------------------------------------------------------------------------------------------------------------------------------------
+  **H1**   **C23** filled JSON. Production $|\Delta|=4.5$; 4/8 anchors exceed 16-bit tolerance.
   **H2**   **Closed** 2026-08-12 ($Z_{2N}$ pack). Kept as history.
-  **H3**   **C20** wavefront-parallel NTT SING beats **C17**; crypto $\ell=2$ untimed; Sage **H1** pending.
-  **H4**   Noisy BK modeled; BK encrypt still noiseless.
+  **H3**   **C20**/**C21** SING bars met; serial NTT SING still loses vs persist; Sage **H1** pending.
+  **H4**   **C22** covering $N\le 128$; **C26** product $N{=}1024$ inject fails $\varepsilon$/$\infty$-norm bars. Metal SING still $e{=}0$ BK.
   **H5**   `*PublicMS` gadgets ($g_0=\delta$): on-lattice intent, not a closer of old **H2**.
   **H6**   TensorLUT / quarantine vs campaign: parallel research, not P1030680 PT.
-  **H7**   Catalog / Regenbogen / UEBUNG: negatives graded; middle ring $\neq A$ untested.
+  **H7**   Catalog / Regenbogen / UEBUNG: negatives graded; middle ring $\neq A$ untested; catalog parked \@417, resume `--bombe-from 418`.
 :::
 
 ### Standing non-implications
@@ -1105,16 +1155,12 @@ Canonical file: `REPRODUCE.md`. Cookbook: `directives/parameter-cookbook.md`. Bu
     make paper      # three-pillar report
     make writeup    # P1030680 campaign report
 
-### Hardness (**H1**)
+### Hardness (**C23**, **H1**)
 
     .build/release/helut --hardness-table
-    .build/release/helut --estimator-export \
-      > logs/helut-estimator-pending.json
-    python3 Scripts/helut_lattice_estimate.py \
-      --pending logs/helut-estimator-pending.json \
-      --out logs/helut-estimator-results.json
+    ./Scripts/helut_sage_estimate.sh
 
-Until SageMath provides `sage.all`, results stay null.
+Native SageMath 10.9 at `~/Applications/SageMath-10-9.app`. Production row: HELUT $175.7$ vs estimator $180.2$. Four of eight anchors exceed the 16-bit merge tolerance --- do not quote $176$ as estimator cost on every row.
 
 ### Encrypted SING (**C4**--**C6**)
 
@@ -1130,11 +1176,52 @@ Until SageMath provides `sage.all`, results stay null.
 
 Default at $N>64$ is tiled-kernel with inlined NTT. Do not assign `--metal-br-fused` at $N=1024$ as a timed lab.
 
+### Wavefront SING (**C20**, **C21**)
+
+Boolean $10.6\,\mathrm{s}/8$; crypto $\ell=2$ $11.38\,\mathrm{s}/8$ at $N=1024$. Logs already in `logs/` --- students need not re-time Metal unless the instructor assigns a machine-local check.
+
+    .build/release/helut --bench netlist.json --degree 1024 \
+      --bench-encrypted --sing --vectors 8 \
+      --paths 'blind-rotate-metal public-ms boolean'
+    .build/release/helut --bench netlist.json --degree 1024 \
+      --bench-encrypted --sing --vectors 8 \
+      --paths 'blind-rotate-metal public-ms crypto'
+
+### Measured noisy BK (**C22**)
+
+Covering gadget only. $\ell=1$ `booleanPublicMS` cannot carry BK noise.
+
+    .build/release/helut --measure-bk-noise --degree 8 \
+      --trials 8 --bk-noise 64
+    .build/release/helut --measure-bk-noise --degree 128 \
+      --trials 4 --bk-noise 64
+
+### Product-shaped $N{=}1024$ residual (**C26**)
+
+Graded negative for production noisy BK (H4). Expect undecodable inject $B{=}64$; $B{=}4$ on `.crypto` may pass $\infty$-norm with $\varepsilon\log_2\approx -1$ (not $-64$).
+
+    .build/release/helut --measure-bk-noise --degree 1024 \
+      --trials 2 --bk-noise 64
+    .build/release/helut --measure-bk-noise --degree 1024 \
+      --trials 2 --bk-noise 4
+
 ### TensorLUT Theorem 1 (**C19**)
 
     swift test -c release --filter testTensorLUTFormalCertificate
 
 Six lemmas must `hold`. Statement: `directives/tensorlut-theorem.md`. Not a U-534 / P1030680 decrypt.
+
+### Enigma256 SoftBus Theorem 2 (**C24**)
+
+    swift test -c release --filter testEnigma256FormalCertificate
+
+Five lemmas must `hold`. Statement: `directives/enigma256-theorem.md`. Structural SoftBus contract---not IND-CPA.
+
+### TensorLUT Theorem 1 corollary (**C25**)
+
+    swift test -c release --filter testTensorLUTFormalCorollaryCertificate
+
+Emitter--discrete agreement and involution-under-freeze must `hold`. Statement: `directives/tensorlut-theorem.md` (corollary).
 
 ### Boolean oracle benches (**C1**)
 

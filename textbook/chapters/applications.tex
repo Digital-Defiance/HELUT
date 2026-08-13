@@ -5,7 +5,23 @@ Applications exist to keep pillars honest.
 A compiler with no netlist is a speech; a melt with no cipher is a float
 toy; a polymorphic cipher with no Red is a blog post.
 
-\section{Tiered datapath (Pillar~I shape laboratory)}
+Canonical nine-slot card: \corpus{directives/application-gallery.md}.
+
+\section{Pillar~I (encrypted)}
+
+\begin{enumerate}
+  \item \textbf{Encrypted \texttt{full\_adder} SING.}
+        Multi-LUT correctness at production-shaped $N$ (\cid{6}, \cid{20},
+        \cid{21}).
+  \item \textbf{Encrypted tree / regex SING.}
+        Compiler is not adder-specialized (\cid{6}, demo $N$).
+  \item \textbf{Hardness $+$ noisy-BK certificates.}
+        Estimator fill-in and covering-gadget residuals (\cid{5}, \cid{22},
+        \cid{23}). Product-shaped $N{=}1024$ inject is a graded failure
+        (\cid{26}); Metal SING still noiseless BK (\hid{4}).
+\end{enumerate}
+
+\section{Pillar~I shape laboratory (oracle --- not FHE)}
 
 \begin{enumerate}
   \item \textbf{Decision tree.}
@@ -14,21 +30,31 @@ toy; a polymorphic cipher with no Red is a blog post.
         and $B$ is a capacity knob.
   \item \textbf{Regex / DFA search.}
         3-character matcher, 23 LUTs. Large $B$ turns unified memory into
-        the story. Teaches: tensor expansion can be a 40\,GiB intermediate
-        before it is a clever algorithm.
+        the story.
   \item \textbf{PicoRV32.}
         ${\sim}4.8\mathrm{k}$ LUTs, ${\sim}1.5\mathrm{k}$ DFFs. Scripted
-        \texttt{resetn} boot. Teaches: sequential coverage (enables,
-        sync-reset, \texttt{"x"} bits) is the compiler, not the kernel.
-        Oracle path: \cid{1}. Encrypted CPU SING: not a \cid{} in this epoch.
+        \texttt{resetn} boot. Oracle path: \cid{1}. Encrypted CPU SING: not
+        a \cid{} in this epoch.
 \end{enumerate}
 
-\section{Encrypted correctness netlists}
+\section{Pillar~II}
 
-\texttt{full\_adder}, tree, and regex under \texttt{--bench-encrypted --sing}
-are the FHE teaching set (\cid{4}--\cid{6}).
-The adder is the first lab; the others prove the compiler is not
-adder-specialized.
+\begin{enumerate}
+  \item \textbf{M4 TensorLUT baseline emit} (\cid{8}).
+  \item \textbf{Stecker involution sandwich / formal} (\cid{9}, \cid{19},
+        \cid{25}).
+  \item \textbf{Shatter vs hold under $\lambda$} --- seminar empirics; not a
+        decrypt (\hid{6}).
+\end{enumerate}
+
+\section{Pillar~III}
+
+\begin{enumerate}
+  \item \textbf{SoftBus reciprocity / bijection} (\cid{10}, \cid{24}).
+  \item \textbf{Red battery} (TensorLUT / KPA / \texttt{ent}) --- empirical
+        grades in \texttt{logs/enigma256-*}.
+  \item \textbf{Fail-closed NLFF harden} (\cid{24} clause~5).
+\end{enumerate}
 
 \section{Campaign as a case study (not a decrypt)}
 
@@ -39,11 +65,6 @@ cryptanalysis seminar attached to Pillar~II methods.
 
 \nonclaimbox{This book does not claim a decrypt of P1030680.
 Campaign fitness is cleartext Metal batch, not HELUT encrypted tick rate.}
-
-\section{E256 (Pillar~III)}
-
-The live cipher under Red pressure (Chapter~\ref{ch:pillariii}).
-Use it as a design studio, not as a messaging homework.
 
 \begin{exercise}
 Pick one application tier and write a five-cell card for it.

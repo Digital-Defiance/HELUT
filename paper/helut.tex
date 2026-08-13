@@ -45,31 +45,37 @@ Differentiable Hardware Cryptanalysis, and Adversarial Polymorphic Ciphers}
 \begin{abstract}
 We present \textbf{HELUT} (Homomorphic Edge Look-Up Tensors) as a \emph{three-pillar}
 cryptographic systems stack---not a new lattice assumption.
+Claim IDs refer to \texttt{directives/claim-sheet.md}.
 
-\textbf{(I) Netlist-clocked torus FHE.}
+\textbf{(I) Netlist-clocked torus FHE} (C4--C7, C13--C18, C20--C23).
 Yosys gate-level \$lut netlists compile into exact $\mathbb{Z}/2^{32}\mathbb{Z}$
 \texttt{MPSGraph} evaluations. The graduated FHE path uses LWE/GLWE samples and
 GGSW bootstrap keys (blind-rotate per \$lut, including whole-netlist Metal graphs
 with binary dynamic $X^p$). HELUT issues machine-checkable certificates:
 discrete $\infty$-norm noise proofs, Gaussian ingest failure $\varepsilon\le 2^{-64}$,
-Decision-LWE$\to$IND-CPA binding, a calibrated classical hardness table, and an
-explicit noisy-BK depth certificate (HELUT's current BK encrypt is noiseless;
-noisy BK is modeled for production).
+Decision-LWE$\to$IND-CPA binding, a calibrated classical hardness table, and a
+measured noisy-BK residual at covering gadgets (C22); product-shaped $N{=}1024$
+inject fails the $\varepsilon\le 2^{-64}$ bar (C26); default product Metal
+$N{=}1024$ SING still uses noiseless BK (H4).
 
-\textbf{(II) Differentiable hardware cryptanalysis.}
+\textbf{(II) Differentiable hardware cryptanalysis} (C8--C9, C19).
 TensorLUT relaxes discrete INIT tables into continuous tensors, grades shatter vs
 hold under $\lambda$, and recovers reciprocal stecker involutions on frozen cores.
+Theorem~1 (continuous$\to$discrete structure) is machine-checked (C19).
 
-\textbf{(III) Adversarial polymorphic ciphers.}
+\textbf{(III) Adversarial polymorphic ciphers} (C10, C24).
 Enigma256-class SoftBus ciphers co-evolve under Red pressure (TensorLUT, KPA,
-\texttt{ent}) and fail closed.
+\texttt{ent}) and fail closed; Theorem~2 states the SoftBus reciprocity /
+fail-closed contract (C24).
 
-Boolean-oracle Metal ticks (trivial encoding) remain a fast shape laboratory:
-PicoRV32 at $N{=}1024$ compiles in ${\sim}1.3\,\mathrm{s}$ with ${\sim}173\,\mathrm{ms}$
-steady ticks. Encrypted full\_adder benches emit per-path ms/row and certificate
-tables (\texttt{--sing}). Classical bits at production $(n,\sigma)=(1024,2^{16})$
-are calibrated ${\sim}176$; \emph{lattice-estimator verification is required before
-production key sizes} (protocol + pending export shipped).
+Boolean-oracle Metal ticks (trivial encoding) remain a fast shape laboratory
+(C1): PicoRV32 at $N{=}1024$ compiles in ${\sim}1.3\,\mathrm{s}$ with
+${\sim}173\,\mathrm{ms}$ steady ticks. Encrypted full\_adder SING at $N{=}1024$
+is measured (C20 boolean $10.6\,\mathrm{s}/8$; C21 crypto $\ell{=}2$
+$11.38\,\mathrm{s}/8$). Classical bits at production $(n,\sigma)=(1024,2^{16})$
+are calibrated ${\sim}176$; lattice-estimator fill-in (C23) agrees on the
+production row ($|\Delta|{=}4.5$) while $4/8$ anchors exceed a $16$-bit
+tolerance---do not quote $176$ as estimator cost on every row (H1).
 \end{abstract}
 
 \section{Introduction}
@@ -101,7 +107,8 @@ Red/Blue loop with differentiable melt and polymorphic ciphers?}
         TensorLUT continuous$\to$discrete melt with graded baseline / shatter /
         involution evidence.
   \item \textbf{Pillar III --- Polymorphic SoftBus ciphers.}
-        Enigma256 under Red TensorLUT/KPA/\texttt{ent} pressure.
+        Enigma256 under Red TensorLUT/KPA/\texttt{ent} pressure; SoftBus
+        reciprocity / fail-closed Theorem~2 (C24).
   \item Boolean-oracle Metal performance tables (PicoRV32 / Enigma) as the
         \emph{shape} laboratory---labeled distinct from the FHE claim.
 \end{enumerate}
@@ -141,20 +148,24 @@ and an application (\texttt{directives/research-release.md}).
 \begin{table}[t]
 \centering
 \small
-\begin{tabular}{@{}lrrrr@{}}
+\begin{tabular}{@{}lrrrrr@{}}
 \toprule
-Label & $n$ & $\sigma$ & Ref bits & HELUT est \\
+Label & $n$ & $\sigma$ & HELUT & Estimator & $|\Delta|$ \\
 \midrule
-demo-N8 & 8 & $2^{12}$ & 4 & 4.0 \\
-weak-n256 & 256 & $2^{17}$ & 45 & 40.4 \\
-mid-n512 & 512 & $2^{16}$ & 95 & 95.5 \\
-classic-n630 & 630 & $2^{15}$ & 128 & 129.0 \\
-prod-n1024-s16 & 1024 & $2^{16}$ & 170 & 175.7 \\
+demo-N8 & 8 & $2^{12}$ & 4.0 & 33.1 & 29.1 \\
+weak-n256 & 256 & $2^{17}$ & 40.4 & 53.7 & 13.3 \\
+mid-n512 & 512 & $2^{16}$ & 95.5 & 92.4 & 3.2 \\
+classic-n630 & 630 & $2^{15}$ & 129.0 & 106.5 & 22.5 \\
+n768-s16 & 768 & $2^{16}$ & 135.6 & 135.4 & 0.2 \\
+prod-n1024-s16 & 1024 & $2^{16}$ & 175.7 & 180.2 & 4.5 \\
+n1024-s17 & 1024 & $2^{17}$ & 160.7 & 189.9 & 29.3 \\
+n2048-s16 & 2048 & $2^{16}$ & 336.1 & 369.8 & 33.7 \\
 \bottomrule
 \end{tabular}
-\caption{Classical hardness calibration ($q=2^{32}$, binary secret).
-Estimator column is PENDING (\texttt{--estimator-export} /
-\texttt{Scripts/helut\_lattice\_estimate.py}).}
+\caption{Classical hardness: HELUT calibrated core-SVP vs native Sage
+lattice-estimator (C23; $q=2^{32}$, binary secret). Production row
+$|\Delta|{=}4.5\le 16$; four anchors exceed the $16$-bit tolerance (H1).
+Receipts: \texttt{logs/helut-estimator-results.json}.}
 \label{tab:hardness}
 \end{table}
 
@@ -543,6 +554,19 @@ Machine-checked proof: \texttt{Sources/HELUTCore/TensorLUTFormal.swift}
 (\texttt{testTensorLUTFormalCertificate}). Statement: \texttt{directives/tensorlut-theorem.md}.
 This is a \emph{structural} theorem---not a U-534 break.
 
+\begin{theorem}[TensorLUT emitter / freeze corollary]
+\label{thm:tensorlut-corollary}
+Under Theorem~\ref{thm:tensorlut} hypotheses plus emit-via-$E$ and
+\texttt{mutatedPreserving} for frozen stecker pairs:
+if $\pi(w)=0$ then $E(w)$ recovers the binary INIT bits;
+every \texttt{mutatedPreserving} genotype retains frozen pairs and remains a
+partial involution (C25).
+\end{theorem}
+
+Machine-checked: \texttt{TensorLUTFormal.corollaryCertificate()}
+(\texttt{testTensorLUTFormalCorollaryCertificate}).
+Still not melt completeness.
+
 \paragraph{Involution sandwich.}
 Stecker genotypes are partial involutions (disjoint pairs) by construction
 (\texttt{SteckerInvolution.isValid}). The GA cannot propose a non-reciprocal map.
@@ -550,27 +574,69 @@ Empirical grades: unmutated M4 baseline $F_{\mathrm{crypto}}=0$; full INIT /
 stecker-cone melts shatter under $\lambda$; blind 3-pair rediscovery PASSed
 (campaign ledger).
 
-\section{Pillar III --- Adversarial polymorphic ciphers (sketch)}
+\section{Application gallery (nine slots)}
+\label{sec:apps-gallery}
+
+Minimum disclosure bar: three runnable applications per pillar
+(\texttt{directives/application-gallery.md}).
+
+\begin{center}
+\small
+\begin{tabular}{@{}llp{0.42\textwidth}@{}}
+\toprule
+Pillar & Slot & Reproduce / claim \\
+\midrule
+I & Encrypted full\_adder SING & C6, C20/C21 \\
+I & Tree / regex SING (demo $N$) & C6 \\
+I & Hardness $+$ noisy-BK certs & C5, C22, C23, C26 \\
+II & M4 baseline emit & C8 \\
+II & Involution sandwich / formal & C9, C19, C25 \\
+II & Shatter vs hold (seminar) & empirical; not a decrypt (H6) \\
+III & SoftBus reciprocity & C10, C24 \\
+III & Red battery grades & \texttt{enigma256\_red\_battery.sh} \\
+III & Fail-closed NLFF harden & C24 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Pillar III --- Adversarial polymorphic ciphers}
 \label{sec:pillar3}
 
+\paragraph{Objective.}
 Enigma256 keeps the reciprocal rotor contract while deleting historical leaks,
-runs on SoftBus, and is graded under Red TensorLUT / KPA / \texttt{ent} pressure.
-Fail-closed generation rolls remain an open security-property proof
-(\texttt{directives/research-release.md} claim C14).
+runs on SoftBus, and is graded under Red TensorLUT / KPA / \texttt{ent} pressure
+(empirical C10).
 
+\begin{theorem}[Enigma256 SoftBus reciprocity / fail-closed]
+\label{thm:enigma256}
+Under the hypotheses of \texttt{Enigma256Formal.certificate()}
+(reciprocal scramble path; day-key involution builders; NLFF retaps do not
+rewrite frozen scramble): frozen scramble is a permutation and an involution;
+stream encrypt-then-decrypt recovers plaintext under identical keys; derived
+plugboard is fixed-point-free involution and un-reflector is an involution;
+\texttt{hardenedCubic()} rejects \texttt{coupledCubic6}.
+\end{theorem}
+
+Machine-checked proof: \texttt{Sources/HELUTCore/Enigma256Formal.swift}
+(\texttt{testEnigma256FormalCertificate}). Statement:
+\texttt{directives/enigma256-theorem.md}.
+This is a \emph{structural SoftBus contract}---not IND-CPA and not a claim that
+Red pressure cannot force Blue generation rolls.
 \section{Limitations and Future Work}
 \label{sec:limits}
 
 \begin{itemize}[leftmargin=*,itemsep=2pt]
-  \item \textbf{Lattice-estimator.} Classical bits are calibrated
-        (\texttt{TFHELWECalibration}); external estimator fill-in requires
-        SageMath + lattice-estimator (\texttt{Scripts/helut\_lattice\_estimate.py}).
-  \item \textbf{Noisy BK.} HELUT BK encrypt is currently noiseless (\(B_{bk}{=}0\));
-        production stacks must instantiate \texttt{TFHENoisyBKCertificate} with
-        measured $\sigma_{\mathrm{BK}}$.
-  \item \textbf{Encrypted scale.} Metal netlist ticks are measured at $N\le 16$;
-        production-shaped $N{=}1024$ encrypted wall-clock remains future work.
-        CPU encrypted paths lock full\_adder / tree / regex at demo $N$.
+  \item \textbf{Lattice-estimator.} Calibrated core-SVP and Sage lattice-estimator
+        disagree on $4/8$ anchors beyond $16$ bits (C23 / H1); production row
+        agrees ($|\Delta|{=}4.5$). Do not quote calibrated $176$ as estimator cost
+        on every row.
+  \item \textbf{Noisy BK.} Covering-gadget residuals are measured (C22). At
+        product-shaped $N{=}1024$, inject $B{=}64$ is undecodable and $B{=}4$ on
+        \texttt{.crypto} yields $\varepsilon\log_2\approx -1$ (C26)---not
+        $2^{-64}$. Default Metal SING still uses noiseless BK ($B_{bk}{=}0$, H4).
+        $\ell{=}1$ \texttt{booleanPublicMS} cannot carry BK noise.
+  \item \textbf{Encrypted scale.} Metal full\_adder SING at $N{=}1024$ is measured
+        (C20 / C21); sequential encrypted clocks and PicoRV FHE path remain open.
   \item \textbf{Oracle vs FHE.} Trivial/boolean Metal graphs are a shape laboratory,
         not the FHE claim.
   \item \textbf{Matrix deduplication.} Toeplitz expansion still benefits from
@@ -578,6 +644,8 @@ Fail-closed generation rolls remain an open security-property proof
   \item \textbf{Side channels.} Metal/GPU power (bgpucap) is parked---not claimed.
   \item \textbf{Coverage.} Async resets, latches, and sequential encrypted clocks
         remain incomplete on the FHE path (combinational \$lut today).
+  \item \textbf{Campaign.} P1030680 catalog / TensorLUT grades are parallel research
+        ---not a plaintext claim (H6 / N5--N7).
 \end{itemize}
 
 \section{Conclusion}

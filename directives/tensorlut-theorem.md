@@ -41,11 +41,27 @@ Assume the hypotheses on the certificate (multilinear LUT, GA mutates only unfro
 
 ---
 
+## Theorem 1 corollary (emitter / freeze completeness)
+
+**Status:** machine-checked in `TensorLUTFormal.corollaryCertificate()` (**C25**).
+
+Assume Theorem 1 hypotheses, plus: Verilog emit uses \(E\); stecker GA uses `mutatedPreserving` for frozen pairs. Then:
+
+7. **Emitter–discrete agreement.** If \(\pi(w)=0\), then \(E(w)_i=w_i\) (as bits) for all \(i\) — emitted INIT equals the binary cube.
+8. **Involution under freeze.** Every genotype returned by `mutatedPreserving(frozen:…)` contains all frozen pairs and remains a partial involution; overlapping a frozen letter is rejected by `isValid`.
+
+**Proof.** `checkEmitterDiscreteAgreement` / `checkInvolutionUnderFreeze`. Reproduce:
+`swift test -c release --filter testTensorLUTFormalCorollaryCertificate`.
+
+**Still does not prove.** Melt completeness; that every shatter lineage reaches \(\pi=0\).
+
+---
+
 ## Five-cell test
 
 | Cell | Artifact |
 |------|----------|
-| Proof | Theorem 1 + `TensorLUTFormalCertificate` |
+| Proof | Theorem 1 + `TensorLUTFormalCertificate`; corollary **C25** |
 | Table | Lemmas vs `holds` on the certificate; campaign grades in BREAK §21 |
 | Metric | \(F_{\mathrm{crypto}}=0\) on unmutated baseline; \(\pi=0\) on binary INIT |
 | Examples | M4 baseline emit; freeze-core involution; blind 3-pair PASS |

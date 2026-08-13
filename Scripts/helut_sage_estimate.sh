@@ -20,6 +20,8 @@ find_sage() {
   for p in \
     /Applications/SageMath-10-9.app/Contents/MacOS/SageMath \
     /Applications/SageMath.app/Contents/MacOS/SageMath \
+    "$HOME/Applications/SageMath-10-9.app/Contents/Frameworks/Sage.framework/Versions/Current/local/bin/sage" \
+    "$HOME/Applications/SageMath-10-9.app/Contents/Frameworks/Sage.framework/Versions/10.9/local/bin/sage" \
     "$HOME/micromamba/envs/sage/bin/sage" \
     "$HOME/miniforge3/envs/sage/bin/sage" \
     /opt/homebrew/Caskroom/sage/*/SageMath-*.app/Contents/MacOS/SageMath
@@ -43,7 +45,7 @@ if SAGE_BIN=$(find_sage); then
   if ! "$SAGE_BIN" --pip install "$EST" >/tmp/helut-sage-pip.log 2>&1; then
     "$SAGE_BIN" -python -m pip install "$EST" | tee -a logs/helut-sage-estimator-run.log
   fi
-  "$SAGE_BIN" -python Scripts/helut_lattice_estimate.py \
+  PYTHONUNBUFFERED=1 "$SAGE_BIN" -python Scripts/helut_lattice_estimate.py \
     --pending logs/helut-estimator-pending.json \
     --out logs/helut-estimator-results.json \
     "$@" 2>&1 | tee -a logs/helut-sage-estimator-run.log

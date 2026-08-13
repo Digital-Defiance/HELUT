@@ -43,19 +43,31 @@ printed, may we say ``encrypted'' on a slide?\}.
 \reproduced{C6, H2 closed}{full\_adder encrypted SING through $N=1024$.}
 
 Follow Appendix~\ref{app:repro}. Record ms/row at $N=8$ and $N=1024$.
-Write the \hid{1} and \hid{4} asterisks next to any hardness or depth
-sentence.
+Write the \hid{1} asterisk next to hardness.
+Write the \hid{4} asterisk next to depth: \cid{22} measured covering gadget;
+$N=1024$ SING is still $e=0$ BK.
 
 Theory track: parse a published SING log and reconstruct the table
 without running Metal.
 
+\section{Lab 4b --- Measured noisy BK (\cid{22})}
+
+\begin{lstlisting}
+.build/release/helut --measure-bk-noise --degree 8 \
+  --trials 8 --bk-noise 64
+\end{lstlisting}
+
+Deliverable: $B_{\mathrm{bk}}$, $\hat\sigma$, $\delta/2$, and one sentence
+on why $\ell=1$ \texttt{booleanPublicMS} is omitted.
+Theory track: read \corpus{logs/helut-noisy-bk-measure.log}.
+
 \section{Lab 5 --- Metal compiler post-mortem}
 
-Compare fused-megagraph DNF, \cid{16}, \cid{17}, \cid{18} using
+Compare fused-megagraph DNF, \cid{16}--\cid{21} using
 Chapter~\ref{ch:metal}'s table.
 Optional systems: \texttt{make test-metal-p1} and one
 \texttt{--bench-encrypted-micro --degree 64} run.
-Deliverable: the \hid{3} paragraph in your own words.
+Deliverable: the \hid{3} paragraph in your own words (scheduler vs NTT).
 
 \section{Lab 6 --- TensorLUT Theorem 1 (\cid{19})}
 

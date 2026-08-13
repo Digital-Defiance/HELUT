@@ -70,7 +70,7 @@ export function JournalPage() {
             <li>
               <span className="mono">OPEN</span>
               <span>
-                <strong>Still untested or incomplete:</strong> catalog right-ring sweep parked at menu 264 (resume 265; ~604 of 868 left; menus 1–264 dead); Thetis-register rings from menu 14; any middle ring other than A (~8–15% of keys); near-shell walk around sister keys. Sister message P1030681 needed heavy degarbling—exact Welchman clean negatives do not rule out a mis-transcribed P1030680. Soft-band near-misses quarantine into Stochastic seeds. More GPU on inventing letters does not invent the plaintext—boolean coverage plus garble-aware escalation does.
+                <strong>Still untested or incomplete:</strong> catalog right-ring sweep parked at originalIndex 417/2513 (last <code>VVVUUUDREINULEINSVI@25</code>; resume <code>--bombe-from 418</code>); Thetis-register rings from menu 14; any middle ring other than A (~8–15% of keys); near-shell walk around sister keys. Sister message P1030681 needed heavy degarbling—exact Welchman clean negatives do not rule out a mis-transcribed P1030680. Soft-band near-misses quarantine into Stochastic seeds. More GPU on inventing letters does not invent the plaintext—boolean coverage plus garble-aware escalation does.
               </span>
             </li>
           </ul>
@@ -278,7 +278,7 @@ export function JournalPage() {
               <h3>I stopped the four-day sweep on purpose.</h3>
               <div className="prose">
                 <p>
-                  I started the exact ≥16 catalog ring sweep, then parked it at menu 57 of 868—all dead at the board so far—in <code>logs/campaign-catalog-rings.log</code> to chase Übung. That arm later cleared through menu 202 (still all dead), paused for Regenbogen/Hannibal (Phase 23), resumed from 203/257, and is now parked at menu 264—still all dead, resume <code>--bombe-from 265</code>. I was not going to spend those days forcing Potsdam register onto a training net while a Thetis-shaped opening was still untested.
+                  I started the exact ≥16 catalog ring sweep, then parked it at menu 57 of 868—all dead at the board so far—in <code>logs/campaign-catalog-rings.log</code> to chase Übung. That arm later cleared through menu 202 (still all dead), paused for Regenbogen/Hannibal (Phase 23), resumed from 203/257/265, and is now parked at originalIndex <strong>417</strong>/2513—last line <code>VVVUUUDREINULEINSVI@25</code>, still all dead, resume <code>--bombe-from 418</code>. I was not going to spend those days forcing Potsdam register onto a training net while a Thetis-shaped opening was still untested.
                 </p>
               </div>
             </article>
@@ -383,7 +383,7 @@ export function JournalPage() {
             <div className="kicker">Honest Scope</div>
             <h2>The Evidence Room</h2>
             <p>
-              I know the Potsdam 1 May keys decrypt other U-534 traffic, but not this message. The archival levers are spent. My engine is graded rather than trusted—a blind Welchman control breaks a known key through the full campaign in 361 seconds, and the Stochastic Bombe’s GPU KPA path recovers that same control when the template is known. Training, collapse, weather, meta-evolve, and shell-RIGA all produced zero survivors under an 80%∩noise+10% gate. Exact catalog and fuzzed arms under rings AAAA are clean negatives; so is the ≥16 UEBUNG head. Soft UEBUNG quarantine escalate is also a clean negative. Regenbogen/Hannibal cribs are not a BREAK—anchor dead under rings; scuttle and Hela soft-band escalate to zero; own-orders and filler AAAA stay below soft. Sister traffic P1030681 needed degarbling, so exact clean negatives may still miss a mis-read ciphertext—soft-band Welchman stops quarantine into Stochastic seeds, graded on both synthetic and historical garbles. TensorLUT is a parallel compiler track, not a Thetis crib. What remains on the menu path: catalog right-ring coverage parked at menu 264 (resume 265; 1–264 dead), parked Thetis-register rings at 13/73, and no middle ring but A.
+              I know the Potsdam 1 May keys decrypt other U-534 traffic, but not this message. The archival levers are spent. My engine is graded rather than trusted—a blind Welchman control breaks a known key through the full campaign in 361 seconds, and the Stochastic Bombe’s GPU KPA path recovers that same control when the template is known. Training, collapse, weather, meta-evolve, and shell-RIGA all produced zero survivors under an 80%∩noise+10% gate. Exact catalog and fuzzed arms under rings AAAA are clean negatives; so is the ≥16 UEBUNG head. Soft UEBUNG quarantine escalate is also a clean negative. Regenbogen/Hannibal cribs are not a BREAK—anchor dead under rings; scuttle and Hela soft-band escalate to zero; own-orders and filler AAAA stay below soft. Sister traffic P1030681 needed degarbling, so exact clean negatives may still miss a mis-read ciphertext—soft-band Welchman stops quarantine into Stochastic seeds, graded on both synthetic and historical garbles. TensorLUT is a parallel compiler track, not a Thetis crib. What remains on the menu path: catalog right-ring coverage parked at originalIndex 417/2513 (resume <code>--bombe-from 418</code>), parked Thetis-register rings at 13/73, and no middle ring but A.
             </p>
           </div>
           <ul className="stack-list">
@@ -441,11 +441,11 @@ export function JournalPage() {
             </article>
 
             <article className="tl-item">
-              <div className="when">3 — Parked: catalog resume from menu 265</div>
+              <div className="when">3 — Parked: catalog resume from originalIndex 418</div>
               <h3>Sweep every ring phase on every exact crib.</h3>
               <div className="prose">
                 <p>
-                  Menus 1–264 are done—all dead at the board—in <code>logs/campaign-catalog-rings.log</code>. Resume with <code>--bombe-from 265</code> (604 menus left; quarantine → <code>logs/quarantine_candidates.json</code>). Regenbogen/Hannibal is closed as a clean negative under right rings (Phase 23).
+                  OriginalIndex 1–417/2513 are done—all dead at the board—in <code>logs/campaign-catalog-rings.log</code> (last <code>VVVUUUDREINULEINSVI@25</code>). Resume with <code>--bombe-from 418</code> (quarantine → <code>logs/quarantine_candidates.json</code>). Regenbogen/Hannibal is closed as a clean negative under right rings (Phase 23).
                 </p>
               </div>
             </article>
@@ -508,7 +508,7 @@ export function JournalPage() {
               <h3>Freeze the core; evolve reciprocal plugs.</h3>
               <div className="prose">
                 <p>
-                  Full INIT melt and stecker-cone melt are diagnosed dead ends. The live arm freezes the known-good TensorLUT silicon and searches a ≤10-pair involution sandwich. Blind three-pair rediscovery on a fourteen-letter crib already PASSed. Still parallel research—not a substitute for catalog right-ring coverage from menu 265.
+                  Full INIT melt and stecker-cone melt are diagnosed dead ends. The live arm freezes the known-good TensorLUT silicon and searches a ≤10-pair involution sandwich. Blind three-pair rediscovery on a fourteen-letter crib already PASSed. Still parallel research—not a substitute for catalog right-ring coverage from originalIndex 418.
                 </p>
               </div>
             </article>

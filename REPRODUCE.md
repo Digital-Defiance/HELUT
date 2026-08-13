@@ -20,19 +20,17 @@ make textbook   # textbook/helut-living-textbook.tex → pdf + md
 make docs       # all three (needs latexmk + pandoc)
 ```
 
-## Hardness / estimator (H1)
+## Hardness / estimator (**C23**, **H1**)
 
 ```bash
 .build/release/helut --hardness-table | tee logs/helut-hardness.txt
 .build/release/helut --estimator-export > logs/helut-estimator-pending.json
-python3 Scripts/helut_lattice_estimate.py \
-  --pending logs/helut-estimator-pending.json \
-  --out logs/helut-estimator-results.json
+./Scripts/helut_sage_estimate.sh
 ```
 
-Until SageMath provides `sage.all`, results stay `null` — do not treat calibrated bits as estimator output (**H1**, **N3**).
+Native SageMath 10.9 lives at `~/Applications/SageMath-10-9.app` (3-manifolds arm64 `.app`; no sudo pkg). The runner finds that path, installs `lattice-estimator`, and writes `logs/helut-estimator-results.json`. Docker qemu amd64 is refused (FLINT SIGILL).
 
-Install path (host): `brew install --cask sage` (may need interactive sudo), then re-run the estimator script. Lattice-estimator Python package alone is not enough.
+Production `prod-n1024-s16`: HELUT 175.7 vs estimator **180.2** (|Δ|=4.5). Four of eight anchors sit outside the 16-bit merge tolerance — do not quote 176 as estimator cost on every row (**H1**).
 
 ## Encrypted ≡ clear (C4–C6) — envelope *N*≤128 (**H2**)
 
@@ -69,20 +67,44 @@ make test-metal-p1 2>&1 | tee logs/helut-ntt-cert.log
   | tee logs/helut-encrypted-micro-n64-ntt.log
 ```
 
-Metal full_adder SING per-LUT (**C20** wavefront-parallel NTT): boolean **10.6 s / 8 rows** (beats **C17** 12.2 s). Legacy fused megagraph is `--metal-br-fused` only.
+Metal full_adder SING per-LUT (**C20** wavefront-parallel NTT): boolean **10.6 s / 8 rows** (beats **C17** 12.2 s). Crypto ℓ=2 (**C21**): **11.38 s / 8**. Legacy fused megagraph is `--metal-br-fused` only.
 
 ```bash
 .build/release/helut --bench netlist.json --degree 1024 --bench-encrypted --sing --vectors 8 \
   --paths 'blind-rotate-metal public-ms boolean' \
   | tee logs/helut-encrypted-n1024-metal-sing-par.log
 .build/release/helut --bench netlist.json --degree 1024 --bench-encrypted --sing --vectors 8 \
+  --paths 'blind-rotate-metal public-ms crypto' \
+  | tee logs/helut-encrypted-n1024-metal-sing-crypto.log
+.build/release/helut --bench netlist.json --degree 1024 --bench-encrypted --sing --vectors 8 \
   --metal-netlist-only \
   | tee logs/helut-encrypted-n1024-metal-netlist-sing.log
 ```
 
+Measured noisy BK (**C22**). Covering gadget only (`cryptoPublicMS` / `.crypto`); ℓ=1 `booleanPublicMS` cannot carry BK noise.
+
+```bash
+.build/release/helut --measure-bk-noise --degree 8 --trials 8 --bk-noise 64 \
+  | tee logs/helut-noisy-bk-measure.log
+.build/release/helut --measure-bk-noise --degree 128 --trials 4 --bk-noise 64 \
+  | tee logs/helut-noisy-bk-measure-n128.log
+swift test -c release --filter 'TFHESeamTests/testNoisyBKIdentityMeasurement'
+swift test -c release --filter 'TFHESeamTests/testEncryptedNetlistFullAdderWithNoisyBK'
+```
+
+Product-shaped *N*=1024 residual (**C26**, H4 graded negative — not a production depth close):
+
+```bash
+.build/release/helut --measure-bk-noise --degree 1024 --trials 2 --bk-noise 64 \
+  | tee logs/helut-noisy-bk-measure-n1024.log
+.build/release/helut --measure-bk-noise --degree 1024 --trials 2 --bk-noise 4 \
+  | tee -a logs/helut-noisy-bk-measure-n1024.log
+```
+
+Expect: noiseless *B*=0; inject *B*=64 undecodable; *B*=4 on `.crypto` may be ∞-norm OK with εlog2≈−1 (not −64).
+
 
 ## Campaign control (C2) — cleartext, not FHE (**N6**)
-
 Welchman blind control on known P1030684 (see journal / `BREAK_P1030680.md`). Fitness is cleartext Metal batch — never HELUT encrypted tick rate.
 
 ## TensorLUT Theorem 1 (C19)
@@ -92,6 +114,22 @@ swift test -c release --filter testTensorLUTFormalCertificate
 ```
 
 Six lemmas must hold (`π`, MSE, \(F\), emitter, involution, freeze). Statement: [`directives/tensorlut-theorem.md`](directives/tensorlut-theorem.md). Structural — not a U-534 / P1030680 decrypt (**H6**, **N**).
+
+## TensorLUT Theorem 1 corollary (C25)
+
+```bash
+swift test -c release --filter testTensorLUTFormalCorollaryCertificate
+```
+
+Two lemmas must hold (emitter–discrete agreement; involution under freeze). Still not melt completeness.
+
+## Enigma256 SoftBus Theorem 2 (C24)
+
+```bash
+swift test -c release --filter testEnigma256FormalCertificate
+```
+
+Five lemmas must hold (bijection, reciprocity, stream round-trip, day-key involutions, `coupledCubic6` reject). Statement: [`directives/enigma256-theorem.md`](directives/enigma256-theorem.md). Structural SoftBus contract — not IND-CPA; builds on empirical **C10**.
 
 ## TensorLUT baseline (C8)
 

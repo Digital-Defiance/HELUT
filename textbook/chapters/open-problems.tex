@@ -17,17 +17,17 @@ Track & Status at epoch \livingepoch{} & Next experiment \\
   & \textbf{Closed} ($Z_{2N}$ pack / \texttt{rotationPower})
   & Keep as a worked bug in Chapter~\ref{ch:torus}. \\
 \hid{1} Sage lattice-estimator
-  & Protocol shipped; SageMath not filled
-  & Estimator script on pending JSON. \\
+  & \cid{23} JSON filled; production $|\Delta|=4.5$
+  & Tighten HELUT vs estimator where $|\Delta|>16$. \\
 \hid{3} Metal BR at large $N$
-  & \cid{18} micro win; SING not vs.\ \cid{17}
-  & Cut in-tile NTT/iNTT round-trips. \\
+  & \cid{20} boolean $10.6\,\mathrm{s}$; \cid{21} crypto $\ell=2$ $11.38\,\mathrm{s}$
+  & NTT inside the crypto $\ell=2$ tile. \\
 \hid{4} Noisy BK
-  & Modeled; $B_{\mathrm{bk}}=0$
-  & Measured $\sigma_{\mathrm{BK}}$ into the certificate. \\
+  & \cid{22} covering $N\le 128$; \cid{26} $N{=}1024$ inject graded fail; SING $e{=}0$
+  & Gadget/$\sigma$ that meets $\varepsilon\le 2^{-64}$ at production $N$. \\
 Campaign catalog
-  & Middle ring $\neq A$ untested; catalog @265
-  & Resume \texttt{--bombe-from 265}. \\
+  & Middle ring $\neq A$ untested; catalog parked @417
+  & Resume \texttt{--bombe-from 418}. \\
 Garble / quarantine
   & Soft-band grades
   & Sister-message lessons; not a decrypt claim. \\
@@ -40,11 +40,12 @@ Garble / quarantine
 \begin{enumerate}
   \item \textbf{Pillar I science:} shallower nets, NTT/persist graphs,
         estimator-backed params (this book's Parts~III).
-  \item \textbf{Pillar II science:} Theorem~1 landed (\cid{19},
-        Chapter~\ref{ch:pillarii}); remaining: completeness of melt,
-        stream-cipher melts.
-  \item \textbf{Pillar III science:} polymorphic Red/Blue standard beyond
-        E256 SoftBus.
+  \item \textbf{Pillar II science:} Theorem~1 landed (\cid{19}); corollary
+        emitter / freeze (\cid{25}, Chapter~\ref{ch:pillarii}); remaining:
+        completeness of melt, stream-cipher melts.
+  \item \textbf{Pillar III science:} SoftBus Theorem~2 landed (\cid{24},
+        Chapter~\ref{ch:pillariii}); remaining: polymorphic Red/Blue standard
+        beyond E256 SoftBus.
   \item \textbf{FHE gate / ZK depth:} TensorLUT aimed at multiplicative
         depth (queued; not a part of this edition).
   \item \textbf{Side-channel (parked):} bgpucap-style power on live Metal

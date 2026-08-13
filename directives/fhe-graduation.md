@@ -68,7 +68,7 @@ CLI: `--encoding …`, `--lut-backend multilinear|pbs|pbs-ggsw|encrypted`, `--be
 
 ### Honest limits (still)
 
-- **Decision-LWE binding** for `encryptLWE` IND-CPA + calibrated classical core-SVP *estimate* (`TFHELWEHardnessCertificate` / `TFHELWECalibration`) — verify with a full lattice estimator before production key sizes (`TFHELWEEstimatorProtocol` + `Scripts/helut_lattice_estimate.py`)
+- **Decision-LWE binding** for `encryptLWE` IND-CPA + calibrated classical core-SVP *estimate* (`TFHELWEHardnessCertificate` / `TFHELWECalibration`) — lattice-estimator JSON filled (**C23**); production |Δ|=4.5; do not treat every calibration row as estimator cost (`TFHELWEEstimatorProtocol`)
 - Gaussian ε-certificate under independent-noise + noiseless-BK hypotheses; noisy BK modeled by `TFHENoisyBKCertificate` / Gaussian depth union bound
 - Discrete-inject ∞-norm proof remains (`TFHENoiseProof`)
 - Multi-LUT default: **`publicMS`** with lattice BK; `.secret` available
@@ -102,10 +102,12 @@ binary-digit `X^p` (O(log N) static rotates per monomial; was O(2N) mux).
 `TFHELWEProduction.certificate128()` targets ≥128 bits at N=1024, σ=2^{16}.
 `TFHELWECalibration` anchors the estimator to TFHE-style ballparks
 (|Δ| ≤ 12 bits); production row ≈176 bits.
-`TFHENoisyBKCertificate` makes the noiseless-BK hypothesis explicit and
-bounds depth under a non-zero $B_{\mathrm{bk}}$.
+`TFHENoisyBKCertificate` makes the noiseless-BK hypothesis explicit.
+`TFHENoisyBKMeasurement` fills *B*<sub>bk</sub> / σ̂ from identity-LUT residuals
+(covering gadget; **C22**). ℓ=1 `booleanPublicMS` cannot carry BK noise.
 `TFHELWEEstimatorProtocol` exports pending rows for lattice-estimator fill-in
-(`--estimator-export`, `Scripts/helut_lattice_estimate.py`).
+(`--estimator-export`, `Scripts/helut_sage_estimate.sh`, **C23**).
+Production row agrees within 4.5 bits; four anchors still exceed Δ=16 (**H1**).
 Encrypted metrics: `--bench-encrypted --sing` / `Scripts/helut_encrypted_sing.sh`.
 
 ### Sample / GGSW / PBS

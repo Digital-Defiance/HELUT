@@ -26,6 +26,8 @@ Needs `latexmk` (MacTeX / TeX Live) and `pandoc`. Aux files land under `build/`.
 
 **Project site:** [helut.digitaldefiance.org](https://helut.digitaldefiance.org) — stack overview, the three pre-Enigma apps, and the P1030680 campaign. Source in [`site/`](site/).
 
+**YouTube concept videos:** Remotion + ElevenLabs TTS under [`videos/`](videos/) (overview + three pillars).
+
 ## Requirements
 
 - macOS 14+
@@ -172,7 +174,7 @@ PRD*.md / phase-*.md   Design progression
 
 - **General HELUT:** Yosys `$lut` + sequential cells → one `MPSGraph`; boolean-safe under trivial constant-fill / phase / glwe-trivial; LUT backends `multilinear` and trivial `pbs`; PicoRV32 ~1.3 s / ~173 ms tick; Enigma M3 Metal≡cleartext at N=1024 **PASS**.
 - **Not claimed:** that calibrated core-SVP estimates replace a lattice-estimator run, or that trivial Metal graphs are FHE. (Decision-LWE binding + ε-cert: `TFHELWEHardnessCertificate` / `TFHEAsymptoticSecurityCertificate`.)
-- **Enigma host attack:** real M4 decrypt / crib-drag / stecker / campaign ladder; P1030680 remains historically unbroken — catalog rings **suspended** at menu 264 (resume `--bombe-from 265`).
+- **Enigma host attack:** real M4 decrypt / crib-drag / stecker / campaign ladder; P1030680 remains historically unbroken — catalog rings **suspended** at originalIndex 417 (resume `--bombe-from 418`).
 - **CLI:** `--bench` for general netlist clocking; day-to-day UX still Enigma-first for campaign tools.
 
 ## License

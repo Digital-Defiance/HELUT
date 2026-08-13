@@ -1,10 +1,11 @@
 \chapter{Ciphers that grow under fire}
 \label{ch:pillariii}
 
-\growswhen{A fail-closed security-property proof for generation rolls, and a
-polymorphic Red/Blue standard beyond the E256 SoftBus instance (roadmap:
-Schneier pillar). This edition teaches the contract and the laboratory
-loop, not a finished standard.}
+\growswhen{A polymorphic Red/Blue standard beyond the E256 SoftBus instance
+(roadmap: Schneier pillar), and IND-CPA / Red-pressure security proofs that
+go past the structural SoftBus contract. This edition teaches Theorem~2
+(machine-checked reciprocity / fail-closed) plus the laboratory loop---not
+a finished industry standard.}
 
 \section{Why a cryptanalysis lab must design ciphers}
 
@@ -37,6 +38,34 @@ the same machine state.
 \reproduced{C10}{Enigma256 reciprocity, fail-closed behavior, and bijection
 tests. See \corpus{Enigma256.md} and fixtures.}
 
+\reproduced{C24}{Enigma256 SoftBus Theorem~2: five machine-checked lemmas
+(bijection, reciprocity, stream round-trip, day-key involutions,
+\texttt{coupledCubic6} reject). Statement:
+\corpus{directives/enigma256-theorem.md}.}
+
+\section{Theorem 2 (structural SoftBus)}
+\label{sec:thm-enigma256}
+
+\begin{theorem}[Enigma256 SoftBus reciprocity / fail-closed]
+\label{thm:enigma256}
+Under the hypotheses of \texttt{Enigma256Formal.certificate()}
+(reciprocal scramble path; day-key involution builders; NLFF retaps do not
+rewrite frozen scramble): frozen scramble is a permutation and an involution;
+stream encrypt-then-decrypt recovers plaintext under identical keys; derived
+plugboard is fixed-point-free involution and un-reflector is an involution;
+\texttt{hardenedCubic()} rejects \texttt{coupledCubic6}.
+\end{theorem}
+
+Machine-checked: \texttt{Enigma256Formal.certificate()} /
+\texttt{testEnigma256FormalCertificate}.
+Reproduce: see Lab appendix / \corpus{REPRODUCE.md}.
+
+\begin{warning}
+Theorem~2 is a \emph{structural SoftBus contract}---not IND-CPA, not a claim
+that Red TensorLUT/KPA/\texttt{ent} cannot force Blue generation rolls, and
+not a finished polymorphic-cipher standard.
+\end{warning}
+
 \section{Red pressure}
 
 Red is not a separate team with a PDF of attacks.
@@ -47,14 +76,8 @@ generations.
 A generation that cannot hold under that pressure does not ship.
 Fail-closed means: if reciprocity, bijection, or a stated invariant
 breaks, the roll aborts rather than emitting a ``mostly fine'' Verilog.
-
-\begin{warning}
-Fail-closed as implemented in tests is not yet the security-property
-proof the doctrine wants for a standard.
-Do not tell a standards committee that E256 is ``done.''
-Tell them the loop exists and the proof is an open hedge on the
-trajectory.
-\end{warning}
+Theorem~2 covers the structural abort path for coupled NLFF harden;
+empirical Red batteries remain separate grades.
 
 \section{What students design}
 

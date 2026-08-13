@@ -61,24 +61,27 @@ Potsdam and Plaice daily keys for 1 May were eliminated by exhaustion against P
 The operational ledger is `BREAK_P1030680.md`; the public claim freeze is `directives/claim-sheet.md`. Table [1](#tab:campaign){reference-type="ref" reference="tab:campaign"} summarizes what is *proven*, what is *eliminated*, and what remains open. **None of these rows is a decrypt of P1030680** (non-claim N5).
 
   **Result**                                                   **Status**
-  ------------------------------------------------------------ -----------------------------------------------------------------------------
+  ------------------------------------------------------------ ------------------------------------------------------------------------------------
   Welchman blind control (P1030684)                            Break in 361 s; all 10 plugs
   Stochastic KPA datapath                                      Control oracle + near-miss PASS; blind stecker $\sim$`<!-- -->`{=html}22/72
+  Training / collapse / weather / RIGA priors                  0 survivors under 80% rigor (ceiling $\sim$`<!-- -->`{=html}60--69% = coincidence)
   Exact $\ge$`<!-- -->`{=html}16 catalog $\times$ rings AAAA   Clean negative
   Curated exact / fuzzed top-40 $\times$ right rings           Clean negative
-  UEBUNG / Thetis-register arms                                Clean negative (register rings parked)
-  Regenbogen / Hannibal operational cribs                      Not BREAK under graded rings
-  Catalog exact $\times$ right rings                           Parked at menu 264/868; resume `--bombe-from 265`
+  UEBUNG / Thetis-register arms                                Clean negative (register rings parked at 13/73)
+  Soft-tail UEBUNG quarantine escalate                         55 seeds; Hybrid 0 survivors
+  Regenbogen / Hannibal (anchor, scuttle, Hela)                Not BREAK; soft escalate 0 survivors
+  Own-orders / filler $\times$ AAAA                            Own: 0 physical; filler below soft --- no rings
+  Catalog exact $\times$ right rings                           Parked originalIndex 417/2513; `--bombe-from 418`
   Middle ring $\ne$ A                                          Untested ($\sim$`<!-- -->`{=html}8--15% of keys)
   Ciphertext garble risk                                       Sister P1030681 needed degarbling; exact bars may drop true shells
 
   : Campaign grades (cleartext Metal). Fitness is not HELUT encrypted tick rate (N6). {#tab:campaign}
 
-Soft-band Welchman stops can quarantine into Stochastic seeds (`--hybrid-quarantine`). Synthetic and historical garble controls grade that path; it has not produced a P1030680 BREAK.
+Soft-band Welchman stops can quarantine into Stochastic seeds (`--hybrid-quarantine`). Synthetic P1030684 block-wipe and historical P1030681 first-draft controls grade that path (escalate recovers edit ceilings, not a new key). On P1030680 itself, UEBUNG and Regenbogen soft bands produced German-looking IC without survivors under the 80% bar --- coincidence, not plaintext.
 
 # Parallel Track: TensorLUT
 
-Independently of the Boolean catalog, HELUT ships a continuous--to--discrete compiler: Yosys LUT6 cells become 64-wide floating INIT tensors, Metal evaluates a multilinear stream, $\lambda$ squeezes toward binary, and an emitter writes gate-level Verilog. Unmutated `enigma_m4` locks $F_{\mathrm{crypto}}=0$ (925 LUT6 + 49 DFFs baseline). Full INIT cold-start and stecker-cone melts *shatter* under $\lambda$; the live arm freezes known-good silicon and evolves a $\le 10$-pair stecker involution by construction (blind three-pair rediscovery PASS; claims C8--C9). This grades generative hardware synthesis and reciprocal genotype search. It does **not** invent P1030680's missing plaintext (N7, H6).
+Independently of the Boolean catalog, HELUT ships a continuous--to--discrete compiler: Yosys LUT6 cells become 64-wide floating INIT tensors, Metal evaluates a multilinear stream, $\lambda$ squeezes toward binary, and an emitter writes gate-level Verilog. Unmutated `enigma_m4` locks $F_{\mathrm{crypto}}=0$ (925 LUT6 + 49 DFFs baseline). Full INIT cold-start and stecker-cone melts *shatter* under $\lambda$; the live arm freezes known-good silicon and evolves a $\le 10$-pair stecker involution by construction (blind three-pair rediscovery PASS; claims C8--C9). Six formal lemmas of the continuous--discrete loop hold in-repo (claim C19; `directives/tensorlut-theorem.md`). This grades generative hardware synthesis and reciprocal genotype search. It does **not** invent P1030680's missing plaintext (N7, H6).
 
 # Scope Relative to the HELUT Stack
 

@@ -891,6 +891,23 @@ final class TFHESeamTests: XCTestCase {
         XCTAssertTrue(cert.hypotheses.contains(where: { $0.contains("multilinear") }))
     }
 
+    func testTensorLUTFormalCorollaryCertificate() {
+        let cert = TensorLUTFormal.corollaryCertificate()
+        XCTAssertTrue(cert.allHold, "\(cert.steps.filter { !$0.holds }.map(\.lemma))")
+        cert.assertValid()
+        XCTAssertEqual(cert.steps.count, 2)
+        XCTAssertTrue(cert.steps.contains { $0.lemma == .emitterDiscreteAgreement && $0.holds })
+        XCTAssertTrue(cert.steps.contains { $0.lemma == .involutionUnderFreeze && $0.holds })
+    }
+
+    func testEnigma256FormalCertificate() {
+        let cert = Enigma256Formal.certificate()
+        XCTAssertTrue(cert.allHold, "\(cert.steps.filter { !$0.holds }.map(\.lemma))")
+        cert.assertValid()
+        XCTAssertEqual(cert.steps.count, 5)
+        XCTAssertTrue(cert.hypotheses.contains(where: { $0.contains("Fail-closed") || $0.contains("fail-closed") || $0.contains("coupledCubic6") }))
+    }
+
     func testTestPolyInitCacheHits() {
         TFHETestPolyCache.shared.clear()
         let table: [UInt32] = [0, 1, 1, 0]

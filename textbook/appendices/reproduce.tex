@@ -17,18 +17,17 @@ make paper      # three-pillar report
 make writeup    # P1030680 campaign report
 \end{lstlisting}
 
-\section{Hardness (\hid{1})}
+\section{Hardness (\cid{23}, \hid{1})}
 
 \begin{lstlisting}
 .build/release/helut --hardness-table
-.build/release/helut --estimator-export \
-  > logs/helut-estimator-pending.json
-python3 Scripts/helut_lattice_estimate.py \
-  --pending logs/helut-estimator-pending.json \
-  --out logs/helut-estimator-results.json
+./Scripts/helut_sage_estimate.sh
 \end{lstlisting}
 
-Until SageMath provides \texttt{sage.all}, results stay null.
+Native SageMath 10.9 at \texttt{\textasciitilde/Applications/SageMath-10-9.app}.
+Production row: HELUT $175.7$ vs estimator $180.2$.
+Four of eight anchors exceed the 16-bit merge tolerance --- do not quote
+$176$ as estimator cost on every row.
 
 \section{Encrypted SING (\cid{4}--\cid{6})}
 
@@ -49,6 +48,45 @@ make test-metal-p1
 Default at $N>64$ is tiled-kernel with inlined NTT.
 Do not assign \texttt{--metal-br-fused} at $N=1024$ as a timed lab.
 
+\section{Wavefront SING (\cid{20}, \cid{21})}
+
+Boolean $10.6\,\mathrm{s}/8$; crypto $\ell=2$ $11.38\,\mathrm{s}/8$ at $N=1024$.
+Logs already in \corpus{logs/} --- students need not re-time Metal unless
+the instructor assigns a machine-local check.
+
+\begin{lstlisting}
+.build/release/helut --bench netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 8 \
+  --paths 'blind-rotate-metal public-ms boolean'
+.build/release/helut --bench netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 8 \
+  --paths 'blind-rotate-metal public-ms crypto'
+\end{lstlisting}
+
+\section{Measured noisy BK (\cid{22})}
+
+Covering gadget only. $\ell=1$ \texttt{booleanPublicMS} cannot carry BK noise.
+
+\begin{lstlisting}
+.build/release/helut --measure-bk-noise --degree 8 \
+  --trials 8 --bk-noise 64
+.build/release/helut --measure-bk-noise --degree 128 \
+  --trials 4 --bk-noise 64
+\end{lstlisting}
+
+\section{Product-shaped $N{=}1024$ residual (\cid{26})}
+
+Graded negative for production noisy BK (H4). Expect undecodable inject
+$B{=}64$; $B{=}4$ on \texttt{.crypto} may pass $\infty$-norm with
+$\varepsilon\log_2\approx -1$ (not $-64$).
+
+\begin{lstlisting}
+.build/release/helut --measure-bk-noise --degree 1024 \
+  --trials 2 --bk-noise 64
+.build/release/helut --measure-bk-noise --degree 1024 \
+  --trials 2 --bk-noise 4
+\end{lstlisting}
+
 \section{TensorLUT Theorem 1 (\cid{19})}
 
 \begin{lstlisting}
@@ -58,6 +96,25 @@ swift test -c release --filter testTensorLUTFormalCertificate
 Six lemmas must \texttt{hold}. Statement:
 \corpus{directives/tensorlut-theorem.md}.
 Not a U-534 / P1030680 decrypt.
+
+\section{Enigma256 SoftBus Theorem 2 (\cid{24})}
+
+\begin{lstlisting}
+swift test -c release --filter testEnigma256FormalCertificate
+\end{lstlisting}
+
+Five lemmas must \texttt{hold}. Statement:
+\corpus{directives/enigma256-theorem.md}.
+Structural SoftBus contract---not IND-CPA.
+
+\section{TensorLUT Theorem 1 corollary (\cid{25})}
+
+\begin{lstlisting}
+swift test -c release --filter testTensorLUTFormalCorollaryCertificate
+\end{lstlisting}
+
+Emitter--discrete agreement and involution-under-freeze must \texttt{hold}.
+Statement: \corpus{directives/tensorlut-theorem.md} (corollary).
 
 \section{Boolean oracle benches (\cid{1})}
 

@@ -9,6 +9,10 @@ import Darwin
 //
 // Under publicMS after each BR: decode/MS succeeds iff |e| < δ/2. With BK body
 // noise bound B_bk (∞-norm) or Gaussian σ_bk, every LUT is a fresh failure event.
+//
+// Measurement (`TFHENoisyBKMeasurement`) requires a covering gadget
+// (baseLog·ℓ = 32). ℓ=1 booleanPublicMS is a noiseless δ-lattice vehicle:
+// BK noise leaves the lattice and later CMUXes mis-decompose.
 
 /// Discrete ∞-norm BK noise floor after one blind-rotate.
 package struct TFHENoisyBKParams: Sendable, Equatable {
