@@ -123,6 +123,19 @@ done | tee logs/helut-noisy-bk-eps-sweep-n128.log
 
 Expect: residual amp large even at *B*=1; printed εlog2 ≈ −24 only at *B*=64.
 
+## Incomplete public-MS gap + Track A approx (C31 / C32)
+
+```bash
+swift test -c release --filter testGGSWIncompleteCoveringCertificate
+.build/release/helut --measure-bk-noise --degree 1024 --trials 4 --bk-noise 1 \
+  | tee logs/helut-noisy-bk-measure-n1024-B1.log
+.build/release/helut --measure-bk-noise --degree 1024 --trials 4 --bk-noise 2 \
+  | tee -a logs/helut-noisy-bk-measure-n1024-B1.log
+```
+
+Expect: uncoveredBits(1024)=10; `cryptoPublicMS` *B*≥1 undecodable; `.crypto` *B*=1 εlog2≈−32.2.
+Statement: [`directives/ggsw-incomplete-covering.md`](directives/ggsw-incomplete-covering.md).
+
 ## Track B Metal SING with noisy BK (C28)
 
 ```bash

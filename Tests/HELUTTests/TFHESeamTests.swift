@@ -908,6 +908,16 @@ final class TFHESeamTests: XCTestCase {
         XCTAssertTrue(cert.hypotheses.contains(where: { $0.contains("Fail-closed") || $0.contains("fail-closed") || $0.contains("coupledCubic6") }))
     }
 
+    func testGGSWIncompleteCoveringCertificate() {
+        let cert = GGSWIncompleteCovering.certificate()
+        XCTAssertTrue(cert.allHold, "\(cert.steps.filter { !$0.holds }.map(\.lemma))")
+        cert.assertValid()
+        XCTAssertEqual(cert.productionUncoveredBits, 10)
+        XCTAssertEqual(GGSWIncompleteCovering.uncoveredBits(degree: 128), 0)
+        XCTAssertEqual(GGSWIncompleteCovering.uncoveredBits(degree: 1024), 10)
+        XCTAssertEqual(GGSWIncompleteCovering.closestCoveringBaseLog(degree: 1024), 8)
+    }
+
     func testGGSWPublicMSCoveringCertificate() {
         let cert = GGSWPublicMSCovering.certificate()
         XCTAssertTrue(cert.allHold, "\(cert.steps.filter { !$0.holds }.map(\.lemma))")

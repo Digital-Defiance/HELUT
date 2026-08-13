@@ -108,6 +108,17 @@ done
 
 Residual amplification stays large; printed $\varepsilon\log_2\approx-24$ only at $B{=}64$.
 
+\section{Incomplete public-MS gap / Track A approx (\cid{31}/\cid{32})}
+
+\begin{lstlisting}
+swift test -c release --filter testGGSWIncompleteCoveringCertificate
+.build/release/helut --measure-bk-noise --degree 1024 \
+  --trials 4 --bk-noise 1
+\end{lstlisting}
+
+uncoveredBits$(1024)=10$. \texttt{.crypto} $B{=}1$ $\Rightarrow\varepsilon\log_2\approx-32.2$.
+Statement: \corpus{directives/ggsw-incomplete-covering.md}.
+
 \section{Track B Metal SING with noisy BK (\cid{28})}
 
 \begin{lstlisting}
