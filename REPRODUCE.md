@@ -133,8 +133,23 @@ swift test -c release --filter testGGSWIncompleteCoveringCertificate
   | tee -a logs/helut-noisy-bk-measure-n1024-B1.log
 ```
 
-Expect: uncoveredBits(1024)=10; `cryptoPublicMS` *B*≥1 undecodable; `.crypto` *B*=1 εlog2≈−32.2.
+Expect: uncoveredBits(1024)=10; `cryptoPublicMS` *B*≥1 undecodable; `.crypto` *B*=1 εlog2≈−8.4 at 8 trials.
 Statement: [`directives/ggsw-incomplete-covering.md`](directives/ggsw-incomplete-covering.md).
+
+## Track A Metal covering-crypto SING with noisy BK (C33)
+
+```bash
+.build/release/helut --bench netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 2 --bk-noise 1 \
+  --paths 'blind-rotate-metal secret crypto' \
+  | tee logs/helut-encrypted-n1024-metal-sing-covering-crypto-noisy-B1.log
+.build/release/helut --bench netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 2 --bk-noise 1 \
+  --paths covering-crypto \
+  | tee logs/helut-encrypted-n1024-metal-sing-covering-publicms-noisy-B1.log
+```
+
+Expect PASS on both; non-zero decodable *B*<sub>bk</sub>. Not `cryptoPublicMS`.
 
 ## Track B Metal SING with noisy BK (C28)
 
