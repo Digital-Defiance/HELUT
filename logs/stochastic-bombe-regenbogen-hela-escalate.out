@@ -1,0 +1,99 @@
+Quarantine ingest: 7 seed(s) from logs/quarantine_regenbogen_hela.json (soft IC≥0.048 tail>-4.300; evolveShell=false hill=24)
+  [0] C beta I-VII-IV rings=AAAH pos=AKID plugs=10 soft=prefix@36 IC=0.052 tail=-3.823 IC=0.044 tail=-3.823
+  [1] C beta V-III-II rings=AAAL pos=QCEW plugs=10 soft=prefix@34 IC=0.052 tail=-3.507 IC=0.044 tail=-3.507
+  [2] B beta VIII-II-IV rings=AAAW pos=IWWE plugs=10 soft=prefix@52 IC=0.053 tail=-3.842 IC=0.043 tail=-3.842
+  [3] B beta VIII-V-VI rings=AAAH pos=QRHH plugs=10 soft=prefix@44 IC=0.053 tail=-4.083 IC=0.042 tail=-4.083
+  [4] B beta VIII-V-VI rings=AAAU pos=QRHU plugs=10 soft=prefix@44 IC=0.053 tail=-4.083 IC=0.042 tail=-4.083
+  [5] B beta I-III-V rings=AAAP pos=BEHT plugs=9 soft=prefix@45 IC=0.048 tail=-4.150 IC=0.040 tail=-4.150
+  [6] B beta VI-V-II rings=AAAI pos=DNFC plugs=9 soft=prefix@33 IC=0.049 tail=-3.677 IC=0.039 tail=-3.677
+HELUT — Stochastic Bombe vs P1030680
+Ciphertext: JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF
+Fitness: match RATIO (×1000 + absolute); halt on exact constrained match
+Survivor bar: ratio ≥ 80% AND ≥ noiseFloor + 10%
+Templates: Fixtures/p1030680_stochastic_regenbogen.json → 12 masks (constrained 16…28)
+  [24] body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@1
+  [24] body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@10
+  [24] body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@13
+  [24] body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@15
+  [24] body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@17
+  [24] body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@18
+  [24] body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@2
+  [24] body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@22
+  [24] body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@24
+  [24] body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@29
+  [24] body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@32
+  [24] body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@33
+Subspaces: potsdam
+GA: pop=32 gens=12 hill=24 noiseSamples=0 evolveShell=false freeRings=false
+
+════════ subspace potsdam-neighbourhood (WO=6) ════════
+  quarantine WO table retained (7 orders; subspace potsdam-neighbourhood not applied)
+——— [potsdam-neighbourhood] 1/12 body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@1 (24) ———
+  → 11/24 (46%) noise=0% Δ=+46% reject pos=KFBE IC=0.0415
+    UKWB beta VI-V-II rings=AAAI stecker=AH BE CI DT GX JO LP RW UZ VY
+  quarantine WO table retained (7 orders; subspace potsdam-neighbourhood not applied)
+——— [potsdam-neighbourhood] 2/12 body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@10 (24) ———
+  → 11/24 (46%) noise=0% Δ=+46% reject pos=JORS IC=0.0423
+    UKWB gamma IV-III-VIII rings=AAAA stecker=BG DO FI KZ NW
+  quarantine WO table retained (7 orders; subspace potsdam-neighbourhood not applied)
+——— [potsdam-neighbourhood] 3/12 body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@13 (24) ———
+  → 11/24 (46%) noise=0% Δ=+46% reject pos=RKMO IC=0.0372
+    UKWB gamma IV-III-VIII rings=AAAA stecker=AU BK CD HJ IN LX OS QV TZ WY
+  quarantine WO table retained (7 orders; subspace potsdam-neighbourhood not applied)
+——— [potsdam-neighbourhood] 4/12 body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@15 (24) ———
+  → 11/24 (46%) noise=0% Δ=+46% reject pos=HQHP IC=0.0360
+    UKWB gamma IV-III-VIII rings=AAAA stecker=AL BE CH FS GV IO JK NZ TW
+  quarantine WO table retained (7 orders; subspace potsdam-neighbourhood not applied)
+——— [potsdam-neighbourhood] 5/12 body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@17 (24) ———
+  → 12/24 (50%) noise=0% Δ=+50% reject pos=IOEC IC=0.0403
+    UKWB gamma IV-III-VIII rings=AAAA stecker=BV CD EY FW LU
+  quarantine WO table retained (7 orders; subspace potsdam-neighbourhood not applied)
+——— [potsdam-neighbourhood] 6/12 body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@18 (24) ———
+  → 12/24 (50%) noise=0% Δ=+50% reject pos=IIPZ IC=0.0407
+    UKWB gamma IV-III-VIII rings=AAAA stecker=AF CE DO GH JR LZ MX NS
+  quarantine WO table retained (7 orders; subspace potsdam-neighbourhood not applied)
+——— [potsdam-neighbourhood] 7/12 body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@2 (24) ———
+  → 13/24 (54%) noise=0% Δ=+54% reject pos=LYPW IC=0.0407
+    UKWB gamma IV-III-VIII rings=AAAA stecker=BY CS GK HR JX MP NV OW UZ
+  quarantine WO table retained (7 orders; subspace potsdam-neighbourhood not applied)
+——— [potsdam-neighbourhood] 8/12 body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@22 (24) ———
+  → 12/24 (50%) noise=0% Δ=+50% reject pos=GYRM IC=0.0383
+    UKWC beta I-VII-IV rings=AAAH stecker=AP CE FS GH IX JK LZ OT RU VW
+  quarantine WO table retained (7 orders; subspace potsdam-neighbourhood not applied)
+——— [potsdam-neighbourhood] 9/12 body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@24 (24) ———
+  → 11/24 (46%) noise=0% Δ=+46% reject pos=UOMZ IC=0.0438
+    UKWB gamma IV-III-VIII rings=AAAA stecker=AY BO CR EZ GV IX JS KQ MP NT
+  quarantine WO table retained (7 orders; subspace potsdam-neighbourhood not applied)
+——— [potsdam-neighbourhood] 10/12 body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@29 (24) ———
+  → 12/24 (50%) noise=0% Δ=+50% reject pos=ZTEO IC=0.0438
+    UKWB beta VI-V-II rings=AAAI stecker=AH BE CS DT JO KZ LP RW VY
+  quarantine WO table retained (7 orders; subspace potsdam-neighbourhood not applied)
+——— [potsdam-neighbourhood] 11/12 body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@32 (24) ———
+  → 11/24 (46%) noise=0% Δ=+46% reject pos=JZNI IC=0.0376
+    UKWB gamma IV-III-VIII rings=AAAA stecker=AC EJ HR KL MX QV UY WZ
+  quarantine WO table retained (7 orders; subspace potsdam-neighbourhood not applied)
+——— [potsdam-neighbourhood] 12/12 body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@33 (24) ———
+  → 11/24 (46%) noise=0% Δ=+46% reject pos=RAKC IC=0.0360
+    UKWB gamma IV-III-VIII rings=AAAA stecker=AZ BY EN FG IQ JR KV MP OW
+
+——— RIGOR SUMMARY (by ratio) ———
+   54.2%  13/24  noise=   0% Δ=+54.2%  potsdam-neighbourhood  body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@2  | UKWB gamma IV-III-VIII rings=AAAA stecker=BY CS GK HR JX MP NV OW UZ
+   50.0%  12/24  noise=   0% Δ=+50.0%  potsdam-neighbourhood  body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@17  | UKWB gamma IV-III-VIII rings=AAAA stecker=BV CD EY FW LU
+   50.0%  12/24  noise=   0% Δ=+50.0%  potsdam-neighbourhood  body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@18  | UKWB gamma IV-III-VIII rings=AAAA stecker=AF CE DO GH JR LZ MX NS
+   50.0%  12/24  noise=   0% Δ=+50.0%  potsdam-neighbourhood  body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@22  | UKWC beta I-VII-IV rings=AAAH stecker=AP CE FS GH IX JK LZ OT RU VW
+   50.0%  12/24  noise=   0% Δ=+50.0%  potsdam-neighbourhood  body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@29  | UKWB beta VI-V-II rings=AAAI stecker=AH BE CS DT JO KZ LP RW VY
+   45.8%  11/24  noise=   0% Δ=+45.8%  potsdam-neighbourhood  body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@1  | UKWB beta VI-V-II rings=AAAI stecker=AH BE CI DT GX JO LP RW UZ VY
+   45.8%  11/24  noise=   0% Δ=+45.8%  potsdam-neighbourhood  body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@10  | UKWB gamma IV-III-VIII rings=AAAA stecker=BG DO FI KZ NW
+   45.8%  11/24  noise=   0% Δ=+45.8%  potsdam-neighbourhood  body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@13  | UKWB gamma IV-III-VIII rings=AAAA stecker=AU BK CD HJ IN LX OS QV TZ WY
+   45.8%  11/24  noise=   0% Δ=+45.8%  potsdam-neighbourhood  body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@15  | UKWB gamma IV-III-VIII rings=AAAA stecker=AL BE CH FS GV IO JK NZ TW
+   45.8%  11/24  noise=   0% Δ=+45.8%  potsdam-neighbourhood  body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@24  | UKWB gamma IV-III-VIII rings=AAAA stecker=AY BO CR EZ GV IX JS KQ MP NT
+   45.8%  11/24  noise=   0% Δ=+45.8%  potsdam-neighbourhood  body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@32  | UKWB gamma IV-III-VIII rings=AAAA stecker=AC EJ HR KL MX QV UY WZ
+   45.8%  11/24  noise=   0% Δ=+45.8%  potsdam-neighbourhood  body:regenbogen_scuttling:BEFEHLERHALTENREGENBOGEN@33  | UKWB gamma IV-III-VIII rings=AAAA stecker=AZ BY EN FG IQ JR KV MP OW
+
+Elapsed: 87.0 s
+Survivors (≥80% and ≥noise+10%): 0
+*** CLEAN NEGATIVE under rigor bar — templates/prior not near-true ***
+Next: invent new structural hypotheses; do not burn catalog rings yet.
+Wrote logs/stochastic-bombe-p1030680-rigor.json
+See stochastic-bombe.md / BREAK_P1030680.md Phase 18
+EXIT:0

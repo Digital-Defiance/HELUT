@@ -1,0 +1,113 @@
+=== HELUT phase/PBS seam 20260812T192416Z ===
+
+######## Phase encoding equiv (N=1024, multilinear) ########
+HELUT boolean-path bench
+  netlist: enigma_netlist.json
+  N=1024  B=1  ticks=0  warmup=1  reset_hold=3
+  encoding: phase (trivial, noise-free)
+  LUT backend: multilinear
+
+Compiled module 'enigma_core': 10 inputs, 688 LUTs, 26 DFFs, 8 outputs
+Compile breakdown: boolean-safe LUT lower 0.04 s, graph build 0.00 s (total 0.04 s)
+COMPILE
+  total            0.0413 s
+  LUT lower        0.0385 s
+  graph build      0.0028 s
+  cells            688 LUTs, 26 DFFs, 10 inputs, 8 outputs
+  RSS delta        +14.7 MiB (after=32.0 MiB)
+
+EQUIV (Metal boolean-path ≡ CleartextNetlistSim)
+  encoding: phase
+  LUT backend: multilinear
+Compiled module 'enigma_core': 10 inputs, 688 LUTs, 26 DFFs, 8 outputs
+Compile breakdown: boolean-safe LUT lower 0.03 s, graph build 0.00 s (total 0.04 s)
+  plaintext      KEINEBESONDERENEREIGNISSE
+  clear          KEINEBESONDERENEREIGNISSE
+  metal          KEINEBESONDERENEREIGNISSE
+  compile        0.0373 s (N=1024 B=1)
+  stream         0.6699 s (25 letters, 0.0268 s/letter)
+  result          PASS
+
+RSS final 217.5 MiB (delta from start +200.2 MiB)
+
+######## Phase encoding equiv (N=1, multilinear) ########
+HELUT boolean-path bench
+  netlist: enigma_netlist.json
+  N=1  B=1  ticks=0  warmup=1  reset_hold=3
+  encoding: phase (trivial, noise-free)
+  LUT backend: multilinear
+
+Compiled module 'enigma_core': 10 inputs, 688 LUTs, 26 DFFs, 8 outputs
+Compile breakdown: boolean-safe LUT lower 0.03 s, graph build 0.00 s (total 0.03 s)
+COMPILE
+  total            0.0298 s
+  LUT lower        0.0278 s
+  graph build      0.0019 s
+  cells            688 LUTs, 26 DFFs, 10 inputs, 8 outputs
+  RSS delta        +8.6 MiB (after=25.9 MiB)
+
+EQUIV (Metal boolean-path ≡ CleartextNetlistSim)
+  encoding: phase
+  LUT backend: multilinear
+Compiled module 'enigma_core': 10 inputs, 688 LUTs, 26 DFFs, 8 outputs
+Compile breakdown: boolean-safe LUT lower 0.03 s, graph build 0.00 s (total 0.03 s)
+  plaintext      KEINEBESONDERENEREIGNISSE
+  clear          KEINEBESONDERENEREIGNISSE
+  metal          KEINEBESONDERENEREIGNISSE
+  compile        0.0295 s (N=1 B=1)
+  stream         0.5803 s (25 letters, 0.0232 s/letter)
+  result          PASS
+
+RSS final 178.3 MiB (delta from start +161.0 MiB)
+
+######## Trivial PBS full_adder (constant-fill, N=64) ########
+HELUT boolean-path bench
+  netlist: netlist.json
+  N=64  B=1  ticks=0  warmup=1  reset_hold=3
+  encoding: constant-fill (trivial, noise-free)
+  LUT backend: pbs
+
+Compiled module 'full_adder': 3 inputs, 3 LUTs, 0 DFFs, 2 outputs
+Compile breakdown: boolean-safe LUT lower 0.00 s, graph build 0.00 s (total 0.00 s)
+COMPILE
+  total            0.0007 s
+  LUT lower        0.0005 s
+  graph build      0.0001 s
+  cells            3 LUTs, 0 DFFs, 3 inputs, 2 outputs
+  RSS delta        +1.5 MiB (after=14.7 MiB)
+
+Combinational netlist — no clock loop.
+EQUIV (Metal PBS/multilinear ≡ CleartextNetlistSim, combinational)
+  encoding: constant-fill
+  LUT backend: pbs
+  rows            8
+  result          PASS
+
+RSS final 25.1 MiB (delta from start +12.0 MiB)
+
+######## Trivial PBS full_adder (phase, N=64) ########
+HELUT boolean-path bench
+  netlist: netlist.json
+  N=64  B=1  ticks=0  warmup=1  reset_hold=3
+  encoding: phase (trivial, noise-free)
+  LUT backend: pbs
+
+Compiled module 'full_adder': 3 inputs, 3 LUTs, 0 DFFs, 2 outputs
+Compile breakdown: boolean-safe LUT lower 0.00 s, graph build 0.00 s (total 0.00 s)
+COMPILE
+  total            0.0005 s
+  LUT lower        0.0004 s
+  graph build      0.0001 s
+  cells            3 LUTs, 0 DFFs, 3 inputs, 2 outputs
+  RSS delta        +1.5 MiB (after=14.7 MiB)
+
+Combinational netlist — no clock loop.
+EQUIV (Metal PBS/multilinear ≡ CleartextNetlistSim, combinational)
+  encoding: phase
+  LUT backend: pbs
+  rows            8
+  result          PASS
+
+RSS final 24.3 MiB (delta from start +11.1 MiB)
+
+=== DONE 20260812T192416Z ===

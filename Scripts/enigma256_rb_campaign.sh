@@ -39,6 +39,9 @@ if [[ "$RUN_GATES" -eq 1 ]]; then
   echo "=== GATE: SoftBus ent (PRNG plaintext, fail-closed) ==="
   ENT_BYTES="${ENT_BYTES:-1048576}" ./Scripts/enigma256_ent.sh
 
+  echo "=== GATE: scramble bijection / reciprocity (fail-closed) ==="
+  ./Scripts/enigma256_bijection.sh
+
   echo "=== GATE: structured SoftBus KPA (partial-leak + day-only joint) ==="
   "$HELUT_BIN" --enigma256-structured-kpa \
     --enigma256-kpa-rounds "${KPA_ROUNDS:-16384}"

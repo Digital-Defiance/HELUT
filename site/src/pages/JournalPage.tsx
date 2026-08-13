@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 export function JournalPage() {
   return (
     <main>
@@ -5,7 +7,12 @@ export function JournalPage() {
         <div className="page-plane" aria-hidden="true" />
         <div className="shell">
           <div className="section-head">
-            <div className="kicker">Turing Complete</div>
+            <div className="kicker">
+              <Link to="/projects/p1030680" style={{ color: 'inherit', textDecoration: 'none' }}>
+                Project · P1030680
+              </Link>
+              {' · '}Turing Complete
+            </div>
             <h2>The ledger of an 80-year-old ghost</h2>
             <p className="lede">
               On May 1, 1945, in the dying days of World War II, a German U-boat transmitted a 72-letter encrypted message across the Baltic Sea. It was encoded using a four-rotor Enigma M4 machine on a training network known as M-Thetis. The Allied forces at Bletchley Park never bothered to break this specific network, assigning it no operational value, and the German operators printed their daily key sheets on water-soluble paper that dissolved decades ago.
@@ -57,13 +64,13 @@ export function JournalPage() {
             <li>
               <span className="mono">ELIMINATED</span>
               <span>
-                <strong>Where tested, these wedges are gone:</strong> exact ≥16 catalog × rings AAAA; curated exact and fuzzed top-40 × right rings; ≥16 UEBUNG heads and their body anchors under right-ring coverage; Thetis-register × AAAA; training, collapse, and weather/keyboard stochastic priors under an 80% rigor bar (ceiling ~60–69% is coincidence). Shell-RIGA with free rings did not lift a wrong prior over that bar.
+                <strong>Where tested, these wedges are gone:</strong> exact ≥16 catalog × rings AAAA; curated exact and fuzzed top-40 × right rings; ≥16 UEBUNG heads and their body anchors under right-ring coverage; Thetis-register × AAAA; training, collapse, and weather/keyboard stochastic priors under an 80% rigor bar (ceiling ~60–69% is coincidence). Shell-RIGA with free rings did not lift a wrong prior over that bar. Soft-tail UEBUNG quarantine escalate: 0 survivors. Regenbogen/Hannibal tiers (anchor, scuttle, Hela, own-orders, filler): not those exact letter-strings as a BREAK—anchor clean dead; scuttle/Hela soft-band physicals escalate to 0 survivors on the coincidence wall; own-orders AAAA all ghosts; filler AAAA below soft.
               </span>
             </li>
             <li>
               <span className="mono">OPEN</span>
               <span>
-                <strong>Still untested or incomplete:</strong> most of the catalog under right-ring sweep (resume menu 203; parked for Regenbogen); Thetis-register rings from menu 14; any middle ring other than A (~8–15% of keys). Sister message P1030681 needed heavy degarbling—exact Welchman clean negatives do not rule out a mis-transcribed P1030680. Soft-band near-misses now quarantine into Stochastic seeds. More GPU on inventing letters does not invent the plaintext—boolean coverage plus garble-aware escalation does.
+                <strong>Still untested or incomplete:</strong> catalog right-ring sweep parked at menu 264 (resume 265; ~604 of 868 left; menus 1–264 dead); Thetis-register rings from menu 14; any middle ring other than A (~8–15% of keys); near-shell walk around sister keys. Sister message P1030681 needed heavy degarbling—exact Welchman clean negatives do not rule out a mis-transcribed P1030680. Soft-band near-misses quarantine into Stochastic seeds. More GPU on inventing letters does not invent the plaintext—boolean coverage plus garble-aware escalation does.
               </span>
             </li>
           </ul>
@@ -271,7 +278,7 @@ export function JournalPage() {
               <h3>I stopped the four-day sweep on purpose.</h3>
               <div className="prose">
                 <p>
-                  I started the exact ≥16 catalog ring sweep, then parked it at menu 57 of 868—all dead at the board so far—in <code>logs/campaign-catalog-rings.log</code> to chase Übung. That arm later resumed and has since cleared through menu 202 (still all dead); resume is <code>--bombe-from 203</code>. I was not going to spend those days forcing Potsdam register onto a training net while a Thetis-shaped opening was still untested.
+                  I started the exact ≥16 catalog ring sweep, then parked it at menu 57 of 868—all dead at the board so far—in <code>logs/campaign-catalog-rings.log</code> to chase Übung. That arm later cleared through menu 202 (still all dead), paused for Regenbogen/Hannibal (Phase 23), resumed from 203/257, and is now parked at menu 264—still all dead, resume <code>--bombe-from 265</code>. I was not going to spend those days forcing Potsdam register onto a training net while a Thetis-shaped opening was still untested.
                 </p>
               </div>
             </article>
@@ -302,10 +309,10 @@ export function JournalPage() {
               <h3>Match the template. Do not score German-ness.</h3>
               <div className="prose">
                 <p>
-                  Turing’s Bombe eliminated impossible keys with a known crib: boolean death by contradiction. Eighty-five years later I can do the reverse—because the GPU can score millions of keys that are merely <em>better</em>, not only keys that are impossible. The Stochastic Bombe keeps a hypothesized plaintext fixed (or a small template bank) and evolves the daily key until the decrypt matches letter-for-letter. That is not brute-forcing \(26^{72}\) plaintext; it is searching the key space under an exact-match objective. German n-grams are irrelevant—Thetis need not look like Potsdam.
+                  Turing’s Bombe eliminated impossible keys with a known crib: boolean death by contradiction. Eighty-five years later I can do the reverse—because the GPU can score millions of keys that are merely <em>better</em>, not only keys that are impossible. The Stochastic Bombe keeps a hypothesized plaintext fixed (or a small template bank) and evolves the daily key until the decrypt matches letter-for-letter. That is not brute-forcing 26<sup>72</sup> plaintext; it is searching the key space under an exact-match objective. German n-grams are irrelevant—Thetis need not look like Potsdam.
                 </p>
                 <p>
-                  The Metal cleartext batch already runs this on the GPU: 26 Greek windows × 17,576 L/M/R lanes per stecker. Control on the first 72 letters of known P1030684 proves the datapath: oracle stecker recovers plaintext and message key <code>VYAA</code> in ~0.2s; drop one true plug and hill-climb climbs 65→72. Cold blind stecker search only reached 22/72 in forty generations—more gens will not melt a false peak in a \(10^{14}\)-sized plugboard. Near the truth the landscape is sharp; far away it is full of traps.
+                  The Metal cleartext batch already runs this on the GPU: 26 Greek windows × 17,576 L/M/R lanes per stecker. Control on the first 72 letters of known P1030684 proves the datapath: oracle stecker recovers plaintext and message key <code>VYAA</code> in ~0.2s; drop one true plug and hill-climb climbs 65→72. Cold blind stecker search only reached 22/72 in forty generations—more gens will not melt a false peak in a 10<sup>14</sup>-sized plugboard. Near the truth the landscape is sharp; far away it is full of traps.
                 </p>
                 <p>
                   What will break P1030680 is not “evolve harder” on an empty template. It is a small bank of Thetis-shaped hypothesized plaintexts (training pads, Kenngruppe drill, structural grids) plus shell constraints, then key search under letter-match—Welchman still runs wherever a ≥16 crib lives. Reversing Turing only works when you bring a hypothesis the 1945 machine never needed to invent on its own.
@@ -354,6 +361,18 @@ export function JournalPage() {
                 </p>
               </div>
             </article>
+            <article className="tl-item">
+              <div className="when">Phase 23: Regenbogen / Hannibal</div>
+              <h3>Not the fleet scuttle order. Not the Hela evacuation phrase.</h3>
+              <div className="prose">
+                <p>
+                  With the catalog ring sweep parked at menu 202, I burned Metal on the operational prior: if U-534 lacked current Thetis keys, would this 72-letter scrap be a Regenbogen scuttle or Hannibal/Hela evacuation broadcast? Long, self-stecker-legal phrases—<code>BEFEHLERHALTENREGENBOGEN</code>, <code>STICHWORTREGENBOGEN</code>, <code>VERSENKUNGBEFOHLEN</code>, <code>RAEUMUNGOSTPREUSSEN</code>, <code>EINSCHIFFUNGHELA</code>, and kin—went through AAAA then full right rings with quarantine armed.
+                </p>
+                <p>
+                  The anchor is a clean negative: nineteen offsets, rings AAAA and right, zero raw stops. Scuttle and Hela produced physical boards and soft-band prefixes (183 / 22 quarantine; 75 / 7), but Hybrid locked-shell escalate returned zero survivors under the 80% bar—ceilings around 54–58%, the coincidence wall again. Own-orders AAAA: all ghosts. Filler AAAA: two physicals, best IC 0.043 — below soft, so no ring sweep. Under right-ring coverage with the middle ring still pinned at A, this ciphertext is <em>not</em> those exact letter-strings at the legal offsets tried. Soft-band German-looking decrypts are not plaintext. Metal returned to the catalog ring sweep; that fragment reached menu 256 before parking.
+                </p>
+              </div>
+            </article>
           </div>
         </div>
       </section>
@@ -364,7 +383,7 @@ export function JournalPage() {
             <div className="kicker">Honest Scope</div>
             <h2>The Evidence Room</h2>
             <p>
-              I know the Potsdam 1 May keys decrypt other U-534 traffic, but not this message. The archival levers are spent. My engine is graded rather than trusted—a blind Welchman control breaks a known key through the full campaign in 361 seconds, and the Stochastic Bombe’s GPU KPA path recovers that same control when the template is known. Training, collapse, weather, meta-evolve, and shell-RIGA all produced zero survivors under an 80%∩noise+10% gate. Exact catalog and fuzzed arms under rings AAAA are clean negatives; so is the ≥16 UEBUNG head. Sister traffic P1030681 needed degarbling, so exact clean negatives may still miss a mis-read ciphertext—soft-band Welchman stops now quarantine into Stochastic seeds, graded on both synthetic and historical garbles. TensorLUT is a parallel compiler track, not a Thetis crib. What remains on the menu path: catalog right-ring coverage parked at menu 202 (resume 203), Regenbogen/Hannibal operational cribs queued next, parked Thetis-register rings at 13/73, and no middle ring but A.
+              I know the Potsdam 1 May keys decrypt other U-534 traffic, but not this message. The archival levers are spent. My engine is graded rather than trusted—a blind Welchman control breaks a known key through the full campaign in 361 seconds, and the Stochastic Bombe’s GPU KPA path recovers that same control when the template is known. Training, collapse, weather, meta-evolve, and shell-RIGA all produced zero survivors under an 80%∩noise+10% gate. Exact catalog and fuzzed arms under rings AAAA are clean negatives; so is the ≥16 UEBUNG head. Soft UEBUNG quarantine escalate is also a clean negative. Regenbogen/Hannibal cribs are not a BREAK—anchor dead under rings; scuttle and Hela soft-band escalate to zero; own-orders and filler AAAA stay below soft. Sister traffic P1030681 needed degarbling, so exact clean negatives may still miss a mis-read ciphertext—soft-band Welchman stops quarantine into Stochastic seeds, graded on both synthetic and historical garbles. TensorLUT is a parallel compiler track, not a Thetis crib. What remains on the menu path: catalog right-ring coverage parked at menu 264 (resume 265; 1–264 dead), parked Thetis-register rings at 13/73, and no middle ring but A.
             </p>
           </div>
           <ul className="stack-list">
@@ -422,11 +441,11 @@ export function JournalPage() {
             </article>
 
             <article className="tl-item">
-              <div className="when">3 — Parked: catalog resume from menu 203</div>
+              <div className="when">3 — Parked: catalog resume from menu 265</div>
               <h3>Sweep every ring phase on every exact crib.</h3>
               <div className="prose">
                 <p>
-                  Menus 1–202 are done—all dead at the board—in <code>logs/campaign-catalog-rings.log</code>. Resume later with <code>--bombe-from 203</code> and append. Live Metal is on the Regenbogen/Hannibal operational-crib queue. Quarantine stays armed so any soft-band physical lands in <code>logs/quarantine_candidates.json</code>.
+                  Menus 1–264 are done—all dead at the board—in <code>logs/campaign-catalog-rings.log</code>. Resume with <code>--bombe-from 265</code> (604 menus left; quarantine → <code>logs/quarantine_candidates.json</code>). Regenbogen/Hannibal is closed as a clean negative under right rings (Phase 23).
                 </p>
               </div>
             </article>
@@ -489,7 +508,7 @@ export function JournalPage() {
               <h3>Freeze the core; evolve reciprocal plugs.</h3>
               <div className="prose">
                 <p>
-                  Full INIT melt and stecker-cone melt are diagnosed dead ends. The live arm freezes the known-good TensorLUT silicon and searches a ≤10-pair involution sandwich. Blind three-pair rediscovery on a fourteen-letter crib already PASSed. Still parallel research—not a substitute for catalog right-ring coverage from menu 203.
+                  Full INIT melt and stecker-cone melt are diagnosed dead ends. The live arm freezes the known-good TensorLUT silicon and searches a ≤10-pair involution sandwich. Blind three-pair rediscovery on a fourteen-letter crib already PASSed. Still parallel research—not a substitute for catalog right-ring coverage from menu 265.
                 </p>
               </div>
             </article>

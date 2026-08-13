@@ -391,3 +391,161 @@ quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → 
   [200/2513·15] WONULBEIROTNULSIBENGEANKERTXZUMWEITERMAR@13 edges=40 letters=23 loops=18 central=R dead at the board                      6692s  35.8M/s ETA 4966.6 min
   [201/2513·16] WONULBEIROTNULSIBENGEANKERTXZUMWEITERMAR@16 edges=40 letters=23 loops=18 central=R dead at the board                      7120s  35.9M/s ETA 4946.9 min
   [202/2513·17] WONULBEIROTNULSIBENGEANKERTXZUMWEITERMAR@21 edges=40 letters=23 loops=18 central=R dead at the board                      7596s  35.7M/s ETA 4959.7 min
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030680_menus.json (2513 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 2513 of 2513
+min crib length: 16 (dropped 1645 shorter from the remaining set)
+resuming from menu 203 of 2513 (skipping 202 already done)
+running 666 menus, highest deduction power first:
+  [203] XNULEINSZWONULBEIROTNULSIBENGEANKERTXZUM@0 edges=40 letters=24 loops=17 central=E
+  [204] XNULEINSZWONULBEIROTNULSIBENGEANKERTXZUM@2 edges=40 letters=24 loops=17 central=E
+  [205] XNULEINSZWONULBEIROTNULSIBENGEANKERTXZUM@3 edges=40 letters=24 loops=17 central=E
+  [206] XNULEINSZWONULBEIROTNULSIBENGEANKERTXZUM@4 edges=40 letters=24 loops=17 central=E
+  [207] XNULEINSZWONULBEIROTNULSIBENGEANKERTXZUM@7 edges=40 letters=24 loops=17 central=E
+  [208] XNULEINSZWONULBEIROTNULSIBENGEANKERTXZUM@26 edges=40 letters=24 loops=17 central=N
+  [209] XNULEINSZWONULBEIROTNULSIBENGEANKERTXZUM@31 edges=40 letters=24 loops=17 central=N
+  [210] NULEINSZWONULBEIROTNULSIBENGEANKERTXZUMW@0 edges=40 letters=24 loops=17 central=E
+  [211] NULEINSZWONULBEIROTNULSIBENGEANKERTXZUMW@1 edges=40 letters=24 loops=17 central=E
+  [212] NULEINSZWONULBEIROTNULSIBENGEANKERTXZUMW@3 edges=40 letters=24 loops=17 central=E
+  [213] NULEINSZWONULBEIROTNULSIBENGEANKERTXZUMW@4 edges=40 letters=24 loops=17 central=E
+  [214] NULEINSZWONULBEIROTNULSIBENGEANKERTXZUMW@5 edges=40 letters=24 loops=17 central=E
+  … 654 more
+shells/menu: 34944 (336 WO × 2 Greek × 2 UKW × 26 ring) → 1.6e+10 settings
+GPU pipeline depth: 4 shells in flight
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+right ring swept: every right-wheel turnover phase covered
+residual gap: middle ring pinned A, so keys whose middle wheel turns over inside a 40-letter span (~8% for 1 notch, ~15% for 2) are not covered
+ETA floor (~50M/s): 3545.0 min
+
+quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → logs/quarantine_candidates.json
+  [203/2513·1] XNULEINSZWONULBEIROTNULSIBENGEANKERTXZUM@0 edges=40 letters=24 loops=17 central=E dead at the board                       499s  32.0M/s ETA 5529.6 min
+  [204/2513·2] XNULEINSZWONULBEIROTNULSIBENGEANKERTXZUM@2 edges=40 letters=24 loops=17 central=E dead at the board                       946s  33.7M/s ETA 5236.2 min
+  [205/2513·3] XNULEINSZWONULBEIROTNULSIBENGEANKERTXZUM@3 edges=40 letters=24 loops=17 central=E dead at the board                      1481s  32.4M/s ETA 5453.9 min
+  [206/2513·4] XNULEINSZWONULBEIROTNULSIBENGEANKERTXZUM@4 edges=40 letters=24 loops=17 central=E dead at the board                      1884s  33.9M/s ETA 5196.5 min
+  [207/2513·5] XNULEINSZWONULBEIROTNULSIBENGEANKERTXZUM@7 edges=40 letters=24 loops=17 central=E dead at the board                      2302s  34.7M/s ETA 5071.5 min
+  [208/2513·6] XNULEINSZWONULBEIROTNULSIBENGEANKERTXZUM@26 edges=40 letters=24 loops=17 central=N dead at the board                      2708s  35.4M/s ETA 4964.4 min
+  [209/2513·7] XNULEINSZWONULBEIROTNULSIBENGEANKERTXZUM@31 edges=40 letters=24 loops=17 central=N dead at the board                      3169s  35.3M/s ETA 4972.2 min
+  [210/2513·8] NULEINSZWONULBEIROTNULSIBENGEANKERTXZUMW@0 edges=40 letters=24 loops=17 central=E dead at the board                      3618s  35.3M/s ETA 4959.7 min
+  [211/2513·9] NULEINSZWONULBEIROTNULSIBENGEANKERTXZUMW@1 edges=40 letters=24 loops=17 central=E dead at the board                      4115s  34.9M/s ETA 5006.8 min
+  [212/2513·10] NULEINSZWONULBEIROTNULSIBENGEANKERTXZUMW@3 edges=40 letters=24 loops=17 central=E dead at the board                      4533s  35.2M/s ETA 4956.6 min
+  [213/2513·11] NULEINSZWONULBEIROTNULSIBENGEANKERTXZUMW@4 edges=40 letters=24 loops=17 central=E dead at the board                      5059s  34.7M/s ETA 5020.6 min
+  [214/2513·12] NULEINSZWONULBEIROTNULSIBENGEANKERTXZUMW@5 edges=40 letters=24 loops=17 central=E dead at the board                      5456s  35.1M/s ETA 4955.5 min
+  [215/2513·13] NULEINSZWONULBEIROTNULSIBENGEANKERTXZUMW@8 edges=40 letters=24 loops=17 central=E dead at the board                      5869s  35.4M/s ETA 4913.3 min
+  [216/2513·14] NULEINSZWONULBEIROTNULSIBENGEANKERTXZUMW@27 edges=40 letters=24 loops=17 central=N dead at the board                      6273s  35.6M/s ETA 4868.8 min
+  [217/2513·15] NULEINSZWONULBEIROTNULSIBENGEANKERTXZUMW@32 edges=40 letters=24 loops=17 central=N dead at the board                      6728s  35.6M/s ETA 4866.7 min
+  [218/2513·16] ULEINSZWONULBEIROTNULSIBENGEANKERTXZUMWE@0 edges=40 letters=24 loops=17 central=E dead at the board                      7219s  35.4M/s ETA 4888.2 min
+  [219/2513·17] ULEINSZWONULBEIROTNULSIBENGEANKERTXZUMWE@1 edges=40 letters=24 loops=17 central=E dead at the board                      7659s  35.4M/s ETA 4873.1 min
+  [220/2513·18] ULEINSZWONULBEIROTNULSIBENGEANKERTXZUMWE@2 edges=40 letters=24 loops=17 central=E dead at the board                      8150s  35.3M/s ETA 4889.9 min
+  [221/2513·19] ULEINSZWONULBEIROTNULSIBENGEANKERTXZUMWE@4 edges=40 letters=24 loops=17 central=E dead at the board                      8565s  35.4M/s ETA 4861.1 min
+  [222/2513·20] ULEINSZWONULBEIROTNULSIBENGEANKERTXZUMWE@5 edges=40 letters=24 loops=17 central=E dead at the board                      9087s  35.1M/s ETA 4891.7 min
+  [223/2513·21] ULEINSZWONULBEIROTNULSIBENGEANKERTXZUMWE@6 edges=40 letters=24 loops=17 central=E dead at the board                      9483s  35.4M/s ETA 4854.6 min
+  [224/2513·22] ULEINSZWONULBEIROTNULSIBENGEANKERTXZUMWE@9 edges=40 letters=24 loops=17 central=E dead at the board                      9896s  35.5M/s ETA 4827.9 min
+  [225/2513·23] ULEINSZWONULBEIROTNULSIBENGEANKERTXZUMWE@28 edges=40 letters=24 loops=17 central=E dead at the board                     10354s  35.5M/s ETA 4824.2 min
+  [226/2513·24] LEINSZWONULBEIROTNULSIBENGEANKERTXZUMWEI@1 edges=40 letters=24 loops=17 central=E dead at the board                     10848s  35.3M/s ETA 4836.6 min
+  [227/2513·25] LEINSZWONULBEIROTNULSIBENGEANKERTXZUMWEI@2 edges=40 letters=24 loops=17 central=E dead at the board                     11283s  35.4M/s ETA 4821.5 min
+  [228/2513·26] LEINSZWONULBEIROTNULSIBENGEANKERTXZUMWEI@3 edges=40 letters=24 loops=17 central=E dead at the board                     11769s  35.3M/s ETA 4828.3 min
+  [229/2513·27] LEINSZWONULBEIROTNULSIBENGEANKERTXZUMWEI@5 edges=40 letters=24 loops=17 central=E dead at the board                     12181s  35.4M/s ETA 4804.9 min
+  [230/2513·28] LEINSZWONULBEIROTNULSIBENGEANKERTXZUMWEI@6 edges=40 letters=24 loops=17 central=E dead at the board                     12697s  35.2M/s ETA 4821.9 min
+  [231/2513·29] LEINSZWONULBEIROTNULSIBENGEANKERTXZUMWEI@7 edges=40 letters=24 loops=17 central=E dead at the board                     13092s  35.4M/s ETA 4792.8 min
+  [232/2513·30] LEINSZWONULBEIROTNULSIBENGEANKERTXZUMWEI@29 edges=40 letters=24 loops=17 central=E dead at the board                     13546s  35.4M/s ETA 4786.2 min
+  [233/2513·31] EINSZWONULBEIROTNULSIBENGEANKERTXZUMWEIT@2 edges=40 letters=24 loops=17 central=E dead at the board                     14037s  35.3M/s ETA 4792.1 min
+  [234/2513·32] EINSZWONULBEIROTNULSIBENGEANKERTXZUMWEIT@3 edges=40 letters=24 loops=17 central=E dead at the board                     14467s  35.3M/s ETA 4777.3 min
+  [235/2513·33] EINSZWONULBEIROTNULSIBENGEANKERTXZUMWEIT@4 edges=40 letters=24 loops=17 central=E dead at the board                     14944s  35.3M/s ETA 4777.6 min
+  [236/2513·34] EINSZWONULBEIROTNULSIBENGEANKERTXZUMWEIT@6 edges=40 letters=24 loops=17 central=E dead at the board                     15352s  35.4M/s ETA 4756.0 min
+  [237/2513·35] EINSZWONULBEIROTNULSIBENGEANKERTXZUMWEIT@7 edges=40 letters=24 loops=17 central=E dead at the board                     15865s  35.2M/s ETA 4767.0 min
+  [238/2513·36] EINSZWONULBEIROTNULSIBENGEANKERTXZUMWEIT@8 edges=40 letters=24 loops=17 central=E dead at the board                     16251s  35.4M/s ETA 4739.8 min
+  [239/2513·37] EINSZWONULBEIROTNULSIBENGEANKERTXZUMWEIT@24 edges=40 letters=24 loops=17 central=R dead at the board                     16660s  35.5M/s ETA 4720.4 min
+  [240/2513·38] EINSZWONULBEIROTNULSIBENGEANKERTXZUMWEIT@30 edges=40 letters=24 loops=17 central=E dead at the board                     17111s  35.5M/s ETA 4713.0 min
+  [241/2513·39] INSZWONULBEIROTNULSIBENGEANKERTXZUMWEITE@3 edges=40 letters=24 loops=17 central=E dead at the board                     17682s  35.2M/s ETA 4737.9 min
+  [242/2513·40] INSZWONULBEIROTNULSIBENGEANKERTXZUMWEITE@4 edges=40 letters=24 loops=17 central=E dead at the board                     18125s  35.2M/s ETA 4727.7 min
+  [243/2513·41] INSZWONULBEIROTNULSIBENGEANKERTXZUMWEITE@5 edges=40 letters=24 loops=17 central=E dead at the board                     18618s  35.2M/s ETA 4730.1 min
+  [244/2513·42] INSZWONULBEIROTNULSIBENGEANKERTXZUMWEITE@7 edges=40 letters=24 loops=17 central=E dead at the board                     19001s  35.3M/s ETA 4705.1 min
+  [245/2513·43] INSZWONULBEIROTNULSIBENGEANKERTXZUMWEITE@8 edges=40 letters=24 loops=17 central=E dead at the board                     19505s  35.2M/s ETA 4709.9 min
+  [246/2513·44] INSZWONULBEIROTNULSIBENGEANKERTXZUMWEITE@9 edges=40 letters=24 loops=17 central=E dead at the board                     19949s  35.2M/s ETA 4700.2 min
+  [247/2513·45] INSZWONULBEIROTNULSIBENGEANKERTXZUMWEITE@25 edges=40 letters=24 loops=17 central=R dead at the board                     20355s  35.3M/s ETA 4681.6 min
+  [248/2513·46] INSZWONULBEIROTNULSIBENGEANKERTXZUMWEITE@31 edges=40 letters=24 loops=17 central=E dead at the board                     20869s  35.2M/s ETA 4687.9 min
+  [249/2513·47] NSZWONULBEIROTNULSIBENGEANKERTXZUMWEITER@4 edges=40 letters=24 loops=17 central=E dead at the board                     21435s  35.0M/s ETA 4705.0 min
+  [250/2513·48] NSZWONULBEIROTNULSIBENGEANKERTXZUMWEITER@5 edges=40 letters=24 loops=17 central=E dead at the board                     21872s  35.0M/s ETA 4693.4 min
+  [251/2513·49] NSZWONULBEIROTNULSIBENGEANKERTXZUMWEITER@6 edges=40 letters=24 loops=17 central=E dead at the board                     22361s  35.0M/s ETA 4692.7 min
+  [252/2513·50] NSZWONULBEIROTNULSIBENGEANKERTXZUMWEITER@8 edges=40 letters=24 loops=17 central=E dead at the board                     22740s  35.1M/s ETA 4669.3 min
+  [253/2513·51] NSZWONULBEIROTNULSIBENGEANKERTXZUMWEITER@9 edges=40 letters=24 loops=17 central=E dead at the board                     23237s  35.0M/s ETA 4670.3 min
+  [254/2513·52] NSZWONULBEIROTNULSIBENGEANKERTXZUMWEITER@26 edges=40 letters=24 loops=17 central=R dead at the board                     23635s  35.1M/s ETA 4651.2 min
+  [255/2513·53] NSZWONULBEIROTNULSIBENGEANKERTXZUMWEITER@32 edges=40 letters=24 loops=17 central=E dead at the board                     24145s  35.1M/s ETA 4654.4 min
+  [256/2513·54] SZWONULBEIROTNULSIBENGEANKERTXZUMWEITERM@0 edges=40 letters=24 loops=17 central=E dead at the board                     24542s  35.1M/s ETA 4635.7 min
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030680_menus.json (2513 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 2513 of 2513
+min crib length: 16 (dropped 1645 shorter from the remaining set)
+resuming from menu 257 of 2513 (skipping 256 already done)
+running 612 menus, highest deduction power first:
+  [257] SZWONULBEIROTNULSIBENGEANKERTXZUMWEITERM@5 edges=40 letters=24 loops=17 central=E
+  [258] SZWONULBEIROTNULSIBENGEANKERTXZUMWEITERM@6 edges=40 letters=24 loops=17 central=E
+  [259] SZWONULBEIROTNULSIBENGEANKERTXZUMWEITERM@7 edges=40 letters=24 loops=17 central=E
+  [260] SZWONULBEIROTNULSIBENGEANKERTXZUMWEITERM@9 edges=40 letters=24 loops=17 central=E
+  [261] SZWONULBEIROTNULSIBENGEANKERTXZUMWEITERM@27 edges=40 letters=24 loops=17 central=R
+  [262] ZWONULBEIROTNULSIBENGEANKERTXZUMWEITERMA@1 edges=40 letters=24 loops=17 central=E
+  [263] ZWONULBEIROTNULSIBENGEANKERTXZUMWEITERMA@6 edges=40 letters=24 loops=17 central=E
+  [264] ZWONULBEIROTNULSIBENGEANKERTXZUMWEITERMA@7 edges=40 letters=24 loops=17 central=E
+  [265] ZWONULBEIROTNULSIBENGEANKERTXZUMWEITERMA@8 edges=40 letters=24 loops=17 central=E
+  [266] ZWONULBEIROTNULSIBENGEANKERTXZUMWEITERMA@28 edges=40 letters=24 loops=17 central=R
+  [267] WONULBEIROTNULSIBENGEANKERTXZUMWEITERMAR@0 edges=40 letters=24 loops=17 central=E
+  [268] WONULBEIROTNULSIBENGEANKERTXZUMWEITERMAR@2 edges=40 letters=24 loops=17 central=E
+  … 600 more
+shells/menu: 34944 (336 WO × 2 Greek × 2 UKW × 26 ring) → 1.6e+10 settings
+GPU pipeline depth: 4 shells in flight
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+right ring swept: every right-wheel turnover phase covered
+residual gap: middle ring pinned A, so keys whose middle wheel turns over inside a 40-letter span (~8% for 1 notch, ~15% for 2) are not covered
+ETA floor (~50M/s): 3257.6 min
+
+quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → logs/quarantine_candidates.json
+  [257/2513·1] SZWONULBEIROTNULSIBENGEANKERTXZUMWEITERM@5 edges=40 letters=24 loops=17 central=E dead at the board                       594s  26.9M/s ETA 6046.7 min
+  [258/2513·2] SZWONULBEIROTNULSIBENGEANKERTXZUMWEITERM@6 edges=40 letters=24 loops=17 central=E dead at the board                      1053s  30.3M/s ETA 5351.1 min
+  [259/2513·3] SZWONULBEIROTNULSIBENGEANKERTXZUMWEITERM@7 edges=40 letters=24 loops=17 central=E dead at the board                      1543s  31.0M/s ETA 5221.9 min
+  [260/2513·4] SZWONULBEIROTNULSIBENGEANKERTXZUMWEITERM@9 edges=40 letters=24 loops=17 central=E dead at the board                      1936s  33.0M/s ETA 4904.5 min
+  [261/2513·5] SZWONULBEIROTNULSIBENGEANKERTXZUMWEITERM@27 edges=40 letters=24 loops=17 central=R dead at the board                      2434s  32.8M/s ETA 4924.1 min
+  [262/2513·6] ZWONULBEIROTNULSIBENGEANKERTXZUMWEITERMA@1 edges=40 letters=24 loops=17 central=E dead at the board                      2845s  33.7M/s ETA 4788.4 min
+  [263/2513·7] ZWONULBEIROTNULSIBENGEANKERTXZUMWEITERMA@6 edges=40 letters=24 loops=17 central=E dead at the board                      3408s  32.8M/s ETA 4909.5 min
+  [264/2513·8] ZWONULBEIROTNULSIBENGEANKERTXZUMWEITERMA@7 edges=40 letters=24 loops=17 central=E dead at the board                      3859s  33.1M/s ETA 4855.9 min
+
+=== SUSPENDED 2026-08-12T19:05:05Z ===
+last logged menu index: 264
+resume: --bombe-from 265 (after last completed line)
+=== END SUSPEND ===
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030680_menus.json (2513 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 2513 of 2513
+min crib length: 16 (dropped 1645 shorter from the remaining set)
+resuming from menu 265 of 2513 (skipping 264 already done)
+running 604 menus, highest deduction power first:
+  [265] ZWONULBEIROTNULSIBENGEANKERTXZUMWEITERMA@8 edges=40 letters=24 loops=17 central=E
+  [266] ZWONULBEIROTNULSIBENGEANKERTXZUMWEITERMA@28 edges=40 letters=24 loops=17 central=R
+  [267] WONULBEIROTNULSIBENGEANKERTXZUMWEITERMAR@0 edges=40 letters=24 loops=17 central=E
+  [268] WONULBEIROTNULSIBENGEANKERTXZUMWEITERMAR@2 edges=40 letters=24 loops=17 central=E
+  [269] WONULBEIROTNULSIBENGEANKERTXZUMWEITERMAR@7 edges=40 letters=24 loops=17 central=E
+  [270] WONULBEIROTNULSIBENGEANKERTXZUMWEITERMAR@8 edges=40 letters=24 loops=17 central=E
+  [271] WONULBEIROTNULSIBENGEANKERTXZUMWEITERMAR@9 edges=40 letters=24 loops=17 central=E
+  [272] WONULBEIROTNULSIBENGEANKERTXZUMWEITERMAR@29 edges=40 letters=24 loops=17 central=R
+  [273] UUUEINSEINSNULDREIKKEISELEKKXX@33 edges=30 letters=18 loops=13 central=E
+  [274] UUUEINSEINSNULDREIKKEISELEKKXX@40 edges=30 letters=19 loops=13 central=E
+  [275] UUUEINSEINSNULDREIKKEISELEKKXX@30 edges=30 letters=19 loops=12 central=E
+  [276] UUUEINSEINSNULDREIKKEISELEKKXX@32 edges=30 letters=19 loops=12 central=E
+  … 592 more
+shells/menu: 34944 (336 WO × 2 Greek × 2 UKW × 26 ring) → 1.6e+10 settings
+GPU pipeline depth: 4 shells in flight
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+right ring swept: every right-wheel turnover phase covered
+residual gap: middle ring pinned A, so keys whose middle wheel turns over inside a 40-letter span (~8% for 1 notch, ~15% for 2) are not covered
+ETA floor (~50M/s): 3215.0 min
+
+quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → logs/quarantine_candidates.json
+  [265/2513·1] ZWONULBEIROTNULSIBENGEANKERTXZUMWEITERMA@8 edges=40 letters=24 loops=17 central=E dead at the board                       495s  32.3M/s ETA 4970.7 min
+  [266/2513·2] ZWONULBEIROTNULSIBENGEANKERTXZUMWEITERMA@28 edges=40 letters=24 loops=17 central=R dead at the board                       986s  32.4M/s ETA 4944.9 min
+  [267/2513·3] WONULBEIROTNULSIBENGEANKERTXZUMWEITERMAR@0 edges=40 letters=24 loops=17 central=E dead at the board                      1395s  34.3M/s ETA 4658.9 min
+  [268/2513·4] WONULBEIROTNULSIBENGEANKERTXZUMWEITERMAR@2 edges=40 letters=24 loops=17 central=E dead at the board                      1802s  35.4M/s ETA 4505.3 min
+  [269/2513·5] WONULBEIROTNULSIBENGEANKERTXZUMWEITERMAR@7 edges=40 letters=24 loops=17 central=E dead at the board                      2369s  33.7M/s ETA 4730.9 min
+  [270/2513·6] WONULBEIROTNULSIBENGEANKERTXZUMWEITERMAR@8 edges=40 letters=24 loops=17 central=E dead at the board                      2819s  34.0M/s ETA 4682.0 min
+  [271/2513·7] WONULBEIROTNULSIBENGEANKERTXZUMWEITERMAR@9 edges=40 letters=24 loops=17 central=E dead at the board                      3396s  32.9M/s ETA 4826.9 min

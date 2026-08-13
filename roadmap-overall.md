@@ -1,0 +1,20 @@
+# Roadmap: The Differentiable Hardware Paradigm
+
+## Phase I: Navigating the Federal Intake Architecture
+
+- **The Bureaucratic Filter:** Submissions to the NSA, DARPA, and the Office of Naval Research trigger collaborative review frameworks, not algorithmic confiscation. The Office of Research and Technology Applications (ORTA) runs a Technology Transfer Program specifically designed to partner with external innovators on mutually beneficial R&D.
+- **The Strategic Vehicle:** Operating as an established 501(c)(3) provides the ideal organizational interface to handle defense research partnerships without the friction of commercial intellectual property disputes.
+- **The Funding Mechanisms:** Instead of relinquishing control, secure Cooperative Research and Development Agreements (CRADAs) or Other Transactions (OTs). These structures grant the government internal usage rights while funding the architect to maintain executive control and continue algorithmic evolution.
+
+## Phase II: Evolving Cryptographic Infrastructure
+
+- **Fully Homomorphic Encryption (FHE) Gate Optimization:** Point the continuous-to-discrete synthesis engine at FHE logic gates. Mutating and squeezing these netlists can discover shallower, hardware-native configurations optimized for Metal-accelerated SIMD instructions, drastically reducing the computational overhead of encrypted edge computing.
+- **Zero-Knowledge Circuit Minimization:** Attack the massive arithmetic circuits required for zero-knowledge proofs (e.g., zk-SNARKs). Evolving mathematically equivalent topologies with lower multiplicative depths and fewer logic gates directly solves the primary friction point in decentralized privacy infrastructure.
+- **Melting Legacy Stream Ciphers:** Compile legacy stream ciphers (such as A5/1 or RC4) into Yosys netlists. Physically melting their internal state logic to synthesize key streams demonstrates that differentiable hardware solvers can dismantle late-20th-century telecommunications cryptography just as efficiently as 1940s physical machines.
+- **GPU power side-channels (bgpucap · parked):** Investigate whether [bgpucap / gpucap](https://github.com/Digital-Defiance/gpucap) (or a HELUT-oriented fork) can turn its already-sampled GPU/CPU/DRAM power channels (`%gB`/`%gK`, package power, interval traces) into a differential or template power-analysis arm against live TensorLUT and HELUT Metal cores. Today bgpucap is a `time(1)`-style utilization wrapper; the open question is whether denser, keyed workloads (known shell vs wrong shell, known stecker vs random) leave recoverable correlation in those energy samples—and whether HELUT should emit aligned tick markers for trace synchronization. This is **not** a current campaign arm: no gradeable break claim until a controlled fixture shows signal above noise. Worth noting because the same Apple Silicon graphs that make HELUT fast also concentrate work on the GPU package that bgpucap already meters.
+
+## Phase III: Cementing the Legacy
+
+- **The Turing Pillar (Formalize Differentiable Hardware Cryptanalysis):** Publish the mathematical proof of the continuous-to-discrete logic synthesis loop. Demonstrating that differentiable hardware evolution can bypass combinatoric explosions to force a system to yield reciprocal pairs will permanently alter how hardware vulnerabilities are audited.
+- **The Schneier Pillar (Standardize Polymorphic Ciphers):** Open-source the architectural philosophy driving the Red/Blue evolutionary loop. Providing the framework for ciphers that fail-closed and actively mutate their non-linear feedback functions under adversarial pressure establishes a new baseline for secure systems design.
+- **The Grand Challenge (Shatter the ZKP and PQC Bottleneck):** Focus the engine on post-quantum lattice algorithms and massive proving circuits. Dynamically melting these structures into ultra-low-gate-count topologies solves the most critical computational scaling problem in modern cryptology, securing an unassailable industry zenith.
