@@ -19,7 +19,7 @@ Track A does **not** need noisy BK to be a valid FHE datapath claim (noiseless B
 
 To close **H4** for Track A you need ε≤2⁻⁶⁴ on a covering gadget at *N*=1024 (approx path: `.crypto`, *g₀*≠*δ* — **C31**/**C32**) or a true approximate public-MS with graded *g₀*≈*δ*. **C29**: widening to \(q=2^{64}\) does **not** create exact public-MS covering at *N*=1024.
 
-**C32**/**C33:** covering `.crypto` @ *N*=1024 inject *B*=1 is Metal-SING-clean (secret + public-ms). Measured εlog2 ≈ −8.4 at 8 trials — not −64. `cryptoPublicMS` + noise still fails.
+**C34:** covering `baseLog=4` @ *N*=1024 inject *B*=1 → σ̂≈2.95×10⁴, asymptotic εlog2≈−913 (meets ≤2⁻⁶⁴); Metal SING PASS. Classic `.crypto` baseLog=8 stays ≈−8.4. Torus-scale *B*~128 on b4 still undecodable — next frontier.
 
 ## Encrypted multi-LUT correctness envelope (H2)
 

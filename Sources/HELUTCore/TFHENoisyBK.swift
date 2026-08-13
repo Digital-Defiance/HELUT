@@ -134,7 +134,18 @@ package struct TFHENoisyBKGaussianCertificate: Sendable, Equatable {
     }
 
     package var failureLog2: Double {
-        log2Probability(unionFailureProbability)
+        if sigmaBK == 0 {
+            return -Double.infinity
+        }
+        let half = Double(delta) / 2
+        let log2One = log2GaussianTwoSidedTail(stddev: sigmaBK, threshold: half)
+        // Union bound: P_union ≤ lutCount · P_one ⇒ log2 ≤ log2(lutCount) + log2(P_one)
+        let n = max(lutCount, 1)
+        if log2One.isInfinite && log2One < 0 {
+            return log2One
+        }
+        let log2Union = log2(Double(n)) + log2One
+        return min(0, log2Union)
     }
 
     /// Union bound over `lutCount` independent post-BR MS events.

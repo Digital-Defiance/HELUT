@@ -1,0 +1,15 @@
+HELUT noisy-BK identity residual (H4)
+  N=1024  trials=8  inject B ∈ {0, 1}  covering-sweep=yes
+
+cryptoPublicMS B=0: max|e|=0 σ̂=0.0 δ/2=1048576 decode_fail=0 decodable=true εlog2=-inf  (baseLog=11 ℓ=2)
+cryptoPublicMS B=1: max|e|=4990198 σ̂=2603355.1 δ/2=1048576 decode_fail=2 decodable=false εlog2=0.0  (baseLog=11 ℓ=2)
+crypto B=0: max|e|=0 σ̂=0.0 δ/2=1048576 decode_fail=0 decodable=true εlog2=-inf  (baseLog=8 ℓ=4)
+crypto B=1: max|e|=515104 σ̂=295125.6 δ/2=1048576 decode_fail=0 decodable=true εlog2=-8.4  (baseLog=8 ℓ=4)
+covering-b16 B=0: max|e|=0 σ̂=0.0 δ/2=1048576 decode_fail=0 decodable=true εlog2=-inf  (baseLog=16 ℓ=2)
+covering-b16 B=1: max|e|=120141572 σ̂=68537863.2 δ/2=1048576 decode_fail=7 decodable=false εlog2=0.0  (baseLog=16 ℓ=2)
+covering-b8 B=0: max|e|=0 σ̂=0.0 δ/2=1048576 decode_fail=0 decodable=true εlog2=-inf  (baseLog=8 ℓ=4)
+covering-b8 B=1: max|e|=515104 σ̂=295125.6 δ/2=1048576 decode_fail=0 decodable=true εlog2=-8.4  (baseLog=8 ℓ=4)
+covering-b4 B=0: max|e|=0 σ̂=0.0 δ/2=1048576 decode_fail=0 decodable=true εlog2=-inf  (baseLog=4 ℓ=8)
+covering-b4 B=1: max|e|=45639 σ̂=29513.2 δ/2=1048576 decode_fail=0 decodable=true εlog2=-inf  (baseLog=4 ℓ=8)
+covering-b2 B=0: max|e|=0 σ̂=0.0 δ/2=1048576 decode_fail=0 decodable=true εlog2=-inf  (baseLog=2 ℓ=16)
+covering-b2 B=1: max|e|=17450 σ̂=8817.0 δ/2=1048576 decode_fail=0 decodable=true εlog2=-inf  (baseLog=2 ℓ=16)

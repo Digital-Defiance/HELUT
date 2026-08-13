@@ -56,6 +56,21 @@ package struct GGSWParams: Sendable, Equatable {
         )
     }
 
+    /// Exact covering gadget under \(q=2^{32}\): `baseLog·ℓ = 32`.
+    /// Smaller `baseLog` ⇒ smaller EP digit bound β ⇒ less BK-noise amplification (H4 Track A).
+    package static func covering(
+        degree: Int,
+        baseLog: Int,
+        glweDimension: Int = 1
+    ) -> GGSWParams {
+        precondition(baseLog > 0 && baseLog <= 32 && 32 % baseLog == 0)
+        return GGSWParams(
+            tfhe: TFHEParams(polynomialDegree: degree, glweDimension: glweDimension, delta: 1),
+            baseLog: baseLog,
+            levelCount: 32 / baseLog
+        )
+    }
+
     /// Public-MS crypto gadget: `g₀ = δ`, `ℓ = ⌊32 / baseLog⌋` (at `N = 128` matches `.crypto`).
     package static func cryptoPublicMS(degree: Int = 1024, glweDimension: Int = 1) -> GGSWParams {
         precondition(degree >= 2 && degree.nonzeroBitCount == 1, "degree must be a power of two")
