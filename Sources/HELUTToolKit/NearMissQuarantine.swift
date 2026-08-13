@@ -1,5 +1,6 @@
 import Foundation
 import HELUTCore
+import HELUTCLI
 
 // MARK: - Near-miss quarantine (Welchman → Stochastic handoff)
 //

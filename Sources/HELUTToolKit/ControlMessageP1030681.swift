@@ -1,5 +1,6 @@
 import Foundation
 import HELUTCore
+import HELUTCLI
 
 /// P1030681 / P1030714 — Dönitz successor message (second net).
 /// Proofed CT/PT from the corpus; Schlüsselzettel re-check from Girard's

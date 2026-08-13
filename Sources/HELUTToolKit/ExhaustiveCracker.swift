@@ -1,6 +1,7 @@
 import Foundation
 import Metal
 import HELUTCore
+import HELUTCLI
 
 // MARK: - Exhaustive M4 shell sweep + plugboard hill-climb (Gillogly / Ostwald-Weierud shape)
 //

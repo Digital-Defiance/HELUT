@@ -1,6 +1,7 @@
 import Foundation
 import Metal
 import HELUTCore
+import HELUTCLI
 
 // MARK: - Cleartext batch datapath (ASIC-esque, boolean-faithful)
 //

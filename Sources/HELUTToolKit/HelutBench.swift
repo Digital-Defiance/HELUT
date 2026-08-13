@@ -3,6 +3,8 @@ import Darwin
 import Metal
 import MetalPerformanceShadersGraph
 import HELUTCore
+import HELUTCLI
+import HELUTCLI
 
 // MARK: - Boolean-path HELUT bench (FHE/PBS datapath)
 

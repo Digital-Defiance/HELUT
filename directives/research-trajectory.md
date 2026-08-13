@@ -15,6 +15,7 @@ Living textbook (course surface on this trajectory): [`../textbook/`](../textboo
 | **H1** Sage lattice-estimator | Honest classical bits | **C23** filled. Production Δ=4.5. Divergences = core-SVP vs Cost `rop`, not silent bugs. Optional retune / quote estimator-only on Δ>16 rows |
 | **H3** Metal BR @ large *N* | Real wall-clock / memory envelope | **C20**/**C21** SING. NTT inside crypto ℓ=2 at *N*=1024 (incomplete public-MS gadget) |
 | **H4** Noisy BK | Production depth story | **C34** baseLog=4 + *B*=1 → ε≈−913 + Metal PASS. Next: raise inject toward torus σ≈2⁻²⁵ |
+| **Packaging** | Library + binaries + Apps/ | [`packaging-roadmap.md`](packaging-roadmap.md) Phase 0.5 — inventory → SPM split → named binaries |
 | Campaign catalog | Exhaust Boolean coverage | Resume `--bombe-from 418`; middle ring ≠ A |
 | Garble / quarantine | Ciphertext may be wrong letters | Soft-band escalate grades; sister-message lessons |
 

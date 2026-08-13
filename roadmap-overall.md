@@ -13,6 +13,10 @@ Campaign catalog (Welchman rings) may burn in the background. Do **not** mix cam
 fitness into FHE prose (**N6**). Do **not** treat avenues as claims until they have a
 **C** row + reproduce command.
 
+**Product shape (parallel track):** HELUT must become a **library + thin binaries +
+Apps/** that researchers can extend — not one Enigma megabin. See
+[`directives/packaging-roadmap.md`](directives/packaging-roadmap.md).
+
 ---
 
 ## Phase 0 — Corpus / proofs push (active)
@@ -53,6 +57,26 @@ claim IDs. Sync living textbook (`\livingepoch`) whenever a **C** / **H** moves.
 - `potential-avenues.md` items — stay frontier until a **C** row exists.
 - Quoting encrypted tick rate next to Welchman M/s — **N6**.
 - Claiming melt completeness or a P1030680 plaintext — **H6** / **N7**.
+
+---
+
+## Phase 0.5 — Library / packaging (parallel with science)
+
+Goal: make HELUT a **general-purpose research tool** others will depend on —
+core libraries, thin binaries, and an `Apps/` growth surface.
+
+Canonical plan: [`directives/packaging-roadmap.md`](directives/packaging-roadmap.md).
+
+| # | Track | Deliverable | Status |
+|---|--------|-------------|--------|
+| P0 | Inventory | Core file → layer map; flag → binary map; `public-api.md` stub | **partial** — flag→binary + ToolKit done |
+| P1 | SPM split | `HELUTNetlist` / `TensorLUT` / `SoftBus` / `Bombe` targets; single `helut` still works | **interim** `HELUTToolKit` |
+| P2 | Binaries | `helut-bench`, `helut-compile`, `helut-e256`, `helut-bombe` + umbrella `helut` | **done** (tensorlut still via e256) |
+| P3 | Apps/ | Template app; gallery points at Apps; third-party can add without editing Core | pending |
+| P4 | Docs / semver | DocC for Core; `helut-lib-0.x` tags separate from `helut-corpus-C*` | pending |
+
+Doctrine: campaign is an **app**; claim-sheet stays one; reproduce commands migrate to
+named binaries with a shim epoch so old scripts do not die overnight.
 
 ---
 

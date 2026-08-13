@@ -1,6 +1,7 @@
 import Foundation
 import Metal
 import HELUTCore
+import HELUTCLI
 
 // MARK: - Welchman diagonal board on the GPU
 //

@@ -1,6 +1,7 @@
 import Foundation
 import Metal
 import HELUTCore
+import HELUTCLI
 
 // MARK: - Enigma 256 TensorLUT Red Team (`--enigma256-tensorlut`)
 

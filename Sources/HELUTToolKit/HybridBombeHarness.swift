@@ -1,5 +1,6 @@
 import Foundation
 import HELUTCore
+import HELUTCLI
 
 // MARK: - Hybrid GA: evolving daily shell × stecker × cleartext batch (P1030680)
 //

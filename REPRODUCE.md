@@ -3,12 +3,23 @@
 **Bar for public science:** if we assert it, someone else can re-run it from this file (or we mark it open in [`directives/claim-sheet.md`](directives/claim-sheet.md)).
 
 Discovery after disclosure: [`directives/research-trajectory.md`](directives/research-trajectory.md).  
-Parameters: [`directives/parameter-cookbook.md`](directives/parameter-cookbook.md).
+Parameters: [`directives/parameter-cookbook.md`](directives/parameter-cookbook.md).  
+Packaging: [`directives/packaging-roadmap.md`](directives/packaging-roadmap.md).
+
+Preferred tools (binary split — umbrella `helut` still accepts the same flags):
+
+| Tool | Role |
+|------|------|
+| `.build/release/helut-bench` | SING / micro / `--measure-bk-noise` / `--hardness-table` |
+| `.build/release/helut-e256` | Enigma256 SoftBus / TensorLUT melt flags |
+| `.build/release/helut-bombe` | Welchman / hybrid / campaign |
+| `.build/release/helut-compile` | `--validate` |
+| `.build/release/helut` | Umbrella shim |
 
 Commands assume macOS Apple Silicon, Swift 6.3+, repo root after:
 
 ```bash
-swift build -c release --product helut
+swift build -c release
 ```
 
 ## Documents

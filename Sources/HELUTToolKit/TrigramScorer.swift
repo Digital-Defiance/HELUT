@@ -1,5 +1,6 @@
 import Foundation
 import HELUTCore
+import HELUTCLI
 
 // MARK: - German trigram scorer (harness-local; HELUTCore stays untouched)
 //

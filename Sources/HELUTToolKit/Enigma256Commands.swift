@@ -1,5 +1,6 @@
 import Foundation
 import HELUTCore
+import HELUTCLI
 
 // MARK: - Enigma 256 golden dump (`--enigma256-golden`)
 

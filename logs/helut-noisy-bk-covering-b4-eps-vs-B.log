@@ -1,0 +1,14 @@
+=== b4 B=8 ===
+covering-b4 B=0: max|e|=0 σ̂=0.0 δ/2=1048576 decode_fail=0 decodable=true εlog2=-inf  (baseLog=4 ℓ=8)
+covering-b4 B=8: max|e|=208544 σ̂=148748.9 δ/2=1048576 decode_fail=0 decodable=true εlog2=-36.0  (baseLog=4 ℓ=8)
+=== b4 B=16 ===
+covering-b4 B=0: max|e|=0 σ̂=0.0 δ/2=1048576 decode_fail=0 decodable=true εlog2=-inf  (baseLog=4 ℓ=8)
+covering-b4 B=16: max|e|=275459 σ̂=162870.2 δ/2=1048576 decode_fail=0 decodable=true εlog2=-29.9  (baseLog=4 ℓ=8)
+=== b4 B=32 ===
+covering-b4 B=0: max|e|=0 σ̂=0.0 δ/2=1048576 decode_fail=0 decodable=true εlog2=-inf  (baseLog=4 ℓ=8)
+covering-b4 B=32: max|e|=549420 σ̂=357746.1 δ/2=1048576 decode_fail=0 decodable=true εlog2=-5.2  (baseLog=4 ℓ=8)
+=== b4 B=64 ===
+covering-b4 B=0: max|e|=0 σ̂=0.0 δ/2=1048576 decode_fail=0 decodable=true εlog2=-inf  (baseLog=4 ℓ=8)
+covering-b4 B=64: max|e|=747047 σ̂=469146.9 δ/2=1048576 decode_fail=0 decodable=true εlog2=-2.3  (baseLog=4 ℓ=8)
+covering-b2 B=0: max|e|=0 σ̂=0.0 δ/2=1048576 decode_fail=0 decodable=true εlog2=-inf  (baseLog=2 ℓ=16)
+covering-b2 B=128: max|e|=767218 σ̂=511908.5 δ/2=1048576 decode_fail=0 decodable=true εlog2=-1.6  (baseLog=2 ℓ=16)
