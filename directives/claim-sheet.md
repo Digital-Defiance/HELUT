@@ -2,7 +2,7 @@
 
 **Bar:** anything we say in public must be **reproducible** from this repo (`REPRODUCE.md` + logs/tests). IDs are for bookkeeping, not a premiere freeze — science moves; update rows when evidence moves.
 
-Doctrine: [`research-release.md`](research-release.md) · Cookbook: [`parameter-cookbook.md`](parameter-cookbook.md) · Reproduce: [`../REPRODUCE.md`](../REPRODUCE.md) · Beyond today: [`research-trajectory.md`](research-trajectory.md) · Course book: [`../textbook/`](../textbook/) (agents: `.cursor/rules/living-textbook.mdc`).
+Doctrine: [`research-release.md`](research-release.md) · Cookbook: [`parameter-cookbook.md`](parameter-cookbook.md) · Reproduce: [`../REPRODUCE.md`](../REPRODUCE.md) · Beyond today: [`research-trajectory.md`](research-trajectory.md) · Course book: [`../textbook/`](../textbook/) (agents: `.cursor/rules/living-textbook.mdc`) · Campaign report: [`../writeup.tex`](../writeup.tex) (agents: `.cursor/rules/writeup.mdc`).
 
 **How to talk about it:** lead with what runs and what it does *not* prove. Discovery continues after any disclosure.
 
@@ -16,7 +16,7 @@ Doctrine: [`research-release.md`](research-release.md) · Cookbook: [`parameter-
 | **C2** | Welchman path breaks known P1030684 end-to-end | campaign control | 361 s · 16B settings · 10 plugs |
 | **C3** | ≤10-plug / SAT kill chain removes ghosts | ghost forensics | writeup / BREAK |
 | **C4** | Encrypted LWE/GLWE + GGSW BR per `$lut` (publicMS / secret) | `--bench-encrypted` | seam tests · EncryptedNetlistSim · full_adder through *N*=1024 |
-| **C5** | Certificates on encrypted ticks (noise, *ε*, calibrated hardness, noisy-BK model) | `--hardness-table` · SING cert lines | cookbook production row |
+| **C5** | Certificates on encrypted ticks (noise, *ε*, calibrated hardness, noisy-BK **measured**) | `--hardness-table` · `--measure-bk-noise` · SING cert lines | cookbook production row · **C22** |
 | **C6** | Encrypted ≡ clear multi-netlist SING | `Scripts/helut_encrypted_sing.sh` | `logs/helut-encrypted-*.log` · adder *N*≤1024 |
 | **C7** | Metal 1-LUT BR microbench | `--bench-encrypted-micro --degree 64` | fused ~50.3 s/BR · persist-schoolbook **0.001 s/BR** (**C17**) · NTT-tile **0.010 s/BR** (**C18**, `--metal-br-tile 64`) |
 | **C8** | TensorLUT M4 baseline *F*<sub>crypto</sub>=0 + Verilog emit | TensorLUT CLI / Phase 21 | `enigma_m4_tensorlut_baseline.v` |
@@ -32,6 +32,12 @@ Doctrine: [`research-release.md`](research-release.md) · Cookbook: [`parameter-
 | **C18** | Metal 3-prime NTT persist BR (Phase 2 NTT) | `make test-metal-p1` · `--bench-encrypted-micro --degree 1024 --trials 2 --warmup 1` · boolean SING | CPU+Metal NTT ≡ schoolbook (19 tests) · **0.433 s/BR** @ *N*=1024 (gpu 0.43 s, RSS 148 MiB) · N=64 tiled **0.010 s/BR** · boolean SING **15.6 s / 8** (1.95 s/row) · `logs/helut-ntt-cert.log` · `logs/helut-encrypted-micro-n1024-ntt.log` · `logs/helut-encrypted-micro-n64-ntt.log` · `logs/helut-encrypted-n1024-metal-sing-ntt.log` |
 | **C19** | TensorLUT continuous→discrete Theorem 1 | `swift test -c release --filter testTensorLUTFormalCertificate` | 6 lemmas hold (`π`, MSE, \(F\), emitter, involution, freeze) · `directives/tensorlut-theorem.md` · `TensorLUTFormal.certificate()` |
 | **C20** | Wavefront-parallel independent `$lut` BRs | `--bench-encrypted --paths 'blind-rotate-metal public-ms boolean'` · N=1024×8 | boolean SING **10.6 s / 8** (1.33 s/row) vs **C17** 12.2 s / **C18** 15.6 s · fused 3-prime NTT micro **0.420 s/BR** · `logs/helut-encrypted-n1024-metal-sing-par.log` · `logs/helut-encrypted-micro-n1024-ntt3.log` |
+| **C21** | Metal cryptoPublicMS ℓ=2 SING @ *N*=1024 | `--bench-encrypted --paths 'blind-rotate-metal public-ms crypto'` · N=1024×8 | **11.38 s / 8** (1.42 s/row) vs **C14** 175.6 s · PASS · `logs/helut-encrypted-n1024-metal-sing-crypto.log` |
+| **C22** | Measured noisy-BK residual → *B*<sub>bk</sub> / σ̂ | `--measure-bk-noise --degree 8 --trials 8 --bk-noise 64` · `--degree 128 --trials 4` | Covering gadget: *N*=8 inject *B*=64 → max\|*e*\|=11173, σ̂=6396; *N*=128 (same as `.crypto`, ℓ=4) → max\|*e*\|=2.42×10⁶, σ̂=1.47×10⁶ ≪ δ/2 but Gaussian εlog2≈−23.5 (not −64); noiseless → 0; full_adder ≡ clear · `logs/helut-noisy-bk-measure.log` · `logs/helut-noisy-bk-measure-n128.log` |
+| **C23** | Native Sage lattice-estimator fill-in | `./Scripts/helut_sage_estimate.sh` | SageMath 10.9 osx-arm64 (`~/Applications/SageMath-10-9.app`); all 8 pending rows filled · prod-n1024-s16 estimator **180.2** vs HELUT **175.7** (\|Δ\|=4.5 ≤ 16) · 4/8 anchors within 16-bit tolerance · `logs/helut-estimator-results.json` · `logs/helut-sage-estimator-run.log` |
+| **C24** | Enigma256 SoftBus Theorem 2 (reciprocity / fail-closed) | `swift test -c release --filter testEnigma256FormalCertificate` | 5 lemmas hold (bijection, reciprocity, stream RT, day-key involutions, coupledCubic6 reject) · `directives/enigma256-theorem.md` · `Enigma256Formal.certificate()` · builds on empirical **C10** |
+| **C25** | TensorLUT Theorem 1 corollary (emitter–discrete + involution under freeze) | `swift test -c release --filter testTensorLUTFormalCorollaryCertificate` | 2 lemmas hold · `TensorLUTFormal.corollaryCertificate()` · `directives/tensorlut-theorem.md` §corollary · still not melt completeness |
+| **C26** | Noisy-BK identity residual @ *N*=1024 (product-shaped) | `--measure-bk-noise --degree 1024 --trials 2 --bk-noise 64` (and `--bk-noise 4`) | Noiseless → *B*<sub>bk</sub>=0. Inject *B*=64: both `cryptoPublicMS` / `crypto` **undecodable** (max\|*e*\| ≫ δ/2). Inject *B*=4: `crypto` ∞-norm OK but εlog2≈−1 (not −64); `cryptoPublicMS` still undecodable. Product SING stays *e*=0 BK. · `logs/helut-noisy-bk-measure-n1024.log` |
 
 ---
 
@@ -39,13 +45,13 @@ Doctrine: [`research-release.md`](research-release.md) · Cookbook: [`parameter-
 
 | ID | Open item | Honest asterisk |
 |----|-----------|-----------------|
-| **H1** | ~176‑bit calibrated @ production (*n*,*σ*) | ≠ lattice-estimator until **native** Sage fills pending JSON. Docker `sagemath/sagemath` linux/amd64 on Apple silicon **SIGILL** in FLINT under qemu (`logs/helut-sage-estimator-run.log`). Runner: `Scripts/helut_sage_estimate.sh`. |
+| **H1** | ~176‑bit calibrated @ production (*n*,*σ*) | **C23:** estimator JSON filled (native Sage 10.9). Production prod-n1024-s16: HELUT 175.7 vs estimator **180.2** (\|Δ\|=4.5). 4/8 anchors within 16-bit tolerance; demo-N8, classic-n630, n1024-s17, n2048-s16 exceed it. Do not quote 176 as estimator cost on every row. |
 | **H2** | Multi-LUT encrypted @ large *N* | **Closed 2026-08-12:** `rotationPower` / pack now keep Z_{2N}; full_adder SING PASS @ N=256/512/1024. Was arity-3 pack overflowing 256·2N headroom. |
-| **H3** | Metal encrypted @ *N*=1024 | **C20:** wavefront-parallel NTT BR boolean SING **10.6 s / 8** (beats **C17** schoolbook persist 12.2 s). **C18** serial NTT SING was 15.6 s. Micro fused 3-prime **0.420 s/BR**. Fused megagraph DNF. Crypto ℓ=2 SING not re-timed. Sage **H1** still pending (native Sage). |
-| **H4** | Noisy BK in product path | Depth **modeled**; BK encrypt still noiseless |
+| **H3** | Metal encrypted @ *N*=1024 | **C20** boolean **10.6 s / 8**; **C21** crypto ℓ=2 **11.38 s / 8** (was **C14** 175.6 s). Micro fused 3-prime **0.420 s/BR**. Fused megagraph DNF. |
+| **H4** | Noisy BK in product path | **C22** covering *N*=8/*N*=128; **C26** product-shaped *N*=1024: inject *B*=64 undecodable; *B*=4 on `.crypto` ∞-norm OK but εlog2≈−1 ≠ −64. Default Metal *N*=1024 SING still *e*=0 BK. ℓ=1 `booleanPublicMS` cannot carry BK noise. Measured noisy-BK depth for ε≤2⁻⁶⁴ remains open at production *N*. |
 | **H5** | `*PublicMS` gadgets (*g*<sub>0</sub>=*δ*) | On-lattice intent; does not alone clear H2 |
 | **H6** | TensorLUT / quarantine vs campaign | Parallel research — not P1030680 plaintext |
-| **H7** | Catalog / Regenbogen / UEBUNG | Negatives / not-BREAK as graded; middle ring ≠A untested; catalog @265 |
+| **H7** | Catalog / Regenbogen / UEBUNG | Negatives / not-BREAK as graded; middle ring ≠A untested; catalog parked @417, resume `--bombe-from 418` |
 
 ---
 

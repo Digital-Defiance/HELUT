@@ -129,8 +129,12 @@ Three layers ship as code, not as vibes (\cid{5}):
 Gaussian $\varepsilon$-certificate & Ingest failure $\le 2^{-64}$ under
 independent-noise hypotheses. \\
 \texttt{TFHENoisyBKCertificate} & Depth under a BK-noise bound $B_{\mathrm{bk}}$.
-HELUT's current BK encrypt is noiseless ($B_{\mathrm{bk}}=0$); production
-must fill a measured $\sigma_{\mathrm{BK}}$ (\hid{4}). \\
+Default Metal SING still encrypts BK with $e=0$.
+\cid{22} fills $B_{\mathrm{bk}}/\hat\sigma$ from identity-LUT residuals
+on a covering gadget ($N=8$: inject $B=64\to\hat\sigma\approx 6396$;
+$N=128$: $\hat\sigma\approx 1.47\times 10^6$, still $<\delta/2$, Gaussian
+$\varepsilon\log_2\approx -23.5$ not $-64$).
+$\ell=1$ \texttt{booleanPublicMS} cannot carry BK noise (\hid{4}). \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -138,8 +142,10 @@ must fill a measured $\sigma_{\mathrm{BK}}$ (\hid{4}). \\
 \begin{warning}
 A noiseless BK is a correct \emph{functional} bootstrap and an incomplete
 \emph{depth} story.
-Students who say ``we have noisy BK'' because the certificate \emph{type}
-exists are failing \hid{4}.
+\cid{22} measures residuals; it does not put noisy BK on the $N=1024$ Metal
+SING path.
+Students who say ``we have production noisy BK'' from the $N=8$ table are
+failing the remaining \hid{4} asterisk.
 \end{warning}
 
 \section{Parameters you may quote}
@@ -156,7 +162,7 @@ $q$ & $2^{32}$ & native word \\
 $\sigma$ & $2^{16}$ & $\ll \delta/2 = 2^{20}$ \\
 Target $\varepsilon$ & $\le 2^{-64}$ & Gaussian union on primary wires \\
 Classical target & $\ge 128$ bits & HELUT est.\ $\approx 176$; \hid{1} \\
-$B_{\mathrm{bk}}$ & 0 (now) & \hid{4} \\
+$B_{\mathrm{bk}}$ & 0 at $N=1024$ SING; measured at covering $N=8$, $N=128$ & \hid{4} \\
 Inter-LUT refresh & \texttt{publicMS} default & lattice-compatible BK masks \\
 \bottomrule
 \end{tabular}

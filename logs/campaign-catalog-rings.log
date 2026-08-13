@@ -679,3 +679,26 @@ quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → 
   [399/2513·135] OVIERUNDUUUZWOFUNFDR@16 edges=20 letters=18 loops=4 central=U dead at the board                     45212s  47.7M/s ETA 2617.9 min
   [400/2513·136] OVIERUNDUUUZWOFUNFDR@21 edges=20 letters=17 loops=4 central=U dead at the board                     45525s  47.7M/s ETA 2611.0 min
   [401/2513·137] OVIERUNDUUUZWOFUNFDR@30 edges=20 letters=19 loops=4 central=U dead at the board                     45780s  47.8M/s ETA 2600.9 min
+  [402/2513·138] OVIERUNDUUUZWOFUNFDR@40 edges=20 letters=19 loops=4 central=U dead at the board                     46225s  47.7M/s ETA 2601.6 min
+  [403/2513·139] OVIERUNDUUUZWOFUNFDR@41 edges=20 letters=18 loops=4 central=U dead at the board                     46512s  47.7M/s ETA 2593.3 min
+  [404/2513·140] UUUFUNFDREIVIERKKNO@8 edges=19 letters=18 loops=4 central=U dead at the board                     46781s  47.8M/s ETA 2584.1 min
+  [405/2513·141] UUUFUNFDREIVIERKKNO@13 edges=19 letters=18 loops=4 central=R dead at the board                     47123s  47.8M/s ETA 2579.0 min
+  [406/2513·142] UUUFUNFDREIVIERKKNO@15 edges=19 letters=16 loops=4 central=R dead at the board                     47446s  47.8M/s ETA 2572.8 min
+  [407/2513·143] UUUFUNFDREIVIERKKNO@23 edges=19 letters=16 loops=4 central=R dead at the board                     47719s  47.9M/s ETA 2563.9 min
+  [408/2513·144] UUUFUNFDREIVIERKKNO@25 edges=19 letters=17 loops=4 central=R dead at the board                     47966s  47.9M/s ETA 2553.7 min
+  [409/2513·145] UUUFUNFDREIVIERKKNO@30 edges=19 letters=17 loops=4 central=P dead at the board                     48239s  48.0M/s ETA 2545.0 min
+  [410/2513·146] UUUFUNFDREIVIERKKNO@31 edges=19 letters=17 loops=4 central=P dead at the board                     48480s  48.1M/s ETA 2534.7 min
+  [411/2513·147] UUUFUNFDREIVIERKKNO@41 edges=19 letters=18 loops=4 central=R dead at the board                     48821s  48.1M/s ETA 2529.6 min
+  [412/2513·148] UUUFUNFDREIVIERKKNO@43 edges=19 letters=18 loops=4 central=U   93301 stops → 0 valid 10-plug completions   49145s  48.1M/s ETA 2523.7 min
+  [413/2513·149] UUUFUNFDREIVIERKKNO@44 edges=19 letters=17 loops=4 central=U       1 stops → 0 valid 10-plug completions   49418s  48.1M/s ETA 2515.1 min
+  [414/2513·150] VVVUUUDREINULEINSVI@1 edges=19 letters=18 loops=4 central=E dead at the board                     49818s  48.1M/s ETA 2513.0 min
+  [415/2513·151] VVVUUUDREINULEINSVI@14 edges=19 letters=18 loops=4 central=U dead at the board                     50180s  48.1M/s ETA 2509.0 min
+  [416/2513·152] VVVUUUDREINULEINSVI@22 edges=19 letters=16 loops=4 central=U dead at the board                     50474s  48.1M/s ETA 2501.5 min
+  [417/2513·153] VVVUUUDREINULEINSVI@25 edges=19 letters=17 loops=4 central=R dead at the board                     50713s  48.2M/s ETA 2491.5 min
+
+=== SUSPEND 2026-08-13T17:03Z ===
+Last completed: [417/2513·153] VVVUUUDREINULEINSVI@25 — dead at the board
+This fragment: --bombe-from 265 through originalIndex 417 (153 menus); all dead / unscorable in-line
+Resume: --bombe-from 418
+Quarantine: logs/quarantine_candidates.json (unchanged soft band)
+Middle ring still pinned A

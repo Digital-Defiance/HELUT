@@ -33,6 +33,12 @@ ID & Result \\
 \cid{18} & 3-prime NTT persist BR; $0.433\,\mathrm{s}$/BR; SING $15.6\,\mathrm{s}/8$. \\
 \cid{19} & TensorLUT continuous$\to$discrete Theorem~1 (six machine-checked lemmas). \\
 \cid{20} & Wavefront-parallel independent \texttt{\$lut} BRs; boolean SING $10.6\,\mathrm{s}/8$. \\
+\cid{21} & Metal cryptoPublicMS $\ell=2$ SING at $N=1024$; $11.38\,\mathrm{s}/8$. \\
+\cid{22} & Measured noisy-BK residual $\to B_{\mathrm{bk}}/\hat\sigma$ (covering gadget). \\
+\cid{23} & Native Sage lattice-estimator fill-in; production $|\Delta|=4.5$. \\
+\cid{24} & Enigma256 SoftBus Theorem~2 (reciprocity / fail-closed; five lemmas). \\
+\cid{25} & TensorLUT Theorem~1 corollary (emitter--discrete $+$ involution under freeze). \\
+\cid{26} & Noisy-BK identity residual at $N{=}1024$: inject $B{=}64$ undecodable; $B{=}4$ $\varepsilon\log_2\approx-1$. \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -45,13 +51,13 @@ ID & Result \\
 \toprule
 ID & Asterisk \\
 \midrule
-\hid{1} & Calibrated bits $\neq$ lattice-estimator until Sage fills JSON. \\
+\hid{1} & \cid{23} filled JSON. Production $|\Delta|=4.5$; 4/8 anchors exceed 16-bit tolerance. \\
 \hid{2} & \textbf{Closed} 2026-08-12 ($Z_{2N}$ pack). Kept as history. \\
-\hid{3} & \cid{20} wavefront-parallel NTT SING beats \cid{17}; crypto $\ell=2$ untimed; Sage \hid{1} pending. \\
-\hid{4} & Noisy BK modeled; BK encrypt still noiseless. \\
+\hid{3} & \cid{20}/\cid{21} SING bars met; serial NTT SING still loses vs persist; Sage \hid{1} pending. \\
+\hid{4} & \cid{22} covering $N\le 128$; \cid{26} product $N{=}1024$ inject fails $\varepsilon$/$\infty$-norm bars. Metal SING still $e{=}0$ BK. \\
 \hid{5} & \texttt{*PublicMS} gadgets ($g_0=\delta$): on-lattice intent, not a closer of old \hid{2}. \\
 \hid{6} & TensorLUT / quarantine vs campaign: parallel research, not P1030680 PT. \\
-\hid{7} & Catalog / Regenbogen / UEBUNG: negatives graded; middle ring $\neq A$ untested. \\
+\hid{7} & Catalog / Regenbogen / UEBUNG: negatives graded; middle ring $\neq A$ untested; catalog parked @417, resume \texttt{--bombe-from 418}. \\
 \bottomrule
 \end{tabular}
 \end{center}

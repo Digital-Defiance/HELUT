@@ -1,0 +1,19 @@
+---
+description: Keep BREAK_P1030680.md and JournalPage in sync with the Enigma campaign
+alwaysApply: true
+---
+# Campaign ledger sync (P1030680)
+
+`BREAK_P1030680.md` is the operational ledger. `site/src/pages/JournalPage.tsx` is the public chronology. Both lag unless you update them in the **same turn** as the science.
+
+**Trigger:** park or resume a Welchman/catalog/Thetis-register/Regenbogen arm; land a clean negative, soft-band quarantine, Hybrid escalate, or **BREAK FOUND**; change coverage (rings, middle ring, head gate); close or open a wedge; grade a control (Welchman, stochastic, garble). Also when you edit campaign rows in `directives/claim-sheet.md` (C2–C3, C8–C12, H6–H7, N5–N7).
+
+**Then, same turn:**
+1. Patch `BREAK_P1030680.md` first: “What we know” table, Phase write-up, attack-plan status (RUNNING / PARKED / DONE), honest scope. Record resume flags (`--bombe-from N`), logs, and what the ciphertext is **not**. Do not invent a decrypt.
+2. Patch `site/src/pages/JournalPage.tsx` to match: ELIMINATED / OPEN, Evidence Room, timeline phase, next-step card. No lecture-voice claims the ledger does not support.
+3. Then follow `.cursor/rules/writeup.mdc` (canonical report is `writeup.tex`).
+4. If a **C** / **H** / **N** row moves, also follow `.cursor/rules/living-textbook.mdc`.
+
+**If BREAK FOUND:** date, key (UKW/Greek/WO/rings/pos/stecker), plaintext, log path, and victory-condition check (crib exact, IC, tail, ≤10-plug) in both files before celebrating. Until then every clean negative stays printed.
+
+Ledger wins over the site if they disagree.

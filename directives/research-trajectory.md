@@ -12,22 +12,23 @@ Living textbook (course surface on this trajectory): [`../textbook/`](../textboo
 | Track | Why it matters | Next experiment |
 |-------|----------------|-----------------|
 | **H2** full_adder @ *N*≥256 | ~~Multi-LUT encrypted correctness~~ **Closed** | Z_{2N} pack / `rotationPower` fix; SING PASS @ 256/512/1024 |
-| **H1** Sage lattice-estimator | Honest classical bits for production-shaped params | Needs SageMath (`sage` / `sage.all`) — not installed here; pending JSON ready |
-| **H3** Metal BR @ large *N* | Real wall-clock / memory envelope | **C20** wavefront SING 10.6 s · NTT micro 0.420 s/BR. Next: native Sage **H1**; crypto ℓ=2 SING; noisy BK |
-| **H4** Noisy BK | Production depth story | Measured *σ*<sub>BK</sub> into `TFHENoisyBKCertificate` (still modeled / *B*<sub>bk</sub>=0) |
-| Campaign catalog | Exhaust Boolean coverage | Resume `--bombe-from 265`; middle ring ≠ A |
+| **H1** Sage lattice-estimator | Honest classical bits for production-shaped params | **C23** JSON filled. Production row agrees (|Δ|=4.5). Tighten HELUT vs estimator on classic-n630 / n1024-s17 / n2048 (Δ>16). |
+| **H3** Metal BR @ large *N* | Real wall-clock / memory envelope | **C20** boolean 10.6 s · **C21** crypto ℓ=2 11.38 s · NTT micro 0.420 s/BR. NTT inside crypto ℓ=2 tile. |
+| **H4** Noisy BK | Production depth story | **C22** *N*≤128 covering; **C26** *N*=1024 inject *B*=64 undecodable / *B*=4 ε≈2⁻¹. Product SING still *B_bk*=0 |
+| Campaign catalog | Exhaust Boolean coverage | Resume `--bombe-from 418`; middle ring ≠ A |
 | Garble / quarantine | Ciphertext may be wrong letters | Soft-band escalate grades; sister-message lessons |
 
 ## Mid term (pillar science)
 
-From [`../roadmap-overall.md`](../roadmap-overall.md) and the project registry:
+From [`../roadmap-overall.md`](../roadmap-overall.md) Phase 0–II and the project registry:
 
-1. **Pillar I** — netlist-clocked FHE: shallower nets, NTT/persist graphs, estimator-backed params ([`metal-compiler-phases.md`](metal-compiler-phases.md))  
-2. **Pillar II** — formalize continuous→discrete: **Theorem 1** (`directives/tensorlut-theorem.md`, **C19**); stream-cipher melts  
-3. **Pillar III** — polymorphic Red/Blue standard beyond E256 SoftBus  
-4. **FHE gate / ZK depth** — TensorLUT aimed at multiplicative depth (queued projects)  
-5. **Side-channel (parked)** — bgpucap-style power on live Metal graphs only with controlled fixtures  
-
+1. **Phase 0 corpus** — abstract↔C-id; estimator honesty table (**C23** in paper); application gallery; artifact tag  
+2. **Pillar I** — netlist-clocked FHE: shallower nets, NTT/persist graphs, estimator-backed params ([`metal-compiler-phases.md`](metal-compiler-phases.md)); **H4** product noisy BK  
+3. **Pillar II** — formalize continuous→discrete: **Theorem 1** (**C19**); **corollary** emitter–discrete / freeze (**C25**); stream-cipher melts  
+4. **Pillar III** — SoftBus reciprocity **Theorem 2** (**C24**); polymorphic Red/Blue standard beyond E256 SoftBus  
+5. **Application gallery** — nine slots outlined (`directives/application-gallery.md`); figures + artifact tag remaining  
+6. **FHE gate / ZK depth** — TensorLUT aimed at multiplicative depth (queued projects)  
+7. **Side-channel (parked)** — bgpucap-style power on live Metal graphs only with controlled fixtures
 ## Speculative (not claims)
 
 [`potential-avenues.md`](potential-avenues.md) — encrypted LLM guardrails, self-modifying dark PicoRV32, honey-token ledgers, online netlist evolution, Metal-tick–synced bgpucap DPA on controlled live graphs. Keep them here so the public story stays honest: **reproducible core now; weird frontier labeled as frontier.**

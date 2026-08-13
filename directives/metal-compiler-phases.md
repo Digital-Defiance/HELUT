@@ -83,7 +83,7 @@ The pain is not “CMUX can’t run on GPU.” It is **encoding a schoolbook exp
 
 ### Phase 1 non-goals
 
-- New lattice assumption, noisy-BK product path (**H4**), Sage estimator (**H1**).
+- New lattice assumption. Sage estimator JSON filled (**C23**); noisy BK measured at covering gadget (**C22**); *N*=1024 Metal SING still *e*=0.
 - Claiming production Metal tick rate for campaign search (**N6**).
 - Parallelizing *within* one CMUX accumulator chain.
 
@@ -126,7 +126,7 @@ Phase 2 without Phase 1 is a big kernel drop into an unmeasured fused path. **Do
 - **Landed 2026-08-13:** `helut_blind_rotate_ntt_tile` — gadget digits in-tile; BK uploaded in 3-prime NTT domain; pointwise EP + iNTT + CRT; bit-identical to schoolbook.
 - Fallback: schoolbook persist tile if `maxTotalThreadsPerThreadgroup < N`.
 
-**Bar (met for micro):** *N*=1024 **0.433 s/BR** vs **C17** 0.519. Boolean SING **15.6 s / 8** is *not* faster than C17 (sequential NTT/iNTT per CMUX). Crypto ℓ=2 SING not re-timed.
+**Bar (met for micro):** *N*=1024 **0.433 s/BR** vs **C17** 0.519. Serial NTT SING was 15.6 s (**C18**). Wavefront-parallel (**C20**) boolean **10.6 s / 8**; crypto ℓ=2 (**C21**) **11.38 s / 8**.
 
 ### Phase 2 non-goals
 
@@ -136,7 +136,7 @@ Phase 2 without Phase 1 is a big kernel drop into an unmeasured fused path. **Do
 
 ### Phase 2 exit
 
-Schoolbook expansion **gone** from the tiled hot path (**C18** `ring=ntt`); Phase‑1 tiles still available as a debug / fallback lowering; **H3** still asterisked (boolean SING 15.6 s > **C17** 12.2 s; crypto ℓ=2 untimed). Cookbook row for Metal production-shaped *N*=1024 NTT micro.
+Schoolbook expansion **gone** from the tiled hot path (**C18** `ring=ntt`); Phase‑1 tiles still available as a debug / fallback lowering; **H3** SING bars met (**C20** boolean 10.6 s, **C21** crypto 11.38 s). Cookbook row for Metal production-shaped *N*=1024 NTT micro.
 
 ---
 
@@ -164,6 +164,6 @@ Schoolbook expansion **gone** from the tiled hot path (**C18** `ring=ntt`); Phas
 5. Flip default hot path; keep schoolbook tile as `--metal-br-schoolbook` fallback.  
 6. **Fused EP kernel (2.2) — done.**  
 7. **GPU-resident BR tile (2.3) — done.**  
-8. **NTT persist BR (C18) — done** for micro (0.433 s/BR; fused 3-prime 0.420 s/BR). SING 15.2 s with pack cache; wavefront-parallel independent `$lut` BRs in tree. Sage H1 needs **native** Sage (qemu SIGILL).
+8. **NTT persist BR (C18) — done** for micro (0.433 s/BR; fused 3-prime 0.420 s/BR). SING 15.2 s with pack cache; wavefront-parallel independent `$lut` BRs in tree. Sage **H1** filled (**C23**).
 
 When a step graduates, add a **C** row (or close **H3**) and a reproduce command — then it may enter public prose.

@@ -5,7 +5,7 @@ Canonical TeX for a first university course in **reconfigurable homomorphic comp
 | Artifact | Path |
 |----------|------|
 | Master file | [`helut-living-textbook.tex`](helut-living-textbook.tex) |
-| Epoch / edition | `\livingepoch` in [`preamble.tex`](preamble.tex) — currently **2026-08-13 / C19**, edition **0.1** |
+| Epoch / edition | `\livingepoch` in [`preamble.tex`](preamble.tex) — currently **2026-08-13 / C26**, edition **0.1** |
 | Corpus of record | [`../directives/claim-sheet.md`](../directives/claim-sheet.md) |
 | Trajectory | [`../directives/research-trajectory.md`](../directives/research-trajectory.md) |
 | Frontier (not claims) | [`../directives/potential-avenues.md`](../directives/potential-avenues.md) |
@@ -39,7 +39,7 @@ Chapter ↔ corpus map:
 |------|------------|
 | Pillar I, Metal compiler, certificates | `fhe-graduation.md`, `metal-compiler-phases.md`, `parameter-cookbook.md` |
 | Pillar II | `tensorlut-theorem.md` (**C19**), `tensorlut.md`, `adversarial-synthesis.md` |
-| Pillar III | `Enigma256.md`, `roadmap-overall.md` Schneier pillar |
+| Pillar III | `enigma256-theorem.md` (**C24**), `Enigma256.md`, `roadmap-overall.md` Schneier pillar |
 | Open problems | `research-trajectory.md` |
 | Frontier | `potential-avenues.md` |
 | Labs / reproduce | `REPRODUCE.md` |

@@ -53,25 +53,24 @@ def try_estimate(n: int, q: int, sigma: float) -> Optional[float]:
         )
         costs = LWE.estimate(params)
         bits = None
-        if isinstance(costs, dict):
-            items = costs.items()
-        else:
-            items = [("estimate", costs)]
+        items = costs.items() if hasattr(costs, "items") else [("estimate", costs)]
         for _name, cost in items:
             if cost is None:
                 continue
-            rop = getattr(cost, "rop", None)
-            if rop is None and isinstance(cost, dict):
-                rop = cost.get("rop")
+            rop = None
+            try:
+                rop = cost["rop"]
+            except Exception:
+                rop = getattr(cost, "rop", None)
             if rop is None:
                 continue
             try:
                 val = float(rop)
-                if val <= 0:
-                    continue
-                b = math.log2(val)
             except Exception:
                 continue
+            if not math.isfinite(val) or val <= 1.0:
+                continue
+            b = math.log2(val)
             bits = b if bits is None else min(bits, b)
         return bits
     except Exception as exc:
@@ -102,8 +101,10 @@ def main() -> int:
         if bits is None:
             pending.append(label)
             results[label] = None
+            print(f"{label}: PENDING", flush=True)
         else:
             results[label] = round(bits, 2)
+            print(f"{label}: {results[label]} bits", flush=True)
 
     payload = {
         "dependency_status": dep,

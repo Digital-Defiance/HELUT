@@ -48,19 +48,22 @@ Paper rule: every abstract sentence maps to a claim ID with all five cells ≥ *
 ## Critical path (order)
 
 1. ~~Rewrite `paper/helut.tex` to three-pillar claim + explicit non-claims~~
-2. **Lattice-estimator** table for production `(n,q,σ)` — protocol shipped; needs SageMath fill-in
-3. ~~Noisy BK depth certificate (`TFHENoisyBKCertificate`)~~ — still need measured σ_BK for production
-4. **Encrypted metrics** — full_adder N≤16 Metal + CPU; tree/regex CPU multi-netlist; N=1024 Metal pending
-5. **Formal method** section for continuous→discrete (TensorLUT) — **Theorem 1** in `directives/tensorlut-theorem.md` / `paper/helut.tex`; machine-checked by `TensorLUTFormal.certificate()`
+2. ~~Lattice-estimator table for production `(n,q,σ)`~~ — **C23** filled (native Sage 10.9); production |Δ|=4.5; four other anchors exceed 16-bit tolerance (**H1**)
+3. ~~Noisy BK depth certificate (`TFHENoisyBKCertificate`)~~ — **C22** measured σ̂ at covering gadget *N*≤128; **C26** product-shaped *N*=1024 inject graded fail (ε/−∞-norm); Metal SING still *e*=0 BK (**H4**)
+4. ~~Encrypted metrics~~ — full_adder SING through *N*=1024 Metal boolean (**C20** 10.6 s) and crypto ℓ=2 (**C21** 11.38 s)
+5. **Formal method** section for continuous→discrete (TensorLUT) — **Theorem 1** in `directives/tensorlut-theorem.md` / `paper/helut.tex`; machine-checked by `TensorLUTFormal.certificate()` (**C19**)
+5b. **Pillar III SoftBus contract** — **Theorem 2** in `directives/enigma256-theorem.md`; `Enigma256Formal.certificate()` (**C24**)
 6. ~~Related-work matrix~~ (paper); ablations via `--cpu-only` / refresh modes
-7. **Application gallery** — figures; parameter cookbook at `directives/parameter-cookbook.md`
-8. **Artifact tag** — tests, scripts, logs
+7. **Application gallery** — nine slots in `directives/application-gallery.md`; figures pending; parameter cookbook at `directives/parameter-cookbook.md`
+8. **Artifact tag** — checklist `directives/artifact-tag.md`; tests, scripts, logs
+
+Corpus push order: [`../roadmap-overall.md`](../roadmap-overall.md) Phase 0.
 
 Parameter cookbook: `directives/parameter-cookbook.md`.
 
 ## Non-claims (always print)
 
-- Calibrated core-SVP ≠ lattice-estimator attack cost
+- Calibrated core-SVP ≠ lattice-estimator attack cost on every row (**C23** filled the JSON; 4/8 anchors still |Δ|>16)
 - Trivial/oracle Metal graphs ≠ FHE
 - `publicMS` semantics and side-channels (Metal/GPU power) out of scope unless measured
 - Quantum / poly-memory attacks out of scope

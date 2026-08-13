@@ -20,6 +20,10 @@ package enum TensorLUTLemma: String, Sendable {
     case involutionSandwich
     /// Freeze mask: frozen LUT weights do not enter π(w).
     case freezeMask
+    /// On π(w)=0 (binary INIT), emitter recovers the INIT bits exactly.
+    case emitterDiscreteAgreement
+    /// Frozen stecker pairs always survive mutation; free+frozen remain a partial involution.
+    case involutionUnderFreeze
 }
 
 package struct TensorLUTProofStep: Sendable, Equatable {
@@ -169,7 +173,42 @@ package enum TensorLUTFormal {
         return abs(frozen - full / 2) < 1e-3
     }
 
-    /// Issue the full Pillar II formal certificate.
+    /// Lemma: when π(w)=0, E(w) recovers the binary INIT bits (Verilog emit ≡ cube).
+    package static func checkEmitterDiscreteAgreement(trials: Int = 32, dim: Int = 64, seed: UInt32 = 0xE1D1) -> Bool {
+        var rng = LCG32(state: seed)
+        for _ in 0..<trials {
+            let bits = (0..<dim).map { _ in rng.next() & 1 }
+            let w = bits.map { Float($0) }
+            if !isBinary(w) { return false }
+            if abs(discretenessPenalty(w)) > 1e-6 { return false }
+            let emitted = emitBinary(w)
+            if emitted != bits.map({ UInt8($0) }) { return false }
+        }
+        // Near-binary fractional weights are *not* claimed to equal emit — only π=0.
+        let soft: [Float] = [0.1, 0.9, 0.5]
+        if isBinary(soft) { return false }
+        return true
+    }
+
+    /// Lemma: mutatedPreserving keeps frozen pairs and yields a valid partial involution.
+    package static func checkInvolutionUnderFreeze(trials: Int = 48, seed: UInt64 = 0xF12E_C001) -> Bool {
+        let frozen: [(Int, Int)] = [(0, 1), (2, 3)]
+        if !SteckerInvolution.isValid(frozen) { return false }
+        var rng = SplitMix64RNG(seed: seed)
+        for _ in 0..<trials {
+            let start = SteckerInvolution(pairs: frozen + [(4, 5)])
+            let next = start.mutatedPreserving(frozen: frozen, maxPairs: 10, rng: &rng)
+            if !SteckerInvolution.isValid(next.pairs) { return false }
+            let frozenSet = Set(frozen.map { ($0.0 << 8) | $0.1 })
+            let nextSet = Set(next.pairs.map { ($0.0 << 8) | $0.1 })
+            if !frozenSet.isSubset(of: nextSet) { return false }
+            // Overlap with a frozen letter must be rejected by isValid.
+            if SteckerInvolution.isValid(frozen + [(0, 7)]) { return false }
+        }
+        return true
+    }
+
+    /// Issue the Pillar II Theorem 1 certificate (six core lemmas — C19).
     package static func certificate() -> TensorLUTFormalCertificate {
         let steps: [TensorLUTProofStep] = [
             .init(lemma: .cryptoFitnessMSE, holds: checkCryptoFitnessMSE()),
@@ -189,5 +228,39 @@ package enum TensorLUTFormal {
                 "Empirical grades (baseline/shatter/3-pair) are separate evidence"
             ]
         )
+    }
+
+    /// Theorem 1 corollary: emitter–discrete agreement + involution under freeze (C25).
+    package static func corollaryCertificate() -> TensorLUTFormalCertificate {
+        let steps: [TensorLUTProofStep] = [
+            .init(lemma: .emitterDiscreteAgreement, holds: checkEmitterDiscreteAgreement()),
+            .init(lemma: .involutionUnderFreeze, holds: checkInvolutionUnderFreeze())
+        ]
+        return TensorLUTFormalCertificate(
+            steps: steps,
+            hypotheses: [
+                "Emitter recovers INIT exactly only when π(w)=0 (binary cube)",
+                "mutatedPreserving freezes stecker pairs; free mutations stay a partial involution",
+                "Corollary strengthens Theorem 1 emit/freeze clauses — still not melt completeness",
+                "Not a U-534 / P1030680 plaintext claim"
+            ]
+        )
+    }
+}
+
+/// Deterministic RNG for formal checks (not crypto).
+private struct SplitMix64RNG: RandomNumberGenerator {
+    private var state: UInt64
+
+    init(seed: UInt64) {
+        self.state = seed == 0 ? 0xDEAD_BEEF_CAFE_BABE : seed
+    }
+
+    mutating func next() -> UInt64 {
+        state &+= 0x9E37_79B9_7F4A_7C15
+        var z = state
+        z = (z ^ (z >> 30)) &* 0xBF58_476D_1CE4_E5B9
+        z = (z ^ (z >> 27)) &* 0x94D0_49BB_1331_11EB
+        return z ^ (z >> 31)
     }
 }

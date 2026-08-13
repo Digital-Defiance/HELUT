@@ -97,7 +97,24 @@ Then:
 Each clause is a \texttt{TensorLUTFormal.check*} in
 \texttt{TensorLUTFormal.swift}, aggregated by
 \texttt{TensorLUTFormal.certificate()}.
-The named lemmas are
+
+\reproduced{C25}{Theorem~1 corollary: emitter--discrete agreement
+($\pi=0\Rightarrow E(w)$ recovers INIT bits) and involution under freeze
+(\texttt{mutatedPreserving} retains frozen pairs).
+\texttt{TensorLUTFormal.corollaryCertificate()}.
+Reproduce:
+\texttt{swift test -c release --filter testTensorLUTFormalCorollaryCertificate}.}
+
+\begin{theorem}[TensorLUT emitter / freeze corollary]
+\label{thm:tensorlut-corollary}
+Under Theorem~\ref{thm:tensorlut} hypotheses plus emit-via-$E$ and
+\texttt{mutatedPreserving}:
+if $\pi(w)=0$ then $E(w)$ recovers the binary INIT;
+every freeze-preserving genotype remains a partial involution containing
+the frozen pairs.
+\end{theorem}
+
+Still not melt completeness.The named lemmas are
 \texttt{discretenessPenalty},
 \texttt{cryptoFitnessMSE},
 \texttt{combinedObjective},

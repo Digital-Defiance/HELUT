@@ -15,7 +15,7 @@ Certificate & Role \\
 \texttt{TFHEAsymptoticSecurityCertificate} & Gaussian ingest $\varepsilon\le 2^{-64}$. \\
 \texttt{TFHELWEHardnessCertificate} & Decision-LWE $\to$ IND-CPA $+$ bit estimate. \\
 \texttt{TFHELWECalibration} & Anchor table for the estimator. \\
-\texttt{TFHENoisyBKCertificate} & Depth under $B_{\mathrm{bk}}$ / noiseless hypothesis. \\
+\texttt{TFHENoisyBKCertificate} / \texttt{TFHENoisyBKMeasurement} & Depth under $B_{\mathrm{bk}}$; identity residual $\hat\sigma$ (\cid{22}). \\
 \texttt{TFHELWEEstimatorProtocol} & External lattice-estimator merge. \\
 \bottomrule
 \end{tabular}
@@ -34,35 +34,49 @@ A passing encrypted tick is a bundle:
   \item Gaussian: ingest $\varepsilon$ under the stated hypotheses.
   \item Hardness: calibrated classical bits, with \hid{1} attached until Sage
         fills the estimator JSON.
-  \item Depth: noisy-BK model, with \hid{4} attached while $B_{\mathrm{bk}}=0$.
+  \item Depth: noisy-BK model; \cid{22} measured at covering gadget;
+        \cid{26} graded fail at product $N{=}1024$ inject;
+        \hid{4} while $N=1024$ Metal SING keeps $B_{\mathrm{bk}}=0$.
 \end{itemize}
 
 Students who report only milliseconds have not completed the lab.
 
+\reproduced{C22}{Identity-LUT residual under a covering gadget fills
+$B_{\mathrm{bk}}$ and $\hat\sigma$. At $N=8$, inject $B=64$ gives
+$\hat\sigma\approx 6396\ll\delta/2$. At $N=128$, $\hat\sigma\approx 1.47\times 10^6$,
+still $\infty$-norm decodable, Gaussian union $\approx 2^{-23.5}$ not $2^{-64}$.}
+
+\reproduced{C26}{Product-shaped $N{=}1024$ identity residual: inject $B{=}64$
+undecodable on \texttt{cryptoPublicMS}/\texttt{crypto}; inject $B{=}4$ on
+\texttt{.crypto} may be $\infty$-norm OK with $\varepsilon\log_2\approx -1$
+(not $-64$). Receipt: \corpus{logs/helut-noisy-bk-measure-n1024.log}.}
 \section{Calibration is not estimation}
 
 \begin{center}
 \small
-\begin{tabular}{@{}lrrrr@{}}
+\begin{tabular}{@{}lrrrrr@{}}
 \toprule
-Label & $n$ & $\sigma$ & Ref bits & HELUT est. \\
+Label & $n$ & $\sigma$ & HELUT & Estimator & $|\Delta|$ \\
 \midrule
-demo-N8 & 8 & $2^{12}$ & 4 & 4.0 \\
-weak-n256 & 256 & $2^{17}$ & 45 & 40.4 \\
-mid-n512 & 512 & $2^{16}$ & 95 & 95.5 \\
-classic-n630 & 630 & $2^{15}$ & 128 & 129.0 \\
-prod-n1024-s16 & 1024 & $2^{16}$ & 170 & 175.7 \\
+demo-N8 & 8 & $2^{12}$ & 4.0 & 33.1 & 29.1 \\
+weak-n256 & 256 & $2^{17}$ & 40.4 & 53.7 & 13.3 \\
+mid-n512 & 512 & $2^{16}$ & 95.5 & 92.4 & 3.2 \\
+classic-n630 & 630 & $2^{15}$ & 129.0 & 106.5 & 22.5 \\
+n768-s16 & 768 & $2^{16}$ & 135.6 & 135.4 & 0.2 \\
+prod-n1024-s16 & 1024 & $2^{16}$ & 175.7 & \textbf{180.2} & 4.5 \\
+n1024-s17 & 1024 & $2^{17}$ & 160.7 & 189.9 & 29.3 \\
+n2048-s16 & 2048 & $2^{16}$ & 336.1 & 369.8 & 33.7 \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-$q=2^{32}$, binary secret.
-The estimator column is PENDING until the cookbook export is filled.
+$q=2^{32}$, binary secret, native Sage~10.9 $+$ lattice-estimator (\cid{23}).
+Merge tolerance is $16$ bits: four rows pass, four fail.
 
 \hedgebox{H1}{Quote ``$\sim 176$ calibrated classical bits at production
-$(n,\sigma)$'' only with the clause ``not lattice-estimator attack cost until
-Sage fills the pending JSON.''
-A midterm bubble that says ``176-bit secure'' without the clause is wrong.}
+$(n,\sigma)$'' together with ``estimator $180.2$ on prod-n1024-s16.''
+A midterm bubble that says ``176-bit secure'' without naming the estimator
+row, or that treats every calibration anchor as estimator cost, is wrong.}
 
 \section{Five-cell test, applied to certificates}
 
@@ -79,9 +93,9 @@ They need the five cells:
 \end{enumerate}
 
 \begin{exercise}
-Which cell is missing for noisy BK as a \emph{product} parameter?
-Write the experiment that would fill it (\hid{4}: measured $\sigma_{\mathrm{BK}}$
-into \texttt{TFHENoisyBKCertificate}).
+\cid{22} filled the measurement cell at covering-gadget $N=8$ and $N=128$.
+Which cell is still missing for noisy BK as a \emph{product} parameter at
+$N=1024$ Metal SING? Name the gadget obstruction ($\ell=1$ vs covering).
 \end{exercise}
 
 \section{Honesty as an engineering interface}
@@ -105,6 +119,6 @@ For each row, write one sentence a journalist may print and one sentence
 they may not.
 \end{lab}
 
-\growswhen{Estimator-backed rows replace the PENDING column; then this
-chapter gains a comparison table against Concrete / tfhe-rs parameter sets
-as a \emph{scope} table, still not a bake-off unless the bars match.}
+\growswhen{The four off-tolerance anchors (demo-N8, classic-n630, n1024-s17,
+n2048-s16) get a documented estimator model, or HELUT's core-SVP fit is
+revised; then \hid{1} can shrink further.}

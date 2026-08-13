@@ -86,24 +86,27 @@ production $N$ it is a museum exhibit.
 \setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}p{0.30\textwidth}p{0.18\textwidth}p{0.28\textwidth}p{0.14\textwidth}@{}}
 \toprule
-Path at $N=1024$ & s/BR (micro) & Boolean SING / 8 & RSS \\
+Path at $N=1024$ & s/BR (micro) & SING / 8 rows & RSS \\
 \midrule
 Fused schoolbook megagraph & DNF ($11.6\,\mathrm{h}$) & --- & ${\sim}4$\,GiB \\
 Poly-mul kernel & 3.645 & --- & --- \\
 Fused EP (\cid{16}) & 1.043 & $25.1\,\mathrm{s}$ ($3.14$\,s/row) & --- \\
 Persist schoolbook (\cid{17}) & 0.519 & $12.2\,\mathrm{s}$ ($1.52$\,s/row) & 68\,MiB \\
-NTT persist (\cid{18}) & \textbf{0.433} & $15.6\,\mathrm{s}$ ($1.95$\,s/row) & 148\,MiB \\
+NTT persist (\cid{18}) serial SING & \textbf{0.433} & $15.6\,\mathrm{s}$ ($1.95$\,s/row) & 148\,MiB \\
+Wavefront-parallel (\cid{20}) & 0.420 (fused 3-prime) & \textbf{$10.6\,\mathrm{s}$} ($1.33$\,s/row) & --- \\
+Crypto $\ell=2$ SING (\cid{21}) & --- & $11.38\,\mathrm{s}$ ($1.42$\,s/row) & --- \\
 CPU SING full\_adder & --- & ${\sim}52\,\mathrm{s}$ & --- \\
 \bottomrule
 \end{tabular}
 \end{center}
 
-\hedgebox{H3}{NTT persist wins the microbench and loses boolean SING against
-schoolbook persist in this epoch ($15.6\,\mathrm{s}$ vs $12.2\,\mathrm{s}$)
-because of sequential in-tile NTT/iNTT round-trips.
-Crypto $\ell=2$ SING is not re-timed.
-Schoolbook is gone from the tiled \emph{hot path} (\texttt{ring=ntt}); SING
-is not yet an NTT victory. Quote both sentences together.}
+\reproduced{C20, C21}{Wavefront-parallel independent \texttt{\$lut} BRs:
+boolean SING $10.6\,\mathrm{s}/8$ beats persist-schoolbook \cid{17};
+cryptoPublicMS $\ell=2$ SING $11.38\,\mathrm{s}/8$ vs \cid{14}'s $175.6\,\mathrm{s}$.}
+
+\hedgebox{H3}{The scheduler, not a faster NTT, is what beat \cid{17} on SING.
+Serial in-tile NTT (\cid{18}) still loses boolean SING ($15.6\,\mathrm{s}$).
+Sage \hid{1} is independent of these wall-clocks.}
 
 \begin{exercise}[Compiler post-mortem]
 In 400 words: why did the fused megagraph never reach the GPU?
@@ -125,6 +128,5 @@ Together they are a SoftBus-native torus compiler: staged IR $+$ ring kernels
 $+$ cached executables---instead of a schoolbook megagraph hoping the GPU
 will eventually appear.
 
-\growswhen{Fewer in-tile NTT/iNTT round-trips so boolean SING beats
-\cid{17}'s $12.2\,\mathrm{s}$; crypto $\ell=2$ SING re-timed; then \hid{3}
-can shrink.}
+\growswhen{NTT EP inside the crypto $\ell=2$ tile (C21's SING log still
+shows $W=64$ schoolbook tiles); then \hid{3} is only Sage \hid{1}.}

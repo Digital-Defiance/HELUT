@@ -1,2 +1,65 @@
-/bin/bash: -c: line 1: syntax error near unexpected token `0,"/est"'
-/bin/bash: -c: line 1: `sage -python -c import sys; sys.path.insert(0,"/est"); import subprocess; subprocess.check_call(["sage","--pip","install","/est"]); import runpy; sys.argv=["helut_lattice_estimate.py","--pending","/work/logs/helut-estimator-pending.json","--out","/work/logs/helut-estimator-results.json"]; runpy.run_path("/work/Scripts/helut_lattice_estimate.py", run_name="__main__")'
+H1: native sage at /Users/jessica/Applications/SageMath-10-9.app/Contents/Frameworks/Sage.framework/Versions/Current/local/bin/sage
+Algorithm <estimator.lwe_bkw.CodedBKW object at 0x11d45d7f0> on LWEParameters(n=8, q=4294967296, Xs=D(σ=0.50, μ=-0.50), Xe=D(σ=4096.00), m=+Infinity, tag=None) failed with cannot access local variable 'sigma_set' where it is not associated with a value
+usvp                 :: rop: ≈2^33.1, red: ≈2^33.1, δ: 1.012950, β: 40, d: 41, tag: usvp
+bdd                  :: rop: ≈2^33.1, red: ≈2^33.1, svp: ≈2^21.1, β: 40, η: 1, d: 40, tag: bdd
+bdd_mitm_hybrid      :: rop: ≈2^33.1, red: ≈2^33.1, svp: ≈2^13.7, β: 40, η: 2, ζ: 7, |S|: 70, d: 40, prob: 1.000, ↻: 1, tag: hybrid
+dual                 :: rop: ≈2^38.8, mem: 41, m: 83, β: 40, d: 91, ↻: 1, tag: dual
+dual_hybrid          :: rop: ≈2^33.4, red: ≈2^33.4, guess: 513.063906501637, β: 40, p: 3, ζ: 0, t: 0, β': 27, N: 0.693, m: 8
+demo-N8: 33.09 bits
+bkw                  :: rop: ≈2^110.8, m: ≈2^99.5, mem: ≈2^100.5, b: 3, t1: 0, t2: 22, ℓ: 2, #cod: 242, #top: 0, #test: 17, tag: coded-bkw
+usvp                 :: rop: ≈2^55.6, red: ≈2^55.6, δ: 1.009787, β: 89, d: 476, tag: usvp
+bdd                  :: rop: ≈2^53.7, red: ≈2^53.2, svp: ≈2^52.0, β: 80, η: 106, d: 484, tag: bdd
+dual                 :: rop: ≈2^57.3, mem: ≈2^30.3, m: 252, β: 91, d: 508, ↻: 1, tag: dual
+dual_hybrid          :: rop: ≈2^54.6, red: ≈2^54.6, guess: ≈2^47.5, β: 81, p: 3, ζ: 10, t: 10, β': 104, N: ≈2^21.4, m: 256
+weak-n256: 53.7 bits
+bkw                  :: rop: ≈2^144.2, m: ≈2^131.6, mem: ≈2^132.6, b: 4, t1: 0, t2: 25, ℓ: 3, #cod: 466, #top: 0, #test: 47, tag: coded-bkw
+usvp                 :: rop: ≈2^96.4, red: ≈2^96.4, δ: 1.005694, β: 234, d: 935, tag: usvp
+bdd                  :: rop: ≈2^94.1, red: ≈2^93.4, svp: ≈2^92.7, β: 223, η: 254, d: 937, tag: bdd
+dual                 :: rop: ≈2^99.1, mem: ≈2^60.7, m: 465, β: 240, d: 977, ↻: 1, tag: dual
+dual_hybrid          :: rop: ≈2^92.4, red: ≈2^92.2, guess: ≈2^88.8, β: 215, p: 2, ζ: 20, t: 40, β': 231, N: ≈2^47.6, m: 512
+mid-n512: 92.36 bits
+bkw                  :: rop: ≈2^145.0, m: ≈2^131.9, mem: ≈2^132.9, b: 4, t1: 0, t2: 30, ℓ: 3, #cod: 566, #top: 0, #test: 64, tag: coded-bkw
+usvp                 :: rop: ≈2^111.3, red: ≈2^111.3, δ: 1.004987, β: 287, d: 1159, tag: usvp
+bdd                  :: rop: ≈2^109.0, red: ≈2^108.3, svp: ≈2^107.7, β: 276, η: 308, d: 1169, tag: bdd
+dual                 :: rop: ≈2^114.7, mem: ≈2^72.0, m: 566, β: 295, d: 1196, ↻: 1, tag: dual
+dual_hybrid          :: rop: ≈2^106.5, red: ≈2^106.4, guess: ≈2^102.8, β: 265, p: 2, ζ: 10, t: 70, β': 279, N: ≈2^57.7, m: 630
+classic-n630: 106.5 bits
+bkw                  :: rop: ≈2^176.6, m: ≈2^163.6, mem: ≈2^164.6, b: 5, t1: 0, t2: 24, ℓ: 4, #cod: 673, #top: 0, #test: 95, tag: coded-bkw
+usvp                 :: rop: ≈2^143.1, red: ≈2^143.1, δ: 1.003975, β: 401, d: 1373, tag: usvp
+bdd                  :: rop: ≈2^140.4, red: ≈2^139.8, svp: ≈2^138.7, β: 389, η: 420, d: 1375, tag: bdd
+dual                 :: rop: ≈2^147.7, mem: ≈2^95.4, m: 667, β: 414, d: 1435, ↻: 1, tag: dual
+dual_hybrid          :: rop: ≈2^135.4, red: ≈2^135.4, guess: ≈2^128.5, β: 369, p: 2, ζ: 20, t: 80, β': 377, N: ≈2^77.5, m: 768
+n768-s16: 135.42 bits
+bkw                  :: rop: ≈2^240.4, m: ≈2^227.2, mem: ≈2^228.2, b: 7, t1: 0, t2: 19, ℓ: 6, #cod: 874, #top: 0, #test: 151, tag: coded-bkw
+usvp                 :: rop: ≈2^192.1, red: ≈2^192.1, δ: 1.003075, β: 576, d: 1808, tag: usvp
+bdd                  :: rop: ≈2^189.0, red: ≈2^188.3, svp: ≈2^187.7, β: 562, η: 596, d: 1823, tag: bdd
+dual                 :: rop: ≈2^198.8, mem: ≈2^131.8, m: 862, β: 596, d: 1886, ↻: 1, tag: dual
+dual_hybrid          :: rop: ≈2^180.2, red: ≈2^179.6, guess: ≈2^178.5, β: 527, p: 2, ζ: 0, t: 160, β': 526, N: ≈2^109.1, m: 1024
+prod-n1024-s16: 180.17 bits
+bkw                  :: rop: ≈2^240.4, m: ≈2^227.2, mem: ≈2^228.2, b: 7, t1: 0, t2: 19, ℓ: 6, #cod: 874, #top: 0, #test: 151, tag: coded-bkw
+usvp                 :: rop: ≈2^203.5, red: ≈2^203.5, δ: 1.002926, β: 617, d: 1789, tag: usvp
+bdd                  :: rop: ≈2^200.1, red: ≈2^199.4, svp: ≈2^198.9, β: 602, η: 636, d: 1805, tag: bdd
+dual                 :: rop: ≈2^211.0, mem: ≈2^140.4, m: 846, β: 640, d: 1870, ↻: 1, tag: dual
+dual_hybrid          :: rop: ≈2^189.9, red: ≈2^189.9, guess: ≈2^183.9, β: 564, p: 2, ζ: 10, t: 150, β': 561, N: ≈2^116.1, m: 1024
+n1024-s17: 189.95 bits
+bkw                  :: rop: ≈2^418.5, m: ≈2^395.4, mem: ≈2^389.0, b: 12, t1: 0, t2: 31, ℓ: 11, #cod: 1790, #top: 1, #test: 257, tag: coded-bkw
+usvp                 :: rop: ≈2^402.0, red: ≈2^402.0, δ: 1.001650, β: 1322, d: 3541, tag: usvp
+bdd                  :: rop: ≈2^398.1, red: ≈2^397.2, svp: ≈2^397.0, β: 1305, η: 1343, d: 3534, tag: bdd
+dual                 :: rop: ≈2^417.8, mem: ≈2^286.4, m: 1602, β: 1375, d: 3650, ↻: 1, tag: dual
+dual_hybrid          :: rop: ≈2^369.8, red: ≈2^369.7, guess: ≈2^365.1, β: 1203, p: 2, ζ: 10, t: 330, β': 1168, N: ≈2^241.6, m: ≈2^11.0
+n2048-s16: 369.77 bits
+{
+  "dependency_status": "ok",
+  "note": "Install: pip install 'git+https://github.com/malb/lattice-estimator.git' and SageMath (sage.all). None values mean not verified \u2014 do not treat HELUT calibrated estimates as lattice-estimator output.",
+  "pending": [],
+  "results": {
+    "classic-n630": 106.5,
+    "demo-N8": 33.09,
+    "mid-n512": 92.36,
+    "n1024-s17": 189.95,
+    "n2048-s16": 369.77,
+    "n768-s16": 135.42,
+    "prod-n1024-s16": 180.17,
+    "weak-n256": 53.7
+  }
+}
