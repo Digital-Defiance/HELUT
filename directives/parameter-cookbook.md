@@ -46,8 +46,17 @@ bk.assertDecodable()
 | Default Metal full_adder SING *N*=1024 | **No** (*B*<sub>bk</sub>=0) | Product path stays noiseless BK until a gadget+σ meets ε≤2⁻⁶⁴ |
 | ℓ=1 `booleanPublicMS` | Cannot carry BK noise | Use covering gadget / crypto ℓ≥2 for residual experiments |
 
-Cookbook rule: quote noisy-BK *success* numbers only next to covering-gadget *N*≤128 (**C22**). At production *N*, print **C26** (undecodable / ε fail) or *e*=0 SING — never imply measured production depth.
-## Demo / correctness (not production)
+Cookbook rule: quote noisy-BK *success* numbers only next to covering-gadget *N*∈{8,128} (**C22**, **C27**). At production *N*=1024 under *q*=2³², exact public-MS covering is **impossible** (**C27**); print **C26** residuals or *e*=0 SING — never imply measured production depth.
+
+### Exact public-MS covering (*q*=2³²)
+
+| *N* | baseLog for *g₀*=*δ* | baseLog \| 32? | Exact? |
+|-----|----------------------|----------------|--------|
+| 8 | 4 | yes (ℓ=8) | **yes** |
+| 128 | 8 | yes (ℓ=4) | **yes** |
+| 1024 | 11 | **no** (⌊32/11⌋·11=22) | **no** (**C27**) |
+
+See `directives/ggsw-public-ms-covering.md`.## Demo / correctness (not production)
 
 | Knob | Value |
 |------|-------|

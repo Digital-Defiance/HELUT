@@ -14,7 +14,7 @@ Living textbook (course surface on this trajectory): [`../textbook/`](../textboo
 | **H2** full_adder @ *N*≥256 | ~~Multi-LUT encrypted correctness~~ **Closed** | Z_{2N} pack / `rotationPower` fix; SING PASS @ 256/512/1024 |
 | **H1** Sage lattice-estimator | Honest classical bits for production-shaped params | **C23** JSON filled. Production row agrees (|Δ|=4.5). Tighten HELUT vs estimator on classic-n630 / n1024-s17 / n2048 (Δ>16). |
 | **H3** Metal BR @ large *N* | Real wall-clock / memory envelope | **C20** boolean 10.6 s · **C21** crypto ℓ=2 11.38 s · NTT micro 0.420 s/BR. NTT inside crypto ℓ=2 tile. |
-| **H4** Noisy BK | Production depth story | **C22** *N*≤128 covering; **C26** *N*=1024 inject *B*=64 undecodable / *B*=4 ε≈2⁻¹. Product SING still *B_bk*=0 |
+| **H4** Noisy BK | Production depth story | **C22**/**C26**/**C27**: covering only at *N*∈{8,128} under *q*=2³²; *N*=1024 inject fails. Next: new (*q*,*N*) or approx gadget for ε≤2⁻⁶⁴ |
 | Campaign catalog | Exhaust Boolean coverage | Resume `--bombe-from 418`; middle ring ≠ A |
 | Garble / quarantine | Ciphertext may be wrong letters | Soft-band escalate grades; sister-message lessons |
 

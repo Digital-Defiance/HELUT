@@ -103,9 +103,18 @@ Product-shaped *N*=1024 residual (**C26**, H4 graded negative — not a producti
 
 Expect: noiseless *B*=0; inject *B*=64 undecodable; *B*=4 on `.crypto` may be ∞-norm OK with εlog2≈−1 (not −64).
 
+## Exact public-MS covering (C27)
 
-## Campaign control (C2) — cleartext, not FHE (**N6**)
-Welchman blind control on known P1030684 (see journal / `BREAK_P1030680.md`). Fitness is cleartext Metal batch — never HELUT encrypted tick rate.
+Why covering noisy BK works at *N*=8/128 but not as `cryptoPublicMS` at *N*=1024 under *q*=2³²:
+
+```bash
+swift test -c release --filter testGGSWPublicMSCoveringCertificate
+```
+
+Statement: [`directives/ggsw-public-ms-covering.md`](directives/ggsw-public-ms-covering.md). Exact degrees among {8…2048}: **{8, 128}** only.
+
+
+## Campaign control (C2) — cleartext, not FHE (**N6**)Welchman blind control on known P1030684 (see journal / `BREAK_P1030680.md`). Fitness is cleartext Metal batch — never HELUT encrypted tick rate.
 
 ## TensorLUT Theorem 1 (C19)
 

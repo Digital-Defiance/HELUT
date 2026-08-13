@@ -908,6 +908,17 @@ final class TFHESeamTests: XCTestCase {
         XCTAssertTrue(cert.hypotheses.contains(where: { $0.contains("Fail-closed") || $0.contains("fail-closed") || $0.contains("coupledCubic6") }))
     }
 
+    func testGGSWPublicMSCoveringCertificate() {
+        let cert = GGSWPublicMSCovering.certificate()
+        XCTAssertTrue(cert.allHold, "\(cert.steps.filter { !$0.holds }.map(\.lemma))")
+        cert.assertValid()
+        XCTAssertEqual(cert.exactDegrees, [8, 128])
+        XCTAssertFalse(GGSWPublicMSCovering.isExactPublicMSCovering(degree: 1024))
+        XCTAssertTrue(GGSWPublicMSCovering.isExactPublicMSCovering(degree: 128))
+        let incomplete = GGSWParams.cryptoPublicMS(degree: 1024)
+        XCTAssertEqual(incomplete.baseLog * incomplete.levelCount, 22)
+    }
+
     func testTestPolyInitCacheHits() {
         TFHETestPolyCache.shared.clear()
         let table: [UInt32] = [0, 1, 1, 0]
