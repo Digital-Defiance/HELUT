@@ -17,14 +17,14 @@ Track & Status at epoch \livingepoch{} & Next experiment \\
   & \textbf{Closed} ($Z_{2N}$ pack / \texttt{rotationPower})
   & Keep as a worked bug in Chapter~\ref{ch:torus}. \\
 \hid{1} Sage lattice-estimator
-  & \cid{23} JSON filled; production $|\Delta|=4.5$
-  & Tighten HELUT vs estimator where $|\Delta|>16$. \\
+  & \cid{23} filled; production $|\Delta|=4.5$; core-SVP vs Cost \texttt{rop} divergences
+  & Optional retune / quote estimator-only on $\Delta>16$ rows. \\
 \hid{3} Metal BR at large $N$
   & \cid{20} boolean $10.6\,\mathrm{s}$; \cid{21} crypto $\ell=2$ $11.38\,\mathrm{s}$
-  & NTT inside the crypto $\ell=2$ tile. \\
+  & NTT inside crypto $\ell=2$ at $N{=}1024$ (incomplete public-MS gadget). \\
 \hid{4} Noisy BK
-  & \cid{22}/\cid{26}/\cid{27}: covering only at $N\in\{8,128\}$; $N{=}1024$ inject fails
-  & New $(q,N)$ or approx gadget for $\varepsilon\le 2^{-64}$. \\
+  & \cid{28} Track~B $N{=}128$ Metal + noisy BK PASS; Track~A $N{=}1024$ $e{=}0$
+  & New $(q,N)$ for Track~A, or tighten Gaussian $\varepsilon$ at $N{=}128$. \\
 Campaign catalog
   & Middle ring $\neq A$ untested; catalog parked @417
   & Resume \texttt{--bombe-from 418}. \\

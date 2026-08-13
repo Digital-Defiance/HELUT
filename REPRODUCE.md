@@ -113,8 +113,20 @@ swift test -c release --filter testGGSWPublicMSCoveringCertificate
 
 Statement: [`directives/ggsw-public-ms-covering.md`](directives/ggsw-public-ms-covering.md). Exact degrees among {8…2048}: **{8, 128}** only.
 
+## Track B Metal SING with noisy BK (C28)
 
-## Campaign control (C2) — cleartext, not FHE (**N6**)Welchman blind control on known P1030684 (see journal / `BREAK_P1030680.md`). Fitness is cleartext Metal batch — never HELUT encrypted tick rate.
+```bash
+.build/release/helut --bench netlist.json --degree 128 \
+  --bench-encrypted --sing --vectors 4 --bk-noise 64 \
+  --paths 'blind-rotate-metal public-ms crypto' \
+  | tee logs/helut-encrypted-n128-metal-sing-crypto-noisy.log
+```
+
+Expect PASS, non-zero decodable *B*<sub>bk</sub>, covering degree.
+
+## Campaign control (C2) — cleartext, not FHE (**N6**)
+
+Welchman blind control on known P1030684 (see journal / `BREAK_P1030680.md`). Fitness is cleartext Metal batch — never HELUT encrypted tick rate.
 
 ## TensorLUT Theorem 1 (C19)
 

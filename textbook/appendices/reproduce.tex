@@ -96,6 +96,16 @@ swift test -c release --filter testGGSWPublicMSCoveringCertificate
 Exact degrees among $\{8,\ldots,2048\}$: $\{8,128\}$ only.
 Statement: \corpus{directives/ggsw-public-ms-covering.md}.
 
+\section{Track B Metal SING with noisy BK (\cid{28})}
+
+\begin{lstlisting}
+.build/release/helut --bench netlist.json --degree 128 \
+  --bench-encrypted --sing --vectors 4 --bk-noise 64 \
+  --paths 'blind-rotate-metal public-ms crypto'
+\end{lstlisting}
+
+Covering degree. Expect PASS and non-zero decodable $B_{\mathrm{bk}}$.
+
 \section{TensorLUT Theorem 1 (\cid{19})}
 
 \begin{lstlisting}
