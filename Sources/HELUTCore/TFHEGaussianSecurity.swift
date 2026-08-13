@@ -133,6 +133,26 @@ package func gaussianTwoSidedTail(stddev: Double, threshold: Double) -> Double {
     return erfcApprox(z)
 }
 
+/// `log₂ P(|Z| ≥ t)` with asymptotic erfc for large z (avoids false −∞ underflow).
+package func log2GaussianTwoSidedTail(stddev: Double, threshold: Double) -> Double {
+    precondition(stddev >= 0 && threshold >= 0)
+    if stddev == 0 {
+        return threshold > 0 ? -Double.infinity : 0
+    }
+    let z = threshold / (stddev * sqrt(2))
+    if z < 0 {
+        return 0
+    }
+    // erfcApprox underflows to 0 for z ≳ 20; use erfc asymptotic:
+    // erfc(z) ∼ exp(−z²) / (z √π)
+    if z >= 12 {
+        let lnErfc = -z * z - log(z * sqrt(.pi))
+        return lnErfc / log(2)  // two-sided ≈ erfc for large z (factor 2 absorbed in ≈)
+    }
+    let p = erfcApprox(z)
+    return log2Probability(p)
+}
+
 package func log2Probability(_ p: Double) -> Double {
     if p <= 0 { return -Double.infinity }
     if p >= 1 { return 0 }

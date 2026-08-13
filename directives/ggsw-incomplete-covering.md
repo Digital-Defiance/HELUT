@@ -42,8 +42,11 @@ At \(N=1024\), inject \(B=1\):
 | Metal SING secret + `.crypto` | **PASS** · *B*<sub>bk</sub>=712370 · `…-covering-crypto-noisy-B1.log` (**C33**) |
 | Metal SING public-ms + `.crypto` | **PASS** · *B*<sub>bk</sub>=352756 · `…-covering-publicms-noisy-B1.log` (**C33**) |
 
-So Track A *can* run Metal SING with covering-non-δ + inject \(B=1\). Gaussian ε is still ≫ 2⁻⁶⁴.
+So Track A *can* run Metal SING with covering-non-δ + inject \(B=1\).
+**C34** upgrades the gadget to covering `baseLog=4` (ℓ=8): σ̂≈2.95×10⁴,
+asymptotic εlog2≈−913 (meets ≤2⁻⁶⁴) with Metal SING PASS.
 `cryptoPublicMS` + noise remains undecodable; noiseless `cryptoPublicMS` SING is still **C21**.
+Torus-scale BK inject (\(B\sim 128\approx 2^{-25}q\)) on covering-b4 is still undecodable — next.
 
 ---
 

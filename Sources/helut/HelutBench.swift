@@ -402,6 +402,25 @@ private func runEncryptedNetlistBench() {
                     device: device,
                     queue: queue
                 )
+                // Finer covering (baseLog=4): EP β↓ ⇒ BK-noise amp↓ (H4 toward ε≤2^{-64}).
+                try runAll(
+                    label: "blind-rotate-metal secret covering-b4",
+                    params: .covering(degree: degree, baseLog: 4),
+                    backend: .blindRotateMetal,
+                    wireRefresh: .secret,
+                    seed: 0xE132,
+                    device: device,
+                    queue: queue
+                )
+                try runAll(
+                    label: "blind-rotate-metal public-ms covering-b4",
+                    params: .covering(degree: degree, baseLog: 4),
+                    backend: .blindRotateMetal,
+                    wireRefresh: .publicMS,
+                    seed: 0xE133,
+                    device: device,
+                    queue: queue
+                )
             }
             if metalNetlistOnly {
                 try runAll(
@@ -1134,14 +1153,24 @@ func runNoisyBKMeasure() {
     let degree = intFlag("--degree") ?? 8
     let trials = intFlag("--trials") ?? 16
     let inject = UInt32(intFlag("--bk-noise", allowZero: true) ?? 64)
+    let coveringSweep = CommandLine.arguments.contains("--covering-sweep")
     print("HELUT noisy-BK identity residual (H4)")
-    print("  N=\(degree)  trials=\(trials)  inject B ∈ {0, \(inject)}")
+    print("  N=\(degree)  trials=\(trials)  inject B ∈ {0, \(inject)}"
+        + (coveringSweep ? "  covering-sweep=yes" : ""))
     print("")
     var rows: [TFHENoisyBKMeasurement] = []
-    let gadgets: [(String, GGSWParams)] = [
+    var gadgets: [(String, GGSWParams)] = [
         ("cryptoPublicMS", .cryptoPublicMS(degree: degree)),
         ("crypto", .crypto(degree: degree))
     ]
+    if let baseLogOnly = intFlag("--covering-base-log"), 32 % baseLogOnly == 0 {
+        gadgets = [("covering-b\(baseLogOnly)", .covering(degree: degree, baseLog: baseLogOnly))]
+    } else if coveringSweep {
+        // Smaller baseLog ⇒ smaller EP β ⇒ less BK-noise amp (Track A push toward ε≤2^{-64}).
+        for baseLog in [16, 8, 4, 2, 1] where 32 % baseLog == 0 {
+            gadgets.append(("covering-b\(baseLog)", .covering(degree: degree, baseLog: baseLog)))
+        }
+    }
     if degree <= 16 {
         print("  note: booleanPublicMS (ℓ=1) omitted — incomplete gadget; BK noise mis-decomposes")
     }
@@ -1169,6 +1198,7 @@ func runNoisyBKMeasure() {
                     + " δ/2=\(measured.decodingHalfGap) "
                     + "decode_fail=\(measured.decodeFailures) "
                     + "decodable=\(cert.eachLUTDecodable) εlog2=\(eps)"
+                    + "  (baseLog=\(params.baseLog) ℓ=\(params.levelCount))"
             )
             rows.append(measured)
             if bound == 0 {

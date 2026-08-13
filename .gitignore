@@ -9,11 +9,3 @@ DerivedData/
 # Yosys JSON for Enigma 256 flattens BRAMs (~27MB); regenerate via Scripts/enigma256_synth.sh
 /enigma_256_netlist.json
 /build/
-# Remotion / ElevenLabs (see videos/.gitignore for detail)
-/videos/node_modules/
-/videos/out/*.mp4
-/videos/out/*.webm
-/videos/public/audio/**/*.mp3
-/videos/public/audio/**/*.alignment.json
-/videos/public/audio/**/plan.json
-/videos/scripts/tts/.dictionary-ids.json

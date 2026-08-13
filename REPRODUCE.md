@@ -151,6 +151,20 @@ Statement: [`directives/ggsw-incomplete-covering.md`](directives/ggsw-incomplete
 
 Expect PASS on both; non-zero decodable *B*<sub>bk</sub>. Not `cryptoPublicMS`.
 
+## Track A covering-b4: ε≤2⁻⁶⁴ + Metal SING (C34)
+
+```bash
+.build/release/helut --measure-bk-noise --degree 1024 --trials 8 --bk-noise 1 \
+  --covering-base-log 4 | tee logs/helut-noisy-bk-covering-b4-n1024-B1.log
+.build/release/helut --bench netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 2 --bk-noise 1 \
+  --paths covering-b4 \
+  | tee logs/helut-encrypted-n1024-metal-sing-covering-b4-noisy-B1.log
+```
+
+Expect: εlog2 ≈ −913 (≪ −64); Metal secret + public-ms covering-b4 PASS.
+Finer covering cuts EP β: baseLog 8→4 drops σ̂ ~10× (`--covering-sweep`).
+
 ## Track B Metal SING with noisy BK (C28)
 
 ```bash

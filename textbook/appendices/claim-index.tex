@@ -46,6 +46,7 @@ ID & Result \\
 \cid{31} & Incomplete public-MS gap at $N{=}1024$: uncoveredBits$=10$; approx candidate $=$\texttt{.crypto}. \\
 \cid{32} & Track~A approx: \texttt{.crypto} inject $B{=}1$ at $N{=}1024$ decodable; $\varepsilon\log_2\approx-8.4$ at 8 trials (not $-64$). \\
 \cid{33} & Track~A Metal SING covering \texttt{.crypto} at $N{=}1024$ with $B{=}1$ PASS (secret + public-ms). \\
+\cid{34} & Track~A covering baseLog$=4$: $\varepsilon\log_2\approx-913$ ($\le 2^{-64}$) + Metal SING PASS. \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -61,7 +62,7 @@ ID & Asterisk \\
 \hid{1} & \cid{23} filled JSON. Production $|\Delta|=4.5$; divergences are core-SVP vs Cost \texttt{rop}. \\
 \hid{2} & \textbf{Closed} 2026-08-12 ($Z_{2N}$ pack). Kept as history. \\
 \hid{3} & \cid{20}/\cid{21} SING bars met; serial NTT SING still loses vs persist. \\
-\hid{4} & \cid{33} Track~A Metal covering-\texttt{.crypto} $B{=}1$ PASS; $\varepsilon\approx 2^{-8.4}$ not $2^{-64}$. \\
+\hid{4} & \cid{34} closes $\varepsilon\le 2^{-64}$ at discrete $B{=}1$ / baseLog$=4$; torus-scale $B{\sim}128$ still open. \\
 \hid{5} & \texttt{*PublicMS} gadgets ($g_0=\delta$): on-lattice intent, not a closer of old \hid{2}. \\
 \hid{6} & TensorLUT / quarantine vs campaign: parallel research, not P1030680 PT. \\
 \hid{7} & Catalog / Regenbogen / UEBUNG: negatives graded; middle ring $\neq A$ untested; catalog parked @417, resume \texttt{--bombe-from 418}. \\

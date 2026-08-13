@@ -132,6 +132,18 @@ Statement: \corpus{directives/ggsw-incomplete-covering.md}.
 
 Expect PASS; covering \texttt{.crypto}, not \texttt{cryptoPublicMS}.
 
+\section{Track A covering-b4 $\varepsilon\le 2^{-64}$ (\cid{34})}
+
+\begin{lstlisting}
+.build/release/helut --measure-bk-noise --degree 1024 \
+  --trials 8 --bk-noise 1 --covering-base-log 4
+.build/release/helut --bench netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 2 --bk-noise 1 \
+  --paths covering-b4
+\end{lstlisting}
+
+Expect $\varepsilon\log_2\approx-913$; Metal PASS. Torus-scale $B{=}128$ still fails.
+
 \section{Track B Metal SING with noisy BK (\cid{28})}
 
 \begin{lstlisting}
