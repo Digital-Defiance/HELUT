@@ -1,0 +1,130 @@
+\chapter{The Metal torus compiler}
+\label{ch:metal}
+
+\section{The picture that changed the compiler}
+
+\begin{verbatim}
+Yosys $lut  -->  pack LWE  -->  blind rotate (N CMUXes)
+                                 |
+                                 +-- failure: each external product expands
+                                 |    sum_j b_j * X^j a  as O(N) MPSGraph ops
+                                 |    --> millions of host MLIR nodes
+                                 |    --> encode wall >> run wall
+                                 |
+                                 +-- design: small graph that *calls* ring kernels
+                                     encode cheap; run on Metal; cache
+\end{verbatim}
+
+CMUX dependence across bootstrap bits is sequential and real.
+The pain was never ``CMUX cannot run on a GPU.''
+The pain was \emph{encoding a schoolbook expansion that should never have been
+a graph}~\cite{helut-metal}.
+
+\reproduced{fused $N=1024$ DNF}{Schoolbook-in-\texttt{MPSGraph} at $N=1024$
+spent $11.6\,\mathrm{h}$ on host encode, never reached the GPU, and died
+\texttt{SIGTERM 143}. That log is part of the curriculum: a compiler that
+does not finish is a measurement, not an anecdote.}
+
+\section{Doctrine}
+
+SoftBus / ANE remains a graph machine.
+We stop mistaking ``unroll all ring math into MLIR'' for ``use the GPU.''
+\texttt{MPSGraph} is a \emph{staged IR} and a \emph{scheduler}.
+Polynomial multiplication and the external product are first-class GPU
+operations.
+
+\section{\texorpdfstring{Phase 1 --- survive $N=1024$}{Phase 1 --- survive N=1024}}
+
+Phase 1 does not change the cryptography. It changes the control plane.
+
+\begin{center}
+\small
+\begin{tabular}{@{}p{0.22\textwidth}p{0.30\textwidth}p{0.38\textwidth}@{}}
+\toprule
+Lever & Idea & Teaching point \\
+\midrule
+Tiled blind rotate & CMUX windows of width $W$; re-ingest ACC
+  & Encode cost scales with $W$, not fused $N\times$ schoolbook. \\
+Constant CSE & Shared splat banks per tile
+  & Graph builders die on \texttt{constantWithScalar} spam. \\
+Executable cache & Compile once per $(N,\ell,W,\mathrm{BK})$
+  & Trial 1 is cold; ticks $\ge 2$ must hit cache. \\
+Telemetry & \texttt{encode} / \texttt{gpu\_run} / \texttt{host\_repack}
+  & Silence is not a hang if the log counts tiles. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Phase~1 without Phase~2 still leaves $O(W\cdot N)$ encode inside each tile.
+Phase~2 without Phase~1 is a kernel drop into an unmeasured fused path.
+The laboratory did both, in that order.
+
+\section{Phase 2 --- ring kernels}
+
+\begin{enumerate}
+  \item \textbf{Negacyclic poly-mul} as a Metal kernel, bit-identical to CPU
+        schoolbook (\cid{18} NTT $\equiv$ schoolbook, 19 tests).
+  \item \textbf{Fused external product} (\cid{16}): one
+        \texttt{helut\_ggsw\_external\_product} launch per CMUX.
+        $N=1024$ microbench $1.043\,\mathrm{s}$/BR.
+  \item \textbf{GPU-resident BR tile} (\cid{17}): ACC $+$ BK on device;
+        $0.519\,\mathrm{s}$/BR at $N=1024$; $N=64$ at $0.001\,\mathrm{s}$/BR.
+  \item \textbf{3-prime NTT persist tile} (\cid{18}): gadget digits in-tile;
+        BK in NTT domain; pointwise EP $+$ iNTT $+$ CRT.
+        $0.433\,\mathrm{s}$/BR at $N=1024$ (gpu $0.43\,\mathrm{s}$, RSS
+        $148\,\mathrm{MiB}$).
+\end{enumerate}
+
+Default Metal BR: fused if $N\le 64$, tiled-kernel otherwise (NTT EP inside
+tiles). Legacy fused megagraph is \texttt{--metal-br-fused} only, and at
+production $N$ it is a museum exhibit.
+
+\section{Numbers a student may quote (epoch \livingepoch)}
+
+\begin{center}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}p{0.30\textwidth}p{0.18\textwidth}p{0.28\textwidth}p{0.14\textwidth}@{}}
+\toprule
+Path at $N=1024$ & s/BR (micro) & Boolean SING / 8 & RSS \\
+\midrule
+Fused schoolbook megagraph & DNF ($11.6\,\mathrm{h}$) & --- & ${\sim}4$\,GiB \\
+Poly-mul kernel & 3.645 & --- & --- \\
+Fused EP (\cid{16}) & 1.043 & $25.1\,\mathrm{s}$ ($3.14$\,s/row) & --- \\
+Persist schoolbook (\cid{17}) & 0.519 & $12.2\,\mathrm{s}$ ($1.52$\,s/row) & 68\,MiB \\
+NTT persist (\cid{18}) & \textbf{0.433} & $15.6\,\mathrm{s}$ ($1.95$\,s/row) & 148\,MiB \\
+CPU SING full\_adder & --- & ${\sim}52\,\mathrm{s}$ & --- \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\hedgebox{H3}{NTT persist wins the microbench and loses boolean SING against
+schoolbook persist in this epoch ($15.6\,\mathrm{s}$ vs $12.2\,\mathrm{s}$)
+because of sequential in-tile NTT/iNTT round-trips.
+Crypto $\ell=2$ SING is not re-timed.
+Schoolbook is gone from the tiled \emph{hot path} (\texttt{ring=ntt}); SING
+is not yet an NTT victory. Quote both sentences together.}
+
+\begin{exercise}[Compiler post-mortem]
+In 400 words: why did the fused megagraph never reach the GPU?
+Your answer must distinguish encode wall from run wall, and must not claim
+that ``Metal cannot multiply polynomials.''
+\end{exercise}
+
+\begin{exercise}[Reading \hid{3}]
+Is \cid{18} a success or a failure?
+Defend a one-sentence answer that a claim-audit grader will accept.
+(Hint: both, along different bars.)
+\end{exercise}
+
+\section{Punchline, for the lecture slide}
+
+Phase~1 makes encoding \emph{finish}.
+Phase~2 makes encoding \emph{irrelevant}.
+Together they are a SoftBus-native torus compiler: staged IR $+$ ring kernels
+$+$ cached executables---instead of a schoolbook megagraph hoping the GPU
+will eventually appear.
+
+\growswhen{Fewer in-tile NTT/iNTT round-trips so boolean SING beats
+\cid{17}'s $12.2\,\mathrm{s}$; crypto $\ell=2$ SING re-timed; then \hid{3}
+can shrink.}

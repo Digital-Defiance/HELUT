@@ -1,0 +1,110 @@
+\chapter{Certificates as first-class artifacts}
+\label{ch:certs}
+
+Most compiler courses grade a binary that runs.
+This course grades a binary that \emph{refuses} when it cannot certify.
+
+\section{The surface}
+
+\begin{center}
+\begin{tabular}{@{}lp{0.58\textwidth}@{}}
+\toprule
+Certificate & Role \\
+\midrule
+\texttt{TFHENoiseProof} & Discrete $\infty$-norm inject lemmas. \\
+\texttt{TFHEAsymptoticSecurityCertificate} & Gaussian ingest $\varepsilon\le 2^{-64}$. \\
+\texttt{TFHELWEHardnessCertificate} & Decision-LWE $\to$ IND-CPA $+$ bit estimate. \\
+\texttt{TFHELWECalibration} & Anchor table for the estimator. \\
+\texttt{TFHENoisyBKCertificate} & Depth under $B_{\mathrm{bk}}$ / noiseless hypothesis. \\
+\texttt{TFHELWEEstimatorProtocol} & External lattice-estimator merge. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\texttt{TFHENoise.refuse} if no certificate.
+That is not an API flourish. It is the difference between a demo and a claim.
+
+\section{How to read a SING log}
+
+A passing encrypted tick is a bundle:
+
+\begin{itemize}
+  \item Functional: ciphertext decrypts to the clear netlist (SING).
+  \item Discrete: $\infty$-norm lemmas held on the inject.
+  \item Gaussian: ingest $\varepsilon$ under the stated hypotheses.
+  \item Hardness: calibrated classical bits, with \hid{1} attached until Sage
+        fills the estimator JSON.
+  \item Depth: noisy-BK model, with \hid{4} attached while $B_{\mathrm{bk}}=0$.
+\end{itemize}
+
+Students who report only milliseconds have not completed the lab.
+
+\section{Calibration is not estimation}
+
+\begin{center}
+\small
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Label & $n$ & $\sigma$ & Ref bits & HELUT est. \\
+\midrule
+demo-N8 & 8 & $2^{12}$ & 4 & 4.0 \\
+weak-n256 & 256 & $2^{17}$ & 45 & 40.4 \\
+mid-n512 & 512 & $2^{16}$ & 95 & 95.5 \\
+classic-n630 & 630 & $2^{15}$ & 128 & 129.0 \\
+prod-n1024-s16 & 1024 & $2^{16}$ & 170 & 175.7 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+$q=2^{32}$, binary secret.
+The estimator column is PENDING until the cookbook export is filled.
+
+\hedgebox{H1}{Quote ``$\sim 176$ calibrated classical bits at production
+$(n,\sigma)$'' only with the clause ``not lattice-estimator attack cost until
+Sage fills the pending JSON.''
+A midterm bubble that says ``176-bit secure'' without the clause is wrong.}
+
+\section{Five-cell test, applied to certificates}
+
+Certificates are themselves claims.
+They need the five cells:
+
+\begin{enumerate}
+  \item Proof: the lemma in code (\texttt{TFHENoiseProof}, \ldots).
+  \item Table: the calibration table; the cookbook production row.
+  \item Metric: $\varepsilon\le 2^{-64}$; bit estimates; $B_{\mathrm{bk}}$.
+  \item Examples: demo $N=8$ (honest fail of 128-bit) and production $N=1024$.
+  \item Application: refuse-closed encrypt so a netlist tick cannot silently
+        drop hardness.
+\end{enumerate}
+
+\begin{exercise}
+Which cell is missing for noisy BK as a \emph{product} parameter?
+Write the experiment that would fill it (\hid{4}: measured $\sigma_{\mathrm{BK}}$
+into \texttt{TFHENoisyBKCertificate}).
+\end{exercise}
+
+\section{Honesty as an engineering interface}
+
+The non-claims of Chapter~\ref{ch:living} are not ethics theater.
+They are API documentation for speech:
+
+\begin{itemize}
+  \item Oracle Metal graphs expose the \emph{shape} of encrypted evaluation
+        (batch, $N$, clock). They do not expose Decision-LWE.
+  \item \texttt{publicMS} is an on-lattice refresh intent. It is not a
+        leakage proof (\nid{} on side channels).
+  \item A campaign's settings/second is a cleartext Metal number. It does
+        not certify encrypted tick rate.
+\end{itemize}
+
+\begin{lab}[Certificate literacy]
+Run \texttt{.build/release/helut --hardness-table} and classify each printed
+row as demo, weak, or production-shaped.
+For each row, write one sentence a journalist may print and one sentence
+they may not.
+\end{lab}
+
+\growswhen{Estimator-backed rows replace the PENDING column; then this
+chapter gains a comparison table against Concrete / tfhe-rs parameter sets
+as a \emph{scope} table, still not a bake-off unless the bars match.}

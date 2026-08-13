@@ -1,0 +1,134 @@
+\chapter{The living contract}
+\label{ch:living}
+
+\section{Why a textbook needs a contract}
+
+Ordinary textbooks accrete errata.
+This one accretes \emph{science}.
+Without a contract, the lecture slides of 2027 will still be quoting a fused
+\texttt{MPSGraph} megagraph that the laboratory killed in August 2026, or---worse---will
+quote a speculative avenue as if it were a theorem.
+
+The contract is the research-release doctrine~\cite{helut-release} translated
+into pedagogy.
+
+\section{The three inventories}
+
+Every public sentence in HELUT is classified in
+\corpus{directives/claim-sheet.md}:
+
+\begin{center}
+\begin{tabular}{@{}llp{0.52\textwidth}@{}}
+\toprule
+Tag & Name & Classroom meaning \\
+\midrule
+\cid{$n$} & Reproducible result & You may lecture it. Students may cite it.
+Someone else can re-run it~\cite{helut-claim-sheet}. \\
+\hid{$n$} & Open hedge & You may discuss it. You must keep the asterisk.
+A problem-set ``true/false'' that drops the asterisk is false. \\
+\nid{$n$} & Non-implication & You must actively prevent this inference.
+It is a common exam trap. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+A fourth class lives only in this book and in
+\corpus{directives/potential-avenues.md}:
+
+\begin{center}
+\begin{tabular}{@{}lp{0.62\textwidth}@{}}
+\toprule
+Frontier & Not a claim until it has a \cid{} row and a reproduce command.
+Seminar fuel. Never a midterm fact. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{The five-cell test}
+
+For an atomic claim $C$, the doctrine requires all five, or $C$ is hedged:
+
+\begin{enumerate}
+  \item \textbf{Proof} --- lemma, reduction, or graded empirical protocol with
+        pass/fail.
+  \item \textbf{Table} --- parameters, comparisons, or grades.
+  \item \textbf{Metric} --- a number with units and a bar.
+  \item \textbf{Examples} --- at least two concrete, runnable instances.
+  \item \textbf{Application} --- at least one end-to-end reason to care.
+\end{enumerate}
+
+\begin{example}[Five cells for \cid{18}]
+Metal 3-prime NTT persist blind-rotate.
+Proof: CPU$+$Metal NTT $\equiv$ schoolbook (19 tests) plus microbench PASS bits.
+Table: $N\in\{64,1024\}$ s/BR versus schoolbook persist and fused-EP.
+Metric: $0.433\,\mathrm{s}$/BR at $N=1024$ (gpu $0.43\,\mathrm{s}$, RSS $148\,\mathrm{MiB}$).
+Examples: microbench identity LUT; full\_adder boolean SING.
+Application: production-shaped polynomial degree on a laptop GPU graph.
+\end{example}
+
+\begin{example}[Five cells for \cid{19}]
+TensorLUT continuous$\to$discrete Theorem~1~\cite{helut-tensorlut-thm}.
+Proof: six \texttt{TensorLUTFormal.check*} lemmas, aggregated by
+\texttt{certificate()}.
+Table: lemma vs \texttt{holds}; campaign grades kept separate.
+Metric: $F_{\mathrm{crypto}}=0$ on unmutated baseline; $\pi=0$ on binary INIT.
+Examples: M4 baseline emit; freeze-core involution; blind 3-pair PASS.
+Application: a stecker search that cannot propose a non-reciprocal map.
+Asterisk: structural, not a U-534 break (\hid{6}).
+\end{example}
+
+\begin{exercise}[Claim audit]
+Take any sentence from a blog post, a grant abstract, or last year's slide
+deck about ``encrypted computing on a Neural Engine.''
+Fill the five cells or mark the sentence a non-claim.
+If you cannot name the log file, it is not a \cid{} row.
+\end{exercise}
+
+\section{Disclosure versus discovery}
+
+\begin{center}
+\begin{tabular}{@{}lp{0.38\textwidth}p{0.38\textwidth}@{}}
+\toprule
+ & Disclosure package & Trajectory \\
+\midrule
+Goal & Someone else re-runs what we assert & We know what to invent next \\
+Artifact & \corpus{REPRODUCE.md}, logs, reproduced boxes
+  & trajectory file, Chapter~\ref{ch:open} \\
+Failure mode & Unreproducible hype & Silence / no next experiment \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+When a trajectory item graduates, it earns a \cid{} row (or a tightened
+\hid{}) and a reproduce command---\emph{then} it may enter lecture voice.
+That sentence is the entire editorial policy of this book.
+
+\section{Standing non-claims}
+
+Print these on the course website.
+
+\nonclaimbox{HELUT does not introduce a new lattice assumption, does not claim
+to have invented TFHE, and does not offer production key sizes until a lattice
+estimator fills the pending JSON (\hid{1}).
+Trivial/oracle Metal graphs are not FHE.
+\texttt{publicMS} gadgets are not a side-channel theorem.
+Campaign fitness is not encrypted tick rate.
+TensorLUT involution grades are not a U-534 break.
+Quantum attacks are out of scope.
+Metal/GPU power analysis is parked~\cite{helut-avenues}.}
+
+\section{How a chapter grows}
+
+\begin{enumerate}
+  \item A laboratory result lands in a log under \corpus{logs/}.
+  \item A \cid{} or \hid{} row is updated in the claim sheet.
+  \item The matching chapter gains an example, a table row, or a converted
+        box; \texttt{\textbackslash livingepoch} bumps.
+  \item The syllabus appendix does \emph{not} automatically change.
+        Instructors opt in (Chapter~\ref{ch:instructor}).
+\end{enumerate}
+
+\growswhen{Automated extraction of claim-sheet tables into
+Appendix~\ref{app:claims}, so the snapshot cannot drift.
+Until then, humans diff the sheet against the appendix before each teaching
+epoch.}

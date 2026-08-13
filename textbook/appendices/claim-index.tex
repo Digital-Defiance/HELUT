@@ -1,0 +1,65 @@
+\chapter{Claim index (snapshot)}
+\label{app:claims}
+
+Canonical living inventory: \corpus{directives/claim-sheet.md}.
+If this appendix disagrees with the sheet, the sheet wins.
+Snapshot epoch: \livingepoch{}.
+
+\section{Reproducible results}
+
+\begin{center}
+\small
+\begin{tabular}{@{}lp{0.72\textwidth}@{}}
+\toprule
+ID & Result \\
+\midrule
+\cid{1} & Yosys \texttt{\$lut}/DFF $\to$ Metal/CPU tensor eval (oracle). \\
+\cid{2} & Welchman path breaks known P1030684 end-to-end. \\
+\cid{3} & $\le 10$-plug / SAT kill chain removes ghosts. \\
+\cid{4} & Encrypted LWE/GLWE $+$ GGSW BR per \texttt{\$lut}. \\
+\cid{5} & Certificates on encrypted ticks. \\
+\cid{6} & Encrypted $\equiv$ clear multi-netlist SING; adder $N\le 1024$. \\
+\cid{7} & Metal 1-LUT BR microbench (fused ancestor numbers). \\
+\cid{8} & TensorLUT M4 baseline $F_{\mathrm{crypto}}=0$ $+$ Verilog emit. \\
+\cid{9} & Stecker involution sandwich; blind 3-pair PASS. \\
+\cid{10} & Enigma256 reciprocity; fail-closed / bijection. \\
+\cid{11} & Potsdam/Plaice keys $\neq$ P1030680. \\
+\cid{12} & Windowed discriminator vs whole-message turnover flaw. \\
+\cid{13} & Metal tiled-kernel BR at $N=1024$ (pre-fusion lineage). \\
+\cid{14} & Metal full\_adder SING at $N=1024$ (pre-NTT lineage). \\
+\cid{15} & Metal netlist-scheduled SING at $N=1024$. \\
+\cid{16} & Metal fused EP kernel; $1.043\,\mathrm{s}$/BR at $N=1024$. \\
+\cid{17} & GPU-resident BR tile; $0.519\,\mathrm{s}$/BR; SING $12.2\,\mathrm{s}/8$. \\
+\cid{18} & 3-prime NTT persist BR; $0.433\,\mathrm{s}$/BR; SING $15.6\,\mathrm{s}/8$. \\
+\cid{19} & TensorLUT continuous$\to$discrete Theorem~1 (six machine-checked lemmas). \\
+\cid{20} & Wavefront-parallel independent \texttt{\$lut} BRs; boolean SING $10.6\,\mathrm{s}/8$. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Open hedges}
+
+\begin{center}
+\small
+\begin{tabular}{@{}lp{0.72\textwidth}@{}}
+\toprule
+ID & Asterisk \\
+\midrule
+\hid{1} & Calibrated bits $\neq$ lattice-estimator until Sage fills JSON. \\
+\hid{2} & \textbf{Closed} 2026-08-12 ($Z_{2N}$ pack). Kept as history. \\
+\hid{3} & \cid{20} wavefront-parallel NTT SING beats \cid{17}; crypto $\ell=2$ untimed; Sage \hid{1} pending. \\
+\hid{4} & Noisy BK modeled; BK encrypt still noiseless. \\
+\hid{5} & \texttt{*PublicMS} gadgets ($g_0=\delta$): on-lattice intent, not a closer of old \hid{2}. \\
+\hid{6} & TensorLUT / quarantine vs campaign: parallel research, not P1030680 PT. \\
+\hid{7} & Catalog / Regenbogen / UEBUNG: negatives graded; middle ring $\neq A$ untested. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Standing non-implications}
+
+Do not let prose imply: new lattice assumption; ``we invented TFHE'';
+production keys without estimator; mock-torus $=$ FHE; P1030680 decrypted;
+campaign fitness $=$ encrypted tick rate; TensorLUT $=$ U-534 break;
+side-channels measured; quantum attacks analyzed.
+Wild ideas in Chapter~\ref{ch:frontier} are trajectory, not results.

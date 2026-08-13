@@ -59,6 +59,14 @@ func nttDomainBootstrapKey(
     return out
 }
 
+private struct NTTScratch {
+    let accMaskBuf: MTLBuffer
+    let accBodyBuf: MTLBuffer
+    let lweABuf: MTLBuffer
+    let scratchBuf: MTLBuffer
+    let uniBuf: MTLBuffer
+}
+
 final class MetalBRNTTEngine: @unchecked Sendable {
     let device: MTLDevice
     let pipeline: MTLComputePipelineState
@@ -66,14 +74,10 @@ final class MetalBRNTTEngine: @unchecked Sendable {
     let levelCount: Int
     let bitCount: Int
     let canFuseThreadgroup: Bool
-    private let accMaskBuf: MTLBuffer
-    private let accBodyBuf: MTLBuffer
     private let nttBkBuf: MTLBuffer
-    private let lweABuf: MTLBuffer
     private let twiddleBuf: MTLBuffer
-    private let scratchBuf: MTLBuffer
-    private let uniBuf: MTLBuffer
     private let lock = NSLock()
+    private var scratchPool: [NTTScratch] = []
     private var encodeSeconds: Double = 0
     private var gpuSeconds: Double = 0
     private var copySeconds: Double = 0
@@ -156,11 +160,24 @@ final class MetalBRNTTEngine: @unchecked Sendable {
         return coeff >> shift;
     }
 
-    void ntt_inplace(
-        threadgroup uint *a,
+    void bitrev_plane(threadgroup uint *a, threadgroup uint *tmp, uint logn, uint k) {
+        tmp[bitrev(k, logn)] = a[k];
+        threadgroup_barrier(mem_flags::mem_threadgroup);
+        a[k] = tmp[k];
+        threadgroup_barrier(mem_flags::mem_threadgroup);
+    }
+
+    void ntt_inplace_3p(
+        threadgroup uint *a0,
+        threadgroup uint *a1,
+        threadgroup uint *a2,
         uint n,
-        device const uint *omegaPow,
-        uint p,
+        device const uint *w0,
+        device const uint *w1,
+        device const uint *w2,
+        uint pA,
+        uint pB,
+        uint pC,
         uint k
     ) {
         for (uint len = 2u; len <= n; len <<= 1) {
@@ -170,53 +187,85 @@ final class MetalBRNTTEngine: @unchecked Sendable {
                 uint j = k % halfLen;
                 uint i0 = block * len + j;
                 uint i1 = i0 + halfLen;
-                uint w = omegaPow[(n / len) * j];
-                uint u = a[i0];
-                uint v = mod_mul(a[i1], w, p);
-                a[i0] = mod_add(u, v, p);
-                a[i1] = mod_sub(u, v, p);
+                uint widx = (n / len) * j;
+                uint u0 = a0[i0];
+                uint v0 = mod_mul(a0[i1], w0[widx], pA);
+                a0[i0] = mod_add(u0, v0, pA);
+                a0[i1] = mod_sub(u0, v0, pA);
+                uint u1 = a1[i0];
+                uint v1 = mod_mul(a1[i1], w1[widx], pB);
+                a1[i0] = mod_add(u1, v1, pB);
+                a1[i1] = mod_sub(u1, v1, pB);
+                uint u2 = a2[i0];
+                uint v2 = mod_mul(a2[i1], w2[widx], pC);
+                a2[i0] = mod_add(u2, v2, pC);
+                a2[i1] = mod_sub(u2, v2, pC);
             }
             threadgroup_barrier(mem_flags::mem_threadgroup);
         }
     }
 
-    void ntt_from_device(
-        threadgroup uint *sh,
+    void ntt_from_device_3p(
+        threadgroup uint *pl0,
+        threadgroup uint *pl1,
+        threadgroup uint *pl2,
         threadgroup uint *tmp,
         device const uint *in,
-        device const uint *psiPow,
-        device const uint *omegaPow,
+        device const uint *tw,
         uint n,
         uint logn,
-        uint p,
+        uint pA,
+        uint pB,
+        uint pC,
         uint k
     ) {
-        sh[k] = mod_mul(in[k] % p, psiPow[k], p);
+        device const uint *psi0 = tw;
+        device const uint *psi1 = tw + 4u * n;
+        device const uint *psi2 = tw + 8u * n;
+        pl0[k] = mod_mul(in[k] % pA, psi0[k], pA);
+        pl1[k] = mod_mul(in[k] % pB, psi1[k], pB);
+        pl2[k] = mod_mul(in[k] % pC, psi2[k], pC);
         threadgroup_barrier(mem_flags::mem_threadgroup);
-        tmp[bitrev(k, logn)] = sh[k];
-        threadgroup_barrier(mem_flags::mem_threadgroup);
-        sh[k] = tmp[k];
-        threadgroup_barrier(mem_flags::mem_threadgroup);
-        ntt_inplace(sh, n, omegaPow, p, k);
+        bitrev_plane(pl0, tmp, logn, k);
+        bitrev_plane(pl1, tmp, logn, k);
+        bitrev_plane(pl2, tmp, logn, k);
+        ntt_inplace_3p(
+            pl0, pl1, pl2, n,
+            tw + 2u * n, tw + 6u * n, tw + 10u * n,
+            pA, pB, pC, k
+        );
     }
 
-    void intt_sh(
-        threadgroup uint *sh,
+    void intt_3p(
+        threadgroup uint *pl0,
+        threadgroup uint *pl1,
+        threadgroup uint *pl2,
         threadgroup uint *tmp,
-        device const uint *psiInvPow,
-        device const uint *omegaInvPow,
-        uint nInv,
+        device const uint *tw,
         uint n,
         uint logn,
-        uint p,
+        uint nInv0,
+        uint nInv1,
+        uint nInv2,
+        uint pA,
+        uint pB,
+        uint pC,
         uint k
     ) {
-        tmp[bitrev(k, logn)] = sh[k];
-        threadgroup_barrier(mem_flags::mem_threadgroup);
-        sh[k] = tmp[k];
-        threadgroup_barrier(mem_flags::mem_threadgroup);
-        ntt_inplace(sh, n, omegaInvPow, p, k);
-        sh[k] = mod_mul(mod_mul(sh[k], nInv, p), psiInvPow[k], p);
+        bitrev_plane(pl0, tmp, logn, k);
+        bitrev_plane(pl1, tmp, logn, k);
+        bitrev_plane(pl2, tmp, logn, k);
+        ntt_inplace_3p(
+            pl0, pl1, pl2, n,
+            tw + 3u * n, tw + 7u * n, tw + 11u * n,
+            pA, pB, pC, k
+        );
+        device const uint *psiI0 = tw + n;
+        device const uint *psiI1 = tw + 5u * n;
+        device const uint *psiI2 = tw + 9u * n;
+        pl0[k] = mod_mul(mod_mul(pl0[k], nInv0, pA), psiI0[k], pA);
+        pl1[k] = mod_mul(mod_mul(pl1[k], nInv1, pB), psiI1[k], pB);
+        pl2[k] = mod_mul(mod_mul(pl2[k], nInv2, pC), psiI2[k], pC);
         threadgroup_barrier(mem_flags::mem_threadgroup);
     }
 
@@ -276,10 +325,15 @@ final class MetalBRNTTEngine: @unchecked Sendable {
         uint n = U.n;
         uint logn = U.logN;
         uint levels = U.levelCount;
+        uint pA = U.p0;
+        uint pB = U.p1;
+        uint pC = U.p2;
         threadgroup uint *shAccM = mem;
         threadgroup uint *shAccB = mem + n;
-        threadgroup uint *sh = mem + 2u * n;
-        threadgroup uint *tmp = mem + 3u * n;
+        threadgroup uint *pl0 = mem + 2u * n;
+        threadgroup uint *pl1 = mem + 3u * n;
+        threadgroup uint *pl2 = mem + 4u * n;
+        threadgroup uint *tmp = mem + 5u * n;
         shAccM[k] = accM[k];
         shAccB[k] = accB[k];
         threadgroup_barrier(mem_flags::mem_threadgroup);
@@ -287,27 +341,25 @@ final class MetalBRNTTEngine: @unchecked Sendable {
         uint polysPerBit = 4u * levels;
         uint bitStride = 3u * polysPerBit * n;
         uint primeStride = polysPerBit * n;
-        uint ps[3] = {U.p0, U.p1, U.p2};
-        uint nInvs[3] = {U.nInv0, U.nInv1, U.nInv2};
 
         for (uint bit = U.bitLo; bit < U.bitHi; ++bit) {
             uint pwr = rotation_power(lweA[bit], U.twoN, U.shift);
-            uint p0 = pwr % n;
+            uint rotOff = pwr % n;
             uint wrapExtra = pwr / n;
-            uint i = (k >= p0) ? (k - p0) : (k + n - p0);
-            uint wraps = wrapExtra + ((k < p0) ? 1u : 0u);
+            uint i = (k >= rotOff) ? (k - rotOff) : (k + n - rotOff);
+            uint wraps = wrapExtra + ((k < rotOff) ? 1u : 0u);
             uint rotM = shAccM[i];
             uint rotB = shAccB[i];
             if (wraps & 1u) {
                 rotM = 0u - rotM;
                 rotB = 0u - rotB;
             }
-            sh[k] = rotM - shAccM[k];
-            tmp[k] = rotB - shAccB[k];
+            pl0[k] = rotM - shAccM[k];
+            pl1[k] = rotB - shAccB[k];
             threadgroup_barrier(mem_flags::mem_threadgroup);
 
-            uint remM = sh[k];
-            uint remB = tmp[k];
+            uint remM = pl0[k];
+            uint remB = pl1[k];
             for (uint lv = 0u; lv < levels; ++lv) {
                 scratch[lv * n + k] = take_digit(&remM, U.baseLog, lv);
                 scratch[(levels + lv) * n + k] = take_digit(&remB, U.baseLog, lv);
@@ -318,56 +370,80 @@ final class MetalBRNTTEngine: @unchecked Sendable {
             uint resBOff = resMOff + 3u * n;
             device const uint *bkBit = nttBk + bit * bitStride;
 
-            for (uint pi = 0u; pi < 3u; ++pi) {
-                uint p = ps[pi];
-                device const uint *psiPow = tw + pi * 4u * n;
-                device const uint *psiInvPow = psiPow + n;
-                device const uint *omegaPow = psiInvPow + n;
-                device const uint *omegaInvPow = omegaPow + n;
-                device const uint *bkP = bkBit + pi * primeStride;
-
-                uint accHatM = 0u;
-                uint accHatB = 0u;
-                for (uint lv = 0u; lv < levels; ++lv) {
-                    ntt_from_device(
-                        sh, tmp, scratch + lv * n,
-                        psiPow, omegaPow, n, logn, p, k
-                    );
-                    uint hatDm = sh[k];
-                    ntt_from_device(
-                        sh, tmp, scratch + (levels + lv) * n,
-                        psiPow, omegaPow, n, logn, p, k
-                    );
-                    uint hatDb = sh[k];
-                    device const uint *g0m = bkP + (lv * 4u) * n;
-                    device const uint *g0b = g0m + n;
-                    device const uint *g1m = g0b + n;
-                    device const uint *g1b = g1m + n;
-                    accHatM = mod_add(
-                        accHatM,
-                        mod_add(mod_mul(g0m[k], hatDm, p), mod_mul(g1m[k], hatDb, p), p),
-                        p
-                    );
-                    accHatB = mod_add(
-                        accHatB,
-                        mod_add(mod_mul(g0b[k], hatDm, p), mod_mul(g1b[k], hatDb, p), p),
-                        p
-                    );
-                    threadgroup_barrier(mem_flags::mem_threadgroup);
-                }
-
-                sh[k] = accHatM;
-                threadgroup_barrier(mem_flags::mem_threadgroup);
-                intt_sh(sh, tmp, psiInvPow, omegaInvPow, nInvs[pi], n, logn, p, k);
-                scratch[resMOff + pi * n + k] = sh[k];
-                threadgroup_barrier(mem_flags::mem_threadgroup);
-
-                sh[k] = accHatB;
-                threadgroup_barrier(mem_flags::mem_threadgroup);
-                intt_sh(sh, tmp, psiInvPow, omegaInvPow, nInvs[pi], n, logn, p, k);
-                scratch[resBOff + pi * n + k] = sh[k];
+            uint accHatM0 = 0u, accHatM1 = 0u, accHatM2 = 0u;
+            uint accHatB0 = 0u, accHatB1 = 0u, accHatB2 = 0u;
+            for (uint lv = 0u; lv < levels; ++lv) {
+                ntt_from_device_3p(
+                    pl0, pl1, pl2, tmp, scratch + lv * n, tw,
+                    n, logn, pA, pB, pC, k
+                );
+                uint hDm0 = pl0[k], hDm1 = pl1[k], hDm2 = pl2[k];
+                ntt_from_device_3p(
+                    pl0, pl1, pl2, tmp, scratch + (levels + lv) * n, tw,
+                    n, logn, pA, pB, pC, k
+                );
+                uint hDb0 = pl0[k], hDb1 = pl1[k], hDb2 = pl2[k];
+                device const uint *g0m0 = bkBit + (lv * 4u) * n;
+                device const uint *g0m1 = bkBit + primeStride + (lv * 4u) * n;
+                device const uint *g0m2 = bkBit + 2u * primeStride + (lv * 4u) * n;
+                accHatM0 = mod_add(
+                    accHatM0,
+                    mod_add(mod_mul(g0m0[k], hDm0, pA), mod_mul(g0m0[k + 2u * n], hDb0, pA), pA),
+                    pA
+                );
+                accHatB0 = mod_add(
+                    accHatB0,
+                    mod_add(mod_mul(g0m0[k + n], hDm0, pA), mod_mul(g0m0[k + 3u * n], hDb0, pA), pA),
+                    pA
+                );
+                accHatM1 = mod_add(
+                    accHatM1,
+                    mod_add(mod_mul(g0m1[k], hDm1, pB), mod_mul(g0m1[k + 2u * n], hDb1, pB), pB),
+                    pB
+                );
+                accHatB1 = mod_add(
+                    accHatB1,
+                    mod_add(mod_mul(g0m1[k + n], hDm1, pB), mod_mul(g0m1[k + 3u * n], hDb1, pB), pB),
+                    pB
+                );
+                accHatM2 = mod_add(
+                    accHatM2,
+                    mod_add(mod_mul(g0m2[k], hDm2, pC), mod_mul(g0m2[k + 2u * n], hDb2, pC), pC),
+                    pC
+                );
+                accHatB2 = mod_add(
+                    accHatB2,
+                    mod_add(mod_mul(g0m2[k + n], hDm2, pC), mod_mul(g0m2[k + 3u * n], hDb2, pC), pC),
+                    pC
+                );
                 threadgroup_barrier(mem_flags::mem_threadgroup);
             }
+
+            pl0[k] = accHatM0;
+            pl1[k] = accHatM1;
+            pl2[k] = accHatM2;
+            threadgroup_barrier(mem_flags::mem_threadgroup);
+            intt_3p(
+                pl0, pl1, pl2, tmp, tw, n, logn,
+                U.nInv0, U.nInv1, U.nInv2, pA, pB, pC, k
+            );
+            scratch[resMOff + k] = pl0[k];
+            scratch[resMOff + n + k] = pl1[k];
+            scratch[resMOff + 2u * n + k] = pl2[k];
+            threadgroup_barrier(mem_flags::mem_threadgroup);
+
+            pl0[k] = accHatB0;
+            pl1[k] = accHatB1;
+            pl2[k] = accHatB2;
+            threadgroup_barrier(mem_flags::mem_threadgroup);
+            intt_3p(
+                pl0, pl1, pl2, tmp, tw, n, logn,
+                U.nInv0, U.nInv1, U.nInv2, pA, pB, pC, k
+            );
+            scratch[resBOff + k] = pl0[k];
+            scratch[resBOff + n + k] = pl1[k];
+            scratch[resBOff + 2u * n + k] = pl2[k];
+            threadgroup_barrier(mem_flags::mem_threadgroup);
 
             uint gatedM = crt_u32(
                 scratch[resMOff + k],
@@ -407,21 +483,34 @@ final class MetalBRNTTEngine: @unchecked Sendable {
         }
         self.pipeline = try device.makeComputePipelineState(function: fn)
         encodeSeconds = CFAbsoluteTimeGetCurrent() - t0
+        let tgNeed = 6 * n * MemoryLayout<UInt32>.stride
         self.canFuseThreadgroup = pipeline.maxTotalThreadsPerThreadgroup >= n
             && n.nonzeroBitCount == 1 && n >= 8
+            && device.maxThreadgroupMemoryLength >= tgNeed
         let polyBytes = n * MemoryLayout<UInt32>.stride
         let nttBkBytes = bitCount * 3 * levelCount * 4 * polyBytes
-        let scratchUints = (2 * levelCount + 6) * n
         let tw = NegacyclicNTT.twiddleTable(n: n)
+        guard
+            let nttBkBuf = device.makeBuffer(length: max(nttBkBytes, 16), options: .storageModeShared),
+            let twiddleBuf = device.makeBuffer(
+                bytes: tw, length: tw.count * 4, options: .storageModeShared
+            )
+        else {
+            throw MetalPolyMulError.shaderCompile("NTT BR buffer alloc failed")
+        }
+        self.nttBkBuf = nttBkBuf
+        self.twiddleBuf = twiddleBuf
+        scratchPool.append(try makeScratch())
+    }
+
+    private func makeScratch() throws -> NTTScratch {
+        let polyBytes = n * MemoryLayout<UInt32>.stride
+        let scratchUints = (2 * levelCount + 6) * n
         guard
             let accMaskBuf = device.makeBuffer(length: polyBytes, options: .storageModeShared),
             let accBodyBuf = device.makeBuffer(length: polyBytes, options: .storageModeShared),
-            let nttBkBuf = device.makeBuffer(length: max(nttBkBytes, 16), options: .storageModeShared),
             let lweABuf = device.makeBuffer(
                 length: bitCount * MemoryLayout<UInt32>.stride, options: .storageModeShared
-            ),
-            let twiddleBuf = device.makeBuffer(
-                bytes: tw, length: tw.count * 4, options: .storageModeShared
             ),
             let scratchBuf = device.makeBuffer(
                 length: max(scratchUints * 4, 16), options: .storageModeShared
@@ -430,15 +519,31 @@ final class MetalBRNTTEngine: @unchecked Sendable {
                 length: MemoryLayout<BRNTTUniforms>.stride, options: .storageModeShared
             )
         else {
-            throw MetalPolyMulError.shaderCompile("NTT BR buffer alloc failed")
+            throw MetalPolyMulError.shaderCompile("NTT BR scratch alloc failed")
         }
-        self.accMaskBuf = accMaskBuf
-        self.accBodyBuf = accBodyBuf
-        self.nttBkBuf = nttBkBuf
-        self.lweABuf = lweABuf
-        self.twiddleBuf = twiddleBuf
-        self.scratchBuf = scratchBuf
-        self.uniBuf = uniBuf
+        return NTTScratch(
+            accMaskBuf: accMaskBuf,
+            accBodyBuf: accBodyBuf,
+            lweABuf: lweABuf,
+            scratchBuf: scratchBuf,
+            uniBuf: uniBuf
+        )
+    }
+
+    private func checkoutScratch() throws -> NTTScratch {
+        lock.lock()
+        if let hit = scratchPool.popLast() {
+            lock.unlock()
+            return hit
+        }
+        lock.unlock()
+        return try makeScratch()
+    }
+
+    private func checkinScratch(_ scratch: NTTScratch) {
+        lock.lock()
+        scratchPool.append(scratch)
+        lock.unlock()
     }
 
     func takeTimings() -> (encode: Double, gpu: Double, copy: Double) {
@@ -480,20 +585,10 @@ final class MetalBRNTTEngine: @unchecked Sendable {
         precondition(lweA.count == bitCount)
         precondition(packedCoeffBK.count == bitCount * levelCount * 4 * n)
         precondition(canFuseThreadgroup, "NTT BR threadgroup too small for N=\(n)")
-        lock.lock()
-        defer { lock.unlock() }
+        let slot = try checkoutScratch()
+        defer { checkinScratch(slot) }
 
-        let c0 = CFAbsoluteTimeGetCurrent()
-        accMask.withUnsafeBytes { raw in
-            accMaskBuf.contents().copyMemory(from: raw.baseAddress!, byteCount: raw.count)
-        }
-        accBody.withUnsafeBytes { raw in
-            accBodyBuf.contents().copyMemory(from: raw.baseAddress!, byteCount: raw.count)
-        }
-        lweA.withUnsafeBytes { raw in
-            lweABuf.contents().copyMemory(from: raw.baseAddress!, byteCount: raw.count)
-        }
-        copySeconds += CFAbsoluteTimeGetCurrent() - c0
+        lock.lock()
         let fp = Self.fingerprint(packedCoeffBK)
         if fp != bkFingerprint {
             let tNTT = CFAbsoluteTimeGetCurrent()
@@ -501,19 +596,32 @@ final class MetalBRNTTEngine: @unchecked Sendable {
                 packedCoeffBK, n: n, levelCount: levelCount, bitCount: bitCount
             )
             encodeSeconds += CFAbsoluteTimeGetCurrent() - tNTT
-            let tUp = CFAbsoluteTimeGetCurrent()
             nttPacked.withUnsafeBytes { raw in
                 nttBkBuf.contents().copyMemory(from: raw.baseAddress!, byteCount: raw.count)
             }
-            copySeconds += CFAbsoluteTimeGetCurrent() - tUp
             bkFingerprint = fp
         }
+        lock.unlock()
+
+        let c0 = CFAbsoluteTimeGetCurrent()
+        accMask.withUnsafeBytes { raw in
+            slot.accMaskBuf.contents().copyMemory(from: raw.baseAddress!, byteCount: raw.count)
+        }
+        accBody.withUnsafeBytes { raw in
+            slot.accBodyBuf.contents().copyMemory(from: raw.baseAddress!, byteCount: raw.count)
+        }
+        lweA.withUnsafeBytes { raw in
+            slot.lweABuf.contents().copyMemory(from: raw.baseAddress!, byteCount: raw.count)
+        }
+        lock.lock()
+        copySeconds += CFAbsoluteTimeGetCurrent() - c0
+        lock.unlock()
 
         let w = max(1, tileWidth)
         let tileCount = (bitCount + w - 1) / w
         let twoN = 2 * n
         let shift = 32 - twoN.trailingZeroBitCount
-        let tgBytes = 4 * n * MemoryLayout<UInt32>.stride
+        let tgBytes = 6 * n * MemoryLayout<UInt32>.stride
         let tg = MTLSize(width: n, height: 1, depth: 1)
         let groups = MTLSize(width: 1, height: 1, depth: 1)
         let p01 = UInt64(NegacyclicNTT.primes[0]) * UInt64(NegacyclicNTT.primes[1])
@@ -550,38 +658,42 @@ final class MetalBRNTTEngine: @unchecked Sendable {
                 pad1: 0
             )
             withUnsafeBytes(of: &uniforms) { raw in
-                uniBuf.contents().copyMemory(from: raw.baseAddress!, byteCount: raw.count)
+                slot.uniBuf.contents().copyMemory(from: raw.baseAddress!, byteCount: raw.count)
             }
             guard let cmd = queue.makeCommandBuffer(),
                   let enc = cmd.makeComputeCommandEncoder() else {
                 throw MetalPolyMulError.noCommandBuffer
             }
             enc.setComputePipelineState(pipeline)
-            enc.setBuffer(accMaskBuf, offset: 0, index: 0)
-            enc.setBuffer(accBodyBuf, offset: 0, index: 1)
+            enc.setBuffer(slot.accMaskBuf, offset: 0, index: 0)
+            enc.setBuffer(slot.accBodyBuf, offset: 0, index: 1)
             enc.setBuffer(nttBkBuf, offset: 0, index: 2)
-            enc.setBuffer(lweABuf, offset: 0, index: 3)
-            enc.setBuffer(uniBuf, offset: 0, index: 4)
+            enc.setBuffer(slot.lweABuf, offset: 0, index: 3)
+            enc.setBuffer(slot.uniBuf, offset: 0, index: 4)
             enc.setBuffer(twiddleBuf, offset: 0, index: 5)
-            enc.setBuffer(scratchBuf, offset: 0, index: 6)
+            enc.setBuffer(slot.scratchBuf, offset: 0, index: 6)
             enc.setThreadgroupMemoryLength(tgBytes, index: 0)
             enc.dispatchThreadgroups(groups, threadsPerThreadgroup: tg)
             enc.endEncoding()
             let g0 = CFAbsoluteTimeGetCurrent()
             cmd.commit()
             cmd.waitUntilCompleted()
+            lock.lock()
             gpuSeconds += CFAbsoluteTimeGetCurrent() - g0
+            lock.unlock()
             if let err = cmd.error {
                 throw MetalPolyMulError.shaderCompile("NTT BR tile GPU: \(err)")
             }
         }
 
         let c1 = CFAbsoluteTimeGetCurrent()
-        let mPtr = accMaskBuf.contents().bindMemory(to: UInt32.self, capacity: n)
-        let bPtr = accBodyBuf.contents().bindMemory(to: UInt32.self, capacity: n)
+        let mPtr = slot.accMaskBuf.contents().bindMemory(to: UInt32.self, capacity: n)
+        let bPtr = slot.accBodyBuf.contents().bindMemory(to: UInt32.self, capacity: n)
         let mask = Array(UnsafeBufferPointer(start: mPtr, count: n))
         let body = Array(UnsafeBufferPointer(start: bPtr, count: n))
+        lock.lock()
         copySeconds += CFAbsoluteTimeGetCurrent() - c1
+        lock.unlock()
         return (mask, body)
     }
 }

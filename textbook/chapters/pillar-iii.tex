@@ -1,0 +1,83 @@
+\chapter{Ciphers that grow under fire}
+\label{ch:pillariii}
+
+\growswhen{A fail-closed security-property proof for generation rolls, and a
+polymorphic Red/Blue standard beyond the E256 SoftBus instance (roadmap:
+Schneier pillar). This edition teaches the contract and the laboratory
+loop, not a finished standard.}
+
+\section{Why a cryptanalysis lab must design ciphers}
+
+A course that only breaks historical machines trains curators.
+Pillar~III asks Blue to sit in the same room as Red: mutate the non-linear
+feedback under adversarial pressure, and fail closed when the invariants
+break~\cite{helut-enigma256,helut-release}.
+
+The historical Enigma leaks this laboratory proved fatal---26-letter menus,
+self-stecker ban, thin plugboards, odometer stepping, paper day keys---are
+deleted on purpose in Enigma256 (E256).
+The reciprocal rotor \emph{contract} is kept: encrypt $\equiv$ decrypt under
+the same machine state.
+
+\section{The E256 contract, for lecture}
+
+\begin{itemize}
+  \item Alphabet is a byte, not 26 letters.
+  \item Plugboard is a 256-entry involution, 128 pairs, no fixed points.
+  \item Four active rotors drawn from a 16-rotor day pool; un-reflector
+        allows fixed points.
+  \item After each byte, NLFF step enables advance offsets; a Galois LFSR
+        clocks. Not an odometer.
+  \item Control-plane crypto (KEM, HKDF, AEAD, signatures) never enters
+        datapath BRAMs.
+  \item The live field is Apple Silicon SoftBus, not an FPGA board on the
+        critical path.
+\end{itemize}
+
+\reproduced{C10}{Enigma256 reciprocity, fail-closed behavior, and bijection
+tests. See \corpus{Enigma256.md} and fixtures.}
+
+\section{Red pressure}
+
+Red is not a separate team with a PDF of attacks.
+Red is TensorLUT cones, SoftBus known-plaintext attacks, and
+\texttt{ent} on the keystream---on the same Mac that rolls Blue
+generations.
+
+A generation that cannot hold under that pressure does not ship.
+Fail-closed means: if reciprocity, bijection, or a stated invariant
+breaks, the roll aborts rather than emitting a ``mostly fine'' Verilog.
+
+\begin{warning}
+Fail-closed as implemented in tests is not yet the security-property
+proof the doctrine wants for a standard.
+Do not tell a standards committee that E256 is ``done.''
+Tell them the loop exists and the proof is an open hedge on the
+trajectory.
+\end{warning}
+
+\section{What students design}
+
+\begin{exercise}[Blue studio]
+Propose one additional invariant E256 should fail-closed on (example:
+NLFF period lower bound; stecker-free involution; BRAM burst width).
+Write the test that would refuse a generation. Do not implement a new
+cipher in this edition unless the instructor opens a project slot.
+\end{exercise}
+
+\begin{exercise}[Historical leaks as a checklist]
+Map each deleted Enigma leak to the E256 construct that replaces it.
+One table, six rows. Then add a seventh row: a leak this design may
+still have, labeled as a question, not a claim.
+\end{exercise}
+
+\section{Relation to Pillars I and II}
+
+E256 is not evaluated as torus FHE in this edition's lecture arc.
+It is a SoftBus datapath with a Red TensorLUT arm.
+Putting E256 on the encrypted HELUT clock is a possible future lab, and
+a possible \nid{} if someone calls that lab ``production messaging.''
+
+\nonclaimbox{E256 is not a NIST candidate in this book, not a replacement
+for TLS, and not an implication that polymorphic rotors beat lattices.
+It is a pedagogical and laboratory standard for fail-closed mutation.}

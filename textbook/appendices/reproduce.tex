@@ -1,0 +1,67 @@
+\chapter{Reproduce commands (course subset)}
+\label{app:repro}
+
+Canonical file: \corpus{REPRODUCE.md}.
+Cookbook: \corpus{directives/parameter-cookbook.md}.
+Build:
+
+\begin{lstlisting}
+swift build -c release --product helut
+\end{lstlisting}
+
+\section{Documents}
+
+\begin{lstlisting}
+make textbook   # this book
+make paper      # three-pillar report
+make writeup    # P1030680 campaign report
+\end{lstlisting}
+
+\section{Hardness (\hid{1})}
+
+\begin{lstlisting}
+.build/release/helut --hardness-table
+.build/release/helut --estimator-export \
+  > logs/helut-estimator-pending.json
+python3 Scripts/helut_lattice_estimate.py \
+  --pending logs/helut-estimator-pending.json \
+  --out logs/helut-estimator-results.json
+\end{lstlisting}
+
+Until SageMath provides \texttt{sage.all}, results stay null.
+
+\section{Encrypted SING (\cid{4}--\cid{6})}
+
+\begin{lstlisting}
+.build/release/helut --bench netlist.json --degree 8 \
+  --bench-encrypted --cpu-only --sing --vectors 8
+./Scripts/helut_encrypted_sing.sh
+\end{lstlisting}
+
+\section{Metal microbench and NTT (\cid{18})}
+
+\begin{lstlisting}
+make test-metal-p1
+.build/release/helut --bench-encrypted-micro --degree 1024 \
+  --trials 2 --warmup 1
+\end{lstlisting}
+
+Default at $N>64$ is tiled-kernel with inlined NTT.
+Do not assign \texttt{--metal-br-fused} at $N=1024$ as a timed lab.
+
+\section{TensorLUT Theorem 1 (\cid{19})}
+
+\begin{lstlisting}
+swift test -c release --filter testTensorLUTFormalCertificate
+\end{lstlisting}
+
+Six lemmas must \texttt{hold}. Statement:
+\corpus{directives/tensorlut-theorem.md}.
+Not a U-534 / P1030680 decrypt.
+
+\section{Boolean oracle benches (\cid{1})}
+
+\begin{lstlisting}
+./Scripts/helut_boolean_bench.sh
+./Scripts/helut_boolean_scale.sh
+\end{lstlisting}

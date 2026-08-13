@@ -114,7 +114,48 @@ package enum TFHELWEEstimatorProtocol {
         return lines.joined(separator: "\n")
     }
 
-    /// JSON artifact for Scripts/helut_lattice_estimate.py.
+    /// Merge `{ "results": { "label": bits } }` or `{ "label": bits }` JSON.
+    package static func loadExternalJSON(_ text: String) -> [String: Double] {
+        guard let data = text.data(using: .utf8),
+              let obj = try? JSONSerialization.jsonObject(with: data)
+        else { return [:] }
+        let raw: [String: Any]
+        if let dict = obj as? [String: Any] {
+            if let nested = dict["results"] as? [String: Any] {
+                raw = nested
+            } else {
+                raw = dict
+            }
+        } else {
+            return [:]
+        }
+        var out: [String: Double] = [:]
+        for (k, v) in raw {
+            if v is NSNull { continue }
+            if let d = v as? Double {
+                out[k] = d
+            } else if let i = v as? Int {
+                out[k] = Double(i)
+            } else if let n = v as? NSNumber {
+                out[k] = n.doubleValue
+            }
+        }
+        return out
+    }
+
+    /// Load `logs/helut-estimator-results.json` if present (Sage fill-in).
+    package static func mergedFromResultsFile(
+        path: String = "logs/helut-estimator-results.json"
+    ) -> [TFHELWEEstimatorRow] {
+        let cwd = FileManager.default.currentDirectoryPath
+        let url = URL(fileURLWithPath: cwd).appendingPathComponent(path)
+        guard let text = try? String(contentsOf: url, encoding: .utf8) else {
+            return pendingTable()
+        }
+        let bits = loadExternalJSON(text)
+        guard !bits.isEmpty else { return pendingTable() }
+        return mergeExternal(bits)
+    }
     package static func exportPendingJSON() -> String {
         let rows = pendingTable().map { r -> [String: Any] in
             [

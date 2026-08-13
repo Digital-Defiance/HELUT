@@ -51,7 +51,7 @@ Paper rule: every abstract sentence maps to a claim ID with all five cells ≥ *
 2. **Lattice-estimator** table for production `(n,q,σ)` — protocol shipped; needs SageMath fill-in
 3. ~~Noisy BK depth certificate (`TFHENoisyBKCertificate`)~~ — still need measured σ_BK for production
 4. **Encrypted metrics** — full_adder N≤16 Metal + CPU; tree/regex CPU multi-netlist; N=1024 Metal pending
-5. **Formal method** section for continuous→discrete (TensorLUT) — sketch in paper; theorem pending
+5. **Formal method** section for continuous→discrete (TensorLUT) — **Theorem 1** in `directives/tensorlut-theorem.md` / `paper/helut.tex`; machine-checked by `TensorLUTFormal.certificate()`
 6. ~~Related-work matrix~~ (paper); ablations via `--cpu-only` / refresh modes
 7. **Application gallery** — figures; parameter cookbook at `directives/parameter-cookbook.md`
 8. **Artifact tag** — tests, scripts, logs
@@ -75,3 +75,4 @@ Parameter cookbook: `directives/parameter-cookbook.md`.
 - Polymorphic Blue: `Enigma256.md`
 - Long roadmap: `roadmap-overall.md`
 - Wild avenues (post-release): `directives/potential-avenues.md`
+- Living textbook (course): `textbook/`

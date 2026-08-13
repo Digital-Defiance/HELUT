@@ -1,0 +1,169 @@
+\chapter{Torus arithmetic and programmable bootstrapping}
+\label{ch:torus}
+
+This chapter is a working minimum of TFHE~\cite{chillotti2020tfhe,ducas2015fhew},
+not a substitute for a lattice-crypto course.
+The goal is that a student can read a HELUT certificate line without bluffing.
+
+\section{The torus and the native word}
+
+\begin{definition}[Discrete torus used here]
+HELUT freezes the modulus $q=2^{32}$ and represents torus elements as
+\texttt{UInt32}. Addition is native wraparound. This is a \emph{systems}
+choice: the machine word \emph{is} the torus.
+\end{definition}
+
+The ring of polynomials is
+\[
+  R_q = \mathbb{Z}_q[X]/(X^N+1),
+\]
+the negacyclic ring. Multiplication by $X$ is a rotation with a sign flip on
+wrap-around---the algebraic fact that makes blind rotation a barrel shifter
+on coefficients.
+
+\begin{warning}
+Exact $\mathrm{mod}\,2^{32}$ integer tensors are not ``homomorphic encryption.''
+They are the arithmetic. Encryption begins when those tensors are LWE or GLWE
+\emph{samples} with a secret and noise.
+\end{warning}
+
+\section{LWE samples, in one page}
+
+\begin{definition}[LWE sample~\cite{regev2005lwe}]
+For secret $s\in\mathbb{Z}_q^n$, a sample is $(a,\langle a,s\rangle+e+m)\in\mathbb{Z}_q^n\times\mathbb{Z}_q$,
+with $a$ uniform and $e$ small Gaussian (or discrete) noise.
+GLWE is the polynomial analog: mask polynomials plus a body polynomial in $R_q$.
+\end{definition}
+
+HELUT's encrypted path uses LWE/GLWE samples and GGSW bootstrap keys.
+Decision-LWE is bound to IND-CPA by a machine-checkable certificate
+(\cid{5}); the bit estimate at production $(n,\sigma)=(1024,2^{16})$ is
+calibrated $\sim 176$ and is \emph{not} a lattice-estimator attack cost until
+Sage fills the pending JSON (\hid{1}).
+
+\section{Programmable bootstrapping, sketched}
+
+A TFHE Boolean gate is often evaluated by programmable bootstrapping (PBS):
+an encrypted phase selects a coefficient of a \emph{test polynomial} via
+\emph{blind rotation}, then a sample extract returns an LWE encryption of the
+LUT output.
+
+Blind rotation is a product of CMUXes, one per bit of the encrypted phase.
+Each CMUX is an external product against a GGSW encrypt of a secret bit.
+The accumulator lives in $R_q$ (a GLWE).
+The sequential dependence across the $N$ (or $n$) bits is real: you cannot
+parallelize away the chain inside one bootstrap.
+You \emph{can} refuse to unroll each external product into $O(N)$ host MLIR
+nodes. That refusal is Chapter~\ref{ch:metal}.
+
+\section{Negacyclic Toeplitz embedding}
+
+Let $A(X)=\sum_{i=0}^{N-1}a_i X^i$.
+Negacyclic convolution against a vector $x$ is $M_A x$, where $M_A$ is the
+Toeplitz matrix whose first column is $(a_0,\ldots,a_{N-1})^\top$ and each
+subsequent column is the previous column rotated downward with the wrapped
+entry \emph{negated}~\cite{lyubashevsky2010ideal}.
+
+\begin{example}[$N=4$ by hand]
+Let $A=(a_0,a_1,a_2,a_3)$. Then
+\[
+M_A
+=
+\begin{pmatrix}
+a_0 & -a_3 & -a_2 & -a_1 \\
+a_1 &  a_0 & -a_3 & -a_2 \\
+a_2 &  a_1 &  a_0 & -a_3 \\
+a_3 &  a_2 &  a_1 &  a_0
+\end{pmatrix}.
+\]
+On \texttt{UInt32}, $-a\equiv 2^{32}-a$. The matrix product \emph{is} the
+ring product. HELUT's Phase-1 kernel proved this bit-exact against a CPU
+schoolbook oracle, including torus corners $\{0,1,2^{31},2^{32}-1\}$.
+\end{example}
+
+\begin{exercise}
+Expand $M_A$ for $A=(1,2,3,4)$ over $\mathbb{Z}/2^{32}\mathbb{Z}$ and multiply
+by $x=(1,0,0,0)^\top$.
+Interpret the output as a polynomial. Then multiply by $x=(0,1,0,0)^\top$ and
+explain the sign that appears.
+\end{exercise}
+
+\paragraph{Why dense Toeplitz is not the FHE hot path.}
+Materializing $N\times N$ at $N=1024$ is $\Theta(N^2)$ words per LUT---a
+kernel proof and a memory stress, not a production PBS.
+The encrypted hot path moved through tiled schoolbook, fused external product,
+GPU-resident tiles, and 3-prime NTT (\cid{16}--\cid{18}).
+Students implementing ``the HELUT paper kernel'' as their FHE engine are
+implementing 2026-era Phase~1, which the compiler chapter treats as a
+\emph{control-plane ancestor}.
+
+\section{Message spacing and \texorpdfstring{$Z_{2N}$}{Z\_2N}}
+
+Blind rotation addresses coefficients at granularity $\delta = q/(2N)$.
+Packing several LWE bits into one phase must respect the cyclic group
+$Z_{2N}$, not an integer that merely looks like a power.
+
+\reproduced{H2 closed}{Multi-LUT encrypted full\_adder SING PASSes at
+$N\in\{256,512,1024\}$. The bug was arity-3 packing overflowing $256\cdot 2N$
+headroom; the fix is rotation-native encrypt plus \texttt{packLWEBits} reduce
+mod $2N$, with \texttt{rotationPower} preferring $Z_{2N}$ representatives.}
+
+That closed hedge is the best homework in the chapter: a systems bug that is
+also an algebraic bug.
+
+\begin{exercise}
+Suppose $N=256$ so $2N=512$. A pack of three bits each scaled by $256$ can
+leave the $2N$ range.
+Show a numeric counterexample, then write the reduction that restores a
+valid rotation power.
+\end{exercise}
+
+\section{Noise, in the sense this course needs}
+
+Three layers ship as code, not as vibes (\cid{5}):
+
+\begin{center}
+\begin{tabular}{@{}lp{0.62\textwidth}@{}}
+\toprule
+\texttt{TFHENoiseProof} & Discrete $\infty$-norm inject lemmas. \\
+Gaussian $\varepsilon$-certificate & Ingest failure $\le 2^{-64}$ under
+independent-noise hypotheses. \\
+\texttt{TFHENoisyBKCertificate} & Depth under a BK-noise bound $B_{\mathrm{bk}}$.
+HELUT's current BK encrypt is noiseless ($B_{\mathrm{bk}}=0$); production
+must fill a measured $\sigma_{\mathrm{BK}}$ (\hid{4}). \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{warning}
+A noiseless BK is a correct \emph{functional} bootstrap and an incomplete
+\emph{depth} story.
+Students who say ``we have noisy BK'' because the certificate \emph{type}
+exists are failing \hid{4}.
+\end{warning}
+
+\section{Parameters you may quote}
+
+From the cookbook~\cite{helut-cookbook}, production-shaped boolean:
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Knob & Value & Asterisk \\
+\midrule
+$N$ & 1024 & \\
+$q$ & $2^{32}$ & native word \\
+$\sigma$ & $2^{16}$ & $\ll \delta/2 = 2^{20}$ \\
+Target $\varepsilon$ & $\le 2^{-64}$ & Gaussian union on primary wires \\
+Classical target & $\ge 128$ bits & HELUT est.\ $\approx 176$; \hid{1} \\
+$B_{\mathrm{bk}}$ & 0 (now) & \hid{4} \\
+Inter-LUT refresh & \texttt{publicMS} default & lattice-compatible BK masks \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Demo $N=8$ will not meet 128-bit hardness. The certificate reports that
+honestly. Using demo $N$ for a ``secure encrypted CPU'' slide is a \nid{}.
+
+\growswhen{SageMath fills \corpus{logs/helut-estimator-results.json} and
+\hid{1} can be replaced by an estimator table in this section.}

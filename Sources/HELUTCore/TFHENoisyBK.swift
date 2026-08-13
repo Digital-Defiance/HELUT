@@ -1,4 +1,5 @@
 import Foundation
+import Darwin
 
 // MARK: - Noisy BK depth certificate (research-release / step 10p)
 //
@@ -76,20 +77,35 @@ package struct TFHENoisyBKCertificate: Sendable, Equatable {
     }
 
     package static func forNetlist(
-        params: TFHENoisyBKParams
+        params: TFHENoisyBKParams,
+        measurement: TFHENoisyBKMeasurement? = nil
     ) -> TFHENoisyBKCertificate {
-        TFHENoisyBKCertificate(
-            params: params,
-            hypotheses: [
-                "After BR, extracted LWE noise |e| ≤ B_bk=\(params.outputNoiseBound)",
-                "publicMS / decode requires |e| < δ/2 = \(params.decodingHalfGap)",
-                "Each LUT is an independent BR → same floor (no cumulative BR noise under refresh)",
-                params.outputNoiseBound == 0
-                    ? "HELUT current BK encrypt is noiseless (e=0 gadget) — production stacks use noisy BK"
-                    : "Noisy BK floor is an engineering bound; replace with measured/σ model for production",
-                "Does not replace TFHEAsymptoticSecurityCertificate Gaussian ingest analysis"
-            ]
-        )
+        var hypotheses = [
+            "After BR, extracted LWE noise |e| ≤ B_bk=\(params.outputNoiseBound)",
+            "publicMS / decode requires |e| < δ/2 = \(params.decodingHalfGap)",
+            "Each LUT is an independent BR → same floor (no cumulative BR noise under refresh)",
+            "Does not replace TFHEAsymptoticSecurityCertificate Gaussian ingest analysis"
+        ]
+        if let measurement {
+            hypotheses.insert(
+                "B_bk measured from identity-LUT residual "
+                    + "(trials=\(measurement.samples), inject B=\(measurement.injectBound), "
+                    + String(format: "σ̂=%.1f", measurement.sigmaHat)
+                    + ", decode_fail=\(measurement.decodeFailures))",
+                at: 3
+            )
+        } else if params.outputNoiseBound == 0 {
+            hypotheses.insert(
+                "HELUT default BK encrypt is noiseless (e=0 gadget) — production stacks use noisy BK",
+                at: 3
+            )
+        } else {
+            hypotheses.insert(
+                "Noisy BK floor is an engineering bound; prefer TFHENoisyBKMeasurement for production",
+                at: 3
+            )
+        }
+        return TFHENoisyBKCertificate(params: params, hypotheses: hypotheses)
     }
 
     package func assertDecodable(file: StaticString = #file, line: UInt = #line) {
@@ -150,5 +166,147 @@ package struct TFHENoisyBKGaussianCertificate: Sendable, Equatable {
 extension TFHENoiseGrowth {
     package mutating func afterBlindRotate(noisyBK params: TFHENoisyBKParams) {
         afterBlindRotate(outputNoiseBound: params.outputNoiseBound)
+    }
+}
+
+/// Centered torus magnitude: `min(x, q−x)` on `UInt32`.
+package func torusCenteredMagnitude(_ x: UInt32) -> UInt32 {
+    x <= 0x8000_0000 ? x : UInt32(0) &- x
+}
+
+/// Empirical post-BR residual under a (possibly noisy) bootstrap key.
+/// Identity LUT: encrypt bit `b`, PBS `[0,1]`, compare phase to `b·δ`.
+package struct TFHENoisyBKMeasurement: Sendable, Equatable {
+    package var maxAbsError: UInt32
+    package var rms: Double
+    package var samples: Int
+    package var injectBound: UInt32
+    package var delta: UInt32
+    package var polynomialDegree: Int
+    package var decodeFailures: Int
+
+    package var sigmaHat: Double { rms }
+
+    package var decodingHalfGap: UInt32 { delta / 2 }
+
+    package var eachLUTDecodable: Bool {
+        UInt64(maxAbsError) < UInt64(decodingHalfGap)
+    }
+
+    package init(
+        maxAbsError: UInt32,
+        rms: Double,
+        samples: Int,
+        injectBound: UInt32,
+        delta: UInt32,
+        polynomialDegree: Int,
+        decodeFailures: Int
+    ) {
+        self.maxAbsError = maxAbsError
+        self.rms = rms
+        self.samples = samples
+        self.injectBound = injectBound
+        self.delta = delta
+        self.polynomialDegree = polynomialDegree
+        self.decodeFailures = decodeFailures
+    }
+
+    package func certificate(lutCount: Int) -> TFHENoisyBKCertificate {
+        TFHENoisyBKCertificate.forNetlist(
+            params: .bounded(
+                outputNoiseBound: maxAbsError,
+                polynomialDegree: polynomialDegree,
+                lutCount: lutCount
+            ),
+            measurement: self
+        )
+    }
+
+    package func gaussianCertificate(
+        lutCount: Int,
+        targetFailureLog2: Int = -64
+    ) -> TFHENoisyBKGaussianCertificate {
+        TFHENoisyBKGaussianCertificate.forDepth(
+            sigmaBK: sigmaHat,
+            polynomialDegree: polynomialDegree,
+            lutCount: lutCount,
+            targetFailureLog2: targetFailureLog2
+        )
+    }
+
+    /// Identity-LUT BR residual. Uses `existing` BK when provided (no extra encrypt).
+    package static func identity(
+        secret: TFHESecretKey,
+        params: GGSWParams,
+        noise: TFHENoiseParams = .none,
+        bootstrapKey existing: BootstrapKey? = nil,
+        trials: Int = 16,
+        seed: UInt32 = 0xB10C,
+        publicRefreshCompatible: Bool = true
+    ) -> TFHENoisyBKMeasurement {
+        precondition(trials > 0)
+        let n = params.tfhe.polynomialDegree
+        let twoN = 2 * n
+        let scale = rotationScale(polynomialDegree: n)
+        var rng = LCG32(state: seed == 0 ? 1 : seed)
+        let bk = existing ?? bootstrapKey(
+            secret: secret,
+            params: params,
+            rng: &rng,
+            publicRefreshCompatible: publicRefreshCompatible,
+            noise: noise
+        )
+        var maxAbs: UInt32 = 0
+        var sumSq: Double = 0
+        var failures = 0
+        let identity: [UInt32] = [0, 1]
+        for _ in 0..<trials {
+            let bit = rng.next() & 1
+            let lwe = encryptLWERotationNative(
+                message: bit,
+                secret: secret.lweSecret,
+                twoN: twoN,
+                rng: &rng
+            )
+            let out = evaluateLUTBlindRotate(
+                truthTable: identity,
+                inputs: [lwe],
+                bootstrapKey: bk,
+                scale: scale
+            )
+            let phase = decryptLWE(out, secret: secret)
+            let expected = bit &* scale
+            let err = torusCenteredMagnitude(phase &- expected)
+            if err > maxAbs { maxAbs = err }
+            sumSq += Double(err) * Double(err)
+            if decodeRotationBoolean(phase, scale: scale) != bit {
+                failures += 1
+            }
+        }
+        return TFHENoisyBKMeasurement(
+            maxAbsError: maxAbs,
+            rms: sqrt(sumSq / Double(trials)),
+            samples: trials,
+            injectBound: noise.bound,
+            delta: scale,
+            polynomialDegree: n,
+            decodeFailures: failures
+        )
+    }
+
+    package static func markdownTable(_ rows: [TFHENoisyBKMeasurement]) -> String {
+        var lines = [
+            "| gadget N | inject B | trials | max |e| | σ̂ | δ/2 | decode fail | decodable |",
+            "|----------|----------|--------|---------|-----|-----|-------------|-----------|"
+        ]
+        for row in rows {
+            let ok = row.eachLUTDecodable && row.decodeFailures == 0 ? "yes" : "no"
+            lines.append(
+                "| \(row.polynomialDegree) | \(row.injectBound) | \(row.samples) | \(row.maxAbsError) | "
+                    + String(format: "%.1f", row.sigmaHat) + " | \(row.decodingHalfGap) | "
+                    + "\(row.decodeFailures) | \(ok) |"
+            )
+        }
+        return lines.joined(separator: "\n")
     }
 }

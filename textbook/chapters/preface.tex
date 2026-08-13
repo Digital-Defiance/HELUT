@@ -1,0 +1,71 @@
+\chapter{Preface}
+\label{ch:preface}
+
+This book is the first teaching surface for a subject that did not have a name
+until the laboratory forced one.
+
+Universities already teach \emph{reconfigurable computing}: LUTs, interconnect,
+place-and-route, FPGA fabrics, high-level synthesis.
+They already teach \emph{applied cryptography}: AES, RSA, lattices, sometimes
+a lecture on fully homomorphic encryption.
+They almost never teach what happens when the reconfigurable fabric \emph{is}
+a machine-learning graph API, the bitstream is a Yosys netlist, and the values
+on the wires are torus samples that must remain encrypted while a host clock
+ticks flip-flops.
+
+That intersection is the subject of this course.
+We call the working stack \textbf{HELUT}---Homomorphic Edge Look-Up Tensors---and
+we call the subject \textbf{reconfigurable homomorphic computing}.
+
+The stack has three pillars~\cite{helut-release,helut-paper}:
+
+\begin{enumerate}
+  \item \textbf{Netlist-clocked torus FHE.}
+        Gate-level sequential circuits evaluate as exact
+        $\mathbb{Z}/2^{32}\mathbb{Z}$ tensor graphs, with real bootstrapping-key
+        blind rotation and machine-checkable certificates.
+  \item \textbf{Differentiable hardware cryptanalysis.}
+        Discrete INIT tables melt into continuous tensors; a $\lambda$-squeeze
+        grades shatter versus hold; reciprocal structure that combinatoric
+        sieves miss can reappear as an involution.
+  \item \textbf{Adversarial polymorphic ciphers.}
+        Blue ciphers co-evolve under Red pressure and fail closed, rather than
+        waiting to become the next historically leaked stream cipher.
+\end{enumerate}
+
+\paragraph{Why a living textbook.}
+Research papers freeze a slice of a laboratory.
+This course cannot.
+The claim inventory~\cite{helut-claim-sheet} moves: Metal kernels get faster,
+hedges close, avenues stay unlabeled until they earn receipts.
+A professor who taught from a PDF dated June would be teaching a different
+Metal compiler than a professor teaching from August.
+So the book is versioned against the corpus \emph{epoch}
+(\livingepoch{} in this edition) and is honest about stubs.
+
+\paragraph{What this edition is.}
+Edition~\corpusedition{} is the \emph{beginnings}: enough foundations to open a
+course, enough Pillar~I to run laboratories, enough Pillars~II and~III to
+assign readings, and a frontier part that is labeled as frontier.
+It is not a complete treatise.
+Where the laboratory is thin, the page says so.
+
+\paragraph{What this edition is not.}
+It is not a claim that HELUT invented TFHE~\cite{chillotti2020tfhe,ducas2015fhew}.
+It is not a production key-size manual until a lattice estimator fills the
+pending table (\hid{1}).
+It is not a decrypt of U-534 / P1030680.
+It is not a side-channel paper.
+Those sentences are printed again in Chapter~\ref{ch:living} because students
+will forget them the week before the final.
+
+\paragraph{Who wrote it.}
+The HELUT project at Digital Defiance.
+The scientific voice of the book is the same voice as the research-release
+doctrine: lead with what runs, and with what it does not prove.
+
+\paragraph{How to cite an epoch.}
+Cite the git commit and the claim-sheet epoch, not ``the HELUT textbook'' as if
+it were a static ISBN.
+When a student reproduces \cid{18}, they are reproducing a dated Metal NTT
+persist tile, not an eternal constant of nature.

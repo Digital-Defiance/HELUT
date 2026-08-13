@@ -675,3 +675,7 @@ quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → 
   [395/2513·131] TGEANKERTXFFFTTTBLEIB@3 edges=21 letters=20 loops=4 central=T dead at the board                     44056s  47.5M/s ETA 2651.2 min
   [396/2513·132] TGEANKERTXFFFTTTBLEIB@14 edges=21 letters=21 loops=4 central=T dead at the board                     44303s  47.6M/s ETA 2640.3 min
   [397/2513·133] TGEANKERTXFFFTTTBLEIB@18 edges=21 letters=21 loops=4 central=T dead at the board                     44563s  47.7M/s ETA 2630.3 min
+  [398/2513·134] TGEANKERTXFFFTTTBLEIB@49 edges=21 letters=19 loops=4 central=T dead at the board                     44905s  47.7M/s ETA 2625.1 min
+  [399/2513·135] OVIERUNDUUUZWOFUNFDR@16 edges=20 letters=18 loops=4 central=U dead at the board                     45212s  47.7M/s ETA 2617.9 min
+  [400/2513·136] OVIERUNDUUUZWOFUNFDR@21 edges=20 letters=17 loops=4 central=U dead at the board                     45525s  47.7M/s ETA 2611.0 min
+  [401/2513·137] OVIERUNDUUUZWOFUNFDR@30 edges=20 letters=19 loops=4 central=U dead at the board                     45780s  47.8M/s ETA 2600.9 min

@@ -54,6 +54,8 @@ bk.assertDecodable()
 python3 Scripts/helut_lattice_estimate.py \
   --pending logs/helut-estimator-pending.json \
   --out logs/helut-estimator-results.json
+# Native SageMath required (Apple silicon: not qemu amd64 — FLINT SIGILL).
+# ./Scripts/helut_sage_estimate.sh --max-n 256
 
 # Encrypted ≡ clear (generic stimuli)
 .build/release/helut --bench netlist.json --degree 8 --bench-encrypted --sing
@@ -74,8 +76,8 @@ python3 Scripts/helut_lattice_estimate.py \
 
 | N | s/BR | RSS | Note |
 |---|-----:|----:|------|
-| 64 | fused ~50.3 / persist-tile **0.001** | ~2.3 GiB / 15 MiB | PASS; **C17** |
-| 1024 | persist-tile **0.519** (fused-EP 1.043 / poly-mul 3.645) | 68 MiB | bits 0+1 PASS; fused DNF 11.6 h; gpu 0.50 s |
+| 64 | fused ~50.3 / persist-schoolbook **0.001** / NTT-tile **0.010** | ~2.3 GiB / 15 MiB / 16 MiB | PASS; **C17** / **C18** |
+| 1024 | NTT-tile **0.433** (persist-schoolbook 0.519 / fused-EP 1.043 / poly-mul 3.645) | 148 MiB | bits 0+1 PASS; fused DNF 11.6 h; gpu 0.43 s; **C18** |
 
 INIT dedup: `TFHETestPolyCache` + shared test-poly tensors in metal-netlist graph.
 

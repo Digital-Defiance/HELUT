@@ -53,7 +53,11 @@ cp -f "$outdir/${base}.pdf" "${tex_dir}/${base}.pdf"
 echo "==> MD   ${TEX_ARG} → ${rel_dir}/${base}.md"
 tmp_md="$(mktemp)"
 tmp_raw="$(mktemp)"
-pandoc "$TEX" -f latex -t markdown --wrap=none -s -o "$tmp_raw"
+# Pandoc resolves \\input relative to cwd, not the .tex path.
+(
+  cd "$tex_dir"
+  pandoc "${base}.tex" -f latex -t markdown --wrap=none -s -o "$tmp_raw"
+)
 python3 - "$tmp_raw" "$tmp_md" <<'PY'
 import re, sys, yaml
 

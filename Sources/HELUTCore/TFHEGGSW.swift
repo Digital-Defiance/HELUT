@@ -489,14 +489,22 @@ package func bootstrapKey(
     secret: TFHESecretKey,
     params: GGSWParams,
     rng: inout LCG32,
-    publicRefreshCompatible: Bool = false
+    publicRefreshCompatible: Bool = false,
+    noise: TFHENoiseParams = .none
 ) -> BootstrapKey {
     let bits = secret.lweSecret
     let delta = rotationScale(polynomialDegree: params.tfhe.polynomialDegree)
     let stride: UInt32 =
         publicRefreshCompatible ? max(max(params.gadget[0], 1), delta) : 1
     let keys = bits.map {
-        encryptGGSW(bit: $0, secret: secret, params: params, rng: &rng, maskStride: stride)
+        encryptGGSW(
+            bit: $0,
+            secret: secret,
+            params: params,
+            rng: &rng,
+            noise: noise,
+            maskStride: stride
+        )
     }
     return BootstrapKey(params: params, bitKeys: keys)
 }

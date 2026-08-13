@@ -1,0 +1,34 @@
+Error response from daemon: no matching manifest for linux/arm64/v8 in the manifest list entries: no match for platform in manifest: not found
+latest: Pulling from sagemath/sagemath
+b40150c1c271: Pulling fs layer
+a0064b7fff11: Pulling fs layer
+5ce8a764fad7: Pulling fs layer
+4f4fb700ef54: Pulling fs layer
+29601274f8cf: Pulling fs layer
+4f4fb700ef54: Pulling fs layer
+69b39b8eac99: Pulling fs layer
+834905ae3193: Pulling fs layer
+aadd16a2161b: Pulling fs layer
+cbb85fd2d3b7: Pulling fs layer
+4f4fb700ef54: Already exists
+ee69b84646e4: Download complete
+a0064b7fff11: Download complete
+5ce8a764fad7: Download complete
+aadd16a2161b: Download complete
+69b39b8eac99: Download complete
+cbb85fd2d3b7: Download complete
+b40150c1c271: Download complete
+5ce8a764fad7: Pull complete
+69b39b8eac99: Pull complete
+b40150c1c271: Pull complete
+29601274f8cf: Download complete
+cbb85fd2d3b7: Pull complete
+29601274f8cf: Pull complete
+834905ae3193: Download complete
+4f4fb700ef54: Pull complete
+a0064b7fff11: Pull complete
+aadd16a2161b: Pull complete
+834905ae3193: Pull complete
+Digest: sha256:e068670ae5863b54b2550e72437ec637b0283acb0dc712c8584c124dbf44e667
+Status: Downloaded newer image for sagemath/sagemath:latest
+docker.io/sagemath/sagemath:latest

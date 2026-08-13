@@ -1,0 +1,135 @@
+\chapter{A new subject}
+\label{ch:subject}
+
+\section{The gap between two mature fields}
+
+Reconfigurable computing classically means: a designer writes RTL, a synthesizer
+emits LUTs and flip-flops, a bitstream configures an FPGA, and the fabric
+evaluates the circuit at a clock~\cite{harris2012digital,gajski2009embedded}.
+The fabric is spatially wired. The configuration is a bitstream. The values
+on the wires are bits.
+
+Fully homomorphic encryption classically means: a scheme evaluates circuits
+\emph{on ciphertexts}~\cite{chillotti2020tfhe,ducas2015fhew}.
+The ``fabric'' is an arithmetic library---NTT butterflies, key-switching
+decompositions, bootstrapping. The configuration is a parameter set. The
+values on the wires are polynomials in $\mathbb{Z}_q[X]/(X^N+1)$.
+
+Each field has textbooks.
+The composition does not.
+
+\begin{definition}[Reconfigurable homomorphic computing]
+The study of compiling \emph{already-synthesized} sequential netlists onto
+\emph{tensor engines} so that LUT evaluation, flip-flop clocking, and
+(when claimed) torus FHE occupy the same graph object, with explicit
+certificates of what the graph does and does not prove.
+\end{definition}
+
+HELUT is one laboratory realization of that definition: Yosys JSON in,
+\texttt{MPSGraph} out, host posedge clock, LWE/GLWE samples on the FHE
+path~\cite{helut-paper}.
+The subject is larger than the prototype.
+A future chapter may describe a CUDA fabric, an MLIR fabric, or an ASIC LUT
+plane. The definition does not name Apple.
+
+\section{Three questions that open the course}
+
+\begin{enumerate}
+  \item \textbf{Representation.}
+        Can a commodity ML graph API host exact modular arithmetic at
+        $q=2^{32}$, or does the API silently round?
+  \item \textbf{Clocking.}
+        Can sequential logic---enables, sync resets, a RISC-V core---tick
+        on that graph without the host becoming a bit-banged FPGA?
+  \item \textbf{Honesty.}
+        When the same object grows a real bootstrapping key, what
+        certificates must ship with every tick, and which sentences remain
+        forbidden?
+\end{enumerate}
+
+Pillar~I is the constructive answer to (1)--(3).
+Pillar~II asks a fourth question the FPGA curriculum never asked:
+\emph{what if the INIT table is not binary?}
+Pillar~III asks a fifth: \emph{what if the circuit under evaluation is allowed
+to mutate because the attacker in the next room is the same compiler?}
+
+\section{Why ``reconfigurable'' is the right word}
+
+An FPGA is reconfigurable because the LUT INIT bits and the interconnect are
+late-bound.
+HELUT is reconfigurable in the same sense, with three substitutions:
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Classical FPGA & This course & Consequence \\
+\midrule
+LUT INIT bitstream & Yosys \texttt{\$lut} truth table & Same IR \\
+Routing fabric & Tensor edges in one graph & Place-and-route becomes lowering \\
+Clock tree & Host \texttt{graph.run} loop & Timing closure becomes tick protocol \\
+IOB / BRAM & Placeholders and MTLBuffers & Memory is unified, not dual-port \\
+Encrypted? & Optional; certificate-gated & Oracle $\neq$ FHE \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The last row is the pedagogical load-bearing wall.
+Students who have built FPGAs want to say ``the CPU is encrypted'' the moment
+PicoRV32 ticks.
+The boolean oracle path \emph{does} clock PicoRV32 on ciphertext-\emph{shaped}
+vectors (\cid{1}).
+The FHE path \emph{does} blind-rotate Yosys LUTs on LWE samples (\cid{4}--\cid{6}).
+They are not the same sentence.
+Chapter~\ref{ch:certs} exists so that confusion is a grading event rather than
+a press cycle.
+
+\section{The three pillars as a curriculum, not a brand}
+
+Roadmap language names them the Turing pillar, the Schneier pillar, and a
+grand challenge on proving circuits~\cite{helut-trajectory}.
+In this course they are simply I, II, III, in the order a student can
+verify them:
+
+\begin{itemize}
+  \item Without I, II is a float32 netlist toy and III has nowhere to run.
+  \item Without II, I is a compiler course with FHE homework.
+  \item Without III, I and II only attack the past; they do not design the
+        next cipher under fire.
+\end{itemize}
+
+Edition~\corpusedition{} teaches I in lecture depth, Pillar~II
+Theorem~\ref{thm:tensorlut} (\cid{19}) in lecture depth with empirics in
+seminar, Pillar~III in seminar depth, and the grand-challenge / side-channel
+items as labeled frontier (Chapter~\ref{ch:frontier}).
+
+\section{Related systems, scoped not ranked}
+
+\begin{center}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+System & Exact $q{=}2^{32}$ Metal & Netlist clock & BK \texttt{\$lut} FHE & Diff.\ hardware \\
+\midrule
+Concrete / tfhe-rs & -- & compiler IR & yes & -- \\
+OpenFHE / HElib & -- & circuit API & yes & -- \\
+HELUT boolean oracle & yes & yes & -- & -- \\
+HELUT encrypted path & yes & yes & yes & -- \\
+TensorLUT (Pillar~II) & -- & Yosys INIT & -- & yes \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+This is a \emph{scope} matrix, not a throughput bake-off~\cite{helut-paper}.
+Concrete is a production TFHE compiler; HELUT is a netlist-clocked tensor
+fabric with an FHE path.
+Students comparing ``ms/gate'' across those rows without naming encoding,
+$N$, and certificate status fail the five-cell test.
+
+\begin{exercise}
+Write four sentences, one per row of the matrix, that a journalist could
+print without creating a \nid{}.
+Then write the one-sentence lie each row most tempts.
+\end{exercise}
+
+\growswhen{A fourth pillar chapter, if FHE-gate / ZK-depth work in the
+mid-term trajectory~\cite{helut-trajectory} graduates. Until then it is
+Chapter~\ref{ch:open}, not a \texttt{\textbackslash part}.}

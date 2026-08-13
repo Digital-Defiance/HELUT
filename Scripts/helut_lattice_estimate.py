@@ -36,10 +36,14 @@ def dependency_status() -> str:
 
 
 def try_estimate(n: int, q: int, sigma: float) -> Optional[float]:
+    LWE = ND = None
     try:
         from estimator import LWE, ND  # type: ignore
     except Exception:
-        return None
+        try:
+            from lattice_estimator import LWE, ND  # type: ignore
+        except Exception:
+            return None
     try:
         params = LWE.Parameters(
             n=n,
@@ -79,6 +83,7 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--pending", type=Path, required=True)
     ap.add_argument("--out", type=Path, required=True)
+    ap.add_argument("--max-n", type=int, default=0, help="Skip rows with n larger than this (0=all)")
     args = ap.parse_args()
 
     dep = dependency_status()
@@ -87,7 +92,13 @@ def main() -> int:
     pending = []
     for row in rows:
         label = row["label"]
-        bits = try_estimate(int(row["n"]), int(row["q"]), float(row["sigma"]))
+        n = int(row["n"])
+        if args.max_n and n > args.max_n:
+            pending.append(label)
+            results[label] = None
+            print(f"skip {label} n={n} > --max-n {args.max_n}", file=sys.stderr)
+            continue
+        bits = try_estimate(n, int(row["q"]), float(row["sigma"]))
         if bits is None:
             pending.append(label)
             results[label] = None

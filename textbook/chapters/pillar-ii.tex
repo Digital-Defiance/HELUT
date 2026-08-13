@@ -1,0 +1,210 @@
+\chapter{Continuous hardware, discrete silicon}
+\label{ch:pillarii}
+
+The structural theorem of this chapter is lecture-safe (\cid{19}).
+Shatter / hold grades and campaign empirics remain seminar-depth and are
+\emph{not} the theorem~\cite{helut-tensorlut-thm}.
+
+\growswhen{A completeness theorem: that melt recovers cryptographic structure
+combinatoric sieves miss, for a stated class of netlists.
+Theorem~1 does not claim that.
+Stream-cipher melts remain on the trajectory.}
+
+\section{The problem boolean search cannot see}
+
+A combinatoric sieve on a cipher netlist proposes discrete genotypes:
+INIT bits, plugboard pairs, rotor orders.
+On a short ciphertext the search space is both enormous and full of
+linguistic hallucinations (the P1030680 campaign is the case study, not
+the claim).
+Boolean search \emph{rejects}.
+It does not \emph{propose} a nearby reciprocal structure that is almost a
+stecker.
+
+Pillar~II melts the hardware~\cite{helut-paper,helut-tensorlut-thm}.
+
+\section{Setup}
+
+Let $L$ be the number of LUT6 cells and $w\in[0,1]^{64L}$ the concatenated
+INIT genome.
+Let $y(w)$ be the \emph{multilinear extension} of those INITs on $[0,1]$
+(exact on $\{0,1\}$ inputs).
+Let $t$ be a target bit vector of matching width.
+Soft crypto fitness and discreteness penalty:
+\begin{align}
+  F_{\mathrm{crypto}}(w)
+  &= -\lVert y(w)-t\rVert_2^2, \\
+  \pi(w)
+  &= \sum_i w_i(1-w_i), \\
+  F(w)
+  &= F_{\mathrm{crypto}}(w)-\lambda\,\pi(w),
+  \qquad \lambda\ge 0.
+\end{align}
+
+\begin{remark}[Implementation schedule]
+HELUT's GA uses a squeeze $\lambda=\lambda_{\max}(p')^2$.
+Theorem~1 needs only $\lambda\ge 0$.
+\end{remark}
+
+Emitter: $E(w)_i=\mathbf{1}[w_i\ge\tfrac12]$.
+Freeze mask $M\subseteq\{1,\dots,64L\}$ removes frozen coordinates from
+$\pi$.
+Stecker genotypes are \emph{partial involutions} (disjoint pairs) on
+$\{0,\dots,25\}$.
+
+Every Yosys \texttt{\$lut} of width $1\ldots 6$ pads to a 64-wide
+\texttt{Float32} INIT.
+The forward pass is branchless and GPU-shaped.
+It is not torus FHE.
+
+\section{Theorem 1 (structural)}
+\label{sec:thm-tensorlut}
+
+\reproduced{C19}{TensorLUT continuous$\to$discrete Theorem~1:
+six machine-checked lemmas
+(\texttt{TensorLUTFormal.certificate()}).
+Not a cryptanalytic break.
+Statement: \corpus{directives/tensorlut-theorem.md}.
+Reproduce:
+\texttt{swift test -c release --filter testTensorLUTFormalCertificate}.}
+
+\begin{theorem}[TensorLUT continuous$\to$discrete]
+\label{thm:tensorlut}
+Assume the hypotheses on the certificate: the LUT is multilinear; the GA
+mutates only unfrozen $w_i\in[0,1]$; the involution sandwich freezes core
+INITs.
+Then:
+\begin{enumerate}
+  \item \textbf{Discreteness.}
+        $\pi(w)\ge 0$, with equality iff $w\in\{0,1\}^{64L}$.
+  \item \textbf{Crypto MSE.}
+        $F_{\mathrm{crypto}}(w)\le 0$, with equality iff $y(w)=t$.
+  \item \textbf{Combined objective.}
+        $F(w)\le F_{\mathrm{crypto}}(w)$; if $\pi(w)>0$, increasing
+        $\lambda$ strictly decreases $F$.
+  \item \textbf{Emitter.}
+        $E$ is idempotent on $\{0,1\}^{64L}$ and agrees with threshold
+        $\tfrac12$.
+  \item \textbf{Involution sandwich.}
+        Overlapping pairs are rejected; applying a valid pair-set twice
+        is the identity on the alphabet.
+  \item \textbf{Freeze.}
+        Coordinates in $M$ do not contribute to $\pi$.
+\end{enumerate}
+\end{theorem}
+
+\paragraph{Proof (machine-checked).}
+Each clause is a \texttt{TensorLUTFormal.check*} in
+\texttt{TensorLUTFormal.swift}, aggregated by
+\texttt{TensorLUTFormal.certificate()}.
+The named lemmas are
+\texttt{discretenessPenalty},
+\texttt{cryptoFitnessMSE},
+\texttt{combinedObjective},
+\texttt{emitterThreshold},
+\texttt{involutionSandwich},
+\texttt{freezeMask}.
+Source path: \corpus{Sources/HELUTCore/TensorLUTFormal.swift}.
+
+\begin{warning}
+Theorem~1 does \emph{not} prove recovery of arbitrary keys; a U-534 /
+P1030680 plaintext; or that melt is complete for all netlists.
+Shatter / hold grades remain empirical (\cid{8}, \cid{9}, \hid{6}).
+\end{warning}
+
+\section{Five-cell test for Theorem 1}
+
+\begin{center}
+\small
+\begin{tabular}{@{}lp{0.68\textwidth}@{}}
+\toprule
+Cell & Artifact \\
+\midrule
+Proof & Theorem~\ref{thm:tensorlut} $+$ \texttt{TensorLUTFormalCertificate} \\
+Table & Lemmas vs \texttt{holds} on the certificate; campaign grades in
+        \corpus{BREAK\_P1030680.md} §21 \\
+Metric & $F_{\mathrm{crypto}}=0$ on unmutated baseline; $\pi=0$ on binary INIT \\
+Examples & M4 baseline emit; freeze-core involution; blind 3-pair PASS \\
+Application & Stecker search that cannot propose a non-reciprocal map \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{exercise}[Read a certificate]
+Run the reproduce filter (Appendix~\ref{app:repro}) or, on the theory track,
+read \texttt{TensorLUTFormal.certificate()} and list the six
+\texttt{holds} bits.
+For each lemma, write one sentence a journalist may print and one they
+may not.
+\end{exercise}
+
+\section{Shatter versus hold (empirical)}
+
+A full cold-start on a large sequential cipher discovers continuous
+shortcuts that \emph{shatter} when $\lambda$ rises: $F_{\mathrm{crypto}}$
+looks perfect in float and dies on the Boolean cube.
+Targeted melting freezes known-good LUT blocks (\texttt{freezeMask}) and
+evolves only the unknown cone---clause~6 of Theorem~\ref{thm:tensorlut}
+is why frozen coordinates do not pay $\pi$.
+Early resignation reboots doomed lineages rather than squeezing a
+reciprocal shortcut to the end.
+
+\begin{definition}[Grade]
+Under a published $\lambda$ schedule, a lineage \textbf{holds} if the
+emitted binary netlist preserves $F_{\mathrm{crypto}}=0$ (or a stated
+bar). It \textbf{shatters} if discreteness kills the continuous solution.
+Both grades are science. Shatter is not a failed demo; it is evidence
+about shortcuts. It is \emph{not} a clause of Theorem~\ref{thm:tensorlut}.
+\end{definition}
+
+\reproduced{C8, C9}{TensorLUT M4 baseline $F_{\mathrm{crypto}}=0$ plus Verilog
+emit; Stecker involution sandwich with blind 3-pair PASS.
+Method claims, not a U-534 / P1030680 plaintext.}
+
+\section{Involution sandwich}
+
+Stecker genotypes are partial involutions (disjoint pairs) by construction
+(Theorem~\ref{thm:tensorlut}, clause~5).
+The GA cannot propose a non-reciprocal map.
+The 16 cone LUTs around an identity plugboard cannot invent letter swaps by
+INIT melt; the sandwich injects $S(\mathrm{CT})$ into a frozen core and
+scores soft PT against bits of $S(P)$.
+Reciprocity is structural.
+
+\begin{warning}
+Short cribs leave unused pairs unconstrained and can admit false $F=0$
+steckers. Grade active-map agreement on $\mathrm{CT}\cup\mathrm{PT}$, use
+parsimony, grow the pair budget on plateau, and allow soft freeze $+$ thaw.
+TensorLUT grades are not a campaign decrypt (\nid{}, \hid{6}).
+\end{warning}
+
+\section{Adversarial synthesis as a compiler loop}
+
+Forward: silicon $\to$ uniform float tensors.
+Reverse: cooled tensors $\to$ INIT hex $\to$ Verilog LUT instantiations.
+The loop is a generative compiler pitting continuous optimization against
+discrete physical limits~\cite{helut-release}.
+Theorem~\ref{thm:tensorlut} is the invariant the loop is forced to obey.
+It is not a guarantee that the loop finds a key.
+
+\begin{exercise}
+Why must $\pi(w)=\sum w_i(1-w_i)$ vanish on binary INITs, and why is a
+fitness that ignores $\pi$ allowed to ``solve'' a cipher that no FPGA can
+implement?
+Give a two-LUT numerical cartoon.
+Which clause of Theorem~\ref{thm:tensorlut} did you just unpack?
+\end{exercise}
+
+\begin{exercise}[Seminar]
+Theorem~\ref{thm:tensorlut} is structural, not complete.
+Write the statement of a completeness theorem you wish were true (melt
+recovers $X$ on netlist class $Y$ under schedule $Z$), and the
+counterexample shape you would try first.
+Do not upgrade shatter/hold grades into that theorem.
+\end{exercise}
+
+\nonclaimbox{Pillar~II does not break P1030680, does not replace Welchman
+search, and does not make TensorLUT a PBS. Parallel research; campaign
+fitness stays cleartext.
+\cid{19} is a theorem about the objective and the involution contract,
+not about plaintext.}

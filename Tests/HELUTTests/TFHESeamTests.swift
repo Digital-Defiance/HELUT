@@ -765,6 +765,99 @@ final class TFHESeamTests: XCTestCase {
         XCTAssertFalse(gLoud.isSecure)
     }
 
+    func testNoisyBKIdentityMeasurement() {
+        let degree = 8
+        // Covering gadget (baseLog·ℓ = 32, g₀ = δ). ℓ=1 booleanPublicMS is a
+        // noiseless-lattice vehicle — BK noise leaves the δ lattice and later
+        // CMUXes mis-decompose.
+        let params = GGSWParams.cryptoPublicMS(degree: degree)
+        XCTAssertEqual(params.baseLog * params.levelCount, 32)
+        let secret = TFHESecretKey.random(params: params.tfhe, seed: 0xB401)
+        let quiet = TFHENoisyBKMeasurement.identity(
+            secret: secret,
+            params: params,
+            noise: .none,
+            trials: 8,
+            seed: 0xB402
+        )
+        XCTAssertEqual(quiet.maxAbsError, 0)
+        XCTAssertEqual(quiet.sigmaHat, 0)
+        XCTAssertEqual(quiet.decodeFailures, 0)
+        XCTAssertTrue(quiet.eachLUTDecodable)
+        let quietCert = quiet.certificate(lutCount: 3)
+        XCTAssertTrue(quietCert.meetsHELUTNoiselessHypothesis)
+        XCTAssertTrue(quietCert.hypotheses.contains(where: { $0.contains("measured") }))
+        XCTAssertTrue(quiet.gaussianCertificate(lutCount: 8).isSecure)
+
+        let noisy = TFHENoisyBKMeasurement.identity(
+            secret: secret,
+            params: params,
+            noise: .demo,
+            trials: 8,
+            seed: 0xB403
+        )
+        XCTAssertGreaterThan(noisy.maxAbsError, 0)
+        XCTAssertGreaterThan(noisy.sigmaHat, 0)
+        XCTAssertEqual(noisy.decodeFailures, 0)
+        XCTAssertTrue(noisy.eachLUTDecodable)
+        XCTAssertLessThan(noisy.maxAbsError, noisy.decodingHalfGap)
+        let noisyCert = noisy.certificate(lutCount: 3)
+        XCTAssertFalse(noisyCert.meetsHELUTNoiselessHypothesis)
+        XCTAssertTrue(noisyCert.eachLUTDecodable)
+        XCTAssertTrue(noisy.gaussianCertificate(lutCount: 8).isSecure)
+    }
+
+    func testEncryptedNetlistFullAdderWithNoisyBK() throws {
+        guard let path = resolvePBSRepoFile("netlist.json") else {
+            return XCTFail("netlist.json not found")
+        }
+        let netlist = loadYosysNetlist(from: path)
+        guard let (moduleName, module) = netlist.modules.first else {
+            return XCTFail("Empty netlist")
+        }
+        let degree = 8
+        let params = GGSWParams.cryptoPublicMS(degree: degree)
+        let secret = TFHESecretKey.random(params: params.tfhe, seed: 0xB411)
+        let enc = EncryptedNetlistSimulator(
+            moduleName: moduleName,
+            module: module,
+            secret: secret,
+            params: params,
+            backend: .blindRotate,
+            wireRefresh: .publicMS,
+            bkNoise: .demo,
+            seed: 0xB412
+        )
+        let clear = CleartextNetlistSimulator(moduleName: moduleName, module: module)
+        for a in 0...1 {
+            for b in 0...1 {
+                for cin in 0...1 {
+                    let inputs: [String: [UInt8]] = [
+                        "a": [UInt8(a)],
+                        "b": [UInt8(b)],
+                        "cin": [UInt8(cin)]
+                    ]
+                    let want = clear.tick(inputs: inputs)
+                    let got = try enc.tick(inputs: inputs)
+                    XCTAssertEqual(got["sum"], want["sum"], "sum a=\(a) b=\(b) cin=\(cin)")
+                    XCTAssertEqual(got["cout"], want["cout"], "cout a=\(a) b=\(b) cin=\(cin)")
+                }
+            }
+        }
+        XCTAssertNotNil(enc.noisyBKMeasurement)
+        XCTAssertGreaterThan(enc.noisyBKMeasurement!.maxAbsError, 0)
+        XCTAssertEqual(enc.noisyBKMeasurement!.decodeFailures, 0)
+        XCTAssertNotNil(enc.noisyBKCertificate)
+        XCTAssertEqual(
+            enc.noisyBKCertificate!.params.outputNoiseBound,
+            enc.noisyBKMeasurement!.maxAbsError
+        )
+        XCTAssertTrue(enc.noisyBKCertificate!.eachLUTDecodable)
+        XCTAssertFalse(enc.noisyBKCertificate!.meetsHELUTNoiselessHypothesis)
+        XCTAssertNotNil(enc.noisyBKGaussianCertificate)
+        XCTAssertTrue(enc.noisyBKGaussianCertificate!.isSecure)
+    }
+
     func testLWEEstimatorProtocolPending() {
         let rows = TFHELWEEstimatorProtocol.pendingTable()
         XCTAssertEqual(rows.count, TFHELWECalibration.anchors.count)
