@@ -12,7 +12,7 @@ Living results inventory: [`claim-sheet.md`](claim-sheet.md).
 |-------|----------------|-----------------|
 | **H2** full_adder @ *N*≥256 | ~~Multi-LUT encrypted correctness~~ **Closed** | Z_{2N} pack / `rotationPower` fix; SING PASS @ 256/512/1024 |
 | **H1** Sage lattice-estimator | Honest classical bits for production-shaped params | Needs SageMath (`sage` / `sage.all`) — not installed here; pending JSON ready |
-| **H3** Metal BR @ large *N* | Real wall-clock / memory envelope | `--bench-encrypted-micro --degree 1024` running → `logs/helut-encrypted-micro-n1024.log`; compiler story: [`metal-compiler-phases.md`](metal-compiler-phases.md) (P1 tiles/CSE/cache → P2 Metal ring kernels) |
+| **H3** Metal BR @ large *N* | Real wall-clock / memory envelope | **C17** persist-tile 0.519 s/BR · boolean SING 12.2 s. Next: NTT poly-mul (schoolbook still in tile kernel) |
 | **H4** Noisy BK | Production depth story | Measured *σ*<sub>BK</sub> into `TFHENoisyBKCertificate` (still modeled / *B*<sub>bk</sub>=0) |
 | Campaign catalog | Exhaust Boolean coverage | Resume `--bombe-from 265`; middle ring ≠ A |
 | Garble / quarantine | Ciphertext may be wrong letters | Soft-band escalate grades; sister-message lessons |

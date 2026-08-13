@@ -5,3 +5,4 @@ HELUT encrypted Metal MICROBENCH
 KEYGEN+BK         1.014 s  RSS +21.1 MiB (after=33.8 MiB)
 HARDNESS          175.7 classical bits  (≥128? yes)
 BR start bit=0  RSS=33.8 MiB …
+MICRO_EXIT:143

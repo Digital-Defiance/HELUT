@@ -1,12 +1,31 @@
 # Metal torus compiler — Phase 1 / Phase 2
 
-**Status:** trajectory story (not a claim).  
-**Why now:** encrypted Metal micro at *N*=1024 spends hours on **host MPSGraph encoding** of schoolbook poly-mul inside fused blind-rotate — GPU never starts.  
+**Status:** Phase 1 control plane **in tree**; Phase 2.2 fused EP **in tree**; Phase 2.3 GPU-resident BR tile **in tree** (2026-08-13). Not a security claim.  
+**Why now:** fused schoolbook-in-MPSGraph at *N*=1024 spent **11.6 h** on host encode, never reached GPU, killed SIGTERM 143 (`logs/helut-encrypted-micro-n1024.log`).  
 **Doctrine:** SoftBus/ANE remains a graph machine; we stop mistaking “unroll all ring math into MLIR” for “use the GPU.”
 
 Living hedges: [`claim-sheet.md`](claim-sheet.md) **H3**. Reproduce: [`../REPRODUCE.md`](../REPRODUCE.md). Broader path: [`research-trajectory.md`](research-trajectory.md).
 
+## Lab status (2026-08-13)
+
+| Item | Result |
+|------|--------|
+| Fused `--bench-encrypted-micro --degree 1024` | **DNF** — 11.6 h, RSS ~4 GiB, still `BR start bit=0` / `negacyclicPolyMul` MLIR, SIGTERM 143 |
+| CPU SING *N*=1024 full_adder | **PASS** ~52 s (`logs/helut-encrypted-n1024-cpu-sing.log`) |
+| Tiled-kernel micro *N*=64 | **PASS** persist-tile **0.001 s/BR** (`logs/helut-encrypted-micro-n64-persist.log`) vs fused-EP 0.043 s vs fused MPSGraph ~50 s |
+| Tiled-kernel micro *N*=1024 | **PASS** persist-tile **0.519 s/BR** (gpu 0.50 s, RSS 68 MiB, `logs/helut-encrypted-micro-n1024-persist.log`) vs fused-EP 1.043 s vs poly-mul 3.645 s |
+| Metal full_adder SING *N*=1024 | **PASS** boolean persist **12.2 s / 8 vec (1.52 s/row)** vs fused-EP 25.1 s vs pre-fusion 90.6 s; crypto 175.6 s not re-timed |
+| Metal netlist-scheduled SING *N*=1024 | **PASS** 91.9 s / 8 vec pre-fusion; same tiled-kernel path now hits persist BR (**C17**) |
+| Default Metal BR | `fused` if *N*≤64; `tiled-kernel` otherwise (GPU-resident ACC+BK inside tiles) |
+| CLI | `--metal-br-fused` · `--metal-br-tile W` |
+| In tree | CMUX tiles (1.1) · `GraphConstBank` CSE (1.2) · cached PSO (1.3) · telemetry (1.4) · poly-mul kernel (2.1) · fused EP (2.2) · **GPU-resident BR tile (2.3)** |
+
+Whole-netlist `evaluateTopoNetlistSingleGraph` defaults to **host-scheduled tiled-kernel** at *N*>64 (same GPU-resident BR as **C17**). Legacy fused MPSGraph is `--metal-br-fused` only.
+
+**Validate:** `make test-metal-p1` (or `swift test -c release --filter MetalCompilerPhase1Tests`). *N*=1024 wall-clock: `--bench-encrypted-micro --degree 1024 --trials 2`.
+
 ---
+
 
 ## The problem in one picture
 
@@ -90,17 +109,17 @@ Phase 2 without Phase 1 is a big kernel drop into an unmeasured fused path. **Do
 
 ### 2.2 External product / CMUX as GPU stages
 
-- Optional fusion: gadget decompose + EP in one or few kernels per CMUX.
+- **Landed 2026-08-13:** CPU gadget decompose + one `helut_ggsw_external_product` launch per CMUX (all ℓ levels, k=1). Cache key `(device, N, ℓ)`.
 - Still scheduled in Phase‑1 tiles so depth and memory stay bounded.
 
-**Bar:** Metal micro *N*=1024 wall competitive with CPU SING order-of-magnitude story (exact target TBD after Phase‑1 baseline); memory envelope published.
+**Bar (met):** Metal micro *N*=1024 **1.043 s/BR** (gpu-dominated); boolean SING **25.1 s / 8** vs CPU SING ~52 s. Schoolbook arithmetic still inside the kernel.
 
 ### 2.3 Persistent param packs
 
-- BK upload once; tile executables + kernels bound to param id.
-- Netlist path: INIT CSE + kernel cache + topo schedule (step 10l lineage).
+- **Landed 2026-08-13:** `helut_blind_rotate_tile` — ACC + BK on GPU; one threadgroup of *N* runs a CMUX tile (rotate, gadget, EP, add). BK fingerprint skips re-upload on later BRs. Fallback: per-CMUX host EP if `maxTotalThreadsPerThreadgroup < N`.
+- One-tile (*W*=1024) ≡ 16-tile (*W*=64) wall at *N*=1024: remaining time is schoolbook ALU/mem, not launch.
 
-**Bar:** Multi-LUT encrypted Metal SING (adder / tree) with compile-once / run-many profile in `REPRODUCE.md`.
+**Bar (met):** Metal micro *N*=1024 **0.519 s/BR**; boolean SING **12.2 s / 8**. Compile-once / run-many: second BR encode=0. NTT still required for Phase 2 exit.
 
 ### Phase 2 non-goals
 
@@ -122,7 +141,7 @@ Schoolbook expansion **gone** from the hot Metal BR path; Phase‑1 tiles still 
 | Constant CSE | **Required** | Keeps glue graphs tiny |
 | Executable cache | **Required** | Caches glue + kernel binds |
 | Schoolbook-in-MPSGraph | Tolerated (bounded) | **Removed** from hot path |
-| Metal NTT / poly-mul | Not yet | **Required** |
+| Metal NTT / poly-mul | Not yet (schoolbook in 2.1/2.2 kernels) | **Required** for Phase 2 exit |
 | Parallel independent BRs | Optional (multi-LUT) | Natural once kernels exist |
 
 **Punchline:** Phase 1 makes encoding *finish*; Phase 2 makes encoding *irrelevant*. Together they are the SoftBus-native torus compiler — staged IR + ring kernels + cached executables — instead of a single schoolbook megagraph hoping the GPU will eventually appear.
@@ -135,6 +154,8 @@ Schoolbook expansion **gone** from the hot Metal BR path; Phase‑1 tiles still 
 2. CSE constants; retune *W*; hit *N*=1024 micro PASS/FAIL.  
 3. Executable cache; publish cold/hot ratio.  
 4. Poly-mul Metal kernel behind a flag; equiv vs CPU.  
-5. Flip default hot path; keep schoolbook tile as `--metal-br-schoolbook` fallback.
+5. Flip default hot path; keep schoolbook tile as `--metal-br-schoolbook` fallback.  
+6. **Fused EP kernel (2.2) — done.**  
+7. **GPU-resident BR tile (2.3) — done.** Next: NTT poly-mul (schoolbook still ~0.5 s/BR).
 
 When a step graduates, add a **C** row (or close **H3**) and a reproduce command — then it may enter public prose.

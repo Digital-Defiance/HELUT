@@ -164,6 +164,7 @@ func runHelutBench() {
 
 /// Encrypted packed/GLWE netlist: GGSW PBS / blind-rotate per `$lut`.
 private func runEncryptedNetlistBench() {
+    setbuf(stdout, nil)
     let path = resolveBenchNetlistPath()
     let degree = intFlag("--degree") ?? 8
     let sing = CommandLine.arguments.contains("--sing")
@@ -205,6 +206,11 @@ private func runEncryptedNetlistBench() {
     }
     print("")
 
+    MetalBRControl.progress = { line in
+        print(line)
+        fflush(stdout)
+    }
+
     struct EncryptedMetric {
         var label: String
         var rows: Int
@@ -221,8 +227,22 @@ private func runEncryptedNetlistBench() {
         if metalNetlistOnly {
             return label.contains("metal-netlist")
         }
-        guard let pathFilter else { return true }
-        return pathFilter.split(separator: ",").contains { label.contains($0.trimmingCharacters(in: .whitespaces)) }
+        guard let pathFilter else {
+            // Fused whole-netlist graph hangs at N≳256 unless tiled-kernel lowering
+            // (evaluateTopoNetlistTiledKernel). Still opt-in via --metal-netlist-only.
+            return !label.contains("metal-netlist")
+        }
+        return pathFilter.split(separator: ",").contains { raw in
+            let token = raw.trimmingCharacters(in: .whitespaces)
+            if token.isEmpty { return false }
+            if token == "blind-rotate-metal" || label.contains("metal-netlist") {
+                // Do not let "blind-rotate-metal" substring-match the netlist path.
+                if token == "blind-rotate-metal" {
+                    return label.contains("blind-rotate-metal") && !label.contains("netlist")
+                }
+            }
+            return label.contains(token)
+        }
     }
 
     func runAll(
@@ -339,6 +359,15 @@ private func runEncryptedNetlistBench() {
                   let queue = device.makeCommandQueue() {
             if !metalNetlistOnly {
                 try runAll(
+                    label: "blind-rotate-metal public-ms boolean",
+                    params: .booleanPublicMS(degree: degree),
+                    backend: .blindRotateMetal,
+                    wireRefresh: .publicMS,
+                    seed: 0xE122,
+                    device: device,
+                    queue: queue
+                )
+                try runAll(
                     label: "blind-rotate-metal public-ms crypto",
                     params: .cryptoPublicMS(degree: degree),
                     backend: .blindRotateMetal,
@@ -348,15 +377,17 @@ private func runEncryptedNetlistBench() {
                     queue: queue
                 )
             }
-            try runAll(
-                label: "blind-rotate-metal-netlist public-ms boolean",
-                params: .booleanPublicMS(degree: degree),
-                backend: .blindRotateMetalNetlist,
-                wireRefresh: .publicMS,
-                seed: 0xE121,
-                device: device,
-                queue: queue
-            )
+            if metalNetlistOnly {
+                try runAll(
+                    label: "blind-rotate-metal-netlist public-ms boolean",
+                    params: .booleanPublicMS(degree: degree),
+                    backend: .blindRotateMetalNetlist,
+                    wireRefresh: .publicMS,
+                    seed: 0xE121,
+                    device: device,
+                    queue: queue
+                )
+            }
         } else {
             print("ENCRYPTED EQUIV (blind-rotate-metal)")
             print("  result          SKIP (no Metal)")
@@ -923,8 +954,24 @@ func runEncryptedMicrobench() {
     let degree = intFlag("--degree") ?? 1024
     let trials = intFlag("--trials") ?? 3
     let warmup = intFlag("--warmup", allowZero: true) ?? 1
+    let tileWidthFlag = intFlag("--metal-br-tile")
+    let tileWidth = tileWidthFlag ?? MetalBRControl.defaultTileWidth
+    let forceFused = CommandLine.arguments.contains("--metal-br-fused")
     precondition(degree >= 2 && (2 * degree).nonzeroBitCount == 1, "2N must be power of two")
     precondition((2 * degree) <= 4096, "2N ≤ 4096 for binary X^p")
+
+    MetalBRControl.defaultTileWidth = tileWidth
+    if forceFused {
+        MetalBRControl.overrideLowering = .fused
+    } else if tileWidthFlag != nil {
+        MetalBRControl.overrideLowering = .tiledKernel
+    } else {
+        MetalBRControl.overrideLowering = nil
+    }
+    MetalBRControl.progress = { line in
+        print(line)
+        fflush(stdout)
+    }
 
     guard let device = MTLCreateSystemDefaultDevice(),
           let queue = device.makeCommandQueue() else {
@@ -939,6 +986,9 @@ func runEncryptedMicrobench() {
 
     print("HELUT encrypted Metal MICROBENCH")
     print("  N=\(degree)  2N=\(twoN)  trials=\(trials)  warmup=\(warmup)")
+    let autoLower = MetalBRLowering.automatic(degree: degree)
+    let lowering = MetalBRControl.overrideLowering ?? autoLower
+    print("  lowering=\(lowering.rawValue)  tileWidth=\(tileWidth)")
     print("  DynamicRotateCost mux=\(mux) binary=\(bin) speedup≈\(String(format: "%.1f", Double(mux)/Double(bin)))×")
     print("")
 
@@ -1008,7 +1058,12 @@ func runEncryptedMicrobench() {
             let (got, dt) = try oneBR(bit: bit)
             precondition(got == bit, "trial mismatch")
             times.append(dt)
+            let tel = MetalBRControl.lastTelemetry
             print(String(format: "TRIAL  %d          %.3f s  bit=%d PASS", i, dt, bit))
+            print(String(
+                format: "  telemetry       lowering=%@ ring=%@ tiles=%d encode=%.3fs gpu=%.3fs copy=%.3fs",
+                tel.lowering, tel.ring, tel.tileCount, tel.encodeSeconds, tel.gpuRunSeconds, tel.hostRepackSeconds
+            ))
         }
         let mean = times.reduce(0, +) / Double(max(times.count, 1))
         let (hits, misses, entries) = TFHETestPolyCache.shared.stats
