@@ -17,9 +17,9 @@ Track A does **not** need noisy BK to be a valid FHE datapath claim (noiseless B
 
 **Track B receipt (**C28**):** Metal `cryptoPublicMS` full_adder SING @ *N*=128, `--bk-noise 64`, PASS · *B*<sub>bk</sub>≈1.62×10⁶ decodable · `logs/helut-encrypted-n128-metal-sing-crypto-noisy.log`.
 
-To close **H4** for Track A you need an **approximate** gadget (or leave *e*=0). **C29**: widening to \(q=2^{64}\) (etc.) does **not** create exact public-MS covering at *N*=1024 — among practical sizes only {8,128} work for any power-of-two word.
+To close **H4** for Track A you need ε≤2⁻⁶⁴ on a covering gadget at *N*=1024 (approx path: `.crypto`, *g₀*≠*δ* — **C31**/**C32**) or a true approximate public-MS with graded *g₀*≈*δ*. **C29**: widening to \(q=2^{64}\) does **not** create exact public-MS covering at *N*=1024.
 
-**Track B ε vs inject (**C30**):** at *N*=128, inject *B*≤8 prints εlog2=−∞, but residual amplification keeps σ̂ ~10⁴–10⁵. Quote *B*<sub>bk</sub>/σ̂ from the sweep log, not just the printed ε.
+**C32 receipt:** `.crypto` @ *N*=1024 inject *B*=1 → decodable, εlog2≈−32.2 (not −64). `cryptoPublicMS` still undecodable for any *B*≥1.
 
 ## Encrypted multi-LUT correctness envelope (H2)
 

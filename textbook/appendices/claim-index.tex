@@ -43,6 +43,8 @@ ID & Result \\
 \cid{28} & Track~B Metal cryptoPublicMS SING at $N{=}128$ with noisy BK ($B{=}64$) PASS. \\
 \cid{29} & Exact public-MS covering stays $\{8,128\}$ for any power-of-two $q{=}2^{w}$ (Theorem~3$'$). \\
 \cid{30} & Track~B $\varepsilon$ vs inject $B$ at $N{=}128$: printed $\varepsilon$ OK at small $B$; $\hat\sigma$ still $\sim 10^{4}$--$10^{5}$. \\
+\cid{31} & Incomplete public-MS gap at $N{=}1024$: uncoveredBits$=10$; approx candidate $=$\texttt{.crypto}. \\
+\cid{32} & Track~A approx: \texttt{.crypto} inject $B{=}1$ at $N{=}1024$ decodable $\varepsilon\log_2\approx-32.2$ (not $-64$). \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -58,7 +60,7 @@ ID & Asterisk \\
 \hid{1} & \cid{23} filled JSON. Production $|\Delta|=4.5$; divergences are core-SVP vs Cost \texttt{rop}. \\
 \hid{2} & \textbf{Closed} 2026-08-12 ($Z_{2N}$ pack). Kept as history. \\
 \hid{3} & \cid{20}/\cid{21} SING bars met; serial NTT SING still loses vs persist. \\
-\hid{4} & Track~B: \cid{28}/\cid{30}. Track~A $N{=}1024$ still $e{=}0$; \cid{29} kills wider-limb unlock. \\
+\hid{4} & \cid{28}--\cid{32}: Track~B Metal closed; Track~A approx candidate $\varepsilon\approx 2^{-32}$ not $2^{-64}$. \\
 \hid{5} & \texttt{*PublicMS} gadgets ($g_0=\delta$): on-lattice intent, not a closer of old \hid{2}. \\
 \hid{6} & TensorLUT / quarantine vs campaign: parallel research, not P1030680 PT. \\
 \hid{7} & Catalog / Regenbogen / UEBUNG: negatives graded; middle ring $\neq A$ untested; catalog parked @417, resume \texttt{--bombe-from 418}. \\

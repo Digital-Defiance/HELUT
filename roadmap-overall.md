@@ -34,7 +34,7 @@ claim IDs. Sync living textbook (`\livingepoch`) whenever a **C** / **H** moves.
 | 0.2 | Pillar II next formal | Theorem 1 (**C19**) exists; next: emitter–discrete agreement **or** involution completeness under freeze → new **C** + `TensorLUTFormal` lemma | **done** (**C25** corollary) |
 | 0.3 | Pillar III theoremoid | Upgrade paper §Pillar III from sketch: reciprocity + fail-closed protocol → **C24** `Enigma256Formal` + `directives/enigma256-theorem.md` | **done** (**C24**) |
 | 0.4 | Honest estimator table | Paper hardness table: HELUT vs lattice-estimator (**C23**); print |Δ|>16 anchors; do not quote 176 as estimator cost | **done** (`tab:hardness`) |
-| 0.5 | Pillar I production asterisks | **H4** covering noisy BK at prod-shaped *N* **or** cookbook “demo *N* only”; optional crypto ℓ=2 NTT tile (**H3**) | **split:** Track B **C28**/**C30**; Track A *e*=0; **C29** forbids wider-limb unlock |
+| 0.5 | Pillar I production asterisks | **H4** covering noisy BK at prod-shaped *N* **or** cookbook “demo *N* only”; optional crypto ℓ=2 NTT tile (**H3**) | **split:** Track B **C28**/**C30**; Track A *e*=0 Metal; **C31**/**C32** approx candidate ε≈−32 |
 | 0.6 | Application gallery | ≥3 short apps per pillar pointing at `REPRODUCE.md` | **done** (`application-gallery.md` + site `/apps`); figures optional |
 | 0.7 | Artifact tag | Frozen claim-sheet + log list + `make docs` PDFs | **checklist ready** (`artifact-tag.md`); tag `helut-corpus-C26` awaits commit |
 | 0.8 | Multiples checklist | Tables / metrics / examples vs `research-release.md` minimums | **drafted** in artifact-tag.md; paper table count at tag time |
