@@ -913,10 +913,21 @@ final class TFHESeamTests: XCTestCase {
         XCTAssertTrue(cert.allHold, "\(cert.steps.filter { !$0.holds }.map(\.lemma))")
         cert.assertValid()
         XCTAssertEqual(cert.exactDegrees, [8, 128])
+        XCTAssertEqual(cert.steps.count, 5) // includes C29 power-of-two word obstruction
         XCTAssertFalse(GGSWPublicMSCovering.isExactPublicMSCovering(degree: 1024))
         XCTAssertTrue(GGSWPublicMSCovering.isExactPublicMSCovering(degree: 128))
         let incomplete = GGSWParams.cryptoPublicMS(degree: 1024)
         XCTAssertEqual(incomplete.baseLog * incomplete.levelCount, 22)
+        // C29: widening limb to UInt64 / 128-bit still forbids N=1024 exact public-MS covering.
+        for w in GGSWPublicMSCovering.powerOfTwoWordBits {
+            XCTAssertFalse(GGSWPublicMSCovering.isExactPublicMSCovering(degree: 1024, wordBits: w))
+            XCTAssertEqual(
+                GGSWPublicMSCovering.practicalDegrees.filter {
+                    GGSWPublicMSCovering.isExactPublicMSCovering(degree: $0, wordBits: w)
+                },
+                [8, 128]
+            )
+        }
     }
 
     func testTestPolyInitCacheHits() {

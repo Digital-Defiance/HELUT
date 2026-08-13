@@ -36,9 +36,24 @@ Under the hypotheses on the certificate (\(q=2^{32}\), power-of-two \(N\)):
 `Sources/HELUTCore/GGSWPublicMSCovering.swift`. Reproduce:
 `swift test -c release --filter testGGSWPublicMSCoveringCertificate`.
 
-**What this does not prove.** That no other \((q,N)\) works; that `.crypto`
+**What this does not prove.** That `.crypto`
 (covering, \(g_0\neq\delta\) at *N*=1024) cannot carry tiny noise (see **C26** ε fail);
 that HELUT must stay at *N*=1024 forever.
+
+---
+
+## Theorem 3′ (power-of-two word, **C29**)
+
+Same setup with torus word \(w\) (so \(q=2^w\)): exact public-MS covering
+iff \((1+\log_2 N)\mid w\).
+
+When \(w\) is itself a power of two, every positive divisor of \(w\) is a
+power of two, so \(1+\log_2 N=2^a\) and \(N=2^{2^a-1}\). Among
+\(N\in\{8,\ldots,2048\}\) that yields **only** \(\{8,128\}\) — for
+**every** \(w\in\{16,32,64,128\}\). In particular **widening the limb to
+UInt64 does not unlock *N*=1024** (baseLog=11 never divides a power of two).
+
+Machine check: lemma `powerOfTwoWordObstruction` in the same certificate test as **C27**.
 
 ---
 
@@ -46,19 +61,19 @@ that HELUT must stay at *N*=1024 forever.
 
 | Path | *N* | Covering? | \(g_0=\delta\)? | Noisy BK |
 |------|-----|-----------|-----------------|----------|
-| Covering public-MS | 8, 128 | yes | yes | **C22** measured; **C28** Metal SING + inject PASS |
+| Covering public-MS | 8, 128 | yes | yes | **C22** measured; **C28** Metal SING + inject PASS; **C30** ε vs *B* |
 | `cryptoPublicMS` | 1024 | **no** | yes | **C26** inject blows up |
 | `.crypto` | 1024 | yes | **no** | **C26** *B*=4 ∞-norm OK, ε≪64-bit |
 
-**Two tracks:** throughput *N*=1024 stays *e*=0 BK (Track A). Noisy depth lives at covering *N*∈{8,128} (Track B). Closing Track A needs a new \((q,N)\) or approximate gadget.
+**Two tracks:** throughput *N*=1024 stays *e*=0 BK (Track A). Noisy depth lives at covering *N*∈{8,128} (Track B). Closing Track A needs an **approximate** gadget — not a new power-of-two \(q\) (**C29**).
 ---
 
 ## Five-cell test
 
 | Cell | Artifact |
 |------|----------|
-| Proof | Theorem 3 + `GGSWPublicMSCoveringCertificate` |
-| Table | Exact degrees {8,128} vs practical list; H4 path table above |
-| Metric | `baseLog·ℓ == 32` iff exact; *N*=1024 product = 22 |
-| Examples | *N*=128 exact; *N*=1024 not; matches `GGSWParams.cryptoPublicMS` |
-| Application | Honest production cookbook: do not claim covering noisy BK at *N*=1024 under \(q=2^{32}\) |
+| Proof | Theorem 3 + 3′ + `GGSWPublicMSCoveringCertificate` |
+| Table | Exact degrees {8,128} vs practical list for *w*∈{16,32,64,128}; H4 path table above |
+| Metric | `baseLog·ℓ == w` iff exact; *N*=1024 product under *w*=32 is 22 |
+| Examples | *N*=128 exact; *N*=1024 not for any listed *w*; matches `GGSWParams.cryptoPublicMS` |
+| Application | Honest production cookbook: do not claim covering noisy BK at *N*=1024 under any \(q=2^{2^k}\) |
