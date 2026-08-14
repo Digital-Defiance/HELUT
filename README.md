@@ -181,6 +181,7 @@ PRD*.md / phase-*.md   Design progression
 - **Not claimed:** that calibrated core-SVP estimates replace a lattice-estimator run, or that trivial Metal graphs are FHE. (Decision-LWE binding + ε-cert: `TFHELWEHardnessCertificate` / `TFHEAsymptoticSecurityCertificate`.)
 - **Enigma host attack:** real M4 decrypt / crib-drag / stecker / campaign ladder; P1030680 remains historically unbroken — catalog rings **suspended** at originalIndex 417 (resume `--bombe-from 418`).
 - **CLI:** `--bench` for general netlist clocking; day-to-day UX still Enigma-first for campaign tools.
+- **Why this is public:** [`OPPENHEIMER.md`](OPPENHEIMER.md) (author's disclosure note — not a claim sheet).
 
 ## License
 
