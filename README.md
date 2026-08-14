@@ -32,6 +32,10 @@ Needs `latexmk` (MacTeX / TeX Live) and `pandoc`. Aux files land under `build/`.
 [`MuleinLabs/helut-videos`](https://github.com/JessicaMulein/MuleinLabs/tree/main/helut-videos)
 (local: `/Volumes/Code/MuleinLabs/helut-videos`).
 
+# A Note on Pronunciation
+
+I will settle one future debate early. As an acronym for Homomorphic Edge Look-Up Tensors, it probably 'should' be an unpronounceable sequence of letters. However, in my head, it has taken on a distinctly Scandinavian bent. It is pronounced hell-yoot (think HELÜT). If anything, "H-E LUT" is acceptable. Settle accordingly.
+
 ## Requirements
 
 - macOS 14+
