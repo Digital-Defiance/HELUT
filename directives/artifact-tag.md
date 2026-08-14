@@ -2,8 +2,8 @@
 
 Freeze before a public tag. Not a claim — a release packing list.
 
-**Current tag:** `helut-corpus-C54` (epoch 2026-08-14 / C54)  
-**Semver:** none yet — Homebrew/`README` say `--HEAD` until `0.1.0` exists.
+**Current corpus tag:** `helut-corpus-C54` (epoch 2026-08-14 / C54)  
+**Semver:** `0.1.0` (alias `helut-lib-0.1.0`) — Homebrew `brew install helut`; SPM `from: "0.1.0"`.
 
 ## Must ship
 

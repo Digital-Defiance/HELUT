@@ -111,7 +111,7 @@ Canonical plan: [`directives/packaging-roadmap.md`](directives/packaging-roadmap
 | P1 | SPM split | `HELUTNetlist` / `TensorLUT` / `SoftBus` / `Bombe` targets; single `helut` still works | **interim** `HELUTToolKit` |
 | P2 | Binaries | `helut-bench`, `helut-compile`, `helut-e256`, `helut-bombe` + umbrella `helut` | **done** (tensorlut still via e256) |
 | P3 | Apps/ | Template app; gallery points at Apps; third-party can add without editing Core | pending |
-| P4 | Docs / semver | DocC for Core; `helut-lib-0.x` tags separate from `helut-corpus-C*` | Homebrew in `digital-defiance/homebrew-tap`; SPM tag pending |
+| P4 | Docs / semver | DocC for Core; `helut-lib-0.x` tags separate from `helut-corpus-C*` | Homebrew stable **0.1.0**; SPM `from: "0.1.0"`; DocC still pending |
 
 Doctrine: campaign is an **app**; claim-sheet stays one; reproduce commands migrate to
 named binaries with a shim epoch so old scripts do not die overnight.

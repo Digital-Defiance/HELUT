@@ -9,9 +9,8 @@ Homebrew keg of headers.
 
 ```bash
 brew tap digital-defiance/homebrew-tap
-brew install helut                 # needs tag 0.1.0 + real sha256 in the formula
-# until the first stable tag is published:
-brew install --HEAD helut
+brew install helut                 # stable 0.1.0
+brew install --HEAD helut          # tip of main
 ```
 
 Requires **macOS 14+**, **Apple Silicon**, and Xcode / CLT with Swift 6.3+.
@@ -48,7 +47,7 @@ Tag `0.1.0` is the API / CLI semver (optional alias `helut-lib-0.1.0`). Corpus t
 Formula path: `/Volumes/Code/homebrew-tap/Formula/helut.rb` (not this repo).
 
 ```bash
-# In HELUT, after tagging and pushing 0.1.0:
-./Scripts/homebrew-bump.sh 0.1.0
+# After tagging and pushing a new semver:
+./Scripts/homebrew-bump.sh 0.1.1
 # Paste sha256 into homebrew-tap/Formula/helut.rb, commit + push the tap.
 ```

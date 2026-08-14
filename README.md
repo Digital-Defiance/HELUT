@@ -10,8 +10,8 @@ The point is not “Enigma only.” Enigma is one application. The stack is a **
 | **CLI tools** | `helut-bench`, `helut-e256`, `helut-bombe`, `helut-compile`, umbrella `helut` |
 | **Host oracles** | Boolean-faithful Enigma/M4 for cryptanalysis and validation (campaign path) |
 
-**Homebrew (CLIs):** see [`HOMEBREW.md`](HOMEBREW.md) — `brew tap digital-defiance/homebrew-tap && brew install --HEAD helut`.  
-**Library consumers:** SPM — use a git revision or a published tag; `from: "0.1.0"` only after that tag exists. Until then: `brew install --HEAD helut` ([`HOMEBREW.md`](HOMEBREW.md)). Packaging plan: [`directives/packaging-roadmap.md`](directives/packaging-roadmap.md).
+**Homebrew (CLIs):** see [`HOMEBREW.md`](HOMEBREW.md) — `brew tap digital-defiance/homebrew-tap && brew install helut`. Tip of `main`: `brew install --HEAD helut`.  
+**Library consumers:** SPM `from: "0.1.0"` (tag `0.1.0`; alias `helut-lib-0.1.0`). Corpus freeze remains `helut-corpus-C54`. Packaging plan: [`directives/packaging-roadmap.md`](directives/packaging-roadmap.md).
 
 The **FHE path** (`--lut-backend encrypted` / `--bench-encrypted`) evaluates LWE/GLWE samples with GGSW bootstrap keys (blind-rotate per Yosys `$lut`). SING means encrypted bits match the clear netlist. Covering-gadget noisy BK at production *N*=1024 is **C52**–**C54** (stride-*k*, not native *δ*, not `cryptoPublicMS`). Hardness: calibrated core-SVP ≈175.7 bits at prod-n1024-s16; Sage estimator **180.2** on that row (**C23**). **Do not quote “176-bit secure.”** Four of eight calibration anchors disagree with the estimator by >16 bits (**H1**). Evidence law: [`directives/research-release.md`](directives/research-release.md). Inventory: [`directives/claim-sheet.md`](directives/claim-sheet.md). Reproduce: [`REPRODUCE.md`](REPRODUCE.md). Trajectory: [`directives/research-trajectory.md`](directives/research-trajectory.md).
 
@@ -184,7 +184,7 @@ PRD*.md / phase-*.md   Design progression
 - **Oracle path (not FHE):** trivial torus + multilinear / trivial PBS. PicoRV32 cleartext ~1.3 s compile / ~173 ms tick; Enigma M3 Metal≡cleartext at *N*=1024 **PASS**.
 - **Hardness:** Decision-LWE binding + ε-certs exist. Calibrated bits ≠ lattice-estimator Cost `rop` on every row (**H1**, **C23**). Trivial Metal graphs are not FHE.
 - **Enigma host attack:** real M4 decrypt / crib-drag / stecker / campaign ladder. **P1030680 is not decrypted.** Catalog rings parked at originalIndex 417 (resume `--bombe-from 418`). Campaign fitness is cleartext Metal, not encrypted ms/row.
-- **CLI:** `--bench` clocks netlists; campaign tools are Enigma-first. Homebrew: `--HEAD` until a stable tag.
+- **CLI:** `--bench` clocks netlists; campaign tools are Enigma-first. Homebrew: `brew install helut` (semver **0.1.0**); `--HEAD` for tip of `main`.
 - **Why this is public:** [`OPPENHEIMER.md`](OPPENHEIMER.md) (author's note — not a **C** row).
 - **How this was built:** [`AI_DISCLOSURE.md`](AI_DISCLOSURE.md) (architect vs engine — not a **C** row).
 
