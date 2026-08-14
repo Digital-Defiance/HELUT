@@ -200,7 +200,39 @@ Does not close $N{=}1024$ at native $k{=}1$. Headroom is $\delta=q/(2N)$.
 \end{lstlisting}
 
 $k{=}4$ Metal SING PASS; 4-trial $\varepsilon\log_2\approx-43$ (not $-64$).
-$k{=}8$ meets $\varepsilon$; public-ms SING fails.
+$k{=}8$ meets $\varepsilon$; public-ms SING fails under $/k\delta$ refresh.
+
+\section{Stride-$k$ public-MS covering-b1 (\cid{52})}
+
+\begin{lstlisting}
+.build/release/helut --measure-bk-noise --degree 1024 --trials 8 \
+  --bk-noise-sigma 128 --covering-base-log 1 --boolean-scale-mul 7
+.build/release/helut --bench netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 2 --bk-noise-sigma 128 \
+  --paths covering-b1 --boolean-scale-mul 7
+\end{lstlisting}
+
+Expect 8-trial $\varepsilon\log_2\approx-170$; Metal secret + public-ms PASS.
+
+\section{Sequential covering counter (\cid{53})}
+
+\begin{lstlisting}
+.build/release/helut --bench counter_netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 2 --bk-noise-sigma 128 \
+  --paths covering-b1 --boolean-scale-mul 7
+\end{lstlisting}
+
+Same encoding as \cid{52}. Expect Metal secret + public-ms PASS. Not PicoRV.
+
+\section{Sequential covering toy ISA (\cid{54})}
+
+\begin{lstlisting}
+.build/release/helut --bench toy_isa_netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 2 --bk-noise-sigma 128 \
+  --paths covering-b1 --boolean-scale-mul 7
+\end{lstlisting}
+
+Expect Metal secret + public-ms PASS. Not PicoRV.
 
 \section{Track B Metal SING with noisy BK (\cid{28})}
 

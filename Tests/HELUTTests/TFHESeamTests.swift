@@ -1356,6 +1356,59 @@ final class TFHESeamTests: XCTestCase {
         }
     }
 
+    /// kδ wires live in `{0,k}`; native-δ public MS + stride-k test poly chains XOR.
+    func testStrideKPublicMSChainedXOR() {
+        let degree = 32
+        let k = 3
+        let params = GGSWParams.booleanTrivial(degree: degree)
+        let secret = TFHESecretKey.random(params: params.tfhe, seed: 0xC4C1)
+        var rng = LCG32(state: 0xC4C2)
+        let bk = bootstrapKey(secret: secret, params: params, rng: &rng)
+        let twoN = 2 * degree
+        let scale = rotationBooleanScale(polynomialDegree: degree, mul: k)
+        let xorTable: [UInt32] = [0, 1, 1, 0]
+        for x in 0...1 {
+            for y in 0...1 {
+                for z in 0...1 {
+                    let lx = encryptLWERotationNative(
+                        message: encodeRotationNativeBit(UInt32(x), k: k),
+                        secret: secret.lweSecret, twoN: twoN, rng: &rng
+                    )
+                    let ly = encryptLWERotationNative(
+                        message: encodeRotationNativeBit(UInt32(y), k: k),
+                        secret: secret.lweSecret, twoN: twoN, rng: &rng
+                    )
+                    let mid = evaluateLUTBlindRotate(
+                        truthTable: xorTable, inputs: [lx, ly], bootstrapKey: bk, scale: scale
+                    )
+                    XCTAssertEqual(
+                        decodeRotationBoolean(decryptLWE(mid, secret: secret), scale: scale),
+                        UInt32(x ^ y)
+                    )
+                    let midNative = publicRefreshBit(mid, twoN: twoN, scale: scale)
+                    XCTAssertEqual(
+                        decodeRotationNativeBit(
+                            decryptLWE(midNative, secret: secret), twoN: twoN, k: k
+                        ),
+                        UInt32(x ^ y)
+                    )
+                    let lz = encryptLWERotationNative(
+                        message: encodeRotationNativeBit(UInt32(z), k: k),
+                        secret: secret.lweSecret, twoN: twoN, rng: &rng
+                    )
+                    let out = evaluateLUTBlindRotate(
+                        truthTable: xorTable, inputs: [midNative, lz], bootstrapKey: bk, scale: scale
+                    )
+                    XCTAssertEqual(
+                        decodeRotationBoolean(decryptLWE(out, secret: secret), scale: scale),
+                        UInt32(x ^ y ^ z),
+                        "stride-k public-MS chained XOR x=\(x) y=\(y) z=\(z)"
+                    )
+                }
+            }
+        }
+    }
+
     func testRotationNativePackStaysInZ2N() {
         // Regression: arity-3 packing at N≥256 used to overflow rotationPower's
         // 256·2N headroom and modulus-switch by mistake (full_adder cout failures).

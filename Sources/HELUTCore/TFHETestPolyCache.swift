@@ -24,7 +24,9 @@ package struct TFHELUTInitKey: Hashable, Sendable {
     }
 }
 
-/// Host-side cache: INIT → degree-N test polynomial (`T[addr]=bit·δ`).
+/// Host-side cache: INIT → degree-N test polynomial.
+/// Native `k=1`: `T[addr]=bit·δ`. Boolean `kδ`: `T[k·addr]=bit·kδ` so public-MS
+/// wires in `{0,k}` rotate onto the LUT slot.
 package final class TFHETestPolyCache: @unchecked Sendable {
     package static let shared = TFHETestPolyCache()
 
@@ -75,8 +77,14 @@ package final class TFHETestPolyCache: @unchecked Sendable {
         lock.unlock()
 
         var poly = [UInt32](repeating: 0, count: degree)
+        let k = booleanScaleFactor(polynomialDegree: degree, scale: scale)
+        let last = (truthTable.count - 1) * k
+        precondition(
+            last < degree,
+            "k-stride test poly needs k*(2^arity-1) < N (k=\(k) aritySlots=\(truthTable.count) N=\(degree))"
+        )
         for (addr, bit) in truthTable.enumerated() {
-            poly[addr] = bit &* scale
+            poly[addr * k] = bit &* scale
         }
         lock.lock()
         store[key] = poly

@@ -74,6 +74,7 @@ package final class EncryptedNetlistSimulator {
     private let commandQueue: MTLCommandQueue?
     private let twoN: Int
     private let scale: UInt32
+    private let booleanK: Int
     /// Encrypted DFF Q (rotation-native / publicMS domain). Host clock; clk is not a torus wire.
     private var encryptedQ: [Int: LWECiphertext] = [:]
 
@@ -119,6 +120,7 @@ package final class EncryptedNetlistSimulator {
         self.rng = LCG32(state: seed == 0 ? 1 : seed)
         self.twoN = 2 * n
         self.scale = rotationBooleanScale(polynomialDegree: n, mul: booleanScaleMul)
+        self.booleanK = booleanScaleMul
         if let noiseBudget {
             self.noiseBudget = noiseBudget
         } else {
@@ -201,7 +203,7 @@ package final class EncryptedNetlistSimulator {
         out.reserveCapacity(encryptedQ.count)
         for (wire, ct) in encryptedQ {
             let phase = decryptLWE(ct, secret: secret)
-            out[wire] = UInt8(phase & 1)
+            out[wire] = UInt8(decodeRotationNativeBit(phase, twoN: twoN, k: booleanK))
         }
         return out
     }
@@ -356,7 +358,7 @@ package final class EncryptedNetlistSimulator {
                         }
                     } else {
                         wires[wire] = encryptLWERotationNative(
-                            message: UInt32(bits[index]),
+                            message: encodeRotationNativeBit(UInt32(bits[index]), k: booleanK),
                             secret: secret.lweSecret,
                             twoN: twoN,
                             rng: &rng
@@ -441,7 +443,7 @@ package final class EncryptedNetlistSimulator {
                     let phase = decryptLWE(extracted, secret: secret)
                     let bit = decodeRotationBoolean(phase, scale: scale)
                     wires[lut.yWire] = encryptLWERotationNative(
-                        message: bit,
+                        message: encodeRotationNativeBit(bit, k: booleanK),
                         secret: secret.lweSecret,
                         twoN: twoN,
                         rng: &rng
@@ -478,8 +480,8 @@ package final class EncryptedNetlistSimulator {
                     if wireRefresh == .none {
                         return UInt8(decodeRotationBoolean(phase, scale: scale))
                     }
-                    // `.secret` and `.publicMS` leave rotation-native / Z_{2N} bits.
-                    return UInt8(phase & 1)
+                    // `.secret` and `.publicMS` leave rotation-native / Z_{2N} `{0,k}` bits.
+                    return UInt8(decodeRotationNativeBit(phase, twoN: twoN, k: booleanK))
                 }
             }
         }
@@ -571,7 +573,7 @@ package final class EncryptedNetlistSimulator {
                         fatalError("Missing encrypted wire \(wire) for output \(port)")
                     }
                     let phase = decryptLWE(ct, secret: secret)
-                    return UInt8(phase & 1)
+                    return UInt8(decodeRotationNativeBit(phase, twoN: twoN, k: booleanK))
                 }
             }
         }
@@ -620,7 +622,7 @@ package final class EncryptedNetlistSimulator {
                     qNext = qCur
                 } else if resetAsserted {
                     qNext = encryptLWERotationNative(
-                        message: resetValue,
+                        message: encodeRotationNativeBit(resetValue, k: booleanK),
                         secret: secret.lweSecret,
                         twoN: twoN,
                         rng: &rng
@@ -630,7 +632,7 @@ package final class EncryptedNetlistSimulator {
                 }
             } else if resetAsserted {
                 qNext = encryptLWERotationNative(
-                    message: resetValue,
+                    message: encodeRotationNativeBit(resetValue, k: booleanK),
                     secret: secret.lweSecret,
                     twoN: twoN,
                     rng: &rng
@@ -651,7 +653,7 @@ package final class EncryptedNetlistSimulator {
         if wireRefresh == .none {
             return UInt8(decodeRotationBoolean(phase, scale: scale))
         }
-        return UInt8(phase & 1)
+        return UInt8(decodeRotationNativeBit(phase, twoN: twoN, k: booleanK))
     }
 
     /// LUT3 (d, q, e): Y = enabled ? d : q.
@@ -681,7 +683,7 @@ package final class EncryptedNetlistSimulator {
             let phase = decryptLWE(extracted, secret: secret)
             let bit = decodeRotationBoolean(phase, scale: scale)
             return encryptLWERotationNative(
-                message: bit,
+                message: encodeRotationNativeBit(bit, k: booleanK),
                 secret: secret.lweSecret,
                 twoN: twoN,
                 rng: &rng

@@ -109,6 +109,14 @@ Receipts: \corpus{logs/helut-noisy-bk-covering-b1-n1024-B32.log},
 \corpus{logs/helut-encrypted-n1024-metal-sing-covering-b1-noisy-B32.log}.
 Finest covering does \emph{not} unlock $B{=}128$ ($\varepsilon\approx -0.6$).}
 
+\reproduced{C52}{Stride-$k$ encoding: public-MS is native-$\delta$ (wires in $\{0,k\}$),
+test poly $T[k\cdot\mathrm{addr}]$. Covering-b1 at $N{=}1024$, torus $\sigma{=}128$,
+$k{=}7$: 8-trial $\varepsilon\log_2\approx -170$; Metal secret $44.08\,\mathrm{s}/2$
+and public-ms $29.40\,\mathrm{s}/2$ both PASS.
+Receipts: \corpus{logs/helut-noisy-bk-covering-b1-gauss-sigma128-n1024-k7-stride-t8.log},
+\corpus{logs/helut-encrypted-n1024-metal-sing-covering-b1-gauss-sigma128-k7-stride.log}.
+Native $k{=}1$ remains \cid{37}; \texttt{cryptoPublicMS} remains \cid{26}.}
+
 \section{Calibration is not estimation}
 
 \begin{center}

@@ -982,15 +982,18 @@ package enum MetalGGSW {
         name: String
     ) -> LWETensors {
         precondition(scale > 1)
+        let n = twoN / 2
+        let step = rotationScale(polynomialDegree: n)
+        precondition(scale % step == 0)
         let scaleA = constantPacked(
             graph: graph,
-            values: [UInt32](repeating: scale, count: lweDimension),
+            values: [UInt32](repeating: step, count: lweDimension),
             batch: batch,
             width: lweDimension,
             name: "\(name)_sa"
         )
         let scaleB = constantPacked(
-            graph: graph, values: [scale], batch: batch, width: 1, name: "\(name)_sb"
+            graph: graph, values: [step], batch: batch, width: 1, name: "\(name)_sb"
         )
         let aDiv = graph.division(lwe.a, scaleA, name: "\(name)_ad")
         let bDiv = graph.division(lwe.b, scaleB, name: "\(name)_bd")

@@ -254,7 +254,7 @@ private func runEncryptedNetlistBench() {
         print("  BK noise inject B=\(bkNoise.bound) (measured identity residual → B_bk)")
     }
     if booleanScaleMul > 1 {
-        print("  boolean scale kδ  k=\(booleanScaleMul)  (decode/test-poly spacing \(booleanScaleMul)×q/(2N))")
+        print("  boolean scale kδ  k=\(booleanScaleMul)  (test-poly stride \(booleanScaleMul); public-MS native δ)")
     }
     if binCost >= 0 {
         print("  DynamicRotateCost mux=\(muxCost) binary=\(binCost) speedup≈\(String(format: "%.1f", Double(muxCost) / Double(max(binCost, 1))))×")

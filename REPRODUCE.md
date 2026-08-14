@@ -294,7 +294,43 @@ Expect: *N*=256 εlog2≈−2109; *N*=512 εlog2≈−76.6 (4 trials); Metal PAS
   | tee logs/helut-encrypted-n1024-metal-sing-covering-b1-gauss-sigma128-k4.log
 ```
 
-Expect: *k*=4 Metal SING PASS; 4-trial εlog2≈−43 (not −64). Sweep: `logs/helut-noisy-bk-covering-b1-gauss-sigma128-n1024-kdelta.log`. *k*=8 meets ε; public-ms SING fails.
+Expect: *k*=4 Metal SING PASS; 4-trial εlog2≈−43 (not −64). Sweep: `logs/helut-noisy-bk-covering-b1-gauss-sigma128-n1024-kdelta.log`. *k*=8 meets ε; public-ms SING fails under `/kδ` refresh (**C43**).
+
+## Stride-k public-MS at N=1024 covering-b1 σ=128 (C52)
+
+```bash
+.build/release/helut --measure-bk-noise --degree 1024 --trials 8 \
+  --bk-noise-sigma 128 --covering-base-log 1 --boolean-scale-mul 7 \
+  | tee logs/helut-noisy-bk-covering-b1-gauss-sigma128-n1024-k7-stride-t8.log
+.build/release/helut --bench netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 2 --bk-noise-sigma 128 \
+  --paths covering-b1 --boolean-scale-mul 7 \
+  | tee logs/helut-encrypted-n1024-metal-sing-covering-b1-gauss-sigma128-k7-stride.log
+```
+
+Expect: 8-trial εlog2≈−170 (decodable); Metal secret + public-ms **PASS**. Native *k*=1 still **C37**. Not `cryptoPublicMS`.
+
+## Sequential covering counter at N=1024 σ=128 k=7 (C53)
+
+```bash
+.build/release/helut --bench counter_netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 2 --bk-noise-sigma 128 \
+  --paths covering-b1 --boolean-scale-mul 7 \
+  | tee logs/helut-encrypted-n1024-metal-sing-counter-covering-b1-gauss-sigma128-k7-stride.log
+```
+
+Expect Metal secret + public-ms **PASS** (~110 s / ~68 s per 2 rows). Same encoding as **C52**. Not PicoRV.
+
+## Sequential covering toy ISA at N=1024 σ=128 k=7 (C54)
+
+```bash
+.build/release/helut --bench toy_isa_netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 2 --bk-noise-sigma 128 \
+  --paths covering-b1 --boolean-scale-mul 7 \
+  | tee logs/helut-encrypted-n1024-metal-sing-toy-isa-covering-b1-gauss-sigma128-k7-stride.log
+```
+
+Expect Metal secret + public-ms **PASS** (~194 s / ~104 s per 2 rows). Not PicoRV.
 
 ## TensorLUT melt–freeze–snap (C44)
 

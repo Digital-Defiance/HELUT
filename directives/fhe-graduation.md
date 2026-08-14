@@ -12,7 +12,7 @@ shape, batch scaling, and Enigma letter clocks — not as the FHE claim.
 | `TorusBitEncoding` | trivial / packed / encrypted packed; discrete noise | — |
 | `LUTEvaluationBackend` | oracle backends; **`encrypted`** via **`LUTNode.evaluateEncrypted`** Metal BR | — |
 | Inter-LUT refresh | **`publicMS` default** (boolean + crypto via lattice BK); `.secret` / `.none` | — |
-| Noise | Discrete + Gaussian ε; **C43** *k*=4 SING at *N*=1024 σ=128; ε bar not stable; *k*=1 still **C37** | *k*∈(4,8) / public-ms at *k*=8 |
+| Noise | Discrete + Gaussian ε; **C52** *k*=7 stride-*k* covering-b1 σ=128 @ *N*=1024 (ε + Metal SING); *k*=1 still **C37** | native-*δ* torus-scale; `cryptoPublicMS` noisy |
 | Clock | Metal PicoRV NOP-fetch **C51** (demo *N*=8, tiled BR) | Metal *N*=1024 PicoRV; fused sequential metal-netlist |
 | E256 in FHE | Frozen 1-byte scramble Metal SING (**C39**) | Live BRAM / NLFF / full core |
 

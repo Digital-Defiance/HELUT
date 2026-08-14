@@ -17,7 +17,7 @@ Track A does **not** need noisy BK to be a valid FHE datapath claim (noiseless B
 
 **Track B receipt (**C28**):** Metal `cryptoPublicMS` full_adder SING @ *N*=128, `--bk-noise 64`, PASS · *B*<sub>bk</sub>≈1.62×10⁶ decodable · `logs/helut-encrypted-n128-metal-sing-crypto-noisy.log`.
 
-To close **H4** for Track A you need ε≤2⁻⁶⁴ on a covering gadget at *N*=1024 (approx path: `.crypto`, *g₀*≠*δ* — **C31**/**C32**) or a true approximate public-MS with graded *g₀*≈*δ*. **C29**: widening to \(q=2^{64}\) does **not** create exact public-MS covering at *N*=1024.
+**C52** closes **H4** Grade B (covering Track A): *N*=1024 covering-b1, torus σ=128, *k*=7 stride-*k* test poly + native-*δ* public-MS. εlog2≈−170 (8 trials) and Metal SING PASS (secret + public-ms). **C53**/**C54** are the same setting on a host-clocked counter and toy ISA. Native *k*=1 remains **C37**. `cryptoPublicMS` remains **C26**.
 
 **C34:** covering `baseLog=4` @ *N*=1024 inject *B*=1 → σ̂≈2.95×10⁴, asymptotic εlog2≈−913; Metal SING PASS.
 
@@ -27,7 +27,9 @@ To close **H4** for Track A you need ε≤2⁻⁶⁴ on a covering gadget at *N*
 
 **C41:** torus-scale Gaussian σ=128 on covering-b1 **does** meet ε≤2⁻⁶⁴ at *N*=256 (εlog2≈−2109) and *N*=512 (εlog2≈−76.6, 4 trials) with Metal SING PASS at *N*=512. Production *N*=1024 still undecodable at native *k*=1 (**C37**).
 
-**C43:** `--boolean-scale-mul k` sets test-poly/decode spacing *kδ*. At *N*=1024 covering-b1 σ=128: *k*=4 Metal SING PASS but 4-trial εlog2≈−43 (not −64); *k*=8 meets ε but public-ms SING fails. Native *k*=1 unchanged.
+**C43:** `/kδ` public-MS. *k*=4 SING yes / ε unstable; *k*=8 ε yes / public-ms SING fail.
+
+**C52:** public-MS is native *δ* (messages `{0,k}`); test poly `T[k·addr]=bit·kδ`. Same covering-b1 σ=128 at *N*=1024, *k*=7: both bars.
 
 ## Encrypted multi-LUT correctness envelope (H2)
 

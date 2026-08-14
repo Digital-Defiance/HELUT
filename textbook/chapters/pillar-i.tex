@@ -138,8 +138,18 @@ encrypted $\equiv$ clear multi-netlist SING; full\_adder through $N=1024$
 $N{=}1024$ public-ms boolean SING PASS. Not PicoRV32; fused metal-netlist
 and cpu-ggsw remain combinational-only.}
 
+\reproduced{C53}{Same counter under covering-b1 noisy BK, $N{=}1024$,
+torus $\sigma{=}128$, $k{=}7$ stride encoding (\cid{52}): Metal secret
+$110.35\,\mathrm{s}/2$ and public-ms $67.98\,\mathrm{s}/2$ both PASS.
+Receipt: \corpus{logs/helut-encrypted-n1024-metal-sing-counter-covering-b1-gauss-sigma128-k7-stride.log}.}
+
 \reproduced{C40}{Encrypted toy ISA: 4-bit accumulator, \texttt{NOP} or
 \texttt{ADD imm}, $11$ \texttt{\$lut} $+$ $4$ DFFs. Metal $N{=}1024$ SING PASS.}
+
+\reproduced{C54}{Same toy ISA under covering-b1 noisy BK, $N{=}1024$,
+$\sigma{=}128$, $k{=}7$: Metal secret $194.10\,\mathrm{s}/2$ and public-ms
+$104.18\,\mathrm{s}/2$ both PASS.
+Receipt: \corpus{logs/helut-encrypted-n1024-metal-sing-toy-isa-covering-b1-gauss-sigma128-k7-stride.log}.}
 
 \reproduced{C45}{Encrypted PicoRV32: $4785$ \texttt{\$lut} $+$ $1565$ DFFs.
 CPU public-ms boolean output SING PASS at demo $N{=}8$, one host posedge,

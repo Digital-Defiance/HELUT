@@ -73,6 +73,9 @@ ID & Result \emph{(continued)} \\
 \cid{49} & Encrypted PicoRV32 \texttt{addi}+\texttt{sw}: store \texttt{wdata}=1, RAM0=1; $3.79\,\mathrm{s}/48$ @ demo $N{=}8$. Load-back is \cid{50}. \\
 \cid{50} & Encrypted PicoRV32 \texttt{lw} sees stored 1 (NBA xfer); $3.77\,\mathrm{s}/48$ @ demo $N{=}8$. Not Metal PicoRV. \\
 \cid{51} & Metal PicoRV32 NOP-fetch @ demo $N{=}8$: tiled BR, 2 fetches, $63.55\,\mathrm{s}/8$. Not fused netlist / not $N{=}1024$. \\
+\cid{52} & Stride-$k$ public-MS covering-b1 @ $N{=}1024$ $\sigma{=}128$ $k{=}7$: $\varepsilon\log_2\approx-170$ (8 trials) + Metal secret/public-ms SING PASS. Native $k{=}1$ still \cid{37}. \\
+\cid{53} & Sequential covering-b1 counter @ $N{=}1024$ $\sigma{=}128$ $k{=}7$: Metal secret/public-ms SING PASS. Not PicoRV. \\
+\cid{54} & Sequential covering-b1 toy ISA @ $N{=}1024$ $\sigma{=}128$ $k{=}7$: Metal secret/public-ms SING PASS. Not PicoRV. \\
 \end{longtable}
 }
 
@@ -87,7 +90,7 @@ ID & Asterisk \\
 \hid{1} & \cid{23} filled JSON. Production $|\Delta|=4.5$; divergences are core-SVP vs Cost \texttt{rop}. \\
 \hid{2} & \textbf{Closed} 2026-08-12 ($Z_{2N}$ pack). Kept as history. \\
 \hid{3} & \cid{20}/\cid{21} SING bars met; serial NTT SING still loses vs persist. \\
-\hid{4} & \cid{43} $k{=}4$ SING at $N{=}1024$ $\sigma{=}128$; $\varepsilon\le 2^{-64}$ not stable. Native $k{=}1$ still \cid{37}. \\
+\hid{4} & \cid{52}--\cid{54} covering Track A $k{=}7$ $\sigma{=}128$ @ $N{=}1024$ (adder, counter, toy ISA). Native $k{=}1$ still \cid{37}; \texttt{cryptoPublicMS} still \cid{26}. \\
 \hid{5} & \texttt{*PublicMS} gadgets ($g_0=\delta$): on-lattice intent, not a closer of old \hid{2}. \\
 \hid{6} & TensorLUT / quarantine vs campaign: parallel research, not P1030680 PT. \\
 \hid{7} & Catalog / Regenbogen / UEBUNG: negatives graded; middle ring $\neq A$ untested; catalog parked @417, resume \texttt{--bombe-from 418}. \\

@@ -597,6 +597,36 @@ package func rotationBooleanScale(polynomialDegree n: Int, mul: Int) -> UInt32 {
     return UInt32(product)
 }
 
+/// `k` such that `scale = k·δ`. Public-MS uses native `δ`; wires live in `{0,k}⊂Z_{2N}`.
+package func booleanScaleFactor(polynomialDegree n: Int, scale: UInt32) -> Int {
+    let base = rotationScale(polynomialDegree: n)
+    precondition(scale % base == 0, "scale must be an integer multiple of δ")
+    let k = Int(scale / base)
+    precondition(k >= 1 && k <= 16)
+    return k
+}
+
+/// Map a boolean to the rotation-native message `k·bit`.
+package func encodeRotationNativeBit(_ bit: UInt32, k: Int) -> UInt32 {
+    precondition(k >= 1)
+    return (bit & 1) &* UInt32(k)
+}
+
+/// Decode a `Z_{2N}` phase near `{0,k}` (after native-δ public MS).
+package func decodeRotationNativeBit(_ phase: UInt32, twoN: Int, k: Int) -> UInt32 {
+    precondition(twoN > 1 && twoN.nonzeroBitCount == 1)
+    precondition(k >= 1)
+    if k == 1 {
+        return phase & 1
+    }
+    let p = Int(phase % UInt32(twoN))
+    func circ(_ a: Int, _ b: Int) -> Int {
+        let d = abs(a - b)
+        return min(d, twoN - d)
+    }
+    return circ(p, k) < circ(p, 0) ? 1 : 0
+}
+
 /// LWE encrypt with mask coeffs in `Z_{2N}` (exact blind-rotate powers under e=0).
 package func encryptLWERotationNative(
     message: UInt32,
@@ -689,11 +719,11 @@ package func evaluateLUTBlindRotate(
     precondition(truthTable.count == 1 << inputs.count)
     precondition(n >= truthTable.count)
     let δ = scale ?? rotationScale(polynomialDegree: n)
-    var testPoly = [UInt32](repeating: 0, count: n)
-    for (addr, bit) in truthTable.enumerated() {
-        precondition(bit == 0 || bit == 1)
-        testPoly[addr] = bit &* δ
-    }
+    let testPoly = TFHETestPolyCache.shared.testPolynomial(
+        truthTable: truthTable,
+        degree: n,
+        scale: δ
+    )
     let packed = packLWEBits(inputs)
     let acc = blindRotate(
         testPolynomial: testPoly,
@@ -703,8 +733,9 @@ package func evaluateLUTBlindRotate(
     return sampleExtractLWE(acc, params: params.tfhe)
 }
 
-/// Public bit refresh after PBS extract: modulus-switch scaled phase `μ·δ → μ`.
-/// Prefers exact division when coeffs lie on the `δ`-lattice; otherwise rounded MS.
+/// Public bit refresh after PBS extract: native-δ MS into `Z_{2N}`.
+/// Boolean `kδ` encoding keeps the message as `{0,k}` (not `/kδ`, which
+/// quantizes the mask too coarsely and breaks chained public-ms LUTs).
 package func publicRefreshBit(
     _ lwe: LWECiphertext,
     twoN: Int,
@@ -712,13 +743,15 @@ package func publicRefreshBit(
 ) -> LWECiphertext {
     precondition(scale > 1)
     precondition(twoN > 1 && twoN.nonzeroBitCount == 1)
-    let half = scale &>> 1
+    let n = twoN / 2
+    let step = rotationScale(polynomialDegree: n)
+    precondition(scale % step == 0)
+    let half = step &>> 1
     func fold(_ v: UInt32) -> UInt32 {
-        if v % scale == 0 {
-            return (v / scale) % UInt32(twoN)
+        if v % step == 0 {
+            return (v / step) % UInt32(twoN)
         }
-        // Rounded modulus switch into Z_{2N}.
-        return ((v &+ half) / scale) % UInt32(twoN)
+        return ((v &+ half) / step) % UInt32(twoN)
     }
     return LWECiphertext(a: lwe.a.map(fold), b: fold(lwe.b))
 }

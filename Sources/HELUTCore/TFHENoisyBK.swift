@@ -293,7 +293,7 @@ package struct TFHENoisyBKMeasurement: Sendable, Equatable {
         for _ in 0..<trials {
             let bit = rng.next() & 1
             let lwe = encryptLWERotationNative(
-                message: bit,
+                message: encodeRotationNativeBit(bit, k: booleanScaleMul),
                 secret: secret.lweSecret,
                 twoN: twoN,
                 rng: &rng
