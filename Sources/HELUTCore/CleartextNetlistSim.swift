@@ -29,6 +29,7 @@ package final class CleartextNetlistSimulator {
     package let luts: [LUTCell]
     package let dffs: [DFFCell]
     package private(set) var state: [Int: UInt8] // Q wire → bit
+    package private(set) var lastWires: [Int: UInt8] = [:]
 
     package init(moduleName: String, module: YosysModule) {
         self.moduleName = moduleName
@@ -99,6 +100,10 @@ package final class CleartextNetlistSimulator {
         }
     }
 
+    package func registerBit(_ qWire: Int) -> UInt8 {
+        state[qWire] ?? 0
+    }
+
     package func resetState(to bits: [Int: UInt8] = [:]) {
         state = [:]
         for dff in dffs {
@@ -148,27 +153,42 @@ package final class CleartextNetlistSimulator {
         var nextState: [Int: UInt8] = [:]
         for dff in dffs {
             let dValue = resolveBit(dff.dBit, wires: wires) ?? 0
-            var qNext = dValue
+            let qCurrent = state[dff.qWire] ?? 0
 
+            var enabled = true
             if let enableBit = dff.enableBit {
                 let rawE = resolveBit(enableBit, wires: wires) ?? 0
                 let enableActiveHigh = dff.polarity.enableActiveHigh ?? true
-                let enabled: UInt8 = enableActiveHigh ? rawE : (1 - rawE)
-                let qCurrent = state[dff.qWire] ?? 0
-                qNext = enabled != 0 ? dValue : qCurrent
+                enabled = (enableActiveHigh ? rawE : (1 - rawE)) != 0
             }
 
+            var resetAsserted = false
+            var resetValue: UInt8 = 0
             if let resetBit = dff.resetBit {
                 let rawR = resolveBit(resetBit, wires: wires) ?? 0
                 let reset = dff.polarity.syncReset ?? (activeHigh: true, value: 0)
-                let asserted: UInt8 = reset.activeHigh ? rawR : (1 - rawR)
-                if asserted != 0 {
-                    qNext = UInt8(reset.value)
+                resetAsserted = (reset.activeHigh ? rawR : (1 - rawR)) != 0
+                resetValue = UInt8(reset.value)
+            }
+
+            let qNext: UInt8
+            if dff.polarity.clockEnableGatesReset {
+                if !enabled {
+                    qNext = qCurrent
+                } else if resetAsserted {
+                    qNext = resetValue
+                } else {
+                    qNext = dValue
                 }
+            } else {
+                var v = enabled ? dValue : qCurrent
+                if resetAsserted { v = resetValue }
+                qNext = v
             }
             nextState[dff.qWire] = qNext
         }
         state = nextState
+        lastWires = wires.merging(state) { _, new in new }
 
         var outputs: [String: [UInt8]] = [:]
         for (port, bits) in outputPorts {

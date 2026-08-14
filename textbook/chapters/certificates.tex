@@ -26,17 +26,23 @@ That is not an API flourish. It is the difference between a demo and a claim.
 
 \section{How to read a SING log}
 
-A passing encrypted tick is a bundle:
+\textbf{SING} $=$ \textbf{S}timuli \textbf{In}, \textbf{G}olden out
+(Section~\ref{sec:sing}): encrypted evaluation must match the cleartext
+netlist on the same generic vectors.
+A passing encrypted tick is then read as a bundle:
 
 \begin{itemize}
-  \item Functional: ciphertext decrypts to the clear netlist (SING).
+  \item Functional: ciphertext decrypts to the clear netlist (the SING gate).
   \item Discrete: $\infty$-norm lemmas held on the inject.
   \item Gaussian: ingest $\varepsilon$ under the stated hypotheses.
   \item Hardness: calibrated classical bits, with \hid{1} attached until Sage
         fills the estimator JSON.
   \item Depth: noisy-BK model; \cid{22} measured at covering gadget;
-        \cid{26} graded fail at product $N{=}1024$ inject;
-        \hid{4} while $N=1024$ Metal SING keeps $B_{\mathrm{bk}}=0$.
+        \cid{26} graded fail at product $N{=}1024$ inject on
+        \texttt{cryptoPublicMS};
+        covering noisy Metal SING exists through inject $B{=}32$ (\cid{36});
+        torus-scale $B{\sim}128$ and default Track~A $e{=}0$ BK remain
+        \hid{4} asterisks.
 \end{itemize}
 
 Students who report only milliseconds have not completed the lab.
@@ -87,6 +93,21 @@ $\hat\sigma\approx 2.95\times 10^{4}$, asymptotic $\varepsilon\log_2\approx -913
 Receipts: \corpus{logs/helut-noisy-bk-covering-b4-n1024-B1.log},
 \corpus{logs/helut-encrypted-n1024-metal-sing-covering-b4-noisy-B1.log}.
 Torus-scale $B{=}128$ on the same gadget is still undecodable.}
+
+\reproduced{C35}{Covering baseLog$=2$ at $N{=}1024$: $\varepsilon\le 2^{-64}$ holds
+through inject $B{=}16$ ($\varepsilon\log_2\approx -65.4$; $B{=}32$ drops to
+$\approx -40.5$). Metal secret + public-ms covering-b2 at $B{=}16$ both PASS
+($B_{\mathrm{bk}}\approx 1.86\times 10^{5}$ / $6.15\times 10^{4}$).
+Receipts: \corpus{logs/helut-noisy-bk-covering-b2-eps-vs-B.log},
+\corpus{logs/helut-encrypted-n1024-metal-sing-covering-b2-noisy-B16.log}.
+Torus-scale $B{\sim}128$ remains $\varepsilon\approx -1.6$.}
+
+\reproduced{C36}{Covering baseLog$=1$ at $N{=}1024$: $\varepsilon\le 2^{-64}$ holds
+through inject $B{=}32$ ($\varepsilon\log_2\approx -139$ at 4 trials; $B{=}64$
+$\approx -26$). Metal secret + public-ms covering-b1 at $B{=}32$ both PASS.
+Receipts: \corpus{logs/helut-noisy-bk-covering-b1-n1024-B32.log},
+\corpus{logs/helut-encrypted-n1024-metal-sing-covering-b1-noisy-B32.log}.
+Finest covering does \emph{not} unlock $B{=}128$ ($\varepsilon\approx -0.6$).}
 
 \section{Calibration is not estimation}
 

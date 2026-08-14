@@ -24,6 +24,12 @@ package enum TensorLUTLemma: String, Sendable {
     case emitterDiscreteAgreement
     /// Frozen stecker pairs always survive mutation; free+frozen remain a partial involution.
     case involutionUnderFreeze
+    /// Coordinate-separable Boolean interpolant: unique maximizer of F is the binary target.
+    case separableMeltUniqueMaximizer
+    /// Snap: if every used INIT entry lies in the open half-space of its target bit, E recovers t.
+    case snapBasinCompleteness
+    /// Freeze: coordinates already at the Boolean target stay; a wrong freeze blocks F=0.
+    case freezePreservesMaximizer
 }
 
 package struct TensorLUTProofStep: Sendable, Equatable {
@@ -241,7 +247,115 @@ package enum TensorLUTFormal {
             hypotheses: [
                 "Emitter recovers INIT exactly only when π(w)=0 (binary cube)",
                 "mutatedPreserving freezes stecker pairs; free mutations stay a partial involution",
-                "Corollary strengthens Theorem 1 emit/freeze clauses — still not melt completeness",
+                "Corollary strengthens Theorem 1 emit/freeze clauses — melt–freeze–snap on separable interpolants is C44, not this corollary",
+                "Not a U-534 / P1030680 plaintext claim"
+            ]
+        )
+    }
+
+    /// 1-D objective on a single INIT address with Boolean target t∈{0,1}.
+    package static func separableCoordinateFitness(weight w: Float, target t: Float, lambda: Float) -> Float {
+        let crypto = -(w - t) * (w - t)
+        let pi = w * (1 - w)
+        return crypto - lambda * pi
+    }
+
+    /// Lemma: for a fully observed 1-LUT (each address is an independent Boolean target),
+    /// F(w)=−‖w−t‖²−λπ(w) has unique maximizer w=t on [0,1]^k for every λ≥0.
+    package static func checkSeparableMeltUniqueMaximizer(
+        trials: Int = 64,
+        dim: Int = 16,
+        seed: UInt32 = 0x5A9
+    ) -> Bool {
+        var rng = LCG32(state: seed)
+        let lambdas: [Float] = [0, 0.5, 1, 8]
+        for _ in 0..<trials {
+            let t = (0..<dim).map { _ in Float(rng.next() & 1) }
+            let atTarget = zip(t, t).map { separableCoordinateFitness(weight: $0.0, target: $0.1, lambda: 0) }
+            if atTarget.contains(where: { abs($0) > 1e-6 }) { return false }
+            for lambda in lambdas {
+                let fStar = t.reduce(Float(0)) { $0 + separableCoordinateFitness(weight: $1, target: $1, lambda: lambda) }
+                if abs(fStar) > 1e-5 { return false }
+                let w = (0..<dim).map { i -> Float in
+                    let u = Float(rng.next() % 10_001) / 10_000
+                    return abs(u - t[i]) < 1e-4 ? (t[i] == 0 ? 0.3 : 0.7) : u
+                }
+                let fW = zip(w, t).reduce(Float(0)) {
+                    $0 + separableCoordinateFitness(weight: $1.0, target: $1.1, lambda: lambda)
+                }
+                if !(fW < fStar - 1e-6) { return false }
+            }
+        }
+        return true
+    }
+
+    /// Lemma: if |w_i − t_i| < 1/2 for Boolean t, then E(w)=t (Verilog snap ≡ interpolant).
+    package static func checkSnapBasinCompleteness(
+        trials: Int = 48,
+        dim: Int = 32,
+        seed: UInt32 = 0x5A10
+    ) -> Bool {
+        var rng = LCG32(state: seed)
+        for _ in 0..<trials {
+            let t = (0..<dim).map { _ in UInt8(rng.next() & 1) }
+            let w = t.map { bit -> Float in
+                let interior = Float((rng.next() % 4_000) + 1) / 10_000 // (0, 0.4]
+                return bit == 1 ? 0.5 + interior : 0.5 - interior
+            }
+            if emitBinary(w) != t { return false }
+            if abs(discretenessPenalty(t.map { Float($0) })) > 1e-6 { return false }
+            // Crossing 1/2 must fail (basin is open).
+            var crossed = w
+            crossed[0] = t[0] == 1 ? 0.49 : 0.51
+            if emitBinary(crossed) == t { return false }
+        }
+        return true
+    }
+
+    /// Lemma: freeze at the Boolean target leaves the unique maximizer on free coords;
+    /// a wrong freeze makes F=0 unreachable.
+    package static func checkFreezePreservesMaximizer() -> Bool {
+        let t: [Float] = [0, 1, 0, 1]
+        let frozenOK: [Float] = [0, 1, 0.4, 0.6] // first two frozen at t
+        let lambda: Float = 4
+        let fOK = zip(frozenOK, t).enumerated().reduce(Float(0)) { acc, it in
+            let (i, pair) = it
+            if i < 2 { return acc } // freeze: omit from π and from search
+            return acc + separableCoordinateFitness(weight: pair.0, target: pair.1, lambda: lambda)
+        }
+        let fStarFree = separableCoordinateFitness(weight: 0, target: 0, lambda: lambda)
+            + separableCoordinateFitness(weight: 1, target: 1, lambda: lambda)
+        if !(fOK < fStarFree - 1e-6) { return false }
+        let snappedFree: [Float] = [0, 1, 0, 1]
+        let fSnapped = zip(snappedFree, t).enumerated().reduce(Float(0)) { acc, it in
+            let (i, pair) = it
+            if i < 2 { return acc }
+            return acc + separableCoordinateFitness(weight: pair.0, target: pair.1, lambda: lambda)
+        }
+        if abs(fSnapped) > 1e-6 { return false }
+        // Wrong freeze: coord 0 stuck at 1 while t_0=0.
+        let wrong: [Float] = [1, 1, 0, 1]
+        let fWrong = zip(wrong, t).reduce(Float(0)) {
+            $0 + separableCoordinateFitness(weight: $1.0, target: $1.1, lambda: 0)
+        }
+        return fWrong < -0.5
+    }
+
+    /// Theorem 1″: melt–freeze–snap for a coordinate-separable Boolean interpolant (C44).
+    package static func meltFreezeSnapCertificate() -> TensorLUTFormalCertificate {
+        let steps: [TensorLUTProofStep] = [
+            .init(lemma: .separableMeltUniqueMaximizer, holds: checkSeparableMeltUniqueMaximizer()),
+            .init(lemma: .snapBasinCompleteness, holds: checkSnapBasinCompleteness()),
+            .init(lemma: .freezePreservesMaximizer, holds: checkFreezePreservesMaximizer())
+        ]
+        return TensorLUTFormalCertificate(
+            steps: steps,
+            hypotheses: [
+                "Each used INIT address is an independent Boolean target (fully observed 1-LUT / separable interpolant)",
+                "F(w)=−‖w−t‖²−λπ(w) with λ≥0, w∈[0,1]^k, t∈{0,1}^k",
+                "Snap is the emitter E(w)_i=1[w_i≥1/2]; basin is the open cube |w_i−t_i|<1/2",
+                "Freeze removes frozen coordinates from search; a wrong freeze blocks F=0",
+                "Does not prove GA convergence, multi-LUT topological melt, or arbitrary-netlist completeness",
                 "Not a U-534 / P1030680 plaintext claim"
             ]
         )

@@ -12,8 +12,9 @@ shape, batch scaling, and Enigma letter clocks — not as the FHE claim.
 | `TorusBitEncoding` | trivial / packed / encrypted packed; discrete noise | — |
 | `LUTEvaluationBackend` | oracle backends; **`encrypted`** via **`LUTNode.evaluateEncrypted`** Metal BR | — |
 | Inter-LUT refresh | **`publicMS` default** (boolean + crypto via lattice BK); `.secret` / `.none` | — |
-| Noise | Discrete proof + Gaussian ε≤2⁻⁶⁴ + **Decision-LWE hardness binding** (~128-bit est.) | Full lattice-estimator verify |
-| Clock | Oracle DFF ping-pong; encrypted **single-graph** Metal netlist (binary X^p) | — |
+| Noise | Discrete + Gaussian ε; **C43** *k*=4 SING at *N*=1024 σ=128; ε bar not stable; *k*=1 still **C37** | *k*∈(4,8) / public-ms at *k*=8 |
+| Clock | Metal PicoRV NOP-fetch **C51** (demo *N*=8, tiled BR) | Metal *N*=1024 PicoRV; fused sequential metal-netlist |
+| E256 in FHE | Frozen 1-byte scramble Metal SING (**C39**) | Live BRAM / NLFF / full core |
 
 Code: `TFHESeam.swift`, `TFHESamples.swift`, `TFHEGGSW.swift`, `MetalGGSW.swift`, `EncryptedNetlistSim.swift`, `ProgrammableBootstrap.swift`, `LUTNode`.  
 CLI: `--encoding …`, `--lut-backend multilinear|pbs|pbs-ggsw|encrypted`, `--bench-encrypted`.

@@ -70,7 +70,7 @@ Phased design docs: [`PRD.md`](PRD.md) (kernel) → [`phase-2.md`](phase-2.md) (
 
 | App | Sources | Netlist | Idea |
 |-----|---------|---------|------|
-| **Encrypted RISC-V** | [`picorv32.v`](picorv32.v) | [`picorv32_netlist.json`](picorv32_netlist.json) | Capstone: ~4.8k LUTs / ~1.5k DFFs; scripted `resetn` boot, multi-tick clocking ([`PRD_App1_RISCV.md`](PRD_App1_RISCV.md), [`PRD_App1.md`](PRD_App1.md)) |
+| **Encrypted RISC-V** | [`picorv32.v`](picorv32.v) | [`picorv32_netlist.json`](picorv32_netlist.json) | CPU `lw` sees 1 (**C50**); Metal NOP-fetch (**C51**, ~7.9 s/tick) at demo *N*=8. Not production *N*. |
 | **Batched search** | [`regex_matcher.v`](regex_matcher.v) | [`regex_netlist.json`](regex_netlist.json) | 3-character matcher × large `B` ([`PRD_App2.md`](PRD_App2.md)) |
 | **Decision tree** | [`decision_tree.v`](decision_tree.v) | [`tree_netlist.json`](tree_netlist.json) | Exact non-linear classify over batched records ([`PRD_App3.md`](PRD_App3.md)) |
 | **Small sequential demos** | [`counter.v`](counter.v), [`circuit.v`](circuit.v), … | [`core_netlist.json`](core_netlist.json), … | DFF retention / early bring-up |

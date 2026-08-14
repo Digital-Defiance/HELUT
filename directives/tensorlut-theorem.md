@@ -53,7 +53,7 @@ Assume Theorem 1 hypotheses, plus: Verilog emit uses \(E\); stecker GA uses `mut
 **Proof.** `checkEmitterDiscreteAgreement` / `checkInvolutionUnderFreeze`. Reproduce:
 `swift test -c release --filter testTensorLUTFormalCorollaryCertificate`.
 
-**Still does not prove.** Melt completeness; that every shatter lineage reaches \(\pi=0\).
+**Still does not prove.** Melt completeness for arbitrary netlists; that every shatter lineage reaches \(\pi=0\). Restricted melt–freeze–snap for a separable interpolant is **C44**.
 
 ---
 
@@ -66,3 +66,22 @@ Assume Theorem 1 hypotheses, plus: Verilog emit uses \(E\); stecker GA uses `mut
 | Metric | \(F_{\mathrm{crypto}}=0\) on unmutated baseline; \(\pi=0\) on binary INIT |
 | Examples | M4 baseline emit; freeze-core involution; blind 3-pair PASS |
 | Application | Stecker search that cannot propose a non-reciprocal map |
+
+---
+
+## Theorem 1″ (melt–freeze–snap, separable interpolant)
+
+**Status:** machine-checked in `TensorLUTFormal.meltFreezeSnapCertificate()` (**C44**).
+
+Assume each used INIT address is an independent Boolean target \(t\in\{0,1\}^k\) (fully observed 1-LUT), \(w\in[0,1]^k\), \(\lambda\ge 0\), and
+\[
+F(w)=-\lVert w-t\rVert_2^2-\lambda\,\pi(w).
+\]
+
+9. **Unique maximizer.** \(F(w)\le 0=F(t)\), with equality iff \(w=t\). The objective snaps; it does not have a fractional global max.
+10. **Snap basin.** If \(\lvert w_i-t_i\rvert<1/2\) for all \(i\), then \(E(w)=t\) (emitted Verilog INIT equals the interpolant). Crossing \(1/2\) on any used address leaves the basin.
+11. **Freeze.** Coordinates already at \(t\) may be removed from search without changing the unique maximizer on free coordinates. A coordinate frozen away from \(t\) makes \(F=0\) unreachable.
+
+**Proof.** `checkSeparableMeltUniqueMaximizer` / `checkSnapBasinCompleteness` / `checkFreezePreservesMaximizer`. Reproduce: `swift test -c release --filter testTensorLUTMeltFreezeSnapCertificate`. Empirical 1-LUT XOR: `testXORLambdaCoolingSnapsTowardBinary` with `polishBinaryAtEnd`.
+
+**Empirical (C48).** A 2-LUT cascade \(y=(a\land b)\oplus c\) melted from \(w=1/2\), snapped, and emitted as two LUT6 cells. Snapped INIT matches all 8 corners (NAND+XNOR is a valid dual). Not Yosys re-synth; not arbitrary-netlist completeness.

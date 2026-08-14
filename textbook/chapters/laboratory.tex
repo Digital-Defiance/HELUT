@@ -33,6 +33,13 @@ Explain in writing why $N$ is not the circuit size.
   --lut-backend pbs --encoding phase --bench-equiv
 .build/release/helut --bench netlist.json --degree 8 \
   --bench-encrypted --cpu-only --sing --vectors 8
+.build/release/helut --bench counter_netlist.json --degree 8 \
+  --bench-encrypted --cpu-only --sing --vectors 8
+.build/release/helut --bench toy_isa_netlist.json --degree 8 \
+  --bench-encrypted --cpu-only --sing --vectors 32
+.build/release/helut --bench picorv32_netlist.json --degree 8 \
+  --bench-encrypted --cpu-only --sing --ticks 48 --reset-hold 3 \
+  --encrypted-mem prog --paths 'blind-rotate public-ms boolean'
 \end{lstlisting}
 
 Deliverable: a table with columns \{backend, $N$, SING, certificates
@@ -77,6 +84,8 @@ swift test -c release --filter testTensorLUTFormalCertificate
 
 Deliverable: name the six lemmas, the certificate hypotheses, and one
 sentence that Theorem~\ref{thm:tensorlut} does \emph{not} prove.
+Optional: \texttt{testTensorLUTMeltFreezeSnapCertificate} (\cid{44}) ---
+what class of INIT genomes the unique-maximizer lemma covers.
 Theory track: read \corpus{Sources/HELUTCore/TensorLUTFormal.swift} and
 \corpus{directives/tensorlut-theorem.md}; reconstruct the five-cell card
 without running Swift.

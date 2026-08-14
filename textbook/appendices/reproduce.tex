@@ -29,13 +29,22 @@ Production row: HELUT $175.7$ vs estimator $180.2$.
 Four of eight anchors exceed the 16-bit merge tolerance --- do not quote
 $176$ as estimator cost on every row.
 
-\section{Encrypted SING (\cid{4}--\cid{6})}
+\section{Encrypted SING (\cid{4}--\cid{6}, \cid{38}--\cid{40})}
 
 \begin{lstlisting}
 .build/release/helut --bench netlist.json --degree 8 \
   --bench-encrypted --cpu-only --sing --vectors 8
 ./Scripts/helut_encrypted_sing.sh
+.build/release/helut --bench counter_netlist.json --degree 8 \
+  --bench-encrypted --cpu-only --sing --vectors 8
+.build/release/helut --bench e256_round1_netlist.json --degree 16 \
+  --bench-encrypted --cpu-only --sing --vectors 32
+.build/release/helut --bench toy_isa_netlist.json --degree 8 \
+  --bench-encrypted --cpu-only --sing --vectors 32
 \end{lstlisting}
+
+\cid{38} counter, \cid{39} frozen E256 round (LUT4, $N\ge 16$),
+\cid{40} toy ISA. None of these is PicoRV32 or live BRAM SoftBus.
 
 \section{Metal microbench and NTT (\cid{18})}
 
@@ -144,6 +153,55 @@ Expect PASS; covering \texttt{.crypto}, not \texttt{cryptoPublicMS}.
 
 Expect $\varepsilon\log_2\approx-913$; Metal PASS. Torus-scale $B{=}128$ still fails.
 
+\section{Track A covering-b2 $\varepsilon\le 2^{-64}$ through $B{=}16$ (\cid{35})}
+
+\begin{lstlisting}
+.build/release/helut-bench --measure-bk-noise --degree 1024 \
+  --trials 4 --bk-noise 16 --covering-base-log 2
+.build/release/helut-bench --bench netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 2 --bk-noise 16 \
+  --paths covering-b2
+\end{lstlisting}
+
+Expect $\varepsilon\log_2\approx-65.4$ at $B{=}16$; Metal PASS. $B{=}32$ fails the bar.
+
+\section{Track A covering-b1 $\varepsilon\le 2^{-64}$ through $B{=}32$ (\cid{36})}
+
+\begin{lstlisting}
+.build/release/helut-bench --measure-bk-noise --degree 1024 \
+  --trials 4 --bk-noise 32 --covering-base-log 1
+.build/release/helut-bench --bench netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 2 --bk-noise 32 \
+  --paths covering-b1
+\end{lstlisting}
+
+Expect $\varepsilon\log_2\approx-139$ at $B{=}32$; Metal PASS. $B{=}128$ still fails.
+
+\section{Track A $\sigma{=}128$ covering-b1 at $N\le 512$ (\cid{41})}
+
+\begin{lstlisting}
+.build/release/helut --measure-bk-noise --degree 512 --trials 4 \
+  --bk-noise-sigma 128 --covering-base-log 1
+.build/release/helut --bench netlist.json --degree 512 \
+  --bench-encrypted --sing --vectors 2 --bk-noise-sigma 128 \
+  --paths covering-b1
+\end{lstlisting}
+
+Does not close $N{=}1024$ at native $k{=}1$. Headroom is $\delta=q/(2N)$.
+
+\section{$k\delta$ encoding at $N{=}1024$ (\cid{43})}
+
+\begin{lstlisting}
+.build/release/helut --measure-bk-noise --degree 1024 --trials 4 \
+  --bk-noise-sigma 128 --covering-base-log 1 --boolean-scale-mul 4
+.build/release/helut --bench netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 2 --bk-noise-sigma 128 \
+  --paths covering-b1 --boolean-scale-mul 4
+\end{lstlisting}
+
+$k{=}4$ Metal SING PASS; 4-trial $\varepsilon\log_2\approx-43$ (not $-64$).
+$k{=}8$ meets $\varepsilon$; public-ms SING fails.
+
 \section{Track B Metal SING with noisy BK (\cid{28})}
 
 \begin{lstlisting}
@@ -182,6 +240,94 @@ swift test -c release --filter testTensorLUTFormalCorollaryCertificate
 
 Emitter--discrete agreement and involution-under-freeze must \texttt{hold}.
 Statement: \corpus{directives/tensorlut-theorem.md} (corollary).
+
+\section{TensorLUT melt--freeze--snap (\cid{44})}
+
+\begin{lstlisting}
+swift test -c release --filter testTensorLUTMeltFreezeSnapCertificate
+\end{lstlisting}
+
+Three lemmas must \texttt{hold} (unique maximizer, snap basin, freeze).
+Statement: \corpus{directives/tensorlut-theorem.md} (Theorem~1$''$).
+Not multi-LUT topological melt.
+
+\section{Encrypted PicoRV32 1-tick (\cid{45})}
+
+\begin{lstlisting}
+.build/release/helut --bench picorv32_netlist.json --degree 8 \
+  --bench-encrypted --cpu-only --sing --vectors 1 \
+  --paths 'blind-rotate public-ms boolean' \
+  | tee logs/helut-encrypted-n8-cpu-sing-picorv32.log
+\end{lstlisting}
+
+Expect PASS, ${\sim}76\,\mathrm{ms}$/row, hardness $4.0$ bits (demo $N$).
+Output SING; $Q$ SING is \cid{46}.
+
+\section{Encrypted PicoRV32 10-tick boot (\cid{46})}
+
+\begin{lstlisting}
+.build/release/helut --bench picorv32_netlist.json --degree 8 \
+  --bench-encrypted --cpu-only --sing --ticks 10 --reset-hold 3 \
+  --paths 'blind-rotate public-ms boolean' \
+  | tee logs/helut-encrypted-n8-cpu-sing-picorv32-boot10.log
+\end{lstlisting}
+
+Expect PASS $0.972\,\mathrm{s}/10$, $Q\equiv$ clear. Idle memory.
+LUT-tax: $N{=}32$ ${\sim}819\,\mathrm{ms}$; $N{=}64$ ${\sim}4.35\,\mathrm{s}$.
+
+\section{Encrypted PicoRV32 NOP-fetch (\cid{47})}
+
+\begin{lstlisting}
+.build/release/helut --bench picorv32_netlist.json --degree 8 \
+  --bench-encrypted --cpu-only --sing --ticks 32 --reset-hold 3 \
+  --encrypted-mem nop --paths 'blind-rotate public-ms boolean' \
+  | tee logs/helut-encrypted-n8-cpu-sing-picorv32-nop-fetch.log
+\end{lstlisting}
+
+Expect 10 fetches, addresses $0,4,\ldots,\mathtt{0x24}$, $Q\equiv$ clear.
+
+\section{Encrypted PicoRV32 addi+sw (\cid{49})}
+
+\begin{lstlisting}
+.build/release/helut --bench picorv32_netlist.json --degree 8 \
+  --bench-encrypted --cpu-only --sing --ticks 48 --reset-hold 3 \
+  --encrypted-mem prog --paths 'blind-rotate public-ms boolean' \
+  | tee logs/helut-encrypted-n8-cpu-sing-picorv32-prog-store.log
+\end{lstlisting}
+
+Expect STORE \texttt{wdata}=1, RAM0=1, 14 fetches, ${\sim}79\,\mathrm{ms}$/row.
+
+\section{Encrypted PicoRV32 lw sees 1 (\cid{50})}
+
+\begin{lstlisting}
+.build/release/helut --bench picorv32_netlist.json --degree 8 \
+  --bench-encrypted --cpu-only --sing --ticks 48 --reset-hold 3 \
+  --encrypted-mem prog --paths 'blind-rotate public-ms boolean' \
+  | tee logs/helut-encrypted-n8-cpu-sing-picorv32-prog-lw.log
+\end{lstlisting}
+
+Expect LOAD xfer \texttt{rdata}=1, STORE \texttt{wdata}=1, 14 fetches,
+${\sim}79\,\mathrm{ms}$/row, $Q\equiv$ clear. Demo $N{=}8$.
+
+\section{Metal PicoRV32 NOP-fetch (\cid{51})}
+
+\begin{lstlisting}
+.build/release/helut --bench picorv32_netlist.json --degree 8 \
+  --bench-encrypted --sing --ticks 8 --reset-hold 3 \
+  --encrypted-mem nop --paths 'blind-rotate-metal public-ms boolean' \
+  --metal-br-tile 8 \
+  | tee logs/helut-encrypted-n8-metal-sing-picorv32-nop-fetch.log
+\end{lstlisting}
+
+Expect 2 fetches, PASS ${\sim}64\,\mathrm{s}/8$. Use tiled BR; fused traps.
+
+\section{2-LUT cascade melt--emit (\cid{48})}
+
+\begin{lstlisting}
+swift test -c release --filter testTwoLUTCascadeMeltFreezeSnapEmit
+\end{lstlisting}
+
+Eight Boolean corners of the snapped INIT must match $(a\land b)\oplus c$.
 
 \section{Boolean oracle benches (\cid{1})}
 

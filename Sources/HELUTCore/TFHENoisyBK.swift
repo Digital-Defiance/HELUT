@@ -155,9 +155,23 @@ package struct TFHENoisyBKGaussianCertificate: Sendable, Equatable {
         lutCount: Int,
         targetFailureLog2: Int = -64
     ) -> TFHENoisyBKGaussianCertificate {
+        forDepth(
+            sigmaBK: sigmaBK,
+            delta: rotationScale(polynomialDegree: n),
+            lutCount: lutCount,
+            targetFailureLog2: targetFailureLog2
+        )
+    }
+
+    package static func forDepth(
+        sigmaBK: Double,
+        delta: UInt32,
+        lutCount: Int,
+        targetFailureLog2: Int = -64
+    ) -> TFHENoisyBKGaussianCertificate {
         precondition(sigmaBK >= 0)
+        precondition(delta >= 2)
         precondition(lutCount >= 0)
-        let delta = rotationScale(polynomialDegree: n)
         let half = Double(delta) / 2
         let pOne: Double
         if sigmaBK == 0 {
@@ -228,9 +242,9 @@ package struct TFHENoisyBKMeasurement: Sendable, Equatable {
 
     package func certificate(lutCount: Int) -> TFHENoisyBKCertificate {
         TFHENoisyBKCertificate.forNetlist(
-            params: .bounded(
+            params: TFHENoisyBKParams(
                 outputNoiseBound: maxAbsError,
-                polynomialDegree: polynomialDegree,
+                delta: delta,
                 lutCount: lutCount
             ),
             measurement: self
@@ -243,7 +257,7 @@ package struct TFHENoisyBKMeasurement: Sendable, Equatable {
     ) -> TFHENoisyBKGaussianCertificate {
         TFHENoisyBKGaussianCertificate.forDepth(
             sigmaBK: sigmaHat,
-            polynomialDegree: polynomialDegree,
+            delta: delta,
             lutCount: lutCount,
             targetFailureLog2: targetFailureLog2
         )
@@ -257,12 +271,13 @@ package struct TFHENoisyBKMeasurement: Sendable, Equatable {
         bootstrapKey existing: BootstrapKey? = nil,
         trials: Int = 16,
         seed: UInt32 = 0xB10C,
-        publicRefreshCompatible: Bool = true
+        publicRefreshCompatible: Bool = true,
+        booleanScaleMul: Int = 1
     ) -> TFHENoisyBKMeasurement {
         precondition(trials > 0)
         let n = params.tfhe.polynomialDegree
         let twoN = 2 * n
-        let scale = rotationScale(polynomialDegree: n)
+        let scale = rotationBooleanScale(polynomialDegree: n, mul: booleanScaleMul)
         var rng = LCG32(state: seed == 0 ? 1 : seed)
         let bk = existing ?? bootstrapKey(
             secret: secret,

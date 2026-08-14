@@ -14,7 +14,7 @@ Living textbook (course surface on this trajectory): [`../textbook/`](../textboo
 | **H2** full_adder @ *N*≥256 | ~~Multi-LUT encrypted correctness~~ **Closed** | Z_{2N} pack / `rotationPower` fix; SING PASS @ 256/512/1024 |
 | **H1** Sage lattice-estimator | Honest classical bits | **C23** filled. Production Δ=4.5. Divergences = core-SVP vs Cost `rop`, not silent bugs. Optional retune / quote estimator-only on Δ>16 rows |
 | **H3** Metal BR @ large *N* | Real wall-clock / memory envelope | **C20**/**C21** SING. NTT inside crypto ℓ=2 at *N*=1024 (incomplete public-MS gadget) |
-| **H4** Noisy BK | Production depth story | **C34** baseLog=4 + *B*=1 → ε≈−913 + Metal PASS. Next: raise inject toward torus σ≈2⁻²⁵ |
+| **H4** Noisy BK | Production depth story | **C37** Gaussian σ=24 + Metal PASS. Torus σ≈128 still undecodable. Next: param retune |
 | **Packaging** | Library + binaries + Apps/ | [`packaging-roadmap.md`](packaging-roadmap.md) Phase 0.5 — inventory → SPM split → named binaries |
 | Campaign catalog | Exhaust Boolean coverage | Resume `--bombe-from 418`; middle ring ≠ A |
 | Garble / quarantine | Ciphertext may be wrong letters | Soft-band escalate grades; sister-message lessons |
@@ -25,7 +25,7 @@ From [`../roadmap-overall.md`](../roadmap-overall.md) Phase 0–II and the proje
 
 1. **Phase 0 corpus** — abstract↔C-id; estimator honesty table (**C23** in paper); application gallery; artifact tag  
 2. **Pillar I** — netlist-clocked FHE: shallower nets, NTT/persist graphs, estimator-backed params ([`metal-compiler-phases.md`](metal-compiler-phases.md)); **H4** product noisy BK  
-3. **Pillar II** — formalize continuous→discrete: **Theorem 1** (**C19**); **corollary** emitter–discrete / freeze (**C25**); stream-cipher melts  
+3. **Pillar II** — formalize continuous→discrete: **Theorem 1** (**C19**); **corollary** emitter–discrete / freeze (**C25**); **melt–freeze–snap** separable interpolant (**C44**); remaining: multi-LUT topology melt, stream-cipher melts  
 4. **Pillar III** — SoftBus reciprocity **Theorem 2** (**C24**); polymorphic Red/Blue standard beyond E256 SoftBus  
 5. **Application gallery** — nine slots outlined (`directives/application-gallery.md`); figures + artifact tag remaining  
 6. **FHE gate / ZK depth** — TensorLUT aimed at multiplicative depth (queued projects)  

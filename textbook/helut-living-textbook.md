@@ -2,7 +2,7 @@
 
 # Reconfigurable Homomorphic Computing A Living Textbook of Netlist-Clocked FHE, Differentiable Hardware, and Polymorphic Ciphers
 
-*Digital Defiance HELUT Project --- living edition 0.1 (2026-08-13 / C34) · August 2026*
+*Digital Defiance HELUT Project --- living edition 0.1 (2026-08-13 / C51) · August 2026*
 
 ::: titlepage
 **Reconfigurable Homomorphic Computing**
@@ -13,7 +13,9 @@ Netlist-Clocked Torus FHE Differentiable Hardware Adversarial Polymorphic Cipher
 
 Digital Defiance / HELUT Project
 
-Living edition 0.1 epoch 2026-08-13 / C34
+Living edition 0.1 epoch 2026-08-13 / C51
+
+Audit stamp:
 
 For a first university course in a new subject
 
@@ -44,7 +46,7 @@ The stack has three pillars [@helut-release; @helut-paper]:
 
 ###### Why a living textbook.
 
-Research papers freeze a slice of a laboratory. This course cannot. The claim inventory [@helut-claim-sheet] moves: Metal kernels get faster, hedges close, avenues stay unlabeled until they earn receipts. A professor who taught from a PDF dated June would be teaching a different Metal compiler than a professor teaching from August. So the book is versioned against the corpus *epoch* (2026-08-13 / C34 in this edition) and is honest about stubs.
+Research papers freeze a slice of a laboratory. This course cannot. The claim inventory [@helut-claim-sheet] moves: Metal kernels get faster, hedges close, avenues stay unlabeled until they earn receipts. A professor who taught from a PDF dated June would be teaching a different Metal compiler than a professor teaching from August. So the book is versioned against the corpus *epoch* (2026-08-13 / C51 in this edition) and is honest about stubs.
 
 ###### What this edition is.
 
@@ -179,7 +181,7 @@ For an atomic claim $C$, the doctrine requires all five, or $C$ is hedged:
 5.  **Application** --- at least one end-to-end reason to care.
 
 ::: example
-**Example 3.1** (Five cells for **C18**). Metal 3-prime NTT persist blind-rotate. Proof: CPU$+$Metal NTT $\equiv$ schoolbook (19 tests) plus microbench PASS bits. Table: $N\in\{64,1024\}$ s/BR versus schoolbook persist and fused-EP. Metric: $0.433\,\mathrm{s}$/BR at $N=1024$ (gpu $0.43\,\mathrm{s}$, RSS $148\,\mathrm{MiB}$). Examples: microbench identity LUT; full_adder boolean SING. Application: production-shaped polynomial degree on a laptop GPU graph.
+**Example 3.1** (Five cells for **C18**). Metal 3-prime NTT persist blind-rotate. Proof: CPU$+$Metal NTT $\equiv$ schoolbook (19 tests) plus microbench PASS bits. Table: $N\in\{64,1024\}$ s/BR versus schoolbook persist and fused-EP. Metric: $0.433\,\mathrm{s}$/BR at $N=1024$ (gpu $0.43\,\mathrm{s}$, RSS $148\,\mathrm{MiB}$). Examples: microbench identity LUT; full_adder boolean SING (**S**timuli **In**, **G**olden out---encrypted evaluation must match the cleartext netlist on the same generic vectors; see Chapter [1](#ch:pillari){reference-type="ref" reference="ch:pillari"}). Application: production-shaped polynomial degree on a laptop GPU graph.
 :::
 
 ::: example
@@ -258,7 +260,7 @@ An FPGA is reconfigurable because the LUT INIT bits and the interconnect are lat
   Encrypted?           Optional; certificate-gated   Oracle $\neq$ FHE
 :::
 
-The last row is the pedagogical load-bearing wall. Students who have built FPGAs want to say "the CPU is encrypted" the moment PicoRV32 ticks. The boolean oracle path *does* clock PicoRV32 on ciphertext-*shaped* vectors (**C1**). The FHE path *does* blind-rotate Yosys LUTs on LWE samples (**C4**--**C6**). They are not the same sentence. Chapter [3](#ch:certs){reference-type="ref" reference="ch:certs"} exists so that confusion is a grading event rather than a press cycle.
+The last row is the pedagogical load-bearing wall. Students who have built FPGAs want to say "the CPU is encrypted" the moment PicoRV32 ticks. The boolean oracle path *does* clock PicoRV32 on ciphertext-*shaped* vectors (**C1**). The FHE path *does* fetch NOPs on encrypted PicoRV32 at demo $N{=}8$ (**C47**): the PC walks $0,4,\ldots$, with decrypted $Q$ matching cleartext. Chapter [3](#ch:certs){reference-type="ref" reference="ch:certs"} exists so that confusion is a grading event rather than a press cycle.
 
 ### The three pillars as a curriculum, not a brand
 
@@ -492,6 +494,30 @@ Each tick is one `graph.run`. With `retainHistory=false`, two preallocated state
 
 This is the reconfigurable clock tree: not routed silicon, but a protocol with explicit buffer ownership.
 
+### SING as the teaching metric {#sec:sing}
+
+**SING** expands to **S**timuli **In**, **G**olden out.
+
+In hardware verification, a *golden model* is the flawless reference circuit: feed test vectors (stimuli) in, expect the exact right bits out. For HELUT the golden model is the cleartext Yosys netlist simulator. A SING check (`--sing` / `--bench-encrypted-metrics`) is the primary teaching metric and the laboratory analogue of a scan chain: encrypt the same generic stimuli, evaluate under GGSW blind-rotate, decrypt, and demand bit-exact agreement with cleartext.
+
+A passing encrypted tick under SING is not only a boolean match. The log is graded as a cryptographic bundle:
+
+- **Functional:** ciphertext decrypts to the clear netlist (the hard gate).
+
+- **Discrete:** $\infty$-norm inject lemmas hold where the path prints them.
+
+- **Gaussian:** ingest failure probabilities stay under stated hypotheses.
+
+- **Hardness:** calibrated classical bit estimates print with **H1** attached until the estimator row is honest.
+
+- **Depth:** noisy bootstrap-key residuals are modeled or measured; default Track A throughput SING may still use $e{=}0$ BK (**H4**); covering noisy SING receipts are separate claims (**C28**, **C33**--**C37**, **C41**, **C43**).
+
+Brutal engineering rule: if SING fails, you do not get to discuss milliseconds. Throughput and timing benches are irrelevant until the FHE path certifies its own correctness against the golden netlist.
+
+::: lab
+**Laboratory 1.1** (Encrypted adder SING). Run the cookbook SING at demo $N$ and at production-shaped $N$ (Appendix [4](#app:repro){reference-type="ref" reference="app:repro"}). Record pass/fail, ms/row, and which certificate types printed. Then answer: which of those numbers would you be willing to put in an abstract without an asterisk?
+:::
+
 ### Two backends, one netlist
 
 ::: center
@@ -503,22 +529,14 @@ This is the reconfigurable clock tree: not routed silicon, but a protocol with e
 
 Inter-LUT refresh defaults to `publicMS` (lattice-compatible BK masks). `.secret` remains for coverage. `.none` is a debug foot-gun.
 
-### Why PicoRV32 is the oracle capstone, not the FHE capstone
+### Why PicoRV32 is real in FHE, with a speed qualifier
 
 PicoRV32 lowers to 4 785 LUTs and 1 565 DFFs [@picorv32]. On the boolean-oracle path it compiles in ${\sim}1.3\,\mathrm{s}$ and ticks at ${\sim}173\,\mathrm{ms}$ ($N=1024$, $B=1$) in the 2026-08-12 boolean bench (**C1**). That is a fabric existence proof: a commodity neural/GPU graph can host a soft CPU's *shape*.
 
-The encrypted path's correctness workhorse is smaller: `full_adder`, then tree and regex netlists, under SING. An encrypted PicoRV32 at production $N$ is a trajectory item, not a **C** row in this epoch.
+The encrypted path uses the same host-clocked sequential seam as the toy counter (**C38**) and toy ISA (**C40**). Claim **C45** is one encrypted host posedge of the full PicoRV32 netlist at demo $N{=}8$ (output SING). Claim **C46** is the PRD 10-tick scripted `resetn` boot at the same $N$: CPU public-ms boolean SING PASS in $0.972\,\mathrm{s}$ ($97.20\,\mathrm{ms}$/row), calibrated hardness $4.0$ bits, with decrypted $Q$ matching the clear register file. A second public-MS on already-native $D$ for plain `$_DFF_P_` cells had been silently folding $1\to 0$ --- outputs could still match. Claim **C49** is execute+store: `addi x1,x0,1` then `sw`, `wdata`=1, $3.79\,\mathrm{s}/48$ ($78.90\,\mathrm{ms}$/row). Claim **C50** is load-back: `lw` sees stored 1 on the NBA xfer, $3.77\,\mathrm{s}/48$ ($78.53\,\mathrm{ms}$/row). Claim **C51** is the first Metal sequential PicoRV receipt: NOP-fetch, two instruction addresses, tiled BR, $7.94\,\mathrm{s}$/row at demo $N$. Metal $N{=}1024$ is not SING-logged this epoch --- the LUT-tax is the remaining engineering, not a missing compiler.
 
 ::: warning
-*Honesty note 1.1*. "We booted an encrypted RISC-V core" is true of the *dark-VM* story only in the oracle or mock-encoding sense unless a SING log says otherwise. Avenue 2 in Chapter [4](#ch:frontier){reference-type="ref" reference="ch:frontier"} is the speculative sequel. Do not merge those sentences on a slide.
-:::
-
-### SING as the teaching metric
-
-SING (stimuli in, golden out) is encrypted $\equiv$ clear on generic vectors, with certificate lines. It is the lab equivalent of a scan chain: if SING fails, you do not get to discuss milliseconds.
-
-::: lab
-**Laboratory 1.1** (Encrypted adder SING). Run the cookbook SING at demo $N$ and at production-shaped $N$ (Appendix [4](#app:repro){reference-type="ref" reference="app:repro"}). Record pass/fail, ms/row, and which certificate types printed. Then answer: which of those numbers would you be willing to put in an abstract without an asterisk?
+*Honesty note 1.1*. "We executed encrypted RISC-V" means **C50** on CPU (addi/store/load of 1) and **C51** on Metal only as a NOP-fetch at demo $N$ ($\sim 8\,\mathrm{s}$/row). Not Linux; not Metal $N{=}1024$. Avenue 2 in Chapter [4](#ch:frontier){reference-type="ref" reference="ch:frontier"} is self-modifying dark code, not this receipt.
 :::
 
 ### Threat / fidelity split
@@ -580,7 +598,7 @@ Phase 1 without Phase 2 still leaves $O(W\cdot N)$ encode inside each tile. Ph
 
 Default Metal BR: fused if $N\le 64$, tiled-kernel otherwise (NTT EP inside tiles). Legacy fused megagraph is `--metal-br-fused` only, and at production $N$ it is a museum exhibit.
 
-### Numbers a student may quote (epoch 2026-08-13 / C34)
+### Numbers a student may quote (epoch 2026-08-13 / C51)
 
 ::: center
   Path at $N=1024$                    s/BR (micro)               SING / 8 rows                           RSS
@@ -628,9 +646,9 @@ Most compiler courses grade a binary that runs. This course grades a binary that
 
 ### How to read a SING log
 
-A passing encrypted tick is a bundle:
+**SING** $=$ **S**timuli **In**, **G**olden out (Section [1.5](#sec:sing){reference-type="ref" reference="sec:sing"}): encrypted evaluation must match the cleartext netlist on the same generic vectors. A passing encrypted tick is then read as a bundle:
 
-- Functional: ciphertext decrypts to the clear netlist (SING).
+- Functional: ciphertext decrypts to the clear netlist (the SING gate).
 
 - Discrete: $\infty$-norm lemmas held on the inject.
 
@@ -638,7 +656,7 @@ A passing encrypted tick is a bundle:
 
 - Hardness: calibrated classical bits, with **H1** attached until Sage fills the estimator JSON.
 
-- Depth: noisy-BK model; **C22** measured at covering gadget; **C26** graded fail at product $N{=}1024$ inject; **H4** while $N=1024$ Metal SING keeps $B_{\mathrm{bk}}=0$.
+- Depth: noisy-BK model; **C22** measured at covering gadget; **C26** graded fail at product $N{=}1024$ inject on `cryptoPublicMS`; covering noisy Metal SING exists through inject $B{=}32$ (**C36**); torus-scale $B{\sim}128$ and default Track A $e{=}0$ BK remain **H4** asterisks.
 
 Students who report only milliseconds have not completed the lab.
 
@@ -695,7 +713,7 @@ The non-claims of Chapter [3](#ch:living){reference-type="ref" reference="ch:li
 
 ## Continuous hardware, discrete silicon {#ch:pillarii}
 
-The structural theorem of this chapter is lecture-safe (**C19**). Shatter / hold grades and campaign empirics remain seminar-depth and are *not* the theorem [@helut-tensorlut-thm].
+The structural theorem of this chapter is lecture-safe (**C19**). The separable melt--freeze--snap certificate is lecture-safe (**C44**). Shatter / hold grades and campaign empirics remain seminar-depth and are *not* the theorem [@helut-tensorlut-thm].
 
 ### The problem boolean search cannot see
 
@@ -749,10 +767,14 @@ Each clause is a `TensorLUTFormal.check*` in `TensorLUTFormal.swift`, aggregated
 **Theorem 1.2** (TensorLUT emitter / freeze corollary). *Under Theorem [1.1](#thm:tensorlut){reference-type="ref" reference="thm:tensorlut"} hypotheses plus emit-via-$E$ and `mutatedPreserving`: if $\pi(w)=0$ then $E(w)$ recovers the binary INIT; every freeze-preserving genotype remains a partial involution containing the frozen pairs.*
 :::
 
-Still not melt completeness.The named lemmas are `discretenessPenalty`, `cryptoFitnessMSE`, `combinedObjective`, `emitterThreshold`, `involutionSandwich`, `freezeMask`. Source path: `Sources/HELUTCore/TensorLUTFormal.swift`.
+Still not melt completeness for arbitrary netlists. The named lemmas of Theorem [1.1](#thm:tensorlut){reference-type="ref" reference="thm:tensorlut"} are `discretenessPenalty`, `cryptoFitnessMSE`, `combinedObjective`, `emitterThreshold`, `involutionSandwich`, `freezeMask`. Source path: `Sources/HELUTCore/TensorLUTFormal.swift`.
 
 ::: warning
 *Honesty note 1.2*. Theorem 1 does *not* prove recovery of arbitrary keys; a U-534 / P1030680 plaintext; or that melt is complete for all netlists. Shatter / hold grades remain empirical (**C8**, **C9**, **H6**).
+:::
+
+::: {#thm:tensorlut-snap .theorem}
+**Theorem 1.3** (TensorLUT melt--freeze--snap, separable interpolant). *Under a fully observed 1-LUT (each used INIT address an independent Boolean target $t$), $F(w)=-\lVert w-t\rVert_2^2-\lambda\pi(w)$ has unique maximizer $w=t$; the emitter recovers $t$ on the open cube $\lvert w_i-t_i\rvert<1/2$; a freeze away from $t$ makes $F=0$ unreachable.*
 :::
 
 ### Five-cell test for Theorem 1
@@ -826,7 +848,7 @@ The historical Enigma leaks this laboratory proved fatal---26-letter menus, self
 ### Theorem 2 (structural SoftBus) {#sec:thm-enigma256}
 
 ::: {#thm:enigma256 .theorem}
-**Theorem 1.3** (Enigma256 SoftBus reciprocity / fail-closed). *Under the hypotheses of `Enigma256Formal.certificate()` (reciprocal scramble path; day-key involution builders; NLFF retaps do not rewrite frozen scramble): frozen scramble is a permutation and an involution; stream encrypt-then-decrypt recovers plaintext under identical keys; derived plugboard is fixed-point-free involution and un-reflector is an involution; `hardenedCubic()` rejects `coupledCubic6`.*
+**Theorem 1.4** (Enigma256 SoftBus reciprocity / fail-closed). *Under the hypotheses of `Enigma256Formal.certificate()` (reciprocal scramble path; day-key involution builders; NLFF retaps do not rewrite frozen scramble): frozen scramble is a permutation and an involution; stream encrypt-then-decrypt recovers plaintext under identical keys; derived plugboard is fixed-point-free involution and un-reflector is an involution; `hardenedCubic()` rejects `coupledCubic6`.*
 :::
 
 Machine-checked: `Enigma256Formal.certificate()` / `testEnigma256FormalCertificate`. Reproduce: see Lab appendix / `REPRODUCE.md`.
@@ -871,19 +893,23 @@ Canonical nine-slot card: `directives/application-gallery.md`.
 
 3.  **Hardness $+$ noisy-BK certificates.** Estimator fill-in and covering-gadget residuals (**C5**, **C22**, **C23**). Product-shaped $N{=}1024$ inject is a graded failure (**C26**); Metal SING still noiseless BK (**H4**).
 
+4.  **Encrypted sequential.** Counter (**C38**), toy `NOP`/`ADD` (**C40**), PicoRV32 `addi`+`sw`+`lw` at demo $N{=}8$ (**C50**); Metal NOP-fetch (**C51**).
+
+5.  **4-bit CSA vs ripple LUT cut** (**C42**). Architecture, not TensorLUT melt.
+
 ### Pillar I shape laboratory (oracle --- not FHE)
 
 1.  **Decision tree.** A 4-bit non-linear boundary, 7 LUTs. Exact threshold logic on a batch of records. Teaches: non-linear Boolean $\neq$ neural net, and $B$ is a capacity knob.
 
 2.  **Regex / DFA search.** 3-character matcher, 23 LUTs. Large $B$ turns unified memory into the story.
 
-3.  **PicoRV32.** ${\sim}4.8\mathrm{k}$ LUTs, ${\sim}1.5\mathrm{k}$ DFFs. Scripted `resetn` boot. Oracle path: **C1**. Encrypted CPU SING: not a **C** in this epoch.
+3.  **PicoRV32.** ${\sim}4.8\mathrm{k}$ LUTs, ${\sim}1.5\mathrm{k}$ DFFs. Scripted `resetn` boot. Oracle path: **C1**. Encrypted 1-tick at demo $N{=}8$: **C50** `lw` sees 1; Metal NOP-fetch **C51**.
 
 ### Pillar II
 
 1.  **M4 TensorLUT baseline emit** (**C8**).
 
-2.  **Stecker involution sandwich / formal** (**C9**, **C19**, **C25**).
+2.  **Stecker involution sandwich / formal** (**C9**, **C19**, **C25**, **C44**, **C48**).
 
 3.  **Shatter vs hold under $\lambda$** --- seminar empirics; not a decrypt (**H6**).
 
@@ -891,9 +917,11 @@ Canonical nine-slot card: `directives/application-gallery.md`.
 
 1.  **SoftBus reciprocity / bijection** (**C10**, **C24**).
 
-2.  **Red battery** (TensorLUT / KPA / `ent`) --- empirical grades in `logs/enigma256-*`.
+2.  **Encrypted 1-round frozen scramble** (**C39**) --- algebraic slice under torus FHE, not live BRAM.
 
-3.  **Fail-closed NLFF harden** (**C24** clause 5).
+3.  **Red battery** (TensorLUT / KPA / `ent`) --- empirical grades in `logs/enigma256-*`.
+
+4.  **Fail-closed NLFF harden** (**C24** clause 5).
 
 ### Campaign as a case study (not a decrypt)
 
@@ -925,6 +953,13 @@ Compile `counter` or `full_adder` Yosys JSON with `--compile-only`. Tick with `-
       --lut-backend pbs --encoding phase --bench-equiv
     .build/release/helut --bench netlist.json --degree 8 \
       --bench-encrypted --cpu-only --sing --vectors 8
+    .build/release/helut --bench counter_netlist.json --degree 8 \
+      --bench-encrypted --cpu-only --sing --vectors 8
+    .build/release/helut --bench toy_isa_netlist.json --degree 8 \
+      --bench-encrypted --cpu-only --sing --vectors 32
+    .build/release/helut --bench picorv32_netlist.json --degree 8 \
+      --bench-encrypted --cpu-only --sing --ticks 48 --reset-hold 3 \
+      --encrypted-mem prog --paths 'blind-rotate public-ms boolean'
 
 Deliverable: a table with columns {backend, $N$, SING, certificates printed, may we say "encrypted" on a slide?}.
 
@@ -949,7 +984,7 @@ Compare fused-megagraph DNF, **C16**--**C21** using Chapter [2](#ch:metal){refe
 
     swift test -c release --filter testTensorLUTFormalCertificate
 
-Deliverable: name the six lemmas, the certificate hypotheses, and one sentence that Theorem [1.1](#thm:tensorlut){reference-type="ref" reference="thm:tensorlut"} does *not* prove. Theory track: read `Sources/HELUTCore/TensorLUTFormal.swift` and `directives/tensorlut-theorem.md`; reconstruct the five-cell card without running Swift.
+Deliverable: name the six lemmas, the certificate hypotheses, and one sentence that Theorem [1.1](#thm:tensorlut){reference-type="ref" reference="thm:tensorlut"} does *not* prove. Optional: `testTensorLUTMeltFreezeSnapCertificate` (**C44**) --- what class of INIT genomes the unique-maximizer lemma covers. Theory track: read `Sources/HELUTCore/TensorLUTFormal.swift` and `directives/tensorlut-theorem.md`; reconstruct the five-cell card without running Swift.
 
 ### Lab 7 --- Five-cell audit (everyone)
 
@@ -970,21 +1005,22 @@ This chapter is the discovery path after disclosure [@helut-trajectory]. None o
 ### Near term
 
 ::: center
-  Track                           Status at epoch 2026-08-13 / C34                                                                  Next experiment
-  ------------------------------- ------------------------------------------------------------------------------------------------- --------------------------------------------------------------------------------------------
-  **H2** full_adder $N\ge 256$    **Closed** ($Z_{2N}$ pack / `rotationPower`)                                                      Keep as a worked bug in Chapter [3](#ch:torus){reference-type="ref" reference="ch:torus"}.
-  **H1** Sage lattice-estimator   **C23** filled; production $|\Delta|=4.5$; core-SVP vs Cost `rop` divergences                     Optional retune / quote estimator-only on $\Delta>16$ rows.
-  **H3** Metal BR at large $N$    **C20** boolean $10.6\,\mathrm{s}$; **C21** crypto $\ell=2$ $11.38\,\mathrm{s}$                   NTT inside crypto $\ell=2$ at $N{=}1024$ (incomplete public-MS gadget).
-  **H4** Noisy BK                 **C34** $\varepsilon\le 2^{-64}$ at discrete $B{=}1$/baseLog$=4$; torus-scale $B{\sim}128$ open   Raise inject bound under finer covering / Gaussian BK.
-  Campaign catalog                Middle ring $\neq A$ untested; catalog parked \@417                                               Resume `--bombe-from 418`.
-  Garble / quarantine             Soft-band grades                                                                                  Sister-message lessons; not a decrypt claim.
+  Track                           Status at epoch 2026-08-13 / C51                                                  Next experiment
+  ------------------------------- --------------------------------------------------------------------------------- --------------------------------------------------------------------------------------------
+  **H2** full_adder $N\ge 256$    **Closed** ($Z_{2N}$ pack / `rotationPower`)                                      Keep as a worked bug in Chapter [3](#ch:torus){reference-type="ref" reference="ch:torus"}.
+  **H1** Sage lattice-estimator   **C23** filled; production $|\Delta|=4.5$; core-SVP vs Cost `rop` divergences     Optional retune / quote estimator-only on $\Delta>16$ rows.
+  **H3** Metal BR at large $N$    **C20** boolean $10.6\,\mathrm{s}$; **C21** crypto $\ell=2$ $11.38\,\mathrm{s}$   NTT inside crypto $\ell=2$ at $N{=}1024$ (incomplete public-MS gadget).
+  **H4** Noisy BK                 **C43** $k{=}4$ SING @ $N{=}1024$ $\sigma{=}128$; $\varepsilon$ 4-trial $-43$     $k$ in $(4,8)$ or public-ms at $k{=}8$; native $k{=}1$ still open.
+  Encrypted sequential            **C51** Metal PicoRV32 NOP-fetch @ demo $N{=}8$ ($7.94\,\mathrm{s}$/row)          Metal $N{=}1024$; fused metal-netlist.
+  Campaign catalog                Middle ring $\neq A$ untested; catalog parked \@417                               Resume `--bombe-from 418`.
+  Garble / quarantine             Soft-band grades                                                                  Sister-message lessons; not a decrypt claim.
 :::
 
 ### Mid-term pillars
 
 1.  **Pillar I science:** shallower nets, NTT/persist graphs, estimator-backed params (this book's Parts III).
 
-2.  **Pillar II science:** Theorem 1 landed (**C19**); corollary emitter / freeze (**C25**, Chapter [1](#ch:pillarii){reference-type="ref" reference="ch:pillarii"}); remaining: completeness of melt, stream-cipher melts.
+2.  **Pillar II science:** Theorem 1 landed (**C19**); corollary emitter / freeze (**C25**); melt--freeze--snap on a separable interpolant (**C44**); 2-LUT cascade emit (**C48**); remaining: multi-LUT topological melt, stream-cipher melts.
 
 3.  **Pillar III science:** SoftBus Theorem 2 landed (**C24**, Chapter [1](#ch:pillariii){reference-type="ref" reference="ch:pillariii"}); remaining: polymorphic Red/Blue standard beyond E256 SoftBus.
 
@@ -1036,7 +1072,7 @@ First graduating experiment: fixture harness that emits tick markers and a publi
 
 ::: center
   Symbol                         Meaning
-  ------------------------------ -------------------------------------------------------------------
+  ------------------------------ -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   $q$                            Torus modulus; HELUT uses $q=2^{32}$.
   $N$                            Polynomial degree / ciphertext shape. Not LUT count.
   $n$                            LWE dimension (often $n=N$ in HELUT boolean production).
@@ -1044,7 +1080,7 @@ First graduating experiment: fixture harness that emits tick markers and a publi
   $\delta$                       $q/(2N)$, rotation / message spacing.
   $\sigma$                       LWE Gaussian width.
   $\varepsilon$                  Ingest failure probability (Gaussian certificate).
-  $B_{\mathrm{bk}}$              BK noise bound; $0$ in HELUT now (**H4**).
+  $B_{\mathrm{bk}}$              BK noise bound after BR; noiseless ($0$) on default Track A throughput SING; measured under covering gadgets (**H4**, **C22**/**C36**).
   $\ell$                         GGSW gadget levels.
   $W$                            CMUX tile width in the Metal compiler.
   $R_q$                          $\mathbb{Z}_q[X]/(X^N+1)$.
@@ -1058,19 +1094,19 @@ First graduating experiment: fixture harness that emits tick markers and a publi
   $M$                            Freeze mask: coordinates excluded from $\pi$.
   $\lambda$                      Discreteness squeeze on $\pi(w)$; Theorem 1 needs $\lambda\ge 0$.
   `$lut`                         Yosys look-up cell; one programmable gate.
-  SING                           Encrypted $\equiv$ clear on generic stimuli.
+  SING                           **S**timuli **In**, **G**olden out: encrypted evaluation $\equiv$ cleartext netlist on the same generic input vectors (`--sing`); certificate lines ride with the tick.
   **C$n$**, **H$n$**, **N$n$**   Claim, hedge, non-implication IDs.
 :::
 
 ## Claim index (snapshot) {#app:claims}
 
-Canonical living inventory: `directives/claim-sheet.md`. If this appendix disagrees with the sheet, the sheet wins. Snapshot epoch: 2026-08-13 / C34.
+Canonical living inventory: `directives/claim-sheet.md`. If this appendix disagrees with the sheet, the sheet wins. Snapshot epoch: 2026-08-13 / C51.
 
 ### Reproducible results
 
 ::: center
   ID        Result
-  --------- --------------------------------------------------------------------------------------------------------------------------------------
+  --------- -----------------------------------------------------------------------------------------------------------------------------------------------------------
   **C1**    Yosys `$lut`/DFF $\to$ Metal/CPU tensor eval (oracle).
   **C2**    Welchman path breaks known P1030684 end-to-end.
   **C3**    $\le 10$-plug / SAT kill chain removes ghosts.
@@ -1105,6 +1141,23 @@ Canonical living inventory: `directives/claim-sheet.md`. If this appendix disagr
   **C32**   Track A approx: `.crypto` inject $B{=}1$ at $N{=}1024$ decodable; $\varepsilon\log_2\approx-8.4$ at 8 trials (not $-64$).
   **C33**   Track A Metal SING covering `.crypto` at $N{=}1024$ with $B{=}1$ PASS (secret + public-ms).
   **C34**   Track A covering baseLog$=4$: $\varepsilon\log_2\approx-913$ ($\le 2^{-64}$) + Metal SING PASS.
+  **C35**   Track A covering baseLog$=2$: $\varepsilon\le 2^{-64}$ through inject $B{=}16$ ($\varepsilon\log_2\approx-65.4$) + Metal SING PASS.
+  **C36**   Track A covering baseLog$=1$: $\varepsilon\le 2^{-64}$ through inject $B{=}32$ ($\varepsilon\log_2\approx-139$) + Metal SING PASS; $B{=}128$ still fails.
+  **C37**   Track A Gaussian BK inject on covering-b1: $\sigma{=}24$ meets $\varepsilon\le 2^{-64}$ + Metal SING PASS; torus $\sigma{\approx}128$ still undecodable.
+  **C38**   Encrypted sequential DFF host-clock: 4-bit counter Metal $N{=}1024$ SING PASS ($15.88\,\mathrm{s}/4$). Not PicoRV32.
+  **C39**   Encrypted 1-byte/1-round E256 frozen scramble Metal $N{=}1024$ SING PASS ($22.77\,\mathrm{s}/2$). Not live BRAM.
+  **C40**   Encrypted toy NOP/ADD ISA Metal $N{=}1024$ SING PASS ($20.31\,\mathrm{s}/4$). Not PicoRV32.
+  **C41**   Covering-b1 Gaussian $\sigma{=}128$ meets $\varepsilon\le 2^{-64}$ at $N\le 512$ + Metal SING; $N{=}1024$ still fail.
+  **C42**   4-bit CSA vs ripple: LUT2 $11\to 8$ ($-27\%$) + encrypted SING PASS. Not TensorLUT melt.
+  **C43**   $k\delta$ encoding at $N{=}1024$: $k{=}4$ Metal SING PASS on covering-b1 $\sigma{=}128$; $\varepsilon$ bar not stable at 4 trials.
+  **C44**   TensorLUT melt--freeze--snap on a separable Boolean interpolant (three lemmas). Not arbitrary-netlist melt.
+  **C45**   Encrypted PicoRV32 1-tick SING at demo $N{=}8$: $76.12\,\mathrm{ms}$/row; 4-bit hardness. Not production $N$.
+  **C46**   Encrypted PicoRV32 10-tick `resetn` boot SING at $N{=}8$: $0.972\,\mathrm{s}/10$; $Q$ $\equiv$ clear. Plain `$_DFF_P_` native-$D$ fix.
+  **C47**   Encrypted PicoRV32 NOP-fetch: 10 instruction fetches, PC $0{+}4k$ through $0x24$; $3.15\,\mathrm{s}/32$.
+  **C48**   2-LUT cascade melt--snap--emit $(a\land b)\oplus c$; 8-corner SING of snapped INIT (dual interpolant OK).
+  **C49**   Encrypted PicoRV32 `addi`+`sw`: store `wdata`=1, RAM0=1; $3.79\,\mathrm{s}/48$ @ demo $N{=}8$. Load-back is **C50**.
+  **C50**   Encrypted PicoRV32 `lw` sees stored 1 (NBA xfer); $3.77\,\mathrm{s}/48$ @ demo $N{=}8$. Not Metal PicoRV.
+  **C51**   Metal PicoRV32 NOP-fetch @ demo $N{=}8$: tiled BR, 2 fetches, $63.55\,\mathrm{s}/8$. Not fused netlist / not $N{=}1024$.
 :::
 
 ### Open hedges
@@ -1115,7 +1168,7 @@ Canonical living inventory: `directives/claim-sheet.md`. If this appendix disagr
   **H1**   **C23** filled JSON. Production $|\Delta|=4.5$; divergences are core-SVP vs Cost `rop`.
   **H2**   **Closed** 2026-08-12 ($Z_{2N}$ pack). Kept as history.
   **H3**   **C20**/**C21** SING bars met; serial NTT SING still loses vs persist.
-  **H4**   **C34** closes $\varepsilon\le 2^{-64}$ at discrete $B{=}1$ / baseLog$=4$; torus-scale $B{\sim}128$ still open.
+  **H4**   **C43** $k{=}4$ SING at $N{=}1024$ $\sigma{=}128$; $\varepsilon\le 2^{-64}$ not stable. Native $k{=}1$ still **C37**.
   **H5**   `*PublicMS` gadgets ($g_0=\delta$): on-lattice intent, not a closer of old **H2**.
   **H6**   TensorLUT / quarantine vs campaign: parallel research, not P1030680 PT.
   **H7**   Catalog / Regenbogen / UEBUNG: negatives graded; middle ring $\neq A$ untested; catalog parked \@417, resume `--bombe-from 418`.
@@ -1170,11 +1223,19 @@ Canonical file: `REPRODUCE.md`. Cookbook: `directives/parameter-cookbook.md`. Bu
 
 Native SageMath 10.9 at `~/Applications/SageMath-10-9.app`. Production row: HELUT $175.7$ vs estimator $180.2$. Four of eight anchors exceed the 16-bit merge tolerance --- do not quote $176$ as estimator cost on every row.
 
-### Encrypted SING (**C4**--**C6**)
+### Encrypted SING (**C4**--**C6**, **C38**--**C40**)
 
     .build/release/helut --bench netlist.json --degree 8 \
       --bench-encrypted --cpu-only --sing --vectors 8
     ./Scripts/helut_encrypted_sing.sh
+    .build/release/helut --bench counter_netlist.json --degree 8 \
+      --bench-encrypted --cpu-only --sing --vectors 8
+    .build/release/helut --bench e256_round1_netlist.json --degree 16 \
+      --bench-encrypted --cpu-only --sing --vectors 32
+    .build/release/helut --bench toy_isa_netlist.json --degree 8 \
+      --bench-encrypted --cpu-only --sing --vectors 32
+
+**C38** counter, **C39** frozen E256 round (LUT4, $N\ge 16$), **C40** toy ISA. None of these is PicoRV32 or live BRAM SoftBus.
 
 ### Metal microbench and NTT (**C18**)
 
@@ -1257,6 +1318,46 @@ Expect PASS; covering `.crypto`, not `cryptoPublicMS`.
 
 Expect $\varepsilon\log_2\approx-913$; Metal PASS. Torus-scale $B{=}128$ still fails.
 
+### Track A covering-b2 $\varepsilon\le 2^{-64}$ through $B{=}16$ (**C35**)
+
+    .build/release/helut-bench --measure-bk-noise --degree 1024 \
+      --trials 4 --bk-noise 16 --covering-base-log 2
+    .build/release/helut-bench --bench netlist.json --degree 1024 \
+      --bench-encrypted --sing --vectors 2 --bk-noise 16 \
+      --paths covering-b2
+
+Expect $\varepsilon\log_2\approx-65.4$ at $B{=}16$; Metal PASS. $B{=}32$ fails the bar.
+
+### Track A covering-b1 $\varepsilon\le 2^{-64}$ through $B{=}32$ (**C36**)
+
+    .build/release/helut-bench --measure-bk-noise --degree 1024 \
+      --trials 4 --bk-noise 32 --covering-base-log 1
+    .build/release/helut-bench --bench netlist.json --degree 1024 \
+      --bench-encrypted --sing --vectors 2 --bk-noise 32 \
+      --paths covering-b1
+
+Expect $\varepsilon\log_2\approx-139$ at $B{=}32$; Metal PASS. $B{=}128$ still fails.
+
+### Track A $\sigma{=}128$ covering-b1 at $N\le 512$ (**C41**)
+
+    .build/release/helut --measure-bk-noise --degree 512 --trials 4 \
+      --bk-noise-sigma 128 --covering-base-log 1
+    .build/release/helut --bench netlist.json --degree 512 \
+      --bench-encrypted --sing --vectors 2 --bk-noise-sigma 128 \
+      --paths covering-b1
+
+Does not close $N{=}1024$ at native $k{=}1$. Headroom is $\delta=q/(2N)$.
+
+### $k\delta$ encoding at $N{=}1024$ (**C43**)
+
+    .build/release/helut --measure-bk-noise --degree 1024 --trials 4 \
+      --bk-noise-sigma 128 --covering-base-log 1 --boolean-scale-mul 4
+    .build/release/helut --bench netlist.json --degree 1024 \
+      --bench-encrypted --sing --vectors 2 --bk-noise-sigma 128 \
+      --paths covering-b1 --boolean-scale-mul 4
+
+$k{=}4$ Metal SING PASS; 4-trial $\varepsilon\log_2\approx-43$ (not $-64$). $k{=}8$ meets $\varepsilon$; public-ms SING fails.
+
 ### Track B Metal SING with noisy BK (**C28**)
 
     .build/release/helut --bench netlist.json --degree 128 \
@@ -1282,6 +1383,73 @@ Five lemmas must `hold`. Statement: `directives/enigma256-theorem.md`. Structura
     swift test -c release --filter testTensorLUTFormalCorollaryCertificate
 
 Emitter--discrete agreement and involution-under-freeze must `hold`. Statement: `directives/tensorlut-theorem.md` (corollary).
+
+### TensorLUT melt--freeze--snap (**C44**)
+
+    swift test -c release --filter testTensorLUTMeltFreezeSnapCertificate
+
+Three lemmas must `hold` (unique maximizer, snap basin, freeze). Statement: `directives/tensorlut-theorem.md` (Theorem 1$''$). Not multi-LUT topological melt.
+
+### Encrypted PicoRV32 1-tick (**C45**)
+
+    .build/release/helut --bench picorv32_netlist.json --degree 8 \
+      --bench-encrypted --cpu-only --sing --vectors 1 \
+      --paths 'blind-rotate public-ms boolean' \
+      | tee logs/helut-encrypted-n8-cpu-sing-picorv32.log
+
+Expect PASS, ${\sim}76\,\mathrm{ms}$/row, hardness $4.0$ bits (demo $N$). Output SING; $Q$ SING is **C46**.
+
+### Encrypted PicoRV32 10-tick boot (**C46**)
+
+    .build/release/helut --bench picorv32_netlist.json --degree 8 \
+      --bench-encrypted --cpu-only --sing --ticks 10 --reset-hold 3 \
+      --paths 'blind-rotate public-ms boolean' \
+      | tee logs/helut-encrypted-n8-cpu-sing-picorv32-boot10.log
+
+Expect PASS $0.972\,\mathrm{s}/10$, $Q\equiv$ clear. Idle memory. LUT-tax: $N{=}32$ ${\sim}819\,\mathrm{ms}$; $N{=}64$ ${\sim}4.35\,\mathrm{s}$.
+
+### Encrypted PicoRV32 NOP-fetch (**C47**)
+
+    .build/release/helut --bench picorv32_netlist.json --degree 8 \
+      --bench-encrypted --cpu-only --sing --ticks 32 --reset-hold 3 \
+      --encrypted-mem nop --paths 'blind-rotate public-ms boolean' \
+      | tee logs/helut-encrypted-n8-cpu-sing-picorv32-nop-fetch.log
+
+Expect 10 fetches, addresses $0,4,\ldots,\mathtt{0x24}$, $Q\equiv$ clear.
+
+### Encrypted PicoRV32 addi+sw (**C49**)
+
+    .build/release/helut --bench picorv32_netlist.json --degree 8 \
+      --bench-encrypted --cpu-only --sing --ticks 48 --reset-hold 3 \
+      --encrypted-mem prog --paths 'blind-rotate public-ms boolean' \
+      | tee logs/helut-encrypted-n8-cpu-sing-picorv32-prog-store.log
+
+Expect STORE `wdata`=1, RAM0=1, 14 fetches, ${\sim}79\,\mathrm{ms}$/row.
+
+### Encrypted PicoRV32 lw sees 1 (**C50**)
+
+    .build/release/helut --bench picorv32_netlist.json --degree 8 \
+      --bench-encrypted --cpu-only --sing --ticks 48 --reset-hold 3 \
+      --encrypted-mem prog --paths 'blind-rotate public-ms boolean' \
+      | tee logs/helut-encrypted-n8-cpu-sing-picorv32-prog-lw.log
+
+Expect LOAD xfer `rdata`=1, STORE `wdata`=1, 14 fetches, ${\sim}79\,\mathrm{ms}$/row, $Q\equiv$ clear. Demo $N{=}8$.
+
+### Metal PicoRV32 NOP-fetch (**C51**)
+
+    .build/release/helut --bench picorv32_netlist.json --degree 8 \
+      --bench-encrypted --sing --ticks 8 --reset-hold 3 \
+      --encrypted-mem nop --paths 'blind-rotate-metal public-ms boolean' \
+      --metal-br-tile 8 \
+      | tee logs/helut-encrypted-n8-metal-sing-picorv32-nop-fetch.log
+
+Expect 2 fetches, PASS ${\sim}64\,\mathrm{s}/8$. Use tiled BR; fused traps.
+
+### 2-LUT cascade melt--emit (**C48**)
+
+    swift test -c release --filter testTwoLUTCascadeMeltFreezeSnapEmit
+
+Eight Boolean corners of the snapped INIT must match $(a\land b)\oplus c$.
 
 ### Boolean oracle benches (**C1**)
 

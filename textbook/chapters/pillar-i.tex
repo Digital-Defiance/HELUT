@@ -70,6 +70,45 @@ buffers; LUT matrices or BK packs are uploaded once and cached.
 This is the reconfigurable clock tree: not routed silicon, but a protocol
 with explicit buffer ownership.
 
+\section{SING as the teaching metric}
+\label{sec:sing}
+
+\textbf{SING} expands to \textbf{S}timuli \textbf{In}, \textbf{G}olden out.
+
+In hardware verification, a \emph{golden model} is the flawless reference
+circuit: feed test vectors (stimuli) in, expect the exact right bits out.
+For HELUT the golden model is the cleartext Yosys netlist simulator.
+A SING check (\texttt{--sing} / \texttt{--bench-encrypted-metrics}) is the
+primary teaching metric and the laboratory analogue of a scan chain:
+encrypt the same generic stimuli, evaluate under GGSW blind-rotate, decrypt,
+and demand bit-exact agreement with cleartext.
+
+A passing encrypted tick under SING is not only a boolean match.
+The log is graded as a cryptographic bundle:
+
+\begin{itemize}
+  \item \textbf{Functional:} ciphertext decrypts to the clear netlist (the hard gate).
+  \item \textbf{Discrete:} $\infty$-norm inject lemmas hold where the path prints them.
+  \item \textbf{Gaussian:} ingest failure probabilities stay under stated hypotheses.
+  \item \textbf{Hardness:} calibrated classical bit estimates print with \hid{1} attached
+        until the estimator row is honest.
+  \item \textbf{Depth:} noisy bootstrap-key residuals are modeled or measured;
+        default Track~A throughput SING may still use $e{=}0$ BK (\hid{4});
+        covering noisy SING receipts are separate claims (\cid{28}, \cid{33}--\cid{37}, \cid{41}, \cid{43}).
+\end{itemize}
+
+Brutal engineering rule: if SING fails, you do not get to discuss milliseconds.
+Throughput and timing benches are irrelevant until the FHE path certifies its
+own correctness against the golden netlist.
+
+\begin{lab}[Encrypted adder SING]
+Run the cookbook SING at demo $N$ and at production-shaped $N$
+(Appendix~\ref{app:repro}).
+Record pass/fail, ms/row, and which certificate types printed.
+Then answer: which of those numbers would you be willing to put in an
+abstract without an asterisk?
+\end{lab}
+
 \section{Two backends, one netlist}
 
 \begin{center}
@@ -94,7 +133,48 @@ Inter-LUT refresh defaults to \texttt{publicMS} (lattice-compatible BK masks).
 encrypted $\equiv$ clear multi-netlist SING; full\_adder through $N=1024$
 (publicMS and secret).}
 
-\section{Why PicoRV32 is the oracle capstone, not the FHE capstone}
+\reproduced{C38}{Encrypted host-clocked DFF $Q$ on a 4-bit counter
+($6$ \texttt{\$lut} $+$ $4$ \texttt{\$\_DFFE\_PP\_}): CPU $N{=}8$ and Metal
+$N{=}1024$ public-ms boolean SING PASS. Not PicoRV32; fused metal-netlist
+and cpu-ggsw remain combinational-only.}
+
+\reproduced{C40}{Encrypted toy ISA: 4-bit accumulator, \texttt{NOP} or
+\texttt{ADD imm}, $11$ \texttt{\$lut} $+$ $4$ DFFs. Metal $N{=}1024$ SING PASS.}
+
+\reproduced{C45}{Encrypted PicoRV32: $4785$ \texttt{\$lut} $+$ $1565$ DFFs.
+CPU public-ms boolean output SING PASS at demo $N{=}8$, one host posedge,
+$76.12\,\mathrm{ms}$/row, hardness $4.0$ bits.}
+
+\reproduced{C46}{Encrypted PicoRV32 10-tick \texttt{resetn} boot (hold 3).
+PASS $0.972\,\mathrm{s}/10$ ($97.20\,\mathrm{ms}$/row) with $Q$ $\equiv$ clear.
+Plain \texttt{\$\_DFF\_P\_} must copy native $D$ (no second public-MS).
+$N{=}32$ 1-tick also PASS ($819\,\mathrm{ms}$/row, 16-bit hardness);
+$N{=}64$ 1-tick PASS ($4.35\,\mathrm{s}$/row, 32-bit hardness).}
+
+\reproduced{C47}{Encrypted PicoRV32 NOP ROM: always-ready
+\texttt{addi x0,x0,0}. Ten instruction fetches, \texttt{mem\_addr}
+$0,4,\ldots,\mathtt{0x24}$, $Q\equiv$ clear. $3.15\,\mathrm{s}/32$ at
+demo $N{=}8$. Receipt:
+\corpus{logs/helut-encrypted-n8-cpu-sing-picorv32-nop-fetch.log}.}
+
+\reproduced{C49}{Encrypted PicoRV32 tiny program: \texttt{addi x1,x0,1},
+NOP, \texttt{sw x1,0(x0)}. Store \texttt{wdata}=1 into host RAM.
+PASS $3.79\,\mathrm{s}/48$ ($78.90\,\mathrm{ms}$/row) at demo $N{=}8$.
+\texttt{\$\_SDFFCE\_*} enable gates reset; \texttt{rdata} held for NBA
+\texttt{mem\_xfer}; host DFF copies native LWE.}
+
+\reproduced{C50}{Same ROM plus \texttt{lw x2,0(x0)}. Host RAM on the NBA
+\texttt{mem\_xfer} cycle: \texttt{rdata}=1. PASS $3.77\,\mathrm{s}/48$
+($78.53\,\mathrm{ms}$/row). First-cycle LOAD log may still show leftover
+NOP $0\mathrm{x}13$; PicoRV samples the xfer. Receipt:
+\corpus{logs/helut-encrypted-n8-cpu-sing-picorv32-prog-lw.log}.}
+
+\reproduced{C51}{Metal PicoRV32 NOP-fetch at demo $N{=}8$: tiled-kernel
+BR (\texttt{--metal-br-tile 8}; fused default traps). Two fetches
+($0$, $4$). PASS $63.55\,\mathrm{s}/8$ ($7.94\,\mathrm{s}$/row).
+Per-LUT Metal BR, not fused metal-netlist.}
+
+\section{Why PicoRV32 is real in FHE, with a speed qualifier}
 
 PicoRV32 lowers to 4\,785 LUTs and 1\,565 DFFs~\cite{picorv32}.
 On the boolean-oracle path it compiles in ${\sim}1.3\,\mathrm{s}$ and ticks
@@ -103,32 +183,32 @@ at ${\sim}173\,\mathrm{ms}$ ($N=1024$, $B=1$) in the 2026-08-12 boolean bench
 That is a fabric existence proof: a commodity neural/GPU graph can host a
 soft CPU's \emph{shape}.
 
-The encrypted path's correctness workhorse is smaller: \texttt{full\_adder},
-then tree and regex netlists, under SING.
-An encrypted PicoRV32 at production $N$ is a trajectory item, not a
-\cid{} row in this epoch.
+The encrypted path uses the same host-clocked sequential seam as the toy
+counter (\cid{38}) and toy ISA (\cid{40}).
+Claim \cid{45} is one encrypted host posedge of the full PicoRV32 netlist at
+demo $N{=}8$ (output SING).
+Claim \cid{46} is the PRD 10-tick scripted \texttt{resetn} boot at the same
+$N$: CPU public-ms boolean SING PASS in $0.972\,\mathrm{s}$ ($97.20\,\mathrm{ms}$/row),
+calibrated hardness $4.0$ bits, with decrypted $Q$ matching the clear
+register file.
+A second public-MS on already-native $D$ for plain \texttt{\$\_DFF\_P\_}
+cells had been silently folding $1\to 0$ --- outputs could still match.
+Claim \cid{49} is execute+store: \texttt{addi x1,x0,1} then \texttt{sw},
+\texttt{wdata}=1, $3.79\,\mathrm{s}/48$ ($78.90\,\mathrm{ms}$/row).
+Claim \cid{50} is load-back: \texttt{lw} sees stored 1 on the NBA xfer,
+$3.77\,\mathrm{s}/48$ ($78.53\,\mathrm{ms}$/row).
+Claim \cid{51} is the first Metal sequential PicoRV receipt: NOP-fetch,
+two instruction addresses, tiled BR, $7.94\,\mathrm{s}$/row at demo $N$.
+Metal $N{=}1024$ is not SING-logged this epoch --- the LUT-tax is the
+remaining engineering, not a missing compiler.
 
 \begin{warning}
-``We booted an encrypted RISC-V core'' is true of the \emph{dark-VM} story
-only in the oracle or mock-encoding sense unless a SING log says otherwise.
-Avenue~2 in Chapter~\ref{ch:frontier} is the speculative sequel.
-Do not merge those sentences on a slide.
+``We executed encrypted RISC-V'' means \cid{50} on CPU (addi/store/load of 1)
+and \cid{51} on Metal only as a NOP-fetch at demo $N$ ($\sim 8\,\mathrm{s}$/row).
+Not Linux; not Metal $N{=}1024$.
+Avenue~2 in Chapter~\ref{ch:frontier} is self-modifying dark code, not this
+receipt.
 \end{warning}
-
-\section{SING as the teaching metric}
-
-SING (stimuli in, golden out) is encrypted $\equiv$ clear on generic vectors,
-with certificate lines.
-It is the lab equivalent of a scan chain: if SING fails, you do not get to
-discuss milliseconds.
-
-\begin{lab}[Encrypted adder SING]
-Run the cookbook SING at demo $N$ and at production-shaped $N$
-(Appendix~\ref{app:repro}).
-Record pass/fail, ms/row, and which certificate types printed.
-Then answer: which of those numbers would you be willing to put in an
-abstract without an asterisk?
-\end{lab}
 
 \section{Threat / fidelity split}
 
@@ -150,6 +230,4 @@ If the tensor datapath cannot boot a CPU under mock encodings, adding real
 TFHE noise only makes the systems problem harder.
 If the FHE path cannot SING an adder, a CPU slide is theatre.
 
-\growswhen{Encrypted sequential clocks beyond combinational \texttt{\$lut}
-refresh; async resets and latches; an encrypted PicoRV32 SING at production
-$N$.}
+\growswhen{Metal $N{=}1024$ PicoRV tick; fused sequential metal-netlist.}

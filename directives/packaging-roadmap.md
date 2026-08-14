@@ -124,7 +124,7 @@ Apps/
   <third-party>/
 ```
 
-- [ ] Template: `Package.swift` snippet or SPM plugin doc — “depend on HELUTCore ≥ C34”
+- [ ] Template: `Package.swift` snippet or SPM plugin doc — “depend on HELUTCore ≥ C36”
 - [ ] Each app: README with claim IDs consumed + reproduce one-liner
 - [ ] Gallery site points at Apps/, not at megabin flags
 

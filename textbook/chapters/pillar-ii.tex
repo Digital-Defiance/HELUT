@@ -2,12 +2,14 @@
 \label{ch:pillarii}
 
 The structural theorem of this chapter is lecture-safe (\cid{19}).
+The separable melt--freeze--snap certificate is lecture-safe (\cid{44}).
 Shatter / hold grades and campaign empirics remain seminar-depth and are
 \emph{not} the theorem~\cite{helut-tensorlut-thm}.
 
-\growswhen{A completeness theorem: that melt recovers cryptographic structure
-combinatoric sieves miss, for a stated class of netlists.
-Theorem~1 does not claim that.
+\growswhen{A completeness theorem for \emph{multi-LUT topological} melt:
+that melt recovers cryptographic structure combinatoric sieves miss, for a
+stated class of netlists beyond a fully observed 1-LUT.
+Theorem~1$''$ (\cid{44}) is the separable interpolant, not that class.
 Stream-cipher melts remain on the trajectory.}
 
 \section{The problem boolean search cannot see}
@@ -114,7 +116,8 @@ every freeze-preserving genotype remains a partial involution containing
 the frozen pairs.
 \end{theorem}
 
-Still not melt completeness.The named lemmas are
+Still not melt completeness for arbitrary netlists.
+The named lemmas of Theorem~\ref{thm:tensorlut} are
 \texttt{discretenessPenalty},
 \texttt{cryptoFitnessMSE},
 \texttt{combinedObjective},
@@ -128,6 +131,27 @@ Theorem~1 does \emph{not} prove recovery of arbitrary keys; a U-534 /
 P1030680 plaintext; or that melt is complete for all netlists.
 Shatter / hold grades remain empirical (\cid{8}, \cid{9}, \hid{6}).
 \end{warning}
+
+\reproduced{C44}{Theorem~1$''$ melt--freeze--snap on a coordinate-separable
+Boolean interpolant: unique maximizer $w=t$, snap basin
+$\lvert w_i-t_i\rvert<1/2$, wrong freeze blocks $F=0$.
+\texttt{TensorLUTFormal.meltFreezeSnapCertificate()}.
+Reproduce:
+\texttt{swift test -c release --filter testTensorLUTMeltFreezeSnapCertificate}.
+Not multi-LUT topological melt.}
+
+\reproduced{C48}{Two-LUT cascade $y=(a\land b)\oplus c$: melt from $0.5$,
+snap, emit two LUT6 Verilog cells. Snapped INIT matches all 8 Boolean
+corners (a dual interpolant such as NAND$+$XNOR is allowed).
+\texttt{testTwoLUTCascadeMeltFreezeSnapEmit}. Not Yosys re-synth.}
+
+\begin{theorem}[TensorLUT melt--freeze--snap, separable interpolant]
+\label{thm:tensorlut-snap}
+Under a fully observed 1-LUT (each used INIT address an independent Boolean
+target $t$), $F(w)=-\lVert w-t\rVert_2^2-\lambda\pi(w)$ has unique maximizer
+$w=t$; the emitter recovers $t$ on the open cube
+$\lvert w_i-t_i\rvert<1/2$; a freeze away from $t$ makes $F=0$ unreachable.
+\end{theorem}
 
 \section{Five-cell test for Theorem 1}
 

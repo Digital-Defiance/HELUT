@@ -74,6 +74,8 @@ package final class EncryptedNetlistSimulator {
     private let commandQueue: MTLCommandQueue?
     private let twoN: Int
     private let scale: UInt32
+    /// Encrypted DFF Q (rotation-native / publicMS domain). Host clock; clk is not a torus wire.
+    private var encryptedQ: [Int: LWECiphertext] = [:]
 
     package init(
         moduleName: String,
@@ -88,7 +90,8 @@ package final class EncryptedNetlistSimulator {
         seed: UInt32 = 0xE11C,
         device: MTLDevice? = nil,
         commandQueue: MTLCommandQueue? = nil,
-        noiseBudget: TFHENoiseBudget? = nil
+        noiseBudget: TFHENoiseBudget? = nil,
+        booleanScaleMul: Int = 1
     ) {
         precondition(secret.params == params.tfhe)
         precondition(params.tfhe.glweDimension == 1)
@@ -99,7 +102,6 @@ package final class EncryptedNetlistSimulator {
             )
         }
         self.clear = CleartextNetlistSimulator(moduleName: moduleName, module: module)
-        precondition(self.clear.dffs.isEmpty, "EncryptedNetlistSimulator is combinational-only")
         let n = params.tfhe.polynomialDegree
         for lut in self.clear.luts {
             precondition(
@@ -116,13 +118,24 @@ package final class EncryptedNetlistSimulator {
         self.scaledPrimaryInputs = scaledPrimaryInputs || inputNoise.bound > 0
         self.rng = LCG32(state: seed == 0 ? 1 : seed)
         self.twoN = 2 * n
-        self.scale = rotationScale(polynomialDegree: n)
+        self.scale = rotationBooleanScale(polynomialDegree: n, mul: booleanScaleMul)
         if let noiseBudget {
             self.noiseBudget = noiseBudget
         } else {
             // Abstract units: 2 per BR input bit + MS/slack per LUT (see tickBlindRotate).
-            let units = self.clear.luts.reduce(0) { partial, lut in
+            var units = self.clear.luts.reduce(0) { partial, lut in
                 partial + lut.aBits.count * TFHENoiseOp.blindRotateLevel.cost + 2
+            }
+            for dff in self.clear.dffs {
+                if dff.enableBit != nil {
+                    units += 3 * TFHENoiseOp.blindRotateLevel.cost + 2
+                }
+                if dff.resetBit != nil {
+                    units += 2 * TFHENoiseOp.blindRotateLevel.cost + 2
+                }
+                if dff.enableBit == nil && dff.resetBit == nil {
+                    units += 2
+                }
             }
             self.noiseBudget = TFHENoiseBudget(capacity: max(64, units + 16))
         }
@@ -138,6 +151,20 @@ package final class EncryptedNetlistSimulator {
         }
         self.device = device
         self.commandQueue = commandQueue
+        if backend == .blindRotateMetalNetlist {
+            precondition(
+                self.clear.dffs.isEmpty,
+                "blind-rotate-metal-netlist is combinational-only (M1 sequential uses per-LUT BR)"
+            )
+        }
+        for dff in self.clear.dffs {
+            encryptedQ[dff.qWire] = encryptLWERotationNative(
+                message: 0,
+                secret: secret.lweSecret,
+                twoN: twoN,
+                rng: &rng
+            )
+        }
 
         if backend == .blindRotate || backend == .blindRotateMetal || backend == .blindRotateMetalNetlist {
             self.bootstrappingKey = bootstrapKey(
@@ -147,7 +174,7 @@ package final class EncryptedNetlistSimulator {
                 publicRefreshCompatible: wireRefresh == .publicMS || self.scaledPrimaryInputs,
                 noise: bkNoise
             )
-            if bkNoise.bound > 0, let bk = self.bootstrappingKey {
+            if bkNoise.bound > 0 || bkNoise.usesGaussian, let bk = self.bootstrappingKey {
                 let measured = TFHENoisyBKMeasurement.identity(
                     secret: secret,
                     params: params,
@@ -155,7 +182,8 @@ package final class EncryptedNetlistSimulator {
                     bootstrapKey: bk,
                     trials: n <= 16 ? 16 : 4,
                     seed: seed &+ 0xB10C,
-                    publicRefreshCompatible: wireRefresh == .publicMS || self.scaledPrimaryInputs
+                    publicRefreshCompatible: wireRefresh == .publicMS || self.scaledPrimaryInputs,
+                    booleanScaleMul: booleanScaleMul
                 )
                 self.noisyBKMeasurement = measured
                 self.noisyBKGaussianCertificate = measured.gaussianCertificate(
@@ -165,6 +193,17 @@ package final class EncryptedNetlistSimulator {
         } else {
             self.bootstrappingKey = nil
         }
+    }
+
+    /// Decrypt host-clocked Q (rotation-native / publicMS). SING diagnostic.
+    package func decryptedRegisterBits() -> [Int: UInt8] {
+        var out: [Int: UInt8] = [:]
+        out.reserveCapacity(encryptedQ.count)
+        for (wire, ct) in encryptedQ {
+            let phase = decryptLWE(ct, secret: secret)
+            out[wire] = UInt8(phase & 1)
+        }
+        return out
     }
 
     /// Issue (and store) the bounded noise certificate for this netlist under current noise params.
@@ -287,7 +326,7 @@ package final class EncryptedNetlistSimulator {
         }
         let bkCert = issueNoisyBKCertificate()
         bkCert.assertDecodable()
-        var wires: [Int: LWECiphertext] = [:]
+        var wires: [Int: LWECiphertext] = encryptedQ
         let useScaledInputs = scaledPrimaryInputs
 
         for (port, bits) in inputs {
@@ -354,27 +393,39 @@ package final class EncryptedNetlistSimulator {
             }
             precondition(!ready.isEmpty, "Stuck encrypted LUT resolve")
             var extractedByWire: [Int: LWECiphertext] = [:]
-            var waveError: Error?
-            let waveLock = NSLock()
-            DispatchQueue.concurrentPerform(iterations: ready.count) { idx in
-                let (lut, aLWEs) = ready[idx]
-                let table = lut.table.map { UInt32($0) }
-                do {
-                    let extracted = try evaluateLUTBlindRotateBody(
-                        truthTable: table,
+            if clear.dffs.isEmpty && ready.count > 1 {
+                var parallelExtracted: [Int: LWECiphertext] = [:]
+                var parallelError: Error?
+                let waveLock = NSLock()
+                DispatchQueue.concurrentPerform(iterations: ready.count) { idx in
+                    let (lut, aLWEs) = ready[idx]
+                    let table = lut.table.map { UInt32($0) }
+                    do {
+                        let extracted = try self.evaluateLUTBlindRotateBody(
+                            truthTable: table,
+                            inputs: aLWEs,
+                            bootstrapKey: bk
+                        )
+                        waveLock.lock()
+                        parallelExtracted[lut.yWire] = extracted
+                        waveLock.unlock()
+                    } catch {
+                        waveLock.lock()
+                        parallelError = error
+                        waveLock.unlock()
+                    }
+                }
+                if let parallelError { throw parallelError }
+                extractedByWire = parallelExtracted
+            } else {
+                for (lut, aLWEs) in ready {
+                    extractedByWire[lut.yWire] = try evaluateLUTBlindRotateBody(
+                        truthTable: lut.table.map { UInt32($0) },
                         inputs: aLWEs,
                         bootstrapKey: bk
                     )
-                    waveLock.lock()
-                    extractedByWire[lut.yWire] = extracted
-                    waveLock.unlock()
-                } catch {
-                    waveLock.lock()
-                    waveError = error
-                    waveLock.unlock()
                 }
             }
-            if let waveError { throw waveError }
             for (lut, aLWEs) in ready {
                 guard let extracted = extractedByWire[lut.yWire] else {
                     preconditionFailure("missing wavefront BR for wire \(lut.yWire)")
@@ -409,6 +460,10 @@ package final class EncryptedNetlistSimulator {
             pending = still
         }
 
+        if !clear.dffs.isEmpty {
+            try commitEncryptedDFFs(wires: &wires, bootstrapKey: bk)
+        }
+
         var outputs: [String: [UInt8]] = [:]
         for (port, bits) in clear.outputPorts {
             outputs[port] = bits.map { bit -> UInt8 in
@@ -416,7 +471,7 @@ package final class EncryptedNetlistSimulator {
                 case .constant(let value):
                     return UInt8(value)
                 case .net(let wire):
-                    guard let ct = wires[wire] else {
+                    guard let ct = wires[wire] ?? encryptedQ[wire] else {
                         fatalError("Missing encrypted wire \(wire) for output \(port)")
                     }
                     let phase = decryptLWE(ct, secret: secret)
@@ -523,6 +578,125 @@ package final class EncryptedNetlistSimulator {
         return outputs
     }
 
+    /// Host posedge: mux D/Q/reset in the clear, copy already-native LWE.
+    /// A BR+publicMS on native D/Q was folding 1→0 (C46). The DFF primitive is the host clock.
+    private func commitEncryptedDFFs(
+        wires: inout [Int: LWECiphertext],
+        bootstrapKey bk: BootstrapKey
+    ) throws {
+        _ = bk
+        var nextQ: [Int: LWECiphertext] = [:]
+        for dff in clear.dffs {
+            guard let dLWE = resolveLWEBit(dff.dBit, wires: wires) else {
+                fatalError("Missing D for encrypted DFF \(dff.name)")
+            }
+            let qCur = encryptedQ[dff.qWire] ?? dLWE
+
+            var enabled = true
+            if let enableBit = dff.enableBit {
+                guard let eLWE = resolveLWEBit(enableBit, wires: wires) else {
+                    fatalError("Missing E for encrypted DFF \(dff.name)")
+                }
+                let rawE = decryptNativeBit(eLWE)
+                let enableActiveHigh = dff.polarity.enableActiveHigh ?? true
+                enabled = (enableActiveHigh ? rawE : (1 - rawE)) != 0
+            }
+
+            var resetAsserted = false
+            var resetValue: UInt32 = 0
+            if let resetBit = dff.resetBit {
+                guard let rLWE = resolveLWEBit(resetBit, wires: wires) else {
+                    fatalError("Missing R for encrypted DFF \(dff.name)")
+                }
+                let rawR = decryptNativeBit(rLWE)
+                let sync = dff.polarity.syncReset ?? (activeHigh: true, value: 0)
+                resetAsserted = (sync.activeHigh ? rawR : (1 - rawR)) != 0
+                resetValue = sync.value & 1
+            }
+
+            let qNext: LWECiphertext
+            if dff.polarity.clockEnableGatesReset {
+                if !enabled {
+                    qNext = qCur
+                } else if resetAsserted {
+                    qNext = encryptLWERotationNative(
+                        message: resetValue,
+                        secret: secret.lweSecret,
+                        twoN: twoN,
+                        rng: &rng
+                    )
+                } else {
+                    qNext = dLWE
+                }
+            } else if resetAsserted {
+                qNext = encryptLWERotationNative(
+                    message: resetValue,
+                    secret: secret.lweSecret,
+                    twoN: twoN,
+                    rng: &rng
+                )
+            } else if dff.enableBit != nil && !enabled {
+                qNext = qCur
+            } else {
+                qNext = dLWE
+            }
+            nextQ[dff.qWire] = qNext
+            wires[dff.qWire] = qNext
+        }
+        encryptedQ = nextQ
+    }
+
+    private func decryptNativeBit(_ ct: LWECiphertext) -> UInt8 {
+        let phase = decryptLWE(ct, secret: secret)
+        if wireRefresh == .none {
+            return UInt8(decodeRotationBoolean(phase, scale: scale))
+        }
+        return UInt8(phase & 1)
+    }
+
+    /// LUT3 (d, q, e): Y = enabled ? d : q.
+    private func enableMuxTable(activeHigh: Bool) -> [UInt32] {
+        (0..<8).map { mask in
+            let d = UInt32(mask & 1)
+            let q = UInt32((mask >> 1) & 1)
+            let e = UInt32((mask >> 2) & 1)
+            let enabled = activeHigh ? e : (1 &- e)
+            return enabled == 1 ? d : q
+        }
+    }
+
+    /// LUT2 (d, r): Y = asserted ? value : d.
+    private func resetMuxTable(activeHigh: Bool, value: UInt32) -> [UInt32] {
+        (0..<4).map { mask in
+            let d = UInt32(mask & 1)
+            let r = UInt32((mask >> 1) & 1)
+            let asserted = activeHigh ? r : (1 &- r)
+            return asserted == 1 ? (value & 1) : d
+        }
+    }
+
+    private func refreshExtracted(_ extracted: LWECiphertext) throws -> LWECiphertext {
+        switch wireRefresh {
+        case .secret:
+            let phase = decryptLWE(extracted, secret: secret)
+            let bit = decodeRotationBoolean(phase, scale: scale)
+            return encryptLWERotationNative(
+                message: bit,
+                secret: secret.lweSecret,
+                twoN: twoN,
+                rng: &rng
+            )
+        case .publicMS:
+            return publicRefreshBit(extracted, twoN: twoN, scale: scale)
+        case .none:
+            return extracted
+        }
+    }
+
+    private func resolveLWEBit(_ bit: YosysBit, wires: [Int: LWECiphertext]) -> LWECiphertext? {
+        resolveLWEBits([bit], wires: wires)?.first
+    }
+
     private func evaluateLUTBlindRotateBody(
         truthTable: [UInt32],
         inputs: [LWECiphertext],
@@ -587,6 +761,10 @@ package final class EncryptedNetlistSimulator {
     // MARK: - Step 10c (clear selectors)
 
     private func tickClearSelector(inputs: [String: [UInt8]]) throws -> [String: [UInt8]] {
+        precondition(
+            clear.dffs.isEmpty,
+            "clear-selector encrypted path is combinational-only"
+        )
         // Clear-selector path is a correctness oracle for GGSW CMUX trees — still issue
         // the certificate surface so benches / refuse paths stay uniform.
         _ = issueNoiseCertificate()

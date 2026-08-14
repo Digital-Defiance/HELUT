@@ -23,8 +23,11 @@ Track & Status at epoch \livingepoch{} & Next experiment \\
   & \cid{20} boolean $10.6\,\mathrm{s}$; \cid{21} crypto $\ell=2$ $11.38\,\mathrm{s}$
   & NTT inside crypto $\ell=2$ at $N{=}1024$ (incomplete public-MS gadget). \\
 \hid{4} Noisy BK
-  & \cid{34} $\varepsilon\le 2^{-64}$ at discrete $B{=}1$/baseLog$=4$; torus-scale $B{\sim}128$ open
-  & Raise inject bound under finer covering / Gaussian BK. \\
+  & \cid{43} $k{=}4$ SING @ $N{=}1024$ $\sigma{=}128$; $\varepsilon$ 4-trial $-43$
+  & $k$ in $(4,8)$ or public-ms at $k{=}8$; native $k{=}1$ still open. \\
+Encrypted sequential
+  & \cid{51} Metal PicoRV32 NOP-fetch @ demo $N{=}8$ ($7.94\,\mathrm{s}$/row)
+  & Metal $N{=}1024$; fused metal-netlist. \\
 Campaign catalog
   & Middle ring $\neq A$ untested; catalog parked @417
   & Resume \texttt{--bombe-from 418}. \\
@@ -41,8 +44,9 @@ Garble / quarantine
   \item \textbf{Pillar I science:} shallower nets, NTT/persist graphs,
         estimator-backed params (this book's Parts~III).
   \item \textbf{Pillar II science:} Theorem~1 landed (\cid{19}); corollary
-        emitter / freeze (\cid{25}, Chapter~\ref{ch:pillarii}); remaining:
-        completeness of melt, stream-cipher melts.
+        emitter / freeze (\cid{25}); melt--freeze--snap on a separable
+        interpolant (\cid{44}); 2-LUT cascade emit (\cid{48}); remaining:
+        multi-LUT topological melt, stream-cipher melts.
   \item \textbf{Pillar III science:} SoftBus Theorem~2 landed (\cid{24},
         Chapter~\ref{ch:pillariii}); remaining: polymorphic Red/Blue standard
         beyond E256 SoftBus.

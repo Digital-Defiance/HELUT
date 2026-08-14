@@ -221,7 +221,7 @@ package func encryptLWE(
     for i in 0..<n {
         b &+= a[i] &* secret[i]
     }
-    if noise.bound > 0 {
+    if noise.bound > 0 || noise.usesGaussian {
         b &+= TFHENoise.sample(count: 1, params: noise, rng: &rng)[0]
     }
     return LWECiphertext(a: a, b: b)
@@ -429,7 +429,8 @@ package func encryptGGSW(
     return GGSWCiphertext(
         params: params,
         rows: rows,
-        trivialBit: secret.polynomials.allSatisfy { $0.allSatisfy { $0 == 0 } } && noise.bound == 0
+        trivialBit: secret.polynomials.allSatisfy { $0.allSatisfy { $0 == 0 } }
+            && noise.bound == 0 && !noise.usesGaussian
             ? bit
             : nil
     )
@@ -584,6 +585,16 @@ package func rotationScale(polynomialDegree n: Int) -> UInt32 {
     let twoN = 2 * n
     precondition(twoN.nonzeroBitCount == 1)
     return (1 as UInt32) &<< UInt32(32 - twoN.trailingZeroBitCount)
+}
+
+/// Boolean test-poly / decode spacing `k·δ` with `δ = q/(2N)`. `k=1` is native.
+/// `k=2` at `N=1024` restores the `N=512` half-gap (H4 encoding retune).
+package func rotationBooleanScale(polynomialDegree n: Int, mul: Int) -> UInt32 {
+    precondition(mul >= 1 && mul <= 16)
+    let base = rotationScale(polynomialDegree: n)
+    let product = UInt64(base) &* UInt64(mul)
+    precondition(product > 0 && product <= UInt64(UInt32.max), "kδ overflow")
+    return UInt32(product)
 }
 
 /// LWE encrypt with mask coeffs in `Z_{2N}` (exact blind-rotate powers under e=0).

@@ -900,6 +900,17 @@ final class TFHESeamTests: XCTestCase {
         XCTAssertTrue(cert.steps.contains { $0.lemma == .involutionUnderFreeze && $0.holds })
     }
 
+    func testTensorLUTMeltFreezeSnapCertificate() {
+        let cert = TensorLUTFormal.meltFreezeSnapCertificate()
+        XCTAssertTrue(cert.allHold, "\(cert.steps.filter { !$0.holds }.map(\.lemma))")
+        cert.assertValid()
+        XCTAssertEqual(cert.steps.count, 3)
+        XCTAssertTrue(cert.steps.contains { $0.lemma == .separableMeltUniqueMaximizer && $0.holds })
+        XCTAssertTrue(cert.steps.contains { $0.lemma == .snapBasinCompleteness && $0.holds })
+        XCTAssertTrue(cert.steps.contains { $0.lemma == .freezePreservesMaximizer && $0.holds })
+        XCTAssertTrue(cert.hypotheses.contains(where: { $0.contains("separable") || $0.contains("1-LUT") }))
+    }
+
     func testEnigma256FormalCertificate() {
         let cert = Enigma256Formal.certificate()
         XCTAssertTrue(cert.allHold, "\(cert.steps.filter { !$0.holds }.map(\.lemma))")

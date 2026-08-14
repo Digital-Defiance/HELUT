@@ -19,6 +19,12 @@ Canonical nine-slot card: \corpus{directives/application-gallery.md}.
         Estimator fill-in and covering-gadget residuals (\cid{5}, \cid{22},
         \cid{23}). Product-shaped $N{=}1024$ inject is a graded failure
         (\cid{26}); Metal SING still noiseless BK (\hid{4}).
+  \item \textbf{Encrypted sequential.}
+        Counter (\cid{38}), toy \texttt{NOP}/\texttt{ADD} (\cid{40}),
+        PicoRV32 \texttt{addi}+\texttt{sw}+\texttt{lw} at demo $N{=}8$
+        (\cid{50}); Metal NOP-fetch (\cid{51}).
+  \item \textbf{4-bit CSA vs ripple LUT cut} (\cid{42}).
+        Architecture, not TensorLUT melt.
 \end{enumerate}
 
 \section{Pillar~I shape laboratory (oracle --- not FHE)}
@@ -33,8 +39,8 @@ Canonical nine-slot card: \corpus{directives/application-gallery.md}.
         the story.
   \item \textbf{PicoRV32.}
         ${\sim}4.8\mathrm{k}$ LUTs, ${\sim}1.5\mathrm{k}$ DFFs. Scripted
-        \texttt{resetn} boot. Oracle path: \cid{1}. Encrypted CPU SING: not
-        a \cid{} in this epoch.
+        \texttt{resetn} boot. Oracle path: \cid{1}. Encrypted 1-tick at
+        demo $N{=}8$: \cid{50} \texttt{lw} sees 1; Metal NOP-fetch \cid{51}.
 \end{enumerate}
 
 \section{Pillar~II}
@@ -42,7 +48,7 @@ Canonical nine-slot card: \corpus{directives/application-gallery.md}.
 \begin{enumerate}
   \item \textbf{M4 TensorLUT baseline emit} (\cid{8}).
   \item \textbf{Stecker involution sandwich / formal} (\cid{9}, \cid{19},
-        \cid{25}).
+        \cid{25}, \cid{44}, \cid{48}).
   \item \textbf{Shatter vs hold under $\lambda$} --- seminar empirics; not a
         decrypt (\hid{6}).
 \end{enumerate}
@@ -51,6 +57,8 @@ Canonical nine-slot card: \corpus{directives/application-gallery.md}.
 
 \begin{enumerate}
   \item \textbf{SoftBus reciprocity / bijection} (\cid{10}, \cid{24}).
+  \item \textbf{Encrypted 1-round frozen scramble} (\cid{39}) --- algebraic
+        slice under torus FHE, not live BRAM.
   \item \textbf{Red battery} (TensorLUT / KPA / \texttt{ent}) --- empirical
         grades in \texttt{logs/enigma256-*}.
   \item \textbf{Fail-closed NLFF harden} (\cid{24} clause~5).

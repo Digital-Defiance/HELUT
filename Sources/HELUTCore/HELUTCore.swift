@@ -652,16 +652,19 @@ package struct YosysDFFPolarity {
     package let enableActiveHigh: Bool?
     /// Sync-reset pin polarity and constant value when reset is asserted (`nil` if no `R`).
     package let syncReset: (activeHigh: Bool, value: UInt32)?
+    /// Yosys `$_SDFFCE_*`: enable has priority (hold when E inactive, even if R is asserted).
+    /// `$_SDFFE_*` keeps reset-over-enable.
+    package let clockEnableGatesReset: Bool
 }
 
 /// Parses enable / sync-reset polarity from a Yosys DFF type string.
 package func parseYosysDFFPolarity(_ type: String) -> YosysDFFPolarity {
     guard type.hasPrefix("$_"), type.hasSuffix("_") else {
-        return YosysDFFPolarity(enableActiveHigh: nil, syncReset: nil)
+        return YosysDFFPolarity(enableActiveHigh: nil, syncReset: nil, clockEnableGatesReset: false)
     }
     let parts = type.dropFirst(2).dropLast().split(separator: "_")
     guard parts.count >= 2 else {
-        return YosysDFFPolarity(enableActiveHigh: nil, syncReset: nil)
+        return YosysDFFPolarity(enableActiveHigh: nil, syncReset: nil, clockEnableGatesReset: false)
     }
     let kind = String(parts[0])
     let code = String(parts[1])
@@ -683,7 +686,11 @@ package func parseYosysDFFPolarity(_ type: String) -> YosysDFFPolarity {
         }
     }
 
-    return YosysDFFPolarity(enableActiveHigh: enableActiveHigh, syncReset: syncReset)
+    return YosysDFFPolarity(
+        enableActiveHigh: enableActiveHigh,
+        syncReset: syncReset,
+        clockEnableGatesReset: kind.contains("SDFFCE")
+    )
 }
 
 /// Compiles a Yosys module into one `MPSGraph`, routing wires by Yosys net ID.

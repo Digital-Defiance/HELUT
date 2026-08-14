@@ -31,6 +31,14 @@ public func stringFlag(_ name: String) -> String? {
     return value.hasPrefix("--") ? nil : value
 }
 
+/// Parse `--name X.Y` from argv (finite, non-negative).
+public func doubleFlag(_ name: String) -> Double? {
+    guard let raw = stringFlag(name), let value = Double(raw), value.isFinite, value >= 0 else {
+        return nil
+    }
+    return value
+}
+
 /// Batch dimension. Override with `--batch N`.
 /// Defaults: P1030680 → 17,576 (26³); demo bombe → 10,000.
 /// On 64 GB unified memory, M4 @ N=1024 is comfortable near B≈30–35k; ≥40k is tight.
@@ -49,6 +57,8 @@ public let positionalArgs: [String] = {
         "--ticks", "--batch", "--rings", "--subspace", "--msg-keys", "--skip", "--from",
         "--degree", "--warmup", "--reset-hold", "--encoding", "--lut-backend",
         "--vectors", "--paths", "--trials", "--bk-noise",
+        "--bk-noise-sigma", "--covering-base-log", "--boolean-scale-mul",
+        "--encrypted-mem", "--metal-br-tile",
         "--hybrid-pop", "--hybrid-gens", "--hybrid-greek-samples",
         "--exhaust-top", "--exhaust-plugs", "--selftest-len",
         "--bombe-menus", "--bombe-plugs", "--bombe-report", "--bombe-pipeline",

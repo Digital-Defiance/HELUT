@@ -1,0 +1,18 @@
+=== gauss σ=8 ===
+covering-b1 B=0: max|e|=0 σ̂=0.0 δ/2=1048576 decode_fail=0 decodable=true εlog2=-inf  (baseLog=1 ℓ=32)
+covering-b1 σ=8.0: max|e|=15501 σ̂=11166.5 δ/2=1048576 decode_fail=0 decodable=true εlog2=-6364.6  (baseLog=1 ℓ=32)
+=== gauss σ=16 ===
+covering-b1 B=0: max|e|=0 σ̂=0.0 δ/2=1048576 decode_fail=0 decodable=true εlog2=-inf  (baseLog=1 ℓ=32)
+covering-b1 σ=16.0: max|e|=71572 σ̂=71196.0 δ/2=1048576 decode_fail=0 decodable=true εlog2=-157.6  (baseLog=1 ℓ=32)
+=== gauss σ=24 ===
+covering-b1 B=0: max|e|=0 σ̂=0.0 δ/2=1048576 decode_fail=0 decodable=true εlog2=-inf  (baseLog=1 ℓ=32)
+covering-b1 σ=24.0: max|e|=108751 σ̂=79900.3 δ/2=1048576 decode_fail=0 decodable=true εlog2=-125.2  (baseLog=1 ℓ=32)
+=== gauss σ=32 ===
+covering-b1 B=0: max|e|=0 σ̂=0.0 δ/2=1048576 decode_fail=0 decodable=true εlog2=-inf  (baseLog=1 ℓ=32)
+covering-b1 σ=32.0: max|e|=159920 σ̂=113598.3 δ/2=1048576 decode_fail=0 decodable=true εlog2=-62.0  (baseLog=1 ℓ=32)
+=== gauss σ=48 ===
+covering-b1 B=0: max|e|=0 σ̂=0.0 δ/2=1048576 decode_fail=0 decodable=true εlog2=-inf  (baseLog=1 ℓ=32)
+covering-b1 σ=48.0: max|e|=359767 σ̂=305388.0 δ/2=1048576 decode_fail=0 decodable=true εlog2=-7.7  (baseLog=1 ℓ=32)
+=== gauss σ=64 ===
+covering-b1 B=0: max|e|=0 σ̂=0.0 δ/2=1048576 decode_fail=0 decodable=true εlog2=-inf  (baseLog=1 ℓ=32)
+covering-b1 σ=64.0: max|e|=144430 σ̂=105725.5 δ/2=1048576 decode_fail=0 decodable=true εlog2=-71.6  (baseLog=1 ℓ=32)

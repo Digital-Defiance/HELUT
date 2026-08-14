@@ -61,6 +61,54 @@ Production `prod-n1024-s16`: HELUT 175.7 vs estimator **180.2** (|Δ|=4.5). Four
 
 Expect `result PASS` and certificate lines. full_adder multi-LUT SING is graded through *N*=1024 (H2 closed 2026-08-12).
 
+## Encrypted sequential DFF (C38)
+
+Host-clocked encrypted *Q* (not fused metal-netlist). Toy `stateful_counter`: 6 `$lut` + 4 DFFs. Not PicoRV32.
+
+```bash
+.build/release/helut --bench counter_netlist.json --degree 8 \
+  --bench-encrypted --cpu-only --sing --vectors 8
+.build/release/helut --bench counter_netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 4 \
+  --paths 'blind-rotate-metal public-ms boolean' \
+  | tee logs/helut-encrypted-n1024-metal-sing-counter.log
+```
+
+Metal receipt: **PASS** 15.88 s / 4 rows (3.97 s/row), *N*=1024 public-ms boolean.
+
+## Encrypted E256 1-round scramble (C39)
+
+Frozen offsets=0, identity plug. Algebraic sboxes + UKW (`e256_round1.v`). LUT4 netlist — CPU needs `--degree 16`. Not live BRAM / NLFF / `enigma_256_core`.
+
+```bash
+yosys -p "read_verilog e256_round1.v; synth -top e256_round1 -flatten; abc -lut 4; write_json e256_round1_netlist.json"
+.build/release/helut --bench e256_round1_netlist.json --degree 16 \
+  --bench-encrypted --cpu-only --sing --vectors 32 \
+  --paths 'blind-rotate public-ms boolean'
+.build/release/helut --bench e256_round1_netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 2 \
+  --paths 'blind-rotate-metal public-ms boolean' \
+  | tee logs/helut-encrypted-n1024-metal-sing-e256-round1.log
+```
+
+Metal receipt: **PASS** 22.77 s / 2 (11.38 s/row).
+
+## Encrypted toy ISA (C40)
+
+4-bit ACC, `NOP` / `ADD imm`. Not PicoRV32.
+
+```bash
+yosys -p "read_verilog toy_isa.v; synth -top toy_isa -flatten; abc -lut 2; write_json toy_isa_netlist.json"
+.build/release/helut --bench toy_isa_netlist.json --degree 8 \
+  --bench-encrypted --cpu-only --sing --vectors 32
+.build/release/helut --bench toy_isa_netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 4 \
+  --paths 'blind-rotate-metal public-ms boolean' \
+  | tee logs/helut-encrypted-n1024-metal-sing-toy-isa.log
+```
+
+Metal receipt: **PASS** 20.31 s / 4 (5.08 s/row).
+
 ## Metal microbench (C7)
 
 ```bash
@@ -175,6 +223,185 @@ Expect PASS on both; non-zero decodable *B*<sub>bk</sub>. Not `cryptoPublicMS`.
 
 Expect: εlog2 ≈ −913 (≪ −64); Metal secret + public-ms covering-b4 PASS.
 Finer covering cuts EP β: baseLog 8→4 drops σ̂ ~10× (`--covering-sweep`).
+
+## Track A covering-b2: ε≤2⁻⁶⁴ through B=16 + Metal SING (C35)
+
+```bash
+.build/release/helut-bench --measure-bk-noise --degree 1024 --trials 4 --bk-noise 16 \
+  --covering-base-log 2 | tee logs/helut-noisy-bk-covering-b2-n1024-B16.log
+# full ε vs B: see logs/helut-noisy-bk-covering-b2-eps-vs-B.log
+.build/release/helut-bench --bench netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 2 --bk-noise 16 \
+  --paths covering-b2 \
+  | tee logs/helut-encrypted-n1024-metal-sing-covering-b2-noisy-B16.log
+```
+
+Expect: εlog2 ≈ −65.4 at *B*=16 (≤ −64); *B*=32 ≈ −40 (fails bar); Metal secret + public-ms covering-b2 PASS.
+
+## Track A covering-b1: ε≤2⁻⁶⁴ through B=32 + Metal SING (C36)
+
+```bash
+.build/release/helut-bench --measure-bk-noise --degree 1024 --trials 4 --bk-noise 32 \
+  --covering-base-log 1 | tee logs/helut-noisy-bk-covering-b1-n1024-B32.log
+# ladder: logs/helut-noisy-bk-covering-b1-eps-vs-B.log
+.build/release/helut-bench --bench netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 2 --bk-noise 32 \
+  --paths covering-b1 \
+  | tee logs/helut-encrypted-n1024-metal-sing-covering-b1-noisy-B32.log
+```
+
+Expect: εlog2 ≈ −139 at *B*=32 (≤ −64); *B*=64 ≈ −26 (fails); *B*=128 ≈ −0.6 (fails, no unlock vs b2); Metal PASS.
+
+## Track A Gaussian BK inject covering-b1 (C37)
+
+```bash
+.build/release/helut-bench --measure-bk-noise --degree 1024 --trials 4 \
+  --bk-noise-sigma 24 --covering-base-log 1 \
+  | tee logs/helut-noisy-bk-covering-b1-gauss-sigma24.log
+.build/release/helut-bench --bench netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 2 --bk-noise-sigma 24 \
+  --paths covering-b1 \
+  | tee logs/helut-encrypted-n1024-metal-sing-covering-b1-gauss-sigma24.log
+```
+
+Expect εlog2 ≈ −159 at σ=24; Metal PASS. Torus σ=128 at *N*=1024 still undecodable.
+
+## Track A param map: σ=128 covering-b1 at N≤512 (C41)
+
+```bash
+.build/release/helut --measure-bk-noise --degree 256 --trials 2 \
+  --bk-noise-sigma 128 --covering-base-log 1
+.build/release/helut --measure-bk-noise --degree 512 --trials 4 \
+  --bk-noise-sigma 128 --covering-base-log 1 \
+  | tee logs/helut-noisy-bk-covering-b1-gauss-sigma128-N256-N512.log
+.build/release/helut --bench netlist.json --degree 512 \
+  --bench-encrypted --sing --vectors 2 --bk-noise-sigma 128 \
+  --paths covering-b1 \
+  | tee logs/helut-encrypted-n512-metal-sing-covering-b1-gauss-sigma128.log
+```
+
+Expect: *N*=256 εlog2≈−2109; *N*=512 εlog2≈−76.6 (4 trials); Metal PASS. Does **not** close *N*=1024 at native *k*=1.
+
+## kδ encoding at N=1024 covering-b1 σ=128 (C43)
+
+```bash
+.build/release/helut --measure-bk-noise --degree 1024 --trials 4 \
+  --bk-noise-sigma 128 --covering-base-log 1 --boolean-scale-mul 4 \
+  | tee logs/helut-noisy-bk-covering-b1-gauss-sigma128-n1024-k4.log
+.build/release/helut --bench netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 2 --bk-noise-sigma 128 \
+  --paths covering-b1 --boolean-scale-mul 4 \
+  | tee logs/helut-encrypted-n1024-metal-sing-covering-b1-gauss-sigma128-k4.log
+```
+
+Expect: *k*=4 Metal SING PASS; 4-trial εlog2≈−43 (not −64). Sweep: `logs/helut-noisy-bk-covering-b1-gauss-sigma128-n1024-kdelta.log`. *k*=8 meets ε; public-ms SING fails.
+
+## TensorLUT melt–freeze–snap (C44)
+
+```bash
+swift test -c release --filter testTensorLUTMeltFreezeSnapCertificate
+swift test -c release --filter testXORLambdaCoolingSnapsTowardBinary
+```
+
+Expect three lemmas `holds`. XOR elite after `polishBinaryAtEnd` emits INIT bits `0110`. Not multi-LUT topological melt.
+
+## Encrypted PicoRV32 1-tick (C45)
+
+```bash
+.build/release/helut --bench picorv32_netlist.json --degree 8 \
+  --bench-encrypted --cpu-only --sing --vectors 1 \
+  --paths 'blind-rotate public-ms boolean' \
+  | tee logs/helut-encrypted-n8-cpu-sing-picorv32.log
+```
+
+Expect **PASS** ~76 ms/row, 4785 LUT / 1565 DFF, hardness 4.0 bits (demo *N*=8). One host posedge. Output SING; register SING from **C46**.
+
+## Encrypted PicoRV32 10-tick resetn boot (C46)
+
+```bash
+.build/release/helut --bench picorv32_netlist.json --degree 8 \
+  --bench-encrypted --cpu-only --sing --ticks 10 --reset-hold 3 \
+  --paths 'blind-rotate public-ms boolean' \
+  | tee logs/helut-encrypted-n8-cpu-sing-picorv32-boot10.log
+```
+
+Expect **PASS** 0.972 s / 10 (97.20 ms/row), Q ≡ clear. Idle `mem_ready=0`. LUT-tax 1-tick: *N*=32 **819 ms** (16 bits); *N*=64 **4.35 s** (32 bits).
+
+## Encrypted PicoRV32 NOP-fetch (C47)
+
+```bash
+.build/release/helut --bench picorv32_netlist.json --degree 8 \
+  --bench-encrypted --cpu-only --sing --ticks 32 --reset-hold 3 \
+  --encrypted-mem nop --paths 'blind-rotate public-ms boolean' \
+  | tee logs/helut-encrypted-n8-cpu-sing-picorv32-nop-fetch.log
+```
+
+Expect **PASS**, 10 fetches, `mem_addr` 0x0,0x4,…,0x24, ~98 ms/row, Q ≡ clear.
+
+## Encrypted PicoRV32 addi+sw store (C49)
+
+```bash
+.build/release/helut --bench picorv32_netlist.json --degree 8 \
+  --bench-encrypted --cpu-only --sing --ticks 48 --reset-hold 3 \
+  --encrypted-mem prog --paths 'blind-rotate public-ms boolean' \
+  | tee logs/helut-encrypted-n8-cpu-sing-picorv32-prog-store.log
+```
+
+Expect **PASS**, STORE `wdata=1`, host RAM0=1, 14 fetches, ~79 ms/row, Q ≡ clear. Demo *N*=8. Load-back is **C50**.
+
+## Encrypted PicoRV32 lw sees 1 (C50)
+
+```bash
+.build/release/helut --bench picorv32_netlist.json --degree 8 \
+  --bench-encrypted --cpu-only --sing --ticks 48 --reset-hold 3 \
+  --encrypted-mem prog --paths 'blind-rotate public-ms boolean' \
+  | tee logs/helut-encrypted-n8-cpu-sing-picorv32-prog-lw.log
+```
+
+Expect **PASS**, LOAD xfer `rdata=1`, STORE `wdata=1`, RAM0=1, 14 fetches, ~79 ms/row, Q ≡ clear. Demo *N*=8. Not Metal PicoRV.
+
+## Metal PicoRV32 NOP-fetch (C51)
+
+```bash
+.build/release/helut --bench picorv32_netlist.json --degree 8 \
+  --bench-encrypted --sing --ticks 8 --reset-hold 3 \
+  --encrypted-mem nop --paths 'blind-rotate-metal public-ms boolean' \
+  --metal-br-tile 8 \
+  | tee logs/helut-encrypted-n8-metal-sing-picorv32-nop-fetch.log
+```
+
+Expect **PASS**, 2 fetches (`0x0`, `0x4`), ~64 s / 8 (~7.9 s/row). Tiled BR; fused default traps. Demo *N*. Not fused metal-netlist.
+
+## 2-LUT cascade melt–snap–emit (C48)
+
+```bash
+swift test -c release --filter testTwoLUTCascadeMeltFreezeSnapEmit
+```
+
+Expect 8-corner SING of snapped INIT and two LUT6 cells in emitted Verilog.
+
+## 4-bit CSA vs ripple LUT cut (C42)
+
+Architecture, not TensorLUT melt.
+
+```bash
+yosys -p "read_verilog ripple4.v; synth -top ripple4 -flatten; abc -lut 2; write_json ripple4_netlist.json"
+yosys -p "read_verilog csa4.v; synth -top csa4 -flatten; abc -lut 2; write_json csa4_netlist.json"
+.build/release/helut --bench ripple4_netlist.json --degree 8 --compile-only
+.build/release/helut --bench csa4_netlist.json --degree 8 --compile-only
+.build/release/helut --bench csa4_netlist.json --degree 8 \
+  --bench-encrypted --cpu-only --sing --vectors 64 \
+  --paths 'blind-rotate public-ms boolean'
+```
+
+Expect: 11 → 8 LUT2 (−27%); both SING PASS.
+
+## Grand audit (Phase 0.9 M5)
+
+```bash
+./Scripts/helut_grand_audit.sh           # formal certs + Sage + CPU-only short SING + textbook stamp
+./Scripts/helut_grand_audit.sh --full    # also Metal N=1024 C20/C21 SING
+```
 
 ## Track B Metal SING with noisy BK (C28)
 

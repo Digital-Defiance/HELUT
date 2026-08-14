@@ -183,7 +183,7 @@ package func encryptGLWE(
             body[i] &+= asj[i]
         }
     }
-    if noise.bound > 0 {
+    if noise.bound > 0 || noise.usesGaussian {
         let e = TFHENoise.sample(count: n, params: noise, rng: &rng)
         for i in 0..<n {
             body[i] &+= e[i]
@@ -317,28 +317,47 @@ package func sampleExtractLWE(
 }
 
 /// Discrete centered-uniform torus noise (graduation step 10b).
-/// Bound `B`: each coeff is uniform in `{-B,…,B}` (torus wrap). `B=0` → noiseless.
+/// Bound `B`: each coeff is uniform in `{-B,…,B}` (torus wrap). `B=0` → noiseless
+/// unless `gaussianSigma > 0` (Box–Muller rounded to torus).
 package struct TFHENoiseParams: Sendable, Equatable {
     package var bound: UInt32
+    /// Torus coefficient stddev for Gaussian BK / encrypt inject (0 → unused).
+    /// Production-scale torus σ≈2⁻²⁵ maps to σ≈128 under q=2³².
+    package var gaussianSigma: Double
 
-    package init(bound: UInt32) {
+    package init(bound: UInt32, gaussianSigma: Double = 0) {
+        precondition(gaussianSigma >= 0 && gaussianSigma.isFinite)
         self.bound = bound
+        self.gaussianSigma = gaussianSigma
     }
 
     package static let none = TFHENoiseParams(bound: 0)
 
     /// Small demo noise for `TFHEParams.noisyBoolean` (`Δ = 2^20`).
     package static let demo = TFHENoiseParams(bound: 64)
+
+    /// Gaussian BK / encrypt inject at torus σ (q-scale).
+    package static func gaussian(sigma: Double) -> TFHENoiseParams {
+        precondition(sigma > 0)
+        let proxyBound = UInt32(min(Double(UInt32.max), max(1, (6 * sigma).rounded())))
+        return TFHENoiseParams(bound: proxyBound, gaussianSigma: sigma)
+    }
+
+    package var usesGaussian: Bool { gaussianSigma > 0 }
 }
 
 package enum TFHENoise {
-    /// Sample `count` centered-uniform coeffs in `[-bound, bound]`.
+    /// Sample `count` noise coeffs: Gaussian if `gaussianSigma > 0`, else
+    /// centered-uniform in `[-bound, bound]`.
     package static func sample(
         count: Int,
         params: TFHENoiseParams,
         rng: inout LCG32
     ) -> [UInt32] {
         precondition(count >= 0)
+        if params.usesGaussian {
+            return (0..<count).map { _ in sampleGaussianTorus(sigma: params.gaussianSigma, rng: &rng) }
+        }
         if params.bound == 0 {
             return [UInt32](repeating: 0, count: count)
         }
@@ -350,6 +369,22 @@ package enum TFHENoise {
             }
             return UInt32(0) &- (u &- params.bound)
         }
+    }
+
+    /// Box–Muller → N(0,σ²), round to nearest torus limb (UInt32 wrap).
+    package static func sampleGaussianTorus(sigma: Double, rng: inout LCG32) -> UInt32 {
+        precondition(sigma > 0 && sigma.isFinite)
+        // Uniform (0,1] from LCG32
+        let u1 = max(Double(rng.next()) / Double(UInt32.max), 1e-12)
+        let u2 = Double(rng.next()) / Double(UInt32.max)
+        let mag = sigma * sqrt(-2 * log(u1))
+        let z = mag * cos(2 * Double.pi * u2)
+        let rounded = z.rounded()
+        if rounded >= 0 {
+            return UInt32(min(rounded, Double(UInt32.max)))
+        }
+        let magNeg = min(-rounded, Double(UInt32.max))
+        return UInt32(0) &- UInt32(magNeg)
     }
 
     /// Unbounded claims without Gaussian / LWE certificates refuse.

@@ -1,0 +1,23 @@
+=== covering-b1 Gaussian σ=128 param map (H4) ===
+--- N=256 trials=2 ---
+HELUT noisy-BK identity residual (H4)
+  N=256  trials=2  inject ∈ {0, σ=128.0}
+
+covering-b1 B=0: max|e|=0 σ̂=0.0 δ/2=4194304 decode_fail=0 decodable=true εlog2=-inf  (baseLog=1 ℓ=32)
+covering-b1 σ=128.0: max|e|=88605 σ̂=77632.6 δ/2=4194304 decode_fail=0 decodable=true εlog2=-2108.7  (baseLog=1 ℓ=32)
+
+| gadget N | inject B | trials | max |e| | σ̂ | δ/2 | decode fail | decodable |
+|----------|----------|--------|---------|-----|-----|-------------|-----------|
+| 256 | 0 | 2 | 0 | 0.0 | 4194304 | 0 | yes |
+| 256 | 768 | 2 | 88605 | 77632.6 | 4194304 | 0 | yes |
+--- N=512 trials=4 ---
+HELUT noisy-BK identity residual (H4)
+  N=512  trials=4  inject ∈ {0, σ=128.0}
+
+covering-b1 B=0: max|e|=0 σ̂=0.0 δ/2=2097152 decode_fail=0 decodable=true εlog2=-inf  (baseLog=1 ℓ=32)
+covering-b1 σ=128.0: max|e|=315572 σ̂=204461.6 δ/2=2097152 decode_fail=0 decodable=true εlog2=-76.6  (baseLog=1 ℓ=32)
+
+| gadget N | inject B | trials | max |e| | σ̂ | δ/2 | decode fail | decodable |
+|----------|----------|--------|---------|-----|-----|-------------|-----------|
+| 512 | 0 | 4 | 0 | 0.0 | 2097152 | 0 | yes |
+| 512 | 768 | 4 | 315572 | 204461.6 | 2097152 | 0 | yes |

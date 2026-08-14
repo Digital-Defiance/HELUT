@@ -1,5 +1,5 @@
 H1: native sage at /Users/jessica/Applications/SageMath-10-9.app/Contents/Frameworks/Sage.framework/Versions/Current/local/bin/sage
-Algorithm <estimator.lwe_bkw.CodedBKW object at 0x11d45d7f0> on LWEParameters(n=8, q=4294967296, Xs=D(σ=0.50, μ=-0.50), Xe=D(σ=4096.00), m=+Infinity, tag=None) failed with cannot access local variable 'sigma_set' where it is not associated with a value
+Algorithm <estimator.lwe_bkw.CodedBKW object at 0x15ddd57f0> on LWEParameters(n=8, q=4294967296, Xs=D(σ=0.50, μ=-0.50), Xe=D(σ=4096.00), m=+Infinity, tag=None) failed with cannot access local variable 'sigma_set' where it is not associated with a value
 usvp                 :: rop: ≈2^33.1, red: ≈2^33.1, δ: 1.012950, β: 40, d: 41, tag: usvp
 bdd                  :: rop: ≈2^33.1, red: ≈2^33.1, svp: ≈2^21.1, β: 40, η: 1, d: 40, tag: bdd
 bdd_mitm_hybrid      :: rop: ≈2^33.1, red: ≈2^33.1, svp: ≈2^13.7, β: 40, η: 2, ζ: 7, |S|: 70, d: 40, prob: 1.000, ↻: 1, tag: hybrid

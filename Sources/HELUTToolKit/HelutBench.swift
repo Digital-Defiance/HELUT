@@ -175,17 +175,53 @@ private func runEncryptedNetlistBench() {
         || CommandLine.arguments.contains("--skip-metal")
     let metalNetlistOnly = CommandLine.arguments.contains("--metal-netlist-only")
     let maxVectors = intFlag("--vectors") ?? 256
+    let encryptedTicks = intFlag("--ticks")
+    let resetHold = intFlag("--reset-hold", allowZero: true)
+    let encryptedMem = stringFlag("--encrypted-mem")
+    let booleanScaleMul = intFlag("--boolean-scale-mul") ?? 1
     let pathFilter = stringFlag("--paths") // comma list substring match; nil = all
-    let bkNoiseBound = intFlag("--bk-noise", allowZero: true) ?? 0
-    let bkNoise = TFHENoiseParams(bound: UInt32(bkNoiseBound))
+    let bkNoise: TFHENoiseParams = {
+        if let sigma = doubleFlag("--bk-noise-sigma"), sigma > 0 {
+            return .gaussian(sigma: sigma)
+        }
+        let bound = intFlag("--bk-noise", allowZero: true) ?? 0
+        return TFHENoiseParams(bound: UInt32(bound))
+    }()
     let netlist = loadYosysNetlist(from: path)
     guard let (moduleName, module) = netlist.modules.first else {
         fatalError("Empty netlist")
     }
     let clear = CleartextNetlistSimulator(moduleName: moduleName, module: module)
-    precondition(clear.dffs.isEmpty, "--bench-encrypted requires a combinational netlist")
+    let sequential = !clear.dffs.isEmpty
+    if sequential && metalNetlistOnly {
+        fatalError("--metal-netlist-only is combinational-only; sequential netlists use per-LUT BR")
+    }
 
-    let stimuli = makeEncryptedStimuli(clear: clear, maxVectors: maxVectors, seed: 0x51A1)
+    let bootTicks = sequential ? encryptedTicks : nil
+    let memKind = encryptedMem
+    let hostMemActive = memKind == "nop" || memKind == "prog"
+    if hostMemActive {
+        precondition(sequential && clear.inputPorts["resetn"] != nil, "--encrypted-mem needs sequential resetn")
+        precondition(clear.inputPorts["mem_ready"] != nil && clear.inputPorts["mem_rdata"] != nil, "--encrypted-mem needs mem_ready/mem_rdata")
+        precondition(clear.outputPorts["mem_valid"] != nil && clear.outputPorts["mem_addr"] != nil, "--encrypted-mem needs mem_valid/mem_addr")
+        if memKind == "prog" {
+            precondition(clear.outputPorts["mem_wstrb"] != nil && clear.outputPorts["mem_wdata"] != nil, "--encrypted-mem prog needs mem_wstrb/mem_wdata")
+        }
+    }
+    if let memKind, memKind != "nop", memKind != "prog" {
+        fatalError("--encrypted-mem must be nop or prog")
+    }
+    let stimuli: [[String: [UInt8]]]
+    if hostMemActive {
+        // Reactive ROM fills rows inside runAll; placeholder length = tick count.
+        let ticks = bootTicks ?? (memKind == "prog" ? 48 : 24)
+        stimuli = Array(repeating: [:], count: ticks)
+    } else if let bootTicks, bootTicks > 0, clear.inputPorts["resetn"] != nil {
+        let hold = resetHold ?? 3
+        stimuli = makeEncryptedResetHoldStimuli(clear: clear, ticks: bootTicks, resetHold: hold)
+    } else {
+        stimuli = makeEncryptedStimuli(clear: clear, maxVectors: maxVectors, seed: 0x51A1)
+    }
     precondition(!stimuli.isEmpty, "no encrypted stimuli")
 
     let twoN = 2 * degree
@@ -199,20 +235,42 @@ private func runEncryptedNetlistBench() {
 
     print("HELUT encrypted-netlist bench\(sing ? " · SING" : "")")
     print("  netlist: \(path)  module=\(moduleName)")
-    print("  poly N=\(degree)  LUTs=\(clear.luts.count)  2N=\(twoN)")
+    print("  poly N=\(degree)  LUTs=\(clear.luts.count)  DFFs=\(clear.dffs.count)\(sequential ? "  sequential" : "")  2N=\(twoN)")
     print("  stimuli=\(stimuli.count) (max --vectors \(maxVectors))  cpu-only=\(cpuOnly)  metal-netlist-only=\(metalNetlistOnly)")
+    if memKind == "nop" {
+        print("  encrypted mem: nop ROM (addi x0,x0,0 = 0x00000013)  ticks=\(stimuli.count)  reset-hold=\(resetHold ?? 3)")
+    } else if memKind == "prog" {
+        print("  encrypted mem: tiny ROM addi; sw; lw x2,0(x0)  ticks=\(stimuli.count)  reset-hold=\(resetHold ?? 3)")
+    } else if encryptedTicks != nil, sequential, clear.inputPorts["resetn"] != nil {
+        print("  scripted boot: ticks=\(stimuli.count)  reset-hold=\(resetHold ?? 3) (resetn=0 then 1; other inputs 0 including clk)")
+    }
     if let pathFilter {
         print("  paths filter: \(pathFilter)")
     }
     print("  paths: public-ms@boolean + public-ms@crypto + secret@crypto\(cpuOnly || metalNetlistOnly ? "" : " (+ Metal)")")
-    if bkNoise.bound > 0 {
+    if bkNoise.usesGaussian {
+        print("  BK noise inject Gaussian σ=\(bkNoise.gaussianSigma) (torus; measured identity residual → B_bk)")
+    } else if bkNoise.bound > 0 {
         print("  BK noise inject B=\(bkNoise.bound) (measured identity residual → B_bk)")
+    }
+    if booleanScaleMul > 1 {
+        print("  boolean scale kδ  k=\(booleanScaleMul)  (decode/test-poly spacing \(booleanScaleMul)×q/(2N))")
     }
     if binCost >= 0 {
         print("  DynamicRotateCost mux=\(muxCost) binary=\(binCost) speedup≈\(String(format: "%.1f", Double(muxCost) / Double(max(binCost, 1))))×")
     }
     print("")
 
+    let tileWidthFlag = intFlag("--metal-br-tile")
+    let tileWidth = tileWidthFlag ?? MetalBRControl.defaultTileWidth
+    MetalBRControl.defaultTileWidth = tileWidth
+    if CommandLine.arguments.contains("--metal-br-fused") {
+        MetalBRControl.overrideLowering = .fused
+    } else if tileWidthFlag != nil {
+        MetalBRControl.overrideLowering = .tiledKernel
+    } else {
+        MetalBRControl.overrideLowering = nil
+    }
     MetalBRControl.progress = { line in
         print(line)
         fflush(stdout)
@@ -231,6 +289,9 @@ private func runEncryptedNetlistBench() {
     var metrics: [EncryptedMetric] = []
 
     func wantPath(_ label: String) -> Bool {
+        if sequential && (label.contains("cpu-ggsw") || label.contains("metal-netlist")) {
+            return false
+        }
         if metalNetlistOnly {
             return label.contains("metal-netlist")
         }
@@ -262,6 +323,9 @@ private func runEncryptedNetlistBench() {
         queue: MTLCommandQueue?
     ) throws {
         guard wantPath(label) else { return }
+        print("  starting \(label)")
+        fflush(stdout)
+        clear.resetState()
         let secret = TFHESecretKey.random(params: params.tfhe, seed: seed)
         let enc = EncryptedNetlistSimulator(
             moduleName: moduleName,
@@ -273,21 +337,97 @@ private func runEncryptedNetlistBench() {
             bkNoise: bkNoise,
             seed: seed &+ 0x100,
             device: device,
-            commandQueue: queue
+            commandQueue: queue,
+            booleanScaleMul: booleanScaleMul
         )
         var rows = 0
+        var lastOutputs: [String: [UInt8]]?
+        var hostMem = PicoRVHostMem()
+        let hold = resetHold ?? 3
         let started = CFAbsoluteTimeGetCurrent()
-        for inputs in stimuli {
+        for tickIndex in 0..<stimuli.count {
+            let inputs: [String: [UInt8]]
+            if let memKind, hostMemActive {
+                inputs = makePicoRVHostMemInputs(
+                    clear: clear,
+                    tick: tickIndex + 1,
+                    resetHold: hold,
+                    lastOutputs: lastOutputs,
+                    kind: memKind,
+                    host: &hostMem
+                )
+            } else {
+                inputs = stimuli[tickIndex]
+            }
             let want = clear.tick(inputs: inputs)
             let got = try enc.tick(inputs: inputs)
             for (port, bits) in want {
                 guard let gotBits = got[port], gotBits == bits else {
                     fatalError(
-                        "\(port) mismatch \(label): want=\(bits) got=\(got[port] ?? []) inputs=\(inputs)"
+                        "\(port) mismatch \(label) tick \(rows + 1): want=\(bits) got=\(got[port] ?? [])"
                     )
                 }
             }
+            if sequential {
+                let encQ = enc.decryptedRegisterBits()
+                for dff in clear.dffs {
+                    let wantQ = clear.state[dff.qWire] ?? 0
+                    let gotQ = encQ[dff.qWire] ?? 255
+                    if wantQ != gotQ {
+                        fatalError(
+                            "DFF \(dff.name) \(dff.type) mismatch \(label) tick \(rows + 1): want=\(wantQ) got=\(gotQ)"
+                        )
+                    }
+                }
+            }
+            if hostMemActive {
+                let valid = (want["mem_valid"] ?? [0]).first ?? 0
+                let ready = (inputs["mem_ready"] ?? [0]).first ?? 0
+                let addr = unpackHostLE(want["mem_addr"] ?? [])
+                let instr = (want["mem_instr"] ?? [0]).first ?? 0
+                let wstrb = unpackHostLE(want["mem_wstrb"] ?? [])
+                let wdata = unpackHostLE(want["mem_wdata"] ?? [])
+                if valid == 1 && ready == 1 {
+                    if instr == 1 {
+                        hostMem.noteFetch(tick: rows + 1, addr: addr)
+                        print(String(format: "  FETCH tick %2d  addr=0x%08x  instr=1", rows + 1, addr))
+                    } else if wstrb == 0 {
+                        let rdata = unpackHostLE(inputs["mem_rdata"] ?? [])
+                        hostMem.noteLoad(tick: rows + 1, addr: addr, rdata: rdata)
+                        print(String(format: "  LOAD  tick %2d  addr=0x%08x  rdata=0x%08x", rows + 1, addr, rdata))
+                    }
+                    if wstrb != 0 {
+                        hostMem.noteStore(tick: rows + 1, addr: addr, wstrb: UInt8(wstrb & 0xf), wdata: wdata)
+                        print(String(format: "  STORE tick %2d  addr=0x%08x  wstrb=0x%x  wdata=0x%08x", rows + 1, addr, wstrb, wdata))
+                    }
+                } else if rows < 12 || valid == 1 {
+                    print(String(format: "  mem tick %2d  valid=%d ready=%d addr=0x%08x instr=%d wstrb=0x%x", rows + 1, valid, ready, addr, instr, wstrb))
+                }
+                hostMem.afterTick(valid: valid, ready: ready, instr: instr, addr: addr)
+            }
+            lastOutputs = want
             rows += 1
+        }
+        if hostMemActive {
+            let addrs = hostMem.fetches.map { $0.addr }
+            let unique = Set(addrs)
+            let addrList = addrs.map { String(format: "0x%x", $0) }.joined(separator: ",")
+            print("  FETCH summary  served=\(hostMem.fetches.count)  unique_addr=\(unique.count)  addrs=\(addrList)")
+            if hostMem.fetches.count < 2 || unique.count < 2 {
+                fatalError("fetch did not advance PC (served=\(hostMem.fetches.count) unique=\(unique.count)) \(label)")
+            }
+            if memKind == "prog" {
+                let wdata1 = hostMem.stores.contains { $0.wstrb != 0 && ($0.wdata & 0xff) == 1 }
+                print("  STORE summary  count=\(hostMem.stores.count)  wdata1=\(wdata1)  ram0=\(hostMem.ram[0] ?? 0)")
+                if !wdata1 {
+                    fatalError("tiny program did not store 1 (stores=\(hostMem.stores.count)) \(label)")
+                }
+                let load1 = hostMem.loadXfers.contains { $0.rdata == 1 }
+                print("  LOAD  summary  count=\(hostMem.loads.count)  xfers=\(hostMem.loadXfers.count)  rdata1=\(load1)")
+                if !load1 {
+                    fatalError("tiny program did not load 1 (xfers=\(hostMem.loadXfers)) \(label)")
+                }
+            }
         }
         let seconds = CFAbsoluteTimeGetCurrent() - started
         let hard = enc.hardnessCertificate ?? enc.issueHardnessCertificate()
@@ -404,7 +544,7 @@ private func runEncryptedNetlistBench() {
                     device: device,
                     queue: queue
                 )
-                // Finer covering (baseLog=4): EP β↓ ⇒ BK-noise amp↓ (H4 toward ε≤2^{-64}).
+                // Finer covering (baseLog=4/2): EP β↓ ⇒ BK-noise amp↓ (H4 toward ε≤2^{-64}).
                 try runAll(
                     label: "blind-rotate-metal secret covering-b4",
                     params: .covering(degree: degree, baseLog: 4),
@@ -420,6 +560,43 @@ private func runEncryptedNetlistBench() {
                     backend: .blindRotateMetal,
                     wireRefresh: .publicMS,
                     seed: 0xE133,
+                    device: device,
+                    queue: queue
+                )
+                try runAll(
+                    label: "blind-rotate-metal secret covering-b2",
+                    params: .covering(degree: degree, baseLog: 2),
+                    backend: .blindRotateMetal,
+                    wireRefresh: .secret,
+                    seed: 0xE134,
+                    device: device,
+                    queue: queue
+                )
+                try runAll(
+                    label: "blind-rotate-metal public-ms covering-b2",
+                    params: .covering(degree: degree, baseLog: 2),
+                    backend: .blindRotateMetal,
+                    wireRefresh: .publicMS,
+                    seed: 0xE135,
+                    device: device,
+                    queue: queue
+                )
+                // Finest covering (baseLog=1): EP β=2 — H4 push toward torus-scale B~128.
+                try runAll(
+                    label: "blind-rotate-metal secret covering-b1",
+                    params: .covering(degree: degree, baseLog: 1),
+                    backend: .blindRotateMetal,
+                    wireRefresh: .secret,
+                    seed: 0xE136,
+                    device: device,
+                    queue: queue
+                )
+                try runAll(
+                    label: "blind-rotate-metal public-ms covering-b1",
+                    params: .covering(degree: degree, baseLog: 1),
+                    backend: .blindRotateMetal,
+                    wireRefresh: .publicMS,
+                    seed: 0xE137,
                     device: device,
                     queue: queue
                 )
@@ -469,8 +646,33 @@ private func runEncryptedNetlistBench() {
     }
 }
 
-/// Build cleartext input vectors for encrypted ≡ clear checks.
-/// Exhaustive when total input width ≤ 12 and space ≤ maxVectors; else seeded sample.
+/// Host-clocked sequential boot: `resetn=0` for `resetHold` ticks, then `1`.
+/// Other ports zero; `clk` is the host tick, not a torus wire.
+private func makeEncryptedResetHoldStimuli(
+    clear: CleartextNetlistSimulator,
+    ticks: Int,
+    resetHold: Int
+) -> [[String: [UInt8]]] {
+    precondition(ticks > 0)
+    let hold = max(0, resetHold)
+    let ports = clear.inputPorts.keys.sorted()
+    return (1...ticks).map { tick in
+        var row: [String: [UInt8]] = [:]
+        for p in ports {
+            let width = clear.inputPorts[p]!.count
+            var bits = [UInt8](repeating: 0, count: width)
+            if p == "clk" {
+                bits = [UInt8](repeating: 0, count: width)
+            } else if p == "resetn" {
+                let live: UInt8 = tick <= hold ? 0 : 1
+                bits = [UInt8](repeating: live, count: width)
+            }
+            row[p] = bits
+        }
+        return row
+    }
+}
+
 private func makeEncryptedStimuli(
     clear: CleartextNetlistSimulator,
     maxVectors: Int,
@@ -1154,11 +1356,24 @@ func runNoisyBKMeasure() {
     setbuf(stdout, nil)
     let degree = intFlag("--degree") ?? 8
     let trials = intFlag("--trials") ?? 16
-    let inject = UInt32(intFlag("--bk-noise", allowZero: true) ?? 64)
+    let injectNoise: TFHENoiseParams = {
+        if let sigma = doubleFlag("--bk-noise-sigma"), sigma > 0 {
+            return .gaussian(sigma: sigma)
+        }
+        return TFHENoiseParams(bound: UInt32(intFlag("--bk-noise", allowZero: true) ?? 64))
+    }()
     let coveringSweep = CommandLine.arguments.contains("--covering-sweep")
+    let booleanScaleMul = intFlag("--boolean-scale-mul") ?? 1
+    let injectLabel: String
+    if injectNoise.usesGaussian {
+        injectLabel = String(format: "σ=%.1f", injectNoise.gaussianSigma)
+    } else {
+        injectLabel = "B=\(injectNoise.bound)"
+    }
     print("HELUT noisy-BK identity residual (H4)")
-    print("  N=\(degree)  trials=\(trials)  inject B ∈ {0, \(inject)}"
-        + (coveringSweep ? "  covering-sweep=yes" : ""))
+    print("  N=\(degree)  trials=\(trials)  inject ∈ {0, \(injectLabel)}"
+        + (coveringSweep ? "  covering-sweep=yes" : "")
+        + (booleanScaleMul > 1 ? "  kδ=\(booleanScaleMul)" : ""))
     print("")
     var rows: [TFHENoisyBKMeasurement] = []
     var gadgets: [(String, GGSWParams)] = [
@@ -1178,13 +1393,17 @@ func runNoisyBKMeasure() {
     }
     for (label, params) in gadgets {
         let secret = TFHESecretKey.random(params: params.tfhe, seed: 0xB10C)
-        for bound in [UInt32(0), inject] {
+        let modes: [TFHENoiseParams] = [.none, injectNoise]
+        for noise in modes {
             let measured = TFHENoisyBKMeasurement.identity(
                 secret: secret,
                 params: params,
-                noise: TFHENoiseParams(bound: bound),
+                noise: noise,
                 trials: trials,
-                seed: 0xB10D &+ bound
+                seed: 0xB10D &+ (noise.usesGaussian
+                    ? UInt32(noise.gaussianSigma.rounded())
+                    : noise.bound),
+                booleanScaleMul: booleanScaleMul
             )
             let cert = measured.certificate(lutCount: 8)
             let gauss = measured.gaussianCertificate(lutCount: 8)
@@ -1194,8 +1413,14 @@ func runNoisyBKMeasure() {
             } else {
                 eps = String(format: "%.1f", gauss.failureLog2)
             }
+            let modeTag: String
+            if noise.usesGaussian {
+                modeTag = String(format: "σ=%.1f", noise.gaussianSigma)
+            } else {
+                modeTag = "B=\(noise.bound)"
+            }
             print(
-                "\(label) B=\(bound): max|e|=\(measured.maxAbsError) "
+                "\(label) \(modeTag): max|e|=\(measured.maxAbsError) "
                     + String(format: "σ̂=%.1f", measured.sigmaHat)
                     + " δ/2=\(measured.decodingHalfGap) "
                     + "decode_fail=\(measured.decodeFailures) "
@@ -1203,7 +1428,7 @@ func runNoisyBKMeasure() {
                     + "  (baseLog=\(params.baseLog) ℓ=\(params.levelCount))"
             )
             rows.append(measured)
-            if bound == 0 {
+            if noise.bound == 0 && !noise.usesGaussian {
                 precondition(measured.maxAbsError == 0, "noiseless BK must measure B_bk=0")
                 cert.assertDecodable()
             }

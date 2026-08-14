@@ -13,7 +13,8 @@ $B$ & Batch axis: independent copies of one netlist. \\
 $\delta$ & $q/(2N)$, rotation / message spacing. \\
 $\sigma$ & LWE Gaussian width. \\
 $\varepsilon$ & Ingest failure probability (Gaussian certificate). \\
-$B_{\mathrm{bk}}$ & BK noise bound; $0$ in HELUT now (\hid{4}). \\
+$B_{\mathrm{bk}}$ & BK noise bound after BR; noiseless ($0$) on default Track~A
+        throughput SING; measured under covering gadgets (\hid{4}, \cid{22}/\cid{36}). \\
 $\ell$ & GGSW gadget levels. \\
 $W$ & CMUX tile width in the Metal compiler. \\
 $R_q$ & $\mathbb{Z}_q[X]/(X^N+1)$. \\
@@ -27,7 +28,9 @@ $E(w)$ & Emitter $\mathbf{1}[w\ge\tfrac12]$. \\
 $M$ & Freeze mask: coordinates excluded from $\pi$. \\
 $\lambda$ & Discreteness squeeze on $\pi(w)$; Theorem~1 needs $\lambda\ge 0$. \\
 \texttt{\$lut} & Yosys look-up cell; one programmable gate. \\
-SING & Encrypted $\equiv$ clear on generic stimuli. \\
+SING & \textbf{S}timuli \textbf{In}, \textbf{G}olden out:
+        encrypted evaluation $\equiv$ cleartext netlist on the same generic
+        input vectors (\texttt{--sing}); certificate lines ride with the tick. \\
 \cid{$n$}, \hid{$n$}, \nid{$n$} & Claim, hedge, non-implication IDs. \\
 \bottomrule
 \end{tabular}

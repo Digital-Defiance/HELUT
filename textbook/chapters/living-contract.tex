@@ -62,7 +62,10 @@ Metal 3-prime NTT persist blind-rotate.
 Proof: CPU$+$Metal NTT $\equiv$ schoolbook (19 tests) plus microbench PASS bits.
 Table: $N\in\{64,1024\}$ s/BR versus schoolbook persist and fused-EP.
 Metric: $0.433\,\mathrm{s}$/BR at $N=1024$ (gpu $0.43\,\mathrm{s}$, RSS $148\,\mathrm{MiB}$).
-Examples: microbench identity LUT; full\_adder boolean SING.
+Examples: microbench identity LUT; full\_adder boolean
+SING (\textbf{S}timuli \textbf{In}, \textbf{G}olden out---encrypted evaluation
+must match the cleartext netlist on the same generic vectors; see
+Chapter~\ref{ch:pillari}).
 Application: production-shaped polynomial degree on a laptop GPU graph.
 \end{example}
 
