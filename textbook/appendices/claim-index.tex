@@ -7,12 +7,21 @@ Snapshot epoch: \livingepoch{}.
 
 \section{Reproducible results}
 
-\begin{center}
-\small
-\begin{tabular}{@{}lp{0.72\textwidth}@{}}
+{\small
+\begin{longtable}{@{}lp{0.72\textwidth}@{}}
 \toprule
 ID & Result \\
 \midrule
+\endfirsthead
+\toprule
+ID & Result \emph{(continued)} \\
+\midrule
+\endhead
+\midrule
+\multicolumn{2}{r}{\emph{Continued on next page}} \\
+\endfoot
+\bottomrule
+\endlastfoot
 \cid{1} & Yosys \texttt{\$lut}/DFF $\to$ Metal/CPU tensor eval (oracle). \\
 \cid{2} & Welchman path breaks known P1030684 end-to-end. \\
 \cid{3} & $\le 10$-plug / SAT kill chain removes ghosts. \\
@@ -64,9 +73,8 @@ ID & Result \\
 \cid{49} & Encrypted PicoRV32 \texttt{addi}+\texttt{sw}: store \texttt{wdata}=1, RAM0=1; $3.79\,\mathrm{s}/48$ @ demo $N{=}8$. Load-back is \cid{50}. \\
 \cid{50} & Encrypted PicoRV32 \texttt{lw} sees stored 1 (NBA xfer); $3.77\,\mathrm{s}/48$ @ demo $N{=}8$. Not Metal PicoRV. \\
 \cid{51} & Metal PicoRV32 NOP-fetch @ demo $N{=}8$: tiled BR, 2 fetches, $63.55\,\mathrm{s}/8$. Not fused netlist / not $N{=}1024$. \\
-\bottomrule
-\end{tabular}
-\end{center}
+\end{longtable}
+}
 
 \section{Open hedges}
 

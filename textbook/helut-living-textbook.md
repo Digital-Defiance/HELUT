@@ -1104,61 +1104,115 @@ Canonical living inventory: `directives/claim-sheet.md`. If this appendix disagr
 
 ### Reproducible results
 
-::: center
-  ID        Result
-  --------- -----------------------------------------------------------------------------------------------------------------------------------------------------------
-  **C1**    Yosys `$lut`/DFF $\to$ Metal/CPU tensor eval (oracle).
-  **C2**    Welchman path breaks known P1030684 end-to-end.
-  **C3**    $\le 10$-plug / SAT kill chain removes ghosts.
-  **C4**    Encrypted LWE/GLWE $+$ GGSW BR per `$lut`.
-  **C5**    Certificates on encrypted ticks.
-  **C6**    Encrypted $\equiv$ clear multi-netlist SING; adder $N\le 1024$.
-  **C7**    Metal 1-LUT BR microbench (fused ancestor numbers).
-  **C8**    TensorLUT M4 baseline $F_{\mathrm{crypto}}=0$ $+$ Verilog emit.
-  **C9**    Stecker involution sandwich; blind 3-pair PASS.
-  **C10**   Enigma256 reciprocity; fail-closed / bijection.
-  **C11**   Potsdam/Plaice keys $\neq$ P1030680.
-  **C12**   Windowed discriminator vs whole-message turnover flaw.
-  **C13**   Metal tiled-kernel BR at $N=1024$ (pre-fusion lineage).
-  **C14**   Metal full_adder SING at $N=1024$ (pre-NTT lineage).
-  **C15**   Metal netlist-scheduled SING at $N=1024$.
-  **C16**   Metal fused EP kernel; $1.043\,\mathrm{s}$/BR at $N=1024$.
-  **C17**   GPU-resident BR tile; $0.519\,\mathrm{s}$/BR; SING $12.2\,\mathrm{s}/8$.
-  **C18**   3-prime NTT persist BR; $0.433\,\mathrm{s}$/BR; SING $15.6\,\mathrm{s}/8$.
-  **C19**   TensorLUT continuous$\to$discrete Theorem 1 (six machine-checked lemmas).
-  **C20**   Wavefront-parallel independent `$lut` BRs; boolean SING $10.6\,\mathrm{s}/8$.
-  **C21**   Metal cryptoPublicMS $\ell=2$ SING at $N=1024$; $11.38\,\mathrm{s}/8$.
-  **C22**   Measured noisy-BK residual $\to B_{\mathrm{bk}}/\hat\sigma$ (covering gadget).
-  **C23**   Native Sage lattice-estimator fill-in; production $|\Delta|=4.5$.
-  **C24**   Enigma256 SoftBus Theorem 2 (reciprocity / fail-closed; five lemmas).
-  **C25**   TensorLUT Theorem 1 corollary (emitter--discrete $+$ involution under freeze).
-  **C26**   Noisy-BK identity residual at $N{=}1024$: inject $B{=}64$ undecodable; $B{=}4$ $\varepsilon\log_2\approx-1$.
-  **C27**   Exact public-MS covering under $q{=}2^{32}$ only at $N\in\{8,128\}$ (Theorem 3).
-  **C28**   Track B Metal cryptoPublicMS SING at $N{=}128$ with noisy BK ($B{=}64$) PASS.
-  **C29**   Exact public-MS covering stays $\{8,128\}$ for any power-of-two $q{=}2^{w}$ (Theorem 3$'$).
-  **C30**   Track B $\varepsilon$ vs inject $B$ at $N{=}128$: printed $\varepsilon$ OK at small $B$; $\hat\sigma$ still $\sim 10^{4}$--$10^{5}$.
-  **C31**   Incomplete public-MS gap at $N{=}1024$: uncoveredBits$=10$; approx candidate $=$`.crypto`.
-  **C32**   Track A approx: `.crypto` inject $B{=}1$ at $N{=}1024$ decodable; $\varepsilon\log_2\approx-8.4$ at 8 trials (not $-64$).
-  **C33**   Track A Metal SING covering `.crypto` at $N{=}1024$ with $B{=}1$ PASS (secret + public-ms).
-  **C34**   Track A covering baseLog$=4$: $\varepsilon\log_2\approx-913$ ($\le 2^{-64}$) + Metal SING PASS.
-  **C35**   Track A covering baseLog$=2$: $\varepsilon\le 2^{-64}$ through inject $B{=}16$ ($\varepsilon\log_2\approx-65.4$) + Metal SING PASS.
-  **C36**   Track A covering baseLog$=1$: $\varepsilon\le 2^{-64}$ through inject $B{=}32$ ($\varepsilon\log_2\approx-139$) + Metal SING PASS; $B{=}128$ still fails.
-  **C37**   Track A Gaussian BK inject on covering-b1: $\sigma{=}24$ meets $\varepsilon\le 2^{-64}$ + Metal SING PASS; torus $\sigma{\approx}128$ still undecodable.
-  **C38**   Encrypted sequential DFF host-clock: 4-bit counter Metal $N{=}1024$ SING PASS ($15.88\,\mathrm{s}/4$). Not PicoRV32.
-  **C39**   Encrypted 1-byte/1-round E256 frozen scramble Metal $N{=}1024$ SING PASS ($22.77\,\mathrm{s}/2$). Not live BRAM.
-  **C40**   Encrypted toy NOP/ADD ISA Metal $N{=}1024$ SING PASS ($20.31\,\mathrm{s}/4$). Not PicoRV32.
-  **C41**   Covering-b1 Gaussian $\sigma{=}128$ meets $\varepsilon\le 2^{-64}$ at $N\le 512$ + Metal SING; $N{=}1024$ still fail.
-  **C42**   4-bit CSA vs ripple: LUT2 $11\to 8$ ($-27\%$) + encrypted SING PASS. Not TensorLUT melt.
-  **C43**   $k\delta$ encoding at $N{=}1024$: $k{=}4$ Metal SING PASS on covering-b1 $\sigma{=}128$; $\varepsilon$ bar not stable at 4 trials.
-  **C44**   TensorLUT melt--freeze--snap on a separable Boolean interpolant (three lemmas). Not arbitrary-netlist melt.
-  **C45**   Encrypted PicoRV32 1-tick SING at demo $N{=}8$: $76.12\,\mathrm{ms}$/row; 4-bit hardness. Not production $N$.
-  **C46**   Encrypted PicoRV32 10-tick `resetn` boot SING at $N{=}8$: $0.972\,\mathrm{s}/10$; $Q$ $\equiv$ clear. Plain `$_DFF_P_` native-$D$ fix.
-  **C47**   Encrypted PicoRV32 NOP-fetch: 10 instruction fetches, PC $0{+}4k$ through $0x24$; $3.15\,\mathrm{s}/32$.
-  **C48**   2-LUT cascade melt--snap--emit $(a\land b)\oplus c$; 8-corner SING of snapped INIT (dual interpolant OK).
-  **C49**   Encrypted PicoRV32 `addi`+`sw`: store `wdata`=1, RAM0=1; $3.79\,\mathrm{s}/48$ @ demo $N{=}8$. Load-back is **C50**.
-  **C50**   Encrypted PicoRV32 `lw` sees stored 1 (NBA xfer); $3.77\,\mathrm{s}/48$ @ demo $N{=}8$. Not Metal PicoRV.
-  **C51**   Metal PicoRV32 NOP-fetch @ demo $N{=}8$: tiled BR, 2 fetches, $63.55\,\mathrm{s}/8$. Not fused netlist / not $N{=}1024$.
-:::
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ID           | Result                                                                                                                                                    |
++:=============+:==========================================================================================================================================================+
+| ID           | Result *(continued)*                                                                                                                                      |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| *Continued on next page*                                                                                                                                                 |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C1**       | Yosys `$lut`/DFF $\to$ Metal/CPU tensor eval (oracle).                                                                                                    |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C2**       | Welchman path breaks known P1030684 end-to-end.                                                                                                           |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C3**       | $\le 10$-plug / SAT kill chain removes ghosts.                                                                                                            |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C4**       | Encrypted LWE/GLWE $+$ GGSW BR per `$lut`.                                                                                                                |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C5**       | Certificates on encrypted ticks.                                                                                                                          |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C6**       | Encrypted $\equiv$ clear multi-netlist SING; adder $N\le 1024$.                                                                                           |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C7**       | Metal 1-LUT BR microbench (fused ancestor numbers).                                                                                                       |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C8**       | TensorLUT M4 baseline $F_{\mathrm{crypto}}=0$ $+$ Verilog emit.                                                                                           |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C9**       | Stecker involution sandwich; blind 3-pair PASS.                                                                                                           |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C10**      | Enigma256 reciprocity; fail-closed / bijection.                                                                                                           |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C11**      | Potsdam/Plaice keys $\neq$ P1030680.                                                                                                                      |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C12**      | Windowed discriminator vs whole-message turnover flaw.                                                                                                    |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C13**      | Metal tiled-kernel BR at $N=1024$ (pre-fusion lineage).                                                                                                   |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C14**      | Metal full_adder SING at $N=1024$ (pre-NTT lineage).                                                                                                      |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C15**      | Metal netlist-scheduled SING at $N=1024$.                                                                                                                 |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C16**      | Metal fused EP kernel; $1.043\,\mathrm{s}$/BR at $N=1024$.                                                                                                |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C17**      | GPU-resident BR tile; $0.519\,\mathrm{s}$/BR; SING $12.2\,\mathrm{s}/8$.                                                                                  |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C18**      | 3-prime NTT persist BR; $0.433\,\mathrm{s}$/BR; SING $15.6\,\mathrm{s}/8$.                                                                                |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C19**      | TensorLUT continuous$\to$discrete Theorem 1 (six machine-checked lemmas).                                                                                 |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C20**      | Wavefront-parallel independent `$lut` BRs; boolean SING $10.6\,\mathrm{s}/8$.                                                                             |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C21**      | Metal cryptoPublicMS $\ell=2$ SING at $N=1024$; $11.38\,\mathrm{s}/8$.                                                                                    |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C22**      | Measured noisy-BK residual $\to B_{\mathrm{bk}}/\hat\sigma$ (covering gadget).                                                                            |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C23**      | Native Sage lattice-estimator fill-in; production $|\Delta|=4.5$.                                                                                         |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C24**      | Enigma256 SoftBus Theorem 2 (reciprocity / fail-closed; five lemmas).                                                                                     |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C25**      | TensorLUT Theorem 1 corollary (emitter--discrete $+$ involution under freeze).                                                                            |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C26**      | Noisy-BK identity residual at $N{=}1024$: inject $B{=}64$ undecodable; $B{=}4$ $\varepsilon\log_2\approx-1$.                                              |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C27**      | Exact public-MS covering under $q{=}2^{32}$ only at $N\in\{8,128\}$ (Theorem 3).                                                                          |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C28**      | Track B Metal cryptoPublicMS SING at $N{=}128$ with noisy BK ($B{=}64$) PASS.                                                                             |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C29**      | Exact public-MS covering stays $\{8,128\}$ for any power-of-two $q{=}2^{w}$ (Theorem 3$'$).                                                               |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C30**      | Track B $\varepsilon$ vs inject $B$ at $N{=}128$: printed $\varepsilon$ OK at small $B$; $\hat\sigma$ still $\sim 10^{4}$--$10^{5}$.                      |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C31**      | Incomplete public-MS gap at $N{=}1024$: uncoveredBits$=10$; approx candidate $=$`.crypto`.                                                                |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C32**      | Track A approx: `.crypto` inject $B{=}1$ at $N{=}1024$ decodable; $\varepsilon\log_2\approx-8.4$ at 8 trials (not $-64$).                                 |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C33**      | Track A Metal SING covering `.crypto` at $N{=}1024$ with $B{=}1$ PASS (secret + public-ms).                                                               |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C34**      | Track A covering baseLog$=4$: $\varepsilon\log_2\approx-913$ ($\le 2^{-64}$) + Metal SING PASS.                                                           |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C35**      | Track A covering baseLog$=2$: $\varepsilon\le 2^{-64}$ through inject $B{=}16$ ($\varepsilon\log_2\approx-65.4$) + Metal SING PASS.                       |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C36**      | Track A covering baseLog$=1$: $\varepsilon\le 2^{-64}$ through inject $B{=}32$ ($\varepsilon\log_2\approx-139$) + Metal SING PASS; $B{=}128$ still fails. |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C37**      | Track A Gaussian BK inject on covering-b1: $\sigma{=}24$ meets $\varepsilon\le 2^{-64}$ + Metal SING PASS; torus $\sigma{\approx}128$ still undecodable.  |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C38**      | Encrypted sequential DFF host-clock: 4-bit counter Metal $N{=}1024$ SING PASS ($15.88\,\mathrm{s}/4$). Not PicoRV32.                                      |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C39**      | Encrypted 1-byte/1-round E256 frozen scramble Metal $N{=}1024$ SING PASS ($22.77\,\mathrm{s}/2$). Not live BRAM.                                          |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C40**      | Encrypted toy NOP/ADD ISA Metal $N{=}1024$ SING PASS ($20.31\,\mathrm{s}/4$). Not PicoRV32.                                                               |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C41**      | Covering-b1 Gaussian $\sigma{=}128$ meets $\varepsilon\le 2^{-64}$ at $N\le 512$ + Metal SING; $N{=}1024$ still fail.                                     |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C42**      | 4-bit CSA vs ripple: LUT2 $11\to 8$ ($-27\%$) + encrypted SING PASS. Not TensorLUT melt.                                                                  |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C43**      | $k\delta$ encoding at $N{=}1024$: $k{=}4$ Metal SING PASS on covering-b1 $\sigma{=}128$; $\varepsilon$ bar not stable at 4 trials.                        |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C44**      | TensorLUT melt--freeze--snap on a separable Boolean interpolant (three lemmas). Not arbitrary-netlist melt.                                               |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C45**      | Encrypted PicoRV32 1-tick SING at demo $N{=}8$: $76.12\,\mathrm{ms}$/row; 4-bit hardness. Not production $N$.                                             |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C46**      | Encrypted PicoRV32 10-tick `resetn` boot SING at $N{=}8$: $0.972\,\mathrm{s}/10$; $Q$ $\equiv$ clear. Plain `$_DFF_P_` native-$D$ fix.                    |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C47**      | Encrypted PicoRV32 NOP-fetch: 10 instruction fetches, PC $0{+}4k$ through $0x24$; $3.15\,\mathrm{s}/32$.                                                  |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C48**      | 2-LUT cascade melt--snap--emit $(a\land b)\oplus c$; 8-corner SING of snapped INIT (dual interpolant OK).                                                 |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C49**      | Encrypted PicoRV32 `addi`+`sw`: store `wdata`=1, RAM0=1; $3.79\,\mathrm{s}/48$ @ demo $N{=}8$. Load-back is **C50**.                                      |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C50**      | Encrypted PicoRV32 `lw` sees stored 1 (NBA xfer); $3.77\,\mathrm{s}/48$ @ demo $N{=}8$. Not Metal PicoRV.                                                 |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C51**      | Metal PicoRV32 NOP-fetch @ demo $N{=}8$: tiled BR, 2 fetches, $63.55\,\mathrm{s}/8$. Not fused netlist / not $N{=}1024$.                                  |
++--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 ### Open hedges
 
