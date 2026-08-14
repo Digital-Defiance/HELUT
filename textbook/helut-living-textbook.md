@@ -378,7 +378,7 @@ The ring of polynomials is $$R_q = \mathbb{Z}_q[X]/(X^N+1),$$ the negacyclic rin
 **Definition 3.2** (LWE sample [@regev2005lwe]). For secret $s\in\mathbb{Z}_q^n$, a sample is $(a,\langle a,s\rangle+e+m)\in\mathbb{Z}_q^n\times\mathbb{Z}_q$, with $a$ uniform and $e$ small Gaussian (or discrete) noise. GLWE is the polynomial analog: mask polynomials plus a body polynomial in $R_q$.
 :::
 
-HELUT's encrypted path uses LWE/GLWE samples and GGSW bootstrap keys. Decision-LWE is bound to IND-CPA by a machine-checkable certificate (**C5**); the bit estimate at production $(n,\sigma)=(1024,2^{16})$ is calibrated $\sim 176$ and is *not* a lattice-estimator attack cost until Sage fills the pending JSON (**H1**).
+HELUT's encrypted path uses LWE/GLWE samples and GGSW bootstrap keys. Decision-LWE is bound to IND-CPA by a machine-checkable certificate (**C5**); the bit estimate at production $(n,\sigma)=(1024,2^{16})$ is calibrated $\sim 176$ and is *not* a lattice-estimator attack cost on every row---Sage filled `logs/helut-estimator-results.json` (**C23**); print **H1** with the number.
 
 ### Programmable bootstrapping, sketched
 
@@ -424,15 +424,15 @@ That closed hedge is the best homework in the chapter: a systems bug that is als
 Three layers ship as code, not as vibes (**C5**):
 
 ::: center
-  ------------------------------------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  ------------------------------------ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   `TFHENoiseProof`                     Discrete $\infty$-norm inject lemmas.
   Gaussian $\varepsilon$-certificate   Ingest failure $\le 2^{-64}$ under independent-noise hypotheses.
-  `TFHENoisyBKCertificate`             Depth under a BK-noise bound $B_{\mathrm{bk}}$. Default Metal SING still encrypts BK with $e=0$. **C22** fills $B_{\mathrm{bk}}/\hat\sigma$ from identity-LUT residuals on a covering gadget ($N=8$: inject $B=64\to\hat\sigma\approx 6396$; $N=128$: $\hat\sigma\approx 1.47\times 10^6$, still $<\delta/2$, Gaussian $\varepsilon\log_2\approx -23.5$ not $-64$). $\ell=1$ `booleanPublicMS` cannot carry BK noise (**H4**).
-  ------------------------------------ --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  `TFHENoisyBKCertificate`             Depth under a BK-noise bound $B_{\mathrm{bk}}$. Default noiseless Track A SING still uses $e=0$ BK. Covering Track A at $N{=}1024$, torus $\sigma{=}128$, $k{=}7$ is **C52**--**C54** (**H4** Grade B). `cryptoPublicMS` inject remains **C26**; native $k{=}1$ remains **C37**.
+  ------------------------------------ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 :::
 
 ::: warning
-*Honesty note 3.2*. A noiseless BK is a correct *functional* bootstrap and an incomplete *depth* story. **C22** measures residuals; it does not put noisy BK on the $N=1024$ Metal SING path. Students who say "we have production noisy BK" from the $N=8$ table are failing the remaining **H4** asterisk.
+*Honesty note 3.2*. A noiseless BK is a correct *functional* bootstrap and an incomplete *depth* story if that is all you ran. **C22** is the covering-gadget measurement at $N\le 128$. **C52**--**C54** put covering noisy BK on $N{=}1024$ Metal SING at $\sigma{=}128$, $k{=}7$. Students who say "we have production noisy BK" from the $N=8$ table, or who drop the native-$k{=}1$ / `cryptoPublicMS` remainders, are failing **H4**.
 :::
 
 ### Parameters you may quote
@@ -440,15 +440,15 @@ Three layers ship as code, not as vibes (**C5**):
 From the cookbook [@helut-cookbook], production-shaped boolean:
 
 ::: center
-  Knob                   Value                                                     Asterisk
-  ---------------------- --------------------------------------------------------- ----------------------------------
-  $N$                    1024                                                      
-  $q$                    $2^{32}$                                                  native word
-  $\sigma$               $2^{16}$                                                  $\ll \delta/2 = 2^{20}$
-  Target $\varepsilon$   $\le 2^{-64}$                                             Gaussian union on primary wires
-  Classical target       $\ge 128$ bits                                            HELUT est. $\approx 176$; **H1**
-  $B_{\mathrm{bk}}$      0 at $N=1024$ SING; measured at covering $N=8$, $N=128$   **H4**
-  Inter-LUT refresh      `publicMS` default                                        lattice-compatible BK masks
+  Knob                   Value                                                             Asterisk
+  ---------------------- ----------------------------------------------------------------- ----------------------------------
+  $N$                    1024                                                              
+  $q$                    $2^{32}$                                                          native word
+  $\sigma$               $2^{16}$                                                          $\ll \delta/2 = 2^{20}$
+  Target $\varepsilon$   $\le 2^{-64}$                                                     Gaussian union on primary wires
+  Classical target       $\ge 128$ bits                                                    HELUT est. $\approx 176$; **H1**
+  $B_{\mathrm{bk}}$      covering Track A **C52**--**C54**; native $k{=}1$ still **C37**   **H4** remainder
+  Inter-LUT refresh      `publicMS` default                                                lattice-compatible BK masks
 :::
 
 Demo $N=8$ will not meet 128-bit hardness. The certificate reports that honestly. Using demo $N$ for a "secure encrypted CPU" slide is a **N**.
@@ -654,9 +654,9 @@ Most compiler courses grade a binary that runs. This course grades a binary that
 
 - Gaussian: ingest $\varepsilon$ under the stated hypotheses.
 
-- Hardness: calibrated classical bits, with **H1** attached until Sage fills the estimator JSON.
+- Hardness: calibrated classical bits, with **H1** attached (**C23** filled the estimator JSON; four anchors still $|\Delta|>16$).
 
-- Depth: noisy-BK model; **C22** measured at covering gadget; **C26** graded fail at product $N{=}1024$ inject on `cryptoPublicMS`; covering noisy Metal SING exists through inject $B{=}32$ (**C36**); torus-scale $B{\sim}128$ and default Track A $e{=}0$ BK remain **H4** asterisks.
+- Depth: noisy-BK model; **C22** measured at covering gadget; **C26** graded fail at `cryptoPublicMS` $N{=}1024$; covering Track A torus-scale is **C52**--**C54**; native $k{=}1$ remains **C37**.
 
 Students who report only milliseconds have not completed the lab.
 
@@ -692,7 +692,7 @@ Certificates are themselves claims. They need the five cells:
 5.  Application: refuse-closed encrypt so a netlist tick cannot silently drop hardness.
 
 ::: exercise
-**Exercise 3.1**. **C22** filled the measurement cell at covering-gadget $N=8$ and $N=128$. Which cell is still missing for noisy BK as a *product* parameter at $N=1024$ Metal SING? Name the gadget obstruction ($\ell=1$ vs covering).
+**Exercise 3.1**. **C52** closed covering Track A noisy BK at $N{=}1024$ ($\sigma{=}128$, $k{=}7$). Which two remainders of **H4** are still graded negatives? Point at **C37** and **C26**.
 :::
 
 ### Honesty as an engineering interface

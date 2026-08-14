@@ -20,7 +20,7 @@ const pillars = [
       {
         idx: 'I.3',
         title: 'Hardness + noisy-BK certificates',
-        body: 'Calibrated hardness + Sage estimator fill-in (C23). Covering-gadget noisy BK at N≤128 (C22). Product-shaped N=1024 inject is a graded failure (C26)—default SING stays e=0 BK (H4).',
+        body: 'Calibrated hardness + Sage fill-in (C23). Covering-gadget noisy BK at N≤128 (C22). Covering Track A at N=1024 σ=128 k=7 is C52–C54 (ε + SING). cryptoPublicMS inject at N=1024 is still a graded failure (C26). Native k=1 at that inject is still C37. Do not quote “176-bit secure” (H1).',
         meta: '--hardness-table · --measure-bk-noise · Scripts/helut_sage_estimate.sh',
       },
     ],
@@ -184,7 +184,7 @@ export function AppsPage() {
             <strong>Reproduce:</strong> claim inventory in <code>directives/claim-sheet.md</code>;
             commands in <code>REPRODUCE.md</code>. Encrypted equivalence:{' '}
             <code>--bench-encrypted --sing</code>. Formal certs: C19 / C24 / C25 filters. Parameter
-            and H4 notes: <code>directives/parameter-cookbook.md</code>.
+            and remaining H4 notes (native k=1 / cryptoPublicMS): <code>directives/parameter-cookbook.md</code>.
           </div>
 
           <p style={{ marginTop: '1.75rem' }}>

@@ -35,14 +35,12 @@ A passing encrypted tick is then read as a bundle:
   \item Functional: ciphertext decrypts to the clear netlist (the SING gate).
   \item Discrete: $\infty$-norm lemmas held on the inject.
   \item Gaussian: ingest $\varepsilon$ under the stated hypotheses.
-  \item Hardness: calibrated classical bits, with \hid{1} attached until Sage
-        fills the estimator JSON.
+  \item Hardness: calibrated classical bits, with \hid{1} attached
+        (\cid{23} filled the estimator JSON; four anchors still $|\Delta|>16$).
   \item Depth: noisy-BK model; \cid{22} measured at covering gadget;
-        \cid{26} graded fail at product $N{=}1024$ inject on
-        \texttt{cryptoPublicMS};
-        covering noisy Metal SING exists through inject $B{=}32$ (\cid{36});
-        torus-scale $B{\sim}128$ and default Track~A $e{=}0$ BK remain
-        \hid{4} asterisks.
+        \cid{26} graded fail at \texttt{cryptoPublicMS} $N{=}1024$;
+        covering Track~A torus-scale is \cid{52}--\cid{54};
+        native $k{=}1$ remains \cid{37}.
 \end{itemize}
 
 Students who report only milliseconds have not completed the lab.
@@ -160,9 +158,9 @@ They need the five cells:
 \end{enumerate}
 
 \begin{exercise}
-\cid{22} filled the measurement cell at covering-gadget $N=8$ and $N=128$.
-Which cell is still missing for noisy BK as a \emph{product} parameter at
-$N=1024$ Metal SING? Name the gadget obstruction ($\ell=1$ vs covering).
+\cid{52} closed covering Track~A noisy BK at $N{=}1024$ ($\sigma{=}128$, $k{=}7$).
+Which two remainders of \hid{4} are still graded negatives? Point at
+\cid{37} and \cid{26}.
 \end{exercise}
 
 \section{Honesty as an engineering interface}

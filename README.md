@@ -11,10 +11,9 @@ The point is not “Enigma only.” Enigma is one application. The stack is a **
 | **Host oracles** | Boolean-faithful Enigma/M4 for cryptanalysis and validation (campaign path) |
 
 **Homebrew (CLIs):** see [`HOMEBREW.md`](HOMEBREW.md) — `brew tap digital-defiance/homebrew-tap && brew install --HEAD helut`.  
-**Library consumers:** SPM `from: "0.1.0"` (not corpus tags). Packaging plan: [`directives/packaging-roadmap.md`](directives/packaging-roadmap.md).
+**Library consumers:** SPM — use a git revision or a published tag; `from: "0.1.0"` only after that tag exists. Until then: `brew install --HEAD helut` ([`HOMEBREW.md`](HOMEBREW.md)). Packaging plan: [`directives/packaging-roadmap.md`](directives/packaging-roadmap.md).
 
-Values labeled “encrypted” on the **FHE path** (`--lut-backend encrypted` / `--bench-encrypted`) are LWE/GLWE samples evaluated with GGSW bootstrap keys (blind-rotate per Yosys `$lut`, `LUTNode` or whole-netlist Metal graph). HELUT ships Decision-LWE → IND-CPA binding (`TFHELWEHardnessCertificate`, ~176-bit classical estimate at N=1024 via `TFHELWECalibration`), Gaussian ε≤2⁻⁶⁴, discrete-inject proofs, and noisy-BK depth certificates. Metrics: `--bench-encrypted --sing` / `Scripts/helut_encrypted_sing.sh`. Bit estimates should be cross-checked with a lattice estimator (`Scripts/helut_lattice_estimate.py`) before production key sizes. Research-release evidence law: `directives/research-release.md`.
-Living results inventory: [`directives/claim-sheet.md`](directives/claim-sheet.md). Reproduce: [`REPRODUCE.md`](REPRODUCE.md). Trajectory beyond disclosure: [`directives/research-trajectory.md`](directives/research-trajectory.md).
+The **FHE path** (`--lut-backend encrypted` / `--bench-encrypted`) evaluates LWE/GLWE samples with GGSW bootstrap keys (blind-rotate per Yosys `$lut`). SING means encrypted bits match the clear netlist. Covering-gadget noisy BK at production *N*=1024 is **C52**–**C54** (stride-*k*, not native *δ*, not `cryptoPublicMS`). Hardness: calibrated core-SVP ≈175.7 bits at prod-n1024-s16; Sage estimator **180.2** on that row (**C23**). **Do not quote “176-bit secure.”** Four of eight calibration anchors disagree with the estimator by >16 bits (**H1**). Evidence law: [`directives/research-release.md`](directives/research-release.md). Inventory: [`directives/claim-sheet.md`](directives/claim-sheet.md). Reproduce: [`REPRODUCE.md`](REPRODUCE.md). Trajectory: [`directives/research-trajectory.md`](directives/research-trajectory.md).
 
 Papers (canonical **TeX**; Markdown is generated — do not hand-edit `*.md`):
 
@@ -177,12 +176,16 @@ PRD*.md / phase-*.md   Design progression
 
 ## Status (honest)
 
-- **General HELUT:** Yosys `$lut` + sequential cells → one `MPSGraph`; boolean-safe under trivial constant-fill / phase / glwe-trivial; LUT backends `multilinear` and trivial `pbs`; PicoRV32 ~1.3 s / ~173 ms tick; Enigma M3 Metal≡cleartext at N=1024 **PASS**.
-- **Not claimed:** that calibrated core-SVP estimates replace a lattice-estimator run, or that trivial Metal graphs are FHE. (Decision-LWE binding + ε-cert: `TFHELWEHardnessCertificate` / `TFHEAsymptoticSecurityCertificate`.)
-- **Enigma host attack:** real M4 decrypt / crib-drag / stecker / campaign ladder; P1030680 remains historically unbroken — catalog rings **suspended** at originalIndex 417 (resume `--bombe-from 418`).
-- **CLI:** `--bench` for general netlist clocking; day-to-day UX still Enigma-first for campaign tools.
-- **Why this is public:** [`OPPENHEIMER.md`](OPPENHEIMER.md) (author's disclosure note — not a claim sheet).
+- **FHE (what “encrypted” means):** LWE/GLWE + GGSW blind-rotate per `$lut`, SING vs clear. Metal adder **C20**/**C21**. Covering Track A noisy BK at *N*=1024 σ=128 *k*=7: **C52** (adder) **C53** (counter) **C54** (toy ISA). Native *k*=1 at that inject is still undecodable (**C37**). `cryptoPublicMS`+noise is still **C26**. Encrypted PicoRV at production *N* is **not** claimed (**C51** is demo *N*=8).
+- **Oracle path (not FHE):** trivial torus + multilinear / trivial PBS. PicoRV32 cleartext ~1.3 s compile / ~173 ms tick; Enigma M3 Metal≡cleartext at *N*=1024 **PASS**.
+- **Hardness:** Decision-LWE binding + ε-certs exist. Calibrated bits ≠ lattice-estimator Cost `rop` on every row (**H1**, **C23**). Trivial Metal graphs are not FHE.
+- **Enigma host attack:** real M4 decrypt / crib-drag / stecker / campaign ladder. **P1030680 is not decrypted.** Catalog rings parked at originalIndex 417 (resume `--bombe-from 418`). Campaign fitness is cleartext Metal, not encrypted ms/row.
+- **CLI:** `--bench` clocks netlists; campaign tools are Enigma-first. Homebrew: `--HEAD` until a stable tag.
+- **Why this is public:** [`OPPENHEIMER.md`](OPPENHEIMER.md) (author's note — not a **C** row).
+- **How this was built:** [`AI_DISCLOSURE.md`](AI_DISCLOSURE.md) (architect vs engine — not a **C** row).
 
 ## License
 
 MIT — see [`LICENSE`](LICENSE). Copyright © 2026 Digital Defiance.
+
+[`SECURITY.md`](SECURITY.md) · [`CONTRIBUTING.md`](CONTRIBUTING.md) · [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) · [`AI_DISCLOSURE.md`](AI_DISCLOSURE.md)

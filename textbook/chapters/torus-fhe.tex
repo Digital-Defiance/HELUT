@@ -38,8 +38,9 @@ GLWE is the polynomial analog: mask polynomials plus a body polynomial in $R_q$.
 HELUT's encrypted path uses LWE/GLWE samples and GGSW bootstrap keys.
 Decision-LWE is bound to IND-CPA by a machine-checkable certificate
 (\cid{5}); the bit estimate at production $(n,\sigma)=(1024,2^{16})$ is
-calibrated $\sim 176$ and is \emph{not} a lattice-estimator attack cost until
-Sage fills the pending JSON (\hid{1}).
+calibrated $\sim 176$ and is \emph{not} a lattice-estimator attack cost on
+every row---Sage filled \corpus{logs/helut-estimator-results.json} (\cid{23});
+print \hid{1} with the number.
 
 \section{Programmable bootstrapping, sketched}
 
@@ -129,23 +130,23 @@ Three layers ship as code, not as vibes (\cid{5}):
 Gaussian $\varepsilon$-certificate & Ingest failure $\le 2^{-64}$ under
 independent-noise hypotheses. \\
 \texttt{TFHENoisyBKCertificate} & Depth under a BK-noise bound $B_{\mathrm{bk}}$.
-Default Metal SING still encrypts BK with $e=0$.
-\cid{22} fills $B_{\mathrm{bk}}/\hat\sigma$ from identity-LUT residuals
-on a covering gadget ($N=8$: inject $B=64\to\hat\sigma\approx 6396$;
-$N=128$: $\hat\sigma\approx 1.47\times 10^6$, still $<\delta/2$, Gaussian
-$\varepsilon\log_2\approx -23.5$ not $-64$).
-$\ell=1$ \texttt{booleanPublicMS} cannot carry BK noise (\hid{4}). \\
+Default noiseless Track~A SING still uses $e=0$ BK.
+Covering Track~A at $N{=}1024$, torus $\sigma{=}128$, $k{=}7$ is
+\cid{52}--\cid{54} (\hid{4} Grade~B).
+\texttt{cryptoPublicMS} inject remains \cid{26}; native $k{=}1$ remains \cid{37}. \\
 \bottomrule
 \end{tabular}
 \end{center}
 
 \begin{warning}
 A noiseless BK is a correct \emph{functional} bootstrap and an incomplete
-\emph{depth} story.
-\cid{22} measures residuals; it does not put noisy BK on the $N=1024$ Metal
-SING path.
-Students who say ``we have production noisy BK'' from the $N=8$ table are
-failing the remaining \hid{4} asterisk.
+\emph{depth} story if that is all you ran.
+\cid{22} is the covering-gadget measurement at $N\le 128$.
+\cid{52}--\cid{54} put covering noisy BK on $N{=}1024$ Metal SING at
+$\sigma{=}128$, $k{=}7$.
+Students who say ``we have production noisy BK'' from the $N=8$ table, or
+who drop the native-$k{=}1$ / \texttt{cryptoPublicMS} remainders, are
+failing \hid{4}.
 \end{warning}
 
 \section{Parameters you may quote}
@@ -162,7 +163,7 @@ $q$ & $2^{32}$ & native word \\
 $\sigma$ & $2^{16}$ & $\ll \delta/2 = 2^{20}$ \\
 Target $\varepsilon$ & $\le 2^{-64}$ & Gaussian union on primary wires \\
 Classical target & $\ge 128$ bits & HELUT est.\ $\approx 176$; \hid{1} \\
-$B_{\mathrm{bk}}$ & 0 at $N=1024$ SING; measured at covering $N=8$, $N=128$ & \hid{4} \\
+$B_{\mathrm{bk}}$ & covering Track~A \cid{52}--\cid{54}; native $k{=}1$ still \cid{37} & \hid{4} remainder \\
 Inter-LUT refresh & \texttt{publicMS} default & lattice-compatible BK masks \\
 \bottomrule
 \end{tabular}
@@ -170,6 +171,3 @@ Inter-LUT refresh & \texttt{publicMS} default & lattice-compatible BK masks \\
 
 Demo $N=8$ will not meet 128-bit hardness. The certificate reports that
 honestly. Using demo $N$ for a ``secure encrypted CPU'' slide is a \nid{}.
-
-\growswhen{SageMath fills \corpus{logs/helut-estimator-results.json} and
-\hid{1} can be replaced by an estimator table in this section.}

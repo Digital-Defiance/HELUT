@@ -22,7 +22,7 @@ swift test --filter 'MockPBSBooleanTests|TFHESeamTests'
 ./Scripts/helut_phase_seam.sh
 ```
 
-Asserts Metal multilinear/trivial-PBS `$lut` evaluation matches `CleartextNetlistSim` where claimed. Encrypted path: whole-netlist Metal graph (binary X^p), Decision-LWE hardness cert (~176-bit est. @ N=1024), Gaussian ε≤2⁻⁶⁴, noisy-BK depth cert — **PASS** (`TFHESeamTests`). Multi-netlist CPU lock: full_adder / tree (256×) / regex (sampled). Metrics: `--bench-encrypted --sing` / `./Scripts/helut_encrypted_sing.sh` (`--cpu-only`, `--vectors`). Mock/trivial graphs are the boolean oracle (`directives/fhe-graduation.md`). Research-release: `directives/research-release.md`. Parameters: `directives/parameter-cookbook.md`.
+Asserts Metal multilinear/trivial-PBS `$lut` evaluation matches `CleartextNetlistSim` where claimed. Encrypted path: BK blind-rotate, Decision-LWE hardness cert (prod-n1024-s16 HELUT 175.7 vs estimator 180.2 — **H1**), Gaussian ε≤2⁻⁶⁴, noisy-BK depth — covering Track A **C52**. Multi-netlist CPU lock: full_adder / tree (256×) / regex (sampled). Metrics: `--bench-encrypted --sing` / `./Scripts/helut_encrypted_sing.sh`. Mock/trivial graphs are the boolean oracle (`directives/fhe-graduation.md`). Research-release: `directives/research-release.md`. Parameters: `directives/parameter-cookbook.md`.
 
 ## Boolean-path performance snapshot
 
