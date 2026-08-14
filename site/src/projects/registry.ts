@@ -107,12 +107,12 @@ export const projects: Project[] = [
     status: 'active',
     kicker: 'Graduated FHE',
     summary:
-      'EncryptedNetlistSimulator evaluates real samples with blind-rotate, public-MS or secret refresh, and certificates (noise, calibrated hardness, noisy-BK depth). Mock torus shapes remain for CPU-scale cleartext only. Lattice-estimator fill and large-N Metal wall-clock are explicit open items.',
+      'EncryptedNetlistSimulator evaluates real samples with blind-rotate, public-MS or secret refresh, and certificates. Mock torus stays for CPU-scale cleartext. Covering Track A noisy BK at N=1024 k=7 is C52–C54. Native k=1 and cryptoPublicMS remain graded. Sage filled C23; H1 still applies.',
     stakes: [
-      'Encrypted ≡ clear on full_adder / tree / regex via --sing',
-      'Calibrated classical bits ≠ lattice-estimator until Sage fills pending JSON',
-      'Metal microbench measured ~50 s/BR at N=64; N=1024 still engineering',
-      'publicMS gadgets use g₀ = δ so refresh stays on-lattice past N=128',
+      'Encrypted ≡ clear on full_adder (C20/C21) and covering noisy sequential ticks (C53/C54)',
+      'Calibrated bits ≠ estimator Cost on every row (H1 / C23: 175.7 vs 180.2 on prod-n1024-s16)',
+      'Metal persist ~0.52 s/BR at N=1024 (C17); wavefront boolean SING 10.6 s/8 (C20)',
+      'Covering public-MS at N=1024 uses stride-k wires, not “g₀=δ exact covering” (C27 still {8,128})',
     ],
     pages: [
       {
@@ -120,6 +120,12 @@ export const projects: Project[] = [
         label: 'Project hub',
         kind: 'hub',
         blurb: 'Status and non-claims',
+      },
+      {
+        path: '/projects/netlist-fhe/journal',
+        label: 'FHE journal',
+        kind: 'journal',
+        blurb: 'SING receipts, covering Track A, honest remainders',
       },
       {
         path: '/stack',

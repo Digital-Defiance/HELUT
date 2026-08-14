@@ -18,4 +18,4 @@ The course book (`textbook/`) is a teaching surface on the claim inventory. It l
 
 **Map:** Pillar I ← metal-compiler / cookbook / fhe-graduation · Pillar II ← `tensorlut-theorem.md` · Pillar III ← `Enigma256.md` · open problems ← trajectory · frontier ← avenues.
 
-Contract: `textbook/README.md`. Build: `make textbook`. Campaign report (separate surface): `writeup.tex` — agents: `.cursor/rules/writeup.mdc`.
+Contract: `textbook/README.md`. Build: `make textbook`. Campaign report: `writeup.tex` (`.cursor/rules/writeup.mdc`). Public site: `.cursor/rules/site-sync.mdc`.

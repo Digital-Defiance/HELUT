@@ -8,18 +8,21 @@ const pillars = [
       {
         idx: 'I.1',
         title: 'Encrypted full_adder SING',
-        body: 'Multi-LUT Metal SING at production-shaped N=1024: boolean wavefront 10.6 s/8 (C20); crypto ℓ=2 11.38 s/8 (C21). Equivalence to clear is C6.',
+        figure: '/gallery/gallery-i1-adder-sing.png',
+        body: 'Multi-LUT Metal SING at production-shaped N=1024: boolean wavefront 10.6 s/8 (C20); crypto ℓ=2 11.38 s/8 (C21). Covering noisy BK, same N, k=7: adder C52, counter C53, toy ISA C54. Equivalence to clear is C6.',
         meta: 'Scripts/helut_encrypted_sing.sh · logs/helut-encrypted-n1024-metal-sing-*.log',
       },
       {
         idx: 'I.2',
         title: 'Encrypted tree / regex SING',
-        body: 'Same compiler on non-adder netlists at demo N (C6). Proves encrypted ticks are not full_adder-specialized.',
+        figure: '/gallery/gallery-i2-tree-regex.png',
+        body: 'Same compiler on non-adder netlists at demo N (C6). Proves encrypted ticks are not full_adder-specialized. Production-N Metal SING is a remainder, not a missing card.',
         meta: 'tree_netlist.json · regex_netlist.json · --bench-encrypted --sing',
       },
       {
         idx: 'I.3',
         title: 'Hardness + noisy-BK certificates',
+        figure: '/gallery/gallery-i3-hardness.png',
         body: 'Calibrated hardness + Sage fill-in (C23). Covering-gadget noisy BK at N≤128 (C22). Covering Track A at N=1024 σ=128 k=7 is C52–C54 (ε + SING). cryptoPublicMS inject at N=1024 is still a graded failure (C26). Native k=1 at that inject is still C37. Do not quote “176-bit secure” (H1).',
         meta: '--hardness-table · --measure-bk-noise · Scripts/helut_sage_estimate.sh',
       },
@@ -31,18 +34,21 @@ const pillars = [
       {
         idx: 'II.1',
         title: 'M4 TensorLUT baseline emit',
+        figure: '/gallery/gallery-ii1-tensorlut.png',
         body: 'Unmutated Enigma M4 stream locks F_crypto=0 and emits LUT6 Verilog (C8).',
         meta: 'enigma_m4_tensorlut_baseline.v · tensorlut.md',
       },
       {
         idx: 'II.2',
         title: 'Involution sandwich / formal',
+        figure: '/gallery/gallery-ii2-involution.png',
         body: 'Blind 3-pair PASS (C9). Theorem 1 + corollary: continuous→discrete structure and emitter/freeze completeness (C19, C25).',
         meta: 'testTensorLUTFormalCertificate · testTensorLUTFormalCorollaryCertificate',
       },
       {
         idx: 'II.3',
         title: 'Shatter vs hold under λ',
+        figure: '/gallery/gallery-ii3-shatter.png',
         body: 'Seminar empirics from campaign Phase 21. Shatter is science about continuous shortcuts—not a U-534 decrypt (H6).',
         meta: 'BREAK_P1030680.md · TensorLUT cold-start / stecker logs',
       },
@@ -54,18 +60,21 @@ const pillars = [
       {
         idx: 'III.1',
         title: 'SoftBus reciprocity / bijection',
+        figure: '/gallery/gallery-iii1-softbus.png',
         body: 'Frozen scramble is a permutation and an involution; stream round-trip under identical keys (C10, Theorem 2 / C24).',
         meta: 'testEnigma256FormalCertificate · Scripts/enigma256_bijection.sh',
       },
       {
         idx: 'III.2',
         title: 'Red battery grades',
+        figure: '/gallery/gallery-iii2-red-battery.png',
         body: 'TensorLUT cones, SoftBus KPA, and ent on the keystream—empirical grades on the same Mac that rolls Blue.',
         meta: 'Scripts/enigma256_red_battery.sh · logs/enigma256-*',
       },
       {
         idx: 'III.3',
         title: 'Fail-closed NLFF harden',
+        figure: '/gallery/gallery-iii3-fail-closed.png',
         body: 'hardenedCubic() rejects coupledCubic6 and rolls back to independent cubic6 (C24 clause 5). Structural SoftBus contract—not IND-CPA.',
         meta: 'Enigma256Formal.checkFailClosedCoupling',
       },
@@ -77,7 +86,7 @@ const shapeLab = [
   {
     idx: 'Shape',
     title: 'PicoRV32 / tree / regex (oracle)',
-    body: 'Cleartext / mock-torus clocks prove CPU-scale netlists fit the host DFF contract (C1). Not the FHE claim.',
+    body: 'Cleartext / mock-torus clocks prove CPU-scale netlists fit the host DFF contract (C1). Encrypted PicoRV exists at demo N=8 (C45–C51; Metal NOP-fetch C51). Not production N, not covering noisy BK.',
     meta: 'picorv32_netlist.json · boolean benches',
   },
 ]
@@ -111,6 +120,9 @@ export function AppsPage() {
                 <article className="app" key={app.idx}>
                   <div className="idx">{app.idx}</div>
                   <h3>{app.title}</h3>
+                  {'figure' in app && app.figure ? (
+                    <img className="app-figure" src={app.figure} alt={app.title} />
+                  ) : null}
                   <p>{app.body}</p>
                   <div className="meta">{app.meta}</div>
                 </article>
@@ -184,7 +196,10 @@ export function AppsPage() {
             <strong>Reproduce:</strong> claim inventory in <code>directives/claim-sheet.md</code>;
             commands in <code>REPRODUCE.md</code>. Encrypted equivalence:{' '}
             <code>--bench-encrypted --sing</code>. Formal certs: C19 / C24 / C25 filters. Parameter
-            and remaining H4 notes (native k=1 / cryptoPublicMS): <code>directives/parameter-cookbook.md</code>.
+            and remaining H4 notes (native k=1 / cryptoPublicMS):{' '}
+            <code>directives/parameter-cookbook.md</code>. FHE chronology:{' '}
+            <Link to="/projects/netlist-fhe/journal">Pillar I journal</Link>. The Enigma hunt is
+            still in progress.
           </div>
 
           <p style={{ marginTop: '1.75rem' }}>

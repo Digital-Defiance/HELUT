@@ -17,6 +17,9 @@ export function QueuedProjectJournalPage() {
   if (project.slug === 'p1030680') {
     return <Navigate to="/projects/p1030680/journal" replace />
   }
+  if (project.slug === 'netlist-fhe') {
+    return <Navigate to="/projects/netlist-fhe/journal" replace />
+  }
   if (project.slug === 'e256') {
     return <Navigate to="/projects/e256/journal" replace />
   }

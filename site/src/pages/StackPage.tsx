@@ -78,16 +78,19 @@ export function StackPage() {
             <li>
               <span className="mono">SAMPLES</span>
               <span>
-                <strong>LWE / GLWE / GGSW:</strong> binary secret; boolean or crypto-shaped gadgets;
-                public-MS paths use <code>g₀ = δ = q/(2N)</code> so refresh stays on-lattice.
+                <strong>LWE / GLWE / GGSW:</strong> binary secret; boolean, crypto, and covering
+                gadgets. Exact <code>g₀ = δ</code> covering holds only at <em>N</em>∈{'{8,128}'}{' '}
+                (C27). Production covering Track A uses stride-<em>k</em> public-MS (C52).
               </span>
             </li>
             <li>
               <span className="mono">CERTS</span>
               <span>
                 <strong>Issued per tick:</strong> discrete ∞-norm noise budget, Gaussian ingest{' '}
-                <em>ε</em> target, calibrated classical hardness (≥128-bit bar at production{' '}
-                <em>N</em>), noisy-BK depth model (HELUT BK encrypt is still noiseless today).
+                <em>ε</em> target, calibrated classical hardness with H1 attached (C23 filled Sage;
+                do not quote “176-bit secure”), noisy-BK depth. Covering Track A at <em>N</em>=1024
+                σ=128 <em>k</em>=7 is C52–C54. Default noiseless Track A SING still uses <em>e</em>=0
+                BK; that is a different path.
               </span>
             </li>
             <li>
@@ -95,17 +98,18 @@ export function StackPage() {
               <span>
                 <strong>Equivalence:</strong>{' '}
                 <code>--bench-encrypted --sing</code> checks encrypted outputs against the clear
-                netlist simulator (full_adder, tree, regex). Metal microbench:{' '}
-                <code>--bench-encrypted-micro</code> (~50&nbsp;s/BR at <em>N</em>=64 measured).
+                netlist (full_adder C20/C21; covering noisy adder/counter/toy ISA C52–C54). Metal
+                microbench: persist ~0.52&nbsp;s/BR at <em>N</em>=1024 (C17); fused 3-prime ~0.42&nbsp;s/BR
+                (C20). The ~50&nbsp;s/BR figure was an early fused <em>N</em>=64 ancestor.
               </span>
             </li>
             <li>
               <span className="mono">LIMITS</span>
               <span>
-                <strong>Not claimed yet:</strong> lattice-estimator attack cost (Sage fill pending);
-                production key sizes until that table lands; side-channel / GPU power analysis.
-                Large-<em>N</em> encrypted Metal wall-clock is an engineering target, not a
-                marketing number.
+                <strong>Not claimed:</strong> native <em>k</em>=1 torus-scale noisy BK at{' '}
+                <em>N</em>=1024 (C37); noisy <code>cryptoPublicMS</code> at that <em>N</em> (C26);
+                estimator Cost on every calibration row (H1); production keys from the HELUT 175.7
+                figure; side-channel / GPU power; a P1030680 plaintext.
               </span>
             </li>
           </ul>
@@ -196,8 +200,9 @@ export function StackPage() {
               <code>directives/claim-sheet.md</code>. Reproduce:{' '}
               <code>REPRODUCE.md</code>. Trajectory:{' '}
               <code>directives/research-trajectory.md</code>. Cookbook:{' '}
-              <code>directives/parameter-cookbook.md</code>. Campaign:{' '}
-              <Link to="/projects/p1030680/journal">Turing Complete</Link>.
+              <code>directives/parameter-cookbook.md</code>. FHE chronology:{' '}
+              <Link to="/projects/netlist-fhe/journal">Pillar I journal</Link>. Campaign (still
+              open): <Link to="/projects/p1030680/journal">Turing Complete</Link>.
             </p>
             <p style={{ marginTop: '1rem' }}>
               <Link to="/apps">Application circuits →</Link>

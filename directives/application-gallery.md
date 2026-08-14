@@ -36,8 +36,8 @@ Shape laboratory (oracle, not FHE claim): decision tree / regex / PicoRV32 (**C1
 
 | Slot | Five-cell ready? | Notes |
 |------|------------------|-------|
-| I.1–I.3 | yes (partial figures) | **C52** covering Track A *N*=1024 σ=128 *k*=7 (ε + SING). **C26** `cryptoPublicMS` inject still graded fail. Native *k*=1 still **C37**. |
+| I.1–I.3 | yes (gallery figures) | **C52** covering Track A *N*=1024 σ=128 *k*=7 (ε + SING). **C26** `cryptoPublicMS` inject still graded fail. Native *k*=1 still **C37**. Production-*N* tree/regex Metal SING and PicoRV covering are remainders, not missing cards. |
 | II.1–II.2 | yes | II.3 seminar-only until more receipts |
 | III.1, III.3 | yes | III.2 empirical, not IND-CPA |
 
-Next: site/paper figures; encrypted tree/regex Metal SING at production *N* if GPU free.
+Next: encrypted tree/regex Metal SING at production *N* if GPU free; PicoRV covering at *N*=1024; native *k*=1 (**C37**). Figures live in `site/public/gallery/`. FHE chronology: `/projects/netlist-fhe/journal`.

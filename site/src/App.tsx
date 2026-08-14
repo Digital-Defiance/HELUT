@@ -17,6 +17,7 @@ import {
   PolymorphicRedBluePage,
 } from './pages/PolymorphicCiphersPages'
 import { QueuedProjectJournalPage } from './pages/QueuedProjectJournalPage'
+import { NetlistFheJournalPage } from './pages/NetlistFheJournalPage'
 
 function Nav() {
   return (
@@ -68,6 +69,16 @@ function Footer() {
         <div>
           © 2026 Digital Defiance · MIT License ·{' '}
           <a href="https://github.com/Digital-Defiance/HELUT">Source</a>
+          {' · '}
+          <a href="https://github.com/Digital-Defiance/HELUT/blob/main/SECURITY.md">Security</a>
+          {' · '}
+          <a href="https://github.com/Digital-Defiance/HELUT/blob/main/OPPENHEIMER.md">
+            Oppenheimer
+          </a>
+          {' · '}
+          <a href="https://github.com/Digital-Defiance/HELUT/blob/main/AI_DISCLOSURE.md">
+            AI disclosure
+          </a>
         </div>
         <div className="mono">Homomorphic Edge Look-Up Tensors</div>
       </div>
@@ -88,6 +99,7 @@ export default function App() {
         <Route path="/projects" element={<ProjectsIndexPage />} />
         <Route path="/projects/:slug" element={<ProjectHubPage />} />
         <Route path="/projects/p1030680/journal" element={<JournalPage />} />
+        <Route path="/projects/netlist-fhe/journal" element={<NetlistFheJournalPage />} />
         <Route path="/projects/e256/design" element={<Enigma256Page />} />
         <Route path="/projects/e256/journal" element={<Enigma256JournalPage />} />
         <Route

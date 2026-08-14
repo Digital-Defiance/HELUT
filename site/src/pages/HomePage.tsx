@@ -81,9 +81,11 @@ export function HomePage() {
               ticks.
             </p>
             <p style={{ marginTop: '1rem' }}>
-              Honest limits: classical hardness is a calibrated estimate until Sage fills the
-              lattice-estimator table; large-<em>N</em> Metal encrypted wall-clock is still being
-              measured; campaign fitness is Welchman/cleartext—not FHE tick rate.
+              Honest limits: calibrated hardness is not lattice-estimator Cost on every row (H1 /
+              C23: prod-n1024-s16 HELUT 175.7 vs Sage 180.2). Covering Track A noisy BK at{' '}
+              <em>N</em>=1024 is C52–C54 (<em>k</em>=7); native <em>k</em>=1 and{' '}
+              <code>cryptoPublicMS</code> remain graded negatives. Campaign fitness is
+              Welchman/cleartext—not FHE tick rate. P1030680 is not decrypted.
             </p>
           </div>
           <ul className="stack-list">
@@ -91,8 +93,9 @@ export function HomePage() {
               <span className="mono">I</span>
               <span>
                 <strong>Netlist-clocked torus FHE</strong> — LWE/GLWE + GGSW BK on Metal/CPU;
-                encrypted full_adder, tree, and regex netlists pass cleartext equivalence under{' '}
-                <code>--bench-encrypted --sing</code>.
+                encrypted full_adder SING at production <em>N</em> (C20/C21); covering noisy BK at
+                the same <em>N</em> with stride-<em>k</em> (C52–C54). Chronology:{' '}
+                <Link to="/projects/netlist-fhe/journal">FHE journal</Link>.
               </span>
             </li>
             <li>

@@ -16,4 +16,4 @@ alwaysApply: true
 
 **If BREAK FOUND:** date, key (UKW/Greek/WO/rings/pos/stecker), plaintext, log path, and victory-condition check (crib exact, IC, tail, ≤10-plug) in both files before celebrating. Until then every clean negative stays printed.
 
-Ledger wins over the site if they disagree.
+Ledger wins over the site if they disagree. FHE Home/Stack/Apps/registry: `.cursor/rules/site-sync.mdc`.
