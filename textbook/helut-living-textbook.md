@@ -2,7 +2,7 @@
 
 # Reconfigurable Homomorphic Computing A Living Textbook of Netlist-Clocked FHE, Differentiable Hardware, and Polymorphic Ciphers
 
-*Digital Defiance HELUT Project --- living edition 0.1.2 (2026-08-14 / C64) · August 2026*
+*Digital Defiance HELUT Project --- living edition 0.1.2 (2026-08-14 / C65) · August 2026*
 
 ::: titlepage
 **Reconfigurable Homomorphic Computing**
@@ -13,7 +13,7 @@ Netlist-Clocked Torus FHE Differentiable Hardware Adversarial Polymorphic Cipher
 
 Digital Defiance / HELUT Project
 
-Living edition 0.1.2 epoch 2026-08-14 / C64
+Living edition 0.1.2 epoch 2026-08-14 / C65
 
 Audit stamp:
 
@@ -46,7 +46,7 @@ The stack has three pillars [@helut-release; @helut-paper]:
 
 ###### Why a living textbook.
 
-Research papers freeze a slice of a laboratory. This course cannot. The claim inventory [@helut-claim-sheet] moves: Metal kernels get faster, hedges close, avenues stay unlabeled until they earn receipts. A professor who taught from a PDF dated June would be teaching a different Metal compiler than a professor teaching from August. So the book is versioned against the corpus *epoch* (2026-08-14 / C64 in this edition) and is honest about stubs.
+Research papers freeze a slice of a laboratory. This course cannot. The claim inventory [@helut-claim-sheet] moves: Metal kernels get faster, hedges close, avenues stay unlabeled until they earn receipts. A professor who taught from a PDF dated June would be teaching a different Metal compiler than a professor teaching from August. So the book is versioned against the corpus *epoch* (2026-08-14 / C65 in this edition) and is honest about stubs.
 
 ###### What this edition is.
 
@@ -606,7 +606,7 @@ Phase 1 without Phase 2 still leaves $O(W\cdot N)$ encode inside each tile. Ph
 
 Default Metal BR: fused if $N\le 64$, tiled-kernel otherwise (NTT EP inside tiles). Legacy fused megagraph is `--metal-br-fused` only, and at production $N$ it is a museum exhibit.
 
-### Numbers a student may quote (epoch 2026-08-14 / C64)
+### Numbers a student may quote (epoch 2026-08-14 / C65)
 
 ::: center
   Path at $N=1024$                      s/BR (micro)               SING / 8 rows                           RSS
@@ -1015,7 +1015,7 @@ This chapter is the discovery path after disclosure [@helut-trajectory]. None o
 ### Near term
 
 ::: center
-  Track                           Status at epoch 2026-08-14 / C64                                                                                             Next experiment
+  Track                           Status at epoch 2026-08-14 / C65                                                                                             Next experiment
   ------------------------------- ---------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------
   **H2** full_adder $N\ge 256$    **Closed** ($Z_{2N}$ pack / `rotationPower`)                                                                                 Keep as a worked bug in Chapter [3](#ch:torus){reference-type="ref" reference="ch:torus"}.
   **H1** Sage lattice-estimator   **C23** filled; production $|\Delta|=4.5$; core-SVP vs Cost `rop` divergences                                                Optional retune / quote estimator-only on $\Delta>16$ rows.
@@ -1110,7 +1110,7 @@ First graduating experiment: fixture harness that emits tick markers and a publi
 
 ## Claim index (snapshot) {#app:claims}
 
-Canonical living inventory: `directives/claim-sheet.md`. If this appendix disagrees with the sheet, the sheet wins. Snapshot epoch: 2026-08-14 / C64.
+Canonical living inventory: `directives/claim-sheet.md`. If this appendix disagrees with the sheet, the sheet wins. Snapshot epoch: 2026-08-14 / C65.
 
 ### Reproducible results
 
@@ -1249,16 +1249,18 @@ Canonical living inventory: `directives/claim-sheet.md`. If this appendix disagr
 +--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **C64**      | Extract$\to$KS $n{=}64$ at poly $N{=}1024$: native-$k$ covering-b2 adder+counter SING. Not LWE-176.                                                                                                                    |
 +--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **C65**      | PicoRV lut6 covering Metal $N{=}1024$ extract$\to$KS $n{=}64$: Q SING PASS (b2 $114\,\mathrm{s}$, b1 $212\,\mathrm{s}$).                                                                                               |
++--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 ### Open hedges
 
 ::: center
   ID       Asterisk
-  -------- --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  -------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   **H1**   **C23** filled JSON. Production $|\Delta|=4.5$; divergences are core-SVP vs Cost `rop`.
   **H2**   **Closed** 2026-08-12 ($Z_{2N}$ pack). Kept as history.
   **H3**   **C20**/**C21** SING bars met; serial NTT SING still loses vs persist.
-  **H4**   **C52**--**C54** covering-b1; **C57** covering-b2; **C64** extract$\to$KS native $k$ at $n{=}64$. Native $k{=}1$ at $n{=}N$ still **C37**; `cryptoPublicMS` still **C26**/**C56**. PicoRV covering Q FAIL at $N{=}1024$ (**C60**/**C61**).
+  **H4**   **C52**--**C54** covering-b1; **C57** covering-b2; **C64**/**C65** extract$\to$KS native $k$ at $n{=}64$ (PicoRV Q PASS). Native $k{=}1$ at $n{=}N$ still **C37**; `cryptoPublicMS` still **C26**/**C56**. PicoRV covering at $n{=}N$ $k{=}7$ still **C60**/**C61** FAIL.
   **H5**   `*PublicMS` gadgets ($g_0=\delta$): on-lattice intent, not a closer of old **H2**.
   **H6**   TensorLUT / quarantine vs campaign: parallel research, not P1030680 PT.
   **H7**   Catalog / Regenbogen / UEBUNG: negatives graded; middle ring $\neq A$ untested; catalog parked \@417, resume `--bombe-from 418`.

@@ -85,6 +85,14 @@ export function NetlistFheJournalPage() {
                 6.35 s at poly <em>N</em>=1024. Not LWE-176. C37 still at <em>n</em>=<em>N</em>.
               </span>
             </li>
+            <li>
+              <span className="mono">C65</span>
+              <span>
+                PicoRV lut6 covering Metal at poly <em>N</em>=1024, extract→KS <em>n</em>=64: Q SING
+                PASS covering-b2 114 s, covering-b1 212 s. C60/C61 remain <em>n</em>=<em>N</em>{' '}
+                <em>k</em>=7 FAIL.
+              </span>
+            </li>
           </ul>
         </div>
       </section>
@@ -126,10 +134,10 @@ export function NetlistFheJournalPage() {
             <li>
               <span className="mono">PicoRV</span>
               <span>
-                Encrypted PicoRV32 covering at <em>N</em>=1024 is C60/C61 Q SING FAIL.
-                Covering Q PASSes at <em>N</em>=64 (C63). Noiseless Metal PicoRV at production{' '}
-                <em>N</em> is C62 (374 s). Extract→KS covering at <em>n</em>=64 is C64 (adder/counter,
-                not this core).
+                Encrypted PicoRV32 covering at <em>n</em>=<em>N</em> <em>k</em>=7 is C60/C61 Q SING
+                FAIL. Extract→KS <em>n</em>=64 on that lut6 core is C65 PASS. Covering Q PASSes at
+                poly <em>N</em>=64 (C63). Noiseless Metal PicoRV at production <em>N</em> is C62
+                (374 s).
               </span>
             </li>
           </ul>

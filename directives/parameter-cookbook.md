@@ -22,6 +22,7 @@ Track A does **not** need noisy BK to be a valid FHE datapath claim (noiseless B
 **C58:** PicoRV `abc -lut 6` → 2006 LUTs (−58%); encrypted SING PASS at *N*=64 (1.35 s, 32-bit). Not covering / not *N*=1024.
 **C62:** Metal PicoRV lut6 *N*=1024 *e*=0 1-tick Q SING PASS (~374 s). **C63:** covering-b2 σ=128 same netlist at *N*=64 PASS (~1.72 s). **C60**/**C61** still FAIL covering Q at *N*=1024.
 **C64:** `--lwe-dimension 64` extract→KS. Native *k*=1 covering-b2 σ=128 adder+counter SING at poly *N*=1024. Not LWE-176. **C37** at *n*=*N*.
+**C65:** same KS on PicoRV lut6 Metal 1-tick covering-b2 **114 s** / b1 **212 s** Q PASS. **C60**/**C61** remain *n*=*N* *k*=7 negatives.
 
 **C34:** covering `baseLog=4` @ *N*=1024 inject *B*=1 → σ̂≈2.95×10⁴, asymptotic εlog2≈−913; Metal SING PASS.
 

@@ -450,6 +450,21 @@ swift test -c release --filter testExtractKeySwitchClosesPBSWhenNLessThanKN
 
 Expect extract→KS print, all **PASS**. Do not quote 175.7 as LWE-*n*=64 security (**H1**). Does not close **C37** (*n*=*N*) or PicoRV **C60**.
 
+## PicoRV lut6 covering extract→KS n=64 (C65)
+
+```bash
+.build/release/helut --bench picorv32_lut6_netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 1 --bk-noise-sigma 128 \
+  --lwe-dimension 64 --paths 'public-ms covering-b2' \
+  | tee logs/helut-encrypted-n1024-metal-sing-picorv32-lut6-covering-b2-ks-n64.log
+.build/release/helut --bench picorv32_lut6_netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 1 --bk-noise-sigma 128 \
+  --lwe-dimension 64 --paths 'public-ms covering-b1' \
+  | tee logs/helut-encrypted-n1024-metal-sing-picorv32-lut6-covering-b1-ks-n64.log
+```
+
+Expect **PASS** ~114 s (b2) / ~212 s (b1), Q SING. Native *k*. **C60**/**C61** (*n*=*N*, *k*=7) stay FAIL. Not LWE-176. Not Linux.
+
 ## TensorLUT melt–freeze–snap (C44)
 
 ```bash
