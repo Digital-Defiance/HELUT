@@ -8,13 +8,13 @@ This repo’s public sentences have to survive the **five-cell test** (`directiv
 2. **Do not imply a U-534 / P1030680 decrypt.** Campaign fitness is cleartext Metal, not encrypted tick rate.
 3. **Do not quote “176-bit secure.”** Hardness is **H1** / **C23**.
 4. **Trivial Metal graphs ≠ FHE.** Encrypted means `--lut-backend encrypted` / `--bench-encrypted` + SING.
-5. Generated Markdown (`writeup.md`, `paper/helut.md`, `textbook/helut-living-textbook.md`) is **not** hand-edited. Patch the `.tex` and `make docs`.
+6. **Do not hallucinate claims, lemmas, theorems, or formulae.** Draft from logs if needed; a **human checks the receipt before commit**. Unchecked math does not land on `main`.
 
 ## How to send work
 
 - Small, reviewable PRs. Name the claim IDs you touch.
 - Tests: `swift test -c release` for the seam you changed; Metal SING only when the change is on that path.
-- New results: add a **C** row, a reproduce command, and a log under `logs/` in the **same** change.
+- New results: add a **C** row, a reproduce command, and a log under `logs/` in the **same** change — **after** a human has checked the numbers.
 
 Questions about packaging (library vs campaign CLI): `directives/packaging-roadmap.md`.
 

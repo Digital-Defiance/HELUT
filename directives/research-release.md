@@ -32,6 +32,10 @@ For claim \(C\), ship all five or hedge \(C\):
 
 Paper rule: every abstract sentence maps to a claim ID with all five cells ≥ *partial*.
 
+## Human gate (before commit)
+
+Do not hallucinate claims, lemmas, theorems, or formulae. Compiler tests do not certify a **C** row. An agent may draft from a log; a **human** must check the statement against the receipt (command, metric, log, five-cell) before the row, the textbook theorem environment, or the paper lemma lands in a commit. If the human has not checked it, it is a hedge or it stays uncommitted.
+
 ## Multiples checklist (minimums before “release”)
 
 | Kind | Minimum |

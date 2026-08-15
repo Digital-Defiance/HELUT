@@ -17,24 +17,24 @@ Living edition 0.1.2 epoch 2026-08-14 / C69
 
 Audit stamp:
 
-For a first university course in a new subject
+Scaffold for a future course --- not ready to teach
 
-Canonical source: `textbook/helut-living-textbook.tex`. Corpus of record: `directives/claim-sheet.md`. This book grows when reproducible results grow. Frontier chapters are labeled frontier.
+Canonical source: `textbook/helut-living-textbook.tex`. Corpus of record: `directives/claim-sheet.md`. This volume is an AI-bootstrapped collecting place for theorems and formulae. Humans must vet, bulk, fill, and edit it before it is a textbook. Frontier chapters are labeled frontier.
 :::
 
 ## How to read the living boxes {#how-to-read-the-living-boxes .unnumbered}
 
-Four boxes appear throughout this book. They are not decoration; they are the difference between a textbook and a press release.
+Five boxes appear throughout this book. They are not decoration; they are the difference between a textbook and a press release.
 
 # How This Book Lives
 
 ## Preface {#ch:preface}
 
-This book is the first teaching surface for a subject that did not have a name until the laboratory forced one.
+This book is a *scaffold* for a subject that did not have a name until the laboratory forced one. It is not a finished textbook. It is not ready to teach.
 
 Universities already teach *reconfigurable computing*: LUTs, interconnect, place-and-route, FPGA fabrics, high-level synthesis. They already teach *applied cryptography*: AES, RSA, lattices, sometimes a lecture on fully homomorphic encryption. They almost never teach what happens when the reconfigurable fabric *is* a machine-learning graph API, the configuration is a Yosys netlist (not an FPGA bitstream---see Chapter [2](#ch:reconf){reference-type="ref" reference="ch:reconf"}), and the values on the wires are torus samples that must remain encrypted while a host clock ticks flip-flops.
 
-That intersection is the subject of this course. We call the working stack **HELUT**---Homomorphic Edge Look-Up Tensors---and we call the subject **reconfigurable homomorphic computing**.
+That intersection is the intended subject of a future course. We call the working stack **HELUT**---Homomorphic Edge Look-Up Tensors---and we call the subject **reconfigurable homomorphic computing**.
 
 The stack has three pillars [@helut-release; @helut-paper]:
 
@@ -46,23 +46,23 @@ The stack has three pillars [@helut-release; @helut-paper]:
 
 ###### Why a living textbook.
 
-Research papers freeze a slice of a laboratory. This course cannot. The claim inventory [@helut-claim-sheet] moves: Metal kernels get faster, hedges close, avenues stay unlabeled until they earn receipts. A professor who taught from a PDF dated June would be teaching a different Metal compiler than a professor teaching from August. So the book is versioned against the corpus *epoch* (2026-08-14 / C69 in this edition) and is honest about stubs.
+Research papers freeze a slice of a laboratory. This course cannot. The claim inventory [@helut-claim-sheet] moves: Metal kernels get faster, hedges close, avenues stay unlabeled until they earn receipts. If this scaffold ever becomes a course, a professor who taught from a PDF dated June would be teaching a different Metal compiler than a professor teaching from August. So the book is versioned against the corpus *epoch* (2026-08-14 / C69 in this edition) and is honest about stubs.
 
 ###### What this edition is.
 
-Edition 0.1.2 is the *beginnings*: enough foundations to open a course, enough Pillar I to run laboratories, enough Pillars II and III to assign readings, and a frontier part that is labeled as frontier. It is not a complete treatise. Where the laboratory is thin, the page says so.
+Edition 0.1.2 is an AI-bootstrapped collecting place: theorems, formulae, claim IDs, and lab receipts as they land---aspirational and future-forward, not a syllabus you can run next semester. Pillar chapters exist so humans have something to vet, bulk up, fill in, and rewrite. It is a long-term project. Where the laboratory is thin, the page says so.
 
 ###### What this edition is not.
 
 It is not a claim that HELUT invented TFHE [@chillotti2020tfhe; @ducas2015fhew]. It is not a production key-size manual. Sage filled the estimator JSON (**C23**); **H1** remains because four of eight calibration anchors disagree with Cost `rop` by more than 16 bits, and because "176-bit secure" is a forbidden exam answer. It is not a decrypt of U-534 / P1030680. It is not a side-channel paper. Those sentences are printed again in Chapter [3](#ch:living){reference-type="ref" reference="ch:living"} because students will forget them the week before the final.
 
-###### This edition is a draft.
+###### This edition is a draft, and it is AI-generated.
 
-Edition 0.1.2 is not a finished book. Chapters will be wrong in small ways until someone diffs them against the claim sheet, line by line. If a box and the sheet disagree, the sheet wins; file an issue or patch the `.tex`. Instructors: treat mid-semester epoch bumps as addenda, not as proof the PDF was already perfect.
+The TeX tree was bootstrapped with AI under human architectural direction (see `AI_DISCLOSURE.md`). That is not the same as human authorship of a course. Chapters will be wrong---sometimes in large ways---until people diff them against the claim sheet, fill the stubs, and rewrite the lecture voice. If a box and the sheet disagree, the sheet wins; file an issue or patch the `.tex`. Do not treat an epoch bump as proof the PDF was ready for a classroom. **Do not hallucinate the math.** A new theorem, lemma, or claim ID is a draft until a human has checked it against the inventory and a log; it does not belong in a git commit until then- at least going forward. We will have to catch up on commits up to now.
 
 ###### Who wrote it.
 
-The HELUT project at Digital Defiance. The scientific voice of the book is the same voice as the research-release doctrine: lead with what runs, and with what it does not prove.
+The HELUT project at Digital Defiance. The scientific voice of the book is the same voice as the research-release doctrine: lead with what runs, and with what it does not prove. The prose itself still needs human editors.
 
 ###### How to cite an epoch.
 
@@ -70,7 +70,7 @@ Cite the git commit and the claim-sheet epoch, not "the HELUT textbook" as if it
 
 ## To the instructor {#ch:instructor}
 
-You are being asked to teach a class that does not yet appear in the ACM/IEEE curriculum guidelines under that name. This chapter is the briefing.
+Do not teach from this PDF. This chapter is a briefing for a course that does not exist yet: it is not in the ACM/IEEE curriculum guidelines, and this book is not ready to put in front of students. The pages that follow are an aspirational skeleton---grading weights, tracks, a fifteen-week outline---so that when humans have vetted and filled the rest of the volume, the pedagogy has a place to live. Until then, treat this chapter as a design note, not an instructor's manual.
 
 ### The course in one paragraph
 
@@ -153,7 +153,7 @@ Bump `\livingepoch` in `textbook/preamble.tex` when you accept an addendum. Cite
 
 Ordinary textbooks accrete errata. This one accretes *science*. Without a contract, the lecture slides of 2027 will still be quoting a fused `MPSGraph` megagraph that the laboratory killed in August 2026, or---worse---will quote a speculative avenue as if it were a theorem.
 
-The contract is the research-release doctrine [@helut-release] translated into pedagogy.
+The contract is the research-release doctrine [@helut-release] translated into *eventual* pedagogy. Until humans have edited this volume into a real textbook, the boxes below are how the scaffold refuses to launder hedges---not a license to open a class.
 
 ### The three inventories
 
@@ -210,7 +210,7 @@ For an atomic claim $C$, the doctrine requires all five, or $C$ is hedged:
   Failure mode   Unreproducible hype                      Silence / no next experiment
 :::
 
-When a trajectory item graduates, it earns a **C** row (or a tightened **H**) and a reproduce command---*then* it may enter lecture voice. That sentence is the entire editorial policy of this book.
+When a trajectory item graduates, it earns a **C** row (or a tightened **H**) and a reproduce command---*then* it may enter lecture voice. That sentence is the entire editorial policy of this book. An AI draft of a lemma is not a graduation: a human must check the statement before it is committed.
 
 ### Standing non-claims
 
@@ -1280,7 +1280,7 @@ Do not let prose imply: new lattice assumption; "we invented TFHE"; production k
 
 ## Fifteen-week syllabus {#app:syllabus}
 
-Suggested title: *Reconfigurable Homomorphic Computing*. 3 credits. Mix of lecture, seminar, and lab (Chapter [2](#ch:instructor){reference-type="ref" reference="ch:instructor"}).
+Suggested title: *Reconfigurable Homomorphic Computing*. 3 credits. Mix of lecture, seminar, and lab (Chapter [2](#ch:instructor){reference-type="ref" reference="ch:instructor"}). This table is a *future* outline, not a schedule you can run. The book is not ready to teach.
 
 ::: center
    Wk  Part   Classroom

@@ -9,3 +9,7 @@ Let me be explicitly clear about the boundary between the architect and the mach
 I am fighting incurable cancer. The fatigue is indescribable, and my memory is shattered. But my architectural vision is entirely intact. Between the cancer, the physical burnout, and the ADHD, I am forced to bounce rapidly across domains—from homomorphic encryption to decentralized storage—whenever a window of lucidity opens.
 
 For two decades, I waited for a collaborator who could instantly adapt to my niche, experimental theories. AI is that collaborator. It is the bridge between my mind and the keyboard when my body fails. As these models evolve, so will my architecture. Like the genetic encryption algorithms housed in this repository, we will mutate, adapt, and harden ourselves against failure.
+
+**The living textbook** (`textbook/`) is part of that bootstrap. It is an AI-generated scaffold: a collecting place for theorems and formulae, aspirational and future-forward. It needs human vetting, bulk, fill-in, and editing. It is **not** ready to teach.
+
+**Claims, lemmas, theorems, and formulae are not compiler-checked.** The AI must not invent them. A human checks each against `directives/claim-sheet.md` and a `REPRODUCE.md` receipt **before commit**. Unchecked math stays out of git.

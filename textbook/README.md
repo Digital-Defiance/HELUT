@@ -1,6 +1,8 @@
 # Living textbook
 
-Canonical TeX for a first university course in **reconfigurable homomorphic computing** — netlist-clocked torus FHE, differentiable hardware, and adversarial polymorphic ciphers.
+Canonical TeX for a **long-term living textbook** of **reconfigurable homomorphic computing** — netlist-clocked torus FHE, differentiable hardware, and adversarial polymorphic ciphers.
+
+**Not ready to teach.** Edition 0.1.x is an AI-bootstrapped scaffold: a collecting place for theorems, formulae, and claim-sheet receipts. Humans must vet, bulk up, fill in, and edit it before it is a course. Do not assign it as a university class. **Claims and lemmas are not AI-invented:** they require a human check against the claim sheet and a reproduce receipt **before commit**. Repo-level AI boundary: [`../AI_DISCLOSURE.md`](../AI_DISCLOSURE.md).
 
 | Artifact | Path |
 |----------|------|
@@ -24,13 +26,13 @@ Draft a subset while writing by commenting out `\input` lines in the master file
 
 Enforced for agents by [`.cursor/rules/living-textbook.mdc`](../.cursor/rules/living-textbook.mdc) (always-on). Humans: same checklist.
 
-This is not a frozen monograph. It is a **teaching surface on a moving corpus**.
+This is not a frozen monograph. It is a **scaffold on a moving corpus**, written so receipts have a book-shaped home. It is not a course you can run.
 
 1. **`directives/claim-sheet.md` is canonical.** The appendix claim index is a snapshot. If they disagree, the sheet wins and the TeX must catch up.
 2. **A new `C` row** → add a numbered example, table, or lab receipt to the matching pillar chapter; bump `\livingepoch`.
 3. **A closed `H` row** → convert the hedge box into a reproduced box; move leftover asterisks into the next open hedge.
 4. **An avenue that graduates** (receipts in `REPRODUCE.md`) → leave Part~VI (frontier) and enter a pillar chapter. Until then it stays `\frontierbox`.
-5. **Lecture voice never outruns receipts.** Frontier chapters are seminar reading, not midterm facts.
+5. **Lecture voice never outruns receipts.** Frontier chapters are seminar reading, not midterm facts. New theorems/lemmas wait for a **human check** before commit.
 6. **Non-claims stay printed.** See `directives/research-release.md`.
 
 Chapter ↔ corpus map:
@@ -44,6 +46,6 @@ Chapter ↔ corpus map:
 | Frontier | `potential-avenues.md` |
 | Labs / reproduce | `REPRODUCE.md` |
 
-## Course
+## Future course (not this edition)
 
-A 15-week syllabus lives in the book (appendix). Instructors: start with [To the instructor](chapters/instructor.tex). Two tracks are designed in: **theory** (certificates, five-cell test) and **systems** (Apple Silicon labs). A department without Macs can still teach the theory track from published logs.
+A 15-week syllabus sketch lives in the book (appendix). It is aspirational. [To the instructor](chapters/instructor.tex) is a design note, not permission to open a section. Two tracks are sketched: **theory** (certificates, five-cell test) and **systems** (Apple Silicon labs). Neither track is ready.

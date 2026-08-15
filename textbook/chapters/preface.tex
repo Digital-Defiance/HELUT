@@ -1,8 +1,9 @@
 \chapter{Preface}
 \label{ch:preface}
 
-This book is the first teaching surface for a subject that did not have a name
+This book is a \emph{scaffold} for a subject that did not have a name
 until the laboratory forced one.
+It is not a finished textbook. It is not ready to teach.
 
 Universities already teach \emph{reconfigurable computing}: LUTs, interconnect,
 place-and-route, FPGA fabrics, high-level synthesis.
@@ -14,7 +15,7 @@ bitstream---see Chapter~\ref{ch:reconf}), and the values
 on the wires are torus samples that must remain encrypted while a host clock
 ticks flip-flops.
 
-That intersection is the subject of this course.
+That intersection is the intended subject of a future course.
 We call the working stack \textbf{HELUT}---Homomorphic Edge Look-Up Tensors---and
 we call the subject \textbf{reconfigurable homomorphic computing}.
 
@@ -39,16 +40,19 @@ Research papers freeze a slice of a laboratory.
 This course cannot.
 The claim inventory~\cite{helut-claim-sheet} moves: Metal kernels get faster,
 hedges close, avenues stay unlabeled until they earn receipts.
-A professor who taught from a PDF dated June would be teaching a different
-Metal compiler than a professor teaching from August.
+If this scaffold ever becomes a course, a professor who taught from a PDF
+dated June would be teaching a different Metal compiler than a professor
+teaching from August.
 So the book is versioned against the corpus \emph{epoch}
 (\livingepoch{} in this edition) and is honest about stubs.
 
 \paragraph{What this edition is.}
-Edition~\corpusedition{} is the \emph{beginnings}: enough foundations to open a
-course, enough Pillar~I to run laboratories, enough Pillars~II and~III to
-assign readings, and a frontier part that is labeled as frontier.
-It is not a complete treatise.
+Edition~\corpusedition{} is an AI-bootstrapped collecting place: theorems,
+formulae, claim IDs, and lab receipts as they land---aspirational and
+future-forward, not a syllabus you can run next semester.
+Pillar chapters exist so humans have something to vet, bulk up, fill in,
+and rewrite.
+It is a long-term project.
 Where the laboratory is thin, the page says so.
 
 \paragraph{What this edition is not.}
@@ -62,17 +66,25 @@ It is not a side-channel paper.
 Those sentences are printed again in Chapter~\ref{ch:living} because students
 will forget them the week before the final.
 
-\paragraph{This edition is a draft.}
-Edition~\corpusedition{} is not a finished book. Chapters will be wrong in
-small ways until someone diffs them against the claim sheet, line by line.
+\paragraph{This edition is a draft, and it is AI-generated.}
+The TeX tree was bootstrapped with AI under human architectural direction
+(see \corpus{AI\_DISCLOSURE.md}).
+That is not the same as human authorship of a course.
+Chapters will be wrong---sometimes in large ways---until people diff them
+against the claim sheet, fill the stubs, and rewrite the lecture voice.
 If a box and the sheet disagree, the sheet wins; file an issue or patch the
-\texttt{.tex}. Instructors: treat mid-semester epoch bumps as addenda, not as
-proof the PDF was already perfect.
+\texttt{.tex}.
+Do not treat an epoch bump as proof the PDF was ready for a classroom.
+\textbf{Do not hallucinate the math.}
+A new theorem, lemma, or claim ID is a draft until a human has checked it
+against the inventory and a log; it does not belong in a git commit until
+then- at least going forward. We will have to catch up on commits up to now.
 
 \paragraph{Who wrote it.}
 The HELUT project at Digital Defiance.
 The scientific voice of the book is the same voice as the research-release
 doctrine: lead with what runs, and with what it does not prove.
+The prose itself still needs human editors.
 
 \paragraph{How to cite an epoch.}
 Cite the git commit and the claim-sheet epoch, not ``the HELUT textbook'' as if

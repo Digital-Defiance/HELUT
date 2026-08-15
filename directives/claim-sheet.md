@@ -6,6 +6,8 @@ Doctrine: [`research-release.md`](research-release.md) · Cookbook: [`parameter-
 
 **How to talk about it:** lead with what runs and what it does *not* prove. Discovery continues after any disclosure.
 
+**Human gate:** do not invent **C** / **H** / **N** rows, lemmas, theorems, or formulae. An agent may *draft* a row from a log; a human must check the receipt (command, numbers, log path, five-cell) **before commit**. Unchecked math stays out of `main`.
+
 ---
 
 ## Reproducible results (C)

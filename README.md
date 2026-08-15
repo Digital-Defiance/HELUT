@@ -21,7 +21,7 @@ Papers (canonical **TeX**; Markdown is generated — do not hand-edit `*.md`):
 |-----|--------|-------|
 | Campaign (P1030680) | [`writeup.tex`](writeup.tex) | `make writeup` → `writeup.pdf` + `writeup.md` |
 | Three-pillar stack | [`paper/helut.tex`](paper/helut.tex) | `make paper` → `paper/helut.pdf` + `paper/helut.md` |
-| Living textbook (course) | [`textbook/helut-living-textbook.tex`](textbook/helut-living-textbook.tex) | `make textbook` → pdf + md |
+| Living textbook (scaffold; **not ready to teach**) | [`textbook/helut-living-textbook.tex`](textbook/helut-living-textbook.tex) | `make textbook` → pdf + md |
 | All three | | `make docs` |
 
 Needs `latexmk` (MacTeX / TeX Live) and `pandoc`. Aux files land under `build/`.
