@@ -1,0 +1,16 @@
+---
+inclusion: fileMatch
+fileMatchPattern: ['*.swift', '*.metal']
+---
+# HELUT Architecture Rules
+- DOMAIN: TFHE-shaped Programmable Bootstrapping (PBS) on Apple Silicon (`MPSGraph` / Metal).
+- FHE CLAIM: `--lut-backend encrypted` / `--bench-encrypted` via `EncryptedNetlistSimulator` (LWE + BK blind-rotate per Yosys `$lut`). Do not call trivial Metal multilinear/CMUX graphs “homomorphic encryption”.
+- BOOLEAN ORACLE: Under trivial torus encoding (constant-fill, phase, glwe-trivial, glwe-packed), `$lut` may use **multilinear** or **trivial PBS** (CMUX + rotate). Bit-exact vs `CleartextNetlistSim`. Useful for shape/batch — not the FHE claim.
+- SAMPLES: LWE/GLWE + BK; `TFHENoiseProof` + Gaussian ε-cert + **`TFHELWEHardnessCertificate`** / `TFHELWECalibration` (Decision-LWE binding). `TFHENoise.refuse` if no certificate.
+- PBS BACKEND: oracle `pbs`/`pbs-ggsw`; **`encrypted`** via `LUTNode` or **whole-netlist** `.blindRotateMetalNetlist` (binary X^p, one MPSGraph). Multi-LUT: `publicMS` default.
+- PHASE-1 KERNEL: Negacyclic poly mul via dense Toeplitz (`NegacyclicMatvecNode`) remains the modular-arithmetic gate — not a netlist `$lut` backend.
+- DATA TYPES: Torus arithmetic is exact mod $2^{32}$. HELUT / PBS tensors use `MPSDataType.uInt32` (no floats on this path; TensorLUT is separate).
+- MEMORY: Prefer `MTLBuffer` zero-copy. Dense $N\times N$ Toeplitz is kernel/stress only.
+- PROHIBITION: No ML deps other than `Metal` / `MetalPerformanceShadersGraph` on HELUTCore PBS paths.
+- NEXT: Campaign catalog / H4 product noisy BK at N=1024 / NTT crypto ℓ=2 tile. Cookbook: `directives/parameter-cookbook.md`.
+---

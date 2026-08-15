@@ -115,7 +115,8 @@ export function StackPage() {
                 PASS with extract→KS <em>n</em>=64); covering KS <em>n</em>=512 native <em>k</em> (C69
                 SING FAIL);
                 estimator Cost on every calibration row (H1); production keys from the HELUT 175.7
-                figure; side-channel / GPU power; a P1030680 plaintext.
+                figure; side-channel / GPU power; a P1030680 plaintext; that the math requires
+                Apple Silicon (first lab, not the invariant); a CUDA or CPU production FHE port.
               </span>
             </li>
           </ul>

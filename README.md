@@ -2,6 +2,17 @@
 
 **Homomorphic Edge Look-Up Tensors** — a Swift / Metal systems prototype that compiles **Yosys gate-level netlists** into a single `MPSGraph` and evaluates every LUT as a dense negacyclic matrix–vector product over $\mathbb{Z}/2^{32}\mathbb{Z}$ on Apple Silicon.
 
+**New here, or not on a Mac?** Read [`INTRO.md`](INTRO.md), or the four-page self-contained note [`note/lut-relaxation.pdf`](note/lut-relaxation.pdf). Then run these, stdlib Python 3, no build step:
+
+```bash
+python3 Scripts/toy_cipher_demo.py         # two toy ciphers, one broken on purpose
+python3 Scripts/tensorlut_math_ref.py      # the structural checks behind the LUT optimiser
+python3 Scripts/lambda_threshold_probe.py  # measured lambda crossover
+python3 Scripts/penalty_threshold.py       # exact-penalty bound, 2 + sqrt(3)
+```
+
+Linux CI runs both. The Swift package genuinely needs Apple Silicon, because Metal is a hard dependency of the encrypted path rather than a convenience import — see [`directives/why-apple-silicon.md`](directives/why-apple-silicon.md). Reviewer map of what is checkable where: [`REVIEWER.md`](REVIEWER.md).
+
 The point is not “Enigma only.” Enigma is one application. The stack is a **datapath for encrypted-shaped circuit evaluation**: combinational LUTs, sequential DFFs, batch parallelism, and CPU-scale netlists (including a **PicoRV32 RISC-V** core).
 
 | Layer | Role |
@@ -44,6 +55,8 @@ I will settle one future debate early. As an acronym for Homomorphic Edge Look-U
 - Optional: [Yosys](https://github.com/YosysHQ/yosys) to re-synthesize Verilog → JSON
 - Large unified memory for big nets / wide batches (64 GB class machine for PicoRV compile and `B ≈ 30k` Enigma)
 
+**Why Apple first:** the project began by stressing one Mac — M-series / `MPSGraph` — so the λ-squeeze and synthesis loops had enough acceleration to exist. Production kernels are Metal-dependent *because that was the laboratory*, not because the math names Apple. Linux / FPGA / r/math readers: [`directives/why-apple-silicon.md`](directives/why-apple-silicon.md). Swift-free Theorem 1 check: `python3 Scripts/tensorlut_math_ref.py`. CUDA and a CPU-only *production* FHE path are trajectory, not claims.
+
 ## Quick start
 
 ```bash
@@ -67,17 +80,17 @@ swift run -c release helut -- path/to/netlist.json --compile-only
 3. **Sequential logic** — `$_DFF*` / `$_SDFF*` / enable / sync-reset, with a host clock loop and ping-pong state buffers.
 4. **Batch axis `B`** — many independent instances of the same circuit in one `graph.run` (search, scoring, parallel machines).
 
-Phased design docs: [`PRD.md`](PRD.md) (kernel) → [`phase-2.md`](phase-2.md) (netlist graph) → [`phase-3.md`](phase-3.md) (Yosys JSON) → [`audit.md`](audit.md).
+Phased design docs: [`PRD.md`](directives/PRD.md) (kernel) → [`phase-2.md`](directives/phase-2.md) (netlist graph) → [`phase-3.md`](directives/phase-3.md) (Yosys JSON) → [`audit.md`](directives/audit.md).
 
 ### Application circuits (in-repo)
 
 | App | Sources | Netlist | Idea |
 |-----|---------|---------|------|
 | **Encrypted RISC-V** | [`picorv32.v`](picorv32.v) | [`picorv32_netlist.json`](picorv32_netlist.json) | CPU `lw` sees 1 (**C50**); Metal NOP-fetch (**C51**, ~7.9 s/tick) at demo *N*=8. Not production *N*. |
-| **Batched search** | [`regex_matcher.v`](regex_matcher.v) | [`regex_netlist.json`](regex_netlist.json) | 3-character matcher × large `B` ([`PRD_App2.md`](PRD_App2.md)) |
-| **Decision tree** | [`decision_tree.v`](decision_tree.v) | [`tree_netlist.json`](tree_netlist.json) | Exact non-linear classify over batched records ([`PRD_App3.md`](PRD_App3.md)) |
+| **Batched search** | [`regex_matcher.v`](regex_matcher.v) | [`regex_netlist.json`](regex_netlist.json) | 3-character matcher × large `B` ([`PRD_App2.md`](directives/PRD_App2.md)) |
+| **Decision tree** | [`decision_tree.v`](decision_tree.v) | [`tree_netlist.json`](tree_netlist.json) | Exact non-linear classify over batched records ([`PRD_App3.md`](directives/PRD_App3.md)) |
 | **Small sequential demos** | [`counter.v`](counter.v), [`circuit.v`](circuit.v), … | [`core_netlist.json`](core_netlist.json), … | DFF retention / early bring-up |
-| **Enigma Bombe** | [`enigma_core.v`](enigma_core.v), [`enigma_m4_core.v`](enigma_m4_core.v) | `enigma_*_netlist.json` | Parallel rotor hypotheses + scoring ([`PRD_App_Enigma_Bombe.md`](PRD_App_Enigma_Bombe.md), [`PRD_App_P1030680_Bombe.md`](PRD_App_P1030680_Bombe.md)) |
+| **Enigma Bombe** | [`enigma_core.v`](enigma_core.v), [`enigma_m4_core.v`](enigma_m4_core.v) | `enigma_*_netlist.json` | Parallel rotor hypotheses + scoring ([`PRD_App_Enigma_Bombe.md`](directives/PRD_App_Enigma_Bombe.md), [`PRD_App_P1030680_Bombe.md`](directives/PRD_App_P1030680_Bombe.md)) |
 
 Re-synthesize examples:
 
@@ -130,7 +143,7 @@ Two different jobs:
 |----------------|--------|---------|
 | `--p1030680-bombe` / default Enigma Metal run | Boolean-safe mock-PBS tensors | Parallel bombe **architecture** + decrypt path |
 | `--break-p1030680` / `--campaign` | Host M4 oracle | **Cryptanalysis** (Welchman / campaign ladder) |
-| `--hybrid` | GA shell+stecker × cleartext Metal/CPU `B=17576` | ASIC-esque / Stochastic Bombe ([`ASIC_CRACKER.md`](ASIC_CRACKER.md), [`stochastic-bombe.md`](stochastic-bombe.md)) |
+| `--hybrid` | GA shell+stecker × cleartext Metal/CPU `B=17576` | ASIC-esque / Stochastic Bombe ([`ASIC_CRACKER.md`](ASIC_CRACKER.md), [`stochastic-bombe.md`](directives/stochastic-bombe.md)) |
 
 Mock-PBS under trivial torus encoding preserves boolean plaintext. Campaign search still uses the host/Welchman ladder and cleartext batch fitness — not in-graph `linguistic_score` alone — because the unbroken-message problem is archival, not tensor fidelity.
 

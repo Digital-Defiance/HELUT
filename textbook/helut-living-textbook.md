@@ -242,7 +242,7 @@ Each field has textbooks. The composition does not.
 **Definition 1.1** (Reconfigurable homomorphic computing). The study of compiling *already-synthesized* sequential netlists onto *tensor engines* so that LUT evaluation, flip-flop clocking, and (when claimed) torus FHE occupy the same graph object, with explicit certificates of what the graph does and does not prove.
 :::
 
-HELUT is one laboratory realization of that definition: Yosys JSON in, `MPSGraph` out, host posedge clock, LWE/GLWE samples on the FHE path [@helut-paper]. The subject is larger than the prototype. A future chapter may describe a CUDA fabric, an MLIR fabric, or an ASIC LUT plane. The definition does not name Apple.
+HELUT is one laboratory realization of that definition: Yosys JSON in, `MPSGraph` out, host posedge clock, LWE/GLWE samples on the FHE path [@helut-paper]. Apple Silicon was the *first* engine because the architect needed that graph hardware to brute-force the $\lambda$-squeeze and synthesis loops --- not because the subject is a Mac API. The definition does not name Apple. A CPU-only restatement of Theorem 1 is `python3 Scripts/tensorlut_math_ref.py`. CUDA and other fabrics remain trajectory until they have **C** rows (`directives/why-apple-silicon.md`).
 
 ### Three questions that open the course
 
@@ -373,6 +373,8 @@ This chapter is a working minimum of TFHE [@chillotti2020tfhe; @ducas2015fhew],
 ::: definition
 **Definition 3.1** (Discrete torus used here). HELUT freezes the modulus $q=2^{32}$ and represents torus elements as `UInt32`. Addition is native wraparound. This is a *systems* choice: the machine word *is* the torus.
 :::
+
+That freeze answers a common question: $q=2^{32}$ is *not* a proof that lattice FHE requires a 32-bit modulus, and TensorLUT (**C19**) is already Boolean / $[0,1]$. Binary-modulus FHE is a new experiment, not a silent reread of **C4**--**C6**. Split: `directives/q-32-vs-q-2.md`.
 
 The ring of polynomials is $$R_q = \mathbb{Z}_q[X]/(X^N+1),$$ the negacyclic ring. Multiplication by $X$ is a rotation with a sign flip on wrap-around---the algebraic fact that makes blind rotation a barrel shifter on coefficients.
 
@@ -579,6 +581,8 @@ CMUX dependence across bootstrap bits is sequential and real. The pain was never
 
 SoftBus / ANE remains a graph machine. We stop mistaking "unroll all ring math into MLIR" for "use the GPU." `MPSGraph` is a *staged IR* and a *scheduler*. Polynomial multiplication and the external product are first-class GPU operations.
 
+Why this GPU first: the laboratory was an M-series Mac pushed to extremes so the $\lambda$-squeeze could run at all (`directives/why-apple-silicon.md`). That does not freeze the math to Apple.
+
 ### Phase 1 --- survive $N=1024$
 
 Phase 1 does not change the cryptography. It changes the control plane.
@@ -723,7 +727,7 @@ The non-claims of Chapter [3](#ch:living){reference-type="ref" reference="ch:li
 
 ## Continuous hardware, discrete silicon {#ch:pillarii}
 
-The structural theorem of this chapter is lecture-safe (**C19**). The separable melt--freeze--snap certificate is lecture-safe (**C44**). Shatter / hold grades and campaign empirics remain seminar-depth and are *not* the theorem [@helut-tensorlut-thm].
+The structural theorem of this chapter is corpus-safe (**C19**) --- not a finished lecture. A plain-English restatement lives in `directives/theorem-1-plain.md`; a Swift-free check is `python3 Scripts/tensorlut_math_ref.py`, and the smallest worked example of the LUT view is `python3 Scripts/toy_cipher_demo.py` (`INTRO.md`). The separable melt--freeze--snap certificate is corpus-safe (**C44**). Shatter / hold grades and campaign empirics remain seminar-depth and are *not* the theorem [@helut-tensorlut-thm].
 
 ### The problem boolean search cannot see
 
@@ -994,7 +998,7 @@ Compare fused-megagraph DNF, **C16**--**C21** using Chapter [2](#ch:metal){refe
 
     swift test -c release --filter testTensorLUTFormalCertificate
 
-Deliverable: name the six lemmas, the certificate hypotheses, and one sentence that Theorem [1.1](#thm:tensorlut){reference-type="ref" reference="thm:tensorlut"} does *not* prove. Optional: `testTensorLUTMeltFreezeSnapCertificate` (**C44**) --- what class of INIT genomes the unique-maximizer lemma covers. Theory track: read `Sources/HELUTCore/TensorLUTFormal.swift` and `directives/tensorlut-theorem.md`; reconstruct the five-cell card without running Swift.
+Deliverable: name the six lemmas, the certificate hypotheses, and one sentence that Theorem [1.1](#thm:tensorlut){reference-type="ref" reference="thm:tensorlut"} does *not* prove. Optional: `testTensorLUTMeltFreezeSnapCertificate` (**C44**) --- what class of INIT genomes the unique-maximizer lemma covers. Theory track, no Swift and no Mac: `python3 Scripts/toy_cipher_demo.py` for the smallest worked example, then `python3 Scripts/tensorlut_math_ref.py`; read `directives/theorem-1-plain.md` and `directives/tensorlut-theorem.md`; reconstruct the five-cell card. Both scripts are executable checks, not machine-checked proofs.
 
 ### Lab 7 --- Five-cell audit (everyone)
 
@@ -1016,7 +1020,7 @@ This chapter is the discovery path after disclosure [@helut-trajectory]. None o
 
 ::: center
   Track                           Status at epoch 2026-08-14 / C69                                                                                             Next experiment
-  ------------------------------- ---------------------------------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------------
+  ------------------------------- ---------------------------------------------------------------------------------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   **H2** full_adder $N\ge 256$    **Closed** ($Z_{2N}$ pack / `rotationPower`)                                                                                 Keep as a worked bug in Chapter [3](#ch:torus){reference-type="ref" reference="ch:torus"}.
   **H1** Sage lattice-estimator   **C23** filled; production $|\Delta|=4.5$; core-SVP vs Cost `rop` divergences                                                Optional retune / quote estimator-only on $\Delta>16$ rows.
   **H3** Metal BR at large $N$    **C20** boolean $10.6\,\mathrm{s}$; **C21** crypto $\ell=2$ $11.38\,\mathrm{s}$                                              NTT inside crypto $\ell=2$ at $N{=}1024$ (incomplete public-MS gadget).
@@ -1024,6 +1028,8 @@ This chapter is the discovery path after disclosure [@helut-trajectory]. None o
   Encrypted sequential            **C53**/**C54** covering-b1 counter + toy ISA @ $N{=}1024$ $\sigma{=}128$ $k{=}7$; **C51** PicoRV Metal still demo $N{=}8$   Metal PicoRV covering @ $N{=}1024$ (LUT-tax).
   Campaign catalog                Middle ring $\neq A$ untested; catalog parked \@417                                                                          Resume `--bombe-from 418`.
   Garble / quarantine             Soft-band grades                                                                                                             Sister-message lessons; not a decrypt claim.
+  Audience R1--R6                 Shipped, not **C** rows: Linux checks, weak-vs-affine toy cipher pair, Theorem 1 in English, the $q$-split, four-page note   Open: Lean/Coq version of the six clauses; toy cipher through Yosys; $q=2$ FHE.
+  Vertex maximizers               Literature-resolved, not a **C** row                                                                                         Raising $\lambda$ is the classical concave exact penalty for 0--1 programming (Raghavachari 1969; Giannessi--Niccolucci 1976). Sufficient: $\lambda\ge\frac12\sup\lambda_{\max}(\nabla^2 f)$, measured $2+\sqrt3$ on two LUTs. Open: scaling with depth / fan-out. `note/lut-relaxation.tex` §4--§5.
 :::
 
 ### Mid-term pillars

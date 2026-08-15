@@ -59,6 +59,41 @@ Detail / discovery notes: [`directives/research-trajectory.md`](directives/resea
 
 ---
 
+## Phase 0.95 — Audience punch list (reviewer)
+
+Answers to an outside review of the shipped repo. None of these are **C** rows,
+and none of them touch production Metal. Status below means "the artifact exists
+and its script exits 0 in Linux CI"; a human still has to read the prose before
+any of it counts as stronger than the **C** row it describes
+([`directives/research-release.md`](directives/research-release.md) §Human gate).
+
+| # | Punch | Why it blocks outsiders | Artifact | Status |
+|---|-------|-------------------------|----------|--------|
+| **R1** | CPU-only, dependency-free math reference | Production FHE and the λ-squeeze live in Swift `MPSGraph` on Apple Silicon. Even `--cpu-only` HELUT needs the Swift stack, so Linux and Windows readers hit a wall at step one. | `Scripts/tensorlut_math_ref.py` — the objective \(F=F_{\mathrm{crypto}}-\lambda\pi\) and the six **C19** checks, stdlib only. `EncryptedNetlistSim` deliberately not ported. | Ships. Linux CI green; Swift `testTensorLUTFormalCertificate` PASS. Executable checks, not a formal proof. Not a **C** row. |
+| **R2** | Toy cipher, the smallest honest example | A 35-year scope hides the actual idea. Reviewer asked for two ciphers of the same type, one sound and one broken by design, and a demonstration of telling them apart. | `Scripts/toy_cipher_demo.py` — one SPN skeleton, PRESENT S-box vs an invertible affine S-box. Four distinguishers: DDT 4 vs 16, black-box XOR identity, one-known-pair recovery at zero key search, LUT INIT affineness. | Ships. Linux CI green. Yosys synthesis of the toy into a real netlist is still open. |
+| **R3** | Distillation of Theorem 1 | Nobody installs Swift to learn an invariant. The statement was buried in `TensorLUTFormal` plus `directives/tensorlut-theorem.md`. | [`directives/theorem-1-plain.md`](directives/theorem-1-plain.md) — setup, six clauses, and an explicit list of what they do not give. Uniqueness at \(w=t\) attributed to **C44**, separable case only. | Ships. Uniqueness overclaim removed. Needs a human read before it is quoted. |
+| **R4** | \(q=2^{32}\) vs \(q=2\) | Fair question: is the 32-bit torus a lattice requirement or a register artifact? | [`directives/q-32-vs-q-2.md`](directives/q-32-vs-q-2.md) — systems freeze, not a theorem; the covering lemmas are what actually depend on the word size (**C27**, degrees 8 and 128); the continuous-LUT side is bit-valued already and is where newcomers should start. | Ships, with the \(q=2\) degenerate case asserted as a negative in Python. Binary-modulus FHE remains an open experiment, not a **C** row. |
+| **R5** | Outsider on-ramp | Four scattered markdown files answered a "too much scaffolding" critique with more scaffolding. | [`INTRO.md`](INTRO.md) — self-contained, no claim IDs, honest limits. [`REVIEWER.md`](REVIEWER.md) is the ledger-side map. | Ships. |
+| **R6** | Five-page note for a maths audience | Reviewer point: do not chuck the repo at r/math, reduce to the essence and ask about that. Needs a specific question, not a tour. | [`note/lut-relaxation.tex`](note/lut-relaxation.tex) → `make note`. Toy-cipher table, the multilinear relaxation, propositions with receipts, the exact-penalty threshold, then two narrow open questions. Probes: `Scripts/lambda_threshold_probe.py`, `Scripts/penalty_threshold.py`. | Ships, 5 pages. |
+| **R7** | \(\lambda\)-threshold: was it open? | We nearly posted a solved problem as an open question. | **No.** Maximizing \(F_\lambda\) is minimizing \(f+\lambda\pi\), the classical concave exact penalty for 0–1 programming: Raghavachari (1969), Giannessi–Niccolucci (1976) for the nonlinear case, Kalantari–Rosen (1982) for the bound. Sufficient condition \(\lambda\ge\tfrac12\sup\lambda_{\max}(\nabla^2 f)\); measured \(=2+\sqrt3\approx 3.732\) on the two-LUT topology, against an observed crossover in \((2,4]\). | Literature-resolved, **not** a new theorem. Cited in the note. Still open and now narrower: how the bound scales with depth / fan-out, and behaviour below the bound. |
+
+Standing constraints for this list: **R1** and **R2** are the on-ramp and should
+stay runnable with nothing but `python3`. Do not quote "HELUT works at \(q=2\)"
+until a **C** row exists. Metal is a hard dependency of the encrypted path, so
+the Apple split is documented rather than engineered away
+([`directives/why-apple-silicon.md`](directives/why-apple-silicon.md)).
+
+Still open from the same review: a machine-checked (Lean or Coq) version of the
+six clauses, and the toy cipher pushed through Yosys so the netlist claim is
+demonstrated rather than described. The vertex-maximizer question turned out to be
+classical (**R7**) — worth remembering as a process lesson: search the
+optimization literature before calling something open. What remains of it is the
+scaling of \(\lambda^\star\) with circuit structure, and what happens below the
+sufficient bound where a real schedule lives. If either resolves it becomes a
+lemma with a receipt and a **C** row, and not before.
+
+---
+
 ## Phase 0 — Corpus / proofs push (active)
 
 Goal: graduate the *release corpus* (paper, theorems, five-cell claims), not more FHE

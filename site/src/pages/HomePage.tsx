@@ -81,7 +81,12 @@ export function HomePage() {
               ticks.
             </p>
             <p style={{ marginTop: '1rem' }}>
-              Honest limits: calibrated hardness is not lattice-estimator Cost on every row (H1 /
+              Honest limits: Apple Silicon is the first laboratory (the λ-squeeze needed that
+              machine) and Metal is a hard dependency of the encrypted path, but the mathematics
+              is not Apple-shaped. Checkable on Linux, no build step:{' '}
+              <code>python3 Scripts/toy_cipher_demo.py</code> and{' '}
+              <code>python3 Scripts/tensorlut_math_ref.py</code>. CUDA / CPU production FHE
+              are trajectory. Calibrated hardness is not lattice-estimator Cost on every row (H1 /
               C23: prod-n1024-s16 HELUT 175.7 vs Sage 180.2). Covering Track A noisy BK at{' '}
               <em>N</em>=1024 is C52–C54 (<em>k</em>=7) and cheaper covering-b2 C57; native <em>k</em>=1 (C37/C55) and{' '}
               <code>cryptoPublicMS</code> (C26/C56) remain graded negatives. Campaign fitness is

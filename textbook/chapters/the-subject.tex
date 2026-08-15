@@ -28,9 +28,14 @@ certificates of what the graph does and does not prove.
 HELUT is one laboratory realization of that definition: Yosys JSON in,
 \texttt{MPSGraph} out, host posedge clock, LWE/GLWE samples on the FHE
 path~\cite{helut-paper}.
-The subject is larger than the prototype.
-A future chapter may describe a CUDA fabric, an MLIR fabric, or an ASIC LUT
-plane. The definition does not name Apple.
+Apple Silicon was the \emph{first} engine because the architect needed that
+graph hardware to brute-force the $\lambda$-squeeze and synthesis loops ---
+not because the subject is a Mac API.
+The definition does not name Apple.
+A CPU-only restatement of Theorem~1 is
+\texttt{python3 Scripts/tensorlut\_math\_ref.py}.
+CUDA and other fabrics remain trajectory until they have \cid{} rows
+(\corpus{directives/why-apple-silicon.md}).
 
 \section{Three questions that open the course}
 

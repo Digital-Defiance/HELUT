@@ -4,6 +4,9 @@
 **Hypotheses** are listed on the certificate; empirical grades (baseline / shatter / blind 3-pair) are separate evidence in `BREAK_P1030680.md`.
 
 Living inventory: [`claim-sheet.md`](claim-sheet.md). Paper: `paper/helut.tex` §Pillar II.
+Plain English (**R3**): [`theorem-1-plain.md`](theorem-1-plain.md).
+CPU math script (**R1**–**R4**): `python3 Scripts/tensorlut_math_ref.py`.
+Reviewer packet: [`../REVIEWER.md`](../REVIEWER.md).
 
 ---
 

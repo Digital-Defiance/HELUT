@@ -42,8 +42,8 @@ const pillars = [
         idx: 'II.2',
         title: 'Involution sandwich / formal',
         figure: '/gallery/gallery-ii2-involution.png',
-        body: 'Blind 3-pair PASS (C9). Theorem 1 + corollary: continuous→discrete structure and emitter/freeze completeness (C19, C25).',
-        meta: 'testTensorLUTFormalCertificate · testTensorLUTFormalCorollaryCertificate',
+        body: 'Blind 3-pair PASS (C9). Theorem 1 + corollary: continuous→discrete structure and emitter/freeze completeness (C19, C25). Swift-free restatement runs in Linux CI: python3 Scripts/tensorlut_math_ref.py, plus a nonlinear-vs-affine toy cipher pair in toy_cipher_demo.py that measures 2^-10 against probability 1 (neither is a new C row).',
+        meta: 'testTensorLUTFormalCertificate · Scripts/toy_cipher_demo.py · theorem-1-plain.md',
       },
       {
         idx: 'II.3',

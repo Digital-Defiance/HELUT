@@ -13,6 +13,11 @@ HELUT freezes the modulus $q=2^{32}$ and represents torus elements as
 choice: the machine word \emph{is} the torus.
 \end{definition}
 
+That freeze answers a common question: \(q=2^{32}\) is \emph{not} a proof that
+lattice FHE requires a 32-bit modulus, and TensorLUT (\cid{19}) is already
+Boolean / \([0,1]\). Binary-modulus FHE is a new experiment, not a silent
+reread of \cid{4}--\cid{6}. Split: \corpus{directives/q-32-vs-q-2.md}.
+
 The ring of polynomials is
 \[
   R_q = \mathbb{Z}_q[X]/(X^N+1),

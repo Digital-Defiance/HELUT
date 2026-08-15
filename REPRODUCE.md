@@ -632,6 +632,20 @@ swift test -c release --filter testTensorLUTFormalCertificate
 
 Six lemmas must hold (`π`, MSE, \(F\), emitter, involution, freeze). Statement: [`directives/tensorlut-theorem.md`](directives/tensorlut-theorem.md). Structural — not a U-534 / P1030680 decrypt (**H6**, **N**).
 
+No Swift, no Mac (Phase 0.95 **R1**–**R5**):
+
+```bash
+python3 Scripts/toy_cipher_demo.py
+python3 Scripts/tensorlut_math_ref.py
+python3 Scripts/lambda_threshold_probe.py
+python3 Scripts/penalty_threshold.py
+make note   # note/lut-relaxation.tex → pdf + md (needs latexmk + pandoc)
+```
+
+The first is the introductory module: one SPN skeleton with a nonlinear S-box and an affine one, five ways to tell them apart, including the exact 4-round differential (2^-10 vs probability 1) and the LUT `INIT` view. The second expects PASS on C19 (with the analytic identities), C25-structural, C44, C27 sizes \(\{8,128\}\), and the toy involution. The third and fourth are **not** claims. The third measures where maximizers of \(F_\lambda\) sit as \(\lambda\) grows on a non-separable two-LUT topology (crossover in \((2,4]\)). The fourth computes the classical exact-penalty bound that explains it: \(\lambda\ge\tfrac12\sup\lambda_{\max}(\nabla^2 f) = 2+\sqrt3\) here. That threshold is Raghavachari (1969) / Giannessi–Niccolucci (1976), **not** a HELUT result — see `note/lut-relaxation.tex` §4.
+
+Both are stdlib only and run in Linux CI (`.github/workflows/linux-math.yml`). They are executable checks rather than machine-checked proofs, and neither is a new **C** row. C25 omits `mutatedPreserving`, which needs Swift's RNG. Start-here page: [`INTRO.md`](INTRO.md). Reviewer map: [`REVIEWER.md`](REVIEWER.md).
+
 ## TensorLUT Theorem 1 corollary (C25)
 
 ```bash

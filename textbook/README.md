@@ -40,7 +40,9 @@ Chapter ↔ corpus map:
 | Book | Grows from |
 |------|------------|
 | Pillar I, Metal compiler, certificates | `fhe-graduation.md`, `metal-compiler-phases.md`, `parameter-cookbook.md` |
-| Pillar II | `tensorlut-theorem.md` (**C19**), `tensorlut.md`, `adversarial-synthesis.md` |
+| Pillar II | `tensorlut-theorem.md` (**C19**), `theorem-1-plain.md`, `tensorlut.md` |
+| Pillar I torus \(q\) | `q-32-vs-q-2.md` (doctrine split; not a **C** row) |
+| Why Apple first | `why-apple-silicon.md` (lab history; not a CUDA claim) |
 | Pillar III | `enigma256-theorem.md` (**C24**), `Enigma256.md`, `roadmap-overall.md` Schneier pillar |
 | Open problems | `research-trajectory.md` |
 | Frontier | `potential-avenues.md` |

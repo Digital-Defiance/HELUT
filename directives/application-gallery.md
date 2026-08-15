@@ -21,7 +21,7 @@ Shape laboratory (oracle, not FHE claim): decision tree / regex / PicoRV32 (**C1
 | # | Application | Claim / bar | Reproduce |
 |---|-------------|-------------|-----------|
 | II.1 | M4 TensorLUT baseline emit | **C8** | TensorLUT CLI / Phase 21 baseline Verilog |
-| II.2 | Stecker involution sandwich / blind 3-pair | **C9**, **C19**, **C25** | Formal certs + Phase 21 protocol |
+| II.2 | Stecker involution sandwich / blind 3-pair | **C9**, **C19**, **C25** | Formal certs + Phase 21 protocol. Swift-free, Linux CI: `python3 Scripts/tensorlut_math_ref.py` and `python3 Scripts/toy_cipher_demo.py` (**R1**/**R2**, not a new **C**) |
 | II.3 | Shatter vs hold under \(\lambda\) | empirical (seminar) | Campaign ledger Phase 21; **not** a decrypt (**H6**) |
 
 ## Pillar III — Polymorphic SoftBus

@@ -6,7 +6,7 @@
 #   make docs        # writeup + paper + textbook
 #   make test-metal-p1  # Phase 1 Metal BR XCTest battery (release)
 
-.PHONY: writeup paper textbook docs clean-docs test-metal-p1
+.PHONY: writeup paper textbook note docs clean-docs test-metal-p1
 
 writeup: writeup.tex Scripts/build_writeup.sh
 	@chmod +x Scripts/build_writeup.sh
@@ -19,6 +19,10 @@ paper: paper/helut.tex Scripts/build_writeup.sh
 textbook: textbook/helut-living-textbook.tex Scripts/build_writeup.sh
 	@chmod +x Scripts/build_writeup.sh
 	./Scripts/build_writeup.sh textbook/helut-living-textbook.tex
+
+note: note/lut-relaxation.tex Scripts/build_writeup.sh
+	@chmod +x Scripts/build_writeup.sh
+	./Scripts/build_writeup.sh note/lut-relaxation.tex
 
 docs: writeup paper textbook
 

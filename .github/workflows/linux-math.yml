@@ -1,0 +1,45 @@
+name: Linux math checks
+
+# The Swift package needs Apple Silicon and Metal. These two scripts do not,
+# and this job is the receipt for that claim. It runs on every push so the
+# badge reflects the current tree rather than the last time a script changed.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  no-mac-required:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Oldest supported and current. Nothing here needs anything newer.
+        python-version: ['3.9', '3.13']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Toy cipher pair (weak vs broken by design)
+        run: python3 Scripts/toy_cipher_demo.py
+      - name: TensorLUT structural checks
+        run: python3 Scripts/tensorlut_math_ref.py
+      - name: Lambda crossover, measured
+        run: python3 Scripts/lambda_threshold_probe.py
+      - name: Exact-penalty Hessian bound (2 + sqrt 3)
+        run: python3 Scripts/penalty_threshold.py
+      - name: Confirm stdlib only
+        run: |
+          if grep -nE '^\s*(import|from)\s+(numpy|scipy|torch|sympy|pandas)' \
+              Scripts/toy_cipher_demo.py Scripts/tensorlut_math_ref.py \
+              Scripts/lambda_threshold_probe.py Scripts/penalty_threshold.py; then
+            echo "Third-party import found; these scripts must stay stdlib-only." >&2
+            exit 1
+          fi
+          echo "stdlib only, confirmed"
