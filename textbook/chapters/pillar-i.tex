@@ -232,7 +232,7 @@ hardness / noisy-BK \emph{certificates} as implemented. \\
 Out of scope unless measured & Side channels; quantum; estimator Cost as
 ``secure bits'' on every row (\hid{1}); native $k{=}1$ / \texttt{cryptoPublicMS}
 noisy BK and PicoRV covering at $N{=}1024$ (\hid{4} remainder; Grade~B is
-\cid{52}--\cid{54}). \\
+\cid{52}--\cid{54}; PicoRV covering-b2 is \cid{60} FAIL). \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -242,4 +242,17 @@ If the tensor datapath cannot boot a CPU under mock encodings, adding real
 TFHE noise only makes the systems problem harder.
 If the FHE path cannot SING an adder, a CPU slide is theatre.
 
-\growswhen{Metal $N{=}1024$ PicoRV tick; fused sequential metal-netlist.}
+\reproduced{C58}{PicoRV32 \texttt{abc -lut 6} netlist: $2006$ LUT $+$ $1565$ DFF.
+CPU public-ms boolean $1$-tick SING PASS at $N{=}64$ ($1.35\,\mathrm{s}$,
+$32$-bit). Demo $N{=}8$ cannot host LUT6 tables.}
+
+\reproduced{C59}{Same lut6 netlist after sequential wavefront: CPU boolean
+$0.165\,\mathrm{s}/1$ at $N{=}64$ (${\sim}8.2\times$ vs \cid{58}).}
+
+\reproduced{C60}{Covering-b2 $k{=}7$ Metal $N{=}1024$ 1-tick Q SING FAIL
+after ${\sim}33$\,min of combinational BRs.}
+
+\reproduced{C62}{Metal PicoRV lut6 $N{=}1024$ $e{=}0$ public-ms boolean 1-tick
+Q SING PASS ($373.89\,\mathrm{s}$). Covering remains \cid{60}/\cid{61}.}
+
+\growswhen{Metal $N{=}1024$ PicoRV covering tick that PASSes Q SING; fused sequential metal-netlist.}

@@ -110,6 +110,11 @@ package final class EncryptedNetlistSimulator {
                 "degree \(n) < LUT \(lut.name) size \(lut.table.count)"
             )
         }
+        let skippedBR = self.clear.luts.filter { $0.blindRotateSkip != nil }.count
+        if skippedBR > 0 {
+            print("  LUT BR skip     \(skippedBR)/\(self.clear.luts.count) identity/constant")
+            fflush(stdout)
+        }
         self.secret = secret
         self.params = params
         self.backend = backend
@@ -395,12 +400,31 @@ package final class EncryptedNetlistSimulator {
             }
             precondition(!ready.isEmpty, "Stuck encrypted LUT resolve")
             var extractedByWire: [Int: LWECiphertext] = [:]
-            if clear.dffs.isEmpty && ready.count > 1 {
+            var brReady: [(CleartextNetlistSimulator.LUTCell, [LWECiphertext])] = []
+            for (lut, aLWEs) in ready {
+                if let skip = lut.blindRotateSkip {
+                    switch skip {
+                    case .copy(let i):
+                        wires[lut.yWire] = aLWEs[i]
+                    case .constant(let bit):
+                        wires[lut.yWire] = encryptLWERotationNative(
+                            message: encodeRotationNativeBit(UInt32(bit), k: booleanK),
+                            secret: secret.lweSecret,
+                            twoN: twoN,
+                            rng: &rng
+                        )
+                        noiseBudget.consume(.encrypt)
+                    }
+                } else {
+                    brReady.append((lut, aLWEs))
+                }
+            }
+            if brReady.count > 1 {
                 var parallelExtracted: [Int: LWECiphertext] = [:]
                 var parallelError: Error?
                 let waveLock = NSLock()
-                DispatchQueue.concurrentPerform(iterations: ready.count) { idx in
-                    let (lut, aLWEs) = ready[idx]
+                DispatchQueue.concurrentPerform(iterations: brReady.count) { idx in
+                    let (lut, aLWEs) = brReady[idx]
                     let table = lut.table.map { UInt32($0) }
                     do {
                         let extracted = try self.evaluateLUTBlindRotateBody(
@@ -419,16 +443,14 @@ package final class EncryptedNetlistSimulator {
                 }
                 if let parallelError { throw parallelError }
                 extractedByWire = parallelExtracted
-            } else {
-                for (lut, aLWEs) in ready {
-                    extractedByWire[lut.yWire] = try evaluateLUTBlindRotateBody(
-                        truthTable: lut.table.map { UInt32($0) },
-                        inputs: aLWEs,
-                        bootstrapKey: bk
-                    )
-                }
+            } else if let (lut, aLWEs) = brReady.first {
+                extractedByWire[lut.yWire] = try evaluateLUTBlindRotateBody(
+                    truthTable: lut.table.map { UInt32($0) },
+                    inputs: aLWEs,
+                    bootstrapKey: bk
+                )
             }
-            for (lut, aLWEs) in ready {
+            for (lut, aLWEs) in brReady {
                 guard let extracted = extractedByWire[lut.yWire] else {
                     preconditionFailure("missing wavefront BR for wire \(lut.yWire)")
                 }

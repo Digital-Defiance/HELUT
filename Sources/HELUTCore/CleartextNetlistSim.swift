@@ -21,6 +21,30 @@ package final class CleartextNetlistSimulator {
         package let yWire: Int
         /// Truth table: `table[inputBits]` → output bit (LSB = A[0]).
         package let table: [UInt8]
+
+        /// Blind-rotate skip: identity on one input, or a constant function.
+        package enum BlindRotateSkip: Equatable {
+            case copy(inputIndex: Int)
+            case constant(UInt8)
+        }
+
+        package var blindRotateSkip: BlindRotateSkip? {
+            if table.allSatisfy({ $0 == 0 }) { return .constant(0) }
+            if table.allSatisfy({ $0 == 1 }) { return .constant(1) }
+            let width = aBits.count
+            guard width > 0, table.count == (1 << width) else { return nil }
+            for i in 0..<width {
+                var isCopy = true
+                for mask in 0..<table.count {
+                    if table[mask] != UInt8((mask >> i) & 1) {
+                        isCopy = false
+                        break
+                    }
+                }
+                if isCopy { return .copy(inputIndex: i) }
+            }
+            return nil
+        }
     }
 
     package let moduleName: String

@@ -128,6 +128,31 @@ identity residual becomes decodable ($\varepsilon\log_2\approx -12.6$), but Meta
 public-ms full\_adder SING fails (sum mismatch). Torus $\sigma{=}128$ remains
 undecodable. Do not quote $k\delta$ as a \texttt{cryptoPublicMS} noisy-BK close.}
 
+\reproduced{C57}{Covering-b2 $\ell{=}16$, $k{=}7$, $\sigma{=}128$ at $N{=}1024$:
+identity $\varepsilon\log_2\approx-110.7$ (4 trials). Metal public-ms adder
+$10.33\,\mathrm{s}/1$ and regex $23$ LUT $26.69\,\mathrm{s}/1$ PASS.
+Covering-b4 public-ms adder and E256 $58$-LUT covering-b2 SING FAIL.
+CPU covering-b2 PASSes at demo $N{=}8$.}
+
+\reproduced{C58}{PicoRV32 \texttt{abc -lut 6}: $2006$ \texttt{\$lut} ($-58\%$ vs
+lut2 $4785$). CPU public-ms boolean SING PASS at $N{=}64$ ($1.35\,\mathrm{s}$,
+$32$-bit). $N{=}8$ SIGTRAPs because table size $64>N$. Not covering; not
+production $N$.}
+
+\reproduced{C59}{Sequential combinational wavefront: independent ready \texttt{\$lut}s
+\texttt{concurrentPerform} even with DFFs. PicoRV lut6 $N{=}64$ CPU boolean
+$0.165\,\mathrm{s}/1$ versus \cid{58} $1.35\,\mathrm{s}$ (${\sim}8.2\times$).}
+
+\reproduced{C60}{PicoRV lut6 covering-b2 $k{=}7$ Metal $N{=}1024$ one tick:
+combinational BRs finished in ${\sim}33$\,min; Q SING FAIL
+(\texttt{\$\_DFF\_P\_} want$=0$ got$=1$). Timed negative.}
+
+\reproduced{C61}{Same PicoRV lut6 at covering-b1 $k{=}7$: ${\sim}61$\,min then Q SING FAIL
+on a nearby \texttt{\$\_DFF\_P\_}. Finer gadget did not fix sequential Q.}
+
+\reproduced{C62}{Metal PicoRV lut6 $N{=}1024$ public-ms boolean $e{=}0$ one tick:
+Q SING PASS in $373.89\,\mathrm{s}$. Hardness $175.7$ with \hid{1}. Not covering.}
+
 \section{Calibration is not estimation}
 
 \begin{center}

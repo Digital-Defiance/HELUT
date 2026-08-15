@@ -83,7 +83,7 @@ export function HomePage() {
             <p style={{ marginTop: '1rem' }}>
               Honest limits: calibrated hardness is not lattice-estimator Cost on every row (H1 /
               C23: prod-n1024-s16 HELUT 175.7 vs Sage 180.2). Covering Track A noisy BK at{' '}
-              <em>N</em>=1024 is C52–C54 (<em>k</em>=7); native <em>k</em>=1 (C37/C55) and{' '}
+              <em>N</em>=1024 is C52–C54 (<em>k</em>=7) and cheaper covering-b2 C57; native <em>k</em>=1 (C37/C55) and{' '}
               <code>cryptoPublicMS</code> (C26/C56) remain graded negatives. Campaign fitness is
               Welchman/cleartext—not FHE tick rate. P1030680 is not decrypted.
             </p>
@@ -94,7 +94,8 @@ export function HomePage() {
               <span>
                 <strong>Netlist-clocked torus FHE</strong> — LWE/GLWE + GGSW BK on Metal/CPU;
                 encrypted full_adder SING at production <em>N</em> (C20/C21); covering noisy BK at
-                the same <em>N</em> with stride-<em>k</em> (C52–C54). Chronology:{' '}
+                the same <em>N</em> with stride-<em>k</em> (C52–C54); Metal PicoRV lut6 1-tick at
+                that <em>N</em> with <em>e</em>=0 BK (C62). Chronology:{' '}
                 <Link to="/projects/netlist-fhe/journal">FHE journal</Link>.
               </span>
             </li>

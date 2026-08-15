@@ -5,7 +5,7 @@ Canonical TeX for a first university course in **reconfigurable homomorphic comp
 | Artifact | Path |
 |----------|------|
 | Master file | [`helut-living-textbook.tex`](helut-living-textbook.tex) |
-| Epoch / edition | `\livingepoch` in [`preamble.tex`](preamble.tex) — currently **2026-08-14 / C56**, edition **0.1.2** |
+| Epoch / edition | `\livingepoch` in [`preamble.tex`](preamble.tex) — currently **2026-08-14 / C62**, edition **0.1.2** |
 | Corpus of record | [`../directives/claim-sheet.md`](../directives/claim-sheet.md) |
 | Trajectory | [`../directives/research-trajectory.md`](../directives/research-trajectory.md) |
 | Frontier (not claims) | [`../directives/potential-avenues.md`](../directives/potential-avenues.md) |

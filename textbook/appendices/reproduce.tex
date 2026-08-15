@@ -261,6 +261,42 @@ None $\le -64$.
 Expect identity decodable at $B{=}1$ ($\varepsilon\approx-12.6$); Metal
 public-ms SING FAIL. Torus $\sigma{=}128$ still undecodable.
 
+\section{Covering-b2 cheaper SING (\cid{57})}
+
+\begin{lstlisting}
+.build/release/helut --measure-bk-noise --degree 1024 --trials 4 \
+  --bk-noise-sigma 128 --covering-base-log 2 --boolean-scale-mul 7
+.build/release/helut --bench regex_netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 1 --bk-noise-sigma 128 \
+  --paths 'public-ms covering-b2' --boolean-scale-mul 7
+\end{lstlisting}
+
+Expect $\varepsilon\log_2\approx-110.7$; regex Metal public-ms PASS.
+Covering-b4 public-ms and E256 covering-b2 FAIL.
+
+\section{PicoRV \texttt{abc -lut 6} (\cid{58})}
+
+\begin{lstlisting}
+yosys -p "read_verilog picorv32.v; synth -top picorv32 -flatten; \
+  abc -lut 6; write_json picorv32_lut6_netlist.json"
+.build/release/helut --bench picorv32_lut6_netlist.json --degree 64 \
+  --bench-encrypted --cpu-only --sing --vectors 1 \
+  --paths 'blind-rotate public-ms boolean'
+\end{lstlisting}
+
+Expect $2006$ LUT, PASS ${\sim}1.35\,\mathrm{s}/1$, $32$-bit. $N{=}8$ traps.
+Wavefront (\cid{59}): same command ${\sim}0.165\,\mathrm{s}/1$.
+
+\section{PicoRV covering-b2 Q SING FAIL (\cid{60})}
+
+\begin{lstlisting}
+.build/release/helut --bench picorv32_lut6_netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 1 --bk-noise-sigma 128 \
+  --paths 'public-ms covering-b2' --boolean-scale-mul 7
+\end{lstlisting}
+
+Expect ${\sim}33$\,min then DFF Q SING FAIL.
+
 \section{Track B Metal SING with noisy BK (\cid{28})}
 
 \begin{lstlisting}

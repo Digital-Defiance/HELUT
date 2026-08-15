@@ -41,6 +41,35 @@ export function NetlistFheJournalPage() {
                 wires, not the historical /kδ path (C43).
               </span>
             </li>
+            <li>
+              <span className="mono">C57</span>
+              <span>
+                Covering-b2 (<em>ℓ</em>=16) <em>k</em>=7 σ=128 at <em>N</em>=1024: εlog2≈−110.7;
+                Metal public-ms adder 10.33 s/1 and regex 23 LUT 26.69 s/1 PASS. Covering-b4
+                public-ms and E256 58-LUT covering-b2 SING FAIL.
+              </span>
+            </li>
+            <li>
+              <span className="mono">C58</span>
+              <span>
+                PicoRV32 <code>abc -lut 6</code>: 2006 LUTs (−58% vs 4785). Encrypted CPU
+                public-ms boolean SING PASS at <em>N</em>=64 (1.35 s pre-wavefront).
+              </span>
+            </li>
+            <li>
+              <span className="mono">C59</span>
+              <span>
+                Sequential combinational wavefront: PicoRV lut6 <em>N</em>=64 CPU boolean 0.165 s
+                (~8.2× vs C58).
+              </span>
+            </li>
+            <li>
+              <span className="mono">C62</span>
+              <span>
+                Metal PicoRV lut6 at production <em>N</em>=1024, noiseless BK: Q SING PASS in
+                373.89 s (C62). Covering noisy BK on the same netlist is still C60/C61 FAIL.
+              </span>
+            </li>
           </ul>
         </div>
       </section>
@@ -59,8 +88,8 @@ export function NetlistFheJournalPage() {
             <li>
               <span className="mono">I.2</span>
               <span>
-                Encrypted tree / regex SING exists at <strong>demo N</strong> (C6). Metal SING at
-                production <em>N</em> is not graded.
+                Encrypted tree SING exists at <strong>demo N</strong> (C6). Regex covering at
+                production <em>N</em> is C57. Tree Metal covering is still a remainder.
               </span>
             </li>
             <li>
@@ -82,8 +111,8 @@ export function NetlistFheJournalPage() {
             <li>
               <span className="mono">PicoRV</span>
               <span>
-                Encrypted PicoRV32 SING is demo <em>N</em>=8 (C45–C51). Covering noisy BK at{' '}
-                <em>N</em>=1024 is not claimed (LUT-tax from C52 × 4785 LUTs is hours per tick).
+                Encrypted PicoRV32 covering at <em>N</em>=1024 is C60/C61 Q SING FAIL.
+                Noiseless Metal PicoRV at that <em>N</em> is C62 (374 s).
               </span>
             </li>
           </ul>

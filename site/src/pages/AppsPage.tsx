@@ -16,7 +16,7 @@ const pillars = [
         idx: 'I.2',
         title: 'Encrypted tree / regex SING',
         figure: '/gallery/gallery-i2-tree-regex.png',
-        body: 'Same compiler on non-adder netlists at demo N (C6). Proves encrypted ticks are not full_adder-specialized. Production-N Metal SING is a remainder, not a missing card.',
+        body: 'Regex covering-b2 k=7 noisy BK Metal SING at production N=1024 (C57, 23 LUTs, 26.7 s/tick). Tree remains demo-N C6. Encrypted ticks are not adder-specialized.',
         meta: 'tree_netlist.json · regex_netlist.json · --bench-encrypted --sing',
       },
       {

@@ -505,6 +505,61 @@ private func runEncryptedNetlistBench() {
             queue: nil
         )
         if cpuOnly {
+            // Covering gadgets were Metal-only; CPU path is the E2 1k-barrier lever.
+            try runAll(
+                label: "blind-rotate secret covering-b4",
+                params: .covering(degree: degree, baseLog: 4),
+                backend: .blindRotate,
+                wireRefresh: .secret,
+                seed: 0xE142,
+                device: nil,
+                queue: nil
+            )
+            try runAll(
+                label: "blind-rotate public-ms covering-b4",
+                params: .covering(degree: degree, baseLog: 4),
+                backend: .blindRotate,
+                wireRefresh: .publicMS,
+                seed: 0xE143,
+                device: nil,
+                queue: nil
+            )
+            try runAll(
+                label: "blind-rotate secret covering-b2",
+                params: .covering(degree: degree, baseLog: 2),
+                backend: .blindRotate,
+                wireRefresh: .secret,
+                seed: 0xE144,
+                device: nil,
+                queue: nil
+            )
+            try runAll(
+                label: "blind-rotate public-ms covering-b2",
+                params: .covering(degree: degree, baseLog: 2),
+                backend: .blindRotate,
+                wireRefresh: .publicMS,
+                seed: 0xE145,
+                device: nil,
+                queue: nil
+            )
+            try runAll(
+                label: "blind-rotate secret covering-b1",
+                params: .covering(degree: degree, baseLog: 1),
+                backend: .blindRotate,
+                wireRefresh: .secret,
+                seed: 0xE146,
+                device: nil,
+                queue: nil
+            )
+            try runAll(
+                label: "blind-rotate public-ms covering-b1",
+                params: .covering(degree: degree, baseLog: 1),
+                backend: .blindRotate,
+                wireRefresh: .publicMS,
+                seed: 0xE147,
+                device: nil,
+                queue: nil
+            )
             print("ENCRYPTED EQUIV (metal)")
             print("  result          SKIP (--cpu-only)")
             print("")

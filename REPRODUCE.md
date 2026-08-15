@@ -357,6 +357,69 @@ Expect: *n*=64 ε≈−36.6; *n*=256 ε≈−10.9; *n*=512 ε≈−6.5; *n*=1024
 
 Expect: identity decodable ε≈−12.6; Metal SING **FAIL**. Torus σ=128 still undecodable.
 
+## Covering-b2 k=7 σ=128 cheaper SING (C57)
+
+```bash
+.build/release/helut --measure-bk-noise --degree 1024 --trials 4 \
+  --bk-noise-sigma 128 --covering-base-log 2 --boolean-scale-mul 7 \
+  | tee logs/helut-noisy-bk-covering-b2-gauss-sigma128-n1024-k7-e1.log
+.build/release/helut --bench netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 1 --bk-noise-sigma 128 \
+  --paths 'public-ms covering-b2' --boolean-scale-mul 7 \
+  | tee logs/helut-encrypted-n1024-metal-sing-covering-b2-gauss-sigma128-k7-e1.log
+.build/release/helut --bench regex_netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 1 --bk-noise-sigma 128 \
+  --paths 'public-ms covering-b2' --boolean-scale-mul 7 \
+  | tee logs/helut-encrypted-n1024-metal-sing-regex-covering-b2-gauss-sigma128-k7-e1.log
+```
+
+Expect: εlog2≈−110.7; adder ~10.3 s/1 PASS; regex 23 LUT ~26.7 s/1 PASS. Covering-b4 public-ms and E256 58-LUT covering-b2 SING FAIL.
+
+CPU covering (same gadget, demo *N*):
+
+```bash
+.build/release/helut --bench netlist.json --degree 8 --bench-encrypted --cpu-only \
+  --sing --vectors 1 --bk-noise-sigma 24 --paths 'public-ms covering-b2'
+```
+
+## PicoRV abc -lut 6 (C58)
+
+```bash
+yosys -p "read_verilog picorv32.v; synth -top picorv32 -flatten; abc -lut 6; write_json picorv32_lut6_netlist.json"
+.build/release/helut --bench picorv32_lut6_netlist.json --degree 64 \
+  --bench-encrypted --cpu-only --sing --vectors 1 \
+  --paths 'blind-rotate public-ms boolean' \
+  | tee logs/helut-encrypted-n64-cpu-sing-picorv32-lut6.log
+```
+
+Expect 2006 `$lut` / 1565 DFF; **PASS** ~1.35 s/1, 32-bit hardness. *N*=8 traps (`table` 64 > *N*). Not covering; not *N*=1024.
+
+## Sequential wavefront (C59)
+
+Same command as **C58** after wavefront. Expect **PASS** ~0.165 s/1 (~8.2×).
+
+## PicoRV lut6 covering-b2 Q SING FAIL (C60)
+
+```bash
+.build/release/helut --bench picorv32_lut6_netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 1 --bk-noise-sigma 128 \
+  --paths 'public-ms covering-b2' --boolean-scale-mul 7 \
+  | tee logs/helut-encrypted-n1024-metal-sing-picorv32-lut6-covering-b2-k7-e6.log
+```
+
+Expect combinational BRs to finish (~33 min) then **DFF Q SING FAIL** (want=0 got=1).
+
+## PicoRV lut6 Metal N=1024 e=0 (C62)
+
+```bash
+.build/release/helut --bench picorv32_lut6_netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 1 \
+  --paths 'blind-rotate-metal public-ms boolean' \
+  | tee logs/helut-encrypted-n1024-metal-sing-picorv32-lut6-boolean-e0.log
+```
+
+Expect **PASS** ~374 s / 1, Q SING, *B*<sub>bk</sub>=0. Hardness 175.7 with **H1**. Not covering.
+
 ## TensorLUT melt–freeze–snap (C44)
 
 ```bash

@@ -78,6 +78,12 @@ ID & Result \emph{(continued)} \\
 \cid{54} & Sequential covering-b1 toy ISA @ $N{=}1024$ $\sigma{=}128$ $k{=}7$: Metal secret/public-ms SING PASS. Not PicoRV. \\
 \cid{55} & Native $k{=}1$ covering-b1 $\sigma{=}128$ LWE-$n$ map @ poly $N{=}1024$: decodable at $n\le 512$ but $\varepsilon>-64$; $n{=}1024$ undecodable (\cid{37}). \\
 \cid{56} & \texttt{cryptoPublicMS} $B{=}1$ $k{=}7$: identity decodable $\varepsilon\approx-12.6$; Metal public-ms SING FAIL. Torus $\sigma{=}128$ still undecodable. \\
+\cid{57} & Covering-b2 $k{=}7$ $\sigma{=}128$ @ $N{=}1024$: $\varepsilon\log_2\approx-110.7$; Metal public-ms adder $10.33\,\mathrm{s}/1$ + regex 23 LUT $26.69\,\mathrm{s}/1$ PASS. b4 public-ms and E256 covering-b2 FAIL. \\
+\cid{58} & PicoRV32 \texttt{abc -lut 6}: $2006$ LUT ($-58\%$) + CPU boolean SING PASS @ $N{=}64$ ($1.35\,\mathrm{s}$). Not covering / not $N{=}1024$. \\
+\cid{59} & Sequential wavefront: PicoRV lut6 $N{=}64$ CPU boolean $0.165\,\mathrm{s}/1$ (${\sim}8.2\times$ vs \cid{58}). \\
+\cid{60} & PicoRV lut6 covering-b2 $k{=}7$ @ $N{=}1024$: Metal 1-tick Q SING FAIL (${\sim}33$\,min, DFF want$=0$ got$=1$). \\
+\cid{61} & PicoRV lut6 covering-b1 $k{=}7$ @ $N{=}1024$: Metal 1-tick Q SING FAIL (${\sim}61$\,min). \\
+\cid{62} & Metal PicoRV lut6 $N{=}1024$ $e{=}0$ 1-tick Q SING PASS ($373.89\,\mathrm{s}$). Not covering. \\
 \end{longtable}
 }
 
@@ -92,7 +98,7 @@ ID & Asterisk \\
 \hid{1} & \cid{23} filled JSON. Production $|\Delta|=4.5$; divergences are core-SVP vs Cost \texttt{rop}. \\
 \hid{2} & \textbf{Closed} 2026-08-12 ($Z_{2N}$ pack). Kept as history. \\
 \hid{3} & \cid{20}/\cid{21} SING bars met; serial NTT SING still loses vs persist. \\
-\hid{4} & \cid{52}--\cid{54} covering Track A $k{=}7$ $\sigma{=}128$ @ $N{=}1024$. Native $k{=}1$ still \cid{37}/\cid{55}; \texttt{cryptoPublicMS} still \cid{26}/\cid{56}. PicoRV covering unrun at production $N$. \\
+\hid{4} & \cid{52}--\cid{54} covering-b1; \cid{57} covering-b2. Native $k{=}1$ still \cid{37}/\cid{55}; \texttt{cryptoPublicMS} still \cid{26}/\cid{56}. PicoRV covering \cid{60}/\cid{61} Q SING FAIL. \\
 \hid{5} & \texttt{*PublicMS} gadgets ($g_0=\delta$): on-lattice intent, not a closer of old \hid{2}. \\
 \hid{6} & TensorLUT / quarantine vs campaign: parallel research, not P1030680 PT. \\
 \hid{7} & Catalog / Regenbogen / UEBUNG: negatives graded; middle ring $\neq A$ untested; catalog parked @417, resume \texttt{--bombe-from 418}. \\
