@@ -87,6 +87,10 @@ ID & Result \emph{(continued)} \\
 \cid{63} & PicoRV lut6 covering-b2 $\sigma{=}128$ @ $N{=}64$: Q SING PASS (${\sim}1.72\,\mathrm{s}$). Native $k$. $k{=}7$ SIGTRAPs. \\
 \cid{64} & Extract$\to$KS $n{=}64$ at poly $N{=}1024$: native-$k$ covering-b2 adder+counter SING. Not LWE-176. \\
 \cid{65} & PicoRV lut6 covering Metal $N{=}1024$ extract$\to$KS $n{=}64$: Q SING PASS (b2 $114\,\mathrm{s}$, b1 $212\,\mathrm{s}$). \\
+\cid{66} & PicoRV lut6 covering 10-tick resetn boot extract$\to$KS $n{=}64$: Metal PASS $1136\,\mathrm{s}/10$. \\
+\cid{67} & Covering KS ladder: $n{=}128$ adder PASS; $n{=}256/512$ SIGTRAP. \\
+\cid{68} & PicoRV lut6 covering NOP-fetch extract$\to$KS $n{=}64$: Metal PASS $911\,\mathrm{s}/8$, fetches $0x0,0x4$. \\
+\cid{69} & Covering KS $n{=}256$ adder SING PASS; $n{=}512$ SING FAIL. C67 SIGTRAP was identity$\times 4$. \\
 \end{longtable}
 }
 
@@ -101,7 +105,7 @@ ID & Asterisk \\
 \hid{1} & \cid{23} filled JSON. Production $|\Delta|=4.5$; divergences are core-SVP vs Cost \texttt{rop}. \\
 \hid{2} & \textbf{Closed} 2026-08-12 ($Z_{2N}$ pack). Kept as history. \\
 \hid{3} & \cid{20}/\cid{21} SING bars met; serial NTT SING still loses vs persist. \\
-\hid{4} & \cid{52}--\cid{54} covering-b1; \cid{57} covering-b2; \cid{64}/\cid{65} extract$\to$KS native $k$ at $n{=}64$ (PicoRV Q PASS). Native $k{=}1$ at $n{=}N$ still \cid{37}; \texttt{cryptoPublicMS} still \cid{26}/\cid{56}. PicoRV covering at $n{=}N$ $k{=}7$ still \cid{60}/\cid{61} FAIL. \\
+\hid{4} & \cid{64}--\cid{66}/\cid{68} extract$\to$KS $n{=}64$. \cid{69} $n{=}256$ covering SING; $n{=}512$ SING FAIL. C67 trap was identity$\times 4$. Native $k{=}1$ at $n{=}N$ still \cid{37}. \\
 \hid{5} & \texttt{*PublicMS} gadgets ($g_0=\delta$): on-lattice intent, not a closer of old \hid{2}. \\
 \hid{6} & TensorLUT / quarantine vs campaign: parallel research, not P1030680 PT. \\
 \hid{7} & Catalog / Regenbogen / UEBUNG: negatives graded; middle ring $\neq A$ untested; catalog parked @417, resume \texttt{--bombe-from 418}. \\

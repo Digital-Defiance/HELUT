@@ -191,16 +191,31 @@ package final class EncryptedNetlistSimulator {
                 fflush(stdout)
             }
             if bkNoise.bound > 0 || bkNoise.usesGaussian, let bk = self.bootstrappingKey {
+                // Covering identity at n≥256 × N=1024 SIGTRAPed (C67) after KS print;
+                // e=0 covering SING at the same n PASSes. One trial is enough for B_bk.
+                let lweN = params.tfhe.lweDimension
+                let trials: Int
+                if n <= 16 {
+                    trials = 16
+                } else if lweN >= 256 {
+                    trials = 1
+                } else {
+                    trials = 4
+                }
+                print("  identity residual trials=\(trials)  (n=\(lweN))")
+                fflush(stdout)
                 let measured = TFHENoisyBKMeasurement.identity(
                     secret: secret,
                     params: params,
                     noise: bkNoise,
                     bootstrapKey: bk,
-                    trials: n <= 16 ? 16 : 4,
+                    trials: trials,
                     seed: seed &+ 0xB10C,
                     publicRefreshCompatible: wireRefresh == .publicMS || self.scaledPrimaryInputs,
                     booleanScaleMul: booleanScaleMul
                 )
+                print("  identity B_bk    \(measured.maxAbsError)  (decodable \(measured.eachLUTDecodable))")
+                fflush(stdout)
                 self.noisyBKMeasurement = measured
                 self.noisyBKGaussianCertificate = measured.gaussianCertificate(
                     lutCount: self.clear.luts.count

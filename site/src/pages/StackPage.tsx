@@ -101,7 +101,7 @@ export function StackPage() {
                 netlist (full_adder C20/C21; covering noisy adder/counter/toy ISA C52–C54;
                 covering-b2 regex C57; PicoRV lut6 Metal <em>N</em>=1024 <em>e</em>=0 C62;
                 PicoRV covering-b2 noisy BK at <em>N</em>=64 C63; extract→KS <em>n</em>=64 C64;
-                PicoRV covering Q PASS via KS C65). Metal
+                PicoRV covering Q PASS via KS C65–C68). Metal
                 microbench: persist ~0.52&nbsp;s/BR at <em>N</em>=1024 (C17); fused 3-prime ~0.42&nbsp;s/BR
                 (C20). The ~50&nbsp;s/BR figure was an early fused <em>N</em>=64 ancestor.
               </span>
@@ -111,8 +111,9 @@ export function StackPage() {
               <span>
                 <strong>Not claimed:</strong> native <em>k</em>=1 torus-scale noisy BK at <em>n</em>=
                 <em>N</em>=1024 (C37/C55); noisy <code>cryptoPublicMS</code> at that <em>N</em> (C26/C56);
-                PicoRV covering at <em>n</em>=<em>N</em> <em>k</em>=7 (C60/C61 Q SING FAIL; C65 PASSes
-                with extract→KS <em>n</em>=64);
+                PicoRV covering at <em>n</em>=<em>N</em> <em>k</em>=7 (C60/C61 Q SING FAIL; C65–C68
+                PASS with extract→KS <em>n</em>=64); covering KS <em>n</em>=512 native <em>k</em> (C69
+                SING FAIL);
                 estimator Cost on every calibration row (H1); production keys from the HELUT 175.7
                 figure; side-channel / GPU power; a P1030680 plaintext.
               </span>

@@ -40,4 +40,4 @@ Shape laboratory (oracle, not FHE claim): decision tree / regex / PicoRV32 (**C1
 | II.1–II.2 | yes | II.3 seminar-only until more receipts |
 | III.1, III.3 | yes | III.2 empirical, not IND-CPA |
 
-Next: tree Metal covering at production *N*; PicoRV covering at *n*=*N* (**C60**/**C61** still FAIL; **C65** is *n*=64 KS); native *k*=1 at *n*=*N* (**C37**). Figures live in `site/public/gallery/`. FHE chronology: `/projects/netlist-fhe/journal`.
+Next: PicoRV `lw` (48-tick prog running); covering KS *n*=512 with *k*=7; native *k*=1 at *n*=*N* (**C37**). **C67** SIGTRAP is superseded by **C69**. Figures live in `site/public/gallery/`. FHE chronology: `/projects/netlist-fhe/journal`.

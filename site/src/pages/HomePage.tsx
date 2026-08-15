@@ -97,9 +97,9 @@ export function HomePage() {
                 the same <em>N</em> with stride-<em>k</em> (C52–C54); Metal PicoRV lut6 1-tick at
                 that <em>N</em> with <em>e</em>=0 BK (C62). Covering Q on that core PASSes at{' '}
                 <em>N</em>=64 (C63) and still FAILs at production <em>N</em> (C60/C61). Extract→KS
-                LWE <em>n</em>=64 native-<em>k</em> covering is C64; PicoRV lut6 covering Q at that
-                <em>N</em> with the same KS is C65 (C60/C61 stay <em>n</em>=<em>N</em> <em>k</em>=7
-                FAIL). Chronology:{' '}
+                LWE <em>n</em>=64 native-<em>k</em> covering is C64; PicoRV lut6 covering Q via that
+                KS is C65–C66/C68 (C60/C61 stay <em>n</em>=<em>N</em> <em>k</em>=7 FAIL). C69: covering
+                KS <em>n</em>=256 PASS, <em>n</em>=512 SING FAIL. Chronology:{' '}
                 <Link to="/projects/netlist-fhe/journal">FHE journal</Link>.
               </span>
             </li>

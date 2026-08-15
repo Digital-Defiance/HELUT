@@ -1,0 +1,15 @@
+HELUT encrypted-netlist bench · SING
+  netlist: netlist.json  module=full_adder
+  poly N=1024  LUTs=3  DFFs=0  2N=2048
+  stimuli=1 (max --vectors 1)  cpu-only=true  metal-netlist-only=false
+  paths filter: public-ms covering-b2
+  paths: public-ms@boolean + public-ms@crypto + secret@crypto
+  BK noise inject Gaussian σ=128.0 (torus; measured identity residual → B_bk)
+  LWE n=512  (CMUX count; extract→KS when n<kN=1024)
+  DynamicRotateCost mux=2099200 binary=11275 speedup≈186.2×
+
+  starting blind-rotate public-ms covering-b2  n=512
+  extract→KS     kN=1024 → n=512  (δ-lattice GLev e=0)
+  identity residual trials=1  (n=512)
+  identity B_bk    858907  (decodable true)
+HELUTToolKit/HelutBench.swift:371: Fatal error: sum mismatch blind-rotate public-ms covering-b2 tick 1: want=[0] got=[1]

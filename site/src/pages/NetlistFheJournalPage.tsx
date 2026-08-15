@@ -93,6 +93,34 @@ export function NetlistFheJournalPage() {
                 <em>k</em>=7 FAIL.
               </span>
             </li>
+            <li>
+              <span className="mono">C66</span>
+              <span>
+                Same KS covering-b2, 10-tick resetn boot: Metal Q SING PASS in 1136 s (114 s/row).
+                Idle mem. Not NOP-fetch.
+              </span>
+            </li>
+            <li>
+              <span className="mono">C67</span>
+              <span>
+                Covering KS adder ladder: <em>n</em>=128 PASS 8.6 s; <em>n</em>=256 and 512 SIGTRAP
+                after extract→KS.
+              </span>
+            </li>
+            <li>
+              <span className="mono">C68</span>
+              <span>
+                PicoRV lut6 covering NOP-fetch, 8 ticks, extract→KS <em>n</em>=64: Metal PASS 911 s,
+                fetches 0x0 then 0x4. Not 10-fetch. Not Linux.
+              </span>
+            </li>
+            <li>
+              <span className="mono">C69</span>
+              <span>
+                Covering KS <em>n</em>=256 adder PASS 17 s after identity 1-trial. <em>n</em>=512 SING
+                FAIL (sum mismatch). C67 SIGTRAP was four identity BRs, not key-switch.
+              </span>
+            </li>
           </ul>
         </div>
       </section>
@@ -135,7 +163,7 @@ export function NetlistFheJournalPage() {
               <span className="mono">PicoRV</span>
               <span>
                 Encrypted PicoRV32 covering at <em>n</em>=<em>N</em> <em>k</em>=7 is C60/C61 Q SING
-                FAIL. Extract→KS <em>n</em>=64 on that lut6 core is C65 PASS. Covering Q PASSes at
+                FAIL. Extract→KS <em>n</em>=64 is C65–C66 and C68 (NOP 2 fetches). Covering Q PASSes at
                 poly <em>N</em>=64 (C63). Noiseless Metal PicoRV at production <em>N</em> is C62
                 (374 s).
               </span>

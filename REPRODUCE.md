@@ -465,6 +465,43 @@ Expect extract→KS print, all **PASS**. Do not quote 175.7 as LWE-*n*=64 securi
 
 Expect **PASS** ~114 s (b2) / ~212 s (b1), Q SING. Native *k*. **C60**/**C61** (*n*=*N*, *k*=7) stay FAIL. Not LWE-176. Not Linux.
 
+## PicoRV lut6 covering 10-tick boot (C66)
+
+```bash
+.build/release/helut --bench picorv32_lut6_netlist.json --degree 1024 \
+  --bench-encrypted --sing --ticks 10 --reset-hold 3 \
+  --bk-noise-sigma 128 --lwe-dimension 64 --paths 'public-ms covering-b2' \
+  | tee logs/helut-encrypted-n1024-metal-sing-picorv32-lut6-covering-b2-ks-n64-boot10.log
+```
+
+Expect **PASS** ~1136 s / 10 (~114 s/row), Q SING. Idle mem. Not NOP-fetch.
+
+## Covering KS n-ladder (C67)
+
+```bash
+.build/release/helut --bench netlist.json --degree 1024 --bench-encrypted --cpu-only \
+  --sing --vectors 1 --paths 'public-ms covering-b2' --bk-noise-sigma 128 \
+  --lwe-dimension 128 \
+  | tee logs/helut-encrypted-n1024-cpu-sing-adder-covering-b2-ks-n128-sigma128.log
+```
+
+Expect *n*=128 **PASS** ~8.6 s. *n*=256/512 **SIGTRAP** after extract→KS was **C67** (identity×4). **C69** retries with 1 identity trial.
+
+## Covering KS n=256 / n=512 after identity cap (C69)
+
+Same adder command as **C67** with current `EncryptedNetlistSim` (identity trials=1 at *n*≥256). Expect *n*=256 **PASS** ~17 s; *n*=512 **SING FAIL** (sum mismatch).
+
+## PicoRV lut6 covering NOP-fetch (C68)
+
+```bash
+.build/release/helut --bench picorv32_lut6_netlist.json --degree 1024 \
+  --bench-encrypted --sing --ticks 8 --reset-hold 3 --encrypted-mem nop \
+  --bk-noise-sigma 128 --lwe-dimension 64 --paths 'public-ms covering-b2' \
+  | tee logs/helut-encrypted-n1024-metal-sing-picorv32-lut6-covering-b2-ks-n64-nop8.log
+```
+
+Expect **PASS** ~911 s / 8, FETCH `0x0,0x4`. Not 10-fetch. Not Linux.
+
 ## TensorLUT melt–freeze–snap (C44)
 
 ```bash

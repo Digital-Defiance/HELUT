@@ -267,4 +267,12 @@ covering-b2 adder and counter SING at poly $N{=}1024$. PicoRV covering remains
 $n{=}64$: Q SING PASS (b2 $114\,\mathrm{s}$, b1 $212\,\mathrm{s}$). Walk-around of
 \cid{60}/\cid{61}, not a silent close of $n{=}N$ $k{=}7$.}
 
-\growswhen{PicoRV covering at $n{=}N$; fused sequential metal-netlist; \texttt{cryptoPublicMS}.}
+\reproduced{C66}{10-tick covering boot on that core: PASS $1136\,\mathrm{s}/10$.}
+
+\reproduced{C67}{KS $n{=}128$ covering adder PASS; $n{\ge}256$ SIGTRAP.}
+
+\reproduced{C68}{NOP-fetch 8 ticks: PASS $911\,\mathrm{s}/8$, PC $0x0{\to}0x4$.}
+
+\reproduced{C69}{KS $n{=}256$ covering adder PASS after identity 1-trial; $n{=}512$ SING FAIL.}
+
+\growswhen{PicoRV \texttt{lw}; KS $n{=}512$ with $k{>}1$; $n{=}N$ native $k$; \texttt{cryptoPublicMS}.}
