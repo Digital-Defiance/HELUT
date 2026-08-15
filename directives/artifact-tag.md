@@ -3,7 +3,8 @@
 Freeze before a public tag. Not a claim — a release packing list.
 
 **Current corpus tag:** `helut-corpus-C54` (epoch 2026-08-14 / C54)  
-**Semver:** `0.1.0` (alias `helut-lib-0.1.0`) — Homebrew `brew install helut`; SPM `from: "0.1.0"`.
+**Semver:** `0.1.0` (alias `helut-lib-0.1.0`) — Homebrew `brew install helut`; SPM `from: "0.1.0"`.  
+**Sheet epoch:** 2026-08-14 / **C56** (C55 LWE-*n* map; C56 cryptoPublicMS *k*=7 SING fail).
 
 ## Must ship
 

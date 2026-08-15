@@ -67,21 +67,23 @@ export function NetlistFheJournalPage() {
               <span className="mono">C37</span>
               <span>
                 Native <em>k</em>=1 torus-scale at <em>N</em>=1024 covering-b1 σ=128 is still
-                undecodable. C52 is stride-<em>k</em>=7, not this row.
+                undecodable at <em>n</em>=1024 (C37, 8 trials). Cutting LWE <em>n</em> (C55) makes
+                identity decodable but ε stays above −64.
               </span>
             </li>
             <li>
               <span className="mono">C26</span>
               <span>
                 <code>cryptoPublicMS</code> inject at production <em>N</em> is still a graded
-                failure.
+                failure (C26). Stride-<em>k</em>=7 makes tiny <em>B</em>=1 identity-decodable but
+                Metal SING fails (C56).
               </span>
             </li>
             <li>
               <span className="mono">PicoRV</span>
               <span>
                 Encrypted PicoRV32 SING is demo <em>N</em>=8 (C45–C51). Covering noisy BK at{' '}
-                <em>N</em>=1024 is not claimed.
+                <em>N</em>=1024 is not claimed (LUT-tax from C52 × 4785 LUTs is hours per tick).
               </span>
             </li>
           </ul>

@@ -9,7 +9,7 @@ const pillars = [
         idx: 'I.1',
         title: 'Encrypted full_adder SING',
         figure: '/gallery/gallery-i1-adder-sing.png',
-        body: 'Multi-LUT Metal SING at production-shaped N=1024: boolean wavefront 10.6 s/8 (C20); crypto ℓ=2 11.38 s/8 (C21). Covering noisy BK, same N, k=7: adder C52, counter C53, toy ISA C54. Equivalence to clear is C6.',
+        body: 'Multi-LUT Metal SING at production-shaped N=1024: boolean wavefront 10.6 s/8 (C20); crypto ℓ=2 11.38 s/8 (C21, e=0 BK). Covering noisy BK, same N, k=7: adder C52, counter C53, toy ISA C54. Equivalence to clear is C6.',
         meta: 'Scripts/helut_encrypted_sing.sh · logs/helut-encrypted-n1024-metal-sing-*.log',
       },
       {
@@ -23,7 +23,7 @@ const pillars = [
         idx: 'I.3',
         title: 'Hardness + noisy-BK certificates',
         figure: '/gallery/gallery-i3-hardness.png',
-        body: 'Calibrated hardness + Sage fill-in (C23). Covering-gadget noisy BK at N≤128 (C22). Covering Track A at N=1024 σ=128 k=7 is C52–C54 (ε + SING). cryptoPublicMS inject at N=1024 is still a graded failure (C26). Native k=1 at that inject is still C37. Do not quote “176-bit secure” (H1).',
+        body: 'Calibrated hardness + Sage fill-in (C23). Covering-gadget noisy BK at N≤128 (C22). Covering Track A at N=1024 σ=128 k=7 is C52–C54 (ε + SING). cryptoPublicMS inject at N=1024 is still a graded failure (C26/C56). Native k=1 at that inject is still C37; LWE-n cut is C55 (ε still >−64). Do not quote “176-bit secure” (H1).',
         meta: '--hardness-table · --measure-bk-noise · Scripts/helut_sage_estimate.sh',
       },
     ],

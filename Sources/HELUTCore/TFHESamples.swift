@@ -32,6 +32,14 @@ package struct TFHEParams: Sendable, Equatable {
         self.delta = delta
     }
 
+    /// Independent LWE dimension `n` (classic TFHE: `n < kN` cuts CMUX count / BK noise).
+    package func withLWEDimension(_ n: Int) -> TFHEParams {
+        precondition(n > 0)
+        var copy = self
+        copy.lweDimension = n
+        return copy
+    }
+
     /// Default boolean-safe HELUT params (`k=1`, `Δ=1`, `n=N`).
     package static let booleanTrivial = TFHEParams(
         polynomialDegree: 1024,
@@ -89,9 +97,13 @@ package struct TFHESecretKey: Sendable, Equatable {
         return TFHESecretKey(params: params, polynomials: polys)
     }
 
-    /// Flattened LWE secret matching `sampleExtractLWE` layout.
+    /// Flattened LWE secret matching `sampleExtractLWE` layout, truncated to `lweDimension`.
     package var lweSecret: [UInt32] {
-        polynomials.flatMap { $0 }
+        let flat = polynomials.flatMap { $0 }
+        let n = params.lweDimension
+        precondition(n > 0 && n <= flat.count, "lweDimension \(n) exceeds kN=\(flat.count)")
+        if n == flat.count { return flat }
+        return Array(flat.prefix(n))
     }
 }
 
@@ -222,8 +234,17 @@ package func decryptGLWE(_ ciphertext: GLWECiphertext, secret: TFHESecretKey) ->
 }
 
 package func decryptLWE(_ ciphertext: LWECiphertext, secret: TFHESecretKey) -> UInt32 {
-    let s = secret.lweSecret
-    precondition(ciphertext.lweDimension == s.count)
+    let full = secret.polynomials.flatMap { $0 }
+    let s: [UInt32]
+    if ciphertext.lweDimension == full.count {
+        s = full
+    } else if ciphertext.lweDimension == secret.params.lweDimension {
+        s = Array(full.prefix(secret.params.lweDimension))
+    } else {
+        preconditionFailure(
+            "LWE dim \(ciphertext.lweDimension) matches neither kN=\(full.count) nor n=\(secret.params.lweDimension)"
+        )
+    }
     var phase = ciphertext.b
     for i in 0..<s.count {
         phase &-= ciphertext.a[i] &* s[i]

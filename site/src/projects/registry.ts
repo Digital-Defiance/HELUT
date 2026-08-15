@@ -112,7 +112,7 @@ export const projects: Project[] = [
       'Encrypted ≡ clear on full_adder (C20/C21) and covering noisy sequential ticks (C53/C54)',
       'Calibrated bits ≠ estimator Cost on every row (H1 / C23: 175.7 vs 180.2 on prod-n1024-s16)',
       'Metal persist ~0.52 s/BR at N=1024 (C17); wavefront boolean SING 10.6 s/8 (C20)',
-      'Covering public-MS at N=1024 uses stride-k wires, not “g₀=δ exact covering” (C27 still {8,128})',
+      'Covering public-MS at N=1024 uses stride-k wires, not “g₀=δ exact covering” (C27 still {8,128}); C55/C56 are n-map / cryptoPublicMS negatives, not closes',
     ],
     pages: [
       {

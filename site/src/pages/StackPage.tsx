@@ -107,7 +107,7 @@ export function StackPage() {
               <span className="mono">LIMITS</span>
               <span>
                 <strong>Not claimed:</strong> native <em>k</em>=1 torus-scale noisy BK at{' '}
-                <em>N</em>=1024 (C37); noisy <code>cryptoPublicMS</code> at that <em>N</em> (C26);
+                <em>N</em>=1024 (C37/C55); noisy <code>cryptoPublicMS</code> at that <em>N</em> (C26/C56);
                 estimator Cost on every calibration row (H1); production keys from the HELUT 175.7
                 figure; side-channel / GPU power; a P1030680 plaintext.
               </span>

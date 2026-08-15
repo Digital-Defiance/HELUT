@@ -58,11 +58,11 @@ ID & Result \emph{(continued)} \\
 \cid{34} & Track~A covering baseLog$=4$: $\varepsilon\log_2\approx-913$ ($\le 2^{-64}$) + Metal SING PASS. \\
 \cid{35} & Track~A covering baseLog$=2$: $\varepsilon\le 2^{-64}$ through inject $B{=}16$ ($\varepsilon\log_2\approx-65.4$) + Metal SING PASS. \\
 \cid{36} & Track~A covering baseLog$=1$: $\varepsilon\le 2^{-64}$ through inject $B{=}32$ ($\varepsilon\log_2\approx-139$) + Metal SING PASS; $B{=}128$ still fails. \\
-\cid{37} & Track~A Gaussian BK inject on covering-b1: $\sigma{=}24$ meets $\varepsilon\le 2^{-64}$ + Metal SING PASS; torus $\sigma{\approx}128$ still undecodable. \\
+\cid{37} & Track~A Gaussian BK inject on covering-b1: $\sigma{=}24$ meets $\varepsilon\le 2^{-64}$ + Metal SING PASS; torus $\sigma{\approx}128$ undecodable at native $k{=}1$ (\cid{55}); torus-scale close is \cid{52} ($k{=}7$). \\
 \cid{38} & Encrypted sequential DFF host-clock: 4-bit counter Metal $N{=}1024$ SING PASS ($15.88\,\mathrm{s}/4$). Not PicoRV32. \\
 \cid{39} & Encrypted 1-byte/1-round E256 frozen scramble Metal $N{=}1024$ SING PASS ($22.77\,\mathrm{s}/2$). Not live BRAM. \\
 \cid{40} & Encrypted toy NOP/ADD ISA Metal $N{=}1024$ SING PASS ($20.31\,\mathrm{s}/4$). Not PicoRV32. \\
-\cid{41} & Covering-b1 Gaussian $\sigma{=}128$ meets $\varepsilon\le 2^{-64}$ at $N\le 512$ + Metal SING; $N{=}1024$ still fail. \\
+\cid{41} & Covering-b1 Gaussian $\sigma{=}128$ meets $\varepsilon\le 2^{-64}$ at $N\le 512$ + Metal SING; native $k{=}1$ at $N{=}1024$ still fail (\cid{37}); torus-scale close is \cid{52}. \\
 \cid{42} & 4-bit CSA vs ripple: LUT2 $11\to 8$ ($-27\%$) + encrypted SING PASS. Not TensorLUT melt. \\
 \cid{43} & $k\delta$ encoding at $N{=}1024$: $k{=}4$ Metal SING PASS on covering-b1 $\sigma{=}128$; $\varepsilon$ bar not stable at 4 trials. \\
 \cid{44} & TensorLUT melt--freeze--snap on a separable Boolean interpolant (three lemmas). Not arbitrary-netlist melt. \\
@@ -76,6 +76,8 @@ ID & Result \emph{(continued)} \\
 \cid{52} & Stride-$k$ public-MS covering-b1 @ $N{=}1024$ $\sigma{=}128$ $k{=}7$: $\varepsilon\log_2\approx-170$ (8 trials) + Metal secret/public-ms SING PASS. Native $k{=}1$ still \cid{37}. \\
 \cid{53} & Sequential covering-b1 counter @ $N{=}1024$ $\sigma{=}128$ $k{=}7$: Metal secret/public-ms SING PASS. Not PicoRV. \\
 \cid{54} & Sequential covering-b1 toy ISA @ $N{=}1024$ $\sigma{=}128$ $k{=}7$: Metal secret/public-ms SING PASS. Not PicoRV. \\
+\cid{55} & Native $k{=}1$ covering-b1 $\sigma{=}128$ LWE-$n$ map @ poly $N{=}1024$: decodable at $n\le 512$ but $\varepsilon>-64$; $n{=}1024$ undecodable (\cid{37}). \\
+\cid{56} & \texttt{cryptoPublicMS} $B{=}1$ $k{=}7$: identity decodable $\varepsilon\approx-12.6$; Metal public-ms SING FAIL. Torus $\sigma{=}128$ still undecodable. \\
 \end{longtable}
 }
 
@@ -90,7 +92,7 @@ ID & Asterisk \\
 \hid{1} & \cid{23} filled JSON. Production $|\Delta|=4.5$; divergences are core-SVP vs Cost \texttt{rop}. \\
 \hid{2} & \textbf{Closed} 2026-08-12 ($Z_{2N}$ pack). Kept as history. \\
 \hid{3} & \cid{20}/\cid{21} SING bars met; serial NTT SING still loses vs persist. \\
-\hid{4} & \cid{52}--\cid{54} covering Track A $k{=}7$ $\sigma{=}128$ @ $N{=}1024$ (adder, counter, toy ISA). Native $k{=}1$ still \cid{37}; \texttt{cryptoPublicMS} still \cid{26}. \\
+\hid{4} & \cid{52}--\cid{54} covering Track A $k{=}7$ $\sigma{=}128$ @ $N{=}1024$. Native $k{=}1$ still \cid{37}/\cid{55}; \texttt{cryptoPublicMS} still \cid{26}/\cid{56}. PicoRV covering unrun at production $N$. \\
 \hid{5} & \texttt{*PublicMS} gadgets ($g_0=\delta$): on-lattice intent, not a closer of old \hid{2}. \\
 \hid{6} & TensorLUT / quarantine vs campaign: parallel research, not P1030680 PT. \\
 \hid{7} & Catalog / Regenbogen / UEBUNG: negatives graded; middle ring $\neq A$ untested; catalog parked @417, resume \texttt{--bombe-from 418}. \\

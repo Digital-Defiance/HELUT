@@ -95,18 +95,22 @@ Persist schoolbook (\cid{17}) & 0.519 & $12.2\,\mathrm{s}$ ($1.52$\,s/row) & 68\
 NTT persist (\cid{18}) serial SING & \textbf{0.433} & $15.6\,\mathrm{s}$ ($1.95$\,s/row) & 148\,MiB \\
 Wavefront-parallel (\cid{20}) & 0.420 (fused 3-prime) & \textbf{$10.6\,\mathrm{s}$} ($1.33$\,s/row) & --- \\
 Crypto $\ell=2$ SING (\cid{21}) & --- & $11.38\,\mathrm{s}$ ($1.42$\,s/row) & --- \\
-CPU SING full\_adder & --- & ${\sim}52\,\mathrm{s}$ & --- \\
+Covering-b1 $k{=}7$ adder (\cid{52}) & --- & $29.40\,\mathrm{s}/2$ public-ms & --- \\
+CPU SING full\_adder ($e{=}0$ BK) & --- & ${\sim}52\,\mathrm{s}$ & --- \\
 \bottomrule
 \end{tabular}
 \end{center}
 
 \reproduced{C20, C21}{Wavefront-parallel independent \texttt{\$lut} BRs:
 boolean SING $10.6\,\mathrm{s}/8$ beats persist-schoolbook \cid{17};
-cryptoPublicMS $\ell=2$ SING $11.38\,\mathrm{s}/8$ vs \cid{14}'s $175.6\,\mathrm{s}$.}
+noiseless cryptoPublicMS $\ell=2$ SING $11.38\,\mathrm{s}/8$ vs \cid{14}'s $175.6\,\mathrm{s}$.
+\cid{21} is $e{=}0$ BK. Noisy \texttt{cryptoPublicMS} is \cid{26}/\cid{56}.}
 
 \hedgebox{H3}{The scheduler, not a faster NTT, is what beat \cid{17} on SING.
 Serial in-tile NTT (\cid{18}) still loses boolean SING ($15.6\,\mathrm{s}$).
-Sage \hid{1} is independent of these wall-clocks.}
+Sage \hid{1} is independent of these wall-clocks.
+Do not quote $0.43\,\mathrm{s}$/BR as a PicoRV covering tick: covering-b1
+$\ell{=}32$ is a different gadget tax (\cid{52}).}
 
 \begin{exercise}[Compiler post-mortem]
 In 400 words: why did the fused megagraph never reach the GPU?
@@ -124,9 +128,10 @@ Defend a one-sentence answer that a claim-audit grader will accept.
 
 Phase~1 makes encoding \emph{finish}.
 Phase~2 makes encoding \emph{irrelevant}.
-Together they are a SoftBus-native torus compiler: staged IR $+$ ring kernels
+Together they are a graph-native torus compiler: staged IR $+$ ring kernels
 $+$ cached executables---instead of a schoolbook megagraph hoping the GPU
 will eventually appear.
+(SoftBus is Pillar~III's cipher contract, not this Metal lowering.)
 
 \growswhen{NTT EP inside the crypto $\ell=2$ tile (C21's SING log still
 shows $W=64$ schoolbook tiles); then \hid{3} is only Sage \hid{1}.}

@@ -94,7 +94,7 @@ The log is graded as a cryptographic bundle:
         until the estimator row is honest.
   \item \textbf{Depth:} noisy bootstrap-key residuals are modeled or measured;
         default Track~A throughput SING may still use $e{=}0$ BK (\hid{4});
-        covering noisy SING receipts are separate claims (\cid{28}, \cid{33}--\cid{37}, \cid{41}, \cid{43}).
+        covering noisy SING receipts are separate claims (\cid{28}, \cid{33}--\cid{37}, \cid{41}, \cid{43}, \cid{52}--\cid{54}).
 \end{itemize}
 
 Brutal engineering rule: if SING fails, you do not get to discuss milliseconds.
@@ -229,8 +229,10 @@ In scope for the \emph{datapath} & Exact modular eval; shape $[B,N]$; DFF
 routing; Yosys coverage for PicoRV32. \\
 In scope for the \emph{FHE claim} & LWE/GLWE $+$ BK; noise / $\varepsilon$ /
 hardness / noisy-BK \emph{certificates} as implemented. \\
-Out of scope unless measured & Side channels; quantum; estimator-backed
-production keys (\hid{1}); noisy BK on the $N=1024$ Metal SING path (\hid{4}). \\
+Out of scope unless measured & Side channels; quantum; estimator Cost as
+``secure bits'' on every row (\hid{1}); native $k{=}1$ / \texttt{cryptoPublicMS}
+noisy BK and PicoRV covering at $N{=}1024$ (\hid{4} remainder; Grade~B is
+\cid{52}--\cid{54}). \\
 \bottomrule
 \end{tabular}
 \end{center}

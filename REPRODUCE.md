@@ -332,6 +332,31 @@ Expect Metal secret + public-ms **PASS** (~110 s / ~68 s per 2 rows). Same e
 
 Expect Metal secret + public-ms **PASS** (~194 s / ~104 s per 2 rows). Not PicoRV.
 
+## Native k=1 LWE-n map at N=1024 covering-b1 σ=128 (C55)
+
+```bash
+.build/release/helut-bench --measure-bk-noise --degree 1024 --trials 8 \
+  --bk-noise-sigma 128 --covering-base-log 1 --lwe-dimension 256 \
+  | tee logs/helut-noisy-bk-covering-b1-gauss-sigma128-n1024-lwe256-t8.log
+# omit --lwe-dimension for n=N=1024 (C37)
+```
+
+Expect: *n*=64 ε≈−36.6; *n*=256 ε≈−10.9; *n*=512 ε≈−6.5; *n*=1024 undecodable. None ≤−64.
+
+## cryptoPublicMS + k=7 tiny inject (C56)
+
+```bash
+.build/release/helut-bench --measure-bk-noise --degree 1024 --trials 4 \
+  --bk-noise 1 --boolean-scale-mul 7 \
+  | tee logs/helut-noisy-bk-cryptoPublicMS-n1024-B1-k7-t4.log
+.build/release/helut-bench --bench netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 2 --bk-noise 1 --boolean-scale-mul 7 \
+  --paths 'blind-rotate-metal public-ms crypto' \
+  | tee logs/helut-encrypted-n1024-metal-sing-cryptoPublicMS-B1-k7.log
+```
+
+Expect: identity decodable ε≈−12.6; Metal SING **FAIL**. Torus σ=128 still undecodable.
+
 ## TensorLUT melt–freeze–snap (C44)
 
 ```bash

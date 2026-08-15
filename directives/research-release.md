@@ -55,7 +55,7 @@ Paper rule: every abstract sentence maps to a claim ID with all five cells ≥ *
 5b. **Pillar III SoftBus contract** — **Theorem 2** in `directives/enigma256-theorem.md`; `Enigma256Formal.certificate()` (**C24**)
 6. ~~Related-work matrix~~ (paper); ablations via `--cpu-only` / refresh modes
 7. **Application gallery** — nine slots in `directives/application-gallery.md`; site figures in `site/public/gallery/`; parameter cookbook at `directives/parameter-cookbook.md`
-8. **Artifact tag** — checklist `directives/artifact-tag.md` (`helut-corpus-C54`; CLI/SPM semver **0.1.0**)
+8. **Artifact tag** — checklist `directives/artifact-tag.md` (`helut-corpus-C54`; CLI/SPM semver **0.1.0**; sheet **C56**)
 
 Corpus push order: [`../roadmap-overall.md`](../roadmap-overall.md) Phase 0.
 

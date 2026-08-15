@@ -9,7 +9,8 @@ place-and-route, FPGA fabrics, high-level synthesis.
 They already teach \emph{applied cryptography}: AES, RSA, lattices, sometimes
 a lecture on fully homomorphic encryption.
 They almost never teach what happens when the reconfigurable fabric \emph{is}
-a machine-learning graph API, the bitstream is a Yosys netlist, and the values
+a machine-learning graph API, the configuration is a Yosys netlist (not an FPGA
+bitstream---see Chapter~\ref{ch:reconf}), and the values
 on the wires are torus samples that must remain encrypted while a host clock
 ticks flip-flops.
 
@@ -52,12 +53,21 @@ Where the laboratory is thin, the page says so.
 
 \paragraph{What this edition is not.}
 It is not a claim that HELUT invented TFHE~\cite{chillotti2020tfhe,ducas2015fhew}.
-It is not a production key-size manual until a lattice estimator fills the
-pending table (\hid{1}).
+It is not a production key-size manual.
+Sage filled the estimator JSON (\cid{23}); \hid{1} remains because four of eight
+calibration anchors disagree with Cost \texttt{rop} by more than 16 bits, and
+because ``176-bit secure'' is a forbidden exam answer.
 It is not a decrypt of U-534 / P1030680.
 It is not a side-channel paper.
 Those sentences are printed again in Chapter~\ref{ch:living} because students
 will forget them the week before the final.
+
+\paragraph{This edition is a draft.}
+Edition~\corpusedition{} is not a finished book. Chapters will be wrong in
+small ways until someone diffs them against the claim sheet, line by line.
+If a box and the sheet disagree, the sheet wins; file an issue or patch the
+\texttt{.tex}. Instructors: treat mid-semester epoch bumps as addenda, not as
+proof the PDF was already perfect.
 
 \paragraph{Who wrote it.}
 The HELUT project at Digital Defiance.

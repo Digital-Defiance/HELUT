@@ -85,9 +85,11 @@ Covering gadget only. $\ell=1$ \texttt{booleanPublicMS} cannot carry BK noise.
 
 \section{Product-shaped $N{=}1024$ residual (\cid{26})}
 
-Graded negative for production noisy BK (H4). Expect undecodable inject
+Graded negative for \texttt{cryptoPublicMS} at $N{=}1024$ (\hid{4} remainder;
+Grade~B covering Track~A is \cid{52}--\cid{54}). Expect undecodable inject
 $B{=}64$; $B{=}4$ on \texttt{.crypto} may pass $\infty$-norm with
 $\varepsilon\log_2\approx -1$ (not $-64$).
+\cid{56}: $k{=}7$ does not make Metal public-ms SING pass.
 
 \begin{lstlisting}
 .build/release/helut --measure-bk-noise --degree 1024 \
@@ -233,6 +235,31 @@ Same encoding as \cid{52}. Expect Metal secret + public-ms PASS. Not PicoRV.
 \end{lstlisting}
 
 Expect Metal secret + public-ms PASS. Not PicoRV.
+
+\section{Native $k{=}1$ LWE-$n$ map (\cid{55})}
+
+\begin{lstlisting}
+.build/release/helut --measure-bk-noise --degree 1024 --trials 8 \
+  --bk-noise-sigma 128 --covering-base-log 1 --lwe-dimension 256
+\end{lstlisting}
+
+Omit \texttt{--lwe-dimension} for $n{=}N{=}1024$ (\cid{37}). Expect
+decodable $\varepsilon>-64$ at $n\le 512$; undecodable at $n{=}1024$.
+None $\le -64$.
+
+\section{\texttt{cryptoPublicMS} plus $k{=}7$ (\cid{56})}
+
+\begin{lstlisting}
+.build/release/helut --measure-bk-noise --degree 1024 --trials 4 \
+  --bk-noise 1 --boolean-scale-mul 7
+.build/release/helut --bench netlist.json --degree 1024 \
+  --bench-encrypted --sing --vectors 2 --bk-noise 1 \
+  --paths 'blind-rotate-metal public-ms crypto' \
+  --boolean-scale-mul 7
+\end{lstlisting}
+
+Expect identity decodable at $B{=}1$ ($\varepsilon\approx-12.6$); Metal
+public-ms SING FAIL. Torus $\sigma{=}128$ still undecodable.
 
 \section{Track B Metal SING with noisy BK (\cid{28})}
 

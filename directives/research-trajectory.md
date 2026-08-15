@@ -14,7 +14,7 @@ Living textbook (course surface on this trajectory): [`../textbook/`](../textboo
 | **H2** full_adder @ *N*≥256 | ~~Multi-LUT encrypted correctness~~ **Closed** | Z_{2N} pack / `rotationPower` fix; SING PASS @ 256/512/1024 |
 | **H1** Sage lattice-estimator | Honest classical bits | **C23** filled. Production Δ=4.5. Divergences = core-SVP vs Cost `rop`, not silent bugs. Optional retune / quote estimator-only on Δ>16 rows |
 | **H3** Metal BR @ large *N* | Real wall-clock / memory envelope | **C20**/**C21** SING. NTT inside crypto ℓ=2 at *N*=1024 (incomplete public-MS gadget) |
-| **H4** Noisy BK | Production depth story | **C52**–**C54** covering Track A *k*=7 σ=128 @ *N*=1024 (adder, counter, toy ISA). Remainder: native *k*=1 (**C37**), `cryptoPublicMS` (**C26**); PicoRV covering |
+| **H4** Noisy BK | Production depth story | **C52**–**C54** covering Track A *k*=7 σ=128 @ *N*=1024 (adder, counter, toy ISA). Remainder: native *k*=1 (**C37**/**C55** n-map), `cryptoPublicMS` (**C26**/**C56** SING fail); PicoRV covering (LUT-tax) |
 | **Packaging** | Library + binaries + Apps/ | [`packaging-roadmap.md`](packaging-roadmap.md) Phase 0.5 — inventory → SPM split → named binaries |
 | Campaign catalog | Exhaust Boolean coverage | Resume `--bombe-from 418`; middle ring ≠ A |
 | Garble / quarantine | Ciphertext may be wrong letters | Soft-band escalate grades; sister-message lessons |

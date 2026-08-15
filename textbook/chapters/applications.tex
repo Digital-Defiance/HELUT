@@ -11,14 +11,16 @@ Canonical nine-slot card: \corpus{directives/application-gallery.md}.
 
 \begin{enumerate}
   \item \textbf{Encrypted \texttt{full\_adder} SING.}
-        Multi-LUT correctness at production-shaped $N$ (\cid{6}, \cid{20},
-        \cid{21}).
+        Multi-LUT correctness at production-shaped $N$ (\cid{6}, \cid{20};
+        \cid{21} is $e{=}0$ BK). Covering noisy adder is \cid{52}.
   \item \textbf{Encrypted tree / regex SING.}
         Compiler is not adder-specialized (\cid{6}, demo $N$).
   \item \textbf{Hardness $+$ noisy-BK certificates.}
         Estimator fill-in and covering-gadget residuals (\cid{5}, \cid{22},
-        \cid{23}). Product-shaped $N{=}1024$ inject is a graded failure
-        (\cid{26}); Metal SING still noiseless BK (\hid{4}).
+        \cid{23}). Covering Track~A at $N{=}1024$, $\sigma{=}128$, $k{=}7$
+        is \cid{52}--\cid{54}. Product-shaped \texttt{cryptoPublicMS} inject
+        remains a graded failure (\cid{26}, \cid{56}); native $k{=}1$ remains
+        \cid{37}/\cid{55} (\hid{4} remainder).
   \item \textbf{Encrypted sequential.}
         Counter (\cid{38}), toy \texttt{NOP}/\texttt{ADD} (\cid{40}),
         PicoRV32 \texttt{addi}+\texttt{sw}+\texttt{lw} at demo $N{=}8$
@@ -80,5 +82,6 @@ If you cannot name two runnable instances, it is not ready for the gallery
 lecture.
 \end{exercise}
 
-\growswhen{Figures for the site gallery; an encrypted tree/regex Metal SING
-table at production $N$; any new application that earns a \cid{} row.}
+\growswhen{An encrypted tree/regex Metal SING table at production $N$;
+PicoRV covering at production $N$; any new application that earns a \cid{}
+row. Site gallery figures already exist under \texttt{site/public/gallery/}.}

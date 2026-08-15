@@ -83,8 +83,8 @@ export function HomePage() {
             <p style={{ marginTop: '1rem' }}>
               Honest limits: calibrated hardness is not lattice-estimator Cost on every row (H1 /
               C23: prod-n1024-s16 HELUT 175.7 vs Sage 180.2). Covering Track A noisy BK at{' '}
-              <em>N</em>=1024 is C52–C54 (<em>k</em>=7); native <em>k</em>=1 and{' '}
-              <code>cryptoPublicMS</code> remain graded negatives. Campaign fitness is
+              <em>N</em>=1024 is C52–C54 (<em>k</em>=7); native <em>k</em>=1 (C37/C55) and{' '}
+              <code>cryptoPublicMS</code> (C26/C56) remain graded negatives. Campaign fitness is
               Welchman/cleartext—not FHE tick rate. P1030680 is not decrypted.
             </p>
           </div>

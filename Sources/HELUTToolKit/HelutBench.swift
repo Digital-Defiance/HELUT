@@ -179,6 +179,7 @@ private func runEncryptedNetlistBench() {
     let resetHold = intFlag("--reset-hold", allowZero: true)
     let encryptedMem = stringFlag("--encrypted-mem")
     let booleanScaleMul = intFlag("--boolean-scale-mul") ?? 1
+    let lweDimension = intFlag("--lwe-dimension")
     let pathFilter = stringFlag("--paths") // comma list substring match; nil = all
     let bkNoise: TFHENoiseParams = {
         if let sigma = doubleFlag("--bk-noise-sigma"), sigma > 0 {
@@ -256,6 +257,9 @@ private func runEncryptedNetlistBench() {
     if booleanScaleMul > 1 {
         print("  boolean scale kδ  k=\(booleanScaleMul)  (test-poly stride \(booleanScaleMul); public-MS native δ)")
     }
+    if let lweDimension {
+        print("  LWE n=\(lweDimension)  (CMUX count; default n=kN=\(degree))")
+    }
     if binCost >= 0 {
         print("  DynamicRotateCost mux=\(muxCost) binary=\(binCost) speedup≈\(String(format: "%.1f", Double(muxCost) / Double(max(binCost, 1))))×")
     }
@@ -315,7 +319,7 @@ private func runEncryptedNetlistBench() {
 
     func runAll(
         label: String,
-        params: GGSWParams,
+        params raw: GGSWParams,
         backend: EncryptedLUTBackend,
         wireRefresh: EncryptedWireRefresh,
         seed: UInt32,
@@ -323,7 +327,8 @@ private func runEncryptedNetlistBench() {
         queue: MTLCommandQueue?
     ) throws {
         guard wantPath(label) else { return }
-        print("  starting \(label)")
+        let params = lweDimension.map { raw.withLWEDimension($0) } ?? raw
+        print("  starting \(label)\(lweDimension.map { "  n=\($0)" } ?? "")")
         fflush(stdout)
         clear.resetState()
         let secret = TFHESecretKey.random(params: params.tfhe, seed: seed)
@@ -1364,6 +1369,7 @@ func runNoisyBKMeasure() {
     }()
     let coveringSweep = CommandLine.arguments.contains("--covering-sweep")
     let booleanScaleMul = intFlag("--boolean-scale-mul") ?? 1
+    let lweDimension = intFlag("--lwe-dimension")
     let injectLabel: String
     if injectNoise.usesGaussian {
         injectLabel = String(format: "σ=%.1f", injectNoise.gaussianSigma)
@@ -1373,7 +1379,8 @@ func runNoisyBKMeasure() {
     print("HELUT noisy-BK identity residual (H4)")
     print("  N=\(degree)  trials=\(trials)  inject ∈ {0, \(injectLabel)}"
         + (coveringSweep ? "  covering-sweep=yes" : "")
-        + (booleanScaleMul > 1 ? "  kδ=\(booleanScaleMul)" : ""))
+        + (booleanScaleMul > 1 ? "  kδ=\(booleanScaleMul)" : "")
+        + (lweDimension.map { "  n=\($0)" } ?? ""))
     print("")
     var rows: [TFHENoisyBKMeasurement] = []
     var gadgets: [(String, GGSWParams)] = [
@@ -1391,7 +1398,8 @@ func runNoisyBKMeasure() {
     if degree <= 16 {
         print("  note: booleanPublicMS (ℓ=1) omitted — incomplete gadget; BK noise mis-decomposes")
     }
-    for (label, params) in gadgets {
+    for (label, raw) in gadgets {
+        let params = lweDimension.map { raw.withLWEDimension($0) } ?? raw
         let secret = TFHESecretKey.random(params: params.tfhe, seed: 0xB10C)
         let modes: [TFHENoiseParams] = [.none, injectNoise]
         for noise in modes {

@@ -83,7 +83,10 @@ package struct GGSWParams: Sendable, Equatable {
         )
     }
 
-    /// Gadget constants g_i = 2^{32 - (i+1)·baseLog}.
+    /// Cut blind-rotate CMUX count (`n` LWE mask bits). Does not change `N` or the gadget.
+    package func withLWEDimension(_ n: Int) -> GGSWParams {
+        GGSWParams(tfhe: tfhe.withLWEDimension(n), baseLog: baseLog, levelCount: levelCount)
+    }
     package var gadget: [UInt32] {
         (0..<levelCount).map { i in
             let shift = 32 - (i + 1) * baseLog
@@ -658,14 +661,14 @@ package func modulusSwitchLWE(_ lwe: LWECiphertext, twoN: Int) -> LWECiphertext 
 }
 
 /// Pack boolean LWE bits into one address ciphertext: `Σ 2^i · ct_i` (mod `2N`).
-/// Assumes rotation-native inputs with `lweDimension == N` and `twoN == 2N`.
-package func packLWEBits(_ bits: [LWECiphertext]) -> LWECiphertext {
+/// `twoN` is the **polynomial** torus `2N` (`N = deg`), not `2·n` when `n < N`.
+package func packLWEBits(_ bits: [LWECiphertext], twoN: Int? = nil) -> LWECiphertext {
     precondition(!bits.isEmpty)
-    let n = bits[0].lweDimension
-    precondition(bits.allSatisfy { $0.lweDimension == n })
-    let twoN = 2 * n
-    precondition(twoN > 1 && twoN.nonzeroBitCount == 1)
-    let mod = UInt32(twoN)
+    let dim = bits[0].lweDimension
+    precondition(bits.allSatisfy { $0.lweDimension == dim })
+    let ring = twoN ?? (2 * dim)
+    precondition(ring > 1 && ring.nonzeroBitCount == 1)
+    let mod = UInt32(ring)
     func reduce(_ ct: LWECiphertext) -> LWECiphertext {
         LWECiphertext(a: ct.a.map { $0 % mod }, b: ct.b % mod)
     }
@@ -724,7 +727,7 @@ package func evaluateLUTBlindRotate(
         degree: n,
         scale: δ
     )
-    let packed = packLWEBits(inputs)
+    let packed = packLWEBits(inputs, twoN: 2 * n)
     let acc = blindRotate(
         testPolynomial: testPoly,
         lwe: packed,

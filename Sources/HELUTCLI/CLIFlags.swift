@@ -58,6 +58,7 @@ public let positionalArgs: [String] = {
         "--degree", "--warmup", "--reset-hold", "--encoding", "--lut-backend",
         "--vectors", "--paths", "--trials", "--bk-noise",
         "--bk-noise-sigma", "--covering-base-log", "--boolean-scale-mul",
+        "--lwe-dimension",
         "--encrypted-mem", "--metal-br-tile",
         "--hybrid-pop", "--hybrid-gens", "--hybrid-greek-samples",
         "--exhaust-top", "--exhaust-plugs", "--selftest-len",

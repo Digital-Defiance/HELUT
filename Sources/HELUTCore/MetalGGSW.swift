@@ -373,7 +373,7 @@ package enum MetalGGSW {
             degree: n,
             scale: δ
         )
-        let packed = packLWEBits(inputs)
+        let packed = packLWEBits(inputs, twoN: 2 * n)
         let acc = try blindRotate(
             testPolynomial: testPoly,
             lwe: packed,

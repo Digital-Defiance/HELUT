@@ -24,7 +24,9 @@ genetic mutation or Ollama.
 \section{Self-modifying encrypted binaries}
 
 \frontierbox{A PicoRV32 that already ticks on an \texttt{MPSGraph} under
-oracle encodings is not a dark VM.
+oracle encodings (\cid{1}) is not a dark VM.
+Encrypted PicoRV is demo $N{=}8$ at $4.0$ bits (\cid{45}--\cid{51}), not
+production $N$.
 The avenue is a binary that rewrites its own instructions while remaining
 FHE-encrypted, so the host sees tensor multiplies and cannot inspect the
 guest.}

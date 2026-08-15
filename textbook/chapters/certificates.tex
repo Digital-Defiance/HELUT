@@ -15,7 +15,7 @@ Certificate & Role \\
 \texttt{TFHEAsymptoticSecurityCertificate} & Gaussian ingest $\varepsilon\le 2^{-64}$. \\
 \texttt{TFHELWEHardnessCertificate} & Decision-LWE $\to$ IND-CPA $+$ bit estimate. \\
 \texttt{TFHELWECalibration} & Anchor table for the estimator. \\
-\texttt{TFHENoisyBKCertificate} / \texttt{TFHENoisyBKMeasurement} & Depth under $B_{\mathrm{bk}}$; identity residual $\hat\sigma$ (\cid{22}). \\
+\texttt{TFHENoisyBKCertificate} / \texttt{TFHENoisyBKMeasurement} & Depth under $B_{\mathrm{bk}}$; identity residual $\hat\sigma$ (\cid{22}; covering Grade~B \cid{52}). \\
 \texttt{TFHELWEEstimatorProtocol} & External lattice-estimator merge. \\
 \bottomrule
 \end{tabular}
@@ -40,7 +40,8 @@ A passing encrypted tick is then read as a bundle:
   \item Depth: noisy-BK model; \cid{22} measured at covering gadget;
         \cid{26} graded fail at \texttt{cryptoPublicMS} $N{=}1024$;
         covering Track~A torus-scale is \cid{52}--\cid{54};
-        native $k{=}1$ remains \cid{37}.
+        native $k{=}1$ remains \cid{37}/\cid{55};
+        \texttt{cryptoPublicMS} noisy SING remains \cid{26}/\cid{56}.
 \end{itemize}
 
 Students who report only milliseconds have not completed the lab.
@@ -53,7 +54,8 @@ still $\infty$-norm decodable, Gaussian union $\approx 2^{-23.5}$ not $2^{-64}$.
 \reproduced{C26}{Product-shaped $N{=}1024$ identity residual: inject $B{=}64$
 undecodable on \texttt{cryptoPublicMS}/\texttt{crypto}; inject $B{=}4$ on
 \texttt{.crypto} may be $\infty$-norm OK with $\varepsilon\log_2\approx -1$
-(not $-64$). Receipt: \corpus{logs/helut-noisy-bk-measure-n1024.log}.}
+(not $-64$). \cid{56}: stride-$k{=}7$ does not turn this into Metal SING.
+Receipt: \corpus{logs/helut-noisy-bk-measure-n1024.log}.}
 
 \reproduced{C28}{Track~B: Metal \texttt{cryptoPublicMS} full\_adder SING at
 covering $N{=}128$ with inject $B{=}64$ PASSes ($B_{\mathrm{bk}}\approx 1.62\times 10^6$
@@ -115,6 +117,17 @@ Receipts: \corpus{logs/helut-noisy-bk-covering-b1-gauss-sigma128-n1024-k7-stride
 \corpus{logs/helut-encrypted-n1024-metal-sing-covering-b1-gauss-sigma128-k7-stride.log}.
 Native $k{=}1$ remains \cid{37}; \texttt{cryptoPublicMS} remains \cid{26}.}
 
+\reproduced{C55}{Native $k{=}1$ covering-b1 $\sigma{=}128$ at polynomial $N{=}1024$:
+cutting LWE $n$ (CMUX count) makes the identity residual decodable at $n\le 512$,
+but $\varepsilon\log_2$ is $-36.6$ ($n{=}64$), $-10.9$ ($n{=}256$), $-6.5$ ($n{=}512$)
+--- none $\le -64$. Default $n{=}N{=}1024$ stays undecodable (\cid{37}, 8 trials).
+Not a hardness-preserving close of native spacing.}
+
+\reproduced{C56}{\texttt{cryptoPublicMS} plus stride-$k{=}7$ at inject $B{=}1$:
+identity residual becomes decodable ($\varepsilon\log_2\approx -12.6$), but Metal
+public-ms full\_adder SING fails (sum mismatch). Torus $\sigma{=}128$ remains
+undecodable. Do not quote $k\delta$ as a \texttt{cryptoPublicMS} noisy-BK close.}
+
 \section{Calibration is not estimation}
 
 \begin{center}
@@ -159,8 +172,10 @@ They need the five cells:
 
 \begin{exercise}
 \cid{52} closed covering Track~A noisy BK at $N{=}1024$ ($\sigma{=}128$, $k{=}7$).
-Which two remainders of \hid{4} are still graded negatives? Point at
-\cid{37} and \cid{26}.
+Name the two remainders of \hid{4} that are still graded negatives, and the
+two follow-up rows that mapped them without closing $\varepsilon$ or SING
+(\cid{37}/\cid{55}, \cid{26}/\cid{56}). PicoRV covering at production $N$ is
+the third remainder; it is a LUT-tax, not a missing SING log at demo $N$.
 \end{exercise}
 
 \section{Honesty as an engineering interface}

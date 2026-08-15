@@ -79,7 +79,9 @@ PicoRV32 ticks.
 The boolean oracle path \emph{does} clock PicoRV32 on ciphertext-\emph{shaped}
 vectors (\cid{1}).
 The FHE path \emph{does} fetch NOPs on encrypted PicoRV32 at demo $N{=}8$
-(\cid{47}): the PC walks $0,4,\ldots$, with decrypted $Q$ matching cleartext.
+(\cid{47} CPU, \cid{51} Metal): the PC walks, decrypted $Q$ matches cleartext,
+and calibrated hardness is $4.0$ bits---not the production $175.7$ row.
+Covering noisy BK at $N{=}1024$ on that core is not claimed.
 Chapter~\ref{ch:certs} exists so that confusion is a grading event rather than
 a press cycle.
 
@@ -119,6 +121,9 @@ TensorLUT (Pillar~II) & -- & Yosys INIT & -- & yes \\
 \end{center}
 
 This is a \emph{scope} matrix, not a throughput bake-off~\cite{helut-paper}.
+The encrypted-path ``yes'' is GGSW \texttt{\$lut} FHE as certified
+(\cid{4}--\cid{6}, covering \cid{52}--\cid{54}); it is not PicoRV covering
+at production $N$.
 Concrete is a production TFHE compiler; HELUT is a netlist-clocked tensor
 fabric with an FHE path.
 Students comparing ``ms/gate'' across those rows without naming encoding,

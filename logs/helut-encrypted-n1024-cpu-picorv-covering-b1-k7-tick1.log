@@ -1,0 +1,14 @@
+HELUT encrypted-netlist bench · SING
+  netlist: picorv32_netlist.json  module=picorv32
+  poly N=1024  LUTs=4785  DFFs=1565  sequential  2N=2048
+  stimuli=1 (max --vectors 1)  cpu-only=true  metal-netlist-only=false
+  scripted boot: ticks=1  reset-hold=0 (resetn=0 then 1; other inputs 0 including clk)
+  paths filter: covering-b1
+  paths: public-ms@boolean + public-ms@crypto + secret@crypto
+  BK noise inject Gaussian σ=128.0 (torus; measured identity residual → B_bk)
+  boolean scale kδ  k=7  (test-poly stride 7; public-MS native δ)
+  DynamicRotateCost mux=2099200 binary=11275 speedup≈186.2×
+
+ENCRYPTED EQUIV (metal)
+  result          SKIP (--cpu-only)
+

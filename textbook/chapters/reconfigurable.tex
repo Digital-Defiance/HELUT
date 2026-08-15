@@ -63,8 +63,10 @@ onto a graph API, not \emph{scalar} program onto PBS.
 \section{Worked lowering: a half-adder}
 
 A half-adder is two gates: $\mathrm{sum}=A\oplus B$, $\mathrm{carry}=A\land B$.
-Under additive torus encoding, XOR is a vector add (free).
+Under \emph{additive torus / mock} encoding, XOR is a vector add (free).
 AND is a LUT (or a PBS).
+On the encrypted GGSW path, both gates are blind-rotates. Do not lecture
+``XOR is free in FHE'' from this paragraph.
 
 \begin{example}[Half-adder as a graph]
 Yosys emits (typically) one \texttt{\$lut} for the AND and uses an add/xor
@@ -81,7 +83,9 @@ Synthesize a 1-bit full adder with Yosys (\texttt{abc -lut 2}) and count
 \texttt{\$lut} versus \texttt{\$\_DFF*} cells.
 Then argue, in four sentences, why the encrypted SING of that netlist is a
 better first FHE lab than PicoRV32. (PicoRV32 is \cid{1} on the \emph{oracle}
-path; the encrypted path's multi-LUT workhorse is the adder, \cid{6}.)
+path and \cid{45}--\cid{51} on encrypted demo $N{=}8$ at $4.0$ bits; the
+encrypted path's production-$N$ multi-LUT workhorse is the adder, \cid{6}
+and \cid{20}; covering noisy adder at the same $N$ is \cid{52}.)
 \end{exercise}
 
 \section{Batch is a first-class capacity knob}
@@ -111,7 +115,7 @@ $N=1024$ becomes memory-bound.
 
 A Metal graph executable is late-bound, cached, and device-specific.
 It is tempting to call it a bitstream.
-We do not, yet.
+We do not, in this edition.
 A bitstream has a documented configuration memory; an \texttt{MPSGraphExecutable}
 has an Apple runtime.
 The analogy is useful in lecture and false on an exam.

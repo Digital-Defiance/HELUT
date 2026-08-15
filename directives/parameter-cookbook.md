@@ -17,7 +17,7 @@ Track A does **not** need noisy BK to be a valid FHE datapath claim (noiseless B
 
 **Track B receipt (**C28**):** Metal `cryptoPublicMS` full_adder SING @ *N*=128, `--bk-noise 64`, PASS · *B*<sub>bk</sub>≈1.62×10⁶ decodable · `logs/helut-encrypted-n128-metal-sing-crypto-noisy.log`.
 
-**C52** closes **H4** Grade B (covering Track A): *N*=1024 covering-b1, torus σ=128, *k*=7 stride-*k* test poly + native-*δ* public-MS. εlog2≈−170 (8 trials) and Metal SING PASS (secret + public-ms). **C53**/**C54** are the same setting on a host-clocked counter and toy ISA. Native *k*=1 remains **C37**. `cryptoPublicMS` remains **C26**.
+**C52** closes **H4** Grade B (covering Track A): *N*=1024 covering-b1, torus σ=128, *k*=7 stride-*k* test poly + native-*δ* public-MS. εlog2≈−170 (8 trials) and Metal SING PASS (secret + public-ms). **C53**/**C54** are the same setting on a host-clocked counter and toy ISA. Native *k*=1 remains **C37** (**C55**: cutting LWE *n* makes identity decodable but ε still >−64). `cryptoPublicMS` remains **C26** (**C56**: *k*=7 + *B*=1 identity-decodable, Metal SING FAIL).
 
 **C34:** covering `baseLog=4` @ *N*=1024 inject *B*=1 → σ̂≈2.95×10⁴, asymptotic εlog2≈−913; Metal SING PASS.
 

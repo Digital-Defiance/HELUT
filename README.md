@@ -185,7 +185,6 @@ PRD*.md / phase-*.md   Design progression
 - **Hardness:** Decision-LWE binding + ε-certs exist. Calibrated bits ≠ lattice-estimator Cost `rop` on every row (**H1**, **C23**). Trivial Metal graphs are not FHE.
 - **Enigma host attack:** real M4 decrypt / crib-drag / stecker / campaign ladder. **P1030680 is not decrypted.** Catalog rings parked at originalIndex 417 (resume `--bombe-from 418`). Campaign fitness is cleartext Metal, not encrypted ms/row.
 - **CLI:** `--bench` clocks netlists; campaign tools are Enigma-first. Homebrew: `brew install helut` (semver **0.1.0**); `--HEAD` for tip of `main`.
-- **Why this is public:** [`OPPENHEIMER.md`](OPPENHEIMER.md) (author's note — not a **C** row).
 - **How this was built:** [`AI_DISCLOSURE.md`](AI_DISCLOSURE.md) (architect vs engine — not a **C** row).
 
 ## License
