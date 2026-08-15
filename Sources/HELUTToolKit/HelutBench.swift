@@ -258,7 +258,7 @@ private func runEncryptedNetlistBench() {
         print("  boolean scale kδ  k=\(booleanScaleMul)  (test-poly stride \(booleanScaleMul); public-MS native δ)")
     }
     if let lweDimension {
-        print("  LWE n=\(lweDimension)  (CMUX count; default n=kN=\(degree))")
+        print("  LWE n=\(lweDimension)  (CMUX count; extract→KS when n<kN=\(degree))")
     }
     if binCost >= 0 {
         print("  DynamicRotateCost mux=\(muxCost) binary=\(binCost) speedup≈\(String(format: "%.1f", Double(muxCost) / Double(max(binCost, 1))))×")

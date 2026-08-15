@@ -138,6 +138,8 @@ package struct KeySwitchKey: Sendable {
     /// `entries[i][level]` encrypts `s_in[i] · g_level` under `s_out` (`e = 0`).
     package var entries: [[LWECiphertext]]
     package var isIdentity: Bool
+    /// `1` = 32-bit torus GLev. `δ` = rotation-native extract (decompose `a/δ` in `Z_{2N}`).
+    package var inputStride: UInt32
 
     package init(
         inputDimension: Int,
@@ -145,7 +147,8 @@ package struct KeySwitchKey: Sendable {
         baseLog: Int,
         levelCount: Int,
         entries: [[LWECiphertext]],
-        isIdentity: Bool
+        isIdentity: Bool,
+        inputStride: UInt32 = 1
     ) {
         self.inputDimension = inputDimension
         self.outputDimension = outputDimension
@@ -153,6 +156,8 @@ package struct KeySwitchKey: Sendable {
         self.levelCount = levelCount
         self.entries = entries
         self.isIdentity = isIdentity
+        self.inputStride = inputStride
+        precondition(inputStride >= 1)
     }
 
     package static func trivialIdentity(dimension: Int) -> KeySwitchKey {
@@ -201,6 +206,81 @@ package func makeKeySwitchKey(
         entries: entries,
         isIdentity: false
     )
+}
+
+/// KSK from sample-extract (`kN`) down to the LWE secret used for the next MS/BR.
+/// Identity when `n = kN` (today's default). Real GLev (`e = 0`) when `--lwe-dimension n < N`.
+package func extractToLWEKeySwitchKey(
+    secret: TFHESecretKey,
+    rng: inout LCG32
+) -> KeySwitchKey {
+    let from = secret.polynomials.flatMap { $0 }
+    let to = secret.lweSecret
+    if from.count == to.count {
+        return .trivialIdentity(dimension: from.count)
+    }
+    return makeRotationNativeKeySwitchKey(
+        from: from,
+        to: to,
+        polynomialDegree: secret.params.polynomialDegree,
+        rng: &rng
+    )
+}
+
+/// GLev on the `δ`-lattice: digits of `a/δ ∈ Z_{2N}` so public-MS after KS stays exact.
+package func makeRotationNativeKeySwitchKey(
+    from fromSecret: [UInt32],
+    to toSecret: [UInt32],
+    polynomialDegree n: Int,
+    rng: inout LCG32
+) -> KeySwitchKey {
+    precondition(fromSecret.allSatisfy { $0 == 0 || $0 == 1 })
+    precondition(toSecret.allSatisfy { $0 == 0 || $0 == 1 })
+    let twoN = 2 * n
+    precondition(twoN > 1 && twoN.nonzeroBitCount == 1)
+    let bits = twoN.trailingZeroBitCount
+    let baseLog = 4
+    let levelCount = (bits + baseLog - 1) / baseLog
+    let delta = rotationScale(polynomialDegree: n)
+    let gadget: [UInt32] = (0..<levelCount).map { i in
+        delta &<< UInt32(i * baseLog)
+    }
+    var entries: [[LWECiphertext]] = []
+    entries.reserveCapacity(fromSecret.count)
+    for sBit in fromSecret {
+        var levels: [LWECiphertext] = []
+        levels.reserveCapacity(levelCount)
+        for level in 0..<levelCount {
+            let message = sBit &* gadget[level]
+            levels.append(
+                encryptLWE(
+                    message: message,
+                    secret: toSecret,
+                    rng: &rng,
+                    maskStride: delta
+                )
+            )
+        }
+        entries.append(levels)
+    }
+    return KeySwitchKey(
+        inputDimension: fromSecret.count,
+        outputDimension: toSecret.count,
+        baseLog: baseLog,
+        levelCount: levelCount,
+        entries: entries,
+        isIdentity: false,
+        inputStride: delta
+    )
+}
+
+/// Sample-extract then key-switch. Closes PBS when `n < kN` (cannot truncate extract).
+package func sampleExtractKeySwitch(
+    _ acc: GLWECiphertext,
+    params: TFHEParams,
+    key: KeySwitchKey
+) -> LWECiphertext {
+    keySwitch(sampleExtractLWE(acc, params: params), key: key)
 }
 
 package func encryptLWE(
@@ -289,17 +369,46 @@ package func keySwitch(_ lwe: LWECiphertext, key: KeySwitchKey) -> LWECiphertext
         b: lwe.b
     )
     for i in 0..<key.inputDimension {
-        let digits = gadgetDecomposeScalar(
-            lwe.a[i],
-            baseLog: key.baseLog,
-            levelCount: key.levelCount
-        )
+        let digits: [UInt32]
+        if key.inputStride > 1 {
+            let stride = key.inputStride
+            let half = stride &>> 1
+            let folded = lwe.a[i] % stride == 0
+                ? lwe.a[i] / stride
+                : (lwe.a[i] &+ half) / stride
+            digits = gadgetDecomposeLSB(
+                folded,
+                baseLog: key.baseLog,
+                levelCount: key.levelCount
+            )
+        } else {
+            digits = gadgetDecomposeScalar(
+                lwe.a[i],
+                baseLog: key.baseLog,
+                levelCount: key.levelCount
+            )
+        }
         for level in 0..<key.levelCount {
             let term = scaleLWE(key.entries[i][level], digits[level])
             acc = subLWE(acc, term)
         }
     }
     return acc
+}
+
+package func gadgetDecomposeLSB(
+    _ value: UInt32,
+    baseLog: Int,
+    levelCount: Int
+) -> [UInt32] {
+    let baseMask = baseLog == 32 ? UInt32.max : (UInt32(1) &<< UInt32(baseLog)) &- 1
+    var remaining = value
+    var digits = [UInt32](repeating: 0, count: levelCount)
+    for level in 0..<levelCount {
+        digits[level] = remaining & baseMask
+        remaining &>>= UInt32(baseLog)
+    }
+    return digits
 }
 
 // MARK: - Polynomial / GLWE helpers
@@ -715,7 +824,8 @@ package func evaluateLUTBlindRotate(
     truthTable: [UInt32],
     inputs: [LWECiphertext],
     bootstrapKey: BootstrapKey,
-    scale: UInt32? = nil
+    scale: UInt32? = nil,
+    keySwitchKey: KeySwitchKey? = nil
 ) -> LWECiphertext {
     let params = bootstrapKey.params
     let n = params.tfhe.polynomialDegree
@@ -733,7 +843,10 @@ package func evaluateLUTBlindRotate(
         lwe: packed,
         bootstrapKey: bootstrapKey
     )
-    return sampleExtractLWE(acc, params: params.tfhe)
+    let ksk = keySwitchKey ?? .trivialIdentity(
+        dimension: params.tfhe.glweDimension * n
+    )
+    return sampleExtractKeySwitch(acc, params: params.tfhe, key: ksk)
 }
 
 /// Public bit refresh after PBS extract: native-δ MS into `Z_{2N}`.
@@ -815,11 +928,8 @@ package func evaluatePBSGGSW(
         params: params,
         rng: &rng
     )
-    let extracted = sampleExtractLWE(acc, params: params.tfhe)
-    let switched = keySwitch(
-        extracted,
-        key: .trivialIdentity(dimension: params.tfhe.lweDimension)
-    )
+    let ksk = extractToLWEKeySwitchKey(secret: secret, rng: &rng)
+    let switched = sampleExtractKeySwitch(acc, params: params.tfhe, key: ksk)
     let phaseFromLWE = decryptLWE(switched, secret: secret)
     let phaseFromGLWE = decryptGLWE(acc, secret: secret)[0]
     precondition(

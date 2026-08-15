@@ -367,6 +367,65 @@ final class TFHESeamTests: XCTestCase {
         }
     }
 
+    func testExtractKeySwitchClosesPBSWhenNLessThanKN() {
+        let degree = 32
+        let lweN = 8
+        let params = GGSWParams.booleanPublicMS(degree: degree).withLWEDimension(lweN)
+        let secret = TFHESecretKey.random(params: params.tfhe, seed: 0xE5E5)
+        var rng = LCG32(state: 0x51)
+        let bk = bootstrapKey(
+            secret: secret,
+            params: params,
+            rng: &rng,
+            publicRefreshCompatible: true
+        )
+        let ksk = extractToLWEKeySwitchKey(secret: secret, rng: &rng)
+        XCTAssertFalse(ksk.isIdentity)
+        XCTAssertEqual(ksk.inputDimension, degree)
+        XCTAssertEqual(ksk.outputDimension, lweN)
+        let twoN = 2 * degree
+        let scale = rotationScale(polynomialDegree: degree)
+        for bit: UInt32 in [0, 1] {
+            let ct = encryptLWERotationNative(
+                message: bit,
+                secret: secret.lweSecret,
+                twoN: twoN,
+                rng: &rng
+            )
+            XCTAssertEqual(ct.lweDimension, lweN)
+            let out = evaluateLUTBlindRotate(
+                truthTable: [0, 1],
+                inputs: [ct],
+                bootstrapKey: bk,
+                scale: scale,
+                keySwitchKey: ksk
+            )
+            XCTAssertEqual(out.lweDimension, lweN)
+            let torusPhase = decryptLWE(out, secret: secret)
+            XCTAssertEqual(
+                decodeRotationBoolean(torusPhase, scale: scale),
+                bit,
+                "torus decrypt after KS failed for bit \(bit) phase=\(torusPhase)"
+            )
+            let refreshed = publicRefreshBit(out, twoN: twoN, scale: scale)
+            XCTAssertEqual(refreshed.lweDimension, lweN)
+            let phase = decryptLWE(refreshed, secret: secret)
+            XCTAssertEqual(decodeRotationNativeBit(phase, twoN: twoN, k: 1), bit)
+            let chained = evaluateLUTBlindRotate(
+                truthTable: [0, 1],
+                inputs: [refreshed],
+                bootstrapKey: bk,
+                scale: scale,
+                keySwitchKey: ksk
+            )
+            let chainedPhase = decryptLWE(
+                publicRefreshBit(chained, twoN: twoN, scale: scale),
+                secret: secret
+            )
+            XCTAssertEqual(decodeRotationNativeBit(chainedPhase, twoN: twoN, k: 1), bit)
+        }
+    }
+
     func testPackedGLWEEncodingRoundTrip() {
         let enc = PackedGLWEEncoding(polynomialDegree: 8)
         XCTAssertEqual(enc.degree, 16)

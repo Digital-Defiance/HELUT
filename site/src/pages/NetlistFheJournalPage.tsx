@@ -67,7 +67,22 @@ export function NetlistFheJournalPage() {
               <span className="mono">C62</span>
               <span>
                 Metal PicoRV lut6 at production <em>N</em>=1024, noiseless BK: Q SING PASS in
-                373.89 s (C62). Covering noisy BK on the same netlist is still C60/C61 FAIL.
+                373.89 s (C62). Covering noisy BK PASSes Q at <em>N</em>=64 (C63) and still FAILs at
+                production <em>N</em> (C60/C61).
+              </span>
+            </li>
+            <li>
+              <span className="mono">C63</span>
+              <span>
+                PicoRV lut6 covering-b2 σ=128 at <em>N</em>=64: Q SING PASS in 1.72 s. Native{' '}
+                <em>k</em>. Stride-<em>k</em>=7 at this <em>N</em> SIGTRAPs.
+              </span>
+            </li>
+            <li>
+              <span className="mono">C64</span>
+              <span>
+                Extract→KS (<em>n</em>=64≪kN): native-<em>k</em> covering-b2 adder 4.22 s and counter
+                6.35 s at poly <em>N</em>=1024. Not LWE-176. C37 still at <em>n</em>=<em>N</em>.
               </span>
             </li>
           </ul>
@@ -112,7 +127,9 @@ export function NetlistFheJournalPage() {
               <span className="mono">PicoRV</span>
               <span>
                 Encrypted PicoRV32 covering at <em>N</em>=1024 is C60/C61 Q SING FAIL.
-                Noiseless Metal PicoRV at that <em>N</em> is C62 (374 s).
+                Covering Q PASSes at <em>N</em>=64 (C63). Noiseless Metal PicoRV at production{' '}
+                <em>N</em> is C62 (374 s). Extract→KS covering at <em>n</em>=64 is C64 (adder/counter,
+                not this core).
               </span>
             </li>
           </ul>

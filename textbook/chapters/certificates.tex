@@ -153,6 +153,14 @@ on a nearby \texttt{\$\_DFF\_P\_}. Finer gadget did not fix sequential Q.}
 \reproduced{C62}{Metal PicoRV lut6 $N{=}1024$ public-ms boolean $e{=}0$ one tick:
 Q SING PASS in $373.89\,\mathrm{s}$. Hardness $175.7$ with \hid{1}. Not covering.}
 
+\reproduced{C63}{Same lut6 netlist, covering-b2 $\sigma{=}128$, CPU $N{=}64$ one tick:
+Q SING PASS in $1.72\,\mathrm{s}$ ($B_{\mathrm{bk}}=88782$). Native $k$.
+Stride $k{=}7$ at this $N$ SIGTRAPs. Does not close \cid{60}.}
+
+\reproduced{C64}{Extract$\to$KS ($n{=}64\ll kN$): $\delta$-lattice GLev. CPU covering-b2
+$\sigma{=}128$ native $k{=}1$ at poly $N{=}1024$: adder $4.22\,\mathrm{s}$, counter
+$6.35\,\mathrm{s}$. Not LWE-176. \cid{37} still at $n{=}N$.}
+
 \section{Calibration is not estimation}
 
 \begin{center}

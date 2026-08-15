@@ -361,7 +361,8 @@ package enum MetalGGSW {
         device: MTLDevice,
         commandQueue: MTLCommandQueue,
         lowering: MetalBRLowering? = nil,
-        tileWidth: Int? = nil
+        tileWidth: Int? = nil,
+        keySwitchKey: KeySwitchKey? = nil
     ) throws -> LWECiphertext {
         let params = bootstrapKey.params
         let n = params.tfhe.polynomialDegree
@@ -383,7 +384,10 @@ package enum MetalGGSW {
             lowering: lowering,
             tileWidth: tileWidth
         )
-        return sampleExtractLWE(acc, params: params.tfhe)
+        let ksk = keySwitchKey ?? .trivialIdentity(
+            dimension: params.tfhe.glweDimension * n
+        )
+        return sampleExtractKeySwitch(acc, params: params.tfhe, key: ksk)
     }
 
     // MARK: - Whole-netlist single MPSGraph (step 10l)
@@ -415,7 +419,8 @@ package enum MetalGGSW {
         bootstrapKey: BootstrapKey,
         scale: UInt32,
         device: MTLDevice,
-        commandQueue: MTLCommandQueue
+        commandQueue: MTLCommandQueue,
+        keySwitchKey: KeySwitchKey? = nil
     ) throws -> [Int: LWECiphertext] {
         let n = bootstrapKey.params.tfhe.polynomialDegree
         let mode = MetalBRControl.overrideLowering ?? MetalBRLowering.automatic(degree: n)
@@ -427,9 +432,21 @@ package enum MetalGGSW {
                 bootstrapKey: bootstrapKey,
                 scale: scale,
                 device: device,
-                commandQueue: commandQueue
+                commandQueue: commandQueue,
+                keySwitchKey: keySwitchKey
             )
         case .fused:
+            if bootstrapKey.params.tfhe.lweDimension != n {
+                return try evaluateTopoNetlistTiledKernel(
+                    jobs: jobs,
+                    primaryWires: primaryWires,
+                    bootstrapKey: bootstrapKey,
+                    scale: scale,
+                    device: device,
+                    commandQueue: commandQueue,
+                    keySwitchKey: keySwitchKey
+                )
+            }
             return try evaluateTopoNetlistFusedGraph(
                 jobs: jobs,
                 primaryWires: primaryWires,
@@ -448,7 +465,8 @@ package enum MetalGGSW {
         bootstrapKey: BootstrapKey,
         scale: UInt32,
         device: MTLDevice,
-        commandQueue: MTLCommandQueue
+        commandQueue: MTLCommandQueue,
+        keySwitchKey: KeySwitchKey? = nil
     ) throws -> [Int: LWECiphertext] {
         let params = bootstrapKey.params
         precondition(params.tfhe.glweDimension == 1)
@@ -475,7 +493,8 @@ package enum MetalGGSW {
                 scale: scale,
                 device: device,
                 commandQueue: commandQueue,
-                lowering: .tiledKernel
+                lowering: .tiledKernel,
+                keySwitchKey: keySwitchKey
             )
             let refreshed = publicRefreshBit(extracted, twoN: twoN, scale: scale)
             wires[job.outputWireId] = refreshed

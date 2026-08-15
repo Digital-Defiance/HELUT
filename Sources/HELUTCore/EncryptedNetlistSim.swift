@@ -54,6 +54,7 @@ package final class EncryptedNetlistSimulator {
     package let scaledPrimaryInputs: Bool
     package private(set) var rng: LCG32
     package private(set) var bootstrappingKey: BootstrapKey?
+    package private(set) var keySwitchKey: KeySwitchKey
     package private(set) var noiseBudget: TFHENoiseBudget
     /// Bounded ∞-norm tracker (step 10h); updated each `tick`.
     package private(set) var noiseGrowth: TFHENoiseGrowth
@@ -153,6 +154,7 @@ package final class EncryptedNetlistSimulator {
         self.noisyBKCertificate = nil
         self.noisyBKMeasurement = nil
         self.noisyBKGaussianCertificate = nil
+        self.keySwitchKey = .trivialIdentity(dimension: params.tfhe.glweDimension * n)
         if backend == .metalGGSW || backend == .blindRotateMetal || backend == .blindRotateMetalNetlist {
             precondition(device != nil && commandQueue != nil, "Metal backend needs device + queue")
         }
@@ -181,6 +183,13 @@ package final class EncryptedNetlistSimulator {
                 publicRefreshCompatible: wireRefresh == .publicMS || self.scaledPrimaryInputs,
                 noise: bkNoise
             )
+            self.keySwitchKey = extractToLWEKeySwitchKey(secret: secret, rng: &self.rng)
+            if !self.keySwitchKey.isIdentity {
+                print(
+                    "  extract→KS     kN=\(params.tfhe.glweDimension * n) → n=\(params.tfhe.lweDimension)  (δ-lattice GLev e=0)"
+                )
+                fflush(stdout)
+            }
             if bkNoise.bound > 0 || bkNoise.usesGaussian, let bk = self.bootstrappingKey {
                 let measured = TFHENoisyBKMeasurement.identity(
                     secret: secret,
@@ -458,6 +467,9 @@ package final class EncryptedNetlistSimulator {
                     noiseBudget.consume(.blindRotateLevel)
                 }
                 noiseBudget.consume(.sampleExtract)
+                if !keySwitchKey.isIdentity {
+                    noiseBudget.consume(.keySwitch)
+                }
                 precondition(noiseBudget.isSafe, "noise budget exhausted mid-netlist")
                 noiseGrowth.afterBlindRotate(outputNoiseBound: 0)
                 switch wireRefresh {
@@ -556,6 +568,9 @@ package final class EncryptedNetlistSimulator {
                         noiseBudget.consume(.blindRotateLevel)
                     }
                     noiseBudget.consume(.sampleExtract)
+                    if !keySwitchKey.isIdentity {
+                        noiseBudget.consume(.keySwitch)
+                    }
                     noiseBudget.consume(.modulusSwitch)
                     noiseGrowth.afterBlindRotate(outputNoiseBound: 0)
                     noiseGrowth.afterExactModulusSwitch()
@@ -577,7 +592,8 @@ package final class EncryptedNetlistSimulator {
             bootstrapKey: bootstrapKey,
             scale: scale,
             device: device!,
-            commandQueue: commandQueue!
+            commandQueue: commandQueue!,
+            keySwitchKey: keySwitchKey
         )
         for (id, ct) in produced {
             wires[id] = ct
@@ -732,7 +748,8 @@ package final class EncryptedNetlistSimulator {
                 truthTable: truthTable,
                 inputs: inputs,
                 bootstrapKey: bootstrapKey,
-                scale: scale
+                scale: scale,
+                keySwitchKey: keySwitchKey
             )
         case .blindRotateMetal:
             let node = LUTNode(
@@ -747,7 +764,8 @@ package final class EncryptedNetlistSimulator {
                 bootKey: bootstrapKey,
                 scale: scale,
                 device: device!,
-                commandQueue: commandQueue!
+                commandQueue: commandQueue!,
+                keySwitchKey: keySwitchKey
             )
             return try node.evaluateEncrypted(inputs: inputs, context: context)
         case .blindRotateMetalNetlist:

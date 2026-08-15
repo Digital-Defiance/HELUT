@@ -95,7 +95,9 @@ export function HomePage() {
                 <strong>Netlist-clocked torus FHE</strong> — LWE/GLWE + GGSW BK on Metal/CPU;
                 encrypted full_adder SING at production <em>N</em> (C20/C21); covering noisy BK at
                 the same <em>N</em> with stride-<em>k</em> (C52–C54); Metal PicoRV lut6 1-tick at
-                that <em>N</em> with <em>e</em>=0 BK (C62). Chronology:{' '}
+                that <em>N</em> with <em>e</em>=0 BK (C62). Covering Q on that core PASSes at{' '}
+                <em>N</em>=64 (C63) and still FAILs at production <em>N</em> (C60/C61). Extract→KS
+                LWE <em>n</em>=64 native-<em>k</em> covering is C64 (not LWE-176). Chronology:{' '}
                 <Link to="/projects/netlist-fhe/journal">FHE journal</Link>.
               </span>
             </li>

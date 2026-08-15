@@ -1,0 +1,9 @@
+^DHELUT encrypted-netlist bench · SING
+  netlist: picorv32_lut6_netlist.json  module=picorv32
+  poly N=8  LUTs=2006  DFFs=1565  sequential  2N=16
+  stimuli=1 (max --vectors 1)  cpu-only=true  metal-netlist-only=false
+  paths filter: blind-rotate public-ms boolean
+  paths: public-ms@boolean + public-ms@crypto + secret@crypto
+  DynamicRotateCost mux=144 binary=36 speedup≈4.0×
+
+  starting blind-rotate public-ms boolean

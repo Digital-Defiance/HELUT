@@ -255,4 +255,13 @@ after ${\sim}33$\,min of combinational BRs.}
 \reproduced{C62}{Metal PicoRV lut6 $N{=}1024$ $e{=}0$ public-ms boolean 1-tick
 Q SING PASS ($373.89\,\mathrm{s}$). Covering remains \cid{60}/\cid{61}.}
 
-\growswhen{Metal $N{=}1024$ PicoRV covering tick that PASSes Q SING; fused sequential metal-netlist.}
+\reproduced{C63}{Covering-b2 noisy BK on that lut6 core PASSes Q at $N{=}64$
+($1.72\,\mathrm{s}$). The $N{=}1024$ covering Q fail is torus-scale depth, not a
+lut6/wavefront race.}
+
+\reproduced{C64}{Extract$\to$KS closes public-MS PBS at $n{=}64$. Native-$k$
+covering-b2 adder and counter SING at poly $N{=}1024$. PicoRV covering remains
+\cid{60}.}
+
+\growswhen{Metal $N{=}1024$ PicoRV covering tick that PASSes Q SING (try
+\texttt{--lwe-dimension} / \cid{64}); fused sequential metal-netlist.}

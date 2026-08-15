@@ -13,17 +13,20 @@ package struct EncryptedLUTMetalContext: Sendable {
     package var scale: UInt32
     package var device: MTLDevice
     package var commandQueue: MTLCommandQueue
+    package var keySwitchKey: KeySwitchKey?
 
     package init(
         bootKey: BootstrapKey,
         scale: UInt32,
         device: MTLDevice,
-        commandQueue: MTLCommandQueue
+        commandQueue: MTLCommandQueue,
+        keySwitchKey: KeySwitchKey? = nil
     ) {
         self.bootKey = bootKey
         self.scale = scale
         self.device = device
         self.commandQueue = commandQueue
+        self.keySwitchKey = keySwitchKey
     }
 
     package static func make(
@@ -71,7 +74,8 @@ extension LUTNode {
             bootstrapKey: context.bootKey,
             scale: context.scale,
             device: context.device,
-            commandQueue: context.commandQueue
+            commandQueue: context.commandQueue,
+            keySwitchKey: context.keySwitchKey
         )
     }
 }

@@ -86,7 +86,7 @@ const shapeLab = [
   {
     idx: 'Shape',
     title: 'PicoRV32 / tree / regex (oracle)',
-    body: 'Cleartext / mock-torus clocks prove CPU-scale netlists fit the host DFF contract (C1). Encrypted PicoRV exists at demo N=8 (C45–C51; Metal NOP-fetch C51). Not production N, not covering noisy BK.',
+    body: 'Cleartext / mock-torus clocks prove CPU-scale netlists fit the host DFF contract (C1). Encrypted PicoRV: demo N C45–C51; lut6 N=64 C58/C59; Metal N=1024 e=0 C62; covering-b2 noisy BK Q PASS at N=64 (C63). Production-N covering Q still C60/C61 FAIL. Extract→KS n=64 covering adder/counter is C64, not PicoRV.',
     meta: 'picorv32_netlist.json · boolean benches',
   },
 ]

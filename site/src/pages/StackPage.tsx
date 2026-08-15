@@ -99,7 +99,8 @@ export function StackPage() {
                 <strong>Equivalence:</strong>{' '}
                 <code>--bench-encrypted --sing</code> checks encrypted outputs against the clear
                 netlist (full_adder C20/C21; covering noisy adder/counter/toy ISA C52–C54;
-                covering-b2 regex C57; PicoRV lut6 Metal <em>N</em>=1024 <em>e</em>=0 C62). Metal
+                covering-b2 regex C57; PicoRV lut6 Metal <em>N</em>=1024 <em>e</em>=0 C62;
+                PicoRV covering-b2 noisy BK at <em>N</em>=64 C63; extract→KS <em>n</em>=64 C64). Metal
                 microbench: persist ~0.52&nbsp;s/BR at <em>N</em>=1024 (C17); fused 3-prime ~0.42&nbsp;s/BR
                 (C20). The ~50&nbsp;s/BR figure was an early fused <em>N</em>=64 ancestor.
               </span>
@@ -107,9 +108,9 @@ export function StackPage() {
             <li>
               <span className="mono">LIMITS</span>
               <span>
-                <strong>Not claimed:</strong> native <em>k</em>=1 torus-scale noisy BK at{' '}
+                <strong>Not claimed:</strong> native <em>k</em>=1 torus-scale noisy BK at <em>n</em>=
                 <em>N</em>=1024 (C37/C55); noisy <code>cryptoPublicMS</code> at that <em>N</em> (C26/C56);
-                PicoRV covering at production <em>N</em> (C60 covering-b2 Q SING FAIL);
+                PicoRV covering at production <em>N</em> (C60/C61 Q SING FAIL; C63 is demo <em>N</em>=64);
                 estimator Cost on every calibration row (H1); production keys from the HELUT 175.7
                 figure; side-channel / GPU power; a P1030680 plaintext.
               </span>

@@ -107,12 +107,12 @@ export const projects: Project[] = [
     status: 'active',
     kicker: 'Graduated FHE',
     summary:
-      'Covering Track A noisy BK at N=1024 k=7 is C52–C54; covering-b2 cheaper SING + regex is C57. Native k=1 and cryptoPublicMS remain graded. Sage filled C23; H1 still applies.',
+      'Covering Track A noisy BK at N=1024 k=7 is C52–C54; covering-b2 cheaper SING + regex is C57. C62 is noiseless PicoRV at that N; C63 is covering PicoRV at N=64; C64 is extract→KS n=64 native-k covering (not LWE-176). Native k=1 at n=N and cryptoPublicMS remain graded. Sage filled C23; H1 still applies.',
     stakes: [
       'Encrypted ≡ clear on full_adder (C20/C21) and covering noisy sequential ticks (C53/C54)',
       'Calibrated bits ≠ estimator Cost on every row (H1 / C23: 175.7 vs 180.2 on prod-n1024-s16)',
       'Metal persist ~0.52 s/BR at N=1024 (C17); wavefront boolean SING 10.6 s/8 (C20)',
-      'Covering public-MS at N=1024 uses stride-k wires, not “g₀=δ exact covering” (C27 still {8,128}); C55/C56 negatives; C60 PicoRV covering-b2 Q SING FAIL',
+      'Covering public-MS at N=1024 uses stride-k wires, not “g₀=δ exact covering” (C27 still {8,128}); C55/C56 negatives; C64 extract→KS n=64 native-k covering SING; C60/C61 PicoRV covering Q FAIL at N=1024 (C63 PASS at N=64)',
     ],
     pages: [
       {

@@ -420,6 +420,36 @@ Expect combinational BRs to finish (~33 min) then **DFF Q SING FAIL** (want=0 
 
 Expect **PASS** ~374 s / 1, Q SING, *B*<sub>bk</sub>=0. Hardness 175.7 with **H1**. Not covering.
 
+## PicoRV lut6 covering-b2 noisy BK at N=64 (C63)
+
+```bash
+.build/release/helut --bench picorv32_lut6_netlist.json --degree 64 \
+  --bench-encrypted --cpu-only --sing --vectors 1 \
+  --paths 'public-ms covering-b2' --bk-noise-sigma 128 \
+  | tee logs/helut-encrypted-n64-cpu-sing-picorv32-lut6-covering-b2-sigma128.log
+```
+
+Expect **PASS** ~1.72 s / 1, Q SING, *B*<sub>bk</sub>≈88782. Do **not** add `--boolean-scale-mul 7` at *N*=64 (SIGTRAP). Does not close **C60**.
+
+## Extract→key-switch n=64 (C64)
+
+```bash
+swift test -c release --filter testExtractKeySwitchClosesPBSWhenNLessThanKN
+.build/release/helut --bench netlist.json --degree 1024 --bench-encrypted --cpu-only \
+  --sing --vectors 1 --paths 'public-ms boolean' --lwe-dimension 64 \
+  | tee logs/helut-encrypted-n1024-cpu-sing-adder-ks-n64-e0.log
+.build/release/helut --bench netlist.json --degree 1024 --bench-encrypted --cpu-only \
+  --sing --vectors 1 --paths 'public-ms covering-b2' --bk-noise-sigma 128 \
+  --lwe-dimension 64 \
+  | tee logs/helut-encrypted-n1024-cpu-sing-adder-covering-b2-ks-n64-sigma128.log
+.build/release/helut --bench counter_netlist.json --degree 1024 --bench-encrypted --cpu-only \
+  --sing --vectors 1 --paths 'public-ms covering-b2' --bk-noise-sigma 128 \
+  --lwe-dimension 64 \
+  | tee logs/helut-encrypted-n1024-cpu-sing-counter-covering-b2-ks-n64-sigma128.log
+```
+
+Expect extract→KS print, all **PASS**. Do not quote 175.7 as LWE-*n*=64 security (**H1**). Does not close **C37** (*n*=*N*) or PicoRV **C60**.
+
 ## TensorLUT melt–freeze–snap (C44)
 
 ```bash
