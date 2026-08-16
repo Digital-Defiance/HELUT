@@ -34,6 +34,8 @@ jobs:
         run: python3 Scripts/lambda_threshold_probe.py
       - name: Exact-penalty Hessian bound (2 + sqrt 3)
         run: python3 Scripts/penalty_threshold.py
+      - name: Claim integrity lint (sheet vs textbook vs tests vs logs)
+        run: python3 Scripts/claim_audit.py
       - name: Confirm stdlib only
         run: |
           if grep -nE '^\s*(import|from)\s+(numpy|scipy|torch|sympy|pandas)' \
