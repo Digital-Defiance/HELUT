@@ -876,3 +876,102 @@ resolution target.
 No archived ε figure was found to be wrong. Several were found to be
 unsupported at their stated sample size, which is a different and fixable
 complaint.
+
+## 15. The nine unre-run rows, and what sample size an ε bar actually needs
+
+§14 closed C35 and re-ran Tier D. Nine rows were left untouched and disclosed as
+such: C26, C30, C33, C34, C36, C37, C41, C55, C56. This closes that gap and, in
+doing so, turns a hand-waved convention into a computed one.
+
+### 15.1 All nine reproduced
+
+Sixteen invocations, fifteen exit-zero and one expected failure.
+
+The distinction that made this cheap to reason about: `--measure-bk-noise` never
+touches `EncryptedNetlistSimulator.tick`, so those halves were structurally
+immune to the determinism defect. The `--bench-encrypted --sing` halves do go
+through `tick`, and those are the ones that could in principle have been decided
+by a mask permutation. All five SING rows (C33, C34, C36, C37, C41) pass.
+
+| Row | Archived | Re-measured 2026-08-16 |
+|-----|----------|------------------------|
+| C26 | *B*=64 both gadgets undecodable; *B*=4 `crypto` ok but ε≈−1 | exact: max\|e\| 123 370 595 / 27 820 597 vs δ/2 1 048 576; *B*=4 `crypto` ε=−1.0 decodable, `cryptoPublicMS` undecodable |
+| C30 | σ̂≈4.6×10⁴ at *B*=1; −260/−215 at 16/32; ≈−24 at 64 | σ̂ **identical to one decimal** at all seven inject levels; −260.7 / −215.5 / −24.1 |
+| C33 | Metal SING PASS | PASS (23 s) |
+| C34 | σ̂≈2.95×10⁴, ε≈−913, SING PASS | σ̂=29 513.2, ε=−913.0, PASS (85 s) |
+| C36 | ε=−139 at 4 trials, SING PASS | ε=−139.3, PASS (333 s) |
+| C37 | ε≈−159 at 4 trials, SING PASS | ε=−159.4, PASS (335 s) |
+| C41 | *N*=256 ε≈−2109; *N*=512 ε≈−76.6; SING PASS | −2108.7 / −76.6, PASS (48 s) |
+| C55 | *n*=256 ε≈−10.9, none meet the bar | −10.9 exactly |
+| C56 | identity ε≈−12.6; Metal public-ms **SING FAIL** (sum mismatch tick 2) | −12.6; fails with `sum mismatch blind-rotate-metal public-ms crypto tick 2: want=[1] got=[0]` |
+
+C56's failure is the documented negative reproducing, down to the tick index and
+the direction of the mismatch. `rc=133` is how a Swift `fatalError` surfaces.
+
+### 15.2 One archived figure was an artifact: `εlog2 = −∞`
+
+The archived C30 log prints `εlog2=-inf` for inject *B* ≤ 8. That is **not** zero
+failure probability; it is the Gaussian tail underflowing in the old evaluation.
+The log-space rewrite prints the finite values, and they are large:
+
+| inject *B* | archived | now | 95% bound |
+|-----------|----------|-----|-----------|
+| 1 | −∞ | −23 744.1 | −8 079.8 |
+| 2 | −∞ | −28 107.5 | −9 564.2 |
+| 4 | −∞ | −8 925.1 | −3 038.1 |
+| 8 | −∞ | −1 966.3 | −670.1 |
+
+σ̂ is unchanged at every level, so this is a reporting fix rather than a
+measurement change. It still mattered: "−∞" is an over-claim, and the sheet
+carried it.
+
+### 15.3 How many samples an ε bar needs, computed rather than chosen
+
+Trial counts across the ε rows were picked by hand — 2 here, 4 there, 8 elsewhere
+— and nothing recorded whether a given choice could support the claim resting on
+it. It can be derived. The 95% bound is `σ̂·√(m/χ²₀.₀₅(m))`, and since
+`log₂ε ∝ −1/σ²`, the bound clears a target iff
+
+    |point| ≥ (m / χ²₀.₀₅(m)) · |target|
+
+The factor falls monotonically in *m*, so each sample count buys a fixed amount of
+slack and any row with more slack than that is already fine:
+
+| samples | \|log₂ε\| needed to clear −64 |
+|---------|------------------------------|
+| 2 | 1537 |
+| 3 | 558 |
+| 4 | **355** |
+| 8 | 182 |
+| 16 | 126 |
+| 32 | 100 |
+| 128 | 79 |
+| 1024 | 69 |
+
+**So `n=4` is not too small in general.** It is sufficient for any row whose point
+estimate is at or below −355, which covers most of them. Only thin margins are
+expensive, and the cost climbs steeply: a point estimate of −76.6 against a −64
+bar needs *n*≈172–256.
+
+Applying this to the twenty-six ε verdicts measured today splits them cleanly into
+three kinds, two of which need no action:
+
+- **Fine at the sample size used** (12 verdicts) — C30 at *B*=1…32, C34,
+  C41 at *N*=256, C56 `crypto`.
+- **Genuinely unmet, and correctly recorded as such** (11 verdicts) — C26,
+  C30 at *B*=64, C55, C56 `cryptoPublicMS`. The *point estimate itself* fails the
+  bar, so no sample count rescues these. Every one of these rows already reads as
+  a negative; none was over-claiming.
+- **Under-sampled** (3 verdicts) — C36 (needs *n*≈16), C37 (*n*≈12), C41 at
+  *N*=512 (*n*≈256). The margin is real but unproven at the *n* used.
+
+Only the third group is a defect, and only two rows in it actually assert the bar
+in their text: C36's title ("ε≤2⁻⁶⁴ through inject *B*=32") and C41's body
+("ε≈−76.6 (≤−64)"). C37 quotes −159 without claiming the bar.
+
+`samplesToClearFailureTarget` computes the required count and returns `nil` when
+the point estimate fails, because the two cases need opposite responses — buy
+trials, or weaken the claim. The CLI prints which, replacing the old
+`±1 needs n≈40489`. That figure was the cost of resolving ε to ±1 order, a far
+stricter standard than clearing a bar, and quoting it made merely under-sampled
+rows look hopeless. §14 records making exactly that error about C35.
