@@ -679,6 +679,13 @@ It cost a claim: the *n*=512 covering adder was filed as a noise-limit FAIL
 before being traced to this.
 
 ```bash
+make gates        # both determinism gates + claim integrity lint
+make determinism  # determinism gates only
+```
+
+or individually:
+
+```bash
 # In-process guard: decoy keys permute Dictionary layout, fingerprint must hold.
 swift test -c release --filter EncryptedDeterminismTests
 
@@ -686,6 +693,11 @@ swift test -c release --filter EncryptedDeterminismTests
 # as N separate processes and requires byte-identical fingerprints.
 python3 Scripts/determinism_cross_process.py --runs 5 --verbose
 ```
+
+**Not CI-enforced.** Both GitHub runners are `ubuntu-latest` and this needs
+macOS, so `make gates` is a local pre-commit ritual rather than a merge gate. The
+claim integrity lint *is* in CI (`.github/workflows/linux-math.yml`) because it is
+pure Python.
 
 Expected: `PASS all 5 processes agreed: 9820c89a488d815d`.
 
