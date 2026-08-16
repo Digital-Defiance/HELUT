@@ -681,6 +681,13 @@ small-sample instability.
 
 ### 13.3 The method cannot resolve N=1024, and that is the real finding
 
+> **PARTLY SUPERSEDED by §14.** The cost figures below are correct, but the
+> conclusion is not: resolving ε to ±1 order is indeed infeasible, while
+> *demonstrating the bound clears the bar* needs only n≈24 and took 42 minutes.
+> C35's bar stands. Left in place because conflating those two requirements is
+> an easy and expensive mistake.
+
+
 Measured per-trial cost:
 
 | configuration | s/trial | n for ±1 order | wall time |
@@ -734,3 +741,70 @@ Fixed in 070f511.
 Worth noting how it was caught: not by review, but by an ordering sanity check —
 "the bound must be worse than the estimate" — applied to real output. That
 invariant is cheap and should be asserted in the tool.
+
+## 14. C35 resolved: the bar stands, and §13 asked the wrong question
+
+§13 concluded that ε at N=1024 "cannot be established by this measurement
+method." That was wrong, and the error was mine: I conflated two different
+requirements.
+
+- **Resolving ε to ±1 order** needs n ≈ 35 000 at this magnitude. At ~78 s per
+  trial that is about eight days. Infeasible, as §13 said.
+- **Demonstrating that the 95% bound clears −64** needs only n ≈ 24. That is
+  about half an hour.
+
+The claim requires the second, not the first. Chasing ±1-order resolution was a
+self-imposed standard that no bar-clearing claim needs.
+
+### 14.1 The measurement
+
+Run at increasing sample size, inject B=16, covering-b2, N=1024:
+
+| n | σ̂ | ε point | 95% bound | clears −64? | wall |
+|---|-----|---------|-----------|-------------|------|
+| 4 | 110 587 | −65.4 | −10.6 | no | 5 min |
+| 8 | 92 117 | −94.3 | −31.9 | no | 10 min |
+| 16 | 84 535 | −111.9 | −55.6 | no | 21 min |
+| **32** | **78 551** | **−129.6** | **−81.3** | **YES** | **42 min** |
+
+`logs/c35-eps-n32-2026-08-15.log`. The bound clears the bar with 17 orders of
+margin.
+
+Two things to notice. σ̂ decreases monotonically with sample size, so the point
+estimate *improves* from −65.4 to −129.6 — the archived figure was pessimistic,
+not optimistic. And the bound tightens toward the point as the χ² interval
+narrows, which is what eventually clears the bar.
+
+### 14.2 What C35 should say
+
+The claim **stands**, but the quotable number changes:
+
+> ε ≤ 2⁻⁸¹ at 95% confidence, n=32 samples.
+
+not the point estimate of −129.6, and certainly not the original −65.4, which
+was true but unsupported at four samples. The original claim was not wrong in
+substance; it was unfalsifiable as measured.
+
+### 14.3 Why the whole detour was worth it
+
+The archived value reproduced *exactly* at n=4 (σ̂=110586.5, ε=−65.4), so nothing
+was miscomputed and no code was broken. What was missing was any statement of
+what four samples can support. Adding the bound turned an unfalsifiable number
+into a defensible one, and it took 42 minutes of machine time to do it.
+
+The general lesson, which now sits in the textbook at §"Why ε needs a sample
+size": when a measurement is compared against a bar, state the confidence bound
+and the sample size, and size the sample to the *bar*, not to some arbitrary
+resolution target.
+
+### 14.4 Everything else in Tier D reproduced
+
+| Row | Archived | Re-measured | Bound added |
+|-----|----------|-------------|-------------|
+| C22 N=8 both gadgets | comfortably clear | identical (σ̂=6395.9 / 59959.9) | clears −64 |
+| C32 `cryptoPublicMS` B=1 | undecodable | undecodable, decode_fail=2 | n/a |
+| C32 `.crypto` B=1 | ε ≈ −8.4 at 8 trials | **−8.4 exactly** | −1.7, needs n≈259 |
+
+No archived ε figure was found to be wrong. Several were found to be
+unsupported at their stated sample size, which is a different and fixable
+complaint.

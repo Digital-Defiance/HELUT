@@ -109,6 +109,204 @@
     "warmup": 1,
     "when": "2026-08-15T19:48:50"
   },
+  "C22eps": {
+    "claims": "N=8 B=64: max|e|=11173, sigma-hat=6396",
+    "cmd": ".build/release/helut --measure-bk-noise --degree 8 --trials 8 --bk-noise 64",
+    "exits": [
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C22eps",
+    "label": "C22 measured noisy-BK residual, N=8, 8 trials",
+    "load_per_core_at_end": 0.158172607421875,
+    "runs": 3,
+    "stability": "no-verdict",
+    "tier": "D",
+    "tool_wall": null,
+    "verdicts": [
+      [],
+      [],
+      []
+    ],
+    "wall": {
+      "max": 0.0066223329995409586,
+      "mean": 0.006305610666458961,
+      "median": 0.0062080830002742005,
+      "min": 0.006086415999561723,
+      "n": 3,
+      "spread": 0.0863256821720272,
+      "stdev": 0.00028095460838055414
+    },
+    "warmup": 0,
+    "when": "2026-08-16T02:18:39"
+  },
+  "C26eps": {
+    "claims": "B=64 undecodable; B=4 eps log2 ~ -1",
+    "cmd": ".build/release/helut --measure-bk-noise --degree 1024 --trials 2 --bk-noise 64",
+    "exits": [
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C26eps",
+    "label": "C26 product-shaped N=1024 identity residual, B=64",
+    "load_per_core_at_end": 0.1844482421875,
+    "runs": 3,
+    "stability": "no-verdict",
+    "tier": "D",
+    "tool_wall": null,
+    "verdicts": [
+      [],
+      [],
+      []
+    ],
+    "wall": {
+      "max": 67.41451770900039,
+      "mean": 65.69398236166671,
+      "median": 65.24716070900013,
+      "min": 64.42026866699962,
+      "n": 3,
+      "spread": 0.045890871104031825,
+      "stdev": 1.5463243590364257
+    },
+    "warmup": 0,
+    "when": "2026-08-16T02:21:57"
+  },
+  "C32eps-t8": {
+    "claims": "eps log2 ~ -8.4 at 8 trials (sample-sensitive, not -64)",
+    "cmd": ".build/release/helut --measure-bk-noise --degree 1024 --trials 8 --bk-noise 1",
+    "exits": [
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C32eps-t8",
+    "label": "C32 .crypto inject B=1 at N=1024, 8 trials",
+    "load_per_core_at_end": 0.158172607421875,
+    "runs": 3,
+    "stability": "no-verdict",
+    "tier": "D",
+    "tool_wall": null,
+    "verdicts": [
+      [],
+      [],
+      []
+    ],
+    "wall": {
+      "max": 226.8000920000004,
+      "mean": 220.7190131390004,
+      "median": 219.56090262500038,
+      "min": 215.79604479200043,
+      "n": 3,
+      "spread": 0.050118427627319266,
+      "stdev": 5.592689756365094
+    },
+    "warmup": 0,
+    "when": "2026-08-16T02:18:39"
+  },
+  "C35eps-t16": {
+    "claims": "(not recorded at 16 trials)",
+    "cmd": ".build/release/helut --measure-bk-noise --degree 1024 --trials 16 --bk-noise 16 --covering-base-log 2",
+    "exits": [
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C35eps-t16",
+    "label": "C35 eps at inject B=16, covering-b2, 16 trials",
+    "load_per_core_at_end": 0.19439697265625,
+    "runs": 3,
+    "stability": "no-verdict",
+    "tier": "D",
+    "tool_wall": null,
+    "verdicts": [
+      [],
+      [],
+      []
+    ],
+    "wall": {
+      "max": 1150.7977294579996,
+      "mean": 1133.176251833,
+      "median": 1133.4435441660003,
+      "min": 1115.2874818750001,
+      "n": 3,
+      "spread": 0.03132952476175447,
+      "stdev": 17.75663269724697
+    },
+    "warmup": 0,
+    "when": "2026-08-16T02:07:37"
+  },
+  "C35eps-t4": {
+    "claims": "eps log2 = -65.4 at B=16, 4 trials, 'still <= -64'",
+    "cmd": ".build/release/helut --measure-bk-noise --degree 1024 --trials 4 --bk-noise 16 --covering-base-log 2",
+    "exits": [
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C35eps-t4",
+    "label": "C35 eps at inject B=16, covering-b2, 4 trials (the bar-passing claim)",
+    "load_per_core_at_end": 0.28204345703125,
+    "runs": 3,
+    "stability": "no-verdict",
+    "tier": "D",
+    "tool_wall": null,
+    "verdicts": [
+      [],
+      [],
+      []
+    ],
+    "wall": {
+      "max": 310.74482975,
+      "mean": 308.76103831966674,
+      "median": 310.7336538750001,
+      "min": 304.804631334,
+      "n": 3,
+      "spread": 0.01911668833395681,
+      "stdev": 3.426353513900686
+    },
+    "warmup": 0,
+    "when": "2026-08-16T00:42:05"
+  },
+  "C35eps-t8": {
+    "claims": "(not recorded at 8 trials)",
+    "cmd": ".build/release/helut --measure-bk-noise --degree 1024 --trials 8 --bk-noise 16 --covering-base-log 2",
+    "exits": [
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C35eps-t8",
+    "label": "C35 eps at inject B=16, covering-b2, 8 trials",
+    "load_per_core_at_end": 0.096832275390625,
+    "runs": 3,
+    "stability": "no-verdict",
+    "tier": "D",
+    "tool_wall": null,
+    "verdicts": [
+      [],
+      [],
+      []
+    ],
+    "wall": {
+      "max": 581.9857726669999,
+      "mean": 577.5381001943333,
+      "median": 576.8311074579999,
+      "min": 573.797420458,
+      "n": 3,
+      "spread": 0.014195406771809811,
+      "stdev": 4.139704943782741
+    },
+    "warmup": 0,
+    "when": "2026-08-16T01:10:58"
+  },
   "C38": {
     "claims": "CPU N=8 PASS (4 stimuli)",
     "cmd": ".build/release/helut --bench counter_netlist.json --degree 8 --bench-encrypted --cpu-only --sing --vectors 8",

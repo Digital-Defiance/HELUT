@@ -9,6 +9,8 @@ the spread, never a single pass.
 | C6 | A | PASS, adder N<=1024 | 0.001 s | 10.0% | 5 | stable-pass |
 | C20 | B | boolean SING 10.6 s / 8 | 9.191 s | 0.1% | 5 | stable-pass |
 | C21 | B | crypto l=2 SING 11.38 s / 8 | 9.924 s | 0.1% | 5 | stable-pass |
+| C22eps | D | N=8 B=64: max|e|=11173, sigma-hat=6396 | 0.006208 s | 8.6% | 3 | no-verdict |
+| C26eps | D | B=64 undecodable; B=4 eps log2 ~ -1 | 65.25 s | 4.6% | 3 | no-verdict |
 | C38 | A | CPU N=8 PASS (4 stimuli) | 0.0009 s | 11.1% | 5 | stable-pass |
 | C38m | B | Metal N=1024 PASS 15.88 s / 4 | 7.003 s | 1.1% | 5 | stable-pass |
 | C39 | A | CPU N=16 PASS (32 rows) | 0.05 s | 5.4% | 5 | stable-pass |
@@ -35,6 +37,10 @@ the spread, never a single pass.
 | C68 | C | PASS 911.3 s / 8, 2 fetches | 905.1 s | 0.3% | 3 | stable-pass |
 | C69 | B | n=256 PASS 17.1 s | 17.28 s | 1.5% | 5 | stable-pass |
 | C69fail | B | n=512 SING FAIL (sum mismatch want=0 got=1) | 34.29 s | 5.4% | 5 | stable-pass |
+| C32eps-t8 | D | eps log2 ~ -8.4 at 8 trials (sample-sensitive, not -64) | 219.6 s | 5.0% | 3 | no-verdict |
+| C35eps-t4 | D | eps log2 = -65.4 at B=16, 4 trials, 'still <= -64' | 310.7 s | 1.9% | 3 | no-verdict |
+| C35eps-t8 | D | (not recorded at 8 trials) | 576.8 s | 1.4% | 3 | no-verdict |
+| C35eps-t16 | D | (not recorded at 16 trials) | 1133 s | 3.1% | 3 | no-verdict |
 
-Rows measured: 29.
+Rows measured: 35.
 No flaky rows in this set: every recorded verdict reproduced on every pass.
