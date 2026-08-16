@@ -1495,7 +1495,7 @@ func runNoisyBKMeasure() {
                     // verdict -- at tiny N the point estimate is astronomically
                     // below any bar and the uncertainty is moot.
                     // NOTE %ld, not %d: Int is 64-bit here and %d truncates.
-                    + epsilonConfidenceNote(measured)
+                    + epsilonConfidenceNote(measured, lutCount: 8)
                     + "  (baseLog=\(params.baseLog) ℓ=\(params.levelCount))"
             )
             rows.append(measured)
@@ -1523,10 +1523,17 @@ func runNoisyBKMeasure() {
 /// meaningless-looking huge number.
 func epsilonConfidenceNote(
     _ m: TFHENoisyBKMeasurement,
+    lutCount: Int,
     targetLog2: Double = -64
 ) -> String {
     guard m.sigmaHat > 0, m.failureLog2Point.isFinite else { return "" }
-    let upper = m.failureLog2Upper95
+    // The printed epsilon is the UNION over `lutCount` LUTs, so the bound must be
+    // too, or the comparison is apples to oranges. Getting this wrong made the
+    // bound look *better* than the point estimate, which is impossible for an
+    // upper bound on sigma: at n=512 the single-LUT bound (-19.1) appeared to
+    // beat the union point estimate (-18.0). Union adds log2(lutCount).
+    let unionPenalty = log2(Double(max(lutCount, 1)))
+    let upper = m.failureLog2Upper95 + unionPenalty
     let clearsAtBound = upper <= targetLog2
     // Comfortable: bound clears the bar with an order of magnitude to spare.
     if clearsAtBound && upper <= targetLog2 * 2 {
