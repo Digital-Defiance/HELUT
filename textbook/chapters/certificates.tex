@@ -44,7 +44,8 @@ A passing encrypted tick is then read as a bundle:
         \texttt{cryptoPublicMS} noisy SING remains \cid{26}/\cid{56}.
 \end{itemize}
 
-Students who report only milliseconds have not completed the lab.
+A lab report on this material is incomplete if it stops at milliseconds: the
+certificate lines are the result, and the timing is context for it.
 
 \reproduced{C22}{Identity-LUT residual under a covering gadget fills
 $B_{\mathrm{bk}}$ and $\hat\sigma$. At $N=8$, inject $B=64$ gives
@@ -62,9 +63,31 @@ covering $N{=}128$ with inject $B{=}64$ PASSes ($B_{\mathrm{bk}}\approx 1.62\tim
 decodable). Receipt:
 \corpus{logs/helut-encrypted-n128-metal-sing-crypto-noisy.log}.}
 
+\reproduced{C27}{Theorem~3: under $q=2^{32}$, exact public-MS covering forces
+$(1+\log_2 N)\mid 32$; among practical degrees $\{8,\dots,2048\}$ only
+$N\in\{8,128\}$ qualify. $N{=}1024$ \texttt{cryptoPublicMS} has
+$\mathrm{baseLog}\cdot\ell = 11\cdot 2 = 22 \neq 32$.
+Statement: \corpus{directives/ggsw-public-ms-covering.md}.
+Reproduce:
+\texttt{swift test -c release --filter testGGSWPublicMSCoveringCertificate}.}
+
+\begin{theorem}[Exact public-MS covering degrees; \corpusthm{3}]
+\label{thm:covering}
+Let the torus word be $q=2^{32}$ and let a public modulus-switch gadget have
+$g_0=\delta$. If the gadget covers, then $(1+\log_2 N)$ divides $32$.
+Consequently, among $N\in\{8,16,\dots,2048\}$ the only exact covering degrees
+are $N=8$ and $N=128$.
+\end{theorem}
+
+\paragraph{Proof (machine-checked).}
+\texttt{GGSWPublicMSCovering.certificate()} asserts the divisibility lemma and
+enumerates \texttt{exactDegrees} $=[8,128]$ over the practical range; the test
+additionally pins $\mathrm{baseLog}\cdot\ell=22$ for $N{=}1024$.
+
 \reproduced{C29}{Theorem~3$'$: for any power-of-two torus word $w$, exact
 public-MS covering among practical degrees stays $\{8,128\}$. Widening the
-limb does not unlock $N{=}1024$ (baseLog~$=11$ never divides $2^k$).}
+limb does not unlock $N{=}1024$ (baseLog~$=11$ never divides $2^k$).
+Same receipt as \cid{27}; lemma \texttt{powerOfTwoWordObstruction}.}
 
 \reproduced{C30}{At covering $N{=}128$, inject $B\le 8$ prints
 $\varepsilon\log_2=-\infty$, but $\hat\sigma$ remains $\sim 10^{4}$--$10^{5}$.
@@ -236,7 +259,7 @@ They are API documentation for speech:
   \item Oracle Metal graphs expose the \emph{shape} of encrypted evaluation
         (batch, $N$, clock). They do not expose Decision-LWE.
   \item \texttt{publicMS} is an on-lattice refresh intent. It is not a
-        leakage proof (\nid{} on side channels).
+        leakage proof (\claimkind{N} on side channels).
   \item A campaign's settings/second is a cleartext Metal number. It does
         not certify encrypted tick rate.
 \end{itemize}

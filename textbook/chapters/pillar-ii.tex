@@ -75,7 +75,7 @@ Statement: \corpus{directives/tensorlut-theorem.md}.
 Reproduce:
 \texttt{swift test -c release --filter testTensorLUTFormalCertificate}.}
 
-\begin{theorem}[TensorLUT continuous$\to$discrete]
+\begin{theorem}[TensorLUT continuous$\to$discrete; \corpusthm{1}]
 \label{thm:tensorlut}
 Assume the hypotheses on the certificate: the LUT is multilinear; the GA
 mutates only unfrozen $w_i\in[0,1]$; the involution sandwich freezes core
@@ -112,7 +112,7 @@ Each clause is a \texttt{TensorLUTFormal.check*} in
 Reproduce:
 \texttt{swift test -c release --filter testTensorLUTFormalCorollaryCertificate}.}
 
-\begin{theorem}[TensorLUT emitter / freeze corollary]
+\begin{theorem}[TensorLUT emitter / freeze corollary; \corpusthm{1} corollary]
 \label{thm:tensorlut-corollary}
 Under Theorem~\ref{thm:tensorlut} hypotheses plus emit-via-$E$ and
 \texttt{mutatedPreserving}:
@@ -150,7 +150,7 @@ snap, emit two LUT6 Verilog cells. Snapped INIT matches all 8 Boolean
 corners (a dual interpolant such as NAND$+$XNOR is allowed).
 \texttt{testTwoLUTCascadeMeltFreezeSnapEmit}. Not Yosys re-synth.}
 
-\begin{theorem}[TensorLUT melt--freeze--snap, separable interpolant]
+\begin{theorem}[TensorLUT melt--freeze--snap, separable interpolant; \corpusthm{1$''$}]
 \label{thm:tensorlut-snap}
 Under a fully observed 1-LUT (each used INIT address an independent Boolean
 target $t$), $F(w)=-\lVert w-t\rVert_2^2-\lambda\pi(w)$ has unique maximizer
@@ -221,7 +221,7 @@ Reciprocity is structural.
 Short cribs leave unused pairs unconstrained and can admit false $F=0$
 steckers. Grade active-map agreement on $\mathrm{CT}\cup\mathrm{PT}$, use
 parsimony, grow the pair budget on plateau, and allow soft freeze $+$ thaw.
-TensorLUT grades are not a campaign decrypt (\nid{}, \hid{6}).
+TensorLUT grades are not a campaign decrypt (\claimkind{N}, \hid{6}).
 \end{warning}
 
 \section{Adversarial synthesis as a compiler loop}

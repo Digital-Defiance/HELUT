@@ -46,28 +46,41 @@ formulae. Humans must vet, bulk, fill, and edit it before it is a
 textbook. Frontier chapters are labeled frontier.\par}
 \end{titlepage}
 
+\draftnotice
+
 \chapter*{How to read the living boxes}
 \addcontentsline{toc}{chapter}{How to read the living boxes}
 
-Five boxes appear throughout this book.
+Seven boxes appear throughout this book.
 They are not decoration; they are the difference between a textbook and a press release.
+Editorial status is not their job --- that is stated once on the previous page and
+stamped on every page footer. These boxes carry \emph{evidential} status, which is
+a separate axis and the one that must never slip.
 
-\reproduced{C\textit{n}}{A result that someone else can re-run from \corpus{REPRODUCE.md} and the claim inventory. Lecture voice may treat it as established \emph{in this corpus}.}
+\reproduced{C\textit{n}}{A result that someone else can re-run from \corpus{REPRODUCE.md} and the claim inventory. The prose may treat it as established \emph{in this corpus}. Keyed to a \claimkind{C} row, always --- never to free text and never to an \claimkind{H} id alone.}
 
-\hedgebox{H\textit{n}}{An honest asterisk. Say it in class with the hedge attached. Do not let students drop the asterisk in a problem set or a paper.}
+\hedgebox{H\textit{n}}{An honest asterisk. Say it with the hedge attached. Do not let it get dropped in a problem set or a paper.}
 
-\frontierbox{Speculative territory from \corpus{directives/potential-avenues.md}. Assign as a seminar essay, never as a midterm fact.}
+\negativebox{no \claimkind{C} row}{A measured \emph{failure}: something we ran that did not pass. Printing clean negatives is doctrine, so these appear on purpose --- but they are never green, and they are never receipts.}
 
-\growswhen{A stub that is waiting on a new \cid{} row, a closed \hid{}, or a graduated avenue. Skip, or treat as a reading of the matching directive.}
+\recheckbox{second model}{Independently re-derived by a different model reading the same evidence. Weaker than a human check and stronger than nothing. Never a substitute for \textbf{Reproduced}.}
 
-\scaffoldbox{This PDF is not a finished textbook and is not ready to teach.
-Edition~\corpusedition{} was bootstrapped with AI as a long-term scaffold:
-a place to collect theorems, formulae, and claim-sheet receipts as the
-laboratory moves. Humans must vet, bulk up, fill in, and edit every chapter
-before it is a course. Do not assign it as a university class.
-Claims, lemmas, theorems, and formulae in this volume must not be invented
-by the model: a human checks each against \corpus{directives/claim-sheet.md}
-and a reproduce receipt \emph{before commit}.}
+\frontierbox{Speculative territory from \corpus{directives/potential-avenues.md}. A seminar essay, never a midterm fact.}
+
+\growswhen{A stub waiting on a new \claimkind{C} row, a closed \claimkind{H}, or a graduated avenue. Skip, or read the matching directive.}
+
+\scaffoldbox{Section-level reminder that a chapter is skeleton rather than
+finished text. The book-level statement of that is the draft notice on the
+previous page; this box marks the specific places where the scaffolding shows.}
+
+\paragraph{Why theorems carry two numbers.}
+The corpus --- \corpus{directives/}, the claim sheet, the papers --- has called
+these results \emph{Theorem 1}, \emph{Theorem 1$''$}, \emph{Theorem 2} and
+\emph{Theorem 3} since before this book existed, and external notes cite them
+that way. \LaTeX{} numbers theorems by chapter. Rather than break either
+convention, each theorem prints both: Theorem~9.1 of this book is also
+\corpusthm{1}. If you are following a reference from the claim sheet, match on
+the corpus name; if you are reading straight through, use the chapter number.
 
 \tableofcontents
 

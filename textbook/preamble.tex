@@ -14,6 +14,34 @@
 \usepackage{url}
 \usepackage[T1]{fontenc}
 \usepackage{textcomp}
+\usepackage{fancyhdr}
+
+% ---------------------------------------------------------------------------
+% Draft status is carried structurally, not by hedging the prose.
+%   1. \draftnotice  -- one unmissable page in the front matter.
+%   2. Per-page footer stamp -- so no single page, quoted or printed alone,
+%      can be mistaken for a finished textbook.
+% The body is written in the voice of the finished book on purpose. Editorial
+% readiness and claim correctness are different things: claims are still gated
+% by directives/claim-sheet.md and Scripts/claim_audit.py.
+% ---------------------------------------------------------------------------
+\newcommand{\draftstamp}{%
+  \footnotesize\itshape Draft \corpusedition{} (\livingepoch{}) --- in
+  preparation%
+}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\fancyfoot[L]{\draftstamp}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyfoot[C]{\thepage}%
+  \fancyfoot[L]{\draftstamp}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\footrulewidth}{0.4pt}%
+}
 
 \hypersetup{
   colorlinks=true,
@@ -46,6 +74,13 @@
   \newcommand{\audittime}{unaudited}
 }
 
+% The corpus names its theorems "Theorem 1", "Theorem 1'", "Theorem 2", ...
+% amsthm numbers them by chapter ("Theorem 9.1"). Both names are load-bearing:
+% the corpus name is what directives/, the claim sheet and the papers cite, and
+% the chapter number is what a reader of this book sees. \corpusthm bridges
+% them inside the theorem's title so neither name is orphaned.
+\newcommand{\corpusthm}[1]{corpus Theorem~#1}
+
 % Claim-sheet IDs
 \newcommand{\cid}[1]{\textbf{C#1}}
 \newcommand{\hid}[1]{\textbf{H#1}}
@@ -67,12 +102,77 @@
 }
 \newcommand{\reproduced}[2]{\livingbox{green!50!black}{Reproduced (#1)}{#2}}
 \newcommand{\hedgebox}[2]{\livingbox{orange!70!black}{Open hedge (#1)}{#2}}
+% Measured negative: a real result that did NOT pass. Doctrine prints clean
+% negatives, but they must never wear the green Reproduced label.
+\newcommand{\negativebox}[2]{\livingbox{purple!60!black}{Measured negative (#1)}{#2}}
+% Independent re-check by a second model. Weaker than a human gate; stronger
+% than nothing. Never a substitute for \reproduced.
+\newcommand{\recheckbox}[2]{\livingbox{teal!60!black}{Re-checked, second model (#1)}{#2}}
+% Generic claim-kind noun, so \cid{} is never called with an empty argument
+% and stays machine-extractable.
+\newcommand{\claimkind}[1]{\textbf{#1}}
 \newcommand{\frontierbox}[1]{\livingbox{blue!55!black}{Frontier --- not a claim}{#1}}
 \newcommand{\growswhen}[1]{\livingbox{black!45}{This section grows when}{#1}}
 \newcommand{\nonclaimbox}[1]{\livingbox{red!55!black}{Non-claim}{#1}}
 \newcommand{\scaffoldbox}[1]{\livingbox{red!70!black}{Not a course yet}{#1}}
 
-% Pedagogy
+% The single authoritative statement of editorial status. Everything that reads
+% like a finished course later in the book is covered by this page.
+\newcommand{\draftnotice}{%
+  \thispagestyle{plain}%
+  \begin{center}
+  \fcolorbox{red!70!black}{red!4}{%
+    \begin{minipage}{\dimexpr\textwidth-4\fboxsep-4\fboxrule\relax}
+    \vspace{0.6em}
+    \begin{center}\Large\bfseries Draft in preparation --- not yet ready to teach from\end{center}
+    \vspace{0.2em}
+    \normalsize
+    Edition \corpusedition{}, epoch \livingepoch{}.
+
+    \medskip
+    This volume is being \emph{prepared} as a textbook, and is written in the
+    voice of the book it is intended to become. It therefore may contain text
+    that implies a course already exists --- chapters that lecture, exercises
+    that are set, labs that are specified, a syllabus that assigns weeks and
+    grading weights. Please read that as work in progress. The material has not
+    been taught, has not been reviewed by anyone qualified to sign off on the
+    pedagogy, and is not part of any curriculum.
+
+    \medskip
+    Status is stated here once and stamped on each page rather than repeated
+    inside every paragraph, so that the text can be read --- and grown --- as
+    continuous prose.
+
+    \medskip
+    \textbf{What is nonetheless load-bearing.} Editorial readiness and factual
+    correctness are separate. Every \cid{}, \hid{} and \nid{} reference, every
+    \textbf{Reproduced} box, and every theorem in this book is bound to
+    \corpus{directives/claim-sheet.md} and a reproduce receipt, and that binding
+    is checked mechanically by \corpus{Scripts/claim\_audit.py} in CI. Claims,
+    lemmas, theorems and formulae are not invented to fill the scaffold: a human
+    checks each against the sheet before commit. If a sentence in this book
+    disagrees with the claim sheet, \textbf{the sheet wins} and the sentence is
+    a bug.
+
+    \medskip
+    Numbers carry the same discipline. Timings are medians of repeated runs with
+    the spread printed where they have been re-measured
+    (\corpus{Scripts/bench\_repeat.py}); single-observation figures inherited
+    from earlier work are being replaced incrementally.
+    \vspace{0.6em}
+    \end{minipage}%
+  }
+  \end{center}
+  \clearpage
+}
+
+% Pedagogy.
+%
+% These are real exercises and real labs, written in the voice the finished book
+% will use. That is deliberate: this edition is a DRAFT being prepared toward a
+% course, not a course pretending to be a draft. Editorial status is carried
+% once, loudly, by the front-matter notice and the per-page DRAFT stamp -- not
+% by hedging every environment title. See \draftnotice below.
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[chapter]
 \newtheorem{example}{Example}[chapter]

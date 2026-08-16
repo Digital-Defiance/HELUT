@@ -41,7 +41,7 @@ A fourth class lives only in this book and in
 \begin{center}
 \begin{tabular}{@{}lp{0.62\textwidth}@{}}
 \toprule
-Frontier & Not a claim until it has a \cid{} row and a reproduce command.
+Frontier & Not a claim until it has a \claimkind{C} row and a reproduce command.
 Seminar fuel. Never a midterm fact. \\
 \bottomrule
 \end{tabular}
@@ -73,7 +73,8 @@ Application: production-shaped polynomial degree on a laptop GPU graph.
 \end{example}
 
 \begin{example}[Five cells for \cid{19}]
-TensorLUT continuous$\to$discrete Theorem~1~\cite{helut-tensorlut-thm}.
+TensorLUT continuous$\to$discrete, \corpusthm{1}, stated as
+Theorem~\ref{thm:tensorlut} in Chapter~\ref{ch:pillarii}~\cite{helut-tensorlut-thm}.
 Proof: six \texttt{TensorLUTFormal.check*} lemmas, aggregated by
 \texttt{certificate()}.
 Table: lemma vs \texttt{holds}; campaign grades kept separate.
@@ -87,7 +88,7 @@ Asterisk: structural, not a U-534 break (\hid{6}).
 Take any sentence from a blog post, a grant abstract, or last year's slide
 deck about ``encrypted computing on a Neural Engine.''
 Fill the five cells or mark the sentence a non-claim.
-If you cannot name the log file, it is not a \cid{} row.
+If you cannot name the log file, it is not a \claimkind{C} row.
 \end{exercise}
 
 \section{Disclosure versus discovery}
@@ -105,8 +106,8 @@ Failure mode & Unreproducible hype & Silence / no next experiment \\
 \end{tabular}
 \end{center}
 
-When a trajectory item graduates, it earns a \cid{} row (or a tightened
-\hid{}) and a reproduce command---\emph{then} it may enter lecture voice.
+When a trajectory item graduates, it earns a \claimkind{C} row (or a tightened
+\claimkind{H}) and a reproduce command---\emph{then} it may enter lecture voice.
 That sentence is the entire editorial policy of this book.
 An AI draft of a lemma is not a graduation: a human must check the statement
 before it is committed.
@@ -133,7 +134,7 @@ Metal/GPU power analysis is parked~\cite{helut-avenues}.}
 
 \begin{enumerate}
   \item A laboratory result lands in a log under \corpus{logs/}.
-  \item A \cid{} or \hid{} row is updated in the claim sheet.
+  \item A \claimkind{C} or \claimkind{H} row is updated in the claim sheet.
   \item The matching chapter gains an example, a table row, or a converted
         box; \texttt{\textbackslash livingepoch} bumps.
   \item The syllabus appendix does \emph{not} automatically change.

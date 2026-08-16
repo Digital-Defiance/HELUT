@@ -108,10 +108,11 @@ Blind rotation addresses coefficients at granularity $\delta = q/(2N)$.
 Packing several LWE bits into one phase must respect the cyclic group
 $Z_{2N}$, not an integer that merely looks like a power.
 
-\reproduced{H2 closed}{Multi-LUT encrypted full\_adder SING PASSes at
-$N\in\{256,512,1024\}$. The bug was arity-3 packing overflowing $256\cdot 2N$
-headroom; the fix is rotation-native encrypt plus \texttt{packLWEBits} reduce
-mod $2N$, with \texttt{rotationPower} preferring $Z_{2N}$ representatives.}
+\reproduced{C6}{Multi-LUT encrypted full\_adder SING PASSes at
+$N\in\{256,512,1024\}$; this is what closed \hid{2} on 2026-08-12. The bug was
+arity-3 packing overflowing $256\cdot 2N$ headroom; the fix is rotation-native
+encrypt plus \texttt{packLWEBits} reduce mod $2N$, with \texttt{rotationPower}
+preferring $Z_{2N}$ representatives.}
 
 That closed hedge is the best homework in the chapter: a systems bug that is
 also an algebraic bug.
@@ -174,4 +175,4 @@ Inter-LUT refresh & \texttt{publicMS} default & lattice-compatible BK masks \\
 \end{center}
 
 Demo $N=8$ will not meet 128-bit hardness. The certificate reports that
-honestly. Using demo $N$ for a ``secure encrypted CPU'' slide is a \nid{}.
+honestly. Using demo $N$ for a ``secure encrypted CPU'' slide is a \claimkind{N}.

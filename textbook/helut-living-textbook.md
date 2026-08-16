@@ -22,9 +22,16 @@ Scaffold for a future course --- not ready to teach
 Canonical source: `textbook/helut-living-textbook.tex`. Corpus of record: `directives/claim-sheet.md`. This volume is an AI-bootstrapped collecting place for theorems and formulae. Humans must vet, bulk, fill, and edit it before it is a textbook. Frontier chapters are labeled frontier.
 :::
 
+::: center
+:::
+
 ## How to read the living boxes {#how-to-read-the-living-boxes .unnumbered}
 
-Five boxes appear throughout this book. They are not decoration; they are the difference between a textbook and a press release.
+Seven boxes appear throughout this book. They are not decoration; they are the difference between a textbook and a press release. Editorial status is not their job --- that is stated once on the previous page and stamped on every page footer. These boxes carry *evidential* status, which is a separate axis and the one that must never slip.
+
+###### Why theorems carry two numbers.
+
+The corpus --- `directives/`, the claim sheet, the papers --- has called these results *Theorem 1*, *Theorem 1$''$*, *Theorem 2* and *Theorem 3* since before this book existed, and external notes cite them that way. LaTeX numbers theorems by chapter. Rather than break either convention, each theorem prints both: Theorem 9.1 of this book is also corpus Theorem 1. If you are following a reference from the claim sheet, match on the corpus name; if you are reading straight through, use the chapter number.
 
 # How This Book Lives
 
@@ -54,7 +61,7 @@ Edition 0.1.2 is an AI-bootstrapped collecting place: theorems, formulae, claim
 
 ###### What this edition is not.
 
-It is not a claim that HELUT invented TFHE [@chillotti2020tfhe; @ducas2015fhew]. It is not a production key-size manual. Sage filled the estimator JSON (**C23**); **H1** remains because four of eight calibration anchors disagree with Cost `rop` by more than 16 bits, and because "176-bit secure" is a forbidden exam answer. It is not a decrypt of U-534 / P1030680. It is not a side-channel paper. Those sentences are printed again in Chapter [3](#ch:living){reference-type="ref" reference="ch:living"} because students will forget them the week before the final.
+It is not a claim that HELUT invented TFHE [@chillotti2020tfhe; @ducas2015fhew]. It is not a production key-size manual. Sage filled the estimator JSON (**C23**); **H1** remains because four of eight calibration anchors disagree with Cost `rop` by more than 16 bits, which is why "176-bit secure" is not a sentence this corpus supports. It is not a decrypt of U-534 / P1030680. It is not a side-channel paper. Those sentences are printed again in Chapter [3](#ch:living){reference-type="ref" reference="ch:living"} because students will forget them the week before the final.
 
 ###### This edition is a draft, and it is AI-generated.
 
@@ -115,7 +122,7 @@ The claim audit is the signature assignment of this course. It trains the skill 
 
 ### What to lecture, what to assign as reading
 
-- **Lecture** Parts II--III (foundations and Pillar I), the honesty chapter, and Theorem [1.1](#thm:tensorlut){reference-type="ref" reference="thm:tensorlut"} (**C19**).
+- **Lecture** Parts II--III (foundations and Pillar I), the honesty chapter, and Theorem [1.1](#thm:tensorlut){reference-type="ref" reference="thm:tensorlut"} (**C19**), which is stated in Chapter [1](#ch:pillarii){reference-type="ref" reference="ch:pillarii"} --- this chapter only refers to it.
 
 - **Seminar** Pillar II empirics (shatter / hold, campaign as case study) and Pillar III in edition 0.1.2. Do not lecture shatter grades as if they were Theorem [1.1](#thm:tensorlut){reference-type="ref" reference="thm:tensorlut"}.
 
@@ -193,7 +200,7 @@ For an atomic claim $C$, the doctrine requires all five, or $C$ is hedged:
 :::
 
 ::: example
-**Example 3.2** (Five cells for **C19**). TensorLUT continuous$\to$discrete Theorem 1 [@helut-tensorlut-thm]. Proof: six `TensorLUTFormal.check*` lemmas, aggregated by `certificate()`. Table: lemma vs `holds`; campaign grades kept separate. Metric: $F_{\mathrm{crypto}}=0$ on unmutated baseline; $\pi=0$ on binary INIT. Examples: M4 baseline emit; freeze-core involution; blind 3-pair PASS. Application: a stecker search that cannot propose a non-reciprocal map. Asterisk: structural, not a U-534 break (**H6**).
+**Example 3.2** (Five cells for **C19**). TensorLUT continuous$\to$discrete, corpus Theorem 1, stated as Theorem [1.1](#thm:tensorlut){reference-type="ref" reference="thm:tensorlut"} in Chapter [1](#ch:pillarii){reference-type="ref" reference="ch:pillarii"} [@helut-tensorlut-thm]. Proof: six `TensorLUTFormal.check*` lemmas, aggregated by `certificate()`. Table: lemma vs `holds`; campaign grades kept separate. Metric: $F_{\mathrm{crypto}}=0$ on unmutated baseline; $\pi=0$ on binary INIT. Examples: M4 baseline emit; freeze-core involution; blind 3-pair PASS. Application: a stecker search that cannot propose a non-reciprocal map. Asterisk: structural, not a U-534 break (**H6**).
 :::
 
 ::: exercise
@@ -250,7 +257,7 @@ HELUT is one laboratory realization of that definition: Yosys JSON in, `MPSGraph
 
 2.  **Clocking.** Can sequential logic---enables, sync resets, a RISC-V core---tick on that graph without the host becoming a bit-banged FPGA?
 
-3.  **Honesty.** When the same object grows a real bootstrapping key, what certificates must ship with every tick, and which sentences remain forbidden?
+3.  **Honesty.** When the same object grows a real bootstrapping key, what certificates must ship with every tick, and which sentences does the evidence still not support?
 
 Pillar I is the constructive answer to (1)--(3). Pillar II asks a fourth question the FPGA curriculum never asked: *what if the INIT table is not binary?* Pillar III asks a fifth: *what if the circuit under evaluation is allowed to mutate because the attacker in the next room is the same compiler?*
 
@@ -280,7 +287,7 @@ Roadmap language names them the Turing pillar, the Schneier pillar, and a grand 
 
 - Without III, I and II only attack the past; they do not design the next cipher under fire.
 
-Edition 0.1.2 teaches I in lecture depth, Pillar II Theorem [1.1](#thm:tensorlut){reference-type="ref" reference="thm:tensorlut"} (**C19**) in lecture depth with empirics in seminar, Pillar III in seminar depth, and the grand-challenge / side-channel items as labeled frontier (Chapter [4](#ch:frontier){reference-type="ref" reference="ch:frontier"}).
+Edition 0.1.2 treats Pillar I in lecture depth, Pillar II Theorem [1.1](#thm:tensorlut){reference-type="ref" reference="thm:tensorlut"} (**C19**, stated in Chapter [1](#ch:pillarii){reference-type="ref" reference="ch:pillarii"}) in lecture depth with empirics in seminar, Pillar III in seminar depth, and the grand-challenge / side-channel items as labeled frontier (Chapter [4](#ch:frontier){reference-type="ref" reference="ch:frontier"}).
 
 ### Related systems, scoped not ranked
 
@@ -672,7 +679,15 @@ Most compiler courses grade a binary that runs. This course grades a binary that
 
 - Depth: noisy-BK model; **C22** measured at covering gadget; **C26** graded fail at `cryptoPublicMS` $N{=}1024$; covering Track A torus-scale is **C52**--**C54**; native $k{=}1$ remains **C37**/**C55**; `cryptoPublicMS` noisy SING remains **C26**/**C56**.
 
-Students who report only milliseconds have not completed the lab.
+A lab report on this material is incomplete if it stops at milliseconds: the certificate lines are the result, and the timing is context for it.
+
+::: {#thm:covering .theorem}
+**Theorem 3.1** (Exact public-MS covering degrees; corpus Theorem 3). *Let the torus word be $q=2^{32}$ and let a public modulus-switch gadget have $g_0=\delta$. If the gadget covers, then $(1+\log_2 N)$ divides $32$. Consequently, among $N\in\{8,16,\dots,2048\}$ the only exact covering degrees are $N=8$ and $N=128$.*
+:::
+
+###### Proof (machine-checked).
+
+`GGSWPublicMSCovering.certificate()` asserts the divisibility lemma and enumerates `exactDegrees` $=[8,128]$ over the practical range; the test additionally pins $\mathrm{baseLog}\cdot\ell=22$ for $N{=}1024$.
 
 ### Calibration is not estimation
 
@@ -758,7 +773,7 @@ Every Yosys `$lut` of width $1\ldots 6$ pads to a 64-wide `Float32` INIT. The fo
 ### Theorem 1 (structural) {#sec:thm-tensorlut}
 
 ::: {#thm:tensorlut .theorem}
-**Theorem 1.1** (TensorLUT continuous$\to$discrete). *Assume the hypotheses on the certificate: the LUT is multilinear; the GA mutates only unfrozen $w_i\in[0,1]$; the involution sandwich freezes core INITs. Then:*
+**Theorem 1.1** (TensorLUT continuous$\to$discrete; corpus Theorem 1). *Assume the hypotheses on the certificate: the LUT is multilinear; the GA mutates only unfrozen $w_i\in[0,1]$; the involution sandwich freezes core INITs. Then:*
 
 1.  ***Discreteness.** $\pi(w)\ge 0$, with equality iff $w\in\{0,1\}^{64L}$.*
 
@@ -778,7 +793,7 @@ Every Yosys `$lut` of width $1\ldots 6$ pads to a 64-wide `Float32` INIT. The fo
 Each clause is a `TensorLUTFormal.check*` in `TensorLUTFormal.swift`, aggregated by `TensorLUTFormal.certificate()`.
 
 ::: {#thm:tensorlut-corollary .theorem}
-**Theorem 1.2** (TensorLUT emitter / freeze corollary). *Under Theorem [1.1](#thm:tensorlut){reference-type="ref" reference="thm:tensorlut"} hypotheses plus emit-via-$E$ and `mutatedPreserving`: if $\pi(w)=0$ then $E(w)$ recovers the binary INIT; every freeze-preserving genotype remains a partial involution containing the frozen pairs.*
+**Theorem 1.2** (TensorLUT emitter / freeze corollary; corpus Theorem 1 corollary). *Under Theorem [1.1](#thm:tensorlut){reference-type="ref" reference="thm:tensorlut"} hypotheses plus emit-via-$E$ and `mutatedPreserving`: if $\pi(w)=0$ then $E(w)$ recovers the binary INIT; every freeze-preserving genotype remains a partial involution containing the frozen pairs.*
 :::
 
 Still not melt completeness for arbitrary netlists. The named lemmas of Theorem [1.1](#thm:tensorlut){reference-type="ref" reference="thm:tensorlut"} are `discretenessPenalty`, `cryptoFitnessMSE`, `combinedObjective`, `emitterThreshold`, `involutionSandwich`, `freezeMask`. Source path: `Sources/HELUTCore/TensorLUTFormal.swift`.
@@ -788,7 +803,7 @@ Still not melt completeness for arbitrary netlists. The named lemmas of Theorem�
 :::
 
 ::: {#thm:tensorlut-snap .theorem}
-**Theorem 1.3** (TensorLUT melt--freeze--snap, separable interpolant). *Under a fully observed 1-LUT (each used INIT address an independent Boolean target $t$), $F(w)=-\lVert w-t\rVert_2^2-\lambda\pi(w)$ has unique maximizer $w=t$; the emitter recovers $t$ on the open cube $\lvert w_i-t_i\rvert<1/2$; a freeze away from $t$ makes $F=0$ unreachable.*
+**Theorem 1.3** (TensorLUT melt--freeze--snap, separable interpolant; corpus Theorem 1$''$). *Under a fully observed 1-LUT (each used INIT address an independent Boolean target $t$), $F(w)=-\lVert w-t\rVert_2^2-\lambda\pi(w)$ has unique maximizer $w=t$; the emitter recovers $t$ on the open cube $\lvert w_i-t_i\rvert<1/2$; a freeze away from $t$ makes $F=0$ unreachable.*
 :::
 
 ### Five-cell test for Theorem 1
@@ -862,7 +877,7 @@ The historical Enigma leaks this laboratory proved fatal---26-letter menus, self
 ### Theorem 2 (structural SoftBus) {#sec:thm-enigma256}
 
 ::: {#thm:enigma256 .theorem}
-**Theorem 1.4** (Enigma256 SoftBus reciprocity / fail-closed). *Under the hypotheses of `Enigma256Formal.certificate()` (reciprocal scramble path; day-key involution builders; NLFF retaps do not rewrite frozen scramble): frozen scramble is a permutation and an involution; stream encrypt-then-decrypt recovers plaintext under identical keys; derived plugboard is fixed-point-free involution and un-reflector is an involution; `hardenedCubic()` rejects `coupledCubic6`.*
+**Theorem 1.4** (Enigma256 SoftBus reciprocity / fail-closed; corpus Theorem 2). *Under the hypotheses of `Enigma256Formal.certificate()` (reciprocal scramble path; day-key involution builders; NLFF retaps do not rewrite frozen scramble): frozen scramble is a permutation and an involution; stream encrypt-then-decrypt recovers plaintext under identical keys; derived plugboard is fixed-point-free involution and un-reflector is an involution; `hardenedCubic()` rejects `coupledCubic6`.*
 :::
 
 Machine-checked: `Enigma256Formal.certificate()` / `testEnigma256FormalCertificate`. Reproduce: see Lab appendix / `REPRODUCE.md`.
@@ -1308,7 +1323,9 @@ Suggested title: *Reconfigurable Homomorphic Computing*. 3 credits. Mix of lectu
    15  VI     Frontier seminars; essays due; living-epoch recap.
 :::
 
-Final: take-home claim audit plus a short oral defense of one reproduced box and one hedge box. If the student upgrades the hedge, they have not passed the course's signature skill.
+Final: take-home claim audit plus a short oral defense of one reproduced box and one hedge box.
+
+The thing being assessed is whether a hedge survives contact with a question. Stating **H1** and then, under follow-up, sliding into "so it is 176-bit secure" is the characteristic failure mode, and noticing it in your own sentence is the skill the course is trying to build. Treat it as the main rubric line and as something to discuss in the viva --- not as an automatic fail. Everyone does it once; the difference between a student who has learned the material and one who has not is whether they catch themselves.
 
 ## Reproduce commands (course subset) {#app:repro}
 
