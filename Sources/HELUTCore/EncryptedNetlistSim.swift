@@ -360,7 +360,15 @@ package final class EncryptedNetlistSimulator {
         var wires: [Int: LWECiphertext] = encryptedQ
         let useScaledInputs = scaledPrimaryInputs
 
-        for (port, bits) in inputs {
+        // Sorted, NOT raw dictionary order. This loop draws from the shared
+        // serial `rng` to encrypt each primary input, and Swift randomises
+        // Dictionary iteration order per process — so unsorted iteration hands a
+        // different mask vector to a different wire on every run. That made the
+        // whole encrypted path non-reproducible: with every seed fixed and an
+        // identical measured B_bk, the n=512 covering adder SING alternated
+        // between PASS and a `sum mismatch` fatalError, while running under
+        // SWIFT_DETERMINISTIC_HASHING=1 passed 4/4. Found 2026-08-15.
+        for (port, bits) in inputs.sorted(by: { $0.key < $1.key }) {
             guard let portBits = clear.inputPorts[port] else { continue }
             precondition(bits.count == portBits.count, "Width mismatch on \(port)")
             for (index, bit) in portBits.enumerated() {
@@ -443,7 +451,16 @@ package final class EncryptedNetlistSimulator {
                     brReady.append((lut, aLWEs))
                 }
             }
-            if brReady.count > 1 {
+            // Set HELUT_SERIAL_WAVEFRONT=1 to evaluate ready LUTs serially.
+            // Added 2026-08-15 to isolate a reproducible nondeterminism: with
+            // every seed fixed and an identical measured B_bk, the n=512
+            // covering adder SING alternates between PASS and a `sum mismatch`
+            // fatalError across runs. Identical inputs with differing outputs
+            // means execution order matters somewhere, and this is the only
+            // concurrency on the encrypted netlist path.
+            let serialWavefront = ProcessInfo.processInfo
+                .environment["HELUT_SERIAL_WAVEFRONT"] == "1"
+            if brReady.count > 1 && !serialWavefront {
                 var parallelExtracted: [Int: LWECiphertext] = [:]
                 var parallelError: Error?
                 let waveLock = NSLock()
@@ -467,12 +484,14 @@ package final class EncryptedNetlistSimulator {
                 }
                 if let parallelError { throw parallelError }
                 extractedByWire = parallelExtracted
-            } else if let (lut, aLWEs) = brReady.first {
-                extractedByWire[lut.yWire] = try evaluateLUTBlindRotateBody(
-                    truthTable: lut.table.map { UInt32($0) },
-                    inputs: aLWEs,
-                    bootstrapKey: bk
-                )
+            } else {
+                for (lut, aLWEs) in brReady {
+                    extractedByWire[lut.yWire] = try evaluateLUTBlindRotateBody(
+                        truthTable: lut.table.map { UInt32($0) },
+                        inputs: aLWEs,
+                        bootstrapKey: bk
+                    )
+                }
             }
             for (lut, aLWEs) in brReady {
                 guard let extracted = extractedByWire[lut.yWire] else {
@@ -830,7 +849,15 @@ package final class EncryptedNetlistSimulator {
         _ = issueNoisyBKCertificate()
         var wires: [Int: GLWECiphertext] = [:]
 
-        for (port, bits) in inputs {
+        // Sorted, NOT raw dictionary order. This loop draws from the shared
+        // serial `rng` to encrypt each primary input, and Swift randomises
+        // Dictionary iteration order per process — so unsorted iteration hands a
+        // different mask vector to a different wire on every run. That made the
+        // whole encrypted path non-reproducible: with every seed fixed and an
+        // identical measured B_bk, the n=512 covering adder SING alternated
+        // between PASS and a `sum mismatch` fatalError, while running under
+        // SWIFT_DETERMINISTIC_HASHING=1 passed 4/4. Found 2026-08-15.
+        for (port, bits) in inputs.sorted(by: { $0.key < $1.key }) {
             guard let portBits = clear.inputPorts[port] else { continue }
             precondition(bits.count == portBits.count, "Width mismatch on \(port)")
             for (index, bit) in portBits.enumerated() {

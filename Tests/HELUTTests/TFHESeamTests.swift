@@ -1626,6 +1626,9 @@ final class TFHESeamTests: XCTestCase {
             twoN: twoN,
             rng: &rngZ
         )
+        // Raw equality is only sound here because the secret is zero, so the
+        // mask sum is zero and no Z_{2N} wraparound occurs. Do not copy this
+        // assertion to a random-secret ciphertext; see the loop below.
         XCTAssertEqual(decryptLWE(lwe1, secret: zero), 1)
         var idPoly = [UInt32](repeating: 0, count: degree)
         idPoly[1] = scale
@@ -1641,7 +1644,17 @@ final class TFHESeamTests: XCTestCase {
                 twoN: twoN,
                 rng: &rng
             )
-            XCTAssertEqual(decryptLWE(lwe, secret: secret), bit)
+            // `encryptLWERotationNative` reduces b and a mod 2N, but
+            // `decryptLWE` subtracts the mask over the full UInt32 ring, so the
+            // phase it returns is the message only *modulo 2N* (it comes back as
+            // message - j*2N for some j). Decode with the rotation-native
+            // decoder, as this file already does at the publicRefreshBit sites.
+            // Raw equality here was wrong and failed for a random secret.
+            XCTAssertEqual(
+                decodeRotationNativeBit(decryptLWE(lwe, secret: secret), twoN: twoN, k: 1),
+                bit,
+                "native rotation round-trip bit=\(bit) phase=\(decryptLWE(lwe, secret: secret))"
+            )
             var poly = [UInt32](repeating: 0, count: degree)
             poly[0] = 0
             poly[1] = scale
