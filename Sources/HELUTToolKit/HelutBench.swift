@@ -1539,8 +1539,24 @@ func epsilonConfidenceNote(
     if clearsAtBound && upper <= targetLog2 * 2 {
         return String(format: " [n=%ld, 95%%up=%.1f — clears %.0f]", m.samples, upper, targetLog2)
     }
-    let need = m.samplesForOneOrder
-    let needStr = (need > 0 && need < 100_000_000) ? String(format: ", ±1 needs n≈%ld", need) : ""
+    // What to do about a bar that is not met depends entirely on *why*, and the
+    // two cases need opposite responses. Printing "±1 needs n≈40489" invited the
+    // wrong one: that is the cost of resolving ε to ±1 order, a far stricter
+    // standard than clearing a bar, and quoting it made under-sampled rows look
+    // hopeless. AUDIT §14. So report the sample size that would actually settle
+    // the bar, and say plainly when no sample size will.
+    //
+    // The requirement is stated against the union target, since the printed ε is
+    // a union over `lutCount` LUTs.
+    let unionTarget = targetLog2 - unionPenalty
+    let needStr: String
+    if clearsAtBound {
+        needStr = ""
+    } else if let need = m.samplesToMeetTarget(targetLog2: unionTarget) {
+        needStr = String(format: ", under-sampled: n≈%ld would clear", need)
+    } else {
+        needStr = ", point estimate itself fails — no n clears this"
+    }
     return String(
         format: " [n=%ld, 95%%up=%.1f %@ %.0f%@]",
         m.samples,

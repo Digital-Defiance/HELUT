@@ -327,8 +327,39 @@ package struct TFHENoisyBKMeasurement: Sendable, Equatable {
     }
 
     /// Samples needed to resolve ε to ±1 order at this magnitude.
+    ///
+    /// Usually *not* the number you want — see `samplesToMeetTarget`. Resolving
+    /// to ±1 order is far stricter than clearing a bar, and conflating the two
+    /// led to declaring C35 undecidable when it was only under-sampled
+    /// (AUDIT §13 vs §14).
     package var samplesForOneOrder: Int {
         samplesForEpsilonResolution(failureLog2: failureLog2Point)
+    }
+
+    /// Smallest sample count whose 95% bound would clear `targetLog2`, or `nil`
+    /// if no sample count can because the point estimate already fails.
+    ///
+    /// Lets a caller distinguish the two ways a bar goes unmet, which need
+    /// opposite responses:
+    ///
+    ///  - **under-sampled** — point estimate clears, bound does not. Buy more
+    ///    trials. C35 and C36 are this.
+    ///  - **genuinely unmet** — point estimate itself fails. More trials are
+    ///    wasted compute; the claim has to be weakened. C55 and C56 are this,
+    ///    and both already say so.
+    package func samplesToMeetTarget(targetLog2: Double = -64) -> Int? {
+        samplesToClearFailureTarget(
+            sigmaHat: sigmaHat,
+            threshold: Double(decodingHalfGap),
+            targetLog2: targetLog2
+        )
+    }
+
+    /// Whether this measurement's *sample size* is what stands between it and
+    /// the bar. True means more trials would settle it.
+    package func isUnderSampledForTarget(targetLog2: Double = -64) -> Bool {
+        guard !meetsTargetWithConfidence(targetLog2: targetLog2) else { return false }
+        return samplesToMeetTarget(targetLog2: targetLog2) != nil
     }
 
     package var eachLUTDecodable: Bool {

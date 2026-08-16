@@ -241,6 +241,55 @@ package func samplesForEpsilonResolution(failureLog2: Double, orders: Double = 1
     return Int((1 / (2 * r * r)).rounded(.up))
 }
 
+/// Smallest sample count at which the 95% bound *clears* `targetLog2`, or `nil`
+/// if no sample size can.
+///
+/// This is the question that actually matters, and it is not the same question
+/// `samplesForEpsilonResolution` answers. Resolving ε to ±1 order is a
+/// self-imposed standard no bar-clearing claim needs; AUDIT §14 records getting
+/// this wrong and concluding a claim was undecidable when it was merely
+/// under-sampled.
+///
+/// The required count depends only on how far the point estimate sits from the
+/// bar. Because the bound is `σ̂·√(m/χ²₀.₀₅(m))` and `log₂ε ∝ −1/σ²`, the bound
+/// clears the bar iff `|point| ≥ (m/χ²₀.₀₅(m))·|target|`. That ratio falls
+/// monotonically in `m`, so there is a single threshold and a scan finds it.
+///
+/// Returns `nil` when the *point estimate itself* fails the bar: no amount of
+/// sampling rescues a measurement whose central value is on the wrong side, and
+/// callers must weaken the claim rather than buy more compute.
+package func samplesToClearFailureTarget(
+    sigmaHat: Double,
+    threshold: Double,
+    targetLog2: Double,
+    confidence: Double = 0.95,
+    cap: Int = 4_000_000
+) -> Int? {
+    guard sigmaHat > 0, threshold > 0, targetLog2.isFinite else { return nil }
+    let point = log2GaussianTwoSidedTail(stddev: sigmaHat, threshold: threshold)
+    // Unreachable: the bound can never be better than the point estimate.
+    guard point <= targetLog2 else { return nil }
+
+    func clears(_ m: Int) -> Bool {
+        let upper = sigmaUpperConfidenceBound(
+            sigmaHat: sigmaHat, samples: m, confidence: confidence
+        )
+        guard upper.isFinite, upper > 0 else { return false }
+        return log2GaussianTwoSidedTail(stddev: upper, threshold: threshold) <= targetLog2
+    }
+
+    // Exponential bracket then bisect: the predicate is monotone in `m`.
+    var hi = 2
+    while hi < cap, !clears(hi) { hi *= 2 }
+    guard clears(hi) else { return nil }
+    var lo = max(2, hi / 2)
+    while lo < hi {
+        let mid = lo + (hi - lo) / 2
+        if clears(mid) { hi = mid } else { lo = mid + 1 }
+    }
+    return lo
+}
+
 /// Asymptotic / concrete failure-probability certificate (Gaussian model).
 package struct TFHEAsymptoticSecurityCertificate: Sendable, Equatable {
     package var params: TFHEGaussianParams
