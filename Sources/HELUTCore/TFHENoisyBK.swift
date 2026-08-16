@@ -98,6 +98,22 @@ package struct TFHENoisyBKCertificate: Sendable, Equatable {
                     + ", decode_fail=\(measurement.decodeFailures))",
                 at: 3
             )
+            // σ̂ is an RMS over `samples` observations and log₂ε ∝ −1/σ̂², so the
+            // sample size, not the arithmetic, sets how much of ε is real.
+            hypotheses.insert(
+                String(
+                    format:
+                        "ε sampling uncertainty: σ̂ from %d samples ⇒ log₂ε "
+                        + "unresolved to ±%.0f orders; point %.1f, 95%% upper bound %.1f; "
+                        + "±1 order would need ~%d samples",
+                    measurement.samples,
+                    measurement.epsilonUnresolvedOrders,
+                    measurement.failureLog2Point,
+                    measurement.failureLog2Upper95,
+                    measurement.samplesForOneOrder
+                ),
+                at: 4
+            )
         } else if params.outputNoiseBound == 0 {
             hypotheses.insert(
                 "HELUT default BK encrypt is noiseless (e=0 gadget) — production stacks use noisy BK",
@@ -217,6 +233,54 @@ package struct TFHENoisyBKMeasurement: Sendable, Equatable {
     package var sigmaHat: Double { rms }
 
     package var decodingHalfGap: UInt32 { delta / 2 }
+
+    // MARK: Sampling uncertainty
+    //
+    // `rms` is an RMS over exactly `samples` observations (one residual per
+    // trial), and ε is an analytic tail evaluated at it. Because log₂ε ∝ −1/σ̂²,
+    // small-sample error in σ̂ dominates ε. These accessors exist so no caller
+    // can quote ε against a bar without also seeing what the sample size can
+    // actually resolve. See the 2026-08-15 re-validation of C35.
+
+    /// One-sided 95% upper confidence bound on σ from this sample.
+    package var sigmaUpper95: Double {
+        sigmaUpperConfidenceBound(sigmaHat: sigmaHat, samples: samples)
+    }
+
+    /// `log₂ε` recomputed at `sigmaUpper95` — the conservative figure, and the
+    /// only one that should be compared against a target such as 2⁻⁶⁴.
+    package var failureLog2Upper95: Double {
+        guard sigmaUpper95.isFinite, sigmaUpper95 > 0 else { return 0 }
+        return log2GaussianTwoSidedTail(
+            stddev: sigmaUpper95,
+            threshold: Double(decodingHalfGap)
+        )
+    }
+
+    /// `log₂ε` at the point estimate of σ̂ (what the tool historically printed).
+    package var failureLog2Point: Double {
+        guard sigmaHat > 0 else { return -Double.infinity }
+        return log2GaussianTwoSidedTail(
+            stddev: sigmaHat,
+            threshold: Double(decodingHalfGap)
+        )
+    }
+
+    /// Orders of `log₂ε` this sample size cannot resolve.
+    package var epsilonUnresolvedOrders: Double {
+        epsilonResolutionOrders(failureLog2: failureLog2Point, samples: samples)
+    }
+
+    /// Whether the target bar is met at the 95% upper bound, not merely at the
+    /// point estimate.
+    package func meetsTargetWithConfidence(targetLog2: Double) -> Bool {
+        failureLog2Upper95 <= targetLog2
+    }
+
+    /// Samples needed to resolve ε to ±1 order at this magnitude.
+    package var samplesForOneOrder: Int {
+        samplesForEpsilonResolution(failureLog2: failureLog2Point)
+    }
 
     package var eachLUTDecodable: Bool {
         UInt64(maxAbsError) < UInt64(decodingHalfGap)

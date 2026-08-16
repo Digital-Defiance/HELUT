@@ -159,6 +159,88 @@ package func log2Probability(_ p: Double) -> Double {
     return log(p) / log(2)
 }
 
+// MARK: - Sampling uncertainty on a measured σ̂
+//
+// ε here is an analytic Gaussian tail evaluated at a *measured* σ̂, and
+// log₂ε ≈ −(δ/2)²/(2σ̂² ln 2) — that is, log₂ε ∝ −1/σ̂². A relative error r in
+// σ̂ therefore moves log₂ε by roughly 2·|log₂ε|·r. At |log₂ε| = 65 a 1% error in
+// σ̂ is worth 1.3 orders, and σ̂ estimated from m samples carries a standard
+// error of about 1/√(2m).
+//
+// The practical consequence, found during the 2026-08-15 re-validation: an ε
+// measured at m = 4 samples has ±46 orders of slack at that scale, so a point
+// estimate of −65.4 says nothing about whether the 2⁻⁶⁴ bar is met. Anything
+// quoting ε against a bar must quote the confidence bound too.
+
+/// Upper quantile of the chi-square distribution (Wilson--Hilferty).
+/// Accurate to a few tenths of a percent for `dof >= 2`, which is far inside the
+/// uncertainty this is used to describe.
+package func chiSquareQuantile(probability p: Double, degreesOfFreedom dof: Int) -> Double {
+    precondition(p > 0 && p < 1 && dof >= 1)
+    let m = Double(dof)
+    let z = standardNormalQuantile(p)
+    let base = 1 - 2 / (9 * m) + z * (2 / (9 * m)).squareRoot()
+    return m * base * base * base
+}
+
+/// Inverse standard normal CDF (Acklam's rational approximation).
+package func standardNormalQuantile(_ p: Double) -> Double {
+    precondition(p > 0 && p < 1)
+    let a = [-3.969683028665376e+01, 2.209460984245205e+02, -2.759285104469687e+02,
+             1.383577518672690e+02, -3.066479806614716e+01, 2.506628277459239e+00]
+    let b = [-5.447609879822406e+01, 1.615858368580409e+02, -1.556989798598866e+02,
+             6.680131188771972e+01, -1.328068155288572e+01]
+    let c = [-7.784894002430293e-03, -3.223964580411365e-01, -2.400758277161838e+00,
+             -2.549732539343734e+00, 4.374664141464968e+00, 2.938163982698783e+00]
+    let d = [7.784695709041462e-03, 3.224671290700398e-01, 2.445134137142996e+00,
+             3.754408661907416e+00]
+    let plow = 0.02425
+    if p < plow {
+        let q = (-2 * log(p)).squareRoot()
+        return (((((c[0] * q + c[1]) * q + c[2]) * q + c[3]) * q + c[4]) * q + c[5])
+            / ((((d[0] * q + d[1]) * q + d[2]) * q + d[3]) * q + 1)
+    }
+    if p > 1 - plow {
+        let q = (-2 * log(1 - p)).squareRoot()
+        return -(((((c[0] * q + c[1]) * q + c[2]) * q + c[3]) * q + c[4]) * q + c[5])
+            / ((((d[0] * q + d[1]) * q + d[2]) * q + d[3]) * q + 1)
+    }
+    let q = p - 0.5
+    let r = q * q
+    return (((((a[0] * r + a[1]) * r + a[2]) * r + a[3]) * r + a[4]) * r + a[5]) * q
+        / (((((b[0] * r + b[1]) * r + b[2]) * r + b[3]) * r + b[4]) * r + 1)
+}
+
+/// One-sided upper confidence bound on σ given an RMS estimate over `samples`
+/// zero-mean observations. Uses `m·σ̂²/σ² ~ χ²(m)`.
+package func sigmaUpperConfidenceBound(
+    sigmaHat: Double,
+    samples: Int,
+    confidence: Double = 0.95
+) -> Double {
+    precondition(sigmaHat >= 0 && samples >= 1)
+    guard samples > 1, sigmaHat > 0 else { return .infinity }
+    let lower = chiSquareQuantile(probability: 1 - confidence, degreesOfFreedom: samples)
+    guard lower > 0 else { return .infinity }
+    return sigmaHat * (Double(samples) / lower).squareRoot()
+}
+
+/// How many orders of `log₂ε` the sample size cannot resolve:
+/// `2·|log₂ε|/√(2m)`. If this exceeds the distance to the target bar, the
+/// measurement cannot decide whether the bar is met.
+package func epsilonResolutionOrders(failureLog2: Double, samples: Int) -> Double {
+    guard samples >= 1, failureLog2.isFinite else { return .infinity }
+    return 2 * abs(failureLog2) / (2 * Double(samples)).squareRoot()
+}
+
+/// Samples needed to resolve `log₂ε` to `±orders`.
+package func samplesForEpsilonResolution(failureLog2: Double, orders: Double = 1) -> Int {
+    guard failureLog2.isFinite, orders > 0 else { return Int.max }
+    let r = orders / (2 * abs(failureLog2))
+    guard r > 0 else { return Int.max }
+    return Int((1 / (2 * r * r)).rounded(.up))
+}
+
 /// Asymptotic / concrete failure-probability certificate (Gaussian model).
 package struct TFHEAsymptoticSecurityCertificate: Sendable, Equatable {
     package var params: TFHEGaussianParams
