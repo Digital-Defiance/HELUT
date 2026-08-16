@@ -182,13 +182,27 @@ swift run -c release helut -- --validate
 
 ```
 Sources/HELUTCore/     Compiler, boolean-safe mock PBS, DFF clocking, Enigma/M4 oracles, scorers
+Sources/HELUTRadio/    C ABI dylib for GNU Radio / ctypes (`helut.h`)
 Sources/helut/         CLI (Enigma bombe + campaign + validate; netlist argv)
+Apps/gr-helut/         GNU Radio OOT + regex demo flowgraph
 Tests/HELUTTests/      Kernel, state, Enigma/M4 tests
 Fixtures/              Historical Enigma vectors, German corpus
 *.v / *_netlist.json   Application circuits (PicoRV32, regex, tree, Enigma, …)
 Scripts/               Campaign + scorer calibration
 paper/                 Technical write-up (helut.tex)
 PRD*.md / phase-*.md   Design progression
+```
+
+GNU Radio demo ([radioconda](https://github.com/radioconda/radioconda-installer): install [Apple Silicon .pkg](https://glare-sable.vercel.app/radioconda/radioconda-installer/radioconda-.*-MacOSX-arm64.pkg) to your home dir → activate conda → [CondaInstall](https://wiki.gnuradio.org/index.php/CondaInstall); Homebrew `gnuradio` is deprecated):
+
+```bash
+# Bootstrap (env, build, ladder of demos — start here):
+#   Apps/gr-helut/README.md
+
+make radio                                          # dylib + selftest (no GRC needed)
+python3 Apps/gr-helut/examples/helut_regex_demo.py  # ctypes path
+# after radioconda: conda activate base   # or: conda activate gnuradio
+python Apps/gr-helut/examples/helut_edge_matcher.py --batch 10000
 ```
 
 ## Status (honest)

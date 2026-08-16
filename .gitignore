@@ -12,3 +12,6 @@ DerivedData/
 # Auto-stamped by Scripts/helut_grand_audit.sh
 /textbook/git-stamp.tex
 
+
+__pycache__/
+*.py[cod]

@@ -127,6 +127,7 @@ Apps/
 - [ ] Template: `Package.swift` snippet or SPM plugin doc — “depend on HELUTCore ≥ C36”
 - [ ] Each app: README with claim IDs consumed + reproduce one-liner
 - [ ] Gallery site points at Apps/, not at megabin flags
+- [x] `Apps/gr-helut/` — C ABI (`HELUTRadio` / `libHELUTRadio.dylib`) + GNU Radio OOT skeleton (`make radio`)
 
 ### P4 — Researcher happiness
 

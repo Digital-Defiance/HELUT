@@ -8,7 +8,7 @@
 #   make gates       # claim lint + determinism gates (run before committing science)
 #   make determinism # in-process + cross-process encrypted determinism only
 
-.PHONY: writeup paper textbook note docs clean-docs test-metal-p1 gates determinism
+.PHONY: writeup paper textbook note docs clean-docs test-metal-p1 gates determinism radio radio-edge
 
 writeup: writeup.tex Scripts/build_writeup.sh
 	@chmod +x Scripts/build_writeup.sh
@@ -56,3 +56,21 @@ clean-docs:
 	rm -f textbook/helut-living-textbook.aux textbook/helut-living-textbook.log textbook/helut-living-textbook.out
 	rm -f textbook/helut-living-textbook.fls textbook/helut-living-textbook.fdb_latexmk textbook/helut-living-textbook.synctex.gz
 	rm -f textbook/helut-living-textbook.toc textbook/helut-living-textbook.bbl textbook/helut-living-textbook.blg
+
+# GNU Radio C ABI (libHELUTRadio.dylib) + smoke CLI. Does not require gnuradio.
+radio:
+	swift build -c release --product HELUTRadio
+	swift build -c release --product helut-radio
+	.build/release/helut-radio --selftest
+	python3 Apps/gr-helut/examples/helut_regex_demo.py --text 'XXDEFYYDEFZZ'
+
+# Closed-loop mindblower (needs radioconda activated — see
+# https://github.com/radioconda/radioconda-installer ;
+# Apple Silicon pkg: https://glare-sable.vercel.app/radioconda/radioconda-installer/radioconda-.*-MacOSX-arm64.pkg
+# Homebrew gnuradio is deprecated).
+radio-edge:
+	swift build -c release --product HELUTRadio
+	HELUT_RADIO_LIB="$(CURDIR)/.build/release/libHELUTRadio.dylib" \
+	PYTHONPATH="$(CURDIR)/Apps/gr-helut/python$${PYTHONPATH:+:$$PYTHONPATH}" \
+	python Apps/gr-helut/examples/helut_edge_matcher.py --batch 10000
+

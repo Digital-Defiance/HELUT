@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<?grc format='1' created='3.10'?>
+<!-- Placeholder GRC: open after brew install gnuradio.
+     Prefer examples/helut_regex_flowgraph.py if companion YAML paths differ. -->
+<flow_graph>
+  <timestamp>Sun Aug 16 13:20:00 2026</timestamp>
+  <options>
+    <param><key>id</key><value>helut_regex_demo</value></param>
+    <param><key>title</key><value>HELUT Regex Matcher</value></param>
+    <param><key>generate_options</key><value>qt_gui</value></param>
+  </options>
+</flow_graph>
