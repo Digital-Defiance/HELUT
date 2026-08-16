@@ -1488,6 +1488,14 @@ func runNoisyBKMeasure() {
                     + " δ/2=\(measured.decodingHalfGap) "
                     + "decode_fail=\(measured.decodeFailures) "
                     + "decodable=\(cert.eachLUTDecodable) εlog2=\(eps)"
+                    // The bar is decided by the confidence bound, not the point
+                    // estimate: log2(eps) is proportional to -1/sigma^2, so a
+                    // sigma-hat from a handful of samples leaves orders
+                    // unresolved. Only worth printing when it could change the
+                    // verdict -- at tiny N the point estimate is astronomically
+                    // below any bar and the uncertainty is moot.
+                    // NOTE %ld, not %d: Int is 64-bit here and %d truncates.
+                    + epsilonConfidenceNote(measured)
                     + "  (baseLog=\(params.baseLog) ℓ=\(params.levelCount))"
             )
             rows.append(measured)
@@ -1499,4 +1507,39 @@ func runNoisyBKMeasure() {
     }
     print("")
     print(TFHENoisyBKMeasurement.markdownTable(rows))
+}
+
+/// Human-readable sampling-uncertainty note for a measured epsilon.
+///
+/// `log2(eps)` is proportional to `-1/sigma^2`, so a relative error r in
+/// sigma-hat moves it by about `2*|log2 eps|*r`, and sigma-hat from m samples
+/// carries a standard error near `1/sqrt(2m)`. The consequence found on
+/// 2026-08-15: C35's "-65.4, still <= -64" at 4 samples carried +/-46 orders and
+/// could not decide the bar at all.
+///
+/// Printed only when it is decision-relevant. When the 95% upper bound already
+/// clears the target by a wide margin the note is noise, and at small N the
+/// point estimate is so far below any bar that "orders unresolved" is a
+/// meaningless-looking huge number.
+func epsilonConfidenceNote(
+    _ m: TFHENoisyBKMeasurement,
+    targetLog2: Double = -64
+) -> String {
+    guard m.sigmaHat > 0, m.failureLog2Point.isFinite else { return "" }
+    let upper = m.failureLog2Upper95
+    let clearsAtBound = upper <= targetLog2
+    // Comfortable: bound clears the bar with an order of magnitude to spare.
+    if clearsAtBound && upper <= targetLog2 * 2 {
+        return String(format: " [n=%ld, 95%%up=%.1f — clears %.0f]", m.samples, upper, targetLog2)
+    }
+    let need = m.samplesForOneOrder
+    let needStr = (need > 0 && need < 100_000_000) ? String(format: ", ±1 needs n≈%ld", need) : ""
+    return String(
+        format: " [n=%ld, 95%%up=%.1f %@ %.0f%@]",
+        m.samples,
+        upper,
+        clearsAtBound ? "clears" : "DOES NOT CLEAR",
+        targetLog2,
+        needStr
+    )
 }
