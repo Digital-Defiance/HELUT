@@ -667,7 +667,35 @@ Five lemmas must hold (bijection, reciprocity, stream round-trip, day-key involu
 ```bash
 # Emit / grades — see tensorlut.md and campaign Phase 21 artifacts
 # Baseline: enigma_m4_tensorlut_baseline.v (925 LUT6 + 49 DFFs)
+
+# Emitted Verilog is synthesizable AND functionally equivalent.
+# Needs yosys on PATH (brew install yosys); skips cleanly without it.
+swift test -c release --filter TensorLUTYosysRoundTripTests \
+  | tee logs/tensorlut-yosys-roundtrip-2026-08-16.log
 ```
+
+Expected:
+
+```
+TENSORLUT_ROUNDTRIP ok: 48 output bits over 16 input assignments, yosys-resynthesized vs source netlist
+TENSORLUT_ROUNDTRIP negative control: 4 mismatch(es) detected
+```
+
+The loop is emit → `yosys -q` (`read_verilog`, `hierarchy`, `proc`, `flatten`,
+`techmap`, `abc -lut 6`, `write_json`) → reload through the repo's own Yosys
+loader → `CleartextNetlistSimulator`, compared against direct evaluation of the
+source TensorLUT cells over **all 16** input assignments. Exhaustive, so
+agreement is proof rather than sampling. A behavioural `LUT6` model is supplied
+in-test so the flow does not depend on where a Yosys install keeps its Xilinx
+library.
+
+The negative control matters more than the positive result: flipping a single
+INIT bit must produce a visible mismatch. Without it, a comparison reading the
+wrong ports — or a Yosys pass that optimised INIT away — would pass silently.
+
+**Still open.** This validates the 4-LUT design, not the 925-LUT M4 baseline.
+The generic per-netlist emit CLI was dropped in the packaging split, so
+`enigma_m4_tensorlut_baseline.v` cannot yet be regenerated end-to-end.
 
 ## Determinism gates (encrypted path)
 
