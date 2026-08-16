@@ -23,7 +23,15 @@
     "and 8 trials; C41 moves -696 -> -76.6 between 2 and 4. Since eps <= 2^-64 is",
     "a pass/fail security bar, sample variance here is scientifically load-bearing",
     "in a way that a 5% timing spread is not. C35 sits 1.4 from the bar at n=4.",
-    "Run these with --runs 3+ and read the SPREAD OF EPS, not the wall clock."
+    "Run these with --runs 3+ and read the SPREAD OF EPS, not the wall clock.",
+    "",
+    "Tier D approx_seconds corrected 2026-08-15 from measured cost:",
+    "N=1024 covering-b1 (l=32) is 155 s/TRIAL, covering-b2 (l=16) ~75 s/trial,",
+    "N=128 is 0.21 s/trial. The first estimates were ~10x low.",
+    "",
+    "approx_seconds corrected to measured PROCESS wall (not the tool's own",
+    "reported wall) 2026-08-15. C52 for example reports 43 s internally but the",
+    "process takes 280 s, and it is process time that a sweep actually costs."
   ],
   "rows": [
     {
@@ -310,7 +318,7 @@
         "--lwe-dimension",
         "64"
       ],
-      "approx_seconds": 5
+      "approx_seconds": 14
     },
     {
       "id": "C67",
@@ -335,7 +343,7 @@
         "--lwe-dimension",
         "128"
       ],
-      "approx_seconds": 9
+      "approx_seconds": 28
     },
     {
       "id": "C69",
@@ -360,13 +368,13 @@
         "--lwe-dimension",
         "256"
       ],
-      "approx_seconds": 18
+      "approx_seconds": 30
     },
     {
       "id": "C69fail",
       "tier": "B",
-      "claims": "n=512 SING FAIL (sum mismatch want=0 got=1)",
-      "label": "NEGATIVE STABILITY: covering KS n=512 adder is claimed to FAIL",
+      "claims": "n=512 SING PASS (the old 'FAIL' was withdrawn 2026-08-15)",
+      "label": "Covering KS n=512 adder SING \u2014 was a claimed negative, now passes",
       "cmd": [
         ".build/release/helut",
         "--bench",
@@ -385,8 +393,8 @@
         "--lwe-dimension",
         "512"
       ],
-      "approx_seconds": 30,
-      "note": "The claim IS the failure. What matters is stable-fail vs FLAKY: an intermittent negative is a much weaker claim than a deterministic one."
+      "approx_seconds": 62,
+      "note": "Originally recorded as SING FAIL. leeloo found it FLAKY (PASSx3, SIGTRAPx2), which led to the Dictionary-order determinism bug. After the fix it is stable-pass, so the negative was an artifact and the covering KS ladder reaches n=512. Kept under this id so the history stays visible in results.json."
     },
     {
       "id": "C20",
@@ -446,7 +454,7 @@
         "--paths",
         "blind-rotate-metal public-ms boolean"
       ],
-      "approx_seconds": 17
+      "approx_seconds": 8
     },
     {
       "id": "C40m",
@@ -466,7 +474,7 @@
         "--paths",
         "blind-rotate-metal public-ms boolean"
       ],
-      "approx_seconds": 21
+      "approx_seconds": 13
     },
     {
       "id": "C39m",
@@ -510,7 +518,7 @@
         "--boolean-scale-mul",
         "7"
       ],
-      "approx_seconds": 11
+      "approx_seconds": 65
     },
     {
       "id": "C52",
@@ -534,7 +542,7 @@
         "--boolean-scale-mul",
         "7"
       ],
-      "approx_seconds": 45
+      "approx_seconds": 291
     },
     {
       "id": "C53",
@@ -699,7 +707,7 @@
         "--covering-base-log",
         "2"
       ],
-      "approx_seconds": 20,
+      "approx_seconds": 320,
       "note": "THE most fragile claim in the ledger: 1.4 from a pass/fail security bar, on a statistic with documented multi-hundred-order sample sensitivity, at n=4."
     },
     {
@@ -719,7 +727,7 @@
         "--covering-base-log",
         "2"
       ],
-      "approx_seconds": 40,
+      "approx_seconds": 640,
       "note": "If eps rises above -64 here, C35's 'still <= -64' does not survive a larger sample."
     },
     {
@@ -739,7 +747,7 @@
         "--covering-base-log",
         "2"
       ],
-      "approx_seconds": 80
+      "approx_seconds": 1280
     },
     {
       "id": "C32eps-t8",
@@ -756,7 +764,7 @@
         "--bk-noise",
         "1"
       ],
-      "approx_seconds": 40
+      "approx_seconds": 320
     },
     {
       "id": "C22eps",
@@ -790,7 +798,7 @@
         "--bk-noise",
         "64"
       ],
-      "approx_seconds": 12
+      "approx_seconds": 80
     }
   ]
 }

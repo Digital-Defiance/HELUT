@@ -61,7 +61,7 @@ BR tile=15/16 bits=896..<960
 BR tile=16/16 bits=960..<1024
 ENCRYPTED EQUIV (blind-rotate-metal public-ms covering-b2)
   rows            1
-  wall            10.7379 s  (10737.90 ms/row)
+  wall            10.2239 s  (10223.87 ms/row)
   classical bits  175.7  (≥128? yes)
   ingest ε log2   -inf  (target -64)
   noisy BK B_bk   1053099  (decodable true)
@@ -69,7 +69,7 @@ ENCRYPTED EQUIV (blind-rotate-metal public-ms covering-b2)
 
 ════════ SING METRICS SUMMARY ════════
 path                                             ms/row       bits    εlog2     B_bk
-blind-rotate-metal public-ms covering-b2         10737.90      175.7 -inf      1053099
+blind-rotate-metal public-ms covering-b2         10223.87      175.7 -inf      1053099
 calibration:
 | Label | n | σ | Ref bits | HELUT est | Δ | Source |
 |---|---:|---:|---:|---:|---:|---|

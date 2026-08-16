@@ -30,7 +30,7 @@ HELUT encrypted-netlist bench · SING
   FETCH summary  served=10  unique_addr=10  addrs=0x0,0x4,0x8,0xc,0x10,0x14,0x18,0x1c,0x20,0x24
 ENCRYPTED EQUIV (blind-rotate public-ms boolean)
   rows            32
-  wall            1.5150 s  (47.34 ms/row)
+  wall            1.5621 s  (48.82 ms/row)
   classical bits  4.0  (≥128? no)
   ingest ε log2   -inf  (target -64)
   noisy BK B_bk   0  (decodable true)
@@ -41,7 +41,7 @@ ENCRYPTED EQUIV (metal)
 
 ════════ SING METRICS SUMMARY ════════
 path                                             ms/row       bits    εlog2     B_bk
-blind-rotate public-ms boolean                      47.34        4.0 -inf            0
+blind-rotate public-ms boolean                      48.82        4.0 -inf            0
 calibration:
 | Label | n | σ | Ref bits | HELUT est | Δ | Source |
 |---|---:|---:|---:|---:|---:|---|

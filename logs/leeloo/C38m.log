@@ -30,30 +30,30 @@ BR tile=7/16 bits=384..<448
 BR tile=7/16 bits=384..<448
 BR tile=8/16 bits=448..<512
 BR tile=8/16 bits=448..<512
+BR tile=9/16 bits=512..<576
+BR tile=9/16 bits=512..<576
 BR tile=8/16 bits=448..<512
 BR tile=9/16 bits=512..<576
-BR tile=9/16 bits=512..<576
-BR tile=9/16 bits=512..<576
-BR tile=10/16 bits=576..<640
 BR tile=10/16 bits=576..<640
 BR tile=10/16 bits=576..<640
 BR tile=11/16 bits=640..<704
 BR tile=11/16 bits=640..<704
+BR tile=10/16 bits=576..<640
+BR tile=12/16 bits=704..<768
+BR tile=12/16 bits=704..<768
 BR tile=11/16 bits=640..<704
-BR tile=12/16 bits=704..<768
-BR tile=12/16 bits=704..<768
-BR tile=12/16 bits=704..<768
 BR tile=13/16 bits=768..<832
 BR tile=13/16 bits=768..<832
+BR tile=12/16 bits=704..<768
+BR tile=14/16 bits=832..<896
+BR tile=14/16 bits=832..<896
 BR tile=13/16 bits=768..<832
-BR tile=14/16 bits=832..<896
-BR tile=14/16 bits=832..<896
-BR tile=14/16 bits=832..<896
 BR tile=15/16 bits=896..<960
 BR tile=15/16 bits=896..<960
-BR tile=15/16 bits=896..<960
+BR tile=14/16 bits=832..<896
 BR tile=16/16 bits=960..<1024
 BR tile=16/16 bits=960..<1024
+BR tile=15/16 bits=896..<960
 BR tile=16/16 bits=960..<1024
 BR tile=1/16 bits=0..<64
 BR tile=1/16 bits=0..<64
@@ -393,7 +393,7 @@ BR tile=15/16 bits=896..<960
 BR tile=16/16 bits=960..<1024
 ENCRYPTED EQUIV (blind-rotate-metal public-ms boolean)
   rows            4
-  wall            7.0128 s  (1753.21 ms/row)
+  wall            7.0692 s  (1767.31 ms/row)
   classical bits  175.7  (≥128? yes)
   ingest ε log2   -inf  (target -64)
   noisy BK B_bk   0  (decodable true)
@@ -401,7 +401,7 @@ ENCRYPTED EQUIV (blind-rotate-metal public-ms boolean)
 
 ════════ SING METRICS SUMMARY ════════
 path                                             ms/row       bits    εlog2     B_bk
-blind-rotate-metal public-ms boolean              1753.21      175.7 -inf            0
+blind-rotate-metal public-ms boolean              1767.31      175.7 -inf            0
 calibration:
 | Label | n | σ | Ref bits | HELUT est | Δ | Source |
 |---|---:|---:|---:|---:|---:|---|

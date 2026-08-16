@@ -8,7 +8,7 @@ HELUT encrypted-netlist bench · SING
   starting blind-rotate public-ms boolean
 ENCRYPTED EQUIV (blind-rotate public-ms boolean)
   rows            4
-  wall            0.0006 s  (0.15 ms/row)
+  wall            0.0009 s  (0.23 ms/row)
   classical bits  4.0  (≥128? no)
   ingest ε log2   -inf  (target -64)
   noisy BK B_bk   0  (decodable true)
@@ -17,7 +17,7 @@ ENCRYPTED EQUIV (blind-rotate public-ms boolean)
   starting blind-rotate public-ms crypto
 ENCRYPTED EQUIV (blind-rotate public-ms crypto)
   rows            4
-  wall            0.0011 s  (0.27 ms/row)
+  wall            0.0014 s  (0.35 ms/row)
   classical bits  4.0  (≥128? no)
   ingest ε log2   -inf  (target -64)
   noisy BK B_bk   0  (decodable true)
@@ -26,7 +26,7 @@ ENCRYPTED EQUIV (blind-rotate public-ms crypto)
   starting blind-rotate secret crypto
 ENCRYPTED EQUIV (blind-rotate secret crypto)
   rows            4
-  wall            0.0007 s  (0.18 ms/row)
+  wall            0.0010 s  (0.25 ms/row)
   classical bits  4.0  (≥128? no)
   ingest ε log2   -inf  (target -64)
   noisy BK B_bk   0  (decodable true)
@@ -35,7 +35,7 @@ ENCRYPTED EQUIV (blind-rotate secret crypto)
   starting blind-rotate secret covering-b4
 ENCRYPTED EQUIV (blind-rotate secret covering-b4)
   rows            4
-  wall            0.0010 s  (0.26 ms/row)
+  wall            0.0013 s  (0.32 ms/row)
   classical bits  4.0  (≥128? no)
   ingest ε log2   -inf  (target -64)
   noisy BK B_bk   0  (decodable true)
@@ -44,7 +44,7 @@ ENCRYPTED EQUIV (blind-rotate secret covering-b4)
   starting blind-rotate public-ms covering-b4
 ENCRYPTED EQUIV (blind-rotate public-ms covering-b4)
   rows            4
-  wall            0.0010 s  (0.25 ms/row)
+  wall            0.0015 s  (0.37 ms/row)
   classical bits  4.0  (≥128? no)
   ingest ε log2   -inf  (target -64)
   noisy BK B_bk   0  (decodable true)
@@ -53,7 +53,7 @@ ENCRYPTED EQUIV (blind-rotate public-ms covering-b4)
   starting blind-rotate secret covering-b2
 ENCRYPTED EQUIV (blind-rotate secret covering-b2)
   rows            4
-  wall            0.0017 s  (0.42 ms/row)
+  wall            0.0020 s  (0.49 ms/row)
   classical bits  4.0  (≥128? no)
   ingest ε log2   -inf  (target -64)
   noisy BK B_bk   0  (decodable true)
@@ -62,7 +62,7 @@ ENCRYPTED EQUIV (blind-rotate secret covering-b2)
   starting blind-rotate public-ms covering-b2
 ENCRYPTED EQUIV (blind-rotate public-ms covering-b2)
   rows            4
-  wall            0.0021 s  (0.53 ms/row)
+  wall            0.0020 s  (0.51 ms/row)
   classical bits  4.0  (≥128? no)
   ingest ε log2   -inf  (target -64)
   noisy BK B_bk   0  (decodable true)
@@ -71,7 +71,7 @@ ENCRYPTED EQUIV (blind-rotate public-ms covering-b2)
   starting blind-rotate secret covering-b1
 ENCRYPTED EQUIV (blind-rotate secret covering-b1)
   rows            4
-  wall            0.0033 s  (0.82 ms/row)
+  wall            0.0032 s  (0.81 ms/row)
   classical bits  4.0  (≥128? no)
   ingest ε log2   -inf  (target -64)
   noisy BK B_bk   0  (decodable true)
@@ -80,7 +80,7 @@ ENCRYPTED EQUIV (blind-rotate secret covering-b1)
   starting blind-rotate public-ms covering-b1
 ENCRYPTED EQUIV (blind-rotate public-ms covering-b1)
   rows            4
-  wall            0.0030 s  (0.75 ms/row)
+  wall            0.0037 s  (0.94 ms/row)
   classical bits  4.0  (≥128? no)
   ingest ε log2   -inf  (target -64)
   noisy BK B_bk   0  (decodable true)
@@ -91,15 +91,15 @@ ENCRYPTED EQUIV (metal)
 
 ════════ SING METRICS SUMMARY ════════
 path                                             ms/row       bits    εlog2     B_bk
-blind-rotate public-ms boolean                       0.15        4.0 -inf            0
-blind-rotate public-ms crypto                        0.27        4.0 -inf            0
-blind-rotate secret crypto                           0.18        4.0 -inf            0
-blind-rotate secret covering-b4                      0.26        4.0 -inf            0
-blind-rotate public-ms covering-b4                   0.25        4.0 -inf            0
-blind-rotate secret covering-b2                      0.42        4.0 -inf            0
-blind-rotate public-ms covering-b2                   0.53        4.0 -inf            0
-blind-rotate secret covering-b1                      0.82        4.0 -inf            0
-blind-rotate public-ms covering-b1                   0.75        4.0 -inf            0
+blind-rotate public-ms boolean                       0.23        4.0 -inf            0
+blind-rotate public-ms crypto                        0.35        4.0 -inf            0
+blind-rotate secret crypto                           0.25        4.0 -inf            0
+blind-rotate secret covering-b4                      0.32        4.0 -inf            0
+blind-rotate public-ms covering-b4                   0.37        4.0 -inf            0
+blind-rotate secret covering-b2                      0.49        4.0 -inf            0
+blind-rotate public-ms covering-b2                   0.51        4.0 -inf            0
+blind-rotate secret covering-b1                      0.81        4.0 -inf            0
+blind-rotate public-ms covering-b1                   0.94        4.0 -inf            0
 calibration:
 | Label | n | σ | Ref bits | HELUT est | Δ | Source |
 |---|---:|---:|---:|---:|---:|---|

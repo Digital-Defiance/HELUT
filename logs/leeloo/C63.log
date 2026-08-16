@@ -12,7 +12,7 @@ HELUT encrypted-netlist bench · SING
   identity B_bk    88782  (decodable true)
 ENCRYPTED EQUIV (blind-rotate public-ms covering-b2)
   rows            1
-  wall            1.7991 s  (1799.12 ms/row)
+  wall            1.7454 s  (1745.37 ms/row)
   classical bits  32.0  (≥128? no)
   ingest ε log2   -inf  (target -64)
   noisy BK B_bk   88782  (decodable true)
@@ -23,7 +23,7 @@ ENCRYPTED EQUIV (metal)
 
 ════════ SING METRICS SUMMARY ════════
 path                                             ms/row       bits    εlog2     B_bk
-blind-rotate public-ms covering-b2                1799.12       32.0 -inf        88782
+blind-rotate public-ms covering-b2                1745.37       32.0 -inf        88782
 calibration:
 | Label | n | σ | Ref bits | HELUT est | Δ | Source |
 |---|---:|---:|---:|---:|---:|---|
