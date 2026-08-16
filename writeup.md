@@ -26,7 +26,7 @@ This software-defined FPGA evaluates Gordon Welchman's diagonal board graph redu
 
 - Together, this physical constraint collapses the total search space by a massive factor of 676.
 
-The mathematical soundness of this reduction was verified in a blind control run. Given a 27-letter crib from a known message (P1030684) and no other parameters, the GPU pipeline evaluated 16 billion settings and extracted the true key, exact shell, and all ten historical plugboard cables in just 361 seconds (claim C2).
+The mathematical soundness of this reduction was verified in a blind control run. Given a 27-letter crib from a known message (P1030684) and no other parameters, the GPU pipeline evaluated 16 billion settings and extracted the true key, exact shell, and all ten historical plugboard cables in just 361 seconds (claim C2). The archived log (`logs/control-p1030684-rings.log`) reads 427 s: 361 s was the first run, and the log was overwritten by a re-run after head scoring was added. Both figures are recorded in `BREAK_P1030680.md`; the re-run is the reproducible one.
 
 # Physical Constraints vs. Mathematical Ghosts
 
@@ -62,7 +62,7 @@ The operational ledger is `BREAK_P1030680.md`; the public claim freeze is `direc
 
   **Result**                                                   **Status**
   ------------------------------------------------------------ ------------------------------------------------------------------------------------
-  Welchman blind control (P1030684)                            Break in 361 s; all 10 plugs
+  Welchman blind control (P1030684)                            Break in 361 s first run / 427 s archived re-run; all 10 plugs
   Stochastic KPA datapath                                      Control oracle + near-miss PASS; blind stecker $\sim$`<!-- -->`{=html}22/72
   Training / collapse / weather / RIGA priors                  0 survivors under 80% rigor (ceiling $\sim$`<!-- -->`{=html}60--69% = coincidence)
   Exact $\ge$`<!-- -->`{=html}16 catalog $\times$ rings AAAA   Clean negative

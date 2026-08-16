@@ -104,7 +104,8 @@ export function HomePage() {
                 <em>N</em>=64 (C63) and still FAILs at production <em>N</em> (C60/C61). Extract→KS
                 LWE <em>n</em>=64 native-<em>k</em> covering is C64; PicoRV lut6 covering Q via that
                 KS is C65–C66/C68 (C60/C61 stay <em>n</em>=<em>N</em> <em>k</em>=7 FAIL). C69: covering
-                KS <em>n</em>=256 PASS, <em>n</em>=512 SING FAIL. Chronology:{' '}
+                KS PASSes at <em>n</em>=256 and <em>n</em>=512 (the earlier <em>n</em>=512 FAIL was
+                withdrawn 2026-08-15 — a determinism artifact, not a noise limit). Chronology:{' '}
                 <Link to="/projects/netlist-fhe/journal">FHE journal</Link>.
               </span>
             </li>

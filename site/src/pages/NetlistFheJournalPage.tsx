@@ -104,7 +104,9 @@ export function NetlistFheJournalPage() {
               <span className="mono">C67</span>
               <span>
                 Covering KS adder ladder: <em>n</em>=128 PASS 8.6 s; <em>n</em>=256 and 512 SIGTRAP
-                after extract→KS.
+                after extract→KS. Both were later explained: C69 traced <em>n</em>=256 to four
+                identity BRs (PASS once fixed), and the <em>n</em>=512 trap to nondeterministic
+                input encryption, fixed 2026-08-15 (now PASS).
               </span>
             </li>
             <li>
@@ -117,8 +119,10 @@ export function NetlistFheJournalPage() {
             <li>
               <span className="mono">C69</span>
               <span>
-                Covering KS <em>n</em>=256 adder PASS 17 s after identity 1-trial. <em>n</em>=512 SING
-                FAIL (sum mismatch). C67 SIGTRAP was four identity BRs, not key-switch.
+                Covering KS adder PASS at <em>n</em>=256 (17 s) and <em>n</em>=512. C67 SIGTRAP was four
+                identity BRs, not key-switch. The <em>n</em>=512 sum mismatch recorded here
+                until 2026-08-15 is <strong>withdrawn</strong>: it was nondeterministic input
+                encryption (Dictionary-order RNG), not a noise limit.
               </span>
             </li>
           </ul>

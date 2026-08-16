@@ -112,8 +112,7 @@ export function StackPage() {
                 <strong>Not claimed:</strong> native <em>k</em>=1 torus-scale noisy BK at <em>n</em>=
                 <em>N</em>=1024 (C37/C55); noisy <code>cryptoPublicMS</code> at that <em>N</em> (C26/C56);
                 PicoRV covering at <em>n</em>=<em>N</em> <em>k</em>=7 (C60/C61 Q SING FAIL; C65–C68
-                PASS with extract→KS <em>n</em>=64); covering KS <em>n</em>=512 native <em>k</em> (C69
-                SING FAIL);
+                PASS with extract→KS <em>n</em>=64);
                 estimator Cost on every calibration row (H1); production keys from the HELUT 175.7
                 figure; side-channel / GPU power; a P1030680 plaintext; that the math requires
                 Apple Silicon (first lab, not the invariant); a CUDA or CPU production FHE port.
