@@ -133,6 +133,72 @@ def load_json(path: str, default):
         return default
 
 
+# --- epsilon sample sufficiency -------------------------------------------
+#
+# Repeating a measurement five times tells you whether it is *reproducible*. It
+# says nothing about whether the sample size inside each pass can support the
+# claim, and those are different questions. An epsilon row can be perfectly
+# stable across five passes and still assert a bar its own trial count cannot
+# carry -- C36 does exactly that: point estimate -139.3, but the 95% bound at
+# n=4 is -23.7, so "<= -64" is unproven no matter how many times it is repeated.
+#
+# helut-bench already prints the diagnosis. Leeloo's job is to not let it scroll
+# past: a stable row with an unsupported bar must be visible in the report.
+EPS_UNDERSAMPLED_RE = re.compile(r"under-sampled: n≈(\d+) would clear")
+EPS_UNREACHABLE_RE = re.compile(r"point estimate itself fails")
+# The two print shapes differ: a comfortable clear reads "95%up=-311.5 — clears
+# -64" with an em dash, while everything else reads "95%up=-23.7 DOES NOT CLEAR
+# -64". Allow the dash, or supported rows are misread as non-epsilon rows.
+EPS_BOUND_RE = re.compile(r"95%up=(-?[\d.]+)\s*(?:—|--)?\s*(DOES NOT CLEAR|clears)")
+
+
+def epsilon_sufficiency(text: str) -> dict | None:
+    """Classify every epsilon verdict a pass printed.
+
+    Returns None for rows that print no bound at all, so non-epsilon rows are
+    unaffected. Otherwise reports the worst case found, since one unsupported
+    bar in a sweep is enough to qualify the row.
+
+    Logs produced before 2026-08-16 carry a bound but no diagnosis (they printed
+    the ±1-order cost instead). Those classify as plain `bar-unmet`: the state is
+    deliberately left un-diagnosed rather than guessed, since the distinction
+    between under-sampled and genuinely unmet cannot be recovered from the old
+    text.
+    """
+    bounds = EPS_BOUND_RE.findall(text)
+    if not bounds:
+        return None
+    failing = [b for b in bounds if b[1] == "DOES NOT CLEAR"]
+    if not failing:
+        return {"state": "supported", "verdicts": len(bounds)}
+    need = [int(m) for m in EPS_UNDERSAMPLED_RE.findall(text)]
+    unreachable = bool(EPS_UNREACHABLE_RE.search(text))
+    worst = min((float(b[0]) for b in failing), default=None)
+    if need:
+        return {
+            "state": "under-sampled",
+            "verdicts": len(bounds),
+            "failing": len(failing),
+            "worst_bound": worst,
+            "samples_needed": max(need),
+        }
+    if unreachable:
+        # Point estimate on the wrong side of the bar. Not a sampling problem,
+        # and normally means the row is a recorded negative -- which is fine.
+        return {
+            "state": "bar-unmet-by-design",
+            "verdicts": len(bounds),
+            "failing": len(failing),
+            "worst_bound": worst,
+        }
+    return {
+        "state": "bar-unmet",
+        "verdicts": len(bounds),
+        "failing": len(failing),
+        "worst_bound": worst,
+    }
+
+
 def verdicts_of(text: str) -> list[str]:
     return VERDICT_RE.findall(text)
 
@@ -231,6 +297,7 @@ def run_row(row: dict, runs: int, warmup: int, quiet: bool) -> dict:
         }
 
     stab = stability(vsets, exits)
+    eps = epsilon_sufficiency(last_out)
     res = {
         "id": row["id"],
         "tier": row.get("tier"),
@@ -242,6 +309,9 @@ def run_row(row: dict, runs: int, warmup: int, quiet: bool) -> dict:
         "exits": exits,
         "verdicts": vsets,
         "stability": stab,
+        # None for non-epsilon rows. Reproducibility and sample sufficiency are
+        # independent properties; a row can be stable and still unsupported.
+        "epsilon": eps,
         "wall": stats(walls),
         "tool_wall": stats(tool),
         "when": time.strftime("%Y-%m-%dT%H:%M:%S"),
@@ -261,6 +331,13 @@ def run_row(row: dict, runs: int, warmup: int, quiet: bool) -> dict:
         print(f"    -> no timing captured; stability {stab}")
     if stab.startswith("FLAKY") or "crash" in stab:
         print(f"    !! {stab}: the recorded verdict does not reproduce every pass")
+    if eps and eps["state"] == "under-sampled":
+        print(
+            f"    !! epsilon bar unsupported at this trial count: bound "
+            f"{eps['worst_bound']}, needs n≈{eps['samples_needed']}. "
+            f"Repeating the pass will not fix this — the sample size inside "
+            f"each pass is the problem."
+        )
     return res
 
 
@@ -304,6 +381,34 @@ def write_report(results: dict) -> None:
         lines.append(f"**Always-crashing rows: {', '.join(crashed)}**")
     if not flaky and not crashed:
         lines.append("No flaky rows in this set: every recorded verdict reproduced on every pass.")
+
+    # Sample sufficiency is orthogonal to reproducibility, and reporting only the
+    # latter is how an unsupported bar survives five passes unnoticed.
+    under = [r for r in rows if (r.get("epsilon") or {}).get("state") == "under-sampled"]
+    bydesign = [r["id"] for r in rows
+                if (r.get("epsilon") or {}).get("state") == "bar-unmet-by-design"]
+    if under:
+        lines += [
+            "",
+            "## ε bars not supported by their own sample size",
+            "",
+            "These rows reproduced fine. That is a different property from having",
+            "enough samples to support the bar they quote: the 95% bound scales as",
+            "`σ̂·√(m/χ²₀.₀₅(m))`, so a thin margin needs a large *m* regardless of how",
+            "many times the pass is repeated. Re-running Leeloo will not move these.",
+            "",
+            "| Row | 95% bound | samples needed |",
+            "|-----|-----------|----------------|",
+        ]
+        for r in under:
+            e = r["epsilon"]
+            lines.append(f"| {r['id']} | {e['worst_bound']} | n≈{e['samples_needed']} |")
+    if bydesign:
+        lines += [
+            "",
+            f"Rows whose ε point estimate is itself past the bar (recorded negatives, "
+            f"no sample size helps): {', '.join(bydesign)}.",
+        ]
     os.makedirs(OUTDIR, exist_ok=True)
     with open(REPORT, "w", encoding="utf-8") as fh:
         fh.write("\n".join(lines) + "\n")
