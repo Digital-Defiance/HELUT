@@ -724,9 +724,77 @@ residuals rather than the single extracted one. Care needed on two points:
 coefficient noise is only approximately i.i.d., and the reference must be exact
 or its error contaminates the estimate.
 
+**This was implemented, and the "~1000×" above is wrong.** See §13.4.1.
+
 Until that lands, the honest position on C35 is unchanged from §9.3(c): the bar
 is supportable at inject `B ≤ 4`; `B=8` and `B=16` sit inside the measurement's
 resolution and are **not decided**.
+
+### 13.4.1 It landed, and the sample-efficiency estimate was off by ~100×
+
+`TFHENoisyBKMeasurement.identityAllCoefficients` implements the sketch. The two
+correctness worries in §13.4 both checked out; the performance claim did not.
+
+**The reference is exact.** Blind rotate leaves `ACC = X^{−p}·v` with
+`p = b − Σ_j a_j s_j` the LWE phase in `Z_2N`. This is a self-test, so `s` is in
+hand and `p` is recomputed rather than inferred. Two tests pin it: coefficient 0
+reproduces the single-residual estimator's value *exactly* at the same seed
+(sample-extract lifts exactly that coefficient, `b: ciphertext.body[0]`), and a
+noiseless bootstrap key yields a residual of exactly 0 across the whole
+accumulator — with no injected noise there is nothing for a wrong reference to
+hide behind.
+
+**σ̂ is unbiased.** The two estimators agree at every degree tested:
+
+| N | accumulator σ̂ | single-residual σ̂ |
+|---|---------------|-------------------|
+| 32 | 14 648 | 14 521 |
+| 64 | 53 036 | 54 316 |
+| 128 | 221 216 | 215 092 |
+| 256 | 751 013 | 770 124 |
+
+**But the coefficients are nowhere near independent.** §13.4 assumed N residuals
+means N samples. Measuring the effective count — repeated runs, inverting
+`sd(σ̂)/mean(σ̂) ≈ 1/√(2n)`, with a control at a known-independent count to divide
+out the residual's excess kurtosis — gives:
+
+| N | effective samples per bootstrap | as % of N |
+|---|-------------------------------|-----------|
+| 32 | 10.0 | 31.2% |
+| 64 | 11.7 | 18.3% |
+| 128 | 8.3 | 6.5% |
+| 256 | 7.7 | 3.0% |
+
+The gain is **flat at roughly 8–12× and mildly decreasing in N**, not
+proportional to N. So the honest figure for the optimisation is about one order
+of magnitude, not three. At N=1024 the trend suggests ~7×, though that is an
+extrapolation and no measurement has been taken there.
+
+Consequence for the ±1-order question: ~8 450 samples at ~7× is ~1 200
+bootstraps, roughly **26 hours** rather than the 23 minutes §13.4 predicted, down
+from about eight days. Useful, not transformative.
+
+A plausible mechanism, offered as a hypothesis and not a claim: the accumulator's
+noise is dominated by a handful of GGSW external-product error polynomials, each
+contributing correlated error across all N coefficients, so the effective count
+tracks the number of noise *sources* rather than the number of coefficients. The
+measured gains do loosely track `ℓ` (ℓ = 5, 4, 4, 3 for N = 32, 64, 128, 256
+under `cryptoPublicMS`), which is suggestive but far from established.
+
+**The bound had to be protected from this.** `sigmaUpper95` and
+`epsilonUnresolvedOrders` divide by a new `effectiveSamples` field, not by
+`samples`. Had they kept dividing by the raw residual count, merely switching
+estimators would have tightened every ε bound by ~√(N/10) with no new evidence —
+the optimistic direction. Accumulator measurements are credited a deliberately
+conservative 4 samples per bootstrap, below the lowest value measured, and the
+certificate note prints the provenance
+(`k PBS × N accumulator coeffs = m residuals, credited j independent`) so no
+reader mistakes residuals for bootstraps. Locked by
+`TFHENoisyBKAccumulatorBoundSafetyTests`.
+
+This does not move C35, whose bar was already cleared at n=32 in §14. It reduces
+the cost of *future* ε statements and removes a trap that would have produced
+unearned confidence.
 
 ### 13.5 A reporting bug found in this work
 

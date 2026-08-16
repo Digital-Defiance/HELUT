@@ -91,22 +91,30 @@ package struct TFHENoisyBKCertificate: Sendable, Equatable {
             "Does not replace TFHEAsymptoticSecurityCertificate Gaussian ingest analysis"
         ]
         if let measurement {
+            let provenance = measurement.isAccumulatorSampled
+                ? "\(measurement.bootstraps) PBS × \(measurement.polynomialDegree) "
+                    + "accumulator coeffs = \(measurement.samples) residuals, "
+                    + "credited \(measurement.effectiveSamples) independent"
+                : "trials=\(measurement.samples)"
             hypotheses.insert(
                 "B_bk measured from identity-LUT residual "
-                    + "(trials=\(measurement.samples), inject B=\(measurement.injectBound), "
+                    + "(\(provenance), inject B=\(measurement.injectBound), "
                     + String(format: "σ̂=%.1f", measurement.sigmaHat)
                     + ", decode_fail=\(measurement.decodeFailures))",
                 at: 3
             )
-            // σ̂ is an RMS over `samples` observations and log₂ε ∝ −1/σ̂², so the
-            // sample size, not the arithmetic, sets how much of ε is real.
+            // σ̂ is an RMS over the residuals and log₂ε ∝ −1/σ̂², so the sample
+            // size, not the arithmetic, sets how much of ε is real. The count
+            // quoted here is the *effective* one: accumulator coefficients are
+            // correlated, and crediting all of them would tighten the bound
+            // beyond what the data supports.
             hypotheses.insert(
                 String(
                     format:
-                        "ε sampling uncertainty: σ̂ from %d samples ⇒ log₂ε "
+                        "ε sampling uncertainty: σ̂ from %d effective samples ⇒ log₂ε "
                         + "unresolved to ±%.0f orders; point %.1f, 95%% upper bound %.1f; "
-                        + "±1 order would need ~%d samples",
-                    measurement.samples,
+                        + "±1 order would need ~%d effective samples",
+                    measurement.effectiveSamples,
                     measurement.epsilonUnresolvedOrders,
                     measurement.failureLog2Point,
                     measurement.failureLog2Upper95,
@@ -230,6 +238,42 @@ package struct TFHENoisyBKMeasurement: Sendable, Equatable {
     package var polynomialDegree: Int
     package var decodeFailures: Int
 
+    // MARK: Sample provenance
+    //
+    // `samples` is a count of *residuals*, which is not the same thing as a
+    // count of bootstraps. The single-residual estimator (`identity`) draws one
+    // residual per PBS, so the two agree. The accumulator estimator
+    // (`identityAllCoefficients`) draws N residuals per PBS, so `samples` is
+    // ~N× `bootstraps`. The χ² confidence bound assumes independent samples, so
+    // any caller quoting a bound from the accumulator estimator has to know
+    // which of the two it is holding. Hence this field rather than a comment.
+
+    /// Number of PBS evaluations behind `samples`. Equals `samples` for the
+    /// single-residual estimator.
+    package var bootstraps: Int
+
+    /// Effective *independent* sample count backing `rms`, which is what a
+    /// confidence bound may divide by.
+    ///
+    /// For the single-residual estimator this is `samples`: one residual per
+    /// bootstrap, genuinely independent. For the accumulator estimator it is
+    /// **not** `samples`. The N residuals from one bootstrap share the same
+    /// GGSW external-product error, so they are identically distributed but
+    /// correlated, and the measured effective count per bootstrap is a flat
+    /// 7.7–11.7 across N ∈ {32,64,128,256} rather than N
+    /// (`TFHENoisyBKEffectiveSampleTests`). Quoting `samples` here would make
+    /// `sigmaUpper95` too tight, i.e. ε too good — the dangerous direction.
+    package var effectiveSamples: Int
+
+    /// Max |residual| over *all* accumulator coefficients, when measured.
+    /// `nil` for the single-residual estimator, which only ever sees
+    /// coefficient 0. Kept distinct from `maxAbsError` because decodability is
+    /// a property of the extracted coefficient, not of the whole accumulator.
+    package var accumulatorMaxAbsError: UInt32?
+
+    /// Whether `samples` counts accumulator coefficients rather than bootstraps.
+    package var isAccumulatorSampled: Bool { bootstraps != samples }
+
     package var sigmaHat: Double { rms }
 
     package var decodingHalfGap: UInt32 { delta / 2 }
@@ -243,8 +287,12 @@ package struct TFHENoisyBKMeasurement: Sendable, Equatable {
     // actually resolve. See the 2026-08-15 re-validation of C35.
 
     /// One-sided 95% upper confidence bound on σ from this sample.
+    ///
+    /// Divides by `effectiveSamples`, not `samples`. The two differ only for the
+    /// accumulator estimator, where correlated coefficients make the raw
+    /// residual count an overstatement of independence.
     package var sigmaUpper95: Double {
-        sigmaUpperConfidenceBound(sigmaHat: sigmaHat, samples: samples)
+        sigmaUpperConfidenceBound(sigmaHat: sigmaHat, samples: effectiveSamples)
     }
 
     /// `log₂ε` recomputed at `sigmaUpper95` — the conservative figure, and the
@@ -266,9 +314,10 @@ package struct TFHENoisyBKMeasurement: Sendable, Equatable {
         )
     }
 
-    /// Orders of `log₂ε` this sample size cannot resolve.
+    /// Orders of `log₂ε` this sample size cannot resolve. Uses the effective
+    /// count for the same reason `sigmaUpper95` does.
     package var epsilonUnresolvedOrders: Double {
-        epsilonResolutionOrders(failureLog2: failureLog2Point, samples: samples)
+        epsilonResolutionOrders(failureLog2: failureLog2Point, samples: effectiveSamples)
     }
 
     /// Whether the target bar is met at the 95% upper bound, not merely at the
@@ -286,6 +335,18 @@ package struct TFHENoisyBKMeasurement: Sendable, Equatable {
         UInt64(maxAbsError) < UInt64(decodingHalfGap)
     }
 
+    /// Independent samples one bootstrap is credited with under accumulator
+    /// sampling.
+    ///
+    /// Measured gain is 7.7–11.7 across N ∈ {32,64,128,256}, flat in N rather
+    /// than proportional to it, and mildly *decreasing* with N
+    /// (`TFHENoisyBKEffectiveSampleTests`). This constant sits below the lowest
+    /// measured value on purpose: the estimate feeds a confidence bound, and
+    /// crediting too many independent samples makes that bound too tight. Under
+    /// -crediting only costs sample size. It is not extrapolated to N=1024,
+    /// where no measurement has been taken.
+    package static let accumulatorSampleGain = 4
+
     package init(
         maxAbsError: UInt32,
         rms: Double,
@@ -293,7 +354,10 @@ package struct TFHENoisyBKMeasurement: Sendable, Equatable {
         injectBound: UInt32,
         delta: UInt32,
         polynomialDegree: Int,
-        decodeFailures: Int
+        decodeFailures: Int,
+        bootstraps: Int? = nil,
+        accumulatorMaxAbsError: UInt32? = nil,
+        effectiveSamples: Int? = nil
     ) {
         self.maxAbsError = maxAbsError
         self.rms = rms
@@ -302,6 +366,22 @@ package struct TFHENoisyBKMeasurement: Sendable, Equatable {
         self.delta = delta
         self.polynomialDegree = polynomialDegree
         self.decodeFailures = decodeFailures
+        let pbs = bootstraps ?? samples
+        self.bootstraps = pbs
+        self.accumulatorMaxAbsError = accumulatorMaxAbsError
+        if let effectiveSamples {
+            self.effectiveSamples = effectiveSamples
+        } else if pbs == samples {
+            // Single-residual estimator: one independent draw per bootstrap.
+            self.effectiveSamples = samples
+        } else {
+            // Accumulator estimator: credit the conservative measured gain, and
+            // never more than the residuals actually collected.
+            self.effectiveSamples = min(
+                samples,
+                max(1, pbs * TFHENoisyBKMeasurement.accumulatorSampleGain)
+            )
+        }
     }
 
     package func certificate(lutCount: Int) -> TFHENoisyBKCertificate {
@@ -385,6 +465,123 @@ package struct TFHENoisyBKMeasurement: Sendable, Equatable {
             delta: scale,
             polynomialDegree: n,
             decodeFailures: failures
+        )
+    }
+
+    /// Identity-LUT BR residual measured across **every** accumulator
+    /// coefficient instead of only the extracted one.
+    ///
+    /// Why this exists: `identity` above runs a full PBS and then keeps a single
+    /// scalar residual, discarding the other N−1 coefficients of the GLWE
+    /// accumulator. Since log₂ε ∝ −1/σ̂², the sample size needed to pin ε down
+    /// grows fast, and at N=1024 the single-residual estimator needs ~8 450
+    /// bootstraps to resolve ε to ±1 order — about eight days. The discarded
+    /// coefficients carry noise from the same distribution, so measuring all of
+    /// them yields ~N residuals per bootstrap at no extra cryptographic cost.
+    ///
+    /// How the reference is obtained: blind rotate leaves
+    /// `ACC = X^{−p}·v` where `p = b − Σ_j a_j s_j` is the LWE phase in `Z_2N`.
+    /// This is a self-test, so `s` is in hand and `p` is computable exactly —
+    /// no decryption of a noisy quantity is involved in forming the reference.
+    /// Rotating the test polynomial by that exact power gives the noiseless
+    /// accumulator, and the residual is the difference. An approximate
+    /// reference would contaminate the estimate, which is why the power is
+    /// recomputed from the secret rather than inferred from the output.
+    ///
+    /// Independence caveat, stated because it bears on the confidence bound:
+    /// the per-coefficient residuals are identically distributed but only
+    /// *approximately* independent — the CMUX ladder mixes external-product
+    /// error across coefficients. `bootstraps` is therefore recorded alongside
+    /// `samples` so a caller can compare the two estimators and see whether the
+    /// effective sample size is really N per PBS.
+    /// `TFHENoisyBKAccumulatorAgreement` does exactly that.
+    package static func identityAllCoefficients(
+        secret: TFHESecretKey,
+        params: GGSWParams,
+        noise: TFHENoiseParams = .none,
+        bootstrapKey existing: BootstrapKey? = nil,
+        trials: Int = 16,
+        seed: UInt32 = 0xB10C,
+        publicRefreshCompatible: Bool = true,
+        booleanScaleMul: Int = 1
+    ) -> TFHENoisyBKMeasurement {
+        precondition(trials > 0)
+        let n = params.tfhe.polynomialDegree
+        let twoN = 2 * n
+        let scale = rotationBooleanScale(polynomialDegree: n, mul: booleanScaleMul)
+        var rng = LCG32(state: seed == 0 ? 1 : seed)
+        let bk = existing ?? bootstrapKey(
+            secret: secret,
+            params: params,
+            rng: &rng,
+            publicRefreshCompatible: publicRefreshCompatible,
+            noise: noise
+        )
+        let identity: [UInt32] = [0, 1]
+        let testPoly = TFHETestPolyCache.shared.testPolynomial(
+            truthTable: identity,
+            degree: n,
+            scale: scale
+        )
+        let s = secret.lweSecret
+
+        var extractedMaxAbs: UInt32 = 0
+        var accMaxAbs: UInt32 = 0
+        var sumSq: Double = 0
+        var sampleCount = 0
+        var failures = 0
+
+        for _ in 0..<trials {
+            let bit = rng.next() & 1
+            let lwe = encryptLWERotationNative(
+                message: encodeRotationNativeBit(bit, k: booleanScaleMul),
+                secret: s,
+                twoN: twoN,
+                rng: &rng
+            )
+            let packed = packLWEBits([lwe], twoN: twoN)
+            let acc = blindRotate(
+                testPolynomial: testPoly,
+                lwe: packed,
+                bootstrapKey: bk
+            )
+
+            // Exact noiseless accumulator: X^{−p}·v, p the LWE phase in Z_2N.
+            var rotation = -rotationPower(packed.b, twoN: twoN)
+            for j in 0..<packed.lweDimension where s[j] == 1 {
+                rotation += rotationPower(packed.a[j], twoN: twoN)
+            }
+            let reference = negacyclicMultiplyByXPower(testPoly, power: rotation)
+
+            let phases = decryptGLWE(acc, secret: secret)
+            precondition(phases.count == n && reference.count == n)
+            for i in 0..<n {
+                let err = torusCenteredMagnitude(phases[i] &- reference[i])
+                if err > accMaxAbs { accMaxAbs = err }
+                sumSq += Double(err) * Double(err)
+            }
+            sampleCount += n
+
+            // Coefficient 0 is what `sampleExtractLWE` lifts, so decodability
+            // and the extracted-residual max stay defined on it alone — same
+            // semantics as `identity` above.
+            let err0 = torusCenteredMagnitude(phases[0] &- reference[0])
+            if err0 > extractedMaxAbs { extractedMaxAbs = err0 }
+            if decodeRotationBoolean(phases[0], scale: scale) != bit {
+                failures += 1
+            }
+        }
+
+        return TFHENoisyBKMeasurement(
+            maxAbsError: extractedMaxAbs,
+            rms: sqrt(sumSq / Double(sampleCount)),
+            samples: sampleCount,
+            injectBound: noise.bound,
+            delta: scale,
+            polynomialDegree: n,
+            decodeFailures: failures,
+            bootstraps: trials,
+            accumulatorMaxAbsError: accMaxAbs
         )
     }
 
