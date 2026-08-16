@@ -198,3 +198,92 @@ final class EncryptedDeterminismTests: XCTestCase {
         )
     }
 }
+
+/// Cross-process determinism.
+///
+/// Everything in `EncryptedDeterminismTests` runs inside one process, and a
+/// single process has one Dictionary hash seed. The property that actually broke
+/// on 2026-08-15 was *cross-process*: Swift reseeds Dictionary hashing per
+/// process, so run A and run B of the same binary visited `inputs` in different
+/// orders and encrypted different wires with different masks. An in-process test
+/// can permute keys to simulate that, but it cannot observe the real thing.
+///
+/// This emits the fingerprint on stdout in a fixed format so an external driver
+/// can run the binary repeatedly and diff. `Scripts/determinism_cross_process.py`
+/// is that driver, and it must run with `SWIFT_DETERMINISTIC_HASHING` unset —
+/// setting it would suppress the very reseeding the check depends on.
+final class EncryptedCrossProcessDeterminismTests: XCTestCase {
+
+    /// Marker the external driver greps for. Changing it breaks the script.
+    static let marker = "CROSS_PROCESS_FINGERPRINT"
+
+    private func repoFile(_ name: String) -> String? {
+        let fm = FileManager.default
+        let cwd = fm.currentDirectoryPath
+        for relative in [name, "../\(name)", "../../\(name)", "../../../\(name)"] {
+            let path = URL(fileURLWithPath: cwd).appendingPathComponent(relative).path
+            if fm.fileExists(atPath: path) { return path }
+        }
+        var url = URL(fileURLWithPath: #filePath)
+        for _ in 0..<5 {
+            url.deleteLastPathComponent()
+            let candidate = url.appendingPathComponent(name).path
+            if fm.fileExists(atPath: candidate) { return candidate }
+        }
+        return nil
+    }
+
+    /// Emit a fingerprint over encrypted inputs and decoded outputs at a fixed
+    /// seed. Deterministic by construction, so any variation across processes is
+    /// a real defect.
+    func testEmitCrossProcessFingerprint() throws {
+        guard let path = repoFile("netlist.json") else {
+            return XCTFail("netlist.json not found")
+        }
+        let netlist = loadYosysNetlist(from: path)
+        guard let (moduleName, module) = netlist.modules.first.map({ ($0.key, $0.value) }) else {
+            return XCTFail("no module in netlist.json")
+        }
+
+        let params = GGSWParams.booleanTrivial(degree: 8)
+        let secret = TFHESecretKey.random(params: params.tfhe, seed: 0xD371)
+        let sim = EncryptedNetlistSimulator(
+            moduleName: moduleName,
+            module: module,
+            secret: secret,
+            params: params,
+            backend: .blindRotate,
+            seed: 0xD372
+        )
+
+        // Enough distinct keys that the Dictionary layout is worth reseeding.
+        // Decoys are skipped without consuming RNG but do move iteration order,
+        // which is exactly the mechanism the old bug rode in on.
+        let inputs: [String: [UInt8]] = [
+            "a": [1], "b": [0], "cin": [1],
+            "zzz_decoy": [0], "aaa_decoy": [1], "mmm_decoy": [0],
+            "q": [0], "r": [1], "s": [0], "t": [1]
+        ]
+
+        var accumulated: UInt64 = 0xcbf2_9ce4_8422_2325
+        for tick in 0..<3 {
+            let outputs = try sim.tick(inputs: inputs)
+            // Fold the input fingerprint.
+            accumulated ^= sim.lastInputFingerprint
+            accumulated = accumulated.multipliedReportingOverflow(by: 0x100_0000_01b3).partialValue
+            // Fold decoded outputs in a key-sorted order so the *fingerprint*
+            // cannot itself depend on Dictionary order.
+            for key in outputs.keys.sorted() {
+                for byte in outputs[key] ?? [] {
+                    accumulated ^= UInt64(byte)
+                    accumulated = accumulated
+                        .multipliedReportingOverflow(by: 0x100_0000_01b3).partialValue
+                }
+            }
+            accumulated ^= UInt64(tick)
+        }
+
+        XCTAssertNotEqual(accumulated, 0)
+        print("\(Self.marker) \(String(accumulated, radix: 16))")
+    }
+}

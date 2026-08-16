@@ -669,6 +669,50 @@ Five lemmas must hold (bijection, reciprocity, stream round-trip, day-key involu
 # Baseline: enigma_m4_tensorlut_baseline.v (925 LUT6 + 49 DFFs)
 ```
 
+## Determinism gates (encrypted path)
+
+The 2026-08-15 defect: `EncryptedNetlistSimulator.tick` encrypted primary inputs
+while iterating `inputs` as a `Dictionary`, drawing from the shared serial RNG
+inside the loop. Swift reseeds Dictionary hashing per process, so each run gave a
+different mask to a different wire, and thin decode margins became coin tosses.
+It cost a claim: the *n*=512 covering adder was filed as a noise-limit FAIL
+before being traced to this.
+
+```bash
+# In-process guard: decoy keys permute Dictionary layout, fingerprint must hold.
+swift test -c release --filter EncryptedDeterminismTests
+
+# Cross-process guard: the property that actually broke. Runs the emitting test
+# as N separate processes and requires byte-identical fingerprints.
+python3 Scripts/determinism_cross_process.py --runs 5 --verbose
+```
+
+Expected: `PASS all 5 processes agreed: 9820c89a488d815d`.
+
+`SWIFT_DETERMINISTIC_HASHING` must stay **unset** — it pins the hash seed and
+makes the cross-process check vacuous. The script refuses to run if it is set
+(exit 2). Exit 1 means fingerprints genuinely diverged.
+
+Both gates were verified to *catch* the bug by reintroducing it: the cross-process
+driver reported 3 distinct fingerprints across 6 processes. A determinism test
+that has never been shown to fail is not evidence.
+
+## Noise-measurement estimators (ε)
+
+```bash
+# Accumulator sampling agrees with the single-residual estimator (coefficient 0
+# reproduces it exactly; a noiseless BK gives residual 0 everywhere).
+swift test -c release --filter TFHENoisyBKAccumulatorTests
+
+# The confidence bound is not tightened by correlated residuals.
+swift test -c release --filter TFHENoisyBKAccumulatorBoundSafetyTests
+
+# Measured effective sample size per bootstrap (~7 min; prints the table in
+# AUDIT.md 13.4.1). Expect gain 8-12x, flat in N -- not the N-fold that
+# AUDIT 13.4 originally predicted.
+swift test -c release --filter TFHENoisyBKEffectiveSampleTests
+```
+
 ## Tests (smoke)
 
 ```bash

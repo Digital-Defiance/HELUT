@@ -178,13 +178,30 @@ def check_epoch(c: set[int]) -> None:
 
 
 def check_test_filters() -> None:
+    """Every `--filter X` cited in the docs must resolve to something runnable.
+
+    `swift test --filter` accepts a test-function name, a suite/class name, or
+    `Suite/testFunc`. The lint originally recognised only function names, so a
+    legitimate class-level filter was reported as missing. Collect both, and
+    accept either side of a `Suite/testFunc` pair.
+    """
     funcs: set[str] = set()
+    suites: set[str] = set()
     tests_dir = os.path.join(ROOT, "Tests")
     for dirpath, _, names in os.walk(tests_dir):
         for nm in names:
             if nm.endswith(".swift"):
                 with open(os.path.join(dirpath, nm), encoding="utf-8") as fh:
-                    funcs |= set(re.findall(r"func\s+(test[A-Za-z0-9_]+)", fh.read()))
+                    body = fh.read()
+                funcs |= set(re.findall(r"func\s+(test[A-Za-z0-9_]+)", body))
+                # `final class Foo: XCTestCase`, `class Foo: XCTestCase`,
+                # and swift-testing `@Suite struct Foo`.
+                suites |= set(
+                    re.findall(r"(?:final\s+)?class\s+([A-Za-z0-9_]+)\s*:\s*XCTestCase", body)
+                )
+                suites |= set(re.findall(r"@Suite[^\n]*\n\s*struct\s+([A-Za-z0-9_]+)", body))
+    runnable = funcs | suites
+
     scanned = [SHEET, "REPRODUCE.md", "REVIEWER.md"] + [r for r, _ in tex_sources()]
     seen: set[str] = set()
     for rel in scanned:
@@ -192,12 +209,27 @@ def check_test_filters() -> None:
         if not os.path.exists(path):
             continue
         txt = read(rel)
-        for m in re.finditer(r"--filter\s+\\?([A-Za-z0-9_]+)", txt):
-            name = m.group(1)
-            seen.add(name)
-            if name not in funcs:
-                fail("test-filter", f"{rel} cites --filter {name}, no such func in Tests/")
-    NOTES.append(f"test filters cited: {len(seen)}; test funcs found: {len(funcs)}")
+        # Optional quoting, and an optional `/testFunc` tail.
+        pattern = r"--filter\s+['\"]?\\?([A-Za-z0-9_]+)(?:/([A-Za-z0-9_]+))?"
+        for m in re.finditer(pattern, txt):
+            head, tail = m.group(1), m.group(2)
+            cited = f"{head}/{tail}" if tail else head
+            seen.add(cited)
+            if tail:
+                # Suite/func form: both halves must exist.
+                if head not in suites:
+                    fail("test-filter", f"{rel} cites --filter {cited}, no suite {head} in Tests/")
+                if tail not in funcs:
+                    fail("test-filter", f"{rel} cites --filter {cited}, no func {tail} in Tests/")
+            elif head not in runnable:
+                fail(
+                    "test-filter",
+                    f"{rel} cites --filter {head}, no such func or suite in Tests/",
+                )
+    NOTES.append(
+        f"test filters cited: {len(seen)}; "
+        f"test funcs found: {len(funcs)}; suites found: {len(suites)}"
+    )
 
 
 def check_logs() -> None:
