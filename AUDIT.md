@@ -647,3 +647,90 @@ Three lessons worth keeping:
   Tier A/B medians are unaffected (timings, not values), but any *marginal*
   encrypted result predating the fix deserves a re-run — starting with C43's
   `k=4` ε instability and C41's n=512 figure.
+
+## 13. Epsilon: one row resolved, and a measurement method that cannot resolve the rest
+
+Following §9, the confidence machinery is now wired into the CLI, so every
+measured row prints its sample count, its 95% upper bound, and whether that
+bound clears the target.
+
+### 13.1 C22 at N=128 is now resolved
+
+The archived figure was `εlog2 ≈ −23.5` at **n=4**, which §9 showed cannot decide
+anything. Re-measured across sample sizes (0.21 s/trial at N=128, so this is
+cheap):
+
+| n | σ̂ | union ε log₂ | union 95% bound |
+|---|-----|--------------|-----------------|
+| 4 | 1 466 383 | −23.5 | −2.8 |
+| 64 | 1 766 748 | −15.9 | −11.3 |
+| **512** | **1 666 139** | **−18.0** | **−16.1** |
+
+σ̂ converges to about 1.67×10⁶ and the union ε to about **−18.0**, with a 95%
+bound of **−16.1**. The row's conclusion — that this is nowhere near 2⁻⁶⁴ — was
+correct and is now properly established rather than asserted from four samples.
+The archived −23.5 was optimistic small-sample noise.
+
+### 13.2 C43's k=4 figure moved
+
+Recorded: `εlog2 ≈ −107 (2 trials) / −43 (4 trials)`. Measured now at n=4:
+σ̂ = 768 411.7, **εlog2 = −21.3**. All three numbers are far above −64, so the
+row's verdict ("SING yes, ε bar not stable") is unchanged — but the specific
+figure moved again, which is the third independent demonstration of the same
+small-sample instability.
+
+### 13.3 The method cannot resolve N=1024, and that is the real finding
+
+Measured per-trial cost:
+
+| configuration | s/trial | n for ±1 order | wall time |
+|---------------|---------|----------------|-----------|
+| N=128, `cryptoPublicMS` | 0.21 | ~1 400 | ~5 min |
+| N=1024, covering-b1 (ℓ=32) | **155** | ~8 450 | **~15 days** |
+
+So the plan in §9.3(b) — "just run more trials" — is **infeasible at production
+degree**. This is not a scheduling problem to be solved with patience; ε at
+N=1024 cannot be established by this measurement method at all, and C35's
+`B=16` bar claim therefore cannot be settled the way it is currently measured.
+
+### 13.4 The fix that would make it feasible
+
+The measurement wastes almost all of its information. `TFHENoisyBK` runs one
+PBS per trial and keeps **one** scalar residual:
+
+```swift
+for _ in 0..<trials { ...; sumSq += err*err }
+return ...(rms: sqrt(sumSq / Double(trials)), samples: trials, ...)
+```
+
+But the GLWE accumulator produced by that PBS has **N coefficients**, and the
+noise in each is a sample from the same distribution. Only the coefficient
+carrying the message is used; the other N−1 are discarded. Estimating σ̂ from all
+N would give 1024 samples per trial at N=1024, so the ~8 450 samples needed for
+±1 order would take about **9 trials, roughly 23 minutes** instead of 15 days —
+a ~1000× improvement in sample efficiency for no extra cryptographic work.
+
+Implementation sketch: measure before sample-extract. Compute the noiseless
+reference accumulator (`X^phase · testPoly`, exactly computable), subtract it
+from the decrypted accumulator, and take the RMS over all N coefficient
+residuals rather than the single extracted one. Care needed on two points:
+coefficient noise is only approximately i.i.d., and the reference must be exact
+or its error contaminates the estimate.
+
+Until that lands, the honest position on C35 is unchanged from §9.3(c): the bar
+is supportable at inject `B ≤ 4`; `B=8` and `B=16` sit inside the measurement's
+resolution and are **not decided**.
+
+### 13.5 A reporting bug found in this work
+
+The first version of the CLI note compared a **union** point estimate against a
+**single-LUT** bound, which produced an impossible ordering: at n=512 the "95%
+upper bound" read −19.1 against a point estimate of −18.0, i.e. the bound looked
+better than the estimate. An upper bound on σ can only make ε worse. The
+single-LUT numbers were right (independently reproduced in Python: point −21.00,
+bound −19.09); the union factor `log₂(lutCount)` was missing from the bound.
+Fixed in 070f511.
+
+Worth noting how it was caught: not by review, but by an ordering sanity check —
+"the bound must be worse than the estimate" — applied to real output. That
+invariant is cheap and should be asserted in the tool.
