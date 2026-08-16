@@ -1,0 +1,20 @@
+Closing the ε confidence gap on under-sampled rows
+started: 2026-08-16T19:55:51Z
+commit:  ab20803
+
+-- C36: covering-b1 N=1024 B=32, need n≈16, running n=24 --
+C36 n=24  (3392s, rc=0)
+    εlog2=-90.6 95%up=-52.2 DOES NOT CLEAR -64, under-sampled: n≈55 would clear]  (baseLog=1 ℓ=32)
+
+-- C37: covering-b1 N=1024 sigma=24, need n≈12, running n=20 --
+C37 n=20  (2830s, rc=0)
+    εlog2=-149.8 95%up=-81.4 clears -64]  (baseLog=1 ℓ=32)
+
+-- C41: covering-b1 N=512 sigma=128, need n≈256. Ladder, sigma-hat is
+   known sample-sensitive so watch it settle before paying for the big run. --
+C41 N=512 n=16  (299s, rc=0)
+    εlog2=-36.8 95%up=-17.9 DOES NOT CLEAR -64, point estimate itself fails — no n clears this]  (ba
+
+C41 N=512 n=64  (1142s, rc=0)
+    εlog2=-61.1 95%up=-44.4 DOES NOT CLEAR -64, point estimate itself fails — no n clears this]  (ba
+
