@@ -404,6 +404,8 @@ package final class EncryptedNetlistSimulator {
                 }
             }
         }
+        lastInputFingerprint = Self.fingerprint(wires: wires, ports: clear.inputPorts)
+
         if useScaledInputs {
             noiseGrowth.assertDecodable()
         }
@@ -553,6 +555,10 @@ package final class EncryptedNetlistSimulator {
                 }
             }
         }
+        lastTickFingerprint = Self.fingerprint(
+            wires: wires.merging(encryptedQ) { current, _ in current },
+            ports: clear.outputPorts
+        )
         return outputs
     }
 
@@ -649,7 +655,57 @@ package final class EncryptedNetlistSimulator {
                 }
             }
         }
+        lastTickFingerprint = Self.fingerprint(wires: wires, ports: clear.outputPorts)
         return outputs
+    }
+
+    /// Stable fingerprint of the ciphertexts backing this tick's outputs.
+    ///
+    /// Exists so a test can see *ciphertext* divergence, not just decoded bits.
+    /// A decoded output can agree while the underlying ciphertexts differ, which
+    /// is exactly how the 2026-08-15 determinism bug hid: it only flipped a bit
+    /// where the noise margin was thin, so small-N tests passed.
+    ///
+    /// Deliberately FNV-1a and not Swift's `Hasher`: `Hasher` is seeded per
+    /// process, so using it here would make the fingerprint vary run to run and
+    /// destroy the property being tested.
+    package private(set) var lastTickFingerprint: UInt64 = 0
+
+    /// Fingerprint of the freshly encrypted *primary input* ciphertexts, taken
+    /// immediately after the input-encryption loop.
+    ///
+    /// This is the surface the 2026-08-15 determinism bug actually lived on, and
+    /// it is the right place to test it. Fingerprinting the tick *outputs*
+    /// cannot see the fault under an e=0 bootstrap key, because blind rotation
+    /// cancels the input mask exactly; and turning the BK noise up far enough to
+    /// make masks matter downstream pushes `booleanPublicMS` past δ/2 and traps.
+    /// Observing the inputs sidesteps both problems.
+    package private(set) var lastInputFingerprint: UInt64 = 0
+
+    static func fingerprint(
+        wires: [Int: LWECiphertext],
+        ports: [String: [YosysBit]]
+    ) -> UInt64 {
+        var h: UInt64 = 0xcbf2_9ce4_8422_2325
+        func mix(_ v: UInt32) {
+            for shift in [0, 8, 16, 24] {
+                h ^= UInt64((v >> UInt32(shift)) & 0xFF)
+                h = h &* 0x0000_0100_0000_01B3
+            }
+        }
+        // Sorted so the fingerprint itself is order-independent.
+        for (port, bits) in ports.sorted(by: { $0.key < $1.key }) {
+            for byte in port.utf8 {
+                h ^= UInt64(byte)
+                h = h &* 0x0000_0100_0000_01B3
+            }
+            for bit in bits {
+                guard case .net(let wire) = bit, let ct = wires[wire] else { continue }
+                mix(ct.b)
+                for coeff in ct.a { mix(coeff) }
+            }
+        }
+        return h
     }
 
     /// Host posedge: mux D/Q/reset in the clear, copy already-native LWE.
