@@ -145,3 +145,69 @@ Metal/GPU power analysis is parked~\cite{helut-avenues}.}
 Appendix~\ref{app:claims}, so the snapshot cannot drift.
 Until then, humans diff the sheet against the appendix before each teaching
 epoch.}
+
+\section{A verdict that varies is a bug, never a parameter}
+\label{sec:determinism}
+
+On 2026-08-15 a re-validation sweep ran every claim in this corpus five times
+instead of once. Two rows stopped agreeing with themselves. One of them,
+\cid{69}, was recorded as a clean negative --- an encrypted adder that failed to
+evaluate correctly at LWE dimension $n{=}512$ --- and it reproduced only twice in
+five attempts.
+
+The tempting explanation was physical, and this book had all the vocabulary for
+it: the measured residual sat at $82\%$ of the decode half-gap $\delta/2$, so
+noise was presumably straddling the threshold. That story was written down. It
+was wrong.
+
+The disproof was already in the tool's own output. Across runs of the same
+command the measured residual was \emph{byte-identical} --- $B_{\mathrm{bk}} =
+858\,907$ every time --- and every seed in the harness is a hardcoded constant.
+Identical inputs were producing different outputs.
+
+\begin{warning}
+Before reaching for a physical explanation of an inconsistent result, check
+whether the computation is deterministic. A fixed-seed pipeline that returns two
+answers has a software defect, and no amount of noise analysis will find it.
+\end{warning}
+
+The defect was mundane and worth knowing about in any language with hash-based
+dictionaries. Encrypting the primary inputs walked a \texttt{Dictionary} while
+drawing from a shared serial random-number generator:
+
+\begin{verbatim}
+for (port, bits) in inputs {                  // hash order
+    wires[wire] = encryptLWE(..., rng: &rng)  // shared RNG
+}
+\end{verbatim}
+
+Swift randomises dictionary hash seeds per process, so every run assigned a
+different mask vector to a different wire. Ciphertexts differed, the noise
+realisation differed, and wherever the margin was thin the decode became a coin
+toss. Sorting the iteration fixed it, and the withdrawn negative became a pass.
+
+Three details generalise beyond this repository:
+
+\begin{itemize}
+  \item \textbf{The concurrency was innocent.} The obvious suspect was a
+        parallel evaluation loop added for throughput. Forcing it serial changed
+        nothing; every shared cache on the path held a correct lock. The fault
+        was in ordinary single-threaded code.
+  \item \textbf{Only a marginal experiment could see it.} Under a noiseless
+        bootstrap key the blind rotation cancels the input mask exactly, so the
+        outputs are identical whichever mask was drawn. The bug was invisible
+        except where noise made masks matter --- which is to say, invisible
+        except near a bar.
+  \item \textbf{One run cannot detect it.} Hash-order dependence is a property
+        of a \emph{process}, so it does not appear in a single receipt, in code
+        review, or in a test suite that runs each case once.
+\end{itemize}
+
+\nonclaimbox{This section is not a claim that the corpus is now
+deterministic everywhere. It is a claim about one fixed defect, one withdrawn
+negative, and a method: run it more than once, and treat disagreement as a
+defect until proven otherwise.}
+
+\growswhen{A determinism assertion covers the encrypted path end to end --- for
+example, byte-identical ciphertexts across processes under a fixed seed, checked
+in CI rather than by hand.}

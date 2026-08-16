@@ -2,7 +2,7 @@
 
 # Reconfigurable Homomorphic Computing A Living Textbook of Netlist-Clocked FHE, Differentiable Hardware, and Polymorphic Ciphers
 
-*Digital Defiance HELUT Project --- living edition 0.1.2 (2026-08-14 / C69) · August 2026*
+*Digital Defiance HELUT Project --- living edition 0.1.2 (2026-08-15 / C69) · August 2026*
 
 ::: titlepage
 **Reconfigurable Homomorphic Computing**
@@ -13,7 +13,7 @@ Netlist-Clocked Torus FHE Differentiable Hardware Adversarial Polymorphic Cipher
 
 Digital Defiance / HELUT Project
 
-Living edition 0.1.2 epoch 2026-08-14 / C69
+Living edition 0.1.2 epoch 2026-08-15 / C69
 
 Audit stamp:
 
@@ -53,7 +53,7 @@ The stack has three pillars [@helut-release; @helut-paper]:
 
 ###### Why a living textbook.
 
-Research papers freeze a slice of a laboratory. This course cannot. The claim inventory [@helut-claim-sheet] moves: Metal kernels get faster, hedges close, avenues stay unlabeled until they earn receipts. If this scaffold ever becomes a course, a professor who taught from a PDF dated June would be teaching a different Metal compiler than a professor teaching from August. So the book is versioned against the corpus *epoch* (2026-08-14 / C69 in this edition) and is honest about stubs.
+Research papers freeze a slice of a laboratory. This course cannot. The claim inventory [@helut-claim-sheet] moves: Metal kernels get faster, hedges close, avenues stay unlabeled until they earn receipts. If this scaffold ever becomes a course, a professor who taught from a PDF dated June would be teaching a different Metal compiler than a professor teaching from August. So the book is versioned against the corpus *epoch* (2026-08-15 / C69 in this edition) and is honest about stubs.
 
 ###### What this edition is.
 
@@ -233,6 +233,35 @@ Print these on the course website.
 
 4.  The syllabus appendix does *not* automatically change. Instructors opt in (Chapter [2](#ch:instructor){reference-type="ref" reference="ch:instructor"}).
 
+### A verdict that varies is a bug, never a parameter {#sec:determinism}
+
+On 2026-08-15 a re-validation sweep ran every claim in this corpus five times instead of once. Two rows stopped agreeing with themselves. One of them, **C69**, was recorded as a clean negative --- an encrypted adder that failed to evaluate correctly at LWE dimension $n{=}512$ --- and it reproduced only twice in five attempts.
+
+The tempting explanation was physical, and this book had all the vocabulary for it: the measured residual sat at $82\%$ of the decode half-gap $\delta/2$, so noise was presumably straddling the threshold. That story was written down. It was wrong.
+
+The disproof was already in the tool's own output. Across runs of the same command the measured residual was *byte-identical* --- $B_{\mathrm{bk}} =
+858\,907$ every time --- and every seed in the harness is a hardcoded constant. Identical inputs were producing different outputs.
+
+::: warning
+*Honesty note 3.1*. Before reaching for a physical explanation of an inconsistent result, check whether the computation is deterministic. A fixed-seed pipeline that returns two answers has a software defect, and no amount of noise analysis will find it.
+:::
+
+The defect was mundane and worth knowing about in any language with hash-based dictionaries. Encrypting the primary inputs walked a `Dictionary` while drawing from a shared serial random-number generator:
+
+    for (port, bits) in inputs {                  // hash order
+        wires[wire] = encryptLWE(..., rng: &rng)  // shared RNG
+    }
+
+Swift randomises dictionary hash seeds per process, so every run assigned a different mask vector to a different wire. Ciphertexts differed, the noise realisation differed, and wherever the margin was thin the decode became a coin toss. Sorting the iteration fixed it, and the withdrawn negative became a pass.
+
+Three details generalise beyond this repository:
+
+- **The concurrency was innocent.** The obvious suspect was a parallel evaluation loop added for throughput. Forcing it serial changed nothing; every shared cache on the path held a correct lock. The fault was in ordinary single-threaded code.
+
+- **Only a marginal experiment could see it.** Under a noiseless bootstrap key the blind rotation cancels the input mask exactly, so the outputs are identical whichever mask was drawn. The bug was invisible except where noise made masks matter --- which is to say, invisible except near a bar.
+
+- **One run cannot detect it.** Hash-order dependence is a property of a *process*, so it does not appear in a single receipt, in code review, or in a test suite that runs each case once.
+
 # Foundations of the Subject
 
 ## A new subject {#ch:subject}
@@ -386,7 +415,7 @@ That freeze answers a common question: $q=2^{32}$ is *not* a proof that lattice 
 The ring of polynomials is $$R_q = \mathbb{Z}_q[X]/(X^N+1),$$ the negacyclic ring. Multiplication by $X$ is a rotation with a sign flip on wrap-around---the algebraic fact that makes blind rotation a barrel shifter on coefficients.
 
 ::: warning
-*Honesty note 3.1*. Exact $\mathrm{mod}\,2^{32}$ integer tensors are not "homomorphic encryption." They are the arithmetic. Encryption begins when those tensors are LWE or GLWE *samples* with a secret and noise.
+*Honesty note 3.2*. Exact $\mathrm{mod}\,2^{32}$ integer tensors are not "homomorphic encryption." They are the arithmetic. Encryption begins when those tensors are LWE or GLWE *samples* with a secret and noise.
 :::
 
 ### LWE samples, in one page
@@ -449,7 +478,7 @@ Three layers ship as code, not as vibes (**C5**):
 :::
 
 ::: warning
-*Honesty note 3.2*. A noiseless BK is a correct *functional* bootstrap and an incomplete *depth* story if that is all you ran. **C22** is the covering-gadget measurement at $N\le 128$. **C52**--**C54** put covering noisy BK on $N{=}1024$ Metal SING at $\sigma{=}128$, $k{=}7$. Students who say "we have production noisy BK" from the $N=8$ table, or who drop the native-$k{=}1$ / `cryptoPublicMS` remainders, are failing **H4**.
+*Honesty note 3.3*. A noiseless BK is a correct *functional* bootstrap and an incomplete *depth* story if that is all you ran. **C22** is the covering-gadget measurement at $N\le 128$. **C52**--**C54** put covering noisy BK on $N{=}1024$ Metal SING at $\sigma{=}128$, $k{=}7$. Students who say "we have production noisy BK" from the $N=8$ table, or who drop the native-$k{=}1$ / `cryptoPublicMS` remainders, are failing **H4**.
 :::
 
 ### Parameters you may quote
@@ -617,7 +646,7 @@ Phase 1 without Phase 2 still leaves $O(W\cdot N)$ encode inside each tile. Ph
 
 Default Metal BR: fused if $N\le 64$, tiled-kernel otherwise (NTT EP inside tiles). Legacy fused megagraph is `--metal-br-fused` only, and at production $N$ it is a museum exhibit.
 
-### Numbers a student may quote (epoch 2026-08-14 / C69)
+### Numbers a student may quote (epoch 2026-08-15 / C69)
 
 ::: center
   Path at $N=1024$                      s/BR (micro)               SING / 8 rows                           RSS
@@ -738,6 +767,45 @@ The non-claims of Chapter [3](#ch:living){reference-type="ref" reference="ch:li
 **Laboratory 3.1** (Certificate literacy). Run `.build/release/helut --hardness-table` and classify each printed row as demo, weak, or production-shaped. For each row, write one sentence a journalist may print and one sentence they may not.
 :::
 
+### Why $\varepsilon$ needs a sample size {#sec:eps-samples}
+
+The failure probability $\varepsilon$ that appears on a noise certificate is not sampled. It is an analytic Gaussian tail evaluated at a *measured* standard deviation: $$\varepsilon = \Pr\bigl[\,|Z| \ge \delta/2\,\bigr],
+  \qquad Z \sim \mathcal{N}(0,\hat\sigma^2),
+  \qquad
+  \log_2\varepsilon \;\approx\; -\frac{(\delta/2)^2}{2\hat\sigma^2\ln 2}.$$
+
+Read the exponent carefully: $\log_2\varepsilon \propto -1/\hat\sigma^2$. Differentiating, a relative error $r$ in $\hat\sigma$ moves $\log_2\varepsilon$ by about $2\,\lvert\log_2\varepsilon\rvert\, r$. At $\lvert\log_2\varepsilon\rvert=65$ a one percent error in $\hat\sigma$ is worth $1.3$ orders.
+
+And $\hat\sigma$ is an RMS over however many residuals were collected --- one per trial. The standard error of a standard-deviation estimate from $m$ samples is about $1/\sqrt{2m}$, so:
+
+::: center
+      $m$   $\mathrm{SE}(\hat\sigma)/\hat\sigma$   unresolved orders at $\log_2\varepsilon=-65$
+  ------- -------------------------------------- ----------------------------------------------
+        2                               $50.0\%$                                       $\pm 65$
+        4                               $35.4\%$                                       $\pm 46$
+        8                               $25.0\%$                                       $\pm 32$
+       64                                $8.8\%$                                     $\pm 11.5$
+    1 024                                $2.2\%$                                      $\pm 2.9$
+    8 450                               $0.77\%$                                        $\pm 1$
+:::
+
+::: warning
+*Honesty note 3.1*. A measured $\varepsilon$ of $-65.4$ against a $2^{-64}$ bar, taken at four samples, carries roughly $\pm 46$ orders. It does not clear the bar. It does not fail to clear the bar. It says nothing about the bar at all. Quote the confidence bound, or quote nothing.
+:::
+
+The bound is standard: $m\hat\sigma^2/\sigma^2 \sim \chi^2(m)$, so a one-sided upper bound on $\sigma$ is $\hat\sigma\sqrt{m/\chi^2_{\alpha}(m)}$, and $\varepsilon$ evaluated there is the conservative figure --- the only one worth comparing against a target. HELUT prints it:
+
+    cryptoPublicMS B=64: ... eps log2=-23.5
+      [n=4, 95%up=-2.8 DOES NOT CLEAR -64, +/-1 needs n~1403]
+
+::: warning
+*Honesty note 3.2* (Sample cost can make a bar unreachable). The same measurement at production degree costs about $155\,\mathrm{s}$ per trial ($N{=}1024$, covering-b1, $\ell{=}32$). The $n\approx 8450$ needed for $\pm 1$ order is therefore roughly *fifteen days*. Some bars cannot be established by running the experiment longer, and saying so is part of the certificate.
+:::
+
+::: exercise
+**Exercise 3.2**. A colleague reports $\varepsilon \le 2^{-64}$ from three trials and proposes shipping the parameters. Compute the unresolved orders. Then compute how many trials would be needed to support the sentence they wrote, and how long that would take at $155\,\mathrm{s}$ per trial. Write the one-line reply you would send.
+:::
+
 # Pillar II --- Differentiable Hardware
 
 ## Continuous hardware, discrete silicon {#ch:pillarii}
@@ -799,7 +867,7 @@ Each clause is a `TensorLUTFormal.check*` in `TensorLUTFormal.swift`, aggregated
 Still not melt completeness for arbitrary netlists. The named lemmas of Theorem [1.1](#thm:tensorlut){reference-type="ref" reference="thm:tensorlut"} are `discretenessPenalty`, `cryptoFitnessMSE`, `combinedObjective`, `emitterThreshold`, `involutionSandwich`, `freezeMask`. Source path: `Sources/HELUTCore/TensorLUTFormal.swift`.
 
 ::: warning
-*Honesty note 1.2*. Theorem 1 does *not* prove recovery of arbitrary keys; a U-534 / P1030680 plaintext; or that melt is complete for all netlists. Shatter / hold grades remain empirical (**C8**, **C9**, **H6**).
+*Honesty note 1.1*. Theorem 1 does *not* prove recovery of arbitrary keys; a U-534 / P1030680 plaintext; or that melt is complete for all netlists. Shatter / hold grades remain empirical (**C8**, **C9**, **H6**).
 :::
 
 ::: {#thm:tensorlut-snap .theorem}
@@ -835,7 +903,7 @@ A full cold-start on a large sequential cipher discovers continuous shortcuts th
 Stecker genotypes are partial involutions (disjoint pairs) by construction (Theorem [1.1](#thm:tensorlut){reference-type="ref" reference="thm:tensorlut"}, clause 5). The GA cannot propose a non-reciprocal map. The 16 cone LUTs around an identity plugboard cannot invent letter swaps by INIT melt; the sandwich injects $S(\mathrm{CT})$ into a frozen core and scores soft PT against bits of $S(P)$. Reciprocity is structural.
 
 ::: warning
-*Honesty note 1.3*. Short cribs leave unused pairs unconstrained and can admit false $F=0$ steckers. Grade active-map agreement on $\mathrm{CT}\cup\mathrm{PT}$, use parsimony, grow the pair budget on plateau, and allow soft freeze $+$ thaw. TensorLUT grades are not a campaign decrypt (**N**, **H6**).
+*Honesty note 1.2*. Short cribs leave unused pairs unconstrained and can admit false $F=0$ steckers. Grade active-map agreement on $\mathrm{CT}\cup\mathrm{PT}$, use parsimony, grow the pair budget on plateau, and allow soft freeze $+$ thaw. TensorLUT grades are not a campaign decrypt (**N**, **H6**).
 :::
 
 ### Adversarial synthesis as a compiler loop
@@ -883,7 +951,7 @@ The historical Enigma leaks this laboratory proved fatal---26-letter menus, self
 Machine-checked: `Enigma256Formal.certificate()` / `testEnigma256FormalCertificate`. Reproduce: see Lab appendix / `REPRODUCE.md`.
 
 ::: warning
-*Honesty note 1.4*. Theorem 2 is a *structural SoftBus contract*---not IND-CPA, not a claim that Red TensorLUT/KPA/`ent` cannot force Blue generation rolls, and not a finished polymorphic-cipher standard.
+*Honesty note 1.3*. Theorem 2 is a *structural SoftBus contract*---not IND-CPA, not a claim that Red TensorLUT/KPA/`ent` cannot force Blue generation rolls, and not a finished polymorphic-cipher standard.
 :::
 
 ### Red pressure
@@ -1023,6 +1091,24 @@ The signature assignment (Chapter [2](#ch:instructor){reference-type="ref" refe
 
 Chapter [4](#ch:frontier){reference-type="ref" reference="ch:frontier"}: pick one avenue. Propose the first experiment that would mint a **C** row. You may not claim the avenue works.
 
+### Lab 9 --- Run it five times {#sec:lab-repeat}
+
+Every measurement in this corpus began as a single observation. This lab is about what that costs, and it needs no Apple hardware for the first half.
+
+1.  Pick any timing in `directives/claim-sheet.md`. Re-run it five times with `Scripts/bench_repeat.py` and report min, median, max and relative spread. Was the archived figure a median, or a best case?
+
+2.  Run the same command once on a cold cache and once warm. On the machine these claims were measured, one row moved by $2.4\times$ between the two. Which of the two numbers belongs in a paper?
+
+3.  Now take a row whose claim is a *failure*. Run it five times. Report whether the failure is deterministic. A negative that reproduces three times in five is a different scientific object from one that reproduces five times in five --- name the difference in one sentence.
+
+4.  Read `logs/leeloo/prefix-vs-postfix.md`. Two rows changed stability after a one-line source fix. Explain why running each row once could never have found that, no matter how carefully the code was reviewed.
+
+Deliverable: a table of {row, archived figure, median of 5, spread, verdict} and one paragraph on which archived numbers you would now decline to quote.
+
+::: warning
+*Honesty note 2.1*. The harness refuses to start if another benchmark is already running, and that refusal is load-bearing rather than fussy: one benchmark on a sixteen-core machine is about $26\%$ per core, well under any sane load threshold, yet it contends for the GPU and memory bandwidth and will skew every number in a concurrent sweep. A build is worse --- it replaces the binary underneath a running sweep.
+:::
+
 ### Optional project slots
 
 TensorLUT involution sandwich replay (**C9** logs), E256 invariant studio, or a new Yosys netlist (student RTL $\to$ SING). Instructor approval required; campaign decrypt projects are out of scope.
@@ -1034,17 +1120,19 @@ This chapter is the discovery path after disclosure [@helut-trajectory]. None o
 ### Near term
 
 ::: center
-  Track                           Status at epoch 2026-08-14 / C69                                                                                             Next experiment
-  ------------------------------- ---------------------------------------------------------------------------------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  **H2** full_adder $N\ge 256$    **Closed** ($Z_{2N}$ pack / `rotationPower`)                                                                                 Keep as a worked bug in Chapter [3](#ch:torus){reference-type="ref" reference="ch:torus"}.
-  **H1** Sage lattice-estimator   **C23** filled; production $|\Delta|=4.5$; core-SVP vs Cost `rop` divergences                                                Optional retune / quote estimator-only on $\Delta>16$ rows.
-  **H3** Metal BR at large $N$    **C20** boolean $10.6\,\mathrm{s}$; **C21** crypto $\ell=2$ $11.38\,\mathrm{s}$                                              NTT inside crypto $\ell=2$ at $N{=}1024$ (incomplete public-MS gadget).
-  **H4** Noisy BK                 **C52**--**C54** covering-b1; **C57** covering-b2 $\varepsilon$ + regex SING @ $N{=}1024$                                    Native $k{=}1$ (**C37**/**C55**); `cryptoPublicMS` (**C26**/**C56**); PicoRV covering (**C60** Q FAIL).
-  Encrypted sequential            **C53**/**C54** covering-b1 counter + toy ISA @ $N{=}1024$ $\sigma{=}128$ $k{=}7$; **C51** PicoRV Metal still demo $N{=}8$   Metal PicoRV covering @ $N{=}1024$ (LUT-tax).
-  Campaign catalog                Middle ring $\neq A$ untested; catalog parked \@417                                                                          Resume `--bombe-from 418`.
-  Garble / quarantine             Soft-band grades                                                                                                             Sister-message lessons; not a decrypt claim.
-  Audience R1--R6                 Shipped, not **C** rows: Linux checks, weak-vs-affine toy cipher pair, Theorem 1 in English, the $q$-split, four-page note   Open: Lean/Coq version of the six clauses; toy cipher through Yosys; $q=2$ FHE.
-  Vertex maximizers               Literature-resolved, not a **C** row                                                                                         Raising $\lambda$ is the classical concave exact penalty for 0--1 programming (Raghavachari 1969; Giannessi--Niccolucci 1976). Sufficient: $\lambda\ge\frac12\sup\lambda_{\max}(\nabla^2 f)$, measured $2+\sqrt3$ on two LUTs. Open: scaling with depth / fan-out. `note/lut-relaxation.tex` §4--§5.
+  Track                             Status at epoch 2026-08-15 / C69                                                                                                                                       Next experiment
+  --------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  **H2** full_adder $N\ge 256$      **Closed** ($Z_{2N}$ pack / `rotationPower`)                                                                                                                           Keep as a worked bug in Chapter [3](#ch:torus){reference-type="ref" reference="ch:torus"}.
+  **H1** Sage lattice-estimator     **C23** filled; production $|\Delta|=4.5$; core-SVP vs Cost `rop` divergences                                                                                          Optional retune / quote estimator-only on $\Delta>16$ rows.
+  **H3** Metal BR at large $N$      **C20** boolean $10.6\,\mathrm{s}$; **C21** crypto $\ell=2$ $11.38\,\mathrm{s}$                                                                                        NTT inside crypto $\ell=2$ at $N{=}1024$ (incomplete public-MS gadget).
+  **H4** Noisy BK                   **C52**--**C54** covering-b1; **C57** covering-b2 $\varepsilon$ + regex SING @ $N{=}1024$; covering KS reaches $n{=}512$ (**C69**, the old $n{=}512$ FAIL withdrawn)   Native $k{=}1$ (**C37**/**C55**); `cryptoPublicMS` (**C26**/**C56**); PicoRV covering (**C60** Q FAIL).
+  Encrypted sequential              **C53**/**C54** covering-b1 counter + toy ISA @ $N{=}1024$ $\sigma{=}128$ $k{=}7$; **C51** PicoRV Metal still demo $N{=}8$                                             Metal PicoRV covering @ $N{=}1024$ (LUT-tax).
+  Campaign catalog                  Middle ring $\neq A$ untested; catalog parked \@417                                                                                                                    Resume `--bombe-from 418`.
+  Garble / quarantine               Soft-band grades                                                                                                                                                       Sister-message lessons; not a decrypt claim.
+  Audience R1--R6                   Shipped, not **C** rows: Linux checks, weak-vs-affine toy cipher pair, Theorem 1 in English, the $q$-split, four-page note                                             Open: Lean/Coq version of the six clauses; toy cipher through Yosys; $q=2$ FHE.
+  Encrypted determinism             Fixed 2026-08-15: input encryption walked a `Dictionary` while drawing from the shared RNG, so ciphertexts varied per process                                          End-to-end determinism assertion in CI (byte-identical ciphertexts across processes at a fixed seed), not just the in-process guard (§[3.7](#sec:determinism){reference-type="ref" reference="sec:determinism"}).
+  $\varepsilon$ sample efficiency   **C22** resolved at $N{=}128$ ($-18.0$, 95% bound $-16.1$, $n{=}512$); $N{=}1024$ costs $155\,\mathrm{s}$/trial so $n{\approx}8450$ is ${\sim}15$ days                 Sample all $N$ accumulator coefficients instead of the one extracted residual (${\sim}1000\times$ more samples per bootstrap). Until then **C35**'s bar is supportable only at inject $B\le 4$ (§[3.6](#sec:eps-samples){reference-type="ref" reference="sec:eps-samples"}).
+  Vertex maximizers                 Literature-resolved, not a **C** row                                                                                                                                   Raising $\lambda$ is the classical concave exact penalty for 0--1 programming (Raghavachari 1969; Giannessi--Niccolucci 1976). Sufficient: $\lambda\ge\frac12\sup\lambda_{\max}(\nabla^2 f)$, measured $2+\sqrt3$ on two LUTs. Open: scaling with depth / fan-out. `note/lut-relaxation.tex` §4--§5.
 :::
 
 ### Mid-term pillars
@@ -1131,7 +1219,7 @@ First graduating experiment: fixture harness that emits tick markers and a publi
 
 ## Claim index (snapshot) {#app:claims}
 
-Canonical living inventory: `directives/claim-sheet.md`. If this appendix disagrees with the sheet, the sheet wins. Snapshot epoch: 2026-08-14 / C69.
+Canonical living inventory: `directives/claim-sheet.md`. If this appendix disagrees with the sheet, the sheet wins. Snapshot epoch: 2026-08-15 / C69.
 
 ### Reproducible results
 
@@ -1278,18 +1366,18 @@ Canonical living inventory: `directives/claim-sheet.md`. If this appendix disagr
 +--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **C68**      | PicoRV lut6 covering NOP-fetch extract$\to$KS $n{=}64$: Metal PASS $911\,\mathrm{s}/8$, fetches $0x0,0x4$.                                                                                                             |
 +--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **C69**      | Covering KS $n{=}256$ adder SING PASS; $n{=}512$ SING FAIL. C67 SIGTRAP was identity$\times 4$.                                                                                                                        |
+| **C69**      | Covering KS adder SING PASS at $n{=}256$ and $n{=}512$. The $n{=}512$ FAIL was withdrawn 2026-08-15 (determinism artifact). C67 SIGTRAP was identity$\times 4$.                                                        |
 +--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 ### Open hedges
 
 ::: center
   ID       Asterisk
-  -------- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  -------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   **H1**   **C23** filled JSON. Production $|\Delta|=4.5$; divergences are core-SVP vs Cost `rop`.
   **H2**   **Closed** 2026-08-12 ($Z_{2N}$ pack). Kept as history.
   **H3**   **C20**/**C21** SING bars met; serial NTT SING still loses vs persist.
-  **H4**   **C64**--**C66**/**C68** extract$\to$KS $n{=}64$. **C69** $n{=}256$ covering SING; $n{=}512$ SING FAIL. C67 trap was identity$\times 4$. Native $k{=}1$ at $n{=}N$ still **C37**.
+  **H4**   **C64**--**C66**/**C68** extract$\to$KS $n{=}64$. **C69** covering SING at $n{=}256$ and $n{=}512$ (the $n{=}512$ FAIL was withdrawn). C67 trap was identity$\times 4$. Native $k{=}1$ at $n{=}N$ still **C37**.
   **H5**   `*PublicMS` gadgets ($g_0=\delta$): on-lattice intent, not a closer of old **H2**.
   **H6**   TensorLUT / quarantine vs campaign: parallel research, not P1030680 PT.
   **H7**   Catalog / Regenbogen / UEBUNG: negatives graded; middle ring $\neq A$ untested; catalog parked \@417, resume `--bombe-from 418`.
@@ -1297,7 +1385,23 @@ Canonical living inventory: `directives/claim-sheet.md`. If this appendix disagr
 
 ### Standing non-implications
 
-Do not let prose imply: new lattice assumption; "we invented TFHE"; production keys without estimator; mock-torus $=$ FHE; P1030680 decrypted; campaign fitness $=$ encrypted tick rate; TensorLUT $=$ U-534 break; side-channels measured; quantum attacks analyzed. Wild ideas in Chapter [4](#ch:frontier){reference-type="ref" reference="ch:frontier"} are trajectory, not results.
+These were an unnumbered list until 2026-08-15. They are now **N** rows in the claim sheet, because the campaign report and the agent rules cite **N5**, **N6** and **N7** by number and those references had no resolvable target. Numbering follows the original clause order, so existing citations keep their meaning.
+
+::: center
+  ID       Do not let prose imply
+  -------- -----------------------------------------------------------------------------
+  **N1**   A new lattice assumption.
+  **N2**   "We invented TFHE" --- prior art is Chillotti et al., Ducas--Micciancio.
+  **N3**   Production keys are safe without an estimator run (**H1**, **C23**).
+  **N4**   Mock or trivial torus encoding $=$ FHE (**C1** is a shape laboratory).
+  **N5**   P1030680 is decrypted (**H6**).
+  **N6**   Campaign fitness $=$ encrypted tick rate. Fitness is cleartext Metal batch.
+  **N7**   TensorLUT $=$ a U-534 / Thetis break (**H6**; **C19** is structural).
+  **N8**   Side channels are measured. GPU power and timing are parked.
+  **N9**   Quantum attacks are analyzed. Not in scope anywhere in this corpus.
+:::
+
+Wild ideas in Chapter [4](#ch:frontier){reference-type="ref" reference="ch:frontier"} are trajectory, not results.
 
 ## Fifteen-week syllabus {#app:syllabus}
 

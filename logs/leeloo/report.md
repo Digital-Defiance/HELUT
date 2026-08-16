@@ -20,15 +20,21 @@ the spread, never a single pass.
 | C47 | A | PASS 3.15 s / 32, 10 fetches | 1.562 s | 0.9% | 5 | stable-pass |
 | C49 | A | PASS 3.79 s / 48, store wdata=1 | 2.356 s | 1.5% | 5 | stable-pass |
 | C52 | B | secret 44.08 s / 2, public-ms 29.40 s / 2 | 43.51 s | 1.6% | 5 | stable-pass |
+| C53 | C | secret 110.35 s / 2, public-ms 67.98 s / 2 | 60.74 s | 7.2% | 3 | stable-pass |
+| C54 | C | secret 194.10 s / 2, public-ms 104.18 s / 2 | 94.54 s | 0.1% | 3 | stable-pass |
 | C57 | B | public-ms covering-b2 adder PASS 10.33 s / 1 | 10.24 s | 0.4% | 5 | stable-pass |
 | C58 | A | PASS 1.35 s / 1 (pre-wavefront) | 0.1587 s | 2.5% | 5 | stable-pass |
 | C59 | A | PASS 0.165 s / 1 | 0.1591 s | 3.8% | 5 | stable-pass |
+| C62 | C | PASS 373.89 s / 1, Q SING | 371.4 s | 0.2% | 3 | stable-pass |
 | C63 | A | PASS 1.72 s / 1 (best case; median 1.80) | 1.745 s | 3.5% | 5 | stable-pass |
 | C64 | A | adder PASS 0.264 s | 0.2768 s | 8.6% | 5 | stable-pass |
 | C64b | A | covering-b2 adder PASS 4.22 s | 4.335 s | 4.0% | 5 | stable-pass |
+| C65 | C | covering-b2 PASS 114.0 s / 1 | 114.1 s | 0.1% | 3 | stable-pass |
+| C66 | C | PASS 1135.8 s / 10 | 1131 s | 0.0% | 3 | stable-pass |
 | C67 | B | n=128 PASS 8.58 s | 8.583 s | 2.7% | 5 | stable-pass |
+| C68 | C | PASS 911.3 s / 8, 2 fetches | 905.1 s | 0.3% | 3 | stable-pass |
 | C69 | B | n=256 PASS 17.1 s | 17.28 s | 1.5% | 5 | stable-pass |
 | C69fail | B | n=512 SING FAIL (sum mismatch want=0 got=1) | 34.29 s | 5.4% | 5 | stable-pass |
 
-Rows measured: 23.
+Rows measured: 29.
 No flaky rows in this set: every recorded verdict reproduced on every pass.

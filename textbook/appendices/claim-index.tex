@@ -90,7 +90,7 @@ ID & Result \emph{(continued)} \\
 \cid{66} & PicoRV lut6 covering 10-tick resetn boot extract$\to$KS $n{=}64$: Metal PASS $1136\,\mathrm{s}/10$. \\
 \cid{67} & Covering KS ladder: $n{=}128$ adder PASS; $n{=}256/512$ SIGTRAP. \\
 \cid{68} & PicoRV lut6 covering NOP-fetch extract$\to$KS $n{=}64$: Metal PASS $911\,\mathrm{s}/8$, fetches $0x0,0x4$. \\
-\cid{69} & Covering KS $n{=}256$ adder SING PASS; $n{=}512$ SING FAIL. C67 SIGTRAP was identity$\times 4$. \\
+\cid{69} & Covering KS adder SING PASS at $n{=}256$ and $n{=}512$. The $n{=}512$ FAIL was withdrawn 2026-08-15 (determinism artifact). C67 SIGTRAP was identity$\times 4$. \\
 \end{longtable}
 }
 
@@ -105,7 +105,7 @@ ID & Asterisk \\
 \hid{1} & \cid{23} filled JSON. Production $|\Delta|=4.5$; divergences are core-SVP vs Cost \texttt{rop}. \\
 \hid{2} & \textbf{Closed} 2026-08-12 ($Z_{2N}$ pack). Kept as history. \\
 \hid{3} & \cid{20}/\cid{21} SING bars met; serial NTT SING still loses vs persist. \\
-\hid{4} & \cid{64}--\cid{66}/\cid{68} extract$\to$KS $n{=}64$. \cid{69} $n{=}256$ covering SING; $n{=}512$ SING FAIL. C67 trap was identity$\times 4$. Native $k{=}1$ at $n{=}N$ still \cid{37}. \\
+\hid{4} & \cid{64}--\cid{66}/\cid{68} extract$\to$KS $n{=}64$. \cid{69} covering SING at $n{=}256$ and $n{=}512$ (the $n{=}512$ FAIL was withdrawn). C67 trap was identity$\times 4$. Native $k{=}1$ at $n{=}N$ still \cid{37}. \\
 \hid{5} & \texttt{*PublicMS} gadgets ($g_0=\delta$): on-lattice intent, not a closer of old \hid{2}. \\
 \hid{6} & TensorLUT / quarantine vs campaign: parallel research, not P1030680 PT. \\
 \hid{7} & Catalog / Regenbogen / UEBUNG: negatives graded; middle ring $\neq A$ untested; catalog parked @417, resume \texttt{--bombe-from 418}. \\
@@ -115,8 +115,28 @@ ID & Asterisk \\
 
 \section{Standing non-implications}
 
-Do not let prose imply: new lattice assumption; ``we invented TFHE'';
-production keys without estimator; mock-torus $=$ FHE; P1030680 decrypted;
-campaign fitness $=$ encrypted tick rate; TensorLUT $=$ U-534 break;
-side-channels measured; quantum attacks analyzed.
+These were an unnumbered list until 2026-08-15. They are now \claimkind{N} rows in the
+claim sheet, because the campaign report and the agent rules cite \nid{5},
+\nid{6} and \nid{7} by number and those references had no resolvable target.
+Numbering follows the original clause order, so existing citations keep their
+meaning.
+
+\begin{center}
+\small
+\begin{tabular}{@{}lp{0.72\textwidth}@{}}
+\toprule
+ID & Do not let prose imply \\
+\midrule
+\nid{1} & A new lattice assumption. \\
+\nid{2} & ``We invented TFHE'' --- prior art is Chillotti et al., Ducas--Micciancio. \\
+\nid{3} & Production keys are safe without an estimator run (\hid{1}, \cid{23}). \\
+\nid{4} & Mock or trivial torus encoding $=$ FHE (\cid{1} is a shape laboratory). \\
+\nid{5} & P1030680 is decrypted (\hid{6}). \\
+\nid{6} & Campaign fitness $=$ encrypted tick rate. Fitness is cleartext Metal batch. \\
+\nid{7} & TensorLUT $=$ a U-534 / Thetis break (\hid{6}; \cid{19} is structural). \\
+\nid{8} & Side channels are measured. GPU power and timing are parked. \\
+\nid{9} & Quantum attacks are analyzed. Not in scope anywhere in this corpus. \\
+\bottomrule
+\end{tabular}
+\end{center}
 Wild ideas in Chapter~\ref{ch:frontier} are trajectory, not results.

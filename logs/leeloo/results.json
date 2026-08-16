@@ -834,6 +834,106 @@
     "warmup": 1,
     "when": "2026-08-15T20:27:43"
   },
+  "C53": {
+    "claims": "secret 110.35 s / 2, public-ms 67.98 s / 2",
+    "cmd": ".build/release/helut --bench counter_netlist.json --degree 1024 --bench-encrypted --sing --vectors 2 --paths covering-b1 --bk-noise-sigma 128 --boolean-scale-mul 7",
+    "exits": [
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C53",
+    "label": "Sequential covering tick: counter N=1024 sigma=128 k=7",
+    "load_per_core_at_end": 0.119537353515625,
+    "runs": 3,
+    "stability": "stable-pass",
+    "tier": "C",
+    "tool_wall": {
+      "max": 65.0206,
+      "mean": 62.13726666666667,
+      "median": 60.7449,
+      "min": 60.6463,
+      "n": 3,
+      "spread": 0.07201098363813267,
+      "stdev": 2.4975265410668497
+    },
+    "verdicts": [
+      [
+        "PASS",
+        "PASS"
+      ],
+      [
+        "PASS",
+        "PASS"
+      ],
+      [
+        "PASS",
+        "PASS"
+      ]
+    ],
+    "wall": {
+      "max": 374.79959829200004,
+      "mean": 333.659859639,
+      "median": 315.6981463750001,
+      "min": 310.48183424999996,
+      "n": 3,
+      "spread": 0.20373183935518147,
+      "stdev": 35.72339640031745
+    },
+    "warmup": 1,
+    "when": "2026-08-15T20:55:11"
+  },
+  "C54": {
+    "claims": "secret 194.10 s / 2, public-ms 104.18 s / 2",
+    "cmd": ".build/release/helut --bench toy_isa_netlist.json --degree 1024 --bench-encrypted --sing --vectors 2 --paths covering-b1 --bk-noise-sigma 128 --boolean-scale-mul 7",
+    "exits": [
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C54",
+    "label": "Sequential covering tick: toy ISA N=1024 sigma=128 k=7",
+    "load_per_core_at_end": 0.155120849609375,
+    "runs": 3,
+    "stability": "stable-pass",
+    "tier": "C",
+    "tool_wall": {
+      "max": 94.57,
+      "mean": 94.53086666666667,
+      "median": 94.5353,
+      "min": 94.4873,
+      "n": 3,
+      "spread": 0.0008748054959363163,
+      "stdev": 0.04152786213294503
+    },
+    "verdicts": [
+      [
+        "PASS",
+        "PASS"
+      ],
+      [
+        "PASS",
+        "PASS"
+      ],
+      [
+        "PASS",
+        "PASS"
+      ]
+    ],
+    "wall": {
+      "max": 355.784126,
+      "mean": 355.17733027766667,
+      "median": 355.223497125,
+      "min": 354.524367708,
+      "n": 3,
+      "spread": 0.0035463822134398876,
+      "stdev": 0.6311467910955602
+    },
+    "warmup": 1,
+    "when": "2026-08-15T21:19:38"
+  },
   "C57": {
     "claims": "public-ms covering-b2 adder PASS 10.33 s / 1",
     "cmd": ".build/release/helut --bench netlist.json --degree 1024 --bench-encrypted --sing --vectors 1 --paths public-ms covering-b2 --bk-noise-sigma 128 --boolean-scale-mul 7",
@@ -1114,6 +1214,53 @@
     "warmup": 1,
     "when": "2026-08-15T19:32:30"
   },
+  "C62": {
+    "claims": "PASS 373.89 s / 1, Q SING",
+    "cmd": ".build/release/helut --bench picorv32_lut6_netlist.json --degree 1024 --bench-encrypted --sing --vectors 1 --paths blind-rotate-metal public-ms boolean",
+    "exits": [
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C62",
+    "label": "Metal PicoRV32 lut6 1-tick at production N=1024, e=0 BK",
+    "load_per_core_at_end": 0.138214111328125,
+    "runs": 3,
+    "stability": "stable-pass",
+    "tier": "C",
+    "tool_wall": {
+      "max": 371.6943,
+      "mean": 371.3043,
+      "median": 371.4002,
+      "min": 370.8184,
+      "n": 3,
+      "spread": 0.00235837245106492,
+      "stdev": 0.445755325262637
+    },
+    "verdicts": [
+      [
+        "PASS"
+      ],
+      [
+        "PASS"
+      ],
+      [
+        "PASS"
+      ]
+    ],
+    "wall": {
+      "max": 372.93192095799986,
+      "mean": 372.55345147199995,
+      "median": 372.64535875,
+      "min": 372.0830747079999,
+      "n": 3,
+      "spread": 0.0022778929887851485,
+      "stdev": 0.43182195387310207
+    },
+    "warmup": 1,
+    "when": "2026-08-15T21:44:31"
+  },
   "C63": {
     "claims": "PASS 1.72 s / 1 (best case; median 1.80)",
     "cmd": ".build/release/helut --bench picorv32_lut6_netlist.json --degree 64 --bench-encrypted --cpu-only --sing --vectors 1 --paths public-ms covering-b2 --bk-noise-sigma 128",
@@ -1294,6 +1441,100 @@
     "warmup": 1,
     "when": "2026-08-15T19:34:41"
   },
+  "C65": {
+    "claims": "covering-b2 PASS 114.0 s / 1",
+    "cmd": ".build/release/helut --bench picorv32_lut6_netlist.json --degree 1024 --bench-encrypted --sing --vectors 1 --paths public-ms covering-b2 --bk-noise-sigma 128 --lwe-dimension 64",
+    "exits": [
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C65",
+    "label": "PicoRV lut6 covering N=1024 extract->KS n=64, Metal Q SING",
+    "load_per_core_at_end": 0.159912109375,
+    "runs": 3,
+    "stability": "stable-pass",
+    "tier": "C",
+    "tool_wall": {
+      "max": 114.1996,
+      "mean": 114.10923333333334,
+      "median": 114.0877,
+      "min": 114.0404,
+      "n": 3,
+      "spread": 0.0013954177356542243,
+      "stdev": 0.08175526486614394
+    },
+    "verdicts": [
+      [
+        "PASS"
+      ],
+      [
+        "PASS"
+      ],
+      [
+        "PASS"
+      ]
+    ],
+    "wall": {
+      "max": 124.11403799999971,
+      "mean": 123.99372822233363,
+      "median": 124.01449166700058,
+      "min": 123.8526550000006,
+      "n": 3,
+      "spread": 0.0021076810982781796,
+      "stdev": 0.13192273741839375
+    },
+    "warmup": 1,
+    "when": "2026-08-15T21:52:47"
+  },
+  "C66": {
+    "claims": "PASS 1135.8 s / 10",
+    "cmd": ".build/release/helut --bench picorv32_lut6_netlist.json --degree 1024 --bench-encrypted --sing --ticks 10 --reset-hold 3 --paths public-ms covering-b2 --bk-noise-sigma 128 --lwe-dimension 64",
+    "exits": [
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C66",
+    "label": "PicoRV lut6 covering 10-tick resetn boot N=1024 KS n=64",
+    "load_per_core_at_end": 0.052764892578125,
+    "runs": 3,
+    "stability": "stable-pass",
+    "tier": "C",
+    "tool_wall": {
+      "max": 1130.9987,
+      "mean": 1130.8480333333334,
+      "median": 1130.8801,
+      "min": 1130.6653,
+      "n": 3,
+      "spread": 0.0002948146315424691,
+      "stdev": 0.16899731753306424
+    },
+    "verdicts": [
+      [
+        "PASS"
+      ],
+      [
+        "PASS"
+      ],
+      [
+        "PASS"
+      ]
+    ],
+    "wall": {
+      "max": 1140.6849143750005,
+      "mean": 1140.5942920140005,
+      "median": 1140.6190500419998,
+      "min": 1140.4789116250013,
+      "n": 3,
+      "spread": 0.00018060609279816738,
+      "stdev": 0.1052093304542049
+    },
+    "warmup": 1,
+    "when": "2026-08-16T00:09:52"
+  },
   "C67": {
     "claims": "n=128 PASS 8.58 s",
     "cmd": ".build/release/helut --bench netlist.json --degree 1024 --bench-encrypted --cpu-only --sing --vectors 1 --paths public-ms covering-b2 --bk-noise-sigma 128 --lwe-dimension 128",
@@ -1353,6 +1594,53 @@
     },
     "warmup": 1,
     "when": "2026-08-15T19:37:30"
+  },
+  "C68": {
+    "claims": "PASS 911.3 s / 8, 2 fetches",
+    "cmd": ".build/release/helut --bench picorv32_lut6_netlist.json --degree 1024 --bench-encrypted --sing --encrypted-mem nop --ticks 8 --reset-hold 3 --paths public-ms covering-b2 --bk-noise-sigma 128 --lwe-dimension 64",
+    "exits": [
+      0,
+      0,
+      0
+    ],
+    "host": "Turing.local",
+    "id": "C68",
+    "label": "PicoRV lut6 covering NOP-fetch N=1024 KS n=64",
+    "load_per_core_at_end": 0.06396484375,
+    "runs": 3,
+    "stability": "stable-pass",
+    "tier": "C",
+    "tool_wall": {
+      "max": 906.8567,
+      "mean": 905.3973,
+      "median": 905.0886,
+      "min": 904.2466,
+      "n": 3,
+      "spread": 0.002883806071582497,
+      "stdev": 1.3321513690268532
+    },
+    "verdicts": [
+      [
+        "PASS"
+      ],
+      [
+        "PASS"
+      ],
+      [
+        "PASS"
+      ]
+    ],
+    "wall": {
+      "max": 916.4909078749997,
+      "mean": 915.0773519443334,
+      "median": 914.7630981250004,
+      "min": 913.9780498330001,
+      "n": 3,
+      "spread": 0.0027470041665981484,
+      "stdev": 1.2855662106770558
+    },
+    "warmup": 1,
+    "when": "2026-08-15T22:53:51"
   },
   "C69": {
     "claims": "n=256 PASS 17.1 s",

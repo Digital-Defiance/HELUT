@@ -273,6 +273,9 @@ $n{=}64$: Q SING PASS (b2 $114\,\mathrm{s}$, b1 $212\,\mathrm{s}$). Walk-around 
 
 \reproduced{C68}{NOP-fetch 8 ticks: PASS $911\,\mathrm{s}/8$, PC $0x0{\to}0x4$.}
 
-\reproduced{C69}{KS $n{=}256$ covering adder PASS after identity 1-trial; $n{=}512$ SING FAIL.}
+\reproduced{C69}{Covering KS adder SING PASSes at $n{=}256$ \emph{and} $n{=}512$.
+The $n{=}512$ case was recorded as a FAIL until 2026-08-15; that negative is
+\textbf{withdrawn}. It was an artifact of nondeterministic input encryption, not
+a noise limit --- see \S\ref{sec:determinism}.}
 
 \growswhen{PicoRV \texttt{lw}; KS $n{=}512$ with $k{>}1$; $n{=}N$ native $k$; \texttt{cryptoPublicMS}.}

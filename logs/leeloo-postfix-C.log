@@ -1,0 +1,57 @@
+Leeloo: 6 row(s), 3 passes + 1 warmup
+load at start: 2.16 (13%/core)
+rough estimate: 192.3 min
+
+
+=== C53 [C] Sequential covering tick: counter N=1024 sigma=128 k=7
+    claims: secret 110.35 s / 2, public-ms 67.98 s / 2
+    warmup   wall= 308.212s exit=0 PASS/PASS tool=60.02s
+    pass 1   wall= 310.482s exit=0 PASS/PASS tool=60.65s
+    pass 2   wall= 315.698s exit=0 PASS/PASS tool=60.74s
+    pass 3   wall= 374.800s exit=0 PASS/PASS tool=65.02s
+    -> median 60.74s  spread 7.2%  stability stable-pass
+
+=== C54 [C] Sequential covering tick: toy ISA N=1024 sigma=128 k=7
+    claims: secret 194.10 s / 2, public-ms 104.18 s / 2
+    warmup   wall= 401.477s exit=0 PASS/PASS tool=99.03s
+    pass 1   wall= 354.524s exit=0 PASS/PASS tool=94.49s
+    pass 2   wall= 355.223s exit=0 PASS/PASS tool=94.57s
+    pass 3   wall= 355.784s exit=0 PASS/PASS tool=94.54s
+    -> median 94.54s  spread 0.1%  stability stable-pass
+
+=== C62 [C] Metal PicoRV32 lut6 1-tick at production N=1024, e=0 BK
+    claims: PASS 373.89 s / 1, Q SING
+    warmup   wall= 374.848s exit=0 PASS tool=373.6s
+    pass 1   wall= 372.932s exit=0 PASS tool=371.7s
+    pass 2   wall= 372.083s exit=0 PASS tool=370.8s
+    pass 3   wall= 372.645s exit=0 PASS tool=371.4s
+    -> median 371.4s  spread 0.2%  stability stable-pass
+
+=== C65 [C] PicoRV lut6 covering N=1024 extract->KS n=64, Metal Q SING
+    claims: covering-b2 PASS 114.0 s / 1
+    warmup   wall= 123.848s exit=0 PASS tool=114.1s
+    pass 1   wall= 123.853s exit=0 PASS tool=114s
+    pass 2   wall= 124.014s exit=0 PASS tool=114.2s
+    pass 3   wall= 124.114s exit=0 PASS tool=114.1s
+    -> median 114.1s  spread 0.1%  stability stable-pass
+
+=== C68 [C] PicoRV lut6 covering NOP-fetch N=1024 KS n=64
+    claims: PASS 911.3 s / 8, 2 fetches
+    warmup   wall= 919.541s exit=0 PASS tool=909.7s
+    pass 1   wall= 916.491s exit=0 PASS tool=906.9s
+    pass 2   wall= 913.978s exit=0 PASS tool=904.2s
+    pass 3   wall= 914.763s exit=0 PASS tool=905.1s
+    -> median 905.1s  spread 0.3%  stability stable-pass
+
+=== C66 [C] PicoRV lut6 covering 10-tick resetn boot N=1024 KS n=64
+    claims: PASS 1135.8 s / 10
+    warmup   wall=1138.327s exit=0 PASS tool=1128s
+    pass 1   wall=1140.685s exit=0 PASS tool=1131s
+    pass 2   wall=1140.479s exit=0 PASS tool=1131s
+    pass 3   wall=1140.619s exit=0 PASS tool=1131s
+    -> median 1131s  spread 0.0%  stability stable-pass
+
+wrote /Volumes/Code/HELUT/logs/leeloo/results.json
+wrote /Volumes/Code/HELUT/logs/leeloo/report.md
+no flaky rows
+C_EXIT=0

@@ -49,8 +49,12 @@ certificate lines are the result, and the timing is context for it.
 
 \reproduced{C22}{Identity-LUT residual under a covering gadget fills
 $B_{\mathrm{bk}}$ and $\hat\sigma$. At $N=8$, inject $B=64$ gives
-$\hat\sigma\approx 6396\ll\delta/2$. At $N=128$, $\hat\sigma\approx 1.47\times 10^6$,
-still $\infty$-norm decodable, Gaussian union $\approx 2^{-23.5}$ not $2^{-64}$.}
+$\hat\sigma\approx 6396\ll\delta/2$. At $N=128$ the residual is still
+$\infty$-norm decodable but the union $\varepsilon$ is nowhere near $2^{-64}$.
+Re-measured 2026-08-15 across sample sizes: $\hat\sigma\to 1.67\times 10^6$ and
+union $\varepsilon\log_2\to -18.0$ with a 95\% upper bound of $-16.1$ at
+$n=512$. The archived $-23.5$ came from $n=4$ and was optimistic small-sample
+noise (\S\ref{sec:eps-samples}).}
 
 \reproduced{C26}{Product-shaped $N{=}1024$ identity residual: inject $B{=}64$
 undecodable on \texttt{cryptoPublicMS}/\texttt{crypto}; inject $B{=}4$ on
@@ -197,8 +201,10 @@ $n{=}256$ and $n{=}512$ SIGTRAP after extract$\to$KS.}
 \reproduced{C68}{NOP-fetch 8 ticks on lut6 PicoRV covering KS $n{=}64$: Metal PASS
 $911\,\mathrm{s}/8$, fetches \texttt{0x0}, \texttt{0x4}.}
 
-\reproduced{C69}{Identity trials$=1$ at LWE $n{\ge}256$: covering-b2 $n{=}256$ adder PASS
-$17.1\,\mathrm{s}$. $n{=}512$ SING FAIL (sum mismatch). C67 SIGTRAP was four identity BRs.}
+\reproduced{C69}{Identity trials$=1$ at LWE $n{\ge}256$: covering-b2 adder PASS at
+$n{=}256$ ($17.1\,\mathrm{s}$) and at $n{=}512$. C67 SIGTRAP was four identity BRs.
+The $n{=}512$ sum mismatch recorded here until 2026-08-15 was a determinism
+artifact and is \textbf{withdrawn} (\S\ref{sec:determinism}).}
 
 \section{Calibration is not estimation}
 
@@ -274,3 +280,89 @@ they may not.
 \growswhen{The four off-tolerance anchors (demo-N8, classic-n630, n1024-s17,
 n2048-s16) get a documented estimator model, or HELUT's core-SVP fit is
 revised; then \hid{1} can shrink further.}
+
+\section{\texorpdfstring{Why $\varepsilon$ needs a sample size}{Why epsilon needs a sample size}}
+\label{sec:eps-samples}
+
+The failure probability $\varepsilon$ that appears on a noise certificate is not
+sampled. It is an analytic Gaussian tail evaluated at a \emph{measured} standard
+deviation:
+\[
+  \varepsilon = \Pr\bigl[\,|Z| \ge \delta/2\,\bigr],
+  \qquad Z \sim \mathcal{N}(0,\hat\sigma^2),
+  \qquad
+  \log_2\varepsilon \;\approx\; -\frac{(\delta/2)^2}{2\hat\sigma^2\ln 2}.
+\]
+
+Read the exponent carefully: $\log_2\varepsilon \propto -1/\hat\sigma^2$.
+Differentiating, a relative error $r$ in $\hat\sigma$ moves $\log_2\varepsilon$ by
+about $2\,\lvert\log_2\varepsilon\rvert\, r$. At $\lvert\log_2\varepsilon\rvert=65$
+a one percent error in $\hat\sigma$ is worth $1.3$ orders.
+
+And $\hat\sigma$ is an RMS over however many residuals were collected --- one per
+trial. The standard error of a standard-deviation estimate from $m$ samples is
+about $1/\sqrt{2m}$, so:
+
+\begin{center}
+\small
+\begin{tabular}{@{}rrr@{}}
+\toprule
+$m$ & $\mathrm{SE}(\hat\sigma)/\hat\sigma$ & unresolved orders at $\log_2\varepsilon=-65$ \\
+\midrule
+2 & $50.0\%$ & $\pm 65$ \\
+4 & $35.4\%$ & $\pm 46$ \\
+8 & $25.0\%$ & $\pm 32$ \\
+64 & $8.8\%$ & $\pm 11.5$ \\
+1\,024 & $2.2\%$ & $\pm 2.9$ \\
+8\,450 & $0.77\%$ & $\pm 1$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\begin{warning}
+A measured $\varepsilon$ of $-65.4$ against a $2^{-64}$ bar, taken at four
+samples, carries roughly $\pm 46$ orders. It does not clear the bar. It does not
+fail to clear the bar. It says nothing about the bar at all. Quote the confidence
+bound, or quote nothing.
+\end{warning}
+
+The bound is standard: $m\hat\sigma^2/\sigma^2 \sim \chi^2(m)$, so a one-sided
+upper bound on $\sigma$ is $\hat\sigma\sqrt{m/\chi^2_{\alpha}(m)}$, and
+$\varepsilon$ evaluated there is the conservative figure --- the only one worth
+comparing against a target. HELUT prints it:
+
+\begin{verbatim}
+cryptoPublicMS B=64: ... eps log2=-23.5
+  [n=4, 95%up=-2.8 DOES NOT CLEAR -64, +/-1 needs n~1403]
+\end{verbatim}
+
+\recheckbox{\cid{22} at $N{=}128$}{Re-derived on 2026-08-15 by a second model
+reading the same evidence, then re-measured on the original hardware. This is
+weaker than a human check and stronger than a single archived number; the
+distinction is the point of this box.}
+
+\reproduced{C22}{Worked example. At covering $N{=}128$ with inject $B{=}64$,
+$\hat\sigma$ converges to $1.67\times 10^6$ and union $\varepsilon\log_2$ to
+$-18.0$ (95\% bound $-16.1$) by $n=512$, at $0.21\,\mathrm{s}$ per trial. The
+conclusion --- nowhere near $2^{-64}$ --- was right all along; it is now
+resolved rather than asserted.}
+
+\begin{warning}[Sample cost can make a bar unreachable]
+The same measurement at production degree costs about $155\,\mathrm{s}$ per trial
+($N{=}1024$, covering-b1, $\ell{=}32$). The $n\approx 8450$ needed for $\pm 1$
+order is therefore roughly \emph{fifteen days}. Some bars cannot be established
+by running the experiment longer, and saying so is part of the certificate.
+\end{warning}
+
+\growswhen{The residual measurement samples all $N$ coefficients of the GLWE
+accumulator instead of only the extracted one. Each is a draw from the same noise
+distribution, so that is about a thousandfold more samples per bootstrap at no
+extra cryptographic cost, and it would turn the fifteen days above into minutes.}
+
+\begin{exercise}
+A colleague reports $\varepsilon \le 2^{-64}$ from three trials and proposes
+shipping the parameters. Compute the unresolved orders. Then compute how many
+trials would be needed to support the sentence they wrote, and how long that
+would take at $155\,\mathrm{s}$ per trial. Write the one-line reply you would
+send.
+\end{exercise}

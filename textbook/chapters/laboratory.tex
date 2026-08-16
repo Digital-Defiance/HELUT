@@ -108,6 +108,46 @@ pass/fail on whether the sentence is lecture-safe at this epoch.
 Chapter~\ref{ch:frontier}: pick one avenue. Propose the first experiment
 that would mint a \claimkind{C} row. You may not claim the avenue works.
 
+\section{\texorpdfstring{Lab 9 --- Run it five times}{Lab 9 --- Run it five times}}
+\label{sec:lab-repeat}
+
+Every measurement in this corpus began as a single observation. This lab is about
+what that costs, and it needs no Apple hardware for the first half.
+
+\begin{enumerate}[itemsep=2pt]
+  \item Pick any timing in \corpus{directives/claim-sheet.md}. Re-run it five
+        times with \corpus{Scripts/bench\_repeat.py} and report min, median,
+        max and relative spread. Was the archived figure a median, or a best
+        case?
+  \item Run the same command once on a cold cache and once warm. On the machine
+        these claims were measured, one row moved by $2.4\times$ between the two.
+        Which of the two numbers belongs in a paper?
+  \item Now take a row whose claim is a \emph{failure}. Run it five times.
+        Report whether the failure is deterministic. A negative that reproduces
+        three times in five is a different scientific object from one that
+        reproduces five times in five --- name the difference in one sentence.
+  \item Read \corpus{logs/leeloo/prefix-vs-postfix.md}. Two rows changed
+        stability after a one-line source fix. Explain why running each row once
+        could never have found that, no matter how carefully the code was
+        reviewed.
+\end{enumerate}
+
+Deliverable: a table of \{row, archived figure, median of 5, spread, verdict\}
+and one paragraph on which archived numbers you would now decline to quote.
+
+\begin{warning}
+The harness refuses to start if another benchmark is already running, and that
+refusal is load-bearing rather than fussy: one benchmark on a sixteen-core
+machine is about $26\%$ per core, well under any sane load threshold, yet it
+contends for the GPU and memory bandwidth and will skew every number in a
+concurrent sweep. A build is worse --- it replaces the binary underneath a
+running sweep.
+\end{warning}
+
+\growswhen{Negative-stability results exist for the \cid{60}/\cid{61} rows, so
+students can compare a deterministic negative against an intermittent one on real
+data.}
+
 \section{Optional project slots}
 
 TensorLUT involution sandwich replay (\cid{9} logs), E256 invariant
