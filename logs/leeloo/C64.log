@@ -1,0 +1,61 @@
+HELUT encrypted-netlist bench · SING
+  netlist: netlist.json  module=full_adder
+  poly N=1024  LUTs=3  DFFs=0  2N=2048
+  stimuli=1 (max --vectors 1)  cpu-only=true  metal-netlist-only=false
+  paths filter: public-ms boolean
+  paths: public-ms@boolean + public-ms@crypto + secret@crypto
+  LWE n=64  (CMUX count; extract→KS when n<kN=1024)
+  DynamicRotateCost mux=2099200 binary=11275 speedup≈186.2×
+
+  starting blind-rotate public-ms boolean  n=64
+  extract→KS     kN=1024 → n=64  (δ-lattice GLev e=0)
+ENCRYPTED EQUIV (blind-rotate public-ms boolean)
+  rows            1
+  wall            0.2737 s  (273.68 ms/row)
+  classical bits  175.7  (≥128? yes)
+  ingest ε log2   -inf  (target -64)
+  noisy BK B_bk   0  (decodable true)
+  result          PASS
+
+ENCRYPTED EQUIV (metal)
+  result          SKIP (--cpu-only)
+
+════════ SING METRICS SUMMARY ════════
+path                                             ms/row       bits    εlog2     B_bk
+blind-rotate public-ms boolean                     273.68      175.7 -inf            0
+calibration:
+| Label | n | σ | Ref bits | HELUT est | Δ | Source |
+|---|---:|---:|---:|---:|---:|---|
+| demo-N8 | 8 | 2^12 | 4 | 4.0 | +0.0 | HELUT demo (not production) |
+| weak-n256 | 256 | 2^17 | 45 | 40.4 | -4.6 | TFHE-style ballpark (weak) |
+| mid-n512 | 512 | 2^16 | 95 | 95.5 | +0.5 | TFHE-style ballpark |
+| classic-n630 | 630 | 2^15 | 128 | 129.0 | +1.0 | ≈ Chillotti boolean 128-bit regime |
+| n768-s16 | 768 | 2^16 | 140 | 135.6 | -4.4 | TFHE-style ballpark |
+| prod-n1024-s16 | 1024 | 2^16 | 170 | 175.7 | +5.7 | HELUT productionBoolean64 |
+| n1024-s17 | 1024 | 2^17 | 155 | 160.7 | +5.7 | same n, noisier σ |
+| n2048-s16 | 2048 | 2^16 | 340 | 336.1 | -3.9 | extrapolated high-security |
+core-SVP model (sage-free):
+| Label | n | σ | HELUT | Core-SVP model | β |
+|---|---:|---:|---:|---:|---:|
+| demo-N8 | 8 | 2^12 | 4.0 | 4.0 | 14 |
+| weak-n256 | 256 | 2^17 | 40.4 | 40.4 | 138 |
+| mid-n512 | 512 | 2^16 | 95.5 | 95.5 | 327 |
+| classic-n630 | 630 | 2^15 | 129.0 | 129.0 | 442 |
+| n768-s16 | 768 | 2^16 | 135.6 | 135.6 | 464 |
+| prod-n1024-s16 | 1024 | 2^16 | 175.7 | 175.7 | 602 |
+| n1024-s17 | 1024 | 2^17 | 160.7 | 160.7 | 550 |
+| n2048-s16 | 2048 | 2^16 | 336.1 | 336.1 | 1151 |
+
+_Interim calibrated Core-SVP (0.292·β). Replace via Sage lattice-estimator when available._
+estimator protocol:
+| Label | n | σ | HELUT | Estimator | Δ |
+|---|---:|---:|---:|---:|---:|
+| demo-N8 | 8 | 2^12 | 4.0 | 33.1 | 29.1 |
+| weak-n256 | 256 | 2^17 | 40.4 | 53.7 | 13.3 |
+| mid-n512 | 512 | 2^16 | 95.5 | 92.4 | 3.2 |
+| classic-n630 | 630 | 2^15 | 129.0 | 106.5 | 22.5 |
+| n768-s16 | 768 | 2^16 | 135.6 | 135.4 | 0.2 |
+| prod-n1024-s16 | 1024 | 2^16 | 175.7 | 180.2 | 4.5 |
+| n1024-s17 | 1024 | 2^17 | 160.7 | 189.9 | 29.3 |
+| n2048-s16 | 2048 | 2^16 | 336.1 | 369.8 | 33.7 |
+══════════════════════════════════════

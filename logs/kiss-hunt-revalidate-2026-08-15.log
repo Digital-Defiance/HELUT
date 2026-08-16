@@ -1,0 +1,36 @@
+=== Target P1030680 ===
+length     : 72
+indicators : VROL NMKA
+broken     : False
+
+=== Daily keys across 50 messages ===
+
+31 messages, 4389 letters of depth
+  reflector=B | greek=C | wheels=438 | rings=AACU | plugs=CH EJ NV OU TY LG SZ PK DI QB
+  P1030659, P1030682, P1030683, P1030684, P1030685, P1030686, P1030687, P1030688, P1030689, P1030690, P1030691, P1030692, P1030693, P1030694, P1030695, P1030696, P1030697, P1030698, P1030699, P1030700, P1030701, P1030702, P1030704, P1030705, P1030706, P1030707, P1030708, P1030709, P1030710, P1030711, P1030712
+
+16 messages, 3078 letters of depth
+  reflector=C | greek=B | wheels=568 | rings=AAEL | plugs=AE BF CM DQ HU JN LX PR SZ VW
+  P1030660, P1030661, P1030662, P1030663, P1030664, P1030666, P1030667, P1030668, P1030669, P1030671, P1030672, P1030673, P1030675, P1030676, P1030679, P1030681
+
+1 messages, 76 letters of depth
+  reflector=C | greek=C | wheels=528 | rings=AAFB | plugs=CP DG EJ FI KT LZ MS NO QU RW
+  P1030713
+
+No recovered key (2): P1030670, P1030680
+
+=== Messages within +/-4 letters of P1030680 (72) ===
+  P1030698  len=  72 (+0)  broken  ind=DNGW DJVX
+  P1030666  len=  68 (-4)  broken  ind=TZDM RSHJ
+  P1030697  len=  76 (+4)  broken  ind=IMAR SHSX
+  P1030713  len=  76 (+4)  broken  ind=FNYG MXHU
+
+=== Kiss test: known plaintexts vs P1030680 ciphertext ===
+(survivor = no self-encipherment collision at that offset)
+
+  72 overlays tested; 8 survived, 5.8 expected by chance
+
+  P1030711 [head] 72 letters survives at offset(s): 0
+  P1030694 [full] 52 letters survives at offset(s): 3, 6, 11, 13, 16, 19, 20
+
+  Leads only. Confirm by running a bombe with the survivor as a full crib.

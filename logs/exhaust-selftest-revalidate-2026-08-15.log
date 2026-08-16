@@ -1,0 +1,30 @@
+Building for production...
+[0/2] Write swift-version--58304C5D6DBC2206.txt
+Build of product 'helut-bombe' complete! (0.09s)
+HELUT — exhaustive cracker self-test (known key)
+Control message: U534 P1030684, Potsdam 1 May 1945 (published key)
+Truth: UKW B, gamma, IV-III-VIII, rings AACU, message key VYAA, 10 plugs
+Using first 72 letters — same length as P1030680
+
+Reference plaintext (true key, true plugs):
+  VVVUUUVIRSOBENNULEINSXXMITUUUVIRSIBENNULZWOYVIRSIBENNULDREIYZWODREISECHS
+  bigram=-2.8719 IC=0.0657
+
+Backend: Metal-ic-sweep
+
+Level 1 — correct wheels/rings, plugs unknown, sieve = IC over 26^4 message keys
+  true key IC = 0.0379
+  rank = 223118 of 456976
+  percentile = top 48.825%
+
+Level 2 — stecker hill-climb from the TRUE rotor setting
+  recovered: DUESETHOTUUTKTZEIERTWEITGTVEEYDASMZUMRGUOWUPLDNUGTXXXYZIEAFFJMMENDLASZTT
+  letters correct: 4/72 (6%)
+  bigram=-3.1270 (true plugs: -2.8719)
+  plugs recovered: 0/10 correct, 7 proposed
+
+Level 3 — verdict on the recovered text
+  likeness=0.80 IC=0.0556 cribs=(none)
+  NO BREAK. Candidates are indistinguishable from noise at this message length.
+
+Read this as the ceiling: P1030680 cannot do better than this rehearsal.
