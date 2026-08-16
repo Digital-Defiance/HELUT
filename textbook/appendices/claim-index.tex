@@ -29,7 +29,10 @@ ID & Result \emph{(continued)} \\
 \cid{5} & Certificates on encrypted ticks. \\
 \cid{6} & Encrypted $\equiv$ clear multi-netlist SING; adder $N\le 1024$. \\
 \cid{7} & Metal 1-LUT BR microbench (fused ancestor numbers). \\
-\cid{8} & TensorLUT M4 baseline $F_{\mathrm{crypto}}=0$ $+$ Verilog emit. \\
+\cid{8} & TensorLUT M4 baseline $F_{\mathrm{crypto}}=0$ $+$ Verilog emit; emitted
+Verilog re-synthesizes through Yosys and is functionally equivalent on the 4-LUT
+design (exhaustive, with negative control). M4 baseline still not regenerable
+end-to-end. \\
 \cid{9} & Stecker involution sandwich; blind 3-pair PASS. \\
 \cid{10} & Enigma256 reciprocity; fail-closed / bijection. \\
 \cid{11} & Potsdam/Plaice keys $\neq$ P1030680. \\
