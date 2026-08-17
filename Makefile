@@ -48,6 +48,7 @@ determinism:
 # Not CI-enforced — both GitHub runners are ubuntu-latest and this needs macOS.
 gates: determinism
 	python3 Scripts/claim_audit.py
+	python3 Scripts/eps_claim_audit.py
 
 clean-docs:
 	rm -rf build/writeup build/paper build/textbook

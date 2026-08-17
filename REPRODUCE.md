@@ -737,6 +737,24 @@ Both gates were verified to *catch* the bug by reintroducing it: the cross-proce
 driver reported 3 distinct fingerprints across 6 processes. A determinism test
 that has never been shown to fail is not evidence.
 
+## ε claim sufficiency
+
+Structural lint cannot catch a row whose ε is correctly measured, correctly
+cited, and still unsupported by its own trial count. That is a statistical
+defect, and it is the one that bit hardest — C36, C37, C41, C52 and C57 all
+quoted an ε their sample size could not carry.
+
+```bash
+python3 Scripts/eps_claim_audit.py           # report
+python3 Scripts/eps_claim_audit.py --strict  # exit 1 if any row is unsupported
+```
+
+The bound clears a target iff `|point| ≥ (m/χ²₀.₀₅(m))·|target|`, so each sample
+count buys fixed slack: n=4 carries any point estimate at or below −371, n=8
+−188, n=16 −129, n=32 −102. **n=4 is not universally too small** — thin margins
+are what cost. Rows are classified `supported`, `under-sampled` (buy trials), or
+`unreachable` (point estimate past the bar; weaken the claim).
+
 ## Noise-measurement estimators (ε)
 
 ```bash
