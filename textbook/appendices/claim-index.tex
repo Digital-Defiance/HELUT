@@ -60,12 +60,12 @@ end-to-end. \\
 \cid{33} & Track~A Metal SING covering \texttt{.crypto} at $N{=}1024$ with $B{=}1$ PASS (secret + public-ms). \\
 \cid{34} & Track~A covering baseLog$=4$: $\varepsilon\log_2\approx-913$ ($\le 2^{-64}$) + Metal SING PASS. \\
 \cid{35} & Track~A covering baseLog$=2$: $\varepsilon\le 2^{-64}$ through inject $B{=}16$ ($\varepsilon\log_2\approx-65.4$) + Metal SING PASS. \\
-\cid{36} & Track~A covering baseLog$=1$: $\varepsilon\le 2^{-64}$ through inject $B{=}32$ ($\varepsilon\log_2\approx-139$) + Metal SING PASS; $B{=}128$ still fails. \\
-\cid{37} & Track~A Gaussian BK inject on covering-b1: $\sigma{=}24$ meets $\varepsilon\le 2^{-64}$ + Metal SING PASS; torus $\sigma{\approx}128$ undecodable at native $k{=}1$ (\cid{55}); torus-scale close is \cid{52} ($k{=}7$). \\
+\cid{36} & Track~A covering baseLog$=1$: $\varepsilon\le 2^{-64}$ through inject $B{=}32$ ($\varepsilon\log_2=-97.8$, 95\% bound $-71.2$ at $n{=}64$; the $-139$ was a 4-trial low draw) + Metal SING PASS; $B{=}128$ still fails. \\
+\cid{37} & Track~A Gaussian BK inject on covering-b1: $\sigma{=}24$ meets $\varepsilon\le 2^{-64}$ (95\% bound $-81.4$ at $n{=}20$) + Metal SING PASS; torus $\sigma{\approx}128$ undecodable at native $k{=}1$ (\cid{55}); torus-scale close is \cid{52} ($k{=}7$). \\
 \cid{38} & Encrypted sequential DFF host-clock: 4-bit counter Metal $N{=}1024$ SING PASS ($15.88\,\mathrm{s}/4$). Not PicoRV32. \\
 \cid{39} & Encrypted 1-byte/1-round E256 frozen scramble Metal $N{=}1024$ SING PASS ($22.77\,\mathrm{s}/2$). Not live BRAM. \\
 \cid{40} & Encrypted toy NOP/ADD ISA Metal $N{=}1024$ SING PASS ($20.31\,\mathrm{s}/4$). Not PicoRV32. \\
-\cid{41} & Covering-b1 Gaussian $\sigma{=}128$ meets $\varepsilon\le 2^{-64}$ at $N\le 512$ + Metal SING; native $k{=}1$ at $N{=}1024$ still fail (\cid{37}); torus-scale close is \cid{52}. \\
+\cid{41} & Covering-b1 Gaussian $\sigma{=}128$: meets $\varepsilon\le 2^{-64}$ at $N{=}256$ (95\% bound $-594.5$). At $N{=}512$ native $k{=}1$ is decodable but $\varepsilon\log_2=-50.6$, short of the bar; stride $k\ge 2$ recovers it (bound $-151.5$ at $k{=}2$) with Metal SING PASS at $k{=}2,3,7$. Native $k{=}1$ at $N{=}1024$ still fails (\cid{37}); torus-scale close is \cid{52}. \\
 \cid{42} & 4-bit CSA vs ripple: LUT2 $11\to 8$ ($-27\%$) + encrypted SING PASS. Not TensorLUT melt. \\
 \cid{43} & $k\delta$ encoding at $N{=}1024$: $k{=}4$ Metal SING PASS on covering-b1 $\sigma{=}128$; $\varepsilon$ bar not stable at 4 trials. \\
 \cid{44} & TensorLUT melt--freeze--snap on a separable Boolean interpolant (three lemmas). Not arbitrary-netlist melt. \\
