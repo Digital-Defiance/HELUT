@@ -64,13 +64,13 @@ export function JournalPage() {
             <li>
               <span className="mono">ELIMINATED</span>
               <span>
-                <strong>Where tested, these wedges are gone:</strong> exact ≥16 catalog × rings AAAA; curated exact and fuzzed top-40 × right rings; ≥16 UEBUNG heads and their body anchors under right-ring coverage; Thetis-register × AAAA; training, collapse, and weather/keyboard stochastic priors under an 80% rigor bar (ceiling ~60–69% is coincidence). Shell-RIGA with free rings did not lift a wrong prior over that bar. Soft-tail UEBUNG quarantine escalate: 0 survivors. Regenbogen/Hannibal tiers (anchor, scuttle, Hela, own-orders, filler): not those exact letter-strings as a BREAK—anchor clean dead; scuttle/Hela soft-band physicals escalate to 0 survivors on the coincidence wall; own-orders AAAA all ghosts; filler AAAA below soft.
+                <strong>Where tested, these wedges are gone:</strong> exact ≥16 catalog × rings AAAA; fuzzed top-40 × right rings; ≥16 UEBUNG heads, and their body anchors under right-ring coverage — that last one re-run on a corrected kernel and re-confirmed (40/40 dead, 0 stops). The curated exact top-30 was contaminated on 20 of its 30 placements by the table-cap bug in Phase 12 and has been re-run and re-confirmed (73 raw stops, identical to the archive, no break). Thetis-register × AAAA; training, collapse, and weather/keyboard stochastic priors under an 80% rigor bar (ceiling ~60–69% is coincidence). Shell-RIGA with free rings did not lift a wrong prior over that bar. Soft-tail UEBUNG quarantine escalate: 0 survivors. Regenbogen/Hannibal tiers (anchor, scuttle, Hela, own-orders, filler): not those exact letter-strings as a BREAK—anchor clean dead; scuttle/Hela soft-band physicals escalate to 0 survivors on the coincidence wall; own-orders AAAA all ghosts; filler AAAA below soft.
               </span>
             </li>
             <li>
               <span className="mono">OPEN</span>
               <span>
-                <strong>Still untested or incomplete:</strong> catalog right-ring sweep parked at originalIndex 417/2513 (last <code>VVVUUUDREINULEINSVI@25</code>; resume <code>--bombe-from 418</code>); Thetis-register rings from menu 14; any middle ring other than A (~8–15% of keys — the arm is now built and graded end-to-end, with the blind control breaking at full middle × right coverage in 4,307 s, but it has produced no P1030680 verdict); the long-menu arms whose negatives are incomplete by up to 5.56% because a kernel table cap reported lanes eliminated without testing them — the Übung body arm was contaminated on all 40 placements and has now been re-run and re-confirmed (40/40 dead, 0 stops); the curated top-30 on 20 of 30 is re-running; the catalog on 300 of 2,513 is not; near-shell walk around sister keys. Sister message P1030681 needed heavy degarbling—exact Welchman clean negatives do not rule out a mis-transcribed P1030680. Soft-band near-misses quarantine into Stochastic seeds. More GPU on inventing letters does not invent the plaintext—boolean coverage plus garble-aware escalation does.
+                <strong>Still untested or incomplete:</strong> garble tolerance is built and graded but has produced <em>no</em> verdict against this message — on a known key the exact board loses the true setting at one to three corrupted letters while a tolerant board keeps it with all 25 plugs correct, and the Metal port cross-checks at zero mismatches in 192 lanes, but its cost is survivor inflation and that inflation turned out to be placement-dependent rather than a function of crib length (an early "17 edges is enough" rule was wrong and is withdrawn), so each menu has to be pre-qualified by measurement before tolerance can be switched on; indels are not modelled at all; catalog right-ring sweep parked at originalIndex 417/2513 (last <code>VVVUUUDREINULEINSVI@25</code>; resume <code>--bombe-from 418</code>); Thetis-register rings from menu 14; any middle ring other than A (~8–15% of keys — the arm is now built and graded end-to-end, with the blind control breaking at full middle × right coverage in 4,307 s, but it has produced no P1030680 verdict); the long-menu arms whose negatives are incomplete by up to 5.56% because a kernel table cap reported lanes eliminated without testing them — the Übung body arm was contaminated on all 40 placements and has now been re-run and re-confirmed (40/40 dead, 0 stops); the curated top-30 on 20 of 30 has also been re-run and re-confirmed (73 raw stops, identical to the archive, no break); the catalog on 300 of 2,513 is queued; near-shell walk around sister keys. Sister message P1030681 needed heavy degarbling—exact Welchman clean negatives do not rule out a mis-transcribed P1030680. Soft-band near-misses quarantine into Stochastic seeds. More GPU on inventing letters does not invent the plaintext—boolean coverage plus garble-aware escalation does.
               </span>
             </li>
           </ul>
@@ -124,7 +124,7 @@ export function JournalPage() {
               <h3>Building a flawless digital Bombe.</h3>
               <div className="prose">
                 <p>
-                  I abandoned statistics and engineered a massive, Metal-accelerated digital version of Gordon Welchman’s WWII diagonal board. Instead of guessing, it uses pure Boolean logic to test for contradictions, rejecting impossible physical states at a blistering 40 million settings per second.
+                  I abandoned statistics and engineered a massive, Metal-accelerated digital version of Gordon Welchman’s WWII diagonal board. Instead of guessing, it uses pure Boolean logic to test for contradictions, rejecting impossible physical states at roughly 45 million settings per second — and close to double that once the middle-ring coverage skip lets most lanes exit early.
                 </p>
                 <p>
                   To make it faster, I optimized my software to perfectly match the physical reality of the 1945 hardware. Because the far-left Enigma rotor (the Greek wheel) never steps during a short message, and the left rotor's notch drives nothing, I digitally pinned them in place. This Turing-shaped architectural decision collapsed the search space by a massive factor of 676.
@@ -173,6 +173,15 @@ export function JournalPage() {
                 </p>
                 <p>
                   A full <code>--bombe-ring-sweep</code> across every placement long enough to test would take roughly 4 days, so I curated a surgical strike: the 30 highest-probability menus, openings first, then maximum loop connectivity. The GPU finished the hunt. Result: 73 raw stops, zero boards that fit 10 physical plugs, across nearly 5×10¹¹ settings. The exact historical phrases at those offsets are not in this message.
+                </p>
+                <p>
+                  <strong>Two caveats added later.</strong> Because I curated this set for long, strong menus, 20 of these 30 placements turned out to be exactly the ones the kernel table cap was quietly mis-reporting (Phase 12). And when I went to re-run it, I found the archived log for this arm is <em>truncated at menu 6 of 30</em> and contains no summary at all — the 73 stops and 4.79×10<sup>11</sup> settings I quoted above had never actually been written to disk. Same buffered-<code>tee</code> truncation that cost me the fuzzed arm.
+                </p>
+                <p>
+                  The re-run settles both. Identical coverage-sensitive figures — 73 raw stops over 4.79×10<sup>11</sup> settings — so the lanes the old cap had been discarding produced <em>zero</em> additional survivors. Best board scores IC 0.041 and a tail of −4.819, far under the 0.055 and −3.600 bars. No break. The negative stands, and this arm finally has a receipt.
+                </p>
+                <p>
+                  One number did move, and it is worth being precise about why: scored completions went from 0 to 35. That is not new coverage, it is a different scoring surface. Phase 8 predates both the head-reading gate I added after Phase 11 and the quarantine soft IC floor from Phase 22. Under those two later additions, 35 boards get far enough to be scored at all; under Phase 8's strict whole-message gate, none did. The raw stop count is the number that tracks coverage, and it did not budge.
                 </p>
               </div>
             </article>
@@ -248,7 +257,7 @@ export function JournalPage() {
                   So I re-ran it. Forty of forty still dead at the board, zero raw stops across 6.39×10<sup>11</sup> settings, five and a quarter hours. The lanes the old cap had been quietly discarding got tested and died too — the bug was not hiding a key here, and the Übung-push hypothesis stays closed, this time on evidence. My curated top-30 sweep is contaminated on 20 of its 30 placements and is re-running next; the main catalog on 300 of 2,513. The Regenbogen queue is clean. Everything at 16 to 25 letters — the large majority of the catalog, and all of the Thetis-register work — was never affected and stands.
                 </p>
                 <p>
-                  Worse, I went back through the terminal history and found my fuzzed turnover sweep had been killed at menu 18 of 40—I had been treating half an arm as a finished negative. I finished that arm properly (Phase 10: clean). And of my 2,513 catalog placements, only 886 were ever long enough to test—and of those 886, exactly <strong>54</strong> have had genuine ring coverage. My "clean negative on the full catalog" was a negative across less than a fifth of the ring space.
+                  Worse, I went back through the terminal history and found my fuzzed turnover sweep had been killed at menu 18 of 40—I had been treating half an arm as a finished negative. I finished that arm properly (Phase 10: clean). And of my 2,513 catalog placements, only 886 were ever long enough to test—and of those 886, about <strong>182</strong> have had genuine ring coverage, plus the 54 curated ones. My "clean negative on the full catalog" was a negative across roughly a fifth of the ring space.
                 </p>
                 <p>
                   I fixed the log line so the machine reports its own gap honestly. I would rather have an uncomfortable ledger than a flattering one.
@@ -305,6 +314,9 @@ export function JournalPage() {
                 <p>
                   Arm 2: short headers paired with mid-message body cribs under confirm-2. All forty ≥16 body anchors died at the board under AAAA, so agreement was already impossible. The short menus then stalled the host on tens of millions of ghost completions; several printed “clears the bar” on prefix flukes while their whole-message IC and tail still failed. I aborted and taught confirm mode to only re-test shells a ≥16 anchor already locked. Ring-sweep of those bodies: 40/40 dead at the board, zero raw stops. The “header pushes the body back” claim is exhausted under right-ring coverage.
                 </p>
+                <p>
+                  Every one of those forty anchors is a forty-letter menu, which later turned out to be precisely the length the kernel table cap was mis-handling (Phase 12) — so this whole arm was contaminated, and I had closed the Übung-push hypothesis on a result I had not earned. I re-ran it on the corrected kernel: <strong>40/40 still dead at the board, zero raw stops across 6.39×10<sup>11</sup> settings</strong>, five and a quarter hours. The conclusion holds. It just holds on evidence now.
+                </p>
               </div>
             </article>
             <article className="tl-item">
@@ -359,6 +371,95 @@ export function JournalPage() {
               </div>
             </article>
             <article className="tl-item">
+              <div className="when">Phase 50: The Crib-Free Path</div>
+              <h3>I stopped needing a probable word — and measured how far that gets me.</h3>
+              <div className="prose">
+                <p>
+                  Every arm above needs a crib, and every crib I have is borrowed from another network. So I built the other kind of attack. Ostwald and Weierud's ciphertext-only method needs no probable word at all: for each candidate rotor setting it hill-climbs the plugboard and ranks the setting by how good a score the climb reaches. Their published reach is messages down to about 100 letters, and the shortest they have ever broken is 78 — on three-rotor Army traffic. Mine is 72 letters on four-rotor naval M4. Shorter than the record, on a harder machine.
+                </p>
+                <p>
+                  The first thing to understand is that this wall is not made of compute, and that changes where hardware helps. Seventy-two letters of naval German carries about 223 bits of redundancy. A ten-plug board is about 47 bits of nuisance parameter, and the attack <em>fits it fresh at every candidate</em>. With roughly 10<sup>11</sup> candidates, you are taking the maximum of an overfitted score over an enormous population — and adding candidates makes that <em>worse</em>, because it raises the maximum of the noise. Enigma@Home has vastly more aggregate compute than my one Mac, and it stops at 78 too.
+                </p>
+                <p>
+                  So the number that decides everything is not a rate. It is the <strong>margin</strong>: the climbed score at the true setting minus the best climbed score over wrong settings. Positive, and a sweep can find the key. Negative, and the search ranks noise above signal no matter what you throw at it. I built a harness that measures exactly that, at a ladder of message lengths, against the 48 published 1 May 1945 keys — same net, same signals office, same German dialect as my target. Two of those controls are 60 and 68 letters, shorter than P1030680 itself.
+                </p>
+                <p>
+                  I made the harness refuse to print a curve unless its controls can decrypt their own published plaintext under their own published key. That preflight caught something immediately: <strong>only 32 of the 48 round-trip exactly.</strong> My first reaction was that I had found transcription garble in the archive itself — the same disease I had been arguing afflicts P1030680, measured in sixteen of its neighbours.
+                </p>
+                <p>
+                  <strong>That was wrong, and I caught it the same day.</strong> When I classified the seventeen failures by the <em>shape</em> of their errors, most turned out to be messages whose errors begin at some position and run to the end — and several of those exceed the ~320-letter Kriegsmarine limit, meaning they were transmitted in parts with a fresh rotor start for each part. Decrypting one of those end-to-end under a single message key is <em>supposed</em> to give a clean head and a garbage tail. That is my harness's assumption breaking, not the archive's transcription. A few others are genuine shifts or divergent transcripts. Only four controls show scattered single-letter errors — eight events in total, which is nowhere near enough to fit a confusion model on.
+                </p>
+                <p>
+                  So the garble hypothesis for my target still rests where it always did: on Girard's documented degarbling of the sister message, not on this. I would rather record the retraction than keep a flattering number.
+                </p>
+                <p>
+                  Validation is unambiguous: at 372 letters the attack recovers <strong>all ten plugs and 100% of the plaintext</strong>, with the true setting sitting 35 standard deviations above the noise. The implementation works, which is what earns the right to believe its failures.
+                </p>
+                <p>
+                  Then a lesson in reading the manual. The reference implementation scores in stages — index of coincidence first, then bigrams, then trigrams — because the measures fail at different moments: with an empty board the text is letter-substituted so n-gram structure is destroyed, while IC survives; once a few plugs are right the n-grams become far sharper. <em>My climb had been bigram-only the whole time.</em> Switching to staged scoring took 252-letter recovery from 0 plugs to 8.
+                </p>
+                <p>
+                  The measured threshold: the margin crosses zero at about <strong>200 letters</strong>. So my implementation is 2.8× worse than the published state of the art, and I need to be slightly better than it. That is the honest gap, and I would rather have it as a number than a feeling.
+                </p>
+                <p>
+                  One lever closed most of the distance. Ostwald's own contribution is partial exhaustion: instead of climbing ten plugs from an empty board, fix one plug and climb the rest, over all 141 candidates. A wrong greedy first plug poisons everything downstream; one of the 141 is the true plug, and that run starts somewhere far better. On identical controls at 72 letters it took the margin from −0.2389 to <strong>−0.0754</strong> and doubled the win rate. Sixty-eight percent of the deficit, gone.
+                </p>
+                <p>
+                  <strong>And it is still negative.</strong> Unseeded, 72 letters is not reachable, so that much is a measurement and not a break. But there is one lever I have that the people who set the record do not. Their tool documents a flag for "known plugboard connections, e.g. from running a bombe" — and then makes you type them in, because the bombe is somebody else's program. Here both engines live in the same binary, and my quarantine files already hold soft-band Welchman stops <em>together with the stecker each menu forced</em>: fifteen to twenty-four of the twenty-six letters, which is seven to twelve plugs.
+                </p>
+                <p>
+                  I modelled that fairly before building the wiring — the true setting seeded with <em>k</em> correct plugs, every decoy seeded with <em>k</em> <strong>random</strong> plugs, because a ghost stop forces a board too. At 72 letters, my target's exact length, on ten controls:
+                </p>
+                <p>
+                  Four plugs flips the margin positive. Six gets 8 of 10 plugs and 85% of the letters. <strong>Eight plugs recovers the complete key and 100% of the plaintext, on every single control.</strong> At 72 letters. Below the published record, on the harder machine.
+                </p>
+                <p>
+                  I have to be precise about what that is, because it is easy to over-read and I would rather state it narrowly than be wrong loudly. Those correct plugs come from the known key — it is <em>oracle-seeded</em>, and it assumes the stop you are seeding from is the true one. It does not make the attack crib-free at 72 letters. What it establishes is smaller and still worth having: <strong>a true bombe stop is finishable.</strong> A stop the strict bar threw out for garble or short-message noise can now be recovered, plugs and plaintext and all.
+                </p>
+                <p>
+                  So I pointed it at every soft-band stop the campaign has ever quarantined. Fifty-five UEBUNG near-misses, twenty-two Regenbogen scuttle boards, seven Hela, two from this week's re-run — eighty-six candidates, each seeded with its own forced plugs and climbed. No break. And in every single arm the best stop scored <em>below</em> the best of twelve random settings. Not "no survivor above the bar" — <strong>worse than noise</strong>, under a scorer that would have finished a true stop. My soft band was never a near miss. Phase 22's genetic escalation told me zero survivors and could not tell me why; this tells me why. That path is closed, properly.
+                </p>
+              </div>
+            </article>
+
+            <article className="tl-item">
+              <div className="when">Phase 51: The Mulein Board</div>
+              <h3>A board that counts contradictions instead of shorting out on the first one.</h3>
+              <div className="prose">
+                <p>
+                  Here is something the 1945 machine could not do — not slowly, but <em>at all</em>. On a physical bombe a contradiction <em>is</em> electricity finding a second path through the diagonal board. The hypothesis short-circuits, the drum spins on. Copper cannot answer "how many contradictions?" because the relay either lights or it does not, and every faithful reimplementation of the board inherits that limitation, including mine.
+                </p>
+                <p>
+                  That is fatal if the ciphertext is dirty. One mis-transcribed letter contradicts a <em>true</em> menu, and the board throws the real key away without comment. Which means every "clean negative" in this entire ledger is a negative about the ciphertext as it was <em>written down</em>, not necessarily as it was transmitted. Girard needed two disagreeing transcripts to degarble the sister message.
+                </p>
+                <p>
+                  In silicon I can count instead of short-circuit, and ask the question a relay cannot phrase: <strong>how few menu edges must I delete before this setting closes consistently?</strong> Delete up to <em>t</em> of them and accept the setting. That is a deletion-tolerant diagonal board. It sits in exactly the slot Welchman's diagonal board did — not a new bombe, a new board on one — so I am calling it the Mulein board. At tolerance zero it is the historical board, bit for bit.
+                </p>
+                <p>
+                  <strong>My first version of it was a complete no-op, and the reason is worth keeping.</strong> I abandoned contradicting edges mid-flight instead of removing them before propagating. Two things went wrong at once: by the time a conflict surfaces the bad value is already committed and has spread through the rest of the board, so restoring the two rows that just clashed unwinds nothing; and the conflict almost always surfaces at the <em>wrong</em> edge, so a perfectly good edge gets blamed while the real culprit stays in. Enumerating the deleted set instead is order-independent and reuses the closure I had already validated.
+                </p>
+                <p>
+                  Then the test that matters. Known key, 27-letter crib, corrupting letters inside the crib span. At one, two, and three garbled letters the exact board <strong>loses</strong> the true setting and the tolerant board <strong>keeps</strong> it — while still forcing <strong>all 25</strong> plug deductions correctly. That LOST → KEPT flip is the whole mechanism, and it is the check my no-op version had quietly failed. The plug column matters just as much: Phase 50 measured that a true stop needs only <em>four</em> correct plugs to flip the crib-free margin positive at 72 letters. Twenty-five is a long way past four. The two halves compose — a garbled true key survives the board <em>and</em> can be finished off.
+                </p>
+                <p>
+                  So I put it in the GPU kernel, and graded it against the host board rather than trusting it: <strong>zero lane mismatches out of 192, at every tolerance, across 45 different crib and offset combinations.</strong> One shell is 26<sup>4</sup> lanes, about ten milliseconds, so tolerance is cheap per shell and expensive per sweep — roughly eight minutes per menu on a pinned ring pass, ninety hours per menu at full ring coverage.
+                </p>
+                <p>
+                  <strong>And then I got the important part wrong, and had to retract it the same day.</strong> Tolerance widens what survives, so the price is survivor inflation, and at offset 0 the price looked beautifully crisp: 16 edges exploded to 130,787 survivors at tolerance 1, while 17 and above stayed at exactly one, and 22 and above stayed at one even at tolerance 2. I wrote up a rule — tolerance 1 needs 17 edges, tolerance 2 needs 22.
+                </p>
+                <p>
+                  Varying the <em>placement</em> destroyed it. At offset 15, sixteen edges costs nothing at all. At offsets 40 and 65, eighteen edges admits 4,301 and 16,019 survivors. Crib length does not predict inflation. What does is the menu's loop structure — tolerance <em>spends</em> redundancy, and only a loop-rich menu has enough to spend. Look at which placements detonate and it is obvious in hindsight: the ones where the exact board was already weak. <strong>Tolerance amplifies an under-determined menu rather than rescuing it.</strong>
+                </p>
+                <p>
+                  The corrected rule is better than the one I lost. Tolerance is not a global switch, it is a per-menu decision pre-qualified by measurement. I cannot simply run the campaign's 16-letter minimum at tolerance 1 — one offset-0 menu there produces 130,787 survivors per shell against an escalator that has so far handled eighty-six. So the order is measure, then run.
+                </p>
+                <p>
+                  What this is not: a decrypt, a verdict against my target, or a claim that P1030680 <em>is</em> garbled. It says a tolerant board would recover a garbled true key, which is a fact about the board and not about the ciphertext. It also does not model <strong>indels</strong> — Girard found an entire four-letter group missing from one transcript, and a missing group is a frame shift rather than a substitution. No bombe has ever asked "what if four letters fell out here." That one is next.
+                </p>
+              </div>
+            </article>
+
+            <article className="tl-item">
               <div className="when">Phase 22: Quarantine</div>
               <h3>Exact bars drop garbled truths. Soft-band them into Stochastic.</h3>
               <div className="prose">
@@ -395,7 +496,7 @@ export function JournalPage() {
             <div className="kicker">Honest Scope</div>
             <h2>The Evidence Room</h2>
             <p>
-              I know the Potsdam 1 May keys decrypt other U-534 traffic, but not this message. The archival levers are spent. My engine is graded rather than trusted—a blind Welchman control breaks a known key through the full campaign in 361 seconds, and the Stochastic Bombe’s GPU KPA path recovers that same control when the template is known. Training, collapse, weather, meta-evolve, and shell-RIGA all produced zero survivors under an 80%∩noise+10% gate. Exact catalog and fuzzed arms under rings AAAA are clean negatives; so is the ≥16 UEBUNG head. Soft UEBUNG quarantine escalate is also a clean negative. Regenbogen/Hannibal cribs are not a BREAK—anchor dead under rings; scuttle and Hela soft-band escalate to zero; own-orders and filler AAAA stay below soft. Sister traffic P1030681 needed degarbling, so exact clean negatives may still miss a mis-read ciphertext—soft-band Welchman stops quarantine into Stochastic seeds, graded on both synthetic and historical garbles. TensorLUT is a parallel compiler track, not a Thetis crib. What remains on the menu path: catalog right-ring coverage parked at originalIndex 417/2513 (resume <code>--bombe-from 418</code>), parked Thetis-register rings at 13/73, no middle ring but A against this message, and 61 long-menu spans whose negatives a kernel table cap left incomplete.
+              I know the Potsdam 1 May keys decrypt other U-534 traffic, but not this message. The archival levers are spent. My engine is graded rather than trusted—a blind Welchman control breaks a known key through the full campaign in about six minutes with all ten plugs (352 s on the current binary; the archived log reads 427 s), it still breaks that control at full middle × right ring coverage in 4,307 s with no residual ring gap anywhere, and the Stochastic Bombe’s GPU KPA path recovers the same control when the template is known. Training, collapse, weather, meta-evolve, and shell-RIGA all produced zero survivors under an 80%∩noise+10% gate. Exact catalog and fuzzed arms under rings AAAA are clean negatives; so is the ≥16 UEBUNG head. Soft UEBUNG quarantine escalate is also a clean negative. Regenbogen/Hannibal cribs are not a BREAK—anchor dead under rings; scuttle and Hela soft-band escalate to zero; own-orders and filler AAAA stay below soft. Sister traffic P1030681 needed degarbling, so exact clean negatives may still miss a mis-read ciphertext—soft-band Welchman stops quarantine into Stochastic seeds, graded on both synthetic and historical garbles. TensorLUT is a parallel compiler track, not a Thetis crib. What remains on the menu path: catalog right-ring coverage parked at originalIndex 417/2513 (resume <code>--bombe-from 418</code>), parked Thetis-register rings at 13/73, no middle ring but A against this message, and the long-menu re-runs a kernel table cap forced — the Übung body arm and the curated top-30 are both done and re-confirmed with zero extra survivors, and 300 catalog placements plus the fuzzed arms are queued.
             </p>
           </div>
           <ul className="stack-list">
@@ -408,7 +509,7 @@ export function JournalPage() {
             <li>
               <span className="mono">LOGS</span>
               <span>
-                <strong>The Ledger:</strong> Every campaign, including the embarrassing ones—false-alarm catalog, top-30 and fuzzed top-40 ring sweeps, Welchman blind control (<code>control-p1030684-rings.log</code>), Stochastic Bombe KPA grades (<code>stochastic-bombe-control-*.log</code>), UEBUNG arms, catalog rings, TensorLUT shatter/involution grades (<code>tensorlut-m4-coldstart.log</code>, <code>tensorlut-m4-stecker-melt.log</code>, <code>tensorlut-m4-stecker-resign-control.log</code>, <code>tensorlut-m4-stecker-involution-blind-3pair.log</code>), and quarantine garble controls (<code>quarantine-garble-control.log</code>, <code>quarantine-donitz-control.log</code>, <code>quarantine-donitz-first-control.log</code>).
+                <strong>The Ledger:</strong> Every campaign, including the embarrassing ones—false-alarm catalog, top-30 and fuzzed top-40 ring sweeps, Welchman blind control (<code>control-p1030684-rings.log</code>), the full middle × right ring control (<code>control-middlering-2026-08-16.log</code>), the middle-ring coverage self-test and the table-cap audit (<code>middle-ring-selftest-2026-08-16c.log</code>, <code>max-upper-audit-2026-08-16.log</code>), the forced re-runs those produced (<code>rerun-uebung-body-rings-maxupper-2026-08-16.log</code>, <code>rerun-top30-rings-maxupper-2026-08-16.log</code>), Stochastic Bombe KPA grades (<code>stochastic-bombe-control-*.log</code>), UEBUNG arms, catalog rings, TensorLUT shatter/involution grades (<code>tensorlut-m4-coldstart.log</code>, <code>tensorlut-m4-stecker-melt.log</code>, <code>tensorlut-m4-stecker-resign-control.log</code>, <code>tensorlut-m4-stecker-involution-blind-3pair.log</code>), and quarantine garble controls (<code>quarantine-garble-control.log</code>, <code>quarantine-donitz-control.log</code>, <code>quarantine-donitz-first-control.log</code>).
               </span>
             </li>
             <li>
@@ -480,7 +581,7 @@ export function JournalPage() {
                   All forty ≥16 mid-message body anchors died at the board under rings AAAA, so confirm-2 could not fire. Short <code>UEBUNG</code> headers then flooded the host with tens of millions of ghost completions; the “clears the bar” lines were prefix flukes—whole-message IC and tail still failed. I aborted, taught confirm mode to only re-test shells a ≥16 anchor already locked.
                 </p>
                 <p>
-                  Ring-sweep of those same forty bodies: every menu dead at the board, zero raw stops across 6.4×10¹¹ settings. Turnover does not save the “header pushes the body back” claim for these cribs. The Übung-push hypothesis is exhausted under right-ring coverage.
+                  Ring-sweep of those same forty bodies: every menu dead at the board, zero raw stops across 6.4×10¹¹ settings. Turnover does not save the “header pushes the body back” claim for these cribs. The Übung-push hypothesis is exhausted under right-ring coverage — and since all forty were later found to be contaminated by the table-cap bug, that sweep has been re-run on the corrected kernel with the same verdict.
                 </p>
               </div>
             </article>
@@ -520,6 +621,22 @@ export function JournalPage() {
                 </p>
                 <p>
                   <strong>Implemented is not run.</strong> As of this entry the arm has produced no P1030680 verdict at all. The measured basis is ~72 minutes per placement, so twenty strong placements is about a day.
+                </p>
+              </div>
+            </article>
+
+            <article className="tl-item">
+              <div className="when">8b — Running: pay off the integrity debt</div>
+              <h3>Re-run the arms a table cap mis-reported.</h3>
+              <div className="prose">
+                <p>
+                  Cheapest outstanding work in the campaign, because the damage is concentrated rather than spread. Ordered by contaminated share per GPU-hour:
+                </p>
+                <p>
+                  <strong>Done —</strong> the Übung body arm, contaminated on all 40 of 40 placements: 40/40 dead, zero raw stops, negative re-established. <strong>Done —</strong> the curated top-30, contaminated on 20 of 30: 73 raw stops over 4.79×10<sup>11</sup> settings, identical to the archived figures, best board IC 0.041 / tail −4.819, no break. In both arms the previously-untested lanes produced <em>zero</em> extra survivors — the bug was not hiding a key. <strong>Queued —</strong> 300 of the catalog's 2,513 placements (~32 h), then the two fuzzed arms (41 and 8 placements, lowest share).
+                </p>
+                <p>
+                  One thing I got wrong on the first pass: rings AAAA is the wrong re-run for these. My own sweep banner reports AAAA as covering 0 of 26 ring phases once a menu passes 26 letters, so the AAAA pass never carried a meaningful negative for a 28-to-40-letter menu in the first place. Right-ring coverage is the claim that actually needs re-establishing.
                 </p>
               </div>
             </article>

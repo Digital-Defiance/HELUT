@@ -227,6 +227,19 @@ public enum HelutBombeCLI {
         config.sweepRightRing = CommandLine.arguments.contains("--bombe-ring-sweep")
         config.sweepMiddleRing = CommandLine.arguments.contains("--bombe-middle-ring")
         config.exactPlugs = intFlag("--bombe-exact-plugs") ?? config.exactPlugs
+        config.garbleTolerance = intFlag("--bombe-garble-tolerance") ?? config.garbleTolerance
+        if let raw = stringFlag("--bombe-rings") {
+            // Comma-separated so several hypotheses ride one sweep: `--bombe-rings AAAA,AACU`.
+            for token in raw.split(separator: ",") {
+                let values = EnigmaAlphabet.normalize(String(token))
+                if values.count == 4 {
+                    config.pinnedRings.append((values[0], values[1], values[2], values[3]))
+                } else {
+                    print("--bombe-rings entries need four letters, e.g. AACU"
+                        + " — ignoring '\(token)'")
+                }
+            }
+        }
         config.fixturePath = stringFlag("--bombe-fixture") ?? config.fixturePath
         // These three are documented in BREAK_P1030680.md but were never parsed here, so
         // every run silently used the defaults — including the Phase 22 arm whose log
@@ -245,6 +258,31 @@ public enum HelutBombeCLI {
             config.wheelOrders = M4ThetisAttack.subspace(named: subspace).wheelOrders
         }
         runWelchmanBombe(config: config)
+        exit(0)
+    }
+
+    if CommandLine.arguments.contains("--garble-board-selftest") {
+        runGarbleBoardSelfTest()
+        exit(0)
+    }
+
+    if CommandLine.arguments.contains("--bombe-tolerance-prequal") {
+        runTolerancePrequal()
+        exit(0)
+    }
+
+    if CommandLine.arguments.contains("--garble-gpu") {
+        runGarbleBoardGPUGrade()
+        exit(0)
+    }
+
+    if CommandLine.arguments.contains("--ostwald-escalate") {
+        runOstwaldEscalate()
+        exit(0)
+    }
+
+    if CommandLine.arguments.contains("--ostwald-curve") {
+        runOstwaldCurve()
         exit(0)
     }
 
@@ -287,7 +325,10 @@ public enum HelutBombeCLI {
             "--exhaust", "--exhaust-selftest", "--hybrid", "--hybrid-bombe",
             "--break-p1030680", "--campaign", "--p1030680-bombe"
         ]
-        return args.contains { keys.contains($0) || $0.hasPrefix("--bombe-") }
+        return args.contains {
+            keys.contains($0) || $0.hasPrefix("--bombe-") || $0.hasPrefix("--ostwald-")
+                || $0.hasPrefix("--garble-")
+        }
     }
 }
 

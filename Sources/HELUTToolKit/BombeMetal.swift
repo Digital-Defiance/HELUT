@@ -26,12 +26,19 @@ private let welchmanMaxUpper = 8
 /// on an engine that has no such cap. Reporting 0 there would silently discard a key.
 let welchmanUndecidedMask: UInt32 = 0x03FF_FFFF
 
+/// Largest garble tolerance the kernel enumerates — owned by `MuleinBoard`, which explains
+/// why the bound is structural (Metal has no recursion, so drop-set loops are unrolled) and
+/// carries the cost model in `MuleinBoard.closuresPerSeed`. Above this, the host board in
+/// `MuleinBoard.propagate` is the fallback.
+let welchmanMaxTolerance = MuleinBoard.maxTolerance
+
 private let welchmanMetalSource = """
 #include <metal_stdlib>
 using namespace metal;
 
 #define MAX_EDGES \(welchmanMaxEdges)
 #define MAX_UPPER \(welchmanMaxUpper)
+#define MAX_TOL \(welchmanMaxTolerance)
 #define WELCHMAN_UNDECIDED \(welchmanUndecidedMask)u
 
 inline uchar rot_fwd(uchar ch, int offset, constant uchar *wiring) {
@@ -43,6 +50,8 @@ inline uchar rot_inv(uchar ch, int offset, constant uchar *inverse) {
     int shifted = (int(ch) + offset) % 26;
     return uchar((int(inverse[shifted]) - offset + 26) % 26);
 }
+
+\(MuleinBoard.metalClosureSource(maxEdges: welchmanMaxEdges, tolerance: welchmanMaxTolerance))
 
 kernel void welchman_sweep(
     constant uchar *edgeA        [[buffer(0)]],
@@ -66,6 +75,7 @@ kernel void welchman_sweep(
     constant uint  &maxPlugs     [[buffer(18)]],
     constant uint  &exactPlugs   [[buffer(19)]],
     constant uint  &skipCovered  [[buffer(20)]],
+    constant uint  &tolerance    [[buffer(21)]],
     uint lane [[thread_position_in_grid]]
 ) {
     if (lane >= 456976u) return;
@@ -162,76 +172,24 @@ kernel void welchman_sweep(
         }
     }
 
-    uchar scram[MAX_EDGES][26];
+    uchar scram[MAX_EDGES * 26];
     for (uint e = 0u; e < edgeCount; ++e) {
         int off = int(edgeOffR[e]);
         uint u = uint(edgeUpper[e]);
         for (uint x = 0u; x < 26u; ++x) {
             uchar v = rot_fwd(uchar(x), off, rFwd);
             v = upper[u][v];
-            scram[e][x] = rot_inv(v, off, rInv);
+            scram[e * 26u + x] = rot_inv(v, off, rInv);
         }
     }
+
+    uint effectiveTol = min(tolerance, uint(MAX_TOL));
 
     uint survivors = 0u;
     for (uint seed = 0u; seed < 26u; ++seed) {
         uint live[26];
-        for (uint i = 0u; i < 26u; ++i) { live[i] = 0u; }
-        live[central] = 1u << seed;
-
-        bool dead = false;
-        bool changed = true;
-        while (changed && !dead) {
-            changed = false;
-
-            for (uint e = 0u; e < edgeCount && !dead; ++e) {
-                uint a = uint(edgeA[e]);
-                uint b = uint(edgeB[e]);
-
-                uint mask = live[a];
-                uint image = 0u;
-                while (mask != 0u) {
-                    uint bit = uint(ctz(mask));
-                    mask &= mask - 1u;
-                    image |= 1u << uint(scram[e][bit]);
-                }
-                if ((image & ~live[b]) != 0u) {
-                    live[b] |= image;
-                    if (popcount(live[b]) > 1) { dead = true; break; }
-                    changed = true;
-                }
-
-                mask = live[b];
-                image = 0u;
-                while (mask != 0u) {
-                    uint bit = uint(ctz(mask));
-                    mask &= mask - 1u;
-                    image |= 1u << uint(scram[e][bit]);
-                }
-                if ((image & ~live[a]) != 0u) {
-                    live[a] |= image;
-                    if (popcount(live[a]) > 1) { dead = true; break; }
-                    changed = true;
-                }
-            }
-            if (dead) { break; }
-
-            for (uint x = 0u; x < 26u && !dead; ++x) {
-                uint mask = live[x];
-                while (mask != 0u) {
-                    uint y = uint(ctz(mask));
-                    mask &= mask - 1u;
-                    uint bit = 1u << x;
-                    if ((live[y] & bit) == 0u) {
-                        live[y] |= bit;
-                        if (popcount(live[y]) > 1) { dead = true; break; }
-                        changed = true;
-                    }
-                }
-            }
-        }
-
-        if (dead) { continue; }
+        if (!mulein_tolerant_closure(scram, edgeA, edgeB, edgeCount,
+                              effectiveTol, central, seed, live)) { continue; }
 
         // Plugboard sieve, on the GPU where the stop is born rather than on the host
         // after it has been shipped back. `maxPlugs` reproduces the host rule exactly
@@ -278,10 +236,17 @@ struct WelchmanInFlight {
 /// `exactPlugs` is a *stronger* claim about the target (a ten-lead Kriegsmarine board)
 /// and is therefore opt-in. `skipMiddleRingCovered` drops lanes a rings-AAAA pass has
 /// already decided, and is only ever set for shells whose middle ring is not A.
+///
+/// `garbleTolerance` is not a sieve but its opposite — it *widens* what survives, by letting a
+/// lane drop up to that many menu edges on the hypothesis that a dropped edge is a
+/// mis-transcribed ciphertext letter. It is listed here because it rides the same plumbing.
+/// Zero is the historical board and the default; anything above it changes verdicts by design
+/// and costs `1 + E + C(E,2) + C(E,3)` closures per seed, so it is always explicit.
 struct WelchmanSieve {
     var maxPlugs: Int = 0
     var exactPlugs: Int = 0
     var skipMiddleRingCovered: Bool = false
+    var garbleTolerance: Int = 0
 
     static let none = WelchmanSieve()
 }
@@ -402,9 +367,11 @@ final class WelchmanMetalEngine {
         var skipCovered = UInt32(
             sieve.skipMiddleRingCovered && shell.rings.2 != 0 ? 1 : 0
         )
+        var tolerance = UInt32(max(0, min(sieve.garbleTolerance, welchmanMaxTolerance)))
         encoder.setBytes(&maxPlugs, length: MemoryLayout<UInt32>.size, index: 18)
         encoder.setBytes(&exactPlugs, length: MemoryLayout<UInt32>.size, index: 19)
         encoder.setBytes(&skipCovered, length: MemoryLayout<UInt32>.size, index: 20)
+        encoder.setBytes(&tolerance, length: MemoryLayout<UInt32>.size, index: 21)
 
         let width = min(pipeline.maxTotalThreadsPerThreadgroup, 256)
         encoder.dispatchThreads(

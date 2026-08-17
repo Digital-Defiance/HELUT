@@ -753,6 +753,25 @@ struct BombeSweepConfig {
     /// not buildable. Opt-in, because it is an assumption about the target rather than a
     /// restatement of the host rule. 0 disables.
     var exactPlugs = 0
+    /// Pin the Ringstellung to an explicit list of hypotheses instead of sweeping all 676,
+    /// e.g. `AAAA,AACU`. A specific ring guess then costs 1x rather than 676x: 1,344 shells
+    /// per placement per ring, ~12 s. Empty means sweep as directed by the sweep flags.
+    ///
+    /// Several rings belong in *one* run rather than several processes. The ring loop is
+    /// inside the sweep, so listing them here shares the menu build and keeps a single
+    /// command queue saturated; two concurrent processes on one GPU merely timeshare it and
+    /// each takes about twice as long for the same finish time.
+    ///
+    /// Greek and left entries should be A: those two rings are unobservable in a short
+    /// message, which is exactly why the 676x reduction may pin them.
+    var pinnedRings: [(Int, Int, Int, Int)] = []
+    /// Deletion tolerance for the diagonal board (the Mulein board). 0 is the historical
+    /// board. Above 0 the kernel accepts a setting when dropping up to this many menu edges
+    /// makes it consistent, on the hypothesis that a dropped edge is a mis-transcribed
+    /// ciphertext letter. Costs `1 + E + C(E,2) + C(E,3)` closures per seed and *widens*
+    /// what survives, so inflation must be pre-qualified per menu — it is placement
+    /// dependent, not a function of crib length (Phase 51).
+    var garbleTolerance = 0
     /// How many GPU shells to keep in flight. 4 is usually enough to hide host drain.
     var pipelineDepth = WelchmanMetalEngine.defaultDepth
     /// Prefer offset-0 message openings (≥ minOpeningLength) from the U-534 corpus,
@@ -848,20 +867,42 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
     let rightRingValues = config.sweepRightRing ? Array(0..<26) : [0]
     // Ring A first in both axes: every other middle ring defers its already-covered
     // lanes to the ring-A pass, so the ring-A pass must be the one that runs in full.
-    let ringVariants: [(Int, Int, Int, Int)] = middleRingValues.flatMap { middle in
-        rightRingValues.map { right in (0, 0, middle, right) }
-    }
+    let ringVariants: [(Int, Int, Int, Int)] = {
+        if !config.pinnedRings.isEmpty { return config.pinnedRings }
+        return middleRingValues.flatMap { middle in
+            rightRingValues.map { right in (0, 0, middle, right) }
+        }
+    }()
     let shellsPerMenu = config.wheelOrders.count * 4 * ringVariants.count
     let settingsPerMenu = Double(shellsPerMenu) * Double(WelchmanMetalEngine.laneCount)
-    print(String(format: "shells/menu: %d (%d WO × 2 Greek × 2 UKW × %d mid-ring × %d right-ring)"
-                 + " → %.3g settings",
-                 shellsPerMenu, config.wheelOrders.count,
-                 middleRingValues.count, rightRingValues.count, settingsPerMenu))
+    if !config.pinnedRings.isEmpty {
+        let letters = config.pinnedRings.map {
+            EnigmaAlphabet.string(from: [$0.0, $0.1, $0.2, $0.3])
+        }.joined(separator: ",")
+        print(String(format: "shells/menu: %d (%d WO × 2 Greek × 2 UKW × rings PINNED %@)"
+                     + " → %.3g settings",
+                     shellsPerMenu, config.wheelOrders.count,
+                     letters as NSString, settingsPerMenu))
+        print("rings pinned: these are ring HYPOTHESES, not coverage. A negative here"
+            + " eliminates \(config.pinnedRings.count) Ringstellung(en) out of 676, no more.")
+    } else {
+        print(String(format: "shells/menu: %d (%d WO × 2 Greek × 2 UKW × %d mid-ring × %d right-ring)"
+                     + " → %.3g settings",
+                     shellsPerMenu, config.wheelOrders.count,
+                     middleRingValues.count, rightRingValues.count, settingsPerMenu))
+    }
     engine.sieve = WelchmanSieve(
         maxPlugs: config.maxPlugs,
         exactPlugs: config.exactPlugs,
-        skipMiddleRingCovered: config.sweepMiddleRing
+        // A pinned ring is one explicit hypothesis, so nothing may be deferred to a
+        // ring-A pass that this run is not performing.
+        skipMiddleRingCovered: config.sweepMiddleRing && config.pinnedRings.isEmpty,
+        garbleTolerance: config.garbleTolerance
     )
+    if config.garbleTolerance > 0 {
+        print("garble tolerance: \(config.garbleTolerance) menu edges may be dropped"
+            + " (Mulein board — widens survivors; inflation is placement dependent)")
+    }
     print("kernel sieve: ≤\(config.maxPlugs) plugs"
         + (config.exactPlugs > 0 ? ", exactly-\(config.exactPlugs) budget" : "")
         + (config.sweepMiddleRing ? ", middle-ring covered-lane skip" : ""))

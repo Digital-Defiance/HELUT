@@ -206,7 +206,22 @@ Middle ring $\ne$ A & Untested vs P1030680; arm graded end-to-end (control break
 Long menus (len 28--40) & Prior negatives \emph{incomplete}: old kernel cap silently
   eliminated up to 5.56\% of lanes. Phase 16 arm 2 contaminated 40/40, Phase 8 top-30
   20/30, catalog 300/2513; $\le$25 letters unaffected. Re-runs under way \\
-Ciphertext garble risk & Sister P1030681 needed degarbling; exact bars may drop true shells \\
+Ciphertext garble risk & Sister P1030681 needed degarbling; exact bars may drop true shells.
+  \textbf{17 of 48} published U-534 keys fail to reproduce their own recorded plaintext, but
+  from at least three causes --- multi-part per-part keys, indels, and only \textbf{4
+  controls / 8 events} of isolated substitution. An earlier ``16 controls prove archive
+  garble'' reading is \textbf{withdrawn} \\
+Crib-free (Ostwald/Weierud) & Threshold measured at ${\sim}$200 letters; $+$141-plug exhaustion
+  removes 68\,\% of the 72-letter deficit, margin still negative. Not a viable arm yet \\
+Tolerant board sensitivity & \textbf{Proven on a known key}: at 1--3 corrupted crib letters the
+  exact board \emph{loses} the true setting and a tolerance-$\ge g$ board \emph{keeps} it,
+  forcing 25/25 plugs correctly. Metal port cross-checks at \textbf{0/192} lane mismatches \\
+Tolerant board specificity & \textbf{Placement}-dependent, not crib-length dependent. An early
+  ``$\ge$17 edges buys tolerance 1'' rule held only at offset 0 and is \textbf{withdrawn}:
+  18-edge menus admit 4{,}301 and 16{,}019 survivors elsewhere. Tolerance amplifies an
+  under-determined menu rather than rescuing it, so it is a per-menu decision \\
+Tolerance against P1030680 & \textbf{Not run.} No target verdict; pre-qualification pending.
+  Indels (Girard's missing \texttt{HMHY} group) are a frame shift and are \emph{not} modelled \\
 \bottomrule
 \end{tabular}
 \caption{Campaign grades (cleartext Metal). Fitness is not HELUT encrypted tick rate (N6).}
@@ -238,6 +253,16 @@ placements were contaminated and that negative was unearned as recorded.
 It has since been re-run on the corrected kernel: 40/40 dead at the board, zero
 raw stops over $6.387\times10^{11}$ settings, so the cap was not concealing a key
 and the hypothesis stays closed on evidence.
+Phase 8's curated top-30, contaminated on 20 of 30 placements, likewise re-runs to
+73 raw stops over $4.79\times10^{11}$ settings --- identical to the archived
+figures --- with best board IC 0.041 / tail $-4.819$ and no break.
+In both arms the previously untested lanes yielded \emph{zero} additional
+survivors.
+Two archival notes belong with that: the scored-completion count on the top-30
+moved $0\to35$ purely because the head-reading gate and quarantine's soft IC floor
+both postdate Phase 8, the raw-stop count being the coverage-sensitive figure; and
+the archived top-30 log is truncated at menu 6 of 30 with no summary, so its quoted
+figures had never been on disk until this re-run supplied them.
 Phase 8's curated top-30 is contaminated on 20 of 30 placements, and the main
 catalog on 300 of 2513.
 The Regenbogen queue is clean, and everything at 16--25 letters, including all of
@@ -286,6 +311,148 @@ control still breaks --- and useless, taking 847\,434 raw stops to 847\,414
 menus that already die at the board.
 Separately, three quarantine flags this report and the ledger both document were
 never parsed, so the soft-tail arm recorded at $-4.3$ ran at the default $-4.0$.
+
+\subsection{The crib-free path, measured}
+
+Every arm above needs a probable word, and every crib in the catalog is imported
+register from other nets.
+The Ostwald--Weierud ciphertext-only attack needs none: for each candidate rotor
+setting it hill-climbs the plugboard and ranks the setting by the score the climb
+reaches.
+Its published reach is messages down to roughly 100 letters, with 78 the shortest
+broken, on three-rotor Heer traffic; P1030680 is 72 letters on four-rotor naval
+M4, i.e.\ shorter than the record on a harder machine.
+
+The limit is not throughput, which changes how hardware should be spent.
+Seventy-two letters of naval German carry ${\sim}223$ bits of redundancy, a
+ten-plug board is ${\sim}47$ bits of nuisance parameter \emph{fitted per
+candidate}, and the shell${\times}$position space is ${\sim}10^{11}$: taking a
+maximum over that many overfitted candidates is a multiple-comparisons problem,
+and adding candidates raises the maximum of the noise.
+The decisive quantity is therefore the \emph{margin} --- climbed score at the true
+setting minus the best climbed score over wrong settings --- and
+\texttt{--ostwald-curve} measures it at a ladder of truncation lengths over the
+published 1 May 1945 U-534 keys, with exhaustion applied symmetrically to true and
+decoy settings so the margin cannot be manufactured.
+
+The harness refuses to report a curve unless its controls decrypt their own
+published plaintext under their own published key, and that preflight found
+something: \textbf{32 of 48 controls round-trip exactly}, the rest do not.
+An earlier revision read that as transcription garble corroborating the garble
+hypothesis; \textbf{that reading is withdrawn}.
+Classified by error shape, the 17 discrepant controls have at least three causes.
+Most are \emph{multi-part} messages --- several exceed the ${\sim}320$-letter
+Kriegsmarine limit and were sent in parts with a fresh Grundstellung each, so
+end-to-end decryption under one message key correctly yields a good head and a
+garbage tail, which is precisely the observed shape.
+A few are indels or divergent transcripts.
+Only four controls, eight events in total, are isolated substitutions --- far too
+thin to fit a confusion model, so any degarbler must take its prior from Girard's
+direct reading of the originals (he names U$\leftrightarrow$N, Q$\leftrightarrow$G,
+H$\leftrightarrow$F) rather than from this corpus.
+
+Validation is unambiguous --- at 372 letters the staged climb recovers all ten
+plugs and 100\,\% of the plaintext (margin $+1.64$, $z=35.6$) --- which is what
+licenses believing the negatives.
+Staged scoring (IC, then bigrams, then trigrams, matching the reference
+implementation's default) decisively beats the bigram-only climb previously in the
+repo: at 252 letters, 8/10 plugs against 0/10.
+The measured threshold is \textbf{${\sim}200$ letters}, where the median margin
+crosses zero; control counts above 180 are thin ($n=3$--6), so those medians are
+noisy while the monotone trend is not.
+Ostwald's partial exhaustion --- fixing one plug and climbing the rest over all 141
+candidates --- removes \textbf{68\,\%} of the deficit at 72 letters
+($-0.2389 \to -0.0754$ on identical controls) and doubles the win rate, the largest
+single lever found and the one the literature names.
+
+Unseeded, the margin at 72 letters remains \emph{negative}: the crib-free path is
+not yet a viable standalone arm against P1030680, our threshold is 2.8$\times$
+worse than the published record, and that gap is unclosed.
+
+The lever available only here changes that picture at the target length.
+A Welchman stop arrives with the stecker its menu forced --- 15--24 of 26 letters,
+i.e.\ 7--12 plugs --- and the reference implementation documents exactly that
+interface (\texttt{-s}, "known plugboard connections, e.g.\ from running a bombe")
+while requiring it to be fed by hand, because the bombe is someone else's program.
+Modelled fairly, with the true setting seeded from $k$ correct plugs and every
+decoy seeded from $k$ \emph{random} plugs, at 72 letters on ten controls the margin
+crosses zero at $k=4$ ($+0.130$) and at $k=8$ the attack recovers the complete key
+and 100\,\% of the plaintext on every control ($+1.049$, 10/10 plugs).
+That is below the published 78-letter record, on the harder machine --- but it is
+\emph{oracle-seeded}, so it assumes the seeded stop is the true key.
+What it establishes is narrower and still useful: a \emph{true} bombe stop is
+finishable at 72 letters, so a stop the strict linguistic bar rejected for garble or
+short-message noise can be recovered.
+
+That makes the climber a much better escalator than the genetic path of §Quarantine,
+which returned zero survivors at a ${\sim}60\,\%$ coincidence ceiling without saying
+why.
+Escalating every soft-band stop the campaign has ever quarantined --- 55 UEBUNG, 22
+Regenbogen scuttle, 7 Hela, 2 from the Phase-49 re-run, 86 in total --- yields no
+break, and in every arm the best stop scores \emph{below} the best of twelve random
+settings ($\Delta$ from $-0.19$ to $-0.80$).
+The soft band is not a near miss; it is worse than noise under a scorer that would
+finish a true stop.
+The quarantine escalation path is therefore closed with a reason rather than a
+ceiling.
+
+\subsection{A diagonal board that counts contradictions}
+
+On the physical bombe a contradiction \emph{is} current finding a second path through
+the diagonal board: the hypothesis short-circuits and the drum advances.
+Copper cannot answer ``how many contradictions?'', and every faithful
+reimplementation inherits that, including ours, which returns \texttt{nil} on the
+first doubled row.
+Under garble this is fatal --- one mis-transcribed ciphertext letter contradicts a
+\emph{true} menu --- so every exact-crib clean negative above is a negative about the
+\emph{recorded} ciphertext rather than the transmitted one.
+
+In silicon the question can be posed differently: how few menu edges must be deleted
+before a setting closes consistently? Accepting a setting when $\le t$ deletions
+suffice gives a \emph{deletion-tolerant} diagonal board, occupying the structural slot
+Welchman's diagonal board did --- a new board on the bombe, not a new bombe.
+Tolerance $0$ is the historical board bit for bit.
+
+Tolerance must \emph{remove} edges before propagating rather than abandon them
+mid-flight. A first implementation did the latter and measured as an exact no-op, for
+two compounding reasons worth recording: by the time a conflict surfaces the bad value
+is already committed and has propagated through the diagonal board, and the edge
+visited when it surfaces is typically a \emph{correct} edge rather than the garbled
+one, so blaming it leaves the real culprit in place.
+
+Sensitivity, graded on the published P1030684 key with letters corrupted inside a
+27-letter crib span: at $1$, $2$ and $3$ garbles the exact board \textbf{loses} the
+true setting and a tolerance-$\ge g$ board \textbf{keeps} it, while still forcing
+$25/25$ plug deductions correctly.
+Since a true stop needs only four correct plugs to flip the crib-free margin at 72
+letters, the two mechanisms compose: a garbled true key survives the board
+\emph{and} is finishable.
+The Metal port is graded against the host board rather than trusted, at
+\textbf{0/192} lane mismatches across 45 crib $\times$ offset $\times$ tolerance
+cells, with wall time per shell rising $0.03\,\mathrm{s} \to 7\,\mathrm{s}$ from
+tolerance $0$ to $2$ --- confirming the extra closures are performed and not elided.
+
+The cost is survivor inflation, and here an early reading was wrong and is withdrawn.
+At crib offset $0$ inflation looked like a clean function of menu size: 16 edges
+admitted 130{,}787 of 456{,}976 lanes at tolerance $1$, while $\ge17$ edges admitted
+exactly one, and $\ge22$ admitted one even at tolerance $2$.
+Varying the \emph{placement} destroys that rule: 16 edges costs nothing at offset 15,
+while 18-edge menus admit $4{,}301$ and $16{,}019$ survivors at offsets 40 and 65.
+Crib length does not predict inflation; the menu's loop structure does, because
+tolerance spends redundancy and only a loop-rich menu has enough to spend.
+The placements that detonate are those already weak at tolerance $0$ --- tolerance
+\emph{amplifies} an under-determined menu rather than rescuing it.
+Tolerance is therefore a per-menu decision, pre-qualified by measuring inflation
+against the escalator's budget, and not a global switch.
+
+We claim no P1030680 verdict from this: tolerance has not been pointed at the target,
+pre-qualification of its placements is pending, and nothing here asserts that
+P1030680 \emph{is} garbled --- only that a tolerant board would recover a garbled true
+key. Tolerance is applied to menu edges, not to the diagonal board itself, so it is an
+algebraic relaxation of the deduction rather than a hypothesis about which letters are
+wrong. Indels are not modelled: Girard records an entire four-letter group
+(\texttt{HMHY}) present on one transcript and absent from the other, which is a frame
+shift rather than a substitution.
 
 \section{Parallel Track: TensorLUT}
 

@@ -266,13 +266,17 @@ package struct WelchmanBombe: Sendable {
 
     // MARK: Implication closure
 
-    /// Propagate σ(seedLetter) = seedValue through the menu and the diagonal board.
+    /// Tolerant propagation (the **Mulein board**) lives in `MuleinBoard.swift`.
     ///
-    /// `live[x]` is a 26-bit mask of the values still implied for σ(x). Any row
-    /// reaching two bits means the hypothesis forced σ(x) to two distinct letters:
-    /// a hard contradiction, and the reason this returns nil.
-    package static func propagate(
-        menu: BombeMenu,
+    /// It is deliberately not in this file: this type is the faithful historical board,
+    /// and `propagate` below short-circuits on the first contradiction exactly as copper
+    /// does. The tolerant board is a separate contribution built *on* this one, and it
+    /// calls `propagateCore` so there is only ever one implementation of the closure.
+
+    /// The closure itself, over an explicit edge list. Shared by the exact and tolerant
+    /// entry points so there is exactly one implementation of the board's logic.
+    package static func propagateCore(
+        ends: [(Int, Int)],
         scramblers: [[UInt8]],
         seedLetter: Int,
         seedValue: Int
@@ -283,39 +287,24 @@ package struct WelchmanBombe: Sendable {
         var changed = true
         while changed {
             changed = false
-
-            for index in menu.ends.indices {
-                let (a, b) = menu.ends[index]
+            for index in ends.indices {
+                let (a, b) = ends[index]
                 let table = scramblers[index]
-
-                var mask = live[a]
-                var image: UInt32 = 0
-                while mask != 0 {
-                    let bit = mask.trailingZeroBitCount
-                    mask &= mask &- 1
-                    image |= UInt32(1) << UInt32(table[bit])
-                }
-                if image & ~live[b] != 0 {
-                    live[b] |= image
-                    if live[b].nonzeroBitCount > 1 { return nil }
-                    changed = true
-                }
-
-                mask = live[b]
-                image = 0
-                while mask != 0 {
-                    let bit = mask.trailingZeroBitCount
-                    mask &= mask &- 1
-                    image |= UInt32(1) << UInt32(table[bit])
-                }
-                if image & ~live[a] != 0 {
-                    live[a] |= image
-                    if live[a].nonzeroBitCount > 1 { return nil }
-                    changed = true
+                for (from, to) in [(a, b), (b, a)] {
+                    var mask = live[from]
+                    var image: UInt32 = 0
+                    while mask != 0 {
+                        let bit = mask.trailingZeroBitCount
+                        mask &= mask &- 1
+                        image |= UInt32(1) << UInt32(table[bit])
+                    }
+                    if image & ~live[to] != 0 {
+                        live[to] |= image
+                        if live[to].nonzeroBitCount > 1 { return nil }
+                        changed = true
+                    }
                 }
             }
-
-            // Diagonal board: σ(x) = y is the same wire as σ(y) = x.
             for x in 0..<26 {
                 var mask = live[x]
                 while mask != 0 {
@@ -331,6 +320,23 @@ package struct WelchmanBombe: Sendable {
             }
         }
         return live
+    }
+
+    /// Propagate σ(seedLetter) = seedValue through the menu and the diagonal board.
+    ///
+    /// `live[x]` is a 26-bit mask of the values still implied for σ(x). Any row
+    /// reaching two bits means the hypothesis forced σ(x) to two distinct letters:
+    /// a hard contradiction, and the reason this returns nil.
+    package static func propagate(
+        menu: BombeMenu,
+        scramblers: [[UInt8]],
+        seedLetter: Int,
+        seedValue: Int
+    ) -> [UInt32]? {
+        propagateCore(
+            ends: menu.ends, scramblers: scramblers,
+            seedLetter: seedLetter, seedValue: seedValue
+        )
     }
 
     // MARK: Setting test

@@ -1,0 +1,30 @@
+=== Tolerant diagonal board — known-key garble grade ===
+control       : P1030684 (published key), 120 letters
+crib          : first 27 letters of the true plaintext, offset 0
+true shell    : UKW B / Greek gamma / IV-III-VIII / rings AACU / pos VYAA
+
+A tolerant board drops up to `t` menu edges that contradict the rest of the board,
+on the hypothesis that a dropped edge is a mis-transcribed ciphertext letter.
+tolerance 0 is the historical board exactly.
+
+SENSITIVITY — does the true setting survive its own garbled ciphertext?
+  garbled  tolerance=0        tolerance=g       plugs forced (correct/total)
+        0  KEPT KEPT 25/25
+        1  LOST KEPT 25/25
+           corrupted positions [13]
+        2  LOST KEPT 25/25
+           corrupted positions [9, 18]
+        3  LOST KEPT 25/25
+           corrupted positions [6, 12, 18]
+
+SPECIFICITY — what does tolerance cost in surviving wrong settings?
+Sampling 26³ window positions at the true shell on the CLEAN ciphertext.
+  tolerance   survivors/17576    inflation vs exact
+          0                1    1.0x
+          1                1    1.0x
+          2                1    1.0x
+          3                1    1.0x
+
+Read both columns together. Sensitivity without specificity is a ghost factory;
+the inflation factor is what the crib-free escalator has to pay for, and it only
+pays if a ghost still lands below the random-setting noise floor.

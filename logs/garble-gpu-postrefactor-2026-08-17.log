@@ -1,0 +1,23 @@
+=== Tolerant diagonal board — Metal kernel grade ===
+control       : P1030684 (published key), 120 letters
+crib          : 27 letters of the true plaintext at offset 0
+tolerance cap : 2 (kernel MAX_TOL = 3)
+
+SENSITIVITY (kernel) — does the true lane survive its own garbled ciphertext?
+  garbled   tol=0    tol=g    host tol=g   agree
+        0   KEPT   KEPT   KEPT   yes
+        1   LOST   KEPT   KEPT   yes
+        2   LOST   KEPT   KEPT   yes
+
+SPECIFICITY + CROSS-CHECK (kernel) — clean ciphertext, all 26^4 lanes.
+The 26^3 slice at the true Greek position is the same population the host arm
+sampled, so those survivor counts are directly comparable.
+menu          : crib 27 letters -> 27 edges
+  tol   lanes surviving   26^3 slice   undecided   GPU s   settings/s   mismatches
+    0                1            1           0    0.02         18.4M   0/192
+    1                1            1           0    0.43         1.05M   0/192
+    2                1            1           0    6.01        0.076M   0/192
+
+Mismatches must be 0/192. The kernel is not a second opinion on the
+board — it is the same board at scale, and any disagreement is a kernel bug, not a
+finding. Survivor inflation is the real cost and it is measured, not assumed.

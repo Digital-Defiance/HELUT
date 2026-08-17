@@ -313,9 +313,30 @@ final class EnigmaBombeValidationTests: XCTestCase {
 
     // MARK: - Tier 3: Statistical scoreboard
 
+    /// Deterministic generator, so a statistical assertion is reproducible.
+    ///
+    /// This test used `Int.random` and failed roughly one run in three, which is a property of
+    /// the sample size rather than of the scorer: with 25 letters drawn uniformly from 26, the
+    /// expected number of coincident pairs is C(25,2)/26 ≈ 11.5, so Σf(f−1) ≈ 23 against a
+    /// threshold of 30 — well inside one standard deviation. A random-input test with a hard
+    /// bound at the noise scale is a coin flip, not a check.
+    private struct SeededRNG: RandomNumberGenerator {
+        var state: UInt64
+        mutating func next() -> UInt64 {
+            state = state &+ 0x9E37_79B9_7F4A_7C15
+            var z = state
+            z = (z ^ (z >> 30)) &* 0xBF58_476D_1CE4_E5B9
+            z = (z ^ (z >> 27)) &* 0x94D0_49BB_1331_11EB
+            return z ^ (z >> 31)
+        }
+    }
+
     func testTier3ScoreboardSpikesOnGermanPlaintext() {
         let plain = EnigmaAlphabet.normalize("KEINEBESONDERENEREIGNISSE")
-        let random = (0..<plain.count).map { _ in Int.random(in: 0..<26) }
+        // Same length as the plaintext, so the score comparison stays like-for-like, but drawn
+        // from a fixed seed so the IC bound is a real assertion rather than a lottery.
+        var rng = SeededRNG(state: 0x5EED_1030_680A_AC05)
+        let random = (0..<plain.count).map { _ in Int.random(in: 0..<26, using: &rng) }
         let scorer = LanguageScorer.germanMilitary()
         let plainScore = scorer.score(plain)
         let randomScore = scorer.score(random)
@@ -324,6 +345,20 @@ final class EnigmaBombeValidationTests: XCTestCase {
         XCTAssertGreaterThan(plainScore, randomScore)
         XCTAssertGreaterThan(plainIC, 0.05)
         XCTAssertLessThan(randomIC, 0.05)
+
+        // The distributional claim the single sample above cannot make on its own: over many
+        // independent draws, random text sits at the 1/26 noise floor. This is the assertion
+        // the original test was reaching for, stated at a sample size that supports it.
+        var bulk = SeededRNG(state: 0xA11C_E714_1945_0501)
+        var mean = 0.0
+        let trials = 256
+        for _ in 0..<trials {
+            let sample = (0..<200).map { _ in Int.random(in: 0..<26, using: &bulk) }
+            mean += LanguageScorer.indexOfCoincidence(sample)
+        }
+        mean /= Double(trials)
+        XCTAssertEqual(mean, 1.0 / 26.0, accuracy: 0.004)
+        XCTAssertLessThan(mean, plainIC)
     }
 
     func testTier3HistoricalMessageScoreboardRanksCorrectKey() {

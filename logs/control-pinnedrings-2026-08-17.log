@@ -1,0 +1,25 @@
+########## pin AAAH (the ring the control breaks at) — must BREAK ##########
+***  BREAK FOUND  ***
+******************************************************************************
+  menu        VVVUUUVIRSOBENNULEINSXXMITU@0 edges=27 letters=21 loops=8 central=U
+  UKW         B
+  Greek       gamma
+  wheel order IV-III-VIII
+  rings       AAAH
+  position    VYYN
+  stecker     BQ CH DI EJ GL KP NV OU SZ TY (10 pairs)
+  IC          0.064 (floor 0.055)
+  tail        -2.848 vs German -2.847 / noise -5.382
+
+  VVVUUUVIRSOBENNULEINSXXMITUUUVIRSIBENNULZWOYVIRSIBENNULDREIYZWODREISECHSEINSYZWODREIDREIACHTEINSDREIOITNACHWZSTENPASSIRT
+******************************************************************************
+
+########## pin AAAA (wrong ring) — must NOT break ##########
+
+quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → logs/quarantine_candidates.json
+  [1/1·1] VVVUUUVIRSOBENNULEINSXXMITU@0 edges=27 letters=21 loops=8 central=U dead at the board                        25s  24.8M/s ETA   0.0 min
+
+total raw stops: 0 over 614175744 settings (24.8M/s mean)
+survived the 10-plug sieve: 0
+no setting survived — every runnable menu contradicted everywhere it was tried
+quarantine: 0 soft-band near-misses (solo pass complete)
