@@ -307,3 +307,129 @@ final class TensorLUTYosysRoundTripTests: XCTestCase {
     write_json resynth.json
     """
 }
+
+/// Can the committed 925-LUT baseline artifact be regenerated?
+///
+/// C8 carried this as an open gap: `enigma_m4_tensorlut_baseline.v` was produced
+/// by `--emit-tensorlut-verilog --emit-out`, those flags were dropped in the
+/// packaging split, and afterwards `TensorLUTEmitter` was reachable only from
+/// library code and an `enigma_256_*`-specific path. The artifact's own header
+/// records the loss. So the file sat in the repo as an asserted result that
+/// nothing could reproduce — the weakest kind of receipt.
+///
+/// The generic path is restored (`TensorLUTGenericEmit`). This test is the proof
+/// it produces the same artifact rather than merely producing *something*: it
+/// compares the emitted module body against the committed file line by line, and
+/// separately compares all 925 INIT words, which are the actual logic content.
+final class TensorLUTBaselineRegenerationTests: XCTestCase {
+
+    private func repoFile(_ name: String) -> String? {
+        let fm = FileManager.default
+        var url = URL(fileURLWithPath: #filePath)
+        for _ in 0..<6 {
+            url.deleteLastPathComponent()
+            let candidate = url.appendingPathComponent(name).path
+            if fm.fileExists(atPath: candidate) { return candidate }
+        }
+        return nil
+    }
+
+    /// Emitting from the source netlist must reproduce the committed baseline.
+    ///
+    /// Two port details had to be right, and getting either wrong shifts every
+    /// signal in the file:
+    ///
+    ///  - `clk` is declared by the emitter itself, so passing the clock net
+    ///    through `inputWires` too declares it twice. The first attempt did that
+    ///    and produced 9 inputs' worth of logic under 10 input declarations.
+    ///  - ports are ordered by net id, not by port name. Both are deterministic;
+    ///    only the former matches what the original emit recorded (`in_3 … in_11`).
+    func testEmitReproducesCommittedM4Baseline() throws {
+        guard let netlistPath = repoFile("enigma_m4_netlist.json"),
+              let committedPath = repoFile("enigma_m4_tensorlut_baseline.v")
+        else {
+            throw XCTSkip("enigma_m4 netlist / baseline artifact not present")
+        }
+
+        let yosys = loadYosysNetlist(from: netlistPath)
+        guard let (_, module) = yosys.modules.first(where: { !$0.value.cells.isEmpty })
+        else {
+            return XCTFail("no module with cells in enigma_m4_netlist.json")
+        }
+
+        let netlist = TensorLUTCompiler.compile(module: module)
+        let chromosome = TensorChromosome.from(netlist: netlist)
+
+        // Same derivation the CLI uses; kept in the test so a change to either
+        // side shows up as a diff rather than as a silently different artifact.
+        let clockNames: Set<String> = ["clk", "clock", "clk_i", "i_clk"]
+        func wires(direction: String, dropClock: Bool) -> [Int32] {
+            var out: Set<Int32> = []
+            for (name, port) in module.ports where port.direction == direction {
+                if dropClock, clockNames.contains(name.lowercased()) { continue }
+                for bit in port.bits {
+                    if case .net(let id) = bit { out.insert(Int32(id)) }
+                }
+            }
+            return out.sorted()
+        }
+
+        XCTAssertEqual(netlist.luts.count, 925, "LUT count drifted from the artifact header")
+        XCTAssertEqual(netlist.dffs.count, 49, "DFF count drifted from the artifact header")
+        XCTAssertEqual(chromosome.inits.count, 59_200, "INIT float count drifted")
+
+        let emitted = TensorLUTEmitter.emitVerilog(
+            moduleName: "enigma_m4_tensorlut_baseline",
+            netlist: netlist,
+            chromosome: chromosome,
+            inputWires: wires(direction: "input", dropClock: true),
+            outputWires: wires(direction: "output", dropClock: false)
+        )
+
+        let committedFull = try String(contentsOfFile: committedPath, encoding: .utf8)
+        let marker = "module enigma_m4_tensorlut_baseline"
+        guard let cRange = committedFull.range(of: marker),
+              let eRange = emitted.range(of: marker)
+        else {
+            return XCTFail("module header not found in one of the two files")
+        }
+        // Compare bodies only: the committed header carries provenance prose and
+        // a behavioural LUT6 model that the emitter does not produce.
+        let committedBody = String(committedFull[cRange.lowerBound...])
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+        let emittedBody = String(emitted[eRange.lowerBound...])
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+
+        if committedBody != emittedBody {
+            let cl = committedBody.split(separator: "\n", omittingEmptySubsequences: false)
+            let el = emittedBody.split(separator: "\n", omittingEmptySubsequences: false)
+            let firstDiff = zip(cl, el).enumerated().first { $0.element.0 != $0.element.1 }
+            XCTFail(
+                """
+                regenerated baseline differs from the committed artifact. \
+                lines \(cl.count) vs \(el.count).
+                first differing line \(firstDiff?.offset ?? -1):
+                  committed: \(firstDiff?.element.0 ?? "-")
+                  emitted:   \(firstDiff?.element.1 ?? "-")
+                """
+            )
+        }
+
+        // The logic content, checked independently of formatting.
+        let initPattern = #"64'h([0-9A-F]{16})"#
+        func initWords(_ s: String) -> [String] {
+            let re = try! NSRegularExpression(pattern: initPattern)
+            let ns = s as NSString
+            return re.matches(in: s, range: NSRange(location: 0, length: ns.length))
+                .map { ns.substring(with: $0.range(at: 1)) }
+        }
+        let committedInits = initWords(committedBody)
+        let emittedInits = initWords(emittedBody)
+        XCTAssertEqual(committedInits.count, 925)
+        XCTAssertEqual(
+            committedInits, emittedInits,
+            "INIT tables differ — the emitted logic is not the committed logic"
+        )
+        print("TENSORLUT_BASELINE regenerated: 925 LUTs, 925/925 INIT words identical")
+    }
+}

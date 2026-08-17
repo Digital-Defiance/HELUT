@@ -3,19 +3,22 @@
 // LUTs: 925  DFFs: 49  wires: 2223
 // INIT floats: 59200
 // Do not hand-edit.
-// STALE COMMAND NOTICE (corrected 2026-08-15 during claim re-validation):
-// this header used to read
-//   swift run -c release helut -- enigma_m4_netlist.json --emit-tensorlut-verilog --emit-out <file>
-// Those two flags no longer exist. The generic per-netlist emit path was
-// dropped from the CLI in the packaging split (directives/packaging-roadmap.md);
-// the surviving CLI emit flags are --enigma256-emit-out /
-// --enigma256-tensorlut-emit-only, which only cover the enigma_256_* modules.
-// The emitter itself is live and tested at library level:
-//   TensorLUTEmitter.emitVerilog(moduleName:netlist:chromosome:inputWires:outputWires:)
-//   swift test -c release --filter testEmitVerilogTwoBitAdderStructure
-//   swift test -c release --filter testInitHexRoundTripMatchesCleartextDecode
-// Re-emitting THIS file needs a generic-netlist CLI entry point that does not
-// exist yet. Tracked as a real gap, not a passing receipt (claim C8).
+// Regenerate with:
+//   .build/release/helut-bench --emit-tensorlut-verilog enigma_m4_netlist.json \
+//     --emit-module-name enigma_m4_tensorlut_baseline --emit-out <file>
+//
+// History: those flags were dropped in the packaging split
+// (directives/packaging-roadmap.md), which left this file asserted but not
+// reproducible -- the weakest kind of receipt. The generic path was restored
+// 2026-08-17 (Sources/HELUTToolKit/TensorLUTGenericEmit.swift) and verified to
+// reproduce this artifact exactly: same 925 LUTs / 49 DFFs / 59200 INIT floats,
+// and all 925 INIT words identical, with zero differing lines in the module body.
+//
+// Locked by:
+//   swift test -c release --filter TensorLUTBaselineRegenerationTests
+// Emitted Verilog is also checked for functional equivalence through Yosys:
+//   swift test -c release --filter TensorLUTYosysRoundTripTests
+// Emits the unmutated Yosys INIT tables -- no mutation, no fitness (claim C8).
 // Behavioral LUT6 (Xilinx Unisim-compatible port map) for Yosys / sim.
 // INIT[k] is the output for address {I5,I4,I3,I2,I1,I0} == k (I0 = LSB).
 module LUT6 #(parameter [63:0] INIT = 64'h0) (

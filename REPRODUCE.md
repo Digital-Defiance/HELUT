@@ -693,9 +693,24 @@ The negative control matters more than the positive result: flipping a single
 INIT bit must produce a visible mismatch. Without it, a comparison reading the
 wrong ports — or a Yosys pass that optimised INIT away — would pass silently.
 
-**Still open.** This validates the 4-LUT design, not the 925-LUT M4 baseline.
-The generic per-netlist emit CLI was dropped in the packaging split, so
-`enigma_m4_tensorlut_baseline.v` cannot yet be regenerated end-to-end.
+**Regenerating the 925-LUT baseline** (gap closed 2026-08-17):
+
+```bash
+.build/release/helut-bench --emit-tensorlut-verilog enigma_m4_netlist.json \
+  --emit-module-name enigma_m4_tensorlut_baseline --emit-out <file>
+```
+
+Reproduces `enigma_m4_tensorlut_baseline.v` exactly: 925 LUTs, 49 DFFs, 59 200
+INIT floats, all 925 INIT words identical, zero differing lines in the module
+body. Locked by `swift test -c release --filter TensorLUTBaselineRegenerationTests`.
+
+Two port details decide whether this works at all, and getting either wrong
+shifts every signal in the file: `clk` is declared by the emitter itself so it
+must not also be passed through `inputWires`, and ports are ordered by net id
+rather than by port name.
+
+Note the scope split — the Yosys equivalence check above is on the 4-LUT design;
+this regeneration check is on the 925-LUT artifact. Neither subsumes the other.
 
 ## Determinism gates (encrypted path)
 

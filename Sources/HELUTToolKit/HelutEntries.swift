@@ -137,6 +137,14 @@ public enum HelutBenchCLI {
         exit(0)
     }
 
+    // Generic per-netlist TensorLUT emit. Restores the path
+    // `enigma_m4_tensorlut_baseline.v` was produced by; its flags were dropped in
+    // the packaging split, which left C8's 925-LUT artifact unregenerable.
+    if CommandLine.arguments.contains("--emit-tensorlut-verilog") {
+        TensorLUTGenericEmit.run()
+        exit(0)
+    }
+
     if CommandLine.arguments.contains("--bench-encrypted-micro") {
         runEncryptedMicrobench()
         exit(0)
