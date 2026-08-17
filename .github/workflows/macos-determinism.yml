@@ -1,0 +1,95 @@
+name: macOS determinism gate
+
+# Why this exists.
+#
+# The 2026-08-15 defect was that `EncryptedNetlistSimulator.tick` encrypted
+# primary inputs while iterating a Dictionary and drawing from the shared RNG.
+# Swift reseeds Dictionary hashing per process, so two runs of the same binary at
+# the same seed produced different ciphertexts, and thin decode margins became
+# coin tosses. It cost a real claim before being traced.
+#
+# The in-process guard permutes keys to simulate that. It cannot observe the real
+# thing, because one process has one hash seed. Only separate processes can, which
+# is what `Scripts/determinism_cross_process.py` does — and that needs macOS,
+# where the other workflow (linux-math.yml) deliberately does not run.
+#
+# UNVERIFIED BY ITS AUTHOR. I have no macOS runner to test this against, so it is
+# written to fail early and legibly rather than mysteriously:
+#
+#   * `swift --version` prints before anything is built.
+#   * A guard fails with an explicit message if the toolchain is below 6.3, which
+#     is what Package.swift declares. macos-26 images carry Xcode CLT 26.6, the
+#     generation that ships Swift 6.3 — but if GitHub's image drifts, the failure
+#     will say so instead of surfacing as a compile error.
+#
+# If it goes red on toolchain grounds, the fix is a runner label or an explicit
+# Xcode selection, not a change to the science. Do not "fix" it by deleting the
+# guard.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  determinism:
+    # Apple Silicon image: the package requires Metal, and the encrypted path
+    # builds Metal shaders even where this particular test uses the CPU
+    # blind-rotate backend.
+    runs-on: macos-26
+    timeout-minutes: 90
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Toolchain
+        run: |
+          swift --version
+          xcodebuild -version || true
+          sw_vers
+
+      - name: Require Swift 6.3 (Package.swift declares swift-tools-version 6.3)
+        run: |
+          set -euo pipefail
+          v=$(swift --version 2>&1 | sed -n 's/.*Apple Swift version \([0-9]*\.[0-9]*\).*/\1/p' | head -1)
+          if [ -z "$v" ]; then
+            echo "could not parse a Swift version from 'swift --version'." >&2
+            exit 1
+          fi
+          echo "parsed Swift $v"
+          major=${v%%.*}; minor=${v##*.}
+          if [ "$major" -lt 6 ] || { [ "$major" -eq 6 ] && [ "$minor" -lt 3 ]; }; then
+            echo "::error::Swift $v is below the 6.3 that Package.swift requires." >&2
+            echo "Pick a runner image or Xcode that ships 6.3+, or lower" >&2
+            echo "swift-tools-version deliberately and re-verify the build." >&2
+            exit 1
+          fi
+
+      - name: Build (release)
+        run: swift build -c release
+
+      - name: In-process determinism guard
+        run: swift test -c release --filter EncryptedDeterminismTests
+
+      # The gate that matters: separate processes, hash randomisation ACTIVE.
+      # SWIFT_DETERMINISTIC_HASHING must stay unset — setting it pins the seed and
+      # makes this check vacuous. The script refuses to run if it is set.
+      - name: Cross-process determinism gate
+        run: python3 Scripts/determinism_cross_process.py --runs 5 --verbose
+
+      - name: Claim integrity lint
+        run: python3 Scripts/claim_audit.py
+
+      - name: ε claim sufficiency audit
+        run: python3 Scripts/eps_claim_audit.py --strict
+
+      - name: Noise-estimator agreement and bound safety
+        run: |
+          swift test -c release --filter TFHENoisyBKAccumulatorTests
+          swift test -c release --filter TFHENoisyBKAccumulatorBoundSafetyTests
+          swift test -c release --filter EpsilonSampleSufficiencyTests
+          swift test -c release --filter EpsilonStrideExchangeRateTests
