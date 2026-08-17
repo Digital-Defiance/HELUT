@@ -61,7 +61,7 @@ Potsdam and Plaice daily keys for 1 May were eliminated by exhaustion against P
 The operational ledger is `BREAK_P1030680.md`; the public claim freeze is `directives/claim-sheet.md`. Table [1](#tab:campaign){reference-type="ref" reference="tab:campaign"} summarizes what is *proven*, what is *eliminated*, and what remains open. **None of these rows is a decrypt of P1030680** (non-claim N5).
 
   **Result**                                                   **Status**
-  ------------------------------------------------------------ ---------------------------------------------------------------------------------------------------------------------------------------------
+  ------------------------------------------------------------ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   Welchman blind control (P1030684)                            Break in 361 s first run / 427 s archived re-run; all 10 plugs
   Stochastic KPA datapath                                      Control oracle + near-miss PASS; blind stecker $\sim$`<!-- -->`{=html}22/72
   Training / collapse / weather / RIGA priors                  0 survivors under 80% rigor (ceiling $\sim$`<!-- -->`{=html}60--69% = coincidence)
@@ -73,7 +73,7 @@ The operational ledger is `BREAK_P1030680.md`; the public claim freeze is `direc
   Own-orders / filler $\times$ AAAA                            Own: 0 physical; filler below soft --- no rings
   Catalog exact $\times$ right rings                           Parked originalIndex 417/2513; `--bombe-from 418`
   Middle ring $\ne$ A                                          Untested vs P1030680; arm graded end-to-end (control breaks at full middle $\times$ right coverage, 26$\times$ space for 12.2$\times$ time)
-  Long menus (len 28/30/40)                                    Prior negatives *incomplete*: old kernel cap silently eliminated up to 5.56% of lanes; $\le$`<!-- -->`{=html}25 letters unaffected
+  Long menus (len 28--40)                                      Prior negatives *incomplete*: old kernel cap silently eliminated up to 5.56% of lanes. Phase 16 arm 2 contaminated 40/40, Phase 8 top-30 20/30, catalog 300/2513; $\le$`<!-- -->`{=html}25 letters unaffected. Re-runs under way
   Ciphertext garble risk                                       Sister P1030681 needed degarbling; exact bars may drop true shells
 
   : Campaign grades (cleartext Metal). Fitness is not HELUT encrypted tick rate (N6). {#tab:campaign}
@@ -82,7 +82,7 @@ Soft-band Welchman stops can quarantine into Stochastic seeds (`--hybrid-quarant
 
 ## A clean negative the board had not earned
 
-The Metal bombe tabulates one upper-involution table per distinct slow-wheel $(l,m)$ state across a menu span, and capped that at four. On overflow it wrote a zero survivor mask --- the code for *eliminated* --- for a lane it had never tested. Pure stepping arithmetic over all 625 catalog spans, 56 naval (middle, right) rotor pairs and 676 windows (`Scripts/max_upper_audit.py`) bounds how often that fired: never at or below 25 letters, then 0.29 % of lanes at 28, 1.14 % at 30 and 5.56 % at 40, or 0.33 % of the whole catalog lane space. So 61 of 625 spans carry negatives that are incomplete by up to 5.56 %; the 16--25 letter majority is untouched. The cap is now 8 and overflow reports *undecided*, which the host --- which has no such cap --- re-tests in full. A table size can no longer discard a key.
+The Metal bombe tabulates one upper-involution table per distinct slow-wheel $(l,m)$ state across a menu span, and capped that at four. On overflow it wrote a zero survivor mask --- the code for *eliminated* --- for a lane it had never tested. Pure stepping arithmetic over every span, all 56 naval (middle, right) rotor pairs and all 676 windows (`Scripts/max_upper_audit.py`) bounds how often that fired: never at or below 25 letters, then 0.29 % of lanes at 28, 1.14 % at 30 and 5.56 % at 40. The damage is concentrated in the curated long-menu arms rather than spread thinly. Phase 16 arm 2 --- forty mid-message anchors whose zero raw stops closed the Übung-push hypothesis --- is 40 letters throughout, so *all forty* placements were contaminated and that negative was unearned as recorded. It has since been re-run on the corrected kernel: 40/40 dead at the board, zero raw stops over $6.387\times10^{11}$ settings, so the cap was not concealing a key and the hypothesis stays closed on evidence. Phase 8's curated top-30 is contaminated on 20 of 30 placements, and the main catalog on 300 of 2513. The Regenbogen queue is clean, and everything at 16--25 letters, including all of the Thetis-register work, is untouched and stands. The cap is now 8 and overflow reports *undecided*, which the host --- which has no such cap --- re-tests in full: a table size can no longer discard a key. Re-runs are ordered by contaminated share per GPU-hour, Phase 16 arm 2 first.
 
 ## Unpinning the middle ring for 6.5--11.4$\times$, not 26$\times$
 
