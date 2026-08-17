@@ -76,12 +76,12 @@ end-to-end. \\
 \cid{49} & Encrypted PicoRV32 \texttt{addi}+\texttt{sw}: store \texttt{wdata}=1, RAM0=1; $3.79\,\mathrm{s}/48$ @ demo $N{=}8$. Load-back is \cid{50}. \\
 \cid{50} & Encrypted PicoRV32 \texttt{lw} sees stored 1 (NBA xfer); $3.77\,\mathrm{s}/48$ @ demo $N{=}8$. Not Metal PicoRV. \\
 \cid{51} & Metal PicoRV32 NOP-fetch @ demo $N{=}8$: tiled BR, 2 fetches, $63.55\,\mathrm{s}/8$. Not fused netlist / not $N{=}1024$. \\
-\cid{52} & Stride-$k$ public-MS covering-b1 @ $N{=}1024$ $\sigma{=}128$ $k{=}7$: $\varepsilon\log_2\approx-170$ (8 trials) + Metal secret/public-ms SING PASS. Native $k{=}1$ still \cid{37}. \\
+\cid{52} & Stride-$k$ public-MS covering-b1 @ $N{=}1024$ $\sigma{=}128$ $k{=}7$: $\varepsilon\log_2=-132.5$ (95\% bound $-83.2$ at $n{=}32$; the $-170$ at 8 trials was unsupported) + Metal secret/public-ms SING PASS. Native $k{=}1$ still \cid{37}. \\
 \cid{53} & Sequential covering-b1 counter @ $N{=}1024$ $\sigma{=}128$ $k{=}7$: Metal secret/public-ms SING PASS. Not PicoRV. \\
 \cid{54} & Sequential covering-b1 toy ISA @ $N{=}1024$ $\sigma{=}128$ $k{=}7$: Metal secret/public-ms SING PASS. Not PicoRV. \\
 \cid{55} & Native $k{=}1$ covering-b1 $\sigma{=}128$ LWE-$n$ map @ poly $N{=}1024$: decodable at $n\le 512$ but $\varepsilon>-64$; $n{=}1024$ undecodable (\cid{37}). \\
 \cid{56} & \texttt{cryptoPublicMS} $B{=}1$ $k{=}7$: identity decodable $\varepsilon\approx-12.6$; Metal public-ms SING FAIL. Torus $\sigma{=}128$ still undecodable. \\
-\cid{57} & Covering-b2 $k{=}7$ $\sigma{=}128$ @ $N{=}1024$: $\varepsilon\log_2\approx-110.7$; Metal public-ms adder $10.33\,\mathrm{s}/1$ + regex 23 LUT $26.69\,\mathrm{s}/1$ PASS. b4 public-ms and E256 covering-b2 FAIL. \\
+\cid{57} & Covering-b2 $k{=}7$ $\sigma{=}128$ @ $N{=}1024$: $\varepsilon\log_2=-60.5$ at $k{=}7$, short of the bar; stride $k{=}14$ clears it ($-319.3$, 95\% bound $-200.5$) with SING still PASS; Metal public-ms adder $10.33\,\mathrm{s}/1$ + regex 23 LUT $26.69\,\mathrm{s}/1$ PASS. b4 public-ms and E256 covering-b2 FAIL. \\
 \cid{58} & PicoRV32 \texttt{abc -lut 6}: $2006$ LUT ($-58\%$) + CPU boolean SING PASS @ $N{=}64$ ($1.35\,\mathrm{s}$). Not covering / not $N{=}1024$. \\
 \cid{59} & Sequential wavefront: PicoRV lut6 $N{=}64$ CPU boolean $0.165\,\mathrm{s}/1$ (${\sim}8.2\times$ vs \cid{58}). \\
 \cid{60} & PicoRV lut6 covering-b2 $k{=}7$ @ $N{=}1024$: Metal 1-tick Q SING FAIL (${\sim}33$\,min, DFF want$=0$ got$=1$). \\

@@ -44,8 +44,11 @@ export function NetlistFheJournalPage() {
             <li>
               <span className="mono">C57</span>
               <span>
-                Covering-b2 (<em>ℓ</em>=16) <em>k</em>=7 σ=128 at <em>N</em>=1024: εlog2≈−110.7;
-                Metal public-ms adder 10.33 s/1 and regex 23 LUT 26.69 s/1 PASS. Covering-b4
+                Covering-b2 (<em>ℓ</em>=16) σ=128 at <em>N</em>=1024: Metal public-ms adder
+                10.33 s/1 and regex 23 LUT 26.69 s/1 PASS at <em>k</em>=7. The
+                εlog2≈−110.7 recorded here was a 4-trial low-σ̂ draw — settled it is
+                −60.5 at <em>k</em>=7, short of −64. Stride <em>k</em>=14 clears it
+                (−319.3, 95% bound −200.5) with SING still PASS. Corrected 2026-08-16. Covering-b4
                 public-ms and E256 58-LUT covering-b2 SING FAIL.
               </span>
             </li>

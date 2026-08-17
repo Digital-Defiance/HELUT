@@ -466,6 +466,266 @@ private func verifyMetalAgainstHost(
     }
 }
 
+// MARK: Middle-ring coverage self-test
+
+/// Grade the claim that lets a middle-ring sweep cost ~5x instead of 26x.
+///
+/// The claim: for middle ring ρ ≠ A, a lane whose middle wheel never reaches its own
+/// notch across the menu span — and whose ring-A partner at window `m − ρ` also never
+/// does — is *exactly* the same machine as that partner, so the rings-AAAA pass already
+/// decided it. Only lanes that break the invariant need testing at ρ.
+///
+/// This asserts it the only way worth trusting: run the validated host board on both
+/// lanes of every claimed-covered pair and demand identical verdicts. A single mismatch
+/// means the skip is dropping keys, which is the exact class of bug that made the old
+/// `MAX_UPPER` overflow report a clean negative it had not earned.
+func runMiddleRingCoverageSelfTest(greekSample: [Int] = [0, 7, 13, 19]) {
+    let cipher = EnigmaAlphabet.normalize(ControlMessageP1030684.ciphertext)
+    let plain = EnigmaAlphabet.normalize(ControlMessageP1030684.plaintext)
+    // 27 letters: campaign scale, the length the blind control actually runs.
+    let cribText = EnigmaAlphabet.string(from: Array(plain[0..<27]))
+    guard let menu = BombeMenuBuilder.menu(crib: cribText, offset: 0, ciphertext: cipher) else {
+        print("could not build the self-test menu")
+        return
+    }
+
+    // Both notch regimes. The middle wheel's own notch count is what the predicate turns
+    // on, so a two-notch middle (VI–VIII) is the case most likely to break it.
+    let triples: [(String, EnigmaRotorSpec, EnigmaRotorSpec, EnigmaRotorSpec)] = [
+        ("IV-III-VIII (1-notch middle)",
+         EnigmaWarehouse.rotorIV, EnigmaWarehouse.rotorIII, EnigmaWarehouse.rotorVIII),
+        ("I-VI-VII (2-notch middle)",
+         EnigmaWarehouse.rotorI, EnigmaWarehouse.rotorVI, EnigmaWarehouse.rotorVII)
+    ]
+
+    print("=== Middle-ring covered-lane skip — coverage self-test ===")
+    print("menu \(menu.description)")
+    print("claim: skipped lanes at middle ring ρ are the same machine as their ring-A")
+    print("partner at window m−ρ, so the rings-AAAA pass already decided them.")
+    print("checking every claimed-covered pair on the validated host board.")
+    print("Greek sample \(greekSample.map { EnigmaAlphabet.character($0) }), "
+        + "all 26³ (L,M,R) per ring, rings B–Z, right ring A.")
+    print()
+
+    let maxStep = menu.steps.max() ?? 0
+
+    /// The kernel's predicate, restated on the host. Must stay in lock-step with the
+    /// `skipCovered` block in `BombeMetal.swift`.
+    func coveredByRingA(middle: EnigmaRotorSpec, right: EnigmaRotorSpec,
+                        posM: Int, posR: Int, ring: Int) -> Bool {
+        var mA = posM
+        var mB = (posM - ring + 26) % 26
+        var rr = posR
+        for _ in 0...maxStep {
+            if middle.isAtNotch(position: mA) || middle.isAtNotch(position: mB) {
+                return false
+            }
+            if right.isAtNotch(position: rr) {
+                mA = (mA + 1) % 26
+                mB = (mB + 1) % 26
+            }
+            rr = (rr + 1) % 26
+        }
+        return true
+    }
+
+    var allPass = true
+    for (label, left, middle, right) in triples {
+        let mismatches = LockedCounter()
+        let skipped = LockedCounter()
+        let tested = LockedCounter()
+        let total = LockedCounter()
+
+        DispatchQueue.concurrentPerform(iterations: 25) { index in
+            let ring = index + 1 // rings B…Z; ring A is the pass everything defers to
+            let atRing = WelchmanBombe(
+                greek: EnigmaM4Warehouse.gamma, left: left, middle: middle, right: right,
+                reflector: EnigmaM4Warehouse.thinB, rings: (0, 0, ring, 0), maxPlugs: 0
+            )
+            let atRingA = WelchmanBombe(
+                greek: EnigmaM4Warehouse.gamma, left: left, middle: middle, right: right,
+                reflector: EnigmaM4Warehouse.thinB, rings: (0, 0, 0, 0), maxPlugs: 0
+            )
+            var localBad = 0, localSkip = 0, localTest = 0, localAll = 0
+            for g in greekSample {
+                for l in 0..<26 {
+                    for m in 0..<26 {
+                        for r in 0..<26 {
+                            localAll += 1
+                            guard coveredByRingA(
+                                middle: middle, right: right, posM: m, posR: r, ring: ring
+                            ) else {
+                                localTest += 1
+                                continue
+                            }
+                            localSkip += 1
+                            let deadHere = atRing.isDead(menu: menu, start: (g, l, m, r))
+                            let partner = (m - ring + 26) % 26
+                            let deadThere = atRingA.isDead(
+                                menu: menu, start: (g, l, partner, r)
+                            )
+                            if deadHere != deadThere { localBad += 1 }
+                        }
+                    }
+                }
+            }
+            mismatches.add(localBad)
+            skipped.add(localSkip)
+            tested.add(localTest)
+            total.add(localAll)
+        }
+
+        let skipRate = Double(skipped.value) / Double(max(total.value, 1))
+        // Ring A runs in full; each of the other 25 runs only its non-covered lanes.
+        let cost = 1.0 + 25.0 * (1.0 - skipRate)
+        print(label)
+        print(String(format: "  pairs claimed covered : %d of %d lanes (%.1f%%)",
+                     skipped.value, total.value, skipRate * 100))
+        print(String(format: "  lanes needing a test  : %d (%.1f%%)",
+                     tested.value, (1 - skipRate) * 100))
+        print("  host verdict mismatches: \(mismatches.value)")
+        print(String(format: "  sweep cost vs rings-AAAA: %.1fx (flat sweep would be 26x)",
+                     cost))
+        if mismatches.value != 0 {
+            allPass = false
+            print("  FAIL — the skip is dropping lanes the ring-A pass did not decide")
+        } else {
+            print("  PASS — every skipped lane is decided identically by its ring-A partner")
+        }
+        print()
+    }
+
+    print(allPass
+        ? "host predicate PASS — covered-lane skip is sound on both notch regimes; the "
+            + "union of ring A (full) and rings B–Z (non-covered lanes) is complete."
+        : "host predicate FAIL — do not run --bombe-middle-ring until this is zero.")
+    print()
+
+    // Phase 2. The host predicate being sound says nothing about the kernel wiring
+    // actually implementing it. Sweep the same ring with the skip on and off and demand:
+    // every lane the skip keeps carries an identical survivor mask, and every lane it
+    // drops is both predicate-covered *and* decided by its ring-A partner on the GPU.
+    print("=== Same claim, through the Metal kernel ===")
+    guard let engine = WelchmanMetalEngine() else {
+        print("  no Metal device — host phase only")
+        return
+    }
+    // A 27-letter menu is dead at the board for almost every shell, which makes the
+    // comparison vacuous: nothing survives either way and the test "passes" by having
+    // no evidence. A 14-letter one leaves only a couple of survivors, which is no better.
+    // Ten letters leaves thousands, so the skip has to discard real survivors and the
+    // ring-A partner has to be the thing that catches them.
+    let shortCrib = EnigmaAlphabet.string(from: Array(plain[0..<10]))
+    guard let shortMenu = BombeMenuBuilder.menu(
+        crib: shortCrib, offset: 0, ciphertext: cipher
+    ) else {
+        print("  could not build the kernel-phase menu")
+        return
+    }
+    let shortMaxStep = shortMenu.steps.max() ?? 0
+
+    func coveredShort(middle: EnigmaRotorSpec, right: EnigmaRotorSpec,
+                      posM: Int, posR: Int, ring: Int) -> Bool {
+        var mA = posM
+        var mB = (posM - ring + 26) % 26
+        var rr = posR
+        for _ in 0...shortMaxStep {
+            if middle.isAtNotch(position: mA) || middle.isAtNotch(position: mB) {
+                return false
+            }
+            if right.isAtNotch(position: rr) {
+                mA = (mA + 1) % 26
+                mB = (mB + 1) % 26
+            }
+            rr = (rr + 1) % 26
+        }
+        return true
+    }
+
+    print("  menu \(shortMenu.description)")
+    var kernelPass = true
+    var sawEvidence = false
+
+    for (label, left, middle, right) in triples {
+        func sweep(ring: Int, skip: Bool) -> [UInt32]? {
+            engine.sieve = WelchmanSieve(
+                maxPlugs: 0, exactPlugs: 0, skipMiddleRingCovered: skip
+            )
+            guard let buffer = engine.sweep(
+                menu: shortMenu, greek: EnigmaM4Warehouse.gamma,
+                left: left, middle: middle, right: right,
+                reflector: EnigmaM4Warehouse.thinB, rings: (0, 0, ring, 0)
+            ) else { return nil }
+            return Array(buffer)
+        }
+        guard let ringAMasks = sweep(ring: 0, skip: false) else {
+            print("  \(label): GPU sweep failed")
+            kernelPass = false
+            continue
+        }
+        print("  \(label)")
+        for ring in [1, 5, 13] {
+            guard let off = sweep(ring: ring, skip: false),
+                  let on = sweep(ring: ring, skip: true) else {
+                print("    ring \(ring): GPU sweep failed")
+                kernelPass = false
+                continue
+            }
+            var lanesSkipped = 0        // predicate says covered
+            var survivorsOff = 0        // survivors when nothing is skipped
+            var survivorsDropped = 0    // survivors the skip discarded — the evidence
+            var notSkipped = 0          // covered but kernel kept it: skip not implemented
+            var wronglySkipped = 0      // kernel zeroed a lane the predicate did not cover
+            var partnerDisagrees = 0    // discarded verdict is not carried by ring A
+            for lane in 0..<WelchmanMetalEngine.laneCount {
+                let (g, l, m, r) = WelchmanMetalEngine.position(forLane: lane)
+                let covered = coveredShort(
+                    middle: middle, right: right, posM: m, posR: r, ring: ring
+                )
+                if off[lane] != 0 { survivorsOff += 1 }
+                if covered {
+                    lanesSkipped += 1
+                    // The kernel must have zeroed it…
+                    if on[lane] != 0 { notSkipped += 1 }
+                    if off[lane] != 0 {
+                        survivorsDropped += 1
+                        // …and the ring-A partner must carry the discarded verdict.
+                        let partner = (m - ring + 26) % 26
+                        let partnerLane = g * 17576 + l * 676 + partner * 26 + r
+                        if ringAMasks[partnerLane] != off[lane] { partnerDisagrees += 1 }
+                    }
+                } else if on[lane] != off[lane] {
+                    // Not covered: the skip must not have touched this lane at all.
+                    wronglySkipped += 1
+                }
+            }
+            if survivorsDropped > 0 { sawEvidence = true }
+            print(String(format: "    ring %@: %6d/%d lanes skipped (%.1f%%), "
+                         + "survivors %6d of which %6d discarded",
+                         String(EnigmaAlphabet.character(ring)) as NSString,
+                         lanesSkipped, WelchmanMetalEngine.laneCount,
+                         Double(lanesSkipped) / Double(WelchmanMetalEngine.laneCount) * 100,
+                         survivorsOff, survivorsDropped))
+            print("             violations — covered-but-kept \(notSkipped), "
+                + "skipped-but-not-covered \(wronglySkipped), "
+                + "ring-A partner disagrees \(partnerDisagrees)")
+            if notSkipped != 0 || wronglySkipped != 0 || partnerDisagrees != 0 {
+                kernelPass = false
+            }
+        }
+    }
+
+    if !sawEvidence {
+        print("VACUOUS — the skip never discarded a single survivor, so the equivalence "
+            + "was never actually exercised. Not a pass.")
+        return
+    }
+    print(kernelPass && allPass
+        ? "PASS — kernel skip drops only lanes whose ring-A partner carries the same "
+            + "verdict, and never alters a verdict it keeps."
+        : "FAIL — kernel skip is not sound; --bombe-middle-ring would lose coverage.")
+}
+
 // MARK: Sweep
 
 struct BombeSweepConfig {
@@ -479,6 +739,20 @@ struct BombeSweepConfig {
     /// turnover, but the right ring sets *when* the middle wheel steps — so a menu
     /// long enough to span a turnover needs all 26 phases to be complete.
     var sweepRightRing = false
+    /// Sweep the *middle* Ringstellung — the one gap no campaign has ever tested.
+    ///
+    /// The middle ring is absorbed into its window position only while the middle wheel
+    /// stays off its own notch in span; once it turns over, the left wheel moves and the
+    /// absorption fails. Rather than pay a flat 26x, ring A is swept in full and each
+    /// other ring tests only the lanes whose middle wheel (or whose ring-A partner's)
+    /// actually reaches a notch — see the `skipCovered` block in `BombeMetal.swift`.
+    /// The union is still complete, at roughly 5-8x instead of 26x.
+    var sweepMiddleRing = false
+    /// Assume the historical ten-lead board and sieve on the plug *budget* as well as the
+    /// ceiling: a menu that pins letters without leaving room for the remaining plugs is
+    /// not buildable. Opt-in, because it is an assumption about the target rather than a
+    /// restatement of the host rule. 0 disables.
+    var exactPlugs = 0
     /// How many GPU shells to keep in flight. 4 is usually enough to hide host drain.
     var pipelineDepth = WelchmanMetalEngine.defaultDepth
     /// Prefer offset-0 message openings (≥ minOpeningLength) from the U-534 corpus,
@@ -570,31 +844,54 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
     }
     if chosen.count > 12 { print("  … \(chosen.count - 12) more") }
 
-    let ringVariants: [(Int, Int, Int, Int)] = config.sweepRightRing
-        ? (0..<26).map { (0, 0, 0, $0) }
-        : [(0, 0, 0, 0)]
+    let middleRingValues = config.sweepMiddleRing ? Array(0..<26) : [0]
+    let rightRingValues = config.sweepRightRing ? Array(0..<26) : [0]
+    // Ring A first in both axes: every other middle ring defers its already-covered
+    // lanes to the ring-A pass, so the ring-A pass must be the one that runs in full.
+    let ringVariants: [(Int, Int, Int, Int)] = middleRingValues.flatMap { middle in
+        rightRingValues.map { right in (0, 0, middle, right) }
+    }
     let shellsPerMenu = config.wheelOrders.count * 4 * ringVariants.count
     let settingsPerMenu = Double(shellsPerMenu) * Double(WelchmanMetalEngine.laneCount)
-    print(String(format: "shells/menu: %d (%d WO × 2 Greek × 2 UKW × %d ring) → %.3g settings",
-                 shellsPerMenu, config.wheelOrders.count, ringVariants.count, settingsPerMenu))
+    print(String(format: "shells/menu: %d (%d WO × 2 Greek × 2 UKW × %d mid-ring × %d right-ring)"
+                 + " → %.3g settings",
+                 shellsPerMenu, config.wheelOrders.count,
+                 middleRingValues.count, rightRingValues.count, settingsPerMenu))
+    engine.sieve = WelchmanSieve(
+        maxPlugs: config.maxPlugs,
+        exactPlugs: config.exactPlugs,
+        skipMiddleRingCovered: config.sweepMiddleRing
+    )
+    print("kernel sieve: ≤\(config.maxPlugs) plugs"
+        + (config.exactPlugs > 0 ? ", exactly-\(config.exactPlugs) budget" : "")
+        + (config.sweepMiddleRing ? ", middle-ring covered-lane skip" : ""))
     print("GPU pipeline depth: \(engine.depth) shells in flight")
     print(String(format: "break threshold: %.3f  IC floor: %.3f  (German %.3f / noise %.3f)",
                  PostBombeDiscriminator.breakThreshold,
                  PostBombeDiscriminator.icFloor,
                  PostBombeDiscriminator.germanReference,
                  PostBombeDiscriminator.noiseReference))
-    if config.sweepRightRing {
+    let longestSpan = chosen.map { $0.1.edgeCount }.max() ?? 0
+    if config.sweepMiddleRing && config.sweepRightRing {
+        print("right ring swept: every right-wheel turnover phase covered")
+        print("middle ring swept: ring A in full, rings B–Z restricted to lanes whose "
+            + "middle wheel reaches a notch (the rest are exactly the ring-A lanes)")
+        print("no residual ring gap for these menus — this is the arm the ledger has "
+            + "never run")
+    } else if config.sweepMiddleRing {
+        print("middle ring swept, right ring pinned A: covers middle-wheel turnover but "
+            + "not right-wheel turnover phase. Add --bombe-ring-sweep for both.")
+    } else if config.sweepRightRing {
         // Sweeping the right ring covers every phase of the right-wheel turnover, so
         // middle-wheel stepping is correct for all 26. The middle ring stays pinned at
         // A, which is only exact while the middle wheel itself does not turn over in
         // span — so a key that steps the left wheel mid-crib is still out of reach.
-        let longest = chosen.map { $0.1.edgeCount }.max() ?? 0
-        let steps = longest / 26 + 1
+        let steps = longestSpan / 26 + 1
         print("right ring swept: every right-wheel turnover phase covered")
         print(String(format: "residual gap: middle ring pinned A, so keys whose middle "
                      + "wheel turns over inside a %d-letter span (~%.0f%% for 1 notch, "
-                     + "~%.0f%% for 2) are not covered",
-                     longest, Double(steps) / 26.0 * 100, Double(2 * steps) / 26.0 * 100))
+                     + "~%.0f%% for 2) are not covered — --bombe-middle-ring closes it",
+                     longestSpan, Double(steps) / 26.0 * 100, Double(2 * steps) / 26.0 * 100))
     } else {
         let longest = chosen.map { $0.1.edgeCount }.max() ?? 0
         let free = max(0, 26 - longest)
@@ -745,7 +1042,12 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
                 )
                 for lane in 0..<WelchmanMetalEngine.laneCount where survivors[lane] != 0 {
                     let start = WelchmanMetalEngine.position(forLane: lane)
-                    let stops = bombe.test(menu: shell.menu, start: start)
+                    // The GPU already decided all 26 seeds; re-running the ones it killed
+                    // is pure duplicated work. An undecided lane carries every bit, so it
+                    // is re-tested in full on an engine with no slow-state cap.
+                    let stops = bombe.test(
+                        menu: shell.menu, start: start, seedMask: survivors[lane]
+                    )
                     rawStops += stops.count
                     for stop in stops {
                         let sweepStop = SweepStop(

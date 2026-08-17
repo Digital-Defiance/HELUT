@@ -14,7 +14,17 @@ import HELUTCLI
 // completed slots. Synchronous `sweep` is enqueue + wait for the rehearsal path.
 
 let welchmanMaxEdges = 40
-private let welchmanMaxUpper = 4
+/// Distinct slow-wheel `(l, m)` states a lane may need across its menu span. A 72-letter
+/// span advances the middle wheel at most three times, so four sufficed while the middle
+/// ring was pinned. It is raised here because overflow used to be reported as
+/// *eliminated* (see `WELCHMAN_UNDECIDED`), and a middle-ring sweep widens the reachable
+/// state count.
+private let welchmanMaxUpper = 8
+
+/// All 26 seed hypotheses marked live: the kernel's "I could not decide this lane" code.
+/// A lane that overflows `MAX_UPPER` writes this instead of 0, so the host re-tests it
+/// on an engine that has no such cap. Reporting 0 there would silently discard a key.
+let welchmanUndecidedMask: UInt32 = 0x03FF_FFFF
 
 private let welchmanMetalSource = """
 #include <metal_stdlib>
@@ -22,6 +32,7 @@ using namespace metal;
 
 #define MAX_EDGES \(welchmanMaxEdges)
 #define MAX_UPPER \(welchmanMaxUpper)
+#define WELCHMAN_UNDECIDED \(welchmanUndecidedMask)u
 
 inline uchar rot_fwd(uchar ch, int offset, constant uchar *wiring) {
     int shifted = (int(ch) + offset) % 26;
@@ -52,6 +63,9 @@ kernel void welchman_sweep(
     constant uchar *notchR       [[buffer(15)]],
     constant uchar *rings        [[buffer(16)]],
     device   uint  *outSurvivors [[buffer(17)]],
+    constant uint  &maxPlugs     [[buffer(18)]],
+    constant uint  &exactPlugs   [[buffer(19)]],
+    constant uint  &skipCovered  [[buffer(20)]],
     uint lane [[thread_position_in_grid]]
 ) {
     if (lane >= 456976u) return;
@@ -64,6 +78,33 @@ kernel void welchman_sweep(
     uint maxStep = 0u;
     for (uint e = 0u; e < edgeCount; ++e) {
         maxStep = max(maxStep, uint(edgeStep[e]));
+    }
+
+    // Middle-ring coverage skip. `skipCovered` is set only for rings[2] != 0, and it
+    // drops exactly the lanes a rings-AAAA pass already decided. The equivalence: the
+    // trail depends on *window* positions (notch tests are ring-free), so as long as
+    // neither this lane's middle wheel nor the middle wheel of its ring-A partner
+    // (start m - rings[2]) reaches its own notch across [0, maxStep], the middle wheel
+    // steps only on right-wheel notches — identical times in both trails — the left
+    // wheel never moves, and offsetM = m - rings[2] is literally the ring-A partner's
+    // window. Same scramblers, same verdict. Any middle-notch hit breaks that
+    // invariant, so those lanes are the ones a middle-ring sweep must actually test.
+    if (skipCovered != 0u) {
+        uchar mA = posM;
+        uchar mB = uchar((uint(posM) + 26u - uint(rings[2])) % 26u);
+        uchar rr = posR;
+        bool hit = false;
+        for (uint t = 0u; t <= maxStep && !hit; ++t) {
+            bool notchA = notchM[mA] != 0;
+            bool notchB = notchM[mB] != 0;
+            if (notchA || notchB) { hit = true; break; }
+            if (notchR[rr] != 0) {
+                mA = uchar((uint(mA) + 1u) % 26u);
+                mB = uchar((uint(mB) + 1u) % 26u);
+            }
+            rr = uchar((uint(rr) + 1u) % 26u);
+        }
+        if (!hit) { outSurvivors[lane] = 0u; return; }
     }
 
     uchar edgeUpper[MAX_EDGES];
@@ -88,7 +129,10 @@ kernel void welchman_sweep(
             }
             if (slot == upperCount) {
                 if (upperCount >= MAX_UPPER) {
-                    outSurvivors[lane] = 0u;
+                    // Undecided, not eliminated. The host engine has no slow-state cap,
+                    // so hand it every seed rather than reporting a clean negative we
+                    // did not earn.
+                    outSurvivors[lane] = WELCHMAN_UNDECIDED;
                     return;
                 }
                 upperL[upperCount] = l;
@@ -187,7 +231,33 @@ kernel void welchman_sweep(
             }
         }
 
-        if (!dead) { survivors |= 1u << seed; }
+        if (dead) { continue; }
+
+        // Plugboard sieve, on the GPU where the stop is born rather than on the host
+        // after it has been shipped back. `maxPlugs` reproduces the host rule exactly
+        // (WelchmanBombe.test), so it changes throughput and not verdicts.
+        if (maxPlugs > 0u || exactPlugs > 0u) {
+            uint determined = 0u;
+            uint halfPairs = 0u;
+            for (uint x = 0u; x < 26u; ++x) {
+                if (live[x] == 0u) { continue; }
+                determined += 1u;
+                if (uint(ctz(live[x])) != x) { halfPairs += 1u; }
+            }
+            uint pairs = halfPairs / 2u;
+            if (maxPlugs > 0u && pairs > maxPlugs) { continue; }
+            // Kriegsmarine boards carried *exactly* ten leads — all three recovered
+            // U-534 daily keys and the P1030684 control have ten pairs. So the plugs the
+            // menu has not yet forced still have to fit: each needs two letters, and a
+            // letter this menu has already pinned (paired or self-steckered) cannot take
+            // one. A board that runs out of free letters is not a machine anyone built.
+            if (exactPlugs > 0u) {
+                if (pairs > exactPlugs) { continue; }
+                if ((26u - determined) < 2u * (exactPlugs - pairs)) { continue; }
+            }
+        }
+
+        survivors |= 1u << seed;
     }
 
     outSurvivors[lane] = survivors;
@@ -199,6 +269,21 @@ struct WelchmanInFlight {
     let slot: Int
     let commandBuffer: MTLCommandBuffer
     let shell: WelchmanShell
+}
+
+/// Sieves the kernel applies before a lane is shipped back to the host.
+///
+/// `maxPlugs` mirrors `WelchmanBombe.test` exactly, so enabling it cannot change a
+/// verdict — it only stops the host from re-deriving stops it would have thrown away.
+/// `exactPlugs` is a *stronger* claim about the target (a ten-lead Kriegsmarine board)
+/// and is therefore opt-in. `skipMiddleRingCovered` drops lanes a rings-AAAA pass has
+/// already decided, and is only ever set for shells whose middle ring is not A.
+struct WelchmanSieve {
+    var maxPlugs: Int = 0
+    var exactPlugs: Int = 0
+    var skipMiddleRingCovered: Bool = false
+
+    static let none = WelchmanSieve()
 }
 
 /// Everything the host needs to re-derive steckers once the GPU reports survivors.
@@ -228,6 +313,10 @@ final class WelchmanMetalEngine {
 
     /// How many shells may be in flight at once.
     let depth: Int
+
+    /// Sieves applied inside the kernel. Default is none, so the rehearsal cross-check
+    /// keeps comparing raw board logic against the host engine.
+    var sieve: WelchmanSieve = .none
 
     static let laneCount = 26 * 26 * 26 * 26 // 456,976
     static let defaultDepth = 4
@@ -306,6 +395,16 @@ final class WelchmanMetalEngine {
             encoder.setBytes(table, length: table.count, index: 5 + offset)
         }
         encoder.setBuffer(buffers[slot], offset: 0, index: 17)
+
+        var maxPlugs = UInt32(max(0, sieve.maxPlugs))
+        var exactPlugs = UInt32(max(0, sieve.exactPlugs))
+        // Never skip at ring A: that pass is the one every other ring defers to.
+        var skipCovered = UInt32(
+            sieve.skipMiddleRingCovered && shell.rings.2 != 0 ? 1 : 0
+        )
+        encoder.setBytes(&maxPlugs, length: MemoryLayout<UInt32>.size, index: 18)
+        encoder.setBytes(&exactPlugs, length: MemoryLayout<UInt32>.size, index: 19)
+        encoder.setBytes(&skipCovered, length: MemoryLayout<UInt32>.size, index: 20)
 
         let width = min(pipeline.maxTotalThreadsPerThreadgroup, 256)
         encoder.dispatchThreads(

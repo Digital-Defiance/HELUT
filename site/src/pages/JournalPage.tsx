@@ -70,7 +70,7 @@ export function JournalPage() {
             <li>
               <span className="mono">OPEN</span>
               <span>
-                <strong>Still untested or incomplete:</strong> catalog right-ring sweep parked at originalIndex 417/2513 (last <code>VVVUUUDREINULEINSVI@25</code>; resume <code>--bombe-from 418</code>); Thetis-register rings from menu 14; any middle ring other than A (~8–15% of keys); near-shell walk around sister keys. Sister message P1030681 needed heavy degarbling—exact Welchman clean negatives do not rule out a mis-transcribed P1030680. Soft-band near-misses quarantine into Stochastic seeds. More GPU on inventing letters does not invent the plaintext—boolean coverage plus garble-aware escalation does.
+                <strong>Still untested or incomplete:</strong> catalog right-ring sweep parked at originalIndex 417/2513 (last <code>VVVUUUDREINULEINSVI@25</code>; resume <code>--bombe-from 418</code>); Thetis-register rings from menu 14; any middle ring other than A (~8–15% of keys — the arm is now built and graded end-to-end, with the blind control breaking at full middle × right coverage in 4,307 s, but it has produced no P1030680 verdict); the long-menu arms whose negatives are incomplete by up to 5.56% because a kernel table cap reported lanes eliminated without testing them — the Übung body arm was contaminated on all 40 placements and has now been re-run and re-confirmed (40/40 dead, 0 stops); the curated top-30 on 20 of 30 is re-running; the catalog on 300 of 2,513 is not; near-shell walk around sister keys. Sister message P1030681 needed heavy degarbling—exact Welchman clean negatives do not rule out a mis-transcribed P1030680. Soft-band near-misses quarantine into Stochastic seeds. More GPU on inventing letters does not invent the plaintext—boolean coverage plus garble-aware escalation does.
               </span>
             </li>
           </ul>
@@ -236,6 +236,18 @@ export function JournalPage() {
                   My sweep printed <em>"turnover phase fully covered, elimination is complete"</em> whenever I swept the ring settings. That was too strong. Sweeping the fast rotor's ring covers every phase of <em>its</em> turnover, but I keep the middle ring pinned at A, and that shortcut only holds while the middle rotor doesn't click over inside the crib itself. No run I have ever launched has tested any other middle ring. Somewhere between 8% and 15% of all possible keys have never been on the board at all.
                 </p>
                 <p>
+                  A third overclaim surfaced later, and it is worse than the other two because it wore the language of a result. The Metal kernel builds one rotor-path table per distinct slow-wheel state a menu span reaches, and it capped that at four. When a lane needed a fifth, the kernel wrote a zero survivor mask — which my driver reads as <em>eliminated</em> — for a lane it had never actually tested. A cap on a lookup table was printing clean negatives.
+                </p>
+                <p>
+                  I bounded it with stepping arithmetic rather than guesses: every span in every fixture I have ever run, all 56 naval middle/right rotor pairs, all 676 windows, no GPU required. It never fires at or below 25 letters. At 28 letters it silently eliminates 0.29% of lanes, at 30 letters 1.14%, and at 40 letters <strong>5.56%</strong>.
+                </p>
+                <p>
+                  The damage is not spread thinly — it sits on exactly the arms I curated for long, strong menus. My Übung body-anchor arm is forty menus of forty letters each, and its result was "0 raw stops, every menu dead at the board," which is what let me close the Übung-push hypothesis. <strong>All forty were contaminated.</strong> That negative was unearned as I recorded it. The cap is now eight and overflow reports <em>undecided</em>, which the host re-tests in full on an engine that has no such limit.
+                </p>
+                <p>
+                  So I re-ran it. Forty of forty still dead at the board, zero raw stops across 6.39×10<sup>11</sup> settings, five and a quarter hours. The lanes the old cap had been quietly discarding got tested and died too — the bug was not hiding a key here, and the Übung-push hypothesis stays closed, this time on evidence. My curated top-30 sweep is contaminated on 20 of its 30 placements and is re-running next; the main catalog on 300 of 2,513. The Regenbogen queue is clean. Everything at 16 to 25 letters — the large majority of the catalog, and all of the Thetis-register work — was never affected and stands.
+                </p>
+                <p>
                   Worse, I went back through the terminal history and found my fuzzed turnover sweep had been killed at menu 18 of 40—I had been treating half an arm as a finished negative. I finished that arm properly (Phase 10: clean). And of my 2,513 catalog placements, only 886 were ever long enough to test—and of those 886, exactly <strong>54</strong> have had genuine ring coverage. My "clean negative on the full catalog" was a negative across less than a fifth of the ring space.
                 </p>
                 <p>
@@ -383,7 +395,7 @@ export function JournalPage() {
             <div className="kicker">Honest Scope</div>
             <h2>The Evidence Room</h2>
             <p>
-              I know the Potsdam 1 May keys decrypt other U-534 traffic, but not this message. The archival levers are spent. My engine is graded rather than trusted—a blind Welchman control breaks a known key through the full campaign in 361 seconds, and the Stochastic Bombe’s GPU KPA path recovers that same control when the template is known. Training, collapse, weather, meta-evolve, and shell-RIGA all produced zero survivors under an 80%∩noise+10% gate. Exact catalog and fuzzed arms under rings AAAA are clean negatives; so is the ≥16 UEBUNG head. Soft UEBUNG quarantine escalate is also a clean negative. Regenbogen/Hannibal cribs are not a BREAK—anchor dead under rings; scuttle and Hela soft-band escalate to zero; own-orders and filler AAAA stay below soft. Sister traffic P1030681 needed degarbling, so exact clean negatives may still miss a mis-read ciphertext—soft-band Welchman stops quarantine into Stochastic seeds, graded on both synthetic and historical garbles. TensorLUT is a parallel compiler track, not a Thetis crib. What remains on the menu path: catalog right-ring coverage parked at originalIndex 417/2513 (resume <code>--bombe-from 418</code>), parked Thetis-register rings at 13/73, and no middle ring but A.
+              I know the Potsdam 1 May keys decrypt other U-534 traffic, but not this message. The archival levers are spent. My engine is graded rather than trusted—a blind Welchman control breaks a known key through the full campaign in 361 seconds, and the Stochastic Bombe’s GPU KPA path recovers that same control when the template is known. Training, collapse, weather, meta-evolve, and shell-RIGA all produced zero survivors under an 80%∩noise+10% gate. Exact catalog and fuzzed arms under rings AAAA are clean negatives; so is the ≥16 UEBUNG head. Soft UEBUNG quarantine escalate is also a clean negative. Regenbogen/Hannibal cribs are not a BREAK—anchor dead under rings; scuttle and Hela soft-band escalate to zero; own-orders and filler AAAA stay below soft. Sister traffic P1030681 needed degarbling, so exact clean negatives may still miss a mis-read ciphertext—soft-band Welchman stops quarantine into Stochastic seeds, graded on both synthetic and historical garbles. TensorLUT is a parallel compiler track, not a Thetis crib. What remains on the menu path: catalog right-ring coverage parked at originalIndex 417/2513 (resume <code>--bombe-from 418</code>), parked Thetis-register rings at 13/73, no middle ring but A against this message, and 61 long-menu spans whose negatives a kernel table cap left incomplete.
             </p>
           </div>
           <ul className="stack-list">
@@ -494,11 +506,20 @@ export function JournalPage() {
             </article>
 
             <article className="tl-item">
-              <div className="when">8 — About 2.5 days after live candidates</div>
+              <div className="when">8 — Built and graded; not yet run</div>
               <h3>Unpin the middle ring on the best menus.</h3>
               <div className="prose">
                 <p>
-                  The 8–15% of keys my audit says have never been on the board. Twenty-six times the cost, so it only earns its slot on menus that ever live under right-ring coverage.
+                  The 8–15% of keys my audit says have never been on the board. It is no longer twenty-six times the cost. Notch tests depend on window position, not on the ring, so a lane whose middle wheel never reaches its notch — and whose ring-A partner at window <em>m</em>−ρ never does either — is the <em>same machine</em> as that partner. Ring A runs in full, rings B–Z run only their notch-hitting lanes, and the union is complete coverage rather than a sample.
+                </p>
+                <p>
+                  I graded that equivalence before trusting it, because a coverage shortcut that quietly drops keys is the same bug as the one below. On the validated host board, 2.4 million claimed-covered pairs, zero verdict mismatches. Through the Metal kernel, with roughly 5,600–6,900 survivors per ring actually discarded, every discarded verdict is carried identically by its ring-A partner.
+                </p>
+                <p>
+                  Then I ran the blind control at <em>full</em> middle × right ring coverage — 908,544 shells, 4.15×10<sup>11</sup> settings, the first run in this campaign with no residual ring gap anywhere. It breaks: same key, all ten plugs, IC 0.064, tail −2.848, in 4,307 seconds at 96.4M settings/s. Twenty-six times the search space for 12.2× the time, because about 70% of lanes exit after the trail test. Raw stops went from 2 to 4, which is the mechanism working rather than a fault — unpin the middle ring and the true machine has several ring-equivalent representations for the sweep to find.
+                </p>
+                <p>
+                  <strong>Implemented is not run.</strong> As of this entry the arm has produced no P1030680 verdict at all. The measured basis is ~72 minutes per placement, so twenty strong placements is about a day.
                 </p>
               </div>
             </article>

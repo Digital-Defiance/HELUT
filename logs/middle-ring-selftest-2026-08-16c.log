@@ -1,0 +1,41 @@
+=== Middle-ring covered-lane skip — coverage self-test ===
+menu VVVUUUVIRSOBENNULEINSXXMITU@0 edges=27 letters=21 loops=8 central=U
+claim: skipped lanes at middle ring ρ are the same machine as their ring-A
+partner at window m−ρ, so the rings-AAAA pass already decided them.
+checking every claimed-covered pair on the validated host board.
+Greek sample ["A", "H", "N", "T"], all 26³ (L,M,R) per ring, rings B–Z, right ring A.
+
+IV-III-VIII (1-notch middle)
+  pairs claimed covered : 1368224 of 1757600 lanes (77.8%)
+  lanes needing a test  : 389376 (22.2%)
+  host verdict mismatches: 0
+  sweep cost vs rings-AAAA: 6.5x (flat sweep would be 26x)
+  PASS — every skipped lane is decided identically by its ring-A partner
+
+I-VI-VII (2-notch middle)
+  pairs claimed covered : 1027520 of 1757600 lanes (58.5%)
+  lanes needing a test  : 730080 (41.5%)
+  host verdict mismatches: 0
+  sweep cost vs rings-AAAA: 11.4x (flat sweep would be 26x)
+  PASS — every skipped lane is decided identically by its ring-A partner
+
+host predicate PASS — covered-lane skip is sound on both notch regimes; the union of ring A (full) and rings B–Z (non-covered lanes) is complete.
+
+=== Same claim, through the Metal kernel ===
+  menu VVVUUUVIRS@0 edges=10 letters=12 loops=0 central=V
+  IV-III-VIII (1-notch middle)
+    ring B: 409656/456976 lanes skipped (89.6%), survivors   7564 of which   6861 discarded
+             violations — covered-but-kept 0, skipped-but-not-covered 0, ring-A partner disagrees 0
+    ring F: 397488/456976 lanes skipped (87.0%), survivors   7607 of which   6680 discarded
+             violations — covered-but-kept 0, skipped-but-not-covered 0, ring-A partner disagrees 0
+    ring N: 397488/456976 lanes skipped (87.0%), survivors   7621 of which   6672 discarded
+             violations — covered-but-kept 0, skipped-but-not-covered 0, ring-A partner disagrees 0
+  I-VI-VII (2-notch middle)
+    ring B: 362336/456976 lanes skipped (79.3%), survivors   7590 of which   5999 discarded
+             violations — covered-but-kept 0, skipped-but-not-covered 0, ring-A partner disagrees 0
+    ring F: 338000/456976 lanes skipped (74.0%), survivors   7562 of which   5608 discarded
+             violations — covered-but-kept 0, skipped-but-not-covered 0, ring-A partner disagrees 0
+    ring N: 397488/456976 lanes skipped (87.0%), survivors   7621 of which   6577 discarded
+             violations — covered-but-kept 0, skipped-but-not-covered 0, ring-A partner disagrees 0
+PASS — kernel skip drops only lanes whose ring-A partner carries the same verdict, and never alters a verdict it keeps.
+EXIT=0

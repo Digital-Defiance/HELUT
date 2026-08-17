@@ -1,0 +1,20 @@
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+rings AAAA: exhaustive over turnover-free spans, which is 0/26 (0%) of keys at 28 letters. --bombe-ring-sweep covers the rest at 26x cost.
+ETA floor (~50M/s): 2.0 min
+
+quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → logs/quarantine_candidates.json
+  [1/10·1] NFUUUFLOTTILLEVONVONZWOECHSY@10 edges=28 letters=19 loops=11 central=O dead at the board                        12s  53.3M/s ETA   1.7 min
+  [2/10·2] UUFLOTTILLEXEINSKKTTTFFFEINY@12 edges=28 letters=18 loops=11 central=F dead at the board                        24s  51.4M/s ETA   1.6 min
+  [3/10·3] UUFLOTTILLEXEINSKKTTTFFFEINY@13 edges=28 letters=18 loops=11 central=F dead at the board                        37s  49.5M/s ETA   1.4 min
+  [4/10·4] YUUFLOTTILLEHACHRXFXDXUUUAUS@13 edges=28 letters=19 loops=11 central=U dead at the board                        50s  49.1M/s ETA   1.3 min
+  [5/10·5] ITUUUUUVIIRSIBENNULZWOYVIRS@0 edges=27 letters=21 loops=11 central=U dead at the board                        60s  50.8M/s ETA   1.0 min
+  [6/10·6] FXUUUFLOTTILLEYFUNFXUUUFLOT@10 edges=27 letters=18 loops=11 central=U dead at the board                        72s  50.9M/s ETA   0.8 min
+  [7/10·7] UUFLOTTILLEYVIERXUUUFLOTTXV@10 edges=27 letters=17 loops=11 central=U dead at the board                        84s  51.4M/s ETA   0.6 min
+  [8/10·8] UUFLOTTILLEYVIERXUUUFLOTTXV@14 edges=27 letters=17 loops=11 central=L dead at the board                        95s  51.8M/s ETA   0.4 min
+  [9/10·9] FXUUUFLOTTILLEYVIERXUUUFLOT@11 edges=27 letters=17 loops=11 central=U dead at the board                       108s  51.2M/s ETA   0.2 min
+  [10/10·10] FXUUUFLOTTILLEYVIERXUUUFLOT@13 edges=27 letters=17 loops=11 central=U dead at the board                       119s  51.6M/s ETA   0.0 min
+
+total raw stops: 0 over 6141757440 settings (51.6M/s mean)
+survived the 10-plug sieve: 0
+no setting survived — every runnable menu contradicted everywhere it was tried
+quarantine: 0 soft-band near-misses (solo pass complete)

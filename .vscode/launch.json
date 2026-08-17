@@ -99,6 +99,26 @@
             "target": "helut-compile",
             "configuration": "release",
             "preLaunchTask": "swift: Build Release helut-compile"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:HELUT}",
+            "name": "Debug helut-radio",
+            "target": "helut-radio",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug helut-radio"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:HELUT}",
+            "name": "Release helut-radio",
+            "target": "helut-radio",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release helut-radio"
         }
     ]
 }

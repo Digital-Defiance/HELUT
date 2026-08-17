@@ -1,0 +1,53 @@
+=== Welchman diagonal board — known-key rehearsal (P1030684) ===
+wheel order IV-III-VIII, Greek γ, UKW B, rings AACU
+true message key VYAA, 10 plugs CH EJ NV OU TY LG SZ PK DI QB
+
+Each row sweeps the full 26⁴ position space for the true wheel order.
+'survivors' counts settings the menu could not kill — the sweep's output volume.
+
+crib                       len edges loops | truth | stecker        | survivors/26⁴ | proj. full space
+----------------------------------------------------------------------------------------------------------------------
+VVVUUU                       6     6     0 | kept   | 7/26 correct |        456953 | 6.14e+08
+VVVUUUVI                     8     8     0 | kept   | 15/26 correct |         77502 | 1.04e+08
+VVVUUUVIR                    9     9     0 | kept   | 17/26 correct |         18824 | 2.53e+07
+VVVUUUVIRS                  10    10     0 | kept   | 17/26 correct |          7637 | 1.03e+07
+VVVUUUVIRSOB                12    12     0 | kept   | 19/26 correct |           314 | 4.22e+05
+VVVUUUVIRSOBENNU            16    16     0 | kept   | 24/26 correct |             1 | 1.34e+03
+VVVUUUVIRSOBENNULEIN        20    20     3 | kept   | 24/26 correct |             1 | 1.34e+03
+VVVUUUVIRSOBENNULEINSXXMI   25    25     7 | kept   | 25/26 correct |             1 | 1.34e+03
+
+Projection assumes the per-shell survivor rate holds across all 1344 shells.
+A survivor is a stop, not a break: each still needs its plaintext read.
+
+=== GPU cross-check (must agree with the host engine exactly) ===
+  menu       VVVUUUVIRSOB@0 edges=12 letters=15 loops=0 central=V
+  GPU      314 survivors in 0.03s (17.60M settings/s)
+  host     314 survivors in 2.22s (0.21M settings/s)
+  lane mismatches: 0
+  true setting VYAA survives on GPU: true
+  AGREEMENT EXACT — GPU is 86x the host sweep rate
+
+=== Discriminator rehearsal (18-letter menu, known key) ===
+  menu VVVUUUVIRSOBENNULE@0 edges=18 letters=18 loops=2 central=U
+  survivors at the true shell: 1
+  crib reproduced exactly by 1/1 after completion
+  German -2.847 / noise -5.382 / threshold -3.600 / IC floor 0.055
+   1. VYAA IC 0.064 tail   -2.889  crib ok   VVVUUUVIRSOBENNULEINSXXMITUUUVIRSIBENNUL <-- TRUE KEY
+  true key ranked #1 of 1
+  PASS — the discriminator picks the real message out of its ghosts
+
+******************************************************************************
+***  BREAK FOUND  ***
+******************************************************************************
+  menu        VVVUUUVIRSOBENNULE@0 edges=18 letters=18 loops=2 central=U
+  UKW         B
+  Greek       gamma
+  wheel order IV-III-VIII
+  rings       AACU
+  position    VYAA
+  stecker     BQ CH DI EJ GL KP NV OU SZ TY (10 pairs)
+  IC          0.064 (floor 0.055)
+  tail        -2.889 vs German -2.847 / noise -5.382
+
+  VVVUUUVIRSOBENNULEINSXXMITUUUVIRSIBENNULZWOYVIRSIBENNULDREIYZWODREISECHSEINSYZWODREIDREIACHTEINSDREIOITNACHWZSTENPASSIRT
+******************************************************************************

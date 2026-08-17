@@ -1,0 +1,30 @@
+######## exact-plugs=0 ########
+  [1/7·1] UEBUNGXUEBUNG@0 edges=13 letters=13 loops=3 central=E    3220 stops → 373 physical, best IC 0.049 tail -4.270      12s  50.9M/s ETA   1.2 min
+  [2/7·2] XUEBUNGXUEBUNG@0 edges=14 letters=13 loops=2 central=E      90 stops → 23 physical, best IC 0.047 tail -4.329      25s  48.4M/s ETA   1.1 min
+  [3/7·3] UEBUNGXUEBUNG@1 edges=13 letters=13 loops=2 central=E  105271 stops → 478 physical, best IC 0.044 tail -4.373      38s  48.0M/s ETA   0.9 min
+  [4/7·4] UEBUNGUEBUNG@0 edges=12 letters=12 loops=1 central=U   21038 stops → 1531 physical, best IC 0.053 tail -4.995      47s  51.8M/s ETA   0.6 min
+  [5/7·5] UEBUNGUEBUNG@1 edges=12 letters=12 loops=1 central=E   21328 stops → 1340 physical, best IC 0.046 tail -4.483      60s  51.2M/s ETA   0.4 min
+  [6/7·6] UEBUNGSMELDUNG@0 edges=14 letters=16 loops=0 central=E     931 stops → 41 physical, best IC 0.040 tail -4.886      77s  48.0M/s ETA   0.2 min
+  [7/7·7] UEBUNGSMELDUNG@1 edges=14 letters=16 loops=0 central=E  695556 stops → 45 physical, best IC 0.046 tail -5.074      93s  46.4M/s ETA   0.0 min
+
+total raw stops: 847434 over 4299230208 settings (46.4M/s mean)
+survived the 10-plug sieve: 3831
+best physical candidate: IC 0.049 tail -4.270 (IC floor 0.055 / threshold -3.600) — below the bar, so no break claimed
+  UEBUNGXUEBUNG@0 edges=13 letters=13 loops=3 central=E
+  UKW B Greek gamma WO I-IV-VI pos HZBR
+  UEBUNGXUEBUNGLTDEBTAXFOFSWURZUKZUSEIPDRQCSGPKRSYEVSGSKEEIEPQDPXYDSEFTFCB
+######## exact-plugs=10 ########
+  [1/7·1] UEBUNGXUEBUNG@0 edges=13 letters=13 loops=3 central=E    3220 stops → 373 physical, best IC 0.049 tail -4.270      12s  50.7M/s ETA   1.2 min
+  [2/7·2] XUEBUNGXUEBUNG@0 edges=14 letters=13 loops=2 central=E      90 stops → 23 physical, best IC 0.047 tail -4.329      26s  48.0M/s ETA   1.1 min
+  [3/7·3] UEBUNGXUEBUNG@1 edges=13 letters=13 loops=2 central=E  105269 stops → 478 physical, best IC 0.044 tail -4.373      39s  47.0M/s ETA   0.9 min
+  [4/7·4] UEBUNGUEBUNG@0 edges=12 letters=12 loops=1 central=U   21035 stops → 1531 physical, best IC 0.053 tail -4.995      49s  50.6M/s ETA   0.6 min
+  [5/7·5] UEBUNGUEBUNG@1 edges=12 letters=12 loops=1 central=E   21323 stops → 1339 physical, best IC 0.046 tail -4.483      62s  49.5M/s ETA   0.4 min
+  [6/7·6] UEBUNGSMELDUNG@0 edges=14 letters=16 loops=0 central=E     928 stops → 40 physical, best IC 0.040 tail -4.886      80s  46.1M/s ETA   0.2 min
+  [7/7·7] UEBUNGSMELDUNG@1 edges=14 letters=16 loops=0 central=E  695549 stops → 45 physical, best IC 0.046 tail -5.074      97s  44.1M/s ETA   0.0 min
+
+total raw stops: 847414 over 4299230208 settings (44.1M/s mean)
+survived the 10-plug sieve: 3829
+best physical candidate: IC 0.049 tail -4.270 (IC floor 0.055 / threshold -3.600) — below the bar, so no break claimed
+  UEBUNGXUEBUNG@0 edges=13 letters=13 loops=3 central=E
+  UKW B Greek gamma WO I-IV-VI pos HZBR
+  UEBUNGXUEBUNGLTDEBTAXFOFSWURZUKZUSEIPDRQCSGPKRSYEVSGSKEEIEPQDPXYDSEFTFCB

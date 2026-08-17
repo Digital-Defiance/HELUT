@@ -217,11 +217,31 @@ public enum HelutBombeCLI {
         config.minCribLength = intFlag("--bombe-min-crib") ?? config.minCribLength
         config.resumeFrom = intFlag("--bombe-from") ?? config.resumeFrom
         config.sweepRightRing = CommandLine.arguments.contains("--bombe-ring-sweep")
+        config.sweepMiddleRing = CommandLine.arguments.contains("--bombe-middle-ring")
+        config.exactPlugs = intFlag("--bombe-exact-plugs") ?? config.exactPlugs
         config.fixturePath = stringFlag("--bombe-fixture") ?? config.fixturePath
+        // These three are documented in BREAK_P1030680.md but were never parsed here, so
+        // every run silently used the defaults — including the Phase 22 arm whose log
+        // claims a soft tail of −4.3. Wired now; the archived margin is not reproducible
+        // without them.
+        if CommandLine.arguments.contains("--bombe-no-quarantine") {
+            config.quarantinePath = nil
+        } else if let quarantine = stringFlag("--bombe-quarantine") {
+            config.quarantinePath = quarantine
+        }
+        config.quarantineSoftTailMargin =
+            doubleFlag("--bombe-quarantine-tail-margin") ?? config.quarantineSoftTailMargin
+        config.quarantineSoftICFloor =
+            doubleFlag("--bombe-quarantine-ic-floor") ?? config.quarantineSoftICFloor
         if let subspace = stringFlag("--subspace") {
             config.wheelOrders = M4ThetisAttack.subspace(named: subspace).wheelOrders
         }
         runWelchmanBombe(config: config)
+        exit(0)
+    }
+
+    if CommandLine.arguments.contains("--bombe-middle-ring-selftest") {
+        runMiddleRingCoverageSelfTest()
         exit(0)
     }
 

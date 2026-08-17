@@ -335,16 +335,34 @@ package struct WelchmanBombe: Sendable {
 
     // MARK: Setting test
 
+    /// Every hypothesis for the central letter: the full 26-bit seed space.
+    package static let allSeeds: UInt32 = 0x03FF_FFFF
+
     /// Test one rotor setting against one menu.
     ///
     /// Every one of the 26 hypotheses for the central letter is tried. If all 26
     /// contradict, the setting is impossible — not unlikely, impossible. Any that
     /// survive are returned with the stecker the menu forces.
     package func test(menu: BombeMenu, start: (Int, Int, Int, Int)) -> [BombeStop] {
+        test(menu: menu, start: start, seedMask: Self.allSeeds)
+    }
+
+    /// Same test, restricted to the hypotheses in `seedMask`.
+    ///
+    /// The GPU already decides all 26 seeds and reports them as a 26-bit mask, so the
+    /// host has no reason to re-run the closures the GPU already killed. Passing the
+    /// mask back is worth up to 26x on the drain path, where a surviving lane usually
+    /// carries one or two live seeds. `allSeeds` reproduces the original behaviour.
+    package func test(
+        menu: BombeMenu,
+        start: (Int, Int, Int, Int),
+        seedMask: UInt32
+    ) -> [BombeStop] {
+        guard seedMask != 0 else { return [] }
         let tables = scramblers(menu: menu, start: start)
         var stops: [BombeStop] = []
 
-        for value in 0..<26 {
+        for value in 0..<26 where seedMask & (UInt32(1) << UInt32(value)) != 0 {
             guard let live = Self.propagate(
                 menu: menu,
                 scramblers: tables,

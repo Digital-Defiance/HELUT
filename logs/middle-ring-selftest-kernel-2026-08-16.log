@@ -1,0 +1,30 @@
+=== Middle-ring covered-lane skip — coverage self-test ===
+menu VVVUUUVIRSOBENNULEINSXXMITU@0 edges=27 letters=21 loops=8 central=U
+claim: skipped lanes at middle ring ρ are the same machine as their ring-A
+partner at window m−ρ, so the rings-AAAA pass already decided them.
+checking every claimed-covered pair on the validated host board.
+Greek sample ["A", "H", "N", "T"], all 26³ (L,M,R) per ring, rings B–Z, right ring A.
+
+IV-III-VIII (1-notch middle)
+  pairs claimed covered : 1368224 of 1757600 lanes (77.8%)
+  lanes needing a test  : 389376 (22.2%)
+  host verdict mismatches: 0
+  sweep cost vs rings-AAAA: 6.5x (flat sweep would be 26x)
+  PASS — every skipped lane is decided identically by its ring-A partner
+
+I-VI-VII (2-notch middle)
+  pairs claimed covered : 1027520 of 1757600 lanes (58.5%)
+  lanes needing a test  : 730080 (41.5%)
+  host verdict mismatches: 0
+  sweep cost vs rings-AAAA: 11.4x (flat sweep would be 26x)
+  PASS — every skipped lane is decided identically by its ring-A partner
+
+host predicate PASS — covered-lane skip is sound on both notch regimes; the union of ring A (full) and rings B–Z (non-covered lanes) is complete.
+
+=== Same claim, through the Metal kernel ===
+  I-VI-VII (2-notch middle), rings B/F/N (middle), right ring A
+  ring B: 0 survivors kept, 0 dropped | mask changed on a kept lane: 0 | dropped-but-not-covered: 0 | dropped-and-ring-A-disagrees: 0
+  ring F: 0 survivors kept, 0 dropped | mask changed on a kept lane: 0 | dropped-but-not-covered: 0 | dropped-and-ring-A-disagrees: 0
+  ring N: 0 survivors kept, 0 dropped | mask changed on a kept lane: 0 | dropped-but-not-covered: 0 | dropped-and-ring-A-disagrees: 0
+PASS — kernel skip drops only lanes its ring-A partner decides identically.
+EXIT=0
