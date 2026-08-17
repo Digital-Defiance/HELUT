@@ -82,6 +82,125 @@ def worst_case_for_span(offset: int, length: int) -> tuple[int, int, str, str, i
     return worst, worst_lane[1], worst_pair[0], worst_pair[1], overflow, combos
 
 
+def menu_shape(crib: str, offset: int, ciphertext: str) -> tuple[int, int, int] | None:
+    """(loops, edges, vertices) for one placement, or None if self-encipherment kills it.
+
+    Mirrors `BombeMenuBuilder.menu` in `WelchmanDiagonalBoard.swift`: the cyclomatic number
+    of the letter graph is what makes a menu bite, so it is the right thing to rank by.
+    """
+    edges: list[tuple[str, str]] = []
+    present: set[str] = set()
+    for index, plain in enumerate(crib):
+        cipher = ciphertext[offset + index]
+        if plain == cipher:
+            return None  # Enigma never enciphers a letter to itself
+        edges.append((plain, cipher))
+        present.add(plain)
+        present.add(cipher)
+
+    parent = {letter: letter for letter in present}
+
+    def find(x: str) -> str:
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+
+    for a, b in edges:
+        ra, rb = find(a), find(b)
+        if ra != rb:
+            parent[ra] = rb
+    roots = {find(letter) for letter in present}
+    return len(edges) - len(present) + len(roots), len(edges), len(present)
+
+
+def _family(text: str) -> str:
+    """Crude source-phrase family key.
+
+    The catalog's long cribs are sliding windows of a few long mined phrases, so ranking
+    purely by loops returns twenty-four alignments of *one* hypothesis. Folding windows of
+    the same phrase into a family lets the selector spend its budget on distinct
+    hypotheses instead. Keyed on the longest shared core we can cheaply compute: the
+    sorted letter multiset is too lossy, so use a mid-string anchor.
+    """
+    return text[len(text) // 3: len(text) // 3 + 12]
+
+
+def emit_strongest(payload: dict, contaminated: set[tuple[int, int]], out: Path,
+                   top: int, per_family: int, include_clean: int) -> int:
+    """Emit a strong *and diverse* fixture for full middle x right ring coverage.
+
+    Two jobs in one pass. The contaminated placements are the long menus, and long menus
+    are the highest-loop menus in the catalog (19-20 against the blind control's 8), so
+    repairing the old cap's damage and closing the middle-ring gap want the same cribs.
+    But only a couple of mined phrases are 40 letters long, so an unrestricted loop
+    ranking tests one hypothesis at two dozen alignments. `per_family` caps alignments per
+    source phrase, and `include_clean` mixes in high-loop *uncontaminated* placements so
+    the middle-ring arm — the only key space no arm has ever touched — is spent on several
+    hypotheses rather than one.
+    """
+    ciphertext = payload["ciphertext"]
+    dirty: list[tuple[int, int, int, str, int]] = []
+    clean: list[tuple[int, int, int, str, int]] = []
+    for crib in payload["cribs"]:
+        text = crib["text"]
+        for offset in crib["offsets"]:
+            shape = menu_shape(text, offset, ciphertext)
+            if shape is None:
+                continue
+            loops, edges, _ = shape
+            row = (loops, edges, len(text), text, offset)
+            if (offset, len(text)) in contaminated:
+                dirty.append(row)
+            else:
+                clean.append(row)
+
+    def take(rows: list[tuple[int, int, int, str, int]], budget: int):
+        rows.sort(key=lambda r: (-r[0], -r[1], -r[2]))
+        seen: dict[str, int] = {}
+        out_rows = []
+        for row in rows:
+            key = _family(row[3])
+            if seen.get(key, 0) >= per_family:
+                continue
+            seen[key] = seen.get(key, 0) + 1
+            out_rows.append(row)
+            if len(out_rows) >= budget:
+                break
+        return out_rows
+
+    chosen_dirty = take(dirty, max(0, top - include_clean))
+    chosen_clean = take(clean, include_clean)
+    chosen = chosen_dirty + chosen_clean
+
+    by_text: dict[str, list[int]] = {}
+    for _, _, _, text, offset in chosen:
+        by_text.setdefault(text, []).append(offset)
+    out.write_text(json.dumps({
+        "target": payload.get("target", "P1030680"),
+        "ciphertext": ciphertext,
+        "note": "Strongest + diverse placements for FULL middle x right ring coverage. "
+                "Part one: contaminated spans that could exceed the old Metal MAX_UPPER=4 "
+                "cap, which reported such lanes ELIMINATED without testing them. Part two: "
+                "high-loop uncontaminated placements, so the middle-ring arm (the only key "
+                "space no arm has ever tested) is spent on several hypotheses rather than "
+                "many alignments of one. Alignments per source phrase are capped. Emitted "
+                "by Scripts/max_upper_audit.py --emit-top.",
+        "cribs": [{"text": t, "messages": 0, "offsets": sorted(o)}
+                  for t, o in by_text.items()],
+    }, indent=2) + "\n", encoding="utf-8")
+
+    print()
+    print(f"wrote {out}: {len(by_text)} cribs, {len(chosen)} placements "
+          f"({len(chosen_dirty)} contaminated + {len(chosen_clean)} clean), "
+          f"max {per_family} alignment(s) per source phrase")
+    print(f"{'loops':>5} {'edges':>5} {'len':>4} {'cap?':>5}  placement")
+    for loops, edges, length, text, offset in chosen:
+        tag = "DIRTY" if (offset, length) in contaminated else "clean"
+        print(f"{loops:>5} {edges:>5} {length:>4} {tag:>5}  {text}@{offset}")
+    return len(chosen)
+
+
 def emit_fixture(payload: dict, contaminated: set[tuple[int, int]], out: Path) -> int:
     """Write a menu fixture holding only the contaminated (crib, offset) placements.
 
@@ -117,12 +236,23 @@ def emit_fixture(payload: dict, contaminated: set[tuple[int, int]], out: Path) -
 
 
 def main() -> int:
-    args = [a for a in sys.argv[1:] if not a.startswith("--")]
-    emit = None
-    if "--emit" in sys.argv:
-        index = sys.argv.index("--emit")
-        if index + 1 < len(sys.argv):
-            emit = Path(sys.argv[index + 1])
+    def flag(name: str) -> str | None:
+        if name in sys.argv:
+            index = sys.argv.index(name)
+            if index + 1 < len(sys.argv):
+                return sys.argv[index + 1]
+        return None
+
+    emit_all = flag("--emit")
+    emit_top_path = flag("--emit-top")
+    top_count = int(flag("--top") or 24)
+    per_family = int(flag("--per-family") or 2)
+    include_clean = int(flag("--include-clean") or 0)
+    consumed = {emit_all, emit_top_path, flag("--top"),
+                flag("--per-family"), flag("--include-clean")}
+    args = [a for a in sys.argv[1:]
+            if not a.startswith("--") and a not in consumed]
+    emit = Path(emit_all) if emit_all else None
     path = Path(args[0] if args else "Fixtures/p1030680_menus.json")
     payload = json.loads(path.read_text())
     ciphertext_len = len(payload["ciphertext"])
@@ -191,8 +321,12 @@ def main() -> int:
     if len(over) > 12:
         print(f"  ... {len(over) - 12} more")
 
+    contaminated = {(o, l) for o, l, *_ in over}
     if emit is not None:
-        emit_fixture(payload, {(o, l) for o, l, *_ in over}, emit)
+        emit_fixture(payload, contaminated, emit)
+    if emit_top_path is not None:
+        emit_strongest(payload, contaminated, Path(emit_top_path),
+                       top_count, per_family, include_clean)
     return 1
 
 

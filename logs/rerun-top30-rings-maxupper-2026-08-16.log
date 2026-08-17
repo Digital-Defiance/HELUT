@@ -50,3 +50,19 @@ quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → 
   [22/30·22] OVIERUNDUUUZWOFUNFDR@0 edges=20 letters=20 loops=3 central=U dead at the board                      9074s  38.7M/s ETA  55.0 min
   [23/30·23] VVVUUUDREINULEINSVI@0 edges=19 letters=18 loops=3 central=E dead at the board                      9401s  39.1M/s ETA  47.7 min
   [24/30·24] UUUZWODREISECHSFUNF@0 edges=19 letters=20 loops=3 central=E dead at the board                      9651s  39.7M/s ETA  40.2 min
+  [25/30·25] UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 central=E      12 stops → 0 valid 10-plug completions    9913s  40.3M/s ETA  33.0 min
+  [26/30·26] TTTFFFEINSSIBENXX@0 edges=17 letters=15 loops=3 central=E dead at the board                     10199s  40.7M/s ETA  26.2 min
+  [27/30·27] FFFTTTBLEIBTBESE@0 edges=16 letters=15 loops=3 central=E      32 stops → 24 physical, best IC 0.041 tail -4.819   10465s  41.2M/s ETA  19.4 min
+  [28/30·28] FFFTTTEINSZWOZWOVI@0 edges=18 letters=18 loops=2 central=T dead at the board                     10753s  41.6M/s ETA  12.8 min
+  [29/30·29] XUUUFLOTTXVVVUUU@0 edges=16 letters=16 loops=2 central=U      29 stops → 11 physical, best IC 0.043 tail -4.992   11101s  41.7M/s ETA   6.4 min
+  [30/30·30] BENNULZWOYVIRSIBEN@0 edges=18 letters=20 loops=1 central=E dead at the board                     11557s  41.5M/s ETA   0.0 min
+
+total raw stops: 73 over 479057080320 settings (41.5M/s mean)
+survived the 10-plug sieve: 35
+best physical candidate: IC 0.041 tail -4.819 (IC floor 0.055 / threshold -3.600) — below the bar, so no break claimed
+  FFFTTTBLEIBTBESE@0 edges=16 letters=15 loops=3 central=E
+  UKW C Greek gamma WO VIII-VII-II pos LMGW
+  FFFTTTBLEIBTBESELUFIZAEEYLEWIITKSHSUMJHBFCXWSYGXHRGWANJBDJHIZNUXPZNAFRDI
+quarantine: wrote 2 near-miss(es) → logs/quarantine_maxupper_rerun.json (solo pass complete)
+  escalate: --hybrid --hybrid-stochastic --hybrid-quarantine logs/quarantine_maxupper_rerun.json
+EXIT=0

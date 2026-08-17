@@ -1,0 +1,83 @@
+{
+  "candidates" : [
+    {
+      "cribExact" : true,
+      "effectiveTailScore" : -3.966169381907427,
+      "fullScore" : -4.689655595924959,
+      "greek" : "gamma",
+      "ic" : 0.045774647887323945,
+      "menuCrib" : "FFFTTTBLEIBTBESE",
+      "menuEdges" : 16,
+      "menuLoops" : 3,
+      "menuOffset" : 0,
+      "pairCount" : 10,
+      "plaintextPrefix" : "FFFTTTBLEIBTBESEVHDIGPEEYVELIITKSMSUYJHBDBXLXBZX",
+      "positions" : "LMGX",
+      "prefixEnd" : 32,
+      "prefixIC" : 0.07862903225806452,
+      "prefixTailScore" : -3.966169381907427,
+      "rings" : "AAAI",
+      "softBand" : "prefix@32 IC=0.079 tail=-3.966",
+      "source" : "Fixtures\/p1030680_top30_menus.json",
+      "steckerPairs" : [
+        "BX",
+        "CQ",
+        "DF",
+        "EY",
+        "GZ",
+        "HK",
+        "JU",
+        "LW",
+        "MT",
+        "NR"
+      ],
+      "tailScore" : -5.074880873757854,
+      "ukw" : "C",
+      "wheelOrder" : "VIII-VII-II"
+    },
+    {
+      "cribExact" : true,
+      "effectiveTailScore" : -3.9308024303400977,
+      "fullScore" : -4.410313689606214,
+      "greek" : "gamma",
+      "ic" : 0.04107981220657277,
+      "menuCrib" : "FFFTTTBLEIBTBESE",
+      "menuEdges" : 16,
+      "menuLoops" : 3,
+      "menuOffset" : 0,
+      "pairCount" : 9,
+      "plaintextPrefix" : "FFFTTTBLEIBTBESELUFIZAEEYLEWIITKSHSUMJHBFCXWSYGX",
+      "positions" : "LMGW",
+      "prefixEnd" : 32,
+      "prefixIC" : 0.08669354838709678,
+      "prefixTailScore" : -3.9308024303400977,
+      "rings" : "AAAH",
+      "softBand" : "prefix@32 IC=0.087 tail=-3.931",
+      "source" : "Fixtures\/p1030680_top30_menus.json",
+      "steckerPairs" : [
+        "BX",
+        "CQ",
+        "DF",
+        "EY",
+        "HK",
+        "JU",
+        "LV",
+        "MT",
+        "NR"
+      ],
+      "tailScore" : -4.818798407873044,
+      "ukw" : "C",
+      "wheelOrder" : "VIII-VII-II"
+    }
+  ],
+  "ciphertext" : "JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF",
+  "generatedAt" : "2026-08-17T19:09:18Z",
+  "softBar" : {
+    "softICFloor" : 0.048,
+    "softTailFloor" : -4,
+    "strictICFloor" : 0.055,
+    "strictTailFloor" : -3.6
+  },
+  "sourceFixture" : "Fixtures\/p1030680_top30_menus.json",
+  "target" : "P1030680"
+}
