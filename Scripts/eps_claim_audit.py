@@ -174,13 +174,26 @@ def main() -> int:
             continue
 
         if bounds:
+            # Does this row offer a robust configuration anywhere? A fragile bound
+            # sitting beside a robust sibling is a different situation from a
+            # fragile bound with nowhere to go: the first needs the row to name
+            # the robust setting, the second needs new science. C36 and C37 are
+            # the first kind -- native k=1 is thin, k=2 is comfortable.
+            best_room = max(
+                (headroom_from_bound(b) for b in bounds if b <= TARGET), default=0.0
+            )
+            has_robust = best_room >= FRAGILE_BELOW
             for b in sorted(bounds):
                 bound_count += 1
                 if b <= TARGET:
                     room = headroom_from_bound(b)
                     if room < FRAGILE_BELOW:
-                        fragile.append((rid, room))
-                        verdict = (f"clears, FRAGILE — {room:.2f}x σ̂ growth breaks it")
+                        if has_robust:
+                            verdict = (f"thin ({room:.2f}x) but row also has a "
+                                       f"{best_room:.2f}x setting")
+                        else:
+                            fragile.append((rid, room))
+                            verdict = f"clears, FRAGILE — {room:.2f}x σ̂ growth breaks it"
                     else:
                         verdict = "clears with margin"
                     print(f"  {rid:6s} {b:9.1f} {room:6.2f}x  {verdict}")

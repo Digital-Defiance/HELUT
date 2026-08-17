@@ -1,0 +1,4 @@
+HELUT noisy-BK identity residual (H4)
+  N=1024  trials=32  inject ∈ {0, σ=128.0}  kδ=14
+
+covering-b1 B=0: max|e|=0 σ̂=0.0 δ/2=14680064 decode_fail=0 decodable=true εlog2=-inf  (baseLog=1 ℓ=32)
