@@ -1061,3 +1061,109 @@ functionally.
 So C41 keeps its ε claim, restated honestly: *N*=512 meets ε≤2⁻⁶⁴ **at *k*≥2**,
 and not at native *k*=1. One order of stride buys a 4× improvement in `|log₂ε|`,
 and the shortfall at *k*=1 was only 1.27×.
+
+## 16. Fragility, the stride lever, and two claims the old bug was still hiding
+
+§15 established that every ε figure was *supported* by its sample size. That is a
+weaker property than it sounds, and this section is about the gap between "clears
+the bar" and "would still clear it tomorrow".
+
+### 16.1 A bound that clears is not necessarily a bound you can rely on
+
+`log₂ε ∝ −1/σ²`, so if σ̂ turns out `g`× larger than measured, `|point|` falls by
+`g²` and the bound survives only while `|point|/g² ≥ slack(n)·|target|`. Working
+that through, and using `bound = point/slack(n)`, the slack cancels:
+
+    σ̂ headroom = √(|bound| / |target|)
+
+Worth measuring because σ̂ genuinely moves between runs: the C52 ladder went
+401 326 → 543 612 (1.35×) from n=16 to n=32, and across every row measured on
+2026-08-16 the spread reached ~1.5×. A bound with less headroom than that can flip
+on a re-run with nothing wrong.
+
+Applying it corrected my own read of which rows were weak, in **both** directions.
+I had called C34 thin; it is comfortable at 2.21×. I had called C36 fine; it sat at
+**1.05×**, meaning a 5% σ̂ rise would break it.
+
+There is also a ceiling. As `n` grows the bound rises toward the point estimate and
+stops, so headroom is capped at `√(|point|/|target|)` however much compute is
+spent. For C36 that ceiling was 1.24×: five more hours of sampling could not have
+made it robust. **Sampling is the wrong lever for a thin margin.**
+
+### 16.2 The right lever is stride, and it is now used four times
+
+σ̂ is a property of the CMUX ladder, not of the message scale, so widening the
+decode gap to `kδ` improves ε without touching the noise. Three fragile rows were
+fixed this way, each with Metal SING checked *first* on both paths, since ε alone
+is not a claim:
+
+| Row | before | after | headroom |
+|-----|--------|-------|----------|
+| C36 *B*=32 | *k*=1, bound −71.2 | *k*=2, bound **−345.5** | 1.05× → **2.32×** |
+| C37 σ=24 | *k*=1, bound −81.4 | *k*=2, bound **−245.2** | 1.13× → **1.96×** |
+| C52 σ=128 | *k*=7, bound −83.2 | *k*=14, bound **−265.8** | 1.14× → **2.04×** |
+
+Nothing was withdrawn: the native-*k*=1 bounds still clear. The rows now *name* the
+robust setting instead of resting on one a 5% drift would break. The audit
+distinguishes a thin bound with a robust sibling in the same row from a thin bound
+with nowhere to go, because the first needs documentation and the second needs new
+science.
+
+Together with C41 (*N*=512 recovered at *k*≥2) and C57 (recovered at *k*=14), the
+stride lever has now rescued or hardened five rows. That makes it a pattern rather
+than a trick: **at *N*=1024 these are gap-budget problems with a known exchange
+rate, not noise walls.**
+
+### 16.3 The determinism bug was still hiding a claim
+
+Nine rows assert a SING FAIL or SIGTRAP. **Every one of their logs predates the
+2026-08-15 determinism fix**, which makes the whole set suspect: C69's *n*=512
+failure had already turned out to be Dictionary-order nondeterminism rather than a
+noise limit.
+
+Re-running them post-fix splits the set cleanly.
+
+**Recovered.** C43's `k=8 public-ms SING FAIL` was logged 2026-08-14. Post-fix it
+**passes both paths** with no mismatch. Its ε settles at n=32 to −181.0 with a
+bound of −113.6, so *k*=8 meets ε **and** SING — where the row previously had
+*k*=4 failing ε and *k*=8 failing SING, i.e. no working configuration at all. That
+is the second claim this one bug was suppressing.
+
+**Confirmed structural, which is equally valuable.** PicoRV lut6 at *N*=1024 *k*=7
+still fails post-fix on both gadgets, at the *identical* DFF cells —
+`slice$14361` for covering-b2, `slice$14359` for covering-b1. Same mismatch, same
+slice, so C60 and C61 are deterministic and structural. They are stronger negatives
+now than when they were recorded, and the only way to know that was to re-run them.
+C56 likewise reproduces exactly, tick index and direction included.
+
+### 16.4 A meta-claim falsified
+
+C43 asserted its *k*=4 figure "cannot be resolved by more trials", citing the
+~15 days that ±1-order resolution would need at 155 s/trial. That is the standard
+§14 already corrected: clearing a bar is far cheaper than resolving to ±1 order.
+Settled at n=32 in about **80 minutes** — *k*=4 gives −34.1 and genuinely fails, so
+the row's "not stable" hedge was right while its cost estimate was wrong.
+
+This was the last surviving instance of that error in the corpus, and it was the
+expensive kind: a maintainer reading "unresolvable" does not try.
+
+### 16.5 The Bombe question: load cannot move these numbers
+
+A P1030680 Welchman Bombe ran concurrently through much of this work, which raises
+a fair objection: were the fragility verdicts artifacts of a loaded machine?
+
+No, and it is checkable rather than arguable. σ̂ is deterministic arithmetic off a
+fixed LCG seed, so contention changes when an answer arrives, never what it is.
+Two measurements re-run under the Bombe came back **bit-identical**:
+
+| Measurement | earlier | under Bombe |
+|-------------|---------|-------------|
+| C22 *N*=128 n=512 | σ̂ 1 666 138.7, ε −18.0 | σ̂ 1 666 138.7, ε −18.0 |
+| C41 *N*=512 *k*=2 n=16 | σ̂ 303 653.9, ε −138.7, bound −69.0 | identical |
+
+**Timings are a different matter**, and there the guard already exists and works.
+`Scripts/leeloo.py` detects a competing HELUT process *by name* and refuses with
+exit 2. Confirmed live: it listed the Bombe (pid 47376) while `machine_busy()` read
+False at 0.284/core — one bench is only ~26% of a core on this box, so load average
+alone does not catch it. The by-name check is what saves the timing rows. No timing
+was re-measured in this work, so nothing timing-based moved.

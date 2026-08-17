@@ -67,7 +67,7 @@ end-to-end. \\
 \cid{40} & Encrypted toy NOP/ADD ISA Metal $N{=}1024$ SING PASS ($20.31\,\mathrm{s}/4$). Not PicoRV32. \\
 \cid{41} & Covering-b1 Gaussian $\sigma{=}128$: meets $\varepsilon\le 2^{-64}$ at $N{=}256$ (95\% bound $-594.5$). At $N{=}512$ native $k{=}1$ is decodable but $\varepsilon\log_2=-50.6$, short of the bar; stride $k\ge 2$ recovers it (bound $-151.5$ at $k{=}2$) with Metal SING PASS at $k{=}2,3,7$. Native $k{=}1$ at $N{=}1024$ still fails (\cid{37}); torus-scale close is \cid{52}. \\
 \cid{42} & 4-bit CSA vs ripple: LUT2 $11\to 8$ ($-27\%$) + encrypted SING PASS. Not TensorLUT melt. \\
-\cid{43} & $k\delta$ encoding at $N{=}1024$: $k{=}4$ Metal SING PASS on covering-b1 $\sigma{=}128$; $\varepsilon$ bar not stable at 4 trials. \\
+\cid{43} & $k\delta$ encoding at $N{=}1024$ covering-b1 $\sigma{=}128$: $k{=}4$ Metal SING PASS but $\varepsilon\log_2=-34.1$ settled at $n{=}32$, short of the bar. $k{=}8$ meets \emph{both} --- $\varepsilon$ bound $-113.6$ and SING PASS; its recorded SING FAIL predated the 2026-08-15 determinism fix. \\
 \cid{44} & TensorLUT melt--freeze--snap on a separable Boolean interpolant (three lemmas). Not arbitrary-netlist melt. \\
 \cid{45} & Encrypted PicoRV32 1-tick SING at demo $N{=}8$: $76.12\,\mathrm{ms}$/row; 4-bit hardness. Not production $N$. \\
 \cid{46} & Encrypted PicoRV32 10-tick \texttt{resetn} boot SING at $N{=}8$: $0.972\,\mathrm{s}/10$; $Q$ $\equiv$ clear. Plain \texttt{\$\_DFF\_P\_} native-$D$ fix. \\
@@ -84,8 +84,8 @@ end-to-end. \\
 \cid{57} & Covering-b2 $k{=}7$ $\sigma{=}128$ @ $N{=}1024$: $\varepsilon\log_2=-60.5$ at $k{=}7$, short of the bar; stride $k{=}14$ clears it ($-319.3$, 95\% bound $-200.5$) with SING still PASS; Metal public-ms adder $10.33\,\mathrm{s}/1$ + regex 23 LUT $26.69\,\mathrm{s}/1$ PASS. b4 public-ms and E256 covering-b2 FAIL. \\
 \cid{58} & PicoRV32 \texttt{abc -lut 6}: $2006$ LUT ($-58\%$) + CPU boolean SING PASS @ $N{=}64$ ($1.35\,\mathrm{s}$). Not covering / not $N{=}1024$. \\
 \cid{59} & Sequential wavefront: PicoRV lut6 $N{=}64$ CPU boolean $0.165\,\mathrm{s}/1$ (${\sim}8.2\times$ vs \cid{58}). \\
-\cid{60} & PicoRV lut6 covering-b2 $k{=}7$ @ $N{=}1024$: Metal 1-tick Q SING FAIL (${\sim}33$\,min, DFF want$=0$ got$=1$). \\
-\cid{61} & PicoRV lut6 covering-b1 $k{=}7$ @ $N{=}1024$: Metal 1-tick Q SING FAIL (${\sim}61$\,min). \\
+\cid{60} & PicoRV lut6 covering-b2 $k{=}7$ @ $N{=}1024$: Metal 1-tick Q SING FAIL (${\sim}33$\,min, DFF want$=0$ got$=1$). Confirmed \emph{structural} by a post-fix re-run failing at the identical cell. \\
+\cid{61} & PicoRV lut6 covering-b1 $k{=}7$ @ $N{=}1024$: Metal 1-tick Q SING FAIL (${\sim}61$\,min). Confirmed structural post-fix, same cell. \\
 \cid{62} & Metal PicoRV lut6 $N{=}1024$ $e{=}0$ 1-tick Q SING PASS ($373.89\,\mathrm{s}$). Not covering. \\
 \cid{63} & PicoRV lut6 covering-b2 $\sigma{=}128$ @ $N{=}64$: Q SING PASS (${\sim}1.72\,\mathrm{s}$). Native $k$. $k{=}7$ SIGTRAPs. \\
 \cid{64} & Extract$\to$KS $n{=}64$ at poly $N{=}1024$: native-$k$ covering-b2 adder+counter SING. Not LWE-176. \\
