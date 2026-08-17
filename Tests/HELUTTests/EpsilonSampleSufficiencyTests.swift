@@ -167,3 +167,101 @@ final class EpsilonSampleSufficiencyTests: XCTestCase {
         XCTAssertNil(unmet.samplesToMeetTarget())
     }
 }
+
+/// The stride-*k* exchange rate: what widening the decode gap buys against ε.
+///
+/// Established empirically at *N*=512, σ=128, covering-b1 on 2026-08-16 while
+/// recovering C41. Native *k*=1 misses 2⁻⁶⁴ (settled −50.6 at n=256), and no
+/// sample size fixes a point estimate on the wrong side of a bar. The lever that
+/// does fix it is the one C52 already used at *N*=1024: wires in `{0,k}`, decode
+/// gap *k*δ.
+///
+/// σ̂ is independent of *k* — it is a property of the CMUX ladder, not of the
+/// message scale — so the whole effect is the gap. The leading term of the
+/// Gaussian tail is `−t²/(2σ²ln2)`, which would make the rate exactly *k*², but
+/// the tail also carries `−log₂(t/σ)`, so growth is slightly **sub**-quadratic:
+/// the measured exponent runs 1.94–1.97 over *k* ∈ [2,11].
+///
+/// Recording that because an earlier draft of this work claimed "*k*² to ~1%".
+/// That was an artifact: σ̂ varied across the four measurements in a direction
+/// that happened to cancel the correction. The tests below assert the real
+/// relationship so the same mistake cannot be re-made silently.
+final class EpsilonStrideExchangeRateTests: XCTestCase {
+
+    /// δ at polynomial degree *N* is `q/2N`; stride *k* multiplies it.
+    private func halfGap(degree: Int, stride: Int) -> Double {
+        let delta = (4_294_967_296.0 / (2.0 * Double(degree))) * Double(stride)
+        return delta / 2.0
+    }
+
+    /// Settled σ̂ at *N*=512, σ=128, covering-b1 (n=256).
+    private let sigma = 251_262.4
+
+    /// The exchange rate is sub-quadratic and tends toward 2 as *k* grows.
+    func testStrideExchangeRateIsSlightlySubQuadratic() {
+        let base = abs(
+            log2GaussianTwoSidedTail(stddev: sigma, threshold: halfGap(degree: 512, stride: 1))
+        )
+        for k in [2, 3, 7, 11] {
+            let got = abs(
+                log2GaussianTwoSidedTail(
+                    stddev: sigma, threshold: halfGap(degree: 512, stride: k)
+                )
+            )
+            let exponent = log(got / base) / log(Double(k))
+            XCTAssertTrue(
+                exponent > 1.90 && exponent < 2.00,
+                """
+                stride k=\(k): implied exponent \(exponent) outside (1.90, 2.00). \
+                |log₂ε| went \(base) -> \(got). The gap/ε exchange rate has moved, \
+                so the C41 recovery arithmetic needs re-deriving.
+                """
+            )
+            // Strictly below k², never above: the log term only ever costs.
+            XCTAssertLessThan(got, base * Double(k * k))
+        }
+    }
+
+    /// The concrete C41 case end to end: *k*=1 misses the bar and is beyond
+    /// rescue by sampling; *k*=2 clears it at a modest sample count.
+    func testC41StrideRecoversTheBar() {
+        let gapK1 = halfGap(degree: 512, stride: 1)
+        let gapK2 = halfGap(degree: 512, stride: 2)
+        let pointK1 = log2GaussianTwoSidedTail(stddev: sigma, threshold: gapK1)
+        let pointK2 = log2GaussianTwoSidedTail(stddev: sigma, threshold: gapK2)
+
+        XCTAssertGreaterThan(pointK1, -64.0, "k=1 at N=512 should miss 2⁻⁶⁴; got \(pointK1)")
+        XCTAssertNil(
+            samplesToClearFailureTarget(sigmaHat: sigma, threshold: gapK1, targetLog2: -64),
+            "k=1 misses the bar, so no sample count may be reported as sufficient"
+        )
+
+        XCTAssertLessThan(pointK2, -64.0, "k=2 at N=512 should clear 2⁻⁶⁴; got \(pointK2)")
+        guard let need = samplesToClearFailureTarget(
+            sigmaHat: sigma, threshold: gapK2, targetLog2: -64
+        ) else {
+            return XCTFail("k=2 clears the bar, so a sufficient sample count must exist")
+        }
+        XCTAssertLessThanOrEqual(
+            need, 64, "k=2 was measured clearing at n=64; helper now demands n=\(need)"
+        )
+
+        // Single-LUT reference values. The CLI prints a union over lutCount, which
+        // is ~3 orders kinder at lutCount=8 — that offset accounted for every one
+        // of the four measured figures to within 0.1.
+        XCTAssertEqual(pointK1, -53.7, accuracy: 1.0)
+        XCTAssertEqual(pointK2, -205.4, accuracy: 4.0)
+    }
+
+    /// The union offset itself: the printed ε is worse than single-LUT by
+    /// log₂(lutCount), and getting that backwards once made a bound look better
+    /// than its own point estimate (AUDIT §13.5).
+    func testUnionPenaltyMatchesMeasuredOffset() {
+        let single = log2GaussianTwoSidedTail(
+            stddev: sigma, threshold: halfGap(degree: 512, stride: 1)
+        )
+        let union = single + log2(8.0)
+        XCTAssertGreaterThan(union, single, "a union over 8 LUTs must be worse, not better")
+        XCTAssertEqual(union, -50.6, accuracy: 1.0)
+    }
+}

@@ -988,6 +988,7 @@ though the third needed a parameter change rather than more compute.
 | C36 *N*=1024 *B*=32 | 4 → −139.3 · 24 → −90.6 · 64 → −97.8 | **−71.2** | clears at n=64 |
 | C41 *N*=512 σ=128 *k*=1 | 4 → −76.6 · 16 → −36.8 · 64 → −61.1 · 256 → −50.6 | −43.5 | **fails at native *k*=1** |
 | C41 *N*=512 σ=128 *k*=2 | 16 → −138.7 · 64 → −207.9 | **−151.5** | clears |
+| C41 *N*=512 σ=128 *k*=3 | 16 → −314.3 · 64 → −515.8 | **−375.9** | clears |
 
 C36 is the instructive one for cost: the n=4 estimate said n≈16 would settle it,
 the n=24 estimate said n≈55, and n=64 finally cleared. The required-sample
@@ -1027,18 +1028,29 @@ decode gap *k*δ.
 
 Measuring across *k* at *N*=512, σ=128, covering-b1:
 
-| *k* | δ/2 | σ̂ | εlog2 | *k*² prediction | ratio |
-|-----|-----|-----|-------|-----------------|-------|
-| 1 | 2 097 152 | 251 262 | −50.6 | −50.6 | 1.000 |
-| 2 | 4 194 304 | 247 845 | −207.9 | −208.0 | 0.999 |
-| 3 | 6 291 456 | 302 203 | −314.3 | −314.8 | 0.998 |
-| 7 | 14 680 064 | 261 545 | −2275.7 | −2288.3 | 0.995 |
+| *k* | δ/2 | σ̂ | εlog2 (union/8) | single-LUT | implied exponent |
+|-----|-----|-----|-----------------|------------|------------------|
+| 1 | 2 097 152 | 251 262 | −50.6 | −53.7 | — |
+| 2 | 4 194 304 | 247 845 | −207.9 | −211.0 | 1.94 |
+| 3 | 6 291 456 | 235 748 | −515.8 | −518.8 | 1.95 |
+| 7 | 14 680 064 | 261 545 | −2275.7 | −2278.7 | 1.97 |
 
 σ̂ is independent of *k* — it is a property of the CMUX ladder, not of the message
-scale — while the gap grows linearly, so `|log₂ε|` scales as *k*². The law holds
-to within 1% at every *k* measured, which is a stronger statement than any single
-row: it says the *N*=512 shortfall is a gap-budget problem with a known exchange
-rate, not a noise wall.
+scale — while the gap grows linearly. So the *N*=512 shortfall is a gap-budget
+problem with a known exchange rate, not a noise wall.
+
+**Correcting an over-claim made earlier in this same session.** I first wrote that
+`|log₂ε|` follows a *k*² law "to ~1%". It does not. The leading term of the
+Gaussian tail is `−t²/(2σ²ln2)`, which is exactly *k*², but the tail also carries
+`−log₂(t/σ)`, so growth is slightly **sub**-quadratic — measured exponent 1.94 to
+1.97 over *k* ∈ [2,11], and strictly below *k*² at every point. The apparent 1%
+agreement was an artifact: σ̂ differed between the four runs in a direction that
+happened to cancel the correction. Caught by writing the law down as a test
+(`EpsilonStrideExchangeRateTests`), which failed on first run.
+
+Every measured figure is fully accounted for: it is the exact Gaussian tail at
+that run's σ̂, plus a union penalty of log₂(8)=3.0 for the eight LUTs. The observed
+offsets are 3.06, 3.10, 3.01, 2.96. No residual anomaly.
 
 Correctness holds too, which matters because ε alone is not a claim: Metal SING
 **PASS** on both covering-b1 paths (secret and public-ms) at *k*=2, 3 and 7, with

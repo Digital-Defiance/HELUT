@@ -26,6 +26,7 @@ number is true; only whether the thing that is supposed to prove it exists.
 
 from __future__ import annotations
 
+import glob
 import os
 import re
 import sys
@@ -249,6 +250,128 @@ def check_logs() -> None:
         fail("missing-log", f"{SHEET} cites {rel}, not on disk")
 
 
+def check_quoted_numbers(txt: str, strict: bool = False) -> None:
+    """Every σ̂ / εlog2 / bound figure quoted in a row must appear in a log that
+    row cites.
+
+    Why this exists. The lint checked that cited logs *exist* and that `--filter`
+    names *resolve*, but never that a number in the prose matched the measurement
+    behind it. Two things got through that gap:
+
+      * C30 carried `εlog2 = −∞` for inject B ≤ 8. That was the Gaussian tail
+        underflowing, not zero failure probability, and it sat in the sheet
+        unchallenged because nothing compared it to anything.
+      * A `k²` scaling law was written up as holding "to ~1%" when the real
+        exponent is 1.94–1.97. Caught only because it was also written as a test,
+        which failed on first run.
+
+    Deliberately narrow. It only checks figures printed in a form the tools emit
+    verbatim -- `σ̂=NNN`, `εlog2=−NN.N`, `bound −NN.N` -- because those are
+    machine-comparable. Rounded prose (`σ̂≈2.95×10⁴`), derived quantities, and
+    ratios are skipped: flagging those would bury a real finding in noise.
+
+    Advisory by default: reports coverage and misses as notes. `--strict` turns a
+    miss into a failure, for use when the sheet has been freshly re-measured and
+    every quoted figure should be traceable.
+    """
+    rows = [ln for ln in txt.split("\n") if re.match(r"\|\s*\*\*[CHN]\d+\*\*", ln)]
+    checked = matched = 0
+    misses: list[str] = []
+
+    # Narrow no-break space and friends appear inside grouped digits in the sheet.
+    def norm(s: str) -> str:
+        for ch in ("\u202f", "\u00a0", "\u2009", " ", ","):
+            s = s.replace(ch, "")
+        return s.replace("\u2212", "-")
+
+    for ln in rows:
+        rid = re.match(r"\|\s*\*\*([CHN]\d+)\*\*", ln).group(1)
+        cited = re.findall(r"`(logs/[A-Za-z0-9_.\-*{},/]+\.(?:log|json))`", ln)
+        if not cited:
+            continue
+        # Expand brace sets, e.g. c41-n512-n{16,64,256}.log
+        paths: list[str] = []
+        for rel in cited:
+            m = re.search(r"\{([^}]*)\}", rel)
+            if m:
+                for alt in m.group(1).split(","):
+                    paths.append(rel[: m.start()] + alt.strip() + rel[m.end():])
+            else:
+                paths.append(rel)
+        blob = ""
+        for rel in paths:
+            for cand in glob.glob(os.path.join(ROOT, rel)) or [os.path.join(ROOT, rel)]:
+                if os.path.exists(cand):
+                    with open(cand, encoding="utf-8", errors="replace") as fh:
+                        blob += fh.read()
+        if not blob:
+            continue
+        nblob = norm(blob)
+
+        # Only the exact machine-printed forms.
+        wanted: list[tuple[str, str]] = []
+        # Plain decimal only. Scientific-notation forms (`σ̂=1.47×10⁵`) are
+        # deliberately-rounded prose. A negative lookahead does not work here:
+        # the regex simply backtracks to a shorter digit run and satisfies it.
+        # So capture, then inspect what follows.
+        for m in re.finditer(r"σ̂\s*=\s*([\d\u202f\u00a0, ]+(?:\.\d+)?)", ln):
+            tail = ln[m.end():m.end() + 4]
+            if re.match(r"\s*[×xe]\s*10", tail):
+                continue
+            wanted.append(("σ̂", m.group(1)))
+        for m in re.finditer(r"εlog2\s*=\s*(\u2212?-?\d+\.\d+)", ln):
+            wanted.append(("εlog2", m.group(1)))
+        for m in re.finditer(r"bound\s+\*{0,2}(\u2212?-?\d+\.\d+)", ln):
+            wanted.append(("bound", m.group(1)))
+
+        # Pull the typed figures the tools actually print, so comparison is
+        # numeric rather than textual. String matching failed on legitimate prose
+        # rounding: the sheet writes "σ̂=73 026" for a logged 73025.9.
+        logged = {
+            "σ̂": [float(x) for x in re.findall(r"σ̂=([\d.]+)", blob)],
+            "εlog2": [float(x) for x in re.findall(r"εlog2=(-?\d+\.\d+)", blob)],
+            "bound": [float(x) for x in re.findall(r"95%up=(-?\d+\.\d+)", blob)],
+        }
+
+        for kind, raw in wanted:
+            checked += 1
+            v = norm(raw).rstrip(".").rstrip(",")
+            try:
+                quoted = float(v)
+            except ValueError:
+                misses.append(f"{rid} {kind}={raw.strip()} unparseable")
+                continue
+            decimals = len(v.split(".")[1]) if "." in v else 0
+            # A quoted figure matches if rounding the logged value to the quoted
+            # precision reproduces it. Also accept sign-flipped forms, since rows
+            # sometimes write a magnitude where the tool prints a negative.
+            pool = logged.get(kind, [])
+            if kind == "bound":
+                pool = pool + logged["εlog2"]  # some rows quote the point as a bound
+            # Half-a-unit-in-the-last-place, not round(): Python rounds
+            # 110586.5 to 110586 (banker's), so a sheet legitimately quoting
+            # 110587 read as untraced.
+            tol = 0.5 * (10 ** -decimals) + 1e-9
+            hit = any(
+                abs(cand - quoted) <= tol or abs(-cand - quoted) <= tol
+                for cand in pool
+            )
+            if hit:
+                matched += 1
+            else:
+                misses.append(f"{rid} {kind}={raw.strip()} not in its cited log(s)")
+
+    NOTES.append(
+        f"quoted figures traced to logs: {matched}/{checked}"
+        + (f"; {len(misses)} untraced" if misses else "")
+    )
+    for msg in misses:
+        if strict:
+            fail("untraced-number", msg)
+        else:
+            NOTES.append(f"untraced: {msg}")
+
+
 def check_grade_column(txt: str, c: set[int]) -> None:
     if "| ID | Grade |" not in txt:
         fail("grade-col", f"{SHEET} C table has no Grade column")
@@ -278,6 +401,7 @@ def main() -> int:
     check_epoch(c)
     check_test_filters()
     check_logs()
+    check_quoted_numbers(txt, strict="--strict" in sys.argv)
 
     if not quiet:
         print(f"claim sheet: C={len(c)} (max C{max(c)})  H={len(h)}  N={len(n)}")
