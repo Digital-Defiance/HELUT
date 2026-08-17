@@ -42,6 +42,10 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SHEET = os.path.join(ROOT, "directives", "claim-sheet.md")
 TARGET = -64.0
 
+# Observed sigma-hat spread across the 2026-08-16 ladders. A bound with less
+# headroom than this can flip between runs without any defect.
+FRAGILE_BELOW = 1.5
+
 
 def standard_normal_quantile(p: float) -> float:
     """Acklam's rational approximation, matching TFHEGaussianSecurity.swift."""
@@ -77,6 +81,51 @@ def slack_factor(n: int) -> float:
     return n / chi2_lower(n)
 
 
+def headroom_from_bound(bound: float, target: float = TARGET) -> float:
+    """σ̂ growth a *printed* bound tolerates, needing only the bound itself.
+
+    Since `bound = point / slack(n)` and headroom is
+    `√(|point| / (slack(n)·|target|))`, the slack cancels:
+
+        headroom = √(|bound| / |target|)
+
+    Preferred over recomputing from the point estimate, because rows accumulate
+    several ε figures as ladders are added and picking the right one by regex is
+    error-prone -- an earlier version of this script reported C57 at its
+    superseded k=7 value.
+    """
+    if bound >= 0 or target >= 0:
+        return 0.0
+    return sqrt(abs(bound) / abs(target))
+
+
+def sigma_headroom(point: float, n: int, target: float = TARGET) -> float:
+    """How far σ̂ could rise before this bound stops clearing the target.
+
+    Pass/fail is not the whole story. `log₂ε ∝ −1/σ²`, so if σ̂ turns out g× larger
+    than measured, `|point|` falls by g², and the bound holds only while
+    `|point|/g² ≥ slack(n)·|target|`. So the row tolerates
+
+        g ≤ √(|point| / (slack(n)·|target|))
+
+    This matters because σ̂ genuinely moves between runs: on 2026-08-16 the C52
+    ladder went 401 326 → 543 612 (1.35×) between n=16 and n=32, and across all
+    rows measured that day the spread reached 1.5×. A row with less headroom than
+    that can flip on a re-run without anything being wrong, which is a weaker
+    claim than a bare "clears" suggests.
+
+    Note the ceiling: as n grows the bound approaches the point estimate, so
+    headroom is capped at √(|point|/|target|) no matter how much compute is spent.
+    A row whose point estimate is close to the bar cannot be made robust by
+    sampling -- it needs a wider decode gap (stride k), which is how C41 and C57
+    were fixed.
+    """
+    need = slack_factor(n) * abs(target)
+    if need <= 0:
+        return 0.0
+    return sqrt(abs(point) / need)
+
+
 def required_samples(point: float, target: float = TARGET, cap: int = 4_000_000) -> int | None:
     """Smallest n whose bound clears `target`, or None if the point estimate fails."""
     if point > target:
@@ -100,55 +149,92 @@ def main() -> int:
           + ", ".join(f"n={n}->{slack_factor(n)*abs(TARGET):.0f}"
                       for n in (2, 4, 8, 16, 32, 64)))
     print()
-    print(f"{'row':6s} {'n':>5s} {'|eps|':>9s} {'need':>6s} {'status':18s} action")
-    print("-" * 96)
+
+    # A row is not one claim. C41 records native k=1 falling short *and* k>=2
+    # clearing; C57 does the same at k=7 vs k=14. Classifying per line forced one
+    # verdict onto both and hid the fragility of the positive half. So evaluate
+    # each printed bound as its own claim, and fall back to line-level reasoning
+    # only for rows that print no bound at all.
+    print("Bounds printed in the sheet (each is a separate assertion):")
+    print(f"  {'row':6s} {'bound':>9s} {'σ̂ room':>7s}  verdict")
+    print("  " + "-" * 74)
 
     problems: list[str] = []
-    counted = 0
+    fragile: list[tuple[str, float]] = []
+    bound_count = 0
+    no_bound_rows: list[tuple[str, int | None, float]] = []
+
     for line in rows:
         rid = re.match(r"\|\s*\*\*(C\d+)\*\*", line).group(1)
         eps = [abs(float(x)) for x in
-               re.findall(r"εlog2[≈=]\s*\*{0,2}(?:−|-)(\d+(?:\.\d+)?)", line)]
-        if not eps:
+               re.findall(r"εlog2[≈=]?\s*\*{0,2}(?:−|-)(\d+(?:\.\d+)?)", line)]
+        bounds = [float(x.replace("\u2212", "-")) for x in
+                  re.findall(r"bound\s+\*{0,2}((?:−|-)\d+(?:\.\d+)?)", line)]
+        if not eps and not bounds:
             continue
-        counted += 1
+
+        if bounds:
+            for b in sorted(bounds):
+                bound_count += 1
+                if b <= TARGET:
+                    room = headroom_from_bound(b)
+                    if room < FRAGILE_BELOW:
+                        fragile.append((rid, room))
+                        verdict = (f"clears, FRAGILE — {room:.2f}x σ̂ growth breaks it")
+                    else:
+                        verdict = "clears with margin"
+                    print(f"  {rid:6s} {b:9.1f} {room:6.2f}x  {verdict}")
+                else:
+                    print(f"  {rid:6s} {b:9.1f} {'—':>7s}  does not clear (recorded as unmet)")
+            continue
+
+        # No printed bound: judge the quoted point against the slack its n buys.
         trials = [int(x) for x in re.findall(r"--trials\s+(\d+)", line)]
         trials += [int(x) for x in re.findall(r"\bn=(\d+)", line)]
         n = max(trials) if trials else None
         best = max(eps)
-
-        has_bound = bool(re.search(r"bound\s+\*{0,2}(?:−|-)\d", line))
         negative = bool(re.search(
-            r"None meet|does \*\*not\*\*|not −64|WITHDRAWN|does NOT meet|no ε≤2⁻⁶⁴",
-            line))
-
-        if has_bound:
-            status, action = "has 95% bound", "-"
-        elif negative:
-            status, action = "recorded negative", "-"
-        elif n and best >= slack_factor(n) * abs(TARGET):
-            status, action = "clears on slack", "-"
+            r"None meet|does \*\*not\*\*|not −64|not \(−64\)|WITHDRAWN|does NOT meet"
+            r"|no ε≤2⁻⁶⁴|short of −64|short of the bar", line))
+        no_bound_rows.append((rid, n, best))
+        if negative:
+            continue
+        if n and best >= slack_factor(n) * abs(TARGET):
+            continue
+        need = required_samples(-best)
+        if need is None:
+            problems.append(f"{rid}: point estimate {-best} is past the bar; weaken the claim")
         else:
-            need = required_samples(-best)
-            if need is None:
-                status = "UNREACHABLE"
-                action = "point estimate past the bar; weaken the claim"
-            else:
-                status = "UNDER-SAMPLED"
-                action = f"re-run at n>={need}, or print a bound"
-            problems.append(f"{rid}: {status.lower()} ({action})")
-
-        need_disp = f"{slack_factor(n)*abs(TARGET):.0f}" if n else "?"
-        print(f"{rid:6s} {str(n or '?'):>5s} {best:9.1f} {need_disp:>6s} {status:18s} {action}")
+            problems.append(f"{rid}: under-sampled at n={n}; re-run at n>={need} or print a bound")
 
     print()
-    print(f"{counted} rows quote an ε figure; {len(problems)} unsupported")
-    for p in problems:
-        print(f"  ! {p}")
+    print("Rows quoting an ε figure with no printed bound:")
+    for rid, n, best in no_bound_rows:
+        need = slack_factor(n) * abs(TARGET) if n else None
+        ok = "ok (clears on slack, or recorded negative)"
+        if need and best < need and any(p.startswith(rid + ":") for p in problems):
+            ok = "UNSUPPORTED"
+        print(f"  {rid:6s} n={str(n or '?'):>4s} |ε|={best:8.1f} "
+              f"need={('%.0f' % need) if need else '?':>6s}  {ok}")
+
+    print()
+    print(f"{bound_count} printed bounds; {len(problems)} unsupported; {len(fragile)} fragile")
+    for p_ in problems:
+        print(f"  ! {p_}")
+    if fragile:
+        print()
+        print("Fragile bounds — supported, but by less than the σ̂ spread seen across")
+        print("today's ladders (up to 1.5x). These can flip on a re-run with nothing")
+        print("actually wrong:")
+        for rid, room in sorted(fragile, key=lambda r: r[1]):
+            print(f"  ! {rid}: {room:.2f}x headroom. More samples raise the bound only")
+            print(f"      toward the point estimate; a wider decode gap (stride k) is the")
+            print(f"      lever that adds real margin — see C41 and C57.")
     if problems and strict:
         return 1
     if not problems:
-        print("\nAll ε figures are supported by the sample size behind them.")
+        print()
+        print("No ε assertion is unsupported by the sample size behind it.")
     return 0
 
 
