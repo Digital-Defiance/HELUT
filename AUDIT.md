@@ -975,3 +975,77 @@ trials, or weaken the claim. The CLI prints which, replacing the old
 `±1 needs n≈40489`. That figure was the cost of resolving ε to ±1 order, a far
 stricter standard than clearing a bar, and quoting it made merely under-sampled
 rows look hopeless. §14 records making exactly that error about C35.
+
+### 15.4 All three under-sampled rows resolved, and none was lost
+
+Sampling each properly. Every one of them is now supported at 95% confidence,
+though the third needed a parameter change rather than more compute.
+
+| Row | ladder (n → εlog2) | settled bound | outcome |
+|-----|--------------------|---------------|---------|
+| C37 *N*=1024 σ=24 | 4 → −159.4 · 20 → −149.8 | **−81.4** | clears at n=20 |
+| C41 *N*=256 σ=128 | 2 → −2108.7 · 32 → −946.9 | **−594.5** | clears at n=32 |
+| C36 *N*=1024 *B*=32 | 4 → −139.3 · 24 → −90.6 · 64 → −97.8 | **−71.2** | clears at n=64 |
+| C41 *N*=512 σ=128 *k*=1 | 4 → −76.6 · 16 → −36.8 · 64 → −61.1 · 256 → −50.6 | −43.5 | **fails at native *k*=1** |
+| C41 *N*=512 σ=128 *k*=2 | 16 → −138.7 · 64 → −207.9 | **−151.5** | clears |
+
+C36 is the instructive one for cost: the n=4 estimate said n≈16 would settle it,
+the n=24 estimate said n≈55, and n=64 finally cleared. The required-sample
+estimate is only as good as the σ̂ it is computed from, so on a thin margin the
+right procedure is to climb a ladder rather than take one shot at a predicted n.
+
+### 15.5 Retraction: the σ̂ "drift" was noise, not bias
+
+Partway through this work I recorded that σ̂ grew with sample size on four
+consecutive measurements (1.03×, 1.24×, 1.44×, 1.49×) and called it suggestive of
+a systematic low bias at small *n*, p≈0.06. **That reading did not survive more
+data.** Extending the ladders shows the sequences are not monotone:
+
+| Row | σ̂ across the ladder |
+|-----|---------------------|
+| C41 *N*=512 *k*=1 | 204 462 → 294 285 → **228 797** → 251 262 |
+| C36 *N*=1024 | 75 752 → 93 986 → **90 452** |
+| C41 *N*=512 *k*=2 | 303 654 (n=16) → **247 845** (n=64) |
+
+They go up and then down, settling. That is sampling noise around a fixed value,
+not a trend. The theoretical bias is real but small — the RMS estimator is low by
+about 6% at n=4 by Jensen — whereas the noise on σ̂ at n=4 is **±35%**, which
+swamps it. The 1.4× excursions were high and low draws, and I over-read four of
+them as a pattern.
+
+The operational conclusion is unchanged and never depended on the bias question:
+±35% at n=4 means a point estimate at that sample size must not be quoted against
+a bar unless the margin is enormous. What changes is the reason given.
+
+### 15.6 The fix for *N*=512: stride *k*, and a clean *k*² law
+
+Native *k*=1 at *N*=512 genuinely misses the bar — −50.6 settled at n=256, where
+σ̂ noise is only ±4.4%. More sampling cannot help a point estimate on the wrong
+side. But the row is a **parameter map**, and the parameter that matters was
+already identified by **C52** at *N*=1024: stride *k* encoding, wires in `{0,k}`,
+decode gap *k*δ.
+
+Measuring across *k* at *N*=512, σ=128, covering-b1:
+
+| *k* | δ/2 | σ̂ | εlog2 | *k*² prediction | ratio |
+|-----|-----|-----|-------|-----------------|-------|
+| 1 | 2 097 152 | 251 262 | −50.6 | −50.6 | 1.000 |
+| 2 | 4 194 304 | 247 845 | −207.9 | −208.0 | 0.999 |
+| 3 | 6 291 456 | 302 203 | −314.3 | −314.8 | 0.998 |
+| 7 | 14 680 064 | 261 545 | −2275.7 | −2288.3 | 0.995 |
+
+σ̂ is independent of *k* — it is a property of the CMUX ladder, not of the message
+scale — while the gap grows linearly, so `|log₂ε|` scales as *k*². The law holds
+to within 1% at every *k* measured, which is a stronger statement than any single
+row: it says the *N*=512 shortfall is a gap-budget problem with a known exchange
+rate, not a noise wall.
+
+Correctness holds too, which matters because ε alone is not a claim: Metal SING
+**PASS** on both covering-b1 paths (secret and public-ms) at *k*=2, 3 and 7, with
+306.1 classical bits. That check was not optional — **C56** shows *k*=7 breaking
+SING on a different path at *N*=1024, so a stride that fixes ε can still fail
+functionally.
+
+So C41 keeps its ε claim, restated honestly: *N*=512 meets ε≤2⁻⁶⁴ **at *k*≥2**,
+and not at native *k*=1. One order of stride buys a 4× improvement in `|log₂ε|`,
+and the shortfall at *k*=1 was only 1.27×.

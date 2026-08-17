@@ -18,3 +18,12 @@ C41 N=512 n=16  (299s, rc=0)
 C41 N=512 n=64  (1142s, rc=0)
     εlog2=-61.1 95%up=-44.4 DOES NOT CLEAR -64, point estimate itself fails — no n clears this]  (ba
 
+C41 N=512 n=256  (4648s, rc=0)
+    εlog2=-50.6 95%up=-43.5 DOES NOT CLEAR -64, point estimate itself fails — no n clears this]  (ba
+
+finished: 2026-08-16T23:21:04Z
+
+Read the 95%up figure, not the exit code. 'clears -64' closes the row;
+'under-sampled: n≈N would clear' means the margin held but needs more n;
+'point estimate itself fails' means sigma-hat drifted and the claim must
+be weakened rather than re-run.
