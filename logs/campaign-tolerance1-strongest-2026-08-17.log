@@ -29,3 +29,9 @@ ETA floor (~50M/s): 127.7 min
 quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → logs/quarantine_tolerance1.json
   [1/24·1] NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE@18 edges=40 letters=21 loops=20 central=U dead at the board                      6675s   2.4M/s ETA 2558.6 min
   [2/24·2] NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE@21 edges=40 letters=21 loops=20 central=U dead at the board                     11568s   2.8M/s ETA 2120.8 min
+  [3/24·3] FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN@19 edges=40 letters=21 loops=20 central=U dead at the board                     17106s   2.8M/s ETA 1995.6 min
+
+=== SUSPENDED 2026-08-17 after placement 3/24 (all dead at the board, tolerance 1, right rings).
+=== Resume: --bombe-ring-sweep --bombe-garble-tolerance 1 --bombe-from 4
+=== Paused to run the indel post-gap arm first: exact board, no inflation, ~23h,
+=== and it tests the error Girard documented rather than one we inferred.

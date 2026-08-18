@@ -104,8 +104,18 @@ func loadCribMenus(path: String) -> CribMenuSet? {
         // holds three true cribs at true offsets, so skipping past the first one merely reaches
         // the second and "breaks" legitimately. That mistake was made and is recorded here.
         if CommandLine.arguments.contains("--bombe-indel-only") {
-            print("  indel-only: dropping \(menus.count) ordinary menus. On an undamaged"
-                + " ciphertext every splice is false, so ANY break here is a false positive.")
+            print("  indel-only: dropping \(menus.count) ordinary menus, sweeping the spliced"
+                + " family alone.")
+            // Deliberately does NOT say "any break here is a false positive". That is true only
+            // on a control whose ciphertext is known to be undamaged, where every splice is
+            // false by construction — it is how the specificity grade works. On a target whose
+            // transcript may genuinely be missing a group, a break would be a real indel hit,
+            // and it still has to clear the ordinary victory conditions. A banner that is true
+            // for one fixture and false for another is how this campaign printed
+            // "turnover phase fully covered" for months.
+            print("  on a known-undamaged control every splice is false, so a break there would"
+                + " be a false positive; on the target a break is a genuine hypothesis hit and"
+                + " must still clear crib-exact ∧ IC ∧ tail ∧ ≤10 plugs.")
             menus.removeAll()
         }
         menus.append(contentsOf: spliced)
