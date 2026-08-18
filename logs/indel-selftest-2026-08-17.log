@@ -1,0 +1,89 @@
+=== Spliced menus (indel hypothesis) — known-key grade ===
+control    : P1030684 (published key), 120 letters
+true shell : UKW B / Greek gamma / IV-III-VIII / rings AACU / pos VYAA
+experiment : delete a 4-letter group at transmitted position 12,
+             then attack the damaged transcript.
+
+An indel is NOT a substitution. Every surviving letter is correct; they sit at
+shifted positions, so each edge after the splice needs a different scrambler.
+That is a menu-geometry change and it runs on the EXACT board — no tolerance,
+no survivor inflation, nothing relaxed.
+
+lost group : HBSX   recording is now 116 letters, transmitted was 120
+
+crib       : VVVUUUVIRSOBENNULEINSXXMITU
+             27 letters at transmitted offset 0 (straddles the gap at 12)
+
+SENSITIVITY
+  menu                                          kept   plugs (correct/forced)
+  ordinary menu, recorded offset                 ILLEGAL (self-encipherment)
+  ordinary menu on the UNDAMAGED text (bound) KEPT 25/25
+  SPLICED menu, true splice+delta KEPT 25/25
+    edges 23 (of 27 crib letters; 4 fell in the gap), loops 5
+
+SPECIFICITY — a wrong splice must NOT rescue the setting.
+Three outcomes are tracked separately, because lumping them together is how this
+test goes vacuous: a wrong splice that is ILLEGAL was never put on the board at all,
+so counting it as 'rejected' would be claiming credit the board did not earn.
+
+  crib length 16 (from 27; floor is 16, below which any menu is a ghost factory and proves nothing)
+  splice   edges   outcome
+       0       -   illegal (self-encipherment)
+       4       -   illegal (self-encipherment)
+       8       -   illegal (self-encipherment)
+      12      12   KEPT   <- true splice
+      16       -   illegal (self-encipherment)
+      20       -   illegal (self-encipherment)
+      24       -   illegal (self-encipherment)
+      28       -   illegal (self-encipherment)
+      32       -   illegal (self-encipherment)
+      36       -   illegal (self-encipherment)
+      40       -   illegal (self-encipherment)
+      44       -   illegal (self-encipherment)
+      48       -   illegal (self-encipherment)
+      52       -   illegal (self-encipherment)
+      56       -   illegal (self-encipherment)
+      60       -   illegal (self-encipherment)
+      64       -   illegal (self-encipherment)
+      68       -   illegal (self-encipherment)
+      72       -   illegal (self-encipherment)
+      76       -   illegal (self-encipherment)
+      80       -   illegal (self-encipherment)
+      84       -   illegal (self-encipherment)
+      88       -   illegal (self-encipherment)
+      92       -   illegal (self-encipherment)
+      96       -   illegal (self-encipherment)
+     100       -   illegal (self-encipherment)
+     104       -   illegal (self-encipherment)
+     108       -   illegal (self-encipherment)
+     112       -   illegal (self-encipherment)
+
+  wrong splices killed by legality alone : 28
+  wrong splices actually put on the board: 0
+  of those, surviving                    : 0
+
+  BOARD-SPECIFICITY IS UNMEASURED HERE, and that is a finding rather than a
+  failure. Every wrong splice was eliminated by self-encipherment before the
+  bombe was asked, so this run says nothing about what the board would do with
+  a legal-but-wrong splice.
+
+  Why that asymmetry is favourable, structurally:
+    * Enigma never encodes a letter to itself, so a menu built from the TRUE
+      crib at the TRUE offset with the TRUE splice is *always* legal — it is
+      reconstructing real plain/cipher pairs. Legality can never reject the
+      truth.
+    * A wrong splice re-pairs the crib against shifted ciphertext, and over 16+
+      positions it almost always hits a self-encipherment. Here that killed
+      28 of 28 wrong candidates for free, with no GPU at all.
+
+  So the splice search is largely self-pruning, which is good for cost. But the
+  discrimination is coming from the cipher's own constraint, NOT from the board,
+  and legality prunes by coincidence rather than by correctness. A hit therefore
+  still needs independent confirmation, exactly as a short-crib stop does.
+
+ENUMERATION COST — how many distinct hypotheses one crib actually generates
+  distinct spliced menus for this crib: 302
+  strongest: VVVUUUVIRSOBENNULEINSXXMITU@T5 splice=0 delta=4 edges=27 loops=9 post-gap
+  straddling 269, post-gap 33
+  (a crib entirely BEFORE the gap is byte-identical to an ordinary menu and is
+   skipped: it is not new key space and every prior arm already swept it)

@@ -70,7 +70,7 @@ export function JournalPage() {
             <li>
               <span className="mono">OPEN</span>
               <span>
-                <strong>Still untested or incomplete:</strong> garble tolerance is built and graded but has produced <em>no</em> verdict against this message — on a known key the exact board loses the true setting at one to three corrupted letters while a tolerant board keeps it with all 25 plugs correct, and the Metal port cross-checks at zero mismatches in 192 lanes, but its cost is survivor inflation and that inflation turned out to be placement-dependent rather than a function of crib length (an early "17 edges is enough" rule was wrong and is withdrawn), so each menu has to be pre-qualified by measurement before tolerance can be switched on; indels are not modelled at all; catalog right-ring sweep parked at originalIndex 417/2513 (last <code>VVVUUUDREINULEINSVI@25</code>; resume <code>--bombe-from 418</code>); Thetis-register rings from menu 14; any middle ring other than A (~8–15% of keys — the arm is now built and graded end-to-end, with the blind control breaking at full middle × right coverage in 4,307 s, but it has produced no P1030680 verdict); the long-menu arms whose negatives are incomplete by up to 5.56% because a kernel table cap reported lanes eliminated without testing them — the Übung body arm was contaminated on all 40 placements and has now been re-run and re-confirmed (40/40 dead, 0 stops); the curated top-30 on 20 of 30 has also been re-run and re-confirmed (73 raw stops, identical to the archive, no break); the catalog on 300 of 2,513 is queued; near-shell walk around sister keys. Sister message P1030681 needed heavy degarbling—exact Welchman clean negatives do not rule out a mis-transcribed P1030680. Soft-band near-misses quarantine into Stochastic seeds. More GPU on inventing letters does not invent the plaintext—boolean coverage plus garble-aware escalation does.
+                <strong>Still untested or incomplete:</strong> garble tolerance is built and graded but has produced <em>no</em> verdict against this message — on a known key the exact board loses the true setting at one to three corrupted letters while a tolerant board keeps it with all 25 plugs correct, and the Metal port cross-checks at zero mismatches in 192 lanes, but its cost is survivor inflation and that inflation turned out to be placement-dependent rather than a function of crib length (an early "17 edges is enough" rule was wrong and is withdrawn), so each menu has to be pre-qualified by measurement before tolerance can be switched on (that gate passes with zero inflation on the 24 strongest target placements, and the arm is now running); the separate indel board is also built and graded — a deleted four-letter group makes the ordinary menu outright illegal while a spliced menu keeps the true setting with all 25 plugs, though its specificity is carried by self-encipherment legality rather than by the board, so a spliced hit would need independent confirmation, and it too has produced no verdict against this message; catalog right-ring sweep parked at originalIndex 417/2513 (last <code>VVVUUUDREINULEINSVI@25</code>; resume <code>--bombe-from 418</code>); Thetis-register rings from menu 14; any middle ring other than A (~8–15% of keys — the arm is now built and graded end-to-end, with the blind control breaking at full middle × right coverage in 4,307 s, but it has produced no P1030680 verdict); the long-menu arms whose negatives are incomplete by up to 5.56% because a kernel table cap reported lanes eliminated without testing them — the Übung body arm was contaminated on all 40 placements and has now been re-run and re-confirmed (40/40 dead, 0 stops); the curated top-30 on 20 of 30 has also been re-run and re-confirmed (73 raw stops, identical to the archive, no break); the catalog on 300 of 2,513 is queued; near-shell walk around sister keys. Sister message P1030681 needed heavy degarbling—exact Welchman clean negatives do not rule out a mis-transcribed P1030680. Soft-band near-misses quarantine into Stochastic seeds. More GPU on inventing letters does not invent the plaintext—boolean coverage plus garble-aware escalation does.
               </span>
             </li>
           </ul>
@@ -371,6 +371,83 @@ export function JournalPage() {
               </div>
             </article>
             <article className="tl-item">
+              <div className="when">Phase 22: Quarantine</div>
+              <h3>Exact bars drop garbled truths. Soft-band them into Stochastic.</h3>
+              <div className="prose">
+                <p>
+                  Dan Girard’s degarbling of the Dönitz sister message P1030681 shows what U-534 paper actually looks like: two disagreeing copies, U confused with N, Q with G, a whole four-letter group missing from one transcript. Our message may be the same kind of mess. An exact Welchman BREAK bar can therefore throw away the true shell because two or three ciphertext letters are wrong.
+                </p>
+                <p>
+                  So I added a quarantine tier. Physical stops that still decrypt their crib exactly, clear a soft IC/trigram band, but fail the strict break gate are written to <code>logs/quarantine_candidates.json</code>. The Stochastic Bombe can ingest that file as elite shell seeds—wheels and rings locked, stecker free to drift—and hunt local garbles without abandoning the Boolean sieve. Synthetic control: wipe twenty letters of known P1030684 after the crib; clean CT still BREAKs, garbled CT soft-bands, Hybrid escalate recovers 100/120 (≥80%). Historical control on Girard’s P1030681: the Schlüsselzettel re-check is only twelve letter diffs and still BREAKs; the first draft—uncertain dots filled, missing group <code>HMHY</code> re-inserted—is thirty-eight diffs, lands in the soft band, and escalate recovers the edit ceiling (334/372). Prior exact-menu clean negatives still stand for those letter strings; they do not stand for a nearby transcription of the same German.
+                </p>
+                <p>
+                  An audit of older campaign logs found no soft-band hits on P1030680 at the default soft tail (−4.0)—closest is <code>UEBUNGXUEBUNG@0</code> at IC 0.049 / tail −4.270. A temporary soft-tail floor of −4.3 on a slim UEBUNG near-miss fixture pulled 55 candidates into quarantine (one whole-band shell). Hybrid locked-shell escalate from that net returned a clean negative under the 80% survivor bar—German-looking IC, coincidence-wall ratio. Soft boundary catches the stop; it does not invent the plaintext.
+                </p>
+              </div>
+            </article>
+            <article className="tl-item">
+              <div className="when">Phase 23: Regenbogen / Hannibal</div>
+              <h3>Not the fleet scuttle order. Not the Hela evacuation phrase.</h3>
+              <div className="prose">
+                <p>
+                  With the catalog ring sweep parked at menu 202, I burned Metal on the operational prior: if U-534 lacked current Thetis keys, would this 72-letter scrap be a Regenbogen scuttle or Hannibal/Hela evacuation broadcast? Long, self-stecker-legal phrases—<code>BEFEHLERHALTENREGENBOGEN</code>, <code>STICHWORTREGENBOGEN</code>, <code>VERSENKUNGBEFOHLEN</code>, <code>RAEUMUNGOSTPREUSSEN</code>, <code>EINSCHIFFUNGHELA</code>, and kin—went through AAAA then full right rings with quarantine armed.
+                </p>
+                <p>
+                  The anchor is a clean negative: nineteen offsets, rings AAAA and right, zero raw stops. Scuttle and Hela produced physical boards and soft-band prefixes (183 / 22 quarantine; 75 / 7), but Hybrid locked-shell escalate returned zero survivors under the 80% bar—ceilings around 54–58%, the coincidence wall again. Own-orders AAAA: all ghosts. Filler AAAA: two physicals, best IC 0.043 — below soft, so no ring sweep. Under right-ring coverage with the middle ring still pinned at A, this ciphertext is <em>not</em> those exact letter-strings at the legal offsets tried. Soft-band German-looking decrypts are not plaintext. Metal returned to the catalog ring sweep; that fragment reached menu 256 before parking.
+                </p>
+              </div>
+            </article>
+            <article className="tl-item">
+              <div className="when">Phases 24–48: Elsewhere in HELUT</div>
+              <h3>Why this chronology skips twenty-five phases.</h3>
+              <div className="prose">
+                <p>
+                  If you are counting, the numbers jump here, and the jump is not missing work — it is work on a different subject. HELUT is three pillars sharing one GPU, and only one of them is this message. The phase numbers are global to the project, so this campaign chronology inherits gaps wherever a phase belonged to another pillar.
+                </p>
+                <p>
+                  Where those phases actually live: <strong>Phases 24–48</strong> are the encrypted-computation ladder — from "our Metal graphs are FHE-<em>shaped</em>" to "our Metal graphs are actually encrypted" — and they are chronicled in the <Link to="/projects/netlist-fhe/journal">Netlist-Clocked Torus FHE journal</Link> (Pillar I). <strong>Phase 21</strong>, the TensorLUT compiler, appears above because it shared this GPU, but its real home is <Link to="/projects/differentiable-hardware/journal">Differentiable Hardware Cryptanalysis</Link> (Pillar II), where the continuous-to-discrete loop is the subject rather than a side effect. FHE Gate Optimization is a <em>queued</em> Pillar II project about multiplicative depth and LUT count; it has a hub but no chronology yet, so do not go looking for these phases there.
+                </p>
+                <p>
+                  Very briefly, so the gap is not mysterious: closing the mock-PBS boolean loop (my <code>$lut</code> lowering had been XOR-packing wires against a random Toeplitz, so tensors I was calling "plaintext" were nothing of the kind); then real TFHE machinery — GLWE and LWE sample types, GGSW external products, a non-zero secret, a crypto gadget, real key-switching; then an encrypted Yosys netlist, LWE blind rotation with a bootstrap key, public modulus-switch refresh, a machine-checked bounded-noise proof, a Gaussian failure-probability certificate, and a Decision-LWE hardness certificate with a calibration table. It ends with a whole-netlist single-graph Metal path and N=1024 microbenchmarks.
+                </p>
+                <p>
+                  None of it touches the Enigma hunt. It shares the silicon, competes for it, and occasionally parks the ring sweep — which is why it appears in the campaign ledger's phase numbering at all. Two campaign-relevant exceptions sit in that range: Phases 19 and 20 (collapse lexicon, meta-evolve, weather and keyboard priors, shell-RIGA — all zero survivors under the rigor bar), which I folded into the Phase 18 narrative above rather than giving separate entries; and Phase 49, which is very much this campaign and gets its own entry below because it cost me two published results.
+                </p>
+              </div>
+            </article>
+
+            <article className="tl-item">
+              <div className="when">Phase 49: The Cap That Printed Negatives</div>
+              <h3>A lookup-table size limit had been reporting clean negatives.</h3>
+              <div className="prose">
+                <p>
+                  Phase 12 above tells the discovery story. This is what it cost and what I did about it, because the fix changed the engine and re-opened two arms I had already published as closed.
+                </p>
+                <p>
+                  The Metal kernel tabulates one rotor-path involution per distinct slow-wheel state a menu span reaches, and it capped that at four. When a lane needed a fifth, the kernel wrote a zero survivor mask — which my driver reads as <em>eliminated</em> — for a lane it had never actually tested. A cap on the size of a lookup table was emitting clean negatives, in the same language as a real result.
+                </p>
+                <p>
+                  I bounded the damage with stepping arithmetic rather than by re-running anything: every menu span in every fixture I have ever swept, all 56 naval middle/right rotor pairs, all 676 windows, no GPU required. It never fires at or below 25 letters. At 28 it silently eliminates 0.29% of lanes, at 30 letters 1.14%, and at 40 letters <strong>5.56%</strong>. Whole-catalog exposure is 0.33% — but it is not spread thinly, and that is the problem.
+                </p>
+                <p>
+                  It concentrates on exactly the arms I curated for long, strong menus. My Übung body-anchor arm is forty menus of forty letters each, so <strong>all forty were contaminated</strong> — and that arm's "zero raw stops" is what let me close the Übung-push hypothesis. The curated top-30 was contaminated on 20 of 30. The main catalog on 300 of 2,513. The Regenbogen queue is clean, and everything from 16 to 25 letters, which is the large majority of the catalog and all of the Thetis-register work, was never affected.
+                </p>
+                <p>
+                  The fix: the cap is now eight, and overflow writes <em>undecided</em> — all 26 seeds live — so the host re-tests that lane in full on an engine that has no such limit. A lane can no longer be discarded by a table size. Then I re-ran both contaminated arms. Übung body: 40/40 still dead, zero raw stops across 6.39×10<sup>11</sup> settings. Top-30: 73 raw stops over 4.79×10<sup>11</sup> settings — <em>byte-identical</em> to the archived figures. In both arms the previously-untested lanes produced <strong>zero</strong> extra survivors. The bug was not hiding a key. Both negatives stand, and now they are earned.
+                </p>
+                <p>
+                  The same phase made the middle ring affordable. It had been pinned at A by a literal zero in one host tuple, and unpinning it looked like 26× the work. It is not, because notch tests depend on window position rather than on the ring: a lane whose middle wheel never reaches its notch — and whose ring-A partner at window <em>m</em>−ρ never does either — is the <em>same machine</em> as that partner. So ring A runs in full and rings B–Z run only their notch-hitting lanes, and the union is complete coverage rather than a sample. Measured cost: <strong>6.5× for a one-notch middle wheel, 11.4× for two</strong>. I graded the equivalence before trusting it — 2.4 million claimed-covered pairs, zero verdict mismatches — because a coverage shortcut that quietly drops keys is the same class of bug as the cap.
+                </p>
+                <p>
+                  Throughput came along for free. The kernel had been applying no plug budget at all, so every over-budget stop was shipped to the host and re-derived before being thrown away; and the driver was reading only "did any seed survive," discarding the 26-bit seed mask the GPU had already computed, then re-running all 26 host closures. Both fixed, with the kernel applying the host rule verbatim so verdicts cannot change: <strong>399 s → 352 s, 45.4M settings/s</strong>, same shell, same ten plugs, same IC and tail, and the GPU-versus-host cross-check still at zero lane mismatches.
+                </p>
+                <p>
+                  Two ideas failed and are recorded as failures. A Kriegsmarine board carried <em>exactly</em> ten leads, so plugs the menu has not yet forced must still fit — sound, and the control still breaks, but <strong>useless</strong>: it took 847,434 raw stops down to 847,414, which is 0.002%, while costing 4% throughput. Its selectivity is anti-correlated with where ghosts actually live. And three quarantine flags documented in my own ledger had <strong>never been parsed</strong> for the Welchman path, which means Phase 22's "temporary soft tail of −4.3" actually ran at −4.0 the whole time. All three are wired now.
+                </p>
+              </div>
+            </article>
+
+            <article className="tl-item">
               <div className="when">Phase 50: The Crib-Free Path</div>
               <h3>I stopped needing a probable word — and measured how far that gets me.</h3>
               <div className="prose">
@@ -454,35 +531,41 @@ export function JournalPage() {
                   The corrected rule is better than the one I lost. Tolerance is not a global switch, it is a per-menu decision pre-qualified by measurement. I cannot simply run the campaign's 16-letter minimum at tolerance 1 — one offset-0 menu there produces 130,787 survivors per shell against an escalator that has so far handled eighty-six. So the order is measure, then run.
                 </p>
                 <p>
-                  What this is not: a decrypt, a verdict against my target, or a claim that P1030680 <em>is</em> garbled. It says a tolerant board would recover a garbled true key, which is a fact about the board and not about the ciphertext. It also does not model <strong>indels</strong> — Girard found an entire four-letter group missing from one transcript, and a missing group is a frame shift rather than a substitution. No bombe has ever asked "what if four letters fell out here." That one is next.
+                  What this is not: a decrypt, a verdict against my target, or a claim that P1030680 <em>is</em> garbled. It says a tolerant board would recover a garbled true key, which is a fact about the board and not about the ciphertext.
+                </p>
+                <p>
+                  It also does not model <strong>indels</strong>, and that gap turned out to matter more than the board itself — so I built the other half. Full design notes for both live on the <Link to="/projects/p1030680/mulein-board">Mulein board page</Link>.
                 </p>
               </div>
             </article>
 
             <article className="tl-item">
-              <div className="when">Phase 22: Quarantine</div>
-              <h3>Exact bars drop garbled truths. Soft-band them into Stochastic.</h3>
+              <div className="when">Phase 51.7: The Indel Board</div>
+              <h3>What Girard actually found was not a wrong letter. It was a missing group.</h3>
               <div className="prose">
                 <p>
-                  Dan Girard’s degarbling of the Dönitz sister message P1030681 shows what U-534 paper actually looks like: two disagreeing copies, U confused with N, Q with G, a whole four-letter group missing from one transcript. Our message may be the same kind of mess. An exact Welchman BREAK bar can therefore throw away the true shell because two or three ciphertext letters are wrong.
+                  The tolerant board fixes substitutions — a letter read wrong at a position I know. But the error Girard actually documented in the sister message was different in kind: an entire four-letter group, <code>HMHY</code>, present on the Schlüsselzettel copy and simply blank on the plain-paper one. Nothing was mis-read. Letters went <em>missing</em>, and everything after them slid.
                 </p>
                 <p>
-                  So I added a quarantine tier. Physical stops that still decrypt their crib exactly, clear a soft IC/trigram band, but fail the strict break gate are written to <code>logs/quarantine_candidates.json</code>. The Stochastic Bombe can ingest that file as elite shell seeds—wheels and rings locked, stecker free to drift—and hunt local garbles without abandoning the Boolean sieve. Synthetic control: wipe twenty letters of known P1030684 after the crib; clean CT still BREAKs, garbled CT soft-bands, Hybrid escalate recovers 100/120 (≥80%). Historical control on Girard’s P1030681: the Schlüsselzettel re-check is only twelve letter diffs and still BREAKs; the first draft—uncertain dots filled, missing group <code>HMHY</code> re-inserted—is thirty-eight diffs, lands in the soft band, and escalate recovers the edit ceiling (334/372). Prior exact-menu clean negatives still stand for those letter strings; they do not stand for a nearby transcription of the same German.
+                  That is a completely different failure, and it needs completely different machinery. If four letters fell out, then every remaining letter is <em>correct</em> — it just sits at the wrong index, which means the rotor had advanced four more times than the recorded position suggests. So each menu edge after the splice needs a <strong>different scrambler</strong>. Nothing about the deduction is relaxed. It is a different, and much more specific, hypothesis about what happened to the paper.
                 </p>
                 <p>
-                  An audit of older campaign logs found no soft-band hits on P1030680 at the default soft tail (−4.0)—closest is <code>UEBUNGXUEBUNG@0</code> at IC 0.049 / tail −4.270. A temporary soft-tail floor of −4.3 on a slim UEBUNG near-miss fixture pulled 55 candidates into quarantine (one whole-band shell). Hybrid locked-shell escalate from that net returned a clean negative under the 80% survivor bar—German-looking IC, coincidence-wall ratio. Soft boundary catches the stop; it does not invent the plaintext.
-                </p>
-              </div>
-            </article>
-            <article className="tl-item">
-              <div className="when">Phase 23: Regenbogen / Hannibal</div>
-              <h3>Not the fleet scuttle order. Not the Hela evacuation phrase.</h3>
-              <div className="prose">
-                <p>
-                  With the catalog ring sweep parked at menu 202, I burned Metal on the operational prior: if U-534 lacked current Thetis keys, would this 72-letter scrap be a Regenbogen scuttle or Hannibal/Hela evacuation broadcast? Long, self-stecker-legal phrases—<code>BEFEHLERHALTENREGENBOGEN</code>, <code>STICHWORTREGENBOGEN</code>, <code>VERSENKUNGBEFOHLEN</code>, <code>RAEUMUNGOSTPREUSSEN</code>, <code>EINSCHIFFUNGHELA</code>, and kin—went through AAAA then full right rings with quarantine armed.
+                  <strong>So the indel board is not part of the Mulein board.</strong> They are siblings, covering the two halves of edit distance: substitution is a deleted edge, an indel is a re-alignment. And the sibling turns out to be the better-behaved one, for three reasons I did not expect going in.
                 </p>
                 <p>
-                  The anchor is a clean negative: nineteen offsets, rings AAAA and right, zero raw stops. Scuttle and Hela produced physical boards and soft-band prefixes (183 / 22 quarantine; 75 / 7), but Hybrid locked-shell escalate returned zero survivors under the 80% bar—ceilings around 54–58%, the coincidence wall again. Own-orders AAAA: all ghosts. Filler AAAA: two physicals, best IC 0.043 — below soft, so no ring sweep. Under right-ring coverage with the middle ring still pinned at A, this ciphertext is <em>not</em> those exact letter-strings at the legal offsets tried. Soft-band German-looking decrypts are not plaintext. Metal returned to the catalog ring sweep; that fragment reached menu 256 before parking.
+                  First, <strong>it needed no new board at all.</strong> The step number and the ciphertext index were already separate arrays in my menu structure, and the GPU kernel already picks a scrambler per edge from that step array. So a spliced menu runs on Welchman's <em>exact</em> board with zero kernel changes. Second, and following from that, <strong>zero survivor inflation</strong> — the entire pre-qualification problem that dominates tolerance simply does not arise. Third, it is the hypothesis with actual evidence behind it: Girard <em>found</em> a missing group, whereas isolated substitution garble across my 48 controls amounts to only four controls and eight events.
+                </p>
+                <p>
+                  The grade. I deleted a real four-letter group — <code>HBSX</code> — from the known P1030684 ciphertext at position 12, manufacturing the transcript a copyist would have left behind, then attacked the damaged text with a 27-letter crib straddling the gap. The ordinary menu did not merely lose the key: it came out <strong>illegal</strong>, because the misalignment forced a letter to encipher to itself, which Enigma forbids. The true shell was never even testable. The spliced menu with the right splice and gap size <strong>kept it, with all 25 plug deductions correct</strong>, on the 23 edges that survived the gap.
+                </p>
+                <p>
+                  <strong>The specificity result is more interesting than a pass would have been.</strong> I checked whether a <em>wrong</em> splice could rescue the setting, and found that at the 16-letter floor, all 28 wrong splices were eliminated before the bombe was ever asked — by self-encipherment. Enigma never encodes a letter to itself, so re-pairing a crib against shifted ciphertext almost always produces an illegal placement.
+                </p>
+                <p>
+                  That asymmetry is structurally in my favour. A menu built from the true crib at the true offset with the true splice is <em>always</em> legal, because it is reconstructing real plain/cipher pairs — so this filter can never reject the truth, while it killed 28 of 28 wrong candidates for free with no GPU at all. But I have to be careful about what it does <em>not</em> show: the discrimination is coming from the cipher's own constraint, not from the board, and legality prunes by coincidence rather than by correctness. I have no measurement of what the board does with a legal-but-wrong splice, so a spliced hit would still need independent confirmation.
+                </p>
+                <p>
+                  Two of my own test bugs are worth recording, because both produced confident wrong answers. My first probe shortened the crib while keeping its start fixed, which quietly walked it off the gap entirely — and since the damaged and undamaged transcripts are <em>identical before the gap</em>, every splice produced the same correct menu and the tool cheerfully reported "28 of 28 wrong splices surviving." My second auto-shortened to 12 letters, below my own ghost threshold, where nothing discriminates anything. The probe now forces the crib to straddle the gap and refuses to go below 16.
                 </p>
               </div>
             </article>

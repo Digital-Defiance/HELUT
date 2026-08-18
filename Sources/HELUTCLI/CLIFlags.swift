@@ -67,6 +67,7 @@ public let positionalArgs: [String] = {
         "--bombe-quarantine", "--bombe-quarantine-tail-margin",
         "--bombe-rings", "--bombe-garble-tolerance",
         "--bombe-tolerance-prequal", "--prequal-shells", "--prequal-arm-shells",
+        "--indel-crib", "--indel-delta", "--indel-gap-at", "--bombe-indel",
         "--bombe-quarantine-ic-floor",
         "--ostwald-wrong", "--ostwald-lengths", "--ostwald-scorer", "--ostwald-controls",
         "--ostwald-exhaust", "--ostwald-seed", "--ostwald-escalate", "--ostwald-keep", "--ostwald-reconnect", "--garble-crib", "--garble-tolerance", "--garble-offset", "--ostwald-lexicon",

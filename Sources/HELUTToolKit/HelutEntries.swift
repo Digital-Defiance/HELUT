@@ -266,6 +266,11 @@ public enum HelutBombeCLI {
         exit(0)
     }
 
+    if CommandLine.arguments.contains("--indel-selftest") {
+        runIndelSelfTest()
+        exit(0)
+    }
+
     if CommandLine.arguments.contains("--bombe-tolerance-prequal") {
         runTolerancePrequal()
         exit(0)
@@ -327,7 +332,10 @@ public enum HelutBombeCLI {
         ]
         return args.contains {
             keys.contains($0) || $0.hasPrefix("--bombe-") || $0.hasPrefix("--ostwald-")
-                || $0.hasPrefix("--garble-")
+                // `--garble-` is the Mulein board (substitution tolerance); `--indel-` is the
+                // spliced-menu hypothesis. Separate prefixes because they are separate
+                // mechanisms — see directives/mulein-board.md §3.
+                || $0.hasPrefix("--garble-") || $0.hasPrefix("--indel-")
         }
     }
 }

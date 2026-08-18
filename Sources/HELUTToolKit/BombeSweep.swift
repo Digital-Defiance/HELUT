@@ -53,6 +53,31 @@ func loadCribMenus(path: String) -> CribMenuSet? {
             }
         }
     }
+
+    // `--bombe-indel <delta>` adds the spliced (indel) family to the same menu list, so both
+    // mechanisms ride ONE sweep rather than two competing processes. The ring loop taught the
+    // same lesson: two processes on one GPU merely timeshare a single command queue and each
+    // takes about twice as long for the same finish time, whereas extra menus in one pass keep
+    // the queue saturated and share the fixture load.
+    //
+    // Spliced menus need no tolerance — a splice relaxes nothing and runs on the exact board —
+    // so with per-menu tolerance a mixed run gives each family what it actually needs.
+    if let delta = intFlag("--bombe-indel"), delta > 0 {
+        var spliced: [BombeMenu] = []
+        var seenTexts = Set<String>()
+        for crib in file.cribs where seenTexts.insert(crib.text).inserted {
+            let family = SpliceMenuBuilder.indelMenus(
+                crib: crib.text, ciphertext: ciphertext,
+                deltas: [delta], minimumEdges: intFlag("--bombe-min-crib") ?? 16
+            )
+            spliced.append(contentsOf: family.map { $0.menu })
+        }
+        print("indel family: +\(spliced.count) spliced menus (delta \(delta),"
+            + " splices on \(SpliceMenuBuilder.transmissionGroup)-letter group boundaries)")
+        print("  a spliced menu runs on the EXACT board — no tolerance, no survivor inflation."
+            + " Step number and ciphertext index diverge; that is the whole mechanism.")
+        menus.append(contentsOf: spliced)
+    }
     // Shortcut #2: rank by deduction power on *this* ciphertext, not by corpus popularity.
     menus.sort(by: byLoopPower)
     return CribMenuSet(ciphertext: ciphertext, menus: menus, source: path)
@@ -1025,6 +1050,25 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
         print()
     }
 
+    /// Tolerance this specific menu may be given, from its own redundancy.
+    ///
+    /// Phase 51.4: tolerance *spends* menu redundancy, and only a loop-rich menu has enough to
+    /// spend. The placements that detonate are the ones already weak at tolerance 0, so the
+    /// gate is loop count rather than crib length — an earlier crib-length rule held only at
+    /// offset 0 and was withdrawn.
+    ///
+    /// The thresholds here are conservative and deliberately not a substitute for
+    /// `--bombe-tolerance-prequal`, which measures actual survivor counts. This only prevents
+    /// the obvious catastrophe of handing tolerance to an under-determined menu; a menu that
+    /// clears this bar can still inflate, which is what the prequal gate is for.
+    func toleranceFor(menu: BombeMenu, requested: Int) -> Int {
+        // Measured on the target's strongest fixture: 40 edges / 20 loops carries tolerance 1
+        // with zero inflation, while 18 edges / 14 letters detonated at tolerance 2.
+        if menu.loops >= 12 { return min(requested, 2) }
+        if menu.loops >= 6 { return min(requested, 1) }
+        return 0
+    }
+
     for (runIndex, item) in runnable.enumerated() {
         let originalIndex = item.0
         let menu = item.1
@@ -1033,6 +1077,26 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
 
         var physical: [SweepStop] = []
         var rawStops = 0
+
+        // Per-menu tolerance. Phase 51.4 measured inflation as a property of the individual
+        // menu's loop structure, not of the run, so a single global switch is the wrong shape:
+        // it would either forgo tolerance on menus that can afford it, or detonate on menus
+        // that cannot. Setting it here lets one sweep carry mixed families in a single pass —
+        // spliced (indel) menus at tolerance 0, where they need none because a splice relaxes
+        // nothing, alongside loop-rich menus at tolerance 1.
+        //
+        // Safe with the shell pipeline: `enqueue` copies the tolerance into the command buffer
+        // at encode time, so shells already in flight from the previous menu keep their own
+        // value even while this one is being set.
+        let menuTolerance = config.garbleTolerance > 0
+            ? toleranceFor(menu: menu, requested: config.garbleTolerance)
+            : 0
+        engine.sieve = WelchmanSieve(
+            maxPlugs: config.maxPlugs,
+            exactPlugs: config.exactPlugs,
+            skipMiddleRingCovered: config.sweepMiddleRing && config.pinnedRings.isEmpty,
+            garbleTolerance: menuTolerance
+        )
 
         if isChallenger {
             if lockedAnchors.isEmpty {

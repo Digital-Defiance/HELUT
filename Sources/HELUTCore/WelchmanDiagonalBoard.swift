@@ -52,8 +52,6 @@ package enum BombeMenuBuilder {
 
         var steps: [Int] = []
         var ends: [(Int, Int)] = []
-        var degree = [Int](repeating: 0, count: 26)
-        var present = [Bool](repeating: false, count: 26)
 
         for index in letters.indices {
             let step = offset + index
@@ -63,10 +61,37 @@ package enum BombeMenuBuilder {
             if plain == cipher { return nil }
             steps.append(step)
             ends.append((plain, cipher))
-            degree[plain] += 1
-            degree[cipher] += 1
-            present[plain] = true
-            present[cipher] = true
+        }
+
+        return assemble(crib: crib, offset: offset, steps: steps, ends: ends)
+    }
+
+    /// Build the menu graph from an edge list: connected components, cyclomatic number, and
+    /// the highest-degree letter to use as the test register.
+    ///
+    /// Shared by the ordinary builder above and by the spliced (indel) builder in
+    /// `SpliceMenu.swift`, so menu *topology* has exactly one implementation. The two differ
+    /// only in how they pair a crib letter with a ciphertext letter and a step number; once
+    /// that pairing exists, a menu is a menu.
+    ///
+    /// `steps` is the ciphertext/rotor index per edge and selects which scrambler the edge
+    /// uses. For an ordinary menu it equals `offset + i`; for a spliced menu it does **not**,
+    /// which is the entire mechanism of the indel hypothesis.
+    package static func assemble(
+        crib: String,
+        offset: Int,
+        steps: [Int],
+        ends: [(Int, Int)]
+    ) -> BombeMenu? {
+        guard !ends.isEmpty, steps.count == ends.count else { return nil }
+
+        var degree = [Int](repeating: 0, count: 26)
+        var present = [Bool](repeating: false, count: 26)
+        for (a, b) in ends {
+            degree[a] += 1
+            degree[b] += 1
+            present[a] = true
+            present[b] = true
         }
 
         var parent = Array(0..<26)
