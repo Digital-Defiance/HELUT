@@ -63,17 +63,36 @@ func loadCribMenus(path: String) -> CribMenuSet? {
     // Spliced menus need no tolerance — a splice relaxes nothing and runs on the exact board —
     // so with per-menu tolerance a mixed run gives each family what it actually needs.
     if let delta = intFlag("--bombe-indel"), delta > 0 {
+        // `--bombe-indel-post-gap` keeps only the family whose crib lies entirely AFTER the
+        // gap. That is the affordable and best-motivated first bite, for three reasons:
+        //
+        //   * It is the cleanest form of the hypothesis — "a group went missing somewhere
+        //     before this crib, so every step number is delta too low." One menu per legal
+        //     offset, independent of where before the crib the gap actually sat.
+        //   * It carries the FULL edge count. Nothing fell in the gap, so no deduction power
+        //     is lost, whereas a straddling menu forfeits up to `delta` edges.
+        //   * It is ~11% of the family (33 of 302 on the control), and the straddling
+        //     remainder is both weaker and nine times more numerous. Full family at right-ring
+        //     coverage is ~7 days; post-gap only is ~18 h.
+        let postGapOnly = CommandLine.arguments.contains("--bombe-indel-post-gap")
         var spliced: [BombeMenu] = []
+        var straddlingDropped = 0
         var seenTexts = Set<String>()
         for crib in file.cribs where seenTexts.insert(crib.text).inserted {
             let family = SpliceMenuBuilder.indelMenus(
                 crib: crib.text, ciphertext: ciphertext,
                 deltas: [delta], minimumEdges: intFlag("--bombe-min-crib") ?? 16
             )
-            spliced.append(contentsOf: family.map { $0.menu })
+            let kept = postGapOnly ? family.filter { !$0.straddlesGap } : family
+            straddlingDropped += family.count - kept.count
+            spliced.append(contentsOf: kept.map { $0.menu })
         }
         print("indel family: +\(spliced.count) spliced menus (delta \(delta),"
             + " splices on \(SpliceMenuBuilder.transmissionGroup)-letter group boundaries)")
+        if postGapOnly {
+            print("  post-gap only: dropped \(straddlingDropped) straddling menus."
+                + " Kept menus carry the full edge count — nothing fell in the gap.")
+        }
         print("  a spliced menu runs on the EXACT board — no tolerance, no survivor inflation."
             + " Step number and ciphertext index diverge; that is the whole mechanism.")
         menus.append(contentsOf: spliced)
