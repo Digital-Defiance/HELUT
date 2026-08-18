@@ -95,6 +95,19 @@ func loadCribMenus(path: String) -> CribMenuSet? {
         }
         print("  a spliced menu runs on the EXACT board — no tolerance, no survivor inflation."
             + " Step number and ciphertext index diverge; that is the whole mechanism.")
+        // `--bombe-indel-only` drops the ordinary family, which is the only way to ask whether
+        // the spliced family manufactures ghosts. On an UNDAMAGED control every splice is a
+        // false hypothesis by construction, so any break from this arm is a false positive —
+        // a clean, decisive specificity test.
+        //
+        // Needed because the obvious version of that test does not work: the control fixture
+        // holds three true cribs at true offsets, so skipping past the first one merely reaches
+        // the second and "breaks" legitimately. That mistake was made and is recorded here.
+        if CommandLine.arguments.contains("--bombe-indel-only") {
+            print("  indel-only: dropping \(menus.count) ordinary menus. On an undamaged"
+                + " ciphertext every splice is false, so ANY break here is a false positive.")
+            menus.removeAll()
+        }
         menus.append(contentsOf: spliced)
     }
     // Shortcut #2: rank by deduction power on *this* ciphertext, not by corpus popularity.
