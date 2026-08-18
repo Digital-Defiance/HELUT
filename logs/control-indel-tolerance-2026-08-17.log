@@ -1,0 +1,44 @@
+indel family: +910 spliced menus (delta 4, splices on 4-letter group boundaries)
+  a spliced menu runs on the EXACT board — no tolerance, no survivor inflation. Step number and ciphertext index diverge; that is the whole mechanism.
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030684_control_menus.json (913 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 4 of 913
+min crib length: 16
+running 4 menus, highest deduction power first:
+  [1] VVVUUUVIRSOBENNULEINSXXMITU@45 edges=27 letters=19 loops=9 central=U
+  [2] VVVUUUVIRSOBENNULEINSXXMITU@0 edges=27 letters=21 loops=8 central=U
+  [3] VVUUUVIRSOBENNULEINSXXMITUU@1 edges=27 letters=21 loops=8 central=U
+  [4] UUVIRSOBENNULEINSXXMITUUUVI@4 edges=27 letters=21 loops=8 central=U
+shells/menu: 1344 (336 WO × 2 Greek × 2 UKW × rings PINNED AAAH) → 6.14e+08 settings
+rings pinned: these are ring HYPOTHESES, not coverage. A negative here eliminates 1 Ringstellung(en) out of 676, no more.
+garble tolerance: 1 menu edges may be dropped (Mulein board — widens survivors; inflation is placement dependent)
+kernel sieve: ≤10 plugs
+GPU pipeline depth: 4 shells in flight
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+rings AAAA: exhaustive over turnover-free spans, which is 0/26 (0%) of keys at 27 letters. --bombe-ring-sweep covers the rest at 26x cost.
+ETA floor (~50M/s): 0.8 min
+
+quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → logs/quarantine_candidates.json
+  [1/4·1] VVVUUUVIRSOBENNULEINSXXMITU@45 edges=27 letters=19 loops=9 central=U dead at the board                       462s   1.3M/s ETA  23.1 min
+  [2/4·2] VVVUUUVIRSOBENNULEINSXXMITU@0 edges=27 letters=21 loops=8 central=U       1 stops → 1 physical, best IC 0.064 tail -2.848    1200s   1.0M/s ETA  20.0 min
+
+total raw stops: 1 over 1228351488 settings (1.0M/s mean)
+survived the 10-plug sieve: 1
+quarantine: 0 soft-band near-misses (break claimed; soft-band peers retained)
+
+******************************************************************************
+***  BREAK FOUND  ***
+******************************************************************************
+  menu        VVVUUUVIRSOBENNULEINSXXMITU@0 edges=27 letters=21 loops=8 central=U
+  UKW         B
+  Greek       gamma
+  wheel order IV-III-VIII
+  rings       AAAH
+  position    VYYN
+  stecker     BQ CH DI EJ GL KP NV OU SZ TY (10 pairs)
+  IC          0.064 (floor 0.055)
+  tail        -2.848 vs German -2.847 / noise -5.382
+
+  VVVUUUVIRSOBENNULEINSXXMITUUUVIRSIBENNULZWOYVIRSIBENNULDREIYZWODREISECHSEINSYZWODREIDREIACHTEINSDREIOITNACHWZSTENPASSIRT
+******************************************************************************
