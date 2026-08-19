@@ -36,9 +36,23 @@ package struct BombeMenu: Sendable {
 
     package var edgeCount: Int { steps.count }
 
+    /// Connected components of the menu graph, from `loops = edges − vertices + components`.
+    ///
+    /// This is the number that decides whether a menu can force a *whole* board. The bombe
+    /// seeds one letter, so it only propagates within that letter's component and never tests
+    /// the constraints in the others — which is exactly how a split menu produces stops without
+    /// being close to anything. `UUUVIRSIBENNULEINS@0` is the campaign's canonical example: 3
+    /// components, 12 raw stops in Phase 3, and 0 joint ≤10-plug completions.
+    package var components: Int { loops - edgeCount + letters.count }
+
     package var description: String {
+        // `components` is printed because the ledger's own rule is that menu strength is
+        // *connectivity*, not edge count — and without it a split menu producing stops reads
+        // like a recurring near-miss rather than a known dud. `comp>1` means the board is only
+        // testing part of the menu and the joint plug sieve is doing the real work.
         "\(crib)@\(offset) edges=\(edgeCount) letters=\(letters.count) "
-            + "loops=\(loops) central=\(EnigmaAlphabet.character(central))"
+            + "loops=\(loops) comp=\(components) "
+            + "central=\(EnigmaAlphabet.character(central))"
     }
 }
 
