@@ -262,8 +262,27 @@ package enum MuleinBoard {
             ulong dropMask,
             uint central,
             uint seed,
-            thread uint *outLive
+            thread uint *outLive,
+            thread ulong *activeOut
         ) {
+            // `activeOut` accumulates the edges that actually MODIFIED `live` before this call
+            // returned. It is the whole performance story for tolerance, and it is sound:
+            //
+            //   With `live` seeded from a single bit, most edges are no-ops on early passes --
+            //   their endpoints hold nothing to propagate. If the closure contradicts without
+            //   edge e ever having written to `live`, then removing e leaves the propagation
+            //   byte-identical up to that point, so the SAME contradiction fires. Dropping e
+            //   cannot help.
+            //
+            //   Therefore any drop set that rescues this setting must intersect the active set,
+            //   and enumerating only active edges is complete as well as cheap. On a wrong
+            //   setting the active set is a short propagation chain -- a handful of edges rather
+            //   than all 40 -- which is where the speedup comes from.
+            //
+            // The host board in MuleinBoard.propagate deliberately does NOT do this. It stays a
+            // blind enumeration so that the GPU-vs-host cross-check is a proof that this prune
+            // preserves verdicts, rather than two implementations sharing an assumption.
+            ulong active = 0ul;
             uint live[26];
             for (uint i = 0u; i < 26u; ++i) { live[i] = 0u; }
             live[central] = 1u << seed;
@@ -287,7 +306,8 @@ package enum MuleinBoard {
                     }
                     if ((image & ~live[b]) != 0u) {
                         live[b] |= image;
-                        if (popcount(live[b]) > 1) { return false; }
+                        active |= 1ul << e;
+                        if (popcount(live[b]) > 1) { *activeOut = active; return false; }
                         changed = true;
                     }
 
@@ -300,7 +320,8 @@ package enum MuleinBoard {
                     }
                     if ((image & ~live[a]) != 0u) {
                         live[a] |= image;
-                        if (popcount(live[a]) > 1) { return false; }
+                        active |= 1ul << e;
+                        if (popcount(live[a]) > 1) { *activeOut = active; return false; }
                         changed = true;
                     }
                 }
@@ -315,7 +336,10 @@ package enum MuleinBoard {
                         uint bit = 1u << x;
                         if ((live[y] & bit) == 0u) {
                             live[y] |= bit;
-                            if (popcount(live[y]) > 1) { return false; }
+                            // The diagonal board is not a menu edge, so it contributes nothing
+                            // to `active` -- but a contradiction discovered here still has to
+                            // export whatever edges got us to this state.
+                            if (popcount(live[y]) > 1) { *activeOut = active; return false; }
                             changed = true;
                         }
                     }
@@ -323,6 +347,7 @@ package enum MuleinBoard {
             }
 
             for (uint i = 0u; i < 26u; ++i) { outLive[i] = live[i]; }
+            *activeOut = active;
             return true;
         }
 
@@ -345,6 +370,15 @@ package enum MuleinBoard {
         /// Existence test: is there a drop set of at most `tolerance` edges under which the
         /// board closes? Smallest-first and lexicographic, matching the host. Loops are
         /// unrolled because Metal has no recursion, which is why MAX_TOL is structural.
+        /// Existence test: is there a drop set of at most `tolerance` edges under which the
+        /// board closes? Conflict-directed rather than blind.
+        ///
+        /// Only edges in the failing closure's **active set** are candidates, because any drop
+        /// set that rescues the setting must intersect it (see `mulein_closure`). That is a
+        /// completeness-preserving prune, not a heuristic, and it is the difference between
+        /// trying 40 subsets and trying the handful of edges that actually did anything.
+        ///
+        /// Loops are unrolled because Metal has no recursion, which is why MAX_TOL is structural.
         inline bool mulein_tolerant_closure(
             thread const uchar *scram,
             constant uchar *edgeA,
@@ -355,37 +389,54 @@ package enum MuleinBoard {
             uint seed,
             thread uint *outLive
         ) {
-            if (mulein_closure(scram, edgeA, edgeB, edgeCount, 0ul, central, seed, outLive)) {
+            ulong active0 = 0ul;
+            if (mulein_closure(scram, edgeA, edgeB, edgeCount, 0ul,
+                               central, seed, outLive, &active0)) {
                 return true;
             }
             if (tolerance == 0u) { return false; }
 
-            for (uint i = 0u; i < edgeCount; ++i) {
+            // Candidates for the first deletion: the active set of the exact failure.
+            ulong cand1 = active0;
+            while (cand1 != 0ul) {
+                uint i = uint(ctz(cand1));
+                cand1 &= cand1 - 1ul;
                 ulong mask = 1ul << i;
                 if (!mulein_seed_attached(edgeA, edgeB, edgeCount, mask, central)) { continue; }
-                if (mulein_closure(scram, edgeA, edgeB, edgeCount, mask, central, seed, outLive)) {
+                ulong active1 = 0ul;
+                if (mulein_closure(scram, edgeA, edgeB, edgeCount, mask,
+                                   central, seed, outLive, &active1)) {
                     return true;
                 }
-            }
-            if (tolerance < 2u) { return false; }
+                if (tolerance < 2u) { continue; }
 
-            for (uint i = 0u; i < edgeCount; ++i) {
-                for (uint j = i + 1u; j < edgeCount; ++j) {
-                    ulong mask = (1ul << i) | (1ul << j);
-                    if (!mulein_seed_attached(edgeA, edgeB, edgeCount, mask, central)) { continue; }
-                    if (mulein_closure(scram, edgeA, edgeB, edgeCount, mask, central, seed, outLive)) {
+                // Second deletion: the active set of the failure *after* dropping i. Same
+                // argument applies recursively. Pairs may be visited twice ({i,j} and {j,i}),
+                // which costs a factor of two and still beats C(40,2) = 780 by two orders.
+                ulong cand2 = active1;
+                while (cand2 != 0ul) {
+                    uint j = uint(ctz(cand2));
+                    cand2 &= cand2 - 1ul;
+                    if (j == i) { continue; }
+                    ulong mask2 = mask | (1ul << j);
+                    if (!mulein_seed_attached(edgeA, edgeB, edgeCount, mask2, central)) { continue; }
+                    ulong active2 = 0ul;
+                    if (mulein_closure(scram, edgeA, edgeB, edgeCount, mask2,
+                                       central, seed, outLive, &active2)) {
                         return true;
                     }
-                }
-            }
-            if (tolerance < 3u) { return false; }
+                    if (tolerance < 3u) { continue; }
 
-            for (uint i = 0u; i < edgeCount; ++i) {
-                for (uint j = i + 1u; j < edgeCount; ++j) {
-                    for (uint k = j + 1u; k < edgeCount; ++k) {
-                        ulong mask = (1ul << i) | (1ul << j) | (1ul << k);
-                        if (!mulein_seed_attached(edgeA, edgeB, edgeCount, mask, central)) { continue; }
-                        if (mulein_closure(scram, edgeA, edgeB, edgeCount, mask, central, seed, outLive)) {
+                    ulong cand3 = active2;
+                    while (cand3 != 0ul) {
+                        uint k = uint(ctz(cand3));
+                        cand3 &= cand3 - 1ul;
+                        if (k == i || k == j) { continue; }
+                        ulong mask3 = mask2 | (1ul << k);
+                        if (!mulein_seed_attached(edgeA, edgeB, edgeCount, mask3, central)) { continue; }
+                        ulong active3 = 0ul;
+                        if (mulein_closure(scram, edgeA, edgeB, edgeCount, mask3,
+                                           central, seed, outLive, &active3)) {
                             return true;
                         }
                     }
