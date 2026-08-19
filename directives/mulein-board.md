@@ -74,10 +74,12 @@ machinery, and conflating them was the first thing that had to be sorted out.
 | **Substitution** — `U` read as `N` | Wrong *letter* at a known position | Delete that menu edge | **Mulein board** (tolerance ≥ 1) |
 | **Indel** — a four-letter group dropped | *Correct* letters at *shifted* positions | Re-index edges and shift step numbers | **Exact board**, new menu geometry |
 
-### They are siblings, not nested
+### One board, two mechanisms
 
-Worth stating plainly because it is easy to assume the indel work is "part of" the Mulein board.
-It is not:
+The Mulein board is the **garble-tolerant board**, and it comprises both mechanisms. That is a
+naming decision, not a technical one: the two act at genuinely different layers and the
+difference matters operationally, so it stays documented as internal structure rather than
+collapsed away.
 
 * The Mulein board relaxes the **deduction** while the crib-position → rotor-step alignment
   stays fixed.

@@ -107,9 +107,10 @@ import Foundation
 //   * Tolerance applies to **menu edges only, not to the diagonal board itself**. It is an
 //     algebraic relaxation of the deduction — it does not nominate *which* letters are wrong,
 //     and it is not a claim about the ciphertext.
-//   * It does **not** model indels. A missing four-letter group (Girard's `HMHY`) is a frame
-//     shift: every letter after the splice pairs with a different rotor state. That is a menu
-//     *geometry* change, not an edge deletion, and it is out of scope here.
+//   * This *type* does not model indels. That is the board's second mechanism and it lives in
+//     `SpliceMenu.swift`: a missing four-letter group (Girard's `HMHY`) is a frame shift, so
+//     every letter after the splice pairs with a different rotor state. A menu *geometry*
+//     change rather than an edge deletion — same board, different half.
 //   * Survivor inflation is real and measured. A tolerant board with no discriminator is a
 //     ghost factory; this one is only usable because Phase 50 supplies a scorer that provably
 //     finishes a true stop and leaves ghosts below the random-setting noise floor.

@@ -16,7 +16,9 @@ import Foundation
 //     changes is *which scrambler each edge uses*, because the rotor had advanced further than
 //     the recorded index suggests.
 //
-// So these are siblings, not parent and child. The indel side is the cheaper and better-evidenced
+// Both mechanisms are the Mulein board; this is its second half, not a separate machine. The
+// naming is deliberate, but the layers genuinely differ and that matters. The indel side is the
+// cheaper and better-evidenced
 // one, for three reasons worth stating before the code:
 //
 //   1. **It needs no new board.** The Metal kernel already selects a scrambler per edge from a

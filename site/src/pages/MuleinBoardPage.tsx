@@ -131,7 +131,7 @@ export function MuleinBoardPage() {
           </ul>
           <div className="prose" style={{ marginTop: '1.5rem' }}>
             <p>
-              <strong>They are siblings, not nested,</strong> and the consequences favour the indel side. An indel needs no new board at all: the GPU kernel already reads a per-edge step array, so a spliced menu runs on the historical <em>exact</em> board with no kernel change. Which means <strong>zero survivor inflation</strong> — the entire cost problem below simply does not arise, and no pre-qualification gate is needed.
+              <strong>Both are the Mulein board</strong> — one board, two mechanisms, and the consequences favour the indel half. An indel needs no new board at all: the GPU kernel already reads a per-edge step array, so a spliced menu runs on the historical <em>exact</em> board with no kernel change. Which means <strong>zero survivor inflation</strong> — the entire cost problem below simply does not arise, and no pre-qualification gate is needed.
             </p>
             <p>
               It is also the better-evidenced hypothesis. Girard <em>found</em> a missing group. By contrast, isolated substitution garble in our own corpus amounts to only four controls and eight events — too thin to fit a confusion model on, which is why an earlier and more confident claim about archive garble had to be retracted.

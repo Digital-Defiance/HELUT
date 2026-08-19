@@ -450,9 +450,11 @@ pre-qualification of its placements is pending, and nothing here asserts that
 P1030680 \emph{is} garbled --- only that a tolerant board would recover a garbled true
 key. Tolerance is applied to menu edges, not to the diagonal board itself, so it is an
 algebraic relaxation of the deduction rather than a hypothesis about which letters are
-wrong. Indels are not modelled: Girard records an entire four-letter group
-(\texttt{HMHY}) present on one transcript and absent from the other, which is a frame
-shift rather than a substitution.
+wrong. Indels are the board's \emph{second} mechanism rather than an omission: Girard
+records an entire four-letter group (\texttt{HMHY}) present on one transcript and absent from
+the other, which is a frame shift rather than a substitution, so it is handled by re-indexing the
+menu and shifting step numbers --- a geometry change on the exact board, carrying no survivor
+inflation and needing no pre-qualification gate.
 
 \section{Parallel Track: TensorLUT}
 
