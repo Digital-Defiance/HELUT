@@ -59,24 +59,24 @@ const pillars = [
     slots: [
       {
         idx: 'III.1',
-        title: 'SoftBus reciprocity / bijection',
+        title: 'Bounded fixture-v4 reciprocity',
         figure: '/gallery/gallery-iii1-softbus.png',
-        body: 'Frozen scramble is a permutation and an involution; stream round-trip under identical keys (C10, Theorem 2 / C24).',
-        meta: 'testEnigma256FormalCertificate · Scripts/enigma256_bijection.sh',
+        body: 'The experimental fixture-v4 center is A_i^-1(A_i(x) XOR k_i). The host derives and transports payload, centerMask, and absoluteByteCounter; RTL validates the counter and has no HMAC. Nine unique tables make a 2,304-byte burst and 10 accesses because the plugboard is used twice. KAT: 1,024 bytes, 9 tables, 10 traces, 25 artifacts; equality 260/65536 (z=0.250), formal 1/1, suite 49/49 (C10/C24). E256-003 remains OPEN pending human acceptance; not for real data.',
+        meta: 'E256/v2/gen0/fa246e9cba9009a4799e5a81722a9b14e9a67293d9621b45985c5f3e620865d4/fixture-v4 · logs/e256-v2-gen0-fixture-v4-validation.json',
       },
       {
         idx: 'III.2',
-        title: 'Red battery grades',
+        title: 'Bounded TensorLUT scramble cone',
         figure: '/gallery/gallery-iii2-red-battery.png',
-        body: 'TensorLUT cones, SoftBus KPA, and ent on the keystream—empirical grades on the same Mac that rolls Blue.',
-        meta: 'Scripts/enigma256_red_battery.sh · logs/enigma256-*',
+        body: 'The fixture-v4 scramble cone is 366 LUT6 with independent center_mask. blue_hold (final_crypto -291592.781250; final_nonbinary 1217) records only bounded optimizer failure—not HMAC, the full core, a security level, or a work factor.',
+        meta: 'logs/e256-v2-gen0-fixture-v4-validation.json · empirical grade',
       },
       {
         idx: 'III.3',
-        title: 'Fail-closed NLFF harden',
+        title: 'Profile-integrity + KAT publication guards',
         figure: '/gallery/gallery-iii3-fail-closed.png',
-        body: 'hardenedCubic() rejects coupledCubic6 and rolls back to independent cubic6 (C24 clause 5). Structural SoftBus contract—not IND-CPA.',
-        meta: 'Enigma256Formal.checkFailClosedCoupling',
+        body: 'Fixture-v4 publication rejects a mismatched canonical profile and fails closed when profile/KAT publication splits; formal integrity supplies the matching structural guard (C10/C24). No IND-CPA, HMAC-security, or external-cryptanalysis claim.',
+        meta: 'testCanonicalGoldenPublicationRejectsMismatchedProfile · testProfileKATSplitPublicationFailsClosed · formal integrity',
       },
     ],
   },
@@ -86,7 +86,7 @@ const shapeLab = [
   {
     idx: 'Shape',
     title: 'PicoRV32 / tree / regex (oracle)',
-    body: 'Cleartext / mock-torus clocks prove CPU-scale netlists fit the host DFF contract (C1). Encrypted PicoRV: demo N C45–C51; lut6 N=64 C58/C59; Metal N=1024 e=0 C62; covering via extract→KS n=64 at poly N=1024 (C65 1-tick, C66 boot, C68 NOP 2 fetches). C69: covering KS n=256 PASS, n=512 SING FAIL. C60/C61 (n=N, k=7) still FAIL.',
+    body: 'Cleartext / mock-torus clocks prove CPU-scale netlists fit the host DFF contract (C1). Encrypted PicoRV: demo N C45–C51; lut6 N=64 C58/C59; Metal N=1024 e=0 C62; covering via extract→KS n=64 at poly N=1024 (C65 1-tick, C66 boot, C68 NOP 2 fetches). C69: covering KS n=256 PASS and n=512 PASS; the old n=512 FAIL is withdrawn as a determinism artifact. C60/C61 (n=N, k=7) still FAIL.',
     meta: 'picorv32_netlist.json · boolean benches',
   },
 ]

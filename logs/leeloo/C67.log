@@ -1,31 +1,34 @@
 HELUT encrypted-netlist bench · SING
-  netlist: netlist.json  module=full_adder
+  netlist: Generated/Netlists/Examples/netlist.json  module=full_adder
   poly N=1024  LUTs=3  DFFs=0  2N=2048
   stimuli=1 (max --vectors 1)  cpu-only=true  metal-netlist-only=false
   paths filter: public-ms covering-b2
   paths: public-ms@boolean + public-ms@crypto + secret@crypto
-  BK noise inject Gaussian σ=128.0 (torus; measured identity residual → B_bk)
+  BK noise inject Gaussian σ=128.0 (torus; identity residual is empirical, not B_bk)
+  noisy-BK policy: UNSAFE DIAGNOSTIC ONLY (functional output cannot certify ε)
   LWE n=128  (CMUX count; extract→KS when n<kN=1024)
   DynamicRotateCost mux=2099200 binary=11275 speedup≈186.2×
 
   starting blind-rotate public-ms covering-b2  n=128
   extract→KS     kN=1024 → n=128  (δ-lattice GLev e=0)
   identity residual trials=4  (n=128)
-  identity B_bk    610382  (decodable true)
+  identity observed max|e| 610382  (sample-decodable true)
 ENCRYPTED EQUIV (blind-rotate public-ms covering-b2)
   rows            1
-  wall            8.5092 s  (8509.24 ms/row)
-  classical bits  175.7  (≥128? yes)
+  wall            8.5620 s  (8562.01 ms/row)
+  classical bits  35.4  (≥128? no)
   ingest ε log2   -inf  (target -64)
-  noisy BK B_bk   610382  (decodable true)
-  result          PASS
+  noisy BK observed max|e| 610382  (sample-decodable true; not a hard bound)
+  noisy BK 95% σ  1123124.2  events=3  εlog2=0.0  target=-64  clears=no
+  functional result PASS
+  result          DIAGNOSTIC ONLY — NO NOISY-BK CONFIDENCE CERTIFICATE
 
 ENCRYPTED EQUIV (metal)
   result          SKIP (--cpu-only)
 
 ════════ SING METRICS SUMMARY ════════
-path                                             ms/row       bits    εlog2     B_bk
-blind-rotate public-ms covering-b2                8509.24      175.7 -inf       610382
+path                                             ms/row       bits    εlog2   BK value  cert
+blind-rotate public-ms covering-b2                8562.01       35.4 -inf       610382  NO
 calibration:
 | Label | n | σ | Ref bits | HELUT est | Δ | Source |
 |---|---:|---:|---:|---:|---:|---|

@@ -8,18 +8,19 @@ import type { Project } from './types'
 export const projects: Project[] = [
   {
     slug: 'p1030680',
-    title: 'P1030680 · Turing Complete',
-    subtitle: 'The unbroken M-Thetis ghost from U-534',
+    title: 'Nazi Blaster 9000 · P1030680',
+    subtitle: 'Unified Mulein campaign against the unbroken M-Thetis ciphertext',
     pillar: 'campaign',
     phase: 'campaign',
     status: 'active',
     kicker: 'Campaign journal',
     summary:
-      'Welchman diagonal board, Stochastic Bombe, quarantine escalate, and TensorLUT as a parallel compiler track — an operational ledger of every wedge eliminated against a 72-letter Kriegsmarine ciphertext.',
+      'Nazi Blaster 9000 unifies the Mulein Future Bank, Welchman diagonal board, Stochastic Bombe, and quarantine escalation against one still-unbroken 72-letter Kriegsmarine ciphertext; Fahrenheit 261 names the historical 261-entry canonical campaign.',
     stakes: [
       'Boolean coverage under right rings (catalog live / resume tracked in the journal)',
+      'Nazi Blaster 9000 settings 1..<256 stripe is operator-reported RUNNING; outcomes unknown',
       'Exact clean negatives do not rule out a mis-transcribed ciphertext',
-      'Middle ring ≠ A still untested',
+      'Middle ring ≠ A is partial/suspended at 1/24 against P1030680',
     ],
     pages: [
       {
@@ -56,13 +57,15 @@ export const projects: Project[] = [
     pillar: 'schneier',
     phase: 'III',
     status: 'active',
-    kicker: 'Blue Team · Gen 5',
+    kicker: 'Blue Team · E256/v2/gen0 · fixture-v4',
     summary:
-      'Keep the reciprocal rotor contract; delete every leak the P1030680 campaign proved fatal. Control-plane KEM/HKDF/AEAD never enters datapath BRAMs. Red melts NLFF cones; Blue rolls genes under pressure — the working laboratory for the Schneier Pillar.',
+      'The experimental fixture-v4 profile uses the conjugated-XOR center A_i^-1(A_i(x) XOR k_i). The host derives and transports payload, centerMask, and absoluteByteCounter; RTL validates the counter and has no HMAC. A day key supplies a plugboard plus 16 forward/reverse rotor pools, with no reflector. The active slot has 9 unique tables, a 2,304-byte burst, and 10 accesses because the plugboard is used twice. This is bounded functional evidence, not a production-security claim.',
     stakes: [
-      'Reciprocity: encrypt ≡ decrypt under the same machine state',
-      'Red surface past NLFF (TensorLUT cones, SoftBus KPA, ent gate)',
-      'Fail-closed generation rolls — no identity-codec silicon ships',
+      'Live tuple: E256/v2/gen0/fa246e9cba9009a4799e5a81722a9b14e9a67293d9621b45985c5f3e620865d4/fixture-v4',
+      'KAT: 1,024 bytes / 9 tables / 10 traces / 25 artifacts; equality 260/65536 (z=0.250); formal 1/1; suite 49/49; receipt logs/e256-v2-gen0-fixture-v4-validation.json',
+      'TensorLUT: 366-LUT6 scramble cone with independent center_mask; blue_hold (final_crypto -291592.781250, final_nonbinary 1217) is bounded optimizer failure only—not HMAC or the full core',
+      'Experimental and not for real data; E256-003 OPEN pending human acceptance. No IND-CPA, HMAC-security, external-cryptanalysis, security-level, or work-factor claim',
+      'Historical gen5 and C39 cones remain quarantined evidence, not the live fixture-v4 datapath',
     ],
     pages: [
       {
@@ -75,13 +78,13 @@ export const projects: Project[] = [
         path: '/projects/e256/design',
         label: 'Architecture & field',
         kind: 'lab',
-        blurb: 'Planes, NLFF, handshake, Red/Blue pressure',
+        blurb: 'Planes, host schedule, fixture receipt, Red/Blue pressure',
       },
       {
         path: '/projects/e256/journal',
         label: 'Field journal',
         kind: 'journal',
-        blurb: 'Generation grades and bijection controls',
+        blurb: 'Generation grades and reciprocity controls',
       },
       {
         path: '/projects/polymorphic-ciphers',
@@ -91,7 +94,7 @@ export const projects: Project[] = [
       },
       {
         path: '/projects/p1030680/journal',
-        label: 'Turing Complete',
+        label: 'Nazi Blaster 9000',
         kind: 'journal',
         blurb: 'The Red ledger that specified what E256 must never do',
       },
@@ -107,12 +110,12 @@ export const projects: Project[] = [
     status: 'active',
     kicker: 'Graduated FHE',
     summary:
-      'Covering Track A noisy BK at N=1024 k=7 is C52–C54; covering-b2 cheaper SING + regex is C57. C62 is noiseless PicoRV at that N; C65/C66/C68 are covering PicoRV via extract→KS n=64 (1-tick, boot, NOP-fetch). C69: KS n=256 covering SING PASS, n=512 SING FAIL (C67 SIGTRAP was identity×4). C60/C61 still FAIL at n=N k=7. Sage filled C23; H1 still applies.',
+      'Covering Track A noisy BK at N=1024 k=7 is C52–C54; covering-b2 cheaper SING + regex is C57. C62 is noiseless PicoRV at that N; C65/C66/C68 are covering PicoRV via extract→KS n=64 (1-tick, boot, NOP-fetch). C69: KS n=256 and n=512 covering SING PASS; the old n=512 FAIL is withdrawn as a determinism artifact (C67 SIGTRAP at n=256 was identity×4). C60/C61 still FAIL at n=N k=7. Sage filled C23; H1 still applies.',
     stakes: [
       'Encrypted ≡ clear on full_adder (C20/C21) and covering noisy sequential ticks (C53/C54)',
       'Calibrated bits ≠ estimator Cost on every row (H1 / C23: 175.7 vs 180.2 on prod-n1024-s16)',
       'Metal persist ~0.52 s/BR at N=1024 (C17); wavefront boolean SING 10.6 s/8 (C20)',
-      'Covering public-MS at N=1024 uses stride-k wires, not “g₀=δ exact covering” (C27 still {8,128}); C65/C66/C68 PicoRV covering via extract→KS n=64; C69 n=256 PASS n=512 SING FAIL; C60/C61 still FAIL at n=N k=7',
+      'Covering public-MS at N=1024 uses stride-k wires, not “g₀=δ exact covering” (C27 still {8,128}); C65/C66/C68 PicoRV covering via extract→KS n=64; C69 n=256 and n=512 PASS, with the old n=512 FAIL withdrawn as a determinism artifact; C60/C61 still FAIL at n=N k=7',
     ],
     pages: [
       {
@@ -227,7 +230,7 @@ export const projects: Project[] = [
         path: '/projects/e256',
         label: 'Enigma256',
         kind: 'lab',
-        blurb: 'Live Gen-5 SoftBus field cipher',
+        blurb: 'Experimental fixture-v4 E256 profile · E256-003 OPEN pending human acceptance',
       },
     ],
     relatedDocs: ['Enigma256.md'],

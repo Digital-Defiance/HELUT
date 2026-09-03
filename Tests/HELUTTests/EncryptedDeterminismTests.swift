@@ -197,6 +197,96 @@ final class EncryptedDeterminismTests: XCTestCase {
             EncryptedNetlistSimulator.fingerprint(wires: other, ports: portsA)
         )
     }
+
+    func testOptInDiagnosticsCaptureStableCleanLUTMetadata() throws {
+        guard let (moduleName, module) = loadAdder() else {
+            return XCTFail("netlist.json not found")
+        }
+        let params = GGSWParams.booleanTrivial(degree: 8)
+        let secret = TFHESecretKey.random(params: params.tfhe, seed: 0xD381)
+        let sim = EncryptedNetlistSimulator(
+            moduleName: moduleName,
+            module: module,
+            secret: secret,
+            params: params,
+            backend: .blindRotate,
+            seed: 0xD382,
+            diagnosticsMode: .firstDivergence
+        )
+        _ = try sim.tick(inputs: ["a": [1], "b": [0], "cin": [1]])
+        let trace = try XCTUnwrap(sim.lastTickDiagnostics)
+        XCTAssertEqual(trace.lutRecords.count, sim.clear.luts.count)
+        XCTAssertNil(trace.firstDivergentLUT)
+        XCTAssertNil(trace.firstLocallyCorruptLUT)
+        XCTAssertTrue(trace.wrongDFFs.isEmpty)
+        XCTAssertTrue(trace.lutRecords.allSatisfy { !$0.initMSBFirst.isEmpty })
+        let ordering = trace.lutRecords.map { "\($0.wavefront):\($0.ordinal)" }
+        let sortedOrdering = trace.lutRecords.sorted {
+            ($0.wavefront, $0.ordinal) < ($1.wavefront, $1.ordinal)
+        }.map { "\($0.wavefront):\($0.ordinal)" }
+        XCTAssertEqual(ordering, sortedOrdering)
+    }
+
+    func testDiagnosticReportSelectsFirstLocalCorruptionAndAllDFFs() {
+        func lut(name: String, ordinal: Int, actual: UInt8) -> EncryptedLUTDiagnostic {
+            EncryptedLUTDiagnostic(
+                wavefront: 1,
+                ordinal: ordinal,
+                name: name,
+                yWire: 100 + ordinal,
+                aBits: ["net(1)"],
+                arity: 1,
+                initMSBFirst: "10",
+                tableLSBFirst: "01",
+                clearAddress: 1,
+                encryptedAddress: 1,
+                packedAddress: 1,
+                clearExpectedBit: 1,
+                localExpectedBit: 1,
+                packedExpectedBit: 1,
+                actualBit: actual,
+                inputPhaseDomain: "full-torus-public-ms",
+                packedNativePhase: 1,
+                expectedPackedPhase: 1,
+                packedOffset: 0,
+                rawPhase: 7,
+                phaseDomain: "torus-extracted",
+                signedResidual: -1,
+                residualMagnitude: 1,
+                halfGap: 8,
+                skippedBlindRotate: false
+            )
+        }
+        let first = lut(name: "a_first", ordinal: 0, actual: 0)
+        let second = lut(name: "b_second", ordinal: 1, actual: 0)
+        let dffA = EncryptedDFFDiagnostic(
+            name: "dff_a", type: "$_DFF_P_", qWire: 20, dBit: "net(100)",
+            expectedBit: 1, actualBit: 0, rawPhase: 0,
+            phaseDomain: "full-torus-wire", normalizedTorusPhase: 0, signedResidual: -8,
+            residualMagnitude: 8, halfGap: 8, producerName: "a_first",
+            producerWavefront: 1, producerArity: 1, producerINIT: "10"
+        )
+        let dffB = EncryptedDFFDiagnostic(
+            name: "dff_b", type: "$_DFF_P_", qWire: 21, dBit: "net(101)",
+            expectedBit: 1, actualBit: 0, rawPhase: 0,
+            phaseDomain: "full-torus-wire", normalizedTorusPhase: 0, signedResidual: -8,
+            residualMagnitude: 8, halfGap: 8, producerName: "b_second",
+            producerWavefront: 1, producerArity: 1, producerINIT: "10"
+        )
+        let trace = EncryptedTickDiagnostics(
+            backend: "blind-rotate", wireRefresh: "public-ms",
+            serialWavefront: false, lutRecords: [first, second],
+            wrongDFFs: [dffA, dffB]
+        )
+        XCTAssertEqual(trace.firstDivergentLUT?.name, "a_first")
+        XCTAssertNil(trace.firstAddressAlias)
+        XCTAssertEqual(trace.firstLocallyCorruptLUT?.name, "a_first")
+        XCTAssertEqual(trace.wrongDFFs.count, 2)
+        let report = trace.report(pathLabel: "test", tick: 1)
+        XCTAssertTrue(report.contains("first locally corrupt LUT"))
+        XCTAssertTrue(report.contains("wrong DFFs: 2"))
+        XCTAssertTrue(report.contains("INIT=10"))
+    }
 }
 
 /// Cross-process determinism.

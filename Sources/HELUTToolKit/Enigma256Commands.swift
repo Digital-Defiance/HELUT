@@ -4,22 +4,64 @@ import HELUTCLI
 
 // MARK: - Enigma 256 golden dump (`--enigma256-golden`)
 
-func runEnigma256Golden() {
-    _ = Enigma256Generation.bootstrapFromFixture()
-    let outDir = stringFlag("--enigma256-out") ?? "Fixtures/enigma256_golden"
-    let plainArg = stringFlag("--enigma256-plain")
-    let plaintext: [UInt8]
-    if let plainArg {
-        plaintext = Array(plainArg.utf8)
-    } else {
-        plaintext = Array("HELUT Enigma256 golden vector stream".utf8)
+enum Enigma256GoldenPublicationError: Error, Equatable, CustomStringConvertible {
+    case canonicalBundleProfileMismatch(expected: String, supplied: String)
+
+    var description: String {
+        switch self {
+        case let .canonicalBundleProfileMismatch(expected, supplied):
+            return "refusing canonical E256 KAT publication: canonical profile is \(expected), supplied profile is \(supplied)"
+        }
     }
+}
+
+func enigma256ValidateGoldenPublication(
+    suppliedCompatibilityKey: String,
+    outputURL: URL,
+    canonicalCompatibilityKey: String,
+    canonicalOutputURL: URL
+) throws {
+    let outputPath = outputURL.standardizedFileURL.resolvingSymlinksInPath().path
+    let canonicalPath = canonicalOutputURL.standardizedFileURL.resolvingSymlinksInPath().path
+    guard outputPath == canonicalPath else { return }
+    guard suppliedCompatibilityKey == canonicalCompatibilityKey else {
+        throw Enigma256GoldenPublicationError.canonicalBundleProfileMismatch(
+            expected: canonicalCompatibilityKey,
+            supplied: suppliedCompatibilityKey
+        )
+    }
+}
+
+func runEnigma256Golden() {
+    let canonicalProfilePath = "Fixtures/enigma256_generation.json"
+    let canonicalOutputPath = "Fixtures/enigma256_golden"
+    let profilePath = stringFlag("--enigma256-genes") ?? canonicalProfilePath
+    let outDir = stringFlag("--enigma256-out")
+        ?? "build/hardware/Enigma256/enigma256_golden"
+    let profile: Enigma256Generation
+    do {
+        profile = try Enigma256Generation.load(from: URL(fileURLWithPath: profilePath))
+        let canonicalProfile = try Enigma256Generation.load(
+            from: URL(fileURLWithPath: canonicalProfilePath)
+        )
+        try enigma256ValidateGoldenPublication(
+            suppliedCompatibilityKey: profile.compatibilityKey,
+            outputURL: URL(fileURLWithPath: outDir, isDirectory: true),
+            canonicalCompatibilityKey: canonicalProfile.compatibilityKey,
+            canonicalOutputURL: URL(fileURLWithPath: canonicalOutputPath, isDirectory: true)
+        )
+        profile.activate()
+    } catch {
+        fatalError("Enigma256 profile/publication validation failed at \(profilePath): \(error)")
+    }
+    let plainArg = stringFlag("--enigma256-plain")
+    let plaintext = plainArg.map { Array($0.utf8) }
 
     let session = Enigma256Bridge.makeGoldenSession(plaintext: plaintext)
     let url = URL(fileURLWithPath: outDir, isDirectory: true)
     do {
         _ = try Enigma256Bridge.writeGoldenBundle(session: session, to: url)
-        _ = try Enigma256Bridge.loadAndVerify(bundle: url)
+        _ = try Enigma256Bridge.loadAndVerify(bundle: url, profile: profile)
     } catch {
         fatalError("Enigma256 golden dump failed: \(error)")
     }
@@ -31,7 +73,7 @@ func runEnigma256Golden() {
     print("  positions: \(String(format: "%02x %02x %02x %02x", m.positions.0, m.positions.1, m.positions.2, m.positions.3))")
     print("  lfsr: \(String(format: "0x%016llx", m.lfsrSeed))")
     print("  ct[0..7]: \(session.ciphertext.prefix(8).map { String(format: "%02x", $0) }.joined())")
-    print("  files: tables/*.hex session.json plaintext.hex ciphertext.hex tb_params.vh")
+    print("  files: manifest.json tables/*.hex trace/*.hex session.json plaintext.* ciphertext.* tb_params.vh")
 }
 
 // MARK: - Enigma 256 file crypt (`--enigma256-crypt`)
@@ -437,59 +479,31 @@ func runEnigma256TCPConnect() {
 // MARK: - NLFF step-enable quality (`--enigma256-nlff-stats`)
 
 func runEnigma256NLFFStats() {
-    let steps = intFlag("--enigma256-nlff-stats-steps") ?? 200_000
-    print("Enigma 256 NLFF step-enable stats (\(steps) LFSR clocks)")
-    print("  Goal: mean rate ~0.5, each rotor active, off-diagonal |φ| small.")
-    print("")
-    for (label, gen) in [
-        ("gen0 quadratic3", Enigma256Generation.gen0),
-        ("gen3 cubic6 (unbalanced taps)", Enigma256Generation.gen3Cubic),
-        ("gen4 coupledCubic6 (rejected)", Enigma256Generation.gen4Coupled),
-        ("gen5 cubic6 balanced (live)", Enigma256Generation.gen5Balanced)
-    ] {
-        let s = gen.stepEnableStats(steps: steps)
-        let rateStr = s.rates.map { String(format: "%.4f", $0) }.joined(separator: " ")
-        print("=== \(label) ===")
-        print("  rates: \(rateStr)  mean=\(String(format: "%.4f", s.meanRate)) \(s.meanRateOK ? "OK" : "BIAS") \(s.rateFloorOK ? "FLOOR_OK" : "DEAD_ROTORS")")
-        print("  max|φ| off-diag=\(String(format: "%.4f", s.maxAbsOffDiagPhi)) \(s.independenceOK ? "OK" : "CORRELATED")")
-        print(String(format: "  P(all four on)=%.6f", s.allFourOnRate))
-        for row in s.phi {
-            print("  φ " + row.map { String(format: "%+.3f", $0) }.joined(separator: " "))
-        }
-        print("")
+    let profile = Enigma256Generation.bootstrapFromFixture()
+    if CommandLine.arguments.contains("--enigma256-nlff-breed")
+        || CommandLine.arguments.contains("--enigma256-nlff-breed-apply") {
+        fputs("""
+        In-process NLFF breeding/apply is disabled for E256-v2.
+        Generate candidates offline with Scripts/e256_nlff_v2_search.py, then validate and
+        promote an accepted receipt with Scripts/e256_nlff_emit.py. Canonical artifacts are
+        never mutated by this command.
+
+        """, stderr)
+        exit(2)
     }
 
-    if CommandLine.arguments.contains("--enigma256-nlff-breed") {
-        let trials = intFlag("--enigma256-nlff-breed-trials") ?? 2_000
-        print("Breeding balanced cubic6 taps (\(trials) trials)…")
-        var rng = SystemRandomNumberGenerator()
-        let (gen, stats) = Enigma256Generation.breedBalancedCubic6(trials: trials, rng: &rng)
-        let rateStr = stats.rates.map { String(format: "%.4f", $0) }.joined(separator: " ")
-        print("=== bred gen \(gen.id) cubic6 ===")
-        print("  folds: \(gen.folds.map { "(\($0.a),\($0.b),\($0.c),\($0.d),\($0.e),\($0.f))" }.joined(separator: " "))")
-        print("  rates: \(rateStr)  mean=\(String(format: "%.4f", stats.meanRate)) \(stats.rateFloorOK ? "FLOOR_OK" : "DEAD_ROTORS")")
-        print("  max|φ|=\(String(format: "%.4f", stats.maxAbsOffDiagPhi)) \(stats.independenceOK ? "OK" : "CORRELATED")")
-        if CommandLine.arguments.contains("--enigma256-nlff-breed-apply") {
-            gen.activate()
-            let genesPath = stringFlag("--enigma256-genes") ?? "Fixtures/enigma256_generation.json"
-            do {
-                try gen.save(to: URL(fileURLWithPath: genesPath))
-                try gen.emitNLFFComboVerilog().write(toFile: "enigma_256_nlff_combo.v", atomically: true, encoding: .utf8)
-                for path in ["enigma_256_core.v", "enigma_256_step_cone.v"] {
-                    let src = try String(contentsOfFile: path, encoding: .utf8)
-                    try gen.rewritingNLFF(in: src).write(toFile: path, atomically: true, encoding: .utf8)
-                }
-                let session = Enigma256Bridge.makeGoldenSession()
-                _ = try Enigma256Bridge.writeGoldenBundle(
-                    session: session,
-                    to: URL(fileURLWithPath: "Fixtures/enigma256_golden", isDirectory: true)
-                )
-                print("  Applied → \(genesPath) + Verilog + goldens")
-            } catch {
-                fputs("breed apply failed: \(error)\n", stderr)
-                exit(1)
-            }
-        }
+    let steps = intFlag("--enigma256-nlff-stats-steps") ?? 200_000
+    let stats = profile.stepEnableStats(steps: steps)
+    let rateText = stats.rates.map { String(format: "%.4f", $0) }.joined(separator: " ")
+    print("Enigma 256 native NLFF step-enable diagnostics (\(steps) LFSR clocks)")
+    print("  compatibility: \(profile.compatibilityKey)")
+    print("  status: \(profile.researchStatus) — bounded diagnostics, not a security proof")
+    print("  receipt: \(profile.receipt) sha256=\(profile.receiptSHA256)")
+    print("  rates: \(rateText) mean=\(String(format: "%.4f", stats.meanRate)) \(stats.meanRateOK ? "OK" : "BIAS") \(stats.rateFloorOK ? "FLOOR_OK" : "DEAD_ROTORS")")
+    print("  max|φ| off-diag=\(String(format: "%.4f", stats.maxAbsOffDiagPhi)) \(stats.independenceOK ? "OK" : "CORRELATED")")
+    print(String(format: "  P(all four on)=%.6f", stats.allFourOnRate))
+    for row in stats.phi {
+        print("  φ " + row.map { String(format: "%+.3f", $0) }.joined(separator: " "))
     }
 }
 
@@ -497,12 +511,16 @@ func runEnigma256NLFFStats() {
 // MARK: - Enigma 256 Red/Blue campaign (`--enigma256-campaign`)
 //
 // Field = Apple Silicon SoftBus + HELUT TensorLUT. No Zynq required.
-// Blue evolves stronger stepping crypto; TensorLUT resistance is a constraint, not a trade for correlation.
+// The profile is immutable at runtime; these runs record bounded evidence only.
 
 struct Enigma256TensorLUTScore: Sendable {
+    var family: String?
+    var suiteVersion: Int?
+    var generation: Int?
+    var fixtureSchemaVersion: Int?
+    var profileSHA256: String?
     var finalCrypto: Double?
     var squeezeSurvived: Bool?
-    var generation: Int?
     var formula: String?
     var verdict: String?
     var path: String
@@ -519,9 +537,13 @@ struct Enigma256TensorLUTScore: Sendable {
 
 func enigma256ParseTensorLUTLog(at path: String) -> Enigma256TensorLUTScore {
     var score = Enigma256TensorLUTScore(
+        family: nil,
+        suiteVersion: nil,
+        generation: nil,
+        fixtureSchemaVersion: nil,
+        profileSHA256: nil,
         finalCrypto: nil,
         squeezeSurvived: nil,
-        generation: nil,
         formula: nil,
         verdict: nil,
         path: path
@@ -529,15 +551,25 @@ func enigma256ParseTensorLUTLog(at path: String) -> Enigma256TensorLUTScore {
     guard let text = try? String(contentsOfFile: path, encoding: .utf8) else { return score }
     for line in text.split(whereSeparator: \.isNewline) {
         let s = String(line)
-        if s.hasPrefix("final_crypto:") {
+        if s.hasPrefix("family:") {
+            score.family = s.dropFirst("family:".count).trimmingCharacters(in: .whitespaces)
+        } else if s.hasPrefix("suite_version:") {
+            let t = s.dropFirst("suite_version:".count).trimmingCharacters(in: .whitespaces)
+            score.suiteVersion = Int(t)
+        } else if s.hasPrefix("generation:") {
+            let t = s.dropFirst("generation:".count).trimmingCharacters(in: .whitespaces)
+            score.generation = Int(t)
+        } else if s.hasPrefix("fixture_schema_version:") {
+            let t = s.dropFirst("fixture_schema_version:".count).trimmingCharacters(in: .whitespaces)
+            score.fixtureSchemaVersion = Int(t)
+        } else if s.hasPrefix("profile_sha256:") {
+            score.profileSHA256 = s.dropFirst("profile_sha256:".count).trimmingCharacters(in: .whitespaces)
+        } else if s.hasPrefix("final_crypto:") {
             let t = s.dropFirst("final_crypto:".count).trimmingCharacters(in: .whitespaces)
             score.finalCrypto = Double(t)
         } else if s.hasPrefix("squeeze_survived:") {
             let t = s.dropFirst("squeeze_survived:".count).trimmingCharacters(in: .whitespaces).lowercased()
             score.squeezeSurvived = (t == "true" || t == "1" || t == "yes")
-        } else if s.hasPrefix("generation:") {
-            let t = s.dropFirst("generation:".count).trimmingCharacters(in: .whitespaces)
-            score.generation = Int(t)
         } else if s.hasPrefix("formula:") {
             score.formula = s.dropFirst("formula:".count).trimmingCharacters(in: .whitespaces)
         } else if s.hasPrefix("verdict:") {
@@ -569,7 +601,15 @@ func enigma256SoftBusKPA(
         )
         var seed = UInt64.random(in: 1 ... .max, using: &rng)
         if seed == 0 { seed = 1 }
-        let msg = Enigma256MessageKey(rotorIndices: rotors, positions: positions, lfsrSeed: seed)
+        let centerMaskKey = Data((0 ..< Enigma256CenterMask.keyLength).map { _ in
+            UInt8.random(in: .min ... .max, using: &rng)
+        })
+        let msg = Enigma256MessageKey(
+            rotorIndices: rotors,
+            positions: positions,
+            lfsrSeed: seed,
+            centerMaskKey: centerMaskKey
+        )
         let bus = Enigma256SoftBus()
         let driver = Enigma256AXIDriver(bus: bus)
         driver.configure(day: day, message: msg)
@@ -592,21 +632,52 @@ func runEnigma256Campaign() {
     let trials = intFlag("--enigma256-campaign-trials") ?? 4_096
     let allowMutate = CommandLine.arguments.contains("--enigma256-campaign-mutate")
     let forceMutate = CommandLine.arguments.contains("--enigma256-campaign-force-mutate")
+    if allowMutate || forceMutate {
+        fputs("""
+        Runtime campaign mutation is disabled for the immutable E256-v2 profile.
+        Run Scripts/e256_nlff_v2_search.py offline, independently validate its holdout receipt,
+        then promote only an accepted receipt with Scripts/e256_nlff_emit.py.
+
+        """, stderr)
+        exit(2)
+    }
     let crib = Array((stringFlag("--enigma256-plain") ?? "HELUT Enigma256 SoftBus Red/Blue crib").utf8)
 
     let genesURL = URL(fileURLWithPath: genesPath)
-    var generation: Enigma256Generation
-    if FileManager.default.fileExists(atPath: genesPath) {
-        do {
-            generation = try Enigma256Generation.load(from: genesURL)
-        } catch {
-            fputs("Failed to load genes \(genesPath): \(error)\n", stderr)
-            exit(2)
-        }
-    } else {
-        generation = .gen0
+    guard FileManager.default.fileExists(atPath: genesPath) else {
+        fputs("Missing required E256-v2 profile fixture: \(genesPath)\n", stderr)
+        exit(2)
+    }
+    let generation: Enigma256Generation
+    do {
+        generation = try Enigma256Generation.load(from: genesURL)
+    } catch {
+        fputs("Failed to load E256-v2 profile \(genesPath): \(error)\n", stderr)
+        exit(2)
     }
     generation.activate()
+
+    let tensor = enigma256ParseTensorLUTLog(at: tensorLog)
+    if FileManager.default.fileExists(atPath: tensorLog) {
+        let compatible = tensor.family == generation.family
+            && tensor.suiteVersion == generation.suiteVersion
+            && tensor.generation == generation.id
+            && tensor.fixtureSchemaVersion == generation.fixtureSchemaVersion
+            && tensor.profileSHA256 == generation.profileHashHex
+        guard compatible else {
+            let foundSuite = tensor.suiteVersion.map { String($0) } ?? "missing"
+            let foundGeneration = tensor.generation.map { String($0) } ?? "missing"
+            let foundSchema = tensor.fixtureSchemaVersion.map { String($0) } ?? "missing"
+            fputs("""
+            Refusing incompatible TensorLUT report: \(tensorLog)
+              expected: \(generation.compatibilityKey)
+              found: family=\(tensor.family ?? "missing") suite_version=\(foundSuite) generation=\(foundGeneration) fixture_schema_version=\(foundSchema) profile_sha256=\(tensor.profileSHA256 ?? "missing")
+            Re-run TensorLUT for the active profile and pass that report with --enigma256-tensorlut-log.
+
+            """, stderr)
+            exit(2)
+        }
+    }
 
     let ikm = Data("enigma256-rb-campaign-ikm-v1".utf8)
     let ctx = Enigma256Context(ikm: ikm)
@@ -628,117 +699,78 @@ func runEnigma256Campaign() {
         rng: &rng
     )
     let softPressure = soft.bestMatches == crib.count
-
-    let tensor = enigma256ParseTensorLUTLog(at: tensorLog)
     let redPressure = softPressure || tensor.redPressure
 
     print("Enigma 256 Red/Blue campaign (Apple Silicon SoftBus field)")
-    print("  generation: \(generation.id) formula=\(generation.formula.rawValue)")
+    print("  compatibility: \(generation.compatibilityKey)")
+    print("  formula: \(generation.formula.rawValue)")
     let foldDesc = generation.folds.map { fold -> String in
-        let taps = fold.taps(for: generation.formula).map(String.init).joined(separator: ",")
-        return "(\(taps))"
+        "(\(fold.taps.map(String.init).joined(separator: ",")))"
     }.joined(separator: " ")
     print("  folds: \(foldDesc)")
     print("  SoftBus KPA: best \(soft.bestMatches)/\(crib.count) over \(soft.trials) trials in \(String(format: "%.1f", soft.elapsedMs)) ms")
     if let c = tensor.finalCrypto, let s = tensor.squeezeSurvived {
-        let side = s ? "RED pressure (squeeze recovered binary elite)" : "BLUE hold (squeeze failed — good)"
+        let side = s
+            ? "RED pressure (squeeze recovered a binary elite)"
+            : "bounded negative (no binary elite recovered)"
         print("  TensorLUT: final_crypto=\(String(format: "%.6f", c)) squeeze_survived=\(s) → \(side)")
         print("  TensorLUT log: \(tensor.path)")
-        if let g = tensor.generation, g != generation.id {
-            print("  note: log is generation \(g); live genes are \(generation.id) — re-run Scripts/enigma256_tensorlut.sh")
-        }
     } else {
         print("  TensorLUT: no score in \(tensor.path) (run Scripts/enigma256_tensorlut.sh)")
     }
     if redPressure {
-        print("  red_pressure: true — Blue should mutate")
+        print("  red_pressure: true — immutable profile; runtime mutation is disabled")
     } else if tensor.blueHold {
-        print("  red_pressure: false — Blue holds; SoftBus KPA also weak")
+        print("  red_pressure: false — no recovery in these bounded SoftBus/TensorLUT runs")
     } else {
-        print("  red_pressure: false (soft=\(softPressure) tensor=\(tensor.redPressure))")
+        print("  red_pressure: false (soft=\(softPressure) tensor=\(tensor.redPressure)); bounded evidence only")
     }
 
-    var mutated = false
-    var nextGen = generation
-    // Mutate policy: evolve *stronger* stepping crypto.
-    // - quadratic3 → cubic6 (gen3)
-    // - coupledCubic6 → rollback gen3 (coupling correlates rotors — rejected)
-    // - cubic6 → retap only under red pressure / force-mutate
-    if forceMutate || allowMutate {
-        switch generation.formula {
-        case .quadratic3, .coupledCubic6:
-            nextGen = .gen3Cubic
-        case .cubic6:
-            if forceMutate || redPressure {
-                nextGen = generation.mutated(rng: &rng)
-            }
-        }
-    }
-    if nextGen.id != generation.id || nextGen.formula != generation.formula || nextGen.folds != generation.folds {
-        nextGen.activate()
-        do {
-            try FileManager.default.createDirectory(
-                at: genesURL.deletingLastPathComponent(),
-                withIntermediateDirectories: true
-            )
-            try nextGen.save(to: genesURL)
-            let combo = nextGen.emitNLFFComboVerilog()
-            try combo.write(toFile: "enigma_256_nlff_combo.v", atomically: true, encoding: .utf8)
-            for path in [
-                "enigma_256_core.v",
-                "enigma_256_step_cone.v",
-                "enigma_256_nlff_lfsr_combo.v",
-                "enigma_256_nlff_offset_combo.v",
-                "enigma_256_scramble_frag_combo.v"
-            ] {
-                let src = try String(contentsOfFile: path, encoding: .utf8)
-                try nextGen.rewritingNLFF(in: src).write(toFile: path, atomically: true, encoding: .utf8)
-            }
-            mutated = true
-            if generation.formula == .coupledCubic6 {
-                print("  Blue rollback → generation \(nextGen.id) cubic6 (reject correlated coupling)")
-            } else {
-                print("  Blue mutate → generation \(nextGen.id) (genes + NLFF Verilog rewritten)")
-            }
-            do {
-                let session = Enigma256Bridge.makeGoldenSession()
-                _ = try Enigma256Bridge.writeGoldenBundle(
-                    session: session,
-                    to: URL(fileURLWithPath: "Fixtures/enigma256_golden", isDirectory: true)
-                )
-                print("  golden fixtures regenerated under generation \(nextGen.id)")
-            } catch {
-                fputs("  warning: golden regenerate failed: \(error)\n", stderr)
-            }
-            print("  Next: ./Scripts/enigma256_sim.sh && ./Scripts/enigma256_tensorlut.sh")
-        } catch {
-            fputs("Blue mutate failed: \(error)\n", stderr)
-            exit(1)
-        }
-    } else if redPressure {
-        print("  Blue hold — red pressure present; re-run with --enigma256-campaign-mutate to roll genes")
+    let mutated = false
+    let nextGen = generation
+    if redPressure {
+        print("  Immutable profile — red pressure recorded as bounded evidence")
+        print("  Next: run offline search and holdout grading; promote only an independently validated receipt")
     } else if tensor.blueHold {
-        print("  Blue hold — TensorLUT squeeze failed (good); SoftBus KPA also weak")
+        print("  No binary elite was recovered in this bounded TensorLUT run; this is not a security claim")
     } else {
-        print("  Blue hold — SoftBus KPA did not recover; TensorLUT unscored")
+        print("  SoftBus KPA found no recovery in the bounded trial budget; TensorLUT unscored")
     }
 
     // JSONL ledger row
     let row: [String: Any] = [
         "ts": ISO8601DateFormatter().string(from: Date()),
+        "family": generation.family,
+        "suite_version": generation.suiteVersion,
         "generation": generation.id,
         "next_generation": nextGen.id,
+        "fixture_schema_version": generation.fixtureSchemaVersion,
+        "profile_sha256": generation.profileHashHex,
+        "compatibility_key": generation.compatibilityKey,
+        "formula": generation.formula.rawValue,
+        "lfsr_transition": generation.lfsrTransition,
+        "update_order": generation.updateOrder,
+        "research_status": generation.researchStatus,
+        "receipt": generation.receipt,
+        "receipt_sha256": generation.receiptSHA256,
         "mutated": mutated,
         "soft_best_matches": soft.bestMatches,
         "soft_length": crib.count,
         "soft_trials": soft.trials,
         "soft_ms": soft.elapsedMs,
         "soft_pressure": softPressure,
-        "tensor_final_crypto": tensor.finalCrypto as Any,
-        "tensor_squeeze_survived": tensor.squeezeSurvived as Any,
+        "tensor_final_crypto": tensor.finalCrypto.map { $0 as Any } ?? NSNull(),
+        "tensor_squeeze_survived": tensor.squeezeSurvived.map { $0 as Any } ?? NSNull(),
         "tensor_pressure": tensor.redPressure,
         "red_pressure": redPressure,
-        "folds": generation.folds.map { ["a": $0.a, "b": $0.b, "c": $0.c] }
+        "components": generation.components.map { ["truth_hex": $0.truthHex] },
+        "folds": generation.folds.map {
+            [
+                "taps": $0.taps,
+                "left_component": $0.leftComponent,
+                "right_component": $0.rightComponent
+            ] as [String: Any]
+        }
     ]
     if let data = try? JSONSerialization.data(withJSONObject: row),
        let line = String(data: data, encoding: .utf8) {
@@ -824,10 +856,10 @@ func runEnigma256Ent() {
         exit(2)
     }
 
-    // Seeded PRNG plaintext → SoftBus ciphertext under live generation.
-    // Do NOT encrypt zeros: the un-reflector permits self-mapping, so scramble(0)==0
-    // ~30% of the time by design — that fails `ent` without indicating a dead cipher.
-    // Prefer PRNG PT over a counter: counter structure can inflate serial correlation.
+    // Seeded PRNG plaintext → SoftBus ciphertext under the active profile.
+    // `ent` remains a smoke test only; the separate zero-plaintext probe checks
+    // the schema-3 equality null near 1/256 and cannot establish security.
+    // Prefer PRNG PT over a counter for the unrelated entropy smoke sample.
     let plainMode = (stringFlag("--enigma256-ent-plain") ?? "prng").lowercased()
     let ikm = Data("enigma256-ent-ikm-v1-32-bytes!!!!!!".utf8)
     let ctx = Enigma256Context(ikm: ikm)
@@ -837,13 +869,17 @@ func runEnigma256Ent() {
     let driver = Enigma256AXIDriver(bus: bus)
     driver.configure(day: ctx.day, message: key)
 
-    // Diagnostic: fixed-point rate under PT=0 (expected high; not a fail criterion).
+    // Chosen-plaintext structural probe. A balanced center mode with two
+    // frozen points in mode one has null p = 1/256 after conjugation.
     var fpProbe = 0
     let fpN = min(100_000, bytes)
     for _ in 0 ..< fpN {
         if driver.transfer(0) == 0 { fpProbe += 1 }
     }
     let fpRate = Double(fpProbe) / Double(fpN)
+    let fpNull = 1.0 / 256.0
+    let fpSigma = sqrt(fpNull * (1 - fpNull) / Double(fpN))
+    let fpCalibrated = abs(fpRate - fpNull) <= 6 * fpSigma
     // Re-arm for the actual entropy sample.
     driver.configure(day: ctx.day, message: key)
 
@@ -920,7 +956,9 @@ func runEnigma256Ent() {
     plaintext: \(plainMode)
     sample: \(outPath)
     softbus_ms: \(String(format: "%.1f", ms))
-    zero_pt_fixed_point_rate: \(String(format: "%.4f", fpRate)) (diagnostic; expected ≫ 1/256)
+    zero_pt_equality_rate: \(String(format: "%.6f", fpRate))
+    zero_pt_null: 0.00390625
+    zero_pt_six_sigma_pass: \(fpCalibrated)
     entropy_bits_per_byte: \(report.entropyPerByte.map { String(format: "%.6f", $0) } ?? "n/a")
     mean: \(report.mean.map { String(format: "%.4f", $0) } ?? "n/a")
     serial_corr: \(report.serialCorr.map { String(format: "%.6f", $0) } ?? "n/a")
@@ -938,7 +976,7 @@ func runEnigma256Ent() {
 
     print("Enigma 256 SoftBus ent gate (gen \(Enigma256Generation.current.id))")
     print("  bytes: \(bytes) plain=\(plainMode) → \(outPath) in \(String(format: "%.1f", ms)) ms")
-    print(String(format: "  zero-PT fixed-point rate=%.2f%% (un-reflector; not gated)", fpRate * 100))
+    print(String(format: "  zero-PT equality rate=%.4f%% (null 1/256; six-sigma %@)", fpRate * 100, fpCalibrated ? "PASS" : "FAIL"))
     if let e = report.entropyPerByte, let m = report.mean, let c = report.serialCorr {
         print(String(format: "  entropy=%.6f  mean=%.4f  corr=%+.6f  → %@", e, m, c, report.pass ? "PASS" : "FAIL"))
     } else {
@@ -947,7 +985,7 @@ func runEnigma256Ent() {
         exit(2)
     }
     print("  log → \(logPath)")
-    if failClosed && !report.pass { exit(1) }
+    if failClosed && (!report.pass || !fpCalibrated) { exit(1) }
 }
 
 // MARK: - Structured SoftBus KPA (widen Red beyond random search)
@@ -997,11 +1035,12 @@ final class Enigma256SoftBusScorer {
     }
 }
 
-/// Hill-climb LFSR seed with Walzenlage + Grundstellung known (side-channel leak model).
+/// Hill-climb LFSR seed with Walzenlage, Grundstellung, and center schedule key known.
 func enigma256HillClimbLFSR(
     day: Enigma256DayKey,
     rotors: (Int, Int, Int, Int),
     positions: (UInt8, UInt8, UInt8, UInt8),
+    centerMaskKey: Data,
     plaintext: [UInt8],
     ciphertext: [UInt8],
     rounds: Int,
@@ -1013,7 +1052,12 @@ func enigma256HillClimbLFSR(
     if seed == 0 { seed = 1 }
     var bestSeed = seed
     var best = scorer.matchCount(
-        message: Enigma256MessageKey(rotorIndices: rotors, positions: positions, lfsrSeed: seed),
+        message: Enigma256MessageKey(
+            rotorIndices: rotors,
+            positions: positions,
+            lfsrSeed: seed,
+            centerMaskKey: centerMaskKey
+        ),
         plaintext: plaintext,
         ciphertext: ciphertext
     )
@@ -1022,7 +1066,12 @@ func enigma256HillClimbLFSR(
         let trial = seed ^ (UInt64(1) << bit)
         let s = trial == 0 ? 1 : trial
         let matches = scorer.matchCount(
-            message: Enigma256MessageKey(rotorIndices: rotors, positions: positions, lfsrSeed: s),
+            message: Enigma256MessageKey(
+                rotorIndices: rotors,
+                positions: positions,
+                lfsrSeed: s,
+                centerMaskKey: centerMaskKey
+            ),
             plaintext: plaintext,
             ciphertext: ciphertext
         )
@@ -1037,11 +1086,12 @@ func enigma256HillClimbLFSR(
     return (best, bestSeed, ms)
 }
 
-/// Hill-climb Grundstellung with rotors + LFSR known.
+/// Hill-climb Grundstellung with rotors, LFSR, and center schedule key known.
 func enigma256HillClimbPositions(
     day: Enigma256DayKey,
     rotors: (Int, Int, Int, Int),
     lfsrSeed: UInt64,
+    centerMaskKey: Data,
     plaintext: [UInt8],
     ciphertext: [UInt8],
     rounds: Int,
@@ -1057,7 +1107,12 @@ func enigma256HillClimbPositions(
     )
     var bestPos = pos
     var best = scorer.matchCount(
-        message: Enigma256MessageKey(rotorIndices: rotors, positions: pos, lfsrSeed: lfsrSeed),
+        message: Enigma256MessageKey(
+            rotorIndices: rotors,
+            positions: pos,
+            lfsrSeed: lfsrSeed,
+            centerMaskKey: centerMaskKey
+        ),
         plaintext: plaintext,
         ciphertext: ciphertext
     )
@@ -1070,7 +1125,12 @@ func enigma256HillClimbPositions(
         default: trial.3 &+= UInt8.random(in: 1 ... 7, using: &rng)
         }
         let matches = scorer.matchCount(
-            message: Enigma256MessageKey(rotorIndices: rotors, positions: trial, lfsrSeed: lfsrSeed),
+            message: Enigma256MessageKey(
+                rotorIndices: rotors,
+                positions: trial,
+                lfsrSeed: lfsrSeed,
+                centerMaskKey: centerMaskKey
+            ),
             plaintext: plaintext,
             ciphertext: ciphertext
         )
@@ -1085,9 +1145,11 @@ func enigma256HillClimbPositions(
     return (best, bestPos, ms)
 }
 
-/// Hill-climb full message key with only the day key known (no Walzenlage / pos / LFSR leak).
+/// Hill-climb rotor order, positions, and LFSR with the center schedule key leaked.
+/// This is not a day-key-only attack under fixture-v4.
 func enigma256HillClimbJoint(
     day: Enigma256DayKey,
+    centerMaskKey: Data,
     plaintext: [UInt8],
     ciphertext: [UInt8],
     rounds: Int,
@@ -1109,7 +1171,12 @@ func enigma256HillClimbJoint(
 
     func score(_ r: (Int, Int, Int, Int), _ p: (UInt8, UInt8, UInt8, UInt8), _ s: UInt64) -> Int {
         scorer.matchCount(
-            message: Enigma256MessageKey(rotorIndices: r, positions: p, lfsrSeed: s),
+            message: Enigma256MessageKey(
+                rotorIndices: r,
+                positions: p,
+                lfsrSeed: s,
+                centerMaskKey: centerMaskKey
+            ),
             plaintext: plaintext,
             ciphertext: ciphertext
         )
@@ -1202,10 +1269,10 @@ func runEnigma256BijectionSweep() {
 }
 
 func runEnigma256StructuredKPA() {
-    _ = Enigma256Generation.bootstrapFromFixture()
+    let profile = Enigma256Generation.bootstrapFromFixture()
     let rounds = intFlag("--enigma256-kpa-rounds") ?? 16_384
     let defaultCrib =
-        "HELUT Enigma256 structured SoftBus KPA long crib — day-only joint hill-climb pressure vector for gen5 SoftBus field!!"
+        "HELUT Enigma256 structured SoftBus KPA long crib — bounded leaked-center-key hill-climb pressure vector."
     let crib = Array((stringFlag("--enigma256-plain") ?? defaultCrib).utf8)
     let ikm = Data("enigma256-struct-kpa-ikm-v1!!!!".utf8)
     let ctx = Enigma256Context(ikm: ikm)
@@ -1220,6 +1287,7 @@ func runEnigma256StructuredKPA() {
         day: ctx.day,
         rotors: trueKey.rotorIndices,
         positions: trueKey.positions,
+        centerMaskKey: trueKey.centerMaskKey,
         plaintext: crib,
         ciphertext: ct,
         rounds: rounds,
@@ -1229,6 +1297,7 @@ func runEnigma256StructuredKPA() {
         day: ctx.day,
         rotors: trueKey.rotorIndices,
         lfsrSeed: trueKey.lfsrSeed,
+        centerMaskKey: trueKey.centerMaskKey,
         plaintext: crib,
         ciphertext: ct,
         rounds: rounds,
@@ -1237,6 +1306,7 @@ func runEnigma256StructuredKPA() {
     let climbJoint: (bestMatches: Int, elapsedMs: Double)? = runHard
         ? enigma256HillClimbJoint(
             day: ctx.day,
+            centerMaskKey: trueKey.centerMaskKey,
             plaintext: crib,
             ciphertext: ct,
             rounds: rounds,
@@ -1247,17 +1317,19 @@ func runEnigma256StructuredKPA() {
     let lfsrPressure = climbLFSR.bestMatches == crib.count
     let posPressure = climbPos.bestMatches == crib.count
     let jointPressure = climbJoint.map { $0.bestMatches == crib.count } ?? false
-    print("Enigma 256 structured SoftBus KPA (gen \(Enigma256Generation.current.id))")
+    print("Enigma 256 structured SoftBus KPA")
+    print("  compatibility: \(profile.compatibilityKey)")
+    print("  scope: bounded attack run with the 32-byte center schedule key leaked; not a security claim")
     print("  crib: \(crib.count) B  rounds: \(rounds)")
-    print("  hill-climb LFSR (pos+Walzenlage known): \(climbLFSR.bestMatches)/\(crib.count) in \(String(format: "%.1f", climbLFSR.elapsedMs)) ms \(lfsrPressure ? "BREAK" : "hold")")
-    print("  hill-climb positions (LFSR+Walzenlage known): \(climbPos.bestMatches)/\(crib.count) in \(String(format: "%.1f", climbPos.elapsedMs)) ms \(posPressure ? "BREAK" : "hold")")
+    print("  hill-climb LFSR (pos+Walzenlage+center key known): \(climbLFSR.bestMatches)/\(crib.count) in \(String(format: "%.1f", climbLFSR.elapsedMs)) ms \(lfsrPressure ? "RECOVERY" : "no recovery")")
+    print("  hill-climb positions (LFSR+Walzenlage+center key known): \(climbPos.bestMatches)/\(crib.count) in \(String(format: "%.1f", climbPos.elapsedMs)) ms \(posPressure ? "RECOVERY" : "no recovery")")
     if let joint = climbJoint {
-        print("  hill-climb joint (day only): \(joint.bestMatches)/\(crib.count) in \(String(format: "%.1f", joint.elapsedMs)) ms \(jointPressure ? "BREAK" : "hold")")
+        print("  hill-climb joint (day+center key known): \(joint.bestMatches)/\(crib.count) in \(String(format: "%.1f", joint.elapsedMs)) ms \(jointPressure ? "RECOVERY" : "no recovery")")
     }
     if lfsrPressure || posPressure || jointPressure {
-        print("  red_pressure: true — message-key recovery under leak/search; keep AEAD/control-plane tight")
+        print("  red_pressure: true — full crib recovery in this bounded leak/search model; keep AEAD/control-plane tight")
         exit(2)
     } else {
-        print("  red_pressure: false — SoftBus holds under structured KPA")
+        print("  red_pressure: false — no full recovery in this bounded structured-KPA run; not a security claim")
     }
 }

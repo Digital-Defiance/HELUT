@@ -34,7 +34,7 @@ Verilog re-synthesizes through Yosys and is functionally equivalent on the 4-LUT
 design (exhaustive, with negative control). M4 baseline still not regenerable
 end-to-end. \\
 \cid{9} & Stecker involution sandwich; blind 3-pair PASS. \\
-\cid{10} & Enigma256 reciprocity; fail-closed / bijection. \\
+\cid{10} & Enigma256 fixture-v4 bounded reciprocity / conjugated-XOR / KAT parity for the schema-4 \texttt{E256-v2/gen0} native profile; full E256 suite \textbf{49/49 PASS}; center $A_i^{-1}(A_i(x)\oplus k_i)$; receipt \texttt{logs/e256-v2-gen0-fixture-v4-validation.json}. Bounded implementation / parity evidence---not IND-CPA, an HMAC proof, external cryptanalysis, or human acceptance. \\
 \cid{11} & Potsdam/Plaice keys $\neq$ P1030680. \\
 \cid{12} & Windowed discriminator vs whole-message turnover flaw. \\
 \cid{13} & Metal tiled-kernel BR at $N=1024$ (pre-fusion lineage). \\
@@ -48,7 +48,7 @@ end-to-end. \\
 \cid{21} & Metal cryptoPublicMS $\ell=2$ SING at $N=1024$; $11.38\,\mathrm{s}/8$. \\
 \cid{22} & Measured noisy-BK residual $\to B_{\mathrm{bk}}/\hat\sigma$ (covering gadget). \\
 \cid{23} & Native Sage lattice-estimator fill-in; production $|\Delta|=4.5$. \\
-\cid{24} & Enigma256 SoftBus Theorem~2 (reciprocity / fail-closed; five lemmas). \\
+\cid{24} & Enigma256 SoftBus Theorem~2, bounded fixture-v4 structural certificate / protocol: formal \textbf{1/1 PASS}; deterministic four-state scramble-bijection sweep; exhaustive byte reciprocity for one frozen fixture state; deterministic 128-byte stream round-trip; fixture plugboard plus selected XOR-center involution/fixed-point checks; exact schema-4 \texttt{E256-v2/gen0} native-profile integrity. Host derives/transports \texttt{(payload, centerMask, absoluteByteCounter)}; RTL validates the counter and does not implement HMAC. Finite checks are exhaustive only where stated; state/key coverage is bounded. Full E256 suite \textbf{49/49 PASS}; receipt \texttt{logs/e256-v2-gen0-fixture-v4-validation.json}. \\
 \cid{25} & TensorLUT Theorem~1 corollary (emitter--discrete $+$ involution under freeze). \\
 \cid{26} & Noisy-BK identity residual at $N{=}1024$: inject $B{=}64$ undecodable; $B{=}4$ $\varepsilon\log_2\approx-1$. \\
 \cid{27} & Exact public-MS covering under $q{=}2^{32}$ only at $N\in\{8,128\}$ (Theorem~3). \\
@@ -63,7 +63,7 @@ end-to-end. \\
 \cid{36} & Track~A covering baseLog$=1$: $\varepsilon\le 2^{-64}$ through inject $B{=}32$ ($\varepsilon\log_2=-97.8$, 95\% bound $-71.2$ at $n{=}64$; the $-139$ was a 4-trial low draw) + Metal SING PASS; $B{=}128$ still fails. \\
 \cid{37} & Track~A Gaussian BK inject on covering-b1: $\sigma{=}24$ meets $\varepsilon\le 2^{-64}$ (95\% bound $-81.4$ at $n{=}20$) + Metal SING PASS; torus $\sigma{\approx}128$ undecodable at native $k{=}1$ (\cid{55}); torus-scale close is \cid{52} ($k{=}7$). \\
 \cid{38} & Encrypted sequential DFF host-clock: 4-bit counter Metal $N{=}1024$ SING PASS ($15.88\,\mathrm{s}/4$). Not PicoRV32. \\
-\cid{39} & Encrypted 1-byte/1-round E256 frozen scramble Metal $N{=}1024$ SING PASS ($22.77\,\mathrm{s}/2$). Not live BRAM. \\
+\cid{39} & Encrypted historical one-byte / one-round legacy-UKW E256 teaching cone Metal $N{=}1024$ SING PASS ($22.77\,\mathrm{s}/2$). It predates live fixture-v4 and does not exercise transported \texttt{centerMask}/\texttt{absoluteByteCounter}, the conjugated-XOR center, live BRAM, NLFF, or the full core. \\
 \cid{40} & Encrypted toy NOP/ADD ISA Metal $N{=}1024$ SING PASS ($20.31\,\mathrm{s}/4$). Not PicoRV32. \\
 \cid{41} & Covering-b1 Gaussian $\sigma{=}128$: meets $\varepsilon\le 2^{-64}$ at $N{=}256$ (95\% bound $-594.5$). At $N{=}512$ native $k{=}1$ is decodable but $\varepsilon\log_2=-50.6$, short of the bar; stride $k\ge 2$ recovers it (bound $-151.5$ at $k{=}2$) with Metal SING PASS at $k{=}2,3,7$. Native $k{=}1$ at $N{=}1024$ still fails (\cid{37}); torus-scale close is \cid{52}. \\
 \cid{42} & 4-bit CSA vs ripple: LUT2 $11\to 8$ ($-27\%$) + encrypted SING PASS. Not TensorLUT melt. \\

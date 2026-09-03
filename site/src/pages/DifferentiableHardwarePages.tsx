@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ProjectJournalShell } from './ProjectJournalShell'
+import { NaziBlaster9000Span } from '../NaziBlaster9000Span'
 
 export function DifferentiableHardwareJournalPage() {
   return (
@@ -15,7 +16,7 @@ export function DifferentiableHardwareJournalPage() {
             <div className="kicker">Open ledger</div>
             <h2>Seed entries</h2>
             <p>
-              Full chronology will grow here the way Turing Complete grew for P1030680. Starting
+              Full chronology will grow here the way <NaziBlaster9000Span /> grew for P1030680. Starting
               points already exist in-repo.
             </p>
           </div>

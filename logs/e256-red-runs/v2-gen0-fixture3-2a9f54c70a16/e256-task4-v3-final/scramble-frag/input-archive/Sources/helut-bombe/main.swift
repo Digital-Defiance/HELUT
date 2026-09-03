@@ -1,0 +1,3 @@
+import HELUTToolKit
+
+HelutBombeCLI.run()

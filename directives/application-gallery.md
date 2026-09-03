@@ -28,9 +28,9 @@ Shape laboratory (oracle, not FHE claim): decision tree / regex / PicoRV32 (**C1
 
 | # | Application | Claim / bar | Reproduce |
 |---|-------------|-------------|-----------|
-| III.1 | SoftBus reciprocity / bijection | **C10**, **C24** | `testEnigma256FormalCertificate`; `Scripts/enigma256_bijection.sh` |
-| III.2 | Red battery (TensorLUT / KPA / `ent`) | empirical grades | `Scripts/enigma256_red_battery.sh`; logs under `logs/enigma256-*` |
-| III.3 | Fail-closed NLFF harden | **C24** clause 5 | `Enigma256Formal.checkFailClosedCoupling` |
+| III.1 | Bounded fixture-v4 reciprocity | **C10**, **C24**; experimental receipt, **E256-003 OPEN** pending human acceptance | `E256/v2/gen0/fa246e9cba9009a4799e5a81722a9b14e9a67293d9621b45985c5f3e620865d4/fixture-v4`; center `A_i^-1(A_i(x) XOR k_i)`; host derives and transports `(payload, centerMask, absoluteByteCounter)` and RTL validates the counter (no RTL HMAC). KAT: 1,024 bytes / 9 tables / 10 traces / 25 artifacts; formal 1/1; suite 49/49; equality 260/65536, z=0.250. Receipt: `logs/e256-v2-gen0-fixture-v4-validation.json` |
+| III.2 | Fixture-v4 TensorLUT scramble-cone grade | empirical, bounded optimizer failure only | 366 LUT6 with independent `center_mask`; `blue_hold`, `final_crypto -291592.781250`, `final_nonbinary 1217`. Not HMAC, not the full core, and not a security level or work factor |
+| III.3 | Fixture-v4 profile-integrity + KAT publication guards | **C10**, **C24**; fail closed | `testCanonicalGoldenPublicationRejectsMismatchedProfile`; `testProfileKATSplitPublicationFailsClosed`; formal integrity |
 
 ## Status
 
@@ -38,6 +38,6 @@ Shape laboratory (oracle, not FHE claim): decision tree / regex / PicoRV32 (**C1
 |------|------------------|-------|
 | I.1–I.3 | yes (gallery figures) | **C52** covering-b1; **C57** covering-b2 regex @ production *N*. **C26**/**C56** `cryptoPublicMS` still fail. Native *k*=1 still **C37**. Tree Metal covering and PicoRV covering @ *N*=1024 remain. **C58** lut6 cut. |
 | II.1–II.2 | yes | II.3 seminar-only until more receipts |
-| III.1, III.3 | yes | III.2 empirical, not IND-CPA |
+| III.1, III.3 | receipts present; acceptance OPEN | III.2 is empirical optimizer evidence. Fixture-v4 is experimental and not for real data; no IND-CPA, HMAC-security, or external-cryptanalysis claim. |
 
-Next: PicoRV `lw` (48-tick prog running); covering KS *n*=512 with *k*=7; native *k*=1 at *n*=*N* (**C37**). **C67** SIGTRAP is superseded by **C69**. Figures live in `site/public/gallery/`. FHE chronology: `/projects/netlist-fhe/journal`.
+Next: PicoRV `lw` (48-tick prog running); native *k*=1 at *n*=*N* (**C37**). **C69** now records covering KS *n*=256 and *n*=512 PASS; the old *n*=512 FAIL is withdrawn as a determinism artifact. **C67** SIGTRAP is superseded by **C69**. Figures live in `site/public/gallery/`. FHE chronology: `/projects/netlist-fhe/journal`.

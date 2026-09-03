@@ -8,7 +8,7 @@ mkdir -p "$(dirname "$OUT")"
 cd "$ROOT"
 
 yosys -Q -p "
-  read_verilog -sv enigma_256_core.v
+  read_verilog -sv -I. Hardware/RTL/Enigma256/enigma_256_core.v
   hierarchy -check -top enigma_256_core
   proc; opt
   memory -nomap

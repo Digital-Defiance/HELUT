@@ -21,23 +21,25 @@ Theory track: $N=4$ by hand (Chapter~\ref{ch:torus} exercises).
 
 \section{Lab 2 --- Netlist clock}
 
-Compile \texttt{counter} or \texttt{full\_adder} Yosys JSON with
-\texttt{--compile-only}.
+Compile the checked-in \texttt{counter} or \texttt{full\_adder} Yosys JSON
+from \corpus{Generated/} with \texttt{--compile-only}. If you re-synthesize an
+authored source from \corpus{Hardware/}, write the disposable JSON below
+\corpus{build/hardware/}; do not overwrite a root compatibility file.
 Tick with \texttt{--bench}. Identify $B$, $N$, LUT count, DFF count.
 Explain in writing why $N$ is not the circuit size.
 
 \section{Lab 3 --- Boolean oracle versus FHE path}
 
 \begin{lstlisting}
-.build/release/helut --bench netlist.json --degree 64 \
+.build/release/helut --bench Generated/Netlists/Examples/netlist.json --degree 64 \
   --lut-backend pbs --encoding phase --bench-equiv
-.build/release/helut --bench netlist.json --degree 8 \
+.build/release/helut --bench Generated/Netlists/Examples/netlist.json --degree 8 \
   --bench-encrypted --cpu-only --sing --vectors 8
-.build/release/helut --bench counter_netlist.json --degree 8 \
+.build/release/helut --bench Generated/Netlists/Examples/counter_netlist.json --degree 8 \
   --bench-encrypted --cpu-only --sing --vectors 8
-.build/release/helut --bench toy_isa_netlist.json --degree 8 \
+.build/release/helut --bench Generated/Netlists/Examples/toy_isa_netlist.json --degree 8 \
   --bench-encrypted --cpu-only --sing --vectors 32
-.build/release/helut --bench picorv32_netlist.json --degree 8 \
+.build/release/helut --bench Generated/Netlists/PicoRV32/picorv32_netlist.json --degree 8 \
   --bench-encrypted --cpu-only --sing --ticks 48 --reset-hold 3 \
   --encrypted-mem prog --paths 'blind-rotate public-ms boolean'
 \end{lstlisting}

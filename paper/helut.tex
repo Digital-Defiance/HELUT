@@ -63,10 +63,12 @@ TensorLUT relaxes discrete INIT tables into continuous tensors, grades shatter v
 hold under $\lambda$, and recovers reciprocal stecker involutions on frozen cores.
 Theorem~1 (continuous$\to$discrete structure) is machine-checked (C19).
 
-\textbf{(III) Adversarial polymorphic ciphers} (C10, C24).
-Enigma256-class SoftBus ciphers co-evolve under Red pressure (TensorLUT, KPA,
-\texttt{ent}) and fail closed; Theorem~2 states the SoftBus reciprocity /
-fail-closed contract (C24).
+\textbf{(III) Adversarial polymorphic ciphers} (C10, C24, C39).
+The schema-4 \texttt{E256-v2/gen0} native-profile fixture-v4 has bounded
+implementation / KAT-parity evidence (full E256 suite $49/49$) and a bounded
+structural certificate / protocol (formal test $1/1$). Coverage is finite and
+key/state-bounded. C39 remains a historical legacy-UKW encrypted teaching cone
+that predates the live fixture-v4 profile.
 
 Boolean-oracle Metal ticks (trivial encoding) remain a fast shape laboratory
 (C1): PicoRV32 at $N{=}1024$ compiles in ${\sim}1.3\,\mathrm{s}$ with
@@ -107,8 +109,9 @@ Red/Blue loop with differentiable melt and polymorphic ciphers?}
         TensorLUT continuous$\to$discrete melt with graded baseline / shatter /
         involution evidence.
   \item \textbf{Pillar III --- Polymorphic SoftBus ciphers.}
-        Enigma256 under Red TensorLUT/KPA/\texttt{ent} pressure; SoftBus
-        reciprocity / fail-closed Theorem~2 (C24).
+        Bounded schema-4 \texttt{E256-v2/gen0} fixture-v4 implementation /
+        KAT parity (C10) and structural certificate / protocol (C24); C39 is a
+        historical legacy-UKW encrypted cone, not the live profile.
   \item Boolean-oracle Metal performance tables (PicoRV32 / Enigma) as the
         \emph{shape} laboratory---labeled distinct from the FHE claim.
 \end{enumerate}
@@ -592,9 +595,9 @@ I & Hardness $+$ noisy-BK certs & C5, C22, C23, C26 \\
 II & M4 baseline emit & C8 \\
 II & Involution sandwich / formal & C9, C19, C25 \\
 II & Shatter vs hold (seminar) & empirical; not a decrypt (H6) \\
-III & SoftBus reciprocity & C10, C24 \\
-III & Red battery grades & \texttt{enigma256\_red\_battery.sh} \\
-III & Fail-closed NLFF harden & C24 \\
+III & Fixture-v4 implementation / KAT parity & C10: full suite $49/49$ \\
+III & Bounded structural certificate / protocol & C24: formal $1/1$ \\
+III & Historical legacy-UKW cone & C39 (pre-fixture-v4) \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -603,25 +606,38 @@ III & Fail-closed NLFF harden & C24 \\
 \label{sec:pillar3}
 
 \paragraph{Objective.}
-Enigma256 keeps the reciprocal rotor contract while deleting historical leaks,
-runs on SoftBus, and is graded under Red TensorLUT / KPA / \texttt{ent} pressure
-(empirical C10).
+For the fixed schema-4 \texttt{E256-v2/gen0} native-profile fixture-v4, C10
+records bounded implementation / KAT parity ($49/49$ full-suite PASS). C24
+records the bounded structural certificate / protocol below; C39 is a separate
+historical cone. None of these rows establishes universal key/state coverage.
 
-\begin{theorem}[Enigma256 SoftBus reciprocity / fail-closed]
+\begin{theorem}[E256 fixture-v4 bounded structural certificate / protocol]
 \label{thm:enigma256}
-Under the hypotheses of \texttt{Enigma256Formal.certificate()}
-(reciprocal scramble path; day-key involution builders; NLFF retaps do not
-rewrite frozen scramble): frozen scramble is a permutation and an involution;
-stream encrypt-then-decrypt recovers plaintext under identical keys; derived
-plugboard is fixed-point-free involution and un-reflector is an involution;
-\texttt{hardenedCubic()} rejects \texttt{coupledCubic6}.
+For the fixed schema-4 \texttt{E256-v2/gen0} native-profile fixture-v4, the C24
+bounded structural certificate / protocol checks exactly: (i) a deterministic
+four-state scramble-bijection sweep; (ii) exhaustive byte reciprocity for one
+frozen fixture state; (iii) a deterministic 128-byte stream round-trip;
+(iv) the fixture plugboard plus selected XOR-center involution/fixed-point
+checks, where the center is $A_i^{-1}(A_i(x)\oplus k_i)$; and (v) exact
+schema-4 \texttt{E256-v2/gen0} native-profile integrity. The host derives and
+transports \texttt{(payload, centerMask, absoluteByteCounter)}. RTL validates
+\texttt{absoluteByteCounter} and does not implement HMAC.
 \end{theorem}
 
-Machine-checked proof: \texttt{Sources/HELUTCore/Enigma256Formal.swift}
-(\texttt{testEnigma256FormalCertificate}). Statement:
+Machine-checked result: formal test \textbf{1/1 PASS}; full E256 suite
+\textbf{49/49 PASS}. Receipt:
+\texttt{logs/e256-v2-gen0-fixture-v4-validation.json}. Statement:
 \texttt{directives/enigma256-theorem.md}.
-This is a \emph{structural SoftBus contract}---not IND-CPA and not a claim that
-Red pressure cannot force Blue generation rolls.
+This is a \emph{bounded structural certificate / protocol}, not a universal
+proof: finite checks are exhaustive only where stated, and state/key coverage
+is bounded. It is not IND-CPA, an HMAC proof, external cryptanalysis, or human
+acceptance.
+
+\paragraph{Historical C39 scope.}
+C39 is a historical one-byte / one-round legacy-UKW encrypted teaching cone
+that predates the live fixture-v4 profile. It does not exercise the transported
+mask/counter fields (\texttt{centerMask}, \texttt{absoluteByteCounter}), the
+conjugated-XOR center, live BRAM, NLFF, or the full core.
 \section{Limitations and Future Work}
 \label{sec:limits}
 

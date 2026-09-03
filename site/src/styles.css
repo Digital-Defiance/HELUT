@@ -6,6 +6,9 @@
   --line: rgba(13, 19, 34, 0.14);
   --copper: #d4833f;         /* Richer, warmer copper */
   --copper-deep: #a86227;    /* Deeper burnished bronze */
+  --nazi-red: #DD0000;
+  --fahrenheit-grey: #5c5f63;
+  --fahrenheit-amber: #FFB000;
   --signal: #148177;         /* Brighter, more precise teal signal */
   --signal-glow: #22a89c;    /* Vibrant accent highlight */
   --muted: #627285;
@@ -455,6 +458,11 @@ section.band-ink code {
 
 .origin-body {
   max-width: 40rem;
+}
+
+.theme-song-player {
+  display: block;
+  width: min(100%, 30rem);
 }
 
 .origin-slot {
@@ -925,4 +933,12 @@ section.band-ink code {
     font-size: 0.82rem;
     gap: 0.25rem 0.75rem;
   }
+}
+
+span.nazi-red {
+font-family: Fraunces, Georgia, serif;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-decoration: none;
+  color: var(--nazi-red);
 }

@@ -1,5 +1,5 @@
 HELUT encrypted-netlist bench · SING
-  netlist: counter_netlist.json  module=stateful_counter
+  netlist: Generated/Netlists/Examples/counter_netlist.json  module=stateful_counter
   poly N=1024  LUTs=6  DFFs=4  sequential  2N=2048
   stimuli=4 (max --vectors 4)  cpu-only=false  metal-netlist-only=false
   paths filter: blind-rotate-metal public-ms boolean
@@ -30,30 +30,30 @@ BR tile=7/16 bits=384..<448
 BR tile=7/16 bits=384..<448
 BR tile=8/16 bits=448..<512
 BR tile=8/16 bits=448..<512
-BR tile=9/16 bits=512..<576
-BR tile=9/16 bits=512..<576
 BR tile=8/16 bits=448..<512
 BR tile=9/16 bits=512..<576
+BR tile=9/16 bits=512..<576
+BR tile=9/16 bits=512..<576
+BR tile=10/16 bits=576..<640
 BR tile=10/16 bits=576..<640
 BR tile=10/16 bits=576..<640
 BR tile=11/16 bits=640..<704
 BR tile=11/16 bits=640..<704
-BR tile=10/16 bits=576..<640
+BR tile=11/16 bits=640..<704
 BR tile=12/16 bits=704..<768
 BR tile=12/16 bits=704..<768
-BR tile=11/16 bits=640..<704
+BR tile=12/16 bits=704..<768
 BR tile=13/16 bits=768..<832
 BR tile=13/16 bits=768..<832
-BR tile=12/16 bits=704..<768
+BR tile=13/16 bits=768..<832
 BR tile=14/16 bits=832..<896
 BR tile=14/16 bits=832..<896
-BR tile=13/16 bits=768..<832
+BR tile=14/16 bits=832..<896
 BR tile=15/16 bits=896..<960
 BR tile=15/16 bits=896..<960
-BR tile=14/16 bits=832..<896
+BR tile=15/16 bits=896..<960
 BR tile=16/16 bits=960..<1024
 BR tile=16/16 bits=960..<1024
-BR tile=15/16 bits=896..<960
 BR tile=16/16 bits=960..<1024
 BR tile=1/16 bits=0..<64
 BR tile=1/16 bits=0..<64
@@ -393,15 +393,15 @@ BR tile=15/16 bits=896..<960
 BR tile=16/16 bits=960..<1024
 ENCRYPTED EQUIV (blind-rotate-metal public-ms boolean)
   rows            4
-  wall            7.0692 s  (1767.31 ms/row)
+  wall            6.9766 s  (1744.15 ms/row)
   classical bits  175.7  (≥128? yes)
   ingest ε log2   -inf  (target -64)
-  noisy BK B_bk   0  (decodable true)
+  noisy BK bound  0  (exactNoiselessConstruction; decodable true)
   result          PASS
 
 ════════ SING METRICS SUMMARY ════════
-path                                             ms/row       bits    εlog2     B_bk
-blind-rotate-metal public-ms boolean              1767.31      175.7 -inf            0
+path                                             ms/row       bits    εlog2   BK value  cert
+blind-rotate-metal public-ms boolean              1744.15      175.7 -inf            0  yes
 calibration:
 | Label | n | σ | Ref bits | HELUT est | Δ | Source |
 |---|---:|---:|---:|---:|---:|---|

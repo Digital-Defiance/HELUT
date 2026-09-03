@@ -67,7 +67,9 @@ REPORT = os.path.join(OUTDIR, "report.md")
 
 # The tool prints its own elapsed time as e.g. "  wall            0.2637 s".
 WALL_RE = re.compile(r"wall\s+([0-9]+\.[0-9]+)\s*s")
-VERDICT_RE = re.compile(r"result\s+(PASS|FAIL|SKIP)")
+VERDICT_RE = re.compile(
+    r"result\s+(PASS|FAIL|SKIP|DIAGNOSTIC ONLY)"
+)
 
 
 def competing_processes() -> list[str]:
@@ -236,7 +238,10 @@ def stability(verdict_sets: list[list[str]], exits: list[int]) -> str:
         return "no-verdict"
     if "FAIL" in only:
         return "stable-fail"
-    if set(only.split("/")) == {"PASS"}:
+    verdict_kinds = set(only.split("/"))
+    if verdict_kinds == {"PASS", "DIAGNOSTIC ONLY"}:
+        return "stable-diagnostic-pass"
+    if verdict_kinds == {"PASS"}:
         return "stable-pass"
     return f"stable-mixed ({only})"
 
@@ -495,13 +500,36 @@ def main() -> int:
         write_report(results)
 
     write_report(results)
-    flaky = [k for k, v in results.items() if v["stability"] == "FLAKY"]
     print(f"\nwrote {RESULTS}")
     print(f"wrote {REPORT}")
-    if flaky:
-        print(f"FLAKY rows: {', '.join(sorted(flaky))}")
+    selected = {row["id"]: row for row in want}
+    diagnostics: list[str] = []
+    problems: dict[str, str] = {}
+    for row_id, row in selected.items():
+        result = results.get(row_id)
+        if result is None:
+            problems[row_id] = "not-run"
+            continue
+        state = result["stability"]
+        if state == "stable-diagnostic-pass":
+            diagnostics.append(row_id)
+        acceptable = {"stable-pass", "stable-diagnostic-pass"}
+        if row.get("tier") == "D":
+            acceptable.add("no-verdict")
+        if state not in acceptable:
+            problems[row_id] = state
+
+    if diagnostics:
+        print(
+            "diagnostic-only functional rows (no noisy-BK confidence certificate): "
+            + ", ".join(sorted(diagnostics))
+        )
+    if problems:
+        print("NON-REPRODUCING selected rows:")
+        for row_id in sorted(problems):
+            print(f"  {row_id}: {problems[row_id]}")
         return 1
-    print("no flaky rows")
+    print("all selected rows reproduced within their recorded evidence scope")
     return 0
 
 

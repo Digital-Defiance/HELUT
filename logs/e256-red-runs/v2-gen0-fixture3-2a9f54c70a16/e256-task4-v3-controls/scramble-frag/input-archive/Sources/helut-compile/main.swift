@@ -1,0 +1,3 @@
+import HELUTToolKit
+
+HelutCompileCLI.run()

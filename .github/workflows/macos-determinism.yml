@@ -72,14 +72,22 @@ jobs:
       - name: Build (release)
         run: swift build -c release
 
+      - name: Checked-in M4 TensorLUT regeneration
+        run: swift test -c release --filter TensorLUTBaselineRegenerationTests
+
       - name: In-process determinism guard
         run: swift test -c release --filter EncryptedDeterminismTests
 
-      # The gate that matters: separate processes, hash randomisation ACTIVE.
-      # SWIFT_DETERMINISTIC_HASHING must stay unset — setting it pins the seed and
-      # makes this check vacuous. The script refuses to run if it is set.
+      # The gate that matters for the root cause: separate processes, hash
+      # randomisation ACTIVE. SWIFT_DETERMINISTIC_HASHING must stay unset —
+      # setting it pins the seed and makes this check vacuous.
       - name: Cross-process determinism gate
         run: python3 Scripts/determinism_cross_process.py --runs 5 --verbose
+
+      # Preserve the actual result recovered by that fix, not only the small-N
+      # seam: exact polynomial N=1024 / LWE n=512 covering-b2 noisy SING.
+      - name: C69 n=512 end-to-end preservation gate
+        run: make c69-smoke
 
       - name: Claim integrity lint
         run: python3 Scripts/claim_audit.py

@@ -258,7 +258,7 @@ final class TFHENoisyBKAccumulatorBoundSafetyTests: XCTestCase {
             secret: secret, params: params, noise: TFHENoiseParams(bound: 8),
             trials: 4, seed: 0x9003
         )
-        let note = acc.certificate(lutCount: 8).hypotheses.joined(separator: " | ")
+        let note = acc.observationReport(lutCount: 8).hypotheses.joined(separator: " | ")
         XCTAssertTrue(
             note.contains("accumulator coeffs"),
             "certificate hides that samples are accumulator coefficients: \(note)"

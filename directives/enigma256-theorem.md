@@ -1,53 +1,55 @@
-# Theorem / Protocol (Enigma256 SoftBus reciprocity)
+# Enigma256 bounded certificate protocol (C24)
 
-**Status:** machine-checked lemmas in `Enigma256Formal.certificate()` (**C24**).  
-Builds on empirical **C10** (reciprocity · fail-closed / bijection tests).  
-Not an IND-CPA proof; not a claim that Red TensorLUT/KPA/`ent` cannot pressure Blue.
+**Status:** bounded executable certificate in `Enigma256Formal.certificate()`; **1/1 PASS** for the certificate test. It builds on the bounded fixture-v4 implementation/KAT parity in **C10**. It is not a universal proof.
 
-Living inventory: [`claim-sheet.md`](claim-sheet.md). Paper: `paper/helut.tex` §Pillar III. Spec: [`../Enigma256.md`](../Enigma256.md).
+Living inventory: [`claim-sheet.md`](claim-sheet.md). Implementation: `Sources/HELUTCore/Enigma256Formal.swift`. Receipt: `logs/e256-v2-gen0-fixture-v4-validation.json`.
 
----
+## Live profile and hypotheses
 
-## Setup
+The certificate is bound to the live native profile:
 
-Let \(M\) be an Enigma256 SoftBus machine under day key \(D\) and message key \(m\).
-Let \(S_{D,m}\) be the **frozen** combinational scramble (no NLFF step):
-plugboard → rotors fwd → un-reflector → rotors rev → plugboard.
-Let \(G\) be an NLFF generation (quadratic3 / cubic6 / coupledCubic6).
+```text
+E256/v2/gen0/fa246e9cba9009a4799e5a81722a9b14e9a67293d9621b45985c5f3e620865d4/fixture-v4
+```
 
----
+For a tested frozen byte position \(i\), let \(A_i\) be the fixture plugboard followed by four forward rotor maps at that position. The live center and inverse path define
 
-## Theorem 2 (structural SoftBus contract)
+\[
+S_i(x) = A_i^{-1}\!\left(A_i(x) \mathbin{\mathrm{XOR}} k_i\right).
+\]
 
-Assume the hypotheses on the certificate (reciprocal rotor path; day-key table
-builders emit involutions; NLFF retaps do not rewrite the scramble combinational
-net). Then:
+The executable checks assume the following implementation contract:
 
-1. **Bijection.** For every frozen \((D,m)\), \(S_{D,m}\) is a permutation of \(\{0,\ldots,255\}\).
-2. **Reciprocity.** \(S_{D,m}\circ S_{D,m}=\mathrm{id}\) (encrypt ≡ decrypt under the same state).
-3. **Stream round-trip.** Encrypt-then-decrypt of a byte stream under identical
-   \((D,m)\) recovers the plaintext (stepping included).
-4. **Day-key involutions.** Derived plugboard is a fixed-point-free involution;
-   un-reflector is an involution (fixed points allowed).
-5. **Fail-closed coupling.** `hardenedCubic()` rejects `coupledCubic6` and rolls
-   back to independent `cubic6` (gen3).
+- `k_i` is one lane of a profile-bound HMAC-SHA256 block selected by a UInt64 big-endian block counter.
+- The pre-step NLFF mask and absolute byte counter each advance exactly once per accepted payload byte.
+- The host derives and transports `(payload, centerMask, absoluteByteCounter)`. RTL validates the transported counter; RTL does not implement HMAC.
+- Day/message/profile inputs and update order match the exact schema-4 native profile checked by `checkNativeProfileIntegrity()`.
+- Exhaustive byte and table checks apply only to the finite domains named below. Key and state coverage is bounded to deterministic sampled states.
 
-**Proof (machine-checked).** Each clause is `Enigma256Formal.check*` in
-`Sources/HELUTCore/Enigma256Formal.swift`, aggregated by
-`Enigma256Formal.certificate()`. Reproduce:
-`swift test -c release --filter testEnigma256FormalCertificate`.
+## Exact five-check protocol
 
-**What this does not prove.** Semantic security; resistance to all Red arms;
-that generation rolls always improve entropy; SoftBus side-channel flatness.
+`Enigma256Formal.certificate()` returns true only when all five checks hold:
 
----
+1. **Deterministic four-state scramble-bijection sweep.** `checkScrambleBijection(states: 4, seed: 0xE256_B1)` checks all 256 byte inputs within each of four deterministically sampled frozen states and requires no sweep failure.
+2. **Exhaustive byte reciprocity for one frozen fixture state.** `checkScrambleReciprocity(seed: 0xE256_B2)` checks all 256 byte inputs for one deterministic frozen fixture-derived state.
+3. **Deterministic 128-byte stream round-trip.** `checkStreamRoundTrip(bytes: 128, seed: 0xE256_B3)` encrypts one deterministic 128-byte stream and decrypts it from the identical initial day/message state, including stepping.
+4. **Fixture plugboard plus selected XOR-center involution/fixed-point checks.** `checkDayKeyAndCenterInvolutions()` exhaustively checks the 256-entry fixture plugboard as a fixed-point-free involution. It exhaustively checks XOR-center maps for masks `0x00`, `0x01`, `0xA5`, and `0xFF`: the zero mask has 256 fixed points; each selected nonzero mask has none.
+5. **Exact schema-4 native-profile integrity.** `checkNativeProfileIntegrity()` validates the live E256-v2/gen0 identity and profile hash, schema version 4, center/KDF/PRF/counter/map-order identifiers, corrected transition and update order, native reversible component/fold/tap structure, and checked domain separation.
 
-## Five-cell test
+The first two checks exhaust the byte domain only inside five deterministic frozen states. The fourth exhausts one 256-entry plugboard and four selected center masks. Those finite sweeps do not quantify over every key, message state, mask, counter, or stream.
 
-| Cell | Artifact |
-|------|----------|
-| Proof | Theorem 2 + `Enigma256FormalCertificate` |
-| Table | Lemmas vs `holds` on the certificate; Red battery summaries in logs |
-| Metric | Sweep failure = nil; stream round-trip error count = 0 |
-| Examples | Fixture IKM day key; 4-state bijection sweep; coupled→gen3 harden |
-| Application | SoftBus cipher that cannot ship a non-reciprocal scramble or coupled NLFF harden |
+## Reproduction and receipt
+
+Run:
+
+```sh
+swift test -c release --filter testEnigma256FormalCertificate
+```
+
+The `post_promotion_validation.formal_certificate` entry in `logs/e256-v2-gen0-fixture-v4-validation.json` records **1 test, 0 failures, five checks held**. The broader fixture-v4 suite and cross-implementation parity are C10 evidence, not additional universal clauses of this certificate.
+
+## Explicit non-claims
+
+This protocol is not an IND-CPA proof, not an HMAC-security proof, not external cryptanalysis, and not external review. It does not establish universal key/state coverage, production security, protocol security, or side-channel resistance. Host-derived mask/counter transport and RTL parity do not mean RTL implements HMAC.
+
+**E256-003 remains OPEN** pending human acceptance. AI semantic review does not close it.

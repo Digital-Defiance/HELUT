@@ -1,16 +1,17 @@
 HELUT encrypted-netlist bench · SING
-  netlist: toy_isa_netlist.json  module=toy_isa
+  netlist: Generated/Netlists/Examples/toy_isa_netlist.json  module=toy_isa
   poly N=1024  LUTs=11  DFFs=4  sequential  2N=2048
   stimuli=2 (max --vectors 2)  cpu-only=false  metal-netlist-only=false
   paths filter: covering-b1
   paths: public-ms@boolean + public-ms@crypto + secret@crypto (+ Metal)
-  BK noise inject Gaussian σ=128.0 (torus; measured identity residual → B_bk)
+  BK noise inject Gaussian σ=128.0 (torus; identity residual is empirical, not B_bk)
+  noisy-BK policy: UNSAFE DIAGNOSTIC ONLY (functional output cannot certify ε)
   boolean scale kδ  k=7  (test-poly stride 7; public-MS native δ)
   DynamicRotateCost mux=2099200 binary=11275 speedup≈186.2×
 
   starting blind-rotate-metal secret covering-b1
   identity residual trials=1  (n=1024)
-  identity B_bk    957426  (decodable true)
+  identity observed max|e| 751598  (sample-decodable true)
 BR tile=1/16 bits=0..<64
 BR tile=1/16 bits=0..<64
 BR tile=1/16 bits=0..<64
@@ -130,12 +131,12 @@ BR tile=10/16 bits=576..<640
 BR tile=11/16 bits=640..<704
 BR tile=11/16 bits=640..<704
 BR tile=12/16 bits=704..<768
+BR tile=13/16 bits=768..<832
 BR tile=12/16 bits=704..<768
-BR tile=13/16 bits=768..<832
-BR tile=13/16 bits=768..<832
 BR tile=14/16 bits=832..<896
-BR tile=14/16 bits=832..<896
+BR tile=13/16 bits=768..<832
 BR tile=15/16 bits=896..<960
+BR tile=14/16 bits=832..<896
 BR tile=15/16 bits=896..<960
 BR tile=16/16 bits=960..<1024
 BR tile=16/16 bits=960..<1024
@@ -365,15 +366,17 @@ BR tile=15/16 bits=896..<960
 BR tile=16/16 bits=960..<1024
 ENCRYPTED EQUIV (blind-rotate-metal secret covering-b1)
   rows            2
-  wall            94.5353 s  (47267.67 ms/row)
+  wall            94.3619 s  (47180.93 ms/row)
   classical bits  175.7  (≥128? yes)
   ingest ε log2   -inf  (target -64)
-  noisy BK B_bk   957426  (decodable true)
-  result          PASS
+  noisy BK observed max|e| 751598  (sample-decodable true; not a hard bound)
+  noisy BK 95% σ  inf  events=22  εlog2=0.0  target=-64  clears=no
+  functional result PASS
+  result          DIAGNOSTIC ONLY — NO NOISY-BK CONFIDENCE CERTIFICATE
 
   starting blind-rotate-metal public-ms covering-b1
   identity residual trials=1  (n=1024)
-  identity B_bk    370960  (decodable true)
+  identity observed max|e| 207067  (sample-decodable true)
 BR tile=1/16 bits=0..<64
 BR tile=1/16 bits=0..<64
 BR tile=1/16 bits=0..<64
@@ -409,19 +412,19 @@ BR tile=6/16 bits=320..<384
 BR tile=6/16 bits=320..<384
 BR tile=6/16 bits=320..<384
 BR tile=6/16 bits=320..<384
-BR tile=7/16 bits=384..<448
 BR tile=6/16 bits=320..<384
 BR tile=7/16 bits=384..<448
 BR tile=7/16 bits=384..<448
 BR tile=7/16 bits=384..<448
 BR tile=7/16 bits=384..<448
-BR tile=8/16 bits=448..<512
+BR tile=7/16 bits=384..<448
 BR tile=7/16 bits=384..<448
 BR tile=8/16 bits=448..<512
 BR tile=8/16 bits=448..<512
 BR tile=8/16 bits=448..<512
 BR tile=8/16 bits=448..<512
 BR tile=8/16 bits=448..<512
+BR tile=8/16 bits=448..<512
 BR tile=9/16 bits=512..<576
 BR tile=9/16 bits=512..<576
 BR tile=9/16 bits=512..<576
@@ -440,13 +443,13 @@ BR tile=11/16 bits=640..<704
 BR tile=11/16 bits=640..<704
 BR tile=11/16 bits=640..<704
 BR tile=11/16 bits=640..<704
-BR tile=12/16 bits=704..<768
 BR tile=12/16 bits=704..<768
 BR tile=12/16 bits=704..<768
 BR tile=12/16 bits=704..<768
 BR tile=12/16 bits=704..<768
 BR tile=12/16 bits=704..<768
 BR tile=13/16 bits=768..<832
+BR tile=12/16 bits=704..<768
 BR tile=13/16 bits=768..<832
 BR tile=13/16 bits=768..<832
 BR tile=13/16 bits=768..<832
@@ -497,10 +500,10 @@ BR tile=12/16 bits=704..<768
 BR tile=13/16 bits=768..<832
 BR tile=13/16 bits=768..<832
 BR tile=14/16 bits=832..<896
+BR tile=15/16 bits=896..<960
 BR tile=14/16 bits=832..<896
-BR tile=15/16 bits=896..<960
-BR tile=15/16 bits=896..<960
 BR tile=16/16 bits=960..<1024
+BR tile=15/16 bits=896..<960
 BR tile=16/16 bits=960..<1024
 BR tile=1/16 bits=0..<64
 BR tile=1/16 bits=0..<64
@@ -531,8 +534,8 @@ BR tile=13/16 bits=768..<832
 BR tile=14/16 bits=832..<896
 BR tile=14/16 bits=832..<896
 BR tile=15/16 bits=896..<960
-BR tile=15/16 bits=896..<960
 BR tile=16/16 bits=960..<1024
+BR tile=15/16 bits=896..<960
 BR tile=16/16 bits=960..<1024
 BR tile=1/16 bits=0..<64
 BR tile=2/16 bits=64..<128
@@ -728,16 +731,18 @@ BR tile=15/16 bits=896..<960
 BR tile=16/16 bits=960..<1024
 ENCRYPTED EQUIV (blind-rotate-metal public-ms covering-b1)
   rows            2
-  wall            55.0255 s  (27512.73 ms/row)
+  wall            54.6498 s  (27324.88 ms/row)
   classical bits  175.7  (≥128? yes)
   ingest ε log2   -inf  (target -64)
-  noisy BK B_bk   370960  (decodable true)
-  result          PASS
+  noisy BK observed max|e| 207067  (sample-decodable true; not a hard bound)
+  noisy BK 95% σ  inf  events=22  εlog2=0.0  target=-64  clears=no
+  functional result PASS
+  result          DIAGNOSTIC ONLY — NO NOISY-BK CONFIDENCE CERTIFICATE
 
 ════════ SING METRICS SUMMARY ════════
-path                                             ms/row       bits    εlog2     B_bk
-blind-rotate-metal secret covering-b1            47267.67      175.7 -inf       957426
-blind-rotate-metal public-ms covering-b1         27512.73      175.7 -inf       370960
+path                                             ms/row       bits    εlog2   BK value  cert
+blind-rotate-metal secret covering-b1            47180.93      175.7 -inf       751598  NO
+blind-rotate-metal public-ms covering-b1         27324.88      175.7 -inf       207067  NO
 calibration:
 | Label | n | σ | Ref bits | HELUT est | Δ | Source |
 |---|---:|---:|---:|---:|---:|---|

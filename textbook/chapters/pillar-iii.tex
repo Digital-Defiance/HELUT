@@ -1,110 +1,120 @@
 \chapter{Ciphers that grow under fire}
 \label{ch:pillariii}
 
-\growswhen{A polymorphic Red/Blue standard beyond the E256 SoftBus instance
-(roadmap: Schneier pillar), and IND-CPA / Red-pressure security proofs that
-go past the structural SoftBus contract. This edition teaches Theorem~2
-(machine-checked reciprocity / fail-closed) plus the laboratory loop---not
-a finished industry standard.}
+\growswhen{A polymorphic Red/Blue standard beyond the bounded E256 fixture-v4
+receipt (roadmap: Schneier pillar), and IND-CPA / Red-pressure security results
+that go past finite structural checks. This chapter is a scaffold and collecting
+surface for existing receipts---not lecture-ready material and not a finished
+industry standard.}
 
-\section{Why a cryptanalysis lab must design ciphers}
+\section{Evidence boundary for a design laboratory}
 
-A course that only breaks historical machines trains curators.
-Pillar~III asks Blue to sit in the same room as Red: mutate the non-linear
-feedback under adversarial pressure, and fail closed when the invariants
-break~\cite{helut-enigma256,helut-release}.
+Historical Enigma traits motivate the E256 design laboratory, but the checked
+claims here do not prove those traits universally fatal or prove their removal
+for every generated machine. This collecting surface records three existing
+rows: bounded fixture-v4 implementation parity (C10), a bounded structural
+certificate / protocol (C24), and a historical encrypted teaching cone (C39).
 
-The historical Enigma leaks this laboratory proved fatal---26-letter menus,
-self-stecker ban, thin plugboards, odometer stepping, paper day keys---are
-deleted on purpose in Enigma256 (E256).
-The reciprocal rotor \emph{contract} is kept: encrypt $\equiv$ decrypt under
-the same machine state.
+The same-state reciprocal shape is a design target. The evidence below is
+finite: only checks explicitly called exhaustive are exhaustive, and key/state
+coverage remains bounded.
 
-\section{The E256 contract, for lecture}
+\section{Fixture-v4 evidence capsule (scaffold)}
 
 \begin{itemize}
-  \item Alphabet is a byte, not 26 letters.
-  \item Plugboard is a 256-entry involution, 128 pairs, no fixed points.
-  \item Four active rotors drawn from a 16-rotor day pool; un-reflector
-        allows fixed points.
-  \item After each byte, NLFF step enables advance offsets; a Galois LFSR
-        clocks. Not an odometer.
-  \item Control-plane crypto (KEM, HKDF, AEAD, signatures) never enters
-        datapath BRAMs.
-  \item The live field is Apple Silicon SoftBus, not an FPGA board on the
-        critical path.
+  \item The fixed live profile is schema-4 \texttt{E256-v2/gen0}, fixture-v4.
+  \item Its conjugated-XOR center is
+        $A_i^{-1}(A_i(x)\oplus k_i)$.
+  \item The host derives and transports
+        \texttt{(payload, centerMask, absoluteByteCounter)}; RTL validates
+        \texttt{absoluteByteCounter} and does not implement HMAC.
+  \item The formal C24 test is \textbf{1/1 PASS}; the full E256 C10 suite is
+        \textbf{49/49 PASS}. The receipt is
+        \texttt{logs/e256-v2-gen0-fixture-v4-validation.json}.
 \end{itemize}
 
-\reproduced{C10}{Enigma256 reciprocity, fail-closed behavior, and bijection
-tests. See \corpus{Enigma256.md} and fixtures.}
+\reproduced{C10}{Enigma256 fixture-v4 bounded implementation / KAT-parity,
+reciprocity, and conjugated-XOR evidence for the fixed schema-4
+\texttt{E256-v2/gen0} native profile. Full E256 suite: \textbf{49/49 PASS}.
+Receipt: \texttt{logs/e256-v2-gen0-fixture-v4-validation.json}.}
 
-\reproduced{C24}{Enigma256 SoftBus Theorem~2: five machine-checked lemmas
-(bijection, reciprocity, stream round-trip, day-key involutions,
-\texttt{coupledCubic6} reject). Statement:
-\corpus{directives/enigma256-theorem.md}.}
+\reproduced{C24}{Enigma256 SoftBus Theorem~2 is a bounded fixture-v4
+structural certificate / protocol: deterministic four-state
+scramble-bijection sweep; exhaustive byte reciprocity for one frozen fixture
+state; deterministic 128-byte stream round-trip; fixture plugboard plus
+selected XOR-center involution/fixed-point checks; and exact schema-4
+\texttt{E256-v2/gen0} native-profile integrity. Formal test:
+\textbf{1/1 PASS}. Statement: \corpus{directives/enigma256-theorem.md}.}
 
-\reproduced{C39}{One frozen 8-bit E256 scramble round (algebraic sboxes + UKW,
-offsets $0$) under GGSW Metal SING at $N{=}1024$. Not live BRAM tables, not
-NLFF, not a full SoftBus burst.}
+\reproduced{C39}{One frozen historical one-byte / one-round E256 teaching cone
+with algebraic sboxes, legacy UKW, offsets $0$, and identity plug under GGSW
+Metal SING at $N{=}1024$. It predates the live fixture-v4 profile and does not
+exercise transported mask/counter tuples, the conjugated-XOR center, live BRAM
+day-key tables, NLFF stepping, or the full core.}
 
-\section{Theorem 2 (structural SoftBus)}
+\section{Theorem 2 (bounded structural certificate / protocol)}
 \label{sec:thm-enigma256}
 
-\begin{theorem}[Enigma256 SoftBus reciprocity / fail-closed; \corpusthm{2}]
+\begin{theorem}[E256 fixture-v4 bounded structural certificate / protocol;
+\corpusthm{2}]
 \label{thm:enigma256}
-Under the hypotheses of \texttt{Enigma256Formal.certificate()}
-(reciprocal scramble path; day-key involution builders; NLFF retaps do not
-rewrite frozen scramble): frozen scramble is a permutation and an involution;
-stream encrypt-then-decrypt recovers plaintext under identical keys; derived
-plugboard is fixed-point-free involution and un-reflector is an involution;
-\texttt{hardenedCubic()} rejects \texttt{coupledCubic6}.
+For the fixed schema-4 \texttt{E256-v2/gen0} native-profile fixture-v4, the C24
+bounded structural certificate / protocol checks exactly: (i) a deterministic
+four-state scramble-bijection sweep; (ii) exhaustive byte reciprocity for one
+frozen fixture state; (iii) a deterministic 128-byte stream round-trip;
+(iv) the fixture plugboard plus selected XOR-center involution/fixed-point
+checks, where the center is $A_i^{-1}(A_i(x)\oplus k_i)$; and (v) exact
+schema-4 \texttt{E256-v2/gen0} native-profile integrity. The host derives and
+transports \texttt{(payload, centerMask, absoluteByteCounter)}. RTL validates
+\texttt{absoluteByteCounter} and does not implement HMAC.
 \end{theorem}
 
-Machine-checked: \texttt{Enigma256Formal.certificate()} /
-\texttt{testEnigma256FormalCertificate}.
-Reproduce: see Lab appendix / \corpus{REPRODUCE.md}.
+Machine-checked result: \texttt{Enigma256Formal.certificate()} /
+\texttt{testEnigma256FormalCertificate}, \textbf{1/1 PASS}; full E256 suite,
+\textbf{49/49 PASS}. Receipt:
+\texttt{logs/e256-v2-gen0-fixture-v4-validation.json}.
+Reproduce through \corpus{REPRODUCE.md}.
 
 \begin{warning}
-Theorem~2 is a \emph{structural SoftBus contract}---not IND-CPA, not a claim
-that Red TensorLUT/KPA/\texttt{ent} cannot force Blue generation rolls, and
-not a finished polymorphic-cipher standard.
+Theorem~2 records a \emph{bounded structural certificate / protocol}, not a
+universal proof. Finite checks are exhaustive only where stated, and state/key
+coverage is bounded. It is not IND-CPA, an HMAC proof, external cryptanalysis,
+human acceptance, or a finished polymorphic-cipher standard.
 \end{warning}
 
-\section{Red pressure}
+\section{Red-pressure questions kept separate}
 
-Red is not a separate team with a PDF of attacks.
-Red is TensorLUT cones, SoftBus known-plaintext attacks, and
-\texttt{ent} on the keystream---on the same Mac that rolls Blue
-generations.
+TensorLUT, known-plaintext, and \texttt{ent} experiments remain internal Red
+questions on this collecting surface. C24 does not show that those experiments
+cannot force a generation roll, and the fixture-v4 receipt is not external
+cryptanalysis or human acceptance. No coupled-NLFF hardening result is part of
+the bounded certificate.
 
-A generation that cannot hold under that pressure does not ship.
-Fail-closed means: if reciprocity, bijection, or a stated invariant
-breaks, the roll aborts rather than emitting a ``mostly fine'' Verilog.
-Theorem~2 covers the structural abort path for coupled NLFF harden;
-empirical Red batteries remain separate grades.
+\section{Draft lab prompts (scaffold; not lecture-ready)}
 
-\section{What students design}
-
-\begin{exercise}[Blue studio]
-Propose one additional invariant E256 should fail-closed on (example:
-NLFF period lower bound; stecker-free involution; BRAM burst width).
-Write the test that would refuse a generation. Do not implement a new
-cipher in this edition unless the instructor opens a project slot.
+\begin{exercise}[Blue studio prompt]
+Propose one additional E256 invariant as an open design question (for example,
+an NLFF period lower bound or BRAM burst-width condition). Specify a test that
+could refuse a generation, but do not promote the proposal to a claim without
+a checked receipt.
 \end{exercise}
 
-\begin{exercise}[Historical leaks as a checklist]
-Map each deleted Enigma leak to the E256 construct that replaces it.
-One table, six rows. Then add a seventh row: a leak this design may
-still have, labeled as a question, not a claim.
+\begin{exercise}[Historical-leak checklist prompt]
+Compare historical Enigma traits with the corresponding E256 design choices.
+Keep every unsupported security consequence labeled as a question, not a
+claim.
 \end{exercise}
 
 \section{Relation to Pillars I and II}
 
-E256's lecture arc is the structural SoftBus contract (Theorem~\ref{thm:enigma256}).
-\cid{39} is a frozen 1-round scramble under GGSW Metal SING---not live BRAM,
-not NLFF, not a messaging product.
-Calling that lab ``production encrypted E256'' is a \claimkind{N}.
+This collecting surface links the bounded C24 protocol to its fixture receipt
+(Theorem~\ref{thm:enigma256}). \cid{39} is a historical frozen one-round
+legacy-UKW scramble under GGSW Metal SING. It predates live fixture-v4 and does
+not exercise transported \texttt{centerMask}/\texttt{absoluteByteCounter}, the
+conjugated-XOR center, live BRAM, NLFF, or a full core. Calling that lab
+``production encrypted E256'' is a \claimkind{N}.
 
-\nonclaimbox{E256 is not a NIST candidate in this book, not a replacement
-for TLS, and not an implication that polymorphic rotors beat lattices.
-It is a pedagogical and laboratory standard for fail-closed mutation.}
+\nonclaimbox{E256 is not a NIST candidate in this scaffold, not a replacement
+for TLS, and not an implication that polymorphic rotors beat lattices. The
+fixture-v4 receipt is bounded implementation / protocol evidence, not IND-CPA,
+an HMAC proof, external cryptanalysis, or human acceptance.}

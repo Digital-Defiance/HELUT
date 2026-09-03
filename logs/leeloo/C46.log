@@ -1,5 +1,5 @@
 HELUT encrypted-netlist bench · SING
-  netlist: picorv32_netlist.json  module=picorv32
+  netlist: Generated/Netlists/PicoRV32/picorv32_netlist.json  module=picorv32
   poly N=8  LUTs=4785  DFFs=1565  sequential  2N=16
   stimuli=10 (max --vectors 256)  cpu-only=true  metal-netlist-only=false
   scripted boot: ticks=10  reset-hold=3 (resetn=0 then 1; other inputs 0 including clk)
@@ -10,18 +10,18 @@ HELUT encrypted-netlist bench · SING
   starting blind-rotate public-ms boolean
 ENCRYPTED EQUIV (blind-rotate public-ms boolean)
   rows            10
-  wall            0.4832 s  (48.32 ms/row)
+  wall            0.5021 s  (50.21 ms/row)
   classical bits  4.0  (≥128? no)
   ingest ε log2   -inf  (target -64)
-  noisy BK B_bk   0  (decodable true)
+  noisy BK bound  0  (exactNoiselessConstruction; decodable true)
   result          PASS
 
 ENCRYPTED EQUIV (metal)
   result          SKIP (--cpu-only)
 
 ════════ SING METRICS SUMMARY ════════
-path                                             ms/row       bits    εlog2     B_bk
-blind-rotate public-ms boolean                      48.32        4.0 -inf            0
+path                                             ms/row       bits    εlog2   BK value  cert
+blind-rotate public-ms boolean                      50.21        4.0 -inf            0  yes
 calibration:
 | Label | n | σ | Ref bits | HELUT est | Δ | Source |
 |---|---:|---:|---:|---:|---:|---|

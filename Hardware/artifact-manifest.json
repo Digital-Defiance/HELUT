@@ -1,0 +1,476 @@
+{
+  "schema": "helut.hardware-artifacts/v1",
+  "migration_state": "canonical",
+  "policies": {
+    "authored_hardware_root": "Hardware",
+    "checked_in_generated_root": "Generated",
+    "scratch_generated_root": "build",
+    "legacy_generators_must_not_write_through_aliases": true,
+    "promotion_requires_explicit_validation": true
+  },
+  "fixed_paths": [
+    "BREAK_P1030680.md",
+    "writeup.tex",
+    "directives/claim-sheet.md",
+    "REPRODUCE.md",
+    "Apps",
+    "Fixtures",
+    "Scripts",
+    "Sources",
+    "Tests",
+    "logs",
+    "site",
+    "textbook"
+  ],
+  "artifacts": [
+    {
+      "id": "rtl.examples.full-adder",
+      "role": "authored-rtl",
+      "current_path": "Hardware/RTL/Examples/circuit.v",
+      "canonical_path": "Hardware/RTL/Examples/circuit.v",
+      "migration": "canonical",
+      "legacy_paths": [
+        "circuit.v"
+      ],
+      "legacy_policy": "retain-wrapper"
+    },
+    {
+      "id": "rtl.examples.counter",
+      "role": "authored-rtl",
+      "current_path": "Hardware/RTL/Examples/counter.v",
+      "canonical_path": "Hardware/RTL/Examples/counter.v",
+      "migration": "canonical",
+      "legacy_paths": [
+        "counter.v"
+      ],
+      "legacy_policy": "retain-wrapper"
+    },
+    {
+      "id": "rtl.examples.csa4",
+      "role": "authored-rtl",
+      "current_path": "Hardware/RTL/Examples/csa4.v",
+      "canonical_path": "Hardware/RTL/Examples/csa4.v",
+      "migration": "canonical",
+      "legacy_paths": [
+        "csa4.v"
+      ],
+      "legacy_policy": "retain-wrapper"
+    },
+    {
+      "id": "rtl.examples.decision-tree",
+      "role": "authored-rtl",
+      "current_path": "Hardware/RTL/Examples/decision_tree.v",
+      "canonical_path": "Hardware/RTL/Examples/decision_tree.v",
+      "migration": "canonical",
+      "legacy_paths": [
+        "decision_tree.v"
+      ],
+      "legacy_policy": "retain-wrapper"
+    },
+    {
+      "id": "rtl.examples.regex",
+      "role": "authored-rtl",
+      "current_path": "Hardware/RTL/Examples/regex_matcher.v",
+      "canonical_path": "Hardware/RTL/Examples/regex_matcher.v",
+      "migration": "canonical",
+      "legacy_paths": [
+        "regex_matcher.v"
+      ],
+      "legacy_policy": "retain-wrapper"
+    },
+    {
+      "id": "rtl.examples.ripple4",
+      "role": "authored-rtl",
+      "current_path": "Hardware/RTL/Examples/ripple4.v",
+      "canonical_path": "Hardware/RTL/Examples/ripple4.v",
+      "migration": "canonical",
+      "legacy_paths": [
+        "ripple4.v"
+      ],
+      "legacy_policy": "retain-wrapper"
+    },
+    {
+      "id": "rtl.examples.toy-isa",
+      "role": "authored-rtl",
+      "current_path": "Hardware/RTL/Examples/toy_isa.v",
+      "canonical_path": "Hardware/RTL/Examples/toy_isa.v",
+      "migration": "canonical",
+      "legacy_paths": [
+        "toy_isa.v"
+      ],
+      "legacy_policy": "retain-wrapper"
+    },
+    {
+      "id": "rtl.enigma.m3",
+      "role": "authored-rtl",
+      "current_path": "Hardware/RTL/Enigma/enigma_core.v",
+      "canonical_path": "Hardware/RTL/Enigma/enigma_core.v",
+      "migration": "canonical",
+      "legacy_paths": ["enigma_core.v"],
+      "legacy_policy": "retain-wrapper"
+    },
+    {
+      "id": "rtl.enigma.m4",
+      "role": "authored-rtl",
+      "current_path": "Hardware/RTL/Enigma/enigma_m4_core.v",
+      "canonical_path": "Hardware/RTL/Enigma/enigma_m4_core.v",
+      "migration": "canonical",
+      "legacy_paths": ["enigma_m4_core.v"],
+      "legacy_policy": "retain-wrapper"
+    },
+    {
+      "id": "rtl.e256.historical-round1",
+      "role": "authored-rtl",
+      "current_path": "Hardware/RTL/Enigma256/Historical/e256_round1.v",
+      "canonical_path": "Hardware/RTL/Enigma256/Historical/e256_round1.v",
+      "migration": "canonical",
+      "legacy_paths": ["e256_round1.v"],
+      "legacy_policy": "retain-wrapper"
+    },
+    {
+      "id": "rtl.e256.axi",
+      "role": "authored-rtl",
+      "current_path": "Hardware/RTL/Enigma256/enigma_256_axi.v",
+      "canonical_path": "Hardware/RTL/Enigma256/enigma_256_axi.v",
+      "migration": "canonical",
+      "legacy_paths": ["enigma_256_axi.v"],
+      "legacy_policy": "retain-wrapper"
+    },
+    {
+      "id": "rtl.e256.axis-tables",
+      "role": "authored-rtl",
+      "current_path": "Hardware/RTL/Enigma256/enigma_256_axis_tables.v",
+      "canonical_path": "Hardware/RTL/Enigma256/enigma_256_axis_tables.v",
+      "migration": "canonical",
+      "legacy_paths": ["enigma_256_axis_tables.v"],
+      "legacy_policy": "retain-wrapper"
+    },
+    {
+      "id": "rtl.e256.core",
+      "role": "authored-rtl",
+      "current_path": "Hardware/RTL/Enigma256/enigma_256_core.v",
+      "canonical_path": "Hardware/RTL/Enigma256/enigma_256_core.v",
+      "migration": "canonical",
+      "legacy_paths": ["enigma_256_core.v"],
+      "legacy_policy": "retain-wrapper"
+    },
+    {
+      "id": "rtl.e256.nlff-combo",
+      "role": "authored-rtl",
+      "current_path": "Hardware/RTL/Enigma256/enigma_256_nlff_combo.v",
+      "canonical_path": "Hardware/RTL/Enigma256/enigma_256_nlff_combo.v",
+      "migration": "canonical",
+      "legacy_paths": ["enigma_256_nlff_combo.v"],
+      "legacy_policy": "retain-wrapper"
+    },
+    {
+      "id": "rtl.e256.nlff-lfsr-combo",
+      "role": "authored-rtl",
+      "current_path": "Hardware/RTL/Enigma256/enigma_256_nlff_lfsr_combo.v",
+      "canonical_path": "Hardware/RTL/Enigma256/enigma_256_nlff_lfsr_combo.v",
+      "migration": "canonical",
+      "legacy_paths": ["enigma_256_nlff_lfsr_combo.v"],
+      "legacy_policy": "retain-wrapper"
+    },
+    {
+      "id": "rtl.e256.nlff-offset-combo",
+      "role": "authored-rtl",
+      "current_path": "Hardware/RTL/Enigma256/enigma_256_nlff_offset_combo.v",
+      "canonical_path": "Hardware/RTL/Enigma256/enigma_256_nlff_offset_combo.v",
+      "migration": "canonical",
+      "legacy_paths": ["enigma_256_nlff_offset_combo.v"],
+      "legacy_policy": "retain-wrapper"
+    },
+    {
+      "id": "rtl.e256.scramble-fragment",
+      "role": "authored-rtl",
+      "current_path": "Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v",
+      "canonical_path": "Hardware/RTL/Enigma256/enigma_256_scramble_frag_combo.v",
+      "migration": "canonical",
+      "legacy_paths": ["enigma_256_scramble_frag_combo.v"],
+      "legacy_policy": "retain-wrapper"
+    },
+    {
+      "id": "rtl.e256.step-cone",
+      "role": "authored-rtl",
+      "current_path": "Hardware/RTL/Enigma256/enigma_256_step_cone.v",
+      "canonical_path": "Hardware/RTL/Enigma256/enigma_256_step_cone.v",
+      "migration": "canonical",
+      "legacy_paths": ["enigma_256_step_cone.v"],
+      "legacy_policy": "retain-wrapper"
+    },
+    {
+      "id": "rtl.e256.polymorphic-rotor-generator",
+      "role": "authored-rtl",
+      "current_path": "Hardware/RTL/Enigma256/polymorphic_rotor_generator.v",
+      "canonical_path": "Hardware/RTL/Enigma256/polymorphic_rotor_generator.v",
+      "migration": "canonical",
+      "legacy_policy": "none"
+    },
+    {
+      "id": "rtl.vendor.picorv32",
+      "role": "vendored-rtl",
+      "current_path": "Hardware/RTL/Vendor/PicoRV32/picorv32.v",
+      "canonical_path": "Hardware/RTL/Vendor/PicoRV32/picorv32.v",
+      "migration": "canonical",
+      "legacy_paths": ["picorv32.v"],
+      "legacy_policy": "retain-wrapper"
+    },
+    {
+      "id": "tb.e256.axi",
+      "role": "authored-testbench",
+      "current_path": "Hardware/Testbenches/Enigma256/enigma_256_axi_tb.v",
+      "canonical_path": "Hardware/Testbenches/Enigma256/enigma_256_axi_tb.v",
+      "migration": "canonical",
+      "legacy_policy": "none"
+    },
+    {
+      "id": "tb.e256.center",
+      "role": "authored-testbench",
+      "current_path": "Hardware/Testbenches/Enigma256/enigma_256_center_tb.v",
+      "canonical_path": "Hardware/Testbenches/Enigma256/enigma_256_center_tb.v",
+      "migration": "canonical",
+      "legacy_policy": "none"
+    },
+    {
+      "id": "tb.e256.lfsr",
+      "role": "authored-testbench",
+      "current_path": "Hardware/Testbenches/Enigma256/enigma_256_lfsr_tb.v",
+      "canonical_path": "Hardware/Testbenches/Enigma256/enigma_256_lfsr_tb.v",
+      "migration": "canonical",
+      "legacy_policy": "none"
+    },
+    {
+      "id": "tb.e256.nlff",
+      "role": "authored-testbench",
+      "current_path": "Hardware/Testbenches/Enigma256/enigma_256_nlff_tb.v",
+      "canonical_path": "Hardware/Testbenches/Enigma256/enigma_256_nlff_tb.v",
+      "migration": "canonical",
+      "legacy_policy": "none"
+    },
+    {
+      "id": "tb.e256.core",
+      "role": "authored-testbench",
+      "current_path": "Hardware/Testbenches/Enigma256/enigma_256_tb.v",
+      "canonical_path": "Hardware/Testbenches/Enigma256/enigma_256_tb.v",
+      "migration": "canonical",
+      "legacy_policy": "none"
+    },
+    {
+      "id": "netlist.examples.full-adder",
+      "role": "generated-netlist",
+      "source_artifact": "rtl.examples.full-adder",
+      "current_path": "Generated/Netlists/Examples/netlist.json",
+      "canonical_path": "Generated/Netlists/Examples/netlist.json",
+      "migration": "canonical",
+      "legacy_paths": ["netlist.json"],
+      "legacy_policy": "retain-copy"
+    },
+    {
+      "id": "netlist.examples.counter",
+      "role": "generated-netlist",
+      "source_artifact": "rtl.examples.counter",
+      "current_path": "Generated/Netlists/Examples/counter_netlist.json",
+      "canonical_path": "Generated/Netlists/Examples/counter_netlist.json",
+      "migration": "canonical",
+      "legacy_paths": ["counter_netlist.json"],
+      "legacy_policy": "retain-copy"
+    },
+    {
+      "id": "netlist.examples.counter-legacy-alias",
+      "role": "compatibility-alias",
+      "source_artifact": "netlist.examples.counter",
+      "current_path": "core_netlist.json",
+      "canonical_path": "Generated/Netlists/Examples/counter_netlist.json",
+      "migration": "legacy-alias",
+      "legacy_policy": "retain-copy"
+    },
+    {
+      "id": "netlist.examples.csa4",
+      "role": "generated-netlist",
+      "source_artifact": "rtl.examples.csa4",
+      "current_path": "Generated/Netlists/Examples/csa4_netlist.json",
+      "canonical_path": "Generated/Netlists/Examples/csa4_netlist.json",
+      "migration": "canonical",
+      "legacy_paths": ["csa4_netlist.json"],
+      "legacy_policy": "retain-copy"
+    },
+    {
+      "id": "netlist.examples.decision-tree",
+      "role": "generated-netlist",
+      "source_artifact": "rtl.examples.decision-tree",
+      "current_path": "Generated/Netlists/Examples/tree_netlist.json",
+      "canonical_path": "Generated/Netlists/Examples/tree_netlist.json",
+      "migration": "canonical",
+      "legacy_paths": ["tree_netlist.json"],
+      "legacy_policy": "retain-copy"
+    },
+    {
+      "id": "netlist.examples.regex",
+      "role": "generated-netlist",
+      "source_artifact": "rtl.examples.regex",
+      "current_path": "Generated/Netlists/Examples/regex_netlist.json",
+      "canonical_path": "Generated/Netlists/Examples/regex_netlist.json",
+      "migration": "canonical",
+      "legacy_paths": ["regex_netlist.json"],
+      "legacy_policy": "retain-copy"
+    },
+    {
+      "id": "netlist.examples.ripple4",
+      "role": "generated-netlist",
+      "source_artifact": "rtl.examples.ripple4",
+      "current_path": "Generated/Netlists/Examples/ripple4_netlist.json",
+      "canonical_path": "Generated/Netlists/Examples/ripple4_netlist.json",
+      "migration": "canonical",
+      "legacy_paths": ["ripple4_netlist.json"],
+      "legacy_policy": "retain-copy"
+    },
+    {
+      "id": "netlist.examples.toy-isa",
+      "role": "generated-netlist",
+      "source_artifact": "rtl.examples.toy-isa",
+      "current_path": "Generated/Netlists/Examples/toy_isa_netlist.json",
+      "canonical_path": "Generated/Netlists/Examples/toy_isa_netlist.json",
+      "migration": "canonical",
+      "legacy_paths": ["toy_isa_netlist.json"],
+      "legacy_policy": "retain-copy"
+    },
+    {
+      "id": "netlist.enigma.m3",
+      "role": "generated-netlist",
+      "source_artifact": "rtl.enigma.m3",
+      "current_path": "Generated/Netlists/Enigma/enigma_netlist.json",
+      "canonical_path": "Generated/Netlists/Enigma/enigma_netlist.json",
+      "migration": "canonical",
+      "legacy_paths": ["enigma_netlist.json"],
+      "legacy_policy": "retain-copy"
+    },
+    {
+      "id": "netlist.enigma.m4",
+      "role": "generated-netlist",
+      "source_artifact": "rtl.enigma.m4",
+      "current_path": "Generated/Netlists/Enigma/enigma_m4_netlist.json",
+      "canonical_path": "Generated/Netlists/Enigma/enigma_m4_netlist.json",
+      "migration": "canonical",
+      "legacy_paths": ["enigma_m4_netlist.json"],
+      "legacy_policy": "retain-copy"
+    },
+    {
+      "id": "netlist.e256.historical-round1",
+      "role": "generated-netlist",
+      "source_artifact": "rtl.e256.historical-round1",
+      "current_path": "Generated/Netlists/Enigma256/e256_round1_netlist.json",
+      "canonical_path": "Generated/Netlists/Enigma256/e256_round1_netlist.json",
+      "migration": "canonical",
+      "legacy_paths": ["e256_round1_netlist.json"],
+      "legacy_policy": "retain-copy"
+    },
+    {
+      "id": "netlist.picorv32.lut2",
+      "role": "generated-netlist",
+      "source_artifact": "rtl.vendor.picorv32",
+      "current_path": "Generated/Netlists/PicoRV32/picorv32_netlist.json",
+      "canonical_path": "Generated/Netlists/PicoRV32/picorv32_netlist.json",
+      "migration": "canonical",
+      "legacy_paths": ["picorv32_netlist.json"],
+      "legacy_policy": "retain-copy"
+    },
+    {
+      "id": "netlist.picorv32.lut6",
+      "role": "generated-netlist",
+      "source_artifact": "rtl.vendor.picorv32",
+      "current_path": "Generated/Netlists/PicoRV32/picorv32_lut6_netlist.json",
+      "canonical_path": "Generated/Netlists/PicoRV32/picorv32_lut6_netlist.json",
+      "migration": "canonical",
+      "legacy_paths": ["picorv32_lut6_netlist.json"],
+      "legacy_policy": "retain-copy"
+    },
+    {
+      "id": "tensorlut.enigma.m4-baseline",
+      "role": "generated-tensorlut",
+      "source_artifact": "netlist.enigma.m4",
+      "current_path": "Generated/TensorLUT/EnigmaM4/enigma_m4_tensorlut_baseline.v",
+      "canonical_path": "Generated/TensorLUT/EnigmaM4/enigma_m4_tensorlut_baseline.v",
+      "migration": "canonical",
+      "legacy_paths": ["enigma_m4_tensorlut_baseline.v"],
+      "legacy_policy": "retain-copy"
+    },
+    {
+      "id": "tensorlut.enigma.m4-coldstart",
+      "role": "generated-tensorlut-evidence",
+      "source_artifact": "netlist.enigma.m4",
+      "current_path": "Generated/TensorLUT/EnigmaM4/enigma_m4_tensorlut_coldstart.v",
+      "canonical_path": "Generated/TensorLUT/EnigmaM4/enigma_m4_tensorlut_coldstart.v",
+      "migration": "canonical",
+      "legacy_paths": ["enigma_m4_tensorlut_coldstart.v"],
+      "legacy_policy": "retain-copy"
+    },
+    {
+      "id": "tensorlut.enigma.m4-stecker-melt",
+      "role": "generated-tensorlut-evidence",
+      "source_artifact": "netlist.enigma.m4",
+      "current_path": "Generated/TensorLUT/EnigmaM4/enigma_m4_tensorlut_stecker_melt.v",
+      "canonical_path": "Generated/TensorLUT/EnigmaM4/enigma_m4_tensorlut_stecker_melt.v",
+      "migration": "canonical",
+      "legacy_paths": ["enigma_m4_tensorlut_stecker_melt.v"],
+      "legacy_policy": "retain-copy"
+    },
+    {
+      "id": "tensorlut.enigma.m4-stecker-resign",
+      "role": "generated-tensorlut-evidence",
+      "source_artifact": "netlist.enigma.m4",
+      "current_path": "Generated/TensorLUT/EnigmaM4/enigma_m4_tensorlut_stecker_resign.v",
+      "canonical_path": "Generated/TensorLUT/EnigmaM4/enigma_m4_tensorlut_stecker_resign.v",
+      "migration": "canonical",
+      "legacy_paths": ["enigma_m4_tensorlut_stecker_resign.v"],
+      "legacy_policy": "retain-copy"
+    },
+    {
+      "id": "tensorlut.e256.step-cone",
+      "role": "generated-tensorlut",
+      "source_artifact": "rtl.e256.step-cone",
+      "current_path": "Generated/TensorLUT/Enigma256/enigma_256_step_cone_tensorlut.v",
+      "canonical_path": "Generated/TensorLUT/Enigma256/enigma_256_step_cone_tensorlut.v",
+      "migration": "canonical",
+      "legacy_paths": ["enigma_256_step_cone_tensorlut.v"],
+      "legacy_policy": "retain-copy"
+    },
+    {
+      "id": "tensorlut.e256.nlff-baseline",
+      "role": "generated-tensorlut",
+      "source_artifact": "rtl.e256.nlff-combo",
+      "current_path": "Generated/TensorLUT/Enigma256/enigma_256_tensorlut_baseline.v",
+      "canonical_path": "Generated/TensorLUT/Enigma256/enigma_256_tensorlut_baseline.v",
+      "migration": "canonical",
+      "legacy_paths": ["enigma_256_tensorlut_baseline.v"],
+      "legacy_policy": "retain-copy"
+    },
+    {
+      "id": "fixture.e256.generation-profile",
+      "role": "fixture-data",
+      "current_path": "Fixtures/enigma256_generation.json",
+      "canonical_path": "Fixtures/enigma256_generation.json",
+      "migration": "canonical",
+      "legacy_policy": "none"
+    },
+    {
+      "id": "profile.e256.nlff-v2",
+      "role": "generated-profile-rtl",
+      "source_artifact": "fixture.e256.generation-profile",
+      "current_path": "Generated/Profiles/Enigma256/enigma_256_nlff_v2.vh",
+      "canonical_path": "Generated/Profiles/Enigma256/enigma_256_nlff_v2.vh",
+      "migration": "canonical",
+      "legacy_paths": ["enigma_256_nlff_v2.vh"],
+      "legacy_policy": "retain-copy"
+    },
+    {
+      "id": "compat.mulein.root-wrapper",
+      "role": "app-authored-rtl",
+      "current_path": "Apps/Mulein/rtl/mulein_closure_core.sv",
+      "canonical_path": "Apps/Mulein/rtl/mulein_closure_core.sv",
+      "migration": "canonical",
+      "legacy_paths": ["mulein_closure_core.v"],
+      "legacy_policy": "retain-wrapper"
+    }
+  ]
+}

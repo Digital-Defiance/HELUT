@@ -172,3 +172,113 @@ quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → 
   [140/237·140] UUUFUNFDREIVIERKKNO@27 edges=19 letters=16 loops=4 central=R dead at the board                     71624s  31.2M/s ETA 827.1 min
   [141/237·141] UUUFUNFDREIVIERKKNO@29 edges=19 letters=17 loops=4 central=R dead at the board                     71889s  31.3M/s ETA 815.8 min
   [142/237·142] UUUFUNFDREIVIERKKNO@34 edges=19 letters=17 loops=4 central=P dead at the board                     72188s  31.4M/s ETA 804.9 min
+  [143/237·143] UUUFUNFDREIVIERKKNO@35 edges=19 letters=17 loops=4 central=P dead at the board                     72447s  31.5M/s ETA 793.7 min
+  [144/237·144] UUUFUNFDREIVIERKKNO@45 edges=19 letters=18 loops=4 central=R dead at the board                     72825s  31.6M/s ETA 783.9 min
+indel family: +237 spliced menus (delta 4, splices on 4-letter group boundaries)
+  post-gap only: dropped 1447 straddling menus. Kept menus carry the full edge count — nothing fell in the gap.
+  a spliced menu runs on the EXACT board — no tolerance, no survivor inflation. Step number and ciphertext index diverge; that is the whole mechanism.
+  indel-only: dropping 24 ordinary menus, sweeping the spliced family alone.
+  on a known-undamaged control every splice is false, so a break there would be a false positive; on the target a break is a genuine hypothesis hit and must still clear crib-exact ∧ IC ∧ tail ∧ ≤10 plugs.
+no menus left after --bombe-from 145 / min crib 16
+indel family: +237 spliced menus (delta 4, splices on 4-letter group boundaries)
+  post-gap only: dropped 1447 straddling menus. Kept menus carry the full edge count — nothing fell in the gap.
+  a spliced menu runs on the EXACT board — no tolerance, no survivor inflation. Step number and ciphertext index diverge; that is the whole mechanism.
+  indel-only: dropping 24 ordinary menus, sweeping the spliced family alone.
+  on a known-undamaged control every splice is false, so a break there would be a false positive; on the target a break is a genuine hypothesis hit and must still clear crib-exact ∧ IC ∧ tail ∧ ≤10 plugs.
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030680_maxupper_strongest_menus.json (237 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 237 of 237
+min crib length: 16
+resuming from menu 145 of 237 (skipping 144 already done)
+running 93 menus, highest deduction power first:
+  [145] UUUFUNFDREIVIERKKNO@47 edges=19 letters=18 loops=4 comp=3 central=U
+  [146] UUUFUNFDREIVIERKKNO@48 edges=19 letters=17 loops=4 comp=2 central=U
+  [147] VVVUUUDREINULEINSVI@5 edges=19 letters=18 loops=4 comp=3 central=E
+  [148] VVVUUUDREINULEINSVI@18 edges=19 letters=18 loops=4 comp=3 central=U
+  [149] VVVUUUDREINULEINSVI@26 edges=19 letters=16 loops=4 comp=1 central=U
+  [150] VVVUUUDREINULEINSVI@29 edges=19 letters=17 loops=4 comp=2 central=R
+  [151] VVVUUUDREINULEINSVI@30 edges=19 letters=16 loops=4 comp=1 central=V
+  [152] VVVUUUDREINULEINSVI@38 edges=19 letters=17 loops=4 comp=2 central=V
+  [153] VVVUUUDREINULEINSVI@42 edges=19 letters=16 loops=4 comp=1 central=V
+  [154] VVVUUUDREINULEINSVI@43 edges=19 letters=16 loops=4 comp=1 central=V
+  [155] VVVUUUDREINULEINSVI@45 edges=19 letters=16 loops=4 comp=1 central=V
+  [156] VVVUUUDREINULEINSVI@50 edges=19 letters=17 loops=4 comp=2 central=V
+  … 81 more
+shells/menu: 34944 (336 WO × 2 Greek × 2 UKW × 1 mid-ring × 26 right-ring) → 1.6e+10 settings
+kernel sieve: ≤10 plugs
+GPU pipeline depth: 4 shells in flight
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+right ring swept: every right-wheel turnover phase covered
+residual gap: middle ring pinned A, so keys whose middle wheel turns over inside a 23-letter span (~4% for 1 notch, ~8% for 2) are not covered — --bombe-middle-ring closes it
+ETA floor (~50M/s): 495.0 min
+
+quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → logs/quarantine_indel_target.json
+indel family: +237 spliced menus (delta 4, splices on 4-letter group boundaries)
+  post-gap only: dropped 1447 straddling menus. Kept menus carry the full edge count — nothing fell in the gap.
+  a spliced menu runs on the EXACT board — no tolerance, no survivor inflation. Step number and ciphertext index diverge; that is the whole mechanism.
+  indel-only: dropping 24 ordinary menus, sweeping the spliced family alone.
+  on a known-undamaged control every splice is false, so a break there would be a false positive; on the target a break is a genuine hypothesis hit and must still clear crib-exact ∧ IC ∧ tail ∧ ≤10 plugs.
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030680_maxupper_strongest_menus.json (237 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 237 of 237
+min crib length: 16
+resuming from menu 145 of 237 (skipping 144 already done)
+running 93 menus, highest deduction power first:
+  [145] UUUFUNFDREIVIERKKNO@47 edges=19 letters=18 loops=4 comp=3 central=U
+  [146] UUUFUNFDREIVIERKKNO@48 edges=19 letters=17 loops=4 comp=2 central=U
+  [147] VVVUUUDREINULEINSVI@5 edges=19 letters=18 loops=4 comp=3 central=E
+  [148] VVVUUUDREINULEINSVI@18 edges=19 letters=18 loops=4 comp=3 central=U
+  [149] VVVUUUDREINULEINSVI@26 edges=19 letters=16 loops=4 comp=1 central=U
+  [150] VVVUUUDREINULEINSVI@29 edges=19 letters=17 loops=4 comp=2 central=R
+  [151] VVVUUUDREINULEINSVI@30 edges=19 letters=16 loops=4 comp=1 central=V
+  [152] VVVUUUDREINULEINSVI@38 edges=19 letters=17 loops=4 comp=2 central=V
+  [153] VVVUUUDREINULEINSVI@42 edges=19 letters=16 loops=4 comp=1 central=V
+  [154] VVVUUUDREINULEINSVI@43 edges=19 letters=16 loops=4 comp=1 central=V
+  [155] VVVUUUDREINULEINSVI@45 edges=19 letters=16 loops=4 comp=1 central=V
+  [156] VVVUUUDREINULEINSVI@50 edges=19 letters=17 loops=4 comp=2 central=V
+  … 81 more
+shells/menu: 34944 (336 WO × 2 Greek × 2 UKW × 1 mid-ring × 26 right-ring) → 1.6e+10 settings
+kernel sieve: ≤10 plugs
+GPU pipeline depth: 4 shells in flight
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+right ring swept: every right-wheel turnover phase covered
+residual gap: middle ring pinned A, so keys whose middle wheel turns over inside a 23-letter span (~4% for 1 notch, ~8% for 2) are not covered — --bombe-middle-ring closes it
+ETA floor (~50M/s): 495.0 min
+
+quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → logs/quarantine_indel_target.json
+indel family: +237 spliced menus (delta 4, splices on 4-letter group boundaries)
+  post-gap only: dropped 1447 straddling menus. Kept menus carry the full edge count — nothing fell in the gap.
+  a spliced menu runs on the EXACT board — no tolerance, no survivor inflation. Step number and ciphertext index diverge; that is the whole mechanism.
+  indel-only: dropping 24 ordinary menus, sweeping the spliced family alone.
+  on a known-undamaged control every splice is false, so a break there would be a false positive; on the target a break is a genuine hypothesis hit and must still clear crib-exact ∧ IC ∧ tail ∧ ≤10 plugs.
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030680_maxupper_strongest_menus.json (237 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 237 of 237
+min crib length: 16
+resuming from menu 145 of 237 (skipping 144 already done)
+running 93 menus, highest deduction power first:
+  [145] UUUFUNFDREIVIERKKNO@47 edges=19 letters=18 loops=4 comp=3 central=U
+  [146] UUUFUNFDREIVIERKKNO@48 edges=19 letters=17 loops=4 comp=2 central=U
+  [147] VVVUUUDREINULEINSVI@5 edges=19 letters=18 loops=4 comp=3 central=E
+  [148] VVVUUUDREINULEINSVI@18 edges=19 letters=18 loops=4 comp=3 central=U
+  [149] VVVUUUDREINULEINSVI@26 edges=19 letters=16 loops=4 comp=1 central=U
+  [150] VVVUUUDREINULEINSVI@29 edges=19 letters=17 loops=4 comp=2 central=R
+  [151] VVVUUUDREINULEINSVI@30 edges=19 letters=16 loops=4 comp=1 central=V
+  [152] VVVUUUDREINULEINSVI@38 edges=19 letters=17 loops=4 comp=2 central=V
+  [153] VVVUUUDREINULEINSVI@42 edges=19 letters=16 loops=4 comp=1 central=V
+  [154] VVVUUUDREINULEINSVI@43 edges=19 letters=16 loops=4 comp=1 central=V
+  [155] VVVUUUDREINULEINSVI@45 edges=19 letters=16 loops=4 comp=1 central=V
+  [156] VVVUUUDREINULEINSVI@50 edges=19 letters=17 loops=4 comp=2 central=V
+  … 81 more
+shells/menu: 34944 (336 WO × 2 Greek × 2 UKW × 1 mid-ring × 26 right-ring) → 1.6e+10 settings
+kernel sieve: ≤10 plugs
+GPU pipeline depth: 4 shells in flight
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+right ring swept: every right-wheel turnover phase covered
+residual gap: middle ring pinned A, so keys whose middle wheel turns over inside a 23-letter span (~4% for 1 notch, ~8% for 2) are not covered — --bombe-middle-ring closes it
+ETA floor (~50M/s): 495.0 min
+
+quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → logs/quarantine_indel_target.json

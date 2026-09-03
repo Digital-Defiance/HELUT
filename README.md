@@ -1,4 +1,4 @@
-# HELUT
+# HELÜT
 
 **Homomorphic Edge Look-Up Tensors** — a Swift / Metal systems prototype that compiles **Yosys gate-level netlists** into a single `MPSGraph` and evaluates every LUT as a dense negacyclic matrix–vector product over $\mathbb{Z}/2^{32}\mathbb{Z}$ on Apple Silicon.
 
@@ -86,21 +86,36 @@ Phased design docs: [`PRD.md`](directives/PRD.md) (kernel) → [`phase-2.md`](di
 
 | App | Sources | Netlist | Idea |
 |-----|---------|---------|------|
-| **Encrypted RISC-V** | [`picorv32.v`](picorv32.v) | [`picorv32_netlist.json`](picorv32_netlist.json) | CPU `lw` sees 1 (**C50**); Metal NOP-fetch (**C51**, ~7.9 s/tick) at demo *N*=8. Not production *N*. |
-| **Batched search** | [`regex_matcher.v`](regex_matcher.v) | [`regex_netlist.json`](regex_netlist.json) | 3-character matcher × large `B` ([`PRD_App2.md`](directives/PRD_App2.md)) |
-| **Decision tree** | [`decision_tree.v`](decision_tree.v) | [`tree_netlist.json`](tree_netlist.json) | Exact non-linear classify over batched records ([`PRD_App3.md`](directives/PRD_App3.md)) |
-| **Small sequential demos** | [`counter.v`](counter.v), [`circuit.v`](circuit.v), … | [`core_netlist.json`](core_netlist.json), … | DFF retention / early bring-up |
-| **Enigma Bombe** | [`enigma_core.v`](enigma_core.v), [`enigma_m4_core.v`](enigma_m4_core.v) | `enigma_*_netlist.json` | Parallel rotor hypotheses + scoring ([`PRD_App_Enigma_Bombe.md`](directives/PRD_App_Enigma_Bombe.md), [`PRD_App_P1030680_Bombe.md`](directives/PRD_App_P1030680_Bombe.md)) |
+| **Encrypted RISC-V** | [`Hardware/RTL/Vendor/PicoRV32/picorv32.v`](Hardware/RTL/Vendor/PicoRV32/picorv32.v) | [`Generated/Netlists/PicoRV32/picorv32_netlist.json`](Generated/Netlists/PicoRV32/picorv32_netlist.json) | CPU `lw` sees 1 (**C50**); Metal NOP-fetch (**C51**, ~7.9 s/tick) at demo *N*=8. Not production *N*. |
+| **Batched search** | [`Hardware/RTL/Examples/regex_matcher.v`](Hardware/RTL/Examples/regex_matcher.v) | [`Generated/Netlists/Examples/regex_netlist.json`](Generated/Netlists/Examples/regex_netlist.json) | 3-character matcher × large `B` ([`PRD_App2.md`](directives/PRD_App2.md)) |
+| **Decision tree** | [`Hardware/RTL/Examples/decision_tree.v`](Hardware/RTL/Examples/decision_tree.v) | [`Generated/Netlists/Examples/tree_netlist.json`](Generated/Netlists/Examples/tree_netlist.json) | Exact non-linear classify over batched records ([`PRD_App3.md`](directives/PRD_App3.md)) |
+| **Small sequential demos** | [`Hardware/RTL/Examples/counter.v`](Hardware/RTL/Examples/counter.v), [`Hardware/RTL/Examples/circuit.v`](Hardware/RTL/Examples/circuit.v), … | [`Generated/Netlists/Examples/counter_netlist.json`](Generated/Netlists/Examples/counter_netlist.json), [`Generated/Netlists/Examples/netlist.json`](Generated/Netlists/Examples/netlist.json), … | DFF retention / early bring-up |
+| **Enigma Bombe** | [`Hardware/RTL/Enigma/enigma_core.v`](Hardware/RTL/Enigma/enigma_core.v), [`Hardware/RTL/Enigma/enigma_m4_core.v`](Hardware/RTL/Enigma/enigma_m4_core.v) | [`Generated/Netlists/Enigma/enigma_netlist.json`](Generated/Netlists/Enigma/enigma_netlist.json), [`Generated/Netlists/Enigma/enigma_m4_netlist.json`](Generated/Netlists/Enigma/enigma_m4_netlist.json) | Parallel rotor hypotheses + scoring ([`PRD_App_Enigma_Bombe.md`](directives/PRD_App_Enigma_Bombe.md), [`PRD_App_P1030680_Bombe.md`](directives/PRD_App_P1030680_Bombe.md)) |
 
-Re-synthesize examples:
+Hardware generation is scratch-first and never writes through root compatibility names:
 
 ```bash
-# PicoRV32 (heavy)
-yosys -p "read_verilog picorv32.v; synth -top picorv32 -flatten; abc -lut 2; write_json picorv32_netlist.json"
+make hardware-check             # manifest + byte-identical compatibility copies
+make generate-m4-artifacts      # build/hardware/EnigmaM4/
+make generate-e256-profile      # build/hardware/Profiles/Enigma256/
+make check-e256-profile         # read-only check of checked-in canonical profile
 
-# M4 Enigma + linguistic score port
-yosys -p "read_verilog -sv enigma_m4_core.v; synth -top enigma_m4_core -flatten; abc -lut 2; write_json enigma_m4_netlist.json"
+# After reviewing a scratch artifact, promote only that family, then refresh aliases:
+make promote-m4-artifacts
+make hardware-compat-sync
+make hardware-check
 ```
+
+`generate-e256-tensorlut` / `promote-e256-tensorlut` provide the corresponding, longer E256 flow. Promotion updates `Generated/` (and the E256 profile fixture where applicable); `hardware-compat-sync` is a separate explicit canonical-to-root operation.
+
+The fixture-v4 golden flow is scratch-first too:
+
+```bash
+.build/release/helut-e256 --enigma256-golden
+# default output: build/hardware/Enigma256/enigma256_golden
+```
+
+An explicit `Fixtures/enigma256_golden` output is compatibility-key guarded; routine reproduction should keep the scratch default rather than overwrite canonical fixtures. The bounded hardware/KAT validation record is `logs/e256-v2-gen0-fixture-v4-validation.json` (1,024 bytes, 9 tables, 10 trace files, 25 artifacts; formal 1/1 and `Enigma256Tests` 49/49).
 
 ### Measured boolean-path benches (2026-08-12)
 
@@ -181,17 +196,49 @@ swift run -c release helut -- --validate
 ## Project layout
 
 ```
-Sources/HELUTCore/     Compiler, boolean-safe mock PBS, DFF clocking, Enigma/M4 oracles, scorers
-Sources/HELUTRadio/    C ABI dylib for GNU Radio / ctypes (`helut.h`)
-Sources/helut/         CLI (Enigma bombe + campaign + validate; netlist argv)
-Apps/gr-helut/         GNU Radio OOT + regex demo flowgraph
-Tests/HELUTTests/      Kernel, state, Enigma/M4 tests
-Fixtures/              Historical Enigma vectors, German corpus
-*.v / *_netlist.json   Application circuits (PicoRV32, regex, tree, Enigma, …)
-Scripts/               Campaign + scorer calibration
-paper/                 Technical write-up (helut.tex)
-PRD*.md / phase-*.md   Design progression
+Hardware/RTL/                 Canonical authored and vendored Verilog/SystemVerilog
+Hardware/Testbenches/         Canonical authored HDL testbenches
+Hardware/artifact-manifest.json  Stable ownership, canonical paths, and compatibility policy
+Generated/                    Checked-in Yosys, TensorLUT, and profile derivatives
+build/                        Ignored disposable generation, simulation, and benchmark scratch
+Apps/                         Application-owned hardware and integration surfaces (including Mulein)
+Reference/Rust/               Portable CPU integer/KAT/Yosys consumer (independent Cargo package)
+Sources/HELUTCore/            Compiler, boolean-safe mock PBS, DFF clocking, Enigma/M4 oracles, scorers
+Sources/HELUTRadio/           C ABI dylib for GNU Radio / ctypes (`helut.h`)
+Sources/helut/                CLI (Enigma bombe + campaign + validate; netlist argv)
+Tests/HELUTTests/             Kernel, state, Enigma/M4 tests
+Fixtures/                     Historical vectors, generated profile fixture, and campaign inputs
+Scripts/                      Build, generation, campaign, and scorer-calibration entry points
+*.v / *_netlist.json          Published compatibility wrappers/copies only; not canonical sources
+paper/                        Technical write-up (`helut.tex`)
+PRD*.md / phase-*.md          Design progression
 ```
+
+New hardware consumers should use `Hardware/` or `Generated/` directly. Root Verilog wrappers and generated JSON/Verilog copies remain for published commands and downstream compatibility; `make hardware-check` detects drift, while `make hardware-compat-sync` performs the explicit canonical-to-root refresh.
+
+### Portable Rust reference
+
+`Reference/Rust/` is a separate, CPU-only integer reference. It strictly consumes the checked-in fixture-v4 profile/KAT for `E256/v2/gen0/fa246e9cba9009a4799e5a81722a9b14e9a67293d9621b45985c5f3e620865d4/fixture-v4` and the checked-in Yosys examples; it does not expose Metal, GPU, FPGA, FHE, Swift FFI, vector generation, `bless`, or promotion commands. Its E256 result is an **internal three-track parity check**, not an accepted immutable external KAT and not enough to close **E256-050**.
+
+```bash
+make rust-reference-check
+
+# Direct commands run from the package directory so rustup discovers the
+# pinned Reference/Rust/rust-toolchain.toml. They remain explicit consumers.
+cd Reference/Rust
+CARGO_TARGET_DIR=../../build/rust-reference cargo run --locked -- e256-kat \
+  --profile ../../Fixtures/enigma256_generation.json \
+  --bundle ../../Fixtures/enigma256_golden \
+  --receipt ../../logs/e256-v2-gen0-nlff-search.json
+CARGO_TARGET_DIR=../../build/rust-reference cargo run --locked -- yosys-parity \
+  --full-adder ../../Generated/Netlists/Examples/netlist.json \
+  --counter ../../Generated/Netlists/Examples/counter_netlist.json \
+  --toy-isa ../../Generated/Netlists/Examples/toy_isa_netlist.json
+```
+
+The validated fixture-v4 Rust parity surface is bounded to the 1,024-byte KAT, 9 tables, 10 trace files, and 25-artifact bundle, including reciprocal decrypt. It is one consumer represented in `logs/e256-v2-gen0-fixture-v4-validation.json`; it is not a separately curated external vector set.
+
+Cargo build output is routed to ignored `build/rust-reference/`. The Make targets select and verify Rust 1.97.1; package-local commands discover the same pin from `rust-toolchain.toml`. The package pins its direct dependencies and commits `Cargo.lock`; its isolated Linux workflow checks formatting, Clippy, tests, both verifier commands, and that the consumer leaves `Fixtures/`, `Hardware/`, and `Generated/` unchanged.
 
 GNU Radio demo ([radioconda](https://github.com/radioconda/radioconda-installer): install [Apple Silicon .pkg](https://glare-sable.vercel.app/radioconda/radioconda-installer/radioconda-.*-MacOSX-arm64.pkg) to your home dir → activate conda → [CondaInstall](https://wiki.gnuradio.org/index.php/CondaInstall); Homebrew `gnuradio` is deprecated):
 

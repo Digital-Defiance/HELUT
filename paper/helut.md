@@ -6,7 +6,7 @@
 
 ## Abstract
 
-We present HELUT (Homomorphic Edge Look-Up Tensors) as a three-pillar cryptographic systems stack---not a new lattice assumption. Claim IDs refer to `directives/claim-sheet.md`. (I) Netlist-clocked torus FHE (C4--C7, C13--C18, C20--C23). Yosys gate-level \$lut netlists compile into exact $\mathbb{Z}/2^{32}\mathbb{Z}$ `MPSGraph` evaluations. The graduated FHE path uses LWE/GLWE samples and GGSW bootstrap keys (blind-rotate per \$lut, including whole-netlist Metal graphs with binary dynamic $X^p$). HELUT issues machine-checkable certificates: discrete $\infty$-norm noise proofs, Gaussian ingest failure $\varepsilon\le 2^{-64}$, Decision-LWE$\to$IND-CPA binding, a calibrated classical hardness table, and a measured noisy-BK residual at covering gadgets (C22); product-shaped $N{=}1024$ inject fails the $\varepsilon\le 2^{-64}$ bar (C26); default product Metal $N{=}1024$ SING still uses noiseless BK (H4). (II) Differentiable hardware cryptanalysis (C8--C9, C19). TensorLUT relaxes discrete INIT tables into continuous tensors, grades shatter vs hold under $\lambda$, and recovers reciprocal stecker involutions on frozen cores. Theorem 1 (continuous$\to$discrete structure) is machine-checked (C19). (III) Adversarial polymorphic ciphers (C10, C24). Enigma256-class SoftBus ciphers co-evolve under Red pressure (TensorLUT, KPA, `ent`) and fail closed; Theorem 2 states the SoftBus reciprocity / fail-closed contract (C24). Boolean-oracle Metal ticks (trivial encoding) remain a fast shape laboratory (C1): PicoRV32 at $N{=}1024$ compiles in ${\sim}1.3\,\mathrm{s}$ with ${\sim}173\,\mathrm{ms}$ steady ticks. Encrypted full_adder SING at $N{=}1024$ is measured (C20 boolean $10.6\,\mathrm{s}/8$; C21 crypto $\ell{=}2$ $11.38\,\mathrm{s}/8$). Classical bits at production $(n,\sigma)=(1024,2^{16})$ are calibrated ${\sim}176$; lattice-estimator fill-in (C23) agrees on the production row ($|\Delta|{=}4.5$) while $4/8$ anchors exceed a $16$-bit tolerance---do not quote $176$ as estimator cost on every row (H1).
+We present HELUT (Homomorphic Edge Look-Up Tensors) as a three-pillar cryptographic systems stack---not a new lattice assumption. Claim IDs refer to `directives/claim-sheet.md`. (I) Netlist-clocked torus FHE (C4--C7, C13--C18, C20--C23). Yosys gate-level \$lut netlists compile into exact $\mathbb{Z}/2^{32}\mathbb{Z}$ `MPSGraph` evaluations. The graduated FHE path uses LWE/GLWE samples and GGSW bootstrap keys (blind-rotate per \$lut, including whole-netlist Metal graphs with binary dynamic $X^p$). HELUT issues machine-checkable certificates: discrete $\infty$-norm noise proofs, Gaussian ingest failure $\varepsilon\le 2^{-64}$, Decision-LWE$\to$IND-CPA binding, a calibrated classical hardness table, and a measured noisy-BK residual at covering gadgets (C22); product-shaped $N{=}1024$ inject fails the $\varepsilon\le 2^{-64}$ bar (C26); default product Metal $N{=}1024$ SING still uses noiseless BK (H4). (II) Differentiable hardware cryptanalysis (C8--C9, C19). TensorLUT relaxes discrete INIT tables into continuous tensors, grades shatter vs hold under $\lambda$, and recovers reciprocal stecker involutions on frozen cores. Theorem 1 (continuous$\to$discrete structure) is machine-checked (C19). (III) Adversarial polymorphic ciphers (C10, C24, C39). The schema-4 `E256-v2/gen0` native-profile fixture-v4 has bounded implementation / KAT-parity evidence (full E256 suite $49/49$) and a bounded structural certificate / protocol (formal test $1/1$). Coverage is finite and key/state-bounded. C39 remains a historical legacy-UKW encrypted teaching cone that predates the live fixture-v4 profile. Boolean-oracle Metal ticks (trivial encoding) remain a fast shape laboratory (C1): PicoRV32 at $N{=}1024$ compiles in ${\sim}1.3\,\mathrm{s}$ with ${\sim}173\,\mathrm{ms}$ steady ticks. Encrypted full_adder SING at $N{=}1024$ is measured (C20 boolean $10.6\,\mathrm{s}/8$; C21 crypto $\ell{=}2$ $11.38\,\mathrm{s}/8$). Classical bits at production $(n,\sigma)=(1024,2^{16})$ are calibrated ${\sim}176$; lattice-estimator fill-in (C23) agrees on the production row ($|\Delta|{=}4.5$) while $4/8$ anchors exceed a $16$-bit tolerance---do not quote $176$ as estimator cost on every row (H1).
 
 # Introduction
 
@@ -22,7 +22,7 @@ HELUT asks a systems-facing question that became a stack:
 
 2.  **Pillar II --- Differentiable hardware.** TensorLUT continuous$\to$discrete melt with graded baseline / shatter / involution evidence.
 
-3.  **Pillar III --- Polymorphic SoftBus ciphers.** Enigma256 under Red TensorLUT/KPA/`ent` pressure; SoftBus reciprocity / fail-closed Theorem 2 (C24).
+3.  **Pillar III --- Polymorphic SoftBus ciphers.** Bounded schema-4 `E256-v2/gen0` fixture-v4 implementation / KAT parity (C10) and structural certificate / protocol (C24); C39 is a historical legacy-UKW encrypted cone, not the live profile.
 
 4.  Boolean-oracle Metal performance tables (PicoRV32 / Enigma) as the *shape* laboratory---labeled distinct from the FHE claim.
 
@@ -280,30 +280,34 @@ Stecker genotypes are partial involutions (disjoint pairs) by construction (`Ste
 Minimum disclosure bar: three runnable applications per pillar (`directives/application-gallery.md`).
 
 ::: center
-  Pillar   Slot                           Reproduce / claim
-  -------- ------------------------------ -------------------------------
-  I        Encrypted full_adder SING      C6, C20/C21
-  I        Tree / regex SING (demo $N$)   C6
-  I        Hardness $+$ noisy-BK certs    C5, C22, C23, C26
-  II       M4 baseline emit               C8
-  II       Involution sandwich / formal   C9, C19, C25
-  II       Shatter vs hold (seminar)      empirical; not a decrypt (H6)
-  III      SoftBus reciprocity            C10, C24
-  III      Red battery grades             `enigma256_red_battery.sh`
-  III      Fail-closed NLFF harden        C24
+  Pillar   Slot                                        Reproduce / claim
+  -------- ------------------------------------------- -------------------------------
+  I        Encrypted full_adder SING                   C6, C20/C21
+  I        Tree / regex SING (demo $N$)                C6
+  I        Hardness $+$ noisy-BK certs                 C5, C22, C23, C26
+  II       M4 baseline emit                            C8
+  II       Involution sandwich / formal                C9, C19, C25
+  II       Shatter vs hold (seminar)                   empirical; not a decrypt (H6)
+  III      Fixture-v4 implementation / KAT parity      C10: full suite $49/49$
+  III      Bounded structural certificate / protocol   C24: formal $1/1$
+  III      Historical legacy-UKW cone                  C39 (pre-fixture-v4)
 :::
 
 # Pillar III --- Adversarial polymorphic ciphers {#sec:pillar3}
 
 #### Objective.
 
-Enigma256 keeps the reciprocal rotor contract while deleting historical leaks, runs on SoftBus, and is graded under Red TensorLUT / KPA / `ent` pressure (empirical C10).
+For the fixed schema-4 `E256-v2/gen0` native-profile fixture-v4, C10 records bounded implementation / KAT parity ($49/49$ full-suite PASS). C24 records the bounded structural certificate / protocol below; C39 is a separate historical cone. None of these rows establishes universal key/state coverage.
 
 ::: {#thm:enigma256 .theorem}
-**Theorem 3** (Enigma256 SoftBus reciprocity / fail-closed). *Under the hypotheses of `Enigma256Formal.certificate()` (reciprocal scramble path; day-key involution builders; NLFF retaps do not rewrite frozen scramble): frozen scramble is a permutation and an involution; stream encrypt-then-decrypt recovers plaintext under identical keys; derived plugboard is fixed-point-free involution and un-reflector is an involution; `hardenedCubic()` rejects `coupledCubic6`.*
+**Theorem 3** (E256 fixture-v4 bounded structural certificate / protocol). *For the fixed schema-4 `E256-v2/gen0` native-profile fixture-v4, the C24 bounded structural certificate / protocol checks exactly: (i) a deterministic four-state scramble-bijection sweep; (ii) exhaustive byte reciprocity for one frozen fixture state; (iii) a deterministic 128-byte stream round-trip; (iv) the fixture plugboard plus selected XOR-center involution/fixed-point checks, where the center is $A_i^{-1}(A_i(x)\oplus k_i)$; and (v) exact schema-4 `E256-v2/gen0` native-profile integrity. The host derives and transports `(payload, centerMask, absoluteByteCounter)`. RTL validates `absoluteByteCounter` and does not implement HMAC.*
 :::
 
-Machine-checked proof: `Sources/HELUTCore/Enigma256Formal.swift` (`testEnigma256FormalCertificate`). Statement: `directives/enigma256-theorem.md`. This is a *structural SoftBus contract*---not IND-CPA and not a claim that Red pressure cannot force Blue generation rolls.
+Machine-checked result: formal test **1/1 PASS**; full E256 suite **49/49 PASS**. Receipt: `logs/e256-v2-gen0-fixture-v4-validation.json`. Statement: `directives/enigma256-theorem.md`. This is a *bounded structural certificate / protocol*, not a universal proof: finite checks are exhaustive only where stated, and state/key coverage is bounded. It is not IND-CPA, an HMAC proof, external cryptanalysis, or human acceptance.
+
+#### Historical C39 scope.
+
+C39 is a historical one-byte / one-round legacy-UKW encrypted teaching cone that predates the live fixture-v4 profile. It does not exercise the transported mask/counter fields (`centerMask`, `absoluteByteCounter`), the conjugated-XOR center, live BRAM, NLFF, or the full core.
 
 # Limitations and Future Work {#sec:limits}
 

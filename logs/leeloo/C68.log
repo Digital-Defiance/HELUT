@@ -1,18 +1,19 @@
 HELUT encrypted-netlist bench · SING
-  netlist: picorv32_lut6_netlist.json  module=picorv32
+  netlist: Generated/Netlists/PicoRV32/picorv32_lut6_netlist.json  module=picorv32
   poly N=1024  LUTs=2006  DFFs=1565  sequential  2N=2048
   stimuli=8 (max --vectors 256)  cpu-only=false  metal-netlist-only=false
   encrypted mem: nop ROM (addi x0,x0,0 = 0x00000013)  ticks=8  reset-hold=3
   paths filter: public-ms covering-b2
   paths: public-ms@boolean + public-ms@crypto + secret@crypto (+ Metal)
-  BK noise inject Gaussian σ=128.0 (torus; measured identity residual → B_bk)
+  BK noise inject Gaussian σ=128.0 (torus; identity residual is empirical, not B_bk)
+  noisy-BK policy: UNSAFE DIAGNOSTIC ONLY (functional output cannot certify ε)
   LWE n=64  (CMUX count; extract→KS when n<kN=1024)
   DynamicRotateCost mux=2099200 binary=11275 speedup≈186.2×
 
   starting blind-rotate-metal public-ms covering-b2  n=64
   extract→KS     kN=1024 → n=64  (δ-lattice GLev e=0)
   identity residual trials=4  (n=64)
-  identity B_bk    312296  (decodable true)
+  identity observed max|e| 312296  (sample-decodable true)
 BR tile=1/1 bits=0..<64
 BR tile=1/1 bits=0..<64
 BR tile=1/1 bits=0..<64
@@ -16072,15 +16073,17 @@ BR tile=1/1 bits=0..<64
   FETCH summary  served=2  unique_addr=2  addrs=0x0,0x4
 ENCRYPTED EQUIV (blind-rotate-metal public-ms covering-b2)
   rows            8
-  wall            905.0886 s  (113136.08 ms/row)
-  classical bits  175.7  (≥128? yes)
+  wall            904.5164 s  (113064.55 ms/row)
+  classical bits  32.0  (≥128? no)
   ingest ε log2   -inf  (target -64)
-  noisy BK B_bk   312296  (decodable true)
-  result          PASS
+  noisy BK observed max|e| 312296  (sample-decodable true; not a hard bound)
+  noisy BK 95% σ  525891.9  events=16048  εlog2=0.0  target=-64  clears=no
+  functional result PASS
+  result          DIAGNOSTIC ONLY — NO NOISY-BK CONFIDENCE CERTIFICATE
 
 ════════ SING METRICS SUMMARY ════════
-path                                             ms/row       bits    εlog2     B_bk
-blind-rotate-metal public-ms covering-b2         113136.08      175.7 -inf       312296
+path                                             ms/row       bits    εlog2   BK value  cert
+blind-rotate-metal public-ms covering-b2         113064.55       32.0 -inf       312296  NO
 calibration:
 | Label | n | σ | Ref bits | HELUT est | Δ | Source |
 |---|---:|---:|---:|---:|---:|---|

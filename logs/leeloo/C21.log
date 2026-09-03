@@ -1,5 +1,5 @@
 HELUT encrypted-netlist bench · SING
-  netlist: netlist.json  module=full_adder
+  netlist: Generated/Netlists/Examples/netlist.json  module=full_adder
   poly N=1024  LUTs=3  DFFs=0  2N=2048
   stimuli=8 (max --vectors 8)  cpu-only=false  metal-netlist-only=false
   paths filter: blind-rotate-metal public-ms crypto
@@ -393,15 +393,15 @@ BR tile=15/16 bits=896..<960
 BR tile=16/16 bits=960..<1024
 ENCRYPTED EQUIV (blind-rotate-metal public-ms crypto)
   rows            8
-  wall            9.9206 s  (1240.07 ms/row)
+  wall            9.9002 s  (1237.53 ms/row)
   classical bits  175.7  (≥128? yes)
   ingest ε log2   -inf  (target -64)
-  noisy BK B_bk   0  (decodable true)
+  noisy BK bound  0  (exactNoiselessConstruction; decodable true)
   result          PASS
 
 ════════ SING METRICS SUMMARY ════════
-path                                             ms/row       bits    εlog2     B_bk
-blind-rotate-metal public-ms crypto               1240.07      175.7 -inf            0
+path                                             ms/row       bits    εlog2   BK value  cert
+blind-rotate-metal public-ms crypto               1237.53      175.7 -inf            0  yes
 calibration:
 | Label | n | σ | Ref bits | HELUT est | Δ | Source |
 |---|---:|---:|---:|---:|---:|---|

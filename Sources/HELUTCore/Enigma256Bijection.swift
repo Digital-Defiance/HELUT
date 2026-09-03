@@ -11,6 +11,7 @@ package enum Enigma256Bijection {
         case collision(ptA: UInt8, ptB: UInt8, ct: UInt8)
         case notSurjective(missingCT: UInt8)
         case notReciprocal(pt: UInt8, ct: UInt8, back: UInt8)
+        case unexpectedFixedPointCount(centerMask: UInt8, expected: Int, actual: Int)
         case streamRoundTrip(index: Int, want: UInt8, got: UInt8)
 
         package var description: String {
@@ -21,6 +22,8 @@ package enum Enigma256Bijection {
                 return String(format: "1:many / not surjective — missing ct %02x", missing)
             case let .notReciprocal(pt, ct, back):
                 return String(format: "not reciprocal scramble(%02x)=%02x scramble²=%02x", pt, ct, back)
+            case let .unexpectedFixedPointCount(mask, expected, actual):
+                return String(format: "center mask %02x has %d frozen fixed points; expected %d", mask, actual, expected)
             case let .streamRoundTrip(i, want, got):
                 return String(format: "stream round-trip fail @%d want %02x got %02x", i, want, got)
             }
@@ -42,20 +45,31 @@ package enum Enigma256Bijection {
 
     /// Injectivity + surjectivity + reciprocity of `scramble` under a frozen state.
     package static func verifyFrozenScramble(_ machine: Enigma256Machine) -> Failure? {
+        let centerMask = machine.currentCenterMask
         var seenCT = [Int](repeating: -1, count: 256)
+        var fixedPoints = 0
         for pt in 0 ..< 256 {
-            let ct = Int(machine.scramble(UInt8(pt)))
+            let ct = Int(machine.scramble(UInt8(pt), centerMask: centerMask))
+            if ct == pt { fixedPoints += 1 }
             if seenCT[ct] >= 0 {
                 return .collision(ptA: UInt8(seenCT[ct]), ptB: UInt8(pt), ct: UInt8(ct))
             }
             seenCT[ct] = pt
-            let back = machine.scramble(UInt8(ct))
+            let back = machine.scramble(UInt8(ct), centerMask: centerMask)
             if Int(back) != pt {
                 return .notReciprocal(pt: UInt8(pt), ct: UInt8(ct), back: back)
             }
         }
         for ct in 0 ..< 256 where seenCT[ct] < 0 {
             return .notSurjective(missingCT: UInt8(ct))
+        }
+        let expectedFixedPoints = centerMask == 0 ? 256 : 0
+        if fixedPoints != expectedFixedPoints {
+            return .unexpectedFixedPointCount(
+                centerMask: centerMask,
+                expected: expectedFixedPoints,
+                actual: fixedPoints
+            )
         }
         return nil
     }
@@ -105,10 +119,14 @@ package enum Enigma256Bijection {
             )
             var lfsrSeed = rng.next()
             if lfsrSeed == 0 { lfsrSeed = 1 }
+            let centerMaskKey = Data((0 ..< Enigma256CenterMask.keyLength).map { _ in
+                UInt8(truncatingIfNeeded: rng.next())
+            })
             let message = Enigma256MessageKey(
                 rotorIndices: rotors,
                 positions: positions,
-                lfsrSeed: lfsrSeed
+                lfsrSeed: lfsrSeed,
+                centerMaskKey: centerMaskKey
             )
             let machine = Enigma256Machine(day: day, message: message)
             if let fail = verifyFrozenScramble(machine) {

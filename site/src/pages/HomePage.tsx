@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom'
+import { HelutSpan } from '../HELUTSpan'
+import { TensorLUTSpan } from '../TensorLUTSpan'
 
 export function HomePage() {
   return (
@@ -7,16 +9,16 @@ export function HomePage() {
         <div className="hero-plane" aria-hidden="true" />
         <div className="shell hero-copy">
           <div className="brand-mark">
-            HE<em>LUT</em>
+            HE<em>LÜT</em>
           </div>
           <div className="hero-readable">
             <p className="brand-expand">Homomorphic Edge Look-Up Tensors</p>
             <h1>Netlists that tick on ciphertext</h1>
             <p className="lede">
-              HELUT compiles Yosys gate-level netlists into tensor graphs on Apple Silicon. The
+              <HelutSpan />{' '}compiles Yosys gate-level netlists into tensor graphs on Apple Silicon. The
               graduated path evaluates real LWE/GLWE samples with GGSW blind-rotate and
               machine-checkable certificates—not a new lattice assumption. A cleartext Metal path
-              still runs the Enigma campaign at tens of millions of settings per second. TensorLUT
+              still runs the Enigma campaign at tens of millions of settings per second. <TensorLUTSpan />{' '}
               melts INIT tables when the genotype itself is the question.
             </p>
             <div className="cta-row">
@@ -37,7 +39,7 @@ export function HomePage() {
             <div className="kicker">Origin</div>
             <h2>I built this because I already lived at the edge.</h2>
             <p>
-              HELUT did not start as a product pitch. I have always been fascinated by the
+              <HelutSpan /> did not start as a product pitch. I have always been fascinated by the
               interchange between bits and radio waves. With GNU Radio, you could reshape a
               flowgraph until the air between transmitter and receiver effectively disappeared.
             </p>
@@ -60,10 +62,24 @@ export function HomePage() {
               theoretical.
             </p>
             <p>
-              HELUT takes that reconfigurable discipline onto tensor silicon: Verilog in, Yosys
+              <HelutSpan /> takes that reconfigurable discipline onto tensor silicon: Verilog in, Yosys
               netlist, Metal (or CPU) evaluation—in the clear for campaign-scale search, or under
               torus FHE samples when the datapath must stay dark.
             </p>
+            <p>
+              I commissioned an original theme for <HelutSpan />—press play for a soundtrack while it
+              computes.
+            </p>
+            <audio
+              aria-label="HELUT theme song"
+              className="theme-song-player"
+              controls
+              preload="metadata"
+            >
+              <source src="/HELUT.mp3" type="audio/mpeg" />
+              Your browser does not support embedded audio.{' '}
+              <a href="/HELUT.mp3">Listen to the HELUT theme song</a>.
+            </audio>
           </div>
         </div>
       </section>

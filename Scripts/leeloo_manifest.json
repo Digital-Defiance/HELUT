@@ -11,9 +11,11 @@
     "  approx_seconds  single-pass estimate, used only for the time estimate",
     "  note            anything a future maintainer needs to know",
     "",
-    "Commands are taken verbatim from REPROduce.md with the `| tee` removed,",
-    "because leeloo captures stdout itself. Rows whose command no longer exists",
-    "or which time superseded code paths are marked lineage:true and skipped.",
+    "Commands mirror REPRODUCE.md with the `| tee` removed because leeloo",
+    "captures stdout itself. Hardware inputs use their canonical `Generated/`",
+    "paths even where REPRODUCE retains a supported root compatibility name.",
+    "Rows whose command no longer exists or which time superseded code paths",
+    "are marked lineage:true and skipped.",
     "",
     "Tier C rows are hours. That is fine; leeloo is resumable (--resume).",
     "",
@@ -42,7 +44,7 @@
       "cmd": [
         ".build/release/helut",
         "--bench",
-        "netlist.json",
+        "Generated/Netlists/Examples/netlist.json",
         "--degree",
         "8",
         "--bench-encrypted",
@@ -61,7 +63,7 @@
       "cmd": [
         ".build/release/helut",
         "--bench",
-        "counter_netlist.json",
+        "Generated/Netlists/Examples/counter_netlist.json",
         "--degree",
         "8",
         "--bench-encrypted",
@@ -80,7 +82,7 @@
       "cmd": [
         ".build/release/helut",
         "--bench",
-        "e256_round1_netlist.json",
+        "Generated/Netlists/Enigma256/e256_round1_netlist.json",
         "--degree",
         "16",
         "--bench-encrypted",
@@ -101,7 +103,7 @@
       "cmd": [
         ".build/release/helut",
         "--bench",
-        "toy_isa_netlist.json",
+        "Generated/Netlists/Examples/toy_isa_netlist.json",
         "--degree",
         "8",
         "--bench-encrypted",
@@ -120,7 +122,7 @@
       "cmd": [
         ".build/release/helut",
         "--bench",
-        "picorv32_netlist.json",
+        "Generated/Netlists/PicoRV32/picorv32_netlist.json",
         "--degree",
         "8",
         "--bench-encrypted",
@@ -141,7 +143,7 @@
       "cmd": [
         ".build/release/helut",
         "--bench",
-        "picorv32_netlist.json",
+        "Generated/Netlists/PicoRV32/picorv32_netlist.json",
         "--degree",
         "8",
         "--bench-encrypted",
@@ -164,7 +166,7 @@
       "cmd": [
         ".build/release/helut",
         "--bench",
-        "picorv32_netlist.json",
+        "Generated/Netlists/PicoRV32/picorv32_netlist.json",
         "--degree",
         "8",
         "--bench-encrypted",
@@ -189,7 +191,7 @@
       "cmd": [
         ".build/release/helut",
         "--bench",
-        "picorv32_netlist.json",
+        "Generated/Netlists/PicoRV32/picorv32_netlist.json",
         "--degree",
         "8",
         "--bench-encrypted",
@@ -214,7 +216,7 @@
       "cmd": [
         ".build/release/helut",
         "--bench",
-        "picorv32_lut6_netlist.json",
+        "Generated/Netlists/PicoRV32/picorv32_lut6_netlist.json",
         "--degree",
         "64",
         "--bench-encrypted",
@@ -236,7 +238,7 @@
       "cmd": [
         ".build/release/helut",
         "--bench",
-        "picorv32_lut6_netlist.json",
+        "Generated/Netlists/PicoRV32/picorv32_lut6_netlist.json",
         "--degree",
         "64",
         "--bench-encrypted",
@@ -257,7 +259,7 @@
       "cmd": [
         ".build/release/helut",
         "--bench",
-        "picorv32_lut6_netlist.json",
+        "Generated/Netlists/PicoRV32/picorv32_lut6_netlist.json",
         "--degree",
         "64",
         "--bench-encrypted",
@@ -280,7 +282,7 @@
       "cmd": [
         ".build/release/helut",
         "--bench",
-        "netlist.json",
+        "Generated/Netlists/Examples/netlist.json",
         "--degree",
         "1024",
         "--bench-encrypted",
@@ -303,7 +305,7 @@
       "cmd": [
         ".build/release/helut",
         "--bench",
-        "netlist.json",
+        "Generated/Netlists/Examples/netlist.json",
         "--degree",
         "1024",
         "--bench-encrypted",
@@ -315,6 +317,7 @@
         "public-ms covering-b2",
         "--bk-noise-sigma",
         "128",
+        "--unsafe-noisy-bk-diagnostic",
         "--lwe-dimension",
         "64"
       ],
@@ -328,7 +331,7 @@
       "cmd": [
         ".build/release/helut",
         "--bench",
-        "netlist.json",
+        "Generated/Netlists/Examples/netlist.json",
         "--degree",
         "1024",
         "--bench-encrypted",
@@ -340,6 +343,7 @@
         "public-ms covering-b2",
         "--bk-noise-sigma",
         "128",
+        "--unsafe-noisy-bk-diagnostic",
         "--lwe-dimension",
         "128"
       ],
@@ -353,7 +357,7 @@
       "cmd": [
         ".build/release/helut",
         "--bench",
-        "netlist.json",
+        "Generated/Netlists/Examples/netlist.json",
         "--degree",
         "1024",
         "--bench-encrypted",
@@ -365,6 +369,7 @@
         "public-ms covering-b2",
         "--bk-noise-sigma",
         "128",
+        "--unsafe-noisy-bk-diagnostic",
         "--lwe-dimension",
         "256"
       ],
@@ -378,7 +383,7 @@
       "cmd": [
         ".build/release/helut",
         "--bench",
-        "netlist.json",
+        "Generated/Netlists/Examples/netlist.json",
         "--degree",
         "1024",
         "--bench-encrypted",
@@ -390,6 +395,7 @@
         "public-ms covering-b2",
         "--bk-noise-sigma",
         "128",
+        "--unsafe-noisy-bk-diagnostic",
         "--lwe-dimension",
         "512"
       ],
@@ -404,7 +410,7 @@
       "cmd": [
         ".build/release/helut",
         "--bench",
-        "netlist.json",
+        "Generated/Netlists/Examples/netlist.json",
         "--degree",
         "1024",
         "--bench-encrypted",
@@ -424,7 +430,7 @@
       "cmd": [
         ".build/release/helut",
         "--bench",
-        "netlist.json",
+        "Generated/Netlists/Examples/netlist.json",
         "--degree",
         "1024",
         "--bench-encrypted",
@@ -444,7 +450,7 @@
       "cmd": [
         ".build/release/helut",
         "--bench",
-        "counter_netlist.json",
+        "Generated/Netlists/Examples/counter_netlist.json",
         "--degree",
         "1024",
         "--bench-encrypted",
@@ -464,7 +470,7 @@
       "cmd": [
         ".build/release/helut",
         "--bench",
-        "toy_isa_netlist.json",
+        "Generated/Netlists/Examples/toy_isa_netlist.json",
         "--degree",
         "1024",
         "--bench-encrypted",
@@ -484,7 +490,7 @@
       "cmd": [
         ".build/release/helut",
         "--bench",
-        "e256_round1_netlist.json",
+        "Generated/Netlists/Enigma256/e256_round1_netlist.json",
         "--degree",
         "1024",
         "--bench-encrypted",
@@ -504,7 +510,7 @@
       "cmd": [
         ".build/release/helut",
         "--bench",
-        "netlist.json",
+        "Generated/Netlists/Examples/netlist.json",
         "--degree",
         "1024",
         "--bench-encrypted",
@@ -515,6 +521,7 @@
         "public-ms covering-b2",
         "--bk-noise-sigma",
         "128",
+        "--unsafe-noisy-bk-diagnostic",
         "--boolean-scale-mul",
         "7"
       ],
@@ -528,7 +535,7 @@
       "cmd": [
         ".build/release/helut",
         "--bench",
-        "netlist.json",
+        "Generated/Netlists/Examples/netlist.json",
         "--degree",
         "1024",
         "--bench-encrypted",
@@ -539,6 +546,7 @@
         "covering-b1",
         "--bk-noise-sigma",
         "128",
+        "--unsafe-noisy-bk-diagnostic",
         "--boolean-scale-mul",
         "7"
       ],
@@ -552,7 +560,7 @@
       "cmd": [
         ".build/release/helut",
         "--bench",
-        "counter_netlist.json",
+        "Generated/Netlists/Examples/counter_netlist.json",
         "--degree",
         "1024",
         "--bench-encrypted",
@@ -563,6 +571,7 @@
         "covering-b1",
         "--bk-noise-sigma",
         "128",
+        "--unsafe-noisy-bk-diagnostic",
         "--boolean-scale-mul",
         "7"
       ],
@@ -576,7 +585,7 @@
       "cmd": [
         ".build/release/helut",
         "--bench",
-        "toy_isa_netlist.json",
+        "Generated/Netlists/Examples/toy_isa_netlist.json",
         "--degree",
         "1024",
         "--bench-encrypted",
@@ -587,6 +596,7 @@
         "covering-b1",
         "--bk-noise-sigma",
         "128",
+        "--unsafe-noisy-bk-diagnostic",
         "--boolean-scale-mul",
         "7"
       ],
@@ -600,7 +610,7 @@
       "cmd": [
         ".build/release/helut",
         "--bench",
-        "picorv32_lut6_netlist.json",
+        "Generated/Netlists/PicoRV32/picorv32_lut6_netlist.json",
         "--degree",
         "1024",
         "--bench-encrypted",
@@ -620,7 +630,7 @@
       "cmd": [
         ".build/release/helut",
         "--bench",
-        "picorv32_lut6_netlist.json",
+        "Generated/Netlists/PicoRV32/picorv32_lut6_netlist.json",
         "--degree",
         "1024",
         "--bench-encrypted",
@@ -631,6 +641,7 @@
         "public-ms covering-b2",
         "--bk-noise-sigma",
         "128",
+        "--unsafe-noisy-bk-diagnostic",
         "--lwe-dimension",
         "64"
       ],
@@ -644,7 +655,7 @@
       "cmd": [
         ".build/release/helut",
         "--bench",
-        "picorv32_lut6_netlist.json",
+        "Generated/Netlists/PicoRV32/picorv32_lut6_netlist.json",
         "--degree",
         "1024",
         "--bench-encrypted",
@@ -659,6 +670,7 @@
         "public-ms covering-b2",
         "--bk-noise-sigma",
         "128",
+        "--unsafe-noisy-bk-diagnostic",
         "--lwe-dimension",
         "64"
       ],
@@ -672,7 +684,7 @@
       "cmd": [
         ".build/release/helut",
         "--bench",
-        "picorv32_lut6_netlist.json",
+        "Generated/Netlists/PicoRV32/picorv32_lut6_netlist.json",
         "--degree",
         "1024",
         "--bench-encrypted",
@@ -685,6 +697,7 @@
         "public-ms covering-b2",
         "--bk-noise-sigma",
         "128",
+        "--unsafe-noisy-bk-diagnostic",
         "--lwe-dimension",
         "64"
       ],

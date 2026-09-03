@@ -758,7 +758,7 @@ final class TFHESeamTests: XCTestCase {
         XCTAssertLessThan(bin * 100, mux) // >100× fewer static rotates
     }
 
-    func testLWEHardnessCertificate128() {
+    func testLWEHardnessCertificate128() throws {
         let cert = TFHELWEProduction.certificate128()
         XCTAssertGreaterThanOrEqual(cert.estimatedClassicalBits, 128)
         XCTAssertTrue(cert.meetsTarget)
@@ -771,6 +771,27 @@ final class TFHESeamTests: XCTestCase {
             targetSecurityBits: 128
         )
         XCTAssertFalse(demo.meetsTarget)
+
+        // Reduced-n correctness rungs must bind the actual LWE dimension, not
+        // inherit the polynomial degree's production estimate.
+        let emptyJSON = #"{"modules":{"empty":{"ports":{},"cells":{}}}}"#
+        let emptyNetlist = try JSONDecoder().decode(
+            YosysNetlist.self,
+            from: Data(emptyJSON.utf8)
+        )
+        let emptyModule = try XCTUnwrap(emptyNetlist.modules["empty"])
+        let reducedParams = GGSWParams.booleanTrivial(degree: 1024).withLWEDimension(512)
+        let reducedSecret = TFHESecretKey.random(params: reducedParams.tfhe, seed: 0x1A2E)
+        let simulator = EncryptedNetlistSimulator(
+            moduleName: "empty",
+            module: emptyModule,
+            secret: reducedSecret,
+            params: reducedParams,
+            backend: .cpuGGSW
+        )
+        let reduced = simulator.issueHardnessCertificate()
+        XCTAssertEqual(reduced.lwe.dimension, 512)
+        XCTAssertFalse(reduced.meetsTarget)
     }
 
     func testLWEHardnessCalibrationTable() {
@@ -843,10 +864,22 @@ final class TFHESeamTests: XCTestCase {
         XCTAssertEqual(quiet.sigmaHat, 0)
         XCTAssertEqual(quiet.decodeFailures, 0)
         XCTAssertTrue(quiet.eachLUTDecodable)
-        let quietCert = quiet.certificate(lutCount: 3)
+        let quietObservation = quiet.observationReport(lutCount: 3)
+        XCTAssertEqual(quietObservation.provenance, .observedSampleMaximum)
+        XCTAssertTrue(quietObservation.recordedValueWithinHalfGap)
+        XCTAssertFalse(
+            quietObservation.eachLUTDecodable,
+            "even a zero-valued finite observation is not a deterministic certificate"
+        )
+        XCTAssertTrue(quietObservation.hypotheses.contains(where: { $0.contains("observation") }))
+        let quietCert = TFHENoisyBKCertificate.forNetlist(
+            params: .noiseless(polynomialDegree: degree, lutCount: 3)
+        )
         XCTAssertTrue(quietCert.meetsHELUTNoiselessHypothesis)
-        XCTAssertTrue(quietCert.hypotheses.contains(where: { $0.contains("measured") }))
-        XCTAssertTrue(quiet.gaussianCertificate(lutCount: 8).isSecure)
+        XCTAssertFalse(
+            quiet.gaussianCertificate(lutCount: 8).isSecure,
+            "finite zero observations do not replace the exact e=0 construction certificate"
+        )
 
         let noisy = TFHENoisyBKMeasurement.identity(
             secret: secret,
@@ -860,10 +893,19 @@ final class TFHESeamTests: XCTestCase {
         XCTAssertEqual(noisy.decodeFailures, 0)
         XCTAssertTrue(noisy.eachLUTDecodable)
         XCTAssertLessThan(noisy.maxAbsError, noisy.decodingHalfGap)
-        let noisyCert = noisy.certificate(lutCount: 3)
-        XCTAssertFalse(noisyCert.meetsHELUTNoiselessHypothesis)
-        XCTAssertTrue(noisyCert.eachLUTDecodable)
-        XCTAssertTrue(noisy.gaussianCertificate(lutCount: 8).isSecure)
+        let noisyObservation = noisy.observationReport(lutCount: 3)
+        XCTAssertEqual(noisyObservation.provenance, .observedSampleMaximum)
+        XCTAssertFalse(noisyObservation.meetsHELUTNoiselessHypothesis)
+        XCTAssertTrue(noisyObservation.recordedValueWithinHalfGap)
+        XCTAssertFalse(noisyObservation.eachLUTDecodable)
+        let noisyGaussian = noisy.gaussianCertificate(lutCount: 8)
+        XCTAssertTrue(noisyGaussian.isConfidenceBound)
+        XCTAssertEqual(noisyGaussian.sigmaBK, noisy.sigmaUpper95)
+        XCTAssertEqual(
+            noisyGaussian.failureLog2,
+            min(0, noisy.failureLog2Upper95 + log2(8.0)),
+            accuracy: 1e-9
+        )
     }
 
     func testEncryptedNetlistFullAdderWithNoisyBK() throws {
@@ -906,14 +948,13 @@ final class TFHESeamTests: XCTestCase {
         XCTAssertNotNil(enc.noisyBKMeasurement)
         XCTAssertGreaterThan(enc.noisyBKMeasurement!.maxAbsError, 0)
         XCTAssertEqual(enc.noisyBKMeasurement!.decodeFailures, 0)
-        XCTAssertNotNil(enc.noisyBKCertificate)
-        XCTAssertEqual(
-            enc.noisyBKCertificate!.params.outputNoiseBound,
-            enc.noisyBKMeasurement!.maxAbsError
+        XCTAssertNil(
+            enc.noisyBKCertificate,
+            "an empirical maximum must not be promoted to a deterministic bound"
         )
-        XCTAssertTrue(enc.noisyBKCertificate!.eachLUTDecodable)
-        XCTAssertFalse(enc.noisyBKCertificate!.meetsHELUTNoiselessHypothesis)
         XCTAssertNotNil(enc.noisyBKGaussianCertificate)
+        XCTAssertTrue(enc.noisyBKGaussianCertificate!.isConfidenceBound)
+        XCTAssertEqual(enc.noisyBKGaussianCertificate!.lutCount, 3)
         XCTAssertTrue(enc.noisyBKGaussianCertificate!.isSecure)
     }
 
@@ -975,7 +1016,7 @@ final class TFHESeamTests: XCTestCase {
         XCTAssertTrue(cert.allHold, "\(cert.steps.filter { !$0.holds }.map(\.lemma))")
         cert.assertValid()
         XCTAssertEqual(cert.steps.count, 5)
-        XCTAssertTrue(cert.hypotheses.contains(where: { $0.contains("Fail-closed") || $0.contains("fail-closed") || $0.contains("coupledCubic6") }))
+        XCTAssertTrue(cert.hypotheses.contains(where: { $0.contains("profile integrity") || $0.contains("E256-v2/gen0") }))
     }
 
     func testGGSWIncompleteCoveringCertificate() {
@@ -1078,6 +1119,63 @@ final class TFHESeamTests: XCTestCase {
                     want
                 )
                 XCTAssertEqual(cpu, metal, "LUTNode Metal lowering must match CPU")
+            }
+        }
+    }
+
+    func testAggregateFirstLUTNodeMetalMatchesCPU() throws {
+        guard let device = MTLCreateSystemDefaultDevice() else {
+            throw XCTSkip("No Metal device")
+        }
+        guard let commandQueue = device.makeCommandQueue() else {
+            throw XCTSkip("No MTLCommandQueue")
+        }
+        let degree = 8
+        let params = GGSWParams.booleanTrivial(degree: degree)
+        let secret = TFHESecretKey.random(params: params.tfhe, seed: 0xA181)
+        var rng = LCG32(state: 0xA182)
+        let bk = bootstrapKey(secret: secret, params: params, rng: &rng)
+        let twoN = 2 * degree
+        let delta = rotationScale(polynomialDegree: degree)
+        let truth: [UInt32] = [0, 1, 1, 0]
+        let node = LUTNode(
+            name: "xor-aggregate-first",
+            truthTable: truth,
+            degree: degree,
+            batch: 1,
+            backend: .encryptedBlindRotate,
+            encodingKind: .glwePacked
+        )
+        let context = EncryptedLUTMetalContext(
+            bootKey: bk,
+            scale: delta,
+            inputPacking: .fullTorusPublicMS,
+            device: device,
+            commandQueue: commandQueue
+        )
+
+        for x in 0...1 {
+            for y in 0...1 {
+                let nativeX = encryptLWERotationNative(
+                    message: UInt32(x), secret: secret.lweSecret, twoN: twoN, rng: &rng
+                )
+                let nativeY = encryptLWERotationNative(
+                    message: UInt32(y), secret: secret.lweSecret, twoN: twoN, rng: &rng
+                )
+                let inputs = [scaleLWE(nativeX, delta), scaleLWE(nativeY, delta)]
+                let cpu = evaluateLUTBlindRotate(
+                    truthTable: truth,
+                    inputs: inputs,
+                    bootstrapKey: bk,
+                    scale: delta,
+                    inputPacking: .fullTorusPublicMS
+                )
+                let metal = try node.evaluateEncrypted(inputs: inputs, context: context)
+                XCTAssertEqual(cpu, metal, "aggregate-first CPU/Metal x=\(x) y=\(y)")
+                XCTAssertEqual(
+                    decodeRotationBoolean(decryptLWE(metal, secret: secret), scale: delta),
+                    UInt32(x ^ y)
+                )
             }
         }
     }
@@ -1415,8 +1513,65 @@ final class TFHESeamTests: XCTestCase {
         }
     }
 
+    /// Aggregate-first public MS keeps raw extracted torus wires between LUTs.
+    func testChainedExtractedLWEWithAggregateFirstPublicMS() {
+        let degree = 32
+        let k = 3
+        let params = GGSWParams.booleanTrivial(degree: degree)
+        let secret = TFHESecretKey.random(params: params.tfhe, seed: 0xC4D1)
+        var rng = LCG32(state: 0xC4D2)
+        let bk = bootstrapKey(secret: secret, params: params, rng: &rng)
+        let twoN = 2 * degree
+        let delta = rotationScale(polynomialDegree: degree)
+        let scale = rotationBooleanScale(polynomialDegree: degree, mul: k)
+        let xorTable: [UInt32] = [0, 1, 1, 0]
+
+        func fullTorusBit(_ bit: UInt32) -> LWECiphertext {
+            let native = encryptLWERotationNative(
+                message: encodeRotationNativeBit(bit, k: k),
+                secret: secret.lweSecret,
+                twoN: twoN,
+                rng: &rng
+            )
+            return scaleLWE(native, delta)
+        }
+
+        for x in 0...1 {
+            for y in 0...1 {
+                for z in 0...1 {
+                    let lx = fullTorusBit(UInt32(x))
+                    let ly = fullTorusBit(UInt32(y))
+                    let mid = evaluateLUTBlindRotate(
+                        truthTable: xorTable,
+                        inputs: [lx, ly],
+                        bootstrapKey: bk,
+                        scale: scale,
+                        inputPacking: .fullTorusPublicMS
+                    )
+                    XCTAssertEqual(
+                        decodeRotationBoolean(decryptLWE(mid, secret: secret), scale: scale),
+                        UInt32(x ^ y)
+                    )
+                    let lz = fullTorusBit(UInt32(z))
+                    let out = evaluateLUTBlindRotate(
+                        truthTable: xorTable,
+                        inputs: [mid, lz],
+                        bootstrapKey: bk,
+                        scale: scale,
+                        inputPacking: .fullTorusPublicMS
+                    )
+                    XCTAssertEqual(
+                        decodeRotationBoolean(decryptLWE(out, secret: secret), scale: scale),
+                        UInt32(x ^ y ^ z),
+                        "aggregate-first chained XOR x=\(x) y=\(y) z=\(z)"
+                    )
+                }
+            }
+        }
+    }
+
     /// kδ wires live in `{0,k}`; native-δ public MS + stride-k test poly chains XOR.
-    func testStrideKPublicMSChainedXOR() {
+    func testStrideKPublicMSChainedXOR() throws {
         let degree = 32
         let k = 3
         let params = GGSWParams.booleanTrivial(degree: degree)
@@ -1466,6 +1621,26 @@ final class TFHESeamTests: XCTestCase {
                 }
             }
         }
+
+        // A literal one entering a LUT must use the same {0,k} native stride as
+        // primary and inter-LUT wires. Encoding it as raw 1 decodes as zero at k=3.
+        let tiedJSON = #"{"modules":{"tied_one":{"ports":{"y":{"direction":"output","bits":[2]}},"cells":{"id":{"type":"$lut","parameters":{"LUT":"10","WIDTH":"1"},"connections":{"A":["1"],"Y":[2]}}}}}}"#
+        let tiedNetlist = try JSONDecoder().decode(
+            YosysNetlist.self,
+            from: Data(tiedJSON.utf8)
+        )
+        let tiedModule = try XCTUnwrap(tiedNetlist.modules["tied_one"])
+        let tiedSimulator = EncryptedNetlistSimulator(
+            moduleName: "tied_one",
+            module: tiedModule,
+            secret: secret,
+            params: params,
+            backend: .blindRotate,
+            wireRefresh: .publicMS,
+            seed: 0xC4C3,
+            booleanScaleMul: k
+        )
+        XCTAssertEqual(try tiedSimulator.tick(inputs: [:])["y"], [UInt8(1)])
     }
 
     func testRotationNativePackStaysInZ2N() {

@@ -1,0 +1,251 @@
+{
+  "schema": "E256-V3-CORE-FREEZE-PROGRESS-1",
+  "status": "OPEN_PROGRESS",
+  "identity": {
+    "family": "E256",
+    "suite_version": 3,
+    "generation": 0,
+    "fixture_schema_version": 5,
+    "profile_sha256": "0206c00e5084ebafe1f841708d2af3f4a029bcf160f7b22ed63bb5078d376e16",
+    "canonical_profile_bytes": 2161,
+    "compatibility_key": "E256/v3/gen0/0206c00e5084ebafe1f841708d2af3f4a029bcf160f7b22ed63bb5078d376e16/fixture-v5",
+    "domain_encoding": "e256_ascii_path_v1",
+    "kdf": "hkdf_sha512_rfc5869_v1",
+    "purpose_stream": "hmac_sha512_purpose_u64be_counter_v1",
+    "bounded_sampler": "u16be_reject_high_v1",
+    "zero_policy": "external_reject_derive_retry_u64le_v1",
+    "real_data_policy": "standard_aead_required"
+  },
+  "scope": {
+    "tranche_findings": [
+      "E256-005",
+      "E256-006",
+      "E256-011",
+      "E256-012",
+      "E256-025",
+      "E256-026",
+      "E256-027",
+      "E256-028",
+      "E256-029"
+    ],
+    "finding_state_changes": [],
+    "e256_003_state": "OPEN",
+    "human_acceptance": "pending",
+    "canonical_alias_promoted": false,
+    "fixture_location": "Fixtures/Staging/Enigma256/E256-v3-gen0-0206c00e5084ebafe1f841708d2af3f4a029bcf160f7b22ed63bb5078d376e16-fixture-v5",
+    "compatibility": "intentionally incompatible with E256-v1 and E256-v2",
+    "statement": "First core-freeze implementation and bounded local parity tranche; no audit row is closed by this receipt."
+  },
+  "fixture_v5": {
+    "manifest": "Fixtures/Staging/Enigma256/E256-v3-gen0-0206c00e5084ebafe1f841708d2af3f4a029bcf160f7b22ed63bb5078d376e16-fixture-v5/fixture-v5.json",
+    "manifest_sha256": "d11753d3a7ed041e77b484d69cf8196087fd816baf4938c4c71d269235a99743",
+    "file_count_including_manifest": 27,
+    "artifact_count": 26,
+    "stream_bytes": 1024,
+    "recurrence_basis_rows": 64,
+    "state_checkpoints": [
+      0,
+      1,
+      2,
+      58,
+      59,
+      60,
+      64,
+      128,
+      1024
+    ],
+    "negative_vector_declarations": 13,
+    "reciprocal_decrypt": "PASS",
+    "path_content_aggregate_sha256": "8466b87e0b3895f520ee34a063ad6af4faa217b5d50dc0a9b387778c16ab1c60",
+    "aggregate_definition": "SHA-256 over each lexicographically sorted relative UTF-8 path, NUL, then file bytes",
+    "fresh_regeneration_byte_compare": "PASS"
+  },
+  "v3_validation": {
+    "release_build": {
+      "command": "swift build -c release --product helut-e256",
+      "status": 0
+    },
+    "swift_scoped_suite": {
+      "command": "swift test -c release --filter 'Enigma256(V3|FixtureV5)'",
+      "status": 0,
+      "tests_reported": 19,
+      "skipped_opt_in_emitter": 1,
+      "failures": 0,
+      "subsets": {
+        "Enigma256V3Tests": "8/8 PASS",
+        "Enigma256FixtureV5Tests": "7 PASS, 1 expected opt-in skip",
+        "Enigma256V3MMIOTests": "3/3 PASS"
+      }
+    },
+    "explicit_scratch_regeneration": {
+      "command": "E256_V3_FIXTURE_OUTPUT=<temporary>/fixture-v5 swift test -c release --filter Enigma256FixtureV5Tests/testEmitScratchFixtureWhenRequested",
+      "status": 0,
+      "tests": 1,
+      "failures": 0,
+      "byte_compare_files": 27,
+      "byte_compare": "PASS"
+    },
+    "rust_package": {
+      "command": "cargo test --manifest-path Reference/Rust/Cargo.toml",
+      "status": 0,
+      "unit_tests": 14,
+      "v3_fixture_integration_tests": 1,
+      "existing_reference_integration_tests": 2,
+      "failures": 0,
+      "v3_known_answers": [
+        "complete HMAC-SHA256 RFC 4231 case",
+        "complete HMAC-SHA512 RFC 4231 case",
+        "complete 42-byte HKDF-SHA512 answer",
+        "exact accepted-space rejection-sampler multiplicities"
+      ]
+    },
+    "rust_pinned_gate": {
+      "command": "make rust-reference-check",
+      "status": 0,
+      "format": "PASS",
+      "clippy_deny_warnings": "PASS",
+      "all_tests": "PASS",
+      "v2_fixture_consumer": "PASS; v2-only regression evidence",
+      "yosys_examples": "PASS; 8 full-adder rows, 16 counter transitions, 1024 toy-ISA transitions"
+    },
+    "rtl": {
+      "command": "./Scripts/enigma256_v3_sim.sh",
+      "status": 0,
+      "portable_fixture_preflight": "PASS; exact selected fixture-v5 rederived before simulation",
+      "zero_state_and_lifecycle": "PASS; reset/rejected load disarm traffic, retained state cannot advance, valid reload re-arms",
+      "nlff_include_identity_samples": 1024,
+      "fixture_trace_beats": 1024,
+      "fixture_trace_result": "1024/1024 PASS",
+      "trace_fields_checked": [
+        "pre/post LFSR",
+        "pre/post rotor offsets",
+        "pre/post absolute counter",
+        "step mask",
+        "center mask",
+        "center input/output",
+        "cipher output"
+      ]
+    },
+    "hardware_integrity": {
+      "command": "make hardware-check",
+      "status": 0,
+      "manifest": "PASS; 47 artifacts, 46 canonical, 0 planned",
+      "compatibility_copies": "PASS; 20 copies"
+    },
+    "semantic_review": {
+      "initial": {
+        "path": "semantic-review/2026-08-28-121159-pr-0.md",
+        "verdict": "NEEDS_CHANGES",
+        "confirmed_findings": 8
+      },
+      "follow_up": {
+        "path": "semantic-review/2026-08-28-153347-pr-0.md",
+        "verdict": "APPROVED",
+        "remaining_high_or_medium_findings_in_scope": 0
+      },
+      "boundary": "AI semantic review is not human acceptance and does not close E256-003 or any tranche row."
+    },
+    "hygiene": {
+      "claim_audit": "PASS; C=69, H=7, N=9",
+      "epsilon_claim_audit_strict": "PASS; 0 unsupported, 0 fragile",
+      "hardware_check": "PASS",
+      "worktree_diff_check": "PASS",
+      "tranche_text_hygiene": "PASS; 20 files, no trailing whitespace, NUL, or missing final LF",
+      "protected_campaign_writeup_worktree": "PASS; no unstaged changes",
+      "cached_diff_check": "BLOCKED only by two pre-existing staged trailing spaces in logs/c60-lut-isolation-b2-k7-e0-metal-2026-08-20.log; unrelated evidence was not rewritten"
+    }
+  },
+  "negative_control_scope": {
+    "fixture_manifest_entries": "13 declarations; not represented as 13 independently executed portable controls",
+    "swift_codec_in_memory_controls": "4 exact typed errors",
+    "swift_fixture_file_controls": [
+      "duplicate and unknown JSON keys",
+      "noncanonical JSON and uppercase hex",
+      "artifact hash mismatch",
+      "raw/hex duplicate mismatch",
+      "extra file",
+      "symlink",
+      "canonical artifact logical/path remap",
+      "descriptor-backed extra path"
+    ],
+    "swift_mmio_raw_ingress_controls": [
+      "profile mismatch",
+      "zero LFSR",
+      "short table",
+      "non-permutation",
+      "inverse mismatch",
+      "fixed-point plugboard",
+      "wrong position count",
+      "wrong center-mask key length",
+      "exhausted counter"
+    ],
+    "swift_mmio_transaction_failure_points": [
+      "begin",
+      "table write 0",
+      "table write 255",
+      "table write 256",
+      "table write 2303",
+      "state staging",
+      "commit"
+    ]
+  },
+  "preserved_v2_regression": {
+    "scope": "Regression guard for the existing v2 compatibility key only; none of these grades transfer to v3.",
+    "profile_replay": "python3 Scripts/e256_nlff_emit.py --check: PASS",
+    "lfsr_rtl": "./Scripts/enigma256_lfsr_sim.sh: PASS through 1024 clocks",
+    "nlff_rtl": "./Scripts/enigma256_nlff_sim.sh: PASS for 14 fixed vectors",
+    "direct_rtl": "E256_REUSE_BUNDLE=1 ./Scripts/enigma256_sim.sh build/hardware/Enigma256/enigma256_golden: PASS for 1024 fixture-v4 bytes",
+    "axis": "E256_REUSE_BUNDLE=1 ./Scripts/enigma256_axi_sim.sh build/hardware/Enigma256/enigma256_golden: PASS for 2304 table bytes and 1024 payload bytes",
+    "lite": "LITE=1 E256_REUSE_BUNDLE=1 ./Scripts/enigma256_axi_sim.sh build/hardware/Enigma256/enigma256_golden: PASS for 2304 table bytes and 1024 payload bytes",
+    "publication_guard": "swift test -c release --filter Enigma256Tests: 49/49 PASS",
+    "c24_bounded_certificate": "swift test -c release --filter testEnigma256FormalCertificate: 1/1 PASS",
+    "explicit_non_inheritance": [
+      "v2 49/49 is not a v3 publication grade",
+      "C24 1/1 is not a v3 proof or certificate",
+      "v2 TensorLUT blue_hold is not copied or reinterpreted"
+    ]
+  },
+  "artifact_sha256": {
+    "Sources/HELUTCore/Enigma256.swift": "bab964c6e0ea29ede089e7d1cb0f7530a209cb80d1c3ca70a62e75ad31d7bf1a",
+    "Sources/HELUTCore/Enigma256V3.swift": "2b0ea57f5e2848b0bb31b08a1b5e17c9eb75fd9837f7568fb3e006e438149a6f",
+    "Sources/HELUTCore/Enigma256StrictJSON.swift": "d1d907fa6b2e9b88dfff7e531583cec30e64ddc2e785901184e0ed3c7cd53d34",
+    "Sources/HELUTCore/Enigma256FixtureV5.swift": "55c30dbc6ba4ffdbb367096df6fa69a55287524399e793280e40fe005cda11c0",
+    "Sources/HELUTCore/Enigma256V3MMIO.swift": "63453dd63b4c0c48e99142ad641cc56f1c347ce6c3e43414c83b99baeb088dd3",
+    "Tests/HELUTTests/Enigma256V3Tests.swift": "8a881349a97b6276c2d4a9e352014c7950c56db0dc76031558835b61dc535cb9",
+    "Tests/HELUTTests/Enigma256FixtureV5Tests.swift": "a8c14984df6320dc264dfe619344f9a51c254ed81db2c22617773acc35906350",
+    "Tests/HELUTTests/Enigma256V3MMIOTests.swift": "bd7214363d35dc82636bdef8b2af42755c888ca997a79ce2943dadc74bf5eb46",
+    "Reference/Rust/src/e256_v3.rs": "62188ce9f6f0b9982625770c9cec252879ab16758c839e42af345b928b1129fb",
+    "Reference/Rust/src/lib.rs": "5114d78b84034e5b0ec8a2637febc6ba5f65bdaf46dfc822f2ba94a6be5b3b4b",
+    "Reference/Rust/src/main.rs": "c0d25d7dbe9d547799b10c49293f7fa1effe08aee39e1a1d9536f7984046e458",
+    "Reference/Rust/tests/e256_v3_parity.rs": "a3d1e9b16c8a39381d80bb75d88971ecf7323ea2c1a7f5374d20c541a13a7f50",
+    "Generated/Profiles/Enigma256/enigma_256_nlff_v2.vh": "2c95f6a075f0249d0821ade64d0dfc898bd0b1c55c378cb849a570c6bdda8126",
+    "Generated/Profiles/Enigma256/enigma_256_nlff_v3.vh": "ad7370eb0e374120d4434e9956b400b71f70b74a67464840b287cc35314bf3fe",
+    "Hardware/RTL/Enigma256/enigma_256_core.v": "9f8cec073e87001375bb2c6d5de95558a0e3b74a46afb211868dec3dff94c124",
+    "Hardware/RTL/Enigma256/enigma_256_core_v3.v": "05f648ec6efaefcfb97c9fca5fd42708d01ac455453aac2bd2d2ea448d0fd937",
+    "Hardware/RTL/Enigma256/enigma_256_nlff_v3_combo.v": "1def27bb6c37d0db0258e01c58d053e48b576936e033b9c80f8c7ae5ed612515",
+    "Hardware/Testbenches/Enigma256/enigma_256_v3_tb.v": "591a1fbf9ae01d17f682b6aab5ed6847aff1807f9221b61c0d53869e34e1f56e",
+    "Hardware/Testbenches/Enigma256/enigma_256_v3_fixture_tb.v": "41c6305b6d384f580d2835700c73fecb22eb16b18ae0636f055e54db01ad663b",
+    "Scripts/enigma256_v3_sim.sh": "8f053faabb1629d3d4fc0a6e77fd73c3a744f0c26d735e14038c98e91f29746b"
+  },
+  "toolchain": {
+    "git_head_at_validation_with_uncommitted_changes": "019d15abf62d1ed3c7612dc90ffdf318c59ada7c",
+    "macos": "26.6.1",
+    "swift": "Apple Swift 6.3.3; swift-driver 1.148.6; target arm64-apple-macosx26.0",
+    "rustc": "1.97.1 (8bab26f4f 2026-07-14; Homebrew)",
+    "cargo": "1.97.1 (c980f4866 2026-06-30; Homebrew)",
+    "iverilog": "13.0 stable",
+    "python": "3.9.6",
+    "working_tree": "dirty with pre-existing staged and unstaged work; receipt hashes bind the v3 inputs consumed"
+  },
+  "limitations": [
+    "This is bounded implementation, strictness, and cross-language/RTL parity evidence, not an IND-CPA proof, an HMAC/HKDF security proof, or external cryptanalysis.",
+    "The in-tree Rust verifier is repository-coupled and is not an independently authored or accepted implementation/KAT.",
+    "The 13 fixture negative vectors are declarations; only the separately enumerated controls are claimed as executed.",
+    "The MMIO transaction is a conformance contract and recording-sink test; no concrete production shadow-bank sink or v3 AXIS/LITE wrapper lands in this tranche.",
+    "No v3 AXIS, AXI-Lite, TensorLUT, physical side-channel, fault-injection, or production hardware grade is claimed.",
+    "No canonical v3 alias was promoted; fixture-v5 remains under Fixtures/Staging/Enigma256.",
+    "E256-003 and all tranche rows remain open pending applicable proof, external review, concrete integrations, and human acceptance.",
+    "The raw E256-v3 research construction must not protect real data; use a standard AEAD.",
+    "No wall-clock timestamp is asserted because the machine clock and session-provided date disagreed during validation."
+  ]
+}

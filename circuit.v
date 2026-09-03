@@ -1,4 +1,2 @@
-module full_adder(input a, input b, input cin, output sum, output cout);
-    assign sum = a ^ b ^ cin;
-    assign cout = (a & b) | (cin & (a ^ b));
-endmodule
+// Compatibility wrapper: canonical RTL lives in Hardware/RTL/Examples/circuit.v.
+`include "Hardware/RTL/Examples/circuit.v"

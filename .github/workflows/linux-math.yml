@@ -26,6 +26,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
+      - name: Hardware manifest and compatibility integrity
+        run: make hardware-check
       - name: Toy cipher pair (weak vs broken by design)
         run: python3 Scripts/toy_cipher_demo.py
       - name: TensorLUT structural checks

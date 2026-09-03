@@ -1,4 +1,7 @@
 import { Link } from 'react-router-dom'
+import { E256Span } from '../E256Span'
+import { HelutSpan } from '../HELUTSpan'
+import { NaziBlaster9000Span } from '../NaziBlaster9000Span'
 
 export function Enigma256Page() {
   return (
@@ -9,13 +12,13 @@ export function Enigma256Page() {
           <div className="section-head">
             <div className="kicker">
               <Link to="/projects/e256" style={{ color: 'inherit', textDecoration: 'none' }}>
-                Project · E256
+                Project · <E256Span />
               </Link>
               {' · '}Blue Team · 2026
             </div>
             <h2>Fixing Enigma for a century that can melt silicon</h2>
             <p className="lede">
-              The hunt for P1030680 is a ledger of how the 1945 machine leaks. Every clean negative, every ghost board, every Turing-shaped shortcut I weaponized against M4 is also a specification for what a rotor cipher must never do again. Enigma 256 (E256) is that rewrite: a base-256 polymorphic stream cipher whose datapath is SoftBus-backed Verilog on Apple Silicon and whose keys never sit in a water-soluble codebook.
+              The hunt for P1030680 is a ledger of how the 1945 machine leaks. Every clean negative, every ghost board, every Turing-shaped shortcut I weaponized against M4 is also a specification for what a rotor cipher must never do again. Enigma 256 (<E256Span />) is that rewrite: a base-256 polymorphic stream cipher whose datapath is SoftBus-backed Verilog on Apple Silicon and whose keys never sit in a water-soluble codebook.
             </p>
             <p className="lede" style={{ marginTop: '1rem' }}>
               This is not nostalgia hardware. It is the Blue Team answer to a Red Team that already runs Welchman, Stochastic KPA, and TensorLUT on Apple Silicon—built from the same findings documented in the{' '}
@@ -23,24 +26,34 @@ export function Enigma256Page() {
             </p>
           </div>
 
+          <div className="note" style={{ marginBottom: '1.5rem' }}>
+            <strong>Experimental research fixture—not for real data.</strong>{' '}
+            <code>E256-003</code> is <strong>OPEN</strong> pending human acceptance. The bounded
+            fixture-v4 receipt is functional evidence only: it is not an IND-CPA claim, an
+            HMAC-security proof, external cryptanalysis, a security level, or a work factor.
+          </div>
+
           <div className="status-strip status-strip-4">
             <div className="stat">
-              <div className="label">Live field</div>
-              <div className="value">Gen 5 · SoftBus</div>
+              <div className="label">Live profile</div>
+              <div className="value">fixture-v4</div>
             </div>
             <div className="stat">
-              <div className="label">KDF / AEAD</div>
-              <div className="value">HKDF-SHA512</div>
+              <div className="label">Center</div>
+              <div className="value">XOR conjugate</div>
             </div>
             <div className="stat">
-              <div className="label">Handshake</div>
-              <div className="value">X25519 ‖ ML-KEM</div>
+              <div className="label">Receipt</div>
+              <div className="value">49/49 · formal 1/1</div>
             </div>
             <div className="stat">
-              <div className="label">Red surface</div>
-              <div className="value">Past NLFF</div>
+              <div className="label">Review</div>
+              <div className="value">E256-003 OPEN</div>
             </div>
           </div>
+          <p className="mono" style={{ marginTop: '1rem', overflowWrap: 'anywhere' }}>
+            E256/v2/gen0/fa246e9cba9009a4799e5a81722a9b14e9a67293d9621b45985c5f3e620865d4/fixture-v4
+          </p>
         </div>
       </section>
 
@@ -48,15 +61,18 @@ export function Enigma256Page() {
         <div className="shell">
           <div className="section-head">
             <div className="kicker">Architecture</div>
-            <h2>Three planes on one Mac</h2>
+            <h2>The fixture-v4 host/RTL boundary</h2>
             <p>
-              Control plane never enters BRAM. Data plane is SoftBus ↔ <code>enigma_256_core</code>. Red melts synthesizable cones and grades SoftBus oracles; Blue rolls genes only under pressure.
+              The host derives and transports <code>(payload, centerMask, absoluteByteCounter)</code>.
+              RTL validates the absolute counter before processing the byte; it does not implement
+              HMAC. The day key contains a plugboard plus 16 forward/reverse rotor pools and no
+              reflector.
             </p>
           </div>
 
-          <figure className="arch-figure" aria-label="E256 architecture diagram">
+          <figure className="arch-figure" aria-label="E256 fixture-v4 architecture diagram">
             <svg viewBox="0 0 920 520" role="img" className="arch-svg">
-              <title>E256 control plane, data plane, and Red/Blue field</title>
+              <title>E256 fixture-v4 host schedule, RTL datapath, and bounded TensorLUT cone</title>
               <defs>
                 <linearGradient id="archCp" x1="0" y1="0" x2="1" y2="1">
                   <stop offset="0%" stopColor="#0f3034" />
@@ -70,69 +86,64 @@ export function Enigma256Page() {
                   <stop offset="0%" stopColor="#a86227" />
                   <stop offset="100%" stopColor="#d4833f" />
                 </linearGradient>
+                <marker id="archArrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+                  <path d="M0,0 L6,3 L0,6 Z" fill="#9ee0da" />
+                </marker>
               </defs>
 
-              {/* Control plane */}
               <rect x="24" y="24" width="872" height="118" rx="4" fill="url(#archCp)" />
-              <text x="44" y="52" className="arch-label">Control plane · Swift / CryptoKit</text>
-              <rect x="44" y="68" width="190" height="52" rx="2" fill="rgba(255,255,255,0.08)" stroke="rgba(158,224,218,0.35)" />
-              <text x="54" y="90" className="arch-box">Handshake</text>
-              <text x="54" y="108" className="arch-sub">X25519 ‖ ML-KEM · Ed25519</text>
-              <path d="M240 94 H268" stroke="#9ee0da" strokeWidth="1.5" markerEnd="url(#archArrow)" />
-              <rect x="274" y="68" width="170" height="52" rx="2" fill="rgba(255,255,255,0.08)" stroke="rgba(158,224,218,0.35)" />
-              <text x="284" y="90" className="arch-box">HKDF-SHA512</text>
-              <text x="284" y="108" className="arch-sub">day · msg · mac</text>
-              <path d="M450 94 H478" stroke="#9ee0da" strokeWidth="1.5" />
-              <rect x="484" y="68" width="170" height="52" rx="2" fill="rgba(255,255,255,0.08)" stroke="rgba(158,224,218,0.35)" />
-              <text x="494" y="90" className="arch-box">AEAD + nonce</text>
-              <text x="494" y="108" className="arch-sub">HMAC-SHA512 · counter</text>
-              <path d="M660 94 H688" stroke="#9ee0da" strokeWidth="1.5" />
-              <rect x="694" y="68" width="178" height="52" rx="2" fill="rgba(255,255,255,0.08)" stroke="rgba(158,224,218,0.35)" />
-              <text x="704" y="90" className="arch-box">E2W1 · TCP</text>
-              <text x="704" y="108" className="arch-sub">verify before fabric</text>
+              <text x="44" y="52" className="arch-label">Host · derive and transport the byte schedule</text>
+              <rect x="44" y="68" width="238" height="52" rx="2" fill="rgba(255,255,255,0.08)" stroke="rgba(158,224,218,0.35)" />
+              <text x="54" y="90" className="arch-box">payload</text>
+              <text x="54" y="108" className="arch-sub">one scheduled byte</text>
+              <path d="M288 94 H316" stroke="#9ee0da" strokeWidth="1.5" markerEnd="url(#archArrow)" />
+              <rect x="322" y="68" width="238" height="52" rx="2" fill="rgba(255,255,255,0.08)" stroke="rgba(158,224,218,0.35)" />
+              <text x="332" y="90" className="arch-box">centerMask</text>
+              <text x="332" y="108" className="arch-sub">independent center input</text>
+              <path d="M566 94 H594" stroke="#9ee0da" strokeWidth="1.5" markerEnd="url(#archArrow)" />
+              <rect x="600" y="68" width="272" height="52" rx="2" fill="rgba(255,255,255,0.08)" stroke="rgba(158,224,218,0.35)" />
+              <text x="610" y="90" className="arch-box">absoluteByteCounter</text>
+              <text x="610" y="108" className="arch-sub">transported; checked by RTL</text>
 
-              {/* Arrow control → data */}
               <path d="M360 142 V168" stroke="var(--ink-soft, #2a374e)" strokeWidth="1.5" strokeDasharray="4 3" />
-              <text x="372" y="162" className="arch-flow">day + message key · tables</text>
+              <text x="372" y="162" className="arch-flow">host tuple + active tables</text>
 
-              {/* Data plane */}
               <rect x="24" y="172" width="560" height="180" rx="4" fill="url(#archDp)" />
-              <text x="44" y="200" className="arch-label arch-label-light">Data plane · SoftBus ↔ enigma_256_core</text>
+              <text x="44" y="200" className="arch-label arch-label-light">RTL · SoftBus ↔ enigma_256_core</text>
               <rect x="44" y="220" width="150" height="100" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(212,131,63,0.45)" />
               <text x="54" y="248" className="arch-box">Burst load</text>
-              <text x="54" y="268" className="arch-sub">10×256 BRAM</text>
-              <text x="54" y="286" className="arch-sub">AXIS / SoftBus</text>
-              <text x="54" y="304" className="arch-sub">CTRL[1] arm</text>
+              <text x="54" y="268" className="arch-sub">9×256 tables</text>
+              <text x="54" y="286" className="arch-sub">2,304 bytes</text>
+              <text x="54" y="304" className="arch-sub">10 accesses</text>
               <path d="M200 270 H228" stroke="#d4833f" strokeWidth="1.5" />
               <rect x="234" y="220" width="200" height="100" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(212,131,63,0.45)" />
-              <text x="244" y="248" className="arch-box">Core stream</text>
-              <text x="244" y="268" className="arch-sub">plug → R1…R4 → UKW</text>
-              <text x="244" y="286" className="arch-sub">→ rev → plug</text>
-              <text x="244" y="304" className="arch-sub">scramble then NLFF step</text>
+              <text x="244" y="248" className="arch-box">Reciprocal core</text>
+              <text x="244" y="268" className="arch-sub">plug → R1…R4 → center</text>
+              <text x="244" y="286" className="arch-sub">→ R4⁻¹…R1⁻¹ → plug</text>
+              <text x="244" y="304" className="arch-sub">counter validation · no HMAC</text>
               <path d="M440 270 H468" stroke="#d4833f" strokeWidth="1.5" />
               <rect x="474" y="220" width="90" height="100" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(212,131,63,0.45)" />
               <text x="486" y="262" className="arch-box">CT</text>
               <text x="482" y="284" className="arch-sub">DATA_OUT</text>
 
-              {/* Red / Blue */}
               <rect x="604" y="172" width="292" height="180" rx="4" fill="url(#archRed)" />
-              <text x="624" y="200" className="arch-label">Red / Blue field</text>
-              <text x="624" y="228" className="arch-box">ent · SoftBus KPA</text>
-              <text x="624" y="252" className="arch-box">TensorLUT cones</text>
-              <text x="624" y="276" className="arch-sub">NLFF → +lfsr_hi → +offsets</text>
-              <text x="624" y="300" className="arch-sub">gen 5 genes · campaign gates</text>
-              <text x="624" y="324" className="arch-sub">mutate only under pressure</text>
+              <text x="624" y="200" className="arch-label">Bounded TensorLUT test</text>
+              <text x="624" y="228" className="arch-box">366-LUT6 scramble cone</text>
+              <text x="624" y="252" className="arch-box">independent center_mask</text>
+              <text x="624" y="278" className="arch-sub">blue_hold</text>
+              <text x="624" y="300" className="arch-sub">crypto −291592.781250</text>
+              <text x="624" y="322" className="arch-sub">nonbinary 1217 · optimizer only</text>
 
-              {/* Byte path strip */}
               <rect x="24" y="372" width="872" height="124" rx="4" fill="#e8ecef" stroke="rgba(13,19,34,0.12)" />
-              <text x="44" y="400" className="arch-label-dark">Reciprocal byte path</text>
-              <text x="44" y="430" className="arch-path">PT → plug → R1±off → R2±off → R3±off → R4±off → un-reflector → rev path → plug → CT</text>
-              <text x="44" y="458" className="arch-path-note">Un-reflector allows fixed points · encrypt ≡ decrypt · gen 5 cubic6 NLFF clocks all four offsets</text>
-              <text x="44" y="482" className="arch-path-note">Full-core BRAM melt deferred · past-NLFF offset cone (~47 LUT6) is the live Red surface</text>
+              <text x="44" y="400" className="arch-label-dark">Reciprocal byte path · no reflector</text>
+              <text x="44" y="430" className="arch-path">PT → plug → R1±off → R2±off → R3±off → R4±off → A_i^-1(A_i(x) XOR k_i)</text>
+              <text x="44" y="458" className="arch-path-note">→ reverse rotor path → the same plugboard → CT</text>
+              <text x="44" y="482" className="arch-path-note">9 unique tables · plugboard accessed twice · centerMask supplied independently</text>
             </svg>
             <figcaption>
-              SoftBus is the field fabric. Spec detail and mermaid sources live in{' '}
-              <a href="https://github.com/Digital-Defiance/HELUT/blob/main/Enigma256.md">Enigma256.md</a>.
+              The live identity is{' '}
+              <code>E256/v2/gen0/fa246e9cba9009a4799e5a81722a9b14e9a67293d9621b45985c5f3e620865d4/fixture-v4</code>.
+              The bounded receipt is <code>logs/e256-v2-gen0-fixture-v4-validation.json</code>.
             </figcaption>
           </figure>
         </div>
@@ -142,15 +153,17 @@ export function Enigma256Page() {
         <div className="shell">
           <div className="section-head">
             <div className="kicker">The machine</div>
-            <h2>How the wheels and plugboard actually connect</h2>
+            <h2>How the fixture-v4 tables and center connect</h2>
             <p>
-              Four active 256-entry rotors sit between a full-spectrum plugboard and an un-reflector. Offsets are not notches—they are bytes advanced by a Galois LFSR through NLFF step enables after every symbol.
+              Four active forward/reverse rotor pairs sit between two accesses to one plugboard.
+              The center is an XOR conjugated through the selected forward composition; there is no
+              reflector or reserved-pair mode.
             </p>
           </div>
 
-          <figure className="arch-figure" aria-label="E256 machine internals diagram">
-            <svg viewBox="0 0 960 640" role="img" className="arch-svg">
-              <title>E256 rotor machine: plugboard, four rotors, un-reflector, LFSR stepping</title>
+          <figure className="arch-figure" aria-label="E256 fixture-v4 machine internals diagram">
+            <svg viewBox="0 0 960 520" role="img" className="arch-svg">
+              <title>E256 fixture-v4: plugboard, forward and reverse rotors, conjugated-XOR center, host schedule</title>
               <defs>
                 <linearGradient id="machInk" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stopColor="#1a2438" />
@@ -172,125 +185,58 @@ export function Enigma256Page() {
                 </marker>
               </defs>
 
-              {/* Day / message key strip */}
               <rect x="20" y="16" width="920" height="88" rx="4" fill="url(#machTeal)" />
-              <text x="36" y="42" className="arch-label">Keying · day pool → message slot</text>
-              <rect x="36" y="54" width="200" height="36" rx="2" fill="rgba(255,255,255,0.08)" stroke="rgba(158,224,218,0.35)" />
-              <text x="48" y="77" className="arch-box" style={{ fontSize: 14 }}>Day: 16-rotor pool</text>
-              <rect x="252" y="54" width="200" height="36" rx="2" fill="rgba(255,255,255,0.08)" stroke="rgba(158,224,218,0.35)" />
-              <text x="264" y="77" className="arch-box" style={{ fontSize: 14 }}>Plug + un-reflector</text>
-              <path d="M460 72 H488" stroke="#9ee0da" strokeWidth="1.5" markerEnd="url(#machArr)" />
-              <rect x="496" y="54" width="210" height="36" rx="2" fill="rgba(255,255,255,0.08)" stroke="rgba(158,224,218,0.35)" />
-              <text x="508" y="77" className="arch-box" style={{ fontSize: 14 }}>Nonce → 4 of 16 + offs</text>
-              <path d="M714 72 H742" stroke="#9ee0da" strokeWidth="1.5" markerEnd="url(#machArr)" />
-              <rect x="750" y="54" width="170" height="36" rx="2" fill="rgba(255,255,255,0.08)" stroke="rgba(158,224,218,0.35)" />
-              <text x="762" y="77" className="arch-box" style={{ fontSize: 14 }}>LFSR seed 64b</text>
+              <text x="36" y="42" className="arch-label">Day key · table pool</text>
+              <rect x="36" y="54" width="250" height="36" rx="2" fill="rgba(255,255,255,0.08)" stroke="rgba(158,224,218,0.35)" />
+              <text x="48" y="77" className="arch-box" style={{ fontSize: 14 }}>Plugboard · 1 unique table</text>
+              <rect x="304" y="54" width="344" height="36" rx="2" fill="rgba(255,255,255,0.08)" stroke="rgba(158,224,218,0.35)" />
+              <text x="316" y="77" className="arch-box" style={{ fontSize: 14 }}>16 forward/reverse rotor pools</text>
+              <rect x="666" y="54" width="254" height="36" rx="2" fill="rgba(255,255,255,0.08)" stroke="rgba(158,224,218,0.35)" />
+              <text x="678" y="77" className="arch-box" style={{ fontSize: 14 }}>No reflector table</text>
 
-              {/* Main chassis */}
-              <rect x="20" y="120" width="920" height="360" rx="4" fill="url(#machInk)" />
-              <text x="36" y="148" className="arch-label arch-label-light">Scramble path · base-256 · reciprocal</text>
+              <rect x="20" y="120" width="920" height="260" rx="4" fill="url(#machInk)" />
+              <text x="36" y="148" className="arch-label arch-label-light">Active slot · 9 unique tables / 10 accesses</text>
 
-              {/* PT */}
-              <rect x="36" y="250" width="56" height="56" rx="2" fill="rgba(255,255,255,0.08)" stroke="#9ee0da" />
-              <text x="50" y="275" className="arch-box" style={{ fontSize: 15 }}>PT</text>
-              <text x="44" y="294" className="arch-sub">byte</text>
+              <rect x="36" y="218" width="56" height="56" rx="2" fill="rgba(255,255,255,0.08)" stroke="#9ee0da" />
+              <text x="50" y="243" className="arch-box" style={{ fontSize: 15 }}>PT</text>
+              <text x="44" y="262" className="arch-sub">byte</text>
+              <path d="M98 246 H118" stroke="#9ee0da" strokeWidth="1.5" markerEnd="url(#machArr)" />
 
-              {/* Plugboard in */}
-              <path d="M98 278 H118" stroke="#9ee0da" strokeWidth="1.5" markerEnd="url(#machArr)" />
-              <rect x="124" y="220" width="72" height="116" rx="2" fill="rgba(20,129,119,0.35)" stroke="#22a89c" />
-              <text x="134" y="250" className="arch-box" style={{ fontSize: 13 }}>Plug</text>
-              <text x="132" y="270" className="arch-sub">256</text>
-              <text x="132" y="288" className="arch-sub">invo-</text>
-              <text x="132" y="306" className="arch-sub">lution</text>
-              <text x="132" y="324" className="arch-sub">128 pr</text>
+              <rect x="124" y="194" width="72" height="104" rx="2" fill="rgba(20,129,119,0.35)" stroke="#22a89c" />
+              <text x="134" y="226" className="arch-box" style={{ fontSize: 13 }}>Plug</text>
+              <text x="132" y="248" className="arch-sub">access 1</text>
+              <text x="132" y="270" className="arch-sub">same table</text>
 
-              {/* Forward rotors */}
-              <path d="M202 278 H220" stroke="#f0c49a" strokeWidth="1.5" markerEnd="url(#machArrCu)" />
-              {[
-                { x: 226, label: 'R1', sub: 'fwd' },
-                { x: 318, label: 'R2', sub: 'fwd' },
-                { x: 410, label: 'R3', sub: 'fwd' },
-                { x: 502, label: 'R4', sub: 'fwd' },
-              ].map((r) => (
-                <g key={`fwd-${r.label}`}>
-                  <rect x={r.x} y="200" width="72" height="72" rx="2" fill="rgba(212,131,63,0.22)" stroke="#d4833f" />
-                  <text x={r.x + 18} y="230" className="arch-box" style={{ fontSize: 16 }}>{r.label}</text>
-                  <text x={r.x + 22} y="252" className="arch-sub">{r.sub} 256</text>
-                  <text x={r.x + 8} y="180" className="arch-sub">+off −off</text>
-                </g>
-              ))}
-              <path d="M298 236 H312" stroke="#f0c49a" strokeWidth="1.5" />
-              <path d="M390 236 H404" stroke="#f0c49a" strokeWidth="1.5" />
-              <path d="M482 236 H496" stroke="#f0c49a" strokeWidth="1.5" />
+              <path d="M202 246 H220" stroke="#f0c49a" strokeWidth="1.5" markerEnd="url(#machArrCu)" />
+              {['R1 fwd', 'R2 fwd', 'R3 fwd', 'R4 fwd'].map((label, index) => {
+                const x = 226 + index * 92
+                return (
+                  <g key={label}>
+                    <rect x={x} y="210" width="72" height="72" rx="2" fill="rgba(212,131,63,0.22)" stroke="#d4833f" />
+                    <text x={x + 10} y="250" className="arch-box" style={{ fontSize: 13 }}>{label}</text>
+                  </g>
+                )
+              })}
 
-              {/* Un-reflector */}
-              <path d="M580 236 H598" stroke="#f0c49a" strokeWidth="1.5" markerEnd="url(#machArrCu)" />
-              <rect x="604" y="188" width="96" height="96" rx="2" fill="url(#machCopper)" />
-              <text x="618" y="224" className="arch-box" style={{ fontSize: 14 }}>Un-UKW</text>
-              <text x="616" y="246" className="arch-sub">fixed pts OK</text>
-              <text x="622" y="266" className="arch-sub">involution</text>
+              <path d="M574 246 H596" stroke="#f0c49a" strokeWidth="1.5" markerEnd="url(#machArrCu)" />
+              <rect x="602" y="190" width="166" height="112" rx="2" fill="url(#machCopper)" />
+              <text x="620" y="222" className="arch-box" style={{ fontSize: 14 }}>Conjugated XOR</text>
+              <text x="620" y="248" className="arch-sub">A_i^-1(</text>
+              <text x="620" y="268" className="arch-sub">A_i(x) XOR k_i)</text>
+              <text x="620" y="288" className="arch-sub">k_i = centerMask</text>
 
-              {/* Reverse rotors */}
-              <path d="M652 300 V320" stroke="#f0c49a" strokeWidth="1.5" />
-              <path d="M652 320 H574" stroke="#f0c49a" strokeWidth="1.5" />
-              {[
-                { x: 502, label: 'R4', sub: 'rev' },
-                { x: 410, label: 'R3', sub: 'rev' },
-                { x: 318, label: 'R2', sub: 'rev' },
-                { x: 226, label: 'R1', sub: 'rev' },
-              ].map((r) => (
-                <g key={`rev-${r.label}`}>
-                  <rect x={r.x} y="328" width="72" height="72" rx="2" fill="rgba(212,131,63,0.12)" stroke="rgba(240,196,154,0.7)" strokeDasharray="3 2" />
-                  <text x={r.x + 18} y="358" className="arch-box" style={{ fontSize: 16 }}>{r.label}</text>
-                  <text x={r.x + 22} y="380" className="arch-sub">{r.sub} 256</text>
-                </g>
-              ))}
-              <path d="M502 364 H486" stroke="#f0c49a" strokeWidth="1.5" />
-              <path d="M410 364 H394" stroke="#f0c49a" strokeWidth="1.5" />
-              <path d="M318 364 H302" stroke="#f0c49a" strokeWidth="1.5" />
+              <path d="M685 308 V328 H574" stroke="#f0c49a" strokeWidth="1.5" markerEnd="url(#machArrCu)" />
+              <text x="226" y="344" className="arch-sub">R4 rev → R3 rev → R2 rev → R1 rev → same plug (access 2) → CT</text>
 
-              {/* Plugboard out + CT */}
-              <path d="M226 364 H202" stroke="#9ee0da" strokeWidth="1.5" markerEnd="url(#machArr)" />
-              <path d="M160 336 V364" stroke="#9ee0da" strokeWidth="1.5" />
-              <path d="M160 364 H196" stroke="#9ee0da" strokeWidth="1.5" />
-              <text x="132" y="360" className="arch-sub">same</text>
-              <text x="132" y="376" className="arch-sub">table</text>
-              <path d="M124 336 H98" stroke="#9ee0da" strokeWidth="1.5" markerEnd="url(#machArr)" />
-              <rect x="36" y="336" width="56" height="56" rx="2" fill="rgba(255,255,255,0.08)" stroke="#9ee0da" />
-              <text x="50" y="361" className="arch-box" style={{ fontSize: 15 }}>CT</text>
-              <text x="44" y="380" className="arch-sub">byte</text>
-
-              {/* Stage math callout */}
-              <rect x="720" y="200" width="200" height="168" rx="2" fill="rgba(255,255,255,0.06)" stroke="rgba(158,224,218,0.3)" />
-              <text x="736" y="228" className="arch-box" style={{ fontSize: 14 }}>Per rotor stage</text>
-              <text x="736" y="254" className="arch-sub">in  = x + offset</text>
-              <text x="736" y="274" className="arch-sub">y  = table[in]</text>
-              <text x="736" y="294" className="arch-sub">out = y − offset</text>
-              <text x="736" y="320" className="arch-sub">mod 256 arithmetic</text>
-              <text x="736" y="344" className="arch-sub">fwd then rev tables</text>
-              <text x="736" y="364" className="arch-sub">are inverses</text>
-
-              {/* Stepping engine */}
-              <rect x="20" y="500" width="920" height="120" rx="4" fill="#e8ecef" stroke="rgba(13,19,34,0.12)" />
-              <text x="36" y="528" className="arch-label-dark">After CT emits · step engine</text>
-              <rect x="36" y="544" width="160" height="56" rx="2" fill="#0f3034" />
-              <text x="52" y="568" className="arch-box" style={{ fontSize: 14 }}>Galois LFSR</text>
-              <text x="48" y="588" className="arch-sub">64b · 0xD800…</text>
-              <path d="M204 572 H228" stroke="#148177" strokeWidth="1.5" />
-              <rect x="236" y="544" width="160" height="56" rx="2" fill="#1f6f6a" />
-              <text x="260" y="568" className="arch-box" style={{ fontSize: 14 }}>NLFF cubic6</text>
-              <text x="248" y="588" className="arch-sub">gen 5 bred taps</text>
-              <path d="M404 572 H428" stroke="#148177" strokeWidth="1.5" />
-              <rect x="436" y="544" width="220" height="56" rx="2" fill="#2a374e" />
-              <text x="452" y="568" className="arch-box" style={{ fontSize: 14 }}>step_r1…r4</text>
-              <text x="448" y="588" className="arch-sub">each ≈ ½ · low φ</text>
-              <path d="M664 572 H688" stroke="#a86227" strokeWidth="1.5" />
-              <rect x="696" y="544" width="224" height="56" rx="2" fill="#a86227" />
-              <text x="712" y="568" className="arch-box" style={{ fontSize: 14 }}>offset_ri += step_ri</text>
-              <text x="708" y="588" className="arch-sub">then LFSR clocks</text>
+              <rect x="20" y="400" width="920" height="96" rx="4" fill="#e8ecef" stroke="rgba(13,19,34,0.12)" />
+              <text x="36" y="428" className="arch-label-dark">Per-byte host schedule</text>
+              <text x="36" y="458" className="arch-path">payload + independent centerMask + absoluteByteCounter → RTL counter validation → output</text>
+              <text x="36" y="482" className="arch-path-note">The RTL boundary validates ordering; it contains no HMAC.</text>
             </svg>
             <figcaption>
-              Forward path (solid) through plugboard and four rotors to the un-reflector; return path (dashed) uses reverse tables and the same plugboard. Encrypt equals decrypt under one state.
+              The active transfer is one plugboard, four forward tables, and four reverse tables:
+              nine unique tables and a 2,304-byte burst. The plugboard appears at both ends, so one
+              byte performs ten table accesses.
             </figcaption>
           </figure>
 
@@ -298,25 +244,31 @@ export function Enigma256Page() {
             <li>
               <span className="mono">POOL</span>
               <span>
-                <strong>Day blueprint:</strong> HKDF expands a 16-rotor virtual warehouse plus plugboard and un-reflector. Only four rotors are selected per nonce (Walzenlage) and burst into SoftBus.
+                <strong>Day blueprint:</strong> one plugboard plus 16 forward/reverse rotor pools.
+                Four pairs populate the active slot; fixture-v4 has no reflector.
               </span>
             </li>
             <li>
-              <span className="mono">OFFSET</span>
+              <span className="mono">CENTER</span>
               <span>
-                <strong>Not notches:</strong> each active rotor carries an 8-bit offset. Stage math is <code>(table[x+off] − off)</code> mod 256 — the classical “wiring through a turned wheel,” without odometer geometry.
+                <strong>XOR conjugate:</strong>{' '}
+                <code>A_i^-1(A_i(x) XOR k_i)</code>, with <code>k_i</code> supplied as the independent
+                <code> centerMask</code> for the byte.
               </span>
             </li>
             <li>
-              <span className="mono">UKW</span>
+              <span className="mono">TABLES</span>
               <span>
-                <strong>Un-reflector:</strong> still an involution (so the machine stays reciprocal), but fixed points are legal. That kills the historical “never encrypts as itself” crib wedge.
+                <strong>Bounded transfer:</strong> 9 unique 256-byte tables, 2,304 bytes total, and
+                10 accesses because the same plugboard is traversed twice.
               </span>
             </li>
             <li>
               <span className="mono">ORDER</span>
               <span>
-                <strong>Scramble then step:</strong> CT is emitted under the current offsets; then NLFF decides which offsets advance and the LFSR clocks — matching <code>Enigma256Machine.process</code> and <code>enigma_256_core.v</code>.
+                <strong>Host schedule:</strong> the host derives and transports <code>payload</code>,{' '}
+                <code>centerMask</code>, and <code>absoluteByteCounter</code>. RTL validates the
+                counter; that boundary is not an HMAC implementation.
               </span>
             </li>
           </ul>
@@ -344,32 +296,32 @@ export function Enigma256Page() {
             <div className="kicker">Hard facts</div>
             <h2>What the ghost hunt taught the designer</h2>
             <p>
-              Flaws that cost Bletchley months—and cost me GPU-weeks—become permanent design bans.
+              Flaws that cost Bletchley months—and cost me GPU-weeks—become explicit test surfaces.
             </p>
           </div>
           <ul className="stack-list">
             <li>
               <span className="mono">NO SELF-MAP</span>
               <span>
-                <strong>M4 forbade A→A.</strong> That law is the crib-alignment wedge: ciphertext never equals plaintext at a position, so menus lock. E256’s un-reflector is an involution that <em>permits</em> fixed points, blinding known-plaintext placement and ciphertext-only cribbing of that form.
+                <strong>M4 forbade A→A.</strong> That law is the crib-alignment wedge: ciphertext never equals plaintext at a position, so menus lock. Fixture-v4 does not use a reflector or a reserved-pair mode; its bounded reciprocal center is <code>A_i^-1(A_i(x) XOR k_i)</code>.
               </span>
             </li>
             <li>
               <span className="mono">STATIC LEFT</span>
               <span>
-                <strong>Greek and left rotors sit still on short traffic.</strong> Pinning them collapsed my search by 676×—Turing’s reduction, still true in 2026. E256 drives all four active rotors from a 64-bit Galois LFSR every byte, so the “left wheels never move” assumption is dead.
+                <strong>Greek and left rotors sit still on short traffic.</strong> Pinning them collapsed my search by 676×—Turing’s reduction, still true in 2026. Fixture-v4 publishes a host-derived per-byte schedule, but the receipt does not establish resistance to an analogous external reduction.
               </span>
             </li>
             <li>
               <span className="mono">TEN PLUGS</span>
               <span>
-                <strong>The Steckerbrett was a 10-cable involution.</strong> Ghost menus die when they demand an eleventh pair; TensorLUT only rediscovers plugs when reciprocity is structural. E256 loads a full 128-pair base-256 plugboard from HKDF—no cable budget for a Welchman kill chain to exploit.
+                <strong>The Steckerbrett was a 10-cable involution.</strong> Ghost menus die when they demand an eleventh pair; TensorLUT only rediscovers plugs when reciprocity is structural. Fixture-v4 uses one full-byte plugboard at both ends of its path; that is an architecture fact, not cryptanalytic evidence.
               </span>
             </li>
             <li>
               <span className="mono">CODEBOOK</span>
               <span>
-                <strong>Day keys lived on paper that dissolved.</strong> Capture of one sheet burned the net. E256 derives session material from X25519 (optionally hybrid with ML-KEM-768) + <strong>HKDF-SHA512</strong>; Ed25519 identities bind hybrid HELLO/ACK against MitM. Ephemeral keys burn at session end.
+                <strong>Day keys lived on paper that dissolved.</strong> Capture of one sheet burned the net. E256’s host-side key derivation and transport sit outside the bounded fixture-v4 RTL receipt; no deployment-security claim follows from the KAT.
               </span>
             </li>
           </ul>
@@ -382,7 +334,8 @@ export function Enigma256Page() {
             <div className="kicker">Chronology</div>
             <h2>From M4 wound to 256-bit machine, step by step</h2>
             <p>
-              Each phase below is a finding from the U-534 campaign, then the architectural correction that became E256.
+              Each phase below is a finding from the U-534 campaign, then the bounded fixture-v4
+              response. The response is experimental architecture, not proof of a secure cipher.
             </p>
           </div>
           <div className="timeline">
@@ -394,85 +347,105 @@ export function Enigma256Page() {
                   Welchman menus, Naval trigrams, and Thetis cribs all assume a 26-symbol ring. A Metal cleartext batch can score every <code>26⁴</code> message key against a template in one shot. That density is why stochastic KPA is even thinkable on M4.
                 </p>
                 <p>
-                  E256 replaces the alphabet with the full byte space <code>0x00…0xFF</code>. Rotors, plugboard, and reflector are 256-entry tables. The classical menu graph and letter-match objective do not transfer; the machine speaks octets, not Kriegsmarine spelling.
+                  <E256Span /> uses the full byte space <code>0x00…0xFF</code>. The live day key has a plugboard plus 16 forward/reverse rotor pools and no reflector. The fixture-v4 receipt checks this implementation boundary; it does not claim that classical objectives cannot transfer or report external cryptanalysis.
                 </p>
               </div>
             </article>
 
             <article className="tl-item">
-              <div className="when">Phase B: Kill the self-stecker law</div>
-              <h3>The un-reflector blinds crib alignment.</h3>
+              <div className="when">Phase B: Replace the self-stecker law</div>
+              <h3>A conjugated-XOR center replaces the historical reflector.</h3>
               <div className="prose">
                 <p>
                   Every exact catalog negative and every Stochastic template bank still leaned on a machine that cannot encrypt a letter to itself. That invariant is how you place a crib before you search rings.
                 </p>
                 <p>
-                  The E256 reflector is still an involution—reciprocal encrypt/decrypt survives—but fixed points are allowed. Self-mapping is no longer a forbidden residue that points a Boolean board at the right offset.
+                  Fixture-v4 uses <code>A_i^-1(A_i(x) XOR k_i)</code>, where the host supplies
+                  <code> k_i</code> as an independent <code>centerMask</code>. There is no reflector,
+                  parity-selected center, or reserved pair in the live profile.
                 </p>
               </div>
             </article>
 
             <article className="tl-item">
               <div className="when">Phase C: Full-spectrum stecker</div>
-              <h3>Stop giving the kill chain a cable count.</h3>
+              <h3>Stop giving the test fixture a cable count.</h3>
               <div className="prose">
                 <p>
                   Phase 3 of the journal was the 10-plug trap: mathematical survivors that needed impossible boards. TensorLUT’s live arm freezes the M4 core and evolves a ≤10-pair involution by construction for the same reason—reciprocity and sparsity are the genotype.
                 </p>
                 <p>
-                  E256’s plugboard is a complete base-256 involution: 128 pairs, Fisher–Yates-derived from the day-key OKM. There is no “eleventh cable” rejection rule. The stecker space is no longer a 47-bit pocket the Bombe can squeeze.
+                  Fixture-v4’s plugboard is one 256-entry table used at ingress and egress. It is
+                  one of nine unique active tables but accounts for two of ten accesses. Those
+                  counts are functional facts, not a claim about a Bombe or external attack.
                 </p>
               </div>
             </article>
 
             <article className="tl-item">
-              <div className="when">Phase D: LFSR stepping</div>
-              <h3>Destroy the odometer that Turing pinned.</h3>
+              <div className="when">Phase D: Per-byte schedule</div>
+              <h3>Make ordering an explicit host/RTL contract.</h3>
               <div className="prose">
                 <p>
                   Historical rotors step like a mileage counter. On a 72-letter Thetis message the Greek wheel never turns; the left rotor’s notch drives nothing. That mechanical truth is why my engine pins those drums and why ring-AAAA and right-ring sweeps are even affordable.
                 </p>
                 <p>
-                  E256 clocks a 64-bit Galois LFSR (primitive taps 64, 63, 61, 60 → feedback <code>0xD800_0000_0000_0000</code>) on every byte. Step enables are <strong>not</strong> raw LFSR bits—live gen 5 uses bred <strong>cubic6</strong> six-tap folds so observable rotor motion does not hand Berlekamp–Massey a linear system. All wheels can move every symbol; static-left assumptions die.
+                  For every fixture-v4 byte, the host derives and transports <code>payload</code>,{' '}
+                  <code>centerMask</code>, and <code>absoluteByteCounter</code>. RTL validates the
+                  absolute counter. The center mask is independent; it is not selected by a
+                  captured rotor-step parity.
                 </p>
               </div>
             </article>
 
             <article className="tl-item">
-              <div className="when">Phase E: Ephemeral day and message keys</div>
-              <h3>No more dissolved key sheets.</h3>
+              <div className="when">Phase E: Host-derived day and byte material</div>
+              <h3>No reflector hidden in the day blueprint.</h3>
               <div className="prose">
                 <p>
                   M-Thetis died with its Grund table. Indicators <code>VROL NMKA</code> bought less than one bit because the starting-position book is gone. Sister traffic needed degarbling because paper and operators disagree.
                 </p>
                 <p>
-                  E256 splits control and data planes. Software runs X25519 and, on macOS 26+, hybrid ML-KEM (or X-Wing), then <strong>HKDF-SHA512</strong> into a day-key blueprint: plugboard shuffle, 16-rotor virtual pool, un-reflector. Each packet carries a plaintext nonce; a micro-HKDF picks Walzenlage (4 of 16), Grundstellung, and LFSR seed. Capture of one session does not decrypt the next.
+                  The live day key contains a plugboard plus 16 forward/reverse rotor pools. The
+                  host selects the active material and transports the per-byte tuple; fixture-v4
+                  does not contain a reflector. The validation receipt is not an HMAC-security or
+                  session-security proof.
                 </p>
               </div>
             </article>
 
             <article className="tl-item">
               <div className="when">Phase F: Silicon datapath</div>
-              <h3>Same contract in Swift and Verilog.</h3>
+              <h3>One compatibility tuple across host and RTL.</h3>
               <div className="prose">
                 <p>
-                  The Blue Team core is <code>enigma_256_core</code>: AXI-friendly BRAM load for plugboard / four rotors fwd+rev / reflector, then <code>load_state</code> for LFSR + positions, then a streaming <code>valid_in</code> byte path. Combinational scramble under current offsets, register the output, then step—matching the Swift oracle’s scramble-then-step order.
+                  The Blue Team core loads the active plugboard and four forward/reverse rotor pairs:
+                  9 unique tables and a 2,304-byte burst. One byte performs 10 table accesses because
+                  the plugboard is used twice. RTL validates <code>absoluteByteCounter</code> and has
+                  no HMAC.
                 </p>
                 <p>
-                  Control plane stays in Swift (CryptoKit HKDF, ECDH). Data plane is exercised on <strong>Apple Silicon SoftBus</strong> with iverilog/Yosys as the Red harness—no board on the critical path. Generation rolls ship as SoftBus genes plus NLFF Verilog rewrites.
+                  The exact live tuple is{' '}
+                  <code>E256/v2/gen0/fa246e9cba9009a4799e5a81722a9b14e9a67293d9621b45985c5f3e620865d4/fixture-v4</code>.
+                  Profile and KAT publication guards fail closed on mismatches; human acceptance is
+                  still open.
                 </p>
               </div>
             </article>
 
             <article className="tl-item">
               <div className="when">Phase G: Red vs Blue</div>
-              <h3>Evolve the cipher against the same engines that hunt M4.</h3>
+              <h3>Record one bounded optimizer result without turning it into security.</h3>
               <div className="prose">
                 <p>
-                  HELUT already breeds alien netlists, melts LUT INIT tables, and scores stecker involutions. That Red Team is the continuous adversary on this Mac: SoftBus KPA, fail-closed <code>ent</code>, and TensorLUT against expanding cones (NLFF → offsets). If pressure crosses threshold, Blue mutates NLFF folds and HKDF generation labels via <code>--enigma256-campaign-mutate</code>.
+                  The fixture-v4 TensorLUT target is a 366-LUT6 scramble cone with independent
+                  <code> center_mask</code>. Its recorded verdict is <code>blue_hold</code>, with
+                  <code> final_crypto -291592.781250</code> and <code>final_nonbinary 1217</code>.
                 </p>
                 <p>
-                  Boundary rule: past-NLFF offset cone is fair game; full-core BRAM soft-map stays deferred. SoftBus is the field fabric—the cipher does not wait for a Zynq.
+                  This is only bounded optimizer failure. The target is not HMAC or the full E256
+                  core, and the result is not a security level, work factor, IND-CPA claim, or
+                  external cryptanalysis result.
                 </p>
               </div>
             </article>
@@ -484,64 +457,73 @@ export function Enigma256Page() {
         <div className="shell split">
           <div className="section-head" style={{ marginBottom: 0 }}>
             <div className="kicker">Implementation</div>
-            <h2>What is on disk today</h2>
+            <h2>What the fixture-v4 receipt establishes</h2>
             <p>
-              Spec in <code>Enigma256.md</code>. Oracle and KDF in <code>Sources/HELUTCore/Enigma256.swift</code>. FPGA datapath in <code>enigma_256_core.v</code>. Bridge and golden session export in <code>Enigma256Bridge.swift</code>. Reciprocity and HKDF round-trips are gated by <code>Enigma256Tests</code>.
+              The atomic KAT covers 1,024 bytes, 9 tables, 10 traces, and 25 artifacts. Equality is
+              260/65536 with z=0.250; formal is 1/1 and the suite is 49/49. The receipt is{' '}
+              <code>logs/e256-v2-gen0-fixture-v4-validation.json</code>.
             </p>
           </div>
           <ul className="stack-list">
             <li>
+              <span className="mono">PROFILE</span>
+              <span>
+                <strong>Exact identity:</strong>{' '}
+                <code>E256/v2/gen0/fa246e9cba9009a4799e5a81722a9b14e9a67293d9621b45985c5f3e620865d4/fixture-v4</code>.
+              </span>
+            </li>
+            <li>
+              <span className="mono">CENTER</span>
+              <span>
+                <strong>Reciprocal center:</strong> <code>A_i^-1(A_i(x) XOR k_i)</code>, with the
+                host-supplied <code>centerMask</code> as <code>k_i</code>. No reflector or
+                reserved-pair mode is present.
+              </span>
+            </li>
+            <li>
+              <span className="mono">WIRE</span>
+              <span>
+                <strong>Host/RTL boundary:</strong> host derives and transports <code>payload</code>,{' '}
+                <code>centerMask</code>, and <code>absoluteByteCounter</code>; RTL validates the
+                counter and contains no HMAC.
+              </span>
+            </li>
+            <li>
               <span className="mono">LOAD</span>
               <span>
-                <strong>Table port:</strong> <code>wr_sel</code> 0…9 fills plugboard, R1–R4 forward/reverse, reflector. Software pushes the active slot only—day pool stays off-chip until Walzenlage picks four rotors.
+                <strong>Active tables:</strong> plugboard plus R1–R4 forward/reverse, 9 unique
+                tables, 2,304-byte burst, and 10 accesses because the plugboard is used twice.
               </span>
             </li>
             <li>
-              <span className="mono">STEP</span>
+              <span className="mono">KAT</span>
               <span>
-                <strong>Galois + NLFF:</strong> feedback <code>0xD800_0000_0000_0000</code>. Live field is gen 5 balanced cubic6 (~0.5 step rate, low φ). Blue evolves stronger stepping—not TensorLUT-only hardness. Genes in <code>Fixtures/enigma256_generation.json</code>. Zero seed forced to 1.
+                <strong>Bounded parity:</strong> 1,024 bytes / 9 tables / 10 traces / 25 artifacts;
+                equality 260/65536 (z=0.250), formal 1/1, suite 49/49.
               </span>
             </li>
             <li>
-              <span className="mono">AEAD</span>
+              <span className="mono">GUARD</span>
               <span>
-                <strong>Integrity:</strong> HMAC-SHA512 tag on <code>nonce‖ciphertext</code> (E256 v2). Wire verifies before SoftBus/AXI. <code>Enigma256ProtectedSession</code> forbids nonce reuse under one IKM.
-              </span>
-            </li>
-            <li>
-              <span className="mono">BURST</span>
-              <span>
-                <strong>Table DMA:</strong> AXIS loader wired into <code>enigma_256_axi</code> (CTRL[1] arm, 2,560 B). SoftBus burst + optional <code>SCA_CTRL</code> jitter. Co-sim default is AXIS.
+                <strong>Publication fails closed:</strong>{' '}
+                <code>testCanonicalGoldenPublicationRejectsMismatchedProfile</code>,{' '}
+                <code>testProfileKATSplitPublicationFailsClosed</code>, and formal integrity guard
+                the bounded profile/KAT publication path.
               </span>
             </li>
             <li>
               <span className="mono">RED</span>
               <span>
-                <strong>TensorLUT cones:</strong> NLFF → offsets → <strong>scramble fragment</strong> (~295 LUT6, frozen reciprocal R1…R4 + un-UKW). Battery: <code>Scripts/enigma256_scramble_frag_battery.sh</code>. Full BRAM flatten deferred.
+                <strong>TensorLUT scope:</strong> 366-LUT6 scramble cone with independent
+                <code> center_mask</code>; <code>blue_hold</code>, final_crypto -291592.781250,
+                final_nonbinary 1217. Not HMAC, not the full core, and not a work factor.
               </span>
             </li>
             <li>
-              <span className="mono">GATE</span>
+              <span className="mono">OPEN</span>
               <span>
-                <strong>Fail-closed:</strong> SoftBus <code>ent</code> (PRNG PT) + structured KPA (partial leak + day-only joint). Campaign default; <code>--no-gates</code> to skip.
-              </span>
-            </li>
-            <li>
-              <span className="mono">RB</span>
-              <span>
-                <strong>Campaign:</strong> <code>Scripts/enigma256_rb_campaign.sh</code> — gates, SoftBus KPA ledger, <code>--hard-red</code> / <code>--wide</code> (offset cone) with TensorLUT <code>expect-hold</code>.
-              </span>
-            </li>
-            <li>
-              <span className="mono">PATH</span>
-              <span>
-                <strong>Byte scrambler:</strong> plugboard → four forward rotors with offset add/sub → un-reflector → four reverse rotors → plugboard. Encrypt equals decrypt under the same state machine.
-              </span>
-            </li>
-            <li>
-              <span className="mono">HOLD</span>
-              <span>
-                <strong>Full-core melt:</strong> NLFF cone is fair game; do not soft-map the BRAM datapath until a campaign generation explicitly asks for it.
+                <strong>E256-003:</strong> pending human acceptance. Until that review closes, this
+                remains experimental, not for real data, and not a secure-deployment claim.
               </span>
             </li>
           </ul>
@@ -552,69 +534,45 @@ export function Enigma256Page() {
         <div className="shell">
           <div className="section-head">
             <div className="kicker">The Plan</div>
-            <h2>What ships next, in order of honesty</h2>
+            <h2>What remains, in order of honesty</h2>
             <p>
-              A cipher that claims to outrun HELUT must be graded the way the journal grades the Bombe: controls first, then adversarial pressure, then SoftBus generation rolls on Apple Silicon.
+              Receipt completion and optimizer failure are evidence cells, not a security proof.
+              Human review remains a separate gate.
             </p>
           </div>
 
           <div className="timeline">
             <article className="tl-item">
-              <div className="when">1 — Done</div>
-              <h3>Lock the reciprocal oracle and Verilog contract.</h3>
+              <div className="when">1 — Receipt complete</div>
+              <h3>Publish the bounded fixture-v4 functional evidence.</h3>
               <div className="prose">
                 <p>
-                  Identity and HKDF-derived wirings round-trip; LFSR feedback matches the core; scramble-before-step order is shared. That is the existence proof of a correct machine.
+                  The 1,024-byte KAT, 9-table/10-trace/25-artifact bundle, equality check, formal
+                  check, and 49/49 suite are recorded in the fixture-v4 validation receipt.
                 </p>
               </div>
             </article>
 
             <article className="tl-item">
-              <div className="when">2 — Done</div>
-              <h3>Control plane: SHA-512 KDF, hybrid PQ, Ed25519 auth.</h3>
+              <div className="when">2 — Bounded result</div>
+              <h3>Keep the TensorLUT verdict inside its tested cone.</h3>
               <div className="prose">
                 <p>
-                  HKDF-SHA512 and PBKDF2-HMAC-SHA512 feed the day key. Hybrid <code>X25519_SS ‖ ML-KEM_SS</code> resists store-now-decrypt-later; Ed25519-signed hybrid wire frames close MitM—still zero Verilog change on that path.
+                  The 366-LUT6 scramble cone with independent <code>center_mask</code> ended
+                  <code> blue_hold</code>. That says this bounded optimizer did not finish a binary
+                  solution; it says nothing about HMAC, the full core, deployment security, or a
+                  cryptanalytic work factor.
                 </p>
               </div>
             </article>
 
             <article className="tl-item">
-              <div className="when">3 — Done</div>
-              <h3>Data-plane hardening: NLFF, AEAD, nonce guard, burst, jitter.</h3>
+              <div className="when">3 — OPEN</div>
+              <h3>E256-003 awaits human acceptance.</h3>
               <div className="prose">
                 <p>
-                  NLFF stepping in Verilog and Swift; HMAC-SHA512 AEAD on wire/file with verify-before-fabric; monotonic nonce sessions; AXIS/SoftBus table burst; optional stream jitter for DPA. Dual-rail masked LUTs remain the high-assurance synthesis path.
-                </p>
-              </div>
-            </article>
-
-            <article className="tl-item">
-              <div className="when">4 — Done</div>
-              <h3>AXIS table burst + deliberate TensorLUT on NLFF cone.</h3>
-              <div className="prose">
-                <p>
-                  <code>enigma_256_axi</code> loads day tables over AXI-Stream (2,560 bytes; CTRL[1] arms). Yosys keeps BRAMs for FPGA-style synth; TensorLUT hits the 4-LUT NLFF cone—baseline crypto 0, and λ=0 explore + discrete polish recovers a binary elite (`squeeze_survived`). Listen/connect default to hybrid+AEAD. Full-core soft-map stays deferred.
-                </p>
-              </div>
-            </article>
-
-            <article className="tl-item">
-              <div className="when">5 — Live</div>
-              <h3>Gen 5 SoftBus field with fail-closed gates.</h3>
-              <div className="prose">
-                <p>
-                  Balanced cubic6 genes; <code>ent</code> + structured KPA gate every campaign; gen-5 Red battery holds. No Zynq on the critical path.
-                </p>
-              </div>
-            </article>
-
-            <article className="tl-item">
-              <div className="when">6 — Live</div>
-              <h3>Push Red past NLFF: offset next-state cone.</h3>
-              <div className="prose">
-                <p>
-                  <code>enigma_256_scramble_frag_combo</code> is a frozen reciprocal path (R1…R4 + un-UKW) plus NLFF/offsets (~295 LUT6). Scramble-frag battery + campaign <code>--wide</code> expect TensorLUT <code>blue_hold</code>. Full-core BRAM melt stays deferred.
+                  Keep fixture-v4 experimental and away from real data until the receipt receives
+                  explicit human acceptance. No production or secure-deployment status is implied.
                 </p>
               </div>
             </article>
@@ -628,16 +586,21 @@ export function Enigma256Page() {
             <div className="kicker">Why rebuild it</div>
             <h2>The same footsteps, facing forward</h2>
             <p>
-              Turing’s reductions still work on 1945 metal because the metal never changed. Rebuilding Enigma without deleting those reductions would be theater. E256 is the opposite gesture: take every wedge the journal proved—self-stecker law, static left wheels, thin plugboards, paper day keys—and engineer them out, then invite the same HELUT stack to try again.
+              Turing’s reductions still work on 1945 metal because the metal never changed. The
+              fixture-v4 exercise turns those historical wedges into explicit architecture and
+              test boundaries, then asks the same <HelutSpan /> stack a bounded question. It does
+              not establish that the resulting experimental cipher is secure.
             </p>
           </div>
           <div className="prose">
             <p>
-              The ghost message remains historically unbroken. The machine that produced it does not get a sequel that fails the same way. Spec, oracle, and core are the first Blue Team commit; the Red Team loop is the promise that this cipher keeps evolving under fire.
+              The ghost message remains historically unbroken. Fixture-v4 is a research artifact
+              with an open human-review gate, not a deployed successor and not a claim that the
+              historical weaknesses have been eliminated under external cryptanalysis.
             </p>
             <p>
               Campaign ledger:{' '}
-              <Link to="/projects/p1030680/journal">Turing Complete</Link>
+              <Link to="/projects/p1030680/journal"><NaziBlaster9000Span /></Link>
               {' · '}
               Hunt overview:{' '}
               <Link to="/enigma">Enigma</Link>

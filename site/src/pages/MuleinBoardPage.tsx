@@ -1,4 +1,7 @@
 import { Link } from 'react-router-dom'
+import { HelutSpan } from '../HELUTSpan'
+import { NaziBlaster9000Span } from '../NaziBlaster9000Span'
+import { Fahrenheit261Span } from '../Fahrenheit261Span'
 
 export function MuleinBoardPage() {
   return (
@@ -16,27 +19,53 @@ export function MuleinBoardPage() {
               </Link>
               {' · '}Mulein Board
             </div>
-            <h2>A diagonal board that counts contradictions</h2>
+            <h2>The Mulein board: a diagonal board that counts contradictions</h2>
             <p className="lede">
               On a physical bombe, a contradiction <em>is</em> electricity finding a second path through the diagonal board. The hypothesis short-circuits, the drum advances, and the machine moves on. There is no register to count in, and no way to ask a wire to keep going after it has already conducted. Copper cannot answer the question <em>how many</em> contradictions.
             </p>
             <p className="lede" style={{ marginTop: '1rem' }}>
               In silicon it can. The Mulein board asks: <strong>how few menu edges must I delete before this rotor setting closes consistently?</strong> Delete up to <em>t</em> of them and accept the setting. At tolerance zero it is Gordon Welchman's board, bit for bit. Above zero it is a machine the 1940s could not have built — not slowly, but at all.
             </p>
+            <p className="lede" style={{ marginTop: '1rem' }}>
+              <NaziBlaster9000Span /> is the formal name of the unified P1030680 Mulein search machine and overall campaign. <Fahrenheit261Span /> is its historical 261-entry canonical-menu/Future campaign; only identity Future 0 ran in that bounded slice, so the name never substitutes inventory for coverage.
+            </p>
           </div>
 
           <div className="status-strip">
             <div className="stat">
-              <div className="label">Status</div>
-              <div className="value">Graded on known keys</div>
+              <div className="label">Mechanism</div>
+              <div className="value">Known-key PASS</div>
             </div>
             <div className="stat">
-              <div className="label">Kernel vs host</div>
-              <div className="value">0 / 192 mismatches</div>
+              <div className="label">Target prefixes</div>
+              <div className="value">t1 3/24 · indel 144/237</div>
             </div>
             <div className="stat">
-              <div className="label">Not claimed</div>
-              <div className="value">No decrypt · No target verdict</div>
+              <div className="label">Middle × right</div>
+              <div className="value">Suspended 1/24</div>
+            </div>
+            <div className="stat">
+              <div className="label"><Fahrenheit261Span /></div>
+              <div className="value">W4 · 1/261 · 256 settings · 0 hits</div>
+            </div>
+            <div className="stat">
+              <div className="label"><NaziBlaster9000Span /></div>
+              <div className="value">RUNNING · 628 Futures · outcomes unknown</div>
+            </div>
+          </div>
+
+          <div className="prose" style={{ marginTop: '1.5rem' }}>
+            <p>
+              <strong>Listen while you read.</strong> The <HelutSpan /> theme is presented here as an optional companion to the board story. Playback never starts automatically.
+            </p>
+            <audio className="theme-song-player" controls preload="metadata">
+              <source src="/HELUT.mp3" type="audio/mpeg" />
+              Your browser does not support the audio element.
+            </audio>
+            <div className="cta-row">
+              <a className="btn ghost" href="/HELUT.mp3" download>
+                Download HELUT.mp3
+              </a>
             </div>
           </div>
         </div>
@@ -112,7 +141,7 @@ export function MuleinBoardPage() {
             <div className="kicker">Architecture</div>
             <h2>Two failure modes, two mechanisms</h2>
             <p>
-              Transcription error is edit distance, and edit distance has two halves. They need different machinery — and the indel half is <em>not</em> part of this board, which is worth being precise about.
+              Transcription error is edit distance, and edit distance has two halves. They need different machinery inside one campaign system: substitution relaxes closure, while an indel changes Future geometry. Keeping that distinction visible is what makes a combined hardware receipt interpretable.
             </p>
           </div>
           <ul className="stack-list">
@@ -140,7 +169,10 @@ export function MuleinBoardPage() {
               And the search is small if you use the historical structure: Kriegsmarine traffic was sent in four-letter groups, so a <em>group</em> going missing puts the splice on a multiple of four — roughly 17 candidate positions per crib placement, not 72.
             </p>
             <p>
-              The two compose, since a spliced menu can also be run at tolerance ≥ 1. But neither contains the other. Together they make the bombe <em>edit-distance aware</em>; the board is only the substitution half.
+              The two compose, since a spliced menu can also be run at tolerance ≥ 1, but neither contains the other. The deletion-tolerant diagonal board is the substitution mechanism; Future geometry is the indel mechanism. Together they make the campaign machine <em>edit-distance aware</em> without pretending the operations are equivalent.
+            </p>
+            <p>
+              <strong>The production path is unified hardware.</strong> One outer TensorLUT lane owns one rotor setting and one shared 80×26 scrambler trail. Parameterized Verilog bank slots own explicit Future geometry and seeds, perform exact-first one-edge repair, and hold complete tagged receipts until accepted. The host compiles evidence into descriptors; it does not run a separate software closure in place of the RTL.
             </p>
           </div>
         </div>
@@ -152,7 +184,7 @@ export function MuleinBoardPage() {
             <div className="kicker">Evidence</div>
             <h2>What is actually proven</h2>
             <p>
-              Every number below is a known-key grade against P1030684 — published key, same day, same boat — following the standing rule in this project: grade the machinery against a key it was not told, <em>before</em> pointing it at the unbroken message.
+              Mechanism claims below begin with known-key grades against P1030684 — published key, same day, same boat — following the standing rule in this project: grade machinery against a key it was not told before pointing it at the unbroken message. The legacy target prefixes remain incomplete; the unified bank now also has one separately bounded target receipt.
             </p>
           </div>
           <div className="prose">
@@ -167,6 +199,21 @@ export function MuleinBoardPage() {
             </p>
             <p>
               <strong>The pinned-ring flag, graded two-sided.</strong> A flag that <em>narrows</em> the search space can silently exclude the answer, so it earns the same scrutiny: pinning the control's own ring reproduces the full break with all ten plugs, IC 0.064 and tail −2.848, while pinning a wrong ring dies at the board.
+            </p>
+            <p>
+              <strong>Bounded target evidence on the legacy Metal path.</strong> Tolerance 1 × right rings is suspended at <strong>3/24</strong>, all three completed placements dead. Post-gap δ=4 × right rings is suspended at <strong>144/237</strong>; entry 111's eight raw stops produce zero valid ≤10-plug completions. Full middle × right rings is suspended at <strong>1/24</strong>, with the completed placement dead over 4.152×10<sup>11</sup> settings. These are local negatives, not completed arms and not a decrypt.
+            </p>
+            <p>
+              <strong>Four-surface production parity.</strong> At <code>BANK_LANES=1</code>, clean exact hit, exact negative, combined post-gap plus one-edge repair, and transmitted step 79 emit identical full held receipts through source RTL, post-Yosys RTL, clear Yosys-JSON simulation, and cleartext Float TensorLUT, including backpressure. That is a known-key Boolean mechanism grade, <strong>not FHE</strong>.
+            </p>
+            <p>
+              <strong><Fahrenheit261Span /> bank selection.</strong> The deterministic P1030680 inventory stages <strong>261 entries</strong> — 24 identity plus 237 post-gap δ=4. All widths <code>1/2/4/8/16</code> synthesize, but complete-receipt medians of 233.777 / 264.719 / <strong>276.035</strong> / 273.890 / 230.780 receipts per second selected <code>BANK_LANES=4</code>. The winner was measured at runtime, not inferred from graph size.
+            </p>
+            <p>
+              <strong><Fahrenheit261Span /> bounded target execution.</strong> Protocol-v3 run <code>sha256-e6dc10d4…2fc1360</code> covered only shell 0 <code>B/beta/IV-III-VIII/AAAA</code>, identity Future 0, and settings <code>0..&lt;256</code>. It completed <strong>16/16 synchronized chunks and 6,656/6,656 canonical receipt projections, with zero hardware positives and zero BREAK gates</strong>. Exact-prefix resume revalidated all rows and appended nothing; the runner commits every job, derives hit/gate state, host-replays persisted hits, halts on a prior gate, and enforces one writer. Receipt: <code>logs/p1030680-mulein-unified-smoke-v3.jsonl</code>, SHA-256 <code>687d0838…2b1f7e7d</code>. This is a clean local negative. The other 260 Futures, remaining settings, and other shells were not executed, so 261 staged must never be read as 261 covered.
+            </p>
+            <p>
+              <strong><NaziBlaster9000Span /> operational arm.</strong> Its separate 628-Future inventory preflight completed shell 0 and setting 0: 628/628 chunks and 16,328 checked receipts retained 15 host-replayed one-edge physical candidates, all non-exact, with <strong>0 exact hits and 0 BREAK gates</strong>. The settings <code>1..&lt;256</code> production stripe across all 628 Futures is <strong>RUNNING by operator report</strong> in <code>logs/p1030680-mulein-operational-settings-000001-000256-v3.jsonl</code>; outcomes are unknown and no live receipt grade, hit, gate, key, plaintext, or decrypt is claimed.
             </p>
           </div>
         </div>
@@ -192,7 +239,7 @@ export function MuleinBoardPage() {
               Crib length does not predict inflation. What governs it is the menu's <strong>loop structure</strong>, because tolerance <em>spends</em> redundancy and only a loop-rich menu has enough to spend. Look at which placements detonate and it is obvious in hindsight: the ones where the exact board was <em>already</em> weak. <strong>Tolerance amplifies an under-determined menu rather than rescuing it.</strong>
             </p>
             <p>
-              The replacement rule is more useful than the one I lost. Tolerance is a <strong>per-menu decision, pre-qualified by measurement</strong> — never a global switch. On the target's 24 strongest placements that gate passes with <em>zero</em> inflation at tolerance 1, at a measured 15.3× cost factor, better than the 41× combinatorial ceiling because most candidate deletions are rejected cheaply. Tolerance 2 fails the gate on three of those menus, and the worst offender is the weakest menu in the set. Exactly as the corrected rule predicts.
+              The replacement rule is more useful than the one I lost. Tolerance is a <strong>per-menu decision, pre-qualified by measurement</strong> — never a global switch. On the target's 24 strongest placements that gate passes with <em>zero</em> inflation at tolerance 1. Conflict-directed one-edge repair measures a <strong>6.2×</strong> cost factor rather than the 41× combinatorial ceiling, because the exact pass runs first, candidate deletions are ordered by observed conflict, and most closures die early. Tolerance 2 fails the gate on three of those menus, and the worst offender is the weakest menu in the set. Exactly as the corrected rule predicts.
             </p>
             <p>
               One more trap, caught by the tool's own banner rather than by me: at crib lengths of 26 letters or more, a rings-AAAA pass covers <strong>zero</strong> of the 26 ring phases. A tolerance run there would have been very nearly vacuous on the long menus. Right-ring coverage is the minimum that carries a real negative.
@@ -221,7 +268,7 @@ export function MuleinBoardPage() {
               Second, <strong>the conflict surfaces at the wrong edge.</strong> Whichever edge happens to be visited when the inconsistency becomes visible is the one that gets blamed — and that is usually a perfectly <em>correct</em> edge, so dropping it does not help and the real culprit stays in.
             </p>
             <p>
-              Enumerating the deleted set instead is order-independent and reuses the already-validated exact closure, so there is exactly one implementation of the board's logic in the repository. A second guard exists for a subtler failure: the seed letter must still touch a surviving edge. Without it, a sufficiently reduced board constrains nothing at all, and then <em>every</em> setting "survives" — a silent way to turn a bombe into a random number generator.
+              Enumerating the deleted set instead is order-independent and reuses the already-validated exact closure. Within the legacy host path, both entry points share one implementation of the board logic. The production RTL is intentionally independent and is cross-graded against the Swift oracle through all four surfaces. A second guard exists for a subtler failure: the seed letter must still touch a surviving edge. Without it, a sufficiently reduced board constrains nothing at all, and then <em>every</em> setting "survives" — a silent way to turn a bombe into a random number generator.
             </p>
           </div>
         </div>
@@ -240,13 +287,13 @@ export function MuleinBoardPage() {
             <li>
               <span className="mono">NO BREAK</span>
               <span>
-                <strong>This is not a decrypt.</strong> P1030680 remains unbroken, and the board has produced no verdict against it yet — pre-qualification passes and the arm is running. Nothing here is evidence that the target <em>is</em> garbled: sensitivity describes the board's behaviour under corruption, not the state of the ciphertext.
+                <strong>This is not a decrypt.</strong> P1030680 remains unbroken. The legacy target arms are incomplete: tolerance 1 is 3/24, post-gap δ=4 is 144/237, and full middle × right coverage is 1/24. The unified bank adds one clean local negative—shell 0, identity Future 0, settings <code>0..&lt;256</code>, zero positives—but the other 260 staged Futures and broader shell/setting space remain open. Nothing here proves the target <em>is</em> garbled or missing a group.
               </span>
             </li>
             <li>
               <span className="mono">SCOPE</span>
               <span>
-                Tolerance applies to <strong>menu edges, not to the diagonal board itself</strong>. It is an algebraic relaxation of the deduction — it nominates no letters and makes no claim about which were mis-read. Indels are a separate mechanism and are not implemented by this board.
+                Tolerance applies to <strong>menu edges, not to the diagonal board itself</strong>. It is an algebraic relaxation of deduction and nominates no letters. Indels remain a distinct exact-board geometry change. The unified hardware can carry both descriptors in one receipt path without collapsing their meanings.
               </span>
             </li>
             <li>
@@ -256,9 +303,15 @@ export function MuleinBoardPage() {
               </span>
             </li>
             <li>
+              <span className="mono">CLEARTEXT</span>
+              <span>
+                The Verilog→Yosys→Float TensorLUT→Metal path on this page is <strong>cleartext hardware evaluation</strong>. Trivial Float TensorLUT is not <HelutSpan />'s encrypted torus path, and its throughput is not an FHE result.
+              </span>
+            </li>
+            <li>
               <span className="mono">NAMING</span>
               <span>
-                "Mulein board" is a local name, chosen because the contribution sits in the same structural slot Welchman's diagonal board did — a new board on an existing bombe, not a new bombe. In writing, the mechanism name is <strong>deletion-tolerant diagonal board</strong>. Full design notes and every receipt path live in <code>directives/mulein-board.md</code>; the campaign record is <Link to="/projects/p1030680/journal">the ledger</Link>, Phase 51.
+                "Mulein board" is a local name, chosen because the contribution sits in the same structural slot Welchman's diagonal board did — a new board on an existing bombe, not a new bombe. In writing, the substitution mechanism is the <strong>deletion-tolerant diagonal board</strong>; the indel mechanism is explicit Future geometry. Full design notes and receipt paths live in <code>directives/mulein-board.md</code>; the campaign record is <Link to="/projects/p1030680/journal">the ledger</Link>, Phases 51.12–51.14.
               </span>
             </li>
           </ul>

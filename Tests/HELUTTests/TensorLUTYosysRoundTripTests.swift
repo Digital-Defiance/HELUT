@@ -345,11 +345,14 @@ final class TensorLUTBaselineRegenerationTests: XCTestCase {
     ///  - ports are ordered by net id, not by port name. Both are deterministic;
     ///    only the former matches what the original emit recorded (`in_3 … in_11`).
     func testEmitReproducesCommittedM4Baseline() throws {
-        guard let netlistPath = repoFile("enigma_m4_netlist.json"),
-              let committedPath = repoFile("enigma_m4_tensorlut_baseline.v")
-        else {
-            throw XCTSkip("enigma_m4 netlist / baseline artifact not present")
-        }
+        let netlistPath = try XCTUnwrap(
+            repoFile("Generated/Netlists/Enigma/enigma_m4_netlist.json"),
+            "checked-in canonical M4 netlist is missing"
+        )
+        let committedPath = try XCTUnwrap(
+            repoFile("Generated/TensorLUT/EnigmaM4/enigma_m4_tensorlut_baseline.v"),
+            "checked-in canonical M4 TensorLUT baseline is missing"
+        )
 
         let yosys = loadYosysNetlist(from: netlistPath)
         guard let (_, module) = yosys.modules.first(where: { !$0.value.cells.isEmpty })

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { NaziBlaster9000Span } from '../NaziBlaster9000Span'
 
 export function EnigmaPage() {
   return (
@@ -72,7 +73,7 @@ export function EnigmaPage() {
       <section className="band">
         <div className="shell">
           <div className="section-head">
-            <div className="kicker">Turing Complete</div>
+            <div className="kicker"><NaziBlaster9000Span /></div>
             <h2>Closing the net, step by step.</h2>
             <p>
               In cryptography, proving where the answer *isn't* is just as important as finding where it is. This is a brief look at the ghosts I have already chased away on my path to the true answer.

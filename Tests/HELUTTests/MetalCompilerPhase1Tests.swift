@@ -324,6 +324,13 @@ final class MetalCompilerPhase1Tests: XCTestCase {
         let bk = bootstrapKey(secret: secret, params: params, rng: &rng)
         let twoN = 2 * degree
         let scale = rotationScale(polynomialDegree: degree)
+        let job = MetalGGSW.NetlistLUTJob(
+            name: "identity",
+            truthTable: truth,
+            inputWireIds: [1],
+            outputWireId: 2
+        )
+        var sawRoundUp = false
         for bit in [UInt32(0), 1] {
             let ct = encryptLWERotationNative(
                 message: bit, secret: secret.lweSecret, twoN: twoN, rng: &rng
@@ -347,7 +354,26 @@ final class MetalCompilerPhase1Tests: XCTestCase {
                 bit
             )
             XCTAssertEqual(MetalBRControl.lastTelemetry.ring, "ntt")
+
+            sawRoundUp = sawRoundUp || (cpu.a + [cpu.b]).contains {
+                ($0 % scale) >= (scale >> 1)
+            }
+            let expectedRefresh = publicRefreshBit(cpu, twoN: twoN, scale: scale)
+            MetalBRControl.overrideLowering = .tiledKernel
+            let hostNetlist = try MetalGGSW.evaluateTopoNetlistSingleGraph(
+                jobs: [job], primaryWires: [1: ct], bootstrapKey: bk, scale: scale,
+                device: device, commandQueue: queue, inputPacking: .rotationNative
+            )
+            MetalBRControl.overrideLowering = .fused
+            let graphNetlist = try MetalGGSW.evaluateTopoNetlistSingleGraph(
+                jobs: [job], primaryWires: [1: ct], bootstrapKey: bk, scale: scale,
+                device: device, commandQueue: queue, inputPacking: .rotationNative
+            )
+            MetalBRControl.overrideLowering = nil
+            XCTAssertEqual(hostNetlist[2], expectedRefresh)
+            XCTAssertEqual(graphNetlist[2], expectedRefresh)
         }
+        XCTAssertTrue(sawRoundUp, "regression vector must exercise half-step rounding")
     }
 
     func testSecondBlindRotateHitsPolyMulCache() throws {

@@ -1,0 +1,130 @@
+{
+  "budget_profile": "bounded",
+  "compatibility_key": "E256/v2/gen0/2a9f54c70a1619805a911758158f1e2204b0fd96c35102a9db5f4575aeb40cb0/fixture-v3",
+  "cone": "nlff",
+  "controls_only": false,
+  "created_utc": "2026-08-24T23:40:41.334978Z",
+  "fixture_schema_version": 3,
+  "git_dirty": true,
+  "git_head": "019d15abf62d1ed3c7612dc90ffdf318c59ada7c",
+  "git_status_sha256": "2585c2b1e7e67a88726e616635a9512e63713e572bb2fcdb07b8c402c4319500",
+  "helut_binary": "/Volumes/Code/HELUT/.build/release/helut",
+  "helut_binary_sha256": "da73a888de2d00d28db5fe8c7603333b3b732298b40ce0516720f97152b7c579",
+  "macos_version": "26.6.1",
+  "matrix": [
+    {
+      "explore_gens": 16,
+      "name": "control-planted-a",
+      "polish_gens": 8,
+      "polish_lambda": 0.0,
+      "population": 8,
+      "role": "planted-easy",
+      "seed": 14833185
+    },
+    {
+      "explore_gens": 16,
+      "name": "control-planted-b",
+      "polish_gens": 8,
+      "polish_lambda": 0.0,
+      "population": 8,
+      "role": "planted-easy",
+      "seed": 12648430
+    },
+    {
+      "explore_gens": 16,
+      "name": "control-null-a",
+      "polish_gens": 8,
+      "polish_lambda": 0.0,
+      "population": 8,
+      "role": "contradictory-null",
+      "seed": 14833185
+    },
+    {
+      "explore_gens": 16,
+      "name": "control-null-b",
+      "polish_gens": 8,
+      "polish_lambda": 0.0,
+      "population": 8,
+      "role": "contradictory-null",
+      "seed": 12648430
+    },
+    {
+      "explore_gens": 48,
+      "name": "hard0",
+      "polish_gens": 24,
+      "polish_lambda": 0.0,
+      "population": 24,
+      "role": "current",
+      "seed": 14833185
+    },
+    {
+      "explore_gens": 40,
+      "name": "seedA",
+      "polish_gens": 20,
+      "polish_lambda": 0.0,
+      "population": 16,
+      "role": "current",
+      "seed": 12648430
+    },
+    {
+      "explore_gens": 40,
+      "name": "seedB",
+      "polish_gens": 20,
+      "polish_lambda": 0.0,
+      "population": 16,
+      "role": "current",
+      "seed": 195936478
+    },
+    {
+      "explore_gens": 32,
+      "name": "lam1",
+      "polish_gens": 16,
+      "polish_lambda": 1.0,
+      "population": 16,
+      "role": "current",
+      "seed": 14833201
+    },
+    {
+      "explore_gens": 32,
+      "name": "lam3",
+      "polish_gens": 16,
+      "polish_lambda": 3.0,
+      "population": 16,
+      "role": "current",
+      "seed": 14833203
+    },
+    {
+      "explore_gens": 64,
+      "name": "longex",
+      "polish_gens": 16,
+      "polish_lambda": 0.0,
+      "population": 16,
+      "role": "current",
+      "seed": 14833217
+    },
+    {
+      "explore_gens": 24,
+      "name": "fatpop",
+      "polish_gens": 16,
+      "polish_lambda": 0.0,
+      "population": 32,
+      "role": "current",
+      "seed": 14833233
+    }
+  ],
+  "profile_fixture": "Fixtures/enigma256_generation.json",
+  "profile_fixture_sha256": "9348abd117f7561785a176f227436dee9db162d07408ae9103836a8011c65944",
+  "profile_sha256": "2a9f54c70a1619805a911758158f1e2204b0fd96c35102a9db5f4575aeb40cb0",
+  "profile_tag": "v2-gen0-fixture3-2a9f54c70a16",
+  "receipt_sha256": "5c5bc931a145048037ec420b2c0c47ff310570e963bd45b8262f18a1640f0027",
+  "run_directory": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-bounded/nlff",
+  "run_id": "e256-task4-bounded",
+  "schema": 1,
+  "scope": "bounded TensorLUT optimizer run; in-sample only; not a security claim or work factor",
+  "source_netlist": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-bounded/nlff/source-netlist.json",
+  "source_netlist_sha256": "b6e027e8b3d090496444c1814c45d37250533224a4bd9c5537faf4a7024a2eb3",
+  "swift_version": "swift-driver version: 1.148.6 Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)",
+  "synthesis_log": "logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-bounded/nlff/synthesis.console.txt",
+  "synthesis_log_sha256": "37e645015149802ab1aac82d0b9e9510f170e31c42bf15811f4cfdad2a3aae75",
+  "yosys_version": "Yosys 0.68+post (git sha1 c12172fbae8af5e20f6fb52e3d4e92d56ed587b6, Release, AppleClang clang++ 21.0.0.21000101)"
+}

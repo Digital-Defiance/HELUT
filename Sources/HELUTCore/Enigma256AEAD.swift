@@ -56,7 +56,13 @@ extension Enigma256Context {
     /// Confidentiality-only (RTL golden / SoftBus body). Prefer `sealAEAD` on the wire.
     package func sealBody(_ plaintext: [UInt8], nonce: Data) -> [UInt8] {
         let (key, wiring) = messageState(nonce: nonce)
-        var machine = Enigma256Machine(wiring: wiring, lfsrSeed: key.lfsrSeed, positions: key.positions)
+        var machine = Enigma256Machine(
+            wiring: wiring,
+            lfsrSeed: key.lfsrSeed,
+            positions: key.positions,
+            centerMaskKey: key.centerMaskKey,
+            generation: profile
+        )
         return machine.process(plaintext)
     }
 

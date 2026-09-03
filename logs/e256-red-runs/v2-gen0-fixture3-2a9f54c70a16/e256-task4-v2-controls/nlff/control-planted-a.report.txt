@@ -1,0 +1,50 @@
+# TensorLUT Red Team — enigma_256_nlff_combo
+family: E256
+suite_version: 2
+generation: 0
+fixture_schema_version: 3
+profile_sha256: 2a9f54c70a1619805a911758158f1e2204b0fd96c35102a9db5f4575aeb40cb0
+formula: native_reversible_16
+lfsr_transition: right_shift_lsb_galois_d800000000000000
+update_order: derive_prestep_mask_scramble_then_step_same_mask
+reflector_derivation: fisher_yates_2_through_255_pairing_reserved_0_1_v1
+center_reserved_pair_rule: 0_1_identity_only_when_center_mode_else_base_reflector
+center_mode: prestep_step_r1_xor_step_r2_xor_step_r3_xor_step_r4
+center_map_order: forward_rotors_center_then_reverse_rotors_v1
+receipt_sha256: 5c5bc931a145048037ec420b2c0c47ff310570e963bd45b8262f18a1640f0027
+run_role: planted-easy
+role_definition: one output-driving LUT mutable with one live INIT entry planted at 0.5; every other LUT frozen correct
+target_scope: in_sample_only_no_holdout
+objective: negative_sum_squared_output_error; perfect=0; threshold final_crypto>-0.05 and melt_nonbinary=0
+netlist: /Volumes/Code/HELUT/logs/e256-red-runs/v2-gen0-fixture3-2a9f54c70a16/e256-task4-v2-controls/nlff/source-netlist.json
+source_netlist_sha256: b6e027e8b3d090496444c1814c45d37250533224a4bd9c5537faf4a7024a2eb3
+luts: 62
+dffs: 0
+batch: 786425
+contradictory_rows: 0
+planted_mutable_lut_count: 1
+planted_melt_luts: 49
+planted_melt_entries: 0
+planted_seed_crypto: -336.000000
+planted_seed_nonbinary: 1
+planted_seed_defect_pass: true
+planted_exact_recovery: true
+explore_gens: 16
+polish_gens: 8
+pop: 8
+polish_lambda: 0.0
+explore_seed: 14833185
+explore_mutation_rate: 0.02
+baseline_expected_crypto: 0.000000
+baseline_crypto: 0.000000
+baseline_sanity_pass: true
+explore_best_crypto: -336.000000
+explore_nonbinary: 1
+polish_gen_crypto: 0.000000
+final_crypto: 0.000000
+final_nonbinary: 0
+elite_fitness: 0.000000
+squeeze_survived: true
+verdict: red_pressure
+control_pass: true
+note: Planted controls prove a live near-solution recovery; contradictory-null controls check verdict plumbing only. Current-role blue_hold is bounded optimizer failure, not a security claim or work factor.

@@ -23,6 +23,11 @@ package enum Enigma256Reg: UInt32, CaseIterable, Sendable {
     case scaCtrl = 0x34
     /// AXIS table burst: write byte count committed (RO progress) / WO start sel.
     case burstStatus = 0x38
+    /// Per-payload HMAC-derived mask byte; latched atomically with DATA_IN.
+    case centerMask = 0x3C
+    /// Absolute payload counter, little register order (semantic value is UInt64).
+    case byteCounterLo = 0x40
+    case byteCounterHi = 0x44
 
     package var offset: UInt32 { rawValue }
 }
@@ -35,6 +40,9 @@ package protocol Enigma256MMIO: AnyObject {
 /// Host driver: tables → message key → LOAD_STATE → stream via MMIO.
 package final class Enigma256AXIDriver {
     package let bus: Enigma256MMIO
+    private var generation = Enigma256Generation.v2Gen0
+    private var centerMaskKey = Data(repeating: 0, count: Enigma256CenterMask.keyLength)
+    private var absoluteByteCounter: UInt64 = 0
 
     package init(bus: Enigma256MMIO) {
         self.bus = bus
@@ -59,7 +67,7 @@ package final class Enigma256AXIDriver {
         }
     }
 
-    /// Burst table load (2,560 bytes) — SoftBus models AXIS DMA; MMIO falls back to beats.
+    /// Burst table load (2,304 bytes) — SoftBus models AXIS DMA; MMIO falls back to beats.
     package func programTablesBurst(_ wiring: Enigma256Wiring) {
         if let soft = bus as? Enigma256SoftBus {
             soft.burstLoadTables(wiring)
@@ -74,19 +82,28 @@ package final class Enigma256AXIDriver {
 
     package func writeMessageKey(_ key: Enigma256MessageKey) {
         let seed = key.lfsrSeed == 0 ? 1 : key.lfsrSeed
+        centerMaskKey = key.centerMaskKey
+        absoluteByteCounter = 0
         write(.initLfsrLo, UInt32(truncatingIfNeeded: seed & 0xFFFF_FFFF))
         write(.initLfsrHi, UInt32(truncatingIfNeeded: seed >> 32))
         write(.initR1, UInt32(key.positions.0))
         write(.initR2, UInt32(key.positions.1))
         write(.initR3, UInt32(key.positions.2))
         write(.initR4, UInt32(key.positions.3))
+        write(.byteCounterLo, 0)
+        write(.byteCounterHi, 0)
     }
 
     package func pulseLoadState() {
         write(.ctrl, 0x1) // CTRL[0] W1C → load_state
     }
 
-    package func configure(day: Enigma256DayKey, message: Enigma256MessageKey) {
+    package func configure(
+        day: Enigma256DayKey,
+        message: Enigma256MessageKey,
+        generation: Enigma256Generation = .v2Gen0
+    ) {
+        self.generation = generation
         programTablesBurst(message.wiring(from: day))
         writeMessageKey(message)
         pulseLoadState()
@@ -94,15 +111,33 @@ package final class Enigma256AXIDriver {
 
     package func configure(context: Enigma256Context, nonce: Data) {
         let (key, _) = context.messageState(nonce: nonce)
-        configure(day: context.day, message: key)
+        generation = context.profile
+        if let soft = bus as? Enigma256SoftBus {
+            soft.bindGeneration(context.profile)
+        }
+        configure(day: context.day, message: key, generation: context.profile)
     }
 
-    /// Write DATA_IN; poll STATUS.valid; return DATA_OUT.
+    /// Transport one atomic `(payload, k_i, absolute counter)` beat.
     package func transfer(_ byte: UInt8, maxPolls: Int = 8) -> UInt8 {
+        precondition(
+            absoluteByteCounter < UInt64.max,
+            "Enigma256 AXI absolute byte counter exhausted"
+        )
+        let centerMask = Enigma256CenterMask.mask(
+            key: centerMaskKey,
+            generation: generation,
+            absoluteByteCounter: absoluteByteCounter
+        )
+        write(.byteCounterLo, UInt32(truncatingIfNeeded: absoluteByteCounter))
+        write(.byteCounterHi, UInt32(truncatingIfNeeded: absoluteByteCounter >> 32))
+        write(.centerMask, UInt32(centerMask))
         write(.dataIn, UInt32(byte))
         for _ in 0 ..< maxPolls {
             let st = read(.status)
+            precondition((st & 0x8) == 0, "Enigma256 AXI schedule desynchronization")
             if (st & 0x1) != 0 {
+                absoluteByteCounter += 1
                 return UInt8(truncatingIfNeeded: read(.dataOut) & 0xFF)
             }
         }
@@ -126,12 +161,18 @@ package final class Enigma256SoftBus: Enigma256MMIO {
     package private(set) var mmioLog: [(offset: UInt32, value: UInt32)] = []
     package private(set) var jitterEnabled = false
     package private(set) var lastBurstBytes = 0
+    package private(set) var centerMask: UInt8 = 0
+    package private(set) var byteCounter: UInt64 = 0
 
     package init() {}
 
-    /// Model AXI-Stream table DMA: one transaction programs all 10×256 BRAMs.
+    package func bindGeneration(_ generation: Enigma256Generation) {
+        handle.bindGeneration(generation)
+    }
+
+    /// Model AXI-Stream table DMA: one transaction programs all 9×256 BRAMs.
     package func burstLoadTables(_ wiring: Enigma256Wiring) {
-        lastBurstBytes = 10 * 256
+        lastBurstBytes = Enigma256TableSel.allCases.count * 256
         handle.programTablesBurst(wiring)
         mmioLog.append((Enigma256Reg.burstStatus.rawValue, UInt32(lastBurstBytes)))
     }
@@ -172,9 +213,17 @@ package final class Enigma256SoftBus: Enigma256MMIO {
             handle.regPos.2 = UInt8(truncatingIfNeeded: value)
         case Enigma256Reg.initR4.rawValue:
             handle.regPos.3 = UInt8(truncatingIfNeeded: value)
+        case Enigma256Reg.centerMask.rawValue:
+            centerMask = UInt8(truncatingIfNeeded: value)
+        case Enigma256Reg.byteCounterLo.rawValue:
+            byteCounter = (byteCounter & 0xFFFF_FFFF_0000_0000) | UInt64(value)
+            handle.regByteCounter = byteCounter
+        case Enigma256Reg.byteCounterHi.rawValue:
+            byteCounter = (UInt64(value) << 32) | (byteCounter & 0xFFFF_FFFF)
+            handle.regByteCounter = byteCounter
         case Enigma256Reg.dataIn.rawValue:
             dataIn = UInt8(truncatingIfNeeded: value)
-            dataOut = handle.transfer(dataIn)
+            dataOut = handle.transfer(dataIn, centerMask: centerMask, counter: byteCounter)
             validOut = true
         default:
             break
@@ -211,6 +260,12 @@ package final class Enigma256SoftBus: Enigma256MMIO {
             return jitterEnabled ? 1 : 0
         case Enigma256Reg.burstStatus.rawValue:
             return UInt32(lastBurstBytes)
+        case Enigma256Reg.centerMask.rawValue:
+            return UInt32(centerMask)
+        case Enigma256Reg.byteCounterLo.rawValue:
+            return UInt32(truncatingIfNeeded: byteCounter)
+        case Enigma256Reg.byteCounterHi.rawValue:
+            return UInt32(truncatingIfNeeded: byteCounter >> 32)
         default:
             return 0
         }

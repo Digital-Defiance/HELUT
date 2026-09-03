@@ -1,38 +1,137 @@
 {
-  "folds" : [
+  "center_construction": "conjugated_xor_counter_prf_v1",
+  "center_map_order": "plugboard_forward_rotors_xor_mask_reverse_rotors_plugboard_v1",
+  "center_mask_block_domain": "center-mask-block",
+  "center_mask_counter": "uint64_be_block_counter_start_0",
+  "center_mask_extraction": "digest_byte_i_mod_32_allow_zero",
+  "center_mask_key_domain": "center-mask-key",
+  "center_mask_key_kdf": "hkdf_sha512_nonce_salt_32_v1",
+  "center_mask_prf": "hmac_sha256_32_byte_blocks_v1",
+  "components": [
     {
-      "a" : 4,
-      "b" : 15,
-      "c" : 17,
-      "d" : 23,
-      "e" : 26,
-      "f" : 61
+      "truth_hex": "a39d51afd62adcd05b55a9672ee22418"
     },
     {
-      "a" : 7,
-      "b" : 9,
-      "c" : 31,
-      "d" : 38,
-      "e" : 50,
-      "f" : 59
+      "truth_hex": "28934ec6d3776da07da0c6a47da6136c"
     },
     {
-      "a" : 30,
-      "b" : 43,
-      "c" : 46,
-      "d" : 49,
-      "e" : 51,
-      "f" : 60
+      "truth_hex": "5d6022ec0beb78760ed16430b978fe9a"
     },
     {
-      "a" : 12,
-      "b" : 29,
-      "c" : 54,
-      "d" : 55,
-      "e" : 57,
-      "f" : 62
+      "truth_hex": "61ba65b5723f93c0abde9a6ad30f2300"
+    },
+    {
+      "truth_hex": "6e83562d6ef4ded2878ca9347804de34"
+    },
+    {
+      "truth_hex": "a84c3b648fc11ce9fd4c4cb9dac16b34"
+    },
+    {
+      "truth_hex": "4674f9a094fadda75957f09a2523906a"
+    },
+    {
+      "truth_hex": "355c4728f7ca7c6a284e79e6de408a6a"
     }
   ],
-  "formula" : "cubic6",
-  "id" : 5
+  "family": "E256",
+  "fixture_schema_version": 4,
+  "folds": [
+    {
+      "left_component": 0,
+      "right_component": 1,
+      "taps": [
+        9,
+        43,
+        15,
+        16,
+        21,
+        39,
+        48,
+        5,
+        38,
+        28,
+        41,
+        51,
+        31,
+        30,
+        63,
+        52
+      ]
+    },
+    {
+      "left_component": 2,
+      "right_component": 3,
+      "taps": [
+        42,
+        13,
+        53,
+        32,
+        1,
+        11,
+        36,
+        50,
+        0,
+        45,
+        19,
+        22,
+        6,
+        23,
+        12,
+        29
+      ]
+    },
+    {
+      "left_component": 4,
+      "right_component": 5,
+      "taps": [
+        61,
+        40,
+        47,
+        20,
+        18,
+        44,
+        34,
+        59,
+        27,
+        8,
+        25,
+        55,
+        33,
+        2,
+        17,
+        4
+      ]
+    },
+    {
+      "left_component": 6,
+      "right_component": 7,
+      "taps": [
+        10,
+        26,
+        60,
+        57,
+        62,
+        35,
+        54,
+        58,
+        46,
+        14,
+        7,
+        49,
+        24,
+        37,
+        56,
+        3
+      ]
+    }
+  ],
+  "formula": "native_reversible_16",
+  "generation": 0,
+  "lfsr_transition": "right_shift_lsb_galois_d800000000000000",
+  "profile_sha256": "fa246e9cba9009a4799e5a81722a9b14e9a67293d9621b45985c5f3e620865d4",
+  "receipt": "logs/e256-v2-gen0-nlff-search.json",
+  "receipt_sha256": "5c5bc931a145048037ec420b2c0c47ff310570e963bd45b8262f18a1640f0027",
+  "research_status": "accepted_bounded_profile",
+  "suite_version": 2,
+  "update_order": "derive_prestep_mask_and_counter_mask_scramble_then_step_and_increment"
 }

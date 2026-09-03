@@ -1,4 +1,7 @@
 import { Link } from 'react-router-dom'
+import { HelutSpan } from '../HELUTSpan'
+import { TensorLUTSpan } from '../TensorLUTSpan'
+import { NaziBlaster9000Span } from '../NaziBlaster9000Span'
 
 export function StackPage() {
   return (
@@ -13,7 +16,7 @@ export function StackPage() {
               Every path starts the same way: IEEE Verilog → Yosys → flattened{' '}
               <code>$lut</code> / DFF JSON. What differs is the arithmetic under the wire—cleartext
               Metal batch for campaign search, graduated torus FHE for encrypted ticks, and
-              TensorLUT when INIT tables themselves are the search space.
+              <TensorLUTSpan /> when INIT tables themselves are the search space.
             </p>
           </div>
         </div>
@@ -28,7 +31,7 @@ export function StackPage() {
               Boolean-faithful orthogonal state vectors and block-diagonal LUT tensors. No
               ciphertext noise. This is what drives Welchman and Stochastic Bombe at ~40M machine
               settings per second on M4 Max unified memory—fitness is letter-match / diagonal-board
-              elimination, not HELUT encrypted tick rate.
+              elimination, not <HelutSpan /> encrypted tick rate.
             </p>
           </div>
           <ul className="stack-list pipeline-list">
@@ -211,7 +214,7 @@ export function StackPage() {
               <code>directives/research-trajectory.md</code>. Cookbook:{' '}
               <code>directives/parameter-cookbook.md</code>. FHE chronology:{' '}
               <Link to="/projects/netlist-fhe/journal">Pillar I journal</Link>. Campaign (still
-              open): <Link to="/projects/p1030680/journal">Turing Complete</Link>.
+              open): <Link to="/projects/p1030680/journal"><NaziBlaster9000Span /></Link>.
             </p>
             <p style={{ marginTop: '1rem' }}>
               <Link to="/apps">Application circuits →</Link>

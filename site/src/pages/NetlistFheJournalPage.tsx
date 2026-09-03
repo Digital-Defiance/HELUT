@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom'
 import { ProjectJournalShell } from './ProjectJournalShell'
+import { NaziBlaster9000Span } from '../NaziBlaster9000Span'
 
 export function NetlistFheJournalPage() {
   return (
     <ProjectJournalShell
       kicker="Pillar I · Field journal"
       title="What the encrypted netlist has graded"
-      lede="This is the chronology for netlist-clocked torus FHE — SING receipts, noisy-BK certificates, and honest remainders. It is not the U-534 hunt. P1030680 is still unbroken; that ledger lives on Turing Complete."
+      lede="This is the chronology for netlist-clocked torus FHE — SING receipts, noisy-BK certificates, and honest remainders. It is not the U-534 hunt. P1030680 is still unbroken; that ledger lives on Nazi Blaster 9000."
       hubPath="/projects/netlist-fhe"
     >
       <section className="band">
@@ -49,7 +50,8 @@ export function NetlistFheJournalPage() {
                 εlog2≈−110.7 recorded here was a 4-trial low-σ̂ draw — settled it is
                 −60.5 at <em>k</em>=7, short of −64. Stride <em>k</em>=14 clears it
                 (−319.3, 95% bound −200.5) with SING still PASS. Corrected 2026-08-16. Covering-b4
-                public-ms and E256 58-LUT covering-b2 SING FAIL.
+                public-ms and the historical C39 E256 58-LUT cone covering-b2 SING FAIL
+                (not the live fixture-v4 conjugated-XOR center).
               </span>
             </li>
             <li>
@@ -184,7 +186,7 @@ export function NetlistFheJournalPage() {
           <p>
             Reproduce: <code>REPRODUCE.md</code> · gallery:{' '}
             <Link to="/apps">Applications</Link> · campaign (still open):{' '}
-            <Link to="/projects/p1030680/journal">Turing Complete</Link>.
+            <Link to="/projects/p1030680/journal"><NaziBlaster9000Span /></Link>.
           </p>
         </div>
       </section>

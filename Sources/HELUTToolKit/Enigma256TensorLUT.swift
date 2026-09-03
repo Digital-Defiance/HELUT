@@ -1,3 +1,4 @@
+import CryptoKit
 import Foundation
 import Metal
 import HELUTCore
@@ -26,7 +27,7 @@ enum Enigma256NLFFExtraOut: Sendable {
 func enigma256NLFFSeedPatterns(
     generation: Enigma256Generation = .current
 ) -> [UInt64] {
-    let tapSets: [[Int]] = generation.folds.map { $0.taps(for: generation.formula) }
+    let tapSets: [[Int]] = generation.folds.map(\.taps)
     var seeds: [UInt64] = []
     let bases: [UInt64] = [1, 0xA5A5_A5A5_A5A5_A5A5, 0x0123_4567_89AB_CDEF]
     for base in bases {
@@ -208,35 +209,33 @@ func enigma256FragSbox4Inv(_ x: UInt8) -> UInt8 {
     return enigma256FragRotR(b, 7)
 }
 
-func enigma256FragUkw(_ x: UInt8) -> UInt8 {
-    let swapped = (x &<< 4) | (x &>> 4)
-    return swapped ^ 0x55
-}
-
 func enigma256FragStage(_ x: UInt8, offset: UInt8, sbox: (UInt8) -> UInt8) -> UInt8 {
     sbox(x &+ offset) &- offset
 }
 
-/// Full frozen reciprocal fragment (identity plug sandwich).
+/// Full frozen reciprocal fragment (identity plug sandwich) with the
+/// fixture-v4 center mask transported independently of the NLFF step mask.
 func enigma256ScrambleFrag(
     dataIn: UInt8,
     offsetR1: UInt8,
     offsetR2: UInt8,
     offsetR3: UInt8,
-    offsetR4: UInt8
+    offsetR4: UInt8,
+    centerMask: UInt8
 ) -> UInt8 {
     let r1 = enigma256FragStage(dataIn, offset: offsetR1, sbox: enigma256FragSbox1)
     let r2 = enigma256FragStage(r1, offset: offsetR2, sbox: enigma256FragSbox2)
     let r3 = enigma256FragStage(r2, offset: offsetR3, sbox: enigma256FragSbox3)
     let r4 = enigma256FragStage(r3, offset: offsetR4, sbox: enigma256FragSbox4)
-    let ref = enigma256FragUkw(r4)
-    let r4r = enigma256FragStage(ref, offset: offsetR4, sbox: enigma256FragSbox4Inv)
+    let centerOut = r4 ^ centerMask
+    let r4r = enigma256FragStage(centerOut, offset: offsetR4, sbox: enigma256FragSbox4Inv)
     let r3r = enigma256FragStage(r4r, offset: offsetR3, sbox: enigma256FragSbox3Inv)
     let r2r = enigma256FragStage(r3r, offset: offsetR2, sbox: enigma256FragSbox2Inv)
     return enigma256FragStage(r2r, offset: offsetR1, sbox: enigma256FragSbox1Inv)
 }
 
-/// Past-offset cone: LFSR + data_in + offsets → frag_out + steps + next offsets + lfsr_next_hi.
+/// Past-offset cone: LFSR + data_in + offsets + transported center_mask →
+/// frag_out + steps + next offsets + lfsr_next_hi.
 func enigma256ScrambleFragTrainingBatch(
     generation: Enigma256Generation = .current,
     extra: Enigma256NLFFExtraOut = .none
@@ -248,6 +247,7 @@ func enigma256ScrambleFragTrainingBatch(
         (0xA5, 0x5A, 0x3C, 0xC3)
     ]
     let dataPatterns: [UInt8] = [0x00, 0x01, 0x7F, 0x80, 0xA5, 0xFF]
+    let centerMaskPatterns: [UInt8] = [0x00, 0x01, 0x7F, 0x80, 0xA5, 0xFF]
     var inputs: [[Float]] = []
     var expected: [[Float]] = []
     let seeds = enigma256NLFFSeedPatterns(generation: generation)
@@ -258,37 +258,58 @@ func enigma256ScrambleFragTrainingBatch(
         let steps: [Bool] = [mask.0, mask.1, mask.2, mask.3]
         for offsets in offsetPatterns {
             for dataIn in dataPatterns {
-                var row = [Float]()
-                row.reserveCapacity(104)
-                for bit in 0 ..< 64 {
-                    row.append(Float((s >> bit) & 1))
-                }
-                enigma256AppendByteBits(&row, dataIn)
-                let offs = [offsets.0, offsets.1, offsets.2, offsets.3]
-                for o in offs {
-                    enigma256AppendByteBits(&row, o)
-                }
-                inputs.append(row)
+                for centerMask in centerMaskPatterns {
+                    var row = [Float]()
+                    row.reserveCapacity(112)
+                    for bit in 0 ..< 64 {
+                        row.append(Float((s >> bit) & 1))
+                    }
+                    enigma256AppendByteBits(&row, dataIn)
+                    let offs = [offsets.0, offsets.1, offsets.2, offsets.3]
+                    for o in offs {
+                        enigma256AppendByteBits(&row, o)
+                    }
+                    enigma256AppendByteBits(&row, centerMask)
+                    inputs.append(row)
 
-                let frag = enigma256ScrambleFrag(
-                    dataIn: dataIn,
-                    offsetR1: offsets.0,
-                    offsetR2: offsets.1,
-                    offsetR3: offsets.2,
-                    offsetR4: offsets.3
-                )
-                var out: [Float] = []
-                enigma256AppendByteBits(&out, frag)
-                out.append(contentsOf: steps.map { $0 ? Float(1) : 0 })
-                for (o, stepped) in zip(offs, steps) {
-                    enigma256AppendByteBits(&out, o &+ (stepped ? 1 : 0))
+                    let frag = enigma256ScrambleFrag(
+                        dataIn: dataIn,
+                        offsetR1: offsets.0,
+                        offsetR2: offsets.1,
+                        offsetR3: offsets.2,
+                        offsetR4: offsets.3,
+                        centerMask: centerMask
+                    )
+                    var out: [Float] = []
+                    enigma256AppendByteBits(&out, frag)
+                    out.append(contentsOf: steps.map { $0 ? Float(1) : 0 })
+                    for (o, stepped) in zip(offs, steps) {
+                        enigma256AppendByteBits(&out, o &+ (stepped ? 1 : 0))
+                    }
+                    enigma256AppendExtraOut(&out, seed: s, extra: extra)
+                    expected.append(out)
                 }
-                enigma256AppendExtraOut(&out, seed: s, extra: extra)
-                expected.append(out)
             }
         }
     }
     return (inputs, expected)
+}
+
+private enum Enigma256TensorLUTRunRole: String {
+    case current
+    case plantedEasy = "planted-easy"
+    case contradictoryNull = "contradictory-null"
+
+    var definition: String {
+        switch self {
+        case .current:
+            return "active-profile full cold start; test arm, not a control"
+        case .plantedEasy:
+            return "one output-driving LUT mutable with one live INIT entry planted at 0.5; every other LUT frozen correct"
+        case .contradictoryNull:
+            return "no-false-positive control: one duplicate input row has one contradictory output bit, so exact deterministic fit is impossible"
+        }
+    }
 }
 
 func runEnigma256TensorLUT() {
@@ -296,7 +317,7 @@ func runEnigma256TensorLUT() {
     let netlistPath = stringFlag("--enigma256-netlist")
         ?? "build/enigma_256_nlff_combo_netlist.json"
     let emitOut = stringFlag("--enigma256-emit-out")
-        ?? "enigma_256_tensorlut_baseline.v"
+        ?? "build/hardware/Enigma256/enigma_256_tensorlut_baseline.v"
     let logPath = stringFlag("--enigma256-tensorlut-log")
         ?? "logs/tensorlut-enigma256-nlff.log"
     let smoke = !CommandLine.arguments.contains("--enigma256-tensorlut-emit-only")
@@ -307,6 +328,19 @@ func runEnigma256TensorLUT() {
     let exploreSeed = UInt64(intFlag("--enigma256-tensorlut-seed") ?? 0xE256_21)
     let expectHold = CommandLine.arguments.contains("--enigma256-tensorlut-expect-hold")
     let requireSqueeze = CommandLine.arguments.contains("--enigma256-tensorlut-require-squeeze")
+    let roleRaw = (stringFlag("--enigma256-tensorlut-role") ?? "current").lowercased()
+    guard let runRole = Enigma256TensorLUTRunRole(rawValue: roleRaw) else {
+        fputs("Invalid --enigma256-tensorlut-role \(roleRaw); use current, planted-easy, or contradictory-null\n", stderr)
+        exit(2)
+    }
+    if expectHold && requireSqueeze {
+        fputs("--enigma256-tensorlut-expect-hold and --enigma256-tensorlut-require-squeeze are mutually exclusive\n", stderr)
+        exit(2)
+    }
+    if runRole != .current && (expectHold || requireSqueeze) {
+        fputs("Control roles enforce their own expected outcome; do not combine them with expectation flags\n", stderr)
+        exit(2)
+    }
 
     guard FileManager.default.fileExists(atPath: netlistPath) else {
         fputs("""
@@ -326,7 +360,7 @@ func runEnigma256TensorLUT() {
 
     let inputWires: [Int32]
     let outputWires: [Int32]
-    let target: AdversarialTarget
+    let baseTarget: AdversarialTarget
 
     if module.ports["init_lfsr"] != nil {
         let rstNets = enigma256PortNets(module, "rst_n")
@@ -338,7 +372,7 @@ func runEnigma256TensorLUT() {
             + enigma256PortNets(module, "step_r2")
             + enigma256PortNets(module, "step_r3")
             + enigma256PortNets(module, "step_r4")
-        target = AdversarialTarget(
+        baseTarget = AdversarialTarget(
             inputWireIDs: inputWires,
             outputWireIDs: outputWires,
             inputVectors: [[Float](repeating: 0, count: inputWires.count)],
@@ -356,8 +390,11 @@ func runEnigma256TensorLUT() {
                 + enigma256PortNets(module, "offset_r2")
                 + enigma256PortNets(module, "offset_r3")
                 + enigma256PortNets(module, "offset_r4")
-            precondition(dataNets.count == 8 && offsetNets.count == 32)
-            inputWires = lfsrNets + dataNets + offsetNets
+            let centerMaskNets = enigma256PortNets(module, "center_mask")
+            precondition(
+                dataNets.count == 8 && offsetNets.count == 32 && centerMaskNets.count == 8
+            )
+            inputWires = lfsrNets + dataNets + offsetNets + centerMaskNets
             var outs = enigma256PortNets(module, "frag_out")
                 + enigma256PortNets(module, "step_r1")
                 + enigma256PortNets(module, "step_r2")
@@ -376,7 +413,7 @@ func runEnigma256TensorLUT() {
             }
             outputWires = outs
             let batch = enigma256ScrambleFragTrainingBatch(extra: extra)
-            target = AdversarialTarget(
+            baseTarget = AdversarialTarget(
                 inputWireIDs: inputWires,
                 outputWireIDs: outputWires,
                 inputVectors: batch.inputs,
@@ -410,7 +447,7 @@ func runEnigma256TensorLUT() {
             }
             outputWires = outs
             let batch = enigma256NLFFOffsetTrainingBatch(extra: extra)
-            target = AdversarialTarget(
+            baseTarget = AdversarialTarget(
                 inputWireIDs: inputWires,
                 outputWireIDs: outputWires,
                 inputVectors: batch.inputs,
@@ -435,7 +472,7 @@ func runEnigma256TensorLUT() {
             }
             outputWires = outs
             let batch = enigma256NLFFTrainingBatch(extra: extra)
-            target = AdversarialTarget(
+            baseTarget = AdversarialTarget(
                 inputWireIDs: inputWires,
                 outputWireIDs: outputWires,
                 inputVectors: batch.inputs,
@@ -443,6 +480,33 @@ func runEnigma256TensorLUT() {
                 clockTicks: 0
             )
         }
+    }
+
+    if runRole != .current && module.ports["lfsr"] == nil {
+        fputs("TensorLUT control roles require a combinational E256 cone with an lfsr input\n", stderr)
+        exit(2)
+    }
+
+    let contradictoryRows: Int
+    let target: AdversarialTarget
+    if runRole == .contradictoryNull {
+        var nullInputs = baseTarget.inputVectors
+        var nullExpected = baseTarget.expectedOutputs
+        var contradictory = baseTarget.expectedOutputs[0]
+        contradictory[0] = contradictory[0] > 0.5 ? 0 : 1
+        nullInputs.append(baseTarget.inputVectors[0])
+        nullExpected.append(contradictory)
+        contradictoryRows = 1
+        target = AdversarialTarget(
+            inputWireIDs: baseTarget.inputWireIDs,
+            outputWireIDs: baseTarget.outputWireIDs,
+            inputVectors: nullInputs,
+            expectedOutputs: nullExpected,
+            clockTicks: baseTarget.clockTicks
+        )
+    } else {
+        contradictoryRows = 0
+        target = baseTarget
     }
 
     let emitName: String
@@ -453,15 +517,32 @@ func runEnigma256TensorLUT() {
     case "enigma_256_scramble_frag_combo": emitName = "enigma_256_scramble_frag_tensorlut"
     default: emitName = "enigma_256_step_cone_tensorlut"
     }
-    let verilog = TensorLUTEmitter.emitVerilog(
+    let emittedBody = TensorLUTEmitter.emitVerilog(
         moduleName: emitName,
         netlist: soft,
         chromosome: chromo,
         inputWires: inputWires,
         outputWires: outputWires
     )
+    let profile = Enigma256Generation.current
+    let netlistData = try! Data(contentsOf: URL(fileURLWithPath: netlistPath))
+    let netlistSHA256 = SHA256.hash(data: netlistData)
+        .map { String(format: "%02x", $0) }
+        .joined()
+    let verilog = """
+    // Auto-generated E256 TensorLUT derivative; do not hand-edit.
+    // Compatibility: \(profile.compatibilityKey)
+    // Receipt SHA-256: \(profile.receiptSHA256)
+    // Source netlist SHA-256: \(netlistSHA256)
+    \(emittedBody)
+    """
+    let emitURL = URL(fileURLWithPath: emitOut)
     do {
-        try verilog.write(toFile: emitOut, atomically: true, encoding: .utf8)
+        try FileManager.default.createDirectory(
+            at: emitURL.deletingLastPathComponent(),
+            withIntermediateDirectories: true
+        )
+        try verilog.write(to: emitURL, atomically: true, encoding: .utf8)
     } catch {
         fatalError("emit failed: \(error)")
     }
@@ -484,6 +565,36 @@ func runEnigma256TensorLUT() {
     let pipeline = try! TensorLUTPipeline(device: device, netlist: soft)
     let liveWidths = soft.liveWidths
 
+    let exploreSeedInits: [Float]
+    let freezeMask: [Bool]?
+    let plantedMeltLUTs: [Int]
+    let plantedMeltEntries: [Int]
+    if runRole == .plantedEasy {
+        let outputSet = Set(outputWires)
+        let candidates = soft.luts.filter { outputSet.contains($0.outWire) }
+        guard let melt = candidates.min(by: {
+            let lhsWidth = liveWidths[$0.cellID]
+            let rhsWidth = liveWidths[$1.cellID]
+            return lhsWidth == rhsWidth ? $0.cellID < $1.cellID : lhsWidth < rhsWidth
+        }) else {
+            fputs("No output-driving LUT is available for the planted-easy control\n", stderr)
+            exit(2)
+        }
+        let entry = 0
+        var planted = chromo
+        planted.freezeAllExcept(meltIndices: Set([melt.cellID]))
+        planted.inits[melt.cellID * 64 + entry] = 0.5
+        exploreSeedInits = planted.inits
+        freezeMask = planted.freezeMask
+        plantedMeltLUTs = [melt.cellID]
+        plantedMeltEntries = [entry]
+    } else {
+        exploreSeedInits = [Float](repeating: 0.5, count: soft.luts.count * 64)
+        freezeMask = nil
+        plantedMeltLUTs = []
+        plantedMeltEntries = []
+    }
+
     var baselineStats: AdversarialHarness.GenerationStats?
     _ = AdversarialHarness(
         device: device,
@@ -503,16 +614,40 @@ func runEnigma256TensorLUT() {
         progress: { baselineStats = $0 }
     )
 
-    // Phase A — crypto-only explore (λ=0).
-    let wiped = [Float](repeating: 0.5, count: soft.luts.count * 64)
+    var plantedSeedStats: AdversarialHarness.GenerationStats?
+    if runRole == .plantedEasy {
+        _ = AdversarialHarness(
+            device: device,
+            pipeline: pipeline,
+            synthesizer: try! AdversarialSynthesizer(device: device),
+            netlist: soft
+        ).run(
+            target: target,
+            config: .init(
+                populationSize: 1,
+                generations: 1,
+                eliteCount: 1,
+                seedScatter: false,
+                rngSeed: 4,
+                seedInits: exploreSeedInits,
+                freezeMask: freezeMask
+            ),
+            progress: { plantedSeedStats = $0 }
+        )
+    }
+
+    // Phase A — crypto-only explore (λ=0). The planted control makes one
+    // output LUT mutable with one live entry at 0.5; current/null use a full wipe.
+    let exploreMutationRate: Float = runRole == .plantedEasy ? 0.02 : 0.28
+    let exploreDiscreteJumpRate: Float = runRole == .plantedEasy ? 1.0 : 0.5
     let exploreSynth = try! AdversarialSynthesizer(
         device: device,
         config: .init(
-            mutationRate: 0.28,
+            mutationRate: exploreMutationRate,
             maxNoise: 0.5,
             lambdaMax: 0,
             liveWidths: liveWidths,
-            discreteJumpRate: 0.5
+            discreteJumpRate: exploreDiscreteJumpRate
         )
     )
     var exploreLast: AdversarialHarness.GenerationStats?
@@ -527,10 +662,11 @@ func runEnigma256TensorLUT() {
             populationSize: pop,
             generations: gens,
             eliteCount: max(4, pop / 6),
-            seedScatter: true,
+            seedScatter: runRole != .plantedEasy,
             rngSeed: exploreSeed,
-            seedInits: wiped,
-            crossoverRate: 0.7
+            seedInits: exploreSeedInits,
+            crossoverRate: 0.7,
+            freezeMask: freezeMask
         ),
         progress: { exploreLast = $0 }
     )
@@ -562,7 +698,8 @@ func runEnigma256TensorLUT() {
             rngSeed: exploreSeed &+ 1,
             seedInits: explored.inits,
             crossoverRate: 0.35,
-            polishBinaryAtEnd: true
+            polishBinaryAtEnd: true,
+            freezeMask: freezeMask
         ),
         progress: { polishLast = $0 }
     )
@@ -582,32 +719,117 @@ func runEnigma256TensorLUT() {
             eliteCount: 1,
             seedScatter: false,
             rngSeed: 3,
-            seedInits: polished.inits
+            seedInits: polished.inits,
+            freezeMask: freezeMask
         ),
         progress: { finalStats = $0 }
     )
 
+    let baselineCrypto = baselineStats?.bestCrypto ?? -999
+    let baselineExpectedCrypto: Float = runRole == .contradictoryNull ? -1 : 0
+    let baselineSanityPass = baselineCrypto.isFinite
+        && abs(baselineCrypto - baselineExpectedCrypto) <= 0.000_001
+    let plantedSeedCrypto = plantedSeedStats?.bestCrypto
+    let plantedSeedNonBinary = plantedSeedStats?.bestNonBinaryCount
+    let plantedSeedDefectPass: Bool?
+    if runRole == .plantedEasy {
+        plantedSeedDefectPass = plantedSeedCrypto?.isFinite == true
+            && (plantedSeedCrypto ?? 0) <= -0.05
+            && plantedSeedNonBinary == 1
+    } else {
+        plantedSeedDefectPass = nil
+    }
     let finalCrypto = finalStats?.bestCrypto ?? -999
-    let finalNonBinary = polished.inits.reduce(0) { $0 + (($1 > 0.05 && $1 < 0.95) ? 1 : 0) }
-    let survived = finalCrypto > -0.05 && finalNonBinary == 0
+    let finalNonBinary = AdversarialHarness.nonBinaryCount(
+        polished.inits,
+        freezeMask: freezeMask
+    )
+    let survived = finalCrypto.isFinite && finalCrypto > -0.05 && finalNonBinary == 0
+    let plantedCanonicalEntry: Float?
+    let plantedFinalEntry: Float?
+    if runRole == .plantedEasy,
+       plantedMeltLUTs.count == 1,
+       plantedMeltEntries.count == 1 {
+        let index = plantedMeltLUTs[0] * 64 + plantedMeltEntries[0]
+        plantedCanonicalEntry = chromo.inits[index]
+        plantedFinalEntry = polished.inits[index]
+    } else {
+        plantedCanonicalEntry = nil
+        plantedFinalEntry = nil
+    }
+    let plantedRecoveryAbsError: Float?
+    if let plantedCanonicalEntry, let plantedFinalEntry {
+        plantedRecoveryAbsError = abs(plantedFinalEntry - plantedCanonicalEntry)
+    } else {
+        plantedRecoveryAbsError = nil
+    }
+    let plantedExactRecovery = plantedRecoveryAbsError.map {
+        $0.isFinite && $0 <= 0.000_001
+    }
+    let controlPass: Bool?
+    switch runRole {
+    case .current:
+        controlPass = nil
+    case .plantedEasy:
+        controlPass = baselineSanityPass
+            && plantedSeedDefectPass == true
+            && survived
+            && plantedExactRecovery == true
+    case .contradictoryNull:
+        controlPass = baselineSanityPass && !survived
+    }
     let generation = Enigma256Generation.current
-    // squeeze_survived=true  → Red recovered a binary elite (Blue must mutate).
-    // squeeze_survived=false → Red failed the squeeze (Blue holds this generation).
+    // squeeze_survived=true  → a threshold-near-binary model fit this in-sample target.
+    // Controls calibrate this optimizer invocation only; neither outcome is security evidence.
     let verdict = survived ? "red_pressure" : "blue_hold"
     let report = """
     # TensorLUT Red Team — \(moduleName)
+    family: \(generation.family)
+    suite_version: \(generation.suiteVersion)
     generation: \(generation.id)
+    fixture_schema_version: \(generation.fixtureSchemaVersion)
+    profile_sha256: \(generation.profileHashHex)
     formula: \(generation.formula.rawValue)
+    lfsr_transition: \(generation.lfsrTransition)
+    update_order: \(generation.updateOrder)
+    center_construction: \(generation.centerConstruction)
+    center_mask_key_kdf: \(generation.centerMaskKeyKDF)
+    center_mask_prf: \(generation.centerMaskPRF)
+    center_mask_key_domain: \(generation.centerMaskKeyDomain)
+    center_mask_block_domain: \(generation.centerMaskBlockDomain)
+    center_mask_counter: \(generation.centerMaskCounter)
+    center_mask_extraction: \(generation.centerMaskExtraction)
+    center_map_order: \(generation.centerMapOrder)
+    receipt_sha256: \(generation.receiptSHA256)
+    run_role: \(runRole.rawValue)
+    role_definition: \(runRole.definition)
+    target_scope: in_sample_only_no_holdout
+    objective: negative_sum_squared_output_error; perfect=0; threshold final_crypto>-0.05 and melt_nonbinary=0
     netlist: \(netlistPath)
+    source_netlist_sha256: \(netlistSHA256)
     luts: \(soft.luts.count)
     dffs: \(soft.dffs.count)
     batch: \(target.batchSize)
+    contradictory_rows: \(contradictoryRows)
+    planted_mutable_lut_count: \(plantedMeltLUTs.count)
+    planted_melt_luts: \(plantedMeltLUTs.map(String.init).joined(separator: ","))
+    planted_melt_entries: \(plantedMeltEntries.map(String.init).joined(separator: ","))
+    planted_seed_crypto: \(plantedSeedCrypto.map { String(format: "%.6f", $0) } ?? "n/a")
+    planted_seed_nonbinary: \(plantedSeedNonBinary.map(String.init) ?? "n/a")
+    planted_seed_defect_pass: \(plantedSeedDefectPass.map { String($0) } ?? "n/a")
+    planted_canonical_entry: \(plantedCanonicalEntry.map { String(format: "%.9f", $0) } ?? "n/a")
+    planted_final_entry: \(plantedFinalEntry.map { String(format: "%.9f", $0) } ?? "n/a")
+    planted_recovery_abs_error: \(plantedRecoveryAbsError.map { String(format: "%.9f", $0) } ?? "n/a")
+    planted_exact_recovery: \(plantedExactRecovery.map { String($0) } ?? "n/a")
     explore_gens: \(gens)
     polish_gens: \(polishGens)
     pop: \(pop)
     polish_lambda: \(polishLambda)
     explore_seed: \(exploreSeed)
-    baseline_crypto: \(baselineStats.map { String(format: "%.6f", $0.bestCrypto) } ?? "n/a")
+    explore_mutation_rate: \(exploreMutationRate)
+    baseline_expected_crypto: \(String(format: "%.6f", baselineExpectedCrypto))
+    baseline_crypto: \(String(format: "%.6f", baselineCrypto))
+    baseline_sanity_pass: \(baselineSanityPass)
     explore_best_crypto: \(exploreLast.map { String(format: "%.6f", $0.bestCrypto) } ?? "n/a")
     explore_nonbinary: \(exploreLast.map { String($0.bestNonBinaryCount) } ?? "n/a")
     polish_gen_crypto: \(polishLast.map { String(format: "%.6f", $0.bestCrypto) } ?? "n/a")
@@ -616,7 +838,8 @@ func runEnigma256TensorLUT() {
     elite_fitness: \(String(format: "%.6f", polished.fitness))
     squeeze_survived: \(survived)
     verdict: \(verdict)
-    note: explore λ=0; polish λ=\(polishLambda). squeeze_survived=false is a Blue hold.
+    control_pass: \(controlPass.map { String($0) } ?? "n/a")
+    note: Planted controls prove a live near-solution recovery; contradictory-null controls check verdict plumbing only. Current-role blue_hold is bounded optimizer failure, not a security claim or work factor.
     """
 
     try! FileManager.default.createDirectory(
@@ -626,12 +849,24 @@ func runEnigma256TensorLUT() {
     try! report.write(toFile: logPath, atomically: true, encoding: .utf8)
     print(report)
     print("  log → \(logPath)")
+    if !baselineSanityPass {
+        fputs("CONTROL FAILURE: baseline evaluator sanity did not match its preregistered score\n", stderr)
+        exit(3)
+    }
+    if let controlPass {
+        if !controlPass {
+            fputs("CONTROL FAILURE: \(runRole.rawValue) did not produce its preregistered outcome\n", stderr)
+            exit(3)
+        }
+        print("  control: PASS (\(runRole.rawValue))")
+        exit(0)
+    }
     if survived {
-        fputs("RED pressure: squeeze recovered a binary elite\n", stderr)
+        fputs("RED pressure: current-role optimizer fit a threshold-near-binary in-sample model\n", stderr)
         if expectHold { exit(2) }
         exit(0)
     } else {
-        fputs("BLUE hold: squeeze failed (crypto \(finalCrypto), nb \(finalNonBinary))\n", stderr)
+        fputs("BLUE hold: bounded current-role optimizer failed (crypto \(finalCrypto), nb \(finalNonBinary)); not security evidence\n", stderr)
         if requireSqueeze { exit(1) }
         exit(0)
     }

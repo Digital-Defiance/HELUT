@@ -22,6 +22,15 @@ Commands assume macOS Apple Silicon, Swift 6.3+, repo root after:
 swift build -c release
 ```
 
+Hardware artifact ownership is explicit: authored HDL lives under `Hardware/`,
+checked-in generated receipts under `Generated/`, and disposable regeneration
+under `build/hardware/`. Root HDL and netlist names are compatibility entry
+points only; new generation commands must not overwrite them.
+
+```bash
+make hardware-check   # manifest ownership + root compatibility integrity
+```
+
 ## Documents
 
 ```bash
@@ -76,16 +85,17 @@ Host-clocked encrypted *Q* (not fused metal-netlist). Toy `stateful_counter`: 6 
 
 Metal receipt: **PASS** 15.88 s / 4 rows (3.97 s/row), *N*=1024 public-ms boolean.
 
-## Encrypted E256 1-round scramble (C39)
+## Encrypted historical E256 1-round teaching cone (C39)
 
-Frozen offsets=0, identity plug. Algebraic sboxes + UKW (`e256_round1.v`). LUT4 netlist — CPU needs `--degree 16`. Not live BRAM / NLFF / `enigma_256_core`.
+Frozen historical pre-fixture-v4 cone with offsets=0 and identity plug. It uses algebraic sboxes plus the legacy UKW (`Hardware/RTL/Enigma256/Historical/e256_round1.v`). The LUT4 netlist needs CPU `--degree 16`. This receipt does **not** exercise the transported `(payload, centerMask, absoluteByteCounter)` tuple, the live conjugated-XOR center, the host HMAC-SHA256 schedule, counter validation/exhaustion, live BRAM day-key tables, NLFF stepping, or the full `enigma_256_core`. It remains a historical encrypted teaching cone, not fixture-v4 E256 evidence.
 
 ```bash
-yosys -p "read_verilog e256_round1.v; synth -top e256_round1 -flatten; abc -lut 4; write_json e256_round1_netlist.json"
-.build/release/helut --bench e256_round1_netlist.json --degree 16 \
+mkdir -p build/hardware/Enigma256
+yosys -p "read_verilog Hardware/RTL/Enigma256/Historical/e256_round1.v; synth -top e256_round1 -flatten; abc -lut 4; check -assert; write_json build/hardware/Enigma256/e256_round1_netlist.json"
+.build/release/helut --bench build/hardware/Enigma256/e256_round1_netlist.json --degree 16 \
   --bench-encrypted --cpu-only --sing --vectors 32 \
   --paths 'blind-rotate public-ms boolean'
-.build/release/helut --bench e256_round1_netlist.json --degree 1024 \
+.build/release/helut --bench build/hardware/Enigma256/e256_round1_netlist.json --degree 1024 \
   --bench-encrypted --sing --vectors 2 \
   --paths 'blind-rotate-metal public-ms boolean' \
   | tee logs/helut-encrypted-n1024-metal-sing-e256-round1.log
@@ -98,10 +108,11 @@ Metal receipt: **PASS** 22.77 s / 2 (11.38 s/row).
 4-bit ACC, `NOP` / `ADD imm`. Not PicoRV32.
 
 ```bash
-yosys -p "read_verilog toy_isa.v; synth -top toy_isa -flatten; abc -lut 2; write_json toy_isa_netlist.json"
-.build/release/helut --bench toy_isa_netlist.json --degree 8 \
+mkdir -p build/hardware/Examples
+yosys -p "read_verilog Hardware/RTL/Examples/toy_isa.v; synth -top toy_isa -flatten; abc -lut 2; check -assert; write_json build/hardware/Examples/toy_isa_netlist.json"
+.build/release/helut --bench build/hardware/Examples/toy_isa_netlist.json --degree 8 \
   --bench-encrypted --cpu-only --sing --vectors 32
-.build/release/helut --bench toy_isa_netlist.json --degree 1024 \
+.build/release/helut --bench build/hardware/Examples/toy_isa_netlist.json --degree 1024 \
   --bench-encrypted --sing --vectors 4 \
   --paths 'blind-rotate-metal public-ms boolean' \
   | tee logs/helut-encrypted-n1024-metal-sing-toy-isa.log
@@ -324,7 +335,7 @@ Expect Metal secret + public-ms **PASS** (~110 s / ~68 s per 2 rows). Same e
 ## Sequential covering toy ISA at N=1024 σ=128 k=7 (C54)
 
 ```bash
-.build/release/helut --bench toy_isa_netlist.json --degree 1024 \
+.build/release/helut --bench Generated/Netlists/Examples/toy_isa_netlist.json --degree 1024 \
   --bench-encrypted --sing --vectors 2 --bk-noise-sigma 128 \
   --paths covering-b1 --boolean-scale-mul 7 \
   | tee logs/helut-encrypted-n1024-metal-sing-toy-isa-covering-b1-gauss-sigma128-k7-stride.log
@@ -373,7 +384,7 @@ Expect: identity decodable ε≈−12.6; Metal SING **FAIL**. Torus σ=128 still
   | tee logs/helut-encrypted-n1024-metal-sing-regex-covering-b2-gauss-sigma128-k7-e1.log
 ```
 
-Expect: εlog2≈−110.7; adder ~10.3 s/1 PASS; regex 23 LUT ~26.7 s/1 PASS. Covering-b4 public-ms and E256 58-LUT covering-b2 SING FAIL.
+Expect: εlog2≈−110.7; adder ~10.3 s/1 PASS; regex 23 LUT ~26.7 s/1 PASS. Covering-b4 public-ms and the **historical pre-fixture-v4** E256 58-LUT covering-b2 SING FAIL; that negative is not the live fixture-v4 conjugated-XOR core.
 
 CPU covering (same gadget, demo *N*):
 
@@ -385,8 +396,9 @@ CPU covering (same gadget, demo *N*):
 ## PicoRV abc -lut 6 (C58)
 
 ```bash
-yosys -p "read_verilog picorv32.v; synth -top picorv32 -flatten; abc -lut 6; write_json picorv32_lut6_netlist.json"
-.build/release/helut --bench picorv32_lut6_netlist.json --degree 64 \
+mkdir -p build/hardware/PicoRV32
+yosys -p "read_verilog Hardware/RTL/Vendor/PicoRV32/picorv32.v; synth -top picorv32 -flatten; abc -lut 6; check -assert; write_json build/hardware/PicoRV32/picorv32_lut6_netlist.json"
+.build/release/helut --bench build/hardware/PicoRV32/picorv32_lut6_netlist.json --degree 64 \
   --bench-encrypted --cpu-only --sing --vectors 1 \
   --paths 'blind-rotate public-ms boolean' \
   | tee logs/helut-encrypted-n64-cpu-sing-picorv32-lut6.log
@@ -401,7 +413,7 @@ Same command as **C58** after wavefront. Expect **PASS** ~0.165 s/1 (~8.2×).
 ## PicoRV lut6 covering-b2 Q SING FAIL (C60)
 
 ```bash
-.build/release/helut --bench picorv32_lut6_netlist.json --degree 1024 \
+.build/release/helut --bench Generated/Netlists/PicoRV32/picorv32_lut6_netlist.json --degree 1024 \
   --bench-encrypted --sing --vectors 1 --bk-noise-sigma 128 \
   --paths 'public-ms covering-b2' --boolean-scale-mul 7 \
   | tee logs/helut-encrypted-n1024-metal-sing-picorv32-lut6-covering-b2-k7-e6.log
@@ -412,7 +424,7 @@ Expect combinational BRs to finish (~33 min) then **DFF Q SING FAIL** (want=0 
 ## PicoRV lut6 Metal N=1024 e=0 (C62)
 
 ```bash
-.build/release/helut --bench picorv32_lut6_netlist.json --degree 1024 \
+.build/release/helut --bench Generated/Netlists/PicoRV32/picorv32_lut6_netlist.json --degree 1024 \
   --bench-encrypted --sing --vectors 1 \
   --paths 'blind-rotate-metal public-ms boolean' \
   | tee logs/helut-encrypted-n1024-metal-sing-picorv32-lut6-boolean-e0.log
@@ -423,7 +435,7 @@ Expect **PASS** ~374 s / 1, Q SING, *B*<sub>bk</sub>=0. Hardness 175.7 with **
 ## PicoRV lut6 covering-b2 noisy BK at N=64 (C63)
 
 ```bash
-.build/release/helut --bench picorv32_lut6_netlist.json --degree 64 \
+.build/release/helut --bench Generated/Netlists/PicoRV32/picorv32_lut6_netlist.json --degree 64 \
   --bench-encrypted --cpu-only --sing --vectors 1 \
   --paths 'public-ms covering-b2' --bk-noise-sigma 128 \
   | tee logs/helut-encrypted-n64-cpu-sing-picorv32-lut6-covering-b2-sigma128.log
@@ -453,11 +465,11 @@ Expect extract→KS print, all **PASS**. Do not quote 175.7 as LWE-*n*=64 securi
 ## PicoRV lut6 covering extract→KS n=64 (C65)
 
 ```bash
-.build/release/helut --bench picorv32_lut6_netlist.json --degree 1024 \
+.build/release/helut --bench Generated/Netlists/PicoRV32/picorv32_lut6_netlist.json --degree 1024 \
   --bench-encrypted --sing --vectors 1 --bk-noise-sigma 128 \
   --lwe-dimension 64 --paths 'public-ms covering-b2' \
   | tee logs/helut-encrypted-n1024-metal-sing-picorv32-lut6-covering-b2-ks-n64.log
-.build/release/helut --bench picorv32_lut6_netlist.json --degree 1024 \
+.build/release/helut --bench Generated/Netlists/PicoRV32/picorv32_lut6_netlist.json --degree 1024 \
   --bench-encrypted --sing --vectors 1 --bk-noise-sigma 128 \
   --lwe-dimension 64 --paths 'public-ms covering-b1' \
   | tee logs/helut-encrypted-n1024-metal-sing-picorv32-lut6-covering-b1-ks-n64.log
@@ -468,7 +480,7 @@ Expect **PASS** ~114 s (b2) / ~212 s (b1), Q SING. Native *k*. **C60**/**C61
 ## PicoRV lut6 covering 10-tick boot (C66)
 
 ```bash
-.build/release/helut --bench picorv32_lut6_netlist.json --degree 1024 \
+.build/release/helut --bench Generated/Netlists/PicoRV32/picorv32_lut6_netlist.json --degree 1024 \
   --bench-encrypted --sing --ticks 10 --reset-hold 3 \
   --bk-noise-sigma 128 --lwe-dimension 64 --paths 'public-ms covering-b2' \
   | tee logs/helut-encrypted-n1024-metal-sing-picorv32-lut6-covering-b2-ks-n64-boot10.log
@@ -489,12 +501,34 @@ Expect *n*=128 **PASS** ~8.6 s. *n*=256/512 **SIGTRAP** after extract→KS was
 
 ## Covering KS n=256 / n=512 after identity cap (C69)
 
-Same adder command as **C67** with current `EncryptedNetlistSim` (identity trials=1 at *n*≥256). Expect *n*=256 **PASS** ~17 s; *n*=512 **SING FAIL** (sum mismatch).
+The current path caps identity measurement at one trial for *n*≥256. Both rungs
+PASS: *n*=256 is about 17 s; *n*=512 passed 5/5 after the primary-input
+Dictionary-order/shared-RNG defect was fixed. The older *n*=512 sum mismatch is
+withdrawn—it was a determinism artifact, not a noise-limit result.
+
+Run the exact non-vacuous preservation gate:
+
+```bash
+make c69-smoke
+```
+
+Or invoke the receipt directly:
+
+```bash
+.build/release/helut --bench netlist.json --degree 1024 --bench-encrypted --cpu-only \
+  --sing --vectors 1 --paths 'public-ms covering-b2' --bk-noise-sigma 128 \
+  --lwe-dimension 512
+```
+
+Expect exactly one selected `blind-rotate public-ms covering-b2` path, the
+`identity residual trials=1 (n=512)` marker, and **PASS**. This preserves the
+covering extract→KS adder ladder through *n*=512; it does not erase the distinct,
+post-fix C60/C61 PicoRV failures at native *n*=*N*, *k*=7.
 
 ## PicoRV lut6 covering NOP-fetch (C68)
 
 ```bash
-.build/release/helut --bench picorv32_lut6_netlist.json --degree 1024 \
+.build/release/helut --bench Generated/Netlists/PicoRV32/picorv32_lut6_netlist.json --degree 1024 \
   --bench-encrypted --sing --ticks 8 --reset-hold 3 --encrypted-mem nop \
   --bk-noise-sigma 128 --lwe-dimension 64 --paths 'public-ms covering-b2' \
   | tee logs/helut-encrypted-n1024-metal-sing-picorv32-lut6-covering-b2-ks-n64-nop8.log
@@ -591,11 +625,12 @@ Expect 8-corner SING of snapped INIT and two LUT6 cells in emitted Verilog.
 Architecture, not TensorLUT melt.
 
 ```bash
-yosys -p "read_verilog ripple4.v; synth -top ripple4 -flatten; abc -lut 2; write_json ripple4_netlist.json"
-yosys -p "read_verilog csa4.v; synth -top csa4 -flatten; abc -lut 2; write_json csa4_netlist.json"
-.build/release/helut --bench ripple4_netlist.json --degree 8 --compile-only
-.build/release/helut --bench csa4_netlist.json --degree 8 --compile-only
-.build/release/helut --bench csa4_netlist.json --degree 8 \
+mkdir -p build/hardware/Examples
+yosys -p "read_verilog Hardware/RTL/Examples/ripple4.v; synth -top ripple4 -flatten; abc -lut 2; check -assert; write_json build/hardware/Examples/ripple4_netlist.json"
+yosys -p "read_verilog Hardware/RTL/Examples/csa4.v; synth -top csa4 -flatten; abc -lut 2; check -assert; write_json build/hardware/Examples/csa4_netlist.json"
+.build/release/helut --bench build/hardware/Examples/ripple4_netlist.json --degree 8 --compile-only
+.build/release/helut --bench build/hardware/Examples/csa4_netlist.json --degree 8 --compile-only
+.build/release/helut --bench build/hardware/Examples/csa4_netlist.json --degree 8 \
   --bench-encrypted --cpu-only --sing --vectors 64 \
   --paths 'blind-rotate public-ms boolean'
 ```
@@ -654,13 +689,51 @@ swift test -c release --filter testTensorLUTFormalCorollaryCertificate
 
 Two lemmas must hold (emitter–discrete agreement; involution under freeze). Still not melt completeness.
 
+## Enigma256 fixture-v4 KAT parity (C10)
+
+Build once, then generate the golden bundle at the command’s **scratch default** and reuse that validated directory for RTL parity. These commands do not overwrite `Fixtures/enigma256_golden`:
+
+```bash
+.build/release/helut-e256 --enigma256-golden
+E256_REUSE_BUNDLE=1 ./Scripts/enigma256_sim.sh \
+  build/hardware/Enigma256/enigma256_golden
+E256_REUSE_BUNDLE=1 ./Scripts/enigma256_axi_sim.sh \
+  build/hardware/Enigma256/enigma256_golden
+LITE=1 E256_REUSE_BUNDLE=1 ./Scripts/enigma256_axi_sim.sh \
+  build/hardware/Enigma256/enigma256_golden
+swift test -c release --filter Enigma256Tests
+make rust-reference-check
+```
+
+The first command defaults to `build/hardware/Enigma256/enigma256_golden`, reloads the emitted bundle, and checks it against the supplied profile. Explicit publication to `Fixtures/enigma256_golden` is compatibility-key guarded and is not a normal reproduction step.
+
+Expected live identity:
+
+`E256/v2/gen0/fa246e9cba9009a4799e5a81722a9b14e9a67293d9621b45985c5f3e620865d4/fixture-v4`
+
+Bounded expected evidence: **1,024 KAT bytes, 9 tables, 10 trace files, 25 artifacts**; direct RTL, AXIS, and AXI-Lite parity; `Enigma256Tests` **49/49 PASS**; and the internal Rust three-track parity consumer. The deterministic equality diagnostic is **260 / 65,536 = 0.00396729**, **z = 0.250**. Receipt: `logs/e256-v2-gen0-fixture-v4-validation.json`.
+
+This is internal implementation/KAT parity, not an accepted immutable external KAT, an IND-CPA result, an HMAC proof, or human acceptance of **E256-003**.
+
 ## Enigma256 SoftBus Theorem 2 (C24)
 
 ```bash
 swift test -c release --filter testEnigma256FormalCertificate
 ```
 
-Five lemmas must hold (bijection, reciprocity, stream round-trip, day-key involutions, `coupledCubic6` reject). Statement: [`directives/enigma256-theorem.md`](directives/enigma256-theorem.md). Structural SoftBus contract — not IND-CPA; builds on empirical **C10**.
+Exactly five bounded checks must hold:
+
+1. a deterministic **four-state** frozen-scramble bijection sweep;
+2. exhaustive **256-byte reciprocity** for one frozen fixture state;
+3. a deterministic **128-byte stream round-trip** under identical day/message state;
+4. exhaustive fixture plugboard involution plus XOR-center involutions for masks `00`, `01`, `a5`, and `ff`, with exactly **256 fixed points for mask zero and 0 for every tested nonzero mask**; and
+5. exact fixture-v4 native-profile integrity: family/version/generation/schema, transition/update/schedule identifiers, `native_reversible_16` component/fold topology, profile hash, and separated profile-bound KDF/HMAC domains.
+
+Expected post-promotion result: **1/1 PASS**. Statement: [`directives/enigma256-theorem.md`](directives/enigma256-theorem.md).
+
+The certificate models `A_i^-1(A_i(x) XOR k_i)` and records the boundary that `k_i` is a profile-bound HMAC-SHA256 lane selected by a UInt64 big-endian block counter. The host derives and transports `(payload, centerMask, absoluteByteCounter)`; RTL validates the counter and does not implement HMAC. Counter transport, mismatch rejection, and the `UInt64.max - 1` final accepted pre-counter are exercised in the broader C10/49-test fixture suite, not added as a sixth C24 check.
+
+Finite table/center checks are exhaustive only over the stated finite inputs; state/key coverage remains bounded. C24 is not IND-CPA, external cryptanalysis, a full protocol proof, runtime-mutation evidence, or closure of **E256-003**. It builds on empirical **C10**.
 
 ## TensorLUT baseline (C8)
 
@@ -722,11 +795,12 @@ It cost a claim: the *n*=512 covering adder was filed as a noise-limit FAIL
 before being traced to this.
 
 ```bash
-make gates        # both determinism gates + claim integrity lint
-make determinism  # determinism gates only
+make gates        # determinism + exact C69 n=512 smoke + claim lints
+make determinism  # fast in-process and cross-process root-cause guards only
+make c69-smoke    # exact N=1024 / n=512 covering-b2 end-to-end receipt
 ```
 
-or individually:
+or run the fast guards individually:
 
 ```bash
 # In-process guard: decoy keys permute Dictionary layout, fingerprint must hold.
@@ -737,12 +811,16 @@ swift test -c release --filter EncryptedDeterminismTests
 python3 Scripts/determinism_cross_process.py --runs 5 --verbose
 ```
 
-**Not CI-enforced.** Both GitHub runners are `ubuntu-latest` and this needs
-macOS, so `make gates` is a local pre-commit ritual rather than a merge gate. The
-claim integrity lint *is* in CI (`.github/workflows/linux-math.yml`) because it is
-pure Python.
+These are macOS CI merge gates in `.github/workflows/macos-determinism.yml`.
+The small-N guards protect the exact Dictionary-order mechanism cheaply; the
+separate C69 smoke protects the recovered *N*=1024, *n*=512 result against
+parameter, key-switch, path-filter, and decode regressions. Its marker checks
+make a successful but unselected path fail as vacuous.
 
-Expected: `PASS all 5 processes agreed: 9820c89a488d815d`.
+Expected cross-process result:
+`PASS all 5 processes agreed: 9820c89a488d815d`.
+Expected exact smoke result:
+`PASS: C69 covering-b2 N=1024 / n=512 remains an end-to-end SING pass`.
 
 `SWIFT_DETERMINISTIC_HASHING` must stay **unset** — it pins the hash seed and
 makes the cross-process check vacuous. The script refuses to run if it is set

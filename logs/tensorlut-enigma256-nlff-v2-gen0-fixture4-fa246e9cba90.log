@@ -1,0 +1,57 @@
+# TensorLUT Red Team — enigma_256_nlff_combo
+family: E256
+suite_version: 2
+generation: 0
+fixture_schema_version: 4
+profile_sha256: fa246e9cba9009a4799e5a81722a9b14e9a67293d9621b45985c5f3e620865d4
+formula: native_reversible_16
+lfsr_transition: right_shift_lsb_galois_d800000000000000
+update_order: derive_prestep_mask_and_counter_mask_scramble_then_step_and_increment
+center_construction: conjugated_xor_counter_prf_v1
+center_mask_key_kdf: hkdf_sha512_nonce_salt_32_v1
+center_mask_prf: hmac_sha256_32_byte_blocks_v1
+center_mask_key_domain: center-mask-key
+center_mask_block_domain: center-mask-block
+center_mask_counter: uint64_be_block_counter_start_0
+center_mask_extraction: digest_byte_i_mod_32_allow_zero
+center_map_order: plugboard_forward_rotors_xor_mask_reverse_rotors_plugboard_v1
+receipt_sha256: 5c5bc931a145048037ec420b2c0c47ff310570e963bd45b8262f18a1640f0027
+run_role: current
+role_definition: active-profile full cold start; test arm, not a control
+target_scope: in_sample_only_no_holdout
+objective: negative_sum_squared_output_error; perfect=0; threshold final_crypto>-0.05 and melt_nonbinary=0
+netlist: build/enigma_256_nlff_combo_netlist.json
+source_netlist_sha256: b6e027e8b3d090496444c1814c45d37250533224a4bd9c5537faf4a7024a2eb3
+luts: 62
+dffs: 0
+batch: 786425
+contradictory_rows: 0
+planted_mutable_lut_count: 0
+planted_melt_luts: 
+planted_melt_entries: 
+planted_seed_crypto: n/a
+planted_seed_nonbinary: n/a
+planted_seed_defect_pass: n/a
+planted_canonical_entry: n/a
+planted_final_entry: n/a
+planted_recovery_abs_error: n/a
+planted_exact_recovery: n/a
+explore_gens: 80
+polish_gens: 48
+pop: 32
+polish_lambda: 0.0
+explore_seed: 14833185
+explore_mutation_rate: 0.28
+baseline_expected_crypto: 0.000000
+baseline_crypto: 0.000000
+baseline_sanity_pass: true
+explore_best_crypto: -364671.718750
+explore_nonbinary: 1287
+polish_gen_crypto: -291592.781250
+final_crypto: -291592.781250
+final_nonbinary: 1217
+elite_fitness: -291592.781250
+squeeze_survived: false
+verdict: blue_hold
+control_pass: n/a
+note: Planted controls prove a live near-solution recovery; contradictory-null controls check verdict plumbing only. Current-role blue_hold is bounded optimizer failure, not a security claim or work factor.

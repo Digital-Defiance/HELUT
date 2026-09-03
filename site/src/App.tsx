@@ -25,7 +25,7 @@ function Nav() {
     <header className="topnav">
       <div className="shell">
         <NavLink to="/" className="brand" end>
-          HE<span>LUT</span>
+          HE<span>LÜT</span>
         </NavLink>
         <nav>
           <ul className="nav-links">
@@ -42,7 +42,7 @@ function Nav() {
               <NavLink to="/enigma">Enigma</NavLink>
             </li>
             <li>
-              <NavLink to="/projects/p1030680/journal">Turing Complete</NavLink>
+              <NavLink to="/projects/p1030680/journal">Nazi Blaster 9000</NavLink>
             </li>
             <li>
               <NavLink to="/projects/p1030680/mulein-board">Mulein Board</NavLink>
@@ -75,10 +75,6 @@ function Footer() {
           <a href="https://github.com/Digital-Defiance/HELUT">Source</a>
           {' · '}
           <a href="https://github.com/Digital-Defiance/HELUT/blob/main/SECURITY.md">Security</a>
-          {' · '}
-          <a href="https://github.com/Digital-Defiance/HELUT/blob/main/OPPENHEIMER.md">
-            Oppenheimer
-          </a>
           {' · '}
           <a href="https://github.com/Digital-Defiance/HELUT/blob/main/AI_DISCLOSURE.md">
             AI disclosure

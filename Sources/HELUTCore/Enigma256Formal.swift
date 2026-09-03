@@ -2,7 +2,7 @@ import Foundation
 
 // MARK: - Enigma256 SoftBus formal surface (Pillar III)
 //
-// Machine-checkable lemmas for reciprocity / bijection / fail-closed generation.
+// Machine-checkable checks for bounded reciprocity / bijection / native-profile integrity.
 // Red-team grades (TensorLUT, KPA, ent) are separate empirical evidence.
 // This is not a security proof against all adversaries — structural SoftBus contract.
 
@@ -14,10 +14,11 @@ package enum Enigma256Lemma: String, Sendable {
     case scrambleReciprocity
     /// Stream encrypt-then-decrypt recovers plaintext under identical day+message keys.
     case streamRoundTrip
-    /// Day-key plugboard is a fixed-point-free involution; un-reflector is an involution.
-    case dayKeyInvolutions
-    /// Generation harden rejects coupledCubic6 (fail-closed toward independent cubic6).
-    case failClosedCoupling
+    /// Day-key plugboard and XOR center maps are involutions; zero/nonzero
+    /// masks have exactly 256/0 fixed points.
+    case dayKeyAndCenterInvolutions
+    /// The frozen E256-v2/gen0 native profile satisfies its structural identity contract.
+    case nativeProfileIntegrity
 }
 
 package struct Enigma256ProofStep: Sendable, Equatable {
@@ -78,7 +79,8 @@ package enum Enigma256Formal {
                 UInt8(truncatingIfNeeded: rng.next()),
                 UInt8(truncatingIfNeeded: rng.next())
             ),
-            lfsrSeed: max(1, UInt64(rng.next()) | 1)
+            lfsrSeed: max(1, UInt64(rng.next()) | 1),
+            centerMaskKey: Data(repeating: 0xB2, count: Enigma256CenterMask.keyLength)
         )
         let machine = Enigma256Machine(day: day, message: message)
         return Enigma256Bijection.verifyFrozenScramble(machine) == nil
@@ -91,7 +93,8 @@ package enum Enigma256Formal {
         let message = Enigma256MessageKey(
             rotorIndices: (4, 5, 6, 7),
             positions: (1, 2, 3, 4),
-            lfsrSeed: max(1, UInt64(rng.next()) | 1)
+            lfsrSeed: max(1, UInt64(rng.next()) | 1),
+            centerMaskKey: Data(repeating: 0xB3, count: Enigma256CenterMask.keyLength)
         )
         var plain = [UInt8](repeating: 0, count: bytes)
         for i in 0 ..< bytes {
@@ -112,28 +115,49 @@ package enum Enigma256Formal {
         return true
     }
 
-    /// Lemma: derived day-key plugboard / reflector involution contracts.
-    package static func checkDayKeyInvolutions() -> Bool {
+    /// Lemma: derived day-key plugboard and finite XOR-center contracts.
+    package static func checkDayKeyAndCenterInvolutions() -> Bool {
         let day = fixtureDay()
         guard isInvolution(day.plugboard, allowFixedPoints: false) else { return false }
-        guard isInvolution(day.reflector, allowFixedPoints: true) else { return false }
+        for mask: UInt8 in [0, 1, 0xA5, 0xFF] {
+            let center = (0 ... 255).map {
+                Enigma256CenterMask.apply(UInt8($0), mask: mask)
+            }
+            guard isInvolution(center, allowFixedPoints: mask == 0) else { return false }
+            let fixedPoints = center.indices.filter { Int(center[$0]) == $0 }.count
+            guard fixedPoints == (mask == 0 ? 256 : 0) else { return false }
+        }
         return true
     }
 
-    /// Lemma: harden fail-closes coupledCubic6 → independent gen3 cubic6.
-    package static func checkFailClosedCoupling() -> Bool {
-        let coupled = Enigma256Generation(
-            id: 99,
-            formula: .coupledCubic6,
-            folds: Enigma256Generation.gen3Cubic.folds
-        )
-        let hardened = coupled.hardenedCubic()
-        if hardened.formula == .coupledCubic6 { return false }
-        if hardened.formula != .cubic6 { return false }
-        // Independent cubic: leaf expressions must not share coupled assign form.
-        let lines = hardened.nlffAssignLines()
-        if lines.contains("nlff_f1 ^") { return false }
-        return true
+    /// Structural check for the frozen native profile; this is not a cryptographic proof.
+    package static func checkNativeProfileIntegrity() -> Bool {
+        let profile = Enigma256Generation.v2Gen0
+        guard (try? profile.validate()) != nil else { return false }
+        return profile.family == "E256"
+            && profile.suiteVersion == 2
+            && profile.id == 0
+            && profile.fixtureSchemaVersion == Enigma256Generation.supportedFixtureSchemaVersion
+            && profile.lfsrTransition == Enigma256Generation.transitionIdentifier
+            && profile.updateOrder == Enigma256Generation.updateOrderIdentifier
+            && profile.centerConstruction == Enigma256Generation.centerConstructionIdentifier
+            && profile.centerMaskKeyKDF == Enigma256Generation.centerMaskKeyKDFIdentifier
+            && profile.centerMaskPRF == Enigma256Generation.centerMaskPRFIdentifier
+            && profile.centerMaskKeyDomain == Enigma256Generation.centerMaskKeyDomainIdentifier
+            && profile.centerMaskBlockDomain == Enigma256Generation.centerMaskBlockDomainIdentifier
+            && profile.centerMaskCounter == Enigma256Generation.centerMaskCounterIdentifier
+            && profile.centerMaskExtraction == Enigma256Generation.centerMaskExtractionIdentifier
+            && profile.centerMapOrder == Enigma256Generation.centerMapOrderIdentifier
+            && profile.formula == .nativeReversible16
+            && profile.components.count == 8
+            && profile.components.allSatisfy { $0.ones == 64 }
+            && profile.folds.count == 4
+            && profile.folds.flatMap(\.taps).sorted() == Array(0 ..< 64)
+            && profile.folds.flatMap({ [$0.leftComponent, $0.rightComponent] }) == Array(0 ..< 8)
+            && profile.profileHashHex == Enigma256Generation.v2Gen0ProfileSHA256
+            && profile.dayInfo != profile.messageInfo
+            && profile.messageInfo != profile.centerMaskKeyInfo
+            && profile.centerMaskKeyInfo != profile.centerMaskBlockInfo
     }
 
     /// Issue the full Pillar III formal certificate.
@@ -142,17 +166,18 @@ package enum Enigma256Formal {
             .init(lemma: .scrambleBijection, holds: checkScrambleBijection()),
             .init(lemma: .scrambleReciprocity, holds: checkScrambleReciprocity()),
             .init(lemma: .streamRoundTrip, holds: checkStreamRoundTrip()),
-            .init(lemma: .dayKeyInvolutions, holds: checkDayKeyInvolutions()),
-            .init(lemma: .failClosedCoupling, holds: checkFailClosedCoupling())
+            .init(lemma: .dayKeyAndCenterInvolutions, holds: checkDayKeyAndCenterInvolutions()),
+            .init(lemma: .nativeProfileIntegrity, holds: checkNativeProfileIntegrity())
         ]
         return Enigma256FormalCertificate(
             steps: steps,
             hypotheses: [
-                "Scramble path is plugboard → rotors fwd → un-reflector → rotors rev → plugboard",
-                "Day-key tables are involutions (plugboard fixed-point-free; reflector may fix)",
-                "NLFF retaps do not alter the frozen scramble combinational path",
-                "Fail-closed means coupledCubic6 is rejected by harden — not IND-CPA",
-                "Lemmas are structural SoftBus contracts — not a claim against all Red pressure"
+                "Scramble path is A_i^-1(A_i(x) XOR k_i) with A_i = plugboard plus four forward rotors",
+                "For a frozen byte position, XOR by k_i is an involution with 256 fixed points iff k_i is zero, otherwise none",
+                "k_i is one lane of a profile-bound HMAC-SHA256 block selected by a UInt64 big-endian block counter",
+                "The absolute byte counter and the pre-step NLFF mask each advance exactly once per accepted payload byte",
+                "NLFF/profile integrity and finite center checks do not prove HMAC security or IND-CPA security",
+                "Checks are exhaustive only for finite table/center properties; sampled state checks are bounded evidence"
             ]
         )
     }

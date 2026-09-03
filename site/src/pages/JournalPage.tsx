@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom'
+import { NaziBlaster9000Span } from '../NaziBlaster9000Span'
+import { Fahrenheit261Span } from '../Fahrenheit261Span'
 
 export function JournalPage() {
   return (
@@ -11,14 +13,17 @@ export function JournalPage() {
               <Link to="/projects/p1030680" style={{ color: 'inherit', textDecoration: 'none' }}>
                 Project · P1030680
               </Link>
-              {' · '}Turing Complete
+              {' · '}<NaziBlaster9000Span />
             </div>
-            <h2>The ledger of an 80-year-old ghost</h2>
+            <h2><NaziBlaster9000Span />: the ledger of an 80-year-old ghost and a persistent adversary</h2>
             <p className="lede">
               On May 1, 1945, in the dying days of World War II, a German U-boat transmitted a 72-letter encrypted message across the Baltic Sea. It was encoded using a four-rotor Enigma M4 machine on a training network known as M-Thetis. The Allied forces at Bletchley Park never bothered to break this specific network, assigning it no operational value, and the German operators printed their daily key sheets on water-soluble paper that dissolved decades ago.
             </p>
             <p className="lede" style={{ marginTop: '1rem' }}>
               For eighty years, message P1030680 has remained unbroken. In cryptography, tracking what failed is just as vital as recording what worked. This is my operational log—a chronological record of every ghost I chased off the board on my way to the true key.
+            </p>
+            <p className="lede" style={{ marginTop: '1rem' }}>
+              For the record, the overall unified search machine and campaign carry the formal name <NaziBlaster9000Span />. Its historical 261-entry canonical-menu/Future campaign is <Fahrenheit261Span />. The names are deliberate: I want cryptography courses and histories of this work to repeat them. Personal credit matters less to me than keeping the purpose explicit—defeating the <span className="nazi-red">Nazis</span> was, and remains, paramount. The receipt standards and BREAK gate are unchanged.
             </p>
           </div>
 
@@ -64,13 +69,13 @@ export function JournalPage() {
             <li>
               <span className="mono">ELIMINATED</span>
               <span>
-                <strong>Where tested, these wedges are gone:</strong> exact ≥16 catalog × rings AAAA; fuzzed top-40 × right rings; ≥16 UEBUNG heads, and their body anchors under right-ring coverage — that last one re-run on a corrected kernel and re-confirmed (40/40 dead, 0 stops). The curated exact top-30 was contaminated on 20 of its 30 placements by the table-cap bug in Phase 12 and has been re-run and re-confirmed (73 raw stops, identical to the archive, no break). Thetis-register × AAAA; training, collapse, and weather/keyboard stochastic priors under an 80% rigor bar (ceiling ~60–69% is coincidence). Shell-RIGA with free rings did not lift a wrong prior over that bar. Soft-tail UEBUNG quarantine escalate: 0 survivors. Regenbogen/Hannibal tiers (anchor, scuttle, Hela, own-orders, filler): not those exact letter-strings as a BREAK—anchor clean dead; scuttle/Hela soft-band physicals escalate to 0 survivors on the coincidence wall; own-orders AAAA all ghosts; filler AAAA below soft.
+                <strong>Where tested, these wedges are gone:</strong> exact ≥16 catalog × rings AAAA; fuzzed top-40 × right rings; ≥16 UEBUNG heads, and their body anchors under right-ring coverage — that last one re-run on a corrected kernel and re-confirmed (40/40 dead, 0 stops). The curated exact top-30 was contaminated on 20 of its 30 placements by the table-cap bug in Phase 12 and has been re-run and re-confirmed (73 raw stops, identical to the archive, no break). Thetis-register × AAAA; training, collapse, and weather/keyboard stochastic priors under an 80% rigor bar (ceiling ~60–69% is coincidence). Shell-RIGA with free rings did not lift a wrong prior over that bar. Soft-tail UEBUNG quarantine escalate: 0 survivors. The legacy Phase 23 Regenbogen/Hannibal slices (anchor, scuttle, Hela, own-orders, filler) are not those tested exact letter-strings as a BREAK—anchor clean dead; scuttle/Hela soft-band physicals escalate to 0 survivors on the coincidence wall; own-orders AAAA all ghosts; filler AAAA below soft. That bounded history does not close the operational prior under correction-aware Future geometry. Separately, <Fahrenheit261Span />—the historical 261-entry canonical-menu/Future campaign—remains a clean local negative only for shell 0 / identity Future 0 / settings <code>0..&lt;256</code>: 6,656 checked receipts, zero positives, zero BREAK gates.
               </span>
             </li>
             <li>
               <span className="mono">OPEN</span>
               <span>
-                <strong>Still untested or incomplete:</strong> garble tolerance is built and graded but has produced <em>no</em> verdict against this message — on a known key the exact board loses the true setting at one to three corrupted letters while a tolerant board keeps it with all 25 plugs correct, and the Metal port cross-checks at zero mismatches in 192 lanes, but its cost is survivor inflation and that inflation turned out to be placement-dependent rather than a function of crib length (an early "17 edges is enough" rule was wrong and is withdrawn), so each menu has to be pre-qualified by measurement before tolerance can be switched on (that gate passes with zero inflation on the 24 strongest target placements, and the arm is now running); the separate indel board is also built and graded — a deleted four-letter group makes the ordinary menu outright illegal while a spliced menu keeps the true setting with all 25 plugs, though its specificity is carried by self-encipherment legality rather than by the board, so a spliced hit would need independent confirmation, and it too has produced no verdict against this message; catalog right-ring sweep parked at originalIndex 417/2513 (last <code>VVVUUUDREINULEINSVI@25</code>; resume <code>--bombe-from 418</code>); Thetis-register rings from menu 14; any middle ring other than A (~8–15% of keys — the arm is now built and graded end-to-end, with the blind control breaking at full middle × right coverage in 4,307 s, but it has produced no P1030680 verdict); the long-menu arms whose negatives are incomplete by up to 5.56% because a kernel table cap reported lanes eliminated without testing them — the Übung body arm was contaminated on all 40 placements and has now been re-run and re-confirmed (40/40 dead, 0 stops); the curated top-30 on 20 of 30 has also been re-run and re-confirmed (73 raw stops, identical to the archive, no break); the catalog on 300 of 2,513 is queued; near-shell walk around sister keys. Sister message P1030681 needed heavy degarbling—exact Welchman clean negatives do not rule out a mis-transcribed P1030680. Soft-band near-misses quarantine into Stochastic seeds. More GPU on inventing letters does not invent the plaintext—boolean coverage plus garble-aware escalation does.
+                <strong>Still open or incomplete:</strong> the legacy target arms retain bounded, partial receipts rather than global verdicts. Tolerance 1 × right rings is suspended at <strong>3/24</strong>, with all three completed placements dead at the board; resume <code>--bombe-menus 0 --bombe-ring-sweep --bombe-garble-tolerance 1 --bombe-from 4</code>. The exact-board post-gap δ=4 arm is suspended at <strong>144/237</strong>: entries 1–110 and 112–144 are dead, and entry 111's eight raw stops yielded zero valid ≤10-plug completions; resume <code>--bombe-menus 0 --bombe-from 145</code>. Full middle × right ring coverage is suspended at <strong>1/24</strong>, with the first placement dead over 4.152×10<sup>11</sup> settings; resume <code>--bombe-menus 0 --bombe-middle-ring --bombe-ring-sweep --bombe-from 2</code>. Complete-receipt benchmarking selected <code>BANK_LANES=4</code> for <NaziBlaster9000Span />, the unified P1030680 Mulein search machine, at 276.035 receipts/s. Its Phase 51.15 preflight then completed shell 0 <code>B/beta/IV-III-VIII/AAAA</code>, setting 0, and all <strong>628 operational-prior Futures</strong>: 628/628 chunks and 16,328 receipts produced 15 host-replayed one-edge physical candidates (5 identity-family, 10 post-gap), but every candidate was non-exact, so there were <strong>0 exact hits and 0 BREAK gates</strong>. Phase 51.16 then completed settings <code>1..&lt;256</code> across all 628 Futures: <strong>10,048/10,048 new chunks, 4,163,640 checked receipts, 4,184 host-verified physical candidates, and 0 BREAK gates</strong>. Those candidates comprise 40 exact identity hits killed by ≤10-plug completion, 2,056 repaired identity hits, 41 exact post-gap hits, and 2,047 repaired post-gap hits; none produced scored plaintext, a key, or a decrypt. Candidate replay remains open: geometry-aware completion and scoring of the 41 exact post-gap hits first, then deduplicated high-constraint repaired identity hits. Settings <code>256..&lt;456976</code> and other shells remain open. Also open: catalog right rings from originalIndex 418, Thetis-register rings from menu 14, and the deprioritised 300-placement long-menu remainder. P1030680 remains unbroken; these cleartext Float TensorLUT/Metal receipts are not FHE and supply no key or decrypt.
               </span>
             </li>
           </ul>
@@ -242,7 +247,7 @@ export function JournalPage() {
                   Validating the engine was the easy half. The hard half was auditing what I had actually eliminated—and there my own log messages had been lying to me.
                 </p>
                 <p>
-                  My sweep printed <em>"turnover phase fully covered, elimination is complete"</em> whenever I swept the ring settings. That was too strong. Sweeping the fast rotor's ring covers every phase of <em>its</em> turnover, but I keep the middle ring pinned at A, and that shortcut only holds while the middle rotor doesn't click over inside the crib itself. No run I have ever launched has tested any other middle ring. Somewhere between 8% and 15% of all possible keys have never been on the board at all.
+                  My sweep printed <em>"turnover phase fully covered, elimination is complete"</em> whenever I swept the ring settings. That was too strong. Sweeping the fast rotor's ring covers every phase of <em>its</em> turnover, but I kept the middle ring pinned at A, and that shortcut only holds while the middle rotor doesn't click over inside the crib itself. At this point in the chronology, no target run had tested another middle ring; roughly 8% to 15% of the key space had never been on the board. Phase 51.12 below records the first partial target run into that gap.
                 </p>
                 <p>
                   A third overclaim surfaced later, and it is worse than the other two because it wore the language of a result. The Metal kernel builds one rotor-path table per distinct slow-wheel state a menu span reaches, and it capped that at four. When a lane needed a fifth, the kernel wrote a zero survivor mask — which my driver reads as <em>eliminated</em> — for a lane it had never actually tested. A cap on a lookup table was printing clean negatives.
@@ -254,7 +259,7 @@ export function JournalPage() {
                   The damage is not spread thinly — it sits on exactly the arms I curated for long, strong menus. My Übung body-anchor arm is forty menus of forty letters each, and its result was "0 raw stops, every menu dead at the board," which is what let me close the Übung-push hypothesis. <strong>All forty were contaminated.</strong> That negative was unearned as I recorded it. The cap is now eight and overflow reports <em>undecided</em>, which the host re-tests in full on an engine that has no such limit.
                 </p>
                 <p>
-                  So I re-ran it. Forty of forty still dead at the board, zero raw stops across 6.39×10<sup>11</sup> settings, five and a quarter hours. The lanes the old cap had been quietly discarding got tested and died too — the bug was not hiding a key here, and the Übung-push hypothesis stays closed, this time on evidence. My curated top-30 sweep is contaminated on 20 of its 30 placements and is re-running next; the main catalog on 300 of 2,513. The Regenbogen queue is clean. Everything at 16 to 25 letters — the large majority of the catalog, and all of the Thetis-register work — was never affected and stands.
+                  So I re-ran it. Forty of forty still dead at the board, zero raw stops across 6.39×10<sup>11</sup> settings, five and a quarter hours. The lanes the old cap had been quietly discarding got tested and died too — the bug was not hiding a key here, and the Übung-push hypothesis stays closed, this time on evidence. The curated top-30 was also re-run later: 73 raw stops over 4.79×10<sup>11</sup> settings, identical to the archived count, zero extra survivors, no break. The main catalog's 300 contaminated placements are retained but deprioritised. The Regenbogen queue is clean. Everything at 16 to 25 letters — the large majority of the catalog, and all of the Thetis-register work — was never affected and stands.
                 </p>
                 <p>
                   Worse, I went back through the terminal history and found my fuzzed turnover sweep had been killed at menu 18 of 40—I had been treating half an arm as a finished negative. I finished that arm properly (Phase 10: clean). And of my 2,513 catalog placements, only 886 were ever long enough to test—and of those 886, about <strong>182</strong> have had genuine ring coverage, plus the 54 curated ones. My "clean negative on the full catalog" was a negative across roughly a fifth of the ring space.
@@ -537,10 +542,10 @@ export function JournalPage() {
                   The corrected rule is better than the one I lost. Tolerance is not a global switch, it is a per-menu decision pre-qualified by measurement. I cannot simply run the campaign's 16-letter minimum at tolerance 1 — one offset-0 menu there produces 130,787 survivors per shell against an escalator that has so far handled eighty-six. So the order is measure, then run.
                 </p>
                 <p>
-                  What this is not: a decrypt, a verdict against my target, or a claim that P1030680 <em>is</em> garbled. It says a tolerant board would recover a garbled true key, which is a fact about the board and not about the ciphertext.
+                  That mechanism grade was not a decrypt or evidence that P1030680 is garbled. The target arm has now run, but only to a durable partial boundary: <strong>3 of 24</strong> strongest placements completed under tolerance 1 × right-ring coverage, all three dead at the board. It is suspended, not running; resume <code>--bombe-menus 0 --bombe-ring-sweep --bombe-garble-tolerance 1 --bombe-from 4</code>. The remaining 21 placements are open, so this is three local negatives rather than a target-wide verdict.
                 </p>
                 <p>
-                  It also does not model <strong>indels</strong>, and that gap turned out to matter more than the board itself — so I built the other half. Full design notes for both live on the <Link to="/projects/p1030680/mulein-board">Mulein board page</Link>.
+                  Tolerance still does not model <strong>indels</strong>, and that gap turned out to matter more than the board itself — so I built and partially ran the other half. Full design notes for both live on the <Link to="/projects/p1030680/mulein-board">Mulein board page</Link>.
                 </p>
               </div>
             </article>
@@ -573,6 +578,76 @@ export function JournalPage() {
                 <p>
                   Two of my own test bugs are worth recording, because both produced confident wrong answers. My first probe shortened the crib while keeping its start fixed, which quietly walked it off the gap entirely — and since the damaged and undamaged transcripts are <em>identical before the gap</em>, every splice produced the same correct menu and the tool cheerfully reported "28 of 28 wrong splices surviving." My second auto-shortened to 12 letters, below my own ghost threshold, where nothing discriminates anything. The probe now forces the crib to straddle the gap and refuses to go below 16.
                 </p>
+                <p>
+                  The target arm then ran on the exact Welchman/Metal path with post-gap δ=4 geometry and right-ring coverage. It is <strong>suspended at 144/237</strong>: entries 1–110 and 112–144 are dead at the board; entry 111 produced eight raw stops and <strong>zero valid ≤10-plug completions</strong>. No physical candidate, no break. Resume <code>--bombe-menus 0 --bombe-from 145</code>; 93 splices remain, and this arm still pins the middle ring at A.
+                </p>
+              </div>
+            </article>
+
+            <article className="tl-item">
+              <div className="when">Phase 51.13: The Unified Verilog Future Bank</div>
+              <h3>The hardware path landed before the target campaign.</h3>
+              <div className="prose">
+                <p>
+                  I replaced the collection of independent host loops with a production Verilog path. One outer TensorLUT lane owns one rotor setting and one shared 80×26 trail; parameterized bank slots own explicit Future-Lattice geometry and independent seeds. Each slot performs exact-first one-edge repair and holds a complete tagged receipt until the host accepts it.
+                </p>
+                <p>
+                  The known-key grade is deliberately P1030684 only. Clean hit, exact negative, combined post-gap plus one-edge repair, and transmitted step 79 produce identical held receipts through source RTL, post-Yosys RTL, clear Yosys-JSON simulation, and cleartext Float TensorLUT at <code>BANK_LANES=1</code>, including backpressure. This is a cleartext Boolean-oracle grade, <strong>not FHE</strong>.
+                </p>
+                <p>
+                  The deterministic target inventory later named <Fahrenheit261Span /> contains <strong>261 entries</strong>: 24 identity plus 237 post-gap δ=4, fingerprint <code>fnv1a64-32fd2543824a62a3</code>. Building that manifest compiles hypotheses; it evaluates no rotor setting. Width-qualified JSON, Verilog, and statistics artifacts now exist for <code>BANK_LANES=1/2/4/8/16</code>, from 45,463 to 758,323 LUTs. That proved all candidate graphs synthesize; it did not identify the fastest runtime architecture. At the end of this phase the bank had processed zero target settings; Phase 51.14 records the measured selection and bounded launch.
+                </p>
+              </div>
+            </article>
+
+            <article className="tl-item">
+              <div className="when">Phase 51.14: <Fahrenheit261Span /></div>
+              <h3>The bounded canonical-manifest launch returned zero positives.</h3>
+              <div className="prose">
+                <p>
+                  <Fahrenheit261Span /> is the formal name of this historical 261-entry canonical-menu/Future campaign. The name denotes the inventory and campaign, not executed breadth: only identity Future 0 ran in the bounded target slice below; the other 260 Futures did not. I benchmarked widths 1, 2, 4, 8, and 16 on the same P1030684 workload—16 settings × 16 jobs × five repetitions, each width in a fresh process, every receipt checked. All five produced the same digest. Their median rates were 233.777, 264.719, <strong>276.035</strong>, 273.890, and 230.780 complete receipts per second, so <code>BANK_LANES=4</code> won. The selected graph has 189,032 LUT6, 2,772 DFF, 205,177 wires, and 28 levels. Graph size did not choose it; measured runtime did.
+                </p>
+                <p>
+                  Protocol v3 binds one immutable manifest snapshot, the netlist, width, graph, protocol, and exact shell/Future/setting plan into the run identity. The ledger admits only an exact ordered plan prefix and stores every canonical per-job receipt projection, so resume recomputes each digest and derives hits and BREAK gates rather than trusting row summaries. Every persisted hit is replayed through the host and discriminator; a prior gate halts before evaluator submission. Malformed, sparse, reordered, post-gate, or candidate-deleted rows fail closed. One atomic non-truncating descriptor stays exclusively locked from pre-read through final synchronized append. Repaired and post-gap positives remain non-BREAK-eligible until their correction geometry can be verified over the full message, and the runner never announces a break automatically.
+                </p>
+                <p>
+                  The bounded target run was deliberately small: shell 0 <code>B/beta/IV-III-VIII/AAAA</code>, identity Future 0, settings <code>0..&lt;256</code>. Protocol-v3 run <code>sha256-e6dc10d45b2e2e9fb4fbc69936fd0909a89dbecc4d53063cb415c58232fc1360</code> completed <strong>16/16 synchronized chunks and 6,656/6,656 canonical receipt projections, with zero hardware positives and zero BREAK gates</strong>. Re-running the identical plan revalidated all 16 rows and appended nothing. The durable receipt is <code>logs/p1030680-mulein-unified-smoke-v3.jsonl</code>, SHA-256 <code>687d08383111b90b284ca08496d5ba02c9d0b560c17613c2e56283362b1f7e7d</code>.
+                </p>
+                <p>
+                  That is a clean local negative, not a global elimination. The other 260 manifest Futures, settings <code>256..&lt;456976</code>, other shells, and the existing catalog, middle-ring, tolerance, and legacy indel remainders were not covered. This was cleartext Float TensorLUT/Metal, <strong>not FHE</strong>. P1030680 remains unbroken: no key, no plaintext, no implied decrypt.
+                </p>
+              </div>
+            </article>
+
+            <article className="tl-item">
+              <div className="when">Phase 51.15: <NaziBlaster9000Span /></div>
+              <h3>The operational preflight was graded; the bounded production stripe launched.</h3>
+              <div className="prose">
+                <p>
+                  <NaziBlaster9000Span /> is the formal name of the unified P1030680 Mulein search machine and overall campaign. I built a separate operational/scuttle inventory rather than overwrite the <Fahrenheit261Span /> canonical artifact. <code>p1030680_mulein_regenbogen_hannibal_identity_postgap_delta4.json</code> contains <strong>628 Futures</strong>—314 identity and 314 post-gap δ=4—with fingerprint <code>fnv1a64-616326e94036a97d</code> and SHA-256 <code>1086b697d70ef9f05855292dd2e041b94a8551d18b1c51ec12c161a0c974c510</code>.
+                </p>
+                <p>
+                  Protocol-v3 run <code>sha256-2b6bde1ead5ffd33b3e598038a7af597d9c1c189c9b607147c98451a527c727a</code> evaluated shell 0 <code>B/beta/IV-III-VIII/AAAA</code>, setting 0, and Futures <code>0..&lt;628</code>. It completed <strong>628/628 chunks and 16,328 checked receipts</strong>. Fifteen physical candidates survived host replay: five identity-family one-edge repairs and ten post-gap one-edge repairs. Every one was <code>exact=false</code>, leaving <strong>0 exact hits and 0 BREAK gates</strong>. These are non-BREAK-eligible ghosts unless an explicit correction or geometry-aware full-message replay changes their grade; they are not evidence that the ciphertext is garbled.
+                </p>
+                <p>
+                  The durable preflight receipt is <code>logs/p1030680-mulein-operational-preflight-v3.jsonl</code>, SHA-256 <code>55a68266f79ca0b17b6de18a80644883c7c8a2585ab2508d42d5d73c9a17f993</code>. At launch, the bounded production stripe covered settings <code>1..&lt;256</code> across all 628 Futures under run identity <code>sha256-efb770bcaddd2bc0581edbb19b66077160a806c30650a60d0b9d6a733c592cc0</code>, with a fixed plan of 10,048 chunks and 4,163,640 receipts. Phase 51.16 records its completed grade. Operational/scuttle hypotheses ran first; that ordering was a working search prior, not historical proof. P1030680 remained unbroken at launch, and the cleartext Float TensorLUT/Metal run was not FHE.
+                </p>
+              </div>
+            </article>
+
+            <article className="tl-item">
+              <div className="when">Phase 51.16: bounded production receipt</div>
+              <h3>The printed stripe is complete: 4,184 physical candidates, zero BREAK gates.</h3>
+              <div className="prose">
+                <p>
+                  From <code>2026-08-20T20:44:18Z</code> through <code>2026-08-21T01:54:45Z</code>, the production run completed <strong>10,048/10,048 new synchronized chunks, 0 skipped, and 4,163,640/4,163,640 canonical receipt projections</strong>. The durable ledger is <code>logs/p1030680-mulein-operational-settings-000001-000256-v3.jsonl</code>, SHA-256 <code>c516238d5420bde46fb7bdc76078ac086b5946de2374f8d7a4b4d56b1e7e52f2</code>. A read-only audit found every one of the 628 Futures in 16 chunks, no duplicate chunks, one run identity, and exact attempted/stored receipt counts.
+                </p>
+                <p>
+                  Host replay retained <strong>4,184 physical candidates</strong>, all <code>hostReplayVerified=true</code>: 40 exact/no-drop identity hits killed by ≤10-plug completion, 2,056 one-edge identity repairs, 41 exact/no-drop post-gap δ=4 hits, and 2,047 one-edge post-gap repairs. There were <strong>0 row BREAK gates, 0 candidate BREAK gates, no scored plaintext, no key, and no decrypt</strong>. This is neither a zero-positive result nor a global negative.
+                </p>
+                <p>
+                  A translation audit paired 1,724 identity/post-gap candidates at <code>post-gap lane = identity lane - 4</code>, so widening the same leading-gap shape would mostly resample closure states. The next justified action is geometry-aware completion and sparse full-message scoring of the <strong>41 exact post-gap hits</strong>, followed by deduplicated explicit corrected-letter replay of the highest-constraint identity repairs; repaired post-gap hits come third. Settings <code>256..&lt;456976</code>, other shells, and the legacy remainders remain open. These are cleartext Float TensorLUT/Metal receipts, not FHE or encrypted tick rate. P1030680 remains unbroken.
+                </p>
               </div>
             </article>
           </div>
@@ -585,26 +660,26 @@ export function JournalPage() {
             <div className="kicker">Honest Scope</div>
             <h2>The Evidence Room</h2>
             <p>
-              I know the Potsdam 1 May keys decrypt other U-534 traffic, but not this message. The archival levers are spent. My engine is graded rather than trusted—a blind Welchman control breaks a known key through the full campaign in about six minutes with all ten plugs (352 s on the current binary; the archived log reads 427 s), it still breaks that control at full middle × right ring coverage in 4,307 s with no residual ring gap anywhere, and the Stochastic Bombe’s GPU KPA path recovers the same control when the template is known. Training, collapse, weather, meta-evolve, and shell-RIGA all produced zero survivors under an 80%∩noise+10% gate. Exact catalog and fuzzed arms under rings AAAA are clean negatives; so is the ≥16 UEBUNG head. Soft UEBUNG quarantine escalate is also a clean negative. Regenbogen/Hannibal cribs are not a BREAK—anchor dead under rings; scuttle and Hela soft-band escalate to zero; own-orders and filler AAAA stay below soft. Sister traffic P1030681 needed degarbling, so exact clean negatives may still miss a mis-read ciphertext—soft-band Welchman stops quarantine into Stochastic seeds, graded on both synthetic and historical garbles. TensorLUT is a parallel compiler track, not a Thetis crib. What remains on the menu path: catalog right-ring coverage parked at originalIndex 417/2513 (resume <code>--bombe-from 418</code>), parked Thetis-register rings at 13/73, no middle ring but A against this message, and the long-menu re-runs a kernel table cap forced — the Übung body arm and the curated top-30 are both done and re-confirmed with zero extra survivors, and 300 catalog placements plus the fuzzed arms are queued.
+              I know the Potsdam 1 May keys decrypt other U-534 traffic, but not this message. The archival levers are spent. My engine is graded rather than trusted: the blind Welchman control breaks a known key in 352 seconds on the current binary with all ten plugs, and the full middle × right-ring control breaks in 4,307 seconds with no residual ring gap. Current P1030680 evidence remains bounded: catalog right rings are parked at originalIndex 417/2513; Thetis-register rings at 13/73; tolerance 1 × right rings at 3/24; post-gap δ=4 × right rings at 144/237; and full middle × right rings at 1/24. The two highest-risk table-cap re-runs are complete and re-confirmed with zero extra survivors; the remaining 300 contaminated catalog placements are retained but deprioritised. The production Verilog Future Bank inside <NaziBlaster9000Span /> agrees across source RTL, post-Yosys RTL, clear JSON, and cleartext Float TensorLUT on P1030684 controls, and complete-receipt benchmarking selected <code>BANK_LANES=4</code> at 276.035 receipts/s. Its operational-prior preflight covered shell 0, setting 0, and all 628 Futures: 628/628 chunks and 16,328 receipts yielded 15 host-replayed one-edge physical candidates, all non-exact, with 0 exact hits and 0 BREAK gates. The Phase 51.16 production stripe then completed settings <code>1..&lt;256</code> across those 628 Futures: <strong>10,048/10,048 chunks, 4,163,640 checked receipts, 4,184 host-verified physical candidates, and 0 BREAK gates</strong>. Forty exact identity hits died at ≤10-plug completion; the remaining 2,056 repaired identity, 41 exact post-gap, and 2,047 repaired post-gap hits still require correction or geometry-aware full-message replay. None supplied a scored plaintext, key, or decrypt. Candidate replay comes before widening; settings <code>256..&lt;456976</code>, other shells, and the printed legacy remainders remain open. TensorLUT remains a cleartext parallel compiler path, not a Thetis crib, not encrypted tick rate, and not an FHE result. P1030680 remains unbroken.
             </p>
           </div>
           <ul className="stack-list">
             <li>
               <span className="mono">FIXTURES</span>
               <span>
-                <strong>The Input Data:</strong> Contains the scraped 1 May corpus (<code>u534_corpus.json</code>), my 100 mined cribs mapped to 2,513 placements (<code>p1030680_menus.json</code>), the Top-30 turnover set, the fuzzed operator-error menus, the Thetis UEBUNG fixtures, the Thetis-register fixture (<code>p1030680_thetis_register_menus.json</code>), the known-key control fixture, and my naval trigram model.
+                <strong>The Input Data:</strong> Contains the scraped 1 May corpus (<code>u534_corpus.json</code>), my 100 mined cribs mapped to 2,513 placements (<code>p1030680_menus.json</code>), the Top-30 turnover set, fuzzed and Thetis-specific fixtures, the known-key control, and the naval trigram model. The <Fahrenheit261Span /> canonical historical unified-bank inventory remains <code>p1030680_mulein_identity_postgap_delta4.json</code> (24 identity + 237 post-gap δ=4 = 261 entries). The separate <NaziBlaster9000Span /> operational-prior inventory is <code>p1030680_mulein_regenbogen_hannibal_identity_postgap_delta4.json</code> (314 identity + 314 post-gap δ=4 = 628 Futures), fingerprint <code>fnv1a64-616326e94036a97d</code>, SHA-256 <code>1086b697d70ef9f05855292dd2e041b94a8551d18b1c51ec12c161a0c974c510</code>. Inventories are input, not execution receipts.
               </span>
             </li>
             <li>
               <span className="mono">LOGS</span>
               <span>
-                <strong>The Ledger:</strong> Every campaign, including the embarrassing ones—false-alarm catalog, top-30 and fuzzed top-40 ring sweeps, Welchman blind control (<code>control-p1030684-rings.log</code>), the full middle × right ring control (<code>control-middlering-2026-08-16.log</code>), the middle-ring coverage self-test and the table-cap audit (<code>middle-ring-selftest-2026-08-16c.log</code>, <code>max-upper-audit-2026-08-16.log</code>), the forced re-runs those produced (<code>rerun-uebung-body-rings-maxupper-2026-08-16.log</code>, <code>rerun-top30-rings-maxupper-2026-08-16.log</code>), Stochastic Bombe KPA grades (<code>stochastic-bombe-control-*.log</code>), UEBUNG arms, catalog rings, TensorLUT shatter/involution grades (<code>tensorlut-m4-coldstart.log</code>, <code>tensorlut-m4-stecker-melt.log</code>, <code>tensorlut-m4-stecker-resign-control.log</code>, <code>tensorlut-m4-stecker-involution-blind-3pair.log</code>), and quarantine garble controls (<code>quarantine-garble-control.log</code>, <code>quarantine-donitz-control.log</code>, <code>quarantine-donitz-first-control.log</code>).
+                <strong>The Ledger:</strong> Every campaign, including the embarrassing ones—Welchman controls, catalog and Thetis arms, table-cap audit and corrected re-runs, middle-ring coverage grades, Stochastic controls, TensorLUT shatter/involution grades, and quarantine receipts. The legacy target boundaries are on disk in <code>campaign-tolerance1-strongest-2026-08-17.log</code> (3/24), <code>campaign-indel-postgap-target-2026-08-17.log</code> (144/237), and <code>campaign-middlering-strongest-2026-08-16.log</code> (1/24). <code>MuleinFutureTensorLUTTests.swift</code> is the P1030684 four-surface parity receipt. Runtime selection is recorded in <code>logs/mulein-future-tensorlut-selection.json</code> and the five <code>mulein_future_bank*_bench.txt</code> logs. The <Fahrenheit261Span /> bounded target receipt is <code>logs/p1030680-mulein-unified-smoke-v3.jsonl</code>. The <NaziBlaster9000Span /> operational-prior preflight receipt is <code>logs/p1030680-mulein-operational-preflight-v3.jsonl</code>, SHA-256 <code>55a68266f79ca0b17b6de18a80644883c7c8a2585ab2508d42d5d73c9a17f993</code>, run <code>sha256-2b6bde1ead5ffd33b3e598038a7af597d9c1c189c9b607147c98451a527c727a</code>: 16,328 checked receipts, 15 repaired/non-exact physical candidates, 0 exact hits, and 0 BREAK gates. Its completed production ledger is <code>logs/p1030680-mulein-operational-settings-000001-000256-v3.jsonl</code>, SHA-256 <code>c516238d5420bde46fb7bdc76078ac086b5946de2374f8d7a4b4d56b1e7e52f2</code>, run <code>sha256-efb770bcaddd2bc0581edbb19b66077160a806c30650a60d0b9d6a733c592cc0</code>: 10,048 synchronized chunks, 4,163,640 checked receipts, 4,184 host-verified physical candidates, and 0 BREAK gates; no candidate supplied scored plaintext, a key, or a decrypt.
               </span>
             </li>
             <li>
               <span className="mono">VICTORY CONDITIONS</span>
               <span>
-                <strong>The Rules of Engagement:</strong> I claim a break only when four things align: a naval German plaintext, an exact crib match, an IC ≥ 0.055, and a physically possible ≤ 10-plug board — judged over the whole message, or over a readable head of at least 16 letters outside the crib. Cribs under 16 cannot solo-claim a break; under confirm-2 they only re-test shells a ≥16 anchor already locked. Stochastic Bombe halt is exact template match under a ≤10-plug board—never a high bigram score alone. Anything less is a ghost.
+                <strong>The Rules of Engagement:</strong> I claim a break only when five things align: a naval German plaintext, an exact crib match, an IC ≥ 0.055, a trigram tail &gt; −3.600, and a physically possible ≤ 10-plug board — judged over the whole message, or over a readable head of at least 16 letters outside the crib. Cribs under 16 cannot solo-claim a break; under confirm-2 they only re-test shells a ≥16 anchor already locked. Stochastic Bombe halt is exact template match under a ≤10-plug board—never a high bigram score alone. Anything less is a ghost.
               </span>
             </li>
           </ul>
@@ -647,7 +722,7 @@ export function JournalPage() {
               <h3>Sweep every ring phase on every exact crib.</h3>
               <div className="prose">
                 <p>
-                  OriginalIndex 1–417/2513 are done—all dead at the board—in <code>logs/campaign-catalog-rings.log</code> (last <code>VVVUUUDREINULEINSVI@25</code>). Resume with <code>--bombe-from 418</code> (quarantine → <code>logs/quarantine_candidates.json</code>). Regenbogen/Hannibal is closed as a clean negative under right rings (Phase 23).
+                  OriginalIndex 1–417/2513 are done—all dead at the board—in <code>logs/campaign-catalog-rings.log</code> (last <code>VVVUUUDREINULEINSVI@25</code>). Resume with <code>--bombe-from 418</code> (quarantine → <code>logs/quarantine_candidates.json</code>). The legacy Phase-23 Regenbogen/Hannibal slices are closed only for the exact strings and AAAA/right-ring scopes actually tested; correction-aware operational Futures remain an active, separate arm.
                 </p>
               </div>
             </article>
@@ -696,11 +771,11 @@ export function JournalPage() {
             </article>
 
             <article className="tl-item">
-              <div className="when">8 — Built and graded; not yet run</div>
+              <div className="when">8 — Suspended at 1/24; resume from placement 2</div>
               <h3>Unpin the middle ring on the best menus.</h3>
               <div className="prose">
                 <p>
-                  The 8–15% of keys my audit says have never been on the board. It is no longer twenty-six times the cost. Notch tests depend on window position, not on the ring, so a lane whose middle wheel never reaches its notch — and whose ring-A partner at window <em>m</em>−ρ never does either — is the <em>same machine</em> as that partner. Ring A runs in full, rings B–Z run only their notch-hitting lanes, and the union is complete coverage rather than a sample.
+                  This arm opens the 8–15% middle-ring gap the earlier audit identified. It is no longer twenty-six times the cost. Notch tests depend on window position, not on the ring, so a lane whose middle wheel never reaches its notch — and whose ring-A partner at window <em>m</em>−ρ never does either — is the <em>same machine</em> as that partner. Ring A runs in full, rings B–Z run only their notch-hitting lanes, and the union is complete coverage rather than a sample.
                 </p>
                 <p>
                   I graded that equivalence before trusting it, because a coverage shortcut that quietly drops keys is the same bug as the one below. On the validated host board, 2.4 million claimed-covered pairs, zero verdict mismatches. Through the Metal kernel, with roughly 5,600–6,900 survivors per ring actually discarded, every discarded verdict is carried identically by its ring-A partner.
@@ -709,23 +784,56 @@ export function JournalPage() {
                   Then I ran the blind control at <em>full</em> middle × right ring coverage — 908,544 shells, 4.15×10<sup>11</sup> settings, the first run in this campaign with no residual ring gap anywhere. It breaks: same key, all ten plugs, IC 0.064, tail −2.848, in 4,307 seconds at 96.4M settings/s. Twenty-six times the search space for 12.2× the time, because about 70% of lanes exit after the trail test. Raw stops went from 2 to 4, which is the mechanism working rather than a fault — unpin the middle ring and the true machine has several ring-equivalent representations for the sweep to find.
                 </p>
                 <p>
-                  <strong>Implemented is not run.</strong> As of this entry the arm has produced no P1030680 verdict at all. The measured basis is ~72 minutes per placement, so twenty strong placements is about a day.
+                  The target arm has now completed its first of 24 strongest placements: dead at the board over 4.152×10<sup>11</sup> settings. It is suspended, not running, with 23 placements open. Resume <code>--bombe-menus 0 --bombe-middle-ring --bombe-ring-sweep --bombe-from 2</code>. One completed placement is the first target evidence from middle ring ≠ A, not a verdict on the rest of the gap.
                 </p>
               </div>
             </article>
 
             <article className="tl-item">
-              <div className="when">8b — Running: pay off the integrity debt</div>
+              <div className="when">8b — Highest-risk re-runs done; remainder deprioritised</div>
               <h3>Re-run the arms a table cap mis-reported.</h3>
               <div className="prose">
                 <p>
                   Cheapest outstanding work in the campaign, because the damage is concentrated rather than spread. Ordered by contaminated share per GPU-hour:
                 </p>
                 <p>
-                  <strong>Done —</strong> the Übung body arm, contaminated on all 40 of 40 placements: 40/40 dead, zero raw stops, negative re-established. <strong>Done —</strong> the curated top-30, contaminated on 20 of 30: 73 raw stops over 4.79×10<sup>11</sup> settings, identical to the archived figures, best board IC 0.041 / tail −4.819, no break. In both arms the previously-untested lanes produced <em>zero</em> extra survivors — the bug was not hiding a key. <strong>Queued —</strong> 300 of the catalog's 2,513 placements (~32 h), then the two fuzzed arms (41 and 8 placements, lowest share).
+                  <strong>Done —</strong> the Übung body arm, contaminated on all 40 of 40 placements: 40/40 dead, zero raw stops, negative re-established. <strong>Done —</strong> the curated top-30, contaminated on 20 of 30: 73 raw stops over 4.79×10<sup>11</sup> settings, identical to the archived figures, best board IC 0.041 / tail −4.819, no break. In both arms the previously-untested lanes produced <em>zero</em> extra survivors — the bug was not hiding a key. <strong>Deprioritised —</strong> the remaining 300 catalog placements (~32 h); the two fuzzed arms remain retained at still lower priority. Strong representatives are already present in the partial full-middle-ring arm.
                 </p>
                 <p>
                   One thing I got wrong on the first pass: rings AAAA is the wrong re-run for these. My own sweep banner reports AAAA as covering 0 of 26 ring phases once a menu passes 26 letters, so the AAAA pass never carried a meaningful negative for a 28-to-40-letter menu in the first place. Right-ring coverage is the claim that actually needs re-establishing.
+                </p>
+              </div>
+            </article>
+
+            <article className="tl-item">
+              <div className="when">10a — Tolerance suspended at 3/24</div>
+              <h3>Resume the one-edge Mulein arm from placement 4.</h3>
+              <div className="prose">
+                <p>
+                  The 24 strongest loop-rich menus passed pre-qualification. Under tolerance 1 × right rings, the first three are dead at the board. Resume <code>--bombe-menus 0 --bombe-ring-sweep --bombe-garble-tolerance 1 --bombe-from 4</code>; 21 placements remain. A completed negative allows any one crib-span edge to be removed, but the partial prefix does not eliminate garble generally.
+                </p>
+              </div>
+            </article>
+
+            <article className="tl-item">
+              <div className="when">10b — Post-gap δ=4 suspended at 144/237</div>
+              <h3>Resume the exact-board indel arm from splice 145.</h3>
+              <div className="prose">
+                <p>
+                  Entries 1–110 and 112–144 are dead at the board. Entry 111's eight raw stops all fail valid ≤10-plug completion. Resume <code>--bombe-menus 0 --bombe-from 145</code>; 93 hypotheses remain, with the middle ring still pinned at A. No physical candidate and no break.
+                </p>
+              </div>
+            </article>
+
+            <article className="tl-item">
+              <div className="when">10c — <NaziBlaster9000Span /> bounded stripe DONE; candidate replay next</div>
+              <h3>Replay the bounded evidence before widening the search.</h3>
+              <div className="prose">
+                <p>
+                  The separate 628-Future operational inventory completed setting 0 across shell 0, then completed settings <code>1..&lt;256</code> across every Future. The production receipt contains <strong>10,048/10,048 new chunks, 4,163,640 checked receipts, 4,184 host-verified physical candidates, and 0 BREAK gates</strong> in <code>logs/p1030680-mulein-operational-settings-000001-000256-v3.jsonl</code>, run identity <code>sha256-efb770bcaddd2bc0581edbb19b66077160a806c30650a60d0b9d6a733c592cc0</code>. It produced no scored plaintext, key, or decrypt; broader settings and shells remain open.
+                </p>
+                <p>
+                  First, run geometry-aware completion and sparse full-message scoring on the <strong>41 exact post-gap hits</strong>. Second, deduplicate the repaired identity hits and explicitly replay corrected letters for the highest-constraint subset; the 40 exact identity hits need no rerun because ≤10-plug completion already killed them. Third, inspect repaired post-gap hits only after those controls. A translation audit found 1,724 identity/post-gap pairs at a four-lane setting shift, so another broad TensorLUT stripe or same-shape leading δ6/δ8 stripe is low-information. Ordinary legacy resumes stay below candidate replay at their printed durable boundaries. This is a working search order, not evidence of a historical plaintext or a claim that P1030680 is garbled.
                 </p>
               </div>
             </article>

@@ -1,0 +1,133 @@
+{
+  "center_map_order": "forward_rotors_center_then_reverse_rotors_v1",
+  "center_mode": "prestep_step_r1_xor_step_r2_xor_step_r3_xor_step_r4",
+  "center_reserved_pair_rule": "0_1_identity_only_when_center_mode_else_base_reflector",
+  "components": [
+    {
+      "truth_hex": "a39d51afd62adcd05b55a9672ee22418"
+    },
+    {
+      "truth_hex": "28934ec6d3776da07da0c6a47da6136c"
+    },
+    {
+      "truth_hex": "5d6022ec0beb78760ed16430b978fe9a"
+    },
+    {
+      "truth_hex": "61ba65b5723f93c0abde9a6ad30f2300"
+    },
+    {
+      "truth_hex": "6e83562d6ef4ded2878ca9347804de34"
+    },
+    {
+      "truth_hex": "a84c3b648fc11ce9fd4c4cb9dac16b34"
+    },
+    {
+      "truth_hex": "4674f9a094fadda75957f09a2523906a"
+    },
+    {
+      "truth_hex": "355c4728f7ca7c6a284e79e6de408a6a"
+    }
+  ],
+  "family": "E256",
+  "fixture_schema_version": 3,
+  "folds": [
+    {
+      "left_component": 0,
+      "right_component": 1,
+      "taps": [
+        9,
+        43,
+        15,
+        16,
+        21,
+        39,
+        48,
+        5,
+        38,
+        28,
+        41,
+        51,
+        31,
+        30,
+        63,
+        52
+      ]
+    },
+    {
+      "left_component": 2,
+      "right_component": 3,
+      "taps": [
+        42,
+        13,
+        53,
+        32,
+        1,
+        11,
+        36,
+        50,
+        0,
+        45,
+        19,
+        22,
+        6,
+        23,
+        12,
+        29
+      ]
+    },
+    {
+      "left_component": 4,
+      "right_component": 5,
+      "taps": [
+        61,
+        40,
+        47,
+        20,
+        18,
+        44,
+        34,
+        59,
+        27,
+        8,
+        25,
+        55,
+        33,
+        2,
+        17,
+        4
+      ]
+    },
+    {
+      "left_component": 6,
+      "right_component": 7,
+      "taps": [
+        10,
+        26,
+        60,
+        57,
+        62,
+        35,
+        54,
+        58,
+        46,
+        14,
+        7,
+        49,
+        24,
+        37,
+        56,
+        3
+      ]
+    }
+  ],
+  "formula": "native_reversible_16",
+  "generation": 0,
+  "lfsr_transition": "right_shift_lsb_galois_d800000000000000",
+  "profile_sha256": "2a9f54c70a1619805a911758158f1e2204b0fd96c35102a9db5f4575aeb40cb0",
+  "receipt": "logs/e256-v2-gen0-nlff-search.json",
+  "receipt_sha256": "5c5bc931a145048037ec420b2c0c47ff310570e963bd45b8262f18a1640f0027",
+  "reflector_derivation": "fisher_yates_2_through_255_pairing_reserved_0_1_v1",
+  "research_status": "accepted_bounded_profile",
+  "suite_version": 2,
+  "update_order": "derive_prestep_mask_scramble_then_step_same_mask"
+}
