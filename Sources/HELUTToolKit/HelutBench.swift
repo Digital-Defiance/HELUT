@@ -386,6 +386,7 @@ private func runEncryptedNetlistBench() {
         for tickIndex in 0..<stimuli.count {
             let inputs: [String: [UInt8]]
             if let memKind, hostMemActive {
+                let xfersBefore = hostMem.loadXfers.count
                 inputs = makePicoRVHostMemInputs(
                     clear: clear,
                     tick: tickIndex + 1,
@@ -394,6 +395,15 @@ private func runEncryptedNetlistBench() {
                     kind: memKind,
                     host: &hostMem
                 )
+                // The load word is driven the tick *after* the request is observed.
+                // Print it so the trace shows the served RAM value, not just the
+                // pre-transfer bus contents.
+                if hostMem.loadXfers.count > xfersBefore, let xfer = hostMem.loadXfers.last {
+                    print(String(
+                        format: "  LOAD  xfer tick %2d  addr=0x%08x  served=0x%08x  (host RAM -> mem_rdata)",
+                        xfer.tick, xfer.addr, xfer.rdata
+                    ))
+                }
             } else {
                 inputs = stimuli[tickIndex]
             }
@@ -489,7 +499,7 @@ private func runEncryptedNetlistBench() {
                     } else if wstrb == 0 {
                         let rdata = unpackHostLE(inputs["mem_rdata"] ?? [])
                         hostMem.noteLoad(tick: rows + 1, addr: addr, rdata: rdata)
-                        print(String(format: "  LOAD  tick %2d  addr=0x%08x  rdata=0x%08x", rows + 1, addr, rdata))
+                        print(String(format: "  LOAD  req  tick %2d  addr=0x%08x  bus=0x%08x  (pre-transfer)", rows + 1, addr, rdata))
                     }
                     if wstrb != 0 {
                         hostMem.noteStore(tick: rows + 1, addr: addr, wstrb: UInt8(wstrb & 0xf), wdata: wdata)
@@ -518,7 +528,10 @@ private func runEncryptedNetlistBench() {
                     fatalError("tiny program did not store 1 (stores=\(hostMem.stores.count)) \(label)")
                 }
                 let load1 = hostMem.loadXfers.contains { $0.rdata == 1 }
-                print("  LOAD  summary  count=\(hostMem.loads.count)  xfers=\(hostMem.loadXfers.count)  rdata1=\(load1)")
+                let servedList = hostMem.loadXfers
+                    .map { String(format: "0x%x", $0.rdata) }
+                    .joined(separator: ",")
+                print("  LOAD  summary  requests=\(hostMem.loads.count)  xfers=\(hostMem.loadXfers.count)  served=\(servedList)  rdata1=\(load1)")
                 if !load1 {
                     fatalError("tiny program did not load 1 (xfers=\(hostMem.loadXfers)) \(label)")
                 }
