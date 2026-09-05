@@ -15,11 +15,14 @@
 	rust-reference-toolchain rust-reference-format rust-reference-clippy rust-reference-test \
 	rust-reference-verify rust-reference-check \
 	generate-m4-artifacts promote-m4-artifacts \
+	generate-ab0cde-netlist promote-ab0cde-netlist \
 	generate-e256-tensorlut promote-e256-tensorlut \
 	generate-e256-profile check-e256-profile promote-e256-profile \
 	radio radio-edge
 
 HARDWARE_SCRATCH := build/hardware
+AB0CDE_SCRATCH := $(HARDWARE_SCRATCH)/Examples
+AB0CDE_SCRATCH_NETLIST := $(AB0CDE_SCRATCH)/ab0cde_netlist.json
 M4_SCRATCH := $(HARDWARE_SCRATCH)/EnigmaM4
 M4_SCRATCH_NETLIST := $(M4_SCRATCH)/enigma_m4_netlist.json
 M4_SCRATCH_TENSORLUT := $(M4_SCRATCH)/enigma_m4_tensorlut_baseline.v
@@ -100,6 +103,22 @@ rust-reference-check: rust-reference-format rust-reference-clippy rust-reference
 hardware-compat-sync:
 	python3 Scripts/sync_hardware_artifacts.py --sync
 	python3 Scripts/validate_hardware_manifest.py
+
+# The Episode 13 callsign matcher follows the same scratch-first promotion rule:
+# synthesize authored RTL under ignored build/, validate the result, then copy
+# only the reviewed canonical artifact into Generated/.
+generate-ab0cde-netlist:
+	@mkdir -p "$(AB0CDE_SCRATCH)"
+	yosys -Q -p "read_verilog Hardware/RTL/Examples/ab0cde_matcher.v; hierarchy -check -top ab0cde_matcher; synth -top ab0cde_matcher -flatten; abc -lut 2; check -assert; write_json $(AB0CDE_SCRATCH_NETLIST)"
+	yosys -Q -p "read_json $(AB0CDE_SCRATCH_NETLIST); hierarchy -check -top ab0cde_matcher; check -assert; stat"
+
+promote-ab0cde-netlist:
+	@test -s "$(AB0CDE_SCRATCH_NETLIST)"
+	yosys -Q -p "read_json $(AB0CDE_SCRATCH_NETLIST); hierarchy -check -top ab0cde_matcher; check -assert"
+	cp "$(AB0CDE_SCRATCH_NETLIST)" Generated/Netlists/Examples/ab0cde_netlist.json
+	python3 Scripts/sync_hardware_artifacts.py --sync
+	python3 Scripts/validate_hardware_manifest.py
+	@echo "Promoted the canonical AB0CDE netlist and refreshed its root compatibility copy."
 
 # M4 generation is scratch-first. Promotion updates only canonical checked-in
 # artifacts; refresh root compatibility copies separately after review.
@@ -197,7 +216,7 @@ radio-edge:
 	swift build -c release --product HELUTRadio
 	HELUT_RADIO_LIB="$(CURDIR)/.build/release/libHELUTRadio.dylib" \
 	PYTHONPATH="$(CURDIR)/Apps/gr-helut/python$${PYTHONPATH:+:$$PYTHONPATH}" \
-	python Apps/gr-helut/examples/helut_edge_matcher.py --batch 10000
+	python Apps/gr-helut/examples/helut_edge_matcher.py --batch 10000 --noise 0.0 --encrypted-freeze
 
 
 # Mulein cleartext RTL lane. Canonical source lives under Apps/Mulein; the root .v file is a

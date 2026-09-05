@@ -148,6 +148,14 @@ class HelutEngine:
     def mode(self) -> str:
         return self._lib.helut_mode(self._handle).decode()
 
+    @property
+    def input_bit_count(self) -> int:
+        return int(self._lib.helut_input_bit_count(self._handle))
+
+    @property
+    def output_bit_count(self) -> int:
+        return int(self._lib.helut_output_bit_count(self._handle))
+
     def regex_feed(self, byte: int) -> int:
         match = ctypes.c_uint8(0)
         rc = self._lib.helut_regex_feed(self._handle, byte & 0xFF, ctypes.byref(match))
@@ -168,6 +176,18 @@ def default_regex_netlist() -> Path:
     if candidate.is_file():
         return candidate
     raise FileNotFoundError("regex_netlist.json not found at repo root")
+
+
+def default_ab0cde_netlist() -> Path:
+    here = Path(__file__).resolve()
+    repo = here.parents[4]
+    candidate = repo / "Generated" / "Netlists" / "Examples" / "ab0cde_netlist.json"
+    if candidate.is_file():
+        return candidate
+    raise FileNotFoundError(
+        "AB0CDE matcher netlist not found at "
+        "Generated/Netlists/Examples/ab0cde_netlist.json"
+    )
 
 
 def main_probe() -> int:

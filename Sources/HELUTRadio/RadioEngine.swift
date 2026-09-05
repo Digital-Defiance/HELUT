@@ -8,6 +8,12 @@ final class RadioEngine {
         case encryptedDemo = "encrypted-demo"
     }
 
+    private struct LiteralMatcherDescriptor {
+        /// For each input port in packed/lexicographic order, the byte-window index to use.
+        let inputWindowIndices: [Int]
+        let matchBitOffset: Int
+    }
+
     let mode: Mode
     let moduleName: String
     let inputPorts: [(name: String, width: Int)]
@@ -15,6 +21,10 @@ final class RadioEngine {
     private let clear: CleartextNetlistSimulator
     private var encrypted: EncryptedNetlistSimulator?
     private var regexWindow: [UInt8] = []
+    private lazy var literalMatcherDescriptor: LiteralMatcherDescriptor? = Self.makeLiteralMatcherDescriptor(
+        inputPorts: inputPorts,
+        outputPorts: outputPorts
+    )
 
     var inputBitCount: Int { inputPorts.reduce(0) { $0 + $1.width } }
     var outputBitCount: Int { outputPorts.reduce(0) { $0 + $1.width } }
@@ -76,29 +86,72 @@ final class RadioEngine {
         return packOutputs(outputs)
     }
 
-    /// regex_matcher convenience: sliding 3-byte window → match bit.
+    /// Literal-matcher convenience: sliding byte window → the one-bit `match` output.
+    ///
+    /// The netlist contract is contiguous 8-bit ports `char0...charN` plus a one-bit
+    /// output named `match`. Window width is therefore derived from the circuit.
     func regexFeed(_ byte: UInt8) throws -> UInt8 {
-        let names = Set(inputPorts.map(\.name))
-        guard names == Set(["char0", "char1", "char2"]),
-              outputPorts.contains(where: { $0.name == "match" && $0.width == 1 }) else {
-            throw RadioError.mode("regex feed requires ports char0/char1/char2 → match")
+        guard let descriptor = literalMatcherDescriptor else {
+            throw RadioError.mode(
+                "regex feed requires contiguous 8-bit ports char0...charN and a one-bit match output"
+            )
         }
+
+        let windowWidth = descriptor.inputWindowIndices.count
         regexWindow.append(byte)
-        if regexWindow.count > 3 {
-            regexWindow.removeFirst(regexWindow.count - 3)
+        if regexWindow.count > windowWidth {
+            regexWindow.removeFirst(regexWindow.count - windowWidth)
         }
-        guard regexWindow.count == 3 else { return 0 }
+        guard regexWindow.count == windowWidth else { return 0 }
+
         var bits: [UInt8] = []
-        bits.reserveCapacity(24)
-        for idx in 0..<3 {
-            let value = regexWindow[idx]
-            for i in 0..<8 {
-                bits.append((value >> i) & 1)
+        bits.reserveCapacity(inputBitCount)
+        // Pack in the engine's lexicographic port order, but map each charN by its
+        // numeric suffix so char10 cannot be mistaken for the byte after char1.
+        for windowIndex in descriptor.inputWindowIndices {
+            let value = regexWindow[windowIndex]
+            for bitIndex in 0..<8 {
+                bits.append((value >> bitIndex) & 1)
             }
         }
-        // Pack in lexicographic port order: char0, char1, char2 (matches inputPorts sort).
+
         let out = try tick(inBits: bits)
-        return out.first ?? 0
+        guard descriptor.matchBitOffset < out.count else {
+            throw RadioError.internal("match output offset exceeds packed output width")
+        }
+        return out[descriptor.matchBitOffset]
+    }
+
+    private static func makeLiteralMatcherDescriptor(
+        inputPorts: [(name: String, width: Int)],
+        outputPorts: [(name: String, width: Int)]
+    ) -> LiteralMatcherDescriptor? {
+        guard !inputPorts.isEmpty else { return nil }
+
+        var windowIndices: [Int] = []
+        windowIndices.reserveCapacity(inputPorts.count)
+        for port in inputPorts {
+            guard port.width == 8, port.name.hasPrefix("char") else { return nil }
+            let suffix = String(port.name.dropFirst(4))
+            guard let index = Int(suffix), index >= 0, suffix == String(index) else { return nil }
+            windowIndices.append(index)
+        }
+        guard Set(windowIndices) == Set(0..<inputPorts.count) else { return nil }
+
+        var packedOffset = 0
+        var matchBitOffset: Int?
+        for port in outputPorts {
+            if port.name == "match" {
+                guard port.width == 1, matchBitOffset == nil else { return nil }
+                matchBitOffset = packedOffset
+            }
+            packedOffset += port.width
+        }
+        guard let matchBitOffset else { return nil }
+        return LiteralMatcherDescriptor(
+            inputWindowIndices: windowIndices,
+            matchBitOffset: matchBitOffset
+        )
     }
 
     private func unpackInputs(_ inBits: [UInt8]) -> [String: [UInt8]] {

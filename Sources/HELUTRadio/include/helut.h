@@ -80,9 +80,11 @@ int helut_tick(
 );
 
 /**
- * Sliding-window helper for regex_matcher (ports char0,char1,char2 → match).
- * Feeds one ASCII byte; emits *match ∈ {0,1} after each call once the window
- * is full. First two calls return HELUT_OK with *match = 0 (warming).
+ * Sliding-window helper for literal matchers.
+ *
+ * The netlist must expose contiguous 8-bit ports char0...charN and a one-bit
+ * output named match. Feeds one byte and derives the window width from those
+ * ports; the first N calls return HELUT_OK with *match = 0 while warming.
  */
 int helut_regex_feed(helut_engine *engine, uint8_t byte, uint8_t *match);
 

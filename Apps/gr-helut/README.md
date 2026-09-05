@@ -19,9 +19,12 @@ C ABI dylib (`libHELUTRadio.dylib`) and a small Python OOT.
 | `python/helut_radio/` | ctypes loader + optional `gr.sync_block` |
 | `examples/helut_edge_matcher.py` | Closed-loop mindblower (no antenna) |
 
-**Demo story:** baseband IQ → AWGN → recovered bytes → `regex_matcher.v` netlist
-→ ★ match on ASCII `"DEF"`. Optional batch hammer. Optional encrypted freeze at
-demo *N*=8.
+**Episode 13 story:** locally generated baseband IQ → simulated AWGN → recovered
+bytes → the 48-input `ab0cde_matcher.v` Yosys netlist → ★ exact callsign
+matches on ASCII `"AB0CDE"`. The transmitted payload is
+`CQ CQ CQ DE AB0CDE AB0CDE K`, so match completion indices are `[17, 24]`.
+Acts I–II use the clear oracle; the optional encrypted freeze evaluates one
+six-byte window at demonstration parameter *N*=8.
 
 ---
 
@@ -147,26 +150,32 @@ python Apps/gr-helut/examples/helut_regex_flowgraph.py
 # expect: PASS  hits@ […]
 ```
 
-### C — Mindblower (closed-loop, no OTA) ← **the one to show people**
+### C — Callsign edge demo (closed-loop, no OTA) ← **the one to show people**
 
 ```bash
-python Apps/gr-helut/examples/helut_edge_matcher.py --batch 10000
+python Apps/gr-helut/examples/helut_edge_matcher.py \
+  --batch 10000 --noise 0.0 --encrypted-freeze
 ```
 
 What you should see:
 
-1. **Act I** — GR IQ + AWGN loopback → HELUT matches `"DEF"` → `PASS`
-2. **Act II** — batch *B*=10000 windows timed (win/s HUD)
-3. Exit `OK — envelope demo complete (no antenna was used)`
+1. **Act I / GNU Radio** — local BPSK-like IQ → simulated AWGN → exact recovery of
+   `CQ CQ CQ DE AB0CDE AB0CDE K`
+2. **Act I / HELUT clear oracle** — the 48-input Yosys netlist reports callsign
+   completion indices `[17, 24]`, agreeing with both recovered and transmitted bytes
+3. **Act II** — 10,000 scalar host-loop windows produce `908/908` expected hits;
+   this is explicitly not a native tensor batch or encrypted throughput
+4. **Act III** — one recovered `AB0CDE` window evaluates on the fixed-seed *N*=8
+   encrypted-demo path; this is not a production security parameter
+5. Exit `OK — callsign envelope demo complete (local loopback; no antenna used)`
 
-Push harder / show the FHE-shaped path:
+The older `DEF` CLI and minimal flowgraph remain as compatibility regressions.
+To explore channel failures, increase `--noise` separately; noisy runs are not a
+byte-for-byte reproducibility claim and now fail closed if the transmitted
+callsign windows do not survive.
 
-```bash
-python Apps/gr-helut/examples/helut_edge_matcher.py --batch 50000 --noise 0.08
-python Apps/gr-helut/examples/helut_edge_matcher.py --encrypted-freeze
-```
-
-Or: `make radio-edge` (expects radioconda already activated).
+Or: `make radio-edge` (expects radioconda already activated and uses the
+deterministic command above).
 
 ### D — Companion (optional)
 

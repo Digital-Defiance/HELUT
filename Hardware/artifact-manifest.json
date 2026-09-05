@@ -79,6 +79,14 @@
       "legacy_policy": "retain-wrapper"
     },
     {
+      "id": "rtl.examples.ab0cde-matcher",
+      "role": "authored-rtl",
+      "current_path": "Hardware/RTL/Examples/ab0cde_matcher.v",
+      "canonical_path": "Hardware/RTL/Examples/ab0cde_matcher.v",
+      "migration": "canonical",
+      "legacy_policy": "none"
+    },
+    {
       "id": "rtl.examples.ripple4",
       "role": "authored-rtl",
       "current_path": "Hardware/RTL/Examples/ripple4.v",
@@ -313,6 +321,16 @@
       "canonical_path": "Generated/Netlists/Examples/regex_netlist.json",
       "migration": "canonical",
       "legacy_paths": ["regex_netlist.json"],
+      "legacy_policy": "retain-copy"
+    },
+    {
+      "id": "netlist.examples.ab0cde-matcher",
+      "role": "generated-netlist",
+      "source_artifact": "rtl.examples.ab0cde-matcher",
+      "current_path": "Generated/Netlists/Examples/ab0cde_netlist.json",
+      "canonical_path": "Generated/Netlists/Examples/ab0cde_netlist.json",
+      "migration": "canonical",
+      "legacy_paths": ["ab0cde_netlist.json"],
       "legacy_policy": "retain-copy"
     },
     {
