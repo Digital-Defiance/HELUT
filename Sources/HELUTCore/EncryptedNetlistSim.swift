@@ -105,9 +105,11 @@ package final class EncryptedNetlistSimulator {
         diagnosticsMode: EncryptedNetlistDiagnosticsMode = .off,
         noisyBKExecutionPolicy: NoisyBKExecutionPolicy = .requireCircuitConfidence,
         noisyBKIdentityTrials: Int? = nil,
+        noisyBKIdentityParallelism: Int = 1,
         noisyBKEventCount: Int? = nil
     ) {
         precondition(secret.params == params.tfhe)
+        precondition(noisyBKIdentityParallelism > 0)
         precondition(params.tfhe.glweDimension == 1)
         if inputNoise.bound > 0 {
             precondition(
@@ -227,7 +229,10 @@ package final class EncryptedNetlistSimulator {
                 }
                 let trials = noisyBKIdentityTrials ?? defaultTrials
                 precondition(trials > 0, "noisyBKIdentityTrials must be positive")
-                print("  identity residual trials=\(trials)  (n=\(lweN))")
+                let parallelismLabel = noisyBKIdentityParallelism > 1
+                    ? "  parallelism=\(noisyBKIdentityParallelism)"
+                    : ""
+                print("  identity residual trials=\(trials)  (n=\(lweN))\(parallelismLabel)")
                 fflush(stdout)
                 let measured = TFHENoisyBKMeasurement.identity(
                     secret: secret,
@@ -237,14 +242,24 @@ package final class EncryptedNetlistSimulator {
                     trials: trials,
                     seed: seed &+ 0xB10C,
                     publicRefreshCompatible: wireRefresh == .publicMS || self.scaledPrimaryInputs,
-                    booleanScaleMul: booleanScaleMul
+                    booleanScaleMul: booleanScaleMul,
+                    maxConcurrentTrials: noisyBKIdentityParallelism
                 )
                 print("  identity observed max|e| \(measured.maxAbsError)  (sample-decodable \(measured.eachLUTDecodable))")
                 fflush(stdout)
                 self.noisyBKMeasurement = measured
-                self.noisyBKGaussianCertificate = measured.gaussianCertificate(
+                let gaussian = measured.gaussianCertificate(
                     lutCount: self.noisyBKEventCount
                 )
+                self.noisyBKGaussianCertificate = gaussian
+                let confidenceClears = gaussian.isSecure ? "yes" : "no"
+                let effectiveSamples = gaussian.effectiveSamples.map(String.init) ?? "none"
+                print(
+                    "  identity 95% confidence σ=\(gaussian.sigmaBK) events=\(gaussian.lutCount) "
+                        + "εlog2=\(gaussian.failureLog2) target=\(gaussian.targetFailureLog2) "
+                        + "samples=\(effectiveSamples) clears=\(confidenceClears)"
+                )
+                fflush(stdout)
             }
         } else {
             self.bootstrappingKey = nil

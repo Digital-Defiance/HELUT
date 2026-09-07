@@ -1,0 +1,50 @@
+HELUT encrypted-netlist bench · SING
+  netlist: netlist.json  module=full_adder
+  poly N=1024  LUTs=3  DFFs=0  2N=2048
+  stimuli=8 (max --vectors 8)  cpu-only=false  metal-netlist-only=false
+  paths filter: blind-rotate-metal public-ms covering-b2
+  paths: public-ms@boolean + public-ms@crypto + secret@crypto (+ Metal)
+  BK noise inject Gaussian σ=128.0 (torus; identity residual is empirical, not B_bk)
+  BK identity confidence trials=32
+  BK identity PBS parallelism=8 (RNG preparation and reduction remain serial)
+  boolean scale kδ  k=14  (test-poly stride 14; public-MS native δ)
+  DynamicRotateCost mux=2099200 binary=11275 speedup≈186.2×
+
+  Metal BR tile progress: quiet
+  starting blind-rotate-metal public-ms covering-b2
+  identity residual trials=32  (n=1024)  parallelism=8
+  identity observed max|e| 3369752  (sample-decodable true)
+  identity 95% confidence σ=1774113.6388565525 events=24 εlog2=-48.183293522830674 target=-64 samples=32 clears=no
+  time: command terminated abnormally
+      187.92 real      1109.27 user         2.98 sys
+           363954176  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+               22561  page reclaims
+                  11  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   0  messages sent
+                   0  messages received
+                   0  signals received
+                   0  voluntary context switches
+              146315  involuntary context switches
+      33076477084875  instructions retired
+       4348851260355  cycles elapsed
+           353813344  peak memory footprint
+PARALLEL_REPLAY_CHILD_EXIT=-5
+
+Validation comparison:
+  serial source: logs/helut-encrypted-bound-20260906T012213Z-t32-k14.raw.log
+  serial max|e|: 3369752
+  parallel max|e|: 3369752
+  serial sigma95: 1774113.6388565525
+  parallel sigma95: 1774113.6388565525
+  serial 24-event log2 epsilon: -48.183293522830674
+  parallel 24-event log2 epsilon: -48.183293522830674
+  serial real seconds: 1132.49
+  parallel real seconds: 187.92
+  speedup: 6.0268x
+  verdict: exact measurement equality; expected fail-closed confidence result reproduced

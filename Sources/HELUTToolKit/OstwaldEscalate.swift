@@ -41,6 +41,10 @@ private struct EscalateManifest: Decodable {
 }
 
 func runOstwaldEscalate() {
+    guard GermanTrigrams.isLoaded else {
+        print("ABORT — attested trigram model unavailable; escalation break bar not evaluated.")
+        return
+    }
     guard let path = stringFlag("--ostwald-escalate") else {
         print("usage: --ostwald-escalate <quarantine.json>")
         return
@@ -141,7 +145,7 @@ func runOstwaldEscalate() {
                 index: index, candidate: candidate,
                 score: climbed.score,
                 ic: LanguageScorer.indexOfCoincidence(climbed.plain),
-                tail: GermanTrigrams.score(climbed.plain),
+                tail: GermanTrigrams.scoreIfLoaded(climbed.plain) ?? -.infinity,
                 plaintext: EnigmaAlphabet.string(from: climbed.plain),
                 pairs: climbed.pairs, cribExact: exact
             )

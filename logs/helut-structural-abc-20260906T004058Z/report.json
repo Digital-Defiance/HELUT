@@ -1,0 +1,623 @@
+{
+  "circuits" : [
+    {
+      "baseline" : {
+        "artifact_directory" : "\/Volumes\/Code\/MuleinLabs\/HELUT\/logs\/helut-structural-abc-20260906T004058Z\/parity12\/baseline",
+        "mapped_cone_luts" : 3,
+        "mapped_depth" : 2,
+        "mapped_luts" : 3,
+        "pre_active_luts" : 7,
+        "pre_depth" : 3,
+        "pre_support_edges" : 30,
+        "proof" : "PROVED"
+      },
+      "id" : "parity12",
+      "input_space" : 4096,
+      "input_wires" : [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "output_wires" : [
+        18
+      ],
+      "search_rows" : 4096,
+      "seeds" : [
+        {
+          "changed_modes" : 1,
+          "mode_vector" : "T,T,T,T,T,T,B0",
+          "pre_active_luts" : 3,
+          "pre_depth" : 2,
+          "pre_support_edges" : 14,
+          "search_mismatches" : 0,
+          "seed" : "0x0000000000005eed",
+          "unique_candidates_evaluated" : 528
+        },
+        {
+          "changed_modes" : 1,
+          "mode_vector" : "T,T,T,T,T,T,B0",
+          "pre_active_luts" : 3,
+          "pre_depth" : 2,
+          "pre_support_edges" : 14,
+          "search_mismatches" : 0,
+          "seed" : "0x0000000000c0ffee",
+          "unique_candidates_evaluated" : 533
+        },
+        {
+          "changed_modes" : 1,
+          "mode_vector" : "T,T,T,T,T,T,B0",
+          "pre_active_luts" : 3,
+          "pre_depth" : 2,
+          "pre_support_edges" : 14,
+          "search_mismatches" : 0,
+          "seed" : "0x0000000051a7e123",
+          "unique_candidates_evaluated" : 554
+        }
+      ],
+      "unique_finalists" : [
+        {
+          "artifact_directory" : "\/Volumes\/Code\/MuleinLabs\/HELUT\/logs\/helut-structural-abc-20260906T004058Z\/parity12\/finalist-0",
+          "changed_modes" : 1,
+          "delta_mapped_depth" : 0,
+          "delta_mapped_luts" : 0,
+          "mapped_cone_luts" : 3,
+          "mapped_depth" : 2,
+          "mapped_luts" : 3,
+          "mode_vector" : "T,T,T,T,T,T,B0",
+          "pre_active_luts" : 3,
+          "pre_depth" : 2,
+          "pre_support_edges" : 14,
+          "proof" : "PROVED",
+          "retained" : true,
+          "search_mismatches" : 0,
+          "seeds" : [
+            "0x0000000000005eed",
+            "0x0000000000c0ffee",
+            "0x0000000051a7e123"
+          ]
+        }
+      ]
+    },
+    {
+      "baseline" : {
+        "artifact_directory" : "\/Volumes\/Code\/MuleinLabs\/HELUT\/logs\/helut-structural-abc-20260906T004058Z\/decision6\/baseline",
+        "mapped_cone_luts" : 1,
+        "mapped_depth" : 1,
+        "mapped_luts" : 1,
+        "pre_active_luts" : 3,
+        "pre_depth" : 2,
+        "pre_support_edges" : 14,
+        "proof" : "PROVED"
+      },
+      "id" : "decision6",
+      "input_space" : 64,
+      "input_wires" : [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "output_wires" : [
+        8
+      ],
+      "search_rows" : 64,
+      "seeds" : [
+        {
+          "changed_modes" : 1,
+          "mode_vector" : "T,T,B0",
+          "pre_active_luts" : 1,
+          "pre_depth" : 1,
+          "pre_support_edges" : 6,
+          "search_mismatches" : 0,
+          "seed" : "0x0000000000005eed",
+          "unique_candidates_evaluated" : 103
+        },
+        {
+          "changed_modes" : 1,
+          "mode_vector" : "T,T,B0",
+          "pre_active_luts" : 1,
+          "pre_depth" : 1,
+          "pre_support_edges" : 6,
+          "search_mismatches" : 0,
+          "seed" : "0x0000000000c0ffee",
+          "unique_candidates_evaluated" : 96
+        },
+        {
+          "changed_modes" : 1,
+          "mode_vector" : "T,T,B0",
+          "pre_active_luts" : 1,
+          "pre_depth" : 1,
+          "pre_support_edges" : 6,
+          "search_mismatches" : 0,
+          "seed" : "0x0000000051a7e123",
+          "unique_candidates_evaluated" : 106
+        }
+      ],
+      "unique_finalists" : [
+        {
+          "artifact_directory" : "\/Volumes\/Code\/MuleinLabs\/HELUT\/logs\/helut-structural-abc-20260906T004058Z\/decision6\/finalist-0",
+          "changed_modes" : 1,
+          "delta_mapped_depth" : 0,
+          "delta_mapped_luts" : 0,
+          "mapped_cone_luts" : 1,
+          "mapped_depth" : 1,
+          "mapped_luts" : 1,
+          "mode_vector" : "T,T,B0",
+          "pre_active_luts" : 1,
+          "pre_depth" : 1,
+          "pre_support_edges" : 6,
+          "proof" : "PROVED",
+          "retained" : true,
+          "search_mismatches" : 0,
+          "seeds" : [
+            "0x0000000000005eed",
+            "0x0000000000c0ffee",
+            "0x0000000051a7e123"
+          ]
+        }
+      ]
+    },
+    {
+      "baseline" : {
+        "artifact_directory" : "\/Volumes\/Code\/MuleinLabs\/HELUT\/logs\/helut-structural-abc-20260906T004058Z\/mux8\/baseline",
+        "mapped_cone_luts" : 3,
+        "mapped_depth" : 2,
+        "mapped_luts" : 3,
+        "pre_active_luts" : 15,
+        "pre_depth" : 4,
+        "pre_support_edges" : 44,
+        "proof" : "PROVED"
+      },
+      "id" : "mux8",
+      "input_space" : 2048,
+      "input_wires" : [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "output_wires" : [
+        25
+      ],
+      "search_rows" : 2048,
+      "seeds" : [
+        {
+          "changed_modes" : 1,
+          "mode_vector" : "T,T,T,T,T,T,T,T,T,T,T,T,T,T,B0",
+          "pre_active_luts" : 7,
+          "pre_depth" : 3,
+          "pre_support_edges" : 21,
+          "search_mismatches" : 0,
+          "seed" : "0x0000000000005eed",
+          "unique_candidates_evaluated" : 1251
+        },
+        {
+          "changed_modes" : 1,
+          "mode_vector" : "T,T,T,T,T,T,T,T,T,T,T,T,T,T,B0",
+          "pre_active_luts" : 7,
+          "pre_depth" : 3,
+          "pre_support_edges" : 21,
+          "search_mismatches" : 0,
+          "seed" : "0x0000000000c0ffee",
+          "unique_candidates_evaluated" : 1276
+        },
+        {
+          "changed_modes" : 1,
+          "mode_vector" : "T,T,T,T,T,T,T,T,T,T,T,T,T,T,B0",
+          "pre_active_luts" : 7,
+          "pre_depth" : 3,
+          "pre_support_edges" : 21,
+          "search_mismatches" : 0,
+          "seed" : "0x0000000051a7e123",
+          "unique_candidates_evaluated" : 1293
+        }
+      ],
+      "unique_finalists" : [
+        {
+          "artifact_directory" : "\/Volumes\/Code\/MuleinLabs\/HELUT\/logs\/helut-structural-abc-20260906T004058Z\/mux8\/finalist-0",
+          "changed_modes" : 1,
+          "delta_mapped_depth" : 0,
+          "delta_mapped_luts" : 0,
+          "mapped_cone_luts" : 3,
+          "mapped_depth" : 2,
+          "mapped_luts" : 3,
+          "mode_vector" : "T,T,T,T,T,T,T,T,T,T,T,T,T,T,B0",
+          "pre_active_luts" : 7,
+          "pre_depth" : 3,
+          "pre_support_edges" : 21,
+          "proof" : "PROVED",
+          "retained" : true,
+          "search_mismatches" : 0,
+          "seeds" : [
+            "0x0000000000005eed",
+            "0x0000000000c0ffee",
+            "0x0000000051a7e123"
+          ]
+        }
+      ]
+    },
+    {
+      "baseline" : {
+        "artifact_directory" : "\/Volumes\/Code\/MuleinLabs\/HELUT\/logs\/helut-structural-abc-20260906T004058Z\/popcount6\/baseline",
+        "mapped_cone_luts" : 3,
+        "mapped_depth" : 1,
+        "mapped_luts" : 3,
+        "pre_active_luts" : 9,
+        "pre_depth" : 2,
+        "pre_support_edges" : 42,
+        "proof" : "PROVED"
+      },
+      "id" : "popcount6",
+      "input_space" : 64,
+      "input_wires" : [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "output_wires" : [
+        8,
+        11,
+        14
+      ],
+      "search_rows" : 64,
+      "seeds" : [
+        {
+          "changed_modes" : 3,
+          "mode_vector" : "T,T,B0,T,T,B0,T,T,B0",
+          "pre_active_luts" : 3,
+          "pre_depth" : 1,
+          "pre_support_edges" : 18,
+          "search_mismatches" : 0,
+          "seed" : "0x0000000000005eed",
+          "unique_candidates_evaluated" : 1035
+        },
+        {
+          "changed_modes" : 3,
+          "mode_vector" : "T,T,B0,T,T,B0,T,T,B0",
+          "pre_active_luts" : 3,
+          "pre_depth" : 1,
+          "pre_support_edges" : 18,
+          "search_mismatches" : 0,
+          "seed" : "0x0000000000c0ffee",
+          "unique_candidates_evaluated" : 994
+        },
+        {
+          "changed_modes" : 3,
+          "mode_vector" : "T,T,B0,T,T,B0,T,T,B0",
+          "pre_active_luts" : 3,
+          "pre_depth" : 1,
+          "pre_support_edges" : 18,
+          "search_mismatches" : 0,
+          "seed" : "0x0000000051a7e123",
+          "unique_candidates_evaluated" : 1009
+        }
+      ],
+      "unique_finalists" : [
+        {
+          "artifact_directory" : "\/Volumes\/Code\/MuleinLabs\/HELUT\/logs\/helut-structural-abc-20260906T004058Z\/popcount6\/finalist-0",
+          "changed_modes" : 3,
+          "delta_mapped_depth" : 0,
+          "delta_mapped_luts" : 0,
+          "mapped_cone_luts" : 3,
+          "mapped_depth" : 1,
+          "mapped_luts" : 3,
+          "mode_vector" : "T,T,B0,T,T,B0,T,T,B0",
+          "pre_active_luts" : 3,
+          "pre_depth" : 1,
+          "pre_support_edges" : 18,
+          "proof" : "PROVED",
+          "retained" : true,
+          "search_mismatches" : 0,
+          "seeds" : [
+            "0x0000000000005eed",
+            "0x0000000000c0ffee",
+            "0x0000000051a7e123"
+          ]
+        }
+      ]
+    },
+    {
+      "baseline" : {
+        "artifact_directory" : "\/Volumes\/Code\/MuleinLabs\/HELUT\/logs\/helut-structural-abc-20260906T004058Z\/multiplier3x3\/baseline",
+        "mapped_cone_luts" : 6,
+        "mapped_depth" : 1,
+        "mapped_luts" : 6,
+        "pre_active_luts" : 18,
+        "pre_depth" : 2,
+        "pre_support_edges" : 72,
+        "proof" : "PROVED"
+      },
+      "id" : "multiplier3x3",
+      "input_space" : 64,
+      "input_wires" : [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "output_wires" : [
+        8,
+        11,
+        14,
+        17,
+        20,
+        23
+      ],
+      "search_rows" : 64,
+      "seeds" : [
+        {
+          "changed_modes" : 7,
+          "mode_vector" : "T,T,B0,T,T,B0,T,T,B0,B0,T,B1,T,T,B1,T,T,B0",
+          "pre_active_luts" : 6,
+          "pre_depth" : 1,
+          "pre_support_edges" : 30,
+          "search_mismatches" : 0,
+          "seed" : "0x0000000000005eed",
+          "unique_candidates_evaluated" : 1398
+        },
+        {
+          "changed_modes" : 7,
+          "mode_vector" : "C1,T,T,T,T,B1,T,T,B0,T,T,B1,T,T,B0,T,B3,B0",
+          "pre_active_luts" : 6,
+          "pre_depth" : 1,
+          "pre_support_edges" : 30,
+          "search_mismatches" : 0,
+          "seed" : "0x0000000000c0ffee",
+          "unique_candidates_evaluated" : 1397
+        },
+        {
+          "changed_modes" : 8,
+          "mode_vector" : "T,T,B1,B1,T,B1,T,T,B0,T,B3,B0,C1,T,T,T,T,B1",
+          "pre_active_luts" : 6,
+          "pre_depth" : 1,
+          "pre_support_edges" : 30,
+          "search_mismatches" : 0,
+          "seed" : "0x0000000051a7e123",
+          "unique_candidates_evaluated" : 1386
+        }
+      ],
+      "unique_finalists" : [
+        {
+          "artifact_directory" : "\/Volumes\/Code\/MuleinLabs\/HELUT\/logs\/helut-structural-abc-20260906T004058Z\/multiplier3x3\/finalist-0",
+          "changed_modes" : 7,
+          "delta_mapped_depth" : 0,
+          "delta_mapped_luts" : 0,
+          "mapped_cone_luts" : 6,
+          "mapped_depth" : 1,
+          "mapped_luts" : 6,
+          "mode_vector" : "C1,T,T,T,T,B1,T,T,B0,T,T,B1,T,T,B0,T,B3,B0",
+          "pre_active_luts" : 6,
+          "pre_depth" : 1,
+          "pre_support_edges" : 30,
+          "proof" : "PROVED",
+          "retained" : true,
+          "search_mismatches" : 0,
+          "seeds" : [
+            "0x0000000000c0ffee"
+          ]
+        },
+        {
+          "artifact_directory" : "\/Volumes\/Code\/MuleinLabs\/HELUT\/logs\/helut-structural-abc-20260906T004058Z\/multiplier3x3\/finalist-1",
+          "changed_modes" : 7,
+          "delta_mapped_depth" : 0,
+          "delta_mapped_luts" : 0,
+          "mapped_cone_luts" : 6,
+          "mapped_depth" : 1,
+          "mapped_luts" : 6,
+          "mode_vector" : "T,T,B0,T,T,B0,T,T,B0,B0,T,B1,T,T,B1,T,T,B0",
+          "pre_active_luts" : 6,
+          "pre_depth" : 1,
+          "pre_support_edges" : 30,
+          "proof" : "PROVED",
+          "retained" : true,
+          "search_mismatches" : 0,
+          "seeds" : [
+            "0x0000000000005eed"
+          ]
+        },
+        {
+          "artifact_directory" : "\/Volumes\/Code\/MuleinLabs\/HELUT\/logs\/helut-structural-abc-20260906T004058Z\/multiplier3x3\/finalist-2",
+          "changed_modes" : 8,
+          "delta_mapped_depth" : 0,
+          "delta_mapped_luts" : 0,
+          "mapped_cone_luts" : 6,
+          "mapped_depth" : 1,
+          "mapped_luts" : 6,
+          "mode_vector" : "T,T,B1,B1,T,B1,T,T,B0,T,B3,B0,C1,T,T,T,T,B1",
+          "pre_active_luts" : 6,
+          "pre_depth" : 1,
+          "pre_support_edges" : 30,
+          "proof" : "PROVED",
+          "retained" : true,
+          "search_mismatches" : 0,
+          "seeds" : [
+            "0x0000000051a7e123"
+          ]
+        }
+      ]
+    },
+    {
+      "baseline" : {
+        "artifact_directory" : "\/Volumes\/Code\/MuleinLabs\/HELUT\/logs\/helut-structural-abc-20260906T004058Z\/adder8\/baseline",
+        "mapped_cone_luts" : 14,
+        "mapped_depth" : 3,
+        "mapped_luts" : 14,
+        "pre_active_luts" : 41,
+        "pre_depth" : 9,
+        "pre_support_edges" : 110,
+        "proof" : "PROVED"
+      },
+      "id" : "adder8",
+      "input_space" : 65536,
+      "input_wires" : [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "output_wires" : [
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56
+      ],
+      "search_rows" : 512,
+      "seeds" : [
+        {
+          "changed_modes" : 9,
+          "mode_vector" : "T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,B1,B0,B0,B0,B0,B0,B0,B0,B0",
+          "pre_active_luts" : 16,
+          "pre_depth" : 8,
+          "pre_support_edges" : 46,
+          "search_mismatches" : 0,
+          "seed" : "0x0000000000005eed",
+          "unique_candidates_evaluated" : 1220
+        },
+        {
+          "changed_modes" : 9,
+          "mode_vector" : "T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,B0,B0,B0,B0,B0,B0,B0,B0,B0",
+          "pre_active_luts" : 16,
+          "pre_depth" : 8,
+          "pre_support_edges" : 46,
+          "search_mismatches" : 0,
+          "seed" : "0x0000000000c0ffee",
+          "unique_candidates_evaluated" : 1056
+        },
+        {
+          "changed_modes" : 9,
+          "mode_vector" : "T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,B0,B0,B0,B0,B0,B0,B0,B0,B0",
+          "pre_active_luts" : 16,
+          "pre_depth" : 8,
+          "pre_support_edges" : 46,
+          "search_mismatches" : 0,
+          "seed" : "0x0000000051a7e123",
+          "unique_candidates_evaluated" : 1110
+        }
+      ],
+      "unique_finalists" : [
+        {
+          "artifact_directory" : "\/Volumes\/Code\/MuleinLabs\/HELUT\/logs\/helut-structural-abc-20260906T004058Z\/adder8\/finalist-0",
+          "changed_modes" : 9,
+          "delta_mapped_depth" : 0,
+          "delta_mapped_luts" : 0,
+          "mapped_cone_luts" : 14,
+          "mapped_depth" : 3,
+          "mapped_luts" : 14,
+          "mode_vector" : "T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,B0,B0,B0,B0,B0,B0,B0,B0,B0",
+          "pre_active_luts" : 16,
+          "pre_depth" : 8,
+          "pre_support_edges" : 46,
+          "proof" : "PROVED",
+          "retained" : true,
+          "search_mismatches" : 0,
+          "seeds" : [
+            "0x0000000000c0ffee",
+            "0x0000000051a7e123"
+          ]
+        },
+        {
+          "artifact_directory" : "\/Volumes\/Code\/MuleinLabs\/HELUT\/logs\/helut-structural-abc-20260906T004058Z\/adder8\/finalist-1",
+          "changed_modes" : 9,
+          "delta_mapped_depth" : 0,
+          "delta_mapped_luts" : 0,
+          "mapped_cone_luts" : 14,
+          "mapped_depth" : 3,
+          "mapped_luts" : 14,
+          "mode_vector" : "T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,T,B1,B0,B0,B0,B0,B0,B0,B0,B0",
+          "pre_active_luts" : 16,
+          "pre_depth" : 8,
+          "pre_support_edges" : 46,
+          "proof" : "PROVED",
+          "retained" : true,
+          "search_mismatches" : 0,
+          "seeds" : [
+            "0x0000000000005eed"
+          ]
+        }
+      ]
+    }
+  ],
+  "claim_boundary" : "LUT6 count and LUT-level depth under this one ABC flow are implementation proxies, not physical area, delay, frequency, power, or a general synthesis result.",
+  "evolution" : {
+    "crossover_rate" : 0.84999999999999998,
+    "elite_count" : 12,
+    "generations" : 16,
+    "mutation_rate" : 0.14999999999999999,
+    "population" : 96,
+    "rank" : [
+      "mismatches",
+      "active_luts",
+      "depth",
+      "support_edges",
+      "changed_modes"
+    ],
+    "seeds" : [
+      "0x0000000000005eed",
+      "0x0000000000c0ffee",
+      "0x0000000051a7e123"
+    ],
+    "tournament_size" : 4
+  },
+  "flow" : {
+    "area_proxy" : "post-ABC $lut cell count",
+    "lut_size" : 6,
+    "proof" : "read mapped JSON + independent behavioral RTL; miter -equiv -flatten; sat -prove trigger 0",
+    "synthesis" : "read LUT6 model + emitted candidate; hierarchy -check; proc; flatten; opt; techmap; opt; abc -lut 6; opt_clean; check -assert; write_json",
+    "timing_proxy" : "maximum post-ABC output-cone LUT levels"
+  },
+  "schema" : "helut.tensorlut.structural-abc-benchmark.v1",
+  "status" : "PASS",
+  "summary" : {
+    "circuits" : 6,
+    "mapped_depth_losses" : 0,
+    "mapped_depth_ties" : 18,
+    "mapped_depth_wins" : 0,
+    "mapped_lut_losses" : 0,
+    "mapped_lut_ties" : 18,
+    "mapped_lut_wins" : 0,
+    "retained_and_proved" : 18,
+    "seed_results" : 18
+  },
+  "timestamp_utc" : "2026-09-06T00:41:15Z",
+  "yosys_version" : "Yosys 0.68+post (git sha1 c12172fbae8af5e20f6fb52e3d4e92d56ed587b6, Release, AppleClang clang++ 21.0.0.21000101)"
+}

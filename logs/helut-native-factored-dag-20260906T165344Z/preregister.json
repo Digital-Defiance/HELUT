@@ -1,0 +1,192 @@
+{
+  "schema": "helut-native-factored-dag-preregister-v1",
+  "utc": "2026-09-06T16:53:44Z",
+  "goal": "Measure one corrected, cost-selected factored multilinear MPSGraph lowering against the sealed host-path receipt. Preserve the paired scope, phase timestamps, synchronized execution, every input write and strict output read, canonical digest, exhaustive assignments, fixture, lane points, trials, and native workers; bank the result whether it improves, regresses, fails, or is unchanged.",
+  "baseline": {
+    "path": "logs/helut-native-host-path-20260906T152504Z/receipt.json",
+    "sha256": "73928f07a9b1a7ea13943e2c7736f9359bfb001c9f79a1cfac923256790d979d",
+    "status": "Sealed and preserved; this is the sole immediate before measurement.",
+    "b65536MedianNanoseconds": {
+      "assignment": 30041,
+      "inputPack": 1031041,
+      "pairedGraph": 2508998,
+      "decode": 553012,
+      "digest": 6610990,
+      "pairedTotal": 10728002,
+      "nativePrepared": 365541,
+      "nativeParallelTotal": 7094750
+    },
+    "b65536DigestHex": "52f209ab0358725",
+    "pairedCrossoverThroughB65536": false
+  },
+  "candidate": {
+    "file": "Sources/HELUTCore/HELUTCore.swift",
+    "name": "cost-selected exact constant-fill Shannon DAG",
+    "semanticChange": "For nonconstant .constantFill multilinear LUTs, compare the live expanded sum-of-minterms operation count with a reduced Shannon DAG over variable orders through width six. Emit low + x * (high - low), with identical cofactors memoized, complements reused, and a final addition by encoded zero that gives the LUT a distinct result tensor. Retain the original expansion unless the factored graph including that distinct-root operation is strictly cheaper.",
+    "exactness": {
+      "arithmetic": "MPSGraph UInt32 arithmetic modulo 2^32",
+      "identity": "For .constantFill, encoded one is componentwise UInt32 1, so grouping the original minterms gives (1 - x) * low + x * high = low + x * (high - low) exactly for every UInt32 coefficient, not only Boolean points.",
+      "truthTableAddressOrderChanged": false,
+      "variableRemap": "An ordered compact mask maps ordered bit i back to original input variableOrder[i]; even and odd compact entries are the low and high cofactors of that same variable.",
+      "distinctRoot": "Every factored LUT adds encoded zero at its root, creating a distinct MPSGraphTensor key even when reduction yields an upstream projection.",
+      "phaseAndGLWEPolicy": "Non-constant .phase and .glweTrivial paths retain the original expansion because their encoded one is not a componentwise ring identity. Packed GLWE continues through compileMultilinearOnBodies unchanged.",
+      "constantFunctions": "Return the same encoded constant directly."
+    },
+    "planner": {
+      "maximumExhaustiveVariableOrderWidth": 6,
+      "widerLUTPolicy": "Use deterministic original variable order while still applying cost selection.",
+      "selectionRule": "factoredCoreOperationCount + one distinct-root addition must be strictly less than live expanded operation count",
+      "memoizationKey": "remaining ordered truth vector plus recursion depth",
+      "logicalOperationAccountingOnly": true,
+      "dispatchCountClaimed": false
+    },
+    "sealedFixtureStaticPlan": {
+      "postABCLUTs": 14,
+      "expandedLiveLogicalArithmeticOperations": 1116,
+      "selectedLogicalArithmeticOperations": 194,
+      "factoredLUTs": 11,
+      "expandedFallbackLUTs": 3,
+      "descriptiveReductionFraction": 0.8261648745519713,
+      "caveat": "These are source-level live arithmetic nodes, not measured Metal dispatches; MPSGraph may fuse, prune, or materialize them differently."
+    },
+    "benchmarkHarnessChanged": false,
+    "assignmentOrInputWritesChanged": false,
+    "graphRunBoundaryOrSynchronizationChanged": false,
+    "outputReadsOrStrictDecodeChanged": false,
+    "digestOrOutputOrderChanged": false,
+    "fixtureChanged": false,
+    "lanePointsTrialsOrWorkersChanged": false
+  },
+  "rejectedPreFreezeCandidate": {
+    "status": "REJECTED_AND_NOT_USED_AS_EVIDENCE",
+    "reason": "The first implementation was not restricted to componentwise-one constant-fill encodings and could return an upstream projection tensor directly. Semantic review identified a phase-shaped polynomial mismatch and possible result-dictionary key collision.",
+    "correctionsBeforeThisFreeze": [
+      "Restrict factored lowering to .constantFill and preserve original phase/glwe expansion.",
+      "Add an encoded-zero root operation to every factored LUT and include it in selection cost."
+    ],
+    "reviewReport": {
+      "path": "semantic-review/2026-09-06-092744-pr-local.md",
+      "sha256": "15c96f9fe1d2ec8454a6909687b88baab4d5ee422980c2d8b40281b97ea80221"
+    },
+    "unpreregisteredExecutionDisclosure": "The semantic-review subagent independently invoked NativeBaselineComparisonTests on the rejected pre-fix candidate. No raw timing bundle was captured, no performance values from it are used, and it is not counted as the preregistered measurement. This candidate was changed after the review before the present freeze."
+  },
+  "prefreezeValidation": {
+    "releaseBuildAndTestListing": "PASS",
+    "sourceDiffCheck": "PASS",
+    "targetedCommand": "swift test -c release --skip-build --filter 'MockPBSBooleanTests/testBooleanSafeFullAdderMatchesCleartext|BatchLaneDistinctTests|TFHESeamTests/testTrivialPBSOracleMatchesMultilinear'",
+    "targetedFooter": "Executed 5 tests, with 0 failures (0 unexpected)",
+    "coverage": [
+      "all eight full-adder Boolean rows through production MPSGraph lowering",
+      "256 independently verified batch lanes",
+      "single-lane corruption negative control",
+      "phase/PBS oracle regression retained"
+    ]
+  },
+  "freeze": {
+    "gitCommit": "4d47ad0ef40c593bb3a0e4ab5aa2e668b917f975",
+    "trackedWorkingTreeDirty": true,
+    "coreSource": "Sources/HELUTCore/HELUTCore.swift",
+    "coreSourceSHA256": "9e9fecf0cf0991174502b462b496b59cc6025d7facb5985856e73b7cb7c1830a",
+    "coreSourceMtimeEpoch": 1788712464,
+    "coreSourceMtimeUTC": "2026-09-06T09:34:24Z",
+    "coreSourceBytes": 60018,
+    "testSource": "Tests/HELUTTests/NativeBaselineComparisonTests.swift",
+    "testSourceSHA256": "0f501da091a73ebbe18bf2c830e2013c5baff75ca1d3a46e70c9897f59183871",
+    "testSourceMtimeEpoch": 1788707468,
+    "testSourceMtimeUTC": "2026-09-06T08:11:08Z",
+    "testSourceBytes": 46315,
+    "compiledXCTest": ".build/arm64-apple-macosx/release/helutPackageTests.xctest/Contents/MacOS/helutPackageTests",
+    "compiledXCTestSHA256": "beeab02b8acef4c7174475a10bd3844c8313d044d573cdc7921766ae3ef489a7",
+    "compiledXCTestMtimeEpoch": 1788712600,
+    "compiledXCTestMtimeUTC": "2026-09-06T09:36:40Z",
+    "compiledXCTestBytes": 10655632,
+    "compiledXCTestNewerThanBothSources": true,
+    "hostModel": "Mac16,5",
+    "operatingSystemVersion": "26.6.2",
+    "activeProcessorCount": 16,
+    "yosysVersion": "0.68+post c12172fbae8af5e20f6fb52e3d4e92d56ed587b6",
+    "verilatorVersion": "5.052"
+  },
+  "preExecutionCheck": {
+    "required": true,
+    "rule": "Immediately before execution, recompute both source hashes, the compiled-XCTest hash, and mtimes. Execute only if all hashes exactly equal this freeze. Record the observed values in raw.log and the receipt."
+  },
+  "command": [
+    "HELUT_PRESERVE_NATIVE_BASELINE_ARTIFACT=1",
+    "HELUT_NATIVE_BASELINE_WORKERS=16",
+    "swift",
+    "test",
+    "-c",
+    "release",
+    "--skip-build",
+    "--filter",
+    "NativeBaselineComparisonTests"
+  ],
+  "executionCount": 1,
+  "fixture": {
+    "kind": "generated 8-bit ripple adder",
+    "emittedLUT6": 16,
+    "expectedMappedLUTs": 14,
+    "functionalInputBits": 16,
+    "declaredInputBitsIncludingClock": 17,
+    "outputBits": 9,
+    "outputWireOrder": [24, 25, 26, 27, 28, 29, 30, 31, 23],
+    "lanePoints": [1, 16, 256, 1024, 4096, 16384, 32768, 65536],
+    "timedTrialsPerPoint": 5,
+    "requestedNativeWorkers": 16,
+    "effectiveNativeWorkers": "min(16, lanes)",
+    "fixedExpectedHashes": {
+      "emitted.v": "8ba6dc328983119bd3b2236438f3431d5d54f530710fe73d6512359dd51c6a5e",
+      "lut6.v": "4c9d11388c4385f5fecc293d6c54a44abe830878cc2832993ce4ff6de7905e66",
+      "flow.ys": "40dc7c3526448219a5eca28fa8102c90129d3a031f0ab46e9c1ab70f2848952a",
+      "tb.cpp": "2dfd5a6cb66a4c15628f4464625c7b076498e6dee6219fbeedadfffa483c34b2",
+      "resynth.json": "84ba190a62302f886b63f7607480b0e3f50f27b380f139ce91bb178fac8164fb",
+      "nativeBinary": "60aab5d844d2b5fc36d6efc20ea0b0fe224a2bde12c4afbe847e4a47e1dfacb9"
+    }
+  },
+  "timingAndCorrectnessContract": {
+    "pairedHELUT": "Assignment-mask regeneration and writes to every preallocated input buffer, including input pointer binding, through one synchronized graph run, output pointer binding, strict output traversal/decode into complete flat lane-major values, and canonical ordered FNV-1a digest.",
+    "phaseOrder": ["assignment", "input pack", "synchronized graph", "strict decode", "digest"],
+    "reconciliationMaximumAbsoluteResidualSeconds": 1e-9,
+    "digestOrder": "lane-major, then output order [24,25,26,27,28,29,30,31,23], hashing little-endian UInt32 lane, wire, and decoded value",
+    "b65536Coverage": "all 65536 functional 16-bit assignments exactly once"
+  },
+  "acceptance": {
+    "xctestFooter": "1 test, 0 failures",
+    "allEightLanePoints": true,
+    "fiveRawSamplesForEveryPhaseAtEveryPoint": true,
+    "phaseSamplesNonnegative": true,
+    "totalSamplesPositive": true,
+    "allPerTrialResidualsWithinOneNanosecond": true,
+    "phaseTotalSamplesMatchReportedHELUTPairedSamples": true,
+    "allHELUTScalarParallelDigestsStableAndEqual": true,
+    "b65536DigestHex": "52f209ab0358725",
+    "generatedFixtureHashesMatchFixedExpectedHashes": true,
+    "speedupRequired": false
+  },
+  "reporting": {
+    "primary": [
+      "B=65536 graph median and HELUT paired-total median versus the sealed host-path receipt",
+      "B=65536 HELUT paired-total median versus contemporaneous native parallel median",
+      "whether any paired crossover occurs through B=65536"
+    ],
+    "secondary": [
+      "all B=65536 phase medians",
+      "all eight HELUT and native medians",
+      "comparison with the original decomposed baseline"
+    ],
+    "ratioDirection": "baseline median divided by candidate median; greater than 1 means lower candidate time",
+    "medianCaveat": "Independent phase medians are not summed. Percentages use the candidate median-total trial.",
+    "noDispatchClaim": "Static logical-operation counts do not establish Metal dispatch count or intermediate materialization.",
+    "noSignificanceClaim": "Five unpinned samples support descriptive ratios only, not a statistical generalization."
+  },
+  "failurePolicy": "Execute the exact preregistered command once and preserve any failure, partial output, unfavorable result, or regression. Do not silently rerun, select a favorable sample set, lower B/trials/workers, move timing boundaries, weaken strict decoding, alter the digest, erase earlier evidence, or replace the sealed baseline.",
+  "claimBoundary": "One corrected graph-algebra optimization in one release-Swift/MPSGraph combinational benchmark on one unpinned Mac16,5. It is not a general Swift, Metal, Apple, HDL, or native-superiority claim.",
+  "plannedArtifacts": {
+    "rawLog": "logs/helut-native-factored-dag-20260906T165344Z/raw.log",
+    "receipt": "logs/helut-native-factored-dag-20260906T165344Z/receipt.json",
+    "receiptSidecar": "logs/helut-native-factored-dag-20260906T165344Z/receipt.json.sha256",
+    "generatedSources": ["emitted.v", "lut6.v", "flow.ys", "tb.cpp"],
+    "generatedHashSidecars": ["generated-sim.sha256", "measured-resynth.sha256"]
+  }
+}

@@ -1,0 +1,95 @@
+Test Suite 'Selected tests' started at 2026-09-05 22:59:48.995.
+Test Suite 'helutPackageTests.xctest' started at 2026-09-05 22:59:48.996.
+Test Suite 'NativeBaselineComparisonTests' started at 2026-09-05 22:59:48.996.
+Test Case '-[HELUTTests.NativeBaselineComparisonTests testHelutVersusVerilatorOnTheSameCircuit]' started.
+NATIVE_BASELINE verilator build (excluded from timings): 1.85s
+NATIVE_BASELINE circuit: 8-bit ripple adder, 16 emitted LUT6, 14 $lut after abc -lut 6, 16 functional input bits, 9 output bits
+NATIVE_BASELINE workers requested=16 source=activeProcessorCount
+
+NATIVE_BASELINE historical scope: synchronized graph run vs scalar assign/eval/read/digest
+NATIVE_BASELINE lanes  helut_graph_s  native_scalar_e2e_s  ratio  digests
+NATIVE_PAIRED scope: prepared pack/assign through ordered output digest
+NATIVE_PAIRED lanes  helut_e2e_s  native_parallel_e2e_s  workers  ratio  digests
+Compiled module 'ripple_adder': 17 inputs, 14 LUTs, 0 DFFs, 9 outputs
+Compile breakdown: boolean-safe LUT lower 0.00 s, graph build 0.00 s (total 0.00 s)
+HELUT_PAIRED_PHASE_SAMPLES lanes=1 assignment_ns=0,0,0,0,0 input_pack_ns=1073,0,0,0,0 graph_ns=1680017,1824021,1780033,1920938,1772046 decode_ns=0,0,0,1073,0 digest_ns=0,0,954,0,954 total_ns=1681089,1824021,1780987,1922011,1773000 residual_ns=0,0,0,0,0
+NATIVE_BASELINE     1  0.002668023  0.000000208  12827.034x  match 8f9f7fb8cfd7dde2
+NATIVE_PAIRED      1  0.001780987  0.000007375    1  241.490x  match 8f9f7fb8cfd7dde2
+NATIVE_PAIRED_DETAIL lanes=1 helut_graph_median_s=0.002668023 native_parallel_prepared_median_s=0.000007208 helut_graph_ns=2874017,2668023,3035903,2571940,1849055 helut_e2e_ns=1681089,1824021,1780987,1922011,1773000
+VERILATOR_SCALAR_SAMPLES lanes=1 e2e_ns=334,209,166,208,167
+VERILATOR_PAIRED_SAMPLES lanes=1 prepared_ns=9333,8041,7208,3875,5625 e2e_ns=9625,8250,7375,4083,5792
+                 helut cold first run 0.039434s (JIT, excluded)
+Compiled module 'ripple_adder': 17 inputs, 14 LUTs, 0 DFFs, 9 outputs
+Compile breakdown: boolean-safe LUT lower 0.00 s, graph build 0.00 s (total 0.00 s)
+HELUT_PAIRED_PHASE_SAMPLES lanes=16 assignment_ns=0,0,1073,0,0 input_pack_ns=1073,0,0,0,1073 graph_ns=1876950,1932025,2038956,1929045,1861930 decode_ns=0,954,0,0,0 digest_ns=2980,2980,2980,2980,2980 total_ns=1881003,1935959,2043009,1932025,1865983 residual_ns=0,0,0,0,0
+NATIVE_BASELINE    16  0.002866030  0.000001792  1599.347x  match 84c0b917691450a5
+NATIVE_PAIRED     16  0.001932025  0.000056833   16  33.995x  match 84c0b917691450a5
+NATIVE_PAIRED_DETAIL lanes=16 helut_graph_median_s=0.002866030 native_parallel_prepared_median_s=0.000054583 helut_graph_ns=2792001,3040075,3049016,2866030,1839995 helut_e2e_ns=1881003,1935959,2043009,1932025,1865983
+VERILATOR_SCALAR_SAMPLES lanes=16 e2e_ns=1833,1750,1791,1833,1792
+VERILATOR_PAIRED_SAMPLES lanes=16 prepared_ns=64250,52916,54583,64208,53958 e2e_ns=66416,55083,56833,66959,55750
+                 helut cold first run 0.038618s (JIT, excluded)
+Compiled module 'ripple_adder': 17 inputs, 14 LUTs, 0 DFFs, 9 outputs
+Compile breakdown: boolean-safe LUT lower 0.00 s, graph build 0.00 s (total 0.00 s)
+HELUT_PAIRED_PHASE_SAMPLES lanes=256 assignment_ns=954,0,0,954,0 input_pack_ns=5007,5960,5007,4053,6080 graph_ns=2171993,2173066,1998067,1950979,2090931 decode_ns=2980,2980,2980,1907,2027 digest_ns=28968,30994,28014,33021,31948 total_ns=2209902,2213001,2034068,1990914,2130985 residual_ns=0,0,0,0,0
+NATIVE_BASELINE   256  0.003020048  0.000026417  114.322x  match aa0c5f15c933c725
+NATIVE_PAIRED    256  0.002130985  0.000087042   16  24.482x  match aa0c5f15c933c725
+NATIVE_PAIRED_DETAIL lanes=256 helut_graph_median_s=0.003020048 native_parallel_prepared_median_s=0.000052458 helut_graph_ns=3028989,3447056,3020048,2045989,2016068 helut_e2e_ns=2209902,2213001,2034068,1990914,2130985
+VERILATOR_SCALAR_SAMPLES lanes=256 e2e_ns=26833,26417,26375,26417,26375
+VERILATOR_PAIRED_SAMPLES lanes=256 prepared_ns=80250,33459,68584,52458,31291 e2e_ns=107042,68792,96709,87042,66500
+                 helut cold first run 0.037892s (JIT, excluded)
+Compiled module 'ripple_adder': 17 inputs, 14 LUTs, 0 DFFs, 9 outputs
+Compile breakdown: boolean-safe LUT lower 0.00 s, graph build 0.00 s (total 0.00 s)
+HELUT_PAIRED_PHASE_SAMPLES lanes=1024 assignment_ns=954,0,954,0,0 input_pack_ns=20981,26941,15020,19073,20027 graph_ns=2112031,2092004,2048016,2085924,2198935 decode_ns=10014,11086,10967,9060,11086 digest_ns=121951,100970,110984,113010,100970 total_ns=2265930,2231002,2185941,2227068,2331018 residual_ns=0,0,0,0,0
+NATIVE_BASELINE  1024  0.002458930  0.000105000  23.418x  match 25bc9c05761bbee5
+NATIVE_PAIRED   1024  0.002231002  0.000171750   16  12.990x  match 25bc9c05761bbee5
+NATIVE_PAIRED_DETAIL lanes=1024 helut_graph_median_s=0.002458930 native_parallel_prepared_median_s=0.000053750 helut_graph_ns=3885031,2977967,2458930,2038956,2148032 helut_e2e_ns=2265930,2231002,2185941,2227068,2331018
+VERILATOR_SCALAR_SAMPLES lanes=1024 e2e_ns=105000,123500,102958,103083,113917
+VERILATOR_PAIRED_SAMPLES lanes=1024 prepared_ns=65208,56000,53750,49459,50583 e2e_ns=186833,171750,171833,167500,166958
+                 helut cold first run 0.034905s (JIT, excluded)
+Compiled module 'ripple_adder': 17 inputs, 14 LUTs, 0 DFFs, 9 outputs
+Compile breakdown: boolean-safe LUT lower 0.00 s, graph build 0.00 s (total 0.00 s)
+HELUT_PAIRED_PHASE_SAMPLES lanes=4096 assignment_ns=2980,2027,2027,1907,2027 input_pack_ns=82016,66996,72956,102997,62943 graph_ns=2251983,2025008,2025008,2196074,2024055 decode_ns=36001,36001,34928,41962,36001 digest_ns=411987,404000,402093,419021,401020 total_ns=2784967,2534032,2537012,2761960,2526045 residual_ns=0,0,0,0,0
+NATIVE_BASELINE  4096  0.002364993  0.000456041  5.186x  match 53efd78eadd2ee5
+NATIVE_PAIRED   4096  0.002537012  0.000456209   16  5.561x  match 53efd78eadd2ee5
+NATIVE_PAIRED_DETAIL lanes=4096 helut_graph_median_s=0.002364993 native_parallel_prepared_median_s=0.000052250 helut_graph_ns=3875971,3054023,2364993,2053976,2174973 helut_e2e_ns=2784967,2534032,2537012,2761960,2526045
+VERILATOR_SCALAR_SAMPLES lanes=4096 e2e_ns=469000,454917,456041,467500,441833
+VERILATOR_PAIRED_SAMPLES lanes=4096 prepared_ns=57084,53000,48791,52250,50875 e2e_ns=453791,449834,469125,466833,456209
+                 helut cold first run 0.033795s (JIT, excluded)
+Compiled module 'ripple_adder': 17 inputs, 14 LUTs, 0 DFFs, 9 outputs
+Compile breakdown: boolean-safe LUT lower 0.00 s, graph build 0.00 s (total 0.00 s)
+HELUT_PAIRED_PHASE_SAMPLES lanes=16384 assignment_ns=8941,9060,7987,7033,7987 input_pack_ns=346065,288963,252008,255942,262976 graph_ns=2174020,2199054,2057910,2284050,2284050 decode_ns=147939,149965,149012,164032,157952 digest_ns=1646042,1780033,1749039,1855969,1857042 total_ns=4323006,4427075,4215956,4567027,4570007 residual_ns=0,0,0,0,0
+NATIVE_BASELINE 16384  0.002315998  0.001840417  1.258x  match 5bae3d89c7c044e5
+NATIVE_PAIRED  16384  0.004427075  0.001926125   16  2.298x  match 5bae3d89c7c044e5
+NATIVE_PAIRED_DETAIL lanes=16384 helut_graph_median_s=0.002315998 native_parallel_prepared_median_s=0.000140750 helut_graph_ns=3902078,3348947,2315998,2118945,2199054 helut_e2e_ns=4323006,4427075,4215956,4567027,4570007
+VERILATOR_SCALAR_SAMPLES lanes=16384 e2e_ns=1766667,1943667,1982791,1840417,1835458
+VERILATOR_PAIRED_SAMPLES lanes=16384 prepared_ns=152042,140750,107292,144667,110666 e2e_ns=1941125,1869541,1775625,1926125,1941500
+                 helut cold first run 0.034904s (JIT, excluded)
+Compiled module 'ripple_adder': 17 inputs, 14 LUTs, 0 DFFs, 9 outputs
+Compile breakdown: boolean-safe LUT lower 0.01 s, graph build 0.00 s (total 0.01 s)
+HELUT_PAIRED_PHASE_SAMPLES lanes=32768 assignment_ns=15020,15020,17047,17047,15020 input_pack_ns=602961,617981,669956,697017,648022 graph_ns=2035975,2300024,2201080,2704978,2090931 decode_ns=280023,288010,262976,283957,304103 digest_ns=3582001,3404975,3294945,3267050,3520012 total_ns=6515980,6626010,6446004,6970048,6578088 residual_ns=0,0,0,0,0
+NATIVE_BASELINE 32768  0.002027035  0.003550875  0.571x  match f79eaea4cb7276a5
+NATIVE_PAIRED  32768  0.006578088  0.003583042   16  1.836x  match f79eaea4cb7276a5
+NATIVE_PAIRED_DETAIL lanes=32768 helut_graph_median_s=0.002027035 native_parallel_prepared_median_s=0.000202584 helut_graph_ns=4158020,3679037,2027035,1991034,1986027 helut_e2e_ns=6515980,6626010,6446004,6970048,6578088
+VERILATOR_SCALAR_SAMPLES lanes=32768 e2e_ns=3425333,3686166,3513500,3550875,3683250
+VERILATOR_PAIRED_SAMPLES lanes=32768 prepared_ns=195167,202584,170625,266250,206500 e2e_nsTest Case '-[HELUTTests.NativeBaselineComparisonTests testHelutVersusVerilatorOnTheSameCircuit]' passed (3.875 seconds).
+Test Suite 'NativeBaselineComparisonTests' passed at 2026-09-05 22:59:52.871.
+	 Executed 1 test, with 0 failures (0 unexpected) in 3.875 (3.875) seconds
+Test Suite 'helutPackageTests.xctest' passed at 2026-09-05 22:59:52.871.
+	 Executed 1 test, with 0 failures (0 unexpected) in 3.875 (3.875) seconds
+Test Suite 'Selected tests' passed at 2026-09-05 22:59:52.871.
+	 Executed 1 test, with 0 failures (0 unexpected) in 3.875 (3.876) seconds
+=3778667,3495792,3337500,3583042,3817125
+                 helut cold first run 0.032051s (JIT, excluded)
+Compiled module 'ripple_adder': 17 inputs, 14 LUTs, 0 DFFs, 9 outputs
+Compile breakdown: boolean-safe LUT lower 0.01 s, graph build 0.00 s (total 0.01 s)
+HELUT_PAIRED_PHASE_SAMPLES lanes=65536 assignment_ns=30041,31114,30041,30041,33975 input_pack_ns=1400948,1258969,1271963,1215935,1269937 graph_ns=2271056,2223015,2130032,2510071,2370000 decode_ns=615954,550985,602007,528932,524998 digest_ns=6729007,6685972,6719947,6631017,6775022 total_ns=11047006,10750055,10753989,10915995,10973930 residual_ns=0,0,0,0,0
+NATIVE_BASELINE 65536  0.002475023  0.006924000  0.357x  match 52f209ab0358725
+NATIVE_PAIRED  65536  0.010915995  0.007008459   16  1.558x  match 52f209ab0358725
+NATIVE_PAIRED_DETAIL lanes=65536 helut_graph_median_s=0.002475023 native_parallel_prepared_median_s=0.000366625 helut_graph_ns=4603028,4539967,2475023,2117991,2047062 helut_e2e_ns=11047006,10750055,10753989,10915995,10973930
+VERILATOR_SCALAR_SAMPLES lanes=65536 e2e_ns=6924000,6990250,7002958,6835084,6867000
+VERILATOR_PAIRED_SAMPLES lanes=65536 prepared_ns=266209,366625,379250,256833,369458 e2e_ns=6934083,7136625,7013958,6950708,7008459
+                 helut cold first run 0.034622s (JIT, excluded)
+
+NATIVE_BASELINE historical crossover: first tested HELUT graph win at B=32768 (0.002027035s vs 0.003550875s).
+NATIVE_PAIRED crossover: none through B=65536 against the configured parallel Verilator baseline.
+NATIVE_PAIRED boundary: one combinational circuit and host; 5 timed passes per point. Build, graph compile, allocation, model/thread creation, and cold specialization are excluded. Historical graph timing remains asymmetric. Paired timing includes deterministic input preparation, synchronized execution, output read/decode, and ordered digest on both sides; HELUT uses release Swift and native uses optimized C++. Native workers are scheduler-managed and unpinned. This is not a general HDL, sequential, cross-host, or best-possible-native claim.

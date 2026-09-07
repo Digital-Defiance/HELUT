@@ -24,7 +24,7 @@ The point is not “Enigma only.” Enigma is one application. The stack is a **
 **Homebrew (CLIs):** see [`HOMEBREW.md`](HOMEBREW.md) — `brew tap digital-defiance/homebrew-tap && brew install helut`. Tip of `main`: `brew install --HEAD helut`.  
 **Library consumers:** SPM `from: "0.1.0"` (tag `0.1.0`; alias `helut-lib-0.1.0`). Corpus freeze remains `helut-corpus-C54`. Packaging plan: [`directives/packaging-roadmap.md`](directives/packaging-roadmap.md).
 
-The **FHE path** (`--lut-backend encrypted` / `--bench-encrypted`) evaluates LWE/GLWE samples with GGSW bootstrap keys (blind-rotate per Yosys `$lut`). SING means encrypted bits match the clear netlist. Covering-gadget noisy BK at production *N*=1024 is **C52**–**C54** (stride-*k*, not native *δ*, not `cryptoPublicMS`). Hardness: calibrated core-SVP ≈175.7 bits at prod-n1024-s16; Sage estimator **180.2** on that row (**C23**). **Do not quote “176-bit secure.”** Four of eight calibration anchors disagree with the estimator by >16 bits (**H1**). Evidence law: [`directives/research-release.md`](directives/research-release.md). Inventory: [`directives/claim-sheet.md`](directives/claim-sheet.md). Reproduce: [`REPRODUCE.md`](REPRODUCE.md). Trajectory: [`directives/research-trajectory.md`](directives/research-trajectory.md).
+The **FHE path** (`--lut-backend encrypted` / `--bench-encrypted`) evaluates masked LWE/GLWE samples with GGSW bootstrap keys and a blind rotate per Yosys `$lut`; SING means every encrypted output matched the clear netlist. The integrated 2026-09-06 full-adder receipt fixes *N*=*n*=1024, covering-b2 (*B*=4, ℓ=16), public MS, Gaussian BK σ=128, exact/noiseless primary inputs, and Boolean stride *k*=14: 192 identity-PBS residuals gave σ₉₅=1,282,097.0 and a 24-event circuit union bound of log₂ε=−93.80, then all 8/8 input rows passed. The sampler prepares RNG inputs and reduces results serially but evaluates up to eight read-only PBS trials concurrently; a 32-sample production replay exactly matched the serial max, σ₉₅, and ε while running 6.03× faster. This is a statistical, circuit-scoped bound—not a hard BK bound, fresh-input-noise result, arbitrary-depth/netlist certificate, or FHE evaluation speedup. The preserved 32-sample *k*=14 run was under-sampled (−48.18); increasing the preregistered sample count recovered the same configuration without changing the circuit or confidence target. Receipt: [`logs/helut-encrypted-k14-recovery-20260906T030525Z.json`](logs/helut-encrypted-k14-recovery-20260906T030525Z.json); raw output: [`…-t192-p8.raw.log`](logs/helut-encrypted-k14-recovery-20260906T030525Z-t192-p8.raw.log). Hardness is a separate model row: calibrated core-SVP ≈175.7 bits at prod-n1024-s16; Sage estimator **180.2** on that row (**C23**). **Do not quote “176-bit secure.”** Four of eight calibration anchors disagree with the estimator by >16 bits (**H1**). Evidence law: [`directives/research-release.md`](directives/research-release.md). Inventory: [`directives/claim-sheet.md`](directives/claim-sheet.md). Reproduce: [`REPRODUCE.md`](REPRODUCE.md). Trajectory: [`directives/research-trajectory.md`](directives/research-trajectory.md).
 
 Papers (canonical **TeX**; Markdown is generated — do not hand-edit `*.md`):
 
@@ -76,7 +76,7 @@ swift run -c release helut -- path/to/netlist.json --compile-only
 ### Core pipeline
 
 1. **Negacyclic matvec** — multiply in $\mathbb{Z}_{2^{32}}[X]/(X^N+1)$ as an $N\times N$ Toeplitz matrix–vector product (`N = 1024`), using native `UInt32` wraparound (Phase-1 kernel proof).
-2. **LUT / mock PBS** — each Yosys `$lut` becomes a multilinear expansion of its truth table over trivial torus encodings (boolean-safe); the dense matvec kernel remains available for modular-arithmetic stress tests.
+2. **LUT execution** — the ordinary Boolean/oracle path expands each Yosys `$lut` over trivial torus encodings (boolean-safe); those timings are not FHE. The separate `--bench-encrypted` path evaluates masked LWE/GLWE samples with noisy or noiseless GGSW bootstrap keys and blind rotation. The dense matvec kernel remains available for modular-arithmetic stress tests.
 3. **Sequential logic** — `$_DFF*` / `$_SDFF*` / enable / sync-reset, with a host clock loop and ping-pong state buffers.
 4. **Batch axis `B`** — many independent instances of the same circuit in one `graph.run` (search, scoring, parallel machines).
 
@@ -129,7 +129,9 @@ Trivial torus encoding + multilinear `$lut`. Drivers: `./Scripts/helut_boolean_b
 | Enigma M3 equiv N=1024 | — | 0.04 s | 27 ms/letter | Metal ≡ cleartext — **PASS** |
 | Enigma M3 equiv N=1 | — | 0.03 s | 26 ms/letter | clear-shape ≡ cleartext — **PASS** |
 
-**Batch scaling (Enigma M3, steady tick after warmup):**
+**Legacy broadcast batch scaling (Enigma M3, steady tick after warmup):**
+
+These archived rows replicate one encoded trajectory across B lanes and do not read outputs back. They measure graph allocation/bandwidth/synchronization, **not independently verified throughput**; the default remains `legacy-broadcast-v1` so their meaning does not change.
 
 | B | N=1024 tick | N=1024 RSS | N=1 tick | N=1 RSS |
 |---|-------------|------------|----------|---------|
@@ -138,7 +140,13 @@ Trivial torus encoding + multilinear `$lut`. Drivers: `./Scripts/helut_boolean_b
 | 100 | 16.6 ms | ~688 MiB | 16.3 ms | ~89 MiB |
 | 1000 | **73 ms** | **~6.0 GiB** | **15 ms** | **~91 MiB** |
 
-At small B, graph overhead dominates `N`; at B=1000, TFHE-shaped `N=1024` becomes memory-bound while clear-shape (`N=1`) stays flat. Use `--degree 1` for throughput experiments; keep `--degree 1024` for TFHE-shaped certification.
+For independent work, use the opt-in combinational `distinct-verified-v1` mode. It assigns every lane a unique deterministic input, retains and decodes every output, checks each result against its own clear oracle, and emits a versioned FNV digest. Packing, oracle evaluation, readback, and hashing remain outside the separately labeled graph timing; any mismatch voids that timing.
+
+The banked production-path B=65,536 receipt uses the same post-ABC 14-LUT 8-bit adder as the native comparison: 65,536 distinct assignments, all 589,824 output bits checked, zero mismatches, and 511 output signatures. Its warmed graph median was 3.043 ms versus 7.356 ms for the then-current same-artifact single-threaded Verilator loop, a 2.42× time ratio in that deliberately asymmetric harness. The 338 ms first graph run and 103 ms post-run verification are preserved and excluded. Receipt: [`logs/helut-production-distinct-b65536-20260906T035827Z/receipt.json`](logs/helut-production-distinct-b65536-20260906T035827Z/receipt.json).
+
+A subsequent preregistered comparison added 16 persistent native workers and a closer paired scope in which both sides prepare inputs, execute, collect outputs, and compute the ordered digest. Every five-sample row matched, including exhaustive B=65,536 digest `52f209ab0358725`, but **no paired crossover occurred through B=65,536**: HELUT took 31.954 ms versus 6.959 ms for native, or 4.592× the native time. Even the prepared diagnostic favored native: 2.133 ms synchronized HELUT graph time versus 0.326 ms parallel assign/eval/collect. The historical graph-versus-scalar row still first favored HELUT at B=32,768 in that run, demonstrating graph amortization—not end-to-end or best-native superiority. Complete receipt: [`logs/helut-native-paired-rerun-20260906T044651Z/receipt.json`](logs/helut-native-paired-rerun-20260906T044651Z/receipt.json).
+
+That negative result exposed a real host lever. An additive phase run measured **20.576 ms** of strict output decode at B=65,536, then a preregistered change replaced 589,824 requested one-element Swift array materializations with the existing strict constant-fill pointer decoder. All exhaustive digests and timing boundaries stayed unchanged. Decode fell to **0.572 ms** (35.97× lower) and paired HELUT fell to **13.420 ms** (2.42× lower) versus a contemporaneous **7.186 ms** native median. This is a substantial recovery, not yet a crossover: HELUT remained **1.867× slower**. The remaining differential gap is mainly input packing plus graph execution; the canonical digest is large on both sides. Baseline phase receipt: [`logs/helut-native-phase-baseline-20260906T051035Z/receipt.json`](logs/helut-native-phase-baseline-20260906T051035Z/receipt.json). Optimized receipt: [`logs/helut-native-decode-pointer-20260906T053925Z/receipt.json`](logs/helut-native-decode-pointer-20260906T053925Z/receipt.json).
 
 ```bash
 ./Scripts/helut_boolean_bench.sh
@@ -146,6 +154,8 @@ At small B, graph overhead dominates `N`; at B=1000, TFHE-shaped `N=1024` become
 .build/release/helut --bench picorv32_netlist.json --batch 1 --degree 1024 --ticks 10
 .build/release/helut --bench enigma_netlist.json --degree 1 --batch 1000 --ticks 8 --reset-hold 0
 .build/release/helut --bench enigma_netlist.json --ticks 0 --bench-equiv
+.build/release/helut-bench --bench Generated/Netlists/Examples/ripple4_netlist.json \
+  --degree 1 --batch 256 --ticks 6 --warmup 1 --bench-distinct-lanes
 ```
 
 > **Note:** Default `helut` UX remains Enigma-bombe oriented. `--bench` is the general HELUTCore clock harness. Campaign cryptanalysis stays on host Welchman / cleartext batch.
@@ -254,9 +264,9 @@ python Apps/gr-helut/examples/helut_edge_matcher.py --batch 10000
 
 ## Status (honest)
 
-- **FHE (what “encrypted” means):** LWE/GLWE + GGSW blind-rotate per `$lut`, SING vs clear. Metal adder **C20**/**C21**. Covering Track A noisy BK at *N*=1024 σ=128 *k*=7: **C52** (adder) **C53** (counter) **C54** (toy ISA). Native *k*=1 at that inject is still undecodable (**C37**). `cryptoPublicMS`+noise is still **C26**. Encrypted PicoRV at production *N* is **not** claimed (**C51** is demo *N*=8).
+- **FHE (what “encrypted” means):** LWE/GLWE + GGSW blind rotate per `$lut`, checked against the clear netlist. The integrated full-adder receipt is exhaustive 8/8 at *N*=*n*=1024, covering-b2, BK σ=128, exact primary inputs, and stride *k*=14; 192 identity-PBS samples with explicit parallelism 8 gave σ₉₅=1,282,097.0 and a 95%-confidence 24-event bound of log₂ε=−93.80, and SING is **PASS**. The preserved *k*=14/32-sample preflight is a timed, under-sampled negative at −48.18; it executed no circuit rows. An exact 32-sample serial/parallel replay matched every bound field before the preregistered larger sample recovered the same configuration. The *k*=16/t40 PASS remains valid fallback history, not the narrowest integrated stride. This does not certify arbitrary circuits or fresh-input noise. Older **C52**–**C54** remain narrower stride-*k* SING receipts. Native *k*=1 at σ=128 is still undecodable (**C37**); noisy `cryptoPublicMS` is still open (**C26**). Encrypted PicoRV at production *N* is not claimed (**C51** is demo *N*=8).
 - **Oracle path (not FHE):** trivial torus + multilinear / trivial PBS. PicoRV32 cleartext ~1.3 s compile / ~173 ms tick; Enigma M3 Metal≡cleartext at *N*=1024 **PASS**.
-- **Hardness:** Decision-LWE binding + ε-certs exist. Calibrated bits ≠ lattice-estimator Cost `rop` on every row (**H1**, **C23**). Trivial Metal graphs are not FHE.
+- **Hardness:** Decision-LWE binding + ε certificates exist, but they are different claims. The 175.7-bit figure is an interim calibrated core-SVP model for the prod-n1024-s16 row—not the measured BK σ=128 residual bound, not every calibration row, and not a blanket security proof (**H1**, **C23**). Trivial Metal graphs are not FHE.
 - **Enigma host attack:** real M4 decrypt / crib-drag / stecker / campaign ladder. **P1030680 is not decrypted.** Catalog rings parked at originalIndex 417 (resume `--bombe-from 418`). Campaign fitness is cleartext Metal, not encrypted ms/row.
 - **CLI:** `--bench` clocks netlists; campaign tools are Enigma-first. Homebrew: `brew install helut` (semver **0.1.0**); `--HEAD` for tip of `main`.
 - **How this was built:** [`AI_DISCLOSURE.md`](AI_DISCLOSURE.md) (architect vs engine — not a **C** row).

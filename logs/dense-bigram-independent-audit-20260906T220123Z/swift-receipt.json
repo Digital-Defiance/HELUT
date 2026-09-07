@@ -1,0 +1,22 @@
+{
+  "schema": "helut.dense-bigram-swift-comparison.v1",
+  "comparison_role": "implementation_under_test",
+  "expected_values_source": "manifest.json external_agreement frozen from Python and Ruby before Swift comparison",
+  "command": "swift test -c release --filter P1030684SparseControlFixtureTests/testP1030684DenseNGramTraceMatchesExternalAuditReceipt",
+  "toolchain": "swift-driver 1.148.6",
+  "architecture": "arm64",
+  "result": {
+    "build": "passed_with_preexisting_unrelated_warnings",
+    "selected_tests": 1,
+    "failures": 0,
+    "test": "P1030684SparseControlFixtureTests.testP1030684DenseNGramTraceMatchesExternalAuditReceipt",
+    "total_bit_pattern": "0xc0777f715b25d69c",
+    "mean_bit_pattern": "0xc00946646aa57920",
+    "trigram_scope_control_unchanged": true
+  },
+  "sources_under_test": {
+    "Sources/HELUTCore/LanguageScorer.swift": "f71257fa943de4d2ea9bab9650836649628f8fea7e16f76ade6b89c379445bdd",
+    "Tests/HELUTTests/P1030684SparseControlFixtureTests.swift": "2af85f3ee6fb23436b0ce3b9057e14c6e508a53f0b2998ba3e8b50ca1fc4bb75",
+    "Tests/HELUTTests/MuleinGermanNGramModelTests.swift": "3fe2f4e06f61037e2d370f4e8d15d46a1fad313d6d1766816d4eeb7924623648"
+  }
+}

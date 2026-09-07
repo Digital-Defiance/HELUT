@@ -1,0 +1,256 @@
+{
+  "schema": "helut-native-degree-one-pack-receipt-v1",
+  "utc": "2026-09-06T17:17:08Z",
+  "verdict": {
+    "functional": "PASS",
+    "preregisteredProtocol": "PASS",
+    "phaseAccounting": "PASS",
+    "candidate": "EXACT_DEGREE_ONE_CONSTANT_FILL_INPUT_PACK",
+    "inputPackPerformance": "IMPROVED_DESCRIPTIVELY",
+    "pairedTotalPerformance": "IMPROVED_DESCRIPTIVELY",
+    "pairedCrossover": "NONE_THROUGH_B65536"
+  },
+  "preregister": {
+    "path": "logs/helut-native-degree-one-pack-20260906T170831Z/preregister.json",
+    "sha256": "ccef741e7b42a78517af81579bf878910bebb47dd7344eaf7a572adc298b2890"
+  },
+  "baseline": {
+    "path": "logs/helut-native-factored-dag-20260906T165344Z/receipt.json",
+    "sha256": "1225cad024dd7a6710d9e07bebb2438b8d21f45c9c3bcc96e718ccb6bac93421",
+    "status": "Preserved and used as the sole immediate before measurement."
+  },
+  "execution": {
+    "commandMatchedPreregister": true,
+    "executionCount": 1,
+    "requestedWorkers": 16,
+    "timedTrialsPerPoint": 5,
+    "xctestStartedUTC": "2026-09-06T17:09:10.772Z",
+    "xctestPassedUTC": "2026-09-06T17:09:14.715Z",
+    "xctestFooter": "Executed 1 test, with 0 failures (0 unexpected)",
+    "xctestDurationSeconds": 3.941,
+    "toolTransportExitCode": -1,
+    "toolTransportNote": "The execution transport reported its known synthetic -1 despite the complete fail-closed output, all benchmark conclusion lines, and XCTest PASS footer.",
+    "rawCaptureNote": "After context compaction, raw.log was banked from the complete returned sole-run output recorded in session context, with terminal carriage-return progress markers normalized to newline-delimited text. The benchmark was not rerun.",
+    "verilatorBuildSecondsExcluded": 1.95,
+    "preservedArtifactDirectory": "/var/folders/s1/v5qk06h56m9fyldr6mkt184w0000gn/T/helut-native-baseline-1AF05933-5ADC-4BAF-9A03-5DCA8E4DDC2A",
+    "result": "PASS"
+  },
+  "preExecutionGate": {
+    "result": "PASS",
+    "coreSourceSHA256": "9e9fecf0cf0991174502b462b496b59cc6025d7facb5985856e73b7cb7c1830a",
+    "expectedCoreSourceSHA256": "9e9fecf0cf0991174502b462b496b59cc6025d7facb5985856e73b7cb7c1830a",
+    "coreSourceMtimeEpoch": 1788712464,
+    "coreSourceMtimeUTC": "2026-09-06T09:34:24Z",
+    "coreSourceBytes": 60018,
+    "testSourceSHA256": "3ee58213f460cbc8a0a316dc90e6edb9a7af5e77426b839fb1d83e8675e490e2",
+    "expectedTestSourceSHA256": "3ee58213f460cbc8a0a316dc90e6edb9a7af5e77426b839fb1d83e8675e490e2",
+    "testSourceMtimeEpoch": 1788714090,
+    "testSourceMtimeUTC": "2026-09-06T10:01:30Z",
+    "testSourceBytes": 47681,
+    "compiledXCTestSHA256": "5f6ea6aa884e28fccbd2ab1acc872687e5054bf89d933795db4bba6c7ec505ad",
+    "expectedCompiledXCTestSHA256": "5f6ea6aa884e28fccbd2ab1acc872687e5054bf89d933795db4bba6c7ec505ad",
+    "compiledXCTestMtimeEpoch": 1788714217,
+    "compiledXCTestMtimeUTC": "2026-09-06T10:03:37Z",
+    "compiledXCTestBytes": 10655632
+  },
+  "provenance": {
+    "gitCommit": "4d47ad0ef40c593bb3a0e4ab5aa2e668b917f975",
+    "trackedWorkingTreeDirty": true,
+    "hostModel": "Mac16,5",
+    "activeProcessorCount": 16,
+    "operatingSystemVersion": "26.6.2",
+    "verilatorVersion": "5.052",
+    "yosysVersion": "0.68+post c12172fbae8af5e20f6fb52e3d4e92d56ed587b6"
+  },
+  "candidate": {
+    "file": "Tests/HELUTTests/NativeBaselineComparisonTests.swift",
+    "change": "Inside the existing timed refillInputs closure, degree-one constant-fill inputs directly write the selected lowPointer[0] or highPointer[0] value to pointer[lane]. Only the invariant clock-sentinel decision is hoisted outside its plan lane loop; the generic degree-greater-than-one implementation remains unchanged.",
+    "exactDegreeOneIdentity": "The old loop writes pointer[lane * 1 + 0] = selectedSource[0]; the specialized loop writes pointer[lane] = selected low[0] or high[0].",
+    "preserved": [
+      "all 17 input plans and all 17 times lanes UInt32 writes",
+      "1,114,112 UInt32 writes per B=65536 trial",
+      "input MTLBuffer contents and bindMemory calls inside timed input pack",
+      "low/high encoded value reads inside timed input pack",
+      "assignment-mask generation and timestamps",
+      "exact encoded low and high values rather than assumed literal zero and one",
+      "generic degree-greater-than-one packing behavior",
+      "cost-selected constant-fill Shannon graph lowering and synchronized graph boundary",
+      "all nine strict output reads for every lane and complete flat value materialization",
+      "canonical lane-major ordered digest and all exhaustive assignments",
+      "fixture, phase timestamps, paired outer boundary, lane points, trials, and workers"
+    ]
+  },
+  "prefreezeValidation": {
+    "releaseBuildAndTestListingPassed": true,
+    "sourceDiffCheckPassed": true,
+    "degreeOneOldVersusNewOraclePassed": true,
+    "oracleLaneWidths": [1, 16, 256, 65536],
+    "oracleUsedArbitraryDistinctUInt32LowHighValues": true,
+    "b65536WriteCount": 1114112,
+    "nativeComparisonRunBeforePreregister": false
+  },
+  "fixture": {
+    "module": "ripple_adder",
+    "emittedLUT6": 16,
+    "mappedLUTs": 14,
+    "mappedDFFs": 0,
+    "declaredInputBits": 17,
+    "functionalInputBits": 16,
+    "outputBits": 9,
+    "outputWireOrder": [24, 25, 26, 27, 28, 29, 30, 31, 23],
+    "b65536AssignmentCoverage": "All 65536 functional 16-bit assignments exactly once.",
+    "measuredResynthSHA256": "84ba190a62302f886b63f7607480b0e3f50f27b380f139ce91bb178fac8164fb",
+    "generatedNativeBinarySHA256": "60aab5d844d2b5fc36d6efc20ea0b0fe224a2bde12c4afbe847e4a47e1dfacb9"
+  },
+  "phaseMedianRowsNanoseconds": [
+    {"lanes": 1, "assignment": 0, "inputPack": 954, "pairedGraph": 515938, "decode": 954, "digest": 0, "pairedTotal": 517011, "nativePrepared": 6209, "nativeParallelTotal": 6667, "digestHex": "8f9f7fb8cfd7dde2"},
+    {"lanes": 16, "assignment": 0, "inputPack": 1073, "pairedGraph": 593066, "decode": 954, "digest": 2980, "pairedTotal": 597954, "nativePrepared": 36958, "nativeParallelTotal": 38792, "digestHex": "84c0b917691450a5"},
+    {"lanes": 256, "assignment": 0, "inputPack": 2980, "pairedGraph": 641942, "decode": 3099, "digest": 30041, "pairedTotal": 678062, "nativePrepared": 33459, "nativeParallelTotal": 65667, "digestHex": "aa0c5f15c933c725"},
+    {"lanes": 1024, "assignment": 954, "inputPack": 9060, "pairedGraph": 589967, "decode": 12040, "digest": 108957, "pairedTotal": 728965, "nativePrepared": 63458, "nativeParallelTotal": 186042, "digestHex": "25bc9c05761bbee5"},
+    {"lanes": 4096, "assignment": 2027, "inputPack": 43035, "pairedGraph": 597000, "decode": 38981, "digest": 461936, "pairedTotal": 1135945, "nativePrepared": 83292, "nativeParallelTotal": 546375, "digestHex": "53efd78eadd2ee5"},
+    {"lanes": 16384, "assignment": 7987, "inputPack": 133991, "pairedGraph": 937939, "decode": 149965, "digest": 1686931, "pairedTotal": 2815962, "nativePrepared": 124416, "nativeParallelTotal": 1731500, "digestHex": "5bae3d89c7c044e5"},
+    {"lanes": 32768, "assignment": 15020, "inputPack": 270963, "pairedGraph": 892997, "decode": 272036, "digest": 3322959, "pairedTotal": 4804015, "nativePrepared": 179625, "nativeParallelTotal": 3564875, "digestHex": "f79eaea4cb7276a5"},
+    {"lanes": 65536, "assignment": 29922, "inputPack": 528932, "pairedGraph": 766039, "decode": 548005, "digest": 6676912, "pairedTotal": 8544087, "nativePrepared": 394125, "nativeParallelTotal": 7421917, "digestHex": "52f209ab0358725"}
+  ],
+  "b65536BeforeAfter": {
+    "sealedFactoredDAGNanoseconds": {
+      "assignment": 29087,
+      "inputPack": 1240015,
+      "pairedGraph": 1000047,
+      "decode": 538945,
+      "digest": 6656051,
+      "pairedTotal": 9504080,
+      "nativeParallelTotal": 6977542
+    },
+    "degreeOnePackNanoseconds": {
+      "assignment": 29922,
+      "inputPack": 528932,
+      "pairedGraph": 766039,
+      "decode": 548005,
+      "digest": 6676912,
+      "pairedTotal": 8544087,
+      "nativeParallelTotal": 7421917
+    },
+    "baselineDividedByDegreeOnePack": {
+      "assignment": 0.9720941113561927,
+      "inputPack": 2.344375080350593,
+      "pairedGraph": 1.305477919531512,
+      "decode": 0.9834673041304368,
+      "digest": 0.9968756514987767,
+      "pairedTotal": 1.1123575871828084,
+      "nativeParallelTotal": 0.940126654609584
+    },
+    "inputPackMillisecondsSaved": 0.711083,
+    "pairedTotalMillisecondsSaved": 0.959993,
+    "degreeOnePackHELUTOverContemporaneousNative": 1.151196786490606,
+    "remainingMedianGapMilliseconds": 1.122170
+  },
+  "b65536RecoveryFromOriginalDecomposedBaseline": {
+    "originalHELUTPairedTotalNanoseconds": 32414079,
+    "degreeOnePackHELUTPairedTotalNanoseconds": 8544087,
+    "originalDividedByDegreeOnePack": 3.7937440243761564,
+    "millisecondsSaved": 23.869992,
+    "originalNativeParallelTotalNanoseconds": 7140917,
+    "degreeOnePackNativeParallelTotalNanoseconds": 7421917
+  },
+  "b65536DegreeOnePackMedianTotalTrial": {
+    "selection": "Fifth raw trial; its total of 8544087 ns is the five-sample median.",
+    "assignmentNanoseconds": 30041,
+    "inputPackNanoseconds": 488997,
+    "graphNanoseconds": 751019,
+    "decodeNanoseconds": 584006,
+    "digestNanoseconds": 6690025,
+    "totalNanoseconds": 8544087,
+    "roundedPhaseSumNanoseconds": 8544088,
+    "unroundedReconciliationResidualNanoseconds": 0,
+    "nonDigestNanoseconds": 1854063,
+    "fractionsOfTotal": {
+      "assignment": 0.0035159988422402534,
+      "inputPack": 0.057232212171996845,
+      "graph": 0.08789926881596594,
+      "decode": 0.06835206617161084,
+      "digest": 0.7830005710381929
+    },
+    "fractionsOfNonDigest": {
+      "assignment": 0.016202793540456825,
+      "inputPack": 0.2637434650278874,
+      "graph": 0.4050666023754317,
+      "decode": 0.3149871390562241
+    }
+  },
+  "differentialDiagnosis": {
+    "pairedCrossoverThroughB65536": false,
+    "remainingDirectPairedGapMilliseconds": 1.122170,
+    "largestCandidatePhase": "digest",
+    "digestMedianMilliseconds": 6.676912,
+    "digestInterpretation": "Digest is 78.30% of the median-total trial, but native computes the same canonical ordered digest. It cannot be removed, skipped, moved, or relabeled as the crossover lever. An implementation optimization is admissible only if every byte in the same stream is processed in the same order and the full work remains inside timing.",
+    "largestCandidateNonDigestPhase": "pairedGraph",
+    "pairedGraphMedianMilliseconds": 0.766039,
+    "decodeMedianMilliseconds": 0.548005,
+    "inputPackMedianMilliseconds": 0.528932,
+    "assignmentMedianMilliseconds": 0.029922,
+    "nativePreparedMedianMilliseconds": 0.394125,
+    "scopeWarning": "Native prepared excludes native assignment and digest while including native eval and output collection; it is a directional diagnostic only, not an equal-scope speed ratio.",
+    "combinationRequired": "The 1.122170 ms direct paired gap exceeds any single HELUT non-digest phase median, so no one local non-digest micro-lever can close it by itself at unchanged native time.",
+    "nextSafeInvestigationOrder": [
+      "Exact degree-one strict output collection/decode specialization that still binds and reads every output value, validates strict constant-fill semantics, and materializes all 589,824 B=65536 values inside the existing decode phase.",
+      "Measure and reduce the explicit MPSGraph executable/submission/synchronization floor without moving the synchronized graph boundary or changing graph semantics.",
+      "If the fixed graph floor remains binding, design a larger fused Yosys-to-Metal backend rather than accumulating benchmark-only host micro-optimizations."
+    ]
+  },
+  "artifacts": {
+    "rawLog": {
+      "path": "logs/helut-native-degree-one-pack-20260906T170831Z/raw.log",
+      "sha256": "bae12bb19270904133c5fd566c114abd805ae6665acaa4f97640255439566435"
+    },
+    "emitted.v": "8ba6dc328983119bd3b2236438f3431d5d54f530710fe73d6512359dd51c6a5e",
+    "lut6.v": "4c9d11388c4385f5fecc293d6c54a44abe830878cc2832993ce4ff6de7905e66",
+    "flow.ys": "40dc7c3526448219a5eca28fa8102c90129d3a031f0ab46e9c1ab70f2848952a",
+    "tb.cpp": "2dfd5a6cb66a4c15628f4464625c7b076498e6dee6219fbeedadfffa483c34b2",
+    "generatedNativeBinarySHA256": "60aab5d844d2b5fc36d6efc20ea0b0fe224a2bde12c4afbe847e4a47e1dfacb9",
+    "measuredResynthSHA256": "84ba190a62302f886b63f7607480b0e3f50f27b380f139ce91bb178fac8164fb"
+  },
+  "acceptance": {
+    "xctestPassed": true,
+    "allEightLanePointsPresent": true,
+    "fiveRawSamplesForEveryPhaseAtEveryPoint": true,
+    "fiveRawSamplesForEveryNativeArrayAtEveryPoint": true,
+    "allPhaseSamplesNonnegative": true,
+    "allTotalSamplesPositive": true,
+    "allReportedPerTrialResidualsZero": true,
+    "maximumRoundedPhaseSumDeltaNanoseconds": 2,
+    "phaseTotalsMatchReportedHELUTPairedSamples": true,
+    "allDigestsStableAndEqual": true,
+    "b65536DigestMatchedPreregister": true,
+    "b65536Exhaustive": true,
+    "generatedFixtureHashesMatchedPreregister": true,
+    "generatedSourceCopiesByteIdenticalToPreservedRunArtifact": true,
+    "speedupWasNotRequired": true,
+    "preregisterFullySatisfied": true
+  },
+  "bankingValidation": {
+    "result": "PASS",
+    "notes": [
+      "No benchmark was rerun after the sole preregistered execution.",
+      "The first generated-copy hash check detected added terminal newlines in lut6.v, flow.ys, and tb.cpp. Only those copy-only EOF bytes were removed; the corrected copies then matched the preserved run hashes exactly.",
+      "The final mechanical validator passed all width, sample-count, sign, residual, phase-total agreement, digest, XCTest, crossover-reporting, source byte-identity, native-binary, Yosys-JSON, and sealed-baseline checks."
+    ]
+  },
+  "conclusions": {
+    "inputPackMedianSpeedupVersusSealedFactoredDAG": 2.344375080350593,
+    "pairedTotalMedianSpeedupVersusSealedFactoredDAG": 1.1123575871828084,
+    "pairedTotalMedianSpeedupVersusOriginalDecomposedBaseline": 3.7937440243761564,
+    "pairedCrossoverThroughB65536": false,
+    "statement": "The exact degree-one input-pack specialization reduced the B=65536 input-pack median from 1.240015 ms to 0.528932 ms and HELUT paired total from 9.504080 ms to 8.544087 ms while preserving all 1,114,112 writes per trial, strict exhaustive output coverage, and digest equality. HELUT remained 1.151x slower than the contemporaneous 7.421917 ms native paired median, leaving a 1.122170 ms gap.",
+    "nextDifferentialLever": "Audit an exact degree-one strict output collection/decode specialization first, then isolate the synchronized MPSGraph execution floor; if those local levers cannot jointly close the gap, move to a larger fused Yosys-to-Metal backend."
+  },
+  "claimBoundaries": [
+    "The ratios are descriptive medians from five unpinned trials, not a significance claim.",
+    "Independent phase medians do not add to the total median; median-total-trial fractions are reported separately.",
+    "The graph and native movements versus the sealed baseline include run-to-run variance and are not attributed to the input-pack source change.",
+    "One combinational 8-bit ripple adder on one Mac16,5 host.",
+    "No equal-scope NATIVE_EVAL metric was synthesized from independent medians.",
+    "No work, pointer binding, strict validation, digest byte, assignment, lane, or trial was moved, skipped, weakened, or selected after observation.",
+    "No general Swift, Metal, Apple, HDL, sequential, encrypted, cross-host, or best-possible-native claim follows."
+  ]
+}

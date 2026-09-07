@@ -1,0 +1,70 @@
+{
+  "schema": "helut-production-distinct-b65536-preregister-v1",
+  "utc": "2026-09-06T03:58:27Z",
+  "goal": "Run the actual release helut-bench production distinct-lane path at B=65536 on the exact post-ABC 8-bit ripple-adder artifact used by the fresh native-baseline test, export a self-contained workload/result pair, and replay it locally.",
+  "artifact": {
+    "origin": "NativeBaselineComparisonTests.testHelutVersusVerilatorOnTheSameCircuit",
+    "temporaryPath": "/var/folders/s1/v5qk06h56m9fyldr6mkt184w0000gn/T/helut-native-baseline-ECCAAEAD-649D-4022-9312-8D39E163C5AB/resynth.json",
+    "resynthSHA256": "84ba190a62302f886b63f7607480b0e3f50f27b380f139ce91bb178fac8164fb",
+    "module": "ripple_adder",
+    "emittedLUT6": 16,
+    "mappedLUT6": 14,
+    "inputPorts": 17,
+    "functionalOperandBits": 16,
+    "outputBits": 9,
+    "note": "The unused clk port sorts first. With 17 declared inputs and B=65536, assignment stride is 2, so clk remains zero while the other 16 bit positions exhaust all 65536 combinations (up to a harmless input-bit permutation)."
+  },
+  "freshNativeReference": {
+    "sameArtifactTestStatus": "1 test, 0 failures",
+    "verilatorVersion": "5.052",
+    "b32768": {
+      "helutGraphMedianSeconds": 0.002534032,
+      "verilatorTimedLoopMedianSeconds": 0.003620167,
+      "digestsMatch": true
+    },
+    "b65536": {
+      "helutGraphMedianSeconds": 0.002050042,
+      "verilatorTimedLoopMedianSeconds": 0.007356375,
+      "digest": "52f209ab0358725",
+      "digestsMatch": true
+    },
+    "boundary": "The native harness is a warmed graph-run median versus a single-threaded Verilator loop that includes input assignment, output reads, and digesting. The production run below has a different versioned digest schema and is not required to reproduce the private native digest."
+  },
+  "argv": [
+    ".build/release/helut-bench",
+    "--bench",
+    "/var/folders/s1/v5qk06h56m9fyldr6mkt184w0000gn/T/helut-native-baseline-ECCAAEAD-649D-4022-9312-8D39E163C5AB/resynth.json",
+    "--bench-module",
+    "ripple_adder",
+    "--degree",
+    "1",
+    "--batch",
+    "65536",
+    "--ticks",
+    "6",
+    "--warmup",
+    "1",
+    "--bench-distinct-lanes",
+    "--bench-distinct-export-workload",
+    "logs/helut-production-distinct-b65536-20260906T035827Z/workload.json",
+    "--bench-distinct-result-out",
+    "logs/helut-production-distinct-b65536-20260906T035827Z/metal-result.json"
+  ],
+  "acceptance": {
+    "processExitStatus": 0,
+    "workloadExportPass": true,
+    "batchMode": "distinct-verified-v1",
+    "lanes": 65536,
+    "declaredInputBits": 17,
+    "distinctInputAssignments": 65536,
+    "checkedOutputBits": 589824,
+    "mismatches": 0,
+    "distinctOutputSignatures": 511,
+    "timingValid": true,
+    "runResult": "PASS",
+    "localReplayResult": "PASS",
+    "requireWorkloadResultDigestAgreement": true
+  },
+  "failurePolicy": "Preserve any failure, mismatch, allocation error, timing invalidation, or non-speedup. Do not reduce B, remove output verification, change the circuit, discard timing samples, or select a favorable rerun.",
+  "claimBoundary": "This closes production-path distinct-lane execution for the exact degree-1 cleartext combinational workload at B=65536. It does not by itself create a symmetric or general native-HDL speed claim, and it says nothing about sequential or encrypted throughput."
+}

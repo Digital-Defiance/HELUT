@@ -531,12 +531,12 @@ enum HybridBombeHarness {
                             )
                         )
                     }
-                    let verdict = HostM4Bombe.evaluateBreak(
+                    let assessment = EnigmaFinalAssessment.evaluate(
                         plaintext: EnigmaAlphabet.normalize(top.bestHit.plaintext)
                     )
-                    if verdict.isPossibleBreak {
-                        progress?("*** Hybrid halt — strong-crib break ***")
-                        progress?(verdict.reason)
+                    if assessment.isPossibleBreak {
+                        progress?("*** Hybrid halt — final language assessment passed ***")
+                        progress?(assessment.reason)
                         return top
                     }
                 }
@@ -1561,18 +1561,20 @@ func runHybridBombe() {
             print("*** CONTROL FAIL — decrypt does not match known plaintext ***")
         }
     } else {
-        let verdict = HostM4Bombe.evaluateBreak(
+        let assessment = EnigmaFinalAssessment.evaluate(
             plaintext: EnigmaAlphabet.normalize(best.bestHit.plaintext)
         )
+        let verdict = assessment.coreVerdict
         print(
             String(
-                format: "Verdict likeness=%.2f cribs=%@",
-                verdict.likeness,
+                format: "Assessment bigram-position=%.2f trigram=%@ cribs=%@",
+                verdict.bigramCalibrationPosition,
+                assessment.trigramScore.map { String(format: "%.4f", $0) } ?? "unavailable",
                 (verdict.strongCribHits.isEmpty ? "(none)" : verdict.strongCribHits.joined(separator: ", "))
                     as NSString
             )
         )
-        print(verdict.reason)
+        print(assessment.reason)
     }
     print("See ASIC_CRACKER.md / evolution-hybridization.md / stochastic-bombe.md")
 }

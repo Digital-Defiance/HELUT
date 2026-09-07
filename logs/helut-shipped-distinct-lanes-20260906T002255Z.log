@@ -1,0 +1,32 @@
+=== HELUT receipt: shipped distinct-lane verified benchmark ===
+timestamp_utc: 2026-09-06T00:22:55Z
+base_commit: 4d47ad0 (working tree contains the integration)
+host: Apple M4 Max, 40-core integrated GPU, macOS 26.6.2 arm64
+mode: distinct-verified-v1
+encoding: constant-fill, trivial/noise-free
+LUT backend: multilinear
+netlist: Generated/Netlists/Examples/ripple4_netlist.json
+scope: graph execution timing excludes compile, input packing, clear-oracle work, readback, decoding, comparison, and hashing
+
+library and falsifiability command:
+swift test -c release --filter BatchLaneDistinctTests
+result: 3 tests, 0 failures
+- B=1/16/64/256: every output bit checked against its lane's independent clear oracle
+- B=256: 256 distinct inputs, 1,280 checked output bits, 31 valid output signatures
+- negative control: exactly one decoded output record in lane 37 flipped; exactly one mismatch; digest changed 2c81f1c165bf1edd -> 5482a63223831774
+- release executable argv/receipt path exercised as a child process
+
+shipped command:
+.build/release/helut-bench --bench Generated/Netlists/Examples/ripple4_netlist.json --degree 1 --batch 256 --ticks 3 --warmup 1 --bench-distinct-lanes
+
+HELUT boolean-path bench
+  device: Apple M4 Max
+  N=1  B=256  ticks=3  warmup=1
+  batch mode: distinct-verified-v1
+  cells: 11 LUTs, 0 DFFs, 8 inputs, 5 outputs
+BATCH_LANES mode=distinct-verified-v1 lanes=256 input_bits=8 distinct_inputs=256 checked=1280 mismatches=0 distinct_lane_outputs=31 digest_schema=fnv1a64-lane-port-bit-v1 digest=fnv1a64-316ae77a78a0150d
+BATCH_LANES timing graph_first_s=0.017611027 graph_steady_median_s=0.000598013 graph_steady_avg_s=0.000598013 verify_s=0.000232935 trials=3 warmup=1 timing_valid=true
+BATCH_LANES result=PASS
+
+claim boundary:
+The opt-in shipped mode proves independent deterministic combinational lane stimuli, full per-lane output readback, clear-oracle agreement, and a falsifiable canonical digest. The legacy default remains legacy-broadcast-v1 so archived batch logs retain their meaning. Sequential netlists are rejected until a versioned tick/lane/state stimulus and digest contract exists. These graph-only timings are not encrypted-path timings and do not include verification overhead.

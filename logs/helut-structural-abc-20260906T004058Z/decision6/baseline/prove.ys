@@ -1,0 +1,8 @@
+read_json resynth.json
+read_verilog reference.v
+proc
+opt
+miter -equiv -flatten decision6_ref decision6_dut miter
+flatten miter
+opt
+sat -prove trigger 0 -show-inputs -show-outputs miter

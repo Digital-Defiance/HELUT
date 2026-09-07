@@ -1,0 +1,173 @@
+{
+  "schema": "helut-native-host-path-preregister-v1",
+  "utc": "2026-09-06T15:25:04Z",
+  "goal": "Measure the corrected post-receipt host-path candidate exactly once against the sealed strict-pointer-decode result. Preserve the accepted paired outer scope, every phase boundary, exhaustive assignment coverage, strict output validation, canonical digest, fixture, lane points, trials, and native worker count; bank the result whether it improves, regresses, fails, or is unchanged.",
+  "baseline": {
+    "path": "logs/helut-native-decode-pointer-20260906T053925Z/receipt.json",
+    "sha256": "d0d73a42304c40c7779ca556f1f8e8d534ee85c5db254cece9471d48599bb6f8",
+    "status": "Sealed and preserved; this is the sole immediate before measurement.",
+    "sourceSHA256": "ad95c1beecf29db93f9f76bfb327485ed64e948914978efed5dfe9478cd16a02",
+    "compiledXCTestSHA256": "7feb1aaccc0271e38d30ae1252395b16eac8e34212e40113d1ddbeb0fe81fbf3",
+    "b65536MedianNanoseconds": {
+      "assignment": 158906,
+      "inputPack": 3324032,
+      "pairedGraph": 2366900,
+      "decode": 571966,
+      "digest": 6892920,
+      "pairedTotal": 13419986,
+      "nativeParallelTotal": 7186084
+    },
+    "b65536DigestHex": "52f209ab0358725",
+    "pairedCrossoverThroughB65536": false
+  },
+  "originalDecomposedBaseline": {
+    "path": "logs/helut-native-phase-baseline-20260906T051035Z/receipt.json",
+    "sha256": "ffe33bd05fc6b9c92327fe84a0d5f5f4937d0e4244267270d48c270c99d73239",
+    "b65536PairedTotalMedianNanoseconds": 32414079,
+    "b65536NativeParallelMedianNanoseconds": 7140917
+  },
+  "candidate": {
+    "file": "Tests/HELUTTests/NativeBaselineComparisonTests.swift",
+    "changesFromSealedDecodePointerSource": [
+      {
+        "name": "flat lane-major decoded storage",
+        "description": "Replace nested per-lane decoded arrays with one UInt32 array of lanes times output-wire count. collectOutputs still strictly decodes and stores every lane/output value at lane * wireCount + output column, and digest traverses lane then canonical output-wire order over the same values.",
+        "workRemoved": "Per-lane inner-array allocation and pointer chasing only."
+      },
+      {
+        "name": "precomputed immutable input metadata",
+        "description": "Precompute each input buffer's bit position, using a sentinel for clk, and traverse assignmentMasks through unsafe buffer views. The assignment(lane:lanes:inputBits:) formula is unchanged, and every timed pass still rewrites all 17 input buffers including clk=0 for every lane and coefficient."
+      },
+      {
+        "name": "precomputed immutable output metadata",
+        "description": "Precompute each output buffer's canonical column and traverse one flat destination buffer. Output-buffer reads, output order [24,25,26,27,28,29,30,31,23], strict decode, and full value materialization are unchanged."
+      }
+    ],
+    "strictPointerDecodePreserved": true,
+    "strictZeroOrOneValidationPreserved": true,
+    "strictAllCoefficientConstantFillValidationPreserved": true,
+    "assignmentFormulaChanged": false,
+    "inputWritesChangedOrSkipped": false,
+    "outputReadsChangedOrSkipped": false,
+    "digestByteStreamOrOrderChanged": false,
+    "graphOrBuffersChanged": false,
+    "outerPairedScopeChanged": false,
+    "phaseTimestampsChanged": false,
+    "lanePointsChanged": false,
+    "trialsChanged": false,
+    "workersChanged": false,
+    "generatedNativeHarnessChanged": false,
+    "timedPointerBinding": {
+      "input": "MTLBuffer.contents().bindMemory remains inside refillInputs after the assignment timestamp and therefore inside timed input pack.",
+      "output": "MTLBuffer.contents().bindMemory remains inside collectOutputs and therefore inside timed strict decode.",
+      "preboundPointersOutsideTimedPhases": false
+    },
+    "excludedInvalidReporting": {
+      "nativeEvalPresent": false,
+      "reason": "NATIVE_EVAL was removed because subtracting independent HELUT medians and comparing unequal work scopes would not be a valid paired metric."
+    }
+  },
+  "freeze": {
+    "gitCommit": "4d47ad0ef40c593bb3a0e4ab5aa2e668b917f975",
+    "trackedWorkingTreeDirty": true,
+    "testSource": "Tests/HELUTTests/NativeBaselineComparisonTests.swift",
+    "testSourceSHA256": "0f501da091a73ebbe18bf2c830e2013c5baff75ca1d3a46e70c9897f59183871",
+    "testSourceMtimeEpoch": 1788707468,
+    "testSourceMtimeUTC": "2026-09-06T08:11:08Z",
+    "testSourceBytes": 46315,
+    "compiledXCTest": ".build/arm64-apple-macosx/release/helutPackageTests.xctest/Contents/MacOS/helutPackageTests",
+    "compiledXCTestSHA256": "e9fc99ef23eb26547aaeec76d910e3116dee63b442424e6d555934d052f007d0",
+    "compiledXCTestMtimeEpoch": 1788707721,
+    "compiledXCTestMtimeUTC": "2026-09-06T08:15:21Z",
+    "compiledXCTestBytes": 10627248,
+    "compiledXCTestNewerThanSource": true,
+    "releaseListBuildCompletedBeforeFreeze": true,
+    "sourceDiffCheckPassedAtFreeze": true,
+    "hostModel": "Mac16,5",
+    "operatingSystemVersion": "26.6.2",
+    "activeProcessorCount": 16,
+    "yosysVersion": "0.68+post c12172fbae8af5e20f6fb52e3d4e92d56ed587b6",
+    "verilatorVersion": "5.052"
+  },
+  "preExecutionCheck": {
+    "required": true,
+    "rule": "Immediately before execution, recompute source and compiled-XCTest SHA-256 plus mtimes. Execute only if both hashes exactly equal the freeze values and the source still contains no NATIVE_EVAL or prebound input/output pointers. Record the observed values in the receipt."
+  },
+  "command": [
+    "HELUT_PRESERVE_NATIVE_BASELINE_ARTIFACT=1",
+    "HELUT_NATIVE_BASELINE_WORKERS=16",
+    "swift",
+    "test",
+    "-c",
+    "release",
+    "--skip-build",
+    "--filter",
+    "NativeBaselineComparisonTests"
+  ],
+  "executionCount": 1,
+  "fixture": {
+    "kind": "generated 8-bit ripple adder",
+    "emittedLUT6": 16,
+    "expectedMappedLUTs": 14,
+    "functionalInputBits": 16,
+    "declaredInputBitsIncludingClock": 17,
+    "outputBits": 9,
+    "outputWireOrder": [24, 25, 26, 27, 28, 29, 30, 31, 23],
+    "lanePoints": [1, 16, 256, 1024, 4096, 16384, 32768, 65536],
+    "timedTrialsPerPoint": 5,
+    "requestedNativeWorkers": 16,
+    "effectiveNativeWorkers": "min(16, lanes)",
+    "fixedExpectedHashes": {
+      "emitted.v": "8ba6dc328983119bd3b2236438f3431d5d54f530710fe73d6512359dd51c6a5e",
+      "lut6.v": "4c9d11388c4385f5fecc293d6c54a44abe830878cc2832993ce4ff6de7905e66",
+      "flow.ys": "40dc7c3526448219a5eca28fa8102c90129d3a031f0ab46e9c1ab70f2848952a",
+      "tb.cpp": "2dfd5a6cb66a4c15628f4464625c7b076498e6dee6219fbeedadfffa483c34b2",
+      "resynth.json": "84ba190a62302f886b63f7607480b0e3f50f27b380f139ce91bb178fac8164fb",
+      "nativeBinary": "60aab5d844d2b5fc36d6efc20ea0b0fe224a2bde12c4afbe847e4a47e1dfacb9"
+    }
+  },
+  "timingAndCorrectnessContract": {
+    "pairedHELUT": "Assignment-mask regeneration and writes to every preallocated input buffer, including input pointer binding, through synchronized graph execution, output pointer binding, strict output traversal/decode into complete flat lane-major values, and canonical ordered FNV-1a digest.",
+    "phaseOrder": ["assignment", "input pack", "synchronized graph", "strict decode", "digest"],
+    "reconciliationMaximumAbsoluteResidualSeconds": 1e-9,
+    "digestOrder": "lane-major, then output order [24,25,26,27,28,29,30,31,23], hashing little-endian UInt32 lane, wire, and decoded value",
+    "b65536Coverage": "all 65536 functional 16-bit assignments exactly once"
+  },
+  "acceptance": {
+    "xctestFooter": "1 test, 0 failures",
+    "allEightLanePoints": true,
+    "fiveRawSamplesForEveryPhaseAtEveryPoint": true,
+    "phaseSamplesNonnegative": true,
+    "totalSamplesPositive": true,
+    "allPerTrialResidualsWithinOneNanosecond": true,
+    "phaseTotalSamplesMatchReportedHELUTPairedSamples": true,
+    "allHELUTScalarParallelDigestsStableAndEqual": true,
+    "b65536DigestHex": "52f209ab0358725",
+    "generatedFixtureHashesMatchFixedExpectedHashes": true,
+    "speedupRequired": false
+  },
+  "reporting": {
+    "primary": [
+      "B=65536 HELUT paired-total median versus sealed decode-pointer HELUT median",
+      "B=65536 HELUT paired-total median versus contemporaneous native parallel median",
+      "whether any paired crossover occurs through B=65536"
+    ],
+    "phaseDiagnosis": "Compare all B=65536 phase medians and the median-total trial. Because native pays the same canonical digest, identify the remaining differential from HELUT assignment plus input pack plus graph plus decode versus native prepared assign/eval/collect rather than presenting digest removal as a crossover.",
+    "secondary": [
+      "all eight HELUT and native medians",
+      "comparison with the original 32.414079 ms decomposed HELUT baseline"
+    ],
+    "ratioDirection": "baseline median divided by candidate median; greater than 1 means lower candidate time",
+    "medianCaveat": "Independent phase medians are not summed. Percentages use the candidate median-total trial.",
+    "noSignificanceClaim": "Five unpinned samples support descriptive ratios only, not a statistical generalization."
+  },
+  "failurePolicy": "Execute the exact preregistered command once and preserve any failure, partial output, unfavorable result, or regression. Do not silently rerun, select a favorable sample set, lower B/trials/workers, move timing boundaries, prebind MTL pointers outside their phases, weaken strict decoding, alter the digest, erase prior evidence, or replace the sealed baseline.",
+  "claimBoundary": "One corrected source-level host-path candidate in one release-Swift/MPSGraph combinational benchmark on one unpinned Mac16,5. It is not a general Swift, Metal, Apple, HDL, or native-superiority claim.",
+  "plannedArtifacts": {
+    "rawLog": "logs/helut-native-host-path-20260906T152504Z/raw.log",
+    "receipt": "logs/helut-native-host-path-20260906T152504Z/receipt.json",
+    "receiptSidecar": "logs/helut-native-host-path-20260906T152504Z/receipt.json.sha256",
+    "generatedSources": ["emitted.v", "lut6.v", "flow.ys", "tb.cpp"],
+    "generatedHashSidecars": ["generated-sim.sha256", "measured-resynth.sha256"]
+  }
+}

@@ -1,0 +1,246 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.68+post (git sha1 c12172fbae8af5e20f6fb52e3d4e92d56ed587b6, Release, AppleClang clang++ 21.0.0.21000101)
+
+-- Executing script file `prove.ys' --
+
+1. Executing JSON frontend.
+Importing module multiplier3x3_dut from JSON tree.
+
+2. Executing Verilog-2005 frontend: reference.v
+Parsing Verilog input from `reference.v' to AST representation.
+Generating RTLIL representation for module `\multiplier3x3_ref'.
+Successfully finished Verilog frontend.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module multiplier3x3_ref.
+Optimizing module multiplier3x3_dut.
+
+4. Executing OPT pass (performing simple optimizations).
+
+4.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module multiplier3x3_ref.
+Optimizing module multiplier3x3_dut.
+
+4.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\multiplier3x3_ref'.
+Computing hashes of 1 cells of `\multiplier3x3_ref'.
+Finding duplicate cells in `\multiplier3x3_ref'.
+Finding identical cells in module `\multiplier3x3_dut'.
+Computing hashes of 24 cells of `\multiplier3x3_dut'.
+Finding duplicate cells in `\multiplier3x3_dut'.
+Removed a total of 0 cells.
+
+4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \multiplier3x3_ref..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \multiplier3x3_dut..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \multiplier3x3_ref.
+  Optimizing cells in module \multiplier3x3_dut.
+Performed a total of 0 changes.
+
+4.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\multiplier3x3_ref'.
+Computing hashes of 1 cells of `\multiplier3x3_ref'.
+Finding duplicate cells in `\multiplier3x3_ref'.
+Finding identical cells in module `\multiplier3x3_dut'.
+Computing hashes of 24 cells of `\multiplier3x3_dut'.
+Finding duplicate cells in `\multiplier3x3_dut'.
+Removed a total of 0 cells.
+
+4.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \multiplier3x3_ref..
+Finding unused cells or wires in module \multiplier3x3_dut..
+Removed 0 unused cells and 1 unused wires.
+<suppressed ~1 debug messages>
+
+4.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module multiplier3x3_ref.
+Optimizing module multiplier3x3_dut.
+
+4.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \multiplier3x3_ref..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \multiplier3x3_dut..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \multiplier3x3_ref.
+  Optimizing cells in module \multiplier3x3_dut.
+Performed a total of 0 changes.
+
+4.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\multiplier3x3_ref'.
+Computing hashes of 1 cells of `\multiplier3x3_ref'.
+Finding duplicate cells in `\multiplier3x3_ref'.
+Finding identical cells in module `\multiplier3x3_dut'.
+Computing hashes of 24 cells of `\multiplier3x3_dut'.
+Finding duplicate cells in `\multiplier3x3_dut'.
+Removed a total of 0 cells.
+
+4.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \multiplier3x3_ref..
+Finding unused cells or wires in module \multiplier3x3_dut..
+
+4.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module multiplier3x3_ref.
+Optimizing module multiplier3x3_dut.
+
+4.16. Finished fast OPT passes. (There is nothing left to do.)
+
+5. Executing MITER pass (creating miter circuit).
+Creating miter cell "miter" with gold cell "multiplier3x3_ref" and gate cell "multiplier3x3_dut".
+
+5.1. Executing FLATTEN pass (flatten design).
+<suppressed ~2 debug messages>
+
+5.2. Executing OPT_EXPR pass (perform const folding).
+Optimizing module miter.
+
+6. Executing FLATTEN pass (flatten design).
+
+7. Executing OPT pass (performing simple optimizations).
+
+7.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module miter.
+Optimizing module multiplier3x3_ref.
+Optimizing module multiplier3x3_dut.
+
+7.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\miter'.
+Computing hashes of 35 cells of `\miter'.
+Finding duplicate cells in `\miter'.
+Finding identical cells in module `\multiplier3x3_ref'.
+Computing hashes of 1 cells of `\multiplier3x3_ref'.
+Finding duplicate cells in `\multiplier3x3_ref'.
+Finding identical cells in module `\multiplier3x3_dut'.
+Computing hashes of 24 cells of `\multiplier3x3_dut'.
+Finding duplicate cells in `\multiplier3x3_dut'.
+Removed a total of 0 cells.
+
+7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \miter..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \multiplier3x3_ref..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \multiplier3x3_dut..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \miter.
+  Optimizing cells in module \multiplier3x3_ref.
+  Optimizing cells in module \multiplier3x3_dut.
+Performed a total of 0 changes.
+
+7.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\miter'.
+Computing hashes of 35 cells of `\miter'.
+Finding duplicate cells in `\miter'.
+Finding identical cells in module `\multiplier3x3_ref'.
+Computing hashes of 1 cells of `\multiplier3x3_ref'.
+Finding duplicate cells in `\multiplier3x3_ref'.
+Finding identical cells in module `\multiplier3x3_dut'.
+Computing hashes of 24 cells of `\multiplier3x3_dut'.
+Finding duplicate cells in `\multiplier3x3_dut'.
+Removed a total of 0 cells.
+
+7.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+7.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \miter..
+Finding unused cells or wires in module \multiplier3x3_ref..
+Finding unused cells or wires in module \multiplier3x3_dut..
+
+7.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module miter.
+Optimizing module multiplier3x3_ref.
+Optimizing module multiplier3x3_dut.
+
+7.9. Finished fast OPT passes. (There is nothing left to do.)
+
+8. Executing SAT pass (solving SAT problems in the circuit).
+Using SAT solver `minisat`.
+
+Setting up SAT problem:
+Final constraint equation: { } = { }
+Imported 35 cells to SAT database.
+Import proof-constraint: \trigger = 1'0
+Final proof equation: \trigger = 1'0
+Import show expression: \in_clk
+Import show expression: \in_in_0
+Import show expression: \in_in_1
+Import show expression: \in_in_2
+Import show expression: \in_in_3
+Import show expression: \in_in_4
+Import show expression: \in_in_5
+Import show expression: \trigger
+
+Solving problem with 442 variables and 1267 clauses..
+SAT proof finished - no model found: SUCCESS!
+
+                  /$$$$$$      /$$$$$$$$     /$$$$$$$    
+                 /$$__  $$    | $$_____/    | $$__  $$   
+                | $$  \ $$    | $$          | $$  \ $$   
+                | $$  | $$    | $$$$$       | $$  | $$   
+                | $$  | $$    | $$__/       | $$  | $$   
+                | $$/$$ $$    | $$          | $$  | $$   
+                |  $$$$$$/ /$$| $$$$$$$$ /$$| $$$$$$$//$$
+                 \____ $$$|__/|________/|__/|_______/|__/
+                       \__/                              
+
+End of script. Logfile hash: 8d652f3f76, time: 0.01s, user: 0.01s, system: 0.01s, MEM: 16.09 MB peak
+Yosys 0.68+post (git sha1 c12172fbae8af5e20f6fb52e3d4e92d56ed587b6, Release, AppleClang clang++ 21.0.0.21000101)
+Time spent: 30% 1x sat (0 sec), 15% 5x opt_merge (0 sec), ...

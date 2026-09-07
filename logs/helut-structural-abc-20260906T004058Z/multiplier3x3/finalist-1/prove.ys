@@ -1,0 +1,8 @@
+read_json resynth.json
+read_verilog reference.v
+proc
+opt
+miter -equiv -flatten multiplier3x3_ref multiplier3x3_dut miter
+flatten miter
+opt
+sat -prove trigger 0 -show-inputs -show-outputs miter

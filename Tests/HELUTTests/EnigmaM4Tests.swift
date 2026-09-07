@@ -126,14 +126,14 @@ final class EnigmaM4Tests: XCTestCase {
         let degenerate = EnigmaAlphabet.normalize(
             "KLHUXHUFUXOUUFIHOBUTKUMHURUCQDLXXUUUUJHWKSMSXMXUUUUUUKUFUOUSAUHDCIUUUYBD"
         )
-        let germanLikeness = HostM4Bombe.germanLikeness(plaintext: german)
-        let degenerateLikeness = HostM4Bombe.germanLikeness(plaintext: degenerate)
+        let germanPosition = HostM4Bombe.bigramCalibrationPosition(plaintext: german)
+        let degeneratePosition = HostM4Bombe.bigramCalibrationPosition(plaintext: degenerate)
 
-        XCTAssertGreaterThan(germanLikeness, 0.75, "Known German plaintext must score as German")
+        XCTAssertGreaterThan(germanPosition, 0.75, "Known German plaintext must score as German")
         XCTAssertLessThan(
-            degenerateLikeness,
+            degeneratePosition,
             0.25,
-            "Degenerate letter-run scored \(degenerateLikeness) — false-positive guard failed"
+            "Degenerate letter-run scored \(degeneratePosition) — false-positive guard failed"
         )
         // Its IC is high precisely because it is degenerate, so IC alone must not decide.
         XCTAssertGreaterThan(LanguageScorer.indexOfCoincidence(degenerate), 0.10)
@@ -143,7 +143,7 @@ final class EnigmaM4Tests: XCTestCase {
         let run = [Int](repeating: EnigmaAlphabet.index("U"), count: 72)
         XCTAssertEqual(LanguageScorer.indexOfCoincidence(run), 1.0, accuracy: 1e-9)
         XCTAssertLessThan(
-            HostM4Bombe.germanLikeness(plaintext: run),
+            HostM4Bombe.bigramCalibrationPosition(plaintext: run),
             0.25,
             "A constant letter run has maximal IC and must still score as non-German"
         )

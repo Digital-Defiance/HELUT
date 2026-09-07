@@ -15,7 +15,7 @@ import HELUTCLI
 
 let cleartextBatchLaneCount = 26 * 26 * 26 // 17_576
 
-private let germanICTarget: Float = 0.0749
+private let germanICTarget = Float(LanguageScorer.Calibration.germanIC)
 private let icPenaltyScale: Float = 8.0
 private let cribBonus: Float = 0.05
 
@@ -123,7 +123,7 @@ kernel void m4_attack_batch(
     }
     float ic = icNum / (n * (n - 1.0f));
     float bigram = (ctLen >= 2u) ? (bigramSum / float(ctLen - 1u)) : -10.0f;
-    float score = bigram - fabs(ic - 0.0749f) * 8.0f;
+    float score = bigram - fabs(ic - \(LanguageScorer.Calibration.germanIC)f) * 8.0f;
 
     // Packed cribs: [nCribs][len][letters…]…
     uint nCribs = uint(cribs[0]);

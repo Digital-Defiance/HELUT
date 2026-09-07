@@ -56,7 +56,10 @@ public let positionalArgs: [String] = {
     let valueFlags: Set<String> = [
         "--ticks", "--batch", "--rings", "--subspace", "--msg-keys", "--skip", "--from",
         "--degree", "--warmup", "--reset-hold", "--encoding", "--lut-backend",
+        "--bench-module", "--bench-distinct-export-workload", "--bench-distinct-result-out",
+        "--bench-distinct-replay-workload", "--bench-distinct-replay-result",
         "--vectors", "--paths", "--trials", "--bk-noise",
+        "--bk-identity-trials", "--bk-identity-parallelism",
         "--bk-noise-sigma", "--covering-base-log", "--boolean-scale-mul",
         "--lwe-dimension",
         "--encrypted-mem", "--metal-br-tile",

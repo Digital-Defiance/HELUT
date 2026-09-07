@@ -1,0 +1,94 @@
+{
+  "schema": "helut.enigma-objective-attestation-manifest.v2",
+  "created_utc": "2026-09-07T02:54:06Z",
+  "status": "complete",
+  "model_id": "helut-enigma-search-n72-correlation-discounted-z-06f8694e-e08a5659-v2",
+  "supersedes": {
+    "model_id": "helut-enigma-search-n72-correlation-discounted-z-06f8694e-e08a5659-v1",
+    "manifest": "logs/enigma-objective-calibration-20260906T234649Z/manifest.json",
+    "manifest_sha256": "af9658e5809c55738c76c82fd6346e49519554b07e4ad7999cf83c784d2bf75a",
+    "reason": "v1 normalized HostM4Bombe.attackScore with raw-bigram moments and used raw-bigram/trigram correlation; v2 calibrates the exact attack score and its paired trigram correlation",
+    "sealed_parent_modified": false
+  },
+  "protocol": {
+    "sample_length": 72,
+    "random_samples": 400,
+    "random_generator_domain": "HELUT dense bigram calibration v2",
+    "attack_score": "bigram - 8 * abs(IC - 0.0747) + 0.05 per matched configured crib",
+    "objective": "(attackZ + trigramWeight * trigramZ) / (1 + trigramWeight)",
+    "trigram_weight": "six-decimal rounded 1 - attack/trigram correlation",
+    "population_variance_divisor": 400,
+    "production_constants_rounded_decimal_places": 6,
+    "final_assessment": "separate Core bigram-position + IC + structure gate, exact frozen trigram model, trigram > -3.600",
+    "publication_fails_closed_without_trigram": true,
+    "final_assessment_claimed_statistically_independent": false
+  },
+  "fixtures": {
+    "bigram_sha256": "06f8694ec17906e993223e0179c6ca326030e62f77ec86e5c4120fddcf68f111",
+    "trigram_sha256": "e08a56593d1e74b88d300e35b18dd504bc5fffef8ae03db51d72e6270e9509d7",
+    "control_reference_sha256": "17ab2fe0bbf0ee813b393e7c064d17ad1343b8eafeffad0be8a7c99e50ffae33",
+    "random_corpus_sha256": "1d85fa80ee8bcf121ff4c2fd70e56acccf782a4ab3aaaa16bc1edd15677f424a"
+  },
+  "implementations": {
+    "python": {
+      "path": "Scripts/audit_enigma_objective_calibration.py",
+      "sha256": "4071c8f84fd8688739af352e38b7ca7e42918aa94891897b30220174a5760646",
+      "receipt": "python-receipt.json",
+      "receipt_sha256": "31a04ce9df21a3648a8eba8c8019613c94940dc349334466cd69f816ed40dd9e",
+      "receipt_bytes": 5245,
+      "receipt_is_direct_stdout": true,
+      "fresh_stdout_byte_identical": true
+    },
+    "ruby": {
+      "path": "Scripts/audit_enigma_objective_calibration.rb",
+      "sha256": "a9d7633c87e7144ab9006abfe411cb85d4c66b31265c778d555fbe8e24efd4f7",
+      "receipt": "ruby-receipt.json",
+      "receipt_sha256": "d15bcbaea89420121f5588c0e1233ffa88ad065d2ab5e05f65068f8a5c017ad2",
+      "receipt_bytes": 5285,
+      "receipt_is_direct_stdout": true,
+      "fresh_stdout_byte_identical": true
+    },
+    "swift": {
+      "path": "Sources/HELUTToolKit/EnigmaScoring.swift",
+      "sha256": "858c0576470d8fdb4def60bf680f4da8792a77d9c0cfcf66d720c6292b6b07e4",
+      "regression_test": "Tests/HELUTTests/EnigmaObjectiveRegressionTests.swift",
+      "regression_test_sha256": "cfc552ba6091b7354b9a6301f1eac8aadd46feb3873c586b121f9bcac6a7f679",
+      "receipt": "swift-receipt.json",
+      "receipt_sha256": "9ce993f63be43129100f3a6918b36c612cd1a32f8dd263599ead3aefe256971c"
+    },
+    "fail_closed_diagnostic_hardening": {
+      "exhaustive_cracker_sha256": "3e0fe14a6b9bbe7bb6cac226639953b6fc3019a80e63b514673e93f4f9d706fc",
+      "ostwald_escalate_sha256": "98a25e1d5a9d846d3e32afd1a58cf5a97c4853133904802b32dce3c08d9d5aaf",
+      "ostwald_curve_runner_sha256": "e3eb20ac74a0328c060095d768b1392cf3da86729b6c61cb142651ed5c9c6d5a"
+    }
+  },
+  "agreement": {
+    "python_ruby_attack_random_mean": "0xc013ca64ce71e32b",
+    "python_ruby_attack_random_population_deviation": "0x3fcde0455070675d",
+    "python_ruby_attack_trigram_covariance": "0x3f9db4caa1cfae49",
+    "python_ruby_attack_trigram_correlation": "0x3fe00553b8b446b6",
+    "python_ruby_swift_objective_random_mean": "0xbea561048d3b051f",
+    "python_ruby_swift_objective_random_population_deviation": "0x3fec3a726a2a0d89",
+    "python_ruby_swift_german_objective": "0x401ed8180b0a6dd9",
+    "python_ruby_swift_dense_recovered_nonsense_objective": "0x401884dfb596c4a1",
+    "focused_regressions_pass": true,
+    "focused_tests_executed": 7,
+    "focused_failures": 0
+  },
+  "known_shell_regression": {
+    "v1_and_v2_plaintext_byte_identical": true,
+    "letters_correct": 25,
+    "true_plugs_recovered": 5,
+    "plugs_proposed": 7,
+    "final_assessment": "rejected"
+  },
+  "scope": {
+    "phase_1_ic_sieve_changed": false,
+    "attack_score_formula_changed": false,
+    "gpu_lane_search_changed": false,
+    "raw_bigram_or_trigram_models_changed": false,
+    "final_trigram_threshold_changed": false,
+    "ranking_treated_as_confidence": false,
+    "historical_v1_receipts_rewritten": false
+  }
+}

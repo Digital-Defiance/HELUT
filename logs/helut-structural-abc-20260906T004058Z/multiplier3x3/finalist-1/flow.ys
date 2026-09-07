@@ -1,0 +1,13 @@
+read_verilog lut6.v
+read_verilog emitted.v
+hierarchy -check -top multiplier3x3_dut
+proc
+flatten
+opt
+techmap
+opt
+abc -lut 6
+opt_clean
+check -assert
+stat
+write_json resynth.json

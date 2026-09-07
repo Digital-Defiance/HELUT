@@ -452,7 +452,9 @@ enum PostBombeDiscriminator {
     /// middle ring cannot represent. Both readings use the same bar; the head just has to
     /// carry `minPrefixTail` non-crib letters to be offered one.
     static func isBreak(_ candidate: DiscriminatedCandidate) -> Bool {
-        guard candidate.cribExact else { return false }
+        // `GermanTrigrams.score` has a search-only bigram fallback. Publication must
+        // never apply a trigram threshold to that fallback.
+        guard GermanTrigrams.isLoaded, candidate.cribExact else { return false }
         if candidate.ic >= icFloor && candidate.tailScore > breakThreshold { return true }
         // Prefix-only break is for turnover divergence on unicity-safe menus.
         // Short cribs fluke head IC/trigrams (the UEBUNG-pair "clears the bar" spam);
@@ -471,6 +473,10 @@ enum PostBombeDiscriminator {
 
     /// The banner. Printed once, when a candidate clears every stage.
     static func announceBreak(_ winner: DiscriminatedCandidate) {
+        guard isBreak(winner) else {
+            print("*** BREAK WITHHELD — final trigram/IC/crib assessment did not pass ***")
+            return
+        }
         let rule = String(repeating: "*", count: 78)
         print()
         print(rule)

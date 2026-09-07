@@ -47,16 +47,18 @@ final class MuleinGermanNGramModelTests: XCTestCase {
         XCTAssertEqual(trigramObservedEntries.filter { !$0 }.count, 2_629)
 
         let aa = 0
-        let aj = 9
+        // The dense 28.5M-letter fixture observes AJ. JX and QY are the only
+        // unobserved cells, so JX is the durable row-specific add-k floor probe.
+        let jx = 9 * 26 + 23
         XCTAssertGreaterThan(LanguageScorer.germanBigramCounts[aa], 0)
-        XCTAssertEqual(LanguageScorer.germanBigramCounts[aj], 0)
+        XCTAssertEqual(LanguageScorer.germanBigramCounts[jx], 0)
         XCTAssertEqual(
             bigram.lookup(tableIndex: aa),
             .entry(logProbability: LanguageScorer.germanBigramLogProbs[aa])
         )
         XCTAssertEqual(
-            bigram.lookup(tableIndex: aj),
-            .floor(logProbability: LanguageScorer.germanBigramLogProbs[aj])
+            bigram.lookup(tableIndex: jx),
+            .floor(logProbability: LanguageScorer.germanBigramLogProbs[jx])
         )
 
         let abc = 28

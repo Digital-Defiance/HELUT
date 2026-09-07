@@ -1,0 +1,174 @@
+{
+  "schema": "helut-native-decode-pointer-receipt-v1",
+  "utc": "2026-09-06T05:55:31Z",
+  "verdict": {
+    "functional": "PASS",
+    "preregisteredProtocol": "PASS",
+    "phaseAccounting": "PASS",
+    "selectedOptimization": "DECODE_POINTER_PATH",
+    "decodePerformance": "IMPROVED_DESCRIPTIVELY",
+    "pairedTotalPerformance": "IMPROVED_DESCRIPTIVELY",
+    "pairedCrossover": "NONE_THROUGH_B65536"
+  },
+  "preregister": {
+    "path": "logs/helut-native-decode-pointer-20260906T053925Z/preregister.json",
+    "sha256": "c15db2a890de1dfd4fbec62c4c5f1be3f195d8c480ce29cc3f778f9eb4c80c67"
+  },
+  "baseline": {
+    "path": "logs/helut-native-phase-baseline-20260906T051035Z/receipt.json",
+    "sha256": "ffe33bd05fc6b9c92327fe84a0d5f5f4937d0e4244267270d48c270c99d73239",
+    "status": "Preserved and used as the sole preregistered before measurement."
+  },
+  "execution": {
+    "commandMatchedPreregister": true,
+    "requestedWorkers": 16,
+    "timedTrialsPerPoint": 5,
+    "xctestFooter": "Executed 1 test, with 0 failures (0 unexpected)",
+    "xctestDurationSeconds": 3.766,
+    "toolTransportExitCode": -1,
+    "toolTransportNote": "The execution transport reported its known synthetic -1 despite the XCTest PASS footer and complete fail-closed harness output.",
+    "rawCaptureNote": "raw.log is captured stdout/stderr with terminal carriage returns normalized.",
+    "verilatorBuildSecondsExcluded": 1.92,
+    "result": "PASS"
+  },
+  "provenance": {
+    "gitCommit": "4d47ad0ef40c593bb3a0e4ab5aa2e668b917f975",
+    "workingTreeDirty": true,
+    "testSourceSHA256": "ad95c1beecf29db93f9f76bfb327485ed64e948914978efed5dfe9478cd16a02",
+    "compiledXCTestSHA256": "7feb1aaccc0271e38d30ae1252395b16eac8e34212e40113d1ddbeb0fe81fbf3",
+    "hostModel": "Mac16,5",
+    "activeProcessorCount": 16,
+    "operatingSystemVersion": "26.6.2",
+    "verilatorVersion": "5.052",
+    "yosysVersion": "0.68+post c12172fbae8af5e20f6fb52e3d4e92d56ed587b6"
+  },
+  "optimization": {
+    "file": "Tests/HELUTTests/NativeBaselineComparisonTests.swift",
+    "before": "Construct an owning Array from every lane/output slice, then call encoding.decodeBit.",
+    "after": "Call MockTorusEncoding.decodeBit(buffer:lane:degree:strict:true) directly on the shared output buffer.",
+    "removedAtB65536PerTrial": "589824 requested one-element owning Array materializations/copies",
+    "preserved": [
+      "all output-buffer reads",
+      "strict raw 0-or-1 validation",
+      "strict all-coefficient constant-fill validation",
+      "output traversal and wire order",
+      "nested decoded-value materialization",
+      "canonical digest and digest order",
+      "graph, buffers, phase timestamps, and paired outer boundary"
+    ]
+  },
+  "fixture": {
+    "module": "ripple_adder",
+    "emittedLUT6": 16,
+    "mappedLUTs": 14,
+    "mappedDFFs": 0,
+    "declaredInputBits": 17,
+    "functionalInputBits": 16,
+    "outputBits": 9,
+    "outputWireOrder": [24, 25, 26, 27, 28, 29, 30, 31, 23],
+    "measuredResynthSHA256": "84ba190a62302f886b63f7607480b0e3f50f27b380f139ce91bb178fac8164fb",
+    "b65536AssignmentCoverage": "All 65536 functional 16-bit assignments exactly once."
+  },
+  "phaseMedianRowsNanoseconds": [
+    {"lanes": 1, "assignment": 0, "inputPack": 1073, "pairedGraph": 1960039, "decode": 0, "digest": 954, "pairedTotal": 1963973, "nativeParallelTotal": 8209, "digestHex": "8f9f7fb8cfd7dde2"},
+    {"lanes": 16, "assignment": 0, "inputPack": 2027, "pairedGraph": 2230048, "decode": 954, "digest": 2980, "pairedTotal": 2236009, "nativeParallelTotal": 59542, "digestHex": "84c0b917691450a5"},
+    {"lanes": 256, "assignment": 954, "inputPack": 12994, "pairedGraph": 2102017, "decode": 2980, "digest": 30994, "pairedTotal": 2148986, "nativeParallelTotal": 104208, "digestHex": "aa0c5f15c933c725"},
+    {"lanes": 1024, "assignment": 2027, "inputPack": 52929, "pairedGraph": 2092957, "decode": 10967, "digest": 105023, "pairedTotal": 2251029, "nativeParallelTotal": 172292, "digestHex": "25bc9c05761bbee5"},
+    {"lanes": 4096, "assignment": 10014, "inputPack": 213981, "pairedGraph": 2092004, "decode": 37074, "digest": 409007, "pairedTotal": 2761006, "nativeParallelTotal": 522833, "digestHex": "53efd78eadd2ee5"},
+    {"lanes": 16384, "assignment": 36001, "inputPack": 863910, "pairedGraph": 2172947, "decode": 142932, "digest": 1790047, "pairedTotal": 4960060, "nativeParallelTotal": 1845917, "digestHex": "5bae3d89c7c044e5"},
+    {"lanes": 32768, "assignment": 83923, "inputPack": 1615047, "pairedGraph": 2187014, "decode": 277996, "digest": 3527999, "pairedTotal": 7795095, "nativeParallelTotal": 3654000, "digestHex": "f79eaea4cb7276a5"},
+    {"lanes": 65536, "assignment": 158906, "inputPack": 3324032, "pairedGraph": 2366900, "decode": 571966, "digest": 6892920, "pairedTotal": 13419986, "nativeParallelTotal": 7186084, "digestHex": "52f209ab0358725"}
+  ],
+  "b65536BeforeAfter": {
+    "baselineNanoseconds": {
+      "assignment": 99063,
+      "inputPack": 1397967,
+      "pairedGraph": 3836036,
+      "decode": 20576000,
+      "digest": 7141948,
+      "pairedTotal": 32414079,
+      "nativeParallelTotal": 7140917
+    },
+    "optimizedNanoseconds": {
+      "assignment": 158906,
+      "inputPack": 3324032,
+      "pairedGraph": 2366900,
+      "decode": 571966,
+      "digest": 6892920,
+      "pairedTotal": 13419986,
+      "nativeParallelTotal": 7186084
+    },
+    "baselineDividedByOptimized": {
+      "assignment": 0.6234062905113715,
+      "inputPack": 0.42056364078324154,
+      "pairedGraph": 1.6207004943174617,
+      "decode": 35.97416629659805,
+      "digest": 1.036128085049587,
+      "pairedTotal": 2.4153586300313576,
+      "nativeParallelTotal": 0.9937146573850236
+    },
+    "decodeMillisecondsSaved": 20.004034,
+    "pairedTotalMillisecondsSaved": 18.994093,
+    "optimizedHELUTOverContemporaneousNative": 1.8674963999864183,
+    "remainingMedianGapMilliseconds": 6.233902
+  },
+  "b65536OptimizedMedianTotalTrial": {
+    "selection": "Second raw trial; its total of 13419986 ns is the five-sample median.",
+    "assignmentNanoseconds": 158906,
+    "inputPackNanoseconds": 3208041,
+    "graphNanoseconds": 2478957,
+    "decodeNanoseconds": 629067,
+    "digestNanoseconds": 6945014,
+    "totalNanoseconds": 13419986,
+    "roundedPhaseSumNanoseconds": 13419985,
+    "unroundedReconciliationResidualNanoseconds": 0,
+    "fractionsOfTotal": {
+      "assignment": 0.01184099595931024,
+      "inputPack": 0.23904950422452007,
+      "graph": 0.18472128063322868,
+      "decode": 0.0468753842217123,
+      "digest": 0.5175127604455027
+    }
+  },
+  "conclusions": {
+    "decodeMedianSpeedup": 35.97416629659805,
+    "pairedTotalMedianSpeedup": 2.4153586300313576,
+    "pairedCrossoverThroughB65536": false,
+    "statement": "The selected strict pointer decode optimization recovered 20.004 ms of decode median and 18.994 ms of total median at B=65536 without changing the digest or paired scope. HELUT improved from 32.414079 ms to 13.419986 ms, but remained 1.867x slower than the contemporaneous 7.186084 ms native paired median.",
+    "nextDifferentialLever": "The canonical digest is now 51.75% of the optimized median-total trial but native pays nearly the same serial digest cost. The remaining cross-runtime gap is primarily HELUT input pack plus graph plus decode versus native prepared assign/eval/collect. Specialize degree-one input packing next, then address the graph floor; do not claim that removing the shared digest alone closes the paired gap."
+  },
+  "artifacts": {
+    "rawLog": {
+      "path": "logs/helut-native-decode-pointer-20260906T053925Z/raw.log",
+      "sha256": "f4e2b385ba4b35b44a72db739d2795db7394112b00637fc74e2dde8d02cc2fef"
+    },
+    "emitted.v": "8ba6dc328983119bd3b2236438f3431d5d54f530710fe73d6512359dd51c6a5e",
+    "lut6.v": "4c9d11388c4385f5fecc293d6c54a44abe830878cc2832993ce4ff6de7905e66",
+    "flow.ys": "40dc7c3526448219a5eca28fa8102c90129d3a031f0ab46e9c1ab70f2848952a",
+    "tb.cpp": "2dfd5a6cb66a4c15628f4464625c7b076498e6dee6219fbeedadfffa483c34b2",
+    "generatedNativeBinarySHA256": "60aab5d844d2b5fc36d6efc20ea0b0fe224a2bde12c4afbe847e4a47e1dfacb9",
+    "measuredResynthSHA256": "84ba190a62302f886b63f7607480b0e3f50f27b380f139ce91bb178fac8164fb"
+  },
+  "acceptance": {
+    "xctestPassed": true,
+    "allEightLanePointsPresent": true,
+    "fiveRawSamplesForEveryPhaseAtEveryPoint": true,
+    "allPhaseSamplesNonnegative": true,
+    "allTotalSamplesPositive": true,
+    "allPerTrialUnroundedResidualsWithinOneNanosecond": true,
+    "phaseTotalsMatchReportedHELUTPairedSamples": true,
+    "allDigestsStableAndEqual": true,
+    "b65536DigestMatchedPreregister": true,
+    "b65536Exhaustive": true,
+    "generatedFixtureHashesMatchedBaseline": true,
+    "speedupWasNotRequired": true,
+    "preregisterFullySatisfied": true
+  },
+  "claimBoundaries": [
+    "The ratios are descriptive medians from five unpinned trials, not a significance claim.",
+    "Independent phase medians do not add to the total median; median-total-trial fractions are reported separately.",
+    "One combinational 8-bit ripple adder on one Mac16,5 host.",
+    "The optimization removes avoidable Swift ownership work but preserves strict constant-fill decoding; it does not alter MPSGraph execution.",
+    "No general Swift, Metal, Apple, HDL, sequential, encrypted, cross-host, or best-possible-native claim follows."
+  ]
+}

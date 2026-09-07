@@ -1,0 +1,56 @@
+{
+  "schema": "helut.enigma-objective-swift-receipt.v2",
+  "implementation": "swift-production-v2",
+  "model_id": "helut-enigma-search-n72-correlation-discounted-z-06f8694e-e08a5659-v2",
+  "validation": {
+    "command": "swift test -c release --filter 'EnigmaObjectiveRegressionTests|P1030684SparseControlFixtureTests'",
+    "tests_executed": 7,
+    "failures": 0,
+    "result": "pass"
+  },
+  "calibration_bit_patterns": {
+    "trigram_german": "0xc007bcaa6c6fd790",
+    "trigram_random_mean": "0xc014666d81c4f1fc",
+    "trigram_random_population_deviation": "0x3fcfc6d99a2ea2da",
+    "attack_random_mean": "0xc013ca64ce71e32b",
+    "attack_random_population_deviation": "0x3fcde0455070675d",
+    "attack_trigram_covariance": "0x3f9db4caa1cfae49",
+    "attack_trigram_correlation": "0x3fe00553b8b446b6",
+    "objective_random_mean": "0xbea561048d3b051f",
+    "objective_random_population_deviation": "0x3fec3a726a2a0d89",
+    "german_objective": "0x401ed8180b0a6dd9",
+    "dense_recovered_nonsense_objective": "0x401884dfb596c4a1"
+  },
+  "production_constants": {
+    "attack_random_mean": -4.94765,
+    "attack_random_deviation": 0.233407,
+    "trigram_german_mean": -2.967122,
+    "trigram_random_mean": -5.100027,
+    "trigram_random_deviation": 0.248256,
+    "attack_trigram_correlation": 0.50065,
+    "trigram_weight": 0.49935,
+    "final_trigram_threshold": -3.6
+  },
+  "known_shell_regression": {
+    "ciphertext_symbols": 72,
+    "baseline_objective": "dense bigram only",
+    "baseline_plaintext": "LLLWOHLARGULATTUSZITSPAMIROOOLOSTIKETTOLZFFNLIKDIBAKRJLDNRITZAUDHEMZEKKS",
+    "baseline_letters_correct": 21,
+    "baseline_true_plugs_recovered": 4,
+    "production_plaintext": "NNNWOLNARSUNSTTOSOITSXDMIROOONISSIKETTONZWBGNIKSIBATRONDORIVZAUDLEGSEKKS",
+    "production_letters_correct": 25,
+    "production_true_plugs_recovered": 5,
+    "production_plugs_proposed": 7,
+    "truth_final_assessment": "possible-break",
+    "production_candidate_final_assessment": "rejected",
+    "dense_recovered_nonsense_final_assessment": "rejected",
+    "missing_trigram_assessment": "model-unavailable"
+  },
+  "boundaries": {
+    "ranking_is_probability_or_confidence": false,
+    "final_assessment_is_separate_from_ranking": true,
+    "final_assessment_claimed_statistically_independent": false,
+    "publication_fails_closed_without_attested_trigram": true,
+    "trigram_diagnostics_print_bigram_fallback_as_trigram": false
+  }
+}

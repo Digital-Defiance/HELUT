@@ -1,0 +1,79 @@
+=== HELUT receipt: first native-simulator baseline and throughput crossover ===
+date: 2026-09-05T23:14:27Z
+cmd: swift test -c release --filter NativeBaselineComparisonTests
+host: Apple M4 Max / macOS 26.6.2
+swift: swift-driver version: 1.148.6 Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)
+yosys: Yosys 0.68+post (git sha1 c12172fbae8af5e20f6fb52e3d4e92d56ed587b6, Release, AppleClang clang++ 21.0.0.21000101)
+verilator: Verilator 5.052 2026-09-05 rev vUNKNOWN-built20260905
+
+closes the gap where every timing table in the repo compared HELUT only to other
+HELUT configurations. The clear Swift oracle is a per-bit dictionary interpreter and
+is useless as a performance baseline, so 'is tensorising faster than native HDL' was
+unmeasured rather than merely unproven.
+
+held constant: one emitted LUT6 artifact feeds both backends (verilator simulates the
+  Verilog directly; HELUT executes the $lut netlist yosys derives from it via abc -lut 6),
+  identical stimulus in identical order, and both fold outputs into the same FNV-1a
+  digest over (lane, wire, value). A digest mismatch invalidates the timings.
+excluded: build and compile time on both sides. HELUT is warmed; its cold first-run JIT
+  cost is reported separately.
+NOT held constant, and the actual question: HELUT evaluates all lanes in one graph
+  submission while verilator loops sequentially and single-threaded.
+
+Building for production...
+[0/9] Write swift-version--58304C5D6DBC2206.txt
+Build complete! (0.09s)
+Test Suite 'Selected tests' started at 2026-09-05 16:14:28.567.
+Test Suite 'helutPackageTests.xctest' started at 2026-09-05 16:14:28.568.
+Test Suite 'NativeBaselineComparisonTests' started at 2026-09-05 16:14:28.568.
+Test Case '-[HELUTTests.NativeBaselineComparisonTests testHelutVersusVerilatorOnTheSameCircuit]' started.
+Test Case '-[HELUTTests.NativeBaselineComparisonTests testHelutVersusVerilatorOnTheSameCircuit]' passed (3.704 seconds).
+Test Suite 'NativeBaselineComparisonTests' passed at 2026-09-05 16:14:32.272.
+	 Executed 1 test, with 0 failures (0 unexpected) in 3.704 (3.704) seconds
+Test Suite 'helutPackageTests.xctest' passed at 2026-09-05 16:14:32.272.
+	 Executed 1 test, with 0 failures (0 unexpected) in 3.704 (3.704) seconds
+Test Suite 'Selected tests' passed at 2026-09-05 16:14:32.272.
+	 Executed 1 test, with 0 failures (0 unexpected) in 3.704 (3.705) seconds
+NATIVE_BASELINE verilator build (excluded from timings): 1.78s
+NATIVE_BASELINE circuit: 8-bit ripple adder, 16 emitted LUT6, 14 $lut after abc -lut 6, 16 input bits, 9 output bits
+
+NATIVE_BASELINE lanes  helut_median_s  verilator_median_s  ratio  digests
+Compiled module 'ripple_adder': 17 inputs, 14 LUTs, 0 DFFs, 9 outputs
+Compile breakdown: boolean-safe LUT lower 0.00 s, graph build 0.00 s (total 0.00 s)
+NATIVE_BASELINE     1  0.002830982  0.000000334     8476.0x  match 8f9f7fb8cfd7dde2
+                 helut cold first run 0.035598s (JIT, excluded from median)
+Compiled module 'ripple_adder': 17 inputs, 14 LUTs, 0 DFFs, 9 outputs
+Compile breakdown: boolean-safe LUT lower 0.01 s, graph build 0.00 s (total 0.01 s)
+NATIVE_BASELINE    16  0.002910972  0.000002458     1184.3x  match 84c0b917691450a5
+                 helut cold first run 0.047424s (JIT, excluded from median)
+Compiled module 'ripple_adder': 17 inputs, 14 LUTs, 0 DFFs, 9 outputs
+Compile breakdown: boolean-safe LUT lower 0.00 s, graph build 0.00 s (total 0.00 s)
+NATIVE_BASELINE   256  0.003206015  0.000029708     107.9x  match aa0c5f15c933c725
+                 helut cold first run 0.045492s (JIT, excluded from median)
+Compiled module 'ripple_adder': 17 inputs, 14 LUTs, 0 DFFs, 9 outputs
+Compile breakdown: boolean-safe LUT lower 0.00 s, graph build 0.00 s (total 0.00 s)
+NATIVE_BASELINE  1024  0.003234029  0.000100833     32.1x  match 25bc9c05761bbee5
+                 helut cold first run 0.097886s (JIT, excluded from median)
+Compiled module 'ripple_adder': 17 inputs, 14 LUTs, 0 DFFs, 9 outputs
+Compile breakdown: boolean-safe LUT lower 0.00 s, graph build 0.00 s (total 0.00 s)
+NATIVE_BASELINE  4096  0.002784014  0.000423416     6.6x  match 53efd78eadd2ee5
+                 helut cold first run 0.035149s (JIT, excluded from median)
+Compiled module 'ripple_adder': 17 inputs, 14 LUTs, 0 DFFs, 9 outputs
+Compile breakdown: boolean-safe LUT lower 0.01 s, graph build 0.00 s (total 0.01 s)
+NATIVE_BASELINE 16384  0.003566980  0.001675708     2.1x  match 5bae3d89c7c044e5
+                 helut cold first run 0.037639s (JIT, excluded from median)
+Compiled module 'ripple_adder': 17 inputs, 14 LUTs, 0 DFFs, 9 outputs
+Compile breakdown: boolean-safe LUT lower 0.01 s, graph build 0.00 s (total 0.01 s)
+NATIVE_BASELINE 32768  0.003986001  0.003329750     1.2x  match f79eaea4cb7276a5
+                 helut cold first run 0.033645s (JIT, excluded from median)
+Compiled module 'ripple_adder': 17 inputs, 14 LUTs, 0 DFFs, 9 outputs
+Compile breakdown: boolean-safe LUT lower 0.01 s, graph build 0.00 s (total 0.01 s)
+NATIVE_BASELINE 65536  0.002057076  0.006673542     0.3x  match 52f209ab0358725
+                 helut cold first run 0.031517s (JIT, excluded from median)
+
+NATIVE_BASELINE crossover: HELUT first becomes faster than sequential Verilator at 65536 lanes (0.002057076s vs 0.006673542s).
+NATIVE_BASELINE boundary: one combinational circuit, one machine, 5 timed passes per point, build and compile time excluded on both sides, HELUT warmed before measurement. Verilator loops lanes sequentially and is single-threaded here; this is not a claim about Verilator's best achievable throughput, nor about sequential circuits, nor about any other host.
+◇ Test run started.
+↳ Testing Library Version: 1902
+↳ Target Platform: arm64e-apple-macos14.0
+✔ Test run with 0 tests in 0 suites passed after 0.001 seconds.

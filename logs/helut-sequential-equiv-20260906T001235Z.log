@@ -1,0 +1,33 @@
+=== HELUT receipt: sequential melt/freeze + post-ABC transition proof ===
+timestamp_utc: 2026-09-06T00:12:35Z
+base_commit: 4d47ad0 (working tree contains the proof implementation)
+host: Apple M4 Max, 40-core integrated GPU, macOS 26.6.2 arm64
+swift: swift-driver version 1.148.6
+yosys: Yosys 0.68+post, git c12172fbae8af5e20f6fb52e3d4e92d56ed587b6
+command: swift test -c release --skip-build --filter TensorLUTYosysRoundTripTests
+
+scope:
+- one positive-edge DFF
+- active-high enable
+- active-low synchronous reset, reset-over-enable
+- one frozen identity LUT plus one erased/discovered XOR transition LUT
+- temporal search visits all four live XOR addresses
+- emitted candidate is remapped through abc -lut 6
+- equiv_induct -seq 1 proves Q_next equivalence for every matched Boolean current state and every x/enable/reset combination
+- negative control flips one reachable discovered INIT bit
+- bounded SAT first resets both machines, applies x=0 with enable active/reset inactive, then exposes divergent Q
+
+Test Suite 'TensorLUTYosysRoundTripTests' passed.
+Executed 7 tests, with 0 failures (0 unexpected) in 13.789 seconds.
+
+TENSORLUT_ROUNDTRIP ok: 48 output bits over 16 input assignments, yosys-resynthesized vs source netlist
+TENSORLUT_SAT_EQUIV negative control: SAT refuted the corrupted elite and produced a counterexample
+TENSORLUT_SEQUENTIAL_EQUIV ok: erased transition refuted; search recovered q_next=q XOR x behind 1 DFF; post-ABC equiv_induct proved every matched Boolean state and all enable/reset/input combinations
+TENSORLUT_SEQUENTIAL_EQUIV negative control: one discovered INIT bit flipped; induction left Q unproved and bounded SAT produced the reset → x=0 → divergent-Q counterexample
+TENSORLUT_ROUNDTRIP negative control: 4 mismatch(es) detected
+TENSORLUT_SAT_EQUIV ok: searched elite proven equivalent to behavioural two-bit addition over the entire input space (yosys miter + minisat, post abc -lut 6)
+TENSORLUT_SEARCHED_ROUNDTRIP ok: erased design failed 14 of 48 bits; searched elite agrees on 48/48 output bits over 16 input assignments, yosys-resynthesized vs target
+TENSORLUT_SEARCHED_ROUNDTRIP negative control: 3 mismatch(es) of 48 detected after one flipped discovered entry
+
+claim boundary:
+This proves the emitted one-register transition relation over arbitrary matched Boolean state for the supported positive-edge, synchronous reset-over-enable subset. It does not yet prove negative-edge, asynchronous reset, SDFFCE enable-over-reset priority, constant-zero control pins, initialization semantics, or simultaneous Metal updates across multiple directly coupled DFFs.

@@ -1,0 +1,156 @@
+{
+  "schema": "helut-production-distinct-b65536-receipt-v1",
+  "verdict": "PASS",
+  "claim": "The release helut-bench production distinct-lane path executed the exact post-ABC 8-bit ripple-adder artifact at B=65536, checked all 589824 output bits against per-lane clear oracles with zero mismatches, exported a self-contained workload/result pair, and passed independent local replay.",
+  "preregister": {
+    "path": "logs/helut-production-distinct-b65536-20260906T035827Z/preregister.json",
+    "sha256": "8001fe82147c152c5c539b92eaae54846eb145a6beaf41ede89bdb9f5008d2be"
+  },
+  "provenance": {
+    "gitCommit": "4d47ad0ef40c593bb3a0e4ab5aa2e668b917f975",
+    "workingTreeDirty": true,
+    "artifactOrigin": "NativeBaselineComparisonTests.testHelutVersusVerilatorOnTheSameCircuit",
+    "resynthSHA256": "84ba190a62302f886b63f7607480b0e3f50f27b380f139ce91bb178fac8164fb",
+    "releaseBinarySHA256": "b9fb91883329e32576e0db7370c1204763ebfb36c5cd03a883314fa1b210f765",
+    "distinctHelperSourceSHA256": "3240edf43bbd9b463b03366a0504b61420acd441bac78c388fa5cf331559d133",
+    "nativeTestSourceSHA256": "52c504da16bd1ef2b9be1940d6132685d71d145d798565db088a577eca173fa7",
+    "host": "Apple M4 Max",
+    "executionBackend": "Metal/MPSGraph",
+    "module": "ripple_adder",
+    "mappedLUTs": 14,
+    "dffs": 0,
+    "declaredInputBits": 17,
+    "functionalOperandBits": 16,
+    "outputBits": 9,
+    "degree": 1
+  },
+  "freshNativeReference": {
+    "testResult": "1 test, 0 failures",
+    "verilatorVersion": "5.052",
+    "b32768": {
+      "helutGraphMedianSeconds": 0.002534032,
+      "verilatorTimedLoopMedianSeconds": 0.003620167,
+      "digestsMatch": true
+    },
+    "b65536": {
+      "helutGraphMedianSeconds": 0.002050042,
+      "verilatorTimedLoopMedianSeconds": 0.007356375,
+      "privateHarnessDigest": "52f209ab0358725",
+      "digestsMatch": true
+    },
+    "observedCrossover": "first tested HELUT win at B=32768 in this rerun",
+    "historicalComparison": "The earlier banked run first won at B=65536. The movement demonstrates that the evidence supports a sampled crossover region, not one immutable crossover width."
+  },
+  "productionRun": {
+    "argv": [
+      ".build/release/helut-bench",
+      "--bench",
+      "<preserved-native-artifact>/resynth.json",
+      "--bench-module",
+      "ripple_adder",
+      "--degree",
+      "1",
+      "--batch",
+      "65536",
+      "--ticks",
+      "6",
+      "--warmup",
+      "1",
+      "--bench-distinct-lanes",
+      "--bench-distinct-export-workload",
+      "logs/helut-production-distinct-b65536-20260906T035827Z/workload.json",
+      "--bench-distinct-result-out",
+      "logs/helut-production-distinct-b65536-20260906T035827Z/metal-result.json"
+    ],
+    "processChildStatusEvidence": "BATCH_LANES result=PASS",
+    "workloadID": "sha256-9601caa5a5ad5d4473dfdaff69bc0ca63e3f5b4a8eeb6e51b7adca2dbf60a859",
+    "lanes": 65536,
+    "distinctInputAssignments": 65536,
+    "checkedOutputBits": 589824,
+    "mismatches": 0,
+    "distinctOutputSignatures": 511,
+    "digestSchema": "fnv1a64-lane-port-bit-v1",
+    "outputDigest": "fnv1a64-3f03b6872d46d5a5",
+    "timingScope": "synchronized graph run only",
+    "timingSamplesNanoseconds": [
+      338255048,
+      4907966,
+      4935980,
+      3043056,
+      1924038,
+      2047896
+    ],
+    "warmupSamples": 1,
+    "graphFirstSeconds": 0.338255048,
+    "graphSteadyMedianSeconds": 0.003043056,
+    "graphSteadyAverageSeconds": 0.0033717872,
+    "verificationSeconds": 0.103464007,
+    "timingValid": true,
+    "compileSeconds": 0.0089,
+    "reportedFinalRSSMiB": 339.5,
+    "reportedRSSDeltaMiB": 272.6,
+    "result": "PASS"
+  },
+  "artifacts": {
+    "workload": {
+      "path": "logs/helut-production-distinct-b65536-20260906T035827Z/workload.json",
+      "sha256": "0a75badeadc8243ed88eb59067fa01df31c685acbda420dfd05060d6dfeb70e1",
+      "bytes": 4638265
+    },
+    "metalResult": {
+      "path": "logs/helut-production-distinct-b65536-20260906T035827Z/metal-result.json",
+      "sha256": "ad6c8403e27535ac9540210326a042707e0c645e84ecdde92b0cd395dfde5cd5",
+      "bytes": 4053031
+    },
+    "reproductionSources": {
+      "note": "The workload embeds the exact original mapped JSON used by the measured run. These readable sources regenerate a functionally identical 14-LUT artifact for reruns.",
+      "emitted.v": "4c97560123a0bb7fdd65b723e569f24e482a83746b7de77fb80719491dd0abae",
+      "lut6.v": "8dc249d4e1ac4c03faa5f059386787b47edef5c638bbcbc2a25b9daccf24c170",
+      "flow.ys": "8c5e7b031a253b810d61cfd1ab387cae1f2e4ec21201fbb299ac42b4dfed57a6",
+      "native_tb.cpp": "1ba5e02851a2f115f1c026f3d9500d041efa2d4e30c64fa9f114046eb42c8c93",
+      "resynth.json": "6ffb29b4f138d74403074817bca9ab21e05e3eb210d1283f2addad7271d66a52"
+    }
+  },
+  "replay": {
+    "argv": [
+      ".build/release/helut-bench",
+      "--bench",
+      "--bench-distinct-replay-workload",
+      "logs/helut-production-distinct-b65536-20260906T035827Z/workload.json",
+      "--bench-distinct-replay-result",
+      "logs/helut-production-distinct-b65536-20260906T035827Z/metal-result.json"
+    ],
+    "checkedOutputBits": 589824,
+    "mismatches": 0,
+    "distinctInputAssignments": 65536,
+    "distinctOutputSignatures": 511,
+    "digest": "fnv1a64-3f03b6872d46d5a5",
+    "timingValid": true,
+    "result": "PASS",
+    "invocationCorrection": "An initial replay invocation omitted the top-level --bench selector and was rejected by the dispatcher before reading either artifact. Adding the established selector replayed the same unchanged files successfully."
+  },
+  "comparison": {
+    "freshVerilatorMedianSeconds": 0.007356375,
+    "productionDistinctGraphMedianSeconds": 0.003043056,
+    "productionGraphLowerTimeFactor": 2.41743,
+    "statement": "At B=65536 on this host and exact circuit, the production distinct verifier's warmed synchronized graph-run median was 2.41743x lower than the fresh same-artifact single-threaded Verilator timed-loop median."
+  },
+  "validation": {
+    "machineJSONParse": true,
+    "inputRows": 65536,
+    "uniqueInputRows": 65536,
+    "outputRows": 65536,
+    "uniqueOutputRows": 511,
+    "workloadResultIDMatch": true,
+    "workloadResultDigestMatch": true,
+    "acceptanceSatisfied": true
+  },
+  "claimBoundaries": [
+    "This is one degree-1 cleartext combinational 8-bit ripple adder on one Apple M4 Max.",
+    "HELUT timing covers synchronized warmed graph execution only; packing, clear-oracle evaluation, readback, decoding, comparison, hashing, and 0.103464007 seconds of verification are outside it.",
+    "The Verilator timed loop includes scalar input assignment, eval, output reads, and digesting, and is single-threaded; timing scopes are not symmetric.",
+    "Build/compile and cold specialization are excluded from the steady medians; HELUT's 0.338255048-second first graph run is preserved.",
+    "The result does not establish best-achievable native throughput, a general crossover width, sequential performance, encrypted performance, another circuit, another machine, or Apple superiority.",
+    "The production verifier and native test use different versioned digest schemas, but both exhaustively validate their own 65536-lane output sets."
+  ]
+}

@@ -12,9 +12,9 @@ enum MuleinGermanNGramModelError: Error, Equatable, Sendable {
     case nonFiniteTableEntry(modelID: String, tableIndex: Int)
 }
 
-/// Immutable adapter over the canonical embedded add-0.5 German bigram table.
+/// Immutable adapter over the independently attested dense add-0.5 German bigram table.
 struct MuleinGermanBigramModel: MuleinNGramModel {
-    static let stableModelID = "helut-german-bigram-add-k-0.5-v1"
+    static let stableModelID = "helut-german-bigram-add-k-0.5-06f8694e-v2"
     static let expectedEntryCount = 676
 
     let modelID = stableModelID
@@ -59,7 +59,7 @@ struct MuleinGermanBigramModel: MuleinNGramModel {
 
 /// Immutable adapter over the canonical fixture-backed add-0.5 German trigram table.
 struct MuleinGermanTrigramModel: MuleinNGramModel {
-    static let stableModelID = "helut-german-trigram-add-k-0.5-v1"
+    static let stableModelID = GermanTrigrams.modelID
     static let expectedEntryCount = 17_576
 
     let modelID = stableModelID

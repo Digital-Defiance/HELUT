@@ -1,3 +1,4 @@
+import CryptoKit
 import Foundation
 import HELUTCore
 import HELUTCLI
@@ -7,10 +8,22 @@ import HELUTCLI
 // Ostwald & Weierud (2017) found n=3 the best trade-off for authentic Enigma traffic:
 // quadgrams are more selective but brittle against the garbles real intercepts contain.
 //
-// Loaded at runtime from Fixtures/german_trigrams.txt ("GRAM COUNT" lines) so corpora can
-// be swapped and re-measured against --exhaust-selftest without a rebuild.
+// Loaded at runtime from the frozen Fixtures/german_trigrams.txt table. Search may
+// explicitly fall back to bigrams when the fixture is unavailable; final assessment
+// never does.
 
 enum GermanTrigrams {
+    static let modelID = "helut-german-trigram-add-k-0.5-e08a5659-v1"
+    static let expectedSourceSHA256 =
+        "e08a56593d1e74b88d300e35b18dd504bc5fffef8ae03db51d72e6270e9509d7"
+
+    /// Frozen 72-symbol calibration from 400 deterministic SHA-256 controls.
+    enum Calibration {
+        static let germanMean = -2.967122
+        static let randomMean = -5.100027
+        static let randomDeviation = 0.248256
+    }
+
     private struct Model: Sendable {
         let table: [Double]
         /// True only when the corresponding gram had an explicit source row.
@@ -20,7 +33,9 @@ enum GermanTrigrams {
 
     private static let model: Model? = load()
 
-    static var sourceDescription: String { model?.description ?? "none (bigram fallback)" }
+    static var sourceDescription: String {
+        model?.description ?? "unavailable (search-only bigram fallback)"
+    }
 
     /// log P(third | first, second), indexed first*676 + second*26 + third. Nil if no fixture.
     static var logProbs: [Double]? { model?.table }
@@ -53,7 +68,14 @@ enum GermanTrigrams {
 
     private static func load() -> Model? {
         guard let url = fixtureURL(),
-              let text = try? String(contentsOf: url, encoding: .utf8) else {
+              let data = try? Data(contentsOf: url) else {
+            return nil
+        }
+        let digest = SHA256.hash(data: data)
+            .map { String(format: "%02x", $0) }
+            .joined()
+        guard digest == expectedSourceSHA256,
+              let text = String(data: data, encoding: .utf8) else {
             return nil
         }
 
@@ -76,7 +98,7 @@ enum GermanTrigrams {
             observedEntries[tableIndex] = true
             loaded += 1
         }
-        guard loaded > 1_000 else { return nil }
+        guard loaded == 14_947 else { return nil }
 
         // Add-k smoothing per (first, second) context so unseen trigrams get a finite floor.
         let smoothing = 0.5
@@ -93,20 +115,23 @@ enum GermanTrigrams {
         return Model(
             table: table,
             observedEntries: observedEntries,
-            description: "Fixtures/german_trigrams.txt (\(loaded) grams; \(header))"
+            description: "\(modelID) (\(loaded) grams; \(header))"
         )
     }
 
-    /// Mean trigram log-probability; falls back to the embedded bigram model when absent.
-    static func score(_ letters: [Int]) -> Double {
-        guard let table = logProbs, letters.count >= 3 else {
-            return LanguageScorer.bigramScore(letters)
-        }
+    /// Mean trigram log-probability from the attested fixture, or nil if unavailable.
+    static func scoreIfLoaded(_ letters: [Int]) -> Double? {
+        guard let table = logProbs, letters.count >= 3 else { return nil }
         var total = 0.0
         for index in 0..<(letters.count - 2) {
             total += table[letters[index] * 676 + letters[index + 1] * 26 + letters[index + 2]]
         }
         return total / Double(letters.count - 2)
+    }
+
+    /// Search-only convenience. Final publication gates must call `scoreIfLoaded`.
+    static func score(_ letters: [Int]) -> Double {
+        scoreIfLoaded(letters) ?? LanguageScorer.bigramScore(letters)
     }
 
     static var isLoaded: Bool { logProbs != nil }

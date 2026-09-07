@@ -13,11 +13,11 @@ Living inventory: `directives/claim-sheet.md`. Reproduce: `REPRODUCE.md`. Trajec
 | **A — throughput / shape** | 1024 | *e*=0 (noiseless) | Metal SING wall-clock (**C20**/**C21**), netlist scale, hardness row prod-n1024-s16 |
 | **B — noisy depth** | 128 (or 8) | covering + measured residual (**C22**, **C28**) | Depth / ε story under public MS; Metal SING with inject |
 
-Track A does **not** need noisy BK to be a valid FHE datapath claim (noiseless BK + certificates still certify). Track B is where you quote \(B_{bk}\) / σ̂. Mixing them — e.g. “production *N*=1024 with covering noisy BK under \(q=2^{32}\)” — is what **C26**/**C27** forbid.
+Track A does not need noisy BK to be a valid encrypted-datapath claim; Track B is the native-spacing depth map. Later **C52**/**C57** receipts add a third, explicit surface at *N*=1024: exact covering gadgets plus widened stride-*k* Boolean spacing. That does not overturn **C26**/**C27**—`cryptoPublicMS` and native-*δ* claims remain open/negative. Always state the gadget, stride, input-noise model, sample count, and circuit event scope; “production *N*=1024 with noisy BK” alone is too broad.
 
 **Track B receipt (**C28**):** Metal `cryptoPublicMS` full_adder SING @ *N*=128, `--bk-noise 64`, PASS · *B*<sub>bk</sub>≈1.62×10⁶ decodable · `logs/helut-encrypted-n128-metal-sing-crypto-noisy.log`.
 
-**C57:** covering-b2 (*ℓ*=16) same *k*=7 σ=128: identity εlog2≈−110.7 (4 trials); Metal public-ms SING PASS adder 10.33 s/1 and regex 23 LUT 26.69 s/1. Cheaper than covering-b1 **C52**. Covering-b4 public-ms and E256 58-LUT covering-b2 SING FAIL.
+**C57:** covering-b2 (*B*=4, ℓ=16), *N*=*n*=1024, BK σ=128. Historical *k*=7 one-row Metal SING remains a cheaper functional result, but its four-trial ε≈−110.7 was a low-σ̂ draw and settled *k*=7 is short of −64. The older *k*=14 noise bound and SING receipts were separate; the integrated 2026-09-06 *k*=14/32-sample run failed closed at a 24-event bound of −48.18 before circuit execution. The preregistered recovery kept *k*=14 and increased only the identity sample count: 192 samples with explicit parallelism 8 clear at σ₉₅=1,282,096.9856 and log₂ε=−93.8005, then all 8/8 full-adder rows pass (48.1757 s evaluation; 969.48 s end to end). A 32-sample parallel replay exactly matched the serial bound fields; its 6.03× wall-time gain is measurement-stage CPU speedup only. Exact/noiseless primary inputs; statistical circuit scope only. `logs/helut-encrypted-k14-recovery-20260906T030525Z.json`. The *k*=16/t40 PASS remains valid fallback history.
 
 **C58:** PicoRV `abc -lut 6` → 2006 LUTs (−58%); encrypted SING PASS at *N*=64 (1.35 s, 32-bit). Not covering / not *N*=1024.
 **C62:** Metal PicoRV lut6 *N*=1024 *e*=0 1-tick Q SING PASS (~374 s). **C63:** covering-b2 σ=128 same netlist at *N*=64 PASS (~1.72 s). **C60**/**C61** still FAIL covering Q at *N*=1024.
@@ -58,7 +58,7 @@ Public-MS gadgets with `g₀ = δ`: `GGSWParams.booleanPublicMS` / `.cryptoPubli
 | \(\delta\) | \(q/(2N)\) | rotation scale / message spacing |
 | Target ingest \(\varepsilon\) | \(\le 2^{-64}\) | Gaussian union over primary wires |
 | Classical target | \(\ge 128\) bits | HELUT est 175.7; estimator **180.2** at prod-n1024-s16 (**C23**). Other anchors: see **H1** |
-| BK noise \(B_{bk}\) | 0 at *N*=1024 SING; **measured** at covering *N*=8 and *N*=128 | *N*=8: σ̂≈6396; *N*=128: σ̂≈1.47×10⁶, εlog2≈−23.5 (not −64). ℓ=1 `booleanPublicMS` cannot carry BK noise |
+| BK noise | 0 for the broad *N*=1024 SING surface; covering-b2 σ=128 has a narrow integrated result at stride *k*=14 | Full-adder only: 192 effective samples, σ₉₅=1,282,096.9856, 24-event log₂ε=−93.8005, 8/8 PASS. This is observational Gaussian confidence, not a hard \(B_{bk}\), and primary inputs were exact. Native *k*=1 remains negative. |
 | Inter-LUT refresh | `publicMS` default | lattice-compatible BK masks |
 | Metal netlist | `2N` power of two, \(2N\le 4096\) | binary dynamic \(X^p\) |
 

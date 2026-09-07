@@ -1,0 +1,45 @@
+{
+  "schema": "helut.enigma-objective-swift-receipt.v1",
+  "implementation": "swift-production-v1",
+  "model_id": "helut-enigma-search-n72-correlation-discounted-z-06f8694e-e08a5659-v1",
+  "validation": {
+    "command": "swift test -c release --filter 'EnigmaObjectiveRegressionTests|P1030684SparseControlFixtureTests'",
+    "tests_executed": 7,
+    "failures": 0,
+    "result": "pass"
+  },
+  "calibration_bit_patterns": {
+    "trigram_german": "0xc007bcaa6c6fd790",
+    "trigram_random_mean": "0xc014666d81c4f1fc",
+    "trigram_random_population_deviation": "0x3fcfc6d99a2ea2da",
+    "random_model_covariance": "0x3f9e76e871479bce",
+    "random_model_correlation": "0x3fe08f6a84c6ce2f",
+    "objective_random_mean": "0xbfeb7b3d9e8a9ef4",
+    "objective_random_population_deviation": "0x3fec700d86d135d2",
+    "german_objective": "0x401b8652ca0050bd",
+    "dense_recovered_nonsense_objective": "0x40153cf0027f8cce"
+  },
+  "production_constants": {
+    "trigram_german_mean": -2.967122,
+    "trigram_random_mean": -5.100027,
+    "trigram_random_deviation": 0.248256,
+    "random_model_correlation": 0.517507,
+    "trigram_weight": 0.482493,
+    "final_trigram_threshold": -3.6
+  },
+  "known_shell_regression": {
+    "ciphertext_symbols": 72,
+    "baseline_objective": "dense bigram only",
+    "baseline_plaintext": "LLLWOHLARGULATTUSZITSPAMIROOOLOSTIKETTOLZFFNLIKDIBAKRJLDNRITZAUDHEMZEKKS",
+    "baseline_letters_correct": 21,
+    "baseline_true_plugs_recovered": 4,
+    "production_plaintext": "NNNWOLNARSUNSTTOSOITSXDMIROOONISSIKETTONZWBGNIKSIBATRONDORIVZAUDLEGSEKKS",
+    "production_letters_correct": 25,
+    "production_true_plugs_recovered": 5,
+    "production_plugs_proposed": 7,
+    "truth_final_assessment": "possible-break",
+    "production_candidate_final_assessment": "rejected",
+    "dense_recovered_nonsense_final_assessment": "rejected",
+    "missing_trigram_assessment": "model-unavailable"
+  }
+}

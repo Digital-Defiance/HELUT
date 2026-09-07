@@ -4,23 +4,120 @@ import Metal
 import MetalPerformanceShadersGraph
 import HELUTCore
 import HELUTCLI
-import HELUTCLI
 
 // MARK: - Boolean-path HELUT bench (FHE/PBS datapath)
+
+private func checkedBenchValueFlag(_ name: String) -> String? {
+    let arguments = CommandLine.arguments
+    let matches = arguments.indices.filter { arguments[$0] == name }
+    guard matches.count <= 1 else {
+        fputs("\(name) may be specified only once\n", stderr)
+        exit(2)
+    }
+    guard let index = matches.first else { return nil }
+    guard index + 1 < arguments.count, !arguments[index + 1].hasPrefix("--") else {
+        fputs("\(name) requires a value\n", stderr)
+        exit(2)
+    }
+    return arguments[index + 1]
+}
+
+private var benchArchitecture: String {
+    #if arch(arm64)
+    return "arm64"
+    #elseif arch(x86_64)
+    return "x86_64"
+    #else
+    return "unknown"
+    #endif
+}
 
 /// Release harness for trivial-encoding boolean-safe HELUT:
 /// compile wall time, steady-state tick latency, optional Enigma Metal≡cleartext.
 func runHelutBench() {
+    let exportWorkloadPath = checkedBenchValueFlag("--bench-distinct-export-workload")
+    let resultOutputPath = checkedBenchValueFlag("--bench-distinct-result-out")
+    let replayWorkloadPath = checkedBenchValueFlag("--bench-distinct-replay-workload")
+    let replayResultPath = checkedBenchValueFlag("--bench-distinct-replay-result")
+    let requestedModule = checkedBenchValueFlag("--bench-module")
+
+    if replayWorkloadPath != nil || replayResultPath != nil {
+        guard let replayWorkloadPath, let replayResultPath,
+              exportWorkloadPath == nil, resultOutputPath == nil else {
+            fputs("replay requires both --bench-distinct-replay-workload and --bench-distinct-replay-result, without export/run flags\n", stderr)
+            exit(2)
+        }
+        do {
+            let workload = try DistinctLaneExchange.loadWorkload(
+                from: URL(fileURLWithPath: replayWorkloadPath)
+            )
+            let result = try DistinctLaneExchange.loadResult(
+                from: URL(fileURLWithPath: replayResultPath)
+            )
+            let receipt = try DistinctLaneExchange.replay(workload: workload, result: result)
+            print(
+                "BATCH_LANE_REPLAY workload_id=\(receipt.workloadID) lanes=\(receipt.lanes) "
+                    + "input_bits=\(receipt.inputBits) checked=\(receipt.comparedBits) "
+                    + "mismatches=\(receipt.mismatches) distinct_inputs=\(receipt.distinctInputAssignments) "
+                    + "distinct_lane_outputs=\(receipt.distinctLaneOutputs) digest=\(receipt.outputDigest)"
+            )
+            print(
+                String(
+                    format: "BATCH_LANE_REPLAY timing first_ns=%llu steady_median_ns=%.1f steady_avg_ns=%.1f timing_valid=%@",
+                    receipt.firstNanoseconds,
+                    receipt.steadyMedianNanoseconds,
+                    receipt.steadyAverageNanoseconds,
+                    receipt.timingValid ? "true" : "false"
+                )
+            )
+            guard receipt.mismatches == 0 else {
+                fputs("BATCH_LANE_REPLAY result=FAIL; graph timings are void\n", stderr)
+                exit(1)
+            }
+            print("BATCH_LANE_REPLAY result=PASS")
+            return
+        } catch {
+            fputs("BATCH_LANE_REPLAY result=INCONCLUSIVE error=\(error)\n", stderr)
+            exit(1)
+        }
+    }
+
+    let exchangeRequested = exportWorkloadPath != nil || resultOutputPath != nil
+    let distinctLanes = CommandLine.arguments.contains("--bench-distinct-lanes")
+        || exchangeRequested
+    if resultOutputPath != nil, exportWorkloadPath == nil {
+        fputs("--bench-distinct-result-out requires --bench-distinct-export-workload so the result has a banked workload\n", stderr)
+        exit(2)
+    }
     if CommandLine.arguments.contains("--bench-encrypted") {
+        if distinctLanes {
+            fputs("--bench-distinct-lanes is a cleartext combinational mode; it cannot be combined with --bench-encrypted\n", stderr)
+            exit(1)
+        }
         runEncryptedNetlistBench()
         return
     }
 
     let path = resolveBenchNetlistPath()
-    let degree = intFlag("--degree") ?? polynomialDegree
-    let batch = intFlag("--batch") ?? 1
-    let ticks = intFlag("--ticks", allowZero: true) ?? 10
-    let warmup = intFlag("--warmup", allowZero: true) ?? 1
+    let parsedDegree = intFlag("--degree")
+    let parsedBatch = intFlag("--batch")
+    let parsedTicks = intFlag("--ticks", allowZero: true)
+    let parsedWarmup = intFlag("--warmup", allowZero: true)
+    if exchangeRequested {
+        for (flag, valid) in [
+            ("--degree", parsedDegree != nil),
+            ("--batch", parsedBatch != nil),
+            ("--ticks", parsedTicks != nil),
+            ("--warmup", parsedWarmup != nil),
+        ] where CommandLine.arguments.contains(flag) && !valid {
+            fputs("\(flag) has a missing or invalid integer value\n", stderr)
+            exit(2)
+        }
+    }
+    let degree = parsedDegree ?? polynomialDegree
+    let batch = parsedBatch ?? 1
+    let ticks = parsedTicks ?? 10
+    let warmup = parsedWarmup ?? 1
     let resetHold = intFlag("--reset-hold", allowZero: true) ?? 3
     let equiv = CommandLine.arguments.contains("--bench-equiv")
     let compileOnly = CommandLine.arguments.contains("--compile-only")
@@ -28,8 +125,60 @@ func runHelutBench() {
     let lutBackend = parseLUTBackendFlag()
 
     if lutBackend.usesEncryptedNetlist {
+        if distinctLanes {
+            fputs("--bench-distinct-lanes does not support an encrypted LUT backend\n", stderr)
+            exit(1)
+        }
         runEncryptedNetlistBench()
         return
+    }
+    if distinctLanes {
+        guard !equiv else {
+            fputs("--bench-distinct-lanes and --bench-equiv are separate verification modes\n", stderr)
+            exit(1)
+        }
+        guard !compileOnly else {
+            fputs("--bench-distinct-lanes requires execution; remove --compile-only\n", stderr)
+            exit(1)
+        }
+        guard ticks > 0, warmup < ticks else {
+            fputs("--bench-distinct-lanes requires --ticks > --warmup >= 0\n", stderr)
+            exit(1)
+        }
+        guard encodingKind == .constantFill, lutBackend == .multilinear else {
+            fputs("--bench-distinct-lanes currently requires --encoding constant-fill --lut-backend multilinear\n", stderr)
+            exit(1)
+        }
+    }
+
+    var exchangeWorkload: DistinctLaneWorkloadV1?
+    if let exportWorkloadPath {
+        do {
+            let netlistData = try Data(contentsOf: URL(fileURLWithPath: path))
+            let workload = try DistinctLaneExchange.makeWorkload(
+                netlistData: netlistData,
+                moduleName: requestedModule,
+                degree: degree,
+                lanes: batch,
+                trials: ticks,
+                warmup: warmup
+            )
+            try DistinctLaneExchange.write(
+                workload,
+                to: URL(fileURLWithPath: exportWorkloadPath)
+            )
+            exchangeWorkload = workload
+            print(
+                "BATCH_LANE_WORKLOAD result=PASS workload_id=\(workload.workloadID) "
+                    + "module=\(workload.moduleName) lanes=\(workload.lanes) "
+                    + "degree=\(workload.degree) trials=\(workload.trials) warmup=\(workload.warmup) "
+                    + "expected_digest=\(workload.expectedOutputDigest) path=\(exportWorkloadPath)"
+            )
+            if resultOutputPath == nil { return }
+        } catch {
+            fputs("BATCH_LANE_WORKLOAD result=FAIL error=\(error)\n", stderr)
+            exit(1)
+        }
     }
 
     let config = HELUTDatapathConfig(
@@ -51,7 +200,9 @@ func runHelutBench() {
 
     print("HELUT boolean-path bench")
     print("  netlist: \(path)")
+    print("  device: \(device.name)")
     print("  N=\(degree)  B=\(batch)  ticks=\(ticks)  warmup=\(warmup)  reset_hold=\(resetHold)")
+    print("  batch mode: \(distinctLanes ? "distinct-verified-v1" : "legacy-broadcast-v1")")
     print("  encoding: \(encodingKind.rawValue) (trivial, noise-free)")
     print("  LUT backend: \(lutBackend.rawValue)")
     if encodingKind.isPackedGLWE {
@@ -60,8 +211,21 @@ func runHelutBench() {
     print("")
 
     let netlist = loadYosysNetlist(from: path)
-    guard let (moduleName, module) = netlist.modules.first else {
+    let moduleName: String
+    if let exchangeWorkload {
+        moduleName = exchangeWorkload.moduleName
+    } else if let requestedModule {
+        moduleName = requestedModule
+    } else if let first = netlist.modules.first {
+        // Legacy runs retain their historical first-module behavior. Portable
+        // workloads reject ambiguity unless --bench-module is provided.
+        moduleName = first.key
+    } else {
         fatalError("Empty netlist")
+    }
+    guard let module = netlist.modules[moduleName] else {
+        fputs("Yosys module '\(moduleName)' is missing\n", stderr)
+        exit(1)
     }
 
     let rssBefore = taskResidentMemoryBytes()
@@ -102,7 +266,97 @@ func runHelutBench() {
 
     if compiler.dffNodes.isEmpty {
         print("Combinational netlist — no clock loop.")
-        if equiv {
+        if distinctLanes {
+            do {
+                let receipt = try runDistinctCombinationalBatch(
+                    compiler: compiler,
+                    moduleName: moduleName,
+                    module: module,
+                    device: device,
+                    commandQueue: commandQueue,
+                    trials: ticks,
+                    warmup: warmup
+                )
+                let digest = String(format: "fnv1a64-%016llx", receipt.digest)
+                if let resultOutputPath {
+                    guard let workload = exchangeWorkload else {
+                        throw DistinctLaneExchangeError.invalid(
+                            "result export has no associated workload"
+                        )
+                    }
+                    let environment = DistinctLaneEnvironmentV1(
+                        executionBackend: "metal-mpsgraph",
+                        implementation: "HELUT YosysGraphCompiler multilinear",
+                        implementationVersion: "distinct-verified-v1",
+                        deviceName: device.name,
+                        vendor: "Apple",
+                        deviceIdentifier: String(format: "0x%016llx", device.registryID),
+                        operatingSystem: ProcessInfo.processInfo.operatingSystemVersionString,
+                        architecture: benchArchitecture,
+                        unifiedMemory: device.hasUnifiedMemory,
+                        lowPower: device.isLowPower,
+                        removable: device.isRemovable
+                    )
+                    let samples = receipt.graphTimes.map {
+                        UInt64(max(0, ($0 * 1_000_000_000).rounded()))
+                    }
+                    let result = try DistinctLaneExchange.makeResult(
+                        workload: workload,
+                        outputRows: receipt.outputRows,
+                        timingSamplesNanoseconds: samples,
+                        environment: environment
+                    )
+                    try DistinctLaneExchange.write(
+                        result,
+                        to: URL(fileURLWithPath: resultOutputPath)
+                    )
+                    let replay = try DistinctLaneExchange.replay(
+                        workload: workload,
+                        result: result
+                    )
+                    guard replay.mismatches == 0 else {
+                        throw DistinctLaneExchangeError.invalid(
+                            "locally exported result failed replay with \(replay.mismatches) mismatches"
+                        )
+                    }
+                    print(
+                        "BATCH_LANE_RESULT workload_id=\(workload.workloadID) "
+                            + "backend=metal-mpsgraph device=\(device.name) "
+                            + "digest=\(result.outputDigest) replay=PASS path=\(resultOutputPath)"
+                    )
+                }
+                print(
+                    "BATCH_LANES mode=distinct-verified-v1 lanes=\(receipt.lanes) "
+                        + "input_bits=\(receipt.inputBits) "
+                        + "distinct_inputs=\(receipt.distinctInputAssignments) "
+                        + "checked=\(receipt.comparedBits) mismatches=\(receipt.mismatches) "
+                        + "distinct_lane_outputs=\(receipt.distinctLaneOutputs) "
+                        + "digest_schema=fnv1a64-lane-port-bit-v1 digest=\(digest)"
+                )
+                print(
+                    String(
+                        format: "BATCH_LANES timing graph_first_s=%.9f graph_steady_median_s=%.9f graph_steady_avg_s=%.9f verify_s=%.9f trials=%d warmup=%d timing_valid=%@",
+                        receipt.graphFirstSeconds,
+                        receipt.graphSteadyMedianSeconds,
+                        receipt.graphSteadyAverageSeconds,
+                        receipt.verificationSeconds,
+                        receipt.graphTimes.count,
+                        warmup,
+                        receipt.mismatches == 0 ? "true" : "false"
+                    )
+                )
+                if receipt.mismatches == 0 {
+                    print("BATCH_LANES result=PASS")
+                } else {
+                    fputs("BATCH_LANES result=FAIL; graph timings are void\n", stderr)
+                    exit(1)
+                }
+                print("")
+            } catch {
+                fputs("--bench-distinct-lanes failed: \(error)\n", stderr)
+                exit(1)
+            }
+        } else if equiv {
             runCombinationalEquivGate(
                 compiler: compiler,
                 moduleName: moduleName,
@@ -111,6 +365,9 @@ func runHelutBench() {
                 commandQueue: commandQueue
             )
         }
+    } else if distinctLanes {
+        fputs("--bench-distinct-lanes currently supports combinational netlists only\n", stderr)
+        exit(1)
     } else if ticks > 0 {
         let tickTimes = runScriptedClock(
             compiler: compiler,
@@ -164,6 +421,243 @@ func runHelutBench() {
     )
 }
 
+package struct DistinctBatchReceipt {
+    package let lanes: Int
+    package let inputBits: Int
+    package let distinctInputAssignments: Int
+    package let mismatches: Int
+    package let comparedBits: Int
+    package let distinctLaneOutputs: Int
+    package let digest: UInt64
+    package let graphTimes: [Double]
+    package let graphFirstSeconds: Double
+    package let graphSteadyMedianSeconds: Double
+    package let graphSteadyAverageSeconds: Double
+    package let verificationSeconds: Double
+    /// Final decoded output rows in frozen sorted-port/ascending-bit order.
+    package let outputRows: [DistinctLaneBitsV1]
+}
+
+package enum DistinctBatchVerificationError: Error, CustomStringConvertible {
+    case sequentialNetlist
+    case invalidInputWidth(Int)
+    case tooManyLanes(requested: Int, available: UInt64)
+    case invalidTiming(trials: Int, warmup: Int)
+    case noOutputs
+    case allocation(String)
+    case missingPlaceholder(String)
+    case missingOracleOutput(port: String, bit: Int)
+
+    package var description: String {
+        switch self {
+        case .sequentialNetlist:
+            return "sequential netlists require a tick/lane/state digest contract"
+        case .invalidInputWidth(let width):
+            return "input width \(width) is outside the supported 1...62 range"
+        case .tooManyLanes(let requested, let available):
+            return "requested \(requested) lanes but only \(available) distinct assignments exist"
+        case .invalidTiming(let trials, let warmup):
+            return "trials=\(trials), warmup=\(warmup); require trials > warmup >= 0"
+        case .noOutputs:
+            return "netlist has no compiled outputs to verify"
+        case .allocation(let what):
+            return "Metal allocation failed for \(what)"
+        case .missingPlaceholder(let port):
+            return "compiled input \(port) has no placeholder"
+        case .missingOracleOutput(let port, let bit):
+            return "clear oracle omitted \(port)[\(bit)]"
+        }
+    }
+}
+
+/// Production verifier used by the opt-in shipped benchmark and by its tests.
+/// Packing, clear-oracle work, readback, and hashing are outside graph timings.
+package func runDistinctCombinationalBatch(
+    compiler: YosysGraphCompiler,
+    moduleName: String,
+    module: YosysModule,
+    device: MTLDevice,
+    commandQueue: MTLCommandQueue,
+    trials: Int,
+    warmup: Int,
+    corruptFirstOutputInLane: Int? = nil
+) throws -> DistinctBatchReceipt {
+    guard compiler.dffNodes.isEmpty else {
+        throw DistinctBatchVerificationError.sequentialNetlist
+    }
+    guard trials > warmup, warmup >= 0 else {
+        throw DistinctBatchVerificationError.invalidTiming(trials: trials, warmup: warmup)
+    }
+
+    let ports = module.ports.sorted(by: { $0.key < $1.key }).compactMap { name, port in
+        port.direction == "input" ? (name: name, width: port.bits.count) : nil
+    }
+    let inputBits = ports.reduce(0) { $0 + $1.width }
+    guard (1...62).contains(inputBits) else {
+        throw DistinctBatchVerificationError.invalidInputWidth(inputBits)
+    }
+    let assignmentSpace = UInt64(1) << UInt64(inputBits)
+    let lanes = compiler.batch
+    guard UInt64(lanes) <= assignmentSpace else {
+        throw DistinctBatchVerificationError.tooManyLanes(
+            requested: lanes, available: assignmentSpace
+        )
+    }
+    guard !compiler.outputTensors.isEmpty else {
+        throw DistinctBatchVerificationError.noOutputs
+    }
+
+    let stride = max(UInt64(1), assignmentSpace / UInt64(lanes))
+    let assignments = (0..<lanes).map { UInt64($0) * stride }
+    let distinctAssignments = Set(assignments).count
+
+    func bits(for mask: UInt64) -> [String: [UInt32]] {
+        var result: [String: [UInt32]] = [:]
+        var cursor = 0
+        for (name, width) in ports {
+            result[name] = (0..<width).map { _ in
+                defer { cursor += 1 }
+                return UInt32((mask >> UInt64(cursor)) & 1)
+            }
+        }
+        return result
+    }
+
+    let laneInputs = assignments.map(bits(for:))
+    let clear = CleartextNetlistSimulator(moduleName: moduleName, module: module)
+    let expected: [[String: [UInt8]]] = laneInputs.map { values in
+        clear.tick(inputs: values.mapValues { $0.map(UInt8.init) })
+    }
+
+    let degree = compiler.degree
+    let elementCount = lanes * degree
+    let shape: [NSNumber] = [NSNumber(value: lanes), NSNumber(value: degree)]
+    let encoding = compiler.bitEncoding
+    var feeds: [MPSGraphTensor: MPSGraphTensorData] = [:]
+    for entry in compiler.inputNodes {
+        guard let placeholder = entry.node.placeholder else {
+            throw DistinctBatchVerificationError.missingPlaceholder(entry.port)
+        }
+        var host = [UInt32](repeating: 0, count: elementCount)
+        for lane in 0..<lanes {
+            let bit = (laneInputs[lane][entry.port] ?? [0])[entry.bitIndex]
+            let encoded = encoding.encodeBit(bit)
+            host.replaceSubrange((lane * degree)..<((lane + 1) * degree), with: encoded)
+        }
+        guard let buffer = device.makeBuffer(
+            bytes: host,
+            length: elementCount * MemoryLayout<UInt32>.stride,
+            options: .storageModeShared
+        ) else {
+            throw DistinctBatchVerificationError.allocation("input \(entry.port)[\(entry.bitIndex)]")
+        }
+        feeds[placeholder] = MPSGraphTensorData(buffer, shape: shape, dataType: .uInt32)
+    }
+
+    let sortedOutputs = compiler.outputTensors.sorted {
+        ($0.port, $0.bitIndex) < ($1.port, $1.bitIndex)
+    }
+    var results: [MPSGraphTensor: MPSGraphTensorData] = [:]
+    var outputs: [(port: String, bit: Int, buffer: MTLBuffer)] = []
+    for entry in sortedOutputs {
+        guard let buffer = device.makeBuffer(
+            length: elementCount * MemoryLayout<UInt32>.stride,
+            options: .storageModeShared
+        ) else {
+            throw DistinctBatchVerificationError.allocation(
+                "output \(entry.port)[\(entry.bitIndex)]"
+            )
+        }
+        results[entry.tensor] = MPSGraphTensorData(buffer, shape: shape, dataType: .uInt32)
+        outputs.append((entry.port, entry.bitIndex, buffer))
+    }
+
+    var graphTimes: [Double] = []
+    graphTimes.reserveCapacity(trials)
+    for _ in 0..<trials {
+        let started = CFAbsoluteTimeGetCurrent()
+        compiler.graph.run(
+            with: commandQueue,
+            feeds: feeds,
+            targetOperations: nil,
+            resultsDictionary: results
+        )
+        graphTimes.append(CFAbsoluteTimeGetCurrent() - started)
+    }
+
+    let verifyStarted = CFAbsoluteTimeGetCurrent()
+    var mismatches = 0
+    var comparedBits = 0
+    var records: [DistinctBatchRecord] = []
+    var outputRows: [DistinctLaneBitsV1] = []
+    var signatures = Set<String>()
+    var corruptionInjected = false
+    for lane in 0..<lanes {
+        var signature = ""
+        var rowBits = ""
+        for output in outputs {
+            let ptr = output.buffer.contents().bindMemory(
+                to: UInt32.self, capacity: elementCount
+            )
+            let laneSlice = Array(
+                UnsafeBufferPointer(
+                    start: ptr.advanced(by: lane * degree), count: degree
+                )
+            )
+            var got = encoding.decodeBit(laneSlice)
+            if !corruptionInjected, corruptFirstOutputInLane == lane {
+                got ^= 1
+                corruptionInjected = true
+            }
+            guard let values = expected[lane][output.port], output.bit < values.count else {
+                throw DistinctBatchVerificationError.missingOracleOutput(
+                    port: output.port, bit: output.bit
+                )
+            }
+            let want = UInt32(values[output.bit])
+            if got != want { mismatches += 1 }
+            comparedBits += 1
+            records.append(
+                DistinctBatchRecord(
+                    lane: lane, port: output.port, bit: output.bit, value: got
+                )
+            )
+            signature += "\(output.port)[\(output.bit)]=\(got);"
+            rowBits.append(got == 0 ? "0" : "1")
+        }
+        signatures.insert(signature)
+        outputRows.append(DistinctLaneBitsV1(lane: lane, bits: rowBits))
+    }
+    let verificationSeconds = CFAbsoluteTimeGetCurrent() - verifyStarted
+
+    let steady = Array(graphTimes.dropFirst(warmup))
+    let orderedSteady = steady.sorted()
+    let median: Double
+    if orderedSteady.count.isMultiple(of: 2) {
+        let upper = orderedSteady[orderedSteady.count / 2]
+        let lower = orderedSteady[(orderedSteady.count / 2) - 1]
+        median = (lower + upper) / 2
+    } else {
+        median = orderedSteady[orderedSteady.count / 2]
+    }
+    let average = steady.reduce(0, +) / Double(steady.count)
+    return DistinctBatchReceipt(
+        lanes: lanes,
+        inputBits: inputBits,
+        distinctInputAssignments: distinctAssignments,
+        mismatches: mismatches,
+        comparedBits: comparedBits,
+        distinctLaneOutputs: signatures.count,
+        digest: distinctBatchChecksum(records),
+        graphTimes: graphTimes,
+        graphFirstSeconds: graphTimes[0],
+        graphSteadyMedianSeconds: median,
+        graphSteadyAverageSeconds: average,
+        verificationSeconds: verificationSeconds,
+        outputRows: outputRows
+    )
+}
+
 /// Encrypted packed/GLWE netlist: GGSW PBS / blind-rotate per `$lut`.
 private func runEncryptedNetlistBench() {
     setbuf(stdout, nil)
@@ -191,6 +685,13 @@ private func runEncryptedNetlistBench() {
         "--unsafe-noisy-bk-diagnostic"
     )
     let noisyBKIdentityTrials = intFlag("--bk-identity-trials")
+    let noisyBKIdentityParallelismFlag = intFlag("--bk-identity-parallelism")
+    if CommandLine.arguments.contains("--bk-identity-parallelism"),
+       noisyBKIdentityParallelismFlag == nil {
+        fputs("--bk-identity-parallelism must be a positive integer\n", stderr)
+        exit(2)
+    }
+    let noisyBKIdentityParallelism = noisyBKIdentityParallelismFlag ?? 1
     let pathFilter = stringFlag("--paths") // comma list substring match; nil = all
     let bkNoise: TFHENoiseParams = {
         if let sigma = doubleFlag("--bk-noise-sigma"), sigma > 0 {
@@ -267,6 +768,9 @@ private func runEncryptedNetlistBench() {
     }
     if let noisyBKIdentityTrials {
         print("  BK identity confidence trials=\(noisyBKIdentityTrials)")
+    }
+    if noisyBKIdentityParallelism > 1 {
+        print("  BK identity PBS parallelism=\(noisyBKIdentityParallelism) (RNG preparation and reduction remain serial)")
     }
     if unsafeNoisyBKDiagnostic {
         print("  noisy-BK policy: UNSAFE DIAGNOSTIC ONLY (functional output cannot certify ε)")
@@ -376,6 +880,7 @@ private func runEncryptedNetlistBench() {
                 ? .diagnosticOnly
                 : .requireCircuitConfidence,
             noisyBKIdentityTrials: noisyBKIdentityTrials,
+            noisyBKIdentityParallelism: noisyBKIdentityParallelism,
             noisyBKEventCount: max(clear.luts.count * stimuli.count, 1)
         )
         var rows = 0
@@ -1554,6 +2059,13 @@ func runNoisyBKMeasure() {
     setbuf(stdout, nil)
     let degree = intFlag("--degree") ?? 8
     let trials = intFlag("--trials") ?? 16
+    let identityParallelismFlag = intFlag("--bk-identity-parallelism")
+    if CommandLine.arguments.contains("--bk-identity-parallelism"),
+       identityParallelismFlag == nil {
+        fputs("--bk-identity-parallelism must be a positive integer\n", stderr)
+        exit(2)
+    }
+    let identityParallelism = identityParallelismFlag ?? 1
     let injectNoise: TFHENoiseParams = {
         if let sigma = doubleFlag("--bk-noise-sigma"), sigma > 0 {
             return .gaussian(sigma: sigma)
@@ -1573,7 +2085,8 @@ func runNoisyBKMeasure() {
     print("  N=\(degree)  trials=\(trials)  inject ∈ {0, \(injectLabel)}"
         + (coveringSweep ? "  covering-sweep=yes" : "")
         + (booleanScaleMul > 1 ? "  kδ=\(booleanScaleMul)" : "")
-        + (lweDimension.map { "  n=\($0)" } ?? ""))
+        + (lweDimension.map { "  n=\($0)" } ?? "")
+        + (identityParallelism > 1 ? "  parallelism=\(identityParallelism)" : ""))
     print("")
     var rows: [TFHENoisyBKMeasurement] = []
     var gadgets: [(String, GGSWParams)] = [
@@ -1604,7 +2117,8 @@ func runNoisyBKMeasure() {
                 seed: 0xB10D &+ (noise.usesGaussian
                     ? UInt32(noise.gaussianSigma.rounded())
                     : noise.bound),
-                booleanScaleMul: booleanScaleMul
+                booleanScaleMul: booleanScaleMul,
+                maxConcurrentTrials: identityParallelism
             )
             let observation = measured.observationReport(lutCount: 8)
             let gauss = measured.gaussianCertificate(lutCount: 8)

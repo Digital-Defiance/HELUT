@@ -1,0 +1,536 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.68+post (git sha1 c12172fbae8af5e20f6fb52e3d4e92d56ed587b6, Release, AppleClang clang++ 21.0.0.21000101)
+
+-- Executing script file `flow.ys' --
+
+1. Executing Verilog-2005 frontend: lut6.v
+Parsing Verilog input from `lut6.v' to AST representation.
+Generating RTLIL representation for module `\LUT6'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: emitted.v
+Parsing Verilog input from `emitted.v' to AST representation.
+Generating RTLIL representation for module `\popcount6_dut'.
+Successfully finished Verilog frontend.
+
+3. Executing HIERARCHY pass (managing design hierarchy).
+
+3.1. Analyzing design hierarchy..
+Top module:  \popcount6_dut
+Used module:     \LUT6
+Parameter \INIT = 64'1000100010001000100010001000100010001000100010001000100010001000
+
+3.2. Executing AST frontend in derive mode using pre-parsed AST for module `\LUT6'.
+Parameter \INIT = 64'1000100010001000100010001000100010001000100010001000100010001000
+Generating RTLIL representation for module `$paramod$21a8bc909cf124d59085eb7f904656a55f93f58c\LUT6'.
+Parameter \INIT = 64'1111111011101000111010001000000011101000100000001000000000000000
+
+3.3. Executing AST frontend in derive mode using pre-parsed AST for module `\LUT6'.
+Parameter \INIT = 64'1111111011101000111010001000000011101000100000001000000000000000
+Generating RTLIL representation for module `$paramod$b210a62c246a59635493753f6440427a81c5acbf\LUT6'.
+Parameter \INIT = 64'1111111011101000111010001000000011101000100000001000000000000000
+Found cached RTLIL representation for module `$paramod$b210a62c246a59635493753f6440427a81c5acbf\LUT6'.
+Parameter \INIT = 64'1000100010001000100010001000100010001000100010001000100010001000
+Found cached RTLIL representation for module `$paramod$21a8bc909cf124d59085eb7f904656a55f93f58c\LUT6'.
+Parameter \INIT = 64'1000000100010111000101110111111000010111011111100111111011101000
+
+3.4. Executing AST frontend in derive mode using pre-parsed AST for module `\LUT6'.
+Parameter \INIT = 64'1000000100010111000101110111111000010111011111100111111011101000
+Generating RTLIL representation for module `$paramod$b79ebda0468b48969e90f19f5a6a8bd862d27e8b\LUT6'.
+Parameter \INIT = 64'1000000100010111000101110111111000010111011111100111111011101000
+Found cached RTLIL representation for module `$paramod$b79ebda0468b48969e90f19f5a6a8bd862d27e8b\LUT6'.
+Parameter \INIT = 64'1000100010001000100010001000100010001000100010001000100010001000
+Found cached RTLIL representation for module `$paramod$21a8bc909cf124d59085eb7f904656a55f93f58c\LUT6'.
+Parameter \INIT = 64'0110100110010110100101100110100110010110011010010110100110010110
+
+3.5. Executing AST frontend in derive mode using pre-parsed AST for module `\LUT6'.
+Parameter \INIT = 64'0110100110010110100101100110100110010110011010010110100110010110
+Generating RTLIL representation for module `$paramod$02374f4a65d3b5609cc7b0641a42ea302923c6c2\LUT6'.
+Parameter \INIT = 64'0110100110010110100101100110100110010110011010010110100110010110
+Found cached RTLIL representation for module `$paramod$02374f4a65d3b5609cc7b0641a42ea302923c6c2\LUT6'.
+
+3.6. Analyzing design hierarchy..
+Top module:  \popcount6_dut
+Used module:     $paramod$21a8bc909cf124d59085eb7f904656a55f93f58c\LUT6
+Used module:     $paramod$b210a62c246a59635493753f6440427a81c5acbf\LUT6
+Used module:     $paramod$b79ebda0468b48969e90f19f5a6a8bd862d27e8b\LUT6
+Used module:     $paramod$02374f4a65d3b5609cc7b0641a42ea302923c6c2\LUT6
+
+3.7. Analyzing design hierarchy..
+Top module:  \popcount6_dut
+Used module:     $paramod$21a8bc909cf124d59085eb7f904656a55f93f58c\LUT6
+Used module:     $paramod$b210a62c246a59635493753f6440427a81c5acbf\LUT6
+Used module:     $paramod$b79ebda0468b48969e90f19f5a6a8bd862d27e8b\LUT6
+Used module:     $paramod$02374f4a65d3b5609cc7b0641a42ea302923c6c2\LUT6
+Removing unused module `\LUT6'.
+Removed 1 unused modules.
+
+4. Executing PROC pass (convert processes to netlists).
+
+4.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+4.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+4.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+4.4. Executing PROC_INIT pass (extract init attributes).
+
+4.5. Executing PROC_ARST pass (detect async resets in processes).
+
+4.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+4.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+4.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+4.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+4.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+4.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+4.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$b79ebda0468b48969e90f19f5a6a8bd862d27e8b\LUT6.
+Optimizing module $paramod$b210a62c246a59635493753f6440427a81c5acbf\LUT6.
+Optimizing module $paramod$21a8bc909cf124d59085eb7f904656a55f93f58c\LUT6.
+Optimizing module popcount6_dut.
+Optimizing module $paramod$02374f4a65d3b5609cc7b0641a42ea302923c6c2\LUT6.
+
+5. Executing FLATTEN pass (flatten design).
+Deleting now unused module $paramod$b79ebda0468b48969e90f19f5a6a8bd862d27e8b\LUT6.
+Deleting now unused module $paramod$b210a62c246a59635493753f6440427a81c5acbf\LUT6.
+Deleting now unused module $paramod$21a8bc909cf124d59085eb7f904656a55f93f58c\LUT6.
+Deleting now unused module $paramod$02374f4a65d3b5609cc7b0641a42ea302923c6c2\LUT6.
+<suppressed ~9 debug messages>
+
+6. Executing OPT pass (performing simple optimizations).
+
+6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module popcount6_dut.
+
+6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\popcount6_dut'.
+Computing hashes of 18 cells of `\popcount6_dut'.
+Finding duplicate cells in `\popcount6_dut'.
+Computing hashes of 15 cells of `\popcount6_dut'.
+Finding duplicate cells in `\popcount6_dut'.
+<suppressed ~9 debug messages>
+Removed a total of 3 cells.
+
+6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \popcount6_dut..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \popcount6_dut.
+Performed a total of 0 changes.
+
+6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\popcount6_dut'.
+Computing hashes of 15 cells of `\popcount6_dut'.
+Finding duplicate cells in `\popcount6_dut'.
+Removed a total of 0 cells.
+
+6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \popcount6_dut..
+Removed 0 unused cells and 9 unused wires.
+<suppressed ~1 debug messages>
+
+6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module popcount6_dut.
+
+6.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \popcount6_dut..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+6.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \popcount6_dut.
+Performed a total of 0 changes.
+
+6.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\popcount6_dut'.
+Computing hashes of 15 cells of `\popcount6_dut'.
+Finding duplicate cells in `\popcount6_dut'.
+Removed a total of 0 cells.
+
+6.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \popcount6_dut..
+
+6.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module popcount6_dut.
+
+6.16. Finished fast OPT passes. (There is nothing left to do.)
+
+7. Executing TECHMAP pass (map to technology primitives).
+
+7.1. Executing Verilog-2005 frontend: /opt/homebrew/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/opt/homebrew/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+7.2. Continuing TECHMAP pass.
+Using template $paramod$constmap:dd30807d65583dc9842702328f3ba80f3f17db93$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx for cells of type $shiftx.
+Using template $paramod$constmap:ca9f44ad9fa9402d70f65820c3c5a61a0160c946$paramod$7ff4260567c9b4790ea4ff6c187771bc9869faee\_90_shift_shiftx for cells of type $shiftx.
+Analyzing pattern of constant bits for this cell:
+  Constant input on bit 0 of port A: 1'0
+  Constant input on bit 1 of port A: 1'0
+  Constant input on bit 2 of port A: 1'0
+  Constant input on bit 3 of port A: 1'1
+  Constant input on bit 4 of port A: 1'0
+  Constant input on bit 5 of port A: 1'1
+  Constant input on bit 6 of port A: 1'1
+  Constant input on bit 7 of port A: 1'1
+  Constant input on bit 8 of port A: 1'0
+  Constant input on bit 9 of port A: 1'1
+  Constant input on bit 10 of port A: 1'1
+  Constant input on bit 11 of port A: 1'1
+  Constant input on bit 12 of port A: 1'1
+  Constant input on bit 13 of port A: 1'1
+  Constant input on bit 14 of port A: 1'1
+  Constant input on bit 15 of port A: 1'0
+  Constant input on bit 16 of port A: 1'0
+  Constant input on bit 17 of port A: 1'1
+  Constant input on bit 18 of port A: 1'1
+  Constant input on bit 19 of port A: 1'1
+  Constant input on bit 20 of port A: 1'1
+  Constant input on bit 21 of port A: 1'1
+  Constant input on bit 22 of port A: 1'1
+  Constant input on bit 23 of port A: 1'0
+  Constant input on bit 24 of port A: 1'1
+  Constant input on bit 25 of port A: 1'1
+  Constant input on bit 26 of port A: 1'1
+  Constant input on bit 27 of port A: 1'0
+  Constant input on bit 28 of port A: 1'1
+  Constant input on bit 29 of port A: 1'0
+  Constant input on bit 30 of port A: 1'0
+  Constant input on bit 31 of port A: 1'0
+  Constant input on bit 32 of port A: 1'0
+  Constant input on bit 33 of port A: 1'1
+  Constant input on bit 34 of port A: 1'1
+  Constant input on bit 35 of port A: 1'1
+  Constant input on bit 36 of port A: 1'1
+  Constant input on bit 37 of port A: 1'1
+  Constant input on bit 38 of port A: 1'1
+  Constant input on bit 39 of port A: 1'0
+  Constant input on bit 40 of port A: 1'1
+  Constant input on bit 41 of port A: 1'1
+  Constant input on bit 42 of port A: 1'1
+  Constant input on bit 43 of port A: 1'0
+  Constant input on bit 44 of port A: 1'1
+  Constant input on bit 45 of port A: 1'0
+  Constant input on bit 46 of port A: 1'0
+  Constant input on bit 47 of port A: 1'0
+  Constant input on bit 48 of port A: 1'1
+  Constant input on bit 49 of port A: 1'1
+  Constant input on bit 50 of port A: 1'1
+  Constant input on bit 51 of port A: 1'0
+  Constant input on bit 52 of port A: 1'1
+  Constant input on bit 53 of port A: 1'0
+  Constant input on bit 54 of port A: 1'0
+  Constant input on bit 55 of port A: 1'0
+  Constant input on bit 56 of port A: 1'1
+  Constant input on bit 57 of port A: 1'0
+  Constant input on bit 58 of port A: 1'0
+  Constant input on bit 59 of port A: 1'0
+  Constant input on bit 60 of port A: 1'0
+  Constant input on bit 61 of port A: 1'0
+  Constant input on bit 62 of port A: 1'0
+  Constant input on bit 63 of port A: 1'1
+Creating constmapped module `$paramod$constmap:b256034f7bfed16de23cb945b5c7ea7d3add1fdd$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx'.
+
+7.13. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$constmap:b256034f7bfed16de23cb945b5c7ea7d3add1fdd$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$89.
+    dead port 2/2 on $mux $procmux$95.
+    dead port 2/2 on $mux $procmux$101.
+    dead port 2/2 on $mux $procmux$107.
+    dead port 2/2 on $mux $procmux$113.
+    dead port 2/2 on $mux $procmux$119.
+Removed 6 multiplexer ports.
+<suppressed ~678 debug messages>
+
+7.14. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$constmap:b256034f7bfed16de23cb945b5c7ea7d3add1fdd$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx.
+<suppressed ~3 debug messages>
+Removed 0 unused cells and 12 unused wires.
+Using template $paramod$constmap:b256034f7bfed16de23cb945b5c7ea7d3add1fdd$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx for cells of type $shiftx.
+Analyzing pattern of constant bits for this cell:
+  Constant input on bit 0 of port A: 1'0
+  Constant input on bit 1 of port A: 1'0
+  Constant input on bit 2 of port A: 1'0
+  Constant input on bit 3 of port A: 1'0
+  Constant input on bit 4 of port A: 1'0
+  Constant input on bit 5 of port A: 1'0
+  Constant input on bit 6 of port A: 1'0
+  Constant input on bit 7 of port A: 1'0
+  Constant input on bit 8 of port A: 1'0
+  Constant input on bit 9 of port A: 1'0
+  Constant input on bit 10 of port A: 1'0
+  Constant input on bit 11 of port A: 1'0
+  Constant input on bit 12 of port A: 1'0
+  Constant input on bit 13 of port A: 1'0
+  Constant input on bit 14 of port A: 1'0
+  Constant input on bit 15 of port A: 1'1
+  Constant input on bit 16 of port A: 1'0
+  Constant input on bit 17 of port A: 1'0
+  Constant input on bit 18 of port A: 1'0
+  Constant input on bit 19 of port A: 1'0
+  Constant input on bit 20 of port A: 1'0
+  Constant input on bit 21 of port A: 1'0
+  Constant input on bit 22 of port A: 1'0
+  Constant input on bit 23 of port A: 1'1
+  Constant input on bit 24 of port A: 1'0
+  Constant input on bit 25 of port A: 1'0
+  Constant input on bit 26 of port A: 1'0
+  Constant input on bit 27 of port A: 1'1
+  Constant input on bit 28 of port A: 1'0
+  Constant input on bit 29 of port A: 1'1
+  Constant input on bit 30 of port A: 1'1
+  Constant input on bit 31 of port A: 1'1
+  Constant input on bit 32 of port A: 1'0
+  Constant input on bit 33 of port A: 1'0
+  Constant input on bit 34 of port A: 1'0
+  Constant input on bit 35 of port A: 1'0
+  Constant input on bit 36 of port A: 1'0
+  Constant input on bit 37 of port A: 1'0
+  Constant input on bit 38 of port A: 1'0
+  Constant input on bit 39 of port A: 1'1
+  Constant input on bit 40 of port A: 1'0
+  Constant input on bit 41 of port A: 1'0
+  Constant input on bit 42 of port A: 1'0
+  Constant input on bit 43 of port A: 1'1
+  Constant input on bit 44 of port A: 1'0
+  Constant input on bit 45 of port A: 1'1
+  Constant input on bit 46 of port A: 1'1
+  Constant input on bit 47 of port A: 1'1
+  Constant input on bit 48 of port A: 1'0
+  Constant input on bit 49 of port A: 1'0
+  Constant input on bit 50 of port A: 1'0
+  Constant input on bit 51 of port A: 1'1
+  Constant input on bit 52 of port A: 1'0
+  Constant input on bit 53 of port A: 1'1
+  Constant input on bit 54 of port A: 1'1
+  Constant input on bit 55 of port A: 1'1
+  Constant input on bit 56 of port A: 1'0
+  Constant input on bit 57 of port A: 1'1
+  Constant input on bit 58 of port A: 1'1
+  Constant input on bit 59 of port A: 1'1
+  Constant input on bit 60 of port A: 1'1
+  Constant input on bit 61 of port A: 1'1
+  Constant input on bit 62 of port A: 1'1
+  Constant input on bit 63 of port A: 1'1
+Creating constmapped module `$paramod$constmap:afb8d4dfc84f9bd3d8cb1c567c2d0f6b55d47a1a$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx'.
+
+7.15. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$constmap:afb8d4dfc84f9bd3d8cb1c567c2d0f6b55d47a1a$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$89.
+    dead port 2/2 on $mux $procmux$95.
+    dead port 2/2 on $mux $procmux$101.
+    dead port 2/2 on $mux $procmux$107.
+    dead port 2/2 on $mux $procmux$113.
+    dead port 2/2 on $mux $procmux$119.
+Removed 6 multiplexer ports.
+<suppressed ~77 debug messages>
+
+7.16. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$constmap:afb8d4dfc84f9bd3d8cb1c567c2d0f6b55d47a1a$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx.
+<suppressed ~3 debug messages>
+Removed 0 unused cells and 12 unused wires.
+Using template $paramod$constmap:afb8d4dfc84f9bd3d8cb1c567c2d0f6b55d47a1a$paramod$05fd02ee8975e559bee57b6e5e564b3ecd2ab687\_90_shift_shiftx for cells of type $shiftx.
+Using extmapper simplemap for cells of type $mux.
+No more expansions possible.
+<suppressed ~26 debug messages>
+
+8. Executing OPT pass (performing simple optimizations).
+
+8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module popcount6_dut.
+<suppressed ~354 debug messages>
+
+8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\popcount6_dut'.
+Computing hashes of 1191 cells of `\popcount6_dut'.
+Finding duplicate cells in `\popcount6_dut'.
+Computing hashes of 970 cells of `\popcount6_dut'.
+Finding duplicate cells in `\popcount6_dut'.
+Computing hashes of 790 cells of `\popcount6_dut'.
+Finding duplicate cells in `\popcount6_dut'.
+Computing hashes of 734 cells of `\popcount6_dut'.
+Finding duplicate cells in `\popcount6_dut'.
+Computing hashes of 726 cells of `\popcount6_dut'.
+Finding duplicate cells in `\popcount6_dut'.
+Computing hashes of 725 cells of `\popcount6_dut'.
+Finding duplicate cells in `\popcount6_dut'.
+Computing hashes of 724 cells of `\popcount6_dut'.
+Finding duplicate cells in `\popcount6_dut'.
+<suppressed ~1401 debug messages>
+Removed a total of 467 cells.
+
+8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \popcount6_dut..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \popcount6_dut.
+Performed a total of 0 changes.
+
+8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\popcount6_dut'.
+Computing hashes of 724 cells of `\popcount6_dut'.
+Finding duplicate cells in `\popcount6_dut'.
+Removed a total of 0 cells.
+
+8.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \popcount6_dut..
+Removed 680 unused cells and 43 unused wires.
+<suppressed ~681 debug messages>
+
+8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module popcount6_dut.
+
+8.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+8.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \popcount6_dut..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+8.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \popcount6_dut.
+Performed a total of 0 changes.
+
+8.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\popcount6_dut'.
+Computing hashes of 44 cells of `\popcount6_dut'.
+Finding duplicate cells in `\popcount6_dut'.
+Removed a total of 0 cells.
+
+8.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \popcount6_dut..
+
+8.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module popcount6_dut.
+
+8.16. Finished fast OPT passes. (There is nothing left to do.)
+
+9. Executing ABC pass (technology mapping using ABC).
+
+9.1. Extracting gate netlist of module `\popcount6_dut' to `<abc-temp-dir>/input.blif'..
+
+9.1.1. Executed ABC.
+Extracted 35 gates and 43 wires to a netlist network with 6 inputs and 3 outputs.
+Running ABC script: <abc-temp-dir>/abc.script
+ABC: ======== ABC command line "source <abc-temp-dir>/abc.script"
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lut <abc-temp-dir>/lutdefs.txt 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + dch -f 
+ABC: + if 
+ABC: + mfs2 
+ABC: + lutpack -S 1 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+9.1.2. Re-integrating ABC results.
+ABC RESULTS:              $lut cells:        3
+ABC RESULTS:        internal signals:       34
+ABC RESULTS:           input signals:        6
+ABC RESULTS:          output signals:        3
+Removing temp directory.
+Removing global temp directory.
+
+10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \popcount6_dut..
+Removed 0 unused cells and 35 unused wires.
+<suppressed ~13 debug messages>
+
+11. Executing CHECK pass (checking for obvious problems).
+Checking module popcount6_dut...
+Found and reported 0 problems.
+
+12. Printing statistics.
+
+=== popcount6_dut ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       71 wires
+      130 wire bits
+       71 public wires
+      130 public wire bits
+       10 ports
+       10 port bits
+       12 cells
+        3   $lut
+        9   $scopeinfo
+
+13. Executing JSON backend.
+
+End of script. Logfile hash: e9413ac7a5, time: 0.09s, user: 0.04s, system: 0.01s, MEM: 23.09 MB peak
+Yosys 0.68+post (git sha1 c12172fbae8af5e20f6fb52e3d4e92d56ed587b6, Release, AppleClang clang++ 21.0.0.21000101)
+Time spent: 55% 1x abc (0 sec), 8% 13x opt_expr (0 sec), ...

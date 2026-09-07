@@ -1,0 +1,11 @@
+read_verilog lut6.v
+read_verilog emitted.v
+hierarchy -top ripple_adder
+proc
+flatten
+opt
+techmap
+opt
+abc -lut 6
+opt_clean
+write_json resynth.json

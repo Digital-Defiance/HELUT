@@ -1,0 +1,77 @@
+{
+  "schema": "helut-native-paired-preregister-v1",
+  "utc": "2026-09-06T04:26:50Z",
+  "goal": "Measure the existing historical HELUT-graph versus scalar-Verilator row and a new closer paired end-to-end row using a deterministic persistent-worker Verilator baseline on the same emitted 8-bit ripple-adder source, without requiring a speedup.",
+  "provenance": {
+    "gitCommit": "4d47ad0ef40c593bb3a0e4ab5aa2e668b917f975",
+    "workingTreeDirty": true,
+    "testSource": "Tests/HELUTTests/NativeBaselineComparisonTests.swift",
+    "testSourceSHA256": "a57ce63118c1c30fd529f473e8585f2a3861934b346d44ef72d48f570accaf11",
+    "compiledXCTest": ".build/arm64-apple-macosx/release/helutPackageTests.xctest/Contents/MacOS/helutPackageTests",
+    "compiledXCTestSHA256": "9199263c8c4d3f3298cf4b05950d730508f7c5cd9f4d1d6182802fe491ff501d",
+    "hostModel": "Mac16,5",
+    "operatingSystemVersion": "26.6.2",
+    "activeProcessorCount": 16,
+    "yosysVersion": "0.68+post c12172fbae8af5e20f6fb52e3d4e92d56ed587b6",
+    "verilatorVersion": "5.052"
+  },
+  "command": [
+    "HELUT_PRESERVE_NATIVE_BASELINE_ARTIFACT=1",
+    "HELUT_NATIVE_BASELINE_WORKERS=16",
+    "swift",
+    "test",
+    "-c",
+    "release",
+    "--skip-build",
+    "--filter",
+    "NativeBaselineComparisonTests"
+  ],
+  "fixture": {
+    "kind": "generated 8-bit ripple adder",
+    "emittedLUT6": 16,
+    "functionalInputBits": 16,
+    "outputBits": 9,
+    "lineage": "One emitted Verilog source is compiled directly by Verilator and separately mapped through Yosys/ABC -lut 6 for HELUT.",
+    "laneAssignment": "assignment(lane) = lane * max(1, 2^16 / lanes) mod 2^16",
+    "lanePoints": [1, 16, 256, 1024, 4096, 16384, 32768, 65536],
+    "timedTrialsPerPoint": 5,
+    "requestedNativeWorkers": 16,
+    "effectiveNativeWorkers": "min(16, lanes)"
+  },
+  "scopes": {
+    "historicalHELUT": "Warmed host wall time around synchronized MPSGraph.run with feeds/results already allocated and packed.",
+    "historicalNative": "Scalar native loop input assignment, Verilated model eval, output reads, and ordered FNV digest.",
+    "pairedHELUT": "Per-trial assignment-mask generation, writes to every preallocated compiler input buffer including constant-low clk, synchronized MPSGraph.run, output-buffer traversal, decode, and ordered FNV digest.",
+    "pairedNative": "Per-trial assignment-vector generation, persistent-worker start/completion synchronization, per-worker input writes including constant-low clk, one private Verilated model eval per lane, output collection, and serial ordered FNV digest.",
+    "nativePreparedDiagnostic": "Persistent-worker synchronization, input writes, eval, output collection, and completion; excludes assignment-vector generation and ordered digest.",
+    "excludedFromSteadyScopes": [
+      "Yosys synthesis",
+      "Verilator build",
+      "HELUT graph compilation",
+      "Metal and model allocation",
+      "native model and worker-thread creation",
+      "process startup",
+      "HELUT cold specialization"
+    ]
+  },
+  "acceptance": {
+    "xctestProcessStatus": 0,
+    "xctestTests": 1,
+    "xctestFailures": 0,
+    "allLanePointsPresent": true,
+    "fivePositiveFiniteSamplesPerScopePerPoint": true,
+    "scalarDigestStableAcrossTrials": true,
+    "parallelDigestStableAcrossTrials": true,
+    "helutDigestStableAcrossTrials": true,
+    "helutScalarParallelDigestsEqualAtEveryPoint": true,
+    "b65536ExhaustiveAssignmentSet": true,
+    "speedupRequired": false
+  },
+  "failurePolicy": "Preserve any Swift failure, generated-C++ build failure, native worker failure, digest mismatch, unstable trial, missing sample, or absence/movement of either crossover. Do not lower B, trials, or worker count; do not select a favorable rerun. A code defect may be fixed only after banking this run and creating a new preregistration tied to the changed source hash.",
+  "claimBoundary": "The paired scope is materially closer than the historical comparison but remains one release-Swift/MPSGraph implementation versus optimized generated C++ on one combinational circuit and unpinned host scheduler. It is not a pure GPU-kernel comparison, a best-possible native implementation, a sequential result, or a general performance claim.",
+  "plannedArtifacts": {
+    "rawLog": "logs/helut-native-paired-20260906T042650Z/raw.log",
+    "receipt": "logs/helut-native-paired-20260906T042650Z/receipt.json",
+    "preservedGeneratedArtifact": "Path printed by the test and copied beside the receipt after execution."
+  }
+}

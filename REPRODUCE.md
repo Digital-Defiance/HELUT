@@ -2,6 +2,8 @@
 
 **Bar for public science:** if we assert it, someone else can re-run it from this file (or we mark it open in [`directives/claim-sheet.md`](directives/claim-sheet.md)).
 
+**Failure rule:** bank the negative, name the binding constraint, choose a defensible lever, and preregister the next test without lowering the bar. Keep both outcomes. A failure maps the next experiment; it is not a reason to give up or permission to move the goalposts. Protocol: [`directives/research-release.md#failure-protocol-find-the-lever`](directives/research-release.md#failure-protocol-find-the-lever).
+
 Discovery after disclosure: [`directives/research-trajectory.md`](directives/research-trajectory.md).  
 Parameters: [`directives/parameter-cookbook.md`](directives/parameter-cookbook.md).  
 Packaging: [`directives/packaging-roadmap.md`](directives/packaging-roadmap.md).
@@ -30,6 +32,75 @@ points only; new generation commands must not overwrite them.
 ```bash
 make hardware-check   # manifest ownership + root compatibility integrity
 ```
+
+## Production distinct lanes at B=65,536 and native baseline
+
+The banked workload/result pair is self-contained and can be replayed without Metal execution:
+
+```bash
+.build/release/helut-bench --bench \
+  --bench-distinct-replay-workload \
+    logs/helut-production-distinct-b65536-20260906T035827Z/workload.json \
+  --bench-distinct-replay-result \
+    logs/helut-production-distinct-b65536-20260906T035827Z/metal-result.json
+```
+
+Expect `lanes=65536`, `distinct_inputs=65536`, `checked=589824`, `mismatches=0`, `distinct_lane_outputs=511`, digest `fnv1a64-3f03b6872d46d5a5`, `timing_valid=true`, and replay **PASS**.
+
+To regenerate the readable mapped artifact and rerun the production path without overwriting the banked result:
+
+```bash
+RECEIPT=logs/helut-production-distinct-b65536-20260906T035827Z
+(
+  cd "$RECEIPT"
+  yosys -q -s flow.ys
+)
+mkdir -p build/repro-distinct-b65536
+.build/release/helut-bench \
+  --bench "$RECEIPT/resynth.json" --bench-module ripple_adder \
+  --degree 1 --batch 65536 --ticks 6 --warmup 1 \
+  --bench-distinct-lanes \
+  --bench-distinct-export-workload build/repro-distinct-b65536/workload.json \
+  --bench-distinct-result-out build/repro-distinct-b65536/metal-result.json
+```
+
+The measured production run checked all 589,824 output bits with zero mismatches. Raw graph samples were 338,255,048; 4,907,966; 4,935,980; 3,043,056; 1,924,038; and 2,047,896 ns, with the first sample treated as warmup. The steady median was 3.043056 ms. The same-era native test measured a 7.356375 ms single-threaded Verilator median at B=65,536, yielding a 2.41743× graph-to-scalar time ratio in that explicitly asymmetric harness.
+
+The stronger comparison is the later preregistered paired run:
+
+```bash
+HELUT_PRESERVE_NATIVE_BASELINE_ARTIFACT=1 \
+HELUT_NATIVE_BASELINE_WORKERS=16 \
+  swift test -c release --filter NativeBaselineComparisonTests
+```
+
+That harness preserves the historical row and adds a closer scope on both sides. HELUT times assignment generation, packing into preallocated input buffers, synchronized graph execution, output decode, and ordered digest. Native times assignment generation, persistent-worker input writes and private-model evaluation, output collection, and the same ordered digest. Build, graph compilation, allocation, worker/model creation, cold specialization, and process startup remain excluded. The phases are analogous, but release Swift/MPSGraph versus optimized generated C++ is still not a language-neutral or pure-kernel comparison.
+
+The clean five-sample run passed all eight widths with identical HELUT, scalar-native, and parallel-native digests. At exhaustive B=65,536:
+
+- historical HELUT graph median: **2.132893 ms**;
+- historical scalar Verilator median: **6.939708 ms**;
+- paired HELUT end-to-end median: **31.954050 ms**;
+- paired 16-worker native end-to-end median: **6.958500 ms**;
+- native parallel assign/eval/collect diagnostic: **0.325500 ms**;
+- digest: `52f209ab0358725` on all three paths.
+
+The historical graph-versus-scalar row first favored HELUT at B=32,768, again supporting a sampled graph-amortization region. The paired row showed **no HELUT crossover through B=65,536**; HELUT took 4.592× the native end-to-end time at the widest point. Approximately 29.82 ms of HELUT's 31.95 ms paired total was outside synchronized graph execution, but graph execution itself was still 6.55× the native prepared diagnostic. Those are two separate optimization levers, not permission to call the older graph-only ratio a native speed win.
+
+The first preregistered paired run reached the same conclusion but omitted the five raw historical scalar samples. It is preserved as functional PASS / protocol PARTIAL at [`logs/helut-native-paired-20260906T042650Z/receipt.json`](logs/helut-native-paired-20260906T042650Z/receipt.json). The reporting-only fix and fully accepted rerun are banked at [`logs/helut-native-paired-rerun-20260906T044651Z/receipt.json`](logs/helut-native-paired-rerun-20260906T044651Z/receipt.json).
+
+The accepted negative was then decomposed without moving the paired boundary. At B=65,536, five-sample medians were 0.099063 ms assignment generation, 1.397967 ms input packing, 3.836036 ms synchronized graph execution, **20.576000 ms strict output decode**, 7.141948 ms canonical digest, and 32.414079 ms total. Adjacent per-trial timestamps reconciled to the total within one nanosecond; all exhaustive digests remained `52f209ab0358725`. Receipt: [`logs/helut-native-phase-baseline-20260906T051035Z/receipt.json`](logs/helut-native-phase-baseline-20260906T051035Z/receipt.json) (SHA-256 `ffe33bd05fc6b9c92327fe84a0d5f5f4937d0e4244267270d48c270c99d73239`).
+
+The preregistered first optimization retained every output read, strict 0/1 and constant-fill check, nested decoded-value materialization, digest operation/order, phase timer, and outer scope. It only replaced each owning one-element output array with `MockTorusEncoding.decodeBit(buffer:lane:degree:strict:)`. The one-shot eight-width rerun passed 1 test with 0 failures. At B=65,536:
+
+- strict decode median: **20.576000 → 0.571966 ms** (**35.97× lower**);
+- HELUT paired median: **32.414079 → 13.419986 ms** (**2.42× lower**);
+- contemporaneous 16-worker native paired median: **7.186084 ms**;
+- exhaustive digest: `52f209ab0358725` on HELUT, scalar native, and parallel native.
+
+There was still **no paired crossover through B=65,536**: optimized HELUT remained 1.867× slower. The result recovers a real lever without changing the comparison, but does not support an end-to-end victory claim. The canonical digest now occupies roughly half the HELUT total and nearly the same serial work exists natively; the remaining differential gap is primarily HELUT input packing plus graph execution plus residual decode versus native prepared assign/eval/collect. Optimized receipt: [`logs/helut-native-decode-pointer-20260906T053925Z/receipt.json`](logs/helut-native-decode-pointer-20260906T053925Z/receipt.json) (SHA-256 `d0d73a42304c40c7779ca556f1f8e8d534ee85c5db254cece9471d48599bb6f8`).
+
+Production distinct-lane artifacts and boundaries remain at [`logs/helut-production-distinct-b65536-20260906T035827Z/receipt.json`](logs/helut-production-distinct-b65536-20260906T035827Z/receipt.json).
 
 ## Documents
 
@@ -368,7 +439,9 @@ Expect: *n*=64 ε≈−36.6; *n*=256 ε≈−10.9; *n*=512 ε≈−6.5; *n*=1024
 
 Expect: identity decodable ε≈−12.6; Metal SING **FAIL**. Torus σ=128 still undecodable.
 
-## Covering-b2 k=7 σ=128 cheaper SING (C57)
+## Covering-b2 σ=128: historical cheaper SING and integrated bound (C57)
+
+The historical *k*=7 commands remain useful for the one-row cost comparison:
 
 ```bash
 .build/release/helut --measure-bk-noise --degree 1024 --trials 4 \
@@ -384,7 +457,28 @@ Expect: identity decodable ε≈−12.6; Metal SING **FAIL**. Torus σ=128 still
   | tee logs/helut-encrypted-n1024-metal-sing-regex-covering-b2-gauss-sigma128-k7-e1.log
 ```
 
-Expect: εlog2≈−110.7; adder ~10.3 s/1 PASS; regex 23 LUT ~26.7 s/1 PASS. Covering-b4 public-ms and the **historical pre-fixture-v4** E256 58-LUT covering-b2 SING FAIL; that negative is not the live fixture-v4 conjugated-XOR core.
+The archived four-trial ε≈−110.7 was a low-σ̂ draw; settled *k*=7 is short of −64. The current integrated, fail-closed full-adder receipt uses one exact path, all eight input rows, and a circuit-scoped confidence gate:
+
+```bash
+set -o pipefail
+HELUT_QUIET_METAL_BR_PROGRESS=1 /usr/bin/time -l \
+  .build/release/helut-bench \
+  --bench netlist.json \
+  --degree 1024 \
+  --bench-encrypted \
+  --sing \
+  --vectors 8 \
+  --bk-noise-sigma 128 \
+  --bk-identity-trials 192 \
+  --bk-identity-parallelism 8 \
+  --paths 'blind-rotate-metal public-ms covering-b2' \
+  --boolean-scale-mul 14 \
+  2>&1 | tee logs/helut-encrypted-bound-reproduction.log
+```
+
+Acceptance requires exactly one selected path, `identity residual trials=192  (n=1024)  parallelism=8`, `rows 8`, preflight and result `clears=yes`, `result PASS`, summary `cert yes`, and process status 0. The banked run reports max|e|=3,369,752, σ₉₅=1,282,096.9856, 24-event log₂ε=−93.8005, 8/8 rows, 48.1757 s encrypted evaluation, and 969.48 s end to end. Raw receipt: `logs/helut-encrypted-k14-recovery-20260906T030525Z-t192-p8.raw.log`; machine receipt: `logs/helut-encrypted-k14-recovery-20260906T030525Z.json`; preregistration: `logs/helut-encrypted-k14-recovery-20260906T030525Z-preregister.json`.
+
+This earned result is *k*=14. The preserved *k*=14/32-sample attempt stopped before circuit execution at log₂ε=−48.18 (`logs/helut-encrypted-bound-20260906T012213Z-t32-k14.raw.log`). Before increasing the sample count, an eight-way 32-sample replay exactly matched the serial max|e|, σ₉₅, event count, and log₂ε; identity-measurement wall time fell from 1,132.49 s to 187.92 s (6.03×). That is a sampling-stage CPU speedup, not encrypted circuit or FHE throughput. The *k*=16/t40 PASS remains preserved as fallback history (`logs/helut-encrypted-bound-20260906T014326Z.json`). Do not add `--unsafe-noisy-bk-diagnostic`, substitute the 175.7-bit calibration row for this residual bound, or generalize the 24-event full-adder result to arbitrary circuits/depth. Primary inputs in this command are exact/noiseless. Covering-b4 public-ms and the historical pre-fixture-v4 E256 58-LUT covering-b2 SING failures remain separate negatives.
 
 CPU covering (same gadget, demo *N*):
 

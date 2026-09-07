@@ -529,13 +529,58 @@ package final class LUTNode: CircuitNode {
         return graph.constant(data, shape: oneShape, dataType: .uInt32)
     }
 
+    private struct FactoredMultilinearKey: Hashable {
+        let depth: Int
+        let values: [UInt32]
+    }
+
+    private struct FactoredMultilinearPlan {
+        let variableOrder: [Int]
+        let operationCount: Int
+    }
+
     private func compileMultilinear(graph: MPSGraph, inputs: [MPSGraphTensor]) -> MPSGraphTensor {
         let width = inputs.count
-        let one = encodedConstant(graph: graph, bit: 1)
         if width == 0 {
             return encodedConstant(graph: graph, bit: truthTable[0])
         }
+        if let constant = constantBit(in: truthTable) {
+            return encodedConstant(graph: graph, bit: constant)
+        }
+        // The Shannon identity below requires encoded one to be the
+        // componentwise UInt32 ring identity. Phase-shaped encodings retain
+        // the original expansion, while constant-fill may be factored exactly.
+        guard encodingKind == .constantFill else {
+            return compileExpandedMultilinear(graph: graph, inputs: inputs)
+        }
 
+        let expandedCost = expandedMultilinearOperationCount(width: width)
+        let factoredPlan = bestFactoredMultilinearPlan(width: width)
+        // The extra addition by encoded zero gives every LUT a distinct root
+        // tensor, so projected wires cannot collide as result-dictionary keys.
+        if factoredPlan.operationCount + 1 < expandedCost {
+            let factored = compileFactoredMultilinear(
+                graph: graph,
+                inputs: inputs,
+                variableOrder: factoredPlan.variableOrder
+            )
+            return graph.addition(
+                factored,
+                encodedConstant(graph: graph, bit: 0),
+                name: "\(name)_fact_output"
+            )
+        }
+        return compileExpandedMultilinear(graph: graph, inputs: inputs)
+    }
+
+    /// Preserve the original sum-of-minterms lowering as a cost-based fallback
+    /// for sparse tables where factoring would add arithmetic.
+    private func compileExpandedMultilinear(
+        graph: MPSGraph,
+        inputs: [MPSGraphTensor]
+    ) -> MPSGraphTensor {
+        let width = inputs.count
+        let one = encodedConstant(graph: graph, bit: 1)
         var complements: [MPSGraphTensor] = []
         complements.reserveCapacity(width)
         for (index, input) in inputs.enumerated() {
@@ -574,6 +619,240 @@ package final class LUTNode: CircuitNode {
             }
         }
         return accumulator ?? encodedConstant(graph: graph, bit: 0)
+    }
+
+    /// Factor the same multilinear polynomial as a reduced Shannon DAG:
+    /// `f = low + x * (high - low)`. UInt32 arithmetic is a ring, so this is
+    /// exactly the expanded polynomial modulo 2^32, not merely Boolean-equivalent.
+    private func compileFactoredMultilinear(
+        graph: MPSGraph,
+        inputs: [MPSGraphTensor],
+        variableOrder: [Int]
+    ) -> MPSGraphTensor {
+        let orderedValues = reorderedTruthTable(variableOrder: variableOrder)
+        var cache: [FactoredMultilinearKey: MPSGraphTensor] = [:]
+        var complements: [Int: MPSGraphTensor] = [:]
+        var constants: [UInt32: MPSGraphTensor] = [:]
+        var operationIndex = 0
+
+        func constantTensor(_ bit: UInt32) -> MPSGraphTensor {
+            if let existing = constants[bit] { return existing }
+            let tensor = encodedConstant(graph: graph, bit: bit)
+            constants[bit] = tensor
+            return tensor
+        }
+
+        func operationName(_ kind: String, depth: Int) -> String {
+            operationIndex += 1
+            return "\(name)_fact_\(kind)_d\(depth)_\(operationIndex)"
+        }
+
+        func emit(_ values: [UInt32], depth: Int) -> MPSGraphTensor {
+            if let constant = constantBit(in: values) {
+                return constantTensor(constant)
+            }
+
+            let key = FactoredMultilinearKey(depth: depth, values: values)
+            if let existing = cache[key] { return existing }
+            precondition(depth < variableOrder.count)
+
+            let halves = splitFactoredValues(values)
+            let low = halves.low
+            let high = halves.high
+            let lowConstant = constantBit(in: low)
+            let highConstant = constantBit(in: high)
+            let variable = variableOrder[depth]
+            let input = inputs[variable]
+            let result: MPSGraphTensor
+
+            if low == high {
+                result = emit(low, depth: depth + 1)
+            } else if lowConstant == 0 && highConstant == 1 {
+                result = input
+            } else if lowConstant == 1 && highConstant == 0 {
+                if let existing = complements[variable] {
+                    result = existing
+                } else {
+                    let complement = graph.subtraction(
+                        constantTensor(1),
+                        input,
+                        name: operationName("not_v\(variable)", depth: depth)
+                    )
+                    complements[variable] = complement
+                    result = complement
+                }
+            } else if lowConstant == 0 {
+                result = graph.multiplication(
+                    input,
+                    emit(high, depth: depth + 1),
+                    name: operationName("take_high", depth: depth)
+                )
+            } else if highConstant == 0 {
+                let lowTensor = emit(low, depth: depth + 1)
+                let selected = graph.multiplication(
+                    input,
+                    lowTensor,
+                    name: operationName("zero_high_mul", depth: depth)
+                )
+                result = graph.subtraction(
+                    lowTensor,
+                    selected,
+                    name: operationName("zero_high_sub", depth: depth)
+                )
+            } else {
+                let lowTensor = emit(low, depth: depth + 1)
+                let highTensor = emit(high, depth: depth + 1)
+                let difference = graph.subtraction(
+                    highTensor,
+                    lowTensor,
+                    name: operationName("difference", depth: depth)
+                )
+                let selected = graph.multiplication(
+                    input,
+                    difference,
+                    name: operationName("select", depth: depth)
+                )
+                result = graph.addition(
+                    lowTensor,
+                    selected,
+                    name: operationName("merge", depth: depth)
+                )
+            }
+
+            cache[key] = result
+            return result
+        }
+
+        return emit(orderedValues, depth: 0)
+    }
+
+    private func bestFactoredMultilinearPlan(width: Int) -> FactoredMultilinearPlan {
+        var candidate = Array(0..<width)
+        var bestOrder = candidate
+        var bestCost = factoredMultilinearOperationCount(
+            values: reorderedTruthTable(variableOrder: candidate),
+            variableOrder: candidate
+        )
+
+        // Yosys maps this path to LUT6 cells. Keep generic wider LUTs
+        // deterministic without allowing factorial compile-time growth.
+        guard width <= 6 else {
+            return FactoredMultilinearPlan(
+                variableOrder: bestOrder,
+                operationCount: bestCost
+            )
+        }
+
+        func visitPermutations(_ position: Int) {
+            if position == candidate.count {
+                let cost = factoredMultilinearOperationCount(
+                    values: reorderedTruthTable(variableOrder: candidate),
+                    variableOrder: candidate
+                )
+                if cost < bestCost {
+                    bestCost = cost
+                    bestOrder = candidate
+                }
+                return
+            }
+            for index in position..<candidate.count {
+                candidate.swapAt(position, index)
+                visitPermutations(position + 1)
+                candidate.swapAt(position, index)
+            }
+        }
+        visitPermutations(0)
+        return FactoredMultilinearPlan(
+            variableOrder: bestOrder,
+            operationCount: bestCost
+        )
+    }
+
+    private func expandedMultilinearOperationCount(width: Int) -> Int {
+        var oneCount = 0
+        var requiredComplements = Set<Int>()
+        for mask in 0..<truthTable.count where truthTable[mask] == 1 {
+            oneCount += 1
+            for bit in 0..<width where ((mask >> bit) & 1) == 0 {
+                requiredComplements.insert(bit)
+            }
+        }
+        return requiredComplements.count
+            + oneCount * max(0, width - 1)
+            + max(0, oneCount - 1)
+    }
+
+    private func factoredMultilinearOperationCount(
+        values: [UInt32],
+        variableOrder: [Int]
+    ) -> Int {
+        var seen = Set<FactoredMultilinearKey>()
+        var complementedVariables = Set<Int>()
+
+        func visit(_ nodeValues: [UInt32], depth: Int) -> Int {
+            if constantBit(in: nodeValues) != nil { return 0 }
+            let key = FactoredMultilinearKey(depth: depth, values: nodeValues)
+            guard seen.insert(key).inserted else { return 0 }
+            precondition(depth < variableOrder.count)
+
+            let halves = splitFactoredValues(nodeValues)
+            let low = halves.low
+            let high = halves.high
+            if low == high {
+                return visit(low, depth: depth + 1)
+            }
+
+            let lowConstant = constantBit(in: low)
+            let highConstant = constantBit(in: high)
+            if lowConstant == 0 && highConstant == 1 {
+                return 0
+            }
+            if lowConstant == 1 && highConstant == 0 {
+                return complementedVariables.insert(variableOrder[depth]).inserted ? 1 : 0
+            }
+            if lowConstant == 0 {
+                return visit(high, depth: depth + 1) + 1
+            }
+            if highConstant == 0 {
+                return visit(low, depth: depth + 1) + 2
+            }
+            return visit(low, depth: depth + 1)
+                + visit(high, depth: depth + 1)
+                + 3
+        }
+
+        return visit(values, depth: 0)
+    }
+
+    private func reorderedTruthTable(variableOrder: [Int]) -> [UInt32] {
+        var ordered = [UInt32](repeating: 0, count: truthTable.count)
+        for orderedMask in 0..<truthTable.count {
+            var originalMask = 0
+            for (orderedBit, originalBit) in variableOrder.enumerated()
+                where ((orderedMask >> orderedBit) & 1) == 1 {
+                originalMask |= 1 << originalBit
+            }
+            ordered[orderedMask] = truthTable[originalMask]
+        }
+        return ordered
+    }
+
+    private func splitFactoredValues(_ values: [UInt32]) -> (low: [UInt32], high: [UInt32]) {
+        precondition(values.count >= 2 && values.count.isMultiple(of: 2))
+        var low: [UInt32] = []
+        var high: [UInt32] = []
+        low.reserveCapacity(values.count / 2)
+        high.reserveCapacity(values.count / 2)
+        for index in stride(from: 0, to: values.count, by: 2) {
+            low.append(values[index])
+            high.append(values[index + 1])
+        }
+        return (low, high)
+    }
+
+    private func constantBit(in values: [UInt32]) -> UInt32? {
+        guard let first = values.first else { return nil }
+        return values.dropFirst().allSatisfy { $0 == first } ? first : nil
     }
 
     private func encodedConstant(graph: MPSGraph, bit: UInt32) -> MPSGraphTensor {

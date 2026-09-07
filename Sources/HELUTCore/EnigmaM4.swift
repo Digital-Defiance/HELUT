@@ -314,9 +314,10 @@ package enum HostM4Bombe {
         return score
     }
 
-    /// How far a decrypt sits between random text and German, as a 0…1 fraction.
-    /// Around 1.0 means indistinguishable from the training corpus; ≤0 means random.
-    package static func germanLikeness(plaintext: [Int]) -> Double {
+    /// Affine position of a decrypt between the frozen random and German bigram references.
+    /// Zero is the random reference and one is the German reference. This value is unbounded
+    /// and is neither a probability nor publication confidence.
+    package static func bigramCalibrationPosition(plaintext: [Int]) -> Double {
         let bigram = LanguageScorer.bigramScore(plaintext)
         let span = LanguageScorer.Calibration.germanMean - LanguageScorer.Calibration.randomMean
         return (bigram - LanguageScorer.Calibration.randomMean) / span
@@ -332,18 +333,18 @@ package enum HostM4Bombe {
 
     package struct BreakVerdict: Sendable {
         package let isPossibleBreak: Bool
-        package let likeness: Double
+        package let bigramCalibrationPosition: Double
         package let indexOfCoincidence: Double
         package let icInBand: Bool
         package let strongCribHits: [String]
         package let reason: String
     }
 
-    /// Human-gate for CO candidates. Bigram likeness alone is not enough at 72 letters —
-    /// German-shaped noise routinely scores ≥0.95 without naval structure.
+    /// Core human gate for CO candidates. Bigram calibration position alone is not enough
+    /// at 72 letters: German-shaped noise routinely exceeds the frozen German reference.
     package static func evaluateBreak(plaintext: [Int]) -> BreakVerdict {
         let text = EnigmaAlphabet.string(from: plaintext)
-        let likeness = germanLikeness(plaintext: plaintext)
+        let calibrationPosition = bigramCalibrationPosition(plaintext: plaintext)
         let ic = LanguageScorer.indexOfCoincidence(plaintext)
         let icInBand = abs(ic - LanguageScorer.Calibration.germanIC) < 0.02
         let hits = strongNavalCribs.filter { text.contains($0) }
@@ -356,7 +357,7 @@ package enum HostM4Bombe {
         if ic > 0.10 {
             return BreakVerdict(
                 isPossibleBreak: false,
-                likeness: likeness,
+                bigramCalibrationPosition: calibrationPosition,
                 indexOfCoincidence: ic,
                 icInBand: icInBand,
                 strongCribHits: hits,
@@ -364,31 +365,31 @@ package enum HostM4Bombe {
                     + "— degenerate letter-run artifact, not plaintext."
             )
         }
-        if likeness >= 0.85 && icInBand && structured {
+        if calibrationPosition >= 0.85 && icInBand && structured {
             return BreakVerdict(
                 isPossibleBreak: true,
-                likeness: likeness,
+                bigramCalibrationPosition: calibrationPosition,
                 indexOfCoincidence: ic,
                 icInBand: icInBand,
                 strongCribHits: hits,
                 reason: "*** Possible break — strong cribs [\(hits.joined(separator: ", "))] "
-                    + "+ German IC/likeness; verify Kenngruppen/Grund ***"
+                    + "+ German IC/bigram evidence; verify Kenngruppen/Grund ***"
             )
         }
-        if likeness >= 0.85 && icInBand && !structured {
+        if calibrationPosition >= 0.85 && icInBand && !structured {
             return BreakVerdict(
                 isPossibleBreak: false,
-                likeness: likeness,
+                bigramCalibrationPosition: calibrationPosition,
                 indexOfCoincidence: ic,
                 icInBand: icInBand,
                 strongCribHits: hits,
-                reason: "NO BREAK. High German-likeness without naval structure "
+                reason: "NO BREAK. High bigram calibration position without naval structure "
                     + "(bigram-fluent nonsense at this message length)."
             )
         }
         return BreakVerdict(
             isPossibleBreak: false,
-            likeness: likeness,
+            bigramCalibrationPosition: calibrationPosition,
             indexOfCoincidence: ic,
             icInBand: icInBand,
             strongCribHits: hits,

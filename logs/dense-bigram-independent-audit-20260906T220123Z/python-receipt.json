@@ -1,0 +1,42 @@
+{
+  "control": {
+    "first_index": 567,
+    "floor_window_starts": [],
+    "last_index": 461,
+    "plaintext_sha256": "e355b691e78cd71bc1ed816e0808ab4f18aeb73376008b2a71dced197ad07145",
+    "symbols": 120,
+    "windows": 119
+  },
+  "fixture": {
+    "counted_pairs": 28508833,
+    "declared_distinct": 674,
+    "ic": "0.0747",
+    "letters": 28508834,
+    "missing": [
+      "JX",
+      "QY"
+    ],
+    "parsed_distinct": 674,
+    "sha256": "06f8694ec17906e993223e0179c6ca326030e62f77ec86e5c4120fddcf68f111"
+  },
+  "implementation": "python-independent-v1",
+  "result": {
+    "mean_bit_pattern": "0xc00946646aa57920",
+    "mean_decimal": "-3.159371216940727",
+    "total_bit_pattern": "0xc0777f715b25d69c",
+    "total_decimal": "-375.9651748159465"
+  },
+  "runtime": {
+    "architecture": "arm64",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "python": "3.9.6 (default, May 22 2026, 11:13:45) "
+  },
+  "schema": "helut.dense-bigram-audit.v1",
+  "scoring": {
+    "accumulation": "explicit left fold from +0.0",
+    "add_k": 0.5,
+    "layout": "row-major A-Z conditional bigrams",
+    "logarithm": "natural",
+    "mean_denominator": 119
+  }
+}

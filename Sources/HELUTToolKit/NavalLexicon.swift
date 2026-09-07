@@ -3,9 +3,11 @@ import HELUTCore
 
 // MARK: - Lexicon score: fit naval *words*, not character statistics
 //
-// The naval trigram experiment (Phase 50.8) measured null, and the reason is instructive: it
-// smoothed naval counts into the *same statistic* the generic model already covers. 7,500
-// trigram observations over 17,576 cells adds almost nothing.
+// The Phase 50.8 naval trigram experiment did not rescue the 72-symbol target row:
+// leave-one-out naval was slightly worse than generic there. At 252 symbols it improved an
+// arm that already won every control. The target-length result is instructive: smoothing
+// roughly 7,500 naval trigram observations over 17,576 cells adds little signal beyond the
+// generic model at 72 symbols.
 //
 // A lexicon is a different feature class, and its shape is the interesting part. Matching
 // `KOMXADMXUUUB` is a single event worth 12 x log2(26) ~ 56 bits of surprise. A trigram model

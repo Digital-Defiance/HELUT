@@ -1,0 +1,188 @@
+{
+  "schema": "helut-proof-fronts-final-receipt-v1",
+  "utc": "2026-09-06T03:40:36Z",
+  "verdict": "PASS_WITH_EXPLICIT_DISCRETE_GPU_HARDWARE_BLOCKER",
+  "taskCount": 7,
+  "tasksCompleted": 7,
+  "summary": "The restricted sequential-equivalence, shipped lane-distinct, restricted structural-evolution, identical-flow ABC proxy, backend-neutral discrete-GPU contract, and circuit-scoped encrypted-bound fronts are closed to the levels stated here. The preregistered k=14 encrypted full-adder configuration was recovered by increasing statistical power without changing the circuit, stride, BK noise, event count, confidence level, or target.",
+  "researchMethod": {
+    "principle": "Bank the negative, name the binding constraint, choose a defensible lever, preregister the next test without lowering the bar, and retain both outcomes.",
+    "doctrine": "directives/research-release.md#failure-protocol-find-the-lever",
+    "k14Example": "The 32-sample failure remains preserved. Exact serial/parallel replay established sampler equivalence. Parallel evaluation made a preregistered 192-sample run practical, and the same k=14 claim then cleared."
+  },
+  "encryptedK14Recovery": {
+    "machineReceipt": "logs/helut-encrypted-k14-recovery-20260906T030525Z.json",
+    "machineReceiptSHA256": "c0a55d3acfb42636161529308becc51f7d195a168d3e3f65dd8b6551efbf794e",
+    "preregister": "logs/helut-encrypted-k14-recovery-20260906T030525Z-preregister.json",
+    "preregisterSHA256": "171b8547119c8e12b6687189ab713ed045ffaae45365b76b711c87535c189a50",
+    "rawLog": "logs/helut-encrypted-k14-recovery-20260906T030525Z-t192-p8.raw.log",
+    "rawLogSHA256": "50067c1399b224f4eb20c84c31406be6499d9fd01f65bb55230081a918a5495a",
+    "parameters": {
+      "circuit": "full_adder",
+      "polynomialDegreeN": 1024,
+      "lweDimensionN": 1024,
+      "gadget": "covering-b2",
+      "bootstrappingKeySigma": 128,
+      "primaryInputs": "exact/noiseless",
+      "booleanStrideK": 14,
+      "identityTrials": 192,
+      "identityParallelism": 8,
+      "postBlindRotateEvents": 24,
+      "confidenceLevel": 0.95,
+      "targetUnionFailureLog2": -64
+    },
+    "observed": {
+      "maxAbsoluteError": 3369752,
+      "sigmaUpper95": 1282096.985627122,
+      "unionFailureLog2": -93.80046749185595,
+      "clearsTarget": true,
+      "rowsPassed": 8,
+      "rowsTotal": 8,
+      "result": "PASS",
+      "encryptedCircuitWallSeconds": 48.1757,
+      "endToEndRealSeconds": 969.48,
+      "maximumResidentSetBytes": 2246279168,
+      "peakMemoryFootprintBytes": 2405370064,
+      "swaps": 0
+    },
+    "preservedNegative": {
+      "configuration": "k=14, identity trials=32, serial",
+      "rawLog": "logs/helut-encrypted-bound-20260906T012213Z-t32-k14.raw.log",
+      "rawLogSHA256": "9b08d9b32a0a1022669df32b8eb996006c53290be717b5443d3440e8daa956de",
+      "sigmaUpper95": 1774113.6388565525,
+      "unionFailureLog2": -48.183293522830674,
+      "outcome": "under-sampled; failed closed before circuit execution"
+    },
+    "serialParallelReplay": {
+      "parallelLog": "logs/helut-encrypted-k14-recovery-20260906T030525Z-parallel32.raw.log",
+      "parallelLogSHA256": "de8a471c161757760a8b76853dc5200ac61977b96f82ab0fe38b7be753b68be3",
+      "exactFields": [
+        "maxAbsoluteError",
+        "sigmaUpper95",
+        "eventCount",
+        "unionFailureLog2"
+      ],
+      "serialRealSeconds": 1132.49,
+      "parallelRealSeconds": 187.92,
+      "speedup": 6.0268,
+      "boundary": "Identity-measurement-stage CPU speedup only; not encrypted circuit evaluation or FHE throughput."
+    },
+    "fallback": {
+      "configuration": "k=16, identity trials=40, serial",
+      "receipt": "logs/helut-encrypted-bound-20260906T014326Z.json",
+      "status": "valid PASS fallback; superseded as the narrowest integrated stride"
+    }
+  },
+  "proofFrontReceipts": {
+    "sequentialEquivalence": {
+      "path": "logs/helut-sequential-equiv-20260906T001235Z.log",
+      "sha256": "bc605c20ecdfee241ceacd180b87658f8b3b64d261d729679d7ca67e402a8ab0"
+    },
+    "shippedDistinctLanes": {
+      "path": "logs/helut-shipped-distinct-lanes-20260906T002255Z.log",
+      "sha256": "18e8047896d319780fb20c34abaad7b0688b30986309e874eda371ac27711d54"
+    },
+    "restrictedStructuralEvolution": {
+      "path": "logs/helut-structural-evolution-20260906T003450Z.log",
+      "sha256": "fb2612351ca735094390cc170d4b3766f460b5838059522f1a384caa4e3f657d"
+    },
+    "identicalFlowABC": {
+      "path": "logs/helut-structural-abc-20260906T004058Z.log",
+      "sha256": "e2947a75dc6d693e359c7d88b4d4c6088345ac420852916f1c34a52ef79d2e6f",
+      "result": "18/18 retained finalists formally proved; mapped LUT and depth wins/ties/losses were 0/18/0 and 0/18/0"
+    },
+    "discreteGPUContract": {
+      "path": "logs/helut-discrete-gpu-contract-20260906T005547Z.log",
+      "sha256": "70f211de31c2c57d264e85ea957391fb2c9b694adf998f50337100ff38c8d32e",
+      "result": "Contract and local Apple integrated-Metal result validated; actual NVIDIA/AMD discrete comparison remains blocked by hardware and backend availability."
+    }
+  },
+  "provenance": {
+    "gitCommit": "4d47ad0ef40c593bb3a0e4ab5aa2e668b917f975",
+    "workingTreeDirty": true,
+    "evidenceRunBinarySHA256": "77c449a249c76c79970486949bb9075068943149cbab05580865b20db1847a38",
+    "finalRebuiltBinarySHA256": "369e9de54ac947c4db78954ac2ae4680592b94d949c2c361d28639b8972d7695",
+    "coreSourceSHA256": "ea233e55105645134990a3bd7a14594c27d8382c1ae36e03dfa83694c5c298e6",
+    "simulatorSourceSHA256": "4bbd61051a5df9e7317b0d4789f4648b67083bd0bfb893a7e2e4b5296f6a82d8",
+    "benchSourceSHA256": "3240edf43bbd9b463b03366a0504b61420acd441bac78c388fa5cf331559d133",
+    "cliFlagsSourceSHA256": "48428b7f9fe867edfbf9f688e0b0c155204ab90815f1c52ef92d95ae9b7359c0",
+    "netlistSHA256": "d647afbd947b9b67e63505caa215209e559efc10aa8099fd10ad18cad5acb13c"
+  },
+  "publicDocuments": {
+    "README.md": "2e6dfa74d90171f0be8584a0ce2aa51dbcc3f921060da810f0adb2f8539befe7",
+    "REPRODUCE.md": "b87ca3e883868cb9d7a56e8fc18009129a90ee2ebd6d9eb388cc89b81f908d1d",
+    "directives/parameter-cookbook.md": "5df64d65b41ecd59d994d6b51be2d17a67873e5c67d399392d5373c0bfe2923d",
+    "directives/claim-sheet.md": "70280ad36b62d3c97acc3e0ff0b59e27fee01bd5edbc775682d8a8ebe2b7881e",
+    "directives/research-release.md": "657ad49429e63d1f9b826fad8934417e88d9b34d1a77c295198eba173af7af91"
+  },
+  "validation": {
+    "focusedTests": [
+      {
+        "filter": "testNoisyBKIdentityMeasurement",
+        "executed": 1,
+        "failures": 0
+      },
+      {
+        "filter": "EpsilonSampleSufficiencyTests",
+        "executed": 6,
+        "failures": 0
+      },
+      {
+        "filter": "DistinctLaneExchangeTests",
+        "executed": 4,
+        "failures": 0
+      },
+      {
+        "filter": "BatchLaneDistinctTests",
+        "executed": 3,
+        "failures": 0
+      },
+      {
+        "filter": "TensorLUTStructuralEvolutionTests",
+        "executed": 5,
+        "failures": 0
+      },
+      {
+        "filter": "TensorLUTStructuralBenchmarkTests",
+        "executed": 1,
+        "failures": 0
+      },
+      {
+        "filter": "TensorLUTYosysRoundTripTests",
+        "executed": 7,
+        "failures": 0
+      }
+    ],
+    "focusedTestsExecuted": 27,
+    "focusedTestFailures": 0,
+    "releaseBuild": "Build complete",
+    "releaseBuildWarnings": "Existing Swift Sendable/deprecation/unused-value warnings remain; no build error was emitted.",
+    "malformedParallelismSmoke": {
+      "argv": [
+        ".build/release/helut-bench",
+        "--bench",
+        "netlist.json",
+        "--bench-encrypted",
+        "--bk-identity-parallelism",
+        "0"
+      ],
+      "childExitStatus": 2,
+      "exactOutput": "--bk-identity-parallelism must be a positive integer",
+      "result": "PASS"
+    },
+    "jsonReceiptsParsed": 3,
+    "artifactReferencesPresent": "10/10",
+    "failureProtocolLinkPresent": true,
+    "supersededNumericClaimSearchMatches": 0,
+    "gitDiffCheckChildExitStatus": 0,
+    "transportBoundary": "The command transport repeatedly reported synthetic exit -1 after returning output. Validation uses explicit child statuses, XCTest zero-failure footers, the Swift Build complete marker, and preserved raw-log child status rather than transport status."
+  },
+  "claimBoundaries": [
+    "The k=14 encrypted result is limited to this exhaustive eight-row, three-LUT full adder and its 24 post-blind-rotate events under the stated Gaussian residual model.",
+    "It is not a hard deterministic BK-noise bound, arbitrary-circuit/depth certificate, fresh-primary-input-noise result, or universal security proof.",
+    "The 6.0268x speedup is identity-measurement-stage CPU wall time, not FHE circuit or cleartext speedup.",
+    "The structural ABC result is a formally checked mapped-LUT/count-depth proxy null, not a physical area, delay, frequency, power, or general ABC-win claim.",
+    "No actual NVIDIA/AMD discrete-GPU timing is claimed on the Apple M4 Max host; CUDA/HIP/ROCm tools and a HELUT discrete backend are absent.",
+    "No commit, push, CI run, deployment, or final video render was performed."
+  ]
+}

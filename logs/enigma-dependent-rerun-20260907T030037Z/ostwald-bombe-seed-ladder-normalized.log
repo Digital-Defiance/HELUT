@@ -1,0 +1,17 @@
+# Normalized deterministic table
+# Full argv template and per-arm raw stdout hashes are in manifest.json.
+# Every arm exited 0 and was byte-identical on immediate rerun.
+# All raw stdout hashes are byte-identical to the prior v1-binary bundle.
+# --ostwald-seed K means K oracle-correct plugs at truth and K random plugs at decoys.
+# This staged scorer does not consume EnigmaSearchObjective; it is an upper-bound
+# ranking control, not a crib-free break or publication verdict.
+
+ seeded ctrls  win    win%  medMargin    medZ  plugs   corr
+────────────────────────────────────────────────────────────────────────────────────────────────
+      0    10    2     20%    -0.1226    0.32   1/10     7%
+      2    10    3     30%    -0.1005    0.63   3/10    11%
+      4    10    5     50%    +0.3308    4.17   6/10    47%
+      6    10    9     90%    +0.6656    5.41   8/10    85%
+      8    10   10    100%    +1.0488    7.65  10/10   100%
+
+EXIT=0

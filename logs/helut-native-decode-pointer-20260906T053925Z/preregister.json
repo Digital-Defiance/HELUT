@@ -1,0 +1,107 @@
+{
+  "schema": "helut-native-decode-pointer-preregister-v1",
+  "utc": "2026-09-06T05:39:25Z",
+  "goal": "Measure the first preregistered host optimization selected by the decomposed baseline: replace per-output owning one-element arrays with the existing strict non-owning constant-fill pointer decoder. Preserve all work, correctness checks, phase timestamps, fixture points, trials, and native workers; bank the result whether it improves, regresses, or is unchanged.",
+  "baseline": {
+    "path": "logs/helut-native-phase-baseline-20260906T051035Z/receipt.json",
+    "sha256": "ffe33bd05fc6b9c92327fe84a0d5f5f4937d0e4244267270d48c270c99d73239",
+    "selectionRuleResult": "decode was the largest recoverable host phase at B=65536",
+    "b65536MedianNanoseconds": {
+      "assignment": 99063,
+      "inputPack": 1397967,
+      "pairedGraph": 3836036,
+      "decode": 20576000,
+      "digest": 7141948,
+      "pairedTotal": 32414079,
+      "nativeParallelTotal": 7140917
+    }
+  },
+  "changeFromBaseline": {
+    "file": "Tests/HELUTTests/NativeBaselineComparisonTests.swift",
+    "semanticChange": "Inside collectOutputs, replace Array(UnsafeBufferPointer(start:pointer+lane*degree,count:degree)) followed by encoding.decodeBit with MockTorusEncoding.decodeBit(buffer:pointer,lane:lane,degree:degree,strict:true).",
+    "owningPerValueArrayRemoved": true,
+    "strictZeroOrOneValidationPreserved": true,
+    "strictAllCoefficientConstantFillValidationPreserved": true,
+    "outputReadsChanged": false,
+    "outputTraversalOrOrderChanged": false,
+    "nestedValueMaterializationChanged": false,
+    "digestChanged": false,
+    "graphOrBuffersChanged": false,
+    "outerPairedScopeChanged": false,
+    "phaseTimestampsChanged": false,
+    "lanePointsChanged": false,
+    "trialsChanged": false,
+    "workersChanged": false,
+    "generatedNativeHarnessChanged": false
+  },
+  "provenance": {
+    "gitCommit": "4d47ad0ef40c593bb3a0e4ab5aa2e668b917f975",
+    "workingTreeDirty": true,
+    "testSource": "Tests/HELUTTests/NativeBaselineComparisonTests.swift",
+    "testSourceSHA256": "ad95c1beecf29db93f9f76bfb327485ed64e948914978efed5dfe9478cd16a02",
+    "compiledXCTest": ".build/arm64-apple-macosx/release/helutPackageTests.xctest/Contents/MacOS/helutPackageTests",
+    "compiledXCTestSHA256": "7feb1aaccc0271e38d30ae1252395b16eac8e34212e40113d1ddbeb0fe81fbf3",
+    "hostModel": "Mac16,5",
+    "operatingSystemVersion": "26.6.2",
+    "activeProcessorCount": 16,
+    "yosysVersion": "0.68+post c12172fbae8af5e20f6fb52e3d4e92d56ed587b6",
+    "verilatorVersion": "5.052"
+  },
+  "command": [
+    "HELUT_PRESERVE_NATIVE_BASELINE_ARTIFACT=1",
+    "HELUT_NATIVE_BASELINE_WORKERS=16",
+    "swift",
+    "test",
+    "-c",
+    "release",
+    "--skip-build",
+    "--filter",
+    "NativeBaselineComparisonTests"
+  ],
+  "fixture": {
+    "kind": "generated 8-bit ripple adder",
+    "emittedLUT6": 16,
+    "expectedMappedLUTs": 14,
+    "functionalInputBits": 16,
+    "outputBits": 9,
+    "outputWireOrder": [24, 25, 26, 27, 28, 29, 30, 31, 23],
+    "lanePoints": [1, 16, 256, 1024, 4096, 16384, 32768, 65536],
+    "timedTrialsPerPoint": 5,
+    "requestedNativeWorkers": 16,
+    "effectiveNativeWorkers": "min(16, lanes)"
+  },
+  "timingAndCorrectnessContract": {
+    "pairedHELUT": "Assignment-mask regeneration and writes to every preallocated input buffer through synchronized graph execution, strict output traversal/decode into the existing nested values, and canonical ordered FNV-1a digest.",
+    "phaseOrder": ["assignment", "input pack", "synchronized graph", "strict decode", "digest"],
+    "reconciliationMaximumAbsoluteResidualSeconds": 1e-9,
+    "digestOrder": "lane-major, then output order [24,25,26,27,28,29,30,31,23], hashing little-endian UInt32 lane, wire, and decoded value",
+    "b65536Coverage": "all 65536 assignments exactly once"
+  },
+  "acceptance": {
+    "xctestFooter": "1 test, 0 failures",
+    "allEightLanePoints": true,
+    "fiveRawSamplesForEveryPhaseAtEveryPoint": true,
+    "phaseSamplesNonnegative": true,
+    "totalSamplesPositive": true,
+    "allPerTrialResidualsWithinOneNanosecond": true,
+    "phaseTotalSamplesMatchReportedHELUTPairedSamples": true,
+    "allHELUTScalarParallelDigestsStableAndEqual": true,
+    "b65536DigestHex": "52f209ab0358725",
+    "generatedFixtureHashesMatchBaseline": true,
+    "speedupRequired": false
+  },
+  "reporting": {
+    "primaryBeforeAfter": ["B=65536 decode median", "B=65536 HELUT paired-total median"],
+    "secondaryBeforeAfter": ["all other B=65536 phase medians", "native paired median", "all eight HELUT paired medians"],
+    "ratioDirection": "baseline median divided by optimized median; greater than 1 means lower optimized time",
+    "medianCaveat": "Phase medians are compared independently and are not summed. Percentages use the optimized median-total trial.",
+    "noSignificanceClaim": "Five unpinned samples support descriptive ratios only, not a statistical generalization."
+  },
+  "failurePolicy": "Execute this preregistered measurement once and bank any failure or unfavorable result. Do not silently rerun, lower B/trials/workers, weaken strict decode, change output representation, fuse digest, or replace the decomposed baseline.",
+  "claimBoundary": "One selected source-level host optimization in one release-Swift/MPSGraph combinational benchmark on one unpinned Mac16,5. It is not a general Swift, Metal, Apple, HDL, or native-superiority claim.",
+  "plannedArtifacts": {
+    "rawLog": "logs/helut-native-decode-pointer-20260906T053925Z/raw.log",
+    "receipt": "logs/helut-native-decode-pointer-20260906T053925Z/receipt.json",
+    "generatedSources": ["emitted.v", "lut6.v", "flow.ys", "tb.cpp"]
+  }
+}

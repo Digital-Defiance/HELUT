@@ -1,0 +1,97 @@
+{
+  "schema": "helut.enigma-dependent-rerun.v1",
+  "created_utc": "2026-09-07T00:18:58Z",
+  "head": "4d47ad0ef40c593bb3a0e4ab5aa2e668b917f975",
+  "worktree": "dirty; manifest binds all relevant files by SHA-256",
+  "runtime": {
+    "architecture": "arm64",
+    "swift_driver": "1.148.6",
+    "build_command": "swift build -c release",
+    "binary": ".build/release/helut-bombe",
+    "binary_sha256": "5bcfa7a07fa2ccce7f9541fc5918c9a53a8c36e2ca975907883a8795d082e85d"
+  },
+  "models": {
+    "bigram_id": "helut-german-bigram-add-k-0.5-06f8694e-v2",
+    "bigram_fixture_sha256": "06f8694ec17906e993223e0179c6ca326030e62f77ec86e5c4120fddcf68f111",
+    "trigram_id": "helut-german-trigram-add-k-0.5-e08a5659-v1",
+    "trigram_fixture_sha256": "e08a56593d1e74b88d300e35b18dd504bc5fffef8ae03db51d72e6270e9509d7",
+    "search_objective_id": "helut-enigma-search-n72-correlation-discounted-z-06f8694e-e08a5659-v1",
+    "u534_corpus_sha256": "dd66ec7b52f3c45ed50749b577a918ae6cb860cb1ff00c537d53fb92bcc113f8"
+  },
+  "relevant_source_sha256": {
+    "Sources/HELUTCore/LanguageScorer.swift": "766ec20dfb668aee86469a7ba96545ee86ece877a20b7a62c797ee82ad7be363",
+    "Sources/HELUTCore/EnigmaM4.swift": "c30b2effbf14842f711c4572b1272972717b2412ced5b09950b1321c88d0ae02",
+    "Sources/HELUTToolKit/EnigmaScoring.swift": "6f63a178a136b31cb33bcd824d4beb5ececb2f2342b1a31399231bfd3d26c42a",
+    "Sources/HELUTToolKit/ExhaustiveCracker.swift": "4f8fdc10d7cba62f1c0ababf726f57c93cbeb041fff44beb45984f973824af63",
+    "Sources/HELUTToolKit/OstwaldCurve.swift": "9777dbffde7b4702539eb367934058353ea098111f531eb660066e6f6a5244df",
+    "Sources/HELUTToolKit/OstwaldCurveRunner.swift": "a5d84ca0059162a8cc75592bf636451c3c2c133663d9ad58e6a8030dac3b37f2",
+    "Sources/HELUTToolKit/TrigramScorer.swift": "7b42302e9b4199e76e95b100a8db2cb655f312373c4109c468020f29bceafb9a"
+  },
+  "historical_receipts": {
+    "logs/exhaust-selftest-revalidate-2026-08-15.log": "b16c4ac6fe0571b68d19a37f7215320e6733876fe4968094ceff1c0c59dbb515",
+    "logs/ostwald-naval-ab-2026-08-17.log": "62a3d34c053971eab73cc5cc945b700e6d0c4955148dd5daa007ed599b04e40b",
+    "logs/ostwald-bombe-seed-ladder-2026-08-17.log": "70775806d85c7fcbbd36f1a8b85311d12f4311ac0bf8b65183ae7835c4c7fa70"
+  },
+  "runs": {
+    "selftest": {
+      "argv": ["./.build/release/helut-bombe", "--exhaust-selftest", "--selftest-len", "72", "--exhaust-plugs", "10"],
+      "exit": 0,
+      "stdout_sha256": "097450fcf9ba88fab9743a9ea266862755c4ef28e56cda1a0d982bca3f72a630",
+      "byte_identical_immediate_rerun": true,
+      "uses_repaired_objective": true,
+      "uses_fail_closed_final_assessment": true,
+      "metrics": {
+        "level1_rank": 223118,
+        "level1_total": 456976,
+        "letters_correct": 25,
+        "true_plugs_recovered": 5,
+        "plugs_proposed": 7,
+        "recovered": "NNNWOLNARSUNSTTOSOITSXDMIROOONISSIKETTONZWBGNIKSIBATRONDORIVZAUDLEGSEKKS",
+        "final_break": false
+      }
+    },
+    "generic_ab": {
+      "argv": ["./.build/release/helut-bombe", "--ostwald-curve", "--ostwald-scorer", "staged", "--ostwald-lengths", "72,100,140,180,252", "--ostwald-controls", "48", "--ostwald-wrong", "16", "--ostwald-exhaust", "0", "--ostwald-seed", "0", "--ostwald-reconnect", "0"],
+      "exit": 0,
+      "stdout_sha256": "e629e5ed15fb3bc9051e7e3fff90a77bd48d6503ae6128f84c2bbe06f2e3c911",
+      "byte_identical_immediate_rerun": true,
+      "scorer": "legacy staged IC -> dense bigram -> hash-bound trigram ranking benchmark",
+      "publication_verdict": false,
+      "rows": [
+        {"length":72,"controls":30,"wins":5,"win_percent":17,"median_margin":-0.2306,"median_z":-0.01,"median_plugs":1,"median_correct_percent":7},
+        {"length":100,"controls":23,"wins":4,"win_percent":17,"median_margin":-0.2070,"median_z":0.25,"median_plugs":1,"median_correct_percent":7},
+        {"length":140,"controls":12,"wins":0,"win_percent":0,"median_margin":-0.1475,"median_z":0.70,"median_plugs":1,"median_correct_percent":6},
+        {"length":180,"controls":6,"wins":1,"win_percent":17,"median_margin":-0.1287,"median_z":0.19,"median_plugs":2,"median_correct_percent":12},
+        {"length":252,"controls":3,"wins":3,"win_percent":100,"median_margin":0.9273,"median_z":14.14,"median_plugs":10,"median_correct_percent":100}
+      ]
+    },
+    "naval_ab": {
+      "argv": ["./.build/release/helut-bombe", "--ostwald-curve", "--ostwald-scorer", "staged", "--ostwald-lengths", "72,100,140,180,252", "--ostwald-controls", "48", "--ostwald-wrong", "16", "--ostwald-exhaust", "0", "--ostwald-seed", "0", "--ostwald-reconnect", "0", "--ostwald-naval"],
+      "exit": 0,
+      "stdout_sha256": "49be7aaa15e7c70537dd127416fa70db9be6584eae454dbbaa863893772c7189",
+      "byte_identical_immediate_rerun": true,
+      "scorer": "legacy staged IC -> dense bigram -> leave-one-out naval trigram ranking benchmark",
+      "publication_verdict": false,
+      "rows": [
+        {"length":72,"controls":30,"wins":4,"win_percent":13,"median_margin":-0.2496,"median_z":-0.15,"median_plugs":1,"median_correct_percent":7},
+        {"length":100,"controls":23,"wins":4,"win_percent":17,"median_margin":-0.2241,"median_z":0.25,"median_plugs":1,"median_correct_percent":7},
+        {"length":140,"controls":12,"wins":0,"win_percent":0,"median_margin":-0.1397,"median_z":0.66,"median_plugs":1,"median_correct_percent":6},
+        {"length":180,"controls":6,"wins":1,"win_percent":17,"median_margin":-0.1381,"median_z":0.15,"median_plugs":2,"median_correct_percent":10},
+        {"length":252,"controls":3,"wins":3,"win_percent":100,"median_margin":1.1531,"median_z":16.75,"median_plugs":10,"median_correct_percent":100}
+      ]
+    },
+    "seed_ladder": {
+      "argv_template": ["./.build/release/helut-bombe", "--ostwald-curve", "--ostwald-scorer", "staged", "--ostwald-lengths", "72", "--ostwald-controls", "12", "--ostwald-wrong", "6", "--ostwald-exhaust", "0", "--ostwald-reconnect", "0", "--ostwald-seed", "K"],
+      "all_exits": 0,
+      "all_byte_identical_immediate_reruns": true,
+      "publication_verdict": false,
+      "rows": [
+        {"seeded_plugs":0,"stdout_sha256":"29d67fc8d1332ed4a85d4394c50d31a2a2fe2af090836caddf5b364469e7ac1a","controls":10,"wins":2,"win_percent":20,"median_margin":-0.1226,"median_z":0.32,"median_plugs":1,"median_correct_percent":7},
+        {"seeded_plugs":2,"stdout_sha256":"9a6d1bd6bcb30f797158f7c2681ad29c8c875ca7bc316a3919dfc08bc2faf037","controls":10,"wins":3,"win_percent":30,"median_margin":-0.1005,"median_z":0.63,"median_plugs":3,"median_correct_percent":11},
+        {"seeded_plugs":4,"stdout_sha256":"1ae0a869346e716cf072eb020e20a48a7addb9749b46fc6154f8d06bba70e42a","controls":10,"wins":5,"win_percent":50,"median_margin":0.3308,"median_z":4.17,"median_plugs":6,"median_correct_percent":47},
+        {"seeded_plugs":6,"stdout_sha256":"2abe54f0352749f737355f7e24400f6837c788179772726e83cfeda2c7677664","controls":10,"wins":9,"win_percent":90,"median_margin":0.6656,"median_z":5.41,"median_plugs":8,"median_correct_percent":85},
+        {"seeded_plugs":8,"stdout_sha256":"4e1846c2f82d79daa1f3dbb87a89af7df37f774a7f4eea037242a589329e44a4","controls":10,"wins":10,"win_percent":100,"median_margin":1.0488,"median_z":7.65,"median_plugs":10,"median_correct_percent":100}
+      ]
+    }
+  }
+}

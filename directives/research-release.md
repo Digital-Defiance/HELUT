@@ -36,6 +36,18 @@ Paper rule: every abstract sentence maps to a claim ID with all five cells ≥ *
 
 Do not hallucinate claims, lemmas, theorems, or formulae. Compiler tests do not certify a **C** row. An agent may draft from a log; a **human** must check the statement against the receipt (command, metric, log, five-cell) before the row, the textbook theorem environment, or the paper lemma lands in a commit. If the human has not checked it, it is a hedge or it stays uncommitted.
 
+## Failure protocol: find the lever
+
+A failed run is evidence about the present bound, not a verdict on the whole line of work. Do not bury it, and do not stop at it:
+
+1. **Bank the negative.** Keep the command, raw output, parameters, termination status, and exact failed bar.
+2. **Name the binding constraint.** Separate implementation defects, insufficient statistical power, resource limits, and genuine parameter or model limits.
+3. **Choose a defensible lever.** Algorithm, representation, scheduling, hardware, sample count, or an explicitly narrower parameter claim may change; the old result may not.
+4. **Register the next test before seeing it.** State what changes, what stays fixed, and what still counts as failure.
+5. **Keep both outcomes.** A recovery explains the lever; another failure narrows the map and points to the next experiment.
+
+Lowering the threshold, dropping hard cases, changing the event count, or selecting a favorable rerun is not recovery. The *k*=14 encrypted-bound sequence is the model: the 32-sample failure remains banked; exact serial/parallel replay proved the faster sampler preserved the measured fields; the preregistered 192-sample run changed statistical power without changing the circuit, stride, noise, event count, or confidence target; and the same claim then cleared. See [`../REPRODUCE.md`](../REPRODUCE.md) and [`../logs/helut-encrypted-k14-recovery-20260906T030525Z.json`](../logs/helut-encrypted-k14-recovery-20260906T030525Z.json).
+
 ## Multiples checklist (minimums before “release”)
 
 | Kind | Minimum |

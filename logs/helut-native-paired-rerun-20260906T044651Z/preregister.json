@@ -1,0 +1,83 @@
+{
+  "schema": "helut-native-paired-preregister-v2",
+  "utc": "2026-09-06T04:46:51Z",
+  "goal": "Repeat the exact 16-worker, five-trial, eight-width native-paired experiment after adding emission of the five historical scalar sample durations. Preserve the protocol-partial first run and require a complete raw timing record; no speedup is required.",
+  "predecessor": {
+    "path": "logs/helut-native-paired-20260906T042650Z/receipt.json",
+    "sha256": "df72274216b02b1790924c619eca2e966b509c2a98df941939a5387840d3b10d",
+    "verdict": "functional PASS, paired no-crossover, protocol PARTIAL",
+    "soleReasonForRerun": "The first harness did not print its five historical scalar raw samples."
+  },
+  "changeFromPredecessor": {
+    "timedLoopsChanged": false,
+    "lanePointsChanged": false,
+    "trialsChanged": false,
+    "workersChanged": false,
+    "digestOrCorrectnessChanged": false,
+    "reportingOnly": "Print VERILATOR_SCALAR_SAMPLES and forward that line through XCTest output."
+  },
+  "provenance": {
+    "gitCommit": "4d47ad0ef40c593bb3a0e4ab5aa2e668b917f975",
+    "workingTreeDirty": true,
+    "testSource": "Tests/HELUTTests/NativeBaselineComparisonTests.swift",
+    "testSourceSHA256": "258ea3cddb7d03250433ec6f5ba81d073b4e04776913c9d0303340d2b80e57a3",
+    "compiledXCTest": ".build/arm64-apple-macosx/release/helutPackageTests.xctest/Contents/MacOS/helutPackageTests",
+    "compiledXCTestSHA256": "f9b7d1fc553234f346e9dc123ed4ae9f184a24d7d46d411e94781007a6e29341",
+    "hostModel": "Mac16,5",
+    "operatingSystemVersion": "26.6.2",
+    "activeProcessorCount": 16,
+    "yosysVersion": "0.68+post c12172fbae8af5e20f6fb52e3d4e92d56ed587b6",
+    "verilatorVersion": "5.052"
+  },
+  "command": [
+    "HELUT_PRESERVE_NATIVE_BASELINE_ARTIFACT=1",
+    "HELUT_NATIVE_BASELINE_WORKERS=16",
+    "swift",
+    "test",
+    "-c",
+    "release",
+    "--skip-build",
+    "--filter",
+    "NativeBaselineComparisonTests"
+  ],
+  "fixture": {
+    "kind": "generated 8-bit ripple adder",
+    "emittedLUT6": 16,
+    "expectedMappedLUTs": 14,
+    "functionalInputBits": 16,
+    "outputBits": 9,
+    "lanePoints": [1, 16, 256, 1024, 4096, 16384, 32768, 65536],
+    "timedTrialsPerPoint": 5,
+    "requestedNativeWorkers": 16,
+    "effectiveNativeWorkers": "min(16, lanes)"
+  },
+  "scopes": {
+    "historicalHELUT": "Warmed synchronized MPSGraph.run with prepared feeds/results.",
+    "historicalNative": "Scalar assignment, eval, output reads, and ordered FNV digest.",
+    "pairedHELUT": "Assignment-mask generation and input packing through synchronized graph execution, output decode, and ordered digest.",
+    "pairedNative": "Assignment-vector generation through persistent-worker input writes/eval/output collection and serial ordered digest.",
+    "nativePreparedDiagnostic": "Persistent-worker synchronization, input writes, eval, output collection, and completion; excludes assignment-vector generation and digest."
+  },
+  "acceptance": {
+    "xctestFooter": "1 test, 0 failures",
+    "allEightLanePoints": true,
+    "fivePositiveRawSamplesForEachOf": [
+      "HELUT graph",
+      "HELUT paired end-to-end",
+      "native scalar end-to-end",
+      "native parallel prepared",
+      "native parallel end-to-end"
+    ],
+    "allMediansRecomputeFromRawSamples": true,
+    "allHELUTScalarParallelDigestsStableAndEqual": true,
+    "b65536Exhaustive": true,
+    "speedupRequired": false
+  },
+  "failurePolicy": "Bank any failure or changed result. Do not discard this run if either crossover moves or disappears. Do not lower B, trials, or workers. Do not replace the predecessor; both receipts remain part of the evidence chain.",
+  "claimBoundary": "One release-Swift/MPSGraph implementation and optimized C++ Verilator implementation on one combinational circuit and one unpinned Mac16,5 scheduler. Paired timing is closer, not pure-kernel or generally representative.",
+  "plannedArtifacts": {
+    "rawLog": "logs/helut-native-paired-rerun-20260906T044651Z/raw.log",
+    "receipt": "logs/helut-native-paired-rerun-20260906T044651Z/receipt.json",
+    "generatedSources": ["emitted.v", "lut6.v", "flow.ys", "tb.cpp"]
+  }
+}

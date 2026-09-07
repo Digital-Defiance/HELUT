@@ -290,6 +290,42 @@ package func torusCenteredMagnitude(_ x: UInt32) -> UInt32 {
     x <= 0x8000_0000 ? x : UInt32(0) &- x
 }
 
+private struct NoisyBKIdentityTrial: Sendable {
+    let bit: UInt32
+    let lwe: LWECiphertext
+}
+
+private struct NoisyBKIdentityResidual: Sendable {
+    let error: UInt32
+    let decodeFailed: Bool
+}
+
+/// Indexed result storage for bounded synchronous workers. Every slot access is
+/// lock-protected; the expensive PBS runs outside the lock.
+private final class NoisyBKIdentityResultSlots: @unchecked Sendable {
+    private var slots: [NoisyBKIdentityResidual?]
+    private let lock = NSLock()
+
+    init(count: Int) {
+        slots = Array(repeating: nil, count: count)
+    }
+
+    func store(_ residual: NoisyBKIdentityResidual, at index: Int) {
+        lock.lock()
+        slots[index] = residual
+        lock.unlock()
+    }
+
+    func snapshot() -> [NoisyBKIdentityResidual] {
+        lock.lock()
+        defer { lock.unlock() }
+        return slots.enumerated().map { index, residual in
+            precondition(residual != nil, "missing noisy-BK identity result at trial \(index)")
+            return residual!
+        }
+    }
+}
+
 /// Empirical post-BR residual under a (possibly noisy) bootstrap key.
 /// Identity LUT: encrypt bit `b`, PBS `[0,1]`, compare phase to `b·δ`.
 package struct TFHENoisyBKMeasurement: Sendable, Equatable {
@@ -508,6 +544,10 @@ package struct TFHENoisyBKMeasurement: Sendable, Equatable {
     }
 
     /// Identity-LUT BR residual. Uses `existing` BK when provided (no extra encrypt).
+    ///
+    /// Key generation, random trial preparation, and result reduction remain
+    /// serial. `maxConcurrentTrials` bounds only the RNG-free PBS evaluations,
+    /// preserving the exact serial sample stream and reduction order.
     package static func identity(
         secret: TFHESecretKey,
         params: GGSWParams,
@@ -516,9 +556,11 @@ package struct TFHENoisyBKMeasurement: Sendable, Equatable {
         trials: Int = 16,
         seed: UInt32 = 0xB10C,
         publicRefreshCompatible: Bool = true,
-        booleanScaleMul: Int = 1
+        booleanScaleMul: Int = 1,
+        maxConcurrentTrials: Int = 1
     ) -> TFHENoisyBKMeasurement {
         precondition(trials > 0)
+        precondition(maxConcurrentTrials > 0)
         let n = params.tfhe.polynomialDegree
         let twoN = 2 * n
         let scale = rotationBooleanScale(polynomialDegree: n, mul: booleanScaleMul)
@@ -530,32 +572,100 @@ package struct TFHENoisyBKMeasurement: Sendable, Equatable {
             publicRefreshCompatible: publicRefreshCompatible,
             noise: noise
         )
-        var maxAbs: UInt32 = 0
-        var sumSq: Double = 0
-        var failures = 0
         let identity: [UInt32] = [0, 1]
+
+        // Preserve the historical streaming path exactly unless concurrency is
+        // explicitly requested. This remains the allocation/timing baseline.
+        if maxConcurrentTrials == 1 || trials == 1 {
+            var maxAbs: UInt32 = 0
+            var sumSq: Double = 0
+            var failures = 0
+            for _ in 0..<trials {
+                let bit = rng.next() & 1
+                let lwe = encryptLWERotationNative(
+                    message: encodeRotationNativeBit(bit, k: booleanScaleMul),
+                    secret: secret.lweSecret,
+                    twoN: twoN,
+                    rng: &rng
+                )
+                let out = evaluateLUTBlindRotate(
+                    truthTable: identity,
+                    inputs: [lwe],
+                    bootstrapKey: bk,
+                    scale: scale
+                )
+                let phase = decryptLWE(out, secret: secret)
+                let expected = bit &* scale
+                let err = torusCenteredMagnitude(phase &- expected)
+                if err > maxAbs { maxAbs = err }
+                sumSq += Double(err) * Double(err)
+                if decodeRotationBoolean(phase, scale: scale) != bit {
+                    failures += 1
+                }
+            }
+            return TFHENoisyBKMeasurement(
+                maxAbsError: maxAbs,
+                rms: sqrt(sumSq / Double(trials)),
+                samples: trials,
+                injectBound: noise.bound,
+                delta: scale,
+                polynomialDegree: n,
+                decodeFailures: failures
+            )
+        }
+
+        // Consume the same RNG values in the same trial-major order as the
+        // serial loop before any work is dispatched. The bootstrap key is a
+        // read-only value during all evaluations.
+        let lweSecret = secret.lweSecret
+        var preparedStorage: [NoisyBKIdentityTrial] = []
+        preparedStorage.reserveCapacity(trials)
         for _ in 0..<trials {
             let bit = rng.next() & 1
             let lwe = encryptLWERotationNative(
                 message: encodeRotationNativeBit(bit, k: booleanScaleMul),
-                secret: secret.lweSecret,
+                secret: lweSecret,
                 twoN: twoN,
                 rng: &rng
             )
+            preparedStorage.append(NoisyBKIdentityTrial(bit: bit, lwe: lwe))
+        }
+        let prepared = preparedStorage
+        let results = NoisyBKIdentityResultSlots(count: trials)
+        let evaluateTrial: @Sendable (NoisyBKIdentityTrial) -> NoisyBKIdentityResidual = { trial in
             let out = evaluateLUTBlindRotate(
                 truthTable: identity,
-                inputs: [lwe],
+                inputs: [trial.lwe],
                 bootstrapKey: bk,
                 scale: scale
             )
             let phase = decryptLWE(out, secret: secret)
-            let expected = bit &* scale
-            let err = torusCenteredMagnitude(phase &- expected)
-            if err > maxAbs { maxAbs = err }
-            sumSq += Double(err) * Double(err)
-            if decodeRotationBoolean(phase, scale: scale) != bit {
-                failures += 1
+            let expected = trial.bit &* scale
+            return NoisyBKIdentityResidual(
+                error: torusCenteredMagnitude(phase &- expected),
+                decodeFailed: decodeRotationBoolean(phase, scale: scale) != trial.bit
+            )
+        }
+
+        // Settle the shared test-polynomial cache serially, then run a bounded
+        // number of strided workers. The first trial is still reduced at index 0.
+        results.store(evaluateTrial(prepared[0]), at: 0)
+        let workerCount = min(maxConcurrentTrials, trials - 1)
+        DispatchQueue.concurrentPerform(iterations: workerCount) { workerIndex in
+            var trialIndex = 1 + workerIndex
+            while trialIndex < trials {
+                results.store(evaluateTrial(prepared[trialIndex]), at: trialIndex)
+                trialIndex += workerCount
             }
+        }
+
+        var maxAbs: UInt32 = 0
+        var sumSq: Double = 0
+        var failures = 0
+        for residual in results.snapshot() {
+            if residual.error > maxAbs { maxAbs = residual.error }
+            sumSq += Double(residual.error) * Double(residual.error)
+            if residual.decodeFailed { failures += 1 }
         }
         return TFHENoisyBKMeasurement(
             maxAbsError: maxAbs,

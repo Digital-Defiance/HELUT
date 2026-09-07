@@ -35,8 +35,12 @@ final class P1030684SparseControlFixtureTests: XCTestCase {
         )
     }
 
-    /// Independently audited in read-only Python and Ruby implementations.
+    /// Independently audited in separate read-only Python and Ruby implementations.
     ///
+    /// The bigram values bind `Fixtures/german_bigrams.txt` at SHA-256
+    /// `06f8694ec17906e993223e0179c6ca326030e62f77ec86e5c4120fddcf68f111`.
+    /// The external values were frozen before Swift comparison; see
+    /// `logs/dense-bigram-independent-audit-20260906T220123Z/manifest.json`.
     /// These constants are intentionally not derived from the Swift evaluator or adapters.
     private enum DenseNGramAuditReceipt {
         static let bigramIndices = [
@@ -67,8 +71,8 @@ final class P1030684SparseControlFixtureTests: XCTestCase {
         ]
         static let bigramFloorWindowStarts: [Int] = []
         static let trigramFloorWindowStarts: [Int] = []
-        static let bigramTotalLogProbabilityBitPattern: UInt64 = 0xc075_02db_7cf3_4e60
-        static let bigramMeanLogProbabilityBitPattern: UInt64 = 0xc006_99a9_6621_ac81
+        static let bigramTotalLogProbabilityBitPattern: UInt64 = 0xc077_7f71_5b25_d69c
+        static let bigramMeanLogProbabilityBitPattern: UInt64 = 0xc009_4664_6aa5_7920
         static let trigramTotalLogProbabilityBitPattern: UInt64 = 0xc074_ff34_c92f_2376
         static let trigramMeanLogProbabilityBitPattern: UInt64 = 0xc006_c6bb_6dc2_51db
     }
@@ -130,17 +134,17 @@ final class P1030684SparseControlFixtureTests: XCTestCase {
         XCTAssertEqual(
             traces.map(\.modelID),
             [
-                "helut-german-bigram-add-k-0.5-v1",
-                "helut-german-trigram-add-k-0.5-v1",
+                "helut-german-bigram-add-k-0.5-06f8694e-v2",
+                "helut-german-trigram-add-k-0.5-e08a5659-v1",
             ]
         )
         XCTAssertEqual(traces.map(\.order), [2, 3])
 
         let bigramTrace = try XCTUnwrap(
-            traces.first { $0.modelID == "helut-german-bigram-add-k-0.5-v1" }
+            traces.first { $0.modelID == "helut-german-bigram-add-k-0.5-06f8694e-v2" }
         )
         let trigramTrace = try XCTUnwrap(
-            traces.first { $0.modelID == "helut-german-trigram-add-k-0.5-v1" }
+            traces.first { $0.modelID == "helut-german-trigram-add-k-0.5-e08a5659-v1" }
         )
         let trigramLogProbabilities = try XCTUnwrap(GermanTrigrams.logProbs)
         let trigramObservedEntries = try XCTUnwrap(GermanTrigrams.observedEntries)
@@ -355,5 +359,88 @@ final class P1030684SparseControlFixtureTests: XCTestCase {
         XCTAssertEqual(unorderedNumerator * 2, orderedNumerator)
         XCTAssertEqual(unorderedDenominator * 2, orderedDenominator)
         XCTAssertEqual(orderedNumerator * 595, orderedDenominator * 38)
+    }
+
+    func testDenseBigramCalibrationMatchesExternalAuditReceipt() {
+        let fixture = SparseControlFixture.p1030684Dense
+        let referenceText = String(fixture.plaintext.prefix(72))
+        let reference = EnigmaAlphabet.normalize(referenceText)
+        XCTAssertEqual(reference.count, 72)
+        let referenceDigest = SHA256.hash(data: Data(referenceText.utf8))
+            .map { String(format: "%02x", $0) }
+            .joined()
+        XCTAssertEqual(
+            referenceDigest,
+            "17ab2fe0bbf0ee813b393e7c064d17ad1343b8eafeffad0be8a7c99e50ffae33"
+        )
+
+        let germanScore = LanguageScorer.bigramScore(reference)
+        XCTAssertEqual(germanScore.bitPattern, 0xc00b_078e_c092_5b5a)
+
+        let domain = Array("HELUT dense bigram calibration v2".utf8)
+        var randomScores: [Double] = []
+        var randomCorpus = Data()
+        var firstSampleDigest: String?
+        for sampleIndex in 0..<400 {
+            var sample: [Int] = []
+            var blockIndex = 0
+            while sample.count < 72 {
+                var payload = Data(domain)
+                payload.append(0)
+                for value in [sampleIndex, blockIndex] {
+                    let integer = UInt32(value)
+                    payload.append(UInt8(truncatingIfNeeded: integer >> 24))
+                    payload.append(UInt8(truncatingIfNeeded: integer >> 16))
+                    payload.append(UInt8(truncatingIfNeeded: integer >> 8))
+                    payload.append(UInt8(truncatingIfNeeded: integer))
+                }
+                for byte in SHA256.hash(data: payload) where byte < 234 {
+                    sample.append(Int(byte) % 26)
+                    if sample.count == 72 { break }
+                }
+                blockIndex += 1
+            }
+
+            let sampleBytes = sample.map { UInt8($0 + 65) }
+            if sampleIndex == 0 {
+                firstSampleDigest = SHA256.hash(data: Data(sampleBytes))
+                    .map { String(format: "%02x", $0) }
+                    .joined()
+            }
+            randomCorpus.append(contentsOf: sampleBytes)
+            randomCorpus.append(10)
+            randomScores.append(LanguageScorer.bigramScore(sample))
+        }
+
+        XCTAssertEqual(
+            firstSampleDigest,
+            "a9de2997fc1b7998c4c619e4dc46e6428cc84c838fbb95dc47855d38c8315225"
+        )
+        let randomCorpusDigest = SHA256.hash(data: randomCorpus)
+            .map { String(format: "%02x", $0) }
+            .joined()
+        XCTAssertEqual(
+            randomCorpusDigest,
+            "1d85fa80ee8bcf121ff4c2fd70e56acccf782a4ab3aaaa16bc1edd15677f424a"
+        )
+
+        var randomMean = 0.0
+        for score in randomScores {
+            randomMean = randomMean + score
+        }
+        randomMean /= Double(randomScores.count)
+        var squaredTotal = 0.0
+        for score in randomScores {
+            let delta = score - randomMean
+            squaredTotal = squaredTotal + delta * delta
+        }
+        let randomDeviation = sqrt(squaredTotal / Double(randomScores.count))
+
+        XCTAssertEqual(randomMean.bitPattern, 0xc012_9c7e_d3c6_2f50)
+        XCTAssertEqual(randomDeviation.bitPattern, 0x3fcd_a403_73f6_2dbd)
+        XCTAssertEqual(LanguageScorer.Calibration.germanMean, -3.378690)
+        XCTAssertEqual(LanguageScorer.Calibration.randomMean, -4.652828)
+        XCTAssertEqual(LanguageScorer.Calibration.randomDeviation, 0.231568)
+        XCTAssertEqual(LanguageScorer.Calibration.germanIC, 0.0747)
     }
 }

@@ -1,0 +1,58 @@
+{
+  "schema": "helut-encrypted-bound-preregister-v1",
+  "utc": "2026-09-06T01:22:13Z",
+  "escalationFrom": {
+    "preregister": "logs/helut-encrypted-bound-20260906T011039Z-preregister.json",
+    "preregisterSHA256": "279d412fdcd89d73ac5893a62d176b3aba1f6026e0e3c883526d41c6293c77ea",
+    "rawLog": "logs/helut-encrypted-bound-20260906T011039Z-t16.raw.log",
+    "rawLogSHA256": "ea9b9442cfda334b4d2373a5db654da7fd5edb7c37b1f128921373c6f7d0d0fd",
+    "outcome": "16-sample preflight stopped fail-closed before circuit execution; max observed residual 3125505 was sample-decodable, but the confidence gate did not permit execution.",
+    "policy": "The first preregistration explicitly allowed a later 32-trial run if 16 samples were insufficient. This run increases statistical sample size; it does not select among repeated 16-sample outcomes."
+  },
+  "diagnosticOnlySourceChange": "EncryptedNetlistSimulator now prints the already-computed preflight sigma95/event/epsilon/target/sample/clears fields before the unchanged assertion. No cryptographic, sampling, certificate, gate, or evaluation arithmetic changed.",
+  "binarySHA256": "24b8355e4438fd401cb6f78677d567561610889d228a6c525e92ab4c6b199a42",
+  "netlist": "netlist.json",
+  "netlistSHA256": "d647afbd947b9b67e63505caa215209e559efc10aa8099fd10ad18cad5acb13c",
+  "argv": [
+    ".build/release/helut-bench",
+    "--bench",
+    "netlist.json",
+    "--degree",
+    "1024",
+    "--bench-encrypted",
+    "--sing",
+    "--vectors",
+    "8",
+    "--bk-noise-sigma",
+    "128",
+    "--bk-identity-trials",
+    "32",
+    "--paths",
+    "blind-rotate-metal public-ms covering-b2",
+    "--boolean-scale-mul",
+    "14"
+  ],
+  "environment": {
+    "HELUT_QUIET_METAL_BR_PROGRESS": "1"
+  },
+  "acceptance": {
+    "expectedPath": "blind-rotate-metal public-ms covering-b2",
+    "expectedPathBlocks": 1,
+    "rows": 8,
+    "exhaustiveFullAdderInputs": true,
+    "postBlindRotateEvents": 24,
+    "identityTrials": 32,
+    "confidenceLevel": 0.95,
+    "targetUnionFailureLog2AtMost": -64,
+    "requireZeroIdentityDecodeFailures": true,
+    "requireAllClearEncryptedOutputsMatch": true,
+    "requireClearsYes": true,
+    "requireResultPass": true,
+    "requireSummaryCertYes": true,
+    "rejectSkip": true,
+    "rejectDiagnosticOnly": true,
+    "rejectUnsafeNoisyBKDiagnostic": true
+  },
+  "failurePolicy": "Preserve an inconclusive or failing run. Do not weaken the gate or rerun to select a favorable sample.",
+  "claimBoundary": "If accepted, this is an exhaustive 8-row full-adder result and a 95%-confidence Gaussian residual union bound over this circuit's 24 post-blind-rotate events at N=n=1024, covering-b2, BK sigma 128, Boolean stride k=14. It is not an arbitrary-netlist/depth, fresh-input-noise, hard deterministic BK bound, or total-GPU-memory claim."
+}

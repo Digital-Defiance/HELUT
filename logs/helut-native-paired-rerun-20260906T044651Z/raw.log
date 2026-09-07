@@ -1,0 +1,70 @@
+Test Suite 'Selected tests' started at 2026-09-05 21:47:54.897.
+Test Suite 'helutPackageTests.xctest' started at 2026-09-05 21:47:54.898.
+Test Suite 'NativeBaselineComparisonTests' started at 2026-09-05 21:47:54.898.
+Test Case '-[HELUTTests.NativeBaselineComparisonTests testHelutVersusVerilatorOnTheSameCircuit]' started.
+Test Case '-[HELUTTests.NativeBaselineComparisonTests testHelutVersusVerilatorOnTheSameCircuit]' passed (3.992 seconds).
+Test Suite 'NativeBaselineComparisonTests' passed at 2026-09-05 21:47:58.890.
+	 Executed 1 test, with 0 failures (0 unexpected) in 3.992 (3.993) seconds
+Test Suite 'helutPackageTests.xctest' passed at 2026-09-05 21:47:58.890.
+	 Executed 1 test, with 0 failures (0 unexpected) in 3.992 (3.993) seconds
+Test Suite 'Selected tests' passed at 2026-09-05 21:47:58.890.
+	 Executed 1 test, with 0 failures (0 unexpected) in 3.992 (3.993) seconds
+NATIVE_BASELINE artifact_dir=/var/folders/s1/v5qk06h56m9fyldr6mkt184w0000gn/T/helut-native-baseline-B7C37AFA-03C5-4148-9736-3AC7861ECC14
+NATIVE_BASELINE verilator build (excluded from timings): 1.88s
+NATIVE_BASELINE circuit: 8-bit ripple adder, 16 emitted LUT6, 14 $lut after abc -lut 6, 16 functional input bits, 9 output bits
+NATIVE_BASELINE workers requested=16 source=environment
+NATIVE_BASELINE historical scope: synchronized graph run vs scalar assign/eval/read/digest
+NATIVE_BASELINE lanes  helut_graph_s  native_scalar_e2e_s  ratio  digests
+NATIVE_PAIRED scope: prepared pack/assign through ordered output digest
+NATIVE_PAIRED lanes  helut_e2e_s  native_parallel_e2e_s  workers  ratio  digests
+NATIVE_BASELINE     1  0.002621055  0.000000209  12540.931x  match 8f9f7fb8cfd7dde2
+NATIVE_PAIRED      1  0.001837969  0.000008375    1  219.459x  match 8f9f7fb8cfd7dde2
+NATIVE_PAIRED_DETAIL lanes=1 helut_graph_median_s=0.002621055 native_parallel_prepared_median_s=0.000008208 helut_graph_ns=2621055,2895951,2641916,1793981,1749992 helut_e2e_ns=1813889,2028108,1979947,1726985,1837969
+VERILATOR_SCALAR_SAMPLES lanes=1 e2e_ns=458,250,209,208,209
+VERILATOR_PAIRED_SAMPLES lanes=1 prepared_ns=9791,7834,9417,7708,8208 e2e_ns=10333,8250,9750,8000,8375
+                 helut cold first run 0.101311s (JIT, excluded)
+NATIVE_BASELINE    16  0.002669096  0.000002208  1208.830x  match 84c0b917691450a5
+NATIVE_PAIRED     16  0.001973033  0.000082709   16  23.855x  match 84c0b917691450a5
+NATIVE_PAIRED_DETAIL lanes=16 helut_graph_median_s=0.002669096 native_parallel_prepared_median_s=0.000080250 helut_graph_ns=3136992,2650976,2669096,3234029,2642035 helut_e2e_ns=1973033,2118945,1982927,1879930,1906991
+VERILATOR_SCALAR_SAMPLES lanes=16 e2e_ns=2208,2250,2208,1875,1750
+VERILATOR_PAIRED_SAMPLES lanes=16 prepared_ns=80250,99250,76125,78125,87083 e2e_ns=82709,101458,78625,80709,89625
+                 helut cold first run 0.043546s (JIT, excluded)
+NATIVE_BASELINE   256  0.002932072  0.000029375  99.815x  match aa0c5f15c933c725
+NATIVE_PAIRED    256  0.002287030  0.000102958   16  22.213x  match aa0c5f15c933c725
+NATIVE_PAIRED_DETAIL lanes=256 helut_graph_median_s=0.002932072 native_parallel_prepared_median_s=0.000074541 helut_graph_ns=3090978,3486991,2932072,2247930,2140999 helut_e2e_ns=2287030,2308011,2200961,2205968,2299070
+VERILATOR_SCALAR_SAMPLES lanes=256 e2e_ns=29375,29417,29333,29500,29375
+VERILATOR_PAIRED_SAMPLES lanes=256 prepared_ns=74541,80708,89833,61250,60583 e2e_ns=102958,115875,126084,96083,90916
+                 helut cold first run 0.039342s (JIT, excluded)
+NATIVE_BASELINE  1024  0.003013968  0.000101083  29.817x  match 25bc9c05761bbee5
+NATIVE_PAIRED   1024  0.002457023  0.000183125   16  13.417x  match 25bc9c05761bbee5
+NATIVE_PAIRED_DETAIL lanes=1024 helut_graph_median_s=0.003013968 native_parallel_prepared_median_s=0.000069750 helut_graph_ns=3265977,3013968,3516078,2969027,1989007 helut_e2e_ns=2441049,2555013,2455950,2457023,2546072
+VERILATOR_SCALAR_SAMPLES lanes=1024 e2e_ns=101500,100959,100458,101083,101083
+VERILATOR_PAIRED_SAMPLES lanes=1024 prepared_ns=69750,66250,61459,73417,71417 e2e_ns=177459,174334,188250,184542,183125
+                 helut cold first run 0.034637s (JIT, excluded)
+NATIVE_BASELINE  4096  0.003049016  0.000451083  6.759x  match 53efd78eadd2ee5
+NATIVE_PAIRED   4096  0.003738046  0.000497084   16  7.520x  match 53efd78eadd2ee5
+NATIVE_PAIRED_DETAIL lanes=4096 helut_graph_median_s=0.003049016 native_parallel_prepared_median_s=0.000081291 helut_graph_ns=3049016,3165007,3548980,2980947,2010942 helut_e2e_ns=3738046,3691912,3879070,3682017,3883958
+VERILATOR_SCALAR_SAMPLES lanes=4096 e2e_ns=397208,406292,463875,453875,451083
+VERILATOR_PAIRED_SAMPLES lanes=4096 prepared_ns=77916,81291,63917,119208,85333 e2e_ns=497084,480125,466083,518250,512875
+                 helut cold first run 0.034669s (JIT, excluded)
+NATIVE_BASELINE 16384  0.002812982  0.001687667  1.667x  match 5bae3d89c7c044e5
+NATIVE_PAIRED  16384  0.009220958  0.001713709   16  5.381x  match 5bae3d89c7c044e5
+NATIVE_PAIRED_DETAIL lanes=16384 helut_graph_median_s=0.002812982 native_parallel_prepared_median_s=0.000118041 helut_graph_ns=3466010,3747940,2812982,1991987,1929998 helut_e2e_ns=9220958,9203076,9260893,8854985,9228945
+VERILATOR_SCALAR_SAMPLES lanes=16384 e2e_ns=1717000,1609625,1640708,1687667,1821834
+VERILATOR_PAIRED_SAMPLES lanes=16384 prepared_ns=138708,112916,110166,126834,118041 e2e_ns=1775792,1709125,1694667,1806834,1713709
+                 helut cold first run 0.033900s (JIT, excluded)
+NATIVE_BASELINE 32768  0.003219962  0.003474708  0.927x  match f79eaea4cb7276a5
+NATIVE_PAIRED  32768  0.016307950  0.003550834   16  4.593x  match f79eaea4cb7276a5
+NATIVE_PAIRED_DETAIL lanes=32768 helut_graph_median_s=0.003219962 native_parallel_prepared_median_s=0.000188833 helut_graph_ns=3821015,4191041,3219962,1876950,2016068 helut_e2e_ns=16270041,15862942,16307950,16614914,16945958
+VERILATOR_SCALAR_SAMPLES lanes=32768 e2e_ns=3535792,3474708,3375000,3626667,3372917
+VERILATOR_PAIRED_SAMPLES lanes=32768 prepared_ns=188500,186541,191375,225459,188833 e2e_ns=3415708,3650125,3475584,3550834,3564167
+                 helut cold first run 0.032583s (JIT, excluded)
+NATIVE_BASELINE 65536  0.002132893  0.006939708  0.307x  match 52f209ab0358725
+NATIVE_PAIRED  65536  0.031954050  0.006958500   16  4.592x  match 52f209ab0358725
+NATIVE_PAIRED_DETAIL lanes=65536 helut_graph_median_s=0.002132893 native_parallel_prepared_median_s=0.000325500 helut_graph_ns=5196929,4561901,2061963,2132893,2082944 helut_e2e_ns=31046987,30712962,31954050,33207059,32899022
+VERILATOR_SCALAR_SAMPLES lanes=65536 e2e_ns=7013334,7033042,6807791,6908500,6939708
+VERILATOR_PAIRED_SAMPLES lanes=65536 prepared_ns=283000,367708,371625,325500,300334 e2e_ns=6958500,7059084,7005791,6867709,6795459
+                 helut cold first run 0.034662s (JIT, excluded)
+NATIVE_BASELINE historical crossover: first tested HELUT graph win at B=32768 (0.003219962s vs 0.003474708s).
+NATIVE_PAIRED crossover: none through B=65536 against the configured parallel Verilator baseline.
+NATIVE_PAIRED boundary: one combinational circuit and host; 5 timed passes per point. Build, graph compile, allocation, model/thread creation, and cold specialization are excluded. Historical graph timing remains asymmetric. Paired timing includes deterministic input preparation, synchronized execution, output read/decode, and ordered digest on both sides; HELUT uses release Swift and native uses optimized C++. Native workers are scheduler-managed and unpinned. This is not a general HDL, sequential, cross-host, or best-possible-native claim.

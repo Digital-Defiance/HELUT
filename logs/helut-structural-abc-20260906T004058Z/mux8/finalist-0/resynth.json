@@ -1,0 +1,1263 @@
+{
+  "creator": "Yosys 0.68+post (git sha1 c12172fbae8af5e20f6fb52e3d4e92d56ed587b6, Release, AppleClang clang++ 21.0.0.21000101)",
+  "modules": {
+    "mux8_dut": {
+      "attributes": {
+        "top": "00000000000000000000000000000001",
+        "src": "emitted.v:1.1-128.10"
+      },
+      "ports": {
+        "clk": {
+          "direction": "input",
+          "bits": [ 2 ]
+        },
+        "in_0": {
+          "direction": "input",
+          "bits": [ 3 ]
+        },
+        "in_1": {
+          "direction": "input",
+          "bits": [ 4 ]
+        },
+        "in_2": {
+          "direction": "input",
+          "bits": [ 5 ]
+        },
+        "in_3": {
+          "direction": "input",
+          "bits": [ 6 ]
+        },
+        "in_4": {
+          "direction": "input",
+          "bits": [ 7 ]
+        },
+        "in_5": {
+          "direction": "input",
+          "bits": [ 8 ]
+        },
+        "in_6": {
+          "direction": "input",
+          "bits": [ 9 ]
+        },
+        "in_7": {
+          "direction": "input",
+          "bits": [ 10 ]
+        },
+        "in_8": {
+          "direction": "input",
+          "bits": [ 11 ]
+        },
+        "in_9": {
+          "direction": "input",
+          "bits": [ 12 ]
+        },
+        "in_10": {
+          "direction": "input",
+          "bits": [ 13 ]
+        },
+        "out_25": {
+          "direction": "output",
+          "bits": [ 14 ]
+        }
+      },
+      "cells": {
+        "$abc$1648$auto$blifparse.cc:557:parse_blif$1649": {
+          "hide_name": 1,
+          "type": "$lut",
+          "parameters": {
+            "LUT": "00110101",
+            "WIDTH": "00000000000000000000000000000011"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 15, 16, 12 ],
+            "Y": [ 14 ]
+          }
+        },
+        "$abc$1648$auto$blifparse.cc:557:parse_blif$1650": {
+          "hide_name": 1,
+          "type": "$lut",
+          "parameters": {
+            "LUT": "0011001100110011010101010101010100001111000011110000000011111111",
+            "WIDTH": "00000000000000000000000000000110"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 9, 10, 6, 5, 11, 13 ],
+            "Y": [ 16 ]
+          }
+        },
+        "$abc$1648$auto$blifparse.cc:557:parse_blif$1651": {
+          "hide_name": 1,
+          "type": "$lut",
+          "parameters": {
+            "LUT": "0000111100001111010101010101010100000000111111110011001100110011",
+            "WIDTH": "00000000000000000000000000000110"
+          },
+          "attributes": {
+          },
+          "port_directions": {
+            "A": "input",
+            "Y": "output"
+          },
+          "connections": {
+            "A": [ 7, 3, 8, 4, 11, 13 ],
+            "Y": [ 15 ]
+          }
+        },
+        "lut_0": {
+          "hide_name": 0,
+          "type": "$scopeinfo",
+          "parameters": {
+            "TYPE": "module"
+          },
+          "attributes": {
+            "cell_src": "emitted.v:39.7-42.6",
+            "module": "$paramod$2af06602961817110579d7c90717c9a7ddb8c2e1\\LUT6",
+            "module_hdlname": "LUT6",
+            "module_src": "lut6.v:2.1-6.10"
+          },
+          "port_directions": {
+          },
+          "connections": {
+          }
+        },
+        "lut_1": {
+          "hide_name": 0,
+          "type": "$scopeinfo",
+          "parameters": {
+            "TYPE": "module"
+          },
+          "attributes": {
+            "cell_src": "emitted.v:45.7-48.6",
+            "module": "$paramod$2af06602961817110579d7c90717c9a7ddb8c2e1\\LUT6",
+            "module_hdlname": "LUT6",
+            "module_src": "lut6.v:2.1-6.10"
+          },
+          "port_directions": {
+          },
+          "connections": {
+          }
+        },
+        "lut_10": {
+          "hide_name": 0,
+          "type": "$scopeinfo",
+          "parameters": {
+            "TYPE": "module"
+          },
+          "attributes": {
+            "cell_src": "emitted.v:99.7-102.6",
+            "module": "$paramod$2af06602961817110579d7c90717c9a7ddb8c2e1\\LUT6",
+            "module_hdlname": "LUT6",
+            "module_src": "lut6.v:2.1-6.10"
+          },
+          "port_directions": {
+          },
+          "connections": {
+          }
+        },
+        "lut_11": {
+          "hide_name": 0,
+          "type": "$scopeinfo",
+          "parameters": {
+            "TYPE": "module"
+          },
+          "attributes": {
+            "cell_src": "emitted.v:105.7-108.6",
+            "module": "$paramod$2af06602961817110579d7c90717c9a7ddb8c2e1\\LUT6",
+            "module_hdlname": "LUT6",
+            "module_src": "lut6.v:2.1-6.10"
+          },
+          "port_directions": {
+          },
+          "connections": {
+          }
+        },
+        "lut_12": {
+          "hide_name": 0,
+          "type": "$scopeinfo",
+          "parameters": {
+            "TYPE": "module"
+          },
+          "attributes": {
+            "cell_src": "emitted.v:111.7-114.6",
+            "module": "$paramod$2af06602961817110579d7c90717c9a7ddb8c2e1\\LUT6",
+            "module_hdlname": "LUT6",
+            "module_src": "lut6.v:2.1-6.10"
+          },
+          "port_directions": {
+          },
+          "connections": {
+          }
+        },
+        "lut_13": {
+          "hide_name": 0,
+          "type": "$scopeinfo",
+          "parameters": {
+            "TYPE": "module"
+          },
+          "attributes": {
+            "cell_src": "emitted.v:117.7-120.6",
+            "module": "$paramod$2af06602961817110579d7c90717c9a7ddb8c2e1\\LUT6",
+            "module_hdlname": "LUT6",
+            "module_src": "lut6.v:2.1-6.10"
+          },
+          "port_directions": {
+          },
+          "connections": {
+          }
+        },
+        "lut_14": {
+          "hide_name": 0,
+          "type": "$scopeinfo",
+          "parameters": {
+            "TYPE": "module"
+          },
+          "attributes": {
+            "cell_src": "emitted.v:123.7-126.6",
+            "module": "$paramod$3bb603edebd7ec20b40d6408f00e08b86f5f3952\\LUT6",
+            "module_hdlname": "LUT6",
+            "module_src": "lut6.v:2.1-6.10"
+          },
+          "port_directions": {
+          },
+          "connections": {
+          }
+        },
+        "lut_2": {
+          "hide_name": 0,
+          "type": "$scopeinfo",
+          "parameters": {
+            "TYPE": "module"
+          },
+          "attributes": {
+            "cell_src": "emitted.v:51.7-54.6",
+            "module": "$paramod$2af06602961817110579d7c90717c9a7ddb8c2e1\\LUT6",
+            "module_hdlname": "LUT6",
+            "module_src": "lut6.v:2.1-6.10"
+          },
+          "port_directions": {
+          },
+          "connections": {
+          }
+        },
+        "lut_3": {
+          "hide_name": 0,
+          "type": "$scopeinfo",
+          "parameters": {
+            "TYPE": "module"
+          },
+          "attributes": {
+            "cell_src": "emitted.v:57.7-60.6",
+            "module": "$paramod$2af06602961817110579d7c90717c9a7ddb8c2e1\\LUT6",
+            "module_hdlname": "LUT6",
+            "module_src": "lut6.v:2.1-6.10"
+          },
+          "port_directions": {
+          },
+          "connections": {
+          }
+        },
+        "lut_4": {
+          "hide_name": 0,
+          "type": "$scopeinfo",
+          "parameters": {
+            "TYPE": "module"
+          },
+          "attributes": {
+            "cell_src": "emitted.v:63.7-66.6",
+            "module": "$paramod$2af06602961817110579d7c90717c9a7ddb8c2e1\\LUT6",
+            "module_hdlname": "LUT6",
+            "module_src": "lut6.v:2.1-6.10"
+          },
+          "port_directions": {
+          },
+          "connections": {
+          }
+        },
+        "lut_5": {
+          "hide_name": 0,
+          "type": "$scopeinfo",
+          "parameters": {
+            "TYPE": "module"
+          },
+          "attributes": {
+            "cell_src": "emitted.v:69.7-72.6",
+            "module": "$paramod$2af06602961817110579d7c90717c9a7ddb8c2e1\\LUT6",
+            "module_hdlname": "LUT6",
+            "module_src": "lut6.v:2.1-6.10"
+          },
+          "port_directions": {
+          },
+          "connections": {
+          }
+        },
+        "lut_6": {
+          "hide_name": 0,
+          "type": "$scopeinfo",
+          "parameters": {
+            "TYPE": "module"
+          },
+          "attributes": {
+            "cell_src": "emitted.v:75.7-78.6",
+            "module": "$paramod$2af06602961817110579d7c90717c9a7ddb8c2e1\\LUT6",
+            "module_hdlname": "LUT6",
+            "module_src": "lut6.v:2.1-6.10"
+          },
+          "port_directions": {
+          },
+          "connections": {
+          }
+        },
+        "lut_7": {
+          "hide_name": 0,
+          "type": "$scopeinfo",
+          "parameters": {
+            "TYPE": "module"
+          },
+          "attributes": {
+            "cell_src": "emitted.v:81.7-84.6",
+            "module": "$paramod$2af06602961817110579d7c90717c9a7ddb8c2e1\\LUT6",
+            "module_hdlname": "LUT6",
+            "module_src": "lut6.v:2.1-6.10"
+          },
+          "port_directions": {
+          },
+          "connections": {
+          }
+        },
+        "lut_8": {
+          "hide_name": 0,
+          "type": "$scopeinfo",
+          "parameters": {
+            "TYPE": "module"
+          },
+          "attributes": {
+            "cell_src": "emitted.v:87.7-90.6",
+            "module": "$paramod$2af06602961817110579d7c90717c9a7ddb8c2e1\\LUT6",
+            "module_hdlname": "LUT6",
+            "module_src": "lut6.v:2.1-6.10"
+          },
+          "port_directions": {
+          },
+          "connections": {
+          }
+        },
+        "lut_9": {
+          "hide_name": 0,
+          "type": "$scopeinfo",
+          "parameters": {
+            "TYPE": "module"
+          },
+          "attributes": {
+            "cell_src": "emitted.v:93.7-96.6",
+            "module": "$paramod$2af06602961817110579d7c90717c9a7ddb8c2e1\\LUT6",
+            "module_hdlname": "LUT6",
+            "module_src": "lut6.v:2.1-6.10"
+          },
+          "port_directions": {
+          },
+          "connections": {
+          }
+        }
+      },
+      "netnames": {
+        "$abc$1648$new_n15": {
+          "hide_name": 1,
+          "bits": [ 16 ],
+          "attributes": {
+          }
+        },
+        "$abc$1648$new_n16": {
+          "hide_name": 1,
+          "bits": [ 15 ],
+          "attributes": {
+          }
+        },
+        "clk": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+            "src": "emitted.v:5.16-5.19"
+          }
+        },
+        "in_0": {
+          "hide_name": 0,
+          "bits": [ 3 ],
+          "attributes": {
+            "src": "emitted.v:6.16-6.20"
+          }
+        },
+        "in_1": {
+          "hide_name": 0,
+          "bits": [ 4 ],
+          "attributes": {
+            "src": "emitted.v:7.16-7.20"
+          }
+        },
+        "in_10": {
+          "hide_name": 0,
+          "bits": [ 13 ],
+          "attributes": {
+            "src": "emitted.v:16.16-16.21"
+          }
+        },
+        "in_2": {
+          "hide_name": 0,
+          "bits": [ 5 ],
+          "attributes": {
+            "src": "emitted.v:8.16-8.20"
+          }
+        },
+        "in_3": {
+          "hide_name": 0,
+          "bits": [ 6 ],
+          "attributes": {
+            "src": "emitted.v:9.16-9.20"
+          }
+        },
+        "in_4": {
+          "hide_name": 0,
+          "bits": [ 7 ],
+          "attributes": {
+            "src": "emitted.v:10.16-10.20"
+          }
+        },
+        "in_5": {
+          "hide_name": 0,
+          "bits": [ 8 ],
+          "attributes": {
+            "src": "emitted.v:11.16-11.20"
+          }
+        },
+        "in_6": {
+          "hide_name": 0,
+          "bits": [ 9 ],
+          "attributes": {
+            "src": "emitted.v:12.16-12.20"
+          }
+        },
+        "in_7": {
+          "hide_name": 0,
+          "bits": [ 10 ],
+          "attributes": {
+            "src": "emitted.v:13.16-13.20"
+          }
+        },
+        "in_8": {
+          "hide_name": 0,
+          "bits": [ 11 ],
+          "attributes": {
+            "src": "emitted.v:14.16-14.20"
+          }
+        },
+        "in_9": {
+          "hide_name": 0,
+          "bits": [ 12 ],
+          "attributes": {
+            "src": "emitted.v:15.16-15.20"
+          }
+        },
+        "lut_0.I0": {
+          "hide_name": 0,
+          "bits": [ 3 ],
+          "attributes": {
+            "hdlname": "lut_0 I0",
+            "src": "lut6.v:2.30-2.32"
+          }
+        },
+        "lut_0.I1": {
+          "hide_name": 0,
+          "bits": [ 4 ],
+          "attributes": {
+            "hdlname": "lut_0 I1",
+            "src": "lut6.v:2.34-2.36"
+          }
+        },
+        "lut_0.I2": {
+          "hide_name": 0,
+          "bits": [ 11 ],
+          "attributes": {
+            "hdlname": "lut_0 I2",
+            "src": "lut6.v:2.38-2.40"
+          }
+        },
+        "lut_0.I3": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_0 I3",
+            "src": "lut6.v:2.42-2.44"
+          }
+        },
+        "lut_0.I4": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_0 I4",
+            "src": "lut6.v:2.46-2.48"
+          }
+        },
+        "lut_0.I5": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_0 I5",
+            "src": "lut6.v:2.50-2.52"
+          }
+        },
+        "lut_0.addr": {
+          "hide_name": 0,
+          "bits": [ 3, 4, 11, "0", "0", "0" ],
+          "attributes": {
+            "hdlname": "lut_0 addr",
+            "src": "lut6.v:4.16-4.20"
+          }
+        },
+        "lut_1.I0": {
+          "hide_name": 0,
+          "bits": [ 5 ],
+          "attributes": {
+            "hdlname": "lut_1 I0",
+            "src": "lut6.v:2.30-2.32"
+          }
+        },
+        "lut_1.I1": {
+          "hide_name": 0,
+          "bits": [ 6 ],
+          "attributes": {
+            "hdlname": "lut_1 I1",
+            "src": "lut6.v:2.34-2.36"
+          }
+        },
+        "lut_1.I2": {
+          "hide_name": 0,
+          "bits": [ 11 ],
+          "attributes": {
+            "hdlname": "lut_1 I2",
+            "src": "lut6.v:2.38-2.40"
+          }
+        },
+        "lut_1.I3": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_1 I3",
+            "src": "lut6.v:2.42-2.44"
+          }
+        },
+        "lut_1.I4": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_1 I4",
+            "src": "lut6.v:2.46-2.48"
+          }
+        },
+        "lut_1.I5": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_1 I5",
+            "src": "lut6.v:2.50-2.52"
+          }
+        },
+        "lut_1.addr": {
+          "hide_name": 0,
+          "bits": [ 5, 6, 11, "0", "0", "0" ],
+          "attributes": {
+            "hdlname": "lut_1 addr",
+            "src": "lut6.v:4.16-4.20"
+          }
+        },
+        "lut_10.I0": {
+          "hide_name": 0,
+          "bits": [ 9 ],
+          "attributes": {
+            "hdlname": "lut_10 I0",
+            "src": "lut6.v:2.30-2.32"
+          }
+        },
+        "lut_10.I1": {
+          "hide_name": 0,
+          "bits": [ 10 ],
+          "attributes": {
+            "hdlname": "lut_10 I1",
+            "src": "lut6.v:2.34-2.36"
+          }
+        },
+        "lut_10.I2": {
+          "hide_name": 0,
+          "bits": [ 11 ],
+          "attributes": {
+            "hdlname": "lut_10 I2",
+            "src": "lut6.v:2.38-2.40"
+          }
+        },
+        "lut_10.I3": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_10 I3",
+            "src": "lut6.v:2.42-2.44"
+          }
+        },
+        "lut_10.I4": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_10 I4",
+            "src": "lut6.v:2.46-2.48"
+          }
+        },
+        "lut_10.I5": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_10 I5",
+            "src": "lut6.v:2.50-2.52"
+          }
+        },
+        "lut_10.addr": {
+          "hide_name": 0,
+          "bits": [ 9, 10, 11, "0", "0", "0" ],
+          "attributes": {
+            "hdlname": "lut_10 addr",
+            "src": "lut6.v:4.16-4.20"
+          }
+        },
+        "lut_11.I2": {
+          "hide_name": 0,
+          "bits": [ 12 ],
+          "attributes": {
+            "hdlname": "lut_11 I2",
+            "src": "lut6.v:2.38-2.40"
+          }
+        },
+        "lut_11.I3": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_11 I3",
+            "src": "lut6.v:2.42-2.44"
+          }
+        },
+        "lut_11.I4": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_11 I4",
+            "src": "lut6.v:2.46-2.48"
+          }
+        },
+        "lut_11.I5": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_11 I5",
+            "src": "lut6.v:2.50-2.52"
+          }
+        },
+        "lut_11.addr": {
+          "hide_name": 0,
+          "bits": [ 17, 18, 12, "0", "0", "0" ],
+          "attributes": {
+            "hdlname": "lut_11 addr",
+            "src": "lut6.v:4.16-4.20",
+            "unused_bits": "0 1"
+          }
+        },
+        "lut_12.I2": {
+          "hide_name": 0,
+          "bits": [ 12 ],
+          "attributes": {
+            "hdlname": "lut_12 I2",
+            "src": "lut6.v:2.38-2.40"
+          }
+        },
+        "lut_12.I3": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_12 I3",
+            "src": "lut6.v:2.42-2.44"
+          }
+        },
+        "lut_12.I4": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_12 I4",
+            "src": "lut6.v:2.46-2.48"
+          }
+        },
+        "lut_12.I5": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_12 I5",
+            "src": "lut6.v:2.50-2.52"
+          }
+        },
+        "lut_12.addr": {
+          "hide_name": 0,
+          "bits": [ 19, 20, 12, "0", "0", "0" ],
+          "attributes": {
+            "hdlname": "lut_12 addr",
+            "src": "lut6.v:4.16-4.20",
+            "unused_bits": "0 1"
+          }
+        },
+        "lut_13.I2": {
+          "hide_name": 0,
+          "bits": [ 13 ],
+          "attributes": {
+            "hdlname": "lut_13 I2",
+            "src": "lut6.v:2.38-2.40"
+          }
+        },
+        "lut_13.I3": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_13 I3",
+            "src": "lut6.v:2.42-2.44"
+          }
+        },
+        "lut_13.I4": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_13 I4",
+            "src": "lut6.v:2.46-2.48"
+          }
+        },
+        "lut_13.I5": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_13 I5",
+            "src": "lut6.v:2.50-2.52"
+          }
+        },
+        "lut_13.O": {
+          "hide_name": 0,
+          "bits": [ 14 ],
+          "attributes": {
+            "hdlname": "lut_13 O",
+            "src": "lut6.v:2.21-2.22"
+          }
+        },
+        "lut_13.addr": {
+          "hide_name": 0,
+          "bits": [ 21, 22, 13, "0", "0", "0" ],
+          "attributes": {
+            "hdlname": "lut_13 addr",
+            "src": "lut6.v:4.16-4.20",
+            "unused_bits": "0 1"
+          }
+        },
+        "lut_14.I0": {
+          "hide_name": 0,
+          "bits": [ 14 ],
+          "attributes": {
+            "hdlname": "lut_14 I0",
+            "src": "lut6.v:2.30-2.32"
+          }
+        },
+        "lut_14.I1": {
+          "hide_name": 0,
+          "bits": [ 14 ],
+          "attributes": {
+            "hdlname": "lut_14 I1",
+            "src": "lut6.v:2.34-2.36"
+          }
+        },
+        "lut_14.I2": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_14 I2",
+            "src": "lut6.v:2.38-2.40"
+          }
+        },
+        "lut_14.I3": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_14 I3",
+            "src": "lut6.v:2.42-2.44"
+          }
+        },
+        "lut_14.I4": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_14 I4",
+            "src": "lut6.v:2.46-2.48"
+          }
+        },
+        "lut_14.I5": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_14 I5",
+            "src": "lut6.v:2.50-2.52"
+          }
+        },
+        "lut_14.O": {
+          "hide_name": 0,
+          "bits": [ 14 ],
+          "attributes": {
+            "hdlname": "lut_14 O",
+            "src": "lut6.v:2.21-2.22"
+          }
+        },
+        "lut_14.addr": {
+          "hide_name": 0,
+          "bits": [ 14, 14, "0", "0", "0", "0" ],
+          "attributes": {
+            "hdlname": "lut_14 addr",
+            "src": "lut6.v:4.16-4.20"
+          }
+        },
+        "lut_2.I0": {
+          "hide_name": 0,
+          "bits": [ 7 ],
+          "attributes": {
+            "hdlname": "lut_2 I0",
+            "src": "lut6.v:2.30-2.32"
+          }
+        },
+        "lut_2.I1": {
+          "hide_name": 0,
+          "bits": [ 8 ],
+          "attributes": {
+            "hdlname": "lut_2 I1",
+            "src": "lut6.v:2.34-2.36"
+          }
+        },
+        "lut_2.I2": {
+          "hide_name": 0,
+          "bits": [ 11 ],
+          "attributes": {
+            "hdlname": "lut_2 I2",
+            "src": "lut6.v:2.38-2.40"
+          }
+        },
+        "lut_2.I3": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_2 I3",
+            "src": "lut6.v:2.42-2.44"
+          }
+        },
+        "lut_2.I4": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_2 I4",
+            "src": "lut6.v:2.46-2.48"
+          }
+        },
+        "lut_2.I5": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_2 I5",
+            "src": "lut6.v:2.50-2.52"
+          }
+        },
+        "lut_2.addr": {
+          "hide_name": 0,
+          "bits": [ 7, 8, 11, "0", "0", "0" ],
+          "attributes": {
+            "hdlname": "lut_2 addr",
+            "src": "lut6.v:4.16-4.20"
+          }
+        },
+        "lut_3.I0": {
+          "hide_name": 0,
+          "bits": [ 9 ],
+          "attributes": {
+            "hdlname": "lut_3 I0",
+            "src": "lut6.v:2.30-2.32"
+          }
+        },
+        "lut_3.I1": {
+          "hide_name": 0,
+          "bits": [ 10 ],
+          "attributes": {
+            "hdlname": "lut_3 I1",
+            "src": "lut6.v:2.34-2.36"
+          }
+        },
+        "lut_3.I2": {
+          "hide_name": 0,
+          "bits": [ 11 ],
+          "attributes": {
+            "hdlname": "lut_3 I2",
+            "src": "lut6.v:2.38-2.40"
+          }
+        },
+        "lut_3.I3": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_3 I3",
+            "src": "lut6.v:2.42-2.44"
+          }
+        },
+        "lut_3.I4": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_3 I4",
+            "src": "lut6.v:2.46-2.48"
+          }
+        },
+        "lut_3.I5": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_3 I5",
+            "src": "lut6.v:2.50-2.52"
+          }
+        },
+        "lut_3.addr": {
+          "hide_name": 0,
+          "bits": [ 9, 10, 11, "0", "0", "0" ],
+          "attributes": {
+            "hdlname": "lut_3 addr",
+            "src": "lut6.v:4.16-4.20"
+          }
+        },
+        "lut_4.I2": {
+          "hide_name": 0,
+          "bits": [ 12 ],
+          "attributes": {
+            "hdlname": "lut_4 I2",
+            "src": "lut6.v:2.38-2.40"
+          }
+        },
+        "lut_4.I3": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_4 I3",
+            "src": "lut6.v:2.42-2.44"
+          }
+        },
+        "lut_4.I4": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_4 I4",
+            "src": "lut6.v:2.46-2.48"
+          }
+        },
+        "lut_4.I5": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_4 I5",
+            "src": "lut6.v:2.50-2.52"
+          }
+        },
+        "lut_4.addr": {
+          "hide_name": 0,
+          "bits": [ 23, 24, 12, "0", "0", "0" ],
+          "attributes": {
+            "hdlname": "lut_4 addr",
+            "src": "lut6.v:4.16-4.20",
+            "unused_bits": "0 1"
+          }
+        },
+        "lut_5.I2": {
+          "hide_name": 0,
+          "bits": [ 12 ],
+          "attributes": {
+            "hdlname": "lut_5 I2",
+            "src": "lut6.v:2.38-2.40"
+          }
+        },
+        "lut_5.I3": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_5 I3",
+            "src": "lut6.v:2.42-2.44"
+          }
+        },
+        "lut_5.I4": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_5 I4",
+            "src": "lut6.v:2.46-2.48"
+          }
+        },
+        "lut_5.I5": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_5 I5",
+            "src": "lut6.v:2.50-2.52"
+          }
+        },
+        "lut_5.addr": {
+          "hide_name": 0,
+          "bits": [ 25, 26, 12, "0", "0", "0" ],
+          "attributes": {
+            "hdlname": "lut_5 addr",
+            "src": "lut6.v:4.16-4.20",
+            "unused_bits": "0 1"
+          }
+        },
+        "lut_6.I2": {
+          "hide_name": 0,
+          "bits": [ 13 ],
+          "attributes": {
+            "hdlname": "lut_6 I2",
+            "src": "lut6.v:2.38-2.40"
+          }
+        },
+        "lut_6.I3": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_6 I3",
+            "src": "lut6.v:2.42-2.44"
+          }
+        },
+        "lut_6.I4": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_6 I4",
+            "src": "lut6.v:2.46-2.48"
+          }
+        },
+        "lut_6.I5": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_6 I5",
+            "src": "lut6.v:2.50-2.52"
+          }
+        },
+        "lut_6.O": {
+          "hide_name": 0,
+          "bits": [ 14 ],
+          "attributes": {
+            "hdlname": "lut_6 O",
+            "src": "lut6.v:2.21-2.22"
+          }
+        },
+        "lut_6.addr": {
+          "hide_name": 0,
+          "bits": [ 27, 28, 13, "0", "0", "0" ],
+          "attributes": {
+            "hdlname": "lut_6 addr",
+            "src": "lut6.v:4.16-4.20",
+            "unused_bits": "0 1"
+          }
+        },
+        "lut_7.I0": {
+          "hide_name": 0,
+          "bits": [ 3 ],
+          "attributes": {
+            "hdlname": "lut_7 I0",
+            "src": "lut6.v:2.30-2.32"
+          }
+        },
+        "lut_7.I1": {
+          "hide_name": 0,
+          "bits": [ 4 ],
+          "attributes": {
+            "hdlname": "lut_7 I1",
+            "src": "lut6.v:2.34-2.36"
+          }
+        },
+        "lut_7.I2": {
+          "hide_name": 0,
+          "bits": [ 11 ],
+          "attributes": {
+            "hdlname": "lut_7 I2",
+            "src": "lut6.v:2.38-2.40"
+          }
+        },
+        "lut_7.I3": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_7 I3",
+            "src": "lut6.v:2.42-2.44"
+          }
+        },
+        "lut_7.I4": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_7 I4",
+            "src": "lut6.v:2.46-2.48"
+          }
+        },
+        "lut_7.I5": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_7 I5",
+            "src": "lut6.v:2.50-2.52"
+          }
+        },
+        "lut_7.addr": {
+          "hide_name": 0,
+          "bits": [ 3, 4, 11, "0", "0", "0" ],
+          "attributes": {
+            "hdlname": "lut_7 addr",
+            "src": "lut6.v:4.16-4.20"
+          }
+        },
+        "lut_8.I0": {
+          "hide_name": 0,
+          "bits": [ 5 ],
+          "attributes": {
+            "hdlname": "lut_8 I0",
+            "src": "lut6.v:2.30-2.32"
+          }
+        },
+        "lut_8.I1": {
+          "hide_name": 0,
+          "bits": [ 6 ],
+          "attributes": {
+            "hdlname": "lut_8 I1",
+            "src": "lut6.v:2.34-2.36"
+          }
+        },
+        "lut_8.I2": {
+          "hide_name": 0,
+          "bits": [ 11 ],
+          "attributes": {
+            "hdlname": "lut_8 I2",
+            "src": "lut6.v:2.38-2.40"
+          }
+        },
+        "lut_8.I3": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_8 I3",
+            "src": "lut6.v:2.42-2.44"
+          }
+        },
+        "lut_8.I4": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_8 I4",
+            "src": "lut6.v:2.46-2.48"
+          }
+        },
+        "lut_8.I5": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_8 I5",
+            "src": "lut6.v:2.50-2.52"
+          }
+        },
+        "lut_8.addr": {
+          "hide_name": 0,
+          "bits": [ 5, 6, 11, "0", "0", "0" ],
+          "attributes": {
+            "hdlname": "lut_8 addr",
+            "src": "lut6.v:4.16-4.20"
+          }
+        },
+        "lut_9.I0": {
+          "hide_name": 0,
+          "bits": [ 7 ],
+          "attributes": {
+            "hdlname": "lut_9 I0",
+            "src": "lut6.v:2.30-2.32"
+          }
+        },
+        "lut_9.I1": {
+          "hide_name": 0,
+          "bits": [ 8 ],
+          "attributes": {
+            "hdlname": "lut_9 I1",
+            "src": "lut6.v:2.34-2.36"
+          }
+        },
+        "lut_9.I2": {
+          "hide_name": 0,
+          "bits": [ 11 ],
+          "attributes": {
+            "hdlname": "lut_9 I2",
+            "src": "lut6.v:2.38-2.40"
+          }
+        },
+        "lut_9.I3": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_9 I3",
+            "src": "lut6.v:2.42-2.44"
+          }
+        },
+        "lut_9.I4": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_9 I4",
+            "src": "lut6.v:2.46-2.48"
+          }
+        },
+        "lut_9.I5": {
+          "hide_name": 0,
+          "bits": [ "0" ],
+          "attributes": {
+            "hdlname": "lut_9 I5",
+            "src": "lut6.v:2.50-2.52"
+          }
+        },
+        "lut_9.addr": {
+          "hide_name": 0,
+          "bits": [ 7, 8, 11, "0", "0", "0" ],
+          "attributes": {
+            "hdlname": "lut_9 addr",
+            "src": "lut6.v:4.16-4.20"
+          }
+        },
+        "n": {
+          "hide_name": 0,
+          "bits": [ 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 29, 30, 31, 32, 33, 34, 14, 35, 36, 37, 38, 39, 40, 14, 14 ],
+          "attributes": {
+            "src": "emitted.v:20.17-20.18",
+            "unused_bits": "11 12 13 14 15 16 18 19 20 21 22 23"
+          }
+        },
+        "out_25": {
+          "hide_name": 0,
+          "bits": [ 14 ],
+          "attributes": {
+            "src": "emitted.v:17.17-17.23"
+          }
+        }
+      }
+    }
+  }
+}

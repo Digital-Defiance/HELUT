@@ -1,0 +1,100 @@
+{
+  "schema": "helut-native-phase-preregister-v1",
+  "utc": "2026-09-06T05:10:35Z",
+  "goal": "Measure HELUT assignment generation, input packing, synchronized graph execution, strict output decode, and canonical digest as adjacent subphases of the already accepted paired end-to-end scope. Attribute the host-side gap before optimizing it; no favorable result is required.",
+  "predecessor": {
+    "path": "logs/helut-native-paired-rerun-20260906T044651Z/receipt.json",
+    "sha256": "1d05c42e4dedfc76c7dea037b12d109475cd65156642b96370b67b45db9dbede",
+    "verdict": "functional and preregistered protocol PASS; no paired crossover through B=65536"
+  },
+  "changeFromPredecessor": {
+    "outerPairedScopeChanged": false,
+    "workMovedAcrossOuterBoundary": false,
+    "lanePointsChanged": false,
+    "trialsChanged": false,
+    "workersChanged": false,
+    "assignmentOrPackingChanged": false,
+    "graphOrBuffersChanged": false,
+    "decodeOrDigestChanged": false,
+    "correctnessChecksChanged": false,
+    "instrumentationOnly": "Read adjacent CFAbsoluteTime timestamps after assignment generation, input packing, synchronized graph execution, strict output decode, and canonical digest; reserve phase sample arrays outside the timed loop; emit raw phase samples and reconciliation residuals after timing. The existing refill closure returns the assignment timestamp, so its return overhead remains inside the input-pack interval."
+  },
+  "provenance": {
+    "gitCommit": "4d47ad0ef40c593bb3a0e4ab5aa2e668b917f975",
+    "workingTreeDirty": true,
+    "testSource": "Tests/HELUTTests/NativeBaselineComparisonTests.swift",
+    "testSourceSHA256": "d82bef30d0c2a5f0550d1fa6933cb8162a563f524bdfb1cf15a8fa98b4c65154",
+    "compiledXCTest": ".build/arm64-apple-macosx/release/helutPackageTests.xctest/Contents/MacOS/helutPackageTests",
+    "compiledXCTestSHA256": "0a1415da0a4856270fdcbc55511a66eb15793a580d93d6af0c2a1186b4915e83",
+    "hostModel": "Mac16,5",
+    "operatingSystemVersion": "26.6.2",
+    "activeProcessorCount": 16,
+    "yosysVersion": "0.68+post c12172fbae8af5e20f6fb52e3d4e92d56ed587b6",
+    "verilatorVersion": "5.052"
+  },
+  "command": [
+    "HELUT_PRESERVE_NATIVE_BASELINE_ARTIFACT=1",
+    "HELUT_NATIVE_BASELINE_WORKERS=16",
+    "swift",
+    "test",
+    "-c",
+    "release",
+    "--skip-build",
+    "--filter",
+    "NativeBaselineComparisonTests"
+  ],
+  "fixture": {
+    "kind": "generated 8-bit ripple adder",
+    "emittedLUT6": 16,
+    "expectedMappedLUTs": 14,
+    "functionalInputBits": 16,
+    "outputBits": 9,
+    "outputWireOrder": [24, 25, 26, 27, 28, 29, 30, 31, 23],
+    "lanePoints": [1, 16, 256, 1024, 4096, 16384, 32768, 65536],
+    "timedTrialsPerPoint": 5,
+    "requestedNativeWorkers": 16,
+    "effectiveNativeWorkers": "min(16, lanes)"
+  },
+  "pairedHELUTScope": "Assignment-mask regeneration and writes to every preallocated input buffer, including clk=0, through synchronized MPSGraph execution, strict output traversal/decode, and ordered FNV-1a digest. Allocation, graph compilation, cold specialization, and correctness comparison remain excluded.",
+  "adjacentPhases": [
+    "assignment generation",
+    "input packing (including refill-closure return overhead)",
+    "synchronized graph call",
+    "output traversal and strict decode into the existing nested value matrix",
+    "canonical lane-major ordered FNV-1a digest"
+  ],
+  "reconciliation": {
+    "method": "For each trial, sum the five adjacent deltas derived from the same six timestamps and compare that sum with digestEnd-start.",
+    "maximumAbsoluteResidualSeconds": 1e-9,
+    "medianCaveat": "Independently selected phase medians are not required to sum to the total median; raw per-trial reconciliation is authoritative."
+  },
+  "acceptance": {
+    "xctestFooter": "1 test, 0 failures",
+    "allEightLanePoints": true,
+    "fiveRawSamplesForEveryPhaseAtEveryPoint": true,
+    "phaseSamplesNonnegative": true,
+    "totalSamplesPositive": true,
+    "allPerTrialResidualsWithinOneNanosecond": true,
+    "phaseTotalSamplesExactlyMatchReportedHELUTPairedSamplesAfterNanosecondRounding": true,
+    "allHELUTScalarParallelDigestsStableAndEqual": true,
+    "b65536Exhaustive": true,
+    "speedupRequired": false
+  },
+  "optimizationSelectionRule": {
+    "measurementPoint": 65536,
+    "rule": "Rank assignment, input pack, decode, and digest by their five-sample median. Optimize the largest recoverable host phase first without moving work outside the paired boundary. Graph execution is recorded but remains a separate kernel lever.",
+    "candidateByWinningPhase": {
+      "decode": "Remove owning one-element decode arrays while preserving strict degree-one validation and canonical output order; prefer a flat representation only if needed.",
+      "digest": "Replace repeated withUnsafeBytes closures with an explicit inlined four-byte little-endian FNV mix while preserving every hashed field and byte.",
+      "inputPack": "Specialize the degree-one constant-fill write loop while still regenerating assignments and rewriting every input including clk.",
+      "assignment": "Hoist only loop-invariant arithmetic and specialize the deterministic formula while still regenerating every assignment inside the paired scope."
+    }
+  },
+  "failurePolicy": "Bank any test, digest, mapping, phase-accounting, or protocol failure. Do not discard or silently rerun an unfavorable decomposition. Do not lower B, trials, or workers. Preserve all predecessor evidence.",
+  "claimBoundary": "This run attributes one release-Swift/MPSGraph paired implementation on one combinational ripple-adder fixture and one Mac16,5. Instrumentation adds clock reads and does not establish general runtime behavior.",
+  "plannedArtifacts": {
+    "rawLog": "logs/helut-native-phase-baseline-20260906T051035Z/raw.log",
+    "receipt": "logs/helut-native-phase-baseline-20260906T051035Z/receipt.json",
+    "generatedSources": ["emitted.v", "lut6.v", "flow.ys", "tb.cpp"]
+  }
+}

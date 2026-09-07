@@ -42,9 +42,22 @@ func runOstwaldCurve() {
     let lexicon = CommandLine.arguments.contains("--ostwald-lexicon")
         ? NavalLexicon.load(corpusPath: corpusPath)
         : nil
-    let navalCorpus = CommandLine.arguments.contains("--ostwald-naval")
-        ? NavalGrams.load(corpusPath: corpusPath)
-        : nil
+    let navalRequested = CommandLine.arguments.contains("--ostwald-naval")
+    let navalCorpus = navalRequested ? NavalGrams.load(corpusPath: corpusPath) : nil
+    if navalRequested, navalCorpus == nil {
+        print("ABORT — leave-one-out naval trigram model unavailable; no curve evaluated.")
+        return
+    }
+    let needsGenericTrigram = navalCorpus == nil && scorers.contains { scorer in
+        switch scorer {
+        case .bigram: return false
+        case .trigram, .staged: return true
+        }
+    }
+    if needsGenericTrigram, !GermanTrigrams.isLoaded {
+        print("ABORT — attested trigram model unavailable; no trigram/staged curve evaluated.")
+        return
+    }
 
     print("=== Ciphertext-only length threshold — crib-free climb on known M4 keys ===")
     print("corpus        : \(corpusPath)")

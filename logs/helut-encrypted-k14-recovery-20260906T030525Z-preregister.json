@@ -1,0 +1,83 @@
+{
+  "schema": "helut-encrypted-k14-recovery-preregister-v1",
+  "utc": "2026-09-06T03:05:25Z",
+  "goal": "Attempt to recover the same N=n=1024, covering-b2, BK sigma 128, Boolean stride k=14, exhaustive full-adder 24-event confidence claim by increasing independent identity-PBS samples; do not change the circuit, event count, noise, gadget, or confidence target.",
+  "parallelImplementation": {
+    "maxConcurrentTrials": 8,
+    "semantics": "Bootstrap-key construction, trial bit/LWE generation, and indexed result reduction are serial and retain historical order. Only RNG-free PBS evaluation of precomputed trials is concurrent.",
+    "binarySHA256": "77c449a249c76c79970486949bb9075068943149cbab05580865b20db1847a38",
+    "coreSourceSHA256": "ea233e55105645134990a3bd7a14594c27d8382c1ae36e03dfa83694c5c298e6",
+    "simulatorSourceSHA256": "4bbd61051a5df9e7317b0d4789f4648b67083bd0bfb893a7e2e4b5296f6a82d8",
+    "productionReplay": "logs/helut-encrypted-k14-recovery-20260906T030525Z-parallel32.raw.log",
+    "productionReplaySHA256": "de8a471c161757760a8b76853dc5200ac61977b96f82ab0fe38b7be753b68be3",
+    "serialReference": "logs/helut-encrypted-bound-20260906T012213Z-t32-k14.raw.log",
+    "serialReferenceSHA256": "9b08d9b32a0a1022669df32b8eb996006c53290be717b5443d3440e8daa956de",
+    "exactReplayFields": {
+      "maxAbsError": 3369752,
+      "sigmaUpper95": 1774113.6388565525,
+      "eventCount": 24,
+      "unionFailureLog2": -48.183293522830674
+    },
+    "serialRealSeconds": 1132.49,
+    "parallelRealSeconds": 187.92,
+    "speedup": 6.0268
+  },
+  "powerAnalysis": {
+    "sourceSamples": 32,
+    "derivedSigmaHat": 1405012.618470638,
+    "pointUnionFailureLog2": -77.886997673947,
+    "estimatedMinimumSamplesToClear": 164,
+    "selectedSamples": 192,
+    "expectedSigmaUpper95IfStable": 1534592.8,
+    "expectedUnionFailureLog2IfStable": -65.02,
+    "warning": "The estimate is not an outcome guarantee. New samples may raise sigmaHat; preserve failure if the preregistered run does not clear."
+  },
+  "netlist": "netlist.json",
+  "netlistSHA256": "d647afbd947b9b67e63505caa215209e559efc10aa8099fd10ad18cad5acb13c",
+  "argv": [
+    ".build/release/helut-bench",
+    "--bench",
+    "netlist.json",
+    "--degree",
+    "1024",
+    "--bench-encrypted",
+    "--sing",
+    "--vectors",
+    "8",
+    "--bk-noise-sigma",
+    "128",
+    "--bk-identity-trials",
+    "192",
+    "--bk-identity-parallelism",
+    "8",
+    "--paths",
+    "blind-rotate-metal public-ms covering-b2",
+    "--boolean-scale-mul",
+    "14"
+  ],
+  "environment": {
+    "HELUT_QUIET_METAL_BR_PROGRESS": "1"
+  },
+  "acceptance": {
+    "expectedPath": "blind-rotate-metal public-ms covering-b2",
+    "expectedPathBlocks": 1,
+    "rows": 8,
+    "exhaustiveFullAdderInputs": true,
+    "postBlindRotateEvents": 24,
+    "identityTrials": 192,
+    "identityParallelism": 8,
+    "confidenceLevel": 0.95,
+    "targetUnionFailureLog2AtMost": -64,
+    "requireZeroIdentityDecodeFailures": true,
+    "requireAllClearEncryptedOutputsMatch": true,
+    "requireClearsYes": true,
+    "requireResultPass": true,
+    "requireSummaryCertYes": true,
+    "requireProcessExitStatus": 0,
+    "rejectSkipForSelectedPath": true,
+    "rejectDiagnosticOnly": true,
+    "rejectUnsafeNoisyBKDiagnostic": true
+  },
+  "failurePolicy": "Preserve an inconclusive or failing run. Do not change k, reduce vectors/events, weaken confidence, enable diagnostic-only execution, or rerun to select a favorable outcome.",
+  "claimBoundary": "If accepted, this recovers k=14 only for this exhaustive 8-row, 3-LUT full-adder and its 24 post-blind-rotate events under the stated Gaussian model. It remains neither a hard deterministic BK bound nor an arbitrary-netlist/depth or fresh-primary-input-noise certificate."
+}

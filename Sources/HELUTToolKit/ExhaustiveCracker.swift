@@ -110,7 +110,8 @@ struct ShellCandidate: Sendable {
 struct SolvedCandidate: Sendable {
     var shell: ShellCandidate
     var pairs: [[Int]]
-    var bigram: Double
+    var objectiveScore: Double
+    var bigramScore: Double
     var attackScore: Double
     var ic: Double
     var plaintext: String
@@ -411,7 +412,7 @@ enum ExhaustiveCracker {
             progress(String(format: "  best sieve IC=%.4f", best.ic))
         }
 
-        progress("Phase 2 — stecker hill-climb (bigram) on survivors")
+        progress("Phase 2 — stecker hill-climb (\(EnigmaSearchObjective.description)) on survivors")
         let solved = hillClimbAll(
             survivors: survivors,
             ciphertext: ciphertext,
@@ -445,7 +446,8 @@ enum ExhaustiveCracker {
                 SolvedCandidate(
                     shell: shell,
                     pairs: climbed.pairs.map { [$0.0, $0.1] },
-                    bigram: climbed.score,
+                    objectiveScore: climbed.score,
+                    bigramScore: LanguageScorer.bigramScore(climbed.plain),
                     attackScore: HostM4Bombe.attackScore(
                         plaintext: climbed.plain,
                         scorer: .germanMilitary()
@@ -456,15 +458,19 @@ enum ExhaustiveCracker {
                 at: index
             )
         }
-        return box.snapshot().sorted { $0.attackScore > $1.attackScore }
+        return box.snapshot().sorted { $0.objectiveScore > $1.objectiveScore }
     }
 
-    /// Greedy plug insertion then a replacement pass — the classic Enigma stecker climb.
+    /// Greedy plug insertion then one replacement pass — the classic Enigma stecker climb.
+    /// The default objective combines calibrated bigram/IC/crib attack and trigram
+    /// evidence; callers can inject a characterization objective explicitly.
     static func hillClimb(
         key: EnigmaM4Key,
         ciphertext: [Int],
-        maxPlugs: Int
+        maxPlugs: Int,
+        scorePlaintext: ([Int]) -> Double = EnigmaSearchObjective.score
     ) -> (pairs: [(Int, Int)], score: Double, plain: [Int]) {
+        precondition(maxPlugs >= 0)
         var plain = [Int](repeating: 0, count: ciphertext.count)
         var pairs: [(Int, Int)] = []
         var used = [Bool](repeating: false, count: 26)
@@ -485,7 +491,7 @@ enum ExhaustiveCracker {
             )
             var machine = EnigmaM4Machine(key: working)
             for index in ciphertext.indices { plain[index] = machine.process(ciphertext[index]) }
-            return LanguageScorer.bigramScore(plain)
+            return scorePlaintext(plain)
         }
 
         var best = evaluate(pairs)
@@ -509,7 +515,7 @@ enum ExhaustiveCracker {
             best = bestScore
         }
 
-        // Replacement pass: pull each plug and see if a different partner scores better.
+        // Pull each selected plug once and keep a better replacement if one exists.
         for index in pairs.indices {
             let original = pairs[index]
             used[original.0] = false
@@ -584,8 +590,12 @@ func runExhaustiveSelfTest() {
     let reference = withPlugs.processText(ct)
     print("Reference plaintext (true key, true plugs):")
     print("  \(EnigmaAlphabet.string(from: reference))")
-    print(String(format: "  bigram=%.4f IC=%.4f\n",
+    let referenceTrigram = GermanTrigrams.scoreIfLoaded(reference)
+        .map { String(format: "%.4f", $0) } ?? "unavailable"
+    print(String(format: "  objective=%.4f bigram=%.4f trigram=%@ IC=%.4f\n",
+                 EnigmaSearchObjective.score(reference),
                  LanguageScorer.bigramScore(reference),
+                 referenceTrigram as NSString,
                  LanguageScorer.indexOfCoincidence(reference)))
 
     let engine = M4ShellSweepEngine.make(ciphertext: ct)
@@ -628,11 +638,18 @@ func runExhaustiveSelfTest() {
     var matches = 0
     for (a, b) in zip(recovered, expected) where a == b { matches += 1 }
     print("Level 2 — stecker hill-climb from the TRUE rotor setting")
+    print("  objective: \(EnigmaSearchObjective.description)")
     print("  recovered: \(recovered)")
     print(String(format: "  letters correct: %d/%d (%.0f%%)",
                  matches, expected.count, 100.0 * Double(matches) / Double(expected.count)))
-    print(String(format: "  bigram=%.4f (true plugs: %.4f)",
-                 climbed.score, LanguageScorer.bigramScore(reference)))
+    print(String(format: "  objective=%.4f (true plugs: %.4f)",
+                 climbed.score, EnigmaSearchObjective.score(reference)))
+    let recoveredTrigram = GermanTrigrams.scoreIfLoaded(climbed.plain)
+        .map { String(format: "%.4f", $0) } ?? "unavailable"
+    print(String(format: "  bigram=%.4f trigram=%@ IC=%.4f",
+                 LanguageScorer.bigramScore(climbed.plain),
+                 recoveredTrigram as NSString,
+                 LanguageScorer.indexOfCoincidence(climbed.plain)))
     let foundPlugs = Set(climbed.pairs.map { Set([$0.0, $0.1]) })
     let truePlugs: Set<Set<Int>> = Set(
         [("C", "H"), ("E", "J"), ("N", "V"), ("O", "U"), ("T", "Y"),
@@ -642,17 +659,19 @@ func runExhaustiveSelfTest() {
     print("  plugs recovered: \(foundPlugs.intersection(truePlugs).count)/10 correct, "
         + "\(climbed.pairs.count) proposed\n")
 
-    // Level 3 — null distribution: what does the machine claim on the true rotors' rivals?
-    print("Level 3 — verdict on the recovered text")
-    let verdict = HostM4Bombe.evaluateBreak(plaintext: climbed.plain)
-    print(String(format: "  likeness=%.2f IC=%.4f cribs=%@",
-                 verdict.likeness,
+    // Level 3 — final assessment is separate from the ranking objective.
+    print("Level 3 — final assessment on the recovered text")
+    let assessment = EnigmaFinalAssessment.evaluate(plaintext: climbed.plain)
+    let verdict = assessment.coreVerdict
+    print(String(format: "  bigram-position=%.2f IC=%.4f trigram=%@ cribs=%@",
+                 verdict.bigramCalibrationPosition,
                  verdict.indexOfCoincidence,
+                 assessment.trigramScore.map { String(format: "%.4f", $0) } ?? "unavailable",
                  (verdict.strongCribHits.isEmpty
                     ? "(none)" : verdict.strongCribHits.joined(separator: ", ")) as NSString))
-    print("  \(verdict.reason)")
+    print("  \(assessment.reason)")
     print("")
-    print("Read this as the ceiling: P1030680 cannot do better than this rehearsal.")
+    print("Read this as a known-shell diagnostic, not a target ceiling: this rehearsal remains NO BREAK.")
 }
 
 // MARK: - CLI entry
@@ -705,10 +724,11 @@ func runExhaustiveCracker() {
                 .joined(separator: " ")
         print(
             String(
-                format: "#%02d score=%.4f bigram=%.4f IC=%.4f  UKW%@ %@ %@-%@-%@ rings=%@ pos=%@",
+                format: "#%02d objective=%.4f attack=%.4f bigram=%.4f IC=%.4f  UKW%@ %@ %@-%@-%@ rings=%@ pos=%@",
                 rank + 1,
+                candidate.objectiveScore,
                 candidate.attackScore,
-                candidate.bigram,
+                candidate.bigramScore,
                 candidate.ic,
                 ukw as NSString,
                 greek as NSString,
@@ -721,20 +741,24 @@ func runExhaustiveCracker() {
         )
         print("    stecker: \(plugs)")
         print("    plain:   \(candidate.plaintext)")
-        let verdict = HostM4Bombe.evaluateBreak(
+        let assessment = EnigmaFinalAssessment.evaluate(
             plaintext: EnigmaAlphabet.normalize(candidate.plaintext)
         )
+        let verdict = assessment.coreVerdict
         print(
             String(
-                format: "    verdict: likeness=%.2f cribs=%@",
-                verdict.likeness,
+                format: "    assessment: bigram-position=%.2f trigram=%@ cribs=%@",
+                verdict.bigramCalibrationPosition,
+                assessment.trigramScore.map { String(format: "%.4f", $0) } ?? "unavailable",
                 (verdict.strongCribHits.isEmpty
                     ? "(none)"
                     : verdict.strongCribHits.joined(separator: ", ")) as NSString
             )
         )
-        if verdict.isPossibleBreak {
-            print("    *** POSSIBLE BREAK *** \(verdict.reason)")
+        if assessment.isPossibleBreak {
+            print("    *** POSSIBLE BREAK *** \(assessment.reason)")
+        } else {
+            print("    \(assessment.reason)")
         }
     }
     print("")

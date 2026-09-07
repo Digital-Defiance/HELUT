@@ -1,0 +1,74 @@
+{
+  "schema": "helut-encrypted-bound-preregister-v1",
+  "utc": "2026-09-06T01:43:26Z",
+  "designEscalation": {
+    "fromPreregister": "logs/helut-encrypted-bound-20260906T012213Z-preregister.json",
+    "fromPreregisterSHA256": "61a17c894adc696e85346fb173c536eb6793bbdc186a21b52a1e042d72de81f7",
+    "fromRawLog": "logs/helut-encrypted-bound-20260906T012213Z-t32-k14.raw.log",
+    "fromRawLogSHA256": "9b08d9b32a0a1022669df32b8eb996006c53290be717b5443d3440e8daa956de",
+    "observedK14": {
+      "identityTrials": 32,
+      "maxAbsError": 3369752,
+      "sigmaUpper95": 1774113.6388565525,
+      "eventCount": 24,
+      "unionFailureLog2": -48.183293522830674,
+      "clearsTarget": false
+    },
+    "powerAnalysis": {
+      "formula": "Project Wilson-Hilferty one-sided 95% chi-square sigma bound plus two-sided Gaussian tail and a 24-event union bound.",
+      "derivedSigmaHat": 1405012.618470638,
+      "k14PointUnionFailureLog2": -77.886997673947,
+      "k14EstimatedSamplesToClear": 164,
+      "k16PointUnionFailureLog2": -102.183219741395,
+      "k16EstimatedSamplesToClear": 33,
+      "selectedSamples": 40
+    },
+    "reason": "The k=14 point estimate clears but 32 samples do not resolve the 95%-confidence circuit bound. A 164-sample k=14 run exceeds the execution window. k=16 is already a supported Boolean-scale value and widens only the Boolean decode/test-polynomial spacing; 40 samples are selected prospectively for margin above the calculated 33-sample threshold.",
+    "antiSelectionPolicy": "This is a declared parameter/design change, not a rerun of k=14 or selection among repeated outcomes. Preserve failure if the k=16 run does not clear."
+  },
+  "binarySHA256": "24b8355e4438fd401cb6f78677d567561610889d228a6c525e92ab4c6b199a42",
+  "netlist": "netlist.json",
+  "netlistSHA256": "d647afbd947b9b67e63505caa215209e559efc10aa8099fd10ad18cad5acb13c",
+  "argv": [
+    ".build/release/helut-bench",
+    "--bench",
+    "netlist.json",
+    "--degree",
+    "1024",
+    "--bench-encrypted",
+    "--sing",
+    "--vectors",
+    "8",
+    "--bk-noise-sigma",
+    "128",
+    "--bk-identity-trials",
+    "40",
+    "--paths",
+    "blind-rotate-metal public-ms covering-b2",
+    "--boolean-scale-mul",
+    "16"
+  ],
+  "environment": {
+    "HELUT_QUIET_METAL_BR_PROGRESS": "1"
+  },
+  "acceptance": {
+    "expectedPath": "blind-rotate-metal public-ms covering-b2",
+    "expectedPathBlocks": 1,
+    "rows": 8,
+    "exhaustiveFullAdderInputs": true,
+    "postBlindRotateEvents": 24,
+    "identityTrials": 40,
+    "confidenceLevel": 0.95,
+    "targetUnionFailureLog2AtMost": -64,
+    "requireZeroIdentityDecodeFailures": true,
+    "requireAllClearEncryptedOutputsMatch": true,
+    "requireClearsYes": true,
+    "requireResultPass": true,
+    "requireSummaryCertYes": true,
+    "rejectSkip": true,
+    "rejectDiagnosticOnly": true,
+    "rejectUnsafeNoisyBKDiagnostic": true
+  },
+  "failurePolicy": "Preserve an inconclusive or failing run. Do not weaken the gate or rerun to select a favorable sample.",
+  "claimBoundary": "If accepted, this is an exhaustive 8-row full-adder result and a 95%-confidence Gaussian residual union bound over this circuit's 24 post-blind-rotate events at N=n=1024, covering-b2, BK sigma 128, Boolean stride k=16. It is not a k=14 result; not an arbitrary-netlist/depth, fresh-input-noise, hard deterministic BK bound, or total-GPU-memory claim."
+}

@@ -1,0 +1,37 @@
+HELUT restricted structural evolution receipt
+schema=helut.tensorlut.structural-evolution.v1
+timestamp_utc=2026-09-06T00:34:50Z
+command=swift test -c release --filter TensorLUTStructuralEvolutionTests
+scope=combinational fixed-DAG LUT6 netlists only
+modes=table,constant0,constant1,bypass-existing-valid-pin
+ranking=mismatch_count,active_reachable_luts,output_cone_depth,support_edges,changed_mode_count
+ranking_order=lexicographic-minimum
+baseline_elite=retained-in-every-generation
+
+RESULT tests=5 failures=0 unexpected=0
+
+POSITIVE_CONTROL redundant_xor:
+  baseline mismatches=0 active_reachable_luts=3 output_cone_depth=2
+  evolved  mismatches=0 active_reachable_luts=1 output_cone_depth=1 support_edges=2 changed_modes=1
+  evolved_mode=lut2:bypass(pin0)
+  deterministic_repeat=same_genome_and_score
+
+CORRECTNESS_FIRST_NEGATIVE_CONTROL:
+  candidate=constant0-output
+  mismatches=2 active_reachable_luts=0
+  verdict=loses-to-correct-three-lut-baseline
+
+CORRUPTION_NEGATIVE_CONTROL:
+  mutation=flip-one-reachable-binary-init-entry
+  resulting_mismatches=1
+
+INVARIANTS:
+  constants and every valid bypass pin materialize to exact 64-entry binary INITs
+  frozen LUTs reject non-table materialization and remain table under mutation
+  exact support analysis propagates constants and bypass aliases before cone counting
+  graph validation rejects DFFs, malformed levels, duplicate drivers, self edges, and non-binary INITs
+
+CLAIM_BOUNDARY:
+  This is restricted structural degeneration over an already compiled acyclic graph.
+  It does not add/delete cells, introduce arbitrary rewiring, mutate execution levels,
+  handle sequential topology, or establish a post-ABC/physical area or timing win.

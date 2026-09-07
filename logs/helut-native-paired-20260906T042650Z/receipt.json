@@ -1,0 +1,188 @@
+{
+  "schema": "helut-native-paired-receipt-v1",
+  "verdict": {
+    "functional": "PASS",
+    "pairedPerformance": "NO_CROSSOVER_THROUGH_B65536",
+    "preregisteredProtocol": "PARTIAL",
+    "protocolGap": "The generated native harness executed five historical scalar trials per point but emitted only each scalar median/min/max, not the five raw scalar samples required by the preregistration. HELUT graph, HELUT end-to-end, native parallel prepared, and native parallel end-to-end raw samples are complete."
+  },
+  "preregister": {
+    "path": "logs/helut-native-paired-20260906T042650Z/preregister.json",
+    "sha256": "d28db49a66b469a343d1a94422b0ca3764f1aff612d66c84f15f8ef6173dab85"
+  },
+  "execution": {
+    "commandMatchedPreregister": true,
+    "requestedWorkers": 16,
+    "timedTrialsPerPoint": 5,
+    "xctestFooter": "Executed 1 test, with 0 failures (0 unexpected)",
+    "xctestDurationSeconds": 3.998,
+    "toolTransportExitCode": -1,
+    "toolTransportNote": "The execution transport reported its known synthetic -1 despite the XCTest PASS footer and complete harness output. Acceptance relies on the XCTest footer and internal fail-closed digest checks.",
+    "verilatorBuildSecondsExcluded": 1.90,
+    "result": "PASS"
+  },
+  "fixture": {
+    "module": "ripple_adder",
+    "emittedLUT6": 16,
+    "mappedLUTs": 14,
+    "declaredInputBits": 17,
+    "functionalInputBits": 16,
+    "outputBits": 9,
+    "mappedDFFs": 0,
+    "resynthSHA256": "84ba190a62302f886b63f7607480b0e3f50f27b380f139ce91bb178fac8164fb",
+    "note": "The exact mapped JSON hash equals the previously banked production B=65536 artifact embedded in logs/helut-production-distinct-b65536-20260906T035827Z/workload.json. Readable sources and the new native driver are banked here."
+  },
+  "rows": [
+    {
+      "lanes": 1,
+      "workers": 1,
+      "digest": "8f9f7fb8cfd7dde2",
+      "helutGraphMedianSeconds": 0.002560973,
+      "nativeScalarEndToEndMedianSeconds": 0.000000125,
+      "helutEndToEndMedianSeconds": 0.001814008,
+      "nativeParallelPreparedMedianSeconds": 0.000007791,
+      "nativeParallelEndToEndMedianSeconds": 0.000008042,
+      "helutGraphSamplesNanoseconds": [2655983, 2928972, 2560973, 1937985, 1734018],
+      "helutEndToEndSamplesNanoseconds": [1793981, 1889944, 1971006, 1814008, 1757026],
+      "nativeParallelPreparedSamplesNanoseconds": [8416, 7500, 7791, 4959, 10125],
+      "nativeParallelEndToEndSamplesNanoseconds": [8875, 7792, 8042, 5084, 10375]
+    },
+    {
+      "lanes": 16,
+      "workers": 16,
+      "digest": "84c0b917691450a5",
+      "helutGraphMedianSeconds": 0.002639055,
+      "nativeScalarEndToEndMedianSeconds": 0.000002209,
+      "helutEndToEndMedianSeconds": 0.001945972,
+      "nativeParallelPreparedMedianSeconds": 0.000072167,
+      "nativeParallelEndToEndMedianSeconds": 0.000074375,
+      "helutGraphSamplesNanoseconds": [2741933, 3119946, 2639055, 2115011, 1973987],
+      "helutEndToEndSamplesNanoseconds": [1945972, 1967072, 1977921, 1785994, 1785994],
+      "nativeParallelPreparedSamplesNanoseconds": [80792, 83292, 52542, 72167, 71334],
+      "nativeParallelEndToEndSamplesNanoseconds": [83250, 85500, 54833, 74375, 73875]
+    },
+    {
+      "lanes": 256,
+      "workers": 16,
+      "digest": "aa0c5f15c933c725",
+      "helutGraphMedianSeconds": 0.003005981,
+      "nativeScalarEndToEndMedianSeconds": 0.000026083,
+      "helutEndToEndMedianSeconds": 0.002162933,
+      "nativeParallelPreparedMedianSeconds": 0.000067042,
+      "nativeParallelEndToEndMedianSeconds": 0.000095375,
+      "helutGraphSamplesNanoseconds": [3005981, 3358006, 3027916, 2218008, 2033949],
+      "helutEndToEndSamplesNanoseconds": [2219081, 2388000, 2088904, 2153993, 2162933],
+      "nativeParallelPreparedSamplesNanoseconds": [59916, 71458, 67042, 67250, 65500],
+      "nativeParallelEndToEndSamplesNanoseconds": [92792, 104500, 95375, 96333, 94500]
+    },
+    {
+      "lanes": 1024,
+      "workers": 16,
+      "digest": "25bc9c05761bbee5",
+      "helutGraphMedianSeconds": 0.002834916,
+      "nativeScalarEndToEndMedianSeconds": 0.000103083,
+      "helutEndToEndMedianSeconds": 0.002547979,
+      "nativeParallelPreparedMedianSeconds": 0.000073750,
+      "nativeParallelEndToEndMedianSeconds": 0.000180083,
+      "helutGraphSamplesNanoseconds": [2834916, 3399968, 3039956, 2043009, 2039075],
+      "helutEndToEndSamplesNanoseconds": [2648950, 2547979, 2531052, 2508044, 2709031],
+      "nativeParallelPreparedSamplesNanoseconds": [92708, 61083, 73750, 78375, 69416],
+      "nativeParallelEndToEndSamplesNanoseconds": [205959, 180083, 179458, 184709, 174417]
+    },
+    {
+      "lanes": 4096,
+      "workers": 16,
+      "digest": "53efd78eadd2ee5",
+      "helutGraphMedianSeconds": 0.003046036,
+      "nativeScalarEndToEndMedianSeconds": 0.000469208,
+      "helutEndToEndMedianSeconds": 0.003857970,
+      "nativeParallelPreparedMedianSeconds": 0.000072750,
+      "nativeParallelEndToEndMedianSeconds": 0.000503083,
+      "helutGraphSamplesNanoseconds": [3160000, 3473997, 3046036, 2742052, 2081990],
+      "helutEndToEndSamplesNanoseconds": [3787041, 3857970, 3983021, 3765941, 3885031],
+      "nativeParallelPreparedSamplesNanoseconds": [105625, 72750, 74041, 67500, 71125],
+      "nativeParallelEndToEndSamplesNanoseconds": [505292, 503083, 557333, 482500, 483750]
+    },
+    {
+      "lanes": 16384,
+      "workers": 16,
+      "digest": "5bae3d89c7c044e5",
+      "helutGraphMedianSeconds": 0.003304958,
+      "nativeScalarEndToEndMedianSeconds": 0.001793541,
+      "helutEndToEndMedianSeconds": 0.009482026,
+      "nativeParallelPreparedMedianSeconds": 0.000137959,
+      "nativeParallelEndToEndMedianSeconds": 0.001916625,
+      "helutGraphSamplesNanoseconds": [3443956, 3774047, 3304958, 1979947, 2171993],
+      "helutEndToEndSamplesNanoseconds": [9549975, 9896040, 9401917, 9482026, 9370923],
+      "nativeParallelPreparedSamplesNanoseconds": [197917, 144667, 121500, 124584, 137959],
+      "nativeParallelEndToEndSamplesNanoseconds": [1928541, 1916625, 1713625, 1819875, 1936958]
+    },
+    {
+      "lanes": 32768,
+      "workers": 16,
+      "digest": "f79eaea4cb7276a5",
+      "helutGraphMedianSeconds": 0.002191067,
+      "nativeScalarEndToEndMedianSeconds": 0.003578250,
+      "helutEndToEndMedianSeconds": 0.016448021,
+      "nativeParallelPreparedMedianSeconds": 0.000182792,
+      "nativeParallelEndToEndMedianSeconds": 0.003693042,
+      "helutGraphSamplesNanoseconds": [4199028, 3709078, 2184987, 2049923, 2191067],
+      "helutEndToEndSamplesNanoseconds": [16101003, 17482996, 17158031, 16315937, 16448021],
+      "nativeParallelPreparedSamplesNanoseconds": [172917, 167167, 188417, 182792, 191042],
+      "nativeParallelEndToEndSamplesNanoseconds": [3728375, 3386667, 3693042, 3472750, 3735834]
+    },
+    {
+      "lanes": 65536,
+      "workers": 16,
+      "digest": "52f209ab0358725",
+      "helutGraphMedianSeconds": 0.002377033,
+      "nativeScalarEndToEndMedianSeconds": 0.007491167,
+      "helutEndToEndMedianSeconds": 0.033419967,
+      "nativeParallelPreparedMedianSeconds": 0.000247333,
+      "nativeParallelEndToEndMedianSeconds": 0.006980333,
+      "helutGraphSamplesNanoseconds": [4560947, 4641056, 2377033, 2303004, 2166986],
+      "helutEndToEndSamplesNanoseconds": [33110976, 33419967, 34975052, 33234000, 33524036],
+      "nativeParallelPreparedSamplesNanoseconds": [272500, 245000, 274958, 244917, 247333],
+      "nativeParallelEndToEndSamplesNanoseconds": [7164334, 6963042, 6906625, 6980333, 7007125]
+    }
+  ],
+  "conclusions": {
+    "historicalFirstTestedGraphWinLanes": 32768,
+    "historicalB65536ScalarTimeOverGraphTime": 3.15147791385311,
+    "pairedCrossoverThroughB65536": false,
+    "pairedB65536HELUTTimeOverNativeTime": 4.787732476373262,
+    "preparedB65536HELUTGraphTimeOverNativePreparedTime": 9.6106585049306,
+    "b65536HELUTHostAndVerificationOverheadSeconds": 0.031042934,
+    "statement": "The old asymmetric graph-versus-scalar crossover remains visible, but a materially closer input-through-digest comparison against 16 persistent native workers shows no HELUT win through B=65536. At B=65536 HELUT end-to-end took 4.788x the native time; even the prepared graph-versus-parallel-eval diagnostic favored native by 9.611x."
+  },
+  "artifacts": {
+    "rawLog": {
+      "path": "logs/helut-native-paired-20260906T042650Z/raw.log",
+      "sha256": "4a1dd15cc8b385dccc736aded6bcb83138a6632d4fd0aa0ae500084ff5f493f0"
+    },
+    "emitted.v": "8ba6dc328983119bd3b2236438f3431d5d54f530710fe73d6512359dd51c6a5e",
+    "lut6.v": "4c9d11388c4385f5fecc293d6c54a44abe830878cc2832993ce4ff6de7905e66",
+    "flow.ys": "40dc7c3526448219a5eca28fa8102c90129d3a031f0ab46e9c1ab70f2848952a",
+    "tb.cpp": "4e1ec4a70ab573b34004d036d177ba17882031a27e1ca557b6e1d0884f8cc699",
+    "generatedNativeBinarySHA256": "ec041a41b25dbc31a64874635a8f5668f9af499ce060b477fbc8f75d5446c81d",
+    "measuredResynthSHA256": "84ba190a62302f886b63f7607480b0e3f50f27b380f139ce91bb178fac8164fb"
+  },
+  "acceptance": {
+    "xctestPassed": true,
+    "allLanePointsPresent": true,
+    "allDigestsStableAndEqual": true,
+    "b65536Exhaustive": true,
+    "speedupWasNotRequired": true,
+    "allRawSamplesPresent": false,
+    "preregisterFullySatisfied": false
+  },
+  "nextLever": "Emit the five historical scalar nanosecond samples, bank this protocol-partial run unchanged, create a new preregistration tied to the changed source hash, and rerun the same lane/worker/trial configuration. Do not alter the measured loops or use a favorable rerun to replace this result.",
+  "claimBoundaries": [
+    "One combinational 8-bit ripple adder on one Mac16,5 host.",
+    "HELUT uses release Swift/MPSGraph over the post-ABC 14-LUT netlist; native uses optimized generated C++ over the common emitted Verilog lineage.",
+    "Workers are scheduler-managed and unpinned.",
+    "The paired scope is closer but not a pure kernel or language-neutral comparison.",
+    "No end-to-end or parallel-native crossover was observed through B=65536.",
+    "This does not invalidate the separately labeled historical graph-versus-scalar measurement; it narrows what that measurement means."
+  ]
+}

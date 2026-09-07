@@ -1481,9 +1481,9 @@ private func runAttackPhase(_ phase: AttackPhase, ciphertext: [Int]) -> Bool {
     )
     print(
         String(
-            format: "Calibration — known German %.2f, ciphertext %.2f",
-            HostM4Bombe.germanLikeness(plaintext: germanReference),
-            HostM4Bombe.germanLikeness(plaintext: ciphertext)
+            format: "Bigram calibration position — known German %.2f, ciphertext %.2f",
+            HostM4Bombe.bigramCalibrationPosition(plaintext: germanReference),
+            HostM4Bombe.bigramCalibrationPosition(plaintext: ciphertext)
         )
     )
 
@@ -1491,18 +1491,22 @@ private func runAttackPhase(_ phase: AttackPhase, ciphertext: [Int]) -> Bool {
         print("NO BREAK. Phase produced no candidates.")
         return false
     }
-    let verdict = HostM4Bombe.evaluateBreak(plaintext: EnigmaAlphabet.normalize(winner.plaintext))
+    let assessment = EnigmaFinalAssessment.evaluate(
+        plaintext: EnigmaAlphabet.normalize(winner.plaintext)
+    )
+    let verdict = assessment.coreVerdict
     print(
         String(
-            format: "Best — likeness %.2f IC %.4f strong cribs: %@",
-            verdict.likeness,
+            format: "Best — bigram-position %.2f IC %.4f trigram %@ strong cribs: %@",
+            verdict.bigramCalibrationPosition,
             verdict.indexOfCoincidence,
+            assessment.trigramScore.map { String(format: "%.4f", $0) } ?? "unavailable",
             (verdict.strongCribHits.isEmpty ? "(none)" : verdict.strongCribHits.joined(separator: ", "))
                 as NSString
         )
     )
-    print(verdict.reason)
-    return verdict.isPossibleBreak
+    print(assessment.reason)
+    return assessment.isPossibleBreak
 }
 
 private func printCribDragReport(ciphertext: [Int]) {
