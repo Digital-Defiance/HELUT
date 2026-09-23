@@ -19,6 +19,52 @@ The same-state reciprocal shape is a design target. The evidence below is
 finite: only checks explicitly called exhaustive are exhaustive, and key/state
 coverage remains bounded.
 
+\paragraph{Open E256-H/X0 hardware and policy measurements.}
+The E256-061/062/063 hardware and X0 checks remain
+\texttt{OPEN\_PROGRESS} and have no C/H/N row. Their complete dependency-ordered
+reproduction commands, receipt digests, and non-claims are in
+\corpus{REPRODUCE.md}. The three latest gates can be re-checked directly with:
+\begin{itemize}[nosep]
+  \item \texttt{make e256-hw-h2-check};
+  \item \texttt{make e256-hw-h4-sequence-check};
+  \item \texttt{make e256-x0-h4-evolution-check}.
+\end{itemize}
+The H4 census validly found that 737,280 of 1,474,560 preregistered mixed
+three-round windows fail the exact all-to-all byte-dependency criterion. Its
+first frozen-order witness uses list indices $[1,2,3]$---tuples
+$(0,1,3,4)$, $(0,1,4,3)$, and $(0,1,4,7)$---where output lane 0 lacks input
+lanes $[6,11,24,29]$. The sequence-specific H3 collapse passed 442,368 exact
+comparisons; integrated RTL/model and per-input cycle evidence passed 55,296
+comparisons each; and all 19 controls were detected.
+
+X0 then checked the exact criterion $S(y)+S(z)=\mathbb{Z}_8$ for all 147,456
+ordered catalog pairs using independent literal and sumset implementations.
+Exactly 73,728 directed transitions are safe and every node has in/out degree
+192. The full graph has two 192-node strongly connected components; the
+16-support quotient has two 8-node components and no Hamiltonian cycle. The
+frozen fallback certificate alternates catalog indices 0 and 3 for twelve
+selectors and verifies all 11 adjacent transitions. All 23 X0 controls were
+detected. This proves only the represented contiguous three-round structural
+dependency windows; the two components prevent one safe walk from covering all
+16 supports.
+
+The generic Yosys/ABC sequence-minus-repeated observations were:
+\begin{itemize}
+  \item FF storage: $-407$ LUT6, $+132$ state bits, $-275$ primitive
+        cells, and $+1$ combinational level;
+  \item ring storage: $-57$ LUT6, $+132$ state bits, $+75$ primitive
+        cells, and $+1$ combinational level.
+\end{itemize}
+There was no threshold or winner. Negative LUT deltas from separate generic
+mappings are not physical selector savings. The H4 counterexample parks
+unrestricted arithmetic switching; X0 supplies a bounded safe-transition
+grammar and path, not a production evolution mechanism. Neither result inherits
+the fixed-tuple four-round/25-active-S-box statement. These are generic
+mapped-RTL measurements, bounded falsification, and host-side structural
+evidence only---not a theorem or course-ready laboratory result. They select no
+architecture, storage organization, round count, schedule, XOF, H4 policy,
+suite, protocol, production RTL, cryptanalytic result, or security value.
+
 \section{Fixture-v4 evidence capsule (scaffold)}
 
 \begin{itemize}

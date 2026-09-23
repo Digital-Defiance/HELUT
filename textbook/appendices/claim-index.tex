@@ -29,10 +29,11 @@ ID & Result \emph{(continued)} \\
 \cid{5} & Certificates on encrypted ticks. \\
 \cid{6} & Encrypted $\equiv$ clear multi-netlist SING; adder $N\le 1024$. \\
 \cid{7} & Metal 1-LUT BR microbench (fused ancestor numbers). \\
-\cid{8} & TensorLUT M4 baseline $F_{\mathrm{crypto}}=0$ $+$ Verilog emit; emitted
-Verilog re-synthesizes through Yosys and is functionally equivalent on the 4-LUT
-design (exhaustive, with negative control). M4 baseline still not regenerable
-end-to-end. \\
+\cid{8} & TensorLUT M4 baseline $F_{\mathrm{crypto}}=0$ $+$ Verilog emit. The
+restored generic per-netlist CLI regenerates the 925-LUT / 49-DFF artifact
+exactly, including all 59,200 INIT floats. Emitted Verilog re-synthesizes through
+Yosys and is functionally equivalent on the 4-LUT design over all 16 inputs,
+with a one-INIT-bit negative control. \\
 \cid{9} & Stecker involution sandwich; blind 3-pair PASS. \\
 \cid{10} & Enigma256 fixture-v4 bounded reciprocity / conjugated-XOR / KAT parity for the schema-4 \texttt{E256-v2/gen0} native profile; full E256 suite \textbf{49/49 PASS}; center $A_i^{-1}(A_i(x)\oplus k_i)$; receipt \texttt{logs/e256-v2-gen0-fixture-v4-validation.json}. Bounded implementation / parity evidence---not IND-CPA, an HMAC proof, external cryptanalysis, or human acceptance. \\
 \cid{11} & Potsdam/Plaice keys $\neq$ P1030680. \\
@@ -70,7 +71,10 @@ end-to-end. \\
 \cid{43} & $k\delta$ encoding at $N{=}1024$ covering-b1 $\sigma{=}128$: $k{=}4$ Metal SING PASS but $\varepsilon\log_2=-34.1$ settled at $n{=}32$, short of the bar. $k{=}8$ meets \emph{both} --- $\varepsilon$ bound $-113.6$ and SING PASS; its recorded SING FAIL predated the 2026-08-15 determinism fix. \\
 \cid{44} & TensorLUT melt--freeze--snap on a separable Boolean interpolant (three lemmas). Not arbitrary-netlist melt. \\
 \cid{45} & Encrypted PicoRV32 1-tick SING at demo $N{=}8$: $76.12\,\mathrm{ms}$/row; 4-bit hardness. Not production $N$. \\
-\cid{46} & Encrypted PicoRV32 10-tick \texttt{resetn} boot SING at $N{=}8$: $0.972\,\mathrm{s}/10$; $Q$ $\equiv$ clear. Plain \texttt{\$\_DFF\_P\_} native-$D$ fix. \\
+\cid{46} & Encrypted PicoRV32 10-tick \texttt{resetn} boot SING at $N{=}8$:
+median $0.473\,\mathrm{s}/10$ over five runs, 0.7\% spread; $Q\equiv$ clear.
+The archived $0.972\,\mathrm{s}/10$ predates the sequential wavefront and is
+stale. Plain \texttt{\$\_DFF\_P\_} native-$D$ fix. \\
 \cid{47} & Encrypted PicoRV32 NOP-fetch: 10 instruction fetches, PC $0{+}4k$ through $0x24$; $3.15\,\mathrm{s}/32$. \\
 \cid{48} & 2-LUT cascade melt--snap--emit $(a\land b)\oplus c$; 8-corner SING of snapped INIT (dual interpolant OK). \\
 \cid{49} & Encrypted PicoRV32 \texttt{addi}+\texttt{sw}: store \texttt{wdata}=1, RAM0=1; $3.79\,\mathrm{s}/48$ @ demo $N{=}8$. Load-back is \cid{50}. \\
@@ -81,7 +85,12 @@ end-to-end. \\
 \cid{54} & Sequential covering-b1 toy ISA @ $N{=}1024$ $\sigma{=}128$ $k{=}7$: Metal secret/public-ms SING PASS. Not PicoRV. \\
 \cid{55} & Native $k{=}1$ covering-b1 $\sigma{=}128$ LWE-$n$ map @ poly $N{=}1024$: decodable at $n\le 512$ but $\varepsilon>-64$; $n{=}1024$ undecodable (\cid{37}). \\
 \cid{56} & \texttt{cryptoPublicMS} $B{=}1$ $k{=}7$: identity decodable $\varepsilon\approx-12.6$; Metal public-ms SING FAIL. Torus $\sigma{=}128$ still undecodable. \\
-\cid{57} & Covering-b2 $k{=}7$ $\sigma{=}128$ @ $N{=}1024$: $\varepsilon\log_2=-60.5$ at $k{=}7$, short of the bar; stride $k{=}14$ clears it ($-319.3$, 95\% bound $-200.5$) with SING still PASS; Metal public-ms adder $10.33\,\mathrm{s}/1$ + regex 23 LUT $26.69\,\mathrm{s}/1$ PASS. b4 public-ms and E256 covering-b2 FAIL. \\
+\cid{57} & Covering-b2 ($\ell{=}16$) at $N{=}n{=}1024$, $\sigma{=}128$:
+historical $k{=}7$ is short of the $-64$ bar. The integrated preregistered
+$k{=}14$, 192-trial run gives a 24-event bound of $-93.8005$ and then full-adder
+SING \textbf{8/8 PASS} (48.1757\,s evaluation; 969.48\,s end to end). Exact
+noiseless primary inputs and Gaussian statistical circuit scope---not a hard BK
+bound, fresh-input-noise result, or arbitrary-netlist/depth certificate. \\
 \cid{58} & PicoRV32 \texttt{abc -lut 6}: $2006$ LUT ($-58\%$) + CPU boolean SING PASS @ $N{=}64$ ($1.35\,\mathrm{s}$). Not covering / not $N{=}1024$. \\
 \cid{59} & Sequential wavefront: PicoRV lut6 $N{=}64$ CPU boolean $0.165\,\mathrm{s}/1$ (${\sim}8.2\times$ vs \cid{58}). \\
 \cid{60} & PicoRV lut6 covering-b2 $k{=}7$ @ $N{=}1024$: Metal 1-tick Q SING FAIL (${\sim}33$\,min, DFF want$=0$ got$=1$). Confirmed \emph{structural} by a post-fix re-run failing at the identical cell. \\

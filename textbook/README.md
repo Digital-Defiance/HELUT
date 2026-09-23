@@ -7,7 +7,7 @@ Canonical TeX for a **long-term living textbook** of **reconfigurable homomorphi
 | Artifact | Path |
 |----------|------|
 | Master file | [`helut-living-textbook.tex`](helut-living-textbook.tex) |
-| Epoch / edition | `\livingepoch` in [`preamble.tex`](preamble.tex) — currently **2026-08-14 / C69**, edition **0.1.2** |
+| Epoch / edition | `\livingepoch` in [`preamble.tex`](preamble.tex) — currently **2026-08-20 / C69**, edition **0.1.2** |
 | Corpus of record | [`../directives/claim-sheet.md`](../directives/claim-sheet.md) |
 | Trajectory | [`../directives/research-trajectory.md`](../directives/research-trajectory.md) |
 | Frontier (not claims) | [`../directives/potential-avenues.md`](../directives/potential-avenues.md) |
