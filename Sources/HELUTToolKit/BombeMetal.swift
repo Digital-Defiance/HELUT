@@ -26,6 +26,55 @@ private let welchmanMaxUpper = 8
 /// on an engine that has no such cap. Reporting 0 there would silently discard a key.
 let welchmanUndecidedMask: UInt32 = 0x03FF_FFFF
 
+enum WelchmanMenuPackingError: Error, Equatable {
+    case invalidEdgeCount(Int)
+    case parallelArrayMismatch(steps: Int, ends: Int)
+    case endpointOutOfRange(edge: Int, a: Int, b: Int)
+    case stepOutOfRange(edge: Int, step: Int)
+    case centralOutOfRange(Int)
+}
+
+struct PackedWelchmanMenu: Equatable {
+    let edgeA: [UInt8]
+    let edgeB: [UInt8]
+    let edgeStep: [UInt8]
+    let central: UInt32
+}
+
+/// Fail-closed host packing shared by legacy, splice, and constellation menus.
+/// No integer is narrowed until every value has been proved representable.
+func packWelchmanMenu(_ menu: BombeMenu) throws -> PackedWelchmanMenu {
+    guard (1...welchmanMaxEdges).contains(menu.edgeCount) else {
+        throw WelchmanMenuPackingError.invalidEdgeCount(menu.edgeCount)
+    }
+    guard menu.steps.count == menu.ends.count else {
+        throw WelchmanMenuPackingError.parallelArrayMismatch(
+            steps: menu.steps.count, ends: menu.ends.count
+        )
+    }
+    guard (0..<26).contains(menu.central) else {
+        throw WelchmanMenuPackingError.centralOutOfRange(menu.central)
+    }
+    var a: [UInt8] = [], b: [UInt8] = [], steps: [UInt8] = []
+    a.reserveCapacity(menu.edgeCount); b.reserveCapacity(menu.edgeCount)
+    steps.reserveCapacity(menu.edgeCount)
+    for index in menu.ends.indices {
+        let edge = menu.ends[index], step = menu.steps[index]
+        guard (0..<26).contains(edge.0), (0..<26).contains(edge.1) else {
+            throw WelchmanMenuPackingError.endpointOutOfRange(
+                edge: index, a: edge.0, b: edge.1
+            )
+        }
+        guard (0...255).contains(step) else {
+            throw WelchmanMenuPackingError.stepOutOfRange(edge: index, step: step)
+        }
+        a.append(UInt8(edge.0)); b.append(UInt8(edge.1)); steps.append(UInt8(step))
+    }
+    return PackedWelchmanMenu(
+        edgeA: a, edgeB: b, edgeStep: steps, central: UInt32(menu.central)
+    )
+}
+
 /// Largest garble tolerance the kernel enumerates — owned by `MuleinBoard`, which explains
 /// why the bound is structural (Metal has no recursion, so drop-set loops are unrolled) and
 /// carries the cost model in `MuleinBoard.closuresPerSeed`. Above this, the host board in
@@ -315,7 +364,7 @@ final class WelchmanMetalEngine {
 
     /// Encode and commit; blocks only if every pipeline slot is already in flight.
     func enqueue(shell: WelchmanShell) -> WelchmanInFlight? {
-        guard shell.menu.edgeCount <= welchmanMaxEdges else { return nil }
+        guard let packed = try? packWelchmanMenu(shell.menu) else { return nil }
         slotsAvailable.wait()
 
         lock.lock()
@@ -333,11 +382,11 @@ final class WelchmanMetalEngine {
         }
 
         let menu = shell.menu
-        let edgeA = menu.ends.map { UInt8($0.0) }
-        let edgeB = menu.ends.map { UInt8($0.1) }
-        let edgeStep = menu.steps.map { UInt8($0) }
+        let edgeA = packed.edgeA
+        let edgeB = packed.edgeB
+        let edgeStep = packed.edgeStep
         var edgeCount = UInt32(menu.edgeCount)
-        var central = UInt32(menu.central)
+        var central = packed.central
 
         encoder.setComputePipelineState(pipeline)
         encoder.setBytes(edgeA, length: edgeA.count, index: 0)

@@ -1,0 +1,489 @@
+{
+  "schemaVersion": 2,
+  "target": "P1030680",
+  "ciphertext": "JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF",
+  "note": "Joint Selm/HELUT Phase-55 constellation: two independently attested strings compete at independent offsets. No plaintext between FFFTTTBLEIBTBESETZT and NEUSTADT is asserted. Both are repo-verbatim: the first in P1030668, the second in P1030669/P1030693; Selm's Volksliste III/KTB research links occupied radio/scuttling context with Neustadt transfer. Single-component rows only, with each anchor offset used at most twice; staged plan evaluates no settings.",
+  "cribs": [],
+  "constellations": [
+    {
+      "id": "wenselaers-procedure-neustadt-001",
+      "anchors": [
+        {
+          "text": "FFFTTTBLEIBTBESETZT",
+          "offset": 15
+        },
+        {
+          "text": "NEUSTADT",
+          "offset": 42
+        }
+      ],
+      "selectionReceipt": {
+        "edges": 27,
+        "letters": 19,
+        "components": 1,
+        "loops": 9,
+        "stepHorizon": 50
+      }
+    },
+    {
+      "id": "wenselaers-procedure-neustadt-002",
+      "anchors": [
+        {
+          "text": "FFFTTTBLEIBTBESETZT",
+          "offset": 17
+        },
+        {
+          "text": "NEUSTADT",
+          "offset": 42
+        }
+      ],
+      "selectionReceipt": {
+        "edges": 27,
+        "letters": 19,
+        "components": 1,
+        "loops": 9,
+        "stepHorizon": 50
+      }
+    },
+    {
+      "id": "wenselaers-procedure-neustadt-003",
+      "anchors": [
+        {
+          "text": "FFFTTTBLEIBTBESETZT",
+          "offset": 15
+        },
+        {
+          "text": "NEUSTADT",
+          "offset": 43
+        }
+      ],
+      "selectionReceipt": {
+        "edges": 27,
+        "letters": 19,
+        "components": 1,
+        "loops": 9,
+        "stepHorizon": 51
+      }
+    },
+    {
+      "id": "wenselaers-procedure-neustadt-004",
+      "anchors": [
+        {
+          "text": "FFFTTTBLEIBTBESETZT",
+          "offset": 17
+        },
+        {
+          "text": "NEUSTADT",
+          "offset": 43
+        }
+      ],
+      "selectionReceipt": {
+        "edges": 27,
+        "letters": 19,
+        "components": 1,
+        "loops": 9,
+        "stepHorizon": 51
+      }
+    },
+    {
+      "id": "wenselaers-procedure-neustadt-005",
+      "anchors": [
+        {
+          "text": "FFFTTTBLEIBTBESETZT",
+          "offset": 18
+        },
+        {
+          "text": "NEUSTADT",
+          "offset": 38
+        }
+      ],
+      "selectionReceipt": {
+        "edges": 27,
+        "letters": 20,
+        "components": 1,
+        "loops": 8,
+        "stepHorizon": 46
+      }
+    },
+    {
+      "id": "wenselaers-procedure-neustadt-006",
+      "anchors": [
+        {
+          "text": "FFFTTTBLEIBTBESETZT",
+          "offset": 18
+        },
+        {
+          "text": "NEUSTADT",
+          "offset": 39
+        }
+      ],
+      "selectionReceipt": {
+        "edges": 27,
+        "letters": 20,
+        "components": 1,
+        "loops": 8,
+        "stepHorizon": 47
+      }
+    },
+    {
+      "id": "wenselaers-procedure-neustadt-007",
+      "anchors": [
+        {
+          "text": "FFFTTTBLEIBTBESETZT",
+          "offset": 28
+        },
+        {
+          "text": "NEUSTADT",
+          "offset": 14
+        }
+      ],
+      "selectionReceipt": {
+        "edges": 27,
+        "letters": 20,
+        "components": 1,
+        "loops": 8,
+        "stepHorizon": 47
+      }
+    },
+    {
+      "id": "wenselaers-procedure-neustadt-008",
+      "anchors": [
+        {
+          "text": "FFFTTTBLEIBTBESETZT",
+          "offset": 28
+        },
+        {
+          "text": "NEUSTADT",
+          "offset": 15
+        }
+      ],
+      "selectionReceipt": {
+        "edges": 27,
+        "letters": 20,
+        "components": 1,
+        "loops": 8,
+        "stepHorizon": 47
+      }
+    },
+    {
+      "id": "wenselaers-procedure-neustadt-009",
+      "anchors": [
+        {
+          "text": "FFFTTTBLEIBTBESETZT",
+          "offset": 10
+        },
+        {
+          "text": "NEUSTADT",
+          "offset": 45
+        }
+      ],
+      "selectionReceipt": {
+        "edges": 27,
+        "letters": 20,
+        "components": 1,
+        "loops": 8,
+        "stepHorizon": 53
+      }
+    },
+    {
+      "id": "wenselaers-procedure-neustadt-010",
+      "anchors": [
+        {
+          "text": "FFFTTTBLEIBTBESETZT",
+          "offset": 10
+        },
+        {
+          "text": "NEUSTADT",
+          "offset": 46
+        }
+      ],
+      "selectionReceipt": {
+        "edges": 27,
+        "letters": 20,
+        "components": 1,
+        "loops": 8,
+        "stepHorizon": 54
+      }
+    },
+    {
+      "id": "wenselaers-procedure-neustadt-011",
+      "anchors": [
+        {
+          "text": "FFFTTTBLEIBTBESETZT",
+          "offset": 38
+        },
+        {
+          "text": "NEUSTADT",
+          "offset": 15
+        }
+      ],
+      "selectionReceipt": {
+        "edges": 27,
+        "letters": 20,
+        "components": 1,
+        "loops": 8,
+        "stepHorizon": 57
+      }
+    },
+    {
+      "id": "wenselaers-procedure-neustadt-012",
+      "anchors": [
+        {
+          "text": "FFFTTTBLEIBTBESETZT",
+          "offset": 38
+        },
+        {
+          "text": "NEUSTADT",
+          "offset": 25
+        }
+      ],
+      "selectionReceipt": {
+        "edges": 27,
+        "letters": 20,
+        "components": 1,
+        "loops": 8,
+        "stepHorizon": 57
+      }
+    },
+    {
+      "id": "wenselaers-procedure-neustadt-013",
+      "anchors": [
+        {
+          "text": "FFFTTTBLEIBTBESETZT",
+          "offset": 46
+        },
+        {
+          "text": "NEUSTADT",
+          "offset": 10
+        }
+      ],
+      "selectionReceipt": {
+        "edges": 27,
+        "letters": 20,
+        "components": 1,
+        "loops": 8,
+        "stepHorizon": 65
+      }
+    },
+    {
+      "id": "wenselaers-procedure-neustadt-014",
+      "anchors": [
+        {
+          "text": "FFFTTTBLEIBTBESETZT",
+          "offset": 48
+        },
+        {
+          "text": "NEUSTADT",
+          "offset": 10
+        }
+      ],
+      "selectionReceipt": {
+        "edges": 27,
+        "letters": 20,
+        "components": 1,
+        "loops": 8,
+        "stepHorizon": 67
+      }
+    },
+    {
+      "id": "wenselaers-procedure-neustadt-015",
+      "anchors": [
+        {
+          "text": "FFFTTTBLEIBTBESETZT",
+          "offset": 48
+        },
+        {
+          "text": "NEUSTADT",
+          "offset": 12
+        }
+      ],
+      "selectionReceipt": {
+        "edges": 27,
+        "letters": 20,
+        "components": 1,
+        "loops": 8,
+        "stepHorizon": 67
+      }
+    },
+    {
+      "id": "wenselaers-procedure-neustadt-016",
+      "anchors": [
+        {
+          "text": "FFFTTTBLEIBTBESETZT",
+          "offset": 12
+        },
+        {
+          "text": "NEUSTADT",
+          "offset": 31
+        }
+      ],
+      "selectionReceipt": {
+        "edges": 27,
+        "letters": 21,
+        "components": 1,
+        "loops": 7,
+        "stepHorizon": 39
+      }
+    },
+    {
+      "id": "wenselaers-procedure-neustadt-017",
+      "anchors": [
+        {
+          "text": "FFFTTTBLEIBTBESETZT",
+          "offset": 12
+        },
+        {
+          "text": "NEUSTADT",
+          "offset": 32
+        }
+      ],
+      "selectionReceipt": {
+        "edges": 27,
+        "letters": 21,
+        "components": 1,
+        "loops": 7,
+        "stepHorizon": 40
+      }
+    },
+    {
+      "id": "wenselaers-procedure-neustadt-018",
+      "anchors": [
+        {
+          "text": "FFFTTTBLEIBTBESETZT",
+          "offset": 13
+        },
+        {
+          "text": "NEUSTADT",
+          "offset": 32
+        }
+      ],
+      "selectionReceipt": {
+        "edges": 27,
+        "letters": 21,
+        "components": 1,
+        "loops": 7,
+        "stepHorizon": 40
+      }
+    },
+    {
+      "id": "wenselaers-procedure-neustadt-019",
+      "anchors": [
+        {
+          "text": "FFFTTTBLEIBTBESETZT",
+          "offset": 13
+        },
+        {
+          "text": "NEUSTADT",
+          "offset": 33
+        }
+      ],
+      "selectionReceipt": {
+        "edges": 27,
+        "letters": 21,
+        "components": 1,
+        "loops": 7,
+        "stepHorizon": 41
+      }
+    },
+    {
+      "id": "wenselaers-procedure-neustadt-020",
+      "anchors": [
+        {
+          "text": "FFFTTTBLEIBTBESETZT",
+          "offset": 23
+        },
+        {
+          "text": "NEUSTADT",
+          "offset": 1
+        }
+      ],
+      "selectionReceipt": {
+        "edges": 27,
+        "letters": 21,
+        "components": 1,
+        "loops": 7,
+        "stepHorizon": 42
+      }
+    },
+    {
+      "id": "wenselaers-procedure-neustadt-021",
+      "anchors": [
+        {
+          "text": "FFFTTTBLEIBTBESETZT",
+          "offset": 23
+        },
+        {
+          "text": "NEUSTADT",
+          "offset": 4
+        }
+      ],
+      "selectionReceipt": {
+        "edges": 27,
+        "letters": 21,
+        "components": 1,
+        "loops": 7,
+        "stepHorizon": 42
+      }
+    },
+    {
+      "id": "wenselaers-procedure-neustadt-022",
+      "anchors": [
+        {
+          "text": "FFFTTTBLEIBTBESETZT",
+          "offset": 16
+        },
+        {
+          "text": "NEUSTADT",
+          "offset": 37
+        }
+      ],
+      "selectionReceipt": {
+        "edges": 27,
+        "letters": 21,
+        "components": 1,
+        "loops": 7,
+        "stepHorizon": 45
+      }
+    },
+    {
+      "id": "wenselaers-procedure-neustadt-023",
+      "anchors": [
+        {
+          "text": "FFFTTTBLEIBTBESETZT",
+          "offset": 19
+        },
+        {
+          "text": "NEUSTADT",
+          "offset": 38
+        }
+      ],
+      "selectionReceipt": {
+        "edges": 27,
+        "letters": 21,
+        "components": 1,
+        "loops": 7,
+        "stepHorizon": 46
+      }
+    },
+    {
+      "id": "wenselaers-procedure-neustadt-024",
+      "anchors": [
+        {
+          "text": "FFFTTTBLEIBTBESETZT",
+          "offset": 19
+        },
+        {
+          "text": "NEUSTADT",
+          "offset": 39
+        }
+      ],
+      "selectionReceipt": {
+        "edges": 27,
+        "letters": 21,
+        "components": 1,
+        "loops": 7,
+        "stepHorizon": 47
+      }
+    }
+  ]
+}

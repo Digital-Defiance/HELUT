@@ -29,6 +29,8 @@ struct QuarantineCandidate: Codable, Sendable, Hashable {
 
     var menuCrib: String
     var menuOffset: Int
+    /// Present for constellation menus; nil decodes every historical quarantine row.
+    var menuAnchors: [BombeMenuAnchor]?
     var menuLoops: Int
     var menuEdges: Int
 
@@ -142,6 +144,7 @@ enum NearMissQuarantine {
             pairCount: ranked.pairCount,
             menuCrib: stop.menu.crib,
             menuOffset: stop.menu.offset,
+            menuAnchors: stop.menu.anchors.count > 1 ? stop.menu.anchors : nil,
             menuLoops: stop.menu.loops,
             menuEdges: stop.menu.edgeCount,
             ic: ranked.ic,

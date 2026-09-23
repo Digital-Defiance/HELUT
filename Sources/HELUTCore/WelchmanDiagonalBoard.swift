@@ -20,9 +20,59 @@ import Foundation
 // stecker value, the diagonal link lights two bits in one row.
 
 /// One crib aligned to one ciphertext offset, as a constraint graph over letters.
+package struct BombeMenuAnchor: Codable, Hashable, Sendable {
+    package let text: String
+    package let offset: Int
+    package let letters: [Int]
+
+    package init(text: String, offset: Int) {
+        self.text = text
+        self.offset = offset
+        self.letters = EnigmaAlphabet.normalize(text)
+    }
+
+    package var range: Range<Int> { offset..<(offset + letters.count) }
+    package var description: String { "\(text)@\(offset)" }
+}
+
+package struct BombeMenuConstraint: Hashable, Sendable {
+    package let step: Int
+    package let plain: Int
+    package let cipher: Int
+}
+
+package enum BombeMenuBuildError: Error, Equatable, CustomStringConvertible {
+    case tooFewAnchors
+    case nonCanonicalAnchor(index: Int, text: String)
+    case anchorOutOfRange(index: Int, offset: Int, length: Int, ciphertextLength: Int)
+    case overlappingAnchors(first: Int, second: Int)
+    case selfEncipherment(anchor: Int, index: Int, letter: Int)
+    case emptyConstellation
+    case tooManyEdges(actual: Int, maximum: Int)
+
+    package var description: String {
+        switch self {
+        case .tooFewAnchors: return "a constellation requires at least two independent anchors"
+        case let .nonCanonicalAnchor(index, text):
+            return "anchor \(index) must be nonempty canonical A-Z, got '\(text)'"
+        case let .anchorOutOfRange(index, offset, length, ciphertextLength):
+            return "anchor \(index) range \(offset)..<\(offset + length) is outside ciphertext 0..<\(ciphertextLength)"
+        case let .overlappingAnchors(first, second):
+            return "anchors \(first) and \(second) overlap; constellation anchors must be independent"
+        case let .selfEncipherment(anchor, index, letter):
+            return "anchor \(anchor) self-enciphers at absolute step \(index) (\(EnigmaAlphabet.character(letter)))"
+        case .emptyConstellation: return "constellation produced no constraints"
+        case let .tooManyEdges(actual, maximum):
+            return "constellation has \(actual) constraints; Metal maximum is \(maximum)"
+        }
+    }
+}
+
 package struct BombeMenu: Sendable {
     package let crib: String
     package let offset: Int
+    /// One or more independent plaintext anchors. Legacy menus always carry one.
+    package let anchors: [BombeMenuAnchor]
     /// Ciphertext index of each edge — selects which scrambler the edge uses.
     package let steps: [Int]
     /// Letter pair joined by each edge: (crib letter, cipher letter).
@@ -34,7 +84,63 @@ package struct BombeMenu: Sendable {
     /// Highest-degree letter, used as the test register.
     package let central: Int
 
+    /// Backward-compatible initializer for host-only tests and legacy builders.
+    package init(
+        crib: String,
+        offset: Int,
+        steps: [Int],
+        ends: [(Int, Int)],
+        letters: [Int],
+        loops: Int,
+        central: Int
+    ) {
+        self.init(
+            crib: crib,
+            offset: offset,
+            anchors: [BombeMenuAnchor(text: crib, offset: offset)],
+            steps: steps,
+            ends: ends,
+            letters: letters,
+            loops: loops,
+            central: central
+        )
+    }
+
+    package init(
+        crib: String,
+        offset: Int,
+        anchors: [BombeMenuAnchor],
+        steps: [Int],
+        ends: [(Int, Int)],
+        letters: [Int],
+        loops: Int,
+        central: Int
+    ) {
+        self.crib = crib
+        self.offset = offset
+        self.anchors = anchors
+        self.steps = steps
+        self.ends = ends
+        self.letters = letters
+        self.loops = loops
+        self.central = central
+    }
+
     package var edgeCount: Int { steps.count }
+    package var constraintCount: Int { edgeCount }
+    package var stepHorizon: Int { (steps.max() ?? -1) + 1 }
+    package var lastCoveredEnd: Int { anchors.map { $0.range.upperBound }.max() ?? 0 }
+    package var coveredPlaintextIndices: [Int] {
+        Array(Set(anchors.flatMap { Array($0.range) })).sorted()
+    }
+    package var constraints: Set<BombeMenuConstraint> {
+        Set(zip(steps, ends).map {
+            BombeMenuConstraint(step: $0.0, plain: $0.1.0, cipher: $0.1.1)
+        })
+    }
+    package var anchorSummary: String {
+        anchors.map(\.description).joined(separator: " + ")
+    }
 
     /// Connected components of the menu graph, from `loops = edges − vertices + components`.
     ///
@@ -50,9 +156,10 @@ package struct BombeMenu: Sendable {
         // *connectivity*, not edge count — and without it a split menu producing stops reads
         // like a recurring near-miss rather than a known dud. `comp>1` means the board is only
         // testing part of the menu and the joint plug sieve is doing the real work.
-        "\(crib)@\(offset) edges=\(edgeCount) letters=\(letters.count) "
+        let name = anchors.count > 1 ? "{\(anchorSummary)}" : "\(crib)@\(offset)"
+        return "\(name) edges=\(edgeCount) letters=\(letters.count) "
             + "loops=\(loops) comp=\(components) "
-            + "central=\(EnigmaAlphabet.character(central))"
+            + "span=\(stepHorizon) central=\(EnigmaAlphabet.character(central))"
     }
 }
 
@@ -77,7 +184,76 @@ package enum BombeMenuBuilder {
             ends.append((plain, cipher))
         }
 
-        return assemble(crib: crib, offset: offset, steps: steps, ends: ends)
+        let anchor = BombeMenuAnchor(text: crib, offset: offset)
+        return assemble(crib: crib, offset: offset, steps: steps, ends: ends, anchors: [anchor])
+    }
+
+    /// Build one joint hypothesis from several independent short plaintext anchors.
+    ///
+    /// The anchors remain separate evidence. They are never concatenated into an invented
+    /// sentence: only their absolute `(step, plaintext, ciphertext)` constraints are unioned.
+    /// A malformed or illegal anchor rejects the whole constellation rather than silently
+    /// weakening it by dropping one member.
+    package static func constellation(
+        anchors specs: [(text: String, offset: Int)],
+        ciphertext: [Int],
+        maximumEdges: Int = 40
+    ) throws -> BombeMenu {
+        guard specs.count >= 2 else { throw BombeMenuBuildError.tooFewAnchors }
+        var anchors: [BombeMenuAnchor] = []
+        for (index, spec) in specs.enumerated() {
+            let letters = EnigmaAlphabet.normalize(spec.text)
+            guard !letters.isEmpty, EnigmaAlphabet.string(from: letters) == spec.text else {
+                throw BombeMenuBuildError.nonCanonicalAnchor(index: index, text: spec.text)
+            }
+            guard spec.offset >= 0, spec.offset + letters.count <= ciphertext.count else {
+                throw BombeMenuBuildError.anchorOutOfRange(
+                    index: index, offset: spec.offset, length: letters.count,
+                    ciphertextLength: ciphertext.count
+                )
+            }
+            let anchor = BombeMenuAnchor(text: spec.text, offset: spec.offset)
+            for (priorIndex, prior) in anchors.enumerated()
+            where anchor.range.overlaps(prior.range) {
+                throw BombeMenuBuildError.overlappingAnchors(
+                    first: priorIndex, second: index
+                )
+            }
+            anchors.append(anchor)
+        }
+
+        var constraints: [(step: Int, plain: Int, cipher: Int)] = []
+        for (anchorIndex, anchor) in anchors.enumerated() {
+            for local in anchor.letters.indices {
+                let step = anchor.offset + local
+                let plain = anchor.letters[local]
+                let cipher = ciphertext[step]
+                guard plain != cipher else {
+                    throw BombeMenuBuildError.selfEncipherment(
+                        anchor: anchorIndex, index: step, letter: plain
+                    )
+                }
+                constraints.append((step, plain, cipher))
+            }
+        }
+        constraints.sort {
+            ($0.step, $0.plain, $0.cipher) < ($1.step, $1.plain, $1.cipher)
+        }
+        guard !constraints.isEmpty else { throw BombeMenuBuildError.emptyConstellation }
+        guard constraints.count <= maximumEdges else {
+            throw BombeMenuBuildError.tooManyEdges(
+                actual: constraints.count, maximum: maximumEdges
+            )
+        }
+        let label = anchors.map(\.text).joined(separator: "+")
+        guard let menu = assemble(
+            crib: label,
+            offset: anchors.map(\.offset).min() ?? 0,
+            steps: constraints.map(\.step),
+            ends: constraints.map { ($0.plain, $0.cipher) },
+            anchors: anchors
+        ) else { throw BombeMenuBuildError.emptyConstellation }
+        return menu
     }
 
     /// Build the menu graph from an edge list: connected components, cyclomatic number, and
@@ -95,9 +271,15 @@ package enum BombeMenuBuilder {
         crib: String,
         offset: Int,
         steps: [Int],
-        ends: [(Int, Int)]
+        ends: [(Int, Int)],
+        anchors explicitAnchors: [BombeMenuAnchor]? = nil
     ) -> BombeMenu? {
-        guard !ends.isEmpty, steps.count == ends.count else { return nil }
+        guard !ends.isEmpty, steps.count == ends.count,
+              steps.allSatisfy({ $0 >= 0 }),
+              ends.allSatisfy({ (0..<26).contains($0.0) && (0..<26).contains($0.1) }) else {
+            return nil
+        }
+        let anchors = explicitAnchors ?? [BombeMenuAnchor(text: crib, offset: offset)]
 
         var degree = [Int](repeating: 0, count: 26)
         var present = [Bool](repeating: false, count: 26)
@@ -134,6 +316,7 @@ package enum BombeMenuBuilder {
         return BombeMenu(
             crib: crib,
             offset: offset,
+            anchors: anchors,
             steps: steps,
             ends: ends,
             letters: vertices,

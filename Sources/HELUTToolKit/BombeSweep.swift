@@ -23,9 +23,18 @@ private struct MenuFile: Decodable {
         let messages: Int
         let offsets: [Int]
     }
+    struct Constellation: Decodable {
+        struct Anchor: Decodable {
+            let text: String
+            let offset: Int
+        }
+        let id: String
+        let anchors: [Anchor]
+    }
     let target: String
     let ciphertext: String
-    let cribs: [Crib]
+    let cribs: [Crib]?
+    let constellations: [Constellation]?
 }
 
 private struct CorpusFile: Decodable {
@@ -44,7 +53,7 @@ func loadCribMenus(path: String) -> CribMenuSet? {
     }
     let ciphertext = EnigmaAlphabet.normalize(file.ciphertext)
     var menus: [BombeMenu] = []
-    for crib in file.cribs {
+    for crib in file.cribs ?? [] {
         for offset in crib.offsets {
             if let menu = BombeMenuBuilder.menu(
                 crib: crib.text, offset: offset, ciphertext: ciphertext
@@ -52,6 +61,29 @@ func loadCribMenus(path: String) -> CribMenuSet? {
                 menus.append(menu)
             }
         }
+    }
+    // A constellation is one joint hypothesis whose short anchors remain separate evidence.
+    // Build endpoints from plaintext + absolute offsets + the root ciphertext; never trust a
+    // fixture-supplied edge array, and never drop one malformed anchor while keeping the rest.
+    for (index, constellation) in (file.constellations ?? []).enumerated() {
+        do {
+            let menu = try BombeMenuBuilder.constellation(
+                anchors: constellation.anchors.map { ($0.text, $0.offset) },
+                ciphertext: ciphertext,
+                maximumEdges: welchmanMaxEdges
+            )
+            menus.append(menu)
+        } catch {
+            fputs(
+                "invalid constellation \(index) ('\(constellation.id)') in \(path): \(error)\n",
+                stderr
+            )
+            return nil
+        }
+    }
+    guard !menus.isEmpty else {
+        fputs("menu fixture \(path) produced no legal menus\n", stderr)
+        return nil
     }
 
     // `--bombe-indel <delta>` adds the spliced (indel) family to the same menu list, so both
@@ -78,7 +110,7 @@ func loadCribMenus(path: String) -> CribMenuSet? {
         var spliced: [BombeMenu] = []
         var straddlingDropped = 0
         var seenTexts = Set<String>()
-        for crib in file.cribs where seenTexts.insert(crib.text).inserted {
+        for crib in (file.cribs ?? []) where seenTexts.insert(crib.text).inserted {
             let family = SpliceMenuBuilder.indelMenus(
                 crib: crib.text, ciphertext: ciphertext,
                 deltas: [delta], minimumEdges: intFlag("--bombe-min-crib") ?? 16
@@ -169,22 +201,22 @@ func loadOpeningMenus(
     return sharedMenus + Array(uniqueMenus.prefix(4))
 }
 
-/// Drop menus whose crib is a proper substring of another menu's crib at the same offset.
+/// Drop exact duplicates and menus whose canonical constraint set is a proper subset of a
+/// stronger menu. This works for contiguous legacy cribs and noncontiguous constellations.
 func maximalMenus(_ menus: [BombeMenu]) -> [BombeMenu] {
-    let ordered = menus.sorted { $0.crib.count > $1.crib.count }
+    let ordered = menus.sorted(by: byLoopPower)
     var kept: [BombeMenu] = []
     for menu in ordered {
-        let dominated = kept.contains {
-            $0.offset == menu.offset && $0.crib.contains(menu.crib)
-        }
+        let dominated = kept.contains { menu.constraints.isSubset(of: $0.constraints) }
         if !dominated { kept.append(menu) }
     }
     return kept
 }
 
+/// Conservative independence: two hypotheses sharing even one exact board constraint do not
+/// count as independent confirmation. Internal constellation anchors remain one menu.
 func menusAreIndependent(_ a: BombeMenu, _ b: BombeMenu) -> Bool {
-    if a.offset != b.offset { return true }
-    return !a.crib.contains(b.crib) && !b.crib.contains(a.crib)
+    a.constraints.isDisjoint(with: b.constraints)
 }
 
 /// Select menus for a run: openings (± loop-ranked partners) or pure loop ranking.
@@ -200,7 +232,9 @@ func selectMenus(config: BombeSweepConfig, full: CribMenuSet) -> (menus: [BombeM
         let text = String(parts[0])
         let wanted = parts.count > 1 ? Int(parts[1]) : nil
         let matched = (opening + full.menus).filter { menu in
-            menu.crib.contains(text) && (wanted == nil || menu.offset == wanted!)
+            menu.anchors.contains { anchor in
+                anchor.text.contains(text) && (wanted == nil || anchor.offset == wanted!)
+            }
         }
         return (Array(matched.sorted(by: byLoopPower).prefix(max(config.menuCount, 1))), matched.count)
     }
@@ -249,7 +283,8 @@ private func firstExisting(_ paths: [String]) -> String? {
 }
 
 private func byLoopPower(_ a: BombeMenu, _ b: BombeMenu) -> Bool {
-    (a.loops, a.edgeCount, a.crib.count) > (b.loops, b.edgeCount, b.crib.count)
+    (a.loops, a.edgeCount, -a.components, a.stepHorizon, a.anchorSummary)
+        > (b.loops, b.edgeCount, -b.components, b.stepHorizon, b.anchorSummary)
 }
 
 // MARK: Known-key control
@@ -879,12 +914,6 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
         return
     }
 
-    guard let engine = WelchmanMetalEngine(depth: config.pipelineDepth) else {
-        print("no Metal device available — the host engine is 100x slower; "
-            + "use --welchman-rehearsal to measure it")
-        return
-    }
-
     let selection = selectMenus(config: config, full: set)
     let catalog = selection.menus
     guard !catalog.isEmpty else {
@@ -900,8 +929,8 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
         guard original >= resumeFrom else { return nil }
         return (original, menu)
     }
-    let chosen = afterResume.filter { $0.1.crib.count >= config.minCribLength }
-    let droppedShort = afterResume.count - chosen.count
+    let chosen = afterResume.filter { $0.1.constraintCount >= config.minCribLength }
+    let droppedWeak = afterResume.count - chosen.count
     if afterResume.isEmpty, resumeFrom > catalog.count {
         fputs(
             "Welchman resume failed: --bombe-from \(resumeFrom) exceeds the selected "
@@ -928,8 +957,8 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
         print("mode: loop-ranked (loops, edges); confirm≥\(config.confirmMenus) independent")
         print("selected \(catalog.count) of \(set.menus.count)")
     }
-    print("min crib length: \(config.minCribLength)"
-        + (droppedShort > 0 ? " (dropped \(droppedShort) shorter from the remaining set)" : ""))
+    print("min menu constraints: \(config.minCribLength)"
+        + (droppedWeak > 0 ? " (dropped \(droppedWeak) weaker from the remaining set)" : ""))
     if resumeFrom > 1 {
         print("resuming from menu \(resumeFrom) of \(catalog.count) "
             + "(skipping \(resumeFrom - 1) already done)")
@@ -941,6 +970,13 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
     if chosen.count > 12 { print("  … \(chosen.count - 12) more") }
     if CommandLine.arguments.contains("--bombe-plan-only") {
         print("PLAN ONLY: \(chosen.count) menus selected; no campaign settings evaluated")
+        print("No Metal device or command queue was created.")
+        return
+    }
+
+    guard let engine = WelchmanMetalEngine(depth: config.pipelineDepth) else {
+        print("no Metal device available — the host engine is 100x slower; "
+            + "use --welchman-rehearsal to measure it")
         return
     }
 
@@ -993,7 +1029,7 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
                  PostBombeDiscriminator.icFloor,
                  PostBombeDiscriminator.germanReference,
                  PostBombeDiscriminator.noiseReference))
-    let longestSpan = chosen.map { $0.1.edgeCount }.max() ?? 0
+    let longestSpan = chosen.map { $0.1.stepHorizon }.max() ?? 0
     if config.sweepMiddleRing && config.sweepRightRing {
         print("right ring swept: every right-wheel turnover phase covered")
         print("middle ring swept: ring A in full, rings B–Z restricted to lanes whose "
@@ -1015,7 +1051,7 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
                      + "~%.0f%% for 2) are not covered — --bombe-middle-ring closes it",
                      longestSpan, Double(steps) / 26.0 * 100, Double(2 * steps) / 26.0 * 100))
     } else {
-        let longest = chosen.map { $0.1.edgeCount }.max() ?? 0
+        let longest = chosen.map { $0.1.stepHorizon }.max() ?? 0
         let free = max(0, 26 - longest)
         print(String(format: "rings AAAA: exhaustive over turnover-free spans, which is "
                      + "%d/26 (%.0f%%) of keys at %d letters. --bombe-ring-sweep covers "
@@ -1041,7 +1077,7 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
     /// key still survives — its ≥16 body locks the shell, then the short header
     /// confirms it. What dies is the 10M–40M ghost-completion flood that stalled arm 2.
     var lockedAnchors: [ShellID: LockedAnchorShell] = [:]
-    let anchorMinLength = 16
+    let anchorMinConstraints = 16
     var totalStops = 0
     var totalCompletions = 0
     var settingsDone = 0
@@ -1078,10 +1114,10 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
     // locked-anchor set is complete before challengers run.
     let runnable: [(Int, BombeMenu)]
     if config.confirmMenus > 1 {
-        let anchors = runnableRaw.filter { $0.1.crib.count >= anchorMinLength }
-        let challengers = runnableRaw.filter { $0.1.crib.count < anchorMinLength }
+        let anchors = runnableRaw.filter { $0.1.constraintCount >= anchorMinConstraints }
+        let challengers = runnableRaw.filter { $0.1.constraintCount < anchorMinConstraints }
         runnable = anchors + challengers
-        print("confirm mode: \(anchors.count) anchor menus (≥\(anchorMinLength)), "
+        print("confirm mode: \(anchors.count) anchor menus (≥\(anchorMinConstraints) constraints), "
             + "\(challengers.count) short challengers (host re-test of locked shells only)")
     } else {
         runnable = runnableRaw
@@ -1097,7 +1133,9 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
         print()
     }
     // ETA covers GPU anchor work only; challengers are O(|locked shells|) on host.
-    let anchorRunnable = runnable.filter { $0.1.crib.count >= anchorMinLength || config.confirmMenus <= 1 }
+    let anchorRunnable = runnable.filter {
+        $0.1.constraintCount >= anchorMinConstraints || config.confirmMenus <= 1
+    }
     let runnableShells = shellsPerMenu * anchorRunnable.count
     let etaSecondsRunnable = settingsPerMenu * Double(anchorRunnable.count) / 50e6
     if runnable.count != chosen.count || config.confirmMenus > 1 {
@@ -1129,7 +1167,8 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
         let originalIndex = item.0
         let menu = item.1
         let label = String(format: "[%d/%d·%d]", originalIndex, catalog.count, runIndex + 1)
-        let isChallenger = config.confirmMenus > 1 && menu.crib.count < anchorMinLength
+        let isChallenger = config.confirmMenus > 1
+            && menu.constraintCount < anchorMinConstraints
 
         var physical: [SweepStop] = []
         var rawStops = 0
@@ -1328,19 +1367,19 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
         // Shorter menus under --bombe-confirm ≥2 may clear the linguistic bar by chance
         // (menu 627); they must wait for an independent partner on the same shell.
         if PostBombeDiscriminator.isBreak(best) {
-            if menu.crib.count >= 16 {
+            if menu.constraintCount >= 16 {
                 breakFound = best
                 break
             }
             if config.confirmMenus > 1 {
                 print(String(format: "  %@ clears the bar at %d letters — holding for "
                              + "≥%d-menu agreement before claiming a break",
-                             label, menu.crib.count, config.confirmMenus))
+                             label, menu.constraintCount, config.confirmMenus))
                 fflush(stdout)
             } else {
                 print(String(format: "  %@ clears the bar at %d letters but is under "
                              + "unicity — not claiming a break (use --bombe-confirm 2)",
-                             label, menu.crib.count))
+                             label, menu.constraintCount))
                 fflush(stdout)
             }
         }
@@ -1354,7 +1393,7 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
 
     print("survived the 10-plug sieve: \(totalCompletions)")
     if config.confirmMenus > 1 {
-        print("locked anchor shells (≥\(anchorMinLength)): \(lockedAnchors.count)")
+        print("locked anchor shells (≥\(anchorMinConstraints) constraints): \(lockedAnchors.count)")
     }
     if !overlong.isEmpty {
         print("skipped (edges > \(welchmanMaxEdges) Metal cap): \(overlong.count) — not tested")
@@ -1604,8 +1643,9 @@ final class LockedShellAgreements: @unchecked Sendable {
             guard independent.count >= minIndependentMenus else { continue }
             // Prefer the stop from the strongest menu as the representative decrypt.
             let bestMenu = independent[0]
-            let representative = stops.first { $0.menu.crib == bestMenu.crib
-                && $0.menu.offset == bestMenu.offset } ?? stops[0]
+            let representative = stops.first {
+                $0.menu.constraints == bestMenu.constraints
+            } ?? stops[0]
             hits.append(
                 ConfirmedShell(
                     representative: representative,

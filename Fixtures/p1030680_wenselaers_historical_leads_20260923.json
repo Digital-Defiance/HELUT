@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "target": "P1030680",
+  "receivedDate": "2026-09-23",
+  "source": {
+    "name": "Selm Merel Wenselaers",
+    "role": "Historian / Curator",
+    "locations": "Amsterdam / Antwerp"
+  },
+  "scope": "Historical lead inventory. This file records provenance and execution policy; it is not itself a Bombe menu fixture, a historical proof, or a decrypt claim.",
+  "evidenceGrades": {
+    "repo-verbatim": "The exact A-Z string is present in Fixtures/u534_corpus.json and was mechanically rechecked.",
+    "source-reported-primary-reference": "Wenselaers supplied a named primary reference or original-document transcription, but no scan/page receipt is in this workspace.",
+    "reconstructed": "Historically plausible correction of a corrupted raw stream; never represented as exact attestation.",
+    "context-only": "A historically grounded term, but not an exact radio string in the repository and/or too weak to run alone.",
+    "withdrawn": "An earlier exact-attestation statement was explicitly withdrawn; excluded from execution."
+  },
+  "historicalReports": [
+    {
+      "id": "W55-H1",
+      "grade": "source-reported-primary-reference",
+      "references": [
+        "DEFE3/577 ZTPG 367835, 26 April 1945",
+        "original KTB U-3521: 30 April, 1 May, 2 May entries"
+      ],
+      "report": "Volksliste III boats were ordered to Travemuende; five men per boat remained as demolition parties while the remaining armed crews went to 3. U-Lehrdivision at Neustadt. U-3521's KTB reportedly records preparations for scuttling and then crew departure, except the Sprengkommando, to Neustadt.",
+      "campaignMeaning": "NEUSTADT transfer and VERSENKUNG are linked stages of one process, not competing plaintext scenarios. Keep terms independent; do not concatenate them into an invented sentence.",
+      "receiptStatus": "pending scan, page reference, or independent archival transcription"
+    },
+    {
+      "id": "W55-H2",
+      "grade": "source-reported-primary-reference",
+      "references": [
+        "original KTB U-3521, 9 April 1945: Auf Sehrohrtiefe, (FT-Programmzeit)"
+      ],
+      "report": "A Baltic AGRU-Front training boat reportedly came to reception depth for a scheduled FT reception window.",
+      "campaignMeaning": "Supports scheduled broadcast reception during Baltic training. Does not prove that the transmission was Thetis; Wenselaers reports AGRU-Front/FdU Ausbildung traffic on multiple communications layers.",
+      "receiptStatus": "pending scan, page reference, and identification of the Funkprogramm/network"
+    },
+    {
+      "id": "W55-H3",
+      "grade": "source-reported-primary-reference",
+      "references": [
+        "Zuteilungsliste Forelle: columns 641-670 Aegir, 671-703 Thetis",
+        "later allocation list displayed by Horenberg: columns 621-653 Thetis"
+      ],
+      "report": "A K-Buch column may stay fixed while a separate allocation list changes over time, provisionally resolving the column-645 Aegir/Thetis contradiction.",
+      "campaignMeaning": "Retain M-Thetis as the working assignment, but print that the exact date, codename, and provenance of the later list remain pending.",
+      "receiptStatus": "later-list chronology/provenance not yet nailed down"
+    },
+    {
+      "id": "W55-H4",
+      "grade": "source-reported-primary-reference",
+      "references": [
+        "DEFE3/579 ZTPG 369048, 1 May 1945",
+        "P1030707 raw/corrupted sister traffic",
+        "Wenselaers historical synthesis infographic, 23 September 2026"
+      ],
+      "report": "U-3014, U-3024, and U-2538 reportedly arrived at Travemuende together; U-3014 later reports the cluster and the radio station remaining manned. U-3014 and U-3024 later reached Neustadt; U-2538 did not.",
+      "campaignMeaning": "Raises an OPEN hypothesis that P1030680 may contain addressing/boat-number material or a short follow-up, and may not have been intended for U-534. The infographic is a synthesis, not a cryptanalytic receipt.",
+      "receiptStatus": "pending source images/exact raw transcription; recipient hypothesis remains OPEN"
+    },
+    {
+      "id": "W55-H5",
+      "grade": "source-reported-primary-reference",
+      "references": [
+        "Deutsches U-Boot-Archiv enquiry",
+        "Deutsches Schifffahrtsmuseum U-2540/Wilhelm Bauer enquiry",
+        "Big Heritage / U-534 collection enquiry",
+        "private U-3521 KTB enquiry"
+      ],
+      "report": "Archive enquiries are outstanding for Funkkladden, Funkbucher, Funkspruchzettel, Schlusselzettel, and Baltic training-radio material.",
+      "campaignMeaning": "A second Thetis message, original radio paper, or key sheet can change the search space. Archive replies outrank another plausible-German GPU arm.",
+      "receiptStatus": "no replies yet"
+    }
+  ],
+  "cribCandidates": [
+    {
+      "text": "FFFTTTBLEIBTBESETZT",
+      "grade": "repo-verbatim",
+      "sourceMessages": ["P1030668"],
+      "rawEvidence": "...UHRJKIELWEINGELAUFENYFFFTTTBLEIBTBESETZTR",
+      "length": 19,
+      "legalPlacements": 19,
+      "bestLoopCount": 7,
+      "singleComponentPlacements": 4,
+      "bestSingleComponentLoopCount": 5,
+      "executionPolicy": "Do not run the short core alone: direct attestation is high confidence, but topology is weak. Use exact source context as the anchor fixture below."
+    },
+    {
+      "text": "UHRJKIELWEINGELAUFENYFFFTTTBLEIBTBESETZT",
+      "grade": "repo-verbatim",
+      "sourceMessages": ["P1030668"],
+      "sourceRange": "plaintext[131..<171]",
+      "length": 40,
+      "selectedZeroBasedOffsets": [7, 17, 27, 30],
+      "loopCount": 18,
+      "letterCount": 23,
+      "components": 1,
+      "executionPolicy": "Finite executable family in Fixtures/p1030680_wenselaers_bleibt_besetzt_context_menus.json. Four alignment-diagonal representatives; stage behind the existing middle-ring arm."
+    },
+    {
+      "text": "FFFTTTBLEIBTBESEOZTX",
+      "grade": "repo-verbatim",
+      "sourceMessages": ["P1030707"],
+      "rawEvidence": "corrupted sister stream",
+      "length": 20,
+      "legalPlacements": 20,
+      "bestLoopCount": 6,
+      "singleComponentPlacements": 5,
+      "executionPolicy": "Preserve as raw evidence. The recurring 16-letter core FFFTTTBLEIBTBESE is already in the catalog at originalIndex 846-868; AAAA was tested, right-ring coverage remains open."
+    },
+    {
+      "text": "BLEIBTBESETZT",
+      "grade": "repo-verbatim",
+      "sourceMessages": ["P1030668"],
+      "length": 13,
+      "executionPolicy": "Short independent term only. Below the 16-letter floor and mechanically weak; never GPU-sweep alone."
+    },
+    {
+      "text": "FTBLEIBTBESETZT",
+      "grade": "reconstructed",
+      "sourceMessages": ["P1030707"],
+      "length": 15,
+      "executionPolicy": "Do not call exactly attested and do not GPU-sweep alone. Superseded as evidence by exact FFFTTTBLEIBTBESETZT in P1030668."
+    },
+    {
+      "text": "WEITEREBEFEHLEATWARTKNX",
+      "grade": "repo-verbatim",
+      "sourceMessages": ["P1030698"],
+      "length": 23,
+      "legalPlacements": 20,
+      "bestLoopCount": 7,
+      "executionPolicy": "Raw corrupted radio evidence; retain, but do not promote the clean reconstruction as exact."
+    },
+    {
+      "text": "WEITEREBEFEHLEABWARTEN",
+      "grade": "reconstructed",
+      "sourceMessages": ["P1030698"],
+      "distanceFromRaw": 3,
+      "length": 22,
+      "executionPolicy": "Source-reported reconstruction, not exact in the repository corpus. Pending original transcription/receipt; no GPU run."
+    },
+    {
+      "text": "KLARZUMVERSENKENGEMXBEFEHL",
+      "grade": "source-reported-primary-reference",
+      "sourceMessages": [],
+      "length": 26,
+      "legalPlacements": 16,
+      "bestLoopCount": 8,
+      "singleComponentPlacements": 11,
+      "executionPolicy": "Potentially useful same-day radio language, but absent from the repository corpus. Require exact message ID, raw A-Z transcription, and GEM./GEMX normalization before fixture emission."
+    },
+    {
+      "text": "SPRENGKOMMANDO",
+      "grade": "context-only",
+      "sourceMessages": [],
+      "length": 14,
+      "executionPolicy": "Reported in U-3521 KTB, not radio corpus. Below floor and all legal placements are split; independent confirmation only, never solo."
+    },
+    {
+      "text": "NEUSTADT",
+      "grade": "repo-verbatim",
+      "sourceMessages": ["P1030669", "P1030693"],
+      "length": 8,
+      "executionPolicy": "Historically elevated anchor that survives paraphrase, but far below unicity and entirely split. Never solo; use to rank longer exact source phrases, not to invent one."
+    },
+    {
+      "text": "BESATZUNG",
+      "grade": "context-only",
+      "sourceMessages": [],
+      "length": 9,
+      "executionPolicy": "KTB/context term only; below floor and entirely split."
+    },
+    {
+      "text": "DREIULEHRDIVISION",
+      "grade": "context-only",
+      "sourceMessages": [],
+      "length": 17,
+      "legalPlacements": 31,
+      "bestLoopCount": 4,
+      "executionPolicy": "Long enough but mechanically weak and not exact radio attestation. No run."
+    }
+  ],
+  "withdrawals": [
+    {
+      "texts": ["UUUDREINULZWOVIER", "UUUZWOFUENFDREIACHT"],
+      "reason": "Selm's careful recheck withdrew the earlier exact-attestation claim for these boat numbers. Repository raw copies P1030704/P1030707 preserve complementary but garbled strings, not either clean form; retaining the correction is part of the joint campaign record.",
+      "executionPolicy": "Excluded from exact fixtures."
+    }
+  ],
+  "nextRequests": [
+    "Exact message ID and raw A-Z stream for KLAR ZUM VERSENKEN GEM. BEFEHL.",
+    "Scan/page/transcription receipt for DEFE3/577 ZTPG 367835 and DEFE3/579 ZTPG 369048.",
+    "Scan/page reference for U-3521 KTB entries and FT-Programmzeit.",
+    "Date, codename, and provenance for the later allocation list mapping column 645 to Thetis.",
+    "Any second Thetis ciphertext, Funkkladde, Funkspruchzettel, Schlusselzettel, or Funkprogramm evidence."
+  ]
+}

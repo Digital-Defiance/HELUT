@@ -31,6 +31,7 @@ private struct EscalateManifest: Decodable {
         let steckerPairs: [String]
         let menuCrib: String
         let menuOffset: Int
+        let menuAnchors: [BombeMenuAnchor]?
         let ic: Double
         let tailScore: Double
         let source: String
@@ -136,10 +137,12 @@ func runOstwaldEscalate() {
             key: key, ciphertext: ciphertext, scorer: scorer,
             exhaustLetters: exhaustLetters, alsoSeeded: seeded
         )
-        let crib = EnigmaAlphabet.normalize(candidate.menuCrib)
-        let end = candidate.menuOffset + crib.count
-        let exact = end <= climbed.plain.count
-            && Array(climbed.plain[candidate.menuOffset..<end]) == crib
+        let anchors = candidate.menuAnchors
+            ?? [BombeMenuAnchor(text: candidate.menuCrib, offset: candidate.menuOffset)]
+        let exact = anchors.allSatisfy { anchor in
+            anchor.offset >= 0 && anchor.range.upperBound <= climbed.plain.count
+                && Array(climbed.plain[anchor.range]) == anchor.letters
+        }
         results.append(
             Result(
                 index: index, candidate: candidate,

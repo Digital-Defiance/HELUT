@@ -49,6 +49,8 @@ struct DiscriminatedCandidate {
     /// Best reading of a shorter head, when the whole message is not the right unit.
     let prefix: PrefixEvidence?
     let cribExact: Bool
+    /// Per-anchor exactness, in fixture order. Aggregate `cribExact` is their conjunction.
+    let anchorMatches: [Bool]
     let pairCount: Int
     let determinedLetters: Int
 
@@ -195,20 +197,47 @@ enum PostBombeDiscriminator {
         return machine.processText(ciphertext)
     }
 
-    /// Score the stretch of plaintext the crib does not already guarantee.
-    private static func tailScore(plain: [Int], menu: BombeMenu) -> Double {
+    static func anchorMatches(plain: [Int], menu: BombeMenu) -> [Bool] {
+        menu.anchors.map { anchor in
+            guard anchor.offset >= 0, anchor.range.upperBound <= plain.count else { return false }
+            return Array(plain[anchor.range]) == anchor.letters
+        }
+    }
+
+    /// Score plaintext not guaranteed by the menu. Legacy one-anchor menus preserve their
+    /// historical concatenating behavior byte-for-byte. Constellations score only physically
+    /// contiguous uncovered runs, so removing two anchors cannot invent an n-gram across either
+    /// excision or across the gap between them.
+    static func tailScore(plain: [Int], menu: BombeMenu) -> Double {
         tailScore(plain: plain, menu: menu, end: plain.count)
     }
 
-    /// Trigram score of `plain[0..<end]` with the crib letters removed, so a decrypt
-    /// cannot score well merely by handing back the crib it was seeded with.
-    private static func tailScore(plain: [Int], menu: BombeMenu, end: Int) -> Double {
-        var tail: [Int] = []
-        let cribRange = menu.offset..<(menu.offset + menu.edgeCount)
-        for index in 0..<min(end, plain.count) where !cribRange.contains(index) {
-            tail.append(plain[index])
+    static func tailScore(plain: [Int], menu: BombeMenu, end: Int) -> Double {
+        let upper = min(end, plain.count)
+        let covered = Set(menu.coveredPlaintextIndices)
+        if menu.anchors.count == 1 {
+            let tail = (0..<upper).filter { !covered.contains($0) }.map { plain[$0] }
+            return tail.count >= 3 ? GermanTrigrams.score(tail) : -10
         }
-        return tail.count >= 3 ? GermanTrigrams.score(tail) : -10
+
+        var runs: [[Int]] = []
+        var run: [Int] = []
+        for index in 0..<upper {
+            if covered.contains(index) {
+                if !run.isEmpty { runs.append(run); run = [] }
+            } else {
+                run.append(plain[index])
+            }
+        }
+        if !run.isEmpty { runs.append(run) }
+        var weighted = 0.0
+        var windows = 0
+        for run in runs where run.count >= 3 {
+            let count = run.count - 2
+            weighted += GermanTrigrams.score(run) * Double(count)
+            windows += count
+        }
+        return windows > 0 ? weighted / Double(windows) : -10
     }
 
     /// Non-crib letters a head must contain before its score is allowed to mean anything.
@@ -220,20 +249,23 @@ enum PostBombeDiscriminator {
     /// Only heads strictly shorter than the message are considered — the whole message is
     /// already scored, and reporting it twice would double-count the same evidence.
     private static func bestPrefix(plain: [Int], menu: BombeMenu) -> PrefixEvidence? {
-        let cribEnd = menu.offset + menu.edgeCount
-        guard cribEnd <= plain.count else { return nil }
+        guard menu.lastCoveredEnd <= plain.count else { return nil }
+        let covered = Set(menu.coveredPlaintextIndices)
         var best: PrefixEvidence?
-        // A head of `end` letters holds `end - cribLength` non-crib letters once the crib
-        // is excised, so start where that reaches the floor.
-        var end = max(cribEnd, menu.offset) + minPrefixTail
+        // Every anchor in a constellation is required evidence, so a readable head must extend
+        // past the last one and contain at least `minPrefixTail` actual, unmasked letters.
+        var end = max(menu.lastCoveredEnd, 1)
         while end < plain.count {
-            let head = Array(plain[0..<end])
-            let evidence = PrefixEvidence(
-                end: end,
-                ic: LanguageScorer.indexOfCoincidence(head),
-                tailScore: tailScore(plain: plain, menu: menu, end: end)
-            )
-            if best == nil || evidence.tailScore > best!.tailScore { best = evidence }
+            let uncovered = (0..<end).reduce(0) { $0 + (covered.contains($1) ? 0 : 1) }
+            if uncovered >= minPrefixTail {
+                let head = Array(plain[0..<end])
+                let evidence = PrefixEvidence(
+                    end: end,
+                    ic: LanguageScorer.indexOfCoincidence(head),
+                    tailScore: tailScore(plain: plain, menu: menu, end: end)
+                )
+                if best == nil || evidence.tailScore > best!.tailScore { best = evidence }
+            }
             end += 1
         }
         return best
@@ -300,11 +332,8 @@ enum PostBombeDiscriminator {
                     continue
                 }
                 let text = EnigmaAlphabet.string(from: plain)
-                let cribLetters = EnigmaAlphabet.normalize(stop.menu.crib)
-                let end = stop.menu.offset + cribLetters.count
-                guard stop.menu.offset >= 0, end <= plain.count else { continue }
-                let slice = Array(plain[stop.menu.offset..<end])
-                let exact = slice == cribLetters
+                let matches = anchorMatches(plain: plain, menu: stop.menu)
+                let exact = !matches.isEmpty && matches.allSatisfy { $0 }
                 let determined = (0..<26).filter { table[$0] != $0 }.count
                 var pairs = 0
                 for x in 0..<26 where table[x] != x { pairs += 1 }
@@ -319,6 +348,7 @@ enum PostBombeDiscriminator {
                     tailScore: tailScore(plain: plain, menu: stop.menu),
                     prefix: prefix,
                     cribExact: exact,
+                    anchorMatches: matches,
                     pairCount: pairs,
                     determinedLetters: determined
                 )
@@ -395,7 +425,8 @@ enum PostBombeDiscriminator {
         print(String(format: "calibration: German %.3f, noise %.3f, break threshold %.3f, IC floor %.3f",
                      germanReference, noiseReference, breakThreshold, icFloor))
         print("ranking \(candidates.count) survivors on all 72 letters; "
-            + "tail = the \(72 - candidates[0].stop.menu.edgeCount) letters the crib does not cover")
+            + "tail excludes \(candidates[0].stop.menu.coveredPlaintextIndices.count) "
+            + "anchored positions")
         print()
         print("  rank  crib  plugs     IC  tail-score  full-score  key   plaintext")
         print("  " + String(repeating: "-", count: 108))
@@ -459,7 +490,7 @@ enum PostBombeDiscriminator {
         // Prefix-only break is for turnover divergence on unicity-safe menus.
         // Short cribs fluke head IC/trigrams (the UEBUNG-pair "clears the bar" spam);
         // they must earn a break through multi-menu agreement, not a lucky head.
-        guard candidate.stop.menu.crib.count >= 16 else { return false }
+        guard candidate.stop.menu.constraintCount >= 16 else { return false }
         guard let prefix = candidate.prefix else { return false }
         return prefix.ic >= icFloor && prefix.tailScore > breakThreshold
     }
