@@ -175,8 +175,16 @@ historical blindspot regarding the target message.
 The scraped corpus contains 48~broken M4 messages.
 Crucially, 31~originate from the Potsdam net, 16~from a second net, and
 1~from a third.
-P1030680 is the \emph{only} message originating from the M-Thetis
-network.
+P1030680 is the only message in the scrape with the working assignment
+M-Thetis. That assignment remains supported by
+\texttt{ACH} under the later allocation list used by Hörenberg, but the
+catalogue chronology is not fully settled: Selm Merel Wenselaers reports an
+earlier list, \emph{Forelle}, which maps column 645 to Aegir while the later
+list maps it to Thetis. Changing Zuteilungslisten can reconcile the apparent
+contradiction without changing the K-Buch column; the exact date, codename, and
+provenance of the later list remain pending. Likewise, preservation among
+U-534's radio papers establishes recovery provenance, not intended recipient.
+An intercepted training-network signal is an open hypothesis, not a finding.
 
 Because Bletchley Park never bothered to work the M-Thetis training net,
 and no other Thetis messages survive in the corpus, all 100~historical
@@ -205,6 +213,34 @@ middle-ring coverage, so a plausible-crib hypothesis remains live in
 The resilience of P1030680 is plausibly a mixture of mismatched
 operational doctrine and incomplete ring coverage, rather than the
 cryptographic strength of the cipher itself.
+
+The archival side of that question is now active team work. Selm Merel
+Wenselaers, a historian and curator in Amsterdam and Antwerp, leads the
+campaign's historical/archival arm alongside HELUT's mechanical cryptanalysis.
+Her named DEFE and U-3521 KTB findings report a concrete process in which
+scuttling parties remained aboard while crews transferred to Neustadt;
+\texttt{NEUSTADT} and \texttt{VERSENKUNG} are therefore linked stages rather
+than competing scenarios. She also reports scheduled \texttt{FT-Programmzeit}
+reception during AGRU-Front training and has enquiries open with archives and
+collections for radio papers, key material, and a second Thetis message. These
+reports move priors but remain source-reported until scans or exact
+transcriptions enter the campaign receipts.
+
+One associated radio finding is independently reproducible in the repository:
+P1030668 contains \texttt{FFFTTTBLEIBTBESETZT} exactly, while P1030707 carries
+the corrupted \texttt{FFFTTTBLEIBTBESEOZTX}. The clean phrase therefore does
+not depend on reconstructing the damaged sister copy. Its 19-letter core is a
+weak menu, but the exact 40-letter P1030668 source context yields four
+single-component, 18-loop alignment hypotheses. They are staged, not run, and
+remain behind the full middle-ring arm. The clean U-3024/U-2538 number strings
+are withdrawn after raw-copy rechecking, and short historical terms are kept
+independent rather than concatenated into invented sentences.
+
+Before the next GPU tranche begins, the campaign reports the completed findings
+and exact proposed scope back to Selm and incorporates any correction or archive
+reply first. The findings are joint work: historical research defines the
+source-grounded questions, and the graded machinery turns them into bounded
+measurements.
 
 Potsdam and Plaice daily keys for 1~May were eliminated by exhaustion
 against P1030680 (claim~C11): all $26^4$ message keys land at the noise
@@ -241,7 +277,13 @@ Crib catalog is recurrence-filtered & \textbf{Known but previously unrun surface
   \textbf{2{,}691{,}455} legal placements; its 24-placement fixture was never run or printed
   publicly. Selm Merel Wenselaers (Historian / Curator, Amsterdam / Antwerp) independently
   flagged the filter and supplied three exact historical leads on 2026-09-22 \\
-Wenselaers hapax leads $\times$ right rings & \textbf{Clean negative.} 28/28 placements dead at
+Selm-led historical/cryptanalytic arm & \textbf{Joint campaign work.} Selm Merel Wenselaers
+  leads the active archival arm; her source research and menu judgement define evidence-backed
+  questions, and HELUT's graded path turns them into controlled measurements. Exact and post-gap
+  tests of her first three leads are both clean 28/28 negatives. A new exact P1030668
+  \texttt{BLEIBTBESETZT} context fixture is staged but not run; archive replies and the full-middle
+  arm come first \\
+Selm-team hapax leads $\times$ right rings & \textbf{Clean negative.} 28/28 placements dead at
   the board, \textbf{0 raw stops over $4.471\times10^{11}$ settings} at 38.0M/s, 0 physical,
   0 quarantine. A verdict on 28 placements of the \emph{recorded} ciphertext with the middle
   ring pinned A --- not on the phrases generally. All three are second-net/Potsdam, so the
@@ -269,13 +311,11 @@ Ciphertext garble risk & Sister P1030681 needed degarbling; exact bars may drop 
   from at least three causes --- multi-part per-part keys, indels, and only \textbf{4
   controls / 8 events} of isolated substitution. An earlier ``16 controls prove archive
   garble'' reading is \textbf{withdrawn} \\
-Crib-free (Ostwald/Weierud) & Not a viable arm yet. The ${\sim}$200-letter threshold and the
-  68\,\% partial-exhaustion gain are \textbf{August sparse-model history}; the latter has
-  \emph{not} been rerun under the repaired dense scorer, so no current 68\,\% claim is made.
-  Current 72-letter known-shell control reaches 25/72 letters and 5/10 true plugs with the
-  IC-only rank still 223{,}118/456{,}976 and a fail-closed \textbf{NO BREAK}; unseeded ranking
-  stays negative (generic 5/30, median $-0.2306$). Four oracle-correct plugs flip the median
-  sign --- an upper bound on \emph{finishing} a true stop, not a way to find one \\
+Crib-free (Ostwald/Weierud) & Still negative at 72 letters, but current-model exhaustion is now
+  measured. Unseeded generic: 5/30, median $-0.2306$. Single-plug exhaust-6 reaches
+  $-0.0672$ (about 71\,\% of the deficit removed) and saturates by exhaust-10 at $-0.0567$.
+  New two-plug exhaust-6 gives 30\,\% wins / $-0.0361$; widening to exhaust-10 gives 40\,\%
+  but worsens the median to $-0.0486$. Thin controls, no zero crossing, no break \\
 Tolerant board sensitivity & \textbf{Proven on a known key}: at 1--3 corrupted crib letters the
   exact board \emph{loses} the true setting and a tolerance-$\ge g$ board \emph{keeps} it,
   forcing 25/25 plugs correctly. Metal port cross-checks at \textbf{0/192} lane mismatches \\
@@ -302,11 +342,13 @@ Post-gap $\delta=4$ against P1030680 & \textbf{Partial / suspended at 144/237}; 
   receipts}; 15 repaired/non-exact candidates yielded 0 exact hits and 0 gates.
   The same shell, all Futures, and settings $1\le s<256$ then completed
   \textbf{10{,}048/10{,}048 chunks and 4{,}163{,}640 receipts}, retaining 4{,}184
-  host-verified physical candidates: 40 exact identity hits killed by completion,
-  2{,}056 identity repairs, 41 exact post-gap hits, and 2{,}047 post-gap repairs.
-  \textbf{0 BREAK gates; no scored plaintext, key, or decrypt}. Candidate replay
-  is next; broader settings and shells remain open. Bounded, not global.
-  Cleartext, not FHE or encrypted tick rate \\
+  host-verified physical candidates: 40 exact identity hits, 2{,}056 identity
+  repairs, 41 exact post-gap hits, and 2{,}047 post-gap repairs. \textbf{0 BREAK
+  gates; no key or decrypt}. Read-only adjudication now kills all 41 exact post-gap
+  hits at joint $\le10$-plug completion, independently matching the 40 exact identity
+  deaths: all \textbf{81 exact candidates are split-menu ghosts}. The 4{,}103
+  repairs have no declared crib-exact bar and remain deferred; broader settings and
+  shells remain open. Bounded, not global. Cleartext, not FHE or encrypted tick rate \\
 \bottomrule
 \end{longtable}
 }
@@ -408,12 +450,7 @@ An internal relay audit on 2026-08-16 had already measured that 99.0\,\% of dist
 letter corpus windows are one-carrier phrases, yielding 2{,}691{,}455 legal placements, and
 emitted a 24-placement fixture. That fixture was never run, however, and the gap remained absent
 from this report and the public chronology.
-Selm Merel Wenselaers (Historian / Curator, Amsterdam / Antwerp) independently flagged the
-filter in unsolicited correspondence on 2026-09-22 and supplied three specific attested leads.
-His legal-placement arithmetic reproduces exactly, and his two highlighted menus are the only
-single-component members of their tied loop-count tier. We are grateful for that work, and the
-division is one of liability rather than ownership: those contributions are his, while any error
-in the verification or in the coverage claims here is ours.
+Selm Merel Wenselaers (Historian / Curator, Amsterdam / Antwerp) joined the campaign team after independently flagging the recurrence filter and supplying three specific historical leads. Her legal-placement arithmetic reproduced exactly, and her two highlighted menus are the only single-component members of their tied loop-count tier. Her work supplied the historical judgement that turned a dormant inventory into an actual experiment; HELUT's graded machinery turned that selection into bounded measurements. These are joint campaign findings, and the combination of archival research and mechanical cryptanalysis is the point rather than a division of credit.
 The correction matters for interpretation: the catalog is the register \emph{repeated across}
 the corpus, not its whole register. It still does not supply Thetis plaintext, which is the
 actual missing ingredient.
@@ -732,23 +769,26 @@ motivates the tolerant board are the work of Michael Hörenberg and
 Jean-François Girard; this campaign is downstream of their archival effort and
 would not exist without it.
 
-\textbf{Selm Merel Wenselaers} (Historian / Curator, Amsterdam / Antwerp)
-independently identified the recurrence filter in unsolicited correspondence on
-2026-09-22 and supplied three verbatim-attested, historically motivated one-carrier
-leads. His 15-of-44 legal-placement calculation reproduced exactly; his two
-highlighted placements were also the only single-component menus among the four
-tied at the highest loop count. These contributions moved a dormant internal
-surface into an actual campaign and public view, and we are grateful for them: the
-correspondence was unsolicited, precise, and reproducible line by line.
-For provenance, HELUT's
-\texttt{Scripts/relay\_crib\_mine.py} had already enumerated the general 99.0\,\% hapax surface
-on 2026-08-16, but its 24-placement fixture was never run or reported here; the
-specific leads, the independent diagnosis, the placement arithmetic, and the
-menu-selection insight are Wenselaers'. What we added was GPU time and grading, so
-any error in the verification, the topology grading, or the coverage claims in this
-report is ours rather than his.
+\textbf{Selm Merel Wenselaers} (Historian / Curator, Amsterdam / Antwerp),
+a deeply valued member of the campaign team, joined the work after independently identifying the recurrence filter
+and supplying three verbatim-attested, historically motivated one-carrier leads.
+Her 15-of-44 legal-placement calculation reproduced exactly; her two highlighted
+placements were also the only single-component menus among the four tied at the
+highest loop count. Her archival judgement moved a dormant internal surface into
+an actual campaign and public view. The resulting work is joint: Selm's historical
+and archival research defines evidence-backed questions, and HELUT's graded
+machinery turns them into controlled measurements. The campaign is stronger for
+combining both disciplines, and the findings belong to that collaboration.
 
-Naming a contributor is not an endorsement of any conclusion here, and none of
-the people named above has claimed a decrypt of P1030680.
+For chronology, HELUT's \texttt{Scripts/relay\_crib\_mine.py} had enumerated the
+general 99.0\,\% hapax surface on 2026-08-16, but its 24-placement fixture had
+never been run or reported. Selm's independent diagnosis, exact leads, placement
+arithmetic, and menu-selection insight supplied the historical prioritisation
+that made the surface actionable. She now leads the campaign's historical and
+archival arm, including primary-source and collection enquiries, while remaining
+part of the decision loop before new computational tranches begin.
+
+Naming collaborators records provenance; it does not imply that any person named
+above has claimed a decrypt of P1030680.
 
 \end{document}
