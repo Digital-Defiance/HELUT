@@ -1,0 +1,28 @@
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030680_wenselaers_procedure_neustadt_constellations.json (24 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 24 of 24
+min menu constraints: 16
+running 24 menus, highest deduction power first:
+  [1] {FFFTTTBLEIBTBESETZT@17 + NEUSTADT@43} edges=27 letters=19 loops=9 comp=1 span=51 central=T
+  [2] {FFFTTTBLEIBTBESETZT@15 + NEUSTADT@43} edges=27 letters=19 loops=9 comp=1 span=51 central=T
+  [3] {FFFTTTBLEIBTBESETZT@17 + NEUSTADT@42} edges=27 letters=19 loops=9 comp=1 span=50 central=T
+  [4] {FFFTTTBLEIBTBESETZT@15 + NEUSTADT@42} edges=27 letters=19 loops=9 comp=1 span=50 central=T
+  [5] {FFFTTTBLEIBTBESETZT@48 + NEUSTADT@12} edges=27 letters=20 loops=8 comp=1 span=67 central=T
+  [6] {FFFTTTBLEIBTBESETZT@48 + NEUSTADT@10} edges=27 letters=20 loops=8 comp=1 span=67 central=T
+  [7] {FFFTTTBLEIBTBESETZT@46 + NEUSTADT@10} edges=27 letters=20 loops=8 comp=1 span=65 central=T
+  [8] {FFFTTTBLEIBTBESETZT@38 + NEUSTADT@25} edges=27 letters=20 loops=8 comp=1 span=57 central=T
+  [9] {FFFTTTBLEIBTBESETZT@38 + NEUSTADT@15} edges=27 letters=20 loops=8 comp=1 span=57 central=T
+  [10] {FFFTTTBLEIBTBESETZT@10 + NEUSTADT@46} edges=27 letters=20 loops=8 comp=1 span=54 central=T
+  [11] {FFFTTTBLEIBTBESETZT@10 + NEUSTADT@45} edges=27 letters=20 loops=8 comp=1 span=53 central=T
+  [12] {FFFTTTBLEIBTBESETZT@28 + NEUSTADT@15} edges=27 letters=20 loops=8 comp=1 span=47 central=T
+  … 12 more
+shells/menu: 34944 (336 WO × 2 Greek × 2 UKW × 1 mid-ring × 26 right-ring) → 1.6e+10 settings
+kernel sieve: ≤10 plugs
+GPU pipeline depth: 4 shells in flight
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+right ring swept: every right-wheel turnover phase covered
+residual gap: middle ring pinned A, so keys whose middle wheel turns over inside a 67-letter span (~12% for 1 notch, ~23% for 2) are not covered — --bombe-middle-ring closes it
+ETA floor (~50M/s): 127.7 min
+
+quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → logs/quarantine_candidates.json
