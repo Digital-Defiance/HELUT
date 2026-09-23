@@ -91,6 +91,22 @@ export function JournalPage() {
               </span>
             </li>
             <li>
+              <span className="mono">RUNNING</span>
+              <span>
+                <strong>A measured prior cut the next major run from 28 hours to under 7 — and it is under way.</strong> Looking for an unexploited lever in data we already held, the recovered daily keys turned out to agree on something: all three key-nets broken from 1 May 1945 put the same rotor, number VIII, in the fast position — 438/AACU (31 messages), 568/AAEL (16), 528/AAFB (1). If the nets chose wheels independently, three agreeing is about a 1.6% coincidence. That narrows the wheel-order search from 336 orders to 42, taking the full middle-ring arm from roughly 28 hours to about 6.6, while the engine still reports no residual ring gap — so coverage is preserved, not traded away.
+                {' '}
+                <strong>It eliminates nothing.</strong> This reorders the search so the likeliest wheel orders run first; the other 294 stay open, and a negative under this prior is explicitly not wheel-order coverage. Three nets is a thin sample, and they may simply have drawn from a shared key table rather than choosing freely — which is a historical question rather than a mathematical one, and one for the archival arm to answer. If central assignment across nets is documented, this becomes a strong constraint; if not, it stays a weak ordering hint.
+              </span>
+            </li>
+            <li>
+              <span className="mono">ELIMINATED</span>
+              <span>
+                <strong>Three classical human methods tested against our own data, and all three are dead.</strong> <em>Cillies</em> — Bletchley's most productive lever was operators choosing lazy message keys. Measured across the 47 recovered keys: 11 of 47 carry a repeated letter against a uniform expectation of 10.2, and per-position letter frequencies are flat. These operators randomised properly; there is no habit to exploit, and that is now a measurement rather than an assumption. <em>The indicator system</em> — the message key is a function of the daily key and the Grundstellung, and that mapping is a bijection, so trading an unknown message key for an unknown Grund reduces the space by exactly nothing. <em>Banburismus</em> — needs two messages in depth, and the target has no partner, which is the founding problem of this whole campaign.
+                {' '}
+                We also mined the expanded corpus for new cribs and found 480 mechanically strong hypotheses, some reaching 20 loops — as strong as the best menus we have. They will not be run. Their provenance is wrong: Graf Spee is 1939, one is a Swedish-intercepted lightship position report, another is U-boat provisioning from November. None is Baltic training register from May 1945. Running them would repeat this campaign's most-tested mistake, the imported-register wedge, which has been negative in every arm to date. A 20-loop menu aimed at the wrong hypothesis is only efficiently wrong.
+              </span>
+            </li>
+            <li>
               <span className="mono">REFRAME</span>
               <span>
                 <strong>72 letters is enough — the barrier is our search, not the message.</strong> The full M4 key (wheels, rings, position, ten-plug board) is about <strong>2<sup>86</sup></strong>. Seventy-two letters of German carries roughly <strong>230 bits</strong> of redundancy, putting unicity distance near <strong>27 letters</strong>. We sit at about 2.7× that. So exactly one key yields German, by a wide margin, and every negative on this page is an <em>estimation</em> failure rather than a shortage of information. An independent check confirms the estimator is what binds: a from-scratch Enigma simulator plus leave-one-out n-grams, grading the truth against genuine wrong-key decrypts with the plugboard climbed symmetrically, reproduces the standing negative (median margin −0.053 at 72 letters) from a completely separate implementation.
