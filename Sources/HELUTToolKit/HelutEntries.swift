@@ -294,6 +294,13 @@ public enum HelutBombeCLI {
         exit(0)
     }
 
+    // Grades the sparse scoring path on a known key under exact and post-gap geometry before it
+    // is allowed to adjudicate any P1030680 candidate.
+    if CommandLine.arguments.contains("--sparse-calibration-control") {
+        MuleinSparseCalibrationControl.run()
+        exit(0)
+    }
+
     if CommandLine.arguments.contains("--indel-selftest") {
         runIndelSelfTest()
         exit(0)
@@ -365,6 +372,10 @@ public enum HelutBombeCLI {
                 // spliced-menu hypothesis. Separate prefixes because they are separate
                 // mechanisms — see directives/mulein-board.md §3.
                 || $0.hasPrefix("--garble-") || $0.hasPrefix("--indel-")
+                // `--sparse-` is the hole-aware scoring path: the calibration control and the
+                // read-only candidate adjudicator. It reads campaign receipts and never
+                // evaluates a rotor setting, so it is deliberately not a `--bombe-` flag.
+                || $0.hasPrefix("--sparse-")
         }
     }
 }
