@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { NaziBlaster9000Span } from '../NaziBlaster9000Span'
 import { Fahrenheit261Span } from '../Fahrenheit261Span'
+import { TuringLiveStat } from '../TuringLiveStat'
 
 export function JournalPage() {
   return (
@@ -27,7 +28,7 @@ export function JournalPage() {
             </p>
           </div>
 
-          <div className="status-strip">
+          <div className="status-strip status-strip-4">
             <div className="stat">
               <div className="label">Indicators</div>
               <div className="value">VROL NMKA</div>
@@ -40,6 +41,7 @@ export function JournalPage() {
               <div className="label">Ciphertext</div>
               <div className="value">72 letters (JCRSA…HVGF)</div>
             </div>
+            <TuringLiveStat />
           </div>
         </div>
       </section>

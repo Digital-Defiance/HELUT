@@ -877,6 +877,30 @@ section.band-ink code {
   color: #e0a36a;
 }
 
+.stat .turing-muted {
+  color: rgba(232, 236, 239, 0.55);
+}
+
+.stat a.turing-live-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.stat a.turing-live-link:hover em,
+.stat a.turing-live-link:focus-visible em {
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+.stat .turing-live-hint {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(158, 224, 218, 0.75);
+  vertical-align: middle;
+}
+
 /* Footer */
 .site-footer {
   padding: 2.5rem 0 3rem;
