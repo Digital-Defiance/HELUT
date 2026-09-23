@@ -1,0 +1,19 @@
+controls                : 30 at 72 letters
+arm A training letters  : 4644
+arm B training letters  : 6348 (+1704, +37%)
+n-gram order            : 4
+wrong-key samples       : 8 per control, identical across arms
+seeds                   : 3
+
+seed 0: A margin=-0.0492 z=+0.129   B margin=-0.0708 z=-0.564
+seed 1: A margin=-0.0358 z=+0.132   B margin=-0.0695 z=-0.548
+seed 2: A margin=-0.0595 z=+0.142   B margin=-0.0693 z=-0.468
+
+ arm   letters  mean margin           margin range   mean z              z range
+----------------------------------------------------------------------------------
+   A      4644      -0.0482 [-0.0595,-0.0358]   +0.135      [+0.129,+0.142]
+   B      6348      -0.0698 [-0.0708,-0.0693]   -0.527      [-0.564,-0.468]
+
+delta margin (B-A): -0.0216    delta z (B-A): -0.662
+VERDICT: z is worse with disjoint ranges -- the extra text is off-register enough
+to hurt. Check that the added traffic matches the target's dialect.
