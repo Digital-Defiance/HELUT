@@ -352,17 +352,32 @@ enum OstwaldCurve {
     /// 25 partners; for six letters that is 141 distinct fixed plugs after removing the
     /// duplicates where both endpoints are listed. Letters are taken in ciphertext
     /// frequency order, which is also how that implementation orders its swaps by default.
+    /// `exhaustDepth` fixes that many plugs simultaneously rather than one.
+    ///
+    /// Depth 1 is Ostwald's published scheme. Depth 2 is the lever Phase 50 named and never
+    /// built, and the reason to expect anything from it is an asymmetry rather than more
+    /// compute. Exhaustion is applied to the true *and* the wrong settings, so extra starts
+    /// raise the decoys' maximum too — which is exactly why depth 1 saturates: sweeping 141
+    /// fixed plugs up to 325 buys no further margin, because both sides gain equally.
+    ///
+    /// What does *not* transfer to a decoy is basin quality. Among depth-1 seeds the truth
+    /// gets one start whose fixed plug is genuinely correct; among depth-2 seeds it gets one
+    /// whose *pair* is correct, and the oracle ladder shows that quality pays steeply
+    /// (2 correct plugs −0.10, 4 correct +0.33). So depth 2 trades a much larger decoy
+    /// maximum against a discretely better true basin, and which dominates is an empirical
+    /// question this parameter exists to answer.
     static func climbExhaustive(
         key: EnigmaM4Key,
         ciphertext: [Int],
         scorer: ClimbScorer,
         maxPlugs: Int = 10,
         exhaustLetters: Int,
+        exhaustDepth: Int = 1,
         alsoSeeded: [(Int, Int)] = [],
         trigramTable: [Double]? = nil,
         reconnectPasses: Int = 0
     ) -> (pairs: [(Int, Int)], score: Double, plain: [Int]) {
-        guard exhaustLetters > 0 else {
+        guard exhaustLetters > 0, exhaustDepth >= 1 else {
             return climb(key: key, ciphertext: ciphertext, scorer: scorer,
                          maxPlugs: maxPlugs, seeded: alsoSeeded,
                          trigramTable: trigramTable, reconnectPasses: reconnectPasses)
@@ -378,12 +393,29 @@ enum OstwaldCurve {
                 seeds.insert([min(a, b), max(a, b)])
             }
         }
+        let ordered = seeds.sorted { ($0[0], $0[1]) < ($1[0], $1[1]) }
+
+        // Start sets: single plugs, or disjoint plug pairs. Disjointness is forced because a
+        // plugboard is an involution — two fixed plugs may not share a letter.
+        var startSets: [[(Int, Int)]] = []
+        if exhaustDepth == 1 {
+            startSets = ordered.map { [($0[0], $0[1])] }
+        } else {
+            for i in ordered.indices {
+                for j in ordered.indices where j > i {
+                    let left = ordered[i], right = ordered[j]
+                    if left[0] == right[0] || left[0] == right[1]
+                        || left[1] == right[0] || left[1] == right[1] { continue }
+                    startSets.append([(left[0], left[1]), (right[0], right[1])])
+                }
+            }
+        }
 
         var best: (pairs: [(Int, Int)], score: Double, plain: [Int])?
-        for seed in seeds {
+        for start in startSets {
             let result = climb(
                 key: key, ciphertext: ciphertext, scorer: scorer, maxPlugs: maxPlugs,
-                seeded: alsoSeeded + [(seed[0], seed[1])], trigramTable: trigramTable,
+                seeded: alsoSeeded + start, trigramTable: trigramTable,
                 reconnectPasses: reconnectPasses
             )
             if best == nil || result.score > best!.score { best = result }
@@ -444,6 +476,7 @@ enum OstwaldCurve {
         wrongSamples: Int,
         seed: UInt64,
         exhaustLetters: Int = 0,
+        exhaustDepth: Int = 1,
         seededPlugs: Int = 0,
         navalCorpus: NavalGramCorpus? = nil,
         reconnectPasses: Int = 0,
@@ -468,7 +501,8 @@ enum OstwaldCurve {
         let oracleSeed = Array(control.truePairs.prefix(max(0, seededPlugs)))
         let truth = climbExhaustive(
             key: stripped, ciphertext: ct, scorer: scorer,
-            exhaustLetters: exhaustLetters, alsoSeeded: oracleSeed,
+            exhaustLetters: exhaustLetters, exhaustDepth: exhaustDepth,
+            alsoSeeded: oracleSeed,
             trigramTable: trigramTable, reconnectPasses: reconnectPasses
         )
         // The lexicon is a *discriminator*, not a climbing objective: the climb above ran on
@@ -513,7 +547,7 @@ enum OstwaldCurve {
             )
             let wrongResult = climbExhaustive(
                     key: wrong, ciphertext: ct, scorer: scorer,
-                    exhaustLetters: exhaustLetters,
+                    exhaustLetters: exhaustLetters, exhaustDepth: exhaustDepth,
                     alsoSeeded: randomPairs(max(0, seededPlugs)),
                     trigramTable: trigramTable, reconnectPasses: reconnectPasses
             )

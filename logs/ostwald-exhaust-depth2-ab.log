@@ -1,0 +1,7 @@
+=== exhaust 6 depth 1 ===
+exhaustion    : Ostwald partial exhaustion over the 6 most frequent ciphertext letters, depth 1
+    72    10    2     20%    -0.0672   -0.34   1/10     7%
+=== exhaust 6 depth 2 ===
+exhaustion    : Ostwald partial exhaustion over the 6 most frequent ciphertext letters, depth 2 (disjoint plug 2-sets)
+    72    10    3     30%    -0.0361   -0.28   1/10     8%
+=== exhaust 10 depth 2 ===

@@ -33,6 +33,11 @@ func runOstwaldCurve() {
     // Ostwald partial exhaustion: number of high-frequency letters to fix a plug on.
     // 6 letters == 141 fixed plugs, matching enigma-cuda's documented -e behaviour.
     let exhaustLetters = intFlag("--ostwald-exhaust", allowZero: true) ?? 0
+    // Depth 1 is Ostwald's published single-plug scheme and saturates: 141 fixed plugs up to
+    // 325 buys no further margin, because exhaustion is symmetric and lifts the decoys' best
+    // start too. Depth 2 fixes two disjoint plugs, trading a far larger decoy maximum against
+    // a discretely better true basin. Never previously run; Phase 50 named it as open.
+    let exhaustDepth = max(1, intFlag("--ostwald-exhaust-depth") ?? 1)
     // Bombe coupling model: k correct plugs at the true setting (a true stop's forced
     // board) against k random plugs at every decoy (a ghost stop's forced board).
     let seededPlugs = intFlag("--ostwald-seed", allowZero: true) ?? 0
@@ -82,7 +87,8 @@ func runOstwaldCurve() {
         : "greedy insertion + one replacement pass (insertion-only neighborhood)"))
     if exhaustLetters > 0 {
         print("exhaustion    : Ostwald partial exhaustion over the \(exhaustLetters) most "
-            + "frequent ciphertext letters")
+            + "frequent ciphertext letters, depth \(exhaustDepth)"
+            + (exhaustDepth > 1 ? " (disjoint plug \(exhaustDepth)-sets)" : ""))
         print("                (applied symmetrically to true *and* wrong settings)")
     } else {
         print("exhaustion    : none — climbing from an empty board (--ostwald-exhaust N)")
@@ -162,6 +168,7 @@ func runOstwaldCurve() {
                     wrongSamples: wrongSamples,
                     seed: UInt64(0x5EED &+ index &* 7919 &+ length &* 104_729),
                     exhaustLetters: exhaustLetters,
+                    exhaustDepth: exhaustDepth,
                     seededPlugs: seededPlugs,
                     navalCorpus: navalCorpus,
                     reconnectPasses: reconnectPasses,

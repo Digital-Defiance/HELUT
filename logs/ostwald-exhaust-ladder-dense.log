@@ -1,0 +1,20 @@
+=== ostwald-exhaust 8 ===
+scorer: staged
+   len ctrls  win    win%  medMargin    medZ  plugs   corr
+    72     8    3     38%    -0.0672   -0.34   0/10     7%
+         medMargin / medZ = median margin and median z-score of the truth.
+=== ostwald-exhaust 10 ===
+scorer: staged
+   len ctrls  win    win%  medMargin    medZ  plugs   corr
+    72     8    3     38%    -0.0567    0.70   0/10     4%
+         medMargin / medZ = median margin and median z-score of the truth.
+=== ostwald-exhaust 13 ===
+scorer: staged
+   len ctrls  win    win%  medMargin    medZ  plugs   corr
+    72     8    3     38%    -0.0567    0.70   0/10     4%
+         medMargin / medZ = median margin and median z-score of the truth.
+=== ostwald-exhaust 26 ===
+scorer: staged
+   len ctrls  win    win%  medMargin    medZ  plugs   corr
+    72     8    3     38%    -0.0567    0.58   0/10     6%
+         medMargin / medZ = median margin and median z-score of the truth.
