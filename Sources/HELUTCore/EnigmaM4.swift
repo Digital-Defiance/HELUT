@@ -656,6 +656,39 @@ package enum M4ThetisAttack {
         )
     }
 
+    /// Measured same-day prior: rotor VIII on the fast wheel.
+    ///
+    /// Tighter than `navalTwoNotchPrior` and grounded in this corpus rather than general
+    /// convention. All three daily keys recovered from the 1 May 1945 U-534 scrape put
+    /// **VIII** in the fast position, on three different nets:
+    ///
+    ///     438 / AACU  (31 messages)   left IV  middle III  right VIII
+    ///     568 / AAEL  (16 messages)   left V   middle VI   right VIII
+    ///     528 / AAFB  ( 1 message )   left V   middle II   right VIII
+    ///
+    /// Under independent per-net wheel choice that is (1/8)^2 ≈ 1.6%. It is evidence, not
+    /// proof: three nets is a thin sample, the nets may have drawn from a shared
+    /// Schlüsseltafel, and the sample is the set Hörenberg happened to break.
+    ///
+    /// **This is an ORDERING prior and nothing else.** 42 of 336 wheel orders, so an 8×
+    /// speedup on whatever arm it fronts; if the prior is wrong the remaining 294 orders are
+    /// simply run afterwards and nothing has been eliminated. A negative here must never be
+    /// reported as covering the wheel-order space. `Scripts/wheel_order_prior.py` recomputes
+    /// the measurement from the corpus.
+    package static func vIIIFastWheelPrior() -> Subspace {
+        var orders: [(EnigmaRotorSpec, EnigmaRotorSpec, EnigmaRotorSpec)] = []
+        for order in allWheelOrders() where order.2.name == "VIII" {
+            orders.append(order)
+        }
+        return Subspace(
+            name: "viii-fast-wheel",
+            rationale: "Rotor VIII on the fast wheel — measured in 3/3 same-day nets "
+                + "(1 May 1945); 42 of 336 orders, ordering prior only, eliminates nothing",
+            wheelOrders: orders,
+            ringVariants: [(0, 0, 0, 0)]
+        )
+    }
+
     /// Unconstrained: every wheel order, rings AAAA.
     package static func fullSpace() -> Subspace {
         Subspace(
@@ -715,6 +748,8 @@ package enum M4ThetisAttack {
             return potsdamNeighbourhood()
         case "two-notch", "naval-two-notch", "naval-two-notch-right":
             return navalTwoNotchPrior()
+        case "viii-fast", "viii-fast-wheel", "viii-right":
+            return vIIIFastWheelPrior()
         case "rings-right", "right-ring":
             return rightRingSweep()
         case "full-potsdam-rings", "potsdam-rings":
@@ -723,7 +758,8 @@ package enum M4ThetisAttack {
             return fullSpace()
         default:
             preconditionFailure(
-                "Unknown subspace '\(name)'. Use: potsdam, two-notch, rings-right, full-potsdam-rings, full"
+                "Unknown subspace '\(name)'. Use: potsdam, two-notch, viii-fast-wheel, "
+                    + "rings-right, full-potsdam-rings, full"
             )
         }
     }

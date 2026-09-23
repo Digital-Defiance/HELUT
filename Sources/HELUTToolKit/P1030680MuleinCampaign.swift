@@ -426,13 +426,15 @@ private func p1030680CampaignSubspace(_ name: String) throws -> M4ThetisAttack.S
     case "potsdam", "potsdam-neighbourhood": return M4ThetisAttack.potsdamNeighbourhood()
     case "two-notch", "naval-two-notch", "naval-two-notch-right":
         return M4ThetisAttack.navalTwoNotchPrior()
+    case "viii-fast", "viii-fast-wheel", "viii-right":
+        return M4ThetisAttack.vIIIFastWheelPrior()
     case "rings-right", "right-ring": return M4ThetisAttack.rightRingSweep()
     case "full-potsdam-rings", "potsdam-rings": return M4ThetisAttack.fullWithPotsdamRings()
     case "full", "all": return M4ThetisAttack.fullSpace()
     default:
         throw MuleinFutureMetalError.invalidBatch(
             "unknown subspace \(name); use potsdam-neighbourhood, naval-two-notch-right, "
-                + "rings-right, full-potsdam-rings, or full"
+                + "viii-fast-wheel, rings-right, full-potsdam-rings, or full"
         )
     }
 }
