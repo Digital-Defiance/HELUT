@@ -1,0 +1,16 @@
+clean-key controls : 32
+n-gram order       : 4 (leave-one-out per control)
+wrong-key samples  : 8 per control, same shell, real decrypts
+every statistic is computed identically for the truth and for each decoy
+
+  len     method  ctrls   win%   med margin   decoy sd    med z  verdict
+------------------------------------------------------------------------
+   72       peak     30    17%      -0.0394     0.0295    0.036  baseline
+   72   ablation     30    17%      -0.0373     0.0214   -0.020  COMPRESSION ONLY — margin up, z down; not progress
+   72       swap     30    17%      -0.0202     0.0152    0.130  REAL separation gain
+   72  logsumexp     30    13%      -0.0280     0.0204    0.090  REAL separation gain
+
+Margin alone is NOT sufficient evidence. Rescaling every score shrinks all margins
+toward zero while separating nothing, and the decoy-sd column exposes exactly that.
+z = (truth - decoy mean) / decoy sd is scale-free, so a method counts as progress
+only when margin AND z both improve over `peak`.
