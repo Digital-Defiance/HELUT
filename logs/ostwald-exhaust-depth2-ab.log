@@ -5,3 +5,5 @@ exhaustion    : Ostwald partial exhaustion over the 6 most frequent ciphertext l
 exhaustion    : Ostwald partial exhaustion over the 6 most frequent ciphertext letters, depth 2 (disjoint plug 2-sets)
     72    10    3     30%    -0.0361   -0.28   1/10     8%
 === exhaust 10 depth 2 ===
+exhaustion    : Ostwald partial exhaustion over the 10 most frequent ciphertext letters, depth 2 (disjoint plug 2-sets)
+    72    10    4     40%    -0.0486   -0.05   1/10     6%
