@@ -475,15 +475,62 @@ Staged from this: \texttt{FFFTTTBLEIBTBESETZT} $\times$ \texttt{NEUSTADT}, 24 si
 rows of 27 edges and 7--9 loops, both strings repo-verbatim, topology cross-checked between an
 independent union-find and the board. The cost is $3.83\times10^{11}$ settings, roughly 2.8~h.
 
+\paragraph{Result: a clean negative.}
+The arm ran to completion on 23 September 2026: 24 of 24 menus dead at the board,
+\textbf{zero} raw stops across $3.832\times10^{11}$ settings at 42.5\,M/s, no physically
+buildable board, and no soft-band candidate at all---the quarantine file was never written.
+Zero raw stops is a stronger shape than the campaign's usual ``many stops, none physical'':
+the board never produced a candidate to sieve. Under right-ring coverage with the middle ring
+pinned, no key places \texttt{FFFTTTBLEIBTBESETZT} \emph{and} \texttt{NEUSTADT} at any of the
+tested alignments. This does not disturb the reported Volksliste~III history; what it falsifies
+is the narrower proposition that both strings sit verbatim in this ciphertext at those offsets.
+The residual stays printed: a pinned middle ring leaves ${\sim}12$--$23\,\%$ of keys untested
+across these 40--67 letter spans.
+
+\paragraph{Unicity: the barrier is the estimator, not the information.}
+This was worth computing and had not been. The full key---wheel order, Greek wheel, thin
+reflector, rings and position ($4.151\times10^{11}$ settings) together with the ten-plug board
+$\binom{26}{\text{10 pairs}} = 26!/(6!\,10!\,2^{10}) \approx 1.507\times10^{14}$---carries
+about $6.3\times10^{25} \approx 2^{86}$, i.e.\ ${\approx}86$ bits. German redundancy at roughly
+3.2 bits per letter puts 72 letters at ${\approx}230$ bits, so unicity distance is near
+\textbf{27 letters} and the target sits at about $2.7\times$ that. Exactly one key yields
+German, by a margin of some 144 bits. Every negative in this report is therefore a failure of
+\emph{search}, not a shortage of information: the answer provably exists inside the space being
+enumerated.
+
+An independent implementation confirms that the estimator is what binds. A from-scratch Python
+M4, verified by reproducing every clean key in the corpus, combined with leave-one-out
+$n$-grams and \emph{genuine} wrong-key decrypts, reproduces the standing negative: median
+margin $-0.053$ at 72 letters across orders 2--5, against the Swift pipeline's $-0.036$ to
+$-0.123$. Two unrelated implementations agreeing on a negative is stronger evidence than
+either alone.
+
+One methodological trap is recorded because it nearly became a false positive. The first
+version of that probe reported a margin of $+1.14$ and a 100\,\% win rate at 72 letters, which
+would have overturned the central negative of this work. The defect was supplying the true
+plugboard to the truth \emph{and} to every decoy: with the correct board the true setting
+decrypts to clean German while wrong settings are noise, so any scorer separates them
+perfectly. It was grading against the answer key. Requiring the board to be hill-climbed
+symmetrically at every candidate moved the figure from $+1.14$ to $-0.044$. That single
+correction is the difficulty of the problem, and it is why partial exhaustion must always be
+applied to the truth and the decoys alike. The probe's scope limit is equally worth stating:
+it trained on 4{,}644 letters, whereas the dense trigram table used here derives from
+28.5\,M. It therefore measures saturation in $n$-gram \emph{order} at small sample size, not
+the exhaustion of language modelling as a lever.
+
+The practical consequence is a change in ranking. The plugboard was a \emph{daily} setting, so
+a second Thetis signal from 1~May would constrain the same 47-bit board with 144 letters
+rather than 72, and the oracle ladder already shows four correct plugs flipping the margin
+positive. Archival discovery therefore outranks further sweeping, including the five-to-seven
+day swept version of the arm above.
+
 The measurement that matters is not the price but the geometry, and it sets the run order.
 A 27-edge contiguous crib spans 27 positions; these constellations span 47--67, because the
 anchors sit far apart. Span, not edge count, is the quantity a middle ring pinned at~A fails to
 cover: the engine's preflight reports ${\sim}12\,\%$ of keys uncovered for one middle-wheel notch
 and ${\sim}23\,\%$ for two across a 67-letter span, against a few percent for a compact crib.
-Loops are not free. Sweeping these rows before the full-middle arm would spend the compute
-precisely where coverage is weakest, so they queue behind it, on the same reasoning that already
-placed the four-placement exact-radio context fixture there. No setting has been evaluated from
-this fixture; it eliminates nothing.
+Loops are not free: the extra deduction power a joint menu buys is partly paid for in a wider
+blind spot, which is the residual quoted with the result above.
 The Ostwald--Weierud ciphertext-only attack needs none: for each candidate rotor
 setting it hill-climbs the plugboard and ranks the setting by the score the climb
 reaches.
