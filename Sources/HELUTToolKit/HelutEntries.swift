@@ -301,6 +301,12 @@ public enum HelutBombeCLI {
         exit(0)
     }
 
+    // Read-only geometry-aware adjudication of campaign candidates. Evaluates no rotor setting.
+    if CommandLine.arguments.contains("--sparse-adjudicate") {
+        runP1030680SparseAdjudication()
+        exit(0)
+    }
+
     if CommandLine.arguments.contains("--indel-selftest") {
         runIndelSelfTest()
         exit(0)
