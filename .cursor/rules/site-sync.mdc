@@ -1,5 +1,5 @@
 ---
-description: Keep helut.digitaldefiance.org in sync when claims, hedges, or SING numbers move
+description: Keep helut.org in sync when claims, hedges, or SING numbers move
 alwaysApply: true
 ---
 # HELUT site sync (`site/`)

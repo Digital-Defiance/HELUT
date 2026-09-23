@@ -37,7 +37,7 @@ Papers (canonical **TeX**; Markdown is generated — do not hand-edit `*.md`):
 
 Needs `latexmk` (MacTeX / TeX Live) and `pandoc`. Aux files land under `build/`.
 
-**Project site:** [helut.digitaldefiance.org](https://helut.digitaldefiance.org) — stack overview, the three pre-Enigma apps, and the P1030680 campaign. Source in [`site/`](site/).
+**Project site:** [helut.org](https://helut.org) — stack overview, the three pre-Enigma apps, and the P1030680 campaign. Source in [`site/`](site/).
 
 **YouTube concept videos:** Remotion + ElevenLabs TTS live in
 [`MuleinLabs/helut-videos`](https://github.com/JessicaMulein/MuleinLabs/tree/main/helut-videos)
