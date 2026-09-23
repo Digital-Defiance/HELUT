@@ -28,7 +28,7 @@ export function EnigmaPage() {
             </div>
             <div className="stat">
               <div className="label">Current Focus</div>
-              <div className="value">Hunting the final rotor turnovers</div>
+              <div className="value">Middle-ring coverage &amp; archival leads</div>
             </div>
           </div>
         </div>
@@ -106,17 +106,22 @@ export function EnigmaPage() {
               <div className="when">Step 4: The Final Hunt</div>
               <h3>A massive sweep.</h3>
               <p>
-                I recently had a false alarm where a shorter phrase tricked the statistics into thinking it had found German. I tightened my defenses and just finished sweeping a massive portion of the search space with no true break. The net is tightening, and I am currently running a highly targeted hunt on the remaining high-probability locations.
+                I once had a false alarm where a shorter phrase tricked the statistics into thinking it had found German. I tightened those defenses and have swept a large portion of the search space with no true break. What is left is not a shrinking net around a known answer — it is honest open ground: the wheel positions a pinned ring never covered, and the historical leads that decide which phrases are even worth testing.
               </p>
             </article>
           </div>
 
           <div className="note" style={{ marginTop: '2rem' }}>
-            I know the engine is flawless. I tested it against a message that was already solved, and out of billions of possibilities, it isolated the one true answer and perfectly rebuilt the operator's physical plugboard. The machine is ready. Now, it's just a matter of time.
+            The engine is validated: against a message that was already solved, it isolated the one true answer out of billions and rebuilt the operator's physical plugboard exactly. That proves the machinery works — it does not promise this message will fall. On 72 letters the honest possibility is that the statistical margin is simply too thin, and that no amount of compute breaks it. The most likely path to a real answer is not more searching but an archival one: a single genuine plaintext fragment would be worth more than every sweep we have run. P1030680 remains unbroken, and we have not read a word of it.
           </div>
 
           <p style={{ marginTop: '1.75rem', color: 'var(--ink-soft)' }}>
-            For those who want to dive into the raw engineering logs and code, my public ledger is available here:{' '}
+            This is now team work. As of September 2026 the historian and curator{' '}
+            <strong>Selm Merel Wenselaers</strong> (Amsterdam / Antwerp) leads the archival arm:
+            her source research decides which hypotheses are worth testing, and the mechanical
+            side turns them into controlled measurements. Negatives are recorded with the same
+            care as any hit. For the raw engineering logs and code, the full public ledger — every
+            eliminated wedge, every honest caveat — is here:{' '}
             <a href="https://github.com/Digital-Defiance/HELUT/blob/main/BREAK_P1030680.md">
               The P1030680 Campaign Journal
             </a>
