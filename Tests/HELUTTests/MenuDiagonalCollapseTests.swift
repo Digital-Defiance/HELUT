@@ -40,6 +40,31 @@ final class MenuDiagonalCollapseTests: XCTestCase {
         XCTAssertFalse(b.constraints.isSubset(of: a.constraints))
     }
 
+    /// The alignment invariant behind `--use-provenance`: two placements of the same source
+    /// text at the same diagonal (`sourceStart - offset`) assert the same source content in
+    /// the same alignment, so they are one hypothesis. Concretely, sliding the window one
+    /// letter right in the source AND one letter right in the target yields a menu whose
+    /// constraints are the same assertion shifted — the overlap is what makes them redundant
+    /// rather than independent. This pins that the shared portion really is identical, which
+    /// is the fact the collapse relies on.
+    func testSameDiagonalPlacementsShareTheirOverlappingConstraints() throws {
+        let source = "FFFTTTBLEIBTBESETZTX"
+        // Same diagonal: sourceStart - offset is constant (0 - 10 == 1 - 11 == -10).
+        let a = try XCTUnwrap(menu(String(source.prefix(18)), 10))
+        let b = try XCTUnwrap(menu(String(source.dropFirst(1).prefix(18)), 11))
+
+        // Every position both menus anchor must carry the same asserted plaintext letter,
+        // because both are reading the same source text at the same alignment.
+        let aMap = Dictionary(uniqueKeysWithValues: zip(a.steps, a.ends.map(\.0)))
+        let bMap = Dictionary(uniqueKeysWithValues: zip(b.steps, b.ends.map(\.0)))
+        let shared = Set(aMap.keys).intersection(bMap.keys)
+        XCTAssertGreaterThan(shared.count, 10, "same-diagonal menus should overlap heavily")
+        for position in shared {
+            XCTAssertEqual(aMap[position], bMap[position],
+                           "same-diagonal menus disagree at position \(position)")
+        }
+    }
+
     func testKeepingASupersetTestsEveryConstraintOfTheDropped() throws {
         // The operational meaning of the collapse: every (step, plain, cipher) the dropped menu
         // would put on the board is already on the keeper's board.

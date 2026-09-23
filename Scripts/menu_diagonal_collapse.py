@@ -79,12 +79,14 @@ def topology(text: str, offset: int, ciphertext: str) -> dict:
 
 
 class Placement:
-    __slots__ = ("id", "text", "offset", "assert_set", "top")
+    __slots__ = ("id", "text", "offset", "assert_set", "top", "source", "source_start")
 
     def __init__(self, text: str, offset: int, ciphertext: str):
         self.id = f"{text}@{offset}"
         self.text = text
         self.offset = offset
+        self.source = None
+        self.source_start = None
         # The hypothesis: position -> plaintext letter over the ciphertext.
         self.assert_set = frozenset(
             (offset + i, ch) for i, ch in enumerate(text))
@@ -106,18 +108,61 @@ class Placement:
                 -self.top["components"], self.id)
 
 
-def load_placements(fixture: dict) -> list[Placement]:
+def load_placements(fixture: dict) -> tuple[list[Placement], str, int]:
     ciphertext = "".join(c for c in fixture["ciphertext"].upper() if c.isalpha())
     placements: list[Placement] = []
     dropped_illegal = 0
     for crib in fixture.get("cribs") or []:
         text = "".join(c for c in crib["text"].upper() if c.isalpha())
+        source = crib.get("sourceMessage")
+        start = crib.get("sourceStart")
         for offset in crib.get("offsets", []):
             if not legal(text, ciphertext, offset):
                 dropped_illegal += 1
                 continue
-            placements.append(Placement(text, offset, ciphertext))
+            pl = Placement(text, offset, ciphertext)
+            pl.source = source
+            pl.source_start = start
+            placements.append(pl)
     return placements, ciphertext, dropped_illegal
+
+
+def collapse_by_diagonal(
+    placements: list[Placement],
+) -> tuple[list[Placement], list[tuple[Placement, str]], int]:
+    """Group by the alignment invariant (sourceMessage, sourceStart - offset).
+
+    Two placements of the same source text at the same diagonal assert the same source
+    content in the same alignment against the ciphertext: they are ONE hypothesis, and a
+    window slid by one letter is not a new one. Keeps the strongest menu per diagonal.
+
+    Requires provenance; placements lacking it are passed through untouched so a fixture
+    without `sourceMessage`/`sourceStart` degrades to the conservative subset collapse
+    rather than silently merging unrelated menus.
+    """
+    groups: dict[tuple, list[Placement]] = {}
+    passthrough: list[Placement] = []
+    for pl in placements:
+        if pl.source is None or pl.source_start is None:
+            passthrough.append(pl)
+            continue
+        groups.setdefault((pl.source, pl.source_start - pl.offset), []).append(pl)
+
+    kept: list[Placement] = list(passthrough)
+    dropped: list[tuple[Placement, str]] = []
+    for (source, diagonal), members in groups.items():
+        best = max(members, key=lambda p: p.strength())
+        kept.append(best)
+        for pl in members:
+            if pl is best:
+                continue
+            # Same soundness rule as the subset collapse: never drop a stronger menu.
+            if pl.top["loops"] > best.top["loops"]:
+                raise AssertionError(
+                    f"UNSOUND DIAGONAL COLLAPSE: {pl.id} (loops={pl.top['loops']}) dropped "
+                    f"for weaker {best.id} (loops={best.top['loops']})")
+            dropped.append((pl, f"same diagonal ({source}, {diagonal}) as {best.id}"))
+    return kept, dropped, len(passthrough)
 
 
 def connected_components(placements: list[Placement]) -> list[list[Placement]]:
@@ -192,6 +237,10 @@ def main() -> int:
     ap.add_argument("--emit", help="write the collapsed fixture here")
     ap.add_argument("--min-loops", type=int, default=0,
                     help="drop survivors below this many loops (0 = keep all)")
+    ap.add_argument("--use-provenance", action="store_true",
+                    help="collapse by the alignment diagonal (sourceMessage, sourceStart - "
+                         "offset). Needs sourceMessage/sourceStart in the fixture; this is "
+                         "the ~300x lever on the hapax surface.")
     ap.add_argument("--quiet", action="store_true")
     args = ap.parse_args()
 
@@ -201,13 +250,27 @@ def main() -> int:
         print(f"no legal placements in {args.fixture}", file=sys.stderr)
         return 1
 
-    groups = connected_components(placements)
     kept_all: list[Placement] = []
     drops: list[tuple[Placement, str]] = []
-    for group in groups:
-        kept, dropped = keep_maximal(group)
-        kept_all.extend(kept)
-        drops.extend(dropped)
+    if args.use_provenance:
+        tagged = sum(1 for p in placements
+                     if p.source is not None and p.source_start is not None)
+        if tagged == 0:
+            print(f"--use-provenance requested but {args.fixture} carries no "
+                  f"sourceMessage/sourceStart; re-emit it with relay_crib_mine.py",
+                  file=sys.stderr)
+            return 1
+        kept_all, drops, untagged = collapse_by_diagonal(placements)
+        print(f"mode                 : diagonal collapse "
+              f"({tagged} tagged, {untagged} untagged passed through)")
+    else:
+        groups = connected_components(placements)
+        for group in groups:
+            kept, dropped = keep_maximal(group)
+            kept_all.extend(kept)
+            drops.extend(dropped)
+        print("mode                 : conservative subset collapse "
+              "(--use-provenance for the alignment lever)")
 
     below = [p for p in kept_all if p.top["loops"] < args.min_loops]
     kept_all = [p for p in kept_all if p.top["loops"] >= args.min_loops]

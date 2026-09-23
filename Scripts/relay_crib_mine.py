@@ -88,12 +88,18 @@ def main() -> int:
     decrypts = [(r["id"], r["plaintext"]) for r in messages
                 if r.get("plaintext") and r["id"] != TARGET]
 
-    # Which windows does each decrypt carry?
+    # Which windows does each decrypt carry, and where in the source does each sit?
+    # `source_start` is retained because the alignment diagonal
+    # (sourceStart - targetOffset) is the invariant that decides whether two
+    # placements are the same hypothesis; discarding it makes the collapse impossible.
     carriers: dict[str, set[str]] = defaultdict(set)
+    source_start: dict[str, int] = {}
     for message_id, text in decrypts:
         for length in range(args.min_len, args.max_len + 1):
             for start in range(len(text) - length + 1):
-                carriers[text[start:start + length]].add(message_id)
+                window = text[start:start + length]
+                carriers[window].add(message_id)
+                source_start.setdefault(window, start)
 
     unique = {w: ids for w, ids in carriers.items() if len(ids) == 1}
     shared = {w: ids for w, ids in carriers.items() if len(ids) >= 2}
@@ -156,8 +162,12 @@ def main() -> int:
 
     if args.emit:
         by_text: dict[str, list[int]] = defaultdict(list)
-        for _, _, window, offset, _ in chosen:
+        by_source: dict[str, str] = {}
+        by_start: dict[str, int] = {}
+        for _, _, window, offset, source in chosen:
             by_text[window].append(offset)
+            by_source[window] = source
+            by_start[window] = source_start[window]
         args.emit.write_text(json.dumps({
             "target": TARGET,
             "ciphertext": ciphertext,
@@ -167,7 +177,17 @@ def main() -> int:
                     "stock register, so the recurrence filter is the wrong gate for it. "
                     "Loop-ranked, capped per source message for hypothesis diversity. "
                     "Emitted by Scripts/relay_crib_mine.py.",
-            "cribs": [{"text": t, "messages": 1, "offsets": sorted(o)}
+            "cribs": [{"text": t,
+                       "messages": 1,
+                       "offsets": sorted(o),
+                       # Provenance is what makes the alignment collapse possible:
+                       # placements of the same source text at the same diagonal
+                       # (sourceStart - offset) are ONE hypothesis, not many.
+                       # Without these two fields a consumer cannot tell a genuine
+                       # new hypothesis from the same window slid by one letter.
+                       # See Scripts/menu_diagonal_collapse.py --use-provenance.
+                       "sourceMessage": by_source[t],
+                       "sourceStart": by_start[t]}
                       for t, o in by_text.items()],
         }, indent=2) + "\n", encoding="utf-8")
         print()
