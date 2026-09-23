@@ -1,0 +1,2698 @@
+{
+  "deterministic_payload": {
+    "collapse_equivalence": {
+      "aggregate_encoding": "For each record in frozen nested-loop order, append a 4-byte unsigned big-endian length followed by compact canonical UTF-8 JSON.",
+      "all_byte_exact": true,
+      "stage_a": {
+        "aggregate_sha256": "cde94fbb7336e7c8c94368c7b89e8f868628b9b055d11acd8ec0fd5ef050ecff",
+        "byte_exact": true,
+        "executed_comparisons": 221184,
+        "expected_comparisons": 221184,
+        "mismatches": 0
+      },
+      "stage_b": {
+        "aggregate_sha256": "b08f0f732faf33821755ffcf5c3bfaadfc2003c42c3baf3902941cd034e9880e",
+        "byte_exact": true,
+        "executed_comparisons": 221184,
+        "expected_comparisons": 221184,
+        "mismatches": 0,
+        "previous_selector_transport_exact": true,
+        "terminal_a12_absent": true
+      },
+      "total_comparisons": 442368
+    },
+    "controls": {
+      "all_detected": true,
+      "executed_ids": [
+        "corpus_digest_perturbation",
+        "reverse_sequence_order",
+        "hold_w0",
+        "selector_index_plus_one",
+        "wrong_h4_shift_direction",
+        "wrong_collapse_transport",
+        "terminal_a12",
+        "wrong_round_key_address",
+        "reverse_mask_word_bytes",
+        "broken_ring_rotation",
+        "incomplete_configuration",
+        "post_commit_pin_change",
+        "externalized_sequence_state",
+        "externalized_mask_state",
+        "nested_child_multiplicity",
+        "duplicate_child_accounting",
+        "postmap_depth_preservation",
+        "extra_repeated_output",
+        "missing_cycle_observation"
+      ],
+      "frozen_ids": [
+        "corpus_digest_perturbation",
+        "reverse_sequence_order",
+        "hold_w0",
+        "selector_index_plus_one",
+        "wrong_h4_shift_direction",
+        "wrong_collapse_transport",
+        "terminal_a12",
+        "wrong_round_key_address",
+        "reverse_mask_word_bytes",
+        "broken_ring_rotation",
+        "incomplete_configuration",
+        "post_commit_pin_change",
+        "externalized_sequence_state",
+        "externalized_mask_state",
+        "nested_child_multiplicity",
+        "duplicate_child_accounting",
+        "postmap_depth_preservation",
+        "extra_repeated_output",
+        "missing_cycle_observation"
+      ],
+      "records": {
+        "broken_ring_rotation": {
+          "aggregate_sha256": "199f46eb41e12542244b64db373a7d897cc0d93cbaf396e1ea4e287e10e8493e",
+          "completion_sentinel_count": 1,
+          "configuration_count": 1,
+          "correct_model_mismatches": 8,
+          "detected": true,
+          "executed_rows": 8,
+          "first_mismatch_witness": {
+            "a": 0,
+            "block": "all_zero",
+            "config": 0,
+            "correct": "5a6765f75f367e669d6b9d711638663db50d82158a3a4eda640ca0bf7a5387a1",
+            "d": 1,
+            "material": "frozen_attack_v1",
+            "mutated": "7e7576a001bd5e2e7765891497139534b78934e53b91f3928a211ad34df544f8"
+          },
+          "mutation_code": 6,
+          "planted_model_matches": 8,
+          "sequence_mode": true,
+          "storage_code": 1
+        },
+        "corpus_digest_perturbation": {
+          "detected": true,
+          "expected_sha256": "fc0eac948c91ec416b5473724af21106e45a05a9fefa7451577bbd73582d85c8",
+          "mutated_sha256": "d2b6ab2ac23c207b2d77c39a83be07d66d2da8868d273085e905786ddb83caa8",
+          "mutation": "first generated structural index incremented modulo 384",
+          "shared_validator_rejected": true
+        },
+        "duplicate_child_accounting": {
+          "correct_metrics": {
+            "generic_abc_lut6": 14,
+            "generic_memory_bits": 5,
+            "generic_primitive_cells": 18,
+            "generic_sequential_bits": 9
+          },
+          "detected": true,
+          "mismatch_metrics": [
+            "generic_abc_lut6",
+            "generic_sequential_bits",
+            "generic_primitive_cells"
+          ],
+          "mutated_metrics": {
+            "generic_abc_lut6": 18,
+            "generic_memory_bits": 5,
+            "generic_primitive_cells": 23,
+            "generic_sequential_bits": 12
+          },
+          "mutation": "add the middle child contribution once after correct recursion"
+        },
+        "externalized_mask_state": {
+          "accepted_as_graded_variant": false,
+          "detected": true,
+          "live_mask_input_bits": 3328,
+          "shared_boundary_validator_rejection": "e256h_h4_externalized_mask_control core module match for e256h_h4_ff_core mismatch: expected 1, got 0",
+          "top": "e256h_h4_externalized_mask_control"
+        },
+        "externalized_sequence_state": {
+          "accepted_as_graded_variant": false,
+          "detected": true,
+          "live_sequence_input_bits": 144,
+          "shared_boundary_validator_rejection": "e256h_h4_externalized_sequence_control core/selector bits mismatch: expected 662, got 518",
+          "top": "e256h_h4_externalized_sequence_control"
+        },
+        "extra_repeated_output": {
+          "detected": true,
+          "mutated_line": 9217,
+          "shared_parser_rejection": "extra repeated output/cycle evidence line 9217 mismatch: expected ('-', '-', '-'), got ('5a6765f75f367e669d6b9d711638663db50d82158a3a4eda640ca0bf7a5387a1', '12', '13')"
+        },
+        "hold_w0": {
+          "aggregate_sha256": "e9c0b6345705eba2bc8e2b32feddc949b0f5e662a17108be4402d981f031ac81",
+          "completion_sentinel_count": 1,
+          "configuration_count": 1,
+          "correct_model_mismatches": 8,
+          "detected": true,
+          "executed_rows": 8,
+          "first_mismatch_witness": {
+            "a": 0,
+            "block": "all_zero",
+            "config": 0,
+            "correct": "5a6765f75f367e669d6b9d711638663db50d82158a3a4eda640ca0bf7a5387a1",
+            "d": 1,
+            "material": "frozen_attack_v1",
+            "mutated": "00e127912dc796fdc2be0f119d87a1b12867694afabb71c80e5a565737d9804e"
+          },
+          "mutation_code": 2,
+          "planted_model_matches": 8,
+          "sequence_mode": true,
+          "storage_code": 0
+        },
+        "incomplete_configuration": {
+          "detected": true,
+          "evidence": {
+            "busy_time_configuration_rejected_without_disturbing_completion": true,
+            "completion_sentinel": "E256H_H4_SEQUENCE_CORE_TB_DONE",
+            "completion_sentinel_count": 1,
+            "incomplete_commit_rejected": true,
+            "invalid_start_no_busy_or_done": true,
+            "overlapping_begin_start_rejected": true,
+            "per_input_ready_high_with_done": true,
+            "per_input_ready_low_while_busy": true,
+            "post_commit_pins_changed_before_every_graded_run": true
+          },
+          "required_observations": {
+            "cfg_error_asserted": true,
+            "key_valid_false": true,
+            "no_busy": true,
+            "no_done": true
+          }
+        },
+        "missing_cycle_observation": {
+          "detected": true,
+          "mutated_line": 1,
+          "shared_parser_rejection": "non-canonical decimal ff_sequence latency line 1: '-'"
+        },
+        "nested_child_multiplicity": {
+          "detected": true,
+          "expected_recursive_metrics": {
+            "generic_abc_lut6": 14,
+            "generic_memory_bits": 5,
+            "generic_primitive_cells": 18,
+            "generic_sequential_bits": 9
+          },
+          "independent_expanded_metrics": {
+            "generic_abc_lut6": 14,
+            "generic_memory_bits": 5,
+            "generic_primitive_cells": 18,
+            "generic_sequential_bits": 9
+          },
+          "observed_recursive_metrics": {
+            "generic_abc_lut6": 14,
+            "generic_memory_bits": 5,
+            "generic_primitive_cells": 18,
+            "generic_sequential_bits": 9
+          },
+          "synthetic_child_multiplicities": {
+            "leaf": {},
+            "middle": {
+              "leaf": 2
+            },
+            "top": {
+              "leaf": 1,
+              "middle": 3
+            }
+          }
+        },
+        "post_commit_pin_change": {
+          "aggregate_sha256": "216a1735ff54383cbc574cfb473591da710d14c2b4f646b0135bbc24a3d524ff",
+          "completion_sentinel_count": 1,
+          "configuration_count": 1,
+          "correct_model_mismatches": 8,
+          "detected": true,
+          "executed_rows": 8,
+          "first_mismatch_witness": {
+            "a": 0,
+            "block": "all_zero",
+            "config": 0,
+            "correct": "5a6765f75f367e669d6b9d711638663db50d82158a3a4eda640ca0bf7a5387a1",
+            "d": 1,
+            "material": "frozen_attack_v1",
+            "mutated": "3597fea943a08c4dac0526c2b3167fce5de7e92b475f04ede5157fd6a2bc3e15"
+          },
+          "mutation_code": 7,
+          "planted_model_matches": 8,
+          "sequence_mode": true,
+          "storage_code": 0
+        },
+        "postmap_depth_preservation": {
+          "detected": true,
+          "mutation": "increment flattened primitive-cell count by one",
+          "shared_flatten_validator_rejection": "mapped/flat primitive metrics mismatch: expected {'generic_abc_lut6': 8141, 'generic_sequential_bits': 3997, 'generic_memory_bits': 0, 'generic_primitive_cells': 12138}, got {'generic_abc_lut6': 8141, 'generic_sequential_bits': 3997, 'generic_memory_bits': 0, 'generic_primitive_cells': 12139}",
+          "variant": "e256h_h4_ff_sequence"
+        },
+        "reverse_mask_word_bytes": {
+          "aggregate_sha256": "9a34d1ca6ca7b7b4ab23f6b28bbb4c4d2fcaade5560355f50bc292f78d47f0df",
+          "completion_sentinel_count": 1,
+          "configuration_count": 1,
+          "correct_model_mismatches": 8,
+          "detected": true,
+          "executed_rows": 8,
+          "first_mismatch_witness": {
+            "a": 0,
+            "block": "all_zero",
+            "config": 0,
+            "correct": "5a6765f75f367e669d6b9d711638663db50d82158a3a4eda640ca0bf7a5387a1",
+            "d": 1,
+            "material": "frozen_attack_v1",
+            "mutated": "dbb0e8d97896fc49068633725d9b3f1bb805da7c647b63a37857f0feda19926a"
+          },
+          "mutation_code": 8,
+          "planted_model_matches": 8,
+          "sequence_mode": true,
+          "storage_code": 0
+        },
+        "reverse_sequence_order": {
+          "aggregate_sha256": "b03ad47e0cd521282e1d57363dad715c602e62d45c4c1faf2bae2bcf52bcbd12",
+          "completion_sentinel_count": 1,
+          "configuration_count": 1,
+          "correct_model_mismatches": 8,
+          "detected": true,
+          "executed_rows": 8,
+          "first_mismatch_witness": {
+            "a": 0,
+            "block": "all_zero",
+            "config": 0,
+            "correct": "5a6765f75f367e669d6b9d711638663db50d82158a3a4eda640ca0bf7a5387a1",
+            "d": 1,
+            "material": "frozen_attack_v1",
+            "mutated": "bfb687e999baaf3222208885cfad3ea1cb0b54ba7ab1587141938ce654b3aa82"
+          },
+          "mutation_code": 1,
+          "planted_model_matches": 8,
+          "sequence_mode": true,
+          "storage_code": 0
+        },
+        "selector_index_plus_one": {
+          "aggregate_sha256": "ca3dee8f28635bdb6aaadec34da4a2c76e8077ae2af2f67e9982109302806849",
+          "completion_sentinel_count": 1,
+          "configuration_count": 1,
+          "correct_model_mismatches": 8,
+          "detected": true,
+          "executed_rows": 8,
+          "first_mismatch_witness": {
+            "a": 0,
+            "block": "all_zero",
+            "config": 0,
+            "correct": "5a6765f75f367e669d6b9d711638663db50d82158a3a4eda640ca0bf7a5387a1",
+            "d": 1,
+            "material": "frozen_attack_v1",
+            "mutated": "59c88a5b0480410185f563e2e0b1e89b25022b0ea87b961e950dd926144da3f8"
+          },
+          "mutation_code": 3,
+          "planted_model_matches": 8,
+          "sequence_mode": true,
+          "storage_code": 0
+        },
+        "terminal_a12": {
+          "detected": true,
+          "material_extended": false,
+          "typed_rejection": "A_12 does not exist in frozen material"
+        },
+        "wrong_collapse_transport": {
+          "block": "all_zero",
+          "detected": true,
+          "first_mismatch_round": 1,
+          "material": "frozen_attack_v1",
+          "mismatching_boundaries": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "schedule": {
+            "a": 0,
+            "d": 1,
+            "indices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11
+            ]
+          },
+          "shared_canonical_boundary_path": true
+        },
+        "wrong_h4_shift_direction": {
+          "aggregate_sha256": "f175446458d37915157a5197e939f76c0dac46bc5843bf790937e79a6a85769b",
+          "completion_sentinel_count": 1,
+          "configuration_count": 1,
+          "correct_model_mismatches": 8,
+          "detected": true,
+          "executed_rows": 8,
+          "first_mismatch_witness": {
+            "a": 0,
+            "block": "all_zero",
+            "config": 0,
+            "correct": "5a6765f75f367e669d6b9d711638663db50d82158a3a4eda640ca0bf7a5387a1",
+            "d": 1,
+            "material": "frozen_attack_v1",
+            "mutated": "f6eca449d221540de2b7eae770e92b8cc57e9d57fffdb6f46299440e2cb91592"
+          },
+          "mutation_code": 4,
+          "planted_model_matches": 8,
+          "sequence_mode": true,
+          "storage_code": 0
+        },
+        "wrong_round_key_address": {
+          "aggregate_sha256": "07b3a2cb159827eef529c077cd5f2e62a4fd4f73a3764c5c6cb9924febc9c688",
+          "completion_sentinel_count": 1,
+          "configuration_count": 1,
+          "correct_model_mismatches": 8,
+          "detected": true,
+          "executed_rows": 8,
+          "first_mismatch_witness": {
+            "a": 0,
+            "block": "all_zero",
+            "config": 0,
+            "correct": "5a6765f75f367e669d6b9d711638663db50d82158a3a4eda640ca0bf7a5387a1",
+            "d": 1,
+            "material": "frozen_attack_v1",
+            "mutated": "7e7576a001bd5e2e7765891497139534b78934e53b91f3928a211ad34df544f8"
+          },
+          "mutation_code": 5,
+          "planted_model_matches": 8,
+          "sequence_mode": true,
+          "storage_code": 0
+        }
+      }
+    },
+    "corpora": {
+      "all_exact": true,
+      "block_corpus_sha256": "217ffeaba8348217a84f237ec5aeb4bb6f0358b823b463596277c5bd2494f44d",
+      "blocks": [
+        {
+          "bytes_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+          "id": "all_zero"
+        },
+        {
+          "bytes_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "id": "all_ff"
+        },
+        {
+          "bytes_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+          "id": "ascending_00_1f"
+        },
+        {
+          "bytes_hex": "fffefdfcfbfaf9f8f7f6f5f4f3f2f1f0efeeedecebeae9e8e7e6e5e4e3e2e1e0",
+          "id": "descending_ff_e0"
+        },
+        {
+          "bytes_hex": "e0b64e602b505cad282db5cb8940df855c950658b594b248b36ba7abf4b321da",
+          "id": "shake_0"
+        },
+        {
+          "bytes_hex": "ee06b2930a4ab368be6220879c55350bea1e3583c2b77787b93c9ff23b3b6313",
+          "id": "shake_1"
+        },
+        {
+          "bytes_hex": "c1af5631a9ff339e65bc73d0d4628802f19a03306ec022cf4a891da9e4f627c5",
+          "id": "shake_2"
+        },
+        {
+          "bytes_hex": "d25aa1f0f1f7e9d3aeebeaea33c80f9c9a1605c8ee224179a9e12e5aed979afa",
+          "id": "shake_3"
+        }
+      ],
+      "certified_list": {
+        "canonical_sha256": "199f1f7bddccf19ce5aa0bde0987441735d628354140d53ebdfec538d7b3f5ed",
+        "count": 384,
+        "first": [
+          0,
+          1,
+          2,
+          5
+        ],
+        "fixed_index_1": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "last": [
+          7,
+          6,
+          5,
+          2
+        ],
+        "order_preserved": true
+      },
+      "executable": {
+        "canonical_sha256": "8056e742146cffd707f3c5590667766fc376c7b25fee4bcec5cd3fc49cbc2a6a",
+        "order": "d outer in [0,1], a inner 0..383",
+        "repeated_schedule_count": 384,
+        "schedule_count": 768,
+        "steps": [
+          0,
+          1
+        ],
+        "switching_schedule_count": 384,
+        "tuple_placements": 9216
+      },
+      "materials": [
+        {
+          "domain": "E256-H/attack/material/v1",
+          "id": "frozen_attack_v1",
+          "raw_bytes": 1184,
+          "raw_sha256": "b6738e7f117bb7b916ee002db482f105a3eb5a046ee84dff45f178510cdeb691"
+        },
+        {
+          "domain": "E256-H/collapse/material/v1/0",
+          "id": "collapse_aux_0",
+          "raw_bytes": 1184,
+          "raw_sha256": "8f6d5d6de2a05906198d221d5c90d5f11ebc7a2562620ccce81511bfba9cf67d"
+        },
+        {
+          "domain": "E256-H/collapse/material/v1/1",
+          "id": "collapse_aux_1",
+          "raw_bytes": 1184,
+          "raw_sha256": "f169f6a649e6b1de158fc3e21ac08dd32d3733bd6429de0dd0e007d4c60a92be"
+        }
+      ],
+      "schedule_material_block_rows": 18432,
+      "structural": {
+        "adjacent_transition_placements": 1622016,
+        "canonical_sha256": "fc0eac948c91ec416b5473724af21106e45a05a9fefa7451577bbd73582d85c8",
+        "contiguous_three_round_windows": 1474560,
+        "order": "a outer 0..383, d inner 0..383",
+        "rounds_per_schedule": 12,
+        "schedule_count": 147456
+      }
+    },
+    "cycle_evidence": {
+      "all_exact": true,
+      "executed_observations": 55296,
+      "expected_observations": 55296,
+      "per_input_ready_window_checked": true,
+      "protocol_evidence": {
+        "busy_time_configuration_rejected_without_disturbing_completion": true,
+        "completion_sentinel": "E256H_H4_SEQUENCE_CORE_TB_DONE",
+        "completion_sentinel_count": 1,
+        "incomplete_commit_rejected": true,
+        "invalid_start_no_busy_or_done": true,
+        "overlapping_begin_start_rejected": true,
+        "per_input_ready_high_with_done": true,
+        "per_input_ready_low_while_busy": true,
+        "post_commit_pins_changed_before_every_graded_run": true
+      },
+      "timing_or_fmax_claim": false,
+      "variant_input_sets_exact": true,
+      "variants": {
+        "ff_repeated": {
+          "initiation_interval_cycles": 13,
+          "initiation_interval_set": [
+            13
+          ],
+          "input_independent": true,
+          "input_set_sha256": "b4a3cf6064fbc847ea9f7bf176b5d62ff2e303c3092e44dc67c572e1c1753520",
+          "latency_cycles": 12,
+          "latency_set": [
+            12
+          ],
+          "observation_count": 9216
+        },
+        "ff_sequence": {
+          "initiation_interval_cycles": 13,
+          "initiation_interval_set": [
+            13
+          ],
+          "input_independent": true,
+          "input_set_sha256": "e20ac44a7aa4a3e99556434a2b537e4a66b346c65b6d87e7ef68738d075d1f83",
+          "latency_cycles": 12,
+          "latency_set": [
+            12
+          ],
+          "observation_count": 18432
+        },
+        "ring_repeated": {
+          "initiation_interval_cycles": 13,
+          "initiation_interval_set": [
+            13
+          ],
+          "input_independent": true,
+          "input_set_sha256": "b4a3cf6064fbc847ea9f7bf176b5d62ff2e303c3092e44dc67c572e1c1753520",
+          "latency_cycles": 12,
+          "latency_set": [
+            12
+          ],
+          "observation_count": 9216
+        },
+        "ring_sequence": {
+          "initiation_interval_cycles": 13,
+          "initiation_interval_set": [
+            13
+          ],
+          "input_independent": true,
+          "input_set_sha256": "e20ac44a7aa4a3e99556434a2b537e4a66b346c65b6d87e7ef68738d075d1f83",
+          "latency_cycles": 12,
+          "latency_set": [
+            12
+          ],
+          "observation_count": 18432
+        }
+      }
+    },
+    "functional_equivalence": {
+      "aggregate_encoding": "For each record in frozen nested-loop order, append a 4-byte unsigned big-endian length followed by compact canonical UTF-8 JSON.",
+      "all_byte_exact": true,
+      "bridge_aggregate_sha256": "c31ffb5b4421c102fc68ad78323d66b8c6dbc93161496317ccd7fada97863b82",
+      "bridge_mismatches": 0,
+      "exact_execution_sets": true,
+      "executed_outputs_by_variant": {
+        "ff_repeated": 9216,
+        "ff_sequence": 18432,
+        "ring_repeated": 9216,
+        "ring_sequence": 18432
+      },
+      "executed_repeated_sequence_bridges": 18432,
+      "executed_rows": 18432,
+      "executed_rtl_model_comparisons": 55296,
+      "executed_storage_comparisons": 27648,
+      "expected_outputs_by_variant": {
+        "ff_repeated": 9216,
+        "ff_sequence": 18432,
+        "ring_repeated": 9216,
+        "ring_sequence": 18432
+      },
+      "expected_repeated_sequence_bridges": 18432,
+      "expected_rows": 18432,
+      "expected_rtl_model_comparisons": 55296,
+      "expected_storage_comparisons": 27648,
+      "model_aggregate_sha256": "d9fd83051279b4795f9fb87afe59d826031c7bda26e2114154c1e8378c9b9326",
+      "model_mismatches": 0,
+      "storage_aggregate_sha256": "88d1c187f09b1357b96fcb93d8d5842abfab339becc851979a7a1f9e92555054",
+      "storage_mismatches": 0,
+      "variant_input_set_sha256": {
+        "ff_repeated": "b4a3cf6064fbc847ea9f7bf176b5d62ff2e303c3092e44dc67c572e1c1753520",
+        "ff_sequence": "e20ac44a7aa4a3e99556434a2b537e4a66b346c65b6d87e7ef68738d075d1f83",
+        "ring_repeated": "b4a3cf6064fbc847ea9f7bf176b5d62ff2e303c3092e44dc67c572e1c1753520",
+        "ring_sequence": "e20ac44a7aa4a3e99556434a2b537e4a66b346c65b6d87e7ef68738d075d1f83"
+      }
+    },
+    "integrity": {
+      "all_exact": true,
+      "architecture_contracts": {
+        "base_between_markers_sha256": "b64472f73be9d0fc6318ff445c5f550cb0129309313228f416599c27d3957bb1",
+        "h2_between_markers_sha256": "214aee439ddf715ebf3e5fc206c336119dd27f85da12ef65f8e590c0cb0bfceb",
+        "h4_inclusive_sha256": "aac50bda525ead96234fc3c0e3e3692fabbde101de34d44f632d6a65bfbed1e4",
+        "path": "directives/e256-hardware-architecture.md"
+      },
+      "frozen_sources": {
+        "h2_rtl": {
+          "path": "Hardware/RTL/Research/E256H/e256h_h2_integrated_core.v",
+          "sha256": "05edd3c1cfb3cfc24ecb12fcada8c07f81451eb9937efd0f3fc10abf3f1d0adf"
+        },
+        "h2_runner": {
+          "path": "Scripts/e256_hardware_h2_gate.py",
+          "sha256": "3a62a7fc56a65682aa735fbb4cd1c611e0da8d4be84081a77c948865f7b77c5c"
+        },
+        "h2_testbench": {
+          "path": "Hardware/Testbenches/Research/E256H/e256h_h2_integrated_core_tb.v",
+          "sha256": "fb02e49ab376c761b6ae1bbb3fec6ab1325c5bfda71c9ff2684668cc14cb2b95"
+        }
+      },
+      "implementation_sources": {
+        "rtl": {
+          "path": "Hardware/RTL/Research/E256H/e256h_h4_sequence_core.v",
+          "sha256": "d6d9dd85b663a1dad02ced8ffe2c375130d322f6ccbcfb16a83734871031f7e8"
+        },
+        "runner": {
+          "path": "Scripts/e256_hardware_h4_sequence_gate.py",
+          "sha256": "f451077a706ff3cc6a13f676b5c1ba3cc9f367c77ebcb4f0cb0f67abf8b4f2ee"
+        },
+        "testbench": {
+          "path": "Hardware/Testbenches/Research/E256H/e256h_h4_sequence_core_tb.v",
+          "sha256": "8c06092ecaba633d62461ca6072d066a8505b19ebc45ef8551921144204464ec"
+        }
+      },
+      "makefile": {
+        "check_recipe_exact": true,
+        "emit_recipe_exact": true,
+        "path": "Makefile",
+        "phony_declared": true
+      },
+      "predecessors": [
+        {
+          "deterministic_payload_sha256": "98af83ec27093787552475fce588f84a902634afcc969bed26462032dddec3cc",
+          "id": "E256-063-steps-2-3",
+          "path": "logs/e256-hardware-candidate-gate.json",
+          "raw_sha256": "0402a53a725f3303ab379bf7f5e986a55cadedb001f4621d9d996f4ee0d93cfc",
+          "schema": "E256-HARDWARE-CANDIDATE-GATE-1"
+        },
+        {
+          "deterministic_payload_sha256": "1478a0ba317bce5f33cb053744b050bb6188543405c1dfacf52d8aaf920c4b71",
+          "id": "E256-063-h3-collapse",
+          "path": "logs/e256-hardware-offset-collapse-gate.json",
+          "raw_sha256": "4b56be2a44ac71d9a89580817a06d6f617247fd3e8b8fc39efd481b888ef0fff",
+          "schema": "E256-HARDWARE-OFFSET-COLLAPSE-GATE-1"
+        },
+        {
+          "deterministic_payload_sha256": "b0b62be2cfebd870f71ce0b5e5300eb52ab8c2aea243712d1617f4e2351dc7e1",
+          "id": "E256-063-h2-integrated-cost",
+          "path": "logs/e256-hardware-h2-gate.json",
+          "raw_sha256": "1e61489e935e17927b1e66c5387ed83bd303ca797418bae38a3640841d50abd5",
+          "schema": "E256-HARDWARE-H2-GATE-1"
+        }
+      ],
+      "preregistration": {
+        "path": "directives/e256-hardware-h4-sequence-preregistration.json",
+        "raw_sha256": "b7afcc67ceac142a800468362ee0c97fcf6c7b6843f0cdd2f96f5d77894fc8e2"
+      },
+      "toolchain": {
+        "host_machine": "arm64",
+        "host_system": "Darwin",
+        "iverilog": "Icarus Verilog version 13.0 (stable) (v13_0)",
+        "python": "3.9.6",
+        "yosys": "Yosys 0.68+post (git sha1 c12172fbae8af5e20f6fb52e3d4e92d56ed587b6, Release, AppleClang clang++ 21.0.0.21000101)"
+      }
+    },
+    "non_claims": [
+      "no H4 production policy or architecture selection",
+      "no inherited mixed-sequence 25-active-S-box or four-round bound",
+      "no cryptographic security level or primitive selection",
+      "no XOF, schedule, round-count, cipher-suite, or AEAD selection",
+      "no vendor FPGA, place-and-route, Fmax, physical power, or literal GPU-to-FPGA synthesis evidence",
+      "no encrypted Metal or FHE execution claim",
+      "reviewed standard AEAD remains mandatory",
+      "E256-063 remains OPEN and no C/H/N or public claim epoch moves"
+    ],
+    "paired_measurements": {
+      "ff": {
+        "comparison": "sequence minus repeated",
+        "delta": {
+          "combinational_levels": 1,
+          "generic_lut6": -407,
+          "primitive_cells": -275,
+          "sequential_bits": 132
+        },
+        "repeated_top": "e256h_h4_ff_repeated",
+        "sequence_top": "e256h_h4_ff_sequence",
+        "threshold_applied": false,
+        "winner_selected": false
+      },
+      "ring": {
+        "comparison": "sequence minus repeated",
+        "delta": {
+          "combinational_levels": 1,
+          "generic_lut6": -57,
+          "primitive_cells": 75,
+          "sequential_bits": 132
+        },
+        "repeated_top": "e256h_h4_ring_repeated",
+        "sequence_top": "e256h_h4_ring_sequence",
+        "threshold_applied": false,
+        "winner_selected": false
+      }
+    },
+    "schema": "E256-HARDWARE-H4-SEQUENCE-GATE-1",
+    "status": "OPEN_PROGRESS",
+    "structural_census": {
+      "adjacent_transition_placements": 1622016,
+      "complete_no_filtering": true,
+      "contiguous_three_round_windows": 1474560,
+      "criterion": "three exact per-round selectors, lane-preserving S-box dependencies, exact row shift, and all-nonzero AES column mixing",
+      "failure_count": 737280,
+      "first_counterexample": {
+        "a": 0,
+        "d": 1,
+        "first_incomplete_output": {
+          "missing_input_lanes": [
+            6,
+            11,
+            24,
+            29
+          ],
+          "output_lane": 0
+        },
+        "indices": [
+          1,
+          2,
+          3
+        ],
+        "start_round": 1,
+        "tuples": [
+          [
+            0,
+            1,
+            3,
+            4
+          ],
+          [
+            0,
+            1,
+            4,
+            3
+          ],
+          [
+            0,
+            1,
+            4,
+            7
+          ]
+        ]
+      },
+      "fixed_tuple_four_round_or_25_active_sbox_inherited": false,
+      "schedule_count": 147456,
+      "unique_window_classes": 147456,
+      "verdict": "ARITHMETIC_SEQUENCE_CENSUS_COUNTEREXAMPLE_FOUND",
+      "windows_per_class": 10
+    },
+    "synthesis": {
+      "all_depths_loop_free": true,
+      "analysis_only_flatten_preserved": true,
+      "externalized_controls": {
+        "mask": {
+          "accepted_as_graded_variant": false,
+          "detected": true,
+          "live_mask_input_bits": 3328,
+          "shared_boundary_validator_rejection": "e256h_h4_externalized_mask_control core module match for e256h_h4_ff_core mismatch: expected 1, got 0",
+          "top": "e256h_h4_externalized_mask_control"
+        },
+        "sequence": {
+          "accepted_as_graded_variant": false,
+          "detected": true,
+          "live_sequence_input_bits": 144,
+          "shared_boundary_validator_rejection": "e256h_h4_externalized_sequence_control core/selector bits mismatch: expected 662, got 518",
+          "top": "e256h_h4_externalized_sequence_control"
+        }
+      },
+      "generic_only_no_vendor_physical_claim": true,
+      "independent_flat_primitive_multisets_closed": true,
+      "logic_basis": "generic LUT6 via pinned Yosys/ABC",
+      "recursive_child_multiplicity_closed": true,
+      "required_artifacts_per_top": [
+        "pre-map hierarchy JSON",
+        "mapped hierarchy JSON",
+        "analysis-only flattened JSON",
+        "mapped Verilog"
+      ],
+      "tops_synthesized_independently": true,
+      "variants": {
+        "ff_repeated": {
+          "artifacts": {
+            "analysis_only_flattened_json": {
+              "path": "build/e256h-h4-sequence/e256h_h4_ff_repeated-flat.json",
+              "sha256": "8b0430cff01a3e527daad649babb6f7c80f392ec34da617b66c0e268529008df"
+            },
+            "mapped_hierarchy_json": {
+              "path": "build/e256h-h4-sequence/e256h_h4_ff_repeated-mapped.json",
+              "sha256": "0b1db58414fea240874c91fd8001326b96c18a6a66024b140a0a3562735406ea"
+            },
+            "mapped_verilog": {
+              "path": "build/e256h-h4-sequence/e256h_h4_ff_repeated-mapped.v",
+              "sha256": "1235e336ce48286e0f6cbd376ab8dd0bfcddc04278f2ce3cfc4d3c34f4bc17a4"
+            },
+            "pre_map_hierarchy_json": {
+              "path": "build/e256h-h4-sequence/e256h_h4_ff_repeated-premap.json",
+              "sha256": "45c090eb9ab9cf8f4fd8a89da53bcd3662a8fdd378634b2be14dc8658e32c658"
+            }
+          },
+          "flat_hierarchy": {
+            "hierarchy_cycle": false,
+            "independent_expansion": {
+              "expanded_module_instances": 1,
+              "metrics_match": true,
+              "module_instance_multiplicities": {
+                "e256h_h4_ff_repeated": 1
+              },
+              "primitive_signature_multiset_match": true,
+              "primitive_type_multiset_match": true
+            },
+            "local_modules": {
+              "e256h_h4_ff_repeated": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 8548,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 12413,
+                  "generic_sequential_bits": 3865
+                },
+                "primitive_type_multiset": {
+                  "$_DFF_P_": 3865,
+                  "$lut": 8548
+                }
+              }
+            },
+            "reachable_module_count": 1,
+            "reachable_modules": [
+              "e256h_h4_ff_repeated"
+            ],
+            "recursive_metrics": {
+              "generic_abc_lut6": 8548,
+              "generic_memory_bits": 0,
+              "generic_primitive_cells": 12413,
+              "generic_sequential_bits": 3865
+            },
+            "recursive_primitive_signature_entries": 12413,
+            "recursive_primitive_signature_multiset_sha256": "daaf18f0e83de1798a3bf61807e8e76d1596eb4780b89388ebc3a45269e642ba",
+            "recursive_primitive_type_multiset": {
+              "$_DFF_P_": 3865,
+              "$lut": 8548
+            },
+            "top": "e256h_h4_ff_repeated"
+          },
+          "flatten_preservation": {
+            "combinational_levels": 10,
+            "depth_result_count": 1,
+            "flat_child_cells": 0,
+            "loop_free": true,
+            "primitive_metrics_identical": true,
+            "primitive_signature_multiset_identical": true,
+            "primitive_type_multiset_identical": true
+          },
+          "h1_eligible": true,
+          "mapped_hierarchy": {
+            "hierarchy_cycle": false,
+            "independent_expansion": {
+              "expanded_module_instances": 39,
+              "metrics_match": true,
+              "module_instance_multiplicities": {
+                "$paramod\\e256h_h4_ff_core\\SEQUENCE_MODE=s32'00000000000000000000000000000000": 1,
+                "$paramod\\e256h_h4_round_direct\\MUTATE_H4_DIRECTION=s32'00000000000000000000000000000000": 1,
+                "e256h_h2_ff_store": 1,
+                "e256h_h2_mixcolumns": 1,
+                "e256h_h2_protocol": 1,
+                "e256h_h2_sbox": 32,
+                "e256h_h2_subbytes": 1,
+                "e256h_h4_ff_repeated": 1
+              },
+              "primitive_signature_multiset_match": true,
+              "primitive_type_multiset_match": true
+            },
+            "local_modules": {
+              "$paramod\\e256h_h4_ff_core\\SEQUENCE_MODE=s32'00000000000000000000000000000000": {
+                "child_multiplicities": {
+                  "$paramod\\e256h_h4_round_direct\\MUTATE_H4_DIRECTION=s32'00000000000000000000000000000000": 1,
+                  "e256h_h2_ff_store": 1,
+                  "e256h_h2_protocol": 1
+                },
+                "metrics": {
+                  "generic_abc_lut6": 793,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 1323,
+                  "generic_sequential_bits": 530
+                },
+                "primitive_type_multiset": {
+                  "$_DFF_P_": 530,
+                  "$lut": 793
+                }
+              },
+              "$paramod\\e256h_h4_round_direct\\MUTATE_H4_DIRECTION=s32'00000000000000000000000000000000": {
+                "child_multiplicities": {
+                  "e256h_h2_mixcolumns": 1,
+                  "e256h_h2_subbytes": 1
+                },
+                "metrics": {
+                  "generic_abc_lut6": 768,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 768,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {
+                  "$lut": 768
+                }
+              },
+              "e256h_h2_ff_store": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 4632,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 7960,
+                  "generic_sequential_bits": 3328
+                },
+                "primitive_type_multiset": {
+                  "$_DFF_P_": 3328,
+                  "$lut": 4632
+                }
+              },
+              "e256h_h2_mixcolumns": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 318,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 318,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {
+                  "$lut": 318
+                }
+              },
+              "e256h_h2_protocol": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 21,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 28,
+                  "generic_sequential_bits": 7
+                },
+                "primitive_type_multiset": {
+                  "$_DFF_P_": 7,
+                  "$lut": 21
+                }
+              },
+              "e256h_h2_sbox": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 63,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 63,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {
+                  "$lut": 63
+                }
+              },
+              "e256h_h2_subbytes": {
+                "child_multiplicities": {
+                  "e256h_h2_sbox": 32
+                },
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 0,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {}
+              },
+              "e256h_h4_ff_repeated": {
+                "child_multiplicities": {
+                  "$paramod\\e256h_h4_ff_core\\SEQUENCE_MODE=s32'00000000000000000000000000000000": 1
+                },
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 0,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {}
+              }
+            },
+            "reachable_module_count": 8,
+            "reachable_modules": [
+              "$paramod\\e256h_h4_ff_core\\SEQUENCE_MODE=s32'00000000000000000000000000000000",
+              "$paramod\\e256h_h4_round_direct\\MUTATE_H4_DIRECTION=s32'00000000000000000000000000000000",
+              "e256h_h2_ff_store",
+              "e256h_h2_mixcolumns",
+              "e256h_h2_protocol",
+              "e256h_h2_sbox",
+              "e256h_h2_subbytes",
+              "e256h_h4_ff_repeated"
+            ],
+            "recursive_metrics": {
+              "generic_abc_lut6": 8548,
+              "generic_memory_bits": 0,
+              "generic_primitive_cells": 12413,
+              "generic_sequential_bits": 3865
+            },
+            "recursive_primitive_signature_entries": 12413,
+            "recursive_primitive_signature_multiset_sha256": "daaf18f0e83de1798a3bf61807e8e76d1596eb4780b89388ebc3a45269e642ba",
+            "recursive_primitive_type_multiset": {
+              "$_DFF_P_": 3865,
+              "$lut": 8548
+            },
+            "top": "e256h_h4_ff_repeated"
+          },
+          "metrics": {
+            "generic_abc_lut6": 8548,
+            "generic_combinational_levels": 10,
+            "generic_memory_bits": 0,
+            "generic_primitive_cells": 12413,
+            "generic_sequential_bits": 3865
+          },
+          "pre_map_hierarchy": {
+            "hierarchy_cycle": false,
+            "independent_expansion": {
+              "expanded_module_instances": 39,
+              "metrics_match": true,
+              "module_instance_multiplicities": {
+                "$paramod\\e256h_h4_ff_core\\SEQUENCE_MODE=s32'00000000000000000000000000000000": 1,
+                "$paramod\\e256h_h4_round_direct\\MUTATE_H4_DIRECTION=s32'00000000000000000000000000000000": 1,
+                "e256h_h2_ff_store": 1,
+                "e256h_h2_mixcolumns": 1,
+                "e256h_h2_protocol": 1,
+                "e256h_h2_sbox": 32,
+                "e256h_h2_subbytes": 1,
+                "e256h_h4_ff_repeated": 1
+              },
+              "primitive_signature_multiset_match": true,
+              "primitive_type_multiset_match": true
+            },
+            "local_modules": {
+              "$paramod\\e256h_h4_ff_core\\SEQUENCE_MODE=s32'00000000000000000000000000000000": {
+                "child_multiplicities": {
+                  "$paramod\\e256h_h4_round_direct\\MUTATE_H4_DIRECTION=s32'00000000000000000000000000000000": 1,
+                  "e256h_h2_ff_store": 1,
+                  "e256h_h2_protocol": 1
+                },
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 24,
+                  "generic_sequential_bits": 530
+                },
+                "primitive_type_multiset": {
+                  "$add": 1,
+                  "$dffe": 1,
+                  "$eq": 1,
+                  "$mux": 7,
+                  "$not": 3,
+                  "$reduce_and": 2,
+                  "$reduce_bool": 1,
+                  "$reduce_or": 2,
+                  "$sdff": 2,
+                  "$sdffe": 3,
+                  "$xor": 1
+                }
+              },
+              "$paramod\\e256h_h4_round_direct\\MUTATE_H4_DIRECTION=s32'00000000000000000000000000000000": {
+                "child_multiplicities": {
+                  "e256h_h2_mixcolumns": 1,
+                  "e256h_h2_subbytes": 1
+                },
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 85,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {
+                  "$add": 52,
+                  "$shiftx": 32,
+                  "$xor": 1
+                }
+              },
+              "e256h_h2_ff_store": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 8,
+                  "generic_sequential_bits": 3328
+                },
+                "primitive_type_multiset": {
+                  "$and": 1,
+                  "$dffe": 1,
+                  "$neg": 1,
+                  "$not": 1,
+                  "$or": 1,
+                  "$shift": 2,
+                  "$shiftx": 1
+                }
+              },
+              "e256h_h2_mixcolumns": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 192,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {
+                  "$mux": 32,
+                  "$not": 32,
+                  "$xor": 128
+                }
+              },
+              "e256h_h2_protocol": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 71,
+                  "generic_sequential_bits": 7
+                },
+                "primitive_type_multiset": {
+                  "$add": 1,
+                  "$eq": 1,
+                  "$logic_and": 22,
+                  "$logic_not": 7,
+                  "$logic_or": 2,
+                  "$lt": 1,
+                  "$mux": 20,
+                  "$ne": 4,
+                  "$not": 1,
+                  "$reduce_and": 3,
+                  "$reduce_bool": 4,
+                  "$reduce_or": 1,
+                  "$sdffe": 4
+                }
+              },
+              "e256h_h2_sbox": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 49,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {
+                  "$shr": 49
+                }
+              },
+              "e256h_h2_subbytes": {
+                "child_multiplicities": {
+                  "e256h_h2_sbox": 32
+                },
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 0,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {}
+              },
+              "e256h_h4_ff_repeated": {
+                "child_multiplicities": {
+                  "$paramod\\e256h_h4_ff_core\\SEQUENCE_MODE=s32'00000000000000000000000000000000": 1
+                },
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 0,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {}
+              }
+            },
+            "reachable_module_count": 8,
+            "reachable_modules": [
+              "$paramod\\e256h_h4_ff_core\\SEQUENCE_MODE=s32'00000000000000000000000000000000",
+              "$paramod\\e256h_h4_round_direct\\MUTATE_H4_DIRECTION=s32'00000000000000000000000000000000",
+              "e256h_h2_ff_store",
+              "e256h_h2_mixcolumns",
+              "e256h_h2_protocol",
+              "e256h_h2_sbox",
+              "e256h_h2_subbytes",
+              "e256h_h4_ff_repeated"
+            ],
+            "recursive_metrics": {
+              "generic_abc_lut6": 0,
+              "generic_memory_bits": 0,
+              "generic_primitive_cells": 1948,
+              "generic_sequential_bits": 3865
+            },
+            "recursive_primitive_signature_entries": 1948,
+            "recursive_primitive_signature_multiset_sha256": "1dfdc76ac97bcf793f987402aebc27ec41a888141d703ce121a366660e5973cf",
+            "recursive_primitive_type_multiset": {
+              "$add": 54,
+              "$and": 1,
+              "$dffe": 2,
+              "$eq": 2,
+              "$logic_and": 22,
+              "$logic_not": 7,
+              "$logic_or": 2,
+              "$lt": 1,
+              "$mux": 59,
+              "$ne": 4,
+              "$neg": 1,
+              "$not": 37,
+              "$or": 1,
+              "$reduce_and": 5,
+              "$reduce_bool": 5,
+              "$reduce_or": 3,
+              "$sdff": 2,
+              "$sdffe": 7,
+              "$shift": 2,
+              "$shiftx": 33,
+              "$shr": 1568,
+              "$xor": 130
+            },
+            "top": "e256h_h4_ff_repeated"
+          },
+          "scripts": {
+            "analysis_only_flatten": "read_json build/e256h-h4-sequence/e256h_h4_ff_repeated-mapped.json; hierarchy -check -top e256h_h4_ff_repeated; flatten; write_json build/e256h-h4-sequence/e256h_h4_ff_repeated-flat.json; check -assert; ltp -noff",
+            "mapped": "read_verilog Hardware/RTL/Research/E256H/e256h_h2_integrated_core.v Hardware/RTL/Research/E256H/e256h_h4_sequence_core.v; hierarchy -check -top e256h_h4_ff_repeated; proc; memory -nomap; opt; techmap; opt; dffunmap; zinit -all; abc -lut 6; opt_clean; check -assert; write_json build/e256h-h4-sequence/e256h_h4_ff_repeated-mapped.json; write_verilog -noattr build/e256h-h4-sequence/e256h_h4_ff_repeated-mapped.v; stat",
+            "pre_map": "read_verilog Hardware/RTL/Research/E256H/e256h_h2_integrated_core.v Hardware/RTL/Research/E256H/e256h_h4_sequence_core.v; hierarchy -check -top e256h_h4_ff_repeated; proc; memory -nomap; opt; check -assert; write_json build/e256h-h4-sequence/e256h_h4_ff_repeated-premap.json; stat"
+          },
+          "selector_mode": "repeated",
+          "state_accounting": {
+            "committed_selector_boundary_present": true,
+            "complete": true,
+            "core_module": "$paramod\\e256h_h4_ff_core\\SEQUENCE_MODE=s32'00000000000000000000000000000000",
+            "datapath_and_control_state_bits": 518,
+            "mask_state_bits": 3328,
+            "mask_store_module": "e256h_h2_ff_store",
+            "protocol_state_bits": 7,
+            "selector_state_bits": 12,
+            "total_sequential_bits": 3865,
+            "wide_live_mask_port": false
+          },
+          "storage_id": "ff",
+          "top": "e256h_h4_ff_repeated"
+        },
+        "ff_sequence": {
+          "artifacts": {
+            "analysis_only_flattened_json": {
+              "path": "build/e256h-h4-sequence/e256h_h4_ff_sequence-flat.json",
+              "sha256": "e732cc9ceab23369dd32ea7dd6d4657ef251942d6933716841383dc05715eb83"
+            },
+            "mapped_hierarchy_json": {
+              "path": "build/e256h-h4-sequence/e256h_h4_ff_sequence-mapped.json",
+              "sha256": "8a3511d9de3cb5c06ef4df03d1de6ebd1e781f076e9959119fa1362831c5245d"
+            },
+            "mapped_verilog": {
+              "path": "build/e256h-h4-sequence/e256h_h4_ff_sequence-mapped.v",
+              "sha256": "6e5e7a22479784a4b809a3fe6ae6afb58904582f8bbead146fcaa4344190f8f0"
+            },
+            "pre_map_hierarchy_json": {
+              "path": "build/e256h-h4-sequence/e256h_h4_ff_sequence-premap.json",
+              "sha256": "060f4741980a4241c47a48ae7a38949ea064a5e003a3467c3781bc89eed82bb2"
+            }
+          },
+          "flat_hierarchy": {
+            "hierarchy_cycle": false,
+            "independent_expansion": {
+              "expanded_module_instances": 1,
+              "metrics_match": true,
+              "module_instance_multiplicities": {
+                "e256h_h4_ff_sequence": 1
+              },
+              "primitive_signature_multiset_match": true,
+              "primitive_type_multiset_match": true
+            },
+            "local_modules": {
+              "e256h_h4_ff_sequence": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 8141,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 12138,
+                  "generic_sequential_bits": 3997
+                },
+                "primitive_type_multiset": {
+                  "$_DFF_P_": 3997,
+                  "$lut": 8141
+                }
+              }
+            },
+            "reachable_module_count": 1,
+            "reachable_modules": [
+              "e256h_h4_ff_sequence"
+            ],
+            "recursive_metrics": {
+              "generic_abc_lut6": 8141,
+              "generic_memory_bits": 0,
+              "generic_primitive_cells": 12138,
+              "generic_sequential_bits": 3997
+            },
+            "recursive_primitive_signature_entries": 12138,
+            "recursive_primitive_signature_multiset_sha256": "5a69ff09112ba6d109dfa51e1adfc62c87f550e3a603b89d59778c15ddd8a103",
+            "recursive_primitive_type_multiset": {
+              "$_DFF_P_": 3997,
+              "$lut": 8141
+            },
+            "top": "e256h_h4_ff_sequence"
+          },
+          "flatten_preservation": {
+            "combinational_levels": 11,
+            "depth_result_count": 1,
+            "flat_child_cells": 0,
+            "loop_free": true,
+            "primitive_metrics_identical": true,
+            "primitive_signature_multiset_identical": true,
+            "primitive_type_multiset_identical": true
+          },
+          "h1_eligible": true,
+          "mapped_hierarchy": {
+            "hierarchy_cycle": false,
+            "independent_expansion": {
+              "expanded_module_instances": 39,
+              "metrics_match": true,
+              "module_instance_multiplicities": {
+                "$paramod\\e256h_h4_ff_core\\SEQUENCE_MODE=s32'00000000000000000000000000000001": 1,
+                "$paramod\\e256h_h4_round_direct\\MUTATE_H4_DIRECTION=s32'00000000000000000000000000000000": 1,
+                "e256h_h2_ff_store": 1,
+                "e256h_h2_mixcolumns": 1,
+                "e256h_h2_protocol": 1,
+                "e256h_h2_sbox": 32,
+                "e256h_h2_subbytes": 1,
+                "e256h_h4_ff_sequence": 1
+              },
+              "primitive_signature_multiset_match": true,
+              "primitive_type_multiset_match": true
+            },
+            "local_modules": {
+              "$paramod\\e256h_h4_ff_core\\SEQUENCE_MODE=s32'00000000000000000000000000000001": {
+                "child_multiplicities": {
+                  "$paramod\\e256h_h4_round_direct\\MUTATE_H4_DIRECTION=s32'00000000000000000000000000000000": 1,
+                  "e256h_h2_ff_store": 1,
+                  "e256h_h2_protocol": 1
+                },
+                "metrics": {
+                  "generic_abc_lut6": 1026,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 1688,
+                  "generic_sequential_bits": 662
+                },
+                "primitive_type_multiset": {
+                  "$_DFF_P_": 662,
+                  "$lut": 1026
+                }
+              },
+              "$paramod\\e256h_h4_round_direct\\MUTATE_H4_DIRECTION=s32'00000000000000000000000000000000": {
+                "child_multiplicities": {
+                  "e256h_h2_mixcolumns": 1,
+                  "e256h_h2_subbytes": 1
+                },
+                "metrics": {
+                  "generic_abc_lut6": 768,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 768,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {
+                  "$lut": 768
+                }
+              },
+              "e256h_h2_ff_store": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 4632,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 7960,
+                  "generic_sequential_bits": 3328
+                },
+                "primitive_type_multiset": {
+                  "$_DFF_P_": 3328,
+                  "$lut": 4632
+                }
+              },
+              "e256h_h2_mixcolumns": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 318,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 318,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {
+                  "$lut": 318
+                }
+              },
+              "e256h_h2_protocol": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 21,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 28,
+                  "generic_sequential_bits": 7
+                },
+                "primitive_type_multiset": {
+                  "$_DFF_P_": 7,
+                  "$lut": 21
+                }
+              },
+              "e256h_h2_sbox": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 43,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 43,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {
+                  "$lut": 43
+                }
+              },
+              "e256h_h2_subbytes": {
+                "child_multiplicities": {
+                  "e256h_h2_sbox": 32
+                },
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 0,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {}
+              },
+              "e256h_h4_ff_sequence": {
+                "child_multiplicities": {
+                  "$paramod\\e256h_h4_ff_core\\SEQUENCE_MODE=s32'00000000000000000000000000000001": 1
+                },
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 0,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {}
+              }
+            },
+            "reachable_module_count": 8,
+            "reachable_modules": [
+              "$paramod\\e256h_h4_ff_core\\SEQUENCE_MODE=s32'00000000000000000000000000000001",
+              "$paramod\\e256h_h4_round_direct\\MUTATE_H4_DIRECTION=s32'00000000000000000000000000000000",
+              "e256h_h2_ff_store",
+              "e256h_h2_mixcolumns",
+              "e256h_h2_protocol",
+              "e256h_h2_sbox",
+              "e256h_h2_subbytes",
+              "e256h_h4_ff_sequence"
+            ],
+            "recursive_metrics": {
+              "generic_abc_lut6": 8141,
+              "generic_memory_bits": 0,
+              "generic_primitive_cells": 12138,
+              "generic_sequential_bits": 3997
+            },
+            "recursive_primitive_signature_entries": 12138,
+            "recursive_primitive_signature_multiset_sha256": "5a69ff09112ba6d109dfa51e1adfc62c87f550e3a603b89d59778c15ddd8a103",
+            "recursive_primitive_type_multiset": {
+              "$_DFF_P_": 3997,
+              "$lut": 8141
+            },
+            "top": "e256h_h4_ff_sequence"
+          },
+          "metrics": {
+            "generic_abc_lut6": 8141,
+            "generic_combinational_levels": 11,
+            "generic_memory_bits": 0,
+            "generic_primitive_cells": 12138,
+            "generic_sequential_bits": 3997
+          },
+          "pre_map_hierarchy": {
+            "hierarchy_cycle": false,
+            "independent_expansion": {
+              "expanded_module_instances": 39,
+              "metrics_match": true,
+              "module_instance_multiplicities": {
+                "$paramod\\e256h_h4_ff_core\\SEQUENCE_MODE=s32'00000000000000000000000000000001": 1,
+                "$paramod\\e256h_h4_round_direct\\MUTATE_H4_DIRECTION=s32'00000000000000000000000000000000": 1,
+                "e256h_h2_ff_store": 1,
+                "e256h_h2_mixcolumns": 1,
+                "e256h_h2_protocol": 1,
+                "e256h_h2_sbox": 32,
+                "e256h_h2_subbytes": 1,
+                "e256h_h4_ff_sequence": 1
+              },
+              "primitive_signature_multiset_match": true,
+              "primitive_type_multiset_match": true
+            },
+            "local_modules": {
+              "$paramod\\e256h_h4_ff_core\\SEQUENCE_MODE=s32'00000000000000000000000000000001": {
+                "child_multiplicities": {
+                  "$paramod\\e256h_h4_round_direct\\MUTATE_H4_DIRECTION=s32'00000000000000000000000000000000": 1,
+                  "e256h_h2_ff_store": 1,
+                  "e256h_h2_protocol": 1
+                },
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 26,
+                  "generic_sequential_bits": 662
+                },
+                "primitive_type_multiset": {
+                  "$add": 1,
+                  "$dffe": 1,
+                  "$eq": 1,
+                  "$mul": 1,
+                  "$mux": 7,
+                  "$not": 3,
+                  "$reduce_and": 2,
+                  "$reduce_bool": 1,
+                  "$reduce_or": 2,
+                  "$sdff": 2,
+                  "$sdffe": 3,
+                  "$shiftx": 1,
+                  "$xor": 1
+                }
+              },
+              "$paramod\\e256h_h4_round_direct\\MUTATE_H4_DIRECTION=s32'00000000000000000000000000000000": {
+                "child_multiplicities": {
+                  "e256h_h2_mixcolumns": 1,
+                  "e256h_h2_subbytes": 1
+                },
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 85,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {
+                  "$add": 52,
+                  "$shiftx": 32,
+                  "$xor": 1
+                }
+              },
+              "e256h_h2_ff_store": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 8,
+                  "generic_sequential_bits": 3328
+                },
+                "primitive_type_multiset": {
+                  "$and": 1,
+                  "$dffe": 1,
+                  "$neg": 1,
+                  "$not": 1,
+                  "$or": 1,
+                  "$shift": 2,
+                  "$shiftx": 1
+                }
+              },
+              "e256h_h2_mixcolumns": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 192,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {
+                  "$mux": 32,
+                  "$not": 32,
+                  "$xor": 128
+                }
+              },
+              "e256h_h2_protocol": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 71,
+                  "generic_sequential_bits": 7
+                },
+                "primitive_type_multiset": {
+                  "$add": 1,
+                  "$eq": 1,
+                  "$logic_and": 22,
+                  "$logic_not": 7,
+                  "$logic_or": 2,
+                  "$lt": 1,
+                  "$mux": 20,
+                  "$ne": 4,
+                  "$not": 1,
+                  "$reduce_and": 3,
+                  "$reduce_bool": 4,
+                  "$reduce_or": 1,
+                  "$sdffe": 4
+                }
+              },
+              "e256h_h2_sbox": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 49,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {
+                  "$shr": 49
+                }
+              },
+              "e256h_h2_subbytes": {
+                "child_multiplicities": {
+                  "e256h_h2_sbox": 32
+                },
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 0,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {}
+              },
+              "e256h_h4_ff_sequence": {
+                "child_multiplicities": {
+                  "$paramod\\e256h_h4_ff_core\\SEQUENCE_MODE=s32'00000000000000000000000000000001": 1
+                },
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 0,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {}
+              }
+            },
+            "reachable_module_count": 8,
+            "reachable_modules": [
+              "$paramod\\e256h_h4_ff_core\\SEQUENCE_MODE=s32'00000000000000000000000000000001",
+              "$paramod\\e256h_h4_round_direct\\MUTATE_H4_DIRECTION=s32'00000000000000000000000000000000",
+              "e256h_h2_ff_store",
+              "e256h_h2_mixcolumns",
+              "e256h_h2_protocol",
+              "e256h_h2_sbox",
+              "e256h_h2_subbytes",
+              "e256h_h4_ff_sequence"
+            ],
+            "recursive_metrics": {
+              "generic_abc_lut6": 0,
+              "generic_memory_bits": 0,
+              "generic_primitive_cells": 1950,
+              "generic_sequential_bits": 3997
+            },
+            "recursive_primitive_signature_entries": 1950,
+            "recursive_primitive_signature_multiset_sha256": "8a18131af02c0cca554a5c152e466d553bacd601590ba0a13a03c9df0d24c853",
+            "recursive_primitive_type_multiset": {
+              "$add": 54,
+              "$and": 1,
+              "$dffe": 2,
+              "$eq": 2,
+              "$logic_and": 22,
+              "$logic_not": 7,
+              "$logic_or": 2,
+              "$lt": 1,
+              "$mul": 1,
+              "$mux": 59,
+              "$ne": 4,
+              "$neg": 1,
+              "$not": 37,
+              "$or": 1,
+              "$reduce_and": 5,
+              "$reduce_bool": 5,
+              "$reduce_or": 3,
+              "$sdff": 2,
+              "$sdffe": 7,
+              "$shift": 2,
+              "$shiftx": 34,
+              "$shr": 1568,
+              "$xor": 130
+            },
+            "top": "e256h_h4_ff_sequence"
+          },
+          "scripts": {
+            "analysis_only_flatten": "read_json build/e256h-h4-sequence/e256h_h4_ff_sequence-mapped.json; hierarchy -check -top e256h_h4_ff_sequence; flatten; write_json build/e256h-h4-sequence/e256h_h4_ff_sequence-flat.json; check -assert; ltp -noff",
+            "mapped": "read_verilog Hardware/RTL/Research/E256H/e256h_h2_integrated_core.v Hardware/RTL/Research/E256H/e256h_h4_sequence_core.v; hierarchy -check -top e256h_h4_ff_sequence; proc; memory -nomap; opt; techmap; opt; dffunmap; zinit -all; abc -lut 6; opt_clean; check -assert; write_json build/e256h-h4-sequence/e256h_h4_ff_sequence-mapped.json; write_verilog -noattr build/e256h-h4-sequence/e256h_h4_ff_sequence-mapped.v; stat",
+            "pre_map": "read_verilog Hardware/RTL/Research/E256H/e256h_h2_integrated_core.v Hardware/RTL/Research/E256H/e256h_h4_sequence_core.v; hierarchy -check -top e256h_h4_ff_sequence; proc; memory -nomap; opt; check -assert; write_json build/e256h-h4-sequence/e256h_h4_ff_sequence-premap.json; stat"
+          },
+          "selector_mode": "sequence",
+          "state_accounting": {
+            "committed_selector_boundary_present": true,
+            "complete": true,
+            "core_module": "$paramod\\e256h_h4_ff_core\\SEQUENCE_MODE=s32'00000000000000000000000000000001",
+            "datapath_and_control_state_bits": 518,
+            "mask_state_bits": 3328,
+            "mask_store_module": "e256h_h2_ff_store",
+            "protocol_state_bits": 7,
+            "selector_state_bits": 144,
+            "total_sequential_bits": 3997,
+            "wide_live_mask_port": false
+          },
+          "storage_id": "ff",
+          "top": "e256h_h4_ff_sequence"
+        },
+        "ring_repeated": {
+          "artifacts": {
+            "analysis_only_flattened_json": {
+              "path": "build/e256h-h4-sequence/e256h_h4_ring_repeated-flat.json",
+              "sha256": "d71d8e1816a5114f2828c9ebd151a39a7b9eec1192ad72387b3ee34eecbfef61"
+            },
+            "mapped_hierarchy_json": {
+              "path": "build/e256h-h4-sequence/e256h_h4_ring_repeated-mapped.json",
+              "sha256": "e80324f915ec4e42d0e1ec9ab9e13196c09893511809fe4d4bb8767db4297658"
+            },
+            "mapped_verilog": {
+              "path": "build/e256h-h4-sequence/e256h_h4_ring_repeated-mapped.v",
+              "sha256": "f0cc18f495304c4735567078630b8dae4b27c9c2b7a7f51189db2ad8d4e5fb8b"
+            },
+            "pre_map_hierarchy_json": {
+              "path": "build/e256h-h4-sequence/e256h_h4_ring_repeated-premap.json",
+              "sha256": "891573b00abacb5ef77503303d753b7b853425cb5ba4fadc08ff7d619f864aa8"
+            }
+          },
+          "flat_hierarchy": {
+            "hierarchy_cycle": false,
+            "independent_expansion": {
+              "expanded_module_instances": 1,
+              "metrics_match": true,
+              "module_instance_multiplicities": {
+                "e256h_h4_ring_repeated": 1
+              },
+              "primitive_signature_multiset_match": true,
+              "primitive_type_multiset_match": true
+            },
+            "local_modules": {
+              "e256h_h4_ring_repeated": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 8386,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 12251,
+                  "generic_sequential_bits": 3865
+                },
+                "primitive_type_multiset": {
+                  "$_DFF_P_": 3865,
+                  "$lut": 8386
+                }
+              }
+            },
+            "reachable_module_count": 1,
+            "reachable_modules": [
+              "e256h_h4_ring_repeated"
+            ],
+            "recursive_metrics": {
+              "generic_abc_lut6": 8386,
+              "generic_memory_bits": 0,
+              "generic_primitive_cells": 12251,
+              "generic_sequential_bits": 3865
+            },
+            "recursive_primitive_signature_entries": 12251,
+            "recursive_primitive_signature_multiset_sha256": "6be8a79a0da1613ef81dfb2d04becd80b0463b5be1fd02b4af79243f38395135",
+            "recursive_primitive_type_multiset": {
+              "$_DFF_P_": 3865,
+              "$lut": 8386
+            },
+            "top": "e256h_h4_ring_repeated"
+          },
+          "flatten_preservation": {
+            "combinational_levels": 10,
+            "depth_result_count": 1,
+            "flat_child_cells": 0,
+            "loop_free": true,
+            "primitive_metrics_identical": true,
+            "primitive_signature_multiset_identical": true,
+            "primitive_type_multiset_identical": true
+          },
+          "h1_eligible": true,
+          "mapped_hierarchy": {
+            "hierarchy_cycle": false,
+            "independent_expansion": {
+              "expanded_module_instances": 39,
+              "metrics_match": true,
+              "module_instance_multiplicities": {
+                "$paramod$2cefe08d6a7db3d3a52edfb3f4a1a7adc9be55b5\\e256h_h2_ring_store": 1,
+                "$paramod\\e256h_h4_ring_core\\SEQUENCE_MODE=s32'00000000000000000000000000000000": 1,
+                "$paramod\\e256h_h4_round_direct\\MUTATE_H4_DIRECTION=s32'00000000000000000000000000000000": 1,
+                "e256h_h2_mixcolumns": 1,
+                "e256h_h2_protocol": 1,
+                "e256h_h2_sbox": 32,
+                "e256h_h2_subbytes": 1,
+                "e256h_h4_ring_repeated": 1
+              },
+              "primitive_signature_multiset_match": true,
+              "primitive_type_multiset_match": true
+            },
+            "local_modules": {
+              "$paramod$2cefe08d6a7db3d3a52edfb3f4a1a7adc9be55b5\\e256h_h2_ring_store": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 4410,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 7738,
+                  "generic_sequential_bits": 3328
+                },
+                "primitive_type_multiset": {
+                  "$_DFF_P_": 3328,
+                  "$lut": 4410
+                }
+              },
+              "$paramod\\e256h_h4_ring_core\\SEQUENCE_MODE=s32'00000000000000000000000000000000": {
+                "child_multiplicities": {
+                  "$paramod$2cefe08d6a7db3d3a52edfb3f4a1a7adc9be55b5\\e256h_h2_ring_store": 1,
+                  "$paramod\\e256h_h4_round_direct\\MUTATE_H4_DIRECTION=s32'00000000000000000000000000000000": 1,
+                  "e256h_h2_protocol": 1
+                },
+                "metrics": {
+                  "generic_abc_lut6": 789,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 1319,
+                  "generic_sequential_bits": 530
+                },
+                "primitive_type_multiset": {
+                  "$_DFF_P_": 530,
+                  "$lut": 789
+                }
+              },
+              "$paramod\\e256h_h4_round_direct\\MUTATE_H4_DIRECTION=s32'00000000000000000000000000000000": {
+                "child_multiplicities": {
+                  "e256h_h2_mixcolumns": 1,
+                  "e256h_h2_subbytes": 1
+                },
+                "metrics": {
+                  "generic_abc_lut6": 768,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 768,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {
+                  "$lut": 768
+                }
+              },
+              "e256h_h2_mixcolumns": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 318,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 318,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {
+                  "$lut": 318
+                }
+              },
+              "e256h_h2_protocol": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 21,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 28,
+                  "generic_sequential_bits": 7
+                },
+                "primitive_type_multiset": {
+                  "$_DFF_P_": 7,
+                  "$lut": 21
+                }
+              },
+              "e256h_h2_sbox": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 65,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 65,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {
+                  "$lut": 65
+                }
+              },
+              "e256h_h2_subbytes": {
+                "child_multiplicities": {
+                  "e256h_h2_sbox": 32
+                },
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 0,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {}
+              },
+              "e256h_h4_ring_repeated": {
+                "child_multiplicities": {
+                  "$paramod\\e256h_h4_ring_core\\SEQUENCE_MODE=s32'00000000000000000000000000000000": 1
+                },
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 0,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {}
+              }
+            },
+            "reachable_module_count": 8,
+            "reachable_modules": [
+              "$paramod$2cefe08d6a7db3d3a52edfb3f4a1a7adc9be55b5\\e256h_h2_ring_store",
+              "$paramod\\e256h_h4_ring_core\\SEQUENCE_MODE=s32'00000000000000000000000000000000",
+              "$paramod\\e256h_h4_round_direct\\MUTATE_H4_DIRECTION=s32'00000000000000000000000000000000",
+              "e256h_h2_mixcolumns",
+              "e256h_h2_protocol",
+              "e256h_h2_sbox",
+              "e256h_h2_subbytes",
+              "e256h_h4_ring_repeated"
+            ],
+            "recursive_metrics": {
+              "generic_abc_lut6": 8386,
+              "generic_memory_bits": 0,
+              "generic_primitive_cells": 12251,
+              "generic_sequential_bits": 3865
+            },
+            "recursive_primitive_signature_entries": 12251,
+            "recursive_primitive_signature_multiset_sha256": "6be8a79a0da1613ef81dfb2d04becd80b0463b5be1fd02b4af79243f38395135",
+            "recursive_primitive_type_multiset": {
+              "$_DFF_P_": 3865,
+              "$lut": 8386
+            },
+            "top": "e256h_h4_ring_repeated"
+          },
+          "metrics": {
+            "generic_abc_lut6": 8386,
+            "generic_combinational_levels": 10,
+            "generic_memory_bits": 0,
+            "generic_primitive_cells": 12251,
+            "generic_sequential_bits": 3865
+          },
+          "pre_map_hierarchy": {
+            "hierarchy_cycle": false,
+            "independent_expansion": {
+              "expanded_module_instances": 39,
+              "metrics_match": true,
+              "module_instance_multiplicities": {
+                "$paramod$2cefe08d6a7db3d3a52edfb3f4a1a7adc9be55b5\\e256h_h2_ring_store": 1,
+                "$paramod\\e256h_h4_ring_core\\SEQUENCE_MODE=s32'00000000000000000000000000000000": 1,
+                "$paramod\\e256h_h4_round_direct\\MUTATE_H4_DIRECTION=s32'00000000000000000000000000000000": 1,
+                "e256h_h2_mixcolumns": 1,
+                "e256h_h2_protocol": 1,
+                "e256h_h2_sbox": 32,
+                "e256h_h2_subbytes": 1,
+                "e256h_h4_ring_repeated": 1
+              },
+              "primitive_signature_multiset_match": true,
+              "primitive_type_multiset_match": true
+            },
+            "local_modules": {
+              "$paramod$2cefe08d6a7db3d3a52edfb3f4a1a7adc9be55b5\\e256h_h2_ring_store": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 11,
+                  "generic_sequential_bits": 3328
+                },
+                "primitive_type_multiset": {
+                  "$and": 1,
+                  "$dffe": 1,
+                  "$mux": 3,
+                  "$neg": 1,
+                  "$not": 1,
+                  "$or": 1,
+                  "$reduce_bool": 1,
+                  "$shift": 2
+                }
+              },
+              "$paramod\\e256h_h4_ring_core\\SEQUENCE_MODE=s32'00000000000000000000000000000000": {
+                "child_multiplicities": {
+                  "$paramod$2cefe08d6a7db3d3a52edfb3f4a1a7adc9be55b5\\e256h_h2_ring_store": 1,
+                  "$paramod\\e256h_h4_round_direct\\MUTATE_H4_DIRECTION=s32'00000000000000000000000000000000": 1,
+                  "e256h_h2_protocol": 1
+                },
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 23,
+                  "generic_sequential_bits": 530
+                },
+                "primitive_type_multiset": {
+                  "$add": 1,
+                  "$dffe": 1,
+                  "$eq": 1,
+                  "$mux": 6,
+                  "$not": 3,
+                  "$reduce_and": 2,
+                  "$reduce_bool": 1,
+                  "$reduce_or": 2,
+                  "$sdff": 2,
+                  "$sdffe": 3,
+                  "$xor": 1
+                }
+              },
+              "$paramod\\e256h_h4_round_direct\\MUTATE_H4_DIRECTION=s32'00000000000000000000000000000000": {
+                "child_multiplicities": {
+                  "e256h_h2_mixcolumns": 1,
+                  "e256h_h2_subbytes": 1
+                },
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 85,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {
+                  "$add": 52,
+                  "$shiftx": 32,
+                  "$xor": 1
+                }
+              },
+              "e256h_h2_mixcolumns": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 192,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {
+                  "$mux": 32,
+                  "$not": 32,
+                  "$xor": 128
+                }
+              },
+              "e256h_h2_protocol": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 71,
+                  "generic_sequential_bits": 7
+                },
+                "primitive_type_multiset": {
+                  "$add": 1,
+                  "$eq": 1,
+                  "$logic_and": 22,
+                  "$logic_not": 7,
+                  "$logic_or": 2,
+                  "$lt": 1,
+                  "$mux": 20,
+                  "$ne": 4,
+                  "$not": 1,
+                  "$reduce_and": 3,
+                  "$reduce_bool": 4,
+                  "$reduce_or": 1,
+                  "$sdffe": 4
+                }
+              },
+              "e256h_h2_sbox": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 49,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {
+                  "$shr": 49
+                }
+              },
+              "e256h_h2_subbytes": {
+                "child_multiplicities": {
+                  "e256h_h2_sbox": 32
+                },
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 0,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {}
+              },
+              "e256h_h4_ring_repeated": {
+                "child_multiplicities": {
+                  "$paramod\\e256h_h4_ring_core\\SEQUENCE_MODE=s32'00000000000000000000000000000000": 1
+                },
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 0,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {}
+              }
+            },
+            "reachable_module_count": 8,
+            "reachable_modules": [
+              "$paramod$2cefe08d6a7db3d3a52edfb3f4a1a7adc9be55b5\\e256h_h2_ring_store",
+              "$paramod\\e256h_h4_ring_core\\SEQUENCE_MODE=s32'00000000000000000000000000000000",
+              "$paramod\\e256h_h4_round_direct\\MUTATE_H4_DIRECTION=s32'00000000000000000000000000000000",
+              "e256h_h2_mixcolumns",
+              "e256h_h2_protocol",
+              "e256h_h2_sbox",
+              "e256h_h2_subbytes",
+              "e256h_h4_ring_repeated"
+            ],
+            "recursive_metrics": {
+              "generic_abc_lut6": 0,
+              "generic_memory_bits": 0,
+              "generic_primitive_cells": 1950,
+              "generic_sequential_bits": 3865
+            },
+            "recursive_primitive_signature_entries": 1950,
+            "recursive_primitive_signature_multiset_sha256": "6e26f21feb72a489d2181e60d411cb56c6c17de8d11f395ecfc9affc4d0093af",
+            "recursive_primitive_type_multiset": {
+              "$add": 54,
+              "$and": 1,
+              "$dffe": 2,
+              "$eq": 2,
+              "$logic_and": 22,
+              "$logic_not": 7,
+              "$logic_or": 2,
+              "$lt": 1,
+              "$mux": 61,
+              "$ne": 4,
+              "$neg": 1,
+              "$not": 37,
+              "$or": 1,
+              "$reduce_and": 5,
+              "$reduce_bool": 6,
+              "$reduce_or": 3,
+              "$sdff": 2,
+              "$sdffe": 7,
+              "$shift": 2,
+              "$shiftx": 32,
+              "$shr": 1568,
+              "$xor": 130
+            },
+            "top": "e256h_h4_ring_repeated"
+          },
+          "scripts": {
+            "analysis_only_flatten": "read_json build/e256h-h4-sequence/e256h_h4_ring_repeated-mapped.json; hierarchy -check -top e256h_h4_ring_repeated; flatten; write_json build/e256h-h4-sequence/e256h_h4_ring_repeated-flat.json; check -assert; ltp -noff",
+            "mapped": "read_verilog Hardware/RTL/Research/E256H/e256h_h2_integrated_core.v Hardware/RTL/Research/E256H/e256h_h4_sequence_core.v; hierarchy -check -top e256h_h4_ring_repeated; proc; memory -nomap; opt; techmap; opt; dffunmap; zinit -all; abc -lut 6; opt_clean; check -assert; write_json build/e256h-h4-sequence/e256h_h4_ring_repeated-mapped.json; write_verilog -noattr build/e256h-h4-sequence/e256h_h4_ring_repeated-mapped.v; stat",
+            "pre_map": "read_verilog Hardware/RTL/Research/E256H/e256h_h2_integrated_core.v Hardware/RTL/Research/E256H/e256h_h4_sequence_core.v; hierarchy -check -top e256h_h4_ring_repeated; proc; memory -nomap; opt; check -assert; write_json build/e256h-h4-sequence/e256h_h4_ring_repeated-premap.json; stat"
+          },
+          "selector_mode": "repeated",
+          "state_accounting": {
+            "committed_selector_boundary_present": true,
+            "complete": true,
+            "core_module": "$paramod\\e256h_h4_ring_core\\SEQUENCE_MODE=s32'00000000000000000000000000000000",
+            "datapath_and_control_state_bits": 518,
+            "mask_state_bits": 3328,
+            "mask_store_module": "$paramod$2cefe08d6a7db3d3a52edfb3f4a1a7adc9be55b5\\e256h_h2_ring_store",
+            "protocol_state_bits": 7,
+            "selector_state_bits": 12,
+            "total_sequential_bits": 3865,
+            "wide_live_mask_port": false
+          },
+          "storage_id": "ring",
+          "top": "e256h_h4_ring_repeated"
+        },
+        "ring_sequence": {
+          "artifacts": {
+            "analysis_only_flattened_json": {
+              "path": "build/e256h-h4-sequence/e256h_h4_ring_sequence-flat.json",
+              "sha256": "f4085de4cdbb3f784976e2ffc733a28bb562060c925648b61911916bcf1cb49a"
+            },
+            "mapped_hierarchy_json": {
+              "path": "build/e256h-h4-sequence/e256h_h4_ring_sequence-mapped.json",
+              "sha256": "6f50bb82fb022a259da34e71d72636c2c0834b6566bd33b507ac279a179aaf1f"
+            },
+            "mapped_verilog": {
+              "path": "build/e256h-h4-sequence/e256h_h4_ring_sequence-mapped.v",
+              "sha256": "fdbe0ec89446b11b162671fab03c60441ffd9d7ab9517d2a16ef54d5cf375848"
+            },
+            "pre_map_hierarchy_json": {
+              "path": "build/e256h-h4-sequence/e256h_h4_ring_sequence-premap.json",
+              "sha256": "0746c5413204e619cdf7488e0f3b100aa73b9c5f8b4b8e9f2e533c0ca293f763"
+            }
+          },
+          "flat_hierarchy": {
+            "hierarchy_cycle": false,
+            "independent_expansion": {
+              "expanded_module_instances": 1,
+              "metrics_match": true,
+              "module_instance_multiplicities": {
+                "e256h_h4_ring_sequence": 1
+              },
+              "primitive_signature_multiset_match": true,
+              "primitive_type_multiset_match": true
+            },
+            "local_modules": {
+              "e256h_h4_ring_sequence": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 8329,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 12326,
+                  "generic_sequential_bits": 3997
+                },
+                "primitive_type_multiset": {
+                  "$_DFF_P_": 3997,
+                  "$lut": 8329
+                }
+              }
+            },
+            "reachable_module_count": 1,
+            "reachable_modules": [
+              "e256h_h4_ring_sequence"
+            ],
+            "recursive_metrics": {
+              "generic_abc_lut6": 8329,
+              "generic_memory_bits": 0,
+              "generic_primitive_cells": 12326,
+              "generic_sequential_bits": 3997
+            },
+            "recursive_primitive_signature_entries": 12326,
+            "recursive_primitive_signature_multiset_sha256": "ce23c37243ac7e1cf0aa576defceef3889bf8ffcc8de7739c27d95842a914ca8",
+            "recursive_primitive_type_multiset": {
+              "$_DFF_P_": 3997,
+              "$lut": 8329
+            },
+            "top": "e256h_h4_ring_sequence"
+          },
+          "flatten_preservation": {
+            "combinational_levels": 11,
+            "depth_result_count": 1,
+            "flat_child_cells": 0,
+            "loop_free": true,
+            "primitive_metrics_identical": true,
+            "primitive_signature_multiset_identical": true,
+            "primitive_type_multiset_identical": true
+          },
+          "h1_eligible": true,
+          "mapped_hierarchy": {
+            "hierarchy_cycle": false,
+            "independent_expansion": {
+              "expanded_module_instances": 39,
+              "metrics_match": true,
+              "module_instance_multiplicities": {
+                "$paramod$2cefe08d6a7db3d3a52edfb3f4a1a7adc9be55b5\\e256h_h2_ring_store": 1,
+                "$paramod\\e256h_h4_ring_core\\SEQUENCE_MODE=s32'00000000000000000000000000000001": 1,
+                "$paramod\\e256h_h4_round_direct\\MUTATE_H4_DIRECTION=s32'00000000000000000000000000000000": 1,
+                "e256h_h2_mixcolumns": 1,
+                "e256h_h2_protocol": 1,
+                "e256h_h2_sbox": 32,
+                "e256h_h2_subbytes": 1,
+                "e256h_h4_ring_sequence": 1
+              },
+              "primitive_signature_multiset_match": true,
+              "primitive_type_multiset_match": true
+            },
+            "local_modules": {
+              "$paramod$2cefe08d6a7db3d3a52edfb3f4a1a7adc9be55b5\\e256h_h2_ring_store": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 4410,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 7738,
+                  "generic_sequential_bits": 3328
+                },
+                "primitive_type_multiset": {
+                  "$_DFF_P_": 3328,
+                  "$lut": 4410
+                }
+              },
+              "$paramod\\e256h_h4_ring_core\\SEQUENCE_MODE=s32'00000000000000000000000000000001": {
+                "child_multiplicities": {
+                  "$paramod$2cefe08d6a7db3d3a52edfb3f4a1a7adc9be55b5\\e256h_h2_ring_store": 1,
+                  "$paramod\\e256h_h4_round_direct\\MUTATE_H4_DIRECTION=s32'00000000000000000000000000000000": 1,
+                  "e256h_h2_protocol": 1
+                },
+                "metrics": {
+                  "generic_abc_lut6": 1020,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 1682,
+                  "generic_sequential_bits": 662
+                },
+                "primitive_type_multiset": {
+                  "$_DFF_P_": 662,
+                  "$lut": 1020
+                }
+              },
+              "$paramod\\e256h_h4_round_direct\\MUTATE_H4_DIRECTION=s32'00000000000000000000000000000000": {
+                "child_multiplicities": {
+                  "e256h_h2_mixcolumns": 1,
+                  "e256h_h2_subbytes": 1
+                },
+                "metrics": {
+                  "generic_abc_lut6": 768,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 768,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {
+                  "$lut": 768
+                }
+              },
+              "e256h_h2_mixcolumns": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 318,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 318,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {
+                  "$lut": 318
+                }
+              },
+              "e256h_h2_protocol": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 21,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 28,
+                  "generic_sequential_bits": 7
+                },
+                "primitive_type_multiset": {
+                  "$_DFF_P_": 7,
+                  "$lut": 21
+                }
+              },
+              "e256h_h2_sbox": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 56,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 56,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {
+                  "$lut": 56
+                }
+              },
+              "e256h_h2_subbytes": {
+                "child_multiplicities": {
+                  "e256h_h2_sbox": 32
+                },
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 0,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {}
+              },
+              "e256h_h4_ring_sequence": {
+                "child_multiplicities": {
+                  "$paramod\\e256h_h4_ring_core\\SEQUENCE_MODE=s32'00000000000000000000000000000001": 1
+                },
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 0,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {}
+              }
+            },
+            "reachable_module_count": 8,
+            "reachable_modules": [
+              "$paramod$2cefe08d6a7db3d3a52edfb3f4a1a7adc9be55b5\\e256h_h2_ring_store",
+              "$paramod\\e256h_h4_ring_core\\SEQUENCE_MODE=s32'00000000000000000000000000000001",
+              "$paramod\\e256h_h4_round_direct\\MUTATE_H4_DIRECTION=s32'00000000000000000000000000000000",
+              "e256h_h2_mixcolumns",
+              "e256h_h2_protocol",
+              "e256h_h2_sbox",
+              "e256h_h2_subbytes",
+              "e256h_h4_ring_sequence"
+            ],
+            "recursive_metrics": {
+              "generic_abc_lut6": 8329,
+              "generic_memory_bits": 0,
+              "generic_primitive_cells": 12326,
+              "generic_sequential_bits": 3997
+            },
+            "recursive_primitive_signature_entries": 12326,
+            "recursive_primitive_signature_multiset_sha256": "ce23c37243ac7e1cf0aa576defceef3889bf8ffcc8de7739c27d95842a914ca8",
+            "recursive_primitive_type_multiset": {
+              "$_DFF_P_": 3997,
+              "$lut": 8329
+            },
+            "top": "e256h_h4_ring_sequence"
+          },
+          "metrics": {
+            "generic_abc_lut6": 8329,
+            "generic_combinational_levels": 11,
+            "generic_memory_bits": 0,
+            "generic_primitive_cells": 12326,
+            "generic_sequential_bits": 3997
+          },
+          "pre_map_hierarchy": {
+            "hierarchy_cycle": false,
+            "independent_expansion": {
+              "expanded_module_instances": 39,
+              "metrics_match": true,
+              "module_instance_multiplicities": {
+                "$paramod$2cefe08d6a7db3d3a52edfb3f4a1a7adc9be55b5\\e256h_h2_ring_store": 1,
+                "$paramod\\e256h_h4_ring_core\\SEQUENCE_MODE=s32'00000000000000000000000000000001": 1,
+                "$paramod\\e256h_h4_round_direct\\MUTATE_H4_DIRECTION=s32'00000000000000000000000000000000": 1,
+                "e256h_h2_mixcolumns": 1,
+                "e256h_h2_protocol": 1,
+                "e256h_h2_sbox": 32,
+                "e256h_h2_subbytes": 1,
+                "e256h_h4_ring_sequence": 1
+              },
+              "primitive_signature_multiset_match": true,
+              "primitive_type_multiset_match": true
+            },
+            "local_modules": {
+              "$paramod$2cefe08d6a7db3d3a52edfb3f4a1a7adc9be55b5\\e256h_h2_ring_store": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 11,
+                  "generic_sequential_bits": 3328
+                },
+                "primitive_type_multiset": {
+                  "$and": 1,
+                  "$dffe": 1,
+                  "$mux": 3,
+                  "$neg": 1,
+                  "$not": 1,
+                  "$or": 1,
+                  "$reduce_bool": 1,
+                  "$shift": 2
+                }
+              },
+              "$paramod\\e256h_h4_ring_core\\SEQUENCE_MODE=s32'00000000000000000000000000000001": {
+                "child_multiplicities": {
+                  "$paramod$2cefe08d6a7db3d3a52edfb3f4a1a7adc9be55b5\\e256h_h2_ring_store": 1,
+                  "$paramod\\e256h_h4_round_direct\\MUTATE_H4_DIRECTION=s32'00000000000000000000000000000000": 1,
+                  "e256h_h2_protocol": 1
+                },
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 25,
+                  "generic_sequential_bits": 662
+                },
+                "primitive_type_multiset": {
+                  "$add": 1,
+                  "$dffe": 1,
+                  "$eq": 1,
+                  "$mul": 1,
+                  "$mux": 6,
+                  "$not": 3,
+                  "$reduce_and": 2,
+                  "$reduce_bool": 1,
+                  "$reduce_or": 2,
+                  "$sdff": 2,
+                  "$sdffe": 3,
+                  "$shiftx": 1,
+                  "$xor": 1
+                }
+              },
+              "$paramod\\e256h_h4_round_direct\\MUTATE_H4_DIRECTION=s32'00000000000000000000000000000000": {
+                "child_multiplicities": {
+                  "e256h_h2_mixcolumns": 1,
+                  "e256h_h2_subbytes": 1
+                },
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 85,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {
+                  "$add": 52,
+                  "$shiftx": 32,
+                  "$xor": 1
+                }
+              },
+              "e256h_h2_mixcolumns": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 192,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {
+                  "$mux": 32,
+                  "$not": 32,
+                  "$xor": 128
+                }
+              },
+              "e256h_h2_protocol": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 71,
+                  "generic_sequential_bits": 7
+                },
+                "primitive_type_multiset": {
+                  "$add": 1,
+                  "$eq": 1,
+                  "$logic_and": 22,
+                  "$logic_not": 7,
+                  "$logic_or": 2,
+                  "$lt": 1,
+                  "$mux": 20,
+                  "$ne": 4,
+                  "$not": 1,
+                  "$reduce_and": 3,
+                  "$reduce_bool": 4,
+                  "$reduce_or": 1,
+                  "$sdffe": 4
+                }
+              },
+              "e256h_h2_sbox": {
+                "child_multiplicities": {},
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 49,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {
+                  "$shr": 49
+                }
+              },
+              "e256h_h2_subbytes": {
+                "child_multiplicities": {
+                  "e256h_h2_sbox": 32
+                },
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 0,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {}
+              },
+              "e256h_h4_ring_sequence": {
+                "child_multiplicities": {
+                  "$paramod\\e256h_h4_ring_core\\SEQUENCE_MODE=s32'00000000000000000000000000000001": 1
+                },
+                "metrics": {
+                  "generic_abc_lut6": 0,
+                  "generic_memory_bits": 0,
+                  "generic_primitive_cells": 0,
+                  "generic_sequential_bits": 0
+                },
+                "primitive_type_multiset": {}
+              }
+            },
+            "reachable_module_count": 8,
+            "reachable_modules": [
+              "$paramod$2cefe08d6a7db3d3a52edfb3f4a1a7adc9be55b5\\e256h_h2_ring_store",
+              "$paramod\\e256h_h4_ring_core\\SEQUENCE_MODE=s32'00000000000000000000000000000001",
+              "$paramod\\e256h_h4_round_direct\\MUTATE_H4_DIRECTION=s32'00000000000000000000000000000000",
+              "e256h_h2_mixcolumns",
+              "e256h_h2_protocol",
+              "e256h_h2_sbox",
+              "e256h_h2_subbytes",
+              "e256h_h4_ring_sequence"
+            ],
+            "recursive_metrics": {
+              "generic_abc_lut6": 0,
+              "generic_memory_bits": 0,
+              "generic_primitive_cells": 1952,
+              "generic_sequential_bits": 3997
+            },
+            "recursive_primitive_signature_entries": 1952,
+            "recursive_primitive_signature_multiset_sha256": "acc851a0e0ed3930428b96606926507d3219bf6ed2e4824193a2d473288acc67",
+            "recursive_primitive_type_multiset": {
+              "$add": 54,
+              "$and": 1,
+              "$dffe": 2,
+              "$eq": 2,
+              "$logic_and": 22,
+              "$logic_not": 7,
+              "$logic_or": 2,
+              "$lt": 1,
+              "$mul": 1,
+              "$mux": 61,
+              "$ne": 4,
+              "$neg": 1,
+              "$not": 37,
+              "$or": 1,
+              "$reduce_and": 5,
+              "$reduce_bool": 6,
+              "$reduce_or": 3,
+              "$sdff": 2,
+              "$sdffe": 7,
+              "$shift": 2,
+              "$shiftx": 33,
+              "$shr": 1568,
+              "$xor": 130
+            },
+            "top": "e256h_h4_ring_sequence"
+          },
+          "scripts": {
+            "analysis_only_flatten": "read_json build/e256h-h4-sequence/e256h_h4_ring_sequence-mapped.json; hierarchy -check -top e256h_h4_ring_sequence; flatten; write_json build/e256h-h4-sequence/e256h_h4_ring_sequence-flat.json; check -assert; ltp -noff",
+            "mapped": "read_verilog Hardware/RTL/Research/E256H/e256h_h2_integrated_core.v Hardware/RTL/Research/E256H/e256h_h4_sequence_core.v; hierarchy -check -top e256h_h4_ring_sequence; proc; memory -nomap; opt; techmap; opt; dffunmap; zinit -all; abc -lut 6; opt_clean; check -assert; write_json build/e256h-h4-sequence/e256h_h4_ring_sequence-mapped.json; write_verilog -noattr build/e256h-h4-sequence/e256h_h4_ring_sequence-mapped.v; stat",
+            "pre_map": "read_verilog Hardware/RTL/Research/E256H/e256h_h2_integrated_core.v Hardware/RTL/Research/E256H/e256h_h4_sequence_core.v; hierarchy -check -top e256h_h4_ring_sequence; proc; memory -nomap; opt; check -assert; write_json build/e256h-h4-sequence/e256h_h4_ring_sequence-premap.json; stat"
+          },
+          "selector_mode": "sequence",
+          "state_accounting": {
+            "committed_selector_boundary_present": true,
+            "complete": true,
+            "core_module": "$paramod\\e256h_h4_ring_core\\SEQUENCE_MODE=s32'00000000000000000000000000000001",
+            "datapath_and_control_state_bits": 518,
+            "mask_state_bits": 3328,
+            "mask_store_module": "$paramod$2cefe08d6a7db3d3a52edfb3f4a1a7adc9be55b5\\e256h_h2_ring_store",
+            "protocol_state_bits": 7,
+            "selector_state_bits": 144,
+            "total_sequential_bits": 3997,
+            "wide_live_mask_port": false
+          },
+          "storage_id": "ring",
+          "top": "e256h_h4_ring_sequence"
+        }
+      }
+    },
+    "verdicts": {
+      "architecture_selected": false,
+      "claim_movement": false,
+      "collapse": "SEQUENCE_H3_COLLAPSE_BYTE_EXACT",
+      "executable_semantics": "EXECUTABLE_SEQUENCE_SEMANTICS_BYTE_EXACT",
+      "harness_valid": true,
+      "harness_validity": {
+        "all_nineteen_controls_detected": true,
+        "collapse_exact": true,
+        "corpora_exact": true,
+        "cycle_evidence_exact": true,
+        "frozen_integrity_exact": true,
+        "functional_exact": true,
+        "paired_measurements_complete": true,
+        "synthesis_accounting_closed": true
+      },
+      "mapped_costs": "PAIRED_GENERIC_MAPPED_DELTAS_RECORDED_NO_WINNER",
+      "predictions": {
+        "H4SP1": {
+          "pass": true,
+          "role": "validity_control",
+          "statement": "all frozen source, tool, corpus, execution-set, semantic, cycle, synthesis, and control invariants close exactly"
+        },
+        "H4SP2": {
+          "observed_failure_count": 737280,
+          "pass": true,
+          "role": "graded_finding",
+          "statement": "the complete arithmetic census may have zero or nonzero mixed-window dependency failures; neither outcome invalidates the harness",
+          "structural_verdict": "ARITHMETIC_SEQUENCE_CENSUS_COUNTEREXAMPLE_FOUND"
+        },
+        "H4SP3": {
+          "observed": {
+            "ff": {
+              "comparison": "sequence minus repeated",
+              "delta": {
+                "combinational_levels": 1,
+                "generic_lut6": -407,
+                "primitive_cells": -275,
+                "sequential_bits": 132
+              },
+              "repeated_top": "e256h_h4_ff_repeated",
+              "sequence_top": "e256h_h4_ff_sequence",
+              "threshold_applied": false,
+              "winner_selected": false
+            },
+            "ring": {
+              "comparison": "sequence minus repeated",
+              "delta": {
+                "combinational_levels": 1,
+                "generic_lut6": -57,
+                "primitive_cells": 75,
+                "sequential_bits": 132
+              },
+              "repeated_top": "e256h_h4_ring_repeated",
+              "sequence_top": "e256h_h4_ring_sequence",
+              "threshold_applied": false,
+              "winner_selected": false
+            }
+          },
+          "pass": true,
+          "role": "graded_finding",
+          "statement": "sequence selection has measurable paired mapped deltas; no sign, magnitude, or storage winner is predicted"
+        }
+      },
+      "production_h4_policy_selected": false,
+      "structural": "ARITHMETIC_SEQUENCE_CENSUS_COUNTEREXAMPLE_FOUND"
+    }
+  },
+  "deterministic_payload_sha256": "4562482417cb2917208cf37f8c4441efbdde602230d878ba49d249b017822064",
+  "environment_advisory_excluded_from_digest": {
+    "elapsed_seconds": 907.597,
+    "git_dirty": true,
+    "git_head": "a8e192a446ce2efca73998fdb54c7e1c44bd7579",
+    "platform": "macOS-26.6.2-arm64-arm-64bit"
+  },
+  "no_wall_clock": "No wall-clock timestamp is asserted; only deterministic inputs and outputs are graded.",
+  "record_sha256": "4e53a53caa1da8bee7f45c572f6208624fd02703d358cdfb52ca9a31c98e0bae"
+}

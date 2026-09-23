@@ -9,8 +9,11 @@
 #   make gates       # hardware + claim lint + determinism + exact C69 n=512 smoke
 #   make determinism # fast in-process + cross-process determinism guards
 #   make c69-smoke   # exact N=1024 / n=512 covering-b2 SING regression
+#   make e256-vnext-topology       # E256-061 structural gate → logs/e256-vnext-topology-gate.json
+#   make e256-vnext-topology-check # verify that receipt reproduces byte-identically
 
 .PHONY: writeup paper textbook note docs clean-docs test-metal-p1 gates determinism c69-smoke \
+	e256-vnext-topology e256-vnext-topology-check \
 	hardware-manifest-check hardware-compat-check hardware-check hardware-compat-sync \
 	rust-reference-toolchain rust-reference-format rust-reference-clippy rust-reference-test \
 	rust-reference-verify rust-reference-check \
@@ -186,6 +189,108 @@ determinism:
 # exact N=1024 / n=512 noisy covering path and takes roughly one minute.
 c69-smoke:
 	bash Scripts/c69_n512_smoke.sh
+
+# E256-061 mirrored-topology structural gate. Deterministic and anchored to the
+# shipped fixture-v5 trace; refuses to emit if that fidelity check fails. This is
+# an OPEN progress gate and closes no claim row — see directives/e256-audit.md
+# and directives/e256-vnext-topology.md.
+e256-vnext-topology:
+	python3 Scripts/e256_topology_experiment.py
+
+e256-vnext-topology-check:
+	python3 Scripts/e256_topology_experiment.py --check
+
+# Frozen, rejection-oriented rotor/schedule campaign. This is a model-only OPEN
+# receipt; it selects no security depth and authorizes no suite implementation.
+.PHONY: e256-vnext-bakeoff e256-vnext-bakeoff-check
+
+e256-vnext-bakeoff:
+	python3 Scripts/e256_vnext_bakeoff.py
+
+e256-vnext-bakeoff-check:
+	python3 Scripts/e256_vnext_bakeoff.py --check
+
+.PHONY: e256-wide e256-wide-check
+
+e256-wide:
+	python3 Scripts/e256_wide_gate.py
+
+e256-wide-check:
+	python3 Scripts/e256_wide_gate.py --check
+
+# E256-H rotor-lane LUT6 cost gate. Needs yosys + iverilog. Measures marginal
+# keying cost with hierarchy preserved; selects no round count and authorizes no
+# production RTL. See directives/e256-hardware-architecture.md.
+.PHONY: e256-hw-cost e256-hw-cost-check
+
+e256-hw-cost:
+	python3 Scripts/e256_hardware_cost_gate.py
+
+e256-hw-cost-check:
+	python3 Scripts/e256_hardware_cost_gate.py --check
+
+# E256-H candidate re-certification (H3 offset rotor over the complete offset
+# space, H4 keyed wiring set) plus the H5 schedule invocation budget. Selects no
+# round count, no production XOF, and no production wiring set.
+.PHONY: e256-hw-candidate e256-hw-candidate-check
+
+e256-hw-candidate:
+	python3 Scripts/e256_hardware_candidate_gate.py
+
+e256-hw-candidate-check:
+	python3 Scripts/e256_hardware_candidate_gate.py --check
+
+# E256-H hardware attack lane (H8). Two synthesizable arms, two planted defects
+# that the same netlist must recover, RTL-vs-model equivalence, and attack cost
+# in LUT6/cycles. Absence of a distinguisher would NOT be a security result.
+.PHONY: e256-hw-attack e256-hw-attack-check
+
+e256-hw-attack:
+	python3 Scripts/e256_hardware_attack_gate.py
+
+e256-hw-attack-check:
+	python3 Scripts/e256_hardware_attack_gate.py --check
+
+# E256-H H3 XOR-offset material-normal-form confirmation. Proves the exact
+# collapse with software, sequential RTL, and a one-round SAT miter. This is
+# not a break, selects no round/XOF/profile, and authorizes no production RTL.
+.PHONY: e256-hw-offset-collapse e256-hw-offset-collapse-check
+
+e256-hw-offset-collapse:
+	python3 Scripts/e256_hardware_offset_collapse_gate.py
+
+e256-hw-offset-collapse-check:
+	python3 Scripts/e256_hardware_offset_collapse_gate.py --check
+
+# E256-H H2 integrated generic-cost gate. Measures six fixed-R=12 research
+# variants after H3 collapse; selects no production architecture or policy.
+.PHONY: e256-hw-h2 e256-hw-h2-check
+
+e256-hw-h2:
+	python3 Scripts/e256_hardware_h2_gate.py
+
+e256-hw-h2-check:
+	python3 Scripts/e256_hardware_h2_gate.py --check
+
+# E256-H H4 switching-sequence gate. Grades repeated versus per-round
+# selectors without selecting a production architecture or policy.
+.PHONY: e256-hw-h4-sequence e256-hw-h4-sequence-check
+
+e256-hw-h4-sequence:
+	python3 Scripts/e256_hardware_h4_sequence_gate.py
+
+e256-hw-h4-sequence-check:
+	python3 Scripts/e256_hardware_h4_sequence_gate.py --check
+
+# E256-X0 proof-carrying H4 transition-policy gate. Derives and independently
+# verifies a bounded structural safe graph and path; no production/security claim.
+.PHONY: e256-x0-h4-evolution e256-x0-h4-evolution-check
+
+e256-x0-h4-evolution:
+	python3 Scripts/e256_x0_h4_evolution_gate.py
+
+e256-x0-h4-evolution-check:
+	python3 Scripts/e256_x0_h4_evolution_gate.py --check
 
 # Pre-commit ritual for anything that touches a claim. macOS CI runs the same
 # determinism and C69 preservation gates; Linux CI retains the pure-Python lints.

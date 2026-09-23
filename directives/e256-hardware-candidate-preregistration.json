@@ -1,0 +1,303 @@
+{
+  "schema": "E256-HARDWARE-CANDIDATE-PREREGISTRATION-1",
+  "status": "FROZEN_FOR_EXECUTION",
+  "date_basis": "2026-08-20 session date; no wall-clock timestamp asserted",
+  "purpose": "Discharge steps 2 and 3 of directives/e256-hardware-architecture.md §5: bound the H5 schedule cost per block, and re-certify the H3 offset rotor and H4 keyed wiring against the same structural obligations the E256-062 receipt already discharged for the programmable-affine construction.",
+  "exploratory_probe_disclosure": {
+    "statement": "An exploratory probe was run before this preregistration was frozen. It confirmed the XOR-offset spectral invariance, that the additive-offset alternative breaks the spectrum, that repeated offsets never reach all-to-all diffusion, and the arithmetic form of the schedule accounting.",
+    "consequence": "Predictions below are therefore stated qualitatively and structurally. Every exact count — the size of the certified wiring set, the compression and permutation totals, and the cost ratio — is reported as a measured output and is deliberately NOT preregistered as a number.",
+    "reason": "Freezing counts already observed in a probe would be post-hoc dressing rather than prediction."
+  },
+  "authorization": {
+    "architecture_record": "directives/e256-hardware-architecture.md",
+    "contract_start_marker": "<!-- E256-H-CONTRACT-START -->",
+    "contract_end_marker": "<!-- E256-H-CONTRACT-END -->",
+    "contract_hash_preimage": "all bytes strictly between the unique start and end marker strings, including their surrounding newlines but excluding both marker strings",
+    "contract_sha256": "b64472f73be9d0fc6318ff445c5f550cb0129309313228f416599c27d3957bb1",
+    "graded_constraints": [
+      "H3",
+      "H4",
+      "H5"
+    ],
+    "allowed": "preregistered structural certification and deterministic cost accounting on a research construction",
+    "blocked": [
+      "production RTL or bitstream",
+      "cipher-suite or profile promotion",
+      "fixture or protocol promotion",
+      "C/H/N claim movement",
+      "security-bit or production-readiness claim",
+      "round-count selection",
+      "selection of a production PRF or XOF"
+    ]
+  },
+  "predecessors": [
+    {
+      "id": "E256-062",
+      "receipt": "logs/e256-wide-state-gate.json",
+      "receipt_schema": "E256-WIDE-STATE-GATE-1",
+      "deterministic_payload_sha256": "21758ce220b9da469a18ea617fa7b2fd41e906add69a258f830b12843e3e495b",
+      "inherited": "Structural obligations and their thresholds: 69 nonzero MixColumns minors, branch number 5, all-to-all structural byte dependency by round 3, and a 25-active-rotor four-round trail certificate."
+    },
+    {
+      "id": "E256-063-step-1",
+      "receipt": "logs/e256-hardware-cost-gate.json",
+      "receipt_schema": "E256-HARDWARE-COST-GATE-1",
+      "deterministic_payload_sha256": "a10e001ad2c2b3de55fcc80197c059f166d5e55599c670e20b01de8f6b7d323d",
+      "inherited": "Measured keying cost: offset 16 LUT6 at depth 3 versus programmable affine 64 LUT6 at depth 5, verdict H3_OFFSET_KEYING_SUPPORTED."
+    }
+  ],
+  "questions": [
+    {
+      "id": "HQ5",
+      "text": "Does the H3 offset rotor preserve the exact AES differential, linear, and algebraic spectrum across the complete offset space rather than a sample?"
+    },
+    {
+      "id": "HQ6",
+      "text": "Which row-offset tuples may enter the H4 keyed wiring set, and is pairwise distinctness sufficient to qualify?"
+    },
+    {
+      "id": "HQ7",
+      "text": "Does every member of the certified wiring set inherit the E256-062 structural obligations, including the four-round active-rotor bound?"
+    },
+    {
+      "id": "HQ8",
+      "text": "How many primitive invocations per 32-byte block does an XOF schedule need against the per-derivation HMAC-SHA512 model?"
+    }
+  ],
+  "toolchain_contract": {
+    "python": "3.9.6",
+    "numpy": "1.26.4",
+    "deterministic_operations": "integer and byte operations only; no floating-point value enters the deterministic payload except explicitly labelled rounded ratios",
+    "advisory_only": [
+      "platform",
+      "elapsed_seconds",
+      "git_head",
+      "git_dirty"
+    ]
+  },
+  "h3_rotor": {
+    "formula": "R(x) = SBOX(x XOR p_in) XOR p_out",
+    "aes_sbox_sha256": "c2d8e5eed6cbebd8625fc18f81486a7733c04f9b0129ffbe974c68b90308b4f2",
+    "offset_space": "all 65536 ordered pairs (p_in, p_out)",
+    "bijection_scope": "exhaustive over all 65536 offset pairs",
+    "spectrum_scope": "exhaustive over all 256 values of p_in; p_out contributes only an output translation, which cannot change differential magnitudes, linear magnitudes, or algebraic degree",
+    "spectrum_argument": "For any a, R(x) XOR R(x XOR a) = SBOX(y) XOR SBOX(y XOR a) under y = x XOR p_in, and y ranges over all 256 values, so the differential distribution is identical to the S-box for every offset pair. Linear magnitudes are preserved because p_out only flips a sign and p_in only permutes the input, and degree is preserved because composition with an affine bijection and XOR of a constant preserve algebraic degree.",
+    "expected_differential_uniformity": 4,
+    "expected_maximum_absolute_lat": 32,
+    "expected_forward_algebraic_degree": 7,
+    "expected_inverse_algebraic_degree": 7,
+    "metric_definitions": "identical to directives/e256-wide-preregistration.json: DDT maximum over input difference 1..255; LAT maximum absolute value over input and output masks 1..255; algebraic degree as maximum coordinate ANF degree computed separately for the forward and inverse maps"
+  },
+  "h4_wiring": {
+    "geometry": "4 rows by 8 columns, byte index 4*column+row",
+    "candidate_space": "all ordered 4-tuples of pairwise distinct row offsets drawn from 0..7",
+    "forward": "out[4*c+r] = in[4*((c+offset[r]) mod 8)+r]",
+    "inverse": "out[4*c+r] = in[4*((c-offset[r]) mod 8)+r]",
+    "mix_columns_matrix_hex_rows": [
+      ["02", "03", "01", "01"],
+      ["01", "02", "03", "01"],
+      ["01", "01", "02", "03"],
+      ["03", "01", "01", "02"]
+    ],
+    "field_polynomial": "0x11b",
+    "certification_obligations": [
+      "row offsets pairwise distinct modulo 8",
+      "row shift is a byte permutation with an exact inverse",
+      "all 69 nonempty square MixColumns minors nonzero over GF(2^8)",
+      "MixColumns branch number 5 with an exact two-sided inverse",
+      "structural all-to-all byte dependency reached by round 3",
+      "four-round active-rotor lower bound of 25 under the inherited wide-trail obligation manifest"
+    ],
+    "certified_set_definition": "the subset of the candidate space for which every certification obligation holds; its size is a measured output, not a preregistered number",
+    "keyed_selection_note": "A keyed wiring selection may only draw from the certified set. Selecting from the full distinct-offset space is forbidden unless the certified set is proven to equal it."
+  },
+  "h5_schedule": {
+    "material_block_bytes": 800,
+    "material_composition": "384 rotor-selection bytes for 12 rounds by 32 lanes, followed by 416 mask bytes for mask indices 0 through 12",
+    "canonical_context_bytes": "computed from the frozen E256-W canonical context encoding, not asserted",
+    "baseline_model": {
+      "id": "hmac_sha512_per_derivation",
+      "description": "the E256-062 model schedule, which issues one HMAC-SHA512 purpose stream per selection byte and per mask index",
+      "sha512_block_bytes": 128,
+      "sha512_compression_accounting": "compressions(message_length) = 1 + ceil((message_length + 17) / 128), covering the 0x80 padding byte and the 16-byte length field",
+      "hmac_compression_accounting": "compressions(inner message) + 2, for the single-block ipad prefix and the two-block outer hash over a 64-byte digest"
+    },
+    "candidate_model": {
+      "id": "shake256_single_squeeze",
+      "description": "one domain-separated SHAKE-256 squeeze covering the complete material block",
+      "rate_bytes": 136,
+      "capacity_bits": 512,
+      "permutation_accounting": "keccak_f1600_calls = ceil((absorbed_length + 1) / 136) + ceil(output_length / 136) - 1, under the stated convention that the final absorb permutation also produces the first squeeze block",
+      "verification": "the squeeze must be checked to actually return the full material block length from hashlib.shake_256"
+    },
+    "graded_quantity": "primitive invocations per 32-byte block for each model, and the ratio between them",
+    "explicit_limitation": "This is exact arithmetic accounting plus an output-length check, not an instrumented count inside a hash implementation and not a synthesis or throughput measurement. Selecting a production XOF remains OPEN."
+  },
+  "controls": [
+    {
+      "id": "additive_offset_rotor",
+      "mutation": "replace XOR conjugation with additive conjugation modulo 256: R(x) = (SBOX((x + p) mod 256) - p) mod 256",
+      "shared_path": ["exact DDT", "exact LAT", "exact ANF degree", "bijection"],
+      "detector": "at least one offset yields a differential uniformity or algebraic degree differing from the S-box",
+      "required_result": "detected",
+      "rationale": "this is the rejected alternative in the architecture record; if the invariance check cannot separate it from XOR conjugation the check has no power"
+    },
+    {
+      "id": "repeated_row_offsets",
+      "mutation": "inject the offset tuple (0,0,0,0) through the normal dependency and dispersion routine",
+      "shared_path": ["row dispersion", "dependency reachability"],
+      "detector": "structural all-to-all dependency is not reached within 12 rounds",
+      "required_result": "detected"
+    },
+    {
+      "id": "partially_repeated_row_offsets",
+      "mutation": "inject the offset tuple (0,1,1,3) through the normal dispersion routine",
+      "shared_path": ["row dispersion"],
+      "detector": "pairwise distinctness fails",
+      "required_result": "detected"
+    },
+    {
+      "id": "singular_mix_matrix",
+      "mutation": "replace MixColumns row 3 with row 2 before structural validation",
+      "shared_path": ["GF(2^8) determinant and minor certificate"],
+      "adapter_exception": "expected typed structural rejection occurs before inverse computation because no inverse exists",
+      "detector": "zero determinant or minor and inverse unavailable",
+      "required_result": "detected"
+    },
+    {
+      "id": "truncated_material_block",
+      "mutation": "request fewer than the frozen 800 material bytes from the candidate schedule",
+      "shared_path": ["material composition", "XOF squeeze", "output-length check"],
+      "detector": "material coverage check rejects the short block",
+      "required_result": "detected"
+    }
+  ],
+  "control_execution_contract": {
+    "requirement": "Each control must execute exactly its declared shared_path; only a declared adapter_exception may terminate early.",
+    "exact_control_ids": true,
+    "candidate_nulls": [
+      "the H3 offset rotor must match the S-box spectrum for every one of the 256 p_in values and be bijective for all 65536 offset pairs",
+      "the frozen Rijndael tuple (0,1,3,4) must appear in the certified wiring set",
+      "the certified wiring set must be non-empty and every member must discharge every obligation"
+    ],
+    "fail_closed": "Build an in-memory invalid diagnostic, exit nonzero, and refuse to write or accept the canonical receipt on any contract, control, null, or coverage failure."
+  },
+  "predictions": [
+    {
+      "id": "Q1",
+      "role": "validity_control",
+      "statement": "the additive-offset control is detected on at least one offset",
+      "rationale": "gives the spectral invariance check demonstrated discriminating power"
+    },
+    {
+      "id": "Q2",
+      "role": "validity_control",
+      "statement": "the repeated-offset and partially-repeated-offset controls are both detected",
+      "rationale": "gives the dispersion and dependency routines demonstrated discriminating power"
+    },
+    {
+      "id": "Q3",
+      "role": "validity_control",
+      "statement": "the singular MixColumns control is detected with a typed structural rejection",
+      "rationale": "confirms the minor and inverse certificate is load-bearing"
+    },
+    {
+      "id": "Q4",
+      "role": "validity_control",
+      "statement": "the truncated material control is detected",
+      "rationale": "confirms the schedule coverage check is load-bearing"
+    },
+    {
+      "id": "Q5",
+      "role": "graded_finding",
+      "statement": "the H3 offset rotor preserves differential uniformity 4, maximum absolute LAT 32, and forward and inverse degree 7 for every p_in, with bijection over the complete 65536-pair offset space",
+      "rationale": "this is the whole structural justification for H3; it must hold exhaustively rather than on a sample"
+    },
+    {
+      "id": "Q6",
+      "role": "graded_finding",
+      "statement": "the certified wiring set is a strict subset of the pairwise-distinct offset space",
+      "rationale": "predicts that pairwise distinctness is NOT sufficient for round-3 diffusion, which would make a naive keyed-wiring set unsafe"
+    },
+    {
+      "id": "Q7",
+      "role": "graded_finding",
+      "statement": "the frozen Rijndael tuple (0,1,3,4) belongs to the certified wiring set",
+      "rationale": "the E256-062 construction must survive its own successor's certification"
+    },
+    {
+      "id": "Q8",
+      "role": "graded_finding",
+      "statement": "the XOF schedule needs at most 8 Keccak-f[1600] permutations per 32-byte block and the HMAC-SHA512 model needs at least 100 times more primitive invocations",
+      "rationale": "H5 claims the per-derivation schedule is unbuildable and that batching fixes it; a weak ratio would undercut that"
+    }
+  ],
+  "hard_rejection_rules": [
+    "Refuse the receipt if the architecture contract hash, this preregistration hash, either predecessor payload digest, the AES S-box hash, or the toolchain contract drifts.",
+    "Refuse the receipt if any control fails to execute its declared shared path or fails to be detected.",
+    "Refuse the receipt if any candidate null fails.",
+    "Refuse the receipt if any validity_control prediction (Q1 through Q4) fails.",
+    "Refuse the receipt if the executed control ID set does not equal the frozen control ID set.",
+    "Do not select a round count, a production XOF, or a production wiring set, and do not infer security from any certificate or cost figure here."
+  ],
+  "interpretation": {
+    "internal_invalid_status": "INVALID_CANDIDATE_HARNESS; never emitted or accepted as the canonical receipt",
+    "valid_emitted_verdicts": [
+      "H3_H4_CANDIDATE_STRUCTURALLY_RECERTIFIED",
+      "H3_H4_CANDIDATE_NOT_RECERTIFIED"
+    ],
+    "decision_table": [
+      {
+        "condition": "contract, coverage, control, or candidate-null failure",
+        "action": "exit nonzero and refuse canonical receipt write/check"
+      },
+      {
+        "condition": "valid harness and Q5, Q6, and Q7 all hold",
+        "action": "emit H3_H4_CANDIDATE_STRUCTURALLY_RECERTIFIED"
+      },
+      {
+        "condition": "valid harness and any of Q5, Q6, or Q7 fails",
+        "action": "emit H3_H4_CANDIDATE_NOT_RECERTIFIED"
+      }
+    ],
+    "scope": "structural certification and arithmetic schedule accounting only",
+    "next": "Re-certification licenses the H8 hardware attack lane against the H3/H4 candidate. It does not license a round count, a production XOF, a byte-exact specification, or production RTL.",
+    "baseline_result": "The fixed-AES comparator retains the same structural bounds, so no rotor-namespace security advantage is established here either."
+  },
+  "non_claims": [
+    "Passing this gate is not IND-CPA, IND-CCA, AEAD, PRP, PRF, or standalone-cipher security.",
+    "The four-round bound covers single differential and linear trails only; clustering, integral, algebraic, meet-in-the-middle, rebound, slide, invariant-subspace, related-key, multi-user, and implementation attacks are untested.",
+    "Structural byte dependency does not prove the absence of algebraic cancellation.",
+    "Exhaustive spectral invariance over the offset space is a statement about one 8-bit rotor, not about the 256-bit permutation.",
+    "The schedule figures are arithmetic invocation counts, not throughput, latency, area, or energy measurements, and no production XOF is selected.",
+    "A certified wiring set is not a keyed-wiring security argument; how offsets are selected and what that leaks remains OPEN.",
+    "No C/H/N row, E256 finding, suite, profile, fixture, or release gate closes here, and reviewed standard AEAD remains mandatory for real data."
+  ],
+  "receipt_contract": {
+    "schema": "E256-HARDWARE-CANDIDATE-GATE-1",
+    "status": "OPEN_PROGRESS",
+    "output": "logs/e256-hardware-candidate-gate.json",
+    "runner": "Scripts/e256_hardware_candidate_gate.py",
+    "deterministic_payload_top_level_keys": [
+      "schema",
+      "status",
+      "inputs",
+      "pinned_parameters",
+      "coverage",
+      "controls",
+      "results",
+      "schedule_budget",
+      "interpretation",
+      "limitations"
+    ],
+    "digest": "SHA-256 of canonical_json(deterministic_payload)",
+    "outer_receipt_keys": [
+      "deterministic_payload",
+      "deterministic_payload_sha256",
+      "environment_advisory_excluded_from_digest",
+      "no_wall_clock"
+    ],
+    "checker": "recompute frozen hashes, the complete offset-space certification, the complete wiring certification, all controls, the schedule accounting, the interpretation gate, the payload, and the digest; require the gate to pass; compare the complete deterministic payload and digest byte-for-byte",
+    "write": "sorted indented UTF-8 JSON with final newline and atomic replacement"
+  }
+}

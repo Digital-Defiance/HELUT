@@ -1,0 +1,293 @@
+{
+  "schema": "E256-HARDWARE-COST-PREREGISTRATION-1",
+  "status": "FROZEN_FOR_EXECUTION",
+  "date_basis": "2026-08-20 session date; no wall-clock timestamp asserted",
+  "revision": {
+    "supersedes_sha256": "26340eed7871aaf40aac353919f6473afbe06a456cec8eb2409f666293d8b76d",
+    "reason": "The superseded draft measured whole-module LUT6 counts after `flatten`, which lets ABC re-synthesize across the S-box boundary and therefore cannot measure marginal keying cost at all.",
+    "rejected_by": "its own P3 metric-stability control",
+    "observed_failure": "offset mapped to 158 LUT6 while the logically identical offset_alt mapped to 187 LUT6, with 1792/1792 functional checks passing in both cases; the flattened flow also reported affine (135) as cheaper than offset (158), which is structurally impossible for a marginal-cost reading",
+    "prior_receipt_status": "no receipt was generated under the superseded preregistration; the harness failed closed with INVALID_COST_HARNESS",
+    "correction": "Synthesis now preserves hierarchy so the shared S-box is never re-optimized against the wrapper, and the graded metric is the top module's local cell count, which is exactly the keying overhead.",
+    "unchanged_thresholds": "The P4 (>=4x) and P6 (<=32) thresholds are carried over verbatim from the superseded draft so that correcting the methodology cannot be confused with moving the goalposts."
+  },
+  "purpose": "Replace the hand gate-count estimates in directives/e256-hardware-architecture.md with measured LUT6 synthesis cost for one rotor lane realized four ways, so that H3 (demote rotor keying to XOR-offset conjugation) is decided by measurement rather than assertion.",
+  "authorization": {
+    "architecture_record": "directives/e256-hardware-architecture.md",
+    "contract_start_marker": "<!-- E256-H-CONTRACT-START -->",
+    "contract_end_marker": "<!-- E256-H-CONTRACT-END -->",
+    "contract_hash_preimage": "all bytes strictly between the unique start and end marker strings, including their surrounding newlines but excluding both marker strings",
+    "contract_sha256": "b64472f73be9d0fc6318ff445c5f550cb0129309313228f416599c27d3957bb1",
+    "graded_constraints": [
+      "H0",
+      "H1",
+      "H2",
+      "H3",
+      "H7"
+    ],
+    "allowed": "preregistered cost-estimation research on non-production RTL",
+    "blocked": [
+      "production RTL or bitstream",
+      "cipher-suite or profile promotion",
+      "fixture or protocol promotion",
+      "C/H/N claim movement",
+      "security-bit, timing-closure, power, or side-channel claim",
+      "round-count selection"
+    ]
+  },
+  "predecessor": {
+    "architecture": "directives/e256-wide-architecture.md",
+    "receipt": "logs/e256-wide-state-gate.json",
+    "receipt_schema": "E256-WIDE-STATE-GATE-1",
+    "deterministic_payload_sha256": "21758ce220b9da469a18ea617fa7b2fd41e906add69a258f830b12843e3e495b",
+    "inherited_result": "Wide state structurally retained for attack only; fixed-AES comparator reached identical structural bounds, so the keyed rotor namespace has no demonstrated advantage and its cost is the open question."
+  },
+  "questions": [
+    {
+      "id": "HQ1",
+      "text": "What is the measured marginal LUT6 cost of each rotor keying scheme over an unkeyed fixed S-box lane holding the S-box description constant?"
+    },
+    {
+      "id": "HQ2",
+      "text": "Is the programmable-affine marginal cost materially larger than the XOR-offset marginal cost, as H3 assumes?"
+    },
+    {
+      "id": "HQ3",
+      "text": "Does realizing the identical rotor function as a runtime-loaded 256-entry lookup cost more logic than the equivalent netlist, as H1 assumes?"
+    },
+    {
+      "id": "HQ4",
+      "text": "Is the LUT6 metric stable against a logically equivalent but differently written description?"
+    }
+  ],
+  "toolchain_contract": {
+    "yosys_version_prefix": "Yosys 0.68+post",
+    "yosys_git_sha1": "c12172fbae8af5e20f6fb52e3d4e92d56ed587b6",
+    "iverilog_version_prefix": "Icarus Verilog version 13.0",
+    "version_binding": "Synthesis results are tool-dependent, so the recorded yosys and iverilog version strings enter the deterministic payload; a different toolchain must fail --check loudly rather than silently compare different numbers.",
+    "advisory_only": [
+      "platform",
+      "elapsed_seconds",
+      "git_head",
+      "git_dirty"
+    ]
+  },
+  "synthesis_contract": {
+    "script": "read_verilog <rtl>; hierarchy -check -top <module>; proc; memory; opt; techmap; opt; dffunmap; zinit -all; abc -lut 6; opt_clean; check -assert; stat; ltp -noff",
+    "script_provenance": "same pass order as the existing Mulein bounded LUT6 lane in the Makefile, with `flatten` deliberately removed",
+    "flatten_prohibited": "`flatten` must not appear. Flattening lets ABC re-synthesize the shared S-box together with the keying logic, which destroys the structural boundary the marginal measurement depends on and makes the metric description-sensitive.",
+    "target": "generic 6-input LUT mapping by ABC; not a vendor architecture and not place-and-route",
+    "keying_lut6_metric": "the local $lut count reported by stat for the top module, which excludes submodules and is therefore exactly the keying overhead added around the shared S-box; absent means zero",
+    "shared_sbox_lut6_metric": "the local $lut count reported by stat for e256h_aes_sbox in the same run",
+    "depth_metric": "length reported by ltp -noff for the top module in the mapped netlist",
+    "graded_quantity": "keying_lut6, compared across variants; the shared S-box cost is reported for context and is identical wherever an S-box is instantiated",
+    "invocation": "one yosys process per variant with -Q, no shared state between variants"
+  },
+  "key_material": {
+    "derivation": "reuse the frozen E256-W model KDF exactly, so the measured lane matches the certified construction",
+    "preregistration_of_record": "directives/e256-wide-preregistration.json",
+    "extract_key_ascii": "E256-W/gate/extract/v1",
+    "test_ikm": "first 32 bytes of SHA-512(ASCII 'E256-W/gate/key/v1/' || u16be(0))",
+    "rotor_subkey_domain": "rotor",
+    "rotor_base": "ASCII 'E256-W/gate/rotor/v1' || u8(0)",
+    "matrix_in": "first rank-8 result of PurposeStream(rotor_key, base || ASCII '/matrix/in/attempt/' || u16be(attempt)).read(8)",
+    "matrix_out": "first rank-8 result of PurposeStream(rotor_key, base || ASCII '/matrix/out/attempt/' || u16be(attempt)).read(8)",
+    "constants": "PurposeStream(rotor_key, base || ASCII '/constants').read(2); byte 0 is c_in, byte 1 is c_out",
+    "offset_parameters": "p_in = c_in and p_out = c_out, so the offset lane is exactly the affine lane with both matrices set to identity",
+    "matrix_packing": "row r occupies bits [8*r+7 : 8*r] of the 64-bit port, matching the frozen row-order convention where output bit r is parity(row_r AND x)",
+    "table_contents": "the 256-byte forward table of the affine lane at the same parameters, packed little-endian as tbl[8*x+7 : 8*x], so the table lane computes an identical function by lookup"
+  },
+  "variants": [
+    {
+      "id": "identity",
+      "module": "e256h_cost_identity",
+      "role": "calibration_control",
+      "function": "y = x",
+      "keyed_bits": 0
+    },
+    {
+      "id": "xor_only",
+      "module": "e256h_cost_xor_only",
+      "role": "calibration_control",
+      "function": "y = x XOR p_in",
+      "keyed_bits": 8
+    },
+    {
+      "id": "fixed",
+      "module": "e256h_cost_fixed",
+      "role": "baseline",
+      "function": "y = SBOX(x)",
+      "keyed_bits": 0
+    },
+    {
+      "id": "offset",
+      "module": "e256h_cost_offset",
+      "role": "candidate",
+      "function": "y = SBOX(x XOR p_in) XOR p_out",
+      "keyed_bits": 16
+    },
+    {
+      "id": "offset_alt",
+      "module": "e256h_cost_offset_alt",
+      "role": "metric_stability_control",
+      "function": "identical to offset, written with per-bit loops instead of byte expressions",
+      "keyed_bits": 16
+    },
+    {
+      "id": "affine",
+      "module": "e256h_cost_affine",
+      "role": "incumbent",
+      "function": "y = L_out(SBOX(L_in(x) XOR c_in)) XOR c_out with runtime matrices",
+      "keyed_bits": 144
+    },
+    {
+      "id": "table",
+      "module": "e256h_cost_table",
+      "role": "h1_violation_comparator",
+      "function": "y = tbl[x], runtime-loaded 256-entry lookup computing the same function as affine",
+      "keyed_bits": 2048
+    }
+  ],
+  "shared_sbox": {
+    "module": "e256h_aes_sbox",
+    "description": "one 256-entry truth-table description of the AES S-box shared by every S-box-bearing variant",
+    "aes_sbox_sha256": "c2d8e5eed6cbebd8625fc18f81486a7733c04f9b0129ffbe974c68b90308b4f2",
+    "rationale": "holding the S-box description constant makes the difference between variants the keying overhead, which is the quantity under test",
+    "explicit_limitation": "this is a truth-table description optimized by ABC, not a tower-field or depth-optimized S-box circuit, so its absolute cost must not be compared to published gate-equivalent S-box figures"
+  },
+  "functional_verification": {
+    "requirement": "every variant must match the frozen Python model on all 256 inputs before any cost number is interpreted",
+    "vectors": "generated from the frozen key material and compared in an Icarus Verilog testbench",
+    "expected_checks_per_variant": 256,
+    "expected_total_checks": 1792,
+    "equivalence_obligations": [
+      "offset output equals affine output when both matrices are the identity",
+      "table output equals affine output on all 256 inputs",
+      "offset_alt output equals offset output on all 256 inputs"
+    ]
+  },
+  "predictions": [
+    {
+      "id": "P1",
+      "role": "validity_control",
+      "statement": "identity keying_lut6 is exactly 0",
+      "rationale": "a wire-through must not consume logic; a nonzero count means the flow inflates trivial designs and no cost number is trustworthy"
+    },
+    {
+      "id": "P2",
+      "role": "validity_control",
+      "statement": "xor_only keying_lut6 is at most 8",
+      "rationale": "eight independent 2-input XORs; a larger count means the flow is not mapping simple logic sensibly"
+    },
+    {
+      "id": "P3",
+      "role": "validity_control",
+      "statement": "offset_alt keying_lut6 and depth equal offset keying_lut6 and depth exactly",
+      "rationale": "if a logically identical rewrite changes the metric, the metric is description noise and the comparison is void; this control already rejected one methodology"
+    },
+    {
+      "id": "P7",
+      "role": "validity_control",
+      "statement": "fixed keying_lut6 is exactly 0 and its shared_sbox_lut6 is greater than 0",
+      "rationale": "confirms the hierarchy boundary is intact, so the shared S-box cost is attributed to the submodule and never to keying"
+    },
+    {
+      "id": "P4",
+      "role": "graded_finding",
+      "statement": "affine keying_lut6 is at least 4x offset keying_lut6",
+      "rationale": "this is the measurable core of H3; failure removes the cost justification for demoting programmable affine keying",
+      "threshold_provenance": "carried over verbatim from the superseded draft"
+    },
+    {
+      "id": "P5",
+      "role": "graded_finding",
+      "statement": "table keying_lut6 is strictly greater than the shared S-box cost",
+      "rationale": "supports H1 by showing a runtime lookup is not a cheap way to obtain a keyed rotor in logic"
+    },
+    {
+      "id": "P6",
+      "role": "graded_finding",
+      "statement": "offset keying_lut6 is at most 32",
+      "rationale": "two byte XORs should be near-free; a larger figure would weaken H3 even if P4 holds",
+      "threshold_provenance": "carried over verbatim from the superseded draft"
+    },
+    {
+      "id": "P8",
+      "role": "graded_finding",
+      "statement": "offset depth is strictly less than affine depth",
+      "rationale": "H3 should reduce logic levels as well as area; a latency win is part of the claim being tested"
+    }
+  ],
+  "hard_rejection_rules": [
+    "Refuse the receipt if the architecture contract hash, this preregistration hash, the predecessor payload digest, the AES S-box hash, or either pinned tool version drifts.",
+    "Refuse the receipt if any variant fails functional verification on all 256 inputs or any equivalence obligation fails.",
+    "Refuse the receipt if any validity_control prediction (P1, P2, P3, P7) fails.",
+    "Refuse the receipt if the synthesis script contains a flatten pass.",
+    "Refuse the receipt if the executed variant ID set does not equal the frozen variant ID set.",
+    "Do not select a round count, declare a production keying scheme, or infer security from any cost number."
+  ],
+  "interpretation": {
+    "internal_invalid_status": "INVALID_COST_HARNESS; never emitted or accepted as the canonical receipt",
+    "valid_emitted_verdicts": [
+      "H3_OFFSET_KEYING_SUPPORTED",
+      "H3_OFFSET_KEYING_NOT_SUPPORTED"
+    ],
+    "decision_table": [
+      {
+        "condition": "contract, coverage, functional, or validity-control failure",
+        "action": "exit nonzero and refuse canonical receipt write/check"
+      },
+      {
+        "condition": "valid harness and P4 holds",
+        "action": "emit H3_OFFSET_KEYING_SUPPORTED"
+      },
+      {
+        "condition": "valid harness and P4 fails",
+        "action": "emit H3_OFFSET_KEYING_NOT_SUPPORTED"
+      }
+    ],
+    "scope": "one combinational byte lane only; the 32-lane round, register budget, schedule, and mode are not measured here",
+    "next": "A supported result promotes H3 from proposal to measured default and licenses the H4/H5 structural re-certification. It does not license production RTL or a round count."
+  },
+  "non_claims": [
+    "LUT6 counts are yosys/ABC generic mapping artifacts, not vendor place-and-route, not gate equivalents, and not ASIC area.",
+    "No timing closure, Fmax, power, energy, TVLA, EM, or fault result is produced.",
+    "Constant-latency combinational logic is not side-channel resistance.",
+    "Only marginal keying cost is compared; the absolute S-box cost reflects a truth-table description, not an optimized tower-field circuit.",
+    "Keying cost is measured with hierarchy preserved. A flattened, globally optimized implementation will not reproduce these numbers, and the ratios are properties of this flow rather than of silicon.",
+    "LUT6 ratios do not transfer to ASIC gate equivalents; the hand estimate in the architecture record put programmable-affine wrappers at 3-5x an optimized tower-field S-box, which a 6-LUT fabric does not reproduce.",
+    "Register and parameter-storage budgets under H2 are not measured by this gate.",
+    "A cheaper lane is not a stronger lane; no structural or security certificate is affected by any figure here.",
+    "This RTL is a non-production cost model and is not a specification, suite, profile, or fixture.",
+    "No C/H/N row, E256 finding, suite, profile, fixture, or release gate closes here, and reviewed standard AEAD remains mandatory for real data."
+  ],
+  "receipt_contract": {
+    "schema": "E256-HARDWARE-COST-GATE-1",
+    "status": "OPEN_PROGRESS",
+    "output": "logs/e256-hardware-cost-gate.json",
+    "runner": "Scripts/e256_hardware_cost_gate.py",
+    "rtl": "Hardware/RTL/Research/E256H/e256h_cost_lanes.v",
+    "testbench": "Hardware/Testbenches/Research/E256H/e256h_cost_lanes_tb.v",
+    "deterministic_payload_top_level_keys": [
+      "schema",
+      "status",
+      "inputs",
+      "pinned_parameters",
+      "coverage",
+      "functional",
+      "measurements",
+      "predictions",
+      "interpretation",
+      "limitations"
+    ],
+    "digest": "SHA-256 of canonical_json(deterministic_payload)",
+    "outer_receipt_keys": [
+      "deterministic_payload",
+      "deterministic_payload_sha256",
+      "environment_advisory_excluded_from_digest",
+      "no_wall_clock"
+    ],
+    "checker": "recompute frozen hashes, key material, vectors, functional verification, all syntheses, predictions, payload, and digest; require the validity gate to pass; compare the complete deterministic payload and digest byte-for-byte",
+    "write": "sorted indented UTF-8 JSON with final newline and atomic replacement"
+  }
+}

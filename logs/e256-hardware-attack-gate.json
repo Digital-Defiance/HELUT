@@ -1,0 +1,611 @@
+{
+  "deterministic_payload": {
+    "cost": {
+      "explicit_limitation": "The integral and single cores expose wide flat material ports because this is a research harness; that inflates their mapped cost relative to an engine that derives material on-chip. Only e256h_atk_round is a clean datapath cost.",
+      "measured_integral_cycles_candidate": {
+        "0:1": 770,
+        "0:2": 1027,
+        "0:3": 1283,
+        "0:4": 1539,
+        "0:5": 1795,
+        "0:6": 2051,
+        "0:7": 2307,
+        "0:8": 2563
+      },
+      "modules": [
+        {
+          "flip_flops": 0,
+          "local_cell_types": {
+            "$lut": 1381
+          },
+          "local_cells": 1381,
+          "local_lut6": 1381,
+          "longest_topological_path": 5,
+          "module": "e256h_atk_round"
+        },
+        {
+          "flip_flops": 518,
+          "local_cell_types": {
+            "$lut": 3496
+          },
+          "local_cells": 4014,
+          "local_lut6": 3496,
+          "longest_topological_path": 5,
+          "module": "e256h_atk_single"
+        },
+        {
+          "flip_flops": 535,
+          "local_cell_types": {
+            "$lut": 4007
+          },
+          "local_cells": 4542,
+          "local_lut6": 4007,
+          "longest_topological_path": 13,
+          "module": "e256h_atk_integral"
+        }
+      ],
+      "shared_sbox": {
+        "flip_flops": 0,
+        "local_cell_types": {
+          "$lut": 49
+        },
+        "local_cells": 49,
+        "local_lut6": 49,
+        "longest_topological_path": 3,
+        "module": "e256h_atk_sbox"
+      },
+      "synthesis_script": "read_verilog Hardware/RTL/Research/E256H/e256h_attack_core.v; hierarchy -check -top <module>; proc; memory; opt; techmap; opt; dffunmap; zinit -all; abc -lut 6; opt_clean; check -assert; stat; ltp -noff"
+    },
+    "coverage": {
+      "defect_modes": 3,
+      "integral_plaintexts_per_run": 256,
+      "integral_runs": 24,
+      "modules_synthesized": 4,
+      "rounds_per_mode": 8,
+      "rtl_model_comparisons": 48,
+      "truncated_runs": 24
+    },
+    "defects": {
+      "all_detected": true,
+      "frozen_codes": [
+        0,
+        1,
+        2
+      ],
+      "frozen_ids": [
+        "candidate",
+        "identity_rotor",
+        "no_diffusion"
+      ],
+      "records": {
+        "identity_rotor": {
+          "arm": "integral",
+          "detected": true,
+          "detector": "integral balance survives at every tested round count",
+          "observed_balanced_bytes_by_round": [
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            32
+          ]
+        },
+        "no_diffusion": {
+          "arm": "truncated_differential",
+          "detected": true,
+          "detector": "exactly one active output byte at every tested round count",
+          "observed_active_bytes_by_round": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        }
+      },
+      "shared_netlist": true
+    },
+    "equivalence": {
+      "executed_comparisons": 48,
+      "expected_comparisons": 48,
+      "integral_rows": {
+        "0:1": {
+          "accumulator_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+          "balanced_bytes": 32,
+          "cycles": 770
+        },
+        "0:2": {
+          "accumulator_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+          "balanced_bytes": 32,
+          "cycles": 1027
+        },
+        "0:3": {
+          "accumulator_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+          "balanced_bytes": 32,
+          "cycles": 1283
+        },
+        "0:4": {
+          "accumulator_hex": "3886be5a5a44befa82275bc75f18b9b10faefa62bb0ef7f9294a6f96da72439a",
+          "balanced_bytes": 0,
+          "cycles": 1539
+        },
+        "0:5": {
+          "accumulator_hex": "c104491d6b0dc7f5598bdcbc4e1002e4c78e2d48ee7210fd554eb03c32db1140",
+          "balanced_bytes": 0,
+          "cycles": 1795
+        },
+        "0:6": {
+          "accumulator_hex": "16689f193366cb3ef8703057f5961c4dac36ca4c1963612c6259ecad7f9a77ed",
+          "balanced_bytes": 0,
+          "cycles": 2051
+        },
+        "0:7": {
+          "accumulator_hex": "83c56fdb02bb95654d13cc7b55ac828898dc62d0ac885a874eda79c429fa2933",
+          "balanced_bytes": 0,
+          "cycles": 2307
+        },
+        "0:8": {
+          "accumulator_hex": "1b2965437a3a5fe068d717d23f011c259192902abe427fa3aa6731d0b11693d6",
+          "balanced_bytes": 0,
+          "cycles": 2563
+        },
+        "1:1": {
+          "accumulator_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+          "balanced_bytes": 32,
+          "cycles": 771
+        },
+        "1:2": {
+          "accumulator_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+          "balanced_bytes": 32,
+          "cycles": 1027
+        },
+        "1:3": {
+          "accumulator_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+          "balanced_bytes": 32,
+          "cycles": 1283
+        },
+        "1:4": {
+          "accumulator_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+          "balanced_bytes": 32,
+          "cycles": 1539
+        },
+        "1:5": {
+          "accumulator_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+          "balanced_bytes": 32,
+          "cycles": 1795
+        },
+        "1:6": {
+          "accumulator_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+          "balanced_bytes": 32,
+          "cycles": 2051
+        },
+        "1:7": {
+          "accumulator_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+          "balanced_bytes": 32,
+          "cycles": 2307
+        },
+        "1:8": {
+          "accumulator_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+          "balanced_bytes": 32,
+          "cycles": 2563
+        },
+        "2:1": {
+          "accumulator_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+          "balanced_bytes": 32,
+          "cycles": 771
+        },
+        "2:2": {
+          "accumulator_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+          "balanced_bytes": 32,
+          "cycles": 1027
+        },
+        "2:3": {
+          "accumulator_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+          "balanced_bytes": 32,
+          "cycles": 1283
+        },
+        "2:4": {
+          "accumulator_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+          "balanced_bytes": 32,
+          "cycles": 1539
+        },
+        "2:5": {
+          "accumulator_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+          "balanced_bytes": 32,
+          "cycles": 1795
+        },
+        "2:6": {
+          "accumulator_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+          "balanced_bytes": 32,
+          "cycles": 2051
+        },
+        "2:7": {
+          "accumulator_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+          "balanced_bytes": 32,
+          "cycles": 2307
+        },
+        "2:8": {
+          "accumulator_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+          "balanced_bytes": 32,
+          "cycles": 2563
+        }
+      },
+      "mismatches": [],
+      "rtl_matches_model": true,
+      "truncated_rows": {
+        "0:1": {
+          "active_bytes": 4,
+          "base_hex": "5f60368d55117ed7c824007e55fc65d5d919709dc381281cafa96b52ba2bedce",
+          "diff_hex": "5f60368d55117ed7c824007e55fc65d5d919709dc381281cafa96b52f411d7ba"
+        },
+        "0:2": {
+          "active_bytes": 16,
+          "base_hex": "5b45cb188316e2fa0fa0700c25343713ce3451f36609664ccc54761239ca2a6d",
+          "diff_hex": "2739339c8316e2fadc1d1edfdfb34a6ece3451f36609664ccc547612925aba56"
+        },
+        "0:3": {
+          "active_bytes": 32,
+          "base_hex": "fe8737ddc17107b5cb71983258c6ebab57848aac570195bb0333478450be3001",
+          "diff_hex": "642d50207ccc66695c5943709b4e849c39467c77616dcf8d183659525c1c0eaf"
+        },
+        "0:4": {
+          "active_bytes": 32,
+          "base_hex": "03ca38ded40d92564a0b212fef2af2af87e1685658e3250122e0f571ef7c85af",
+          "diff_hex": "e5cb5614c592621fcfc92a9cd7d69085ea6c10c03abfca82be3d6e5e3cc97af0"
+        },
+        "0:5": {
+          "active_bytes": 32,
+          "base_hex": "c510e4055cdb4445d7b8f1c2c7981bada98a6d99159fdfd0328a4a77f7346328",
+          "diff_hex": "704f3d483c8fceeb50cecb56d8737a006cc88e25b0a327fe6013e65460fc32c9"
+        },
+        "0:6": {
+          "active_bytes": 32,
+          "base_hex": "b3f77b2bc014f04e1f4e8d543c21c8d5c5c0134f7c6d1d16c4cdf2d911823f9a",
+          "diff_hex": "be9a2bfc8de8c4e4afed267382b283b0833c11f8dd9a31a2b04f3bbb37c22916"
+        },
+        "0:7": {
+          "active_bytes": 32,
+          "base_hex": "89ec7940e6073597f8d6c950d19fef286a7b32291a6843f54cc453a0162a9f39",
+          "diff_hex": "e3ebee1da09c70b8d0955b081faeec0c55366dc07b956bb3a9c7d602e439f1ea"
+        },
+        "0:8": {
+          "active_bytes": 32,
+          "base_hex": "236ae148e5b6bdff7cdb73689d5ae14f6fefe0e1b53573a66f1e09bd787328ed",
+          "diff_hex": "3ba27c67401f3480176e5bbab70733839976698355e65a08e592562ec335e748"
+        },
+        "1:1": {
+          "active_bytes": 4,
+          "base_hex": "90d50b16df5906c659cfc32ef21d9a685afe397e9738da93a46938a3e234c617",
+          "diff_hex": "90d50b16df5906c659cfc32ef21d9a685afe397e9738da93a46938a3e135c715"
+        },
+        "1:2": {
+          "active_bytes": 16,
+          "base_hex": "42d5654dad97439cdeab09c76efb0c2f3fb17b22a0da4d1ff1644712e3fdfe03",
+          "diff_hex": "43d4674ead97439cdfa90ac668fe0f2c3fb17b22a0da4d1ff1644712e5fffc07"
+        },
+        "1:3": {
+          "active_bytes": 27,
+          "base_hex": "5cd4b18be3721c718313a35f841eceb70e84587d11df3e39d4b69f34ce66422a",
+          "diff_hex": "5bd5b68be17018778216a45f8f16ceb30f845f7913db383bd3bf9130ce684024"
+        },
+        "1:4": {
+          "active_bytes": 27,
+          "base_hex": "83b684196951522d74b9b27cb1087117ce8715f444bcdcb4887240b53b4f8302",
+          "diff_hex": "87bf8d1a6944432370a8af79bb097817ce8e10f944b5ddbe886351be31529a07"
+        },
+        "1:5": {
+          "active_bytes": 30,
+          "base_hex": "742d8af271da24f916201e06e45f9c91990ef41919cb1fbe41271bb161f39625",
+          "diff_hex": "6125a0d67bff0bef150e1e22e44eb7b59a2cd00913e62cb4542315a162eba01f"
+        },
+        "1:6": {
+          "active_bytes": 30,
+          "base_hex": "79b91e14d64a7eb90f876fbc49c3b672d3d75f8dbf2f54ca87c3d9eed8f60a4a",
+          "diff_hex": "08f42228d6603ae57e8328882bf28931c79963e0bf436e9693c79f89ba864a0e"
+        },
+        "1:7": {
+          "active_bytes": 31,
+          "base_hex": "e73b6af6c8f3761f170ee390677fbde4a02483b9b13a9ff716e0f2145c5dbe30",
+          "diff_hex": "a7a37636149b5ee757a2db506c47c584e0b19f796d52b70f564cc3d45c65c65e"
+        },
+        "1:8": {
+          "active_bytes": 28,
+          "base_hex": "970f5c9b60b20952b0a6783554b82b040e9203f8695d23b216cff115ae9a5913",
+          "diff_hex": "5ca794a0606afaed7bfee0ae54cb8814c53acbc36985d00ddd97698eaee9fa02"
+        },
+        "2:1": {
+          "active_bytes": 1,
+          "base_hex": "21c601371c2fc244672b852abefcda0e8416149e6c3fd36bf42be52fa927a7ea",
+          "diff_hex": "21c601371c2fc244672b852abefcda0e8416149e6c3fd36bf42be52fa927a7d0"
+        },
+        "2:2": {
+          "active_bytes": 1,
+          "base_hex": "8fc0d295d873204c1d531bf143ecdcff1c327aa4b10822a35da557c104a0e285",
+          "diff_hex": "8fc0d295d873204c1d531bf143ecdcff1c327aa4b10822a35da557c104a0e27d"
+        },
+        "2:3": {
+          "active_bytes": 1,
+          "base_hex": "814a3b6954b40ff756ed5ccb59c59b6c79831887f0f89cba983389c9f49fc3c3",
+          "diff_hex": "814a3b6954b40ff756ed5ccb59c59b6c79831887f0f89cba983389c9f49fc32f"
+        },
+        "2:4": {
+          "active_bytes": 1,
+          "base_hex": "14346496243e8cfdcda44d9fe8157f4d9f0b47f154c1ac76e2c903a63cb1a3f1",
+          "diff_hex": "14346496243e8cfdcda44d9fe8157f4d9f0b47f154c1ac76e2c903a63cb1a349"
+        },
+        "2:5": {
+          "active_bytes": 1,
+          "base_hex": "c5ad3233212633c79ce127b4b0099fb944f83483c12c44d6c9af81a9a8c0189b",
+          "diff_hex": "c5ad3233212633c79ce127b4b0099fb944f83483c12c44d6c9af81a9a8c01882"
+        },
+        "2:6": {
+          "active_bytes": 1,
+          "base_hex": "39c704a22a4a75185e2be41e0c97a7340e675b51f3aa1a04797000e5ed65aba2",
+          "diff_hex": "39c704a22a4a75185e2be41e0c97a7340e675b51f3aa1a04797000e5ed65ab21"
+        },
+        "2:7": {
+          "active_bytes": 1,
+          "base_hex": "b0ca4a070adf672ba801d557d9cc482da9f8c44c4c37b697d10cfe6cc87bd610",
+          "diff_hex": "b0ca4a070adf672ba801d557d9cc482da9f8c44c4c37b697d10cfe6cc87bd682"
+        },
+        "2:8": {
+          "active_bytes": 1,
+          "base_hex": "2738abc0f2e709a1c40d099d82c17fbee143baed4b2f8c11b48a16ef69659dca",
+          "diff_hex": "2738abc0f2e709a1c40d099d82c17fbee143baed4b2f8c11b48a16ef69659de0"
+        }
+      }
+    },
+    "inputs": {
+      "aes_sbox_sha256": "c2d8e5eed6cbebd8625fc18f81486a7733c04f9b0129ffbe974c68b90308b4f2",
+      "architecture_contract_sha256": "b64472f73be9d0fc6318ff445c5f550cb0129309313228f416599c27d3957bb1",
+      "architecture_record": "directives/e256-hardware-architecture.md",
+      "iverilog_version": "Icarus Verilog version 13.0 (stable) (v13_0)",
+      "predecessor_payload_digests": {
+        "logs/e256-hardware-candidate-gate.json": "98af83ec27093787552475fce588f84a902634afcc969bed26462032dddec3cc",
+        "logs/e256-hardware-cost-gate.json": "a10e001ad2c2b3de55fcc80197c059f166d5e55599c670e20b01de8f6b7d323d",
+        "logs/e256-wide-state-gate.json": "21758ce220b9da469a18ea617fa7b2fd41e906add69a258f830b12843e3e495b"
+      },
+      "preregistration": "directives/e256-hardware-attack-preregistration.json",
+      "preregistration_sha256": "15bb0b68d1f0ebb521497d4d06cc4250cf608b3a71e1f0719f3e0a7b2017fde3",
+      "python": "3.9.6",
+      "rtl": "Hardware/RTL/Research/E256H/e256h_attack_core.v",
+      "rtl_sha256": "f4b5d6210275d831e48a3b16ca0457fa0927164ab33853b466ae0ca326fbcd3b",
+      "runner": "Scripts/e256_hardware_attack_gate.py",
+      "runner_sha256": "6928516545363269fd3c36224ab0013779bb14068336493a068eeb4ce9d077c2",
+      "testbench": "Hardware/Testbenches/Research/E256H/e256h_attack_core_tb.v",
+      "testbench_sha256": "ae9d35af3edb76a696249dd4c32b8a3816c7a06643efbbf8f1397409a8b9ee2b",
+      "yosys_version": "Yosys 0.68+post (git sha1 c12172fbae8af5e20f6fb52e3d4e92d56ed587b6, Release, AppleClang clang++ 21.0.0.21000101)"
+    },
+    "interpretation": {
+      "harness_valid": true,
+      "harness_validity_checks": {
+        "all_planted_defects_recovered": true,
+        "defect_modes_exact": true,
+        "frozen_contract_validated": true,
+        "rtl_matches_model": true,
+        "validity_controls_pass": true
+      },
+      "integral_dies_at_round": 4,
+      "internal_invalid_status": "INVALID_ATTACK_HARNESS; never emitted or accepted as the canonical receipt",
+      "next": "Extend the lane to differential trail search, impossible differentials, meet-in-the-middle, and key recovery before any round count is argued. A round count requires the full attack matrix, not two arms.",
+      "production_round_count": null,
+      "reduced_round_integral_reach": 3,
+      "scope": "two bounded attack arms, one active lane, at most 8 rounds, one key-equivalent material set",
+      "search_not_cipher": "This gate grades the SEARCH, not the cipher. A calibrated search that finds no distinguisher is not a security result and must never be reported as one.",
+      "verdict": "HARDWARE_ATTACK_LANE_CALIBRATED_REDUCED_ROUND_DISTINGUISHER_FOUND"
+    },
+    "limitations": [
+      "A calibrated search that finds no distinguisher is NOT a security result; it grades the search.",
+      "The reduced-round distinguisher reported here is not a break of the full construction, and no full-round attack is claimed.",
+      "Two attack arms are not the attack matrix. Differential clustering, impossible differentials, algebraic and degree growth, meet-in-the-middle, rebound, slide, invariant subspace, related-key and related-tweak, multi-user, reset and reuse, and TMTO are all untested.",
+      "Only one active lane, one input difference, and one material set are exercised; no key-recovery attack is implemented.",
+      "LUT6 and cycle figures are yosys/ABC and simulation artifacts, not place-and-route, Fmax, energy, or silicon.",
+      "No round count is selected and no production keying, wiring, XOF, mode, or RTL is authorized.",
+      "No C/H/N row, E256 finding, suite, profile, fixture, or release gate closes here, and reviewed standard AEAD remains mandatory for real data."
+    ],
+    "pinned_parameters": {
+      "attack_arms": [
+        "integral",
+        "truncated_differential"
+      ],
+      "defect_modes": [
+        "candidate",
+        "identity_rotor",
+        "no_diffusion"
+      ],
+      "exploratory_probe_disclosure": {
+        "consequence": "Predictions are stated qualitatively and structurally. The exact round at which the candidate's integral property dies, the exact active-byte progression, all accumulator values, and every cost figure are reported as measured outputs and are deliberately NOT preregistered as numbers.",
+        "reason": "Freezing counts already observed in a probe would be post-hoc dressing rather than prediction.",
+        "statement": "An exploratory Python probe was run before this preregistration was frozen. It confirmed that the integral arm separates the candidate from both planted defects, and that the truncated-differential arm separates the no-diffusion defect."
+      },
+      "framing": {
+        "planted_positive_requirement": "No negative result is reportable unless every planted defect is recovered by the same netlist on the same shared datapath.",
+        "primary_claim_direction": "This gate grades the SEARCH, not the cipher. A calibrated search that finds no distinguisher is not a security result and must never be reported as one.",
+        "reduced_round_findings_are_expected": "A reduced-round distinguisher is a normal and useful result for an AES-like SPN. Finding one bounds the round count from below; it is not a break of the construction."
+      },
+      "graded_constraints": [
+        "H0",
+        "H1",
+        "H8"
+      ],
+      "material_bytes": 1184,
+      "material_note": "The H3 scheme needs two offset bytes per lane per round, so its material block is 1184 bytes rather than the 800 bytes recorded for the E256-062 selection scheme. The XOF squeeze-block count is recomputed here rather than inherited.",
+      "material_sha256": "b6738e7f117bb7b916ee002db482f105a3eb5a046ee84dff45f178510cdeb691",
+      "material_shake256_squeeze_blocks": 9,
+      "max_rounds_tested": 8,
+      "mix_columns_matrix_hex_rows": [
+        [
+          "02",
+          "03",
+          "01",
+          "01"
+        ],
+        [
+          "01",
+          "02",
+          "03",
+          "01"
+        ],
+        [
+          "01",
+          "01",
+          "02",
+          "03"
+        ],
+        [
+          "03",
+          "01",
+          "01",
+          "02"
+        ]
+      ],
+      "prediction_ids": [
+        "A1",
+        "A2",
+        "A3",
+        "A4",
+        "A5",
+        "A6"
+      ],
+      "rotor": "H3 offset rotor R(x) = SBOX(x XOR p_in) XOR p_out, one per lane per round",
+      "row_offsets": [
+        0,
+        1,
+        3,
+        4
+      ],
+      "row_offsets_provenance": "member of the certified wiring set from logs/e256-hardware-candidate-gate.json",
+      "target_identity": "E256-H/attack-target/v1"
+    },
+    "results": {
+      "candidate_active_bytes_by_round": [
+        4,
+        16,
+        32,
+        32,
+        32,
+        32,
+        32,
+        32
+      ],
+      "candidate_integral_balanced_by_round": [
+        32,
+        32,
+        32,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "first_full_diffusion_round": 3,
+      "max_surviving_integral_round": 3,
+      "outcomes": {
+        "A1": {
+          "observed": [
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            32,
+            32
+          ],
+          "pass": true,
+          "role": "validity_control",
+          "statement": "identity_rotor defect recovered by the integral arm at every round"
+        },
+        "A2": {
+          "observed": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "pass": true,
+          "role": "validity_control",
+          "statement": "no_diffusion defect recovered by the truncated arm at every round"
+        },
+        "A3": {
+          "observed": {
+            "comparisons": 48,
+            "mismatches": 0
+          },
+          "pass": true,
+          "role": "validity_control",
+          "statement": "every RTL value matches the independent software model"
+        },
+        "A4": {
+          "observed": {
+            "balanced_bytes_by_round": [
+              32,
+              32,
+              32,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "dies_at_round": 4,
+            "max_surviving_round": 3
+          },
+          "pass": true,
+          "role": "graded_finding",
+          "statement": "candidate integral survives at least 3 rounds and then dies"
+        },
+        "A5": {
+          "observed": {
+            "active_bytes_by_round": [
+              4,
+              16,
+              32,
+              32,
+              32,
+              32,
+              32,
+              32
+            ],
+            "first_full_round": 3
+          },
+          "pass": true,
+          "role": "graded_finding",
+          "statement": "candidate truncated differential reaches all 32 bytes by round 3"
+        },
+        "A6": {
+          "observed": "see cost section",
+          "pass": true,
+          "role": "graded_finding",
+          "statement": "attack cost reported in LUT6, cells, depth, and measured cycles"
+        }
+      },
+      "validity_control_ids": [
+        "A1",
+        "A2",
+        "A3"
+      ],
+      "validity_controls_pass": true
+    },
+    "schema": "E256-HARDWARE-ATTACK-GATE-1",
+    "status": "OPEN_PROGRESS"
+  },
+  "deterministic_payload_sha256": "1114e260455232a2979f8a4f613fc6d6daf4be4f97c3ca6903c3f639357d7a2d",
+  "environment_advisory_excluded_from_digest": {
+    "elapsed_seconds_single_run_not_a_claim": 38.305,
+    "git_dirty": true,
+    "git_head": "a8e192a446ce2efca73998fdb54c7e1c44bd7579",
+    "platform": "macOS-26.6.2-arm64-arm-64bit"
+  },
+  "no_wall_clock": "No wall-clock timestamp is asserted; only deterministic inputs and outputs are graded."
+}

@@ -1,0 +1,325 @@
+{
+  "schema": "E256-HARDWARE-OFFSET-COLLAPSE-PREREGISTRATION-1",
+  "status": "FROZEN_FOR_EXECUTION",
+  "date_basis": "2026-08-20 session date; no wall-clock timestamp asserted",
+  "purpose": "Confirm, with independent software, sequential RTL, and an all-input one-round SAT miter, that H3 XOR input/output offsets are an exact many-to-one relabeling of ordinary effective round masks for a fixed H4 wiring sequence. Bank the material normal form before any collapsed-schedule H2 RTL is designed.",
+  "derivation_disclosure": {
+    "statement": "The linear-transport identity and both normal forms were derived during inspection before this preregistration was frozen. This is a confirmatory gate, not a prospective discovery.",
+    "consequence": "The formulas and arithmetic byte counts are frozen as known inputs. Exact corpus aggregates, formal witnesses for planted mutations, output digests, and runtime measurements remain outputs.",
+    "prior_execution": "No collapse runner, miter, sequencing testbench, or collapse receipt existed or was run before this freeze."
+  },
+  "authorization": {
+    "architecture_record": "directives/e256-hardware-architecture.md",
+    "design_record_section": "9. Pre-execution decision record — H3 XOR-offset collapse",
+    "contract_start_marker": "<!-- E256-H-CONTRACT-START -->",
+    "contract_end_marker": "<!-- E256-H-CONTRACT-END -->",
+    "contract_hash_preimage": "all bytes strictly between the unique start and end marker strings, including their surrounding newlines but excluding both marker strings",
+    "contract_sha256": "b64472f73be9d0fc6318ff445c5f550cb0129309313228f416599c27d3957bb1",
+    "graded_constraints": ["H1", "H2", "H3", "H4", "H5"],
+    "allowed": "confirmatory material-normal-form research against non-production E256-H artifacts",
+    "blocked": [
+      "production RTL or bitstream",
+      "cipher-suite, profile, fixture, or protocol promotion",
+      "C/H/N claim movement",
+      "security-bit or production-readiness claim",
+      "round-count selection",
+      "production XOF or keyed-wiring selection",
+      "claim that algebraic collapse is a cryptanalytic break"
+    ]
+  },
+  "predecessors": [
+    {
+      "id": "E256-062",
+      "receipt": "logs/e256-wide-state-gate.json",
+      "receipt_schema": "E256-WIDE-STATE-GATE-1",
+      "deterministic_payload_sha256": "21758ce220b9da469a18ea617fa7b2fd41e906add69a258f830b12843e3e495b"
+    },
+    {
+      "id": "E256-063-step-1",
+      "receipt": "logs/e256-hardware-cost-gate.json",
+      "receipt_schema": "E256-HARDWARE-COST-GATE-1",
+      "deterministic_payload_sha256": "a10e001ad2c2b3de55fcc80197c059f166d5e55599c670e20b01de8f6b7d323d"
+    },
+    {
+      "id": "E256-063-steps-2-3",
+      "receipt": "logs/e256-hardware-candidate-gate.json",
+      "receipt_schema": "E256-HARDWARE-CANDIDATE-GATE-1",
+      "deterministic_payload_sha256": "98af83ec27093787552475fce588f84a902634afcc969bed26462032dddec3cc",
+      "certified_h4_set_size": 384,
+      "certified_h4_set_sha256": "199f1f7bddccf19ce5aa0bde0987441735d628354140d53ebdfec538d7b3f5ed"
+    },
+    {
+      "id": "E256-063-step-4",
+      "receipt": "logs/e256-hardware-attack-gate.json",
+      "receipt_schema": "E256-HARDWARE-ATTACK-GATE-1",
+      "deterministic_payload_sha256": "1114e260455232a2979f8a4f613fc6d6daf4be4f97c3ca6903c3f639357d7a2d",
+      "frozen_material_sha256": "b6738e7f117bb7b916ee002db482f105a3eb5a046ee84dff45f178510cdeb691"
+    }
+  ],
+  "frozen_predecessor_sources": {
+    "rtl": {
+      "path": "Hardware/RTL/Research/E256H/e256h_attack_core.v",
+      "sha256": "f4b5d6210275d831e48a3b16ca0457fa0927164ab33853b466ae0ca326fbcd3b"
+    },
+    "testbench": {
+      "path": "Hardware/Testbenches/Research/E256H/e256h_attack_core_tb.v",
+      "sha256": "ae9d35af3edb76a696249dd4c32b8a3816c7a06643efbbf8f1397409a8b9ee2b"
+    },
+    "runner": {
+      "path": "Scripts/e256_hardware_attack_gate.py",
+      "sha256": "6928516545363269fd3c36224ab0013779bb14068336493a068eeb4ce9d077c2"
+    }
+  },
+  "questions": [
+    {
+      "id": "HQ13",
+      "text": "Are all H3 p_out vectors exactly transportable through the complete forward H4 linear layer into the following mask?"
+    },
+    {
+      "id": "HQ14",
+      "text": "For each fixed round count, are all H3 p_in vectors exactly absorbable into the effective masks at nonlinear boundaries, including the terminal-key exception?"
+    },
+    {
+      "id": "HQ15",
+      "text": "Does the unchanged frozen RTL compute byte-identical outputs when driven by zero offsets and the independently collapsed effective masks?"
+    },
+    {
+      "id": "HQ16",
+      "text": "Can the gate detect a genuinely non-translation-equivalent rotor-position family rather than declaring every keyed S-box absorbable?"
+    }
+  ],
+  "toolchain_contract": {
+    "python": "3.9.6",
+    "yosys_version_prefix": "Yosys 0.68+post",
+    "yosys_git_sha1": "c12172fbae8af5e20f6fb52e3d4e92d56ed587b6",
+    "iverilog_version_prefix": "Icarus Verilog version 13.0",
+    "formal_engine": "yosys sat -verify on the flattened proof cone; flattening is permitted for equivalence proof only and forbidden for cost measurement",
+    "advisory_only": ["platform", "elapsed_seconds", "git_head", "git_dirty"]
+  },
+  "construction": {
+    "state_bytes": 32,
+    "geometry": "4 rows by 8 columns, byte index 4*column+row",
+    "rounds_covered": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    "original_recurrence": "X_0 = P XOR M_0; X_{r+1} = L_{w_r}(SBOX^32(X_r XOR A_r) XOR B_r) XOR M_{r+1}",
+    "linear_layer": "L_w = AES MixColumns after forward H4 RowShift w, over GF(2) with polynomial 0x11b",
+    "stage_a": {
+      "name": "prefix_compatible_output_offset_collapse",
+      "formula": "Mprime_0=M_0; Mprime_{r+1}=M_{r+1} XOR L_{w_r}(B_r); retain A_r; set B_r=0",
+      "raw_bytes_at_12_rounds": 1184,
+      "effective_bytes_at_12_rounds": 800,
+      "semantics_warning": "These 800 bytes are 384 input offsets plus 416 transformed masks, not the E256-W 384 rotor IDs plus 416 masks."
+    },
+    "stage_b": {
+      "name": "fixed_round_full_offset_collapse",
+      "formula": "K_0=M_0 XOR A_0; K_r=L_{w_{r-1}}(B_{r-1}) XOR M_r XOR A_r for 1<=r<R; K_R=L_{w_{R-1}}(B_{R-1}) XOR M_R",
+      "canonical_recurrence": "Z_0=P XOR K_0; Z_{r+1}=L_{w_r}(SBOX^32(Z_r)) XOR K_{r+1}",
+      "effective_bytes_at_12_rounds": 416,
+      "effective_bytes_at_8_rounds": 288,
+      "terminal_rule": "K_R excludes A_R and must be derived separately for each tested prefix R"
+    },
+    "raw_material": {
+      "bytes": 1184,
+      "layout": "12*32 interleaved (A_r[j],B_r[j]) pairs followed by 13*32 masks",
+      "frozen_domain": "E256-H/attack/material/v1",
+      "frozen_sha256": "b6738e7f117bb7b916ee002db482f105a3eb5a046ee84dff45f178510cdeb691",
+      "shake256_rate_bytes": 136,
+      "frozen_squeeze_blocks": 9,
+      "compatibility_rule": "The confirmatory gate collapses already-derived bytes. A direct 800- or 416-byte squeeze is a new schedule and is not authorized by this receipt."
+    },
+    "aes_sbox_sha256": "c2d8e5eed6cbebd8625fc18f81486a7733c04f9b0129ffbe974c68b90308b4f2",
+    "mix_columns_matrix_hex_rows": [
+      ["02", "03", "01", "01"],
+      ["01", "02", "03", "01"],
+      ["01", "01", "02", "03"],
+      ["03", "01", "01", "02"]
+    ]
+  },
+  "software_coverage": {
+    "certified_h4_source": "the exact ordered 384-member list in logs/e256-hardware-candidate-gate.json",
+    "wiring_use": "one selected certified tuple is repeated for all rounds in a comparison, matching the scope actually certified by the predecessor",
+    "material_sets": [
+      {
+        "id": "frozen_attack_v1",
+        "derivation": "the exact predecessor material under E256-H/attack/material/v1"
+      },
+      {
+        "id": "collapse_aux_0",
+        "derivation": "SHAKE256(ASCII 'E256-H/collapse/material/v1/0').digest(1184)"
+      },
+      {
+        "id": "collapse_aux_1",
+        "derivation": "SHAKE256(ASCII 'E256-H/collapse/material/v1/1').digest(1184)"
+      }
+    ],
+    "block_corpus": {
+      "count": 8,
+      "definition": "all-zero; all-ff; bytes 00..1f; bytes ff..e0; then four consecutive 32-byte blocks from SHAKE256(ASCII 'E256-H/collapse/blocks/v1')"
+    },
+    "stage_a_expected_comparisons": 110592,
+    "stage_b_expected_comparisons": 110592,
+    "total_expected_comparisons": 221184,
+    "aggregate_rule": "Hash each tuple/material/round/block identifier and original/stage-A/stage-B output in canonical iteration order; record aggregate SHA-256 rather than every ciphertext."
+  },
+  "rtl_coverage": {
+    "fixed_h4_tuple": [0, 1, 3, 4],
+    "rounds": [1, 2, 3, 4, 5, 6, 7, 8],
+    "blocks": "the same 8-block deterministic corpus",
+    "expected_original_vs_canonical_comparisons": 64,
+    "predecessor_rule": "Instantiate the unchanged e256h_atk_single on both sides; original side receives frozen offsets/masks, canonical side receives zero offsets and a separately derived fixed-R effective-mask vector.",
+    "stimulus_rule": "Drive start and changing inputs on the negative edge, preserving the predecessor race-avoidance convention."
+  },
+  "formal_contract": {
+    "scope": "compositional proof of one complete H3/H4 round: the nonlinear-boundary input is identical by construction as U=SBOX^32(state XOR A), and a Yosys SAT miter proves the remaining linear identity for arbitrary 256-bit U, B, and M under fixed certified tuple (0,1,3,4)",
+    "proof_decomposition": {
+      "nonlinear_boundary": "Both original and canonical forms evaluate the same deterministic AES S-box bank on the same state XOR A input; the 256-entry AES S-box hash is pinned and the unchanged dual-core RTL comparison checks integration.",
+      "sat_lemma": "Prove L(U XOR B) XOR M = L(U) XOR L(B) XOR M for arbitrary U, B, M. This is stronger than testing selected S-box outputs because U is unconstrained.",
+      "supersedes_preregistration_sha256": "3823e2632a6b2a38264a7c6d4630cafcda457a711c0f0fdf275c00d1698a23a2",
+      "reason": "The monolithic miter duplicated 64 table S-box instances and timed out before SAT despite the nonlinear layer being irrelevant to the algebraic identity.",
+      "detected_by": "first fail-closed gate execution after software and 64-row RTL completion; no SAT result or receipt was emitted",
+      "scope_of_change": "Proof decomposition only. Formulas, software/RTL coverage, controls, predictions, verdicts, material accounting, and interpretation are unchanged."
+    },
+    "correct_mode": "prove mismatch=0 between original_linear=L(U XOR B) XOR M and canonical_linear=L(U) XOR L(B) XOR M",
+    "correct_expected": "UNSAT for mismatch",
+    "mutation_modes": [
+      {
+        "id": "omit_output_transport",
+        "mutation": "canonical mask M, omitting L(B)",
+        "expected": "SAT for mismatch"
+      },
+      {
+        "id": "raw_output_offset",
+        "mutation": "canonical mask M XOR B rather than M XOR L(B)",
+        "expected": "SAT for mismatch"
+      },
+      {
+        "id": "wrong_transport_source",
+        "mutation": "canonical mask M XOR L(A) rather than M XOR L(B), with arbitrary control input A",
+        "expected": "SAT for mismatch"
+      }
+    ],
+    "witness_rule": "Every planted mutation must yield a normalized deterministic counterexample witness; a missing witness invalidates the harness."
+  },
+  "controls": [
+    {
+      "id": "omit_output_transport",
+      "shared_path": ["formal miter", "complete H4 linear layer"],
+      "required_result": "detected"
+    },
+    {
+      "id": "raw_output_offset",
+      "shared_path": ["formal miter", "complete H4 linear layer"],
+      "required_result": "detected"
+    },
+    {
+      "id": "wrong_transport_source",
+      "shared_path": ["formal miter", "complete H4 linear layer"],
+      "required_result": "detected"
+    },
+    {
+      "id": "terminal_input_offset_included",
+      "mutation": "incorrectly XOR A_R into terminal K_R",
+      "shared_path": ["fixed-R software transform", "sequential corpus"],
+      "required_result": "detected for every R=1..11; R=12 is inapplicable because the frozen 12-round material defines A_0 through A_11 and no A_12",
+      "freeze_correction": {
+        "supersedes_preregistration_sha256": "ef369bf4356ba938c0da847f8a5b3244104fc47427bf1ad03aa78df36fcbf74e",
+        "reason": "The original control coverage incorrectly required A_12 even though the frozen 1,184-byte layout contains only A_0 through A_11.",
+        "detected_by": "pre-implementation contract inspection",
+        "prior_execution": "No runner, RTL miter, testbench, or receipt existed or ran under the superseded preregistration.",
+        "scope": "Arithmetic/index correction to this planted control only. Stage-A and Stage-B equivalence coverage remains R=1..12; no formula, material, prediction, verdict, threshold, or interpretation changed."
+      }
+    },
+    {
+      "id": "wrong_mask_index",
+      "mutation": "use M_r where M_{r+1} is required in Stage A",
+      "shared_path": ["prefix-compatible software transform", "sequential corpus"],
+      "required_result": "detected"
+    },
+    {
+      "id": "non_absorbable_bit_permutation",
+      "control_family": "C(x)=ror8(SBOX(rol8(x,1)),1)",
+      "detector": "For each a in 0..255 derive b=C(0) XOR SBOX(a), then exhaust x in 0..255; reject absorbability unless C(x)=SBOX(x XOR a) XOR b for every x.",
+      "required_result": "zero matching XOR-translation pairs"
+    }
+  ],
+  "predictions": [
+    {
+      "id": "OC1",
+      "role": "validity_control",
+      "statement": "all six planted controls are detected through their declared shared paths"
+    },
+    {
+      "id": "OC2",
+      "role": "graded_finding",
+      "statement": "Stage A is byte-exact for all 110592 frozen software cases"
+    },
+    {
+      "id": "OC3",
+      "role": "graded_finding",
+      "statement": "Stage B is byte-exact for all 110592 frozen software cases with a separately derived terminal key for each R"
+    },
+    {
+      "id": "OC4",
+      "role": "graded_finding",
+      "statement": "all 64 sequential RTL original-versus-canonical comparisons match"
+    },
+    {
+      "id": "OC5",
+      "role": "graded_finding",
+      "statement": "the arbitrary-input one-round correct miter is UNSAT for mismatch and every formal mutation is SAT"
+    },
+    {
+      "id": "OC6",
+      "role": "graded_finding",
+      "statement": "the fixed-12-round effective material is exactly 416 bytes, exposing a 768-byte and 6144-bit representation kernel"
+    }
+  ],
+  "hard_rejection_rules": [
+    "Refuse the receipt if this preregistration hash, the architecture contract hash, any predecessor payload digest, any frozen predecessor source hash, the certified H4 set hash, frozen material hash, AES S-box hash, or pinned tool version drifts.",
+    "Refuse the receipt unless the executed wiring, material, round, block, control, prediction, RTL comparison, and formal-mode sets exactly equal the frozen sets.",
+    "Refuse the receipt on any software or RTL mismatch.",
+    "Refuse the receipt unless the correct formal miter proves mismatch UNSAT and every mutated miter yields SAT with a witness.",
+    "Refuse the receipt if any planted control or validity-control prediction fails.",
+    "Do not modify a frozen predecessor source or receipt to implement this gate.",
+    "Do not report a shorter direct XOF derivation as compatibility-equivalent, select a round count, or infer security."
+  ],
+  "interpretation": {
+    "internal_invalid_status": "INVALID_OFFSET_COLLAPSE_HARNESS; never emitted or accepted as the canonical receipt",
+    "valid_emitted_verdicts": [
+      "H3_XOR_OFFSETS_EXACTLY_COLLAPSE_TO_EFFECTIVE_MASKS",
+      "H3_XOR_OFFSET_COLLAPSE_NOT_CONFIRMED"
+    ],
+    "passing_interpretation": "For any fixed H4 wiring sequence in scope, H3 p_in/p_out bytes add no permutation-family freedom beyond effective round masks. Retain H4 moving wiring as the Enigma mechanism and demote separately stored H3 offsets from the lean baseline.",
+    "scope": "material normal-form equivalence only; all 384 certified repeated-use H4 tuples in software, fixed (0,1,3,4) in unchanged sequential RTL and one-round SAT proof",
+    "next": "Use the 416-byte fixed-12-round effective-mask normal form, plus separately accounted H4 selector material, as the baseline for a preregistered H2 integrated-core cost gate. A direct short XOF schedule remains a new construction until separately frozen."
+  },
+  "non_claims": [
+    "Algebraic material collapse is not a cryptanalytic break and does not establish or reduce a security-bit value.",
+    "The receipt does not certify arbitrary per-round switching among H4 tuples; the predecessor certified repeated use of each tuple.",
+    "The receipt does not select a production round count, XOF, key schedule, wiring selector, mode, profile, fixture, protocol, or RTL.",
+    "The 416-byte normal form is live effective material after collapsing already-derived predecessor bytes. Directly squeezing 416 bytes under a new domain would be a new schedule requiring new evidence.",
+    "No C/H/N row, E256 finding, suite, profile, fixture, or release gate closes; reviewed standard AEAD remains mandatory for real data."
+  ],
+  "receipt_contract": {
+    "schema": "E256-HARDWARE-OFFSET-COLLAPSE-GATE-1",
+    "status": "OPEN_PROGRESS",
+    "output": "logs/e256-hardware-offset-collapse-gate.json",
+    "runner": "Scripts/e256_hardware_offset_collapse_gate.py",
+    "rtl_miter": "Hardware/RTL/Research/E256H/e256h_offset_collapse_miter.v",
+    "testbench": "Hardware/Testbenches/Research/E256H/e256h_offset_collapse_tb.v",
+    "deterministic_payload_top_level_keys": [
+      "schema",
+      "status",
+      "inputs",
+      "pinned_parameters",
+      "coverage",
+      "controls",
+      "equivalence",
+      "material_normal_form",
+      "interpretation",
+      "limitations"
+    ],
+    "digest": "SHA-256 of canonical_json(deterministic_payload)",
+    "checker": "recompute frozen hashes, certified set, material/corpus, software equivalence, sequential RTL comparison, formal proof and mutation witnesses, complete deterministic payload, and digest; compare payload and digest byte-for-byte",
+    "write": "sorted indented UTF-8 JSON with final newline and atomic replacement"
+  }
+}

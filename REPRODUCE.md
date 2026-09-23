@@ -783,6 +783,170 @@ swift test -c release --filter testTensorLUTFormalCorollaryCertificate
 
 Two lemmas must hold (emitter–discrete agreement; involution under freeze). Still not melt completeness.
 
+## E256 vNext topology gate (OPEN)
+
+```bash
+make e256-vnext-topology-check
+```
+
+Expect schema `E256-VNEXT-TOPOLOGY-GATE-1`, status `OPEN_PROGRESS`, results
+SHA-256 `cc1ca362872c0a822270a3f8ad7b18525301aac54f7b3b59bf819aa6c10635fe`,
+and `CHECK PASS`. This reproduces the fixture-v5-anchored mirrored-topology
+finding and the bounded two-query distinguisher measurements. It is not a
+decrypt, a nonce-respecting attack, pseudorandomness evidence, a production
+candidate, or a C/H/N movement; standard AEAD remains mandatory.
+
+## E256 vNext rotor/schedule bake-off (OPEN)
+
+```bash
+make e256-vnext-bakeoff-check
+```
+
+Expect schema `E256-VNEXT-ROTOR-SCHEDULE-BAKEOFF-1`, status `OPEN_PROGRESS`,
+deterministic payload SHA-256
+`fd54809cbd12de9d6f14151bcd401232aae765b72cb8368128ea54bdfa7b7197`,
+verdict `NO_BYTE_LOCAL_PRODUCTION_CANDIDATE_RESEARCH_BASELINE_RETAINED`, exact
+payload/digest agreement, and `CHECK PASS`. The retained 1+1 cell is an attack
+baseline, not a selected depth, suite, or cipher; AEAD-only remains the
+production baseline.
+
+## E256 wide-state structural gate (OPEN)
+
+```bash
+make e256-wide-check
+```
+
+Expect schema `E256-WIDE-STATE-GATE-1`, status `OPEN_PROGRESS`, deterministic
+payload SHA-256
+`21758ce220b9da469a18ea617fa7b2fd41e906add69a258f830b12843e3e495b`, verdict
+`STRUCTURAL_WIDE_STATE_CANDIDATE_RETAINED_FOR_ATTACK_ONLY`, exact payload/digest
+agreement, and `CHECK PASS`. The fixed-AES comparator reaches the same bounded
+structural bars, so this establishes no rotor-namespace advantage, no production
+round count, and no security result.
+
+## E256-H rotor-lane cost gate (OPEN)
+
+```bash
+make e256-hw-cost-check
+```
+
+Expect schema `E256-HARDWARE-COST-GATE-1`, status `OPEN_PROGRESS`, deterministic
+payload SHA-256
+`a10e001ad2c2b3de55fcc80197c059f166d5e55599c670e20b01de8f6b7d323d`, verdict
+`H3_OFFSET_KEYING_SUPPORTED`, 1,792/1,792 functional checks, exact payload/digest
+agreement, and `CHECK PASS`. These are hierarchy-preserved generic LUT6
+measurements for one combinational byte lane—not place-and-route, full-round,
+power, side-channel, production, or security evidence.
+
+## E256-H candidate and schedule gate (OPEN)
+
+```bash
+make e256-hw-candidate-check
+```
+
+Expect schema `E256-HARDWARE-CANDIDATE-GATE-1`, status `OPEN_PROGRESS`,
+deterministic payload SHA-256
+`98af83ec27093787552475fce588f84a902634afcc969bed26462032dddec3cc`, verdict
+`H3_H4_CANDIDATE_STRUCTURALLY_RECERTIFIED`, all five controls detected, exact
+payload/digest agreement, and `CHECK PASS`. This is bounded structural
+certification plus primitive-invocation accounting; it selects no XOF, wiring
+set, architecture, round count, or security value.
+
+## E256-H hardware attack lane (OPEN)
+
+```bash
+make e256-hw-attack-check
+```
+
+Expect schema `E256-HARDWARE-ATTACK-GATE-1`, status `OPEN_PROGRESS`,
+deterministic payload SHA-256
+`1114e260455232a2979f8a4f613fc6d6daf4be4f97c3ca6903c3f639357d7a2d`, verdict
+`HARDWARE_ATTACK_LANE_CALIBRATED_REDUCED_ROUND_DISTINGUISHER_FOUND`, both
+planted defects recovered, exact payload/digest agreement, and `CHECK PASS`.
+This grades two bounded search arms and finds the expected 3-round integral
+distinguisher; it is not a break, key recovery, an attack matrix, or evidence
+for a production round count.
+
+## E256-H XOR-offset collapse gate (OPEN)
+
+```bash
+make e256-hw-offset-collapse-check
+```
+
+Expect schema `E256-HARDWARE-OFFSET-COLLAPSE-GATE-1`, status `OPEN_PROGRESS`,
+deterministic payload SHA-256
+`1478a0ba317bce5f33cb053744b050bb6188543405c1dfacf52d8aaf920c4b71`, verdict
+`H3_XOR_OFFSETS_EXACTLY_COLLAPSE_TO_EFFECTIVE_MASKS`, all six controls detected,
+exact payload/digest agreement, and `CHECK PASS`. This is an exact material
+normal-form equivalence at the printed software/RTL/SAT scope—not key recovery,
+a security-bit result, or authorization for a shorter production schedule.
+
+## E256-H H2 integrated-cost gate (OPEN)
+
+```bash
+make e256-hw-h2-check
+```
+
+Expect schema `E256-HARDWARE-H2-GATE-1`, status `OPEN_PROGRESS`, verdict
+`H2_INTEGRATED_COSTS_MEASURED_NO_ARCHITECTURE_SELECTED`, deterministic payload
+SHA-256 `b0b62be2cfebd870f71ce0b5e5300eb52ab8c2aea243712d1617f4e2351dc7e1`,
+`prior_digest_valid=True`, `payload_bytes_match=True`, `digest_match=True`, and
+`CHECK PASS`.
+
+This is a fixed-`R=12` non-production generic-cost fixture with no C/H/N
+movement. It selects no architecture, storage organization, round count,
+direct-short schedule, H4 policy, production RTL, or security result; reviewed
+standard AEAD remains the real-data boundary.
+
+## E256-H H4 per-round switching-sequence gate (OPEN)
+
+```bash
+make e256-hw-h4-sequence-check
+```
+
+Expect schema `E256-HARDWARE-H4-SEQUENCE-GATE-1`, status `OPEN_PROGRESS`,
+`harness valid: True`, **1,474,560** structural windows with **737,280**
+failures, **442,368** collapse comparisons with zero mismatches, **18,432**
+executable rows with **55,296** RTL/model comparisons and per-input cycle
+observations, **19/19** controls, structural verdict
+`ARITHMETIC_SEQUENCE_CENSUS_COUNTEREXAMPLE_FOUND`, deterministic payload
+SHA-256 `4562482417cb2917208cf37f8c4441efbdde602230d878ba49d249b017822064`,
+and `CHECK PASS`. The printed sequence-minus-repeated generic mapped deltas are
+FF `-407 LUT6, +132 sequential bits, -275 primitive cells, +1 level` and ring
+`-57 LUT6, +132 sequential bits, +75 primitive cells, +1 level`.
+
+This is valid bounded falsification evidence: unrestricted use of the tested
+arithmetic switching family is parked under the exact three-round byte-
+dependency criterion. It is not a result about every possible switching policy,
+a mixed-sequence 25-active-S-box theorem, a physical FPGA/Metal result, a
+policy or architecture winner, or a security claim. E256-063 remains OPEN and
+reviewed standard AEAD remains mandatory.
+
+## E256-X0 H4 proof-carrying transition-policy gate (OPEN)
+
+```bash
+make e256-x0-h4-evolution-check
+```
+
+Expect schema `E256-X0-H4-EVOLUTION-GATE-1`, status `OPEN_PROGRESS`,
+`harness valid: True`, **73,728/147,456** directed pairs safe, graph root
+`d7e44b625acc693a28469dd993edfe3bf8cd7a4b966275a70ad7cf3941e4a80a`,
+**147,456** exact pair-vector comparisons, **98,304** first-selector cases,
+**2,048** translation cases, and **23/23** controls. Every node has in/out
+degree 192. Expect two 192-node full-graph SCCs, two 8-node support-quotient
+SCCs, verdict `FULL_SUPPORT_QUOTIENT_HAMILTONIAN_CYCLE_NOT_FOUND`, fallback
+path `[0,3,0,3,0,3,0,3,0,3,0,3]` with **11/11** transitions verified,
+deterministic payload SHA-256
+`35060c802427046f5f4630c6b9db6401d8ac90c4649fc0cf088d3f35f31b1b44`,
+and `CHECK PASS`.
+
+This proves the exact structural transition criterion `S(y)+S(z)=Z8` and
+carries one bounded valid path. The two-component topology is an adverse
+finding: the path cannot evolve across all 16 support classes. This is not a
+mixed four-round/25-active-S-box theorem, attack work factor, production
+schedule or evolution mechanism, hardware/Metal/FHE result, or security claim.
+E256-063 remains OPEN and reviewed standard AEAD remains mandatory.
+
 ## Enigma256 fixture-v4 KAT parity (C10)
 
 Build once, then generate the golden bundle at the command’s **scratch default** and reuse that validated directory for RTL parity. These commands do not overwrite `Fixtures/enigma256_golden`:

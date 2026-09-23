@@ -1,0 +1,972 @@
+{
+  "deterministic_payload": {
+    "controls": {
+      "all_detected": true,
+      "executed_ids": [
+        "omit_output_transport",
+        "raw_output_offset",
+        "wrong_transport_source",
+        "terminal_input_offset_included",
+        "wrong_mask_index",
+        "non_absorbable_bit_permutation"
+      ],
+      "frozen_ids": [
+        "omit_output_transport",
+        "raw_output_offset",
+        "wrong_transport_source",
+        "terminal_input_offset_included",
+        "wrong_mask_index",
+        "non_absorbable_bit_permutation"
+      ],
+      "records": {
+        "non_absorbable_bit_permutation": {
+          "a_values": 256,
+          "detected": true,
+          "executed_comparisons": 65536,
+          "family": "C(x)=ror8(SBOX(rol8(x,1)),1)",
+          "matching_xor_translation_pairs": [],
+          "shared_path": [
+            "independent exhaustive byte-family detector"
+          ],
+          "x_values_per_a": 256
+        },
+        "omit_output_transport": {
+          "detected": true,
+          "expected": "detected",
+          "formal_outcome": "SAT",
+          "shared_path": [
+            "formal miter",
+            "complete H4 linear layer"
+          ],
+          "witness": {
+            "B": "0000000000000000000000002800000000100000000000000000580000000080",
+            "M": "00000000000000000000000000000000000000000000000000000000b2987058",
+            "U": "000000000000000000000000ee00000000c30000000000000000ad0000000081",
+            "canonical_out": "0000000000000000000000000000000000000000000000000000000083000080",
+            "mismatch": "1",
+            "original_out": "000000000000000000000000000000000000000000000000000000000080284b"
+          }
+        },
+        "raw_output_offset": {
+          "detected": true,
+          "expected": "detected",
+          "formal_outcome": "SAT",
+          "shared_path": [
+            "formal miter",
+            "complete H4 linear layer"
+          ],
+          "witness": {
+            "B": "c6e964859b030a6909c207040bd3f3194c0575acd409507d63d577e5e2858372",
+            "M": "044520608980164494d00014083d0a0d9481230a01c081c01050914100090000",
+            "U": "853e5585f2850a69b01f7404043546f66e08be46d309a16403c57ac1e1858378",
+            "canonical_out": "000aa90d8440581618088080912844a0c0018de027200141c444914010921300",
+            "mismatch": "1",
+            "original_out": "40230242a69843005470607480116289040c6ac4ee0800000282c45e00050801"
+          }
+        },
+        "terminal_input_offset_included": {
+          "aggregate_sha256": "1ccf3d1448716fa99c82a9b45858ea011fb02ac4f85843c5576a04772663d2e0",
+          "blocks_per_round": 8,
+          "detected": true,
+          "detected_rounds": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "mismatches_by_round": {
+            "1": 8,
+            "10": 8,
+            "11": 8,
+            "2": 8,
+            "3": 8,
+            "4": 8,
+            "5": 8,
+            "6": 8,
+            "7": 8,
+            "8": 8,
+            "9": 8
+          },
+          "mutation": "incorrectly XOR A_R into terminal K_R",
+          "round_12": "inapplicable: frozen material has A_0 through A_11 only",
+          "rounds_tested": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11
+          ],
+          "shared_path": [
+            "fixed-R software transform",
+            "sequential corpus"
+          ]
+        },
+        "wrong_mask_index": {
+          "aggregate_sha256": "3a499dc14f899603a914a9d823b92acc106cbc1edd74393bbf05f27226721ccd",
+          "detected": true,
+          "executed_cases": 96,
+          "expected_cases": 96,
+          "mismatches": 96,
+          "mutation": "use M_r where M_{r+1} is required in Stage A",
+          "rounds_detected": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "shared_path": [
+            "prefix-compatible software transform",
+            "sequential corpus"
+          ]
+        },
+        "wrong_transport_source": {
+          "detected": true,
+          "expected": "detected",
+          "formal_outcome": "SAT",
+          "shared_path": [
+            "formal miter",
+            "complete H4 linear layer"
+          ],
+          "witness": {
+            "A": "0000000e00000000000000005a0000000b150000000d00000000100000000934",
+            "B": "0000000e91001f0000fc0014410000000be10c00000d004718005300001309a0",
+            "M": "000000012db69b9b14010409018c8d8d00000000408180000000000008c103d1",
+            "U": "0000000e91001f0000fc0014890000000b6f0c009b0d00471b00de008d1309a1",
+            "canonical_out": "0000000100000000120100080000000000000000408151f700000000a5004c00",
+            "mismatch": "1",
+            "original_out": "00000001000000001204070a0000000000000000408180000000000083094219"
+          }
+        }
+      }
+    },
+    "coverage": {
+      "controls": {
+        "executed_ids": [
+          "omit_output_transport",
+          "raw_output_offset",
+          "wrong_transport_source",
+          "terminal_input_offset_included",
+          "wrong_mask_index",
+          "non_absorbable_bit_permutation"
+        ],
+        "frozen_ids": [
+          "omit_output_transport",
+          "raw_output_offset",
+          "wrong_transport_source",
+          "terminal_input_offset_included",
+          "wrong_mask_index",
+          "non_absorbable_bit_permutation"
+        ]
+      },
+      "formal": {
+        "arbitrary_input_bits": 768,
+        "arbitrary_input_bits_by_mode": {
+          "correct": 768,
+          "omit_output_transport": 768,
+          "raw_output_offset": 768,
+          "wrong_transport_source": 1024
+        },
+        "complete_linear_lemmas": 1,
+        "complete_rounds": 0,
+        "executed_modes": [
+          "correct",
+          "omit_output_transport",
+          "raw_output_offset",
+          "wrong_transport_source"
+        ],
+        "frozen_modes": [
+          "correct",
+          "omit_output_transport",
+          "raw_output_offset",
+          "wrong_transport_source"
+        ],
+        "nonlinear_or_sbox_logic_in_sat_cone": false,
+        "proved_output_bits": 256
+      },
+      "predictions": {
+        "executed_ids": [
+          "OC1",
+          "OC2",
+          "OC3",
+          "OC4",
+          "OC5",
+          "OC6"
+        ],
+        "frozen_ids": [
+          "OC1",
+          "OC2",
+          "OC3",
+          "OC4",
+          "OC5",
+          "OC6"
+        ]
+      },
+      "rtl": {
+        "executed_block_ids": [
+          "all_zero",
+          "all_ff",
+          "ascending_00_1f",
+          "descending_ff_e0",
+          "shake_0",
+          "shake_1",
+          "shake_2",
+          "shake_3"
+        ],
+        "executed_comparisons": 64,
+        "executed_rounds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "expected_comparisons": 64,
+        "fixed_h4_tuple": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "frozen_block_ids": [
+          "all_zero",
+          "all_ff",
+          "ascending_00_1f",
+          "descending_ff_e0",
+          "shake_0",
+          "shake_1",
+          "shake_2",
+          "shake_3"
+        ],
+        "frozen_rounds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      },
+      "software": {
+        "block_corpus": [
+          {
+            "bytes_hex": "0000000000000000000000000000000000000000000000000000000000000000",
+            "id": "all_zero"
+          },
+          {
+            "bytes_hex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+            "id": "all_ff"
+          },
+          {
+            "bytes_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+            "id": "ascending_00_1f"
+          },
+          {
+            "bytes_hex": "fffefdfcfbfaf9f8f7f6f5f4f3f2f1f0efeeedecebeae9e8e7e6e5e4e3e2e1e0",
+            "id": "descending_ff_e0"
+          },
+          {
+            "bytes_hex": "e0b64e602b505cad282db5cb8940df855c950658b594b248b36ba7abf4b321da",
+            "id": "shake_0"
+          },
+          {
+            "bytes_hex": "ee06b2930a4ab368be6220879c55350bea1e3583c2b77787b93c9ff23b3b6313",
+            "id": "shake_1"
+          },
+          {
+            "bytes_hex": "c1af5631a9ff339e65bc73d0d4628802f19a03306ec022cf4a891da9e4f627c5",
+            "id": "shake_2"
+          },
+          {
+            "bytes_hex": "d25aa1f0f1f7e9d3aeebeaea33c80f9c9a1605c8ee224179a9e12e5aed979afa",
+            "id": "shake_3"
+          }
+        ],
+        "block_corpus_sha256": "217ffeaba8348217a84f237ec5aeb4bb6f0358b823b463596277c5bd2494f44d",
+        "executed_block_ids": [
+          "all_zero",
+          "all_ff",
+          "ascending_00_1f",
+          "descending_ff_e0",
+          "shake_0",
+          "shake_1",
+          "shake_2",
+          "shake_3"
+        ],
+        "executed_h4_set_sha256": "199f1f7bddccf19ce5aa0bde0987441735d628354140d53ebdfec538d7b3f5ed",
+        "executed_h4_set_size": 384,
+        "executed_material_ids": [
+          "frozen_attack_v1",
+          "collapse_aux_0",
+          "collapse_aux_1"
+        ],
+        "executed_rounds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "executed_stage_a_comparisons": 110592,
+        "executed_stage_b_comparisons": 110592,
+        "executed_total_comparisons": 221184,
+        "expected_stage_a_comparisons": 110592,
+        "expected_stage_b_comparisons": 110592,
+        "expected_total_comparisons": 221184,
+        "frozen_block_ids": [
+          "all_zero",
+          "all_ff",
+          "ascending_00_1f",
+          "descending_ff_e0",
+          "shake_0",
+          "shake_1",
+          "shake_2",
+          "shake_3"
+        ],
+        "frozen_h4_set_sha256": "199f1f7bddccf19ce5aa0bde0987441735d628354140d53ebdfec538d7b3f5ed",
+        "frozen_h4_set_size": 384,
+        "frozen_material_ids": [
+          "frozen_attack_v1",
+          "collapse_aux_0",
+          "collapse_aux_1"
+        ],
+        "frozen_rounds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ]
+      }
+    },
+    "equivalence": {
+      "formal": {
+        "aggregate_sha256": "2e91c7dd6b5d2cf07a39178b5a6c78215eba2cfb58fcb17bd53f7d36df9bad40",
+        "all_mutations_sat_with_witnesses": true,
+        "arbitrary_input_bits_by_mode": {
+          "correct": 768,
+          "omit_output_transport": 768,
+          "raw_output_offset": 768,
+          "wrong_transport_source": 1024
+        },
+        "correct_proved_unsat": true,
+        "engine": "yosys sat -verify on the flattened proof cone; flattening is permitted for equivalence proof only and forbidden for cost measurement",
+        "executed_modes": [
+          "correct",
+          "omit_output_transport",
+          "raw_output_offset",
+          "wrong_transport_source"
+        ],
+        "fixed_h4_tuple": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "flattened_proof_cone": true,
+        "independent_complete_linear_paths": {
+          "canonical": [
+            "L(U)",
+            "L(B)"
+          ],
+          "original": "L(U XOR B)",
+          "wrong_transport_control": "L(A)"
+        },
+        "input_signals_by_mode": {
+          "correct": [
+            "U",
+            "B",
+            "M"
+          ],
+          "omit_output_transport": [
+            "U",
+            "B",
+            "M"
+          ],
+          "raw_output_offset": [
+            "U",
+            "B",
+            "M"
+          ],
+          "wrong_transport_source": [
+            "U",
+            "A",
+            "B",
+            "M"
+          ]
+        },
+        "nonlinear_or_sbox_logic_in_sat_cone": false,
+        "proof_decomposition": {
+          "detected_by": "first fail-closed gate execution after software and 64-row RTL completion; no SAT result or receipt was emitted",
+          "nonlinear_boundary": "Both original and canonical forms evaluate the same deterministic AES S-box bank on the same state XOR A input; the 256-entry AES S-box hash is pinned and the unchanged dual-core RTL comparison checks integration.",
+          "reason": "The monolithic miter duplicated 64 table S-box instances and timed out before SAT despite the nonlinear layer being irrelevant to the algebraic identity.",
+          "sat_lemma": "Prove L(U XOR B) XOR M = L(U) XOR L(B) XOR M for arbitrary U, B, M. This is stronger than testing selected S-box outputs because U is unconstrained.",
+          "scope_of_change": "Proof decomposition only. Formulas, software/RTL coverage, controls, predictions, verdicts, material accounting, and interpretation are unchanged.",
+          "supersedes_preregistration_sha256": "3823e2632a6b2a38264a7c6d4630cafcda457a711c0f0fdf275c00d1698a23a2"
+        },
+        "records": [
+          {
+            "arbitrary_input_bits": 768,
+            "expected": "UNSAT for mismatch",
+            "input_signals": [
+              "U",
+              "B",
+              "M"
+            ],
+            "mode": "correct",
+            "outcome": "UNSAT",
+            "top": "e256h_offset_collapse_correct",
+            "witness": null
+          },
+          {
+            "arbitrary_input_bits": 768,
+            "expected": "SAT for mismatch",
+            "input_signals": [
+              "U",
+              "B",
+              "M"
+            ],
+            "mode": "omit_output_transport",
+            "outcome": "SAT",
+            "top": "e256h_offset_collapse_omit_output_transport",
+            "witness": {
+              "B": "0000000000000000000000002800000000100000000000000000580000000080",
+              "M": "00000000000000000000000000000000000000000000000000000000b2987058",
+              "U": "000000000000000000000000ee00000000c30000000000000000ad0000000081",
+              "canonical_out": "0000000000000000000000000000000000000000000000000000000083000080",
+              "mismatch": "1",
+              "original_out": "000000000000000000000000000000000000000000000000000000000080284b"
+            }
+          },
+          {
+            "arbitrary_input_bits": 768,
+            "expected": "SAT for mismatch",
+            "input_signals": [
+              "U",
+              "B",
+              "M"
+            ],
+            "mode": "raw_output_offset",
+            "outcome": "SAT",
+            "top": "e256h_offset_collapse_raw_output_offset",
+            "witness": {
+              "B": "c6e964859b030a6909c207040bd3f3194c0575acd409507d63d577e5e2858372",
+              "M": "044520608980164494d00014083d0a0d9481230a01c081c01050914100090000",
+              "U": "853e5585f2850a69b01f7404043546f66e08be46d309a16403c57ac1e1858378",
+              "canonical_out": "000aa90d8440581618088080912844a0c0018de027200141c444914010921300",
+              "mismatch": "1",
+              "original_out": "40230242a69843005470607480116289040c6ac4ee0800000282c45e00050801"
+            }
+          },
+          {
+            "arbitrary_input_bits": 1024,
+            "expected": "SAT for mismatch",
+            "input_signals": [
+              "U",
+              "A",
+              "B",
+              "M"
+            ],
+            "mode": "wrong_transport_source",
+            "outcome": "SAT",
+            "top": "e256h_offset_collapse_wrong_transport_source",
+            "witness": {
+              "A": "0000000e00000000000000005a0000000b150000000d00000000100000000934",
+              "B": "0000000e91001f0000fc0014410000000be10c00000d004718005300001309a0",
+              "M": "000000012db69b9b14010409018c8d8d00000000408180000000000008c103d1",
+              "U": "0000000e91001f0000fc0014890000000b6f0c009b0d00471b00de008d1309a1",
+              "canonical_out": "0000000100000000120100080000000000000000408151f700000000a5004c00",
+              "mismatch": "1",
+              "original_out": "00000001000000001204070a0000000000000000408180000000000083094219"
+            }
+          }
+        ],
+        "scope": "compositional proof of one complete H3/H4 round: the nonlinear-boundary input is identical by construction as U=SBOX^32(state XOR A), and a Yosys SAT miter proves the remaining linear identity for arbitrary 256-bit U, B, and M under fixed certified tuple (0,1,3,4)"
+      },
+      "sequential_rtl": {
+        "aggregate_sha256": "93cbcd54ed9d0d4a26224789c749f64da88915686c0894f00666ac14f48384e2",
+        "block_ids": [
+          "all_zero",
+          "all_ff",
+          "ascending_00_1f",
+          "descending_ff_e0",
+          "shake_0",
+          "shake_1",
+          "shake_2",
+          "shake_3"
+        ],
+        "both_sides_match_independent_software": true,
+        "executed_original_vs_canonical_comparisons": 64,
+        "expected_original_vs_canonical_comparisons": 64,
+        "fixed_h4_tuple": [
+          0,
+          1,
+          3,
+          4
+        ],
+        "mismatches": 0,
+        "rounds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "rtl_vs_software_side_comparisons": 128
+      },
+      "software": {
+        "aggregate_encoding": "For each record in frozen nested-loop order, append a 4-byte unsigned big-endian length followed by compact canonical UTF-8 JSON. State outputs are 32 bytes in ascending byte-index order encoded as 64 lowercase hex characters.",
+        "combined_aggregate_sha256": "e7bca7ee189af4bd343024ba96507ff2eeee32f89be582f4eb59147c6b56f351",
+        "stage_a": {
+          "aggregate_sha256": "6bc3900effb23945d245d0ebeeb4c7f2c4cbca0fb9ffa46b82d88cf335dd9cc1",
+          "byte_exact": true,
+          "executed_comparisons": 110592,
+          "expected_comparisons": 110592,
+          "mismatches": 0
+        },
+        "stage_b": {
+          "aggregate_sha256": "954f3188770e83a0bc2318855bfcd3947d5369d1e3fd30f3b84016a133cfa099",
+          "byte_exact": true,
+          "executed_comparisons": 110592,
+          "expected_comparisons": 110592,
+          "fixed_round_terminal_keys_derived_separately": true,
+          "mismatches": 0
+        },
+        "total_comparisons": 221184
+      }
+    },
+    "inputs": {
+      "aes_sbox_sha256": "c2d8e5eed6cbebd8625fc18f81486a7733c04f9b0129ffbe974c68b90308b4f2",
+      "architecture_contract": {
+        "path": "directives/e256-hardware-architecture.md",
+        "sha256": "b64472f73be9d0fc6318ff445c5f550cb0129309313228f416599c27d3957bb1"
+      },
+      "certified_h4_set": {
+        "sha256": "199f1f7bddccf19ce5aa0bde0987441735d628354140d53ebdfec538d7b3f5ed",
+        "size": 384,
+        "source": "logs/e256-hardware-candidate-gate.json"
+      },
+      "frozen_predecessor_sources": {
+        "rtl": {
+          "path": "Hardware/RTL/Research/E256H/e256h_attack_core.v",
+          "sha256": "f4b5d6210275d831e48a3b16ca0457fa0927164ab33853b466ae0ca326fbcd3b"
+        },
+        "runner": {
+          "path": "Scripts/e256_hardware_attack_gate.py",
+          "sha256": "6928516545363269fd3c36224ab0013779bb14068336493a068eeb4ce9d077c2"
+        },
+        "testbench": {
+          "path": "Hardware/Testbenches/Research/E256H/e256h_attack_core_tb.v",
+          "sha256": "ae9d35af3edb76a696249dd4c32b8a3816c7a06643efbbf8f1397409a8b9ee2b"
+        }
+      },
+      "gate_artifacts": {
+        "rtl_miter": {
+          "path": "Hardware/RTL/Research/E256H/e256h_offset_collapse_miter.v",
+          "sha256": "8b29ca93334536ad4ba6bfb8f602f73e2b7a37c5cd56dd958c25141f9261c082"
+        },
+        "runner": {
+          "path": "Scripts/e256_hardware_offset_collapse_gate.py",
+          "sha256": "5931ec48276c9402bee78382bc82366409e33fa78670246f0d967497d480cd80"
+        },
+        "testbench": {
+          "path": "Hardware/Testbenches/Research/E256H/e256h_offset_collapse_tb.v",
+          "sha256": "bcbc8e08c01fb3ff3da09db8a8e7aae9cbc6c461c7c5d318b0c7769811f109c0"
+        }
+      },
+      "predecessors": [
+        {
+          "deterministic_payload_sha256": "21758ce220b9da469a18ea617fa7b2fd41e906add69a258f830b12843e3e495b",
+          "id": "E256-062",
+          "path": "logs/e256-wide-state-gate.json",
+          "schema": "E256-WIDE-STATE-GATE-1"
+        },
+        {
+          "deterministic_payload_sha256": "a10e001ad2c2b3de55fcc80197c059f166d5e55599c670e20b01de8f6b7d323d",
+          "id": "E256-063-step-1",
+          "path": "logs/e256-hardware-cost-gate.json",
+          "schema": "E256-HARDWARE-COST-GATE-1"
+        },
+        {
+          "deterministic_payload_sha256": "98af83ec27093787552475fce588f84a902634afcc969bed26462032dddec3cc",
+          "id": "E256-063-steps-2-3",
+          "path": "logs/e256-hardware-candidate-gate.json",
+          "schema": "E256-HARDWARE-CANDIDATE-GATE-1"
+        },
+        {
+          "deterministic_payload_sha256": "1114e260455232a2979f8a4f613fc6d6daf4be4f97c3ca6903c3f639357d7a2d",
+          "id": "E256-063-step-4",
+          "path": "logs/e256-hardware-attack-gate.json",
+          "schema": "E256-HARDWARE-ATTACK-GATE-1"
+        }
+      ],
+      "preregistration": {
+        "path": "directives/e256-hardware-offset-collapse-preregistration.json",
+        "sha256": "3d7a12731fcf81f6120577122c55bd8ec25589a82226d49fab7e5b8350ee0cee"
+      },
+      "toolchain": {
+        "iverilog": "Icarus Verilog version 13.0 (stable) (v13_0)",
+        "python": "3.9.6",
+        "yosys": "Yosys 0.68+post (git sha1 c12172fbae8af5e20f6fb52e3d4e92d56ed587b6, Release, AppleClang clang++ 21.0.0.21000101)"
+      }
+    },
+    "interpretation": {
+      "claim_movement": false,
+      "harness_valid": true,
+      "harness_validity_checks": {
+        "all_controls_detected": true,
+        "all_predictions_pass": true,
+        "formal_correct_unsat": true,
+        "formal_mutations_sat_with_witnesses": true,
+        "frozen_contract_validated": true,
+        "rtl_equivalence_exact": true,
+        "software_equivalence_exact": true,
+        "software_sets_exact": true,
+        "validity_controls_pass": true
+      },
+      "internal_invalid_status_not_emitted": "INVALID_OFFSET_COLLAPSE_HARNESS; never emitted or accepted as the canonical receipt",
+      "next": "Use the 416-byte fixed-12-round effective-mask normal form, plus separately accounted H4 selector material, as the baseline for a preregistered H2 integrated-core cost gate. A direct short XOF schedule remains a new construction until separately frozen.",
+      "passing_interpretation": "For any fixed H4 wiring sequence in scope, H3 p_in/p_out bytes add no permutation-family freedom beyond effective round masks. Retain H4 moving wiring as the Enigma mechanism and demote separately stored H3 offsets from the lean baseline.",
+      "predictions": {
+        "all_predictions_pass": true,
+        "executed_ids": [
+          "OC1",
+          "OC2",
+          "OC3",
+          "OC4",
+          "OC5",
+          "OC6"
+        ],
+        "frozen_ids": [
+          "OC1",
+          "OC2",
+          "OC3",
+          "OC4",
+          "OC5",
+          "OC6"
+        ],
+        "outcomes": {
+          "OC1": {
+            "observed": {
+              "all_detected": true,
+              "controls": 6
+            },
+            "pass": true,
+            "role": "validity_control",
+            "statement": "all six planted controls are detected through their declared shared paths"
+          },
+          "OC2": {
+            "observed": {
+              "comparisons": 110592,
+              "mismatches": 0
+            },
+            "pass": true,
+            "role": "graded_finding",
+            "statement": "Stage A is byte-exact for all 110592 frozen software cases"
+          },
+          "OC3": {
+            "observed": {
+              "comparisons": 110592,
+              "fixed_round_terminal_keys": true,
+              "mismatches": 0
+            },
+            "pass": true,
+            "role": "graded_finding",
+            "statement": "Stage B is byte-exact for all 110592 frozen software cases with a separately derived terminal key for each R"
+          },
+          "OC4": {
+            "observed": {
+              "comparisons": 64,
+              "mismatches": 0
+            },
+            "pass": true,
+            "role": "graded_finding",
+            "statement": "all 64 sequential RTL original-versus-canonical comparisons match"
+          },
+          "OC5": {
+            "observed": {
+              "correct_unsat": true,
+              "mutations_sat_with_witnesses": true
+            },
+            "pass": true,
+            "role": "graded_finding",
+            "statement": "the arbitrary-input one-round correct miter is UNSAT for mismatch and every formal mutation is SAT"
+          },
+          "OC6": {
+            "observed": {
+              "effective_bytes": 416,
+              "kernel_bits": 6144,
+              "kernel_bytes": 768
+            },
+            "pass": true,
+            "role": "graded_finding",
+            "statement": "the fixed-12-round effective material is exactly 416 bytes, exposing a 768-byte and 6144-bit representation kernel"
+          }
+        },
+        "validity_control_ids": [
+          "OC1"
+        ],
+        "validity_controls_pass": true
+      },
+      "scope": "material normal-form equivalence only; all 384 certified repeated-use H4 tuples in software, fixed (0,1,3,4) in unchanged sequential RTL and one-round SAT proof",
+      "verdict": "H3_XOR_OFFSETS_EXACTLY_COLLAPSE_TO_EFFECTIVE_MASKS"
+    },
+    "limitations": [
+      "Algebraic material collapse is not a cryptanalytic break and does not establish or reduce a security-bit value.",
+      "The receipt does not certify arbitrary per-round switching among H4 tuples; the predecessor certified repeated use of each tuple.",
+      "The receipt does not select a production round count, XOF, key schedule, wiring selector, mode, profile, fixture, protocol, or RTL.",
+      "The 416-byte normal form is live effective material after collapsing already-derived predecessor bytes. Directly squeezing 416 bytes under a new domain would be a new schedule requiring new evidence.",
+      "No C/H/N row, E256 finding, suite, profile, fixture, or release gate closes; reviewed standard AEAD remains mandatory for real data."
+    ],
+    "material_normal_form": {
+      "collapse_source": "all forms are collapsed from each already-derived 1184-byte material set",
+      "direct_short_xof_compatibility": false,
+      "material_sets": [
+        {
+          "domain": "E256-H/attack/material/v1",
+          "id": "frozen_attack_v1",
+          "raw_bytes": 1184,
+          "raw_sha256": "b6738e7f117bb7b916ee002db482f105a3eb5a046ee84dff45f178510cdeb691"
+        },
+        {
+          "domain": "E256-H/collapse/material/v1/0",
+          "id": "collapse_aux_0",
+          "raw_bytes": 1184,
+          "raw_sha256": "8f6d5d6de2a05906198d221d5c90d5f11ebc7a2562620ccce81511bfba9cf67d"
+        },
+        {
+          "domain": "E256-H/collapse/material/v1/1",
+          "id": "collapse_aux_1",
+          "raw_bytes": 1184,
+          "raw_sha256": "f169f6a649e6b1de158fc3e21ac08dd32d3733bd6429de0dd0e007d4c60a92be"
+        }
+      ],
+      "raw_mask_bytes": 416,
+      "raw_material_bytes": 1184,
+      "raw_offset_bytes": 768,
+      "representation_kernel_bits": 6144,
+      "representation_kernel_bytes": 768,
+      "stage_a_12_round_bytes": 800,
+      "stage_a_semantics": "These 800 bytes are 384 input offsets plus 416 transformed masks, not the E256-W 384 rotor IDs plus 416 masks.",
+      "stage_b_fixed_12_round_bytes": 416,
+      "stage_b_fixed_8_round_bytes": 288,
+      "terminal_rule": "K_R excludes A_R and must be derived separately for each tested prefix R"
+    },
+    "pinned_parameters": {
+      "aggregate_encoding": "For each record in frozen nested-loop order, append a 4-byte unsigned big-endian length followed by compact canonical UTF-8 JSON. State outputs are 32 bytes in ascending byte-index order encoded as 64 lowercase hex characters.",
+      "block_ids": [
+        "all_zero",
+        "all_ff",
+        "ascending_00_1f",
+        "descending_ff_e0",
+        "shake_0",
+        "shake_1",
+        "shake_2",
+        "shake_3"
+      ],
+      "compatibility_rule": "The confirmatory gate collapses already-derived bytes. A direct 800- or 416-byte squeeze is a new schedule and is not authorized by this receipt.",
+      "control_ids": [
+        "omit_output_transport",
+        "raw_output_offset",
+        "wrong_transport_source",
+        "terminal_input_offset_included",
+        "wrong_mask_index",
+        "non_absorbable_bit_permutation"
+      ],
+      "date_basis": "2026-08-20 session date; no wall-clock timestamp asserted",
+      "fixed_rtl_and_formal_h4_tuple": [
+        0,
+        1,
+        3,
+        4
+      ],
+      "formal_arbitrary_input_bits_by_mode": {
+        "correct": 768,
+        "omit_output_transport": 768,
+        "raw_output_offset": 768,
+        "wrong_transport_source": 1024
+      },
+      "formal_input_signals_by_mode": {
+        "correct": [
+          "U",
+          "B",
+          "M"
+        ],
+        "omit_output_transport": [
+          "U",
+          "B",
+          "M"
+        ],
+        "raw_output_offset": [
+          "U",
+          "B",
+          "M"
+        ],
+        "wrong_transport_source": [
+          "U",
+          "A",
+          "B",
+          "M"
+        ]
+      },
+      "formal_mode_ids": [
+        "correct",
+        "omit_output_transport",
+        "raw_output_offset",
+        "wrong_transport_source"
+      ],
+      "formal_proof_decomposition": {
+        "detected_by": "first fail-closed gate execution after software and 64-row RTL completion; no SAT result or receipt was emitted",
+        "nonlinear_boundary": "Both original and canonical forms evaluate the same deterministic AES S-box bank on the same state XOR A input; the 256-entry AES S-box hash is pinned and the unchanged dual-core RTL comparison checks integration.",
+        "reason": "The monolithic miter duplicated 64 table S-box instances and timed out before SAT despite the nonlinear layer being irrelevant to the algebraic identity.",
+        "sat_lemma": "Prove L(U XOR B) XOR M = L(U) XOR L(B) XOR M for arbitrary U, B, M. This is stronger than testing selected S-box outputs because U is unconstrained.",
+        "scope_of_change": "Proof decomposition only. Formulas, software/RTL coverage, controls, predictions, verdicts, material accounting, and interpretation are unchanged.",
+        "supersedes_preregistration_sha256": "3823e2632a6b2a38264a7c6d4630cafcda457a711c0f0fdf275c00d1698a23a2"
+      },
+      "formal_scope": "compositional proof of one complete H3/H4 round: the nonlinear-boundary input is identical by construction as U=SBOX^32(state XOR A), and a Yosys SAT miter proves the remaining linear identity for arbitrary 256-bit U, B, and M under fixed certified tuple (0,1,3,4)",
+      "geometry": "4 rows by 8 columns, byte index 4*column+row",
+      "graded_constraints": [
+        "H1",
+        "H2",
+        "H3",
+        "H4",
+        "H5"
+      ],
+      "linear_layer": "L_w = AES MixColumns after forward H4 RowShift w, over GF(2) with polynomial 0x11b",
+      "material_domains": [
+        "E256-H/attack/material/v1",
+        "E256-H/collapse/material/v1/0",
+        "E256-H/collapse/material/v1/1"
+      ],
+      "material_ids": [
+        "frozen_attack_v1",
+        "collapse_aux_0",
+        "collapse_aux_1"
+      ],
+      "mix_columns_matrix_hex_rows": [
+        [
+          "02",
+          "03",
+          "01",
+          "01"
+        ],
+        [
+          "01",
+          "02",
+          "03",
+          "01"
+        ],
+        [
+          "01",
+          "01",
+          "02",
+          "03"
+        ],
+        [
+          "03",
+          "01",
+          "01",
+          "02"
+        ]
+      ],
+      "original_recurrence": "X_0 = P XOR M_0; X_{r+1} = L_{w_r}(SBOX^32(X_r XOR A_r) XOR B_r) XOR M_{r+1}",
+      "prediction_ids": [
+        "OC1",
+        "OC2",
+        "OC3",
+        "OC4",
+        "OC5",
+        "OC6"
+      ],
+      "question_ids": [
+        "HQ13",
+        "HQ14",
+        "HQ15",
+        "HQ16"
+      ],
+      "raw_mask_offset_bytes": 768,
+      "raw_material_layout": "12*32 interleaved (A_r[j],B_r[j]) pairs followed by 13*32 masks",
+      "rtl_rounds": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "software_rounds": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "stage_a_formula": "Mprime_0=M_0; Mprime_{r+1}=M_{r+1} XOR L_{w_r}(B_r); retain A_r; set B_r=0",
+      "stage_b_canonical_recurrence": "Z_0=P XOR K_0; Z_{r+1}=L_{w_r}(SBOX^32(Z_r)) XOR K_{r+1}",
+      "stage_b_formula": "K_0=M_0 XOR A_0; K_r=L_{w_{r-1}}(B_{r-1}) XOR M_r XOR A_r for 1<=r<R; K_R=L_{w_{R-1}}(B_{R-1}) XOR M_R",
+      "state_bytes": 32,
+      "terminal_rule": "K_R excludes A_R and must be derived separately for each tested prefix R"
+    },
+    "schema": "E256-HARDWARE-OFFSET-COLLAPSE-GATE-1",
+    "status": "OPEN_PROGRESS"
+  },
+  "deterministic_payload_sha256": "1478a0ba317bce5f33cb053744b050bb6188543405c1dfacf52d8aaf920c4b71",
+  "environment_advisory_excluded_from_digest": {
+    "elapsed_seconds_single_run_not_a_claim": 50.008,
+    "git_dirty": true,
+    "git_head": "a8e192a446ce2efca73998fdb54c7e1c44bd7579",
+    "platform": "macOS-26.6.2-arm64-arm-64bit"
+  },
+  "no_wall_clock": "No wall-clock timestamp is asserted; only deterministic inputs and outputs are graded."
+}

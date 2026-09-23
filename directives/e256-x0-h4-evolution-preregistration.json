@@ -1,0 +1,229 @@
+{
+  "schema": "E256-X0-H4-EVOLUTION-PREREGISTRATION-1",
+  "status": "FROZEN_BEFORE_IMPLEMENTATION",
+  "freeze_date": "2026-08-20",
+  "title": "E256-X0 proof-carrying compositional H4 safe-transition graph and path certificate",
+  "contract": {
+    "path": "directives/e256-x0-h4-evolution.md",
+    "start_marker": "<!-- E256-X0-H4-EVOLUTION-CONTRACT-START -->",
+    "end_marker": "<!-- E256-X0-H4-EVOLUTION-CONTRACT-END -->",
+    "digest_rule": "SHA-256 of exact UTF-8 bytes from the first byte of the unique start marker through the last byte of the unique end marker, inclusive",
+    "inclusive_sha256": "1ef354e9b933838eb3e74b32b202e4693f1bfdd62379f10dbc6a8673b3383962"
+  },
+  "absence_at_freeze": [
+    "directives/e256-x0-h4-evolution-preregistration.json",
+    "Scripts/e256_x0_h4_evolution_gate.py",
+    "logs/e256-x0-h4-evolution-gate.json",
+    "build/e256-x0-h4-evolution"
+  ],
+  "predecessors": [
+    {
+      "id": "E256-063-H4-CANDIDATE-CATALOG",
+      "path": "logs/e256-hardware-candidate-gate.json",
+      "schema": "E256-HARDWARE-CANDIDATE-GATE-1",
+      "raw_sha256": "0402a53a725f3303ab379bf7f5e986a55cadedb001f4621d9d996f4ee0d93cfc",
+      "deterministic_payload_sha256": "98af83ec27093787552475fce588f84a902634afcc969bed26462032dddec3cc"
+    },
+    {
+      "id": "E256-063-H4-SEQUENCE-CENSUS",
+      "path": "logs/e256-hardware-h4-sequence-gate.json",
+      "schema": "E256-HARDWARE-H4-SEQUENCE-GATE-1",
+      "raw_sha256": "9d06dcca6d83d1f9bcc04806f8fbb1e12cf7b66f390069fe3b4ad90edeaf34e6",
+      "deterministic_payload_sha256": "4562482417cb2917208cf37f8c4441efbdde602230d878ba49d249b017822064",
+      "record_sha256": "4e53a53caa1da8bee7f45c572f6208624fd02703d358cdfb52ca9a31c98e0bae"
+    }
+  ],
+  "frozen_sources": {
+    "h4_preregistration": {
+      "path": "directives/e256-hardware-h4-sequence-preregistration.json",
+      "sha256": "b7afcc67ceac142a800468362ee0c97fcf6c7b6843f0cdd2f96f5d77894fc8e2"
+    },
+    "h4_architecture_marker": {
+      "path": "directives/e256-hardware-architecture.md",
+      "start_marker": "<!-- E256-H-H4-SEQUENCE-CONTRACT-START -->",
+      "end_marker": "<!-- E256-H-H4-SEQUENCE-CONTRACT-END -->",
+      "inclusive_sha256": "aac50bda525ead96234fc3c0e3e3692fabbde101de34d44f632d6a65bfbed1e4"
+    },
+    "h4_runner": {
+      "path": "Scripts/e256_hardware_h4_sequence_gate.py",
+      "sha256": "f451077a706ff3cc6a13f676b5c1ba3cc9f367c77ebcb4f0cb0f67abf8b4f2ee"
+    },
+    "h4_rtl": {
+      "path": "Hardware/RTL/Research/E256H/e256h_h4_sequence_core.v",
+      "sha256": "d6d9dd85b663a1dad02ced8ffe2c375130d322f6ccbcfb16a83734871031f7e8"
+    },
+    "h4_testbench": {
+      "path": "Hardware/Testbenches/Research/E256H/e256h_h4_sequence_core_tb.v",
+      "sha256": "8c06092ecaba633d62461ca6072d066a8505b19ebc45ef8551921144204464ec"
+    }
+  },
+  "toolchain": {
+    "python_required_exact": "3.9.6",
+    "dependencies": "Python standard library only",
+    "arithmetic": "exact integers only; floating point forbidden",
+    "scope": "host-side structural graph and certificate derivation; no RTL, synthesis, Metal, FHE, or physical hardware"
+  },
+  "catalog": {
+    "source": "logs/e256-hardware-candidate-gate.json#/deterministic_payload/results/h4_wiring/certified_set",
+    "count": 384,
+    "support_count": 16,
+    "permutations_per_support": 24,
+    "canonical_sha256": "199f1f7bddccf19ce5aa0bde0987441735d628354140d53ebdfec538d7b3f5ed",
+    "first_tuple": [0, 1, 2, 5],
+    "fixed_tuple": [0, 1, 3, 4],
+    "fixed_tuple_index": 1,
+    "last_tuple": [7, 6, 5, 2],
+    "tuple_code": "o_0 | (o_1 << 3) | (o_2 << 6) | (o_3 << 9)",
+    "support_order": "ascending numeric 8-bit support mask"
+  },
+  "algebraic_contract": {
+    "closed_form": "For selectors x,y,z, output column c depends on original-row-a columns c+x_a+y_b+z_k mod 8 for b,k in 0..3",
+    "safe_criterion": "S(y)+S(z)=Z8",
+    "sumset_oracle": "8-bit support masks and modular rotations",
+    "literal_oracle": "32 singleton byte lanes, actual ordered row shifts, and all-nonzero AES MixColumns support for exactly three rounds",
+    "ordered_pair_count": 147456,
+    "literal_first_selector_index": 0,
+    "exact_vector_agreement_required": true,
+    "first_selector_invariance_scope": "all 384 first selectors times all 256 ordered support-class pairs",
+    "first_selector_invariance_cases": 98304,
+    "translation_invariance_scope": "all 8 translations times all 256 ordered support-class pairs",
+    "translation_invariance_cases": 2048,
+    "mismatch_policy": "fail closed; no filtering"
+  },
+  "graph_contract": {
+    "schema": "E256-X0-H4-SAFE-GRAPH-1",
+    "nodes": 384,
+    "row_bytes": 48,
+    "bitset_bytes": 18432,
+    "edge_rule": "directed i->j iff S(C[i])+S(C[j])=Z8",
+    "destination_bit_rule": "row i byte j//8 bit 1<<(j%8)",
+    "root_domain_ascii": "E256-X0/H4-safe-graph/v1",
+    "root_preimage": "domain || 0x00 || u16be(384) || raw32(certified_list_sha256) || edge_bitset",
+    "prior_consistency_edge_count": 73728,
+    "prior_consistency_non_edge_count": 73728,
+    "symmetry_must_be_verified": true,
+    "bitset_and_root_are_graded_outputs": true
+  },
+  "prior_census_contract": {
+    "class_map": "(b,d)->(i,j)=(b+d,b+2d) mod 384",
+    "inverse": "d=j-i mod 384; b=2i-j mod 384",
+    "class_count": 147456,
+    "placements_per_class": 10,
+    "expected_failed_classes_from_prior_receipt": 73728,
+    "expected_failed_placements_from_prior_receipt": 737280,
+    "expected_safe_classes_from_prior_receipt": 73728,
+    "prior_first_counterexample": {
+      "a": 0,
+      "d": 1,
+      "start_round": 1,
+      "indices": [1, 2, 3],
+      "tuples": [[0, 1, 3, 4], [0, 1, 4, 3], [0, 1, 4, 7]],
+      "output_lane": 0,
+      "missing_input_lanes": [6, 11, 24, 29]
+    },
+    "exploratory_disclosure_before_freeze": "d=0 was the only stride with zero failed classes",
+    "expected_zero_failure_strides": [0],
+    "role": "consistency reconstruction, not blind prediction"
+  },
+  "diagnostics_contract": {
+    "full_graph": [
+      "complete out-degree vector and histogram",
+      "complete in-degree vector and histogram",
+      "loop and off-diagonal directed edge counts",
+      "same-support and support-changing directed edge counts",
+      "deterministic strongly connected components",
+      "first unsafe ordered pair",
+      "first support-changing safe two-cycle"
+    ],
+    "support_quotient": {
+      "node_count": 16,
+      "node_order": "ascending numeric support mask",
+      "edge_rule": "same modular sumset criterion",
+      "required": [
+        "canonical adjacency",
+        "deterministic strongly connected components",
+        "exact lexicographically least Hamiltonian-cycle DP anchored at node 0"
+      ],
+      "valid_hamiltonian_outcomes": [
+        "FULL_SUPPORT_QUOTIENT_HAMILTONIAN_CYCLE_FOUND",
+        "FULL_SUPPORT_QUOTIENT_HAMILTONIAN_CYCLE_NOT_FOUND"
+      ]
+    },
+    "walk_lengths": [1, 2, 3, 11],
+    "walk_count": "exact sum(A^k) over the full directed 384-node graph",
+    "log2_bounds": "integer floor and ceil from bit_length only",
+    "missing_observation_policy": "validity failure"
+  },
+  "path_certificate_contract": {
+    "schema": "E256-X0-H4-PATH-CERTIFICATE-1",
+    "selector_count": 12,
+    "transition_count": 11,
+    "required_fields": ["schema", "safe_graph_root", "catalog_indices", "tuple_codes", "selection_rule"],
+    "primary_selection": "first 12 quotient nodes of the lexicographically least anchored Hamiltonian cycle, each lifted to the lowest catalog index with that support",
+    "fallback_selection": "alternate the lexicographically first support-changing safe two-cycle to length 12; if absent, repeat the lowest safe loop",
+    "verification": "reconstruct graph/root; check index ranges and tuple-code equality; independently check all 11 adjacent graph transitions; trust no supplied edge witness",
+    "scope": "all eleven represented contiguous three-round windows satisfy structural all-to-all byte dependency only",
+    "reverse_paths_legal": true,
+    "repeated_nodes_legal": true
+  },
+  "controls": [
+    {"id": "catalog_reorder", "mutation": "swap catalog entries 0 and 1"},
+    {"id": "stale_catalog_hash", "mutation": "supply an all-zero catalog digest"},
+    {"id": "tuple_element_mutation", "mutation": "change one in-range tuple element"},
+    {"id": "duplicate_tuple_offset", "mutation": "duplicate one offset inside a tuple"},
+    {"id": "out_of_range_tuple_offset", "mutation": "insert offset 8"},
+    {"id": "wrong_xy_pair", "mutation": "use S(x)+S(y) instead of S(y)+S(z)"},
+    {"id": "xor_sumset", "mutation": "use bitwise XOR of support elements instead of modular addition"},
+    {"id": "wrong_modulus", "mutation": "reduce sums modulo 7"},
+    {"id": "omitted_support_element", "mutation": "drop one element before sumset construction"},
+    {"id": "graph_bit_flip", "mutation": "flip one canonical edge bit"},
+    {"id": "reversed_bit_order", "mutation": "decode destination bits most-significant-bit first within each byte"},
+    {"id": "missing_graph_row", "mutation": "remove one 48-byte row"},
+    {"id": "duplicate_graph_row", "mutation": "duplicate one 48-byte row"},
+    {"id": "stale_graph_root", "mutation": "supply an all-zero graph root"},
+    {"id": "forged_graph_root", "mutation": "hash mutated graph bytes and present the matching forged root"},
+    {"id": "insert_unsafe_edge", "mutation": "set the first lexicographic unsafe edge"},
+    {"id": "remove_safe_edge", "mutation": "clear the first lexicographic safe edge"},
+    {"id": "filtered_pair_corpus", "mutation": "remove one ordered pair from the exhaustive algebraic corpus"},
+    {"id": "tuple_code_index_mismatch", "mutation": "replace one path tuple code without changing its index"},
+    {"id": "out_of_range_path_index", "mutation": "replace one path index with 384"},
+    {"id": "truncated_path", "mutation": "remove the twelfth selector"},
+    {"id": "known_unsafe_transition", "mutation": "insert the first lexicographic unsafe transition into the path"},
+    {"id": "missing_scc_cycle_observation", "mutation": "remove the required quotient Hamiltonian observation"}
+  ],
+  "receipt_contract": {
+    "schema": "E256-X0-H4-EVOLUTION-GATE-1",
+    "status": "OPEN_PROGRESS",
+    "path": "logs/e256-x0-h4-evolution-gate.json",
+    "scratch_path": "build/e256-x0-h4-evolution",
+    "emit_target": "make e256-x0-h4-evolution",
+    "check_target": "make e256-x0-h4-evolution-check",
+    "deterministic_digest_rule": "SHA-256 of UTF-8 canonical compact sorted-key JSON deterministic_payload",
+    "record_hash_rule": "SHA-256 of canonical complete record with record_sha256 set to null",
+    "check_rule": "regenerate and require byte-identical canonical deterministic_payload bytes and deterministic_payload_sha256",
+    "required_sections": [
+      "integrity",
+      "catalog",
+      "algebraic_equivalence",
+      "prior_census_reconstruction",
+      "safe_graph",
+      "support_quotient",
+      "diagnostics",
+      "path_certificate_controls",
+      "verdicts",
+      "non_claims"
+    ]
+  },
+  "validity_rule": "Exact frozen identities, complete algebraic scopes, exact prior-census reconstruction, canonical graph/root closure, all required diagnostics, a verified twelve-selector path with eleven safe transitions, and all 23 controls detected are mandatory. SCC and Hamiltonian outcomes are graded findings.",
+  "valid_verdict": "SAFE_TRANSITION_GRAPH_DERIVED_AND_PATH_CERTIFIED",
+  "non_claims": [
+    "no mixed four-round or 25-active-S-box bound",
+    "no differential, linear, truncated, integral, algebraic, cube, related-key, cancellation, or value-feasibility claim",
+    "no security level, production round count, schedule, evolution rule, key derivation, XOF, suite, protocol, or standard",
+    "no architecture, storage organization, RTL enforcement, vendor FPGA, place-and-route, Fmax, physical power, side-channel, or fault claim",
+    "no Metal, encrypted Metal, FHE, or self-modifying-cipher execution claim",
+    "the fixed-selector wide_trail_manifest does not certify mixed walks",
+    "reviewed standard AEAD remains mandatory for real data",
+    "E256-063 remains OPEN; no C/H/N row or public claim epoch moves"
+  ]
+}

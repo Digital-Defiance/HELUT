@@ -1,0 +1,293 @@
+{
+  "schema": "E256-HARDWARE-ATTACK-PREREGISTRATION-1",
+  "status": "FROZEN_FOR_EXECUTION",
+  "date_basis": "2026-08-20 session date; no wall-clock timestamp asserted",
+  "revision": {
+    "supersedes_sha256": "93797f5543b1d49bd6ae9e7cd311066df2d298bb60445dc6d811af53892eb184",
+    "reason": "Arithmetic correction only: expected_rtl_model_comparisons was 72, which is not 3 defect modes x 8 round counts x 2 attack arms. The correct coverage is 48.",
+    "detected_by": "the runner's own coverage assertion, which failed closed before any receipt was written",
+    "prior_receipt_status": "no receipt was generated under the superseded preregistration",
+    "scope_of_change": "No prediction, threshold, defect, arm, construction parameter, or verdict definition was altered."
+  },
+  "purpose": "Discharge step 4 of directives/e256-hardware-architecture.md §5 and constraint H8: build the attack lane as a netlist, prove it recovers planted defects, and report what it finds against reduced-round E256-H together with its cost in LUT6 and cycles.",
+  "framing": {
+    "primary_claim_direction": "This gate grades the SEARCH, not the cipher. A calibrated search that finds no distinguisher is not a security result and must never be reported as one.",
+    "reduced_round_findings_are_expected": "A reduced-round distinguisher is a normal and useful result for an AES-like SPN. Finding one bounds the round count from below; it is not a break of the construction.",
+    "planted_positive_requirement": "No negative result is reportable unless every planted defect is recovered by the same netlist on the same shared datapath."
+  },
+  "exploratory_probe_disclosure": {
+    "statement": "An exploratory Python probe was run before this preregistration was frozen. It confirmed that the integral arm separates the candidate from both planted defects, and that the truncated-differential arm separates the no-diffusion defect.",
+    "consequence": "Predictions are stated qualitatively and structurally. The exact round at which the candidate's integral property dies, the exact active-byte progression, all accumulator values, and every cost figure are reported as measured outputs and are deliberately NOT preregistered as numbers.",
+    "reason": "Freezing counts already observed in a probe would be post-hoc dressing rather than prediction."
+  },
+  "authorization": {
+    "architecture_record": "directives/e256-hardware-architecture.md",
+    "contract_start_marker": "<!-- E256-H-CONTRACT-START -->",
+    "contract_end_marker": "<!-- E256-H-CONTRACT-END -->",
+    "contract_hash_preimage": "all bytes strictly between the unique start and end marker strings, including their surrounding newlines but excluding both marker strings",
+    "contract_sha256": "b64472f73be9d0fc6318ff445c5f550cb0129309313228f416599c27d3957bb1",
+    "graded_constraints": [
+      "H0",
+      "H1",
+      "H8"
+    ],
+    "allowed": "preregistered attack-harness research on non-production RTL",
+    "blocked": [
+      "production RTL or bitstream",
+      "cipher-suite or profile promotion",
+      "fixture or protocol promotion",
+      "C/H/N claim movement",
+      "security-bit or production-readiness claim",
+      "round-count selection",
+      "any claim that absence of a distinguisher implies security"
+    ]
+  },
+  "predecessors": [
+    {
+      "id": "E256-062",
+      "receipt": "logs/e256-wide-state-gate.json",
+      "receipt_schema": "E256-WIDE-STATE-GATE-1",
+      "deterministic_payload_sha256": "21758ce220b9da469a18ea617fa7b2fd41e906add69a258f830b12843e3e495b",
+      "inherited": "Structural all-to-all byte dependency at round 3, which the truncated-differential arm should reproduce dynamically."
+    },
+    {
+      "id": "E256-063-step-1",
+      "receipt": "logs/e256-hardware-cost-gate.json",
+      "receipt_schema": "E256-HARDWARE-COST-GATE-1",
+      "deterministic_payload_sha256": "a10e001ad2c2b3de55fcc80197c059f166d5e55599c670e20b01de8f6b7d323d",
+      "inherited": "Offset keying is the measured-cheaper scheme, so the attack lane targets the H3 offset rotor."
+    },
+    {
+      "id": "E256-063-steps-2-3",
+      "receipt": "logs/e256-hardware-candidate-gate.json",
+      "receipt_schema": "E256-HARDWARE-CANDIDATE-GATE-1",
+      "deterministic_payload_sha256": "98af83ec27093787552475fce588f84a902634afcc969bed26462032dddec3cc",
+      "inherited": "H3 spectrum certified over the complete offset space, and the certified wiring set containing (0,1,3,4)."
+    }
+  ],
+  "questions": [
+    {
+      "id": "HQ9",
+      "text": "Does the hardware attack lane recover every planted defect through the candidate's own datapath?"
+    },
+    {
+      "id": "HQ10",
+      "text": "Does the synthesizable attack core compute exactly the same function as the independent software model?"
+    },
+    {
+      "id": "HQ11",
+      "text": "How far does an integral distinguisher reach against reduced-round E256-H, and where does it stop?"
+    },
+    {
+      "id": "HQ12",
+      "text": "What does the attack lane cost in LUT6, flip-flops, and cycles?"
+    }
+  ],
+  "toolchain_contract": {
+    "python": "3.9.6",
+    "yosys_version_prefix": "Yosys 0.68+post",
+    "yosys_git_sha1": "c12172fbae8af5e20f6fb52e3d4e92d56ed587b6",
+    "iverilog_version_prefix": "Icarus Verilog version 13.0",
+    "version_binding": "Synthesis and simulation results are tool-dependent, so the recorded version strings enter the deterministic payload.",
+    "advisory_only": [
+      "platform",
+      "elapsed_seconds",
+      "git_head",
+      "git_dirty"
+    ]
+  },
+  "construction_under_attack": {
+    "identity": "E256-H/attack-target/v1",
+    "state_bytes": 32,
+    "geometry": "4 rows by 8 columns, byte index 4*column+row",
+    "rotor": "H3 offset rotor R(x) = SBOX(x XOR p_in) XOR p_out, one per lane per round",
+    "aes_sbox_sha256": "c2d8e5eed6cbebd8625fc18f81486a7733c04f9b0129ffbe974c68b90308b4f2",
+    "row_offsets": [0, 1, 3, 4],
+    "row_offsets_provenance": "member of the certified wiring set from logs/e256-hardware-candidate-gate.json",
+    "mix_columns_matrix_hex_rows": [
+      ["02", "03", "01", "01"],
+      ["01", "02", "03", "01"],
+      ["01", "01", "02", "03"],
+      ["03", "01", "01", "02"]
+    ],
+    "field_polynomial": "0x11b",
+    "round_order": [
+      "xor_mask_0_before_round_1",
+      "rotor_layer_32_lanes",
+      "row_shift",
+      "mix_columns",
+      "xor_round_mask"
+    ],
+    "max_rounds_tested": 8,
+    "material": {
+      "derivation": "SHAKE-256 squeeze over ASCII 'E256-H/attack/material/v1'",
+      "total_bytes": 1184,
+      "layout": "768 offset bytes as (p_in, p_out) pairs in round-major then lane-major order for 12 rounds by 32 lanes, followed by 416 mask bytes in mask-index-major order for masks 0 through 12",
+      "note_on_h5_block_size": "The H3 scheme needs two offset bytes per lane per round, so its material block is 1184 bytes rather than the 800 bytes recorded for the E256-062 selection scheme. The XOF squeeze-block count is recomputed here rather than inherited.",
+      "rounds_wired_into_rtl": 8
+    }
+  },
+  "attack_arms": [
+    {
+      "id": "integral",
+      "module": "e256h_atk_integral",
+      "method": "Feed 256 plaintexts that are zero except for an active lane sweeping 0..255, run the round datapath, and XOR-accumulate the ciphertexts. Zero accumulator bytes indicate a surviving balance property.",
+      "active_lane": 0,
+      "plaintexts_per_run": 256,
+      "reported": "32-byte accumulator, zero-byte count, and measured cycle count per (defect, rounds) pair"
+    },
+    {
+      "id": "truncated_differential",
+      "module": "e256h_atk_single",
+      "method": "Evaluate the all-zero block and the block with a one-byte difference in lane 0, then count differing output bytes.",
+      "input_difference": 1,
+      "reported": "active output byte count and both ciphertexts per (defect, rounds) pair"
+    }
+  ],
+  "defect_modes": [
+    {
+      "code": 0,
+      "id": "candidate",
+      "description": "unmodified H3/H4 construction"
+    },
+    {
+      "code": 1,
+      "id": "identity_rotor",
+      "description": "planted positive: rotor layer replaced by identity, making the whole permutation affine",
+      "shared_path": ["round datapath", "integral accumulator", "single evaluator"],
+      "detector": "integral balance survives at every tested round count",
+      "required_result": "detected"
+    },
+    {
+      "code": 2,
+      "id": "no_diffusion",
+      "description": "planted positive: row shift and MixColumns replaced by identity, isolating the 32 lanes",
+      "shared_path": ["round datapath", "integral accumulator", "single evaluator"],
+      "detector": "truncated differential leaves exactly one active output byte at every tested round count",
+      "required_result": "detected"
+    }
+  ],
+  "control_execution_contract": {
+    "requirement": "Defect injection must use the same netlist and the same round datapath as the candidate, selected by the defect port. Separate reimplementations are forbidden.",
+    "exact_defect_codes": [0, 1, 2],
+    "equivalence_requirement": "Every value emitted by the RTL, for every defect mode and round count, must equal an independently computed software model value. A mismatch means the lane is attacking the wrong function and invalidates the harness.",
+    "expected_rtl_model_comparisons": 48,
+    "fail_closed": "Build an in-memory invalid diagnostic, exit nonzero, and refuse to write or accept the canonical receipt on any contract, equivalence, control, or coverage failure."
+  },
+  "cost_contract": {
+    "synthesis_script": "read_verilog <rtl>; hierarchy -check -top <module>; proc; memory; opt; techmap; opt; dffunmap; zinit -all; abc -lut 6; opt_clean; check -assert; stat; ltp -noff",
+    "flatten_prohibited": "`flatten` must not appear, for the same reason recorded in directives/e256-hardware-cost-preregistration.json.",
+    "modules_measured": ["e256h_atk_round", "e256h_atk_single", "e256h_atk_integral"],
+    "metrics": ["local $lut count", "total cells", "longest topological path", "measured cycles per integral run"],
+    "explicit_limitation": "The integral and single cores expose wide flat material ports because this is a research harness; that inflates their mapped cost relative to an engine that derives material on-chip. Only e256h_atk_round is a clean datapath cost."
+  },
+  "predictions": [
+    {
+      "id": "A1",
+      "role": "validity_control",
+      "statement": "the identity_rotor planted defect is recovered by the integral arm at every tested round count",
+      "rationale": "an affine permutation must remain balanced; if the search misses this it cannot detect anything"
+    },
+    {
+      "id": "A2",
+      "role": "validity_control",
+      "statement": "the no_diffusion planted defect is recovered by the truncated-differential arm at every tested round count",
+      "rationale": "lane isolation must be visible as a single active output byte"
+    },
+    {
+      "id": "A3",
+      "role": "validity_control",
+      "statement": "every RTL-emitted value matches the independent software model for all defect modes and round counts",
+      "rationale": "without bit-exact agreement the lane is not attacking the specified construction"
+    },
+    {
+      "id": "A4",
+      "role": "graded_finding",
+      "statement": "the candidate's integral balance survives at least 3 rounds and then dies, giving a bounded reduced-round distinguisher",
+      "rationale": "expected for an AES-like SPN; the measured reach is the useful output and bounds any future round count from below"
+    },
+    {
+      "id": "A5",
+      "role": "graded_finding",
+      "statement": "the candidate's truncated-differential active-byte count reaches all 32 bytes by round 3, dynamically reproducing the E256-062 structural dependency certificate",
+      "rationale": "cross-checks a static structural certificate against a dynamic hardware measurement"
+    },
+    {
+      "id": "A6",
+      "role": "graded_finding",
+      "statement": "attack cost is reported in LUT6, cells, logic depth, and measured cycles for every declared module",
+      "rationale": "H0 and H8 require attack cost to be measured rather than asserted"
+    }
+  ],
+  "hard_rejection_rules": [
+    "Refuse the receipt if the architecture contract hash, this preregistration hash, any predecessor payload digest, the AES S-box hash, or any pinned tool version drifts.",
+    "Refuse the receipt if any planted defect is not recovered by its declared arm.",
+    "Refuse the receipt if any RTL value disagrees with the independent software model.",
+    "Refuse the receipt if the executed defect-mode set or attack-arm set does not equal the frozen set.",
+    "Refuse the receipt if any validity_control prediction (A1, A2, A3) fails.",
+    "Refuse the receipt if the synthesis script contains a flatten pass.",
+    "Never report absence of a distinguisher as evidence of security, and do not select a round count."
+  ],
+  "interpretation": {
+    "internal_invalid_status": "INVALID_ATTACK_HARNESS; never emitted or accepted as the canonical receipt",
+    "valid_emitted_verdicts": [
+      "HARDWARE_ATTACK_LANE_CALIBRATED_REDUCED_ROUND_DISTINGUISHER_FOUND",
+      "HARDWARE_ATTACK_LANE_CALIBRATED_NO_DISTINGUISHER_FOUND"
+    ],
+    "decision_table": [
+      {
+        "condition": "contract, coverage, equivalence, control, or validity-control failure",
+        "action": "exit nonzero and refuse canonical receipt write/check"
+      },
+      {
+        "condition": "calibrated lane and the candidate integral survives at any tested round count",
+        "action": "emit HARDWARE_ATTACK_LANE_CALIBRATED_REDUCED_ROUND_DISTINGUISHER_FOUND"
+      },
+      {
+        "condition": "calibrated lane and the candidate integral survives at no tested round count",
+        "action": "emit HARDWARE_ATTACK_LANE_CALIBRATED_NO_DISTINGUISHER_FOUND and record explicitly that this is not a security result"
+      }
+    ],
+    "scope": "two bounded attack arms, one active lane, at most 8 rounds, one key-equivalent material set",
+    "next": "Extend the lane to differential trail search, impossible differentials, meet-in-the-middle, and key recovery before any round count is argued. A round count requires the full attack matrix, not two arms."
+  },
+  "non_claims": [
+    "A calibrated search that finds no distinguisher is NOT a security result; it grades the search.",
+    "The reduced-round distinguisher reported here is not a break of the full construction, and no full-round attack is claimed.",
+    "Two attack arms are not the attack matrix. Differential clustering, impossible differentials, algebraic and degree growth, meet-in-the-middle, rebound, slide, invariant subspace, related-key and related-tweak, multi-user, reset and reuse, and TMTO are all untested.",
+    "Only one active lane, one input difference, and one material set are exercised; no key-recovery attack is implemented.",
+    "LUT6 and cycle figures are yosys/ABC and simulation artifacts, not place-and-route, Fmax, energy, or silicon.",
+    "No round count is selected and no production keying, wiring, XOF, mode, or RTL is authorized.",
+    "No C/H/N row, E256 finding, suite, profile, fixture, or release gate closes here, and reviewed standard AEAD remains mandatory for real data."
+  ],
+  "receipt_contract": {
+    "schema": "E256-HARDWARE-ATTACK-GATE-1",
+    "status": "OPEN_PROGRESS",
+    "output": "logs/e256-hardware-attack-gate.json",
+    "runner": "Scripts/e256_hardware_attack_gate.py",
+    "rtl": "Hardware/RTL/Research/E256H/e256h_attack_core.v",
+    "testbench": "Hardware/Testbenches/Research/E256H/e256h_attack_core_tb.v",
+    "deterministic_payload_top_level_keys": [
+      "schema",
+      "status",
+      "inputs",
+      "pinned_parameters",
+      "coverage",
+      "equivalence",
+      "defects",
+      "results",
+      "cost",
+      "interpretation",
+      "limitations"
+    ],
+    "digest": "SHA-256 of canonical_json(deterministic_payload)",
+    "outer_receipt_keys": [
+      "deterministic_payload",
+      "deterministic_payload_sha256",
+      "environment_advisory_excluded_from_digest",
+      "no_wall_clock"
+    ],
+    "checker": "recompute frozen hashes, material, the software model, the simulation, all syntheses, predictions, payload, and digest; require the validity gate to pass; compare the complete deterministic payload and digest byte-for-byte",
+    "write": "sorted indented UTF-8 JSON with final newline and atomic replacement"
+  }
+}
