@@ -1,0 +1,61 @@
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030680_wenselaers_hapax_menus.json (28 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 28 of 28
+min crib length: 16
+running 28 menus, highest deduction power first:
+  [1] STUETZPUNKTLUEBECKVVVCHEFVIERXUUUFLOTTXX@18 edges=40 letters=21 loops=20 comp=1 central=V
+  [2] STUETZPUNKTLUEBECKVVVCHEFVIERXUUUFLOTTXX@4 edges=40 letters=22 loops=19 comp=1 central=E
+  [3] STUETZPUNKTLUEBECKVVVCHEFVIERXUUUFLOTTXX@30 edges=40 letters=22 loops=19 comp=1 central=V
+  [4] STUETZPUNKTLUEBECKVVVCHEFVIERXUUUFLOTTXX@31 edges=40 letters=22 loops=19 comp=1 central=V
+  [5] ALLEINMARSCHNACHJNEUSTADTJANGETRETENX@0 edges=37 letters=23 loops=16 comp=2 central=E
+  [6] ALLEINMARSCHNACHJNEUSTADTJANGETRETENX@2 edges=37 letters=23 loops=15 comp=1 central=E
+  [7] ALLEINMARSCHNACHJNEUSTADTJANGETRETENX@6 edges=37 letters=23 loops=15 comp=1 central=E
+  [8] ALLEINMARSCHNACHJNEUSTADTJANGETRETENX@8 edges=37 letters=23 loops=15 comp=1 central=E
+  [9] ALLEINMARSCHNACHJNEUSTADTJANGETRETENX@17 edges=37 letters=24 loops=15 comp=2 central=R
+  [10] ALLEINMARSCHNACHJNEUSTADTJANGETRETENX@26 edges=37 letters=23 loops=15 comp=1 central=R
+  [11] ALLEINMARSCHNACHJNEUSTADTJANGETRETENX@12 edges=37 letters=24 loops=14 comp=1 central=E
+  [12] ALLEINMARSCHNACHJNEUSTADTJANGETRETENX@21 edges=37 letters=24 loops=14 comp=1 central=R
+  … 16 more
+shells/menu: 34944 (336 WO × 2 Greek × 2 UKW × 1 mid-ring × 26 right-ring) → 1.6e+10 settings
+kernel sieve: ≤10 plugs
+GPU pipeline depth: 4 shells in flight
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+right ring swept: every right-wheel turnover phase covered
+residual gap: middle ring pinned A, so keys whose middle wheel turns over inside a 40-letter span (~8% for 1 notch, ~15% for 2) are not covered — --bombe-middle-ring closes it
+ETA floor (~50M/s): 149.0 min
+
+quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → logs/quarantine_wenselaers_hapax.json
+  [1/28·1] STUETZPUNKTLUEBECKVVVCHEFVIERXUUUFLOTTXX@18 edges=40 letters=21 loops=20 comp=1 central=V dead at the board                       411s  38.9M/s ETA 184.8 min
+  [2/28·2] STUETZPUNKTLUEBECKVVVCHEFVIERXUUUFLOTTXX@4 edges=40 letters=22 loops=19 comp=1 central=E dead at the board                       883s  36.2M/s ETA 191.3 min
+  [3/28·3] STUETZPUNKTLUEBECKVVVCHEFVIERXUUUFLOTTXX@30 edges=40 letters=22 loops=19 comp=1 central=V dead at the board                      1307s  36.6M/s ETA 181.6 min
+  [4/28·4] STUETZPUNKTLUEBECKVVVCHEFVIERXUUUFLOTTXX@31 edges=40 letters=22 loops=19 comp=1 central=V dead at the board                      1779s  35.9M/s ETA 177.9 min
+  [5/28·5] ALLEINMARSCHNACHJNEUSTADTJANGETRETENX@0 edges=37 letters=23 loops=16 comp=2 central=E dead at the board                      2226s  35.9M/s ETA 170.7 min
+  [6/28·6] ALLEINMARSCHNACHJNEUSTADTJANGETRETENX@2 edges=37 letters=23 loops=15 comp=1 central=E dead at the board                      2632s  36.4M/s ETA 160.8 min
+  [7/28·7] ALLEINMARSCHNACHJNEUSTADTJANGETRETENX@6 edges=37 letters=23 loops=15 comp=1 central=E dead at the board                      3132s  35.7M/s ETA 156.6 min
+  [8/28·8] ALLEINMARSCHNACHJNEUSTADTJANGETRETENX@8 edges=37 letters=23 loops=15 comp=1 central=E dead at the board                      3599s  35.5M/s ETA 150.0 min
+  [9/28·9] ALLEINMARSCHNACHJNEUSTADTJANGETRETENX@17 edges=37 letters=24 loops=15 comp=2 central=R dead at the board                      4055s  35.4M/s ETA 142.7 min
+  [10/28·10] ALLEINMARSCHNACHJNEUSTADTJANGETRETENX@26 edges=37 letters=23 loops=15 comp=1 central=R dead at the board                      4495s  35.5M/s ETA 134.8 min
+  [11/28·11] ALLEINMARSCHNACHJNEUSTADTJANGETRETENX@12 edges=37 letters=24 loops=14 comp=1 central=E dead at the board                      4976s  35.3M/s ETA 128.2 min
+  [12/28·12] ALLEINMARSCHNACHJNEUSTADTJANGETRETENX@21 edges=37 letters=24 loops=14 comp=1 central=R dead at the board                      5372s  35.7M/s ETA 119.4 min
+  [13/28·13] ALLEINMARSCHNACHJNEUSTADTJANGETRETENX@23 edges=37 letters=24 loops=14 comp=1 central=R dead at the board                      5751s  36.1M/s ETA 110.6 min
+  [14/28·14] SOFORTNEUSTADTINMARSCHSETZENX@2 edges=29 letters=21 loops=9 comp=1 central=S dead at the board                      6138s  36.4M/s ETA 102.3 min
+  [15/28·15] SOFORTNEUSTADTINMARSCHSETZENX@6 edges=29 letters=22 loops=9 comp=2 central=S dead at the board                      6450s  37.1M/s ETA  93.2 min
+  [16/28·16] SOFORTNEUSTADTINMARSCHSETZENX@11 edges=29 letters=21 loops=9 comp=1 central=R dead at the board                      6824s  37.4M/s ETA  85.3 min
+  [17/28·17] SOFORTNEUSTADTINMARSCHSETZENX@18 edges=29 letters=23 loops=9 comp=3 central=R dead at the board                      7214s  37.6M/s ETA  77.8 min
+  [18/28·18] SOFORTNEUSTADTINMARSCHSETZENX@7 edges=29 letters=22 loops=8 comp=1 central=S dead at the board                      7609s  37.8M/s ETA  70.5 min
+  [19/28·19] SOFORTNEUSTADTINMARSCHSETZENX@13 edges=29 letters=22 loops=8 comp=1 central=R dead at the board                      8014s  37.9M/s ETA  63.3 min
+  [20/28·20] SOFORTNEUSTADTINMARSCHSETZENX@16 edges=29 letters=22 loops=8 comp=1 central=R dead at the board                      8469s  37.7M/s ETA  56.5 min
+  [21/28·21] SOFORTNEUSTADTINMARSCHSETZENX@17 edges=29 letters=22 loops=8 comp=1 central=R dead at the board                      8864s  37.8M/s ETA  49.2 min
+  [22/28·22] SOFORTNEUSTADTINMARSCHSETZENX@21 edges=29 letters=23 loops=8 comp=2 central=R dead at the board                      9216s  38.1M/s ETA  41.9 min
+  [23/28·23] SOFORTNEUSTADTINMARSCHSETZENX@23 edges=29 letters=23 loops=8 comp=2 central=R dead at the board                      9595s  38.3M/s ETA  34.8 min
+  [24/28·24] SOFORTNEUSTADTINMARSCHSETZENX@28 edges=29 letters=24 loops=7 comp=2 central=R dead at the board                      9943s  38.5M/s ETA  27.6 min
+  [25/28·25] SOFORTNEUSTADTINMARSCHSETZENX@33 edges=29 letters=24 loops=7 comp=2 central=T dead at the board                     10353s  38.6M/s ETA  20.7 min
+  [26/28·26] SOFORTNEUSTADTINMARSCHSETZENX@40 edges=29 letters=24 loops=7 comp=2 central=S dead at the board                     10845s  38.3M/s ETA  13.9 min
+  [27/28·27] SOFORTNEUSTADTINMARSCHSETZENX@41 edges=29 letters=23 loops=7 comp=1 central=S dead at the board                     11305s  38.1M/s ETA   7.0 min
+  [28/28·28] SOFORTNEUSTADTINMARSCHSETZENX@39 edges=29 letters=25 loops=5 comp=1 central=S dead at the board                     11759s  38.0M/s ETA   0.0 min
+
+total raw stops: 0 over 447119941632 settings (38.0M/s mean)
+survived the 10-plug sieve: 0
+no setting survived — every runnable menu contradicted everywhere it was tried
+quarantine: 0 soft-band near-misses (solo pass complete)

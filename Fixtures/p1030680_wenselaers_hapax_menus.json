@@ -1,0 +1,57 @@
+{
+  "target": "P1030680",
+  "ciphertext": "JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF",
+  "note": "Hapax leads after Selm Merel Wenselaers (Historian / Curator, Amsterdam / Antwerp). All three are verbatim-attested in the U-534 corpus but were excluded from p1030680_menus.json by crib_mine.py --emit-min-messages 2 (each carried by exactly 1 message), so none was ever tested. SOFORTNEUSTADTINMARSCHSETZENX <- P1030669 (second net C/beta/568/AAEL). ALLEINMARSCHNACHJNEUSTADTJANGETRETENX <- P1030693 (Potsdam B/C/438/AACU). STUETZPUNKTLUEBECKVVVCHEFVIERXUUUFLOTTXX <- P1030662 (second net); its @4 placement shares 22 of 40 edges with already-ring-swept VVVCHEFVIERXUUUFLOTTXXMITUUU@22 (originalIndex 296). None is M-Thetis: all are imported register per Phase 13.",
+  "cribs": [
+    {
+      "text": "STUETZPUNKTLUEBECKVVVCHEFVIERXUUUFLOTTXX",
+      "messages": 1,
+      "offsets": [
+        18,
+        4,
+        30,
+        31
+      ],
+      "anchored": false
+    },
+    {
+      "text": "ALLEINMARSCHNACHJNEUSTADTJANGETRETENX",
+      "messages": 1,
+      "offsets": [
+        0,
+        2,
+        6,
+        8,
+        12,
+        17,
+        21,
+        23,
+        26
+      ],
+      "anchored": true
+    },
+    {
+      "text": "SOFORTNEUSTADTINMARSCHSETZENX",
+      "messages": 1,
+      "offsets": [
+        2,
+        6,
+        7,
+        11,
+        13,
+        16,
+        17,
+        18,
+        21,
+        23,
+        28,
+        33,
+        39,
+        40,
+        41
+      ],
+      "anchored": false
+    }
+  ],
+  "credit": "Leads identified and supplied by Selm Merel Wenselaers, Historian / Curator, Amsterdam / Antwerp (correspondence 2026-09-22). Verification, topology grading and all coverage claims are HELUT's."
+}
