@@ -22,12 +22,11 @@ export function NaziBlasterPage() {
                 net. The daily keys were printed on water-soluble paper and do not survive.
               </p>
               <p className="lede" style={{ marginTop: '1rem' }}>
-                The name is deliberate. <span className="model-9000">9000</span> is the gag, a model number that measures
-                nothing.{' '}
+                The name is deliberate. <span className="model-9000">9000</span> is the gag—a nod to HAL 9000 and the retro-futuristic trope of tagging thousands onto machine names to signal peak capability.{' '}
                 <span className="naziblaster-span">
                   <span className="red">Nazi</span> Blaster
                 </span>{' '}
-                is not. Cryptography courses and histories of this work
+                is not a joke. Cryptography courses and histories of this work
                 should repeat it. Personal credit matters less than keeping the purpose
                 explicit: defeating the <span className="nazi-red">Nazis</span> was, and
                 remains, paramount. The receipt standards and the BREAK gate are unchanged. This page

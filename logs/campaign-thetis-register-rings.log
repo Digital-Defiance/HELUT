@@ -144,3 +144,5 @@ quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → 
   [23/73·4] EACHSEDMEACHSEDM@0 edges=16 letters=14 loops=4 comp=2 span=16 central=E      29 stops → 12 physical, best IC 0.047 tail -5.043    1040s  61.4M/s ETA 216.7 min
     shell B/beta/I-VIII-II/AAAT pos WEFK plugs 10  → logs/welchman-physical.jsonl
   [24/73·5] VERFAHRENKENNGRUPPE@4 edges=19 letters=17 loops=3 comp=1 span=23 central=E dead at the board                      1346s  59.3M/s ETA 219.9 min
+  [25/73·6] GRUPPENZAHLXXXXXX@4 edges=17 letters=16 loops=3 comp=2 span=21 central=X       2 stops → 0 valid 10-plug completions    1622s  59.1M/s ETA 216.3 min
+  [26/73·7] GRUPPENZAHLXXXXXX@3 edges=17 letters=16 loops=3 comp=2 span=20 central=X       1 stops → 0 valid 10-plug completions    1925s  58.1M/s ETA 215.4 min
