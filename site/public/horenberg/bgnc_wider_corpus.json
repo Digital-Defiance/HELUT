@@ -1,0 +1,409 @@
+{
+  "source": "https://www.enigma.hoerenberg.com",
+  "credit": "Breaking German Navy Ciphers project (Michael Hoerenberg and collaborators). Breaks and transcriptions are theirs; this fixture is a research-input copy. Any publication must credit BGNC.",
+  "note": "Wider BGNC scrape beyond the U-534 pages, collected because Fixtures/u534_corpus.json supplies only 4,644 letters of naval register and Scripts/lm_margin_probe.py is confounded by that sample size. Separate from u534_corpus.json, which is load-bearing for campaign controls.",
+  "categories": [
+    "Norrköping messages",
+    "The Spanish Enigma Message",
+    "M4 Project 2006",
+    "Reservehandverfahren",
+    "Breaking the M4"
+  ],
+  "messages": [
+    {
+      "id": "First U534 Ciphertext only break",
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=Breaking%20the%20M4&page=First%20U534%20Ciphertext%20only%20break",
+      "indicators": [
+        "BDSH",
+        "FBFX"
+      ],
+      "reflector": "B",
+      "greek": "C",
+      "wheels": "438",
+      "wheel_positions": "VYAA",
+      "rings": "AACU",
+      "plugs": "CH EJ NV OU TY LG SZ PK DI QB",
+      "date": "1.May 1945",
+      "ciphertext": "RFBYWKIKELDCHBSXUNFJFSNRRVFWASXYLQCQFADYJXNTBMVLRDCGULOWHTBGWUSSOQHGAYEDKMJDNGVZNZFOXFKMIBKQNXFDWFIVGCYMJVQCKYQFBHYKZSCJP",
+      "length": 121,
+      "plaintext": "VVVUUUVIRSOBENNULEINSXXMITUUUVIRSIBENNULZWOYVIRSIBENNULDREIYZWODREISECHSEINSYZWODREIDREIACHTEINSDREIOITNACHWZSTENPASSIRTI",
+      "machine": "M4",
+      "broken": true,
+      "category": "Breaking the M4"
+    },
+    {
+      "id": "P1030670 RHV",
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=Reservehandverfahren&page=P1030670%20RHV",
+      "indicators": [
+        "QQGK",
+        "ECLZ"
+      ],
+      "ciphertext": "JIVGECURUOKLWDSQSPLCLFXRMMMIWSGMJLHJFQTJSWNFOKLSCDJGRVZVHVGWVMDVZYLGEVLYLVRUPYVBXWNLP",
+      "length": 85,
+      "machine": "EnigmaI",
+      "broken": false,
+      "category": "Reservehandverfahren"
+    },
+    {
+      "id": "PAGE_23_COEW",
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=Norrk%C3%B6ping%20messages&page=PAGE_23_COEW",
+      "indicators": [
+        "COEW"
+      ],
+      "reflector": "B",
+      "wheels": "1 6 2",
+      "wheel_positions": "QXP",
+      "rings": "ATG",
+      "plugs": "AB EG JS LQ OT VY",
+      "ciphertext": "ODXODHQKXTREYPFLGSKHWOPDIJQCELMPFEEJTKTIASWQEHDVTOMJCOIHRWQFCKERTWNQMXGBDWWFMGVJNWPQTXXOWEOPIEYDPGDVQDNRDMJMP",
+      "length": 109,
+      "plaintext": "GRUPEVONBREMENWELESIEBENEINSMETERABEINSNULNULNULUHRUNBRAUCHBARACHTENABEINSVIERUHRAUFABSTIMUNGDREISECHSMETERGI",
+      "machine": "EnigmaI",
+      "broken": true,
+      "category": "Norrköping messages"
+    },
+    {
+      "id": "PAGE_24_LMWP",
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=Norrk%C3%B6ping%20messages&page=PAGE_24_LMWP",
+      "indicators": [
+        "LMWP"
+      ],
+      "reflector": "B",
+      "wheels": "1 6 2",
+      "wheel_positions": "MDR",
+      "rings": "ATG",
+      "plugs": "AB EG JS LQ OT VY",
+      "ciphertext": "YPPQKAJERAEYNFECUVDCXMUVEWUJWVVANRZNNPXTRJDQQGGVDMBMIPPOUHYZOSWDFUSQJUZTWYLWANUHWKLLP",
+      "length": 85,
+      "plaintext": "GRUPPEVONVONSTADTHAGENFLUGSICHERUNGSSCHIFCARLMEYERHIEREINGELAUFENYAUSSERDEMMMMEINSCJI",
+      "machine": "EnigmaI",
+      "broken": true,
+      "category": "Norrköping messages"
+    },
+    {
+      "id": "PAGE_40_AFDFX",
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=Norrk%C3%B6ping%20messages&page=PAGE_40_AFDFX",
+      "indicators": [
+        "AFDFX"
+      ],
+      "reflector": "B",
+      "wheels": "5 1 4",
+      "wheel_positions": "KEU",
+      "plugs": "BF DV EJ GM IY KP LZ NX OQ TW",
+      "ciphertext": "DSBDBDCOSGCYAMDSITWWZUSDLJBXAPVJMXLDKPUUIAPYYUSNRJOHKGOWRCDKBNYZELVKWYMWOPNTVOSNFNOCFNUDSQPUP",
+      "length": 93,
+      "plaintext": "WAETIGKEITSBERIQTVOMXSEQSXDREIXVIERNULLXSEITEXZWOXLFLXKDOXEINSXXPREIXSTRIQXNULLXLFLXKDOXEINSP",
+      "machine": "EnigmaI",
+      "broken": true,
+      "category": "Norrköping messages"
+    },
+    {
+      "id": "PAGE_40_AYDJM",
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=Norrk%C3%B6ping%20messages&page=PAGE_40_AYDJM",
+      "indicators": [
+        "AYDJM"
+      ],
+      "reflector": "B",
+      "wheels": "5 1 4",
+      "wheel_positions": "ERG",
+      "plugs": "BF DV EJ GM IY KP LZ NX OQ TW",
+      "ciphertext": "YMZAXOZBCWGZFIGIMWXQWGAKOHLICKJOHFJFVNAVAUHAWSXEILABDJUBEUAQSAMWJWGUPOJZNLBCDDAVBXBQOPTYRNZTPUPABQBOJDJOXRJKMGLYJLQPBAQXAIAVXOGQHKTTOPHZROKUMSSJLONINRGUBQFAJPPP",
+      "length": 160,
+      "plaintext": "TAETIGKEITSBERIQTVOMXSEQSXDREIXVIERNULLXSONDERANLAGEXZWOXSXITEXZWOXLGXKDOXROEMDREIXXNULLXSTRIQXNULLXSEITEXDREIXLGXKDOXROEMXDREIXNULLXSTRIQXZWOXLGXKDOXROEMXDREIBP",
+      "machine": "EnigmaI",
+      "broken": true,
+      "category": "Norrköping messages"
+    },
+    {
+      "id": "PAGE_40_PYCMW",
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=Norrk%C3%B6ping%20messages&page=PAGE_40_PYCMW",
+      "indicators": [
+        "PYCMW"
+      ],
+      "reflector": "B",
+      "wheels": "135",
+      "wheel_positions": "VLG",
+      "rings": "XLG",
+      "plugs": "AK BZ CE DX GL JQ MU NV OT SY",
+      "ciphertext": "PYZXKLLQFHELFTJAWURWBYZOWLFHFMNFYMWEGDECHKKGXHLTRQOEKIBFKLHHQWXLIQVMDVYTSZHXUSJXDACDTBBWUJIFEGIYZZJXIYHLVWNRVEVQKMGWNMHP",
+      "length": 120,
+      "plaintext": "TAETIGSKEITSBERIQTFUERDENSEQSXDREIXVIERNULLXSONDERANLAGEZWOXSEITENZAHLZWOXLGTKDOXROEMZWOXNEUNMOMMAFUENFXLGXKDOXROEMZWOXP",
+      "machine": "EnigmaI",
+      "broken": true,
+      "category": "Norrköping messages"
+    },
+    {
+      "id": "PAGE_40_ZBAQW",
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=Norrk%C3%B6ping%20messages&page=PAGE_40_ZBAQW",
+      "indicators": [
+        "ZBAQW"
+      ],
+      "reflector": "B",
+      "wheels": "135",
+      "wheel_positions": "VJF",
+      "rings": "XLG",
+      "plugs": "AK BZ CE DX GL JQ MU NV OT SY",
+      "ciphertext": "OWTSBSTOLYMVABUFAAUWECRQYISIGZDZMCHECVVZGIZOYUJIDTFZUUOURDWVIMYOLXIOGNMKCYQQEYYTWITHHBYXAWAYXRTBUOOXXPNETERPZBIP",
+      "length": 112,
+      "plaintext": "TAETIGKEITSBIRICHTVOMXSEQSXOREIXVIERNULLXAQTXAUFGENOMMENXNULLXMEFOERDERTXLEITSTELLEWARXKRAKAUXLXGXKDOXROEMXAQTXP",
+      "machine": "EnigmaI",
+      "broken": true,
+      "category": "Norrköping messages"
+    },
+    {
+      "id": "PAGE_47_DOEP",
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=Norrk%C3%B6ping%20messages&page=PAGE_47_DOEP",
+      "indicators": [
+        "DOEP"
+      ],
+      "reflector": "B",
+      "wheels": "7 4 6",
+      "plugs": "BM DX EW GP JO KV NZ RT",
+      "ciphertext": "YEWZANTGDXWUVDSSYQELAMUOAMBVFZAJWFATABRMMBWXWTLFIOYBTEXXFFAOHADDXWWGBEROYDWLEUTPP",
+      "length": 81,
+      "plaintext": "KOFFERGRAMOPHONKEINSINNKTZCMYQWPJDZXQLXGJXKWXLQDHYKCMIRBYKFHCMQWHVXLRHGDXMQWCHYKI",
+      "machine": "EnigmaI",
+      "broken": false,
+      "category": "Norrköping messages"
+    },
+    {
+      "id": "PAGE_47_KRNV",
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=Norrk%C3%B6ping%20messages&page=PAGE_47_KRNV",
+      "indicators": [
+        "KRNV"
+      ],
+      "reflector": "B",
+      "wheels": "7 4 6",
+      "plugs": "BM DX EW GP JO KV NZ RT",
+      "ciphertext": "IWNOXNFTRJNPMRAWPZNKQECKKTWIOBEXLBHFLHHJLMYCZGCYSLCUDIJDLGQQPRYURGKGTFKRQEPIOVBIP",
+      "length": 81,
+      "plaintext": "SEENACHRICHTLEUCHTSCHIFFEMILSXBQPLANNORDFUENFNUOMERDREIEINSLIEGTWIEDERAUFSTATIONI",
+      "machine": "EnigmaI",
+      "broken": false,
+      "category": "Norrköping messages"
+    },
+    {
+      "id": "PAGE_47_PHZH",
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=Norrk%C3%B6ping%20messages&page=PAGE_47_PHZH",
+      "indicators": [
+        "PHZH"
+      ],
+      "reflector": "B",
+      "wheels": "7 4 6",
+      "plugs": "BM DX EW GP JO KV NZ RT",
+      "ciphertext": "BJUWJBFTIMXLRINPCOPSNAUDMGURAJCHQWQCSCIZUVANPXMHRUREBYDLNAVOVDVFTNQUZOAUZBXMPXHQAZEUWDMNBXAWQEHKQZBABWQZCYMIWRAELZENYFTPPCXJP",
+      "length": 125,
+      "plaintext": "MUELEIMERKATOFFELKELLEROHNESEDEUTUNGJDKFLNCZDKFLBMNKHZCNLDMHKZCMLFDKDFHZCMKFJDLNMGKHJGLMKDJFLNMHRDJFHGJFKDJFKDJFKDJFMNLDKFMNI",
+      "machine": "EnigmaI",
+      "broken": false,
+      "category": "Norrköping messages"
+    },
+    {
+      "id": "PAGE_47_RTQSX",
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=Norrk%C3%B6ping%20messages&page=PAGE_47_RTQSX",
+      "indicators": [
+        "RTQSX"
+      ],
+      "reflector": "B",
+      "wheels": "415",
+      "wheel_positions": "WYU",
+      "rings": "PVG",
+      "plugs": "AG BS CW EN FZ HJ IO KT LX PR",
+      "ciphertext": "WNLWSYZUKNCQSHOQCLAZLRJXDRIFLDWNMOQIBQZGJGIHRPTIWPHYAUCEIJMMYXPTONGQOXDAUKYIVNQAOYVFCXKJNOJQVPUMUZHFRMGGJIUILKUIESJKOOJNIYNBDVBOXMUAKREMODLBXHYGTXLUNFNHWYWQGVOP",
+      "length": 160,
+      "plaintext": "KOMMAHIERZUWIRDDERVERKGHRDERGEGENFUNKSTELVEBEOBAQTETUNDBXIABGABEEIFESFUERDIEABSTMMENDEFUMKSTELLENIQTWIQTVGENFUKKSPRUQESUSWPUNKTDEREMPFAENGERAUFSQWNBUNGSLUECKEXP",
+      "machine": "EnigmaI",
+      "broken": true,
+      "category": "Norrköping messages"
+    },
+    {
+      "id": "PAGE_47_WRCE",
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=Norrk%C3%B6ping%20messages&page=PAGE_47_WRCE",
+      "indicators": [
+        "WRCE"
+      ],
+      "reflector": "B",
+      "wheels": "7 4 6",
+      "plugs": "AC DM EK FL HO IQ PT RX SU WY",
+      "ciphertext": "RGRQHFXBYUMXKOEEKEBJZIUMAXKBZWJFDYOMDXAMEBWNUXPQCOXZPSGHQNBRBQHYSPVJVIRFVOJIRIVOZQZNPVRGDRQPDAXOXLFCUZZZLEYAKVSHESNAADESNDAIIIVHNJUGNTBCGQIMWZJPISYTGNTTPVGWWUQVWVRVILEODSKBTYZALUAFAZEELDHMMYHCAGFBP",
+      "length": 197,
+      "plaintext": "PFLASTERSTEINSAUERKIRSCHEOHNEBEDEUTSNGKGJDHSKDLBMCNBMBKGLSGPTLNLLHHWQBYDSVHGTMRROERUUSAZEQHNLBTPVPPIMXGWOYQKLIFXNZVMHQMNLNTAGQNVXUKBSIKFRUBJRENUDJZWUQFVZSDCXPCSGHJGTVFJHXUFXMMCKTSHDPRGFRCSRMTIXYXHI",
+      "machine": "EnigmaI",
+      "broken": false,
+      "category": "Norrköping messages"
+    },
+    {
+      "id": "PAGE_47_YEXP",
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=Norrk%C3%B6ping%20messages&page=PAGE_47_YEXP",
+      "indicators": [
+        "YEXP"
+      ],
+      "reflector": "B",
+      "wheels": "7 4 6",
+      "plugs": "BM DX EW GP JO KV NZ RT",
+      "ciphertext": "RYYBLWIEIZBCYBJLPTIVCAOEIQIGVTTADXYMJDAACREPPRQRWEOZKLCNIMINQMDONPDLMTYXSLONP",
+      "length": 77,
+      "plaintext": "SCHREIBMASCVINEVERLAENGDUNGSSCHNURTAUWETTERKEINENSINNKWRQFSXPBYJFBRZFSKBMNVFI",
+      "machine": "EnigmaI",
+      "broken": false,
+      "category": "Norrköping messages"
+    },
+    {
+      "id": "PAGE_47_ZWBA",
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=Norrk%C3%B6ping%20messages&page=PAGE_47_ZWBA",
+      "indicators": [
+        "ZWBA"
+      ],
+      "reflector": "B",
+      "wheels": "7 4 6",
+      "plugs": "AC DM EK FL HO IQ PT RX SU WY",
+      "ciphertext": "ZWBAMHITALQBQALFWHGVVBPWKFGHQNSHYGTHLOODZWBAMHIT",
+      "length": 48,
+      "machine": "EnigmaI",
+      "broken": false,
+      "category": "Norrköping messages"
+    },
+    {
+      "id": "PAGE_49_DDVS",
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=Norrk%C3%B6ping%20messages&page=PAGE_49_DDVS",
+      "indicators": [
+        "DDVS"
+      ],
+      "reflector": "B",
+      "wheels": "362",
+      "wheel_positions": "NEY",
+      "rings": "AKT",
+      "plugs": "AQ BT CS EH FO GI KY LZ MU NV PX",
+      "ciphertext": "XCOTNMYTRPIPOVARVQIXMQLPVXHYYJBOGNPYNBXOFBGZP",
+      "length": 45,
+      "plaintext": "ALLEUUUJAEGERUNTERRHNDSCHUTZGEIENVVVBSNNNWMHI",
+      "machine": "EnigmaI",
+      "broken": true,
+      "category": "Norrköping messages"
+    },
+    {
+      "id": "PAGE_49_KRLR",
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=Norrk%C3%B6ping%20messages&page=PAGE_49_KRLR",
+      "indicators": [
+        "KRLR"
+      ],
+      "reflector": "B",
+      "wheels": "7 4 6",
+      "plugs": "BM DX EW GP JO KV NZ RT",
+      "ciphertext": "PBQOMEWLLMJFBXKPZNBHRGLUGVHJBXYPSEACOXOTBQRWVTPVVYHLLDOCQQKIWVAMJNFADSUNAVMJGJIBMUGBWWRKJBZNHVELOGZHTISLTUWSP",
+      "length": 109,
+      "plaintext": "VERWALTUNGSAMTREICHSGERICHTARBEITSLAGERNICHTAUFSCHLAGENVCNSTDMQWZVGNVMBCPDGKPFQZWTRLDMFNGHSRDTFZGLDKCVLMNHGFI",
+      "machine": "EnigmaI",
+      "broken": false,
+      "category": "Norrköping messages"
+    },
+    {
+      "id": "PAGE_49_TCQB",
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=Norrk%C3%B6ping%20messages&page=PAGE_49_TCQB",
+      "indicators": [
+        "TCQB"
+      ],
+      "reflector": "B",
+      "wheels": "362",
+      "wheel_positions": "OYW",
+      "rings": "AKT",
+      "plugs": "AQ BT CS EH FO GI KY LZ MU NV PX",
+      "ciphertext": "SYNFWSYWNZZKGQSCHGNVYHOAMZAEQAUKULPHTJVYFUBZIBVKMHWLBZHGTSAQOZYQFUZWTEPPSGUQZFZGORIAWAJHGJIQUIWDFTQPJOWFSNXOAVUHIHOXLMFBYRDVKZGDBLKUXWEMBWWRPXUFDXEFYEYOTSQHSYIDHOKNQITLTQTQSTEJXYVWHCTRTCCCZMPSGPMPQQOVAOWHTOJQGQQCOTTZQHMDOJKGOJGHMDPQP",
+      "length": 233,
+      "plaintext": "LEUCHTSCHIFFOMILXXPOSINIONXXFUENFDREIGRADVIERNEUNMINDREINULSEKNORDYACHTGRADSECHSMINOSFXLEUCHTSCHIFFDORAVERTRITBUNNUCHWESTNORDWESVXUNGEFAEHRERSTANDORTXXFUEDFDREIGRADFUENFZWOMINEINSZWOSEYNORPQSIEBENGRADFUENFVIERMINVIERSEKOSTVVVNORDFGSI",
+      "machine": "EnigmaI",
+      "broken": true,
+      "category": "Norrköping messages"
+    },
+    {
+      "id": "PAGE_69_OWLS Graf Spee",
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=Norrk%C3%B6ping%20messages&page=PAGE_69_OWLS%20Graf%20Spee",
+      "indicators": [
+        "OWLS"
+      ],
+      "reflector": "B",
+      "wheels": "165",
+      "wheel_positions": "EKD",
+      "rings": "AHX",
+      "plugs": "AO BU CR EW JT KS MP NY",
+      "ciphertext": "QQMWTQJWJTMNSXYLNSACMHXZZRXWLNQZZZDZVLVUTKXDXWSLSKNWEZNFCFRGLIUHXPVKINZAJVECMOTVPVNZIMRBUIEUBZGFMZYPRMMEWTFZFGVLQSYQGWNDMQDNRZOVYMGAVLFMRAFZRYRMICPEZSMKBMHJUTDUQSBABROQLEFPRBZFJQSRPMRYXWOXIJLDVIFVXJLMRQFGYHIMELRSDOTAIVVXMXMDPISBHLIMMBFMKJSWTJMCCPEGKPJAVBWKJUZQBDEWDJYBMTYMP",
+      "length": 273,
+      "plaintext": "GRAFSPEEVONSEEKRIEGSLTGXXJDEVONSHIREJJDEYONSHIRAJWESTLICHSCHOTTLANDXJYOLBERTJJCOLBERTJJAIGLEJJAIGLEJMIGTELMEERYJALGERIEJJALGERIEJJJULOSVERNEJJJULESDERNEJVONXASABLANCANACHGIBRALTARXENGLISCHJAFRICSTARJJAFRICSTARJMITZWOHECKGESCHUETZENNEUNXEINSLWOXTENERIFEAUSNACHBUENOSAIRESDFI",
+      "machine": "EnigmaI",
+      "broken": true,
+      "category": "Norrköping messages"
+    },
+    {
+      "id": "PAGE_81_IRLU",
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=Norrk%C3%B6ping%20messages&page=PAGE_81_IRLU",
+      "indicators": [
+        "IRLU"
+      ],
+      "reflector": "B",
+      "wheels": "7 6 5",
+      "plugs": "AV BF DR IM OS WY",
+      "ciphertext": "MSPOKQBHQLCMENJJXMYGPKKXWGXTWWXDNYZFQGEKDKSYPKLBBDPMSFUUWHYZLTVOWIOFHKOUZMLQFCFLVQGXOPWNEGWWQJLTFWAMENHBDBRBSYLMSNWYZOIEP",
+      "length": 121,
+      "plaintext": "VINRFINSRRRFLVONFDMMMOSTMITDUNKOAWERDONARBEITUQTXRBRECHENYHERANSCHLIESINNANMINEZRATUMSCIIFFEINSEINSQUSIEBENVIERNLUNACHTOI",
+      "machine": "EnigmaI",
+      "broken": false,
+      "category": "Norrköping messages"
+    },
+    {
+      "id": "RHV Part 3",
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=Reservehandverfahren&page=RHV%20Part%203",
+      "ciphertext": "MCBPJQTBFPDZMNRELPDUOZHIBUSBROLHKQFQRHPAHTCLKWCLYVDJYDBTKGTADHCQEMDECIAQQCKHVHGPWDISDIZCRDSQHCLAYNPDINKLZWYMKFPJHLZGMCBPJQTB",
+      "length": 124,
+      "machine": "EnigmaI",
+      "broken": false,
+      "category": "Reservehandverfahren"
+    },
+    {
+      "id": "RHV Part 4",
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=Reservehandverfahren&page=RHV%20Part%204",
+      "ciphertext": "MCBPJQTBFPDZMNRELPDUOZHIBUSBROLHKQFQRHPAHTCLKWCLYVDJYDBTKGTADHCQEMDECIAQQCKHVHGPWDISDIZCRDSQHCLAYNPDINKLZWYMKFPJHLZGMCBPJQTB",
+      "length": 124,
+      "machine": "EnigmaI",
+      "broken": false,
+      "category": "Reservehandverfahren"
+    },
+    {
+      "id": "Rasch Message",
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=M4%20Project%202006&page=Rasch%20Message",
+      "reflector": "B",
+      "wheels": "613",
+      "wheel_positions": "NAQL",
+      "rings": "ZZDG",
+      "plugs": "BQ CR DI EJ KW MT OS PX UZ GH",
+      "ciphertext": "HCEYZTCSOPUPPZDICQRDLWXXFACTTJMBRDVCJJMMZRPYIKHZAWGLYXWTMJPQUEFSZBOTVRLALZXWVXTSLFFFAUDQFBWRRYAPSBOWJMKLDUYUPFUQDOWVHAHCDWAUARSWTKOFVOYFPUFHVZFDGGPOOVGRMBPXXZCANKMONFHXPCKHJZBUMXJWXKAUODXZUCVCXPFTE",
+      "length": 197,
+      "plaintext": "BOOTKLARXBEIJSCHNOORBETWAZWOSIBENXNOVXSECHSNULCBMXPROVIANTBISZWONULXDEZXBENOETIGEGLMESERYNOCHVIEFKLHRXSTEHEMARQUBRUNOBRUNFZWOFUHFXLAGWWIEJKCHAEFERJXNNTWWWFUNFYEINSFUNFMBSTEIGENDYGUTESIWXDVVVJRASCHP",
+      "machine": "EnigmaI",
+      "broken": true,
+      "category": "M4 Project 2006"
+    },
+    {
+      "id": "The Spanish Enigma message",
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20Spanish%20Enigma%20Message&page=The%20Spanish%20Enigma%20message",
+      "reflector": "setta",
+      "wheels": "2 1 3",
+      "wheel_positions": "WYAO",
+      "rings": "AAAH",
+      "ciphertext": "OHACIPLYXTSIHJSBJCZXWYXPJJMUIWYFGVHTMALUTAEAVXHRXVQWDRVJKIMCYFRODNBXDISWSDIYXFJWVKHQHQMKZT",
+      "length": 90,
+      "plaintext": "RADIOSDEBENREGRESARAZZESPANAZZTANPRONTOLESSEAPOSIBLEXCONTESTOSURADIOKKQQTKKDEDIEZACTUALXXXI",
+      "machine": "EnigmaI",
+      "broken": true,
+      "category": "The Spanish Enigma Message"
+    },
+    {
+      "id": "Third Message",
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=M4%20Project%202006&page=Third%20Message",
+      "ciphertext": "READCLXPLWRUHCEYZTCSOPUPPZDIUQRDLWXXFACTTJMBHDVCJJMMZRPYIKHZAWGLYXWTMJPQUEFSZBCTVRLALZXWVXTSLFFFAUDQFBWRRYAPSBOWJMKLDUYUPFUQDOWVHAHCDWAUARSWTXCFVOYFPUFHVZFDGGPOOVGRMBPXXZCANKMONFHXPCKHJZBUMXJWXKAU",
+      "length": 196,
+      "machine": "EnigmaI",
+      "broken": false,
+      "category": "M4 Project 2006"
+    }
+  ]
+}

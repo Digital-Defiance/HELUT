@@ -402,9 +402,15 @@ section {
 }
 
 section.band {
-  background:
-    linear-gradient(120deg, rgba(31, 111, 106, 0.22), rgba(31, 111, 106, 0.08) 45%, rgba(196, 120, 58, 0.06)),
-    #d9e6e4;
+  /* Solid layer is separate. Edge drops a hex color that shares the
+     background shorthand with a gradient, and the band then matches the page. */
+  background-color: #d9e6e4;
+  background-image: linear-gradient(
+    120deg,
+    rgba(31, 111, 106, 0.22),
+    rgba(31, 111, 106, 0.08) 45%,
+    rgba(196, 120, 58, 0.06)
+  );
   border-block: 1px solid rgba(31, 111, 106, 0.28);
 }
 
@@ -412,8 +418,8 @@ section.band {
 section.band-ink {
   position: relative;
   overflow: hidden;
-  background:
-    linear-gradient(135deg, #092429 0%, #124044 48%, #175d58 100%);
+  background-color: #092429;
+  background-image: linear-gradient(135deg, #092429 0%, #124044 48%, #175d58 100%);
   color: #edf2f5;
   border-block: none;
 }

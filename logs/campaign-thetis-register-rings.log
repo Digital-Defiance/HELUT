@@ -136,3 +136,6 @@ residual gap: middle ring pinned A, so keys whose middle wheel turns over inside
 ETA floor (~50M/s): 287.4 min
 
 quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → logs/quarantine_candidates.json
+  [20/73·1] ANALLEXXANALLEXX@1 edges=16 letters=13 loops=4 comp=1 span=17 central=A       6 stops → 5 physical, best IC 0.049 tail -5.145     275s  58.1M/s ETA 242.7 min
+    shell B/beta/VII-II-III/AAAG pos ODGK plugs 9  → logs/welchman-physical.jsonl
+  [21/73·2] ANALLEXXANALLEXX@0 edges=16 letters=13 loops=4 comp=1 span=16 central=A dead at the board                       538s  59.3M/s ETA 233.2 min

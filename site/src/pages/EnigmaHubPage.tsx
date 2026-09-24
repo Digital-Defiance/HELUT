@@ -111,7 +111,7 @@ export function EnigmaHubPage() {
           </div>
         </section>
 
-        <section className="band">
+        <section className="band-ink">
           <div className="shell">
             <div className="section-head">
               <div className="kicker">Team</div>
@@ -134,7 +134,7 @@ export function EnigmaHubPage() {
               <li>
                 <span className="mono">ENGINE</span>
                 <span>
-                  <strong>Jessica Mulein</strong> — mechanical arm. She designed and operates{' '}
+                  <strong>Jessica Mulein</strong> (US / Seattle) — mechanical arm. She designed and operates{' '}
                   <NaziBlaster9000Span />: the Welchman board, Ostwald climb, and Mulein
                   geometry, and the HELUT stack that hosts them. The{' '}
                   <Link to={enigmaPaths.journal}>campaign journal</Link> is her ledger.
