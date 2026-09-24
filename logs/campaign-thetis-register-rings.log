@@ -146,3 +146,33 @@ quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → 
   [24/73·5] VERFAHRENKENNGRUPPE@4 edges=19 letters=17 loops=3 comp=1 span=23 central=E dead at the board                      1346s  59.3M/s ETA 219.9 min
   [25/73·6] GRUPPENZAHLXXXXXX@4 edges=17 letters=16 loops=3 comp=2 span=21 central=X       2 stops → 0 valid 10-plug completions    1622s  59.1M/s ETA 216.3 min
   [26/73·7] GRUPPENZAHLXXXXXX@3 edges=17 letters=16 loops=3 comp=2 span=20 central=X       1 stops → 0 valid 10-plug completions    1925s  58.1M/s ETA 215.4 min
+  [27/73·8] ANALLEFUNKSTELLEN@1 edges=17 letters=16 loops=3 comp=2 span=18 central=E dead at the board                      2222s  57.5M/s ETA 212.9 min
+  [28/73·9] ZEITGRUPPEXXXXXX@5 edges=16 letters=14 loops=3 comp=1 span=21 central=X       8 stops → 4 physical, best IC 0.041 tail -4.840    2515s  57.1M/s ETA 209.6 min
+    shell B/gamma/VII-III-IV/AAAT pos EPTP plugs 10  → logs/welchman-physical.jsonl
+  [29/73·10] ZEITGRUPPEXXXXXX@4 edges=16 letters=14 loops=3 comp=1 span=20 central=X       5 stops → 2 physical, best IC 0.045 tail -5.341    2805s  56.9M/s ETA 205.7 min
+    shell C/beta/VII-II-VIII/AAAI pos SLAN plugs 10  → logs/welchman-physical.jsonl
+  [30/73·11] EACHSEDMEACHSEDM@1 edges=16 letters=14 loops=3 comp=1 span=17 central=E       6 stops → 2 physical, best IC 0.041 tail -5.451    3086s  56.9M/s ETA 201.1 min
+    shell B/gamma/I-VIII-IV/AAAQ pos MHZV plugs 10  → logs/welchman-physical.jsonl
+  [31/73·12] OEDMOEDMOEDMOEDM@0 edges=16 letters=14 loops=3 comp=1 span=16 central=E      10 stops → 8 physical, best IC 0.050 tail -4.980    3467s  55.3M/s ETA 202.2 min
+    shell B/beta/IV-VI-VIII/AAAB pos GOWJ plugs 10  → logs/welchman-physical.jsonl
+  [32/73·13] LEHRSPRUCHXXXXXX@5 edges=16 letters=15 loops=3 comp=2 span=21 central=X     188 stops → 7 physical, best IC 0.038 tail -4.414    3700s  56.1M/s ETA 194.5 min
+    shell B/beta/VI-II-I/AAAM pos WWKB plugs 9  → logs/welchman-physical.jsonl
+  [33/73·14] SEDMOEDMACHSEDMO@4 edges=16 letters=15 loops=3 comp=2 span=20 central=E      11 stops → 2 physical, best IC 0.045 tail -4.663    4072s  54.9M/s ETA 193.9 min
+    shell C/gamma/IV-V-VII/AAAG pos EMKA plugs 10  → logs/welchman-physical.jsonl
+  [34/73·15] FUNKLEHRGANGXXXX@3 edges=16 letters=16 loops=3 comp=3 span=19 central=X  458878 stops → 10 physical, best IC 0.038 tail -4.803    4326s  55.4M/s ETA 187.5 min
+    shell B/beta/IV-II-VI/AAAM pos GCKL plugs 10  → logs/welchman-physical.jsonl
+  [35/73·16] FUNKLEHRGANGXXXX@2 edges=16 letters=16 loops=3 comp=3 span=18 central=X     159 stops → 5 physical, best IC 0.038 tail -4.389    4746s  53.8M/s ETA 187.9 min
+    shell B/gamma/IV-III-V/AAAZ pos GSQQ plugs 8  → logs/welchman-physical.jsonl
+  [36/73·17] ANFUNKLEHRGANGXX@0 edges=16 letters=16 loops=3 comp=3 span=16 central=A     168 stops → 4 physical, best IC 0.042 tail -4.508    5129s  52.9M/s ETA 186.1 min
+    shell C/beta/VIII-IV-VI/AAAA pos APRO plugs 10  → logs/welchman-physical.jsonl
+  [37/73·18] LEHRGANGFUNKSPRUCH@1 edges=18 letters=18 loops=2 comp=2 span=19 central=E  382787 stops → 0 valid 10-plug completions    5435s  52.9M/s ETA 181.2 min
+  [38/73·19] UEBUNGSSPRUCHXXXX@4 edges=17 letters=17 loops=2 comp=2 span=21 central=X       2 stops → 0 valid 10-plug completions    5935s  51.1M/s ETA 182.2 min
+  [39/73·20] UEBUNGSSPRUCHXXXX@3 edges=17 letters=17 loops=2 comp=2 span=20 central=S       7 stops → 0 scorable completions    6251s  51.1M/s ETA 177.1 min
+  [40/73·21] THETISFUNKSPRUCHX@0 edges=17 letters=17 loops=2 comp=2 span=17 central=S dead at the board                      6723s  49.9M/s ETA 176.1 min
+  [41/73·22] THETISFUNKSPRUCHX@1 edges=17 letters=18 loops=2 comp=3 span=18 central=S      14 stops → 0 scorable completions    7108s  49.4M/s ETA 172.3 min
+  [42/73·23] KACHOEDMKACHOEDM@4 edges=16 letters=15 loops=2 comp=1 span=20 central=E       7 stops → 1 physical, best IC 0.044 tail -4.563    7514s  48.9M/s ETA 168.8 min
+    shell C/beta/VII-III-II/AAAD pos DPXY plugs 10  → logs/welchman-physical.jsonl
+  [43/73·24] ACHSEDMOEDMACHSE@3 edges=16 letters=15 loops=2 comp=1 span=19 central=E      24 stops → 14 physical, best IC 0.039 tail -5.028    8117s  47.2M/s ETA 169.1 min
+    shell C/beta/VII-IV-V/AAAU pos ITJO plugs 9  → logs/welchman-physical.jsonl
+  [44/73·25] SEDMOEDMACHSEDMO@1 edges=16 letters=15 loops=2 comp=1 span=17 central=E       9 stops → 6 physical, best IC 0.041 tail -4.751    8670s  46.0M/s ETA 167.6 min
+    shell B/beta/II-V-I/AAAU pos LQKI plugs 7  → logs/welchman-physical.jsonl

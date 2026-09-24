@@ -367,6 +367,40 @@ This is an **OPEN structural progress receipt**, not a cipher promotion or closu
 - The machine verdict **`SAFE_TRANSITION_GRAPH_DERIVED_AND_PATH_CERTIFIED`** means only that the complete structural transition grammar and one deterministic path were verified. It is not a mixed four-round/25-active-S-box theorem, differential/linear/integral/algebraic/cube/related-key result, attack work factor, production schedule, self-evolving cipher, RTL policy-enforcement mechanism, Metal/FHE execution, or physical FPGA result.
 - **No C/H/N row, public epoch, architecture, round count, schedule, XOF, suite, protocol, production RTL, or security value moves. E256-063 remains `OPEN`; reviewed standard AEAD remains mandatory for real data.**
 
+### E256-062 — namespace versus fixed-AES twin, one integral (OPEN)
+
+This is an **OPEN progress receipt**, not a closure receipt. It answers wide-state §4 item 2 for a single attack and does not close E256-062.
+
+- Preregistration: `directives/e256-namespace-vs-aes-preregistration.json`, SHA-256 `90c5ae3fbd4af29e37777792856ae43f5e52fadc3774977eeb7c02a89f3090b4`. Receipt: `logs/e256-namespace-vs-aes-gate.json`, schema `E256-NAMESPACE-VS-AES-GATE-1`, status `OPEN_PROGRESS`, deterministic payload SHA-256 `964c922269c61f4b7dfcb3d85a2a1cf005e1bae866e127eec37748a78374dd7a`. Reproduce with `make e256-namespace-vs-aes-check`.
+- Machines share the AES S-box, MixColumns, and one SHAKE-256 mask schedule. `p_in` and `p_out` are zero. The twin repeats wiring `(0,1,3,4)`. The candidate draws each round from the catalog `(0,1,3,4)`, `(0,1,2,5)`, `(0,1,4,7)` by SHAKE-256.
+- Integral over one active byte, rounds 1–8: both machines stay balanced for **3** rounds and break at round 4. Balanced-byte counts: twin `32,32,32,0,0,0,1,0`; candidate `32,32,32,0,0,0,0,0`.
+- Controls: identity rotor on the candidate schedule stayed balanced at all **8** rounds. Mono-parity wiring `(0,2,4,6)` was not all-to-all by round 12.
+- Machine verdict: **`NAMESPACE_FAILS_ON_THIS_INTEGRAL`**. Equal surviving-round counts are a namespace failure under the frozen win rule. The round-7 lane counts are not a second metric.
+- Scope: one integral, one key label, a three-tuple catalog. Not the attack matrix, not a round-count selection, not a security result. AEAD-only remains the production baseline.
+
+### E256 patched rotor — power exponent 112 (OPEN)
+
+This is an **OPEN research receipt**. The rotor is not installed in E256-H.
+
+- Preregistration: `directives/e256-patched-rotor-preregistration.json`, SHA-256 `fb779d447d462f6a700a3ae2ebc04cb7b03cfc58126cecca457cf14379c08cf7`. Receipt: `logs/e256-patched-rotor-gate.json`, schema `E256-PATCHED-ROTOR-GATE-1`, deterministic payload SHA-256 `5a3316337bfeeeeed75a475f8e07dfacfc52c3d01b74e027fa170274b795c510`. Reproduce with `make e256-patched-rotor-check`.
+- Selected map: GF(2^8) power `x^112`, 0 sent to 0. It is a 256-symbol bijection, not an involution, and not a translation. Its DDT histogram is outside the inverse/AES class. 121 maps in the searched family were outside that class.
+- Measured bounds: differential peak **6**, absolute Walsh peak **64**, algebraic degree **3**. AES is 4, 32, and 7. These bounds are worse.
+- The same integral stays balanced for **3** rounds on this rotor and on the AES twin, then breaks. That tie is the SPN bijection property.
+- **Not a replacement for the AES S-box.** No suite, profile, fixture, or C/H/N row moves.
+
+### E256 repaired machine — 4-round schedule (OPEN)
+
+This is an **OPEN functional receipt**. It is not a security result and not a promoted round count.
+
+- Code: `Scripts/e256_repaired_round.py`, `Hardware/RTL/Research/E256H/e256r_round.v`. Receipt: `logs/e256-repaired-machine.json`. Reproduce with `make e256-repaired-round`.
+- Schedule: SHAKE-256 over `E256-R/schedule/v1 || key || block_index` emits one 32-byte mask per round. Experimental width is **4** rounds. Byte dependency is complete at 3 (reach 4, 16, 32). The integral on this schedule stays balanced for 3 rounds and breaks at round 4: **32, 32, 32, 0, 0, 0, 0, 0**. The identity S-box stays balanced for all 8 rounds.
+- Four-round single-trail certificate on this MixColumns and these offsets: **69** minors, **0** zero, offsets `(0,1,3,4)` distinct, middle bundle cases meet 5, so the active-S-box lower bound is **25**. Measured S-box peaks are differential **4** and Walsh **32**, which is where `2^-150` and `2^-75` come from. Identity S-box peak is **256**, so that bound does not apply to it. With the column mix removed, byte reach at 4 rounds stays **1**. This is a single-trail bound, not a security result.
+- Two-round clustering on this same round, input difference `0x01` into byte 0: one exhibited output difference is reached by **64** trails. Their combined weight is **3040** against a best single trail of **1024** (about 2.97×). One round of the same mix has **0** outputs reached by more than one trail. The identity S-box has **1** two-round trail. Those 64 trails meet on one difference, so one continuation through rounds 3 and 4 carries all of them. That exhibited four-round bundle is still **64** trails, **53** S-boxes, and the same **2.97×** ratio: cluster about `2^-316.4`, best trail on that path `2^-318`. This is a lower bound on one differential. The sum over every other four-round trail was not counted.
+- Second model `Scripts/e256_repaired_twin.py` (column layout, does not import the first model) matched encrypt and decrypt on **32** blocks. Same-session code, not an external review. Verilog still matched the first model on 16 blocks × 4 rounds.
+- Identity S-box control: the 4-round map was recovered exactly on 16/16 held-out blocks. The real AES S-box missed that affine model on 16/16.
+- 256 keyed blocks decrypted back to the plaintext. The neighboring block index did not. Verilog matched Python on 16 blocks × 4 rounds, then decrypted.
+- Fixture-v4 `enigma_256_core.v` is unchanged. No suite, profile, fixture, or C/H/N row moves.
+
 ### E256-v3/gen0 — fixture-v5 first core-freeze tranche (OPEN)
 
 This is an **OPEN progress receipt**, not a closure receipt:

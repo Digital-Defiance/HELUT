@@ -292,6 +292,31 @@ e256-x0-h4-evolution:
 e256-x0-h4-evolution-check:
 	python3 Scripts/e256_x0_h4_evolution_gate.py --check
 
+# Keyed H4 namespace versus fixed-AES twin on one integral. Equal reach fails.
+# No round count, suite, or security claim is selected.
+.PHONY: e256-namespace-vs-aes e256-namespace-vs-aes-check
+
+e256-namespace-vs-aes:
+	python3 Scripts/e256_namespace_vs_aes_gate.py
+
+e256-namespace-vs-aes-check:
+	python3 Scripts/e256_namespace_vs_aes_gate.py --check
+
+# 8-bit rotor that closes the Enigma rotor holes. Research receipt only.
+.PHONY: e256-patched-rotor e256-patched-rotor-check
+
+e256-patched-rotor:
+	python3 Scripts/e256_patched_rotor_gate.py
+
+e256-patched-rotor-check:
+	python3 Scripts/e256_patched_rotor_gate.py --check
+
+# Repaired round: separate encrypt and decrypt, matched to Python. Not fixture-v4.
+.PHONY: e256-repaired-round
+
+e256-repaired-round:
+	python3 Scripts/e256_repaired_round.py
+
 # Pre-commit ritual for anything that touches a claim. macOS CI runs the same
 # determinism and C69 preservation gates; Linux CI retains the pure-Python lints.
 gates: hardware-check determinism c69-smoke

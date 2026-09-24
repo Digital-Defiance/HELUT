@@ -1,0 +1,24 @@
+{
+  "schema": "E256-PATCHED-ROTOR-GATE-1",
+  "status": "OPEN_PROGRESS",
+  "preregistration_sha256": "fb779d447d462f6a700a3ae2ebc04cb7b03cfc58126cecca457cf14379c08cf7",
+  "deterministic_payload_sha256": "5a3316337bfeeeeed75a475f8e07dfacfc52c3d01b74e027fa170274b795c510",
+  "deterministic_payload": {
+    "schema": "E256-PATCHED-ROTOR-GATE-1",
+    "prereg_sha256": "fb779d447d462f6a700a3ae2ebc04cb7b03cfc58126cecca457cf14379c08cf7",
+    "rotor_id": "power:112",
+    "differential_peak": 6,
+    "walsh_peak": 64,
+    "algebraic_degree": 3,
+    "bijective": true,
+    "involution": false,
+    "translation": false,
+    "ddt_histogram_equals_inverse": false,
+    "integral_surviving_rounds_rotor": 3,
+    "integral_surviving_rounds_aes_twin": 3,
+    "integral_tie": true,
+    "candidates_outside_inverse_class": 121,
+    "table_sha256": "d62669d1459b1a40106e5ebfcb64086f66a453caf34fb4bd968d123047183a41"
+  },
+  "scope": "Research rotor only. Not installed in E256-H. An integral tie is the SPN bijection property, not an advantage over AES."
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "E256-PATCHED-ROTOR-PREREGISTRATION-1",
+  "status": "FROZEN_FOR_EXECUTION",
+  "date_basis": "2026-09-24 session date; no wall-clock timestamp asserted",
+  "purpose": "Build one 8-bit rotor that closes the Enigma rotor holes, and measure it. Do not promote it into a cipher.",
+  "enigma_holes_this_rotor_closes": [
+    "A rotor is a permutation of 26 letters. This rotor is a permutation of 256 symbols.",
+    "The reflector makes the whole machine an involution. This rotor must not be an involution.",
+    "A historical rotor is one wheel plus a ring offset. An XOR-offset of a single wiring is not a second rotor.",
+    "A notch odometer is not the selection rule. The formula has no turnover position."
+  ],
+  "search": {
+    "field_polynomial": "0x11b",
+    "power_exponents": "every e in 1..254 with gcd(e, 255)=1",
+    "feistel": {
+      "rounds": 4,
+      "nibble_field_polynomial": "0x13",
+      "round_function": "inversion in GF(16), with 0 mapping to 0",
+      "split": "high nibble is L, low nibble is R; each round is L,R = R, L XOR f(R)"
+    },
+    "exclude": "any map whose DDT histogram equals the multiplicative inverse, including the AES S-box",
+    "selection": "among the remainder, minimum differential-uniformity peak, then minimum absolute Walsh peak, then maximum algebraic degree"
+  },
+  "acceptance": [
+    "bijective on 256 symbols",
+    "not an involution",
+    "not a translation x |-> x XOR c",
+    "DDT histogram differs from the inverse",
+    "formula is tableless"
+  ],
+  "integral_prediction": "Any bijection in this SPN shares the AES twin's integral reach. Equal surviving rounds are the expected result, not a win over AES.",
+  "blocked": [
+    "C/H/N claim movement",
+    "replacing the AES S-box in E256-H",
+    "suite, profile, or fixture promotion",
+    "security-bit claim"
+  ]
+}

@@ -56,9 +56,20 @@ export const selmQuelle2499: JournalAttachment = {
     'Crypto Museum scan of the Quelle booklet (Zu M.Dv.Nr.98), recovered by Wenselaers. Tafel A pairs are photographed; the May Tauschtafelplan in hand remains Prüfnr. 1772a.',
 }
 
+export const selmSchluesselMBauer: JournalAttachment = {
+  href: '/selm/article-antiUbootRDF-AOB-97.pdf',
+  title: 'Bauer, Ultra versus Enigma — Schlüssel M appendices (Hellschreiber scan)',
+  kind: 'pdf',
+  credit: SELM_CREDIT,
+  bytesLabel: '72 MB',
+  origin:
+    'Scan recovered by Wenselaers, 24 September 2026. She reports that it reproduces M.Dv.Nr. 32/1 as Appendix E (pp. 299–313), a May 1945 Hydra key sheet as Appendix F (p. 314), and Tafel D, Kennwort Quelle, as Appendix G (p. 315). Not applied to VROL/NMKA.',
+}
+
 export const selmAllPublicFiles: JournalAttachment[] = [
   selmU534LastDays,
   selmU3521Dossier,
   selmNidInterrogation,
   selmQuelle2499,
+  selmSchluesselMBauer,
 ]

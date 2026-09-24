@@ -1,0 +1,90 @@
+{
+  "schema": "E256-NAMESPACE-VS-AES-PREREGISTRATION-1",
+  "status": "FROZEN_FOR_EXECUTION",
+  "date_basis": "2026-09-24 session date; no wall-clock timestamp asserted",
+  "purpose": "Measure whether a keyed choice among certified H4 wirings makes the same integral distinguisher die earlier than a fixed-AES twin. This grades one attack on two machines. It does not select a round count or a cipher.",
+  "framing": {
+    "primary_claim_direction": "The namespace beats the twin only if the cheapest successful integral on the candidate dies at a strictly earlier round than the same integral on the twin.",
+    "equal_is_failure": "Equal reach means the namespace earns nothing on this attack.",
+    "hidden_wiring_is_not_the_argument": "Both machines are attacked as chosen-plaintext oracles. A win that exists only because the attacker was denied the wiring schedule is out of scope; the integral does not use the schedule.",
+    "absence_is_not_security": "If the integral finds nothing on both machines, the search is uncalibrated unless the planted identity rotor stays balanced at every tested round."
+  },
+  "authorization": {
+    "architecture_record": "directives/e256-wide-architecture.md",
+    "open_choice": "section 4 item 2: whether the rotor namespace earns its cost",
+    "blocked": [
+      "C/H/N claim movement",
+      "suite, profile, or fixture promotion",
+      "production RTL",
+      "round-count selection",
+      "security-bit claim",
+      "any claim that this integral is the full attack matrix"
+    ]
+  },
+  "machines": {
+    "shared": {
+      "state_bytes": 32,
+      "geometry": "byte index 4*column+row",
+      "sbox": "AES",
+      "aes_sbox_sha256": "c2d8e5eed6cbebd8625fc18f81486a7733c04f9b0129ffbe974c68b90308b4f2",
+      "mix_columns_matrix_hex_rows": [
+        ["02", "03", "01", "01"],
+        ["01", "02", "03", "01"],
+        ["01", "01", "02", "03"],
+        ["03", "01", "01", "02"]
+      ],
+      "field_polynomial": "0x11b",
+      "masks": "13 blocks of 32 bytes from SHAKE-256 of the domain below; identical on both machines",
+      "offsets": "p_in and p_out are zero. Effective masks are the shared mask schedule. The machines differ only in the row-shift tuple.",
+      "rounds_tested": [1, 2, 3, 4, 5, 6, 7, 8],
+      "material_domain": "E256-H/namespace-vs-aes/material/v1"
+    },
+    "twin": {
+      "id": "fixed_aes",
+      "row_offsets_every_round": [0, 1, 3, 4]
+    },
+    "candidate": {
+      "id": "keyed_namespace",
+      "catalog": [
+        [0, 1, 3, 4],
+        [0, 1, 2, 5],
+        [0, 1, 4, 7]
+      ],
+      "selection": "round r uses catalog[SHAKE-256(domain || key_label=0 || r)[0] mod 3]",
+      "selection_domain": "E256-H/namespace-vs-aes/select/v1"
+    }
+  },
+  "attack": {
+    "id": "integral_one_active_byte",
+    "active_lane": 0,
+    "plaintexts": 256,
+    "balanced_means": "XOR of the 256 output blocks is zero at that lane",
+    "surviving_rounds": "largest tested round at which all 32 lanes are balanced; 0 if round 1 is already unbalanced",
+    "win_rule": "candidate surviving_rounds < twin surviving_rounds"
+  },
+  "planted_controls": [
+    {
+      "id": "identity_rotor",
+      "requirement": "On the candidate schedule, skipping the S-box leaves all 32 lanes balanced at every tested round. If this control is quiet, the integral is uncalibrated and no win or loss may be reported."
+    },
+    {
+      "id": "mono_parity_wiring",
+      "tuple": [0, 2, 4, 6],
+      "requirement": "Repeated use of this tuple is not all-to-all by round 12. The gate must detect that before it grades the namespace."
+    }
+  ],
+  "predictions": [
+    {
+      "id": "P1",
+      "text": "The identity-rotor control stays fully balanced at every tested round."
+    },
+    {
+      "id": "P2",
+      "text": "The mono-parity wiring is detected as not all-to-all by round 12."
+    },
+    {
+      "id": "P3",
+      "text": "The win rule is applied exactly once, to the integral surviving-round counts, and equal counts are a namespace failure."
+    }
+  ]
+}
