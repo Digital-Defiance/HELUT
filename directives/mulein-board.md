@@ -300,9 +300,11 @@ near-miss against a 12-sample floor. Phase 65 ranker/beam/all-settings is built 
 gated on `--ostwald-curve`. The full 72-letter ranker curve scored 5/30 greedy
 and 6/30 with beam 4, both with a negative median: not a zero crossing. Phase 66
 4-plug hot-letter brute: 0/32 oracle cover. Phase 67 **RUNNING**: 4-plug
-alphabet climb on locked P1030684 VYAA / 385320, restarted 2026-09-24T16:51:24Z
-on 524,288-job Metal waves, live ~37M/s / ~37 min
-(`logs/ostwald-fourplug-p1030684-true-385320.log`). Next: wrong setting 0.
+alphabet climb on locked P1030684 VYAA / 385320, 524,288-job Metal waves,
+live ~37M/s. 210 true 4-subsets at ~1 in 781,000; the run visits all of them.
+Phase 50.6 oracle-locked 4 plugs (50% / +0.33 on a 10-message panel) is not
+this experiment. Next: wrong setting 0.
+(`logs/ostwald-fourplug-p1030684-true-385320.log`).
 Not a P1030680 consume.
 No live hit, gate,
 key, plaintext, or decrypt is claimed. Operational/scuttle hypotheses ran first.

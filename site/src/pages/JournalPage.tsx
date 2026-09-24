@@ -137,7 +137,7 @@ export function JournalPage() {
             <li>
               <span className="mono">OPEN</span>
               <span>
-                <strong>The 164-million 4-plug alphabet climb is RUNNING on the known-key greeting.</strong> True P1030684 setting VYAA / index 385320. Restarted 2026-09-24T16:51:24Z after the first launch crawled at ~2.0M/s: 8,192-job chunks plus a CPU polish of every ghost, not a RAM miss. Now 524,288-job Metal waves, polish-top 256, 56 GB unified. Metal insert is 503 decrypts/start (8.25×10<sup>10</sup>). Floor 10M/s was 137.5 min; live rate is ~37M/s (~37 min). Log <code>logs/ostwald-fourplug-p1030684-true-385320.log</code>. Next is wrong setting index 0. Not pointed at P1030680 until true crib-exact and wrong crib BAD.
+                <strong>The 164-million 4-plug alphabet climb is RUNNING on the known-key greeting.</strong> True P1030684 setting VYAA / index 385320. This is not a 210/164M lottery: those 210 true 4-subsets sit at about 1 in 781,000, frequency cannot find them (0/32), and the run visits every start. What is being graded is whether greedy insertion from those 210 still prints crib-exact at 72 letters. Phase 50.6 froze four oracle plugs on a ten-message panel (50% / +0.33); that is not this experiment. Live ~37M/s, ~30 min remaining. Log <code>logs/ostwald-fourplug-p1030684-true-385320.log</code>. Next is wrong setting index 0. Not pointed at P1030680 until true crib-exact and wrong crib BAD.
               </span>
             </li>
             <li>
@@ -945,10 +945,10 @@ export function JournalPage() {
               <h3>Known-key greeting is running on P1030684 VYAA. Not this ciphertext.</h3>
               <div className="prose">
                 <p>
-                  C(26,8)×105 = 164,038,875 four-plug boards. Metal greedy insertion from a 4-plug seed is 503 decrypts each, 8.25×10<sup>10</sup> decrypts per locked setting — about 137.5 minutes at the 10M floor. The 164 million starts stream in waves of 524,288; replacement polish runs only on the top 256 scores in each wave. On the true rotor setting, 210 of those boards are true 4-subsets and Phase 50.6 says they BREAK. On a wrong setting the same budget raises ghost maxima; 72-letter IC cannot pick them.
+                  C(26,8)×105 = 164,038,875 four-plug boards. Metal greedy insertion from a 4-plug seed is 503 decrypts each, 8.25×10<sup>10</sup> decrypts per locked setting. The 164 million starts stream in waves of 524,288; replacement polish runs only on the top 256 scores in each wave. On the true rotor setting, 210 of those boards are true 4-subsets of a 10-plug board — about 1 in 781,000. Frequency cannot find them (Phase 66, 0/32). The greeting visits all 210; it does not roll a die. Phase 50.6 froze four <em>oracle</em> plugs on a ten-message panel (50% win, median +0.33). That is not a promise that greedy insertion from an enumerated 4-subset prints crib-exact on this 72-letter text. On a wrong setting the same budget raises ghost maxima; 72-letter IC cannot pick them.
                 </p>
                 <p>
-                  <strong>RUNNING</strong> since restart 2026-09-24T16:51:24Z: <code>--ostwald-all-settings --ostwald-control p1030684 --ostwald-setting-from 385320 --ostwald-setting-count 1 --ostwald-brute-plugs 4 --ostwald-brute-all --ostwald-exhaust 26 --ostwald-memory-gb 56</code>. Live ~37M/s, ETA ~37 min. The first launch at 16:38:36Z had crawled at ~2.0M/s (~15 h) on 8,192-job chunks. Log <code>logs/ostwald-fourplug-p1030684-true-385320.log</code>. Next is setting 0 as the ghost control. Not pointed at P1030680 until both receipts exist.
+                  <strong>RUNNING</strong> since restart 2026-09-24T16:51:24Z: <code>--ostwald-all-settings --ostwald-control p1030684 --ostwald-setting-from 385320 --ostwald-setting-count 1 --ostwald-brute-plugs 4 --ostwald-brute-all --ostwald-exhaust 26 --ostwald-memory-gb 56</code>. Live ~37M/s. The first launch at 16:38:36Z had crawled at ~2.0M/s (~15 h) on 8,192-job chunks. Log <code>logs/ostwald-fourplug-p1030684-true-385320.log</code>. Next is setting 0 as the ghost control. Not pointed at P1030680 until both receipts exist.
                 </p>
               </div>
             </article>
