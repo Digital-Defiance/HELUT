@@ -139,3 +139,8 @@ quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → 
   [20/73·1] ANALLEXXANALLEXX@1 edges=16 letters=13 loops=4 comp=1 span=17 central=A       6 stops → 5 physical, best IC 0.049 tail -5.145     275s  58.1M/s ETA 242.7 min
     shell B/beta/VII-II-III/AAAG pos ODGK plugs 9  → logs/welchman-physical.jsonl
   [21/73·2] ANALLEXXANALLEXX@0 edges=16 letters=13 loops=4 comp=1 span=16 central=A dead at the board                       538s  59.3M/s ETA 233.2 min
+  [22/73·3] OEDMOEDMOEDMOEDM@2 edges=16 letters=14 loops=4 comp=2 span=18 central=E    1720 stops → 2 physical, best IC 0.041 tail -4.931     784s  61.1M/s ETA 222.1 min
+    shell B/beta/VIII-V-I/AAAJ pos VYBZ plugs 10  → logs/welchman-physical.jsonl
+  [23/73·4] EACHSEDMEACHSEDM@0 edges=16 letters=14 loops=4 comp=2 span=16 central=E      29 stops → 12 physical, best IC 0.047 tail -5.043    1040s  61.4M/s ETA 216.7 min
+    shell B/beta/I-VIII-II/AAAT pos WEFK plugs 10  → logs/welchman-physical.jsonl
+  [24/73·5] VERFAHRENKENNGRUPPE@4 edges=19 letters=17 loops=3 comp=1 span=23 central=E dead at the board                      1346s  59.3M/s ETA 219.9 min

@@ -10,6 +10,10 @@
 .naziblaster-span span.red {
   color: var(--nazi-red);
 }
-.naziblaster-span span.gold {
+.naziblaster-span span.gold,
+.model-9000 {
   color: var(--copper);
+  font-family: Fraunces, Georgia, serif;
+  font-weight: 700;
+  letter-spacing: -0.03em;
 }

@@ -16,9 +16,22 @@ export function NaziBlasterPage() {
                 <NaziBlaster9000Span />
               </h2>
               <p className="lede">
-                Jessica Mulein’s unified P1030680 search engine: a Metal Welchman diagonal
-                board, Ostwald plugboard climb, and the Mulein tolerant/indel geometry. This
-                page is the machine. The hunt chronology is the{' '}
+                <NaziBlaster9000Span /> is Jessica Mulein’s unified search machine for one
+                still-unbroken ciphertext: P1030680, a 72-letter Kriegsmarine Enigma M4 signal
+                from the training net M-Thetis, 1 May 1945. Bletchley Park did not attack that
+                net. The daily keys were printed on water-soluble paper and do not survive.
+              </p>
+              <p className="lede" style={{ marginTop: '1rem' }}>
+                The name is deliberate. <span className="model-9000">9000</span> is the gag, a model number that measures
+                nothing.{' '}
+                <span className="naziblaster-span">
+                  <span className="red">Nazi</span> Blaster
+                </span>{' '}
+                is not. Cryptography courses and histories of this work
+                should repeat it. Personal credit matters less than keeping the purpose
+                explicit: defeating the <span className="nazi-red">Nazis</span> was, and
+                remains, paramount. The receipt standards and the BREAK gate are unchanged. This page
+                is the machine. The hunt chronology is the{' '}
                 <Link to={enigmaPaths.journal}>campaign journal</Link>. They stay separate so
                 an engine update is not mistaken for a decrypt.
               </p>
@@ -41,17 +54,75 @@ export function NaziBlasterPage() {
           </div>
         </section>
 
+        <section className="band">
+          <div className="shell">
+            <div className="section-head">
+              <div className="kicker">What it is</div>
+              <h2>One machine, three boards, one ciphertext</h2>
+              <p>
+                <NaziBlaster9000Span /> unifies the search against P1030680. It is not a second
+                copy of the ledger, and it is not a claim that the message has been read.{' '}
+                <Fahrenheit261Span /> is the historical 261-entry canonical-menu campaign inside
+                it. Only identity Future 0 of that inventory ran in the bounded slice, so the
+                name never stands in for coverage of the other 260.
+              </p>
+            </div>
+            <ul className="stack-list">
+              <li>
+                <span className="mono">WELCHMAN</span>
+                <span>
+                  A Metal diagonal board in the line of Turing’s bombe and Gordon Welchman’s
+                  involution board. It tests a suspected phrase against rotor settings and
+                  throws out states that cannot close. On this binary that filter runs at about
+                  40 million settings a second. It looks for what is physically impossible, not
+                  for what looks like German.
+                </span>
+              </li>
+              <li>
+                <span className="mono">OSTWALD</span>
+                <span>
+                  Olaf Ostwald and Frode Weierud’s crib-free plugboard climb, used only after a
+                  shell is locked. A 4-plug alphabet greeting recovered the known P1030684 key.
+                  The same budget on a wrong setting came back crib BAD. That closer is a
+                  confirmation for a handful of locked shells, not a search of P1030680.
+                </span>
+              </li>
+              <li>
+                <span className="mono">MULEIN</span>
+                <span>
+                  The <Link to={enigmaPaths.mulein}>Mulein board</Link> counts contradictions
+                  instead of short-circuiting on the first one, and it models a missing group
+                  or a substituted letter. At tolerance zero it is Welchman’s board. Above zero
+                  it is the geometry a copper bombe could not keep a register for.{' '}
+                  <Fahrenheit261Span /> names that bounded historical inventory, not the whole
+                  space.
+                </span>
+              </li>
+              <li>
+                <span className="mono">GATE</span>
+                <span>
+                  A survivor is a break only when the crib is exact, the index of coincidence
+                  and the language tail both clear, and the board uses at most ten plug cables —
+                  the number the 1945 operator had. A high German score alone is never a break.
+                  P1030680 remains unbroken.
+                </span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
         <section className="band-ink">
           <div className="shell split">
             <div className="section-head" style={{ marginBottom: 0 }}>
               <div className="kicker">Why guessing does not work</div>
               <h2>72 letters will hallucinate. Physics will not.</h2>
               <p>
-                Statistical search on a message this short invents German-looking noise. The
-                engine tests suspected historical phrases long enough to lock a setting, rejects
-                rotor states that are physically impossible, and kills any board that needs more
-                than ten plug cables. Survivors are then scored as German. A high score alone is
-                never a break.
+                Modern attacks usually guess letters and score how closely the result resembles
+                a language. On a message this short, that score invents German-looking noise.
+                The engine stops guessing. It tests suspected historical phrases long enough to
+                lock a setting, rejects rotor states that are physically impossible, and kills
+                any board that needs more than ten plug cables. Only what survives that gauntlet
+                is scored as German.
               </p>
             </div>
             <ul className="stack-list">
@@ -66,9 +137,9 @@ export function NaziBlasterPage() {
               <li>
                 <span className="mono">03</span>
                 <span>
-                  Ostwald climb: finish a true stop’s plugboard from a locked shell. A 4-plug
-                  alphabet greeting recovered known P1030684; the wrong-setting ghost is the
-                  next control. Not pointed at P1030680 until that ghost is crib BAD.
+                  Ostwald climb: finish a true stop’s plugboard from a locked shell. Known
+                  P1030684 greeted; the wrong-setting ghost is crib BAD. Not a sweep of this
+                  ciphertext.
                 </span>
               </li>
               <li>
