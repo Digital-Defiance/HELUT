@@ -2,14 +2,19 @@
 
 export const TURING_TERMINAL_URL = 'https://turing.helut.org'
 
-/** Raw JSON; cache-bust query is appended at fetch time. Repo must be public. */
+/**
+ * GitHub Contents API (not raw.githubusercontent.com).
+ * Raw is Fastly-cached for minutes and ignores ?t= busting; the API returns
+ * the current blob quickly. Repo must be public. Unauthenticated limit is
+ * 60 req/hr/IP — keep poll interval at or above ~90s.
+ */
 export const TURING_STATUS_URL =
-  'https://raw.githubusercontent.com/Digital-Defiance/HELUT-turing-status/main/status.json'
+  'https://api.github.com/repos/Digital-Defiance/HELUT-turing-status/contents/status.json?ref=main'
 
 /** If lastStatus is older than this while live=true, treat as stale (crash without off). */
 export const TURING_STATUS_MAX_AGE_SEC = 2 * 60 * 60
 
-export const TURING_STATUS_POLL_MS = 60_000
+export const TURING_STATUS_POLL_MS = 90_000
 
 export type TuringStatusJson = {
   live: boolean
@@ -40,8 +45,13 @@ export function isTuringLive(
 export async function fetchTuringStatus(
   url: string = TURING_STATUS_URL,
 ): Promise<TuringStatusJson | null> {
-  const bust = `${url}${url.includes('?') ? '&' : '?'}t=${Date.now()}`
-  const res = await fetch(bust, { cache: 'no-store' })
+  const res = await fetch(url, {
+    cache: 'no-store',
+    headers: {
+      Accept: 'application/vnd.github.raw+json',
+      'X-GitHub-Api-Version': '2022-11-28',
+    },
+  })
   if (!res.ok) return null
   return parseTuringStatus(await res.json())
 }
