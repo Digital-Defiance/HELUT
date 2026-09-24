@@ -22,6 +22,6 @@ The public site is a teaching surface on the claim inventory. It lags unless you
 
 **Remainders vs site bugs:** tree/regex encrypted Metal SING at production *N*, PicoRV covering at *N*=1024, and native *k*=1 (**C37**) are **open science**. If the site does not claim them as done, that is correct — do not “fix” copy by inventing those bars.
 
-**Map:** Pillar I ← Home / Stack / Apps I.* / `netlist-fhe` · Pillar II ← Apps II.* / differentiable-hardware hub · Pillar III ← Apps III.* / e256 · campaign ← Enigma + journal (other rule).
+**Map:** Pillar I ← Home / Stack / Apps I.* / `netlist-fhe` · Pillar II ← Apps II.* / differentiable-hardware hub · Pillar III ← Apps III.* / e256 · campaign ← Enigma section (`/enigma`, message, corpus, journal, Nazi Blaster 9000, Mulein).
 
 Contract: `site/README.md`. Build: `cd site && npm run build`. Textbook: `.cursor/rules/living-textbook.mdc`. Videos: `.cursor/rules/helut-videos-sync.mdc`.

@@ -299,13 +299,12 @@ Phase 64 best −3.0390 (IC 0.0544) crib BAD after 3.33 million climbs is not a
 near-miss against a 12-sample floor. Phase 65 ranker/beam/all-settings is built and
 gated on `--ostwald-curve`. The full 72-letter ranker curve scored 5/30 greedy
 and 6/30 with beam 4, both with a negative median: not a zero crossing. Phase 66
-4-plug hot-letter brute: 0/32 oracle cover. Phase 67 **RUNNING**: 4-plug
-alphabet climb on locked P1030684 VYAA / 385320, 524,288-job Metal waves,
-live ~37M/s. 210 true 4-subsets at ~1 in 781,000; the run visits all of them.
-Phase 50.6 oracle-locked 4 plugs (50% / +0.33 on a 10-message panel) is not
-this experiment. Next: wrong setting 0.
-(`logs/ostwald-fourplug-p1030684-true-385320.log`).
-Not a P1030680 consume.
+4-plug hot-letter brute: 0/32 oracle cover. Phase 67 **DONE** on true
+P1030684 VYAA / 385320: 313 waves, ~37.8 min @ 36.3M/s, crib-exact,
+IC 0.0657, 10 pairs, known 72-letter plaintext
+(`logs/ostwald-fourplug-p1030684-true-385320.log`). Not a P1030680 consume.
+Wrong setting 0 is **DONE**, crib BAD, IC 0.0509, NO BREAK
+(`logs/ostwald-fourplug-p1030684-wrong-0.log`).
 No live hit, gate,
 key, plaintext, or decrypt is claimed. Operational/scuttle hypotheses ran first.
 Afterward, the old playbook

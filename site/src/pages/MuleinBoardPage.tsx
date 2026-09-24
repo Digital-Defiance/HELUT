@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom'
 import { HelutSpan } from '../HELUTSpan'
 import { NaziBlaster9000Span } from '../NaziBlaster9000Span'
 import { Fahrenheit261Span } from '../Fahrenheit261Span'
+import { enigmaPaths } from '../enigma/paths'
+import { horenbergHome } from '../enigma/corpus'
 
 export function MuleinBoardPage() {
   return (
@@ -12,10 +14,10 @@ export function MuleinBoardPage() {
           <div className="section-head">
             <div className="kicker">
               <Link
-                to="/projects/p1030680/journal"
+                to={enigmaPaths.message}
                 style={{ color: 'inherit', textDecoration: 'none' }}
               >
-                Project · P1030680
+                Enigma · P1030680
               </Link>
               {' · '}Mulein Board
             </div>
@@ -102,7 +104,11 @@ export function MuleinBoardPage() {
             <li>
               <span className="mono">CORPUS</span>
               <span>
-                <strong>Dan Girard</strong> and <strong>Frode Weierud</strong>, hosted by Hörenberg, recovered and published the U-534 traffic and degarbled the sister message P1030681 from two disagreeing transcripts. They supply the 48 known-key controls every grade on this page is measured against — and the entire empirical reason to believe garble matters. Girard found an entire four-letter group present on one copy and blank on the other.
+                <strong>Dan Girard</strong> and <strong>Frode Weierud</strong>, hosted by{' '}
+                <a href={horenbergHome} target="_blank" rel="noreferrer">
+                  Michael Hörenberg
+                </a>
+                , recovered and published the U-534 traffic and degarbled the sister message P1030681 from two disagreeing transcripts. They supply the 48 known-key controls every grade on this page is measured against — and the entire empirical reason to believe garble matters. Girard found an entire four-letter group present on one copy and blank on the other.
               </span>
             </li>
             <li>
@@ -311,7 +317,7 @@ export function MuleinBoardPage() {
             <li>
               <span className="mono">NAMING</span>
               <span>
-                "Mulein board" is a local name, chosen because the contribution sits in the same structural slot Welchman's diagonal board did — a new board on an existing bombe, not a new bombe. In writing, the substitution mechanism is the <strong>deletion-tolerant diagonal board</strong>; the indel mechanism is explicit Future geometry. Full design notes and receipt paths live in <code>directives/mulein-board.md</code>; the campaign record is <Link to="/projects/p1030680/journal">the ledger</Link>, Phases 51.12–51.14.
+                "Mulein board" is a local name, chosen because the contribution sits in the same structural slot Welchman's diagonal board did — a new board on an existing bombe, not a new bombe. In writing, the substitution mechanism is the <strong>deletion-tolerant diagonal board</strong>; the indel mechanism is explicit Future geometry. Full design notes and receipt paths live in <code>directives/mulein-board.md</code>; the campaign record is <Link to={enigmaPaths.journal}>the ledger</Link>, Phases 51.12–51.14.
               </span>
             </li>
           </ul>

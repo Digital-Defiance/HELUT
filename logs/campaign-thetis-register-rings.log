@@ -40,3 +40,99 @@ ETA floor (~50M/s): 388.6 min
 
 ---
 ABORTED at menu 13/73. Resume: --bombe-from 14 | tee -a this log.
+=== Phase 68 resume 2026-09-24T18:20:55Z --bombe-from 14 ===
+=== Welchman diagonal board — P1030680 ===
+fixture: /Volumes/Code/HELUT/Fixtures/p1030680_thetis_register_menus.json (73 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 73 of 73
+min menu constraints: 16
+resuming from menu 14 of 73 (skipping 13 already done)
+running 60 menus, highest deduction power first:
+  [14] ANALLEFUNKSTELLEN@3 edges=17 letters=14 loops=4 comp=1 span=20 central=E
+  [15] OEDMOEDMOEDMOEDM@4 edges=16 letters=13 loops=4 comp=1 span=20 central=E
+  [16] XXXXACHXXXXACHXX@2 edges=16 letters=13 loops=4 comp=1 span=18 central=X
+  [17] XXXSEDMXXXSEDMXX@2 edges=16 letters=13 loops=4 comp=1 span=18 central=X
+  [18] THETISXTHETISXTH@2 edges=16 letters=13 loops=4 comp=1 span=18 central=T
+  [19] ACHACHACHACHACHA@2 edges=16 letters=13 loops=4 comp=1 span=18 central=A
+  [20] ANALLEXXANALLEXX@1 edges=16 letters=13 loops=4 comp=1 span=17 central=A
+  [21] ANALLEXXANALLEXX@0 edges=16 letters=13 loops=4 comp=1 span=16 central=A
+  [22] OEDMOEDMOEDMOEDM@2 edges=16 letters=14 loops=4 comp=2 span=18 central=E
+  [23] EACHSEDMEACHSEDM@0 edges=16 letters=14 loops=4 comp=2 span=16 central=E
+  [24] VERFAHRENKENNGRUPPE@4 edges=19 letters=17 loops=3 comp=1 span=23 central=E
+  [25] GRUPPENZAHLXXXXXX@4 edges=17 letters=16 loops=3 comp=2 span=21 central=X
+  … 48 more
+shells/menu: 34944 (336 WO × 2 Greek × 2 UKW × 1 mid-ring × 26 right-ring) → 1.6e+10 settings
+kernel sieve: ≤10 plugs
+GPU pipeline depth: 4 shells in flight
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+right ring swept: every right-wheel turnover phase covered
+residual gap: middle ring pinned A, so keys whose middle wheel turns over inside a 24-letter span (~4% for 1 notch, ~8% for 2) are not covered — --bombe-middle-ring closes it
+ETA floor (~50M/s): 319.4 min
+
+quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → logs/quarantine_candidates.json
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030680_thetis_register_menus.json (73 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 73 of 73
+min menu constraints: 16
+resuming from menu 14 of 73 (skipping 13 already done)
+running 60 menus, highest deduction power first:
+  [14] ANALLEFUNKSTELLEN@3 edges=17 letters=14 loops=4 comp=1 span=20 central=E
+  [15] OEDMOEDMOEDMOEDM@4 edges=16 letters=13 loops=4 comp=1 span=20 central=E
+  [16] XXXXACHXXXXACHXX@2 edges=16 letters=13 loops=4 comp=1 span=18 central=X
+  [17] XXXSEDMXXXSEDMXX@2 edges=16 letters=13 loops=4 comp=1 span=18 central=X
+  [18] THETISXTHETISXTH@2 edges=16 letters=13 loops=4 comp=1 span=18 central=T
+  [19] ACHACHACHACHACHA@2 edges=16 letters=13 loops=4 comp=1 span=18 central=A
+  [20] ANALLEXXANALLEXX@1 edges=16 letters=13 loops=4 comp=1 span=17 central=A
+  [21] ANALLEXXANALLEXX@0 edges=16 letters=13 loops=4 comp=1 span=16 central=A
+  [22] OEDMOEDMOEDMOEDM@2 edges=16 letters=14 loops=4 comp=2 span=18 central=E
+  [23] EACHSEDMEACHSEDM@0 edges=16 letters=14 loops=4 comp=2 span=16 central=E
+  [24] VERFAHRENKENNGRUPPE@4 edges=19 letters=17 loops=3 comp=1 span=23 central=E
+  [25] GRUPPENZAHLXXXXXX@4 edges=17 letters=16 loops=3 comp=2 span=21 central=X
+  … 48 more
+shells/menu: 34944 (336 WO × 2 Greek × 2 UKW × 1 mid-ring × 26 right-ring) → 1.6e+10 settings
+kernel sieve: ≤10 plugs
+GPU pipeline depth: 4 shells in flight
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+right ring swept: every right-wheel turnover phase covered
+residual gap: middle ring pinned A, so keys whose middle wheel turns over inside a 24-letter span (~4% for 1 notch, ~8% for 2) are not covered — --bombe-middle-ring closes it
+ETA floor (~50M/s): 319.4 min
+
+quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → logs/quarantine_candidates.json
+  [14/73·1] ANALLEFUNKSTELLEN@3 edges=17 letters=14 loops=4 comp=1 span=20 central=E dead at the board                       276s  57.9M/s ETA 271.1 min
+  [15/73·2] OEDMOEDMOEDMOEDM@4 edges=16 letters=13 loops=4 comp=1 span=20 central=E       1 stops → 1 physical, best IC 0.049 tail -5.028     540s  59.1M/s ETA 261.1 min
+  [16/73·3] XXXXACHXXXXACHXX@2 edges=16 letters=13 loops=4 comp=1 span=18 central=X       1 stops → 1 physical, best IC 0.049 tail -5.804     774s  61.9M/s ETA 245.0 min
+  [17/73·4] XXXSEDMXXXSEDMXX@2 edges=16 letters=13 loops=4 comp=1 span=18 central=X dead at the board                      1014s  63.0M/s ETA 236.6 min
+  [18/73·5] THETISXTHETISXTH@2 edges=16 letters=13 loops=4 comp=1 span=18 central=T       3 stops → 2 physical, best IC 0.039 tail -5.484    1286s  62.1M/s ETA 235.8 min
+  [19/73·6] ACHACHACHACHACHA@2 edges=16 letters=13 loops=4 comp=1 span=18 central=A dead at the board                      1567s  61.2M/s ETA 235.0 min
+
+=== Phase 68 restart 2026-09-24T18:51:37Z — release binary with physical ledger, resume --bombe-from 20 (menus 14–19 done; 15/16/18 shells were not recorded) ===
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030680_thetis_register_menus.json (73 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 73 of 73
+min menu constraints: 16
+resuming from menu 20 of 73 (skipping 19 already done)
+running 54 menus, highest deduction power first:
+  [20] ANALLEXXANALLEXX@1 edges=16 letters=13 loops=4 comp=1 span=17 central=A
+  [21] ANALLEXXANALLEXX@0 edges=16 letters=13 loops=4 comp=1 span=16 central=A
+  [22] OEDMOEDMOEDMOEDM@2 edges=16 letters=14 loops=4 comp=2 span=18 central=E
+  [23] EACHSEDMEACHSEDM@0 edges=16 letters=14 loops=4 comp=2 span=16 central=E
+  [24] VERFAHRENKENNGRUPPE@4 edges=19 letters=17 loops=3 comp=1 span=23 central=E
+  [25] GRUPPENZAHLXXXXXX@4 edges=17 letters=16 loops=3 comp=2 span=21 central=X
+  [26] GRUPPENZAHLXXXXXX@3 edges=17 letters=16 loops=3 comp=2 span=20 central=X
+  [27] ANALLEFUNKSTELLEN@1 edges=17 letters=16 loops=3 comp=2 span=18 central=E
+  [28] ZEITGRUPPEXXXXXX@5 edges=16 letters=14 loops=3 comp=1 span=21 central=X
+  [29] ZEITGRUPPEXXXXXX@4 edges=16 letters=14 loops=3 comp=1 span=20 central=X
+  [30] EACHSEDMEACHSEDM@1 edges=16 letters=14 loops=3 comp=1 span=17 central=E
+  [31] OEDMOEDMOEDMOEDM@0 edges=16 letters=14 loops=3 comp=1 span=16 central=E
+  … 42 more
+shells/menu: 34944 (336 WO × 2 Greek × 2 UKW × 1 mid-ring × 26 right-ring) → 1.6e+10 settings
+kernel sieve: ≤10 plugs
+GPU pipeline depth: 4 shells in flight
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+right ring swept: every right-wheel turnover phase covered
+residual gap: middle ring pinned A, so keys whose middle wheel turns over inside a 24-letter span (~4% for 1 notch, ~8% for 2) are not covered — --bombe-middle-ring closes it
+ETA floor (~50M/s): 287.4 min
+
+quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → logs/quarantine_candidates.json

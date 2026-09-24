@@ -203,7 +203,7 @@ export function AppsPage() {
           </div>
 
           <p style={{ marginTop: '1.75rem' }}>
-            <Link to="/enigma">The hunt for U-534 →</Link>
+            <Link to="/enigma">Enigma · P1030680 →</Link>
           </p>
         </div>
       </section>

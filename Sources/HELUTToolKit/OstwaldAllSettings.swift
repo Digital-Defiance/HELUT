@@ -8,10 +8,10 @@ import HELUTCLI
 // survivors. The true P1030684 key ranks 223,118 / 456,976 on that sieve — noise. This
 // runner drops the sieve: every position on one locked shell gets an Ostwald climb.
 //
-// One shell is ~1.8k decrypts × 456,976 starts ≈ 8.2×10⁸ decrypts. Metal at a few million
-// per second is a few minutes. That is the 2026 compute we actually have. It is still the
-// same discriminator unless `--ostwald-scorer ranker` is fitted and `--ostwald-curve` has
-// greeted at 72 letters. Do not point this at P1030680 until that margin is positive.
+// One locked setting × 164M 4-plug starts is ~38 min on this machine and *greets*
+// on true P1030684 (Phase 67). The wrong-setting ghost is crib BAD. A handful of
+// locked P1030680 settings is eligible; 26⁴ is not. Empty cribs cannot clear the
+// break bar (OstwaldBreakBar.minAttestedCrib).
 //
 // Requires an explicit shell (`--ostwald-shell` / `--ostwald-control p1030684` / first
 // unique shell in `--ostwald-escalate`). Does not mint a crib.
@@ -40,6 +40,12 @@ package enum OstwaldAllSettings {
         package let wheelOrder: String
         package let rings: String
     }
+
+    /// Operational-prior shell from the bounded Mulein stripe. A working search
+    /// assignment, not a Thetis daily-key proof.
+    package static let workingPriorShell = Shell(
+        ukw: "B", greek: "beta", wheelOrder: "IV-III-VIII", rings: "AAAA"
+    )
 
     package static func parseShell(_ text: String) -> Shell? {
         let parts = text.split(separator: "/").map(String.init)
@@ -95,6 +101,24 @@ func runOstwaldAllSettings() {
         let truePos = EnigmaM4Key.positions(fromLetters: control.positions)
         print("true P1030684 index: \(OstwaldAllSettings.index(truePos)) "
             + "(\(control.positions)); wrong-setting control is --ostwald-setting-from 0")
+    } else if stringFlag("--ostwald-control")?.lowercased() == "p1030680" {
+        ciphertext = U534MessageP1030680.ciphertext
+        crib = ""
+        target = "P1030680"
+        shells = [OstwaldAllSettings.workingPriorShell]
+        print("P1030680 probe — working-prior shell "
+            + "\(OstwaldAllSettings.workingPriorShell.ukw)/"
+            + "\(OstwaldAllSettings.workingPriorShell.greek)/"
+            + "\(OstwaldAllSettings.workingPriorShell.wheelOrder)/"
+            + "\(OstwaldAllSettings.workingPriorShell.rings) "
+            + "unless --ostwald-shell overrides. Not a Thetis daily-key proof.")
+        print("No crib loaded. Anchors shorter than \(OstwaldBreakBar.minAttestedCrib) "
+            + "cannot clear the break bar (N5).")
+        if intFlag("--ostwald-setting-count") == nil && !bruteSettingsOk {
+            print("ABORT — P1030680 requires --ostwald-setting-count (a handful of locked "
+                + "settings). Never default 26⁴.")
+            return
+        }
     }
 
     if let path = stringFlag("--ostwald-escalate"),
@@ -102,7 +126,7 @@ func runOstwaldAllSettings() {
        let manifest = try? JSONDecoder().decode(OstwaldEscalateManifest.self, from: data) {
         if ciphertext.isEmpty { ciphertext = manifest.ciphertext }
         target = manifest.target
-        if crib.isEmpty, let first = manifest.candidates.first {
+        if crib.isEmpty, target != "P1030680", let first = manifest.candidates.first {
             crib = first.menuCrib
             cribOffset = first.menuOffset
         }
@@ -130,10 +154,12 @@ func runOstwaldAllSettings() {
             EnigmaM4Key.positions(fromLetters: ControlMessageP1030684.positions)
         )
         print("usage: --ostwald-all-settings --ostwald-control p1030684")
-        print("   or: --ostwald-all-settings --ostwald-shell B/gamma/IV-III-VIII/AACU "
+        print("   or: --ostwald-all-settings --ostwald-control p1030680 "
+            + "--ostwald-setting-from 0 --ostwald-setting-count 1")
+        print("   or: --ostwald-all-settings --ostwald-shell B/beta/IV-III-VIII/AAAA "
             + "--ostwald-escalate <quarantine.json>")
-        print("drops the IC sieve; climbs every message key on one locked shell. "
-            + "Not a crib. Grade with --ostwald-curve before P1030680.")
+        print("drops the IC sieve; climbs locked message keys on one shell. "
+            + "Not a crib. P1030680 never defaults to 26⁴.")
         print("4-plug alphabet greeting (one locked setting, ~3.1 h at the 10M floor):")
         print("  --ostwald-all-settings --ostwald-control p1030684 "
             + "--ostwald-setting-from \(trueIndex) --ostwald-setting-count 1 "
@@ -142,7 +168,7 @@ func runOstwaldAllSettings() {
     }
     guard !ciphertext.isEmpty else {
         print("ABORT — all-settings needs ciphertext (--ostwald-control p1030684 "
-            + "or --ostwald-escalate <quarantine.json>).")
+            + "or p1030680 or --ostwald-escalate <quarantine.json>).")
         return
     }
 

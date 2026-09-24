@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import { HelutSpan } from '../HELUTSpan'
 import { TensorLUTSpan } from '../TensorLUTSpan'
-import { NaziBlaster9000Span } from '../NaziBlaster9000Span'
 
 export function StackPage() {
   return (
@@ -214,7 +213,7 @@ export function StackPage() {
               <code>directives/research-trajectory.md</code>. Cookbook:{' '}
               <code>directives/parameter-cookbook.md</code>. FHE chronology:{' '}
               <Link to="/projects/netlist-fhe/journal">Pillar I journal</Link>. Campaign (still
-              open): <Link to="/projects/p1030680/journal"><NaziBlaster9000Span /></Link>.
+              open): <Link to="/enigma">Enigma · P1030680</Link>.
             </p>
             <p style={{ marginTop: '1rem' }}>
               <Link to="/apps">Application circuits →</Link>

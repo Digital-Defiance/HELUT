@@ -144,6 +144,19 @@ final class OstwaldMetalTests: XCTestCase {
         XCTAssertTrue(line.contains("69.2 min"), line)
     }
 
+    func testRoundLineKeepsInt64Decrypts() {
+        let live = OstwaldProgress.liveLine(
+            elapsed: 1881,
+            decryptsDone: 2_147_483_648,
+            decryptsTotal: 82_511_554_125
+        )
+        let line = OstwaldProgress.roundLine(
+            round: 1, active: 524_288, decryptsDone: 2_147_483_648, live: live
+        )
+        XCTAssertTrue(line.contains("2147483648 decrypts"), line)
+        XCTAssertFalse(line.contains("-"), line)
+    }
+
     func testLiveEtaLineShape() {
         let line = OstwaldProgress.liveLine(
             elapsed: 1227,

@@ -2,6 +2,18 @@ import { Link } from 'react-router-dom'
 import { NaziBlaster9000Span } from '../NaziBlaster9000Span'
 import { Fahrenheit261Span } from '../Fahrenheit261Span'
 import { TuringLiveStat } from '../TuringLiveStat'
+import { enigmaPaths } from '../enigma/paths'
+import { horenbergHome } from '../enigma/corpus'
+import { JournalAttachments, JournalParaphrase, JournalQuote } from '../journal/JournalCite'
+import {
+  SELM_CREDIT,
+  SELM_QUOTES,
+  selmAllPublicFiles,
+  selmNidInterrogation,
+  selmQuelle2499,
+  selmU3521Dossier,
+  selmU534LastDays,
+} from '../journal/selmSources'
 
 export function JournalPage() {
   return (
@@ -11,20 +23,21 @@ export function JournalPage() {
         <div className="shell">
           <div className="section-head">
             <div className="kicker">
-              <Link to="/projects/p1030680" style={{ color: 'inherit', textDecoration: 'none' }}>
-                Project · P1030680
+              <Link to={enigmaPaths.message} style={{ color: 'inherit', textDecoration: 'none' }}>
+                Enigma · P1030680
               </Link>
-              {' · '}<NaziBlaster9000Span />
+              {' · '}Campaign journal
             </div>
-            <h2><NaziBlaster9000Span />: the ledger of an 80-year-old ghost and a persistent adversary</h2>
+            <h2>The ledger of an 80-year-old ghost</h2>
+            <p className="byline">Jessica Mulein · mechanical arm · HELUT</p>
             <p className="lede">
-              On May 1, 1945, in the dying days of World War II, a German U-boat transmitted a 72-letter encrypted message across the Baltic Sea. It was encoded using a four-rotor Enigma M4 machine on a training network known as M-Thetis. The Allied forces at Bletchley Park never bothered to break this specific network, assigning it no operational value, and the German operators printed their daily key sheets on water-soluble paper that dissolved decades ago.
+              On 1 May 1945 a Kriegsmarine Enigma M4 on the training net M-Thetis enciphered a 72-letter signal. Bletchley Park did not attack this net. Daily key sheets were printed on water-soluble paper and do not survive. The ciphertext is preserved among the Hörenberg / U-534 radio and cipher papers; preservation is not proof of intended recipient.
             </p>
             <p className="lede" style={{ marginTop: '1rem' }}>
-              For eighty years, message P1030680 has remained unbroken. In cryptography, tracking what failed is just as vital as recording what worked. This is my operational log—a chronological record of every ghost I chased off the board on my way to the true key.
+              P1030680 remains unbroken. This page is Jessica Mulein’s operational log: a chronology of every hypothesis that failed, every control that passed, and every arm still open. Tracking what was eliminated is the public record until a key and plaintext clear the BREAK gate.
             </p>
             <p className="lede" style={{ marginTop: '1rem' }}>
-              For the record, the overall unified search machine and campaign carry the formal name <NaziBlaster9000Span />. Its historical 261-entry canonical-menu/Future campaign is <Fahrenheit261Span />. The names are deliberate: I want cryptography courses and histories of this work to repeat them. Personal credit matters less to me than keeping the purpose explicit—defeating the <span className="nazi-red">Nazis</span> was, and remains, paramount. The receipt standards and BREAK gate are unchanged.
+              The unified search machine is named <NaziBlaster9000Span />. <Fahrenheit261Span /> is its bounded 261-entry canonical-menu campaign. The name is blunt on purpose. The hunt is a graded Boolean search: crib exact, IC, tail, and a physically possible ≤10-plug board. Defeating Nazi Germany is the historical purpose of the work, not a caption.
             </p>
           </div>
 
@@ -35,7 +48,7 @@ export function JournalPage() {
             </div>
             <div className="stat">
               <div className="label">Key-Net</div>
-              <div className="value">M-Thetis (Confirmed)</div>
+              <div className="value">M-Thetis (working assignment)</div>
             </div>
             <div className="stat">
               <div className="label">Ciphertext</div>
@@ -77,13 +90,13 @@ export function JournalPage() {
             <li>
               <span className="mono">OPEN</span>
               <span>
-                <strong>Still open or incomplete:</strong> the legacy target arms retain bounded, partial receipts rather than global verdicts. Tolerance 1 × right rings is suspended at <strong>3/24</strong>, with all three completed placements dead at the board; resume <code>--bombe-menus 0 --bombe-ring-sweep --bombe-garble-tolerance 1 --bombe-from 4</code>. The exact-board post-gap δ=4 arm is suspended at <strong>144/237</strong>: entries 1–110 and 112–144 are dead, and entry 111's eight raw stops yielded zero valid ≤10-plug completions; resume <code>--bombe-menus 0 --bombe-from 145</code>. Full middle × right ring coverage under the VIII-fast prior is now <strong>complete: 24/24 dead at the board</strong> — placement 1 over 4.152×10<sup>11</sup> settings at all 336 wheel orders, placements 2–24 with <strong>0 raw stops over 1.194×10<sup>12</sup> settings</strong> at 72.1M/s, nothing in quarantine. That is coverage of 42 of 336 wheel orders, not wheel-order elimination; the other 294 stay open. The four-placement P1030668 BLEIBTBESETZT context fixture is <strong>complete: 4/4 dead at the board, 0 raw stops over 2.076×10<sup>11</sup> settings</strong> at 52.3M/s (Phase 60) — still 42 of 336 wheel orders. Complete-receipt benchmarking selected <code>BANK_LANES=4</code> for <NaziBlaster9000Span />, the unified P1030680 Mulein search machine, at 276.035 receipts/s. Its Phase 51.15 preflight then completed shell 0 <code>B/beta/IV-III-VIII/AAAA</code>, setting 0, and all <strong>628 operational-prior Futures</strong>: 628/628 chunks and 16,328 receipts produced 15 host-replayed one-edge physical candidates (5 identity-family, 10 post-gap), but every candidate was non-exact, so there were <strong>0 exact hits and 0 BREAK gates</strong>. Phase 51.16 then completed settings <code>1..&lt;256</code> across all 628 Futures: <strong>10,048/10,048 new chunks, 4,163,640 checked receipts, 4,184 host-verified physical candidates, and 0 BREAK gates</strong>. Those candidates comprise 40 exact identity hits killed by ≤10-plug completion, 2,056 repaired identity hits, 41 exact post-gap hits, and 2,047 repaired post-gap hits; none produced scored plaintext, a key, or a decrypt. Candidate replay is now <strong>done for every exact candidate, and it corrected our own diagnosis</strong>. Counting the ledger gave 41 exact/no-drop post-gap candidates, 40 exact identity candidates already killed by plug completion, and 4,103 repaired. A read-only geometry-aware adjudicator then graded the 41 with no GPU at all: host replay verified 41/41, and <strong>all 41 return no-consistent-board</strong> — no ≤10-plug board satisfies the whole menu, so they never reach the language test. The missing geometry-aware decrypt was therefore never the blocker. Their six source Futures carry <strong>two to five disconnected components</strong> on 16–21 edges, one of them a zero-loop tree, which makes them split-menu ghosts of the kind documented since Phase 4 — and the campaign had already killed all 40 identity siblings the same way. <strong>All 81 exact candidates in that stripe are ghosts.</strong> Identity-family repairs with at least four forced plugs were consumed by <code>--mulein-ostwald-adapt</code> / <code>--ostwald-escalate</code> (Phases 62–64): <strong>38 then 824 then 4,101 climbed, NO BREAK</strong>. Phase 64's best −3.0390 (IC 0.0544) crib BAD beats a 12-sample floor after 3.33 million climbs; that is not a near-miss. Settings <code>256..&lt;456976</code> and other shells remain open. Also open: catalog right rings from originalIndex 418, Thetis-register rings from menu 14, the deprioritised 300-placement long-menu remainder, and the Phase 65 ranker/beam/all-settings path until <code>--ostwald-curve</code> greets at 72 letters. P1030680 remains unbroken; these cleartext Float TensorLUT/Metal receipts are not FHE and supply no key or decrypt.
+                <strong>Still open or incomplete — and still unbroken.</strong> No key, no plaintext. Resume flags below are where the hunt sits, not coverage of the whole space. The legacy target arms retain bounded, partial receipts rather than global verdicts. Tolerance 1 × right rings is suspended at <strong>3/24</strong>, with all three completed placements dead at the board; resume <code>--bombe-menus 0 --bombe-ring-sweep --bombe-garble-tolerance 1 --bombe-from 4</code>. The exact-board post-gap δ=4 arm is suspended at <strong>144/237</strong>: entries 1–110 and 112–144 are dead, and entry 111's eight raw stops yielded zero valid ≤10-plug completions; resume <code>--bombe-menus 0 --bombe-from 145</code>. Full middle × right ring coverage under the VIII-fast prior is now <strong>complete: 24/24 dead at the board</strong> — placement 1 over 4.152×10<sup>11</sup> settings at all 336 wheel orders, placements 2–24 with <strong>0 raw stops over 1.194×10<sup>12</sup> settings</strong> at 72.1M/s, nothing in quarantine. That is coverage of 42 of 336 wheel orders, not wheel-order elimination; the other 294 stay open. The four-placement P1030668 BLEIBTBESETZT context fixture is <strong>complete: 4/4 dead at the board, 0 raw stops over 2.076×10<sup>11</sup> settings</strong> at 52.3M/s (Phase 60) — still 42 of 336 wheel orders. Complete-receipt benchmarking selected <code>BANK_LANES=4</code> for <NaziBlaster9000Span />, the unified P1030680 Mulein search machine, at 276.035 receipts/s. Its Phase 51.15 preflight then completed shell 0 <code>B/beta/IV-III-VIII/AAAA</code>, setting 0, and all <strong>628 operational-prior Futures</strong>: 628/628 chunks and 16,328 receipts produced 15 host-replayed one-edge physical candidates (5 identity-family, 10 post-gap), but every candidate was non-exact, so there were <strong>0 exact hits and 0 BREAK gates</strong>. Phase 51.16 then completed settings <code>1..&lt;256</code> across all 628 Futures: <strong>10,048/10,048 new chunks, 4,163,640 checked receipts, 4,184 host-verified physical candidates, and 0 BREAK gates</strong>. Those candidates comprise 40 exact identity hits killed by ≤10-plug completion, 2,056 repaired identity hits, 41 exact post-gap hits, and 2,047 repaired post-gap hits; none produced scored plaintext, a key, or a decrypt. Candidate replay is now <strong>done for every exact candidate, and it corrected our own diagnosis</strong>. Counting the ledger gave 41 exact/no-drop post-gap candidates, 40 exact identity candidates already killed by plug completion, and 4,103 repaired. A read-only geometry-aware adjudicator then graded the 41 with no GPU at all: host replay verified 41/41, and <strong>all 41 return no-consistent-board</strong> — no ≤10-plug board satisfies the whole menu, so they never reach the language test. The missing geometry-aware decrypt was therefore never the blocker. Their six source Futures carry <strong>two to five disconnected components</strong> on 16–21 edges, one of them a zero-loop tree, which makes them split-menu ghosts of the kind documented since Phase 4 — and the campaign had already killed all 40 identity siblings the same way. <strong>All 81 exact candidates in that stripe are ghosts.</strong> Identity-family repairs with at least four forced plugs were consumed by <code>--mulein-ostwald-adapt</code> / <code>--ostwald-escalate</code> (Phases 62–64): <strong>38 then 824 then 4,101 climbed, NO BREAK</strong>. Phase 64's best −3.0390 (IC 0.0544) crib BAD beats a 12-sample floor after 3.33 million climbs; that is not a near-miss. Settings <code>256..&lt;456976</code> and other shells remain open. Also open: catalog right rings from originalIndex 418, tolerance 1 from placement 4, post-gap δ=4 from 145, and the deprioritised 300-placement long-menu remainder. Phase 65’s ranker/beam path did not greet at 72 letters. Phase 67 greets on locked P1030684; the wrong-setting ghost is crib BAD (IC 0.0509, NO BREAK). Phase 68 resumes Thetis-register × right rings from menu 14/73 — both the archival arm and this Welchman remainder stay live; 26<sup>4</sup> is not a campaign. P1030680 remains unbroken; these cleartext Float TensorLUT/Metal receipts are not FHE and supply no key or decrypt.
               </span>
             </li>
             <li>
               <span className="mono">HAPAX</span>
               <span>
-                <strong>A known but dormant corpus surface was tested with historian-supplied leads, and came back clean.</strong> HELUT's August 2026 relay audit had already measured that the recurrence catalogue omits 152,938 of 154,469 distinct 16–40 letter windows and expands them to 2,691,455 legal placements; its naive 24-placement fixture was never run and the gap never reached this chronology. In September, <strong>Selm Merel Wenselaers</strong> (Historian / Curator, Amsterdam / Antwerp), now a deeply valued member of the campaign team leading the historical/archival arm, independently flagged the filter and supplied three historically motivated phrases. Her 15/44 legal-placement list reproduces exactly, and her highlighted starts 3 and 12 are the only single-component menus among the four tied at nine loops. The 28-placement right-ring arm is now <strong>complete: 28/28 dead at the board, zero raw stops over 4.471×10<sup>11</sup> settings</strong>, nothing reaching the plug sieve and no soft-band hit. That is a verdict on those 28 placements of the <em>recorded</em> ciphertext under right-ring coverage with the middle ring pinned — not on the phrases in general, and not on the wider hapax surface. The strings are second-net/Potsdam rather than Thetis register. The post-gap arm then came back the same way: <strong>28/28 dead, zero raw stops over another 4.471×10<sup>11</sup> settings</strong>, testing the hypothesis that a four-letter group went missing from the recording before the crib — the error Girard documented in the sister message. Both readings of the transcript are therefore closed for these placements, and neither produced so much as a stop. Tolerance 1, which tests a single mis-read letter, is measured affordable at a 7.7× cost factor with zero projected spurious stops and is the only edit hypothesis left untested for these phrases. With thanks: Wenselaers' historical selection, independent diagnosis, placement arithmetic, and menu insight made the experiment possible; HELUT's graded path turned that work into a bounded measurement. The two clean negatives are joint campaign findings, not separate contributions competing for credit.
+                <strong>A known but dormant corpus surface was tested with historian-supplied leads, and came back clean.</strong> HELUT's August 2026 relay audit had already measured that the recurrence catalogue omits 152,938 of 154,469 distinct 16–40 letter windows and expands them to 2,691,455 legal placements; its naive 24-placement fixture was never run and the gap never reached this chronology. In September, <strong>Selm Merel Wenselaers</strong> (historian and curator, Amsterdam / Antwerp), who leads the archival arm, independently flagged the filter and supplied three historically motivated phrases. Her 15/44 legal-placement list reproduces exactly, and her highlighted starts 3 and 12 are the only single-component menus among the four tied at nine loops. The 28-placement right-ring arm is now <strong>complete: 28/28 dead at the board, zero raw stops over 4.471×10<sup>11</sup> settings</strong>, nothing reaching the plug sieve and no soft-band hit. That is a verdict on those 28 placements of the <em>recorded</em> ciphertext under right-ring coverage with the middle ring pinned — not on the phrases in general, and not on the wider hapax surface. The strings are second-net/Potsdam rather than Thetis register. The post-gap arm then came back the same way: <strong>28/28 dead, zero raw stops over another 4.471×10<sup>11</sup> settings</strong>, testing the hypothesis that a four-letter group went missing from the recording before the crib — the error Girard documented in the sister message. Both readings of the transcript are therefore closed for these placements, and neither produced so much as a stop. Tolerance 1, which tests a single mis-read letter, is measured affordable at a 7.7× cost factor with zero projected spurious stops and is the only edit hypothesis left untested for these phrases. With thanks: Wenselaers' historical selection, independent diagnosis, placement arithmetic, and menu insight made the experiment possible; HELUT's graded path turned that work into a bounded measurement. The two clean negatives are joint campaign findings, not separate contributions competing for credit.
               </span>
             </li>
             <li>
@@ -130,14 +143,20 @@ export function JournalPage() {
             </li>
             <li>
               <span className="mono">OPEN</span>
-              <span>
-                <strong>Quelle Tafel A pairs are photographed. The May plan is a different Prüfnummer.</strong> Crypto Museum Doppelbuchstabentauschtafeln Prüfnr. 2499, pp. 3–4, shows <code>VR→ES OL→AE NM→CD KA→HM</code> and the control maps <code>FN→KY HC→DM GV→UU ET→ZZ</code>. So <code>VROL NMKA → EACH/SEDM</code> is no longer only a recovered mapping. 1 May table <em>selection</em> remains Tauschtafelplan Bruno Prüfnr. 1772a. The 2499 cover assigns that set's plan the same Prüfnr. Edition compatibility is not demonstrated; <code>discovery_eligible</code> stays false.
-              </span>
+              <div>
+                <span>
+                  <strong>Quelle Tafel A pairs are photographed. The May plan is a different Prüfnummer.</strong> Crypto Museum Doppelbuchstabentauschtafeln Prüfnr. 2499, pp. 3–4, shows <code>VR→ES OL→AE NM→CD KA→HM</code> and the control maps <code>FN→KY HC→DM GV→UU ET→ZZ</code>. So <code>VROL NMKA → EACH/SEDM</code> is no longer only a recovered mapping. 1 May table <em>selection</em> remains Tauschtafelplan Bruno Prüfnr. 1772a. The 2499 cover assigns that set's plan the same Prüfnr. Edition compatibility is not demonstrated; <code>discovery_eligible</code> stays false.
+                </span>
+                <JournalAttachments
+                  kicker={`Attachment · ${SELM_CREDIT}`}
+                  files={[selmQuelle2499]}
+                />
+              </div>
             </li>
             <li>
               <span className="mono">OPEN</span>
               <span>
-                <strong>The 164-million 4-plug alphabet climb is RUNNING on the known-key greeting.</strong> True P1030684 setting VYAA / index 385320. This is not a 210/164M lottery: those 210 true 4-subsets sit at about 1 in 781,000, frequency cannot find them (0/32), and the run visits every start. What is being graded is whether greedy insertion from those 210 still prints crib-exact at 72 letters. Phase 50.6 froze four oracle plugs on a ten-message panel (50% / +0.33); that is not this experiment. Live ~37M/s, ~30 min remaining. Log <code>logs/ostwald-fourplug-p1030684-true-385320.log</code>. Next is wrong setting index 0. Not pointed at P1030680 until true crib-exact and wrong crib BAD.
+                <strong>The 164-million 4-plug alphabet climb greets on the true P1030684 setting. The wrong-setting ghost is crib BAD.</strong> True VYAA / index 385320: 164,038,875 streamed starts, 313 Metal waves, <strong>~37.8 min at 36.3M/s</strong>, <strong>1 candidate clears the break bar</strong> — crib ok, IC 0.0657, tail −2.9671, 10 pairs, the known 72-letter window. Log <code>logs/ostwald-fourplug-p1030684-true-385320.log</code>. Ghost AAAA / index 0: 2026-09-24T17:30:26Z → 18:08:27Z, <strong>~38.0 min at 36.2M/s</strong>, crib BAD, IC 0.0509, tail −3.0462, <strong>NO BREAK</strong>. Log <code>logs/ostwald-fourplug-p1030684-wrong-0.log</code>. Known-key pair, not P1030680. A handful of locked P1030680 settings is eligible as a 38-minute confirmation; never 26<sup>4</sup>. Phase 68 spends the GPU on Thetis-register rings instead of one random AAAA ticket.
               </span>
             </li>
             <li>
@@ -177,24 +196,48 @@ export function JournalPage() {
               <span>
                 <strong>For the first time, we can name a single document that would change the mechanics — not another crib.</strong> Five mechanical routes closed in one day (the constellation pairing, the basin estimator, corpus volume, operator key habits, and the indicator system), against one ordering prior and one reframe. The pattern is the finding: every closed route was mechanical, and the arithmetic now ranks archives above compute. The plugboard was a <em>daily</em> setting, four correct plugs flip the statistics from hopeless to solvable, and a second same-day message would constrain the same board with 144 letters instead of 72. No sweep we own competes with that.
                 {' '}
-                So the ask has a specific target: <strong>the 1 May 1945 Kriegsmarine key table — did it assign wheel orders centrally across nets, or did each net draw independently?</strong> All three nets broken that day used the same fast rotor, which we are currently forced to treat as a mere ordering hint. If central assignment is documented, that hint becomes a hard constraint and the search space genuinely shrinks eightfold; if nets chose freely, it stays a weak hint and we keep paying full price. Either answer is worth having, and only an archive can give it. That is a question a single document settles, which is what makes it worth a journey. Bauer's cited Appendix F is a surviving Hydra May 1945 <em>plugboard</em> fragment, not that document, unless the missing page also prints wheel order. Identity-family Ostwald against the bounded stripe is now another closed mechanical route (Phases 62–64, including Metal on split-menu seeds and CPU on every remaining repair); it does not change that ranking. Live mechanical plan (Phase 67): 4-plug alphabet climb on locked P1030684 VYAA, then the wrong-setting ghost control, and only then any locked P1030680 guess. Archives still outrank more sweeping of this ciphertext. Tafel A pairs are now photographed in Prüfnr. 2499; the May plan is still 1772a.
+                So the ask has a specific target: <strong>the 1 May 1945 Kriegsmarine key table — did it assign wheel orders centrally across nets, or did each net draw independently?</strong> All three nets broken that day used the same fast rotor, which we are currently forced to treat as a mere ordering hint. If central assignment is documented, that hint becomes a hard constraint and the search space genuinely shrinks eightfold; if nets chose freely, it stays a weak hint and we keep paying full price. Either answer is worth having, and only an archive can give it. That is a question a single document settles, which is what makes it worth a journey. Bauer's cited Appendix F is a surviving Hydra May 1945 <em>plugboard</em> fragment, not that document, unless the missing page also prints wheel order. Identity-family Ostwald against the bounded stripe is now another closed mechanical route (Phases 62–64, including Metal on split-menu seeds and CPU on every remaining repair); it does not change that ranking. Live mechanical plan (Phase 67): the true P1030684 4-plug greeting is <strong>done</strong> (crib-exact, known plaintext); the wrong-setting ghost control is running. Archives still outrank more sweeping of this ciphertext. Tafel A pairs are now photographed in Prüfnr. 2499; the May plan is still 1772a.
               </span>
             </li>
             <li>
               <span className="mono">ARCHIVE</span>
-              <span>
-                <strong>A photographed U-3521 war diary gives us the Baltic training environment — and its custodian was careful to say what it is not.</strong> Wenselaers recovered the complete U-3521 material including photographs of surviving KTB pages rather than forum transcriptions. The boat begins Agru-Front training on 2 April, and a 9 April entry records <code>Auf Sehrohrtiefe (FT-Programmzeit)</code> — scheduled radio reception at periscope depth, which is the concrete form of the broadcast layer we had only inferred. The final pages document preparations for scuttling on 30 April and 1 May, the crew leaving on 2 May except for the demolition party and travelling to Neustadt, and the boat scuttled on 3 May.
-                {' '}
-                <strong>She also reported the absence first.</strong> There is no second Thetis transmission in the dossier, and she declined to oversell it. She holds one further distinction strictly, and we adopt it verbatim: the war diary documents the crew going <em>to Neustadt</em> but does <em>not</em> name the 3. U-Lehrdivision — that link comes only from a separate order. Two sources, two claims, kept apart. So this is procedural context, not evidence that U-3521 itself used Thetis.
-                {' '}
-                One trap worth flagging before anyone walks into it: a DEFE signal places U-3014, U-2538 and U-3024 together at Travemünde on 1 May, which looks like corroboration for the boat-number cribs we withdrew. It is not. That withdrawal rested on the raw sister copies not carrying those number strings cleanly — a transcription fact the DEFE material does not touch. Boats sharing a harbour is not a letter string in this ciphertext. The withdrawal stands.
-              </span>
+              <div>
+                <span>
+                  <strong>A photographed U-3521 war diary gives us the Baltic training environment — and its custodian was careful to say what it is not.</strong> Wenselaers recovered the complete U-3521 material including photographs of surviving KTB pages rather than forum transcriptions. The boat begins Agru-Front training on 2 April, and a 9 April entry records <code>Auf Sehrohrtiefe (FT-Programmzeit)</code> — scheduled radio reception at periscope depth, which is the concrete form of the broadcast layer we had only inferred. The final pages document preparations for scuttling on 30 April and 1 May, the crew leaving on 2 May except for the demolition party and travelling to Neustadt, and the boat scuttled on 3 May.
+                  {' '}
+                  <strong>She also reported the absence first.</strong> There is no second Thetis transmission in the dossier, and she declined to oversell it. Two sources, two claims, kept apart. So this is procedural context, not evidence that U-3521 itself used Thetis.
+                  {' '}
+                  One trap worth flagging before anyone walks into it: a DEFE signal places U-3014, U-2538 and U-3024 together at Travemünde on 1 May, which looks like corroboration for the boat-number cribs we withdrew. It is not. That withdrawal rested on the raw sister copies not carrying those number strings cleanly — a transcription fact the DEFE material does not touch. Boats sharing a harbour is not a letter string in this ciphertext. The withdrawal stands.
+                </span>
+                <JournalQuote speaker={SELM_CREDIT} source="U-3521 source dossier, 24 September 2026">
+                  {SELM_QUOTES.thetisRefusal}
+                </JournalQuote>
+                <JournalQuote speaker={SELM_CREDIT} source="U-3521 source dossier, 24 September 2026">
+                  {SELM_QUOTES.neustadtSeparation}
+                </JournalQuote>
+                <JournalQuote speaker={SELM_CREDIT} source="U-3521 source dossier, 24 September 2026">
+                  {SELM_QUOTES.dossierHierarchy}
+                </JournalQuote>
+                <JournalAttachments
+                  kicker={`Attachment · ${SELM_CREDIT}`}
+                  files={[selmU3521Dossier]}
+                />
+              </div>
             </li>
             <li>
               <span className="mono">ARCHIVE</span>
-              <span>
-                <strong>The historical arm is now active team work, and it changes the model without pretending to prove it.</strong> Wenselaers reports a concrete Volksliste III process from DEFE and the original U-3521 KTB: demolition parties remained aboard while crews transferred to the 3. U-Lehrdivision at Neustadt. That makes Neustadt and scuttling linked stages rather than competing scenarios. The repository independently confirms <code>FFFTTTBLEIBTBESETZT</code> exactly in P1030668 and the corrupted <code>FFFTTTBLEIBTBESEOZTX</code> sister reading in P1030707; the proposed clean U-3024/U-2538 strings are withdrawn after raw-copy recheck. The reported <code>KLAR ZUM VERSENKEN GEM. BEFEHL.</code>, U-3521 <code>FT-Programmzeit</code>, DEFE references, and changing Aegir/Thetis allocation lists remain source-reported pending scans, exact message IDs, and chronology. P1030680's working net stays M-Thetis, but the later allocation-list provenance and the intended recipient are now printed as open. An exact 40-letter P1030668 radio context gives four single-component 18-loop menus and is <strong>complete: 4/4 dead, 0 raw stops over 2.076×10<sup>11</sup> settings</strong> under the VIII-fast middle-ring coverage that came back empty on the strongest catalog menus (Phase 60). Phase 61 holds VIII-fast as an ordering prior: NARA key-log requests, R.I.P. 401 non-random sheets, and a 3 May Kenngruppen test are live archival lines with no receipts yet. Not another invented sentence, and not a Girard-named-class weighted Mulein board.
-              </span>
+              <div>
+                <span>
+                  <strong>The historical arm is now active team work, and it changes the model without pretending to prove it.</strong> Wenselaers reports a concrete Volksliste III process from DEFE and the original U-3521 KTB: demolition parties remained aboard while crews transferred to the 3. U-Lehrdivision at Neustadt. That makes Neustadt and scuttling linked stages rather than competing scenarios. The repository independently confirms <code>FFFTTTBLEIBTBESETZT</code> exactly in P1030668 and the corrupted <code>FFFTTTBLEIBTBESEOZTX</code> sister reading in P1030707; the proposed clean U-3024/U-2538 strings are withdrawn after raw-copy recheck. The reported <code>KLAR ZUM VERSENKEN GEM. BEFEHL.</code>, U-3521 <code>FT-Programmzeit</code>, DEFE references, and changing Aegir/Thetis allocation lists remain source-reported pending scans, exact message IDs, and chronology. P1030680's working net stays M-Thetis, but the later allocation-list provenance and the intended recipient are now printed as open. An exact 40-letter P1030668 radio context gives four single-component 18-loop menus and is <strong>complete: 4/4 dead, 0 raw stops over 2.076×10<sup>11</sup> settings</strong> under the VIII-fast middle-ring coverage that came back empty on the strongest catalog menus (Phase 60). Phase 61 holds VIII-fast as an ordering prior: NARA key-log requests, R.I.P. 401 non-random sheets, and a 3 May Kenngruppen test are live archival lines with no receipts yet. Not another invented sentence, and not a Girard-named-class weighted Mulein board.
+                </span>
+                <JournalQuote speaker={SELM_CREDIT} source="The last days of U-534, 23 September 2026">
+                  {SELM_QUOTES.notForU534}
+                </JournalQuote>
+                <JournalAttachments
+                  kicker={`Attachment · ${SELM_CREDIT}`}
+                  files={[selmU534LastDays]}
+                />
+              </div>
             </li>
           </ul>
         </div>
@@ -206,7 +249,7 @@ export function JournalPage() {
             <div className="kicker">Chronology</div>
             <h2>Hunting the true key, step by step</h2>
             <p>
-              When you are trying to break a cipher this old, your first instinct is to let a computer guess the answer. I learned very quickly that guessing is exactly what the Enigma machine was designed to defeat. Here is the true chronological history of my attack on U-534.
+              The first instinct against a cipher this old is to let a computer guess. That is what Enigma was designed to defeat. What follows is the chronological record of the attack on P1030680 — not a claim that the signal was addressed to U-534.
             </p>
           </div>
           <div className="timeline">
@@ -228,7 +271,12 @@ export function JournalPage() {
               <h3>History is cheaper than compute.</h3>
               <div className="prose">
                 <p>
-                  Before spinning up the graphics cards again, I scraped the historical archives. I pulled a corpus of 50 message pages intercepted from U-534 on that exact same day: 48 broken M4 messages, one hand-cipher, and exactly one unbroken Enigma message—mine.
+                  Before spinning up the graphics cards again, I scraped the historical archives. I pulled a corpus of 50 message pages intercepted from U-534 on that exact same day: 48 broken M4 messages, one hand-cipher, and exactly one unbroken Enigma message—mine. The pages are hosted by{' '}
+                  <a href={horenbergHome} target="_blank" rel="noreferrer">
+                    Michael Hörenberg
+                  </a>
+                  . That scrape is now public on the{' '}
+                  <Link to={enigmaPaths.corpus}>U-534 corpus</Link> page, with the JSON available to download.
                 </p>
                 <p>
                   I was hunting for a lucky break. Did the operator accidentally re-send a message that was already broken (a "kiss")? I tested all 72 possible alignments, but the survival rate matched pure random chance. Did they reuse a daily key from another network like Potsdam or Plaice? I exhausted all 456,976 possible message keys against the three recovered daily keys from those networks, and found nothing but the noise floor (a bigram score of ≈ −212).
@@ -244,13 +292,13 @@ export function JournalPage() {
 
             <article className="tl-item">
               <div className="when">Phase 2: The Boolean Engine</div>
-              <h3>Building a flawless digital Bombe.</h3>
+              <h3>A Metal Welchman board.</h3>
               <div className="prose">
                 <p>
-                  I abandoned statistics and engineered a massive, Metal-accelerated digital version of Gordon Welchman’s WWII diagonal board. Instead of guessing, it uses pure Boolean logic to test for contradictions, rejecting impossible physical states at roughly 45 million settings per second — and close to double that once the middle-ring coverage skip lets most lanes exit early.
+                  Statistics were retired. In their place: a Metal-accelerated Gordon Welchman diagonal board. It tests for Boolean contradiction and rejects physically impossible rotor states at roughly 45 million settings per second — close to double that once the middle-ring coverage skip lets most lanes exit early.
                 </p>
                 <p>
-                  To make it faster, I optimized my software to perfectly match the physical reality of the 1945 hardware. Because the far-left Enigma rotor (the Greek wheel) never steps during a short message, and the left rotor's notch drives nothing, I digitally pinned them in place. This Turing-shaped architectural decision collapsed the search space by a massive factor of 676.
+                  The software is pinned to 1945 hardware. The Greek wheel does not step on a 72-letter message, and the left rotor’s notch drives nothing, so both are held. That Turing-shaped reduction collapses the search by 676.
                 </p>
                 <p>
                   A rehearsal run on a known message (P1030684) proved the <em>board</em> is perfect: if I hand it the true shell and a 16-letter phrase, the true key is the absolute only survivor out of 456,976 possible settings. What that rehearsal did <em>not</em> grade was the full campaign path—336 rotor orders, Greek wheels, reflectors, ring phases. That gap is Phase 11.
@@ -263,7 +311,7 @@ export function JournalPage() {
               <h3>Reality beats mathematics.</h3>
               <div className="prose">
                 <p>
-                  During my first major sweep, I thought I had cracked it. I tested the common naval phrase <code>UUUVIRSIBENNULEINS</code> at the very beginning of the message (offset 0). The GPU engine spit out 12 surviving rotor states where the logical math worked perfectly.
+                  During my first major sweep, I thought I had cracked it. I tested the common naval phrase <code>UUUVIRSIBENNULEINS</code> at the very beginning of the message (offset 0). The GPU returned 12 surviving rotor states where the logical math worked perfectly.
                 </p>
                 <p>
                   But a physical 1945 Enigma operator only had exactly 10 cables to plug into their machine. When my script took those 12 mathematical survivors and tried to map the remaining letters to see if they fit within that strict 10-cable limit, every single one of them failed. My digital forensics showed that the menu was mathematically "split," meaning one cluster of letters admitted zero valid starting seeds. They were "ghosts"—mathematical flukes that failed basic physics. I immediately built an automated, inline kill chain into my engine to permanently catch these false positives as they drain off the GPU.
@@ -669,7 +717,7 @@ export function JournalPage() {
                   That mechanism grade was not a decrypt or evidence that P1030680 is garbled. The target arm has now run, but only to a durable partial boundary: <strong>3 of 24</strong> strongest placements completed under tolerance 1 × right-ring coverage, all three dead at the board. It is suspended, not running; resume <code>--bombe-menus 0 --bombe-ring-sweep --bombe-garble-tolerance 1 --bombe-from 4</code>. The remaining 21 placements are open, so this is three local negatives rather than a target-wide verdict.
                 </p>
                 <p>
-                  Tolerance still does not model <strong>indels</strong>, and that gap turned out to matter more than the board itself — so I built and partially ran the other half. Full design notes for both live on the <Link to="/projects/p1030680/mulein-board">Mulein board page</Link>.
+                  Tolerance still does not model <strong>indels</strong>, and that gap turned out to matter more than the board itself — so I built and partially ran the other half. Full design notes for both live on the <Link to={enigmaPaths.mulein}>Mulein board page</Link>.
                 </p>
               </div>
             </article>
@@ -785,6 +833,16 @@ export function JournalPage() {
                 <p>
                   The next tranche changes the target model rather than inventing another sentence. Wenselaers reports primary-source evidence that crews transferred to Neustadt while demolition parties remained aboard, so Neustadt and scuttling are stages of one process. She also reports scheduled <code>FT-Programmzeit</code> reception during AGRU-Front training, changing Aegir/Thetis allocation lists, and active archive enquiries. These reports carry named sources but remain source-reported until scans or exact transcriptions enter the evidence room. Preservation among U-534's papers does not prove intended recipient; intercepted training-network traffic is now an open hypothesis.
                 </p>
+                <JournalQuote speaker={SELM_CREDIT} source="The last days of U-534, 23 September 2026">
+                  {SELM_QUOTES.notForU534}
+                </JournalQuote>
+                <JournalQuote speaker={SELM_CREDIT} source="The last days of U-534, 23 September 2026">
+                  {SELM_QUOTES.unreadMessage}
+                </JournalQuote>
+                <JournalAttachments
+                  kicker={`Attachments · ${SELM_CREDIT}`}
+                  files={[selmU534LastDays, selmU3521Dossier]}
+                />
                 <p>
                   The corpus independently confirms one new exact radio phrase: <code>FFFTTTBLEIBTBESETZT</code> in P1030668. Its short core is mechanically weak, but the exact 40-letter source context yields four single-component, 18-loop alignment hypotheses. Phase 60 then ran those four placements under the same VIII-fast middle-ring coverage that came back empty on the strongest catalog menus: <strong>4/4 dead, 0 raw stops over 2.076×10<sup>11</sup> settings</strong>.
                 </p>
@@ -819,11 +877,31 @@ export function JournalPage() {
 
             <article className="tl-item">
               <div className="when">Phase 61: archival map</div>
-              <h3>The search-changing documents are now named. None of them has been read.</h3>
+              <h3>The search-changing documents are now named. The interrogation is attached; the NARA boxes have not been read.</h3>
               <div className="prose">
                 <p>
                   Wenselaers has a NARA RG 457 request acknowledged for German key logs, allocation lists, and indicator books, including Box 620 NR 1665 key logs through May 1945. R.I.P. 401 is reported to document non-random naval wheel-order sheets; that is structure <em>inside</em> a net’s key generation, not yet a proof that one net’s fast wheel constrains another. The April 1945 NID interrogation (U 413 / U 1209 / U 877 / U 1199) reconstructs Baltic working-up as temporary flotilla attachments and describes radio-watch practice — listen to routines even when remaining silent — but <strong>never names Thetis</strong>. A 3 May FdU Ausbildung / FdU Front split is a designed natural experiment once original 8-letter Kenngruppen exist; Cloots and Beckers are the trail, and no indicators are in hand.
                 </p>
+                <JournalParaphrase speaker={SELM_CREDIT} source="24 September 2026 replies">
+                  <p>
+                    Do not promote VIII-fast from the three recovered nets until it is known whether General Key Sheets used a common wheel-order schedule across Schlüsselnetze, or were generated independently inside each net. Keep the 42-of-336 ordering prior until that document exists.
+                  </p>
+                </JournalParaphrase>
+                <JournalParaphrase speaker={SELM_CREDIT} source="24 September 2026, ranked payoffs">
+                  <p>What would change the search, in the order she ranked it:</p>
+                  <ol>
+                    <li>a second same-period Thetis transmission</li>
+                    <li>the 1 May Schlüsseltafel / key-log answer to wheel order</li>
+                    <li>original 3 May Kenngruppen</li>
+                    <li>a duplicate or better P1030680 witness</li>
+                    <li>late Thetis holder / distribution</li>
+                    <li>a high-fidelity working-up register</li>
+                  </ol>
+                </JournalParaphrase>
+                <JournalAttachments
+                  kicker={`Attachment · ${SELM_CREDIT}`}
+                  files={[selmNidInterrogation]}
+                />
                 <p>
                   VIII-fast stays an ordering prior. No new GPU tranche. Do not mint cribs from the training vocabulary. If a key table, a second Thetis witness, or one indicator from each side of the split lands, that outranks sweeping.
                 </p>
@@ -866,6 +944,10 @@ export function JournalPage() {
                 <p>
                   The 2499 cover states that that Ausgabe's Tauschtafelplan carries the same Prüfnummer. The May plan in hand is Prüfnr. 1772a. Edition compatibility is not demonstrated. The detector records both documents and keeps <code>discovery_eligible</code> false. 3 May still fail-closed. P1030680 remains unbroken.
                 </p>
+                <JournalAttachments
+                  kicker={`Attachment · ${SELM_CREDIT}`}
+                  files={[selmQuelle2499]}
+                />
               </div>
             </article>
 
@@ -942,13 +1024,42 @@ export function JournalPage() {
 
             <article className="tl-item">
               <div className="when">Phase 67: streamed 4-plug alphabet climb</div>
-              <h3>Known-key greeting is running on P1030684 VYAA. Not this ciphertext.</h3>
+              <h3>Known-key greeting recovered P1030684. The ghost is crib BAD. Not this ciphertext.</h3>
               <div className="prose">
                 <p>
                   C(26,8)×105 = 164,038,875 four-plug boards. Metal greedy insertion from a 4-plug seed is 503 decrypts each, 8.25×10<sup>10</sup> decrypts per locked setting. The 164 million starts stream in waves of 524,288; replacement polish runs only on the top 256 scores in each wave. On the true rotor setting, 210 of those boards are true 4-subsets of a 10-plug board — about 1 in 781,000. Frequency cannot find them (Phase 66, 0/32). The greeting visits all 210; it does not roll a die. Phase 50.6 froze four <em>oracle</em> plugs on a ten-message panel (50% win, median +0.33). That is not a promise that greedy insertion from an enumerated 4-subset prints crib-exact on this 72-letter text. On a wrong setting the same budget raises ghost maxima; 72-letter IC cannot pick them.
                 </p>
                 <p>
-                  <strong>RUNNING</strong> since restart 2026-09-24T16:51:24Z: <code>--ostwald-all-settings --ostwald-control p1030684 --ostwald-setting-from 385320 --ostwald-setting-count 1 --ostwald-brute-plugs 4 --ostwald-brute-all --ostwald-exhaust 26 --ostwald-memory-gb 56</code>. Live ~37M/s. The first launch at 16:38:36Z had crawled at ~2.0M/s (~15 h) on 8,192-job chunks. Log <code>logs/ostwald-fourplug-p1030684-true-385320.log</code>. Next is setting 0 as the ghost control. Not pointed at P1030680 until both receipts exist.
+                  <strong>DONE</strong> on true VYAA / 385320 (restart 2026-09-24T16:51:24Z, exit 0 at 17:29:14Z): 313/313 waves, <strong>~37.8 min at 36.3M/s</strong>. <strong>1 candidate clears the break bar</strong> — <code>B/gamma/IV-III-VIII</code> AACU / VYAA, crib ok, IC 0.0657, tail −2.9671, 10 pairs, the known 72-letter window <code>VVVUUUVIRSOBENNULEINS…SECHS</code>. Log <code>logs/ostwald-fourplug-p1030684-true-385320.log</code>. That is a known-key greeting, not a P1030680 decrypt.
+                </p>
+                <p>
+                  <strong>DONE</strong> on wrong AAAA / 0 (launch 2026-09-24T17:30:26Z, exit 0 at 18:08:27Z): 313/313 waves, <strong>~38.0 min at 36.2M/s</strong>. Best candidate crib BAD, IC 0.0509, tail −3.0462, climbed −3.0462, decrypt <code>QWGRINEMUSEMANGN…</code>. <strong>NO BREAK</strong>. Log <code>logs/ostwald-fourplug-p1030684-wrong-0.log</code>. A handful of locked P1030680 settings is eligible as a confirmation test; never 26<sup>4</sup>.
+                </p>
+              </div>
+            </article>
+
+            <article className="tl-item">
+              <div className="when">Phase 68: dual path</div>
+              <h3>The archival arm stays first. The GPU goes back on Turing's remaining menus.</h3>
+              <div className="prose">
+                <p>
+                  Unicity says 72 letters determine German. That is not a 26<sup>4</sup> lottery. Phase 67 showed the 4-plug alphabet climb can finish a <em>true</em> setting in ~38 minutes and will not hallucinate a BREAK on a ghost — and an empty crib can no longer clear the bar. The missing input is still a historically locked setting, a second Thetis message, or a crib that actually stops. Both arms stay live so neither avenue is abandoned: Selm's archival work, and HELUT's remaining Welchman remainder.
+                </p>
+                <p>
+                  <strong>RUNNING</strong> 2026-09-24: Thetis-register × right rings from menu <strong>14/73</strong> into <code>logs/campaign-thetis-register-rings.log</code>. Menus 1–13 were already dead or unscorable. About sixty placements remain, ~6.5 hours at the measured ring-sweep rate. Middle ring stays pinned A. Command: <code>--welchman --bombe-fixture Fixtures/p1030680_thetis_register_menus.json --bombe-ring-sweep --bombe-from 14</code>. This is not a P1030680 4-plug consume and not catalog 418.
+                </p>
+              </div>
+            </article>
+
+            <article className="tl-item">
+              <div className="when">Phase 69: plugboard marginal</div>
+              <h3>The integral compresses the scores. It does not separate the key.</h3>
+              <div className="prose">
+                <p>
+                  Metropolis–Hastings on legal ≤10-plug boards, tempered from β=1 down to 0, graded on 8 known keys against 6 wrong message keys, 3 seeds. The margin got less negative on every seed and the scale-free separation got worse. Win rate stayed at the peak's 12% after the first seed. That is compression, the same failure as the Phase 56.3 proxies. Log <code>logs/plugboard-marginal-probe-20260924.log</code>. Not pointed at P1030680.
+                </p>
+                <p>
+                  Menus 15 and 16 of the live ring sweep each printed one physical stop (IC 0.049, tails −5.028 and −5.804). Both miss the soft tail floor of −4, and the shell was not recorded, so Ostwald has nothing to climb.
                 </p>
               </div>
             </article>
@@ -962,14 +1073,29 @@ export function JournalPage() {
             <div className="kicker">Honest Scope</div>
             <h2>The Evidence Room</h2>
             <p>
-              The target's working assignment is M-Thetis under the later allocation list used by Hörenberg; reported earlier and later Zuteilungslisten map column 645 differently, so the later list's date and provenance remain open. Preservation among U-534 papers likewise does not establish intended recipient. Online archival levers were exhausted, but the Selm-led historical arm now has active primary-source and collection enquiries. My engine is graded rather than trusted: the blind Welchman control breaks a known key in 352 seconds on the current binary with all ten plugs, and the full middle × right-ring control breaks in 4,307 seconds with no residual ring gap. Current P1030680 evidence remains bounded: catalog right rings are parked at originalIndex 417/2513; Thetis-register rings at 13/73; tolerance 1 × right rings at 3/24; post-gap δ=4 × right rings at 144/237; and full middle × right rings under the VIII-fast prior are <strong>24/24 dead at the board</strong> (42 of 336 wheel orders; the other 294 remain open). The two highest-risk table-cap re-runs are complete and re-confirmed with zero extra survivors; the remaining 300 contaminated catalog placements are retained but deprioritised. The production Verilog Future Bank inside <NaziBlaster9000Span /> agrees across source RTL, post-Yosys RTL, clear JSON, and cleartext Float TensorLUT on P1030684 controls, and complete-receipt benchmarking selected <code>BANK_LANES=4</code> at 276.035 receipts/s. Its operational-prior preflight covered shell 0, setting 0, and all 628 Futures: 628/628 chunks and 16,328 receipts yielded 15 host-replayed one-edge physical candidates, all non-exact, with 0 exact hits and 0 BREAK gates. The Phase 51.16 production stripe then completed settings <code>1..&lt;256</code> across those 628 Futures: <strong>10,048/10,048 chunks, 4,163,640 checked receipts, 4,184 host-verified physical candidates, and 0 BREAK gates</strong>. All 40 exact identity hits and all 41 exact post-gap hits now die at joint ≤10-plug completion: <strong>all 81 exact candidates are split-menu ghosts</strong>. Identity-family repairs with enough forced plugs were consumed by <code>--mulein-ostwald-adapt</code> / <code>--ostwald-escalate</code> (Phases 62–64): <strong>38 then 824 then 4,101 climbed, NO BREAK</strong>, best −3.0390 versus a 12-sample floor of −3.4564 after 3.33 million climbs — not a near-miss. Split-menu identity trees with at least four plugs are in the 824; Phase 64 included empty boards and gapped post-gap. The 2026 Ostwald ranker/beam/all-settings path is built (Phase 65) and gated on a known-key curve. None supplied a key or decrypt. The four-placement P1030668 BLEIBTBESETZT context fixture is <strong>complete: 4/4 dead, 0 raw stops over 2.076×10<sup>11</sup> settings</strong> under the same VIII-fast middle-ring coverage (Phase 60; log <code>campaign-wenselaers-bleibt-besetzt-viii-fast-middlering.log</code>), 0 quarantine. Live archival lines (Phase 61) include a NARA RG 457 key-log request with no box read, a reported R.I.P. 401 non-random wheel-order section that does not yet answer cross-net assignment, a 3 May Ausbildung/Front Kenngruppen test that is not executable until original indicators exist, and Bauer Anhang F cited for Hydra May 1945 stecker (page not in hand, not this ciphertext's board). Tauschtafelplan Bruno Prüfnr. 1772a now dates P1030680's Kenngruppen table as Quelle / Tafel A on 1 May (selection). Tafel A pairs are photographed in Prüfnr. 2499 (Phase 61.3); 1772a vs 2499 edition compatibility is open, and the 621–653 Thetis crop remains undated. NID 1/PW/REP/17 reconstructs Baltic working-up and radio-watch practice but does not identify Thetis. A Girard-named-class weighted Mulein deletion board is not next: it is a subset of uniform tolerance 1, already dead on the strongest menus. Settings <code>256..&lt;456976</code>, other shells, and the printed legacy remainders remain open. TensorLUT remains a cleartext parallel compiler path, not a Thetis crib, not encrypted tick rate, and not an FHE result. P1030680 remains unbroken.
+              The target's working assignment is M-Thetis under the later allocation list used by Hörenberg; reported earlier and later Zuteilungslisten map column 645 differently, so the later list's date and provenance remain open. Preservation among U-534 papers likewise does not establish intended recipient. Online archival levers were exhausted, but the archival arm led by Selm Merel Wenselaers now has active primary-source and collection enquiries. Jessica Mulein’s engine is graded rather than trusted: the blind Welchman control breaks a known key in 352 seconds on the current binary with all ten plugs, and the full middle × right-ring control breaks in 4,307 seconds with no residual ring gap. Current P1030680 evidence remains bounded: catalog right rings are parked at originalIndex 417/2513; Thetis-register rings are <strong>RUNNING from menu 14/73</strong> (Phase 68); tolerance 1 × right rings at 3/24; post-gap δ=4 × right rings at 144/237; and full middle × right rings under the VIII-fast prior are <strong>24/24 dead at the board</strong> (42 of 336 wheel orders; the other 294 remain open). The two highest-risk table-cap re-runs are complete and re-confirmed with zero extra survivors; the remaining 300 contaminated catalog placements are retained but deprioritised. The production Verilog Future Bank inside <NaziBlaster9000Span /> agrees across source RTL, post-Yosys RTL, clear JSON, and cleartext Float TensorLUT on P1030684 controls, and complete-receipt benchmarking selected <code>BANK_LANES=4</code> at 276.035 receipts/s. Its operational-prior preflight covered shell 0, setting 0, and all 628 Futures: 628/628 chunks and 16,328 receipts yielded 15 host-replayed one-edge physical candidates, all non-exact, with 0 exact hits and 0 BREAK gates. The Phase 51.16 production stripe then completed settings <code>1..&lt;256</code> across those 628 Futures: <strong>10,048/10,048 chunks, 4,163,640 checked receipts, 4,184 host-verified physical candidates, and 0 BREAK gates</strong>. All 40 exact identity hits and all 41 exact post-gap hits now die at joint ≤10-plug completion: <strong>all 81 exact candidates are split-menu ghosts</strong>. Identity-family repairs with enough forced plugs were consumed by <code>--mulein-ostwald-adapt</code> / <code>--ostwald-escalate</code> (Phases 62–64): <strong>38 then 824 then 4,101 climbed, NO BREAK</strong>, best −3.0390 versus a 12-sample floor of −3.4564 after 3.33 million climbs — not a near-miss. Split-menu identity trees with at least four plugs are in the 824; Phase 64 included empty boards and gapped post-gap. The 2026 Ostwald ranker/beam/all-settings path is built (Phase 65). The 164-million 4-plug alphabet climb <strong>greets on locked P1030684 VYAA</strong> (Phase 67: crib-exact, known 72-letter plaintext); the wrong-setting ghost is <strong>crib BAD</strong> (IC 0.0509, NO BREAK). None of that is a P1030680 key or decrypt. The four-placement P1030668 BLEIBTBESETZT context fixture is <strong>complete: 4/4 dead, 0 raw stops over 2.076×10<sup>11</sup> settings</strong> under the same VIII-fast middle-ring coverage (Phase 60; log <code>campaign-wenselaers-bleibt-besetzt-viii-fast-middlering.log</code>), 0 quarantine. Live archival lines (Phase 61) include a NARA RG 457 key-log request with no box read, a reported R.I.P. 401 non-random wheel-order section that does not yet answer cross-net assignment, a 3 May Ausbildung/Front Kenngruppen test that is not executable until original indicators exist, and Bauer Anhang F cited for Hydra May 1945 stecker (page not in hand, not this ciphertext's board). Tauschtafelplan Bruno Prüfnr. 1772a now dates P1030680's Kenngruppen table as Quelle / Tafel A on 1 May (selection). Tafel A pairs are photographed in Prüfnr. 2499 (Phase 61.3); 1772a vs 2499 edition compatibility is open, and the 621–653 Thetis crop remains undated. NID 1/PW/REP/17 reconstructs Baltic working-up and radio-watch practice but does not identify Thetis. A Girard-named-class weighted Mulein deletion board is not next: it is a subset of uniform tolerance 1, already dead on the strongest menus. Settings <code>256..&lt;456976</code>, other shells, and the printed legacy remainders remain open. TensorLUT remains a cleartext parallel compiler path, not a Thetis crib, not encrypted tick rate, and not an FHE result. P1030680 remains unbroken.
             </p>
           </div>
           <ul className="stack-list">
             <li>
+              <span className="mono">SELM</span>
+              <div>
+                <span>
+                  <strong>Named sources, attached as she recovered them.</strong> Selm Merel Wenselaers (Historian / Curator, Amsterdam / Antwerp) leads the archival arm. The files below are her reconstructions and recovered scans, published with her credit. Direct quotations are taken from those files; email rankings that are not on file are labelled paraphrase. They do not mint cribs, do not identify Thetis, and do not imply a decrypt.
+                </span>
+                <JournalAttachments
+                  kicker={`Attachments · ${SELM_CREDIT}`}
+                  files={selmAllPublicFiles}
+                  previewImages={false}
+                />
+              </div>
+            </li>
+            <li>
               <span className="mono">FIXTURES</span>
               <span>
-                <strong>The Input Data:</strong> Contains the scraped 1 May corpus (<code>u534_corpus.json</code>), my 100 mined cribs mapped to 2,513 placements (<code>p1030680_menus.json</code>), the Top-30 turnover set, fuzzed and Thetis-specific fixtures, the known-key control, and the naval trigram model. The <Fahrenheit261Span /> canonical historical unified-bank inventory remains <code>p1030680_mulein_identity_postgap_delta4.json</code> (24 identity + 237 post-gap δ=4 = 261 entries). The separate <NaziBlaster9000Span /> operational-prior inventory is <code>p1030680_mulein_regenbogen_hannibal_identity_postgap_delta4.json</code> (314 identity + 314 post-gap δ=4 = 628 Futures), fingerprint <code>fnv1a64-616326e94036a97d</code>, SHA-256 <code>1086b697d70ef9f05855292dd2e041b94a8551d18b1c51ec12c161a0c974c510</code>. Inventories are input, not execution receipts.
+                <strong>The Input Data:</strong> Contains the scraped 1 May corpus (
+                <Link to={enigmaPaths.corpus}><code>u534_corpus.json</code></Link>
+                ), my 100 mined cribs mapped to 2,513 placements (<code>p1030680_menus.json</code>), the Top-30 turnover set, fuzzed and Thetis-specific fixtures, the known-key control, and the naval trigram model. The <Fahrenheit261Span /> canonical historical unified-bank inventory remains <code>p1030680_mulein_identity_postgap_delta4.json</code> (24 identity + 237 post-gap δ=4 = 261 entries). The separate <NaziBlaster9000Span /> operational-prior inventory is <code>p1030680_mulein_regenbogen_hannibal_identity_postgap_delta4.json</code> (314 identity + 314 post-gap δ=4 = 628 Futures), fingerprint <code>fnv1a64-616326e94036a97d</code>, SHA-256 <code>1086b697d70ef9f05855292dd2e041b94a8551d18b1c51ec12c161a0c974c510</code>. Inventories are input, not execution receipts.
               </span>
             </li>
             <li>
@@ -1053,11 +1179,11 @@ export function JournalPage() {
             </article>
 
             <article className="tl-item">
-              <div className="when">6 — Parked at menu 13 of 73 (parallel OK)</div>
+              <div className="when">6 — RUNNING from menu 14 of 73</div>
               <h3>Probe Thetis register: Kenngruppe and training openings.</h3>
               <div className="prose">
                 <p>
-                  Seventy-three ≥16 Kenngruppe/training placements at the head under rings AAAA: three physical boards, zero breaks. Right-ring sweep reached menu 13 of 73—all dead or unscorable—then was aborted. Resume with <code>--bombe-from 14</code> into <code>logs/campaign-thetis-register-rings.log</code> while the catalog sweep runs.
+                  Seventy-three ≥16 Kenngruppe/training placements at the head under rings AAAA: three physical boards, zero breaks. Right-ring sweep reached menu 13 of 73—all dead or unscorable—then was aborted. Phase 68 resumed with <code>--bombe-from 14</code> into <code>logs/campaign-thetis-register-rings.log</code>. Catalog rings stay parked at 418; this is the GPU this tranche, not a 26<sup>4</sup> Ostwald brute.
                 </p>
               </div>
             </article>
@@ -1135,7 +1261,7 @@ export function JournalPage() {
                   The separate 628-Future operational inventory completed setting 0 across shell 0, then completed settings <code>1..&lt;256</code> across every Future. The production receipt contains <strong>10,048/10,048 new chunks, 4,163,640 checked receipts, 4,184 host-verified physical candidates, and 0 BREAK gates</strong> in <code>logs/p1030680-mulein-operational-settings-000001-000256-v3.jsonl</code>, run identity <code>sha256-efb770bcaddd2bc0581edbb19b66077160a806c30650a60d0b9d6a733c592cc0</code>. It produced no scored plaintext, key, or decrypt; broader settings and shells remain open.
                 </p>
                 <p>
-                  Exact-family replay is done: all 81 exact candidates are split-menu ghosts. Identity-family and gapped post-gap repairs were climbed (Phases 62–64): <strong>38 then 824 then 4,101 crib BAD, NO BREAK</strong>. Phase 64's best −3.0390 (IC 0.0544) vs a 12-sample floor after 3.33 million climbs is not a near-miss. The 2026 Ostwald ranker/beam path (Phase 65) and the 4-plug hot-letter brute (Phase 66) are graded negatives; the 164-million 4-plug alphabet climb is <strong>RUNNING</strong> on locked P1030684 VYAA (Phase 67), log <code>logs/ostwald-fourplug-p1030684-true-385320.log</code>. Not a P1030680 consume. Four correct plugs still finish a true stop. A translation audit found 1,724 identity/post-gap pairs at a four-lane setting shift, so another broad TensorLUT stripe or same-shape leading δ6/δ8 stripe is low-information. Ordinary legacy resumes stay at their printed durable boundaries. This is a working search order, not evidence of a historical plaintext or a claim that P1030680 is garbled.
+                  Exact-family replay is done: all 81 exact candidates are split-menu ghosts. Identity-family and gapped post-gap repairs were climbed (Phases 62–64): <strong>38 then 824 then 4,101 crib BAD, NO BREAK</strong>. Phase 64's best −3.0390 (IC 0.0544) vs a 12-sample floor after 3.33 million climbs is not a near-miss. The 2026 Ostwald ranker/beam path (Phase 65) and the 4-plug hot-letter brute (Phase 66) are graded negatives; the 164-million 4-plug alphabet climb <strong>greets on locked P1030684 VYAA</strong> (Phase 67, crib-exact, known plaintext) and the AAAA ghost is crib BAD (IC 0.0509, NO BREAK), log <code>logs/ostwald-fourplug-p1030684-wrong-0.log</code>. Not a P1030680 consume. Four correct plugs still finish a true stop. A translation audit found 1,724 identity/post-gap pairs at a four-lane setting shift, so another broad TensorLUT stripe or same-shape leading δ6/δ8 stripe is low-information. Ordinary legacy resumes stay at their printed durable boundaries. This is a working search order, not evidence of a historical plaintext or a claim that P1030680 is garbled.
                 </p>
               </div>
             </article>

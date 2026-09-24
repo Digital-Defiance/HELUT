@@ -15,7 +15,7 @@ export function QueuedProjectJournalPage() {
 
   // Projects with dedicated journal components should not hit this route.
   if (project.slug === 'p1030680') {
-    return <Navigate to="/projects/p1030680/journal" replace />
+    return <Navigate to="/enigma/journal" replace />
   }
   if (project.slug === 'netlist-fhe') {
     return <Navigate to="/projects/netlist-fhe/journal" replace />

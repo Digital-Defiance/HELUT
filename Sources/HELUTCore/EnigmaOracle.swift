@@ -74,6 +74,8 @@ package enum EnigmaWarehouse {
 
     package static let reflectorA: [Int] = EnigmaAlphabet.normalize("EJMZALYXVBWFCRQUONTSPIKHGD")
     package static let reflectorB: [Int] = EnigmaAlphabet.normalize("YRUHQSLDPXNGOKMIEBFZCWVJAT")
+    /// Thick Umkehrwalze C (Caesar). M4's thin C + γ parked at A/A is this permutation.
+    package static let reflectorC: [Int] = EnigmaAlphabet.normalize("FVPJIAOYEDRZXWGCTKUQSBNMHL")
 
     package static func rotor(named name: String) -> EnigmaRotorSpec {
         switch name.uppercased() {
@@ -93,6 +95,7 @@ package enum EnigmaWarehouse {
         switch name.uppercased() {
         case "A": return reflectorA
         case "B": return reflectorB
+        case "C": return reflectorC
         default: preconditionFailure("Unknown reflector '\(name)'")
         }
     }

@@ -1,0 +1,17 @@
+clean-key controls : 8 (72-letter capable pool 32 clean)
+n-gram order       : 4 leave-one-out
+wrong-key samples  : 6 per control, same shell
+schedule           : [1.0, 0.5, 0.25, 0.1, 0.05, 0.01, 0.0] × 24 MH steps
+truth and decoys walk the same prior. No record plugboard is loaded.
+
+  seed   method  ctrls   win%   med margin   decoy sd    med z  verdict
+-----------------------------------------------------------------------
+20260924     peak      8    12%      -2.6465     2.8448    0.104  baseline
+20260924 integral      8    25%      -0.6581     0.2880   -0.837  COMPRESSION ONLY — margin up, z down; not progress
+20268843     peak      8    12%      -5.6120     2.9152    0.069  baseline
+20268843 integral      8    12%      -0.4481     0.3483   -0.813  COMPRESSION ONLY — margin up, z down; not progress
+20276762     peak      8    12%      -2.9267     2.0949    0.490  baseline
+20276762 integral      8    12%      -0.5429     0.3436   -0.732  COMPRESSION ONLY — margin up, z down; not progress
+
+A method counts only when margin AND z both beat peak, on more than one seed.
+Single-seed movement is the Phase 56.3 failure mode.

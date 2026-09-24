@@ -154,6 +154,12 @@ package enum OstwaldProgress {
         }
         return String(format: "%6.0fs %@ ETA %5.1f min", elapsed, rateText, eta / 60)
     }
+
+    /// Round banner. Do not use `String(format: "%d")` for `decryptsDone` —
+    /// `%d` is Int32 and wraps negative past 2,147,483,647. Interpolation keeps Int64.
+    package static func roundLine(round: Int, active: Int, decryptsDone: Int, live: String) -> String {
+        "  [round \(round) · \(active) climbs live · \(decryptsDone) decrypts] \(live)"
+    }
 }
 
 package enum OstwaldMemory {

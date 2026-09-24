@@ -164,6 +164,43 @@ enum NearMissQuarantine {
         )
     }
 
+    /// Every physically buildable stop, including those below the soft tail floor.
+    /// The shell is what Ostwald needs; the plaintext prefix is cleared so a ghost
+    /// decrypt is not a second ciphertext record.
+    static let physicalLedgerPath = "logs/welchman-physical.jsonl"
+
+    static func appendPhysical(
+        _ ranked: DiscriminatedCandidate,
+        source: String,
+        to path: String = physicalLedgerPath
+    ) {
+        var row = makeCandidate(from: ranked, source: source)
+        row.plaintextPrefix = ""
+        appendPhysicalRow(row, to: path)
+    }
+
+    static func appendPhysicalRow(_ row: QuarantineCandidate, to path: String) {
+        var row = row
+        row.plaintextPrefix = ""
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.sortedKeys]
+        guard var data = try? encoder.encode(row) else { return }
+        data.append(0x0A)
+        let url = URL(fileURLWithPath: path)
+        let dir = url.deletingLastPathComponent()
+        if !dir.path.isEmpty {
+            try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+        }
+        if FileManager.default.fileExists(atPath: path),
+           let handle = FileHandle(forWritingAtPath: path) {
+            defer { try? handle.close() }
+            _ = try? handle.seekToEnd()
+            try? handle.write(contentsOf: data)
+        } else {
+            try? data.write(to: url)
+        }
+    }
+
     static func steckerPairTokens(_ table: [Int]) -> [String] {
         var pairs: [String] = []
         for a in 0..<26 where table[a] > a {

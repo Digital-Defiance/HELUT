@@ -114,6 +114,7 @@ final class MuleinOstwaldEscalateAdapterTests: XCTestCase {
 
     func testBombeCLIRoutesTheAllSettingsFlag() {
         XCTAssertTrue(HelutBombeCLI.handles(["--ostwald-all-settings", "--ostwald-control", "p1030684"]))
+        XCTAssertTrue(HelutBombeCLI.handles(["--ostwald-all-settings", "--ostwald-control", "p1030680"]))
     }
 
     func testSubsetMaterializeCompilesOnlyRequestedOrdinals() throws {

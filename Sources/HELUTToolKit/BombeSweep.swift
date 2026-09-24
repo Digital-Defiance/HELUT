@@ -1361,6 +1361,17 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
         print(String(format: "  %@ %-44@ %7d stops → %d physical, best IC %.3f tail %.3f  %@",
                      label, menu.description as NSString,
                      rawStops, verdict.candidates.count, best.ic, best.tailScore, progress))
+        let ringString = EnigmaAlphabet.string(from: [
+            best.stop.rings.0, best.stop.rings.1, best.stop.rings.2, best.stop.rings.3
+        ])
+        print(String(
+            format: "    shell %@/%@/%@/%@ pos %@ plugs %d  → %@",
+            best.stop.ukw, best.stop.greek, best.stop.wheelOrder, ringString,
+            best.messageKey, best.pairCount, NearMissQuarantine.physicalLedgerPath
+        ))
+        for candidate in verdict.candidates.prefix(8) {
+            NearMissQuarantine.appendPhysical(candidate, source: quarantineSource + "#physical")
+        }
         fflush(stdout)
 
         // Solo BREAK is allowed only for cribs that clear the unicity floor (16).

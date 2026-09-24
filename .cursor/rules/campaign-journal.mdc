@@ -10,7 +10,7 @@ alwaysApply: true
 
 **Then, same turn:**
 1. Patch `BREAK_P1030680.md` first: “What we know” table, Phase write-up, attack-plan status (RUNNING / PARKED / DONE), honest scope. Record resume flags (`--bombe-from N`), logs, and what the ciphertext is **not**. Do not invent a decrypt.
-2. Patch `site/src/pages/JournalPage.tsx` to match: ELIMINATED / OPEN, Evidence Room, timeline phase, next-step card. No lecture-voice claims the ledger does not support.
+2. Patch `site/src/pages/JournalPage.tsx` to match: ELIMINATED / OPEN, Evidence Room, timeline phase, next-step card. Public URL is `/enigma/journal`. No lecture-voice claims the ledger does not support.
 3. Then follow `.cursor/rules/writeup.mdc` (canonical report is `writeup.tex`).
 4. If a **C** / **H** / **N** row moves, also follow `.cursor/rules/living-textbook.mdc`.
 

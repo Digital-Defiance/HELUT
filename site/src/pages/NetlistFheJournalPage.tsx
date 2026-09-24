@@ -186,7 +186,7 @@ export function NetlistFheJournalPage() {
           <p>
             Reproduce: <code>REPRODUCE.md</code> · gallery:{' '}
             <Link to="/apps">Applications</Link> · campaign (still open):{' '}
-            <Link to="/projects/p1030680/journal"><NaziBlaster9000Span /></Link>.
+            <Link to="/enigma/nazi-blaster-9000"><NaziBlaster9000Span /></Link>.
           </p>
         </div>
       </section>

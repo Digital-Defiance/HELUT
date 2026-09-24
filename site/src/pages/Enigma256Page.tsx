@@ -22,7 +22,7 @@ export function Enigma256Page() {
             </p>
             <p className="lede" style={{ marginTop: '1rem' }}>
               This is not nostalgia hardware. It is the Blue Team answer to a Red Team that already runs Welchman, Stochastic KPA, and TensorLUT on Apple Silicon—built from the same findings documented in the{' '}
-              <Link to="/projects/p1030680/journal">campaign journal</Link>.
+              <Link to="/enigma/journal">campaign journal</Link>.
             </p>
           </div>
 
@@ -600,7 +600,7 @@ export function Enigma256Page() {
             </p>
             <p>
               Campaign ledger:{' '}
-              <Link to="/projects/p1030680/journal"><NaziBlaster9000Span /></Link>
+              <Link to="/enigma/nazi-blaster-9000"><NaziBlaster9000Span /></Link>
               {' · '}
               Hunt overview:{' '}
               <Link to="/enigma">Enigma</Link>

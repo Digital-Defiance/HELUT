@@ -1,5 +1,6 @@
 import XCTest
 @testable import HELUTCore
+@testable import HELUTToolKit
 
 /// Soft-band floors for Welchman→Stochastic quarantine (mirrors NearMissQuarantine defaults).
 final class NearMissQuarantineLogicTests: XCTestCase {
@@ -26,5 +27,26 @@ final class NearMissQuarantineLogicTests: XCTestCase {
             )
         }
         XCTAssertEqual(pairs, ["AB", "CD"])
+    }
+
+    func testPhysicalLedgerKeepsTheShellAndDropsPlaintext() throws {
+        let row = QuarantineCandidate(
+            ukw: "B", greek: "beta", wheelOrder: "IV-III-VIII", rings: "AAAA",
+            positions: "AAAA", steckerPairs: ["AB"], pairCount: 1,
+            menuCrib: "OEDMOEDMOEDMOEDM", menuOffset: 4, menuAnchors: nil,
+            menuLoops: 4, menuEdges: 16, ic: 0.049, tailScore: -5.028,
+            fullScore: -4.5, effectiveTailScore: -5.028, cribExact: false,
+            prefixEnd: nil, prefixIC: nil, prefixTailScore: nil,
+            plaintextPrefix: "SHOULDNOTPERSIST", softBand: "below-soft", source: "test"
+        )
+        let url = FileManager.default.temporaryDirectory
+            .appendingPathComponent("welchman-physical-\(UUID().uuidString).jsonl")
+        NearMissQuarantine.appendPhysicalRow(row, to: url.path)
+        let text = try String(contentsOf: url, encoding: .utf8)
+        XCTAssertTrue(text.contains("\"wheelOrder\":\"IV-III-VIII\""))
+        XCTAssertTrue(text.contains("\"positions\":\"AAAA\""))
+        XCTAssertTrue(text.contains("\"tailScore\":-5.028"))
+        XCTAssertFalse(text.contains("SHOULDNOTPERSIST"))
+        try? FileManager.default.removeItem(at: url)
     }
 }

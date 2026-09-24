@@ -1,0 +1,885 @@
+{
+  "source": "https://www.enigma.hoerenberg.com",
+  "note": "Publicly documented U-534 intercepts (H\u00f6renberg). Scraped for HELUT research.",
+  "messages": [
+    {
+      "id": "P1030659",
+      "indicators": [
+        "VRUA",
+        "SKXD"
+      ],
+      "reflector": "B",
+      "greek": "C",
+      "wheels": "438",
+      "wheel_positions": "YVOS",
+      "rings": "AACU",
+      "plugs": "CH EJ NV OU TY LG SZ PK DI QB",
+      "ciphertext": "YUPOVEJTBKONNFSALTWELQAZJXTIRJLLISCSGXSHEJFYNZQDNQSUXPGFTJKWINGORYBJYADWNFCLPPNSLWUYBUQISXGQHEKIMFIF",
+      "length": 100,
+      "plaintext": "FFFDDDUUUAUSBILDUNGVONVONZWOSECHSUUUFLOTTXXTTTFFFZWODREIAUSGEZQESTETMITSSSSSSGCGXTTTFFFZWOQIBRTTTGBN",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030659"
+    },
+    {
+      "id": "P1030660",
+      "indicators": [
+        "RMJE",
+        "TODU"
+      ],
+      "reflector": "C",
+      "greek": "B",
+      "wheels": "568",
+      "wheel_positions": "IGZQ",
+      "rings": "AAEL",
+      "plugs": "AE BF CM DQ HU JN LX PR SZ VW",
+      "ciphertext": "TWNHYAZGBILSHEWPGLBPQLWQEKITIAFGZHWIMCWDFXPAFEILQZWFNRFTTQHUOADVLRLGAOQKVLWLSJHWOFJJSLUVEYNRRAJAQDKQBGMFYCEVKPFJPKOWHHQZYZEQRTQIKKXIXTFPOEMI",
+      "length": 140,
+      "plaintext": "FXDXUUUOSTYFUNCQUUUFXWTTXVVVUUUEINSEINSNULDREIKKEISELEKKXXISTSECHSSTUENDLICHESDOCKENVORMITTAGSAMDREIXFUNFXINRENDSBURGGEMXFXDXUUUOSTMOEGLICHL",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030660"
+    },
+    {
+      "id": "P1030661",
+      "indicators": [
+        "LDRF",
+        "KXND"
+      ],
+      "reflector": "C",
+      "greek": "B",
+      "wheels": "568",
+      "wheel_positions": "XPSV",
+      "rings": "AAEL",
+      "plugs": "AE BF CM DQ HU JN LX PR SZ VW",
+      "ciphertext": "TUKAQYYOOHVKJQTDVSBKRDDAZLOYXHRDEOZSPZOTBZMSBEIYASHHJKIMCZWYIKYJOEWQHDZWFNOADOEIOYKAUWVFPMHSYNUGIKEVFGBBAYPCGOTYSEPLSXQHKZNB",
+      "length": 124,
+      "plaintext": "UMSUEDDREIYYVIEGINSCHAUERNBISFUENFWOLKIGVEREINZELTSCHAUERKKBEREICHDORABISEINSXFUENFXABENDSKKSICHTACHTYYZEHNSMSEEZWOYBDREIDBV",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030661"
+    },
+    {
+      "id": "P1030662",
+      "indicators": [
+        "VLDH",
+        "EQTX"
+      ],
+      "reflector": "C",
+      "greek": "B",
+      "wheels": "568",
+      "wheel_positions": "WIIJ",
+      "rings": "AAEL",
+      "plugs": "AE BF CM DQ HU JN LX PR SZ VW",
+      "ciphertext": "LIRZMLWRCDMSNKLKBEBHRMFQFEQAZWXBGBIEXJPYFCQAAWSEKDEACOHDZKCZTOVSYHFNSCMAIMIMMAVJNLFXEWNPUIRINOZNCRVDHCGKCYRVUJQPVKEUIVVXGLQMKRJMDMLXLLRLYBKJWRXBQRZWGCCNDOPMGCKJ",
+      "length": 160,
+      "plaintext": "UUUVIRSIBENNULEINSYNACHRXUUUSTUETZPUNKTLUEBECKVVVCHEFVIERXUUUFLOTTXXMITUUUVIERSIBENNULZWOUNDUUUVIERSIBENNULDREIZURFLENDERWERFTLUEBECKGEHENXFONDORTFOLGTWEITERESX",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030662"
+    },
+    {
+      "id": "P1030663",
+      "indicators": [
+        "HHBV",
+        "SHZU"
+      ],
+      "reflector": "C",
+      "greek": "B",
+      "wheels": "568",
+      "wheel_positions": "ODBS",
+      "rings": "AAEL",
+      "plugs": "AE BF CM DQ HU JN LX PR SZ VW",
+      "ciphertext": "WJPSBIYBZWEZGBQMUNMKCRJGRICYQWBTXTTULIILIWMGQZCEABYUABINYQPYRNSTPKMHVQSBELHRTDHYBNAKWLRABOMVZPWR",
+      "length": 96,
+      "plaintext": "UUUZWODREIDREIACHTVVVCHEFVIERXUUUFLOTTXXMITUUUZWODREISECHSEINSZUMDOCKBETRIEBRENDSBURGENTLASSENXK",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030663"
+    },
+    {
+      "id": "P1030664",
+      "indicators": [
+        "DVTC",
+        "AEUL"
+      ],
+      "reflector": "C",
+      "greek": "B",
+      "wheels": "568",
+      "wheel_positions": "BSOJ",
+      "rings": "AAEL",
+      "plugs": "AE BF CM DQ HU JN LX PR SZ VW",
+      "ciphertext": "SNNJZFEMBCKJQOVTWHLWUBCFABRBJSEPROQRZLBCXULLVPNJDBMUXLRGGDWWXKBEWTHCBUVRBHAZAMVOFQFFQXXWUKWWJNYVRTXGNTITHNJ",
+      "length": 107,
+      "plaintext": "MITUUUVIRSGBENNULZWOYVIRSIBENYULDREIYZWODREISECHSEINSUMEINSNULUHRJSASSNITZJAUSNACHISONDERBURGJFAHRTFUENFSMTN",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030664"
+    },
+    {
+      "id": "P1030666",
+      "indicators": [
+        "TZDM",
+        "RSHJ"
+      ],
+      "reflector": "C",
+      "greek": "B",
+      "wheels": "568",
+      "wheel_positions": "PFYB",
+      "rings": "AAEL",
+      "plugs": "AE BF CM DQ HU JN LX PR SZ VW",
+      "ciphertext": "VXOYXWLHSGGGSBKLWKZOFTRLJZEQKOMEGPLJUAAHMZBJMRPFIYBWJEHDNFNTLOKQYXDN",
+      "length": 68,
+      "plaintext": "HAENGEMICTANGELEITUUUVDRSIBENNULEINSANXXUUUZWODREIDREIACHTKKKAISERKK",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030666"
+    },
+    {
+      "id": "P1030667",
+      "indicators": [
+        "XLQG",
+        "HITL"
+      ],
+      "reflector": "C",
+      "greek": "B",
+      "wheels": "568",
+      "wheel_positions": "HYKK",
+      "rings": "AAEL",
+      "plugs": "AE BF CM DQ HU JN LX PR SZ VW",
+      "ciphertext": "ZBOQCPKZTPXXWSWXKXELBMDUMWJNPKCGMXGYWHTGMRLRCUQWFUYAITNFQFNPUPRKOVNHJNVFQBNVSGMSKLMTVVVHSTOIKBOLVEKJZJWHKDWBFTPOXQACJYYJQYPGTOIMYTACOBMUZSZWIQXEWTVUPNGEDKPSGOTZXWFNSPHVCPVDFEEN",
+      "length": 176,
+      "plaintext": "STUEKOWARNEMVENDEYZWOSECHVXUUUFLOTTXHACHRXFXDXUUUAUSBILDUNGVVVHEVTHAXXEINSEINSDGEINULUHRMITETWAEINEEINJNULNUOFLUECHTLIKGEMARSBHWARNEMUENDENACHJNYBORGJJNYBORZNNANNIBRUNOBESETZTQ",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030667"
+    },
+    {
+      "id": "P1030668",
+      "indicators": [
+        "OZNZ",
+        "FOSA"
+      ],
+      "reflector": "C",
+      "greek": "B",
+      "wheels": "568",
+      "wheel_positions": "RXCI",
+      "rings": "AAEL",
+      "plugs": "AE BF CM DQ HU JN LX PR SZ VW",
+      "ciphertext": "UZTTXODTEIFJUMXKVLNEKJQGHSWDUIBFIAPYZMOFCZGBCTXNXUEFDTUIWNZQBXASIUFRLSXJEZRENCZQSACKSVQGVXCAGNUUNSCSEZDVUFYMZXPGIGCCWZRKDCWEVRVKUJBRYZCYYDMSDQRZSHZOSUOKEPVLPDDQAMLAVQZBZGMZ",
+      "length": 172,
+      "plaintext": "KOMXADMXUUUBOOTEYFDUUUAUSBXYFDUUUOSTYSSSMMMHHHSSSOSTAZWWFUNFXUUUFLOTTXYFUNFXUUUFLOTTXYHAKAXKIELVONVONTORPXFANGBOOTEINSNEUNXXEINSZWOUHRJKIELWEINGELAUFENYFFFTTTBLEIBTBESETZTR",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030668"
+    },
+    {
+      "id": "P1030669",
+      "indicators": [
+        "LITV",
+        "DLEX"
+      ],
+      "reflector": "C",
+      "greek": "B",
+      "wheels": "568",
+      "wheel_positions": "DGOE",
+      "rings": "AAEL",
+      "plugs": "AE BF CM DQ HU JN LX PR SZ VW",
+      "ciphertext": "VFOFZTNTOQXHMHYSUARPWEDAEEOXNYDZQZHXMFXGMRPCOFERVIVUQNGCSAOVXDZWRUGVADACKFUOOTDXQZBNXDGVXBFPOEVRPBECSYYSIABWAWGCWCFZROYAXSRGVNSLUUIPMTQIKLEZTANXBANMTFKZJNOITINZVCIEGBXADZTMKYPWTTDZXZKDIBZITQRESNHLQIITTPUNKRAZTBSOMIMLLWTLEKVDSFQMFBBECFHEDCAQWIPINCLAUVBSJKCMOXXMJGEPMIOFUEOXPGQUIYOWVPDCNSHW",
+      "length": 288,
+      "plaintext": "SSDCHEFFUNFXUUUFLOTTXXEINSKKTTTFFFEINSACHTMITZWOSTELLKARTENAUSRUESTUNGSKAGERRAKUNDNORWEGENMITHAFENPLAENENUNDEINSEXEMPLARLFDXBEFXBBBDDDUUUOOOPPPNRXSIEBENVOMZWOVIERXVIERXVIERFUNFXSOFORTNEUSTADTINMARSCHSETZENXZWOKKTTTFFFEINBNEUNVORLPEUFIGKIELBLEIBENXDHEIKKBESTARTEHXNGERBETENXXFXDXUUUAUSBXKF",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030669"
+    },
+    {
+      "id": "P1030670",
+      "broken": false,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030670"
+    },
+    {
+      "id": "P1030671",
+      "indicators": [
+        "TJMQ",
+        "KHYV"
+      ],
+      "reflector": "C",
+      "greek": "B",
+      "wheels": "568",
+      "wheel_positions": "LWGN",
+      "rings": "AAEL",
+      "plugs": "AE BF CM DQ HU JN LX PR SZ VW",
+      "ciphertext": "SCXBDTZLXVDMEIHBBHNETIJLDFCWBGRMTHSWQNTYOKQGVZKZNJVPGAKDDQAZAGVJHKIFNLQIXOYAKFQQUBAKGYAHRDRXLTOVYPNHJDZFTYOCLTIHHCSQBPFTOHDIZJGGDSJICPJDEXIBLDYCMTGYARLTCHJKFNTNLFEYGFLYTBILLXTKFXNHPWYYOFLDBQVQ",
+      "length": 192,
+      "plaintext": "VONVONUUUEINSNULNULACHTKKGESSNERKRTXNULNEUNDREINULUHRVONLUEBECKTRAVEMUENDEEINXZUSATZFUERFUNFUUUFLOTTXJTREIBOALVERBRXVOMEINSXVIRXBISDREINULXVIRXSECHSYEINSCBMXBESTANDAMEINSXFUNFXXVIRFUNFYNEUNCBM",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030671"
+    },
+    {
+      "id": "P1030672",
+      "indicators": [
+        "DNUG",
+        "HJEK"
+      ],
+      "reflector": "C",
+      "greek": "B",
+      "wheels": "568",
+      "wheel_positions": "UYUA",
+      "rings": "AAEL",
+      "plugs": "AE BF CM DQ HU JN LX PR SZ VW",
+      "ciphertext": "NBAYXSCJPEQODZYLCLBKMDBSQVDVBZMOQPZTTPGGWTOWAGARFKJQOFFCKVBRIBTBAQKUZXBQMJALHKALTTHDEJSTLZJXXZMZLZBLUJQESJYUXWNRLDRXYEFRRLQUCMHZPUDVZGFCOOSDLNOHIXYBUVHHPGSZ",
+      "length": 156,
+      "plaintext": "FXDXUEUOSTKKINGXKKVONVONUUUEINSEINSNULDREIKKEISELEKKXXEINSKKUNDICHTIGKEITROHRVIERXKKBEYYUNDENTWAESSERUNGKKZWOKKSCHWEISSENKUEHLWASXERLEITUNGINVIERBACKBORDLBQ",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030672"
+    },
+    {
+      "id": "P1030673",
+      "indicators": [
+        "UWAM",
+        "SKWN"
+      ],
+      "reflector": "C",
+      "greek": "B",
+      "wheels": "568",
+      "wheel_positions": "AWGI",
+      "rings": "AAEL",
+      "plugs": "AE BF CM DQ HU JN LX PR SZ VW",
+      "ciphertext": "UVTSJFGRCRKXQOWLCBKKNXIQREVQHNZDGONIPKUNSMORFTOAWNSJJJVRXZUJSDLGJSAKERGESFPWWDMCCIPDUNIDIALHZJYCPLZTNBYCEDXHYDDCKAWXSNLEMEBSJYZK",
+      "length": 128,
+      "plaintext": "FUENFTEUUUFLOTTXANANUUUZWOFUEDFEINSSIEBENXXSPEZIAHISTFUERTELEKINANLAGEWARTEAUFUUULEITSTELLEXFRAGEXXWANNWIRDSPEZIALISTABGEHOLTXBN",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030673"
+    },
+    {
+      "id": "P1030675",
+      "indicators": [
+        "PDYK",
+        "CKSY"
+      ],
+      "reflector": "C",
+      "greek": "B",
+      "wheels": "568",
+      "wheel_positions": "SCHL",
+      "rings": "AAEL",
+      "plugs": "AE BF CM DQ HU JN LX PR SZ VW",
+      "ciphertext": "TAWZZYNZGGMICVLSADLQFDFKHDGZLSEEMDFFBQLYISEIWKDONDWJWETKZOWWYLTYIIOWSMCFTGNLKOZCAAWHBHFJDRWLDHFHEWUBPWVDEZFPBOCVKECVFXWZGSVBDPHLTVOJCFLSQNSODYFMBQFQULTHDISGOQURABEHHIBNXNAAKLEJMXQHJWXAVDLVTPTSTDCPWPYXCUVWAFJTTSFUSPTHOSTHXADWRQWZJCTUKWCWHYFYQTRTPKPPJGPMDZQDAXAIZLWCADYZUTLXJJUDQGMFWZRWZXBQRHNCRUFUZZLALDHHOIBWYPKTSRNQUHMUPTFWUHWBIKMASACVPRELBRRMRKLZWLVSFGUQFFXTAVQIHXDXRKQVGARLMZDBMDGRYNWIYSHWCNHIWXYFBFGXXQNPTSEROCVYTOJTKKLQRALUDQMUFAKRHKOJCMWPSZHNAVVSEWFFPGRJTVNOLSGRERKXSCYWBOQTPXOXJLQXSPYTMEOXOURSHIBYBNWQEFPTGGMCVXNGCDFQIYLCMPDLWOOAALODSWCDAWOZOMBGDZOQKZWQKFRMRWCHGWFUERWPJAQFDRBVOAEYYAIYNPCLJDXOCBAZOHQOKVUFGLQNXQYDUZJIFXRVJDQOOOGXIGNONPEQLKQBTVJDANIXQFDYXRDTQTFPZEHEOMXPPPFGGLTVFODHBSQPAQMDDWXMMGAJZVURSIYGAAXDZDV",
+      "length": 719,
+      "plaintext": "BINEFDUUUAUSBXYVIERXYZWOFUNFXUXZWOUECHSXUUUFLXXHIERVORLIEGENDEKKKRTTBBBEINERMMMSSSFLXZEIGENIMMERWIEDJRSCHLEZHTEFAHRDISZIPLINUUUBOOTEINGELEITENSOWIEBEIALLEINMARSCHGROSSZUEGIGEABWEICHUNGENVONZWGNGSWEGSEIESDURCHFEHLERHAFTENAVIGATIONYGROSSZUGIGEAUSWEICHBEWEGUNGENODERLEICHTFERTIGESABSCHNEIDENBEIKURSAENERUNGENXICHMACHEESDENKOMMANDANTENERNEUTZURPFLICHTEINERSEITSZWANGSWEGEGENAUEINZUHALTENYWOBEIABSTANDVONBOJENSTRICHFUNFNULBISEINSFUNFNULMMMBETRAGENSOLLYANDERSEITSBEMFAHRENIMGELEITDIEVORANTRITTDESMARSCHESBEIMGELEITFUEHRERZUERFRAGENDENBEFEHLEUEBERFAHRWNISEUNDABSTANDVOMGELEITPERSOENLICHINNEZUHALTENXBEIVERSTOESSENYDIEMIRGEMELDETWERDENYBEHLTEICHMIRSOFORTIGEABOESUNGESBETRXKOMMNDANTENVORXXKOMXADMXUUUBOOTEGKDOSVIERZWOZWOZWOBEFXZ",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030675"
+    },
+    {
+      "id": "P1030676",
+      "indicators": [
+        "KXPC",
+        "PGVB"
+      ],
+      "reflector": "C",
+      "greek": "B",
+      "wheels": "568",
+      "wheel_positions": "NLKO",
+      "rings": "AAEL",
+      "plugs": "AE BF CM DQ HU JN LX PR SZ VW",
+      "ciphertext": "CREMRWLLIMBXDLOTDINDYGYKTJPYCTCWDTPXXTNATVFZUNACFCQLWDQRFWQNXJGMASWAKGZBKMAEAKNZPORYAHWFXYAP",
+      "length": 92,
+      "plaintext": "UUUJAGDKEINEVERAENDERUNGENGEGWNLEITNRXEINSVIERSIEBENXXADMXWWWESTLXOSTSEELTNRXEINSFUENFZWOBBV",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030676"
+    },
+    {
+      "id": "P1030679",
+      "indicators": [
+        "JIAY",
+        "DPVC"
+      ],
+      "reflector": "C",
+      "greek": "B",
+      "wheels": "568",
+      "wheel_positions": "JDPC",
+      "rings": "AAEL",
+      "plugs": "AE BF CM DQ HU JN LX PR SZ VW",
+      "ciphertext": "QGHUBZAPKAEHQMRJTWEWBTDBRISUVLJMKBSPDKZASGJSIPXFSOPBLYQVPPRAUDZXDWRWAZHJNANMBJRIZDYRQJVT",
+      "length": 88,
+      "plaintext": "EOMXADMXUUZBOOTEYFDUUUAESBXYTORPXINSPEKTIONYUUUTENDERMOSELLONVONKREFELDXXEINSEINSVIERNUL",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030679"
+    },
+    {
+      "id": "P1030680",
+      "indicators": [
+        "VROL",
+        "NMKA"
+      ],
+      "wheels": "",
+      "date": "01. May 1945",
+      "ciphertext": "JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF",
+      "length": 72,
+      "plaintext": "KBTACHSVAVRVAUQAVAKOKACHOEDMBLACHKOEDINGGETL",
+      "broken": false,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=Unbroken&page=P1030680"
+    },
+    {
+      "id": "P1030681",
+      "indicators": [
+        "DUHF",
+        "TETO"
+      ],
+      "reflector": "C",
+      "greek": "B",
+      "wheels": "568",
+      "wheel_positions": "YOSZ",
+      "rings": "AAEL",
+      "plugs": "AE BF CM DQ HU JN LX PR SZ VW",
+      "ciphertext": "LANOTCTOUARBBFPMHPHGCZXTDYGAHGUFXGEWKBLKGJWLQXXTGPJJAVTOYJFGSLPPQIHZFXOEBWIIEKFZLCLOAQJULJOYHSSMBBGWHZANVOIIPYRBRTDJQDJJOQKCXWDNBBTYVXLYTAPGVEATXSONPNYNQFUDBBHHVWEPYEYDOHNLXKZDNWRHDUWUJUMWWVIIWZXIVIUQDRHYMNCYEFUAPNHOTKHKGDNPSAKNUAGHJZSMJBMHVTREQEDGXHLZWIFUSKDQVELNMIMITHBHDBWVHDFYHJOQIHORTDJDBWXEMEAYXGYQXOHFDMYUXXNOJAZRSGHPLWMLRECWWUTLRTTVLBHYOORGLGOWUXNXHMHYFAACQEKTHSJW",
+      "length": 372,
+      "plaintext": "KRKRALLEXXFOLGENDESISTSOFORTBEKANNTZUGEBENXXICHHABEFOLGENDENBEFEHLERHALTENXXJANSTERLEDESBISHERIGXNREICHSMARSCHALLSJGOERINGJSETZTDERFUEHRERSIEYHVRRGRZSSADMIRALYALSSEINENNACHFOLGEREINXSCHRIFTLSCHEVOLLMACHTUNTERWEGSXABSOFORTSOLLENSIESAEMTLICHEMASSNAHMENVERFUEGENYDIESICHAUSDERGEGENWAERTIGENLAGEERGEBENXGEZXREICHSLEITEIKKTULPEKKJBORMANNJXXOBXDXMMMDURNHFKSTXKOMXADMXUUUBOOIEXKP",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030681"
+    },
+    {
+      "id": "P1030682",
+      "indicators": [
+        "FFUC",
+        "MWYR"
+      ],
+      "reflector": "B",
+      "greek": "C",
+      "wheels": "438",
+      "wheel_positions": "MVYY",
+      "rings": "AACU",
+      "plugs": "CH EJ NV OU TY LG SZ PK DI QB",
+      "ciphertext": "PIARMJTBFRGMEBDSBOGCRVBCOXYOHRWDLQIXQYCXZSKFLQMSIMTQBNZDTXDQIVFUYGLIATLERQYQKSIXMMZUKZTVFCJPPFVGZGOE",
+      "length": 100,
+      "plaintext": "FFFDDDUUUMSTVINVONHAKFROENNELQAUFGGGZWONULZWONEUXUUBZWOVOMZWOACHTXVSERXXJHRCHTJHIERNICHTEINZELGUFENF",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030682"
+    },
+    {
+      "id": "P1030683",
+      "indicators": [
+        "LYSC",
+        "PJWE"
+      ],
+      "reflector": "B",
+      "greek": "C",
+      "wheels": "438",
+      "wheel_positions": "FHFA",
+      "rings": "AACU",
+      "plugs": "CH EJ NV OU TY LG SZ PK DI QB",
+      "ciphertext": "PJVSRPPQDGKLDENENWLJLYMARZJGDKDPFTKRKWFBVZSVCNGILVUWQRVYDNQPJDHITDKODTSSOQAAJSJSGZWEXUJJWJAZEYCASCAQ",
+      "length": 100,
+      "plaintext": "GRUPPENMARYMHMITUUUDREINULZWOVIRUNBUUGZWOFUNFDREIOCHTNACHTRAVEMUEVDEVVVUUUDREINULEINSVIRKKMARBACHKKM",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030683"
+    },
+    {
+      "id": "P1030684",
+      "indicators": [
+        "BDSH",
+        "FBFX"
+      ],
+      "reflector": "B",
+      "greek": "C",
+      "wheels": "438",
+      "wheel_positions": "VYAA",
+      "rings": "AACU",
+      "plugs": "CH EJ NV OU TY LG SZ PK DI QB",
+      "ciphertext": "RFBYWKIKELDCHBSXUNFJFSNRRVFWASXYLQCQFADYJXNTBMVLRDCGULOWHTBGWUSSOQHGAYEDKMJDNGVZNZFOXFKMIBKQNXFDWFIVGCYMJVQCKYQFBHYKZSCJ",
+      "length": 120,
+      "plaintext": "VVVUUUVIRSOBENNULEINSXXMITUUUVIRSIBENNULZWOYVIRSIBENNULDREIYZWODREISECHSEINSYZWODREIDREIACHTEINSDREIOITNACHWZSTENPASSIRT",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030684"
+    },
+    {
+      "id": "P1030685",
+      "indicators": [
+        "TYDR",
+        "YIPN"
+      ],
+      "reflector": "B",
+      "greek": "C",
+      "wheels": "438",
+      "wheel_positions": "QXFW",
+      "rings": "AACU",
+      "plugs": "CH EJ NV OU TY LG SZ PK DI QB",
+      "ciphertext": "FCJYNBLBWHTRXXWPIXGLGOSSLKCFXBFIERNBTNNWDPRXGBEQCXWXSPALAXWZKKQGEYDWAJCOIGVKQQCHKPVLDXPTZOFEBRDOIEMUKGCNCEKICLLDEGCXMNPDMIPUUXHJGRDZARUWDROUFYFVIUQFEFURWGMBPVMGDLGVNUNPKFKGSYAHEXXWURJXNJTSRQWBRDSJUBVLRSYDPCMELCVCCMGVRNVREYQIGZIBWGIL",
+      "length": 232,
+      "plaintext": "KOMXADMXUUUBOOTEYSSSMCMHHHSSSOSTHFXDXUFHOSTVONVONCHEFVIERTEUUDFLOTTXSWGNEMUENDEANKERAUFXMARSCHNACHHOERUPYYHAFFANGETRETENXSTELLENYNSWINEMUENDEHABENXZUSATZFUERLEITUNGXXGUSNAVFRITZUEBELSTELLTGEGENSTELLENVERKEHRABZWONULLNULLNULLUHREINBT",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030685"
+    },
+    {
+      "id": "P1030686",
+      "indicators": [
+        "SUJP",
+        "YVQG"
+      ],
+      "reflector": "B",
+      "greek": "C",
+      "wheels": "438",
+      "wheel_positions": "XVLI",
+      "rings": "AACU",
+      "plugs": "CH EJ NV OU TY LG SZ PK DI QB",
+      "ciphertext": "IAAOVEUEXXPJYRAEWTCUKIPWRATCZAPVSMYMWTEHSXRVTRHCFTESBOEHKVGNFCLVWDJXQOSQNKBGZYLLGZLCVUQLQBMADLQEKVBFRIEA",
+      "length": 104,
+      "plaintext": "SPRUCHSCHLIESSELVONFFFTTTMILUHRZEITGRUPSEEINSZWOZHOVIERSOFORTWERGEBENYDAFFFTTTNICHTZULOESENFUNKLEITUNGXZ",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030686"
+    },
+    {
+      "id": "P1030687",
+      "indicators": [
+        "GYOV",
+        "AVCW"
+      ],
+      "reflector": "B",
+      "greek": "C",
+      "wheels": "438",
+      "wheel_positions": "PIWM",
+      "rings": "AACU",
+      "plugs": "CH EJ NV OU TY LG SZ PK DI QB",
+      "ciphertext": "GCMALCTWAMPLEIGDFCZLUGVYWBETKRMLFNJEXRZMTYSCUIWQKHFYUJASKIQDZPDQHZGONWVNBKSFYMYJPFTPAJZCIAMBZPKAQYSXDWSXRKKUPNBCMBRFPVFKGZBVXVYDAULNWLAZXTGHSQMDTHSHEVLVWSLU",
+      "length": 156,
+      "plaintext": "NEISSEFURKCRVXKPTXHEILMANNDVVFANGBTXZWOVIERXXXELABGABEDURCHGEFUHRTXKURIERMITSCALUEVSELMITCELNOCHNICHTEEUGETROFFENXFRGGESOLLIQHHIERWZRTWNOJSRWARNEMGNDQFFHENM",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030687"
+    },
+    {
+      "id": "P1030688",
+      "indicators": [
+        "IVJP",
+        "WFRY"
+      ],
+      "reflector": "B",
+      "greek": "C",
+      "wheels": "438",
+      "wheel_positions": "JMLW",
+      "rings": "AACU",
+      "plugs": "CH EJ NV OU TY LG SZ PK DI QB",
+      "ciphertext": "NZEEZPLZMGWWMXIUBHWVCLFCUKVRJFVJHBSEJLACVQKNQUHTXUQIJTCHSUUMBCFQCULAGJACNZDUGGPMFPVBNNGAHBOPALEBVQHFBDWSBAQBGNOKNBNMRIYDAZNPUNBPATLWPCLILDTSZINJMHSNGFLWVTJYXBSSNMOHKDXCBNPIFCFVDHZTXYCFSBHREQUICSSTJFAMFJAQJFDUZVJTCVEUGLMERRHLCWFSIAINJONBJSACYBFQTLYAKGHIQTNMUICHACSRYUFIRDWYIDFDGWTUOQBGCISYPWFCMPEPCEMUBDXHRLJIBATRCRLMPJZTZRVFIKRNDKELYGICJUDEALJDJJHEOMUXAUUAJIUSPEIHJUZFMUDYKTKHFAJSVIJWLFDEJNPCJVBUPINRAJWIBPDNGWLYUQGVDDEGDKRUZKQIBMDSDGBNQCBSLGPLHOJJCNZPVORNZFIVUDIRPCOXOQXF",
+      "length": 472,
+      "plaintext": "UUUYYSTUETZPUNKTWESERMUENDEYTTTFFFEINSFUNFYTTCFFFEINSSIBENVONVONFXDXUUUOSTVVVOOOXXAUFDORTXFFFTTTEINSFUNFVIERNEUNYYZWONEUNVOMZGONEUNXVIERXXEINSKKVONDENFUNFNZLTONMEQXERFUEGBARENHROVIJDTETWADREINULTONNENMOEGLICHSTVOLLSTAENDIGEUUUYYBOOTSAUSRUPSTUNPENZMSAMMENSTELLENUNDMITTTTFFFEINSFUNFNNCHHQLGOLRNDVERLAGERNXZWOKKRESTPROVIANTVONETWAZWONULTONNENMITTTTFFFTINSSIBENANJSAARJRENWSBURGABGEBENXZUSATZVUERTTTFFFEINSFUNFUNDTTTFFFEINSSIBENXXSOFORTAUSLAUFENNACHWESERMUENDEXBESTAETIGENCWQ",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030688"
+    },
+    {
+      "id": "P1030689",
+      "indicators": [
+        "JQLX",
+        "BFCM"
+      ],
+      "reflector": "B",
+      "greek": "C",
+      "wheels": "438",
+      "wheel_positions": "KPVG",
+      "rings": "AACU",
+      "plugs": "CH EJ NV OU TY LG SZ PK DI QB",
+      "ciphertext": "DUNKCANQMIGSFKQXUWSTQDKQESDJGKYYWBSKXAXCGZMUTAKEQBNQWXENUXTDFOJNEPDJMIRZGGAAAMKWZMFKOSKOYEBKFFPDIMTLGYAQSRZGQVODYLSFEBCEWHBVLFHYWCRONYFUFVOZVFORZSQIMSRCXSRZQFWZUATZDOAMPMFOWXNMCDIYYMTYXBNL",
+      "length": 188,
+      "plaintext": "LEITUNGVONVONEINSNEUNXUUUFLOTTFFFTTTEINSZWOZWOVIERYYSEZHSZWOHIERGELOESTXVERSCHLUESSELTNACHRRRHHHVVVXINHALTXXUUUCAAKKKVONVONWOEWEZWONXEINSDREIEINSFUENFBHRANSTEUERUNGSLONNEJFEHMARNSUEDWESTJU",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030689"
+    },
+    {
+      "id": "P1030690",
+      "indicators": [
+        "FNHC",
+        "GVET"
+      ],
+      "reflector": "B",
+      "greek": "C",
+      "wheels": "438",
+      "wheel_positions": "TBFS",
+      "rings": "AACU",
+      "plugs": "CH EJ NV OU TY LG SZ PK DI QB",
+      "ciphertext": "EQTNQSDBFJHWGKHPHXEFOYGEZPJMHZCIKPCIMPSIGUZMGTIWBRTFWEJTDILJJDPJVMBVUXKGSVXPEZERJXZFWWVCPSSFKXBSITWFKOBJXXYZDYJS",
+      "length": 112,
+      "plaintext": "UUUVIRSIBENNULEINSANANEINSNULXSSSDDDXXERBITTEWEITERGELEITVONROTEINSDREIAAANACHHOERUPHAFFAMZWOOFUNFXNULDREIUHRRLT",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030690"
+    },
+    {
+      "id": "P1030691",
+      "indicators": [
+        "ERXT",
+        "BWSC"
+      ],
+      "reflector": "B",
+      "greek": "C",
+      "wheels": "438",
+      "wheel_positions": "IIDH",
+      "rings": "AACU",
+      "plugs": "CH EJ NV OU TY LG SZ PK DI QB",
+      "ciphertext": "IYQMOWAPYIYEOLEWBEZYRVLFRCEOWTRYQIYFRASBSAXYYMVDCEJJDFUIVJMONUAGMSWJMYITCDQFHNYNPOBWFAITLHNT",
+      "length": 92,
+      "plaintext": "VIRUUFFLOTTLXVVVUUUVIRSIUENNULEINSXXERBITTEJKIELJFUERSCHLEIFENFAHRTEINSVIRTAGEUEBERFAELLIGTK",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030691"
+    },
+    {
+      "id": "P1030692",
+      "indicators": [
+        "INLM",
+        "WIPF"
+      ],
+      "reflector": "B",
+      "greek": "C",
+      "wheels": "438",
+      "wheel_positions": "NGHY",
+      "rings": "AACU",
+      "plugs": "CH EJ NV OU TY LG SZ PK DI QB",
+      "ciphertext": "HDQQRDLCWFZVIVCRUICVNHDQISLNMWCOIXTBGPMKKQBGVHCLELODACTDLCJZPSXXCTIBEWOMJSKPWVBVQCTEIJTJZSIBKSVIKHWZOVQOJQTTPLKM",
+      "length": 112,
+      "plaintext": "DIEFUNKSPRUECHEMITUHRZEITJRUPPENEINSNEUNZWOEINSYYEINSFUNFFUNFZWOSINDNICHTGELOESTWORDENXNEUHERGEBENVVVFUNKOEITUNG",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030692"
+    },
+    {
+      "id": "P1030693",
+      "indicators": [
+        "JOKE",
+        "BZOY"
+      ],
+      "reflector": "B",
+      "greek": "C",
+      "wheels": "438",
+      "wheel_positions": "LPWJ",
+      "rings": "AACU",
+      "plugs": "CH EJ NV OU TY LG SZ PK DI QB",
+      "ciphertext": "NRNRSECNDEKHLHJIMHLCCOILHTWSMPXSGPGFTEUBURWWMSZMPENLQAYEOJCQTZEYRMHYTDUFBZYWMFVQESQGYWTOHWKDSUMORBGZIRJEEWCQKBUZJYJRGOPXDTWUENUIOKVTDVNRVEWKDNPJAFWLTPQAYUXFPXUAHKTQTVYOUZKMZYEHVRSRGJJYIZUPHKXBPBPWKURUYGXHGKLJ",
+      "length": 208,
+      "plaintext": "KOMXADMXUUUBOOTEYFXDXUUUAUSBXVONVONJOTTOWUENSCHEXXUEBERWEGZWOYWEGDREIUNDWEGVIERALLEINMARSCHNACHJNEUSTADTJANGETRETENXMARSCHFAHRTEINSZWOSMSCHALTUGGRENUNDNNNBBXNRWEGENKARTENINWARNEMUENDEUEDROSTOCKNICHTBEKOMMENXP",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030693"
+    },
+    {
+      "id": "P1030694",
+      "indicators": [
+        "MXII",
+        "XPQF"
+      ],
+      "reflector": "B",
+      "greek": "C",
+      "wheels": "438",
+      "wheel_positions": "RCPO",
+      "rings": "AACU",
+      "plugs": "CH EJ NV OU TY LG SZ PK DI QB",
+      "ciphertext": "VBBHSYTWZEEDGKYCAKYVWBWUUZVZIGCTBZLZYUHYWILFYUPBIPCMMXIIXPQF",
+      "length": 60,
+      "plaintext": "PLLEVONVONZEHNXSIDIXXHAFENWARNEMUENDEFEINDBESETZTCHV",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030694"
+    },
+    {
+      "id": "P1030695",
+      "indicators": [
+        "TNSO",
+        "RILZ"
+      ],
+      "reflector": "B",
+      "greek": "C",
+      "wheels": "438",
+      "wheel_positions": "VINV",
+      "rings": "AACU",
+      "plugs": "CH EJ NV OU TY LG SZ PK DI QB",
+      "ciphertext": "WFAKACRIWUFSRWTORGFONHJTJXWYXZBRAABOIUKOZPZBSVNHRAAZPZYHAVSZCDEJGUIQGWXBBMZZGCBFUGLKECWMUC",
+      "length": 90,
+      "plaintext": "LEITUNGVVVUUUIFUEXZPKTXWWWHAVENXXFFFTTTZWONULEINSDREIERLEDIGTXINHAATXXFFFTTTEINSZWOZWOVIHI",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030695"
+    },
+    {
+      "id": "P1030696",
+      "indicators": [
+        "HJLY",
+        "HFZH"
+      ],
+      "reflector": "B",
+      "greek": "C",
+      "wheels": "438",
+      "wheel_positions": "DLLS",
+      "rings": "AACU",
+      "plugs": "CH EJ NV OU TY LG SZ PK DI QB",
+      "ciphertext": "DZWSSUYRTTVLNZNTRVSLZQOWRTXYRZVXRRCDTTFANRWKIWKGLDCJDESPEECIUONJPRPBZOXIKPFDQBOUJDFAFTXKSJCQDCCRCXVLZRPA",
+      "length": 104,
+      "plaintext": "TONIANANCHEFZWOSECHSUUUFLOTTXXUMUZWVDREISECHSZWOBEIPOSITIONEINSZWODORAGETROFFENXFOLGEVERBANDMITGGGSIEBEN",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030696"
+    },
+    {
+      "id": "P1030697",
+      "indicators": [
+        "IMAR",
+        "SHSX"
+      ],
+      "reflector": "B",
+      "greek": "C",
+      "wheels": "438",
+      "wheel_positions": "GHHI",
+      "rings": "AACU",
+      "plugs": "CH EJ NV OU TY LG SZ PK DI QB",
+      "ciphertext": "WTRTBZBRBWCEUGZRPLPRVIOOHFIJHIRANYQPKTCWPOGOFZYOYYZDWJZVFCDUPZIFIZGUEDVEHWPV",
+      "length": 76,
+      "plaintext": "FXDXUUUVSTVVVTTTFFFEINSSIBENXXFFFTSAEINSNEUNZWOSIBENLYACHTNEUNXICDBESTAIKIGT",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030697"
+    },
+    {
+      "id": "P1030698",
+      "indicators": [
+        "DNGW",
+        "DJVX"
+      ],
+      "reflector": "B",
+      "greek": "C",
+      "wheels": "438",
+      "wheel_positions": "WQYR",
+      "rings": "AACU",
+      "plugs": "CH EJ NV OU TY LG SZ PK DI QB",
+      "ciphertext": "VIDTGYBSPAXVEDJFKONPMXHTCNAAFKXIOWVCZXUTDGFSEWGFAIDHPKQVARAGUAUPWVRBFOWO",
+      "length": 72,
+      "plaintext": "TTTFFFZWOVIERVVVFXDXUUUXAUSBXXTRAVEMUENDEBLEIBENXWEITEREBEFEHLEATWARTKNX",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030698"
+    },
+    {
+      "id": "P1030699",
+      "indicators": [
+        "FQTX",
+        "TLQJ"
+      ],
+      "reflector": "B",
+      "greek": "C",
+      "wheels": "438",
+      "wheel_positions": "VUYW",
+      "rings": "AACU",
+      "plugs": "CH EJ NV OU TY LG SZ PK DI QB",
+      "ciphertext": "NKNWVNDMSCTYOYWFWGPUQWFMNYIKFUHRDFBMWCNRJCKVZJLGOUSIHDYRKUUXMAJUQSBWSOQVZSCDVTKSNZAFREIJNVTDUZSHZKFIUSBEONFAFZOLROWBBFGGUXEQKWGPJCSUPCXREAQEXS",
+      "length": 142,
+      "plaintext": "ANALLEVONVONFUNKHEITUNGXXGROSSEZAHLUNKLLRERFUNKSPRGECHEGIBTVERANLASSUNGDARAUFHINZUWEISENYDASSABEINSXFUENFXEINGBWFNUSNULUHRSCHLUESSMLENTEUXORCO",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030699"
+    },
+    {
+      "id": "P1030700",
+      "indicators": [
+        "ROGU",
+        "MMDG"
+      ],
+      "reflector": "B",
+      "greek": "C",
+      "wheels": "438",
+      "wheel_positions": "VMGC",
+      "rings": "AACU",
+      "plugs": "CH EJ NV OU TY LG SZ PK DI QB",
+      "ciphertext": "QBHEWTDFEQITKUWFQUHLIQQGVYGRSDOHDCOBFMDHXSKOFPAODRSVBEREIQZVEDAXSHOHBIYMCIIZSKGNDLNFKFVLWWHZXZGQXWSSPWLSOQXEANCELJYJCETZTLSTTWMTOBWUFQCENQQCBXAWOHOYPDNLUXMGOZFZBFLOXJNSSTLPHXJDYSSBNBOZLVPXJBATNNJDLCKKBZNRSTKPMPNVSRETKOIZTVSDBSYPZEBSJLODSJGCXFJVENZTQTFI",
+      "length": 252,
+      "plaintext": "KOMXBDMXUUUBOOTEYFXDXUUUAUSBILVUNYYZWOSECHSXUUUFLOTTXVVVUUURWODREISECHSVIERKKREMASKKMITUUVZWODREIFUVFYEWHSYUUUZWODREIFUNFZWOYUUFZWLREINFPEBYUZWORZIFUNFNYANYUUROFDDEEISEFHSNULFUUZGWRDQEISECHSDREIUNDUUUZWODREISECHSFUNFEINSCECHSUHRWARNEMUONDEAUSNACZEIGLHL",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030700"
+    },
+    {
+      "id": "P1030701",
+      "indicators": [
+        "BZRK",
+        "WKOM"
+      ],
+      "reflector": "B",
+      "greek": "C",
+      "wheels": "438",
+      "wheel_positions": "YRWR",
+      "rings": "AACU",
+      "plugs": "CH EJ NV OU TY LG SZ PK DI QB",
+      "ciphertext": "ITWJPXTCNNIWZBGAKNWCPFTKEHWPDJLVZWTWSHKUMYZZAMNLMHVTVPTSCLAOAXEVAOQNOAFOMCSAIUGLZYNPDEBQFLETVPDJNHRFPPMYZAQVDLWSMXFLZHIKPXUMXOR",
+      "length": 127,
+      "plaintext": "ZWODREONULNULUHRTRAVEMUENDEREEDEAUSOHNEGELEITNACHJKIELJAUFWEGDREIYSECHSYEINSXMARSCHFAHRTENSZWOSXSCHALTUNGNANNCBRUNOVVVUUUINSULN",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030701"
+    },
+    {
+      "id": "P1030702",
+      "indicators": [
+        "UICL",
+        "YRUW"
+      ],
+      "reflector": "B",
+      "greek": "C",
+      "wheels": "438",
+      "wheel_positions": "MDAF",
+      "rings": "AACU",
+      "plugs": "CH EJ NV OU TY LG SZ PK DI QB",
+      "ciphertext": "BYIAGVWLQKWNHFIEPINCOHSNBKWSBRHXANECJWLGSMDMODULQAGNQMODYSKQVKQZJOGUJOSZJLXPFOLWYKKQSXTSHPGITEKUSNBLUZCUJNFDRXGFNXWUFZDVVLUJZ",
+      "length": 125,
+      "plaintext": "UUUFUNFDREIVIERKKNOLLAUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENGEANKERTXZUMWEITERMARCNACHTRAVEMUENDEERWARTEOELLITJLECHJ",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030702"
+    },
+    {
+      "id": "P1030704",
+      "indicators": [
+        "DICB",
+        "HJRY"
+      ],
+      "reflector": "B",
+      "greek": "C",
+      "wheels": "438",
+      "wheel_positions": "ADLX",
+      "rings": "AACU",
+      "plugs": "CH EJ NV OU TY LG SZ PK DI QB",
+      "ciphertext": "NYWNBUPRIPMNKAYMLXVPMFMGTXGQEKVPNXWOKNKYMVRHMLGLQURJPPSUPHYZVQUNKCFSXCWNEFMVNFHWQWPFFJCNDCRGMXAGWOPCFQCYNHWIQPROOZNLWQWU",
+      "length": 120,
+      "plaintext": "TRAVEMUENDEYYREEDEMITUJUDREINULZWOVIERUNDUUUZWOFUNFDREIACRTGEANKERTXFFFTTTBLEIBUBESETZTPVVVUUUDREINULEINSVIEYTDKARBACHKK",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030704"
+    },
+    {
+      "id": "P1030705",
+      "indicators": [
+        "BXYW",
+        "PYYV"
+      ],
+      "reflector": "B",
+      "greek": "C",
+      "wheels": "438",
+      "wheel_positions": "UYXC",
+      "rings": "AACU",
+      "plugs": "CH EJ NV OU TY LG SZ PK DI QB",
+      "ciphertext": "HVJXGDXRESSSXPLXQLKZICEKWUZHWSJTBJUBRUMMRDOPKTGGQZCWRAYAPSKZXBYLXHBOTJAKOPPZHAKDTXYEBOKMWVSTWTJXYMNPNTXHGFEBPMPIQYJHLSGMMAAPMMLOXVKIOYXQJBIAUMTFTXFKLDHPTQIMCBMZJFRBNVPWJVRPHVWDTEATDWPHWVJFDEGEKBXGAJCTVVZOHICI",
+      "length": 208,
+      "plaintext": "UUUVIERSIEBENNULEINSYUUUVPRSIEBENEINSZWOYUUUDREINULEINSNEUNYFUENFXUUUFLYTTXNACHRXQDUUUAUSBXXXINABAENDERUNGFFFTTTVOMDREINULXVIERXUEBERNIMMTBLJRAKYMUUVIERSIBBENNUUEEESNEBENEINSZWOXXVRNVONKOMXADMXUQRWOTEPPPEINSXO",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030705"
+    },
+    {
+      "id": "P1030706",
+      "indicators": [
+        "UICL",
+        "YRUW"
+      ],
+      "reflector": "B",
+      "greek": "C",
+      "wheels": "438",
+      "wheel_positions": "MDAF",
+      "rings": "AACU",
+      "plugs": "CH EJ NV OU TY LG SZ PK DI QB",
+      "ciphertext": "BYIAGVWLQKWNBHIEPINGOHSNBKWSBRHXANECJWLGSMDMODULQAGNQMODYSKQVKQZJOGUJOSZJLXPFOLWYKKQSXTSHPCGYITEKUSTBLUZCUJNFDRXGFNBWUQZDVVLUJZN",
+      "length": 128,
+      "plaintext": "UUUFUNFDREIVIERKKNOJLAUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENGEANKERTXZUMWEITERMARSCHNACHTRJVEMUENDEERWARTEQELEITJLECHJM",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030706"
+    },
+    {
+      "id": "P1030707",
+      "indicators": [
+        "DICB",
+        "HJRY"
+      ],
+      "reflector": "B",
+      "greek": "C",
+      "wheels": "438",
+      "wheel_positions": "ADLX",
+      "rings": "AACU",
+      "plugs": "CH EJ NV OU TY LG SZ PK DI QB",
+      "ciphertext": "NYWNBUPRIPMNKRUMLXVPMFOGTXGQEKVPLXWOKNKYMVRHMLGLQURJPIHUPFYZVQUNKCFSXCWNEFMVNFHPQWPFCJCRDCRGMXAGWOPGFQCYNHLIQPROOZNLWQD",
+      "length": 119,
+      "plaintext": "TRAVEMUENDEYYAJEDEMITUUUDREINULZOOVIERUNDUUUZWOFUNFDRTLACBTGEANKERTXFFFTTTBLEIBTBESEOZTXVVVUUUDREINKLEINSVYEYTDKARBACHK",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030707"
+    },
+    {
+      "id": "P1030708",
+      "indicators": [
+        "EVFI",
+        "DJNP"
+      ],
+      "reflector": "B",
+      "greek": "C",
+      "wheels": "438",
+      "wheel_positions": "MRPV",
+      "rings": "AACU",
+      "plugs": "CH EJ NV OU TY LG SZ PK DI QB",
+      "ciphertext": "VZGLJKLVEOEITYLROHKVJOMQRIFFCVUITUZTPELMTXBTBZXXAABWLKBQULYXDDMUGIERRICEZRRDPZZHEPALWGEKCZVFHJIKKDKOSOKQDDWSIUHQGDERCJYPUKOZHYTJYXUNGNFDGGPQTM",
+      "length": 142,
+      "plaintext": "FXDXUUUOSTVONVONTTTFFFEINSSIBENXXDURCHKERZTEGERUNGINDERSCHLEUSEERSTNULZWONDLNULUHRMFTTTTFFFEXNSFUENFBUUNSBUETTELAUSXBEABSICHTIYECUXHAVENZUGHEN",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030708"
+    },
+    {
+      "id": "P1030709",
+      "indicators": [
+        "SFFI",
+        "PKGK"
+      ],
+      "reflector": "B",
+      "greek": "C",
+      "wheels": "438",
+      "wheel_positions": "THNR",
+      "rings": "AACU",
+      "plugs": "CH EJ NV OU TY LG SZ PK DI QB",
+      "ciphertext": "VDTLYZAINSDVHVDPKWYGAYHOBILIGMYXMSEDQSRARVDLKALGFHANDFYUBEJVXXNMCEOIDJSJYSYIELDAYSLZFULJNLOCECMJCEJGLNPKLFVFFFSKWACYSLDXJGFHUNWAJLEXHYGEBQTSQUU",
+      "length": 143,
+      "plaintext": "FUNKSPRUCHMITUHRZEITGRUPPEZWOZWOZWOEINSHIERSEHRVERSTUEMMELTUNDCHVIERNULXGRUPPEVOLLKOMMENUNKLARXNACHPRUEFENUSDNEUVERSCHLUESSELTABSETENXFUNLEIUNG",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030709"
+    },
+    {
+      "id": "P1030710",
+      "indicators": [
+        "VIID",
+        "ATIJ"
+      ],
+      "reflector": "B",
+      "greek": "C",
+      "wheels": "438",
+      "wheel_positions": "GCXO",
+      "rings": "AACU",
+      "plugs": "CH EJ NV OU TY LG SZ PK DI QB",
+      "ciphertext": "DXERSSZKLROHURYIMNDPIAQWWYDRMEOSJWTFFKIPTWEMNUFKOXTKLOJYKIGHCFWFFFHLOSFIBGWIDQVQYXQKRPHIKJQFMAEHSBGPMCTDQKFGDZJOUWIHRHCRBSBASCVBYUIVQIIPAMBJJLTJDFSPRZDWFIKZIYHQWHQZPPMJSBRWINTQGXPVUQK",
+      "length": 183,
+      "plaintext": "KOMXADMXUUUBOOTEYFUENFXUUUFLOTTXYVIERXUUUFLOTTXVVVUUUDREINULDREINULKKLUTTMANNKKXXMITUUUDEINAUFMARSCHNAPHTRAVEMUEWDEPASSIERTXMARDCHFAHRTACHTSMXUMEINSACFTNULNULUHRBZASIEBENAAAGEANKERTWZ",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030710"
+    },
+    {
+      "id": "P1030711",
+      "indicators": [
+        "FBVF",
+        "YNMW"
+      ],
+      "reflector": "B",
+      "greek": "C",
+      "wheels": "438",
+      "wheel_positions": "WHBT",
+      "rings": "AACU",
+      "plugs": "CH EJ NV OU TY LG SZ PK DI QB",
+      "ciphertext": "DLSMYBZRAPXZJHSEGRMDDUOARWGDALKGUDDNRVJZILRZQNSSXNDGRSEEMNATHCEZBHRCEKWGKOZUNDKERARVELXWPYCUMNCZNJ",
+      "length": 98,
+      "plaintext": "FUNFUUUFLOTTXVONVONZWOECHSUUUFLOTTXXVORAUSSICHTLICHESEINTREFFENUUUZWODREISECHSFUNFINKELDREIXFUNFXM",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030711"
+    },
+    {
+      "id": "P1030712",
+      "reflector": "B",
+      "greek": "C",
+      "wheels": "438",
+      "wheel_positions": "FURO",
+      "rings": "AACU",
+      "plugs": "CH EJ NV OU TY LG SZ PK DI QB",
+      "ciphertext": "EFLPBHCFKMRPFQYXAGEDUVASMXLYMBPRYTWSZMJCHZIVDJYBPMNHRAPDLZTABQHFIOSBQIBLRWOWAOVSCIIBZDDRENHDGKVPCZGUWMCO",
+      "length": 104,
+      "plaintext": "XUUUFLOTTXVVVUUUFUNFDREIVIERKKNOLLAUKKEINSACHTUHRIMGELEITVVVZWONULEINSVIERVONROTNULEINSBISROTNULSIEBENFH",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030712"
+    },
+    {
+      "id": "P1030713",
+      "indicators": [
+        "FNYG",
+        "MXHU"
+      ],
+      "reflector": "C",
+      "greek": "C",
+      "wheels": "528",
+      "wheel_positions": "ZPEU",
+      "rings": "AAFB",
+      "plugs": "CP DG EJ FI KT LZ MS NO QU RW",
+      "ciphertext": "MPSANXAASRPBMXMNJMJYYPUGPFZOYAEQIEVWIOXHRVJECKAFVASOIELMFYBYGABXMYWOIVIMKGBA",
+      "length": 76,
+      "plaintext": "LEITUNGVVVUUUSTUETZPKTXWWWHAVENXXFFFTTTEUNSZWOZWOVIERHUERMITVRRHHHVVVGELOEST",
+      "broken": true,
+      "url": "https://www.enigma.hoerenberg.com/index.php?cat=The%20U534%20messages&page=P1030713"
+    }
+  ]
+}

@@ -142,8 +142,8 @@ export function HomePage() {
             <li>
               <span className="mono">LAB</span>
               <span>
-                <strong>P1030680 campaign</strong> — Welchman + Stochastic Bombe on cleartext Metal
-                batch; still the unbroken M-Thetis ghost from U-534.
+                <strong>P1030680 campaign</strong> — the Enigma historian wing:{' '}
+                <Link to="/enigma">message, journal, and search machine</Link>. Still unbroken.
               </span>
             </li>
           </ul>

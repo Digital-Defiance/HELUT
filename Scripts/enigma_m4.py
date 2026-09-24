@@ -20,6 +20,11 @@ Model (matches EnigmaM4Machine.process / WelchmanBombe.positionTrail):
       right += 1                       (double-step handled by the middle-notch branch)
   * signal: plug -> R -> M -> L -> G -> UKW -> G^-1 -> L^-1 -> M^-1 -> R^-1 -> plug
     (Greek wheel G is static; it never steps)
+
+Enigma I (`I3`) is the three-rotor path with a *thick* UKW. It is not M4 with a rotor
+removed. Compatibility is one parking: β at window A / ring A + thin B ≡ thick B, and
+γ at A/A + thin C ≡ thick C. Tests: Tests/python/test_enigma_i_compat.py and
+Tests/HELUTTests/EnigmaICompatibilityTests.swift.
 """
 from __future__ import annotations
 
@@ -54,10 +59,16 @@ GREEK = {
     "beta":  "LEYJVCNIXWPBQMDRTAKZGFUHOS",
     "gamma": "FSOKANUERHMBTIYCWLQPZXVGJD",
 }
-# Thin reflectors.
+# Thin reflectors (M4).
 THIN = {
     "B": "ENKQAUYWJICOPBLMDXZVFTHRGS",
     "C": "RDOBJNTKVEHMLFCWZAXGYIPSUQ",
+}
+# Thick reflectors (Enigma I / M3), copied from EnigmaWarehouse.
+THICK = {
+    "A": "EJMZALYXVBWFCRQUONTSPIKHGD",
+    "B": "YRUHQSLDPXNGOKMIEBFZCWVJAT",
+    "C": "FVPJIAOYEDRZXWGCTKUQSBNMHL",
 }
 # Corpus records greek as B/C meaning beta/gamma; reflector as B/C meaning thin B/C.
 GREEK_ALIAS = {"B": "beta", "C": "gamma", "BETA": "beta", "GAMMA": "gamma"}
@@ -150,6 +161,53 @@ class M4:
         v = (self.greek_fwd[(v + og) % 26] - og) % 26
         v = self.ukw[v]
         v = (self.greek_rev[(v + og) % 26] - og) % 26
+        v = (self.left.rev[(v + ol) % 26] - ol) % 26
+        v = (self.middle.rev[(v + om) % 26] - om) % 26
+        v = (self.right.rev[(v + orr) % 26] - orr) % 26
+        return self.plug[v]
+
+    def process(self, text: list[int]) -> list[int]:
+        out = []
+        for x in text:
+            self._step()
+            out.append(self._cipher_letter(x))
+        return out
+
+
+class I3:
+    """Three-rotor Enigma I / M3. Matches Swift EnigmaMachine (double-step, step-then-cipher)."""
+
+    def __init__(self, reflector: str, wheels: str, rings: str, positions: str, plugs: str):
+        self.ukw = perm(THICK[reflector.upper()])
+        names = [WHEEL_ALIAS.get(w, w) for w in M4._split_wheels(wheels)]
+        if len(names) != 3:
+            raise ValueError(f"need 3 wheels, got {names!r}")
+        self.left, self.middle, self.right = (Rotor(n) for n in names)
+        r, p = norm(rings), norm(positions)
+        if len(r) != 3 or len(p) != 3:
+            raise ValueError("Enigma I rings and positions must be 3 letters")
+        self.ring_l, self.ring_m, self.ring_r = r
+        self.pos_l, self.pos_m, self.pos_r = p
+        self.plug = M4._plugboard(plugs)
+
+    def _step(self):
+        nm = self.middle.at_notch(self.pos_m)
+        nr = self.right.at_notch(self.pos_r)
+        if nm:
+            self.pos_l = (self.pos_l + 1) % 26
+        if nm or nr:
+            self.pos_m = (self.pos_m + 1) % 26
+        self.pos_r = (self.pos_r + 1) % 26
+
+    def _cipher_letter(self, x: int) -> int:
+        ol = M4._off(self.pos_l, self.ring_l)
+        om = M4._off(self.pos_m, self.ring_m)
+        orr = M4._off(self.pos_r, self.ring_r)
+        v = self.plug[x]
+        v = (self.right.fwd[(v + orr) % 26] - orr) % 26
+        v = (self.middle.fwd[(v + om) % 26] - om) % 26
+        v = (self.left.fwd[(v + ol) % 26] - ol) % 26
+        v = self.ukw[v]
         v = (self.left.rev[(v + ol) % 26] - ol) % 26
         v = (self.middle.rev[(v + om) % 26] - om) % 26
         v = (self.right.rev[(v + orr) % 26] - orr) % 26

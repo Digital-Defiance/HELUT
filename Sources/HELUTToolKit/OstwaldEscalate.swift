@@ -125,6 +125,34 @@ package struct OstwaldEscalateResult: Sendable {
     package let breakCount: Int
 }
 
+/// Break-bar crib match. Empty or <16-letter anchors are not "exact": a vacant
+/// menu would otherwise match the empty slice of any plaintext (N5).
+package enum OstwaldBreakBar {
+    package static let minAttestedCrib = 16
+
+    package static func cribExact(anchors: [BombeMenuAnchor], plaintext: [Int]) -> Bool {
+        let attested = anchors.filter { $0.letters.count >= minAttestedCrib }
+        guard !attested.isEmpty else { return false }
+        return attested.allSatisfy { anchor in
+            anchor.offset >= 0
+                && anchor.range.upperBound <= plaintext.count
+                && Array(plaintext[anchor.range]) == anchor.letters
+        }
+    }
+
+    package static func clears(
+        cribExact: Bool,
+        ic: Double,
+        tail: Double,
+        pairCount: Int
+    ) -> Bool {
+        cribExact
+            && ic >= PostBombeDiscriminator.icFloor
+            && tail > PostBombeDiscriminator.breakThreshold
+            && pairCount <= 10
+    }
+}
+
 package enum OstwaldEscalate {
     /// Campaign JSON stores `"beta"` / `"gamma"`. Historical climber lookup is
     /// `beta → B`, everything else → `C` (so `"gamma"` lands on gamma, which is correct).
@@ -191,8 +219,9 @@ package enum OstwaldEscalate {
                     elapsed: elapsed, decryptsDone: decryptsDone, decryptsTotal: plannedDecrypts
                 )
                 let active = jobs.filter { !$0.stuck && $0.pairs.count < $0.maxPlugs }.count
-                note(String(format: "  [round %d · %d climbs live · %d decrypts] %@",
-                            round, active, decryptsDone, live))
+                note(OstwaldProgress.roundLine(
+                    round: round, active: active, decryptsDone: decryptsDone, live: live
+                ))
                 if round > 12 { break }
             }
             OstwaldWave.scoreFinal(
@@ -534,8 +563,8 @@ package enum OstwaldEscalate {
                 + "in waves of \(waveJobs) "
                 + "(not materialised; polish-top \(OstwaldWave.polishTopCount))")
         }
-        note(String(format: "climbs        : %d materialised + %d streamed (%d candidates)",
-                    jobs.count, streamedStarts, manifest.candidates.count))
+        note("climbs        : \(jobs.count) materialised + \(streamedStarts) streamed "
+            + "(\(manifest.candidates.count) candidates)")
         note(String(
             format: "unified budget: %.1f GB → %.3g trials/dispatch (32-byte records)",
             Double(budgetBytes) / 1_073_741_824.0, Double(trialCap)
@@ -646,16 +675,12 @@ package enum OstwaldEscalate {
             let pairCount = job?.pairs.count ?? 0
             let anchors = candidate.menuAnchors
                 ?? [BombeMenuAnchor(text: candidate.menuCrib, offset: candidate.menuOffset)]
-            let exact = anchors.allSatisfy { anchor in
-                anchor.offset >= 0 && anchor.range.upperBound <= plain.count
-                    && Array(plain[anchor.range]) == anchor.letters
-            }
+            let exact = OstwaldBreakBar.cribExact(anchors: anchors, plaintext: plain)
             let ic = LanguageScorer.indexOfCoincidence(plain)
             let tail = GermanTrigrams.scoreIfLoaded(plain) ?? -.infinity
-            let clears = exact
-                && ic >= PostBombeDiscriminator.icFloor
-                && tail > PostBombeDiscriminator.breakThreshold
-                && pairCount <= 10
+            let clears = OstwaldBreakBar.clears(
+                cribExact: exact, ic: ic, tail: tail, pairCount: pairCount
+            )
             results.append(
                 OstwaldEscalateCandidateResult(
                     index: index,
