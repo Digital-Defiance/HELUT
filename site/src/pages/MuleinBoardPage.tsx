@@ -42,7 +42,7 @@ export function MuleinBoardPage() {
             </div>
             <div className="stat">
               <div className="label">Middle × right</div>
-              <div className="value">Suspended 1/24</div>
+              <div className="value">VIII-fast 24/24 dead</div>
             </div>
             <div className="stat">
               <div className="label"><Fahrenheit261Span /></div>
@@ -201,7 +201,7 @@ export function MuleinBoardPage() {
               <strong>The pinned-ring flag, graded two-sided.</strong> A flag that <em>narrows</em> the search space can silently exclude the answer, so it earns the same scrutiny: pinning the control's own ring reproduces the full break with all ten plugs, IC 0.064 and tail −2.848, while pinning a wrong ring dies at the board.
             </p>
             <p>
-              <strong>Bounded target evidence on the legacy Metal path.</strong> Tolerance 1 × right rings is suspended at <strong>3/24</strong>, all three completed placements dead. Post-gap δ=4 × right rings is suspended at <strong>144/237</strong>; entry 111's eight raw stops produce zero valid ≤10-plug completions. Full middle × right rings is suspended at <strong>1/24</strong>, with the completed placement dead over 4.152×10<sup>11</sup> settings. These are local negatives, not completed arms and not a decrypt.
+              <strong>Bounded target evidence on the legacy Metal path.</strong> Tolerance 1 × right rings is suspended at <strong>3/24</strong>, all three completed placements dead. Post-gap δ=4 × right rings is suspended at <strong>144/237</strong>; entry 111's eight raw stops produce zero valid ≤10-plug completions. Full middle × right rings under the VIII-fast prior is <strong>24/24 dead at the board</strong> (42 of 336 wheel orders; the other 294 remain open). These are local negatives, not a decrypt.
             </p>
             <p>
               <strong>Four-surface production parity.</strong> At <code>BANK_LANES=1</code>, clean exact hit, exact negative, combined post-gap plus one-edge repair, and transmitted step 79 emit identical full held receipts through source RTL, post-Yosys RTL, clear Yosys-JSON simulation, and cleartext Float TensorLUT, including backpressure. That is a known-key Boolean mechanism grade, <strong>not FHE</strong>.
@@ -287,7 +287,7 @@ export function MuleinBoardPage() {
             <li>
               <span className="mono">NO BREAK</span>
               <span>
-                <strong>This is not a decrypt.</strong> P1030680 remains unbroken. The legacy target arms are incomplete: tolerance 1 is 3/24, post-gap δ=4 is 144/237, and full middle × right coverage is 1/24. The unified bank adds one clean local negative—shell 0, identity Future 0, settings <code>0..&lt;256</code>, zero positives—but the other 260 staged Futures and broader shell/setting space remain open. Nothing here proves the target <em>is</em> garbled or missing a group.
+                <strong>This is not a decrypt.</strong> P1030680 remains unbroken. The legacy target arms are incomplete: tolerance 1 is 3/24, post-gap δ=4 is 144/237; full middle × right coverage under VIII-fast is 24/24 dead at the board (294 wheel orders still open). The unified bank adds one clean local negative—shell 0, identity Future 0, settings <code>0..&lt;256</code>, zero positives—but the other 260 staged Futures and broader shell/setting space remain open. Nothing here proves the target <em>is</em> garbled or missing a group.
               </span>
             </li>
             <li>

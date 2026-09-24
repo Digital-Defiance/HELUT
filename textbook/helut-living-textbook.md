@@ -2,7 +2,7 @@
 
 # Reconfigurable Homomorphic Computing A Living Textbook of Netlist-Clocked FHE, Differentiable Hardware, and Polymorphic Ciphers
 
-*Digital Defiance HELUT Project --- living edition 0.1.2 (2026-08-20 / C69) · August 2026*
+*Digital Defiance HELUT Project --- living edition 0.1.2 (2026-09-23 / C69) · August 2026*
 
 ::: titlepage
 **Reconfigurable Homomorphic Computing**
@@ -13,7 +13,7 @@ Netlist-Clocked Torus FHE Differentiable Hardware Adversarial Polymorphic Cipher
 
 Digital Defiance / HELUT Project
 
-Living edition 0.1.2 epoch 2026-08-20 / C69
+Living edition 0.1.2 epoch 2026-09-23 / C69
 
 Audit stamp:
 
@@ -53,7 +53,7 @@ The stack has three pillars [@helut-release; @helut-paper]:
 
 ###### Why a living textbook.
 
-Research papers freeze a slice of a laboratory. This course cannot. The claim inventory [@helut-claim-sheet] moves: Metal kernels get faster, hedges close, avenues stay unlabeled until they earn receipts. If this scaffold ever becomes a course, a professor who taught from a PDF dated June would be teaching a different Metal compiler than a professor teaching from August. So the book is versioned against the corpus *epoch* (2026-08-20 / C69 in this edition) and is honest about stubs.
+Research papers freeze a slice of a laboratory. This course cannot. The claim inventory [@helut-claim-sheet] moves: Metal kernels get faster, hedges close, avenues stay unlabeled until they earn receipts. If this scaffold ever becomes a course, a professor who taught from a PDF dated June would be teaching a different Metal compiler than a professor teaching from August. So the book is versioned against the corpus *epoch* (2026-09-23 / C69 in this edition) and is honest about stubs.
 
 ###### What this edition is.
 
@@ -646,7 +646,7 @@ Phase 1 without Phase 2 still leaves $O(W\cdot N)$ encode inside each tile. Ph
 
 Default Metal BR: fused if $N\le 64$, tiled-kernel otherwise (NTT EP inside tiles). Legacy fused megagraph is `--metal-br-fused` only, and at production $N$ it is a museum exhibit.
 
-### Numbers a student may quote (epoch 2026-08-20 / C69)
+### Numbers a student may quote (epoch 2026-09-23 / C69)
 
 ::: center
   Path at $N=1024$                      s/BR (micro)               SING / 8 rows                           RSS
@@ -1136,14 +1136,14 @@ This chapter is the discovery path after disclosure [@helut-trajectory]. None o
 ### Near term
 
 ::: center
-  Track                             Status at epoch 2026-08-20 / C69                                                                                                                                       Next experiment
+  Track                             Status at epoch 2026-09-23 / C69                                                                                                                                       Next experiment
   --------------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   **H2** full_adder $N\ge 256$      **Closed** ($Z_{2N}$ pack / `rotationPower`)                                                                                                                           Keep as a worked bug in Chapter [3](#ch:torus){reference-type="ref" reference="ch:torus"}.
   **H1** Sage lattice-estimator     **C23** filled; production $|\Delta|=4.5$; core-SVP vs Cost `rop` divergences                                                                                          Optional retune / quote estimator-only on $\Delta>16$ rows.
   **H3** Metal BR at large $N$      **C20** boolean $10.6\,\mathrm{s}$; **C21** crypto $\ell=2$ $11.38\,\mathrm{s}$                                                                                        NTT inside crypto $\ell=2$ at $N{=}1024$ (incomplete public-MS gadget).
   **H4** Noisy BK                   **C52**--**C54** covering-b1; **C57** covering-b2 $\varepsilon$ + regex SING @ $N{=}1024$; covering KS reaches $n{=}512$ (**C69**, the old $n{=}512$ FAIL withdrawn)   Native $k{=}1$ (**C37**/**C55**); `cryptoPublicMS` (**C26**/**C56**); PicoRV covering (**C60** Q FAIL).
   Encrypted sequential              **C53**/**C54** covering-b1 counter + toy ISA @ $N{=}1024$ $\sigma{=}128$ $k{=}7$; **C51** PicoRV Metal still demo $N{=}8$                                             Metal PicoRV covering @ $N{=}1024$ (LUT-tax).
-  Campaign catalog                  Middle ring $\neq A$ untested; catalog parked \@417                                                                                                                    Resume `--bombe-from 418`.
+  Campaign catalog                  Middle ring $\neq A$ tested under VIII-fast (24/24 dead; 294 WO open); catalog parked \@417                                                                            Resume `--bombe-from 418`.
   Garble / quarantine               Soft-band grades                                                                                                                                                       Sister-message lessons; not a decrypt claim.
   Audience R1--R6                   Shipped, not **C** rows: Linux checks, weak-vs-affine toy cipher pair, Theorem 1 in English, the $q$-split, four-page note                                             Open: Lean/Coq version of the six clauses; toy cipher through Yosys; $q=2$ FHE.
   Encrypted determinism             Fixed 2026-08-15: input encryption walked a `Dictionary` while drawing from the shared RNG, so ciphertexts varied per process                                          End-to-end determinism assertion in CI (byte-identical ciphertexts across processes at a fixed seed), not just the in-process guard (§[3.7](#sec:determinism){reference-type="ref" reference="sec:determinism"}).
@@ -1235,7 +1235,7 @@ First graduating experiment: fixture harness that emits tick markers and a publi
 
 ## Claim index (snapshot) {#app:claims}
 
-Canonical living inventory: `directives/claim-sheet.md`. If this appendix disagrees with the sheet, the sheet wins. Snapshot epoch: 2026-08-20 / C69.
+Canonical living inventory: `directives/claim-sheet.md`. If this appendix disagrees with the sheet, the sheet wins. Snapshot epoch: 2026-09-23 / C69.
 
 ### Reproducible results
 
@@ -1396,7 +1396,7 @@ Canonical living inventory: `directives/claim-sheet.md`. If this appendix disagr
   **H4**   **C64**--**C66**/**C68** extract$\to$KS $n{=}64$. **C69** covering SING at $n{=}256$ and $n{=}512$ (the $n{=}512$ FAIL was withdrawn). C67 trap was identity$\times 4$. Native $k{=}1$ at $n{=}N$ still **C37**.
   **H5**   `*PublicMS` gadgets ($g_0=\delta$): on-lattice intent, not a closer of old **H2**.
   **H6**   TensorLUT / quarantine vs campaign: parallel research, not P1030680 PT.
-  **H7**   Catalog / Regenbogen / UEBUNG: negatives graded; middle ring $\neq A$ untested; catalog parked \@417, resume `--bombe-from 418`.
+  **H7**   Catalog / Regenbogen / UEBUNG: negatives graded; middle ring $\neq A$ tested under VIII-fast (24/24 dead; 294 WO open); catalog parked \@417, resume `--bombe-from 418`.
 :::
 
 ### Standing non-implications
