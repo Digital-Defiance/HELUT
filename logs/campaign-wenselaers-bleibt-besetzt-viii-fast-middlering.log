@@ -1,0 +1,32 @@
+=== launch 2026-09-24T02:31:34Z ===
+cmd: ./.build/release/helut --welchman --bombe-fixture Fixtures/p1030680_wenselaers_bleibt_besetzt_context_menus.json --bombe-menus 0 --bombe-min-crib 16 --subspace viii-fast-wheel --bombe-middle-ring --bombe-ring-sweep --bombe-quarantine logs/quarantine_wenselaers_bleibt_besetzt.json
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030680_wenselaers_bleibt_besetzt_context_menus.json (4 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 4 of 4
+min menu constraints: 16
+running 4 menus, highest deduction power first:
+  [1] UHRJKIELWEINGELAUFENYFFFTTTBLEIBTBESETZT@30 edges=40 letters=23 loops=18 comp=1 span=70 central=T
+  [2] UHRJKIELWEINGELAUFENYFFFTTTBLEIBTBESETZT@27 edges=40 letters=23 loops=18 comp=1 span=67 central=T
+  [3] UHRJKIELWEINGELAUFENYFFFTTTBLEIBTBESETZT@17 edges=40 letters=23 loops=18 comp=1 span=57 central=T
+  [4] UHRJKIELWEINGELAUFENYFFFTTTBLEIBTBESETZT@7 edges=40 letters=23 loops=18 comp=1 span=47 central=E
+shells/menu: 113568 (42 WO × 2 Greek × 2 UKW × 26 mid-ring × 26 right-ring) → 5.19e+10 settings
+kernel sieve: ≤10 plugs, middle-ring covered-lane skip
+GPU pipeline depth: 4 shells in flight
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+right ring swept: every right-wheel turnover phase covered
+middle ring swept: ring A in full, rings B–Z restricted to lanes whose middle wheel reaches a notch (the rest are exactly the ring-A lanes)
+no residual ring gap for these menus — this is the arm the ledger has never run
+ETA floor (~50M/s): 69.2 min
+
+quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → logs/quarantine_wenselaers_bleibt_besetzt.json
+  [1/4·1] UHRJKIELWEINGELAUFENYFFFTTTBLEIBTBESETZT@30 edges=40 letters=23 loops=18 comp=1 span=70 central=T dead at the board                      1227s  42.3M/s ETA  61.3 min
+  [2/4·2] UHRJKIELWEINGELAUFENYFFFTTTBLEIBTBESETZT@27 edges=40 letters=23 loops=18 comp=1 span=67 central=T dead at the board                      2227s  46.6M/s ETA  37.1 min
+  [3/4·3] UHRJKIELWEINGELAUFENYFFFTTTBLEIBTBESETZT@17 edges=40 letters=23 loops=18 comp=1 span=57 central=T dead at the board                      3148s  49.5M/s ETA  17.5 min
+  [4/4·4] UHRJKIELWEINGELAUFENYFFFTTTBLEIBTBESETZT@7 edges=40 letters=23 loops=18 comp=1 span=47 central=E dead at the board                      3972s  52.3M/s ETA   0.0 min
+
+total raw stops: 0 over 207591401472 settings (52.3M/s mean)
+survived the 10-plug sieve: 0
+no setting survived — every runnable menu contradicted everywhere it was tried
+quarantine: 0 soft-band near-misses (solo pass complete)
+=== exit 0 2026-09-24T03:37:46Z ===

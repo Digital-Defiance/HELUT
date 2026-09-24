@@ -46,6 +46,9 @@ struct QuarantineCandidate: Codable, Sendable, Hashable {
 
     var softBand: String
     var source: String
+    /// Dummy-steps before the recorded letters. Nil/0 is dense Ostwald. Missing on
+    /// every historical quarantine row.
+    var leadingHoles: Int? = nil
 }
 
 struct QuarantineManifest: Codable, Sendable {

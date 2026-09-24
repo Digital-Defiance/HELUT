@@ -307,6 +307,12 @@ public enum HelutBombeCLI {
         exit(0)
     }
 
+    // Identity-family Mulein repairs → dense Ostwald quarantine. Does not climb.
+    if CommandLine.arguments.contains("--mulein-ostwald-adapt") {
+        runMuleinOstwaldAdapt()
+        exit(0)
+    }
+
     if CommandLine.arguments.contains("--indel-selftest") {
         runIndelSelfTest()
         exit(0)
@@ -322,8 +328,18 @@ public enum HelutBombeCLI {
         exit(0)
     }
 
+    if CommandLine.arguments.contains("--ostwald-all-settings") {
+        runOstwaldAllSettings()
+        exit(0)
+    }
+
     if CommandLine.arguments.contains("--ostwald-escalate") {
         runOstwaldEscalate()
+        exit(0)
+    }
+
+    if CommandLine.arguments.contains("--ostwald-brute-probe") {
+        runOstwaldFourPlugProbe()
         exit(0)
     }
 
@@ -382,6 +398,9 @@ public enum HelutBombeCLI {
                 // read-only candidate adjudicator. It reads campaign receipts and never
                 // evaluates a rotor setting, so it is deliberately not a `--bombe-` flag.
                 || $0.hasPrefix("--sparse-")
+                // `--mulein-ostwald-adapt` rebounds the Future inventory and host-replays
+                // identity repairs. `--mulein-future-campaign` is already in `keys`.
+                || $0.hasPrefix("--mulein-")
         }
     }
 }

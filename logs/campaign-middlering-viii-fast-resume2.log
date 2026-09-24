@@ -1,0 +1,58 @@
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030680_maxupper_strongest_menus.json (24 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 24 of 24
+min menu constraints: 16
+resuming from menu 2 of 24 (skipping 1 already done)
+running 23 menus, highest deduction power first:
+  [2] FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN@22 edges=40 letters=21 loops=20 comp=1 span=62 central=U
+  [3] NFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENGE@21 edges=40 letters=21 loops=20 comp=1 span=61 central=T
+  [4] NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE@21 edges=40 letters=21 loops=20 comp=1 span=61 central=U
+  [5] UNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENG@20 edges=40 letters=21 loops=20 comp=1 span=60 central=U
+  [6] FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN@19 edges=40 letters=21 loops=20 comp=1 span=59 central=U
+  [7] NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE@18 edges=40 letters=21 loops=20 comp=1 span=58 central=U
+  [8] LAUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIRO@17 edges=40 letters=22 loops=19 comp=1 span=57 central=U
+  [9] AUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIROT@11 edges=40 letters=22 loops=19 comp=1 span=51 central=U
+  [10] LAUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIRO@10 edges=40 letters=22 loops=19 comp=1 span=50 central=U
+  [11] UUUFUNFDREIVIERKKNOLLAUKK@25 edges=25 letters=19 loops=8 comp=2 span=50 central=R
+  [12] UUUFUNFDREIVIERKKNOLLAUKK@27 edges=25 letters=20 loops=8 comp=3 span=52 central=R
+  [13] DMXUUUBOOTEYFXDXUUUAUSB@31 edges=23 letters=19 loops=7 comp=3 span=54 central=U
+  … 11 more
+shells/menu: 113568 (42 WO × 2 Greek × 2 UKW × 26 mid-ring × 26 right-ring) → 5.19e+10 settings
+kernel sieve: ≤10 plugs, middle-ring covered-lane skip
+GPU pipeline depth: 4 shells in flight
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+right ring swept: every right-wheel turnover phase covered
+middle ring swept: ring A in full, rings B–Z restricted to lanes whose middle wheel reaches a notch (the rest are exactly the ring-A lanes)
+no residual ring gap for these menus — this is the arm the ledger has never run
+ETA floor (~50M/s): 397.9 min
+
+quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → logs/quarantine_middlering_viii.json
+  [2/24·1] FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN@22 edges=40 letters=21 loops=20 comp=1 span=62 central=U dead at the board                       784s  66.2M/s ETA 287.3 min
+  [3/24·2] NFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENGE@21 edges=40 letters=21 loops=20 comp=1 span=61 central=T dead at the board                      1811s  57.3M/s ETA 316.9 min
+  [4/24·3] NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE@21 edges=40 letters=21 loops=20 comp=1 span=61 central=U dead at the board                      2518s  61.8M/s ETA 279.8 min
+  [5/24·4] UNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENG@20 edges=40 letters=21 loops=20 comp=1 span=60 central=U dead at the board                      3253s  63.8M/s ETA 257.5 min
+  [6/24·5] FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN@19 edges=40 letters=21 loops=20 comp=1 span=59 central=U dead at the board                      4090s  63.4M/s ETA 245.4 min
+  [7/24·6] NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE@18 edges=40 letters=21 loops=20 comp=1 span=58 central=U dead at the board                      4884s  63.8M/s ETA 230.6 min
+  [8/24·7] LAUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIRO@17 edges=40 letters=22 loops=19 comp=1 span=57 central=U dead at the board                      5721s  63.5M/s ETA 218.0 min
+  [9/24·8] AUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIROT@11 edges=40 letters=22 loops=19 comp=1 span=51 central=U dead at the board                      6549s  63.4M/s ETA 204.6 min
+  [10/24·9] LAUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIRO@10 edges=40 letters=22 loops=19 comp=1 span=50 central=U dead at the board                      7369s  63.4M/s ETA 191.0 min
+  [11/24·10] UUUFUNFDREIVIERKKNOLLAUKK@25 edges=25 letters=19 loops=8 comp=2 span=50 central=R dead at the board                      8006s  64.8M/s ETA 173.5 min
+  [12/24·11] UUUFUNFDREIVIERKKNOLLAUKK@27 edges=25 letters=20 loops=8 comp=3 span=52 central=R dead at the board                      8575s  66.6M/s ETA 155.9 min
+  [13/24·12] DMXUUUBOOTEYFXDXUUUAUSB@31 edges=23 letters=19 loops=7 comp=3 span=54 central=U dead at the board                      9160s  68.0M/s ETA 139.9 min
+  [14/24·13] DMXUUUBOOTEYFXDXUUUAUSB@8 edges=23 letters=19 loops=7 comp=3 span=31 central=U dead at the board                      9699s  69.6M/s ETA 124.3 min
+  [15/24·14] TGEANKERTXFFFTTTBLEIB@37 edges=21 letters=17 loops=6 comp=2 span=58 central=T dead at the board                     10315s  70.4M/s ETA 110.5 min
+  [16/24·15] ZPKTXWWWHAVENXXFFFTTT@25 edges=21 letters=17 loops=6 comp=2 span=46 central=F dead at the board                     11409s  68.2M/s ETA 101.4 min
+  [17/24·16] TGEANKERTXFFFTTTBLEIB@24 edges=21 letters=17 loops=6 comp=2 span=45 central=T dead at the board                     11980s  69.3M/s ETA  87.4 min
+  [18/24·17] ZPKTXWWWHAVENXXFFFTTT@50 edges=21 letters=18 loops=6 comp=3 span=71 central=T dead at the board                     12706s  69.4M/s ETA  74.7 min
+  [19/24·18] UUUFUNFDREIVIERKKNO@27 edges=19 letters=16 loops=6 comp=3 span=46 central=R dead at the board                     13216s  70.7M/s ETA  61.2 min
+  [20/24·19] ULDREIYZWODREISECHSEINS@16 edges=23 letters=19 loops=5 comp=1 span=39 central=R dead at the board                     13727s  71.8M/s ETA  48.2 min
+  [21/24·20] ULDREIYZWODREISECHSEINS@12 edges=23 letters=20 loops=5 comp=2 span=35 central=E dead at the board                     14479s  71.7M/s ETA  36.2 min
+  [22/24·21] VVVUUUDREINULEINSVI@40 edges=19 letters=15 loops=5 comp=1 span=59 central=V dead at the board                     15162s  71.9M/s ETA  24.1 min
+  [23/24·22] UUUVIRSIBENNULEINS@44 edges=18 letters=14 loops=5 comp=1 span=62 central=B dead at the board                     15804s  72.2M/s ETA  12.0 min
+  [24/24·23] UUUVIRSIBENNULEINS@40 edges=18 letters=14 loops=5 comp=1 span=58 central=B dead at the board                     16563s  72.1M/s ETA   0.0 min
+
+total raw stops: 0 over 1193650558464 settings (72.1M/s mean)
+survived the 10-plug sieve: 0
+no setting survived — every runnable menu contradicted everywhere it was tried
+quarantine: 0 soft-band near-misses (solo pass complete)

@@ -1,0 +1,86 @@
+=== adapt launch 2026-09-24T14:12:15Z ===
+cmd: ./.build/release/helut --mulein-ostwald-adapt logs/p1030680-mulein-operational-settings-000001-000256-v3.jsonl --mulein-ostwald-adapt-out logs/p1030680-mulein-identity-repair-ostwald.json --mulein-ostwald-adapt-skip-out logs/p1030680-mulein-identity-repair-ostwald-skips.jsonl
+=== P1030680 Mulein-repair → Ostwald escalate adapter ===
+source ledger : logs/p1030680-mulein-operational-settings-000001-000256-v3.jsonl
+quarantine    : logs/p1030680-mulein-identity-repair-ostwald.json
+skip ledger   : logs/p1030680-mulein-identity-repair-ostwald-skips.jsonl
+min pairs     : 4  (Phase 50.6: four correct plugs flip the 72-letter sign)
+rebound       : fast — SHA-256 + fingerprint, compile identity-repair ordinals only
+scope         : identity-family repairs; post-gap dense climb is illegal
+
+ledger SHA-256: c516238d5420bde46fb7bdc76078ac086b5946de2374f8d7a4b4d56b1e7e52f2
+rows scanned  : streamed (not loaded as one blob)
+run           : sha256-efb770bcaddd2bc0581edbb19b66077160a806c30650a60d0b9d6a733c592cc0
+candidates    : 4184 total
+  identity-repair queued : 2056
+  skipped exact-identity-already-scored: 40
+  skipped exact-post-gap-already-adjudicated: 41
+  skipped post-gap-dense-ostwald-illegal: 2047
+
+manifest      : 628 Futures, fingerprint fnv1a64-616326e94036a97d — rebound by content
+  identity    : 314
+  post-gap    : 314 (not compiled)
+  compiled    : 59 identity-repair ordinals (fast mode; not 628)
+
+=== Adapter summary ===
+queued identity-repair : 2056
+emitted to escalate    : 38
+skipped split-menu: 1993
+skipped pair-count-below-floor: 25
+wrote quarantine       : logs/p1030680-mulein-identity-repair-ostwald.json
+wrote skips            : logs/p1030680-mulein-identity-repair-ostwald-skips.jsonl
+
+This is not a climb and not a decrypt. Feed the quarantine to
+  --ostwald-escalate logs/p1030680-mulein-identity-repair-ostwald.json
+if you want the dense 72-letter walker to grade these forced plugs.
+Do not point that walker at post-gap repairs.
+=== adapt exit 0 2026-09-24T14:12:20Z ===
+emitted candidates: 38
+=== escalate launch 2026-09-24T14:12:20Z ===
+cmd: ./.build/release/helut --ostwald-escalate logs/p1030680-mulein-identity-repair-ostwald.json
+=== Ostwald escalation of bombe stops ===
+manifest      : logs/p1030680-mulein-identity-repair-ostwald.json
+target        : P1030680 (72 letters)
+candidates    : 38
+scorer        : staged   trigram model: helut-german-trigram-add-k-0.5-e08a5659-v1 (14947 grams; letters=28508834 ic=0.0747 distinct=14947)
+seeding       : all forced plugs held fixed (--ostwald-keep N to free the rest)
+break bar     : crib exact ∧ IC ≥ 0.055 ∧ tail > -3.6
+
+noise floor   : mean -3.6456, best of 12 random settings -3.4564
+
+top escalated candidates by climbed score:
+   #  climbed      IC     tail  crib  shell / position
+  27  -3.6976  0.0493  -3.6976  BAD   B/beta/IV-III-VIII AAAA AAFL
+      ASSUINZKYOULDASWEBSONURSSUCQMOBATFPKWPOMKDJAYYXSWSLOWGRORXHADOJHRELATSAS
+   6  -3.7014  0.0446  -3.7014  BAD   B/beta/IV-III-VIII AAAA AAFD
+      XZEHRNCXELZJSIXDMEFROKEYQJNAUPNEZMENEANGNALIGUCHNIEWMVFCNDGAZURIFYZBSCXU
+  37  -3.7373  0.0473  -3.7373  BAD   B/beta/IV-III-VIII AAAA AAJT
+      LZBIUEHRYCHSVSZUSWARSRCHEVAUIIEEKWENONNGSREOFTWSOTTEERSPXMOPHIBYEOYUJXRA
+  20  -3.7383  0.0372  -3.7383  BAD   B/beta/IV-III-VIII AAAA AAAR
+      YFIBBROJIAUMKLSWLBSJAINSPNEOVTDOYANGNMHIRWUFCXWPVROPARTWURSBEBETYREMDIZA
+  26  -3.7416  0.0469  -3.7416  BAD   B/beta/IV-III-VIII AAAA AAEE
+      NSAVFOKPWPCPULHXMBCEWDEMFASXZWELIEDIELNLEABIWACHINDEODHKKZUCBMANPCEZPHII
+  36  -3.7634  0.0516  -3.7634  BAD   B/beta/IV-III-VIII AAAA AAJE
+      KYTIRELDIHGQJULMGNDKITEXTLVEEIZELUENMANGERCYMUEEGEYREWMQPJYTHACGHDANZAMT
+   7  -3.7689  0.0438  -3.7689  BAD   B/beta/IV-III-VIII AAAA AAFT
+      IRJUKLHOTIOZMUSGOBSRANGSTINANSCQZFERXFXXMPEZGEIINSAGPDGNIRBSFHRAUJWAWIRS
+  18  -3.7878  0.0391  -3.7878  BAD   B/beta/IV-III-VIII AAAA AAAD
+      APINJPUKONZZBUSDABSVQXTSEKOHEREUKTHMOELFONSELKSAULAPTKQWHOIRRGHJXTUMSSCZ
+  21  -3.7899  0.0403  -3.7899  BAD   B/beta/IV-III-VIII AAAA AABH
+      XLWUISKOADVWSTOYLSSKENVWMKURTGUECCENCONZCMYMCHKIRVIKEGYLMWUILGROHDAFUKUH
+  15  -3.8065  0.0462  -3.8065  BAD   B/beta/IV-III-VIII AAAA AAIB
+      TYEAGNEVROCFMGWAEUJXLFRENFIRHZBEOFENONNGZIGTHIRAPQGHLEGSWWMKAHRKOOGGFIXX
+  32  -3.8109  0.0391  -3.8109  BAD   B/beta/IV-III-VIII AAAA AAHE
+      KRVBPWANHENENTSFLXXAKQBCPIHRTYINTLOSWMUNUROILPCHISCLOCHKSZPEFEMZTTISENWU
+   0  -3.8298  0.0407  -3.8298  BAD   B/beta/IV-III-VIII AAAA AABH
+      PAULTKLUGHATJJRARFCWAJQBJWJEBTONXPPCVDAZJOTIPCCHIROHDGHLAYSDAILCMQUANKIR
+
+NO BREAK — no escalated candidate clears crib-exact ∧ IC ≥ 0.055 ∧ tail > -3.6.
+  best climbed -3.6976 (noise best -3.4564, Δ -0.2412) IC 0.0493 tail -3.6976
+  and it does not even clear the random-setting floor, so these stops
+  are ghosts as far as this scorer can tell.
+
+Read this narrowly. It says the quarantined stops in this file are not the
+key. It does not bound the escalator, which is graded separately on known
+keys (Phase 50.6): given 4+ correct plugs it clears the bar at 72 letters.
+=== escalate exit 0 2026-09-24T14:12:20Z ===

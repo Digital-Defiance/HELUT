@@ -131,7 +131,7 @@ Re-validation stamp: M4 Max / 64 GB / macOS 26.6.1 / Swift 6.3.3. Mechanical lin
 | **H4** (remainder) | Native-*δ* / `cryptoPublicMS` noisy BK | **C64**–**C66**/**C68** extract→KS *n*=64. **C69:** covering SING **PASS** at *n*=256 and *n*=512; the old *n*=512 failure was a withdrawn determinism artifact and is now protected by `make c69-smoke`. C67 SIGTRAP was identity×4. **C37** remains native *n*=*N*. **C60**/**C61** remain post-fix failures at *n*=*N*, *k*=7. Open: noisy `cryptoPublicMS`; native *n*=*N* at production parameters; full PicoRV `lw`. |
 | **H5** | `*PublicMS` gadgets (*g*<sub>0</sub>=*δ*) | On-lattice intent; does not alone close old H2. |
 | **H6** | TensorLUT / quarantine vs campaign | Parallel research — **not** P1030680 plaintext. |
-| **H7** | Catalog / Regenbogen / UEBUNG | Negatives / not-BREAK as graded; middle ring ≠A untested; catalog parked @417, resume `--bombe-from 418`. |
+| **H7** | Catalog / Regenbogen / UEBUNG | Negatives / not-BREAK as graded; middle ring ≠A **tested under VIII-fast** (24/24 dead, 0 stops; 294 WO remain open); catalog parked @417, resume `--bombe-from 418`. |
 
 ### Closed hedges (history — do not re-open as if unsolved)
 

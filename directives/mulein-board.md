@@ -191,7 +191,7 @@ Receipt: `logs/control-pinnedrings-2026-08-17.log`
 |---|---|---|
 | Tolerance 1 × right rings | **3/24**, all three completed placements dead at board | `--bombe-menus 0 --bombe-ring-sweep --bombe-garble-tolerance 1 --bombe-from 4` |
 | Post-gap δ=4 × right rings | **144/237**; entry 111's 8 raw stops produce 0 valid ≤10-plug completions | `--bombe-menus 0 --bombe-from 145` |
-| Full middle × right rings | **1/24**, completed placement dead over 4.152×10¹¹ settings | `--bombe-menus 0 --bombe-middle-ring --bombe-ring-sweep --bombe-from 2` |
+| Full middle × right rings | **DONE under VIII-fast**, 24/24 dead; 0 stops on placements 2–24 over 1.194×10¹² settings. Other 294 WO open | BLEIBTBESETZT context fixture **DONE (Phase 60)**: 4/4 dead, 0 stops over 2.076×10¹¹ settings, same subspace |
 
 These are local negatives from the existing cleartext Welchman/Metal campaign path. None is a
 completed hypothesis family or a decrypt.
@@ -286,14 +286,26 @@ geometry-aware full-message replay. These receipts do not establish that the cip
 garbled. Durable ledger: `logs/p1030680-mulein-operational-preflight-v3.jsonl`, SHA-256
 `55a68266f79ca0b17b6de18a80644883c7c8a2585ab2508d42d5d73c9a17f993`.
 
-The exact bounded stripe is **RUNNING by operator report; outcomes are unknown and no receipt
-grade has been ingested at this sync**: the same shell and all 628 Futures,
-settings `1..<256`, fresh ledger
+The exact bounded stripe is **DONE as bounded coverage** (Phase 51.16): the same shell and all
+628 Futures, settings `1..<256`, durable ledger
 `logs/p1030680-mulein-operational-settings-000001-000256-v3.jsonl`, run identity
-`sha256-efb770bcaddd2bc0581edbb19b66077160a806c30650a60d0b9d6a733c592cc0`, 10,048 chunks,
-and 4,163,640 planned receipts. The prior plan-only invocation evaluated no settings and wrote
-no ledger; the active operator invocation omits only `--mulein-future-plan-only`. No live hit,
-gate, key, plaintext, or decrypt is claimed. Operational/scuttle hypotheses run first.
+`sha256-efb770bcaddd2bc0581edbb19b66077160a806c30650a60d0b9d6a733c592cc0`, **10,048/10,048
+chunks and 4,163,640 checked receipts**, 4,184 host-verified physical candidates, **0 BREAK
+gates**. All 81 exact candidates are split-menu ghosts. `--mulein-ostwald-adapt` (Phase 59)
+fast-rebounds this inventory and host-replays identity-family repairs into dense Ostwald;
+post-gap dense climb is illegal. **Consumed (Phases 62–64):** 38 then 824 then 4,101
+identity and gapped post-gap repairs climbed (Metal then CPU Ostwald), NO BREAK.
+Phase 64 best −3.0390 (IC 0.0544) crib BAD after 3.33 million climbs is not a
+near-miss against a 12-sample floor. Phase 65 ranker/beam/all-settings is built and
+gated on `--ostwald-curve`. The full 72-letter ranker curve scored 5/30 greedy
+and 6/30 with beam 4, both with a negative median: not a zero crossing. Phase 66
+4-plug hot-letter brute: 0/32 oracle cover. Phase 67 **RUNNING**: 4-plug
+alphabet climb on locked P1030684 VYAA / 385320, restarted 2026-09-24T16:51:24Z
+on 524,288-job Metal waves, live ~37M/s / ~37 min
+(`logs/ostwald-fourplug-p1030684-true-385320.log`). Next: wrong setting 0.
+Not a P1030680 consume.
+No live hit, gate,
+key, plaintext, or decrypt is claimed. Operational/scuttle hypotheses ran first.
 Afterward, the old playbook
 returns through the same garble/indel/Future machinery; ordinary legacy resumes remain lower
 priority at their durable boundaries. This ordering is a working search prior, not historical

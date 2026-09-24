@@ -1,0 +1,290 @@
+=== adapt launch 2026-09-24T15:07:50Z ===
+cmd: ./.build/release/helut --mulein-ostwald-adapt logs/p1030680-mulein-operational-settings-000001-000256-v3.jsonl --mulein-ostwald-split-menu --mulein-ostwald-family both --mulein-ostwald-min-pairs 0 --mulein-ostwald-adapt-out logs/p1030680-mulein-everything-ostwald.json --mulein-ostwald-adapt-skip-out logs/p1030680-mulein-everything-ostwald-skips.jsonl
+=== P1030680 Mulein-repair → Ostwald escalate adapter ===
+source ledger : logs/p1030680-mulein-operational-settings-000001-000256-v3.jsonl
+quarantine    : logs/p1030680-mulein-everything-ostwald.json
+skip ledger   : logs/p1030680-mulein-everything-ostwald-skips.jsonl
+min pairs     : 0  (empty boards emitted; Phase 50.6 still wants 4 correct plugs to finish)
+family        : both  split-menu: emit
+rebound       : fast — SHA-256 + fingerprint, compile requested repair ordinals
+scope         : identity plus leading-gap post-gap (δ dummy-steps); dense post-gap still illegal
+
+ledger SHA-256: c516238d5420bde46fb7bdc76078ac086b5946de2374f8d7a4b4d56b1e7e52f2
+rows scanned  : streamed (not loaded as one blob)
+run           : sha256-efb770bcaddd2bc0581edbb19b66077160a806c30650a60d0b9d6a733c592cc0
+candidates    : 4184 total
+  identity-repair queued : 4103
+  skipped exact-identity-already-scored: 40
+  skipped exact-post-gap-already-adjudicated: 41
+
+manifest      : 628 Futures, fingerprint fnv1a64-616326e94036a97d — rebound by content
+  identity    : 314
+  post-gap    : 314 (not compiled)
+  compiled    : 119 repair ordinals (fast mode; not 628)
+
+=== Adapter summary ===
+queued identity-repair : 4103
+emitted to escalate    : 4101
+skipped duplicate-shell-live-hash: 2
+wrote quarantine       : logs/p1030680-mulein-everything-ostwald.json
+wrote skips            : logs/p1030680-mulein-everything-ostwald-skips.jsonl
+
+This is not a climb and not a decrypt. Feed the quarantine to
+  --ostwald-escalate logs/p1030680-mulein-everything-ostwald.json
+Identity rows use the dense walker; post-gap rows carry leadingHoles = δ.
+=== adapt exit 0 2026-09-24T15:07:57Z ===
+=== escalate launch 2026-09-24T15:07:57Z ===
+cmd: ./.build/release/helut --ostwald-escalate logs/p1030680-mulein-everything-ostwald.json --ostwald-cpu
+=== Ostwald escalation of bombe stops ===
+manifest      : logs/p1030680-mulein-everything-ostwald.json
+target        : P1030680 (72 letters)
+candidates    : 4101
+scorer        : staged   trigram model: helut-german-trigram-add-k-0.5-e08a5659-v1 (14947 grams; letters=28508834 ic=0.0747 distinct=14947)
+seeding       : all forced plugs held fixed (--ostwald-keep N to free the rest)
+exhaustion    : top-up to 4 via exhaust 6 depth 2, then climb to 10
+break bar     : crib exact ∧ IC ≥ 0.055 ∧ tail > -3.6
+
+noise floor   : mean -3.6456, best of 12 random settings -3.4564
+
+climbs        : 3329721 (4101 candidates × starts)
+unified budget: 8.0 GB → 2.68e+08 trials/dispatch (32-byte records)
+backend       : CPU   cores 16
+decrypts      : 2355139843
+ETA floor (~40k decrypts/s): 981.3 min
+
+  [1/3329721]      0s   1.0k/s ETA 38521.9 min
+  [16648/3329721]      8s   1.3M/s ETA  29.1 min
+  [33296/3329721]     16s   1.3M/s ETA  28.9 min
+  [49944/3329721]     25s   1.3M/s ETA  28.9 min
+  [66592/3329721]     33s   1.3M/s ETA  28.9 min
+  [83240/3329721]     42s   1.3M/s ETA  29.2 min
+  [99888/3329721]     51s   1.3M/s ETA  29.3 min
+  [116536/3329721]     60s   1.3M/s ETA  29.3 min
+  [133184/3329721]     69s   1.3M/s ETA  29.2 min
+  [149832/3329721]     78s   1.3M/s ETA  29.1 min
+  [166480/3329721]     86s   1.3M/s ETA  28.8 min
+  [183128/3329721]     94s   1.3M/s ETA  28.6 min
+  [199776/3329721]    103s   1.3M/s ETA  28.4 min
+  [216424/3329721]    111s   1.3M/s ETA  28.2 min
+  [233072/3329721]    120s   1.3M/s ETA  28.0 min
+  [249720/3329721]    128s   1.3M/s ETA  27.8 min
+  [266368/3329721]    136s   1.3M/s ETA  27.6 min
+  [283016/3329721]    144s   1.3M/s ETA  27.5 min
+  [299664/3329721]    153s   1.3M/s ETA  27.3 min
+  [316312/3329721]    161s   1.3M/s ETA  27.1 min
+  [332960/3329721]    169s   1.3M/s ETA  27.0 min
+  [349608/3329721]    178s   1.3M/s ETA  26.8 min
+  [366256/3329721]    186s   1.3M/s ETA  26.7 min
+  [382904/3329721]    195s   1.3M/s ETA  26.5 min
+  [399552/3329721]    203s   1.3M/s ETA  26.4 min
+  [416200/3329721]    212s   1.3M/s ETA  26.3 min
+  [432848/3329721]    220s   1.3M/s ETA  26.1 min
+  [449496/3329721]    229s   1.3M/s ETA  26.0 min
+  [466144/3329721]    237s   1.3M/s ETA  25.8 min
+  [482792/3329721]    245s   1.3M/s ETA  25.7 min
+  [499440/3329721]    254s   1.3M/s ETA  25.5 min
+  [516088/3329721]    262s   1.3M/s ETA  25.4 min
+  [532736/3329721]    271s   1.3M/s ETA  25.2 min
+  [549384/3329721]    279s   1.3M/s ETA  25.1 min
+  [566032/3329721]    288s   1.3M/s ETA  24.9 min
+  [582680/3329721]    297s   1.3M/s ETA  24.8 min
+  [599328/3329721]    305s   1.3M/s ETA  24.7 min
+  [615976/3329721]    313s   1.3M/s ETA  24.6 min
+  [632624/3329721]    322s   1.3M/s ETA  24.4 min
+  [649272/3329721]    330s   1.3M/s ETA  24.3 min
+  [665920/3329721]    339s   1.3M/s ETA  24.2 min
+  [682568/3329721]    348s   1.3M/s ETA  24.1 min
+  [699216/3329721]    357s   1.3M/s ETA  23.9 min
+  [715864/3329721]    366s   1.3M/s ETA  23.8 min
+  [732512/3329721]    375s   1.3M/s ETA  23.7 min
+  [749160/3329721]    383s   1.3M/s ETA  23.6 min
+  [765808/3329721]    392s   1.3M/s ETA  23.4 min
+  [782456/3329721]    400s   1.3M/s ETA  23.3 min
+  [799104/3329721]    408s   1.3M/s ETA  23.1 min
+  [815752/3329721]    417s   1.3M/s ETA  22.9 min
+  [832400/3329721]    425s   1.3M/s ETA  22.8 min
+  [849048/3329721]    433s   1.3M/s ETA  22.6 min
+  [865696/3329721]    441s   1.3M/s ETA  22.5 min
+  [882344/3329721]    450s   1.3M/s ETA  22.3 min
+  [898992/3329721]    458s   1.3M/s ETA  22.2 min
+  [915640/3329721]    467s   1.3M/s ETA  22.0 min
+  [932288/3329721]    475s   1.3M/s ETA  21.9 min
+  [948936/3329721]    483s   1.3M/s ETA  21.7 min
+  [965584/3329721]    492s   1.3M/s ETA  21.6 min
+  [982232/3329721]    500s   1.3M/s ETA  21.4 min
+  [998880/3329721]    508s   1.3M/s ETA  21.3 min
+  [1015528/3329721]    517s   1.3M/s ETA  21.2 min
+  [1032176/3329721]    525s   1.3M/s ETA  21.0 min
+  [1048824/3329721]    533s   1.3M/s ETA  20.9 min
+  [1065472/3329721]    542s   1.3M/s ETA  20.7 min
+  [1082120/3329721]    550s   1.3M/s ETA  20.6 min
+  [1098768/3329721]    558s   1.3M/s ETA  20.4 min
+  [1115416/3329721]    567s   1.3M/s ETA  20.3 min
+  [1132064/3329721]    576s   1.3M/s ETA  20.2 min
+  [1148712/3329721]    584s   1.3M/s ETA  20.0 min
+  [1165360/3329721]    593s   1.3M/s ETA  19.9 min
+  [1182008/3329721]    601s   1.3M/s ETA  19.7 min
+  [1198656/3329721]    610s   1.3M/s ETA  19.6 min
+  [1215304/3329721]    618s   1.3M/s ETA  19.5 min
+  [1231952/3329721]    626s   1.3M/s ETA  19.3 min
+  [1248600/3329721]    635s   1.3M/s ETA  19.2 min
+  [1265248/3329721]    643s   1.3M/s ETA  19.0 min
+  [1281896/3329721]    652s   1.3M/s ETA  18.9 min
+  [1298544/3329721]    660s   1.3M/s ETA  18.7 min
+  [1315192/3329721]    669s   1.3M/s ETA  18.6 min
+  [1331840/3329721]    677s   1.3M/s ETA  18.5 min
+  [1348488/3329721]    685s   1.3M/s ETA  18.3 min
+  [1365136/3329721]    694s   1.3M/s ETA  18.2 min
+  [1381784/3329721]    702s   1.3M/s ETA  18.0 min
+  [1398432/3329721]    711s   1.3M/s ETA  17.9 min
+  [1415080/3329721]    720s   1.3M/s ETA  17.8 min
+  [1431728/3329721]    729s   1.3M/s ETA  17.6 min
+  [1448376/3329721]    737s   1.3M/s ETA  17.5 min
+  [1465024/3329721]    746s   1.3M/s ETA  17.4 min
+  [1481672/3329721]    754s   1.3M/s ETA  17.2 min
+  [1498320/3329721]    762s   1.3M/s ETA  17.1 min
+  [1514968/3329721]    770s   1.3M/s ETA  16.9 min
+  [1531616/3329721]    779s   1.3M/s ETA  16.8 min
+  [1548264/3329721]    787s   1.3M/s ETA  16.6 min
+  [1564912/3329721]    795s   1.3M/s ETA  16.5 min
+  [1581560/3329721]    804s   1.3M/s ETA  16.3 min
+  [1598208/3329721]    812s   1.3M/s ETA  16.2 min
+  [1614856/3329721]    820s   1.3M/s ETA  16.0 min
+  [1631504/3329721]    829s   1.3M/s ETA  15.9 min
+  [1648152/3329721]    837s   1.3M/s ETA  15.8 min
+  [1664800/3329721]    846s   1.3M/s ETA  15.6 min
+  [1681448/3329721]    854s   1.3M/s ETA  15.5 min
+  [1698096/3329721]    863s   1.3M/s ETA  15.3 min
+  [1714744/3329721]    871s   1.3M/s ETA  15.2 min
+  [1731392/3329721]    879s   1.3M/s ETA  15.1 min
+  [1748040/3329721]    887s   1.3M/s ETA  14.9 min
+  [1764688/3329721]    896s   1.3M/s ETA  14.8 min
+  [1781336/3329721]    904s   1.3M/s ETA  14.6 min
+  [1797984/3329721]    912s   1.3M/s ETA  14.5 min
+  [1814632/3329721]    921s   1.3M/s ETA  14.3 min
+  [1831280/3329721]    929s   1.3M/s ETA  14.2 min
+  [1847928/3329721]    937s   1.3M/s ETA  14.1 min
+  [1864576/3329721]    946s   1.3M/s ETA  13.9 min
+  [1881224/3329721]    954s   1.3M/s ETA  13.8 min
+  [1897872/3329721]    962s   1.3M/s ETA  13.6 min
+  [1914520/3329721]    971s   1.3M/s ETA  13.5 min
+  [1931168/3329721]    979s   1.3M/s ETA  13.3 min
+  [1947816/3329721]    987s   1.3M/s ETA  13.2 min
+  [1964464/3329721]    996s   1.3M/s ETA  13.1 min
+  [1981112/3329721]   1004s   1.3M/s ETA  12.9 min
+  [1997760/3329721]   1013s   1.3M/s ETA  12.8 min
+  [2014408/3329721]   1021s   1.3M/s ETA  12.6 min
+  [2031056/3329721]   1029s   1.3M/s ETA  12.5 min
+  [2047704/3329721]   1037s   1.3M/s ETA  12.3 min
+  [2064352/3329721]   1046s   1.3M/s ETA  12.2 min
+  [2081000/3329721]   1054s   1.3M/s ETA  12.1 min
+  [2097648/3329721]   1062s   1.3M/s ETA  11.9 min
+  [2114296/3329721]   1071s   1.3M/s ETA  11.8 min
+  [2130944/3329721]   1079s   1.3M/s ETA  11.6 min
+  [2147592/3329721]   1087s   1.3M/s ETA  11.5 min
+  [2164240/3329721]   1095s   1.3M/s ETA  11.4 min
+  [2180888/3329721]   1104s   1.3M/s ETA  11.2 min
+  [2197536/3329721]   1112s   1.3M/s ETA  11.1 min
+  [2214184/3329721]   1120s   1.3M/s ETA  10.9 min
+  [2230832/3329721]   1129s   1.3M/s ETA  10.8 min
+  [2247480/3329721]   1137s   1.3M/s ETA  10.6 min
+  [2264128/3329721]   1145s   1.3M/s ETA  10.5 min
+  [2280776/3329721]   1154s   1.3M/s ETA  10.4 min
+  [2297424/3329721]   1162s   1.3M/s ETA  10.2 min
+  [2314072/3329721]   1170s   1.3M/s ETA  10.1 min
+  [2330720/3329721]   1179s   1.3M/s ETA   9.9 min
+  [2347368/3329721]   1187s   1.3M/s ETA   9.8 min
+  [2364016/3329721]   1195s   1.3M/s ETA   9.7 min
+  [2380664/3329721]   1203s   1.3M/s ETA   9.5 min
+  [2397312/3329721]   1212s   1.3M/s ETA   9.4 min
+  [2413960/3329721]   1220s   1.3M/s ETA   9.2 min
+  [2430608/3329721]   1229s   1.3M/s ETA   9.1 min
+  [2447256/3329721]   1237s   1.3M/s ETA   9.0 min
+  [2463904/3329721]   1245s   1.3M/s ETA   8.8 min
+  [2480552/3329721]   1254s   1.3M/s ETA   8.7 min
+  [2497200/3329721]   1262s   1.3M/s ETA   8.5 min
+  [2513848/3329721]   1270s   1.3M/s ETA   8.4 min
+  [2530496/3329721]   1279s   1.3M/s ETA   8.3 min
+  [2547144/3329721]   1287s   1.3M/s ETA   8.1 min
+  [2563792/3329721]   1295s   1.3M/s ETA   8.0 min
+  [2580440/3329721]   1304s   1.3M/s ETA   7.8 min
+  [2597088/3329721]   1312s   1.3M/s ETA   7.7 min
+  [2613736/3329721]   1320s   1.3M/s ETA   7.5 min
+  [2630384/3329721]   1329s   1.3M/s ETA   7.4 min
+  [2647032/3329721]   1337s   1.3M/s ETA   7.3 min
+  [2663680/3329721]   1346s   1.3M/s ETA   7.1 min
+  [2680328/3329721]   1354s   1.3M/s ETA   7.0 min
+  [2696976/3329721]   1363s   1.3M/s ETA   6.8 min
+  [2713624/3329721]   1371s   1.3M/s ETA   6.7 min
+  [2730272/3329721]   1379s   1.3M/s ETA   6.6 min
+  [2746920/3329721]   1388s   1.3M/s ETA   6.4 min
+  [2763568/3329721]   1396s   1.3M/s ETA   6.3 min
+  [2780216/3329721]   1404s   1.3M/s ETA   6.1 min
+  [2796864/3329721]   1413s   1.3M/s ETA   6.0 min
+  [2813512/3329721]   1422s   1.3M/s ETA   5.8 min
+  [2830160/3329721]   1433s   1.3M/s ETA   5.7 min
+  [2846808/3329721]   1445s   1.3M/s ETA   5.5 min
+  [2863456/3329721]   1457s   1.3M/s ETA   5.3 min
+  [2880104/3329721]   1468s   1.3M/s ETA   5.1 min
+  [2896752/3329721]   1480s   1.3M/s ETA   4.9 min
+  [2913400/3329721]   1491s   1.3M/s ETA   4.7 min
+  [2930048/3329721]   1502s   1.3M/s ETA   4.6 min
+  [2946696/3329721]   1513s   1.3M/s ETA   4.4 min
+  [2963344/3329721]   1525s   1.3M/s ETA   4.2 min
+  [2979992/3329721]   1536s   1.3M/s ETA   4.0 min
+  [2996640/3329721]   1547s   1.3M/s ETA   3.8 min
+  [3013288/3329721]   1558s   1.3M/s ETA   3.6 min
+  [3029936/3329721]   1569s   1.3M/s ETA   3.4 min
+  [3046584/3329721]   1581s   1.3M/s ETA   3.3 min
+  [3063232/3329721]   1592s   1.3M/s ETA   3.1 min
+  [3079880/3329721]   1603s   1.3M/s ETA   2.9 min
+  [3096528/3329721]   1614s   1.3M/s ETA   2.7 min
+  [3113176/3329721]   1625s   1.3M/s ETA   2.5 min
+  [3129824/3329721]   1637s   1.3M/s ETA   2.3 min
+  [3146472/3329721]   1648s   1.3M/s ETA   2.1 min
+  [3163120/3329721]   1659s   1.3M/s ETA   2.0 min
+  [3179768/3329721]   1670s   1.3M/s ETA   1.8 min
+  [3196416/3329721]   1682s   1.3M/s ETA   1.6 min
+  [3213064/3329721]   1693s   1.3M/s ETA   1.4 min
+  [3229712/3329721]   1704s   1.3M/s ETA   1.2 min
+  [3246360/3329721]   1716s   1.3M/s ETA   1.0 min
+  [3263008/3329721]   1727s   1.3M/s ETA   0.8 min
+  [3279656/3329721]   1738s   1.3M/s ETA   0.7 min
+  [3296304/3329721]   1750s   1.3M/s ETA   0.5 min
+  [3312952/3329721]   1763s   1.3M/s ETA   0.2 min
+  [3329600/3329721]   1779s   1.3M/s ETA   0.0 min
+  [3329721/3329721]   1779s   1.3M/s ETA   0.0 min
+top escalated candidates by climbed score:
+   #  climbed      IC     tail  crib  shell / position
+  4099  -3.0390  0.0544  -3.0390  BAD   B/beta/IV-III-VIII AAAA AAIP
+      CVTIISAZILNKAREFFGHEULTENADBEIFEWYSTALAMBLEGTEDIMUKUMZUMSKUMABASYRITAATU
+  4100  -3.0390  0.0544  -3.0390  BAD   B/beta/IV-III-VIII AAAA AAIT
+      CVTIISAZILNKAREFFGHEULTENADBEIFEWYSTALAMBLEGTEDIMUKUMZUMSKUMABASYRITAATU
+  3315  -3.1417  0.0544  -3.1417  BAD   B/beta/IV-III-VIII AAAA AABF
+      YVMOEFFAALDUMGALBSCHMMEBEREJUEGBENKTRWMINEUVSURNNEHRSICFERHAEMQMSTASAUPM
+  3330  -3.1417  0.0544  -3.1417  BAD   B/beta/IV-III-VIII AAAA AABJ
+      YVMOEFFAALDUMGALBSCHMMEBEREJUEGBENKTRWMINEUVSURNNEHRSICFERHAEMQMSTASAUPM
+  4058  -3.1670  0.0434  -3.1670  BAD   B/beta/IV-III-VIII AAAA AAFE
+      CSUHIUMUATXANTERBEBOSPHHENIKIELTUNVAMIGTYTENWILDURYBZEDASOSTGMAWERKSAPCB
+  4060  -3.1670  0.0434  -3.1670  BAD   B/beta/IV-III-VIII AAAA AAFI
+      CSUHIUMUATXANTERBEBOSPHHENIKIELTUNVAMIGTYTENWILDURYBZEDASOSTGMAWERKSAPCB
+  4082  -3.1770  0.0653  -3.1770  BAD   B/beta/IV-III-VIII AAAA AAIV
+      HVENZWCAQQHLKAEIGXVONPERQKINNTSEKINNDSWIESNUNAEEENNTRAFRAKNAUFLUMTADEIAN
+  4083  -3.1770  0.0653  -3.1770  BAD   B/beta/IV-III-VIII AAAA AAIZ
+      HVENZWCAQQHLKAEIGXVONPERQKINNTSEKINNDSWIESNUNAEEENNTRAFRAKNAUFLUMTADEIAN
+  4097  -3.1801  0.0532  -3.1801  BAD   B/beta/IV-III-VIII AAAA AAIE
+      MILLHIEDZUINOFTEHIVZQUILEGBCITAIZOGESVANKOUPTELIALVEFACOSINNOOMYRIPDFITN
+  4098  -3.1801  0.0532  -3.1801  BAD   B/beta/IV-III-VIII AAAA AAII
+      MILLHIEDZUINOFTEHIVZQUILEGBCITAIZOGESVANKOUPTELIALVEFACOSINNOOMYRIPDFITN
+  3742  -3.1805  0.0520  -3.1805  BAD   B/beta/IV-III-VIII AAAA AAGQ
+      AYFUEZULDERESEVOGYSEGDEMNGDAUFXUTFORZTEGESSDSKREGPTKRIMIOSSDOKONDAPPGYIW
+  3756  -3.1805  0.0520  -3.1805  BAD   B/beta/IV-III-VIII AAAA AAGU
+      AYFUEZULDERESEVOGYSEGDEMNGDAUFXUTFORZTEGESSDSKREGPTKRIMIOSSDOKONDAPPGYIW
+
+NO BREAK — no escalated candidate clears crib-exact ∧ IC ≥ 0.055 ∧ tail > -3.6.
+  best climbed -3.0390 (noise best -3.4564, Δ +0.4174) IC 0.0544 tail -3.0390
+
+Read this narrowly. It says the quarantined stops in this file are not the
+key. It does not bound the escalator, which is graded separately on known
+keys (Phase 50.6): given 4+ correct plugs it clears the bar at 72 letters.
+=== escalate exit 0 2026-09-24T15:37:38Z ===

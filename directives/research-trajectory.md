@@ -17,7 +17,7 @@ Living textbook (course surface on this trajectory): [`../textbook/`](../textboo
 | **H4** Noisy BK | Production depth story | **C69** KS *n*=256 covering SING; *n*=512 SING FAIL. **C68** NOP-fetch. Remainder: `lw`, `cryptoPublicMS`, *n*=*N* |
 | **Packaging** | Library + binaries + Apps/ | [`packaging-roadmap.md`](packaging-roadmap.md) Phase 0.5 — inventory → SPM split → named binaries |
 | **Audience (R1–R5)** | Linux / r/math on-ramp | Phase 0.95 **shipped**, not **C** rows: `toy_cipher_demo.py` + `tensorlut_math_ref.py` (Linux CI); [`theorem-1-plain.md`](theorem-1-plain.md); [`q-32-vs-q-2.md`](q-32-vs-q-2.md); [`../INTRO.md`](../INTRO.md). Human-check before treating any of it as stronger than **C19**. Open: Lean/Coq clauses, toy through Yosys, \(q=2\) FHE. |
-| Campaign catalog | Exhaust Boolean coverage | Resume `--bombe-from 418`; middle ring ≠ A |
+| Campaign catalog | Exhaust Boolean coverage | Resume `--bombe-from 418`; middle ring ≠ A tested under VIII-fast only |
 | Garble / quarantine | Ciphertext may be wrong letters | Soft-band escalate grades; sister-message lessons |
 
 ## Mid term (pillar science)

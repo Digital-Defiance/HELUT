@@ -77,7 +77,7 @@ export function JournalPage() {
             <li>
               <span className="mono">OPEN</span>
               <span>
-                <strong>Still open or incomplete:</strong> the legacy target arms retain bounded, partial receipts rather than global verdicts. Tolerance 1 × right rings is suspended at <strong>3/24</strong>, with all three completed placements dead at the board; resume <code>--bombe-menus 0 --bombe-ring-sweep --bombe-garble-tolerance 1 --bombe-from 4</code>. The exact-board post-gap δ=4 arm is suspended at <strong>144/237</strong>: entries 1–110 and 112–144 are dead, and entry 111's eight raw stops yielded zero valid ≤10-plug completions; resume <code>--bombe-menus 0 --bombe-from 145</code>. Full middle × right ring coverage under the VIII-fast prior is now <strong>complete: 24/24 dead at the board</strong> — placement 1 over 4.152×10<sup>11</sup> settings at all 336 wheel orders, placements 2–24 with <strong>0 raw stops over 1.194×10<sup>12</sup> settings</strong> at 72.1M/s, nothing in quarantine. That is coverage of 42 of 336 wheel orders, not wheel-order elimination; the other 294 stay open. Complete-receipt benchmarking selected <code>BANK_LANES=4</code> for <NaziBlaster9000Span />, the unified P1030680 Mulein search machine, at 276.035 receipts/s. Its Phase 51.15 preflight then completed shell 0 <code>B/beta/IV-III-VIII/AAAA</code>, setting 0, and all <strong>628 operational-prior Futures</strong>: 628/628 chunks and 16,328 receipts produced 15 host-replayed one-edge physical candidates (5 identity-family, 10 post-gap), but every candidate was non-exact, so there were <strong>0 exact hits and 0 BREAK gates</strong>. Phase 51.16 then completed settings <code>1..&lt;256</code> across all 628 Futures: <strong>10,048/10,048 new chunks, 4,163,640 checked receipts, 4,184 host-verified physical candidates, and 0 BREAK gates</strong>. Those candidates comprise 40 exact identity hits killed by ≤10-plug completion, 2,056 repaired identity hits, 41 exact post-gap hits, and 2,047 repaired post-gap hits; none produced scored plaintext, a key, or a decrypt. Candidate replay is now <strong>done for every exact candidate, and it corrected our own diagnosis</strong>. Counting the ledger gave 41 exact/no-drop post-gap candidates, 40 exact identity candidates already killed by plug completion, and 4,103 repaired. A read-only geometry-aware adjudicator then graded the 41 with no GPU at all: host replay verified 41/41, and <strong>all 41 return no-consistent-board</strong> — no ≤10-plug board satisfies the whole menu, so they never reach the language test. The missing geometry-aware decrypt was therefore never the blocker. Their six source Futures carry <strong>two to five disconnected components</strong> on 16–21 edges, one of them a zero-loop tree, which makes them split-menu ghosts of the kind documented since Phase 4 — and the campaign had already killed all 40 identity siblings the same way. <strong>All 81 exact candidates in that stripe are ghosts.</strong> The 4,103 repaired candidates are now routed by <code>--mulein-ostwald-adapt</code>: identity-family repairs with at least four forced plugs can enter dense Ostwald; post-gap repairs are skipped because a 72-letter recorded climb is illegal after a gap. That adapter is <strong>built, not consumed</strong> against the stripe. The lesson is about inventory rather than compute: the next manifest should gate on connectivity, not crib length. Settings <code>256..&lt;456976</code> and other shells remain open. Also open: catalog right rings from originalIndex 418, Thetis-register rings from menu 14, and the deprioritised 300-placement long-menu remainder. P1030680 remains unbroken; these cleartext Float TensorLUT/Metal receipts are not FHE and supply no key or decrypt.
+                <strong>Still open or incomplete:</strong> the legacy target arms retain bounded, partial receipts rather than global verdicts. Tolerance 1 × right rings is suspended at <strong>3/24</strong>, with all three completed placements dead at the board; resume <code>--bombe-menus 0 --bombe-ring-sweep --bombe-garble-tolerance 1 --bombe-from 4</code>. The exact-board post-gap δ=4 arm is suspended at <strong>144/237</strong>: entries 1–110 and 112–144 are dead, and entry 111's eight raw stops yielded zero valid ≤10-plug completions; resume <code>--bombe-menus 0 --bombe-from 145</code>. Full middle × right ring coverage under the VIII-fast prior is now <strong>complete: 24/24 dead at the board</strong> — placement 1 over 4.152×10<sup>11</sup> settings at all 336 wheel orders, placements 2–24 with <strong>0 raw stops over 1.194×10<sup>12</sup> settings</strong> at 72.1M/s, nothing in quarantine. That is coverage of 42 of 336 wheel orders, not wheel-order elimination; the other 294 stay open. The four-placement P1030668 BLEIBTBESETZT context fixture is <strong>complete: 4/4 dead at the board, 0 raw stops over 2.076×10<sup>11</sup> settings</strong> at 52.3M/s (Phase 60) — still 42 of 336 wheel orders. Complete-receipt benchmarking selected <code>BANK_LANES=4</code> for <NaziBlaster9000Span />, the unified P1030680 Mulein search machine, at 276.035 receipts/s. Its Phase 51.15 preflight then completed shell 0 <code>B/beta/IV-III-VIII/AAAA</code>, setting 0, and all <strong>628 operational-prior Futures</strong>: 628/628 chunks and 16,328 receipts produced 15 host-replayed one-edge physical candidates (5 identity-family, 10 post-gap), but every candidate was non-exact, so there were <strong>0 exact hits and 0 BREAK gates</strong>. Phase 51.16 then completed settings <code>1..&lt;256</code> across all 628 Futures: <strong>10,048/10,048 new chunks, 4,163,640 checked receipts, 4,184 host-verified physical candidates, and 0 BREAK gates</strong>. Those candidates comprise 40 exact identity hits killed by ≤10-plug completion, 2,056 repaired identity hits, 41 exact post-gap hits, and 2,047 repaired post-gap hits; none produced scored plaintext, a key, or a decrypt. Candidate replay is now <strong>done for every exact candidate, and it corrected our own diagnosis</strong>. Counting the ledger gave 41 exact/no-drop post-gap candidates, 40 exact identity candidates already killed by plug completion, and 4,103 repaired. A read-only geometry-aware adjudicator then graded the 41 with no GPU at all: host replay verified 41/41, and <strong>all 41 return no-consistent-board</strong> — no ≤10-plug board satisfies the whole menu, so they never reach the language test. The missing geometry-aware decrypt was therefore never the blocker. Their six source Futures carry <strong>two to five disconnected components</strong> on 16–21 edges, one of them a zero-loop tree, which makes them split-menu ghosts of the kind documented since Phase 4 — and the campaign had already killed all 40 identity siblings the same way. <strong>All 81 exact candidates in that stripe are ghosts.</strong> Identity-family repairs with at least four forced plugs were consumed by <code>--mulein-ostwald-adapt</code> / <code>--ostwald-escalate</code> (Phases 62–64): <strong>38 then 824 then 4,101 climbed, NO BREAK</strong>. Phase 64's best −3.0390 (IC 0.0544) crib BAD beats a 12-sample floor after 3.33 million climbs; that is not a near-miss. Settings <code>256..&lt;456976</code> and other shells remain open. Also open: catalog right rings from originalIndex 418, Thetis-register rings from menu 14, the deprioritised 300-placement long-menu remainder, and the Phase 65 ranker/beam/all-settings path until <code>--ostwald-curve</code> greets at 72 letters. P1030680 remains unbroken; these cleartext Float TensorLUT/Metal receipts are not FHE and supply no key or decrypt.
               </span>
             </li>
             <li>
@@ -96,6 +96,54 @@ export function JournalPage() {
               <span className="mono">ELIMINATED</span>
               <span>
                 <strong>The VIII-fast middle-ring arm ran to completion, and it is a clean negative.</strong> All 24 strongest-plus-diverse placements dead at the board. Placement 1 had already died over 4.152×10<sup>11</sup> settings at the full 336 wheel orders; placements 2–24 under the rotor-VIII-fast prior added <strong>0 raw stops across 1.194×10<sup>12</sup> settings</strong> at 72.1M/s, 0 physically buildable boards, and 0 soft near-misses. The engine still reported no residual ring gap, so middle and right coverage is intact for those 42 orders. <strong>It still eliminates nothing about the other 294 wheel orders</strong> — this reordered the search, and a negative here is not wheel-order coverage. Three nets is a thin sample; they may have drawn from a shared key table rather than choosing freely. That remains a historical question, and the archival ask is unchanged: if central assignment is documented, 42 orders become the space rather than the head of a queue.
+              </span>
+            </li>
+            <li>
+              <span className="mono">ELIMINATED</span>
+              <span>
+                <strong>The four-placement P1030668 BLEIBTBESETZT context fixture ran, and it is a clean negative.</strong> All 4 menus dead at the board: <strong>0 raw stops across 2.076×10<sup>11</sup> settings</strong> at 52.3M/s (3,972 s), 0 physically buildable boards, and 0 soft near-misses — nothing even reached the quarantine band. Each menu was the exact 40-letter radio window <code>UHRJKIELWEINGELAUFENYFFFTTTBLEIBTBESETZT</code> at offsets 30, 27, 17, and 7: 40 edges, 18 loops, one component, middle and right rings unpinned under the VIII-fast prior. This does <em>not</em> touch the P1030668 radio finding; what was falsified is those four alignments sitting verbatim in this ciphertext under that coverage. Residual scope, printed rather than buried: 42 of 336 wheel orders. The short 19-letter core was never swept solo, and the joint constellation with <code>NEUSTADT</code> remains the Phase 56.1 pinned-A negative.
+              </span>
+            </li>
+            <li>
+              <span className="mono">ELIMINATED</span>
+              <span>
+                <strong>Identity-family one-edge repairs from the bounded stripe were climbed, including split-menu trees, and they are a clean negative.</strong> Phase 62: 38 single-component repairs, <strong>NO BREAK</strong>, best −3.6976 versus a random-setting floor of −3.4564. Phase 63: <code>--mulein-ostwald-split-menu</code> emitted 824 identity-family repairs with at least four forced plugs; Metal Ostwald (exhaust 6 / depth 2 / top-up 4, 8 GB unified) climbed them in one second at 4.6M decrypts/s. <strong>NO BREAK</strong>: 824/824 crib BAD, best −3.4797 versus −3.4564 (Δ −0.0233), IC 0.0395 — still below the floor. Scope is shell 0, settings <code>1..&lt;256</code> only. Log <code>logs/campaign-mulein-ostwald-metal.log</code>. This is not a decrypt. P1030680 remains unbroken.
+              </span>
+            </li>
+            <li>
+              <span className="mono">ELIMINATED</span>
+              <span>
+                <strong>CPU Ostwald climbed every remaining repair on the bounded stripe, including empty boards and gapped post-gap walks, and it is a clean negative.</strong> <code>--mulein-ostwald-family both --mulein-ostwald-split-menu --mulein-ostwald-min-pairs 0</code> emitted 4,101 identity and gapped post-gap repairs. 3,329,721 climbs finished in 1,779 s at 1.3M decrypts/s. <strong>NO BREAK</strong>, 4101/4101 crib BAD. Best −3.0390 (IC 0.0544, tail −3.0390) at <code>B/beta/IV-III-VIII/AAAA</code> AAIP/AAIT — twin garbage decrypts. That score beats a 12-sample random-setting floor (−3.4564), which is what taking a maximum over 3.33 million climbs does; it is not a near-miss. IC misses 0.055. Log <code>logs/campaign-mulein-ostwald-cpu-everything.log</code>. Not a decrypt.
+              </span>
+            </li>
+            <li>
+              <span className="mono">OPEN</span>
+              <span>
+                <strong>The 2026 Ostwald path is built. A 72-letter curve did not greet, so it is not pointed at P1030680.</strong> A leave-one-out linear ranker, a beam climb, unlocking all forced plugs with <code>--ostwald-keep 0</code>, and <code>--ostwald-all-settings</code> (every message key on one locked shell, no IC sieve) replace searching a broken scorer faster. Full curve on 30 round-tripping controls: greedy <strong>5/30 (17%), median −1.2000</strong>; decoy-climb fit <strong>1/30, −1.7306</strong> (worse); beam 4 <strong>6/30, −1.0925</strong>. Median plugs 1/10. The 6-control smoke (2/6) overstated the win rate. That is not a zero crossing.                 Logs <code>logs/ostwald-curve-ranker-72.log</code>, <code>logs/ostwald-curve-ranker-decoy.log</code>, <code>logs/ostwald-curve-ranker-beam4.log</code>.
+              </span>
+            </li>
+            <li>
+              <span className="mono">ELIMINATED</span>
+              <span>
+                <strong>Four-plug hot-letter brute cannot seed Ostwald from ciphertext frequency.</strong> Four correct plugs still flip the 72-letter sign (Phase 50.6), but those four are not among the eight hottest ciphertext letters on any of 32 round-tripping controls. <code>--ostwald-brute-plugs 4 --ostwald-exhaust 8</code> enumerates 105 perfect matchings and scores <strong>1/30 wins, median −0.1633</strong>, 0/10 plugs. An unclimbed true 4-plug is a moderate trigram outlier against 2048 random 4-plug boards (8/12 beat the random max) and is still buried in the 164-million-board tail. Metal can hold that enumeration; it cannot invent the plugs. Logs <code>logs/ostwald-curve-brute4-e8.log</code>, <code>logs/ostwald-brute-probe.log</code>.
+              </span>
+            </li>
+            <li>
+              <span className="mono">OPEN</span>
+              <span>
+                <strong>Quelle Tafel A pairs are photographed. The May plan is a different Prüfnummer.</strong> Crypto Museum Doppelbuchstabentauschtafeln Prüfnr. 2499, pp. 3–4, shows <code>VR→ES OL→AE NM→CD KA→HM</code> and the control maps <code>FN→KY HC→DM GV→UU ET→ZZ</code>. So <code>VROL NMKA → EACH/SEDM</code> is no longer only a recovered mapping. 1 May table <em>selection</em> remains Tauschtafelplan Bruno Prüfnr. 1772a. The 2499 cover assigns that set's plan the same Prüfnr. Edition compatibility is not demonstrated; <code>discovery_eligible</code> stays false.
+              </span>
+            </li>
+            <li>
+              <span className="mono">OPEN</span>
+              <span>
+                <strong>The 164-million 4-plug alphabet climb is RUNNING on the known-key greeting.</strong> True P1030684 setting VYAA / index 385320. Restarted 2026-09-24T16:51:24Z after the first launch crawled at ~2.0M/s: 8,192-job chunks plus a CPU polish of every ghost, not a RAM miss. Now 524,288-job Metal waves, polish-top 256, 56 GB unified. Metal insert is 503 decrypts/start (8.25×10<sup>10</sup>). Floor 10M/s was 137.5 min; live rate is ~37M/s (~37 min). Log <code>logs/ostwald-fourplug-p1030684-true-385320.log</code>. Next is wrong setting index 0. Not pointed at P1030680 until true crib-exact and wrong crib BAD.
+              </span>
+            </li>
+            <li>
+              <span className="mono">OPEN</span>
+              <span>
+                <strong>Bauer cites a surviving May 1945 Hydra plugboard table. The page is not in hand.</strong> <em>Ultra versus Enigma</em> p. 36 n. 15 points to Appendix F for Steckerverbindungen für Mai 1945, Schlüssel M Hydra, in use through 7 May. Hydra is the home-waters comparison net. That column is not Thetis plugs and not an VIII-fast answer unless the missing page also prints wheel order. It will not be loaded onto P1030680.
               </span>
             </li>
             <li>
@@ -129,7 +177,7 @@ export function JournalPage() {
               <span>
                 <strong>For the first time, we can name a single document that would change the mechanics — not another crib.</strong> Five mechanical routes closed in one day (the constellation pairing, the basin estimator, corpus volume, operator key habits, and the indicator system), against one ordering prior and one reframe. The pattern is the finding: every closed route was mechanical, and the arithmetic now ranks archives above compute. The plugboard was a <em>daily</em> setting, four correct plugs flip the statistics from hopeless to solvable, and a second same-day message would constrain the same board with 144 letters instead of 72. No sweep we own competes with that.
                 {' '}
-                So the ask has a specific target: <strong>the 1 May 1945 Kriegsmarine key table — did it assign wheel orders centrally across nets, or did each net draw independently?</strong> All three nets broken that day used the same fast rotor, which we are currently forced to treat as a mere ordering hint. If central assignment is documented, that hint becomes a hard constraint and the search space genuinely shrinks eightfold; if nets chose freely, it stays a weak hint and we keep paying full price. Either answer is worth having, and only an archive can give it. That is a question a single document settles, which is what makes it worth a journey.
+                So the ask has a specific target: <strong>the 1 May 1945 Kriegsmarine key table — did it assign wheel orders centrally across nets, or did each net draw independently?</strong> All three nets broken that day used the same fast rotor, which we are currently forced to treat as a mere ordering hint. If central assignment is documented, that hint becomes a hard constraint and the search space genuinely shrinks eightfold; if nets chose freely, it stays a weak hint and we keep paying full price. Either answer is worth having, and only an archive can give it. That is a question a single document settles, which is what makes it worth a journey. Bauer's cited Appendix F is a surviving Hydra May 1945 <em>plugboard</em> fragment, not that document, unless the missing page also prints wheel order. Identity-family Ostwald against the bounded stripe is now another closed mechanical route (Phases 62–64, including Metal on split-menu seeds and CPU on every remaining repair); it does not change that ranking. Live mechanical plan (Phase 67): 4-plug alphabet climb on locked P1030684 VYAA, then the wrong-setting ghost control, and only then any locked P1030680 guess. Archives still outrank more sweeping of this ciphertext. Tafel A pairs are now photographed in Prüfnr. 2499; the May plan is still 1772a.
               </span>
             </li>
             <li>
@@ -145,7 +193,7 @@ export function JournalPage() {
             <li>
               <span className="mono">ARCHIVE</span>
               <span>
-                <strong>The historical arm is now active team work, and it changes the model without pretending to prove it.</strong> Wenselaers reports a concrete Volksliste III process from DEFE and the original U-3521 KTB: demolition parties remained aboard while crews transferred to the 3. U-Lehrdivision at Neustadt. That makes Neustadt and scuttling linked stages rather than competing scenarios. The repository independently confirms <code>FFFTTTBLEIBTBESETZT</code> exactly in P1030668 and the corrupted <code>FFFTTTBLEIBTBESEOZTX</code> sister reading in P1030707; the proposed clean U-3024/U-2538 strings are withdrawn after raw-copy recheck. The reported <code>KLAR ZUM VERSENKEN GEM. BEFEHL.</code>, U-3521 <code>FT-Programmzeit</code>, DEFE references, and changing Aegir/Thetis allocation lists remain source-reported pending scans, exact message IDs, and chronology. P1030680's working net stays M-Thetis, but the later allocation-list provenance and the intended recipient are now printed as open. An exact 40-letter P1030668 radio context gives four single-component 18-loop menus and is the next GPU run, under the VIII-fast middle-ring coverage that just came back empty. <strong>Before any new GPU tranche, the team reports the completed findings and exact planned scope back to Selm and incorporates any correction or archive reply first.</strong> Not another invented sentence, and not a Girard-named-class weighted Mulein board.
+                <strong>The historical arm is now active team work, and it changes the model without pretending to prove it.</strong> Wenselaers reports a concrete Volksliste III process from DEFE and the original U-3521 KTB: demolition parties remained aboard while crews transferred to the 3. U-Lehrdivision at Neustadt. That makes Neustadt and scuttling linked stages rather than competing scenarios. The repository independently confirms <code>FFFTTTBLEIBTBESETZT</code> exactly in P1030668 and the corrupted <code>FFFTTTBLEIBTBESEOZTX</code> sister reading in P1030707; the proposed clean U-3024/U-2538 strings are withdrawn after raw-copy recheck. The reported <code>KLAR ZUM VERSENKEN GEM. BEFEHL.</code>, U-3521 <code>FT-Programmzeit</code>, DEFE references, and changing Aegir/Thetis allocation lists remain source-reported pending scans, exact message IDs, and chronology. P1030680's working net stays M-Thetis, but the later allocation-list provenance and the intended recipient are now printed as open. An exact 40-letter P1030668 radio context gives four single-component 18-loop menus and is <strong>complete: 4/4 dead, 0 raw stops over 2.076×10<sup>11</sup> settings</strong> under the VIII-fast middle-ring coverage that came back empty on the strongest catalog menus (Phase 60). Phase 61 holds VIII-fast as an ordering prior: NARA key-log requests, R.I.P. 401 non-random sheets, and a 3 May Kenngruppen test are live archival lines with no receipts yet. Not another invented sentence, and not a Girard-named-class weighted Mulein board.
               </span>
             </li>
           </ul>
@@ -722,7 +770,7 @@ export function JournalPage() {
                   Host replay retained <strong>4,184 physical candidates</strong>, all <code>hostReplayVerified=true</code>: 40 exact/no-drop identity hits killed by ≤10-plug completion, 2,056 one-edge identity repairs, 41 exact/no-drop post-gap δ=4 hits, and 2,047 one-edge post-gap repairs. There were <strong>0 row BREAK gates, 0 candidate BREAK gates, no scored plaintext, no key, and no decrypt</strong>. This is neither a zero-positive result nor a global negative.
                 </p>
                 <p>
-                  A translation audit paired 1,724 identity/post-gap candidates at <code>post-gap lane = identity lane - 4</code>, so widening the same leading-gap shape would mostly resample closure states. The read-only adjudicator has now resolved every exact candidate: all 40 identity hits and all 41 post-gap hits die at joint ≤10-plug completion. The six source Futures have two to five disconnected components on only 16–21 edges—one is a zero-loop tree—so <strong>all 81 exact candidates are split-menu ghosts</strong>. They never reach the language score, and the earlier claim that geometry-aware decryption was their blocker is withdrawn. The 4,103 repaired candidates remain unclimbed: an identity-only Ostwald adapter is built (<code>--mulein-ostwald-adapt</code>, fast rebound of the 628-Future inventory) but has not been consumed against the stripe, and post-gap repairs must not enter the dense 72-letter walker. Settings <code>256..&lt;456976</code>, other shells, and the legacy remainders remain open. These are cleartext Float TensorLUT/Metal receipts, not FHE or encrypted tick rate. P1030680 remains unbroken.
+                  A translation audit paired 1,724 identity/post-gap candidates at <code>post-gap lane = identity lane - 4</code>, so widening the same leading-gap shape would mostly resample closure states. The read-only adjudicator has now resolved every exact candidate: all 40 identity hits and all 41 post-gap hits die at joint ≤10-plug completion. The six source Futures have two to five disconnected components on only 16–21 edges—one is a zero-loop tree—so <strong>all 81 exact candidates are split-menu ghosts</strong>. They never reach the language score, and the earlier claim that geometry-aware decryption was their blocker is withdrawn. Identity-family repairs with at least four forced plugs were later climbed (Phases 62–63): 38 then 824 crib BAD, <strong>NO BREAK</strong>, best −3.4797 versus a random-setting floor of −3.4564. Split-menu identity trees with enough plugs are in that 824; 1,232 identity repairs remain below the pair floor. Post-gap repairs must not enter the dense 72-letter walker; a leading-gap walk exists and was not consumed. Settings <code>256..&lt;456976</code>, other shells, and the legacy remainders remain open. These are cleartext Float TensorLUT/Metal receipts, not FHE or encrypted tick rate. P1030680 remains unbroken.
                 </p>
               </div>
             </article>
@@ -738,20 +786,169 @@ export function JournalPage() {
                   The next tranche changes the target model rather than inventing another sentence. Wenselaers reports primary-source evidence that crews transferred to Neustadt while demolition parties remained aboard, so Neustadt and scuttling are stages of one process. She also reports scheduled <code>FT-Programmzeit</code> reception during AGRU-Front training, changing Aegir/Thetis allocation lists, and active archive enquiries. These reports carry named sources but remain source-reported until scans or exact transcriptions enter the evidence room. Preservation among U-534's papers does not prove intended recipient; intercepted training-network traffic is now an open hypothesis.
                 </p>
                 <p>
-                  The corpus independently confirms one new exact radio phrase: <code>FFFTTTBLEIBTBESETZT</code> in P1030668. Its short core is mechanically weak, but the exact 40-letter source context yields four single-component, 18-loop alignment hypotheses. They are now the next GPU run, under the same VIII-fast middle-ring coverage that just came back empty on the strongest catalog menus. Before that tranche starts, the team reports these findings and the exact command scope back to Selm and incorporates any correction or archive reply first.
+                  The corpus independently confirms one new exact radio phrase: <code>FFFTTTBLEIBTBESETZT</code> in P1030668. Its short core is mechanically weak, but the exact 40-letter source context yields four single-component, 18-loop alignment hypotheses. Phase 60 then ran those four placements under the same VIII-fast middle-ring coverage that came back empty on the strongest catalog menus: <strong>4/4 dead, 0 raw stops over 2.076×10<sup>11</sup> settings</strong>.
                 </p>
               </div>
             </article>
 
             <article className="tl-item">
               <div className="when">Phase 59: identity-repair Ostwald adapter</div>
-              <h3>The Future-aware escalate adapter is built. It has not been pointed at the stripe.</h3>
+              <h3>The Future-aware escalate adapter is built. Phase 62 later pointed it at the stripe.</h3>
               <div className="prose">
                 <p>
                   <code>--mulein-ostwald-adapt</code> streams the durable campaign JSONL, rebounds the 628-Future inventory by SHA-256 and fingerprint, and compiles <strong>only the identity-repair ordinals</strong> that appear on candidate rows. That is the fast path: not a TensorLUT rematerialize of all 628 Futures. Forced plugs are rebuilt from the host <code>live</code> bitmask. Split menus and post-gap repairs are counted with an explicit skip reason. Dense Ostwald is legal only on the identity family's 72-letter timeline; after a gap the same walker would encipher every later symbol at a rotor position four steps too low.
                 </p>
                 <p>
-                  The 1 GB stripe has not been consumed, no quarantine JSON has been written, and no climb has been run. Crib-exact on a dropped letter remains undefined. P1030680 remains unbroken.
+                  This phase did not consume the stripe. Phase 62 later did: 38 identity repairs climbed, NO BREAK. Phase 63 then Metal-climbed the split-menu identity boards with at least four plugs: 824, NO BREAK. XCTest covers both flags on synthetic fixtures and the P1030684 known-key control; it does not load the 628-Future operational JSON. Crib-exact on a dropped letter remains undefined. P1030680 remains unbroken.
+                </p>
+              </div>
+            </article>
+
+            <article className="tl-item">
+              <div className="when">Phase 60: BLEIBTBESETZT context fixture</div>
+              <h3>The four 18-loop P1030668 alignments are dead at the board.</h3>
+              <div className="prose">
+                <p>
+                  <code>--welchman --bombe-fixture Fixtures/p1030680_wenselaers_bleibt_besetzt_context_menus.json --bombe-menus 0 --subspace viii-fast-wheel --bombe-middle-ring --bombe-ring-sweep</code> selected <strong>4/4 menus</strong>, each 40 edges / 23 letters / 18 loops / one component, spans 47–70. Banner: 113,568 shells per menu (42 wheel orders × 2 Greek × 2 UKW × 26 middle × 26 right), covered-lane skip, <strong>no residual ring gap</strong>. Log <code>logs/campaign-wenselaers-bleibt-besetzt-viii-fast-middlering.log</code>.
+                </p>
+                <p>
+                  Result (2026-09-24T03:37:46Z, exit 0): <strong>4/4 dead at the board, 0 raw stops over 2.076×10<sup>11</sup> settings</strong> at 52.3M/s (3,972 s), 0 physically buildable boards, 0 soft near-misses — nothing reached quarantine. This is VIII-fast subspace coverage (42 of 336 orders), not wheel-order elimination, and not a decrypt. P1030680 remains unbroken.
+                </p>
+              </div>
+            </article>
+
+            <article className="tl-item">
+              <div className="when">Phase 61: archival map</div>
+              <h3>The search-changing documents are now named. None of them has been read.</h3>
+              <div className="prose">
+                <p>
+                  Wenselaers has a NARA RG 457 request acknowledged for German key logs, allocation lists, and indicator books, including Box 620 NR 1665 key logs through May 1945. R.I.P. 401 is reported to document non-random naval wheel-order sheets; that is structure <em>inside</em> a net’s key generation, not yet a proof that one net’s fast wheel constrains another. The April 1945 NID interrogation (U 413 / U 1209 / U 877 / U 1199) reconstructs Baltic working-up as temporary flotilla attachments and describes radio-watch practice — listen to routines even when remaining silent — but <strong>never names Thetis</strong>. A 3 May FdU Ausbildung / FdU Front split is a designed natural experiment once original 8-letter Kenngruppen exist; Cloots and Beckers are the trail, and no indicators are in hand.
+                </p>
+                <p>
+                  VIII-fast stays an ordering prior. No new GPU tranche. Do not mint cribs from the training vocabulary. If a key table, a second Thetis witness, or one indicator from each side of the split lands, that outranks sweeping.
+                </p>
+              </div>
+            </article>
+
+            <article className="tl-item">
+              <div className="when">Phase 61.1: Tauschtafelplan Bruno</div>
+              <h3>1 May 1945 uses Kennwort Quelle, Tafel A. That is table selection, not a Thetis proof.</h3>
+              <div className="prose">
+                <p>
+                  Wenselaers recovered Tauschtafelplan Bruno, Prüfnr. 1772a, Kennwort Quelle. Column six is annotated Mai 45; day 1 is a clean printed A. The P1030680 path <code>VROL NMKA → Quelle/A → EACH/SEDM → ACH → 645/14</code> no longer depends on assuming Tafel A for May. Pair contents of Tafel A are now photographed in a different edition (Phase 61.3). The 621–653 = M-Thetis crop is still undated, so the detector keeps <code>discovery_eligible</code> false. P1030680 is never a discovery.
+                </p>
+                <p>
+                  3 May is a different cell in the same column and carries a handwritten mark. It is not encoded, and a 3 May classify must not inherit Tafel A. Original 3 May indicators, when they exist, use that day's letter — not A.
+                </p>
+              </div>
+            </article>
+
+            <article className="tl-item">
+              <div className="when">Phase 61.2: Bauer Appendix F</div>
+              <h3>A surviving May 1945 Hydra plugboard table is cited. The page is not in hand, and it is not this ciphertext's board.</h3>
+              <div className="prose">
+                <p>
+                  Wenselaers recovered Bauer's <em>Ultra versus Enigma</em> chapter on the daily-key changeover and the Tagesschlüssel destruction rule. Inner setting (wheels and rings) at midnight, outer setting (plugs) at noon, until 1 July 1942 when the change is described as simultaneous at noon. Almost no daily-key papers survive. Footnote 15 points to Appendix F for the Steckerverbindungen for May 1945, Schlüssel M Hydra, with struck-through positions in use through 7 May. The attached extract is the chapter, not the appendix.
+                </p>
+                <p>
+                  Hydra is the home-waters comparison net. A Hydra plugboard column does not answer whether wheel orders were assigned centrally — that is a Walzenlage question — and it will not be loaded onto P1030680. A planned 1 May plurality of Grundstellungen is source-reported from the same chapter and is not confirmed. <em>Enigmafunk</em> confirms Kenngruppen procedure and contains no Thetis key. Funkschaltung Bruno in that chapter is a radio circuit, not Tauschtafelplan Bruno.
+                </p>
+              </div>
+            </article>
+
+            <article className="tl-item">
+              <div className="when">Phase 61.3: Quelle Tafel A photograph</div>
+              <h3>The pair map is on a table. The May plan is a different Prüfnummer.</h3>
+              <div className="prose">
+                <p>
+                  Wenselaers found a photographic scan of Quelle, Tafel A in the Crypto Museum Doppelbuchstabentauschtafeln, Prüfnr. 2499, pp. 3–4. The cover is Kennwort Quelle. The table confirms <code>VR→ES OL→AE NM→CD KA→HM</code> and, independently, <code>FN→KY HC→DM GV→UU ET→ZZ</code>. So <code>VROL NMKA → EACH/SEDM</code> is backed by a Tafel A photograph, not only a recovered mapping.
+                </p>
+                <p>
+                  The 2499 cover states that that Ausgabe's Tauschtafelplan carries the same Prüfnummer. The May plan in hand is Prüfnr. 1772a. Edition compatibility is not demonstrated. The detector records both documents and keeps <code>discovery_eligible</code> false. 3 May still fail-closed. P1030680 remains unbroken.
+                </p>
+              </div>
+            </article>
+
+            <article className="tl-item">
+              <div className="when">Phase 62: identity-repair Ostwald consume</div>
+              <h3>Thirty-eight identity repairs climbed. None cleared the random-setting floor.</h3>
+              <div className="prose">
+                <p>
+                  <code>--mulein-ostwald-adapt</code> streamed <code>logs/p1030680-mulein-operational-settings-000001-000256-v3.jsonl</code> (SHA-256 <code>c516238d5420bde46fb7bdc76078ac086b5946de2374f8d7a4b4d56b1e7e52f2</code>), rebounded the 628-Future inventory by content, and compiled <strong>59 identity-repair ordinals</strong> — not a rematerialize of all 628. Of 4,184 candidates: 2,056 identity repairs queued; 40+41 exact already scored; <strong>2,047 post-gap skipped as dense-climb-illegal</strong>. Host replay emitted <strong>38</strong> after <strong>1,993 split-menu</strong> skips and 25 pair-floor skips.
+                </p>
+                <p>
+                  <code>--ostwald-escalate</code> on that quarantine (2026-09-24T14:12:20Z, exit 0): <strong>NO BREAK</strong>, 38/38 crib BAD. Best climbed <strong>−3.6976</strong> (IC 0.0493) versus noise best of 12 random settings <strong>−3.4564</strong> (Δ <strong>−0.2412</strong>). These stops do not clear the random-setting floor. Log <code>logs/campaign-mulein-ostwald-adapt.log</code>. Post-gap repairs were not climbed. Settings <code>256..&lt;456976</code> and other shells remain open. P1030680 remains unbroken.
+                </p>
+              </div>
+            </article>
+
+            <article className="tl-item">
+              <div className="when">Phase 63: Metal Ostwald on split-menu seeds</div>
+              <h3>Eight hundred twenty-four identity repairs, including split-menu trees, climbed on Metal. None cleared the floor.</h3>
+              <div className="prose">
+                <p>
+                  The Phase 62 climber skipped 1,993 split-menu identity repairs before host replay. <code>--mulein-ostwald-split-menu</code> now emits them. Of 2,056 queued identity repairs, host replay kept <strong>824</strong> with at least four forced plugs (38 single-component plus 786 split-menu) and dropped 1,232 below the pair floor. Post-gap stays dense-climb-illegal; a leading-gap walk exists in the climber and was not pointed at those 2,047 hits.
+                </p>
+                <p>
+                  Metal Ostwald batches every live climb's unused-pair trials into one dispatch, with an 8 GB unified-memory cap (~2.68×10<sup>8</sup> 32-byte trials) and Welchman-shaped progress: <code>ETA floor (~10M decrypts/s): 0.0 min</code>, then live <code>4.6M/s ETA 0.0 min</code>. Defaults are board seeds, top-up target 4, exhaust 6, depth 2, climb to 10. All 824 already had four plugs, so this was climb-only. 4-plug hot-letter brute remains refused at exhaust 6 (four pairs need eight letters). Known-key control: eight correct plugs still crib-exact on Metal.
+                </p>
+                <p>
+                  Escalate (2026-09-24T14:57:20Z, exit 0): <strong>NO BREAK</strong>, 824/824 crib BAD. Best climbed <strong>−3.4797</strong> (IC 0.0395) versus noise best <strong>−3.4564</strong> (Δ <strong>−0.0233</strong>). Still below the random-setting floor. Log <code>logs/campaign-mulein-ostwald-metal.log</code>. This is not a decrypt. P1030680 remains unbroken.
+                </p>
+              </div>
+            </article>
+
+            <article className="tl-item">
+              <div className="when">Phase 64: CPU Ostwald on every remaining repair</div>
+              <h3>Four thousand one hundred one repairs climbed, including empty boards and gapped post-gap. None cleared the break bar.</h3>
+              <div className="prose">
+                <p>
+                  <code>--mulein-ostwald-family both --mulein-ostwald-split-menu --mulein-ostwald-min-pairs 0</code> emitted 4,101 identity and gapped post-gap repairs (2 duplicate-shell skips). CPU Ostwald scored 3,329,721 climbs in 1,779 s at 1.3M decrypts/s.
+                </p>
+                <p>
+                  Escalate (2026-09-24T15:37:38Z, exit 0): <strong>NO BREAK</strong>, 4101/4101 crib BAD. Best <strong>−3.0390</strong> (IC 0.0544, tail −3.0390) at <code>B/beta/IV-III-VIII/AAAA</code> AAIP/AAIT — identical decrypts, not German. That score beats a 12-sample random-setting floor of −3.4564 because 3.33 million climbs will; it is not a near-miss. IC misses 0.055. Log <code>logs/campaign-mulein-ostwald-cpu-everything.log</code>. P1030680 remains unbroken.
+                </p>
+              </div>
+            </article>
+
+            <article className="tl-item">
+              <div className="when">Phase 65: 2026 Ostwald path</div>
+              <h3>A leave-one-out ranker, a beam climb, and all-settings without the IC sieve. The curve is the gate.</h3>
+              <div className="prose">
+                <p>
+                  Searching the 2014 Ostwald scorer faster cannot flip a negative margin. Phase 65 keeps the climb and changes the objective: a leave-one-out linear ranker fitted on 72-letter known-key windows against wrong-setting decrypts, not uniform random text; a beam of partial boards; <code>--ostwald-keep 0</code> actually unlocking forced plugs; and <code>--ostwald-all-settings</code> climbing every message key on one locked shell so the IC sieve that ranked the true P1030684 key 223,118 / 456,976 is no longer in the way.
+                </p>
+                <p>
+                  Smoke <code>--ostwald-curve --ostwald-scorer ranker --ostwald-lengths 72 --ostwald-controls 8 --ostwald-wrong 8</code> (2026-09-24, exit 0): 6 eligible controls, <strong>2/6 wins, median margin −1.0269</strong> in ranker units. Thin sample.
+                </p>
+                <p>
+                  Full curve <code>--ostwald-curve --ostwald-scorer ranker --ostwald-lengths 72</code> (2026-09-24, exit 0, 5.7 s): 32/48 round-trip, 30 eligible, 16 wrong samples, <strong>5/30 wins (17%), median margin −1.2000</strong>, z 0.59, 1/10 plugs. Decoy-climb fit: <strong>1/30, −1.7306</strong> (worse). Beam 4: <strong>6/30, −1.0925</strong> (still negative). Not a zero crossing, not a crib, not pointed at P1030680. Logs <code>logs/ostwald-curve-ranker-72.log</code>, <code>logs/ostwald-curve-ranker-decoy.log</code>, <code>logs/ostwald-curve-ranker-beam4.log</code>. P1030680 remains unbroken.
+                </p>
+              </div>
+            </article>
+
+            <article className="tl-item">
+              <div className="when">Phase 66: 4-plug hot-letter brute</div>
+              <h3>Ostwald needs four correct plugs. Ciphertext frequency does not contain them.</h3>
+              <div className="prose">
+                <p>
+                  <code>--ostwald-brute-plugs 4</code> was already built and refused at exhaust 6, because four pairs need eight letters. It is now wired into <code>--ostwald-curve</code> and graded at exhaust 8: 105 perfect matchings, staged scorer, 16 wrong samples.
+                </p>
+                <p>
+                  Result (2026-09-24, exit 0, 26.9 s): <strong>0/32</strong> round-tripping controls have four true plugs among the eight hottest ciphertext letters. Curve <strong>1/30 wins, median −0.1633</strong>, 0/10 plugs. Unclimbed true 4-subsets beat 2048 random 4-plug boards on 8/12 controls, with a still-populated tail (up to 24/2048). A Metal score of all 164 million 4-plug boards does not uniquely surface Phase 50.6. Logs <code>logs/ostwald-curve-brute4-e8.log</code>, <code>logs/ostwald-brute-probe.log</code>. P1030680 remains unbroken.
+                </p>
+              </div>
+            </article>
+
+            <article className="tl-item">
+              <div className="when">Phase 67: streamed 4-plug alphabet climb</div>
+              <h3>Known-key greeting is running on P1030684 VYAA. Not this ciphertext.</h3>
+              <div className="prose">
+                <p>
+                  C(26,8)×105 = 164,038,875 four-plug boards. Metal greedy insertion from a 4-plug seed is 503 decrypts each, 8.25×10<sup>10</sup> decrypts per locked setting — about 137.5 minutes at the 10M floor. The 164 million starts stream in waves of 524,288; replacement polish runs only on the top 256 scores in each wave. On the true rotor setting, 210 of those boards are true 4-subsets and Phase 50.6 says they BREAK. On a wrong setting the same budget raises ghost maxima; 72-letter IC cannot pick them.
+                </p>
+                <p>
+                  <strong>RUNNING</strong> since restart 2026-09-24T16:51:24Z: <code>--ostwald-all-settings --ostwald-control p1030684 --ostwald-setting-from 385320 --ostwald-setting-count 1 --ostwald-brute-plugs 4 --ostwald-brute-all --ostwald-exhaust 26 --ostwald-memory-gb 56</code>. Live ~37M/s, ETA ~37 min. The first launch at 16:38:36Z had crawled at ~2.0M/s (~15 h) on 8,192-job chunks. Log <code>logs/ostwald-fourplug-p1030684-true-385320.log</code>. Next is setting 0 as the ghost control. Not pointed at P1030680 until both receipts exist.
                 </p>
               </div>
             </article>
@@ -765,7 +962,7 @@ export function JournalPage() {
             <div className="kicker">Honest Scope</div>
             <h2>The Evidence Room</h2>
             <p>
-              The target's working assignment is M-Thetis under the later allocation list used by Hörenberg; reported earlier and later Zuteilungslisten map column 645 differently, so the later list's date and provenance remain open. Preservation among U-534 papers likewise does not establish intended recipient. Online archival levers were exhausted, but the Selm-led historical arm now has active primary-source and collection enquiries. My engine is graded rather than trusted: the blind Welchman control breaks a known key in 352 seconds on the current binary with all ten plugs, and the full middle × right-ring control breaks in 4,307 seconds with no residual ring gap. Current P1030680 evidence remains bounded: catalog right rings are parked at originalIndex 417/2513; Thetis-register rings at 13/73; tolerance 1 × right rings at 3/24; post-gap δ=4 × right rings at 144/237; and full middle × right rings under the VIII-fast prior are <strong>24/24 dead at the board</strong> (42 of 336 wheel orders; the other 294 remain open). The two highest-risk table-cap re-runs are complete and re-confirmed with zero extra survivors; the remaining 300 contaminated catalog placements are retained but deprioritised. The production Verilog Future Bank inside <NaziBlaster9000Span /> agrees across source RTL, post-Yosys RTL, clear JSON, and cleartext Float TensorLUT on P1030684 controls, and complete-receipt benchmarking selected <code>BANK_LANES=4</code> at 276.035 receipts/s. Its operational-prior preflight covered shell 0, setting 0, and all 628 Futures: 628/628 chunks and 16,328 receipts yielded 15 host-replayed one-edge physical candidates, all non-exact, with 0 exact hits and 0 BREAK gates. The Phase 51.16 production stripe then completed settings <code>1..&lt;256</code> across those 628 Futures: <strong>10,048/10,048 chunks, 4,163,640 checked receipts, 4,184 host-verified physical candidates, and 0 BREAK gates</strong>. All 40 exact identity hits and all 41 exact post-gap hits now die at joint ≤10-plug completion: <strong>all 81 exact candidates are split-menu ghosts</strong>. The remaining 4,103 repaired candidates are routed by <code>--mulein-ostwald-adapt</code> (built, not consumed): identity-family repairs with enough forced plugs can enter dense Ostwald; post-gap repairs are skipped as dense-climb-illegal. None supplied a key or decrypt. The next GPU run is the four-placement P1030668 BLEIBTBESETZT context fixture under the same VIII-fast middle-ring coverage. A Girard-named-class weighted Mulein deletion board is not next: it is a subset of uniform tolerance 1, already dead on the strongest menus. Settings <code>256..&lt;456976</code>, other shells, and the printed legacy remainders remain open. TensorLUT remains a cleartext parallel compiler path, not a Thetis crib, not encrypted tick rate, and not an FHE result. P1030680 remains unbroken.
+              The target's working assignment is M-Thetis under the later allocation list used by Hörenberg; reported earlier and later Zuteilungslisten map column 645 differently, so the later list's date and provenance remain open. Preservation among U-534 papers likewise does not establish intended recipient. Online archival levers were exhausted, but the Selm-led historical arm now has active primary-source and collection enquiries. My engine is graded rather than trusted: the blind Welchman control breaks a known key in 352 seconds on the current binary with all ten plugs, and the full middle × right-ring control breaks in 4,307 seconds with no residual ring gap. Current P1030680 evidence remains bounded: catalog right rings are parked at originalIndex 417/2513; Thetis-register rings at 13/73; tolerance 1 × right rings at 3/24; post-gap δ=4 × right rings at 144/237; and full middle × right rings under the VIII-fast prior are <strong>24/24 dead at the board</strong> (42 of 336 wheel orders; the other 294 remain open). The two highest-risk table-cap re-runs are complete and re-confirmed with zero extra survivors; the remaining 300 contaminated catalog placements are retained but deprioritised. The production Verilog Future Bank inside <NaziBlaster9000Span /> agrees across source RTL, post-Yosys RTL, clear JSON, and cleartext Float TensorLUT on P1030684 controls, and complete-receipt benchmarking selected <code>BANK_LANES=4</code> at 276.035 receipts/s. Its operational-prior preflight covered shell 0, setting 0, and all 628 Futures: 628/628 chunks and 16,328 receipts yielded 15 host-replayed one-edge physical candidates, all non-exact, with 0 exact hits and 0 BREAK gates. The Phase 51.16 production stripe then completed settings <code>1..&lt;256</code> across those 628 Futures: <strong>10,048/10,048 chunks, 4,163,640 checked receipts, 4,184 host-verified physical candidates, and 0 BREAK gates</strong>. All 40 exact identity hits and all 41 exact post-gap hits now die at joint ≤10-plug completion: <strong>all 81 exact candidates are split-menu ghosts</strong>. Identity-family repairs with enough forced plugs were consumed by <code>--mulein-ostwald-adapt</code> / <code>--ostwald-escalate</code> (Phases 62–64): <strong>38 then 824 then 4,101 climbed, NO BREAK</strong>, best −3.0390 versus a 12-sample floor of −3.4564 after 3.33 million climbs — not a near-miss. Split-menu identity trees with at least four plugs are in the 824; Phase 64 included empty boards and gapped post-gap. The 2026 Ostwald ranker/beam/all-settings path is built (Phase 65) and gated on a known-key curve. None supplied a key or decrypt. The four-placement P1030668 BLEIBTBESETZT context fixture is <strong>complete: 4/4 dead, 0 raw stops over 2.076×10<sup>11</sup> settings</strong> under the same VIII-fast middle-ring coverage (Phase 60; log <code>campaign-wenselaers-bleibt-besetzt-viii-fast-middlering.log</code>), 0 quarantine. Live archival lines (Phase 61) include a NARA RG 457 key-log request with no box read, a reported R.I.P. 401 non-random wheel-order section that does not yet answer cross-net assignment, a 3 May Ausbildung/Front Kenngruppen test that is not executable until original indicators exist, and Bauer Anhang F cited for Hydra May 1945 stecker (page not in hand, not this ciphertext's board). Tauschtafelplan Bruno Prüfnr. 1772a now dates P1030680's Kenngruppen table as Quelle / Tafel A on 1 May (selection). Tafel A pairs are photographed in Prüfnr. 2499 (Phase 61.3); 1772a vs 2499 edition compatibility is open, and the 621–653 Thetis crop remains undated. NID 1/PW/REP/17 reconstructs Baltic working-up and radio-watch practice but does not identify Thetis. A Girard-named-class weighted Mulein deletion board is not next: it is a subset of uniform tolerance 1, already dead on the strongest menus. Settings <code>256..&lt;456976</code>, other shells, and the printed legacy remainders remain open. TensorLUT remains a cleartext parallel compiler path, not a Thetis crib, not encrypted tick rate, and not an FHE result. P1030680 remains unbroken.
             </p>
           </div>
           <ul className="stack-list">
@@ -778,7 +975,7 @@ export function JournalPage() {
             <li>
               <span className="mono">LOGS</span>
               <span>
-                <strong>The Ledger:</strong> Every campaign, including the embarrassing ones—Welchman controls, catalog and Thetis arms, table-cap audit and corrected re-runs, middle-ring coverage grades, Stochastic controls, TensorLUT shatter/involution grades, and quarantine receipts. The legacy target boundaries are on disk in <code>campaign-tolerance1-strongest-2026-08-17.log</code> (3/24), <code>campaign-indel-postgap-target-2026-08-17.log</code> (144/237), <code>campaign-middlering-strongest-2026-08-16.log</code> (placement 1/24), and <code>campaign-middlering-viii-fast-resume2.log</code> (placements 2–24, 0 stops). <code>MuleinFutureTensorLUTTests.swift</code> is the P1030684 four-surface parity receipt. Runtime selection is recorded in <code>logs/mulein-future-tensorlut-selection.json</code> and the five <code>mulein_future_bank*_bench.txt</code> logs. The <Fahrenheit261Span /> bounded target receipt is <code>logs/p1030680-mulein-unified-smoke-v3.jsonl</code>. The <NaziBlaster9000Span /> operational-prior preflight receipt is <code>logs/p1030680-mulein-operational-preflight-v3.jsonl</code>, SHA-256 <code>55a68266f79ca0b17b6de18a80644883c7c8a2585ab2508d42d5d73c9a17f993</code>, run <code>sha256-2b6bde1ead5ffd33b3e598038a7af597d9c1c189c9b607147c98451a527c727a</code>: 16,328 checked receipts, 15 repaired/non-exact physical candidates, 0 exact hits, and 0 BREAK gates. Its completed production ledger is <code>logs/p1030680-mulein-operational-settings-000001-000256-v3.jsonl</code>, SHA-256 <code>c516238d5420bde46fb7bdc76078ac086b5946de2374f8d7a4b4d56b1e7e52f2</code>, run <code>sha256-efb770bcaddd2bc0581edbb19b66077160a806c30650a60d0b9d6a733c592cc0</code>: 10,048 synchronized chunks, 4,163,640 checked receipts, 4,184 host-verified physical candidates, and 0 BREAK gates; no candidate supplied scored plaintext, a key, or a decrypt.
+                <strong>The Ledger:</strong> Every campaign, including the embarrassing ones—Welchman controls, catalog and Thetis arms, table-cap audit and corrected re-runs, middle-ring coverage grades, Stochastic controls, TensorLUT shatter/involution grades, and quarantine receipts. The legacy target boundaries are on disk in <code>campaign-tolerance1-strongest-2026-08-17.log</code> (3/24), <code>campaign-indel-postgap-target-2026-08-17.log</code> (144/237), <code>campaign-middlering-strongest-2026-08-16.log</code> (placement 1/24), and <code>campaign-middlering-viii-fast-resume2.log</code> (placements 2–24, 0 stops). The BLEIBTBESETZT 40-letter context arm is <strong>complete</strong> in <code>campaign-wenselaers-bleibt-besetzt-viii-fast-middlering.log</code> (4/4 dead, 0 stops over 2.076×10<sup>11</sup> settings). Identity-repair Ostwald consume is <strong>complete</strong> in <code>campaign-mulein-ostwald-adapt.log</code> (38 climbed, NO BREAK), <code>campaign-mulein-ostwald-metal.log</code> (824 split-menu-inclusive climbed, NO BREAK, best −3.4797 vs noise −3.4564), and <code>campaign-mulein-ostwald-cpu-everything.log</code> (4,101 identity + gapped post-gap, 3,329,721 climbs, NO BREAK, best −3.0390 crib BAD). <code>MuleinFutureTensorLUTTests.swift</code> is the P1030684 four-surface parity receipt. Runtime selection is recorded in <code>logs/mulein-future-tensorlut-selection.json</code> and the five <code>mulein_future_bank*_bench.txt</code> logs. The <Fahrenheit261Span /> bounded target receipt is <code>logs/p1030680-mulein-unified-smoke-v3.jsonl</code>. The <NaziBlaster9000Span /> operational-prior preflight receipt is <code>logs/p1030680-mulein-operational-preflight-v3.jsonl</code>, SHA-256 <code>55a68266f79ca0b17b6de18a80644883c7c8a2585ab2508d42d5d73c9a17f993</code>, run <code>sha256-2b6bde1ead5ffd33b3e598038a7af597d9c1c189c9b607147c98451a527c727a</code>: 16,328 checked receipts, 15 repaired/non-exact physical candidates, 0 exact hits, and 0 BREAK gates. Its completed production ledger is <code>logs/p1030680-mulein-operational-settings-000001-000256-v3.jsonl</code>, SHA-256 <code>c516238d5420bde46fb7bdc76078ac086b5946de2374f8d7a4b4d56b1e7e52f2</code>, run <code>sha256-efb770bcaddd2bc0581edbb19b66077160a806c30650a60d0b9d6a733c592cc0</code>: 10,048 synchronized chunks, 4,163,640 checked receipts, 4,184 host-verified physical candidates, and 0 BREAK gates; no candidate supplied scored plaintext, a key, or a decrypt.
               </span>
             </li>
             <li>
@@ -931,14 +1128,14 @@ export function JournalPage() {
             </article>
 
             <article className="tl-item">
-              <div className="when">10c — <NaziBlaster9000Span /> bounded stripe DONE; candidate replay next</div>
-              <h3>Replay the bounded evidence before widening the search.</h3>
+              <div className="when">10c — <NaziBlaster9000Span /> bounded stripe DONE; identity Ostwald DONE</div>
+              <h3>Replay of identity-family repairs, including split-menu trees, is a clean negative.</h3>
               <div className="prose">
                 <p>
                   The separate 628-Future operational inventory completed setting 0 across shell 0, then completed settings <code>1..&lt;256</code> across every Future. The production receipt contains <strong>10,048/10,048 new chunks, 4,163,640 checked receipts, 4,184 host-verified physical candidates, and 0 BREAK gates</strong> in <code>logs/p1030680-mulein-operational-settings-000001-000256-v3.jsonl</code>, run identity <code>sha256-efb770bcaddd2bc0581edbb19b66077160a806c30650a60d0b9d6a733c592cc0</code>. It produced no scored plaintext, key, or decrypt; broader settings and shells remain open.
                 </p>
                 <p>
-                  First, run geometry-aware completion and sparse full-message scoring on the <strong>41 exact post-gap hits</strong>. Second, deduplicate the repaired identity hits and explicitly replay corrected letters for the highest-constraint subset; the 40 exact identity hits need no rerun because ≤10-plug completion already killed them. Third, inspect repaired post-gap hits only after those controls. A translation audit found 1,724 identity/post-gap pairs at a four-lane setting shift, so another broad TensorLUT stripe or same-shape leading δ6/δ8 stripe is low-information. Ordinary legacy resumes stay below candidate replay at their printed durable boundaries. This is a working search order, not evidence of a historical plaintext or a claim that P1030680 is garbled.
+                  Exact-family replay is done: all 81 exact candidates are split-menu ghosts. Identity-family and gapped post-gap repairs were climbed (Phases 62–64): <strong>38 then 824 then 4,101 crib BAD, NO BREAK</strong>. Phase 64's best −3.0390 (IC 0.0544) vs a 12-sample floor after 3.33 million climbs is not a near-miss. The 2026 Ostwald ranker/beam path (Phase 65) and the 4-plug hot-letter brute (Phase 66) are graded negatives; the 164-million 4-plug alphabet climb is <strong>RUNNING</strong> on locked P1030684 VYAA (Phase 67), log <code>logs/ostwald-fourplug-p1030684-true-385320.log</code>. Not a P1030680 consume. Four correct plugs still finish a true stop. A translation audit found 1,724 identity/post-gap pairs at a four-lane setting shift, so another broad TensorLUT stripe or same-shape leading δ6/δ8 stripe is low-information. Ordinary legacy resumes stay at their printed durable boundaries. This is a working search order, not evidence of a historical plaintext or a claim that P1030680 is garbled.
                 </p>
               </div>
             </article>

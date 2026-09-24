@@ -1,0 +1,24 @@
+=== Unclimbed 4-plug score probe (Metal 164M filter question) ===
+window        : 72 letters
+true subsets  : C(10,4) = 210 disjoint 4-plug boards from the published stecker
+random boards : 2048 random 4-plug boards, same rotor setting
+score         : trigram (the Metal kernel's last stage; unclimbed 4-plug is not yet staged-to-trigram)
+
+        id  trueMax   rndMax  rndMean       z        beat
+  P1030698   -4.527   -4.314   -5.238    3.11      3/2048
+  P1030697   -4.258   -4.309   -5.041    3.44      0/2048
+  P1030713   -4.544   -4.297   -5.096    2.31     24/2048
+  P1030679   -4.305   -4.354   -5.164    3.65      0/2048
+  P1030676   -4.200   -4.327   -5.123    4.22      0/2048
+  P1030691   -3.946   -4.250   -5.094    4.75      0/2048
+  P1030663   -4.195   -4.302   -5.108    4.23      0/2048
+  P1030682   -4.459   -4.334   -5.087    2.78      5/2048
+  P1030683   -4.145   -4.419   -5.072    4.07      0/2048
+  P1030686   -3.687   -4.303   -5.148    6.46      0/2048
+  P1030696   -3.982   -4.280   -5.087    4.71      0/2048
+  P1030712   -4.345   -4.276   -5.107    3.34      1/2048
+
+trueMax > rndMax on 8/12 controls (unclimbed).
+If this is not a clean majority, a 164M Metal 4-plug *score* does not find the
+Phase 50.6 board. Climbing all 164M remaining-six boards is ~2 h/setting at 10M/s
+and is still symmetric on decoys.

@@ -355,32 +355,63 @@ package enum MuleinFutureManifestBuilder {
     package static func materialize(
         _ manifest: MuleinFutureManifest
     ) throws -> [MuleinFutureMetalWork] {
-        try manifest.entries.map { entry in
-            let future = try MuleinFutureLattice.compile(
-                evidence: entry.evidence,
-                hypothesis: entry.hypothesis,
-                minimumEdges: manifest.minimumEdges
-            )
-            guard future.receipts == entry.receipts,
-                  future.geometry == entry.geometry,
-                  future.boardEdges.map(\.id) == entry.boardEdgeIDs,
-                  future.executionKey.steps == entry.steps,
-                  future.executionKey.endpointA == entry.endpointA,
-                  future.executionKey.endpointB == entry.endpointB,
-                  future.menu.central == entry.central,
-                  future.menu.edgeCount == entry.edgeCount,
-                  future.menu.loops == entry.loops else {
-                throw MuleinFutureMetalError.commandFailed(
-                    "manifest entry \(entry.ordinal) failed provenance/geometry replay"
+        try manifest.entries.map { try materialize(entry: $0, minimumEdges: manifest.minimumEdges) }
+    }
+
+    /// Fast rebound: compile only the named ordinals. The 628-Future operational inventory is
+    /// input, not a second TensorLUT campaign — callers that already know which Futures appear
+    /// on candidate rows must not rematerialize the other 600.
+    package static func materialize(
+        _ manifest: MuleinFutureManifest,
+        ordinals: Set<Int>
+    ) throws -> [Int: MuleinFutureMetalWork] {
+        var out: [Int: MuleinFutureMetalWork] = [:]
+        out.reserveCapacity(ordinals.count)
+        for ordinal in ordinals.sorted() {
+            guard manifest.entries.indices.contains(ordinal) else {
+                throw MuleinFutureMetalError.invalidBatch(
+                    "requested Future ordinal \(ordinal) is outside the manifest"
                 )
             }
-            return MuleinFutureMetalWork(
-                future: future,
-                tolerance: entry.tolerance,
-                maxPlugs: entry.maxPlugs,
-                exactPlugs: entry.exactPlugs
+            let entry = manifest.entries[ordinal]
+            guard entry.ordinal == ordinal else {
+                throw MuleinFutureMetalError.invalidBatch(
+                    "manifest entry at index \(ordinal) has ordinal \(entry.ordinal)"
+                )
+            }
+            out[ordinal] = try materialize(entry: entry, minimumEdges: manifest.minimumEdges)
+        }
+        return out
+    }
+
+    private static func materialize(
+        entry: MuleinFutureManifestEntry,
+        minimumEdges: Int
+    ) throws -> MuleinFutureMetalWork {
+        let future = try MuleinFutureLattice.compile(
+            evidence: entry.evidence,
+            hypothesis: entry.hypothesis,
+            minimumEdges: minimumEdges
+        )
+        guard future.receipts == entry.receipts,
+              future.geometry == entry.geometry,
+              future.boardEdges.map(\.id) == entry.boardEdgeIDs,
+              future.executionKey.steps == entry.steps,
+              future.executionKey.endpointA == entry.endpointA,
+              future.executionKey.endpointB == entry.endpointB,
+              future.menu.central == entry.central,
+              future.menu.edgeCount == entry.edgeCount,
+              future.menu.loops == entry.loops else {
+            throw MuleinFutureMetalError.commandFailed(
+                "manifest entry \(entry.ordinal) failed provenance/geometry replay"
             )
         }
+        return MuleinFutureMetalWork(
+            future: future,
+            tolerance: entry.tolerance,
+            maxPlugs: entry.maxPlugs,
+            exactPlugs: entry.exactPlugs
+        )
     }
 
     package static func write(_ manifest: MuleinFutureManifest, to path: String) throws {
