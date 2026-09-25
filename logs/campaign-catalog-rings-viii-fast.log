@@ -1,0 +1,286 @@
+=== catalog VIII-fast launch 2026-09-25T14:47:56Z --bombe-from 418 --subspace viii-fast-wheel ===
+scope: menus 418-2513, 42 of 336 orders (VIII on the fast wheel). A dry pass is not wheel-order coverage.
+full-order receipt through 417 stays in logs/campaign-catalog-rings.log
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030680_menus.json (2513 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 2513 of 2513
+min menu constraints: 16 (dropped 1645 weaker from the remaining set)
+resuming from menu 418 of 2513 (skipping 417 already done)
+running 451 menus, highest deduction power first:
+  [418] VVVUUUDREINULEINSVI@25 edges=19 letters=17 loops=4 comp=2 span=44 central=R
+  [419] UUUFUNFDREIVIERKKNO@25 edges=19 letters=17 loops=4 comp=2 span=44 central=R
+  [420] UUUFUNFDREIVIERKKNO@43 edges=19 letters=18 loops=4 comp=3 span=62 central=U
+  [421] UUUFUNFDREIVIERKKNO@41 edges=19 letters=18 loops=4 comp=3 span=60 central=R
+  [422] VVVUUUDREINULEINSVI@14 edges=19 letters=18 loops=4 comp=3 span=33 central=U
+  [423] UUUFUNFDREIVIERKKNO@13 edges=19 letters=18 loops=4 comp=3 span=32 central=R
+  [424] UUUFUNFDREIVIERKKNO@8 edges=19 letters=18 loops=4 comp=3 span=27 central=U
+  [425] VVVUUUDREINULEINSVI@1 edges=19 letters=18 loops=4 comp=3 span=20 central=E
+  [426] UUUZWODREISECHSFUNF@26 edges=19 letters=19 loops=4 comp=4 span=45 central=R
+  [427] UUUVIRSIBENNULEINS@43 edges=18 letters=15 loops=4 comp=1 span=61 central=B
+  [428] FFFTTTEINSZWOZWOVI@41 edges=18 letters=15 loops=4 comp=1 span=59 central=T
+  [429] UUUVIRSIBENNULEINS@35 edges=18 letters=15 loops=4 comp=1 span=53 central=B
+  … 439 more
+shells/menu: 4368 (42 WO × 2 Greek × 2 UKW × 1 mid-ring × 26 right-ring) → 2e+09 settings
+kernel sieve: ≤10 plugs
+GPU pipeline depth: 4 shells in flight
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+right ring swept: every right-wheel turnover phase covered
+residual gap: middle ring pinned A, so keys whose middle wheel turns over inside a 72-letter span (~12% for 1 notch, ~23% for 2) are not covered — --bombe-middle-ring closes it
+ETA floor (~50M/s): 300.1 min
+
+quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → logs/quarantine_catalog_viii_fast.json
+  [418/2513·1] VVVUUUDREINULEINSVI@25 edges=19 letters=17 loops=4 comp=2 span=44 central=R dead at the board                        34s  58.3M/s ETA 256.9 min
+  [419/2513·2] UUUFUNFDREIVIERKKNO@25 edges=19 letters=17 loops=4 comp=2 span=44 central=R dead at the board                        71s  56.0M/s ETA 266.8 min
+  [420/2513·3] UUUFUNFDREIVIERKKNO@43 edges=19 letters=18 loops=4 comp=3 span=62 central=U   12620 stops → 0 valid 10-plug completions     118s  50.8M/s ETA 293.3 min
+  [421/2513·4] UUUFUNFDREIVIERKKNO@41 edges=19 letters=18 loops=4 comp=3 span=60 central=R dead at the board                       170s  47.0M/s ETA 316.5 min
+  [422/2513·5] VVVUUUDREINULEINSVI@14 edges=19 letters=18 loops=4 comp=3 span=33 central=U dead at the board                       223s  44.7M/s ETA 331.6 min
+  [423/2513·6] UUUFUNFDREIVIERKKNO@13 edges=19 letters=18 loops=4 comp=3 span=32 central=R dead at the board                       272s  44.0M/s ETA 336.8 min
+  [424/2513·7] UUUFUNFDREIVIERKKNO@8 edges=19 letters=18 loops=4 comp=3 span=27 central=U dead at the board                       307s  45.6M/s ETA 324.1 min
+  [425/2513·8] VVVUUUDREINULEINSVI@1 edges=19 letters=18 loops=4 comp=3 span=20 central=E dead at the board                       379s  42.1M/s ETA 349.8 min
+  [426/2513·9] UUUZWODREISECHSFUNF@26 edges=19 letters=19 loops=4 comp=4 span=45 central=R     234 stops → 0 valid 10-plug completions     412s  43.6M/s ETA 337.6 min
+  [427/2513·10] UUUVIRSIBENNULEINS@43 edges=18 letters=15 loops=4 comp=1 span=61 central=B dead at the board                       453s  44.0M/s ETA 333.2 min
+  [428/2513·11] FFFTTTEINSZWOZWOVI@41 edges=18 letters=15 loops=4 comp=1 span=59 central=T dead at the board                       488s  45.0M/s ETA 325.6 min
+  [429/2513·12] UUUVIRSIBENNULEINS@35 edges=18 letters=15 loops=4 comp=1 span=53 central=B dead at the board                       558s  43.0M/s ETA 339.9 min
+  [430/2513·13] UUUVIRSIBENNULEINS@33 edges=18 letters=15 loops=4 comp=1 span=51 central=B dead at the board                       633s  41.0M/s ETA 355.3 min
+  [431/2513·14] ZWOSECHSUUUFLOTTXX@40 edges=18 letters=16 loops=4 comp=2 span=58 central=S dead at the board                       681s  41.1M/s ETA 354.1 min
+  [432/2513·15] UUUVIRSIBENNULEINS@32 edges=18 letters=16 loops=4 comp=2 span=50 central=B dead at the board                       746s  40.1M/s ETA 361.6 min
+  [433/2513·16] UUUVIRSIBENNULEINS@31 edges=18 letters=16 loops=4 comp=2 span=49 central=P dead at the board                       784s  40.7M/s ETA 355.4 min
+  [434/2513·17] UUUVIRSIBENNULEINS@26 edges=18 letters=16 loops=4 comp=2 span=44 central=R dead at the board                       818s  41.5M/s ETA 348.0 min
+  [435/2513·18] FFFTTTEINSZWOZWOVI@23 edges=18 letters=16 loops=4 comp=2 span=41 central=F dead at the board                       848s  42.4M/s ETA 340.0 min
+  [436/2513·19] FFFTTTEINSZWOZWOVI@16 edges=18 letters=16 loops=4 comp=2 span=34 central=F dead at the board                       884s  42.9M/s ETA 334.8 min
+  [437/2513·20] FFFTTTEINSZWOZWOVI@15 edges=18 letters=16 loops=4 comp=2 span=33 central=F dead at the board                       918s  43.5M/s ETA 329.8 min
+  [438/2513·21] FFFTTTEINSZWOZWOVI@24 edges=18 letters=17 loops=4 comp=3 span=42 central=F    4290 stops → 0 valid 10-plug completions     948s  44.2M/s ETA 323.4 min
+  [439/2513·22] UUUVIRSIBENNULEINS@16 edges=18 letters=17 loops=4 comp=3 span=34 central=U dead at the board                       995s  44.1M/s ETA 323.3 min
+  [440/2513·23] UUUVIRSIBENNULEINS@15 edges=18 letters=17 loops=4 comp=3 span=33 central=U dead at the board                      1031s  44.5M/s ETA 319.7 min
+  [441/2513·24] FFFTTTEINSZWOZWOVI@14 edges=18 letters=17 loops=4 comp=3 span=32 central=F dead at the board                      1079s  44.4M/s ETA 320.1 min
+  [442/2513·25] KOMXADMXUUUBOOTEYF@3 edges=18 letters=17 loops=4 comp=3 span=21 central=E dead at the board                      1131s  44.1M/s ETA 321.1 min
+  [443/2513·26] KOMXADMXUUUBOOTEYF@2 edges=18 letters=17 loops=4 comp=3 span=20 central=E       6 stops → 0 valid 10-plug completions    1167s  44.5M/s ETA 318.0 min
+  [444/2513·27] FFFTTTEINSZWOZWOVI@35 edges=18 letters=18 loops=4 comp=4 span=53 central=T     246 stops → 0 valid 10-plug completions    1218s  44.3M/s ETA 318.7 min
+  [445/2513·28] KOMXADMXUUUBOOTEYF@33 edges=18 letters=18 loops=4 comp=4 span=51 central=B    2714 stops → 0 valid 10-plug completions    1265s  44.2M/s ETA 318.5 min
+  [446/2513·29] KOMXADMXUUUBOOTEYF@20 edges=18 letters=18 loops=4 comp=4 span=38 central=O   56978 stops → 0 valid 10-plug completions    1300s  44.5M/s ETA 315.4 min
+  [447/2513·30] UUUVIRSIBENNULEINS@7 edges=18 letters=18 loops=4 comp=4 span=25 central=U    4608 stops → 0 valid 10-plug completions    1349s  44.4M/s ETA 315.5 min
+  [448/2513·31] KOMXADMXUUUBOOTEYF@29 edges=18 letters=19 loops=4 comp=5 span=47 central=P  161716 stops → 0 valid 10-plug completions    1383s  44.7M/s ETA 312.3 min
+  [449/2513·32] TTTFFFEINSSIBENXX@3 edges=17 letters=14 loops=4 comp=1 span=20 central=S dead at the board                      1415s  45.1M/s ETA 308.8 min
+  [450/2513·33] TTTFFFEINSSIBENXX@55 edges=17 letters=15 loops=4 comp=2 span=72 central=T dead at the board                      1445s  45.6M/s ETA 305.0 min
+  [451/2513·34] TTTFFFEINSSIBENXX@51 edges=17 letters=15 loops=4 comp=2 span=68 central=S dead at the board                      1477s  45.9M/s ETA 302.0 min
+  [452/2513·35] KOMXADMXUUUBOOTEY@3 edges=17 letters=15 loops=4 comp=2 span=20 central=E       2 stops → 0 valid 10-plug completions    1526s  45.8M/s ETA 302.3 min
+  [453/2513·36] KOMXADMXUUUBOOTEY@2 edges=17 letters=16 loops=4 comp=3 span=19 central=E      18 stops → 0 valid 10-plug completions    1563s  46.0M/s ETA 300.2 min
+  [454/2513·37] KOMXADMXUUUBOOTEY@33 edges=17 letters=17 loops=4 comp=4 span=50 central=B    6818 stops → 0 valid 10-plug completions    1611s  45.8M/s ETA 300.5 min
+  [455/2513·38] KOMXADMXUUUBOOTEY@20 edges=17 letters=18 loops=4 comp=5 span=37 central=O 1182826 stops → 0 valid 10-plug completions    1649s  46.0M/s ETA 298.7 min
+  [456/2513·39] XUUUFLOTTXVVVUUU@42 edges=16 letters=13 loops=4 comp=1 span=58 central=U dead at the board                      1683s  46.2M/s ETA 296.4 min
+  [457/2513·40] FFFTTTBLEIBTBESE@42 edges=16 letters=13 loops=4 comp=1 span=58 central=B dead at the board                      1712s  46.6M/s ETA 293.1 min
+  [458/2513·41] XUUUFLOTTXVVVUUU@38 edges=16 letters=13 loops=4 comp=1 span=54 central=U       2 stops → 0 scorable completions    1759s  46.5M/s ETA 293.2 min
+  [459/2513·42] FFFTTTBLEIBTBESE@38 edges=16 letters=13 loops=4 comp=1 span=54 central=B       2 stops → 0 scorable completions    1795s  46.7M/s ETA 291.4 min
+  [460/2513·43] XUUUFLOTTXVVVUUU@30 edges=16 letters=13 loops=4 comp=1 span=46 central=U dead at the board                      1832s  46.8M/s ETA 289.7 min
+  [461/2513·44] XUUUFLOTTXVVVUUU@27 edges=16 letters=13 loops=4 comp=1 span=43 central=U dead at the board                      1866s  47.1M/s ETA 287.7 min
+  [462/2513·45] XUUUFLOTTXVVVUUU@26 edges=16 letters=13 loops=4 comp=1 span=42 central=U dead at the board                      1909s  47.1M/s ETA 287.0 min
+  [463/2513·46] XUUUFLOTTXVVVUUU@47 edges=16 letters=14 loops=4 comp=2 span=63 central=U       2 stops → 0 scorable completions    1942s  47.3M/s ETA 285.0 min
+  [464/2513·47] XUUUFLOTTXVVVUUU@39 edges=16 letters=14 loops=4 comp=2 span=55 central=U       4 stops → 2 physical, best IC 0.046 tail -4.964    1976s  47.5M/s ETA 283.1 min
+    shell B/gamma/VI-IV-VIII/AAAG pos RHXX plugs 10  → logs/welchman-physical.jsonl
+  [465/2513·48] FFFTTTBLEIBTBESE@23 edges=16 letters=14 loops=4 comp=2 span=39 central=F       4 stops → 2 physical, best IC 0.041 tail -4.488    2004s  47.8M/s ETA 280.4 min
+    shell C/beta/III-V-VIII/AAAM pos WMSL plugs 10  → logs/welchman-physical.jsonl
+  [466/2513·49] KOMXADMXUUUBOOTE@3 edges=16 letters=15 loops=4 comp=3 span=19 central=E  106350 stops → 0 valid 10-plug completions    2055s  47.6M/s ETA 281.0 min
+  [467/2513·50] KOMXADMXUUUBOOTE@20 edges=16 letters=17 loops=4 comp=5 span=36 central=O 2113872 stops → 2 physical, best IC 0.040 tail -5.004    2108s  47.3M/s ETA 281.8 min
+    shell C/gamma/V-II-VIII/AAAE pos NCQE plugs 9  → logs/welchman-physical.jsonl
+  [474/2513·51] DMXUUUBOOTEYFXDXUUUAUSB@47 edges=23 letters=21 loops=3 comp=1 span=70 central=U dead at the board                      2169s  46.9M/s ETA 283.5 min
+  [475/2513·52] DMXUUUBOOTEYFXDXUUUAUSB@46 edges=23 letters=21 loops=3 comp=1 span=69 central=U dead at the board                      2223s  46.7M/s ETA 284.3 min
+  [476/2513·53] ULDREIYZWODREISECHSEINS@42 edges=23 letters=21 loops=3 comp=1 span=65 central=S dead at the board                      2294s  46.1M/s ETA 287.1 min
+  [477/2513·54] ULDREIYZWODREISECHSEINS@36 edges=23 letters=21 loops=3 comp=1 span=59 central=S dead at the board                      2369s  45.5M/s ETA 290.2 min
+  [478/2513·55] ULDREIYZWODREISECHSEINS@34 edges=23 letters=21 loops=3 comp=1 span=57 central=S dead at the board                      2444s  44.9M/s ETA 293.3 min
+  [479/2513·56] ULDREIYZWODREISECHSEINS@24 edges=23 letters=21 loops=3 comp=1 span=47 central=R dead at the board                      2483s  45.0M/s ETA 291.9 min
+  [480/2513·57] ULDREIYZWODREISECHSEINS@9 edges=23 letters=21 loops=3 comp=1 span=32 central=E dead at the board                      2526s  45.0M/s ETA 291.0 min
+  [481/2513·58] ULDREIYZWODREISECHSEINS@7 edges=23 letters=21 loops=3 comp=1 span=30 central=E dead at the board                      2568s  45.1M/s ETA 290.0 min
+  [482/2513·59] ULDREIYZWODREISECHSEINS@4 edges=23 letters=21 loops=3 comp=1 span=27 central=E dead at the board                      2606s  45.2M/s ETA 288.6 min
+  [483/2513·60] ULDREIYZWODREISECHSEINS@2 edges=23 letters=21 loops=3 comp=1 span=25 central=E dead at the board                      2671s  44.8M/s ETA 290.1 min
+  [484/2513·61] ULDREIYZWODREISECHSEINS@49 edges=23 letters=22 loops=3 comp=2 span=72 central=S dead at the board                      2724s  44.7M/s ETA 290.2 min
+  [485/2513·62] ULDREIYZWODREISECHSEINS@30 edges=23 letters=22 loops=3 comp=2 span=53 central=R dead at the board                      2777s  44.6M/s ETA 290.4 min
+  [486/2513·63] ZPKTXWWWHAVENXXFFFTTT@21 edges=21 letters=19 loops=3 comp=1 span=42 central=F dead at the board                      2827s  44.5M/s ETA 290.2 min
+  [487/2513·64] ZPKTXWWWHAVENXXFFFTTT@4 edges=21 letters=19 loops=3 comp=1 span=25 central=T dead at the board                      2902s  44.0M/s ETA 292.5 min
+  [488/2513·65] TGEANKERTXFFFTTTBLEIB@13 edges=21 letters=21 loops=3 comp=3 span=34 central=T dead at the board                      2940s  44.1M/s ETA 291.0 min
+  [489/2513·66] TGEANKERTXFFFTTTBLEIB@7 edges=21 letters=21 loops=3 comp=3 span=28 central=T dead at the board                      3000s  43.9M/s ETA 291.7 min
+  [490/2513·67] TGEANKERTXFFFTTTBLEIB@5 edges=21 letters=21 loops=3 comp=3 span=26 central=T dead at the board                      3035s  44.1M/s ETA 290.0 min
+  [491/2513·68] OVIERUNDUUUZWOFUNFDR@47 edges=20 letters=19 loops=3 comp=2 span=67 central=U    5504 stops → 0 valid 10-plug completions    3072s  44.2M/s ETA 288.4 min
+  [492/2513·69] OVIERUNDUUUZWOFUNFDR@45 edges=20 letters=19 loops=3 comp=2 span=65 central=U dead at the board                      3150s  43.7M/s ETA 290.7 min
+  [493/2513·70] OVIERUNDUUUZWOFUNFDR@27 edges=20 letters=19 loops=3 comp=2 span=47 central=R dead at the board                      3195s  43.7M/s ETA 289.9 min
+  [494/2513·71] OVIERUNDUUUZWOFUNFDR@25 edges=20 letters=19 loops=3 comp=2 span=45 central=R dead at the board                      3233s  43.8M/s ETA 288.4 min
+  [495/2513·72] OVIERUNDUUUZWOFUNFDR@8 edges=20 letters=19 loops=3 comp=2 span=28 central=U dead at the board                      3284s  43.8M/s ETA 288.1 min
+  [496/2513·73] OVIERUNDUUUZWOFUNFDR@51 edges=20 letters=20 loops=3 comp=3 span=71 central=U dead at the board                      3343s  43.6M/s ETA 288.5 min
+  [497/2513·74] OVIERUNDUUUZWOFUNFDR@37 edges=20 letters=20 loops=3 comp=3 span=57 central=U dead at the board                      3393s  43.5M/s ETA 288.1 min
+  [498/2513·75] OVIERUNDUUUZWOFUNFDR@36 edges=20 letters=20 loops=3 comp=3 span=56 central=U dead at the board                      3445s  43.5M/s ETA 287.9 min
+  [499/2513·76] OVIERUNDUUUZWOFUNFDR@29 edges=20 letters=20 loops=3 comp=3 span=49 central=U dead at the board                      3498s  43.4M/s ETA 287.7 min
+  [500/2513·77] OVIERUNDUUUZWOFUNFDR@0 edges=20 letters=20 loops=3 comp=3 span=20 central=U dead at the board                      3547s  43.3M/s ETA 287.1 min
+  [501/2513·78] VVVUUUDREINULEINSVI@36 edges=19 letters=17 loops=3 comp=1 span=55 central=V dead at the board                      3583s  43.5M/s ETA 285.6 min
+  [502/2513·79] UUUFUNFDREIVIERKKNO@32 edges=19 letters=17 loops=3 comp=1 span=51 central=R dead at the board                      3643s  43.3M/s ETA 285.9 min
+  [503/2513·80] VVVUUUDREINULEINSVI@30 edges=19 letters=17 loops=3 comp=1 span=49 central=V dead at the board                      3680s  43.4M/s ETA 284.4 min
+  [504/2513·81] VVVUUUDREINULEINSVI@29 edges=19 letters=17 loops=3 comp=1 span=48 central=V dead at the board                      3718s  43.5M/s ETA 283.1 min
+  [505/2513·82] UUUFUNFDREIVIERKKNO@19 edges=19 letters=17 loops=3 comp=1 span=38 central=R dead at the board                      3757s  43.6M/s ETA 281.8 min
+  [506/2513·83] UUUFUNFDREIVIERKKNO@17 edges=19 letters=17 loops=3 comp=1 span=36 central=R dead at the board                      3810s  43.5M/s ETA 281.6 min
+  [507/2513·84] VVVUUUDREINULEINSVI@15 edges=19 letters=17 loops=3 comp=1 span=34 central=V dead at the board                      3844s  43.6M/s ETA 279.9 min
+  [508/2513·85] UUUFUNFDREIVIERKKNO@11 edges=19 letters=17 loops=3 comp=1 span=30 central=U dead at the board                      3884s  43.7M/s ETA 278.7 min
+  [509/2513·86] VVVUUUDREINULEINSVI@51 edges=19 letters=18 loops=3 comp=2 span=70 central=V dead at the board                      3921s  43.8M/s ETA 277.3 min
+  [510/2513·87] UUUFUNFDREIVIERKKNO@45 edges=19 letters=18 loops=3 comp=2 span=64 central=U dead at the board                      3953s  43.9M/s ETA 275.6 min
+  [511/2513·88] UUUZWODREISECHSFUNF@16 edges=19 letters=18 loops=3 comp=2 span=35 central=U dead at the board                      3989s  44.0M/s ETA 274.2 min
+  [512/2513·89] VVVUUUDREINULEINSVI@12 edges=19 letters=18 loops=3 comp=2 span=31 central=U  299272 stops → 0 valid 10-plug completions    4039s  44.0M/s ETA 273.8 min
+  [513/2513·90] VVVUUUDREINULEINSVI@10 edges=19 letters=18 loops=3 comp=2 span=29 central=U dead at the board                      4102s  43.8M/s ETA 274.2 min
+  [514/2513·91] UUUFUNFDREIVIERKKNO@9 edges=19 letters=18 loops=3 comp=2 span=28 central=U dead at the board                      4148s  43.8M/s ETA 273.5 min
+  [515/2513·92] VVVUUUDREINULEINSVI@8 edges=19 letters=18 loops=3 comp=2 span=27 central=U dead at the board                      4208s  43.6M/s ETA 273.7 min
+  [516/2513·93] VVVUUUDREINULEINSVI@0 edges=19 letters=18 loops=3 comp=2 span=19 central=E dead at the board                      4263s  43.5M/s ETA 273.5 min
+  [517/2513·94] VVVUUUDREINULEINSVI@53 edges=19 letters=19 loops=3 comp=3 span=72 central=V dead at the board                      4300s  43.6M/s ETA 272.2 min
+  [518/2513·95] UUUFUNFDREIVIERKKNO@49 edges=19 letters=19 loops=3 comp=3 span=68 central=U dead at the board                      4354s  43.6M/s ETA 271.9 min
+  [519/2513·96] UUUFUNFDREIVIERKKNO@6 edges=19 letters=19 loops=3 comp=3 span=25 central=U dead at the board                      4392s  43.6M/s ETA 270.7 min
+  [520/2513·97] UUUFUNFDREIVIERKKNO@2 edges=19 letters=19 loops=3 comp=3 span=21 central=E dead at the board                      4426s  43.7M/s ETA 269.2 min
+  [521/2513·98] UUUZWODREISECHSFUNF@51 edges=19 letters=20 loops=3 comp=4 span=70 central=S dead at the board                      4465s  43.8M/s ETA 268.0 min
+  [522/2513·99] UUUZWODREISECHSFUNF@44 edges=19 letters=20 loops=3 comp=4 span=63 central=S       8 stops → 0 valid 10-plug completions    4526s  43.7M/s ETA 268.2 min
+  [523/2513·100] UUUZWODREISECHSFUNF@28 edges=19 letters=20 loops=3 comp=4 span=47 central=P dead at the board                      4576s  43.6M/s ETA 267.7 min
+  [524/2513·101] UUUZWODREISECHSFUNF@24 edges=19 letters=20 loops=3 comp=4 span=43 central=R dead at the board                      4625s  43.6M/s ETA 267.1 min
+  [525/2513·102] UUUZWODREISECHSFUNF@0 edges=19 letters=20 loops=3 comp=4 span=19 central=E dead at the board                      4662s  43.7M/s ETA 265.9 min
+  [526/2513·103] UUUZWODREISECHSFUNF@31 edges=19 letters=21 loops=3 comp=5 span=50 central=P dead at the board                      4700s  43.7M/s ETA 264.7 min
+  [527/2513·104] BENNULZWOYVIRSIBEN@44 edges=18 letters=16 loops=3 comp=1 span=62 central=B dead at the board                      4739s  43.8M/s ETA 263.5 min
+  [528/2513·105] ZWOSECHSUUUFLOTTXX@41 edges=18 letters=16 loops=3 comp=1 span=59 central=S dead at the board                      4779s  43.9M/s ETA 262.4 min
+  [529/2513·106] UUUVIRSIBENNULEINS@29 edges=18 letters=16 loops=3 comp=1 span=47 central=P dead at the board                      4834s  43.8M/s ETA 262.2 min
+  [530/2513·107] UUUVIRSIBENNULEINS@28 edges=18 letters=16 loops=3 comp=1 span=46 central=P dead at the board                      4870s  43.9M/s ETA 261.0 min
+  [531/2513·108] UUUVIRSIBENNULEINS@24 edges=18 letters=16 loops=3 comp=1 span=42 central=P dead at the board                      4923s  43.8M/s ETA 260.6 min
+  [532/2513·109] UUUVIRSIBENNULEINS@19 edges=18 letters=16 loops=3 comp=1 span=37 central=U dead at the board                      4970s  43.8M/s ETA 259.9 min
+  [533/2513·110] FFFTTTEINSZWOZWOVI@18 edges=18 letters=16 loops=3 comp=1 span=36 central=F dead at the board                      5016s  43.8M/s ETA 259.2 min
+  [534/2513·111] ZWOSECHSUUUFLOTTXX@15 edges=18 letters=16 loops=3 comp=1 span=33 central=U dead at the board                      5053s  43.8M/s ETA 258.0 min
+  [535/2513·112] FFFTTTEINSZWOZWOVI@51 edges=18 letters=17 loops=3 comp=2 span=69 central=T       2 stops → 0 valid 10-plug completions    5101s  43.8M/s ETA 257.3 min
+  [536/2513·113] UUUVIRSIBENNULEINS@50 edges=18 letters=17 loops=3 comp=2 span=68 central=S dead at the board                      5139s  43.9M/s ETA 256.2 min
+  [537/2513·114] FFFTTTEINSZWOZWOVI@50 edges=18 letters=17 loops=3 comp=2 span=68 central=T       4 stops → 0 valid 10-plug completions    5180s  43.9M/s ETA 255.2 min
+  [538/2513·115] FFFTTTEINSZWOZWOVI@49 edges=18 letters=17 loops=3 comp=2 span=67 central=T dead at the board                      5216s  44.0M/s ETA 254.0 min
+  [539/2513·116] FFFTTTEINSZWOZWOVI@48 edges=18 letters=17 loops=3 comp=2 span=66 central=T dead at the board                      5256s  44.1M/s ETA 253.0 min
+  [540/2513·117] FFFTTTEINSZWOZWOVI@47 edges=18 letters=17 loops=3 comp=2 span=65 central=T dead at the board                      5302s  44.0M/s ETA 252.3 min
+  [541/2513·118] BENNULZWOYVIRSIBEN@42 edges=18 letters=17 loops=3 comp=2 span=60 central=B dead at the board                      5352s  44.0M/s ETA 251.7 min
+  [542/2513·119] BENNULZWOYVIRSIBEN@41 edges=18 letters=17 loops=3 comp=2 span=59 central=B dead at the board                      5402s  44.0M/s ETA 251.2 min
+  [543/2513·120] FFFTTTEINSZWOZWOVI@38 edges=18 letters=17 loops=3 comp=2 span=56 central=T dead at the board                      5451s  43.9M/s ETA 250.6 min
+  [544/2513·121] ZWOSECHSUUUFLOTTXX@23 edges=18 letters=17 loops=3 comp=2 span=41 central=P      20 stops → 0 valid 10-plug completions    5501s  43.9M/s ETA 250.0 min
+  [545/2513·122] KOMXADMXUUUBOOTEYF@23 edges=18 letters=17 loops=3 comp=2 span=41 central=O dead at the board                      5560s  43.8M/s ETA 249.9 min
+  [546/2513·123] KOMXADMXUUUBOOTEYF@21 edges=18 letters=17 loops=3 comp=2 span=39 central=O dead at the board                      5607s  43.8M/s ETA 249.2 min
+  [547/2513·124] UUUVIRSIBENNULEINS@17 edges=18 letters=17 loops=3 comp=2 span=35 central=U dead at the board                      5655s  43.8M/s ETA 248.5 min
+  [548/2513·125] FFFTTTEINSZWOZWOVI@13 edges=18 letters=17 loops=3 comp=2 span=31 central=F dead at the board                      5690s  43.9M/s ETA 247.3 min
+  [549/2513·126] FFFTTTEINSZWOZWOVI@12 edges=18 letters=17 loops=3 comp=2 span=30 central=F dead at the board                      5753s  43.7M/s ETA 247.3 min
+  [550/2513·127] ZWOSECHSUUUFLOTTXX@9 edges=18 letters=17 loops=3 comp=2 span=27 central=U dead at the board                      5803s  43.7M/s ETA 246.7 min
+  [551/2513·128] ZWOSECHSUUUFLOTTXX@7 edges=18 letters=17 loops=3 comp=2 span=25 central=S     400 stops → 0 valid 10-plug completions    5850s  43.7M/s ETA 246.0 min
+  [552/2513·129] UUUVIRSIBENNULEINS@5 edges=18 letters=17 loops=3 comp=2 span=23 central=U dead at the board                      5898s  43.7M/s ETA 245.4 min
+  [553/2513·130] ZWOSECHSUUUFLOTTXX@3 edges=18 letters=17 loops=3 comp=2 span=21 central=S dead at the board                      5935s  43.7M/s ETA 244.2 min
+  [554/2513·131] ZWOSECHSUUUFLOTTXX@52 edges=18 letters=18 loops=3 comp=3 span=70 central=S dead at the board                      6003s  43.6M/s ETA 244.4 min
+  [555/2513·132] ZWOSECHSUUUFLOTTXX@51 edges=18 letters=18 loops=3 comp=3 span=69 central=S dead at the board                      6057s  43.5M/s ETA 243.9 min
+  [556/2513·133] UUUVIRSIBENNULEINS@51 edges=18 letters=18 loops=3 comp=3 span=69 central=S dead at the board                      6093s  43.6M/s ETA 242.8 min
+  [557/2513·134] BENNULZWOYVIRSIBEN@39 edges=18 letters=18 loops=3 comp=3 span=57 central=B dead at the board                      6151s  43.5M/s ETA 242.5 min
+  [558/2513·135] FFFTTTEINSZWOZWOVI@37 edges=18 letters=18 loops=3 comp=3 span=55 central=T       6 stops → 0 valid 10-plug completions    6218s  43.3M/s ETA 242.6 min
+  [559/2513·136] BENNULZWOYVIRSIBEN@33 edges=18 letters=18 loops=3 comp=3 span=51 central=B dead at the board                      6263s  43.3M/s ETA 241.8 min
+  [560/2513·137] KOMXADMXUUUBOOTEYF@32 edges=18 letters=18 loops=3 comp=3 span=50 central=B     666 stops → 0 valid 10-plug completions    6343s  43.1M/s ETA 242.3 min
+  [561/2513·138] ZWOSECHSUUUFLOTTXX@27 edges=18 letters=18 loops=3 comp=3 span=45 central=P     482 stops → 0 valid 10-plug completions    6394s  43.1M/s ETA 241.7 min
+  [562/2513·139] KOMXADMXUUUBOOTEYF@25 edges=18 letters=18 loops=3 comp=3 span=43 central=P dead at the board                      6470s  42.9M/s ETA 242.0 min
+  [563/2513·140] UUUVIRSIBENNULEINS@12 edges=18 letters=18 loops=3 comp=3 span=30 central=U dead at the board                      6518s  42.9M/s ETA 241.3 min
+  [564/2513·141] UUUVIRSIBENNULEINS@11 edges=18 letters=18 loops=3 comp=3 span=29 central=U    5228 stops → 0 valid 10-plug completions    6570s  42.8M/s ETA 240.7 min
+  [565/2513·142] ZWOSECHSUUUFLOTTXX@4 edges=18 letters=18 loops=3 comp=3 span=22 central=S dead at the board                      6606s  42.9M/s ETA 239.6 min
+  [566/2513·143] UUUZWODREIDREIACHT@3 edges=18 letters=18 loops=3 comp=3 span=21 central=E  287658 stops → 0 valid 10-plug completions    6643s  43.0M/s ETA 238.5 min
+  [567/2513·144] UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 comp=3 span=18 central=E       2 stops → 0 valid 10-plug completions    6697s  42.9M/s ETA 238.0 min
+  [568/2513·145] UUUVIRSIBENNULEINS@0 edges=18 letters=18 loops=3 comp=3 span=18 central=E       2 stops → 0 valid 10-plug completions    6748s  42.9M/s ETA 237.3 min
+  [569/2513·146] ZWOSECHSUUUFLOTTXX@32 edges=18 letters=19 loops=3 comp=4 span=50 central=B 2619582 stops → 0 valid 10-plug completions    6817s  42.7M/s ETA 237.4 min
+  [570/2513·147] ZWOSECHSUUUFLOTTXX@30 edges=18 letters=19 loops=3 comp=4 span=48 central=P     426 stops → 0 valid 10-plug completions    6872s  42.7M/s ETA 236.9 min
+  [571/2513·148] UUUZWODREIDREIACHT@28 edges=18 letters=19 loops=3 comp=4 span=46 central=R       6 stops → 0 valid 10-plug completions    6906s  42.8M/s ETA 235.7 min
+  [572/2513·149] BENNULZWOYVIRSIBEN@28 edges=18 letters=19 loops=3 comp=4 span=46 central=P dead at the board                      6956s  42.8M/s ETA 235.0 min
+  [573/2513·150] UUUZWODREIDREIACHT@25 edges=18 letters=19 loops=3 comp=4 span=43 central=R     384 stops → 0 valid 10-plug completions    7001s  42.8M/s ETA 234.1 min
+  [574/2513·151] KOMXADMXUUUBOOTEYF@39 edges=18 letters=20 loops=3 comp=5 span=57 central=B      14 stops → 0 valid 10-plug completions    7049s  42.8M/s ETA 233.4 min
+  [575/2513·152] UUUZWODREIDREIACHT@29 edges=18 letters=20 loops=3 comp=5 span=47 central=P dead at the board                      7095s  42.8M/s ETA 232.6 min
+  [576/2513·153] TTTFFFEINSSIBENXX@49 edges=17 letters=15 loops=3 comp=1 span=66 central=T dead at the board                      7147s  42.7M/s ETA 232.0 min
+  [577/2513·154] TTTFFFEINSSIBENXX@38 edges=17 letters=15 loops=3 comp=1 span=55 central=B dead at the board                      7195s  42.7M/s ETA 231.3 min
+  [578/2513·155] TTTFFFEINSSIBENXX@2 edges=17 letters=15 loops=3 comp=1 span=19 central=E dead at the board                      7231s  42.8M/s ETA 230.1 min
+  [579/2513·156] TTTFFFEINSSIBENXX@0 edges=17 letters=15 loops=3 comp=1 span=17 central=E dead at the board                      7286s  42.7M/s ETA 229.6 min
+  [580/2513·157] TTTFFFEINSSIBENXX@54 edges=17 letters=16 loops=3 comp=2 span=71 central=T      42 stops → 0 valid 10-plug completions    7324s  42.8M/s ETA 228.6 min
+  [581/2513·158] TTTFFFEINSSIBENXX@52 edges=17 letters=16 loops=3 comp=2 span=69 central=T dead at the board                      7361s  42.8M/s ETA 227.5 min
+  [582/2513·159] TTTFFFEINSSIBENXX@33 edges=17 letters=16 loops=3 comp=2 span=50 central=B dead at the board                      7443s  42.6M/s ETA 227.8 min
+  [583/2513·160] TTTFFFEINSSIBENXX@32 edges=17 letters=16 loops=3 comp=2 span=49 central=F       2 stops → 0 valid 10-plug completions    7479s  42.7M/s ETA 226.7 min
+  [584/2513·161] TTTFFFEINSSIBENXX@31 edges=17 letters=16 loops=3 comp=2 span=48 central=F      10 stops → 0 valid 10-plug completions    7526s  42.7M/s ETA 225.9 min
+  [585/2513·162] TTTFFFEINSSIBENXX@30 edges=17 letters=16 loops=3 comp=2 span=47 central=F       2 stops → 0 valid 10-plug completions    7578s  42.7M/s ETA 225.3 min
+  [586/2513·163] TTTFFFEINSSIBENXX@26 edges=17 letters=16 loops=3 comp=2 span=43 central=F       2 stops → 0 valid 10-plug completions    7614s  42.7M/s ETA 224.2 min
+  [587/2513·164] TTTFFFEINSSIBENXX@19 edges=17 letters=16 loops=3 comp=2 span=36 central=F       4 stops → 0 valid 10-plug completions    7687s  42.6M/s ETA 224.2 min
+  [588/2513·165] TTTFFFEINSSIBENXX@12 edges=17 letters=17 loops=3 comp=3 span=29 central=F      18 stops → 0 valid 10-plug completions    7738s  42.6M/s ETA 223.6 min
+  [589/2513·166] KOMXADMXUUUBOOTEY@32 edges=17 letters=18 loops=3 comp=4 span=49 central=B   72964 stops → 0 valid 10-plug completions    7842s  42.3M/s ETA 224.4 min
+  [590/2513·167] KOMXADMXUUUBOOTEY@39 edges=17 letters=19 loops=3 comp=5 span=56 central=B      34 stops → 0 valid 10-plug completions    7892s  42.2M/s ETA 223.7 min
+  [591/2513·168] KOMXADMXUUUBOOTEY@29 edges=17 letters=19 loops=3 comp=5 span=46 central=P  166618 stops → 0 valid 10-plug completions    7925s  42.3M/s ETA 222.5 min
+  [592/2513·169] XUUUFLOTTXVVVUUU@36 edges=16 letters=14 loops=3 comp=1 span=52 central=U       4 stops → 0 scorable completions    7982s  42.3M/s ETA 222.0 min
+  [593/2513·170] XUUUFLOTTXVVVUUU@29 edges=16 letters=14 loops=3 comp=1 span=45 central=U dead at the board                      8016s  42.3M/s ETA 220.8 min
+  [594/2513·171] XUUUFLOTTXVVVUUU@16 edges=16 letters=14 loops=3 comp=1 span=32 central=U dead at the board                      8052s  42.4M/s ETA 219.7 min
+  [595/2513·172] XUUUFLOTTXVVVUUU@56 edges=16 letters=15 loops=3 comp=2 span=72 central=U dead at the board                      8088s  42.4M/s ETA 218.7 min
+  [596/2513·173] XUUUFLOTTXVVVUUU@48 edges=16 letters=15 loops=3 comp=2 span=64 central=U dead at the board                      8164s  42.3M/s ETA 218.6 min
+  [597/2513·174] FFFTTTBLEIBTBESE@48 edges=16 letters=15 loops=3 comp=2 span=64 central=T     116 stops → 0 scorable completions    8197s  42.4M/s ETA 217.5 min
+  [598/2513·175] FFFTTTBLEIBTBESE@28 edges=16 letters=15 loops=3 comp=2 span=44 central=F dead at the board                      8248s  42.4M/s ETA 216.8 min
+  [599/2513·176] FFFTTTBLEIBTBESE@19 edges=16 letters=15 loops=3 comp=2 span=35 central=F  331026 stops → 2 physical, best IC 0.042 tail -5.213    8283s  42.4M/s ETA 215.7 min
+    shell C/beta/I-III-VIII/AAAI pos ZOGM plugs 10  → logs/welchman-physical.jsonl
+  [600/2513·177] FFFTTTBLEIBTBESE@18 edges=16 letters=15 loops=3 comp=2 span=34 central=F 24668150 stops → 0 scorable completions    8543s  41.4M/s ETA 220.4 min
+  [601/2513·178] FFFTTTBLEIBTBESE@15 edges=16 letters=15 loops=3 comp=2 span=31 central=T       6 stops → 4 physical, best IC 0.048 tail -4.573    8589s  41.4M/s ETA 219.6 min
+    shell C/gamma/V-II-VIII/AAAH pos HBYW plugs 10  → logs/welchman-physical.jsonl
+  [602/2513·179] XUUUFLOTTXVVVUUU@6 edges=16 letters=15 loops=3 comp=2 span=22 central=U      10 stops → 2 physical, best IC 0.043 tail -4.952    8643s  41.3M/s ETA 218.9 min
+    shell C/gamma/VII-IV-VIII/AAAE pos VHME plugs 10  → logs/welchman-physical.jsonl
+  [603/2513·180] FFFTTTBLEIBTBESE@6 edges=16 letters=15 loops=3 comp=2 span=22 central=E       2 stops → 0 valid 10-plug completions    8674s  41.4M/s ETA 217.7 min
+  [604/2513·181] XUUUFLOTTXVVVUUU@3 edges=16 letters=15 loops=3 comp=2 span=19 central=U       4 stops → 0 valid 10-plug completions    8705s  41.5M/s ETA 216.4 min
+  [605/2513·182] FFFTTTBLEIBTBESE@0 edges=16 letters=15 loops=3 comp=2 span=16 central=E      10 stops → 6 physical, best IC 0.037 tail -4.744    8758s  41.5M/s ETA 215.7 min
+    shell C/gamma/III-VII-VIII/AAAH pos ILJF plugs 10  → logs/welchman-physical.jsonl
+  [606/2513·183] FFFTTTBLEIBTBESE@16 edges=16 letters=16 loops=3 comp=3 span=32 central=T     460 stops → 0 valid 10-plug completions    8832s  41.4M/s ETA 215.6 min
+  [607/2513·184] KOMXADMXUUUBOOTE@2 edges=16 letters=16 loops=3 comp=3 span=18 central=E     404 stops → 0 scorable completions    8880s  41.4M/s ETA 214.7 min
+  [608/2513·185] KOMXADMXUUUBOOTE@33 edges=16 letters=17 loops=3 comp=4 span=49 central=B  161654 stops → 0 scorable completions    8926s  41.4M/s ETA 213.9 min
+  [609/2513·186] FFFTTTBLEIBTBESE@13 edges=16 letters=17 loops=3 comp=4 span=29 central=T    1202 stops → 0 scorable completions    8979s  41.3M/s ETA 213.2 min
+  [610/2513·187] ZWODREISECHSEINS@47 edges=16 letters=18 loops=3 comp=5 span=63 central=S   22982 stops → 0 scorable completions    9027s  41.3M/s ETA 212.4 min
+  [611/2513·188] KOMXADMXUUUBOOTE@39 edges=16 letters=18 loops=3 comp=5 span=55 central=B     450 stops → 0 scorable completions    9073s  41.4M/s ETA 211.5 min
+  [612/2513·189] KOMXADMXUUUBOOTE@32 edges=16 letters=18 loops=3 comp=5 span=48 central=B 546980220 stops → 2 physical, best IC 0.045 tail -5.164   15360s  24.6M/s ETA 354.9 min
+    shell B/gamma/VII-V-VIII/AAAC pos TLJE plugs 10  → logs/welchman-physical.jsonl
+  [613/2513·190] ZWODREISECHSEINS@28 edges=16 letters=18 loops=3 comp=5 span=44 central=P  974270 stops → 2 physical, best IC 0.044 tail -4.935   15392s  24.6M/s ETA 352.4 min
+    shell C/gamma/IV-II-VIII/AAAD pos TSJO plugs 10  → logs/welchman-physical.jsonl
+  [614/2513·191] ZWODREISECHSEINS@3 edges=16 letters=18 loops=3 comp=5 span=19 central=E      32 stops → 0 valid 10-plug completions   15423s  24.7M/s ETA 349.9 min
+  [615/2513·192] KOMXADMXUUUBOOTE@29 edges=16 letters=19 loops=3 comp=6 span=45 central=P  261888 stops → 2 physical, best IC 0.048 tail -4.932   15454s  24.8M/s ETA 347.5 min
+    shell B/gamma/VII-VI-VIII/AAAL pos IKII plugs 9  → logs/welchman-physical.jsonl
+  [694/2513·193] TGEANKERTXFFFTTTBLEIB@9 edges=21 letters=21 loops=2 comp=2 span=30 central=T     620 stops → 0 valid 10-plug completions   15510s  24.8M/s ETA 345.6 min
+  [695/2513·194] OVIERUNDUUUZWOFUNFDR@39 edges=20 letters=19 loops=2 comp=1 span=59 central=U dead at the board                     15566s  24.9M/s ETA 343.7 min
+  [696/2513·195] OVIERUNDUUUZWOFUNFDR@28 edges=20 letters=19 loops=2 comp=1 span=48 central=R dead at the board                     15619s  24.9M/s ETA 341.8 min
+  [697/2513·196] OVIERUNDUUUZWOFUNFDR@19 edges=20 letters=19 loops=2 comp=1 span=39 central=U dead at the board                     15669s  25.0M/s ETA 339.8 min
+  [698/2513·197] OVIERUNDUUUZWOFUNFDR@52 edges=20 letters=20 loops=2 comp=2 span=72 central=U dead at the board                     15732s  25.0M/s ETA 338.1 min
+  [699/2513·198] OVIERUNDUUUZWOFUNFDR@35 edges=20 letters=20 loops=2 comp=2 span=55 central=U dead at the board                     15790s  25.0M/s ETA 336.3 min
+  [700/2513·199] OVIERUNDUUUZWOFUNFDR@5 edges=20 letters=20 loops=2 comp=2 span=25 central=U dead at the board                     15837s  25.1M/s ETA 334.3 min
+  [701/2513·200] OVIERUNDUUUZWOFUNFDR@4 edges=20 letters=20 loops=2 comp=2 span=24 central=U dead at the board                     15919s  25.1M/s ETA 333.0 min
+  [702/2513·201] OVIERUNDUUUZWOFUNFDR@2 edges=20 letters=20 loops=2 comp=2 span=22 central=U dead at the board                     15976s  25.1M/s ETA 331.2 min
+  [703/2513·202] OVIERUNDUUUZWOFUNFDR@34 edges=20 letters=21 loops=2 comp=3 span=54 central=U dead at the board                     16046s  25.1M/s ETA 329.7 min
+  [704/2513·203] OVIERUNDUUUZWOFUNFDR@1 edges=20 letters=21 loops=2 comp=3 span=21 central=U dead at the board                     16111s  25.2M/s ETA 328.0 min
+  [705/2513·204] UUUFUNFDREIVIERKKNO@48 edges=19 letters=18 loops=2 comp=1 span=67 central=U dead at the board                     16151s  25.2M/s ETA 325.9 min
+  [706/2513·205] UUUFUNFDREIVIERKKNO@40 edges=19 letters=18 loops=2 comp=1 span=59 central=R dead at the board                     16199s  25.3M/s ETA 324.0 min
+  [707/2513·206] UUUFUNFDREIVIERKKNO@35 edges=19 letters=18 loops=2 comp=1 span=54 central=R dead at the board                     16281s  25.3M/s ETA 322.7 min
+  [708/2513·207] UUUZWODREISECHSFUNF@11 edges=19 letters=18 loops=2 comp=1 span=30 central=U dead at the board                     16317s  25.3M/s ETA 320.6 min
+  [709/2513·208] UUUZWODREISECHSFUNF@10 edges=19 letters=18 loops=2 comp=1 span=29 central=U dead at the board                     16368s  25.4M/s ETA 318.7 min
+  [710/2513·209] VVVUUUDREINULEINSVI@5 edges=19 letters=18 loops=2 comp=1 span=24 central=U dead at the board                     16418s  25.4M/s ETA 316.8 min
+  [711/2513·210] UUUFUNFDREIVIERKKNO@52 edges=19 letters=19 loops=2 comp=2 span=71 central=G dead at the board                     16489s  25.4M/s ETA 315.4 min
+  [712/2513·211] UUUFUNFDREIVIERKKNO@51 edges=19 letters=19 loops=2 comp=2 span=70 central=U     250 stops → 0 valid 10-plug completions   16522s  25.5M/s ETA 313.2 min
+  [713/2513·212] UUUZWODREISECHSFUNF@42 edges=19 letters=19 loops=2 comp=2 span=61 central=S dead at the board                     16590s  25.5M/s ETA 311.7 min
+  [714/2513·213] UUUFUNFDREIVIERKKNO@39 edges=19 letters=19 loops=2 comp=2 span=58 central=R dead at the board                     16626s  25.6M/s ETA 309.6 min
+  [715/2513·214] UUUFUNFDREIVIERKKNO@37 edges=19 letters=19 loops=2 comp=2 span=56 central=R dead at the board                     16698s  25.6M/s ETA 308.2 min
+  [716/2513·215] UUUZWODREISECHSFUNF@27 edges=19 letters=19 loops=2 comp=2 span=46 central=F dead at the board                     16748s  25.6M/s ETA 306.4 min
+  [717/2513·216] VVVUUUDREINULEINSVI@13 edges=19 letters=19 loops=2 comp=2 span=32 central=U dead at the board                     16801s  25.7M/s ETA 304.7 min
+  [718/2513·217] VVVUUUDREINULEINSVI@9 edges=19 letters=19 loops=2 comp=2 span=28 central=U dead at the board                     16853s  25.7M/s ETA 302.9 min
+  [719/2513·218] UUUZWODREISECHSFUNF@8 edges=19 letters=19 loops=2 comp=2 span=27 central=U dead at the board                     16889s  25.8M/s ETA 300.9 min
+  [720/2513·219] VVVUUUDREINULEINSVI@7 edges=19 letters=19 loops=2 comp=2 span=26 central=U dead at the board                     16936s  25.8M/s ETA 299.0 min
+  [721/2513·220] VVVUUUDREINULEINSVI@6 edges=19 letters=19 loops=2 comp=2 span=25 central=U dead at the board                     16972s  25.9M/s ETA 297.0 min
+  [722/2513·221] UUUFUNFDREIVIERKKNO@4 edges=19 letters=19 loops=2 comp=2 span=23 central=U      16 stops → 0 valid 10-plug completions   17036s  25.9M/s ETA 295.5 min
+  [723/2513·222] UUUZWODREISECHSFUNF@38 edges=19 letters=20 loops=2 comp=3 span=57 central=S   42494 stops → 0 valid 10-plug completions   17112s  25.9M/s ETA 294.2 min
+  [724/2513·223] UUUZWODREISECHSFUNF@25 edges=19 letters=20 loops=2 comp=3 span=44 central=R dead at the board                     17159s  25.9M/s ETA 292.4 min
+  [725/2513·224] UUUZWODREISECHSFUNF@46 edges=19 letters=21 loops=2 comp=4 span=65 central=S dead at the board                     17238s  25.9M/s ETA 291.2 min
+  [726/2513·225] UUUZWODREISECHSFUNF@45 edges=19 letters=21 loops=2 comp=4 span=64 central=S   24058 stops → 0 valid 10-plug completions   17319s  25.9M/s ETA 289.9 min
+  [727/2513·226] UUUZWODREISECHSFUNF@3 edges=19 letters=21 loops=2 comp=4 span=22 central=S      26 stops → 0 valid 10-plug completions   17367s  26.0M/s ETA 288.2 min
+  [728/2513·227] FFFTTTEINSZWOZWOVI@52 edges=18 letters=17 loops=2 comp=1 span=70 central=T dead at the board                     17418s  26.0M/s ETA 286.5 min
+  [729/2513·228] FFFTTTEINSZWOZWOVI@46 edges=18 letters=17 loops=2 comp=1 span=64 central=T dead at the board                     17477s  26.0M/s ETA 284.9 min
+  [730/2513·229] BENNULZWOYVIRSIBEN@45 edges=18 letters=17 loops=2 comp=1 span=63 central=B dead at the board                     17514s  26.1M/s ETA 283.0 min
+  [731/2513·230] BENNULZWOYVIRSIBEN@43 edges=18 letters=17 loops=2 comp=1 span=61 central=B dead at the board                     17568s  26.1M/s ETA 281.3 min
+  [732/2513·231] ZWOSECHSUUUFLOTTXX@42 edges=18 letters=17 loops=2 comp=1 span=60 central=S dead at the board                     17637s  26.1M/s ETA 280.0 min
+  [733/2513·232] FFFTTTEINSZWOZWOVI@39 edges=18 letters=17 loops=2 comp=1 span=57 central=T dead at the board                     17673s  26.2M/s ETA 278.0 min
+  [734/2513·233] ZWOSECHSUUUFLOTTXX@22 edges=18 letters=17 loops=2 comp=1 span=40 central=P dead at the board                     17728s  26.2M/s ETA 276.4 min
+  [735/2513·234] ZWOSECHSUUUFLOTTXX@20 edges=18 letters=17 loops=2 comp=1 span=38 central=U dead at the board                     17775s  26.3M/s ETA 274.7 min
+  [736/2513·235] FFFTTTEINSZWOZWOVI@19 edges=18 letters=17 loops=2 comp=1 span=37 central=F dead at the board                     17827s  26.3M/s ETA 273.1 min
+  [737/2513·236] UUUZWODREIDREIACHT@16 edges=18 letters=17 loops=2 comp=1 span=34 central=R dead at the board                     17903s  26.3M/s ETA 271.8 min
+  [738/2513·237] ZWOSECHSUUUFLOTTXX@54 edges=18 letters=18 loops=2 comp=2 span=72 central=G       2 stops → 0 valid 10-plug completions   17949s  26.4M/s ETA 270.1 min
+  [739/2513·238] UUUVIRSIBENNULEINS@52 edges=18 letters=18 loops=2 comp=2 span=70 central=N       8 stops → 0 valid 10-plug completions   18031s  26.3M/s ETA 269.0 min
+  [740/2513·239] BENNULZWOYVIRSIBEN@48 edges=18 letters=18 loops=2 comp=2 span=66 central=N dead at the board                     18099s  26.4M/s ETA 267.6 min
+  [741/2513·240] UUUZWODREIDREIACHT@44 edges=18 letters=18 loops=2 comp=2 span=62 central=T dead at the board                     18166s  26.4M/s ETA 266.2 min
+  [742/2513·241] UUUZWODREIDREIACHT@42 edges=18 letters=18 loops=2 comp=2 span=60 central=R dead at the board                     18232s  26.4M/s ETA 264.8 min
+  [743/2513·242] KOMXADMXUUUBOOTEYF@41 edges=18 letters=18 loops=2 comp=2 span=59 central=B dead at the board                     18293s  26.4M/s ETA 263.3 min
+  [744/2513·243] UUUZWODREIDREIACHT@40 edges=18 letters=18 loops=2 comp=2 span=58 central=R dead at the board                     18346s  26.4M/s ETA 261.7 min
+  [745/2513·244] FFFTTTEINSZWOZWOVI@36 edges=18 letters=18 loops=2 comp=2 span=54 central=T      20 stops → 0 valid 10-plug completions   18419s  26.4M/s ETA 260.4 min
