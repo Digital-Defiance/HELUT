@@ -312,10 +312,16 @@ e256-patched-rotor-check:
 	python3 Scripts/e256_patched_rotor_gate.py --check
 
 # Repaired round: separate encrypt and decrypt, matched to Python. Not fixture-v4.
-.PHONY: e256-repaired-round
+.PHONY: e256-repaired-round e256-v5 e256-v6
 
 e256-repaired-round:
 	python3 Scripts/e256_repaired_round.py
+
+e256-v5:
+	python3 Scripts/e256_v5.py
+
+e256-v6:
+	python3 Scripts/e256_v6.py
 
 # Pre-commit ritual for anything that touches a claim. macOS CI runs the same
 # determinism and C69 preservation gates; Linux CI retains the pure-Python lints.

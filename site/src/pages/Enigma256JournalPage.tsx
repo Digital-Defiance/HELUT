@@ -72,20 +72,57 @@ export function Enigma256JournalPage() {
         <div className="shell">
           <div className="section-head">
             <div className="kicker">Research · 24 September 2026</div>
-            <h2>The repaired machine</h2>
+            <h2>The 16-bit round is the research standard</h2>
             <p>
-              A 256-bit rotor round, checked as a datapath. Experimental. It does not replace
-              fixture-v4, and it is not a security claim.
+              Sixteen words, a field inverse, the public constant 1, and a multiplier chosen by
+              the key and the block. That round is the loaded profile,
+              E256/v6/gen0/c2abdbe580bad275838fc2650f81fdb14cb5ae3865cb74c5087f488ca51a35b9/fixture-v6.
+              The byte-walk receipt is historical.
+              This is not a security claim, and it is not the staged v3 fixture-v5 lane.
             </p>
           </div>
           <div className="timeline">
+            <article className="tl-item">
+              <div className="when">Current</div>
+              <h3>The 16-bit round is the research standard.</h3>
+              <div className="prose">
+                <p>
+                  Sixteen words of 16 bits. Each word is multiplied by a field element, inverted in
+                  GF(2^16), and XORed with the public constant 1, then shifted and mixed. Decrypt
+                  is the inverse path. The integral dies at round 4 on all 16 words. A one-round
+                  peel recovers the multiplier and misses from round 2 on. Twenty-five rounds is
+                  the width. <code>make e256-v6</code>. The 8-bit rotor tied the AES S-box.
+                  <code>enigma_256_core.v</code> is this round. The byte-walk core is historical.
+                </p>
+              </div>
+            </article>
+            <article className="tl-item">
+              <div className="when">Research</div>
+              <h3>E256-v6 puts the inverse in a 16-bit word.</h3>
+              <div className="prose">
+                <p>
+                  The research standard is the 16-bit round. v5 is the 8-bit step that tied the
+                  AES S-box. Thirty-two bytes are sixteen words. Each word is scaled, inverted in
+                  GF(2^16), and XORed with the public constant 1. There is no keyed mask. Decrypt
+                  is the inverse path. The experimental width is 25 rounds. All 16 words of the
+                  integral die at round 4 and stay dead. One round peels the multiplier. The same
+                  formula misses at 2 rounds and at 25. One input word stays degree 15. With 20
+                  input bits the degree is 19. A one-word difference at 25 rounds is at the floor
+                  of that test: each pair has its own output difference. An XOR grafted back on is
+                  an involution on 8 of 8 blocks. Changing the multiplier drops that to
+                  0 of 8. One key bit and a new block each reselect all 400 multipliers. Verilog
+                  matches Python on 2 blocks of 25 rounds.{' '}
+                  <code>make e256-v6</code>. Not a security claim, and not fixture-v4.
+                </p>
+              </div>
+            </article>
             <article className="tl-item">
               <div className="when">What changed</div>
               <h3>One wide round, encrypt and decrypt on different paths.</h3>
               <div className="prose">
                 <p>
-                  The live core still walks a byte through forward rotors, a center XOR, and the
-                  reverse rotors. The research module leaves that file alone. Its state is 32
+                  The loaded byte-walk walks a byte through forward rotors, a center XOR, and the
+                  reverse rotors. This research module left that file alone. Its state is 32
                   bytes. Each round XORs a 32-byte mask, runs the AES S-box on all 32 lanes,
                   shifts rows by <code>(0,1,3,4)</code>, and mixes the eight columns. Decrypt
                   runs the inverse mix, the inverse shift, the inverse S-box, and then the mask.
@@ -93,7 +130,7 @@ export function Enigma256JournalPage() {
                 </p>
                 <p>
                   The masks come from SHAKE-256 over the key and the block number, one mask per
-                  round. The experimental width is <strong>4 rounds</strong>. Verilog and a second
+                  round. The experimental width is <strong>14 rounds</strong>. Verilog and a second
                   Python model, written as eight columns, agree on the bytes.{' '}
                   <code>make e256-repaired-round</code>.
                 </p>
@@ -132,15 +169,50 @@ export function Enigma256JournalPage() {
               </div>
             </article>
             <article className="tl-item">
-              <div className="when">Pinned</div>
-              <h3>Eight rounds, then fourteen. Not started.</h3>
+              <div className="when">E256-v5</div>
+              <h3>The patched multi-byte rotor machine has its own research core.</h3>
               <div className="prose">
                 <p>
-                  Four rounds is the first width where that integral goes quiet. The linear
-                  single-trail figure there is <code>2^-75</code>. Eight rounds would stack a
-                  second copy of the four-round trail. Fourteen is the width a 256-bit block of
-                  this family uses in Rijndael. Both are pinned. Neither has been run. Fixture-v4
-                  remains the live profile.
+                  E256-v5 is a 32-byte state. Each round is a keyed rotor on every byte, a row
+                  shift of <code>(0,1,3,4)</code>, MixColumns, and a mask. Decrypt is the inverse
+                  path. A new block reselects the rotors. Four, eight, and fourteen rounds all
+                  round-trip. A mask change alone is still an involution at each of those widths,
+                  and replacing one rotor is not. The lane-0 integral dies at round 4. Verilog
+                  matches Python on 2 blocks of 14 rounds. This is not fixture-v4, and it is not
+                  the staged v3 fixture-v5 lane. <code>make e256-v5</code>.
+                </p>
+              </div>
+            </article>
+            <article className="tl-item">
+              <div className="when">Fourteen rounds</div>
+              <h3>The machine now runs fourteen. That is the Rijndael width for this block.</h3>
+              <div className="prose">
+                <p>
+                  Fourteen-round encrypt and decrypt agree in both Python models and in Verilog,
+                  16 blocks. The integral dies at round 4 on all 32 input lanes. After that the
+                  busiest round has 2 balanced bytes, never all 32. The identity S-box stays
+                  fully balanced for all 14 rounds.
+                </p>
+                <p>
+                  The same four-round certificate applies three times, and the two-round tail
+                  adds five active S-boxes: at least <strong>80</strong> on a single trail, at most{' '}
+                  <code>2^-480</code> differential and <code>2^-240</code> linear. An output bit’s
+                  algebraic degree is 7 after one round and 14 after three rounds inside a 16-bit
+                  window. The upper bound reaches 255 at round 3 and stays there. One known pair
+                  recovers a one-round mask and does not recover the first mask of a 14-round
+                  ciphertext. One exhibited bundle carried through all fourteen is still about
+                  2.97× its best trail, through 372 S-boxes, near <code>2^-2230</code>. That is
+                  one path, not the sum of every trail.
+                </p>
+                <p>
+                  Each round mask is now its own SHAKE-256 call, and a final whitening mask sits
+                  after the last MixColumns. The fifteen masks on the planted key are pairwise
+                  distinct. Stripping the last linear layer no longer shows the last S-box output.
+                  A one-byte guess recovers a two-round mask and recovers nothing from fourteen
+                  rounds. The sum of every trail, a full-state meet-in-the-middle, and the exact
+                  degree of one 256-bit output bit do not fit in this process. This fourteen-round
+                  machine is the 8-bit step. The loaded profile is the 16-bit round. The byte-walk
+                  receipt is historical.
                 </p>
               </div>
             </article>

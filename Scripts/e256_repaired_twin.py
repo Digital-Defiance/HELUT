@@ -21,8 +21,41 @@ INV = (
     (0x0D, 0x09, 0x0E, 0x0B),
     (0x0B, 0x0D, 0x09, 0x0E),
 )
-ROUNDS = 4
-DOMAIN = b"E256-R/schedule/v1"
+ROUNDS = 14
+DOMAIN = b"E256-R/schedule/v2"
+
+
+def mask_bytes(key: bytes, block_index: int, label: bytes) -> list[int]:
+    raw = hashlib.shake_256(DOMAIN + label + key + block_index.to_bytes(8, "big")).digest(32)
+    return list(raw)
+
+
+def masks_for(key: bytes, block_index: int) -> tuple[list[list[list[int]]], list[list[int]]]:
+    rounds = [columns_of(mask_bytes(key, block_index, b"R" + index.to_bytes(2, "big"))) for index in range(ROUNDS)]
+    white = columns_of(mask_bytes(key, block_index, b"W"))
+    return rounds, white
+
+
+def encrypt(key: bytes, block_index: int, plain: list[int]) -> list[int]:
+    rounds, white = masks_for(key, block_index)
+    columns = columns_of(plain)
+    for mask in rounds:
+        keyed = [[SBOX[columns[c][r] ^ mask[c][r]] for r in range(4)] for c in range(8)]
+        columns = apply_mix(shift(keyed, +1), MIX)
+    flat = flatten(columns)
+    cover = flatten(white)
+    return [a ^ b for a, b in zip(flat, cover)]
+
+
+def decrypt(key: bytes, block_index: int, cipher: list[int]) -> list[int]:
+    rounds, white = masks_for(key, block_index)
+    cover = flatten(white)
+    columns = columns_of([a ^ b for a, b in zip(cipher, cover)])
+    for mask in reversed(rounds):
+        mixed = apply_mix(columns, INV)
+        shifted = shift(mixed, -1)
+        columns = [[INV_SBOX[shifted[c][r]] ^ mask[c][r] for r in range(4)] for c in range(8)]
+    return flatten(columns)
 
 
 def mul(a: int, b: int) -> int:
@@ -88,28 +121,3 @@ def shift(columns: list[list[int]], sign: int) -> list[list[int]]:
             out[column][row] = columns[src][row]
     return out
 
-
-def masks_for(key: bytes, block_index: int) -> list[list[list[int]]]:
-    raw = hashlib.shake_256(DOMAIN + key + block_index.to_bytes(8, "big")).digest(ROUNDS * 32)
-    masks = []
-    for round_index in range(ROUNDS):
-        chunk = raw[round_index * 32 : (round_index + 1) * 32]
-        masks.append(columns_of(list(chunk)))
-    return masks
-
-
-def encrypt(key: bytes, block_index: int, plain: list[int]) -> list[int]:
-    columns = columns_of(plain)
-    for mask in masks_for(key, block_index):
-        keyed = [[SBOX[columns[c][r] ^ mask[c][r]] for r in range(4)] for c in range(8)]
-        columns = apply_mix(shift(keyed, +1), MIX)
-    return flatten(columns)
-
-
-def decrypt(key: bytes, block_index: int, cipher: list[int]) -> list[int]:
-    columns = columns_of(cipher)
-    for mask in reversed(masks_for(key, block_index)):
-        mixed = apply_mix(columns, INV)
-        shifted = shift(mixed, -1)
-        columns = [[INV_SBOX[shifted[c][r]] ^ mask[c][r] for r in range(4)] for c in range(8)]
-    return flatten(columns)

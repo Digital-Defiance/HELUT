@@ -25,7 +25,7 @@ FIXTURE_VVP="$(mktemp "${TMPDIR:-/tmp}/enigma256-v3-fixture.XXXXXX")"
 trap 'rm -f "$ZERO_VVP" "$FIXTURE_VVP"' EXIT
 
 iverilog -g2012 -I "$ROOT" -s enigma_256_v3_tb -o "$ZERO_VVP" \
-  "$ROOT/Hardware/RTL/Enigma256/enigma_256_core.v" \
+  "$ROOT/Fixtures/Historical/Enigma256/E256-v2-gen0-fa246e9cba9009a4799e5a81722a9b14e9a67293d9621b45985c5f3e620865d4-fixture-v4/enigma_256_core.v" \
   "$ROOT/Hardware/RTL/Enigma256/enigma_256_core_v3.v" \
   "$ROOT/Hardware/RTL/Enigma256/enigma_256_nlff_combo.v" \
   "$ROOT/Hardware/RTL/Enigma256/enigma_256_nlff_v3_combo.v" \
@@ -35,7 +35,7 @@ vvp "$ZERO_VVP"
 iverilog -g2012 -I "$ROOT" -s enigma_256_v3_fixture_tb \
   -P "enigma_256_v3_fixture_tb.FIXTURE=\"$FIXTURE\"" \
   -o "$FIXTURE_VVP" \
-  "$ROOT/Hardware/RTL/Enigma256/enigma_256_core.v" \
+  "$ROOT/Fixtures/Historical/Enigma256/E256-v2-gen0-fa246e9cba9009a4799e5a81722a9b14e9a67293d9621b45985c5f3e620865d4-fixture-v4/enigma_256_core.v" \
   "$ROOT/Hardware/RTL/Enigma256/enigma_256_core_v3.v" \
   "$ROOT/Hardware/Testbenches/Enigma256/enigma_256_v3_fixture_tb.v"
 vvp "$FIXTURE_VVP"

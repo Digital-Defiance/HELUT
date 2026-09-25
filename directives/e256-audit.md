@@ -10,7 +10,8 @@ The existing implementation, generated artifacts, fixtures, and receipts are one
 
 - **E256-v1/gen0...gen5**: historical only; all generation grading is contaminated by the singular LFSR transition. Gen5 is additionally invalidated by a formula-invariant `0.375` correlation to its linear tap.
 - **E256-v2/gen0**: the first clean candidate. It is a new suite with a corrected and independently checked transition, new KDF/transcript domains, immutable profile binding, new fixtures, new RTL module/artifact names, and no ciphertext compatibility with v1.
-  - **Live fixture-v4:** `E256/v2/gen0/fa246e9cba9009a4799e5a81722a9b14e9a67293d9621b45985c5f3e620865d4/fixture-v4`.
+  - **Live fixture-v6:** `E256/v6/gen0/c2abdbe580bad275838fc2650f81fdb14cb5ae3865cb74c5087f488ca51a35b9/fixture-v6`. Golden: `Fixtures/enigma256_golden`. Core: `Hardware/RTL/Enigma256/enigma_256_core.v`.
+  - **Historical fixture-v4 (not the loaded profile):** `E256/v2/gen0/fa246e9cba9009a4799e5a81722a9b14e9a67293d9621b45985c5f3e620865d4/fixture-v4`, kept unmodified under `Fixtures/Historical/Enigma256/`. Its 49/49 suite and formal 1/1 stay bound to that tuple.
   - **Historical fixture-v3 (non-loadable):** `Fixtures/Historical/Enigma256/E256-v2-gen0-2a9f54c70a1619805a911758158f1e2204b0fd96c35102a9db5f4575aeb40cb0-fixture-v3`.
 - **E256-v2/gen1+**: may exist only after deterministic candidate generation and train/holdout attacks. Candidate selection is allowed to return `NO ACCEPTABLE CANDIDATE`.
 
@@ -388,17 +389,63 @@ This is an **OPEN research receipt**. The rotor is not installed in E256-H.
 - The same integral stays balanced for **3** rounds on this rotor and on the AES twin, then breaks. That tie is the SPN bijection property.
 - **Not a replacement for the AES S-box.** No suite, profile, fixture, or C/H/N row moves.
 
-### E256 repaired machine — 4-round schedule (OPEN)
+### Enigma defect patch — wide rotor stack against the byte-local walk (OPEN)
+
+Measured by `Scripts/e256_enigma_defect_patch.py` on the E256-W candidate at 4 rounds. Not a cipher selection.
+
+- Byte-local mirrored center, one rotor from the same namespace: mask 0 is the identity, and **255/255** nonzero masks are fixed-point-free involutions of 128 two-cycles.
+- Wide rotor stack: encrypting the ciphertext does not return the plaintext. A ciphertext byte matches the plaintext byte on **3/1024** positions. A one-byte plaintext flip never changes only one output byte (**0/32**).
+- The related-position defect is still there if the rotors stay put. Two wide encryptions that differ by one XOR on a single mask byte have a quotient that is an involution on **16/16** full blocks. That is `F⁻¹(F(x) XOR d)` for the partial map up to the mask. Rounds after the mask cancel.
+- Changing one rotor id, and leaving the masks alone, drops that involution to **0/16**. A position change has to reselect a rotor. A new mask is not the patch.
+
+### E256-v5 — current research machine (OPEN)
+
+Research build, and the machine this journal now treats as current. It is not fixture-v4, and it is not the staged `E256/v3/gen0/.../fixture-v5` lane. `enigma_256_core.v` was not overwritten.
+
+- Code: `Scripts/e256_v5.py`, `Hardware/RTL/Research/E256H/e256v5_round.v`. Reproduce with `make e256-v5`.
+- State is 32 bytes. Each round applies a keyed affine rotor on every byte, shifts rows by `(0,1,3,4)`, mixes the eight columns, then XORs a mask. Decrypt is the inverse path. The block index is inside the rotor derivation, so a new block reselects the rotors.
+- Widths checked: **4**, **8**, and **14** rounds. Verilog is the 14-round width. No production round count is selected.
+- At each width, encrypt-twice does not return the plaintext, a one-byte plaintext flip changes all **32** output bytes, and the neighboring block index does not decrypt. A one-byte mask change with the rotors held fixed is an involution on **8/8** blocks. Replacing one rotor drops that to **0/8**.
+- Lane-0 integral at 14 rounds: **32, 32, 32, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1**. It dies at round **4**. All **32** input lanes die at round 4. After that the busiest round has **2** balanced bytes, never 32.
+- One key bit reselects **448/448** lanes. A planted schedule that ignores the key collides.
+- Four drawn rotors match the AES S-box spectrum: differential peak **4**, Walsh peak **32**, output-bit degree **7**. The keyed wrapper does not beat the fixed substitution on those three numbers.
+- A 16-bit rotor, the field inverse in GF(2^16), was measured in `Scripts/e256_v5_wide_rotor.py` and then installed as E256-v6, not inside this 8-bit round. The 8-bit inverse calibrates at differential **4/256**, degree **7**, coordinate Walsh **32**. The 16-bit inverse is differential **4/65536** (`2^-14`), degree **15**, coordinate Walsh **512** (`2^-7`). The AES box is `2^-6` and `2^-3` on those same ratios.
+- The schedule binds the block index into every rotor. Across blocks 0–15, all **16** rotor schedules differ. Block 0 and block 1 differ in **448/448** lanes. A planted schedule that ignores the block index collides, so the check is not vacuous. The fourteen rounds inside one block also use fourteen different rotor sets. Verilog matches Python on **2** blocks × **14** rounds.
+- Messages are padded with `0x80` and then zeros out to 32 bytes, including a whole extra block when the message already fills one. Lengths 0, 1, 15, 31, 32, and 33 round-trip at 4 rounds. A padded block is a multiple of 2 bytes, so a 16-bit rotor can take it.
+- No suite, profile, fixture, or C/H/N row moves. Fixture-v4 stays the live machine.
+
+### E256-v6 — 16-bit inverse round (OPEN)
+
+Research build. It does not replace E256-v5 as the current machine, and it does not touch fixture-v4.
+
+- Code: `Scripts/e256_v6.py`, `Hardware/RTL/Research/E256H/e256v6_round.v`. Reproduce with `make e256-v6`.
+- State is 32 bytes, read as **16** words of 16 bits. Each word is multiplied by a nonzero field element and inverted in GF(2^16) with polynomial `0x1100B`, then XORed with the public constant `1`. Rows shift by `(0,1,2,3)` across four columns. MixColumns uses the AES coefficients over that field. Decrypt is the inverse path. There is no keyed XOR mask. Schedule domain `E256-v6/schedule/v2`.
+- Four, eight, and twenty-five rounds round-trip. Encrypt-twice is not the plaintext. A one-word flip changes **16/16** words. Dependency reaches all 16 words by round 4. The neighboring block index does not decrypt. Twenty-five is the experimental Verilog width, not a selected round count.
+- The mix matrix has **69** nonzero minors over GF(2^16), so its branch number is **5**. With row shifts `(0,1,2,3)`, a four-round trail has at least **25** active inverses and a two-round trail has at least **5**. Each inverse has differential probability at most `2^-14` and correlation at most `2^-7`. Four rounds are therefore at most `2^-350` differential and correlation `2^-175`. Two rounds stop at `2^-70`, short of a 256-bit key. The first 24 rounds of the 25-round width are six such windows: **150** active inverses, differential `2^-2100`, correlation `2^-1050`. This is a single-trail bound. It does not sum every trail.
+- Word 0, taken through all **65536** values, is balanced on **16, 16, 16** words after rounds 1–3 and on **0** words from round 4 through round 25. All **16** input words die at round **4**. After that, no word is balanced again. Without the public constant the same word stayed balanced for all 25 rounds, because the pure inverse undoes itself.
+- One known pair recovers the first-round multiplier when the plaintext has a single nonzero word. The same formula misses at 2, 3, 4, and 25 rounds. A key with one flipped bit does not decrypt. The least-significant bit of output word 0, as a function of that one input word, has degree **15** after one, two, and three rounds. At three rounds, with a second word contributing, that bit has degree **15, 16, 17, 19** over **16, 17, 18, 20** input bits. The degree over all 256 input bits was not computed.
+- One word difference, over all **65536** values of that word: the rotor differential peak is **4/65536**. After one round the heaviest output difference occurs **4** times, across **32767** differences, in **4** words. After 2, 3, and 25 rounds the heaviest occurs **2** times and **32768** full-state differences are reached. Two is the floor of this test, because `F(x)` and `F(x XOR δ)` always share a difference. Hitting that floor means no second pair produced the same 32-byte difference. This sample cannot see a probability below `2^-15`.
+- An XOR grafted onto the round, with the multipliers held fixed, is an involution on **8/8** blocks. The installed round has no such XOR. Changing one multiplier drops the quotient to **0/8** at 4 rounds and at 25.
+- The schedule binds the key and the block index into every multiplier. Blocks 0–15 all differ. Block 0 and block 1 differ in **400/400** scales, and one key bit does the same. A planted schedule that ignores the block collides, and a planted schedule that ignores the key collides. Verilog checks the same **400/400** key-bit and block-index reselection on the scale table.
+- Verilog matches Python on **2** blocks × **25** rounds.
+- Messages padded with `0x80` and zeros to 32 bytes round-trip at lengths 0, 1, 15, 31, 32, and 33.
+- No suite, profile, fixture, or C/H/N row moves. v5 stays the current research machine.
+
+### E256 repaired machine — 14-round schedule (OPEN)
 
 This is an **OPEN functional receipt**. It is not a security result and not a promoted round count.
 
-- Code: `Scripts/e256_repaired_round.py`, `Hardware/RTL/Research/E256H/e256r_round.v`. Receipt: `logs/e256-repaired-machine.json`. Reproduce with `make e256-repaired-round`.
-- Schedule: SHAKE-256 over `E256-R/schedule/v1 || key || block_index` emits one 32-byte mask per round. Experimental width is **4** rounds. Byte dependency is complete at 3 (reach 4, 16, 32). The integral on this schedule stays balanced for 3 rounds and breaks at round 4: **32, 32, 32, 0, 0, 0, 0, 0**. The identity S-box stays balanced for all 8 rounds.
-- Four-round single-trail certificate on this MixColumns and these offsets: **69** minors, **0** zero, offsets `(0,1,3,4)` distinct, middle bundle cases meet 5, so the active-S-box lower bound is **25**. Measured S-box peaks are differential **4** and Walsh **32**, which is where `2^-150` and `2^-75` come from. Identity S-box peak is **256**, so that bound does not apply to it. With the column mix removed, byte reach at 4 rounds stays **1**. This is a single-trail bound, not a security result.
-- Two-round clustering on this same round, input difference `0x01` into byte 0: one exhibited output difference is reached by **64** trails. Their combined weight is **3040** against a best single trail of **1024** (about 2.97×). One round of the same mix has **0** outputs reached by more than one trail. The identity S-box has **1** two-round trail. Those 64 trails meet on one difference, so one continuation through rounds 3 and 4 carries all of them. That exhibited four-round bundle is still **64** trails, **53** S-boxes, and the same **2.97×** ratio: cluster about `2^-316.4`, best trail on that path `2^-318`. This is a lower bound on one differential. The sum over every other four-round trail was not counted.
-- Second model `Scripts/e256_repaired_twin.py` (column layout, does not import the first model) matched encrypt and decrypt on **32** blocks. Same-session code, not an external review. Verilog still matched the first model on 16 blocks × 4 rounds.
-- Identity S-box control: the 4-round map was recovered exactly on 16/16 held-out blocks. The real AES S-box missed that affine model on 16/16.
-- 256 keyed blocks decrypted back to the plaintext. The neighboring block index did not. Verilog matched Python on 16 blocks × 4 rounds, then decrypted.
+- Code: `Scripts/e256_repaired_round.py`, `Scripts/e256_repaired_twin.py`, `Hardware/RTL/Research/E256H/e256r_round.v`. Receipt: `logs/e256-repaired-machine.json`. Reproduce with `make e256-repaired-round`.
+- Schedule: each round mask is SHAKE-256 over `E256-R/schedule/v2 || R || round_index || key || block_index`. A separate final whitening mask (`|| W ||`) is XORed after the last MixColumns. Experimental width is **14** rounds. Byte dependency is complete at 3 (reach 4, 16, 32).
+- Integral on this schedule, lane 0: **32, 32, 32, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0**. All **32** input lanes die at round **4**. After that, the busiest round has **2** balanced bytes, never 32. The identity S-box stays balanced for all 14 rounds. Death at round 4 is the expected AES-like behavior, not a defect.
+- Four-round single-trail certificate: **69** minors, **0** zero, offsets `(0,1,3,4)` distinct, **25** active S-boxes per four rounds and **5** over the two-round tail. Three windows plus rounds 13–14 give a lower bound of **80** active S-boxes. S-box peaks differential **4** and Walsh **32**, so a single trail is at most `2^-480` differential and `2^-240` linear. Identity peak **256**. Mix removed: byte reach at 14 rounds stays **1**.
+- Algebraic degree: every AES S-box output bit has degree **7**. One input byte after one round still has degree **7**. Two input bytes still show degree **7** after two rounds, then **14** after three rounds inside that 16-bit window. The identity S-box stays degree **1**. The degree upper bound is 7, 49, then **255** from round 3 through round 14, so a low-degree interpolation does not apply at the 14-round width. The exact degree of a full 256-bit output bit was not computed.
+- One known plaintext-ciphertext pair recovers a one-round mask exactly. The same peel on a 14-round ciphertext does not recover the first mask.
+- Routes that still fit in one process, all on this schedule: the 15 masks (14 rounds plus whitening) are pairwise distinct on the planted key, so a slide of identical rounds has no place to land. Stripping MixColumns and ShiftRows from the ciphertext does not expose the last S-box output; removing the whitening first does. Guessing one secret byte of a 2-round mask recovers that byte (exactly one hit in 256). The same 256 guesses, peeling only two rounds off a 14-round ciphertext, recover nothing.
+- What this process cannot run: the sum of every 14-round trail, a meet-in-the-middle over the full 256-bit state, and the exact degree of one full-width output bit. Those are the routes left. They are not a security claim.
+- One two-round output difference is reached by **64** trails, weight **3040** against best trail **1024** (2.97×). Carried through 14 rounds that bundle is still 64 trails, **372** S-boxes, cluster about `2^-2230`. The sum over every other trail was not counted.
+- Every one of the 256 plaintext bits, every key bit, and every ciphertext bit was flipped on a planted block. Output bits changed in the ranges 101–150, 97–146, and 106–154. No key bit still decrypted. The first MixColumns column matches the published AES vector `d4 bf 5d 30` → `04 66 81 e5`. Eight counters produced eight distinct keystream blocks, and the neighboring counter did not decrypt.
+- The second model matched encrypt and decrypt on **256** blocks. Same-session code, not an external review. Verilog matched on **16** blocks × **14** rounds. Identity S-box recovered on 16/16 held-out blocks; the real S-box missed 16/16. 256 keyed blocks round-trip; the neighboring block index does not.
 - Fixture-v4 `enigma_256_core.v` is unchanged. No suite, profile, fixture, or C/H/N row moves.
 
 ### E256-v3/gen0 — fixture-v5 first core-freeze tranche (OPEN)

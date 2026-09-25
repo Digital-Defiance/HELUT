@@ -34,7 +34,9 @@ func enigma256ValidateGoldenPublication(
 
 func runEnigma256Golden() {
     let canonicalProfilePath = "Fixtures/enigma256_generation.json"
-    let canonicalOutputPath = "Fixtures/enigma256_golden"
+    let canonicalOutputPath = "Fixtures/Historical/Enigma256/E256-v2-gen0-fa246e9cba9009a4799e5a81722a9b14e9a67293d9621b45985c5f3e620865d4-fixture-v4/enigma256_golden"
+    let loadedGoldenPath = "Fixtures/enigma256_golden"
+    let loadedCompatibilityKey = "E256/v6/gen0/c2abdbe580bad275838fc2650f81fdb14cb5ae3865cb74c5087f488ca51a35b9/fixture-v6"
     let profilePath = stringFlag("--enigma256-genes") ?? canonicalProfilePath
     let outDir = stringFlag("--enigma256-out")
         ?? "build/hardware/Enigma256/enigma256_golden"
@@ -44,6 +46,15 @@ func runEnigma256Golden() {
         let canonicalProfile = try Enigma256Generation.load(
             from: URL(fileURLWithPath: canonicalProfilePath)
         )
+        let loadedPath = URL(fileURLWithPath: loadedGoldenPath, isDirectory: true)
+            .standardizedFileURL.resolvingSymlinksInPath().path
+        let requestedPath = URL(fileURLWithPath: outDir, isDirectory: true)
+            .standardizedFileURL.resolvingSymlinksInPath().path
+        if requestedPath == loadedPath && profile.compatibilityKey != loadedCompatibilityKey {
+            fatalError(
+                "refusing to overwrite the loaded 16-bit golden \(loadedCompatibilityKey) with \(profile.compatibilityKey)"
+            )
+        }
         try enigma256ValidateGoldenPublication(
             suppliedCompatibilityKey: profile.compatibilityKey,
             outputURL: URL(fileURLWithPath: outDir, isDirectory: true),

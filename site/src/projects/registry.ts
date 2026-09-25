@@ -65,19 +65,19 @@ export const projects: Project[] = [
   {
     slug: 'e256',
     title: 'Enigma256 · E256',
-    subtitle: 'Base-256 polymorphic stream cipher — SoftBus on Apple Silicon',
+    subtitle: '16-bit research round — from the M4 defects to a 256-bit inverse',
     pillar: 'schneier',
     phase: 'III',
     status: 'active',
-    kicker: 'Blue Team · E256/v2/gen0 · fixture-v4',
+    kicker: 'Research standard · 16-bit · 25 rounds',
     summary:
-      'The experimental fixture-v4 profile uses the conjugated-XOR center A_i^-1(A_i(x) XOR k_i). The host derives and transports payload, centerMask, and absoluteByteCounter; RTL validates the counter and has no HMAC. A day key supplies a plugboard plus 16 forward/reverse rotor pools, with no reflector. The active slot has 9 unique tables, a 2,304-byte burst, and 10 accesses because the plugboard is used twice. This is bounded functional evidence, not a production-security claim.',
+      'The loaded profile is sixteen 16-bit words. Each word is multiplied by a key- and block-selected field element, inverted in GF(2^16), and XORed with the public constant 1, then shifted and mixed. Decrypt is the inverse path. There is no reflector and no keyed XOR mask. The integral dies at round 4. A one-round peel recovers the multiplier and misses from round 2 on. This is not a security claim and not for real data.',
     stakes: [
-      'Live tuple: E256/v2/gen0/fa246e9cba9009a4799e5a81722a9b14e9a67293d9621b45985c5f3e620865d4/fixture-v4',
-      'KAT: 1,024 bytes / 9 tables / 10 traces / 25 artifacts; equality 260/65536 (z=0.250); formal 1/1; suite 49/49; receipt logs/e256-v2-gen0-fixture-v4-validation.json',
-      'TensorLUT: 366-LUT6 scramble cone with independent center_mask; blue_hold (final_crypto -291592.781250, final_nonbinary 1217) is bounded optimizer failure only—not HMAC or the full core',
-      'Experimental and not for real data; E256-003 OPEN pending human acceptance. No IND-CPA, HMAC-security, external-cryptanalysis, security-level, or work-factor claim',
-      'Historical gen5 and C39 cones remain quarantined evidence, not the live fixture-v4 datapath',
+      'Research round: polynomial 0x1100B, public constant 1, shifts (0,1,2,3), branch number 5, schedule E256-v6/schedule/v2, 25 rounds. make e256-v6. Verilog matches Python on 2 blocks.',
+      'Measured: integral dies at round 4 on all 16 words. Peel hits at 1 round and misses at 2, 3, 4, and 25. One word stays degree 15; 20 input bits reach degree 19 at 3 rounds. A one-word difference is at the floor of that test from round 2 on.',
+      'Loaded profile: E256/v6/gen0/c2abdbe580bad275838fc2650f81fdb14cb5ae3865cb74c5087f488ca51a35b9/fixture-v6. Golden KAT is Fixtures/enigma256_golden. The byte-walk receipt stays historical: E256/v2/gen0/fa246e9c…/fixture-v4, suite 49/49, formal 1/1.',
+      'Not computed: the sum of every trail, and the degree of one output bit over all 256 inputs. No IND-CPA, HMAC-security, external-cryptanalysis, security-level, or work-factor claim. E256-003 remains OPEN.',
+      'Historical gen5 and C39 cones remain quarantined evidence, not the 16-bit round and not the loaded fixture-v4 datapath',
     ],
     pages: [
       {
@@ -90,7 +90,7 @@ export const projects: Project[] = [
         path: '/projects/e256/design',
         label: 'Architecture & field',
         kind: 'lab',
-        blurb: 'Planes, host schedule, fixture receipt, Red/Blue pressure',
+        blurb: 'From M4 to the loaded 16-bit round',
       },
       {
         path: '/projects/e256/journal',
@@ -242,7 +242,7 @@ export const projects: Project[] = [
         path: '/projects/e256',
         label: 'Enigma256',
         kind: 'lab',
-        blurb: 'Experimental fixture-v4 E256 profile · E256-003 OPEN pending human acceptance',
+        blurb: 'Loaded 16-bit round',
       },
     ],
     relatedDocs: ['Enigma256.md'],

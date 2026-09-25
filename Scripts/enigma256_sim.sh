@@ -6,8 +6,11 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
-OUT="${1:-Fixtures/enigma256_golden}"
-PROFILE="${2:-${E256_PROFILE_PATH:-Fixtures/enigma256_generation.json}}"
+# The loaded golden is the 16-bit profile. This sim is the byte-walk receipt.
+HIST="Fixtures/Historical/Enigma256/E256-v2-gen0-fa246e9cba9009a4799e5a81722a9b14e9a67293d9621b45985c5f3e620865d4-fixture-v4"
+OUT="${1:-$HIST/enigma256_golden}"
+PROFILE="${2:-${E256_PROFILE_PATH:-$HIST/enigma256_generation.json}}"
+CORE="$ROOT/$HIST/enigma_256_core.v"
 if [[ "${E256_REUSE_BUNDLE:-0}" != "1" ]]; then
   swift run helut --enigma256-golden --enigma256-genes "$PROFILE" --enigma256-out "$OUT"
 elif [[ ! -f "$OUT/manifest.json" ]]; then
@@ -15,10 +18,10 @@ elif [[ ! -f "$OUT/manifest.json" ]]; then
   exit 2
 fi
 iverilog -g2012 -I "$OUT" -I "$ROOT" -o /tmp/enigma256.vvp \
-  "$ROOT/Hardware/RTL/Enigma256/enigma_256_core.v" \
+  "$CORE" \
   "$ROOT/Hardware/Testbenches/Enigma256/enigma_256_tb.v"
 vvp /tmp/enigma256.vvp +HEXDIR="$OUT"
 iverilog -g2012 -I "$OUT" -I "$ROOT" -o /tmp/enigma256_center.vvp \
-  "$ROOT/Hardware/RTL/Enigma256/enigma_256_core.v" \
+  "$CORE" \
   "$ROOT/Hardware/Testbenches/Enigma256/enigma_256_center_tb.v"
 vvp /tmp/enigma256_center.vvp

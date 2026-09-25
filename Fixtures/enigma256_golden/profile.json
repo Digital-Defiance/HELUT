@@ -1,0 +1,18 @@
+{
+  "family": "E256",
+  "suite_version": 6,
+  "generation": 0,
+  "fixture_schema_version": 6,
+  "canonical_profile": "E256|6|0|6|gf2_16_mul_inv_xor1_shift_mix|inverse_decrypt|poly_0x1100B|affine_0x1|shake256|E256-v6/schedule/v2|zero_scale_becomes_1|shifts_0.1.2.3|mix_branch_5|rounds_25|pad_iso9797_1_method2",
+  "profile_sha256": "c2abdbe580bad275838fc2650f81fdb14cb5ae3865cb74c5087f488ca51a35b9",
+  "compatibility_key": "E256/v6/gen0/c2abdbe580bad275838fc2650f81fdb14cb5ae3865cb74c5087f488ca51a35b9/fixture-v6",
+  "rounds": 25,
+  "block_bytes": 32,
+  "word_bits": 16,
+  "polynomial": "0x1100B",
+  "affine": "0x1",
+  "schedule_domain": "E256-v6/schedule/v2",
+  "core": "enigma_256_core",
+  "research_round": "Hardware/RTL/Research/E256H/e256v6_round.v",
+  "not_a_security_claim": true
+}

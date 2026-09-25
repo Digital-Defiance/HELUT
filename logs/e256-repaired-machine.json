@@ -1,21 +1,75 @@
 {
   "schema": "E256-REPAIRED-MACHINE-1",
   "status": "OPEN_FUNCTIONAL",
-  "frozen_rounds": 4,
+  "frozen_rounds": 14,
   "trail": {
     "minors_evaluated": 69,
     "zero_minors": 0,
     "offsets_distinct": true,
     "bundle_cases_meet_five": true,
-    "active_sboxes_lower_bound": 25,
+    "active_sboxes_lower_bound_per_four_rounds": 25,
+    "four_round_windows_inside_width": 3,
+    "two_round_tail_active_sboxes": 5,
+    "active_sboxes_lower_bound": 80,
     "differential_peak": 4,
     "walsh_peak": 32,
-    "single_trail_differential_log2_upper": -150,
-    "single_trail_linear_log2_upper": -75,
+    "single_trail_differential_log2_upper": -480,
+    "single_trail_linear_log2_upper": -240,
     "identity_differential_peak": 256,
     "identity_bound_applies": false,
     "mix_off_zero_minors": 54,
     "mix_off_byte_reach_at_frozen_rounds": 1
+  },
+  "degree": {
+    "sbox_bit_degree": 7,
+    "round1_degree": 7,
+    "round2_degree_in_16_input_bits": 7,
+    "round3_degree_in_16_input_bits": 14,
+    "identity_round2_degree": 1,
+    "upper_bound_by_round": [
+      7,
+      49,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255,
+      255
+    ],
+    "saturates_at_round": 3
+  },
+  "routes": {
+    "masks_distinct": true,
+    "free_strip_blocked": true,
+    "two_round_byte_hits": [
+      8
+    ],
+    "fourteen_round_peel_hits": []
+  },
+  "stress": {
+    "keyed_blocks": 64,
+    "plaintext_bit_flips": "112..149",
+    "wrong_key_rejects": 64,
+    "involution_hits": 0,
+    "ciphertext_byte_counts": "2..18",
+    "corners": 2
+  },
+  "avalanche": {
+    "mixcolumns_kat": true,
+    "plaintext_bits": "101..150",
+    "key_bits": "97..146",
+    "decrypt_bits": "106..154",
+    "counters": 8
+  },
+  "mask_recovery": {
+    "one_round_recovered": true,
+    "full_width_peel_recovered_first_mask": false
   },
   "cluster": {
     "enumerated_rounds": 2,
@@ -27,26 +81,55 @@
     "two_round_best_trail_weight": 1024,
     "two_round_ratio": 2.96875,
     "identity_two_round_trails": 1,
-    "four_round_carried_trails": 64,
-    "four_round_continuation_sboxes": 48,
-    "four_round_sboxes_on_exhibited_trail": 53,
-    "four_round_cluster_weight": 240853614043363586284373609021440,
-    "four_round_best_trail_weight": 81129638414606681695789005144064,
-    "four_round_ratio_lower_bound": 2.96875,
-    "four_round_cluster_log2_upper_note": "ratio only; not the full differential sum"
+    "carried_rounds": 14,
+    "carried_trails": 64,
+    "carried_sboxes": 372,
+    "carried_cluster_log2": -2230.4301443916693
   },
-  "twin_blocks": 32,
+  "twin_blocks": 256,
   "integral_balanced_by_round": [
     32,
     32,
     32,
+    1,
+    0,
+    1,
+    1,
+    0,
+    0,
     0,
     0,
     0,
     0,
     0
   ],
+  "integral_lanes": {
+    "lanes": 32,
+    "death": 4,
+    "max_balanced_by_round": [
+      32,
+      32,
+      32,
+      1,
+      1,
+      1,
+      2,
+      1,
+      1,
+      1,
+      1,
+      2,
+      1,
+      1
+    ]
+  },
   "identity_integral_balanced_by_round": [
+    32,
+    32,
+    32,
+    32,
+    32,
+    32,
     32,
     32,
     32,
@@ -69,17 +152,17 @@
   "single_flip_worst_rounds_1_to_8": [
     4,
     16,
-    31,
+    30,
+    30,
     29,
     30,
-    31,
-    30,
-    30
+    29,
+    31
   ],
   "identity_rotor_recovered": 16,
   "real_rotor_affine_misses": 16,
   "machine_round_trips": 256,
   "hardware_blocks": 16,
-  "schedule": "SHAKE-256(E256-R/schedule/v1 || key || block_index_be64)",
+  "schedule": "SHAKE-256 per round (E256-R/schedule/v2 || R || round_be16 || key || block_be64) plus a final whitening mask",
   "note": "Experimental width and functional checks. Not a security result."
 }

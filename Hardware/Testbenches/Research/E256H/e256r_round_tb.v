@@ -4,8 +4,8 @@
 
 module e256r_round_tb;
   reg [7:0] nmem [0:1];
-  reg [7:0] mem [0:4607];
-  reg [255:0] st, mk, want, plain;
+  reg [7:0] mem [0:15871];
+  reg [255:0] st, mk, want, plain, white, covered;
   wire [255:0] cipher, back;
   integer i, k, r, n, rounds, base, fail, steps;
 
@@ -37,6 +37,14 @@ module e256r_round_tb;
         st = cipher;
         steps = steps + 1;
       end
+      for (i = 0; i < 32; i = i + 1) begin
+        white[8*i +: 8] = mem[base + 32 + 2*rounds*32 + i];
+        covered[8*i +: 8] = mem[base + 32 + 2*rounds*32 + 32 + i];
+      end
+      if ((st ^ white) !== covered) begin
+        $display("FAIL whitening block %0d", k);
+        fail = fail + 1;
+      end
       for (r = rounds - 1; r >= 0; r = r - 1) begin
         for (i = 0; i < 32; i = i + 1)
           mk[8*i +: 8] = mem[base + 32 + r*32 + i];
@@ -47,7 +55,7 @@ module e256r_round_tb;
         $display("FAIL decrypt block %0d", k);
         fail = fail + 1;
       end
-      base = base + 32 * (1 + 2 * rounds);
+      base = base + 32 * (3 + 2 * rounds);
     end
     if (fail) $fatal(1);
     $display("PASS verilog %0d blocks x %0d rounds match python and decrypt", n, rounds);
