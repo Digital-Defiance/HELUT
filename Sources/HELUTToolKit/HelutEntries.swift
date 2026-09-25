@@ -328,6 +328,11 @@ public enum HelutBombeCLI {
         exit(0)
     }
 
+    if CommandLine.arguments.contains("--ostwald-locked-plugs") {
+        runOstwaldLockedPlugs()
+        exit(0)
+    }
+
     if CommandLine.arguments.contains("--ostwald-all-settings") {
         runOstwaldAllSettings()
         exit(0)

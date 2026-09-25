@@ -1378,11 +1378,22 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
         // Shorter menus under --bombe-confirm ≥2 may clear the linguistic bar by chance
         // (menu 627); they must wait for an independent partner on the same shell.
         if PostBombeDiscriminator.isBreak(best) {
-            if menu.constraintCount >= 16 {
+            if PostBombeDiscriminator.breaksOnPrefixOnly(best) {
+                let end = best.prefix?.end ?? 0
+                print(String(
+                    format: "  head letters 0..%d clears; whole message IC %.3f tail %.3f does not. Continuing.",
+                    end, best.ic, best.tailScore
+                ))
+                if config.sweepMiddleRing {
+                    print("  Middle ring was swept. This head is not a recovered plaintext.")
+                } else {
+                    print("  Middle ring was pinned. Re-run this menu with --bombe-middle-ring; this sweep continues.")
+                }
+                fflush(stdout)
+            } else if menu.constraintCount >= 16 {
                 breakFound = best
                 break
-            }
-            if config.confirmMenus > 1 {
+            } else if config.confirmMenus > 1 {
                 print(String(format: "  %@ clears the bar at %d letters — holding for "
                              + "≥%d-menu agreement before claiming a break",
                              label, menu.constraintCount, config.confirmMenus))
@@ -1448,7 +1459,7 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
 
     if let winner = breakFound {
         flushQuarantine(note: "break claimed; soft-band peers retained")
-        PostBombeDiscriminator.announceBreak(winner)
+        PostBombeDiscriminator.announceBreak(winner, middleRingSwept: config.sweepMiddleRing)
         return
     }
 
@@ -1499,12 +1510,13 @@ func runWelchmanBombe(config: BombeSweepConfig = BombeSweepConfig()) {
                 )
             )
         }
-        guard PostBombeDiscriminator.isBreak(best) else { continue }
+        guard PostBombeDiscriminator.isBreak(best),
+              !PostBombeDiscriminator.breaksOnPrefixOnly(best) else { continue }
         print()
         print("confirmed shell also clears the linguistic bar "
             + "(\(hit.independentCount) independent menus)")
         flushQuarantine(note: "confirmed break")
-        PostBombeDiscriminator.announceBreak(best)
+        PostBombeDiscriminator.announceBreak(best, middleRingSwept: config.sweepMiddleRing)
         return
     }
     flushQuarantine(note: "confirm pass complete")

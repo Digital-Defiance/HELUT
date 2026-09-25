@@ -205,3 +205,114 @@ quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → 
     shell C/gamma/VI-IV-I/AAAD pos ZXXY plugs 10  → logs/welchman-physical.jsonl
   [61/73·42] FUNKSPRUCHUEBUNG@5 edges=16 letters=17 loops=1 comp=2 span=21 central=U      98 stops → 5 physical, best IC 0.038 tail -5.082   19729s  34.0M/s ETA  93.9 min
     shell C/beta/V-I-VI/AAAM pos BIJV plugs 8  → logs/welchman-physical.jsonl
+  [62/73·43] SCHULFUNKSPRUCHX@1 edges=16 letters=17 loops=1 comp=2 span=17 central=S      84 stops → 7 physical, best IC 0.049 tail -4.387   20078s  34.2M/s ETA  85.6 min
+    shell C/beta/VI-I-II/AAAJ pos MWEW plugs 9  → logs/welchman-physical.jsonl
+
+total raw stops: 175946936 over 686648481792 settings (34.2M/s mean)
+survived the 10-plug sieve: 167
+quarantine: wrote 15 near-miss(es) → logs/quarantine_candidates.json (break claimed; soft-band peers retained)
+  escalate: --hybrid --hybrid-stochastic --hybrid-quarantine logs/quarantine_candidates.json
+
+******************************************************************************
+***  BREAK FOUND  ***
+******************************************************************************
+  menu        SCHULFUNKSPRUCHX@1 edges=16 letters=17 loops=1 comp=2 span=17 central=S
+  UKW         C
+  Greek       beta
+  wheel order VI-I-II
+  rings       AAAJ
+  position    MWEW
+  stecker     AP BG CO DK EU HJ IT MR VY (9 pairs)
+  IC          0.049 (floor 0.055)
+  tail        -4.387 vs German -2.847 / noise -5.382
+  head        letters 0..32 — IC 0.058, tail -3.416. The decrypt is German to there and noise after.
+  Likely a middle-wheel turnover past the crib, which the pinned middle
+  ring cannot represent. Re-run this shell sweeping the middle ring to
+  recover the remainder of the message.
+
+  ESCHULFUNKSPRUCHXHEHQDASDIDESSJUQMTWMQHIBEMDEUOLFULRIPLCHHSIUZZSQAHPNZTE
+******************************************************************************
+=== Phase 71 resume 2026-09-25T03:03:44Z --bombe-from 63 (menu 62 finished; head-only hits continue) ===
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030680_thetis_register_menus.json (73 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 73 of 73
+min menu constraints: 16
+resuming from menu 63 of 73 (skipping 62 already done)
+running 11 menus, highest deduction power first:
+  [63] FUNKSPRUCHUEBUNG@0 edges=16 letters=17 loops=1 comp=2 span=16 central=U
+  [64] VONFUNKLEHRGANGX@5 edges=16 letters=18 loops=1 comp=3 span=21 central=E
+  [65] PRAKTIKUMFUNKXXX@5 edges=16 letters=18 loops=1 comp=3 span=21 central=K
+  [66] VONFUNKLEHRGANGX@3 edges=16 letters=18 loops=1 comp=3 span=19 central=E
+  [67] SCHULFUNKSPRUCHX@2 edges=16 letters=18 loops=1 comp=3 span=18 central=S
+  [68] FUNKSPRUCHUEBUNG@2 edges=16 letters=18 loops=1 comp=3 span=18 central=U
+  [69] VONFUNKLEHRGANGX@1 edges=16 letters=18 loops=1 comp=3 span=17 central=E
+  [70] VONFUNKLEHRGANGX@0 edges=16 letters=18 loops=1 comp=3 span=16 central=E
+  [71] AUSBILDUNGXFUNKX@5 edges=16 letters=18 loops=0 comp=2 span=21 central=K
+  [72] FUNKSPRUCHUEBUNG@3 edges=16 letters=18 loops=0 comp=2 span=19 central=U
+  [73] AUSBILDUNGXFUNKX@0 edges=16 letters=18 loops=0 comp=2 span=16 central=J
+shells/menu: 34944 (336 WO × 2 Greek × 2 UKW × 1 mid-ring × 26 right-ring) → 1.6e+10 settings
+kernel sieve: ≤10 plugs
+GPU pipeline depth: 4 shells in flight
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+right ring swept: every right-wheel turnover phase covered
+residual gap: middle ring pinned A, so keys whose middle wheel turns over inside a 21-letter span (~4% for 1 notch, ~8% for 2) are not covered — --bombe-middle-ring closes it
+ETA floor (~50M/s): 58.6 min
+
+quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → logs/quarantine_candidates.json
+  [63/73·1] FUNKSPRUCHUEBUNG@0 edges=16 letters=17 loops=1 comp=2 span=16 central=U     747 stops → 6 physical, best IC 0.054 tail -4.834     475s  33.6M/s ETA  79.1 min
+    shell B/beta/VIII-II-VI/AAAJ pos HEJF plugs 7  → logs/welchman-physical.jsonl
+  [64/73·2] VONFUNKLEHRGANGX@5 edges=16 letters=18 loops=1 comp=3 span=21 central=E     533 stops → 3 physical, best IC 0.038 tail -4.611    1117s  28.6M/s ETA  83.8 min
+    shell C/beta/III-VI-I/AAAD pos WRPZ plugs 10  → logs/welchman-physical.jsonl
+  [65/73·3] PRAKTIKUMFUNKXXX@5 edges=16 letters=18 loops=1 comp=3 span=21 central=K    2235 stops → 5 physical, best IC 0.041 tail -4.600    1490s  32.2M/s ETA  66.2 min
+    shell C/beta/I-III-VII/AAAC pos ONMX plugs 10  → logs/welchman-physical.jsonl
+=== ABORTED 2026-09-25T03:32:08Z after menu 65. Menus 63–65 finished; 66 was in flight. Restarting --bombe-from 66 ===
+=== Phase 71 resume 2026-09-25T03:32:41Z --bombe-from 66 ===
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030680_thetis_register_menus.json (73 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 73 of 73
+min menu constraints: 16
+resuming from menu 66 of 73 (skipping 65 already done)
+running 8 menus, highest deduction power first:
+  [66] VONFUNKLEHRGANGX@3 edges=16 letters=18 loops=1 comp=3 span=19 central=E
+  [67] SCHULFUNKSPRUCHX@2 edges=16 letters=18 loops=1 comp=3 span=18 central=S
+  [68] FUNKSPRUCHUEBUNG@2 edges=16 letters=18 loops=1 comp=3 span=18 central=U
+  [69] VONFUNKLEHRGANGX@1 edges=16 letters=18 loops=1 comp=3 span=17 central=E
+  [70] VONFUNKLEHRGANGX@0 edges=16 letters=18 loops=1 comp=3 span=16 central=E
+  [71] AUSBILDUNGXFUNKX@5 edges=16 letters=18 loops=0 comp=2 span=21 central=K
+  [72] FUNKSPRUCHUEBUNG@3 edges=16 letters=18 loops=0 comp=2 span=19 central=U
+  [73] AUSBILDUNGXFUNKX@0 edges=16 letters=18 loops=0 comp=2 span=16 central=J
+shells/menu: 34944 (336 WO × 2 Greek × 2 UKW × 1 mid-ring × 26 right-ring) → 1.6e+10 settings
+kernel sieve: ≤10 plugs
+GPU pipeline depth: 4 shells in flight
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+right ring swept: every right-wheel turnover phase covered
+residual gap: middle ring pinned A, so keys whose middle wheel turns over inside a 21-letter span (~4% for 1 notch, ~8% for 2) are not covered — --bombe-middle-ring closes it
+ETA floor (~50M/s): 42.6 min
+
+quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → logs/quarantine_candidates.json
+  [66/73·1] VONFUNKLEHRGANGX@3 edges=16 letters=18 loops=1 comp=3 span=19 central=E 4485411 stops → 0 scorable completions     616s  25.9M/s ETA  71.8 min
+  [67/73·2] SCHULFUNKSPRUCHX@2 edges=16 letters=18 loops=1 comp=3 span=18 central=S     149 stops → 2 physical, best IC 0.032 tail -4.948     997s  32.0M/s ETA  49.9 min
+    shell C/beta/VI-III-I/AAAL pos XOHM plugs 10  → logs/welchman-physical.jsonl
+  [68/73·3] FUNKSPRUCHUEBUNG@2 edges=16 letters=18 loops=1 comp=3 span=18 central=U    1898 stops → 4 physical, best IC 0.046 tail -5.256    1500s  31.9M/s ETA  41.7 min
+    shell B/gamma/VII-IV-V/AAAY pos PHHU plugs 10  → logs/welchman-physical.jsonl
+  [69/73·4] VONFUNKLEHRGANGX@1 edges=16 letters=18 loops=1 comp=3 span=17 central=E  178812 stops → 0 scorable completions    2093s  30.5M/s ETA  34.9 min
+  [70/73·5] VONFUNKLEHRGANGX@0 edges=16 letters=18 loops=1 comp=3 span=16 central=E   11986 stops → 2 physical, best IC 0.034 tail -5.024    2802s  28.5M/s ETA  28.0 min
+    shell B/beta/V-VI-I/AAAO pos PXXP plugs 10  → logs/welchman-physical.jsonl
+  [71/73·6] AUSBILDUNGXFUNKX@5 edges=16 letters=18 loops=0 comp=2 span=21 central=K     282 stops → 4 physical, best IC 0.035 tail -4.982    3461s  27.7M/s ETA  19.2 min
+    shell C/beta/I-VIII-II/AAAP pos UCJK plugs 10  → logs/welchman-physical.jsonl
+  [72/73·7] FUNKSPRUCHUEBUNG@3 edges=16 letters=18 loops=0 comp=2 span=19 central=U  606330 stops → 25 physical, best IC 0.038 tail -4.733    4118s  27.1M/s ETA   9.8 min
+    shell C/beta/I-VII-II/AAAK pos UXEP plugs 10  → logs/welchman-physical.jsonl
+  [73/73·8] AUSBILDUNGXFUNKX@0 edges=16 letters=18 loops=0 comp=2 span=16 central=J      82 stops → 3 physical, best IC 0.038 tail -4.629    5217s  24.5M/s ETA   0.0 min
+    shell B/beta/II-VII-V/AAAW pos ELHS plugs 10  → logs/welchman-physical.jsonl
+
+total raw stops: 5284950 over 127748554752 settings (24.5M/s mean)
+survived the 10-plug sieve: 40
+best physical candidate: IC 0.038 tail -4.629 (IC floor 0.055 / threshold -3.600) — below the bar, so no break claimed
+  AUSBILDUNGXFUNKX@0 edges=16 letters=18 loops=0 comp=2 span=16 central=J
+  UKW B Greek beta WO II-VII-V pos ELHS
+  AUSBILDUNGXFUNKXRRTMUSXYXLSKPEDRUILNQAZVZSNAPMOKDXIFDJPNFJFAHCVSRSIAQTTE
+quarantine: wrote 3 near-miss(es) → logs/quarantine_candidates.json (solo pass complete)
+  escalate: --hybrid --hybrid-stochastic --hybrid-quarantine logs/quarantine_candidates.json
+=== exit 0 2026-09-25T04:59:39Z ===

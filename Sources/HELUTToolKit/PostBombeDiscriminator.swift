@@ -503,7 +503,9 @@ enum PostBombeDiscriminator {
     }
 
     /// The banner. Printed once, when a candidate clears every stage.
-    static func announceBreak(_ winner: DiscriminatedCandidate) {
+    /// `middleRingSwept` is true when this run already unpinned the middle ring.
+    /// The turnover sentence is only for a pinned-A sweep.
+    static func announceBreak(_ winner: DiscriminatedCandidate, middleRingSwept: Bool = false) {
         guard isBreak(winner) else {
             print("*** BREAK WITHHELD — final trigram/IC/crib assessment did not pass ***")
             return
@@ -527,9 +529,14 @@ enum PostBombeDiscriminator {
             print(String(format: "  head        letters 0..%d — IC %.3f, tail %.3f. "
                          + "The decrypt is German to there and noise after.",
                          prefix.end, prefix.ic, prefix.tailScore))
-            print("  Likely a middle-wheel turnover past the crib, which the pinned middle")
-            print("  ring cannot represent. Re-run this shell sweeping the middle ring to")
-            print("  recover the remainder of the message.")
+            if middleRingSwept {
+                print("  The middle ring was already swept. This head is still the best stop.")
+                print("  The rest of the message does not read. This is not a recovered plaintext.")
+            } else {
+                print("  Likely a middle-wheel turnover past the crib, which the pinned middle")
+                print("  ring cannot represent. Re-run this shell sweeping the middle ring to")
+                print("  recover the remainder of the message.")
+            }
         }
         print()
         print("  \(winner.plaintext)")

@@ -75,7 +75,7 @@ The operational ledger is `BREAK_P1030680.md`; the public claim freeze is `direc
   Training / collapse / weather / RIGA priors                  0 survivors under 80% rigor (ceiling $\sim$`<!-- -->`{=html}60--69% = coincidence)
   Exact $\ge$`<!-- -->`{=html}16 catalog $\times$ rings AAAA   Clean negative
   Curated exact / fuzzed top-40 $\times$ right rings           Clean negative
-  UEBUNG / Thetis-register arms                                AAAA clean negative; register rings **running from 14/73** (Phase 68)
+  UEBUNG / Thetis-register arms                                AAAA clean negative; register rings **done, 73/73, no break** (Phase 71). Menus 66--73 best IC 0.038, tail $-4.629$. Menu 62 head misses the whole message. Three `FUNKSPRUCHUEBUNG` quarantine rows are prefix hits; whole-message tails $-5.256$, $-4.534$, $-4.733$ miss the soft band. Next: catalog 418--2513 under VIII-fast (42 of 336 orders)
   Soft-tail UEBUNG quarantine escalate                         55 seeds; Hybrid 0 survivors
   Regenbogen / Hannibal legacy Welchman slices                 Not BREAK where tested under AAAA/right-ring scope; soft escalate 0 survivors. This does not close correction-aware operational Futures
   Own-orders / filler $\times$ AAAA                            Own: 0 physical; filler below soft --- no rings
