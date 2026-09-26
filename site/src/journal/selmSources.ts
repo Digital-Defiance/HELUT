@@ -66,10 +66,65 @@ export const selmSchluesselMBauer: JournalAttachment = {
     'Scan recovered by Wenselaers, 24 September 2026. She reports that it reproduces M.Dv.Nr. 32/1 as Appendix E (pp. 299–313), a May 1945 Hydra key sheet as Appendix F (p. 314), and Tafel D, Kennwort Quelle, as Appendix G (p. 315). Not applied to VROL/NMKA.',
 }
 
+export const selmArgusV3Watchlist: JournalAttachment = {
+  href: '/selm/ARGUS_V3_WATCHLIST_2026-09-26.zip',
+  title: 'ARGUS v3 watchlist',
+  kind: 'archive',
+  credit: SELM_CREDIT,
+  bytesLabel: '211 KB',
+  origin:
+    '26 September 2026. Evidence ledger and watchlist. A watch item is not a crib and is not a decrypt.',
+}
+
+export const selmArgusV31: JournalAttachment = {
+  href: '/selm/ARGUS_V3_1_PROVENANCE_2026-09-26.zip',
+  title: 'ARGUS v3.1 provenance',
+  kind: 'archive',
+  credit: SELM_CREDIT,
+  bytesLabel: '216 KB',
+  origin:
+    'The crib export had been only the Hörenberg scrape. Batch B is a 1943 U-466 diary transcription and a Nixe sheet. Neither is queued.',
+}
+
+export const selmArgusV32: JournalAttachment = {
+  href: '/selm/ARGUS_V3_2_JESS_TURING_2026-09-26.zip',
+  title: 'ARGUS v3.2 Jess/Turing',
+  kind: 'archive',
+  credit: SELM_CREDIT,
+  bytesLabel: '228 KB',
+  origin:
+    'Coprocessor build. U-534 is not assumed, Teilfunkspruch stays allowed, Travemünde/ZTPG stays quarantined. Superseded by v4, which emits no crib.',
+}
+
+export const selmArgusV4: JournalAttachment = {
+  href: '/selm/ARGUS_V4_JESS_TURING_2026-09-26.zip',
+  title: 'ARGUS v4 Jess/Turing',
+  kind: 'archive',
+  credit: SELM_CREDIT,
+  bytesLabel: '235 KB',
+  origin:
+    '26 September 2026. Asking it for cribs returns none. All 121 stored candidates are marked ineligible.',
+}
+
+export const selmCribBatchA: JournalAttachment = {
+  href: '/selm/P1030680_JESSICA_CRIB_BATCH_A.csv',
+  title: 'Crib batch A (Hörenberg)',
+  kind: 'csv',
+  credit: SELM_CREDIT,
+  bytesLabel: '7 KB',
+  origin:
+    'Solved Potsdam plaintext from the Hörenberg scrape. Not a Thetis crib. Not queued.',
+}
+
 export const selmAllPublicFiles: JournalAttachment[] = [
   selmU534LastDays,
   selmU3521Dossier,
   selmNidInterrogation,
   selmQuelle2499,
   selmSchluesselMBauer,
+  selmArgusV3Watchlist,
+  selmArgusV31,
+  selmArgusV32,
+  selmArgusV4,
+  selmCribBatchA,
 ]

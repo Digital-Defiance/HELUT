@@ -24,7 +24,7 @@ export function JournalQuote({
 export type JournalAttachment = {
   href: string
   title: string
-  kind: 'pdf' | 'image'
+  kind: 'pdf' | 'image' | 'archive' | 'csv'
   credit: string
   creditLine?: string
   caption?: string
@@ -74,7 +74,7 @@ export function JournalAttachments({
               {file.title}
             </a>
             <span className="journal-attachments-meta">
-              {file.kind === 'pdf' ? 'PDF' : 'Image'}
+              {file.kind === 'pdf' ? 'PDF' : file.kind === 'image' ? 'Image' : file.kind === 'csv' ? 'CSV' : 'Archive'}
               {file.bytesLabel ? ` · ${file.bytesLabel}` : ''}
               {` · ${file.credit}`}
             </span>

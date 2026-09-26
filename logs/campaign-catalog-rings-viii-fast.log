@@ -284,3 +284,241 @@ quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → 
   [743/2513·242] KOMXADMXUUUBOOTEYF@41 edges=18 letters=18 loops=2 comp=2 span=59 central=B dead at the board                     18293s  26.4M/s ETA 263.3 min
   [744/2513·243] UUUZWODREIDREIACHT@40 edges=18 letters=18 loops=2 comp=2 span=58 central=R dead at the board                     18346s  26.4M/s ETA 261.7 min
   [745/2513·244] FFFTTTEINSZWOZWOVI@36 edges=18 letters=18 loops=2 comp=2 span=54 central=T      20 stops → 0 valid 10-plug completions   18419s  26.4M/s ETA 260.4 min
+  [746/2513·245] FFFTTTEINSZWOZWOVI@34 edges=18 letters=18 loops=2 comp=2 span=52 central=T dead at the board                     18476s  26.5M/s ETA 258.9 min
+  [747/2513·246] FFFTTTEINSZWOZWOVI@33 edges=18 letters=18 loops=2 comp=2 span=51 central=T dead at the board                     18554s  26.5M/s ETA 257.7 min
+  [748/2513·247] KOMXADMXUUUBOOTEYF@24 edges=18 letters=18 loops=2 comp=2 span=42 central=P dead at the board                     18653s  26.4M/s ETA 256.8 min
+  [749/2513·248] BENNULZWOYVIRSIBEN@22 edges=18 letters=18 loops=2 comp=2 span=40 central=P       2 stops → 0 valid 10-plug completions   18731s  26.4M/s ETA 255.5 min
+  [750/2513·249] BENNULZWOYVIRSIBEN@21 edges=18 letters=18 loops=2 comp=2 span=39 central=R dead at the board                     18793s  26.4M/s ETA 254.1 min
+  [751/2513·250] BENNULZWOYVIRSIBEN@19 edges=18 letters=18 loops=2 comp=2 span=37 central=R dead at the board                     18860s  26.5M/s ETA 252.7 min
+  [752/2513·251] BENNULZWOYVIRSIBEN@17 edges=18 letters=18 loops=2 comp=2 span=35 central=R   14008 stops → 0 valid 10-plug completions   18928s  26.5M/s ETA 251.4 min
+  [753/2513·252] UUUVIRSIBENNULEINS@14 edges=18 letters=18 loops=2 comp=2 span=32 central=U dead at the board                     18974s  26.5M/s ETA 249.7 min
+  [754/2513·253] UUUZWODREIDREIACHT@13 edges=18 letters=18 loops=2 comp=2 span=31 central=R dead at the board                     19012s  26.6M/s ETA 248.0 min
+  [755/2513·254] UUUZWODREIDREIACHT@10 edges=18 letters=18 loops=2 comp=2 span=28 central=E       2 stops → 0 valid 10-plug completions   19048s  26.6M/s ETA 246.2 min
+  [756/2513·255] FFFTTTEINSZWOZWOVI@9 edges=18 letters=18 loops=2 comp=2 span=27 central=T       6 stops → 0 valid 10-plug completions   19112s  26.6M/s ETA 244.8 min
+  [757/2513·256] UUUVIRSIBENNULEINS@8 edges=18 letters=18 loops=2 comp=2 span=26 central=U dead at the board                     19150s  26.7M/s ETA 243.1 min
+  [758/2513·257] UUUVIRSIBENNULEINS@6 edges=18 letters=18 loops=2 comp=2 span=24 central=U dead at the board                     19190s  26.7M/s ETA 241.4 min
+  [759/2513·258] KOMXADMXUUUBOOTEYF@4 edges=18 letters=18 loops=2 comp=2 span=22 central=E dead at the board                     19277s  26.7M/s ETA 240.3 min
+  [760/2513·259] ZWOSECHSUUUFLOTTXX@2 edges=18 letters=18 loops=2 comp=2 span=20 central=S dead at the board                     19346s  26.7M/s ETA 239.0 min
+  [761/2513·260] FFFTTTEINSZWOZWOVI@0 edges=18 letters=18 loops=2 comp=2 span=18 central=T dead at the board                     19398s  26.8M/s ETA 237.5 min
+  [762/2513·261] KOMXADMXUUUBOOTEYF@47 edges=18 letters=19 loops=2 comp=3 span=65 central=T     334 stops → 0 valid 10-plug completions   19465s  26.8M/s ETA 236.2 min
+  [763/2513·262] UUUZWODREIDREIACHT@45 edges=18 letters=19 loops=2 comp=3 span=63 central=T    1978 stops → 0 valid 10-plug completions   19585s  26.7M/s ETA 235.5 min
+  [764/2513·263] KOMXADMXUUUBOOTEYF@40 edges=18 letters=19 loops=2 comp=3 span=58 central=B dead at the board                     19644s  26.7M/s ETA 234.0 min
+  [765/2513·264] UUUZWODREIDREIACHT@38 edges=18 letters=19 loops=2 comp=3 span=56 central=R       2 stops → 0 valid 10-plug completions   19736s  26.7M/s ETA 233.0 min
+  [766/2513·265] BENNULZWOYVIRSIBEN@37 edges=18 letters=19 loops=2 comp=3 span=55 central=B dead at the board                     19812s  26.7M/s ETA 231.8 min
+  [767/2513·266] BENNULZWOYVIRSIBEN@36 edges=18 letters=19 loops=2 comp=3 span=54 central=B dead at the board                     19869s  26.7M/s ETA 230.3 min
+  [768/2513·267] ZWOSECHSUUUFLOTTXX@31 edges=18 letters=19 loops=2 comp=3 span=49 central=P    6162 stops → 0 valid 10-plug completions   19956s  26.7M/s ETA 229.2 min
+  [769/2513·268] ZWOSECHSUUUFLOTTXX@29 edges=18 letters=19 loops=2 comp=3 span=47 central=P      64 stops → 0 valid 10-plug completions   20016s  26.7M/s ETA 227.8 min
+  [770/2513·269] UUUZWODREIDREIACHT@26 edges=18 letters=19 loops=2 comp=3 span=44 central=R     306 stops → 0 valid 10-plug completions   20069s  26.8M/s ETA 226.3 min
+  [771/2513·270] KOMXADMXUUUBOOTEYF@26 edges=18 letters=19 loops=2 comp=3 span=44 central=P dead at the board                     20135s  26.8M/s ETA 225.0 min
+  [772/2513·271] UUUZWODREIDREIACHT@24 edges=18 letters=19 loops=2 comp=3 span=42 central=R      18 stops → 0 valid 10-plug completions   20193s  26.8M/s ETA 223.5 min
+  [773/2513·272] BENNULZWOYVIRSIBEN@24 edges=18 letters=19 loops=2 comp=3 span=42 central=P dead at the board                     20265s  26.8M/s ETA 222.3 min
+  [774/2513·273] KOMXADMXUUUBOOTEYF@19 edges=18 letters=19 loops=2 comp=3 span=37 central=O       6 stops → 0 valid 10-plug completions   20361s  26.8M/s ETA 221.3 min
+  [775/2513·274] BENNULZWOYVIRSIBEN@13 edges=18 letters=19 loops=2 comp=3 span=31 central=R dead at the board                     20448s  26.7M/s ETA 220.2 min
+  [776/2513·275] KOMXADMXUUUBOOTEYF@9 edges=18 letters=19 loops=2 comp=3 span=27 central=O dead at the board                     20525s  26.7M/s ETA 218.9 min
+  [777/2513·276] BENNULZWOYVIRSIBEN@8 edges=18 letters=19 loops=2 comp=3 span=26 central=E dead at the board                     20582s  26.8M/s ETA 217.5 min
+  [778/2513·277] KOMXADMXUUUBOOTEYF@7 edges=18 letters=19 loops=2 comp=3 span=25 central=O dead at the board                     20650s  26.8M/s ETA 216.2 min
+  [779/2513·278] UUUZWODREIDREIACHT@5 edges=18 letters=19 loops=2 comp=3 span=23 central=E     192 stops → 0 valid 10-plug completions   20729s  26.8M/s ETA 215.0 min
+  [780/2513·279] KOMXADMXUUUBOOTEYF@50 edges=18 letters=20 loops=2 comp=4 span=68 central=X       2 stops → 0 scorable completions   20779s  26.8M/s ETA 213.5 min
+  [781/2513·280] ZWOSECHSUUUFLOTTXX@49 edges=18 letters=20 loops=2 comp=4 span=67 central=S dead at the board                     20820s  26.8M/s ETA 211.9 min
+  [782/2513·281] UUUZWODREIDREIACHT@37 edges=18 letters=20 loops=2 comp=4 span=55 central=R      16 stops → 0 valid 10-plug completions   20893s  26.8M/s ETA 210.7 min
+  [783/2513·282] UUUZWODREIDREIACHT@30 edges=18 letters=20 loops=2 comp=4 span=48 central=P      24 stops → 0 valid 10-plug completions   20952s  26.9M/s ETA 209.3 min
+  [784/2513·283] BENNULZWOYVIRSIBEN@54 edges=18 letters=21 loops=2 comp=5 span=72 central=G       4 stops → 0 valid 10-plug completions   20998s  26.9M/s ETA 207.8 min
+  [785/2513·284] UUUZWODREIDREIACHT@48 edges=18 letters=21 loops=2 comp=5 span=66 central=T dead at the board                     21069s  26.9M/s ETA 206.5 min
+  [786/2513·285] UUUZWODREIDREIACHT@47 edges=18 letters=21 loops=2 comp=5 span=65 central=T dead at the board                     21138s  26.9M/s ETA 205.2 min
+  [787/2513·286] TTTFFFEINSSIBENXX@53 edges=17 letters=16 loops=2 comp=1 span=70 central=T dead at the board                     21193s  26.9M/s ETA 203.8 min
+  [788/2513·287] TTTFFFEINSSIBENXX@17 edges=17 letters=16 loops=2 comp=1 span=34 central=F dead at the board                     21248s  27.0M/s ETA 202.4 min
+  [789/2513·288] KOMXADMXUUUBOOTEY@4 edges=17 letters=16 loops=2 comp=1 span=21 central=E dead at the board                     21322s  27.0M/s ETA 201.1 min
+  [790/2513·289] TTTFFFEINSSIBENXX@1 edges=17 letters=16 loops=2 comp=1 span=18 central=E dead at the board                     21377s  27.0M/s ETA 199.7 min
+  [791/2513·290] KOMXADMXUUUBOOTEY@47 edges=17 letters=17 loops=2 comp=2 span=64 central=T    1860 stops → 0 valid 10-plug completions   21431s  27.0M/s ETA 198.3 min
+  [792/2513·291] KOMXADMXUUUBOOTEY@41 edges=17 letters=17 loops=2 comp=2 span=58 central=B dead at the board                     21495s  27.0M/s ETA 197.0 min
+  [793/2513·292] KOMXADMXUUUBOOTEY@24 edges=17 letters=17 loops=2 comp=2 span=41 central=P      22 stops → 0 valid 10-plug completions   21581s  27.0M/s ETA 195.9 min
+  [794/2513·293] KOMXADMXUUUBOOTEY@23 edges=17 letters=17 loops=2 comp=2 span=40 central=O      16 stops → 0 valid 10-plug completions   21645s  27.0M/s ETA 194.5 min
+  [795/2513·294] TTTFFFEINSSIBENXX@21 edges=17 letters=17 loops=2 comp=2 span=38 central=F dead at the board                     21680s  27.1M/s ETA 193.0 min
+  [796/2513·295] KOMXADMXUUUBOOTEY@21 edges=17 letters=17 loops=2 comp=2 span=38 central=O dead at the board                     21738s  27.1M/s ETA 191.6 min
+  [797/2513·296] TTTFFFEINSSIBENXX@15 edges=17 letters=17 loops=2 comp=2 span=32 central=F     316 stops → 0 valid 10-plug completions   21808s  27.1M/s ETA 190.3 min
+  [798/2513·297] TTTFFFEINSSIBENXX@14 edges=17 letters=17 loops=2 comp=2 span=31 central=F     490 stops → 0 valid 10-plug completions   21859s  27.1M/s ETA 188.9 min
+  [799/2513·298] TTTFFFEINSSIBENXX@11 edges=17 letters=17 loops=2 comp=2 span=28 central=F dead at the board                     21913s  27.1M/s ETA 187.5 min
+  [800/2513·299] KOMXADMXUUUBOOTEY@9 edges=17 letters=17 loops=2 comp=2 span=26 central=O dead at the board                     21977s  27.2M/s ETA 186.2 min
+  [801/2513·300] TTTFFFEINSSIBENXX@8 edges=17 letters=17 loops=2 comp=2 span=25 central=E dead at the board                     22048s  27.2M/s ETA 185.0 min
+  [802/2513·301] KOMXADMXUUUBOOTEY@7 edges=17 letters=17 loops=2 comp=2 span=24 central=O dead at the board                     22108s  27.2M/s ETA 183.6 min
+  [803/2513·302] KOMXADMXUUUBOOTEY@50 edges=17 letters=18 loops=2 comp=3 span=67 central=X       4 stops → 0 scorable completions   22158s  27.2M/s ETA 182.2 min
+  [804/2513·303] KOMXADMXUUUBOOTEY@40 edges=17 letters=18 loops=2 comp=3 span=57 central=B       8 stops → 0 scorable completions   22206s  27.2M/s ETA 180.8 min
+  [805/2513·304] KOMXADMXUUUBOOTEY@26 edges=17 letters=18 loops=2 comp=3 span=43 central=P       4 stops → 0 valid 10-plug completions   22260s  27.3M/s ETA 179.4 min
+  [806/2513·305] KOMXADMXUUUBOOTEY@25 edges=17 letters=18 loops=2 comp=3 span=42 central=P       2 stops → 0 valid 10-plug completions   22331s  27.3M/s ETA 178.2 min
+  [807/2513·306] KOMXADMXUUUBOOTEY@19 edges=17 letters=18 loops=2 comp=3 span=36 central=O      40 stops → 0 valid 10-plug completions   22419s  27.2M/s ETA 177.1 min
+  [808/2513·307] FFFTTTBLEIBTBESE@51 edges=16 letters=15 loops=2 comp=1 span=67 central=T dead at the board                     22474s  27.3M/s ETA 175.7 min
+  [809/2513·308] FFFTTTBLEIBTBESE@17 edges=16 letters=15 loops=2 comp=1 span=33 central=F       6 stops → 2 physical, best IC 0.051 tail -4.837   22524s  27.3M/s ETA 174.3 min
+    shell C/gamma/I-III-VIII/AAAA pos ZVIX plugs 10  → logs/welchman-physical.jsonl
+  [810/2513·309] XUUUFLOTTXVVVUUU@12 edges=16 letters=15 loops=2 comp=1 span=28 central=U dead at the board                     22559s  27.3M/s ETA 172.8 min
+  [811/2513·310] XUUUFLOTTXVVVUUU@5 edges=16 letters=15 loops=2 comp=1 span=21 central=U dead at the board                     22608s  27.4M/s ETA 171.4 min
+  [812/2513·311] KOMXADMXUUUBOOTE@4 edges=16 letters=15 loops=2 comp=1 span=20 central=E       2 stops → 0 scorable completions   22680s  27.4M/s ETA 170.2 min
+  [813/2513·312] XUUUFLOTTXVVVUUU@54 edges=16 letters=16 loops=2 comp=2 span=70 central=U       2 stops → 0 scorable completions   22716s  27.4M/s ETA 168.7 min
+  [814/2513·313] FFFTTTBLEIBTBESE@50 edges=16 letters=16 loops=2 comp=2 span=66 central=T       6 stops → 0 valid 10-plug completions   22775s  27.4M/s ETA 167.4 min
+  [815/2513·314] KOMXADMXUUUBOOTE@47 edges=16 letters=16 loops=2 comp=2 span=63 central=T   23174 stops → 0 scorable completions   22830s  27.5M/s ETA 166.0 min
+  [816/2513·315] KOMXADMXUUUBOOTE@43 edges=16 letters=16 loops=2 comp=2 span=59 central=B       4 stops → 2 physical, best IC 0.049 tail -5.509   22887s  27.5M/s ETA 164.7 min
+    shell B/beta/VII-IV-VIII/AAAI pos XTVN plugs 10  → logs/welchman-physical.jsonl
+  [817/2513·316] KOMXADMXUUUBOOTE@41 edges=16 letters=16 loops=2 comp=2 span=57 central=B       6 stops → 0 scorable completions   22950s  27.5M/s ETA 163.4 min
+  [818/2513·317] FFFTTTBLEIBTBESE@10 edges=16 letters=16 loops=2 comp=2 span=26 central=E      10 stops → 2 physical, best IC 0.040 tail -4.925   22983s  27.5M/s ETA 161.9 min
+    shell B/gamma/IV-III-VIII/AAAA pos YWGW plugs 9  → logs/welchman-physical.jsonl
+  [819/2513·318] XUUUFLOTTXVVVUUU@2 edges=16 letters=16 loops=2 comp=2 span=18 central=U       2 stops → 0 valid 10-plug completions   23029s  27.6M/s ETA 160.5 min
+  [820/2513·319] XUUUFLOTTXVVVUUU@1 edges=16 letters=16 loops=2 comp=2 span=17 central=U       2 stops → 0 valid 10-plug completions   23080s  27.6M/s ETA 159.2 min
+  [821/2513·320] XUUUFLOTTXVVVUUU@0 edges=16 letters=16 loops=2 comp=2 span=16 central=U       4 stops → 2 physical, best IC 0.043 tail -4.992   23155s  27.6M/s ETA 158.0 min
+    shell B/gamma/VI-II-VIII/AAAG pos NSZZ plugs 10  → logs/welchman-physical.jsonl
+  [822/2513·321] ZWODREISECHSEINS@45 edges=16 letters=17 loops=2 comp=3 span=61 central=S      12 stops → 0 valid 10-plug completions   23190s  27.6M/s ETA 156.5 min
+  [823/2513·322] KOMXADMXUUUBOOTE@40 edges=16 letters=17 loops=2 comp=3 span=56 central=B      48 stops → 0 scorable completions   23237s  27.7M/s ETA 155.2 min
+  [824/2513·323] KOMXADMXUUUBOOTE@25 edges=16 letters=17 loops=2 comp=3 span=41 central=P      34 stops → 0 scorable completions   23306s  27.7M/s ETA 153.9 min
+  [825/2513·324] KOMXADMXUUUBOOTE@23 edges=16 letters=17 loops=2 comp=3 span=39 central=O     854 stops → 2 physical, best IC 0.040 tail -4.866   23372s  27.7M/s ETA 152.7 min
+    shell B/gamma/II-VII-VIII/AAAG pos PINM plugs 10  → logs/welchman-physical.jsonl
+  [826/2513·325] FFFTTTBLEIBTBESE@12 edges=16 letters=17 loops=2 comp=3 span=28 central=T      34 stops → 2 physical, best IC 0.044 tail -4.892   23418s  27.7M/s ETA 151.3 min
+    shell C/beta/VI-I-VIII/AAAE pos IMLA plugs 10  → logs/welchman-physical.jsonl
+  [827/2513·326] FFFTTTBLEIBTBESE@11 edges=16 letters=17 loops=2 comp=3 span=27 central=T     640 stops → 0 valid 10-plug completions   23475s  27.7M/s ETA 150.0 min
+  [828/2513·327] KOMXADMXUUUBOOTE@7 edges=16 letters=17 loops=2 comp=3 span=23 central=U     904 stops → 4 physical, best IC 0.043 tail -5.110   23531s  27.7M/s ETA 148.7 min
+    shell C/beta/V-I-VIII/AAAA pos OARQ plugs 9  → logs/welchman-physical.jsonl
+  [829/2513·328] ZWODREISECHSEINS@54 edges=16 letters=18 loops=2 comp=4 span=70 central=S   75398 stops → 0 scorable completions   23592s  27.8M/s ETA 147.4 min
+  [830/2513·329] KOMXADMXUUUBOOTE@50 edges=16 letters=18 loops=2 comp=4 span=66 central=X    9152 stops → 0 scorable completions   23644s  27.8M/s ETA 146.1 min
+  [831/2513·330] ZWODREISECHSEINS@39 edges=16 letters=18 loops=2 comp=4 span=55 central=S      22 stops → 0 scorable completions   23694s  27.8M/s ETA 144.8 min
+  [832/2513·331] ZWODREISECHSEINS@30 edges=16 letters=18 loops=2 comp=4 span=46 central=P  483598 stops → 2 physical, best IC 0.044 tail -5.109   23752s  27.8M/s ETA 143.5 min
+    shell C/beta/I-VI-VIII/AAAI pos GSEL plugs 10  → logs/welchman-physical.jsonl
+  [833/2513·332] ZWODREISECHSEINS@27 edges=16 letters=18 loops=2 comp=4 span=43 central=P    1486 stops → 0 scorable completions   23784s  27.9M/s ETA 142.1 min
+  [834/2513·333] ZWODREISECHSEINS@25 edges=16 letters=18 loops=2 comp=4 span=41 central=P 24104398 stops → 0 scorable completions   24065s  27.6M/s ETA 142.1 min
+  [835/2513·334] ZWODREISECHSEINS@23 edges=16 letters=18 loops=2 comp=4 span=39 central=R     100 stops → 2 physical, best IC 0.045 tail -5.454   24099s  27.7M/s ETA 140.7 min
+    shell C/gamma/VI-I-VIII/AAAC pos RKBR plugs 10  → logs/welchman-physical.jsonl
+  [836/2513·335] KOMXADMXUUUBOOTE@19 edges=16 letters=18 loops=2 comp=4 span=35 central=O    1984 stops → 0 scorable completions   24193s  27.6M/s ETA 139.6 min
+  [837/2513·336] ZWODREISECHSEINS@6 edges=16 letters=18 loops=2 comp=4 span=22 central=E     502 stops → 0 scorable completions   24245s  27.7M/s ETA 138.3 min
+  [1187/2513·337] OVIERUNDUUUZWOFUNFDR@50 edges=20 letters=20 loops=1 comp=1 span=70 central=U dead at the board                     24307s  27.7M/s ETA 137.0 min
+  [1188/2513·338] OVIERUNDUUUZWOFUNFDR@3 edges=20 letters=20 loops=1 comp=1 span=23 central=U dead at the board                     24358s  27.7M/s ETA 135.7 min
+  [1189/2513·339] OVIERUNDUUUZWOFUNFDR@49 edges=20 letters=21 loops=1 comp=2 span=69 central=U dead at the board                     24416s  27.7M/s ETA 134.4 min
+  [1190/2513·340] OVIERUNDUUUZWOFUNFDR@33 edges=20 letters=21 loops=1 comp=2 span=53 central=U dead at the board                     24482s  27.7M/s ETA 133.2 min
+  [1191/2513·341] UUUFUNFDREIVIERKKNO@53 edges=19 letters=19 loops=1 comp=1 span=72 central=G dead at the board                     24554s  27.7M/s ETA 132.0 min
+  [1192/2513·342] UUUZWODREISECHSFUNF@40 edges=19 letters=19 loops=1 comp=1 span=59 central=S dead at the board                     24640s  27.7M/s ETA 130.9 min
+  [1193/2513·343] UUUFUNFDREIVIERKKNO@38 edges=19 letters=19 loops=1 comp=1 span=57 central=R dead at the board                     24703s  27.7M/s ETA 129.6 min
+  [1194/2513·344] UUUZWODREISECHSFUNF@13 edges=19 letters=19 loops=1 comp=1 span=32 central=U dead at the board                     24760s  27.7M/s ETA 128.4 min
+  [1195/2513·345] UUUFUNFDREIVIERKKNO@7 edges=19 letters=19 loops=1 comp=1 span=26 central=U dead at the board                     24822s  27.7M/s ETA 127.1 min
+  [1196/2513·346] UUUZWODREISECHSFUNF@29 edges=19 letters=20 loops=1 comp=2 span=48 central=P dead at the board                     24901s  27.7M/s ETA 125.9 min
+  [1197/2513·347] UUUZWODREISECHSFUNF@49 edges=19 letters=21 loops=1 comp=3 span=68 central=S dead at the board                     24971s  27.7M/s ETA 124.7 min
+  [1198/2513·348] UUUZWODREISECHSFUNF@36 edges=19 letters=21 loops=1 comp=3 span=55 central=S dead at the board                     25045s  27.7M/s ETA 123.5 min
+  [1199/2513·349] UUUZWODREISECHSFUNF@33 edges=19 letters=21 loops=1 comp=3 span=52 central=U dead at the board                     25118s  27.7M/s ETA 122.4 min
+  [1200/2513·350] UUUZWODREISECHSFUNF@32 edges=19 letters=21 loops=1 comp=3 span=51 central=U dead at the board                     25182s  27.7M/s ETA 121.1 min
+  [1201/2513·351] KOMXADMXUUUBOOTEYF@42 edges=18 letters=18 loops=1 comp=1 span=60 central=B dead at the board                     25259s  27.7M/s ETA 119.9 min
+  [1202/2513·352] KOMXADMXUUUBOOTEYF@31 edges=18 letters=18 loops=1 comp=1 span=49 central=P dead at the board                     25332s  27.7M/s ETA 118.7 min
+  [1203/2513·353] KOMXADMXUUUBOOTEYF@30 edges=18 letters=18 loops=1 comp=1 span=48 central=P dead at the board                     25384s  27.8M/s ETA 117.4 min
+  [1204/2513·354] ZWOSECHSUUUFLOTTXX@26 edges=18 letters=18 loops=1 comp=1 span=44 central=P dead at the board                     25434s  27.8M/s ETA 116.2 min
+  [1205/2513·355] ZWOSECHSUUUFLOTTXX@25 edges=18 letters=18 loops=1 comp=1 span=43 central=P dead at the board                     25512s  27.8M/s ETA 115.0 min
+  [1206/2513·356] UUUZWODREIDREIACHT@12 edges=18 letters=18 loops=1 comp=1 span=30 central=R dead at the board                     25605s  27.8M/s ETA 113.9 min
+  [1207/2513·357] UUUZWODREIDREIACHT@11 edges=18 letters=18 loops=1 comp=1 span=29 central=R dead at the board                     25681s  27.7M/s ETA 112.7 min
+  [1208/2513·358] UUUVIRSIBENNULEINS@9 edges=18 letters=18 loops=1 comp=1 span=27 central=U dead at the board                     25732s  27.8M/s ETA 111.4 min
+  [1209/2513·359] KOMXADMXUUUBOOTEYF@8 edges=18 letters=18 loops=1 comp=1 span=26 central=O dead at the board                     25822s  27.8M/s ETA 110.3 min
+  [1210/2513·360] KOMXADMXUUUBOOTEYF@5 edges=18 letters=18 loops=1 comp=1 span=23 central=U dead at the board                     25903s  27.7M/s ETA 109.1 min
+  [1211/2513·361] UUUVIRSIBENNULEINS@4 edges=18 letters=18 loops=1 comp=1 span=22 central=E dead at the board                     25981s  27.7M/s ETA 108.0 min
+  [1212/2513·362] UUUZWODREIDREIACHT@1 edges=18 letters=18 loops=1 comp=1 span=19 central=E dead at the board                     26057s  27.7M/s ETA 106.8 min
+  [1213/2513·363] KOMXADMXUUUBOOTEYF@1 edges=18 letters=18 loops=1 comp=1 span=19 central=E dead at the board                     26129s  27.7M/s ETA 105.6 min
+  [1214/2513·364] UUUZWODREIDREIACHT@33 edges=18 letters=19 loops=1 comp=2 span=51 central=R dead at the board                     26194s  27.7M/s ETA 104.3 min
+  [1215/2513·365] BENNULZWOYVIRSIBEN@29 edges=18 letters=19 loops=1 comp=2 span=47 central=P dead at the board                     26242s  27.8M/s ETA 103.1 min
+  [1216/2513·366] KOMXADMXUUUBOOTEYF@28 edges=18 letters=19 loops=1 comp=2 span=46 central=P dead at the board                     26303s  27.8M/s ETA 101.8 min
+  [1217/2513·367] KOMXADMXUUUBOOTEYF@27 edges=18 letters=19 loops=1 comp=2 span=45 central=P dead at the board                     26353s  27.8M/s ETA 100.5 min
+  [1218/2513·368] BENNULZWOYVIRSIBEN@10 edges=18 letters=19 loops=1 comp=2 span=28 central=E dead at the board                     26405s  27.8M/s ETA  99.3 min
+  [1219/2513·369] UUUZWODREIDREIACHT@7 edges=18 letters=19 loops=1 comp=2 span=25 central=E dead at the board                     26452s  27.8M/s ETA  98.0 min
+  [1220/2513·370] BENNULZWOYVIRSIBEN@7 edges=18 letters=19 loops=1 comp=2 span=25 central=E      18 stops → 0 valid 10-plug completions   26526s  27.8M/s ETA  96.8 min
+  [1221/2513·371] UUUZWODREIDREIACHT@6 edges=18 letters=19 loops=1 comp=2 span=24 central=E dead at the board                     26611s  27.8M/s ETA  95.6 min
+  [1222/2513·372] KOMXADMXUUUBOOTEYF@53 edges=18 letters=20 loops=1 comp=3 span=71 central=G dead at the board                     26687s  27.8M/s ETA  94.5 min
+  [1223/2513·373] BENNULZWOYVIRSIBEN@52 edges=18 letters=20 loops=1 comp=3 span=70 central=N    1962 stops → 0 valid 10-plug completions   26741s  27.8M/s ETA  93.2 min
+  [1224/2513·374] UUUZWODREIDREIACHT@51 edges=18 letters=20 loops=1 comp=3 span=69 central=G 37199824 stops → 0 valid 10-plug completions   27464s  27.2M/s ETA  94.2 min
+  [1225/2513·375] ZWOSECHSUUUFLOTTXX@47 edges=18 letters=20 loops=1 comp=3 span=65 central=T     532 stops → 0 valid 10-plug completions   27547s  27.2M/s ETA  93.0 min
+  [1226/2513·376] UUUZWODREIDREIACHT@46 edges=18 letters=20 loops=1 comp=3 span=64 central=T       2 stops → 0 valid 10-plug completions   27627s  27.2M/s ETA  91.8 min
+  [1227/2513·377] UUUZWODREIDREIACHT@36 edges=18 letters=20 loops=1 comp=3 span=54 central=R      22 stops → 0 valid 10-plug completions   27680s  27.2M/s ETA  90.6 min
+  [1228/2513·378] UUUZWODREIDREIACHT@34 edges=18 letters=20 loops=1 comp=3 span=52 central=R dead at the board                     27762s  27.2M/s ETA  89.4 min
+  [1229/2513·379] UUUZWODREIDREIACHT@32 edges=18 letters=20 loops=1 comp=3 span=50 central=B    2950 stops → 0 valid 10-plug completions   27897s  27.1M/s ETA  88.3 min
+  [1230/2513·380] BENNULZWOYVIRSIBEN@3 edges=18 letters=20 loops=1 comp=3 span=21 central=E dead at the board                     27958s  27.1M/s ETA  87.1 min
+  [1231/2513·381] BENNULZWOYVIRSIBEN@1 edges=18 letters=20 loops=1 comp=3 span=19 central=E dead at the board                     28020s  27.1M/s ETA  85.8 min
+  [1232/2513·382] BENNULZWOYVIRSIBEN@0 edges=18 letters=20 loops=1 comp=3 span=18 central=E dead at the board                     28115s  27.1M/s ETA  84.6 min
+  [1233/2513·383] UUUZWODREIDREIACHT@49 edges=18 letters=21 loops=1 comp=4 span=67 central=G       6 stops → 0 valid 10-plug completions   28182s  27.1M/s ETA  83.4 min
+  [1234/2513·384] KOMXADMXUUUBOOTEY@42 edges=17 letters=17 loops=1 comp=1 span=59 central=B dead at the board                     28265s  27.1M/s ETA  82.2 min
+  [1235/2513·385] TTTFFFEINSSIBENXX@20 edges=17 letters=17 loops=1 comp=1 span=37 central=F dead at the board                     28323s  27.1M/s ETA  80.9 min
+  [1236/2513·386] TTTFFFEINSSIBENXX@18 edges=17 letters=17 loops=1 comp=1 span=35 central=F dead at the board                     28386s  27.1M/s ETA  79.7 min
+  [1237/2513·387] TTTFFFEINSSIBENXX@16 edges=17 letters=17 loops=1 comp=1 span=33 central=F dead at the board                     28448s  27.2M/s ETA  78.4 min
+  [1238/2513·388] TTTFFFEINSSIBENXX@13 edges=17 letters=17 loops=1 comp=1 span=30 central=F dead at the board                     28509s  27.2M/s ETA  77.2 min
+  [1239/2513·389] KOMXADMXUUUBOOTEY@8 edges=17 letters=17 loops=1 comp=1 span=25 central=O       2 stops → 2 physical, best IC 0.038 tail -5.297   28599s  27.2M/s ETA  76.0 min
+    shell C/gamma/II-III-VIII/AAAD pos EMYA plugs 9  → logs/welchman-physical.jsonl
+  [1240/2513·390] TTTFFFEINSSIBENXX@7 edges=17 letters=17 loops=1 comp=1 span=24 central=E dead at the board                     28647s  27.2M/s ETA  74.7 min
+  [1241/2513·391] KOMXADMXUUUBOOTEY@5 edges=17 letters=17 loops=1 comp=1 span=22 central=E dead at the board                     28713s  27.2M/s ETA  73.4 min
+  [1242/2513·392] KOMXADMXUUUBOOTEY@1 edges=17 letters=17 loops=1 comp=1 span=18 central=E dead at the board                     28791s  27.2M/s ETA  72.2 min
+  [1243/2513·393] KOMXADMXUUUBOOTEY@30 edges=17 letters=18 loops=1 comp=2 span=47 central=P      10 stops → 0 valid 10-plug completions   28842s  27.2M/s ETA  70.9 min
+  [1244/2513·394] KOMXADMXUUUBOOTEY@55 edges=17 letters=19 loops=1 comp=3 span=72 central=G dead at the board                     28903s  27.2M/s ETA  69.7 min
+  [1245/2513·395] KOMXADMXUUUBOOTEY@53 edges=17 letters=19 loops=1 comp=3 span=70 central=G dead at the board                     28980s  27.2M/s ETA  68.5 min
+  [1246/2513·396] KOMXADMXUUUBOOTEY@28 edges=17 letters=19 loops=1 comp=3 span=45 central=P       2 stops → 0 valid 10-plug completions   29040s  27.2M/s ETA  67.2 min
+  [1247/2513·397] KOMXADMXUUUBOOTEY@27 edges=17 letters=19 loops=1 comp=3 span=44 central=P      10 stops → 0 valid 10-plug completions   29089s  27.2M/s ETA  65.9 min
+  [1248/2513·398] ZWODREISECHSEINS@43 edges=16 letters=16 loops=1 comp=1 span=59 central=S dead at the board                     29162s  27.2M/s ETA  64.7 min
+  [1249/2513·399] KOMXADMXUUUBOOTE@42 edges=16 letters=16 loops=1 comp=1 span=58 central=B       4 stops → 0 scorable completions   29239s  27.2M/s ETA  63.5 min
+  [1250/2513·400] ZWODREISECHSEINS@41 edges=16 letters=16 loops=1 comp=1 span=57 central=S       4 stops → 0 scorable completions   29313s  27.2M/s ETA  62.3 min
+  [1251/2513·401] KOMXADMXUUUBOOTE@8 edges=16 letters=16 loops=1 comp=1 span=24 central=O       4 stops → 2 physical, best IC 0.038 tail -5.268   29405s  27.2M/s ETA  61.1 min
+    shell C/gamma/II-III-VIII/AAAD pos EMYA plugs 9  → logs/welchman-physical.jsonl
+  [1252/2513·402] FFFTTTBLEIBTBESE@8 edges=16 letters=16 loops=1 comp=1 span=24 central=E dead at the board                     29469s  27.2M/s ETA  59.9 min
+  [1253/2513·403] FFFTTTBLEIBTBESE@7 edges=16 letters=16 loops=1 comp=1 span=23 central=E dead at the board                     29515s  27.3M/s ETA  58.6 min
+  [1254/2513·404] KOMXADMXUUUBOOTE@5 edges=16 letters=16 loops=1 comp=1 span=21 central=E       2 stops → 0 scorable completions   29587s  27.3M/s ETA  57.4 min
+  [1255/2513·405] KOMXADMXUUUBOOTE@1 edges=16 letters=16 loops=1 comp=1 span=17 central=E       2 stops → 0 scorable completions   29671s  27.2M/s ETA  56.2 min
+  [1256/2513·406] KOMXADMXUUUBOOTE@24 edges=16 letters=17 loops=1 comp=2 span=40 central=P     584 stops → 2 physical, best IC 0.053 tail -4.827   29759s  27.2M/s ETA  55.0 min
+    shell C/gamma/II-IV-VIII/AAAL pos FBXP plugs 9  → logs/welchman-physical.jsonl
+  [1257/2513·407] KOMXADMXUUUBOOTE@21 edges=16 letters=17 loops=1 comp=2 span=37 central=O dead at the board                     29819s  27.2M/s ETA  53.7 min
+  [1258/2513·408] ZWODREISECHSEINS@19 edges=16 letters=17 loops=1 comp=2 span=35 central=R      18 stops → 0 scorable completions   29873s  27.3M/s ETA  52.5 min
+  [1259/2513·409] ZWODREISECHSEINS@16 edges=16 letters=17 loops=1 comp=2 span=32 central=R   35718 stops → 0 scorable completions   29932s  27.3M/s ETA  51.2 min
+  [1260/2513·410] ZWODREISECHSEINS@11 edges=16 letters=17 loops=1 comp=2 span=27 central=E       8 stops → 2 physical, best IC 0.041 tail -4.814   30005s  27.3M/s ETA  50.0 min
+    shell B/gamma/VII-III-VIII/AAAG pos WJTA plugs 10  → logs/welchman-physical.jsonl
+  [1261/2513·411] ZWODREISECHSEINS@9 edges=16 letters=17 loops=1 comp=2 span=25 central=E      10 stops → 0 valid 10-plug completions   30079s  27.3M/s ETA  48.8 min
+  [1262/2513·412] KOMXADMXUUUBOOTE@9 edges=16 letters=17 loops=1 comp=2 span=25 central=O      12 stops → 0 scorable completions   30147s  27.3M/s ETA  47.6 min
+  [1263/2513·413] FFFTTTBLEIBTBESE@9 edges=16 letters=17 loops=1 comp=2 span=25 central=E    1978 stops → 2 physical, best IC 0.054 tail -4.783   30193s  27.3M/s ETA  46.3 min
+    shell B/beta/VI-III-VIII/AAAG pos KRQK plugs 8  → logs/welchman-physical.jsonl
+  [1264/2513·414] ZWODREISECHSEINS@56 edges=16 letters=18 loops=1 comp=3 span=72 central=G      72 stops → 0 scorable completions   30269s  27.3M/s ETA  45.1 min
+  [1265/2513·415] KOMXADMXUUUBOOTE@55 edges=16 letters=18 loops=1 comp=3 span=71 central=G      26 stops → 0 scorable completions   30329s  27.3M/s ETA  43.8 min
+  [1266/2513·416] ZWODREISECHSEINS@52 edges=16 letters=18 loops=1 comp=3 span=68 central=S      60 stops → 0 scorable completions   30411s  27.3M/s ETA  42.6 min
+  [1267/2513·417] ZWODREISECHSEINS@35 edges=16 letters=18 loops=1 comp=3 span=51 central=B      56 stops → 0 scorable completions   30490s  27.3M/s ETA  41.4 min
+  [1268/2513·418] KOMXADMXUUUBOOTE@30 edges=16 letters=18 loops=1 comp=3 span=46 central=P      24 stops → 0 scorable completions   30540s  27.3M/s ETA  40.2 min
+  [1269/2513·419] ZWODREISECHSEINS@29 edges=16 letters=18 loops=1 comp=3 span=45 central=P     272 stops → 4 physical, best IC 0.043 tail -5.034   30616s  27.3M/s ETA  39.0 min
+    shell B/beta/III-I-VIII/AAAH pos ZENJ plugs 10  → logs/welchman-physical.jsonl
+  [1270/2513·420] KOMXADMXUUUBOOTE@27 edges=16 letters=18 loops=1 comp=3 span=43 central=P      58 stops → 0 scorable completions   30665s  27.3M/s ETA  37.7 min
+  [1271/2513·421] KOMXADMXUUUBOOTE@26 edges=16 letters=18 loops=1 comp=3 span=42 central=P      58 stops → 0 scorable completions   30718s  27.4M/s ETA  36.5 min
+  [1272/2513·422] KOMXADMXUUUBOOTE@18 edges=16 letters=18 loops=1 comp=3 span=34 central=O     246 stops → 0 scorable completions   30802s  27.3M/s ETA  35.3 min
+  [1273/2513·423] ZWODREISECHSEINS@13 edges=16 letters=18 loops=1 comp=3 span=29 central=S      20 stops → 2 physical, best IC 0.046 tail -5.271   30855s  27.4M/s ETA  34.0 min
+    shell C/beta/I-VI-VIII/AAAA pos LSOP plugs 10  → logs/welchman-physical.jsonl
+  [1274/2513·424] KOMXADMXUUUBOOTE@56 edges=16 letters=19 loops=1 comp=4 span=72 central=G     250 stops → 0 scorable completions   30913s  27.4M/s ETA  32.8 min
+  [1275/2513·425] ZWODREISECHSEINS@49 edges=16 letters=19 loops=1 comp=4 span=65 central=S     628 stops → 0 scorable completions   30984s  27.4M/s ETA  31.6 min
+  [1276/2513·426] ZWODREISECHSEINS@37 edges=16 letters=19 loops=1 comp=4 span=53 central=S     184 stops → 0 scorable completions   31068s  27.4M/s ETA  30.4 min
+  [1277/2513·427] ZWODREISECHSEINS@34 edges=16 letters=19 loops=1 comp=4 span=50 central=B      48 stops → 0 scorable completions   31165s  27.3M/s ETA  29.2 min
+  [1278/2513·428] ZWODREISECHSEINS@32 edges=16 letters=19 loops=1 comp=4 span=48 central=E      74 stops → 4 physical, best IC 0.050 tail -4.567   31247s  27.3M/s ETA  28.0 min
+    shell B/gamma/V-VII-VIII/AAAC pos OATS plugs 10  → logs/welchman-physical.jsonl
+  [1279/2513·429] ZWODREISECHSEINS@31 edges=16 letters=19 loops=1 comp=4 span=47 central=P    2880 stops → 0 scorable completions   31296s  27.4M/s ETA  26.7 min
+  [1280/2513·430] KOMXADMXUUUBOOTE@28 edges=16 letters=19 loops=1 comp=4 span=44 central=P      66 stops → 2 physical, best IC 0.043 tail -4.892   31356s  27.4M/s ETA  25.5 min
+    shell B/beta/IV-V-VIII/AAAE pos WJMQ plugs 8  → logs/welchman-physical.jsonl
+  [2008/2513·431] UUUZWODREISECHSFUNF@48 edges=19 letters=21 loops=0 comp=2 span=67 central=S dead at the board                     31436s  27.4M/s ETA  24.3 min
+  [2009/2513·432] UUUZWODREISECHSFUNF@34 edges=19 letters=22 loops=0 comp=3 span=53 central=U       2 stops → 0 valid 10-plug completions   31515s  27.4M/s ETA  23.1 min
+  [2010/2513·433] BENNULZWOYVIRSIBEN@27 edges=18 letters=19 loops=0 comp=1 span=45 central=P dead at the board                     31591s  27.4M/s ETA  21.9 min
+  [2011/2513·434] BENNULZWOYVIRSIBEN@26 edges=18 letters=19 loops=0 comp=1 span=44 central=R dead at the board                     31651s  27.4M/s ETA  20.7 min
+  [2012/2513·435] BENNULZWOYVIRSIBEN@20 edges=18 letters=19 loops=0 comp=1 span=38 central=R dead at the board                     31736s  27.4M/s ETA  19.5 min
+  [2013/2513·436] KOMXADMXUUUBOOTEYF@17 edges=18 letters=19 loops=0 comp=1 span=35 central=O dead at the board                     31825s  27.3M/s ETA  18.2 min
+  [2014/2513·437] UUUZWODREIDREIACHT@53 edges=18 letters=20 loops=0 comp=2 span=71 central=G dead at the board                     31912s  27.3M/s ETA  17.0 min
+  [2015/2513·438] KOMXADMXUUUBOOTEYF@51 edges=18 letters=20 loops=0 comp=2 span=69 central=X dead at the board                     31985s  27.3M/s ETA  15.8 min
+  [2016/2513·439] BENNULZWOYVIRSIBEN@4 edges=18 letters=20 loops=0 comp=2 span=22 central=E      50 stops → 0 valid 10-plug completions   32053s  27.3M/s ETA  14.6 min
+  [2017/2513·440] UUUZWODREIDREIACHT@54 edges=18 letters=21 loops=0 comp=3 span=72 central=G dead at the board                     32139s  27.3M/s ETA  13.4 min
+  [2018/2513·441] KOMXADMXUUUBOOTEY@51 edges=17 letters=18 loops=0 comp=1 span=68 central=X dead at the board                     32203s  27.3M/s ETA  12.2 min
+  [2019/2513·442] KOMXADMXUUUBOOTEY@31 edges=17 letters=18 loops=0 comp=1 span=48 central=P dead at the board                     32277s  27.3M/s ETA  11.0 min
+  [2020/2513·443] KOMXADMXUUUBOOTEY@54 edges=17 letters=19 loops=0 comp=2 span=71 central=G      68 stops → 2 physical, best IC 0.048 tail -4.954   32341s  27.3M/s ETA   9.7 min
+    shell C/gamma/III-VII-VIII/AAAM pos SPSY plugs 10  → logs/welchman-physical.jsonl
+  [2021/2513·444] KOMXADMXUUUBOOTEY@17 edges=17 letters=19 loops=0 comp=2 span=34 central=O dead at the board                     32430s  27.3M/s ETA   8.5 min
+  [2022/2513·445] KOMXADMXUUUBOOTE@51 edges=16 letters=17 loops=0 comp=1 span=67 central=X       2 stops → 0 scorable completions   32494s  27.3M/s ETA   7.3 min
+  [2023/2513·446] ZWODREISECHSEINS@14 edges=16 letters=17 loops=0 comp=1 span=30 central=S       2 stops → 0 scorable completions   32567s  27.3M/s ETA   6.1 min
+  [2024/2513·447] KOMXADMXUUUBOOTE@31 edges=16 letters=18 loops=0 comp=2 span=47 central=P      54 stops → 0 scorable completions   32643s  27.3M/s ETA   4.9 min
+  [2025/2513·448] KOMXADMXUUUBOOTE@17 edges=16 letters=18 loops=0 comp=2 span=33 central=O       4 stops → 0 scorable completions   32729s  27.3M/s ETA   3.7 min
+  [2026/2513·449] KOMXADMXUUUBOOTE@54 edges=16 letters=19 loops=0 comp=3 span=70 central=G    2044 stops → 2 physical, best IC 0.048 tail -4.998   32802s  27.3M/s ETA   2.4 min
+    shell C/gamma/III-VII-VIII/AAAM pos SPSY plugs 10  → logs/welchman-physical.jsonl
+  [2027/2513·450] KOMXADMXUUUBOOTE@53 edges=16 letters=19 loops=0 comp=3 span=69 central=G      18 stops → 2 physical, best IC 0.052 tail -4.956   32880s  27.3M/s ETA   1.2 min
+    shell C/gamma/II-VII-VIII/AAAE pos XTBH plugs 10  → logs/welchman-physical.jsonl
+  [2028/2513·451] ZWODREISECHSEINS@48 edges=16 letters=19 loops=0 comp=3 span=64 central=S     508 stops → 0 scorable completions   32946s  27.3M/s ETA   0.0 min
+
+total raw stops: 642562788 over 900228096768 settings (27.3M/s mean)
+survived the 10-plug sieve: 74
+best physical candidate: IC 0.041 tail -4.488 (IC floor 0.055 / threshold -3.600) — below the bar, so no break claimed
+  FFFTTTBLEIBTBESE@23 edges=16 letters=14 loops=4 comp=2 span=39 central=F
+  UKW C Greek beta WO III-V-VIII pos WMSL
+  QAKYCQYYPQSSGICERTAMLADFFFTTTBLEIBTBESEVZSHLUUHIVLLKIMYSILWBUCCAGZEBSXPW
+quarantine: wrote 2 near-miss(es) → logs/quarantine_catalog_viii_fast.json (solo pass complete)
+  escalate: --hybrid --hybrid-stochastic --hybrid-quarantine logs/quarantine_catalog_viii_fast.json
+=== exit 0 2026-09-25T23:57:03Z ===
