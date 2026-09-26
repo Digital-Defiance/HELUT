@@ -10,9 +10,9 @@ Course surface: [`../textbook/chapters/applications.tex`](../textbook/chapters/a
 
 | # | Application | Claim / bar | Reproduce |
 |---|-------------|-------------|-----------|
-| I.1 | Encrypted `full_adder` SING | **C6**, **C20**; **C21** (*e*=0 BK); covering noisy **C52** | `Scripts/helut_encrypted_sing.sh`; Metal boolean / crypto / covering-b1 *k*=7 |
+| I.1 | Encrypted `full_adder` SING | **C6**, **C20**; **C21** (*e*=0 BK); covering noisy **C52**; balanced covering-b2 **C70** | `Scripts/helut_encrypted_sing.sh`; Metal boolean / crypto / covering-b1 *k*=7; **C70** `--balanced-gadget` |
 | I.2 | Encrypted tree / regex SING | **C6** (demo *N*); regex covering **C57** @ production *N* | `--bench regex_netlist.json --degree 1024 --paths 'public-ms covering-b2' --boolean-scale-mul 7 --bk-noise-sigma 128`; tree still demo *N* |
-| I.3 | Hardness + noisy-BK certificates | **C5**, **C22**, **C23**, **C52** | `--hardness-table`; `--measure-bk-noise`; `Scripts/helut_sage_estimate.sh`; covering-b1 *k*=7 |
+| I.3 | Hardness + noisy-BK certificates | **C5**, **C22**, **C23**, **C52**, **C57**, **C70** | `--hardness-table`; `--measure-bk-noise`; `Scripts/helut_sage_estimate.sh`; covering-b1 *k*=7; balanced covering-b2 **C70** |
 
 Shape laboratory (oracle, not FHE claim): decision tree / regex / PicoRV32 (**C1**) — labeled distinct from I.1–I.3.
 
@@ -36,7 +36,7 @@ Shape laboratory (oracle, not FHE claim): decision tree / regex / PicoRV32 (**C1
 
 | Slot | Five-cell ready? | Notes |
 |------|------------------|-------|
-| I.1–I.3 | yes (gallery figures) | **C52** covering-b1; **C57** covering-b2 regex @ production *N*. **C26**/**C56** `cryptoPublicMS` still fail. Native *k*=1 still **C37**. Tree Metal covering and PicoRV covering @ *N*=1024 remain. **C58** lut6 cut. |
+| I.1–I.3 | yes (gallery figures) | **C52** covering-b1; **C57** unsigned covering-b2 *k*=7 stays short of −64; **C70** balanced covering-b2 full-adder clears that gate. **C26**/**C56** `cryptoPublicMS` still fail. Native *k*=1 still **C37**. Tree Metal covering and PicoRV covering @ *N*=1024 remain. **C58** lut6 cut. |
 | II.1–II.2 | yes | II.3 seminar-only until more receipts |
 | III.1, III.3 | receipts present; acceptance OPEN | III.2 is empirical optimizer evidence. Fixture-v4 is experimental and not for real data; no IND-CPA, HMAC-security, or external-cryptanalysis claim. |
 

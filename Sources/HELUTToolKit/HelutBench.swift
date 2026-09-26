@@ -858,8 +858,15 @@ private func runEncryptedNetlistBench() {
         queue: MTLCommandQueue?
     ) throws {
         guard wantPath(label) else { return }
-        let params = lweDimension.map { raw.withLWEDimension($0) } ?? raw
-        print("  starting \(label)\(lweDimension.map { "  n=\($0)" } ?? "")")
+        let gadget: GGSWParams = {
+            guard CommandLine.arguments.contains("--balanced-gadget"),
+                  raw.baseLog * raw.levelCount == 32
+            else { return raw }
+            return raw.withBalancedDigits()
+        }()
+        let params = lweDimension.map { gadget.withLWEDimension($0) } ?? gadget
+        print("  starting \(label)\(lweDimension.map { "  n=\($0)" } ?? "")"
+            + (params.balancedDigits ? "  digits=balanced" : ""))
         fflush(stdout)
         clear.resetState()
         let secret = TFHESecretKey.random(params: params.tfhe, seed: seed)
@@ -2074,6 +2081,7 @@ func runNoisyBKMeasure() {
     }()
     let coveringSweep = CommandLine.arguments.contains("--covering-sweep")
     let booleanScaleMul = intFlag("--boolean-scale-mul") ?? 1
+    let balancedDigits = CommandLine.arguments.contains("--balanced-gadget")
     let lweDimension = intFlag("--lwe-dimension")
     let injectLabel: String
     if injectNoise.usesGaussian {
@@ -2085,6 +2093,7 @@ func runNoisyBKMeasure() {
     print("  N=\(degree)  trials=\(trials)  inject ∈ {0, \(injectLabel)}"
         + (coveringSweep ? "  covering-sweep=yes" : "")
         + (booleanScaleMul > 1 ? "  kδ=\(booleanScaleMul)" : "")
+        + (balancedDigits ? "  digits=balanced" : "")
         + (lweDimension.map { "  n=\($0)" } ?? "")
         + (identityParallelism > 1 ? "  parallelism=\(identityParallelism)" : ""))
     print("")
@@ -2100,6 +2109,9 @@ func runNoisyBKMeasure() {
         for baseLog in [16, 8, 4, 2, 1] where 32 % baseLog == 0 {
             gadgets.append(("covering-b\(baseLog)", .covering(degree: degree, baseLog: baseLog)))
         }
+    }
+    if balancedDigits {
+        gadgets = gadgets.map { ($0.0, $0.1.withBalancedDigits()) }
     }
     if degree <= 16 {
         print("  note: booleanPublicMS (ℓ=1) omitted — incomplete gadget; BK noise mis-decomposes")

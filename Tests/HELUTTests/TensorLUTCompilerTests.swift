@@ -126,6 +126,34 @@ final class TensorLUTCompilerTests: XCTestCase {
             XCTAssertEqual(ptr[q], Float(expected), accuracy: accuracy, "Q wire \(q)")
         }
     }
+
+    func testSDFFCEEnableGatesResetOnPicoRV() throws {
+        guard let path = resolveNetlistPath("picorv32_lut6_netlist.json") else {
+            throw XCTSkip("picorv32_lut6_netlist.json not found")
+        }
+        let yosys = loadYosysNetlist(from: path)
+        guard let (_, module) = yosys.modules.first else {
+            return XCTFail("empty netlist")
+        }
+        let soft = TensorLUTCompiler.compile(module: module)
+        XCTAssertEqual(soft.dffs.filter { $0.enableGatesReset != 0 }.count, 40)
+        XCTAssertEqual(soft.dffs.filter { $0.enableGatesReset == 0 }.count, soft.dffs.count - 40)
+    }
+
+    func testSDFFCEFlagFromMinimalModule() throws {
+        let json = """
+        {"modules":{"m":{"ports":{},"cells":{
+          "ce":{"type":"$_SDFFCE_PP0P_","parameters":{},"connections":{"D":[1],"Q":[2],"E":[3],"R":[4]}},
+          "e":{"type":"$_SDFFE_PP0P_","parameters":{},"connections":{"D":[5],"Q":[6],"E":[7],"R":[8]}}
+        }}}}
+        """.data(using: .utf8)!
+        let netlist = try JSONDecoder().decode(YosysNetlist.self, from: json)
+        let module = netlist.modules["m"]!
+        let soft = TensorLUTCompiler.compile(module: module)
+        let byQ = Dictionary(uniqueKeysWithValues: soft.dffs.map { (Int($0.qWire), $0) })
+        XCTAssertEqual(byQ[2]?.enableGatesReset, 1)
+        XCTAssertEqual(byQ[6]?.enableGatesReset, 0)
+    }
 }
 
 private func resolveNetlistPath(_ filename: String) -> String? {

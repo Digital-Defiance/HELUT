@@ -13,14 +13,29 @@ package struct GGSWParams: Sendable, Equatable {
     package var baseLog: Int
     /// Number of decomposition levels ℓ.
     package var levelCount: Int
+    /// Signed digits in \([-B/2, B/2)\), exact mod \(2^{32}\) when the gadget covers the word.
+    /// Unsigned \([0, B)\) remains the default.
+    package var balancedDigits: Bool
 
-    package init(tfhe: TFHEParams, baseLog: Int, levelCount: Int) {
+    package init(
+        tfhe: TFHEParams,
+        baseLog: Int,
+        levelCount: Int,
+        balancedDigits: Bool = false
+    ) {
         precondition(baseLog > 0 && baseLog <= 32)
         precondition(levelCount > 0)
         precondition(baseLog * levelCount <= 32)
+        if balancedDigits {
+            precondition(
+                baseLog * levelCount == 32,
+                "balanced digits need a covering gadget (baseLog·ℓ = 32)"
+            )
+        }
         self.tfhe = tfhe
         self.baseLog = baseLog
         self.levelCount = levelCount
+        self.balancedDigits = balancedDigits
     }
 
     /// Exact boolean gadget: one level, digit = full coefficient, `g₀ = 1`.
@@ -85,7 +100,21 @@ package struct GGSWParams: Sendable, Equatable {
 
     /// Cut blind-rotate CMUX count (`n` LWE mask bits). Does not change `N` or the gadget.
     package func withLWEDimension(_ n: Int) -> GGSWParams {
-        GGSWParams(tfhe: tfhe.withLWEDimension(n), baseLog: baseLog, levelCount: levelCount)
+        GGSWParams(
+            tfhe: tfhe.withLWEDimension(n),
+            baseLog: baseLog,
+            levelCount: levelCount,
+            balancedDigits: balancedDigits
+        )
+    }
+
+    package func withBalancedDigits(_ enabled: Bool = true) -> GGSWParams {
+        GGSWParams(
+            tfhe: tfhe,
+            baseLog: baseLog,
+            levelCount: levelCount,
+            balancedDigits: enabled
+        )
     }
     package var gadget: [UInt32] {
         (0..<levelCount).map { i in
@@ -356,6 +385,36 @@ package func gadgetDecomposeScalar(
     return digits
 }
 
+/// Signed digits in \([-B/2, B/2)\), least-significant level first, with carry.
+/// A negative digit is stored as its \(2^{32}\) two's complement, so the existing
+/// modular scale is multiplication by that small signed value. Exact when
+/// `baseLog·levelCount = 32` (the final carry wraps on the torus).
+package func gadgetDecomposeScalarBalanced(
+    _ value: UInt32,
+    baseLog: Int,
+    levelCount: Int
+) -> [UInt32] {
+    precondition(baseLog > 0 && baseLog < 32)
+    precondition(baseLog * levelCount == 32)
+    let base = UInt32(1) &<< UInt32(baseLog)
+    let half = base &>> 1
+    let mask = base &- 1
+    var carry: UInt32 = 0
+    var digits = [UInt32](repeating: 0, count: levelCount)
+    for level in stride(from: levelCount - 1, through: 0, by: -1) {
+        let shift = 32 - (level + 1) * baseLog
+        let raw = ((value &>> UInt32(shift)) & mask) &+ carry
+        if raw >= half {
+            carry = 1
+            digits[level] = raw &- base
+        } else {
+            carry = 0
+            digits[level] = raw
+        }
+    }
+    return digits
+}
+
 /// Key-switch under `e = 0`. Identity keys return the input unchanged.
 package func keySwitch(_ lwe: LWECiphertext, key: KeySwitchKey) -> LWECiphertext {
     precondition(lwe.lweDimension == key.inputDimension)
@@ -470,8 +529,26 @@ package func scaleGLWEByPolynomial(_ ct: GLWECiphertext, _ poly: [UInt32]) -> GL
 package func gadgetDecompose(
     _ poly: [UInt32],
     baseLog: Int,
-    levelCount: Int
+    levelCount: Int,
+    balanced: Bool = false
 ) -> [[UInt32]] {
+    if balanced {
+        var levels = Array(
+            repeating: [UInt32](repeating: 0, count: poly.count),
+            count: levelCount
+        )
+        for (coeffIndex, value) in poly.enumerated() {
+            let digits = gadgetDecomposeScalarBalanced(
+                value,
+                baseLog: baseLog,
+                levelCount: levelCount
+            )
+            for level in 0..<levelCount {
+                levels[level][coeffIndex] = digits[level]
+            }
+        }
+        return levels
+    }
     let baseMask = baseLog == 32 ? UInt32.max : (UInt32(1) &<< UInt32(baseLog)) &- 1
     var levels = Array(
         repeating: [UInt32](repeating: 0, count: poly.count),
@@ -571,7 +648,8 @@ package func externalProduct(_ ggsw: GGSWCiphertext, _ ct: GLWECiphertext) -> GL
         let digits = gadgetDecompose(
             ct.mask[glweRow],
             baseLog: params.baseLog,
-            levelCount: params.levelCount
+            levelCount: params.levelCount,
+            balanced: params.balancedDigits
         )
         for level in 0..<params.levelCount {
             acc = addGLWE(acc, scaleGLWEByPolynomial(ggsw.row(glweRow: glweRow, level: level), digits[level]))
@@ -580,7 +658,8 @@ package func externalProduct(_ ggsw: GGSWCiphertext, _ ct: GLWECiphertext) -> GL
     let bodyDigits = gadgetDecompose(
         ct.body,
         baseLog: params.baseLog,
-        levelCount: params.levelCount
+        levelCount: params.levelCount,
+        balanced: params.balancedDigits
     )
     for level in 0..<params.levelCount {
         acc = addGLWE(acc, scaleGLWEByPolynomial(ggsw.row(glweRow: k, level: level), bodyDigits[level]))

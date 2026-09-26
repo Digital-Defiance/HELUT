@@ -45,11 +45,11 @@ export function NetlistFheJournalPage() {
             <li>
               <span className="mono">C57</span>
               <span>
-                Covering-b2 (<em>ℓ</em>=16) σ=128 at <em>N</em>=1024: Metal public-ms adder
-                10.33 s/1 and regex 23 LUT 26.69 s/1 PASS at <em>k</em>=7. The
-                εlog2≈−110.7 recorded here was a 4-trial low-σ̂ draw — settled it is
-                −60.5 at <em>k</em>=7, short of −64. Stride <em>k</em>=14 clears it
-                (−319.3, 95% bound −200.5) with SING still PASS. Corrected 2026-08-16. Covering-b4
+                Covering-b2 (<em>ℓ</em>=16) σ=128 at <em>N</em>=1024. Unsigned digits at{' '}
+                <em>k</em>=7 stay short of −64 (the four-trial −110.7 was a low-σ̂ draw).
+                The integrated unsigned <em>k</em>=14 receipt is 192 identity trials, a
+                24-event bound of −93.8, then full-adder 8/8 PASS. Historical one-row
+                adder and regex timings remain. Balanced digits are C70. Covering-b4
                 public-ms and the historical C39 E256 58-LUT cone covering-b2 SING FAIL
                 (not the live fixture-v4 conjugated-XOR center).
               </span>
@@ -128,6 +128,19 @@ export function NetlistFheJournalPage() {
                 identity BRs, not key-switch. The <em>n</em>=512 sum mismatch recorded here
                 until 2026-08-15 is <strong>withdrawn</strong>: it was nondeterministic input
                 encryption (Dictionary-order RNG), not a noise limit.
+              </span>
+            </li>
+            <li>
+              <span className="mono">C70</span>
+              <span>
+                Balanced covering-b2 digits at <em>N</em>=1024, σ=128, stride-<em>k</em>=7.
+                Unsigned C57 <em>k</em>=7 stays short of −64. The circuit gate is a 32-trial
+                draw: max|e|=1,495,355, σ₉₅=726,622, 24 events, log₂ε=−72.7, then full-adder
+                Metal SING 8/8 PASS (49.6 s evaluation, 241 s end to end). A separate identity
+                draw printed −113.5. Covering base 1 does not move. C60 was not remeasured.
+                Unsigned digits remain the default. Same-week compiler corrections (two-phase
+                TensorLUT DFF commit, SDFFCE enable-over-reset, fail-closed unknown cells,
+                full-word BK fingerprint) do not move ε.
               </span>
             </li>
           </ul>

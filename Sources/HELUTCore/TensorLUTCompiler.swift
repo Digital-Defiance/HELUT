@@ -51,7 +51,8 @@ package enum TensorLUTCompiler {
         var luts: [TensorLUT6Cell] = []
         var dffs: [TensorDFFCell] = []
 
-        for (_, cell) in module.cells.sorted(by: { $0.key < $1.key }) {
+        for (cellName, cell) in module.cells.sorted(by: { $0.key < $1.key }) {
+            assertSupportedNetlistCell(cell, name: "TensorLUTCompiler '\(cellName)'")
             if cell.type == "$lut" {
                 guard let aBits = cell.connections["A"],
                       let yBits = cell.connections["Y"],
@@ -108,7 +109,8 @@ package enum TensorLUTCompiler {
                         resetWire: resetWire,
                         enableActiveHigh: enableActiveHigh,
                         resetActiveHigh: resetActiveHigh,
-                        resetValue: resetValue
+                        resetValue: resetValue,
+                        enableGatesReset: polarity.clockEnableGatesReset ? 1 : 0
                     )
                 )
             }

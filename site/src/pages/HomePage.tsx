@@ -104,7 +104,9 @@ export function HomePage() {
               <code>python3 Scripts/tensorlut_math_ref.py</code>. CUDA / CPU production FHE
               are trajectory. Calibrated hardness is not lattice-estimator Cost on every row (H1 /
               C23: prod-n1024-s16 HELUT 175.7 vs Sage 180.2). Covering Track A noisy BK at{' '}
-              <em>N</em>=1024 is C52–C54 (<em>k</em>=7) and cheaper covering-b2 C57; native <em>k</em>=1 (C37/C55) and{' '}
+              <em>N</em>=1024 is C52–C54 (<em>k</em>=7) and cheaper covering-b2 C57. Balanced
+              digits clear the full-adder <em>k</em>=7 gate (C70); unsigned <em>k</em>=7 stays
+              short of −64. Native <em>k</em>=1 (C37/C55) and{' '}
               <code>cryptoPublicMS</code> (C26/C56) remain graded negatives. Campaign fitness is
               Welchman/cleartext—not FHE tick rate. P1030680 is not decrypted.
             </p>
@@ -119,7 +121,9 @@ export function HomePage() {
                 that <em>N</em> with <em>e</em>=0 BK (C62). Covering Q on that core PASSes at{' '}
                 <em>N</em>=64 (C63) and still FAILs at production <em>N</em> (C60/C61). Extract→KS
                 LWE <em>n</em>=64 native-<em>k</em> covering is C64; PicoRV lut6 covering Q via that
-                KS is C65–C66/C68 (C60/C61 stay <em>n</em>=<em>N</em> <em>k</em>=7 FAIL). C69: covering
+                KS is C65–C66/C68 (C60/C61 stay <em>n</em>=<em>N</em> <em>k</em>=7 FAIL). C70: balanced
+                covering-b2 digits clear the full-adder <em>k</em>=7 gate; unsigned <em>k</em>=7 stays
+                short of −64 (C57). C69: covering
                 KS PASSes at <em>n</em>=256 and <em>n</em>=512 (the earlier <em>n</em>=512 FAIL was
                 withdrawn 2026-08-15 — a determinism artifact, not a noise limit). Chronology:{' '}
                 <Link to="/projects/netlist-fhe/journal">FHE journal</Link>.

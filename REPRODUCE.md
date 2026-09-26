@@ -478,7 +478,35 @@ HELUT_QUIET_METAL_BR_PROGRESS=1 /usr/bin/time -l \
 
 Acceptance requires exactly one selected path, `identity residual trials=192  (n=1024)  parallelism=8`, `rows 8`, preflight and result `clears=yes`, `result PASS`, summary `cert yes`, and process status 0. The banked run reports max|e|=3,369,752, σ₉₅=1,282,096.9856, 24-event log₂ε=−93.8005, 8/8 rows, 48.1757 s encrypted evaluation, and 969.48 s end to end. Raw receipt: `logs/helut-encrypted-k14-recovery-20260906T030525Z-t192-p8.raw.log`; machine receipt: `logs/helut-encrypted-k14-recovery-20260906T030525Z.json`; preregistration: `logs/helut-encrypted-k14-recovery-20260906T030525Z-preregister.json`.
 
-This earned result is *k*=14. The preserved *k*=14/32-sample attempt stopped before circuit execution at log₂ε=−48.18 (`logs/helut-encrypted-bound-20260906T012213Z-t32-k14.raw.log`). Before increasing the sample count, an eight-way 32-sample replay exactly matched the serial max|e|, σ₉₅, event count, and log₂ε; identity-measurement wall time fell from 1,132.49 s to 187.92 s (6.03×). That is a sampling-stage CPU speedup, not encrypted circuit or FHE throughput. The *k*=16/t40 PASS remains preserved as fallback history (`logs/helut-encrypted-bound-20260906T014326Z.json`). Do not add `--unsafe-noisy-bk-diagnostic`, substitute the 175.7-bit calibration row for this residual bound, or generalize the 24-event full-adder result to arbitrary circuits/depth. Primary inputs in this command are exact/noiseless. Covering-b4 public-ms and the historical pre-fixture-v4 E256 58-LUT covering-b2 SING failures remain separate negatives.
+This earned result is *k*=14 with unsigned digits. The preserved *k*=14/32-sample attempt stopped before circuit execution at log₂ε=−48.18 (`logs/helut-encrypted-bound-20260906T012213Z-t32-k14.raw.log`). Before increasing the sample count, an eight-way 32-sample replay exactly matched the serial max|e|, σ₉₅, event count, and log₂ε; identity-measurement wall time fell from 1,132.49 s to 187.92 s (6.03×). That is a sampling-stage CPU speedup, not encrypted circuit or FHE throughput. The *k*=16/t40 PASS remains preserved as fallback history (`logs/helut-encrypted-bound-20260906T014326Z.json`). Do not add `--unsafe-noisy-bk-diagnostic`, substitute the 175.7-bit calibration row for this residual bound, or generalize the 24-event full-adder result to arbitrary circuits/depth. Primary inputs in this command are exact/noiseless. Covering-b4 public-ms and the historical pre-fixture-v4 E256 58-LUT covering-b2 SING failures remain separate negatives. Balanced digits on the same covering base are **C70**.
+
+## Balanced covering-b2 digits at *k*=7 (C70)
+
+Unsigned *k*=7 stays short of −64. `--balanced-gadget` uses digits in [−B/2, B/2). The decomposition is exact when baseLog·ℓ=32. Covering base 1 is unchanged.
+
+```bash
+set -o pipefail
+.build/release/helut-bench --measure-bk-noise --degree 1024 --trials 32 \
+  --bk-noise-sigma 128 --covering-base-log 2 --boolean-scale-mul 7 \
+  --bk-identity-parallelism 8 --balanced-gadget \
+  | tee logs/c57-balanced-k7-n32.log
+HELUT_QUIET_METAL_BR_PROGRESS=1 /usr/bin/time -l \
+  .build/release/helut-bench \
+  --bench netlist.json \
+  --degree 1024 \
+  --bench-encrypted \
+  --sing \
+  --vectors 8 \
+  --bk-noise-sigma 128 \
+  --bk-identity-trials 32 \
+  --bk-identity-parallelism 8 \
+  --paths 'blind-rotate-metal public-ms covering-b2' \
+  --boolean-scale-mul 7 \
+  --balanced-gadget \
+  2>&1 | tee logs/c57-balanced-k7-sing-v8.log
+```
+
+Identity: noiseless max|e|=0; noisy max|e|=1,403,097, σ̂=465,308.8, printed 95% union −113.5, clears −64. Circuit gate (a different 32-trial draw): max|e|=1,495,355, σ₉₅=726,621.9, 24 events, log₂ε=−72.7, clears −64, then 8/8 PASS, 49.6 s evaluation, 241 s end to end. `logs/c57-balanced-k7-sing-smoke.log` is a one-trial `--unsafe-noisy-bk-diagnostic` shader bring-up and is not this certificate. Exact/noiseless primary inputs. Not PicoRV (**C60** not remeasured). Not covering-b1.
 
 CPU covering (same gadget, demo *N*):
 

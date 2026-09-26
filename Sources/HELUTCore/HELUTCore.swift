@@ -972,6 +972,23 @@ package func parseYosysDFFPolarity(_ type: String) -> YosysDFFPolarity {
     )
 }
 
+/// TensorLUT, the cleartext reference, and the graph compiler accept `$lut` and
+/// clocked sync-reset DFFs. Anything else used to read as constant 0.
+package func assertSupportedNetlistCell(_ cell: YosysCell, name: String) {
+    if cell.type == "$lut" { return }
+    guard isYosysDFFType(cell.type) else {
+        fatalError("\(name): unsupported cell type \(cell.type)")
+    }
+    let kind = cell.type.dropFirst(2).split(separator: "_").first.map(String.init) ?? ""
+    if kind.contains("LATCH") {
+        fatalError("\(name): \(cell.type) is a latch, not a clocked DFF")
+    }
+    let polarity = parseYosysDFFPolarity(cell.type)
+    if cell.connections["R"] != nil && polarity.syncReset == nil {
+        fatalError("\(name): \(cell.type) reset is not a modeled synchronous reset")
+    }
+}
+
 /// Compiles a Yosys module into one `MPSGraph`, routing wires by Yosys net ID.
 package final class YosysGraphCompiler {
     /// Metal wire length (`N` or `2N` when `glwe-packed`).
@@ -1028,6 +1045,9 @@ package final class YosysGraphCompiler {
     package func compile(moduleName: String, module: YosysModule) {
         lastToeplitzExpandSeconds = 0
         let compileStarted = CFAbsoluteTimeGetCurrent()
+        for (cellName, cell) in module.cells {
+            assertSupportedNetlistCell(cell, name: "YosysGraphCompiler '\(cellName)'")
+        }
         compileInputPorts(module.ports)
         // Register Q placeholders before LUTs so sequential feedback nets resolve.
         compileDFFStateInputs(module.cells)
@@ -1131,10 +1151,35 @@ package final class YosysGraphCompiler {
                     resetAsserted = graph.subtraction(one, rawR, name: "\(base)_R_active")
                 }
                 let oneMinusReset = graph.subtraction(one, resetAsserted, name: "\(base)_notR")
-                let resetValue = constantTensor(value: reset.value)
-                let cleared = graph.multiplication(resetAsserted, resetValue, name: "\(base)_rstVal")
-                let held = graph.multiplication(oneMinusReset, qNext, name: "\(base)_rstHold")
-                qNext = graph.addition(cleared, held, name: "\(base)_Qnext")
+                let resetValueTensor = constantTensor(value: reset.value)
+                let cleared = graph.multiplication(resetAsserted, resetValueTensor, name: "\(base)_rstVal")
+                if polarity.clockEnableGatesReset {
+                    // $_SDFFCE_: inactive enable holds Q even when reset is asserted.
+                    let resetMux = graph.addition(
+                        cleared,
+                        graph.multiplication(oneMinusReset, dTensor, name: "\(base)_rstD"),
+                        name: "\(base)_rstMux"
+                    )
+                    if let eBits = cell.connections["E"], eBits.first != nil,
+                       let qTensor = dffNodes[index].stateInput.placeholder {
+                        let enableActiveHigh = polarity.enableActiveHigh ?? true
+                        let rawE = resolveConnectionBit(eBits[0], label: "DFF '\(cellName)' E")
+                        let eTensor = enableActiveHigh
+                            ? rawE
+                            : graph.subtraction(one, rawE, name: "\(base)_E_gate")
+                        let oneMinusE = graph.subtraction(one, eTensor, name: "\(base)_notE_gate")
+                        qNext = graph.addition(
+                            graph.multiplication(eTensor, resetMux, name: "\(base)_eRst"),
+                            graph.multiplication(oneMinusE, qTensor, name: "\(base)_holdGate"),
+                            name: "\(base)_Qnext"
+                        )
+                    } else {
+                        qNext = resetMux
+                    }
+                } else {
+                    let held = graph.multiplication(oneMinusReset, qNext, name: "\(base)_rstHold")
+                    qNext = graph.addition(cleared, held, name: "\(base)_Qnext")
+                }
             }
 
             dffNodes[index].bindStateOutput(qNext)

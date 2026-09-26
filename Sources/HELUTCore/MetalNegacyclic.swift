@@ -486,7 +486,7 @@ private final class MetalBRPersistEngine: @unchecked Sendable {
         uint levelCount;
         uint baseLog;
         uint shift;
-        uint pad;
+        uint balanced;
     };
 
     uint take_digit(thread uint *remaining, uint baseLog, uint level) {
@@ -556,12 +556,35 @@ private final class MetalBRPersistEngine: @unchecked Sendable {
             uint gatedM = 0u;
             uint gatedB = 0u;
             for (uint j = 0u; j < n; ++j) {
-                uint remM = shDiffM[j];
-                uint remB = shDiffB[j];
                 uint idx = (k >= j) ? (k - j) : (k + n - j);
+                uint dm[32];
+                uint db[32];
+                if (U.balanced != 0u) {
+                    uint base = 1u << U.baseLog;
+                    uint halfBase = base >> 1u;
+                    uint mask = base - 1u;
+                    uint carryM = 0u;
+                    uint carryB = 0u;
+                    for (int lv = int(U.levelCount) - 1; lv >= 0; --lv) {
+                        uint sh = 32u - (uint(lv) + 1u) * U.baseLog;
+                        uint rawM = ((shDiffM[j] >> sh) & mask) + carryM;
+                        uint rawB = ((shDiffB[j] >> sh) & mask) + carryB;
+                        if (rawM >= halfBase) { carryM = 1u; dm[lv] = rawM - base; }
+                        else { carryM = 0u; dm[lv] = rawM; }
+                        if (rawB >= halfBase) { carryB = 1u; db[lv] = rawB - base; }
+                        else { carryB = 0u; db[lv] = rawB; }
+                    }
+                } else {
+                    uint remM = shDiffM[j];
+                    uint remB = shDiffB[j];
+                    for (uint lv = 0u; lv < U.levelCount; ++lv) {
+                        dm[lv] = take_digit(&remM, U.baseLog, lv);
+                        db[lv] = take_digit(&remB, U.baseLog, lv);
+                    }
+                }
                 for (uint lv = 0u; lv < U.levelCount; ++lv) {
-                    uint dmj = take_digit(&remM, U.baseLog, lv);
-                    uint dbj = take_digit(&remB, U.baseLog, lv);
+                    uint dmj = dm[lv];
+                    uint dbj = db[lv];
                     device const uint *g0m = ggsw + (lv * 4u) * n;
                     device const uint *g0b = g0m + n;
                     device const uint *g1m = g0b + n;
@@ -630,17 +653,12 @@ private final class MetalBRPersistEngine: @unchecked Sendable {
         return t
     }
 
+    /// Every word. A 32-word sample aliased distinct bootstrap keys onto one NTT cache.
     private static func fingerprint(_ words: [UInt32]) -> UInt64 {
         var h: UInt64 = UInt64(words.count) &* 0x9E3779B97F4A7C15
-        if words.isEmpty { return h }
-        h ^= UInt64(words[0])
-        h ^= UInt64(words[words.count - 1]) &* 0x100000001b3
-        let stride = max(1, words.count / 32)
-        var i = 0
-        while i < words.count {
-            h ^= UInt64(words[i])
+        for word in words {
+            h ^= UInt64(word)
             h = h &* 0x100000001b3
-            i += stride
         }
         return h
     }
@@ -652,6 +670,7 @@ private final class MetalBRPersistEngine: @unchecked Sendable {
         lweA: [UInt32],
         baseLog: Int,
         tileWidth: Int,
+        balancedDigits: Bool = false,
         queue: MTLCommandQueue,
         progress: ((String) -> Void)?
     ) throws -> (mask: [UInt32], body: [UInt32]) {
@@ -701,7 +720,7 @@ private final class MetalBRPersistEngine: @unchecked Sendable {
                 levelCount: UInt32(levelCount),
                 baseLog: UInt32(baseLog),
                 shift: UInt32(shift),
-                pad: 0
+                balanced: balancedDigits ? 1 : 0
             )
             guard let cmd = queue.makeCommandBuffer(),
                   let enc = cmd.makeComputeCommandEncoder() else {
@@ -743,7 +762,7 @@ private struct BRTileUniforms {
     var levelCount: UInt32
     var baseLog: UInt32
     var shift: UInt32
-    var pad: UInt32
+    var balanced: UInt32
 }
 
 private enum MetalBRPersistCache {
@@ -792,12 +811,14 @@ extension MetalGGSW {
         let maskDigits = gadgetDecompose(
             ciphertext.mask[0],
             baseLog: params.baseLog,
-            levelCount: params.levelCount
+            levelCount: params.levelCount,
+            balanced: params.balancedDigits
         )
         let bodyDigits = gadgetDecompose(
             ciphertext.body,
             baseLog: params.baseLog,
-            levelCount: params.levelCount
+            levelCount: params.levelCount,
+            balanced: params.balancedDigits
         )
         let engine = try MetalEPCache.engine(
             device: device,
@@ -851,6 +872,7 @@ extension MetalGGSW {
                     lweA: lwe.a,
                     baseLog: params.baseLog,
                     tileWidth: w,
+                    balancedDigits: params.balancedDigits,
                     queue: commandQueue,
                     progress: MetalBRControl.progress
                 )
@@ -879,6 +901,7 @@ extension MetalGGSW {
                 lweA: lwe.a,
                 baseLog: params.baseLog,
                 tileWidth: w,
+                balancedDigits: params.balancedDigits,
                 queue: commandQueue,
                 progress: MetalBRControl.progress
             )

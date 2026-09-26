@@ -60,6 +60,9 @@ package struct TensorDFFCell: Codable {
     package let resetActiveHigh: Int32
     /// Loaded when reset is asserted (`0` or `1`).
     package let resetValue: Int32
+    /// `1` for Yosys `$_SDFFCE_*`: inactive enable holds Q even if reset is asserted.
+    /// `0` keeps reset-over-enable (`$_SDFF_` / `$_SDFFE_`).
+    package let enableGatesReset: Int32
 
     package init(
         dWire: Int32,
@@ -68,7 +71,8 @@ package struct TensorDFFCell: Codable {
         resetWire: Int32 = -1,
         enableActiveHigh: Int32 = 1,
         resetActiveHigh: Int32 = 1,
-        resetValue: Int32 = 0
+        resetValue: Int32 = 0,
+        enableGatesReset: Int32 = 0
     ) {
         self.dWire = dWire
         self.qWire = qWire
@@ -77,6 +81,7 @@ package struct TensorDFFCell: Codable {
         self.enableActiveHigh = enableActiveHigh
         self.resetActiveHigh = resetActiveHigh
         self.resetValue = resetValue
+        self.enableGatesReset = enableGatesReset
     }
 }
 

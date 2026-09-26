@@ -155,11 +155,12 @@ identity residual becomes decodable ($\varepsilon\log_2\approx -12.6$), but Meta
 public-ms full\_adder SING fails (sum mismatch). Torus $\sigma{=}128$ remains
 undecodable. Do not quote $k\delta$ as a \texttt{cryptoPublicMS} noisy-BK close.}
 
-\reproduced{C57}{Covering-b2 $\ell{=}16$, $k{=}7$, $\sigma{=}128$ at $N{=}1024$:
-identity $\varepsilon\log_2\approx-110.7$ (4 trials). Metal public-ms adder
-$10.33\,\mathrm{s}/1$ and regex $23$ LUT $26.69\,\mathrm{s}/1$ PASS.
-Covering-b4 public-ms adder and E256 $58$-LUT covering-b2 SING FAIL.
-CPU covering-b2 PASSes at demo $N{=}8$.}
+\reproduced{C57}{Covering-b2 $\ell{=}16$ at $N{=}n{=}1024$, $\sigma{=}128$.
+Unsigned $k{=}7$ is short of $-64$ (the four-trial $-110.7$ was a low-$\hat\sigma$ draw).
+The preregistered $k{=}14$, 192-trial run gives a 24-event bound of $-93.8005$
+and full-adder SING 8/8 PASS ($48.1757\,\mathrm{s}$ evaluation).
+Historical one-row adder and regex timings remain. Covering-b4 and the
+historical E256 covering-b2 negatives remain separate. Balanced digits are \cid{70}.}
 
 \reproduced{C58}{PicoRV32 \texttt{abc -lut 6}: $2006$ \texttt{\$lut} ($-58\%$ vs
 lut2 $4785$). CPU public-ms boolean SING PASS at $N{=}64$ ($1.35\,\mathrm{s}$,
@@ -205,6 +206,15 @@ $911\,\mathrm{s}/8$, fetches \texttt{0x0}, \texttt{0x4}.}
 $n{=}256$ ($17.1\,\mathrm{s}$) and at $n{=}512$. C67 SIGTRAP was four identity BRs.
 The $n{=}512$ sum mismatch recorded here until 2026-08-15 was a determinism
 artifact and is \textbf{withdrawn} (\S\ref{sec:determinism}).}
+
+\reproduced{C70}{Balanced covering-b2 digits at $N{=}n{=}1024$, $\sigma{=}128$,
+$k{=}7$. Unsigned \cid{57} $k{=}7$ stays short of $-64$. Standalone identity,
+32 trials: noiseless $\max|e|{=}0$; noisy $\hat\sigma{=}465308.8$, printed 95\%
+union $-113.5$. The in-process circuit gate is a different draw: $\sigma_{95}{=}726622$,
+24 events, $\log_2\varepsilon{=}-72.7$, then full-adder Metal SING 8/8 PASS
+($49.6\,\mathrm{s}$ evaluation, $241\,\mathrm{s}$ end to end). Exact primary
+inputs and Gaussian statistical circuit scope. Covering base 1 does not move.
+\cid{60} was not remeasured. Unsigned digits remain the default.}
 
 \section{Calibration is not estimation}
 

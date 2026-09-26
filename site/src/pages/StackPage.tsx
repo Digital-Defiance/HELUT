@@ -101,7 +101,7 @@ export function StackPage() {
                 <strong>Equivalence:</strong>{' '}
                 <code>--bench-encrypted --sing</code> checks encrypted outputs against the clear
                 netlist (full_adder C20/C21; covering noisy adder/counter/toy ISA C52–C54;
-                covering-b2 regex C57; PicoRV lut6 Metal <em>N</em>=1024 <em>e</em>=0 C62;
+                covering-b2 regex C57; balanced covering-b2 full-adder C70; PicoRV lut6 Metal <em>N</em>=1024 <em>e</em>=0 C62;
                 PicoRV covering-b2 noisy BK at <em>N</em>=64 C63; extract→KS <em>n</em>=64 C64;
                 PicoRV covering Q PASS via KS C65–C68). Metal
                 microbench: persist ~0.52&nbsp;s/BR at <em>N</em>=1024 (C17); fused 3-prime ~0.42&nbsp;s/BR

@@ -24,7 +24,10 @@ package final class TensorLUTPipeline {
     private let device: MTLDevice
     private let commandQueue: MTLCommandQueue
     private let pipelineState: MTLComputePipelineState
-    private let dffPipelineState: MTLComputePipelineState
+    private let dffNextPipelineState: MTLComputePipelineState
+    private let dffCommitPipelineState: MTLComputePipelineState
+    private var qNextBuffer: MTLBuffer?
+    private var qNextCapacity: Int = 0
 
     private struct LevelBuffers {
         let nodesBuffer: MTLBuffer
@@ -54,6 +57,7 @@ package final class TensorLUTPipeline {
         int32_t enableActiveHigh;
         int32_t resetActiveHigh;
         int32_t resetValue;
+        int32_t enableGatesReset;
     };
 
     kernel void tensor_lut6_eval_level(
@@ -100,40 +104,64 @@ package final class TensorLUTPipeline {
         laneWires[node.outWire] = accumulatedOutput;
     }
 
-    kernel void soft_dff_update(
+    // Phase 1 reads D/E/R/Q only. A later dispatch writes Q, so a Q→D link
+    // cannot observe this tick's new state.
+    kernel void dff_next_state(
         device DFFInputs const *dffNodes [[buffer(0)]],
-        device float *wireStates         [[buffer(1)]],
-        constant uint32_t &numDFFs       [[buffer(2)]],
-        constant uint32_t &totalWires    [[buffer(3)]],
+        device float const *wireStates   [[buffer(1)]],
+        device float *qNext              [[buffer(2)]],
+        constant uint32_t &numDFFs       [[buffer(3)]],
+        constant uint32_t &totalWires    [[buffer(4)]],
+        constant uint32_t &batchSize     [[buffer(5)]],
         uint2 position                   [[thread_position_in_grid]]
     ) {
         uint batchIdx = position.x;
         uint dffIdx = position.y;
-
-        if (dffIdx >= numDFFs) return;
+        if (dffIdx >= numDFFs || batchIdx >= batchSize) return;
 
         DFFInputs node = dffNodes[dffIdx];
-        device float *laneWires = wireStates + (batchIdx * totalWires);
+        device float const *laneWires = wireStates + (batchIdx * totalWires);
 
         float dVal = (node.dWire >= 0) ? laneWires[node.dWire] : 0.0f;
         float qCur = laneWires[node.qWire];
-        float qNext = dVal;
-
+        float enabled = 1.0f;
         if (node.enableWire >= 0) {
             float eRaw = laneWires[node.enableWire];
-            float enabled = (node.enableActiveHigh != 0) ? eRaw : (1.0f - eRaw);
-            qNext = (enabled >= 0.5f) ? dVal : qCur;
+            enabled = (node.enableActiveHigh != 0) ? eRaw : (1.0f - eRaw);
         }
-
+        float asserted = 0.0f;
         if (node.resetWire >= 0) {
             float rRaw = laneWires[node.resetWire];
-            float asserted = (node.resetActiveHigh != 0) ? rRaw : (1.0f - rRaw);
-            if (asserted >= 0.5f) {
-                qNext = float(node.resetValue);
-            }
+            asserted = (node.resetActiveHigh != 0) ? rRaw : (1.0f - rRaw);
         }
+        bool enableOn = enabled >= 0.5f;
+        bool resetOn = asserted >= 0.5f;
+        float next = dVal;
+        if (node.enableGatesReset != 0) {
+            if (!enableOn) next = qCur;
+            else if (resetOn) next = float(node.resetValue);
+            else next = dVal;
+        } else {
+            next = enableOn ? dVal : qCur;
+            if (resetOn) next = float(node.resetValue);
+        }
+        qNext[dffIdx * batchSize + batchIdx] = next;
+    }
 
-        laneWires[node.qWire] = qNext;
+    kernel void dff_commit(
+        device DFFInputs const *dffNodes [[buffer(0)]],
+        device float *wireStates         [[buffer(1)]],
+        device float const *qNext        [[buffer(2)]],
+        constant uint32_t &numDFFs       [[buffer(3)]],
+        constant uint32_t &totalWires    [[buffer(4)]],
+        constant uint32_t &batchSize     [[buffer(5)]],
+        uint2 position                   [[thread_position_in_grid]]
+    ) {
+        uint batchIdx = position.x;
+        uint dffIdx = position.y;
+        if (dffIdx >= numDFFs || batchIdx >= batchSize) return;
+        device float *laneWires = wireStates + (batchIdx * totalWires);
+        laneWires[dffNodes[dffIdx].qWire] = qNext[dffIdx * batchSize + batchIdx];
     }
     """
 
@@ -143,8 +171,8 @@ package final class TensorLUTPipeline {
             "LUT6Inputs stride must match Metal (7×int32)"
         )
         precondition(
-            MemoryLayout<TensorDFFCell>.stride == 28,
-            "TensorDFFCell stride must match Metal DFFInputs (7×int32)"
+            MemoryLayout<TensorDFFCell>.stride == 32,
+            "TensorDFFCell stride must match Metal DFFInputs (8×int32)"
         )
         self.device = device
         guard let queue = device.makeCommandQueue() else {
@@ -156,11 +184,13 @@ package final class TensorLUTPipeline {
         guard let lutFunc = library.makeFunction(name: "tensor_lut6_eval_level") else {
             fatalError("Failed to locate tensor_lut6_eval_level kernel")
         }
-        guard let dffFunc = library.makeFunction(name: "soft_dff_update") else {
-            fatalError("Failed to locate soft_dff_update kernel")
+        guard let dffNext = library.makeFunction(name: "dff_next_state"),
+              let dffCommit = library.makeFunction(name: "dff_commit") else {
+            fatalError("Failed to locate dff_next_state / dff_commit kernels")
         }
         self.pipelineState = try device.makeComputePipelineState(function: lutFunc)
-        self.dffPipelineState = try device.makeComputePipelineState(function: dffFunc)
+        self.dffNextPipelineState = try device.makeComputePipelineState(function: dffNext)
+        self.dffCommitPipelineState = try device.makeComputePipelineState(function: dffCommit)
 
         if let netlist {
             prepareLevelBuffers(netlist: netlist)
@@ -371,23 +401,52 @@ package final class TensorLUTPipeline {
         batchSize: Int
     ) -> Bool {
         guard numDFFs > 0 else { return true }
-        guard let dffBuffer,
-              let encoder = commandBuffer.makeComputeCommandEncoder() else { return false }
-
-        encoder.setComputePipelineState(dffPipelineState)
-        encoder.setBuffer(dffBuffer, offset: 0, index: 0)
-        encoder.setBuffer(wireBuffer, offset: 0, index: 1)
+        guard batchSize > 0, let dffBuffer else { return true }
+        let need = Int(numDFFs) * batchSize
+        if qNextBuffer == nil || qNextCapacity < need {
+            guard let scratch = device.makeBuffer(
+                length: need * MemoryLayout<Float>.stride,
+                options: .storageModeShared
+            ) else { return false }
+            qNextBuffer = scratch
+            qNextCapacity = need
+        }
+        guard let qNextBuffer else { return false }
 
         var nDffs = numDFFs
         var tWires = UInt32(totalWires)
-        encoder.setBytes(&nDffs, length: MemoryLayout<UInt32>.size, index: 2)
-        encoder.setBytes(&tWires, length: MemoryLayout<UInt32>.size, index: 3)
-
-        let w = min(dffPipelineState.maxTotalThreadsPerThreadgroup, max(batchSize, 1))
+        var batch = UInt32(batchSize)
         let gridSize = MTLSize(width: batchSize, height: Int(numDFFs), depth: 1)
-        let threadgroupSize = MTLSize(width: w, height: 1, depth: 1)
-        encoder.dispatchThreads(gridSize, threadsPerThreadgroup: threadgroupSize)
-        encoder.endEncoding()
+
+        guard let nextEncoder = commandBuffer.makeComputeCommandEncoder() else { return false }
+        nextEncoder.setComputePipelineState(dffNextPipelineState)
+        nextEncoder.setBuffer(dffBuffer, offset: 0, index: 0)
+        nextEncoder.setBuffer(wireBuffer, offset: 0, index: 1)
+        nextEncoder.setBuffer(qNextBuffer, offset: 0, index: 2)
+        nextEncoder.setBytes(&nDffs, length: MemoryLayout<UInt32>.size, index: 3)
+        nextEncoder.setBytes(&tWires, length: MemoryLayout<UInt32>.size, index: 4)
+        nextEncoder.setBytes(&batch, length: MemoryLayout<UInt32>.size, index: 5)
+        let nextWidth = min(dffNextPipelineState.maxTotalThreadsPerThreadgroup, batchSize)
+        nextEncoder.dispatchThreads(
+            gridSize,
+            threadsPerThreadgroup: MTLSize(width: nextWidth, height: 1, depth: 1)
+        )
+        nextEncoder.endEncoding()
+
+        guard let commitEncoder = commandBuffer.makeComputeCommandEncoder() else { return false }
+        commitEncoder.setComputePipelineState(dffCommitPipelineState)
+        commitEncoder.setBuffer(dffBuffer, offset: 0, index: 0)
+        commitEncoder.setBuffer(wireBuffer, offset: 0, index: 1)
+        commitEncoder.setBuffer(qNextBuffer, offset: 0, index: 2)
+        commitEncoder.setBytes(&nDffs, length: MemoryLayout<UInt32>.size, index: 3)
+        commitEncoder.setBytes(&tWires, length: MemoryLayout<UInt32>.size, index: 4)
+        commitEncoder.setBytes(&batch, length: MemoryLayout<UInt32>.size, index: 5)
+        let commitWidth = min(dffCommitPipelineState.maxTotalThreadsPerThreadgroup, batchSize)
+        commitEncoder.dispatchThreads(
+            gridSize,
+            threadsPerThreadgroup: MTLSize(width: commitWidth, height: 1, depth: 1)
+        )
+        commitEncoder.endEncoding()
         return true
     }
 }

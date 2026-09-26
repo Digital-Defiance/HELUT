@@ -143,7 +143,12 @@ package enum TensorLUTEmitter {
                 if dff.resetWire >= 0 {
                     let rRef = "n[\(dff.resetWire)]"
                     let asserted = dff.resetActiveHigh != 0 ? rRef : "!\(rRef)"
-                    next = "(\(asserted) ? 1'b\(dff.resetValue) : \(next))"
+                    if dff.enableGatesReset != 0 && dff.enableWire >= 0 {
+                        let enabled = dff.enableActiveHigh != 0 ? "n[\(dff.enableWire)]" : "!n[\(dff.enableWire)]"
+                        next = "(\(enabled) ? ((\(asserted) ? 1'b\(dff.resetValue) : \(dExpr)) : n_reg[\(dff.qWire)]))"
+                    } else {
+                        next = "(\(asserted) ? 1'b\(dff.resetValue) : \(next))"
+                    }
                 }
                 v.append("        n_reg[\(dff.qWire)] <= \(next);")
             }

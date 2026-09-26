@@ -30,7 +30,7 @@ private struct BRNTTUniforms {
     var pLoHi: UInt32
     var pHiLo: UInt32
     var pHiHi: UInt32
-    var pad0: UInt32
+    var balanced: UInt32
     var pad1: UInt32
 }
 
@@ -110,9 +110,18 @@ final class MetalBRNTTEngine: @unchecked Sendable {
         uint pLoHi;
         uint pHiLo;
         uint pHiHi;
-        uint pad0;
+        uint balanced; // 1: digits in [-B/2, B/2), stored as int32
         uint pad1;
     };
+
+    uint mod_coeff(uint x, uint p, uint balanced) {
+        if (balanced == 0u) return x % p;
+        int s = as_type<int>(x);
+        if (s >= 0) return uint(s) % p;
+        uint mag = uint(-s);
+        uint r = mag % p;
+        return r == 0u ? 0u : p - r;
+    }
 
     uint mod_mul(uint a, uint b, uint p) {
         return uint((ulong)a * (ulong)b % (ulong)p);
@@ -217,14 +226,15 @@ final class MetalBRNTTEngine: @unchecked Sendable {
         uint pA,
         uint pB,
         uint pC,
+        uint balanced,
         uint k
     ) {
         device const uint *psi0 = tw;
         device const uint *psi1 = tw + 4u * n;
         device const uint *psi2 = tw + 8u * n;
-        pl0[k] = mod_mul(in[k] % pA, psi0[k], pA);
-        pl1[k] = mod_mul(in[k] % pB, psi1[k], pB);
-        pl2[k] = mod_mul(in[k] % pC, psi2[k], pC);
+        pl0[k] = mod_mul(mod_coeff(in[k], pA, balanced), psi0[k], pA);
+        pl1[k] = mod_mul(mod_coeff(in[k], pB, balanced), psi1[k], pB);
+        pl2[k] = mod_mul(mod_coeff(in[k], pC, balanced), psi2[k], pC);
         threadgroup_barrier(mem_flags::mem_threadgroup);
         bitrev_plane(pl0, tmp, logn, k);
         bitrev_plane(pl1, tmp, logn, k);
@@ -358,11 +368,36 @@ final class MetalBRNTTEngine: @unchecked Sendable {
             pl1[k] = rotB - shAccB[k];
             threadgroup_barrier(mem_flags::mem_threadgroup);
 
-            uint remM = pl0[k];
-            uint remB = pl1[k];
+            uint remSrcM = pl0[k];
+            uint remSrcB = pl1[k];
+            uint digM[32];
+            uint digB[32];
+            if (U.balanced != 0u) {
+                uint base = 1u << U.baseLog;
+                uint halfBase = base >> 1u;
+                uint mask = base - 1u;
+                uint carryM = 0u;
+                uint carryB = 0u;
+                for (int lv = int(levels) - 1; lv >= 0; --lv) {
+                    uint sh = 32u - (uint(lv) + 1u) * U.baseLog;
+                    uint rawM = ((remSrcM >> sh) & mask) + carryM;
+                    uint rawB = ((remSrcB >> sh) & mask) + carryB;
+                    if (rawM >= halfBase) { carryM = 1u; digM[lv] = rawM - base; }
+                    else { carryM = 0u; digM[lv] = rawM; }
+                    if (rawB >= halfBase) { carryB = 1u; digB[lv] = rawB - base; }
+                    else { carryB = 0u; digB[lv] = rawB; }
+                }
+            } else {
+                uint remM = pl0[k];
+                uint remB = pl1[k];
+                for (uint lv = 0u; lv < levels; ++lv) {
+                    digM[lv] = take_digit(&remM, U.baseLog, lv);
+                    digB[lv] = take_digit(&remB, U.baseLog, lv);
+                }
+            }
             for (uint lv = 0u; lv < levels; ++lv) {
-                scratch[lv * n + k] = take_digit(&remM, U.baseLog, lv);
-                scratch[(levels + lv) * n + k] = take_digit(&remB, U.baseLog, lv);
+                scratch[lv * n + k] = digM[lv];
+                scratch[(levels + lv) * n + k] = digB[lv];
             }
             threadgroup_barrier(mem_flags::mem_threadgroup);
 
@@ -375,12 +410,12 @@ final class MetalBRNTTEngine: @unchecked Sendable {
             for (uint lv = 0u; lv < levels; ++lv) {
                 ntt_from_device_3p(
                     pl0, pl1, pl2, tmp, scratch + lv * n, tw,
-                    n, logn, pA, pB, pC, k
+                    n, logn, pA, pB, pC, U.balanced, k
                 );
                 uint hDm0 = pl0[k], hDm1 = pl1[k], hDm2 = pl2[k];
                 ntt_from_device_3p(
                     pl0, pl1, pl2, tmp, scratch + (levels + lv) * n, tw,
-                    n, logn, pA, pB, pC, k
+                    n, logn, pA, pB, pC, U.balanced, k
                 );
                 uint hDb0 = pl0[k], hDb1 = pl1[k], hDb2 = pl2[k];
                 device const uint *g0m0 = bkBit + (lv * 4u) * n;
@@ -556,17 +591,12 @@ final class MetalBRNTTEngine: @unchecked Sendable {
         return t
     }
 
+    /// Every word. A 32-word sample aliased distinct bootstrap keys onto one NTT cache.
     private static func fingerprint(_ words: [UInt32]) -> UInt64 {
         var h: UInt64 = UInt64(words.count) &* 0x9E3779B97F4A7C15
-        if words.isEmpty { return h }
-        h ^= UInt64(words[0])
-        h ^= UInt64(words[words.count - 1]) &* 0x100000001b3
-        let stride = max(1, words.count / 32)
-        var i = 0
-        while i < words.count {
-            h ^= UInt64(words[i])
+        for word in words {
+            h ^= UInt64(word)
             h = h &* 0x100000001b3
-            i += stride
         }
         return h
     }
@@ -578,6 +608,7 @@ final class MetalBRNTTEngine: @unchecked Sendable {
         lweA: [UInt32],
         baseLog: Int,
         tileWidth: Int,
+        balancedDigits: Bool = false,
         queue: MTLCommandQueue,
         progress: ((String) -> Void)?
     ) throws -> (mask: [UInt32], body: [UInt32]) {
@@ -654,7 +685,7 @@ final class MetalBRNTTEngine: @unchecked Sendable {
                 pLoHi: UInt32(truncatingIfNeeded: P.lo >> 32),
                 pHiLo: UInt32(truncatingIfNeeded: P.hi),
                 pHiHi: UInt32(truncatingIfNeeded: P.hi >> 32),
-                pad0: 0,
+                balanced: balancedDigits ? 1 : 0,
                 pad1: 0
             )
             withUnsafeBytes(of: &uniforms) { raw in

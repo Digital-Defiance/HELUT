@@ -84,6 +84,7 @@ package final class CleartextNetlistSimulator {
         var compiledLUTs: [LUTCell] = []
         var compiledDFFs: [DFFCell] = []
         for (cellName, cell) in module.cells.sorted(by: { $0.key < $1.key }) {
+            assertSupportedNetlistCell(cell, name: "CleartextNetlistSimulator '\(cellName)'")
             if cell.type == "$lut" {
                 guard let aBits = cell.connections["A"],
                       let yBits = cell.connections["Y"],
