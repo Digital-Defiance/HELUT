@@ -106,6 +106,16 @@ export const selmArgusV4: JournalAttachment = {
     '26 September 2026. Asking it for cribs returns none. All 121 stored candidates are marked ineligible.',
 }
 
+export const selmArgusV5: JournalAttachment = {
+  href: '/selm/ARGUS_V5_JESS_TURING_2026-09-27.zip',
+  title: 'ARGUS v5 Jess/Turing',
+  kind: 'archive',
+  credit: SELM_CREDIT,
+  bytesLabel: '247 KB',
+  origin:
+    '27 September 2026. Adds an open 1 May hypothesis about U3030, U3032, and U2540. Not an attribution of P1030680. Not a crib. Plaintext not found.',
+}
+
 export const selmCribBatchA: JournalAttachment = {
   href: '/selm/P1030680_JESSICA_CRIB_BATCH_A.csv',
   title: 'Crib batch A (Hörenberg)',
@@ -126,5 +136,6 @@ export const selmAllPublicFiles: JournalAttachment[] = [
   selmArgusV31,
   selmArgusV32,
   selmArgusV4,
+  selmArgusV5,
   selmCribBatchA,
 ]

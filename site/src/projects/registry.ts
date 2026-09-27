@@ -122,12 +122,12 @@ export const projects: Project[] = [
     status: 'active',
     kicker: 'Graduated FHE',
     summary:
-      'Covering Track A noisy BK at N=1024 k=7 is C52–C54; covering-b2 cheaper SING + regex is C57. C70: balanced covering-b2 digits clear the full-adder k=7 gate (8/8, log₂ε=−72.7); unsigned k=7 stays short of −64. C62 is noiseless PicoRV at that N; C65/C66/C68 are covering PicoRV via extract→KS n=64 (1-tick, boot, NOP-fetch). C69: KS n=256 and n=512 covering SING PASS; the old n=512 FAIL is withdrawn as a determinism artifact (C67 SIGTRAP at n=256 was identity×4). C60/C61 still FAIL at n=N k=7 (C60 not remeasured under C70; C61 is covering-b1). Sage filled C23; H1 still applies.',
+      'Covering Track A noisy BK at N=1024 k=7 is C52–C54; covering-b2 cheaper SING + regex is C57. C70: balanced covering-b2 digits clear the full-adder k=7 gate (8/8, log₂ε=−72.7); unsigned k=7 stays short of −64. C71: the same digits on PicoRV lut6 still fail Q after a −88.4 bound. C62 is noiseless PicoRV at that N; C65/C66/C68 are covering PicoRV via extract→KS n=64 (1-tick, boot, NOP-fetch). C69: KS n=256 and n=512 covering SING PASS; the old n=512 FAIL is withdrawn as a determinism artifact (C67 SIGTRAP at n=256 was identity×4). C60/C61 still FAIL at n=N k=7. Sage filled C23; H1 still applies.',
     stakes: [
       'Encrypted ≡ clear on full_adder (C20/C21) and covering noisy sequential ticks (C53/C54)',
       'Calibrated bits ≠ estimator Cost on every row (H1 / C23: 175.7 vs 180.2 on prod-n1024-s16)',
       'Metal persist ~0.52 s/BR at N=1024 (C17); wavefront boolean SING 10.6 s/8 (C20)',
-      'Covering public-MS at N=1024 uses stride-k wires, not “g₀=δ exact covering” (C27 still {8,128}); C70 is balanced covering-b2 on the full adder, not PicoRV; C65/C66/C68 PicoRV covering via extract→KS n=64; C69 n=256 and n=512 PASS, with the old n=512 FAIL withdrawn as a determinism artifact; C60/C61 still FAIL at n=N k=7',
+      'Covering public-MS at N=1024 uses stride-k wires, not “g₀=δ exact covering” (C27 still {8,128}); C70 is balanced covering-b2 on the full adder; C71 is the same digits failing PicoRV Q; C65/C66/C68 PicoRV covering via extract→KS n=64; C69 n=256 and n=512 PASS, with the old n=512 FAIL withdrawn as a determinism artifact; C60/C61 still FAIL at n=N k=7',
     ],
     pages: [
       {

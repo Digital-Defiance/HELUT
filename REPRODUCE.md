@@ -541,7 +541,27 @@ Same command as **C58** after wavefront. Expect **PASS** ~0.165 s/1 (~8.2×).
   | tee logs/helut-encrypted-n1024-metal-sing-picorv32-lut6-covering-b2-k7-e6.log
 ```
 
-Expect combinational BRs to finish (~33 min) then **DFF Q SING FAIL** (want=0 got=1).
+Expect combinational BRs to finish (~33 min) then **DFF Q SING FAIL** (want=0 got=1). The post-fix re-run fails at `slice$14361`.
+
+## Balanced digits on that PicoRV tick (C71)
+
+Unsigned **C60** stays the recorded cell. `--balanced-gadget` is a different noise draw. A 32-trial union over 2006 events does not clear −64 (log₂ε=−60.7), so that process traps before the tick. At 192 trials the bound clears and the tick still fails.
+
+```bash
+set -o pipefail
+HELUT_QUIET_METAL_BR_PROGRESS=1 \
+  .build/release/helut-bench \
+  --bench Generated/Netlists/PicoRV32/picorv32_lut6_netlist.json \
+  --degree 1024 \
+  --bench-encrypted --sing --vectors 1 \
+  --bk-noise-sigma 128 \
+  --bk-identity-trials 192 --bk-identity-parallelism 8 \
+  --paths 'blind-rotate-metal public-ms covering-b2' \
+  --boolean-scale-mul 7 --balanced-gadget \
+  2>&1 | tee logs/c70-picorv-covering-b2-k7-balanced-t192.log
+```
+
+Expect the 192-trial line `clears=yes` and log₂ε=−88.4, then four `$_DFF_P_` mismatches, want=0 got=1: `slice$14510`, `slice$14521`, `slice$14523`, `slice$8281`. Not `slice$14361`. The 32-trial trap is `logs/c70-picorv-covering-b2-k7-balanced.log`. **C61** is covering-b1 and is not this run.
 
 ## PicoRV lut6 Metal N=1024 e=0 (C62)
 

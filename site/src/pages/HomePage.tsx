@@ -122,7 +122,8 @@ export function HomePage() {
                 <em>N</em>=64 (C63) and still FAILs at production <em>N</em> (C60/C61). Extract→KS
                 LWE <em>n</em>=64 native-<em>k</em> covering is C64; PicoRV lut6 covering Q via that
                 KS is C65–C66/C68 (C60/C61 stay <em>n</em>=<em>N</em> <em>k</em>=7 FAIL). C70: balanced
-                covering-b2 digits clear the full-adder <em>k</em>=7 gate; unsigned <em>k</em>=7 stays
+                covering-b2 digits clear the full-adder <em>k</em>=7 gate; the same digits still
+                fail PicoRV Q (C71). Unsigned <em>k</em>=7 stays
                 short of −64 (C57). C69: covering
                 KS PASSes at <em>n</em>=256 and <em>n</em>=512 (the earlier <em>n</em>=512 FAIL was
                 withdrawn 2026-08-15 — a determinism artifact, not a noise limit). Chronology:{' '}

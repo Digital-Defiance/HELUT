@@ -214,7 +214,16 @@ union $-113.5$. The in-process circuit gate is a different draw: $\sigma_{95}{=}
 24 events, $\log_2\varepsilon{=}-72.7$, then full-adder Metal SING 8/8 PASS
 ($49.6\,\mathrm{s}$ evaluation, $241\,\mathrm{s}$ end to end). Exact primary
 inputs and Gaussian statistical circuit scope. Covering base 1 does not move.
-\cid{60} was not remeasured. Unsigned digits remain the default.}
+PicoRV under these digits is \cid{71}. Unsigned digits remain the default.}
+
+\reproduced{C71}{Same lut6 PicoRV, balanced covering-b2, $k{=}7$, $N{=}1024$.
+A 32-trial union over $2006$ events is $\log_2\varepsilon{=}-60.7$ and does not
+clear $-64$, so the circuit does not run. At $192$ trials the bound clears
+($\sigma_{95}{=}637757$, $\log_2\varepsilon{=}-88.4$) and tick 1 still fails:
+four \texttt{\$\_DFF\_P\_} cells want $0$ got $1$
+(\texttt{slice\$14510}, \texttt{slice\$14521}, \texttt{slice\$14523},
+\texttt{slice\$8281}). Not the unsigned \cid{60} cell. Wall $2725\,\mathrm{s}$.
+\cid{61} is covering-b1 and is not this measurement.}
 
 \section{Calibration is not estimation}
 

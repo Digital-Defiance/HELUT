@@ -137,10 +137,22 @@ export function NetlistFheJournalPage() {
                 Unsigned C57 <em>k</em>=7 stays short of −64. The circuit gate is a 32-trial
                 draw: max|e|=1,495,355, σ₉₅=726,622, 24 events, log₂ε=−72.7, then full-adder
                 Metal SING 8/8 PASS (49.6 s evaluation, 241 s end to end). A separate identity
-                draw printed −113.5. Covering base 1 does not move. C60 was not remeasured.
-                Unsigned digits remain the default. Same-week compiler corrections (two-phase
-                TensorLUT DFF commit, SDFFCE enable-over-reset, fail-closed unknown cells,
-                full-word BK fingerprint) do not move ε.
+                draw printed −113.5. Covering base 1 does not move. PicoRV under these
+                digits is C71. Unsigned digits remain the default. Same-week compiler
+                corrections (two-phase TensorLUT DFF commit, SDFFCE enable-over-reset,
+                fail-closed unknown cells, full-word BK fingerprint) do not move ε.
+              </span>
+            </li>
+            <li>
+              <span className="mono">C71</span>
+              <span>
+                Balanced covering-b2 digits on PicoRV lut6 at <em>N</em>=1024, stride-<em>k</em>=7.
+                A 32-trial union over 2,006 events is −60.7 and does not clear −64, so the
+                circuit does not run. At 192 trials the bound clears (−88.4) and tick 1 still
+                fails: four <code>$_DFF_P_</code> cells, want 0 got 1
+                (<code>slice$14510</code>, <code>slice$14521</code>, <code>slice$14523</code>,{' '}
+                <code>slice$8281</code>). Not the unsigned C60 cell <code>slice$14361</code>.
+                Wall 2,725 s. C61 is covering base 1 and is not this measurement.
               </span>
             </li>
           </ul>
@@ -185,7 +197,7 @@ export function NetlistFheJournalPage() {
               <span className="mono">PicoRV</span>
               <span>
                 Encrypted PicoRV32 covering at <em>n</em>=<em>N</em> <em>k</em>=7 is C60/C61 Q SING
-                FAIL. Extract→KS <em>n</em>=64 is C65–C66 and C68 (NOP 2 fetches). Covering Q PASSes at
+                FAIL. Balanced digits clear the noise bound and the Q bits still fail (C71). Extract→KS <em>n</em>=64 is C65–C66 and C68 (NOP 2 fetches). Covering Q PASSes at
                 poly <em>N</em>=64 (C63). Noiseless Metal PicoRV at production <em>N</em> is C62
                 (374 s).
               </span>
