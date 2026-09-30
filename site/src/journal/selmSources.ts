@@ -113,7 +113,47 @@ export const selmArgusV5: JournalAttachment = {
   credit: SELM_CREDIT,
   bytesLabel: '247 KB',
   origin:
-    '27 September 2026. Adds an open 1 May hypothesis about U3030, U3032, and U2540. Not an attribution of P1030680. Not a crib. Plaintext not found.',
+    '27 September 2026. Adds an open 1 May hypothesis about U3030, U3032, and U2540. Not an attribution of P1030680. Not a crib. Plaintext not found. The ROT07A grid in this package is withdrawn in v8.1.',
+}
+
+export const selmArgusV81: JournalAttachment = {
+  href: '/selm/ARGUS_V8_1_ARCHIVAL_UPDATE_2026-09-28.zip',
+  title: 'ARGUS v8.1 archival update',
+  kind: 'archive',
+  credit: SELM_CREDIT,
+  bytesLabel: '54 KB',
+  origin:
+    '28 September 2026. ZTPG 369139 reads 7A, not ROT07A. Volksliste III order and an Offizier card are recorded. Not an attribution. Not a crib.',
+}
+
+export const selmArgusV90: JournalAttachment = {
+  href: '/selm/ARGUS_V9_0_ARCHIVAL_AUTHENTICATION_2026-09-28.zip',
+  title: 'ARGUS v9.0',
+  kind: 'archive',
+  credit: SELM_CREDIT,
+  bytesLabel: '59 KB',
+  origin:
+    '28 September 2026. Rolls up the DEFE 3 reading, the Mahon Kenngruppen example, and the open Kew and Swedish requests. Not a decrypt.',
+}
+
+export const selmTicomI38Cover: JournalAttachment = {
+  href: '/selm/IMG_1234.jpeg',
+  title: 'TICOM I-38 cover',
+  kind: 'image',
+  credit: SELM_CREDIT,
+  bytesLabel: '340 KB',
+  origin:
+    'Interrogation of Lt. Hans-Joachim Frowein, 21 June 1945. Cover only. Section 31 is not on this page.',
+}
+
+export const selmTicomI38Page3: JournalAttachment = {
+  href: '/selm/IMG_1235.jpeg',
+  title: 'TICOM I-38 page 3',
+  kind: 'image',
+  credit: SELM_CREDIT,
+  bytesLabel: '600 KB',
+  origin:
+    'Page 3. A crib of about 25 letters, and one turnover in the right-hand wheel against more than one. Not section 31.',
 }
 
 export const selmCribBatchA: JournalAttachment = {
@@ -137,5 +177,9 @@ export const selmAllPublicFiles: JournalAttachment[] = [
   selmArgusV32,
   selmArgusV4,
   selmArgusV5,
+  selmArgusV81,
+  selmArgusV90,
+  selmTicomI38Cover,
+  selmTicomI38Page3,
   selmCribBatchA,
 ]

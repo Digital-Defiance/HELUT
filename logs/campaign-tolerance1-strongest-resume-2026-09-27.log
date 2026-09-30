@@ -1,0 +1,38 @@
+=== 2026-09-27 tolerance-1 resume from menu 4, as ordered
+=== Rank order moved. This index skips UNFU@23, FUN@22, NFUUU@21.
+=== It repeats the August negatives NFUN@21, FUN@19, NFUN@18 (now indices 4, 6, 7).
+=== Welchman diagonal board — P1030680 ===
+fixture: Fixtures/p1030680_maxupper_strongest_menus.json (24 loop-ranked placements)
+mode: loop-ranked (loops, edges); confirm≥1 independent
+selected 24 of 24
+min menu constraints: 16
+resuming from menu 4 of 24 (skipping 3 already done)
+running 21 menus, highest deduction power first:
+  [4] NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE@21 edges=40 letters=21 loops=20 comp=1 span=61 central=U
+  [5] UNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENG@20 edges=40 letters=21 loops=20 comp=1 span=60 central=U
+  [6] FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN@19 edges=40 letters=21 loops=20 comp=1 span=59 central=U
+  [7] NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE@18 edges=40 letters=21 loops=20 comp=1 span=58 central=U
+  [8] LAUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIRO@17 edges=40 letters=22 loops=19 comp=1 span=57 central=U
+  [9] AUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIROT@11 edges=40 letters=22 loops=19 comp=1 span=51 central=U
+  [10] LAUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIRO@10 edges=40 letters=22 loops=19 comp=1 span=50 central=U
+  [11] UUUFUNFDREIVIERKKNOLLAUKK@25 edges=25 letters=19 loops=8 comp=2 span=50 central=R
+  [12] UUUFUNFDREIVIERKKNOLLAUKK@27 edges=25 letters=20 loops=8 comp=3 span=52 central=R
+  [13] DMXUUUBOOTEYFXDXUUUAUSB@31 edges=23 letters=19 loops=7 comp=3 span=54 central=U
+  [14] DMXUUUBOOTEYFXDXUUUAUSB@8 edges=23 letters=19 loops=7 comp=3 span=31 central=U
+  [15] TGEANKERTXFFFTTTBLEIB@37 edges=21 letters=17 loops=6 comp=2 span=58 central=T
+  … 9 more
+shells/menu: 34944 (336 WO × 2 Greek × 2 UKW × 1 mid-ring × 26 right-ring) → 1.6e+10 settings
+garble tolerance: 1 menu edges may be dropped (Mulein board — widens survivors; inflation is placement dependent)
+kernel sieve: ≤10 plugs
+GPU pipeline depth: 4 shells in flight
+break threshold: -3.600  IC floor: 0.055  (German -2.847 / noise -5.382)
+right ring swept: every right-wheel turnover phase covered
+residual gap: middle ring pinned A, so keys whose middle wheel turns over inside a 71-letter span (~12% for 1 notch, ~23% for 2) are not covered — --bombe-middle-ring closes it
+ETA floor (~50M/s): 111.8 min
+
+quarantine: soft IC≥0.048 / tail>-4.000 (strict IC≥0.055 / tail>-3.600) → logs/quarantine_tolerance1.json
+  [4/24·1] NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE@21 edges=40 letters=21 loops=20 comp=1 span=61 central=U dead at the board                      1140s  14.0M/s ETA 380.1 min
+  [5/24·2] UNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBENG@20 edges=40 letters=21 loops=20 comp=1 span=60 central=U dead at the board                      2628s  12.2M/s ETA 416.1 min
+  [6/24·3] FUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBEN@19 edges=40 letters=21 loops=20 comp=1 span=59 central=U dead at the board                      4190s  11.4M/s ETA 419.0 min
+  [7/24·4] NFUNFUUUFLOTTXNULEINSZWONULBEIROTNULSIBE@18 edges=40 letters=21 loops=20 comp=1 span=58 central=U dead at the board                      5833s  11.0M/s ETA 413.2 min
+  [8/24·5] LAUKKANANFUNFUUUFLOTTXNULEINSZWONULBEIRO@17 edges=40 letters=22 loops=19 comp=1 span=57 central=U dead at the board                      7940s  10.1M/s ETA 423.5 min

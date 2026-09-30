@@ -347,8 +347,15 @@ Selm-led historical/cryptanalytic arm & \textbf{Joint campaign work.} Selm Merel
   sheet, and it is not queued. ARGUS v3.2 still offered a crib command and is
   superseded by v4, which emits no crib (121 candidates, all ineligible).
   ARGUS v5 (27 September 2026) adds an open historical branch: U3030, U3032,
-  and U2540 on 1 May, with a reported 18:00 reunion at ROT07A / AO7819
-  (ZTPG 369139). It is not an attribution of P1030680, not a crib, and not
+  and U2540 on 1 May, with a reported 18:00 reunion (ZTPG 369139).
+  Phase~76 withdraws the v5 grid ROT07A / AO7819. Her reading of the card
+  is Gedser at 1630 and anchored at 1800 at 7A; the next card distinguishes
+  7A from ROT 07. TICOM I-38 \S31, her reading of the 21 June 1945
+  interrogation, is the December 1944 decision that only two-turnover
+  wheels go in the right-hand position. The report does not name Thetis
+  and does not select VIII. That is the existing two-notch ordering prior,
+  126 of 336. The prior does not restrict. The full-336 tolerance-1 arm
+  stopped after menu 8 of 24 on its own. The U3030 branch is not an attribution of P1030680, not a crib, and not
   a claim that P1030710, already broken on Potsdam in the scrape, is that
   signal. The corpus JSON glues across a hole the Hörenberg page still prints.
   Restoring it, message key \texttt{GCXO} reads the surviving text through
@@ -400,9 +407,13 @@ Tolerant board specificity & \textbf{Placement}-dependent, not crib-length depen
   ``$\ge$17 edges buys tolerance 1'' rule held only at offset 0 and is \textbf{withdrawn}:
   18-edge menus admit 4{,}301 and 16{,}019 survivors elsewhere. Tolerance amplifies an
   under-determined menu rather than rescuing it, so it is a per-menu decision \\
-Tolerance 1 against P1030680 & \textbf{Partial / suspended at 3/24}; all three completed
-  strongest placements are dead under right-ring coverage. Resume
-  \texttt{--bombe-menus 0 --bombe-ring-sweep --bombe-garble-tolerance 1 --bombe-from 4}; 21 remain \\
+Tolerance 1 against P1030680 & \textbf{Stopped after menu 8 of 24} (2026-09-27).
+  The process is gone and the log has no footer. Menus 4--8 are dead, which
+  repeats the August three, \texttt{NFUN@18}, \texttt{NFUN@21}, and
+  \texttt{FUN@19}, and adds menus 5 and 8. The rank order moved, so this index
+  skips \texttt{UNFU@23}, \texttt{FUN@22}, and \texttt{NFUUU@21}. Menus 9--24
+  are unrun. Log
+  \texttt{logs/campaign-tolerance1-strongest-resume-2026-09-27.log} \\
 Post-gap $\delta=4$ against P1030680 & \textbf{Partial / suspended at 144/237}; entries 1--110
   and 112--144 are dead, while entry 111's 8 raw stops yield 0 valid $\le10$-plug
   completions. Resume \texttt{--bombe-menus 0 --bombe-from 145}; middle ring remains A \\
@@ -813,12 +824,15 @@ Tolerance is therefore a per-menu decision, pre-qualified by measuring inflation
 against the escalator's budget, and not a global switch.
 
 The known-key sensitivity grade does not assert that P1030680 \emph{is} garbled.
-The target tolerance-1 arm has nevertheless run to a bounded pause point:
-\textbf{3/24} strongest placements are complete under right-ring coverage and all
-three are dead at the board. It is suspended; resume
-\texttt{--bombe-menus 0 --bombe-ring-sweep --bombe-garble-tolerance 1 --bombe-from 4}.
-The remaining 21 placements are open, so this is three local negatives rather than
-a verdict on garble generally.
+The target tolerance-1 arm has a bounded August prefix:
+\textbf{3/24} strongest placements of that day's order are dead at the board
+(\texttt{NFUN@18}, \texttt{NFUN@21}, \texttt{FUN@19}). The 2026-09-27 resume
+stopped after menu 8 of 24. The process is gone and the log has no footer.
+Menus 4--8 are dead. The rank order now sorts equal-loop menus by span, so that
+index skips \texttt{UNFU@23}, \texttt{FUN@22}, and \texttt{NFUUU@21} and repeats
+the three negatives. Menus 9--24 are unrun. Log
+\texttt{logs/campaign-tolerance1-strongest-resume-2026-09-27.log}.
+This is not a verdict on garble generally.
 
 Indels are the board's \emph{second} mechanism rather than an omission: Girard
 records an entire four-letter group (\texttt{HMHY}) present on one transcript and
