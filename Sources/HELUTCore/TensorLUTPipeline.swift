@@ -28,6 +28,11 @@ package final class TensorLUTPipeline {
     private let dffCommitPipelineState: MTLComputePipelineState
     private var qNextBuffer: MTLBuffer?
     private var qNextCapacity: Int = 0
+    private var boundNetlist: TensorLUTNetlist?
+    private var anerBooster: TensorLUTANERBooster?
+    private var anerBoostAttempted = false
+    /// True when the most recent forward ran on the Neural Engine through ANER.
+    package private(set) var forwardUsedNeuralEngine = false
 
     private struct LevelBuffers {
         let nodesBuffer: MTLBuffer
@@ -199,6 +204,10 @@ package final class TensorLUTPipeline {
 
     /// Pre-allocates per-level node/index buffers and the DFF table (call once per netlist).
     package func prepareLevelBuffers(netlist: TensorLUTNetlist) {
+        boundNetlist = netlist
+        anerBooster = nil
+        anerBoostAttempted = false
+        forwardUsedNeuralEngine = false
         levelDispatchData = netlist.executionLevels.compactMap { levelIndices in
             guard !levelIndices.isEmpty else { return nil }
 
@@ -265,6 +274,14 @@ package final class TensorLUTPipeline {
         batchSize: Int
     ) {
         precondition(!levelDispatchData.isEmpty, "Call prepareLevelBuffers before evaluateForward")
+        if boostForward(
+            totalWires: totalWires,
+            initsBuffer: initsBuffer,
+            wireBuffer: wireBuffer,
+            batchSize: batchSize
+        ) {
+            return
+        }
         guard let commandBuffer = commandQueue.makeCommandBuffer() else { return }
         encodeForward(
             on: commandBuffer,
@@ -329,6 +346,34 @@ package final class TensorLUTPipeline {
         batchSize: Int
     ) throws {
         precondition(!levelDispatchData.isEmpty, "Call prepareLevelBuffers before evaluateTick")
+        if boostForward(
+            totalWires: totalWires,
+            initsBuffer: initsBuffer,
+            wireBuffer: wireBuffer,
+            batchSize: batchSize
+        ) {
+            guard numDFFs > 0 else { return }
+            guard let commandBuffer = commandQueue.makeCommandBuffer() else {
+                throw CheckedExecutionError.commandBufferUnavailable
+            }
+            guard encodeClockTick(
+                on: commandBuffer,
+                totalWires: totalWires,
+                wireBuffer: wireBuffer,
+                batchSize: batchSize
+            ) else {
+                throw CheckedExecutionError.commandEncoderUnavailable(stage: "DFF")
+            }
+            commandBuffer.commit()
+            commandBuffer.waitUntilCompleted()
+            guard commandBuffer.status == .completed else {
+                throw CheckedExecutionError.commandFailed(
+                    statusRawValue: Int(commandBuffer.status.rawValue),
+                    detail: commandBuffer.error?.localizedDescription ?? "no Metal error detail"
+                )
+            }
+            return
+        }
         guard let commandBuffer = commandQueue.makeCommandBuffer() else {
             throw CheckedExecutionError.commandBufferUnavailable
         }
@@ -357,6 +402,40 @@ package final class TensorLUTPipeline {
                 detail: commandBuffer.error?.localizedDescription ?? "no Metal error detail"
             )
         }
+    }
+
+    /// Combinational pass on ANER inside the measured tile. A wider batch stays on Metal.
+    private func boostForward(
+        totalWires: Int,
+        initsBuffer: MTLBuffer,
+        wireBuffer: MTLBuffer,
+        batchSize: Int
+    ) -> Bool {
+        guard (1...TensorLUTANERBooster.maxBoostBatch).contains(batchSize) else {
+            forwardUsedNeuralEngine = false
+            return false
+        }
+        if !anerBoostAttempted {
+            anerBoostAttempted = true
+            if let boundNetlist {
+                anerBooster = TensorLUTANERBooster(netlist: boundNetlist)
+            }
+        }
+        guard batchSize > 0,
+              let anerBooster,
+              anerBooster.usesNeuralEngine,
+              totalWires == anerBooster.wires,
+              anerBooster.matches(initsBuffer),
+              anerBooster.forward(
+                wires: wireBuffer.contents().bindMemory(to: Float.self, capacity: batchSize * totalWires),
+                batch: batchSize
+              )
+        else {
+            forwardUsedNeuralEngine = false
+            return false
+        }
+        forwardUsedNeuralEngine = true
+        return true
     }
 
     @discardableResult

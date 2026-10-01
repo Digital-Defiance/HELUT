@@ -1,0 +1,25 @@
+HELUT encrypted-netlist bench · SING
+  netlist: picorv32_lut3_netlist.json  module=picorv32
+  poly N=1024  LUTs=4226  DFFs=1565  sequential  2N=2048
+  stimuli=8 (max --vectors 256)  cpu-only=false  metal-netlist-only=false
+  encrypted mem: nop ROM (addi x0,x0,0 = 0x00000013)  ticks=8  reset-hold=3
+  paths filter: blind-rotate-metal public-ms covering-b2
+  paths: public-ms@boolean + public-ms@crypto + secret@crypto (+ Metal)
+  BK noise inject Gaussian σ=128.0 (torus; identity residual is empirical, not B_bk)
+  BK identity confidence trials=192
+  BK identity PBS parallelism=8 (RNG preparation and reduction remain serial)
+  boolean scale kδ  k=127  (test-poly stride 127; public-MS native δ)
+  DynamicRotateCost mux=2099200 binary=11275 speedup≈186.2×
+
+  Metal BR tile progress: quiet
+  starting blind-rotate-metal public-ms covering-b2  digits=balanced
+  identity residual trials=192  (n=1024)  parallelism=8
+  identity observed max|e| 1943891  (sample-decodable true)
+  identity native ε -1:10 0:178 1:4
+  port-weighted 95% σ=615591.4218101825 ports=11869 classes=m=9×10356 m=10×48 m=12×100 m=15×9 m=21×1332 m=31×4 m=63×20 εlog2=-747.5595248586088 target=-64 samples=192 clears=yes
+  wire-margin (not the gate) events=33808 εlog2=-33750.25921567016 clears=yes
+  mem tick  1  valid=0 ready=0 addr=0x00000000 instr=0 wstrb=0x0
+  mem tick  2  valid=0 ready=0 addr=0x00000000 instr=0 wstrb=0x0
+  mem tick  3  valid=0 ready=0 addr=0x00000000 instr=0 wstrb=0x0
+  mem tick  4  valid=0 ready=1 addr=0x00000000 instr=0 wstrb=0x0
+  FETCH tick  5  addr=0x00000000  instr=1

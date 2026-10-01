@@ -126,6 +126,16 @@ export const selmArgusV81: JournalAttachment = {
     '28 September 2026. ZTPG 369139 reads 7A, not ROT07A. Volksliste III order and an Offizier card are recorded. Not an attribution. Not a crib.',
 }
 
+export const selmArgusV101: JournalAttachment = {
+  href: '/selm/ARGUS_10_1_JUBILEE_2026-10-01.zip',
+  title: 'ARGUS 10.1 / X.1',
+  kind: 'archive',
+  credit: SELM_CREDIT,
+  bytesLabel: '10 KB',
+  origin:
+    '1 October 2026. Administrative-provenance lane for who produced naval keys. P1030680 stays unbroken. Not a crib. Not a reason to restart compute.',
+}
+
 export const selmArgusV90: JournalAttachment = {
   href: '/selm/ARGUS_V9_0_ARCHIVAL_AUTHENTICATION_2026-09-28.zip',
   title: 'ARGUS v9.0',
@@ -179,6 +189,7 @@ export const selmAllPublicFiles: JournalAttachment[] = [
   selmArgusV5,
   selmArgusV81,
   selmArgusV90,
+  selmArgusV101,
   selmTicomI38Cover,
   selmTicomI38Page3,
   selmCribBatchA,

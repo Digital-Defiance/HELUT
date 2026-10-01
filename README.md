@@ -15,6 +15,8 @@ Linux CI runs both. The Swift package genuinely needs Apple Silicon, because Met
 
 The point is not “Enigma only.” Enigma is one application. The stack is a **datapath for encrypted-shaped circuit evaluation**: combinational LUTs, sequential DFFs, batch parallelism, and CPU-scale netlists (including a **PicoRV32 RISC-V** core).
 
+A small frozen cleartext circuit can take one Neural Engine tile through [ANER](https://github.com/Digital-Defiance/ANER) (`aner_lut6`): at most 64 lookups and a batch of at most 64, with the wire vector still inside 512 channels. `TensorLUTPipeline` loads `libaner` from `ANER_LIBRARY`, `/Volumes/Code/ANER/lib/build`, or `/usr/local/lib`. The INIT table has to still match the compiled netlist. A wider batch, a larger netlist, Enigma, PicoRV32, and the encrypted negacyclic path stay on Metal, and flip-flop clocks stay on the Metal kernels.
+
 | Layer | Role |
 |-------|------|
 | **HELUTCore** / ToolKit | Swift libraries (SPM) + Metal FHE / netlist stack |
