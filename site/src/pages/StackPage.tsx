@@ -116,11 +116,20 @@ export function StackPage() {
                 still misses ε≤2⁻⁶⁴ (−50.6 settled at 256 trials); <em>k</em>≥2 clears it (C41); noisy <code>cryptoPublicMS</code> at that <em>N</em> (C26/C56);
                 PicoRV covering at <em>n</em>=<em>N</em> <em>k</em>=7 (C60/C61 Q SING FAIL; C60
                 confirmed structural at <code>slice$14361</code>). C71 remeasures that covering-b2
-                tick with balanced digits: the bound clears and four other <code>$_DFF_P_</code>{' '}
-                cells still fail. C65–C68 PASS with extract→KS <em>n</em>=64;
+                tick with balanced digits: the per-wire bound clears and four other <code>$_DFF_P_</code>{' '}
+                cells still fail. The port-weighted packing bound does not clear. A LUT3 remap at <em>k</em>=127 has two matching receipts (one all-zero tick, and four ticks with reset released on tick 4) and is not a claim id. Not a fetch. C65–C68 PASS with extract→KS <em>n</em>=64;
                 estimator Cost on every calibration row (H1); production keys from the HELUT 175.7
                 figure; side-channel / GPU power; a P1030680 plaintext; that the math requires
                 Apple Silicon (first lab, not the invariant); a CUDA or CPU production FHE port.
+                Prior art, checked 30 September 2026: Verilog-to-TFHE is HELM and HEIR; GPU RTL
+                simulation is RTLFlow and NVIDIA GEM; the multilinear LUT relaxation is published,
+                including DiffLUT-Net, which trains new networks. Concrete already sizes a bootstrap
+                from the 2-norm of the weights that feed it. The port-weighted gate is that kind of
+                fact for public-MS packing, not a new noise law. To our knowledge this pass did not
+                find a TFHE blind rotation on Apple Metal, one Yosys netlist held to bit-level parity
+                across cleartext, encrypted, and a relaxation that emits Verilog, or a published
+                deletion-tolerant diagonal board. Absence from the pass is not a proof of absence.
+                The note is <code>directives/prior-art.md</code>.
               </span>
             </li>
           </ul>

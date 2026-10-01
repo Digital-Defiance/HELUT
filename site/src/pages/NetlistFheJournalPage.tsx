@@ -147,12 +147,23 @@ export function NetlistFheJournalPage() {
               <span className="mono">C71</span>
               <span>
                 Balanced covering-b2 digits on PicoRV lut6 at <em>N</em>=1024, stride-<em>k</em>=7.
-                A 32-trial union over 2,006 events is −60.7 and does not clear −64, so the
-                circuit does not run. At 192 trials the bound clears (−88.4) and tick 1 still
+                A 32-trial per-wire union over 2,006 events is −60.7 and does not clear −64, so the
+                circuit does not run. At 192 trials that per-wire bound clears (−88.4) and tick 1 still
                 fails: four <code>$_DFF_P_</code> cells, want 0 got 1
                 (<code>slice$14510</code>, <code>slice$14521</code>, <code>slice$14523</code>,{' '}
                 <code>slice$8281</code>). Not the unsigned C60 cell <code>slice$14361</code>.
-                Wall 2,725 s. C61 is covering base 1 and is not this measurement.
+                Wall 2,725 s. That −88.4 figure is the per-wire margin. The port-weighted packing bound at the same σ is +9.9 and does not clear −64. The circuit gate now fails closed on that union. C61 is covering base 1 and is not this measurement.
+              </span>
+            </li>
+            <li>
+              <span className="mono">receipt</span>
+              <span>
+                30 September 2026. Not a claim id. The same PicoRV core remapped to LUT3,
+                stride-<em>k</em>=127, balanced covering-b2, <em>N</em>=1024. The port-weighted
+                union is −747.6 and clears −64. One all-zero tick matched every output and
+                flip-flop Q (3,816.8 s). Four ticks, reset held for three and <code>resetn</code>{' '}
+                high on tick 4, also matched (14,752.3 s, 3,688 s/row). The clk pin stayed 0.
+                Not a fetch.
               </span>
             </li>
           </ul>
@@ -197,7 +208,7 @@ export function NetlistFheJournalPage() {
               <span className="mono">PicoRV</span>
               <span>
                 Encrypted PicoRV32 covering at <em>n</em>=<em>N</em> <em>k</em>=7 is C60/C61 Q SING
-                FAIL. Balanced digits clear the noise bound and the Q bits still fail (C71). Extract→KS <em>n</em>=64 is C65–C66 and C68 (NOP 2 fetches). Covering Q PASSes at
+                FAIL. Balanced digits clear the per-wire bound and the Q bits still fail (C71). The port-weighted packing bound does not clear. A LUT3 remap at <em>k</em>=127 has two matching receipts (one all-zero tick, and four ticks with reset released on tick 4) and is not a claim id. Not a fetch. Extract→KS <em>n</em>=64 is C65–C66 and C68 (NOP 2 fetches). Covering Q PASSes at
                 poly <em>N</em>=64 (C63). Noiseless Metal PicoRV at production <em>N</em> is C62
                 (374 s).
               </span>

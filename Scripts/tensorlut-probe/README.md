@@ -28,6 +28,7 @@ bit-sliced ticks, Montgomery/Shoup). Those are not in the live pipeline.
 | `affine.py` | Share of LUTs that are affine over GF(2) (XOR/NOT/wire) per netlist, plus ANF degree histogram |
 | `live.py` | Peak live wires along the topological order vs allocated wires |
 | `netstat.py` | LUT width histogram, level count, DFF Q-to-D/E/R links per netlist |
+| `portcert.py` | Port-weighted packing bound. `python3 portcert.py SIGMA netlist.json:K`. "does NOT clear" means the run fails whatever the per-wire gate prints |
 
 ## Commands
 

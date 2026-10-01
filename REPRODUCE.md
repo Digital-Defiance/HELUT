@@ -561,7 +561,47 @@ HELUT_QUIET_METAL_BR_PROGRESS=1 \
   2>&1 | tee logs/c70-picorv-covering-b2-k7-balanced-t192.log
 ```
 
-Expect the 192-trial line `clears=yes` and log₂ε=−88.4, then four `$_DFF_P_` mismatches, want=0 got=1: `slice$14510`, `slice$14521`, `slice$14523`, `slice$8281`. Not `slice$14361`. The 32-trial trap is `logs/c70-picorv-covering-b2-k7-balanced.log`. **C61** is covering-b1 and is not this run.
+The recorded 192-trial log printed the per-wire margin `clears=yes` at log₂ε=−88.4, then four `$_DFF_P_` mismatches, want=0 got=1: `slice$14510`, `slice$14521`, `slice$14523`, `slice$8281`. Not `slice$14361`. That margin is P(|e| > kδ/2). The gate now fails closed on the port-weighted union, which at the same σ₉₅=637,757 is +9.9 and does not clear −64. A rerun measures the identity trials and then refuses before the netlist tick. The 32-trial trap is `logs/c70-picorv-covering-b2-k7-balanced.log`. **C61** is covering-b1 and is not this run. The preflight, with no blind rotation, is `python3 Scripts/tensorlut-probe/portcert.py 637757 Generated/Netlists/PicoRV32/picorv32_lut6_netlist.json:7`.
+
+## LUT3 at k=127, one all-zero stimulus (not a claim row)
+
+`--vectors 1` keeps only the all-zero input. That is the same stimulus class as the lut6 failure above. Mismatch of any output or any DFF Q aborts the process before `result PASS`.
+
+```bash
+set -o pipefail
+HELUT_QUIET_METAL_BR_PROGRESS=1 \
+  .build/release/helut-bench \
+  --bench picorv32_lut3_netlist.json \
+  --degree 1024 \
+  --bench-encrypted --sing --vectors 1 \
+  --bk-noise-sigma 128 \
+  --bk-identity-trials 192 --bk-identity-parallelism 8 \
+  --paths 'blind-rotate-metal public-ms covering-b2' \
+  --boolean-scale-mul 127 --balanced-gadget \
+  2>&1 | tee logs/c71-picorv-lut3-k127-balanced.log
+```
+
+Finished 2026-09-30. Module `picorv32`, 4226 LUT, 1565 DFF. Identity max|e|=1,943,891, native ε −1:10, 0:178, 1:4, σ₉₅=615,591.4. Port-weighted union log₂ε=−747.6, 11,869 ports, clears −64. The wire-margin line is not the gate. One row, outputs and every DFF Q matched cleartext, wall 3,816.8 s. `result PASS` is that match plus the certificate. Not a boot, not a fetch, not a claim row.
+
+## LUT3 at k=127, four ticks, reset released on tick 4 (not a claim row)
+
+`--ticks 4 --reset-hold 3` holds `resetn` at 0 for ticks 1–3 and sets it to 1 on tick 4. The clk pin stays 0; each bench tick is the clock step, as in the C66 boot. Other inputs stay 0. No memory port is driven, so this is not a fetch.
+
+```bash
+set -o pipefail
+HELUT_QUIET_METAL_BR_PROGRESS=1 \
+  .build/release/helut-bench \
+  --bench picorv32_lut3_netlist.json \
+  --degree 1024 \
+  --bench-encrypted --sing --ticks 4 --reset-hold 3 \
+  --bk-noise-sigma 128 \
+  --bk-identity-trials 192 --bk-identity-parallelism 8 \
+  --paths 'blind-rotate-metal public-ms covering-b2' \
+  --boolean-scale-mul 127 --balanced-gadget \
+  2>&1 | tee logs/c71-picorv-lut3-k127-reset4.log
+```
+
+Finished 2026-09-30. Same identity draw as the one-row receipt: max|e|=1,943,891, native ε −1:10, 0:178, 1:4, σ₉₅=615,591.4, port-weighted log₂ε=−747.6, clears −64. Four rows, outputs and every DFF Q matched cleartext, wall 14,752.3 s (3,688.1 s/row). `result PASS`. Not a fetch, not a claim row.
 
 ## PicoRV lut6 Metal N=1024 e=0 (C62)
 

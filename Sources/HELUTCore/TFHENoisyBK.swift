@@ -186,6 +186,66 @@ package struct TFHENoisyBKCertificate: Sendable, Equatable {
     }
 }
 
+/// One LUT's noisy input ports. `weightSum` is Σ 2^i over those ports.
+package struct TFHENoisyPortBudget: Sendable, Equatable {
+    package var weightSum: Int
+    package var noisyCount: Int
+}
+
+package enum TFHENoisyPortWeight {
+    /// LUT outputs and flip-flop Q are noisy. Primary inputs and constants are exact.
+    package static func budgets(
+        luts: [CleartextNetlistSimulator.LUTCell],
+        dffs: [CleartextNetlistSimulator.DFFCell]
+    ) -> [TFHENoisyPortBudget] {
+        var noisyWires = Set<Int>()
+        noisyWires.reserveCapacity(luts.count + dffs.count)
+        for lut in luts {
+            noisyWires.insert(lut.yWire)
+        }
+        for dff in dffs {
+            noisyWires.insert(dff.qWire)
+        }
+        var budgets: [TFHENoisyPortBudget] = []
+        budgets.reserveCapacity(luts.count)
+        for lut in luts {
+            var weightSum = 0
+            var noisyCount = 0
+            for (index, bit) in lut.aBits.enumerated() {
+                guard case .net(let wire) = bit, noisyWires.contains(wire) else { continue }
+                precondition(index < 30, "LUT port weight 2^\(index) does not fit a port budget")
+                weightSum += 1 << index
+                noisyCount += 1
+            }
+            if noisyCount > 0 {
+                budgets.append(TFHENoisyPortBudget(weightSum: weightSum, noisyCount: noisyCount))
+            }
+        }
+        return budgets
+    }
+}
+
+private func log2SumExp(_ terms: [Double]) -> Double {
+    let finite = terms.filter { $0.isFinite }
+    if finite.isEmpty {
+        return terms.contains(where: { $0 > 0 }) ? Double.infinity : -Double.infinity
+    }
+    let hi = finite.max()!
+    var acc = 0.0
+    for term in finite {
+        acc += pow(2, term - hi)
+    }
+    return hi + log2(acc)
+}
+
+/// Integer the public-MS packer consumes: round(signed torus error / δ).
+package func refreshedNativeError(phase: UInt32, expected: UInt32, nativeDelta: UInt32) -> Int {
+    precondition(nativeDelta > 0)
+    let diff = phase &- expected
+    let signed = diff <= 0x8000_0000 ? Double(diff) : Double(diff) - 4294967296.0
+    return Int((signed / Double(nativeDelta)).rounded())
+}
+
 /// Gaussian BK output noise → circuit-scoped MS failure after BR.
 package struct TFHENoisyBKGaussianCertificate: Sendable, Equatable {
     /// Sigma used for the bound. Measurement-derived certificates use the
@@ -199,16 +259,27 @@ package struct TFHENoisyBKGaussianCertificate: Sendable, Equatable {
     package var targetFailureLog2: Int
     package var confidenceLevel: Double?
     package var effectiveSamples: Int?
+    /// Set when this certificate is the port-weighted packing union.
+    /// `failureLog2` then reports that union, which may be positive.
+    package var portWeightedLog2: Double?
+    /// `m=0×5856 m=3×1` — noisy ports grouped by the integer error budget.
+    package var portClassSummary: String?
 
     package var isConfidenceBound: Bool {
         confidenceLevel != nil && effectiveSamples != nil
     }
 
     package var isSecure: Bool {
-        unionFailureProbability <= pow(2, Double(targetFailureLog2))
+        if let portWeightedLog2 {
+            return portWeightedLog2 <= Double(targetFailureLog2)
+        }
+        return unionFailureProbability <= pow(2, Double(targetFailureLog2))
     }
 
     package var failureLog2: Double {
+        if let portWeightedLog2 {
+            return portWeightedLog2
+        }
         if sigmaBK == 0 {
             return -Double.infinity
         }
@@ -263,7 +334,74 @@ package struct TFHENoisyBKGaussianCertificate: Sendable, Equatable {
             unionFailureProbability: pUnion,
             targetFailureLog2: targetFailureLog2,
             confidenceLevel: nil,
-            effectiveSamples: nil
+            effectiveSamples: nil,
+            portWeightedLog2: nil,
+            portClassSummary: nil
+        )
+    }
+
+    /// Union over noisy LUT input ports. A port is noisy when a LUT output or
+    /// a flip-flop Q drives it. Primary inputs and constants are exact.
+    ///
+    /// Each LUT packs refreshed natives with weights 2^i. Every noisy input
+    /// must satisfy |ε| ≤ m, where m · W < k/2 and W is the sum of those
+    /// weights. The per-port threshold is (m + ½)·δ. This is the margin
+    /// packing consumes. The per-wire kδ/2 margin is a different event.
+    package static func forNoisyPorts(
+        sigmaBK: Double,
+        nativeDelta: UInt32,
+        booleanK: Int,
+        budgets: [TFHENoisyPortBudget],
+        targetFailureLog2: Int = -64
+    ) -> TFHENoisyBKGaussianCertificate {
+        precondition(sigmaBK >= 0)
+        precondition(nativeDelta >= 2)
+        precondition(booleanK >= 1)
+        let delta = Double(nativeDelta)
+        var portsByBudget: [Int: Int] = [:]
+        var classLogs: [Double] = []
+        var worstTail = -Double.infinity
+        var portCount = 0
+        for budget in budgets where budget.noisyCount > 0 && budget.weightSum > 0 {
+            let m = Int(floor((Double(booleanK) / 2 - 1e-9) / Double(budget.weightSum)))
+            let threshold = (Double(m) + 0.5) * delta
+            let tail = log2GaussianTwoSidedTail(stddev: sigmaBK, threshold: threshold)
+            let contribution: Double
+            if tail.isInfinite && tail < 0 {
+                contribution = tail
+            } else {
+                contribution = log2(Double(budget.noisyCount)) + tail
+            }
+            classLogs.append(contribution)
+            portsByBudget[m, default: 0] += budget.noisyCount
+            portCount += budget.noisyCount
+            if tail > worstTail { worstTail = tail }
+        }
+        let unionLog2 = log2SumExp(classLogs)
+        let summary = portsByBudget.keys.sorted().map { key in
+            "m=\(key)×\(portsByBudget[key] ?? 0)"
+        }.joined(separator: " ")
+        let pUnion: Double
+        if unionLog2.isInfinite && unionLog2 < 0 {
+            pUnion = 0
+        } else if unionLog2 >= 0 {
+            pUnion = 1
+        } else {
+            pUnion = min(1, pow(2, unionLog2))
+        }
+        return TFHENoisyBKGaussianCertificate(
+            sigmaBK: sigmaBK,
+            delta: nativeDelta,
+            lutCount: portCount,
+            perLUTFailureProbability: worstTail.isInfinite && worstTail < 0
+                ? 0
+                : (worstTail >= 0 ? 1 : pow(2, worstTail)),
+            unionFailureProbability: pUnion,
+            targetFailureLog2: targetFailureLog2,
+            confidenceLevel: nil,
+            effectiveSamples: nil,
+            portWeightedLog2: unionLog2,
+            portClassSummary: summary.isEmpty ? "no noisy ports" : summary
         )
     }
 
@@ -298,6 +436,7 @@ private struct NoisyBKIdentityTrial: Sendable {
 private struct NoisyBKIdentityResidual: Sendable {
     let error: UInt32
     let decodeFailed: Bool
+    let nativeError: Int
 }
 
 /// Indexed result storage for bounded synchronous workers. Every slot access is
@@ -336,6 +475,8 @@ package struct TFHENoisyBKMeasurement: Sendable, Equatable {
     package var delta: UInt32
     package var polynomialDegree: Int
     package var decodeFailures: Int
+    /// Histogram of refreshed native ε = round(signed error / δ). Packing consumes this integer.
+    package var nativeErrorHistogram: [Int: Int]
 
     // MARK: Sample provenance
     //
@@ -487,7 +628,8 @@ package struct TFHENoisyBKMeasurement: Sendable, Equatable {
         decodeFailures: Int,
         bootstraps: Int? = nil,
         accumulatorMaxAbsError: UInt32? = nil,
-        effectiveSamples: Int? = nil
+        effectiveSamples: Int? = nil,
+        nativeErrorHistogram: [Int: Int] = [:]
     ) {
         self.maxAbsError = maxAbsError
         self.rms = rms
@@ -496,6 +638,7 @@ package struct TFHENoisyBKMeasurement: Sendable, Equatable {
         self.delta = delta
         self.polynomialDegree = polynomialDegree
         self.decodeFailures = decodeFailures
+        self.nativeErrorHistogram = nativeErrorHistogram
         let pbs = bootstraps ?? samples
         self.bootstraps = pbs
         self.accumulatorMaxAbsError = accumulatorMaxAbsError
@@ -543,6 +686,33 @@ package struct TFHENoisyBKMeasurement: Sendable, Equatable {
         return certificate
     }
 
+    /// Port-weighted packing union at this measurement's σ₉₅. `nativeDelta` is δ, not kδ.
+    package func portWeightedCertificate(
+        budgets: [TFHENoisyPortBudget],
+        nativeDelta: UInt32,
+        booleanK: Int,
+        targetFailureLog2: Int = -64
+    ) -> TFHENoisyBKGaussianCertificate {
+        var certificate = TFHENoisyBKGaussianCertificate.forNoisyPorts(
+            sigmaBK: sigmaUpper95,
+            nativeDelta: nativeDelta,
+            booleanK: booleanK,
+            budgets: budgets,
+            targetFailureLog2: targetFailureLog2
+        )
+        certificate.confidenceLevel = 0.95
+        certificate.effectiveSamples = effectiveSamples
+        return certificate
+    }
+
+    package var nativeErrorHistogramLine: String {
+        if nativeErrorHistogram.isEmpty { return "native ε (none)" }
+        let parts = nativeErrorHistogram.keys.sorted().map { bin in
+            "\(bin):\(nativeErrorHistogram[bin] ?? 0)"
+        }
+        return "native ε " + parts.joined(separator: " ")
+    }
+
     /// Identity-LUT BR residual. Uses `existing` BK when provided (no extra encrypt).
     ///
     /// Key generation, random trial preparation, and result reduction remain
@@ -576,10 +746,12 @@ package struct TFHENoisyBKMeasurement: Sendable, Equatable {
 
         // Preserve the historical streaming path exactly unless concurrency is
         // explicitly requested. This remains the allocation/timing baseline.
+        let nativeDelta = rotationScale(polynomialDegree: n)
         if maxConcurrentTrials == 1 || trials == 1 {
             var maxAbs: UInt32 = 0
             var sumSq: Double = 0
             var failures = 0
+            var histogram: [Int: Int] = [:]
             for _ in 0..<trials {
                 let bit = rng.next() & 1
                 let lwe = encryptLWERotationNative(
@@ -599,6 +771,7 @@ package struct TFHENoisyBKMeasurement: Sendable, Equatable {
                 let err = torusCenteredMagnitude(phase &- expected)
                 if err > maxAbs { maxAbs = err }
                 sumSq += Double(err) * Double(err)
+                histogram[refreshedNativeError(phase: phase, expected: expected, nativeDelta: nativeDelta), default: 0] += 1
                 if decodeRotationBoolean(phase, scale: scale) != bit {
                     failures += 1
                 }
@@ -610,7 +783,8 @@ package struct TFHENoisyBKMeasurement: Sendable, Equatable {
                 injectBound: noise.bound,
                 delta: scale,
                 polynomialDegree: n,
-                decodeFailures: failures
+                decodeFailures: failures,
+                nativeErrorHistogram: histogram
             )
         }
 
@@ -643,7 +817,12 @@ package struct TFHENoisyBKMeasurement: Sendable, Equatable {
             let expected = trial.bit &* scale
             return NoisyBKIdentityResidual(
                 error: torusCenteredMagnitude(phase &- expected),
-                decodeFailed: decodeRotationBoolean(phase, scale: scale) != trial.bit
+                decodeFailed: decodeRotationBoolean(phase, scale: scale) != trial.bit,
+                nativeError: refreshedNativeError(
+                    phase: phase,
+                    expected: expected,
+                    nativeDelta: nativeDelta
+                )
             )
         }
 
@@ -662,9 +841,11 @@ package struct TFHENoisyBKMeasurement: Sendable, Equatable {
         var maxAbs: UInt32 = 0
         var sumSq: Double = 0
         var failures = 0
+        var histogram: [Int: Int] = [:]
         for residual in results.snapshot() {
             if residual.error > maxAbs { maxAbs = residual.error }
             sumSq += Double(residual.error) * Double(residual.error)
+            histogram[residual.nativeError, default: 0] += 1
             if residual.decodeFailed { failures += 1 }
         }
         return TFHENoisyBKMeasurement(
@@ -674,7 +855,8 @@ package struct TFHENoisyBKMeasurement: Sendable, Equatable {
             injectBound: noise.bound,
             delta: scale,
             polynomialDegree: n,
-            decodeFailures: failures
+            decodeFailures: failures,
+            nativeErrorHistogram: histogram
         )
     }
 

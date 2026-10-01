@@ -246,18 +246,28 @@ package final class EncryptedNetlistSimulator {
                     maxConcurrentTrials: noisyBKIdentityParallelism
                 )
                 print("  identity observed max|e| \(measured.maxAbsError)  (sample-decodable \(measured.eachLUTDecodable))")
+                print("  identity \(measured.nativeErrorHistogramLine)")
                 fflush(stdout)
                 self.noisyBKMeasurement = measured
-                let gaussian = measured.gaussianCertificate(
-                    lutCount: self.noisyBKEventCount
+                let budgets = TFHENoisyPortWeight.budgets(luts: self.clear.luts, dffs: self.clear.dffs)
+                let gaussian = measured.portWeightedCertificate(
+                    budgets: budgets,
+                    nativeDelta: self.torusStep,
+                    booleanK: booleanScaleMul
                 )
                 self.noisyBKGaussianCertificate = gaussian
+                let wire = measured.gaussianCertificate(lutCount: self.noisyBKEventCount)
                 let confidenceClears = gaussian.isSecure ? "yes" : "no"
                 let effectiveSamples = gaussian.effectiveSamples.map(String.init) ?? "none"
                 print(
-                    "  identity 95% confidence σ=\(gaussian.sigmaBK) events=\(gaussian.lutCount) "
+                    "  port-weighted 95% σ=\(gaussian.sigmaBK) ports=\(gaussian.lutCount) "
+                        + "classes=\(gaussian.portClassSummary ?? "none") "
                         + "εlog2=\(gaussian.failureLog2) target=\(gaussian.targetFailureLog2) "
                         + "samples=\(effectiveSamples) clears=\(confidenceClears)"
+                )
+                print(
+                    "  wire-margin (not the gate) events=\(wire.lutCount) "
+                        + "εlog2=\(wire.failureLog2) clears=\(wire.isSecure ? "yes" : "no")"
                 )
                 fflush(stdout)
             }

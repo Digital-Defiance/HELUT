@@ -108,7 +108,11 @@ export function HomePage() {
               digits clear the full-adder <em>k</em>=7 gate (C70); unsigned <em>k</em>=7 stays
               short of −64. Native <em>k</em>=1 (C37/C55) and{' '}
               <code>cryptoPublicMS</code> (C26/C56) remain graded negatives. Campaign fitness is
-              Welchman/cleartext—not FHE tick rate. P1030680 is not decrypted.
+              Welchman/cleartext—not FHE tick rate. P1030680 is not decrypted. The pieces are
+              not new inventions: Verilog-to-TFHE, GPU RTL simulation, and the multilinear LUT
+              relaxation are published. To our knowledge the distinctive part is holding one
+              Yosys netlist to bit-level parity across those engines, on Metal. The checked
+              note is on the stack page.
             </p>
           </div>
           <ul className="stack-list">
@@ -123,7 +127,7 @@ export function HomePage() {
                 LWE <em>n</em>=64 native-<em>k</em> covering is C64; PicoRV lut6 covering Q via that
                 KS is C65–C66/C68 (C60/C61 stay <em>n</em>=<em>N</em> <em>k</em>=7 FAIL). C70: balanced
                 covering-b2 digits clear the full-adder <em>k</em>=7 gate; the same digits still
-                fail PicoRV Q (C71). Unsigned <em>k</em>=7 stays
+                fail PicoRV Q after a per-wire bound that clears (C71). The port-weighted packing bound does not clear. A LUT3 remap at <em>k</em>=127 has two matching receipts and is not a claim id. Not a fetch. Unsigned <em>k</em>=7 stays
                 short of −64 (C57). C69: covering
                 KS PASSes at <em>n</em>=256 and <em>n</em>=512 (the earlier <em>n</em>=512 FAIL was
                 withdrawn 2026-08-15 — a determinism artifact, not a noise limit). Chronology:{' '}

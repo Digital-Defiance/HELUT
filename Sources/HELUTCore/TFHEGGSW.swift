@@ -781,7 +781,10 @@ package func rotationScale(polynomialDegree n: Int) -> UInt32 {
 /// Boolean test-poly / decode spacing `k·δ` with `δ = q/(2N)`. `k=1` is native.
 /// `k=2` at `N=1024` restores the `N=512` half-gap (H4 encoding retune).
 package func rotationBooleanScale(polynomialDegree n: Int, mul: Int) -> UInt32 {
-    precondition(mul >= 1 && mul <= 16)
+    // 128 covers LUT3 at k=127 (7·127+63 = 952 < 1024). The kδ product
+    // check below is the overflow gate; TFHETestPolyCache still refuses
+    // k·(2^w−1) ≥ N.
+    precondition(mul >= 1 && mul <= 128)
     let base = rotationScale(polynomialDegree: n)
     let product = UInt64(base) &* UInt64(mul)
     precondition(product > 0 && product <= UInt64(UInt32.max), "kδ overflow")
@@ -793,7 +796,7 @@ package func booleanScaleFactor(polynomialDegree n: Int, scale: UInt32) -> Int {
     let base = rotationScale(polynomialDegree: n)
     precondition(scale % base == 0, "scale must be an integer multiple of δ")
     let k = Int(scale / base)
-    precondition(k >= 1 && k <= 16)
+    precondition(k >= 1 && k <= 128)
     return k
 }
 

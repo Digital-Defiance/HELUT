@@ -673,8 +673,8 @@ private func runEncryptedNetlistBench() {
     let resetHold = intFlag("--reset-hold", allowZero: true)
     let encryptedMem = stringFlag("--encrypted-mem")
     let booleanScaleMul = intFlag("--boolean-scale-mul") ?? 1
-    guard (1...16).contains(booleanScaleMul) else {
-        fputs("--boolean-scale-mul must be an integer in 1...16\n", stderr)
+    guard (1...128).contains(booleanScaleMul) else {
+        fputs("--boolean-scale-mul must be an integer in 1...128\n", stderr)
         exit(2)
     }
     let lweDimension = intFlag("--lwe-dimension")
@@ -2151,7 +2151,8 @@ func runNoisyBKMeasure() {
                     + String(format: "σ̂=%.1f", measured.sigmaHat)
                     + " δ/2=\(measured.decodingHalfGap) "
                     + "decode_fail=\(measured.decodeFailures) "
-                    + "observed-within-gap=\(observation.recordedValueWithinHalfGap) εlog2=\(eps)"
+                    + "observed-within-gap=\(observation.recordedValueWithinHalfGap) εlog2=\(eps) "
+                    + measured.nativeErrorHistogramLine
                     // The bar is decided by the confidence bound, not the point
                     // estimate: log2(eps) is proportional to -1/sigma^2, so a
                     // sigma-hat from a handful of samples leaves orders

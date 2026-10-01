@@ -8,6 +8,16 @@ The largest wins are in TensorLUT and the Metal blind rotation, not the Welchman
 
 Everything here was checked against the repo at commit `7a980a3` and the checked-in Yosys netlists. The sandbox is Linux with no Metal, so speedups are CPU proxies or arguments. Each row below says which.
 
+## Since the review
+
+30 September 2026. Five commits after `7a980a3` took the correctness row and the balanced digits. C70 stands: the full adder clears at k=7, log₂ε=−72.7, 8/8 PASS. That netlist has one noisy port, and its weight is 1, so it cannot show the failure below.
+
+C71's −88.4 clear was the wrong event. The gate bounded P(|e| > kδ/2), which is the margin for decoding one wire's bit. A consumer LUT packs the refreshed native values with weights 2ⁱ. At k=7, a native error of 1 on any port of weight 4 or more lands in the wrong address. The trace is producer y=653, error 1,205,312, refreshed native 1, still the right bit, then consumer y=654 on its weight-32 port, address 24 instead of 19.
+
+`portcert.py` is the preflight. At σ₉₅=637,757 the full adder is −99.4 and clears −64. PicoRV lut6 is +9.9 and does not. The circuit gate now fails closed on that port-weighted union, after the identity trials and before the netlist tick. Identity trials also histogram the refreshed native integer. The stride cap is 128, so LUT3 at k=127 fits in N=1024. That netlist has two receipts, both 2026-09-30, both with port-weighted log₂ε=−747.6 and every output and DFF Q matched. One all-zero stimulus, wall 3,816.8 s (`logs/c71-picorv-lut3-k127-balanced.log`). Four ticks with reset released on tick 4, wall 14,752.3 s (`logs/c71-picorv-lut3-k127-reset4.log`). Neither is a claim row, and neither is a fetch.
+
+Rows 2–4 of the review (L1 fitness, native gather, the bit-sliced path) have not landed.
+
 | # | Change | Effort | Expected effect | Evidence |
 | --- | --- | --- | --- | --- |
 | 1 | Two-phase DFF commit; honor `$_SDFFCE_`; fail closed on unknown cells and async resets; full BK cache key | Small | Removes a nondeterministic output and three silent mis-models | Race measured on Enigma M4 |
