@@ -117,7 +117,7 @@ export function StackPage() {
                 PicoRV covering at <em>n</em>=<em>N</em> <em>k</em>=7 (C60/C61 Q SING FAIL; C60
                 confirmed structural at <code>slice$14361</code>). C71 remeasures that covering-b2
                 tick with balanced digits: the per-wire bound clears and four other <code>$_DFF_P_</code>{' '}
-                cells still fail. The port-weighted packing bound does not clear. A LUT3 remap at <em>k</em>=127 has two matching receipts (one all-zero tick, and four ticks with reset released on tick 4) and is not a claim id. Not a fetch. C65–C68 PASS with extract→KS <em>n</em>=64;
+                cells still fail. The port-weighted packing bound does not clear. A LUT3 remap at <em>k</em>=127 has three matching receipts. An eight-tick NOP fetched 0x0 and 0x4. Not a store. Not a claim id. C65–C68 PASS with extract→KS <em>n</em>=64;
                 estimator Cost on every calibration row (H1); production keys from the HELUT 175.7
                 figure; side-channel / GPU power; a P1030680 plaintext; that the math requires
                 Apple Silicon (first lab, not the invariant); a CUDA or CPU production FHE port.

@@ -163,7 +163,9 @@ export function NetlistFheJournalPage() {
                 union is −747.6 and clears −64. One all-zero tick matched every output and
                 flip-flop Q (3,816.8 s). Four ticks, reset held for three and <code>resetn</code>{' '}
                 high on tick 4, also matched (14,752.3 s, 3,688 s/row). The clk pin stayed 0.
-                Not a fetch.
+                Not a fetch. 1 October 2026: eight ticks on a NOP ROM, same gate. Tick 5
+                fetched <code>0x0</code> and tick 8 fetched <code>0x4</code>. Outputs and every
+                flip-flop Q matched. Wall 28,693.5 s (3,587 s/row). Not a store. Not a claim id.
               </span>
             </li>
           </ul>
@@ -208,7 +210,7 @@ export function NetlistFheJournalPage() {
               <span className="mono">PicoRV</span>
               <span>
                 Encrypted PicoRV32 covering at <em>n</em>=<em>N</em> <em>k</em>=7 is C60/C61 Q SING
-                FAIL. Balanced digits clear the per-wire bound and the Q bits still fail (C71). The port-weighted packing bound does not clear. A LUT3 remap at <em>k</em>=127 has two matching receipts (one all-zero tick, and four ticks with reset released on tick 4) and is not a claim id. Not a fetch. Extract→KS <em>n</em>=64 is C65–C66 and C68 (NOP 2 fetches). Covering Q PASSes at
+                FAIL. Balanced digits clear the per-wire bound and the Q bits still fail (C71). The port-weighted packing bound does not clear. A LUT3 remap at <em>k</em>=127 has two matching receipts (one all-zero tick, and four ticks with reset released on tick 4) and is not a claim id. An eight-tick NOP fetched 0x0 and 0x4 and is still not a claim id. Not a store. Extract→KS <em>n</em>=64 is C65–C66 and C68 (NOP 2 fetches). Covering Q PASSes at
                 poly <em>N</em>=64 (C63). Noiseless Metal PicoRV at production <em>N</em> is C62
                 (374 s).
               </span>

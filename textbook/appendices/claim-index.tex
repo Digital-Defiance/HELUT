@@ -104,7 +104,7 @@ bound, fresh-input-noise result, or arbitrary-netlist/depth certificate. \\
 \cid{68} & PicoRV lut6 covering NOP-fetch extract$\to$KS $n{=}64$: Metal PASS $911\,\mathrm{s}/8$, fetches $0x0,0x4$. \\
 \cid{69} & Covering KS adder SING PASS at $n{=}256$ and $n{=}512$. The $n{=}512$ FAIL was withdrawn 2026-08-15 (determinism artifact). C67 SIGTRAP was identity$\times 4$. \\
 \cid{70} & Balanced covering-b2 digits, $k{=}7$, $N{=}n{=}1024$, $\sigma{=}128$: 24-event bound $-72.7$ clears $-64$, full-adder Metal SING 8/8 PASS. Unsigned \cid{57} $k{=}7$ stays short. PicoRV is \cid{71}. \\
-\cid{71} & Balanced covering-b2 PicoRV lut6 at $N{=}1024$ $k{=}7$: 192-trial per-wire bound $-88.4$ clears $-64$, then Q SING FAIL. The port-weighted packing bound at the same $\sigma$ is $+9.9$ and does not clear. Not the \cid{60} cell. LUT3 $k{=}127$ has two logged receipts (one all-zero tick, and four ticks with reset released on tick 4, wall $14752.3\,\mathrm{s}$); both matched and neither is a claim row. \\
+\cid{71} & Balanced covering-b2 PicoRV lut6 at $N{=}1024$ $k{=}7$: 192-trial per-wire bound $-88.4$ clears $-64$, then Q SING FAIL. The port-weighted packing bound at the same $\sigma$ is $+9.9$ and does not clear. Not the \cid{60} cell. LUT3 $k{=}127$ has three logged receipts. The eight-tick NOP fetched $0\mathrm{x}0$ and $0\mathrm{x}4$ (wall $28693.5\,\mathrm{s}$). None is a claim row. \\
 \end{longtable}
 }
 
@@ -119,7 +119,7 @@ ID & Asterisk \\
 \hid{1} & \cid{23} filled JSON. Production $|\Delta|=4.5$; divergences are core-SVP vs Cost \texttt{rop}. \\
 \hid{2} & \textbf{Closed} 2026-08-12 ($Z_{2N}$ pack). Kept as history. \\
 \hid{3} & \cid{20}/\cid{21} SING bars met; serial NTT SING still loses vs persist. \\
-\hid{4} & \cid{70} balanced covering-b2 clears the full-adder $k{=}7$ gate; unsigned \cid{57} $k{=}7$ stays short. \cid{71}: the same digits still fail PicoRV Q; the cleared bound was the per-wire margin, and the port-weighted bound does not clear. LUT3 $k{=}127$ has two logged receipts, including a four-tick reset-release; neither is a claim row. \cid{64}--\cid{66}/\cid{68} extract$\to$KS $n{=}64$. \cid{69} covering SING at $n{=}256$ and $n{=}512$. Native $k{=}1$ at $n{=}N$ still \cid{37}. \cid{60}/\cid{61} not closed. \\
+\hid{4} & \cid{70} balanced covering-b2 clears the full-adder $k{=}7$ gate; unsigned \cid{57} $k{=}7$ stays short. \cid{71}: the same digits still fail PicoRV Q; the cleared bound was the per-wire margin, and the port-weighted bound does not clear. LUT3 $k{=}127$ has three logged receipts, including an eight-tick NOP fetch of $0\mathrm{x}0$ and $0\mathrm{x}4$; none is a claim row. \cid{64}--\cid{66}/\cid{68} extract$\to$KS $n{=}64$. \cid{69} covering SING at $n{=}256$ and $n{=}512$. Native $k{=}1$ at $n{=}N$ still \cid{37}. \cid{60}/\cid{61} not closed. \\
 \hid{5} & \texttt{*PublicMS} gadgets ($g_0=\delta$): on-lattice intent, not a closer of old \hid{2}. \\
 \hid{6} & TensorLUT / quarantine vs campaign: parallel research, not P1030680 PT. \\
 \hid{7} & Catalog / Regenbogen / UEBUNG: negatives graded; middle ring $\neq A$ tested under VIII-fast (24/24 dead; 294 WO open); catalog parked @417, resume \texttt{--bombe-from 418}. \\

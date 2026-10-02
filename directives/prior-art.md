@@ -63,8 +63,9 @@ verified here. Leave it off the site.
 ## Not yet earned
 
 A certified encrypted tick of unmodified PicoRV32 on Apple silicon is still
-open. The LUT3 netlist at k=127 has two receipts (one all-zero tick, and four ticks
-with reset released on tick 4; log₂ε=−747.6, outputs and DFF Q matched).
-Neither is a claim row, and neither is a fetch.
+open. The LUT3 netlist at k=127 has three receipts. One all-zero tick and a four-tick
+reset-release matched and were not fetches. An eight-tick NOP fetched 0x0
+then 0x4 (log₂ε=−747.6, outputs and DFF Q matched, 28,693.5 s). None is a
+claim row, and the NOP is not a store.
 The sampled mixed-strategy melt is not a result. The tolerant
 board is not a published method.

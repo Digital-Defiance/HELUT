@@ -603,6 +603,27 @@ HELUT_QUIET_METAL_BR_PROGRESS=1 \
 
 Finished 2026-09-30. Same identity draw as the one-row receipt: max|e|=1,943,891, native ε −1:10, 0:178, 1:4, σ₉₅=615,591.4, port-weighted log₂ε=−747.6, clears −64. Four rows, outputs and every DFF Q matched cleartext, wall 14,752.3 s (3,688.1 s/row). `result PASS`. Not a fetch, not a claim row.
 
+## LUT3 at k=127, eight-tick NOP fetch (not a claim row)
+
+`--encrypted-mem nop` serves `addi x0, x0, 0` (`0x00000013`). Reset is held for three ticks. A fetch is counted only when `mem_valid` and `mem_ready` are both 1 and `mem_instr` is 1. The same class on lut6 with extract→KS *n*=64 is **C68**. This run does not cut the LWE dimension.
+
+```bash
+set -o pipefail
+HELUT_QUIET_METAL_BR_PROGRESS=1 \
+  .build/release/helut-bench \
+  --bench picorv32_lut3_netlist.json \
+  --degree 1024 \
+  --bench-encrypted --sing --ticks 8 --reset-hold 3 \
+  --encrypted-mem nop \
+  --bk-noise-sigma 128 \
+  --bk-identity-trials 192 --bk-identity-parallelism 8 \
+  --paths 'blind-rotate-metal public-ms covering-b2' \
+  --boolean-scale-mul 127 --balanced-gadget \
+  2>&1 | tee logs/c71-picorv-lut3-k127-nop8.log
+```
+
+Finished 2026-10-01. Same identity draw: max|e|=1,943,891, native ε −1:10, 0:178, 1:4, σ₉₅=615,591.4, port-weighted log₂ε=−747.6, clears −64. Ticks 1–3 have `mem_valid`=0. Tick 5 fetches `0x0`. Tick 8 fetches `0x4`. Summary: served=2, unique=2. Eight rows, outputs and every DFF Q matched cleartext, wall 28,693.5 s (3,586.7 s/row). `result PASS`. Not a store. Not 10-fetch. Not a claim row.
+
 ## PicoRV lut6 Metal N=1024 e=0 (C62)
 
 ```bash
