@@ -126,6 +126,16 @@ export const selmArgusV81: JournalAttachment = {
     '28 September 2026. ZTPG 369139 reads 7A, not ROT07A. Volksliste III order and an Offizier card are recorded. Not an attribution. Not a crib.',
 }
 
+export const selmZuteilung3271: JournalAttachment = {
+  href: '/selm/zuteilungsliste_pruefnr_3271.pdf',
+  title: 'Zuteilungsliste Prüf-Nr. 3271',
+  kind: 'pdf',
+  credit: SELM_CREDIT,
+  bytesLabel: '1.9 MB',
+  origin:
+    '2 October 2026. Frode Weierud, via Selm. Ausgabe 1941, Kennworte Dorsch, Forelle, Haifisch, Zander, distribution stamps 25 May 1943. Not the 4 March 1945 Hering list. Columns not transcribed.',
+}
+
 export const selmArgusV101: JournalAttachment = {
   href: '/selm/ARGUS_10_1_JUBILEE_2026-10-01.zip',
   title: 'ARGUS 10.1 / X.1',
@@ -190,6 +200,7 @@ export const selmAllPublicFiles: JournalAttachment[] = [
   selmArgusV81,
   selmArgusV90,
   selmArgusV101,
+  selmZuteilung3271,
   selmTicomI38Cover,
   selmTicomI38Page3,
   selmCribBatchA,
