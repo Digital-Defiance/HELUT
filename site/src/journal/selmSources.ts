@@ -186,6 +186,56 @@ export const selmCribBatchA: JournalAttachment = {
     'Solved Potsdam plaintext from the Hörenberg scrape. Not a Thetis crib. Not queued.',
 }
 
+export const christofferCribCode: JournalAttachment = {
+  href: '/christoffer/P1030680-crib-search-code.zip',
+  title: 'P1030680 crib-search code',
+  kind: 'archive',
+  credit: 'Christoffer Duif',
+  bytesLabel: '117 KB',
+  origin:
+    '7 October 2026. WebGPU bombe, kernel V5. Read, not run. Same 1.6×10^10 right-ring placement as HELUT. No deletions.',
+}
+
+export const selmSchluesselM323: JournalAttachment = {
+  href: '/selm/Schluessel_M_Allgemeine_Bestimmungen_1941_62.pdf',
+  title: 'M.Dv. Nr. 32/3 — Der Schlüssel M, Allgemeine Bestimmungen (1941, amended)',
+  kind: 'pdf',
+  credit: SELM_CREDIT,
+  bytesLabel: '4.2 MB',
+  origin:
+    'Scan inspected October 2026. Page 34a, Deckbl. 8, is §157: Thetis for tactical U-boat exercises, Allgemein and Offizier, change at 0700 DGZ. The 17 March 1943 order covers Deckblätter 5–8. Not a May 1945 key sheet.',
+}
+
+export const christofferZtpgu39136: JournalAttachment = {
+  href: '/christoffer/ztpgu-39136-1945-05-04.jpg',
+  title: 'ZIP/ZTPGU/39136 — 4 May 1945',
+  kind: 'image',
+  credit: 'Sea War Museum, Thyborøn, via Christoffer Duif',
+  bytesLabel: '294 KB',
+  origin:
+    'TOO 0935, TOI 0819/4/5/45, 4020 kc/s. Norway as headquarters of U-boat operational control. Not a 1 May Thetis intercept.',
+}
+
+export const christofferZtpgu39087: JournalAttachment = {
+  href: '/christoffer/ztpgu-39087-1945-05-08.jpg',
+  title: 'ZIP/ZTPGU/39087 — 8 May 1945',
+  kind: 'image',
+  credit: 'Sea War Museum, Thyborøn, via Christoffer Duif',
+  bytesLabel: '274 KB',
+  origin:
+    'TOO 1215, TOI 1050/8/5/45, 5400 kc/s. Captain (U/B) West to B.D.U. asks the whereabouts of five boats, including U-3503. Not a 1 May Thetis intercept.',
+}
+
+export const christofferDefeOcr: JournalAttachment = {
+  href: '/christoffer/DEFE3-577-579-OCR-index.zip',
+  title: 'DEFE 3/577–579 OCR and dated index',
+  kind: 'archive',
+  credit: 'Christoffer Duif',
+  bytesLabel: '978 KB',
+  origin:
+    '7 October 2026. 2,215 pages, 1,974 dated. Thetis, VROL, and NMKA are absent from the page texts. Not a stronger negative than Phase 76.',
+}
+
 export const selmAllPublicFiles: JournalAttachment[] = [
   selmU534LastDays,
   selmU3521Dossier,
@@ -201,6 +251,7 @@ export const selmAllPublicFiles: JournalAttachment[] = [
   selmArgusV90,
   selmArgusV101,
   selmZuteilung3271,
+  selmSchluesselM323,
   selmTicomI38Cover,
   selmTicomI38Page3,
   selmCribBatchA,

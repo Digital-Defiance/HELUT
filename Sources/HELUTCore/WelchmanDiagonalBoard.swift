@@ -637,3 +637,101 @@ package struct WelchmanBombe: Sendable {
         return true
     }
 }
+
+/// Closed walks through the menu's test letter.
+///
+/// Turing's loop test: the stecker of the central letter has to be a fixed point of the
+/// scrambler product around every such walk, or the diagonal board contradicts on the edge
+/// that closes it. The test is necessary for the exact board and is not sufficient, so a
+/// seed that fails it can be skipped and a seed that passes still has to be propagated.
+/// Leaving a walk out only costs propagation. It does not change which seeds survive.
+///
+/// Not valid once edges may be dropped. A garble tolerance can delete the edge a walk
+/// needed, and a seed the full menu rejects can then close. Callers at tolerance > 0
+/// ignore these walks.
+package enum TuringMenuWalks {
+    package static let maxWalks = 8
+    /// Tree path out, the closing edge, and the tree path back. A menu has at most 40
+    /// edges and the test letter's component has at most 26 letters, so 64 covers the
+    /// uncancelled walk. A longer walk is omitted, which only skips a filter.
+    package static let maxEdgesPerWalk = 64
+
+    /// Shortest walks first, so the kernel kills a seed on the cheapest product.
+    package static func walks(ends: [(Int, Int)], central: Int) -> [[Int]] {
+        guard (0..<26).contains(central), !ends.isEmpty else { return [] }
+        var adjacent = Array(repeating: [(letter: Int, edge: Int)](), count: 26)
+        for (index, edge) in ends.enumerated() {
+            guard (0..<26).contains(edge.0), (0..<26).contains(edge.1), edge.0 != edge.1 else {
+                continue
+            }
+            adjacent[edge.0].append((edge.1, index))
+            adjacent[edge.1].append((edge.0, index))
+        }
+
+        var parentEdge = Array(repeating: -1, count: 26)
+        var parentLetter = Array(repeating: -1, count: 26)
+        var seen = Array(repeating: false, count: 26)
+        var queue = [central]
+        seen[central] = true
+        var head = 0
+        while head < queue.count {
+            let letter = queue[head]
+            head += 1
+            for link in adjacent[letter] where !seen[link.letter] {
+                seen[link.letter] = true
+                parentEdge[link.letter] = link.edge
+                parentLetter[link.letter] = letter
+                queue.append(link.letter)
+            }
+        }
+
+        func path(to letter: Int) -> [Int] {
+            var edges: [Int] = []
+            var cursor = letter
+            while cursor != central {
+                let edge = parentEdge[cursor]
+                if edge < 0 { return [] }
+                edges.append(edge)
+                cursor = parentLetter[cursor]
+            }
+            return edges.reversed()
+        }
+
+        var tree = Set<Int>()
+        for letter in 0..<26 where parentEdge[letter] >= 0 {
+            tree.insert(parentEdge[letter])
+        }
+
+        var found: [[Int]] = []
+        for (index, edge) in ends.enumerated() {
+            if tree.contains(index) { continue }
+            guard seen[edge.0], seen[edge.1] else { continue }
+            let walk = path(to: edge.0) + [index] + path(to: edge.1).reversed()
+            guard !walk.isEmpty, walk.count <= maxEdgesPerWalk else { continue }
+            found.append(walk)
+        }
+        found.sort { $0.count < $1.count }
+        if found.count > maxWalks {
+            found.removeSubrange(maxWalks...)
+        }
+        return found
+    }
+
+    /// `true` when `seed` is a fixed point of every walk. An empty walk list passes.
+    package static func passes(
+        seed: Int,
+        walks: [[Int]],
+        scramblers: [[UInt8]]
+    ) -> Bool {
+        for walk in walks {
+            var value = seed
+            for edge in walk {
+                guard scramblers.indices.contains(edge),
+                      scramblers[edge].indices.contains(value) else { return false }
+                value = Int(scramblers[edge][value])
+            }
+            if value != seed { return false }
+        }
+        return true
+    }
+}

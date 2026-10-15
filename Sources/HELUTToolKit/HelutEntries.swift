@@ -222,6 +222,11 @@ public enum HelutBombeCLI {
         exit(0)
     }
 
+    if CommandLine.arguments.contains("--bombe-duif-bench") {
+        runDuifComparisonBench()
+        exit(0)
+    }
+
     if CommandLine.arguments.contains("--welchman-rehearsal") {
         runWelchmanRehearsal()
         exit(0)

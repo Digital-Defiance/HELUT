@@ -1,0 +1,31 @@
+=== Duif comparison bench ===
+device: Apple M4 Max
+one shell = 456,976 window positions, one ring setting, middle ring A
+Duif V5 on an RTX 5070, same quoted shell, middle ring walked inside it:
+  26-letter crib 588 units/s    18-letter crib 3,124 units/s
+sample: 1500 shells after 48 warmup
+
+{KOMX@0 + DMXUUUBOOTEYFDUUUAUSB@5} edges=25 letters=20 loops=6 comp=1 span=26 central=U
+  board only  1500 shells   16.62s    90.2 shells/s   41.2 M/s  first-shell lanes 0
+  loop test  1500 shells    7.85s   191.0 shells/s   87.3 M/s  first-shell lanes 0
+  loop + 4-wide  1500 shells    7.43s   201.7 shells/s   92.2 M/s  first-shell lanes 0
+  loop + step table  1500 shells    8.56s   175.2 shells/s   80.0 M/s  first-shell lanes 0
+  loop + step table + 4-wide  1500 shells    7.56s   198.4 shells/s   90.7 M/s  first-shell lanes 0
+
+VVVUUUZWODREISECHS@49 edges=18 letters=20 loops=1 comp=3 span=67 central=S
+  board only  1500 shells   14.19s   105.7 shells/s   48.3 M/s  first-shell lanes 0
+  loop test  1500 shells    7.30s   205.4 shells/s   93.9 M/s  first-shell lanes 0
+  loop + 4-wide  1500 shells    6.76s   221.8 shells/s  101.3 M/s  first-shell lanes 0
+  loop + step table  1500 shells    7.41s   202.4 shells/s   92.5 M/s  first-shell lanes 0
+  loop + step table + 4-wide  1500 shells    6.66s   225.4 shells/s  103.0 M/s  first-shell lanes 0
+
+full right-ring crib, loop test with four seeds at once
+{KOMX@0 + DMXUUUBOOTEYFDUUUAUSB@5} edges=25 letters=20 loops=6 comp=1 span=26 central=U
+shells: 34944 (336 orders × 2 Greek × 2 reflectors × 26 right rings)
+  181.8s   192.2 shells/s   87.8 M/s
+
+full right-ring crib, loop test with four seeds at once
+VVVUUUZWODREISECHS@49 edges=18 letters=20 loops=1 comp=3 span=67 central=S
+shells: 34944 (336 orders × 2 Greek × 2 reflectors × 26 right rings)
+  159.8s   218.7 shells/s   99.9 M/s
+
